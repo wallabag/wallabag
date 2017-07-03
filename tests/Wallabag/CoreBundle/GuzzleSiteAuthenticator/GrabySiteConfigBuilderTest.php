@@ -2,13 +2,12 @@
 
 namespace Tests\Wallabag\CoreBundle\GuzzleSiteAuthenticator;
 
+use Graby\SiteConfig\SiteConfig as GrabySiteConfig;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
-use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfig;
-use Graby\SiteConfig\SiteConfig as GrabySiteConfig;
-use Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder;
 
 class GrabySiteConfigBuilderTest extends \PHPUnit_Framework_TestCase
 {
@@ -68,20 +67,15 @@ class GrabySiteConfigBuilderTest extends \PHPUnit_Framework_TestCase
 
         $config = $this->builder->buildForHost('www.example.com');
 
-        $this->assertEquals(
-            new SiteConfig([
-                'host' => 'example.com',
-                'requiresLogin' => true,
-                'loginUri' => 'http://www.example.com/login',
-                'usernameField' => 'login',
-                'passwordField' => 'password',
-                'extraFields' => ['field' => 'value'],
-                'notLoggedInXpath' => '//div[@class="need-login"]',
-                'username' => 'foo',
-                'password' => 'bar',
-            ]),
-            $config
-        );
+        $this->assertSame('example.com', $config->getHost());
+        $this->assertSame(true, $config->requiresLogin());
+        $this->assertSame('http://www.example.com/login', $config->getLoginUri());
+        $this->assertSame('login', $config->getUsernameField());
+        $this->assertSame('password', $config->getPasswordField());
+        $this->assertSame(['field' => 'value'], $config->getExtraFields());
+        $this->assertSame('//div[@class="need-login"]', $config->getNotLoggedInXpath());
+        $this->assertSame('foo', $config->getUsername());
+        $this->assertSame('bar', $config->getPassword());
 
         $records = $handler->getRecords();
 

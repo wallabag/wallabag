@@ -46,12 +46,12 @@ class TablePrefixSubscriberTest extends \PHPUnit_Framework_TestCase
 
         $metaDataEvent = new LoadClassMetadataEventArgs($metaClass, $em);
 
-        $this->assertEquals($tableNameExpected, $metaDataEvent->getClassMetadata()->getTableName());
+        $this->assertSame($tableNameExpected, $metaDataEvent->getClassMetadata()->getTableName());
 
         $subscriber->loadClassMetadata($metaDataEvent);
 
-        $this->assertEquals($finalTableName, $metaDataEvent->getClassMetadata()->getTableName());
-        $this->assertEquals($finalTableNameQuoted, $metaDataEvent->getClassMetadata()->getQuotedTableName($platform));
+        $this->assertSame($finalTableName, $metaDataEvent->getClassMetadata()->getTableName());
+        $this->assertSame($finalTableNameQuoted, $metaDataEvent->getClassMetadata()->getQuotedTableName($platform));
     }
 
     /**
@@ -75,8 +75,8 @@ class TablePrefixSubscriberTest extends \PHPUnit_Framework_TestCase
 
         $evm->dispatchEvent('loadClassMetadata', $metaDataEvent);
 
-        $this->assertEquals($finalTableName, $metaDataEvent->getClassMetadata()->getTableName());
-        $this->assertEquals($finalTableNameQuoted, $metaDataEvent->getClassMetadata()->getQuotedTableName($platform));
+        $this->assertSame($finalTableName, $metaDataEvent->getClassMetadata()->getTableName());
+        $this->assertSame($finalTableNameQuoted, $metaDataEvent->getClassMetadata()->getQuotedTableName($platform));
     }
 
     public function testPrefixManyToMany()
@@ -103,12 +103,12 @@ class TablePrefixSubscriberTest extends \PHPUnit_Framework_TestCase
 
         $metaDataEvent = new LoadClassMetadataEventArgs($metaClass, $em);
 
-        $this->assertEquals('entry', $metaDataEvent->getClassMetadata()->getTableName());
+        $this->assertSame('entry', $metaDataEvent->getClassMetadata()->getTableName());
 
         $subscriber->loadClassMetadata($metaDataEvent);
 
-        $this->assertEquals('yo_entry', $metaDataEvent->getClassMetadata()->getTableName());
-        $this->assertEquals('yo_entry_tag', $metaDataEvent->getClassMetadata()->associationMappings['tags']['joinTable']['name']);
-        $this->assertEquals('yo_entry', $metaDataEvent->getClassMetadata()->getQuotedTableName(new \Doctrine\DBAL\Platforms\MySqlPlatform()));
+        $this->assertSame('yo_entry', $metaDataEvent->getClassMetadata()->getTableName());
+        $this->assertSame('yo_entry_tag', $metaDataEvent->getClassMetadata()->associationMappings['tags']['joinTable']['name']);
+        $this->assertSame('yo_entry', $metaDataEvent->getClassMetadata()->getQuotedTableName(new \Doctrine\DBAL\Platforms\MySqlPlatform()));
     }
 }

@@ -24,11 +24,6 @@ class Version20161024212538 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix').$tableName;
-    }
-
     /**
      * @param Schema $schema
      */
@@ -60,8 +55,13 @@ class Version20161024212538 extends AbstractMigration implements ContainerAwareI
 
         $clientsTable->dropColumn('user_id', 'integer');
 
-        if ($this->connection->getDatabasePlatform()->getName() != 'sqlite') {
+        if ($this->connection->getDatabasePlatform()->getName() !== 'sqlite') {
             $clientsTable->removeForeignKey($this->constraintName);
         }
+    }
+
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

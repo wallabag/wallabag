@@ -2,19 +2,19 @@
 
 namespace Tests\Wallabag\ImportBundle\Import;
 
-use Wallabag\UserBundle\Entity\User;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Config;
-use Wallabag\ImportBundle\Import\PocketImport;
 use GuzzleHttp\Client;
-use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
-use Wallabag\ImportBundle\Redis\Producer;
-use Monolog\Logger;
-use Monolog\Handler\TestHandler;
-use Simpleue\Queue\RedisQueue;
+use GuzzleHttp\Subscriber\Mock;
 use M6Web\Component\RedisMock\RedisMockFactory;
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
+use Simpleue\Queue\RedisQueue;
+use Wallabag\CoreBundle\Entity\Config;
+use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\ImportBundle\Import\PocketImport;
+use Wallabag\ImportBundle\Redis\Producer;
+use Wallabag\UserBundle\Entity\User;
 
 class PocketImportTest extends \PHPUnit_Framework_TestCase
 {
@@ -26,66 +26,13 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
     protected $tagsAssigner;
     protected $uow;
 
-    private function getPocketImport($consumerKey = 'ConsumerKey', $dispatched = 0)
-    {
-        $this->user = new User();
-
-        $config = new Config($this->user);
-        $config->setPocketConsumerKey('xxx');
-
-        $this->user->setConfig($config);
-
-        $this->contentProxy = $this->getMockBuilder('Wallabag\CoreBundle\Helper\ContentProxy')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->tagsAssigner = $this->getMockBuilder('Wallabag\CoreBundle\Helper\TagsAssigner')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->uow = $this->getMockBuilder('Doctrine\ORM\UnitOfWork')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->em
-            ->expects($this->any())
-            ->method('getUnitOfWork')
-            ->willReturn($this->uow);
-
-        $this->uow
-            ->expects($this->any())
-            ->method('getScheduledEntityInsertions')
-            ->willReturn([]);
-
-        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $dispatcher
-            ->expects($this->exactly($dispatched))
-            ->method('dispatch');
-
-        $pocket = new PocketImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher);
-        $pocket->setUser($this->user);
-
-        $this->logHandler = new TestHandler();
-        $logger = new Logger('test', [$this->logHandler]);
-        $pocket->setLogger($logger);
-
-        return $pocket;
-    }
-
     public function testInit()
     {
         $pocketImport = $this->getPocketImport();
 
-        $this->assertEquals('Pocket', $pocketImport->getName());
+        $this->assertSame('Pocket', $pocketImport->getName());
         $this->assertNotEmpty($pocketImport->getUrl());
-        $this->assertEquals('import.pocket.description', $pocketImport->getDescription());
+        $this->assertSame('import.pocket.description', $pocketImport->getDescription());
     }
 
     public function testOAuthRequest()
@@ -103,7 +50,7 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
 
         $code = $pocketImport->getRequestToken('http://0.0.0.0/redirect');
 
-        $this->assertEquals('wunderbar_code', $code);
+        $this->assertSame('wunderbar_code', $code);
     }
 
     public function testOAuthRequestBadResponse()
@@ -125,7 +72,7 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
 
         $records = $this->logHandler->getRecords();
         $this->assertContains('PocketImport: Failed to request token', $records[0]['message']);
-        $this->assertEquals('ERROR', $records[0]['level_name']);
+        $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
     public function testOAuthAuthorize()
@@ -144,7 +91,7 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
         $res = $pocketImport->authorize('wunderbar_code');
 
         $this->assertTrue($res);
-        $this->assertEquals('wunderbar_token', $pocketImport->getAccessToken());
+        $this->assertSame('wunderbar_token', $pocketImport->getAccessToken());
     }
 
     public function testOAuthAuthorizeBadResponse()
@@ -166,7 +113,7 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
 
         $records = $this->logHandler->getRecords();
         $this->assertContains('PocketImport: Failed to authorize client', $records[0]['message']);
-        $this->assertEquals('ERROR', $records[0]['level_name']);
+        $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
     /**
@@ -291,7 +238,7 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
         $res = $pocketImport->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 1, 'imported' => 1, 'queued' => 0], $pocketImport->getSummary());
+        $this->assertSame(['skipped' => 1, 'imported' => 1, 'queued' => 0], $pocketImport->getSummary());
     }
 
     /**
@@ -386,7 +333,7 @@ class PocketImportTest extends \PHPUnit_Framework_TestCase
         $res = $pocketImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 2, 'queued' => 0], $pocketImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 2, 'queued' => 0], $pocketImport->getSummary());
     }
 
     /**
@@ -425,7 +372,7 @@ JSON;
                 {
                     "status": 1,
                     "list": {
-                        "229279690": '.$body.'
+                        "229279690": ' . $body . '
                     }
                 }
             ')),
@@ -472,7 +419,7 @@ JSON;
         $res = $pocketImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 1], $pocketImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 1], $pocketImport->getSummary());
     }
 
     /**
@@ -511,7 +458,7 @@ JSON;
                 {
                     "status": 1,
                     "list": {
-                        "229279690": '.$body.'
+                        "229279690": ' . $body . '
                     }
                 }
             ')),
@@ -551,7 +498,7 @@ JSON;
         $res = $pocketImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 1], $pocketImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 1], $pocketImport->getSummary());
 
         $this->assertNotEmpty($redisMock->lpop('pocket'));
     }
@@ -577,7 +524,7 @@ JSON;
 
         $records = $this->logHandler->getRecords();
         $this->assertContains('PocketImport: Failed to import', $records[0]['message']);
-        $this->assertEquals('ERROR', $records[0]['level_name']);
+        $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
     public function testImportWithExceptionFromGraby()
@@ -630,6 +577,59 @@ JSON;
         $res = $pocketImport->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 1, 'queued' => 0], $pocketImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 1, 'queued' => 0], $pocketImport->getSummary());
+    }
+
+    private function getPocketImport($consumerKey = 'ConsumerKey', $dispatched = 0)
+    {
+        $this->user = new User();
+
+        $config = new Config($this->user);
+        $config->setPocketConsumerKey('xxx');
+
+        $this->user->setConfig($config);
+
+        $this->contentProxy = $this->getMockBuilder('Wallabag\CoreBundle\Helper\ContentProxy')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->tagsAssigner = $this->getMockBuilder('Wallabag\CoreBundle\Helper\TagsAssigner')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->uow = $this->getMockBuilder('Doctrine\ORM\UnitOfWork')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->em
+            ->expects($this->any())
+            ->method('getUnitOfWork')
+            ->willReturn($this->uow);
+
+        $this->uow
+            ->expects($this->any())
+            ->method('getScheduledEntityInsertions')
+            ->willReturn([]);
+
+        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dispatcher
+            ->expects($this->exactly($dispatched))
+            ->method('dispatch');
+
+        $pocket = new PocketImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher);
+        $pocket->setUser($this->user);
+
+        $this->logHandler = new TestHandler();
+        $logger = new Logger('test', [$this->logHandler]);
+        $pocket->setLogger($logger);
+
+        return $pocket;
     }
 }

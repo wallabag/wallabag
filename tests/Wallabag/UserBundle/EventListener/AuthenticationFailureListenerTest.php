@@ -2,14 +2,14 @@
 
 namespace Tests\Wallabag\UserBundle\EventListener;
 
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
-use Wallabag\UserBundle\EventListener\AuthenticationFailureListener;
-use Monolog\Logger;
-use Monolog\Handler\TestHandler;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\AuthenticationEvents;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
+use Wallabag\UserBundle\EventListener\AuthenticationFailureListener;
 
 class AuthenticationFailureListenerTest extends \PHPUnit_Framework_TestCase
 {

@@ -4,10 +4,10 @@ namespace Wallabag\ApiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\OAuthServerBundle\Entity\Client as BaseClient;
-use Wallabag\UserBundle\Entity\User;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
+use Wallabag\UserBundle\Entity\User;
 
 /**
  * @ORM\Table("oauth2_clients")
@@ -99,6 +99,6 @@ class Client extends BaseClient
      */
     public function getClientId()
     {
-        return $this->getId().'_'.$this->getRandomId();
+        return $this->getId() . '_' . $this->getRandomId();
     }
 }

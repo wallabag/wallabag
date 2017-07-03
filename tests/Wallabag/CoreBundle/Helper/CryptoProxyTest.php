@@ -2,9 +2,9 @@
 
 namespace Tests\Wallabag\CoreBundle\Helper;
 
-use Psr\Log\NullLogger;
-use Monolog\Logger;
 use Monolog\Handler\TestHandler;
+use Monolog\Logger;
+use Psr\Log\NullLogger;
 use Wallabag\CoreBundle\Helper\CryptoProxy;
 
 class CryptoProxyTest extends \PHPUnit_Framework_TestCase
@@ -14,7 +14,7 @@ class CryptoProxyTest extends \PHPUnit_Framework_TestCase
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $crypto = new CryptoProxy(sys_get_temp_dir().'/'.uniqid('', true).'.txt', $logger);
+        $crypto = new CryptoProxy(sys_get_temp_dir() . '/' . uniqid('', true) . '.txt', $logger);
         $crypted = $crypto->crypt('test');
         $decrypted = $crypto->decrypt($crypted);
 
@@ -27,14 +27,14 @@ class CryptoProxyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException RuntimeException
+     * @expectedException \RuntimeException
      * @expectedExceptionMessage Decrypt fail
      *
      * @return [type] [description]
      */
     public function testDecryptBadValue()
     {
-        $crypto = new CryptoProxy(sys_get_temp_dir().'/'.uniqid('', true).'.txt', new NullLogger());
+        $crypto = new CryptoProxy(sys_get_temp_dir() . '/' . uniqid('', true) . '.txt', new NullLogger());
         $crypto->decrypt('badvalue');
     }
 }

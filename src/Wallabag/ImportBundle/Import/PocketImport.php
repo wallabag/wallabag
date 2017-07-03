@@ -8,10 +8,9 @@ use Wallabag\CoreBundle\Entity\Entry;
 
 class PocketImport extends AbstractImport
 {
+    const NB_ELEMENTS = 5000;
     private $client;
     private $accessToken;
-
-    const NB_ELEMENTS = 5000;
 
     /**
      * Only used for test purpose.
@@ -176,7 +175,7 @@ class PocketImport extends AbstractImport
      */
     public function parseEntry(array $importedEntry)
     {
-        $url = isset($importedEntry['resolved_url']) && $importedEntry['resolved_url'] != '' ? $importedEntry['resolved_url'] : $importedEntry['given_url'];
+        $url = isset($importedEntry['resolved_url']) && $importedEntry['resolved_url'] !== '' ? $importedEntry['resolved_url'] : $importedEntry['given_url'];
 
         $existingEntry = $this->em
             ->getRepository('WallabagCoreBundle:Entry')
@@ -195,15 +194,15 @@ class PocketImport extends AbstractImport
         $this->fetchContent($entry, $url);
 
         // 0, 1, 2 - 1 if the item is archived - 2 if the item should be deleted
-        $entry->setArchived($importedEntry['status'] == 1 || $this->markAsRead);
+        $entry->setArchived($importedEntry['status'] === 1 || $this->markAsRead);
 
         // 0 or 1 - 1 If the item is starred
-        $entry->setStarred($importedEntry['favorite'] == 1);
+        $entry->setStarred($importedEntry['favorite'] === 1);
 
         $title = 'Untitled';
-        if (isset($importedEntry['resolved_title']) && $importedEntry['resolved_title'] != '') {
+        if (isset($importedEntry['resolved_title']) && $importedEntry['resolved_title'] !== '') {
             $title = $importedEntry['resolved_title'];
-        } elseif (isset($importedEntry['given_title']) && $importedEntry['given_title'] != '') {
+        } elseif (isset($importedEntry['given_title']) && $importedEntry['given_title'] !== '') {
             $title = $importedEntry['given_title'];
         }
 

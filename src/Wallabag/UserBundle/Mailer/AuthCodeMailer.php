@@ -2,8 +2,8 @@
 
 namespace Wallabag\UserBundle\Mailer;
 
-use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
 use Scheb\TwoFactorBundle\Mailer\AuthCodeMailerInterface;
+use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
 
 /**
  * Custom mailer for TwoFactorBundle email.

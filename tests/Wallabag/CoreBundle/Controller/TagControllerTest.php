@@ -17,7 +17,7 @@ class TagControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/tag/list');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
     public function testAddTagToEntry()
@@ -31,7 +31,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->flush();
         $this->getEntityManager()->clear();
 
-        $crawler = $client->request('GET', '/view/'.$entry->getId());
+        $crawler = $client->request('GET', '/view/' . $entry->getId());
 
         $form = $crawler->filter('form[name=tag]')->form();
 
@@ -40,7 +40,7 @@ class TagControllerTest extends WallabagCoreTestCase
         ];
 
         $client->submit($form, $data);
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         // be sure to reload the entry
         $entry = $this->getEntityManager()->getRepository(Entry::class)->find($entry->getId());
@@ -48,7 +48,7 @@ class TagControllerTest extends WallabagCoreTestCase
 
         // tag already exists and already assigned
         $client->submit($form, $data);
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $entry = $this->getEntityManager()->getRepository(Entry::class)->find($entry->getId());
         $this->assertCount(1, $entry->getTags());
@@ -59,7 +59,7 @@ class TagControllerTest extends WallabagCoreTestCase
         ];
 
         $client->submit($form, $data);
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $entry = $this->getEntityManager()->getRepository(Entry::class)->find($entry->getId());
         $this->assertCount(2, $entry->getTags());
@@ -75,7 +75,7 @@ class TagControllerTest extends WallabagCoreTestCase
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId('http://0.0.0.0/entry2', $this->getLoggedInUserId());
 
-        $crawler = $client->request('GET', '/view/'.$entry->getId());
+        $crawler = $client->request('GET', '/view/' . $entry->getId());
 
         $form = $crawler->filter('form[name=tag]')->form();
 
@@ -84,7 +84,7 @@ class TagControllerTest extends WallabagCoreTestCase
         ];
 
         $client->submit($form, $data);
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $newEntry = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
@@ -97,8 +97,8 @@ class TagControllerTest extends WallabagCoreTestCase
         }
 
         $this->assertGreaterThanOrEqual(2, count($tags));
-        $this->assertNotFalse(array_search('foo2', $tags), 'Tag foo2 is assigned to the entry');
-        $this->assertNotFalse(array_search('bar2', $tags), 'Tag bar2 is assigned to the entry');
+        $this->assertNotFalse(array_search('foo2', $tags, true), 'Tag foo2 is assigned to the entry');
+        $this->assertNotFalse(array_search('bar2', $tags, true), 'Tag bar2 is assigned to the entry');
     }
 
     public function testRemoveTagFromEntry()
@@ -116,27 +116,27 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->clear();
 
         // We make a first request to set an history and test redirection after tag deletion
-        $client->request('GET', '/view/'.$entry->getId());
+        $client->request('GET', '/view/' . $entry->getId());
         $entryUri = $client->getRequest()->getUri();
-        $client->request('GET', '/remove-tag/'.$entry->getId().'/'.$tag->getId());
+        $client->request('GET', '/remove-tag/' . $entry->getId() . '/' . $tag->getId());
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-        $this->assertEquals($entryUri, $client->getResponse()->getTargetUrl());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertSame($entryUri, $client->getResponse()->getTargetUrl());
 
         // re-retrieve the entry to be sure to get fresh data from database (mostly for tags)
         $entry = $this->getEntityManager()->getRepository(Entry::class)->find($entry->getId());
         $this->assertNotContains($this->tagName, $entry->getTags());
 
-        $client->request('GET', '/remove-tag/'.$entry->getId().'/'.$tag->getId());
+        $client->request('GET', '/remove-tag/' . $entry->getId() . '/' . $tag->getId());
 
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
 
         $tag = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Tag')
             ->findOneByLabel($this->tagName);
 
-        $this->assertNull($tag, $this->tagName.' was removed because it begun an orphan tag');
+        $this->assertNull($tag, $this->tagName . ' was removed because it begun an orphan tag');
     }
 
     public function testShowEntriesForTagAction()
@@ -165,9 +165,9 @@ class TagControllerTest extends WallabagCoreTestCase
             ->getRepository('WallabagCoreBundle:Tag')
             ->findOneByEntryAndTagLabel($entry, $this->tagName);
 
-        $crawler = $client->request('GET', '/tag/list/'.$tag->getSlug());
+        $crawler = $client->request('GET', '/tag/list/' . $tag->getSlug());
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertCount(1, $crawler->filter('[id*="entry-"]'));
 
         $entry->removeTag($tag);

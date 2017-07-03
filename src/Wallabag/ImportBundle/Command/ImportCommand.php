@@ -5,8 +5,8 @@ namespace Wallabag\ImportBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class ImportCommand extends ContainerAwareCommand
@@ -27,7 +27,7 @@ class ImportCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('Start : '.(new \DateTime())->format('d-m-Y G:i:s').' ---');
+        $output->writeln('Start : ' . (new \DateTime())->format('d-m-Y G:i:s') . ' ---');
 
         if (!file_exists($input->getArgument('filepath'))) {
             throw new Exception(sprintf('File "%s" not found', $input->getArgument('filepath')));
@@ -80,12 +80,12 @@ class ImportCommand extends ContainerAwareCommand
 
         if (true === $res) {
             $summary = $import->getSummary();
-            $output->writeln('<info>'.$summary['imported'].' imported</info>');
-            $output->writeln('<comment>'.$summary['skipped'].' already saved</comment>');
+            $output->writeln('<info>' . $summary['imported'] . ' imported</info>');
+            $output->writeln('<comment>' . $summary['skipped'] . ' already saved</comment>');
         }
 
         $em->clear();
 
-        $output->writeln('End : '.(new \DateTime())->format('d-m-Y G:i:s').' ---');
+        $output->writeln('End : ' . (new \DateTime())->format('d-m-Y G:i:s') . ' ---');
     }
 }

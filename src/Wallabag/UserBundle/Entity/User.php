@@ -4,12 +4,12 @@ namespace Wallabag\UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
+use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\XmlRoot;
-use JMS\Serializer\Annotation\Accessor;
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
 use Scheb\TwoFactorBundle\Model\TrustedComputerInterface;
-use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Wallabag\ApiBundle\Entity\Client;
@@ -93,6 +93,21 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     protected $config;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Wallabag\ApiBundle\Entity\Client", mappedBy="user", cascade={"remove"})
+     */
+    protected $clients;
+
+    /**
+     * @see getFirstClient() below
+     *
+     * @Groups({"user_api_with_client"})
+     * @Accessor(getter="getFirstClient")
+     */
+    protected $default_client;
+
+    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $authCode;
@@ -109,21 +124,6 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
      */
     private $trusted;
 
-    /**
-     * @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="Wallabag\ApiBundle\Entity\Client", mappedBy="user", cascade={"remove"})
-     */
-    protected $clients;
-
-    /**
-     * @see getFirstClient() below
-     *
-     * @Groups({"user_api_with_client"})
-     * @Accessor(getter="getFirstClient")
-     */
-    protected $default_client;
-
     public function __construct()
     {
         parent::__construct();
@@ -137,7 +137,7 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
      */
     public function timestamps()
     {
-        if (is_null($this->createdAt)) {
+        if (null === $this->createdAt) {
             $this->createdAt = new \DateTime();
         }
 

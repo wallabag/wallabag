@@ -2,8 +2,8 @@
 
 namespace Tests\Wallabag\ImportBundle\Controller;
 
-use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 
 class ChromeControllerTest extends WallabagCoreTestCase
 {
@@ -14,9 +14,9 @@ class ChromeControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/import/chrome');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
-        $this->assertEquals(1, $crawler->filter('input[type=file]')->count());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
+        $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
     public function testImportChromeWithRabbitEnabled()
@@ -28,9 +28,9 @@ class ChromeControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/import/chrome');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
-        $this->assertEquals(1, $crawler->filter('input[type=file]')->count());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
+        $this->assertSame(1, $crawler->filter('input[type=file]')->count());
 
         $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 0);
     }
@@ -49,7 +49,7 @@ class ChromeControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
     public function testImportChromeWithRedisEnabled()
@@ -61,13 +61,13 @@ class ChromeControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/import/chrome');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
-        $this->assertEquals(1, $crawler->filter('input[type=file]')->count());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
+        $this->assertSame(1, $crawler->filter('input[type=file]')->count());
 
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__.'/../fixtures/chrome-bookmarks', 'Bookmarks');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/chrome-bookmarks', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -75,7 +75,7 @@ class ChromeControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 
@@ -95,7 +95,7 @@ class ChromeControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/chrome');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__.'/../fixtures/chrome-bookmarks', 'Bookmarks');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/chrome-bookmarks', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -103,7 +103,7 @@ class ChromeControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 
@@ -120,11 +120,11 @@ class ChromeControllerTest extends WallabagCoreTestCase
 
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://www.usinenouvelle.com is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for http://www.usinenouvelle.com is ok');
-        $this->assertEquals(1, count($content->getTags()));
+        $this->assertSame(1, count($content->getTags()));
 
         $createdAt = $content->getCreatedAt();
-        $this->assertEquals('2011', $createdAt->format('Y'));
-        $this->assertEquals('07', $createdAt->format('m'));
+        $this->assertSame('2011', $createdAt->format('Y'));
+        $this->assertSame('07', $createdAt->format('m'));
     }
 
     public function testImportWallabagWithEmptyFile()
@@ -135,7 +135,7 @@ class ChromeControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/chrome');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__.'/../fixtures/test.txt', 'test.txt');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/test.txt', 'test.txt');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -143,7 +143,7 @@ class ChromeControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 

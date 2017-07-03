@@ -12,7 +12,7 @@ class ImportControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/import/');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertContains('login', $client->getResponse()->headers->get('location'));
     }
 
@@ -23,7 +23,7 @@ class ImportControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/import/');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals(8, $crawler->filter('blockquote')->count());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(8, $crawler->filter('blockquote')->count());
     }
 }

@@ -79,7 +79,7 @@ script:
     - echo "travis_fold:end:fixtures"
 
     - if [[ $VALIDATE_TRANSLATION_FILE = '' ]]; then ./bin/simple-phpunit -v ; fi;
-    - if [[ $CS_FIXER = run ]]; then php bin/php-cs-fixer fix src/ --verbose --dry-run ; fi;
+    - if [[ $CS_FIXER = run ]]; then php bin/php-cs-fixer fix --verbose --dry-run ; fi;
     - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml src/Wallabag/CoreBundle/Resources/translations -v ; fi;
     - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml app/Resources/CraueConfigBundle/translations -v ; fi;
     - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml src/Wallabag/UserBundle/Resources/translations -v ; fi;

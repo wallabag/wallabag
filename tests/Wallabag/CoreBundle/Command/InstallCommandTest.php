@@ -11,9 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Tester\CommandTester;
-use Wallabag\CoreBundle\Command\InstallCommand;
 use Tests\Wallabag\CoreBundle\Mock\InstallCommandMock;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Command\InstallCommand;
 
 class InstallCommandTest extends WallabagCoreTestCase
 {
@@ -86,9 +86,9 @@ class InstallCommandTest extends WallabagCoreTestCase
         $tester->setInputs([
             'y', // dropping database
             'y', // create super admin
-            'username_'.uniqid('', true), // username
-            'password_'.uniqid('', true), // password
-            'email_'.uniqid('', true).'@wallabag.it', // email
+            'username_' . uniqid('', true), // username
+            'password_' . uniqid('', true), // password
+            'email_' . uniqid('', true) . '@wallabag.it', // email
         ]);
         $tester->execute([
             'command' => $command->getName(),
@@ -111,9 +111,9 @@ class InstallCommandTest extends WallabagCoreTestCase
         $tester = new CommandTester($command);
         $tester->setInputs([
             'y', // create super admin
-            'username_'.uniqid('', true), // username
-            'password_'.uniqid('', true), // password
-            'email_'.uniqid('', true).'@wallabag.it', // email
+            'username_' . uniqid('', true), // username
+            'password_' . uniqid('', true), // password
+            'email_' . uniqid('', true) . '@wallabag.it', // email
         ]);
         $tester->execute([
             'command' => $command->getName(),
@@ -159,9 +159,9 @@ class InstallCommandTest extends WallabagCoreTestCase
         $tester = new CommandTester($command);
         $tester->setInputs([
             'y', // create super admin
-            'username_'.uniqid('', true), // username
-            'password_'.uniqid('', true), // password
-            'email_'.uniqid('', true).'@wallabag.it', // email
+            'username_' . uniqid('', true), // username
+            'password_' . uniqid('', true), // password
+            'email_' . uniqid('', true) . '@wallabag.it', // email
         ]);
         $tester->execute([
             'command' => $command->getName(),

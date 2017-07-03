@@ -26,8 +26,8 @@ class WallabagExtensionTest extends \PHPUnit_Framework_TestCase
 
         $extension = new WallabagExtension($entryRepository, $tagRepository, $tokenStorage, 0, $translator);
 
-        $this->assertEquals('lemonde.fr', $extension->removeWww('www.lemonde.fr'));
-        $this->assertEquals('lemonde.fr', $extension->removeWww('lemonde.fr'));
-        $this->assertEquals('gist.github.com', $extension->removeWww('gist.github.com'));
+        $this->assertSame('lemonde.fr', $extension->removeWww('www.lemonde.fr'));
+        $this->assertSame('lemonde.fr', $extension->removeWww('lemonde.fr'));
+        $this->assertSame('gist.github.com', $extension->removeWww('gist.github.com'));
     }
 }

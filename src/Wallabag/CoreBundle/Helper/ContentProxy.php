@@ -4,12 +4,12 @@ namespace Wallabag\CoreBundle\Helper;
 
 use Graby\Graby;
 use Psr\Log\LoggerInterface;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Tools\Utils;
 use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeExtensionGuesser;
 use Symfony\Component\Validator\Constraints\Locale as LocaleConstraint;
 use Symfony\Component\Validator\Constraints\Url as UrlConstraint;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Tools\Utils;
 
 /**
  * This kind of proxy class take care of getting the content from an url
@@ -100,7 +100,7 @@ class ContentProxy
 
             // is it a timestamp?
             if (filter_var($date, FILTER_VALIDATE_INT) !== false) {
-                $date = '@'.$content['date'];
+                $date = '@' . $content['date'];
             }
 
             try {
@@ -189,7 +189,7 @@ class ContentProxy
             return;
         }
 
-        $this->logger->warning('Language validation failed. '.(string) $errors);
+        $this->logger->warning('Language validation failed. ' . (string) $errors);
     }
 
     /**
@@ -211,6 +211,6 @@ class ContentProxy
             return;
         }
 
-        $this->logger->warning('PreviewPicture validation failed. '.(string) $errors);
+        $this->logger->warning('PreviewPicture validation failed. ' . (string) $errors);
     }
 }

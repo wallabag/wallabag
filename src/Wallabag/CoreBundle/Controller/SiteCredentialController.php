@@ -2,12 +2,12 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Wallabag\UserBundle\Entity\User;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Entity\SiteCredential;
+use Wallabag\UserBundle\Entity\User;
 
 /**
  * SiteCredential controller.
@@ -167,7 +167,7 @@ class SiteCredentialController extends Controller
      */
     private function checkUserAction(SiteCredential $siteCredential)
     {
-        if (null === $this->getUser() || $this->getUser()->getId() != $siteCredential->getUser()->getId()) {
+        if (null === $this->getUser() || $this->getUser()->getId() !== $siteCredential->getUser()->getId()) {
             throw $this->createAccessDeniedException('You can not access this site credential.');
         }
     }

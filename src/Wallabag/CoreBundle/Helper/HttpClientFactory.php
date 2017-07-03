@@ -41,7 +41,7 @@ class HttpClientFactory
      */
     public function buildHttpClient()
     {
-        $this->logger->log('debug', 'Restricted access config enabled?', array('enabled' => (int) $this->restrictedAccess));
+        $this->logger->log('debug', 'Restricted access config enabled?', ['enabled' => (int) $this->restrictedAccess]);
 
         if (0 === (int) $this->restrictedAccess) {
             return;

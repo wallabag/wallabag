@@ -11,21 +11,6 @@ use Wallabag\CoreBundle\Entity\Tag;
 class EntryRepository extends EntityRepository
 {
     /**
-     * Return a query builder to used by other getBuilderFor* method.
-     *
-     * @param int $userId
-     *
-     * @return QueryBuilder
-     */
-    private function getBuilderByUser($userId)
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.user = :userId')->setParameter('userId', $userId)
-            ->orderBy('e.createdAt', 'desc')
-        ;
-    }
-
-    /**
      * Retrieves all entries for a user.
      *
      * @param int $userId
@@ -108,7 +93,7 @@ class EntryRepository extends EntityRepository
 
         // We lower() all parts here because PostgreSQL 'LIKE' verb is case-sensitive
         $qb
-            ->andWhere('lower(e.content) LIKE lower(:term) OR lower(e.title) LIKE lower(:term) OR lower(e.url) LIKE lower(:term)')->setParameter('term', '%'.$term.'%')
+            ->andWhere('lower(e.content) LIKE lower(:term) OR lower(e.title) LIKE lower(:term) OR lower(e.url) LIKE lower(:term)')->setParameter('term', '%' . $term . '%')
             ->leftJoin('e.tags', 't')
             ->groupBy('e.id');
 
@@ -158,7 +143,7 @@ class EntryRepository extends EntityRepository
         }
 
         if (null !== $isPublic) {
-            $qb->andWhere('e.uid IS '.(true === $isPublic ? 'NOT' : '').' NULL');
+            $qb->andWhere('e.uid IS ' . (true === $isPublic ? 'NOT' : '') . ' NULL');
         }
 
         if ($since > 0) {
@@ -340,7 +325,7 @@ class EntryRepository extends EntityRepository
             ->where('e.user=:userId')->setParameter('userId', $userId)
         ;
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     /**
@@ -360,7 +345,7 @@ class EntryRepository extends EntityRepository
             ->andWhere('t.id=:tagId')->setParameter('tagId', $tagId)
         ;
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     /**
@@ -413,5 +398,20 @@ class EntryRepository extends EntityRepository
             ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * Return a query builder to used by other getBuilderFor* method.
+     *
+     * @param int $userId
+     *
+     * @return QueryBuilder
+     */
+    private function getBuilderByUser($userId)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.user = :userId')->setParameter('userId', $userId)
+            ->orderBy('e.createdAt', 'desc')
+        ;
     }
 }

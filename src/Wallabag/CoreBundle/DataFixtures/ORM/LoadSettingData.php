@@ -2,10 +2,10 @@
 
 namespace Wallabag\CoreBundle\DataFixtures\ORM;
 
+use Craue\ConfigBundle\Entity\Setting;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Craue\ConfigBundle\Entity\Setting;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

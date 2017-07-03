@@ -8,6 +8,14 @@ use Symfony\Component\HttpFoundation\Request;
 class FirefoxController extends BrowserController
 {
     /**
+     * @Route("/firefox", name="import_firefox")
+     */
+    public function indexAction(Request $request)
+    {
+        return parent::indexAction($request);
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getImportService()
@@ -29,13 +37,5 @@ class FirefoxController extends BrowserController
     protected function getImportTemplate()
     {
         return 'WallabagImportBundle:Firefox:index.html.twig';
-    }
-
-    /**
-     * @Route("/firefox", name="import_firefox")
-     */
-    public function indexAction(Request $request)
-    {
-        return parent::indexAction($request);
     }
 }

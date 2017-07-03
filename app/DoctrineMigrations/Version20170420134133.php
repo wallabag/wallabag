@@ -22,17 +22,12 @@ class Version20170420134133 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix').$tableName;
-    }
-
     /**
      * @param Schema $schema
      */
     public function up(Schema $schema)
     {
-        $this->addSql('DELETE FROM '.$this->getTable('craue_config_setting')." WHERE name = 'download_pictures';");
+        $this->addSql('DELETE FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'download_pictures';");
     }
 
     /**
@@ -43,10 +38,15 @@ class Version20170420134133 extends AbstractMigration implements ContainerAwareI
         $downloadPictures = $this->container
             ->get('doctrine.orm.default_entity_manager')
             ->getConnection()
-            ->fetchArray('SELECT * FROM '.$this->getTable('craue_config_setting')." WHERE name = 'download_pictures'");
+            ->fetchArray('SELECT * FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'download_pictures'");
 
         $this->skipIf(false !== $downloadPictures, 'It seems that you already played this migration.');
 
-        $this->addSql('INSERT INTO '.$this->getTable('craue_config_setting')." (name, value, section) VALUES ('download_pictures', '1', 'entry')");
+        $this->addSql('INSERT INTO ' . $this->getTable('craue_config_setting') . " (name, value, section) VALUES ('download_pictures', '1', 'entry')");
+    }
+
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

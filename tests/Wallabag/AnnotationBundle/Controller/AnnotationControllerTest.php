@@ -49,12 +49,12 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
             $this->logInAs('admin');
         }
 
-        $this->client->request('GET', $prefixUrl.'/'.$entry->getId().'.json');
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->client->request('GET', $prefixUrl . '/' . $entry->getId() . '.json');
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
         $this->assertGreaterThanOrEqual(1, $content['total']);
-        $this->assertEquals($annotation->getText(), $content['rows'][0]['text']);
+        $this->assertSame($annotation->getText(), $content['rows'][0]['text']);
 
         // we need to re-fetch the annotation becase after the flush, it has been "detached" from the entity manager
         $annotation = $em->getRepository('WallabagAnnotationBundle:Annotation')->findAnnotationById($annotation->getId());
@@ -88,16 +88,16 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
                 ['start' => '', 'startOffset' => 24, 'end' => '', 'endOffset' => 31],
             ],
         ]);
-        $this->client->request('POST', $prefixUrl.'/'.$entry->getId().'.json', [], [], $headers, $content);
+        $this->client->request('POST', $prefixUrl . '/' . $entry->getId() . '.json', [], [], $headers, $content);
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertEquals('Big boss', $content['user']);
-        $this->assertEquals('v1.0', $content['annotator_schema_version']);
-        $this->assertEquals('my annotation', $content['text']);
-        $this->assertEquals('my quote', $content['quote']);
+        $this->assertSame('Big boss', $content['user']);
+        $this->assertSame('v1.0', $content['annotator_schema_version']);
+        $this->assertSame('my annotation', $content['text']);
+        $this->assertSame('my quote', $content['quote']);
 
         /** @var Annotation $annotation */
         $annotation = $this->client->getContainer()
@@ -105,7 +105,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
             ->getRepository('WallabagAnnotationBundle:Annotation')
             ->findLastAnnotationByPageId($entry->getId(), 1);
 
-        $this->assertEquals('my annotation', $annotation->getText());
+        $this->assertSame('my annotation', $annotation->getText());
     }
 
     /**
@@ -133,9 +133,9 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
                 ['start' => '', 'startOffset' => 24, 'end' => '', 'endOffset' => 31],
             ],
         ]);
-        $this->client->request('POST', $prefixUrl.'/'.$entry->getId().'.json', [], [], $headers, $content);
+        $this->client->request('POST', $prefixUrl . '/' . $entry->getId() . '.json', [], [], $headers, $content);
 
-        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(400, $this->client->getResponse()->getStatusCode());
     }
 
     /**
@@ -166,21 +166,21 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
         $content = json_encode([
             'text' => 'a modified annotation',
         ]);
-        $this->client->request('PUT', $prefixUrl.'/'.$annotation->getId().'.json', [], [], $headers, $content);
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->client->request('PUT', $prefixUrl . '/' . $annotation->getId() . '.json', [], [], $headers, $content);
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertEquals('Big boss', $content['user']);
-        $this->assertEquals('v1.0', $content['annotator_schema_version']);
-        $this->assertEquals('a modified annotation', $content['text']);
-        $this->assertEquals('my quote', $content['quote']);
+        $this->assertSame('Big boss', $content['user']);
+        $this->assertSame('v1.0', $content['annotator_schema_version']);
+        $this->assertSame('a modified annotation', $content['text']);
+        $this->assertSame('my quote', $content['quote']);
 
         /** @var Annotation $annotationUpdated */
         $annotationUpdated = $em
             ->getRepository('WallabagAnnotationBundle:Annotation')
             ->findOneById($annotation->getId());
-        $this->assertEquals('a modified annotation', $annotationUpdated->getText());
+        $this->assertSame('a modified annotation', $annotationUpdated->getText());
 
         $em->remove($annotationUpdated);
         $em->flush();
@@ -218,12 +218,12 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
         $content = json_encode([
             'text' => 'a modified annotation',
         ]);
-        $this->client->request('DELETE', $prefixUrl.'/'.$annotation->getId().'.json', [], [], $headers, $content);
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->client->request('DELETE', $prefixUrl . '/' . $annotation->getId() . '.json', [], [], $headers, $content);
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertEquals('This is my annotation /o/', $content['text']);
+        $this->assertSame('This is my annotation /o/', $content['text']);
 
         $annotationDeleted = $em
             ->getRepository('WallabagAnnotationBundle:Annotation')

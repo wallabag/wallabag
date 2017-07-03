@@ -32,7 +32,7 @@ class UserLocaleListenerTest extends \PHPUnit_Framework_TestCase
 
         $listener->onInteractiveLogin($event);
 
-        $this->assertEquals('fr', $session->get('_locale'));
+        $this->assertSame('fr', $session->get('_locale'));
     }
 
     public function testWithoutLanguage()
@@ -53,6 +53,6 @@ class UserLocaleListenerTest extends \PHPUnit_Framework_TestCase
 
         $listener->onInteractiveLogin($event);
 
-        $this->assertEquals('', $session->get('_locale'));
+        $this->assertNull($session->get('_locale'));
     }
 }

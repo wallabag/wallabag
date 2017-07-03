@@ -76,7 +76,7 @@ class CleanDuplicatesCommand extends ContainerAwareCommand
             $url = $this->similarUrl($entry['url']);
 
             /* @var $entry Entry */
-            if (in_array($url, $urls)) {
+            if (in_array($url, $urls, true)) {
                 ++$duplicatesCount;
 
                 $em->remove($repo->find($entry['id']));
@@ -93,7 +93,7 @@ class CleanDuplicatesCommand extends ContainerAwareCommand
 
     private function similarUrl($url)
     {
-        if (in_array(substr($url, -1), ['/', '#'])) { // get rid of "/" and "#" and the end of urls
+        if (in_array(substr($url, -1), ['/', '#'], true)) { // get rid of "/" and "#" and the end of urls
             return substr($url, 0, strlen($url));
         }
 

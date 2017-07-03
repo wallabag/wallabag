@@ -18,7 +18,7 @@ class UtilsTest extends \PHPUnit_Framework_TestCase
     public function examples()
     {
         $examples = [];
-        $finder = (new Finder())->in(__DIR__.'/samples');
+        $finder = (new Finder())->in(__DIR__ . '/samples');
         foreach ($finder->getIterator() as $file) {
             $examples[] = [$file->getContents(), 1];
         }

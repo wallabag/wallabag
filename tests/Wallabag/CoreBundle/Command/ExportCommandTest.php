@@ -4,8 +4,8 @@ namespace Tests\Wallabag\CoreBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Wallabag\CoreBundle\Command\ExportCommand;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Command\ExportCommand;
 
 class ExportCommandTest extends WallabagCoreTestCase
 {

@@ -22,11 +22,6 @@ class Version20170407200919 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix').$tableName;
-    }
-
     /**
      * @param Schema $schema
      */
@@ -47,5 +42,10 @@ class Version20170407200919 extends AbstractMigration implements ContainerAwareI
         $this->skipIf($entryTable->hasColumn('is_public'), 'It seems that you already played this migration.');
 
         $entryTable->addColumn('is_public', 'boolean', ['notnull' => false, 'default' => 0]);
+    }
+
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

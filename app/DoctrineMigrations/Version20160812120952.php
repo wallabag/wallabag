@@ -22,11 +22,6 @@ class Version20160812120952 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix').$tableName;
-    }
-
     /**
      * @param Schema $schema
      */
@@ -45,5 +40,10 @@ class Version20160812120952 extends AbstractMigration implements ContainerAwareI
     {
         $clientsTable = $schema->getTable($this->getTable('oauth2_clients'));
         $clientsTable->dropColumn('name');
+    }
+
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

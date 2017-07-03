@@ -17,7 +17,7 @@ class SettingsControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/settings');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
     public function testSettingsWithNormalUser()
@@ -27,6 +27,6 @@ class SettingsControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/settings');
 
-        $this->assertEquals(403, $client->getResponse()->getStatusCode());
+        $this->assertSame(403, $client->getResponse()->getStatusCode());
     }
 }

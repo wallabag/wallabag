@@ -6,8 +6,8 @@ use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfig;
 use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfigBuilder;
 use Graby\SiteConfig\ConfigBuilder;
 use Psr\Log\LoggerInterface;
-use Wallabag\CoreBundle\Repository\SiteCredentialRepository;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Wallabag\CoreBundle\Repository\SiteCredentialRepository;
 
 class GrabySiteConfigBuilder implements SiteConfigBuilder
 {
@@ -57,7 +57,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
     {
         // required by credentials below
         $host = strtolower($host);
-        if (substr($host, 0, 4) == 'www.') {
+        if (substr($host, 0, 4) === 'www.') {
             $host = substr($host, 4);
         }
 

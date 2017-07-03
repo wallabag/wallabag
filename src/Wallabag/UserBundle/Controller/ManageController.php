@@ -7,10 +7,10 @@ use FOS\UserBundle\FOSUserEvents;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\UserBundle\Form\SearchUserType;
 
@@ -48,13 +48,13 @@ class ManageController extends Controller
                 $this->get('translator')->trans('flashes.user.notice.added', ['%username%' => $user->getUsername()])
             );
 
-            return $this->redirectToRoute('user_edit', array('id' => $user->getId()));
+            return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
         }
 
-        return $this->render('WallabagUserBundle:Manage:new.html.twig', array(
+        return $this->render('WallabagUserBundle:Manage:new.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -79,15 +79,15 @@ class ManageController extends Controller
                 $this->get('translator')->trans('flashes.user.notice.updated', ['%username%' => $user->getUsername()])
             );
 
-            return $this->redirectToRoute('user_edit', array('id' => $user->getId()));
+            return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
         }
 
-        return $this->render('WallabagUserBundle:Manage:edit.html.twig', array(
+        return $this->render('WallabagUserBundle:Manage:edit.html.twig', [
             'user' => $user,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
             'twofactor_auth' => $this->getParameter('twofactor_auth'),
-        ));
+        ]);
     }
 
     /**
@@ -113,22 +113,6 @@ class ManageController extends Controller
         }
 
         return $this->redirectToRoute('user_index');
-    }
-
-    /**
-     * Creates a form to delete a User entity.
-     *
-     * @param User $user The User entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(User $user)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('user_delete', array('id' => $user->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
     }
 
     /**
@@ -174,5 +158,21 @@ class ManageController extends Controller
             'searchForm' => $form->createView(),
             'users' => $pagerFanta,
         ]);
+    }
+
+    /**
+     * Creates a form to delete a User entity.
+     *
+     * @param User $user The User entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(User $user)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('user_delete', ['id' => $user->getId()]))
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
     }
 }

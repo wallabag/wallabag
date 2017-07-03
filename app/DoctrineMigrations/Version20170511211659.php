@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Increase the length of the "quote" column of "annotation" table
+ * Increase the length of the "quote" column of "annotation" table.
  */
 class Version20170511211659 extends AbstractMigration implements ContainerAwareInterface
 {
@@ -21,11 +21,6 @@ class Version20170511211659 extends AbstractMigration implements ContainerAwareI
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
-    }
-
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 
     public function up(Schema $schema)
@@ -68,13 +63,11 @@ EOD
                 );
                 $this->addSql('DROP TABLE __temp__wallabag_annotation');
                 break;
-
             case 'mysql':
-                $this->addSql('ALTER TABLE '.$tableName.' MODIFY quote TEXT NOT NULL');
+                $this->addSql('ALTER TABLE ' . $tableName . ' MODIFY quote TEXT NOT NULL');
                 break;
-
             case 'postgresql':
-                $this->addSql('ALTER TABLE '.$tableName.' ALTER COLUMN quote TYPE TEXT');
+                $this->addSql('ALTER TABLE ' . $tableName . ' ALTER COLUMN quote TYPE TEXT');
                 break;
         }
     }
@@ -87,14 +80,17 @@ EOD
             case 'sqlite':
                 throw new SkipMigrationException('Too complex ...');
                 break;
-
             case 'mysql':
-                $this->addSql('ALTER TABLE '.$tableName.' MODIFY quote VARCHAR(255) NOT NULL');
+                $this->addSql('ALTER TABLE ' . $tableName . ' MODIFY quote VARCHAR(255) NOT NULL');
                 break;
-
             case 'postgresql':
-                $this->addSql('ALTER TABLE '.$tableName.' ALTER COLUMN quote TYPE VARCHAR(255)');
+                $this->addSql('ALTER TABLE ' . $tableName . ' ALTER COLUMN quote TYPE VARCHAR(255)');
                 break;
         }
+    }
+
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

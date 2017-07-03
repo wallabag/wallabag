@@ -13,15 +13,6 @@ use Wallabag\CoreBundle\Event\Listener\LocaleListener;
 
 class LocaleListenerTest extends \PHPUnit_Framework_TestCase
 {
-    private function getEvent(Request $request)
-    {
-        $kernel = $this->getMockBuilder('Symfony\Component\HttpKernel\HttpKernelInterface')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        return new GetResponseEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST);
-    }
-
     public function testWithoutSession()
     {
         $request = Request::create('/');
@@ -30,7 +21,7 @@ class LocaleListenerTest extends \PHPUnit_Framework_TestCase
         $event = $this->getEvent($request);
 
         $listener->onKernelRequest($event);
-        $this->assertEquals('en', $request->getLocale());
+        $this->assertSame('en', $request->getLocale());
     }
 
     public function testWithPreviousSession()
@@ -44,7 +35,7 @@ class LocaleListenerTest extends \PHPUnit_Framework_TestCase
         $event = $this->getEvent($request);
 
         $listener->onKernelRequest($event);
-        $this->assertEquals('fr', $request->getLocale());
+        $this->assertSame('fr', $request->getLocale());
     }
 
     public function testLocaleFromRequestAttribute()
@@ -59,8 +50,8 @@ class LocaleListenerTest extends \PHPUnit_Framework_TestCase
         $event = $this->getEvent($request);
 
         $listener->onKernelRequest($event);
-        $this->assertEquals('en', $request->getLocale());
-        $this->assertEquals('es', $request->getSession()->get('_locale'));
+        $this->assertSame('en', $request->getLocale());
+        $this->assertSame('es', $request->getSession()->get('_locale'));
     }
 
     public function testSubscribedEvents()
@@ -81,6 +72,15 @@ class LocaleListenerTest extends \PHPUnit_Framework_TestCase
             $event
         );
 
-        $this->assertEquals('fr', $request->getLocale());
+        $this->assertSame('fr', $request->getLocale());
+    }
+
+    private function getEvent(Request $request)
+    {
+        $kernel = $this->getMockBuilder('Symfony\Component\HttpKernel\HttpKernelInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        return new GetResponseEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST);
     }
 }

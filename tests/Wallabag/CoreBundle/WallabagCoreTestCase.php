@@ -18,16 +18,16 @@ abstract class WallabagCoreTestCase extends WebTestCase
      */
     private $client = null;
 
-    public function getClient()
-    {
-        return $this->client;
-    }
-
     public function setUp()
     {
         parent::setUp();
 
         $this->client = static::createClient();
+    }
+
+    public function getClient()
+    {
+        return $this->client;
     }
 
     public function resetDatabase(Client $client)
@@ -83,10 +83,10 @@ abstract class WallabagCoreTestCase extends WebTestCase
         $loginManager = $container->get('fos_user.security.login_manager');
         $firewallName = $container->getParameter('fos_user.firewall_name');
 
-        $user = $userManager->findUserBy(array('username' => $username));
+        $user = $userManager->findUserBy(['username' => $username]);
         $loginManager->logInUser($firewallName, $user);
 
-        $session->set('_security_'.$firewallName, serialize($container->get('security.token_storage')->getToken()));
+        $session->set('_security_' . $firewallName, serialize($container->get('security.token_storage')->getToken()));
         $session->save();
 
         $cookie = new Cookie($session->getName(), $session->getId());

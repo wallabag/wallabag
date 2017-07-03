@@ -10,8 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\TaggingRule;
-use Wallabag\CoreBundle\Form\Type\ConfigType;
 use Wallabag\CoreBundle\Form\Type\ChangePasswordType;
+use Wallabag\CoreBundle\Form\Type\ConfigType;
 use Wallabag\CoreBundle\Form\Type\RssType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleType;
 use Wallabag\CoreBundle\Form\Type\UserInformationType;
@@ -54,7 +54,7 @@ class ConfigController extends Controller
         }
 
         // handle changing password
-        $pwdForm = $this->createForm(ChangePasswordType::class, null, ['action' => $this->generateUrl('config').'#set4']);
+        $pwdForm = $this->createForm(ChangePasswordType::class, null, ['action' => $this->generateUrl('config') . '#set4']);
         $pwdForm->handleRequest($request);
 
         if ($pwdForm->isSubmitted() && $pwdForm->isValid()) {
@@ -69,13 +69,13 @@ class ConfigController extends Controller
 
             $this->get('session')->getFlashBag()->add('notice', $message);
 
-            return $this->redirect($this->generateUrl('config').'#set4');
+            return $this->redirect($this->generateUrl('config') . '#set4');
         }
 
         // handle changing user information
         $userForm = $this->createForm(UserInformationType::class, $user, [
             'validation_groups' => ['Profile'],
-            'action' => $this->generateUrl('config').'#set3',
+            'action' => $this->generateUrl('config') . '#set3',
         ]);
         $userForm->handleRequest($request);
 
@@ -87,11 +87,11 @@ class ConfigController extends Controller
                 'flashes.config.notice.user_updated'
             );
 
-            return $this->redirect($this->generateUrl('config').'#set3');
+            return $this->redirect($this->generateUrl('config') . '#set3');
         }
 
         // handle rss information
-        $rssForm = $this->createForm(RssType::class, $config, ['action' => $this->generateUrl('config').'#set2']);
+        $rssForm = $this->createForm(RssType::class, $config, ['action' => $this->generateUrl('config') . '#set2']);
         $rssForm->handleRequest($request);
 
         if ($rssForm->isSubmitted() && $rssForm->isValid()) {
@@ -103,12 +103,12 @@ class ConfigController extends Controller
                 'flashes.config.notice.rss_updated'
             );
 
-            return $this->redirect($this->generateUrl('config').'#set2');
+            return $this->redirect($this->generateUrl('config') . '#set2');
         }
 
         // handle tagging rule
         $taggingRule = new TaggingRule();
-        $action = $this->generateUrl('config').'#set5';
+        $action = $this->generateUrl('config') . '#set5';
 
         if ($request->query->has('tagging-rule')) {
             $taggingRule = $this->getDoctrine()
@@ -119,7 +119,7 @@ class ConfigController extends Controller
                 return $this->redirect($action);
             }
 
-            $action = $this->generateUrl('config').'?tagging-rule='.$taggingRule->getId().'#set5';
+            $action = $this->generateUrl('config') . '?tagging-rule=' . $taggingRule->getId() . '#set5';
         }
 
         $newTaggingRule = $this->createForm(TaggingRuleType::class, $taggingRule, ['action' => $action]);
@@ -135,7 +135,7 @@ class ConfigController extends Controller
                 'flashes.config.notice.tagging_rules_updated'
             );
 
-            return $this->redirect($this->generateUrl('config').'#set5');
+            return $this->redirect($this->generateUrl('config') . '#set5');
         }
 
         return $this->render('WallabagCoreBundle:Config:index.html.twig', [
@@ -182,7 +182,7 @@ class ConfigController extends Controller
             'flashes.config.notice.rss_token_updated'
         );
 
-        return $this->redirect($this->generateUrl('config').'#set2');
+        return $this->redirect($this->generateUrl('config') . '#set2');
     }
 
     /**
@@ -207,7 +207,7 @@ class ConfigController extends Controller
             'flashes.config.notice.tagging_rules_deleted'
         );
 
-        return $this->redirect($this->generateUrl('config').'#set5');
+        return $this->redirect($this->generateUrl('config') . '#set5');
     }
 
     /**
@@ -223,7 +223,7 @@ class ConfigController extends Controller
     {
         $this->validateRuleAction($rule);
 
-        return $this->redirect($this->generateUrl('config').'?tagging-rule='.$rule->getId().'#set5');
+        return $this->redirect($this->generateUrl('config') . '?tagging-rule=' . $rule->getId() . '#set5');
     }
 
     /**
@@ -241,11 +241,9 @@ class ConfigController extends Controller
                     ->getRepository('WallabagAnnotationBundle:Annotation')
                     ->removeAllByUserId($this->getUser()->getId());
                 break;
-
             case 'tags':
                 $this->removeAllTagsByUserId($this->getUser()->getId());
                 break;
-
             case 'entries':
                 // SQLite doesn't care about cascading remove, so we need to manually remove associated stuff
                 // otherwise they won't be removed ...
@@ -272,10 +270,63 @@ class ConfigController extends Controller
 
         $this->get('session')->getFlashBag()->add(
             'notice',
-            'flashes.config.notice.'.$type.'_reset'
+            'flashes.config.notice.' . $type . '_reset'
         );
 
-        return $this->redirect($this->generateUrl('config').'#set3');
+        return $this->redirect($this->generateUrl('config') . '#set3');
+    }
+
+    /**
+     * Delete account for current user.
+     *
+     * @Route("/account/delete", name="delete_account")
+     *
+     * @param Request $request
+     *
+     * @throws AccessDeniedHttpException
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteAccountAction(Request $request)
+    {
+        $enabledUsers = $this->get('wallabag_user.user_repository')
+            ->getSumEnabledUsers();
+
+        if ($enabledUsers <= 1) {
+            throw new AccessDeniedHttpException();
+        }
+
+        $user = $this->getUser();
+
+        // logout current user
+        $this->get('security.token_storage')->setToken(null);
+        $request->getSession()->invalidate();
+
+        $em = $this->get('fos_user.user_manager');
+        $em->deleteUser($user);
+
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    /**
+     * Switch view mode for current user.
+     *
+     * @Route("/config/view-mode", name="switch_view_mode")
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function changeViewModeAction(Request $request)
+    {
+        $user = $this->getUser();
+        $user->getConfig()->setListMode(!$user->getConfig()->getListMode());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirect($request->headers->get('referer'));
     }
 
     /**
@@ -349,7 +400,7 @@ class ConfigController extends Controller
      */
     private function validateRuleAction(TaggingRule $rule)
     {
-        if ($this->getUser()->getId() != $rule->getConfig()->getUser()->getId()) {
+        if ($this->getUser()->getId() !== $rule->getConfig()->getUser()->getId()) {
             throw $this->createAccessDeniedException('You can not access this tagging rule.');
         }
     }
@@ -372,58 +423,5 @@ class ConfigController extends Controller
         }
 
         return $config;
-    }
-
-    /**
-     * Delete account for current user.
-     *
-     * @Route("/account/delete", name="delete_account")
-     *
-     * @param Request $request
-     *
-     * @throws AccessDeniedHttpException
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function deleteAccountAction(Request $request)
-    {
-        $enabledUsers = $this->get('wallabag_user.user_repository')
-            ->getSumEnabledUsers();
-
-        if ($enabledUsers <= 1) {
-            throw new AccessDeniedHttpException();
-        }
-
-        $user = $this->getUser();
-
-        // logout current user
-        $this->get('security.token_storage')->setToken(null);
-        $request->getSession()->invalidate();
-
-        $em = $this->get('fos_user.user_manager');
-        $em->deleteUser($user);
-
-        return $this->redirect($this->generateUrl('fos_user_security_login'));
-    }
-
-    /**
-     * Switch view mode for current user.
-     *
-     * @Route("/config/view-mode", name="switch_view_mode")
-     *
-     * @param Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function changeViewModeAction(Request $request)
-    {
-        $user = $this->getUser();
-        $user->getConfig()->setListMode(!$user->getConfig()->getListMode());
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($user);
-        $em->flush();
-
-        return $this->redirect($request->headers->get('referer'));
     }
 }

@@ -28,11 +28,6 @@ class Version20161128131503 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix').$tableName;
-    }
-
     /**
      * @param Schema $schema
      */
@@ -57,5 +52,10 @@ class Version20161128131503 extends AbstractMigration implements ContainerAwareI
             $this->skipIf($userTable->hasColumn($field), 'It seems that you already played this migration.');
             $userTable->addColumn($field, $type, ['notnull' => false]);
         }
+    }
+
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

@@ -29,11 +29,6 @@ class Version20170510082609 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix').$tableName;
-    }
-
     /**
      * @param Schema $schema
      */
@@ -42,7 +37,7 @@ class Version20170510082609 extends AbstractMigration implements ContainerAwareI
         $this->skipIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'This migration only apply to MySQL');
 
         foreach ($this->fields as $field) {
-            $this->addSql('ALTER TABLE '.$this->getTable('user').' CHANGE '.$field.' '.$field.' VARCHAR(180) NOT NULL;');
+            $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' CHANGE ' . $field . ' ' . $field . ' VARCHAR(180) NOT NULL;');
         }
     }
 
@@ -54,7 +49,12 @@ class Version20170510082609 extends AbstractMigration implements ContainerAwareI
         $this->skipIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'This migration only apply to MySQL');
 
         foreach ($this->fields as $field) {
-            $this->addSql('ALTER TABLE '.$this->getTable('user').' CHANGE '.$field.' '.$field.' VARCHAR(255) NOT NULL;');
+            $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' CHANGE ' . $field . ' ' . $field . ' VARCHAR(255) NOT NULL;');
         }
+    }
+
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

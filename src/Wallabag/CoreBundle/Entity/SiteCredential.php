@@ -188,7 +188,7 @@ class SiteCredential
      */
     public function timestamps()
     {
-        if (is_null($this->createdAt)) {
+        if (null === $this->createdAt) {
             $this->createdAt = new \DateTime();
         }
     }
