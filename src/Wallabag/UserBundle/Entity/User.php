@@ -95,6 +95,13 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     /**
      * @var ArrayCollection
      *
+     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\SiteCredential", mappedBy="user", cascade={"remove"})
+     */
+    protected $siteCredentials;
+
+    /**
+     * @var ArrayCollection
+     *
      * @ORM\OneToMany(targetEntity="Wallabag\ApiBundle\Entity\Client", mappedBy="user", cascade={"remove"})
      */
     protected $clients;

@@ -57,7 +57,7 @@ class SiteCredential
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="site_credentials")
+     * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="siteCredentials")
      */
     private $user;
 
