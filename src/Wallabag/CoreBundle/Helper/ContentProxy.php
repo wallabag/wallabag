@@ -67,6 +67,76 @@ class ContentProxy
     }
 
     /**
+     * Use a Symfony validator to ensure the language is well formatted.
+     *
+     * @param Entry  $entry
+     * @param string $value Language to validate and save
+     */
+    public function updateLanguage(Entry $entry, $value)
+    {
+        // some lang are defined as fr-FR, es-ES.
+        // replacing - by _ might increase language support
+        $value = str_replace('-', '_', $value);
+
+        $errors = $this->validator->validate(
+            $value,
+            (new LocaleConstraint())
+        );
+
+        if (0 === count($errors)) {
+            $entry->setLanguage($value);
+
+            return;
+        }
+
+        $this->logger->warning('Language validation failed. ' . (string) $errors);
+    }
+
+    /**
+     * Use a Symfony validator to ensure the preview picture is a real url.
+     *
+     * @param Entry  $entry
+     * @param string $value URL to validate and save
+     */
+    public function updatePreviewPicture(Entry $entry, $value)
+    {
+        $errors = $this->validator->validate(
+            $value,
+            (new UrlConstraint())
+        );
+
+        if (0 === count($errors)) {
+            $entry->setPreviewPicture($value);
+
+            return;
+        }
+
+        $this->logger->warning('PreviewPicture validation failed. ' . (string) $errors);
+    }
+
+    /**
+     * Update date.
+     *
+     * @param Entry  $entry
+     * @param string $value Date to validate and save
+     */
+    public function updatePublishedAt(Entry $entry, $value)
+    {
+        $date = $value;
+
+        // is it a timestamp?
+        if (filter_var($date, FILTER_VALIDATE_INT) !== false) {
+            $date = '@' . $value;
+        }
+
+        try {
+            $entry->setPublishedAt(new \DateTime($date));
+        } catch (\Exception $e) {
+            $this->logger->warning('Error while defining date', ['e' => $e, 'url' => $entry->getUrl(), 'date' => $value]);
+        }
+    }
+
+    /**
      * Stock entry with fetched or imported content.
      * Will fall back to OpenGraph data if available.
      *
@@ -154,75 +224,5 @@ class ContentProxy
     private function validateContent(array $content)
     {
         return !empty($content['title']) && !empty($content['html']) && !empty($content['url']);
-    }
-
-    /**
-     * Use a Symfony validator to ensure the language is well formatted.
-     *
-     * @param Entry  $entry
-     * @param string $value Language to validate and save
-     */
-    public function updateLanguage(Entry $entry, $value)
-    {
-        // some lang are defined as fr-FR, es-ES.
-        // replacing - by _ might increase language support
-        $value = str_replace('-', '_', $value);
-
-        $errors = $this->validator->validate(
-            $value,
-            (new LocaleConstraint())
-        );
-
-        if (0 === count($errors)) {
-            $entry->setLanguage($value);
-
-            return;
-        }
-
-        $this->logger->warning('Language validation failed. ' . (string) $errors);
-    }
-
-    /**
-     * Use a Symfony validator to ensure the preview picture is a real url.
-     *
-     * @param Entry  $entry
-     * @param string $value URL to validate and save
-     */
-    public function updatePreviewPicture(Entry $entry, $value)
-    {
-        $errors = $this->validator->validate(
-            $value,
-            (new UrlConstraint())
-        );
-
-        if (0 === count($errors)) {
-            $entry->setPreviewPicture($value);
-
-            return;
-        }
-
-        $this->logger->warning('PreviewPicture validation failed. ' . (string) $errors);
-    }
-
-    /**
-     * Update date.
-     *
-     * @param Entry  $entry
-     * @param string $value Date to validate and save
-     */
-    public function updatePublishedAt(Entry $entry, $value)
-    {
-        $date = $value;
-
-        // is it a timestamp?
-        if (filter_var($date, FILTER_VALIDATE_INT) !== false) {
-            $date = '@'.$value;
-        }
-
-        try {
-            $entry->setPublishedAt(new \DateTime($date));
-        } catch (\Exception $e) {
-            $this->logger->warning('Error while defining date', ['e' => $e, 'url' => $entry->getUrl(), 'date' => $value]);
-        }
     }
 }

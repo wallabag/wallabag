@@ -519,7 +519,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             $this->markTestSkipped('No content found in db.');
         }
 
-        $this->client->request('PATCH', '/api/entries/'.$entry->getId().'.json', [
+        $this->client->request('PATCH', '/api/entries/' . $entry->getId() . '.json', [
             'title' => 'New awesome title',
             'tags' => 'new tag ' . uniqid(),
             'starred' => '1',
@@ -579,10 +579,9 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame($entry->getId(), $content['id']);
         $this->assertSame($entry->getUrl(), $content['url']);
         $this->assertGreaterThanOrEqual(1, count($content['tags']), 'We force only one tag');
-        $this->assertGreaterThan($nbTags, count($content['tags']));
         $this->assertEmpty($content['published_by'], 'Authors were not saved because of an array instead of a string');
-        $this->assertEquals($previousContent, $content['content'], 'Ensure content has not moved');
-        $this->assertEquals($previousLanguage, $content['language'], 'Ensure language has not moved');
+        $this->assertSame($previousContent, $content['content'], 'Ensure content has not moved');
+        $this->assertSame($previousLanguage, $content['language'], 'Ensure language has not moved');
     }
 
     public function testGetTagsEntry()
@@ -730,8 +729,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $previousTitle = $entry->getTitle();
 
-        $this->client->request('PATCH', '/api/entries/'.$entry->getId().'.json', [
-            'title' => $entry->getTitle().'++',
+        $this->client->request('PATCH', '/api/entries/' . $entry->getId() . '.json', [
+            'title' => $entry->getTitle() . '++',
         ]);
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
@@ -739,7 +738,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertSame(1, $content['is_archived']);
-        $this->assertEquals($previousTitle.'++', $content['title']);
+        $this->assertSame($previousTitle . '++', $content['title']);
     }
 
     public function testSaveIsStarredAfterPatch()
@@ -913,9 +912,9 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testPostEntriesTagsListActionNoList()
     {
-        $this->client->request('POST', '/api/entries/tags/lists?list='.json_encode([]));
+        $this->client->request('POST', '/api/entries/tags/lists?list=' . json_encode([]));
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
@@ -950,9 +949,9 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testDeleteEntriesTagsListActionNoList()
     {
-        $this->client->request('DELETE', '/api/entries/tags/list?list='.json_encode([]));
+        $this->client->request('DELETE', '/api/entries/tags/list?list=' . json_encode([]));
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
@@ -981,9 +980,9 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testPostEntriesListActionWithNoUrls()
     {
-        $this->client->request('POST', '/api/entries/lists?urls='.json_encode([]));
+        $this->client->request('POST', '/api/entries/lists?urls=' . json_encode([]));
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
@@ -1017,9 +1016,9 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testDeleteEntriesListActionWithNoUrls()
     {
-        $this->client->request('DELETE', '/api/entries/list?urls='.json_encode([]));
+        $this->client->request('DELETE', '/api/entries/list?urls=' . json_encode([]));
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 

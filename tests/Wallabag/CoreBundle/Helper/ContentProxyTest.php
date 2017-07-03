@@ -521,13 +521,13 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
-        $this->assertEquals('http://1.1.1.1/image.jpg', $entry->getUrl());
-        $this->assertEquals('this is my title', $entry->getTitle());
+        $this->assertSame('http://1.1.1.1/image.jpg', $entry->getUrl());
+        $this->assertSame('this is my title', $entry->getTitle());
         $this->assertContains('http://1.1.1.1/image.jpg', $entry->getContent());
         $this->assertSame('http://1.1.1.1/image.jpg', $entry->getPreviewPicture());
-        $this->assertEquals('image/jpeg', $entry->getMimetype());
-        $this->assertEquals('200', $entry->getHttpStatus());
-        $this->assertEquals('1.1.1.1', $entry->getDomainName());
+        $this->assertSame('image/jpeg', $entry->getMimetype());
+        $this->assertSame('200', $entry->getHttpStatus());
+        $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
     private function getTaggerMock()

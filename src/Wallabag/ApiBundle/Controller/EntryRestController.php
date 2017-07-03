@@ -354,11 +354,11 @@ class EntryRestController extends WallabagRestController
             ]);
         }
 
-        if (!is_null($data['isArchived'])) {
+        if (null !== $data['isArchived']) {
             $entry->setArchived((bool) $data['isArchived']);
         }
 
-        if (!is_null($data['isStarred'])) {
+        if (null !== $data['isStarred']) {
             $entry->setStarred((bool) $data['isStarred']);
         }
 
@@ -366,7 +366,7 @@ class EntryRestController extends WallabagRestController
             $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $data['tags']);
         }
 
-        if (!is_null($data['isPublic'])) {
+        if (null !== $data['isPublic']) {
             if (true === (bool) $data['isPublic'] && null === $entry->getUid()) {
                 $entry->generateUid();
             } elseif (false === (bool) $data['isPublic']) {
@@ -457,11 +457,11 @@ class EntryRestController extends WallabagRestController
             $contentProxy->updatePublishedAt($entry, $data['publishedAt']);
         }
 
-        if (!is_null($data['isArchived'])) {
+        if (null !== $data['isArchived']) {
             $entry->setArchived((bool) $data['isArchived']);
         }
 
-        if (!is_null($data['isStarred'])) {
+        if (null !== $data['isStarred']) {
             $entry->setStarred((bool) $data['isStarred']);
         }
 
@@ -470,7 +470,7 @@ class EntryRestController extends WallabagRestController
             $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $data['tags']);
         }
 
-        if (!is_null($data['isPublic'])) {
+        if (null !== $data['isPublic']) {
             if (true === (bool) $data['isPublic'] && null === $entry->getUid()) {
                 $entry->generateUid();
             } elseif (false === (bool) $data['isPublic']) {
