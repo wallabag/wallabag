@@ -42,6 +42,10 @@ class AppKernel extends Kernel
             new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
         ];
 
+        if (class_exists('FR3D\\LdapBundle\\FR3DLdapBundle')) {
+          $bundles[] = new FR3D\LdapBundle\FR3DLdapBundle();
+        }
+
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();

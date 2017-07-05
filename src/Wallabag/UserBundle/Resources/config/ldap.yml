@@ -1,0 +1,28 @@
+fr3d_ldap:
+    service:
+        user_hydrator: ldap_user_hydrator
+    driver:
+        host: "%ldap_host%"
+        port: "%ldap_port%"
+        useSsl: "%ldap_ssl%"
+        useStartTls: "%ldap_tls%"
+        bindRequiresDn: "%ldap_bind_requires_dn%"
+        username: "%ldap_manager_dn%"
+        password: "%ldap_manager_pw%"
+    user:
+        baseDn: "%ldap_base%"
+        filter: "%ldap_filter%"
+        usernameAttribute: "%ldap_username_attribute%"
+security:
+    providers:
+        chain_provider:
+            chain:
+                providers: [ fr3d_ldapbundle, fos_userbundle ]
+        fr3d_ldapbundle:
+            id: fr3d_ldap.security.user.provider
+    firewalls:
+        secured_area:
+            fr3d_ldap: ~
+            form_login:
+                provider: chain_provider
+

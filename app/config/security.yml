@@ -6,6 +6,7 @@ security:
         ROLE_ADMIN: ROLE_USER
         ROLE_SUPER_ADMIN: [ ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
 
+    # /!\ This list is modified in WallabagUserBundle when LDAP is enabled
     providers:
         administrators:
             entity:
@@ -36,6 +37,7 @@ security:
             pattern: ^/login$
             anonymous:  ~
 
+        # /!\ This section is modified in WallabagUserBundle when LDAP is enabled
         secured_area:
             pattern: ^/
             form_login:

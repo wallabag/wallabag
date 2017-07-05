@@ -86,6 +86,9 @@
         "friendsofsymfony/jsrouting-bundle": "^1.6",
         "bdunogier/guzzle-site-authenticator": "1.0.0-beta1"
     },
+    "suggest": {
+      "fr3d/ldap-bundle": "If you want to authenticate via LDAP"
+    },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",
         "doctrine/data-fixtures": "~1.1.1",

@@ -1,0 +1,22 @@
+services:
+    fos_oauth_server.server:
+        class: OAuth2\OAuth2
+        arguments:
+            - "@oauth_storage_ldap_wrapper"
+            - "%fos_oauth_server.server.options%"
+    oauth_storage_ldap_wrapper:
+        class: Wallabag\UserBundle\OAuthStorageLdapWrapper
+        parent: fos_oauth_server.storage
+        calls:
+            - [setLdapManager, ["@fr3d_ldap.ldap_manager"]]
+
+    ldap_user_hydrator:
+        class: Wallabag\UserBundle\LdapHydrator
+        arguments:
+            - "@fos_user.user_manager"
+            - "@event_dispatcher"
+            - [ "%ldap_username_attribute%", "%ldap_email_attribute%", "%ldap_name_attribute%", "%ldap_enabled_attribute%" ]
+            - "%ldap_base%"
+            - "%ldap_admin_filter%"
+            - "@fr3d_ldap.ldap_driver"
+
