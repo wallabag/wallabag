@@ -299,8 +299,8 @@ class EntryRestController extends WallabagRestController
      *          {"name"="url", "dataType"="string", "required"=true, "format"="http://www.test.com/article.html", "description"="Url for the entry."},
      *          {"name"="title", "dataType"="string", "required"=false, "description"="Optional, we'll get the title from the page."},
      *          {"name"="tags", "dataType"="string", "required"=false, "format"="tag1,tag2,tag3", "description"="a comma-separated list of tags."},
-     *          {"name"="starred", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="entry already starred"},
      *          {"name"="archive", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="entry already archived"},
+     *          {"name"="starred", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="entry already starred"},
      *          {"name"="content", "dataType"="string", "required"=false, "description"="Content of the entry"},
      *          {"name"="language", "dataType"="string", "required"=false, "description"="Language of the entry"},
      *          {"name"="preview_picture", "dataType"="string", "required"=false, "description"="Preview picture of the entry"},
@@ -328,7 +328,58 @@ class EntryRestController extends WallabagRestController
             $entry->setUrl($url);
         }
 
-        $this->upsertEntry($entry, $request);
+        $data = $this->retrieveValueFromRequest($request);
+
+        try {
+            $this->get('wallabag_core.content_proxy')->updateEntry(
+                $entry,
+                $entry->getUrl(),
+                [
+                    'title' => !empty($data['title']) ? $data['title'] : $entry->getTitle(),
+                    'html' => !empty($data['content']) ? $data['content'] : $entry->getContent(),
+                    'url' => $entry->getUrl(),
+                    'language' => !empty($data['language']) ? $data['language'] : $entry->getLanguage(),
+                    'date' => !empty($data['publishedAt']) ? $data['publishedAt'] : $entry->getPublishedAt(),
+                    // faking the open graph preview picture
+                    'open_graph' => [
+                        'og_image' => !empty($data['picture']) ? $data['picture'] : $entry->getPreviewPicture(),
+                    ],
+                    'authors' => is_string($data['authors']) ? explode(',', $data['authors']) : $entry->getPublishedBy(),
+                ]
+            );
+        } catch (\Exception $e) {
+            $this->get('logger')->error('Error while saving an entry', [
+                'exception' => $e,
+                'entry' => $entry,
+            ]);
+        }
+
+        if (null !== $data['isArchived']) {
+            $entry->setArchived((bool) $data['isArchived']);
+        }
+
+        if (null !== $data['isStarred']) {
+            $entry->setStarred((bool) $data['isStarred']);
+        }
+
+        if (!empty($data['tags'])) {
+            $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $data['tags']);
+        }
+
+        if (null !== $data['isPublic']) {
+            if (true === (bool) $data['isPublic'] && null === $entry->getUid()) {
+                $entry->generateUid();
+            } elseif (false === (bool) $data['isPublic']) {
+                $entry->cleanUid();
+            }
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($entry);
+        $em->flush();
+
+        // entry saved, dispatch event about it!
+        $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
 
         return $this->sendResponse($entry);
     }
@@ -361,7 +412,78 @@ class EntryRestController extends WallabagRestController
         $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
 
-        $this->upsertEntry($entry, $request, true);
+        $contentProxy = $this->get('wallabag_core.content_proxy');
+
+        $data = $this->retrieveValueFromRequest($request);
+
+        // this is a special case where user want to manually update the entry content
+        // the ContentProxy will only cleanup the html
+        // and also we force to not re-fetch the content in case of error
+        if (!empty($data['content'])) {
+            try {
+                $contentProxy->updateEntry(
+                    $entry,
+                    $entry->getUrl(),
+                    [
+                        'html' => $data['content'],
+                    ],
+                    true
+                );
+            } catch (\Exception $e) {
+                $this->get('logger')->error('Error while saving an entry', [
+                    'exception' => $e,
+                    'entry' => $entry,
+                ]);
+            }
+        }
+
+        if (!empty($data['title'])) {
+            $entry->setTitle($data['title']);
+        }
+
+        if (!empty($data['language'])) {
+            $contentProxy->updateLanguage($entry, $data['language']);
+        }
+
+        if (!empty($data['authors']) && is_string($data['authors'])) {
+            $entry->setPublishedBy(explode(',', $data['authors']));
+        }
+
+        if (!empty($data['picture'])) {
+            $contentProxy->updatePreviewPicture($entry, $data['picture']);
+        }
+
+        if (!empty($data['publishedAt'])) {
+            $contentProxy->updatePublishedAt($entry, $data['publishedAt']);
+        }
+
+        if (null !== $data['isArchived']) {
+            $entry->setArchived((bool) $data['isArchived']);
+        }
+
+        if (null !== $data['isStarred']) {
+            $entry->setStarred((bool) $data['isStarred']);
+        }
+
+        if (!empty($data['tags'])) {
+            $entry->removeAllTags();
+            $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $data['tags']);
+        }
+
+        if (null !== $data['isPublic']) {
+            if (true === (bool) $data['isPublic'] && null === $entry->getUid()) {
+                $entry->generateUid();
+            } elseif (false === (bool) $data['isPublic']) {
+                $entry->cleanUid();
+            }
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($entry);
+        $em->flush();
+
+        // entry saved, dispatch event about it!
+        $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
 
         return $this->sendResponse($entry);
     }
@@ -634,76 +756,27 @@ class EntryRestController extends WallabagRestController
     }
 
     /**
-     * Update or Insert a new entry.
+     * Retrieve value from the request.
+     * Used for POST & PATCH on a an entry.
      *
-     * @param Entry   $entry
      * @param Request $request
-     * @param bool    $disableContentUpdate If we don't want the content to be update by fetching the url (used when patching instead of posting)
+     *
+     * @return array
      */
-    private function upsertEntry(Entry $entry, Request $request, $disableContentUpdate = false)
+    private function retrieveValueFromRequest(Request $request)
     {
-        $title = $request->request->get('title');
-        $tags = $request->request->get('tags', []);
-        $isArchived = $request->request->get('archive');
-        $isStarred = $request->request->get('starred');
-        $isPublic = $request->request->get('public');
-        $content = $request->request->get('content');
-        $language = $request->request->get('language');
-        $picture = $request->request->get('preview_picture');
-        $publishedAt = $request->request->get('published_at');
-        $authors = $request->request->get('authors', '');
-
-        try {
-            $this->get('wallabag_core.content_proxy')->updateEntry(
-                $entry,
-                $entry->getUrl(),
-                [
-                    'title' => !empty($title) ? $title : $entry->getTitle(),
-                    'html' => !empty($content) ? $content : $entry->getContent(),
-                    'url' => $entry->getUrl(),
-                    'language' => !empty($language) ? $language : $entry->getLanguage(),
-                    'date' => !empty($publishedAt) ? $publishedAt : $entry->getPublishedAt(),
-                    // faking the open graph preview picture
-                    'open_graph' => [
-                        'og_image' => !empty($picture) ? $picture : $entry->getPreviewPicture(),
-                    ],
-                    'authors' => is_string($authors) ? explode(',', $authors) : $entry->getPublishedBy(),
-                ],
-                $disableContentUpdate
-            );
-        } catch (\Exception $e) {
-            $this->get('logger')->error('Error while saving an entry', [
-                'exception' => $e,
-                'entry' => $entry,
-            ]);
-        }
-
-        if (null !== $isArchived) {
-            $entry->setArchived((bool) $isArchived);
-        }
-
-        if (null !== $isStarred) {
-            $entry->setStarred((bool) $isStarred);
-        }
-
-        if (!empty($tags)) {
-            $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $tags);
-        }
-
-        if (null !== $isPublic) {
-            if (true === (bool) $isPublic && null === $entry->getUid()) {
-                $entry->generateUid();
-            } elseif (false === (bool) $isPublic) {
-                $entry->cleanUid();
-            }
-        }
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($entry);
-        $em->flush();
-
-        // entry saved, dispatch event about it!
-        $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+        return [
+            'title' => $request->request->get('title'),
+            'tags' => $request->request->get('tags', []),
+            'isArchived' => $request->request->get('archive'),
+            'isStarred' => $request->request->get('starred'),
+            'isPublic' => $request->request->get('public'),
+            'content' => $request->request->get('content'),
+            'language' => $request->request->get('language'),
+            'picture' => $request->request->get('preview_picture'),
+            'publishedAt' => $request->request->get('published_at'),
+            'authors' => $request->request->get('authors', ''),
+        ];
     }
 
     /**

@@ -221,12 +221,9 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ->method('tag');
 
         $validator = $this->getValidator();
-        $validator->expects($this->exactly(2))
+        $validator->expects($this->once())
             ->method('validate')
-            ->will($this->onConsecutiveCalls(
-                new ConstraintViolationList([new ConstraintViolation('oops', 'oops', [], 'oops', 'language', 'dontexist')]),
-                new ConstraintViolationList()
-            ));
+            ->willReturn(new ConstraintViolationList([new ConstraintViolation('oops', 'oops', [], 'oops', 'language', 'dontexist')]));
 
         $graby = $this->getMockBuilder('Graby\Graby')
             ->setMethods(['fetchContent'])
@@ -494,6 +491,41 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('http://3.3.3.3/cover.jpg', $entry->getPreviewPicture());
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
+        $this->assertSame('200', $entry->getHttpStatus());
+        $this->assertSame('1.1.1.1', $entry->getDomainName());
+    }
+
+    public function testWithImageAsContent()
+    {
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $graby = $this->getMockBuilder('Graby\Graby')
+            ->setMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn([
+                'html' => '<p><img src="http://1.1.1.1/image.jpg" /></p>',
+                'title' => 'this is my title',
+                'url' => 'http://1.1.1.1/image.jpg',
+                'content_type' => 'image/jpeg',
+                'status' => '200',
+                'open_graph' => [],
+            ]);
+
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'http://0.0.0.0');
+
+        $this->assertSame('http://1.1.1.1/image.jpg', $entry->getUrl());
+        $this->assertSame('this is my title', $entry->getTitle());
+        $this->assertContains('http://1.1.1.1/image.jpg', $entry->getContent());
+        $this->assertSame('http://1.1.1.1/image.jpg', $entry->getPreviewPicture());
+        $this->assertSame('image/jpeg', $entry->getMimetype());
         $this->assertSame('200', $entry->getHttpStatus());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
     }

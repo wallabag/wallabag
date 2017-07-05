@@ -67,112 +67,12 @@ class ContentProxy
     }
 
     /**
-     * Stock entry with fetched or imported content.
-     * Will fall back to OpenGraph data if available.
-     *
-     * @param Entry $entry   Entry to stock
-     * @param array $content Array with at least title, url & html
-     */
-    private function stockEntry(Entry $entry, array $content)
-    {
-        $title = $content['title'];
-        if (!$title && !empty($content['open_graph']['og_title'])) {
-            $title = $content['open_graph']['og_title'];
-        }
-
-        $html = $content['html'];
-        if (false === $html) {
-            $html = $this->fetchingErrorMessage;
-
-            if (!empty($content['open_graph']['og_description'])) {
-                $html .= '<p><i>But we found a short description: </i></p>';
-                $html .= $content['open_graph']['og_description'];
-            }
-        }
-
-        $entry->setUrl($content['url']);
-        $entry->setTitle($title);
-        $entry->setContent($html);
-        $entry->setHttpStatus(isset($content['status']) ? $content['status'] : '');
-
-        if (!empty($content['date'])) {
-            $date = $content['date'];
-
-            // is it a timestamp?
-            if (filter_var($date, FILTER_VALIDATE_INT) !== false) {
-                $date = '@' . $content['date'];
-            }
-
-            try {
-                $entry->setPublishedAt(new \DateTime($date));
-            } catch (\Exception $e) {
-                $this->logger->warning('Error while defining date', ['e' => $e, 'url' => $content['url'], 'date' => $content['date']]);
-            }
-        }
-
-        if (!empty($content['authors']) && is_array($content['authors'])) {
-            $entry->setPublishedBy($content['authors']);
-        }
-
-        if (!empty($content['all_headers'])) {
-            $entry->setHeaders($content['all_headers']);
-        }
-
-        $this->validateAndSetLanguage(
-            $entry,
-            isset($content['language']) ? $content['language'] : null
-        );
-
-        $this->validateAndSetPreviewPicture(
-            $entry,
-            isset($content['open_graph']['og_image']) ? $content['open_graph']['og_image'] : null
-        );
-
-        // if content is an image, define it as a preview too
-        if (!empty($content['content_type']) && in_array($this->mimeGuesser->guess($content['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
-            $this->validateAndSetPreviewPicture(
-                $entry,
-                $content['url']
-            );
-        }
-
-        $entry->setMimetype(isset($content['content_type']) ? $content['content_type'] : '');
-        $entry->setReadingTime(Utils::getReadingTime($html));
-
-        $domainName = parse_url($entry->getUrl(), PHP_URL_HOST);
-        if (false !== $domainName) {
-            $entry->setDomainName($domainName);
-        }
-
-        try {
-            $this->tagger->tag($entry);
-        } catch (\Exception $e) {
-            $this->logger->error('Error while trying to automatically tag an entry.', [
-                'entry_url' => $content['url'],
-                'error_msg' => $e->getMessage(),
-            ]);
-        }
-    }
-
-    /**
-     * Validate that the given content has at least a title, an html and a url.
-     *
-     * @param array $content
-     *
-     * @return bool true if valid otherwise false
-     */
-    private function validateContent(array $content)
-    {
-        return !empty($content['title']) && !empty($content['html']) && !empty($content['url']);
-    }
-
-    /**
      * Use a Symfony validator to ensure the language is well formatted.
      *
      * @param Entry  $entry
-     * @param string $value Language to validate
+     * @param string $value Language to validate and save
      */
-    private function validateAndSetLanguage($entry, $value)
+    public function updateLanguage(Entry $entry, $value)
     {
         // some lang are defined as fr-FR, es-ES.
         // replacing - by _ might increase language support
@@ -196,9 +96,9 @@ class ContentProxy
      * Use a Symfony validator to ensure the preview picture is a real url.
      *
      * @param Entry  $entry
-     * @param string $value URL to validate
+     * @param string $value URL to validate and save
      */
-    private function validateAndSetPreviewPicture($entry, $value)
+    public function updatePreviewPicture(Entry $entry, $value)
     {
         $errors = $this->validator->validate(
             $value,
@@ -212,5 +112,117 @@ class ContentProxy
         }
 
         $this->logger->warning('PreviewPicture validation failed. ' . (string) $errors);
+    }
+
+    /**
+     * Update date.
+     *
+     * @param Entry  $entry
+     * @param string $value Date to validate and save
+     */
+    public function updatePublishedAt(Entry $entry, $value)
+    {
+        $date = $value;
+
+        // is it a timestamp?
+        if (filter_var($date, FILTER_VALIDATE_INT) !== false) {
+            $date = '@' . $value;
+        }
+
+        try {
+            $entry->setPublishedAt(new \DateTime($date));
+        } catch (\Exception $e) {
+            $this->logger->warning('Error while defining date', ['e' => $e, 'url' => $entry->getUrl(), 'date' => $value]);
+        }
+    }
+
+    /**
+     * Stock entry with fetched or imported content.
+     * Will fall back to OpenGraph data if available.
+     *
+     * @param Entry $entry   Entry to stock
+     * @param array $content Array with at least title, url & html
+     */
+    private function stockEntry(Entry $entry, array $content)
+    {
+        $entry->setUrl($content['url']);
+
+        $domainName = parse_url($entry->getUrl(), PHP_URL_HOST);
+        if (false !== $domainName) {
+            $entry->setDomainName($domainName);
+        }
+
+        if (!empty($content['title'])) {
+            $entry->setTitle($content['title']);
+        } elseif (!empty($content['open_graph']['og_title'])) {
+            $entry->setTitle($content['open_graph']['og_title']);
+        }
+
+        $html = $content['html'];
+        if (false === $html) {
+            $html = $this->fetchingErrorMessage;
+
+            if (!empty($content['open_graph']['og_description'])) {
+                $html .= '<p><i>But we found a short description: </i></p>';
+                $html .= $content['open_graph']['og_description'];
+            }
+        }
+
+        $entry->setContent($html);
+        $entry->setReadingTime(Utils::getReadingTime($html));
+
+        if (!empty($content['status'])) {
+            $entry->setHttpStatus($content['status']);
+        }
+
+        if (!empty($content['authors']) && is_array($content['authors'])) {
+            $entry->setPublishedBy($content['authors']);
+        }
+
+        if (!empty($content['all_headers'])) {
+            $entry->setHeaders($content['all_headers']);
+        }
+
+        if (!empty($content['date'])) {
+            $this->updatePublishedAt($entry, $content['date']);
+        }
+
+        if (!empty($content['language'])) {
+            $this->updateLanguage($entry, $content['language']);
+        }
+
+        if (!empty($content['open_graph']['og_image'])) {
+            $this->updatePreviewPicture($entry, $content['open_graph']['og_image']);
+        }
+
+        // if content is an image, define it as a preview too
+        if (!empty($content['content_type']) && in_array($this->mimeGuesser->guess($content['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
+            $this->updatePreviewPicture($entry, $content['url']);
+        }
+
+        if (!empty($content['content_type'])) {
+            $entry->setMimetype($content['content_type']);
+        }
+
+        try {
+            $this->tagger->tag($entry);
+        } catch (\Exception $e) {
+            $this->logger->error('Error while trying to automatically tag an entry.', [
+                'entry_url' => $content['url'],
+                'error_msg' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    /**
+     * Validate that the given content has at least a title, an html and a url.
+     *
+     * @param array $content
+     *
+     * @return bool true if valid otherwise false
+     */
+    private function validateContent(array $content)
+    {
+        return !empty($content['title']) && !empty($content['html']) && !empty($content['url']);
     }
 }

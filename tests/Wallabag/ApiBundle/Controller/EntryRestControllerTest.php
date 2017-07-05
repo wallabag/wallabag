@@ -519,9 +519,6 @@ class EntryRestControllerTest extends WallabagApiTestCase
             $this->markTestSkipped('No content found in db.');
         }
 
-        // hydrate the tags relations
-        $nbTags = count($entry->getTags());
-
         $this->client->request('PATCH', '/api/entries/' . $entry->getId() . '.json', [
             'title' => 'New awesome title',
             'tags' => 'new tag ' . uniqid(),
@@ -532,6 +529,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             'authors' => 'bob,sponge',
             'content' => 'awesome',
             'public' => 0,
+            'published_at' => 1488833381,
         ]);
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
@@ -541,7 +539,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame($entry->getId(), $content['id']);
         $this->assertSame($entry->getUrl(), $content['url']);
         $this->assertSame('New awesome title', $content['title']);
-        $this->assertGreaterThan($nbTags, count($content['tags']));
+        $this->assertGreaterThanOrEqual(1, count($content['tags']), 'We force only one tag');
         $this->assertSame(1, $content['user_id']);
         $this->assertSame('de_AT', $content['language']);
         $this->assertSame('http://preview.io/picture.jpg', $content['preview_picture']);
@@ -549,6 +547,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertContains('bob', $content['published_by']);
         $this->assertSame('awesome', $content['content']);
         $this->assertFalse($content['is_public'], 'Entry is no more shared');
+        $this->assertContains('2017-03-06', $content['published_at']);
     }
 
     public function testPatchEntryWithoutQuotes()
@@ -562,8 +561,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
             $this->markTestSkipped('No content found in db.');
         }
 
-        // hydrate the tags relations
-        $nbTags = count($entry->getTags());
+        $previousContent = $entry->getContent();
+        $previousLanguage = $entry->getLanguage();
 
         $this->client->request('PATCH', '/api/entries/' . $entry->getId() . '.json', [
             'title' => 'New awesome title',
@@ -579,9 +578,10 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertSame($entry->getId(), $content['id']);
         $this->assertSame($entry->getUrl(), $content['url']);
-        $this->assertSame('New awesome title', $content['title']);
-        $this->assertGreaterThan($nbTags, count($content['tags']));
+        $this->assertGreaterThanOrEqual(1, count($content['tags']), 'We force only one tag');
         $this->assertEmpty($content['published_by'], 'Authors were not saved because of an array instead of a string');
+        $this->assertSame($previousContent, $content['content'], 'Ensure content has not moved');
+        $this->assertSame($previousLanguage, $content['language'], 'Ensure language has not moved');
     }
 
     public function testGetTagsEntry()
@@ -727,6 +727,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
             $this->markTestSkipped('No content found in db.');
         }
 
+        $previousTitle = $entry->getTitle();
+
         $this->client->request('PATCH', '/api/entries/' . $entry->getId() . '.json', [
             'title' => $entry->getTitle() . '++',
         ]);
@@ -736,6 +738,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertSame(1, $content['is_archived']);
+        $this->assertSame($previousTitle . '++', $content['title']);
     }
 
     public function testSaveIsStarredAfterPatch()
@@ -907,6 +910,17 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertCount(4, $tags);
     }
 
+    public function testPostEntriesTagsListActionNoList()
+    {
+        $this->client->request('POST', '/api/entries/tags/lists?list=' . json_encode([]));
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertEmpty($content);
+    }
+
     public function testDeleteEntriesTagsListAction()
     {
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
@@ -933,6 +947,17 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertCount(0, $entry->getTags());
     }
 
+    public function testDeleteEntriesTagsListActionNoList()
+    {
+        $this->client->request('DELETE', '/api/entries/tags/list?list=' . json_encode([]));
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertEmpty($content);
+    }
+
     public function testPostEntriesListAction()
     {
         $list = [
@@ -951,6 +976,17 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertInternalType('int', $content[1]['entry']);
         $this->assertSame('http://0.0.0.0/entry2', $content[1]['url']);
+    }
+
+    public function testPostEntriesListActionWithNoUrls()
+    {
+        $this->client->request('POST', '/api/entries/lists?urls=' . json_encode([]));
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertEmpty($content);
     }
 
     public function testDeleteEntriesListAction()
@@ -976,6 +1012,17 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertFalse($content[1]['entry']);
         $this->assertSame('http://0.0.0.0/test-entry-not-exist', $content[1]['url']);
+    }
+
+    public function testDeleteEntriesListActionWithNoUrls()
+    {
+        $this->client->request('DELETE', '/api/entries/list?urls=' . json_encode([]));
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertEmpty($content);
     }
 
     public function testLimitBulkAction()
