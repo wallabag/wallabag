@@ -15,6 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Wallabag\ApiBundle\Entity\Client;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
 
 /**
  * User.
@@ -29,6 +30,8 @@ use Wallabag\CoreBundle\Entity\Entry;
  */
 class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterface
 {
+    use EntityTimestampsTrait;
+
     /** @Serializer\XmlAttribute */
     /**
      * @var int
@@ -136,19 +139,6 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
         parent::__construct();
         $this->entries = new ArrayCollection();
         $this->roles = ['ROLE_USER'];
-    }
-
-    /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
-    public function timestamps()
-    {
-        if (null === $this->createdAt) {
-            $this->createdAt = new \DateTime();
-        }
-
-        $this->updatedAt = new \DateTime();
     }
 
     /**

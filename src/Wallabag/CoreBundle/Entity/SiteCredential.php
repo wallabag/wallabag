@@ -4,6 +4,7 @@ namespace Wallabag\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
 use Wallabag\UserBundle\Entity\User;
 
 /**
@@ -15,6 +16,8 @@ use Wallabag\UserBundle\Entity\User;
  */
 class SiteCredential
 {
+    use EntityTimestampsTrait;
+
     /**
      * @var int
      *
@@ -181,15 +184,5 @@ class SiteCredential
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * @ORM\PrePersist
-     */
-    public function timestamps()
-    {
-        if (null === $this->createdAt) {
-            $this->createdAt = new \DateTime();
-        }
     }
 }

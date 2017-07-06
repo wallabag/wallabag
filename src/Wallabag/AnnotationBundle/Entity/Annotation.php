@@ -10,6 +10,7 @@ use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
 use Wallabag\UserBundle\Entity\User;
 
 /**
@@ -22,6 +23,8 @@ use Wallabag\UserBundle\Entity\User;
  */
 class Annotation
 {
+    use EntityTimestampsTrait;
+
     /**
      * @var int
      *
@@ -131,18 +134,6 @@ class Annotation
     public function getText()
     {
         return $this->text;
-    }
-
-    /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
-    public function timestamps()
-    {
-        if (null === $this->createdAt) {
-            $this->createdAt = new \DateTime();
-        }
-        $this->updatedAt = new \DateTime();
     }
 
     /**
