@@ -56,6 +56,7 @@ class ExportCommand extends ContainerAwareCommand
             $data = $this->getContainer()->get('wallabag_core.helper.entries_export')
                 ->setEntries($entries)
                 ->updateTitle('All')
+                ->updateAuthor('All')
                 ->exportJsonData();
             file_put_contents($filePath, $data);
         } catch (\InvalidArgumentException $e) {

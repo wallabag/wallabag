@@ -18,7 +18,7 @@ class EntriesExport
     private $logoPath;
     private $title = '';
     private $entries = [];
-    private $authors = ['wallabag'];
+    private $author = 'wallabag';
     private $language = '';
     private $footerTemplate = '<div style="text-align:center;">
         <p>Produced by wallabag with %EXPORT_METHOD%</p>
@@ -67,6 +67,24 @@ class EntriesExport
 
         if ('entry' === $method) {
             $this->title = $this->entries[0]->getTitle();
+        }
+
+        return $this;
+    }
+
+    /**
+     * Sets the author for just one entry.
+     *
+     * @param string $method Method to get articles
+     *
+     * @return EntriesExport
+     */
+    public function updateAuthor($method)
+    {
+        $this->author = $method.' authors';
+
+        if ('entry' === $method) {
+            $this->author = $this->entries[0]->getDomainName();
         }
 
         return $this;
@@ -128,9 +146,7 @@ class EntriesExport
         $book->setLanguage($this->language);
         $book->setDescription('Some articles saved on my wallabag');
 
-        foreach ($this->authors as $author) {
-            $book->setAuthor($author, $author);
-        }
+        $book->setAuthor($this->author, $this->author);
 
         // I hope this is a non existant address :)
         $book->setPublisher('wallabag', 'wallabag');
@@ -196,7 +212,7 @@ class EntriesExport
          * Book metadata
          */
         $content->set('title', $this->title);
-        $content->set('author', implode($this->authors));
+        $content->set('author', $this->author);
         $content->set('subject', $this->title);
 
         /*
@@ -247,7 +263,7 @@ class EntriesExport
          * Book metadata
          */
         $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetAuthor('wallabag');
+        $pdf->SetAuthor($this->author);
         $pdf->SetTitle($this->title);
         $pdf->SetSubject('Articles via wallabag');
         $pdf->SetKeywords('wallabag');
