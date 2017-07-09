@@ -73,7 +73,9 @@ class EntriesExport
     }
 
     /**
-     * Sets the author for just one entry.
+     * Sets the author for one entry or category.
+     *
+     * The publishers are used, or the domain name if empty.
      *
      * @param string $method Method to get articles
      *
@@ -84,7 +86,12 @@ class EntriesExport
         $this->author = $method.' authors';
 
         if ('entry' === $method) {
-            $this->author = $this->entries[0]->getDomainName();
+            $publishedBy = $this->entries[0]->getPublishedBy();
+            if (!empty($publishedBy)) {
+                $this->author = implode(', ', $this->entries[0]->getPublishedBy());
+            } else {
+                $this->author = $this->entries[0]->getDomainName();
+            }
         }
 
         return $this;
