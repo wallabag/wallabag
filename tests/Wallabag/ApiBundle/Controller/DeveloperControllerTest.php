@@ -34,7 +34,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $this->assertContains('My app', $alert[0]);
     }
 
-    public function testCreateTokenFromPasswords()
+    public function testCreateToken()
     {
         $client = $this->getClient();
         $apiClient = $this->createApiClientForUser('admin');
@@ -54,26 +54,6 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $this->assertArrayHasKey('expires_in', $data);
         $this->assertArrayHasKey('token_type', $data);
         $this->assertArrayHasKey('refresh_token', $data);
-    }
-
-    public function testCreateTokenFromClientCredentialsOnly()
-    {
-        $client = $this->getClient();
-        $apiClient = $this->createApiClientForUser('admin', ['client_credentials']);
-
-        $client->request('POST', '/oauth/v2/token', [
-            'grant_type' => 'client_credentials',
-            'client_id' => $apiClient->getPublicId(),
-            'client_secret' => $apiClient->getSecret(),
-        ]);
-
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
-
-        $data = json_decode($client->getResponse()->getContent(), true);
-        $this->assertArrayHasKey('access_token', $data);
-        $this->assertArrayHasKey('expires_in', $data);
-        $this->assertArrayHasKey('token_type', $data);
-        // Client Credentials created-clients have no refresh tokens
     }
 
     public function testListingClient()
