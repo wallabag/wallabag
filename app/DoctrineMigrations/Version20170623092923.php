@@ -45,7 +45,7 @@ class Version20170623092923 extends AbstractMigration implements ContainerAwareI
         $table->addColumn('parameter', 'text');
         $table->addIndex(['user_id'], 'idx_user');
         $table->setPrimaryKey(['id']);
-        $table->addForeignKeyConstraint($this->getTable('user'), ['user_id'], ['id'], [], 'fk_user');
+        $table->addForeignKeyConstraint($this->getTable('user'), ['user_id'], ['id'], [], 'fk_user_notification');
 
         if ('postgresql' === $this->connection->getDatabasePlatform()->getName()) {
             $schema->dropSequence('notification_id_seq');
