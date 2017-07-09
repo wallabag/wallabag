@@ -1,4 +1,4 @@
-#Installation
+# Installation
 
 ## On a dedicated web server (recommended way)
 
