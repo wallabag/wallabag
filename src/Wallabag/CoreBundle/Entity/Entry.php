@@ -28,7 +28,8 @@ use Wallabag\UserBundle\Entity\User;
  *         @ORM\Index(name="created_at", columns={"created_at"}),
  *         @ORM\Index(name="uid", columns={"uid"}),
  *         @ORM\Index(name="hashed_url_user_id", columns={"user_id", "hashed_url"}, options={"lengths"={null, 40}})
- *     }
+ *     },
+ *     uniqueConstraints={@ORM\UniqueConstraint(name="IDX_entry_given_url",columns={"url", "given_url", "user_id"})}
  * )
  * @ORM\HasLifecycleCallbacks()
  * @Hateoas\Relation("self", href = "expr('/api/entries/' ~ object.getId())")
@@ -66,6 +67,15 @@ class Entry
      * @Groups({"entries_for_user", "export_all"})
      */
     private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="given_url", type="text", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $givenUrl;
 
     /**
      * @var string
@@ -313,6 +323,30 @@ class Entry
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set given url.
+     *
+     * @param string $givenUrl
+     *
+     * @return Entry
+     */
+    public function setGivenUrl($givenUrl)
+    {
+        $this->givenUrl = $givenUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get given Url.
+     *
+     * @return string
+     */
+    public function getGivenUrl()
+    {
+        return $this->givenUrl;
     }
 
     /**
