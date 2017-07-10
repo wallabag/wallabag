@@ -83,15 +83,17 @@ class EntriesExport
      */
     public function updateAuthor($method)
     {
-        $this->author = $method.' authors';
+        if ('entry' !== $method) {
+            $this->author = $method . ' authors';
 
-        if ('entry' === $method) {
-            $publishedBy = $this->entries[0]->getPublishedBy();
-            if (!empty($publishedBy)) {
-                $this->author = implode(', ', $this->entries[0]->getPublishedBy());
-            } else {
-                $this->author = $this->entries[0]->getDomainName();
-            }
+            return $this;
+        }
+
+        $this->author = $this->entries[0]->getDomainName();
+
+        $publishedBy = $this->entries[0]->getPublishedBy();
+        if (!empty($publishedBy)) {
+            $this->author = implode(', ', $publishedBy);
         }
 
         return $this;
