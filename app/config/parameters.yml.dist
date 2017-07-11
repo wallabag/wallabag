@@ -60,3 +60,23 @@ parameters:
 
     # sites credentials
     sites_credentials: {}
+
+    # ldap configuration
+    # To enable, you need to require fr3d/ldap-bundle
+    ldap_enabled: false
+    ldap_host: localhost
+    ldap_port: 389
+    ldap_tls:  false
+    ldap_ssl:  false
+    ldap_bind_requires_dn: true
+    ldap_base: dc=example,dc=com
+    ldap_manager_dn: ou=Manager,dc=example,dc=com
+    ldap_manager_pw: password
+    ldap_filter: (&(ObjectClass=Person))
+    # optional (if null: no ldap user is admin)
+    ldap_admin_filter: (&(memberOf=ou=admins,dc=example,dc=com)(uid=%s))
+    ldap_username_attribute: uid
+    ldap_email_attribute: mail
+    ldap_name_attribute: cn
+    # optional (default sets user as enabled unconditionally)
+    ldap_enabled_attribute: ~

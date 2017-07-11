@@ -1,5 +1,15 @@
 <?php
 
+// This permits to have the LdapUserInterface even when fr3d/ldap-bundle is not
+// in the packages
+namespace FR3D\LdapBundle\Model;
+
+interface LdapUserInterface
+{
+    public function setDn($dn);
+    public function getDn();
+}
+
 namespace Wallabag\UserBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -14,6 +24,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Wallabag\ApiBundle\Entity\Client;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
+use FR3D\LdapBundle\Model\LdapUserInterface;
 
 /**
  * User.
@@ -26,7 +37,7 @@ use Wallabag\CoreBundle\Entity\Entry;
  * @UniqueEntity("email")
  * @UniqueEntity("username")
  */
-class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterface
+class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterface, LdapUserInterface
 {
     /**
      * @var int
@@ -44,6 +55,13 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
      * @ORM\Column(name="name", type="text", nullable=true)
      */
     protected $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dn", type="text", nullable=true)
+     */
+    protected $dn;
 
     /**
      * @var date
@@ -265,5 +283,34 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     public function getClients()
     {
         return $this->clients;
+    }
+
+    /**
+     * Set dn.
+     *
+     * @param string $dn
+     *
+     * @return User
+     */
+    public function setDn($dn)
+    {
+        $this->dn = $dn;
+
+        return $this;
+    }
+
+    /**
+     * Get dn.
+     *
+     * @return string
+     */
+    public function getDn()
+    {
+        return $this->dn;
+    }
+
+    public function isLdapUser()
+    {
+        return $this->dn !== null;
     }
 }
