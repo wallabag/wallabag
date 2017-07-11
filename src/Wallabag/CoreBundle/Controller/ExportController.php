@@ -33,6 +33,7 @@ class ExportController extends Controller
             return $this->get('wallabag_core.helper.entries_export')
                 ->setEntries($entry)
                 ->updateTitle('entry')
+                ->updateAuthor('entry')
                 ->exportAs($format);
         } catch (\InvalidArgumentException $e) {
             throw new NotFoundHttpException($e->getMessage());
@@ -76,6 +77,7 @@ class ExportController extends Controller
             return $this->get('wallabag_core.helper.entries_export')
                 ->setEntries($entries)
                 ->updateTitle($method)
+                ->updateAuthor($method)
                 ->exportAs($format);
         } catch (\InvalidArgumentException $e) {
             throw new NotFoundHttpException($e->getMessage());

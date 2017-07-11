@@ -180,6 +180,7 @@ class EntryRestController extends WallabagRestController
         return $this->get('wallabag_core.helper.entries_export')
             ->setEntries($entry)
             ->updateTitle('entry')
+            ->updateAuthor('entry')
             ->exportAs($request->attributes->get('_format'));
     }
 
