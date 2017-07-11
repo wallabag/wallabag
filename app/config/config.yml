@@ -110,7 +110,7 @@ fos_rest:
             epub: true
             mobi: true
         templating_formats:
-            html: true
+            html: false
         force_redirects:
             html: true
         failed_validation: HTTP_BAD_REQUEST
