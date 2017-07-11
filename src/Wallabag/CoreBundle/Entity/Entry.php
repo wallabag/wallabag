@@ -12,6 +12,7 @@ use JMS\Serializer\Annotation\VirtualProperty;
 use JMS\Serializer\Annotation\XmlRoot;
 use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\AnnotationBundle\Entity\Annotation;
+use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
 use Wallabag\UserBundle\Entity\User;
 
 /**
@@ -32,6 +33,8 @@ use Wallabag\UserBundle\Entity\User;
  */
 class Entry
 {
+    use EntityTimestampsTrait;
+
     /** @Serializer\XmlAttribute */
     /**
      * @var int
@@ -470,19 +473,6 @@ class Entry
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
-    public function timestamps()
-    {
-        if (null === $this->createdAt) {
-            $this->createdAt = new \DateTime();
-        }
-
-        $this->updatedAt = new \DateTime();
     }
 
     /**
