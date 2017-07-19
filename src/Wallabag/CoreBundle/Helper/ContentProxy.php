@@ -122,7 +122,7 @@ class ContentProxy
      */
     public function updatePublishedAt(Entry $entry, $value)
     {
-        $date = $value;
+        $date = $value instanceof \DateTime ? $value->date : $value;
 
         // is it a timestamp?
         if (filter_var($date, FILTER_VALIDATE_INT) !== false) {
