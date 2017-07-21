@@ -110,7 +110,7 @@ Arguments:
 
 Options:
 
- - `--maxIterations[=MAXITERATIONS]`: Number of iterations before stoping [default: false]
+ - `--maxIterations[=MAXITERATIONS]`: Number of iterations before stopping [default: false]
 
 
 wallabag:install
