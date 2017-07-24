@@ -27,6 +27,7 @@ php:
     - 5.6
     - 7.0
     - 7.1
+    - 7.2
     - nightly
 
 node_js:
@@ -43,6 +44,7 @@ matrix:
         - php: 7.0
           env: CS_FIXER=run VALIDATE_TRANSLATION_FILE=run ASSETS=build DB=sqlite
     allow_failures:
+        - php: 7.2
         - php: nightly
 
 # exclude v1 branches
