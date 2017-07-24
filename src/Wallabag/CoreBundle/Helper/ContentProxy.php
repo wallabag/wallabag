@@ -122,15 +122,21 @@ class ContentProxy
      */
     public function updatePublishedAt(Entry $entry, $value)
     {
-        $date = $value instanceof \DateTime ? $value->date : $value;
+        $date = $value;
 
         // is it a timestamp?
         if (filter_var($date, FILTER_VALIDATE_INT) !== false) {
-            $date = '@' . $value;
+            $date = '@' . $date;
         }
 
         try {
-            $entry->setPublishedAt(new \DateTime($date));
+            // is it already a DateTime?
+            // (it's inside the try/catch in case of fail to be parse time string)
+            if (!$date instanceof \DateTime) {
+                $date = new \DateTime($date);
+            }
+
+            $entry->setPublishedAt($date);
         } catch (\Exception $e) {
             $this->logger->warning('Error while defining date', ['e' => $e, 'url' => $entry->getUrl(), 'date' => $value]);
         }
