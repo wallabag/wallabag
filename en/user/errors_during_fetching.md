@@ -45,3 +45,14 @@ If wallabag failed when fetching an article, you can click on the reload
 button (the third on the below picture).
 
 ![Refetch content](../../img/user/refetch.png)
+
+## Enable log to help us identify the problem
+
+If you really can't find a way to parse the content after trying the previous 2 steps, you can enable log which will help us to find why it fails.
+
+- edit `app/config/config_prod.yml`
+- replace [in line 18](https://github.com/wallabag/wallabag/blob/master/app/config/config_prod.yml#L18) `error` to `debug`
+- `rm -rf var/cache/*`
+- empty file `var/log/prod.log`
+- reload your wallabag and refetch the content
+- paste the file `var/log/prod.log` in a new issue on GitHub
