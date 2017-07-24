@@ -1300,7 +1300,7 @@ class EntryControllerTest extends WallabagCoreTestCase
                 null,
             ],
             'es-ES' => [
-                'http://www.muylinux.com/2015/04/17/odf-reino-unido-microsoft-google',
+                'http://www.muylinux.com/2015/04/17/odf-reino-unido-microsoft-google/',
                 'es_ES',
             ],
         ];

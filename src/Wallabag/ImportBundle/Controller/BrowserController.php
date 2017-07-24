@@ -80,10 +80,10 @@ abstract class BrowserController extends Controller
      */
     abstract protected function getImportService();
 
-     /**
-      * Return the template used for the form.
-      *
-      * @return string
-      */
-     abstract protected function getImportTemplate();
+    /**
+     * Return the template used for the form.
+     *
+     * @return string
+     */
+    abstract protected function getImportTemplate();
 }
