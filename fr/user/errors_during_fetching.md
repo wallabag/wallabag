@@ -53,3 +53,15 @@ Si wallabag échoue en récupérant l'article, vous pouvez cliquer sur le
 bouton suivant (le troisième sur l'image ci-dessous).
 
 ![Réessayer de récupérer le contenu](../../img/user/refetch.png)
+
+## Activer les logs pour faciliter l'issue du problème
+
+Si après les 2 étapes décrites ci-dessus vous n'arrivez pas à avoir le contenu de l'article, l'erreur est peut-être ailleurs.
+Dans ce cas, vous allez activer les logs sur votre instance wallabag pour nous aider à trouver ce qui ne vas pas.
+
+- éditez le fichier `app/config/config_prod.yml`
+- à [la ligne 18](https://github.com/wallabag/wallabag/blob/master/app/config/config_prod.yml#L18) mettez `error` à la place de `debug`
+- `rm -rf var/cache/*`
+- vider le contenu du fichier `var/log/prod.log`
+- recharger votre instance wallabag et recharger le contenu qui pose soucis
+- copier/coller le contenu du fichier `var/log/prod.log` dans une nouvelle issue GitHub
