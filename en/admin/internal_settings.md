@@ -8,7 +8,7 @@ The internal settings page is only available for the instance administrator. It 
 
 `1` to include the Javascript code for [Piwik](https://piwik.org/).
 
-### Host of your website in Piwik (without `http://` ou `https://`)
+### Host of your website in Piwik (without `http://` or `https://`)
 
 URL for your Piwik server.
 
