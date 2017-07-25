@@ -421,6 +421,16 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testPostSameEntry()
     {
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $entry = new Entry($em->getReference(User::class, 1));
+        $entry->setUrl('http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html');
+        $entry->setArchived(true);
+        $entry->addTag((new Tag())->setLabel('google'));
+        $entry->addTag((new Tag())->setLabel('apple'));
+        $em->persist($entry);
+        $em->flush();
+        $em->clear();
+
         $this->client->request('POST', '/api/entries.json', [
             'url' => 'http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
             'archive' => '1',
@@ -1045,5 +1055,29 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertSame(400, $this->client->getResponse()->getStatusCode());
         $this->assertContains('API limit reached', $this->client->getResponse()->getContent());
+    }
+
+    public function testRePostEntryAndReUsePublishedAt()
+    {
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $entry = new Entry($em->getReference(User::class, 1));
+        $entry->setTitle('Antoine de Caunes : « Je veux avoir le droit de tâtonner »');
+        $entry->setContent('hihi');
+        $entry->setUrl('http://www.lemonde.fr/m-perso/article/2017/06/25/antoine-de-caunes-je-veux-avoir-le-droit-de-tatonner_5150728_4497916.html');
+        $entry->setPublishedAt(new \DateTime('2017-06-26T07:46:02+0200'));
+        $em->persist($entry);
+        $em->flush();
+        $em->clear();
+
+        $this->client->request('POST', '/api/entries.json', [
+            'url' => 'http://www.lemonde.fr/m-perso/article/2017/06/25/antoine-de-caunes-je-veux-avoir-le-droit-de-tatonner_5150728_4497916.html',
+        ]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThan(0, $content['id']);
+        $this->assertSame('http://www.lemonde.fr/m-perso/article/2017/06/25/antoine-de-caunes-je-veux-avoir-le-droit-de-tatonner_5150728_4497916.html', $content['url']);
     }
 }
