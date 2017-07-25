@@ -18,6 +18,11 @@ $(document).ready(() => {
       $('div#article_toolbar ul.links a.markasread')[0].click();
     });
 
+    /* add tag */
+    Mousetrap.bind('t', () => {
+      $('div#article_toolbar ul.links a#nav-btn-add-tag')[0].click();
+    });
+
     /* delete */
     Mousetrap.bind('del', () => {
       $('div#article_toolbar ul.links a.delete')[0].click();

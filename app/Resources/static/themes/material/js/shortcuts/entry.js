@@ -18,6 +18,11 @@ $(document).ready(() => {
       $('ul.side-nav a.markasread i')[0].click();
     });
 
+    /* add tag */
+    Mousetrap.bind('t', () => {
+      $('ul.side-nav a#nav-btn-add-tag i')[0].click();
+    });
+
     /* delete */
     Mousetrap.bind('del', () => {
       $('ul.side-nav a.delete i')[0].click();
