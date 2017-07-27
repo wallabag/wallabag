@@ -69,9 +69,4 @@ class ExportCommand extends ContainerAwareCommand
 
         return 0;
     }
-
-    private function getDoctrine()
-    {
-        return $this->getContainer()->get('doctrine');
-    }
 }
