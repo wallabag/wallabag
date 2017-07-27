@@ -7,12 +7,13 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Wallabag\UserBundle\Entity\User;
 
 class ShowUserCommand extends ContainerAwareCommand
 {
-    /** @var OutputInterface */
-    protected $output;
+    /** @var SymfonyStyle */
+    protected $io;
 
     protected function configure()
     {
@@ -29,7 +30,7 @@ class ShowUserCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->output = $output;
+        $this->io = new SymfonyStyle($input, $output);
 
         $username = $input->getArgument('username');
 
@@ -37,7 +38,7 @@ class ShowUserCommand extends ContainerAwareCommand
             $user = $this->getUser($username);
             $this->showUser($user);
         } catch (NoResultException $e) {
-            $output->writeln(sprintf('<error>User "%s" not found.</error>', $username));
+            $this->io->error(sprintf('User "%s" not found.', $username));
 
             return 1;
         }
@@ -50,12 +51,14 @@ class ShowUserCommand extends ContainerAwareCommand
      */
     private function showUser(User $user)
     {
-        $this->output->writeln(sprintf('Username : %s', $user->getUsername()));
-        $this->output->writeln(sprintf('Email : %s', $user->getEmail()));
-        $this->output->writeln(sprintf('Display name : %s', $user->getName()));
-        $this->output->writeln(sprintf('Creation date : %s', $user->getCreatedAt()->format('Y-m-d H:i:s')));
-        $this->output->writeln(sprintf('Last login : %s', $user->getLastLogin() !== null ? $user->getLastLogin()->format('Y-m-d H:i:s') : 'never'));
-        $this->output->writeln(sprintf('2FA activated: %s', $user->isTwoFactorAuthentication() ? 'yes' : 'no'));
+        $this->io->listing([
+            sprintf('Username : %s', $user->getUsername()),
+            sprintf('Email : %s', $user->getEmail()),
+            sprintf('Display name : %s', $user->getName()),
+            sprintf('Creation date : %s', $user->getCreatedAt()->format('Y-m-d H:i:s')),
+            sprintf('Last login : %s', $user->getLastLogin() !== null ? $user->getLastLogin()->format('Y-m-d H:i:s') : 'never'),
+            sprintf('2FA activated: %s', $user->isTwoFactorAuthentication() ? 'yes' : 'no'),
+        ]);
     }
 
     /**
