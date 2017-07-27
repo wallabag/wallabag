@@ -169,6 +169,7 @@ entry:
         filtered_tags: 'Articles filtrats per etiquetas :'
         filtered_search: 'Articles filtrats per recèrca :'
         untagged: 'Articles sens etiqueta'
+        all: 'Totes los articles'
     list:
         number_on_the_page: "{0} I a pas cap d'article.|{1} I a un article.|]1,Inf[ I a %count% articles."
         reading_time: 'durada de lectura'

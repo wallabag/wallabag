@@ -169,6 +169,7 @@ entry:
         filtered_tags: 'Gefiltert nach Tags:'
         filtered_search: 'Gefiltert nach Suche:'
         untagged: 'Nicht getaggte Einträge'
+        all: 'Alle Einträge'
     list:
         number_on_the_page: '{0} Es gibt keine Einträge.|{1} Es gibt einen Eintrag.|]1,Inf[ Es gibt %count% Einträge.'
         reading_time: 'geschätzte Lesezeit'

@@ -169,6 +169,7 @@ entry:
         filtered_tags: 'Filtrar por tags:'
         # filtered_search: 'Filtered by search:'
         untagged: 'Entradas sem tags'
+        # all: 'All entries'
     list:
         number_on_the_page: '{0} Não existem entradas.|{1} Existe uma entrada.|]1,Inf[ Existem %count% entradas.'
         reading_time: 'tempo estimado de leitura'
