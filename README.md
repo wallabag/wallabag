@@ -1,9 +1,9 @@
 # Documentation
 
-- [Documentation en français](/fr/index.md)
-- [Documentation in english](/en/index.md)
-- [Dokumentation auf Deutsch](/de/index.md)
-- [Documentazione in italiano](/it/index.md)
+- [Documentation en français](/fr/SUMMARY.md)
+- [Documentation in english](/en/SUMMARY.md)
+- [Dokumentation auf Deutsch](/de/SUMMARY.md)
+- [Documentazione in italiano](/it/SUMMARY.md)
 
 # Install it locally
 
