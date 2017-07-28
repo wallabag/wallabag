@@ -173,7 +173,7 @@ yourdomain.ru {
   rewrite / {
     to {path} {path}/ /app.php?{query}
   }
-  tls your@emai.ru
+  tls your@email.ru
   log /var/log/caddy/wbg.access.log
   errors /var/log/caddy/wbg.error.log
 }
