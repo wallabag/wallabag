@@ -57,7 +57,7 @@
 
     <!-- Export -->
     <div id="export" class="side-nav right-aligned">
-    {% set currentTag = '' %}
+    {% set currentTag = null %}
     {% if tag is defined %}
         {% set currentTag = tag.slug %}
     {% endif %}
