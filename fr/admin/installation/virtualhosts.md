@@ -128,7 +128,7 @@ En imaginant que vous vouliez installer wallabag dans le dossier
 `/var/www/wallabag`, voici un fichier de configuration pour wallabag
 (éditez votre fichier `lighttpd.conf` collez-y cette configuration) :
 
-```
+```lighttpd
 server.modules = (
     "mod_fastcgi",
     "mod_access",

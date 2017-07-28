@@ -1,7 +1,6 @@
-Virtual hosts
--------------
+# Virtual hosts
 
-### Configuration on Apache
+## Configuration on Apache
 
 Do not forget to active the *rewrite* mod of Apache
 
@@ -11,6 +10,7 @@ a2enmod rewrite && systemctl reload apache2
 
 Assuming you install wallabag in the `/var/www/wallabag` folder and that
 you want to use PHP as an Apache module, here's a vhost for wallabag:
+
 ```apache
 <VirtualHost *:80>
     ServerName domain.tld
@@ -68,7 +68,7 @@ Require all granted
 After reloading or restarting Apache, you should now be able to access
 wallabag at <http://domain.tld>.
 
-### Configuration on Nginx
+## Configuration on Nginx
 
 Assuming you installed wallabag in the `/var/www/wallabag` folder,
 here's the recipe for wallabag :
@@ -121,12 +121,13 @@ When you want to import large files into wallabag, you need to add this
 line in your nginx configuration
 `client_max_body_size XM; # allows file uploads up to X megabytes`.
 
-### Configuration on lighttpd
+## Configuration on lighttpd
 
 Assuming you install wallabag in the `/var/www/wallabag` folder, here's
 the recipe for wallabag (edit your `lighttpd.conf` file and paste this
 configuration into it):
-```
+
+```lighttpd
 server.modules = (
     "mod_fastcgi",
     "mod_access",
