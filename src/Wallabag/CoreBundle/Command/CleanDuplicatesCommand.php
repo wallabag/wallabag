@@ -7,13 +7,14 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
 
 class CleanDuplicatesCommand extends ContainerAwareCommand
 {
-    /** @var OutputInterface */
-    protected $output;
+    /** @var SymfonyStyle */
+    protected $io;
 
     protected $duplicates = 0;
 
@@ -32,7 +33,7 @@ class CleanDuplicatesCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->output = $output;
+        $this->io = new SymfonyStyle($input, $output);
 
         $username = $input->getArgument('username');
 
@@ -41,20 +42,22 @@ class CleanDuplicatesCommand extends ContainerAwareCommand
                 $user = $this->getUser($username);
                 $this->cleanDuplicates($user);
             } catch (NoResultException $e) {
-                $output->writeln(sprintf('<error>User "%s" not found.</error>', $username));
+                $this->io->error(sprintf('User "%s" not found.', $username));
 
                 return 1;
             }
+
+            $this->io->success('Finished cleaning.');
         } else {
             $users = $this->getContainer()->get('wallabag_user.user_repository')->findAll();
 
-            $output->writeln(sprintf('Cleaning through %d user accounts', count($users)));
+            $this->io->text(sprintf('Cleaning through <info>%d</info> user accounts', count($users)));
 
             foreach ($users as $user) {
-                $output->writeln(sprintf('Processing user %s', $user->getUsername()));
+                $this->io->text(sprintf('Processing user <info>%s</info>', $user->getUsername()));
                 $this->cleanDuplicates($user);
             }
-            $output->writeln(sprintf('Finished cleaning. %d duplicates found in total', $this->duplicates));
+            $this->io->success(sprintf('Finished cleaning. %d duplicates found in total', $this->duplicates));
         }
 
         return 0;
@@ -88,7 +91,7 @@ class CleanDuplicatesCommand extends ContainerAwareCommand
 
         $this->duplicates += $duplicatesCount;
 
-        $this->output->writeln(sprintf('Cleaned %d duplicates for user %s', $duplicatesCount, $user->getUserName()));
+        $this->io->text(sprintf('Cleaned <info>%d</info> duplicates for user <info>%s</info>', $duplicatesCount, $user->getUserName()));
     }
 
     private function similarUrl($url)

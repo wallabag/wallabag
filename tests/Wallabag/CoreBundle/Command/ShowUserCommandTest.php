@@ -56,9 +56,9 @@ class ShowUserCommandTest extends WallabagCoreTestCase
             'username' => 'admin',
         ]);
 
-        $this->assertContains('Username : admin', $tester->getDisplay());
-        $this->assertContains('Email : bigboss@wallabag.org', $tester->getDisplay());
-        $this->assertContains('Display name : Big boss', $tester->getDisplay());
+        $this->assertContains('Username: admin', $tester->getDisplay());
+        $this->assertContains('Email: bigboss@wallabag.org', $tester->getDisplay());
+        $this->assertContains('Display name: Big boss', $tester->getDisplay());
         $this->assertContains('2FA activated: no', $tester->getDisplay());
     }
 
@@ -88,6 +88,6 @@ class ShowUserCommandTest extends WallabagCoreTestCase
             'username' => 'admin',
         ]);
 
-        $this->assertContains('Display name : Bug boss', $tester->getDisplay());
+        $this->assertContains('Display name: Bug boss', $tester->getDisplay());
     }
 }

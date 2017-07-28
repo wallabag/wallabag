@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ExportCommand extends ContainerAwareCommand
 {
@@ -31,10 +32,12 @@ class ExportCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $io = new SymfonyStyle($input, $output);
+
         try {
             $user = $this->getContainer()->get('wallabag_user.user_repository')->findOneByUserName($input->getArgument('username'));
         } catch (NoResultException $e) {
-            $output->writeln(sprintf('<error>User "%s" not found.</error>', $input->getArgument('username')));
+            $io->error(sprintf('User "%s" not found.', $input->getArgument('username')));
 
             return 1;
         }
@@ -44,7 +47,7 @@ class ExportCommand extends ContainerAwareCommand
             ->getQuery()
             ->getResult();
 
-        $output->write(sprintf('Exporting %d entrie(s) for user « <comment>%s</comment> »... ', count($entries), $user->getUserName()));
+        $io->text(sprintf('Exporting <info>%d</info> entrie(s) for user <info>%s</info>...', count($entries), $user->getUserName()));
 
         $filePath = $input->getArgument('filepath');
 
@@ -60,12 +63,12 @@ class ExportCommand extends ContainerAwareCommand
                 ->exportJsonData();
             file_put_contents($filePath, $data);
         } catch (\InvalidArgumentException $e) {
-            $output->writeln(sprintf('<error>Error: "%s"</error>', $e->getMessage()));
+            $io->error(sprintf('Error: "%s"', $e->getMessage()));
 
             return 1;
         }
 
-        $output->writeln('<info>Done.</info>');
+        $io->success('Done.');
 
         return 0;
     }

@@ -52,11 +52,11 @@ class ShowUserCommand extends ContainerAwareCommand
     private function showUser(User $user)
     {
         $this->io->listing([
-            sprintf('Username : %s', $user->getUsername()),
-            sprintf('Email : %s', $user->getEmail()),
-            sprintf('Display name : %s', $user->getName()),
-            sprintf('Creation date : %s', $user->getCreatedAt()->format('Y-m-d H:i:s')),
-            sprintf('Last login : %s', $user->getLastLogin() !== null ? $user->getLastLogin()->format('Y-m-d H:i:s') : 'never'),
+            sprintf('Username: %s', $user->getUsername()),
+            sprintf('Email: %s', $user->getEmail()),
+            sprintf('Display name: %s', $user->getName()),
+            sprintf('Creation date: %s', $user->getCreatedAt()->format('Y-m-d H:i:s')),
+            sprintf('Last login: %s', $user->getLastLogin() !== null ? $user->getLastLogin()->format('Y-m-d H:i:s') : 'never'),
             sprintf('2FA activated: %s', $user->isTwoFactorAuthentication() ? 'yes' : 'no'),
         ]);
     }
