@@ -111,9 +111,4 @@ class CleanDuplicatesCommand extends ContainerAwareCommand
     {
         return $this->getContainer()->get('wallabag_user.user_repository')->findOneByUserName($username);
     }
-
-    private function getDoctrine()
-    {
-        return $this->getContainer()->get('doctrine');
-    }
 }
