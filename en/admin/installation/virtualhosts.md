@@ -159,3 +159,24 @@ url.rewrite-if-not-file = (
     "^/([^?]*)" => "/app.php?=$1",
 )
 ```
+
+## Configuration on Caddy
+
+For caddy server configuration might be just like this (assuming wallabag installation folder is `/var/www/wallabag`):
+
+```caddy
+yourdomain.ru {
+  root /var/www/wallabag/web
+  fastcgi / /var/run/php7-fpm.sock php {
+    index app.php
+  }
+  rewrite / {
+    to {path} {path}/ /app.php?{query}
+  }
+  tls your@emai.ru
+  log /var/log/caddy/wbg.access.log
+  errors /var/log/caddy/wbg.error.log
+}
+```
+
+You can also add `push` directive for http/2 and `gzip` for compression. Tested with caddy v0.10.4
