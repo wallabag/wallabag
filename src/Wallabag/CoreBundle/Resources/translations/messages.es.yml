@@ -169,6 +169,7 @@ entry:
         filtered_tags: 'Filtrado por etiquetas:'
         filtered_search: 'Filtrado por búsqueda:'
         untagged: 'Artículos sin etiquetas'
+        all: "Todos los artículos"
     list:
         number_on_the_page: '{0} No hay artículos.|{1} Hay un artículo.|]1,Inf[ Hay %count% artículos.'
         reading_time: 'tiempo estimado de lectura'

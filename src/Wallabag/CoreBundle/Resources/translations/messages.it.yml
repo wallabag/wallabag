@@ -169,6 +169,7 @@ entry:
         filtered_tags: 'Filtrati per etichetta:'
         filtered_search: 'Filtrati per ricerca:'
         untagged: 'Articoli non etichettati'
+        all: 'Tutti gli articoli'
     list:
         number_on_the_page: "{0} Non ci sono contenuti.|{1} C'è un contenuto.|]1,Inf[ Ci sono %count% contenuti."
         reading_time: 'tempo di lettura stimato'

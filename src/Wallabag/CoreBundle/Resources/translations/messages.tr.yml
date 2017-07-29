@@ -169,6 +169,7 @@ entry:
         # filtered_tags: 'Filtered by tags:'
         # filtered_search: 'Filtered by search:'
         # untagged: 'Untagged entries'
+        # all: 'All entries'
     list:
         number_on_the_page: '{0} Herhangi bir makale yok.|{1} Burada bir adet makale var.|]1,Inf[ Burada %count% adet makale var.'
         reading_time: 'tahmini okuma süresi'

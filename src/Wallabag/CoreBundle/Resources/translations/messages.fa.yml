@@ -169,6 +169,7 @@ entry:
         # filtered_tags: 'Filtered by tags:'
         # filtered_search: 'Filtered by search:'
         # untagged: 'Untagged entries'
+        # all: 'All entries'
     list:
         number_on_the_page: '{0} هیج مقاله‌ای نیست.|{1} یک مقاله هست.|]1,Inf[ %count% مقاله هست.'
         reading_time: 'زمان تخمینی برای خواندن'

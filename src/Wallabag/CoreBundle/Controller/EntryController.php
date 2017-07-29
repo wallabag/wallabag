@@ -573,6 +573,7 @@ class EntryController extends Controller
                 'entries' => $entries,
                 'currentPage' => $page,
                 'searchTerm' => $searchTerm,
+                'isFiltered' => $form->isSubmitted(),
             ]
         );
     }
