@@ -1,8 +1,6 @@
-Errori durante l'ottenimento degli articoli
-===========================================
+# Errori durante l'ottenimento degli articoli
 
-Perché l'ottenimento di un articolo fallisce?
----------------------------------------------
+## Perché l'ottenimento di un articolo fallisce?
 
 Ci possono essere varie ragioni:
 
@@ -38,8 +36,7 @@ Potete poi inviare una pull request a
 [<https://github.com/fivefilters/ftr-site-config>](https://github.com/fivefilters/ftr-site-config)
 il quale é il repository ufficiale per i file siteconfig.
 
-Come posso provare a riottenere questo articolo?
-------------------------------------------------
+## Come posso provare a riottenere questo articolo?
 
 Se wallabag ha fallito a ottenere l'articolo, potete cliccare sul
 bottone di ricaricamento (il terzo bottone nella figura sottostante).

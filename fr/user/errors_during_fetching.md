@@ -1,17 +1,33 @@
-Erreur durant la récupération des articles
-==========================================
+# Erreur durant la récupération des articles
 
-Pourquoi la récupération des articles échoue ?
-----------------------------------------------
+## Pourquoi la récupération des articles échoue ?
 
 Il peut y avoir plusieurs raisons :
 
 -   problème de connexion internet
--   wallabag ne peut pas récupérer le contenu à cause de la structure du
-    site web
+-   wallabag ne peut pas récupérer le contenu à cause de la structure du site web
 
-Comment puis-je aider pour réparer ça ?
----------------------------------------
+## Vérifier les logs de production pour les messages d'erreurs ou de debug
+
+Par défaut, si un site ne peut pas être correctemetn parsé à cause d'une erreur dans la requête (une page inexistante, un temps de réponse trop long, etc.) un message d'erreur sera affiché dans le fichier `WALLABAG_DIR/var/log/prod.log`.
+
+Si vous voyez une ligne qui commence par `graby.ERROR` et qui correspond à votre période de test, c'est que la requête a échoué à cause d'une erreur.
+
+Merci d'indiquer tout le passage correspondant à l'erreur dans l'issue que vous ouvrirez sur GitHub.
+
+## Activer les logs pour faciliter l'issue du problème
+
+Si après les 2 étapes décrites ci-dessus vous n'arrivez pas à avoir le contenu de l'article, l'erreur est peut-être ailleurs.
+Dans ce cas, vous allez activer les logs sur votre instance wallabag pour nous aider à trouver ce qui ne vas pas.
+
+- éditez le fichier `app/config/config_prod.yml`
+- à [la ligne 18](https://github.com/wallabag/wallabag/blob/master/app/config/config_prod.yml#L18) mettez `error` à la place de `debug`
+- `rm -rf var/cache/*`
+- vider le contenu du fichier `var/log/prod.log`
+- recharger votre instance wallabag et recharger le contenu qui pose soucis
+- copier/coller le contenu du fichier `var/log/prod.log` dans une nouvelle issue GitHub
+
+## Comment puis-je aider pour réparer ça ?
 
 Vous pouvez essayer de résoudre ce problème vous même (comme ça, nous
 restons concentrés pour améliorer wallabag au lieu d'écrire ces fichiers
@@ -44,24 +60,9 @@ Ensuite, vous pouvez créer une pull request ici
 qui est le projet principal pour stocker les fichiers de configuration.
 Si vous ne voulez pas attendre que votre PR soit mergée, vous pouvez mettre vos fichiers de config dans le répertoire `vendor/j0k3r/graby-site-config` de votre wallabag. Mais ces modifications seront supprimées quand vous mettez à jour wallabag.
 
-
-
-Comment puis-je réessayer de récupérer le contenu ?
----------------------------------------------------
+## Comment puis-je réessayer de récupérer le contenu ?
 
 Si wallabag échoue en récupérant l'article, vous pouvez cliquer sur le
 bouton suivant (le troisième sur l'image ci-dessous).
 
 ![Réessayer de récupérer le contenu](../../img/user/refetch.png)
-
-## Activer les logs pour faciliter l'issue du problème
-
-Si après les 2 étapes décrites ci-dessus vous n'arrivez pas à avoir le contenu de l'article, l'erreur est peut-être ailleurs.
-Dans ce cas, vous allez activer les logs sur votre instance wallabag pour nous aider à trouver ce qui ne vas pas.
-
-- éditez le fichier `app/config/config_prod.yml`
-- à [la ligne 18](https://github.com/wallabag/wallabag/blob/master/app/config/config_prod.yml#L18) mettez `error` à la place de `debug`
-- `rm -rf var/cache/*`
-- vider le contenu du fichier `var/log/prod.log`
-- recharger votre instance wallabag et recharger le contenu qui pose soucis
-- copier/coller le contenu du fichier `var/log/prod.log` dans une nouvelle issue GitHub
