@@ -124,7 +124,7 @@ Username of the account used for demo.
 
 `1` to activate local pictures downloading, `0`, to deactivate.
 
-Once this feature activated, the articles pictures will be downloaded in the `/web/assets/images` folder of your wallabag instance. The path of pictures in articles will also be updated to the path of pictures which are on your instance.
+Once this feature is activated, the articles pictures will be downloaded in the `/web/assets/images` folder of your wallabag instance. The path of pictures in articles will also be updated to the path of pictures which are on your instance.
 
 ### Support URL for wallabag
 
