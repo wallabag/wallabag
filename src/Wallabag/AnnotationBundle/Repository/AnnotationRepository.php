@@ -3,6 +3,8 @@
 namespace Wallabag\AnnotationBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
+use Wallabag\AnnotationBundle\Entity\Annotation;
 
 /**
  * AnnotationRepository.

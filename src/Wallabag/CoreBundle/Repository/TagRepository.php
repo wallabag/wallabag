@@ -3,6 +3,7 @@
 namespace Wallabag\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Wallabag\CoreBundle\Entity\Tag;
 
 class TagRepository extends EntityRepository
 {
