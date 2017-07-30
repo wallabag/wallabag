@@ -35,6 +35,7 @@ Custom to wallabag:
  - `wallabag:install`: (re)Install wallabag
  - `wallabag:tag:all`: Tag all entries for a user using his/her tagging rules.
  - `wallabag:user:show`: Shows the details for a user.
+ - `wallabag:user:list`: List all existing users.
  - `wallabag:entry:reload`: Reload entries.
 
 wallabag:clean-duplicates
@@ -155,6 +156,18 @@ wallabag:user:show <username>
 Arguments:
  - username: User to show details for.
  
+
+wallabag:user:list
+------------------
+
+This command list all existing users.
+
+Usage:
+
+```
+wallabag:user:list
+```
+
 
 wallabag:entry:reload
 ---------------------
