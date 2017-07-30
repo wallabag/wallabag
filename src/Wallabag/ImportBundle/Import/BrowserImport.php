@@ -232,4 +232,6 @@ abstract class BrowserImport extends AbstractImport
 
         return $importedEntry;
     }
+
+    abstract protected function prepareEntry(array $entry = []);
 }
