@@ -2,12 +2,12 @@
 
 namespace Wallabag\CoreBundle\Helper;
 
-use JMS\Serializer;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use PHPePub\Core\EPub;
 use PHPePub\Core\Structure\OPF\DublinCore;
 use Symfony\Component\HttpFoundation\Response;
+use Wallabag\CoreBundle\Entity\Entry;
 
 /**
  * This class doesn't have unit test BUT it's fully covered by a functional test with ExportControllerTest.
@@ -427,7 +427,7 @@ class EntriesExport
      *
      * @param string $format
      *
-     * @return Serializer
+     * @return string
      */
     private function prepareSerializingContent($format)
     {

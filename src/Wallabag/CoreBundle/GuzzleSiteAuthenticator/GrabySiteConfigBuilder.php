@@ -8,6 +8,7 @@ use Graby\SiteConfig\ConfigBuilder;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Wallabag\CoreBundle\Repository\SiteCredentialRepository;
+use Wallabag\UserBundle\Entity\User;
 
 class GrabySiteConfigBuilder implements SiteConfigBuilder
 {
@@ -27,7 +28,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
     private $logger;
 
     /**
-     * @var Wallabag\UserBundle\Entity\User|null
+     * @var User|null
      */
     private $currentUser;
 
