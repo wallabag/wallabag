@@ -55,6 +55,7 @@ class TagAllCommandTest extends WallabagCoreTestCase
             'username' => 'admin',
         ]);
 
-        $this->assertContains('Tagging entries for user « admin »... Done', $tester->getDisplay());
+        $this->assertContains('Tagging entries for user admin...', $tester->getDisplay());
+        $this->assertContains('Done', $tester->getDisplay());
     }
 }

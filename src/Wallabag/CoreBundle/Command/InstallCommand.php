@@ -6,14 +6,13 @@ use Craue\ConfigBundle\Entity\Setting;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class InstallCommand extends ContainerAwareCommand
 {
@@ -23,9 +22,9 @@ class InstallCommand extends ContainerAwareCommand
     protected $defaultInput;
 
     /**
-     * @var OutputInterface
+     * @var SymfonyStyle
      */
-    protected $defaultOutput;
+    protected $io;
 
     /**
      * @var array
@@ -52,10 +51,10 @@ class InstallCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->defaultInput = $input;
-        $this->defaultOutput = $output;
 
-        $output->writeln('<info>Installing wallabag...</info>');
-        $output->writeln('');
+        $this->io = new SymfonyStyle($input, $output);
+
+        $this->io->title('Wallabag installer');
 
         $this
             ->checkRequirements()
@@ -65,13 +64,14 @@ class InstallCommand extends ContainerAwareCommand
             ->runMigrations()
         ;
 
-        $output->writeln('<info>wallabag has been successfully installed.</info>');
-        $output->writeln('<comment>Just execute `php bin/console server:run --env=prod` for using wallabag: http://localhost:8000</comment>');
+        $this->io->success('Wallabag has been successfully installed.');
+        $this->io->note('Just execute `php bin/console server:run --env=prod` for using wallabag: http://localhost:8000');
     }
 
     protected function checkRequirements()
     {
-        $this->defaultOutput->writeln('<info><comment>Step 1 of 5.</comment> Checking system requirements.</info>');
+        $this->io->section('Step 1 of 5: Checking system requirements.');
+
         $doctrineManager = $this->getContainer()->get('doctrine')->getManager();
 
         $rows = [];
@@ -156,30 +156,24 @@ class InstallCommand extends ContainerAwareCommand
             $rows[] = [$label, $status, $help];
         }
 
-        $table = new Table($this->defaultOutput);
-        $table
-            ->setHeaders(['Checked', 'Status', 'Recommendation'])
-            ->setRows($rows)
-            ->render();
+        $this->io->table(['Checked', 'Status', 'Recommendation'], $rows);
 
         if (!$fulfilled) {
             throw new \RuntimeException('Some system requirements are not fulfilled. Please check output messages and fix them.');
         }
 
-        $this->defaultOutput->writeln('<info>Success! Your system can run wallabag properly.</info>');
-
-        $this->defaultOutput->writeln('');
+        $this->io->success('Success! Your system can run wallabag properly.');
 
         return $this;
     }
 
     protected function setupDatabase()
     {
-        $this->defaultOutput->writeln('<info><comment>Step 2 of 5.</comment> Setting up database.</info>');
+        $this->io->section('Step 2 of 5: Setting up database.');
 
         // user want to reset everything? Don't care about what is already here
         if (true === $this->defaultInput->getOption('reset')) {
-            $this->defaultOutput->writeln('Dropping database, creating database and schema, clearing the cache');
+            $this->io->text('Dropping database, creating database and schema, clearing the cache');
 
             $this
                 ->runCommand('doctrine:database:drop', ['--force' => true])
@@ -188,13 +182,13 @@ class InstallCommand extends ContainerAwareCommand
                 ->runCommand('cache:clear')
             ;
 
-            $this->defaultOutput->writeln('');
+            $this->io->newLine();
 
             return $this;
         }
 
         if (!$this->isDatabasePresent()) {
-            $this->defaultOutput->writeln('Creating database and schema, clearing the cache');
+            $this->io->text('Creating database and schema, clearing the cache');
 
             $this
                 ->runCommand('doctrine:database:create')
@@ -202,16 +196,13 @@ class InstallCommand extends ContainerAwareCommand
                 ->runCommand('cache:clear')
             ;
 
-            $this->defaultOutput->writeln('');
+            $this->io->newLine();
 
             return $this;
         }
 
-        $questionHelper = $this->getHelper('question');
-        $question = new ConfirmationQuestion('It appears that your database already exists. Would you like to reset it? (y/N)', false);
-
-        if ($questionHelper->ask($this->defaultInput, $this->defaultOutput, $question)) {
-            $this->defaultOutput->writeln('Dropping database, creating database and schema');
+        if ($this->io->confirm('It appears that your database already exists. Would you like to reset it?', false)) {
+            $this->io->text('Dropping database, creating database and schema...');
 
             $this
                 ->runCommand('doctrine:database:drop', ['--force' => true])
@@ -219,9 +210,8 @@ class InstallCommand extends ContainerAwareCommand
                 ->runCommand('doctrine:schema:create')
             ;
         } elseif ($this->isSchemaPresent()) {
-            $question = new ConfirmationQuestion('Seems like your database contains schema. Do you want to reset it? (y/N)', false);
-            if ($questionHelper->ask($this->defaultInput, $this->defaultOutput, $question)) {
-                $this->defaultOutput->writeln('Dropping schema and creating schema');
+            if ($this->io->confirm('Seems like your database contains schema. Do you want to reset it?', false)) {
+                $this->io->text('Dropping schema and creating schema...');
 
                 $this
                     ->runCommand('doctrine:schema:drop', ['--force' => true])
@@ -229,29 +219,27 @@ class InstallCommand extends ContainerAwareCommand
                 ;
             }
         } else {
-            $this->defaultOutput->writeln('Creating schema');
+            $this->io->text('Creating schema...');
 
             $this
                 ->runCommand('doctrine:schema:create')
             ;
         }
 
-        $this->defaultOutput->writeln('Clearing the cache');
+        $this->io->text('Clearing the cache...');
         $this->runCommand('cache:clear');
 
-        $this->defaultOutput->writeln('');
+        $this->io->newLine();
+        $this->io->text('<info>Database successfully setup.</info>');
 
         return $this;
     }
 
     protected function setupAdmin()
     {
-        $this->defaultOutput->writeln('<info><comment>Step 3 of 5.</comment> Administration setup.</info>');
+        $this->io->section('Step 3 of 5: Administration setup.');
 
-        $questionHelper = $this->getHelperSet()->get('question');
-        $question = new ConfirmationQuestion('Would you like to create a new admin user (recommended) ? (Y/n)', true);
-
-        if (!$questionHelper->ask($this->defaultInput, $this->defaultOutput, $question)) {
+        if (!$this->io->confirm('Would you like to create a new admin user (recommended)?', true)) {
             return $this;
         }
 
@@ -260,14 +248,13 @@ class InstallCommand extends ContainerAwareCommand
         $userManager = $this->getContainer()->get('fos_user.user_manager');
         $user = $userManager->createUser();
 
-        $question = new Question('Username (default: wallabag) :', 'wallabag');
-        $user->setUsername($questionHelper->ask($this->defaultInput, $this->defaultOutput, $question));
+        $user->setUsername($this->io->ask('Username', 'wallabag'));
 
-        $question = new Question('Password (default: wallabag) :', 'wallabag');
-        $user->setPlainPassword($questionHelper->ask($this->defaultInput, $this->defaultOutput, $question));
+        $question = new Question('Password', 'wallabag');
+        $question->setHidden(true);
+        $user->setPlainPassword($this->io->askQuestion($question));
 
-        $question = new Question('Email:', '');
-        $user->setEmail($questionHelper->ask($this->defaultInput, $this->defaultOutput, $question));
+        $user->setEmail($this->io->ask('Email', ''));
 
         $user->setEnabled(true);
         $user->addRole('ROLE_SUPER_ADMIN');
@@ -278,14 +265,14 @@ class InstallCommand extends ContainerAwareCommand
         $event = new UserEvent($user);
         $this->getContainer()->get('event_dispatcher')->dispatch(FOSUserEvents::USER_CREATED, $event);
 
-        $this->defaultOutput->writeln('');
+        $this->io->text('<info>Administration successfully setup.</info>');
 
         return $this;
     }
 
     protected function setupConfig()
     {
-        $this->defaultOutput->writeln('<info><comment>Step 4 of 5.</comment> Config setup.</info>');
+        $this->io->section('Step 4 of 5: Config setup.');
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
         // cleanup before insert new stuff
@@ -301,17 +288,19 @@ class InstallCommand extends ContainerAwareCommand
 
         $em->flush();
 
-        $this->defaultOutput->writeln('');
+        $this->io->text('<info>Config successfully setup.</info>');
 
         return $this;
     }
 
     protected function runMigrations()
     {
-        $this->defaultOutput->writeln('<info><comment>Step 5 of 5.</comment> Run migrations.</info>');
+        $this->io->section('Step 5 of 5: Run migrations.');
 
         $this
             ->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true]);
+
+        $this->io->text('<info>Migrations successfully executed.</info>');
 
         return $this;
     }
