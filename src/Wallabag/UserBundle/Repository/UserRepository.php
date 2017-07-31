@@ -56,6 +56,19 @@ class UserRepository extends EntityRepository
     }
 
     /**
+     * Count how many users are existing.
+     *
+     * @return int
+     */
+    public function getSumUsers()
+    {
+        return $this->createQueryBuilder('u')
+            ->select('count(u)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
      * Retrieves users filtered with a search term.
      *
      * @param string $term
