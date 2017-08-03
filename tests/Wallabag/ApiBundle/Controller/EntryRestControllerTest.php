@@ -292,6 +292,9 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame(1, $content['page']);
         $this->assertGreaterThanOrEqual(1, $content['pages']);
 
+        $this->assertContains('foo', array_column($content['_embedded']['items'][0]['tags'], 'label'), 'Entries tags should have "foo" tag');
+        $this->assertContains('bar', array_column($content['_embedded']['items'][0]['tags'], 'label'), 'Entries tags should have "bar" tag');
+
         $this->assertArrayHasKey('_links', $content);
         $this->assertArrayHasKey('self', $content['_links']);
         $this->assertArrayHasKey('first', $content['_links']);

@@ -133,7 +133,7 @@ class EntryRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('e')
             ->leftJoin('e.tags', 't')
-            ->where('e.user =:userId')->setParameter('userId', $userId);
+            ->where('e.user = :userId')->setParameter('userId', $userId);
 
         if (null !== $isArchived) {
             $qb->andWhere('e.isArchived = :isArchived')->setParameter('isArchived', (bool) $isArchived);
@@ -152,8 +152,23 @@ class EntryRepository extends EntityRepository
         }
 
         if ('' !== $tags) {
-            foreach (explode(',', $tags) as $tag) {
-                $qb->andWhere('t.label = :label')->setParameter('label', $tag);
+            foreach (explode(',', $tags) as $i => $tag) {
+                $entryAlias = 'e' . $i;
+                $tagAlias = 't' . $i;
+
+                // Complexe queries to ensure multiple tags is associated to an entry
+                // https://stackoverflow.com/a/6638146/569101
+                $qb->andWhere($qb->expr()->in(
+                    'e.id',
+                    $this->createQueryBuilder($entryAlias)
+                        ->select($entryAlias . '.id')
+                        ->leftJoin($entryAlias . '.tags', $tagAlias)
+                        ->where($tagAlias . '.label = :label' . $i)
+                        ->getDQL()
+                ));
+
+                // bound parameter to the main query builder
+                $qb->setParameter('label' . $i, $tag);
             }
         }
 
@@ -181,7 +196,7 @@ class EntryRepository extends EntityRepository
             ->innerJoin('e.tags', 't')
             ->innerJoin('e.user', 'u')
             ->addSelect('t', 'u')
-            ->where('e.user=:userId')->setParameter('userId', $userId)
+            ->where('e.user = :userId')->setParameter('userId', $userId)
         ;
 
         return $qb->getQuery()->getResult();
@@ -323,7 +338,27 @@ class EntryRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('e')
             ->select('count(e)')
-            ->where('e.user=:userId')->setParameter('userId', $userId)
+            ->where('e.user = :userId')->setParameter('userId', $userId)
+        ;
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * Count all entries for a tag and a user.
+     *
+     * @param int $userId
+     * @param int $tagId
+     *
+     * @return int
+     */
+    public function countAllEntriesByUserIdAndTagId($userId, $tagId)
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->select('count(e.id)')
+            ->leftJoin('e.tags', 't')
+            ->where('e.user = :userId')->setParameter('userId', $userId)
+            ->andWhere('t.id = :tagId')->setParameter('tagId', $tagId)
         ;
 
         return (int) $qb->getQuery()->getSingleScalarResult();
