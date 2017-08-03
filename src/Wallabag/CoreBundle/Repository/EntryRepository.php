@@ -156,7 +156,7 @@ class EntryRepository extends EntityRepository
                 $entryAlias = 'e' . $i;
                 $tagAlias = 't' . $i;
 
-                // Complexe queries to ensure multiple tags is associated to an entry
+                // Complexe queries to ensure multiple tags are associated to an entry
                 // https://stackoverflow.com/a/6638146/569101
                 $qb->andWhere($qb->expr()->in(
                     'e.id',
