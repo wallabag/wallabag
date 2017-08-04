@@ -160,13 +160,19 @@ Arguments:
 wallabag:user:list
 ------------------
 
-This command list all existing users.
+This command lists all existing users.
 
 Usage:
 
 ```
-wallabag:user:list
+wallabag:user:list [<search>]
 ```
+
+Arguments:
+ - search: Filter the list with the given search term. The search is done on users' username, name and email
+
+Options:
+ - `--limit=LIMIT`: Max number of users displayed in the list
 
 
 wallabag:entry:reload
