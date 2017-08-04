@@ -169,8 +169,14 @@ Cette commande vous permet de lister les utilisateurs existants.
 Utilisation:
 
 ```
-wallabag:user:list
+wallabag:user:list [<search>]
 ```
+
+Arguments:
+ - search: Filtre la liste selon la chaîne saisie. La recherche s'effectue sur le login, le nom et l'email des utilisateurs
+
+Options:
+ - `--limit=LIMIT`: Nombre d'utilisateurs maximum affichés dans la liste (100 par défaut)
 
 
 wallabag:entry:reload
