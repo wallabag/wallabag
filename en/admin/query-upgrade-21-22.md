@@ -80,7 +80,7 @@ ALTER TABLE wallabag_user CHANGE `name` `name` longtext CHARACTER SET utf8 COLLA
 
 ## PostgreSQL and SQLite
 
-This migration only apply to MySQL.
+This migration only applies to MySQL.
 
 # Migration 20161024212538
 
