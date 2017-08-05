@@ -97,11 +97,11 @@ config:
             all: 'Totes'
         rss_limit: "Nombre d'articles dins un flux RSS"
     form_user:
-        two_factor_description: "Activar l'autentificacion doble-factor vòl dire que recebretz un còdi per corrièl per cada novèla connexion pas aprovada."
+        two_factor_description: "Activar l'autentificacion en dos temps vòl dire que recebretz un còdi per corrièl per cada novèla connexion pas aprovada."
         name_label: 'Nom'
         email_label: 'Adreça de corrièl'
         twoFactorAuthentication_label: 'Dobla autentificacion'
-        help_twoFactorAuthentication: "S'avètz activat 2FA, cada còp que volètz vos connectar a wallabag, recebretz un còdi per corrièl."
+        help_twoFactorAuthentication: "S'avètz activat l'autentificacion en dos temps, cada còp que volètz vos connectar a wallabag, recebretz un còdi per corrièl."
         delete:
             title: Suprimir mon compte (Mèfi zòna perilhosa)
             description: Se confirmatz la supression de vòstre compte, TOTES vòstres articles, TOTAS vòstras etiquetas, TOTAS vòstras anotacions e vòstre compte seràn suprimits per totjorn. E aquò es IRREVERSIBLE. Puèi seretz desconnectat.
@@ -213,7 +213,7 @@ entry:
             back_to_homepage: 'Tornar'
             set_as_read: 'Marcar coma legit'
             set_as_unread: 'Marcar coma pas legit'
-            set_as_starred: 'Metre en favori'
+            set_as_starred: 'Metre en favorit'
             view_original_article: 'Article original'
             re_fetch_content: 'Tornar cargar lo contengut'
             delete: 'Suprimir'
@@ -339,7 +339,7 @@ quickstart:
     more: 'Mai…'
     intro:
         title: 'Benvenguda sus wallabag !'
-        paragraph_1: "Anem vos guidar per far lo torn de la proprietat e vos presentar unas fonccionalitats que vos poirián interessar per vos apropriar aquesta aisina."
+        paragraph_1: "Anem vos guidar per far lo torn de la proprietat e vos presentar unas foncionalitats que vos poirián interessar per vos apropriar aquesta aisina."
         paragraph_2: 'Seguètz-nos !'
     configure:
         title: "Configuratz l'aplicacion"
@@ -359,7 +359,7 @@ quickstart:
         title: 'Primièrs passes'
         description: "Ara wallabag es ben configurat, es lo moment d'archivar lo web. Podètz clicar sul signe + a man drecha amont per ajustar un ligam."
         new_article: 'Ajustatz vòstre primièr article'
-        unread_articles: 'E racaptatz-lo !'
+        unread_articles: 'E recaptatz-lo !'
     migrate:
         title: 'Migrar dempuèi un servici existent'
         description: "Sètz un ancian utilizaire d'un servici existent ? Vos ajudarem a trapar vòstras donadas sus wallabag."
@@ -375,7 +375,7 @@ quickstart:
         use_docker: 'Utilizar Docker per installar wallabag'
     docs:
         title: 'Documentacion complèta'
-        description: "I a un fum de fonccionalitats dins wallabag. Esitetz pas a legir lo manual per las conéisser e aprendre a las utilizar."
+        description: "I a un fum de foncionalitats dins wallabag. Esitetz pas a legir lo manual per las conéisser e aprendre a las utilizar."
         annotate: 'Anotar vòstre article'
         export: 'Convertissètz vòstres articles en ePub o en PDF'
         search_filters: "Aprenètz a utilizar lo motor de recèrca e los filtres per retrobar l'article que vos interèssa"
@@ -418,11 +418,11 @@ import:
         connect_to_pocket: 'Se connectar a Pocket e importar las donadas'
     wallabag_v1:
         page_title: 'Importar > Wallabag v1'
-        description: 'Aquesta aisina importarà totas vòstras donadas de wallabag v1. Sus vòstre pagina de configuracion de wallabag v1, clicatz sus \"Export JSON\" dins la seccion \"Exportar vòstras donadas de wallabag\". Traparatz un fichièr \"wallabag-export-1-xxxx-xx-xx.json\".'
+        description: 'Aquesta aisina importarà totas vòstras donadas de wallabag v1. Sus vòstre pagina de configuracion de wallabag v1, clicatz sus \"Export JSON\" dins la seccion \"Exportar vòstras donadas de wallabag\". Traparetz un fichièr \"wallabag-export-1-xxxx-xx-xx.json\".'
         how_to: "Causissètz lo fichièr de vòstra exportacion wallabag v1 e clicatz sul boton çai-jos per l'importar."
     wallabag_v2:
         page_title: 'Importar > Wallabag v2'
-        description: "Aquesta aisina importarà totas vòstras donadas d'una instància mai de wallabag v2. Anatz dins totes vòstres articles, puèi, sus la barra laterala, clicatz sus \"JSON\". Traparatz un fichièr \"All articles.json\"."
+        description: "Aquesta aisina importarà totas vòstras donadas d'una instància mai de wallabag v2. Anatz dins totes vòstres articles, puèi, sus la barra laterala, clicatz sus \"JSON\". Traparetz un fichièr \"All articles.json\"."
     readability:
         page_title: 'Importar > Readability'
         description: "Aquesta aisina importarà totas vòstres articles de Readability. Sus la pagina de l'aisina (https://www.readability.com/tools/), clicatz sus \"Export your data\" dins la seccion \"Data Export\". Recebretz un corrièl per telecargar un json (qu'acaba pas amb un .json de fach)."
@@ -432,7 +432,7 @@ import:
         download_images_warning: "Avètz activat lo telecargament de los imatges de vòstres articles. Combinat amb l'importacion classica, aquò pòt tardar un long moment (o benlèu fracassar). <strong>Recomandem fòrtament</strong> l'activacion de l'importacion asincròna per evitar las errors."
     firefox:
         page_title: 'Importar > Firefox'
-        description: "Aquesta aisina importarà totas vòstres favorits de Firefox. Just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
+        description: "Aquesta aisina importarà totas vòstres favorits de Firefox. Anatz simplament dins vòstres marcapaginas (Ctrl+Maj+O), puèi dins \"Impòrt e salvagarda\", causissètz \"Salvagardar...\". Auretz un fichièr .json."
         how_to: "Mercés de causir lo fichièr de salvagarda e de clicar sul boton dejós per l'importar. Notatz que lo tractament pòt durar un moment ja que totes los articles an d'èsser recuperats."
     chrome:
         page_title: 'Importar > Chrome'
@@ -460,12 +460,12 @@ developer:
     existing_clients:
         title: 'Los clients existents'
         field_id: 'ID Client'
-        field_secret: 'Clé secreta'
+        field_secret: 'Clau secrèta'
         field_uris: 'URLs de redireccion'
         field_grant_types: 'Tipe de privilègi acordat'
         no_client: 'Pas cap de client pel moment.'
     remove:
-        warn_message_1: 'Avètz la possibilitat de supriimr un client. Aquesta accion es IRREVERSIBLA !'
+        warn_message_1: 'Avètz la possibilitat de suprimir un client. Aquesta accion es IRREVERSIBLA !'
         warn_message_2: "Se suprimissètz un client, totas las aplicacions que l'emplegan foncionaràn pas mai amb vòstre compte wallabag."
         action: 'Suprimir aqueste client'
     client:
@@ -553,7 +553,7 @@ flashes:
         notice:
             config_saved: 'Los paramètres son ben estats meses a jorn.'
             password_updated: 'Vòstre senhal es ben estat mes a jorn'
-            password_not_updated_demo: "En demostration, podètz pas cambiar lo senhal d'aqueste utilizaire."
+            password_not_updated_demo: "En demostracion, podètz pas cambiar lo senhal d'aqueste utilizaire."
             user_updated: 'Vòstres informacions personnelas son ben estadas mesas a jorn'
             rss_updated: 'La configuracion dels fluxes RSS es ben estada mesa a jorn'
             tagging_rules_updated: 'Règlas misa a jorn'
@@ -565,7 +565,7 @@ flashes:
             archived_reset: Articles archivat suprimits
     entry:
         notice:
-            entry_already_saved: 'Article ja salvargardat lo %date%'
+            entry_already_saved: 'Article ja salvagardat lo %date%'
             entry_saved: 'Article enregistrat'
             entry_saved_failed: 'Article salvat mai fracàs de la recuperacion del contengut'
             entry_updated: 'Article mes a jorn'
@@ -582,9 +582,9 @@ flashes:
     import:
         notice:
             failed: "L'importacion a fracassat, mercés de tornar ensajar."
-            failed_on_file: "Errorr pendent du tractament de l'import. Mercés de verificar vòstre fichièr."
-            summary: "Rapòrt d'import: %imported% importats, %skipped% ja presents."
-            summary_with_queue: "Rapòrt d'import : %queued% en espèra de tractament."
+            failed_on_file: "Error en tractar l'impòrt. Mercés de verificar vòstre fichièr."
+            summary: "Rapòrt d'impòrt: %imported% importats, %skipped% ja presents."
+            summary_with_queue: "Rapòrt d'impòrt : %queued% en espèra de tractament."
         error:
             redis_enabled_not_installed: "Redis es capable d'importar de manièra asincròna mai sembla que <u>podèm pas nos conectar amb el</u>. Mercés de verificar la configuracion de Redis."
             rabbit_enabled_not_installed: "RabbitMQ es capable d'importar de manièra asincròna mai sembla que <u>podèm pas nos conectar amb el</u>. Mercés de verificar la configuracion de RabbitMQ."
