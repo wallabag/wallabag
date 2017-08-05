@@ -537,7 +537,7 @@ site_credential:
          no: 'Non'
          create_new_one: Crear un novèl identificant
     form:
-        username_label: 'Nom d'utilizaire'
+        username_label: "Nom d'utilizaire"
         host_label: 'Òste'
         password_label: 'Senhal'
         save: 'Enregistrar'
