@@ -2,14 +2,14 @@ security:
     login:
         page_title: 'Benvenguda sus wallabag !'
         keep_logged_in: 'Demorar connectat'
-        forgot_password: 'Senhal doblidat ?'
+        forgot_password: 'Senhal oblidat ?'
         submit: 'Se connectar'
         register: 'Crear un compte'
         username: "Nom d'utilizaire"
         password: 'Senhal'
         cancel: 'Anullar'
     resetting:
-        description: "Picatz vòstra adreça de corrièl çai-jos, vos mandarem las instruccions per reïnicializar vòstre senhal."
+        description: "Picatz vòstra adreça de‘ corrièl çai-jos, vos mandarem las instruccions per reïnicializar vòstre senhal."
     register:
         page_title: 'Se crear un compte'
         go_to_account: 'Anar sus vòstre compte'
@@ -22,7 +22,7 @@ menu:
         all_articles: 'Totes los articles'
         config: 'Configuracion'
         tags: 'Etiquetas'
-        internal_settings: 'Configuracion interna'
+        internal_settings: 'Configuracion intèrna'
         import: 'Importar'
         howto: 'Ajuda'
         developer: 'Gestion dels clients API'
@@ -32,7 +32,7 @@ menu:
         save_link: 'Enregistrar un novèl article'
         back_to_unread: 'Tornar als articles pas legits'
         users_management: 'Gestion dels utilizaires'
-        # site_credentials: 'Site credentials'
+        site_credentials: 'Identificants del site'
     top:
         add_new_entry: 'Enregistrar un novèl article'
         search: 'Cercar'
@@ -77,7 +77,7 @@ config:
             redirect_current_page: 'A la pagina actuala'
         pocket_consumer_key_label: Clau d'autentificacion Pocket per importar las donadas
         android_configuration: Configuratz vòstra aplicacion Android
-        # android_instruction: "Touch here to prefill your Android application"
+        android_instruction: "Tocatz aquí per garnir las informacions de l'aplicacion Android"
         help_theme: "wallabag es personalizable. Podètz causir vòstre tèma preferit aquí."
         help_items_per_page: "Podètz cambiar lo nombre d'articles afichats per pagina."
         help_reading_speed: "wallabag calcula lo temps de lectura per cada article. Podètz lo definir aquí, gràcias a aquesta lista, se sètz un legeire rapid o lent. wallabag tornarà calcular lo temps de lectura per cada article."
@@ -94,7 +94,7 @@ config:
             unread: 'Pas legits'
             starred: 'Favorits'
             archive: 'Legits'
-            # all: 'All'
+            all: 'Totes'
         rss_limit: "Nombre d'articles dins un flux RSS"
     form_user:
         two_factor_description: "Activar l'autentificacion doble-factor vòl dire que recebretz un còdi per corrièl per cada novèla connexion pas aprovada."
@@ -191,8 +191,8 @@ entry:
         unread_label: 'Pas legits'
         preview_picture_label: 'A un imatge'
         preview_picture_help: 'Imatge'
-        # is_public_label: 'Has a public link'
-        # is_public_help: 'Public link'
+        is_public_label: 'Ten un ligam public'
+        is_public_help: 'Ligam public'
         language_label: 'Lenga'
         http_status_label: 'Estatut HTTP'
         reading_time:
@@ -248,8 +248,8 @@ entry:
     public:
         shared_by_wallabag: "Aqueste article es estat partejat per <a href='%wallabag_instance%'>wallabag</a>"
     confirm:
-        # delete: "Are you sure you want to remove that article?"
-        # delete_tag: "Are you sure you want to remove that tag from that article?"
+        delete: "Sètz segur de voler suprimir aqueste article ?"
+        delete_tag: "Sètz segur de voler levar aquesta etiqueta de l'article ?"
 
 about:
     page_title: 'A prepaus'
@@ -526,20 +526,20 @@ user:
         placeholder: "Filtrar per nom d'utilizaire o corrièl"
 
 site_credential:
-    # page_title: Site credentials management
-    # new_site_credential: Create a credential
-    # edit_site_credential: Edit an existing credential
-    # description: "Here you can manage all credentials for sites which required them (create, edit and delete), like a paywall, an authentication, etc."
+    page_title: Gestion dels identificants
+    new_site_credential: Crear un identificant
+    edit_site_credential: Modificar un identificant
+    description: "Aquí podètz gerir vòstres identificants pels sites que los demandan (ne crear, ne modifiar, ne suprimir) coma los sites a peatge, etc."
     list:
          actions: 'Accions'
          edit_action: 'Modificar'
          yes: 'Òc'
          no: 'Non'
-        # create_new_one: Create a new credential
+        create_new_one: Crear un novèl identificant
     form:
-        # username_label: 'Username'
-        # host_label: 'Host'
-        # password_label: 'Password'
+        username_label: 'Nom d'utilizaire'
+        host_label: 'Òste'
+        password_label: 'Senhal'
         save: 'Enregistrar'
         delete: 'Suprimir'
         delete_confirm: 'Sètz segur ?'
@@ -599,6 +599,6 @@ flashes:
             deleted: 'Utilizaire "%username%" suprimit'
     site_credential:
         notice:
-            # added: 'Site credential for "%host%" added'
-            # updated: 'Site credential for "%host%" updated'
-            # deleted: 'Site credential for "%host%" deleted'
+            added: 'Identificant per "%host%" ajustat'
+            updated: 'Identificant per "%host%" mes a jorn'
+            deleted: 'Identificant per "%host%" suprimit'
