@@ -535,7 +535,7 @@ site_credential:
          edit_action: 'Modificar'
          yes: 'Òc'
          no: 'Non'
-        create_new_one: Crear un novèl identificant
+         create_new_one: Crear un novèl identificant
     form:
         username_label: 'Nom d'utilizaire'
         host_label: 'Òste'
