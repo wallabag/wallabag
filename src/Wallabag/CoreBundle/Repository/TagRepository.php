@@ -63,6 +63,27 @@ class TagRepository extends EntityRepository
     }
 
     /**
+     * Find all tags (flat) per user with nb entries.
+     *
+     * @param int $userId
+     *
+     * @return array
+     */
+    public function findAllFlatTagsWithNbEntries($userId)
+    {
+        return $this->createQueryBuilder('t')
+            ->select('t.id, t.label, t.slug, count(e.id) as nbEntries')
+            ->distinct(true)
+            ->leftJoin('t.entries', 'e')
+            ->where('e.user = :userId')
+            ->groupBy('t.id')
+            ->orderBy('t.slug')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getArrayResult();
+    }
+
+    /**
      * Used only in test case to get a tag for our entry.
      *
      * @return Tag

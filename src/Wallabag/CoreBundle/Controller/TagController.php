@@ -84,28 +84,11 @@ class TagController extends Controller
      */
     public function showTagAction()
     {
-        $repository = $this->get('wallabag_core.entry_repository');
         $tags = $this->get('wallabag_core.tag_repository')
-            ->findAllTags($this->getUser()->getId());
-
-        $flatTags = [];
-
-        foreach ($tags as $tag) {
-            $nbEntries = $repository->countAllEntriesByUserIdAndTagId(
-                $this->getUser()->getId(),
-                $tag->getId()
-            );
-
-            $flatTags[] = [
-                'id' => $tag->getId(),
-                'label' => $tag->getLabel(),
-                'slug' => $tag->getSlug(),
-                'nbEntries' => $nbEntries,
-            ];
-        }
+            ->findAllFlatTagsWithNbEntries($this->getUser()->getId());
 
         return $this->render('WallabagCoreBundle:Tag:tags.html.twig', [
-            'tags' => $flatTags,
+            'tags' => $tags,
         ]);
     }
 
