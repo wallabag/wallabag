@@ -32,7 +32,7 @@ menu:
         save_link: 'Zapisz link'
         back_to_unread: 'Powrót do nieprzeczytanych artykułów'
         users_management: 'Zarządzanie użytkownikami'
-        # site_credentials: 'Site credentials'
+        site_credentials: 'Poświadczenia strony'
     top:
         add_new_entry: 'Dodaj nowy wpis'
         search: 'Szukaj'
@@ -94,7 +94,7 @@ config:
             unread: 'Nieprzeczytane'
             starred: 'Oznaczone gwiazdką'
             archive: 'Archiwum'
-            # all: 'All'
+            all: 'Wszystkie'
         rss_limit: 'Link do RSS'
     form_user:
         two_factor_description: "Włączenie autoryzacji dwuetapowej oznacza, że będziesz otrzymywał maile z kodem przy każdym nowym, niezaufanym połączeniu"
@@ -526,20 +526,20 @@ user:
         placeholder: Filtruj po nazwie użytkownika lub adresie e-mail
 
 site_credential:
-    # page_title: Site credentials management
-    # new_site_credential: Create a credential
-    # edit_site_credential: Edit an existing credential
-    # description: "Here you can manage all credentials for sites which required them (create, edit and delete), like a paywall, an authentication, etc."
+    page_title: Zarządzanie poświadczeniami strony
+    new_site_credential: Stwórz nowe poświadczenie
+    edit_site_credential: Edytuj istniejące poświadczenie
+    description: "Tutaj możesz zarządzać wszystkim poświadczeniami wymaganymi przez strony (stwórz, edytuj i usuń ), takie jak paywall, autentykacja, itp."
     list:
         actions: Akcje
         edit_action: Edytuj
         yes: Tak
         no: Nie
-        # create_new_one: Create a new credential
+        create_new_one: Stwórz nowe poświadczenie
     form:
-        # username_label: 'Username'
-        # host_label: 'Host'
-        # password_label: 'Password'
+        username_label: 'Nazwa użytkownika'
+        host_label: 'Host'
+        password_label: 'Hasło'
         save: Zapisz
         delete: Usuń
         delete_confirm: Jesteś pewien?
@@ -599,6 +599,6 @@ flashes:
             deleted: 'Użytkownik "%username%" usunięty'
     site_credential:
         notice:
-            # added: 'Site credential for "%host%" added'
-            # updated: 'Site credential for "%host%" updated'
-            # deleted: 'Site credential for "%host%" deleted'
+            added: 'Poświadczenie dla "%host%" dodane'
+            updated: 'Poświadczenie dla "%host%" zaktualizowane'
+            deleted: 'Poświadczenie dla "%host%" usuniętę'
