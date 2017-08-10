@@ -9,10 +9,10 @@ security:
         password: 'Senhal'
         cancel: 'Anullar'
     resetting:
-        description: "Picatz vòstra adreça de‘ corrièl çai-jos, vos mandarem las instruccions per reïnicializar vòstre senhal."
+        description: "Picatz vòstra adreça de corrièl çai-jos, vos mandarem las instruccions per reïnicializar vòstre senhal."
     register:
         page_title: 'Se crear un compte'
-        go_to_account: 'Anar sus vòstre compte'
+        go_to_account: 'Anar a vòstre compte'
 
 menu:
     left:
