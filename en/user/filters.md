@@ -41,4 +41,4 @@ domain name. For example, in this field, type `bbc.co.uk` to retrieve this websi
 
 ## Creation date
 
-When you save an article, wallabag stores the current date, You can, for example, to retrieve articles written between the 1st and 31st of January for example.
+When you save an article, wallabag stores the current date. You can, for example, retrieve articles written between the 1st and 31st of January.
