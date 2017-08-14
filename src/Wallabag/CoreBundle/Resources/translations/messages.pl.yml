@@ -452,6 +452,7 @@ developer:
         field_uris: 'Przekieruj URIs'
         field_grant_types: 'Przyznaj pozwolenie'
         no_client: 'Nie ma jeszcze klienta.'
+#        show_qrcode: 'Show QRCode'
     remove:
         warn_message_1: 'Masz możliwość usunięcia tego klienta. Ta akcja jest NIEODWRACALNA !'
         warn_message_2: "Jeżeli go usuniesz, aplikacje skonfigurowane z tym klientem nię będa w stanie autoryzować twojego wallabag."

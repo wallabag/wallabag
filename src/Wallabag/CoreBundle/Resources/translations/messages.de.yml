@@ -452,6 +452,7 @@ developer:
         field_uris: 'Weiterleitungs-URIs'
         field_grant_types: "Erlaubte grant_types"
         no_client: 'Bisher kein Client.'
+      # show_qrcode: 'Show QRCode'
     remove:
         warn_message_1: 'Du hast die Möglichkeit, diesen Client zu entfernen. DIESE AKTION IST NICHT WIDERRUFBAR!'
         warn_message_2: "Wenn du ihn entfernst, hat keine der damit konfigurierten Anwendungen mehr die Möglichkeit, sich in deinen wallabag-Konto anzumelden."

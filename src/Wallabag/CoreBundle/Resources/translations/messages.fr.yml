@@ -452,6 +452,7 @@ developer:
         field_uris: "Adresse de redirection"
         field_grant_types: "Type de privilège accordé"
         no_client: "Aucun client pour le moment"
+        show_qrcode: 'Voir le QRCode'
     remove:
         warn_message_1: "Vous avez la possibilité de supprimer le client %name%. Cette action est IRRÉVERSIBLE !"
         warn_message_2: "Si vous supprimez le client %name%, toutes les applications qui l’utilisaient ne fonctionneront plus avec votre compte wallabag."

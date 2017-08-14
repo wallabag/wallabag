@@ -456,6 +456,7 @@ developer:
         field_uris: 'URI di reindirizzamento'
         field_grant_types: 'Tipi di permessi concessi'
         no_client: 'Ancora nessun client.'
+#        show_qrcode: 'Show QRCode'
     remove:
         warn_message_1: "Hai la possibilità di rimuovere questo client.L'operazione è IRREVERSIBILE!"
         warn_message_2: "Se lo rimuovi, ogni app configurata con questo client non sarà più in grado di autenticarsi."

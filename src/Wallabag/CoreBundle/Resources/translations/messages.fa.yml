@@ -452,6 +452,7 @@ developer:
     #     field_uris: 'Redirect URIs'
     #     field_grant_types: 'Grant type allowed'
     #     no_client: 'No client yet.'
+    #     show_qrcode: 'Show QRCode'
     # remove:
     #     warn_message_1: 'You have the ability to remove this client. This action is IRREVERSIBLE !'
     #     warn_message_2: "If you remove it, every app configured with that client won't be able to auth on your wallabag."

@@ -452,6 +452,7 @@ developer:
         field_uris: 'URLs de redireccion'
         field_grant_types: 'Tipe de privilègi acordat'
         no_client: 'Pas cap de client pel moment.'
+#        show_qrcode: 'Show QRCode'
     remove:
         warn_message_1: 'Avètz la possibilitat de supriimr un client. Aquesta accion es IRREVERSIBLA !'
         warn_message_2: "Se suprimissètz un client, totas las aplicacions que l'emplegan foncionaràn pas mai amb vòstre compte wallabag."

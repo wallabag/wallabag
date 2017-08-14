@@ -452,6 +452,7 @@ developer:
         field_uris: 'URIs de redirección'
         field_grant_types: 'Permisos concedidos'
         no_client: 'Todavía no hay clientes.'
+#        show_qrcode: 'Show QRCode'
     remove:
         warn_message_1: 'Tienes permiso para eliminar el cliente %name%. ¡Está acción es IRREVERSIBLE!'
         warn_message_2: "Si lo eliminas, cada aplicación configurada con ese cliente no podrá autenticarse en wallabag."

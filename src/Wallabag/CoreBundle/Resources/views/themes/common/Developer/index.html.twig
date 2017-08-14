@@ -52,6 +52,12 @@
                                         {{ 'developer.remove.warn_message_1'|trans({'%name%': client.name }) }}<br/>
                                         {{ 'developer.remove.warn_message_2'|trans({'%name%': client.name }) }}<br/>
                                         <a class="waves-effect waves-light red btn" href="{{ path('developer_delete_client', {'id': client.id}) }}">{{ 'developer.remove.action'|trans({'%name%': client.name }) }}</a>
+                                        <a class="waves-effect waves-light btn" href="">{{ 'developer.existing_clients.show_qrcode'|trans }}</a>
+                                        <img id="iphoneQrcode{{ client.id }}" />
+                                        <script>
+                                            const imgBase64 = jrQrcode.getQrBase64('wallabag-token://{{ app.user.username }}%%{{ wallabag_url }}%%{{ client.id }}_{{ client.randomId }}%%{{ client.secret }}');
+                                            document.getElementById('iphoneQrcode{{ client.id }}').src = imgBase64;
+                                        </script>
                                     </p>
                                 </div>
                             </li>
