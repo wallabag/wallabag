@@ -20,7 +20,7 @@ picture.
 
 ## Language
 
-wallabag (via graby) can detect article language. It's easy to you to
+wallabag (via graby) can detect an article's language. It's easy for you to
 retrieve articles written in a specific language.
 
 ## HTTP status
@@ -30,17 +30,15 @@ You can retrieve the articles by filtering by their HTTP status code:
 
 ## Reading time
 
-wallabag estimates how many time you need to read an article. With this
-filter, you can for example find the articles with a reading time
+wallabag estimates how much time you need to read an article. With this
+filter, you can for example find articles with a reading time
 between 2 and 5 minutes.
 
 ## Domain name
 
-Thanks to this filter, you can retrieve the articles from the same
-domain name. For example, in this field, type `bbc.co.uk` to retrieve
-the articles of this website.
+Thanks to this filter, you can retrieve articles from the same
+domain name. For example, in this field, type `bbc.co.uk` to retrieve this website's articles.
 
 ## Creation date
 
-When you save an article, wallabag stored the current date. So handful
-to retrieve articles written between 1st and 31th January for example.
+When you save an article, wallabag stores the current date. You can, for example, retrieve articles written between the 1st and 31st of January.
