@@ -369,7 +369,7 @@ class EntryRepository extends EntityRepository
      *
      * @return array
      */
-    public function getAllEntriesId($userId = null)
+    public function findAllEntriesIdByUserId($userId = null)
     {
         $qb = $this->createQueryBuilder('e')
             ->select('e.id');

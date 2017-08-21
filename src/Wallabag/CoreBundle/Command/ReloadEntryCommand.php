@@ -41,7 +41,7 @@ class ReloadEntryCommand extends ContainerAwareCommand
         }
 
         $entryRepository = $this->getContainer()->get('wallabag_core.entry_repository');
-        $entryIds = $entryRepository->getAllEntriesId($userId);
+        $entryIds = $entryRepository->findAllEntriesIdByUserId($userId);
 
         $nbEntries = count($entryIds);
         if (!$nbEntries) {
