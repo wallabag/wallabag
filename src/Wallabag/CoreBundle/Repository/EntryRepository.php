@@ -365,6 +365,23 @@ class EntryRepository extends EntityRepository
     }
 
     /**
+     * @param int $userId
+     *
+     * @return array
+     */
+    public function getAllEntriesId($userId = null)
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->select('e.id');
+
+        if (null !== $userId) {
+            $qb->where('e.user = :userid')->setParameter(':userid', $userId);
+        }
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    /**
      * Find all entries by url and owner.
      *
      * @param $url
