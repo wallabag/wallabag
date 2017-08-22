@@ -71,7 +71,7 @@ class CleanDuplicatesCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $repo = $this->getContainer()->get('wallabag_core.entry_repository');
 
-        $entries = $repo->getAllEntriesIdAndUrl($user->getId());
+        $entries = $repo->findAllEntriesIdAndUrlByUserId($user->getId());
 
         $duplicatesCount = 0;
         $urls = [];

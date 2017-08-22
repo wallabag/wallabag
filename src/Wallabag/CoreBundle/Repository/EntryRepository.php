@@ -355,7 +355,7 @@ class EntryRepository extends EntityRepository
      * Get id and url from all entries
      * Used for the clean-duplicates command.
      */
-    public function getAllEntriesIdAndUrl($userId)
+    public function findAllEntriesIdAndUrlByUserId($userId)
     {
         $qb = $this->createQueryBuilder('e')
             ->select('e.id, e.url')
