@@ -35,9 +35,9 @@
                 {% if craue_setting('share_unmark') %}<li><a href="{{ craue_setting('unmark_url') }}/mark/add?url={{ entry.url|url_encode }}&amp;title={{entry.title|url_encode}}&amp;v=6" target="_blank" class="tool unmark icon-image icon-image--unmark" title="unmark"><span>unmark.it</span></a></li>{% endif %}
                 {% if craue_setting('carrot') %}<li><a href="https://secure.carrot.org/GiveAndGetBack.do?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}" class="tool carrot icon-image icon-image--carrot" target="_blank" title="carrot"><span>Carrot</span></a></li>{% endif %}
                 {% if craue_setting('show_printlink') %}<li><a title="{{ 'entry.view.left_menu.print'|trans }}" class="tool icon icon-print" href="javascript: window.print();"><span>{{ 'entry.view.left_menu.print'|trans }}</span></a></li>{% endif %}
-                {% if craue_setting('export_epub') %}<li><a href="?epub&amp;method=id&amp;value={{ entry.id }}" title="Generate ePub file">EPUB</a></li>{% endif %}
-                {% if craue_setting('export_mobi') %}<li><a href="?mobi&amp;method=id&amp;value={{ entry.id }}" title="Generate Mobi file">MOBI</a></li>{% endif %}
-                {% if craue_setting('export_pdf') %}<li><a href="?pdf&amp;method=id&amp;value={{ entry.id }}" title="Generate PDF file">PDF</a></li>{% endif %}
+                {% if craue_setting('export_epub') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'epub' }) }}" title="Generate ePub file">EPUB</a></li>{% endif %}
+                {% if craue_setting('export_mobi') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'mobi' }) }}" title="Generate Mobi file">MOBI</a></li>{% endif %}
+                {% if craue_setting('export_pdf') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'pdf' }) }}" title="Generate PDF file">PDF</a></li>{% endif %}
                 <li><a href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{{ 'entry.view.left_menu.problem.label'|trans }}" class="tool bad-display icon icon-delete"><span>{{ 'entry.view.left_menu.problem.label'|trans }}</span></a></li>
             </ul>
         </div>

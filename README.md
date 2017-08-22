@@ -3,7 +3,7 @@
 [![Gitter](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/wallabag/wallabag)
 
 # What is wallabag?
-wallabag is a self hostable application allowing you to not miss any content anymore.
+wallabag is a self-hostable PHP application allowing you to not miss any content anymore.
 Click, save and read it when you can. It extracts content so that you can read it when you have time.
 
 More information on our website: [wallabag.org](https://wallabag.org).
