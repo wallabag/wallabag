@@ -39,6 +39,7 @@ Spécifique à wallabag:
 - `wallabag:install`: (ré)Installer wallabag
 - `wallabag:tag:all`: Tagger tous les articles pour un utilisateur ou une utilisatrice en utilisant ses règles de tags automatiques.
 - `wallabag:user:show`: Affiche les détails d'un utilisateur.
+- `wallabag:entry:reload`: Recharge le contenu des articles.
 
 wallabag:clean-duplicates
 -------------------------
@@ -157,3 +158,18 @@ wallabag:user:show <username>
 
 Arguments:
  - username: Utilisateur à afficher.
+ 
+
+wallabag:entry:reload
+---------------------
+
+Cette commande vous permet de recharger le contenu des articles.
+
+Utilisation:
+
+```
+wallabag:entry:reload [<username>]
+```
+
+Arguments:
+ - username: Recharge uniquement le contenu des articles de l'utilisateur donné.
