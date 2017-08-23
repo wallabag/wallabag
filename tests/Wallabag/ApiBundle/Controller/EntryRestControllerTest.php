@@ -407,6 +407,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame('http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html', $content['url']);
         $this->assertSame(0, $content['is_archived']);
         $this->assertSame(0, $content['is_starred']);
+        $this->assertNull($content['starred_at']);
         $this->assertSame('New title for my article', $content['title']);
         $this->assertSame(1, $content['user_id']);
         $this->assertCount(2, $content['tags']);
@@ -483,6 +484,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testPostArchivedAndStarredEntry()
     {
+        $now = new \DateTime();
         $this->client->request('POST', '/api/entries.json', [
             'url' => 'http://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html',
             'archive' => '1',
@@ -497,6 +499,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame('http://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html', $content['url']);
         $this->assertSame(1, $content['is_archived']);
         $this->assertSame(1, $content['is_starred']);
+        $this->assertGreaterThanOrEqual($now->getTimestamp(), (new \DateTime($content['starred_at']))->getTimestamp());
         $this->assertSame(1, $content['user_id']);
     }
 
@@ -753,6 +756,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testSaveIsStarredAfterPatch()
     {
+        $now = new \DateTime();
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
@@ -770,6 +774,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertSame(1, $content['is_starred']);
+        $this->assertGreaterThanOrEqual($now->getTimestamp(), (new \DateTime($content['starred_at']))->getTimestamp());
     }
 
     public function dataForEntriesExistWithUrl()

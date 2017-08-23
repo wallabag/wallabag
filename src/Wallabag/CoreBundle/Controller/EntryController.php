@@ -333,6 +333,7 @@ class EntryController extends Controller
         $this->checkUserAction($entry);
 
         $entry->toggleStar();
+        $entry->updateStar($entry->isStarred());
         $this->getDoctrine()->getManager()->flush();
 
         $message = 'flashes.entry.notice.entry_unstarred';

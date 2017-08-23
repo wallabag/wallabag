@@ -143,6 +143,15 @@ class Entry
     private $publishedBy;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="starred_at", type="datetime", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $starredAt = null;
+
+    /**
      * @ORM\OneToMany(targetEntity="Wallabag\AnnotationBundle\Entity\Annotation", mappedBy="entry", cascade={"persist", "remove"})
      * @ORM\JoinTable
      *
@@ -473,6 +482,44 @@ class Entry
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getStarredAt()
+    {
+        return $this->starredAt;
+    }
+
+    /**
+     * @param \DateTime|null $starredAt
+     *
+     * @return Entry
+     */
+    public function setStarredAt($starredAt = null)
+    {
+        $this->starredAt = $starredAt;
+
+        return $this;
+    }
+
+    /**
+     * update isStarred and starred_at fields.
+     *
+     * @param bool $isStarred
+     *
+     * @return Entry
+     */
+    public function updateStar($isStarred = false)
+    {
+        $this->setStarred($isStarred);
+        $this->setStarredAt(null);
+        if ($this->isStarred()) {
+            $this->setStarredAt(new \DateTime());
+        }
+
+        return $this;
     }
 
     /**
