@@ -39,6 +39,7 @@ Spécifique à wallabag:
 - `wallabag:install`: (ré)Installer wallabag
 - `wallabag:tag:all`: Tagger tous les articles pour un utilisateur ou une utilisatrice en utilisant ses règles de tags automatiques.
 - `wallabag:user:show`: Affiche les détails d'un utilisateur.
+- `wallabag:user:list`: Liste les utilisateurs existants.
 - `wallabag:entry:reload`: Recharge le contenu des articles.
 
 wallabag:clean-duplicates
@@ -158,7 +159,25 @@ wallabag:user:show <username>
 
 Arguments:
  - username: Utilisateur à afficher.
- 
+
+
+wallabag:user:list
+------------------
+
+Cette commande vous permet de lister les utilisateurs existants.
+
+Utilisation:
+
+```
+wallabag:user:list [<search>]
+```
+
+Arguments:
+ - search: Filtre la liste selon la chaîne saisie. La recherche s'effectue sur le login, le nom et l'email des utilisateurs
+
+Options:
+ - `--limit=LIMIT`: Nombre d'utilisateurs maximum affichés dans la liste (100 par défaut)
+
 
 wallabag:entry:reload
 ---------------------
