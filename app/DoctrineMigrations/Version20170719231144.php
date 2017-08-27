@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Changed tags to lowercase
+ * Changed tags to lowercase.
  */
 class Version20170719231144 extends AbstractMigration implements ContainerAwareInterface
 {
@@ -22,24 +22,19 @@ class Version20170719231144 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix').$tableName;
-    }
-
     /**
      * @param Schema $schema
      */
     public function up(Schema $schema)
     {
-        $this->skipIf($this->connection->getDatabasePlatform()->getName() == 'sqlite', 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
-        
+        $this->skipIf($this->connection->getDatabasePlatform()->getName() === 'sqlite', 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
+
         // Find tags which need to be merged
-        $dupTags = $this->connection->query("
+        $dupTags = $this->connection->query('
             SELECT LOWER(label)
-            FROM   ".$this->getTable('tag')."
+            FROM   ' . $this->getTable('tag') . '
             GROUP BY LOWER(label)
-            HAVING COUNT(*) > 1"
+            HAVING COUNT(*) > 1'
         );
         $dupTags->execute();
 
@@ -47,10 +42,10 @@ class Version20170719231144 extends AbstractMigration implements ContainerAwareI
             $label = $duplicates['LOWER(label)'];
 
             // Retrieve all duplicate tags for a given tag
-            $tags = $this->connection->query("
+            $tags = $this->connection->query('
                 SELECT id
-                FROM   ".$this->getTable('tag')."
-                WHERE  LOWER(label) = '".$label."'
+                FROM   ' . $this->getTable('tag') . "
+                WHERE  LOWER(label) = '" . $label . "'
                 ORDER BY id ASC"
             );
             $tags->execute();
@@ -72,24 +67,24 @@ class Version20170719231144 extends AbstractMigration implements ContainerAwareI
             // Just in case...
             if (count($ids) > 0) {
                 // Merge tags
-                $this->addSql("
-                    UPDATE ".$this->getTable('entry_tag')."
-                    SET    tag_id = ".$newId."
-                    WHERE  tag_id IN (".implode(',', $ids).")"
+                $this->addSql('
+                    UPDATE ' . $this->getTable('entry_tag') . '
+                    SET    tag_id = ' . $newId . '
+                    WHERE  tag_id IN (' . implode(',', $ids) . ')'
                 );
 
                 // Delete unused tags
-                $this->addSql("
-                    DELETE FROM ".$this->getTable('tag')."
-                    WHERE id IN (".implode(',', $ids).")"
+                $this->addSql('
+                    DELETE FROM ' . $this->getTable('tag') . '
+                    WHERE id IN (' . implode(',', $ids) . ')'
                 );
             }
         }
 
         // Iterate over all tags to lowercase them
-        $this->addSql("
-            UPDATE ".$this->getTable('tag')."
-            SET label = LOWER(label)"
+        $this->addSql('
+            UPDATE ' . $this->getTable('tag') . '
+            SET label = LOWER(label)'
         );
     }
 
@@ -99,5 +94,10 @@ class Version20170719231144 extends AbstractMigration implements ContainerAwareI
     public function down(Schema $schema)
     {
         throw new SkipMigrationException('Too complex ...');
+    }
+
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }
