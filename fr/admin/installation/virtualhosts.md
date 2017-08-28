@@ -128,7 +128,7 @@ En imaginant que vous vouliez installer wallabag dans le dossier
 `/var/www/wallabag`, voici un fichier de configuration pour wallabag
 (éditez votre fichier `lighttpd.conf` collez-y cette configuration) :
 
-```
+```lighttpd
 server.modules = (
     "mod_fastcgi",
     "mod_access",
@@ -160,3 +160,25 @@ url.rewrite-if-not-file = (
     "^/([^?]*)" => "/app.php?=$1",
 )
 ```
+
+## Configuration avec Caddy
+
+En imaginant que vous vouliez installer wallabag dans le dossier
+`/var/www/wallabag`, voici un caddyfile pour wallabag
+
+```caddy
+yourdomain.ru {
+  root /var/www/wallabag/web
+  fastcgi / /var/run/php7-fpm.sock php {
+    index app.php
+  }
+  rewrite / {
+    to {path} {path}/ /app.php?{query}
+  }
+  tls your@email.ru
+  log /var/log/caddy/wbg.access.log
+  errors /var/log/caddy/wbg.error.log
+}
+```
+
+Vous pouvez aussi ajouter une directive `push` pour http/2 et aussi `gzip` pour compression. Le caddyfile est testé avec caddy v0.10.4
