@@ -65,7 +65,7 @@ class EntryRepository extends EntityRepository
     public function getBuilderForStarredByUser($userId)
     {
         return $this
-            ->getBuilderByUser($userId)
+            ->getBuilderByUser($userId, 'starredAt', 'desc')
             ->andWhere('e.isStarred = true')
         ;
     }
@@ -401,15 +401,16 @@ class EntryRepository extends EntityRepository
     /**
      * Return a query builder to used by other getBuilderFor* method.
      *
-     * @param int $userId
+     * @param int    $userId
+     * @param string $sortBy
+     * @param string $direction
      *
      * @return QueryBuilder
      */
-    private function getBuilderByUser($userId)
+    private function getBuilderByUser($userId, $sortBy = 'createdAt', $direction = 'desc')
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.user = :userId')->setParameter('userId', $userId)
-            ->orderBy('e.createdAt', 'desc')
-        ;
+            ->orderBy(sprintf('e.%s', $sortBy), $direction);
     }
 }

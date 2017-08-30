@@ -361,7 +361,7 @@ class EntryRestController extends WallabagRestController
         }
 
         if (null !== $data['isStarred']) {
-            $entry->setStarred((bool) $data['isStarred']);
+            $entry->updateStar((bool) $data['isStarred']);
         }
 
         if (!empty($data['tags'])) {
@@ -464,7 +464,7 @@ class EntryRestController extends WallabagRestController
         }
 
         if (null !== $data['isStarred']) {
-            $entry->setStarred((bool) $data['isStarred']);
+            $entry->updateStar((bool) $data['isStarred']);
         }
 
         if (!empty($data['tags'])) {
