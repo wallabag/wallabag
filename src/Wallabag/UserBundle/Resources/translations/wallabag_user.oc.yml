@@ -6,6 +6,6 @@ auth_code:
         body:
             hello: "Bonjorn %user%,"
             first_para: "Estant qu'avètz activat l'autentificacion en dos temps sus vòstre compte wallabag e que venètz de vos connectar dempuèi un novèl periferic (ordinador, mobil, etc.) vos mandem un còdi per validar la connexion."
-            second_para: "Vaquí lo còdi per dintrar :"
-            support: "S'avètz un problèma de connexion, dobtetz pas a contactar l'assisténcia : "
+            second_para: "Vaquí lo còdi per dintrar : "
+            support: "S'avètz un problèma de connexion, dobtetz pas a contactar l'assisténcia : "
             signature: "La còla de wallabag"
