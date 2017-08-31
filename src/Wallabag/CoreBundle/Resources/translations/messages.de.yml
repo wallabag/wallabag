@@ -46,7 +46,7 @@ footer:
         social: 'Soziales'
         powered_by: 'angetrieben von'
         about: 'Über'
-    stats: Seit %user_creation% hast du %nb_archives% Artikel gelesen. Das sind ungefähr %per_day% pro Tag!
+    stats: 'Seit %user_creation% hast du %nb_archives% Artikel gelesen. Das sind ungefähr %per_day% pro Tag!'
 
 config:
     page_title: 'Einstellungen'
@@ -74,8 +74,8 @@ config:
             label: 'Wohin soll nach dem Gelesenmarkieren eines Artikels weitergeleitet werden?'
             redirect_homepage: 'Zur Homepage'
             redirect_current_page: 'Zur aktuellen Seite'
-        pocket_consumer_key_label: Consumer-Key für Pocket, um Inhalte zu importieren
-        android_configuration: Konfiguriere deine Android Application
+        pocket_consumer_key_label: 'Consumer-Key für Pocket, um Inhalte zu importieren'
+        android_configuration: 'Konfiguriere deine Android-App'
         help_theme: "wallabag ist anpassbar. Du kannst dein bevorzugtes Theme hier auswählen."
         help_items_per_page: "Du kannst die Nummer von Artikeln pro Seite anpassen."
         help_reading_speed: "wallabag berechnet eine Lesezeit pro Artikel. Hier kannst du definieren, ob du ein schneller oder langsamer Leser bist. wallabag wird die Lesezeiten danach neu berechnen."
@@ -100,17 +100,17 @@ config:
         twoFactorAuthentication_label: 'Zwei-Faktor-Authentifizierung'
         help_twoFactorAuthentication: "Wenn du 2FA aktivierst, wirst du bei jedem Login einen Code per E-Mail bekommen."
         delete:
-            title: Lösche mein Konto (a.k.a Gefahrenzone)
-            description: Wenn du dein Konto löschst, werden ALL deine Artikel, ALL deine Tags, ALL deine Anmerkungen und dein Konto dauerhaft gelöscht (kann NICHT RÜCKGÄNGIG gemacht werden). Du wirst anschließend ausgeloggt.
-            confirm: Bist du wirklich sicher? (DIES KANN NICHT RÜCKGÄNGIG GEMACHT WERDEN)
-            button: Lösche mein Konto
+            title: 'Lösche mein Konto (a.k.a Gefahrenzone)'
+            description: 'Wenn du dein Konto löschst, werden ALL deine Artikel, ALL deine Tags, ALL deine Anmerkungen und dein Konto dauerhaft gelöscht (kann NICHT RÜCKGÄNGIG gemacht werden). Du wirst anschließend ausgeloggt.'
+            confirm: 'Bist du wirklich sicher? (DIES KANN NICHT RÜCKGÄNGIG GEMACHT WERDEN)'
+            button: 'Lösche mein Konto'
     reset:
-        title: Zurücksetzen (a.k.a Gefahrenzone)
-        description: Beim Nutzen der folgenden Schaltflächenhast du die Möglichkeit, einige Informationen von deinem Konto zu entfernen. Sei dir bewusst, dass dies NICHT RÜCKGÄNGIG zu machen ist.
-        annotations: Entferne ALLE Annotationen
-        tags: Entferne ALLE Tags
-        entries: Entferne ALLE Einträge
-        confirm: Bist du wirklich sicher? (DIES KANN NICHT RÜCKGÄNGIG GEMACHT WERDEN)
+        title: 'Zurücksetzen (a.k.a Gefahrenzone)'
+        description: 'Beim Nutzen der folgenden Schaltflächenhast du die Möglichkeit, einige Informationen von deinem Konto zu entfernen. Sei dir bewusst, dass dies NICHT RÜCKGÄNGIG zu machen ist.'
+        annotations: 'Entferne ALLE Annotationen'
+        tags: 'Entferne ALLE Tags'
+        entries: 'Entferne ALLE Einträge'
+        confirm: 'Bist du wirklich sicher? (DIES KANN NICHT RÜCKGÄNGIG GEMACHT WERDEN)'
     form_password:
         description: "Hier kannst du dein Kennwort ändern. Dieses sollte mindestens acht Zeichen enthalten."
         old_password_label: 'Altes Kennwort'
@@ -172,7 +172,7 @@ entry:
         number_of_tags: '{1}und ein anderer Tag|]1,Inf[und %count% andere Tags'
         reading_time_minutes_short: '%readingTime% min'
         reading_time_less_one_minute_short: '&lt; 1 min'
-        original_article: 'Original'
+        original_article: 'Original-Artikel'
         toogle_as_read: 'Gelesen-Status ändern'
         toogle_as_star: 'Favoriten-Status ändern'
         delete: 'Löschen'
@@ -220,7 +220,7 @@ entry:
                 label: 'Probleme?'
                 description: 'Erscheint dieser Artikel falsch?'
         edit_title: 'Titel ändern'
-        original_article: 'original'
+        original_article: 'Original-Artikel'
         annotations_on_the_entry: '{0} Keine Anmerkungen|{1} Eine Anmerkung|]1,Inf[ %count% Anmerkungen'
         created_at: 'Erstellungsdatum'
     new:
@@ -295,32 +295,32 @@ howto:
     bookmarklet:
         description: 'Ziehe diesen Link in deine Lesezeichenleiste:'
     shortcuts:
-        page_description: Dies sind die verfügbaren Tastenkürzel in wallabag.
-        shortcut: Tastenkürzel
-        action: Aktion
-        all_pages_title: Tastenkürzel auf allen Seiten
-        go_unread: Zu ungelesen gehen
-        go_starred: Zu Favoriten gehen
-        go_archive: Zu archivierten gehen
-        go_all: Zu allen Artikel gehen
-        go_tags: Zu den Tags gehen
-        go_config: Einstellungen öffnen
-        go_import: Import-Sektion öffnen
-        go_developers: Zur Entwickler-Seite gehen
-        go_howto: Zum Howto gehen (diese Seite!)
-        go_logout: Abmelden
-        list_title: Tastenkürzel verfügbar auf den Listen-Seiten
-        search: Suche
-        article_title: Tastenkürzel verfügbar auf der Artikel-Seite
-        open_original: Original-Artikel öffnen
-        toggle_favorite: Favorit-Status für den Artikel ändern
-        toggle_archive: Archiviert-Status für den Artikel ändern
-        delete: Artikel löschen
-        material_title: Tastenkürzel des Material-Theme
-        add_link: Neuen Link hinzufügen
-        hide_form: Aktuelles Formular verstecken (Suche oder neuer Link)
-        arrows_navigation: Durch Artikel navigieren
-        open_article: Gewählten Artikel anzeigen
+        page_description: 'Dies sind die verfügbaren Tastenkürzel in wallabag.'
+        shortcut: 'Tastenkürzel'
+        action: 'Aktion'
+        all_pages_title: 'Tastenkürzel auf allen Seiten'
+        go_unread: 'Zu ungelesen gehen'
+        go_starred: 'Zu Favoriten gehen'
+        go_archive: 'Zu archivierten gehen'
+        go_all: 'Zu allen Artikel gehen'
+        go_tags: 'Zu den Tags gehen'
+        go_config: 'Einstellungen öffnen'
+        go_import: 'Import-Sektion öffnen'
+        go_developers: 'Zur Entwickler-Seite gehen'
+        go_howto: 'Zum Howto gehen (diese Seite!)'
+        go_logout: 'Abmelden'
+        list_title: 'Tastenkürzel verfügbar auf den Listen-Seiten'
+        search: 'Suche'
+        article_title: 'Tastenkürzel verfügbar auf der Artikel-Seite'
+        open_original: 'Original-Artikel öffnen'
+        toggle_favorite: 'Favorit-Status für den Artikel ändern'
+        toggle_archive: 'Archiviert-Status für den Artikel ändern'
+        delete: 'Artikel löschen'
+        material_title: 'Tastenkürzel des Material-Theme'
+        add_link: 'Neuen Link hinzufügen'
+        hide_form: 'Aktuelles Formular verstecken (Suche oder neuer Link)'
+        arrows_navigation: 'Durch Artikel navigieren'
+        open_article: 'Gewählten Artikel anzeigen'
 
 quickstart:
     page_title: 'Schnelleinstieg'
@@ -471,7 +471,7 @@ developer:
         field_id: 'Client-ID'
         field_secret: 'Client-Secret'
         back: 'Zurück'
-        read_howto: 'Lese des How-To zu "Wie erstelle ich meine erste Anwendung"'
+        read_howto: 'Lese das How-To zu "Wie erstelle ich meine erste Anwendung"'
     howto:
         page_title: 'API-Client-Verwaltung > Wie erstelle ich meine erste Anwendung'
         description:
@@ -486,16 +486,16 @@ developer:
         back: 'Zurück'
 
 user:
-    page_title: Benutzerverwaltung
-    new_user: Erstelle einen neuen Benutzer
-    edit_user: Bearbeite einen existierenden Benutzer
+    page_title: 'Benutzerverwaltung'
+    new_user: 'Erstelle einen neuen Benutzer'
+    edit_user: 'Bearbeite einen existierenden Benutzer'
     description: "Hier kannst du alle Benutzer verwalten (erstellen, bearbeiten und löschen)"
     list:
-        actions: Aktionen
-        edit_action: Bearbeiten
-        yes: Ja
-        no: Nein
-        create_new_one: Erstelle einen neuen Benutzer
+        actions: 'Aktionen'
+        edit_action: 'Bearbeiten'
+        yes: 'Ja'
+        no: 'Nein'
+        create_new_one: 'Erstelle einen neuen Benutzer'
     form:
         username_label: 'Benutzername'
         name_label: 'Name'
@@ -505,14 +505,14 @@ user:
         email_label: 'E-Mail-Adresse'
         enabled_label: 'Aktiviert'
         last_login_label: 'Letzter Login'
-        twofactor_label: Zwei-Faktor-Authentifizierung
-        save: Speichern
-        delete: Löschen
-        delete_confirm: Bist du sicher?
-        back_to_list: Zurück zur Liste
+        twofactor_label: 'Zwei-Faktor-Authentifizierung'
+        save: 'Speichern'
+        delete: 'Löschen'
+        delete_confirm: 'Bist du sicher?'
+        back_to_list: 'Zurück zur Liste'
 
 error:
-    page_title: Ein Fehler ist aufgetreten
+    page_title: 'Ein Fehler ist aufgetreten'
 
 flashes:
     config:
@@ -525,9 +525,9 @@ flashes:
             tagging_rules_updated: 'Tagging-Regeln aktualisiert'
             tagging_rules_deleted: 'Tagging-Regel gelöscht'
             rss_token_updated: 'RSS-Token aktualisiert'
-            annotations_reset: Anmerkungen zurücksetzen
-            tags_reset: Tags zurücksetzen
-            entries_reset: Einträge zurücksetzen
+            annotations_reset: 'Anmerkungen zurücksetzen'
+            tags_reset: 'Tags zurücksetzen'
+            entries_reset: 'Einträge zurücksetzen'
     entry:
         notice:
             entry_already_saved: 'Eintrag bereits am %date% gespeichert'
