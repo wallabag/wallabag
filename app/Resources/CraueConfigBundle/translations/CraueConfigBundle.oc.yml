@@ -12,7 +12,7 @@ export_xml: Activar l'expòrt XML
 import_with_rabbitmq: Activar RabbitMQ per importar de donadas de manièra asincròna
 import_with_redis: Activar Redis per importar de donadas de manièra asincròna
 shaarli_url: URL de Shaarli, se lo servici Shaarli es activat
-share_diaspora: Activar lo partatge cap a Diaspora
+share_diaspora: Activar lo partatge cap a Diaspora*
 share_mail: Activar lo partatge per corrièl
 share_shaarli: Activar lo partatge cap a Shaarli
 share_scuttle: Activar lo partatge cap a Scuttle
