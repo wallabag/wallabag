@@ -32,7 +32,7 @@ menu:
         save_link: 'Link speichern'
         back_to_unread: 'Zurück zu ungelesenen Artikeln'
         users_management: 'Benutzerverwaltung'
-        site_credentials: 'Seitenzugangsdaten'
+        site_credentials: 'Zugangsdaten'
     top:
         add_new_entry: 'Neuen Artikel hinzufügen'
         search: 'Suche'
@@ -178,7 +178,7 @@ entry:
         number_of_tags: '{1}und ein anderer Tag|]1,Inf[und %count% andere Tags'
         reading_time_minutes_short: '%readingTime% min'
         reading_time_less_one_minute_short: '&lt; 1 min'
-        original_article: 'Original-Artikel'
+        original_article: 'Originalartikel'
         toogle_as_read: 'Gelesen-Status ändern'
         toogle_as_star: 'Favoriten-Status ändern'
         delete: 'Löschen'
@@ -228,7 +228,7 @@ entry:
                 label: 'Probleme?'
                 description: 'Erscheint dieser Artikel falsch?'
         edit_title: 'Titel ändern'
-        original_article: 'Original-Artikel'
+        original_article: 'Originalartikel'
         annotations_on_the_entry: '{0} Keine Anmerkungen|{1} Eine Anmerkung|]1,Inf[ %count% Anmerkungen'
         created_at: 'Erstellungsdatum'
         published_at: 'Erscheinungsdatum'
@@ -526,16 +526,16 @@ user:
         placeholder: 'Filtere nach Benutzer oder E-Mail-Adresse'
 
 site_credential:
-    page_title: 'Verwaltung Seitenzugangsdaten'
-    new_site_credential: 'Seitenzugang anlegen'
-    edit_site_credential: 'Bestehenden Seitenzugang bearbeiten'
+    page_title: 'Verwaltung Zugangsdaten'
+    new_site_credential: 'Zugangsdaten anlegen'
+    edit_site_credential: 'Bestehende Zugangsdaten bearbeiten'
     description: 'Hier kannst du alle Zugangsdaten für Webseiten verwalten, die diese benötigen (anlegen, bearbeiten und löschen), wie z. B. eine Paywall, eine Authentifizierung, etc.'
     list:
         actions: 'Aktionen'
         edit_action: 'Bearbeiten'
         yes: 'Ja'
         no: 'Nein'
-        reate_new_one: 'Einen neuen Seitenzugang anlegen'
+        create_new_one: 'Einen neuen Seitenzugang anlegen'
     form:
         username_label: 'Benutzername'
         host_label: 'Host'
