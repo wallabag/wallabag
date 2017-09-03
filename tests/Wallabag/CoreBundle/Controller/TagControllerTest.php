@@ -9,6 +9,7 @@ use Wallabag\CoreBundle\Entity\Tag;
 class TagControllerTest extends WallabagCoreTestCase
 {
     public $tagName = 'opensource';
+    public $caseTagName = 'OpenSource';
 
     public function testList()
     {
@@ -36,7 +37,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $form = $crawler->filter('form[name=tag]')->form();
 
         $data = [
-            'tag[label]' => $this->tagName,
+            'tag[label]' => $this->caseTagName,
         ];
 
         $client->submit($form, $data);
@@ -45,6 +46,7 @@ class TagControllerTest extends WallabagCoreTestCase
         // be sure to reload the entry
         $entry = $this->getEntityManager()->getRepository(Entry::class)->find($entry->getId());
         $this->assertCount(1, $entry->getTags());
+        $this->assertContains($this->tagName, $entry->getTags());
 
         // tag already exists and already assigned
         $client->submit($form, $data);
@@ -80,7 +82,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $form = $crawler->filter('form[name=tag]')->form();
 
         $data = [
-            'tag[label]' => 'foo2, bar2',
+            'tag[label]' => 'foo2, Bar2',
         ];
 
         $client->submit($form, $data);
