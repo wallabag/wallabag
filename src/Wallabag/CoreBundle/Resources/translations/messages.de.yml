@@ -246,7 +246,7 @@ entry:
         url_label: 'URL'
         save_label: 'Speichern'
     public:
-        shared_by_wallabag: 'Dieser Artikel wurde von %username% mittels <a href='%wallabag_instance%'>wallabag</a> geteilt'
+        shared_by_wallabag: 'Dieser Artikel wurde von %username% mittels <a href="%wallabag_instance%">wallabag</a> geteilt'
     confirm:
         delete: 'Bist du sicher, dass du diesen Artikel löschen möchtest?'
         delete_tag: 'Bist du sicher, dass du diesen Tag vom Artikel entfernen möchtest?'
