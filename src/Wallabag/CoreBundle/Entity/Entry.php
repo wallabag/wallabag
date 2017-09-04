@@ -245,6 +245,15 @@ class Entry
      */
     private $tags;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="origin_url", type="text", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $originUrl;
+
     /*
      * @param User     $user
      */
@@ -830,5 +839,29 @@ class Entry
         $this->headers = $headers;
 
         return $this;
+    }
+    
+    /**
+     * Set origin url.
+     *
+     * @param string $originUrl
+     *
+     * @return Entry
+     */
+    public function setOriginUrl($originUrl)
+    {
+        $this->originUrl = $originUrl;
+
+        return $this;
+    }
+    
+    /**
+     * Get origin url.
+     *
+     * @return string
+     */
+    public function getOriginUrl()
+    {
+        return $this->originUrl;
     }
 }
