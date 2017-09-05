@@ -1,7 +1,6 @@
-Host virtuali
--------------
+# Host virtuali
 
-### Configurazione su Apache
+## Configurazione su Apache
 
 Non dimenticate di attivare la mod *rewrite* di Apache
 
@@ -9,9 +8,9 @@ Non dimenticate di attivare la mod *rewrite* di Apache
 a2enmod rewrite && systemctl reload apache2
 ```
 
-Assumendo che voi abbiate installato wallabag nella cartella
+Presumendo che voi abbiate installato wallabag nella cartella
 `/var/www/wallabag` e che vogliate usare PHP come un modulo Apache, ecco
-un vhost per l’applicazione:
+un vhost per l’wallabag:
 
 ```apache
 <VirtualHost *:80>
@@ -51,12 +50,27 @@ un vhost per l’applicazione:
 </VirtualHost>
 ```
 
+Per Apache 2.4, nella sezione &lt;Directory /var/www/wallabag/web&gt;
+dovete rimpiazzare le seguenti direttive:
+
+```apache
+AllowOverride None
+Order Allow,Deny
+Allow from All
+```
+
+tramite
+
+```apache
+Require all granted
+```
+
 Dopo aver riavviato o ricaricato Apache dovreste essere in grado di
 accedere a wallabag tramite l’indirizzo <http://domain.tld>.
 
-### Configurazione su Nginx
+## Configurazione su Nginx
 
-Assumendo che abbiate installato wallabag nella cartella
+Presumendo che abbiate installato wallabag nella cartella
 `/var/www/wallabag`, ecco una ricetta per l’applicazione:
 
 ```nginx
@@ -103,13 +117,16 @@ server {
 Dopo aver riavviato o ricaricato Nginx dovreste essere in grado di
 accedere a wallabag tramite l’indirizzo <http://domain.tld>.
 
-### Configurazione su lighttpd
+Quando vorrete importare file grandi in wallabag, dovrete aggiungere questa linea alla vostra configurazione di nginx
+`client_max_body_size XM; # allows file uploads up to X megabytes`.
 
-Assumendo che abbiate installato wallabag nella cartella
+## Configurazione su lighttpd
+
+Presumendo che abbiate installato wallabag nella cartella
 /var/www/wallabag, ecco una ricetta per l’applicazione (modificate il
-vostro file lighttpd.conf e incollatevi questa configurazione):
+vostro file `lighttpd.conf` e incollatevi questa configurazione):
 
-```
+```lighttpd
 server.modules = (
     "mod_fastcgi",
     "mod_access",
@@ -141,3 +158,25 @@ url.rewrite-if-not-file = (
     "^/([^?]*)" => "/app.php?=$1",
 )
 ```
+
++## Configurazione con Caddy
+ +
+ +Presumendo che voi vogliate installare wallabag nella cartella
+ +`/var/www/wallabag`, ecco un caddyfile per wallabag
+ +
+ +```caddy
+ +yourdomain.ru {
+ +  root /var/www/wallabag/web
+ +  fastcgi / /var/run/php7-fpm.sock php {
+ +    index app.php
+ +  }
+ +  rewrite / {
+ +    to {path} {path}/ /app.php?{query}
+ +  }
+ +  tls your@email.ru
+ +  log /var/log/caddy/wbg.access.log
+ +  errors /var/log/caddy/wbg.error.log
+ +}
+ +```
+ +
+ +Potete anche aggiungere una direttiva `push` per http/2 ed anche `gzip` per la compressione. Il caddyfile è testato con caddy v0.10.4

@@ -1,11 +1,10 @@
-Risorse di terze parti
-======================
+# Risorse di terze parti
 
 Alcune applicazioni o librerie usano le nostre API. Ecco una lista non
 esaustiva:
 
 -   [Wrapper Java per l'API di
-    wallabag](https://github.com/Strubbl/jWallabag) di Strubbl.
+    wallabag](https://github.com/Strubbl/jWallabag) di Dmitriy Bogdanov.
 -   [Libreria .NET per l'API di wallabag
     v2](https://github.com/jlnostr/wallabag-api) di Julian Oster.
 -   [API di Python per
@@ -17,4 +16,7 @@ esaustiva:
 -   [Wrapper Golang per l'API di
     wallabag](https://github.com/Strubbl/wallabago) di Strubbl, per il
     suo progetto [wallabag-stats
-    graph](https://github.com/Strubbl/wallabag-stats).
+    graph](https://github.com/Strubbl/wallabag-stats) e lo strumento a riga di comando
+    [wallabag-add-article](https://github.com/Strubbl/wallabag-add-article). 
+-   Strumento per scaricare automaticamente gli articoli di wallabag sul vostro computer locale o lettore ebook Kobo
+    [wallabako](https://gitlab.com/anarcat/wallabako) di anarcat.

@@ -1,11 +1,9 @@
-Documentazione su API
-=====================
+# Documentazione su API
 
 Grazie a questa documentazione, vedremo come interagire con l'API di
 wallabag.
 
-Requisiti
-=========
+# Requisiti
 
 -   wallabag appena (o no) installato su <http://localhost:8000>
 -   `httpie` installato sul vostro computer ([guardate il sito del

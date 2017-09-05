@@ -1,8 +1,7 @@
-Ottenere voci esistenti
-=======================
+# Ottenere articoli esistenti
 
 Documentazione per questo metodo:
-<http://localhost:8000/api/doc#get--api-entries>.{\_format}
+`<http://localhost:8000/api/doc#get--api-entries>.{\_format}`
 
 Mentre lavoriamo su una nuova installazione di wallabag, non otterremo
 risultati con questo comando:
@@ -12,7 +11,7 @@ http GET http://localhost:8000/api/entries.json \
 "Authorization:Bearer ZGJmNTA2MDdmYTdmNWFiZjcxOWY3MWYyYzkyZDdlNWIzOTU4NWY3NTU1MDFjOTdhMTk2MGI3YjY1ZmI2NzM5MA"
 ```
 
-restituisce:
+ritorna:
 
 ```http
 HTTP/1.1 200 OK
@@ -57,11 +56,10 @@ esempio di cURL:
 curl --get "https://localhost:8000/api/entries.html?access_token=ZGJmNTA2MDdmYTdmNWFiZjcxOWY3MWYyYzkyZDdlNWIzOTU4NWY3NTU1MDFjOTdhMTk2MGI3YjY1ZmI2NzM5MA"
 ```
 
-Aggiungere la vostra prima voce
-===============================
+# Aggiungere il vostro primo articolo
 
 Documentazione per questo metodo:
-<http://localhost:8000/api/doc#post--api-entries>.{\_format}
+`<http://localhost:8000/api/doc#post--api-entries>.{\_format}`
 
 ```bash
 http POST http://localhost:8000/api/entries.json \
@@ -69,7 +67,7 @@ http POST http://localhost:8000/api/entries.json \
 url="http://www.numerama.com/tech/160115-le-pocket-libre-wallabag-fait-le-plein-de-fonctionnalites.html"
 ```
 
-restituisce:
+ritorna:
 
 ```http
 HTTP/1.1 200 OK
@@ -110,7 +108,7 @@ X-Powered-By: PHP/7.0.4
 }
 ```
 
-Ora, se eseguite il comando precedente (vedere **Ottenere voci
+Ora, se eseguite il comando precedente (vedere **Ottenere articoli
 esistenti**), avrete dei dati.
 
 esempio di cURL:
@@ -119,18 +117,17 @@ esempio di cURL:
 curl "https://localhost:8000/api/entries.html?access_token=ZGJmNTA2MDdmYTdmNWFiZjcxOWY3MWYyYzkyZDdlNWIzOTU4NWY3NTU1MDFjOTdhMTk2MGI3YjY1ZmI2NzM5MA&url=http://www.numerama.com/tech/160115-le-pocket-libre-wallabag-fait-le-plein-de-fonctionnalites.html"
 ```
 
-Eliminare una voce
-==================
+# Eliminare un articolo
 
 Documentazione per questo metodo:
-<http://localhost:8000/api/doc#delete--api-entries-%7Bentry%7D>.{\_format}
+`<http://localhost:8000/api/doc#delete--api-entries-%7Bentry%7D>.{\_format}`
 
 ```bash
 http DELETE http://localhost:8000/api/entries/1.json \
 "Authorization:Bearer ZGJmNTA2MDdmYTdmNWFiZjcxOWY3MWYyYzkyZDdlNWIzOTU4NWY3NTU1MDFjOTdhMTk2MGI3YjY1ZmI2NzM5MA"
 ```
 
-restituisce
+ritorna
 
 ```http
 HTTP/1.1 200 OK
@@ -171,7 +168,7 @@ X-Powered-By: PHP/7.0.4
 }
 ```
 
-E se volete elencare le voci esistenti (vedere **Ottenere voci
+E se volete elencare le voci esistenti (vedere **Ottenere articoli
 esistenti**), l'insieme è vuoto.
 
 esempio di cURL:
@@ -180,8 +177,7 @@ esempio di cURL:
 curl --request DELETE "https://localhost:8000/api/entries/1.html?access_token=ZGJmNTA2MDdmYTdmNWFiZjcxOWY3MWYyYzkyZDdlNWIzOTU4NWY3NTU1MDFjOTdhMTk2MGI3YjY1ZmI2NzM5MA"
 ```
 
-Altri metodi
-============
+# Altri metodi
 
-Non scriveremo esempi per ogni metodo API. Guardate l'elenco qui :
+Non abbiamo scritto esempi per ogni metodo API. Guardate l'elenco qui :
 <http://localhost:8000/api/doc> per ogni metodo conosciuto.

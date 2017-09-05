@@ -1,34 +1,33 @@
-Creazione di un account e autenticazione
-========================================
+# Creare di un account ed autenticarsi
 
-Registrazione
--------------
+## Registrazione
 
-Sulla pagina di login, cliccate sul bottone `Register`
+Sulla pagina di accesso, cliccate sul bottone `Registrati`
 
-![Registration form](../../img/user/registration_form.png)
+![Modulo di registrazione](../../img/user/registration_form.png)
 
-Dovrete completare il modulo. Assicuratevi di inserire un indirizzo
-email valido, quindi vi invieremo un'email di attivazione.
+Dovete completare il modulo. Assicuratevi di inserire un indirizzo
+e-mail valido, quindi vi invieremo un'e-mail di attivazione.
 
-![Email was sent to activate account](../../img/user/sent_email.png)
+![Email inviata per attivare l'account](../../img/user/sent_email.png)
 
-Controllate la vostra casella, in cui avrete una nuova mail con un link
+Controllate la vostra casella, in cui avrete una nuova e-mail con un link
 che assomiglia a questo
 `http://wallabag/register/confirm/Ba19wokGovN-DdBQNfg4YgRkUQWRP4-k2g0Bk-hBTX4`.
 Cliccateci sopra per attivare il vostro account.
 
-Il vostro account é ora attivo
+Il vostro account è ora attivo
 
-![Welcome on board!](../../img/user/activated_account.png)
+![Benvenuti a bordo!](../../img/user/activated_account.png)
 
-Login
------
+## Login
 
-Il vostro account é ora abilitato, congratulazioni!
+Il vostro account è ora abilitato, congratulazioni!
+
+Per accedere a wallabag, completate il modulo nella pagina di accesso.
 
 Se siete sul vostro computer personale e volete restare connessi,
-spuntate la casella `Keep me logged in`: wallabag vi ricorderá per un
+spuntate la casella `Rimani connesso`: wallabag vi ricorderà per un
 anno.
 
-![Login form](../../img/user/login_form.png)
+![Modulo di accesso](../../img/user/login_form.png)

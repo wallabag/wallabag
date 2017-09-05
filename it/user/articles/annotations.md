@@ -1,21 +1,20 @@
-Annotate i vostri articoli
---------------------------
+# Annotate i vostri articoli
 
-in ogni articolo che leggiate potete scrivere delle note. É piú facile
+in ogni articolo che leggete potete scrivere delle note. È più facile
 da capire con delle immagini.
 
 Selezionate la parte dell'articolo che volete annotare e cliccate sulla
 matita:
 
-![Select your text](../../../img/user/annotations_1.png)
+![Selezionate il testo](../../../img/user/annotations_1.png)
 
 Scrivete poi la vostra nota:
 
-![Write your annotation](../../../img/user/annotations_2.png)
+![Scrivete la vostra nota](../../../img/user/annotations_2.png)
 
-Il testo é ora sottolineato e potrete leggere la vostra nota muovendo il
+Il testo è ora sottolineato e potrete leggere la vostra nota muovendo il
 cursore su di esso.
 
-![Read your annotation](../../../img/user/annotations_3.png)
+![Leggete la vostra nota](../../../img/user/annotations_3.png)
 
-Potete creare quante note vogliate.
+Potete creare tutte le note che desiderate.

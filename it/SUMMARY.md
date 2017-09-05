@@ -1,59 +1,60 @@
-# Summary
+# Sommario
 
 * [Home](README.md)
 
-## User
+## Utente
 
-* [Create account](user/create_account.md)
-* [Articles](user/articles/README.md)
-    * [Save](user/articles/save.md)
-    * [Share](user/articles/share.md)
+* [Creazione account](user/create_account.md)
+* [Articoli](user/articles/README.md)
+    * [Salvataggio](user/articles/save.md)
+    * [Condivisione](user/articles/share.md)
     * [Download](user/articles/download.md)
-    * [Annotations](user/articles/annotations.md)
-    * [Restricted access](user/articles/restricted.md)
-* [Configuration](user/configuration/README.md)
-    * [Settings](user/configuration/settings.md)
+    * [Annotazione](user/articles/annotations.md)
+    * [Accesso ristretto](user/articles/restricted.md)
+* [Configurazione](user/configuration/README.md)
+    * [Impostazioni](user/configuration/settings.md)
     * [RSS](user/configuration/rss.md)
-    * [User Information](user/configuration/user_information.md)
+    * [Informazioni utente](user/configuration/user_information.md)
     * [Password](user/configuration/password.md)
-    * [Tagging Rules](user/configuration/tagging_rules.md)
-* [Fetch errors](user/errors_during_fetching.md)
+    * [Regole di etichetttatura](user/configuration/tagging_rules.md)
+* [Errori di recupero](user/errors_during_fetching.md)
 * [FAQ](user/faq.md)
-* [Filters](user/filters.md)
-* [Import](user/import/README.md)
+* [Filtri](user/filters.md)
+* [Importazione](user/import/README.md)
     * [Pocket](user/import/Pocket.md)
     * [Instapaper](user/import/Instapaper.md)
     * [wallabag v1](user/import/wallabagv1.md)
     * [wallabag v2](user/import/wallabagv2.md)
-* [Tags](user/tags.md)
+* [Etichette](user/tags.md)
 
 ## Apps
 
 * [Android](apps/android.md)
 
-## Administrator
+## Amministatore
 
-* [Installation](admin/installation/readme.md)
-    * [Requirements](admin/installation/requirements.md)
-    * [Installation](admin/installation/installation.md)
-    * [VirtualHosts](admin/installation/virtualhosts.md)
-    * [Right Access](admin/installation/rightaccess.md)
+* [Installazione](admin/installation/readme.md)
+    * [Requisiti](admin/installation/requirements.md)
+    * [Installazione](admin/installation/installation.md)
+    * [Host virtuali](admin/installation/virtualhosts.md)
+    * [Diritti di accesso](admin/installation/rightaccess.md)
 * [Backup](admin/backup.md)
-* [Console commands](admin/console_commands.md)
-* [Asynchronous](admin/asynchronous.md)
-* [Parameters](admin/parameters.md)
-* [Internal settings](admin/internal_settings.md)
-* [Upgrade](admin/upgrade.md)
-    * [Upgrade from 2.1 to 2.2](admin/query-upgrade-21-22.md)
+* [Comandi console](admin/console_commands.md)
+* [Compiti asincroni](admin/asynchronous.md)
+* [Parametri](admin/parameters.md)
+* [Impostazioni interne](admin/internal_settings.md)
+* [Aggiornamento](admin/upgrade.md)
+    * [Aggiornamento da 2.1 a 2.2](admin/query-upgrade-21-22.md)
 
-## Developer
+## Sviluppatore
 
 * [API](developer/api/readme.md)
     * [oAuth](developer/api/oauth.md)
-    * [Methods](developer/api/methods.md)
-    * [Resources](developer/api/resources.md)
+    * [Metodi](developer/api/methods.md)
+    * [Risorse](developer/api/resources.md)
 * [Docker](developer/docker.md)
-* [Documentation](developer/documentation.md)
+* [Documentazione](developer/documentation.md)
 * [Front-End](developer/front_end.md)
-* [Test Suite](developer/testsuite.md)
-* [Translate](developer/translate.md)
+* [Suite di test](developer/testsuite.md)
+* [Traduzione](developer/translate.md)
+* [Paywall](developer/paywall.md)

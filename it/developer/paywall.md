@@ -1,48 +1,24 @@
-Articoli dietro ad un paywall
-=============================
+# Configurare l'accesso al paywall
 
-wallabag puó acquisire articoli da siti web che usano un sistema paywall
+> **[attenzione] Importante**
+>
+> Questa è la parte tecnica a proposito del paywall. Se state cercando la sezione dedicata all'utente, si prega di leggere [questa pagina](../user/articles/restricted.md).
 
-Abilitate l'autenticazione paywall
-----------------------------------
-
-Su impostazioni interne, nella sezione **Articolo**, abilitate
-l'autenticazione per siti con paywall (con il valore 1).
-
-Configurate le credenziali in wallabag
---------------------------------------
-
-Modificate il vostro file `app/config/parameters.yml` per modificare le
-credenziali per ogni sito con paywall. Ecco un esempio di alcuni siti
-francesi:
-
-```yaml
-sites_credentials:
-    mediapart.fr: {username: "myMediapartLogin", password: "mypassword"}
-    arretsurimages.net: {username: "myASILogin", password: "mypassword"}
-```
-
-These credentials will be shared between each user of your wallabag
-instance.
-
-Fate il parsing dei file di configurazione
-------------------------------------------
-
-Leggete questa parte della documentazione \*link mancante\* per capire i
-file di configurazione.
+Leggete [questa parte della documentazione](../user/errors_during_fetching.md)
+per capire i file di configurazione, i quali si trovano sotto `vendor/j0k3r/graby-site-config/`. Per la maggior parte dei siti, questo file è già configurato: le istruzioni seguenti sono valide solo per i siti web che non sono ancora configurati.
 
 Ogni file di configurazione del parsing deve essere migliorato
 aggiungendo `requires_login`, `login_uri`, `login_username_field`,
 `login_password_field` e `not_logged_in_xpath`.
 
 Fate attenzione, il modulo di login deve essere nel contenuto della
-pagina quando wallabag lo carica. É impossibile per wallab essere
-autenticato su un sito dove il modulo di login é caricato dopo la pagina
+pagina quando wallabag lo carica. È impossibile per wallabag essere
+autenticato su un sito dove il modulo di login è caricato dopo la pagina
 (da ajax per esempio).
 
-`login_uri` é l'URL di azione del modulo (l'attributo `action` del
-modulo). `login_username_field` é l'attributo `name` nel campo di login.
-`login_password_field` é l'attributo `name` nel campo password.
+`login_uri` è l'URL di azione del modulo (l'attributo `action` del
+modulo). `login_username_field` è l'attributo `name` nel campo di login.
+`login_password_field` è l'attributo `name` nel campo password.
 
 Per esempio:
 
