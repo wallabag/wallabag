@@ -1,5 +1,4 @@
-Creare un nuovo client API
-==========================
+# Creare un nuovo client API
 
 Sul vostro account wallabag potete creare un nuovo client API presso
 questo URL <http://localhost:8000/developer/client/create>.
@@ -20,8 +19,7 @@ Client secret:
 636ocbqo978ckw0gsw4gcwwocg8044sco0w8w84cws48ggogs4
 ```
 
-Ottenere un token per il ricaricamento
-======================================
+# Ottenere un token per l'accesso
 
 Per ogni chiamata API avrete bisogno di un token. Creiamolo con questo
 comando (rimpiazzate `client_id`, `client_secret`, `username` and

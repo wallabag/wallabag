@@ -1,11 +1,9 @@
-
-Condividete i vostri articoli
------------------------------
+# Condividete i vostri articoli
 
 Quando leggete un articolo, potete condividerlo. Cliccate semplicemente
 sul bottone di condivisione:
 
-![share article](../../../img/user/share.png)
+![Condividete un articolo](../../../img/user/share.png)
 
 Ora potete condividere l'articolo:
 

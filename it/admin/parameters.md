@@ -1,16 +1,14 @@
-Qual'é il significato dei parametri?
-====================================
+# Qual'è il significato dei parametri?
 
-File parameters.yml di default
-------------------------------
+## File parameters.yml di default
 
 Ecco l'ultima versione del file app/config/parameters.yml di default.
 Assicuratevi che la vostra rispetti questa. Se non sapete quale
 parametro dovete impostare, si prega di lasciare quello di default.
 
-> **[danger] Information**
+> **[pericolo] Informazione**
 >
-> To apply changes to `parameters.yml`, you have to clear your cache by deleting everything in `var/cache` with this command: `bin/console cache:clear -e=prod`.
+> Per applicare i cambiamenti a `parameters.yml`, dovete pulire la cache eliminando tutti i contenuti della cartella `var/cache` con questo comando: `bin/console cache:clear -e=prod`.
 
 
 ```yaml
@@ -48,8 +46,7 @@ parameters:
     domain_name: https://your-wallabag-url-instance.com
 ```
 
-Significato di ogni parametro
------------------------------
+## Significato di ogni parametro
 
 ### Parametri del database
 
@@ -57,16 +54,16 @@ Significato di ogni parametro
 | ------|---------|------------ |
 | database_driver | Dovrebbe essere pdo_sqlite o pdo_mysql o pdo_pgsql  | pdo_sqlite |
 | database_host  | Host del vostro database (generalmente localhost o 127.0.0.1) | 127.0.0.1 |
-| database_port  | Porta del vostro database (potete lasciare ~ per usare quella di default) | ~ |
+| database_port  | Porta del vostro database (potete lasciare ``~`` per usare quella di default) | ~ |
 | database_name | Nome del vostro database | symfony |
 | database_user | L'utente che puó scrivere su questo database | root |
 | database_password | Password di quell'utente | ~ |
 | database_path | Solo per SQLite, definite dove mettere il file del database. Lasciatelo vuoto se usate un altro database | `%kernel.root_dir%/ ../data/db/wallabag.sqlite` |
-| database_table_prefix | Tutte le tavole di wallabag avranno quella stringa come prefisso. Potete includere un _ per maggior chiarezza | wallabag_ |
+| database_table_prefix | Tutte le tavole di wallabag avranno quella stringa come prefisso. Potete includere un ``_`` per maggior chiarezza | wallabag_ |
 | database_socket | Se il vostro database usa un socket al posto di tcp, inserite il percorso del socket (altri parametri di connessione saranno ignorati) | null |
 | database_charset | Per PostgreSQL & SQLite dovreste usare utf8, per MySQL usate utf8mb4 per gestire emoji ed altri caratteri speciali | utf8mb4 |
 
-## Configurazione per inviare email
+## Parametri del mailer
 
 | Nome  | Descrizione | Default |
 | -----|-------------|-------- |
@@ -80,7 +77,7 @@ Significato di ogni parametro
 | Nome  | Descrizione | Default |
 | -----|-------------|-------- |
 | locale | Lingua di default della vostra istanza di wallabag (come en, fr, es, etc.) | en |
-| secret | Questa é una stringa che dovrebbe essere unica per la vostra applicazione ed é usata comunemente per aggiungere piú entropia alle operazioni di sicurezza. | ovmpmAWXRCabNlMgzlzFXDYmCFfzGv |
+| secret | Questa é una stringa che dovrebbe essere unica per la vostra applicazione ed è usata comunemente per aggiungere più entropia alle operazioni di sicurezza. | ovmpmAWXRCabNlMgzlzFXDYmCFfzGv |
 | twofactor_auth | true per abilitare l'autenticazione a due fattori | true |
 | twofactor_sender | Email del mittente per ricevere il codice a due fattori | no-reply@wallabag.org |
 | fosuser_registration | true per abilitare la registrazione pubblica | true |
@@ -89,7 +86,7 @@ Significato di ogni parametro
 | rss_limit | Limite per i feed RSS | 50 |
 | domain_name | URL completo della vostra istanza di wallabag (senza la barra alla fine) | https://la-vostra-istanza-di-wallabag.it |
 
-## Configurazione di RabbitMQ
+## Opzioni di RabbitMQ
 
 | Nome  | Descrizione | Default |
 | -----|-------------|-------- |
@@ -98,7 +95,7 @@ Significato di ogni parametro
 | rabbitmq_user | Utente che puó leggere le code | guest |
 | rabbitmq_password | Password di quell'utente | guest |
 
-## Configurazione di Redis
+## Opzioni di Redis
 
 | Nome  | Descrizione | Default |
 | -----|-------------|-------- |
@@ -106,4 +103,4 @@ Significato di ogni parametro
 | redis_host | IP o hostname del server bersaglio (ignorato per lo schema unix) | localhost |
 | redis_port | Porta TCP/IP del server bersaglio (ignorato per lo schema unix) | 6379 |
 | redis_path | Percorso del file domain socket di UNIX usato quando ci si connette a Redis usando domain socket di UNIX | null
-| redis_password | Password defined in the Redis server configuration (parameter `requirepass` in `redis.conf`) | null
+| redis_password | Password definita nella configurazione del server Redis (parametro `requirepass` su `redis.conf`) | null

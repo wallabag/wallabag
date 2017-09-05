@@ -1,11 +1,9 @@
+# Informazioni utente
 
-Informazioni dell'utente
-------------------------
-
-Potete cambiare il vostro nome, il vostro indirizzo email e abilitare
+Potete cambiare il vostro nome, il vostro indirizzo e-mail e abilitare
 l'`Autenticazione a due fattori`.
 
-### Autenticazione a due fattori (2FA)
+## Autenticazione a due fattori (2FA)
 
 > L'autenticazione a due fattori (conosciuta anche come 2FA) é una
 > tecnologia brevettata nel 1984 che offre l'identificazione degli
@@ -23,8 +21,8 @@ Se abilitate la 2FA, ogni volta che vogliate accedere a wallabag,
 riceverete un codice via email. Dovrete inserire il codice nel seguente
 modulo.
 
-![Two factor authentication](../../../img/user/2FA_form.png)
+![Autenticazine a due fattori](../../../img/user/2FA_form.png)
 
 Se non volete ricevere il codice ogni volta che vogliate accedere,
-potete spuntare la casella `I'm on a trusted computer`: wallabag vi
+potete spuntare la casella `Sono su un computer fidato`: wallabag vi
 ricorderá per 15 giorni.

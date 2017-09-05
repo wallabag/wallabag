@@ -2,7 +2,7 @@ Compiti Asincroni
 =================
 
 Per avviare compiti asincroni (utile ad esempio per grandi
-importazioni), Possiamo usare RabbitMQ o Redis.
+importazioni), Potete usare RabbitMQ o Redis.
 
 Installare RabbitMQ per compiti asincroni
 -----------------------------------------
@@ -53,8 +53,8 @@ valore 1).
 
 ### Avviare RabbitMQ consumer
 
-Dipendendo da quale servizio vogliate importare, dovrete abilitare uno
-(o più se volete supportare molti) o più cronjob:
+Dipendendo da quale servizio vogliate importare, dovete abilitare uno
+o più (se volete supportare molti) cronjob:
 
 ```bash
 # per importare da Pocket
@@ -83,7 +83,7 @@ Installare Redis per compiti asincroni
 --------------------------------------
 
 Per avviare compiti asincroni (utile ad esempio per grandi
-importazioni), Possiamo usare Redis.
+importazioni), possiamo usare Redis.
 
 ### Requisiti
 
@@ -122,7 +122,7 @@ Su Strumenti, nella sezione **Importa**, abilitate Redis (con il valore
 ### Avviare Redis consumer
 
 Dipendendo da quale servizio vogliate importare, dovrete abilitare uno
-(o più se volete supportare molti) o più cronjob:
+o più (se volete supportare molti) cronjob:
 
 ```bash
 # per importare da Pocket

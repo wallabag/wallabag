@@ -1,4 +1,4 @@
-Contribuite a questa documentazione
+Contribuire a questa documentazione
 ===================================
 
 Le fonti della nostra documentazione sono qui

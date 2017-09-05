@@ -1,18 +1,16 @@
-Eseguite wallabag in docker-compose
-===================================
+# Eseguire wallabag in docker-compose
 
-Per eseguire la vostra propria istanza di sviluppo di wallabag, dovreste
+Per eseguire la vostra istanza di sviluppo di wallabag, dovreste
 usare i file docker compose preconfigurati.
 
 Requisiti
 ---------
 
-Assicuratevi di avere Docker
-&lt;https://docs.docker.com/installation/ubuntulinux/&gt; e [Docker
+Assicuratevi di avere [Docker](https://docs.docker.com/installation/ubuntulinux/) e [Docker
 Compose](https://docs.docker.com/compose/install/) disponibili sul
 vostro sistema e aggiornati.
 
-Cambiate DBMS
+Cambiare DBMS
 -------------
 
 Per default, wallabag inizierá con un database SQLite. Visto che
@@ -34,14 +32,14 @@ Per far continuare ad eseguire i comandi Symfony sul vostro host (come
     `SYMFONY__ENV__DATABASE_HOST`.
 -   creare un `127.0.0.1 rdbms` sul vostro file di sistema `hosts`
 
-Eseguite wallabag
+Eseguire wallabag
 -----------------
 
 1.  Fate un fork o clonate il progetto
-2.  Modificate `app/config/parameters.yml` per rimpiazzare le proprietá di `database_*` con quelle commentate (con valori con prefisso `env.`)
+2.  Modificate `app/config/parameters.yml` per rimpiazzare le proprietá di `database_*` con quelle presenti nei commenti (con valori con prefisso `env.`)
 3.  `composer install` per installare le dipendenze del progetto
 4.  `php bin/console wallabag:install` per creare lo schema
 5.  `docker-compose up` per eseguire i containers
 6.  Infine, andate su <http://localhost:8080/> per trovare il vostro wallabag appena installato.
 
-Durante i vari passi potreste incontrare problemi di permessi UNIX, percorsi sbagliati nella cache generata, etc... Operazioni come cambiare i file della cache o cambiare i proprietari dei file potrebbero essere richiesto frequentemente, per cui non abbiate paura!
+Durante i vari passi potreste incontrare problemi di permessi UNIX, percorsi sbagliati nella cache generata, etc... Operazioni come cambiare i file della cache o cambiare i proprietari dei file potrebbero essere richieste frequentemente, per cui non abbiate paura!

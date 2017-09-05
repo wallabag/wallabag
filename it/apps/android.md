@@ -1,77 +1,73 @@
-Applicazione Android
-====================
+# Applicazione Android
 
-Scopo di questo documento
--------------------------
+## Scopo di questo documento
 
 Questo documento spiega come configurare la vostra applicazione Android
-in modo che funzioni con la vostra istanza di wallabag. Non vi é
+in modo che funzioni con la vostra istanza di wallabag. Non vi è
 differenza in questa procedura sia per wallabag v1 che per v2.
 
-Passi per configurare la vostra app
------------------------------------
+## Passi per configurare la vostra app
 
 Quando aprirete l'app per la prima volta, vedrete una schermata di
 benvenuto dove vi si consiglia per prima cosa di configurare l'app per
 la vostra istanza di wallabag.
 
-![Welcome screen](../../img/user/android_welcome_screen.en.png)
+![Schermata di benvenuto](../../img/user/android_welcome_screen.en.png)
 
 Confermate semplicemente quel messaggio e verrete reindirizzati alla
 schermata delle impostazioni.
 
-![Settings screen](../../img/user/android_configuration_screen.en.png)
+![Schermata delle impostazioni](../../img/user/android_configuration_screen.en.png)
 
 Inserite i vostri dati di wallabag. Dovrete inserire il vostro indirizzo
-di wallabag. **É importante che questo URL non finisca con una barra**.
+di wallabag. **È importante che questo URL non finisca con una barra**.
 Inserite anche le vostre credenziali nei campi user name e password.
 
-![Filled in settings](../../img/user/android_configuration_filled_in.en.png)
+![Impostazioni inserite](../../img/user/android_configuration_filled_in.en.png)
 
 Dopo aver completato l'inserimento dei dati, premete il bottone
 Connection test e aspettate che il test finisca.
 
-![Connection test with your wallabag data](../../img/user/android_configuration_connection_test.en.png)
+![Test di connessione con i vostri dati di wallabag](../../img/user/android_configuration_connection_test.en.png)
 
 Il test di connessione dovrebbe finire con successo. In caso contrario,
 dovrete prima risolvere questo problema fino a che possiate procedere.
 
-![Connection test successful](../../img/user/android_configuration_connection_test_success.en.png)
+![Test di connessione avvenuto con successo](../../img/user/android_configuration_connection_test_success.en.png)
 
-Dopo che il test sará avvenuto con successo, potrete premere il bottone
-per ottenere le credenziali del vostro feed. L'app cercherá di
+Dopo che il test sarà avvenuto con successo, potrete premere il bottone
+per ottenere le credenziali del vostro feed. L'app cercherà di
 connettersi alla vostra istanza di wallabag e ottenere l'id utente e il
 token corrispondente per i feed.
 
-![Getting the feed credentials](../../img/user/android_configuration_get_feed_credentials.en.png)
+![Ottenendo le credenziali del feed](../../img/user/android_configuration_get_feed_credentials.en.png)
 
-Quando il processo di ottenimento delle credenziali del vostro feed sará
+Quando il processo di ottenimento delle credenziali del vostro feed sarà
 concluso con successo, vedrete un messaggio toast, il quale avviserá che
 l'id utente ed il token sono stati inseriti nel modulo.
 
-![Getting feed credentials successful](../../img/user/android_configuration_feed_credentials_automatically_filled_in.en.png)
+![Ottenimendo delle credenziali del feed avvenuto con successo](../../img/user/android_configuration_feed_credentials_automatically_filled_in.en.png)
 
 Ora dovrete scorrere fino alla fine del menu delle impostazioni.
 Ovviamente potrete cambiare le impostazioni in base alle vostre
 preferenze. Terminate la configurazione della vostra app premendo il
 bottone per il salvataggio.
 
-![Bottom of the settings screen](../../img/user/android_configuration_scroll_bottom.en.png)
+![Parte finale della schermata delle impostazioni](../../img/user/android_configuration_scroll_bottom.en.png)
 
-Dopo aver premuto il bottone apparirá la seguente schermata. L'app
-proporrá di iniziare il processo di sincronizzazione per aggiornare i
-vostri feed ed articoli. É raccomandato accettare quest'azione e premere
-Sí.
+Dopo aver premuto il bottone apparirà la seguente schermata. L'app
+proporrà di iniziare il processo di sincronizzazione per aggiornare i
+vostri feed ed articoli. È raccomandato accettare quest'azione e premere
+Sì.
 
-![Settings saved the first time](../../img/user/android_configuration_saved_feed_update.en.png)
+![Impostazioni salvate per la prima volta](../../img/user/android_configuration_saved_feed_update.en.png)
 
-Alla fine, dopo che la sincronizzazione sará avvenuta con successo,
-apparirá la lista degli articoli non letti.
+Alla fine, dopo che la sincronizzazione sarà avvenuta con successo,
+apparirà la lista degli articoli non letti.
 
-![Filled article list cause feeds successfully synchronized](../../img/user/android_unread_feed_synced.en.png)
+![Lista degli articoli piena poiché i feed sono stati sincronizzati con successo](../../img/user/android_unread_feed_synced.en.png)
 
-Limiti conosciuti
------------------
+## Limiti conosciuti
 
 ### Autenticazione a due fattori (2FA)
 
@@ -92,11 +88,10 @@ oggetti nel vostro feed RSS.
 
 Se potete raggiungere la vostra istanza web di wallabag via HTTPS,
 dovreste usare quest'ultimo, in particolar modo se il vostro URL HTTP vi
-reindirizza a quello HTTPS. Attualmente l'app non puó gestire
+reindirizza a quello HTTPS. Attualmente l'app non può gestire
 propriamente il reindirizzamento.
 
-Riferimenti
------------
+## Riferimenti
 
 -   [Codice sorgente dell'applicazione
     Android](https://github.com/wallabag/android-app)

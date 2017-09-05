@@ -15,8 +15,8 @@ Database
 --------
 
 Per il fatto che wallabag supporta vari tipi di database, il modo di
-eseguire backup dipende dal database che stiate usando, quindi dovrete
-fare riferimento alla documentazione del venditore.
+eseguire backup dipende dal database che state usando, quindi dovrete
+fare riferimento alla documentazione del fornitore.
 
 Ecco alcuni esempi:
 

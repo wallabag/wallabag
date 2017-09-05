@@ -7,13 +7,12 @@ Documentazione di wallabag
 lasciando solamente il contenuto. Elementi come comandi di navigazione o
 pubblicità sono rimossi.
 
-La documentazione principale per quest'applicazione è organizzata in un
-paio di sezioni:
+La documentazione principale per quest'applicazione è organizzata in quattro sezioni:
 
--   user-related docs
--   apps-related docs
--   administator-realted docs
--   developer-related docs
+-   Documentazione utente
+-   Documentazione app
+-   Documentazione amministratore
+-   Documentazione sviluppatore
 
 La documentazione è disponibile anche in altre lingue:
 
