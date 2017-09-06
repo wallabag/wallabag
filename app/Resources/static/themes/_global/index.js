@@ -9,7 +9,7 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import 'lato-font/css/lato-font.css';
 import './global.scss';
 
-/* Shortcuts*/
+/* Shortcuts */
 import './js/shortcuts/entry';
 import './js/shortcuts/main';
 

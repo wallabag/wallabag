@@ -1,6 +1,6 @@
 import Mousetrap from 'mousetrap';
 
-/** Shortcuts **/
+/* Shortcuts */
 
 /* Go to */
 Mousetrap.bind('g u', () => { window.location.href = Routing.generate('homepage'); });
