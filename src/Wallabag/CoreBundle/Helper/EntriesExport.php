@@ -2,6 +2,7 @@
 
 namespace Wallabag\CoreBundle\Helper;
 
+use Html2Text\Html2Text;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use PHPePub\Core\EPub;
@@ -408,7 +409,8 @@ class EntriesExport
         $bar = str_repeat('=', 100);
         foreach ($this->entries as $entry) {
             $content .= "\n\n" . $bar . "\n\n" . $entry->getTitle() . "\n\n" . $bar . "\n\n";
-            $content .= trim(preg_replace('/\s+/S', ' ', strip_tags($entry->getContent()))) . "\n\n";
+            $html = new Html2Text($entry->getContent(), ['do_links' => 'none', 'width' => 100]);
+            $content .= $html->getText();
         }
 
         return Response::create(

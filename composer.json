@@ -84,7 +84,8 @@
         "symfony/dom-crawler": "^3.1",
         "friendsofsymfony/jsrouting-bundle": "^1.6",
         "bdunogier/guzzle-site-authenticator": "^1.0.0@dev",
-        "defuse/php-encryption": "^2.1"
+        "defuse/php-encryption": "^2.1",
+        "html2text/html2text": "^4.1"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",
