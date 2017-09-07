@@ -184,13 +184,13 @@ class RssControllerTest extends WallabagCoreTestCase
         $em->flush();
 
         $client = $this->getClient();
-        $client->request('GET', '/admin/SUPERTOKEN/tags/foo-bar.xml');
+        $client->request('GET', '/admin/SUPERTOKEN/tags/foo.xml');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $this->validateDom($client->getResponse()->getContent(), 'tag (foo bar)', 'tags/foo-bar');
+        $this->validateDom($client->getResponse()->getContent(), 'tag (foo)', 'tags/foo');
 
-        $client->request('GET', '/admin/SUPERTOKEN/tags/foo-bar.xml?page=3000');
+        $client->request('GET', '/admin/SUPERTOKEN/tags/foo.xml?page=3000');
         $this->assertSame(302, $client->getResponse()->getStatusCode());
     }
 }
