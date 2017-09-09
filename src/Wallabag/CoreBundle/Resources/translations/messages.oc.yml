@@ -244,6 +244,7 @@ entry:
         page_title: 'Modificar un article'
         title_label: 'Títol'
         url_label: 'Url'
+        # origin_url_label: 'Origin url'
         save_label: 'Enregistrar'
     public:
         shared_by_wallabag: "Aqueste article es estat partejat per <a href='%wallabag_instance%'>wallabag</a>"

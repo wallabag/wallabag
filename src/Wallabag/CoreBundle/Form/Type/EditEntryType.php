@@ -22,6 +22,11 @@ class EditEntryType extends AbstractType
                 'required' => false,
                 'label' => 'entry.edit.url_label',
             ])
+            ->add('origin_url', TextType::class, [
+                'required' => false,
+                'property_path' => 'originUrl',
+                'label' => 'entry.edit.origin_url_label',
+            ])
             ->add('save', SubmitType::class, [
                 'label' => 'entry.edit.save_label',
             ])

@@ -244,6 +244,7 @@ entry:
         page_title: 'Editar un artículo'
         title_label: 'Título'
         url_label: 'URL'
+        # origin_url_label: 'Origin url'
         save_label: 'Guardar'
     public:
         shared_by_wallabag: "Este artículo se ha compartido con <a href='%wallabag_instance%'>wallabag</a>"

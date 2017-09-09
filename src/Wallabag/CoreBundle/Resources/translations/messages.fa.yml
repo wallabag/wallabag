@@ -244,6 +244,7 @@ entry:
         page_title: 'ویرایش مقاله'
         title_label: 'عنوان'
         url_label: 'نشانی'
+        # origin_url_label: 'Origin url'
         save_label: 'ذخیره'
     public:
         # shared_by_wallabag: "This article has been shared by %username% with <a href='%wallabag_instance%'>wallabag</a>"
