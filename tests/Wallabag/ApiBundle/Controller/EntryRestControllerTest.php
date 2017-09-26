@@ -308,6 +308,13 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
 
+    public function testGetTaggedEntriesWithBadParams()
+    {
+        $this->client->request('GET', '/api/entries', ['tags' => ['foo','bar']]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+    }
+
     public function testGetDatedEntries()
     {
         $this->client->request('GET', '/api/entries', ['since' => 1443274283]);
