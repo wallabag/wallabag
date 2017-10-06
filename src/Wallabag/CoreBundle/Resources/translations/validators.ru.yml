@@ -1,0 +1,6 @@
+validator:
+    password_must_match: 'Пароли должны совпадать.'
+    password_too_short: 'Пароль должен быть длиннее 8 символов'
+    password_wrong_value: 'Неправильный текущий пароль'
+    item_per_page_too_high: 'Это, безусловно, убьет приложение'
+    rss_limit_too_high: 'Это, безусловно, убьет приложение'
