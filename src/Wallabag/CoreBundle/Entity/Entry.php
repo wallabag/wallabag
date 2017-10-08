@@ -180,11 +180,11 @@ class Entry
     /**
      * @var int
      *
-     * @ORM\Column(name="reading_time", type="integer", nullable=true)
+     * @ORM\Column(name="reading_time", type="integer", nullable=false)
      *
      * @Groups({"entries_for_user", "export_all"})
      */
-    private $readingTime;
+    private $readingTime = 0;
 
     /**
      * @var string
