@@ -134,6 +134,7 @@ services:
         arguments:
             - '%domain_name%'
             - src/Wallabag/CoreBundle/Resources/public/themes/_global/img/appicon/apple-touch-icon-152.png
+            - "@translator"
 
     wallabag.operator.array.matches:
         class: Wallabag\CoreBundle\Operator\PHP\Matches

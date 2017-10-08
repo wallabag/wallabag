@@ -397,6 +397,9 @@ tag:
         add: 'Ajustar'
         placeholder: "Podètz ajustar mai qu'una etiqueta, separadas per de virgula."
 
+# export:
+#     footer_template: '<div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p></div>'
+
 import:
     page_title: 'Importar'
     page_description: "Benvenguda sus l'aisina de migracion de wallabag. Causissètz çai-jos lo servici dempuèi lo qual volètz migrar."
