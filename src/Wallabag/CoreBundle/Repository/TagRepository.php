@@ -3,6 +3,7 @@
 namespace Wallabag\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Wallabag\CoreBundle\Entity\Tag;
 
 class TagRepository extends EntityRepository
 {
@@ -62,6 +63,27 @@ class TagRepository extends EntityRepository
     }
 
     /**
+     * Find all tags (flat) per user with nb entries.
+     *
+     * @param int $userId
+     *
+     * @return array
+     */
+    public function findAllFlatTagsWithNbEntries($userId)
+    {
+        return $this->createQueryBuilder('t')
+            ->select('t.id, t.label, t.slug, count(e.id) as nbEntries')
+            ->distinct(true)
+            ->leftJoin('t.entries', 'e')
+            ->where('e.user = :userId')
+            ->groupBy('t.id')
+            ->orderBy('t.slug')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getArrayResult();
+    }
+
+    /**
      * Used only in test case to get a tag for our entry.
      *
      * @return Tag
@@ -75,5 +97,25 @@ class TagRepository extends EntityRepository
             ->setMaxResults(1)
             ->getQuery()
             ->getSingleResult();
+    }
+
+    public function findForArchivedArticlesByUser($userId)
+    {
+        $ids = $this->createQueryBuilder('t')
+            ->select('t.id')
+            ->leftJoin('t.entries', 'e')
+            ->where('e.user = :userId')->setParameter('userId', $userId)
+            ->andWhere('e.isArchived = true')
+            ->groupBy('t.id')
+            ->orderBy('t.slug')
+            ->getQuery()
+            ->getArrayResult();
+
+        $tags = [];
+        foreach ($ids as $id) {
+            $tags[] = $this->find($id);
+        }
+
+        return $tags;
     }
 }

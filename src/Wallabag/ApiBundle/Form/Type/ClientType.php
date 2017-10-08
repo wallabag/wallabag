@@ -5,8 +5,8 @@ namespace Wallabag\ApiBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,7 +16,11 @@ class ClientType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, ['label' => 'developer.client.form.name_label'])
-            ->add('redirect_uris', UrlType::class, ['required' => false, 'label' => 'developer.client.form.redirect_uris_label'])
+            ->add('redirect_uris', UrlType::class, [
+                'required' => false,
+                'label' => 'developer.client.form.redirect_uris_label',
+                'property_path' => 'redirectUris',
+            ])
             ->add('save', SubmitType::class, ['label' => 'developer.client.form.save_label'])
         ;
 

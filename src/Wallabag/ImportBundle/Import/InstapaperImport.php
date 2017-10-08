@@ -68,6 +68,14 @@ class InstapaperImport extends AbstractImport
                 continue;
             }
 
+            // last element in the csv is the folder where the content belong
+            // BUT it can also be the status (since status = folder in Instapaper)
+            // and we don't want archive, unread & starred to become a tag
+            $tags = null;
+            if (false === in_array($data[3], ['Archive', 'Unread', 'Starred'], true)) {
+                $tags = [$data[3]];
+            }
+
             $entries[] = [
                 'url' => $data[0],
                 'title' => $data[1],
@@ -75,6 +83,7 @@ class InstapaperImport extends AbstractImport
                 'is_archived' => $data[3] === 'Archive' || $data[3] === 'Starred',
                 'is_starred' => $data[3] === 'Starred',
                 'html' => false,
+                'tags' => $tags,
             ];
         }
         fclose($handle);
@@ -116,7 +125,15 @@ class InstapaperImport extends AbstractImport
         $entry->setTitle($importedEntry['title']);
 
         // update entry with content (in case fetching failed, the given entry will be return)
-        $entry = $this->fetchContent($entry, $importedEntry['url'], $importedEntry);
+        $this->fetchContent($entry, $importedEntry['url'], $importedEntry);
+
+        if (!empty($importedEntry['tags'])) {
+            $this->tagsAssigner->assignTagsToEntry(
+                $entry,
+                $importedEntry['tags'],
+                $this->em->getUnitOfWork()->getScheduledEntityInsertions()
+            );
+        }
 
         $entry->setArchived($importedEntry['is_archived']);
         $entry->setStarred($importedEntry['is_starred']);

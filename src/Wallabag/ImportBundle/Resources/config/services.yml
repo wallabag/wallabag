@@ -20,6 +20,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "@wallabag_core.tags_assigner"
             - "@event_dispatcher"
         calls:
             - [ setClient, [ "@wallabag_import.pocket.client" ] ]
@@ -32,7 +33,10 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "@wallabag_core.tags_assigner"
             - "@event_dispatcher"
+            - "%wallabag_core.fetching_error_message_title%"
+            - "%wallabag_core.fetching_error_message%"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
@@ -43,6 +47,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "@wallabag_core.tags_assigner"
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
@@ -54,6 +59,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "@wallabag_core.tags_assigner"
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
@@ -65,6 +71,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "@wallabag_core.tags_assigner"
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
@@ -76,6 +83,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "@wallabag_core.tags_assigner"
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
@@ -87,6 +95,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "@wallabag_core.tags_assigner"
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
@@ -97,6 +106,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@wallabag_core.content_proxy"
+            - "@wallabag_core.tags_assigner"
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]

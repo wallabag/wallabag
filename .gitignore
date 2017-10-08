@@ -13,6 +13,7 @@
 /bin/*
 !/bin/console
 !/bin/symfony_requirements
+.php_cs.cache
 
 # Parameters
 /app/config/parameters.yml
@@ -27,6 +28,7 @@ web/bundles/*
 !web/bundles/wallabagcore
 /web/assets/images/*
 !web/assets/images/.gitkeep
+web/bundles/wallabagcore/*.dev.js
 
 # Build
 /app/build
@@ -51,3 +53,8 @@ bin
 app/Resources/build/
 !/src/Wallabag/CoreBundle/Resources/public
 /src/Wallabag/CoreBundle/Resources/public/*
+
+# Test-generated files
+admin-export.json
+specialexport.json
+/data/site-credentials-secret-key.txt

@@ -7,37 +7,60 @@
     <div class="row">
         <div class="col s12">
             <div class="card-panel">
+                {% if users.getNbPages > 1 %}
+                    {{ pagerfanta(users, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+                {% endif %}
                 <div class="row">
-                    <div class="input-field col s12">
+                    <div class="col s6">
                         <p class="help">{{ 'user.description'|trans|raw }}</p>
-
-                        <table class="bordered">
-                            <thead>
-                                <tr>
-                                    <th>{{ 'user.form.username_label'|trans }}</th>
-                                    <th>{{ 'user.form.email_label'|trans }}</th>
-                                    <th>{{ 'user.form.last_login_label'|trans }}</th>
-                                    <th>{{ 'user.list.actions'|trans }}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {% for user in users %}
-                                <tr>
-                                    <td>{{ user.username }}</td>
-                                    <td>{{ user.email }}</td>
-                                    <td>{% if user.lastLogin %}{{ user.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
-                                    <td>
-                                        <a href="{{ path('user_edit', { 'id': user.id }) }}">{{ 'user.list.edit_action'|trans }}</a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                        <br />
-                        <p>
-                            <a href="{{ path('user_new') }}" class="waves-effect waves-light btn">{{ 'user.list.create_new_one'|trans }}</a>
-                        </p>
                     </div>
+                    <div class="col s6">
+                        <div class="input-field">
+                            <form name="search_users" method="GET" action="{{ path('user_index')}}">
+                                {% if form_errors(searchForm) %}
+                                    <span class="black-text">{{ form_errors(searchForm) }}</span>
+                                {% endif %}
+
+                                {% if form_errors(searchForm.term) %}
+                                    <span class="black-text">{{ form_errors(searchForm.term) }}</span>
+                                {% endif %}
+
+                                {{ form_widget(searchForm.term, { 'attr': {'autocomplete': 'off', 'placeholder': 'user.search.placeholder'} }) }}
+
+                                {{ form_rest(searchForm) }}
+                            </form>
+                        </div>
+                    </div>
+
+                    <table class="bordered">
+                        <thead>
+                            <tr>
+                                <th>{{ 'user.form.username_label'|trans }}</th>
+                                <th>{{ 'user.form.email_label'|trans }}</th>
+                                <th>{{ 'user.form.last_login_label'|trans }}</th>
+                                <th>{{ 'user.list.actions'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{% if user.lastLogin %}{{ user.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                <td>
+                                    <a href="{{ path('user_edit', { 'id': user.id }) }}">{{ 'user.list.edit_action'|trans }}</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <br />
+                    <p>
+                        <a href="{{ path('user_new') }}" class="waves-effect waves-light btn">{{ 'user.list.create_new_one'|trans }}</a>
+                    </p>
+                    {% if users.getNbPages > 1 %}
+                        {{ pagerfanta(users, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -3,8 +3,8 @@
 namespace Wallabag\ApiBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Wallabag\ApiBundle\Entity\Client;
 use Wallabag\ApiBundle\Form\Type\ClientType;
 
@@ -75,7 +75,7 @@ class DeveloperController extends Controller
      */
     public function deleteClientAction(Client $client)
     {
-        if (null === $this->getUser() || $client->getUser()->getId() != $this->getUser()->getId()) {
+        if (null === $this->getUser() || $client->getUser()->getId() !== $this->getUser()->getId()) {
             throw $this->createAccessDeniedException('You can not access this client.');
         }
 

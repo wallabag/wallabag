@@ -15,11 +15,11 @@ shaarli_url: نشانی Shaarli، اگر فعال بود
 share_diaspora: فعال‌سازی هم‌رسانی به Diaspora
 share_mail:  فعال‌سازی هم‌رسانی با ایمیل
 share_shaarli:  فعال‌سازی هم‌رسانی به Shaarli
+share_scuttle:  فعال‌سازی هم‌رسانی به Scuttle
 share_twitter:  فعال‌سازی هم‌رسانی به Twitter
 share_unmark:  فعال‌سازی هم‌رسانی به Unmark.it
 show_printlink: نمایش پیوندی برای چاپ مطلب
 wallabag_support_url: نشانی صفحهٔ پشتیبانی wallabag
-wallabag_url: نشانی صفحهٔ wallabag *شما*
 entry: "مقاله"
 export: "برون‌سپاری"
 import: "درون‌ریزی"
@@ -33,3 +33,4 @@ modify_settings: "اعمال"
 # share_public: Allow public url for entries
 # download_images_enabled: Download images locally
 # restricted_access: Enable authentication for websites with paywall
+# api_user_registration: Enable user to be registered using the API

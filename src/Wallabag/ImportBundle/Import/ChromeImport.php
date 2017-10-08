@@ -45,7 +45,7 @@ class ChromeImport extends BrowserImport
             'created_at' => substr($entry['date_added'], 0, 10),
         ];
 
-        if (array_key_exists('tags', $entry) && $entry['tags'] != '') {
+        if (array_key_exists('tags', $entry) && $entry['tags'] !== '') {
             $data['tags'] = $entry['tags'];
         }
 

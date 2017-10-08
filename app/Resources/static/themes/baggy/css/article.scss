@@ -1,0 +1,165 @@
+
+#article {
+  width: 70%;
+  margin-bottom: 3em;
+  text-align: justify;
+
+  .tags {
+    margin-bottom: 1em;
+  }
+
+  i {
+    font-style: normal;
+  }
+
+  h1 {
+    text-align: left;
+  }
+
+  h2::after {
+    content: none;
+  }
+
+  h2,
+  h3,
+  h4 {
+    text-transform: none;
+  }
+}
+
+blockquote {
+  border: 1px solid #999;
+  background-color: #fff;
+  padding: 1em;
+  margin: 0;
+}
+
+.topPosF {
+  position: fixed;
+  right: 20%;
+  bottom: 2em;
+  font-size: 1.5em;
+}
+
+#article_toolbar {
+  margin-bottom: 1em;
+
+  li {
+    display: inline-block;
+    margin: 3px auto;
+  }
+
+  a {
+    background-color: #000;
+    padding: 0.3em 0.5em 0.2em;
+    color: #fff;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      background-color: #999;
+    }
+  }
+}
+
+#nav-btn-add-tag {
+  cursor: pointer;
+}
+
+.shaarli::before {
+  content: "*";
+}
+
+.return {
+  text-decoration: none;
+  margin-top: 1em;
+  display: block;
+}
+
+.return::before {
+  margin-right: 0.5em;
+}
+
+.notags {
+  font-style: italic;
+  color: #999;
+}
+
+.icon-rss {
+  background-color: #000;
+  color: #fff;
+  padding: 0.2em 0.5em;
+
+  &::before {
+    position: relative;
+    top: 2px;
+  }
+}
+
+.list-tags {
+  li {
+    margin-bottom: 0.5em;
+  }
+
+  .icon-rss:hover,
+  .icon-rss:focus {
+    background-color: #fff;
+    color: #000;
+    text-decoration: none;
+  }
+
+  a {
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+}
+
+pre code {
+  font-family: "Courier New", Courier, monospace;
+}
+
+#filters {
+  position: fixed;
+  width: 20%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 30px 30px 15px 15px;
+  border-left: 1px #333 solid;
+  z-index: 12;
+  min-width: 300px;
+
+  form .filter-group {
+    margin: 5px;
+  }
+}
+
+#download-form {
+  position: fixed;
+  width: 10%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 30px 30px 15px 15px;
+  border-left: 1px #333 solid;
+  z-index: 12;
+  min-width: 200px;
+
+  li {
+    display: block;
+    padding: 0.5em 2em 0.5em 1em;
+    color: #fff;
+    position: relative;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 400;
+    font-family: PT Sans, sans-serif;
+    transition: all 0.5s ease;
+  }
+}

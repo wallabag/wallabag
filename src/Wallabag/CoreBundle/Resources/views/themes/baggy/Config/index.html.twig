@@ -82,7 +82,7 @@
         <fieldset class="w500p inline">
             <div class="row">
                 <h3>{{ 'config.form_settings.android_configuration'|trans }}</h3>
-                <a href="wallabag://{{ app.user.username }}@{{ wallabag_url }}" >Touch here to prefill your Android application</a>
+                <a href="wallabag://{{ app.user.username }}@{{ wallabag_url }}">{{ 'config.form_settings.android_instruction' | trans }}</a>
                 <br/>
                 <img id="androidQrcode" />
                 <script>
@@ -106,7 +106,7 @@
 
         <fieldset class="w500p inline">
             <div class="row">
-                <label>Rss token</label>
+                <label>{{ 'config.form_rss.token_label'|trans }}</label>
                 {% if rss.token %}
                     {{ rss.token }}
                 {% else %}
@@ -128,9 +128,10 @@
             <div class="row">
                 <label>{{ 'config.form_rss.rss_links'|trans }}</label>
                 <ul>
-                    <li><a href="{{ path('unread_rss', {'username': rss.username, 'token': rss.token}) }}">unread</a></li>
-                    <li><a href="{{ path('starred_rss', {'username': rss.username, 'token': rss.token}) }}">fav</a></li>
-                    <li><a href="{{ path('archive_rss', {'username': rss.username, 'token': rss.token}) }}">archives</a></li>
+                    <li><a href="{{ path('unread_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.unread'|trans }}</a></li>
+                    <li><a href="{{ path('starred_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.starred'|trans }}</a></li>
+                    <li><a href="{{ path('archive_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.archive'|trans }}</a></li>
+                    <li><a href="{{ path('all_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.all'|trans }}</a></li>
                 </ul>
             </div>
         </fieldset>
@@ -197,6 +198,11 @@
                 <li>
                     <a href="{{ path('config_reset', { type: 'tags'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
                         {{ 'config.reset.tags'|trans }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('config_reset', { type: 'archived'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                        {{ 'config.reset.archived'|trans }}
                     </a>
                 </li>
                 <li>

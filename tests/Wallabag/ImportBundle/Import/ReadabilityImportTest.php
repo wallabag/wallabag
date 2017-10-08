@@ -2,14 +2,14 @@
 
 namespace Tests\Wallabag\ImportBundle\Import;
 
-use Wallabag\ImportBundle\Import\ReadabilityImport;
-use Wallabag\UserBundle\Entity\User;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\ImportBundle\Redis\Producer;
-use Monolog\Logger;
-use Monolog\Handler\TestHandler;
-use Simpleue\Queue\RedisQueue;
 use M6Web\Component\RedisMock\RedisMockFactory;
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
+use Simpleue\Queue\RedisQueue;
+use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\ImportBundle\Import\ReadabilityImport;
+use Wallabag\ImportBundle\Redis\Producer;
+use Wallabag\UserBundle\Entity\User;
 
 class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
 {
@@ -17,59 +17,27 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
     protected $em;
     protected $logHandler;
     protected $contentProxy;
-
-    private function getReadabilityImport($unsetUser = false, $dispatched = 0)
-    {
-        $this->user = new User();
-
-        $this->em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->contentProxy = $this->getMockBuilder('Wallabag\CoreBundle\Helper\ContentProxy')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $dispatcher
-            ->expects($this->exactly($dispatched))
-            ->method('dispatch');
-
-        $wallabag = new ReadabilityImport($this->em, $this->contentProxy, $dispatcher);
-
-        $this->logHandler = new TestHandler();
-        $logger = new Logger('test', [$this->logHandler]);
-        $wallabag->setLogger($logger);
-
-        if (false === $unsetUser) {
-            $wallabag->setUser($this->user);
-        }
-
-        return $wallabag;
-    }
+    protected $tagsAssigner;
 
     public function testInit()
     {
         $readabilityImport = $this->getReadabilityImport();
 
-        $this->assertEquals('Readability', $readabilityImport->getName());
+        $this->assertSame('Readability', $readabilityImport->getName());
         $this->assertNotEmpty($readabilityImport->getUrl());
-        $this->assertEquals('import.readability.description', $readabilityImport->getDescription());
+        $this->assertSame('import.readability.description', $readabilityImport->getDescription());
     }
 
     public function testImport()
     {
-        $readabilityImport = $this->getReadabilityImport(false, 24);
-        $readabilityImport->setFilepath(__DIR__.'/../fixtures/readability.json');
+        $readabilityImport = $this->getReadabilityImport(false, 3);
+        $readabilityImport->setFilepath(__DIR__ . '/../fixtures/readability.json');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $entryRepo->expects($this->exactly(24))
+        $entryRepo->expects($this->exactly(3))
             ->method('findByUrlAndUserId')
             ->willReturn(false);
 
@@ -83,20 +51,20 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $this->contentProxy
-            ->expects($this->exactly(24))
+            ->expects($this->exactly(3))
             ->method('updateEntry')
             ->willReturn($entry);
 
         $res = $readabilityImport->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 24, 'queued' => 0], $readabilityImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 3, 'queued' => 0], $readabilityImport->getSummary());
     }
 
     public function testImportAndMarkAllAsRead()
     {
         $readabilityImport = $this->getReadabilityImport(false, 1);
-        $readabilityImport->setFilepath(__DIR__.'/../fixtures/readability-read.json');
+        $readabilityImport->setFilepath(__DIR__ . '/../fixtures/readability-read.json');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
             ->disableOriginalConstructor()
@@ -128,13 +96,13 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($res);
 
-        $this->assertEquals(['skipped' => 1, 'imported' => 1, 'queued' => 0], $readabilityImport->getSummary());
+        $this->assertSame(['skipped' => 1, 'imported' => 1, 'queued' => 0], $readabilityImport->getSummary());
     }
 
     public function testImportWithRabbit()
     {
         $readabilityImport = $this->getReadabilityImport();
-        $readabilityImport->setFilepath(__DIR__.'/../fixtures/readability.json');
+        $readabilityImport->setFilepath(__DIR__ . '/../fixtures/readability.json');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
             ->disableOriginalConstructor()
@@ -160,7 +128,7 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $producer
-            ->expects($this->exactly(24))
+            ->expects($this->exactly(3))
             ->method('publish');
 
         $readabilityImport->setProducer($producer);
@@ -168,13 +136,13 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
         $res = $readabilityImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 24], $readabilityImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 3], $readabilityImport->getSummary());
     }
 
     public function testImportWithRedis()
     {
         $readabilityImport = $this->getReadabilityImport();
-        $readabilityImport->setFilepath(__DIR__.'/../fixtures/readability.json');
+        $readabilityImport->setFilepath(__DIR__ . '/../fixtures/readability.json');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
             ->disableOriginalConstructor()
@@ -206,7 +174,7 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
         $res = $readabilityImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 24], $readabilityImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 3], $readabilityImport->getSummary());
 
         $this->assertNotEmpty($redisMock->lpop('readability'));
     }
@@ -214,7 +182,7 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
     public function testImportBadFile()
     {
         $readabilityImport = $this->getReadabilityImport();
-        $readabilityImport->setFilepath(__DIR__.'/../fixtures/wallabag-v1.jsonx');
+        $readabilityImport->setFilepath(__DIR__ . '/../fixtures/wallabag-v1.jsonx');
 
         $res = $readabilityImport->import();
 
@@ -222,13 +190,13 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
 
         $records = $this->logHandler->getRecords();
         $this->assertContains('ReadabilityImport: unable to read file', $records[0]['message']);
-        $this->assertEquals('ERROR', $records[0]['level_name']);
+        $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
     public function testImportUserNotDefined()
     {
         $readabilityImport = $this->getReadabilityImport(true);
-        $readabilityImport->setFilepath(__DIR__.'/../fixtures/readability.json');
+        $readabilityImport->setFilepath(__DIR__ . '/../fixtures/readability.json');
 
         $res = $readabilityImport->import();
 
@@ -236,6 +204,43 @@ class ReadabilityImportTest extends \PHPUnit_Framework_TestCase
 
         $records = $this->logHandler->getRecords();
         $this->assertContains('ReadabilityImport: user is not defined', $records[0]['message']);
-        $this->assertEquals('ERROR', $records[0]['level_name']);
+        $this->assertSame('ERROR', $records[0]['level_name']);
+    }
+
+    private function getReadabilityImport($unsetUser = false, $dispatched = 0)
+    {
+        $this->user = new User();
+
+        $this->em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->contentProxy = $this->getMockBuilder('Wallabag\CoreBundle\Helper\ContentProxy')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->tagsAssigner = $this->getMockBuilder('Wallabag\CoreBundle\Helper\TagsAssigner')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dispatcher
+            ->expects($this->exactly($dispatched))
+            ->method('dispatch');
+
+        $wallabag = new ReadabilityImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher);
+
+        $this->logHandler = new TestHandler();
+        $logger = new Logger('test', [$this->logHandler]);
+        $wallabag->setLogger($logger);
+
+        if (false === $unsetUser) {
+            $wallabag->setUser($this->user);
+        }
+
+        return $wallabag;
     }
 }

@@ -136,7 +136,7 @@ class UsernameRssTokenConverterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @expectedExceptionMessage User not found
      */
     public function testApplyUserNotFound()
@@ -212,6 +212,6 @@ class UsernameRssTokenConverterTest extends \PHPUnit_Framework_TestCase
 
         $converter->apply($request, $params);
 
-        $this->assertEquals($user, $request->attributes->get('user'));
+        $this->assertSame($user, $request->attributes->get('user'));
     }
 }

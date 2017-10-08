@@ -15,11 +15,11 @@ shaarli_url: URL de Shaarli, si el servicio está activado
 share_diaspora: Activar compartir con Diaspora
 share_mail: Activar compartir con Email
 share_shaarli: Activar compartir con Shaarli
+share_scuttle: Activar compartir con Scuttle
 share_twitter: Activar compartir con Twitter
 share_unmark: Activar compartir con Unmark.it
 show_printlink: Mostrar un enlace para imprimir contenido
 wallabag_support_url: URL de soporte de wallabag
-wallabag_url: URL de *tu* instancia de wallabag
 entry: "artículo"
 export: "exportar"
 import: "importar"
@@ -33,3 +33,4 @@ demo_mode_username: "Nombre de usuario demo"
 share_public: Permitir URL pública para los artículos
 download_images_enabled: Descargar imágenes localmente
 restricted_access: Activar autenticación para websites con paywall
+# api_user_registration: Enable user to be registered using the API

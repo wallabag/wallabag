@@ -1,0 +1,172 @@
+
+@media screen and (max-width: 1050px) {
+  .entry {
+    width: 49%;
+  }
+
+  .entry:nth-child(3n+1) {
+    margin-left: 1.5%;
+  }
+
+  .entry:nth-child(2n+1) {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  #article {
+    width: 80%;
+  }
+
+  .topPosF {
+    right: 2.5em;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .entry {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  #display-mode {
+    display: none;
+  }
+}
+
+@media screen and (max-height: 770px) {
+  .menu.users,
+  .menu.internal,
+  .menu.developer {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .entry {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  body > header {
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 3em;
+    z-index: 11;
+  }
+
+  #links li:last-child {
+    position: static;
+    width: auto;
+  }
+
+  #links li:last-child a::before {
+    content: none;
+  }
+
+  .logo {
+    width: 1.25em;
+    height: 1.25em;
+    left: 0;
+    top: 0;
+  }
+
+  .login > header {
+    position: static;
+  }
+
+  .login form {
+    width: 100%;
+    position: static;
+    margin-left: 0;
+  }
+
+  .login .logo {
+    height: auto;
+    top: 0.5em;
+    width: 75px;
+    margin-left: -37.5px;
+  }
+
+  .desktopHide {
+    display: block;
+    position: fixed;
+    z-index: 20;
+    top: 0;
+    right: 0;
+    border: 0;
+    width: 2.5em;
+    height: 2.5em;
+    cursor: pointer;
+    background-color: #999;
+    font-size: 1.2em;
+  }
+
+  .desktopHide:hover,
+  .desktopHide:focus {
+    background-color: #fff;
+  }
+
+  #links {
+    display: none;
+    width: 100%;
+    height: auto;
+    padding-top: 3em;
+  }
+
+  #links.menu--open {
+    display: block;
+  }
+
+  footer {
+    position: static;
+    margin-right: 3em;
+  }
+
+  #main {
+    margin-left: 1.5em;
+    padding-right: 1.5em;
+    position: static;
+    margin-top: 3em;
+  }
+
+  .card-entry-labels {
+    display: none;
+  }
+
+  #article_toolbar .topPosF {
+    display: none;
+  }
+
+  #article {
+    width: 100%;
+  }
+
+  #article h1 {
+    font-size: 1.5em;
+  }
+
+  #article_toolbar a {
+    padding: 0.3em 0.4em 0.2em;
+  }
+
+  #display-mode {
+    display: none;
+  }
+
+  .popup-form,
+  #bagit-form,
+  #search-form {
+    left: 0;
+    width: 100%;
+    border-left: none;
+  }
+
+  .popup-form form,
+  #bagit-form form,
+  #search-form form {
+    width: 100%;
+  }
+}

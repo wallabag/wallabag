@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Added indexes on wallabag_entry.is_starred and wallabag_entry.is_archived
+ * Added indexes on wallabag_entry.is_starred and wallabag_entry.is_archived.
  */
 class Version20170127093841 extends AbstractMigration implements ContainerAwareInterface
 {
@@ -23,11 +23,6 @@ class Version20170127093841 extends AbstractMigration implements ContainerAwareI
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
-    }
-
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix').$tableName;
     }
 
     /**
@@ -52,5 +47,10 @@ class Version20170127093841 extends AbstractMigration implements ContainerAwareI
 
         $entryTable->dropIndex($this->indexStarredName);
         $entryTable->dropIndex($this->indexArchivedName);
+    }
+
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

@@ -4,13 +4,13 @@ namespace Tests\Wallabag\CoreBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Wallabag\CoreBundle\Command\TagAllCommand;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Command\TagAllCommand;
 
 class TagAllCommandTest extends WallabagCoreTestCase
 {
     /**
-     * @expectedException Symfony\Component\Console\Exception\RuntimeException
+     * @expectedException \Symfony\Component\Console\Exception\RuntimeException
      * @expectedExceptionMessage Not enough arguments (missing: "username")
      */
     public function testRunTagAllCommandWithoutUsername()
@@ -55,6 +55,7 @@ class TagAllCommandTest extends WallabagCoreTestCase
             'username' => 'admin',
         ]);
 
-        $this->assertContains('Tagging entries for user « admin »... Done', $tester->getDisplay());
+        $this->assertContains('Tagging entries for user admin...', $tester->getDisplay());
+        $this->assertContains('Done', $tester->getDisplay());
     }
 }

@@ -32,6 +32,7 @@ menu:
         # save_link: 'Save a link'
         back_to_unread: 'Înapoi la articolele necitite'
         # users_management: 'Users management'
+        # site_credentials: 'Site credentials'
     top:
         add_new_entry: 'Introdu un nou articol'
         search: 'Căutare'
@@ -71,11 +72,12 @@ config:
             # 300_word: 'I read ~300 words per minute'
             # 400_word: 'I read ~400 words per minute'
         action_mark_as_read:
-            # label: 'Where do you to be redirected after mark an article as read?'
+            # label: 'Where do you want to be redirected to after marking an article as read?'
             # redirect_homepage: 'To the homepage'
             # redirect_current_page: 'To the current page'
         pocket_consumer_key_label: Cheie consumator pentru importarea contentului din Pocket
         # android_configuration: Configure your Android application
+        # android_instruction: "Touch here to prefill your Android application"
         # help_theme: "wallabag is customizable. You can choose your prefered theme here."
         # help_items_per_page: "You can change the number of articles displayed on each page."
         # help_reading_speed: "wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article."
@@ -89,9 +91,10 @@ config:
         token_reset: 'Resetează-ți token-ul'
         rss_links: 'Link-uri RSS'
         rss_link:
-            unread: 'unread'
-            starred: 'starred'
-            archive: 'archived'
+            unread: 'Unread'
+            starred: 'Starred'
+            archive: 'Archived'
+            # all: 'All'
         rss_limit: 'Limită RSS'
     form_user:
         # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion"
@@ -110,6 +113,7 @@ config:
         # annotations: Remove ALL annotations
         # tags: Remove ALL tags
         # entries: Remove ALL entries
+        # archived: Remove ALL archived entries
         # confirm: Are you really really sure? (THIS CAN'T BE UNDONE)
     form_password:
         # description: "You can change your password here. Your new password should by at least 8 characters long."
@@ -154,6 +158,7 @@ config:
         #         or: 'One rule OR another'
         #         and: 'One rule AND another'
         #         matches: 'Tests that a <i>subject</i> is matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>'
+        #         notmatches: 'Tests that a <i>subject</i> is not matches a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
 
 entry:
     page_titles:
@@ -164,6 +169,7 @@ entry:
         # filtered_tags: 'Filtered by tags:'
         # filtered_search: 'Filtered by search:'
         # untagged: 'Untagged entries'
+        # all: 'All entries'
     list:
         # number_on_the_page: '{0} There is no entry.|{1} There is one entry.|]1,Inf[ There are %count% entries.'
         reading_time: 'timp estimat de citire'
@@ -185,6 +191,8 @@ entry:
         unread_label: 'Necitite'
         preview_picture_label: 'Are o imagine de previzualizare'
         preview_picture_help: 'Previzualizare imagine'
+        # is_public_label: 'Has a public link'
+        # is_public_help: 'Public link'
         language_label: 'Limbă'
         # http_status_label: 'HTTP status'
         reading_time:
@@ -214,7 +222,7 @@ entry:
             share_email_label: 'E-mail'
             # public_link: 'public link'
             # delete_public_link: 'delete public link'
-            download: 'Descarcă'
+            export: 'Descarcă'
             # print: 'Print'
             problem:
                 label: 'Probleme?'
@@ -223,6 +231,8 @@ entry:
         original_article: 'original'
         # annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %count% annotations'
         created_at: 'Data creării'
+        # published_at: 'Publication date'
+        # published_by: 'Published by'
     new:
         page_title: 'Salvează un nou articol'
         placeholder: 'http://website.com'
@@ -234,10 +244,12 @@ entry:
         # page_title: 'Edit an entry'
         # title_label: 'Title'
         url_label: 'Url'
-        # is_public_label: 'Public'
         save_label: 'Salvează'
     public:
-        # shared_by_wallabag: "This article has been shared by <a href='%wallabag_instance%'>wallabag</a>"
+        # shared_by_wallabag: "This article has been shared by %username% with <a href='%wallabag_instance%'>wallabag</a>"
+    confirm:
+        # delete: "Are you sure you want to remove that article?"
+        # delete_tag: "Are you sure you want to remove that tag from that article?"
 
 about:
     page_title: 'Despre'
@@ -510,6 +522,28 @@ user:
         # delete: Delete
         # delete_confirm: Are you sure?
         # back_to_list: Back to list
+    search:
+        # placeholder: Filter by username or email
+
+site_credential:
+    # page_title: Site credentials management
+    # new_site_credential: Create a credential
+    # edit_site_credential: Edit an existing credential
+    # description: "Here you can manage all credentials for sites which required them (create, edit and delete), like a paywall, an authentication, etc."
+    # list:
+    #     actions: Actions
+    #     edit_action: Edit
+    #     yes: Yes
+    #     no: No
+    #     create_new_one: Create a new credential
+    # form:
+    #     username_label: 'Username'
+    #     host_label: 'Host'
+    #     password_label: 'Password'
+    #     save: Save
+    #     delete: Delete
+    #     delete_confirm: Are you sure?
+    #     back_to_list: Back to list
 
 error:
     # page_title: An error occurred
@@ -528,6 +562,7 @@ flashes:
             # annotations_reset: Annotations reset
             # tags_reset: Tags reset
             # entries_reset: Entries reset
+            # archived_reset: Archived entries deleted
     entry:
         notice:
             # entry_already_saved: 'Entry already saved on %date%'
@@ -562,3 +597,8 @@ flashes:
             # added: 'User "%username%" added'
             # updated: 'User "%username%" updated'
             # deleted: 'User "%username%" deleted'
+    site_credential:
+        notice:
+            # added: 'Site credential for "%host%" added'
+            # updated: 'Site credential for "%host%" updated'
+            # deleted: 'Site credential for "%host%" deleted'

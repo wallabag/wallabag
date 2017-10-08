@@ -3,9 +3,9 @@
 namespace Wallabag\CoreBundle\Twig;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\CoreBundle\Repository\TagRepository;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class WallabagExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
@@ -33,11 +33,11 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
 
     public function getFunctions()
     {
-        return array(
+        return [
             new \Twig_SimpleFunction('count_entries', [$this, 'countEntries']),
             new \Twig_SimpleFunction('count_tags', [$this, 'countTags']),
             new \Twig_SimpleFunction('display_stats', [$this, 'displayStats']),
-        );
+        ];
     }
 
     public function removeWww($url)
@@ -64,19 +64,15 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
             case 'starred':
                 $qb = $this->entryRepository->getBuilderForStarredByUser($user->getId());
                 break;
-
             case 'archive':
                 $qb = $this->entryRepository->getBuilderForArchiveByUser($user->getId());
                 break;
-
             case 'unread':
                 $qb = $this->entryRepository->getBuilderForUnreadByUser($user->getId());
                 break;
-
             case 'all':
                 $qb = $this->entryRepository->getBuilderForAllByUser($user->getId());
                 break;
-
             default:
                 throw new \InvalidArgumentException(sprintf('Type "%s" is not implemented.', $type));
         }
@@ -139,7 +135,7 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
         $nbDays = (int) $interval->format('%a') ?: 1;
 
         // force setlocale for date translation
-        setlocale(LC_TIME, strtolower($user->getConfig()->getLanguage()).'_'.strtoupper(strtolower($user->getConfig()->getLanguage())));
+        setlocale(LC_TIME, strtolower($user->getConfig()->getLanguage()) . '_' . strtoupper(strtolower($user->getConfig()->getLanguage())));
 
         return $this->translator->trans('footer.stats', [
             '%user_creation%' => strftime('%e %B %Y', $user->getCreatedAt()->getTimestamp()),

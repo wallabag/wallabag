@@ -109,10 +109,10 @@ class PinboardImport extends AbstractImport
         $entry->setTitle($data['title']);
 
         // update entry with content (in case fetching failed, the given entry will be return)
-        $entry = $this->fetchContent($entry, $data['url'], $data);
+        $this->fetchContent($entry, $data['url'], $data);
 
         if (!empty($data['tags'])) {
-            $this->contentProxy->assignTagsToEntry(
+            $this->tagsAssigner->assignTagsToEntry(
                 $entry,
                 $data['tags'],
                 $this->em->getUnitOfWork()->getScheduledEntityInsertions()

@@ -4,9 +4,9 @@ namespace Wallabag\CoreBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
-use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation\XmlRoot;
 
 /**
@@ -78,7 +78,7 @@ class Tag
      */
     public function setLabel($label)
     {
-        $this->label = $label;
+        $this->label = mb_convert_case($label, MB_CASE_LOWER);
 
         return $this;
     }

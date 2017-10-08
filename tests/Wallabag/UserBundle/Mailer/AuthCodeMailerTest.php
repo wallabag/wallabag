@@ -68,8 +68,8 @@ TWIG;
 
         $msg = $this->spool->getMessages()[0];
         $this->assertArrayHasKey('test@wallabag.io', $msg->getTo());
-        $this->assertEquals(['nobody@test.io' => 'wallabag test'], $msg->getFrom());
-        $this->assertEquals('subject', $msg->getSubject());
+        $this->assertSame(['nobody@test.io' => 'wallabag test'], $msg->getFrom());
+        $this->assertSame('subject', $msg->getSubject());
         $this->assertContains('text body http://0.0.0.0/support', $msg->toString());
         $this->assertContains('html body 666666', $msg->toString());
     }

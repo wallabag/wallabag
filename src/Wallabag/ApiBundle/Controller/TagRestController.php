@@ -3,8 +3,8 @@
 namespace Wallabag\ApiBundle\Controller;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 
@@ -31,7 +31,7 @@ class TagRestController extends WallabagRestController
     }
 
     /**
-     * Permanently remove one tag from **every** entry.
+     * Permanently remove one tag from **every** entry by passing the Tag label.
      *
      * @ApiDoc(
      *      requirements={
@@ -44,7 +44,7 @@ class TagRestController extends WallabagRestController
     public function deleteTagLabelAction(Request $request)
     {
         $this->validateAuthentication();
-        $label = $request->request->get('tag', '');
+        $label = $request->get('tag', '');
 
         $tag = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findOneByLabel($label);
 
@@ -78,7 +78,7 @@ class TagRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        $tagsLabels = $request->request->get('tags', '');
+        $tagsLabels = $request->get('tags', '');
 
         $tags = [];
 
@@ -106,7 +106,7 @@ class TagRestController extends WallabagRestController
     }
 
     /**
-     * Permanently remove one tag from **every** entry.
+     * Permanently remove one tag from **every** entry by passing the Tag ID.
      *
      * @ApiDoc(
      *      requirements={

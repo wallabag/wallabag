@@ -912,6 +912,14 @@ a.add-to-wallabag-link-after::after {
   content: "\e953";
 }
 
+.icon-pencil2::before {
+  content: "\e906";
+}
+
+.icon-users::before {
+  content: "\e972";
+}
+
 .icon-time::before {
   content: "\e952";
 }
@@ -945,6 +953,11 @@ a.add-to-wallabag-link-after::after {
 /* shaarli */
 .icon-image--shaarli {
   background-image: url("../../_global/img/icons/shaarli.png");
+}
+
+/* scuttle */
+.icon-image--scuttle {
+  background-image: url("../../_global/img/icons/scuttle.png");
 }
 
 /* ==========================================================================
@@ -1060,6 +1073,10 @@ blockquote {
 }
 
 .shaarli::before {
+  content: "*";
+}
+
+.scuttle::before {
   content: "*";
 }
 

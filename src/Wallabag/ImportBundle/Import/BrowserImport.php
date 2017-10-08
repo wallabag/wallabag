@@ -3,8 +3,6 @@
 namespace Wallabag\ImportBundle\Import;
 
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\UserBundle\Entity\User;
-use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
 
 abstract class BrowserImport extends AbstractImport
@@ -72,6 +70,80 @@ abstract class BrowserImport extends AbstractImport
         $this->filepath = $filepath;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function parseEntry(array $importedEntry)
+    {
+        if ((!array_key_exists('guid', $importedEntry) || (!array_key_exists('id', $importedEntry))) && is_array(reset($importedEntry))) {
+            if ($this->producer) {
+                $this->parseEntriesForProducer($importedEntry);
+
+                return;
+            }
+
+            $this->parseEntries($importedEntry);
+
+            return;
+        }
+
+        if (array_key_exists('children', $importedEntry)) {
+            if ($this->producer) {
+                $this->parseEntriesForProducer($importedEntry['children']);
+
+                return;
+            }
+
+            $this->parseEntries($importedEntry['children']);
+
+            return;
+        }
+
+        if (!array_key_exists('uri', $importedEntry) && !array_key_exists('url', $importedEntry)) {
+            return;
+        }
+
+        $url = array_key_exists('uri', $importedEntry) ? $importedEntry['uri'] : $importedEntry['url'];
+
+        $existingEntry = $this->em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($url, $this->user->getId());
+
+        if (false !== $existingEntry) {
+            ++$this->skippedEntries;
+
+            return;
+        }
+
+        $data = $this->prepareEntry($importedEntry);
+
+        $entry = new Entry($this->user);
+        $entry->setUrl($data['url']);
+        $entry->setTitle($data['title']);
+
+        // update entry with content (in case fetching failed, the given entry will be return)
+        $this->fetchContent($entry, $data['url'], $data);
+
+        if (array_key_exists('tags', $data)) {
+            $this->tagsAssigner->assignTagsToEntry(
+                $entry,
+                $data['tags']
+            );
+        }
+
+        $entry->setArchived($data['is_archived']);
+
+        if (!empty($data['created_at'])) {
+            $dt = new \DateTime();
+            $entry->setCreatedAt($dt->setTimestamp($data['created_at']));
+        }
+
+        $this->em->persist($entry);
+        ++$this->importedEntries;
+
+        return $entry;
     }
 
     /**
@@ -153,84 +225,12 @@ abstract class BrowserImport extends AbstractImport
     /**
      * {@inheritdoc}
      */
-    public function parseEntry(array $importedEntry)
-    {
-        if ((!array_key_exists('guid', $importedEntry) || (!array_key_exists('id', $importedEntry))) && is_array(reset($importedEntry))) {
-            if ($this->producer) {
-                $this->parseEntriesForProducer($importedEntry);
-
-                return;
-            }
-
-            $this->parseEntries($importedEntry);
-
-            return;
-        }
-
-        if (array_key_exists('children', $importedEntry)) {
-            if ($this->producer) {
-                $this->parseEntriesForProducer($importedEntry['children']);
-
-                return;
-            }
-
-            $this->parseEntries($importedEntry['children']);
-
-            return;
-        }
-
-        if (!array_key_exists('uri', $importedEntry) && !array_key_exists('url', $importedEntry)) {
-            return;
-        }
-
-        $url = array_key_exists('uri', $importedEntry) ? $importedEntry['uri'] : $importedEntry['url'];
-
-        $existingEntry = $this->em
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId($url, $this->user->getId());
-
-        if (false !== $existingEntry) {
-            ++$this->skippedEntries;
-
-            return;
-        }
-
-        $data = $this->prepareEntry($importedEntry);
-
-        $entry = new Entry($this->user);
-        $entry->setUrl($data['url']);
-        $entry->setTitle($data['title']);
-
-        // update entry with content (in case fetching failed, the given entry will be return)
-        $entry = $this->fetchContent($entry, $data['url'], $data);
-
-        if (array_key_exists('tags', $data)) {
-            $this->contentProxy->assignTagsToEntry(
-                $entry,
-                $data['tags']
-            );
-        }
-
-        $entry->setArchived($data['is_archived']);
-
-        if (!empty($data['created_at'])) {
-            $dt = new \DateTime();
-            $entry->setCreatedAt($dt->setTimestamp($data['created_at']));
-        }
-
-        $this->em->persist($entry);
-        ++$this->importedEntries;
-
-        return $entry;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function setEntryAsRead(array $importedEntry)
     {
         $importedEntry['is_archived'] = 1;
 
         return $importedEntry;
     }
+
+    abstract protected function prepareEntry(array $entry = []);
 }

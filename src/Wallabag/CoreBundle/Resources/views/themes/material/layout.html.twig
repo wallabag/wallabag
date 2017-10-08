@@ -2,12 +2,14 @@
 
 {% block css %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/themes/material/css/style.min.css') }}"  media="screen,projection,print"/>
+    {% if not app.debug %}
+        <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/material.css') }}">
+    {% endif %}
 {% endblock %}
 
 {% block scripts %}
     {{ parent() }}
-    <script src="{{ asset('bundles/wallabagcore/themes/material/js/material.min.js') }}"></script>
+    <script src="{{ asset('bundles/wallabagcore/material' ~ (app.debug ? '.dev' : '') ~ '.js') }}"></script>
 {% endblock %}
 
 {% block header %}
@@ -64,6 +66,11 @@
             <li class="bold {% if currentRoute == 'config' %}active{% endif %}">
                 <a class="waves-effect" href="{{ path('config') }}">{{ 'menu.left.config'|trans }}</a>
             </li>
+            {% if craue_setting('restricted_access') %}
+            <li class="bold {% if currentRoute starts with 'site_credentials_' %}active{% endif %}">
+                <a class="waves-effect" href="{{ path('site_credentials_index') }}">{{ 'menu.left.site_credentials'|trans }}</a>
+            </li>
+            {% endif %}
             {% if is_granted('ROLE_SUPER_ADMIN') %}
                 <li class="bold {% if currentRoute starts with 'user_' %}active{% endif %}">
                     <a class="waves-effect" href="{{ path('user_index') }}">{{ 'menu.left.users_management'|trans }}</a>
@@ -116,12 +123,12 @@
             </ul>
             <div class="input-field nav-panel-search" style="display: none">
                 {{ render(controller("WallabagCoreBundle:Entry:searchForm", {'currentRoute': app.request.attributes.get('_route')})) }}
-                <label for="search" class="active"><i class="material-icons search">search</i></label>
+                <label for="search"><i class="material-icons search">search</i></label>
                 <i class="material-icons close">clear</i>
             </div>
             <div class="input-field nav-panel-add" style="display: none">
                 {{ render(controller("WallabagCoreBundle:Entry:addEntryForm")) }}
-                <label for="add" class="active"><i class="material-icons add">add</i></label>
+                <label for="add"><i class="material-icons add">add</i></label>
                 <i class="material-icons close">clear</i>
             </div>
         </div>

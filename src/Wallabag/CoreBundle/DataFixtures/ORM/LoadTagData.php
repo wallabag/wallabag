@@ -19,7 +19,7 @@ class LoadTagData extends AbstractFixture implements OrderedFixtureInterface
 
         $manager->persist($tag1);
 
-        $this->addReference('foo-tag', $tag1);
+        $this->addReference('foo-bar-tag', $tag1);
 
         $tag2 = new Tag();
         $tag2->setLabel('bar');
@@ -34,6 +34,13 @@ class LoadTagData extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($tag3);
 
         $this->addReference('baz-tag', $tag3);
+
+        $tag4 = new Tag();
+        $tag4->setLabel('foo');
+
+        $manager->persist($tag4);
+
+        $this->addReference('foo-tag', $tag4);
 
         $manager->flush();
     }

@@ -2,11 +2,12 @@
 
 namespace Wallabag\CoreBundle\Helper;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Message\Response;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DomCrawler\Crawler;
-use GuzzleHttp\Client;
-use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeExtensionGuesser;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeExtensionGuesser;
 
 class DownloadImages
 {
@@ -30,17 +31,6 @@ class DownloadImages
     }
 
     /**
-     * Setup base folder where all images are going to be saved.
-     */
-    private function setFolder()
-    {
-        // if folder doesn't exist, attempt to create one and store the folder name in property $folder
-        if (!file_exists($this->baseFolder)) {
-            mkdir($this->baseFolder, 0755, true);
-        }
-    }
-
-    /**
      * Process the html and extract image from it, save them to local and return the updated html.
      *
      * @param int    $entryId ID of the entry
@@ -54,7 +44,7 @@ class DownloadImages
         $crawler = new Crawler($html);
         $result = $crawler
             ->filterXpath('//img')
-            ->extract(array('src'));
+            ->extract(['src']);
 
         $relativePath = $this->getRelativePath($entryId);
 
@@ -64,6 +54,11 @@ class DownloadImages
 
             if (false === $imagePath) {
                 continue;
+            }
+
+            // if image contains "&" and we can't find it in the html it might be because it's encoded as &amp;
+            if (false !== stripos($image, '&') && false === stripos($html, $image)) {
+                $image = str_replace('&', '&amp;', $image);
             }
 
             $html = str_replace($image, $imagePath, $html);
@@ -91,9 +86,9 @@ class DownloadImages
             $relativePath = $this->getRelativePath($entryId);
         }
 
-        $this->logger->debug('DownloadImages: working on image: '.$imagePath);
+        $this->logger->debug('DownloadImages: working on image: ' . $imagePath);
 
-        $folderPath = $this->baseFolder.'/'.$relativePath;
+        $folderPath = $this->baseFolder . '/' . $relativePath;
 
         // build image path
         $absolutePath = $this->getAbsoluteLink($url, $imagePath);
@@ -111,15 +106,13 @@ class DownloadImages
             return false;
         }
 
-        $ext = $this->mimeGuesser->guess($res->getHeader('content-type'));
-        $this->logger->debug('DownloadImages: Checking extension', ['ext' => $ext, 'header' => $res->getHeader('content-type')]);
-        if (!in_array($ext, ['jpeg', 'jpg', 'gif', 'png'], true)) {
-            $this->logger->error('DownloadImages: Processed image with not allowed extension. Skipping '.$imagePath);
-
+        $ext = $this->getExtensionFromResponse($res, $imagePath);
+        if (false === $res) {
             return false;
         }
+
         $hashImage = hash('crc32', $absolutePath);
-        $localPath = $folderPath.'/'.$hashImage.'.'.$ext;
+        $localPath = $folderPath . '/' . $hashImage . '.' . $ext;
 
         try {
             $im = imagecreatefromstring($res->getBody());
@@ -144,13 +137,15 @@ class DownloadImages
                 $this->logger->debug('DownloadImages: Re-creating jpg');
                 break;
             case 'png':
+                imagealphablending($im, false);
+                imagesavealpha($im, true);
                 imagepng($im, $localPath, ceil(self::REGENERATE_PICTURES_QUALITY / 100 * 9));
                 $this->logger->debug('DownloadImages: Re-creating png');
         }
 
         imagedestroy($im);
 
-        return $this->wallabagUrl.'/assets/images/'.$relativePath.'/'.$hashImage.'.'.$ext;
+        return $this->wallabagUrl . '/assets/images/' . $relativePath . '/' . $hashImage . '.' . $ext;
     }
 
     /**
@@ -161,7 +156,7 @@ class DownloadImages
     public function removeImages($entryId)
     {
         $relativePath = $this->getRelativePath($entryId);
-        $folderPath = $this->baseFolder.'/'.$relativePath;
+        $folderPath = $this->baseFolder . '/' . $relativePath;
 
         $finder = new Finder();
         $finder
@@ -177,6 +172,17 @@ class DownloadImages
     }
 
     /**
+     * Setup base folder where all images are going to be saved.
+     */
+    private function setFolder()
+    {
+        // if folder doesn't exist, attempt to create one and store the folder name in property $folder
+        if (!file_exists($this->baseFolder)) {
+            mkdir($this->baseFolder, 0755, true);
+        }
+    }
+
+    /**
      * Generate the folder where we are going to save images based on the entry url.
      *
      * @param int $entryId ID of the entry
@@ -186,8 +192,8 @@ class DownloadImages
     private function getRelativePath($entryId)
     {
         $hashId = hash('crc32', $entryId);
-        $relativePath = $hashId[0].'/'.$hashId[1].'/'.$hashId;
-        $folderPath = $this->baseFolder.'/'.$relativePath;
+        $relativePath = $hashId[0] . '/' . $hashId[1] . '/' . $hashId;
+        $folderPath = $this->baseFolder . '/' . $relativePath;
 
         if (!file_exists($folderPath)) {
             mkdir($folderPath, 0777, true);
@@ -229,5 +235,46 @@ class DownloadImages
         $this->logger->error('DownloadImages: Can not make an absolute link', ['base' => $base, 'url' => $url]);
 
         return false;
+    }
+
+    /**
+     * Retrieve and validate the extension from the response of the url of the image.
+     *
+     * @param Response $res       Guzzle Response
+     * @param string   $imagePath Path from the src image from the content (used for log only)
+     *
+     * @return string|false Extension name or false if validation failed
+     */
+    private function getExtensionFromResponse(Response $res, $imagePath)
+    {
+        $ext = $this->mimeGuesser->guess($res->getHeader('content-type'));
+        $this->logger->debug('DownloadImages: Checking extension', ['ext' => $ext, 'header' => $res->getHeader('content-type')]);
+
+        // ok header doesn't have the extension, try a different way
+        if (empty($ext)) {
+            $types = [
+                'jpeg' => "\xFF\xD8\xFF",
+                'gif' => 'GIF',
+                'png' => "\x89\x50\x4e\x47\x0d\x0a",
+            ];
+            $bytes = substr((string) $res->getBody(), 0, 8);
+
+            foreach ($types as $type => $header) {
+                if (0 === strpos($bytes, $header)) {
+                    $ext = $type;
+                    break;
+                }
+            }
+
+            $this->logger->debug('DownloadImages: Checking extension (alternative)', ['ext' => $ext]);
+        }
+
+        if (!in_array($ext, ['jpeg', 'jpg', 'gif', 'png'], true)) {
+            $this->logger->error('DownloadImages: Processed image with not allowed extension. Skipping: ' . $imagePath);
+
+            return false;
+        }
+
+        return $ext;
     }
 }

@@ -40,8 +40,8 @@ class WallabagRestController extends FOSRestController
     protected function validateUserAccess($requestUserId)
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
-        if ($requestUserId != $user->getId()) {
-            throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$requestUserId.', logged user id: '.$user->getId());
+        if ($requestUserId !== $user->getId()) {
+            throw $this->createAccessDeniedException('Access forbidden. Entry user id: ' . $requestUserId . ', logged user id: ' . $user->getId());
         }
     }
 }

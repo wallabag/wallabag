@@ -10,8 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\TaggingRule;
-use Wallabag\CoreBundle\Form\Type\ConfigType;
 use Wallabag\CoreBundle\Form\Type\ChangePasswordType;
+use Wallabag\CoreBundle\Form\Type\ConfigType;
 use Wallabag\CoreBundle\Form\Type\RssType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleType;
 use Wallabag\CoreBundle\Form\Type\UserInformationType;
@@ -54,7 +54,7 @@ class ConfigController extends Controller
         }
 
         // handle changing password
-        $pwdForm = $this->createForm(ChangePasswordType::class, null, ['action' => $this->generateUrl('config').'#set4']);
+        $pwdForm = $this->createForm(ChangePasswordType::class, null, ['action' => $this->generateUrl('config') . '#set4']);
         $pwdForm->handleRequest($request);
 
         if ($pwdForm->isSubmitted() && $pwdForm->isValid()) {
@@ -69,13 +69,13 @@ class ConfigController extends Controller
 
             $this->get('session')->getFlashBag()->add('notice', $message);
 
-            return $this->redirect($this->generateUrl('config').'#set4');
+            return $this->redirect($this->generateUrl('config') . '#set4');
         }
 
         // handle changing user information
         $userForm = $this->createForm(UserInformationType::class, $user, [
             'validation_groups' => ['Profile'],
-            'action' => $this->generateUrl('config').'#set3',
+            'action' => $this->generateUrl('config') . '#set3',
         ]);
         $userForm->handleRequest($request);
 
@@ -87,11 +87,11 @@ class ConfigController extends Controller
                 'flashes.config.notice.user_updated'
             );
 
-            return $this->redirect($this->generateUrl('config').'#set3');
+            return $this->redirect($this->generateUrl('config') . '#set3');
         }
 
         // handle rss information
-        $rssForm = $this->createForm(RssType::class, $config, ['action' => $this->generateUrl('config').'#set2']);
+        $rssForm = $this->createForm(RssType::class, $config, ['action' => $this->generateUrl('config') . '#set2']);
         $rssForm->handleRequest($request);
 
         if ($rssForm->isSubmitted() && $rssForm->isValid()) {
@@ -103,12 +103,12 @@ class ConfigController extends Controller
                 'flashes.config.notice.rss_updated'
             );
 
-            return $this->redirect($this->generateUrl('config').'#set2');
+            return $this->redirect($this->generateUrl('config') . '#set2');
         }
 
         // handle tagging rule
         $taggingRule = new TaggingRule();
-        $action = $this->generateUrl('config').'#set5';
+        $action = $this->generateUrl('config') . '#set5';
 
         if ($request->query->has('tagging-rule')) {
             $taggingRule = $this->getDoctrine()
@@ -119,7 +119,7 @@ class ConfigController extends Controller
                 return $this->redirect($action);
             }
 
-            $action = $this->generateUrl('config').'?tagging-rule='.$taggingRule->getId().'#set5';
+            $action = $this->generateUrl('config') . '?tagging-rule=' . $taggingRule->getId() . '#set5';
         }
 
         $newTaggingRule = $this->createForm(TaggingRuleType::class, $taggingRule, ['action' => $action]);
@@ -135,7 +135,7 @@ class ConfigController extends Controller
                 'flashes.config.notice.tagging_rules_updated'
             );
 
-            return $this->redirect($this->generateUrl('config').'#set5');
+            return $this->redirect($this->generateUrl('config') . '#set5');
         }
 
         return $this->render('WallabagCoreBundle:Config:index.html.twig', [
@@ -151,9 +151,8 @@ class ConfigController extends Controller
                 'token' => $config->getRssToken(),
             ],
             'twofactor_auth' => $this->getParameter('twofactor_auth'),
-            'wallabag_url' => $this->get('craue_config')->get('wallabag_url'),
-            'enabled_users' => $this->getDoctrine()
-                ->getRepository('WallabagUserBundle:User')
+            'wallabag_url' => $this->getParameter('domain_name'),
+            'enabled_users' => $this->get('wallabag_user.user_repository')
                 ->getSumEnabledUsers(),
         ]);
     }
@@ -183,7 +182,7 @@ class ConfigController extends Controller
             'flashes.config.notice.rss_token_updated'
         );
 
-        return $this->redirect($this->generateUrl('config').'#set2');
+        return $this->redirect($this->generateUrl('config') . '#set2');
     }
 
     /**
@@ -208,7 +207,7 @@ class ConfigController extends Controller
             'flashes.config.notice.tagging_rules_deleted'
         );
 
-        return $this->redirect($this->generateUrl('config').'#set5');
+        return $this->redirect($this->generateUrl('config') . '#set5');
     }
 
     /**
@@ -224,7 +223,7 @@ class ConfigController extends Controller
     {
         $this->validateRuleAction($rule);
 
-        return $this->redirect($this->generateUrl('config').'?tagging-rule='.$rule->getId().'#set5');
+        return $this->redirect($this->generateUrl('config') . '?tagging-rule=' . $rule->getId() . '#set5');
     }
 
     /**
@@ -242,93 +241,39 @@ class ConfigController extends Controller
                     ->getRepository('WallabagAnnotationBundle:Annotation')
                     ->removeAllByUserId($this->getUser()->getId());
                 break;
-
             case 'tags':
                 $this->removeAllTagsByUserId($this->getUser()->getId());
                 break;
-
             case 'entries':
-                // SQLite doesn't care about cascading remove, so we need to manually remove associated stuf
+                // SQLite doesn't care about cascading remove, so we need to manually remove associated stuff
                 // otherwise they won't be removed ...
-                if ($this->get('doctrine')->getConnection()->getDriver() instanceof \Doctrine\DBAL\Driver\PDOSqlite\Driver) {
+                if ($this->get('doctrine')->getConnection()->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\SqlitePlatform) {
                     $this->getDoctrine()->getRepository('WallabagAnnotationBundle:Annotation')->removeAllByUserId($this->getUser()->getId());
                 }
 
                 // manually remove tags to avoid orphan tag
                 $this->removeAllTagsByUserId($this->getUser()->getId());
 
-                $this->getDoctrine()
-                    ->getRepository('WallabagCoreBundle:Entry')
-                    ->removeAllByUserId($this->getUser()->getId());
+                $this->get('wallabag_core.entry_repository')->removeAllByUserId($this->getUser()->getId());
+                break;
+            case 'archived':
+                if ($this->get('doctrine')->getConnection()->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\SqlitePlatform) {
+                    $this->removeAnnotationsForArchivedByUserId($this->getUser()->getId());
+                }
+
+                // manually remove tags to avoid orphan tag
+                $this->removeTagsForArchivedByUserId($this->getUser()->getId());
+
+                $this->get('wallabag_core.entry_repository')->removeArchivedByUserId($this->getUser()->getId());
+                break;
         }
 
         $this->get('session')->getFlashBag()->add(
             'notice',
-            'flashes.config.notice.'.$type.'_reset'
+            'flashes.config.notice.' . $type . '_reset'
         );
 
-        return $this->redirect($this->generateUrl('config').'#set3');
-    }
-
-    /**
-     * Remove all tags for a given user and cleanup orphan tags.
-     *
-     * @param int $userId
-     */
-    private function removeAllTagsByUserId($userId)
-    {
-        $tags = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findAllTags($userId);
-
-        if (empty($tags)) {
-            return;
-        }
-
-        $this->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->removeTags($userId, $tags);
-
-        // cleanup orphan tags
-        $em = $this->getDoctrine()->getManager();
-
-        foreach ($tags as $tag) {
-            if (count($tag->getEntries()) === 0) {
-                $em->remove($tag);
-            }
-        }
-
-        $em->flush();
-    }
-
-    /**
-     * Validate that a rule can be edited/deleted by the current user.
-     *
-     * @param TaggingRule $rule
-     */
-    private function validateRuleAction(TaggingRule $rule)
-    {
-        if ($this->getUser()->getId() != $rule->getConfig()->getUser()->getId()) {
-            throw $this->createAccessDeniedException('You can not access this tagging rule.');
-        }
-    }
-
-    /**
-     * Retrieve config for the current user.
-     * If no config were found, create a new one.
-     *
-     * @return Config
-     */
-    private function getConfig()
-    {
-        $config = $this->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Config')
-            ->findOneByUser($this->getUser());
-
-        // should NEVER HAPPEN ...
-        if (!$config) {
-            $config = new Config($this->getUser());
-        }
-
-        return $config;
+        return $this->redirect($this->generateUrl('config') . '#set3');
     }
 
     /**
@@ -344,8 +289,7 @@ class ConfigController extends Controller
      */
     public function deleteAccountAction(Request $request)
     {
-        $enabledUsers = $this->getDoctrine()
-            ->getRepository('WallabagUserBundle:User')
+        $enabledUsers = $this->get('wallabag_user.user_repository')
             ->getSumEnabledUsers();
 
         if ($enabledUsers <= 1) {
@@ -383,5 +327,101 @@ class ConfigController extends Controller
         $em->flush();
 
         return $this->redirect($request->headers->get('referer'));
+    }
+
+    /**
+     * Remove all tags for given tags and a given user and cleanup orphan tags.
+     *
+     * @param array $tags
+     * @param int   $userId
+     */
+    private function removeAllTagsByStatusAndUserId($tags, $userId)
+    {
+        if (empty($tags)) {
+            return;
+        }
+
+        $this->get('wallabag_core.entry_repository')
+            ->removeTags($userId, $tags);
+
+        // cleanup orphan tags
+        $em = $this->getDoctrine()->getManager();
+
+        foreach ($tags as $tag) {
+            if (count($tag->getEntries()) === 0) {
+                $em->remove($tag);
+            }
+        }
+
+        $em->flush();
+    }
+
+    /**
+     * Remove all tags for a given user and cleanup orphan tags.
+     *
+     * @param int $userId
+     */
+    private function removeAllTagsByUserId($userId)
+    {
+        $tags = $this->get('wallabag_core.tag_repository')->findAllTags($userId);
+        $this->removeAllTagsByStatusAndUserId($tags, $userId);
+    }
+
+    /**
+     * Remove all tags for a given user and cleanup orphan tags.
+     *
+     * @param int $userId
+     */
+    private function removeTagsForArchivedByUserId($userId)
+    {
+        $tags = $this->get('wallabag_core.tag_repository')->findForArchivedArticlesByUser($userId);
+        $this->removeAllTagsByStatusAndUserId($tags, $userId);
+    }
+
+    private function removeAnnotationsForArchivedByUserId($userId)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $archivedEntriesAnnotations = $this->getDoctrine()
+            ->getRepository('WallabagAnnotationBundle:Annotation')
+            ->findAllArchivedEntriesByUser($userId);
+
+        foreach ($archivedEntriesAnnotations as $archivedEntriesAnnotation) {
+            $em->remove($archivedEntriesAnnotation);
+        }
+
+        $em->flush();
+    }
+
+    /**
+     * Validate that a rule can be edited/deleted by the current user.
+     *
+     * @param TaggingRule $rule
+     */
+    private function validateRuleAction(TaggingRule $rule)
+    {
+        if ($this->getUser()->getId() !== $rule->getConfig()->getUser()->getId()) {
+            throw $this->createAccessDeniedException('You can not access this tagging rule.');
+        }
+    }
+
+    /**
+     * Retrieve config for the current user.
+     * If no config were found, create a new one.
+     *
+     * @return Config
+     */
+    private function getConfig()
+    {
+        $config = $this->getDoctrine()
+            ->getRepository('WallabagCoreBundle:Config')
+            ->findOneByUser($this->getUser());
+
+        // should NEVER HAPPEN ...
+        if (!$config) {
+            $config = new Config($this->getUser());
+        }
+
+        return $config;
     }
 }

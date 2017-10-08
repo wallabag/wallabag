@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Added index on wallabag_entry.uid
+ * Added index on wallabag_entry.uid.
  */
 class Version20161214094403 extends AbstractMigration implements ContainerAwareInterface
 {
@@ -22,11 +22,6 @@ class Version20161214094403 extends AbstractMigration implements ContainerAwareI
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
-    }
-
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix').$tableName;
     }
 
     /**
@@ -49,5 +44,10 @@ class Version20161214094403 extends AbstractMigration implements ContainerAwareI
         $this->skipIf(false === $entryTable->hasIndex($this->indexName), 'It seems that you already played this migration.');
 
         $entryTable->dropIndex($this->indexName);
+    }
+
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

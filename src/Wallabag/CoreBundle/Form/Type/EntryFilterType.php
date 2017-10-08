@@ -3,12 +3,13 @@
 namespace Wallabag\CoreBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
-use Lexik\Bundle\FormFilterBundle\Filter\Query\QueryInterface;
-use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\NumberRangeFilterType;
-use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\DateRangeFilterType;
-use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\TextFilterType;
+use Lexik\Bundle\FormFilterBundle\Filter\FilterOperands;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\CheckboxFilterType;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\ChoiceFilterType;
+use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\DateRangeFilterType;
+use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\NumberRangeFilterType;
+use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\TextFilterType;
+use Lexik\Bundle\FormFilterBundle\Filter\Query\QueryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,7 +34,7 @@ class EntryFilterType extends AbstractType
         $this->user = $tokenStorage->getToken() ? $tokenStorage->getToken()->getUser() : null;
 
         if (null === $this->user || !is_object($this->user)) {
-            return null;
+            return;
         }
     }
 
@@ -41,6 +42,14 @@ class EntryFilterType extends AbstractType
     {
         $builder
             ->add('readingTime', NumberRangeFilterType::class, [
+                'left_number_options' => [
+                    'condition_operator' => FilterOperands::OPERATOR_GREATER_THAN_EQUAL,
+                    'attr' => ['min' => 0],
+                ],
+                'right_number_options' => [
+                    'condition_operator' => FilterOperands::OPERATOR_LOWER_THAN_EQUAL,
+                    'attr' => ['min' => 0],
+                ],
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                     $lower = $values['value']['left_number'][0];
                     $upper = $values['value']['right_number'][0];
@@ -90,7 +99,7 @@ class EntryFilterType extends AbstractType
                     if (strlen($value) <= 2 || empty($value)) {
                         return;
                     }
-                    $expression = $filterQuery->getExpr()->like($field, $filterQuery->getExpr()->lower($filterQuery->getExpr()->literal('%'.$value.'%')));
+                    $expression = $filterQuery->getExpr()->like($field, $filterQuery->getExpr()->lower($filterQuery->getExpr()->literal('%' . $value . '%')));
 
                     return $filterQuery->createCondition($expression);
                 },
@@ -104,8 +113,8 @@ class EntryFilterType extends AbstractType
                     }
 
                     $paramName = sprintf('%s', str_replace('.', '_', $field));
-                    $expression = $filterQuery->getExpr()->eq($field, ':'.$paramName);
-                    $parameters = array($paramName => $value);
+                    $expression = $filterQuery->getExpr()->eq($field, ':' . $paramName);
+                    $parameters = [$paramName => $value];
 
                     return $filterQuery->createCondition($expression, $parameters);
                 },
@@ -140,6 +149,20 @@ class EntryFilterType extends AbstractType
                     return $filterQuery->createCondition($expression);
                 },
                 'label' => 'entry.filters.preview_picture_label',
+            ])
+            ->add('isPublic', CheckboxFilterType::class, [
+                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                    if (false === $values['value']) {
+                        return;
+                    }
+
+                    // is_public isn't a real field
+                    // we should use the "uid" field to determine if the entry has been made public
+                    $expression = $filterQuery->getExpr()->isNotNull($values['alias'] . '.uid');
+
+                    return $filterQuery->createCondition($expression);
+                },
+                'label' => 'entry.filters.is_public_label',
             ])
             ->add('language', ChoiceFilterType::class, [
                 'choices' => array_flip($this->repository->findDistinctLanguageByUser($this->user->getId())),

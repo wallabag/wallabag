@@ -8,6 +8,14 @@ use Symfony\Component\HttpFoundation\Request;
 class ChromeController extends BrowserController
 {
     /**
+     * @Route("/chrome", name="import_chrome")
+     */
+    public function indexAction(Request $request)
+    {
+        return parent::indexAction($request);
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getImportService()
@@ -29,13 +37,5 @@ class ChromeController extends BrowserController
     protected function getImportTemplate()
     {
         return 'WallabagImportBundle:Chrome:index.html.twig';
-    }
-
-    /**
-     * @Route("/chrome", name="import_chrome")
-     */
-    public function indexAction(Request $request)
-    {
-        return parent::indexAction($request);
     }
 }

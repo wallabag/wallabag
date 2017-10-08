@@ -2,16 +2,16 @@
 
 namespace Tests\Wallabag\ImportBundle\Command;
 
+use M6Web\Component\RedisMock\RedisMockFactory;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Wallabag\ImportBundle\Command\RedisWorkerCommand;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use M6Web\Component\RedisMock\RedisMockFactory;
+use Wallabag\ImportBundle\Command\RedisWorkerCommand;
 
 class RedisWorkerCommandTest extends WallabagCoreTestCase
 {
     /**
-     * @expectedException Symfony\Component\Console\Exception\RuntimeException
+     * @expectedException \Symfony\Component\Console\Exception\RuntimeException
      * @expectedExceptionMessage Not enough arguments (missing: "serviceName")
      */
     public function testRunRedisWorkerCommandWithoutArguments()
@@ -28,7 +28,7 @@ class RedisWorkerCommandTest extends WallabagCoreTestCase
     }
 
     /**
-     * @expectedException Symfony\Component\Config\Definition\Exception\Exception
+     * @expectedException \Symfony\Component\Config\Definition\Exception\Exception
      * @expectedExceptionMessage No queue or consumer found for service name
      */
     public function testRunRedisWorkerCommandWithBadService()

@@ -29,7 +29,8 @@ doctrine:
         user: "%test_database_user%"
         password: "%test_database_password%"
         charset: "%test_database_charset%"
-        path: "%test_database_path%"
+        path: "%env(TEST_DATABASE_PATH)%"
+
     orm:
         metadata_cache_driver:
             type: service

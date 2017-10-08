@@ -9,17 +9,17 @@ export_csv: Activar l'expòrt CSV
 export_json: Activar l'expòrt JSON
 export_txt: Activar l'expòrt TXT
 export_xml: Activar l'expòrt XML
-import_with_rabbitmq: Activar Enable RabbitMQ per importar de donadas de manièra asincròna
+import_with_rabbitmq: Activar RabbitMQ per importar de donadas de manièra asincròna
 import_with_redis: Activar Redis per importar de donadas de manièra asincròna
 shaarli_url: URL de Shaarli, se lo servici Shaarli es activat
-share_diaspora: Activar lo partatge cap a Diaspora
+share_diaspora: Activar lo partatge cap a Diaspora*
 share_mail: Activar lo partatge per corrièl
 share_shaarli: Activar lo partatge cap a Shaarli
+share_scuttle: Activar lo partatge cap a Scuttle
 share_twitter: Activar lo partatge cap a Twitter
 share_unmark: Activar lo partatge cap a Unmark.it
 show_printlink: Afichar un ligam per imprimir
 wallabag_support_url: URL d'assisténcia de wallabag
-wallabag_url: URL de *vòstra* instància de wallabag
 entry: "article"
 export: "expòrt"
 import: "impòrt"
@@ -33,3 +33,4 @@ demo_mode_username: "Utilizaire de la demostracion"
 share_public: Autorizar una URL publica pels articles
 download_images_enabled: Telecargar los imatges en local
 restricted_access: Activar l'autenticacion pels sites amb peatge
+api_user_registration: Autorizar los utilizaires a se marcar amb l'API

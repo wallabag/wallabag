@@ -2,33 +2,14 @@
 
 namespace Wallabag\ImportBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class PocketController extends Controller
 {
-    /**
-     * Return Pocket Import Service with or without RabbitMQ enabled.
-     *
-     * @return \Wallabag\ImportBundle\Import\PocketImport
-     */
-    private function getPocketImportService()
-    {
-        $pocket = $this->get('wallabag_import.pocket.import');
-        $pocket->setUser($this->getUser());
-
-        if ($this->get('craue_config')->get('import_with_rabbitmq')) {
-            $pocket->setProducer($this->get('old_sound_rabbit_mq.import_pocket_producer'));
-        } elseif ($this->get('craue_config')->get('import_with_redis')) {
-            $pocket->setProducer($this->get('wallabag_import.producer.redis.pocket'));
-        }
-
-        return $pocket;
-    }
-
     /**
      * @Route("/pocket", name="import_pocket")
      */
@@ -70,7 +51,7 @@ class PocketController extends Controller
         $this->get('session')->set('mark_as_read', $request->request->get('form')['mark_as_read']);
 
         return $this->redirect(
-            'https://getpocket.com/auth/authorize?request_token='.$requestToken.'&redirect_uri='.$this->generateUrl('import_pocket_callback', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'https://getpocket.com/auth/authorize?request_token=' . $requestToken . '&redirect_uri=' . $this->generateUrl('import_pocket_callback', [], UrlGeneratorInterface::ABSOLUTE_URL),
             301
         );
     }
@@ -116,5 +97,24 @@ class PocketController extends Controller
         );
 
         return $this->redirect($this->generateUrl('homepage'));
+    }
+
+    /**
+     * Return Pocket Import Service with or without RabbitMQ enabled.
+     *
+     * @return \Wallabag\ImportBundle\Import\PocketImport
+     */
+    private function getPocketImportService()
+    {
+        $pocket = $this->get('wallabag_import.pocket.import');
+        $pocket->setUser($this->getUser());
+
+        if ($this->get('craue_config')->get('import_with_rabbitmq')) {
+            $pocket->setProducer($this->get('old_sound_rabbit_mq.import_pocket_producer'));
+        } elseif ($this->get('craue_config')->get('import_with_redis')) {
+            $pocket->setProducer($this->get('wallabag_import.producer.redis.pocket'));
+        }
+
+        return $pocket;
     }
 }

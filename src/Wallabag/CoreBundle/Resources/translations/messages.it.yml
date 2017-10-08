@@ -1,7 +1,7 @@
 security:
     login:
         page_title: 'Benvenuto in wallabag!'
-        keep_logged_in: 'Resta loggato'
+        keep_logged_in: 'Resta connesso'
         forgot_password: 'Hai dimenticato la password?'
         submit: 'Login'
         register: 'Registrati'
@@ -21,17 +21,18 @@ menu:
         archive: 'Archivio'
         all_articles: 'Tutti'
         config: 'Configurazione'
-        tags: 'Tags'
+        tags: 'Etichette'
         internal_settings: 'Strumenti'
         import: 'Importa'
-        howto: 'How to'
-        # developer: 'API clients management'
+        howto: 'Come fare'
+        developer: 'Gestione client API'
         logout: 'Logout'
         about: 'About'
         search: 'Cerca'
         save_link: 'Salva collegamento'
         back_to_unread: 'Torna ai contenuti non letti'
-        # users_management: 'Users management'
+        users_management: 'Gestione utenti'
+        site_credentials: 'Credenziali sito'
     top:
         add_new_entry: 'Aggiungi un nuovo contenuto'
         search: 'Cerca'
@@ -44,9 +45,9 @@ footer:
     wallabag:
         elsewhere: 'Porta wallabag con te'
         social: 'Social'
-        powered_by: 'powered by'
-        about: 'About'
-    # stats: Since %user_creation% you read %nb_archives% articles. That is about %per_day% a day!
+        powered_by: 'Offerto da'
+        about: 'A proposito'
+    stats: Dal %user_creation% hai letto %nb_archives% articoli. Circa %per_day% al giorno!
 
 config:
     page_title: 'Configurazione'
@@ -55,7 +56,7 @@ config:
         rss: 'RSS'
         user_info: 'Informazioni utente'
         password: 'Password'
-        rules: 'Regole di tagging'
+        rules: 'Regole di etichettatura'
         new_user: 'Aggiungi utente'
     form:
         save: 'Salva'
@@ -65,72 +66,75 @@ config:
         language_label: 'Lingua'
         reading_speed:
             label: 'Velocità di lettura'
-            help_message: 'Puoi utilizzare dei tools online per valutare la tua velocità di lettura:'
+            help_message: 'Puoi utilizzare degli strumenti online per valutare la tua velocità di lettura:'
             100_word: 'Leggo ~100 parole al minuto'
             200_word: 'Leggo ~200 parole al minuto'
             300_word: 'Leggo ~300 parole al minuto'
             400_word: 'Leggo ~400 parole al minuto'
         action_mark_as_read:
-            # label: 'Where do you to be redirected after mark an article as read?'
-            # redirect_homepage: 'To the homepage'
-            # redirect_current_page: 'To the current page'
-        pocket_consumer_key_label: Consumer key per Pocket per importare i contenuti
-        # android_configuration: Configure your Android application
-        # help_theme: "wallabag is customizable. You can choose your prefered theme here."
-        # help_items_per_page: "You can change the number of articles displayed on each page."
-        # help_reading_speed: "wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article."
-        # help_language: "You can change the language of wallabag interface."
-        # help_pocket_consumer_key: "Required for Pocket import. You can create it in your Pocket account."
+            label: "Dove vuoi essere reindirizzato dopo aver segnato l'articolo come già letto?"
+            redirect_homepage: 'Alla homepage'
+            redirect_current_page: 'Alla pagina corrente'
+        pocket_consumer_key_label: Consumer key per Pocket usata per per importare i contenuti
+        android_configuration: Configura la tua applicazione Android
+        android_instruction: "Tocca qui per preriempire la tua applicazione Android"
+        help_theme: "wallabag è personalizzabile. Qui puoi scegliere il tuo tema preferito."
+        help_items_per_page: "Puoi cambiare il numero di articoli mostrati su ogni pagina."
+        help_reading_speed: "wallabag calcola un tempo di lettura per ogni articolo. Puoi definire qui, grazie a questa lista, se sei un lettore lento o veloce. wallabag ricalcolerà la velocità di lettura per ogni articolo."
+        help_language: "Puoi cambiare la lingua dell'interfaccia di wallabag."
+        help_pocket_consumer_key: "Richiesta per importare da Pocket. La puoi creare nel tuo account Pocket."
     form_rss:
         description: 'I feed RSS generati da wallabag ti permettono di leggere i tuoi contenuti salvati con il tuo lettore di RSS preferito. Prima, devi generare un token.'
-        token_label: 'RSS token'
+        token_label: 'Token RSS'
         no_token: 'Nessun token'
         token_create: 'Crea il tuo token'
         token_reset: 'Rigenera il tuo token'
         rss_links: 'Collegamenti RSS'
         rss_link:
-            unread: 'non letti'
-            starred: 'preferiti'
-            archive: 'archiviati'
+            unread: 'Non letti'
+            starred: 'Preferiti'
+            archive: 'Archiviati'
+            # all: 'All'
         rss_limit: 'Numero di elementi nel feed'
     form_user:
-        two_factor_description: "Abilitando la two factor authentication riceverai una e-mail con un codice per ogni nuova connesione non verificata"
+        two_factor_description: "Abilitando l'autenticazione a due fattori riceverai una e-mail con un codice per ogni nuova connesione non verificata"
         name_label: 'Nome'
         email_label: 'E-mail'
-        twoFactorAuthentication_label: 'Two factor authentication'
-        # help_twoFactorAuthentication: "If you enable 2FA, each time you want to login to wallabag, you'll receive a code by email."
+        twoFactorAuthentication_label: 'Autenticazione a due fattori'
+        help_twoFactorAuthentication: "Se abiliti l'autenticazione a due fattori, ogni volta che vorrai connetterti a wallabag, riceverai un codice via E-mail."
         delete:
-            # title: Delete my account (a.k.a danger zone)
-            # description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
-            # confirm: Are you really sure? (THIS CAN'T BE UNDONE)
-            # button: Delete my account
+            title: Cancella il mio account (zona pericolosa)
+            description: Rimuovendo il tuo account, TUTTI i tuoi articoli, TUTTE le tue etichette, TUTTE le tue annotazioni ed il tuo account verranno rimossi PERMANENTEMENTE (impossibile da ANNULLARE). Verrai poi disconnesso.
+            confirm: Sei veramente sicuro? (NON PUOI TORNARE INDIETRO)
+            button: Cancella il mio account
     reset:
-        # title: Reset area (a.k.a danger zone)
-        # description: By hiting buttons below you'll have ability to remove some informations from your account. Be aware that these actions are IRREVERSIBLE.
-        # annotations: Remove ALL annotations
-        # tags: Remove ALL tags
-        # entries: Remove ALL entries
-        # confirm: Are you really really sure? (THIS CAN'T BE UNDONE)
+        title: Area di reset (zona pericolosa)
+        description: Premendo i tasti sottostanti potrai rimuovere delle informazioni dal tuo account. Ricorda che queste azioni sono IRREVERSIBILI.
+        annotations: Rimuovi TUTTE le annotazioni
+        tags: Rimuovi TUTTE le etichette
+        entries: Rimuovi TUTTI gli articoli
+        # archived: Remove ALL archived entries
+        confirm: Sei veramente sicuro? (NON PUOI TORNARE INDIETRO)
     form_password:
-        # description: "You can change your password here. Your new password should by at least 8 characters long."
+        description: "Qui puoi cambiare la tua password. La tua nuova password dovrebbe essere composta da almeno 8 caratteri."
         old_password_label: 'Password corrente'
         new_password_label: 'Nuova password'
         repeat_new_password_label: 'Ripeti la nuova password'
     form_rules:
         if_label: 'se'
-        then_tag_as_label: 'allora tagga come'
+        then_tag_as_label: 'allora etichetta come'
         delete_rule_label: 'elimina'
-        # edit_rule_label: 'edit'
+        edit_rule_label: 'modifica'
         rule_label: 'Regola'
-        tags_label: 'Tag'
+        tags_label: 'Etichetta'
         faq:
             title: 'FAQ'
-            tagging_rules_definition_title: 'Cosa significa « regole di tagging » ?'
-            tagging_rules_definition_description: 'Sono regole utilizzate da wallabag per taggare automaticamente i contenuti.<br />Ogni volta che viene aggiunto un contenuto, tutte le regole di tagging rules vengono utilizzate per aggiungere i tag configurati, risparmiandoti il lavoro di classificare i contenuti manualmente.'
+            tagging_rules_definition_title: 'Cosa significa « regole di etichettatura » ?'
+            tagging_rules_definition_description: 'Sono regole utilizzate da wallabag per etichettare automaticamente i contenuti.<br />Ogni volta che viene aggiunto un contenuto, tutte le regole di etichettatura vengono utilizzate per aggiungere le etichette configurate, risparmiandoti il lavoro di classificare i contenuti manualmente.'
             how_to_use_them_title: 'Come si usano?'
-            how_to_use_them_description: 'Diciamo che vuoi taggare un contenuto come « <i>lettura veloce</i> » quando il tempo di lettura è inferiore ai 3 minuti.<br />In questo case, devi mettere « readingTime &lt;= 3 » nel campo <i>Regola</i> e « <i>lettura veloce</i> » nel campo <i>Tag</i>.<br />Molti tag si possono aggiungere contemporanemente separandoli con una virgola: « <i>lettura veloce, da leggere</i> »<br />Regole complesse possono essere scritte utilizzando gli operatori predefiniti: se « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » allora tagga « <i>lettura lunga, github </i> »'
+            how_to_use_them_description: 'Diciamo che vuoi etichettare un contenuto come « <i>lettura veloce</i> » quando il tempo di lettura è inferiore ai 3 minuti.<br />In questo case, devi mettere « readingTime &lt;= 3 » nel campo <i>Regola</i> e « <i>lettura veloce</i> » nel campo <i>Etichette</i>.<br />Molte etichette si possono aggiungere contemporanemente separandole con una virgola: « <i>lettura veloce, da leggere</i> »<br />Regole complesse possono essere scritte utilizzando gli operatori predefiniti: se « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » allora etichetta « <i>lettura lunga, github </i> »'
             variables_available_title: 'Quali operatori e variabili posso utilizzare per scrivere delle regole?'
-            variables_available_description: 'I seguenti operatori e variabili posso essere utilizzati per scrivere regole di tagging:'
+            variables_available_description: 'I seguenti operatori e variabili posso essere utilizzati per scrivere regole di etichettatura:'
             meaning: 'Significato'
             variable_description:
                 label: 'Variabile'
@@ -154,6 +158,7 @@ config:
                 or: "Una regola O un'altra"
                 and: "Una regola E un'altra"
                 matches: 'Verifica che un <i>oggetto</i> risulti in una <i>ricerca</i> (case-insensitive).<br />Esempio: <code>titolo contiene "football"</code>'
+                # notmatches: 'Tests that a <i>subject</i> is not matches a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
 
 entry:
     page_titles:
@@ -161,18 +166,19 @@ entry:
         starred: 'Contenuti preferiti'
         archived: 'Contenuti archiviati'
         filtered: 'Contenuti filtrati'
-        # filtered_tags: 'Filtered by tags:'
-        # filtered_search: 'Filtered by search:'
-        # untagged: 'Untagged entries'
+        filtered_tags: 'Filtrati per etichetta:'
+        filtered_search: 'Filtrati per ricerca:'
+        untagged: 'Articoli non etichettati'
+        all: 'Tutti gli articoli'
     list:
         number_on_the_page: "{0} Non ci sono contenuti.|{1} C'è un contenuto.|]1,Inf[ Ci sono %count% contenuti."
         reading_time: 'tempo di lettura stimato'
         reading_time_minutes: 'tempo di lettura stimato: %readingTime% min'
         reading_time_less_one_minute: 'tempo di lettura stimato: &lt; 1 min'
-        # number_of_tags: '{1}and one other tag|]1,Inf[and %count% other tags'
+        number_of_tags: "{1}ed un'altra etichetta|]1,Inf[e %count% altre etichette"
         reading_time_minutes_short: '%readingTime% min'
         reading_time_less_one_minute_short: '&lt; 1 min'
-        original_article: 'originale'
+        original_article: 'Originale'
         toogle_as_read: 'Segna come da leggere'
         toogle_as_star: 'Segna come non preferito'
         delete: 'Elimina'
@@ -182,11 +188,13 @@ entry:
         status_label: 'Stato'
         archived_label: 'Archiviati'
         starred_label: 'Preferiti'
-        # unread_label: 'Unread'
+        unread_label: 'Non letti'
         preview_picture_label: "Ha un'immagine di anteprima"
         preview_picture_help: 'Immagine di anteprima'
+        # is_public_label: 'Has a public link'
+        # is_public_help: 'Public link'
         language_label: 'Lingua'
-        # http_status_label: 'HTTP status'
+        http_status_label: 'Stato HTTP'
         reading_time:
             label: 'Tempo di lettura in minuti'
             from: 'da'
@@ -209,38 +217,42 @@ entry:
             view_original_article: 'Contenuto originale'
             re_fetch_content: 'Ri-ottieni pagina'
             delete: 'Elimina'
-            add_a_tag: 'Aggiungi un tag'
+            add_a_tag: 'Aggiungi un''etichetta'
             share_content: 'Condividi'
             share_email_label: 'E-mail'
-            # public_link: 'public link'
-            # delete_public_link: 'delete public link'
-            download: 'Download'
+            public_link: 'Link pubblico'
+            delete_public_link: 'Elimina link pubblico'
+            export: 'Esporta'
             print: 'Stampa'
             problem:
                 label: 'Problemi?'
                 description: 'Questo contenuto viene visualizzato male?'
         edit_title: 'Modifica titolo'
-        original_article: 'originale'
+        original_article: 'Originale'
         annotations_on_the_entry: '{0} Nessuna annotazione|{1} Una annotazione|]1,Inf[ %count% annotazioni'
         created_at: 'Data di creazione'
+        published_at: 'Data di pubblicazione'
+        published_by: 'Pubblicato da'
     new:
         page_title: 'Salva un nuovo contenuto'
         placeholder: 'http://website.com'
         form_new:
             url_label: Url
     search:
-        # placeholder: 'What are you looking for?'
+        placeholder: 'Cosa stai cercando?'
     edit:
         page_title: 'Modifica voce'
         title_label: 'Titolo'
         url_label: 'Url'
-        is_public_label: 'Pubblico'
         save_label: 'Salva'
     public:
-        # shared_by_wallabag: "This article has been shared by <a href='%wallabag_instance%'>wallabag</a>"
+        shared_by_wallabag: "Questo articolo è stato condiviso da %username% con <a href='%wallabag_instance%'>wallabag</a>"
+    confirm:
+        delete: "Vuoi veramente rimuovere quell'articolo?"
+        delete_tag: "Vuoi veramente rimuovere quell'etichetta da quell'articolo?"
 
 about:
-    page_title: 'About'
+    page_title: 'A proposito'
     top_menu:
         who_behind_wallabag: "Chi c'è dietro a wallabag"
         getting_help: 'Ottieni aiuto'
@@ -259,7 +271,7 @@ about:
         bug_reports: 'Bug reports'
         support: '<a href="https://github.com/wallabag/wallabag/issues">su GitHub</a>'
     helping:
-        description: 'wallabag è gratuito opensource. Puoi aiutarci:'
+        description: 'wallabag è gratuito ed OpenSource. Puoi aiutarci:'
         by_contributing: 'per contribuire al progetto:'
         by_contributing_2: 'un elenco delle attività richieste'
         by_paypal: 'via Paypal'
@@ -267,15 +279,15 @@ about:
         description: 'Un grazie ai collaboratori di wallabag web application'
     third_party:
         description: 'Ecco un elenco delle librerie di terze parti utilizzate in wallabag (con le rispettive licenze):'
-        package: 'Package'
+        package: 'Pacchetto'
         license: 'Licenza'
 
 howto:
-    page_title: 'How to'
+    page_title: 'Come fare'
     page_description: 'Ci sono diversi modi per salvare un contenuto:'
     tab_menu:
-        # add_link: "Add a link"
-        # shortcuts: "Use shortcuts"
+        add_link: "Aggiungi un link"
+        shortcuts: "Usa le scorciatoie"
     top_menu:
         browser_addons: 'tramite addons del Browser'
         mobile_apps: 'tramite app Mobile'
@@ -293,45 +305,45 @@ howto:
         ios: 'sullo store di iTunes'
         windows: 'sullo store di Microsoft'
     bookmarklet:
-        description: 'Trascinando e rilasciando questo link sulla barra dei bookmark del tuo browser:'
+        description: 'Trascinando e rilasciando questo link sulla barra dei preferiti del tuo browser:'
     shortcuts:
-        # page_description: Here are the shortcuts available in wallabag.
-        # shortcut: Shortcut
-        # action: Action
-        # all_pages_title: Shortcuts available in all pages
-        # go_unread: Go to unread
-        # go_starred: Go to starred
-        # go_archive: Go to archive
-        # go_all: Go to all entries
-        # go_tags: Go to tags
-        # go_config: Go to config
-        # go_import: Go to import
-        # go_developers: Go to developers
-        # go_howto: Go to howto (this page!)
-        # go_logout: Logout
-        # list_title: Shortcuts available in listing pages
-        # search: Display the search form
-        # article_title: Shortcuts available in entry view
-        # open_original: Open original URL of the entry
-        # toggle_favorite: Toggle star status for the entry
-        # toggle_archive: Toggle read status for the entry
-        # delete: Delete the entry
-        # material_title: Shortcuts available with Material theme only
-        # add_link: Add a new link
-        # hide_form: Hide the current form (search or new link)
-        # arrows_navigation: Navigate through articles
-        # open_article: Display the selected entry
+        page_description: Ecco le scorciatoie disponibili su wallabag.
+        shortcut: Scorciatoia
+        action: Azione
+        all_pages_title: Scorciatoie disponibili in tutte le pagine
+        go_unread: Vai ai non letti
+        go_starred: Vai ai preferiti
+        go_archive: Vai in archivio
+        go_all: Vai a tutti gli articoli
+        go_tags: Vai alle etichette
+        go_config: Vai su configurazione
+        go_import: Vai su importazione
+        go_developers: Vai su sviluppatori
+        go_howto: Vai su Come fare (questa pagina!)
+        go_logout: Disconnetti
+        list_title: Scorciatoie disponibili quando si elencano le pagine
+        search: Mostra il modulo di ricerca
+        article_title: Scorciatoie disponibili in vista articoli
+        open_original: Apri URL originale dell'articolo
+        toggle_favorite: Cambia stato Preferito dell'articolo
+        toggle_archive: Cambia stato Letto dell'articolo in letto
+        delete: Cancella l'articolo
+        material_title: Scorciatoie disponibili solo con il tema Material
+        add_link: Aggiungi un nuovo link
+        hide_form: Nascondi il modulo corrente (ricerca o nuovo link)
+        arrows_navigation: Naviga tra gli articoli
+        open_article: Mostra l'articolo selezionato
 
 quickstart:
     page_title: 'Introduzione'
-    # more: 'More…'
+    more: 'Più…'
     intro:
         title: 'Benvenuto su wallabag!'
-        paragraph_1: "Un tour in cui ti guideremo per scoprire e che ti mostrerà delle funzionalità che potrebbero interessarti."
+        paragraph_1: "Ti accompagneremo alla scoperta di wallabag e ti mostreremo delle funzionalità che potrebbero interessarti."
         paragraph_2: 'Seguici!'
     configure:
         title: "Configura l'applicazione"
-        # description: 'In order to have an application which suits you, have a look into the configuration of wallabag.'
+        description: "Per avere un'applicazione che ti soddisfi, dai un'occhiata alla configurazione di wallabag."
         language: 'Cambia lingua e design'
         rss: 'Abilita i feed RSS'
         tagging_rules: 'Scrivi delle regole per taggare automaticamente i contenuti'
@@ -345,7 +357,7 @@ quickstart:
         import: "Configura l'importazione"
     first_steps:
         title: 'Primi passi'
-        # description: "Now wallabag is well configured, it's time to archive the web. You can click on the top right sign + to add a link."
+        description: "Ora wallabag è ben configurata, è ora di archiviare il web. Puoi cliccare sul segno + in alto per aggiungere un link."
         new_article: 'Salva il tuo primo contenuto'
         unread_articles: 'E classificalo!'
     migrate:
@@ -358,12 +370,12 @@ quickstart:
         instapaper: 'Trasferisci da Instapaper'
     developer:
         title: 'Sviluppatori'
-        # description: 'We also thought to the developers: Docker, API, translations, etc.'
+        description: 'Abbiamo pensato anche agli sviluppatori: Docker, API, traduzioni, etc.'
         create_application: 'Crea la tua applicazione'
-        # use_docker: 'Use Docker to install wallabag'
+        use_docker: 'Usa Docker per installare wallabag'
     docs:
         title: 'Documentazione completa'
-        # description: "There are so much features in wallabag. Don't hesitate to read the manual to know them and to learn how to use them."
+        description: "wallabag ha tantissime funzionalità. Non esitare a leggere il manuale per conoscerle ed imparare ad usarle."
         annotate: 'Annota il tuo contenuto'
         export: 'Converti i tuoi contenuti in EPUB o PDF'
         search_filters: 'Impara come puoi recuperare un contenuto tramite la ricerca e i filtri'
@@ -373,17 +385,17 @@ quickstart:
         title: 'Supporto'
         description: 'Se hai bisogno di aiuto, siamo qui per te.'
         github: 'Su GitHub'
-        email: 'Per email'
+        email: 'Per E-mail'
         gitter: 'Su Gitter'
 
 tag:
-    page_title: 'Tags'
+    page_title: 'Etichette'
     list:
-        number_on_the_page: "{0} Non ci sono tag.|{1} C'è un tag.|]1,Inf[ ci sono %count% tag."
-        # see_untagged_entries: 'See untagged entries'
+        number_on_the_page: "{0} Non ci sono etichette.|{1} C'è un'etichetta.|]1,Inf[ ci sono %count% etichette."
+        see_untagged_entries: 'Vedi articoli non etichettati'
     new:
-        # add: 'Add'
-        # placeholder: 'You can add several tags, separated by a comma.'
+        add: 'Aggiungi'
+        placeholder: 'Puoi aggiungere varie etichette, separate da una virgola.'
 
 import:
     page_title: 'Importa'
@@ -397,46 +409,46 @@ import:
         save_label: 'Carica file'
     pocket:
         page_title: 'Importa da > Pocket'
-        description: "Questo importatore copierà tutti i tuoi dati da Pocket. Pocket non ci consente di ottenere contenuti dal loro servzio, così il contenuto leggibile di ogni articolo verrà ri-ottenuto da wallabag."
+        description: "Questo importatore copierà tutti i tuoi dati da Pocket. Pocket non ci consente di ottenere contenuti dal loro servizio, così il contenuto leggibile di ogni articolo verrà ri-ottenuto da wallabag."
         config_missing:
             description: "Importazione da Pocket non configurata."
             admin_message: 'Devi definire %keyurls% una pocket_consumer_key %keyurle%.'
-            user_message: 'Il tuo amministratore di server deve define una API Key per Pocket.'
+            user_message: 'Il tuo amministratore del server deve definire una API Key per Pocket.'
         authorize_message: 'Puoi importare dati dal tuo account Pocket. Devi solo cliccare sul pulsante sottostante e autorizzare la connessione a getpocket.com.'
         connect_to_pocket: 'Connetti a Pocket and importa i dati'
     wallabag_v1:
         page_title: 'Importa da > Wallabag v1'
-        description: 'Questo importatore copierà tutti i tuoi dati da un wallabag v1. Nella tua pagina di configurazione, clicca su "JSON export" nella sezione "Esport i tuoi dati di wallabag". Otterrai un file "wallabag-export-1-xxxx-xx-xx.json".'
+        description: 'Questo importatore copierà tutti i tuoi dati da un wallabag v1. Nella tua pagina di configurazione, clicca su "JSON export" nella sezione "Esporta i tuoi dati di wallabag". Otterrai un file "wallabag-export-1-xxxx-xx-xx.json".'
         how_to: 'Seleziona la tua esportazione di wallabag e clicca sul pulsante sottostante caricare il file e importare i dati.'
     wallabag_v2:
         page_title: 'Importa da > Wallabag v2'
-        description: 'Questo importatore copierà tutti i tuoi dati da un wallabag v2. Vai in "Tutti i contenuti", e, nella sidebar di esportazione, clicca su "JSON". Otterrai un file "Tutti i contenuti.json".'
+        description: 'Questo importatore copierà tutti i tuoi dati da un wallabag v2. Vai in "Tutti i contenuti", e, nella barra laterale di esportazione, clicca su "JSON". Otterrai un file "Tutti i contenuti.json'
     readability:
         page_title: 'Importa da > Readability'
-        # description: 'This importer will import all your Readability articles. On the tools (https://www.readability.com/tools/) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).'
-        # how_to: 'Please select your Readability export and click on the below button to upload and import it.'
+        description: 'Questo importatore copierà tutti i tuoi articoli da Readability. Nella pagina strumenti (https://www.readability.com/tools/), clicca su "Export your data" nella sezione "Data Export". Riceverai una E-mail per scaricare un file json (che tuttavia non termina con .json).'
+        how_to: 'Seleziona la tua esportazione da Readability e clicca sul bottone sottostante per caricarla ed importarla.'
     worker:
-        # enabled: "Import is made asynchronously. Once the import task is started, an external worker will handle jobs one at a time. The current service is:"
-        # download_images_warning: "You enabled downloading images for your articles. Combined with classic import it can take ages to proceed (or maybe failed). We <strong>strongly recommend</strong> to enable asynchronous import to avoid errors."
+        enabled: "L'importazione è asincrona. Una volta iniziata l'importazione, un worker esterno gestirà i compiti uno alla volta. Il servizio corrente è:"
+        download_images_warning: "Hai abilitato il download delle immagini per i tuoi articoli. Insieme all'importazione classica potrebbe volerci molto tempo per procedere (oppure potrebbe fallire). <strong>Raccomandiamo fortemente</strong> di abilitare l'importazione asincrona per evitare errori."
     firefox:
        page_title: 'Importa da > Firefox'
-       # description: "This importer will import all your Firefox bookmarks. Just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
-       # how_to: "Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched."
+       description: "Questo importatore copierà tutti i tuoi preferiti di Firefox. Vai sui tuoi preferiti (Ctrl+Maj+O), poi su \"Import and backup\", scegli \"Backup...\". Otterrai un file .json."
+       how_to: "Scegli il file di backup dei preferiti e clicca sul bottone sottostante per importarlo. Tieni presente che questo processo potrebbe richiedere molto tempo poiché tutti gli articoli devono essere recuperati."
     chrome:
        page_title: 'Importa da > Chrome'
-       # description: "This importer will import all your Chrome bookmarks. The location of the file depends on your operating system : <ul><li>On Linux, go into the <code>~/.config/chromium/Default/</code> directory</li><li>On Windows, it should be at <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>On OS X, it should be at <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Once you got there, copy the Bookmarks file someplace you'll find.<em><br>Note that if you have Chromium instead of Chrome, you'll have to correct paths accordingly.</em></p>"
-       # how_to: "Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched."
+       description: "Questo importatore copierà tutti i tuoi preferiti di Chrome. L'ubicazione del file dipende dal sistema operativo: <ul><li>Su Linux, vai nella cartella <code>~/.config/chromium/Default/</code></li><li>Su Windows, dovrebbe essere in <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>Su OS X, dovrebbe essere su <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Una volta arrivato lì, copia il file dei preferiti dove puoi trovarlo.<em><br>Se hai Chromium invece che Chrome, dovrai di conseguenza modificare i percorsi.</em></p>"
+       how_to: "Scegli il file di backup dei preferiti e clicca sul bottone sottostante per importarlo. Tieni presente che questo processo potrebbe richiedere molto tempo poiché tutti gli articoli devono essere recuperati."
     instapaper:
         page_title: 'Importa da > Instapaper'
-        # description: 'This importer will import all your Instapaper articles. On the settings (https://www.instapaper.com/user) page, click on "Download .CSV file" in the "Export" section. A CSV file will be downloaded (like "instapaper-export.csv").'
-        # how_to: 'Please select your Instapaper export and click on the below button to upload and import it.'
+        description: 'Questo importatore copierà tutti i tuoi articoli da Instapaper. Nella pagina delle impostazioni (https://www.instapaper.com/user), clicca su "Download .CSV file" nella sezione "Export". Sarà scaricato un file CSV (come "instapaper-export.csv").'
+        how_to: 'Scegli la tua esportazione da Instapaper e clicca sul bottone sottostante per caricarla ed importarla.'
     pinboard:
         page_title: "Importa da > Pinboard"
-        # description: 'This importer will import all your Instapaper articles. On the backup (https://pinboard.in/settings/backup) page, click on "JSON" in the "Bookmarks" section. A JSON file will be downloaded (like "pinboard_export").'
-        # how_to: 'Please select your Pinboard export and click on the below button to upload and import it.'
+        description: 'Questo importatore copierà tutti i tuoi articoli da Pinboard. Sulla pagina di backup (https://pinboard.in/settings/backup), clicca su "JSON" nella sezione "Bookmarks". Sarà scaricato un file JSON (come "pinboard_export").'
+        how_to: 'Scegli la tua esportazione da Pinboard e clicca sul bottone sottostante per caricarla ed importarla.'
 
 developer:
-    # page_title: 'API clients management'
+    page_title: 'Gestione client API'
     welcome_message: 'Benvenuto nelle API di wallabag'
     documentation: 'Documentazione'
     how_to_first_app: 'Come creare la mia prima applicazione'
@@ -447,33 +459,33 @@ developer:
         create_new: 'Crea un nuovo client'
     existing_clients:
         title: 'Client esistenti'
-        field_id: 'Client ID'
-        field_secret: 'Client secret'
-        field_uris: 'Redirect URI'
-        field_grant_types: 'Tipi di grant permessi'
+        field_id: 'ID Client'
+        field_secret: 'Chiave segreta'
+        field_uris: 'URI di reindirizzamento'
+        field_grant_types: 'Tipi di permessi concessi'
         no_client: 'Ancora nessun client.'
     remove:
-        warn_message_1: "Hai la possibilitò di rimuovere questo client.L'operazione è IRREVERSIBILE!"
+        warn_message_1: "Hai la possibilità di rimuovere questo client.L'operazione è IRREVERSIBILE!"
         warn_message_2: "Se lo rimuovi, ogni app configurata con questo client non sarà più in grado di autenticarsi."
         action: 'Rimuovi questo client'
     client:
-        # page_title: 'API clients management > Nuovo client'
+        page_title: 'Gestione client API > Nuovo client'
         page_description: 'Stai per creare un nuovo client. Compila i campi sottostanti per il redirect URI della tua applicazione.'
         form:
-            # name_label: 'Name of the client'
+            name_label: 'Nome del client'
             redirect_uris_label: 'Redirect URI'
             save_label: 'Crea un nuovo client'
         action_back: 'Indietro'
     client_parameter:
-        # page_title: 'API clients management > parametri Client'
+        page_title: 'Gestione client API > Parametri Client'
         page_description: 'Questi sono i tuoi parametri del client.'
-        # field_name: 'Client name'
-        field_id: 'Client ID'
-        field_secret: 'Client secret'
+        field_name: 'Nome del Client'
+        field_id: 'ID Client'
+        field_secret: 'Chiave segreta'
         back: 'Indietro'
-        read_howto: 'Leggi howto "Come creare la mia prima applicazione"'
+        read_howto: 'Leggi Come fare "Come creare la mia prima applicazione"'
     howto:
-        # page_title: 'API clients management > Come creare la mia prima applicazione'
+        page_title: 'Gestione client API > Come creare la mia prima applicazione'
         description:
             paragraph_1: 'I seguenti comandi fanno uso della <a href="https://github.com/jkbrzt/httpie">libreria HTTPie</a>. Verifica che sia installata sul tuo sistema prima di utilizzarli.'
             paragraph_2: 'Hai bisogno di un token per far comunicare la tua applicazione di terze parti e le API di wallabag.'
@@ -486,33 +498,55 @@ developer:
         back: 'Indietro'
 
 user:
-    # page_title: Users management
-    # new_user: Create a new user
-    # edit_user: Edit an existing user
-    # description: "Here you can manage all users (create, edit and delete)"
+    page_title: Gestione utenti
+    new_user: Crea un nuovo utente
+    edit_user: Modifica un utente esistente
+    description: "Qui puoi gestire tutti gli utenti (crea, modifica ed elimina)"
+    list:
+        actions: Azioni
+        edit_action: Modifica
+        yes: Sì
+        no: "No"
+        create_new_one: Crea un nuovo utente
+    form:
+        username_label: 'Nome utente'
+        name_label: 'Nome'
+        password_label: 'Password'
+        repeat_new_password_label: 'Ripeti password'
+        plain_password_label: '????'
+        email_label: 'E-mail'
+        enabled_label: 'Abilitato'
+        last_login_label: 'Ultima connessione'
+        twofactor_label: Autenticazione a due fattori
+        save: Salva
+        delete: Cancella
+        delete_confirm: Sei sicuro?
+        back_to_list: Torna alla lista
+    search:
+        # placeholder: Filter by username or email
+
+site_credential:
+    # page_title: Site credentials management
+    # new_site_credential: Create a credential
+    # edit_site_credential: Edit an existing credential
+    # description: "Here you can manage all credentials for sites which required them (create, edit and delete), like a paywall, an authentication, etc."
     # list:
     #     actions: Actions
     #     edit_action: Edit
     #     yes: Yes
     #     no: No
-    #     create_new_one: Create a new user
-    form:
-        username_label: 'Username'
-        # name_label: 'Name'
-        password_label: 'Password'
-        repeat_new_password_label: 'Ripeti password'
-        plain_password_label: '????'
-        email_label: 'E-mail'
-        # enabled_label: 'Enabled'
-        # last_login_label: 'Last login'
-        # twofactor_label: Two factor authentication
-        # save: Save
-        # delete: Delete
-        # delete_confirm: Are you sure?
-        # back_to_list: Back to list
+    #     create_new_one: Create a new credential
+    # form:
+    #     username_label: 'Username'
+    #     host_label: 'Host'
+    #     password_label: 'Password'
+    #     save: Save
+    #     delete: Delete
+    #     delete_confirm: Are you sure?
+    #     back_to_list: Back to list
 
 error:
-    # page_title: An error occurred
+    page_title: Si è verificato un errore
 
 flashes:
     config:
@@ -522,20 +556,21 @@ flashes:
             password_not_updated_demo: "In modalità demo, non puoi cambiare la password dell'utente."
             user_updated: 'Informazioni aggiornate'
             rss_updated: 'Informazioni RSS aggiornate'
-            tagging_rules_updated: 'Regole di tagging aggiornate'
-            tagging_rules_deleted: 'Regola di tagging aggiornate'
+            tagging_rules_updated: 'Regole di etichettatura aggiornate'
+            tagging_rules_deleted: 'Regola di etichettatura eliminate'
             rss_token_updated: 'RSS token aggiornato'
-            # annotations_reset: Annotations reset
-            # tags_reset: Tags reset
-            # entries_reset: Entries reset
+            annotations_reset: Reset annotazioni
+            tags_reset: Reset etichette
+            entries_reset: Reset articoli
+            # archived_reset: Archived entries deleted
     entry:
         notice:
             entry_already_saved: 'Contenuto già salvato in data %date%'
             entry_saved: 'Contenuto salvato'
-            # entry_saved_failed: 'Entry saved but fetching content failed'
+            entry_saved_failed: 'Articolo salvato ma il recupero del contenuto è fallito'
             entry_updated: 'Contenuto aggiornato'
             entry_reloaded: 'Contenuto ricaricato'
-            # entry_reloaded_failed: 'Entry reloaded but fetching content failed'
+            entry_reloaded_failed: 'Articolo ricaricato ma il recupero del contenuto è fallito'
             entry_archived: 'Contenuto archiviato'
             entry_unarchived: 'Contenuto dis-archiviato'
             entry_starred: 'Contenuto segnato come preferito'
@@ -543,22 +578,27 @@ flashes:
             entry_deleted: 'Contenuto eliminato'
     tag:
         notice:
-            tag_added: 'Tag aggiunto'
+            tag_added: 'Etichetta aggiunta'
     import:
         notice:
             failed: 'Importazione fallita, riprova.'
             failed_on_file: 'Errore durante la processazione dei dati da importare. Verifica il tuo file di import.'
             summary: 'Sommario di importazione: %imported% importati, %skipped% già salvati.'
-            # summary_with_queue: 'Import summary: %queued% queued.'
+            summary_with_queue: "Riassunto dell'importazione: %queued% messo in coda."
         error:
-            # redis_enabled_not_installed: Redis is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check Redis configuration.
-            # rabbit_enabled_not_installed: RabbitMQ is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check RabbitMQ configuration.
+            redis_enabled_not_installed: Redis è abilitato per gestire l'importazione asincrona, ma sembra che  <u>non possiamo connetterci ad esso</u>. Controlla la tua configurazione di Redis.
+            rabbit_enabled_not_installed: RabbitMQ è abilitato per gestire l'importazione asincrona, ma sembra che  <u>non possiamo connetterci ad esso</u>. Controlla la tua configurazione di RabbitMQ.
     developer:
         notice:
             client_created: 'Nuovo client creato.'
             client_deleted: 'Client eliminato'
     user:
         notice:
-            # added: 'User "%username%" added'
-            # updated: 'User "%username%" updated'
-            # deleted: 'User "%username%" deleted'
+            added: 'Utente "%username%" aggiunto'
+            updated: 'Utente "%username%" aggiornato'
+            deleted: 'Utente "%username%" eliminato'
+    site_credential:
+        notice:
+            # added: 'Site credential for "%host%" added'
+            # updated: 'Site credential for "%host%" updated'
+            # deleted: 'Site credential for "%host%" deleted'

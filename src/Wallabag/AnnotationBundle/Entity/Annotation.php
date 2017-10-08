@@ -3,13 +3,15 @@
 namespace Wallabag\AnnotationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Exclude;
-use JMS\Serializer\Annotation\VirtualProperty;
-use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Groups;
-use Wallabag\UserBundle\Entity\User;
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\VirtualProperty;
+use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
+use Wallabag\UserBundle\Entity\User;
 
 /**
  * Annotation.
@@ -21,6 +23,8 @@ use Wallabag\CoreBundle\Entity\Entry;
  */
 class Annotation
 {
+    use EntityTimestampsTrait;
+
     /**
      * @var int
      *
@@ -56,7 +60,11 @@ class Annotation
     /**
      * @var string
      *
-     * @ORM\Column(name="quote", type="string")
+     * @Assert\Length(
+     *     max = 10000,
+     *     maxMessage = "validator.quote_length_too_high"
+     * )
+     * @ORM\Column(name="quote", type="text")
      *
      * @Groups({"entries_for_user", "export_all"})
      */
@@ -126,18 +134,6 @@ class Annotation
     public function getText()
     {
         return $this->text;
-    }
-
-    /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
-    public function timestamps()
-    {
-        if (is_null($this->createdAt)) {
-            $this->createdAt = new \DateTime();
-        }
-        $this->updatedAt = new \DateTime();
     }
 
     /**

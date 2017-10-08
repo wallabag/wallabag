@@ -2,8 +2,8 @@
 
 namespace Tests\Wallabag\ImportBundle\Controller;
 
-use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 
 class FirefoxControllerTest extends WallabagCoreTestCase
 {
@@ -14,9 +14,9 @@ class FirefoxControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/import/firefox');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
-        $this->assertEquals(1, $crawler->filter('input[type=file]')->count());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
+        $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
     public function testImportFirefoxWithRabbitEnabled()
@@ -28,9 +28,9 @@ class FirefoxControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/import/firefox');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
-        $this->assertEquals(1, $crawler->filter('input[type=file]')->count());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
+        $this->assertSame(1, $crawler->filter('input[type=file]')->count());
 
         $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 0);
     }
@@ -49,7 +49,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
     public function testImportFirefoxWithRedisEnabled()
@@ -61,13 +61,13 @@ class FirefoxControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/import/firefox');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
-        $this->assertEquals(1, $crawler->filter('input[type=file]')->count());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
+        $this->assertSame(1, $crawler->filter('input[type=file]')->count());
 
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__.'/../fixtures/firefox-bookmarks.json', 'Bookmarks');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/firefox-bookmarks.json', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -75,7 +75,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 
@@ -95,7 +95,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/firefox');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__.'/../fixtures/firefox-bookmarks.json', 'Bookmarks');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/firefox-bookmarks.json', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -103,7 +103,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 
@@ -121,23 +121,23 @@ class FirefoxControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty($content->getMimetype(), 'Mimetype for http://lexpansion.lexpress.fr is ok');
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://lexpansion.lexpress.fr is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for http://lexpansion.lexpress.fr is ok');
-        $this->assertEquals(2, count($content->getTags()));
+        $this->assertSame(3, count($content->getTags()));
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId(
-                'http://stackoverflow.com/questions/15017163/parser-for-exported-bookmarks-html-file-of-google-chrome-and-mozilla-in-java',
+                'https://stackoverflow.com/questions/15017163/parser-for-exported-bookmarks-html-file-of-google-chrome-and-mozilla-in-java',
                 $this->getLoggedInUserId()
             );
 
-        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for http://stackoverflow.com is ok');
-        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://stackoverflow.com is ok');
-        $this->assertEmpty($content->getLanguage(), 'Language for http://stackoverflow.com is ok');
+        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://stackoverflow.com is ok');
+        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://stackoverflow.com is ok');
+        $this->assertEmpty($content->getLanguage(), 'Language for https://stackoverflow.com is ok');
 
         $createdAt = $content->getCreatedAt();
-        $this->assertEquals('2013', $createdAt->format('Y'));
-        $this->assertEquals('12', $createdAt->format('m'));
+        $this->assertSame('2013', $createdAt->format('Y'));
+        $this->assertSame('12', $createdAt->format('m'));
     }
 
     public function testImportWallabagWithEmptyFile()
@@ -148,7 +148,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/firefox');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__.'/../fixtures/test.txt', 'test.txt');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/test.txt', 'test.txt');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -156,7 +156,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 

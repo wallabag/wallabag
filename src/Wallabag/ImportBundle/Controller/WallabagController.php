@@ -3,7 +3,9 @@
 namespace Wallabag\ImportBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
 
 /**
@@ -11,20 +13,6 @@ use Wallabag\ImportBundle\Form\Type\UploadImportType;
  */
 abstract class WallabagController extends Controller
 {
-    /**
-     * Return the service to handle the import.
-     *
-     * @return \Wallabag\ImportBundle\Import\ImportInterface
-     */
-    abstract protected function getImportService();
-
-    /**
-     * Return the template used for the form.
-     *
-     * @return string
-     */
-    abstract protected function getImportTemplate();
-
     /**
      * Handle import request.
      *
@@ -43,11 +31,11 @@ abstract class WallabagController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('file')->getData();
             $markAsRead = $form->get('mark_as_read')->getData();
-            $name = $this->getUser()->getId().'.json';
+            $name = $this->getUser()->getId() . '.json';
 
-            if (null !== $file && in_array($file->getClientMimeType(), $this->getParameter('wallabag_import.allow_mimetypes')) && $file->move($this->getParameter('wallabag_import.resource_dir'), $name)) {
+            if (null !== $file && in_array($file->getClientMimeType(), $this->getParameter('wallabag_import.allow_mimetypes'), true) && $file->move($this->getParameter('wallabag_import.resource_dir'), $name)) {
                 $res = $wallabag
-                    ->setFilepath($this->getParameter('wallabag_import.resource_dir').'/'.$name)
+                    ->setFilepath($this->getParameter('wallabag_import.resource_dir') . '/' . $name)
                     ->setMarkAsRead($markAsRead)
                     ->import();
 
@@ -66,7 +54,7 @@ abstract class WallabagController extends Controller
                         ]);
                     }
 
-                    unlink($this->getParameter('wallabag_import.resource_dir').'/'.$name);
+                    unlink($this->getParameter('wallabag_import.resource_dir') . '/' . $name);
                 }
 
                 $this->get('session')->getFlashBag()->add(
@@ -75,12 +63,12 @@ abstract class WallabagController extends Controller
                 );
 
                 return $this->redirect($this->generateUrl('homepage'));
-            } else {
-                $this->get('session')->getFlashBag()->add(
-                    'notice',
-                    'flashes.import.notice.failed_on_file'
-                );
             }
+
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'flashes.import.notice.failed_on_file'
+            );
         }
 
         return $this->render($this->getImportTemplate(), [
@@ -88,4 +76,18 @@ abstract class WallabagController extends Controller
             'import' => $wallabag,
         ]);
     }
+
+    /**
+     * Return the service to handle the import.
+     *
+     * @return \Wallabag\ImportBundle\Import\ImportInterface
+     */
+    abstract protected function getImportService();
+
+    /**
+     * Return the template used for the form.
+     *
+     * @return string
+     */
+    abstract protected function getImportTemplate();
 }
