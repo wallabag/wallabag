@@ -132,9 +132,9 @@ services:
     wallabag_core.helper.entries_export:
         class: Wallabag\CoreBundle\Helper\EntriesExport
         arguments:
+            - "@translator"
             - '%domain_name%'
             - src/Wallabag/CoreBundle/Resources/public/themes/_global/img/appicon/apple-touch-icon-152.png
-            - "@translator"
 
     wallabag.operator.array.matches:
         class: Wallabag\CoreBundle\Operator\PHP\Matches

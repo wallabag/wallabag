@@ -23,20 +23,16 @@ class EntriesExport
     private $entries = [];
     private $author = 'wallabag';
     private $language = '';
-    private $footerTemplate = '<div style="text-align:center;">
-        <p>Produced by wallabag with %EXPORT_METHOD%</p>
-        <p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p>
-        </div>';
 
     /**
      * @param string $wallabagUrl Wallabag instance url
      * @param string $logoPath    Path to the logo FROM THE BUNDLE SCOPE
      */
-    public function __construct($wallabagUrl, $logoPath, TranslatorInterface $translator)
+    public function __construct(TranslatorInterface $translator, $wallabagUrl, $logoPath)
     {
+        $this->translator = $translator;
         $this->wallabagUrl = $wallabagUrl;
         $this->logoPath = $logoPath;
-        $this->translator = $translator;
     }
 
     /**
