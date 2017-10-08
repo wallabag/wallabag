@@ -25,6 +25,7 @@ class EntriesExport
     private $language = '';
 
     /**
+     * @param TranslatorInterface $translator Translator service
      * @param string $wallabagUrl Wallabag instance url
      * @param string $logoPath    Path to the logo FROM THE BUNDLE SCOPE
      */
