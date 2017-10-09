@@ -752,7 +752,7 @@ class EntryRestController extends WallabagRestController
         $context = new SerializationContext();
         $context->setSerializeNull(true);
 
-        $json = $this->get('serializer')->serialize($data, 'json', $context);
+        $json = $this->get('jms_serializer')->serialize($data, 'json', $context);
 
         return (new JsonResponse())->setJson($json);
     }

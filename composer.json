@@ -43,7 +43,7 @@
         "ext-iconv": "*",
         "ext-tokenizer": "*",
         "ext-pdo": "*",
-        "symfony/symfony": "3.2.*",
+        "symfony/symfony": "3.3.*",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-cache-bundle": "^1.2",
@@ -51,15 +51,15 @@
         "symfony/swiftmailer-bundle": "^2.3",
         "symfony/monolog-bundle": "^3.0",
         "sensio/distribution-bundle": "^5.0",
-        "sensio/framework-extra-bundle": "^3.0.2",
+        "sensio/framework-extra-bundle": "^3.0",
         "incenteev/composer-parameter-handler": "^2.0",
-        "nelmio/cors-bundle": "~1.4.0",
+        "nelmio/cors-bundle": "~1.4",
         "friendsofsymfony/rest-bundle": "~2.1",
-        "jms/serializer-bundle": "~1.1",
+        "jms/serializer-bundle": "~2.2",
         "nelmio/api-doc-bundle": "~2.7",
         "mgargano/simplehtmldom": "~1.5",
         "wallabag/tcpdf": "^6.2",
-        "simplepie/simplepie": "~1.3.1",
+        "simplepie/simplepie": "~1.5",
         "willdurand/hateoas-bundle": "~1.0",
         "liip/theme-bundle": "~1.1",
         "lexik/form-filter-bundle": "~5.0",
@@ -89,12 +89,12 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",
-        "doctrine/data-fixtures": "~1.1.1",
+        "doctrine/data-fixtures": "~1.1",
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.3",
         "friendsofphp/php-cs-fixer": "~2.0",
         "m6web/redis-mock": "^2.0",
-        "dama/doctrine-test-bundle": "^1.0"
+        "dama/doctrine-test-bundle": "^3.0"
     },
     "scripts": {
         "post-cmd": [

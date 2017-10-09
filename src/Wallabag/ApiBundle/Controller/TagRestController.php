@@ -25,7 +25,7 @@ class TagRestController extends WallabagRestController
             ->getRepository('WallabagCoreBundle:Tag')
             ->findAllTags($this->getUser()->getId());
 
-        $json = $this->get('serializer')->serialize($tags, 'json');
+        $json = $this->get('jms_serializer')->serialize($tags, 'json');
 
         return (new JsonResponse())->setJson($json);
     }
@@ -58,7 +58,7 @@ class TagRestController extends WallabagRestController
 
         $this->cleanOrphanTag($tag);
 
-        $json = $this->get('serializer')->serialize($tag, 'json');
+        $json = $this->get('jms_serializer')->serialize($tag, 'json');
 
         return (new JsonResponse())->setJson($json);
     }
@@ -100,7 +100,7 @@ class TagRestController extends WallabagRestController
 
         $this->cleanOrphanTag($tags);
 
-        $json = $this->get('serializer')->serialize($tags, 'json');
+        $json = $this->get('jms_serializer')->serialize($tags, 'json');
 
         return (new JsonResponse())->setJson($json);
     }
@@ -126,7 +126,7 @@ class TagRestController extends WallabagRestController
 
         $this->cleanOrphanTag($tag);
 
-        $json = $this->get('serializer')->serialize($tag, 'json');
+        $json = $this->get('jms_serializer')->serialize($tag, 'json');
 
         return (new JsonResponse())->setJson($json);
     }

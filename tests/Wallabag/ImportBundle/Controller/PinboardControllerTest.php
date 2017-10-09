@@ -118,6 +118,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('flashes.import.notice.summary', $body[0]);
 
+        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
         $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://ma.ttias.be is ok');
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://ma.ttias.be is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for https://ma.ttias.be is ok');
@@ -161,6 +162,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
+        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content1);
         $this->assertTrue($content1->isArchived());
 
         $content2 = $client->getContainer()
@@ -171,6 +173,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
+        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content2);
         $this->assertTrue($content2->isArchived());
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
