@@ -145,7 +145,7 @@ class TagRestController extends WallabagRestController
         $em = $this->getDoctrine()->getManager();
 
         foreach ($tags as $tag) {
-            if (count($tag->getEntries()) === 0) {
+            if (0 === count($tag->getEntries())) {
                 $em->remove($tag);
             }
         }

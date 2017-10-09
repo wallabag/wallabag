@@ -59,7 +59,7 @@ class ExportController extends Controller
         $methodBuilder = 'getBuilderFor' . $method . 'ByUser';
         $repository = $this->get('wallabag_core.entry_repository');
 
-        if ($category === 'tag_entries') {
+        if ('tag_entries' === $category) {
             $tag = $this->get('wallabag_core.tag_repository')->findOneBySlug($request->query->get('tag'));
 
             $entries = $repository->findAllByTagId(

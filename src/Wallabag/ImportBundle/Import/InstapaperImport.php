@@ -63,7 +63,7 @@ class InstapaperImport extends AbstractImport
 
         $entries = [];
         $handle = fopen($this->filepath, 'r');
-        while (($data = fgetcsv($handle, 10240)) !== false) {
+        while (false !== ($data = fgetcsv($handle, 10240))) {
             if ('URL' === $data[0]) {
                 continue;
             }
@@ -80,8 +80,8 @@ class InstapaperImport extends AbstractImport
                 'url' => $data[0],
                 'title' => $data[1],
                 'status' => $data[3],
-                'is_archived' => $data[3] === 'Archive' || $data[3] === 'Starred',
-                'is_starred' => $data[3] === 'Starred',
+                'is_archived' => 'Archive' === $data[3] || 'Starred' === $data[3],
+                'is_starred' => 'Starred' === $data[3],
                 'html' => false,
                 'tags' => $tags,
             ];

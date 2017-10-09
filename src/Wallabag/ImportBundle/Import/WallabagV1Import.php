@@ -61,7 +61,7 @@ class WallabagV1Import extends WallabagImport
             $data['html'] = $this->fetchingErrorMessage;
         }
 
-        if (array_key_exists('tags', $entry) && $entry['tags'] !== '') {
+        if (array_key_exists('tags', $entry) && '' !== $entry['tags']) {
             $data['tags'] = $entry['tags'];
         }
 

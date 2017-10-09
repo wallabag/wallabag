@@ -125,7 +125,7 @@ class ContentProxy
         $date = $value;
 
         // is it a timestamp?
-        if (filter_var($date, FILTER_VALIDATE_INT) !== false) {
+        if (false !== filter_var($date, FILTER_VALIDATE_INT)) {
             $date = '@' . $date;
         }
 

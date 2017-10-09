@@ -171,7 +171,7 @@ abstract class BrowserImport extends AbstractImport
             $entryToBeFlushed[] = $entry;
 
             // flush every 20 entries
-            if (($i % 20) === 0) {
+            if (0 === ($i % 20)) {
                 $this->em->flush();
 
                 foreach ($entryToBeFlushed as $entry) {

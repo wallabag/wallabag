@@ -52,7 +52,7 @@ class ListUserCommand extends ContainerAwareCommand
                 '%s/%s%s user(s) displayed.',
                 count($users),
                 $nbUsers,
-                $input->getArgument('search') === null ? '' : ' (filtered)'
+                null === $input->getArgument('search') ? '' : ' (filtered)'
             )
         );
 
