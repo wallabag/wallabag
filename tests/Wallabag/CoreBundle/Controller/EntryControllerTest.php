@@ -1343,7 +1343,7 @@ class EntryControllerTest extends WallabagCoreTestCase
      */
     public function testRestrictedArticle()
     {
-        $url = 'http://www.monde-diplomatique.fr/2017/05/BONNET/57475';
+        $url = 'https://www.monde-diplomatique.fr/2017/05/BONNET/57475';
         $this->logInAs('admin');
         $client = $this->getClient();
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
