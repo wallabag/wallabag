@@ -14,6 +14,7 @@ wallabag_core:
         oc: 'Occitan'
         it: 'Italiano'
         pt: 'Português'
+        ru: 'Русский'
     items_on_page: 12
     theme: material
     language: '%locale%'
