@@ -310,7 +310,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testGetTaggedEntriesWithBadParams()
     {
-        $this->client->request('GET', '/api/entries', ['tags' => ['foo','bar']]);
+        $this->client->request('GET', '/api/entries', ['tags' => ['foo', 'bar']]);
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
     }
