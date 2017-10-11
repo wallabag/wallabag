@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Changed reading_time field to prevent null value
+ * Changed reading_time field to prevent null value.
  */
 class Version20171008195606 extends AbstractMigration implements ContainerAwareInterface
 {
@@ -27,7 +27,7 @@ class Version20171008195606 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        $this->skipIf($this->connection->getDatabasePlatform()->getName() === 'sqlite', 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
+        $this->skipIf('sqlite' === $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
 
         switch ($this->connection->getDatabasePlatform()->getName()) {
             case 'mysql':
@@ -44,7 +44,7 @@ class Version20171008195606 extends AbstractMigration implements ContainerAwareI
      */
     public function down(Schema $schema)
     {
-        $this->skipIf($this->connection->getDatabasePlatform()->getName() === 'sqlite', 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
+        $this->skipIf('sqlite' === $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
 
         switch ($this->connection->getDatabasePlatform()->getName()) {
             case 'mysql':
