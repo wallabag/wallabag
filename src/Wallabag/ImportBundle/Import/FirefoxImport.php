@@ -45,7 +45,7 @@ class FirefoxImport extends BrowserImport
             'created_at' => substr($entry['dateAdded'], 0, 10),
         ];
 
-        if (array_key_exists('tags', $entry) && $entry['tags'] !== '') {
+        if (array_key_exists('tags', $entry) && '' !== $entry['tags']) {
             $data['tags'] = $entry['tags'];
         }
 

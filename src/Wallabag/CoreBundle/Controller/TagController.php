@@ -65,7 +65,7 @@ class TagController extends Controller
         $em->flush();
 
         // remove orphan tag in case no entries are associated to it
-        if (count($tag->getEntries()) === 0) {
+        if (0 === count($tag->getEntries())) {
             $em->remove($tag);
             $em->flush();
         }

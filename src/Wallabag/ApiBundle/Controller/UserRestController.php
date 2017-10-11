@@ -46,7 +46,7 @@ class UserRestController extends WallabagRestController
     public function putUserAction(Request $request)
     {
         if (!$this->getParameter('fosuser_registration') || !$this->get('craue_config')->get('api_user_registration')) {
-            $json = $this->get('serializer')->serialize(['error' => "Server doesn't allow registrations"], 'json');
+            $json = $this->get('jms_serializer')->serialize(['error' => "Server doesn't allow registrations"], 'json');
 
             return (new JsonResponse())
                 ->setJson($json)
@@ -92,7 +92,7 @@ class UserRestController extends WallabagRestController
                 $errors['password'] = $this->translateErrors($data['plainPassword']['children']['first']['errors']);
             }
 
-            $json = $this->get('serializer')->serialize(['error' => $errors], 'json');
+            $json = $this->get('jms_serializer')->serialize(['error' => $errors], 'json');
 
             return (new JsonResponse())
                 ->setJson($json)
@@ -127,7 +127,7 @@ class UserRestController extends WallabagRestController
      */
     private function sendUser(User $user, $group = 'user_api', $status = JsonResponse::HTTP_OK)
     {
-        $json = $this->get('serializer')->serialize(
+        $json = $this->get('jms_serializer')->serialize(
             $user,
             'json',
             SerializationContext::create()->setGroups([$group])

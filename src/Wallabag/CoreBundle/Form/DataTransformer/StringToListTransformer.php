@@ -48,7 +48,7 @@ class StringToListTransformer implements DataTransformerInterface
      */
     public function reverseTransform($string)
     {
-        if ($string === null) {
+        if (null === $string) {
             return;
         }
 

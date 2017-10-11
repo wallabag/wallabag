@@ -348,7 +348,7 @@ class ConfigController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         foreach ($tags as $tag) {
-            if (count($tag->getEntries()) === 0) {
+            if (0 === count($tag->getEntries())) {
                 $em->remove($tag);
             }
         }

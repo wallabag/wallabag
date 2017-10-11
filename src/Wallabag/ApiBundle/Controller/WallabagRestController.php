@@ -19,7 +19,7 @@ class WallabagRestController extends FOSRestController
     public function getVersionAction()
     {
         $version = $this->container->getParameter('wallabag_core.version');
-        $json = $this->get('serializer')->serialize($version, 'json');
+        $json = $this->get('jms_serializer')->serialize($version, 'json');
 
         return (new JsonResponse())->setJson($json);
     }

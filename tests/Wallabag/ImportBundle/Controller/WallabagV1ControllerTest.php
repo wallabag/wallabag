@@ -119,6 +119,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('flashes.import.notice.summary', $body[0]);
 
+        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
         $this->assertEmpty($content->getMimetype(), 'Mimetype for http://www.framablog.org is empty');
         $this->assertEmpty($content->getPreviewPicture(), 'Preview picture for http://www.framablog.org is empty');
         $this->assertEmpty($content->getLanguage(), 'Language for http://www.framablog.org is empty');
@@ -160,6 +161,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
+        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content1);
         $this->assertTrue($content1->isArchived());
 
         $content2 = $client->getContainer()
@@ -170,6 +172,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
+        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content2);
         $this->assertTrue($content2->isArchived());
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));

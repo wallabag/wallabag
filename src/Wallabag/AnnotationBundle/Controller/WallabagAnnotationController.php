@@ -31,7 +31,7 @@ class WallabagAnnotationController extends FOSRestController
         $total = count($annotationRows);
         $annotations = ['total' => $total, 'rows' => $annotationRows];
 
-        $json = $this->get('serializer')->serialize($annotations, 'json');
+        $json = $this->get('jms_serializer')->serialize($annotations, 'json');
 
         return (new JsonResponse())->setJson($json);
     }
@@ -64,7 +64,7 @@ class WallabagAnnotationController extends FOSRestController
             $em->persist($annotation);
             $em->flush();
 
-            $json = $this->get('serializer')->serialize($annotation, 'json');
+            $json = $this->get('jms_serializer')->serialize($annotation, 'json');
 
             return JsonResponse::fromJsonString($json);
         }
@@ -99,7 +99,7 @@ class WallabagAnnotationController extends FOSRestController
             $em->persist($annotation);
             $em->flush();
 
-            $json = $this->get('serializer')->serialize($annotation, 'json');
+            $json = $this->get('jms_serializer')->serialize($annotation, 'json');
 
             return JsonResponse::fromJsonString($json);
         }
@@ -124,7 +124,7 @@ class WallabagAnnotationController extends FOSRestController
         $em->remove($annotation);
         $em->flush();
 
-        $json = $this->get('serializer')->serialize($annotation, 'json');
+        $json = $this->get('jms_serializer')->serialize($annotation, 'json');
 
         return (new JsonResponse())->setJson($json);
     }

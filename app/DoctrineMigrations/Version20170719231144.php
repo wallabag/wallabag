@@ -27,7 +27,7 @@ class Version20170719231144 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        $this->skipIf($this->connection->getDatabasePlatform()->getName() === 'sqlite', 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
+        $this->skipIf('sqlite' === $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
 
         // Find tags which need to be merged
         $dupTags = $this->connection->query('

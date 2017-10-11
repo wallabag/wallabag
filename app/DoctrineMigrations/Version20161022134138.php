@@ -27,7 +27,7 @@ class Version20161022134138 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        $this->skipIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'This migration only apply to MySQL');
+        $this->skipIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'This migration only apply to MySQL');
 
         $this->addSql('ALTER DATABASE ' . $this->connection->getParams()['dbname'] . ' CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;');
 
@@ -58,7 +58,7 @@ class Version20161022134138 extends AbstractMigration implements ContainerAwareI
      */
     public function down(Schema $schema)
     {
-        $this->skipIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'This migration only apply to MySQL');
+        $this->skipIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'This migration only apply to MySQL');
 
         $this->addSql('ALTER DATABASE ' . $this->connection->getParams()['dbname'] . ' CHARACTER SET = utf8 COLLATE = utf8_unicode_ci;');
 

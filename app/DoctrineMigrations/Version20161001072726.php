@@ -28,7 +28,7 @@ class Version20161001072726 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        $this->skipIf($this->connection->getDatabasePlatform()->getName() === 'sqlite', 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
+        $this->skipIf('sqlite' === $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
 
         // remove all FK from entry_tag
         switch ($this->connection->getDatabasePlatform()->getName()) {

@@ -1268,7 +1268,7 @@ class EntryControllerTest extends WallabagCoreTestCase
                 'ru',
             ],
             'fr-FR' => [
-                'http://www.zataz.com/90-des-dossiers-medicaux-des-coreens-du-sud-vendus-a-des-entreprises-privees/',
+                'https://www.zataz.com/90-des-dossiers-medicaux-des-coreens-du-sud-vendus-a-des-entreprises-privees/',
                 'fr_FR',
             ],
             'de' => [
@@ -1300,7 +1300,7 @@ class EntryControllerTest extends WallabagCoreTestCase
                 null,
             ],
             'es-ES' => [
-                'http://www.muylinux.com/2015/04/17/odf-reino-unido-microsoft-google/',
+                'https://www.muylinux.com/2015/04/17/odf-reino-unido-microsoft-google/',
                 'es_ES',
             ],
         ];
@@ -1343,7 +1343,7 @@ class EntryControllerTest extends WallabagCoreTestCase
      */
     public function testRestrictedArticle()
     {
-        $url = 'http://www.monde-diplomatique.fr/2017/05/BONNET/57475';
+        $url = 'https://www.monde-diplomatique.fr/2017/05/BONNET/57475';
         $this->logInAs('admin');
         $client = $this->getClient();
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');

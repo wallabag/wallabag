@@ -55,7 +55,7 @@ class Version20161024212538 extends AbstractMigration implements ContainerAwareI
 
         $clientsTable->dropColumn('user_id', 'integer');
 
-        if ($this->connection->getDatabasePlatform()->getName() !== 'sqlite') {
+        if ('sqlite' !== $this->connection->getDatabasePlatform()->getName()) {
             $clientsTable->removeForeignKey($this->constraintName);
         }
     }
