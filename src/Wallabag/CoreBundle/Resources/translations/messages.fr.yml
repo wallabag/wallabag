@@ -397,6 +397,9 @@ tag:
         add: "Ajouter"
         placeholder: "Vous pouvez ajouter plusieurs tags, séparés par une virgule."
 
+export:
+    footer_template: '<div style="text-align:center;"><p>Généré par wallabag with %method%</p><p>Merci d''ouvrir <a href="https://github.com/wallabag/wallabag/issues">un ticket</a> si vous rencontrez des soucis d''affichage avec ce document sur votre support.</p></div>'
+
 import:
     page_title: "Importer"
     page_description: "Bienvenue dans l’outil de migration de wallabag. Choisissez ci-dessous le service depuis lequel vous souhaitez migrer."

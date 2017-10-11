@@ -8,6 +8,7 @@ use JMS\Serializer\SerializerBuilder;
 use PHPePub\Core\EPub;
 use PHPePub\Core\Structure\OPF\DublinCore;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 
 /**
@@ -17,21 +18,20 @@ class EntriesExport
 {
     private $wallabagUrl;
     private $logoPath;
+    private $translator;
     private $title = '';
     private $entries = [];
     private $author = 'wallabag';
     private $language = '';
-    private $footerTemplate = '<div style="text-align:center;">
-        <p>Produced by wallabag with %EXPORT_METHOD%</p>
-        <p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p>
-        </div>';
 
     /**
-     * @param string $wallabagUrl Wallabag instance url
-     * @param string $logoPath    Path to the logo FROM THE BUNDLE SCOPE
+     * @param TranslatorInterface $translator  Translator service
+     * @param string              $wallabagUrl Wallabag instance url
+     * @param string              $logoPath    Path to the logo FROM THE BUNDLE SCOPE
      */
-    public function __construct($wallabagUrl, $logoPath)
+    public function __construct(TranslatorInterface $translator, $wallabagUrl, $logoPath)
     {
+        $this->translator = $translator;
         $this->wallabagUrl = $wallabagUrl;
         $this->logoPath = $logoPath;
     }
@@ -451,7 +451,9 @@ class EntriesExport
      */
     private function getExportInformation($type)
     {
-        $info = str_replace('%EXPORT_METHOD%', $type, $this->footerTemplate);
+        $info = $this->translator->trans('export.footer_template', [
+            '%method%' => $type,
+        ]);
 
         if ('tcpdf' === $type) {
             return str_replace('%IMAGE%', '<img src="' . $this->logoPath . '" />', $info);

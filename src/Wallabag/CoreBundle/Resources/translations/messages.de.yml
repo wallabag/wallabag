@@ -397,6 +397,9 @@ tag:
         add: 'Hinzufügen'
         placeholder: 'Du kannst verschiedene Tags, getrennt von einem Komma, hinzufügen.'
 
+export:
+    footer_template: '<div style="text-align:center;"><p>Generiert von wallabag mit Hilfe von %method%</p><p>Bitte öffne <a href="https://github.com/wallabag/wallabag/issues">ein Ticket</a> wenn du ein Problem mit der Darstellung von diesem E-Book auf deinem Gerät hast.</p></div>'
+
 import:
     page_title: 'Importieren'
     page_description: 'Willkommen beim wallabag-Importer. Wähle deinen vorherigen Service aus, von dem du die Daten migrieren willst.'
