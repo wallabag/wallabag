@@ -48,6 +48,7 @@ class AppKernel extends Kernel
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
             $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
+            $bundles[] = new Symfony\Bundle\WebServerBundle\WebServerBundle();
 
             if ('test' === $this->getEnvironment()) {
                 $bundles[] = new DAMA\DoctrineTestBundle\DAMADoctrineTestBundle();
