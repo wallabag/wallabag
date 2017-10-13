@@ -34,6 +34,7 @@ class Version20171008195606 extends AbstractMigration implements ContainerAwareI
                 $this->addSql('ALTER TABLE ' . $this->getTable('entry') . ' CHANGE reading_time reading_time INT(11) NOT NULL;');
                 break;
             case 'postgresql':
+                $this->addSql('UPDATE ' . $this->getTable('entry') . ' SET reading_time = 0 WHERE reading_time IS NULL;');
                 $this->addSql('ALTER TABLE ' . $this->getTable('entry') . ' ALTER COLUMN reading_time SET NOT NULL;');
                 break;
         }
