@@ -205,7 +205,7 @@ services:
         class: Wallabag\CoreBundle\Helper\DownloadImages
         arguments:
             - "@wallabag_core.entry.download_images.client"
-            - "%kernel.root_dir%/../web/assets/images"
+            - "%kernel.project_dir%/web/assets/images"
             - '%domain_name%'
             - "@logger"
 

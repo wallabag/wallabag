@@ -3,7 +3,7 @@ imports:
 
 framework:
     assets:
-        # json_manifest_path: '%kernel.root_dir%/../web/bundles/wallabagcore/manifest.json'
+        # json_manifest_path: '%kernel.project_dir%/web/bundles/wallabagcore/manifest.json'
 
 #doctrine:
 #    orm:

@@ -52,7 +52,7 @@ class ExportCommand extends ContainerAwareCommand
         $filePath = $input->getArgument('filepath');
 
         if (!$filePath) {
-            $filePath = $this->getContainer()->getParameter('kernel.root_dir') . '/../' . sprintf('%s-export.json', $user->getUsername());
+            $filePath = $this->getContainer()->getParameter('kernel.project_dir') . '/' . sprintf('%s-export.json', $user->getUsername());
         }
 
         try {

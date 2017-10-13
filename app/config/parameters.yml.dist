@@ -16,7 +16,7 @@ parameters:
     database_name: wallabag
     database_user: root
     database_password: ~
-    # For SQLite, database_path should be "%kernel.root_dir%/../data/db/wallabag.sqlite"
+    # For SQLite, database_path should be "%kernel.project_dir%/data/db/wallabag.sqlite"
     database_path: null
     database_table_prefix: wallabag_
     database_socket: null
