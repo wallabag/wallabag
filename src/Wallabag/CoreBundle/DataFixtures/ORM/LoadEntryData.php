@@ -37,6 +37,7 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
         $entry2->setMimetype('text/html');
         $entry2->setTitle('test title entry2');
         $entry2->setContent('This is my content /o/');
+        $entry2->setOriginUrl('ftp://oneftp.tld');
         $entry2->setLanguage('fr');
 
         $manager->persist($entry2);

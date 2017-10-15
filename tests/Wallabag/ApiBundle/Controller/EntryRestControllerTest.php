@@ -36,6 +36,25 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
 
+    public function testGetOneEntryWithOriginUrl()
+    {
+        $entry = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneBy(['user' => 1, 'url' => 'http://0.0.0.0/entry2']);
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        $this->client->request('GET', '/api/entries/' . $entry->getId() . '.json');
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertSame($entry->getOriginUrl(), $content['origin_url']);
+    }
+
     public function testExportEntry()
     {
         $entry = $this->client->getContainer()
@@ -531,6 +550,29 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame(1, $content['is_starred']);
     }
 
+    public function testPostEntryWithOriginUrl()
+    {
+        $this->client->request('POST', '/api/entries.json', [
+            'url' => 'http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
+            'tags' => 'google',
+            'title' => 'New title for my article',
+            'content' => 'my content',
+            'language' => 'de',
+            'published_at' => '2016-09-08T11:55:58+0200',
+            'authors' => 'bob,helen',
+            'public' => 1,
+            'origin_url' => 'http://mysource.tld',
+        ]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThan(0, $content['id']);
+        $this->assertSame('http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html', $content['url']);
+        $this->assertSame('http://mysource.tld', $content['origin_url']);
+    }
+
     public function testPatchEntry()
     {
         $entry = $this->client->getContainer()
@@ -602,6 +644,37 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame($entry->getId(), $content['id']);
         $this->assertSame($entry->getUrl(), $content['url']);
         $this->assertGreaterThanOrEqual(1, count($content['tags']), 'We force only one tag');
+        $this->assertEmpty($content['published_by'], 'Authors were not saved because of an array instead of a string');
+        $this->assertSame($previousContent, $content['content'], 'Ensure content has not moved');
+        $this->assertSame($previousLanguage, $content['language'], 'Ensure language has not moved');
+    }
+
+    public function testPatchEntryWithOriginUrl()
+    {
+        $entry = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUser(1);
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        $previousContent = $entry->getContent();
+        $previousLanguage = $entry->getLanguage();
+
+        $this->client->request('PATCH', '/api/entries/' . $entry->getId() . '.json', [
+            'title' => 'Another awesome title just for profit',
+            'origin_url' => 'https://myawesomesource.example.com',
+        ]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertSame($entry->getId(), $content['id']);
+        $this->assertSame($entry->getUrl(), $content['url']);
+        $this->assertSame('https://myawesomesource.example.com', $content['origin_url']);
         $this->assertEmpty($content['published_by'], 'Authors were not saved because of an array instead of a string');
         $this->assertSame($previousContent, $content['content'], 'Ensure content has not moved');
         $this->assertSame($previousLanguage, $content['language'], 'Ensure language has not moved');
