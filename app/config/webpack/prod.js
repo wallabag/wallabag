@@ -76,11 +76,23 @@ module.exports = function () {
           }),
         },
         {
-          test: /\.(jpg|png|gif|svg)$/,
+          test: /\.(jpg|png|gif|svg|ico)$/,
+          include: /node_modules/,
           use: {
             loader: 'file-loader',
             options: {
               name: 'img/[name].[ext]',
+            },
+          },
+        },
+        {
+          test: /\.(jpg|png|gif|svg|ico)$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'file-loader',
+            options: {
+              context: 'app/Resources/static',
+              name: '[path][name].[ext]',
             },
           },
         },
