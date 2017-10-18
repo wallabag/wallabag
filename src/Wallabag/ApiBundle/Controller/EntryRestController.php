@@ -102,7 +102,7 @@ class EntryRestController extends WallabagRestController
         $order = $request->query->get('order', 'desc');
         $page = (int) $request->query->get('page', 1);
         $perPage = (int) $request->query->get('perPage', 30);
-        $tags = $request->query->get('tags', '');
+        $tags = is_array($request->query->get('tags')) ? '' : (string) $request->query->get('tags', '');
         $since = $request->query->get('since', 0);
 
         /** @var \Pagerfanta\Pagerfanta $pager */
