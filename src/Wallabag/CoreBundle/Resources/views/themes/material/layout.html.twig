@@ -3,13 +3,13 @@
 {% block css %}
     {{ parent() }}
     {% if not app.debug %}
-        <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/material.css') }}">
+        <link rel="stylesheet" href="{{ asset('wallassets/material.css') }}">
     {% endif %}
 {% endblock %}
 
 {% block scripts %}
     {{ parent() }}
-    <script src="{{ asset('bundles/wallabagcore/material' ~ (app.debug ? '.dev' : '') ~ '.js') }}"></script>
+    <script src="{{ asset('wallassets/material' ~ (app.debug ? '.dev' : '') ~ '.js') }}"></script>
 {% endblock %}
 
 {% block header %}
@@ -29,7 +29,7 @@
             {% block logo %}
                 <li class="logo border-bottom">
                     <a title="{{ 'menu.left.back_to_unread'|trans }}" href="{{ path('unread') }}">
-                        <img src="{{ asset('bundles/wallabagcore/themes/_global/img/logo-square.png') }}" alt="wallabag logo" />
+                        <img src="{{ asset('wallassets/themes/_global/img/logo-square.png') }}" alt="wallabag logo" />
                     </a>
                 </li>
             {% endblock %}

@@ -13,8 +13,8 @@ module.exports = function () {
     },
     output: {
       filename: '[name].js',
-      path: path.resolve(rootDir, 'web/bundles/wallabagcore'),
-      publicPath: '/bundles/wallabagcore/',
+      path: path.resolve(rootDir, 'web/wallassets'),
+      publicPath: '/wallassets/',
     },
     plugins: [
       new webpack.ProvidePlugin({

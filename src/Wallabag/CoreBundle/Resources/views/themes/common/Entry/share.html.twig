@@ -4,7 +4,7 @@
         <meta property="og:title" content="{{ entry.title|e|raw }}" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="{{ app.request.uri }}" />
-        {% set picturePath = app.request.schemeAndHttpHost ~ asset('bundles/wallabagcore/themes/_global/img/logo-other_themes.png') %}
+        {% set picturePath = app.request.schemeAndHttpHost ~ asset('wallassets/themes/_global/img/logo-other_themes.png') %}
         {% if entry.previewPicture is not null %}
             {% set picturePath = entry.previewPicture %}
         {% endif %}
@@ -15,9 +15,9 @@
         <meta name="twitter:title" content="{{ entry.title|e|raw }}" />
         <meta name="twitter:description" content="{{ entry.content|striptags|slice(0, 300)|raw }}&hellip;" />
         {% if app.debug %}
-            <script src="{{ asset('bundles/wallabagcore/public.dev.js') }}"></script>
+            <script src="{{ asset('wallassets/public.dev.js') }}"></script>
         {% else %}
-            <link rel="stylesheet" href="{{ asset('bundles/wallabagcore/public.css') }}">
+            <link rel="stylesheet" href="{{ asset('wallassets/public.css') }}">
         {% endif %}
 
     </head>
