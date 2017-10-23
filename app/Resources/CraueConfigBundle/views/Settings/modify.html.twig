@@ -20,12 +20,10 @@
 
                         {% for section in sections | craue_sortSections %}
                             <div id="set-{{ section }}" class="col s12">
-                                {% for setting in form.settings if setting.section.vars.value == section %}
-                                        {{ form_row(setting.name) }}
-                                        {{ form_row(setting.section) }}
-                                        {{ form_row(setting.value, {
-                                            'label': setting.name.vars.value | trans({}, 'CraueConfigBundle'),
-                                        }) }}
+                                {% for setting in form.settings if setting.vars.value.section == section %}
+                                    {{ form_row(setting.value, {
+                                        'label': setting.vars.value.name | trans({}, 'CraueConfigBundle'),
+                                    }) }}
                                 {% endfor %}
                             </div>
                         {% endfor %}
@@ -35,8 +33,7 @@
                     {{ 'modify_settings' | trans({}, 'CraueConfigBundle') }}
                 </button>
 
-                {{ form_rest(form) }}
-                {{ form_end(form) }}
+                {{ form_widget(form._token) }}
             </div>
         </div>
     </div>

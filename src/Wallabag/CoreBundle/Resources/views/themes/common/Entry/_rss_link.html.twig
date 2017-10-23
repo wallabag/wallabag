@@ -1,0 +1,6 @@
+{% if tag is defined %}
+    <a rel="alternate" type="application/rss+xml" href="{{ path('tag_rss', {'username': app.user.username, 'token': app.user.config.rssToken, 'slug': tag.slug}) }}" class="right"><i class="material-icons md-24">rss_feed</i></a>
+{% elseif currentRoute in ['unread', 'starred', 'archive', 'all'] %}
+    <a rel="alternate" type="application/rss+xml" href="{{ path(currentRoute ~ '_rss', {'username': app.user.username, 'token': app.user.config.rssToken}) }}" class="right"><i class="material-icons">rss_feed</i></a>
+{% endif %}
+

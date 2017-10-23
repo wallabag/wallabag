@@ -4,13 +4,13 @@ namespace Tests\Wallabag\ImportBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Wallabag\ImportBundle\Command\ImportCommand;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\ImportBundle\Command\ImportCommand;
 
 class ImportCommandTest extends WallabagCoreTestCase
 {
     /**
-     * @expectedException Symfony\Component\Console\Exception\RuntimeException
+     * @expectedException \Symfony\Component\Console\Exception\RuntimeException
      * @expectedExceptionMessage Not enough arguments
      */
     public function testRunImportCommandWithoutArguments()
@@ -27,7 +27,7 @@ class ImportCommandTest extends WallabagCoreTestCase
     }
 
     /**
-     * @expectedException Symfony\Component\Config\Definition\Exception\Exception
+     * @expectedException \Symfony\Component\Config\Definition\Exception\Exception
      * @expectedExceptionMessage not found
      */
     public function testRunImportCommandWithoutFilepath()
@@ -40,16 +40,15 @@ class ImportCommandTest extends WallabagCoreTestCase
         $tester = new CommandTester($command);
         $tester->execute([
             'command' => $command->getName(),
-            'userId' => 1,
+            'username' => 'admin',
             'filepath' => 1,
         ]);
     }
 
     /**
-     * @expectedException Symfony\Component\Config\Definition\Exception\Exception
-     * @expectedExceptionMessage User with id
+     * @expectedException \Doctrine\ORM\NoResultException
      */
-    public function testRunImportCommandWithoutUserId()
+    public function testRunImportCommandWithWrongUsername()
     {
         $application = new Application($this->getClient()->getKernel());
         $application->add(new ImportCommand());
@@ -59,7 +58,7 @@ class ImportCommandTest extends WallabagCoreTestCase
         $tester = new CommandTester($command);
         $tester->execute([
             'command' => $command->getName(),
-            'userId' => 0,
+            'username' => 'random',
             'filepath' => './',
         ]);
     }
@@ -74,12 +73,29 @@ class ImportCommandTest extends WallabagCoreTestCase
         $tester = new CommandTester($command);
         $tester->execute([
             'command' => $command->getName(),
-            'userId' => 1,
-            'filepath' => $application->getKernel()->getContainer()->getParameter('kernel.root_dir').'/../tests/Wallabag/ImportBundle/fixtures/wallabag-v2-read.json',
+            'username' => 'admin',
+            'filepath' => $application->getKernel()->getContainer()->getParameter('kernel.project_dir') . '/tests/Wallabag/ImportBundle/fixtures/wallabag-v2-read.json',
             '--importer' => 'v2',
         ]);
 
         $this->assertContains('imported', $tester->getDisplay());
         $this->assertContains('already saved', $tester->getDisplay());
+    }
+
+    public function testRunImportCommandWithUserId()
+    {
+        $application = new Application($this->getClient()->getKernel());
+        $application->add(new ImportCommand());
+
+        $command = $application->find('wallabag:import');
+
+        $tester = new CommandTester($command);
+        $tester->execute([
+            'command' => $command->getName(),
+            'username' => 1,
+            'filepath' => $application->getKernel()->getContainer()->getParameter('kernel.project_dir') . '/tests/Wallabag/ImportBundle/fixtures/wallabag-v2-read.json',
+            '--useUserId' => true,
+            '--importer' => 'v2',
+        ]);
     }
 }

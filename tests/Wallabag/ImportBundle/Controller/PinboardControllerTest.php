@@ -2,8 +2,8 @@
 
 namespace Tests\Wallabag\ImportBundle\Controller;
 
-use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 
 class PinboardControllerTest extends WallabagCoreTestCase
 {
@@ -14,9 +14,9 @@ class PinboardControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/import/pinboard');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
-        $this->assertEquals(1, $crawler->filter('input[type=file]')->count());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
+        $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
     public function testImportPinboardWithRabbitEnabled()
@@ -28,9 +28,9 @@ class PinboardControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/import/pinboard');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
-        $this->assertEquals(1, $crawler->filter('input[type=file]')->count());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
+        $this->assertSame(1, $crawler->filter('input[type=file]')->count());
 
         $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 0);
     }
@@ -49,7 +49,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
     public function testImportPinboardWithRedisEnabled()
@@ -61,13 +61,13 @@ class PinboardControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/import/pinboard');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
-        $this->assertEquals(1, $crawler->filter('input[type=file]')->count());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
+        $this->assertSame(1, $crawler->filter('input[type=file]')->count());
 
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__.'/../fixtures/pinboard_export', 'pinboard.json');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/pinboard_export', 'pinboard.json');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -75,7 +75,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 
@@ -95,7 +95,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/pinboard');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__.'/../fixtures/pinboard_export', 'pinboard.json');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/pinboard_export', 'pinboard.json');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -103,7 +103,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 
@@ -118,12 +118,19 @@ class PinboardControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('flashes.import.notice.summary', $body[0]);
 
+        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
         $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://ma.ttias.be is ok');
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://ma.ttias.be is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for https://ma.ttias.be is ok');
-        $this->assertEquals(2, count($content->getTags()));
+
+        $tags = $content->getTags();
+        $this->assertContains('foot', $tags, 'It includes the "foot" tag');
+        $this->assertContains('varnish', $tags, 'It includes the "varnish" tag');
+        $this->assertContains('php', $tags, 'It includes the "php" tag');
+        $this->assertSame(3, count($tags));
+
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
-        $this->assertEquals('2016-10-26', $content->getCreatedAt()->format('Y-m-d'));
+        $this->assertSame('2016-10-26', $content->getCreatedAt()->format('Y-m-d'));
     }
 
     public function testImportPinboardWithFileAndMarkAllAsRead()
@@ -134,7 +141,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/pinboard');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__.'/../fixtures/pinboard_export', 'pinboard-read.json');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/pinboard_export', 'pinboard-read.json');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -143,7 +150,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 
@@ -155,6 +162,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
+        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content1);
         $this->assertTrue($content1->isArchived());
 
         $content2 = $client->getContainer()
@@ -165,6 +173,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
+        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content2);
         $this->assertTrue($content2->isArchived());
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
@@ -179,7 +188,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/pinboard');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__.'/../fixtures/test.txt', 'test.txt');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/test.txt', 'test.txt');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -187,7 +196,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 

@@ -16,7 +16,9 @@ class StaticController extends Controller
 
         return $this->render(
             '@WallabagCore/themes/common/Static/howto.html.twig',
-            ['addonsUrl' => $addonsUrl]
+            [
+                'addonsUrl' => $addonsUrl,
+            ]
         );
     }
 
@@ -40,8 +42,7 @@ class StaticController extends Controller
     public function quickstartAction()
     {
         return $this->render(
-            '@WallabagCore/themes/common/Static/quickstart.html.twig',
-            []
+            '@WallabagCore/themes/common/Static/quickstart.html.twig'
         );
     }
 }

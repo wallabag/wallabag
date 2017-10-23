@@ -5,5 +5,6 @@ parameters:
     test_database_name: null
     test_database_user: null
     test_database_password: null
-    test_database_path: '%kernel.root_dir%/../data/db/wallabag_test.sqlite'
+    test_database_path: "%env(TEST_DATABASE_PATH)%"
+    env(TEST_DATABASE_PATH): "%kernel.project_dir%/data/db/wallabag_test.sqlite"
     test_database_charset: utf8

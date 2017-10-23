@@ -30,11 +30,6 @@ class Version20161122203647 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix').$tableName;
-    }
-
     /**
      * @param Schema $schema
      */
@@ -59,5 +54,10 @@ class Version20161122203647 extends AbstractMigration implements ContainerAwareI
 
         $userTable->addColumn('expired', 'smallint', ['notnull' => false]);
         $userTable->addColumn('credentials_expired', 'smallint', ['notnull' => false]);
+    }
+
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

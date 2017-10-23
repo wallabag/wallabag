@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Added action_mark_as_read field on config table
+ * Added action_mark_as_read field on config table.
  */
 class Version20161106113822 extends AbstractMigration implements ContainerAwareInterface
 {
@@ -20,11 +20,6 @@ class Version20161106113822 extends AbstractMigration implements ContainerAwareI
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
-    }
-
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix').$tableName;
     }
 
     /**
@@ -52,5 +47,10 @@ class Version20161106113822 extends AbstractMigration implements ContainerAwareI
         $this->skipIf(!$configTable->hasColumn('action_mark_as_read'), 'It seems that you already played this migration.');
 
         $configTable->dropColumn('action_mark_as_read');
+    }
+
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

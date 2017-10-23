@@ -1,0 +1,263 @@
+
+::selection {
+  color: #fff;
+  background-color: #000;
+}
+
+.desktopHide {
+  display: none;
+}
+
+.logo {
+  position: fixed;
+  z-index: 20;
+  top: 0.4em;
+  left: 0.6em;
+}
+
+h2,
+h3,
+h4 {
+  font-family: "PT Sans", sans-serif;
+  text-transform: uppercase;
+}
+
+p,
+li,
+label {
+  color: #666;
+}
+
+a {
+  color: #000;
+  font-weight: bold;
+
+  &.nostyle {
+    text-decoration: none;
+  }
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+form fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+form input[type="text"],
+form input[type="number"],
+select,
+form input[type="password"],
+form input[type="url"],
+form input[type="email"] {
+  border: 1px solid #999;
+  padding: 0.5em 1em;
+  min-width: 12em;
+  color: #666;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select {
+    -webkit-appearance: none;
+    border-radius: 0;
+    background: #fff url("../../_global/img/bg-select.png") no-repeat right center;
+  }
+}
+
+.inline {
+  .row {
+    display: inline-block;
+    margin-right: 0.5em;
+  }
+
+  label {
+    min-width: 6em;
+  }
+}
+
+fieldset label {
+  display: inline-block;
+  min-width: 12.5em;
+  color: #666;
+}
+
+label {
+  margin-right: 0.5em;
+}
+
+form .row {
+  margin-bottom: 0.5em;
+}
+
+form button,
+input[type="submit"] {
+  cursor: pointer;
+  background-color: #000;
+  color: #fff;
+  padding: 0.5em 1em;
+  display: inline-block;
+  border: 1px solid #000;
+}
+
+form button:hover,
+form button:focus,
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+  background-color: #fff;
+  color: #000;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#bookmarklet {
+  cursor: move;
+}
+
+h2::after {
+  content: "";
+  height: 4px;
+  width: 20%;
+  background-color: #000;
+  display: block;
+}
+
+.links {
+  padding: 0;
+  margin: 0;
+
+  li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+#links {
+  position: fixed;
+  top: 0;
+  width: 10em;
+  left: 0;
+  text-align: right;
+  background-color: #333;
+  padding-top: 9.5em;
+  height: 100%;
+  box-shadow: inset -4px 0 20px rgba(0, 0, 0, 0.6);
+  z-index: 15;
+
+  > li > a {
+    display: block;
+    padding: 0.5em 2em 0.5em 1em;
+    color: #fff;
+    position: relative;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: normal;
+    font-family: "PT Sans", sans-serif;
+    transition: all 0.5s ease;
+
+    &:hover,
+    &:focus {
+      background-color: #999;
+      color: #000;
+    }
+  }
+
+  .current::after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    border: 10px solid transparent;
+    border-right-color: #eee;
+    right: 0;
+    top: 50%;
+    margin-top: -10px;
+  }
+
+  li:last-child {
+    position: fixed;
+    bottom: 1em;
+    width: 10em;
+
+    a::before {
+      font-size: 1.2em;
+      position: relative;
+      top: 2px;
+    }
+  }
+}
+
+#main {
+  margin-left: 12em;
+  position: relative;
+  z-index: 10;
+  padding-right: 5%;
+  padding-bottom: 1em;
+}
+
+#sort {
+  padding: 0;
+  list-style-type: none;
+  opacity: 0.5;
+  display: inline-block;
+
+  li {
+    display: inline;
+    font-size: 0.9em;
+
+    & + li {
+      margin-left: 10px;
+    }
+  }
+
+  a {
+    padding: 2px 2px 0;
+    vertical-align: middle;
+  }
+
+  img {
+    vertical-align: baseline;
+
+    :hover {
+      cursor: pointer;
+    }
+  }
+}
+
+#display-mode {
+  float: right;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  opacity: 0.5;
+}
+
+#listmode {
+  width: 16px;
+  display: inline-block;
+  text-decoration: none;
+
+  &.tablemode {
+    background: url("../../_global/img/table.png") no-repeat bottom;
+  }
+
+  .listmode {
+    background: url("../../_global/img/list.png") no-repeat bottom;
+  }
+}
+
+#warning_message {
+  position: fixed;
+  background-color: #ff6347;
+  z-index: 1000;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  color: #000;
+}

@@ -25,9 +25,9 @@
 
                             <div class="row">
                                 <div class="input-field col s11">
-                                    {{ form_label(form.config.theme) }}
                                     {{ form_errors(form.config.theme) }}
                                     {{ form_widget(form.config.theme) }}
+                                    {{ form_label(form.config.theme) }}
                                 </div>
                                 <div class="input-field col s1">
                                     <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_theme'|trans }}">
@@ -38,9 +38,9 @@
 
                             <div class="row">
                                 <div class="input-field col s11">
-                                    {{ form_label(form.config.items_per_page) }}
                                     {{ form_errors(form.config.items_per_page) }}
                                     {{ form_widget(form.config.items_per_page) }}
+                                    {{ form_label(form.config.items_per_page) }}
                                 </div>
                                 <div class="input-field col s1">
                                     <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_items_per_page'|trans }}">
@@ -51,9 +51,9 @@
 
                             <div class="row">
                                 <div class="input-field col s11">
-                                    {{ form_label(form.config.reading_speed) }}
                                     {{ form_errors(form.config.reading_speed) }}
                                     {{ form_widget(form.config.reading_speed) }}
+                                    {{ form_label(form.config.reading_speed) }}
                                     <p>
                                         {{ 'config.form_settings.reading_speed.help_message'|trans }}
                                         <a href="http://www.myreadspeed.com/calculate/">myreadspeed</a>
@@ -66,19 +66,19 @@
                                 </div>
                             </div>
 
-                        <div class="row">
-                            <div class="input-field col s12">
-                                {{ form_label(form.config.action_mark_as_read) }}
-                                {{ form_errors(form.config.action_mark_as_read) }}
-                                {{ form_widget(form.config.action_mark_as_read) }}
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.config.action_mark_as_read) }}
+                                    {{ form_errors(form.config.action_mark_as_read) }}
+                                    {{ form_widget(form.config.action_mark_as_read) }}
+                                </div>
                             </div>
-                        </div>
 
                             <div class="row">
                                 <div class="input-field col s11">
-                                    {{ form_label(form.config.language) }}
                                     {{ form_errors(form.config.language) }}
                                     {{ form_widget(form.config.language) }}
+                                    {{ form_label(form.config.language) }}
                                 </div>
                                 <div class="input-field col s1">
                                     <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_language'|trans }}">
@@ -89,9 +89,9 @@
 
                             <div class="row">
                                 <div class="input-field col s11">
-                                    {{ form_label(form.config.pocket_consumer_key) }}
                                     {{ form_errors(form.config.pocket_consumer_key) }}
                                     {{ form_widget(form.config.pocket_consumer_key) }}
+                                    {{ form_label(form.config.pocket_consumer_key) }}
                                     <p>
                                         &raquo;
                                         <a href="https://getpocket.com/developer/docs/authentication">https://getpocket.com/developer/docs/authentication</a>
@@ -107,7 +107,7 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <h5>{{ 'config.form_settings.android_configuration'|trans }}</h5>
-                                    <a href="wallabag://{{ app.user.username }}@{{ wallabag_url }}" class="waves-effect waves-light btn hide-on-large-only">Touch here to prefill your Android application</a>
+                                    <a href="wallabag://{{ app.user.username }}@{{ wallabag_url }}" class="waves-effect waves-light btn hide-on-large-only">{{ 'config.form_settings.android_instruction' | trans }}</a>
                                     <img id="androidQrcode" class="hide-on-med-and-down" />
                                 </div>
                                 <script>
@@ -132,8 +132,8 @@
                             </div>
 
                             <div class="row">
-                                <div class="input-field col s12">
-                                    <label>{{ 'config.form_rss.token_label'|trans }}</label>
+                                <div class="col s12">
+                                    <h6 class="grey-text">{{ 'config.form_rss.token_label'|trans }}</h6>
                                     <div>
                                         {% if rss.token %}
                                             {{ rss.token }}
@@ -151,12 +151,13 @@
                             </div>
                             {% if rss.token %}
                             <div class="row">
-                                <div class="input-field col s12">
-                                    <label>{{ 'config.form_rss.rss_links'|trans }}</label>
+                                <div class="col s12">
+                                    <h6 class="grey-text">{{ 'config.form_rss.rss_links'|trans }}</h6>
                                     <ul>
                                         <li><a href="{{ path('unread_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.unread'|trans }}</a></li>
                                         <li><a href="{{ path('starred_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.starred'|trans }}</a></li>
                                         <li><a href="{{ path('archive_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.archive'|trans }}</a></li>
+                                        <li><a href="{{ path('all_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.all'|trans }}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -229,6 +230,9 @@
                             <a href="{{ path('config_reset', { type: 'tags'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
                                 {{ 'config.reset.tags'|trans }}
                             </a>
+                            <a href="{{ path('config_reset', { type: 'archived'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                                {{ 'config.reset.archived'|trans }}
+                            </a>
                             <a href="{{ path('config_reset', { type: 'entries'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
                                 {{ 'config.reset.entries'|trans }}
                             </a>
@@ -251,11 +255,11 @@
                         {{ form_start(form.pwd) }}
                             {{ form_errors(form.pwd) }}
 
-                        <div class="row">
-                            <div class="input-field col s12">
-                                {{ 'config.form_password.description'|trans }}
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ 'config.form_password.description'|trans }}
+                                </div>
                             </div>
-                        </div>
 
                             <div class="row">
                                 <div class="input-field col s12">
@@ -410,8 +414,8 @@
                                         <tr>
                                             <td>domainName</td>
                                             <td>{{ 'config.form_rules.faq.variable_description.domainName'|trans }}</td>
-                                            <td>matches</td>
-                                            <td>{{ 'config.form_rules.faq.operator_description.matches'|trans|raw }}</td>
+                                            <td>matches<br />notmaches</td>
+                                            <td>{{ 'config.form_rules.faq.operator_description.matches'|trans|raw }}<br />{{ 'config.form_rules.faq.operator_description.notmatches'|trans|raw }}</td>
                                         </tr>
                                     </tbody>
                                 </table>

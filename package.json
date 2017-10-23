@@ -1,34 +1,13 @@
 {
   "name": "wallabag",
-  "version": "2.1.0",
+  "version": "2.2.2",
   "description": "wallabag is a self hostable application for saving web pages",
-  "main": "index.js",
   "private": true,
   "directories": {
     "doc": "docs"
   },
   "engines": {
-    "node": ">0.12"
-  },
-  "browser": {
-    "jquery": "./node_modules/jquery/dist/jquery.js",
-    "jQuery": "./node_modules/jquery/dist/jquery.js",
-    "materialize": "./node_modules/materialize-css/bin/materialize.js"
-  },
-  "browserify-shim": {
-    "jquery": {
-      "exports": "$"
-    },
-    "materialize": "materialize",
-    "jquery-ui": {
-      "depends": "jquery",
-      "exports": null
-    }
-  },
-  "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
+    "node": ">4.8"
   },
   "repository": {
     "type": "git",
@@ -57,52 +36,49 @@
     "url": "https://github.com/wallabag/wallabag/issues"
   },
   "devDependencies": {
-    "annotator": "git://github.com/wallabag/annotator.git#0f076c7d371ed25eb0793346f46982d90f2c4c85",
-    "autoprefixer": "^6.3.6",
-    "babel-eslint": "^6.1.2",
-    "babel-preset-es2015": "^6.14.0",
-    "babelify": "^7.3.0",
-    "browserify": "^13.0.0",
-    "browserify-shim": "^3.8.12",
-    "cssnano": "^3.5.2",
-    "es6-promise": "^3.2.1",
-    "eslint": "^3.7.1",
-    "eslint-config-airbnb-base": "^8.0.0",
-    "eslint-plugin-import": "^1.16.0",
-    "grunt": ">=0.4.0",
-    "grunt-browserify": "^5.0.0",
-    "grunt-cli": "^1.2.0",
-    "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-concat": "^1.0.0",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-symlink": "^1.0.0",
-    "grunt-contrib-uglify": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-eslint": "^19.0.0",
-    "grunt-postcss": "^0.8.0",
-    "grunt-stylelint": "^0.6.0",
-    "hammerjs": "^2.0.6",
-    "icomoon-free-npm": "0.0.0",
-    "jquery": "^2.2.4",
-    "jquery-ui-browserify": "^1.11.0-pre-seelio",
-    "jquery.cookie": "^1.4.1",
-    "jquery.tinydot": "^0.2.1",
-    "load-grunt-tasks": "^3.4.1",
-    "material-design-icons-iconfont": "^3.0.0",
-    "materialize-css": "0.97.5",
-    "npm": "^3.8.3",
-    "pickadate": "^3.5.6",
-    "pixrem": "^3.0.0",
-    "postcss-cssnext": "^2.5.1",
-    "prismjs": "^1.4.1",
-    "ptsans-npm-webfont": "0.0.4",
-    "roboto-fontface": "^0.6.0",
-    "stylelint": "^7.3.1",
-    "stylelint-config-standard": "^13.0.2",
-    "through": "^2.3.8"
+    "autoprefixer": "^7.1.1",
+    "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.4.0",
+    "css-loader": "^0.28.0",
+    "eslint": "^4.0.0",
+    "eslint-config-airbnb-base": "^11.1.3",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-import": "^2.2.0",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.0",
+    "lato-font": "^3.0.0",
+    "node-sass": "^4.5.2",
+    "postcss-loader": "^2.0.5",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.18.2",
+    "stylelint": "^7.9.0",
+    "stylelint-config-standard": "^16.0.0",
+    "stylelint-webpack-plugin": "^0.7.0",
+    "url-loader": "^0.5.8",
+    "webpack": "^2.3.2",
+    "webpack-dev-server": "^2.4.4",
+    "webpack-manifest-plugin": "^1.1.0",
+    "webpack-merge": "^4.1.0"
   },
   "dependencies": {
-    "jr-qrcode": "^1.0.5",
-    "mousetrap": "^1.6.0"
+    "annotator": "git://github.com/wallabag/annotator.git#0f076c7d371ed25eb0793346f46982d90f2c4c85",
+    "hammerjs": "^2.0.8",
+    "icomoon-free-npm": "^0.0.0",
+    "jquery": "^2.1.4",
+    "jquery.cookie": "^1.4.1",
+    "jr-qrcode": "^1.0.7",
+    "material-design-icons-iconfont": "^3.0.3",
+    "materialize-css": "^0.98.1",
+    "mousetrap": "^1.6.0",
+    "ptsans-npm-webfont": "^0.0.4",
+    "roboto-fontface": "^0.7.0",
+    "waypoints": "^4.0.1"
+  },
+  "scripts": {
+    "watch": "./node_modules/.bin/webpack-dev-server --env=dev",
+    "build:dev": "./node_modules/.bin/webpack --env=dev",
+    "build:prod": "./node_modules/.bin/webpack --env=prod"
   }
 }

@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class TagAllCommand extends ContainerAwareCommand
 {
@@ -25,21 +26,22 @@ class TagAllCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $io = new SymfonyStyle($input, $output);
+
         try {
             $user = $this->getUser($input->getArgument('username'));
         } catch (NoResultException $e) {
-            $output->writeln(sprintf('<error>User "%s" not found.</error>', $input->getArgument('username')));
+            $io->error(sprintf('User "%s" not found.', $input->getArgument('username')));
 
             return 1;
         }
         $tagger = $this->getContainer()->get('wallabag_core.rule_based_tagger');
 
-        $output->write(sprintf('Tagging entries for user « <comment>%s</comment> »... ', $user->getUserName()));
+        $io->text(sprintf('Tagging entries for user <info>%s</info>...', $user->getUserName()));
 
         $entries = $tagger->tagAllForUser($user);
 
-        $output->writeln('<info>Done.</info>');
-        $output->write(sprintf('Persist entries ... ', $user->getUserName()));
+        $io->text('Persist entries... ');
 
         $em = $this->getDoctrine()->getManager();
         foreach ($entries as $entry) {
@@ -47,7 +49,9 @@ class TagAllCommand extends ContainerAwareCommand
         }
         $em->flush();
 
-        $output->writeln('<info>Done.</info>');
+        $io->success('Done.');
+
+        return 0;
     }
 
     /**
@@ -59,7 +63,7 @@ class TagAllCommand extends ContainerAwareCommand
      */
     private function getUser($username)
     {
-        return $this->getDoctrine()->getRepository('WallabagUserBundle:User')->findOneByUserName($username);
+        return $this->getContainer()->get('wallabag_user.user_repository')->findOneByUserName($username);
     }
 
     private function getDoctrine()

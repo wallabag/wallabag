@@ -1,5 +1,12 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
+{% block head %}
+    {{ parent() }}
+    {% if tag is defined and app.user.config.rssToken %}
+        <link rel="alternate" type="application/rss+xml" href="{{ path('tag_rss', {'username': app.user.username, 'token': app.user.config.rssToken, 'slug': tag.slug}) }}" />
+    {% endif %}
+{% endblock %}
+
 {% block title %}
     {% set filter = '' %}
     {% if tag is defined %}
@@ -12,14 +19,17 @@
 {% endblock %}
 
 {% block content %}
-
+    {% set currentRoute = app.request.attributes.get('_route') %}
     {% set listMode = app.user.config.listMode %}
     <div class="results">
         <div class="nb-results">{{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}</div>
         <div class="pagination">
-            <a href="{{ path('switch_view_mode') }}"><i class="listMode-btn material-icons md-36">{% if listMode == 0 %}list{% else %}view_module{% endif %}</i></a>
-            <i class="btn-clickable download-btn material-icons md-36 js-export-action">file_download</i>
-            <i class="btn-clickable filter-btn material-icons md-36 js-filters-action">filter_list</i>
+            <a href="{{ path('switch_view_mode') }}"><i class="listMode-btn material-icons md-24">{% if listMode == 0 %}list{% else %}view_module{% endif %}</i></a>
+            {% if app.user.config.rssToken %}
+                {% include "@WallabagCore/themes/common/Entry/_rss_link.html.twig" %}
+            {% endif %}
+            <i class="btn-clickable download-btn material-icons md-24 js-export-action">file_download</i>
+            <i class="btn-clickable filter-btn material-icons md-24 js-filters-action">filter_list</i>
             {% if entries.getNbPages > 1 %}
                 {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
             {% endif %}
@@ -47,10 +57,10 @@
             </div>
 
             <ul class="tools links">
-                <li><a title="{{ 'entry.list.toogle_as_read'|trans }}" class="tool icon-check icon {% if entry.isArchived == 0 %}archive-off{% else %}archive{% endif %}" href="{{ path('archive_entry', { 'id': entry.id }) }}"><span>{{ 'entry.list.toogle_as_read'|trans }}</span></a></li>
-                <li><a title="{{ 'entry.list.toogle_as_star'|trans }}" class="tool icon-star icon {% if entry.isStarred == 0 %}fav-off{% else %}fav{% endif %}" href="{{ path('star_entry', { 'id': entry.id }) }}"><span>{{ 'entry.list.toogle_as_star'|trans }}</span></a></li>
-                <li><a title="{{ 'entry.list.delete'|trans }}" class="tool delete icon-trash icon" href="{{ path('delete_entry', { 'id': entry.id }) }}"><span>{{ 'entry.list.delete'|trans }}</span></a></li>
-                <li><a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.list.original_article'|trans }} : {{ entry.title|e }}" class="tool link icon-link icon"><span>{{ entry.domainName|removeWww }}</span></a></li>
+                <li><a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.list.original_article'|trans }} : {{ entry.title|e }}"><span>{{ entry.domainName|removeWww }}</span></a></li>
+                <li><a title="{{ 'entry.list.toogle_as_read'|trans }}" class="tool icon {% if entry.isArchived == 0 %}archive-off{% else %}archive{% endif %}" href="{{ path('archive_entry', { 'id': entry.id }) }}"><i class="material-icons md-24 vertical-align-middle">check</i><span>{{ 'entry.list.toogle_as_read'|trans }}</span></a></li>
+                <li><a title="{{ 'entry.list.toogle_as_star'|trans }}" class="tool icon {% if entry.isStarred == 0 %}fav-off{% else %}fav{% endif %}" href="{{ path('star_entry', { 'id': entry.id }) }}"><i class="material-icons md-24 vertical-align-middle">star_rate</i><span>{{ 'entry.list.toogle_as_star'|trans }}</span></a></li>
+                <li><a title="{{ 'entry.list.delete'|trans }}" class="tool icon" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" href="{{ path('delete_entry', { 'id': entry.id }) }}"><i class="material-icons md-24 vertical-align-middle">delete</i><span>{{ 'entry.list.delete'|trans }}</span></a></li>
             </ul>
             {% if (entry.previewPicture is null or listMode == 1) %}
                 <ul class="card-entry-tags">
@@ -76,8 +86,7 @@
 
     <!-- Export -->
     <aside id="download-form">
-    {% set currentRoute = app.request.attributes.get('_route') %}
-    {% set currentTag = '' %}
+    {% set currentTag = null %}
     {% if tag is defined %}
         {% set currentTag = tag %}
     {% endif %}
@@ -126,6 +135,11 @@
                 <div class="input-field">
                     {{ form_widget(form.previewPicture) }}
                     {{ form_label(form.previewPicture) }}
+                </div>
+
+                <div class="input-field">
+                    {{ form_widget(form.isPublic) }}
+                    {{ form_label(form.isPublic) }}
                 </div>
             </div>
 

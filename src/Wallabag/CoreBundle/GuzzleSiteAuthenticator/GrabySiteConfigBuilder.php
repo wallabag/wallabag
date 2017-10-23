@@ -5,46 +5,72 @@ namespace Wallabag\CoreBundle\GuzzleSiteAuthenticator;
 use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfig;
 use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfigBuilder;
 use Graby\SiteConfig\ConfigBuilder;
-use OutOfRangeException;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Wallabag\CoreBundle\Repository\SiteCredentialRepository;
+use Wallabag\UserBundle\Entity\User;
 
 class GrabySiteConfigBuilder implements SiteConfigBuilder
 {
     /**
-     * @var \Graby\SiteConfig\ConfigBuilder
+     * @var ConfigBuilder
      */
     private $grabyConfigBuilder;
+
     /**
-     * @var array
+     * @var SiteCredentialRepository
      */
-    private $credentials;
+    private $credentialRepository;
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
+     * @var User|null
+     */
+    private $currentUser;
 
     /**
      * GrabySiteConfigBuilder constructor.
      *
-     * @param \Graby\SiteConfig\ConfigBuilder $grabyConfigBuilder
-     * @param array                           $credentials
+     * @param ConfigBuilder            $grabyConfigBuilder
+     * @param TokenStorage             $token
+     * @param SiteCredentialRepository $credentialRepository
+     * @param LoggerInterface          $logger
      */
-    public function __construct(ConfigBuilder $grabyConfigBuilder, array $credentials = [])
+    public function __construct(ConfigBuilder $grabyConfigBuilder, TokenStorage $token, SiteCredentialRepository $credentialRepository, LoggerInterface $logger)
     {
         $this->grabyConfigBuilder = $grabyConfigBuilder;
-        $this->credentials = $credentials;
+        $this->credentialRepository = $credentialRepository;
+        $this->logger = $logger;
+
+        if ($token->getToken()) {
+            $this->currentUser = $token->getToken()->getUser();
+        }
     }
 
     /**
-     * Builds the SiteConfig for a host.
-     *
-     * @param string $host The "www." prefix is ignored
-     *
-     * @return SiteConfig
-     *
-     * @throws OutOfRangeException If there is no config for $host
+     * {@inheritdoc}
      */
     public function buildForHost($host)
     {
         // required by credentials below
         $host = strtolower($host);
-        if (substr($host, 0, 4) == 'www.') {
+        if ('www.' === substr($host, 0, 4)) {
             $host = substr($host, 4);
+        }
+
+        $credentials = null;
+        if ($this->currentUser) {
+            $credentials = $this->credentialRepository->findOneByHostAndUser($host, $this->currentUser->getId());
+        }
+
+        if (null === $credentials) {
+            $this->logger->debug('Auth: no credentials available for host.', ['host' => $host]);
+
+            return false;
         }
 
         $config = $this->grabyConfigBuilder->buildForHost($host);
@@ -54,15 +80,47 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
             'loginUri' => $config->login_uri ?: null,
             'usernameField' => $config->login_username_field ?: null,
             'passwordField' => $config->login_password_field ?: null,
-            'extraFields' => is_array($config->login_extra_fields) ? $config->login_extra_fields : [],
+            'extraFields' => $this->processExtraFields($config->login_extra_fields),
             'notLoggedInXpath' => $config->not_logged_in_xpath ?: null,
+            'username' => $credentials['username'],
+            'password' => $credentials['password'],
         ];
 
-        if (isset($this->credentials[$host])) {
-            $parameters['username'] = $this->credentials[$host]['username'];
-            $parameters['password'] = $this->credentials[$host]['password'];
+        $config = new SiteConfig($parameters);
+
+        // do not leak usernames and passwords in log
+        $parameters['username'] = '**masked**';
+        $parameters['password'] = '**masked**';
+
+        $this->logger->debug('Auth: add parameters.', ['host' => $host, 'parameters' => $parameters]);
+
+        return $config;
+    }
+
+    /**
+     * Processes login_extra_fields config, transforming an '=' separated array of strings
+     * into a key/value array.
+     *
+     * @param array|mixed $extraFieldsStrings
+     *
+     * @return array
+     */
+    protected function processExtraFields($extraFieldsStrings)
+    {
+        if (!is_array($extraFieldsStrings)) {
+            return [];
         }
 
-        return new SiteConfig($parameters);
+        $extraFields = [];
+        foreach ($extraFieldsStrings as $extraField) {
+            if (false === strpos($extraField, '=')) {
+                continue;
+            }
+
+            list($fieldName, $fieldValue) = explode('=', $extraField, 2);
+            $extraFields[$fieldName] = $fieldValue;
+        }
+
+        return $extraFields;
     }
 }

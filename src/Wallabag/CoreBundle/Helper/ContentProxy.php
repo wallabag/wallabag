@@ -4,11 +4,12 @@ namespace Wallabag\CoreBundle\Helper;
 
 use Graby\Graby;
 use Psr\Log\LoggerInterface;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Tools\Utils;
-use Wallabag\CoreBundle\Repository\TagRepository;
 use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeExtensionGuesser;
+use Symfony\Component\Validator\Constraints\Locale as LocaleConstraint;
+use Symfony\Component\Validator\Constraints\Url as UrlConstraint;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Tools\Utils;
 
 /**
  * This kind of proxy class take care of getting the content from an url
@@ -18,38 +19,37 @@ class ContentProxy
 {
     protected $graby;
     protected $tagger;
+    protected $validator;
     protected $logger;
-    protected $tagRepository;
     protected $mimeGuesser;
     protected $fetchingErrorMessage;
+    protected $eventDispatcher;
 
-    public function __construct(Graby $graby, RuleBasedTagger $tagger, TagRepository $tagRepository, LoggerInterface $logger, $fetchingErrorMessage)
+    public function __construct(Graby $graby, RuleBasedTagger $tagger, ValidatorInterface $validator, LoggerInterface $logger, $fetchingErrorMessage)
     {
         $this->graby = $graby;
         $this->tagger = $tagger;
+        $this->validator = $validator;
         $this->logger = $logger;
-        $this->tagRepository = $tagRepository;
         $this->mimeGuesser = new MimeTypeExtensionGuesser();
         $this->fetchingErrorMessage = $fetchingErrorMessage;
     }
 
     /**
-     * Fetch content using graby and hydrate given entry with results information.
-     * In case we couldn't find content, we'll try to use Open Graph data.
+     * Update entry using either fetched or provided content.
      *
-     * We can also force the content, in case of an import from the v1 for example, so the function won't
-     * fetch the content from the website but rather use information given with the $content parameter.
-     *
-     * @param Entry  $entry   Entry to update
-     * @param string $url     Url to grab content for
-     * @param array  $content An array with AT LEAST keys title, html, url, language & content_type to skip the fetchContent from the url
-     *
-     * @return Entry
+     * @param Entry  $entry                Entry to update
+     * @param string $url                  Url of the content
+     * @param array  $content              Array with content provided for import with AT LEAST keys title, html, url to skip the fetchContent from the url
+     * @param bool   $disableContentUpdate Whether to skip trying to fetch content using Graby
      */
-    public function updateEntry(Entry $entry, $url, array $content = [])
+    public function updateEntry(Entry $entry, $url, array $content = [], $disableContentUpdate = false)
     {
-        // do we have to fetch the content or the provided one is ok?
-        if (empty($content) || false === $this->validateContent($content)) {
+        if (!empty($content['html'])) {
+            $content['html'] = $this->graby->cleanupHtml($content['html'], $url);
+        }
+
+        if ((empty($content) || false === $this->validateContent($content)) && false === $disableContentUpdate) {
             $fetchedContent = $this->graby->fetchContent($url);
 
             // when content is imported, we have information in $content
@@ -59,107 +59,169 @@ class ContentProxy
             }
         }
 
-        $title = $content['title'];
-        if (!$title && isset($content['open_graph']['og_title'])) {
-            $title = $content['open_graph']['og_title'];
+        // be sure to keep the url in case of error
+        // so we'll be able to refetch it in the future
+        $content['url'] = !empty($content['url']) ? $content['url'] : $url;
+
+        $this->stockEntry($entry, $content);
+    }
+
+    /**
+     * Use a Symfony validator to ensure the language is well formatted.
+     *
+     * @param Entry  $entry
+     * @param string $value Language to validate and save
+     */
+    public function updateLanguage(Entry $entry, $value)
+    {
+        // some lang are defined as fr-FR, es-ES.
+        // replacing - by _ might increase language support
+        $value = str_replace('-', '_', $value);
+
+        $errors = $this->validator->validate(
+            $value,
+            (new LocaleConstraint())
+        );
+
+        if (0 === count($errors)) {
+            $entry->setLanguage($value);
+
+            return;
         }
 
-        $html = $content['html'];
-        if (false === $html) {
-            $html = $this->fetchingErrorMessage;
+        $this->logger->warning('Language validation failed. ' . (string) $errors);
+    }
 
-            if (isset($content['open_graph']['og_description'])) {
-                $html .= '<p><i>But we found a short description: </i></p>';
-                $html .= $content['open_graph']['og_description'];
+    /**
+     * Use a Symfony validator to ensure the preview picture is a real url.
+     *
+     * @param Entry  $entry
+     * @param string $value URL to validate and save
+     */
+    public function updatePreviewPicture(Entry $entry, $value)
+    {
+        $errors = $this->validator->validate(
+            $value,
+            (new UrlConstraint())
+        );
+
+        if (0 === count($errors)) {
+            $entry->setPreviewPicture($value);
+
+            return;
+        }
+
+        $this->logger->warning('PreviewPicture validation failed. ' . (string) $errors);
+    }
+
+    /**
+     * Update date.
+     *
+     * @param Entry  $entry
+     * @param string $value Date to validate and save
+     */
+    public function updatePublishedAt(Entry $entry, $value)
+    {
+        $date = $value;
+
+        // is it a timestamp?
+        if (false !== filter_var($date, FILTER_VALIDATE_INT)) {
+            $date = '@' . $date;
+        }
+
+        try {
+            // is it already a DateTime?
+            // (it's inside the try/catch in case of fail to be parse time string)
+            if (!$date instanceof \DateTime) {
+                $date = new \DateTime($date);
             }
+
+            $entry->setPublishedAt($date);
+        } catch (\Exception $e) {
+            $this->logger->warning('Error while defining date', ['e' => $e, 'url' => $entry->getUrl(), 'date' => $value]);
         }
+    }
 
-        $entry->setUrl($content['url'] ?: $url);
-        $entry->setTitle($title);
-        $entry->setContent($html);
-        $entry->setHttpStatus(isset($content['status']) ? $content['status'] : '');
-
-        $entry->setLanguage(isset($content['language']) ? $content['language'] : '');
-        $entry->setMimetype(isset($content['content_type']) ? $content['content_type'] : '');
-        $entry->setReadingTime(Utils::getReadingTime($html));
+    /**
+     * Stock entry with fetched or imported content.
+     * Will fall back to OpenGraph data if available.
+     *
+     * @param Entry $entry   Entry to stock
+     * @param array $content Array with at least title, url & html
+     */
+    private function stockEntry(Entry $entry, array $content)
+    {
+        $entry->setUrl($content['url']);
 
         $domainName = parse_url($entry->getUrl(), PHP_URL_HOST);
         if (false !== $domainName) {
             $entry->setDomainName($domainName);
         }
 
-        if (isset($content['open_graph']['og_image']) && $content['open_graph']['og_image']) {
-            $entry->setPreviewPicture($content['open_graph']['og_image']);
+        if (!empty($content['title'])) {
+            $entry->setTitle($content['title']);
+        } elseif (!empty($content['open_graph']['og_title'])) {
+            $entry->setTitle($content['open_graph']['og_title']);
         }
 
-        // if content is an image define as a preview too
-        if (isset($content['content_type']) && in_array($this->mimeGuesser->guess($content['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
-            $entry->setPreviewPicture($content['url']);
+        $html = $content['html'];
+        if (false === $html) {
+            $html = $this->fetchingErrorMessage;
+
+            if (!empty($content['open_graph']['og_description'])) {
+                $html .= '<p><i>But we found a short description: </i></p>';
+                $html .= $content['open_graph']['og_description'];
+            }
+        }
+
+        $entry->setContent($html);
+        $entry->setReadingTime(Utils::getReadingTime($html));
+
+        if (!empty($content['status'])) {
+            $entry->setHttpStatus($content['status']);
+        }
+
+        if (!empty($content['authors']) && is_array($content['authors'])) {
+            $entry->setPublishedBy($content['authors']);
+        }
+
+        if (!empty($content['all_headers'])) {
+            $entry->setHeaders($content['all_headers']);
+        }
+
+        if (!empty($content['date'])) {
+            $this->updatePublishedAt($entry, $content['date']);
+        }
+
+        if (!empty($content['language'])) {
+            $this->updateLanguage($entry, $content['language']);
+        }
+
+        if (!empty($content['open_graph']['og_image'])) {
+            $this->updatePreviewPicture($entry, $content['open_graph']['og_image']);
+        }
+
+        // if content is an image, define it as a preview too
+        if (!empty($content['content_type']) && in_array($this->mimeGuesser->guess($content['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
+            $this->updatePreviewPicture($entry, $content['url']);
+        }
+
+        if (!empty($content['content_type'])) {
+            $entry->setMimetype($content['content_type']);
         }
 
         try {
             $this->tagger->tag($entry);
         } catch (\Exception $e) {
             $this->logger->error('Error while trying to automatically tag an entry.', [
-                'entry_url' => $url,
+                'entry_url' => $content['url'],
                 'error_msg' => $e->getMessage(),
             ]);
         }
-
-        return $entry;
     }
 
     /**
-     * Assign some tags to an entry.
-     *
-     * @param Entry        $entry
-     * @param array|string $tags          An array of tag or a string coma separated of tag
-     * @param array        $entitiesReady Entities from the EntityManager which are persisted but not yet flushed
-     *                                    It is mostly to fix duplicate tag on import @see http://stackoverflow.com/a/7879164/569101
-     */
-    public function assignTagsToEntry(Entry $entry, $tags, array $entitiesReady = [])
-    {
-        if (!is_array($tags)) {
-            $tags = explode(',', $tags);
-        }
-
-        // keeps only Tag entity from the "not yet flushed entities"
-        $tagsNotYetFlushed = [];
-        foreach ($entitiesReady as $entity) {
-            if ($entity instanceof Tag) {
-                $tagsNotYetFlushed[$entity->getLabel()] = $entity;
-            }
-        }
-
-        foreach ($tags as $label) {
-            $label = trim($label);
-
-            // avoid empty tag
-            if (0 === strlen($label)) {
-                continue;
-            }
-
-            if (isset($tagsNotYetFlushed[$label])) {
-                $tagEntity = $tagsNotYetFlushed[$label];
-            } else {
-                $tagEntity = $this->tagRepository->findOneByLabel($label);
-
-                if (is_null($tagEntity)) {
-                    $tagEntity = new Tag();
-                    $tagEntity->setLabel($label);
-                }
-            }
-
-            // only add the tag on the entry if the relation doesn't exist
-            if (false === $entry->getTags()->contains($tagEntity)) {
-                $entry->addTag($tagEntity);
-            }
-        }
-    }
-
-    /**
-     * Validate that the given content as enough value to be used
-     * instead of fetch the content from the url.
+     * Validate that the given content has at least a title, an html and a url.
      *
      * @param array $content
      *
@@ -167,6 +229,6 @@ class ContentProxy
      */
     private function validateContent(array $content)
     {
-        return isset($content['title']) && isset($content['html']) && isset($content['url']) && isset($content['language']) && isset($content['content_type']);
+        return !empty($content['title']) && !empty($content['html']) && !empty($content['url']);
     }
 }

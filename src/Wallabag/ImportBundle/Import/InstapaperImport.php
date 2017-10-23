@@ -63,18 +63,27 @@ class InstapaperImport extends AbstractImport
 
         $entries = [];
         $handle = fopen($this->filepath, 'r');
-        while (($data = fgetcsv($handle, 10240)) !== false) {
+        while (false !== ($data = fgetcsv($handle, 10240))) {
             if ('URL' === $data[0]) {
                 continue;
+            }
+
+            // last element in the csv is the folder where the content belong
+            // BUT it can also be the status (since status = folder in Instapaper)
+            // and we don't want archive, unread & starred to become a tag
+            $tags = null;
+            if (false === in_array($data[3], ['Archive', 'Unread', 'Starred'], true)) {
+                $tags = [$data[3]];
             }
 
             $entries[] = [
                 'url' => $data[0],
                 'title' => $data[1],
                 'status' => $data[3],
-                'is_archived' => $data[3] === 'Archive' || $data[3] === 'Starred',
-                'is_starred' => $data[3] === 'Starred',
+                'is_archived' => 'Archive' === $data[3] || 'Starred' === $data[3],
+                'is_starred' => 'Starred' === $data[3],
                 'html' => false,
+                'tags' => $tags,
             ];
         }
         fclose($handle);
@@ -116,7 +125,15 @@ class InstapaperImport extends AbstractImport
         $entry->setTitle($importedEntry['title']);
 
         // update entry with content (in case fetching failed, the given entry will be return)
-        $entry = $this->fetchContent($entry, $importedEntry['url'], $importedEntry);
+        $this->fetchContent($entry, $importedEntry['url'], $importedEntry);
+
+        if (!empty($importedEntry['tags'])) {
+            $this->tagsAssigner->assignTagsToEntry(
+                $entry,
+                $importedEntry['tags'],
+                $this->em->getUnitOfWork()->getScheduledEntityInsertions()
+            );
+        }
 
         $entry->setArchived($importedEntry['is_archived']);
         $entry->setStarred($importedEntry['is_starred']);

@@ -91,9 +91,10 @@ config:
         token_reset: 'Rigenera il tuo token'
         rss_links: 'Collegamenti RSS'
         rss_link:
-            unread: 'non letti'
-            starred: 'preferiti'
-            archive: 'archiviati'
+            unread: 'Non letti'
+            starred: 'Preferiti'
+            archive: 'Archiviati'
+            # all: 'All'
         rss_limit: 'Numero di elementi nel feed'
     form_user:
         two_factor_description: "Abilitando l'autenticazione a due fattori riceverai una e-mail con un codice per ogni nuova connesione non verificata"
@@ -112,6 +113,7 @@ config:
         annotations: Rimuovi TUTTE le annotazioni
         tags: Rimuovi TUTTE le etichette
         entries: Rimuovi TUTTI gli articoli
+        # archived: Remove ALL archived entries
         confirm: Sei veramente sicuro? (NON PUOI TORNARE INDIETRO)
     form_password:
         description: "Qui puoi cambiare la tua password. La tua nuova password dovrebbe essere composta da almeno 8 caratteri."
@@ -156,6 +158,7 @@ config:
                 or: "Una regola O un'altra"
                 and: "Una regola E un'altra"
                 matches: 'Verifica che un <i>oggetto</i> risulti in una <i>ricerca</i> (case-insensitive).<br />Esempio: <code>titolo contiene "football"</code>'
+                # notmatches: 'Tests that a <i>subject</i> is not matches a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
 
 entry:
     page_titles:
@@ -166,6 +169,7 @@ entry:
         filtered_tags: 'Filtrati per etichetta:'
         filtered_search: 'Filtrati per ricerca:'
         untagged: 'Articoli non etichettati'
+        all: 'Tutti gli articoli'
     list:
         number_on_the_page: "{0} Non ci sono contenuti.|{1} C'è un contenuto.|]1,Inf[ Ci sono %count% contenuti."
         reading_time: 'tempo di lettura stimato'
@@ -187,6 +191,8 @@ entry:
         unread_label: 'Non letti'
         preview_picture_label: "Ha un'immagine di anteprima"
         preview_picture_help: 'Immagine di anteprima'
+        # is_public_label: 'Has a public link'
+        # is_public_help: 'Public link'
         language_label: 'Lingua'
         http_status_label: 'Stato HTTP'
         reading_time:
@@ -211,7 +217,7 @@ entry:
             view_original_article: 'Contenuto originale'
             re_fetch_content: 'Ri-ottieni pagina'
             delete: 'Elimina'
-            add_a_tag: 'Aggiungi un tag'
+            add_a_tag: 'Aggiungi un''etichetta'
             share_content: 'Condividi'
             share_email_label: 'E-mail'
             public_link: 'Link pubblico'
@@ -222,7 +228,7 @@ entry:
                 label: 'Problemi?'
                 description: 'Questo contenuto viene visualizzato male?'
         edit_title: 'Modifica titolo'
-        original_article: 'originale'
+        original_article: 'Originale'
         annotations_on_the_entry: '{0} Nessuna annotazione|{1} Una annotazione|]1,Inf[ %count% annotazioni'
         created_at: 'Data di creazione'
         published_at: 'Data di pubblicazione'
@@ -238,13 +244,15 @@ entry:
         page_title: 'Modifica voce'
         title_label: 'Titolo'
         url_label: 'Url'
-        is_public_label: 'Pubblico'
         save_label: 'Salva'
     public:
         shared_by_wallabag: "Questo articolo è stato condiviso da %username% con <a href='%wallabag_instance%'>wallabag</a>"
+    confirm:
+        delete: "Vuoi veramente rimuovere quell'articolo?"
+        delete_tag: "Vuoi veramente rimuovere quell'etichetta da quell'articolo?"
 
 about:
-    page_title: 'About'
+    page_title: 'A proposito'
     top_menu:
         who_behind_wallabag: "Chi c'è dietro a wallabag"
         getting_help: 'Ottieni aiuto'
@@ -263,7 +271,7 @@ about:
         bug_reports: 'Bug reports'
         support: '<a href="https://github.com/wallabag/wallabag/issues">su GitHub</a>'
     helping:
-        description: 'wallabag è gratuito opensource. Puoi aiutarci:'
+        description: 'wallabag è gratuito ed OpenSource. Puoi aiutarci:'
         by_contributing: 'per contribuire al progetto:'
         by_contributing_2: 'un elenco delle attività richieste'
         by_paypal: 'via Paypal'
@@ -331,7 +339,7 @@ quickstart:
     more: 'Più…'
     intro:
         title: 'Benvenuto su wallabag!'
-        paragraph_1: "Un tour in cui ti guideremo per scoprire e che ti mostrerà delle funzionalità che potrebbero interessarti."
+        paragraph_1: "Ti accompagneremo alla scoperta di wallabag e ti mostreremo delle funzionalità che potrebbero interessarti."
         paragraph_2: 'Seguici!'
     configure:
         title: "Configura l'applicazione"
@@ -389,6 +397,9 @@ tag:
         add: 'Aggiungi'
         placeholder: 'Puoi aggiungere varie etichette, separate da una virgola.'
 
+# export:
+#     footer_template: '<div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p></div>'
+
 import:
     page_title: 'Importa'
     page_description: "Benvenuto nell'importatore di wallabag. Seleziona il servizio da cui vuoi trasferire i contenuti."
@@ -401,20 +412,20 @@ import:
         save_label: 'Carica file'
     pocket:
         page_title: 'Importa da > Pocket'
-        description: "Questo importatore copierà tutti i tuoi dati da Pocket. Pocket non ci consente di ottenere contenuti dal loro servzio, così il contenuto leggibile di ogni articolo verrà ri-ottenuto da wallabag."
+        description: "Questo importatore copierà tutti i tuoi dati da Pocket. Pocket non ci consente di ottenere contenuti dal loro servizio, così il contenuto leggibile di ogni articolo verrà ri-ottenuto da wallabag."
         config_missing:
             description: "Importazione da Pocket non configurata."
             admin_message: 'Devi definire %keyurls% una pocket_consumer_key %keyurle%.'
-            user_message: 'Il tuo amministratore di server deve define una API Key per Pocket.'
+            user_message: 'Il tuo amministratore del server deve definire una API Key per Pocket.'
         authorize_message: 'Puoi importare dati dal tuo account Pocket. Devi solo cliccare sul pulsante sottostante e autorizzare la connessione a getpocket.com.'
         connect_to_pocket: 'Connetti a Pocket and importa i dati'
     wallabag_v1:
         page_title: 'Importa da > Wallabag v1'
-        description: 'Questo importatore copierà tutti i tuoi dati da un wallabag v1. Nella tua pagina di configurazione, clicca su "JSON export" nella sezione "Esport i tuoi dati di wallabag". Otterrai un file "wallabag-export-1-xxxx-xx-xx.json".'
+        description: 'Questo importatore copierà tutti i tuoi dati da un wallabag v1. Nella tua pagina di configurazione, clicca su "JSON export" nella sezione "Esporta i tuoi dati di wallabag". Otterrai un file "wallabag-export-1-xxxx-xx-xx.json".'
         how_to: 'Seleziona la tua esportazione di wallabag e clicca sul pulsante sottostante caricare il file e importare i dati.'
     wallabag_v2:
         page_title: 'Importa da > Wallabag v2'
-        description: 'Questo importatore copierà tutti i tuoi dati da un wallabag v2. Vai in "Tutti i contenuti", e, nella sidebar di esportazione, clicca su "JSON". Otterrai un file "Tutti i contenuti.json".'
+        description: 'Questo importatore copierà tutti i tuoi dati da un wallabag v2. Vai in "Tutti i contenuti", e, nella barra laterale di esportazione, clicca su "JSON". Otterrai un file "Tutti i contenuti.json'
     readability:
         page_title: 'Importa da > Readability'
         description: 'Questo importatore copierà tutti i tuoi articoli da Readability. Nella pagina strumenti (https://www.readability.com/tools/), clicca su "Export your data" nella sezione "Data Export". Riceverai una E-mail per scaricare un file json (che tuttavia non termina con .json).'
@@ -514,6 +525,28 @@ user:
         delete: Cancella
         delete_confirm: Sei sicuro?
         back_to_list: Torna alla lista
+    search:
+        # placeholder: Filter by username or email
+
+site_credential:
+    # page_title: Site credentials management
+    # new_site_credential: Create a credential
+    # edit_site_credential: Edit an existing credential
+    # description: "Here you can manage all credentials for sites which required them (create, edit and delete), like a paywall, an authentication, etc."
+    # list:
+    #     actions: Actions
+    #     edit_action: Edit
+    #     yes: Yes
+    #     no: No
+    #     create_new_one: Create a new credential
+    # form:
+    #     username_label: 'Username'
+    #     host_label: 'Host'
+    #     password_label: 'Password'
+    #     save: Save
+    #     delete: Delete
+    #     delete_confirm: Are you sure?
+    #     back_to_list: Back to list
 
 error:
     page_title: Si è verificato un errore
@@ -532,6 +565,7 @@ flashes:
             annotations_reset: Reset annotazioni
             tags_reset: Reset etichette
             entries_reset: Reset articoli
+            # archived_reset: Archived entries deleted
     entry:
         notice:
             entry_already_saved: 'Contenuto già salvato in data %date%'
@@ -566,3 +600,8 @@ flashes:
             added: 'Utente "%username%" aggiunto'
             updated: 'Utente "%username%" aggiornato'
             deleted: 'Utente "%username%" eliminato'
+    site_credential:
+        notice:
+            # added: 'Site credential for "%host%" added'
+            # updated: 'Site credential for "%host%" updated'
+            # deleted: 'Site credential for "%host%" deleted'

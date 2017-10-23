@@ -2,6 +2,8 @@
 
 namespace Tests\Wallabag\CoreBundle\Helper;
 
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
@@ -15,14 +17,19 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
     private $tagRepository;
     private $entryRepository;
     private $tagger;
+    private $logger;
+    private $handler;
 
     public function setUp()
     {
         $this->rulerz = $this->getRulerZMock();
         $this->tagRepository = $this->getTagRepositoryMock();
         $this->entryRepository = $this->getEntryRepositoryMock();
+        $this->logger = $this->getLogger();
+        $this->handler = new TestHandler();
+        $this->logger->pushHandler($this->handler);
 
-        $this->tagger = new RuleBasedTagger($this->rulerz, $this->tagRepository, $this->entryRepository);
+        $this->tagger = new RuleBasedTagger($this->rulerz, $this->tagRepository, $this->entryRepository, $this->logger);
     }
 
     public function testTagWithNoRule()
@@ -32,6 +39,8 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
         $this->tagger->tag($entry);
 
         $this->assertTrue($entry->getTags()->isEmpty());
+        $records = $this->handler->getRecords();
+        $this->assertCount(0, $records);
     }
 
     public function testTagWithNoMatchingRule()
@@ -49,6 +58,8 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
         $this->tagger->tag($entry);
 
         $this->assertTrue($entry->getTags()->isEmpty());
+        $records = $this->handler->getRecords();
+        $this->assertCount(0, $records);
     }
 
     public function testTagWithAMatchingRule()
@@ -70,6 +81,9 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
         $tags = $entry->getTags();
         $this->assertSame('foo', $tags[0]->getLabel());
         $this->assertSame('bar', $tags[1]->getLabel());
+
+        $records = $this->handler->getRecords();
+        $this->assertCount(1, $records);
     }
 
     public function testTagWithAMixOfMatchingRules()
@@ -90,6 +104,8 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
 
         $tags = $entry->getTags();
         $this->assertSame('foo', $tags[0]->getLabel());
+        $records = $this->handler->getRecords();
+        $this->assertCount(1, $records);
     }
 
     public function testWhenTheTagExists()
@@ -118,6 +134,8 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
 
         $tags = $entry->getTags();
         $this->assertSame($tag, $tags[0]);
+        $records = $this->handler->getRecords();
+        $this->assertCount(1, $records);
     }
 
     public function testSameTagWithDifferentfMatchingRules()
@@ -138,6 +156,8 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
 
         $tags = $entry->getTags();
         $this->assertCount(1, $tags);
+        $records = $this->handler->getRecords();
+        $this->assertCount(2, $records);
     }
 
     public function testTagAllEntriesForAUser()
@@ -162,7 +182,7 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
             $tags = $entry->getTags();
 
             $this->assertCount(1, $tags);
-            $this->assertEquals('hey', $tags[0]->getLabel());
+            $this->assertSame('hey', $tags[0]->getLabel());
         }
     }
 
@@ -208,5 +228,10 @@ class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
         return $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
             ->disableOriginalConstructor()
             ->getMock();
+    }
+
+    private function getLogger()
+    {
+        return new Logger('foo');
     }
 }

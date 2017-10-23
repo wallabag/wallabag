@@ -1,12 +1,12 @@
 <?php
 
-use Doctrine\Common\Annotations\AnnotationRegistry;
 use Composer\Autoload\ClassLoader;
+use Doctrine\Common\Annotations\AnnotationRegistry;
 
 /**
- * @var ClassLoader $loader
+ * @var ClassLoader
  */
-$loader = require __DIR__.'/../vendor/autoload.php';
+$loader = require __DIR__ . '/../vendor/autoload.php';
 
 AnnotationRegistry::registerLoader([$loader, 'loadClass']);
 

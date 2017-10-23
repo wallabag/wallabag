@@ -36,7 +36,7 @@ class ImportCompilerPassTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($definition->hasMethodCall('addImport'));
 
         $calls = $definition->getMethodCalls();
-        $this->assertEquals('pocket', $calls[0][1][1]);
+        $this->assertSame('pocket', $calls[0][1][1]);
     }
 
     protected function process(ContainerBuilder $container)

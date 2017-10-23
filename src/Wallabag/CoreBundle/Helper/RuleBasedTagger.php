@@ -2,6 +2,7 @@
 
 namespace Wallabag\CoreBundle\Helper;
 
+use Psr\Log\LoggerInterface;
 use RulerZ\RulerZ;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
@@ -14,12 +15,14 @@ class RuleBasedTagger
     private $rulerz;
     private $tagRepository;
     private $entryRepository;
+    private $logger;
 
-    public function __construct(RulerZ $rulerz, TagRepository $tagRepository, EntryRepository $entryRepository)
+    public function __construct(RulerZ $rulerz, TagRepository $tagRepository, EntryRepository $entryRepository, LoggerInterface $logger)
     {
         $this->rulerz = $rulerz;
         $this->tagRepository = $tagRepository;
         $this->entryRepository = $entryRepository;
+        $this->logger = $logger;
     }
 
     /**
@@ -35,6 +38,11 @@ class RuleBasedTagger
             if (!$this->rulerz->satisfies($entry, $rule->getRule())) {
                 continue;
             }
+
+            $this->logger->info('Matching rule.', [
+                'rule' => $rule->getRule(),
+                'tags' => $rule->getTags(),
+            ]);
 
             foreach ($rule->getTags() as $label) {
                 $tag = $this->getTag($label);

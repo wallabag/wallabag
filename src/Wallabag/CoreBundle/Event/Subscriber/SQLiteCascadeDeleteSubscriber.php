@@ -2,10 +2,10 @@
 
 namespace Wallabag\CoreBundle\Event\Subscriber;
 
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Wallabag\CoreBundle\Entity\Entry;
-use Doctrine\Bundle\DoctrineBundle\Registry;
 
 /**
  * SQLite doesn't care about cascading remove, so we need to manually remove associated stuf for an Entry.
@@ -45,9 +45,8 @@ class SQLiteCascadeDeleteSubscriber implements EventSubscriber
     public function preRemove(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-
-        if (!$this->doctrine->getConnection()->getDriver() instanceof \Doctrine\DBAL\Driver\PDOSqlite\Driver ||
-            !$entity instanceof Entry) {
+        if (!$this->doctrine->getConnection()->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\SqlitePlatform
+            || !$entity instanceof Entry) {
             return;
         }
 

@@ -11,7 +11,7 @@ class TagRestControllerTest extends WallabagApiTestCase
     {
         $this->client->request('GET', '/api/tags.json');
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
@@ -22,39 +22,49 @@ class TagRestControllerTest extends WallabagApiTestCase
         return end($content);
     }
 
-    /**
-     * @depends testGetUserTags
-     */
-    public function testDeleteUserTag($tag)
+    public function testDeleteUserTag()
     {
-        $tagName = $tag['label'];
+        $tagLabel = 'tagtest';
+        $tag = new Tag();
+        $tag->setLabel($tagLabel);
 
-        $this->client->request('DELETE', '/api/tags/'.$tag['id'].'.json');
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $em->persist($tag);
+        $em->flush();
+        $em->clear();
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->client->request('DELETE', '/api/tags/' . $tag->getId() . '.json');
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertArrayHasKey('label', $content);
-        $this->assertEquals($tag['label'], $content['label']);
-        $this->assertEquals($tag['slug'], $content['slug']);
+        $this->assertSame($tag->getLabel(), $content['label']);
+        $this->assertSame($tag->getSlug(), $content['slug']);
 
-        $entries = $this->client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findAllByTagId($this->user->getId(), $tag['id']);
+        $entries = $em->getRepository('WallabagCoreBundle:Entry')
+            ->findAllByTagId($this->user->getId(), $tag->getId());
 
         $this->assertCount(0, $entries);
 
-        $tag = $this->client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Tag')
-            ->findOneByLabel($tagName);
+        $tag = $em->getRepository('WallabagCoreBundle:Tag')->findOneByLabel($tagLabel);
 
-        $this->assertNull($tag, $tagName.' was removed because it begun an orphan tag');
+        $this->assertNull($tag, $tagLabel . ' was removed because it begun an orphan tag');
     }
 
-    public function testDeleteTagByLabel()
+    public function dataForDeletingTagByLabel()
+    {
+        return [
+            'by_query' => [true],
+            'by_body' => [false],
+        ];
+    }
+
+    /**
+     * @dataProvider dataForDeletingTagByLabel
+     */
+    public function testDeleteTagByLabel($useQueryString)
     {
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
         $entry = $this->client->getContainer()
@@ -73,15 +83,19 @@ class TagRestControllerTest extends WallabagApiTestCase
         $em->persist($entry);
         $em->flush();
 
-        $this->client->request('DELETE', '/api/tag/label.json', ['tag' => $tag->getLabel()]);
+        if ($useQueryString) {
+            $this->client->request('DELETE', '/api/tag/label.json?tag=' . $tag->getLabel());
+        } else {
+            $this->client->request('DELETE', '/api/tag/label.json', ['tag' => $tag->getLabel()]);
+        }
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertArrayHasKey('label', $content);
-        $this->assertEquals($tag->getLabel(), $content['label']);
-        $this->assertEquals($tag->getSlug(), $content['slug']);
+        $this->assertSame($tag->getLabel(), $content['label']);
+        $this->assertSame($tag->getSlug(), $content['slug']);
 
         $entries = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
@@ -95,10 +109,13 @@ class TagRestControllerTest extends WallabagApiTestCase
     {
         $this->client->request('DELETE', '/api/tag/label.json', ['tag' => 'does not exist']);
 
-        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
     }
 
-    public function testDeleteTagsByLabel()
+    /**
+     * @dataProvider dataForDeletingTagByLabel
+     */
+    public function testDeleteTagsByLabel($useQueryString)
     {
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
         $entry = $this->client->getContainer()
@@ -122,21 +139,25 @@ class TagRestControllerTest extends WallabagApiTestCase
         $em->persist($entry);
         $em->flush();
 
-        $this->client->request('DELETE', '/api/tags/label.json', ['tags' => $tag->getLabel().','.$tag2->getLabel()]);
+        if ($useQueryString) {
+            $this->client->request('DELETE', '/api/tags/label.json?tags=' . $tag->getLabel() . ',' . $tag2->getLabel());
+        } else {
+            $this->client->request('DELETE', '/api/tags/label.json', ['tags' => $tag->getLabel() . ',' . $tag2->getLabel()]);
+        }
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertCount(2, $content);
 
         $this->assertArrayHasKey('label', $content[0]);
-        $this->assertEquals($tag->getLabel(), $content[0]['label']);
-        $this->assertEquals($tag->getSlug(), $content[0]['slug']);
+        $this->assertSame($tag->getLabel(), $content[0]['label']);
+        $this->assertSame($tag->getSlug(), $content[0]['slug']);
 
         $this->assertArrayHasKey('label', $content[1]);
-        $this->assertEquals($tag2->getLabel(), $content[1]['label']);
-        $this->assertEquals($tag2->getSlug(), $content[1]['slug']);
+        $this->assertSame($tag2->getLabel(), $content[1]['label']);
+        $this->assertSame($tag2->getSlug(), $content[1]['slug']);
 
         $entries = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
@@ -157,6 +178,6 @@ class TagRestControllerTest extends WallabagApiTestCase
     {
         $this->client->request('DELETE', '/api/tags/label.json', ['tags' => 'does not exist']);
 
-        $this->assertEquals(404, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
     }
 }

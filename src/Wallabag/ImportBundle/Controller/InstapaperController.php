@@ -2,8 +2,8 @@
 
 namespace Wallabag\ImportBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
 
@@ -29,11 +29,11 @@ class InstapaperController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('file')->getData();
             $markAsRead = $form->get('mark_as_read')->getData();
-            $name = 'instapaper_'.$this->getUser()->getId().'.csv';
+            $name = 'instapaper_' . $this->getUser()->getId() . '.csv';
 
-            if (null !== $file && in_array($file->getClientMimeType(), $this->getParameter('wallabag_import.allow_mimetypes')) && $file->move($this->getParameter('wallabag_import.resource_dir'), $name)) {
+            if (null !== $file && in_array($file->getClientMimeType(), $this->getParameter('wallabag_import.allow_mimetypes'), true) && $file->move($this->getParameter('wallabag_import.resource_dir'), $name)) {
                 $res = $instapaper
-                    ->setFilepath($this->getParameter('wallabag_import.resource_dir').'/'.$name)
+                    ->setFilepath($this->getParameter('wallabag_import.resource_dir') . '/' . $name)
                     ->setMarkAsRead($markAsRead)
                     ->import();
 
@@ -52,7 +52,7 @@ class InstapaperController extends Controller
                         ]);
                     }
 
-                    unlink($this->getParameter('wallabag_import.resource_dir').'/'.$name);
+                    unlink($this->getParameter('wallabag_import.resource_dir') . '/' . $name);
                 }
 
                 $this->get('session')->getFlashBag()->add(
@@ -61,12 +61,12 @@ class InstapaperController extends Controller
                 );
 
                 return $this->redirect($this->generateUrl('homepage'));
-            } else {
-                $this->get('session')->getFlashBag()->add(
-                    'notice',
-                    'flashes.import.notice.failed_on_file'
-                );
             }
+
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'flashes.import.notice.failed_on_file'
+            );
         }
 
         return $this->render('WallabagImportBundle:Instapaper:index.html.twig', [

@@ -2,14 +2,14 @@
 
 namespace Tests\Wallabag\ImportBundle\Import;
 
-use Wallabag\ImportBundle\Import\ChromeImport;
-use Wallabag\UserBundle\Entity\User;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\ImportBundle\Redis\Producer;
-use Monolog\Logger;
-use Monolog\Handler\TestHandler;
-use Simpleue\Queue\RedisQueue;
 use M6Web\Component\RedisMock\RedisMockFactory;
+use Monolog\Handler\TestHandler;
+use Monolog\Logger;
+use Simpleue\Queue\RedisQueue;
+use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\ImportBundle\Import\ChromeImport;
+use Wallabag\ImportBundle\Redis\Producer;
+use Wallabag\UserBundle\Entity\User;
 
 class ChromeImportTest extends \PHPUnit_Framework_TestCase
 {
@@ -17,53 +17,21 @@ class ChromeImportTest extends \PHPUnit_Framework_TestCase
     protected $em;
     protected $logHandler;
     protected $contentProxy;
-
-    private function getChromeImport($unsetUser = false, $dispatched = 0)
-    {
-        $this->user = new User();
-
-        $this->em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->contentProxy = $this->getMockBuilder('Wallabag\CoreBundle\Helper\ContentProxy')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $dispatcher
-            ->expects($this->exactly($dispatched))
-            ->method('dispatch');
-
-        $wallabag = new ChromeImport($this->em, $this->contentProxy, $dispatcher);
-
-        $this->logHandler = new TestHandler();
-        $logger = new Logger('test', [$this->logHandler]);
-        $wallabag->setLogger($logger);
-
-        if (false === $unsetUser) {
-            $wallabag->setUser($this->user);
-        }
-
-        return $wallabag;
-    }
+    protected $tagsAssigner;
 
     public function testInit()
     {
         $chromeImport = $this->getChromeImport();
 
-        $this->assertEquals('Chrome', $chromeImport->getName());
+        $this->assertSame('Chrome', $chromeImport->getName());
         $this->assertNotEmpty($chromeImport->getUrl());
-        $this->assertEquals('import.chrome.description', $chromeImport->getDescription());
+        $this->assertSame('import.chrome.description', $chromeImport->getDescription());
     }
 
     public function testImport()
     {
         $chromeImport = $this->getChromeImport(false, 1);
-        $chromeImport->setFilepath(__DIR__.'/../fixtures/chrome-bookmarks');
+        $chromeImport->setFilepath(__DIR__ . '/../fixtures/chrome-bookmarks');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
             ->disableOriginalConstructor()
@@ -90,13 +58,13 @@ class ChromeImportTest extends \PHPUnit_Framework_TestCase
         $res = $chromeImport->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 1, 'queued' => 0], $chromeImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 1, 'queued' => 0], $chromeImport->getSummary());
     }
 
     public function testImportAndMarkAllAsRead()
     {
         $chromeImport = $this->getChromeImport(false, 1);
-        $chromeImport->setFilepath(__DIR__.'/../fixtures/chrome-bookmarks');
+        $chromeImport->setFilepath(__DIR__ . '/../fixtures/chrome-bookmarks');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
             ->disableOriginalConstructor()
@@ -128,13 +96,13 @@ class ChromeImportTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($res);
 
-        $this->assertEquals(['skipped' => 0, 'imported' => 1, 'queued' => 0], $chromeImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 1, 'queued' => 0], $chromeImport->getSummary());
     }
 
     public function testImportWithRabbit()
     {
         $chromeImport = $this->getChromeImport();
-        $chromeImport->setFilepath(__DIR__.'/../fixtures/chrome-bookmarks');
+        $chromeImport->setFilepath(__DIR__ . '/../fixtures/chrome-bookmarks');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
             ->disableOriginalConstructor()
@@ -168,13 +136,13 @@ class ChromeImportTest extends \PHPUnit_Framework_TestCase
         $res = $chromeImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 1], $chromeImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 1], $chromeImport->getSummary());
     }
 
     public function testImportWithRedis()
     {
         $chromeImport = $this->getChromeImport();
-        $chromeImport->setFilepath(__DIR__.'/../fixtures/chrome-bookmarks');
+        $chromeImport->setFilepath(__DIR__ . '/../fixtures/chrome-bookmarks');
 
         $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
             ->disableOriginalConstructor()
@@ -206,7 +174,7 @@ class ChromeImportTest extends \PHPUnit_Framework_TestCase
         $res = $chromeImport->setMarkAsRead(true)->import();
 
         $this->assertTrue($res);
-        $this->assertEquals(['skipped' => 0, 'imported' => 0, 'queued' => 1], $chromeImport->getSummary());
+        $this->assertSame(['skipped' => 0, 'imported' => 0, 'queued' => 1], $chromeImport->getSummary());
 
         $this->assertNotEmpty($redisMock->lpop('chrome'));
     }
@@ -214,7 +182,7 @@ class ChromeImportTest extends \PHPUnit_Framework_TestCase
     public function testImportBadFile()
     {
         $chromeImport = $this->getChromeImport();
-        $chromeImport->setFilepath(__DIR__.'/../fixtures/wallabag-v1.jsonx');
+        $chromeImport->setFilepath(__DIR__ . '/../fixtures/wallabag-v1.jsonx');
 
         $res = $chromeImport->import();
 
@@ -222,13 +190,13 @@ class ChromeImportTest extends \PHPUnit_Framework_TestCase
 
         $records = $this->logHandler->getRecords();
         $this->assertContains('Wallabag Browser Import: unable to read file', $records[0]['message']);
-        $this->assertEquals('ERROR', $records[0]['level_name']);
+        $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
     public function testImportUserNotDefined()
     {
         $chromeImport = $this->getChromeImport(true);
-        $chromeImport->setFilepath(__DIR__.'/../fixtures/chrome-bookmarks');
+        $chromeImport->setFilepath(__DIR__ . '/../fixtures/chrome-bookmarks');
 
         $res = $chromeImport->import();
 
@@ -236,6 +204,43 @@ class ChromeImportTest extends \PHPUnit_Framework_TestCase
 
         $records = $this->logHandler->getRecords();
         $this->assertContains('Wallabag Browser Import: user is not defined', $records[0]['message']);
-        $this->assertEquals('ERROR', $records[0]['level_name']);
+        $this->assertSame('ERROR', $records[0]['level_name']);
+    }
+
+    private function getChromeImport($unsetUser = false, $dispatched = 0)
+    {
+        $this->user = new User();
+
+        $this->em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->contentProxy = $this->getMockBuilder('Wallabag\CoreBundle\Helper\ContentProxy')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->tagsAssigner = $this->getMockBuilder('Wallabag\CoreBundle\Helper\TagsAssigner')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $dispatcher
+            ->expects($this->exactly($dispatched))
+            ->method('dispatch');
+
+        $wallabag = new ChromeImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher);
+
+        $this->logHandler = new TestHandler();
+        $logger = new Logger('test', [$this->logHandler]);
+        $wallabag->setLogger($logger);
+
+        if (false === $unsetUser) {
+            $wallabag->setUser($this->user);
+        }
+
+        return $wallabag;
     }
 }

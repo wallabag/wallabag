@@ -16,7 +16,7 @@ class Matches
 {
     public function __invoke($subject, $pattern)
     {
-        if ($pattern[0] === "'") {
+        if ("'" === $pattern[0]) {
             $pattern = sprintf("'%%%s%%'", substr($pattern, 1, -1));
         }
 

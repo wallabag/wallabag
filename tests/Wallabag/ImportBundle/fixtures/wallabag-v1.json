@@ -32,38 +32,5 @@
         "content": "<span class=\"name\">README.md</span><p>wallabag is a self hostable application allowing you to not miss any content anymore. Click, save, read it when you can. It extracts content so that you can read it when you have time.</p>\n<p>More informations on our website: <a href=\"http://wallabag.org\">wallabag.org</a></p>\n<h2><a class=\"anchor\" href=\"https://github.com/wallabag/wallabag#license\"></a>License</h2>\n<p>Copyright © 2010-2014 Nicolas Lœuillet <a href=\"mailto:nicolas@loeuillet.org\">nicolas@loeuillet.org</a> This work is free. You can redistribute it and/or modify it under the terms of the Do What The Fuck You Want To Public License, Version 2, as published by Sam Hocevar. See the COPYING file for more details.</p>\n",
         "user_id": "1",
         "tags":""
-    },
-    {
-        "0": "3",
-        "1": "a self hostable application for saving web pages | wallabag",
-        "2": "https://www.wallabag.org/",
-        "3": "1",
-        "4": "0",
-        "5": "\n<div class=\"row\">\n<div class=\"col-lg-8 col-md-12 col-xs-12 col-sm-12\">\n<p>wallabag (formerly poche) is a <strong>self hostable application for saving web pages</strong>. Unlike other services, wallabag is free (as in freedom) and open source.</p>\n</div>\n\n</div>\n<div class=\"row\">\n<div class=\"col-lg-8 col-md-12 col-xs-12 col-sm-12\">\n<p>With this application you will not miss content anymore. <strong>Click, save, read it when you want</strong>. It saves the content you select so that you can read it when you have time.</p>\n</div>\n\n</div>\n<div class=\"row\">\n<div class=\"col-lg-6 col-md-12 col-xs-12 col-sm-12\">\n<h2>How it works</h2>\n<p>Thanks to the bookmarklet or <a title=\"Downloads\" href=\"http://www.wallabag.org/downloads/\">third-party applications</a>, you save an article in your wallabag to read it later. Then, when you open your wallabag, <strong>you can comfortably read your articles</strong>.</p>\n<h2>How to use wallabag</h2>\n<p>There are two ways to use wallabag: you can <a href=\"http://www.wallabag.org/frequently-asked-questions/#How_can_I_install_wallabag_and_what_are_the_requirements\">install it</a> on your web server or you can <a href=\"http://app.inthepoche.com\">create an account</a> at Framabag (we install and upgrade wallabag for you).</p>\n</div>\n\n</div>\n",
-        "6": "1",
-        "id": "3",
-        "title": "a self hostable application for saving web pages | wallabag",
-        "url": "https://www.wallabag.org/",
-        "is_read": "1",
-        "is_fav": "0",
-        "content": "\n<div class=\"row\">\n<div class=\"col-lg-8 col-md-12 col-xs-12 col-sm-12\">\n<p>wallabag (formerly poche) is a <strong>self hostable application for saving web pages</strong>. Unlike other services, wallabag is free (as in freedom) and open source.</p>\n</div>\n\n</div>\n<div class=\"row\">\n<div class=\"col-lg-8 col-md-12 col-xs-12 col-sm-12\">\n<p>With this application you will not miss content anymore. <strong>Click, save, read it when you want</strong>. It saves the content you select so that you can read it when you have time.</p>\n</div>\n\n</div>\n<div class=\"row\">\n<div class=\"col-lg-6 col-md-12 col-xs-12 col-sm-12\">\n<h2>How it works</h2>\n<p>Thanks to the bookmarklet or <a title=\"Downloads\" href=\"http://www.wallabag.org/downloads/\">third-party applications</a>, you save an article in your wallabag to read it later. Then, when you open your wallabag, <strong>you can comfortably read your articles</strong>.</p>\n<h2>How to use wallabag</h2>\n<p>There are two ways to use wallabag: you can <a href=\"http://www.wallabag.org/frequently-asked-questions/#How_can_I_install_wallabag_and_what_are_the_requirements\">install it</a> on your web server or you can <a href=\"http://app.inthepoche.com\">create an account</a> at Framabag (we install and upgrade wallabag for you).</p>\n</div>\n\n</div>\n",
-        "user_id": "1"
-    },
-    {
-        "0": "4",
-        "1": "Sans titre",
-        "2": "http:\/\/www.konradlischka.info\/2016\/01\/blog\/wie-ein-deutsches-start-up-mit-wagniskapital-die-marktluecke-fuer-lokalen-digitaljournalismus-schliessen-will\/",
-        "3": "0",
-        "4": "0",
-        "5": "[unable to retrieve full-text content]",
-        "6": "1",
-        "id": "4",
-        "title": "Sans titre",
-        "url": "http:\/\/www.konradlischka.info\/2016\/01\/blog\/wie-ein-deutsches-start-up-mit-wagniskapital-die-marktluecke-fuer-lokalen-digitaljournalismus-schliessen-will\/",
-        "is_read": "0",
-        "is_fav": "0",
-        "content": "[unable to retrieve full-text content]",
-        "user_id": "1",
-        "tags": ""
     }
 ]

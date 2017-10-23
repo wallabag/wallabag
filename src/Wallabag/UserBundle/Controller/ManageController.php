@@ -4,35 +4,21 @@ namespace Wallabag\UserBundle\Controller;
 
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Exception\OutOfRangeCurrentPageException;
+use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Wallabag\UserBundle\Entity\User;
-use Wallabag\CoreBundle\Entity\Config;
+use Wallabag\UserBundle\Form\SearchUserType;
 
 /**
  * User controller.
  */
 class ManageController extends Controller
 {
-    /**
-     * Lists all User entities.
-     *
-     * @Route("/", name="user_index")
-     * @Method("GET")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $users = $em->getRepository('WallabagUserBundle:User')->findAll();
-
-        return $this->render('WallabagUserBundle:Manage:index.html.twig', array(
-            'users' => $users,
-        ));
-    }
-
     /**
      * Creates a new User entity.
      *
@@ -47,9 +33,7 @@ class ManageController extends Controller
         // enable created user by default
         $user->setEnabled(true);
 
-        $form = $this->createForm('Wallabag\UserBundle\Form\NewUserType', $user, [
-            'validation_groups' => ['Profile'],
-        ]);
+        $form = $this->createForm('Wallabag\UserBundle\Form\NewUserType', $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -64,13 +48,13 @@ class ManageController extends Controller
                 $this->get('translator')->trans('flashes.user.notice.added', ['%username%' => $user->getUsername()])
             );
 
-            return $this->redirectToRoute('user_edit', array('id' => $user->getId()));
+            return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
         }
 
-        return $this->render('WallabagUserBundle:Manage:new.html.twig', array(
+        return $this->render('WallabagUserBundle:Manage:new.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -95,15 +79,15 @@ class ManageController extends Controller
                 $this->get('translator')->trans('flashes.user.notice.updated', ['%username%' => $user->getUsername()])
             );
 
-            return $this->redirectToRoute('user_edit', array('id' => $user->getId()));
+            return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
         }
 
-        return $this->render('WallabagUserBundle:Manage:edit.html.twig', array(
+        return $this->render('WallabagUserBundle:Manage:edit.html.twig', [
             'user' => $user,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
             'twofactor_auth' => $this->getParameter('twofactor_auth'),
-        ));
+        ]);
     }
 
     /**
@@ -132,6 +116,51 @@ class ManageController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param int     $page
+     *
+     * @Route("/list/{page}", name="user_index", defaults={"page" = 1})
+     *
+     * Default parameter for page is hardcoded (in duplication of the defaults from the Route)
+     * because this controller is also called inside the layout template without any page as argument
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function searchFormAction(Request $request, $page = 1)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $qb = $em->getRepository('WallabagUserBundle:User')->createQueryBuilder('u');
+
+        $form = $this->createForm(SearchUserType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->get('logger')->info('searching users');
+
+            $searchTerm = (isset($request->get('search_user')['term']) ? $request->get('search_user')['term'] : '');
+
+            $qb = $em->getRepository('WallabagUserBundle:User')->getQueryBuilderForSearch($searchTerm);
+        }
+
+        $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
+        $pagerFanta = new Pagerfanta($pagerAdapter);
+        $pagerFanta->setMaxPerPage(50);
+
+        try {
+            $pagerFanta->setCurrentPage($page);
+        } catch (OutOfRangeCurrentPageException $e) {
+            if ($page > 1) {
+                return $this->redirect($this->generateUrl('user_index', ['page' => $pagerFanta->getNbPages()]), 302);
+            }
+        }
+
+        return $this->render('WallabagUserBundle:Manage:index.html.twig', [
+            'searchForm' => $form->createView(),
+            'users' => $pagerFanta,
+        ]);
+    }
+
+    /**
      * Creates a form to delete a User entity.
      *
      * @param User $user The User entity
@@ -141,7 +170,7 @@ class ManageController extends Controller
     private function createDeleteForm(User $user)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('user_delete', array('id' => $user->getId())))
+            ->setAction($this->generateUrl('user_delete', ['id' => $user->getId()]))
             ->setMethod('DELETE')
             ->getForm()
         ;

@@ -2,23 +2,70 @@
 
 namespace Tests\Wallabag\CoreBundle;
 
+use Symfony\Bundle\FrameworkBundle\Client;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\NullOutput;
+use Wallabag\CoreBundle\Entity\Config;
+use Wallabag\UserBundle\Entity\User;
 
 abstract class WallabagCoreTestCase extends WebTestCase
 {
+    /**
+     * @var Client|null
+     */
     private $client = null;
-
-    public function getClient()
-    {
-        return $this->client;
-    }
 
     public function setUp()
     {
         parent::setUp();
 
         $this->client = static::createClient();
+    }
+
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    public function resetDatabase(Client $client)
+    {
+        $application = new Application($client->getKernel());
+        $application->setAutoExit(false);
+
+        $application->run(new ArrayInput([
+            'command' => 'doctrine:schema:drop',
+            '--no-interaction' => true,
+            '--force' => true,
+            '--env' => 'test',
+        ]), new NullOutput());
+
+        $application->run(new ArrayInput([
+            'command' => 'doctrine:schema:create',
+            '--no-interaction' => true,
+            '--env' => 'test',
+        ]), new NullOutput());
+
+        $application->run(new ArrayInput([
+            'command' => 'doctrine:fixtures:load',
+            '--no-interaction' => true,
+            '--env' => 'test',
+        ]), new NullOutput());
+
+        /*
+         * Recreate client to avoid error:
+         *
+         * [Doctrine\DBAL\ConnectionException]
+         * Transaction commit failed because the transaction has been marked for rollback only.
+         */
+        $this->client = static::createClient();
+    }
+
+    public function getEntityManager()
+    {
+        return $this->client->getContainer()->get('doctrine.orm.entity_manager');
     }
 
     /**
@@ -36,10 +83,10 @@ abstract class WallabagCoreTestCase extends WebTestCase
         $loginManager = $container->get('fos_user.security.login_manager');
         $firewallName = $container->getParameter('fos_user.firewall_name');
 
-        $user = $userManager->findUserBy(array('username' => $username));
-        $loginManager->loginUser($firewallName, $user);
+        $user = $userManager->findUserBy(['username' => $username]);
+        $loginManager->logInUser($firewallName, $user);
 
-        $session->set('_security_'.$firewallName, serialize($container->get('security.token_storage')->getToken()));
+        $session->set('_security_' . $firewallName, serialize($container->get('security.token_storage')->getToken()));
         $session->save();
 
         $cookie = new Cookie($session->getName(), $session->getId());
@@ -65,6 +112,23 @@ abstract class WallabagCoreTestCase extends WebTestCase
     }
 
     /**
+     * Return the user of the logged in user.
+     * You should be sure that you called `logInAs` before.
+     *
+     * @return User
+     */
+    public function getLoggedInUser()
+    {
+        $token = static::$kernel->getContainer()->get('security.token_storage')->getToken();
+
+        if (null !== $token) {
+            return $token->getUser();
+        }
+
+        throw new \RuntimeException('No logged in User.');
+    }
+
+    /**
      * Return the user id of the logged in user.
      * You should be sure that you called `logInAs` before.
      *
@@ -72,13 +136,15 @@ abstract class WallabagCoreTestCase extends WebTestCase
      */
     public function getLoggedInUserId()
     {
-        $token = static::$kernel->getContainer()->get('security.token_storage')->getToken();
+        return $this->getLoggedInUser()->getId();
+    }
 
-        if (null !== $token) {
-            return $token->getUser()->getId();
-        }
-
-        throw new \RuntimeException('No logged in User.');
+    public function useTheme($theme)
+    {
+        $config = $this->getEntityManager()->getRepository(Config::class)->findOneByUser($this->getLoggedInUser());
+        $config->setTheme($theme);
+        $this->getEntityManager()->persist($config);
+        $this->getEntityManager()->flush();
     }
 
     /**

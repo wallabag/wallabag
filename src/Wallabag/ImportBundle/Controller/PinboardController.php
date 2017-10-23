@@ -2,8 +2,8 @@
 
 namespace Wallabag\ImportBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
 
@@ -29,11 +29,11 @@ class PinboardController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('file')->getData();
             $markAsRead = $form->get('mark_as_read')->getData();
-            $name = 'pinboard_'.$this->getUser()->getId().'.json';
+            $name = 'pinboard_' . $this->getUser()->getId() . '.json';
 
-            if (null !== $file && in_array($file->getClientMimeType(), $this->getParameter('wallabag_import.allow_mimetypes')) && $file->move($this->getParameter('wallabag_import.resource_dir'), $name)) {
+            if (null !== $file && in_array($file->getClientMimeType(), $this->getParameter('wallabag_import.allow_mimetypes'), true) && $file->move($this->getParameter('wallabag_import.resource_dir'), $name)) {
                 $res = $pinboard
-                    ->setFilepath($this->getParameter('wallabag_import.resource_dir').'/'.$name)
+                    ->setFilepath($this->getParameter('wallabag_import.resource_dir') . '/' . $name)
                     ->setMarkAsRead($markAsRead)
                     ->import();
 
@@ -52,7 +52,7 @@ class PinboardController extends Controller
                         ]);
                     }
 
-                    unlink($this->getParameter('wallabag_import.resource_dir').'/'.$name);
+                    unlink($this->getParameter('wallabag_import.resource_dir') . '/' . $name);
                 }
 
                 $this->get('session')->getFlashBag()->add(
@@ -61,12 +61,12 @@ class PinboardController extends Controller
                 );
 
                 return $this->redirect($this->generateUrl('homepage'));
-            } else {
-                $this->get('session')->getFlashBag()->add(
-                    'notice',
-                    'flashes.import.notice.failed_on_file'
-                );
             }
+
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'flashes.import.notice.failed_on_file'
+            );
         }
 
         return $this->render('WallabagImportBundle:Pinboard:index.html.twig', [

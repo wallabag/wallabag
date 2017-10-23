@@ -2,6 +2,12 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: wallabag.yml }
+
+parameters:
+    # Allows to use the live reload feature for changes in assets
+    use_webpack_dev_server: false
+    craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\SymfonyCacheComponentAdapter
 
 framework:
     #esi:             ~
@@ -10,7 +16,7 @@ framework:
         fallback: "%locale%"
     secret: "%secret%"
     router:
-        resource: "%kernel.root_dir%/config/routing.yml"
+        resource: "%kernel.project_dir%/app/config/routing.yml"
         strict_requirements: ~
     form: ~
     csrf_protection: ~
@@ -24,44 +30,10 @@ framework:
     session:
         # handler_id set to null will use default session handler from php.ini
         handler_id: session.handler.native_file
-        save_path: "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+        save_path: "%kernel.project_dir%/var/sessions/%kernel.environment%"
     fragments: ~
     http_method_override: true
     assets: ~
-
-wallabag_core:
-    version: 2.2.3
-    paypal_url: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9UBA65LG3FX9Y&lc=gb"
-    languages:
-        en: 'English'
-        fr: 'Français'
-        de: 'Deutsch'
-        tr: 'Türkçe'
-        fa: 'فارسی'
-        ro: 'Română'
-        pl: 'Polish'
-        da: 'Dansk'
-        es: 'Español'
-        oc: 'Occitan'
-        it: 'Italiano'
-        pt: 'Português'
-    items_on_page: 12
-    theme: material
-    language: '%locale%'
-    rss_limit: 50
-    reading_speed: 1
-    cache_lifetime: 10
-    action_mark_as_read: 1
-    list_mode: 1
-    fetching_error_message: |
-        wallabag can't retrieve contents for this article. Please <a href="http://doc.wallabag.org/en/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.
-
-wallabag_user:
-    registration_enabled: "%fosuser_registration%"
-
-wallabag_import:
-    allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain', 'text/csv']
-    resource_dir: "%kernel.root_dir%/../web/uploads/import"
 
 # Twig Configuration
 twig:
@@ -100,7 +72,7 @@ stof_doctrine_extensions:
             sluggable: true
 
 doctrine_migrations:
-    dir_name: "%kernel.root_dir%/DoctrineMigrations"
+    dir_name: "%kernel.project_dir%/app/DoctrineMigrations"
     namespace: Application\Migrations
     table_name: migration_versions
     name: Application Migrations
@@ -138,7 +110,7 @@ fos_rest:
             epub: true
             mobi: true
         templating_formats:
-            html: true
+            html: false
         force_redirects:
             html: true
         failed_validation: HTTP_BAD_REQUEST
@@ -378,3 +350,10 @@ fos_js_routing:
         - howto
         - fos_user_security_logout
         - new
+
+jms_serializer:
+    handlers:
+        # to be removed if we switch to (default) ISO8601 datetime instead of ATOM
+        # see: https://github.com/schmittjoh/JMSSerializerBundle/pull/494
+        datetime:
+            default_format: "Y-m-d\\TH:i:sO" # ATOM

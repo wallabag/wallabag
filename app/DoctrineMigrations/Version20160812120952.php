@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Added name field on wallabag_oauth2_clients
+ * Added name field on wallabag_oauth2_clients.
  */
 class Version20160812120952 extends AbstractMigration implements ContainerAwareInterface
 {
@@ -20,11 +20,6 @@ class Version20160812120952 extends AbstractMigration implements ContainerAwareI
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
-    }
-
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix').$tableName;
     }
 
     /**
@@ -45,5 +40,10 @@ class Version20160812120952 extends AbstractMigration implements ContainerAwareI
     {
         $clientsTable = $schema->getTable($this->getTable('oauth2_clients'));
         $clientsTable->dropColumn('name');
+    }
+
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

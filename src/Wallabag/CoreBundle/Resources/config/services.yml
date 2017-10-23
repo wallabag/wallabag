@@ -41,6 +41,7 @@ services:
         arguments:
             -
                 error_message: '%wallabag_core.fetching_error_message%'
+                error_message_title: '%wallabag_core.fetching_error_message_title%'
             - "@wallabag_core.guzzle.http_client"
             - "@wallabag_core.graby.config_builder"
         calls:
@@ -62,7 +63,11 @@ services:
         class: Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder
         arguments:
             - "@wallabag_core.graby.config_builder"
-            - "%sites_credentials%"
+            - "@security.token_storage"
+            - "@wallabag_core.site_credential_repository"
+            - '@logger'
+        tags:
+            - { name: monolog.logger, channel: graby }
 
     # service alias override
     bd_guzzle_site_authenticator.site_config_builder:
@@ -71,10 +76,11 @@ services:
     wallabag_core.guzzle.http_client_factory:
         class: Wallabag\CoreBundle\Helper\HttpClientFactory
         arguments:
-            - "@bd_guzzle_site_authenticator.authenticator_subscriber"
             - "@wallabag_core.guzzle.cookie_jar"
             - '@=service(''craue_config'').get(''restricted_access'')'
             - '@logger'
+        calls:
+            - ["addSubscriber", ["@bd_guzzle_site_authenticator.authenticator_subscriber"]]
 
     wallabag_core.guzzle.cookie_jar:
         class: GuzzleHttp\Cookie\FileCookieJar
@@ -85,9 +91,14 @@ services:
         arguments:
             - "@wallabag_core.graby"
             - "@wallabag_core.rule_based_tagger"
-            - "@wallabag_core.tag_repository"
+            - "@validator"
             - "@logger"
             - '%wallabag_core.fetching_error_message%'
+
+    wallabag_core.tags_assigner:
+        class: Wallabag\CoreBundle\Helper\TagsAssigner
+        arguments:
+            - "@wallabag_core.tag_repository"
 
     wallabag_core.rule_based_tagger:
         class: Wallabag\CoreBundle\Helper\RuleBasedTagger
@@ -95,6 +106,7 @@ services:
             - "@rulerz"
             - "@wallabag_core.tag_repository"
             - "@wallabag_core.entry_repository"
+            - "@logger"
 
     # repository as a service
     wallabag_core.entry_repository:
@@ -109,10 +121,19 @@ services:
         arguments:
             - WallabagCoreBundle:Tag
 
+    wallabag_core.site_credential_repository:
+        class: Wallabag\CoreBundle\Repository\SiteCredentialRepository
+        factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
+        arguments:
+            - WallabagCoreBundle:SiteCredential
+        calls:
+            - [ setCrypto, [ "@wallabag_core.helper.crypto_proxy" ] ]
+
     wallabag_core.helper.entries_export:
         class: Wallabag\CoreBundle\Helper\EntriesExport
         arguments:
-            - '@=service(''craue_config'').get(''wallabag_url'')'
+            - "@translator"
+            - '%domain_name%'
             - src/Wallabag/CoreBundle/Resources/public/themes/_global/img/appicon/apple-touch-icon-152.png
 
     wallabag.operator.array.matches:
@@ -124,6 +145,16 @@ services:
         class: Wallabag\CoreBundle\Operator\Doctrine\Matches
         tags:
             - { name: rulerz.operator, target: doctrine, operator: matches, inline: true }
+
+    wallabag.operator.array.notmatches:
+        class: Wallabag\CoreBundle\Operator\PHP\NotMatches
+        tags:
+            - { name: rulerz.operator, target: native, operator: notmatches }
+
+    wallabag.operator.doctrine.notmatches:
+        class: Wallabag\CoreBundle\Operator\Doctrine\NotMatches
+        tags:
+            - { name: rulerz.operator, target: doctrine, operator: notmatches, inline: true }
 
     wallabag_core.helper.redirect:
         class: Wallabag\CoreBundle\Helper\Redirect
@@ -174,9 +205,15 @@ services:
         class: Wallabag\CoreBundle\Helper\DownloadImages
         arguments:
             - "@wallabag_core.entry.download_images.client"
-            - "%kernel.root_dir%/../web/assets/images"
-            - '@=service(''craue_config'').get(''wallabag_url'')'
+            - "%kernel.project_dir%/web/assets/images"
+            - '%domain_name%'
             - "@logger"
 
     wallabag_core.entry.download_images.client:
         class: GuzzleHttp\Client
+
+    wallabag_core.helper.crypto_proxy:
+        class: Wallabag\CoreBundle\Helper\CryptoProxy
+        arguments:
+            - "%wallabag_core.site_credentials.encryption_key_path%"
+            - "@logger"

@@ -19,7 +19,7 @@ class WallabagRestController extends FOSRestController
     public function getVersionAction()
     {
         $version = $this->container->getParameter('wallabag_core.version');
-        $json = $this->get('serializer')->serialize($version, 'json');
+        $json = $this->get('jms_serializer')->serialize($version, 'json');
 
         return (new JsonResponse())->setJson($json);
     }
@@ -40,8 +40,8 @@ class WallabagRestController extends FOSRestController
     protected function validateUserAccess($requestUserId)
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
-        if ($requestUserId != $user->getId()) {
-            throw $this->createAccessDeniedException('Access forbidden. Entry user id: '.$requestUserId.', logged user id: '.$user->getId());
+        if ($requestUserId !== $user->getId()) {
+            throw $this->createAccessDeniedException('Access forbidden. Entry user id: ' . $requestUserId . ', logged user id: ' . $user->getId());
         }
     }
 }

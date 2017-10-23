@@ -32,6 +32,7 @@ menu:
         save_link: 'Zapisz link'
         back_to_unread: 'Powrót do nieprzeczytanych artykułów'
         users_management: 'Zarządzanie użytkownikami'
+        site_credentials: 'Poświadczenia strony'
     top:
         add_new_entry: 'Dodaj nowy wpis'
         search: 'Szukaj'
@@ -76,6 +77,7 @@ config:
             redirect_current_page: 'do bieżącej strony'
         pocket_consumer_key_label: 'Klucz klienta Pocket do importu zawartości'
         android_configuration: Skonfiguruj swoją androidową aplikację
+        android_instruction: "Dotknij tutaj, aby wstępnie uzupełnij androidową aplikację"
         help_theme: "Dopasuj wallabag do swoich potrzeb. Tutaj możesz wybrać preferowany przez ciebie motyw."
         help_items_per_page: "Możesz zmienić ilość artykułów wyświetlanych na każdej stronie."
         help_reading_speed: "wallabag oblicza czas czytania każdego artykułu. Dzięki tej liście możesz określić swoje tempo. Wallabag przeliczy ponownie czas potrzebny, na przeczytanie każdego z artykułów."
@@ -89,9 +91,10 @@ config:
         token_reset: 'Zresetuj swojego tokena'
         rss_links: 'RSS links'
         rss_link:
-            unread: 'nieprzeczytane'
-            starred: 'oznaczone gwiazdką'
-            archive: 'archiwum'
+            unread: 'Nieprzeczytane'
+            starred: 'Oznaczone gwiazdką'
+            archive: 'Archiwum'
+            all: 'Wszystkie'
         rss_limit: 'Link do RSS'
     form_user:
         two_factor_description: "Włączenie autoryzacji dwuetapowej oznacza, że będziesz otrzymywał maile z kodem przy każdym nowym, niezaufanym połączeniu"
@@ -110,6 +113,7 @@ config:
         annotations: Usuń WSZYSTKIE adnotacje
         tags: Usuń WSZYSTKIE tagi
         entries: usuń WSZYTSTKIE wpisy
+        archived: usuń WSZYSTKIE zarchiwizowane wpisy
         confirm: Jesteś pewien? (tej operacji NIE MOŻNA cofnąć)
     form_password:
         description: "Tutaj możesz zmienić swoje hasło. Twoje nowe hasło powinno mieć conajmniej 8 znaków."
@@ -154,6 +158,7 @@ config:
                 or: 'Jedna reguła LUB inna'
                 and: 'Jedna reguła I inna'
                 matches: 'Sprawdź czy <i>temat</i> pasuje <i>szukaj</i> (duże lub małe litery).<br />Przykład: <code>tytuł zawiera "piłka nożna"</code>'
+                notmatches: 'Sprawdź czy <i>temat</i> nie zawiera <i>szukaj</i> (duże lub małe litery).<br />Przykład: <code>tytuł nie zawiera "piłka nożna"</code>'
 
 entry:
     page_titles:
@@ -164,6 +169,7 @@ entry:
         filtered_tags: 'Filtrowane po tagach:'
         filtered_search: 'Filtrowanie po wyszukiwaniu:'
         untagged: 'Odtaguj wpisy'
+        all: 'Wszystkie przedmioty'
     list:
         number_on_the_page: '{0} Nie ma wpisów.|{1} Jest jeden wpis.|]1,Inf[ Są %count% wpisy.'
         reading_time: 'szacunkowy czas czytania'
@@ -185,6 +191,8 @@ entry:
         unread_label: 'Nieprzeczytane'
         preview_picture_label: 'Posiada podgląd obrazu'
         preview_picture_help: 'Podgląd obrazu'
+        is_public_label: 'Posiada publiczny link'
+        is_public_help: 'Publiczny link'
         language_label: 'Język'
         http_status_label: 'Status HTTP'
         reading_time:
@@ -223,6 +231,8 @@ entry:
         original_article: 'oryginalny'
         annotations_on_the_entry: '{0} Nie ma adnotacji |{1} Jedna adnotacja |]1,Inf[ %count% adnotacji'
         created_at: 'Czas stworzenia'
+        published_at: 'Data publikacji'
+        published_by: 'Opublikowane przez'
     new:
         page_title: 'Zapisz nowy wpis'
         placeholder: 'http://website.com'
@@ -234,10 +244,12 @@ entry:
         page_title: 'Edytuj wpis'
         title_label: 'Tytuł'
         url_label: 'Adres URL'
-        is_public_label: 'Publiczny'
         save_label: 'Zapisz'
     public:
         shared_by_wallabag: "Ten artykuł został udostępniony przez <a href='%wallabag_instance%'>wallabag</a>"
+    confirm:
+        delete: "Czy jesteś pewien, że chcesz usunąć ten artykuł?"
+        delete_tag: "Czy jesteś pewien, że chcesz usunąć ten tag, z tego artykułu?"
 
 about:
     page_title: 'O nas'
@@ -385,6 +397,9 @@ tag:
         add: 'Dodaj'
         placeholder: 'Możesz dodać kilka tagów, oddzielając je przecinkami.'
 
+export:
+     footer_template: '<div style="text-align:center;"><p>Stworzone przez wallabag z %method%</p><p>Proszę zgłoś <a href="https://github.com/wallabag/wallabag/issues">sprawę</a>, jeżeli masz problem z wyświetleniem tego e-booka na swoim urządzeniu.</p></div>'
+
 import:
     page_title: 'Import'
     page_description: 'Witaj w importerze Wallabag. Wybierz swoją poprzednią usługę, z której chcesz migrować.'
@@ -510,6 +525,28 @@ user:
         delete: Usuń
         delete_confirm: Jesteś pewien?
         back_to_list: Powrót do listy
+    search:
+        placeholder: Filtruj po nazwie użytkownika lub adresie e-mail
+
+site_credential:
+    page_title: Zarządzanie poświadczeniami strony
+    new_site_credential: Stwórz nowe poświadczenie
+    edit_site_credential: Edytuj istniejące poświadczenie
+    description: "Tutaj możesz zarządzać wszystkim poświadczeniami wymaganymi przez strony (stwórz, edytuj i usuń ), takie jak paywall, autentykacja, itp."
+    list:
+        actions: Akcje
+        edit_action: Edytuj
+        yes: Tak
+        no: Nie
+        create_new_one: Stwórz nowe poświadczenie
+    form:
+        username_label: 'Nazwa użytkownika'
+        host_label: 'Host'
+        password_label: 'Hasło'
+        save: Zapisz
+        delete: Usuń
+        delete_confirm: Jesteś pewien?
+        back_to_list: Powrót do listy
 
 error:
     page_title: Wystąpił błąd
@@ -528,6 +565,7 @@ flashes:
             annotations_reset: Zresetuj adnotacje
             tags_reset: Zresetuj tagi
             entries_reset: Zresetuj wpisy
+            archived_reset: Zarchiwizowane wpisy usunięte
     entry:
         notice:
             entry_already_saved: 'Wpis już został dodany %date%'
@@ -562,3 +600,8 @@ flashes:
             added: 'Użytkownik "%username%" dodany'
             updated: 'Użytkownik "%username%" zaktualizowany'
             deleted: 'Użytkownik "%username%" usunięty'
+    site_credential:
+        notice:
+            added: 'Poświadczenie dla "%host%" dodane'
+            updated: 'Poświadczenie dla "%host%" zaktualizowane'
+            deleted: 'Poświadczenie dla "%host%" usuniętę'

@@ -15,11 +15,11 @@ shaarli_url: Shaarli URL, dacă serviciul este permis
 share_diaspora: Permite share către Diaspora
 share_mail: Permite share prin email
 share_shaarli: Permite share către Shaarli
+share_scuttle: Permite share către Scuttle
 share_twitter: Permite share către Twitter
 share_unmark: Permite share către Unmark.it
 show_printlink: Afișează un link pentru a printa content-ul
 wallabag_support_url: URL-ul de suport pentru wallabag
-wallabag_url: URL-ul instanței tale wallabag
 entry: "alticol"
 export: "exportă"
 import: "importă"
@@ -33,3 +33,4 @@ modify_settings: "aplică"
 # share_public: Allow public url for entries
 # download_images_enabled: Download images locally
 # restricted_access: Enable authentication for websites with paywall
+# api_user_registration: Enable user to be registered using the API

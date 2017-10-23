@@ -2,8 +2,8 @@
 
 namespace Tests\Wallabag\ImportBundle\Controller;
 
-use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 
 class ReadabilityControllerTest extends WallabagCoreTestCase
 {
@@ -14,9 +14,9 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/import/readability');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
-        $this->assertEquals(1, $crawler->filter('input[type=file]')->count());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
+        $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
     public function testImportReadabilityWithRabbitEnabled()
@@ -28,9 +28,9 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/import/readability');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
-        $this->assertEquals(1, $crawler->filter('input[type=file]')->count());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
+        $this->assertSame(1, $crawler->filter('input[type=file]')->count());
 
         $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 0);
     }
@@ -49,7 +49,7 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
     public function testImportReadabilityWithRedisEnabled()
@@ -61,13 +61,13 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/import/readability');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
-        $this->assertEquals(1, $crawler->filter('input[type=file]')->count());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
+        $this->assertSame(1, $crawler->filter('input[type=file]')->count());
 
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__.'/../fixtures/readability.json', 'readability.json');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/readability.json', 'readability.json');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -75,7 +75,7 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 
@@ -95,7 +95,7 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/readability');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__.'/../fixtures/readability.json', 'readability.json');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/readability.json', 'readability.json');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -103,7 +103,7 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 
@@ -111,19 +111,24 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId(
-                'http://www.zataz.com/90-des-dossiers-medicaux-des-coreens-du-sud-vendus-a-des-entreprises-privees/',
+                'https://www.zataz.com/90-des-dossiers-medicaux-des-coreens-du-sud-vendus-a-des-entreprises-privees/',
                 $this->getLoggedInUserId()
             );
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('flashes.import.notice.summary', $body[0]);
 
+        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
         $this->assertNotEmpty($content->getMimetype(), 'Mimetype for http://www.zataz.com is ok');
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://www.zataz.com is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for http://www.zataz.com is ok');
-        $this->assertEquals(0, count($content->getTags()));
+
+        $tags = $content->getTags();
+        $this->assertContains('foot', $tags, 'It includes the "foot" tag');
+        $this->assertSame(1, count($tags));
+
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
-        $this->assertEquals('2016-09-08', $content->getCreatedAt()->format('Y-m-d'));
+        $this->assertSame('2016-09-08', $content->getCreatedAt()->format('Y-m-d'));
     }
 
     public function testImportReadabilityWithFileAndMarkAllAsRead()
@@ -134,7 +139,7 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/readability');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__.'/../fixtures/readability-read.json', 'readability-read.json');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/readability-read.json', 'readability-read.json');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -143,7 +148,7 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 
@@ -155,16 +160,18 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
+        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content1);
         $this->assertTrue($content1->isArchived());
 
         $content2 = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId(
-                'https://facebook.github.io/graphql/',
+                'https://facebook.github.io/graphql/October2016/',
                 $this->getLoggedInUserId()
             );
 
+        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content2);
         $this->assertTrue($content2->isArchived());
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
@@ -179,7 +186,7 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/readability');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__.'/../fixtures/test.txt', 'test.txt');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/test.txt', 'test.txt');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -187,7 +194,7 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 

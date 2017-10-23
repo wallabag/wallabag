@@ -4,13 +4,13 @@ namespace Tests\Wallabag\CoreBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Wallabag\CoreBundle\Command\ExportCommand;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Command\ExportCommand;
 
 class ExportCommandTest extends WallabagCoreTestCase
 {
     /**
-     * @expectedException Symfony\Component\Console\Exception\RuntimeException
+     * @expectedException \Symfony\Component\Console\Exception\RuntimeException
      * @expectedExceptionMessage Not enough arguments (missing: "username")
      */
     public function testExportCommandWithoutUsername()
@@ -55,7 +55,8 @@ class ExportCommandTest extends WallabagCoreTestCase
             'username' => 'admin',
         ]);
 
-        $this->assertContains('Exporting 6 entrie(s) for user « admin »... Done', $tester->getDisplay());
+        $this->assertContains('Exporting 5 entrie(s) for user admin...', $tester->getDisplay());
+        $this->assertContains('Done', $tester->getDisplay());
         $this->assertFileExists('admin-export.json');
     }
 
@@ -70,7 +71,7 @@ class ExportCommandTest extends WallabagCoreTestCase
         $tester->execute([
             'command' => $command->getName(),
             'username' => 'admin',
-            'filepath' => 'specialexport.json'
+            'filepath' => 'specialexport.json',
         ]);
 
         $this->assertFileExists('specialexport.json');

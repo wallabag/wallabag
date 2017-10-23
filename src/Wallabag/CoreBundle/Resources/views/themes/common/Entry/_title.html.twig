@@ -5,7 +5,7 @@
 {% elseif currentRoute == 'archive' %}
     {{ 'entry.page_titles.archived'|trans }}
 {% elseif currentRoute == 'all' %}
-    {{ 'entry.page_titles.filtered'|trans }}
+    {{ isFiltered ? 'entry.page_titles.filtered'|trans : 'entry.page_titles.all'|trans }}
 {% elseif currentRoute == 'search' %}
     {{ 'entry.page_titles.filtered_search'|trans }} {{ filter }}
 {% elseif currentRoute == 'tag_entries' %}

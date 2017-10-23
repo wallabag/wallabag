@@ -5,14 +5,15 @@ namespace Wallabag\CoreBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Hateoas\Configuration\Annotation as Hateoas;
-use JMS\Serializer\Annotation\Groups;
-use JMS\Serializer\Annotation\XmlRoot;
 use JMS\Serializer\Annotation\Exclude;
-use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation\XmlRoot;
 use Symfony\Component\Validator\Constraints as Assert;
-use Wallabag\UserBundle\Entity\User;
 use Wallabag\AnnotationBundle\Entity\Annotation;
+use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
+use Wallabag\UserBundle\Entity\User;
 
 /**
  * Entry.
@@ -32,6 +33,8 @@ use Wallabag\AnnotationBundle\Entity\Annotation;
  */
 class Entry
 {
+    use EntityTimestampsTrait;
+
     /** @Serializer\XmlAttribute */
     /**
      * @var int
@@ -122,6 +125,33 @@ class Entry
     private $updatedAt;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="published_at", type="datetime", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $publishedAt;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="published_by", type="array", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $publishedBy;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="starred_at", type="datetime", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $starredAt = null;
+
+    /**
      * @ORM\OneToMany(targetEntity="Wallabag\AnnotationBundle\Entity\Annotation", mappedBy="entry", cascade={"persist", "remove"})
      * @ORM\JoinTable
      *
@@ -150,11 +180,11 @@ class Entry
     /**
      * @var int
      *
-     * @ORM\Column(name="reading_time", type="integer", nullable=true)
+     * @ORM\Column(name="reading_time", type="integer", nullable=false)
      *
      * @Groups({"entries_for_user", "export_all"})
      */
-    private $readingTime;
+    private $readingTime = 0;
 
     /**
      * @var string
@@ -175,15 +205,6 @@ class Entry
     private $previewPicture;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="is_public", type="boolean", nullable=true, options={"default" = false})
-     *
-     * @Groups({"export_all"})
-     */
-    private $isPublic;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="http_status", type="string", length=3, nullable=true)
@@ -191,6 +212,15 @@ class Entry
      * @Groups({"entries_for_user", "export_all"})
      */
     private $httpStatus;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="headers", type="array", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $headers;
 
     /**
      * @Exclude
@@ -455,16 +485,41 @@ class Entry
     }
 
     /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
+     * @return \DateTime|null
      */
-    public function timestamps()
+    public function getStarredAt()
     {
-        if (is_null($this->createdAt)) {
-            $this->createdAt = new \DateTime();
+        return $this->starredAt;
+    }
+
+    /**
+     * @param \DateTime|null $starredAt
+     *
+     * @return Entry
+     */
+    public function setStarredAt($starredAt = null)
+    {
+        $this->starredAt = $starredAt;
+
+        return $this;
+    }
+
+    /**
+     * update isStarred and starred_at fields.
+     *
+     * @param bool $isStarred
+     *
+     * @return Entry
+     */
+    public function updateStar($isStarred = false)
+    {
+        $this->setStarred($isStarred);
+        $this->setStarredAt(null);
+        if ($this->isStarred()) {
+            $this->setStarredAt(new \DateTime());
         }
 
-        $this->updatedAt = new \DateTime();
+        return $this;
     }
 
     /**
@@ -532,23 +587,7 @@ class Entry
     }
 
     /**
-     * @return bool
-     */
-    public function isPublic()
-    {
-        return $this->isPublic;
-    }
-
-    /**
-     * @param bool $isPublic
-     */
-    public function setIsPublic($isPublic)
-    {
-        $this->isPublic = $isPublic;
-    }
-
-    /**
-     * @return ArrayCollection<Tag>
+     * @return ArrayCollection
      */
     public function getTags()
     {
@@ -591,6 +630,11 @@ class Entry
         $tag->addEntry($this);
     }
 
+    /**
+     * Remove the given tag from the entry (if the tag is associated).
+     *
+     * @param Tag $tag
+     */
     public function removeTag(Tag $tag)
     {
         if (!$this->tags->contains($tag)) {
@@ -599,6 +643,17 @@ class Entry
 
         $this->tags->removeElement($tag);
         $tag->removeEntry($this);
+    }
+
+    /**
+     * Remove all assigned tags from the entry.
+     */
+    public function removeAllTags()
+    {
+        foreach ($this->tags as $tag) {
+            $this->tags->removeElement($tag);
+            $tag->removeEntry($this);
+        }
     }
 
     /**
@@ -683,7 +738,22 @@ class Entry
     }
 
     /**
-     * @return int
+     * Used in the entries filter so it's more explicit for the end user than the uid.
+     * Also used in the API.
+     *
+     * @VirtualProperty
+     * @SerializedName("is_public")
+     * @Groups({"entries_for_user"})
+     *
+     * @return bool
+     */
+    public function isPublic()
+    {
+        return null !== $this->uid;
+    }
+
+    /**
+     * @return string
      */
     public function getHttpStatus()
     {
@@ -691,13 +761,73 @@ class Entry
     }
 
     /**
-     * @param int $httpStatus
+     * @param string $httpStatus
      *
      * @return Entry
      */
     public function setHttpStatus($httpStatus)
     {
         $this->httpStatus = $httpStatus;
+
+        return $this;
+    }
+
+    /**
+     * @return \Datetime
+     */
+    public function getPublishedAt()
+    {
+        return $this->publishedAt;
+    }
+
+    /**
+     * @param \Datetime $publishedAt
+     *
+     * @return Entry
+     */
+    public function setPublishedAt(\Datetime $publishedAt)
+    {
+        $this->publishedAt = $publishedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPublishedBy()
+    {
+        return $this->publishedBy;
+    }
+
+    /**
+     * @param array $publishedBy
+     *
+     * @return Entry
+     */
+    public function setPublishedBy($publishedBy)
+    {
+        $this->publishedBy = $publishedBy;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getHeaders()
+    {
+        return $this->headers;
+    }
+
+    /**
+     * @param array $headers
+     *
+     * @return Entry
+     */
+    public function setHeaders($headers)
+    {
+        $this->headers = $headers;
 
         return $this;
     }

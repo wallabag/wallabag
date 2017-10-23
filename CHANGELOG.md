@@ -1,9 +1,89 @@
 # Changelog
 
+##  [2.3.0](https://github.com/wallabag/wallabag/tree/2.3.0) (2017-10-21)
+   [Full Changelog](https://github.com/wallabag/wallabag/compare/2.2.3...2.3.0)
+
+### API
+
+- API `exists` returns `id` if article exists [#2919](https://github.com/wallabag/wallabag/pull/2919)
+- Added API endpoint to handle a list of URL and to add/delete tags [#3055](https://github.com/wallabag/wallabag/pull/3055)
+- Added API endpoint to handle a list of URL [#3053](https://github.com/wallabag/wallabag/pull/3053)
+- Retrieve tag / tags value from query or request [#3103](https://github.com/wallabag/wallabag/pull/3103)
+- Register through API [#3065](https://github.com/wallabag/wallabag/pull/3065)
+- API user creation behind a toggle [#3177](https://github.com/wallabag/wallabag/pull/3177)
+- Allow other fields to be sent using API [#3106](https://github.com/wallabag/wallabag/pull/3106)
+- Add ability to patch an entry with more fields [#3181](https://github.com/wallabag/wallabag/pull/3181)
+- Create (and return) a client after creating a new user using the API [#3187](https://github.com/wallabag/wallabag/pull/3187)
+- Fix PATCH method [#3256](https://github.com/wallabag/wallabag/pull/3256)
+
+### Technical stuff
+
+- Dropping PHP 5.5 [#2861](https://github.com/wallabag/wallabag/pull/2861), migrated to Symfony 3.3 [#3376](https://github.com/wallabag/wallabag/pull/3376), defined MySQL as the default rdbms for wallabag [#3171](https://github.com/wallabag/wallabag/pull/3171)
+- Add Cloudron as installation method [#3000](https://github.com/wallabag/wallabag/pull/3000)
+- Added migrations execution after fresh install [#3088](https://github.com/wallabag/wallabag/pull/3088)
+- Upgraded CraueConfigBundle to 2.0 [#3113](https://github.com/wallabag/wallabag/pull/3113)
+- Removed embedded documentation. [The repository is now here](https://github.com/wallabag/doc). [#3122](https://github.com/wallabag/wallabag/pull/3122)
+- Fix some Scrutinizer issues [#3161](https://github.com/wallabag/wallabag/pull/3161) [#3172](https://github.com/wallabag/wallabag/pull/3172)
+- Isolated tests [#3137](https://github.com/wallabag/wallabag/pull/3137)
+- Log an error level message when user auth fail [#3195](https://github.com/wallabag/wallabag/pull/3195)
+- Add a real configuration for CS-Fixer [#3258](https://github.com/wallabag/wallabag/pull/3258)
+
+### Features
+
+- Share articles to Scuttle (https://github.com/scronide/scuttle) instance [#2999](https://github.com/wallabag/wallabag/pull/2999)
+- Allow to remove all archived entries [#3020](https://github.com/wallabag/wallabag/pull/3020) 
+- Added publication date and author [#3024](https://github.com/wallabag/wallabag/pull/3024)
+- Added `notmatches` operator for automatic tagging rule [#3047](https://github.com/wallabag/wallabag/pull/3047)
+- Search & paginate users [#3060](https://github.com/wallabag/wallabag/pull/3060)
+- **Clean duplicates entries** command [#2920](https://github.com/wallabag/wallabag/pull/2920)
+- Added headers field in Entry [#3108](https://github.com/wallabag/wallabag/pull/3108)
+- Add some deletion confirmation to avoid mistake [#3147](https://github.com/wallabag/wallabag/pull/3147)
+- Add support for tag in Instapaper import [#3168](https://github.com/wallabag/wallabag/pull/3168)
+- Added tags on list view [#3077](https://github.com/wallabag/wallabag/pull/3077)
+- **Show user** command [#3179](https://github.com/wallabag/wallabag/pull/3179)
+- Add ability to filter public entries & use it in the API [#3208](https://github.com/wallabag/wallabag/pull/3208)
+- Store credentials for restricted site in database [#2683](https://github.com/wallabag/wallabag/pull/2683)
+- Add RSS for tags & All entries [#3207](https://github.com/wallabag/wallabag/pull/3207)
+- Add **list users** command [#3301](https://github.com/wallabag/wallabag/pull/3301)
+- Add **reload entry** command [#3326](https://github.com/wallabag/wallabag/pull/3326)
+- Add starred_at field which is set when an entry is starred [#3330](https://github.com/wallabag/wallabag/pull/3330)
+
+### Changes
+
+- Changed default value for list mode (grid instead of list) [#3014](https://github.com/wallabag/wallabag/pull/3014)
+- Remove `isPublic` from Entry entity [#3030](https://github.com/wallabag/wallabag/pull/3030)
+- Use username to import [#3080](https://github.com/wallabag/wallabag/pull/3080)
+- Adds Webpack support and remove Grunt [#3022](https://github.com/wallabag/wallabag/pull/3022) 
+- Improved Guzzle subscribers extensibility [#2751](https://github.com/wallabag/wallabag/pull/2751)
+- Added logger when we match Tagging rules [#3110](https://github.com/wallabag/wallabag/pull/3110)
+- unify Download/Export wording. [#3130](https://github.com/wallabag/wallabag/pull/3130)
+- Staying on an article view after removing a tag [#3138](https://github.com/wallabag/wallabag/pull/3138)
+- Use an alternative way to detect images [#3184](https://github.com/wallabag/wallabag/pull/3184)
+- Displays an error with an annotation with a too long quote [#3093](https://github.com/wallabag/wallabag/pull/3093)
+- Validate language & preview picture fields [#3192](https://github.com/wallabag/wallabag/pull/3192)
+- remove craueconfig domain name setting and add a proper one in parameters [#3173](https://github.com/wallabag/wallabag/pull/3173)
+- Better public sharing page [#3204](https://github.com/wallabag/wallabag/pull/3204)
+
+### Fixes
+
+- Use up-to-date Firefox extension and add F-Droid link for Android app [#3057](https://github.com/wallabag/wallabag/pull/3057)
+- Fixed sandwich menu position in entry view (material theme) [#3073](https://github.com/wallabag/wallabag/pull/3073)
+- Disabled shortcuts on login/register page [#3075](https://github.com/wallabag/wallabag/pull/3075)
+- "+" in url not parsed correctly (when we click on original URL) [#3002](https://github.com/wallabag/wallabag/pull/3002)
+- Skip auth when no credentials are found [#3101](https://github.com/wallabag/wallabag/pull/3101)
+- Added migration to change length for user fields [#3104](https://github.com/wallabag/wallabag/pull/3104)
+- Fix delete annotation when username is defined [#3120](https://github.com/wallabag/wallabag/pull/3120)
+- Fixed is_starred for wallabag v2 import [#3143](https://github.com/wallabag/wallabag/pull/3143)
+- Replace images with & in url [#3176](https://github.com/wallabag/wallabag/pull/3176)
+- Ignore tag's case [#3139](https://github.com/wallabag/wallabag/pull/3139)
+- Multiple tag search, which was broken from API [#3309](https://github.com/wallabag/wallabag/pull/3309)
+
+### Translations
+
+- Add Russian language [#3378](https://github.com/wallabag/wallabag/pull/3378)
+
 ## [2.2.3](https://github.com/wallabag/wallabag/tree/2.2.3) (2017-05-17)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.2.2...2.2.3)
-
-
 
 - Lock guzzle-site-authenticator to avoid errors [\#3124](https://github.com/wallabag/wallabag/pull/3124) ([j0k3r](https://github.com/j0k3r))
 - reorder contrib strings in about page [\#3123](https://github.com/wallabag/wallabag/pull/3123) ([X-dark](https://github.com/X-dark))
@@ -27,9 +107,6 @@
 ## [2.2.2](https://github.com/wallabag/wallabag/tree/2.2.2) (2017-03-02)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.2.1...2.2.2)
 
-
-
-- Changed wallabag version [\#2954](https://github.com/wallabag/wallabag/pull/2954) ([nicosomb](https://github.com/nicosomb))
 - Update Polish translation [\#2932](https://github.com/wallabag/wallabag/pull/2932) ([mruminski](https://github.com/mruminski))
 - Update Spanish translation [\#2917](https://github.com/wallabag/wallabag/pull/2917) ([ngosang](https://github.com/ngosang))
 - Remove word repetition from german translation [\#2911](https://github.com/wallabag/wallabag/pull/2911) ([jlnostr](https://github.com/jlnostr))
@@ -69,21 +146,13 @@
 ## [2.2.1](https://github.com/wallabag/wallabag/tree/2.2.1) (2017-01-31)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.2.0...2.2.1)
 
-
-
-- Prepare wallabag 2.2.1 :rocket: [\#2812](https://github.com/wallabag/wallabag/pull/2812) ([nicosomb](https://github.com/nicosomb))
 - Fixed duplicate entry for share\_public in craue\_setting\_table [\#2809](https://github.com/wallabag/wallabag/pull/2809) ([nicosomb](https://github.com/nicosomb))
 
 ## [2.2.0](https://github.com/wallabag/wallabag/tree/2.2.0) (2017-01-28)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.1.6.1...2.2.0)
 
-
-
-- Prepare wallabag 2.2.0 🚀 [\#2790](https://github.com/wallabag/wallabag/pull/2790) ([nicosomb](https://github.com/nicosomb))
 - Added indexes on is\_archived and is\_starred [\#2789](https://github.com/wallabag/wallabag/pull/2789) ([nicosomb](https://github.com/nicosomb))
 - Fix \#2056 update config.yml [\#2624](https://github.com/wallabag/wallabag/pull/2624) ([Rurik19](https://github.com/Rurik19))
-- Change version to 2.2.0-dev [\#2608](https://github.com/wallabag/wallabag/pull/2608) ([nicosomb](https://github.com/nicosomb))
-- wallabag 2.2.0 [\#2416](https://github.com/wallabag/wallabag/pull/2416) ([j0k3r](https://github.com/j0k3r))
 
 ## [2.1.6.1](https://github.com/wallabag/wallabag/tree/2.1.6.1) (2017-01-23)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.1.6...2.1.6.1)
@@ -91,30 +160,20 @@
 ## [2.1.6](https://github.com/wallabag/wallabag/tree/2.1.6) (2017-01-18)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.1.5...2.1.6)
 
-
-
 - Update copyright year [\#2736](https://github.com/wallabag/wallabag/pull/2736) ([lex111](https://github.com/lex111))
-- Prepare wallabag 2.1.6 :rocket: [\#2759](https://github.com/wallabag/wallabag/pull/2759) ([nicosomb](https://github.com/nicosomb))
 - Fixed possible JS injection via the title edition [\#2758](https://github.com/wallabag/wallabag/pull/2758) ([nicosomb](https://github.com/nicosomb))
 
 ## [2.1.5](https://github.com/wallabag/wallabag/tree/2.1.5) (2016-11-21)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.1.4...2.1.5)
 
-
-
-- Prepare wallabag 2.1.5 [\#2625](https://github.com/wallabag/wallabag/pull/2625) ([nicosomb](https://github.com/nicosomb))
 - Force composer to run as PHP 5.5.9 [\#2623](https://github.com/wallabag/wallabag/pull/2623) ([j0k3r](https://github.com/j0k3r))
 
 ## [2.1.4](https://github.com/wallabag/wallabag/tree/2.1.4) (2016-11-19)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.1.3...2.1.4)
 
-
-
-- Updated changelog for 2.1.4 [\#2607](https://github.com/wallabag/wallabag/pull/2607) ([nicosomb](https://github.com/nicosomb))
 - Add .travis.yml change to RELEASE\_PROCESS [\#2605](https://github.com/wallabag/wallabag/pull/2605) ([j0k3r](https://github.com/j0k3r))
 - wallabag can’t work on PostgreSQL \<= 9.1 [\#2604](https://github.com/wallabag/wallabag/pull/2604) ([j0k3r](https://github.com/j0k3r))
 - Fix clear-cache problem using —no-dev [\#2603](https://github.com/wallabag/wallabag/pull/2603) ([j0k3r](https://github.com/j0k3r))
-- Prepare wallabag 2.1.4 :rocket: [\#2596](https://github.com/wallabag/wallabag/pull/2596) ([nicosomb](https://github.com/nicosomb))
 - User-agents have moved to site-config [\#2587](https://github.com/wallabag/wallabag/pull/2587) ([j0k3r](https://github.com/j0k3r))
 - fix \#2582 - Documentation, Nginx config: disable all other PHP file from symphony [\#2584](https://github.com/wallabag/wallabag/pull/2584) ([blankoworld](https://github.com/blankoworld))
 - Added help on config screen [\#2578](https://github.com/wallabag/wallabag/pull/2578) ([nicosomb](https://github.com/nicosomb))
@@ -135,15 +194,12 @@
 ## [2.1.3](https://github.com/wallabag/wallabag/tree/2.1.3) (2016-11-04)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.1.2...2.1.3)
 
-
-
 - Force user-agent for .slashdot.org [\#2528](https://github.com/wallabag/wallabag/pull/2528) ([Kdecherf](https://github.com/Kdecherf))
 - Translation update - French [\#2519](https://github.com/wallabag/wallabag/pull/2519) ([Jibec](https://github.com/Jibec))
 - docs: fix link to wallabag-stats project [\#2518](https://github.com/wallabag/wallabag/pull/2518) ([Strubbl](https://github.com/Strubbl))
 - docs: update 3rd party projects by Strubbl [\#2514](https://github.com/wallabag/wallabag/pull/2514) ([Strubbl](https://github.com/Strubbl))
 - Fix missing words in Android application documentation [\#2485](https://github.com/wallabag/wallabag/pull/2485) ([bmillemathias](https://github.com/bmillemathias))
 - Removed MD5 hash in documentation [\#2466](https://github.com/wallabag/wallabag/pull/2466) ([nicosomb](https://github.com/nicosomb))
-- Prepare wallabag 2.1.3 :rocket: [\#2536](https://github.com/wallabag/wallabag/pull/2536) ([nicosomb](https://github.com/nicosomb))
 - Use created\_at as default sort [\#2534](https://github.com/wallabag/wallabag/pull/2534) ([j0k3r](https://github.com/j0k3r))
 - Added documentation about failed to load external entity error [\#2530](https://github.com/wallabag/wallabag/pull/2530) ([nicosomb](https://github.com/nicosomb))
 - Add Instapaper to CLI import [\#2524](https://github.com/wallabag/wallabag/pull/2524) ([lologhi](https://github.com/lologhi))
@@ -168,8 +224,6 @@
 ## [2.1.2](https://github.com/wallabag/wallabag/tree/2.1.2) (2016-10-17)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.1.1...2.1.2)
 
-
-
 - German: improve existing and add missing translation [\#2459](https://github.com/wallabag/wallabag/pull/2459) ([Strubbl](https://github.com/Strubbl))
 - add link to German documentation in about page [\#2457](https://github.com/wallabag/wallabag/pull/2457) ([Strubbl](https://github.com/Strubbl))
 - Bring make dev [\#2451](https://github.com/wallabag/wallabag/pull/2451) ([tcitworld](https://github.com/tcitworld))
@@ -179,7 +233,6 @@
 - Fixed hardcoded title for internal settings [\#2464](https://github.com/wallabag/wallabag/pull/2464) ([nicosomb](https://github.com/nicosomb))
 - Fix tabs on material [\#2455](https://github.com/wallabag/wallabag/pull/2455) ([tcitworld](https://github.com/tcitworld))
 - Fix baggy display on small screens [\#2454](https://github.com/wallabag/wallabag/pull/2454) ([tcitworld](https://github.com/tcitworld))
-- Prepare wallabag 2.1.2 :rocket: [\#2452](https://github.com/wallabag/wallabag/pull/2452) ([nicosomb](https://github.com/nicosomb))
 - View improvements [\#2450](https://github.com/wallabag/wallabag/pull/2450) ([nicosomb](https://github.com/nicosomb))
 - Fixed french and german doc homepages [\#2447](https://github.com/wallabag/wallabag/pull/2447) ([nicosomb](https://github.com/nicosomb))
 - Added information about tagging rules in documentation [\#2446](https://github.com/wallabag/wallabag/pull/2446) ([nicosomb](https://github.com/nicosomb))
@@ -222,12 +275,9 @@
 ## [2.1.1](https://github.com/wallabag/wallabag/tree/2.1.1) (2016-10-04)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.1.0...2.1.1)
 
-
-
 - Create config even if user is disabled [\#2359](https://github.com/wallabag/wallabag/pull/2359) ([j0k3r](https://github.com/j0k3r))
 - Add php-bcmath extension to requirements [\#2354](https://github.com/wallabag/wallabag/pull/2354) ([Zayon](https://github.com/Zayon))
 - Basically, fix everything [\#2353](https://github.com/wallabag/wallabag/pull/2353) ([tcitworld](https://github.com/tcitworld))
-- Prepare wallabag 2.1.1 [\#2349](https://github.com/wallabag/wallabag/pull/2349) ([nicosomb](https://github.com/nicosomb))
 - Update messages.pl.yml [\#2341](https://github.com/wallabag/wallabag/pull/2341) ([mruminski](https://github.com/mruminski))
 -  small improvement for german translation [\#2340](https://github.com/wallabag/wallabag/pull/2340) ([Strubbl](https://github.com/Strubbl))
 - Fix for 2.1 installation [\#2338](https://github.com/wallabag/wallabag/pull/2338) ([j0k3r](https://github.com/j0k3r))
@@ -235,20 +285,14 @@
 ## [2.1.0](https://github.com/wallabag/wallabag/tree/2.1.0) (2016-10-03)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.0.8...2.1.0)
 
-
-
 - Docker : install PHP 'gd' extension [\#2319](https://github.com/wallabag/wallabag/pull/2319) ([pmartin](https://github.com/pmartin))
 - Fix issue \#2296: epub export with special chars in the title. [\#2297](https://github.com/wallabag/wallabag/pull/2297) ([egilli](https://github.com/egilli))
 - Remove error message when creating ePub versions [\#2330](https://github.com/wallabag/wallabag/pull/2330) ([pmichelazzo](https://github.com/pmichelazzo))
-- wallabag 2.1 [\#1999](https://github.com/wallabag/wallabag/pull/1999) ([nicosomb](https://github.com/nicosomb))
 
 ## [2.0.8](https://github.com/wallabag/wallabag/tree/2.0.8) (2016-09-07)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.0.7...2.0.8)
 
-
-
 - Allow failure for PHP 7.1 [\#2236](https://github.com/wallabag/wallabag/pull/2236) ([j0k3r](https://github.com/j0k3r))
-- Prepare wallabag 2.0.8 [\#2271](https://github.com/wallabag/wallabag/pull/2271) ([nicosomb](https://github.com/nicosomb))
 - Add a check for the database connection [\#2262](https://github.com/wallabag/wallabag/pull/2262) ([j0k3r](https://github.com/j0k3r))
 - Fix issue \#1991: correction of the height field to add articles [\#2241](https://github.com/wallabag/wallabag/pull/2241) ([modos189](https://github.com/modos189))
 - V2 improve view [\#2238](https://github.com/wallabag/wallabag/pull/2238) ([modos189](https://github.com/modos189))
@@ -259,9 +303,6 @@
 ## [2.0.7](https://github.com/wallabag/wallabag/tree/2.0.7) (2016-08-22)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.0.6...2.0.7)
 
-
-
-- Prepare wallabag 2.0.7 [\#2226](https://github.com/wallabag/wallabag/pull/2226) ([nicosomb](https://github.com/nicosomb))
 - Avoid breaking import when fetching fail [\#2224](https://github.com/wallabag/wallabag/pull/2224) ([j0k3r](https://github.com/j0k3r))
 - Added creation date and reading time on article view [\#2222](https://github.com/wallabag/wallabag/pull/2222) ([nicosomb](https://github.com/nicosomb))
 - Replaced favorite word/icon with star one [\#2221](https://github.com/wallabag/wallabag/pull/2221) ([nicosomb](https://github.com/nicosomb))
@@ -273,10 +314,7 @@
 ## [2.0.6](https://github.com/wallabag/wallabag/tree/2.0.6) (2016-08-10)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.0.5...2.0.6)
 
-
-
 - Run PHP 7.1 on Travis [\#2048](https://github.com/wallabag/wallabag/pull/2048) ([j0k3r](https://github.com/j0k3r))
-- Prepare release 2.0.6 [\#2212](https://github.com/wallabag/wallabag/pull/2212) ([nicosomb](https://github.com/nicosomb))
 - Fixed typo in entry:notice:entry\_saved [\#2200](https://github.com/wallabag/wallabag/pull/2200) ([charno6](https://github.com/charno6))
 - Handling socials links into a config file [\#2199](https://github.com/wallabag/wallabag/pull/2199) ([Simounet](https://github.com/Simounet))
 - FIX image inside a figure element max-width [\#2198](https://github.com/wallabag/wallabag/pull/2198) ([Simounet](https://github.com/Simounet))
@@ -296,13 +334,10 @@
 ## [2.0.5](https://github.com/wallabag/wallabag/tree/2.0.5) (2016-05-31)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.0.4...2.0.5)
 
-
-
 - Improve English translation [\#2109](https://github.com/wallabag/wallabag/pull/2109) ([Poorchop](https://github.com/Poorchop))
 - Update api.rst [\#2044](https://github.com/wallabag/wallabag/pull/2044) ([joshp23](https://github.com/joshp23))
 - new details in the doc about the rights access again;\) [\#2038](https://github.com/wallabag/wallabag/pull/2038) ([foxmask](https://github.com/foxmask))
 - Fix the deletion of Tags/Entries relation when delete an entry [\#2122](https://github.com/wallabag/wallabag/pull/2122) ([nicosomb](https://github.com/nicosomb))
-- Prepare wallabag 2.0.5 [\#2118](https://github.com/wallabag/wallabag/pull/2118) ([nicosomb](https://github.com/nicosomb))
 - Docs proposal [\#2112](https://github.com/wallabag/wallabag/pull/2112) ([Poorchop](https://github.com/Poorchop))
 - add screenshots of android docu in English [\#2111](https://github.com/wallabag/wallabag/pull/2111) ([Strubbl](https://github.com/Strubbl))
 - CS [\#2098](https://github.com/wallabag/wallabag/pull/2098) ([j0k3r](https://github.com/j0k3r))
@@ -319,9 +354,6 @@
 ## [2.0.4](https://github.com/wallabag/wallabag/tree/2.0.4) (2016-05-07)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.0.3...2.0.4)
 
-
-
-- Prepare wallabag 2.0.4 [\#2035](https://github.com/wallabag/wallabag/pull/2035) ([nicosomb](https://github.com/nicosomb))
 - Change Travis/Scrutinizer pictures in README [\#2029](https://github.com/wallabag/wallabag/pull/2029) ([nicosomb](https://github.com/nicosomb))
 - Docu for android app [\#2028](https://github.com/wallabag/wallabag/pull/2028) ([Strubbl](https://github.com/Strubbl))
 - Update messages.it.yml [\#2024](https://github.com/wallabag/wallabag/pull/2024) ([jamiroconca](https://github.com/jamiroconca))
@@ -349,30 +381,20 @@
 ## [2.0.3](https://github.com/wallabag/wallabag/tree/2.0.3) (2016-04-22)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.0.2...2.0.3)
 
-
-
-- Prepare release 2.0.3 [\#1965](https://github.com/wallabag/wallabag/pull/1965) ([nicosomb](https://github.com/nicosomb))
 - Update API documentation with cURL examples [\#1962](https://github.com/wallabag/wallabag/pull/1962) ([nicosomb](https://github.com/nicosomb))
 
 ## [2.0.2](https://github.com/wallabag/wallabag/tree/2.0.2) (2016-04-21)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.9.2...2.0.2)
 
-
-
 - Fix translation for Go to your account button after subscription [\#1957](https://github.com/wallabag/wallabag/pull/1957) ([nicosomb](https://github.com/nicosomb))
 - Update links in documentation [\#1954](https://github.com/wallabag/wallabag/pull/1954) ([nicosomb](https://github.com/nicosomb))
 - Actualisation des liens morts \(Documentation de traduction\) [\#1953](https://github.com/wallabag/wallabag/pull/1953) ([maxi62330](https://github.com/maxi62330))
-- Prepare release 2.0.2 [\#1948](https://github.com/wallabag/wallabag/pull/1948) ([nicosomb](https://github.com/nicosomb))
 - Added some curl examples [\#1945](https://github.com/wallabag/wallabag/pull/1945) ([ddeimeke](https://github.com/ddeimeke))
 - Update Travis configuration with branches renaming [\#1944](https://github.com/wallabag/wallabag/pull/1944) ([nicosomb](https://github.com/nicosomb))
 - Optimize import [\#1942](https://github.com/wallabag/wallabag/pull/1942) ([nicosomb](https://github.com/nicosomb))
 
 ## [1.9.2](https://github.com/wallabag/wallabag/tree/1.9.2) (2016-04-18)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.0.1...1.9.2)
-
-
-
-- \[Do Not Merge\] Wallabag 1.9.2 [\#1814](https://github.com/wallabag/wallabag/pull/1814) ([tcitworld](https://github.com/tcitworld))
 
 ## [2.0.1](https://github.com/wallabag/wallabag/tree/2.0.1) (2016-04-11)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.0.0...2.0.1)
@@ -395,25 +417,11 @@
 ## [2.0.0-alpha.0](https://github.com/wallabag/wallabag/tree/2.0.0-alpha.0) (2015-09-14)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.9.1-b...2.0.0-alpha.0)
 
-
-
-- Update CONTRIBUTING.md [\#1415](https://github.com/wallabag/wallabag/pull/1415) ([sridharrajs](https://github.com/sridharrajs))
-
 ## [1.9.1-b](https://github.com/wallabag/wallabag/tree/1.9.1-b) (2015-08-04)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.9.1...1.9.1-b)
 
-
-
-- 1.9.1-b [\#1274](https://github.com/wallabag/wallabag/pull/1274) ([nicosomb](https://github.com/nicosomb))
-
 ## [1.9.1](https://github.com/wallabag/wallabag/tree/1.9.1) (2015-08-03)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.9.1beta3...1.9.1)
-
-
-
-- Revert "fix link to save your first article" [\#1248](https://github.com/wallabag/wallabag/pull/1248) ([tcitworld](https://github.com/tcitworld))
-- fix link to save your first article [\#1247](https://github.com/wallabag/wallabag/pull/1247) ([axelsimon](https://github.com/axelsimon))
-- 1.9.1 [\#1267](https://github.com/wallabag/wallabag/pull/1267) ([nicosomb](https://github.com/nicosomb))
 
 ## [1.9.1beta3](https://github.com/wallabag/wallabag/tree/1.9.1beta3) (2015-06-06)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.9.1beta2...1.9.1beta3)
@@ -433,10 +441,6 @@
 ## [1.9](https://github.com/wallabag/wallabag/tree/1.9) (2015-02-18)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.9RC1...1.9)
 
-
-
-- Version 1.9.0 [\#1081](https://github.com/wallabag/wallabag/pull/1081) ([tcitworld](https://github.com/tcitworld))
-
 ## [1.9RC1](https://github.com/wallabag/wallabag/tree/1.9RC1) (2015-02-16)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.9beta2...1.9RC1)
 
@@ -445,14 +449,6 @@
 
 ## [1.9beta](https://github.com/wallabag/wallabag/tree/1.9beta) (2015-02-14)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.8.1old...1.9beta)
-
-
-
-- Revert "Update german localisation." [\#1030](https://github.com/wallabag/wallabag/pull/1030) ([tcitworld](https://github.com/tcitworld))
-- Update german localisation. [\#1028](https://github.com/wallabag/wallabag/pull/1028) ([jlnostr](https://github.com/jlnostr))
-- Fixed \#993: add wallabag to packagist [\#1004](https://github.com/wallabag/wallabag/pull/1004) ([nicosomb](https://github.com/nicosomb))
-- Update fr\_FR.utf8.po [\#986](https://github.com/wallabag/wallabag/pull/986) ([goofy-bz](https://github.com/goofy-bz))
-- Make call to FTRSS silent to avoid warnings which can break import [\#974](https://github.com/wallabag/wallabag/pull/974) ([jbfavre](https://github.com/jbfavre))
 
 ## [1.8.1old](https://github.com/wallabag/wallabag/tree/1.8.1old) (2014-11-16)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.8.1bis...1.8.1old)
@@ -463,51 +459,23 @@
 ## [1.8.1b](https://github.com/wallabag/wallabag/tree/1.8.1b) (2014-11-16)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.8.1...1.8.1b)
 
-
-
-- 1.8.1b [\#933](https://github.com/wallabag/wallabag/pull/933) ([tcitworld](https://github.com/tcitworld))
-
 ## [1.8.1](https://github.com/wallabag/wallabag/tree/1.8.1) (2014-11-15)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.8.0...1.8.1)
-
-
-
-- 1.8.1 [\#932](https://github.com/wallabag/wallabag/pull/932) ([nicosomb](https://github.com/nicosomb))
 
 ## [1.8.0](https://github.com/wallabag/wallabag/tree/1.8.0) (2014-10-10)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.7.2...1.8.0)
 
-
-
-- 1.8.0 [\#863](https://github.com/wallabag/wallabag/pull/863) ([nicosomb](https://github.com/nicosomb))
-
 ## [1.7.2](https://github.com/wallabag/wallabag/tree/1.7.2) (2014-07-24)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.7.1...1.7.2)
-
-
-
-- security fix [\#791](https://github.com/wallabag/wallabag/pull/791) ([mariroz](https://github.com/mariroz))
 
 ## [1.7.1](https://github.com/wallabag/wallabag/tree/1.7.1) (2014-07-15)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.7.0...1.7.1)
 
-
-
-- 1.7.1 [\#761](https://github.com/wallabag/wallabag/pull/761) ([nicosomb](https://github.com/nicosomb))
-
 ## [1.7.0](https://github.com/wallabag/wallabag/tree/1.7.0) (2014-05-29)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.6.1b...1.7.0)
 
-
-
-- 1.7, call me "Premium version" [\#712](https://github.com/wallabag/wallabag/pull/712) ([nicosomb](https://github.com/nicosomb))
-
 ## [1.6.1b](https://github.com/wallabag/wallabag/tree/1.6.1b) (2014-04-11)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.6.1...1.6.1b)
-
-
-
-- 1.6.1 [\#634](https://github.com/wallabag/wallabag/pull/634) ([nicosomb](https://github.com/nicosomb))
 
 ## [1.6.1](https://github.com/wallabag/wallabag/tree/1.6.1) (2014-04-03)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.6.0...1.6.1)
@@ -515,17 +483,8 @@
 ## [1.6.0](https://github.com/wallabag/wallabag/tree/1.6.0) (2014-04-03)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.5.2...1.6.0)
 
-
-
-- wallabag 1.6.0 [\#595](https://github.com/wallabag/wallabag/pull/595) ([nicosomb](https://github.com/nicosomb))
-
 ## [1.5.2](https://github.com/wallabag/wallabag/tree/1.5.2) (2014-02-21)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.5.1.1...1.5.2)
-
-
-
-- 1.5.2 [\#481](https://github.com/wallabag/wallabag/pull/481) ([nicosomb](https://github.com/nicosomb))
-- version number 1.5.1 [\#469](https://github.com/wallabag/wallabag/pull/469) ([nicosomb](https://github.com/nicosomb))
 
 ## [1.5.1.1](https://github.com/wallabag/wallabag/tree/1.5.1.1) (2014-02-19)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.5.1...1.5.1.1)
@@ -533,52 +492,23 @@
 ## [1.5.1](https://github.com/wallabag/wallabag/tree/1.5.1) (2014-02-19)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.5.0...1.5.1)
 
-
-
-- 1.5.1 [\#468](https://github.com/wallabag/wallabag/pull/468) ([nicosomb](https://github.com/nicosomb))
-
 ## [1.5.0](https://github.com/wallabag/wallabag/tree/1.5.0) (2014-02-13)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.4.0...1.5.0)
-
-
-
-- 1.5.0 [\#450](https://github.com/wallabag/wallabag/pull/450) ([nicosomb](https://github.com/nicosomb))
 
 ## [1.4.0](https://github.com/wallabag/wallabag/tree/1.4.0) (2014-02-03)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.3.1...1.4.0)
 
-
-
-- changelog 1.4 [\#427](https://github.com/wallabag/wallabag/pull/427) ([nicosomb](https://github.com/nicosomb))
-
 ## [1.3.1](https://github.com/wallabag/wallabag/tree/1.3.1) (2014-01-07)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.3.0...1.3.1)
-
-
-
-- poche 1.3.1 [\#387](https://github.com/wallabag/wallabag/pull/387) ([nicosomb](https://github.com/nicosomb))
 
 ## [1.3.0](https://github.com/wallabag/wallabag/tree/1.3.0) (2013-12-23)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.2.0...1.3.0)
 
-
-
-- poche 1.3.0 [\#363](https://github.com/wallabag/wallabag/pull/363) ([nicosomb](https://github.com/nicosomb))
-- 1.2.0 [\#326](https://github.com/wallabag/wallabag/pull/326) ([nicosomb](https://github.com/nicosomb))
-
 ## [1.2.0](https://github.com/wallabag/wallabag/tree/1.2.0) (2013-11-25)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.1.0...1.2.0)
 
-
-
-- 1.1.0 [\#289](https://github.com/wallabag/wallabag/pull/289) ([nicosomb](https://github.com/nicosomb))
-
 ## [1.1.0](https://github.com/wallabag/wallabag/tree/1.1.0) (2013-10-25)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.0.0...1.1.0)
-
-
-
-- merge 1.0.0 [\#256](https://github.com/wallabag/wallabag/pull/256) ([nicosomb](https://github.com/nicosomb))
 
 ## [1.0.0](https://github.com/wallabag/wallabag/tree/1.0.0) (2013-10-03)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.0-beta5.2...1.0.0)
@@ -592,28 +522,14 @@
 ## [1.0-beta5](https://github.com/wallabag/wallabag/tree/1.0-beta5) (2013-09-20)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.0-beta4...1.0-beta5)
 
-
-
-- beta5 [\#226](https://github.com/wallabag/wallabag/pull/226) ([nicosomb](https://github.com/nicosomb))
-- beta4 [\#181](https://github.com/wallabag/wallabag/pull/181) ([nicosomb](https://github.com/nicosomb))
-
 ## [1.0-beta4](https://github.com/wallabag/wallabag/tree/1.0-beta4) (2013-08-25)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.0-beta3...1.0-beta4)
 
 ## [1.0-beta3](https://github.com/wallabag/wallabag/tree/1.0-beta3) (2013-08-17)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.0-beta2...1.0-beta3)
 
-
-
-- beta3 [\#141](https://github.com/wallabag/wallabag/pull/141) ([nicosomb](https://github.com/nicosomb))
-- merge with beta2 [\#132](https://github.com/wallabag/wallabag/pull/132) ([nicosomb](https://github.com/nicosomb))
-
 ## [1.0-beta2](https://github.com/wallabag/wallabag/tree/1.0-beta2) (2013-08-11)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/1.0-beta1...1.0-beta2)
-
-
-
-- merge dev into master [\#109](https://github.com/wallabag/wallabag/pull/109) ([nicosomb](https://github.com/nicosomb))
 
 ## [1.0-beta1](https://github.com/wallabag/wallabag/tree/1.0-beta1) (2013-08-07)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/0.3...1.0-beta1)
@@ -621,16 +537,8 @@
 ## [0.3](https://github.com/wallabag/wallabag/tree/0.3) (2013-07-31)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/0.2.1...0.3)
 
-
-
-- v0.2.1 [\#74](https://github.com/wallabag/wallabag/pull/74) ([nicosomb](https://github.com/nicosomb))
-
 ## [0.2.1](https://github.com/wallabag/wallabag/tree/0.2.1) (2013-04-23)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/0.2...0.2.1)
-
-
-
-- tag 0.2 [\#67](https://github.com/wallabag/wallabag/pull/67) ([nicosomb](https://github.com/nicosomb))
 
 ## [0.2](https://github.com/wallabag/wallabag/tree/0.2) (2013-04-21)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/0.11...0.2)
@@ -639,12 +547,3 @@
 [Full Changelog](https://github.com/wallabag/wallabag/compare/0.1...0.11)
 
 ## [0.1](https://github.com/wallabag/wallabag/tree/0.1) (2013-04-19)
-
-
-- Ajout conf nginx pour la protection de la bdd [\#50](https://github.com/wallabag/wallabag/pull/50) ([Gregoire-M](https://github.com/Gregoire-M))
-- Modifications css [\#19](https://github.com/wallabag/wallabag/pull/19) ([tmos](https://github.com/tmos))
-- Some fixes and improvements [\#5](https://github.com/wallabag/wallabag/pull/5) ([fatihorhan](https://github.com/fatihorhan))
-
-
-
-\* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*

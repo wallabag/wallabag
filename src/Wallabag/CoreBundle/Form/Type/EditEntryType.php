@@ -3,7 +3,6 @@
 namespace Wallabag\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,11 +16,6 @@ class EditEntryType extends AbstractType
             ->add('title', TextType::class, [
                 'required' => true,
                 'label' => 'entry.edit.title_label',
-            ])
-            ->add('is_public', CheckboxType::class, [
-                'required' => false,
-                'label' => 'entry.edit.is_public_label',
-                'property_path' => 'isPublic',
             ])
             ->add('url', TextType::class, [
                 'disabled' => true,

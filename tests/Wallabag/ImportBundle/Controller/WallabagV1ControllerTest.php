@@ -2,8 +2,8 @@
 
 namespace Tests\Wallabag\ImportBundle\Controller;
 
-use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 
 class WallabagV1ControllerTest extends WallabagCoreTestCase
 {
@@ -14,9 +14,9 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/import/wallabag-v1');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
-        $this->assertEquals(1, $crawler->filter('input[type=file]')->count());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
+        $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
     public function testImportWallabagWithRabbitEnabled()
@@ -28,9 +28,9 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/import/wallabag-v1');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
-        $this->assertEquals(1, $crawler->filter('input[type=file]')->count());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
+        $this->assertSame(1, $crawler->filter('input[type=file]')->count());
 
         $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 0);
     }
@@ -49,7 +49,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
     public function testImportWallabagWithRedisEnabled()
@@ -62,13 +62,13 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/import/wallabag-v1');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertEquals(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
-        $this->assertEquals(1, $crawler->filter('input[type=file]')->count());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
+        $this->assertSame(1, $crawler->filter('input[type=file]')->count());
 
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__.'/../fixtures/wallabag-v1.json', 'wallabag-v1.json');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/wallabag-v1.json', 'wallabag-v1.json');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -76,7 +76,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 
@@ -96,7 +96,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/wallabag-v1');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__.'/../fixtures/wallabag-v1.json', 'wallabag-v1.json');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/wallabag-v1.json', 'wallabag-v1.json');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -104,7 +104,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 
@@ -112,24 +112,23 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId(
-                'https://framablog.org/2014/02/05/framabag-service-libre-gratuit-interview-developpeur/',
+                'http://www.framablog.org/index.php/post/2014/02/05/Framabag-service-libre-gratuit-interview-developpeur',
                 $this->getLoggedInUserId()
             );
-
-        $tag = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Tag')
-            ->findOneByLabel('Framabag');
-
-        $this->assertTrue($content->getTags()->contains($tag));
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertContains('flashes.import.notice.summary', $body[0]);
 
-        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for http://www.framablog.org is ok');
-        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://www.framablog.org is ok');
-        $this->assertNotEmpty($content->getLanguage(), 'Language for http://www.framablog.org is ok');
-        $this->assertEquals(1, count($content->getTags()));
+        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
+        $this->assertEmpty($content->getMimetype(), 'Mimetype for http://www.framablog.org is empty');
+        $this->assertEmpty($content->getPreviewPicture(), 'Preview picture for http://www.framablog.org is empty');
+        $this->assertEmpty($content->getLanguage(), 'Language for http://www.framablog.org is empty');
+
+        $tags = $content->getTags();
+        $this->assertContains('foot', $tags, 'It includes the "foot" tag');
+        $this->assertContains('framabag', $tags, 'It includes the "framabag" tag');
+        $this->assertSame(2, count($tags));
+
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
     }
 
@@ -141,7 +140,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/wallabag-v1');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__.'/../fixtures/wallabag-v1-read.json', 'wallabag-v1-read.json');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/wallabag-v1-read.json', 'wallabag-v1-read.json');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -150,7 +149,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 
@@ -162,6 +161,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
+        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content1);
         $this->assertTrue($content1->isArchived());
 
         $content2 = $client->getContainer()
@@ -172,6 +172,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
+        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content2);
         $this->assertTrue($content2->isArchived());
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
@@ -186,7 +187,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/wallabag-v1');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__.'/../fixtures/test.txt', 'test.txt');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/test.txt', 'test.txt');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -194,7 +195,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 

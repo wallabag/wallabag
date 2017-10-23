@@ -12,7 +12,7 @@ class ExportControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/export/unread.csv');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertContains('login', $client->getResponse()->headers->get('location'));
     }
 
@@ -23,7 +23,7 @@ class ExportControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/export/awesomeness.epub');
 
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
     public function testUnknownFormatExport()
@@ -33,7 +33,7 @@ class ExportControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/export/unread.xslx');
 
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
     public function testUnsupportedFormatExport()
@@ -42,15 +42,15 @@ class ExportControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         $client->request('GET', '/export/unread.doc');
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneByUsernameAndNotArchived('admin');
 
-        $client->request('GET', '/export/'.$content->getId().'.doc');
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $client->request('GET', '/export/' . $content->getId() . '.doc');
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
     public function testBadEntryId()
@@ -60,7 +60,7 @@ class ExportControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/export/0.mobi');
 
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
     public function testEpubExport()
@@ -72,12 +72,12 @@ class ExportControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/export/archive.epub');
         ob_end_clean();
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $headers = $client->getResponse()->headers;
-        $this->assertEquals('application/epub+zip', $headers->get('content-type'));
-        $this->assertEquals('attachment; filename="Archive articles.epub"', $headers->get('content-disposition'));
-        $this->assertEquals('binary', $headers->get('content-transfer-encoding'));
+        $this->assertSame('application/epub+zip', $headers->get('content-type'));
+        $this->assertSame('attachment; filename="Archive articles.epub"', $headers->get('content-disposition'));
+        $this->assertSame('binary', $headers->get('content-transfer-encoding'));
     }
 
     public function testMobiExport()
@@ -91,15 +91,15 @@ class ExportControllerTest extends WallabagCoreTestCase
             ->findOneByUsernameAndNotArchived('admin');
 
         ob_start();
-        $crawler = $client->request('GET', '/export/'.$content->getId().'.mobi');
+        $crawler = $client->request('GET', '/export/' . $content->getId() . '.mobi');
         ob_end_clean();
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $headers = $client->getResponse()->headers;
-        $this->assertEquals('application/x-mobipocket-ebook', $headers->get('content-type'));
-        $this->assertEquals('attachment; filename="'.preg_replace('/[^A-Za-z0-9\-]/', '', $content->getTitle()).'.mobi"', $headers->get('content-disposition'));
-        $this->assertEquals('binary', $headers->get('content-transfer-encoding'));
+        $this->assertSame('application/x-mobipocket-ebook', $headers->get('content-type'));
+        $this->assertSame('attachment; filename="' . preg_replace('/[^A-Za-z0-9\-]/', '', $content->getTitle()) . '.mobi"', $headers->get('content-disposition'));
+        $this->assertSame('binary', $headers->get('content-transfer-encoding'));
     }
 
     public function testPdfExport()
@@ -111,23 +111,23 @@ class ExportControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/export/all.pdf');
         ob_end_clean();
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $headers = $client->getResponse()->headers;
-        $this->assertEquals('application/pdf', $headers->get('content-type'));
-        $this->assertEquals('attachment; filename="All articles.pdf"', $headers->get('content-disposition'));
-        $this->assertEquals('binary', $headers->get('content-transfer-encoding'));
+        $this->assertSame('application/pdf', $headers->get('content-type'));
+        $this->assertSame('attachment; filename="All articles.pdf"', $headers->get('content-disposition'));
+        $this->assertSame('binary', $headers->get('content-transfer-encoding'));
 
         ob_start();
         $crawler = $client->request('GET', '/export/tag_entries.pdf?tag=foo-bar');
         ob_end_clean();
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $headers = $client->getResponse()->headers;
-        $this->assertEquals('application/pdf', $headers->get('content-type'));
-        $this->assertEquals('attachment; filename="Tag_entries articles.pdf"', $headers->get('content-disposition'));
-        $this->assertEquals('binary', $headers->get('content-transfer-encoding'));
+        $this->assertSame('application/pdf', $headers->get('content-type'));
+        $this->assertSame('attachment; filename="Tag_entries articles.pdf"', $headers->get('content-disposition'));
+        $this->assertSame('binary', $headers->get('content-transfer-encoding'));
     }
 
     public function testTxtExport()
@@ -139,12 +139,12 @@ class ExportControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/export/all.txt');
         ob_end_clean();
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $headers = $client->getResponse()->headers;
-        $this->assertEquals('text/plain; charset=UTF-8', $headers->get('content-type'));
-        $this->assertEquals('attachment; filename="All articles.txt"', $headers->get('content-disposition'));
-        $this->assertEquals('UTF-8', $headers->get('content-transfer-encoding'));
+        $this->assertSame('text/plain; charset=UTF-8', $headers->get('content-type'));
+        $this->assertSame('attachment; filename="All articles.txt"', $headers->get('content-disposition'));
+        $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
     }
 
     public function testCsvExport()
@@ -169,19 +169,19 @@ class ExportControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/export/archive.csv');
         ob_end_clean();
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $headers = $client->getResponse()->headers;
-        $this->assertEquals('application/csv', $headers->get('content-type'));
-        $this->assertEquals('attachment; filename="Archive articles.csv"', $headers->get('content-disposition'));
-        $this->assertEquals('UTF-8', $headers->get('content-transfer-encoding'));
+        $this->assertSame('application/csv', $headers->get('content-type'));
+        $this->assertSame('attachment; filename="Archive articles.csv"', $headers->get('content-disposition'));
+        $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
 
         $csv = str_getcsv($client->getResponse()->getContent(), "\n");
 
         $this->assertGreaterThan(1, $csv);
         // +1 for title line
-        $this->assertEquals(count($contentInDB) + 1, count($csv));
-        $this->assertEquals('Title;URL;Content;Tags;"MIME Type";Language;"Creation date"', $csv[0]);
+        $this->assertSame(count($contentInDB) + 1, count($csv));
+        $this->assertSame('Title;URL;Content;Tags;"MIME Type";Language;"Creation date"', $csv[0]);
         $this->assertContains($contentInDB[0]['title'], $csv[1]);
         $this->assertContains($contentInDB[0]['url'], $csv[1]);
         $this->assertContains($contentInDB[0]['content'], $csv[1]);
@@ -189,11 +189,9 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertContains($contentInDB[0]['language'], $csv[1]);
         $this->assertContains($contentInDB[0]['createdAt']->format('d/m/Y h:i:s'), $csv[1]);
 
-        $expectedTag = [];
         foreach ($contentInDB[0]['tags'] as $tag) {
-            $expectedTag[] = $tag['label'];
+            $this->assertContains($tag['label'], $csv[1]);
         }
-        $this->assertContains(implode(', ', $expectedTag), $csv[1]);
     }
 
     public function testJsonExport()
@@ -207,15 +205,15 @@ class ExportControllerTest extends WallabagCoreTestCase
             ->findByUrlAndUserId('http://0.0.0.0/entry1', $this->getLoggedInUserId());
 
         ob_start();
-        $crawler = $client->request('GET', '/export/'.$contentInDB->getId().'.json');
+        $crawler = $client->request('GET', '/export/' . $contentInDB->getId() . '.json');
         ob_end_clean();
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $headers = $client->getResponse()->headers;
-        $this->assertEquals('application/json', $headers->get('content-type'));
-        $this->assertEquals('attachment; filename="'.$contentInDB->getTitle().'.json"', $headers->get('content-disposition'));
-        $this->assertEquals('UTF-8', $headers->get('content-transfer-encoding'));
+        $this->assertSame('application/json', $headers->get('content-type'));
+        $this->assertSame('attachment; filename="' . $contentInDB->getTitle() . '.json"', $headers->get('content-disposition'));
+        $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
 
         $content = json_decode($client->getResponse()->getContent(), true);
         $this->assertArrayHasKey('id', $content[0]);
@@ -232,16 +230,17 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertArrayHasKey('created_at', $content[0]);
         $this->assertArrayHasKey('updated_at', $content[0]);
 
-        $this->assertEquals($contentInDB->isArchived(), $content[0]['is_archived']);
-        $this->assertEquals($contentInDB->isStarred(), $content[0]['is_starred']);
-        $this->assertEquals($contentInDB->getTitle(), $content[0]['title']);
-        $this->assertEquals($contentInDB->getUrl(), $content[0]['url']);
-        $this->assertEquals([['text' => 'This is my annotation /o/', 'quote' => 'content']], $content[0]['annotations']);
-        $this->assertEquals($contentInDB->getMimetype(), $content[0]['mimetype']);
-        $this->assertEquals($contentInDB->getLanguage(), $content[0]['language']);
-        $this->assertEquals($contentInDB->getReadingtime(), $content[0]['reading_time']);
-        $this->assertEquals($contentInDB->getDomainname(), $content[0]['domain_name']);
-        $this->assertEquals(['foo bar', 'baz'], $content[0]['tags']);
+        $this->assertSame((int) $contentInDB->isArchived(), $content[0]['is_archived']);
+        $this->assertSame((int) $contentInDB->isStarred(), $content[0]['is_starred']);
+        $this->assertSame($contentInDB->getTitle(), $content[0]['title']);
+        $this->assertSame($contentInDB->getUrl(), $content[0]['url']);
+        $this->assertSame([['text' => 'This is my annotation /o/', 'quote' => 'content']], $content[0]['annotations']);
+        $this->assertSame($contentInDB->getMimetype(), $content[0]['mimetype']);
+        $this->assertSame($contentInDB->getLanguage(), $content[0]['language']);
+        $this->assertSame($contentInDB->getReadingtime(), $content[0]['reading_time']);
+        $this->assertSame($contentInDB->getDomainname(), $content[0]['domain_name']);
+        $this->assertContains('baz', $content[0]['tags']);
+        $this->assertContains('foo', $content[0]['tags']);
     }
 
     public function testXmlExport()
@@ -264,16 +263,16 @@ class ExportControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/export/unread.xml');
         ob_end_clean();
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $headers = $client->getResponse()->headers;
-        $this->assertEquals('application/xml', $headers->get('content-type'));
-        $this->assertEquals('attachment; filename="Unread articles.xml"', $headers->get('content-disposition'));
-        $this->assertEquals('UTF-8', $headers->get('content-transfer-encoding'));
+        $this->assertSame('application/xml', $headers->get('content-type'));
+        $this->assertSame('attachment; filename="Unread articles.xml"', $headers->get('content-disposition'));
+        $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
 
         $content = new \SimpleXMLElement($client->getResponse()->getContent());
         $this->assertGreaterThan(0, $content->count());
-        $this->assertEquals(count($contentInDB), $content->count());
+        $this->assertSame(count($contentInDB), $content->count());
         $this->assertNotEmpty('id', (string) $content->entry[0]->id);
         $this->assertNotEmpty('title', (string) $content->entry[0]->title);
         $this->assertNotEmpty('url', (string) $content->entry[0]->url);

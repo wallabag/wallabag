@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Added user_id column on oauth2_clients to prevent users to delete API clients from other users
+ * Added user_id column on oauth2_clients to prevent users to delete API clients from other users.
  */
 class Version20161024212538 extends AbstractMigration implements ContainerAwareInterface
 {
@@ -22,11 +22,6 @@ class Version20161024212538 extends AbstractMigration implements ContainerAwareI
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
-    }
-
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix').$tableName;
     }
 
     /**
@@ -60,8 +55,13 @@ class Version20161024212538 extends AbstractMigration implements ContainerAwareI
 
         $clientsTable->dropColumn('user_id', 'integer');
 
-        if ($this->connection->getDatabasePlatform()->getName() != 'sqlite') {
+        if ('sqlite' !== $this->connection->getDatabasePlatform()->getName()) {
             $clientsTable->removeForeignKey($this->constraintName);
         }
+    }
+
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

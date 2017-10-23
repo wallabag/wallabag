@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Added the internal setting to enable/disable downloading pictures
+ * Added the internal setting to enable/disable downloading pictures.
  */
 class Version20161031132655 extends AbstractMigration implements ContainerAwareInterface
 {
@@ -22,11 +22,6 @@ class Version20161031132655 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix').$tableName;
-    }
-
     /**
      * @param Schema $schema
      */
@@ -35,11 +30,11 @@ class Version20161031132655 extends AbstractMigration implements ContainerAwareI
         $images = $this->container
             ->get('doctrine.orm.default_entity_manager')
             ->getConnection()
-            ->fetchArray('SELECT * FROM '.$this->getTable('craue_config_setting')." WHERE name = 'download_images_enabled'");
+            ->fetchArray('SELECT * FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'download_images_enabled'");
 
         $this->skipIf(false !== $images, 'It seems that you already played this migration.');
 
-        $this->addSql('INSERT INTO '.$this->getTable('craue_config_setting')." (name, value, section) VALUES ('download_images_enabled', 0, 'misc')");
+        $this->addSql('INSERT INTO ' . $this->getTable('craue_config_setting') . " (name, value, section) VALUES ('download_images_enabled', 0, 'misc')");
     }
 
     /**
@@ -47,6 +42,11 @@ class Version20161031132655 extends AbstractMigration implements ContainerAwareI
      */
     public function down(Schema $schema)
     {
-        $this->addSql('DELETE FROM '.$this->getTable('craue_config_setting')." WHERE name = 'download_images_enabled';");
+        $this->addSql('DELETE FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'download_images_enabled';");
+    }
+
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

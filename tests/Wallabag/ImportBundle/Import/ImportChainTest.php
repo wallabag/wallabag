@@ -16,6 +16,6 @@ class ImportChainTest extends \PHPUnit_Framework_TestCase
         $importChain->addImport($import, 'alias');
 
         $this->assertCount(1, $importChain->getAll());
-        $this->assertEquals($import, $importChain->getAll()['alias']);
+        $this->assertSame($import, $importChain->getAll()['alias']);
     }
 }
