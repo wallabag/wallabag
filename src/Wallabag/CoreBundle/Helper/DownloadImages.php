@@ -2,8 +2,13 @@
 
 namespace Wallabag\CoreBundle\Helper;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Message\Response;
+use Http\Client\Common\HttpMethodsClient;
+use Http\Client\Common\Plugin\ErrorPlugin;
+use Http\Client\Common\PluginClient;
+use Http\Client\HttpClient;
+use Http\Discovery\MessageFactoryDiscovery;
+use Http\Message\MessageFactory;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Finder\Finder;
@@ -19,9 +24,9 @@ class DownloadImages
     private $mimeGuesser;
     private $wallabagUrl;
 
-    public function __construct(Client $client, $baseFolder, $wallabagUrl, LoggerInterface $logger)
+    public function __construct(HttpClient $client, $baseFolder, $wallabagUrl, LoggerInterface $logger, MessageFactory $messageFactory = null)
     {
-        $this->client = $client;
+        $this->client = new HttpMethodsClient(new PluginClient($client, [new ErrorPlugin()]), $messageFactory ?: MessageFactoryDiscovery::find());
         $this->baseFolder = $baseFolder;
         $this->wallabagUrl = rtrim($wallabagUrl, '/');
         $this->logger = $logger;
@@ -135,7 +140,7 @@ class DownloadImages
         $localPath = $folderPath . '/' . $hashImage . '.' . $ext;
 
         try {
-            $im = imagecreatefromstring($res->getBody());
+            $im = imagecreatefromstring((string) $res->getBody());
         } catch (\Exception $e) {
             $im = false;
         }
@@ -306,14 +311,14 @@ class DownloadImages
     /**
      * Retrieve and validate the extension from the response of the url of the image.
      *
-     * @param Response $res       Guzzle Response
+     * @param ResponseInterface $res       Http Response
      * @param string   $imagePath Path from the src image from the content (used for log only)
      *
      * @return string|false Extension name or false if validation failed
      */
-    private function getExtensionFromResponse(Response $res, $imagePath)
+    private function getExtensionFromResponse(ResponseInterface $res, $imagePath)
     {
-        $ext = $this->mimeGuesser->guess($res->getHeader('content-type'));
+        $ext = $this->mimeGuesser->guess(current($res->getHeader('content-type')));
         $this->logger->debug('DownloadImages: Checking extension', ['ext' => $ext, 'header' => $res->getHeader('content-type')]);
 
         // ok header doesn't have the extension, try a different way

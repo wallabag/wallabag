@@ -3,9 +3,10 @@
 namespace Tests\Wallabag\CoreBundle\Helper;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\Mock;
+use Http\Mock\Client as HttpMockClient;
+use GuzzleHttp\Psr7\Response;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
@@ -32,18 +33,14 @@ class DownloadImagesTest extends TestCase
      */
     public function testProcessHtml($html, $url)
     {
-        $client = new Client();
+        $httpMockClient = new HttpMockClient();
 
-        $mock = new Mock([
-            new Response(200, ['content-type' => 'image/png'], Stream::factory(file_get_contents(__DIR__ . '/../fixtures/unnamed.png'))),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/png'], file_get_contents(__DIR__ . '/../fixtures/unnamed.png')));
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $download = new DownloadImages($client, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
 
         $res = $download->processHtml(123, $html, $url);
 
@@ -53,18 +50,13 @@ class DownloadImagesTest extends TestCase
 
     public function testProcessHtmlWithBadImage()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, ['content-type' => 'application/json'], Stream::factory('')),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(200, ['content-type' => 'application/json'], ''));
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $download = new DownloadImages($client, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
         $res = $download->processHtml(123, '<div><img src="http://i.imgur.com/T9qgcHc.jpg" /></div>', 'http://imgur.com/gallery/WxtWY');
 
         $this->assertContains('http://i.imgur.com/T9qgcHc.jpg', $res, 'Image were not replace because of content-type');
@@ -85,18 +77,13 @@ class DownloadImagesTest extends TestCase
      */
     public function testProcessSingleImage($header, $extension)
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, ['content-type' => $header], Stream::factory(file_get_contents(__DIR__ . '/../fixtures/unnamed.png'))),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(200, ['content-type' => $header], file_get_contents(__DIR__ . '/../fixtures/unnamed.png')));
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $download = new DownloadImages($client, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
         $res = $download->processSingleImage(123, 'T9qgcHc.jpg', 'http://imgur.com/gallery/WxtWY');
 
         $this->assertContains('/assets/images/9/b/9b0ead26/ebe60399.' . $extension, $res);
@@ -104,18 +91,13 @@ class DownloadImagesTest extends TestCase
 
     public function testProcessSingleImageWithBadUrl()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(404, []),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(404, []));
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $download = new DownloadImages($client, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
         $res = $download->processSingleImage(123, 'T9qgcHc.jpg', 'http://imgur.com/gallery/WxtWY');
 
         $this->assertFalse($res, 'Image can not be found, so it will not be replaced');
@@ -123,18 +105,13 @@ class DownloadImagesTest extends TestCase
 
     public function testProcessSingleImageWithBadImage()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, ['content-type' => 'image/png'], Stream::factory('')),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/png'], ''));
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $download = new DownloadImages($client, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
         $res = $download->processSingleImage(123, 'http://i.imgur.com/T9qgcHc.jpg', 'http://imgur.com/gallery/WxtWY');
 
         $this->assertFalse($res, 'Image can not be loaded, so it will not be replaced');
@@ -142,18 +119,13 @@ class DownloadImagesTest extends TestCase
 
     public function testProcessSingleImageFailAbsolute()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, ['content-type' => 'image/png'], Stream::factory(file_get_contents(__DIR__ . '/../fixtures/unnamed.png'))),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/png'], file_get_contents(__DIR__ . '/../fixtures/unnamed.png')));
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $download = new DownloadImages($client, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
         $res = $download->processSingleImage(123, '/i.imgur.com/T9qgcHc.jpg', 'imgur.com/gallery/WxtWY');
 
         $this->assertFalse($res, 'Absolute image can not be determined, so it will not be replaced');
@@ -161,18 +133,13 @@ class DownloadImagesTest extends TestCase
 
     public function testProcessRealImage()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, ['content-type' => null], Stream::factory(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg'))),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(200, ['content-type' => null], file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')));
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $download = new DownloadImages($client, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
 
         $res = $download->processSingleImage(
             123,

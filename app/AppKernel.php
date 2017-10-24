@@ -34,6 +34,7 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new BD\GuzzleSiteAuthenticatorBundle\BDGuzzleSiteAuthenticatorBundle(),
             new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
+            new Http\HttplugBundle\HttplugBundle(),
 
             // wallabag bundles
             new Wallabag\CoreBundle\WallabagCoreBundle(),
