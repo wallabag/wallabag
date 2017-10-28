@@ -190,7 +190,8 @@ class EntriesExport
             // in filenames, we limit to A-z/0-9
             $filename = preg_replace('/[^A-Za-z0-9\-]/', '', $entry->getTitle());
 
-            $chapter = $content_start . $entry->getContent() . $bookEnd;
+            $titlepage = "<h1>".$entry->getTitle()."</h1>";
+            $chapter = $content_start . $titlepage . $entry->getContent() . $bookEnd;
             $book->addChapter($entry->getTitle(), htmlspecialchars($filename) . '.html', $chapter, true, EPub::EXTERNAL_REF_ADD);
         }
 
