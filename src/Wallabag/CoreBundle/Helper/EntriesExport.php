@@ -174,8 +174,6 @@ class EntriesExport
             $book->setCoverImage('Cover.png', file_get_contents($this->logoPath), 'image/png');
         }
 
-        $book->buildTOC();
-
         /*
          * Adding actual entries
          */
@@ -190,12 +188,13 @@ class EntriesExport
             // in filenames, we limit to A-z/0-9
             $filename = preg_replace('/[^A-Za-z0-9\-]/', '', $entry->getTitle());
 
-            $titlepage = "<h1>".$entry->getTitle()."</h1>";
-            $chapter = $content_start . $titlepage . $entry->getContent() . $bookEnd;
+            $titlepage = $content_start . "<h1>".$entry->getTitle()."</h1>" . $this->getExportInformation('PHPePub') . $bookEnd;
+            $book->addChapter("Title", 'Title.html', $titlepage, true, EPub::EXTERNAL_REF_ADD);
+            $chapter = $content_start . $entry->getContent() . $bookEnd;
             $book->addChapter($entry->getTitle(), htmlspecialchars($filename) . '.html', $chapter, true, EPub::EXTERNAL_REF_ADD);
         }
 
-        $book->addChapter('Notices', 'Cover2.html', $content_start . $this->getExportInformation('PHPePub') . $bookEnd);
+        $book->buildTOC();
 
         return Response::create(
             $book->getBook(),
