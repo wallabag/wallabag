@@ -64,7 +64,7 @@ class EntriesExport
      */
     public function updateTitle($method)
     {
-        $this->title = $method.' articles';
+        $this->title = $method . ' articles';
 
         if ('entry' === $method) {
             $this->title = $this->entries[0]->getTitle();
@@ -85,7 +85,7 @@ class EntriesExport
     public function updateAuthor($method)
     {
         if ('entry' !== $method) {
-            $this->author = $method.' authors';
+            $this->author = $method . ' authors';
 
             return $this;
         }
@@ -109,7 +109,7 @@ class EntriesExport
      */
     public function exportAs($format)
     {
-        $functionName = 'produce'.ucfirst($format);
+        $functionName = 'produce' . ucfirst($format);
         if (method_exists($this, $functionName)) {
             return $this->$functionName();
         }
@@ -134,12 +134,12 @@ class EntriesExport
          */
         $content_start =
             "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-            ."<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:epub=\"http://www.idpf.org/2007/ops\">\n"
-            .'<head>'
-            ."<meta http-equiv=\"Default-Style\" content=\"text/html; charset=utf-8\" />\n"
-            ."<title>wallabag articles book</title>\n"
-            ."</head>\n"
-            ."<body>\n";
+            . "<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:epub=\"http://www.idpf.org/2007/ops\">\n"
+            . '<head>'
+            . "<meta http-equiv=\"Default-Style\" content=\"text/html; charset=utf-8\" />\n"
+            . "<title>wallabag articles book</title>\n"
+            . "</head>\n"
+            . "<body>\n";
 
         $bookEnd = "</body>\n</html>\n";
 
@@ -188,10 +188,10 @@ class EntriesExport
             // in filenames, we limit to A-z/0-9
             $filename = preg_replace('/[^A-Za-z0-9\-]/', '', $entry->getTitle());
 
-            $titlepage = $content_start.'<h1>'.$entry->getTitle().'</h1>'.$this->getExportInformation('PHPePub').$bookEnd;
+            $titlepage = $content_start . '<h1>' . $entry->getTitle() . '</h1>' . $this->getExportInformation('PHPePub') . $bookEnd;
             $book->addChapter('Title', 'Title.html', $titlepage, true, EPub::EXTERNAL_REF_ADD);
-            $chapter = $content_start.$entry->getContent().$bookEnd;
-            $book->addChapter($entry->getTitle(), htmlspecialchars($filename).'.html', $chapter, true, EPub::EXTERNAL_REF_ADD);
+            $chapter = $content_start . $entry->getContent() . $bookEnd;
+            $book->addChapter($entry->getTitle(), htmlspecialchars($filename) . '.html', $chapter, true, EPub::EXTERNAL_REF_ADD);
         }
 
         $book->buildTOC();
@@ -202,7 +202,7 @@ class EntriesExport
             [
                 'Content-Description' => 'File Transfer',
                 'Content-type' => 'application/epub+zip',
-                'Content-Disposition' => 'attachment; filename="'.$this->title.'.epub"',
+                'Content-Disposition' => 'attachment; filename="' . $this->title . '.epub"',
                 'Content-Transfer-Encoding' => 'binary',
             ]
         );
@@ -254,7 +254,7 @@ class EntriesExport
                 'Accept-Ranges' => 'bytes',
                 'Content-Description' => 'File Transfer',
                 'Content-type' => 'application/x-mobipocket-ebook',
-                'Content-Disposition' => 'attachment; filename="'.$this->title.'.mobi"',
+                'Content-Disposition' => 'attachment; filename="' . $this->title . '.mobi"',
                 'Content-Transfer-Encoding' => 'binary',
             ]
         );
@@ -282,7 +282,7 @@ class EntriesExport
          * Front page
          */
         $pdf->AddPage();
-        $intro = '<h1>'.$this->title.'</h1>'.$this->getExportInformation('tcpdf');
+        $intro = '<h1>' . $this->title . '</h1>' . $this->getExportInformation('tcpdf');
 
         $pdf->writeHTMLCell(0, 0, '', '', $intro, 0, 1, 0, true, '', true);
 
@@ -295,7 +295,7 @@ class EntriesExport
             }
 
             $pdf->AddPage();
-            $html = '<h1>'.$entry->getTitle().'</h1>';
+            $html = '<h1>' . $entry->getTitle() . '</h1>';
             $html .= $entry->getContent();
 
             $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
@@ -310,7 +310,7 @@ class EntriesExport
             [
                 'Content-Description' => 'File Transfer',
                 'Content-type' => 'application/pdf',
-                'Content-Disposition' => 'attachment; filename="'.$this->title.'.pdf"',
+                'Content-Disposition' => 'attachment; filename="' . $this->title . '.pdf"',
                 'Content-Transfer-Encoding' => 'binary',
             ]
         );
@@ -356,7 +356,7 @@ class EntriesExport
             200,
             [
                 'Content-type' => 'application/csv',
-                'Content-Disposition' => 'attachment; filename="'.$this->title.'.csv"',
+                'Content-Disposition' => 'attachment; filename="' . $this->title . '.csv"',
                 'Content-Transfer-Encoding' => 'UTF-8',
             ]
         );
@@ -374,7 +374,7 @@ class EntriesExport
             200,
             [
                 'Content-type' => 'application/json',
-                'Content-Disposition' => 'attachment; filename="'.$this->title.'.json"',
+                'Content-Disposition' => 'attachment; filename="' . $this->title . '.json"',
                 'Content-Transfer-Encoding' => 'UTF-8',
             ]
         );
@@ -392,7 +392,7 @@ class EntriesExport
             200,
             [
                 'Content-type' => 'application/xml',
-                'Content-Disposition' => 'attachment; filename="'.$this->title.'.xml"',
+                'Content-Disposition' => 'attachment; filename="' . $this->title . '.xml"',
                 'Content-Transfer-Encoding' => 'UTF-8',
             ]
         );
@@ -408,7 +408,7 @@ class EntriesExport
         $content = '';
         $bar = str_repeat('=', 100);
         foreach ($this->entries as $entry) {
-            $content .= "\n\n".$bar."\n\n".$entry->getTitle()."\n\n".$bar."\n\n";
+            $content .= "\n\n" . $bar . "\n\n" . $entry->getTitle() . "\n\n" . $bar . "\n\n";
             $html = new Html2Text($entry->getContent(), ['do_links' => 'none', 'width' => 100]);
             $content .= $html->getText();
         }
@@ -418,7 +418,7 @@ class EntriesExport
             200,
             [
                 'Content-type' => 'text/plain',
-                'Content-Disposition' => 'attachment; filename="'.$this->title.'.txt"',
+                'Content-Disposition' => 'attachment; filename="' . $this->title . '.txt"',
                 'Content-Transfer-Encoding' => 'UTF-8',
             ]
         );
@@ -456,7 +456,7 @@ class EntriesExport
         ]);
 
         if ('tcpdf' === $type) {
-            return str_replace('%IMAGE%', '<img src="'.$this->logoPath.'" />', $info);
+            return str_replace('%IMAGE%', '<img src="' . $this->logoPath . '" />', $info);
         }
 
         return str_replace('%IMAGE%', '', $info);
