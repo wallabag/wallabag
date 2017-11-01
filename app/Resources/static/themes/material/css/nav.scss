@@ -95,6 +95,11 @@ nav {
     display: flex;
     flex: 1;
   }
+
+  &.nav-panel-add form.disabled,
+  &.nav-panel-add form.disabled input {
+    background-color: whitesmoke;
+  }
 }
 
 #button_filters {
