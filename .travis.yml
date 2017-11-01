@@ -70,7 +70,7 @@ before_install:
 
 script:
     - travis_wait bash composer install -o  --no-interaction --no-progress --prefer-dist
-    - ant prepare-$DB
+    - make prepare DB=$DB
 
     - echo "travis_fold:start:migrations"
     - php bin/console doctrine:migrations:migrate --no-interaction --env=test
