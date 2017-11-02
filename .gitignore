@@ -23,12 +23,11 @@
 
 # Assets and user uploads
 web/uploads/
-!web/bundles
-web/bundles/*
-!web/bundles/wallabagcore
+/web/bundles/*
+!/web/bundles/.gitkeep
 /web/assets/images/*
 !web/assets/images/.gitkeep
-web/bundles/wallabagcore/*.dev.js
+/web/wallassets/*.dev.js
 
 # Build
 /app/build
