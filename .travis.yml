@@ -72,10 +72,6 @@ script:
     - travis_wait bash composer install -o  --no-interaction --no-progress --prefer-dist
     - make prepare DB=$DB
 
-    - echo "travis_fold:start:migrations"
-    - php bin/console doctrine:migrations:migrate --no-interaction --env=test
-    - echo "travis_fold:end:migrations"
-
     - echo "travis_fold:start:fixtures"
     - php bin/console doctrine:fixtures:load --no-interaction --env=test
     - echo "travis_fold:end:fixtures"

@@ -30,18 +30,7 @@ ifdef DB
 endif
 	-php bin/console doctrine:database:drop --force --env=test
 	php bin/console doctrine:database:create --env=test
-ifndef DB ## make test does not define DB
-	php bin/console doctrine:schema:create --env=test
-endif
-ifeq ($(DB), sqlite)
-	php bin/console doctrine:schema:create --env=test
-endif
-ifeq ($(DB), mysql)
-	php bin/console doctrine:database:import data/sql/mysql_base.sql --env=test
-endif
-ifeq ($(DB), pgsql)
-	psql -h localhost -d wallabag_test -U travis -f data/sql/pgsql_base.sql
-endif
+	php bin/console doctrine:migrations:migrate --no-interaction --env=test
 
 fixtures: ## Load fixtures into database
 	php bin/console doctrine:fixtures:load --no-interaction --env=test
