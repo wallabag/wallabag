@@ -70,7 +70,9 @@ before_install:
 
 script:
     - travis_wait bash composer install -o  --no-interaction --no-progress --prefer-dist
+    - echo "travis_fold:start:prepare"
     - make prepare DB=$DB
+    - echo "travis_fold:start:prepare"
 
     - echo "travis_fold:start:fixtures"
     - php bin/console doctrine:fixtures:load --no-interaction --env=test
