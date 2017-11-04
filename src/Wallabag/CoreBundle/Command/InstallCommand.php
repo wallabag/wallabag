@@ -61,7 +61,6 @@ class InstallCommand extends ContainerAwareCommand
             ->setupDatabase()
             ->setupAdmin()
             ->setupConfig()
-            ->runMigrations()
         ;
 
         $this->io->success('Wallabag has been successfully installed.');
@@ -70,7 +69,7 @@ class InstallCommand extends ContainerAwareCommand
 
     protected function checkRequirements()
     {
-        $this->io->section('Step 1 of 5: Checking system requirements.');
+        $this->io->section('Step 1 of 4: Checking system requirements.');
 
         $doctrineManager = $this->getContainer()->get('doctrine')->getManager();
 
@@ -169,7 +168,7 @@ class InstallCommand extends ContainerAwareCommand
 
     protected function setupDatabase()
     {
-        $this->io->section('Step 2 of 5: Setting up database.');
+        $this->io->section('Step 2 of 4: Setting up database.');
 
         // user want to reset everything? Don't care about what is already here
         if (true === $this->defaultInput->getOption('reset')) {
@@ -178,7 +177,7 @@ class InstallCommand extends ContainerAwareCommand
             $this
                 ->runCommand('doctrine:database:drop', ['--force' => true])
                 ->runCommand('doctrine:database:create')
-                ->runCommand('doctrine:schema:create')
+                ->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true])
                 ->runCommand('cache:clear')
             ;
 
@@ -192,7 +191,7 @@ class InstallCommand extends ContainerAwareCommand
 
             $this
                 ->runCommand('doctrine:database:create')
-                ->runCommand('doctrine:schema:create')
+                ->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true])
                 ->runCommand('cache:clear')
             ;
 
@@ -207,7 +206,7 @@ class InstallCommand extends ContainerAwareCommand
             $this
                 ->runCommand('doctrine:database:drop', ['--force' => true])
                 ->runCommand('doctrine:database:create')
-                ->runCommand('doctrine:schema:create')
+                ->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true])
             ;
         } elseif ($this->isSchemaPresent()) {
             if ($this->io->confirm('Seems like your database contains schema. Do you want to reset it?', false)) {
@@ -215,14 +214,14 @@ class InstallCommand extends ContainerAwareCommand
 
                 $this
                     ->runCommand('doctrine:schema:drop', ['--force' => true])
-                    ->runCommand('doctrine:schema:create')
+                    ->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true])
                 ;
             }
         } else {
             $this->io->text('Creating schema...');
 
             $this
-                ->runCommand('doctrine:schema:create')
+                ->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true])
             ;
         }
 
@@ -237,7 +236,7 @@ class InstallCommand extends ContainerAwareCommand
 
     protected function setupAdmin()
     {
-        $this->io->section('Step 3 of 5: Administration setup.');
+        $this->io->section('Step 3 of 4: Administration setup.');
 
         if (!$this->io->confirm('Would you like to create a new admin user (recommended)?', true)) {
             return $this;
@@ -272,7 +271,7 @@ class InstallCommand extends ContainerAwareCommand
 
     protected function setupConfig()
     {
-        $this->io->section('Step 4 of 5: Config setup.');
+        $this->io->section('Step 4 of 4: Config setup.');
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
         // cleanup before insert new stuff
@@ -289,18 +288,6 @@ class InstallCommand extends ContainerAwareCommand
         $em->flush();
 
         $this->io->text('<info>Config successfully setup.</info>');
-
-        return $this;
-    }
-
-    protected function runMigrations()
-    {
-        $this->io->section('Step 5 of 5: Run migrations.');
-
-        $this
-            ->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true]);
-
-        $this->io->text('<info>Migrations successfully executed.</info>');
 
         return $this;
     }

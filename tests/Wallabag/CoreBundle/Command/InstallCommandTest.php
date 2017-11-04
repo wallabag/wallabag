@@ -5,6 +5,7 @@ namespace Tests\Wallabag\CoreBundle\Command;
 use DAMA\DoctrineTestBundle\Doctrine\DBAL\StaticDriver;
 use Doctrine\Bundle\DoctrineBundle\Command\CreateDatabaseDoctrineCommand;
 use Doctrine\Bundle\DoctrineBundle\Command\DropDatabaseDoctrineCommand;
+use Doctrine\Bundle\MigrationsBundle\Command\MigrationsMigrateDoctrineCommand;
 use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -98,7 +99,6 @@ class InstallCommandTest extends WallabagCoreTestCase
         $this->assertContains('Setting up database.', $tester->getDisplay());
         $this->assertContains('Administration setup.', $tester->getDisplay());
         $this->assertContains('Config setup.', $tester->getDisplay());
-        $this->assertContains('Run migrations.', $tester->getDisplay());
     }
 
     public function testRunInstallCommandWithReset()
@@ -125,7 +125,6 @@ class InstallCommandTest extends WallabagCoreTestCase
         $this->assertContains('Dropping database, creating database and schema, clearing the cache', $tester->getDisplay());
         $this->assertContains('Administration setup.', $tester->getDisplay());
         $this->assertContains('Config setup.', $tester->getDisplay());
-        $this->assertContains('Run migrations.', $tester->getDisplay());
 
         // we force to reset everything
         $this->assertContains('Dropping database, creating database and schema, clearing the cache', $tester->getDisplay());
@@ -171,7 +170,6 @@ class InstallCommandTest extends WallabagCoreTestCase
         $this->assertContains('Setting up database.', $tester->getDisplay());
         $this->assertContains('Administration setup.', $tester->getDisplay());
         $this->assertContains('Config setup.', $tester->getDisplay());
-        $this->assertContains('Run migrations.', $tester->getDisplay());
 
         // the current database doesn't already exist
         $this->assertContains('Creating database and schema, clearing the cache', $tester->getDisplay());
@@ -198,7 +196,6 @@ class InstallCommandTest extends WallabagCoreTestCase
         $this->assertContains('Setting up database.', $tester->getDisplay());
         $this->assertContains('Administration setup.', $tester->getDisplay());
         $this->assertContains('Config setup.', $tester->getDisplay());
-        $this->assertContains('Run migrations.', $tester->getDisplay());
 
         $this->assertContains('Dropping schema and creating schema', $tester->getDisplay());
     }
@@ -209,6 +206,7 @@ class InstallCommandTest extends WallabagCoreTestCase
         $application->add(new InstallCommand());
         $application->add(new DropDatabaseDoctrineCommand());
         $application->add(new CreateDatabaseDoctrineCommand());
+        $application->add(new MigrationsMigrateDoctrineCommand());
 
         // drop database first, so the install command won't ask to reset things
         $command = new DropDatabaseDoctrineCommand();
@@ -242,7 +240,6 @@ class InstallCommandTest extends WallabagCoreTestCase
         $this->assertContains('Setting up database.', $tester->getDisplay());
         $this->assertContains('Administration setup.', $tester->getDisplay());
         $this->assertContains('Config setup.', $tester->getDisplay());
-        $this->assertContains('Run migrations.', $tester->getDisplay());
 
         $this->assertContains('Creating schema', $tester->getDisplay());
     }
@@ -265,6 +262,5 @@ class InstallCommandTest extends WallabagCoreTestCase
         $this->assertContains('Setting up database.', $tester->getDisplay());
         $this->assertContains('Administration setup.', $tester->getDisplay());
         $this->assertContains('Config setup.', $tester->getDisplay());
-        $this->assertContains('Run migrations.', $tester->getDisplay());
     }
 }
