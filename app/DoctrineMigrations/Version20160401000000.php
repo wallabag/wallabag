@@ -176,6 +176,17 @@ SQL
      */
     public function down(Schema $schema)
     {
-        //TODO: drop tables
+        $this->addSql('DROP TABLE wallabag_craue_config_setting');
+        $this->addSql('DROP TABLE "wallabag_tagging_rule"');
+        $this->addSql('DROP TABLE "wallabag_config"');
+        $this->addSql('DROP TABLE "wallabag_entry"');
+        $this->addSql('DROP TABLE wallabag_entry_tag');
+        $this->addSql('DROP TABLE "wallabag_tag"');
+        $this->addSql('DROP TABLE wallabag_oauth2_refresh_tokens');
+        $this->addSql('DROP TABLE wallabag_oauth2_access_tokens');
+        $this->addSql('DROP TABLE wallabag_oauth2_clients');
+        $this->addSql('DROP TABLE wallabag_oauth2_auth_codes');
+        $this->addSql('DROP TABLE "wallabag_user"');
+        $this->addSql('DROP TABLE wallabag_annotation');
     }
 }
