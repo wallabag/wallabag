@@ -1,5 +1,11 @@
 <div class="card-stacked">
-    <div class="preview">{% if entry.previewPicture is not null %}<img src="{{ entry.previewPicture }}" />{% endif %}</div>
+    <div class="preview">
+        {% if entry.previewPicture is not null %}
+            <a href="{{ path('view', { 'id': entry.id }) }}">
+                <img src="{{ entry.previewPicture }}" />
+            </a>
+        {% endif %}
+    </div>
     <div class="card-content">
         <span class="card-title dot-ellipsis dot-resize-update">
             <a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title | striptags | e('html_attr') }}">
