@@ -1,6 +1,7 @@
 [![Build Status](https://api.travis-ci.org/wallabag/wallabag.svg?branch=master)](https://travis-ci.org/wallabag/wallabag)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/wallabag/wallabag/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/wallabag/wallabag/?branch=master)
-[![Backers on Open Collective](https://opencollective.com/wallabag/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/wallabag/sponsors/badge.svg)](#sponsors) [![Gitter](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/wallabag/wallabag)
+[![Backers on Open Collective](https://opencollective.com/wallabag/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/wallabag/sponsors/badge.svg)](#sponsors) 
+[![Gitter](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/wallabag/wallabag)
 
 # What is wallabag?
 wallabag is a self-hostable PHP application allowing you to not miss any content anymore.
