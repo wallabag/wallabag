@@ -72,6 +72,7 @@
     "material-design-icons-iconfont": "^3.0.3",
     "materialize-css": "^0.98.1",
     "mousetrap": "^1.6.0",
+    "opencollective": "^1.0.3",
     "ptsans-npm-webfont": "^0.0.4",
     "roboto-fontface": "^0.7.0",
     "waypoints": "^4.0.1"
@@ -79,6 +80,12 @@
   "scripts": {
     "watch": "./node_modules/.bin/webpack-dev-server --env=dev",
     "build:dev": "./node_modules/.bin/webpack --env=dev",
-    "build:prod": "./node_modules/.bin/webpack --env=prod"
+    "build:prod": "./node_modules/.bin/webpack --env=prod",
+    "postinstall": "opencollective postinstall"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/wallabag",
+    "logo": "https://opencollective.com/opencollective/logo.txt"
   }
 }
