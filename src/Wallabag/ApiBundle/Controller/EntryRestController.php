@@ -309,7 +309,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="published_at", "dataType"="datetime|integer", "format"="YYYY-MM-DDTHH:II:SS+TZ or a timestamp", "required"=false, "description"="Published date of the entry"},
      *          {"name"="authors", "dataType"="string", "format"="Name Firstname,author2,author3", "required"=false, "description"="Authors of the entry"},
      *          {"name"="public", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="will generate a public link for the entry"},
-     *          {"name"="origin_url", "dataType"="string", "required"=false, "format"="http://www.test.com/article.html", "description"="Origin url for the entry."},
+     *          {"name"="origin_url", "dataType"="string", "required"=false, "format"="http://www.test.com/article.html", "description"="Origin url for the entry (from where you found it)."},
      *       }
      * )
      *
@@ -409,7 +409,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="published_at", "dataType"="datetime|integer", "format"="YYYY-MM-DDTHH:II:SS+TZ or a timestamp", "required"=false, "description"="Published date of the entry"},
      *          {"name"="authors", "dataType"="string", "format"="Name Firstname,author2,author3", "required"=false, "description"="Authors of the entry"},
      *          {"name"="public", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="will generate a public link for the entry"},
-     *          {"name"="origin_url", "dataType"="string", "required"=false, "format"="http://www.test.com/article.html", "description"="Origin url for the entry."},
+     *          {"name"="origin_url", "dataType"="string", "required"=false, "format"="http://www.test.com/article.html", "description"="Origin url for the entry (from where you found it)."},
      *      }
      * )
      *

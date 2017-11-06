@@ -244,7 +244,7 @@ entry:
         # page_title: 'Edit an entry'
         # title_label: 'Title'
         url_label: 'Url'
-        # origin_url_label: 'Origin url'
+        # origin_url_label: 'Origin url (from where you found that entry)'
         save_label: 'Salvează'
     public:
         # shared_by_wallabag: "This article has been shared by %username% with <a href='%wallabag_instance%'>wallabag</a>"

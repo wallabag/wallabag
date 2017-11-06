@@ -234,6 +234,7 @@ entry:
         page_title: 'Изменить запись'
         title_label: 'Название'
         url_label: 'Ссылка'
+        # origin_url_label: 'Origin url (from where you found that entry)'
         is_public_label: 'Публичная'
         save_label: 'Сохранить'
     public:

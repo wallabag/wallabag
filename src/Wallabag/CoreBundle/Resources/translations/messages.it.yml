@@ -244,7 +244,7 @@ entry:
         page_title: 'Modifica voce'
         title_label: 'Titolo'
         url_label: 'Url'
-        # origin_url_label: 'Origin url'
+        # origin_url_label: 'Origin url (from where you found that entry)'
         save_label: 'Salva'
     public:
         shared_by_wallabag: "Questo articolo è stato condiviso da %username% con <a href='%wallabag_instance%'>wallabag</a>"
