@@ -50,6 +50,11 @@ $(document).ready(() => {
     $('#entry_url').focus();
     return false;
   });
+  const materialAddForm = $('.nav-panel-add form[name=entry]');
+  materialAddForm.on('submit', () => {
+    materialAddForm.addClass('disabled');
+    $('input#entry_url', materialAddForm).prop('readonly', true).trigger('blur');
+  });
   $('#nav-btn-search').on('click', () => {
     $('.nav-panel-buttom').hide(100);
     $('.nav-panel-search').show(100);
