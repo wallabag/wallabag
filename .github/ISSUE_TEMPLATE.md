@@ -19,3 +19,6 @@ Remember, this is _not_ a place to ask questions. For that, go to https://commun
 
 Please provide necessary steps for reproduction of this issue, or better the
 reduced test case (without any external dependencies, if possible).
+
+<!-- Love wallabag? Please consider supporting our collective:
+👉  https://opencollective.com/wallabag/donate -->
