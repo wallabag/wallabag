@@ -6,7 +6,9 @@
                 <li><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
             {% endfor %}
             </ul>
-            <div class="preview activator" style="background-image: url({{ entry.previewPicture }})"></div>
+            <a href="{{ path('view', { 'id': entry.id }) }}">
+                <span class="preview" style="background-image: url({{ entry.previewPicture }})"></span>
+            </a>
         </div>
 
         <div class="card-content">

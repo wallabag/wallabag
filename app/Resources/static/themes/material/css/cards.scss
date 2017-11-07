@@ -134,6 +134,7 @@ main {
   .card-fullimage .preview {
     height: 14em;
     background: no-repeat 50%/cover;
+    display: block;
   }
 
   &.sw {
