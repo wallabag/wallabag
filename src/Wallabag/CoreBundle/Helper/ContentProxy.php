@@ -253,16 +253,14 @@ class ContentProxy
 
         if (!empty($content['title'])) {
             $entry->setTitle($content['title']);
-        } elseif (!empty($content['open_graph']['og_title'])) {
-            $entry->setTitle($content['open_graph']['og_title']);
         }
 
         if (empty($content['html'])) {
             $content['html'] = $this->fetchingErrorMessage;
 
-            if (!empty($content['open_graph']['og_description'])) {
+            if (!empty($content['description'])) {
                 $content['html'] .= '<p><i>But we found a short description: </i></p>';
-                $content['html'] .= $content['open_graph']['og_description'];
+                $content['html'] .= $content['description'];
             }
         }
 
@@ -277,8 +275,8 @@ class ContentProxy
             $entry->setPublishedBy($content['authors']);
         }
 
-        if (!empty($content['all_headers']) && $this->storeArticleHeaders) {
-            $entry->setHeaders($content['all_headers']);
+        if (!empty($content['headers'])) {
+            $entry->setHeaders($content['headers']);
         }
 
         if (!empty($content['date'])) {
@@ -290,12 +288,12 @@ class ContentProxy
         }
 
         $previewPictureUrl = '';
-        if (!empty($content['open_graph']['og_image'])) {
-            $previewPictureUrl = $content['open_graph']['og_image'];
+        if (!empty($content['image'])) {
+            $previewPictureUrl = $content['image'];
         }
 
         // if content is an image, define it as a preview too
-        if (!empty($content['content_type']) && \in_array($this->mimeGuesser->guess($content['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
+        if (!empty($content['headers']['content_type']) && \in_array($this->mimeGuesser->guess($content['headers']['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
             $previewPictureUrl = $content['url'];
         } elseif (empty($previewPictureUrl)) {
             $this->logger->debug('Extracting images from content to provide a default preview picture');
@@ -310,8 +308,8 @@ class ContentProxy
             $this->updatePreviewPicture($entry, $previewPictureUrl);
         }
 
-        if (!empty($content['content_type'])) {
-            $entry->setMimetype($content['content_type']);
+        if (!empty($content['headers']['content-type'])) {
+            $entry->setMimetype($content['headers']['content-type']);
         }
 
         try {
