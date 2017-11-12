@@ -233,6 +233,7 @@ entry:
         created_at: "Date de création"
         published_at: "Date de publication"
         published_by: "Publié par"
+        provided_by: "Fourni par"
     new:
         page_title: "Sauvegarder un nouvel article"
         placeholder: "http://website.com"

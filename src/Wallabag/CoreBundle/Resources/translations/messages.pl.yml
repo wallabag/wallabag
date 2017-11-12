@@ -233,6 +233,7 @@ entry:
         created_at: 'Czas stworzenia'
         published_at: 'Data publikacji'
         published_by: 'Opublikowane przez'
+        # provided_by: 'Provided by'
     new:
         page_title: 'Zapisz nowy wpis'
         placeholder: 'http://website.com'

@@ -233,6 +233,7 @@ entry:
         created_at: 'Data de creacion'
         published_at: 'Data de publicacion'
         published_by: 'Publicat per'
+        # provided_by: 'Provided by'
     new:
         page_title: 'Enregistrar un novèl article'
         placeholder: 'http://website.com'

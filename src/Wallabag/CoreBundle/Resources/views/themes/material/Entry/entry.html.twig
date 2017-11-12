@@ -251,7 +251,7 @@
                     </li>
                     {% if entry.originUrl is not empty %}
                         <li>
-                            <i class="material-icons" title="Provided by">launch</i>
+                            <i class="material-icons" title="{{ 'entry.view.provided_by'|trans }}">launch</i>
                             <a href="{{ entry.originUrl|e }}" target="_blank" class="tool">
                                 {{ entry.originUrl|striptags|removeSchemeAndWww|truncate(32) }}
                             </a>

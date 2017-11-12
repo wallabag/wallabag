@@ -233,6 +233,7 @@ entry:
         created_at: 'Data de criação'
         # published_at: 'Publication date'
         # published_by: 'Published by'
+        # provided_by: 'Provided by'
     new:
         page_title: 'Salvar nova entrada'
         placeholder: 'http://website.com'

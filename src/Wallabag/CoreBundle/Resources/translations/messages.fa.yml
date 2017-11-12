@@ -233,6 +233,7 @@ entry:
         created_at: 'زمان ساخت'
         # published_at: 'Publication date'
         # published_by: 'Published by'
+        # provided_by: 'Provided by'
     new:
         page_title: 'ذخیرهٔ مقالهٔ تازه'
         placeholder: 'http://website.com'

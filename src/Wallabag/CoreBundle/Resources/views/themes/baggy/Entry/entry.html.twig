@@ -73,7 +73,7 @@
             <span class="tool link"><i class="material-icons link">comment</i> {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}</span>
 
             {% if entry.originUrl is not empty %}
-                <i class="material-icons" title="Provided by">launch</i>
+                <i class="material-icons" title="{{ 'entry.view.provided_by'|trans }}">launch</i>
                 <a href="{{ entry.originUrl|e }}" target="_blank" class="tool">
                     {{ entry.originUrl|striptags|removeSchemeAndWww|truncate(32) }}
                 </a>

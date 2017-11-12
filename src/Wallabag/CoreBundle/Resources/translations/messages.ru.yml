@@ -223,6 +223,7 @@ entry:
         original_article: 'оригинал'
         annotations_on_the_entry: '{0} Нет аннотации|{1} Одна аннотация|]1,Inf[ %count% аннотаций'
         created_at: 'Дата создания'
+        # provided_by: 'Provided by'
     new:
         page_title: 'Сохранить новую запись'
         placeholder: 'http://website.com'
