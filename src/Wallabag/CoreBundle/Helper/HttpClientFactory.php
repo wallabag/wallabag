@@ -60,13 +60,17 @@ class HttpClientFactory implements ClientFactory
         $this->logger->log('debug', 'Restricted access config enabled?', ['enabled' => (int) $this->restrictedAccess]);
 
         if (0 === (int) $this->restrictedAccess) {
-            return new GuzzleAdapter(new GuzzleClient());
+            return new GuzzleAdapter(new GuzzleClient($config));
         }
 
         // we clear the cookie to avoid websites who use cookies for analytics
         $this->cookieJar->clear();
-        // need to set the (shared) cookie jar
-        $guzzle = new GuzzleClient(['defaults' => ['cookies' => $this->cookieJar]]);
+        if (!isset($config['defaults']['cookies'])) {
+            // need to set the (shared) cookie jar
+            $config['defaults']['cookies'] = $this->cookieJar;
+        }
+
+        $guzzle = new GuzzleClient($config);
         foreach ($this->subscribers as $subscriber) {
             $guzzle->getEmitter()->attach($subscriber);
         }

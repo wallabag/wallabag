@@ -375,6 +375,9 @@ httplug:
     clients:
         wallabag_core:
             factory: 'wallabag_core.http_client_factory'
+            config:
+                defaults:
+                    timeout: 10
             plugins: ['httplug.plugin.logger']
         wallabag_core.entry.download_images:
             factory: 'httplug.factory.auto'
