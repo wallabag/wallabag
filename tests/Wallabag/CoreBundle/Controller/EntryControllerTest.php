@@ -9,6 +9,7 @@ use Wallabag\CoreBundle\Entity\SiteCredential;
 
 class EntryControllerTest extends WallabagCoreTestCase
 {
+    const An_URL_CONTAINING_AN_ARTICLE_WITH_IMAGE = 'http://www.lemonde.fr/judo/article/2017/11/11/judo-la-decima-de-teddy-riner_5213605_1556020.html';
     public $downloadImagesEnabled = false;
     public $url = 'http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html';
 
@@ -161,7 +162,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame($this->url, $content->getUrl());
         $this->assertContains('Google', $content->getTitle());
         $this->assertSame('fr', $content->getLanguage());
-        $this->assertSame('2015-03-28 15:37:39', $content->getPublishedAt()->format('Y-m-d H:i:s'));
+        $this->assertSame('2015-03-28 11:43:19', $content->getPublishedAt()->format('Y-m-d H:i:s'));
         $this->assertSame('Morgane Tual', $author[0]);
         $this->assertArrayHasKey('x-varnish1', $content->getHeaders());
     }
@@ -977,7 +978,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $url = 'http://www.20minutes.fr/montpellier/1952003-20161030-video-car-tombe-panne-rugbymen-perpignan-improvisent-melee-route';
+        $url = self::An_URL_CONTAINING_AN_ARTICLE_WITH_IMAGE;
         $client->getContainer()->get('craue_config')->set('download_images_enabled', 1);
 
         $crawler = $client->request('GET', '/new');
@@ -1003,9 +1004,9 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $entry);
         $this->assertSame($url, $entry->getUrl());
-        $this->assertContains('Perpignan', $entry->getTitle());
+        $this->assertContains('Judo', $entry->getTitle());
         // instead of checking for the filename (which might change) check that the image is now local
-        $this->assertContains($client->getContainer()->getParameter('domain_name') . '/assets/images/', $entry->getContent());
+        $this->assertContains(rtrim($client->getContainer()->getParameter('domain_name'), '/') . '/assets/images/', $entry->getContent());
 
         $client->getContainer()->get('craue_config')->set('download_images_enabled', 0);
     }
@@ -1019,7 +1020,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $url = 'http://www.20minutes.fr/montpellier/1952003-20161030-video-car-tombe-panne-rugbymen-perpignan-improvisent-melee-route';
+        $url = self::An_URL_CONTAINING_AN_ARTICLE_WITH_IMAGE;
         $client->getContainer()->get('craue_config')->set('download_images_enabled', 1);
 
         $crawler = $client->request('GET', '/new');
