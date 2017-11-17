@@ -1,0 +1,36 @@
+settings_changed: ปรับปรุงองค์ประกอบ
+download_pictures: ดาวน์โหลดรูปภาพผ่านเซิฟเวอร์ของคุณ
+carrot: เปิดการแชร์ Carrot
+diaspora_url: Diaspora-URL, ถ้าเซิฟเวอร์ถูกเปิดใช้งาน
+export_epub: เปิดใช้งานการนำเข้าข้อมูลแบบ ePub
+export_mobi: เปิดใช้งานการนำเข้าข้อมูลแบบ .mobi
+export_pdf: เปิดใช้งานการนำเข้าข้อมูลแบบ PDF
+export_csv: เปิดใช้งานการนำเข้าข้อมูลแบบ CSV
+export_json: เปิดใช้งานการนำเข้าข้อมูลแบบ JSON
+export_txt: เปิดใช้งานการนำเข้าข้อมูลแบบ TXT
+export_xml: เปิดใช้งานการนำเข้าข้อมูลแบบ XML
+import_with_rabbitmq: เปิดใช้งาน RabbitMQ เพื่อดึงข้อมูลแบบ asynchronous
+import_with_redis: เปิดใช้งาน Redis เพื่อดึงข้อมูลแบบ asynchronous
+shaarli_url: Shaarli-URL, ถ้าเซิฟเวอร์ถูกเปิดใช้งาน
+share_diaspora: เปิดการแชร์ Diaspora
+share_mail: เปิดการแชร์ผ่าน email
+share_shaarli: เปิดการแชร์ Shaarli
+share_scuttle: เปิดการแชร์ Scuttle
+share_twitter: เปิดการแชร์ Twitter
+share_unmark: เปิดการแชร์ Unmark.it
+show_printlink: แสดงลิงค์เพื่อปรินท์เนื้อหา
+wallabag_support_url: URL ที่สนับสนุนจาก wallabag
+entry: "บทความ"
+export: "นำข้อมูลออก"
+import: "นำเข้าข้อมูล"
+misc: "เบ็ดเตล็ด"
+modify_settings: "ปรับใช้"
+piwik_host: โฮสบนเว็บไซต์ของคุณใน Piwik (ยกเว้น http:// หรือ https://)
+piwik_site_id: ไอดีบนเว็บไซต์ของคุณใน Piwik
+piwik_enabled: เปิดการใช้ Piwik
+demo_mode_enabled: "เปิดการใช้งานโหมดเดโม ? (เฉพาะการใช้สำหรับเดโมสาธารณะของ wallabag)"
+demo_mode_username: "ผู้ใช้ส่วนเดโม"
+share_public: ยอมรับ URL สาธารณะจากการเข้าถึงข้อมูล
+download_images_enabled: ดาวน์โหลดรูปภาพเฉพาะ
+restricted_access: เปิดใช้งานการรองรับบนเว็บไซต์กับ paywall
+api_user_registration: เปิดใช้งานให้ผู้ใช้ลงทะเบียนการใช้ API
