@@ -12,7 +12,7 @@ export_xml: Enable XML export
 import_with_rabbitmq: Enable RabbitMQ to import data asynchronously
 import_with_redis: Enable Redis to import data asynchronously
 shaarli_url: Shaarli URL, if the service is enabled
-share_diaspora: Enable share to Diaspora
+share_diaspora: Enable share to diaspora*
 share_mail: Enable share by e-mail
 share_shaarli: Enable sharing to Shaarli
 share_scuttle: Enable sharing to Scuttle
@@ -28,9 +28,9 @@ modify_settings: "apply"
 piwik_host: Host of your website in Piwik (without http:// ou https://)
 piwik_site_id: ID of your website in Piwik
 piwik_enabled: Enable Piwik
-demo_mode_enabled: "Enable demo mode? (Only used for the wallabag public demo)"
+demo_mode_enabled: "Enable demo mode? (Only used for the public wallabag demo)"
 demo_mode_username: "Demo user"
 share_public: Allow public URL for entries
 download_images_enabled: Download images locally
-restricted_access: Enable authentication for websites with paywall
+restricted_access: Enable authentication for paywalled websites
 api_user_registration: Enable user to be registered using the API
