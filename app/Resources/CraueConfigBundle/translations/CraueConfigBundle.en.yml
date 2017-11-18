@@ -1,7 +1,7 @@
 settings_changed: Configuration updated
 download_pictures: Download pictures on your server
 carrot: Enable share to Carrot
-diaspora_url: Diaspora URL, if the service is enabled
+diaspora_url: diaspora* URL, if the service is enabled
 export_epub: Enable ePub export
 export_mobi: Enable .mobi export
 export_pdf: Enable PDF export
@@ -13,11 +13,11 @@ import_with_rabbitmq: Enable RabbitMQ to import data asynchronously
 import_with_redis: Enable Redis to import data asynchronously
 shaarli_url: Shaarli URL, if the service is enabled
 share_diaspora: Enable share to Diaspora
-share_mail: Enable share by email
-share_shaarli: Enable share to Shaarli
-share_scuttle: Enable share to Scuttle
-share_twitter: Enable share to Twitter
-share_unmark: Enable share to Unmark.it
+share_mail: Enable share by e-mail
+share_shaarli: Enable sharing to Shaarli
+share_scuttle: Enable sharing to Scuttle
+share_twitter: Enable sharing to Twitter
+share_unmark: Enable sharing to Unmark.it
 show_printlink: Display a link to print content
 wallabag_support_url: Support URL for wallabag
 entry: "article"
@@ -28,9 +28,9 @@ modify_settings: "apply"
 piwik_host: Host of your website in Piwik (without http:// ou https://)
 piwik_site_id: ID of your website in Piwik
 piwik_enabled: Enable Piwik
-demo_mode_enabled: "Enable demo mode ? (only used for the wallabag public demo)"
+demo_mode_enabled: "Enable demo mode? (Only used for the wallabag public demo)"
 demo_mode_username: "Demo user"
-share_public: Allow public url for entries
+share_public: Allow public URL for entries
 download_images_enabled: Download images locally
 restricted_access: Enable authentication for websites with paywall
 api_user_registration: Enable user to be registered using the API
