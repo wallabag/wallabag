@@ -5,7 +5,7 @@ auth_code:
         subject: 'wallabag authentication code'
         body:
             hello: "Hi %user%,"
-            first_para: "Since you enable two factor authentication on your wallabag account and you just logged in from a new device (computer, phone, etc.), we send you a code to validate your connection."
+            first_para: "Since you require two factor authentication to log in on your wallabag account, and a new device just used it, we send you a code to validate its connection."
             second_para: "Here is the code:"
             support: "Please don't hesitate to contact us if you have any problems:"
             signature: "The wallabag team"
