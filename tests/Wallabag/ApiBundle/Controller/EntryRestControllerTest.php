@@ -440,6 +440,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame('New title for my article', $content['title']);
         $this->assertSame(1, $content['user_id']);
         $this->assertCount(2, $content['tags']);
+        $this->assertNull($content['origin_url']);
         $this->assertSame('my content', $content['content']);
         $this->assertSame('de', $content['language']);
         $this->assertSame('2016-09-08T11:55:58+0200', $content['published_at']);
@@ -679,6 +680,60 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame($previousContent, $content['content'], 'Ensure content has not moved');
         $this->assertSame($previousLanguage, $content['language'], 'Ensure language has not moved');
     }
+
+    public function testPatchEntryRemoveOriginUrl()
+    {
+        $entry = $this->client->getContainer()
+        ->get('doctrine.orm.entity_manager')
+        ->getRepository('WallabagCoreBundle:Entry')
+        ->findOneByUser(1);
+
+        if (!$entry) {
+            $this->markTestSkipped('No content found in db.');
+        }
+
+        $previousContent = $entry->getContent();
+        $previousLanguage = $entry->getLanguage();
+        $previousTitle = $entry->getTitle();
+
+        $this->client->request('PATCH', '/api/entries/' . $entry->getId() . '.json', [
+            'origin_url' => '',
+        ]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertSame($entry->getId(), $content['id']);
+        $this->assertSame($entry->getUrl(), $content['url']);
+        $this->assertEmpty($content['origin_url']);
+        $this->assertEmpty($content['published_by'], 'Authors were not saved because of an array instead of a string');
+        $this->assertSame($previousContent, $content['content'], 'Ensure content has not moved');
+        $this->assertSame($previousLanguage, $content['language'], 'Ensure language has not moved');
+        $this->assertSame($previousTitle, $content['title'], 'Ensure title has not moved');
+    }
+    
+        public function testPatchEntryNullOriginUrl()
+        {
+            $entry = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUser(1);
+    
+            if (!$entry) {
+                $this->markTestSkipped('No content found in db.');
+            }
+    
+            $this->client->request('PATCH', '/api/entries/' . $entry->getId() . '.json', [
+                'origin_url' => null,
+            ]);
+    
+            $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+    
+            $content = json_decode($this->client->getResponse()->getContent(), true);
+    
+            $this->assertNull($content['origin_url']);
+        }
 
     public function testGetTagsEntry()
     {
