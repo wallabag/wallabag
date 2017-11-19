@@ -50,7 +50,7 @@ class WallabagExtensionTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $extension = new WallabagExtension($entryRepository, $tagRepository, $tokenStorage, 0, $translator);
-        
+
         $this->assertSame('lemonde.fr', $extension->removeSchemeAndWww('www.lemonde.fr'));
         $this->assertSame('lemonde.fr', $extension->removeSchemeAndWww('http://lemonde.fr'));
         $this->assertSame('lemonde.fr', $extension->removeSchemeAndWww('https://www.lemonde.fr'));

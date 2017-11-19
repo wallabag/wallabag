@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Add origin_url column
+ * Add origin_url column.
  */
 class Version20171105202000 extends AbstractMigration implements ContainerAwareInterface
 {

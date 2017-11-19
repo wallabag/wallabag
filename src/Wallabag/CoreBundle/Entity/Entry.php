@@ -840,7 +840,7 @@ class Entry
 
         return $this;
     }
-    
+
     /**
      * Set origin url.
      *
@@ -854,7 +854,7 @@ class Entry
 
         return $this;
     }
-    
+
     /**
      * Get origin url.
      *
