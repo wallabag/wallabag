@@ -24,8 +24,9 @@ class ContentProxy
     protected $mimeGuesser;
     protected $fetchingErrorMessage;
     protected $eventDispatcher;
+    protected $storeArticleHeaders;
 
-    public function __construct(Graby $graby, RuleBasedTagger $tagger, ValidatorInterface $validator, LoggerInterface $logger, $fetchingErrorMessage)
+    public function __construct(Graby $graby, RuleBasedTagger $tagger, ValidatorInterface $validator, LoggerInterface $logger, $fetchingErrorMessage, $storeArticleHeaders)
     {
         $this->graby = $graby;
         $this->tagger = $tagger;
@@ -33,6 +34,7 @@ class ContentProxy
         $this->logger = $logger;
         $this->mimeGuesser = new MimeTypeExtensionGuesser();
         $this->fetchingErrorMessage = $fetchingErrorMessage;
+        $this->storeArticleHeaders = $storeArticleHeaders;
     }
 
     /**
@@ -185,7 +187,7 @@ class ContentProxy
             $entry->setPublishedBy($content['authors']);
         }
 
-        if (!empty($content['all_headers'])) {
+        if (!empty($content['all_headers']) && $this->storeArticleHeaders) {
             $entry->setHeaders($content['all_headers']);
         }
 

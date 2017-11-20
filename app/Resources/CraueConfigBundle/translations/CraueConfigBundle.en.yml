@@ -12,6 +12,8 @@ export_xml: Enable XML export
 import_with_rabbitmq: Enable RabbitMQ to import data asynchronously
 import_with_redis: Enable Redis to import data asynchronously
 shaarli_url: Shaarli URL, if the service is enabled
+scuttle_url: Scuttle URL, if the service is enabled
+unmark_url: Unmark URL, if the service is enabled
 share_diaspora: Enable share to diaspora*
 share_mail: Enable share by e-mail
 share_shaarli: Enable sharing to Shaarli
@@ -34,3 +36,4 @@ share_public: Allow public URL for entries
 download_images_enabled: Download images locally
 restricted_access: Enable authentication for paywalled websites
 api_user_registration: Enable user to be registered using the API
+store_article_headers: Enable if wallabag stores HTTP headers for each article
