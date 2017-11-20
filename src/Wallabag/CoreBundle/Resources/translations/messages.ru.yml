@@ -223,6 +223,7 @@ entry:
         original_article: 'оригинал'
         annotations_on_the_entry: '{0} Нет аннотации|{1} Одна аннотация|]1,Inf[ %count% аннотаций'
         created_at: 'Дата создания'
+        # provided_by: 'Provided by'
     new:
         page_title: 'Сохранить новую запись'
         placeholder: 'http://website.com'
@@ -234,6 +235,7 @@ entry:
         page_title: 'Изменить запись'
         title_label: 'Название'
         url_label: 'Ссылка'
+        # origin_url_label: 'Origin url (from where you found that entry)'
         is_public_label: 'Публичная'
         save_label: 'Сохранить'
     public:

@@ -309,6 +309,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="published_at", "dataType"="datetime|integer", "format"="YYYY-MM-DDTHH:II:SS+TZ or a timestamp", "required"=false, "description"="Published date of the entry"},
      *          {"name"="authors", "dataType"="string", "format"="Name Firstname,author2,author3", "required"=false, "description"="Authors of the entry"},
      *          {"name"="public", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="will generate a public link for the entry"},
+     *          {"name"="origin_url", "dataType"="string", "required"=false, "format"="http://www.test.com/article.html", "description"="Origin url for the entry (from where you found it)."},
      *       }
      * )
      *
@@ -368,6 +369,10 @@ class EntryRestController extends WallabagRestController
             $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $data['tags']);
         }
 
+        if (!empty($data['origin_url'])) {
+            $entry->setOriginUrl($data['origin_url']);
+        }
+
         if (null !== $data['isPublic']) {
             if (true === (bool) $data['isPublic'] && null === $entry->getUid()) {
                 $entry->generateUid();
@@ -404,6 +409,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="published_at", "dataType"="datetime|integer", "format"="YYYY-MM-DDTHH:II:SS+TZ or a timestamp", "required"=false, "description"="Published date of the entry"},
      *          {"name"="authors", "dataType"="string", "format"="Name Firstname,author2,author3", "required"=false, "description"="Authors of the entry"},
      *          {"name"="public", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="will generate a public link for the entry"},
+     *          {"name"="origin_url", "dataType"="string", "required"=false, "format"="http://www.test.com/article.html", "description"="Origin url for the entry (from where you found it)."},
      *      }
      * )
      *
@@ -478,6 +484,10 @@ class EntryRestController extends WallabagRestController
             } elseif (false === (bool) $data['isPublic']) {
                 $entry->cleanUid();
             }
+        }
+
+        if (!empty($data['origin_url'])) {
+            $entry->setOriginUrl($data['origin_url']);
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -778,6 +788,7 @@ class EntryRestController extends WallabagRestController
             'picture' => $request->request->get('preview_picture'),
             'publishedAt' => $request->request->get('published_at'),
             'authors' => $request->request->get('authors', ''),
+            'origin_url' => $request->request->get('origin_url', ''),
         ];
     }
 

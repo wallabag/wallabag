@@ -231,6 +231,7 @@ entry:
         created_at: 'Oluşturulma tarihi'
         # published_at: 'Publication date'
         # published_by: 'Published by'
+        # provided_by: 'Provided by'
     new:
         page_title: 'Yeni makaleyi kaydet'
         placeholder: 'http://website.com'
@@ -242,6 +243,7 @@ entry:
         page_title: 'Makaleyi düzenle'
         title_label: 'Başlık'
         url_label: 'Url'
+        # origin_url_label: 'Origin url (from where you found that entry)'
         save_label: 'Kaydet'
     public:
         # shared_by_wallabag: "This article has been shared by %username% with <a href='%wallabag_instance%'>wallabag</a>"

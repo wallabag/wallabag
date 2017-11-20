@@ -233,6 +233,7 @@ entry:
         created_at: 'Data creării'
         # published_at: 'Publication date'
         # published_by: 'Published by'
+        # provided_by: 'Provided by'
     new:
         page_title: 'Salvează un nou articol'
         placeholder: 'http://website.com'
@@ -244,6 +245,7 @@ entry:
         # page_title: 'Edit an entry'
         # title_label: 'Title'
         url_label: 'Url'
+        # origin_url_label: 'Origin url (from where you found that entry)'
         save_label: 'Salvează'
     public:
         # shared_by_wallabag: "This article has been shared by %username% with <a href='%wallabag_instance%'>wallabag</a>"

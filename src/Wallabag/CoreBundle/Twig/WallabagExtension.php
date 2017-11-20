@@ -28,6 +28,7 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
     {
         return [
             new \Twig_SimpleFilter('removeWww', [$this, 'removeWww']),
+            new \Twig_SimpleFilter('removeSchemeAndWww', [$this, 'removeSchemeAndWww']),
         ];
     }
 
@@ -43,6 +44,13 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
     public function removeWww($url)
     {
         return preg_replace('/^www\./i', '', $url);
+    }
+
+    public function removeSchemeAndWww($url)
+    {
+        return $this->removeWww(
+            preg_replace('@^https?://@i', '', $url)
+        );
     }
 
     /**

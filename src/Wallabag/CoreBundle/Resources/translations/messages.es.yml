@@ -233,6 +233,7 @@ entry:
         created_at: 'Fecha de creación'
         # published_at: 'Publication date'
         # published_by: 'Published by'
+        # provided_by: 'Provided by'
     new:
         page_title: 'Guardar un nuevo artículo'
         placeholder: 'http://sitioweb.com'
@@ -244,6 +245,7 @@ entry:
         page_title: 'Editar un artículo'
         title_label: 'Título'
         url_label: 'URL'
+        # origin_url_label: 'Origin url (from where you found that entry)'
         save_label: 'Guardar'
     public:
         shared_by_wallabag: "Este artículo se ha compartido con <a href='%wallabag_instance%'>wallabag</a>"

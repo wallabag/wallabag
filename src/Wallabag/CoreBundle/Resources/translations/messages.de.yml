@@ -233,6 +233,7 @@ entry:
         created_at: 'Erstellungsdatum'
         published_at: 'Erscheinungsdatum'
         published_by: 'Veröffentlicht von'
+        # provided_by: 'Provided by'
     new:
         page_title: 'Neuen Artikel speichern'
         placeholder: 'https://website.de'
@@ -244,6 +245,7 @@ entry:
         page_title: 'Eintrag bearbeiten'
         title_label: 'Titel'
         url_label: 'URL'
+        # origin_url_label: 'Origin url (from where you found that entry)'
         save_label: 'Speichern'
     public:
         shared_by_wallabag: 'Dieser Artikel wurde von %username% mittels <a href="%wallabag_instance%">wallabag</a> geteilt'

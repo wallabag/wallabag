@@ -233,6 +233,7 @@ entry:
         created_at: 'Data de creacion'
         published_at: 'Data de publicacion'
         published_by: 'Publicat per'
+        # provided_by: 'Provided by'
     new:
         page_title: 'Enregistrar un novèl article'
         placeholder: 'http://website.com'
@@ -244,6 +245,7 @@ entry:
         page_title: 'Modificar un article'
         title_label: 'Títol'
         url_label: 'Url'
+        # origin_url_label: 'Origin url (from where you found that entry)'
         save_label: 'Enregistrar'
     public:
         shared_by_wallabag: "Aqueste article es estat partejat per <a href='%wallabag_instance%'>wallabag</a>"

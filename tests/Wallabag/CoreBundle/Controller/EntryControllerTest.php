@@ -475,6 +475,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $data = [
             'entry[title]' => 'My updated title hehe :)',
+            'entry[origin_url]' => 'https://example.io',
         ];
 
         $client->submit($form, $data);
@@ -483,8 +484,43 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('div[id=article] h1')->extract(['_text']));
-        $this->assertContains('My updated title hehe :)', $alert[0]);
+        $this->assertGreaterThan(1, $title = $crawler->filter('div[id=article] h1')->extract(['_text']));
+        $this->assertContains('My updated title hehe :)', $title[0]);
+        $this->assertGreaterThan(1, $stats = $crawler->filter('div[class=tools] ul[class=stats] li a[class=tool]')->extract(['_text']));
+        $this->assertContains('example.io', trim($stats[1]));
+    }
+
+    public function testEditRemoveOriginUrl()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+
+        $crawler = $client->request('GET', '/edit/' . $entry->getId());
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('button[type=submit]')->form();
+
+        $data = [
+            'entry[title]' => 'My updated title hehe :)',
+            'entry[origin_url]' => '',
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+
+        $this->assertGreaterThan(1, $title = $crawler->filter('div[id=article] h1')->extract(['_text']));
+        $this->assertContains('My updated title hehe :)', $title[0]);
+        $this->assertSame(1, count($stats = $crawler->filter('div[class=tools] ul[class=stats] li a[class=tool]')->extract(['_text'])));
+        $this->assertNotContains('example.io', trim($stats[0]));
     }
 
     public function testToggleArchive()

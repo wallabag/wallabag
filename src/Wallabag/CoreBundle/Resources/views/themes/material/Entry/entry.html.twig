@@ -125,7 +125,7 @@
                     {% endif %}
                     {% if craue_setting('share_shaarli') %}
                         <li>
-                        <a href="{{ craue_setting('shaarli_url') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|striptags|url_encode }}&amp;tags={{ entry.tags|join(',')|striptags|url_encode }}" target="_blank" title="shaarli" class="tool icon-image shaarli">
+                        <a href="{{ craue_setting('shaarli_url') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|striptags|url_encode }}&amp;tags={{ entry.tags|join(',')|striptags|url_encode }}&amp;lf_original_url={{ entry.originUrl|url_encode }}" target="_blank" title="shaarli" class="tool icon-image shaarli">
                                 <span>shaarli</span>
                             </a>
                         </li>
@@ -249,6 +249,14 @@
                         <i class="material-icons link">comment</i>
                         {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}
                     </li>
+                    {% if entry.originUrl is not empty %}
+                        <li>
+                            <i class="material-icons" title="{{ 'entry.view.provided_by'|trans }}">launch</i>
+                            <a href="{{ entry.originUrl|e }}" target="_blank" class="tool">
+                                {{ entry.originUrl|striptags|removeSchemeAndWww|truncate(32) }}
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
                 <ul class="tags">
                     {% for tag in entry.tags %}
