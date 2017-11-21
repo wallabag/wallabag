@@ -40,7 +40,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 'language' => '',
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, false);
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://user@:80');
 
@@ -51,7 +51,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($entry->getMimetype());
         $this->assertEmpty($entry->getLanguage());
         $this->assertSame(0.0, $entry->getReadingTime());
-        $this->assertSame(null, $entry->getDomainName());
+        $this->assertNull($entry->getDomainName());
     }
 
     public function testWithEmptyContent()
@@ -75,7 +75,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 'language' => '',
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, false);
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
@@ -115,7 +115,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 ],
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, false);
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://domain.io');
 
@@ -157,7 +157,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 ],
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, false);
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
@@ -199,7 +199,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 ],
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, false);
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
@@ -241,7 +241,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 'status' => '200',
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $validator, $this->getLogger(), $this->fetchingErrorMessage, false);
+        $proxy = new ContentProxy($graby, $tagger, $validator, $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
@@ -290,7 +290,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 ],
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $validator, $this->getLogger(), $this->fetchingErrorMessage, false);
+        $proxy = new ContentProxy($graby, $tagger, $validator, $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
@@ -311,7 +311,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, false);
+        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, true);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -341,6 +341,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('Jeremy', $entry->getPublishedBy());
         $this->assertContains('Nico', $entry->getPublishedBy());
         $this->assertContains('Thomas', $entry->getPublishedBy());
+        $this->assertNotNull($entry->getHeaders(), 'Headers are stored, so value is not null');
         $this->assertContains('no-cache', $entry->getHeaders());
     }
 
@@ -353,7 +354,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $logger, $this->fetchingErrorMessage, false);
+        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $logger, $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -388,7 +389,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $handler = new TestHandler();
         $logger->pushHandler($handler);
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $logger, $this->fetchingErrorMessage, false);
+        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $logger, $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -425,7 +426,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
             ->method('tag')
             ->will($this->throwException(new \Exception()));
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, false);
+        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -465,7 +466,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, false);
+        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -517,7 +518,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
                 'open_graph' => [],
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, false);
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 

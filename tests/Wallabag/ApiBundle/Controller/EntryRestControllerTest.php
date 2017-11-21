@@ -855,7 +855,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertSame(false, $content['exists']);
+        $this->assertFalse($content['exists']);
     }
 
     public function testGetEntriesExistsWithNoUrl()

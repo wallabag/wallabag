@@ -68,7 +68,7 @@ class GrabySiteConfigBuilderTest extends \PHPUnit_Framework_TestCase
         $config = $this->builder->buildForHost('www.example.com');
 
         $this->assertSame('example.com', $config->getHost());
-        $this->assertSame(true, $config->requiresLogin());
+        $this->assertTrue($config->requiresLogin());
         $this->assertSame('http://www.example.com/login', $config->getLoginUri());
         $this->assertSame('login', $config->getUsernameField());
         $this->assertSame('password', $config->getPasswordField());
