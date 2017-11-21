@@ -31,6 +31,7 @@ class Version20171008195606 extends AbstractMigration implements ContainerAwareI
 
         switch ($this->connection->getDatabasePlatform()->getName()) {
             case 'mysql':
+                $this->addSql('UPDATE ' . $this->getTable('entry') . ' SET reading_time = 0 WHERE reading_time IS NULL;');
                 $this->addSql('ALTER TABLE ' . $this->getTable('entry') . ' CHANGE reading_time reading_time INT(11) NOT NULL;');
                 break;
             case 'postgresql':
