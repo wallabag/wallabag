@@ -12,6 +12,8 @@ export_xml: Activer l'export XML
 import_with_rabbitmq: Activer RabbitMQ pour gérer les imports de façon asynchrone
 import_with_redis: Activer Redis pour gérer les imports de façon asynchrone
 shaarli_url: URL de Shaarli, si le service Shaarli est activé
+scuttle_url: URL de Scuttle, si le service Scuttle est activé
+unmark_url: URL de Unmark, si le service Unmark est activé
 share_diaspora: Activer le partage vers Diaspora
 share_mail: Activer le partage par email
 share_shaarli: Activer le partage vers Shaarli
@@ -34,3 +36,4 @@ share_public: Autoriser une URL publique pour les articles
 download_images_enabled: Télécharger les images en local
 restricted_access: Activer l'authentification pour les articles derrière un paywall
 api_user_registration: Activer la création de compte depuis l'API
+store_article_headers: Activer le stockage des en-têtes HTTP de chaque article

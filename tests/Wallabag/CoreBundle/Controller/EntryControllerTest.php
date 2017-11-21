@@ -137,6 +137,8 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
+        $client->getContainer()->get('craue_config')->set('store_article_headers', 1);
+
         $crawler = $client->request('GET', '/new');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
@@ -165,6 +167,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame('2015-03-28 11:43:19', $content->getPublishedAt()->format('Y-m-d H:i:s'));
         $this->assertSame('Morgane Tual', $author[0]);
         $this->assertArrayHasKey('x-varnish1', $content->getHeaders());
+        $client->getContainer()->get('craue_config')->set('store_article_headers', 0);
     }
 
     public function testPostWithMultipleAuthors()

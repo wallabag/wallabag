@@ -311,7 +311,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, true);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -341,6 +341,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('Jeremy', $entry->getPublishedBy());
         $this->assertContains('Nico', $entry->getPublishedBy());
         $this->assertContains('Thomas', $entry->getPublishedBy());
+        $this->assertNotNull($entry->getHeaders(), 'Headers are stored, so value is not null');
         $this->assertContains('no-cache', $entry->getHeaders());
     }
 

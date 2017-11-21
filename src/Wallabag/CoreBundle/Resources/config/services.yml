@@ -94,6 +94,7 @@ services:
             - "@validator"
             - "@logger"
             - '%wallabag_core.fetching_error_message%'
+            - '@=service(''craue_config'').get(''store_article_headers'')'
 
     wallabag_core.tags_assigner:
         class: Wallabag\CoreBundle\Helper\TagsAssigner
