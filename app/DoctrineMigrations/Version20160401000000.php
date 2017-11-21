@@ -6,7 +6,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Initial database structure
+ * Initial database structure.
  */
 class Version20160401000000 extends AbstractMigration
 {
@@ -22,7 +22,7 @@ class Version20160401000000 extends AbstractMigration
 
         switch ($this->connection->getDatabasePlatform()->getName()) {
             case 'sqlite':
-                $sql = <<<SQL
+                $sql = <<<'SQL'
 CREATE TABLE wallabag_craue_config_setting (name VARCHAR(255) NOT NULL, value VARCHAR(255) DEFAULT NULL, section VARCHAR(255) DEFAULT NULL, PRIMARY KEY(name));
 CREATE UNIQUE INDEX UNIQ_5D9649505E237E06 ON wallabag_craue_config_setting (name);
 CREATE TABLE "wallabag_tagging_rule" (id INTEGER NOT NULL, config_id INTEGER DEFAULT NULL, rule VARCHAR(255) NOT NULL, tags CLOB NOT NULL, PRIMARY KEY(id), CONSTRAINT FK_2D9B3C5424DB0683 FOREIGN KEY (config_id) REFERENCES "wallabag_config" (id) NOT DEFERRABLE INITIALLY IMMEDIATE);
@@ -65,7 +65,7 @@ SQL
 
                 break;
             case 'mysql':
-                $sql = <<<SQL
+                $sql = <<<'SQL'
 CREATE TABLE wallabag_craue_config_setting (name VARCHAR(255) NOT NULL, value VARCHAR(255) DEFAULT NULL, section VARCHAR(255) DEFAULT NULL, UNIQUE INDEX UNIQ_5D9649505E237E06 (name), PRIMARY KEY(name)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
 CREATE TABLE `wallabag_entry` (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, title LONGTEXT DEFAULT NULL, url LONGTEXT DEFAULT NULL, is_archived TINYINT(1) NOT NULL, is_starred TINYINT(1) NOT NULL, content LONGTEXT DEFAULT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, mimetype LONGTEXT DEFAULT NULL, language LONGTEXT DEFAULT NULL, reading_time INT DEFAULT NULL, domain_name LONGTEXT DEFAULT NULL, preview_picture LONGTEXT DEFAULT NULL, is_public TINYINT(1) DEFAULT '0', INDEX IDX_F4D18282A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
 CREATE TABLE wallabag_entry_tag (entry_id INT NOT NULL, tag_id INT NOT NULL, INDEX IDX_C9F0DD7CBA364942 (entry_id), INDEX IDX_C9F0DD7CBAD26311 (tag_id), PRIMARY KEY(entry_id, tag_id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
@@ -97,9 +97,8 @@ SQL
                     $this->addSql($query);
                 }
                 break;
-
             case 'postgresql':
-                $sql = <<<SQL
+                $sql = <<<'SQL'
 CREATE TABLE wallabag_craue_config_setting (name VARCHAR(255) NOT NULL, value VARCHAR(255) DEFAULT NULL, section VARCHAR(255) DEFAULT NULL, PRIMARY KEY(name));
 CREATE UNIQUE INDEX UNIQ_5D9649505E237E06 ON wallabag_craue_config_setting (name);
 CREATE TABLE "wallabag_entry" (id INT NOT NULL, user_id INT DEFAULT NULL, title TEXT DEFAULT NULL, url TEXT DEFAULT NULL, is_archived BOOLEAN NOT NULL, is_starred BOOLEAN NOT NULL, content TEXT DEFAULT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, mimetype TEXT DEFAULT NULL, language TEXT DEFAULT NULL, reading_time INT DEFAULT NULL, domain_name TEXT DEFAULT NULL, preview_picture TEXT DEFAULT NULL, is_public BOOLEAN DEFAULT 'false', PRIMARY KEY(id));
