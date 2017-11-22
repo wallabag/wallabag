@@ -8,6 +8,20 @@ use Wallabag\CoreBundle\Entity\SiteCredential;
 
 class SiteCredentialControllerTest extends WallabagCoreTestCase
 {
+    public function testAccessDeniedBecauseFeatureDisabled()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $client->getContainer()->get('craue_config')->set('restricted_access', 0);
+
+        $client->request('GET', '/site-credentials/');
+
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
+
+        $client->getContainer()->get('craue_config')->set('restricted_access', 1);
+    }
+
     public function testListSiteCredential()
     {
         $this->logInAs('admin');
