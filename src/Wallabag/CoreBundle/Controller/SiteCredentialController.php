@@ -24,6 +24,8 @@ class SiteCredentialController extends Controller
      */
     public function indexAction()
     {
+        $this->isSiteCredentialsEnabled();
+
         $credentials = $this->get('wallabag_core.site_credential_repository')->findByUser($this->getUser());
 
         return $this->render('WallabagCoreBundle:SiteCredential:index.html.twig', [
@@ -43,6 +45,8 @@ class SiteCredentialController extends Controller
      */
     public function newAction(Request $request)
     {
+        $this->isSiteCredentialsEnabled();
+
         $credential = new SiteCredential($this->getUser());
 
         $form = $this->createForm('Wallabag\CoreBundle\Form\Type\SiteCredentialType', $credential);
@@ -83,6 +87,8 @@ class SiteCredentialController extends Controller
      */
     public function editAction(Request $request, SiteCredential $siteCredential)
     {
+        $this->isSiteCredentialsEnabled();
+
         $this->checkUserAction($siteCredential);
 
         $deleteForm = $this->createDeleteForm($siteCredential);
@@ -125,6 +131,8 @@ class SiteCredentialController extends Controller
      */
     public function deleteAction(Request $request, SiteCredential $siteCredential)
     {
+        $this->isSiteCredentialsEnabled();
+
         $this->checkUserAction($siteCredential);
 
         $form = $this->createDeleteForm($siteCredential);
@@ -142,6 +150,16 @@ class SiteCredentialController extends Controller
         }
 
         return $this->redirectToRoute('site_credentials_index');
+    }
+
+    /**
+     * Throw a 404 if the feature is disabled.
+     */
+    private function isSiteCredentialsEnabled()
+    {
+        if (!$this->get('craue_config')->get('restricted_access')) {
+            throw $this->createNotFoundException('Feature "restricted_access" is disabled, controllers too.');
+        }
     }
 
     /**
