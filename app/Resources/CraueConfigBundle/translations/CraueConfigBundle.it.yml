@@ -37,3 +37,4 @@ demo_mode_username: "Utente Demo"
 # restricted_access: Enable authentication for websites with paywall
 api_user_registration: Abilita la registrazione dell'utente attraverso l'API
 # store_article_headers: Enable if wallabag stores HTTP headers for each article
+# shaarli_share_origin_url: Enable sharing origin url to Shaarli, if the service is enabled

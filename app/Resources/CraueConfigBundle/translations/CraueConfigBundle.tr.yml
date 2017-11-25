@@ -38,3 +38,4 @@
 # restricted_access: Enable authentication for websites with paywall
 # api_user_registration: Enable user to be registered using the API
 # store_article_headers: Enable if wallabag stores HTTP headers for each article
+# shaarli_share_origin_url: Enable sharing origin url to Shaarli, if the service is enabled

@@ -34,3 +34,4 @@ share_public: ยอมรับ URL สาธารณะจากการเ�
 download_images_enabled: ดาวน์โหลดรูปภาพเฉพาะ
 restricted_access: เปิดใช้งานการรองรับบนเว็บไซต์กับ paywall
 api_user_registration: เปิดใช้งานให้ผู้ใช้ลงทะเบียนการใช้ API
+# shaarli_share_origin_url: Enable sharing origin url to Shaarli, if the service is enabled

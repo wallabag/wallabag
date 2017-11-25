@@ -158,6 +158,10 @@ wallabag_core:
             name: store_article_headers
             value: 0
             section: entry
+        -
+            name: shaarli_share_origin_url
+            value: 0
+            section: entry
 
 wallabag_user:
     registration_enabled: "%fosuser_registration%"
