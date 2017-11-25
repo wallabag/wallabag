@@ -1,0 +1,11 @@
+# Two factor mail
+auth_code:
+    on: 'on'
+    mailer:
+        subject: 'การรองรับ wallabag code'
+        body:
+            hello: "สวัสดี %user%,"
+            first_para: "ตั้งแต่ที่คุณเปิดใช้งาน two factor authentication บนบัญชี wallabag ของคุณ และ คุณได้ทำการลงชื่อเข้าใช้จากอุปกรณ์ใหม่ (คอมพิวเตอร์, มือถือ, etc.), พวกเราจะส่ง code ให้คุณเพื่อตรวจสอบการเชื่อมต่อ"
+            second_para: "ที่นี้เป็น code:"
+            support: "ไม่ต้องรอการติดต่อจากพวกเราถ้าคุณมีปัญหา:"
+            signature: "ทีม wallabag"
