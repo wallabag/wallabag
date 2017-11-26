@@ -502,6 +502,14 @@ class EntryController extends Controller
             $message = 'flashes.entry.notice.' . $prefixMessage . '_failed';
         }
 
+        if (empty($entry->getDomainName())) {
+            $this->get('wallabag_core.content_proxy')->setEntryDomainName($entry);
+        }
+
+        if (empty($entry->getTitle())) {
+            $this->get('wallabag_core.content_proxy')->setDefaultEntryTitle($entry);
+        }
+
         $this->get('session')->getFlashBag()->add('notice', $message);
     }
 

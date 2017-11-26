@@ -381,6 +381,14 @@ class EntryRestController extends WallabagRestController
             }
         }
 
+        if (empty($entry->getDomainName())) {
+            $this->get('wallabag_core.content_proxy')->setEntryDomainName($entry);
+        }
+
+        if (empty($entry->getTitle())) {
+            $this->get('wallabag_core.content_proxy')->setDefaultEntryTitle($entry);
+        }
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($entry);
         $em->flush();
@@ -488,6 +496,14 @@ class EntryRestController extends WallabagRestController
 
         if (!empty($data['origin_url'])) {
             $entry->setOriginUrl($data['origin_url']);
+        }
+
+        if (empty($entry->getDomainName())) {
+            $this->get('wallabag_core.content_proxy')->setEntryDomainName($entry);
+        }
+
+        if (empty($entry->getTitle())) {
+            $this->get('wallabag_core.content_proxy')->setDefaultEntryTitle($entry);
         }
 
         $em = $this->getDoctrine()->getManager();

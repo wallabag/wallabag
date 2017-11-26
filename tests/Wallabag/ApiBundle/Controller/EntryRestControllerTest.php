@@ -501,6 +501,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
             $content = json_decode($this->client->getResponse()->getContent(), true);
             $this->assertGreaterThan(0, $content['id']);
             $this->assertSame('http://www.example.com/', $content['url']);
+            $this->assertSame('www.example.com', $content['domain_name']);
+            $this->assertSame('www.example.com', $content['title']);
         } finally {
             // Remove the created entry to avoid side effects on other tests
             if (isset($content['id'])) {
