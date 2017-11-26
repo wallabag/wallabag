@@ -37,3 +37,4 @@ download_images_enabled: Telecargar los imatges en local
 restricted_access: Activar l'autenticacion pels sites amb peatge
 api_user_registration: Autorizar los utilizaires a se marcar amb l'API
 # store_article_headers: Enable if wallabag stores HTTP headers for each article
+# shaarli_share_origin_url: Enable sharing origin url to Shaarli, if the service is enabled
