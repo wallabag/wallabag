@@ -6,6 +6,7 @@ use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\SiteCredential;
+use Wallabag\CoreBundle\Helper\ContentProxy;
 
 class EntryControllerTest extends WallabagCoreTestCase
 {
@@ -1428,5 +1429,53 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame('Crimes et réformes aux Philippines', $content->getTitle());
 
         $client->getContainer()->get('craue_config')->set('restricted_access', 0);
+    }
+
+    public function testPostEntryWhenFetchFails()
+    {
+        $url = 'http://example.com/papers/email_tracking.pdf';
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $container = $client->getContainer();
+        $contentProxy = $this->getMockBuilder(ContentProxy::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['updateEntry'])
+            ->getMock();
+        $contentProxy->expects($this->any())
+            ->method('updateEntry')
+            ->willThrowException(new \Exception('Test Fetch content fails'));
+
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => $url,
+        ];
+
+        /**
+         * We generate a new client to be able to use Mock ContentProxy
+         * Also we reinject the cookie from the previous client to keep the
+         * session.
+         */
+        $cookie = $client->getCookieJar()->all();
+        $client = $this->getNewClient();
+        $client->getCookieJar()->set($cookie[0]);
+        $client->getContainer()->set('wallabag_core.content_proxy', $contentProxy);
+        $client->submit($form, $data);
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($url, $this->getLoggedInUserId());
+
+        $authors = $content->getPublishedBy();
+        $this->assertSame('email_tracking.pdf', $content->getTitle());
+        $this->assertSame('example.com', $content->getDomainName());
     }
 }
