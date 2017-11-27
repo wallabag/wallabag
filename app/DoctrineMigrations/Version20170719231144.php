@@ -42,12 +42,13 @@ class Version20170719231144 extends AbstractMigration implements ContainerAwareI
             $label = $duplicates['LOWER(label)'];
 
             // Retrieve all duplicate tags for a given tag
-            $tags = $this->connection->query('
+            $tags = $this->connection->createQuery('
                 SELECT id
                 FROM   ' . $this->getTable('tag') . "
-                WHERE  LOWER(label) = '" . $label . "'
+                WHERE  LOWER(label) = :label
                 ORDER BY id ASC"
             );
+            $tags->setParameter('label', $label);
             $tags->execute();
 
             $first = true;
