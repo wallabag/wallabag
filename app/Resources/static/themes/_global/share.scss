@@ -380,6 +380,14 @@ tbody {
   border-width: 1px 0;
 }
 
+figure {
+  text-align: center;
+}
+
+figure > * {
+  margin: 0 auto;
+}
+
 header {
   text-align: center;
 }
