@@ -2,6 +2,7 @@
     {% if form_errors(form) %}
         <span class="black-text">{{ form_errors(form) }}</span>
     {% endif %}
+    <button type="submit" class="new-entry-button"><i class="material-icons add">add</i></button>
 
     {% if form_errors(form.url) %}
         <span class="black-text">{{ form_errors(form.url) }}</span>

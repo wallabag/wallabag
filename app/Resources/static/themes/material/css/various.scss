@@ -21,6 +21,17 @@ div.settings div.file-field {
 
 nav .input-field input {
   margin: 0;
+  padding-left: 0.5rem;
+}
+
+.new-entry-button {
+  padding: 0 1rem;
+  background-color: transparent;
+  border: none;
+
+  &:focus {
+    background-color: inherit;
+  }
 }
 
 .tabs {
