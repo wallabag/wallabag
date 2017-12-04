@@ -1,6 +1,9 @@
+<!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
         <title>{{ entry.title|e|raw }}</title>
+        <meta name="viewport" content="initial-scale=1.0">
         <meta property="og:title" content="{{ entry.title|e|raw }}" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="{{ app.request.uri }}" />
@@ -22,16 +25,15 @@
 
     </head>
     <body>
-        <header>
+        <header class="block">
             <h1>{{ entry.title|e|raw }}</h1>
-            <div><a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e|raw }}" class="tool">{{ entry.domainName|removeWww }}</a></div>
-            <div>{{ "entry.public.shared_by_wallabag"|trans({'%wallabag_instance%': url('homepage'), '%username%': entry.user.username})|raw }}.</div>
-
+            <a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e|raw }}" class="tool">{{ entry.domainName|removeWww }}</a>
+            <p class="shared-by">{{ "entry.public.shared_by_wallabag"|trans({'%wallabag_instance%': url('homepage'), '%username%': entry.user.username})|raw }}.</p>
             {% if entry.previewPicture is not null %}
-                <div><img class="preview" src="{{ entry.previewPicture }}" alt="{{ entry.title|striptags|e('html_attr') }}" /></div>
+                <img class="preview" src="{{ entry.previewPicture }}" alt="{{ entry.title|striptags|e('html_attr') }}" />
             {% endif %}
         </header>
-        <article>
+        <article class="block">
             {{ entry.content | raw }}
         </article>
     </body>
