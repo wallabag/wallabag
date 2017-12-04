@@ -21,8 +21,8 @@
 {% block content %}
     {% set listMode = app.user.config.listMode %}
     {% set currentRoute = app.request.attributes.get('_route') %}
-    <div class="results clearfix">
-        <div class="nb-results left">
+    <div class="results">
+        <div class="nb-results">
             {{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}
             <a href="{{ path('switch_view_mode') }}"><i class="material-icons">{% if listMode == 0 %}view_list{% else %}view_module{% endif %}</i></a>
             {% if app.user.config.rssToken %}
@@ -34,7 +34,6 @@
         {% endif %}
     </div>
 
-    <br />
     <ul class="{% if listMode == 1 %}collection{% else %}row data{% endif %}">
         {% for entry in entries %}
             <li id="entry-{{ entry.id|e }}" class="col {% if listMode == 0 %}l3 m6{% else %}collection-item{% endif %} s12">
@@ -52,7 +51,9 @@
     </ul>
 
     {% if entries.getNbPages > 1 %}
-        {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+        <div class="results">
+            {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+        </div>
     {% endif %}
 
     <!-- Export -->

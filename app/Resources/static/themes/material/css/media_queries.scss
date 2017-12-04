@@ -8,6 +8,10 @@
   footer {
     padding-left: 240px;
   }
+
+  .pagination {
+    margin-left: auto;
+  }
 }
 
 @media only screen and (max-width: 992px) {
@@ -16,10 +20,6 @@
   footer,
   nav {
     padding-left: 0;
-  }
-
-  .pagination {
-    width: auto;
   }
 
   .nav-panels .action {
@@ -62,9 +62,13 @@
     display: none;
   }
 
-  .pagination li.prev,
-  .pagination li.next {
-    width: auto;
+  .pagination li {
+    margin-bottom: 0.5rem;
+
+    &.prev,
+    &.next {
+      width: auto;
+    }
   }
 
   .drag-target + .drag-target {
