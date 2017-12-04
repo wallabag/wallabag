@@ -43,10 +43,12 @@
     padding: 0;
   }
 
+  span,
   a {
     padding: 0 10px;
     height: 30px;
     display: block;
+    line-height: 30px;
   }
 
   .disabled {
