@@ -12,12 +12,10 @@
 }
 
 .results {
-  height: 1em;
-
-  .nb-results,
-  .pagination {
-    margin: 15px 15px 0;
-  }
+  display: flex;
+  padding: 1rem 1rem 0;
+  flex-wrap: wrap;
+  justify-content: space-between;
 
   .nb-results {
     display: inline-flex;
@@ -29,10 +27,11 @@
 }
 
 .pagination {
-  float: right;
-
   ul {
-    margin: 0 !important;
+    display: flex;
+    margin: 0;
+    flex-wrap: wrap;
+    justify-content: space-around;
 
     .prev.disabled,
     .next.disabled {
@@ -44,10 +43,12 @@
     padding: 0;
   }
 
+  span,
   a {
     padding: 0 10px;
     height: 30px;
     display: block;
+    line-height: 30px;
   }
 
   .disabled {
