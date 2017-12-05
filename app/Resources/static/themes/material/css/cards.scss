@@ -73,20 +73,6 @@ main {
     white-space: nowrap;
   }
 
-  .card-entry-labels-hidden li {
-    display: inline-block;
-    background-color: $blueAccentColor;
-    margin: 0 5px;
-    padding: 5px 12px;
-    border-radius: 3px;
-    color: #fff;
-    max-height: 2em;
-    max-width: calc(100% - 15px);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
   .card-content .estimatedTime {
     margin-bottom: 10px;
   }
