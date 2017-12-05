@@ -12,10 +12,10 @@
     <div class="row">
         <ul class="card-tag-labels">
             {% for tag in tags %}
-                <li title="{{tag.label}} ({{ tag.nbEntries }})" id="tag-{{ tag.id }}" class="col l2 m2 s5">
-                    <a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{tag.label}} ({{ tag.nbEntries }})</a>
+                <li title="{{tag.label}} ({{ tag.nbEntries }})" id="tag-{{ tag.id }}">
+                    <a href="{{ path('tag_entries', {'slug': tag.slug}) }}" class="card-tag-link">{{tag.label}} ({{ tag.nbEntries }})</a>
                     {% if app.user.config.rssToken %}
-                        <a rel="alternate" type="application/rss+xml" href="{{ path('tag_rss', {'username': app.user.username, 'token': app.user.config.rssToken, 'slug': tag.slug}) }}" class="right"><i class="material-icons">rss_feed</i></a>
+                        <a rel="alternate" type="application/rss+xml" href="{{ path('tag_rss', {'username': app.user.username, 'token': app.user.config.rssToken, 'slug': tag.slug}) }}" class="card-tag-rss"><i class="material-icons">rss_feed</i></a>
                     {% endif %}
                 </li>
             {% endfor %}

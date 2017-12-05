@@ -160,10 +160,17 @@ a.original:not(.waves-effect) {
   border-radius: 0 3px 3px 0;
   color: #fff;
   cursor: default;
-  max-height: 2em;
-  overflow: hidden;
+}
+
+.card-entry-labels li {
   text-overflow: ellipsis;
   white-space: nowrap;
+  overflow: hidden;
+}
+
+.card-tag-labels li {
+  display: flex;
+  justify-content: space-between;
 }
 
 .card-entry-tags a,
@@ -174,6 +181,33 @@ a.original:not(.waves-effect) {
   text-decoration: none;
   font-weight: normal;
   color: #fff;
+}
+
+.card-tag-labels a {
+  height: 100%;
+  align-items: center;
+}
+
+.card-tag-link {
+  display: flex;
+  min-width: 100px;
+  flex-grow: 1;
+}
+
+.card-tag-rss {
+  display: flex;
+}
+
+.card-tag-labels {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-tag-labels li {
+  margin: 10px;
+  flex-basis: 19%;
+  flex-grow: 1;
+  align-items: center;
 }
 
 .card-stacked {
@@ -244,4 +278,10 @@ a.original:not(.waves-effect) {
 
 .settings .div_tabs {
   padding-bottom: 15px;
+}
+
+@media only screen and (min-width: 992px) {
+  .card-tag-labels li {
+    max-width: 50%;
+  }
 }
