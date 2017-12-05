@@ -143,7 +143,7 @@ a.original:not(.waves-effect) {
   margin: 10px 10px 10px auto;
   padding: 5px 12px 5px 16px !important;
   background-color: $blueAccentColor;
-  border-radius: 0 3px 3px 0;
+  border-radius: 3px;
   color: #fff;
   cursor: default;
 }
@@ -151,6 +151,7 @@ a.original:not(.waves-effect) {
 .card-entry-labels li {
   text-overflow: ellipsis;
   white-space: nowrap;
+  border-radius: 0 3px 3px 0;
   overflow: hidden;
 }
 
