@@ -64,13 +64,8 @@
   }
 }
 
-.page-footer .footer-copyright {
-  p {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    display: block;
-  }
+.footer-text {
+  margin: 0.7rem 0.5rem;
 }
 
 .hidden {

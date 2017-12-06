@@ -140,13 +140,13 @@
         <div class="footer-copyright">
             <div class="container">
                 <div class="row">
-                    <div class="col m12 l8 hide-on-small-only">
-                        <p title="{{ display_stats() | raw | striptags }}">
+                    <div class="col m12 l8">
+                        <p class="footer-text" title="{{ display_stats() | raw | striptags }}">
                             {{ display_stats() }}
                         </p>
                     </div>
                     <div class="col s12 l4">
-                        <p>
+                        <p class="footer-text">
                             {{ 'footer.wallabag.powered_by'|trans }} <a target="_blank" href="https://wallabag.org" class="grey-text text-lighten-4">wallabag</a> –
                             <a class="grey-text text-lighten-4" href="{{ path('about') }}">{{ 'footer.wallabag.about'|trans|lower }}</a>
                         </p>
