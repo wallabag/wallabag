@@ -2,10 +2,13 @@
 /* ==========================================================================
    Nav
    ========================================================================== */
+nav,
+.nav-wrapper {
+  height: auto;
+  line-height: initial;
+}
 
 nav {
-  height: auto;
-
   input {
     color: #aaa;
   }
@@ -17,13 +20,23 @@ nav {
 
 .nav-wrapper {
   display: flex;
+  padding: 0.6rem 0.4rem 0.6rem 0.75rem;
   flex-wrap: wrap;
   justify-content: space-between;
-  min-height: 64px;
+  align-items: center;
 
   .button-collapse {
-    padding: 0 15px;
+    margin-left: 0;
+    margin-right: 0.5rem;
+    padding: 0 0.5rem;
+    height: auto;
+    line-height: 1;
   }
+}
+
+nav .nav-wrapper i {
+  height: 46px;
+  line-height: 46px;
 }
 
 .nav-input {
@@ -34,10 +47,6 @@ nav {
   display: flex;
   flex-grow: 1;
   justify-content: flex-end;
-
-  li {
-    max-height: 64px;
-  }
 }
 
 .nav-panel-add .add,
@@ -50,9 +59,8 @@ nav {
   transition: background 0.2s ease;
 
   .action {
-    padding-left: 0.75rem;
+    margin: 0;
     font-size: 2.1rem;
-    white-space: nowrap;
   }
 
   .input-field input {
@@ -69,6 +77,11 @@ nav {
     box-shadow: none;
     color: #444;
   }
+}
+
+.nav-panel-top {
+  display: flex;
+  align-items: center;
 }
 
 .input-field {
