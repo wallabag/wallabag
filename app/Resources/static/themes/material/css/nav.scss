@@ -31,6 +31,8 @@ nav {
     padding: 0 0.5rem;
     height: auto;
     line-height: 1;
+    background-color: transparent;
+    border: none;
   }
 }
 
@@ -121,4 +123,10 @@ nav .nav-wrapper i {
 
 #button_export {
   display: none;
+}
+
+@media (min-width: 993px) {
+  .button-collapse {
+    display: none;
+  }
 }
