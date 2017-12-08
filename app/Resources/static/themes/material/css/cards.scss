@@ -73,20 +73,6 @@ main {
     white-space: nowrap;
   }
 
-  .card-entry-labels-hidden li {
-    display: inline-block;
-    background-color: $blueAccentColor;
-    margin: 0 5px;
-    padding: 5px 12px;
-    border-radius: 3px;
-    color: #fff;
-    max-height: 2em;
-    max-width: calc(100% - 15px);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
   .card-content .estimatedTime {
     margin-bottom: 10px;
   }
@@ -157,13 +143,21 @@ a.original:not(.waves-effect) {
   margin: 10px 10px 10px auto;
   padding: 5px 12px 5px 16px !important;
   background-color: $blueAccentColor;
-  border-radius: 0 3px 3px 0;
+  border-radius: 3px;
   color: #fff;
   cursor: default;
-  max-height: 2em;
-  overflow: hidden;
+}
+
+.card-entry-labels li {
   text-overflow: ellipsis;
   white-space: nowrap;
+  border-radius: 0 3px 3px 0;
+  overflow: hidden;
+}
+
+.card-tag-labels li {
+  display: flex;
+  justify-content: space-between;
 }
 
 .card-entry-tags a,
@@ -174,6 +168,33 @@ a.original:not(.waves-effect) {
   text-decoration: none;
   font-weight: normal;
   color: #fff;
+}
+
+.card-tag-labels a {
+  height: 100%;
+  align-items: center;
+}
+
+.card-tag-link {
+  display: flex;
+  min-width: 100px;
+  flex-grow: 1;
+}
+
+.card-tag-rss {
+  display: flex;
+}
+
+.card-tag-labels {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-tag-labels li {
+  margin: 10px;
+  flex-basis: 19%;
+  flex-grow: 1;
+  align-items: center;
 }
 
 .card-stacked {
@@ -244,4 +265,10 @@ a.original:not(.waves-effect) {
 
 .settings .div_tabs {
   padding-bottom: 15px;
+}
+
+@media only screen and (min-width: 992px) {
+  .card-tag-labels li {
+    max-width: 50%;
+  }
 }
