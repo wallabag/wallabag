@@ -77,7 +77,7 @@ class UserRestController extends WallabagRestController
             $view->setFormat('json');
 
             // handle errors in a more beautiful way than the default view
-            $data = json_decode($this->handleView($view)->getContent(), true)['children'];
+            $data = json_decode($this->handleView($view)->getContent(), true)['errors']['children'];
             $errors = [];
 
             if (isset($data['username']['errors'])) {
