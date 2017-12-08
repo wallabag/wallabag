@@ -64,17 +64,8 @@
   }
 }
 
-.page-footer .footer-copyright {
-  min-width: 50px;
-  height: auto !important;
-  line-height: 1em !important;
-
-  p {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    display: block;
-  }
+.footer-text {
+  margin: 0.7rem 0.5rem;
 }
 
 .hidden {
