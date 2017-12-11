@@ -11,7 +11,7 @@
             <link rel="next" href="{{ url }}?page={{ entries.nextPage }}"/>
         {% endif -%}
         <link rel="last" href="{{ url }}?page={{ entries.nbPages }}"/>
-        <pubDate>{{ "now"|date('D, d M Y H:i:s') }}</pubDate>
+        <pubDate>{{ "now"|date(constant('DATE_RSS')) }}</pubDate>
         <generator>wallabag</generator>
         <description>wallabag {{ type }} elements</description>
 
@@ -22,7 +22,7 @@
                 <source url="{{ url('view', { 'id': entry.id }) }}">wallabag</source>
                 <link>{{ entry.url }}</link>
                 <guid>{{ entry.url }}</guid>
-                <pubDate>{{ entry.createdAt|date('D, d M Y H:i:s') }}</pubDate>
+                <pubDate>{{ entry.createdAt|date(constant('DATE_RSS')) }}</pubDate>
                 <description>
                     <![CDATA[{%- if entry.readingTime > 0 -%}{{ 'entry.list.reading_time_minutes'|trans({'%readingTime%': entry.readingTime}) }}{%- else -%}{{ 'entry.list.reading_time_less_one_minute'|trans|raw }}{%- endif %}{{ entry.content|raw -}}]]>
                 </description>
