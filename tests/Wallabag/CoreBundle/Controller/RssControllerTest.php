@@ -61,6 +61,9 @@ class RssControllerTest extends WallabagCoreTestCase
             [
                 '/wallace/YZIOAUZIAO/archives.xml',
             ],
+            [
+                '/wallace/YZIOAUZIAO/all.xml',
+            ],
         ];
     }
 
@@ -139,6 +142,28 @@ class RssControllerTest extends WallabagCoreTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $this->validateDom($client->getResponse()->getContent(), 'archive', 'archive');
+    }
+
+    public function testAll()
+    {
+        $client = $this->getClient();
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUsername('admin');
+
+        $config = $user->getConfig();
+        $config->setRssToken('SUPERTOKEN');
+        $config->setRssLimit(null);
+        $em->persist($config);
+        $em->flush();
+
+        $client = $this->getClient();
+        $client->request('GET', '/admin/SUPERTOKEN/all.xml');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $this->validateDom($client->getResponse()->getContent(), 'all', 'all');
     }
 
     public function testPagination()
