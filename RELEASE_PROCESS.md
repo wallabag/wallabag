@@ -9,7 +9,7 @@ During this documentation, we assume the release is `$LAST_WALLABAG_RELEASE`.
 #### Files to edit
 
 - `app/config/wallabag.yml` (`wallabag_core.version`)
-- `CHANGELOG.md` (by using this command `github-changes -o wallabag -r wallabag -k YOURGITHUBTOKEN --only-pulls --use-commit-body --title Changelog --date-format YYYY/MM/DD --between-tags 2.0.0-alpha.0...master -n 2.1.3`. [github-changes is available here](https://github.com/lalitkapoor/github-changes))
+- `CHANGELOG.md`
 
 #### Create release on GitHub
 

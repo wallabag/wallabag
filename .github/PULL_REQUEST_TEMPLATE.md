@@ -7,6 +7,7 @@
 | Tests pass?   | yes/no
 | Documentation | yes/no
 | Translation   | yes/no
+| CHANGELOG.md  | yes/no
 | Fixed tickets | #...
 | License       | MIT
 
