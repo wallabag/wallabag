@@ -27,6 +27,7 @@
 - Isolated tests [#3137](https://github.com/wallabag/wallabag/pull/3137)
 - Log an error level message when user auth fail [#3195](https://github.com/wallabag/wallabag/pull/3195)
 - Add a real configuration for CS-Fixer [#3258](https://github.com/wallabag/wallabag/pull/3258)
+- Replace ant with Makefile [#3398](https://github.com/wallabag/wallabag/pull/3398)
 
 ### Features
 
@@ -47,6 +48,7 @@
 - Add **list users** command [#3301](https://github.com/wallabag/wallabag/pull/3301)
 - Add **reload entry** command [#3326](https://github.com/wallabag/wallabag/pull/3326)
 - Add starred_at field which is set when an entry is starred [#3330](https://github.com/wallabag/wallabag/pull/3330)
+- Add originUrl property to Entry [#3346](https://github.com/wallabag/wallabag/pull/3346)
 
 ### Changes
 
@@ -62,7 +64,8 @@
 - Displays an error with an annotation with a too long quote [#3093](https://github.com/wallabag/wallabag/pull/3093)
 - Validate language & preview picture fields [#3192](https://github.com/wallabag/wallabag/pull/3192)
 - remove craueconfig domain name setting and add a proper one in parameters [#3173](https://github.com/wallabag/wallabag/pull/3173)
-- Better public sharing page [#3204](https://github.com/wallabag/wallabag/pull/3204)
+- Better public sharing page [#3204](https://github.com/wallabag/wallabag/pull/3204), [#3449](https://github.com/wallabag/wallabag/pull/3449)
+- Improved pagination, navigation, tag's list and footer UI [#3459](https://github.com/wallabag/wallabag/pull/3459), [#3467](https://github.com/wallabag/wallabag/pull/3467), [#3461](https://github.com/wallabag/wallabag/pull/3461), [#3463](https://github.com/wallabag/wallabag/pull/3463)
 
 ### Fixes
 
@@ -77,6 +80,7 @@
 - Replace images with & in url [#3176](https://github.com/wallabag/wallabag/pull/3176)
 - Ignore tag's case [#3139](https://github.com/wallabag/wallabag/pull/3139)
 - Multiple tag search, which was broken from API [#3309](https://github.com/wallabag/wallabag/pull/3309)
+- In RSS feeds, pubDate now conformant to DateTime RFC822 specifications [#3471](https://github.com/wallabag/wallabag/pull/3471)
 
 ### Translations
 
