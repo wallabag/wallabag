@@ -19,7 +19,7 @@ dev: ## Install the latest dev version
 	@sh scripts/dev.sh
 
 run: ## Run the wallabag built-in server
-	@php bin/console server:run --env=$(ENV)
+	@php bin/console server:run --env=dev
 
 build: ## Run webpack
 	@npm run build:$(ENV)
