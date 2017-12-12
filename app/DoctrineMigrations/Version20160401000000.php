@@ -28,13 +28,7 @@ class Version20160401000000 extends AbstractMigration implements ContainerAwareI
      */
     public function up(Schema $schema)
     {
-        try {
-            $schema->getTable($this->getTable('entry'));
-
-            $this->skipIf(true, 'Database already initialized');
-        } catch (SchemaException $e) {
-            // it's ok, the table does not exist we can proceed to the initial migration
-        }
+        $this->skipIf($schema->hasTable($this->getTable('entry')), 'Database already initialized');
 
         switch ($this->connection->getDatabasePlatform()->getName()) {
             case 'sqlite':
