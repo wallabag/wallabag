@@ -18,16 +18,16 @@ class CustomPostgreSqlSchemaManager extends PostgreSqlSchemaManager
      */
     protected function _getPortableSequenceDefinition($sequence)
     {
+        $sequenceName = $sequence['relname'];
         if ('public' !== $sequence['schemaname']) {
             $sequenceName = $sequence['schemaname'] . '.' . $sequence['relname'];
-        } else {
-            $sequenceName = $sequence['relname'];
         }
 
         $query = 'SELECT min_value, increment_by FROM ' . $this->_platform->quoteIdentifier($sequenceName);
 
-        // patch for PostgreSql >= 10
-        if ((float) ($this->_conn->getWrappedConnection()->getServerVersion()) >= 10) {
+        // the `method_exists` is only to avoid test to fail:
+        // DAMA\DoctrineTestBundle\Doctrine\DBAL\StaticConnection doesn't support the `getServerVersion`
+        if (method_exists($this->_conn->getWrappedConnection(), 'getServerVersion') && (float) ($this->_conn->getWrappedConnection()->getServerVersion()) >= 10) {
             $query = "SELECT min_value, increment_by FROM pg_sequences WHERE schemaname = 'public' AND sequencename = " . $this->_conn->quote($sequenceName);
         }
 
