@@ -13,6 +13,7 @@ need to set, please leave the default one.
 ```yaml
 parameters:
     database_driver: pdo_mysql
+    database_driver_class: ~
     database_host: 127.0.0.1
     database_port: null
     database_name: wallabag
@@ -53,6 +54,7 @@ parameters:
 | Name  | Description | Default |
 | ------|---------|------------ |
 | database_driver | Should be pdo_sqlite or pdo_mysql or pdo_pgsql  | pdo_sqlite |
+| database_driver_class | Should be used only for PostgreSQL 10 with `Wallabag\CoreBundle\Doctrine\DBAL\Driver\CustomPostgreSQLDriver` | ~ |
 | database_host  | host of your database (usually localhost or 127.0.0.1) | 127.0.0.1 |
 | database_port  | port of your database (you can leave ``~`` to use the default one) | ~ |
 | database_name | name of your database | symfony |
