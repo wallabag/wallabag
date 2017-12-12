@@ -4,20 +4,36 @@ namespace Application\Migrations;
 
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\DBAL\Schema\SchemaException;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Initial database structure.
  */
-class Version20160401000000 extends AbstractMigration
+class Version20160401000000 extends AbstractMigration implements ContainerAwareInterface
 {
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+
     /**
      * @param Schema $schema
      */
     public function up(Schema $schema)
     {
-        if ($this->version->getConfiguration()->getNumberOfExecutedMigrations() > 0) {
-            $this->version->markMigrated();
+        try {
+            $schema->getTable($this->getTable('entry'));
+
             $this->skipIf(true, 'Database already initialized');
+        } catch (SchemaException $e) {
+            // it's ok, the table does not exist we can proceed to the initial migration
         }
 
         switch ($this->connection->getDatabasePlatform()->getName()) {
@@ -160,7 +176,7 @@ ALTER TABLE wallabag_oauth2_refresh_tokens ADD CONSTRAINT FK_20C9FB24A76ED395 FO
 ALTER TABLE wallabag_oauth2_auth_codes ADD CONSTRAINT FK_EE52E3FA19EB6921 FOREIGN KEY (client_id) REFERENCES wallabag_oauth2_clients (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
 ALTER TABLE wallabag_oauth2_auth_codes ADD CONSTRAINT FK_EE52E3FAA76ED395 FOREIGN KEY (user_id) REFERENCES "wallabag_user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
 ALTER TABLE wallabag_annotation ADD CONSTRAINT FK_A7AED006A76ED395 FOREIGN KEY (user_id) REFERENCES "wallabag_user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
-ALTER TABLE wallabag_annotation ADD CONSTRAINT FK_A7AED006BA364942 FOREIGN KEY (entry_id) REFERENCES "wallabag_entry" (id) NOT DEFERRABLE INITIALLY IMMEDIATE;                
+ALTER TABLE wallabag_annotation ADD CONSTRAINT FK_A7AED006BA364942 FOREIGN KEY (entry_id) REFERENCES "wallabag_entry" (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
 SQL
                 ;
                 foreach (explode("\n", $sql) as $query) {
@@ -187,5 +203,10 @@ SQL
         $this->addSql('DROP TABLE wallabag_oauth2_auth_codes');
         $this->addSql('DROP TABLE "wallabag_user"');
         $this->addSql('DROP TABLE wallabag_annotation');
+    }
+
+    private function getTable($tableName)
+    {
+        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }
