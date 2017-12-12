@@ -97,6 +97,15 @@
             <div class="collapsible-body"></div>
         </li>
 
+        {% if craue_setting('share_public')
+           or craue_setting('share_twitter')
+           or craue_setting('share_shaarli')
+           or craue_setting('share_scuttle')
+           or craue_setting('share_diaspora')
+           or craue_setting('share_unmark')
+           or craue_setting('carrot')
+           or craue_setting('share_mail')
+        %}
         <li class="bold">
             <a class="waves-effect collapsible-header">
                 <i class="material-icons small">share</i>
@@ -169,6 +178,7 @@
                 </ul>
             </div>
         </li>
+        {% endif %}
 
         {% if craue_setting('show_printlink') %}
         <li class="bold border-bottom hide-on-med-and-down">
