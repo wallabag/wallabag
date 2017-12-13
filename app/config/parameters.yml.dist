@@ -11,6 +11,8 @@ parameters:
     # database_password: %env.database_password%
 
     database_driver: pdo_mysql
+    database_driver_class: ~
+    # database_driver_class: Wallabag\CoreBundle\Doctrine\DBAL\Driver\CustomPostgreSQLDriver
     database_host: 127.0.0.1
     database_port: ~
     database_name: wallabag
