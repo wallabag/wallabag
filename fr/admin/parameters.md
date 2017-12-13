@@ -14,6 +14,7 @@ défaut.
 ```yml
 parameters:
     database_driver: pdo_mysql
+    database_driver_class: ~
     database_host: 127.0.0.1
     database_port: null
     database_name: wallabag
@@ -54,6 +55,7 @@ parameters:
 | Nom  | Description | Valeur par défaut |
 | ------|---------|------------ |
 | database_driver | Doit être pdo_sqlite ou pdo_mysql ou pdo_pgsql | pdo_sqlite |
+| database_driver_class | Ne doit être utilisé qu'avec PostgreSQL 10 avec la valeur `Wallabag\CoreBundle\Doctrine\DBAL\Driver\CustomPostgreSQLDriver` | ~ |
 | database_host  | Hôte de votre base de données (généralement localhost ou 127.0.0.1) | 127.0.0.1 |
 | database_port  | Port de votre base de données (vous pouvez laisser ~ pour utiliser celui par défaut) | ~ |
 | database_name | Nom de votre base de données | symfony |
