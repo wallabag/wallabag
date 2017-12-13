@@ -70,3 +70,13 @@ store.
 
 [Install wallabag on your
 Cloudron](https://cloudron.io/store/org.wallabag.cloudronapp.html)
+
+### Installation on YunoHost
+
+YunoHost provides an easy way to install webapps on your server with a
+focus on sysadmin automation and keeping apps updated. wallabag is
+packaged as an official YunoHost app and is available to install directly from the
+official repository.
+
+[![Install wallabag with 
+YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=wallabag2)
