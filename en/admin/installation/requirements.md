@@ -1,6 +1,6 @@
 # Requirements
 
-wallabag is compatible with **PHP >= 5.6**, including PHP 7.
+wallabag is compatible with **PHP >= 5.6**, including PHP 7.1.
 
 > **[info] Information**
 >
@@ -42,7 +42,7 @@ wallabag uses PDO to connect to the database, so you'll need one of the
 following:
 
 -   pdo_mysql
--   pdo_sqlite
 -   pdo_pgsql
+-   pdo_sqlite
 
 and its corresponding database server.

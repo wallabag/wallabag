@@ -84,7 +84,7 @@ parameters:
 | fosuser_confirmation | true to send a confirmation by email for each registration | true |
 | from_email | email address used in From: field in each email | no-reply@wallabag.org |
 | rss_limit | item limit for RSS feeds | 50 |
-| domain_name | Full URL of your wallabag instance (without the trailing slash) | https://your-wallabag-url-instance.com |
+| domain_name (**new in 2.3.0**) | Full URL of your wallabag instance (without the trailing slash) | https://your-wallabag-url-instance.com |
 
 ## RabbitMQ options
 
