@@ -218,3 +218,15 @@ services:
         arguments:
             - "%wallabag_core.site_credentials.encryption_key_path%"
             - "@logger"
+
+    wallabag_core.listener.migration_listener:
+        public: false
+        class: Wallabag\CoreBundle\Listener\MigrationListener
+        arguments:
+            - "@doctrine.dbal.default_connection"
+            - %doctrine_migrations.dir_name%
+            - %doctrine_migrations.namespace%
+            - "@service_container"
+            - %wallabag_core.run_migrations_on_request%
+        tags:
+            - "kernel.event_subscriber"
