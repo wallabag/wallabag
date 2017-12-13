@@ -19,9 +19,10 @@ Then you can install wallabag by executing the following commands:
 
 ```
 git clone https://github.com/wallabag/wallabag.git
-cd wallabag && make install
-make run
+cd wallabag && make install 
 ```
+
+Now, [configure a virtual host](https://doc.wallabag.org/en/admin/installation/virtualhosts.html) to use your wallabag. 
 
 # License
 Copyright © 2013-2018 Nicolas Lœuillet <nicolas@loeuillet.org>
