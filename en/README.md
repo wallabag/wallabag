@@ -9,7 +9,7 @@ The main documentation for this application is organized into multiple sections:
 
 -   user-related docs
 -   apps-related docs
--   administator-realted docs
+-   administator-related docs
 -   developer-related docs
 
 The documentation is available in other languages:
