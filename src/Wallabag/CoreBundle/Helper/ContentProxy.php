@@ -145,6 +145,38 @@ class ContentProxy
     }
 
     /**
+     * Helper to extract and save host from entry url.
+     *
+     * @param Entry $entry
+     */
+    public function setEntryDomainName(Entry $entry)
+    {
+        $domainName = parse_url($entry->getUrl(), PHP_URL_HOST);
+        if (false !== $domainName) {
+            $entry->setDomainName($domainName);
+        }
+    }
+
+    /**
+     * Helper to set a default title using:
+     * - url basename, if applicable
+     * - hostname.
+     *
+     * @param Entry $entry
+     */
+    public function setDefaultEntryTitle(Entry $entry)
+    {
+        $url = parse_url($entry->getUrl());
+        $path = pathinfo($url['path'], PATHINFO_BASENAME);
+
+        if (empty($path)) {
+            $path = $url['host'];
+        }
+
+        $entry->setTitle($path);
+    }
+
+    /**
      * Stock entry with fetched or imported content.
      * Will fall back to OpenGraph data if available.
      *
@@ -155,10 +187,7 @@ class ContentProxy
     {
         $entry->setUrl($content['url']);
 
-        $domainName = parse_url($entry->getUrl(), PHP_URL_HOST);
-        if (false !== $domainName) {
-            $entry->setDomainName($domainName);
-        }
+        $this->setEntryDomainName($entry);
 
         if (!empty($content['title'])) {
             $entry->setTitle($content['title']);
