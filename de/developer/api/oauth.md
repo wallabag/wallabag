@@ -2,7 +2,7 @@ Einen neuen API Client erstellen
 --------------------------------
 
 In deinem wallabag Account, kannst du einen neuen API Client unter
-dieser URL <http://localhost:8000/developer/client/create> erstellen.
+dieser URL https://app.wallabag.it/developer/client/create erstellen.
 
 Gib dazu nur die Umleitungs-URL deiner Appliaktion an und erstelle
 deinen Client. Wenn deine Applikation eine Desktopapplikation ist, trage
@@ -72,7 +72,7 @@ Existierende Einträge erhalten
 ------------------------------
 
 Dokumentation für diese Methode:
-<http://localhost:8000/api/doc#get--api-entries>.{\_format}
+https://app.wallabag.it/api/doc#get--api-entries.{_format}
 
 Da wir auf einer neuen wallabag Installation arbeiten, bekommen wir
 keine Ergebnisse mit diesem Kommando:
