@@ -19,6 +19,8 @@ access your wallabag.
 > `SYMFONY__DATABASE_DRIVER`. You can have a look at [Symfony
 > documentation](http://symfony.com/doc/current/cookbook/configuration/external_parameters.html).
 
+---
+
 > **[info] Information**
 >
 > If you want to use SQLite to store your data, please put `%kernel.root_dir%/../data/db/wallabag.sqlite` for the `database_path` parameter during installation.
