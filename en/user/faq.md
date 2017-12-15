@@ -58,11 +58,11 @@ This is a Doctrine / PHP bug, nothing we can do about it.
 
 ## Why has SQLite support been dropped?
 
-Since June 2017 [SQLite support has been
+Since June 2017, [SQLite support has been
 dropped](https://github.com/wallabag/wallabag/pull/3171)
-and MySQL is the default database now. SQLite Support has been dropped
+and MySQL is the default database now. SQLite support has been dropped
 because it's awful for database migrations. It's just you'll have to
 do migrations the hard way and lose data each time.
 
-For development purposes sqlite is still fine though-
+For development purposes, SQLite is still fine though.
 
