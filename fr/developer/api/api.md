@@ -8,18 +8,18 @@ Pré-requis
 ----------
 
 -   wallabag fraichement installé et disponible à
-    <http://localhost:8000>
+    https://app.wallabag.it
 -   `httpie` installé sur votre ordinateur ([voir le site du
     projet](https://github.com/jkbrzt/httpie)). Vous pouvez également
     adapter les commandes en utilisant curl ou wget.
 -   toutes les méthodes de l'API documentées ici
-    <http://localhost:8000/api/doc>
+    https://app.wallabag.it/api/doc
 
 Créer un nouveau client d'API
 -----------------------------
 
 Depuis votre wallabag, vous pouvez créer un nouveau client d'API à cette
-URL <http://localhost:8000/developer/client/create>.
+URL https://app.wallabag.it/developer/client/create.
 
 Vous devez renseigner l'URL de redirection de votre application et créer
 votre client. Si votre application est une application desktop,
@@ -89,7 +89,7 @@ Récupérer les articles existants
 --------------------------------
 
 Documentation pour cette méthode :
-<http://localhost:8000/api/doc#get--api-entries>.{\_format}
+https://app.wallabag.it/api/doc#get--api-entries.{_format}
 
 Comme nous venons tout juste d'installer wallabag, nous n'aurons aucun
 résultat avec cette commande :
@@ -148,7 +148,7 @@ Créer votre premier article
 ---------------------------
 
 Documentation pour cette méthode :
-<http://localhost:8000/api/doc#post--api-entries>.{\_format}
+https://app.wallabag.it/api/doc#post--api-entries.{_format}
 
 ```bash
 http POST http://localhost:8000/api/entries.json \
@@ -210,7 +210,7 @@ Supprimer un article
 --------------------
 
 Documentation pour cette méthode :
-<http://localhost:8000/api/doc#delete--api-entries-%7Bentry%7D>.{\_format}
+https://app.wallabag.it/api/doc#delete--api-entries-%7Bentry%7D.{_format}
 
 ```bash
 http DELETE http://localhost:8000/api/entries/1.json \
@@ -272,7 +272,7 @@ Autres méthodes
 
 Nous n'écrirons pas d'exemples pour toutes les méthodes de l'API.
 
-Jetez un œil à la liste complète ici <http://localhost:8000/api/doc>
+Jetez un œil à la liste complète ici https://app.wallabag.it/api/doc
 pour connaitre chaque méthode.
 
 Ressources tierces

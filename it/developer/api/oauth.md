@@ -1,7 +1,7 @@
 # Creare un nuovo client API
 
 Sul vostro account wallabag potete creare un nuovo client API presso
-questo URL <http://localhost:8000/developer/client/create>.
+questo URL https://app.wallabag.it/developer/client/create.
 
 Date solamente l'URL per il reindirizzamento della vostra applicazione e
 create il vostro client. Se la vostra applicazione è desktop, inserite

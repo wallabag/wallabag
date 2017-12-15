@@ -8,9 +8,9 @@ Pré-requis
 ----------
 
 -   wallabag fraichement installé et disponible à
-    <http://localhost:8000>
+    https://app.wallabag.it
 -   `httpie` installé sur votre ordinateur ([voir le site du
     projet](https://github.com/jkbrzt/httpie)). Vous pouvez également
     adapter les commandes en utilisant curl ou wget.
 -   toutes les méthodes de l'API documentées ici
-    <http://localhost:8000/api/doc>
+    https://app.wallabag.it/api/doc

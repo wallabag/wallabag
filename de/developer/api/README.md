@@ -7,9 +7,9 @@ interagieren.
 Voraussetzungen
 ---------------
 
--   wallabag frisch (oder nicht) installiert auf <http://localhost:8000>
+-   wallabag frisch (oder nicht) installiert auf https://app.wallabag.it
 -   `httpie` installiert auf deinem Computer ([siehe
     Projektwebsite](https://github.com/jkbrzt/httpie)). Beachte, dass du
     die Kommandos auch mit curl oder wget nutzen kannst.
 -   alle API Methoden sind hier dokumentiert
-    <http://localhost:8000/api/doc>
+    https://app.wallabag.it/api/doc

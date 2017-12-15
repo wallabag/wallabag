@@ -2,7 +2,7 @@ Deinen ersten Eintrag hinzufügen
 --------------------------------
 
 Dokumentation für diese Methode:
-<http://localhost:8000/api/doc#post--api-entries>.{\_format}
+https://app.wallabag.it/api/doc#post--api-entries.{_format}
 
 ```bash
 http POST http://localhost:8000/api/entries.json \
@@ -64,7 +64,7 @@ Eintrag löschen
 ---------------
 
 Dokumentation für diese Methode:
-<http://localhost:8000/api/doc#delete--api-entries-%7Bentry%7D>.{\_format}
+https://app.wallabag.it/api/doc#delete--api-entries-{entry}.{_format}
 
 ```bash
 http DELETE http://localhost:8000/api/entries/1.json \
@@ -126,5 +126,5 @@ Andere Methoden
 
 Wir werden nicht für jede API Methode Beispiele schreiben.
 
-Wirf einen Blick in die Liste <http://localhost:8000/api/doc>, um alle
+Wirf einen Blick in die Liste https://app.wallabag.it/api/doc, um alle
 Methode kennenzulernen.
