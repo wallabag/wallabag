@@ -89,7 +89,7 @@ Récupérer les articles existants
 --------------------------------
 
 Documentation pour cette méthode :
-https://app.wallabag.it/api/doc#delete--api-entries-{entry}.{_format}
+https://app.wallabag.it/api/doc#get--api-entries.{_format}
 
 Comme nous venons tout juste d'installer wallabag, nous n'aurons aucun
 résultat avec cette commande :

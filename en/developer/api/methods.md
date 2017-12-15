@@ -2,7 +2,7 @@
 
 Documentation for this method:
 
-http://app.wallabag.it/api/doc#get--api-entries.{_format}
+https://app.wallabag.it/api/doc#get--api-entries.{_format}
 
 As we work on a fresh wallabag installation, we'll have no result with this command:
 
