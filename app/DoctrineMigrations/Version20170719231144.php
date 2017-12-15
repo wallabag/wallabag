@@ -75,7 +75,7 @@ class Version20170719231144 extends AbstractMigration implements ContainerAwareI
                     WHERE  tag_id IN (' . implode(',', $ids) . ')
                         AND entry_id NOT IN (
                            SELECT entry_id
-                           FROM ' . $this->getTable('entry_tag') . '
+                           FROM (SELECT * FROM ' . $this->getTable('entry_tag') . ') AS _entry_tag
                            WHERE tag_id = ' . $newId . '
                         )'
                 );
