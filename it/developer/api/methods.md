@@ -1,7 +1,7 @@
 # Ottenere articoli esistenti
 
 Documentazione per questo metodo:
-`<http://localhost:8000/api/doc#get--api-entries>.{\_format}`
+https://app.wallabag.it/api/doc#get--api-entries.{_format}
 
 Mentre lavoriamo su una nuova installazione di wallabag, non otterremo
 risultati con questo comando:
@@ -59,7 +59,7 @@ curl --get "https://localhost:8000/api/entries.html?access_token=ZGJmNTA2MDdmYTd
 # Aggiungere il vostro primo articolo
 
 Documentazione per questo metodo:
-`<http://localhost:8000/api/doc#post--api-entries>.{\_format}`
+https://app.wallabag.it/api/doc#post--api-entries.{_format}
 
 ```bash
 http POST http://localhost:8000/api/entries.json \
@@ -120,7 +120,7 @@ curl "https://localhost:8000/api/entries.html?access_token=ZGJmNTA2MDdmYTdmNWFiZ
 # Eliminare un articolo
 
 Documentazione per questo metodo:
-`<http://localhost:8000/api/doc#delete--api-entries-%7Bentry%7D>.{\_format}`
+https://app.wallabag.it/api/doc#delete--api-entries-{entry}.{_format}
 
 ```bash
 http DELETE http://localhost:8000/api/entries/1.json \
@@ -180,4 +180,4 @@ curl --request DELETE "https://localhost:8000/api/entries/1.html?access_token=ZG
 # Altri metodi
 
 Non abbiamo scritto esempi per ogni metodo API. Guardate l'elenco qui :
-<http://localhost:8000/api/doc> per ogni metodo conosciuto.
+https://app.wallabag.it/api/doc per ogni metodo conosciuto.

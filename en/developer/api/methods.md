@@ -2,7 +2,7 @@
 
 Documentation for this method:
 
-`http://localhost:8000/api/doc#get--api-entries.{_format}`
+http://app.wallabag.it/api/doc#get--api-entries.{_format}
 
 As we work on a fresh wallabag installation, we'll have no result with this command:
 
@@ -58,7 +58,7 @@ curl --get "https://localhost:8000/api/entries.html?access_token=ZGJmNTA2MDdmYTd
 
 # Adding your first entry
 
-Documentation for this method: `http://localhost:8000/api/doc#post--api-entries.{_format}`
+Documentation for this method: https://app.wallabag.it/api/doc#post--api-entries.{_format}
 
 ```bash
 http POST http://localhost:8000/api/entries.json \
@@ -117,7 +117,7 @@ curl "https://localhost:8000/api/entries.html?access_token=ZGJmNTA2MDdmYTdmNWFiZ
 
 # Deleting an entry
 
-Documentation for this method: <http://localhost:8000/api/doc#delete--api-entries-%7Bentry%7D>.{\_format}
+Documentation for this method: https://app.wallabag.it/api/doc#delete--api-entries-{entry}.{_format}
 
 ```bash
 http DELETE http://localhost:8000/api/entries/1.json \
@@ -177,4 +177,4 @@ curl --request DELETE "https://localhost:8000/api/entries/1.html?access_token=ZG
 
 We didn't write samples for each API method.
 
-Have a look on the listing here: <http://localhost:8000/api/doc> to know each method.
+Have a look on the listing here: https://app.wallabag.it/api/doc to know each method.

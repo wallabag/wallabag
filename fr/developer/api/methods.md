@@ -3,7 +3,7 @@ Récupérer les articles existants
 --------------------------------
 
 Documentation pour cette méthode :
-<http://localhost:8000/api/doc#get--api-entries>.{\_format}
+https://app.wallabag.it/api/doc#get--api-entries.{_format}
 
 Comme nous venons tout juste d'installer wallabag, nous n'aurons aucun
 résultat avec cette commande :
@@ -62,7 +62,7 @@ Créer votre premier article
 ---------------------------
 
 Documentation pour cette méthode :
-<http://localhost:8000/api/doc#post--api-entries>.{\_format}
+https://app.wallabag.it/api/doc#post--api-entries.{_format}
 
 ```bash
 http POST http://localhost:8000/api/entries.json \
@@ -124,7 +124,7 @@ Supprimer un article
 --------------------
 
 Documentation pour cette méthode :
-<http://localhost:8000/api/doc#delete--api-entries-%7Bentry%7D>.{\_format}
+https://app.wallabag.it/api/doc#delete--api-entries-{entry}.{_format}
 
 ```bash
 http DELETE http://localhost:8000/api/entries/1.json \
@@ -186,5 +186,5 @@ Autres méthodes
 
 Nous n'écrirons pas d'exemples pour toutes les méthodes de l'API.
 
-Jetez un œil à la liste complète ici <http://localhost:8000/api/doc>
+Jetez un œil à la liste complète ici https://app.wallabag.it/api/doc
 pour connaitre chaque méthode.
