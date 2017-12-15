@@ -12,10 +12,16 @@ cd wallabag && make install
 Now, read the following documentation to create your virtual host, then
 access your wallabag.
 
-To define parameters with environment variables, you have to set these
-variables with `SYMFONY__` prefix. For example,
-`SYMFONY__DATABASE_DRIVER`. You can have a look at [Symfony
-documentation](http://symfony.com/doc/current/cookbook/configuration/external_parameters.html).
+> **[info] Information**
+>
+> To define parameters with environment variables, you have to set these
+> variables with `SYMFONY__` prefix. For example,
+> `SYMFONY__DATABASE_DRIVER`. You can have a look at [Symfony
+> documentation](http://symfony.com/doc/current/cookbook/configuration/external_parameters.html).
+
+> **[info] Information**
+>
+> If you want to use SQLite to store your data, please put `%kernel.root_dir%/../data/db/wallabag.sqlite` for the `database_path` parameter during installation.
 
 ## On shared hosting
 
@@ -82,5 +88,5 @@ focus on sysadmin automation and keeping apps updated. wallabag is
 packaged as an official YunoHost app and is available to install directly from the
 official repository.
 
-[![Install wallabag with 
+[![Install wallabag with
 YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=wallabag2)
