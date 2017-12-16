@@ -18,14 +18,14 @@
                 </li>
                 <li>
                     <a class="waves-effect" href="{{ path('homepage') }}">
-                        <i class="material-icons">exit_to_app</i>
+                        <i class="material-icons">arrow_back</i>
                     </a>
                 </li>
             </ul>
             <ul class="right">
                 <li>
                     <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_read'|trans }}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
-                        <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}redo{% endif %}</i>
+                        <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
                     </a>
                 </li>
                 <li>
@@ -39,7 +39,7 @@
     <ul id="slide-out" class="collapsible side-nav fixed reader-mode" data-collapsible="accordion">
         <li class="bold border-bottom hide-on-med-and-down">
             <a class="waves-effect collapsible-header" href="{{ path('homepage') }}">
-                <i class="material-icons small">exit_to_app</i>
+                <i class="material-icons small">arrow_back</i>
                 <span>{{ 'entry.view.left_menu.back_to_homepage'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
@@ -55,7 +55,7 @@
 
         <li class="bold">
             <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.re_fetch_content'|trans }}" href="{{ path('reload_entry', { 'id': entry.id }) }}" id="reload">
-                <i class="material-icons small">autorenew</i>
+                <i class="material-icons small">refresh</i>
                 <span>{{ 'entry.view.left_menu.re_fetch_content'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
@@ -68,7 +68,7 @@
 
         <li class="bold hide-on-med-and-down">
             <a class="waves-effect collapsible-header markasread" title="{{ markAsReadLabel|trans }}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
-                <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}redo{% endif %}</i>
+                <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
                 <span>{{ markAsReadLabel|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
@@ -298,8 +298,8 @@
               <i class="material-icons">menu</i>
             </a>
             <ul>
-              <li><a class="btn-floating" href="{{ path('archive_entry', { 'id': entry.id }) }}"><i class="material-icons">done</i></a></li>
-              <li><a class="btn-floating" href="{{ path('star_entry', { 'id': entry.id }) }}"><i class="material-icons">star_outline</i></a></li>
+              <li><a class="btn-floating" href="{{ path('archive_entry', { 'id': entry.id }) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i></a></li>
+              <li><a class="btn-floating" href="{{ path('star_entry', { 'id': entry.id }) }}"><i class="material-icons">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i></a></li>
               <li><a class="btn-floating" href="{{ path('delete_entry', { 'id': entry.id }) }}" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')"><i class="material-icons">delete</i></a></li>
             </ul>
         </div>
