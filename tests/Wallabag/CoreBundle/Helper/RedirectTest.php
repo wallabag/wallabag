@@ -2,13 +2,14 @@
 
 namespace Tests\Wallabag\CoreBundle\Helper;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Helper\Redirect;
 use Wallabag\UserBundle\Entity\User;
 
-class RedirectTest extends \PHPUnit_Framework_TestCase
+class RedirectTest extends TestCase
 {
     /** @var \PHPUnit_Framework_MockObject_MockObject */
     private $routerMock;

@@ -2,10 +2,11 @@
 
 namespace Tests\Wallabag\ImportBundle\Import;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Wallabag\ImportBundle\Import\ImportCompilerPass;
 
-class ImportCompilerPassTest extends \PHPUnit_Framework_TestCase
+class ImportCompilerPassTest extends TestCase
 {
     public function testProcessNoDefinition()
     {

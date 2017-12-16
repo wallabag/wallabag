@@ -5,13 +5,14 @@ namespace Tests\Wallabag\ImportBundle\Import;
 use M6Web\Component\RedisMock\RedisMockFactory;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
+use PHPUnit\Framework\TestCase;
 use Simpleue\Queue\RedisQueue;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\ImportBundle\Import\ChromeImport;
 use Wallabag\ImportBundle\Redis\Producer;
 use Wallabag\UserBundle\Entity\User;
 
-class ChromeImportTest extends \PHPUnit_Framework_TestCase
+class ChromeImportTest extends TestCase
 {
     protected $user;
     protected $em;

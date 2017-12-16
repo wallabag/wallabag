@@ -8,9 +8,10 @@ use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\Mock;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
+use PHPUnit\Framework\TestCase;
 use Wallabag\CoreBundle\Helper\DownloadImages;
 
-class DownloadImagesTest extends \PHPUnit_Framework_TestCase
+class DownloadImagesTest extends TestCase
 {
     public function dataForSuccessImage()
     {

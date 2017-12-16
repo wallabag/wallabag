@@ -2,10 +2,11 @@
 
 namespace Tests\Wallabag\CoreBundle\Tools;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Finder\Finder;
 use Wallabag\CoreBundle\Tools\Utils;
 
-class UtilsTest extends \PHPUnit_Framework_TestCase
+class UtilsTest extends TestCase
 {
     /**
      * @dataProvider examples

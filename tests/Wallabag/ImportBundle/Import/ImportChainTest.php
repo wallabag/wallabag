@@ -2,9 +2,10 @@
 
 namespace Tests\Wallabag\ImportBundle\Import;
 
+use PHPUnit\Framework\TestCase;
 use Wallabag\ImportBundle\Import\ImportChain;
 
-class ImportChainTest extends \PHPUnit_Framework_TestCase
+class ImportChainTest extends TestCase
 {
     public function testGetAll()
     {

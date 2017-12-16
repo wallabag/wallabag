@@ -4,6 +4,7 @@ namespace Tests\Wallabag\UserBundle\EventListener;
 
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\FOSUserEvents;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,7 +12,7 @@ use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\UserBundle\EventListener\CreateConfigListener;
 
-class CreateConfigListenerTest extends \PHPUnit_Framework_TestCase
+class CreateConfigListenerTest extends TestCase
 {
     private $em;
     private $listener;

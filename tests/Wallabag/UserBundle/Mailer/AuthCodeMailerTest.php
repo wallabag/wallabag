@@ -2,6 +2,7 @@
 
 namespace Tests\Wallabag\UserBundle\Mailer;
 
+use PHPUnit\Framework\TestCase;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\UserBundle\Mailer\AuthCodeMailer;
 
@@ -21,7 +22,7 @@ final class CountableMemorySpool extends \Swift_MemorySpool implements \Countabl
     }
 }
 
-class AuthCodeMailerTest extends \PHPUnit_Framework_TestCase
+class AuthCodeMailerTest extends TestCase
 {
     protected $mailer;
     protected $spool;
