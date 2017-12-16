@@ -2,6 +2,7 @@
 
 namespace Tests\Wallabag\CoreBundle\Event\Listener;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -11,7 +12,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Wallabag\CoreBundle\Event\Listener\LocaleListener;
 
-class LocaleListenerTest extends \PHPUnit_Framework_TestCase
+class LocaleListenerTest extends TestCase
 {
     public function testWithoutSession()
     {
