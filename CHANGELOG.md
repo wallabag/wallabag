@@ -7,6 +7,10 @@
 
  - Fix empty title and domain_name when exception is thrown during fetch [#3442](https://github.com/wallabag/wallabag/pull/3442)
 
+### Changes
+
+- material: replace exit_to_app, redo and autorenew icons [#3513](https://github.com/wallabag/wallabag/pull/3513)
+
 ##  [2.3.0](https://github.com/wallabag/wallabag/tree/2.3.0) (2017-12-11)
    [Full Changelog](https://github.com/wallabag/wallabag/compare/2.2.3...2.3.0)
 
