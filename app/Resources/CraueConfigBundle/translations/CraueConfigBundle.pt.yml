@@ -15,7 +15,6 @@ shaarli_url: URL Shaarli caso o serviço esteja habilitado
 scuttle_url: URL Scuttle caso o serviço esteja habilitado
 unmark_url: URL Unmark caso o serviço esteja habilitado
 pocket_consumer_key: Chave de consumidor do Pocket para importar conteúdo (https://getpocket.com/developer/docs/authentication)
-shaarli_url: URL Shaarli caso o serviço esteja habilitado
 share_diaspora: Habilitar compartilhamento para o Diaspora
 share_mail: Habilitar compartilhamento por e-mail
 share_shaarli: Habilitar compartilhamento para o Shaarli
