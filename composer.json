@@ -94,7 +94,7 @@
         "symfony/phpunit-bridge": "^3.3",
         "friendsofphp/php-cs-fixer": "~2.0",
         "m6web/redis-mock": "^2.0",
-        "dama/doctrine-test-bundle": "^3.0"
+        "dama/doctrine-test-bundle": "^4.0"
     },
     "scripts": {
         "post-cmd": [
