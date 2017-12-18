@@ -47,7 +47,7 @@ You must run some SQL queries to upgrade your database. We assume that the table
 
 You may encounter issues with indexes names: if so, please change queries with the correct index name.
 
-[You can find all the queries here](query-upgrade-22-23.md).
+[You can find all the queries here](./query-upgrade-22-23.md).
 
 ### Explanations about database migrations
 
