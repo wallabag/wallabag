@@ -11,8 +11,9 @@
 ### Changes
 
 - material: replace exit_to_app, redo and autorenew icons [#3513](https://github.com/wallabag/wallabag/pull/3513)
+- Add PHP 7.2 compatibility [#3515](https://github.com/wallabag/wallabag/pull/3515)
 
-##  [2.3.0](https://github.com/wallabag/wallabag/tree/2.3.0) (2017-12-11)
+## [2.3.0](https://github.com/wallabag/wallabag/tree/2.3.0) (2017-12-11)
    [Full Changelog](https://github.com/wallabag/wallabag/compare/2.2.3...2.3.0)
 
 ### API
@@ -44,7 +45,7 @@
 ### Features
 
 - Share articles to Scuttle (https://github.com/scronide/scuttle) instance [#2999](https://github.com/wallabag/wallabag/pull/2999)
-- Allow to remove all archived entries [#3020](https://github.com/wallabag/wallabag/pull/3020) 
+- Allow to remove all archived entries [#3020](https://github.com/wallabag/wallabag/pull/3020)
 - Added publication date and author [#3024](https://github.com/wallabag/wallabag/pull/3024)
 - Added `notmatches` operator for automatic tagging rule [#3047](https://github.com/wallabag/wallabag/pull/3047)
 - Search & paginate users [#3060](https://github.com/wallabag/wallabag/pull/3060)
@@ -67,7 +68,7 @@
 - Changed default value for list mode (grid instead of list) [#3014](https://github.com/wallabag/wallabag/pull/3014)
 - Remove `isPublic` from Entry entity [#3030](https://github.com/wallabag/wallabag/pull/3030)
 - Use username to import [#3080](https://github.com/wallabag/wallabag/pull/3080)
-- Adds Webpack support and remove Grunt [#3022](https://github.com/wallabag/wallabag/pull/3022) 
+- Adds Webpack support and remove Grunt [#3022](https://github.com/wallabag/wallabag/pull/3022)
 - Improved Guzzle subscribers extensibility [#2751](https://github.com/wallabag/wallabag/pull/2751)
 - Added logger when we match Tagging rules [#3110](https://github.com/wallabag/wallabag/pull/3110)
 - unify Download/Export wording. [#3130](https://github.com/wallabag/wallabag/pull/3130)
