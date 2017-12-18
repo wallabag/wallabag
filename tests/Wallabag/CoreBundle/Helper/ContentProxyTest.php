@@ -5,6 +5,7 @@ namespace Tests\Wallabag\CoreBundle\Helper;
 use Graby\Graby;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
@@ -15,7 +16,7 @@ use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Helper\RuleBasedTagger;
 use Wallabag\UserBundle\Entity\User;
 
-class ContentProxyTest extends \PHPUnit_Framework_TestCase
+class ContentProxyTest extends TestCase
 {
     private $fetchingErrorMessage = 'wallabag can\'t retrieve contents for this article. Please <a href="http://doc.wallabag.org/en/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.';
 
@@ -220,7 +221,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
-        $validator = $this->getValidator();
+        $validator = $this->getValidator(false);
         $validator->expects($this->once())
             ->method('validate')
             ->willReturn(new ConstraintViolationList([new ConstraintViolation('oops', 'oops', [], 'oops', 'language', 'dontexist')]));
@@ -261,7 +262,7 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
-        $validator = $this->getValidator();
+        $validator = $this->getValidator(false);
         $validator->expects($this->exactly(2))
             ->method('validate')
             ->will($this->onConsecutiveCalls(
@@ -544,11 +545,19 @@ class ContentProxyTest extends \PHPUnit_Framework_TestCase
         return new NullLogger();
     }
 
-    private function getValidator()
+    private function getValidator($withDefaultMock = true)
     {
-        return $this->getMockBuilder(RecursiveValidator::class)
+        $mock = $this->getMockBuilder(RecursiveValidator::class)
             ->setMethods(['validate'])
             ->disableOriginalConstructor()
             ->getMock();
+
+        if ($withDefaultMock) {
+            $mock->expects($this->any())
+                ->method('validate')
+                ->willReturn(new ConstraintViolationList());
+        }
+
+        return $mock;
     }
 }

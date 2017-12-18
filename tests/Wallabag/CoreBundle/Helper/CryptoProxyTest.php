@@ -4,10 +4,11 @@ namespace Tests\Wallabag\CoreBundle\Helper;
 
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use Wallabag\CoreBundle\Helper\CryptoProxy;
 
-class CryptoProxyTest extends \PHPUnit_Framework_TestCase
+class CryptoProxyTest extends TestCase
 {
     public function testCrypto()
     {

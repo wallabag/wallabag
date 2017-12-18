@@ -5,11 +5,12 @@ namespace Tests\Wallabag\CoreBundle\GuzzleSiteAuthenticator;
 use Graby\SiteConfig\SiteConfig as GrabySiteConfig;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder;
 
-class GrabySiteConfigBuilderTest extends \PHPUnit_Framework_TestCase
+class GrabySiteConfigBuilderTest extends TestCase
 {
     /** @var \Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder */
     protected $builder;

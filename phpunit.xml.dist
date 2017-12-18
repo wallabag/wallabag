@@ -32,6 +32,6 @@
     </filter>
 
     <listeners>
-        <listener class="\DAMA\DoctrineTestBundle\PHPUnit\LegacyPHPUnitListener" />
+        <listener class="\DAMA\DoctrineTestBundle\PHPUnit\PHPUnitListener" />
     </listeners>
 </phpunit>

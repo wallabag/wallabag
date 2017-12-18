@@ -2,6 +2,7 @@
 
 namespace Tests\Wallabag\CoreBundle\Event\Listener;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
@@ -11,7 +12,7 @@ use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Event\Listener\UserLocaleListener;
 use Wallabag\UserBundle\Entity\User;
 
-class UserLocaleListenerTest extends \PHPUnit_Framework_TestCase
+class UserLocaleListenerTest extends TestCase
 {
     public function testWithLanguage()
     {

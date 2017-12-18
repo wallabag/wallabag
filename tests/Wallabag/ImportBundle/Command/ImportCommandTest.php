@@ -97,5 +97,8 @@ class ImportCommandTest extends WallabagCoreTestCase
             '--useUserId' => true,
             '--importer' => 'v2',
         ]);
+
+        $this->assertContains('imported', $tester->getDisplay());
+        $this->assertContains('already saved', $tester->getDisplay());
     }
 }

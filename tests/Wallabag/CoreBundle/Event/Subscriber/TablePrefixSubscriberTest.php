@@ -5,9 +5,10 @@ namespace Tests\Wallabag\CoreBundle\Event\Subscriber;
 use Doctrine\Common\EventManager;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use PHPUnit\Framework\TestCase;
 use Wallabag\CoreBundle\Event\Subscriber\TablePrefixSubscriber;
 
-class TablePrefixSubscriberTest extends \PHPUnit_Framework_TestCase
+class TablePrefixSubscriberTest extends TestCase
 {
     public function dataForPrefix()
     {

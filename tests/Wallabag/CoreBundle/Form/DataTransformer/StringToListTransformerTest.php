@@ -2,9 +2,10 @@
 
 namespace Tests\Wallabag\CoreBundle\Form\DataTransformer;
 
+use PHPUnit\Framework\TestCase;
 use Wallabag\CoreBundle\Form\DataTransformer\StringToListTransformer;
 
-class StringToListTransformerTest extends \PHPUnit_Framework_TestCase
+class StringToListTransformerTest extends TestCase
 {
     /**
      * @dataProvider transformProvider

@@ -4,6 +4,7 @@ namespace Tests\Wallabag\CoreBundle\Helper;
 
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
+use PHPUnit\Framework\TestCase;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
@@ -11,7 +12,7 @@ use Wallabag\CoreBundle\Entity\TaggingRule;
 use Wallabag\CoreBundle\Helper\RuleBasedTagger;
 use Wallabag\UserBundle\Entity\User;
 
-class RuleBasedTaggerTest extends \PHPUnit_Framework_TestCase
+class RuleBasedTaggerTest extends TestCase
 {
     private $rulerz;
     private $tagRepository;

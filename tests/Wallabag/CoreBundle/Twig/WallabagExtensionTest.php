@@ -2,9 +2,10 @@
 
 namespace Tests\Wallabag\CoreBundle\Twig;
 
+use PHPUnit\Framework\TestCase;
 use Wallabag\CoreBundle\Twig\WallabagExtension;
 
-class WallabagExtensionTest extends \PHPUnit_Framework_TestCase
+class WallabagExtensionTest extends TestCase
 {
     public function testRemoveWww()
     {
