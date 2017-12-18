@@ -408,6 +408,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertSame($entry->getTitle(), $content['title']);
         $this->assertSame($entry->getUrl(), $content['url']);
+        $this->assertSame($entry->getId(), $content['id']);
 
         // We'll try to delete this entry again
         $this->client->request('DELETE', '/api/entries/' . $entry->getId() . '.json');

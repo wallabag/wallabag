@@ -5,7 +5,8 @@
 
 ### Fixes
 
- - Fix empty title and domain_name when exception is thrown during fetch [#3442](https://github.com/wallabag/wallabag/pull/3442)
+- Fix empty title and domain_name when exception is thrown during fetch [#3442](https://github.com/wallabag/wallabag/pull/3442)
+- api: copy entry object before sending, to keep id [#3516](https://github.com/wallabag/wallabag/pull/3516)
 
 ### Changes
 

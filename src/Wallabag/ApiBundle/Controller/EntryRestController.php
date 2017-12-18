@@ -575,6 +575,9 @@ class EntryRestController extends WallabagRestController
         $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
 
+        // We copy $entry to keep id in returned object
+        $e = $entry;
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($entry);
         $em->flush();
@@ -582,7 +585,7 @@ class EntryRestController extends WallabagRestController
         // entry deleted, dispatch event about it!
         $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
 
-        return $this->sendResponse($entry);
+        return $this->sendResponse($e);
     }
 
     /**
