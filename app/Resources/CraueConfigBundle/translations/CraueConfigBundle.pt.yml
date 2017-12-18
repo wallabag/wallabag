@@ -1,7 +1,7 @@
 # settings_changed: Configuration updated
 download_pictures: Download imagens no seu servidor
 carrot: Habilitar compartilhamento para o Carrot
-diaspora_url: URL Diaspora, se o serviço está habilitado
+diaspora_url: URL Diaspora caso o serviço esteja habilitado
 export_epub: Habilita exportação para ePub
 export_mobi: Habilita exportação para .mobi
 export_pdf: Habilita exportação para PDF
@@ -11,9 +11,10 @@ export_txt: Habilita exportação para TXT
 export_xml: Habilita exportação para XML
 # import_with_rabbitmq: Enable RabbitMQ to import data asynchronously
 # import_with_redis: Enable Redis to import data asynchronously
-shaarli_url: URL Shaarli, se o serviço está habilitado
-scuttle_url: URL Scuttle, se o serviço está habilitado
-unmark_url: URL Unmark, se o serviço está habilitado
+shaarli_url: URL Shaarli caso o serviço esteja habilitado
+scuttle_url: URL Scuttle caso o serviço esteja habilitado
+unmark_url: URL Unmark caso o serviço esteja habilitado
+pocket_consumer_key: Chave de consumidor do Pocket para importar conteúdo (https://getpocket.com/developer/docs/authentication)
 share_diaspora: Habilitar compartilhamento para o Diaspora
 share_mail: Habilitar compartilhamento por e-mail
 share_shaarli: Habilitar compartilhamento para o Shaarli
