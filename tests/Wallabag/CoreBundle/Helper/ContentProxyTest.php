@@ -221,7 +221,7 @@ class ContentProxyTest extends TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
-        $validator = $this->getValidator();
+        $validator = $this->getValidator(false);
         $validator->expects($this->once())
             ->method('validate')
             ->willReturn(new ConstraintViolationList([new ConstraintViolation('oops', 'oops', [], 'oops', 'language', 'dontexist')]));
@@ -262,7 +262,7 @@ class ContentProxyTest extends TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
-        $validator = $this->getValidator();
+        $validator = $this->getValidator(false);
         $validator->expects($this->exactly(2))
             ->method('validate')
             ->will($this->onConsecutiveCalls(
@@ -545,11 +545,19 @@ class ContentProxyTest extends TestCase
         return new NullLogger();
     }
 
-    private function getValidator()
+    private function getValidator($withDefaultMock = true)
     {
-        return $this->getMockBuilder(RecursiveValidator::class)
+        $mock = $this->getMockBuilder(RecursiveValidator::class)
             ->setMethods(['validate'])
             ->disableOriginalConstructor()
             ->getMock();
+
+        if ($withDefaultMock) {
+            $mock->expects($this->any())
+                ->method('validate')
+                ->willReturn(new ConstraintViolationList());
+        }
+
+        return $mock;
     }
 }
