@@ -78,13 +78,11 @@ class AppKernel extends Kernel
                        'base_url' => 'http://localhost:8080/',
                    ],
                ]);
-            }
-            else
-            {
+            } else {
                 $container->loadFromExtension('framework', [
                     'assets' => [
                         'base_url' => $container->getParameter('domain_name'),
-                    ]
+                    ],
                 ]);
             }
         });
