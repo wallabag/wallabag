@@ -2,11 +2,9 @@
     {% if withPreview is defined %}
         <i class="grey-text text-darken-4 activator material-icons right">more_vert</i>
     {% endif %}
-    <span class="card-title dot-ellipsis dot-resize-update">
-        <a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title| striptags | e('html_attr') }}">
-            {{ entry.title | striptags | truncate(80, true, '…') | raw | default('config.form_rules.faq.variable_description.title'|trans) }}
-        </a>
-    </span>
+    <a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title| striptags | e('html_attr') }}" class="card-title dot-ellipsis dot-resize-update">
+        {{ entry.title | striptags | truncate(80, true, '…') | raw | default('config.form_rules.faq.variable_description.title'|trans) }}
+    </a>
 
     <div class="{{ subClass|default('original grey-text') }}">
         <a href="{{ entry.url|e }}" target="_blank" title="{{ entry.domainName|removeWww }}" class="tool grey-text">{{ entry.domainName|removeWww }}</a>
