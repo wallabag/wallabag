@@ -10,22 +10,7 @@
                 <span class="preview" style="background-image: url({{ entry.previewPicture }})"></span>
             </a>
         </div>
-
-        <div class="card-content">
-            <i class="grey-text text-darken-4 activator material-icons right">more_vert</i>
-
-            <span class="card-title dot-ellipsis dot-resize-update">
-                <a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title | striptags | e('html_attr') }}">
-                    {{ entry.title | striptags | truncate(80, true, '…') | raw }}
-                </a>
-            </span>
-
-            <div class="original grey-text">
-                <a href="{{ entry.url|e }}" target="_blank" title="{{ entry.domainName|removeWww }}" class="tool original grey-text">
-                    <span>{{ entry.domainName|removeWww }}</span>
-                </a>
-            </div>
-        </div>
+        {% include "@WallabagCore/themes/material/Entry/Card/_content.html.twig" with {'entry': entry, 'withPreview': true} only %}
     </div>
 
     <div class="card-reveal">

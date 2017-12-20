@@ -6,24 +6,7 @@
             </a>
         {% endif %}
     </div>
-    <div class="card-content">
-        <span class="card-title dot-ellipsis dot-resize-update">
-            <a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title | striptags | e('html_attr') }}">
-                {{ entry.title| striptags | truncate(120, true, '…') | raw }}
-            </a>
-        </span>
-
-        <div class="metadata">
-            <a href="{{ entry.url|e }}" class="grey-text domain" target="_blank" title="{{ entry.domainName|removeWww }}">
-                <span>{{ entry.domainName|removeWww }}</span>
-            </a>
-            {% for tag in entry.tags | slice(0, 3) %}
-                <span class="chip hide-on-med-and-down">
-                    <a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a>
-                </span>
-            {% endfor %}
-        </div>
-    </div>
+    {% include "@WallabagCore/themes/material/Entry/Card/_content.html.twig" with {'entry': entry, 'withTags': true, 'subClass': 'metadata'} only %}
     <ul class="tools-list hide-on-small-only">
         <li>
             <a title="{{ 'entry.list.toogle_as_read'|trans }}" class="tool grey-text" href="{{ path('archive_entry', { 'id': entry.id }) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i></a>
