@@ -4,7 +4,7 @@
     {% endif %}
     <span class="card-title dot-ellipsis dot-resize-update">
         <a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title| striptags | e('html_attr') }}">
-            {{ entry.title | striptags | truncate(80, true, '…') | raw }}
+            {{ entry.title | striptags | truncate(80, true, '…') | raw | default('config.form_rules.faq.variable_description.title'|trans) }}
         </a>
     </span>
 
