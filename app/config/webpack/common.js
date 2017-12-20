@@ -14,7 +14,7 @@ module.exports = function () {
     output: {
       filename: '[name].js',
       path: path.resolve(rootDir, 'web/wallassets'),
-      publicPath: '/wallassets/',
+      publicPath: '',
     },
     plugins: [
       new webpack.ProvidePlugin({
