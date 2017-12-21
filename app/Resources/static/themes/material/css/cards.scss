@@ -250,6 +250,10 @@ a.original:not(.waves-effect) {
     float: right;
     max-width: 6em;
   }
+
+  .tags {
+    display: inline-block;
+  }
 }
 
 #content .collection .collection-item {

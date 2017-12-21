@@ -268,16 +268,7 @@
                         </li>
                     {% endif %}
                 </ul>
-                <ul class="tags">
-                    {% for tag in entry.tags %}
-                        <li class="chip">
-                            <a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a>
-                            <a href="{{ path('remove_tag', { 'entry': entry.id, 'tag': tag.id }) }}" onclick="return confirm('{{ 'entry.confirm.delete_tag'|trans|escape('js') }}')">
-                                <i class="material-icons vertical-align-middle">delete</i>
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
+                {% include "@WallabagCore/themes/material/Entry/_tags.html.twig" with {'tags': entry.tags, 'withRemove': true} only %}
             </div>
 
             <div class="input-field nav-panel-add-tag" style="display: none">
