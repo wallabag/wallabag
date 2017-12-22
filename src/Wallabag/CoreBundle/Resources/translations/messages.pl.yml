@@ -161,6 +161,7 @@ config:
                 notmatches: 'Sprawdź czy <i>temat</i> nie zawiera <i>szukaj</i> (duże lub małe litery).<br />Przykład: <code>tytuł nie zawiera "piłka nożna"</code>'
 
 entry:
+    default_title: 'Tytuł wpisu'
     page_titles:
         unread: 'Nieprzeczytane wpisy'
         starred: 'Wpisy oznaczone gwiazdką'

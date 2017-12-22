@@ -161,6 +161,7 @@ config:
                 notmatches: "Teste si un <i>sujet</i> ne correspond pas à une <i>recherche</i> (non sensible à la casse).<br />Exemple : <code>title notmatches \"football\"</code>"
 
 entry:
+    default_title: "Titre de l’article"
     page_titles:
         unread: "Articles non lus"
         starred: "Articles favoris"

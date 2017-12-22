@@ -161,6 +161,7 @@ config:
                 # notmatches: 'Tests that a <i>subject</i> is not matches a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
 
 entry:
+    default_title: 'Título del artículo'
     page_titles:
         unread: 'Artículos no leídos'
         starred: 'Artículos favoritos'

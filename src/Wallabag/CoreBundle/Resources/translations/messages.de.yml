@@ -161,6 +161,7 @@ config:
                 notmatches: 'Testet, ob ein <i>Titel</i> nicht auf eine <i>Suche</i> zutrifft (Groß- und Kleinschreibung wird nicht berücksichtigt).<br />Beispiel: <code>title notmatches "Fußball"</code>'
 
 entry:
+    default_title: 'Titel des Eintrags'
     page_titles:
         unread: 'Ungelesene Einträge'
         starred: 'Favorisierte Einträge'

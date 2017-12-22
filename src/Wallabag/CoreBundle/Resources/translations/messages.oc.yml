@@ -161,6 +161,7 @@ config:
                 notmatches: 'Teste se <i>subjècte</i> correspond pas a una <i>recèrca</i> (sensibla a la cassa).<br />Example : <code>title notmatches "football"</code>'
 
 entry:
+    default_title: "Títol de l'article"
     page_titles:
         unread: 'Articles pas legits'
         starred: 'Articles favorits'

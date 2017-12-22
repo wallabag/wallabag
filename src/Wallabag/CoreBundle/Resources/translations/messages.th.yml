@@ -161,6 +161,7 @@ config:
                 notmatches: 'ทดสอบว่า <i>เรื่อง</i> นี้ไม่ตรงกับ <i>การต้นหา</i> (กรณีไม่ทราบ).<br />ตัวอย่าง: <code>หัวข้อทีไม่ตรงกับ "football"</code>'
 
 entry:
+    default_title: 'หัวข้อรายการ'
     page_titles:
         unread: 'รายการที่ไม่ได้อ่าน'
         starred: 'รายการที่แสดง'
