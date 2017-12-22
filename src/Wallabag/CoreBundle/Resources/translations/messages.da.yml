@@ -590,6 +590,7 @@ flashes:
             entry_starred: 'Artikel markeret som favorit'
             entry_unstarred: 'Artikel ikke længere markeret som favorit'
             entry_deleted: 'Artikel slettet'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             # tag_added: 'Tag added'

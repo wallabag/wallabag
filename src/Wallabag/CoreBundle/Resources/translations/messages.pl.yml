@@ -590,6 +590,7 @@ flashes:
             entry_starred: 'Wpis oznaczony gwiazdką'
             entry_unstarred: 'Wpis odznaczony gwiazdką'
             entry_deleted: 'Wpis usunięty'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'Tag dodany'

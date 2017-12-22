@@ -20,11 +20,15 @@
 
 {% block content %}
     {% set currentRoute = app.request.attributes.get('_route') %}
+    {% if currentRoute == 'homepage' %}
+        {% set currentRoute = 'unread' %}
+    {% endif %}
     {% set listMode = app.user.config.listMode %}
     <div class="results">
         <div class="nb-results">{{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}</div>
         <div class="pagination">
             <a href="{{ path('switch_view_mode') }}"><i class="listMode-btn material-icons md-24">{% if listMode == 0 %}list{% else %}view_module{% endif %}</i></a>
+            <a href="{{ path(currentRoute ~ '_random') }}">random</a>
             {% if app.user.config.rssToken %}
                 {% include "@WallabagCore/themes/common/Entry/_rss_link.html.twig" %}
             {% endif %}
@@ -89,9 +93,6 @@
     {% set currentTag = null %}
     {% if tag is defined %}
         {% set currentTag = tag %}
-    {% endif %}
-    {% if currentRoute == 'homepage' %}
-        {% set currentRoute = 'unread' %}
     {% endif %}
         <h2>{{ 'entry.list.export_title'|trans }}</h2>
         <a href="javascript: void(null);" id="download-form-close" class="close-button--popup close-button">&times;</a>

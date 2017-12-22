@@ -590,6 +590,7 @@ flashes:
             entry_starred: 'Article ajustat dins los favorits'
             entry_unstarred: 'Article quitat dels favorits'
             entry_deleted: 'Article suprimit'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'Etiqueta ajustada'

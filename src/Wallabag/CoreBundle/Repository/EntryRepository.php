@@ -110,8 +110,7 @@ class EntryRepository extends EntityRepository
      */
     public function getBuilderForUntaggedByUser($userId)
     {
-        return $this
-            ->sortQueryBuilder($this->getRawBuilderForUntaggedByUser($userId));
+        return $this->sortQueryBuilder($this->getRawBuilderForUntaggedByUser($userId));
     }
 
     /**
@@ -433,6 +432,46 @@ class EntryRepository extends EntityRepository
     }
 
     /**
+     * Returns a random entry, filtering by status.
+     *
+     * @param $userId
+     * @param string $status can be unread, archive or starred
+     *
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     * @return Entry
+     */
+    public function getRandomEntry($userId, $status = '')
+    {
+        $max = $this->getEntityManager()
+            ->createQuery('SELECT MAX(e.id) FROM Wallabag\CoreBundle\Entity\Entry e WHERE e.user = :userId')
+            ->setParameter('userId', $userId)
+            ->getSingleScalarResult();
+
+        $qb = $this->createQueryBuilder('e')
+            ->where('e.user = :user_id')->setParameter('user_id', $userId);
+
+        if ('unread' === $status) {
+            $qb->andWhere('e.isArchived = false');
+        }
+
+        if ('archive' === $status) {
+            $qb->andWhere('e.isArchived = true');
+        }
+
+        if ('starred' === $status) {
+            $qb->andWhere('e.isStarred = true');
+        }
+
+        return $qb->andWhere('e.id >= :rand')
+            ->setParameter('rand', rand(0, $max))
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult();
+    }
+
+    /**
      * Return a query builder to be used by other getBuilderFor* method.
      *
      * @param int $userId
@@ -470,7 +509,6 @@ class EntryRepository extends EntityRepository
      */
     private function sortQueryBuilder(QueryBuilder $qb, $sortBy = 'createdAt', $direction = 'desc')
     {
-        return $qb
-            ->orderBy(sprintf('e.%s', $sortBy), $direction);
+        return $qb->orderBy(sprintf('e.%s', $sortBy), $direction);
     }
 }

@@ -590,6 +590,7 @@ flashes:
             entry_starred: 'Contenuto segnato come preferito'
             entry_unstarred: 'Contenuto rimosso dai preferiti'
             entry_deleted: 'Contenuto eliminato'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'Etichetta aggiunta'

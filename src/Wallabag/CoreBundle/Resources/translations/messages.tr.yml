@@ -568,6 +568,7 @@ flashes:
             entry_starred: 'Makale favorilere eklendi'
             entry_unstarred: 'Makale favorilerden çıkartıldı'
             entry_deleted: 'Makale silindi'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'Etiket eklendi'

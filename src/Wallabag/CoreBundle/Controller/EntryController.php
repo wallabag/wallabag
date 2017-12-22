@@ -2,6 +2,7 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
+use Doctrine\ORM\NoResultException;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
@@ -230,6 +231,110 @@ class EntryController extends Controller
     public function showStarredAction(Request $request, $page)
     {
         return $this->showEntries('starred', $request, $page);
+    }
+
+    /**
+     * Shows random unread entry.
+     *
+     * @param Entry $entry
+     *
+     * @Route("/unread/random", name="unread_random")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showRandomUnreadEntryAction()
+    {
+        $repository = $this->get('wallabag_core.entry_repository');
+
+        try {
+            $entry = $repository->getRandomEntry($this->getUser()->getId(), 'unread');
+        } catch (NoResultException $e) {
+            $bag = $this->get('session')->getFlashBag();
+            $bag->clear();
+            $bag->add('notice', 'flashes.entry.notice.no_random_entry');
+
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+
+        return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
+    }
+
+    /**
+     * Shows random favorite entry.
+     *
+     * @param Entry $entry
+     *
+     * @Route("/starred/random", name="starred_random")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showRandomStarredEntryAction()
+    {
+        $repository = $this->get('wallabag_core.entry_repository');
+
+        try {
+            $entry = $repository->getRandomEntry($this->getUser()->getId(), 'starred');
+        } catch (NoResultException $e) {
+            $bag = $this->get('session')->getFlashBag();
+            $bag->clear();
+            $bag->add('notice', 'flashes.entry.notice.no_random_entry');
+
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+
+        return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
+    }
+
+    /**
+     * Shows random archived entry.
+     *
+     * @param Entry $entry
+     *
+     * @Route("/archive/random", name="archive_random")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showRandomArchiveEntryAction()
+    {
+        $repository = $this->get('wallabag_core.entry_repository');
+
+        try {
+            $entry = $repository->getRandomEntry($this->getUser()->getId(), 'starred');
+        } catch (NoResultException $e) {
+            $bag = $this->get('session')->getFlashBag();
+            $bag->clear();
+            $bag->add('notice', 'flashes.entry.notice.no_random_entry');
+
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+
+        return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
+    }
+
+    /**
+     * Shows random all entry.
+     *
+     * @param Entry $entry
+     *
+     * @Route("/all/random", name="all_random")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showRandomAllEntryAction()
+    {
+        $repository = $this->get('wallabag_core.entry_repository');
+
+        try {
+            $entry = $repository->getRandomEntry($this->getUser()->getId());
+        } catch (NoResultException $e) {
+            $bag = $this->get('session')->getFlashBag();
+            $bag->clear();
+            $bag->add('notice', 'flashes.entry.notice.no_random_entry');
+
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+
+        return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
     }
 
     /**

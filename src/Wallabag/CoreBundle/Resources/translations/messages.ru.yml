@@ -555,6 +555,7 @@ flashes:
             entry_starred: 'Запись помечена звездочкой'
             entry_unstarred: 'Пометка звездочкой у записи убрана'
             entry_deleted: 'Запись удалена'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'Тег добавлен'

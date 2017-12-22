@@ -588,6 +588,7 @@ flashes:
             entry_starred: 'รายการที่แสดง'
             entry_unstarred: 'รายการที่ไม่ได้แสดง'
             entry_deleted: 'รายการที่ถูกลบ'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'แท็กที่เพิ่ม'

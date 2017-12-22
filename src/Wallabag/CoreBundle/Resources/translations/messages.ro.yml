@@ -590,6 +590,7 @@ flashes:
             entry_starred: 'Articol adăugat la favorite'
             entry_unstarred: 'Articol șters de la favorite'
             entry_deleted: 'Articol șters'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             # tag_added: 'Tag added'

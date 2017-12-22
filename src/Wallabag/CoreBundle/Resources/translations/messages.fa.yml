@@ -590,6 +590,7 @@ flashes:
             entry_starred: 'مقاله برگزیده شد'
             entry_unstarred: 'مقاله نابرگزیده شد'
             entry_deleted: 'مقاله پاک شد'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'برچسب افزوده شد'

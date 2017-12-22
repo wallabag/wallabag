@@ -590,6 +590,7 @@ flashes:
             entry_starred: 'Entrada destacada'
             entry_unstarred: 'Entrada não destacada'
             entry_deleted: 'Entrada apagada'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'Tag adicionada'
