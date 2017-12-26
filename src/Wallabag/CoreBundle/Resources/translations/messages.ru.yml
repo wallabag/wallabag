@@ -156,6 +156,7 @@ config:
                 matches: 'Тесты, в которых <i> тема </i> соответствует <i> поиску </i> (без учета регистра). Пример: <code> title matches "футбол" </code>'
 
 entry:
+    default_title: 'Название записи'
     page_titles:
         unread: 'Непрочитанные записи'
         starred: 'Помеченные записи'

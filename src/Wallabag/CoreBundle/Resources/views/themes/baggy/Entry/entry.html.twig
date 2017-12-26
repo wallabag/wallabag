@@ -1,11 +1,11 @@
 {% extends "WallabagCoreBundle::layout.html.twig" %}
 
-{% block title %}{{ entry.title|e|raw }} ({{ entry.domainName|removeWww }}){% endblock %}
+{% block title %}{{ entry.title|e|raw|default('entry.default_title'|trans) }} ({{ entry.domainName|removeWww }}){% endblock %}
 
 {% block content %}
     <div id="article">
         <header class="mbm">
-            <h1>{{ entry.title|e|raw }} <a href="{{ path('edit', { 'id': entry.id }) }}" class="nostyle" title="{{ 'entry.view.edit_title'|trans }}">✎</a></h1>
+            <h1>{{ entry.title|e|raw |default('entry.default_title'|trans) }} <a href="{{ path('edit', { 'id': entry.id }) }}" class="nostyle" title="{{ 'entry.view.edit_title'|trans }}">✎</a></h1>
         </header>
 
         <div id="article_toolbar">
