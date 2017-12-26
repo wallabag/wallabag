@@ -1,17 +1,26 @@
 # Changelog
 
-## [unreleased](https://github.com/wallabag/wallabag/tree/master)
-   [Full Changelog](https://github.com/wallabag/wallabag/compare/2.3.0...master)
+## [2.3.1](https://github.com/wallabag/wallabag/tree/2.3.1)
+   [Full Changelog](https://github.com/wallabag/wallabag/compare/2.3.0...2.3.1)
 
 ### Fixes
 
-- Fix empty title and domain_name when exception is thrown during fetch [#3442](https://github.com/wallabag/wallabag/pull/3442)
-- api: copy entry object before sending, to keep id [#3516](https://github.com/wallabag/wallabag/pull/3516)
+- Changed the way to check for initial migration [#3487](https://github.com/wallabag/wallabag/pull/3487)
+- Displayed the RSS icon on homepage route [#3490](https://github.com/wallabag/wallabag/pull/3490)
+- Hided the share toggle button if no service is enabled [#3492](https://github.com/wallabag/wallabag/pull/3492)
+- Updated robots.txt to prevent crawling [#3510](https://github.com/wallabag/wallabag/pull/3510)
+- Fixed lower case tags migration [#3507](https://github.com/wallabag/wallabag/pull/3507)
+- Fixed initial migration when using custom table prefix [#3504](https://github.com/wallabag/wallabag/pull/3504)
+- Fixed assets for subfolder install [#3524](https://github.com/wallabag/wallabag/pull/3524)
+- Fixed empty card title link [#3525](https://github.com/wallabag/wallabag/pull/3525)
+- Fixed empty title and domain_name when exception is thrown during fetch [#3442](https://github.com/wallabag/wallabag/pull/3442)
+- API: copied entry object before sending, to keep id [#3516](https://github.com/wallabag/wallabag/pull/3516)
 
 ### Changes
 
-- material: replace exit_to_app, redo and autorenew icons [#3513](https://github.com/wallabag/wallabag/pull/3513)
-- Add PHP 7.2 compatibility [#3515](https://github.com/wallabag/wallabag/pull/3515)
+- Added custom driver & schema manager for PostgreSQL 10 [#3488](https://github.com/wallabag/wallabag/pull/3488)
+- Replaced exit_to_app, redo and autorenew icons [#3513](https://github.com/wallabag/wallabag/pull/3513)
+- Added PHP 7.2 compatibility [#3515](https://github.com/wallabag/wallabag/pull/3515)
 
 ## [2.3.0](https://github.com/wallabag/wallabag/tree/2.3.0) (2017-12-11)
    [Full Changelog](https://github.com/wallabag/wallabag/compare/2.2.3...2.3.0)
