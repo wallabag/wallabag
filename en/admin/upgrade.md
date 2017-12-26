@@ -2,9 +2,18 @@
 
 You will find here different ways to upgrade your wallabag:
 
+-   [from 2.3.x to 2.3.y](#upgrading-from-23x-to-23y)
 -   [from 2.2.x to 2.3.x](#upgrading-from-22x-to-23x)
 -   [from 2.x.y to 2.3.x](#upgrading-from-2xy-to-23x)
 -   [from 1.x to 2.x](#from-wallabag-1x)
+
+## Upgrading from 2.3.x to 2.3.y
+
+```bash
+make update
+```
+
+That's all.
 
 ## Upgrading from 2.2.x to 2.3.x
 
