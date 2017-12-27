@@ -268,7 +268,7 @@
                         </li>
                     {% endif %}
                 </ul>
-                {% include "@WallabagCore/themes/material/Entry/_tags.html.twig" with {'tags': entry.tags, 'withRemove': true} only %}
+                {% include "@WallabagCore/themes/material/Entry/_tags.html.twig" with {'tags': entry.tags, 'entryId': entry.id, 'withRemove': true} only %}
             </div>
 
             <div class="input-field nav-panel-add-tag" style="display: none">
