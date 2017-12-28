@@ -2,8 +2,7 @@
 /* ==========================================================================
    Nav
    ========================================================================== */
-nav,
-.nav-wrapper {
+nav {
   height: auto;
   line-height: initial;
 }
@@ -18,25 +17,25 @@ nav {
   }
 }
 
-.nav-wrapper {
+.nav-panel-item .button-collapse {
+  margin-left: 0;
+  margin-right: 0.5rem;
+  padding: 0 0.5rem;
+  height: auto;
+  line-height: 1;
+  background-color: transparent;
+  border: none;
+}
+
+.nav-panel-item {
   display: flex;
   padding: 0.6rem 0.4rem 0.6rem 0.75rem;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-
-  .button-collapse {
-    margin-left: 0;
-    margin-right: 0.5rem;
-    padding: 0 0.5rem;
-    height: auto;
-    line-height: 1;
-    background-color: transparent;
-    border: none;
-  }
 }
 
-nav .nav-wrapper i {
+.nav-panel-item .material-icons {
   height: 46px;
   line-height: 46px;
 }
@@ -51,8 +50,8 @@ nav .nav-wrapper i {
   justify-content: flex-end;
 }
 
-.nav-panel-add .add,
-.nav-panel-search .search,
+.nav-panel-item .add,
+.nav-panel-item .search,
 .nav-panels .close {
   color: #444 !important;
 }
@@ -68,7 +67,6 @@ nav .nav-wrapper i {
   .input-field input {
     display: block;
     line-height: inherit;
-    width: calc(100% - 8rem);
     height: 3rem;
   }
 
@@ -86,45 +84,43 @@ nav .nav-wrapper i {
 }
 
 .input-field {
-  &.nav-panel-add label,
-  &.nav-panel-search label {
+  &.nav-panel-item label {
     left: 1rem;
   }
 
-  &.nav-panel-add .close,
-  &.nav-panel-search .close {
-    position: absolute;
-    top: 0;
-    right: 1rem;
+  &.nav-panel-item .close {
     color: transparent;
     cursor: pointer;
     font-size: 2rem;
     transition: 0.3s color;
   }
 
-  &.nav-panel-add,
-  &.nav-panel-add form,
-  &.nav-panel-search,
-  &.nav-panel-search form {
+  &.nav-panel-item {
     display: flex;
     flex: 1;
+    flex-wrap: nowrap;
     align-items: center;
   }
 
-  &.nav-panel-add form.disabled,
-  &.nav-panel-add form.disabled input {
+  &.nav-panel-add.disabled,
+  &.nav-panel-add.disabled input {
     background-color: whitesmoke;
   }
 }
 
 .nav-form-button {
-  padding: 0 1rem;
+  padding: 0;
   background-color: transparent;
   border: none;
 
   &:focus {
     background-color: inherit;
   }
+}
+
+.nav-form-button,
+.nav-panel-item .close {
+  margin: 0 1%;
 }
 
 #button_filters {

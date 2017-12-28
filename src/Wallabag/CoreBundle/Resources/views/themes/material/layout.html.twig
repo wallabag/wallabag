@@ -93,44 +93,40 @@
                 <a class="waves-effect icon icon-power" href="{{ path('fos_user_security_logout') }}">{{ 'menu.left.logout'|trans }}</a>
             </li>
         </ul>
-        <div class="nav-wrapper nav-panels">
-            <div class="nav-panel-top">
-                <button data-activates="slide-out" class="nav-panel-menu button-collapse"><i class="material-icons">menu</i></button>
-                <h1 class="left action">
-                    {% block title %}
-                    {% endblock %}
-                </h1>
+        <div class="nav-panels">
+            <div class="nav-panel-actions nav-panel-item">
+                <div class="nav-panel-top">
+                    <button data-activates="slide-out" class="nav-panel-menu button-collapse"><i class="material-icons">menu</i></button>
+                    <h1 class="left action">
+                        {% block title %}
+                        {% endblock %}
+                    </h1>
+                </div>
+                <ul class="input-field nav-panel-buttom">
+                    <li class="bold">
+                        <a class="waves-effect tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.add_new_entry'|trans }}" href="{{ path('new') }}" id="nav-btn-add">
+                            <i class="material-icons">add</i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.search'|trans }}" href="javascript: void(null);" id="nav-btn-search">
+                            <i class="material-icons">search</i>
+                        </a>
+                    </li>
+                    <li id="button_filters">
+                        <a class="nav-panel-menu button-collapse-right tooltipped js-filters-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-activates="filters">
+                            <i class="material-icons">filter_list</i>
+                        </a>
+                    </li>
+                    <li id="button_export">
+                        <a class="nav-panel-menu button-collapse-right tooltipped js-export-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.export'|trans }}" href="#" data-activates="export">
+                            <i class="material-icons">file_download</i>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <ul class="input-field nav-panel-buttom">
-                <li class="bold">
-                    <a class="waves-effect tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.add_new_entry'|trans }}" href="{{ path('new') }}" id="nav-btn-add">
-                        <i class="material-icons">add</i>
-                    </a>
-                </li>
-                <li>
-                    <a class="waves-effect tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.search'|trans }}" href="javascript: void(null);" id="nav-btn-search">
-                        <i class="material-icons">search</i>
-                    </a>
-                </li>
-                <li id="button_filters">
-                    <a class="nav-panel-menu button-collapse-right tooltipped js-filters-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-activates="filters">
-                        <i class="material-icons">filter_list</i>
-                    </a>
-                </li>
-                <li id="button_export">
-                    <a class="nav-panel-menu button-collapse-right tooltipped js-export-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.export'|trans }}" href="#" data-activates="export">
-                        <i class="material-icons">file_download</i>
-                    </a>
-                </li>
-            </ul>
-            <div class="input-field nav-panel-search" style="display: none">
-                {{ render(controller("WallabagCoreBundle:Entry:searchForm", {'currentRoute': app.request.attributes.get('_route')})) }}
-                <i class="material-icons close">clear</i>
-            </div>
-            <div class="input-field nav-panel-add" style="display: none">
-                {{ render(controller("WallabagCoreBundle:Entry:addEntryForm")) }}
-                <i class="material-icons close">clear</i>
-            </div>
+            {{ render(controller("WallabagCoreBundle:Entry:searchForm", {'currentRoute': app.request.attributes.get('_route')})) }}
+            {{ render(controller("WallabagCoreBundle:Entry:addEntryForm")) }}
         </div>
     </nav>
 {% endblock %}
