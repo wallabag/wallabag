@@ -69,7 +69,7 @@ nav .nav-wrapper i {
     display: block;
     line-height: inherit;
     width: calc(100% - 8rem);
-    height: 4.1rem;
+    height: 3rem;
   }
 
   .input-field input:focus {
@@ -108,6 +108,7 @@ nav .nav-wrapper i {
   &.nav-panel-search form {
     display: flex;
     flex: 1;
+    align-items: center;
   }
 
   &.nav-panel-add form.disabled,
