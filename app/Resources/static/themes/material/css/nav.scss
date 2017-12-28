@@ -116,6 +116,16 @@ nav .nav-wrapper i {
   }
 }
 
+.nav-form-button {
+  padding: 0 1rem;
+  background-color: transparent;
+  border: none;
+
+  &:focus {
+    background-color: inherit;
+  }
+}
+
 #button_filters {
   display: none;
 }

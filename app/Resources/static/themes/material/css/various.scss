@@ -24,16 +24,6 @@ nav .input-field input {
   padding-left: 0.5rem;
 }
 
-.new-entry-button {
-  padding: 0 1rem;
-  background-color: transparent;
-  border: none;
-
-  &:focus {
-    background-color: inherit;
-  }
-}
-
 .tabs {
   display: flex;
 }
