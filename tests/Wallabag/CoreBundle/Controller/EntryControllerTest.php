@@ -5,6 +5,7 @@ namespace Tests\Wallabag\CoreBundle\Controller;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Entity\SiteCredential;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 
@@ -1477,5 +1478,24 @@ class EntryControllerTest extends WallabagCoreTestCase
         $authors = $content->getPublishedBy();
         $this->assertSame('email_tracking.pdf', $content->getTitle());
         $this->assertSame('example.com', $content->getDomainName());
+    }
+
+    public function testEntryDeleteTagLink()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $entry = $em->getRepository('WallabagCoreBundle:Entry')->findByUrlAndUserId('http://0.0.0.0/entry1', $this->getLoggedInUserId());
+        $tag = $entry->getTags()[0];
+
+        $crawler = $client->request('GET', '/view/' . $entry->getId());
+
+        // As long as the deletion link of a tag is following
+        // a link to the tag view, we take the second one to retrieve
+        // the deletion link of the first tag
+        $link = $crawler->filter('body div#article div.tools ul.tags li.chip a')->extract('href')[1];
+
+        $this->assertSame(sprintf('/remove-tag/%s/%s', $entry->getId(), $tag->getId()), $link);
     }
 }
