@@ -68,9 +68,8 @@ class ContentProxy
 
         // In one case (at least in tests), url is empty here
         // so we set it using $url provided in the updateEntry call.
-        // Not sure what are the other possible cases where this property is empty 
-        if (empty($entry->getUrl()) && !empty($url))
-        {
+        // Not sure what are the other possible cases where this property is empty
+        if (empty($entry->getUrl()) && !empty($url)) {
             $entry->setUrl($url);
         }
 
@@ -247,7 +246,15 @@ class ContentProxy
      */
     private function stockEntry(Entry $entry, array $content)
     {
-        $entry->setUrl($content['url']);
+        // When a redirection occurs while fetching an entry
+        // we move the original url in origin_url property if empty
+        // and set the entry url with the final value
+        if (!empty($content['url']) && $entry->getUrl() !== $content['url']) {
+            if (empty($entry->getOriginUrl())) {
+                $entry->setOriginUrl($entry->getUrl());
+            }
+            $entry->setUrl($content['url']);
+        }
 
         $this->setEntryDomainName($entry);
 

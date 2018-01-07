@@ -775,6 +775,32 @@ class ContentProxyTest extends TestCase
         return $string;
     }
 
+    public function testWithChangedUrl()
+    {
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, true);
+        $entry = new Entry(new User());
+        $proxy->updateEntry(
+            $entry,
+            'http://0.0.0.0',
+            [
+                'html' => false,
+                'title' => '',
+                'url' => 'http://1.1.1.1',
+                'content_type' => '',
+                'language' => '',
+            ],
+            true
+        );
+
+        $this->assertSame('http://1.1.1.1', $entry->getUrl());
+        $this->assertSame('1.1.1.1', $entry->getDomainName());
+        $this->assertSame('http://0.0.0.0', $entry->getOriginUrl());
+    }
+
     private function getTaggerMock()
     {
         return $this->getMockBuilder(RuleBasedTagger::class)
