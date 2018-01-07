@@ -66,6 +66,14 @@ class ContentProxy
         // so we'll be able to refetch it in the future
         $content['url'] = !empty($content['url']) ? $content['url'] : $url;
 
+        // In one case (at least in tests), url is empty here
+        // so we set it using $url provided in the updateEntry call.
+        // Not sure what are the other possible cases where this property is empty 
+        if (empty($entry->getUrl()) && !empty($url))
+        {
+            $entry->setUrl($url);
+        }
+
         $this->stockEntry($entry, $content);
     }
 
