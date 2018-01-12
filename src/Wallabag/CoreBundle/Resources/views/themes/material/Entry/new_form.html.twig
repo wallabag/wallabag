@@ -1,13 +1,15 @@
-<form name="entry" method="post" action="{{ path('new_entry')}}">
+<form class="input-field nav-panel-item nav-panel-add" style="display: none" name="entry" method="post" action="{{ path('new_entry')}}">
     {% if form_errors(form) %}
         <span class="black-text">{{ form_errors(form) }}</span>
     {% endif %}
+    <button type="submit" class="nav-form-button"><i class="material-icons add">add</i></button>
 
     {% if form_errors(form.url) %}
         <span class="black-text">{{ form_errors(form.url) }}</span>
     {% endif %}
 
     {{ form_widget(form.url, { 'attr': {'autocomplete': 'off', 'placeholder': 'entry.new.placeholder'} }) }}
+    <i class="material-icons close">clear</i>
 
     {{ form_rest(form) }}
 </form>

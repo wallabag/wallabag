@@ -17,7 +17,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/developer/client/create');
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $form = $crawler->filter('button[type=submit]')->form();
+        $form = $crawler->filter('button[id=client_save]')->form();
 
         $data = [
             'client[name]' => 'My app',

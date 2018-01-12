@@ -476,7 +476,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $form = $crawler->filter('button[type=submit]')->form();
+        $form = $crawler->filter('button[id=entry_save]')->form();
 
         $data = [
             'entry[title]' => 'My updated title hehe :)',
@@ -509,7 +509,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $form = $crawler->filter('button[type=submit]')->form();
+        $form = $crawler->filter('button[id=entry_save]')->form();
 
         $data = [
             'entry[title]' => 'My updated title hehe :)',
