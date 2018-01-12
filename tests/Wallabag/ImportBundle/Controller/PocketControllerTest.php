@@ -14,7 +14,7 @@ class PocketControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/pocket');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertSame(1, $crawler->filter('button[type=submit]')->count());
+        $this->assertSame(1, $crawler->filter('button[name=action]')->count());
     }
 
     public function testImportPocketWithRabbitEnabled()
@@ -27,7 +27,7 @@ class PocketControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/pocket');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertSame(1, $crawler->filter('button[type=submit]')->count());
+        $this->assertSame(1, $crawler->filter('button[name=action]')->count());
 
         $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 0);
     }
@@ -43,7 +43,7 @@ class PocketControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/pocket');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertSame(1, $crawler->filter('button[type=submit]')->count());
+        $this->assertSame(1, $crawler->filter('button[name=action]')->count());
 
         $client->getContainer()->get('craue_config')->set('import_with_redis', 0);
     }
