@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.3.2](https://github.com/wallabag/wallabag/tree/2.3.2)
+   [Full Changelog](https://github.com/wallabag/wallabag/compare/2.3.1...2.3.2)
+
+### Fixes
+
+- Add `set -eu` to update.sh [#3546](https://github.com/wallabag/wallabag/pull/3546)
+- Fix broken link to remove tags from entries [#3536](https://github.com/wallabag/wallabag/pull/3536)
+
+### Changes
+
+- Nav actions updated [#3541](https://github.com/wallabag/wallabag/pull/3541)
+- Replaced Create new client link with a button [#3539](https://github.com/wallabag/wallabag/pull/3539)
+
 ## [2.3.1](https://github.com/wallabag/wallabag/tree/2.3.1)
    [Full Changelog](https://github.com/wallabag/wallabag/compare/2.3.0...2.3.1)
 
