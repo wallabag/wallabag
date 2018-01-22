@@ -3,7 +3,6 @@
 # eg: `sh update.sh prod`
 
 set -e
-set -u
 
 COMPOSER_COMMAND='composer'
 
@@ -11,6 +10,8 @@ DIR="${BASH_SOURCE}"
 if [ ! -d "$DIR" ]; then DIR="$PWD/scripts"; fi
 . "$DIR/require.sh"
 
+# starting from here, update shall abort if a variable is not set
+set -u
 ENV=$1
 
 rm -rf var/cache/*
