@@ -3,7 +3,7 @@
         {% for tag in tags %}
             <li class="chip">
                 <a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a>
-                {% if withRemove %}
+                {% if withRemove is defined and withRemove == true %}
                     <a href="{{ path('remove_tag', { 'entry': entryId, 'tag': tag.id }) }}" onclick="return confirm('{{ 'entry.confirm.delete_tag'|trans|escape('js') }}')">
                         <i class="material-icons vertical-align-middle">delete</i>
                     </a>
