@@ -88,8 +88,14 @@ class TagController extends Controller
         $tags = $this->get('wallabag_core.tag_repository')
             ->findAllFlatTagsWithNbEntries($this->getUser()->getId());
 
+        $renameForms = [];
+        foreach ($tags as $tag) {
+            $renameForms[$tag['id']] = $this->createForm(RenameTagType::class, new Tag())->createView();
+        }
+
         return $this->render('WallabagCoreBundle:Tag:tags.html.twig', [
             'tags' => $tags,
+            'renameForms' => $renameForms,
         ]);
     }
 
