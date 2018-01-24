@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Form\Type\NewTagType;
+use Wallabag\CoreBundle\Form\Type\RenameTagType;
 
 class TagController extends Controller
 {
@@ -129,5 +130,49 @@ class TagController extends Controller
             'currentPage' => $page,
             'tag' => $tag,
         ]);
+    }
+
+    /**
+     * Rename a given tag with a new label
+     * Create a new tag with the new name and drop the old one.
+     *
+     * @param Tag     $tag
+     * @param Request $request
+     *
+     * @Route("/tag/rename/{slug}", name="tag_rename")
+     * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function renameTagAction(Tag $tag, Request $request)
+    {
+        $form = $this->createForm(RenameTagType::class, new Tag());
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entries = $this->get('wallabag_core.entry_repository')->findAllByTagId(
+                $this->getUser()->getId(),
+                $tag->getId()
+            );
+            foreach ($entries as $entry) {
+                $this->get('wallabag_core.tags_assigner')->assignTagsToEntry(
+                    $entry,
+                    $form->get('label')->getData()
+                );
+                $entry->removeTag($tag);
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+        }
+
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            'flashes.tag.notice.tag_renamed'
+        );
+
+        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'), '', true);
+
+        return $this->redirect($redirectUrl);
     }
 }
