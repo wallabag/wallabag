@@ -387,6 +387,8 @@ tag:
     new:
         add: 'Добавить'
         placeholder: 'Вы можете добавить несколько тегов, разделенных запятой.'
+    rename:
+        # placeholder: 'You can update tag name.'
 
 import:
     page_title: 'Импорт'
@@ -547,6 +549,7 @@ flashes:
     tag:
         notice:
             tag_added: 'Тег добавлен'
+            # tag_renamed: 'Tag renamed'
     import:
         notice:
             failed: 'Во время импорта произошла ошибка, повторите попытку.'

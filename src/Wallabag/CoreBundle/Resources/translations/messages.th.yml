@@ -397,6 +397,8 @@ tag:
     new:
         add: 'เพิ่ม'
         placeholder: 'คุณสามารถเพิ่มได้หลายแท็ก, จากการแบ่งโดย comma'
+    rename:
+        # placeholder: 'You can update tag name.'
 
 export:
     footer_template: '<div style="text-align:center;"><p>ผลิตโดย wallabag กับ %method%</p><p>ให้ทำการเปิด <a href="https://github.com/wallabag/wallabag/issues">ฉบับนี้</a> ถ้าคุณมีข้อบกพร่องif you have trouble with the display of this E-Book on your device.</p></div>'
@@ -583,6 +585,7 @@ flashes:
     tag:
         notice:
             tag_added: 'แท็กที่เพิ่ม'
+            # tag_renamed: 'Tag renamed'
     import:
         notice:
             failed: 'นำข้อมูลเข้าล้มเหลว, ลองใหม่อีกครั้ง'
