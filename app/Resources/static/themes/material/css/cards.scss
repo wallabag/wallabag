@@ -180,6 +180,17 @@ a.original:not(.waves-effect) {
   flex-grow: 1;
 }
 
+.card-tag-form {
+  display: flex;
+  min-width: 100px;
+  flex-grow: 1;
+}
+
+.card-tag-form input {
+  margin-bottom: 0;
+  height: 2rem;
+}
+
 .card-tag-rss {
   display: flex;
 }
