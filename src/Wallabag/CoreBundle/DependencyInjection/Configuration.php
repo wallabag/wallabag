@@ -65,6 +65,9 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->scalarNode('encryption_key_path')
                 ->end()
+                ->booleanNode('run_migration_on_request')
+                    ->defaultFalse()
+                ->end()
             ->end()
         ;
 

@@ -23,6 +23,7 @@ wallabag_core:
     reading_speed: 1
     cache_lifetime: 10
     action_mark_as_read: 1
+    run_migration_on_request: false
     list_mode: 0
     fetching_error_message_title: 'No title found'
     fetching_error_message: |

@@ -6,6 +6,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Wallabag\CoreBundle\Listener\MigrationListener;
 
 class WallabagCoreExtension extends Extension
 {
@@ -30,6 +31,7 @@ class WallabagCoreExtension extends Extension
         $container->setParameter('wallabag_core.api_limit_mass_actions', $config['api_limit_mass_actions']);
         $container->setParameter('wallabag_core.default_internal_settings', $config['default_internal_settings']);
         $container->setParameter('wallabag_core.site_credentials.encryption_key_path', $config['encryption_key_path']);
+        $container->setParameter('wallabag_core.run_migrations_on_request', $config['run_migration_on_request']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
