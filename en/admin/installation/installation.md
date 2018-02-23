@@ -25,6 +25,10 @@ access your wallabag.
 >
 > If you want to use SQLite to store your data, please put `%kernel.root_dir%/../data/db/wallabag.sqlite` for the `database_path` parameter during installation.
 
+> **[info] Information**
+>
+> If you're installing Wallabag behind Squid as a reverse proxy, make sure to update your squid.conf configuration to include "login=PASS" in the "cache_peer" line. This is necessary for API calls to work properly.
+
 ## On shared hosting
 
 We provide a package with all dependencies inside. The default
@@ -98,3 +102,4 @@ YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://i
 The SynoCommunity provides a package to install wallabag on your Synology NAS.
 
 [Install wallabag with Synology](https://synocommunity.com/package/wallabag)
+
