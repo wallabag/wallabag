@@ -64,7 +64,7 @@
         "liip/theme-bundle": "^1.4.6",
         "lexik/form-filter-bundle": "^5.0.4",
         "j0k3r/graby": "^1.0",
-        "friendsofsymfony/user-bundle": "^2.0.1",
+        "friendsofsymfony/user-bundle": "2.0.*",
         "friendsofsymfony/oauth-server-bundle": "^1.5.2",
         "stof/doctrine-extensions-bundle": "^1.2",
         "scheb/two-factor-bundle": "^2.14.0",
