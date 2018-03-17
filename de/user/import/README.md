@@ -4,8 +4,9 @@ Migration von einem Drittanbieter
 In wallabag 2.x kannst du Daten von folgenden Anbietern importieren:
 
 -   [Pocket](Pocket.md)
--   [Readability](Readability.md)
 -   [Instapaper](Instapaper.md)
+-   [Readability](Readability.md)
+-   [Pinboard](Pinboard.md)
 -   [wallabag 1.x](wallabagv1.md)
 -   [wallabag 2.x](wallabagv2.md)
 
