@@ -3,8 +3,9 @@
 Dans wallabag 2.x, vous pouvez importer des données depuis :
 
 -   [Pocket](Pocket.md)
--   [Readability](Readability.md)
 -   [Instapaper](Instapaper.md)
+-   [Readability](Readability.md)
+-   [Pinboard](Pinboard.md)
 -   [wallabag 1.x](wallabagv1.md)
 -   [wallabag 2.x](wallabagv2.md)
 
