@@ -129,7 +129,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId(
-                'http://www.20minutes.fr/high-tech/2077615-20170531-dis-donc-donald-trump-quoi-exactement-covfefe',
+                'https://www.20minutes.fr/high-tech/2077615-20170531-dis-donc-donald-trump-quoi-exactement-covfefe',
                 $this->getLoggedInUserId()
             );
 
