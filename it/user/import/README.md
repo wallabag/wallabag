@@ -4,10 +4,10 @@ In wallabag 2.x, potete importare dati da:
 
 -   [Pocket](Pocket.md)
 -   [Instapaper](Instapaper.md)
--   [wallabag 1.x](wallabagv1.md)
--   [wallabag 2.x](wallabagv2.md)
 -   [Readability](Readability.md)
 -   [Pinboard](Pinboard.md)
+-   [wallabag 1.x](wallabagv1.md)
+-   [wallabag 2.x](wallabagv2.md)
 
 Abbiamo anche sviluppato [uno script per eseguire migrazioni tramite la
 linea di comando](#import-via-command-line-interface-cli).
