@@ -36,6 +36,11 @@
       "src": "wallassets/themes/_global/img/appicon/apple-touch-icon-152.png",
       "type": "image/png",
       "sizes": "152x152"
+    },
+    {
+      "src": "wallassets/themes/_global/img/appicon/apple-touch-icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "display": "standalone",
