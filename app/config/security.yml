@@ -12,7 +12,7 @@ security:
                 class: WallabagUserBundle:User
                 property: username
         fos_userbundle:
-            id: fos_user.user_provider.username
+            id: fos_user.user_provider.username_email
 
     # the main part of the security, where you can set up firewalls
     # for specific sections of your app
