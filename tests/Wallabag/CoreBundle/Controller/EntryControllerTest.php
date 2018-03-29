@@ -1314,7 +1314,7 @@ class EntryControllerTest extends WallabagCoreTestCase
                 'fr_FR',
             ],
             'de' => [
-                'http://www.bild.de/politik/ausland/theresa-may/wahlbeben-grossbritannien-analyse-52108924.bild.html',
+                'https://www.bild.de/politik/ausland/theresa-may/wahlbeben-grossbritannien-analyse-52108924.bild.html',
                 'de',
             ],
             'it' => [
