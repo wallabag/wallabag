@@ -111,7 +111,7 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId(
-                'https://www.zataz.com/90-des-dossiers-medicaux-des-coreens-du-sud-vendus-a-des-entreprises-privees/',
+                'https://www.20minutes.fr/bordeaux/2120479-20170823-bordeaux-poche-chocolatine-association-traduit-etudiants-etrangers-mots-sud-ouest',
                 $this->getLoggedInUserId()
             );
 
@@ -119,9 +119,9 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
         $this->assertContains('flashes.import.notice.summary', $body[0]);
 
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
-        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for http://www.zataz.com is ok');
-        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://www.zataz.com is ok');
-        $this->assertNotEmpty($content->getLanguage(), 'Language for http://www.zataz.com is ok');
+        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://www.20minutes.fr is ok');
+        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.20minutes.fr is ok');
+        $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.20minutes.fr is ok');
 
         $tags = $content->getTags();
         $this->assertContains('foot', $tags, 'It includes the "foot" tag');

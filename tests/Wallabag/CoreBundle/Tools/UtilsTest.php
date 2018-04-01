@@ -13,7 +13,7 @@ class UtilsTest extends TestCase
      */
     public function testCorrectWordsCountForDifferentLanguages($text, $expectedCount)
     {
-        static::assertEquals((float) $expectedCount, Utils::getReadingTime($text));
+        static::assertSame((float) $expectedCount, Utils::getReadingTime($text));
     }
 
     public function examples()

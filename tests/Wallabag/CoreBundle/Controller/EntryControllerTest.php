@@ -1309,12 +1309,12 @@ class EntryControllerTest extends WallabagCoreTestCase
                 'https://www.pravda.ru/world/09-06-2017/1337283-qatar-0/',
                 'ru',
             ],
-            'fr-FR' => [
-                'https://www.zataz.com/90-des-dossiers-medicaux-des-coreens-du-sud-vendus-a-des-entreprises-privees/',
-                'fr_FR',
+            'fr' => [
+                'https://fr.wikipedia.org/wiki/Wallabag',
+                'fr',
             ],
             'de' => [
-                'http://www.bild.de/politik/ausland/theresa-may/wahlbeben-grossbritannien-analyse-52108924.bild.html',
+                'https://www.bild.de/politik/ausland/theresa-may/wahlbeben-grossbritannien-analyse-52108924.bild.html',
                 'de',
             ],
             'it' => [
