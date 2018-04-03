@@ -6,6 +6,16 @@ use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 
 class SecurityControllerTest extends WallabagCoreTestCase
 {
+    public function testLoginWithEmail()
+    {
+        $this->logInAsUsingHttp('bigboss@wallabag.org');
+        $client = $this->getClient();
+        $client->followRedirects();
+
+        $crawler = $client->request('GET', '/config');
+        $this->assertContains('config.form_rss.description', $crawler->filter('body')->extract(['_text'])[0]);
+    }
+
     public function testLoginWithout2Factor()
     {
         $this->logInAs('admin');
@@ -81,7 +91,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
         }
 
         $client->followRedirects();
-        $crawler = $client->request('GET', '/register');
+        $client->request('GET', '/register');
         $this->assertContains('registration.submit', $client->getResponse()->getContent());
     }
 }
