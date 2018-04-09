@@ -3,6 +3,11 @@ entry:
   resource: "WallabagApiBundle:EntryRest"
   name_prefix:  api_
 
+search:
+  type: rest
+  resource: "WallabagApiBundle:SearchRest"
+  name_prefix:  api_
+
 tag:
   type: rest
   resource: "WallabagApiBundle:TagRest"
