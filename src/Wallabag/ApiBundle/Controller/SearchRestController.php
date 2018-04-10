@@ -10,13 +10,7 @@ use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Event\EntryDeletedEvent;
-use Wallabag\CoreBundle\Event\EntrySavedEvent;
 
 class SearchRestController extends WallabagRestController
 {

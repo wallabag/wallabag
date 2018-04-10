@@ -4,9 +4,6 @@ namespace Tests\Wallabag\ApiBundle\Controller;
 
 use Tests\Wallabag\ApiBundle\WallabagApiTestCase;
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Helper\ContentProxy;
-use Wallabag\UserBundle\Entity\User;
 
 class SearchRestControllerTest extends WallabagApiTestCase
 {
@@ -15,7 +12,7 @@ class SearchRestControllerTest extends WallabagApiTestCase
         $this->client->request('GET', '/api/search', [
             'page' => 1,
             'perPage' => 2,
-            'term' => 'entry' // 6 results
+            'term' => 'entry', // 6 results
         ]);
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
@@ -45,7 +42,7 @@ class SearchRestControllerTest extends WallabagApiTestCase
     public function testGetSearchWithNoLimit()
     {
         $this->client->request('GET', '/api/search', [
-            'term' => 'entry'
+            'term' => 'entry',
         ]);
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
