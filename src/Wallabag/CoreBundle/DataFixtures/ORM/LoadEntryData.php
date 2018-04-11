@@ -98,7 +98,7 @@ class LoadEntryData extends AbstractFixture implements OrderedFixtureInterface
         $entry6->setMimetype('text/html');
         $entry6->setTitle('test title entry6');
         $entry6->setContent('This is my content /o/');
-        $entry6->setArchived(true);
+        $entry6->updateArchived(true);
         $entry6->setLanguage('de');
         $entry6->addTag($this->getReference('bar-tag'));
 

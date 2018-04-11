@@ -849,7 +849,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $entryArchived->setContent('Youhou');
         $entryArchived->setTitle('Youhou');
         $entryArchived->addTag($tagArchived);
-        $entryArchived->setArchived(true);
+        $entryArchived->updateArchived(true);
         $em->persist($entryArchived);
 
         $annotationArchived = new Annotation($user);

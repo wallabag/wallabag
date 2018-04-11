@@ -358,7 +358,7 @@ class EntryRestController extends WallabagRestController
         }
 
         if (null !== $data['isArchived']) {
-            $entry->setArchived((bool) $data['isArchived']);
+            $entry->updateArchived((bool) $data['isArchived']);
         }
 
         if (null !== $data['isStarred']) {
@@ -474,7 +474,7 @@ class EntryRestController extends WallabagRestController
         }
 
         if (null !== $data['isArchived']) {
-            $entry->setArchived((bool) $data['isArchived']);
+            $entry->updateArchived((bool) $data['isArchived']);
         }
 
         if (null !== $data['isStarred']) {
