@@ -234,7 +234,7 @@ entry:
         created_at: 'Data de creacion'
         published_at: 'Data de publicacion'
         published_by: 'Publicat per'
-        # provided_by: 'Provided by'
+        provided_by: 'Provesit per'
     new:
         page_title: 'Enregistrar un novèl article'
         placeholder: 'http://website.com'
@@ -246,7 +246,7 @@ entry:
         page_title: 'Modificar un article'
         title_label: 'Títol'
         url_label: 'Url'
-        # origin_url_label: 'Origin url (from where you found that entry)'
+        origin_url_label: 'Url d’origina (ont avètz trobat aqueste article)'
         save_label: 'Enregistrar'
     public:
         shared_by_wallabag: "Aqueste article es estat partejat per <a href='%wallabag_instance%'>wallabag</a>"
@@ -400,8 +400,8 @@ tag:
         add: 'Ajustar'
         placeholder: "Podètz ajustar mai qu'una etiqueta, separadas per de virgula."
 
-# export:
-#     footer_template: '<div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p></div>'
+export:
+    footer_template: '<div style="text-align:center;"><p>Produch per wallabag amb %method%</p><p>Mercés de dobrir <a href="https://github.com/wallabag/wallabag/issues">una sollicitacion</a> s’avètz de problèmas amb l’afichatge d’aqueste E-Book sus vòstre periferic.</p></div>'
 
 import:
     page_title: 'Importar'
