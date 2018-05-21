@@ -22,6 +22,16 @@
     padding-left: 0;
   }
 
+  table {
+    display: block;
+    overflow: auto;
+  }
+
+  iframe {
+    max-width: 100%;
+    height: auto;
+  }
+
   .nav-panels .action {
     padding-right: 0.75rem;
   }
