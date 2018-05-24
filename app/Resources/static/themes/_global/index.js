@@ -65,7 +65,7 @@ $(document).ready(() => {
     retrievePercent(x.entryId);
 
     $(window).resize(() => {
-      retrievePercent(x.entryId);
+      retrievePercent(x.entryId, true);
     });
   }
 });

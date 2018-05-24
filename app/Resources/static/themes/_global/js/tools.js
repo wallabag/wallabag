@@ -19,14 +19,16 @@ function savePercent(id, percent) {
   return true;
 }
 
-function retrievePercent(id) {
+function retrievePercent(id, resized) {
   if (!supportsLocalStorage()) { return false; }
 
   const bheight = $(document).height();
   const percent = localStorage[`wallabag.article.${id}.percent`];
   const scroll = bheight * percent;
 
-  $('html,body').animate({ scrollTop: scroll }, 'fast');
+  if (!resized) {
+    $('html,body').animate({ scrollTop: scroll }, 'fast');
+  }
 
   return true;
 }
