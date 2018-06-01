@@ -183,4 +183,25 @@ class DownloadImagesTest extends TestCase
         $this->assertContains('http://wallabag.io/assets/images/9/b/9b0ead26/', $res, 'Content-Type was empty but data is ok for an image');
         $this->assertContains('DownloadImages: Checking extension (alternative)', $logHandler->getRecords()[3]['message']);
     }
+
+    public function testProcessImageWithSrcset()
+    {
+        $client = new Client();
+
+        $mock = new Mock([
+            new Response(200, ['content-type' => 'image/jpeg'], Stream::factory(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg'))),
+            new Response(200, ['content-type' => 'image/jpeg'], Stream::factory(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg'))),
+            new Response(200, ['content-type' => 'image/jpeg'], Stream::factory(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg'))),
+        ]);
+
+        $client->getEmitter()->attach($mock);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', [$logHandler]);
+
+        $download = new DownloadImages($client, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $res = $download->processHtml(123, '<p><img class="alignnone wp-image-1153" src="http://piketty.blog.lemonde.fr/files/2017/10/F1FR-530x375.jpg" alt="" width="628" height="444" srcset="http://piketty.blog.lemonde.fr/files/2017/10/F1FR-530x375.jpg 530w, http://piketty.blog.lemonde.fr/files/2017/10/F1FR-768x543.jpg 768w, http://piketty.blog.lemonde.fr/files/2017/10/F1FR-900x636.jpg 900w" sizes="(max-width: 628px) 100vw, 628px" /></p>', 'http://piketty.blog.lemonde.fr/2017/10/12/budget-2018-la-jeunesse-sacrifiee/');
+
+        $this->assertNotContains('http://piketty.blog.lemonde.fr/', $res, 'Image srcset attribute were not replaced');
+    }
 }
