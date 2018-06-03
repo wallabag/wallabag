@@ -204,4 +204,27 @@ class DownloadImagesTest extends TestCase
 
         $this->assertNotContains('http://piketty.blog.lemonde.fr/', $res, 'Image srcset attribute were not replaced');
     }
+
+    public function testProcessImageWithNullPath()
+    {
+        $client = new Client();
+
+        $mock = new Mock([
+            new Response(200, ['content-type' => null], Stream::factory(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg'))),
+        ]);
+
+        $client->getEmitter()->attach($mock);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', [$logHandler]);
+
+        $download = new DownloadImages($client, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+
+        $res = $download->processSingleImage(
+            123,
+            null,
+            'https://framablog.org/2018/06/30/engagement-atypique/'
+        );
+        $this->assertFalse($res);
+    }
 }
