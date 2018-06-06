@@ -137,12 +137,12 @@ CREATE TABLE {$this->getTable('oauth2_auth_codes')} (id INT NOT NULL, client_id 
 CREATE UNIQUE INDEX UNIQ_EE52E3FA5F37A13B ON {$this->getTable('oauth2_auth_codes')} (token);
 CREATE INDEX IDX_EE52E3FA19EB6921 ON {$this->getTable('oauth2_auth_codes')} (client_id);
 CREATE INDEX IDX_EE52E3FAA76ED395 ON {$this->getTable('oauth2_auth_codes')} (user_id);
-CREATE TABLE {$this->getTable('user')} (id INT NOT NULL, username VARCHAR(180) NOT NULL, username_canonical VARCHAR(180) NOT NULL, email VARCHAR(180) NOT NULL, email_canonical VARCHAR(180) NOT NULL, enabled BOOLEAN NOT NULL, salt VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, last_login TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, locked BOOLEAN NOT NULL, expired BOOLEAN NOT NULL, expires_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, confirmation_token VARCHAR(255) DEFAULT NULL, password_requested_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, roles TEXT NOT NULL, credentials_expired BOOLEAN NOT NULL, credentials_expire_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, name TEXT DEFAULT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, authCode INT DEFAULT NULL, twoFactorAuthentication BOOLEAN NOT NULL, trusted TEXT DEFAULT NULL, PRIMARY KEY(id));
-CREATE UNIQUE INDEX UNIQ_1D63E7E592FC23A8 ON {$this->getTable('user')} (username_canonical);
-CREATE UNIQUE INDEX UNIQ_1D63E7E5A0D96FBF ON {$this->getTable('user')} (email_canonical);
-CREATE UNIQUE INDEX UNIQ_1D63E7E5C05FB297 ON {$this->getTable('user')} (confirmation_token);
-COMMENT ON COLUMN {$this->getTable('user')}.roles IS '(DC2Type:array)';
-COMMENT ON COLUMN {$this->getTable('user')}.trusted IS '(DC2Type:json_array)';
+CREATE TABLE "{$this->getTable('user')}" (id INT NOT NULL, username VARCHAR(180) NOT NULL, username_canonical VARCHAR(180) NOT NULL, email VARCHAR(180) NOT NULL, email_canonical VARCHAR(180) NOT NULL, enabled BOOLEAN NOT NULL, salt VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, last_login TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, locked BOOLEAN NOT NULL, expired BOOLEAN NOT NULL, expires_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, confirmation_token VARCHAR(255) DEFAULT NULL, password_requested_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, roles TEXT NOT NULL, credentials_expired BOOLEAN NOT NULL, credentials_expire_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, name TEXT DEFAULT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, authCode INT DEFAULT NULL, twoFactorAuthentication BOOLEAN NOT NULL, trusted TEXT DEFAULT NULL, PRIMARY KEY(id));
+CREATE UNIQUE INDEX UNIQ_1D63E7E592FC23A8 ON "{$this->getTable('user')}" (username_canonical);
+CREATE UNIQUE INDEX UNIQ_1D63E7E5A0D96FBF ON "{$this->getTable('user')}" (email_canonical);
+CREATE UNIQUE INDEX UNIQ_1D63E7E5C05FB297 ON "{$this->getTable('user')}" (confirmation_token);
+COMMENT ON COLUMN "{$this->getTable('user')}".roles IS '(DC2Type:array)';
+COMMENT ON COLUMN "{$this->getTable('user')}".trusted IS '(DC2Type:json_array)';
 CREATE TABLE {$this->getTable('annotation')} (id INT NOT NULL, user_id INT DEFAULT NULL, entry_id INT DEFAULT NULL, text TEXT NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, quote VARCHAR(255) NOT NULL, ranges TEXT NOT NULL, PRIMARY KEY(id));
 CREATE INDEX IDX_A7AED006A76ED395 ON {$this->getTable('annotation')} (user_id);
 CREATE INDEX IDX_A7AED006BA364942 ON {$this->getTable('annotation')} (entry_id);
@@ -157,18 +157,18 @@ CREATE SEQUENCE oauth2_refresh_tokens_id_seq INCREMENT BY 1 MINVALUE 1 START 1;
 CREATE SEQUENCE oauth2_auth_codes_id_seq INCREMENT BY 1 MINVALUE 1 START 1;
 CREATE SEQUENCE "user_id_seq" INCREMENT BY 1 MINVALUE 1 START 1;
 CREATE SEQUENCE annotation_id_seq INCREMENT BY 1 MINVALUE 1 START 1;
-ALTER TABLE {$this->getTable('entry')} ADD CONSTRAINT FK_F4D18282A76ED395 FOREIGN KEY (user_id) REFERENCES {$this->getTable('user')} (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+ALTER TABLE {$this->getTable('entry')} ADD CONSTRAINT FK_F4D18282A76ED395 FOREIGN KEY (user_id) REFERENCES "{$this->getTable('user')}" (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
 ALTER TABLE {$this->getTable('entry_tag')} ADD CONSTRAINT FK_C9F0DD7CBA364942 FOREIGN KEY (entry_id) REFERENCES {$this->getTable('entry')} (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
 ALTER TABLE {$this->getTable('entry_tag')} ADD CONSTRAINT FK_C9F0DD7CBAD26311 FOREIGN KEY (tag_id) REFERENCES {$this->getTable('tag')} (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
-ALTER TABLE {$this->getTable('config')} ADD CONSTRAINT FK_87E64C53A76ED395 FOREIGN KEY (user_id) REFERENCES {$this->getTable('user')} (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+ALTER TABLE {$this->getTable('config')} ADD CONSTRAINT FK_87E64C53A76ED395 FOREIGN KEY (user_id) REFERENCES "{$this->getTable('user')}" (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
 ALTER TABLE {$this->getTable('tagging_rule')} ADD CONSTRAINT FK_2D9B3C5424DB0683 FOREIGN KEY (config_id) REFERENCES {$this->getTable('config')} (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
 ALTER TABLE {$this->getTable('oauth2_access_tokens')} ADD CONSTRAINT FK_368A420919EB6921 FOREIGN KEY (client_id) REFERENCES {$this->getTable('oauth2_clients')} (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
-ALTER TABLE {$this->getTable('oauth2_access_tokens')} ADD CONSTRAINT FK_368A4209A76ED395 FOREIGN KEY (user_id) REFERENCES {$this->getTable('user')} (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+ALTER TABLE {$this->getTable('oauth2_access_tokens')} ADD CONSTRAINT FK_368A4209A76ED395 FOREIGN KEY (user_id) REFERENCES "{$this->getTable('user')}" (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
 ALTER TABLE {$this->getTable('oauth2_refresh_tokens')} ADD CONSTRAINT FK_20C9FB2419EB6921 FOREIGN KEY (client_id) REFERENCES {$this->getTable('oauth2_clients')} (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
-ALTER TABLE {$this->getTable('oauth2_refresh_tokens')} ADD CONSTRAINT FK_20C9FB24A76ED395 FOREIGN KEY (user_id) REFERENCES {$this->getTable('user')} (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+ALTER TABLE {$this->getTable('oauth2_refresh_tokens')} ADD CONSTRAINT FK_20C9FB24A76ED395 FOREIGN KEY (user_id) REFERENCES "{$this->getTable('user')}" (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
 ALTER TABLE {$this->getTable('oauth2_auth_codes')} ADD CONSTRAINT FK_EE52E3FA19EB6921 FOREIGN KEY (client_id) REFERENCES {$this->getTable('oauth2_clients')} (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
-ALTER TABLE {$this->getTable('oauth2_auth_codes')} ADD CONSTRAINT FK_EE52E3FAA76ED395 FOREIGN KEY (user_id) REFERENCES {$this->getTable('user')} (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
-ALTER TABLE {$this->getTable('annotation')} ADD CONSTRAINT FK_A7AED006A76ED395 FOREIGN KEY (user_id) REFERENCES {$this->getTable('user')} (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+ALTER TABLE {$this->getTable('oauth2_auth_codes')} ADD CONSTRAINT FK_EE52E3FAA76ED395 FOREIGN KEY (user_id) REFERENCES "{$this->getTable('user')}" (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
+ALTER TABLE {$this->getTable('annotation')} ADD CONSTRAINT FK_A7AED006A76ED395 FOREIGN KEY (user_id) REFERENCES "{$this->getTable('user')}" (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
 ALTER TABLE {$this->getTable('annotation')} ADD CONSTRAINT FK_A7AED006BA364942 FOREIGN KEY (entry_id) REFERENCES {$this->getTable('entry')} (id) NOT DEFERRABLE INITIALLY IMMEDIATE;
 SQL
                 ;
@@ -194,7 +194,7 @@ SQL
         $this->addSql("DROP TABLE {$this->getTable('oauth2_access_tokens')}");
         $this->addSql("DROP TABLE {$this->getTable('oauth2_clients')}");
         $this->addSql("DROP TABLE {$this->getTable('oauth2_auth_codes')}");
-        $this->addSql("DROP TABLE {$this->getTable('user')}");
+        $this->addSql("DROP TABLE \"{$this->getTable('user')}\"");
         $this->addSql("DROP TABLE {$this->getTable('annotation')}");
     }
 
