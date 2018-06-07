@@ -742,7 +742,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $em->persist($tag);
 
         $entry = new Entry($user);
-        $entry->setUrl('http://www.lemonde.fr/europe/article/2016/10/01/pour-le-psoe-chaque-election-s-est-transformee-en-une-agonie_5006476_3214.html');
+        $entry->setUrl('https://www.lemonde.fr/europe/article/2016/10/01/pour-le-psoe-chaque-election-s-est-transformee-en-une-agonie_5006476_3214.html');
         $entry->setContent('Youhou');
         $entry->setTitle('Youhou');
         $entry->addTag($tag);
@@ -827,7 +827,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $em->persist($tag);
 
         $entry = new Entry($user);
-        $entry->setUrl('http://www.lemonde.fr/europe/article/2016/10/01/pour-le-psoe-chaque-election-s-est-transformee-en-une-agonie_5006476_3214.html');
+        $entry->setUrl('https://www.lemonde.fr/europe/article/2016/10/01/pour-le-psoe-chaque-election-s-est-transformee-en-une-agonie_5006476_3214.html');
         $entry->setContent('Youhou');
         $entry->setTitle('Youhou');
         $entry->addTag($tag);
@@ -845,7 +845,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $em->persist($tagArchived);
 
         $entryArchived = new Entry($user);
-        $entryArchived->setUrl('http://www.lemonde.fr/europe/article/2016/10/01/pour-le-psoe-chaque-election-s-est-transformee-en-une-agonie_5006476_3214.html');
+        $entryArchived->setUrl('https://www.lemonde.fr/europe/article/2016/10/01/pour-le-psoe-chaque-election-s-est-transformee-en-une-agonie_5006476_3214.html');
         $entryArchived->setContent('Youhou');
         $entryArchived->setTitle('Youhou');
         $entryArchived->addTag($tagArchived);
@@ -903,7 +903,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $em->persist($tag);
 
         $entry = new Entry($user);
-        $entry->setUrl('http://www.lemonde.fr/europe/article/2016/10/01/pour-le-psoe-chaque-election-s-est-transformee-en-une-agonie_5006476_3214.html');
+        $entry->setUrl('https://www.lemonde.fr/europe/article/2016/10/01/pour-le-psoe-chaque-election-s-est-transformee-en-une-agonie_5006476_3214.html');
         $entry->setContent('Youhou');
         $entry->setTitle('Youhou');
         $entry->addTag($tag);

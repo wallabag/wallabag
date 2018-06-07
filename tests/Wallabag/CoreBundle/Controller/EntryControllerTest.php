@@ -11,9 +11,9 @@ use Wallabag\CoreBundle\Helper\ContentProxy;
 
 class EntryControllerTest extends WallabagCoreTestCase
 {
-    const AN_URL_CONTAINING_AN_ARTICLE_WITH_IMAGE = 'http://www.lemonde.fr/judo/article/2017/11/11/judo-la-decima-de-teddy-riner_5213605_1556020.html';
+    const AN_URL_CONTAINING_AN_ARTICLE_WITH_IMAGE = 'https://www.lemonde.fr/judo/article/2017/11/11/judo-la-decima-de-teddy-riner_5213605_1556020.html';
     public $downloadImagesEnabled = false;
-    public $url = 'http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html';
+    public $url = 'https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html';
 
     /**
      * @after
@@ -1143,7 +1143,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         $entry = new Entry($this->getLoggedInUser());
-        $entry->setUrl('http://www.lemonde.fr/incorrect-url/');
+        $entry->setUrl('https://www.lemonde.fr/incorrect-url/');
         $entry->setHttpStatus(404);
         $this->getEntityManager()->persist($entry);
 
@@ -1342,8 +1342,8 @@ class EntryControllerTest extends WallabagCoreTestCase
                 null,
             ],
             'es-ES' => [
-                'https://www.muylinux.com/2015/04/17/odf-reino-unido-microsoft-google/',
-                'es_ES',
+                'https://www.20minutos.es/noticia/3360685/0/gobierno-sanchez-primero-historia-mas-mujeres-que-hombres/',
+                'es',
             ],
         ];
     }
