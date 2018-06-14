@@ -2,27 +2,15 @@
 
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
 /**
  * Added index on wallabag_entry.uid.
  */
-class Version20161214094403 extends AbstractMigration implements ContainerAwareInterface
+class Version20161214094403 extends WallabagMigration
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-
     private $indexName = 'IDX_entry_uid';
-
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
 
     /**
      * @param Schema $schema
@@ -44,10 +32,5 @@ class Version20161214094403 extends AbstractMigration implements ContainerAwareI
         $this->skipIf(false === $entryTable->hasIndex($this->indexName), 'It seems that you already played this migration.');
 
         $entryTable->dropIndex($this->indexName);
-    }
-
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

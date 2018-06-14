@@ -2,26 +2,14 @@
 
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
 /**
  * Renamed uuid to uid in entry table.
  */
-class Version20161214094402 extends AbstractMigration implements ContainerAwareInterface
+class Version20161214094402 extends WallabagMigration
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
-
     /**
      * @param Schema $schema
      */
@@ -66,10 +54,5 @@ class Version20161214094402 extends AbstractMigration implements ContainerAwareI
             case 'postgresql':
                 $this->addSql('ALTER TABLE ' . $this->getTable('entry') . ' RENAME uid TO uuid');
         }
-    }
-
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }
