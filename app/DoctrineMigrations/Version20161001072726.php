@@ -24,7 +24,7 @@ class Version20161001072726 extends WallabagMigration
                 $query = $this->connection->query("
                     SELECT CONSTRAINT_NAME
                     FROM information_schema.key_column_usage
-                    WHERE TABLE_NAME = '" . $this->getTable('entry_tag') . "' AND CONSTRAINT_NAME LIKE 'FK_%'
+                    WHERE TABLE_NAME = '" . $this->getTable('entry_tag', WallabagMigration::UN_ESCAPED_TABLE) . "' AND CONSTRAINT_NAME LIKE 'FK_%'
                     AND TABLE_SCHEMA = '" . $this->connection->getDatabase() . "'"
                 );
                 $query->execute();
@@ -42,7 +42,7 @@ class Version20161001072726 extends WallabagMigration
                     FROM   pg_constraint c
                     JOIN   pg_namespace n ON n.oid = c.connamespace
                     WHERE  contype = 'f'
-                    AND    conrelid::regclass::text = '" . $this->getTable('entry_tag') . "'
+                    AND    conrelid::regclass::text = '" . $this->getTable('entry_tag', WallabagMigration::UN_ESCAPED_TABLE) . "'
                     AND    n.nspname = 'public';"
                 );
                 $query->execute();
@@ -63,7 +63,7 @@ class Version20161001072726 extends WallabagMigration
                 $query = $this->connection->query("
                     SELECT CONSTRAINT_NAME
                     FROM information_schema.key_column_usage
-                    WHERE TABLE_NAME = '" . $this->getTable('annotation') . "'
+                    WHERE TABLE_NAME = '" . $this->getTable('annotation', WallabagMigration::UN_ESCAPED_TABLE) . "'
                     AND CONSTRAINT_NAME LIKE 'FK_%'
                     AND COLUMN_NAME = 'entry_id'
                     AND TABLE_SCHEMA = '" . $this->connection->getDatabase() . "'"
@@ -83,7 +83,7 @@ class Version20161001072726 extends WallabagMigration
                     FROM   pg_constraint c
                     JOIN   pg_namespace n ON n.oid = c.connamespace
                     WHERE  contype = 'f'
-                    AND    conrelid::regclass::text = '" . $this->getTable('annotation') . "'
+                    AND    conrelid::regclass::text = '" . $this->getTable('annotation', WallabagMigration::UN_ESCAPED_TABLE) . "'
                     AND    n.nspname = 'public'
                     AND    pg_get_constraintdef(c.oid) LIKE '%entry_id%';"
                 );
