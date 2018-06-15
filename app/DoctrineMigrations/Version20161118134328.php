@@ -2,26 +2,14 @@
 
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
 /**
  * Add http_status in `entry_table`.
  */
-class Version20161118134328 extends AbstractMigration implements ContainerAwareInterface
+class Version20161118134328 extends WallabagMigration
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
-
     /**
      * @param Schema $schema
      */
@@ -47,10 +35,5 @@ class Version20161118134328 extends AbstractMigration implements ContainerAwareI
         $this->skipIf(!$entryTable->hasColumn('http_status'), 'It seems that you already played this migration.');
 
         $entryTable->dropColumn('http_status');
-    }
-
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }
