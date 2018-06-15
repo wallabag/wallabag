@@ -189,7 +189,7 @@ class EntryRepository extends EntityRepository
             $qb->orderBy('e.id', $order);
         } elseif ('updated' === $sort) {
             $qb->orderBy('e.updatedAt', $order);
-        } else if ('archived' === $sort) {
+        } elseif ('archived' === $sort) {
             $qb->orderBy('e.archivedAt', $order);
         }
 
