@@ -62,7 +62,7 @@ parameters:
 | database_user | Utilisateur de votre base de données | root |
 | database_password | Mot de passe de cet utilisateur | ~ |
 | database_path | Uniquement pour SQLite. Chemin du fichier de base de données. Laissez vide pour les autres bases de données. | `%kernel.root_dir%/ ../data/db/wallabag.sqlite` |
-| database_table_prefix | Toutes les tables de wallabag seront préfixées par cette chaine. Vous pouvez ajouter un _ pour plus de clarté | wallabag_ |
+| database_table_prefix | Toutes les tables de wallabag seront préfixées par cette chaine. Vous pouvez ajouter un ``_`` pour plus de clarté MAIS SURTOUT PAS UN ``-`` | wallabag_ |
 | database_socket | Si votre base de données utilise un socket plutôt que tcp, spécifiez le chemin du socket (les autres paramètres de connexion seront alors ignorés) | null |
 | database_charset | Pour PostgreSQL & SQLite vous devriez utiliser utf8, pour MySQL utilisez utf8mb4 pour prendre en charge les emoji et autres caractères spéciaux | utf8mb4 |
 
