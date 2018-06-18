@@ -61,7 +61,7 @@ parameters:
 | database_user | user that can write to this database | root |
 | database_password | password of that user| ~ |
 | database_path | only for SQLite, define where to put the database file. Put it to null for any other database | `%kernel.root_dir%/ ../data/db/wallabag.sqlite` |
-| database_table_prefix | all wallabag's tables will be prefixed with that string. You can include a ``_`` for clarity | wallabag_ |
+| database_table_prefix | all wallabag's tables will be prefixed with that string. You can include a ``_`` for clarity BUT NEVER USE A ``-`` | wallabag_ |
 | database_socket | If your database is using a socket instead of tcp, put the path of the socket (other connection parameters will then be ignored) | null |
 | database_charset | For PostgreSQL & SQLite you should use utf8, for MySQL use utf8mb4 to handle emoji and other special characters | utf8mb4 |
 
