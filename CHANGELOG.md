@@ -1,5 +1,29 @@
 # Changelog
 
+## [2.3.3](https://github.com/wallabag/wallabag/tree/2.3.3)
+   [Full Changelog](https://github.com/wallabag/wallabag/compare/2.3.2...2.3.3)
+
+### Fixes
+
+- Fix error when withRemove variable is not defined. [#3573](https://github.com/wallabag/wallabag/pull/3573)
+- Fix title card HTML parsing [#3592](https://github.com/wallabag/wallabag/pull/3592)
+- Fix tests [#3597](https://github.com/wallabag/wallabag/pull/3597)
+- Fix tests [#3619](https://github.com/wallabag/wallabag/pull/3619)
+- Better encoding of the URI for the bookmarklet [#3616](https://github.com/wallabag/wallabag/pull/3616)
+- Fix overflow wrap issue [#3652](https://github.com/wallabag/wallabag/pull/3652)
+- Fix/firefox mobile unneeded resize [#3653](https://github.com/wallabag/wallabag/pull/3653)
+- Fix srcset attribute on images downloaded [#3661](https://github.com/wallabag/wallabag/pull/3661)
+- Fix authors and preview alt encoding display [#3664](https://github.com/wallabag/wallabag/pull/3664)
+- Spelling: GitHub, Log out, of the dev [#3614](https://github.com/wallabag/wallabag/pull/3614)
+- Fix tests [#3668](https://github.com/wallabag/wallabag/pull/3668)
+- Fixed migrations with dash into db names [#3538](https://github.com/wallabag/wallabag/pull/3538)
+
+### Changes
+
+- Allow login by email [#3615](https://github.com/wallabag/wallabag/pull/3615)
+- Occitan update [#3646](https://github.com/wallabag/wallabag/pull/3646)
+- Highlight code in articles using highlight.js [#3636](https://github.com/wallabag/wallabag/pull/3636)
+
 ## [2.3.2](https://github.com/wallabag/wallabag/tree/2.3.2)
    [Full Changelog](https://github.com/wallabag/wallabag/compare/2.3.1...2.3.2)
 
