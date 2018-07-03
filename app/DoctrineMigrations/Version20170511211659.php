@@ -2,27 +2,15 @@
 
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Migrations\SkipMigrationException;
 use Doctrine\DBAL\Schema\Schema;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
 /**
  * Increase the length of the "quote" column of "annotation" table.
  */
-class Version20170511211659 extends AbstractMigration implements ContainerAwareInterface
+class Version20170511211659 extends WallabagMigration
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
-
     public function up(Schema $schema)
     {
         $tableName = $this->getTable('annotation');
@@ -30,8 +18,8 @@ class Version20170511211659 extends AbstractMigration implements ContainerAwareI
         switch ($this->connection->getDatabasePlatform()->getName()) {
             case 'sqlite':
                 $this->addSql(<<<EOD
-CREATE TEMPORARY TABLE __temp__wallabag_annotation AS 
-    SELECT id, user_id, entry_id, text, created_at, updated_at, quote, ranges 
+CREATE TEMPORARY TABLE __temp__wallabag_annotation AS
+    SELECT id, user_id, entry_id, text, created_at, updated_at, quote, ranges
     FROM ${tableName}
 EOD
                 );
@@ -56,8 +44,8 @@ EOD
                 );
 
                 $this->addSql(<<<EOD
-INSERT INTO ${tableName} (id, user_id, entry_id, text, created_at, updated_at, quote, ranges) 
-SELECT id, user_id, entry_id, text, created_at, updated_at, quote, ranges 
+INSERT INTO ${tableName} (id, user_id, entry_id, text, created_at, updated_at, quote, ranges)
+SELECT id, user_id, entry_id, text, created_at, updated_at, quote, ranges
 FROM __temp__wallabag_annotation;
 EOD
                 );
@@ -87,10 +75,5 @@ EOD
                 $this->addSql('ALTER TABLE ' . $tableName . ' ALTER COLUMN quote TYPE VARCHAR(255)');
                 break;
         }
-    }
-
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

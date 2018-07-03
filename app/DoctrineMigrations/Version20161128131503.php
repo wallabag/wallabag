@@ -2,31 +2,19 @@
 
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
 /**
  * Removed locked, credentials_expire_at and expires_at.
  */
-class Version20161128131503 extends AbstractMigration implements ContainerAwareInterface
+class Version20161128131503 extends WallabagMigration
 {
     private $fields = [
         'locked' => 'smallint',
         'credentials_expire_at' => 'datetime',
         'expires_at' => 'datetime',
     ];
-
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
 
     /**
      * @param Schema $schema
@@ -52,10 +40,5 @@ class Version20161128131503 extends AbstractMigration implements ContainerAwareI
             $this->skipIf($userTable->hasColumn($field), 'It seems that you already played this migration.');
             $userTable->addColumn($field, $type, ['notnull' => false]);
         }
-    }
-
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

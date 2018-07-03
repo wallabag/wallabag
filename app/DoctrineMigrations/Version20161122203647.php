@@ -2,10 +2,8 @@
 
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
 /**
  * Methods and properties removed from `FOS\UserBundle\Model\User`.
@@ -18,18 +16,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * You need to drop the fields `expired` and `credentials_expired` from your database
  * schema, because they aren't mapped anymore.
  */
-class Version20161122203647 extends AbstractMigration implements ContainerAwareInterface
+class Version20161122203647 extends WallabagMigration
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
-
     /**
      * @param Schema $schema
      */
@@ -54,10 +42,5 @@ class Version20161122203647 extends AbstractMigration implements ContainerAwareI
 
         $userTable->addColumn('expired', 'smallint', ['notnull' => false]);
         $userTable->addColumn('credentials_expired', 'smallint', ['notnull' => false]);
-    }
-
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

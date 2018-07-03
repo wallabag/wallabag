@@ -11,7 +11,6 @@ use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\RecursiveValidator;
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Helper\RuleBasedTagger;
 use Wallabag\UserBundle\Entity\User;

@@ -419,7 +419,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testPostEntry()
     {
         $this->client->request('POST', '/api/entries.json', [
-            'url' => 'http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
+            'url' => 'https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
             'tags' => 'google',
             'title' => 'New title for my article',
             'content' => 'my content',
@@ -434,7 +434,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertGreaterThan(0, $content['id']);
-        $this->assertSame('http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html', $content['url']);
+        $this->assertSame('https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html', $content['url']);
         $this->assertSame(0, $content['is_archived']);
         $this->assertSame(0, $content['is_starred']);
         $this->assertNull($content['starred_at']);
@@ -455,7 +455,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
     {
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
         $entry = new Entry($em->getReference(User::class, 1));
-        $entry->setUrl('http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html');
+        $entry->setUrl('https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html');
         $entry->setArchived(true);
         $entry->addTag((new Tag())->setLabel('google'));
         $entry->addTag((new Tag())->setLabel('apple'));
@@ -464,7 +464,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $em->clear();
 
         $this->client->request('POST', '/api/entries.json', [
-            'url' => 'http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
+            'url' => 'https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
             'archive' => '1',
             'tags' => 'google, apple',
         ]);
@@ -474,7 +474,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertGreaterThan(0, $content['id']);
-        $this->assertSame('http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html', $content['url']);
+        $this->assertSame('https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html', $content['url']);
         $this->assertSame(1, $content['is_archived']);
         $this->assertSame(0, $content['is_starred']);
         $this->assertCount(3, $content['tags']);
@@ -519,7 +519,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
     {
         $now = new \DateTime();
         $this->client->request('POST', '/api/entries.json', [
-            'url' => 'http://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html',
+            'url' => 'https://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html',
             'archive' => '1',
             'starred' => '1',
         ]);
@@ -529,7 +529,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertGreaterThan(0, $content['id']);
-        $this->assertSame('http://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html', $content['url']);
+        $this->assertSame('https://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html', $content['url']);
         $this->assertSame(1, $content['is_archived']);
         $this->assertSame(1, $content['is_starred']);
         $this->assertGreaterThanOrEqual($now->getTimestamp(), (new \DateTime($content['starred_at']))->getTimestamp());
@@ -539,7 +539,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testPostArchivedAndStarredEntryWithoutQuotes()
     {
         $this->client->request('POST', '/api/entries.json', [
-            'url' => 'http://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html',
+            'url' => 'https://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html',
             'archive' => 0,
             'starred' => 1,
         ]);
@@ -549,7 +549,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertGreaterThan(0, $content['id']);
-        $this->assertSame('http://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html', $content['url']);
+        $this->assertSame('https://www.lemonde.fr/idees/article/2016/02/08/preserver-la-liberte-d-expression-sur-les-reseaux-sociaux_4861503_3232.html', $content['url']);
         $this->assertSame(0, $content['is_archived']);
         $this->assertSame(1, $content['is_starred']);
     }
@@ -557,7 +557,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testPostEntryWithOriginUrl()
     {
         $this->client->request('POST', '/api/entries.json', [
-            'url' => 'http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
+            'url' => 'https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
             'tags' => 'google',
             'title' => 'New title for my article',
             'content' => 'my content',
@@ -573,7 +573,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertGreaterThan(0, $content['id']);
-        $this->assertSame('http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html', $content['url']);
+        $this->assertSame('https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html', $content['url']);
         $this->assertSame('http://mysource.tld', $content['origin_url']);
     }
 
@@ -1013,7 +1013,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testReloadEntry()
     {
         $this->client->request('POST', '/api/entries.json', [
-            'url' => 'http://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
+            'url' => 'https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
             'archive' => '1',
             'tags' => 'google, apple',
         ]);
@@ -1117,7 +1117,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testPostEntriesListAction()
     {
         $list = [
-            'http://www.lemonde.fr/musiques/article/2017/04/23/loin-de-la-politique-le-printemps-de-bourges-retombe-en-enfance_5115862_1654986.html',
+            'https://www.lemonde.fr/musiques/article/2017/04/23/loin-de-la-politique-le-printemps-de-bourges-retombe-en-enfance_5115862_1654986.html',
             'http://0.0.0.0/entry2',
         ];
 
@@ -1128,7 +1128,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertInternalType('int', $content[0]['entry']);
-        $this->assertSame('http://www.lemonde.fr/musiques/article/2017/04/23/loin-de-la-politique-le-printemps-de-bourges-retombe-en-enfance_5115862_1654986.html', $content[0]['url']);
+        $this->assertSame('https://www.lemonde.fr/musiques/article/2017/04/23/loin-de-la-politique-le-printemps-de-bourges-retombe-en-enfance_5115862_1654986.html', $content[0]['url']);
 
         $this->assertInternalType('int', $content[1]['entry']);
         $this->assertSame('http://0.0.0.0/entry2', $content[1]['url']);
@@ -1209,14 +1209,14 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $entry = new Entry($em->getReference(User::class, 1));
         $entry->setTitle('Antoine de Caunes : « Je veux avoir le droit de tâtonner »');
         $entry->setContent('hihi');
-        $entry->setUrl('http://www.lemonde.fr/m-perso/article/2017/06/25/antoine-de-caunes-je-veux-avoir-le-droit-de-tatonner_5150728_4497916.html');
+        $entry->setUrl('https://www.lemonde.fr/m-perso/article/2017/06/25/antoine-de-caunes-je-veux-avoir-le-droit-de-tatonner_5150728_4497916.html');
         $entry->setPublishedAt(new \DateTime('2017-06-26T07:46:02+0200'));
         $em->persist($entry);
         $em->flush();
         $em->clear();
 
         $this->client->request('POST', '/api/entries.json', [
-            'url' => 'http://www.lemonde.fr/m-perso/article/2017/06/25/antoine-de-caunes-je-veux-avoir-le-droit-de-tatonner_5150728_4497916.html',
+            'url' => 'https://www.lemonde.fr/m-perso/article/2017/06/25/antoine-de-caunes-je-veux-avoir-le-droit-de-tatonner_5150728_4497916.html',
         ]);
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
@@ -1224,6 +1224,6 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertGreaterThan(0, $content['id']);
-        $this->assertSame('http://www.lemonde.fr/m-perso/article/2017/06/25/antoine-de-caunes-je-veux-avoir-le-droit-de-tatonner_5150728_4497916.html', $content['url']);
+        $this->assertSame('https://www.lemonde.fr/m-perso/article/2017/06/25/antoine-de-caunes-je-veux-avoir-le-droit-de-tatonner_5150728_4497916.html', $content['url']);
     }
 }

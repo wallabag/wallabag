@@ -2,27 +2,15 @@
 
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
 /**
  * Added user_id column on oauth2_clients to prevent users to delete API clients from other users.
  */
-class Version20161024212538 extends AbstractMigration implements ContainerAwareInterface
+class Version20161024212538 extends WallabagMigration
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-
     private $constraintName = 'IDX_user_oauth_client';
-
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
 
     /**
      * @param Schema $schema
@@ -58,10 +46,5 @@ class Version20161024212538 extends AbstractMigration implements ContainerAwareI
         if ('sqlite' !== $this->connection->getDatabasePlatform()->getName()) {
             $clientsTable->removeForeignKey($this->constraintName);
         }
-    }
-
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

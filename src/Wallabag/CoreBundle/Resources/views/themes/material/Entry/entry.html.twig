@@ -245,7 +245,7 @@
                         <li>
                             <i class="material-icons" title="{{ 'entry.view.published_by'|trans }}">person</i>
                             {% for author in entry.publishedBy %}
-                                {{ author }}{% if not loop.last %}, {% endif %}
+                                {{ author|raw }}{% if not loop.last %}, {% endif %}
                             {% endfor %}
                         </li>
                     {% endif %}
@@ -276,7 +276,7 @@
             </div>
 
             {% if entry.previewPicture is not null %}
-                <div><img class="preview" src="{{ entry.previewPicture }}" alt="{{ entry.title|striptags|e('html_attr') }}" /></div>
+                <div><img class="preview" src="{{ entry.previewPicture }}" alt="{{ entry.title|striptags|default('entry.default_title'|trans)|raw }}" /></div>
             {% endif %}
 
         </aside>

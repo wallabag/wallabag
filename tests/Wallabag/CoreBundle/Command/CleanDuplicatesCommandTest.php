@@ -60,7 +60,7 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
 
     public function testDuplicate()
     {
-        $url = 'http://www.lemonde.fr/sport/visuel/2017/05/05/rondelle-prison-blanchissage-comprendre-le-hockey-sur-glace_5122587_3242.html';
+        $url = 'https://www.lemonde.fr/sport/visuel/2017/05/05/rondelle-prison-blanchissage-comprendre-le-hockey-sur-glace_5122587_3242.html';
         $client = $this->getClient();
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
 

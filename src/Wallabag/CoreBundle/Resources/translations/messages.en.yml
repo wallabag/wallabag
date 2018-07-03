@@ -265,7 +265,7 @@ about:
     who_behind_wallabag:
         developped_by: 'Developed by'
         website: 'website'
-        many_contributors: 'And many others contributors ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">on Github</a>'
+        many_contributors: 'And many others contributors ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">on GitHub</a>'
         project_website: 'Project website'
         license: 'License'
         version: 'Version'
@@ -323,7 +323,7 @@ howto:
         go_import: Go to import
         go_developers: Go to developers
         go_howto: Go to howto (this page!)
-        go_logout: Logout
+        go_logout: Log out
         list_title: Shortcuts available in listing pages
         search: Display the search form
         article_title: Shortcuts available in entry view
@@ -373,7 +373,7 @@ quickstart:
         instapaper: 'Migrate from Instapaper'
     developer:
         title: 'Developers'
-        description: 'We also thought to the developers: Docker, API, translations, etc.'
+        description: 'We also thought of the developers: Docker, API, translations, etc.'
         create_application: 'Create your third-party application'
         use_docker: 'Use Docker to install wallabag'
     docs:

@@ -13,8 +13,10 @@ import './global.scss';
 import './js/shortcuts/entry';
 import './js/shortcuts/main';
 
-import { savePercent, retrievePercent } from './js/tools';
+/* Hightlight */
+import './js/highlight';
 
+import { savePercent, retrievePercent } from './js/tools';
 
 /* ==========================================================================
  Annotations & Remember position
@@ -65,7 +67,7 @@ $(document).ready(() => {
     retrievePercent(x.entryId);
 
     $(window).resize(() => {
-      retrievePercent(x.entryId);
+      retrievePercent(x.entryId, true);
     });
   }
 });

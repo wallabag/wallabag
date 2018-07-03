@@ -42,14 +42,17 @@ class DownloadImages
     public function processHtml($entryId, $html, $url)
     {
         $crawler = new Crawler($html);
-        $result = $crawler
-            ->filterXpath('//img')
+        $imagesCrawler = $crawler
+            ->filterXpath('//img');
+        $imagesUrls = $imagesCrawler
             ->extract(['src']);
+        $imagesSrcsetUrls = $this->getSrcsetUrls($imagesCrawler);
+        $imagesUrls = array_unique(array_merge($imagesUrls, $imagesSrcsetUrls));
 
         $relativePath = $this->getRelativePath($entryId);
 
         // download and save the image to the folder
-        foreach ($result as $image) {
+        foreach ($imagesUrls as $image) {
             $imagePath = $this->processSingleImage($entryId, $image, $url, $relativePath);
 
             if (false === $imagePath) {
@@ -169,6 +172,33 @@ class DownloadImages
         }
 
         @rmdir($folderPath);
+    }
+
+    /**
+     * Get images urls from the srcset image attribute.
+     *
+     * @param Crawler $imagesCrawler
+     *
+     * @return array An array of urls
+     */
+    protected function getSrcsetUrls(Crawler $imagesCrawler)
+    {
+        $urls = [];
+        $iterator = $imagesCrawler
+            ->getIterator();
+        while ($iterator->valid()) {
+            $srcsetAttribute = $iterator->current()->getAttribute('srcset');
+            if ('' !== $srcsetAttribute) {
+                $srcset = array_map('trim', explode(',', $srcsetAttribute));
+                $srcsetUrls = array_map(function ($src) {
+                    return explode(' ', $src)[0];
+                }, $srcset);
+                $urls = array_merge($srcsetUrls, $urls);
+            }
+            $iterator->next();
+        }
+
+        return $urls;
     }
 
     /**

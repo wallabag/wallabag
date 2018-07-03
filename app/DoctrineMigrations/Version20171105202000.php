@@ -2,26 +2,14 @@
 
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
 /**
  * Add origin_url column.
  */
-class Version20171105202000 extends AbstractMigration implements ContainerAwareInterface
+class Version20171105202000 extends WallabagMigration
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
-
     /**
      * @param Schema $schema
      */
@@ -46,10 +34,5 @@ class Version20171105202000 extends AbstractMigration implements ContainerAwareI
         $this->skipIf(!$entryTable->hasColumn('origin_url'), 'It seems that you already played this migration.');
 
         $entryTable->dropColumn('origin_url');
-    }
-
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }
