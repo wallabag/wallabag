@@ -128,14 +128,14 @@ class FirefoxControllerTest extends WallabagCoreTestCase
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId(
-                'https://stackoverflow.com/questions/15017163/parser-for-exported-bookmarks-html-file-of-google-chrome-and-mozilla-in-java',
+                'https://www.lemonde.fr/disparitions/article/2018/07/05/le-journaliste-et-cineaste-claude-lanzmann-est-mort_5326313_3382.html',
                 $this->getLoggedInUserId()
             );
 
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
-        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://stackoverflow.com is ok');
-        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://stackoverflow.com is ok');
-        $this->assertEmpty($content->getLanguage(), 'Language for https://stackoverflow.com is ok');
+        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://www.lemonde.fr is ok');
+        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.lemonde.fr is ok');
+        $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.lemonde.fr is ok');
 
         $createdAt = $content->getCreatedAt();
         $this->assertSame('2013', $createdAt->format('Y'));
