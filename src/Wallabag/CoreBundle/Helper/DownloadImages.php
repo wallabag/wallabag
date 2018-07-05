@@ -85,6 +85,10 @@ class DownloadImages
      */
     public function processSingleImage($entryId, $imagePath, $url, $relativePath = null)
     {
+        if (null === $imagePath) {
+            return false;
+        }
+
         if (null === $relativePath) {
             $relativePath = $this->getRelativePath($entryId);
         }
