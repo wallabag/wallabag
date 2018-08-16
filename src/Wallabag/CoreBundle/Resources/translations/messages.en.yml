@@ -116,7 +116,7 @@ config:
         archived: Remove ALL archived entries
         confirm: Are you really sure? (THIS CAN'T BE UNDONE)
     form_password:
-        description: "You can change your password here. Your new password should by at least 8 characters long."
+        description: "You can change your password here. Your new password should be at least 8 characters long."
         old_password_label: 'Current password'
         new_password_label: 'New password'
         repeat_new_password_label: 'Repeat new password'
