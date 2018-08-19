@@ -1325,10 +1325,6 @@ class EntryControllerTest extends WallabagCoreTestCase
                 'http://www.hao123.com/shequ?__noscript__-=1',
                 'zh_CN',
             ],
-            'de_AT' => [
-                'https://buy.garmin.com/de-AT/AT/catalog/product/compareResult.ep?compareProduct=112885&compareProduct=36728',
-                'de_AT',
-            ],
             'ru_RU' => [
                 'http://netler.ru/ikt/windows-error-reporting.htm',
                 'ru_RU',
