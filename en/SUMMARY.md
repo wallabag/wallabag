@@ -40,6 +40,7 @@
     * [Installation](admin/installation/installation.md)
     * [VirtualHosts](admin/installation/virtualhosts.md)
     * [Right Access](admin/installation/rightaccess.md)
+* [Common errors](admin/common_errors.md)
 * [Backup](admin/backup.md)
 * [Console commands](admin/console_commands.md)
 * [Asynchronous](admin/asynchronous.md)
