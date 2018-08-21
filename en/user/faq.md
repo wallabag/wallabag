@@ -1,5 +1,7 @@
 # Frequently Asked Questions
 
+You can also check for [common errors](../admin/common_errors.md) regarding the installation & configuration of your instance.
+
 ## During the installation, I got the error `Error Output: sh: 1: @post-cmd: not found`
 
 It seems you have a problem with your `composer` installation. Try to
