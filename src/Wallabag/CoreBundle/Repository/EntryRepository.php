@@ -130,6 +130,20 @@ class EntryRepository extends EntityRepository
     }
 
     /**
+     * Retrieve the number of untagged entries for a user.
+     * 
+     * @param int $userId
+     * 
+     * @return int
+     */
+    public function countUntaggedEntriesByUser($userId)
+    {
+        return $this->getRawBuilderForUntaggedByUser($userId)
+            ->select('count(e.id)')
+            ->getSingleScalarResult();
+    }
+
+    /**
      * Find Entries.
      *
      * @param int    $userId
