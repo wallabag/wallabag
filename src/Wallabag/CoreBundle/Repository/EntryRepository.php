@@ -102,7 +102,7 @@ class EntryRepository extends EntityRepository
     }
 
     /**
-     * Retrieves untagged entries for a user.
+     * Retrieve a sorted list of untagged entries for a user.
      *
      * @param int $userId
      *
@@ -111,8 +111,21 @@ class EntryRepository extends EntityRepository
     public function getBuilderForUntaggedByUser($userId)
     {
         return $this
-            ->getSortedQueryBuilderByUser($userId)
-            ->andWhere('size(e.tags) = 0');
+            ->sortQueryBuilder($this->getRawBuilderForUntaggedByUser($userId));
+    }
+
+    /**
+     * Retrieve untagged entries for a user.
+     * 
+     * @param int $userId
+     * 
+     * @return QueryBuilder
+     */
+    public function getRawBuilderForUntaggedByUser($userId)
+    {
+        return $this->getQueryBuilderByUser($userId)
+            ->leftJoin('e.tags', 't')
+            ->andWhere('t.id is null');
     }
 
     /**
