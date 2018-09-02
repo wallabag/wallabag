@@ -116,9 +116,9 @@ class EntryRepository extends EntityRepository
 
     /**
      * Retrieve untagged entries for a user.
-     * 
+     *
      * @param int $userId
-     * 
+     *
      * @return QueryBuilder
      */
     public function getRawBuilderForUntaggedByUser($userId)
@@ -429,7 +429,7 @@ class EntryRepository extends EntityRepository
     /**
      * Return a query builder to be used by other getBuilderFor* method.
      *
-     * @param int    $userId
+     * @param int $userId
      *
      * @return QueryBuilder
      */
@@ -454,11 +454,11 @@ class EntryRepository extends EntityRepository
     }
 
     /**
-     * Return the given QueryBuilder with an orderBy() call
-     * 
+     * Return the given QueryBuilder with an orderBy() call.
+     *
      * @param QueryBuilder $qb
-     * @param string $sortBy
-     * @param string $direction
+     * @param string       $sortBy
+     * @param string       $direction
      *
      * @return QueryBuilder
      */
