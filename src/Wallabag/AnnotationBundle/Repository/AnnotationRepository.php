@@ -21,7 +21,7 @@ class AnnotationRepository extends EntityRepository
     public function getBuilderForAllByUser($userId)
     {
         return $this
-            ->getBuilderByUser($userId)
+            ->getSortedQueryBuilderByUser($userId)
         ;
     }
 
@@ -133,7 +133,7 @@ class AnnotationRepository extends EntityRepository
      *
      * @return QueryBuilder
      */
-    private function getBuilderByUser($userId)
+    private function getSortedQueryBuilderByUser($userId)
     {
         return $this->createQueryBuilder('a')
             ->leftJoin('a.user', 'u')
