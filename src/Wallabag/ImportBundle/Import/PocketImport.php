@@ -149,7 +149,7 @@ class PocketImport extends AbstractImport
         //  - first call get 5k offset 0
         //  - second call get 5k offset 5k
         //  - and so on
-        if (self::NB_ELEMENTS === count($entries['list'])) {
+        if (self::NB_ELEMENTS === \count($entries['list'])) {
             ++$run;
 
             return $this->import(self::NB_ELEMENTS * $run);

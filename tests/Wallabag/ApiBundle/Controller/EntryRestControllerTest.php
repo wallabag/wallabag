@@ -28,7 +28,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertSame($entry->getTitle(), $content['title']);
         $this->assertSame($entry->getUrl(), $content['url']);
-        $this->assertCount(count($entry->getTags()), $content['tags']);
+        $this->assertCount(\count($entry->getTags()), $content['tags']);
         $this->assertSame($entry->getUserName(), $content['user_name']);
         $this->assertSame($entry->getUserEmail(), $content['user_email']);
         $this->assertSame($entry->getUserId(), $content['user_id']);
@@ -127,7 +127,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertGreaterThanOrEqual(1, count($content));
+        $this->assertGreaterThanOrEqual(1, \count($content));
         $this->assertNotEmpty($content['_embedded']['items']);
         $this->assertGreaterThanOrEqual(1, $content['total']);
         $this->assertSame(1, $content['page']);
@@ -154,7 +154,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertGreaterThanOrEqual(1, count($content));
+        $this->assertGreaterThanOrEqual(1, \count($content));
         $this->assertArrayHasKey('items', $content['_embedded']);
         $this->assertGreaterThanOrEqual(0, $content['total']);
         $this->assertSame(1, $content['page']);
@@ -206,7 +206,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertGreaterThanOrEqual(1, count($content));
+        $this->assertGreaterThanOrEqual(1, \count($content));
         $this->assertArrayHasKey('items', $content['_embedded']);
         $this->assertGreaterThanOrEqual(1, $content['total']);
         $this->assertSame(1, $content['page']);
@@ -250,7 +250,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertGreaterThanOrEqual(1, count($content));
+        $this->assertGreaterThanOrEqual(1, \count($content));
         $this->assertNotEmpty($content['_embedded']['items']);
         $this->assertGreaterThanOrEqual(1, $content['total']);
         $this->assertSame(1, $content['page']);
@@ -278,7 +278,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertGreaterThanOrEqual(1, count($content));
+        $this->assertGreaterThanOrEqual(1, \count($content));
         $this->assertNotEmpty($content['_embedded']['items']);
         $this->assertGreaterThanOrEqual(1, $content['total']);
         $this->assertSame(1, $content['page']);
@@ -305,7 +305,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertGreaterThanOrEqual(1, count($content));
+        $this->assertGreaterThanOrEqual(1, \count($content));
         $this->assertNotEmpty($content['_embedded']['items']);
         $this->assertGreaterThanOrEqual(1, $content['total']);
         $this->assertSame(1, $content['page']);
@@ -342,7 +342,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertGreaterThanOrEqual(1, count($content));
+        $this->assertGreaterThanOrEqual(1, \count($content));
         $this->assertNotEmpty($content['_embedded']['items']);
         $this->assertGreaterThanOrEqual(1, $content['total']);
         $this->assertSame(1, $content['page']);
@@ -370,7 +370,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertGreaterThanOrEqual(1, count($content));
+        $this->assertGreaterThanOrEqual(1, \count($content));
         $this->assertEmpty($content['_embedded']['items']);
         $this->assertSame(0, $content['total']);
         $this->assertSame(1, $content['page']);
@@ -608,7 +608,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame($entry->getId(), $content['id']);
         $this->assertSame($entry->getUrl(), $content['url']);
         $this->assertSame('New awesome title', $content['title']);
-        $this->assertGreaterThanOrEqual(1, count($content['tags']), 'We force only one tag');
+        $this->assertGreaterThanOrEqual(1, \count($content['tags']), 'We force only one tag');
         $this->assertSame(1, $content['user_id']);
         $this->assertSame('de_AT', $content['language']);
         $this->assertSame('http://preview.io/picture.jpg', $content['preview_picture']);
@@ -647,7 +647,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertSame($entry->getId(), $content['id']);
         $this->assertSame($entry->getUrl(), $content['url']);
-        $this->assertGreaterThanOrEqual(1, count($content['tags']), 'We force only one tag');
+        $this->assertGreaterThanOrEqual(1, \count($content['tags']), 'We force only one tag');
         $this->assertEmpty($content['published_by'], 'Authors were not saved because of an array instead of a string');
         $this->assertSame($previousContent, $content['content'], 'Ensure content has not moved');
         $this->assertSame($previousLanguage, $content['language'], 'Ensure language has not moved');
@@ -772,7 +772,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             $this->markTestSkipped('No content found in db.');
         }
 
-        $nbTags = count($entry->getTags());
+        $nbTags = \count($entry->getTags());
 
         $newTags = 'tag1,tag2,tag3';
 
@@ -783,7 +783,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertArrayHasKey('tags', $content);
-        $this->assertSame($nbTags + 3, count($content['tags']));
+        $this->assertSame($nbTags + 3, \count($content['tags']));
 
         $entryDB = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
@@ -813,7 +813,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         }
 
         // hydrate the tags relations
-        $nbTags = count($entry->getTags());
+        $nbTags = \count($entry->getTags());
         $tag = $entry->getTags()[0];
 
         $this->client->request('DELETE', '/api/entries/' . $entry->getId() . '/tags/' . $tag->getId() . '.json');
@@ -823,7 +823,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertArrayHasKey('tags', $content);
-        $this->assertSame($nbTags - 1, count($content['tags']));
+        $this->assertSame($nbTags - 1, \count($content['tags']));
     }
 
     public function testSaveIsArchivedAfterPost()

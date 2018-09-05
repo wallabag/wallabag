@@ -127,7 +127,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $tags = $content->getTags();
         $this->assertContains('foot', $tags, 'It includes the "foot" tag');
         $this->assertContains('framabag', $tags, 'It includes the "framabag" tag');
-        $this->assertSame(2, count($tags));
+        $this->assertSame(2, \count($tags));
 
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
     }

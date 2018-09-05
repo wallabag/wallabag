@@ -33,7 +33,7 @@ class EntryFilterType extends AbstractType
 
         $this->user = $tokenStorage->getToken() ? $tokenStorage->getToken()->getUser() : null;
 
-        if (null === $this->user || !is_object($this->user)) {
+        if (null === $this->user || !\is_object($this->user)) {
             return;
         }
     }
@@ -96,7 +96,7 @@ class EntryFilterType extends AbstractType
             ->add('domainName', TextFilterType::class, [
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                     $value = $values['value'];
-                    if (strlen($value) <= 2 || empty($value)) {
+                    if (\strlen($value) <= 2 || empty($value)) {
                         return;
                     }
                     $expression = $filterQuery->getExpr()->like($field, $filterQuery->getExpr()->lower($filterQuery->getExpr()->literal('%' . $value . '%')));

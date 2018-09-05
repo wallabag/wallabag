@@ -45,7 +45,7 @@ class EntriesExport
      */
     public function setEntries($entries)
     {
-        if (!is_array($entries)) {
+        if (!\is_array($entries)) {
             $this->language = $entries->getLanguage();
             $entries = [$entries];
         }
@@ -325,7 +325,7 @@ class EntriesExport
     {
         $delimiter = ';';
         $enclosure = '"';
-        $handle = fopen('php://memory', 'rb+');
+        $handle = fopen('php://memory', 'b+r');
 
         fputcsv($handle, ['Title', 'URL', 'Content', 'Tags', 'MIME Type', 'Language', 'Creation date'], $delimiter, $enclosure);
 

@@ -43,7 +43,7 @@ class ImportCommand extends ContainerAwareCommand
             $user = $em->getRepository('WallabagUserBundle:User')->findOneByUsername($input->getArgument('username'));
         }
 
-        if (!is_object($user)) {
+        if (!\is_object($user)) {
             throw new Exception(sprintf('User "%s" not found', $input->getArgument('username')));
         }
 

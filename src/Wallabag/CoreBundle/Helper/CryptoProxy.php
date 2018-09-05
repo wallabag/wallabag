@@ -81,6 +81,6 @@ class CryptoProxy
      */
     private function mask($value)
     {
-        return strlen($value) > 0 ? $value[0] . '*****' . $value[strlen($value) - 1] : 'Empty value';
+        return \strlen($value) > 0 ? $value[0] . '*****' . $value[\strlen($value) - 1] : 'Empty value';
     }
 }

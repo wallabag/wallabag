@@ -62,7 +62,7 @@ class InstapaperImport extends AbstractImport
         }
 
         $entries = [];
-        $handle = fopen($this->filepath, 'r');
+        $handle = fopen($this->filepath, 'rb');
         while (false !== ($data = fgetcsv($handle, 10240))) {
             if ('URL' === $data[0]) {
                 continue;
@@ -72,7 +72,7 @@ class InstapaperImport extends AbstractImport
             // BUT it can also be the status (since status = folder in Instapaper)
             // and we don't want archive, unread & starred to become a tag
             $tags = null;
-            if (false === in_array($data[3], ['Archive', 'Unread', 'Starred'], true)) {
+            if (false === \in_array($data[3], ['Archive', 'Unread', 'Starred'], true)) {
                 $tags = [$data[3]];
             }
 

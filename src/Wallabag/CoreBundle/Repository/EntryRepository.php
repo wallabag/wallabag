@@ -151,7 +151,7 @@ class EntryRepository extends EntityRepository
             $qb->andWhere('e.updatedAt > :since')->setParameter('since', new \DateTime(date('Y-m-d H:i:s', $since)));
         }
 
-        if (is_string($tags) && '' !== $tags) {
+        if (\is_string($tags) && '' !== $tags) {
             foreach (explode(',', $tags) as $i => $tag) {
                 $entryAlias = 'e' . $i;
                 $tagAlias = 't' . $i;
@@ -320,7 +320,7 @@ class EntryRepository extends EntityRepository
             ->getQuery()
             ->getResult();
 
-        if (count($res)) {
+        if (\count($res)) {
             return current($res);
         }
 

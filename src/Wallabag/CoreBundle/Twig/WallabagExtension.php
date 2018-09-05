@@ -64,7 +64,7 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
     {
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
 
-        if (null === $user || !is_object($user)) {
+        if (null === $user || !\is_object($user)) {
             return 0;
         }
 
@@ -96,7 +96,7 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
         $query->useResultCache(true);
         $query->setResultCacheLifetime($this->lifeTime);
 
-        return count($query->getArrayResult());
+        return \count($query->getArrayResult());
     }
 
     /**
@@ -108,7 +108,7 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
     {
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
 
-        if (null === $user || !is_object($user)) {
+        if (null === $user || !\is_object($user)) {
             return 0;
         }
 
@@ -124,7 +124,7 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
     {
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
 
-        if (null === $user || !is_object($user)) {
+        if (null === $user || !\is_object($user)) {
             return 0;
         }
 
@@ -137,7 +137,7 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
         $query->useResultCache(true);
         $query->setResultCacheLifetime($this->lifeTime);
 
-        $nbArchives = count($query->getArrayResult());
+        $nbArchives = \count($query->getArrayResult());
 
         $interval = $user->getCreatedAt()->diff(new \DateTime('now'));
         $nbDays = (int) $interval->format('%a') ?: 1;

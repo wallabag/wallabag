@@ -107,7 +107,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
      */
     protected function processExtraFields($extraFieldsStrings)
     {
-        if (!is_array($extraFieldsStrings)) {
+        if (!\is_array($extraFieldsStrings)) {
             return [];
         }
 

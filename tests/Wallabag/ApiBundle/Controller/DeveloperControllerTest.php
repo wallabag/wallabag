@@ -28,7 +28,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $newNbClients = $em->getRepository('WallabagApiBundle:Client')->findAll();
-        $this->assertGreaterThan(count($nbClients), count($newNbClients));
+        $this->assertGreaterThan(\count($nbClients), \count($newNbClients));
 
         $this->assertGreaterThan(1, $alert = $crawler->filter('.settings ul li strong')->extract(['_text']));
         $this->assertContains('My app', $alert[0]);
@@ -65,7 +65,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/developer');
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertSame(count($nbClients), $crawler->filter('ul[class=collapsible] li')->count());
+        $this->assertSame(\count($nbClients), $crawler->filter('ul[class=collapsible] li')->count());
     }
 
     public function testDeveloperHowto()

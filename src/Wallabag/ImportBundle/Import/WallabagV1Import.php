@@ -56,7 +56,7 @@ class WallabagV1Import extends WallabagImport
 
         // In case of a bad fetch in v1, replace title and content with v2 error strings
         // If fetching fails again, they will get this instead of the v1 strings
-        if (in_array($entry['title'], $this->untitled, true)) {
+        if (\in_array($entry['title'], $this->untitled, true)) {
             $data['title'] = $this->fetchingErrorMessageTitle;
             $data['html'] = $this->fetchingErrorMessage;
         }

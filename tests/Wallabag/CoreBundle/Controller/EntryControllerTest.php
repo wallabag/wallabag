@@ -524,7 +524,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertGreaterThan(1, $title = $crawler->filter('div[id=article] h1')->extract(['_text']));
         $this->assertContains('My updated title hehe :)', $title[0]);
-        $this->assertSame(1, count($stats = $crawler->filter('div[class=tools] ul[class=stats] li a[class=tool]')->extract(['_text'])));
+        $this->assertSame(1, \count($stats = $crawler->filter('div[class=tools] ul[class=stats] li a[class=tool]')->extract(['_text'])));
         $this->assertNotContains('example.io', trim($stats[0]));
     }
 

@@ -43,7 +43,7 @@ class ReloadEntryCommand extends ContainerAwareCommand
         $entryRepository = $this->getContainer()->get('wallabag_core.entry_repository');
         $entryIds = $entryRepository->findAllEntriesIdByUserId($userId);
 
-        $nbEntries = count($entryIds);
+        $nbEntries = \count($entryIds);
         if (!$nbEntries) {
             $io->success('No entry to reload.');
 

@@ -138,14 +138,14 @@ class TagRestController extends WallabagRestController
      */
     private function cleanOrphanTag($tags)
     {
-        if (!is_array($tags)) {
+        if (!\is_array($tags)) {
             $tags = [$tags];
         }
 
         $em = $this->getDoctrine()->getManager();
 
         foreach ($tags as $tag) {
-            if (0 === count($tag->getEntries())) {
+            if (0 === \count($tag->getEntries())) {
                 $em->remove($tag);
             }
         }

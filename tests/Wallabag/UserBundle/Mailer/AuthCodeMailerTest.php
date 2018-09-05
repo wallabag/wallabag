@@ -13,7 +13,7 @@ final class CountableMemorySpool extends \Swift_MemorySpool implements \Countabl
 {
     public function count()
     {
-        return count($this->messages);
+        return \count($this->messages);
     }
 
     public function getMessages()
