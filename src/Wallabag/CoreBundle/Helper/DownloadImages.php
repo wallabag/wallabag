@@ -198,7 +198,7 @@ class DownloadImages
                 // Must be one or more digits followed by w OR x
                 $pattern = "/(?:[^\"'\s]+\s*(?:\d+[wx])+)/";
                 preg_match_all($pattern, $srcsetAttribute, $matches);
-                $srcset = call_user_func_array('array_merge', $matches);
+                $srcset = \call_user_func_array('array_merge', $matches);
                 $srcsetUrls = array_map(function ($src) {
                     return trim(explode(' ', $src, 2)[0]);
                 }, $srcset);
@@ -308,7 +308,7 @@ class DownloadImages
             $this->logger->debug('DownloadImages: Checking extension (alternative)', ['ext' => $ext]);
         }
 
-        if (!in_array($ext, ['jpeg', 'jpg', 'gif', 'png'], true)) {
+        if (!\in_array($ext, ['jpeg', 'jpg', 'gif', 'png'], true)) {
             $this->logger->error('DownloadImages: Processed image with not allowed extension. Skipping: ' . $imagePath);
 
             return false;

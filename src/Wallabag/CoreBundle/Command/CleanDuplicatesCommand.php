@@ -51,7 +51,7 @@ class CleanDuplicatesCommand extends ContainerAwareCommand
         } else {
             $users = $this->getContainer()->get('wallabag_user.user_repository')->findAll();
 
-            $this->io->text(sprintf('Cleaning through <info>%d</info> user accounts', count($users)));
+            $this->io->text(sprintf('Cleaning through <info>%d</info> user accounts', \count($users)));
 
             foreach ($users as $user) {
                 $this->io->text(sprintf('Processing user <info>%s</info>', $user->getUsername()));
@@ -79,7 +79,7 @@ class CleanDuplicatesCommand extends ContainerAwareCommand
             $url = $this->similarUrl($entry['url']);
 
             /* @var $entry Entry */
-            if (in_array($url, $urls, true)) {
+            if (\in_array($url, $urls, true)) {
                 ++$duplicatesCount;
 
                 $em->remove($repo->find($entry['id']));
@@ -96,8 +96,8 @@ class CleanDuplicatesCommand extends ContainerAwareCommand
 
     private function similarUrl($url)
     {
-        if (in_array(substr($url, -1), ['/', '#'], true)) { // get rid of "/" and "#" and the end of urls
-            return substr($url, 0, strlen($url));
+        if (\in_array(substr($url, -1), ['/', '#'], true)) { // get rid of "/" and "#" and the end of urls
+            return substr($url, 0, \strlen($url));
         }
 
         return $url;

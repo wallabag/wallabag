@@ -47,7 +47,7 @@ class ExportCommand extends ContainerAwareCommand
             ->getQuery()
             ->getResult();
 
-        $io->text(sprintf('Exporting <info>%d</info> entrie(s) for user <info>%s</info>...', count($entries), $user->getUserName()));
+        $io->text(sprintf('Exporting <info>%d</info> entrie(s) for user <info>%s</info>...', \count($entries), $user->getUserName()));
 
         $filePath = $input->getArgument('filepath');
 

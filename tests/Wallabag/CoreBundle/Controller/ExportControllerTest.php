@@ -180,7 +180,7 @@ class ExportControllerTest extends WallabagCoreTestCase
 
         $this->assertGreaterThan(1, $csv);
         // +1 for title line
-        $this->assertSame(count($contentInDB) + 1, count($csv));
+        $this->assertSame(\count($contentInDB) + 1, \count($csv));
         $this->assertSame('Title;URL;Content;Tags;"MIME Type";Language;"Creation date"', $csv[0]);
         $this->assertContains($contentInDB[0]['title'], $csv[1]);
         $this->assertContains($contentInDB[0]['url'], $csv[1]);
@@ -272,7 +272,7 @@ class ExportControllerTest extends WallabagCoreTestCase
 
         $content = new \SimpleXMLElement($client->getResponse()->getContent());
         $this->assertGreaterThan(0, $content->count());
-        $this->assertSame(count($contentInDB), $content->count());
+        $this->assertSame(\count($contentInDB), $content->count());
         $this->assertNotEmpty('id', (string) $content->entry[0]->id);
         $this->assertNotEmpty('title', (string) $content->entry[0]->title);
         $this->assertNotEmpty('url', (string) $content->entry[0]->url);

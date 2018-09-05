@@ -55,7 +55,7 @@ class Version20170719231144 extends WallabagMigration
             }
 
             // Just in case...
-            if (count($ids) > 0) {
+            if (\count($ids) > 0) {
                 // Merge tags
                 $this->addSql('
                     UPDATE ' . $this->getTable('entry_tag') . '

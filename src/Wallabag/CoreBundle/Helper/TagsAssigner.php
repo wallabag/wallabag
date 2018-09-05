@@ -32,7 +32,7 @@ class TagsAssigner
     {
         $tagsEntities = [];
 
-        if (!is_array($tags)) {
+        if (!\is_array($tags)) {
             $tags = explode(',', $tags);
         }
 
@@ -48,7 +48,7 @@ class TagsAssigner
             $label = trim(mb_convert_case($label, MB_CASE_LOWER));
 
             // avoid empty tag
-            if (0 === strlen($label)) {
+            if (0 === \strlen($label)) {
                 continue;
             }
 

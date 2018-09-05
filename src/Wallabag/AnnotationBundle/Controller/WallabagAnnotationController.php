@@ -28,7 +28,7 @@ class WallabagAnnotationController extends FOSRestController
             ->getDoctrine()
             ->getRepository('WallabagAnnotationBundle:Annotation')
             ->findAnnotationsByPageId($entry->getId(), $this->getUser()->getId());
-        $total = count($annotationRows);
+        $total = \count($annotationRows);
         $annotations = ['total' => $total, 'rows' => $annotationRows];
 
         $json = $this->get('jms_serializer')->serialize($annotations, 'json');

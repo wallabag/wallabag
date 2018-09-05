@@ -81,7 +81,7 @@ class InstallCommand extends ContainerAwareCommand
         $status = '<info>OK!</info>';
         $help = '';
 
-        if (!extension_loaded($this->getContainer()->getParameter('database_driver'))) {
+        if (!\extension_loaded($this->getContainer()->getParameter('database_driver'))) {
             $fulfilled = false;
             $status = '<error>ERROR!</error>';
             $help = 'Database driver "' . $this->getContainer()->getParameter('database_driver') . '" is not installed.';
@@ -146,7 +146,7 @@ class InstallCommand extends ContainerAwareCommand
             $status = '<info>OK!</info>';
             $help = '';
 
-            if (!function_exists($functionRequired)) {
+            if (!\function_exists($functionRequired)) {
                 $fulfilled = false;
                 $status = '<error>ERROR!</error>';
                 $help = 'You need the ' . $functionRequired . ' function activated';
@@ -371,7 +371,7 @@ class InstallCommand extends ContainerAwareCommand
         }
 
         try {
-            return in_array($databaseName, $schemaManager->listDatabases(), true);
+            return \in_array($databaseName, $schemaManager->listDatabases(), true);
         } catch (\Doctrine\DBAL\Exception\DriverException $e) {
             // it means we weren't able to get database list, assume the database doesn't exist
 
@@ -389,6 +389,6 @@ class InstallCommand extends ContainerAwareCommand
     {
         $schemaManager = $this->getContainer()->get('doctrine')->getManager()->getConnection()->getSchemaManager();
 
-        return count($schemaManager->listTableNames()) > 0 ? true : false;
+        return \count($schemaManager->listTableNames()) > 0 ? true : false;
     }
 }

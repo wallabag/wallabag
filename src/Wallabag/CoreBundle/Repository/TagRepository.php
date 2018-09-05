@@ -30,7 +30,7 @@ class TagRepository extends EntityRepository
             $query->setResultCacheLifetime($cacheLifeTime);
         }
 
-        return count($query->getArrayResult());
+        return \count($query->getArrayResult());
     }
 
     /**

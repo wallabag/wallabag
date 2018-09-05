@@ -31,7 +31,7 @@ class Redirect
     {
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
 
-        if (null === $user || !is_object($user)) {
+        if (null === $user || !\is_object($user)) {
             return $url;
         }
 

@@ -102,7 +102,7 @@ class EntryRestController extends WallabagRestController
         $order = $request->query->get('order', 'desc');
         $page = (int) $request->query->get('page', 1);
         $perPage = (int) $request->query->get('perPage', 30);
-        $tags = is_array($request->query->get('tags')) ? '' : (string) $request->query->get('tags', '');
+        $tags = \is_array($request->query->get('tags')) ? '' : (string) $request->query->get('tags', '');
         $since = $request->query->get('since', 0);
 
         /** @var \Pagerfanta\Pagerfanta $pager */
@@ -253,7 +253,7 @@ class EntryRestController extends WallabagRestController
 
         $limit = $this->container->getParameter('wallabag_core.api_limit_mass_actions');
 
-        if (count($urls) > $limit) {
+        if (\count($urls) > $limit) {
             throw new HttpException(400, 'API limit reached');
         }
 
@@ -347,7 +347,7 @@ class EntryRestController extends WallabagRestController
                     'open_graph' => [
                         'og_image' => !empty($data['picture']) ? $data['picture'] : $entry->getPreviewPicture(),
                     ],
-                    'authors' => is_string($data['authors']) ? explode(',', $data['authors']) : $entry->getPublishedBy(),
+                    'authors' => \is_string($data['authors']) ? explode(',', $data['authors']) : $entry->getPublishedBy(),
                 ]
             );
         } catch (\Exception $e) {
@@ -461,7 +461,7 @@ class EntryRestController extends WallabagRestController
             $contentProxy->updateLanguage($entry, $data['language']);
         }
 
-        if (!empty($data['authors']) && is_string($data['authors'])) {
+        if (!empty($data['authors']) && \is_string($data['authors'])) {
             $entry->setPublishedBy(explode(',', $data['authors']));
         }
 
