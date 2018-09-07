@@ -26,3 +26,18 @@ tools:
 checks:
     php:
         code_rating: true
+
+# use the new PHP analysis engine
+# https://scrutinizer-ci.com/docs/tools/php/php-analyzer/guides/migrate_to_new_php_analysis
+build:
+    nodes:
+        analysis:
+            tests:
+                override:
+                    - php-scrutinizer-run
+
+    dependencies:
+        override:
+            - npm install -g 'yarn'
+            - yarn install --force
+            - COMPOSER_MEMORY_LIMIT=-1 composer install -o --no-interaction --no-progress --prefer-dist
