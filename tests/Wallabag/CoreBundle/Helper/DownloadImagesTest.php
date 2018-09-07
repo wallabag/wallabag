@@ -204,4 +204,52 @@ class DownloadImagesTest extends TestCase
 
         $this->assertNotContains('http://piketty.blog.lemonde.fr/', $res, 'Image srcset attribute were not replaced');
     }
+
+    public function testProcessImageWithTrickySrcset()
+    {
+        $client = new Client();
+
+        $mock = new Mock([
+            new Response(200, ['content-type' => 'image/jpeg'], Stream::factory(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg'))),
+            new Response(200, ['content-type' => 'image/jpeg'], Stream::factory(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg'))),
+            new Response(200, ['content-type' => 'image/jpeg'], Stream::factory(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg'))),
+        ]);
+
+        $client->getEmitter()->attach($mock);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', [$logHandler]);
+
+        $download = new DownloadImages($client, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $res = $download->processHtml(123, '<figure id="post-257260" class="align-none media-257260"><img src="https://cdn.css-tricks.com/wp-content/uploads/2017/08/the-critical-request.png" srcset="https://res.cloudinary.com/css-tricks/image/upload/c_scale,w_1000,f_auto,q_auto/v1501594717/the-critical-request_bqdfaa.png 1000w, https://res.cloudinary.com/css-tricks/image/upload/c_scale,w_200,f_auto,q_auto/v1501594717/the-critical-request_bqdfaa.png 200w" sizes="(min-width: 1850px) calc( (100vw - 555px) / 3 )
+       (min-width: 1251px) calc( (100vw - 530px) / 2 )
+       (min-width: 1086px) calc(100vw - 480px)
+       (min-width: 626px)  calc(100vw - 335px)
+                           calc(100vw - 30px)" alt="" /></figure>', 'https://css-tricks.com/the-critical-request/');
+
+        $this->assertNotContains('f_auto,q_auto', $res, 'Image srcset attribute were not replaced');
+    }
+
+    public function testProcessImageWithNullPath()
+    {
+        $client = new Client();
+
+        $mock = new Mock([
+            new Response(200, ['content-type' => null], Stream::factory(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg'))),
+        ]);
+
+        $client->getEmitter()->attach($mock);
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', [$logHandler]);
+
+        $download = new DownloadImages($client, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+
+        $res = $download->processSingleImage(
+            123,
+            null,
+            'https://framablog.org/2018/06/30/engagement-atypique/'
+        );
+        $this->assertFalse($res);
+    }
 }

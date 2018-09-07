@@ -98,7 +98,7 @@ class TagControllerTest extends WallabagCoreTestCase
             $tags[$key] = $tag->getLabel();
         }
 
-        $this->assertGreaterThanOrEqual(2, count($tags));
+        $this->assertGreaterThanOrEqual(2, \count($tags));
         $this->assertNotFalse(array_search('foo2', $tags, true), 'Tag foo2 is assigned to the entry');
         $this->assertNotFalse(array_search('bar2', $tags, true), 'Tag bar2 is assigned to the entry');
     }

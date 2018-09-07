@@ -50,7 +50,7 @@ class ListUserCommand extends ContainerAwareCommand
         $io->success(
             sprintf(
                 '%s/%s%s user(s) displayed.',
-                count($users),
+                \count($users),
                 $nbUsers,
                 null === $input->getArgument('search') ? '' : ' (filtered)'
             )

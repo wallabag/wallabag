@@ -85,6 +85,10 @@ class DownloadImages
      */
     public function processSingleImage($entryId, $imagePath, $url, $relativePath = null)
     {
+        if (null === $imagePath) {
+            return false;
+        }
+
         if (null === $relativePath) {
             $relativePath = $this->getRelativePath($entryId);
         }
@@ -181,7 +185,7 @@ class DownloadImages
      *
      * @return array An array of urls
      */
-    protected function getSrcsetUrls(Crawler $imagesCrawler)
+    private function getSrcsetUrls(Crawler $imagesCrawler)
     {
         $urls = [];
         $iterator = $imagesCrawler
@@ -189,9 +193,14 @@ class DownloadImages
         while ($iterator->valid()) {
             $srcsetAttribute = $iterator->current()->getAttribute('srcset');
             if ('' !== $srcsetAttribute) {
-                $srcset = array_map('trim', explode(',', $srcsetAttribute));
+                // Couldn't start with " OR ' OR a white space
+                // Could be one or more white space
+                // Must be one or more digits followed by w OR x
+                $pattern = "/(?:[^\"'\s]+\s*(?:\d+[wx])+)/";
+                preg_match_all($pattern, $srcsetAttribute, $matches);
+                $srcset = \call_user_func_array('array_merge', $matches);
                 $srcsetUrls = array_map(function ($src) {
-                    return explode(' ', $src)[0];
+                    return trim(explode(' ', $src, 2)[0]);
                 }, $srcset);
                 $urls = array_merge($srcsetUrls, $urls);
             }
@@ -299,7 +308,7 @@ class DownloadImages
             $this->logger->debug('DownloadImages: Checking extension (alternative)', ['ext' => $ext]);
         }
 
-        if (!in_array($ext, ['jpeg', 'jpg', 'gif', 'png'], true)) {
+        if (!\in_array($ext, ['jpeg', 'jpg', 'gif', 'png'], true)) {
             $this->logger->error('DownloadImages: Processed image with not allowed extension. Skipping: ' . $imagePath);
 
             return false;

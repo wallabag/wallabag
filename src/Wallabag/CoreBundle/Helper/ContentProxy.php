@@ -85,7 +85,7 @@ class ContentProxy
             (new LocaleConstraint())
         );
 
-        if (0 === count($errors)) {
+        if (0 === \count($errors)) {
             $entry->setLanguage($value);
 
             return;
@@ -107,7 +107,7 @@ class ContentProxy
             (new UrlConstraint())
         );
 
-        if (0 === count($errors)) {
+        if (0 === \count($errors)) {
             $entry->setPreviewPicture($value);
 
             return;
@@ -212,7 +212,7 @@ class ContentProxy
             $entry->setHttpStatus($content['status']);
         }
 
-        if (!empty($content['authors']) && is_array($content['authors'])) {
+        if (!empty($content['authors']) && \is_array($content['authors'])) {
             $entry->setPublishedBy($content['authors']);
         }
 
@@ -233,7 +233,7 @@ class ContentProxy
         }
 
         // if content is an image, define it as a preview too
-        if (!empty($content['content_type']) && in_array($this->mimeGuesser->guess($content['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
+        if (!empty($content['content_type']) && \in_array($this->mimeGuesser->guess($content['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
             $this->updatePreviewPicture($entry, $content['url']);
         }
 

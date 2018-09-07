@@ -21,7 +21,7 @@ class EntryRepository extends EntityRepository
     public function getBuilderForAllByUser($userId)
     {
         return $this
-            ->getBuilderByUser($userId)
+            ->getSortedQueryBuilderByUser($userId)
         ;
     }
 
@@ -35,7 +35,7 @@ class EntryRepository extends EntityRepository
     public function getBuilderForUnreadByUser($userId)
     {
         return $this
-            ->getBuilderByUser($userId)
+            ->getSortedQueryBuilderByUser($userId)
             ->andWhere('e.isArchived = false')
         ;
     }
@@ -50,7 +50,7 @@ class EntryRepository extends EntityRepository
     public function getBuilderForArchiveByUser($userId)
     {
         return $this
-            ->getBuilderByUser($userId)
+            ->getSortedQueryBuilderByUser($userId)
             ->andWhere('e.isArchived = true')
         ;
     }
@@ -65,7 +65,7 @@ class EntryRepository extends EntityRepository
     public function getBuilderForStarredByUser($userId)
     {
         return $this
-            ->getBuilderByUser($userId, 'starredAt', 'desc')
+            ->getSortedQueryBuilderByUser($userId, 'starredAt', 'desc')
             ->andWhere('e.isStarred = true')
         ;
     }
@@ -82,7 +82,7 @@ class EntryRepository extends EntityRepository
     public function getBuilderForSearchByUser($userId, $term, $currentRoute)
     {
         $qb = $this
-            ->getBuilderByUser($userId);
+            ->getSortedQueryBuilderByUser($userId);
 
         if ('starred' === $currentRoute) {
             $qb->andWhere('e.isStarred = true');
@@ -102,7 +102,7 @@ class EntryRepository extends EntityRepository
     }
 
     /**
-     * Retrieves untagged entries for a user.
+     * Retrieve a sorted list of untagged entries for a user.
      *
      * @param int $userId
      *
@@ -111,8 +111,21 @@ class EntryRepository extends EntityRepository
     public function getBuilderForUntaggedByUser($userId)
     {
         return $this
-            ->getBuilderByUser($userId)
-            ->andWhere('size(e.tags) = 0');
+            ->sortQueryBuilder($this->getRawBuilderForUntaggedByUser($userId));
+    }
+
+    /**
+     * Retrieve untagged entries for a user.
+     *
+     * @param int $userId
+     *
+     * @return QueryBuilder
+     */
+    public function getRawBuilderForUntaggedByUser($userId)
+    {
+        return $this->getQueryBuilderByUser($userId)
+            ->leftJoin('e.tags', 't')
+            ->andWhere('t.id is null');
     }
 
     /**
@@ -151,7 +164,7 @@ class EntryRepository extends EntityRepository
             $qb->andWhere('e.updatedAt > :since')->setParameter('since', new \DateTime(date('Y-m-d H:i:s', $since)));
         }
 
-        if (is_string($tags) && '' !== $tags) {
+        if (\is_string($tags) && '' !== $tags) {
             foreach (explode(',', $tags) as $i => $tag) {
                 $entryAlias = 'e' . $i;
                 $tagAlias = 't' . $i;
@@ -260,7 +273,7 @@ class EntryRepository extends EntityRepository
      */
     public function removeTag($userId, Tag $tag)
     {
-        $entries = $this->getBuilderByUser($userId)
+        $entries = $this->getSortedQueryBuilderByUser($userId)
             ->innerJoin('e.tags', 't')
             ->andWhere('t.id = :tagId')->setParameter('tagId', $tag->getId())
             ->getQuery()
@@ -296,7 +309,7 @@ class EntryRepository extends EntityRepository
      */
     public function findAllByTagId($userId, $tagId)
     {
-        return $this->getBuilderByUser($userId)
+        return $this->getSortedQueryBuilderByUser($userId)
             ->innerJoin('e.tags', 't')
             ->andWhere('t.id = :tagId')->setParameter('tagId', $tagId)
             ->getQuery()
@@ -320,7 +333,7 @@ class EntryRepository extends EntityRepository
             ->getQuery()
             ->getResult();
 
-        if (count($res)) {
+        if (\count($res)) {
             return current($res);
         }
 
@@ -414,7 +427,20 @@ class EntryRepository extends EntityRepository
     }
 
     /**
-     * Return a query builder to used by other getBuilderFor* method.
+     * Return a query builder to be used by other getBuilderFor* method.
+     *
+     * @param int $userId
+     *
+     * @return QueryBuilder
+     */
+    private function getQueryBuilderByUser($userId)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.user = :userId')->setParameter('userId', $userId);
+    }
+
+    /**
+     * Return a sorted query builder to be used by other getBuilderFor* method.
      *
      * @param int    $userId
      * @param string $sortBy
@@ -422,10 +448,23 @@ class EntryRepository extends EntityRepository
      *
      * @return QueryBuilder
      */
-    private function getBuilderByUser($userId, $sortBy = 'createdAt', $direction = 'desc')
+    private function getSortedQueryBuilderByUser($userId, $sortBy = 'createdAt', $direction = 'desc')
     {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.user = :userId')->setParameter('userId', $userId)
+        return $this->sortQueryBuilder($this->getQueryBuilderByUser($userId));
+    }
+
+    /**
+     * Return the given QueryBuilder with an orderBy() call.
+     *
+     * @param QueryBuilder $qb
+     * @param string       $sortBy
+     * @param string       $direction
+     *
+     * @return QueryBuilder
+     */
+    private function sortQueryBuilder(QueryBuilder $qb, $sortBy = 'createdAt', $direction = 'desc')
+    {
+        return $qb
             ->orderBy(sprintf('e.%s', $sortBy), $direction);
     }
 }

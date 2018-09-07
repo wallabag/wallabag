@@ -26,7 +26,6 @@ framework:
         engines: ['twig']
     default_locale: "%locale%"
     trusted_hosts: ~
-    trusted_proxies: ~
     session:
         # handler_id set to null will use default session handler from php.ini
         handler_id: session.handler.native_file

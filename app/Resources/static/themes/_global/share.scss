@@ -221,6 +221,12 @@ ol li:last-child {
   padding-bottom: 0;
 }
 
+iframe,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
 mark {
   padding: 0 0.2em;
 }

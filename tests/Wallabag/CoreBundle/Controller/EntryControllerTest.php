@@ -524,7 +524,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertGreaterThan(1, $title = $crawler->filter('div[id=article] h1')->extract(['_text']));
         $this->assertContains('My updated title hehe :)', $title[0]);
-        $this->assertSame(1, count($stats = $crawler->filter('div[class=tools] ul[class=stats] li a[class=tool]')->extract(['_text'])));
+        $this->assertSame(1, \count($stats = $crawler->filter('div[class=tools] ul[class=stats] li a[class=tool]')->extract(['_text'])));
         $this->assertNotContains('example.io', trim($stats[0]));
     }
 
@@ -1324,10 +1324,6 @@ class EntryControllerTest extends WallabagCoreTestCase
             'zh_CN' => [
                 'http://www.hao123.com/shequ?__noscript__-=1',
                 'zh_CN',
-            ],
-            'de_AT' => [
-                'https://buy.garmin.com/de-AT/AT/catalog/product/compareResult.ep?compareProduct=112885&compareProduct=36728',
-                'de_AT',
             ],
             'ru_RU' => [
                 'http://netler.ru/ikt/windows-error-reporting.htm',

@@ -36,7 +36,7 @@ class UsernameRssTokenConverter implements ParamConverterInterface
     {
         // If there is no manager, this means that only Doctrine DBAL is configured
         // In this case we can do nothing and just return
-        if (null === $this->registry || !count($this->registry->getManagers())) {
+        if (null === $this->registry || !\count($this->registry->getManagers())) {
             return false;
         }
 

@@ -77,7 +77,7 @@ abstract class BrowserImport extends AbstractImport
      */
     public function parseEntry(array $importedEntry)
     {
-        if ((!array_key_exists('guid', $importedEntry) || (!array_key_exists('id', $importedEntry))) && is_array(reset($importedEntry))) {
+        if ((!array_key_exists('guid', $importedEntry) || (!array_key_exists('id', $importedEntry))) && \is_array(reset($importedEntry))) {
             if ($this->producer) {
                 $this->parseEntriesForProducer($importedEntry);
 
