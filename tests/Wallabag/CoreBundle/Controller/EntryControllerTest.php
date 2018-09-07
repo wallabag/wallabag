@@ -1325,12 +1325,12 @@ class EntryControllerTest extends WallabagCoreTestCase
                 'http://www.hao123.com/shequ?__noscript__-=1',
                 'zh_CN',
             ],
-            'ru_RU' => [
-                'http://netler.ru/ikt/windows-error-reporting.htm',
-                'ru_RU',
+            'ru' => [
+                'https://www.kp.ru/daily/26879.7/3921982/',
+                'ru',
             ],
             'pt_BR' => [
-                'http://precodoscombustiveis.com.br/postos/cidade/4121/pr/maringa',
+                'https://politica.estadao.com.br/noticias/eleicoes,campanha-catatonica,70002491983',
                 'pt_BR',
             ],
             'fucked_list_of_languages' => [
