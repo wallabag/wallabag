@@ -450,7 +450,7 @@ class EntryRepository extends EntityRepository
      */
     private function getSortedQueryBuilderByUser($userId, $sortBy = 'createdAt', $direction = 'desc')
     {
-        return $this->sortQueryBuilder($this->getQueryBuilderByUser($userId));
+        return $this->sortQueryBuilder($this->getQueryBuilderByUser($userId), $sortBy, $direction);
     }
 
     /**
