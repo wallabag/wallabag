@@ -53,6 +53,7 @@ class ContentProxy
 
         if ((empty($content) || false === $this->validateContent($content)) && false === $disableContentUpdate) {
             $fetchedContent = $this->graby->fetchContent($url);
+            $fetchedContent['title'] = $this->sanitizeUTF8Text($fetchedContent['title']);
 
             // when content is imported, we have information in $content
             // in case fetching content goes bad, we'll keep the imported information instead of overriding them
@@ -66,6 +67,28 @@ class ContentProxy
         $content['url'] = !empty($content['url']) ? $content['url'] : $url;
 
         $this->stockEntry($entry, $content);
+    }
+
+    /**
+     * Remove invalid UTF-8 characters from the given string in following steps:
+     * - try to interpret the given string as ISO-8859-1, convert it to UTF-8 and return it (if its valid)
+     * - simply remove every invalid UTF-8 character and return the result (https://stackoverflow.com/a/1433665)
+     * @param String $rawText
+     * @return string
+     */
+    private function sanitizeUTF8Text(String $rawText) {
+        if (mb_check_encoding($rawText, 'utf-8')) {
+            return $rawText; // return because its valid utf-8 text
+        }
+
+        // we assume that $text is encoded in ISO-8859-1 (and not the similar Windows-1252 or other encoding)
+        $convertedText = utf8_encode($rawText);
+        if (mb_check_encoding($convertedText, 'utf-8')) {
+            return $convertedText;
+        }
+
+        // last resort: simply remove invalid UTF-8 character because $rawText can have some every exotic encoding
+        return iconv("UTF-8", "UTF-8//IGNORE", $rawText);
     }
 
     /**
