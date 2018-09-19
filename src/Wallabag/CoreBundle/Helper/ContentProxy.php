@@ -53,7 +53,7 @@ class ContentProxy
 
         if ((empty($content) || false === $this->validateContent($content)) && false === $disableContentUpdate) {
             $fetchedContent = $this->graby->fetchContent($url);
-            $fetchedContent['title'] = $this->sanitizeUTF8Text($fetchedContent['title']);
+            $fetchedContent['title'] = $this->sanitizeContentTitle($fetchedContent['title'], $fetchedContent['content_type']);
 
             // when content is imported, we have information in $content
             // in case fetching content goes bad, we'll keep the imported information instead of overriding them
@@ -70,24 +70,44 @@ class ContentProxy
     }
 
     /**
-     * Remove invalid UTF-8 characters from the given string in following steps:
-     * - try to interpret the given string as ISO-8859-1, convert it to UTF-8 and return it (if its valid)
-     * - simply remove every invalid UTF-8 character and return the result (https://stackoverflow.com/a/1433665)
+     * Try to sanitize the title of the fetched content from wrong character encodings and invalid UTF-8 character.
+     * @param $title
+     * @param $contentType
+     * @return string
+     */
+    private function sanitizeContentTitle($title, $contentType) {
+        if ('application/pdf' === $contentType) {
+            $convertedTitle = $this->convertPdfEncodingToUTF8($title);
+            return $this->sanitizeUTF8Text($convertedTitle);
+        }
+        return $this->sanitizeUTF8Text($title);
+    }
+
+    /**
+     * If the title from the fetched content comes from a PDF, then its very possible that the character encoding is not
+     * UTF-8. This methods tries to identify the character encoding and translate the title to UTF-8.
+     * @param $title
+     * @return string (maybe contains invalid UTF-8 character)
+     */
+    private function convertPdfEncodingToUTF8($title) {
+        // first try UTF-16 (then UTF-8) because its easier to detect its present/absence
+        foreach (array('UTF-16BE', 'UTF-16LE', 'UTF-8', 'WINDOWS-1252') as $encoding) {
+            if (mb_check_encoding($title, $encoding)) {
+                return mb_convert_encoding($title, 'UTF-8', $encoding);
+            }
+        }
+        return $title;
+    }
+
+    /**
+     * Remove invalid UTF-8 characters from the given string.
      * @param String $rawText
      * @return string
      */
     private function sanitizeUTF8Text($rawText) {
-        if (mb_check_encoding($rawText, 'utf-8')) {
-            return $rawText; // return because its valid utf-8 text
+        if (mb_check_encoding($rawText, 'UTF-8')) {
+            return $rawText;
         }
-
-        // we assume that $text is encoded in ISO-8859-1 (and not the similar Windows-1252 or other encoding)
-        $convertedText = utf8_encode($rawText);
-        if (mb_check_encoding($convertedText, 'utf-8')) {
-            return $convertedText;
-        }
-
-        // last resort: simply remove invalid UTF-8 character because $rawText can have some every exotic encoding
         return iconv("UTF-8", "UTF-8//IGNORE", $rawText);
     }
 
