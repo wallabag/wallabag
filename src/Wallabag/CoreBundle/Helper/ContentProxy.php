@@ -90,8 +90,8 @@ class ContentProxy
      * @return string (maybe contains invalid UTF-8 character)
      */
     private function convertPdfEncodingToUTF8($title) {
-        // first try UTF-16 (then UTF-8) because its easier to detect its present/absence
-        foreach (array('UTF-16BE', 'UTF-16LE', 'UTF-8', 'WINDOWS-1252') as $encoding) {
+        // first try UTF-8 because its easier to detect its present/absence
+        foreach (array('UTF-8', 'UTF-16BE', 'WINDOWS-1252') as $encoding) {
             if (mb_check_encoding($title, $encoding)) {
                 return mb_convert_encoding($title, 'UTF-8', $encoding);
             }
