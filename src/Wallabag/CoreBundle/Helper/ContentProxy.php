@@ -76,7 +76,7 @@ class ContentProxy
      * @param String $rawText
      * @return string
      */
-    private function sanitizeUTF8Text(String $rawText) {
+    private function sanitizeUTF8Text($rawText) {
         if (mb_check_encoding($rawText, 'utf-8')) {
             return $rawText; // return because its valid utf-8 text
         }
