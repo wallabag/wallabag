@@ -115,16 +115,16 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId(
-                'http://www.liberation.fr/planete/2015/10/26/refugies-l-ue-va-creer-100-000-places-d-accueil-dans-les-balkans_1408867',
+                'https://www.liberation.fr/planete/2015/10/26/refugies-l-ue-va-creer-100-000-places-d-accueil-dans-les-balkans_1408867',
                 $this->getLoggedInUserId()
             );
 
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
 
         // empty because it wasn't re-imported
-        $this->assertEmpty($content->getMimetype(), 'Mimetype for http://www.liberation.fr is empty');
-        $this->assertEmpty($content->getPreviewPicture(), 'Preview picture for http://www.liberation.fr is empty');
-        $this->assertEmpty($content->getLanguage(), 'Language for http://www.liberation.fr is empty');
+        $this->assertEmpty($content->getMimetype(), 'Mimetype for https://www.liberation.fr is empty');
+        $this->assertEmpty($content->getPreviewPicture(), 'Preview picture for https://www.liberation.fr is empty');
+        $this->assertEmpty($content->getLanguage(), 'Language for https://www.liberation.fr is empty');
 
         $tags = $content->getTags();
         $this->assertContains('foot', $tags, 'It includes the "foot" tag');

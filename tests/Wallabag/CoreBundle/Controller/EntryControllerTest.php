@@ -174,7 +174,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
     public function testPostWithMultipleAuthors()
     {
-        $url = 'http://www.liberation.fr/planete/2017/04/05/donald-trump-et-xi-jinping-tentative-de-flirt-en-floride_1560768';
+        $url = 'https://www.liberation.fr/planete/2017/04/05/donald-trump-et-xi-jinping-tentative-de-flirt-en-floride_1560768';
         $this->logInAs('admin');
         $client = $this->getClient();
 
@@ -197,6 +197,7 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
+        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
         $authors = $content->getPublishedBy();
         $this->assertSame('2017-04-05 19:26:13', $content->getPublishedAt()->format('Y-m-d H:i:s'));
         $this->assertSame('fr', $content->getLanguage());
