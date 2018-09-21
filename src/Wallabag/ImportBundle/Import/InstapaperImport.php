@@ -135,7 +135,7 @@ class InstapaperImport extends AbstractImport
             );
         }
 
-        $entry->setArchived($importedEntry['is_archived']);
+        $entry->updateArchived($importedEntry['is_archived']);
         $entry->setStarred($importedEntry['is_starred']);
 
         $this->em->persist($entry);

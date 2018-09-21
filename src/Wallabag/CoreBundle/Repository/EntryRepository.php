@@ -50,7 +50,7 @@ class EntryRepository extends EntityRepository
     public function getBuilderForArchiveByUser($userId)
     {
         return $this
-            ->getSortedQueryBuilderByUser($userId)
+            ->getSortedQueryBuilderByUser($userId, 'archivedAt', 'desc')
             ->andWhere('e.isArchived = true')
         ;
     }
@@ -189,6 +189,8 @@ class EntryRepository extends EntityRepository
             $qb->orderBy('e.id', $order);
         } elseif ('updated' === $sort) {
             $qb->orderBy('e.updatedAt', $order);
+        } elseif ('archived' === $sort) {
+            $qb->orderBy('e.archivedAt', $order);
         }
 
         $pagerAdapter = new DoctrineORMAdapter($qb, true, false);

@@ -621,7 +621,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $content->setMimetype('text/html');
         $content->setTitle('test title entry');
         $content->setContent('This is my content /o/');
-        $content->setArchived(true);
+        $content->updateArchived(true);
         $content->setLanguage('fr');
 
         $em->persist($content);
@@ -774,7 +774,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl($this->url);
-        $entry->setArchived(false);
+        $entry->updateArchived(false);
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
 
@@ -1245,7 +1245,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl('http://0.0.0.0/foo/baz/qux');
         $entry->setTitle('Le manège');
-        $entry->setArchived(true);
+        $entry->updateArchived(true);
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
 
@@ -1275,7 +1275,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl('http://domain/qux');
         $entry->setTitle('Le manège');
-        $entry->setArchived(true);
+        $entry->updateArchived(true);
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
 

@@ -438,6 +438,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame(0, $content['is_archived']);
         $this->assertSame(0, $content['is_starred']);
         $this->assertNull($content['starred_at']);
+        $this->assertNull($content['archived_at']);
         $this->assertSame('New title for my article', $content['title']);
         $this->assertSame(1, $content['user_id']);
         $this->assertCount(2, $content['tags']);
@@ -533,6 +534,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame(1, $content['is_archived']);
         $this->assertSame(1, $content['is_starred']);
         $this->assertGreaterThanOrEqual($now->getTimestamp(), (new \DateTime($content['starred_at']))->getTimestamp());
+        $this->assertGreaterThanOrEqual($now->getTimestamp(), (new \DateTime($content['archived_at']))->getTimestamp());
         $this->assertSame(1, $content['user_id']);
     }
 

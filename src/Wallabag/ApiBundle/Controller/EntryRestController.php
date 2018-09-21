@@ -79,7 +79,7 @@ class EntryRestController extends WallabagRestController
      *       parameters={
      *          {"name"="archive", "dataType"="integer", "required"=false, "format"="1 or 0, all entries by default", "description"="filter by archived status."},
      *          {"name"="starred", "dataType"="integer", "required"=false, "format"="1 or 0, all entries by default", "description"="filter by starred status."},
-     *          {"name"="sort", "dataType"="string", "required"=false, "format"="'created' or 'updated', default 'created'", "description"="sort entries by date."},
+     *          {"name"="sort", "dataType"="string", "required"=false, "format"="'created' or 'updated' or 'archived', default 'created'", "description"="sort entries by date."},
      *          {"name"="order", "dataType"="string", "required"=false, "format"="'asc' or 'desc', default 'desc'", "description"="order of sort."},
      *          {"name"="page", "dataType"="integer", "required"=false, "format"="default '1'", "description"="what page you want."},
      *          {"name"="perPage", "dataType"="integer", "required"=false, "format"="default'30'", "description"="results per page."},
@@ -358,7 +358,7 @@ class EntryRestController extends WallabagRestController
         }
 
         if (null !== $data['isArchived']) {
-            $entry->setArchived((bool) $data['isArchived']);
+            $entry->updateArchived((bool) $data['isArchived']);
         }
 
         if (null !== $data['isStarred']) {
@@ -474,7 +474,7 @@ class EntryRestController extends WallabagRestController
         }
 
         if (null !== $data['isArchived']) {
-            $entry->setArchived((bool) $data['isArchived']);
+            $entry->updateArchived((bool) $data['isArchived']);
         }
 
         if (null !== $data['isStarred']) {

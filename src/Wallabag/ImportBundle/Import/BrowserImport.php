@@ -133,7 +133,7 @@ abstract class BrowserImport extends AbstractImport
             );
         }
 
-        $entry->setArchived($data['is_archived']);
+        $entry->updateArchived($data['is_archived']);
 
         if (!empty($data['created_at'])) {
             $dt = new \DateTime();

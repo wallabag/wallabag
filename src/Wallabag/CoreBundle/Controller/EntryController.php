@@ -532,11 +532,9 @@ class EntryController extends Controller
         switch ($type) {
             case 'search':
                 $qb = $repository->getBuilderForSearchByUser($this->getUser()->getId(), $searchTerm, $currentRoute);
-
                 break;
             case 'untagged':
                 $qb = $repository->getBuilderForUntaggedByUser($this->getUser()->getId());
-
                 break;
             case 'starred':
                 $qb = $repository->getBuilderForStarredByUser($this->getUser()->getId());
