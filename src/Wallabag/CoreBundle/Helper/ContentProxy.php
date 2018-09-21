@@ -77,8 +77,7 @@ class ContentProxy
      */
     private function sanitizeContentTitle($title, $contentType) {
         if ('application/pdf' === $contentType) {
-            $convertedTitle = $this->convertPdfEncodingToUTF8($title);
-            return $this->sanitizeUTF8Text($convertedTitle);
+            $title = $this->convertPdfEncodingToUTF8($title);
         }
         return $this->sanitizeUTF8Text($title);
     }
