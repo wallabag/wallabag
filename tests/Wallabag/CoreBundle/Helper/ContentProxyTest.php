@@ -744,7 +744,7 @@ class ContentProxyTest extends TestCase
      * @param $string
      * @return string
      */
-    function strToHex($string){
+    private function strToHex($string){
         $hex = '';
         for ($i=0; $i<strlen($string); $i++){
             $ord = ord($string[$i]);
@@ -759,7 +759,7 @@ class ContentProxyTest extends TestCase
      * @param $hex
      * @return string
      */
-    function hexToStr($hex){
+    private function hexToStr($hex){
         $string='';
         for ($i=0; $i < strlen($hex)-1; $i+=2){
             $string .= chr(hexdec($hex[$i].$hex[$i+1]));
