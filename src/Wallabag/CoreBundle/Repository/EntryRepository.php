@@ -50,7 +50,7 @@ class EntryRepository extends EntityRepository
     public function getBuilderForArchiveByUser($userId)
     {
         return $this
-            ->getSortedQueryBuilderByUser($userId)
+            ->getSortedQueryBuilderByUser($userId, 'archivedAt', 'desc')
             ->andWhere('e.isArchived = true')
         ;
     }
