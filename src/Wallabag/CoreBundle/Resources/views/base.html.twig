@@ -69,7 +69,7 @@
         {% block footer %}{% endblock %}
 
         {% if craue_setting('piwik_enabled') %}
-            {{ piwik(craue_setting('piwik_host'), craue_setting('piwik_site_id')) }}
+            {{ piwik(craue_setting('piwik_host')|e('html_attr'), craue_setting('piwik_site_id')|e('html_attr')) }}
         {% endif %}
     </body>
 </html>
