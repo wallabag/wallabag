@@ -740,30 +740,38 @@ class ContentProxyTest extends TestCase
     }
 
     /**
-     * https://stackoverflow.com/a/18506801
+     * https://stackoverflow.com/a/18506801.
+     *
      * @param $string
+     *
      * @return string
      */
-    private function strToHex($string){
+    private function strToHex($string)
+    {
         $hex = '';
-        for ($i=0; $i<strlen($string); $i++){
-            $ord = ord($string[$i]);
+        for ($i = 0; $i < \strlen($string); ++$i) {
+            $ord = \ord($string[$i]);
             $hexCode = dechex($ord);
-            $hex .= substr('0'.$hexCode, -2);
+            $hex .= substr('0' . $hexCode, -2);
         }
-        return strToUpper($hex);
+
+        return strtoupper($hex);
     }
 
     /**
-     * https://stackoverflow.com/a/18506801
+     * https://stackoverflow.com/a/18506801.
+     *
      * @param $hex
+     *
      * @return string
      */
-    private function hexToStr($hex){
-        $string='';
-        for ($i=0; $i < strlen($hex)-1; $i+=2){
-            $string .= chr(hexdec($hex[$i].$hex[$i+1]));
+    private function hexToStr($hex)
+    {
+        $string = '';
+        for ($i = 0; $i < \strlen($hex) - 1; $i += 2) {
+            $string .= \chr(hexdec($hex[$i] . $hex[$i + 1]));
         }
+
         return $string;
     }
 
