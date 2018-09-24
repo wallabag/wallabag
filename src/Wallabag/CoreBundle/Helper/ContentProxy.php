@@ -53,6 +53,7 @@ class ContentProxy
 
         if ((empty($content) || false === $this->validateContent($content)) && false === $disableContentUpdate) {
             $fetchedContent = $this->graby->fetchContent($url);
+            $fetchedContent['title'] = $this->sanitizeContentTitle($fetchedContent['title'], $fetchedContent['content_type']);
 
             // when content is imported, we have information in $content
             // in case fetching content goes bad, we'll keep the imported information instead of overriding them
@@ -174,6 +175,59 @@ class ContentProxy
         }
 
         $entry->setTitle($path);
+    }
+
+    /**
+     * Try to sanitize the title of the fetched content from wrong character encodings and invalid UTF-8 character.
+     *
+     * @param $title
+     * @param $contentType
+     *
+     * @return string
+     */
+    private function sanitizeContentTitle($title, $contentType)
+    {
+        if ('application/pdf' === $contentType) {
+            $title = $this->convertPdfEncodingToUTF8($title);
+        }
+
+        return $this->sanitizeUTF8Text($title);
+    }
+
+    /**
+     * If the title from the fetched content comes from a PDF, then its very possible that the character encoding is not
+     * UTF-8. This methods tries to identify the character encoding and translate the title to UTF-8.
+     *
+     * @param $title
+     *
+     * @return string (maybe contains invalid UTF-8 character)
+     */
+    private function convertPdfEncodingToUTF8($title)
+    {
+        // first try UTF-8 because its easier to detect its present/absence
+        foreach (['UTF-8', 'UTF-16BE', 'WINDOWS-1252'] as $encoding) {
+            if (mb_check_encoding($title, $encoding)) {
+                return mb_convert_encoding($title, 'UTF-8', $encoding);
+            }
+        }
+
+        return $title;
+    }
+
+    /**
+     * Remove invalid UTF-8 characters from the given string.
+     *
+     * @param string $rawText
+     *
+     * @return string
+     */
+    private function sanitizeUTF8Text($rawText)
+    {
+        if (mb_check_encoding($rawText, 'UTF-8')) {
+            return $rawText;
+        }
+
+        return iconv('UTF-8', 'UTF-8//IGNORE', $rawText);
     }
 
     /**
