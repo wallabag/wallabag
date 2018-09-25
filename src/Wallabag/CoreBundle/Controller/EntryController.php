@@ -532,9 +532,11 @@ class EntryController extends Controller
         $searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
         $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
 
-        $sortBy = 'createdAt';
-        if (in_array($request->get('sort', 'createdAt'), ['id', 'createdAt', 'title', 'updatedAt'], true)) {
-            $sortBy = $request->get('sort', 'createdAt');
+        // defined as null by default because each repository method have the right field as default value too
+        // like `getBuilderForStarredByUser` will have `starredAt` sort by default
+        $sortBy = null;
+        if (in_array($request->get('sort', 'createdAt'), ['id', 'title', 'createdAt', 'updatedAt', 'starredAt', 'archivedAt'], true)) {
+            $sortBy = $request->get('sort', null);
         }
 
         $direction = 'DESC' === $request->get('direction') ? 'DESC' : 'ASC';
