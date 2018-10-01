@@ -48,6 +48,6 @@ Se non riuscite proprio ad ottenere il contenuto dopo aver provato i due passi p
 - modificate `app/config/config_prod.yml`
 - rimpiazzate [nella riga 18](https://github.com/wallabag/wallabag/blob/master/app/config/config_prod.yml#L18) `error` con `debug`
 - `rm -rf var/cache/*`
-- svuotate il file `var/log/prod.log`
+- svuotate il file `var/logs/prod.log`
 - ricaricate il vostro wallabag e riottenete il contenuto
-- incollate il file `var/log/prod.log` in un nuovo "issue" su GitHub
+- incollate il file `var/logs/prod.log` in un nuovo "issue" su GitHub
