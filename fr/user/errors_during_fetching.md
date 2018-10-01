@@ -9,7 +9,7 @@ Il peut y avoir plusieurs raisons :
 
 ## Vérifier les logs de production pour les messages d'erreurs ou de debug
 
-Par défaut, si un site ne peut pas être correctement parsé à cause d'une erreur dans la requête (une page inexistante, un temps de réponse trop long, etc.) un message d'erreur sera affiché dans le fichier `WALLABAG_DIR/var/log/prod.log`.
+Par défaut, si un site ne peut pas être correctement parsé à cause d'une erreur dans la requête (une page inexistante, un temps de réponse trop long, etc.) un message d'erreur sera affiché dans le fichier `WALLABAG_DIR/var/logs/prod.log`.
 
 Si vous voyez une ligne qui commence par `graby.ERROR` et qui correspond à votre période de test, c'est que la requête a échoué à cause d'une erreur.
 
@@ -23,9 +23,9 @@ Dans ce cas, vous allez activer les logs sur votre instance wallabag pour nous a
 - éditez le fichier `app/config/config_prod.yml`
 - à [la ligne 18](https://github.com/wallabag/wallabag/blob/master/app/config/config_prod.yml#L18) mettez `error` à la place de `debug`
 - `rm -rf var/cache/*`
-- videz le contenu du fichier `var/log/prod.log`
+- videz le contenu du fichier `var/logs/prod.log`
 - rechargez votre instance wallabag et rechargez le contenu qui pose souci
-- copiez/collez le contenu du fichier `var/log/prod.log` dans une nouvelle issue GitHub
+- copiez/collez le contenu du fichier `var/logs/prod.log` dans une nouvelle issue GitHub
 
 ## Comment puis-je aider pour réparer ça ?
 

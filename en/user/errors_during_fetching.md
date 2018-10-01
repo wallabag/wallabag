@@ -9,7 +9,7 @@ There may be several reasons:
 
 ## Check production log for debug / error message
 
-By default, if a website can't be fetched because of a request error (a 404 page, a timeout, a SSL problem, etc.) the error log message will be displayed in the `WALLABAG_DIR/var/log/prod.log` file.
+By default, if a website can't be fetched because of a request error (a 404 page, a timeout, a SSL problem, etc.) the error log message will be displayed in the `WALLABAG_DIR/var/logs/prod.log` file.
 
 If you find a line starting with `graby.ERROR` during the timeframe of your test it means the request failed because of an error.
 
@@ -22,9 +22,9 @@ If you can't find an error message in the log and really can't find a way to par
 - edit `app/config/config_prod.yml`
 - replace [in line 18](https://github.com/wallabag/wallabag/blob/master/app/config/config_prod.yml#L18) `error` to `debug`
 - `rm -rf var/cache/*`
-- empty file `var/log/prod.log`
+- empty file `var/logs/prod.log`
 - reload your wallabag and refetch the content
-- paste the file `var/log/prod.log` in a new issue on GitHub
+- paste the file `var/logs/prod.log` in a new issue on GitHub
 
 ## How can I help to fix that?
 
