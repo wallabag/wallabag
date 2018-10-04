@@ -357,3 +357,8 @@ jms_serializer:
         # see: https://github.com/schmittjoh/JMSSerializerBundle/pull/494
         datetime:
             default_format: "Y-m-d\\TH:i:sO" # ATOM
+
+# see https://github.com/symfony/symfony-standard/pull/1133
+sensio_framework_extra:
+   router:
+        annotations: false

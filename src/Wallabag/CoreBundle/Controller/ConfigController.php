@@ -2,12 +2,12 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\TaggingRule;
 use Wallabag\CoreBundle\Form\Type\ChangePasswordType;

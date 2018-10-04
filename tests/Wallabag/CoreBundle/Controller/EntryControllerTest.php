@@ -985,8 +985,13 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client->request('GET', '/share/' . $content->getId());
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
-        // follow link with uid
-        $crawler = $client->followRedirect();
+        $shareUrl = $client->getResponse()->getTargetUrl();
+
+        // use a new client to have a fresh empty session (instead of a logged one from the previous client)
+        $client->restart();
+
+        $client->request('GET', $shareUrl);
+
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertContains('max-age=25200', $client->getResponse()->headers->get('cache-control'));
         $this->assertContains('public', $client->getResponse()->headers->get('cache-control'));
@@ -1001,9 +1006,6 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client->getContainer()->get('craue_config')->set('share_public', 0);
         $client->request('GET', '/share/' . $content->getUid());
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-
-        $client->request('GET', '/view/' . $content->getId());
-        $this->assertContains('no-cache', $client->getResponse()->headers->get('cache-control'));
 
         // removing the share
         $client->request('GET', '/share/delete/' . $content->getId());

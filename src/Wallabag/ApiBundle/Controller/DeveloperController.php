@@ -2,9 +2,9 @@
 
 namespace Wallabag\ApiBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\ApiBundle\Entity\Client;
 use Wallabag\ApiBundle\Form\Type\ClientType;
 

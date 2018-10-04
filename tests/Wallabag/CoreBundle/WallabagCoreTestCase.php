@@ -84,8 +84,8 @@ abstract class WallabagCoreTestCase extends WebTestCase
         $container = $this->client->getContainer();
         $session = $container->get('session');
 
-        $userManager = $container->get('fos_user.user_manager');
-        $loginManager = $container->get('fos_user.security.login_manager');
+        $userManager = $container->get('fos_user.user_manager.test');
+        $loginManager = $container->get('fos_user.security.login_manager.test');
         $firewallName = $container->getParameter('fos_user.firewall_name');
 
         $user = $userManager->findUserBy(['username' => $username]);

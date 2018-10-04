@@ -7,10 +7,9 @@ use FOS\UserBundle\FOSUserEvents;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\UserBundle\Form\SearchUserType;
 
@@ -22,8 +21,7 @@ class ManageController extends Controller
     /**
      * Creates a new User entity.
      *
-     * @Route("/new", name="user_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", name="user_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -60,8 +58,7 @@ class ManageController extends Controller
     /**
      * Displays a form to edit an existing User entity.
      *
-     * @Route("/{id}/edit", name="user_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", name="user_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, User $user)
     {
@@ -93,8 +90,7 @@ class ManageController extends Controller
     /**
      * Deletes a User entity.
      *
-     * @Route("/{id}", name="user_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="user_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, User $user)
     {

@@ -121,7 +121,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
     {
         $client = $this->getClient();
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
-        $userManager = $client->getContainer()->get('fos_user.user_manager');
+        $userManager = $client->getContainer()->get('fos_user.user_manager.test');
         $user = $userManager->findUserBy(['username' => $username]);
         $apiClient = new Client($user);
         $apiClient->setName('My app');

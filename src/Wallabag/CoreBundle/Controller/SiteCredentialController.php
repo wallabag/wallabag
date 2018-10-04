@@ -2,10 +2,9 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\CoreBundle\Entity\SiteCredential;
 use Wallabag\UserBundle\Entity\User;
 
@@ -19,8 +18,7 @@ class SiteCredentialController extends Controller
     /**
      * Lists all User entities.
      *
-     * @Route("/", name="site_credentials_index")
-     * @Method("GET")
+     * @Route("/", name="site_credentials_index", methods={"GET"})
      */
     public function indexAction()
     {
@@ -36,8 +34,7 @@ class SiteCredentialController extends Controller
     /**
      * Creates a new site credential entity.
      *
-     * @Route("/new", name="site_credentials_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", name="site_credentials_new", methods={"GET", "POST"})
      *
      * @param Request $request
      *
@@ -77,8 +74,7 @@ class SiteCredentialController extends Controller
     /**
      * Displays a form to edit an existing site credential entity.
      *
-     * @Route("/{id}/edit", name="site_credentials_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", name="site_credentials_edit", methods={"GET", "POST"})
      *
      * @param Request        $request
      * @param SiteCredential $siteCredential
@@ -121,8 +117,7 @@ class SiteCredentialController extends Controller
     /**
      * Deletes a site credential entity.
      *
-     * @Route("/{id}", name="site_credentials_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="site_credentials_delete", methods={"DELETE"})
      *
      * @param Request        $request
      * @param SiteCredential $siteCredential
