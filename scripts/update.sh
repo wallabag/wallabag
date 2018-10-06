@@ -2,6 +2,12 @@
 # You can execute this file to update wallabag
 # eg: `sh update.sh prod`
 
+# Abort running this script if root
+if [ "$EUID" == "0" ]; then
+    echo "Do not run this script as root!" >&2
+    exit 1
+fi
+
 set -e
 set -u
 
