@@ -68,6 +68,25 @@ Require all granted
 After reloading or restarting Apache, you should now be able to access
 wallabag at <http://domain.tld>.
 
+### PHP-FPM instead of mod_php
+
+If you use PHP-FPM (via mod_proxy_fcgi or similar) then Apache must be
+instructed to *keep* the Authorization header in requests for the API to work.
+In Apache versions `>= 2.4.13` place the following in the section `<Directory
+/var/www/wallabag/web>`:
+
+```apache
+CGIPassAuth On
+```
+
+In older Apache versions we have to set the header value as environment
+variable for the CGI process. For example, with mod_proxy_fcgi the following
+works, when placed somewhere next to the proxy definition:
+
+```apache
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+```
+
 ## Configuration on Nginx
 
 Assuming you installed wallabag in the `/var/www/wallabag` folder,
