@@ -181,6 +181,7 @@ services:
 
     wallabag_core.exception_controller:
         class: Wallabag\CoreBundle\Controller\ExceptionController
+        public: true
         arguments:
             - '@twig'
             - '%kernel.debug%'
@@ -218,3 +219,31 @@ services:
         arguments:
             - "%wallabag_core.site_credentials.encryption_key_path%"
             - "@logger"
+
+    wallabag_core.command.clean_duplicates:
+        class: Wallabag\CoreBundle\Command\CleanDuplicatesCommand
+        tags: ['console.command']
+
+    wallabag_core.command.export:
+        class: Wallabag\CoreBundle\Command\ExportCommand
+        tags: ['console.command']
+
+    wallabag_core.command.install:
+        class: Wallabag\CoreBundle\Command\InstallCommand
+        tags: ['console.command']
+
+    wallabag_core.command.list_user:
+        class: Wallabag\CoreBundle\Command\ListUserCommand
+        tags: ['console.command']
+
+    wallabag_core.command.reload_entry:
+        class: Wallabag\CoreBundle\Command\ReloadEntryCommand
+        tags: ['console.command']
+
+    wallabag_core.command.show_user:
+        class: Wallabag\CoreBundle\Command\ShowUserCommand
+        tags: ['console.command']
+
+    wallabag_core.command.tag_all:
+        class: Wallabag\CoreBundle\Command\TagAllCommand
+        tags: ['console.command']

@@ -26,7 +26,7 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
     {
         parent::setUp();
 
-        $userRepository = $this->getClient()->getContainer()->get('wallabag_user.user_repository');
+        $userRepository = $this->getClient()->getContainer()->get('wallabag_user.user_repository.test');
 
         $user = $userRepository->findOneByUserName('admin');
         $this->adminEntry = new Entry($user);
@@ -60,7 +60,7 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
 
         $reloadedEntries = $this->getClient()
             ->getContainer()
-            ->get('wallabag_core.entry_repository')
+            ->get('wallabag_core.entry_repository.test')
             ->findById([$this->adminEntry->getId(), $this->bobEntry->getId()]);
 
         foreach ($reloadedEntries as $reloadedEntry) {
@@ -84,7 +84,7 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
             'interactive' => false,
         ]);
 
-        $entryRepository = $this->getClient()->getContainer()->get('wallabag_core.entry_repository');
+        $entryRepository = $this->getClient()->getContainer()->get('wallabag_core.entry_repository.test');
 
         $reloadedAdminEntry = $entryRepository->find($this->adminEntry->getId());
         $this->assertNotEmpty($reloadedAdminEntry->getContent());

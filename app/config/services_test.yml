@@ -1,0 +1,38 @@
+services:
+    # see https://github.com/symfony/symfony/issues/24543
+    fos_user.user_manager.test:
+        alias: fos_user.user_manager
+        public: true
+
+    fos_user.security.login_manager.test:
+        alias: fos_user.security.login_manager
+        public: true
+
+    wallabag_core.entry_repository.test:
+        alias: wallabag_core.entry_repository
+        public: true
+
+    wallabag_user.user_repository.test:
+        alias: wallabag_user.user_repository
+        public: true
+
+    filesystem_cache:
+        class: Doctrine\Common\Cache\FilesystemCache
+        arguments:
+            - "%kernel.cache_dir%/doctrine/metadata"
+
+    # fixtures
+    Wallabag\AnnotationBundle\DataFixtures\ORM\:
+        resource: '../../src/Wallabag/AnnotationBundle/DataFixtures/ORM/*'
+        tags: ['doctrine.fixture.orm']
+        autowire: true
+
+    Wallabag\CoreBundle\DataFixtures\ORM\:
+        resource: '../../src/Wallabag/CoreBundle/DataFixtures/ORM/*'
+        tags: ['doctrine.fixture.orm']
+        autowire: true
+
+    Wallabag\UserBundle\DataFixtures\ORM\:
+        resource: '../../src/Wallabag/UserBundle/DataFixtures/ORM/*'
+        tags: ['doctrine.fixture.orm']
+        autowire: true
