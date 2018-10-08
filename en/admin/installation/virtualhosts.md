@@ -2,7 +2,7 @@
 
 ## Configuration on Apache
 
-Do not forget to active the *rewrite* mod of Apache
+Do not forget to activate the *rewrite* mod of Apache:
 
 ```bash
 a2enmod rewrite && systemctl reload apache2
@@ -51,7 +51,7 @@ you want to use PHP as an Apache module, here's a vhost for wallabag:
 
 Note for Apache 2.4, in the section
 &lt;Directory /var/www/wallabag/web&gt; you have to replace the
-directives :
+directives:
 
 ```apache
 AllowOverride None
