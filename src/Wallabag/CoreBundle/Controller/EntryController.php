@@ -234,6 +234,21 @@ class EntryController extends Controller
     }
 
     /**
+     * Shows untagged articles for current user.
+     *
+     * @param Request $request
+     * @param int     $page
+     *
+     * @Route("/untagged/list/{page}", name="untagged", defaults={"page" = "1"})
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showUntaggedEntriesAction(Request $request, $page)
+    {
+        return $this->showEntries('untagged', $request, $page);
+    }
+
+    /**
      * Shows random unread entry.
      *
      * @param Entry $entry
@@ -244,19 +259,7 @@ class EntryController extends Controller
      */
     public function showRandomUnreadEntryAction()
     {
-        $repository = $this->get('wallabag_core.entry_repository');
-
-        try {
-            $entry = $repository->getRandomEntry($this->getUser()->getId(), 'unread');
-        } catch (NoResultException $e) {
-            $bag = $this->get('session')->getFlashBag();
-            $bag->clear();
-            $bag->add('notice', 'flashes.entry.notice.no_random_entry');
-
-            return $this->redirect($this->generateUrl('homepage'));
-        }
-
-        return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
+        return $this->showRandomEntries('unread');
     }
 
     /**
@@ -270,19 +273,7 @@ class EntryController extends Controller
      */
     public function showRandomStarredEntryAction()
     {
-        $repository = $this->get('wallabag_core.entry_repository');
-
-        try {
-            $entry = $repository->getRandomEntry($this->getUser()->getId(), 'starred');
-        } catch (NoResultException $e) {
-            $bag = $this->get('session')->getFlashBag();
-            $bag->clear();
-            $bag->add('notice', 'flashes.entry.notice.no_random_entry');
-
-            return $this->redirect($this->generateUrl('homepage'));
-        }
-
-        return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
+        return $this->showRandomEntries('starred');
     }
 
     /**
@@ -296,19 +287,21 @@ class EntryController extends Controller
      */
     public function showRandomArchiveEntryAction()
     {
-        $repository = $this->get('wallabag_core.entry_repository');
+        return $this->showRandomEntries('archive');
+    }
 
-        try {
-            $entry = $repository->getRandomEntry($this->getUser()->getId(), 'starred');
-        } catch (NoResultException $e) {
-            $bag = $this->get('session')->getFlashBag();
-            $bag->clear();
-            $bag->add('notice', 'flashes.entry.notice.no_random_entry');
-
-            return $this->redirect($this->generateUrl('homepage'));
-        }
-
-        return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
+    /**
+     * Shows random all entry.
+     *
+     * @param Entry $entry
+     *
+     * @Route("/untagged/random", name="untagged_random")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showRandomUntaggedEntryAction()
+    {
+        return $this->showRandomEntries('untagged');
     }
 
     /**
@@ -322,19 +315,7 @@ class EntryController extends Controller
      */
     public function showRandomAllEntryAction()
     {
-        $repository = $this->get('wallabag_core.entry_repository');
-
-        try {
-            $entry = $repository->getRandomEntry($this->getUser()->getId());
-        } catch (NoResultException $e) {
-            $bag = $this->get('session')->getFlashBag();
-            $bag->clear();
-            $bag->add('notice', 'flashes.entry.notice.no_random_entry');
-
-            return $this->redirect($this->generateUrl('homepage'));
-        }
-
-        return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
+        return $this->showRandomEntries();
     }
 
     /**
@@ -571,54 +552,6 @@ class EntryController extends Controller
     }
 
     /**
-     * Shows untagged articles for current user.
-     *
-     * @param Request $request
-     * @param int     $page
-     *
-     * @Route("/untagged/list/{page}", name="untagged", defaults={"page" = "1"})
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function showUntaggedEntriesAction(Request $request, $page)
-    {
-        return $this->showEntries('untagged', $request, $page);
-    }
-
-    /**
-     * Fetch content and update entry.
-     * In case it fails, $entry->getContent will return an error message.
-     *
-     * @param Entry  $entry
-     * @param string $prefixMessage Should be the translation key: entry_saved or entry_reloaded
-     */
-    private function updateEntry(Entry $entry, $prefixMessage = 'entry_saved')
-    {
-        $message = 'flashes.entry.notice.' . $prefixMessage;
-
-        try {
-            $this->get('wallabag_core.content_proxy')->updateEntry($entry, $entry->getUrl());
-        } catch (\Exception $e) {
-            $this->get('logger')->error('Error while saving an entry', [
-                'exception' => $e,
-                'entry' => $entry,
-            ]);
-
-            $message = 'flashes.entry.notice.' . $prefixMessage . '_failed';
-        }
-
-        if (empty($entry->getDomainName())) {
-            $this->get('wallabag_core.content_proxy')->setEntryDomainName($entry);
-        }
-
-        if (empty($entry->getTitle())) {
-            $this->get('wallabag_core.content_proxy')->setDefaultEntryTitle($entry);
-        }
-
-        $this->get('session')->getFlashBag()->add('notice', $message);
-    }
-
-    /**
      * Global method to retrieve entries depending on the given type
      * It returns the response to be send.
      *
@@ -688,6 +621,63 @@ class EntryController extends Controller
                 'isFiltered' => $form->isSubmitted(),
             ]
         );
+    }
+
+    /**
+     * Global method to retrieve random entries depending on the given type.
+     *
+     * @param string $type Entries type: unread, starred, archive or untagged
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    private function showRandomEntries($type)
+    {
+        $repository = $this->get('wallabag_core.entry_repository');
+
+        try {
+            $entry = $repository->getRandomEntry($this->getUser()->getId(), $type);
+        } catch (NoResultException $e) {
+            $bag = $this->get('session')->getFlashBag();
+            $bag->clear();
+            $bag->add('notice', 'flashes.entry.notice.no_random_entry');
+
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+
+        return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
+    }
+
+    /**
+     * Fetch content and update entry.
+     * In case it fails, $entry->getContent will return an error message.
+     *
+     * @param Entry  $entry
+     * @param string $prefixMessage Should be the translation key: entry_saved or entry_reloaded
+     */
+    private function updateEntry(Entry $entry, $prefixMessage = 'entry_saved')
+    {
+        $message = 'flashes.entry.notice.' . $prefixMessage;
+
+        try {
+            $this->get('wallabag_core.content_proxy')->updateEntry($entry, $entry->getUrl());
+        } catch (\Exception $e) {
+            $this->get('logger')->error('Error while saving an entry', [
+                'exception' => $e,
+                'entry' => $entry,
+            ]);
+
+            $message = 'flashes.entry.notice.' . $prefixMessage . '_failed';
+        }
+
+        if (empty($entry->getDomainName())) {
+            $this->get('wallabag_core.content_proxy')->setEntryDomainName($entry);
+        }
+
+        if (empty($entry->getTitle())) {
+            $this->get('wallabag_core.content_proxy')->setDefaultEntryTitle($entry);
+        }
+
+        $this->get('session')->getFlashBag()->add('notice', $message);
     }
 
     /**

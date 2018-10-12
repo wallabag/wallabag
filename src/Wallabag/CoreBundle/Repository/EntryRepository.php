@@ -464,6 +464,11 @@ class EntryRepository extends EntityRepository
             $qb->andWhere('e.isStarred = true');
         }
 
+        if ('untagged' === $status) {
+            $qb->leftJoin('e.tags', 't');
+            $qb->andWhere('t.id is null');
+        }
+
         return $qb->andWhere('e.id >= :rand')
             ->setParameter('rand', rand(0, $max))
             ->setMaxResults(1)
