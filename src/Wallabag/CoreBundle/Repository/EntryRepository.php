@@ -440,17 +440,14 @@ class EntryRepository extends EntityRepository
      * @throws \Doctrine\ORM\NoResultException
      * @throws \Doctrine\ORM\NonUniqueResultException
      *
+     * @see https://github.com/doctrine/doctrine2/issues/5479#issuecomment-403862934
+     *
      * @return Entry
      */
     public function getRandomEntry($userId, $status = '')
     {
-        $max = $this->getEntityManager()
-            ->createQuery('SELECT MAX(e.id) FROM Wallabag\CoreBundle\Entity\Entry e WHERE e.user = :userId')
-            ->setParameter('userId', $userId)
-            ->getSingleScalarResult();
-
-        $qb = $this->createQueryBuilder('e')
-            ->where('e.user = :user_id')->setParameter('user_id', $userId);
+        $qb = $this->getQueryBuilderByUser($userId)
+            ->select('MIN(e.id)', 'MAX(e.id)');
 
         if ('unread' === $status) {
             $qb->andWhere('e.isArchived = false');
@@ -469,8 +466,15 @@ class EntryRepository extends EntityRepository
             $qb->andWhere('t.id is null');
         }
 
-        return $qb->andWhere('e.id >= :rand')
-            ->setParameter('rand', rand(0, $max))
+        $idLimits = $qb
+            ->getQuery()
+            ->getOneOrNullResult();
+        $randomPossibleIds = rand($idLimits[1], $idLimits[2]);
+
+        return $qb
+            ->select('e')
+            ->andWhere('e.id >= :random_id')
+            ->setParameter('random_id', $randomPossibleIds)
             ->setMaxResults(1)
             ->getQuery()
             ->getSingleResult();
