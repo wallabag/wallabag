@@ -249,73 +249,28 @@ class EntryController extends Controller
     }
 
     /**
-     * Shows random unread entry.
+     * Shows random entry depending on the given type.
      *
      * @param Entry $entry
      *
-     * @Route("/unread/random", name="unread_random")
+     * @Route("/{type}/random", name="random_entry", requirements={"_locale": "unread|starred|archive|untagged|all"})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function showRandomUnreadEntryAction()
+    public function redirectRandomEntryAction($type = 'all')
     {
-        return $this->showRandomEntries('unread');
-    }
+        try {
+            $entry = $this->get('wallabag_core.entry_repository')
+                ->getRandomEntry($this->getUser()->getId(), $type);
+        } catch (NoResultException $e) {
+            $bag = $this->get('session')->getFlashBag();
+            $bag->clear();
+            $bag->add('notice', 'flashes.entry.notice.no_random_entry');
 
-    /**
-     * Shows random favorite entry.
-     *
-     * @param Entry $entry
-     *
-     * @Route("/starred/random", name="starred_random")
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function showRandomStarredEntryAction()
-    {
-        return $this->showRandomEntries('starred');
-    }
+            return $this->redirect($this->generateUrl('homepage'));
+        }
 
-    /**
-     * Shows random archived entry.
-     *
-     * @param Entry $entry
-     *
-     * @Route("/archive/random", name="archive_random")
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function showRandomArchiveEntryAction()
-    {
-        return $this->showRandomEntries('archive');
-    }
-
-    /**
-     * Shows random all entry.
-     *
-     * @param Entry $entry
-     *
-     * @Route("/untagged/random", name="untagged_random")
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function showRandomUntaggedEntryAction()
-    {
-        return $this->showRandomEntries('untagged');
-    }
-
-    /**
-     * Shows random all entry.
-     *
-     * @param Entry $entry
-     *
-     * @Route("/all/random", name="all_random")
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function showRandomAllEntryAction()
-    {
-        return $this->showRandomEntries();
+        return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
     }
 
     /**
@@ -621,30 +576,6 @@ class EntryController extends Controller
                 'isFiltered' => $form->isSubmitted(),
             ]
         );
-    }
-
-    /**
-     * Global method to retrieve random entries depending on the given type.
-     *
-     * @param string $type Entries type: unread, starred, archive or untagged
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    private function showRandomEntries($type)
-    {
-        $repository = $this->get('wallabag_core.entry_repository');
-
-        try {
-            $entry = $repository->getRandomEntry($this->getUser()->getId(), $type);
-        } catch (NoResultException $e) {
-            $bag = $this->get('session')->getFlashBag();
-            $bag->clear();
-            $bag->add('notice', 'flashes.entry.notice.no_random_entry');
-
-            return $this->redirect($this->generateUrl('homepage'));
-        }
-
-        return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
     }
 
     /**

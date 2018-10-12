@@ -1495,4 +1495,30 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertSame(sprintf('/remove-tag/%s/%s', $entry->getId(), $tag->getId()), $link);
     }
+
+    public function testRandom()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $client->request('GET', '/unread/random');
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'Unread random');
+
+        $client->request('GET', '/starred/random');
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'Starred random');
+
+        $client->request('GET', '/archive/random');
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'Archive random');
+
+        $client->request('GET', '/untagged/random');
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'Untagged random');
+
+        $client->request('GET', '/all/random');
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'All random');
+    }
 }

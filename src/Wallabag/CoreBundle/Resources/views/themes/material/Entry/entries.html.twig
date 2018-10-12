@@ -28,7 +28,7 @@
         <div class="nb-results">
             {{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}
             <a href="{{ path('switch_view_mode') }}"><i class="material-icons">{% if listMode == 0 %}view_list{% else %}view_module{% endif %}</i></a>
-            <a href="{{ path(currentRoute ~ '_random') }}">random</a>
+            <a href="{{ path('random_entry', { 'type': currentRoute }) }}">random</a>
             {% if app.user.config.rssToken %}
                 {% include "@WallabagCore/themes/common/Entry/_rss_link.html.twig" %}
             {% endif %}
