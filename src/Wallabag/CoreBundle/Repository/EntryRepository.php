@@ -435,7 +435,7 @@ class EntryRepository extends EntityRepository
      * Returns a random entry, filtering by status.
      *
      * @param $userId
-     * @param string $status can be unread, archive or starred
+     * @param string $type can be unread, archive, starred, etc
      *
      * @throws \Doctrine\ORM\NoResultException
      * @throws \Doctrine\ORM\NonUniqueResultException
@@ -444,26 +444,25 @@ class EntryRepository extends EntityRepository
      *
      * @return Entry
      */
-    public function getRandomEntry($userId, $status = '')
+    public function getRandomEntry($userId, $type = '')
     {
         $qb = $this->getQueryBuilderByUser($userId)
             ->select('MIN(e.id)', 'MAX(e.id)');
 
-        if ('unread' === $status) {
-            $qb->andWhere('e.isArchived = false');
-        }
-
-        if ('archive' === $status) {
-            $qb->andWhere('e.isArchived = true');
-        }
-
-        if ('starred' === $status) {
-            $qb->andWhere('e.isStarred = true');
-        }
-
-        if ('untagged' === $status) {
-            $qb->leftJoin('e.tags', 't');
-            $qb->andWhere('t.id is null');
+        switch ($type) {
+            case 'unread':
+                $qb->andWhere('e.isArchived = false');
+                break;
+            case 'archive':
+                $qb->andWhere('e.isArchived = true');
+                break;
+            case 'starred':
+                $qb->andWhere('e.isStarred = true');
+                break;
+            case 'untagged':
+                $qb->leftJoin('e.tags', 't');
+                $qb->andWhere('t.id is null');
+                break;
         }
 
         $idLimits = $qb

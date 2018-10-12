@@ -251,7 +251,7 @@ class EntryController extends Controller
     /**
      * Shows random entry depending on the given type.
      *
-     * @param Entry $entry
+     * @param string $type
      *
      * @Route("/{type}/random", name="random_entry", requirements={"_locale": "unread|starred|archive|untagged|all"})
      *
@@ -267,7 +267,7 @@ class EntryController extends Controller
             $bag->clear();
             $bag->add('notice', 'flashes.entry.notice.no_random_entry');
 
-            return $this->redirect($this->generateUrl('homepage'));
+            return $this->redirect($this->generateUrl($type));
         }
 
         return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
