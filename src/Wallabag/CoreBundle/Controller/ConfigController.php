@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Locale as LocaleConstraint;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\TaggingRule;
 use Wallabag\CoreBundle\Form\Type\ChangePasswordType;
@@ -341,11 +342,13 @@ class ConfigController extends Controller
      */
     public function setLocaleAction(Request $request, $language = null)
     {
-        if (null !== $language) {
-            $this->get('session')->set('_locale', $language);
+        $errors = $this->get('validator')->validate($language, (new LocaleConstraint()));
+
+        if (0 === \count($errors)) {
+            $request->getSession()->set('_locale', $language);
         }
 
-        return $this->redirect($request->headers->get('referer'));
+        return $this->redirect($request->headers->get('referer', $this->generateUrl('homepage')));
     }
 
     /**

@@ -965,4 +965,39 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/config/view-mode');
     }
+
+    public function testChangeLocaleWithoutReferer()
+    {
+        $client = $this->getClient();
+
+        $client->request('GET', '/locale/de');
+        $client->followRedirect();
+
+        $this->assertSame('de', $client->getRequest()->getLocale());
+        $this->assertSame('de', $client->getContainer()->get('session')->get('_locale'));
+    }
+
+    public function testChangeLocaleWithReferer()
+    {
+        $client = $this->getClient();
+
+        $client->request('GET', '/login');
+        $client->request('GET', '/locale/de');
+        $client->followRedirect();
+
+        $this->assertSame('de', $client->getRequest()->getLocale());
+        $this->assertSame('de', $client->getContainer()->get('session')->get('_locale'));
+    }
+
+    public function testChangeLocaleToBadLocale()
+    {
+        $client = $this->getClient();
+
+        $client->request('GET', '/login');
+        $client->request('GET', '/locale/yuyuyuyu');
+        $client->followRedirect();
+
+        $this->assertNotSame('yuyuyuyu', $client->getRequest()->getLocale());
+        $this->assertNotSame('yuyuyuyu', $client->getContainer()->get('session')->get('_locale'));
+    }
 }
