@@ -10,13 +10,13 @@ clean: ## Clear the application cache
 	rm -rf var/cache/*
 
 install: ## Install wallabag with the latest version
-	@sh scripts/install.sh $(ENV)
+	@bash scripts/install.sh $(ENV)
 
 update: ## Update the wallabag installation to the latest version
-	@sh scripts/update.sh $(ENV)
+	@bash scripts/update.sh $(ENV)
 
 dev: ## Install the latest dev version
-	@sh scripts/dev.sh
+	@bash scripts/dev.sh
 
 run: ## Run the wallabag built-in server
 	@php bin/console server:run --env=dev
