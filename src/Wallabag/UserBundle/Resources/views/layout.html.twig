@@ -15,6 +15,11 @@
             {% block fos_user_content %}
             {% endblock fos_user_content %}
         </div>
+        <div class="center">
+            <a href="{{ path('changeLocale', {'language': 'de'}) }}">Deutsch</a> –
+            <a href="{{ path('changeLocale', {'language': 'en'}) }}">English</a> –
+            <a href="{{ path('changeLocale', {'language': 'fr'}) }}">Français</a>
+        </div>
     </div>
 </main>
 {% endblock %}
