@@ -399,6 +399,8 @@ tag:
     new:
         add: "Ajouter"
         placeholder: "Vous pouvez ajouter plusieurs tags, séparés par une virgule."
+    rename:
+        placeholder: 'Vous pouvez changer le nom de votre tag.'
 
 export:
     footer_template: '<div style="text-align:center;"><p>Généré par wallabag with %method%</p><p>Merci d''ouvrir <a href="https://github.com/wallabag/wallabag/issues">un ticket</a> si vous rencontrez des soucis d''affichage avec ce document sur votre support.</p></div>'
@@ -585,6 +587,7 @@ flashes:
     tag:
         notice:
             tag_added: "Tag ajouté"
+            tag_renamed: "Tag renommé"
     import:
         notice:
             failed: "L’import a échoué, veuillez ré-essayer"

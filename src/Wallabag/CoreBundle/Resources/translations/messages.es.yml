@@ -399,6 +399,8 @@ tag:
     new:
         add: 'Añadir'
         placeholder: 'Puedes añadir varias etiquetas, separadas por una coma.'
+    rename:
+        # placeholder: 'You can update tag name.'
 
 # export:
 #     footer_template: '<div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p></div>'
@@ -585,6 +587,7 @@ flashes:
     tag:
         notice:
             tag_added: 'Etiqueta añadida'
+            # tag_renamed: 'Tag renamed'
     import:
         notice:
             failed: 'Importación fallida, por favor, inténtelo de nuevo.'
