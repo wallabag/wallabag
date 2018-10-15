@@ -68,6 +68,20 @@ Require all granted
 Après que vous ayez rechargé/redémarré Apache, vous devriez pouvoir
 avoir accès à wallabag à l'adresse <http://domain.tld>.
 
+### Utilisation de PHP-FPM au lieu de `mod_php`
+
+Si vous utilisez PHP-FPM (via `mod_proxy_fcgi` ou similaire), il faut indiquer à Apache de *conserver* l'en-tête `Authorization` dans les requêtes pour que l'API fonctionne. Dans les versions d'Apache `>= 2.4.13` ajoutez dans la section `<Directory /var/www/wallabag/web>` :
+
+```apache
+CGIPassAuth On
+```
+
+Dans les versions d'Apache `< 2.4.13`, il faut créer une variable d'environnement pour le processus CGI. Par exemple, avec `mod_proxy_fcgi`, on peut ajouter à côté de la définition du proxy :
+
+```apache
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+```
+
 ### Configuration avec Nginx
 
 En imaginant que vous vouliez installer wallabag dans le dossier
