@@ -40,6 +40,11 @@ here](https://chrome.google.com/webstore/detail/wallabagger/gbmgphmejlcoihgedabh
 You can download the [Opera addon
 here](https://addons.opera.com/en/extensions/details/wallabagger/).
 
+### Edge
+
+You can download the [Edge addon
+here](https://www.microsoft.com/en-us/store/p/wallabagger/9p41cnlppmfz).
+
 ### How to use our addon
 
 wallabagger is a browser extension to add pages to wallabag, with the ability to:
