@@ -123,6 +123,12 @@ main {
     display: block;
   }
 
+  .card-image .placeholder {
+    background-color: #111;
+    filter: invert(100%);
+    -webkit-filter: invert(100%);
+  }
+
   &.sw {
     max-width: 370px;
     margin-left: auto;

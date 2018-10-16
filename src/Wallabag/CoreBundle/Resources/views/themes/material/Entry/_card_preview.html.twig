@@ -7,7 +7,11 @@
             {% endfor %}
             </ul>
             <a href="{{ path('view', { 'id': entry.id }) }}">
+              {% if entry.previewPicture is null %}
+                <span class="preview placeholder" style="background-image: url({{ asset('wallassets/themes/_global/img/logo-square.svg') }});"></span>
+              {% else %}
                 <span class="preview" style="background-image: url({{ entry.previewPicture }})"></span>
+              {% endif %}
             </a>
         </div>
         {% include "@WallabagCore/themes/material/Entry/Card/_content.html.twig" with {'entry': entry, 'withPreview': true} only %}
