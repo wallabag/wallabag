@@ -801,6 +801,14 @@ class ContentProxyTest extends TestCase
                 null,
                 'example.org',
             ],
+            'fragment and query string in fetched content' => [
+                'https://example.org/hello',
+                null,
+                'https://example.org/hello?foo#world',
+                'https://example.org/hello',
+                null,
+                'example.org',
+            ]
         ];
     }
 
