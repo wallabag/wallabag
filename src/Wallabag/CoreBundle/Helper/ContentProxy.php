@@ -332,29 +332,68 @@ class ContentProxy
             $diff_keys = array_keys($diff);
             sort($diff_keys);
 
-            switch ($diff_keys) {
-                case ['path']:
-                    if (($parsed_entry_url['path'] . '/' === $parsed_content_url['path']) // diff is trailing slash, we only replace the url of the entry
-                        || ($url === urldecode($entry->getUrl()))) { // we update entry url if new url is a decoded version of it, see EntryRepository#findByUrlAndUserId
+            if ($this->ignoreUrl($entry->getUrl())) {
+                $entry->setUrl($url);
+            } else {
+                switch ($diff_keys) {
+                    case ['path']:
+                        if (($parsed_entry_url['path'] . '/' === $parsed_content_url['path']) // diff is trailing slash, we only replace the url of the entry
+                            || ($url === urldecode($entry->getUrl()))) { // we update entry url if new url is a decoded version of it, see EntryRepository#findByUrlAndUserId
+                            $entry->setUrl($url);
+                        }
+                        break;
+                    case ['scheme']:
                         $entry->setUrl($url);
-                    }
-                    break;
-                case ['scheme']:
-                    $entry->setUrl($url);
-                    break;
-                case ['fragment']:
-                case ['query']:
-                case ['fragment', 'query']:
-                    // noop
-                    break;
-                default:
-                    if (empty($entry->getOriginUrl())) {
-                        $entry->setOriginUrl($entry->getUrl());
-                    }
-                    $entry->setUrl($url);
-                    break;
+                        break;
+                    case ['fragment']:
+                    case ['query']:
+                    case ['fragment', 'query']:
+                        // noop
+                        break;
+                    default:
+                        if (empty($entry->getOriginUrl())) {
+                            $entry->setOriginUrl($entry->getUrl());
+                        }
+                        $entry->setUrl($url);
+                        break;
+                }
             }
         }
+    }
+
+    /**
+     * Check entry url against an ignore list to replace with content url.
+     *
+     * XXX: move the ignore list in the database to let users handle it
+     *
+     * @param string $url url to test
+     *
+     * @return bool true if url matches ignore list otherwise false
+     */
+    private function ignoreUrl($url)
+    {
+        $ignored_hosts = ['feedproxy.google.com', 'feeds.reuters.com'];
+        $ignored_patterns = ['https?://www\.lemonde\.fr/tiny.*'];
+
+        $parsed_url = parse_url($url);
+
+        $filtered = array_filter($ignored_hosts, function ($var) use ($parsed_url) {
+            return $var === $parsed_url['host'];
+        });
+
+        if ([] !== $filtered) {
+            return true;
+        }
+
+        $filtered = array_filter($ignored_patterns, function ($var) use ($url) {
+            return preg_match("`$var`i", $url);
+        });
+
+        if ([] !== $filtered) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

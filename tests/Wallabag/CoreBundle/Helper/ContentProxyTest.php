@@ -808,7 +808,39 @@ class ContentProxyTest extends TestCase
                 'https://example.org/hello',
                 null,
                 'example.org',
-            ]
+            ],
+            'different path and query string in fetch content' => [
+                'https://example.org/hello',
+                null,
+                'https://example.org/world?foo',
+                'https://example.org/world?foo',
+                'https://example.org/hello',
+                'example.org',
+            ],
+            'feedproxy ignore list test' => [
+                'http://feedproxy.google.com/~r/Wallabag/~3/helloworld',
+                null,
+                'https://example.org/hello-wallabag',
+                'https://example.org/hello-wallabag',
+                null,
+                'example.org',
+            ],
+            'feedproxy ignore list test with origin url already set' => [
+                'http://feedproxy.google.com/~r/Wallabag/~3/helloworld',
+                'https://example.org/this-is-source',
+                'https://example.org/hello-wallabag',
+                'https://example.org/hello-wallabag',
+                'https://example.org/this-is-source',
+                'example.org',
+            ],
+            'lemonde ignore pattern test' => [
+                'http://www.lemonde.fr/tiny/url',
+                null,
+                'http://example.com/hello-world',
+                'http://example.com/hello-world',
+                null,
+                'example.com',
+            ],
         ];
     }
 
