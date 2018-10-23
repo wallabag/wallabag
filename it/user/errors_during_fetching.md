@@ -23,7 +23,7 @@ aggiustare: si prega di riportare il problema).
 Se non funziona, provate a estrarre un siteconfig usando:
 [<http://siteconfig.fivefilters.org/>](http://siteconfig.fivefilters.org/)
 (selezionate quale parte del contenuto é effettivamente contenuto). Potete
-[leggere prima questa documentazione](http://help.fivefilters.org/customer/en/portal/articles/223153-site-patterns).
+[leggere prima questa documentazione](https://help.fivefilters.org/full-text-rss/site-patterns.html).
 
 Potete testarlo sul sito **f43.m3**: cliccate su **Want to try a custom
 siteconfig?** e inserite il file generato da siteconfig.fivefilters.org.
