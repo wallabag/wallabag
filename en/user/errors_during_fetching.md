@@ -43,7 +43,7 @@ If it doesn't works, try to extract a site config using:
 [<http://siteconfig.fivefilters.org/>](http://siteconfig.fivefilters.org/)
 (select which part of the content is actually the content). You can
 [read this documentation
-before](http://help.fivefilters.org/customer/en/portal/articles/223153-site-patterns).
+before](https://help.fivefilters.org/full-text-rss/site-patterns.html).
 
 You can test it on **f43.me** website: click on **Want to try a custom
 siteconfig?** and put the generated file from
