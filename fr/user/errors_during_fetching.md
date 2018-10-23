@@ -47,7 +47,7 @@ configuration en utilisant :
 [<http://siteconfig.fivefilters.org/>](http://siteconfig.fivefilters.org/)
 (sélectionnez les parties du contenu qui correspondent à ce que vous
 souhaitez garder). Vous pouvez [lire cette documentation
-avant](http://help.fivefilters.org/customer/en/portal/articles/223153-site-patterns).
+avant](https://help.fivefilters.org/full-text-rss/site-patterns.html).
 
 Vous pouvez tester ce fichier sur le site **f43.me** : cliquez sur
 **Want to try a custom siteconfig?** et insérez le fichier généré depuis
