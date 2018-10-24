@@ -4,7 +4,6 @@ namespace Wallabag\ApiBundle\Controller;
 
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
-use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -771,24 +770,6 @@ class EntryRestController extends WallabagRestController
         }
 
         return $this->sendResponse($results);
-    }
-
-    /**
-     * Shortcut to send data serialized in json.
-     *
-     * @param mixed $data
-     *
-     * @return JsonResponse
-     */
-    private function sendResponse($data)
-    {
-        // https://github.com/schmittjoh/JMSSerializerBundle/issues/293
-        $context = new SerializationContext();
-        $context->setSerializeNull(true);
-
-        $json = $this->get('jms_serializer')->serialize($data, 'json', $context);
-
-        return (new JsonResponse())->setJson($json);
     }
 
     /**

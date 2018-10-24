@@ -3,7 +3,6 @@
 namespace Tests\Wallabag\ApiBundle\Controller;
 
 use Tests\Wallabag\ApiBundle\WallabagApiTestCase;
-use Wallabag\CoreBundle\Entity\Entry;
 
 class SearchRestControllerTest extends WallabagApiTestCase
 {
@@ -19,7 +18,7 @@ class SearchRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertGreaterThanOrEqual(1, count($content));
+        $this->assertGreaterThanOrEqual(1, \count($content));
         $this->assertArrayHasKey('items', $content['_embedded']);
         $this->assertGreaterThanOrEqual(0, $content['total']);
         $this->assertSame(1, $content['page']);
@@ -49,7 +48,7 @@ class SearchRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertGreaterThanOrEqual(1, count($content));
+        $this->assertGreaterThanOrEqual(1, \count($content));
         $this->assertArrayHasKey('items', $content['_embedded']);
         $this->assertGreaterThanOrEqual(0, $content['total']);
         $this->assertSame(1, $content['page']);
