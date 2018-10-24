@@ -374,8 +374,6 @@ class ContentProxy
                 $entry->setUrl($url);
                 break;
             case ['fragment']:
-            case ['query']:
-            case ['fragment', 'query']:
                 // noop
                 break;
             default:

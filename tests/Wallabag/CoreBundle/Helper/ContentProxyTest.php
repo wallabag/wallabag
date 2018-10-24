@@ -777,20 +777,12 @@ class ContentProxyTest extends TestCase
                 null,
                 'example.com',
             ],
-            'no query string in fetched content' => [
-                'https://example.org/hello?world=1',
-                null,
-                'https://example.org/hello',
-                'https://example.org/hello?world=1',
-                null,
-                'example.org',
-            ],
             'query string in fetched content' => [
                 'https://example.org/hello',
                 null,
                 'https://example.org/hello?world=1',
+                'https://example.org/hello?world=1',
                 'https://example.org/hello',
-                null,
                 'example.org',
             ],
             'fragment in fetched content' => [
@@ -805,8 +797,8 @@ class ContentProxyTest extends TestCase
                 'https://example.org/hello',
                 null,
                 'https://example.org/hello?foo#world',
+                'https://example.org/hello?foo#world',
                 'https://example.org/hello',
-                null,
                 'example.org',
             ],
             'different path and query string in fetch content' => [
