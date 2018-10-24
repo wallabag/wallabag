@@ -328,6 +328,18 @@ class ContentProxy
         $parsed_entry_url = parse_url($entry->getUrl());
         $parsed_content_url = parse_url($url);
 
+        /**
+         * The following part computes the list of part changes between two
+         * parse_url arrays.
+         *
+         * As array_diff_assoc only computes changes to go from the left array
+         * to the right one, we make two differents arrays to have both
+         * directions. We merge these two arrays and sort keys before passing
+         * the result to the switch.
+         *
+         * The resulting array gives us all changing parts between the two
+         * urls: scheme, host, path, query and/or fragment.
+         */
         $diff_ec = array_diff_assoc($parsed_entry_url, $parsed_content_url);
         $diff_ce = array_diff_assoc($parsed_content_url, $parsed_entry_url);
 
@@ -340,6 +352,17 @@ class ContentProxy
             return false;
         }
 
+        /**
+         * This switch case lets us apply different behaviors according to
+         * changing parts of urls.
+         *
+         * As $diff_keys is an array, we provide arrays as cases. ['path'] means
+         * 'only the path is different between the two urls' whereas
+         * ['fragment', 'query'] means 'only fragment and query string parts are
+         * different between the two urls'.
+         * 
+         * Note that values in $diff_keys are sorted.
+         */
         switch ($diff_keys) {
             case ['path']:
                 if (($parsed_entry_url['path'] . '/' === $parsed_content_url['path']) // diff is trailing slash, we only replace the url of the entry
