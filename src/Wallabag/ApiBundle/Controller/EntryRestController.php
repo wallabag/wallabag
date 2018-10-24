@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Event\EntryDeletedEvent;
@@ -140,7 +139,7 @@ class EntryRestController extends WallabagRestController
                     'tags' => $tags,
                     'since' => $since,
                 ],
-                UrlGeneratorInterface::ABSOLUTE_URL
+                true
             )
         );
 

@@ -9,7 +9,6 @@ use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SearchRestController extends WallabagRestController
 {
@@ -57,7 +56,7 @@ class SearchRestController extends WallabagRestController
                     'page' => $page,
                     'perPage' => $perPage,
                 ],
-                UrlGeneratorInterface::ABSOLUTE_URL
+                true
             )
         );
 
