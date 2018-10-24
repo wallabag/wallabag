@@ -28,7 +28,7 @@
         "issues": "https://github.com/wallabag/wallabag/issues"
     },
     "require": {
-        "php": ">=5.6.0",
+        "php": ">=7.1.0",
         "ext-pcre": "*",
         "ext-dom": "*",
         "ext-curl": "*",
@@ -48,7 +48,7 @@
         "doctrine/doctrine-bundle": "^1.8.0",
         "doctrine/doctrine-cache-bundle": "^1.3.2",
         "twig/extensions": "^1.5.1",
-        "symfony/swiftmailer-bundle": "^2.6.7",
+        "symfony/swiftmailer-bundle": "^3.2.3",
         "symfony/monolog-bundle": "^3.1.2",
         "sensio/distribution-bundle": "^5.0.21",
         "sensio/framework-extra-bundle": "^5.2.1",
@@ -131,7 +131,7 @@
     "config": {
         "bin-dir": "bin",
         "platform": {
-            "php": "5.6.0"
+            "php": "7.1.0"
         }
     },
     "minimum-stability": "dev",
