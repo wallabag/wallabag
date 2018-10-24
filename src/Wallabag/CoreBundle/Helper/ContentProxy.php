@@ -349,6 +349,7 @@ class ContentProxy
 
         if ($this->ignoreUrl($entry->getUrl())) {
             $entry->setUrl($url);
+
             return false;
         }
 
@@ -360,7 +361,7 @@ class ContentProxy
          * 'only the path is different between the two urls' whereas
          * ['fragment', 'query'] means 'only fragment and query string parts are
          * different between the two urls'.
-         * 
+         *
          * Note that values in $diff_keys are sorted.
          */
         switch ($diff_keys) {
