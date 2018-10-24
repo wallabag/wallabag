@@ -79,7 +79,7 @@
         "ocramius/proxy-manager": "^1.0.2",
         "white-october/pagerfanta-bundle": "^1.1.0",
         "php-amqplib/rabbitmq-bundle": "^1.14",
-        "predis/predis": "^1.1.1",
+        "predis/predis": "v1.1.x-dev",
         "javibravo/simpleue": "^2.0",
         "symfony/dom-crawler": "^3.3.13",
         "friendsofsymfony/jsrouting-bundle": "^2.2.1",
