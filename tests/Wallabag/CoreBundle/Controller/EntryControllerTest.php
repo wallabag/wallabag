@@ -168,7 +168,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame('fr', $content->getLanguage());
         $this->assertSame('2015-03-28 11:43:19', $content->getPublishedAt()->format('Y-m-d H:i:s'));
         $this->assertSame('Morgane Tual', $author[0]);
-        $this->assertArrayHasKey('x-varnish1', $content->getHeaders());
+        $this->assertArrayHasKey('x-served-by', $content->getHeaders());
         $client->getContainer()->get('craue_config')->set('store_article_headers', 0);
     }
 
