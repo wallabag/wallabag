@@ -740,6 +740,133 @@ class ContentProxyTest extends TestCase
     }
 
     /**
+     * Data provider for testWithChangedUrl.
+     *
+     * Arrays contain the following values:
+     * $entry_url
+     * $origin_url
+     * $content_url
+     * $expected_entry_url
+     * $expected_origin_url
+     * $expected_domain
+     */
+    public function dataForChangedUrl()
+    {
+        return [
+            'normal' => [
+                'http://0.0.0.0',
+                null,
+                'http://1.1.1.1',
+                'http://1.1.1.1',
+                'http://0.0.0.0',
+                '1.1.1.1',
+            ],
+            'origin already set' => [
+                'http://0.0.0.0',
+                'http://hello',
+                'http://1.1.1.1',
+                'http://1.1.1.1',
+                'http://hello',
+                '1.1.1.1',
+            ],
+            'trailing slash' => [
+                'https://example.com/hello-world',
+                null,
+                'https://example.com/hello-world/',
+                'https://example.com/hello-world/',
+                null,
+                'example.com',
+            ],
+            'query string in fetched content' => [
+                'https://example.org/hello',
+                null,
+                'https://example.org/hello?world=1',
+                'https://example.org/hello?world=1',
+                'https://example.org/hello',
+                'example.org',
+            ],
+            'fragment in fetched content' => [
+                'https://example.org/hello',
+                null,
+                'https://example.org/hello#world',
+                'https://example.org/hello',
+                null,
+                'example.org',
+            ],
+            'fragment and query string in fetched content' => [
+                'https://example.org/hello',
+                null,
+                'https://example.org/hello?foo#world',
+                'https://example.org/hello?foo#world',
+                'https://example.org/hello',
+                'example.org',
+            ],
+            'different path and query string in fetch content' => [
+                'https://example.org/hello',
+                null,
+                'https://example.org/world?foo',
+                'https://example.org/world?foo',
+                'https://example.org/hello',
+                'example.org',
+            ],
+            'feedproxy ignore list test' => [
+                'http://feedproxy.google.com/~r/Wallabag/~3/helloworld',
+                null,
+                'https://example.org/hello-wallabag',
+                'https://example.org/hello-wallabag',
+                null,
+                'example.org',
+            ],
+            'feedproxy ignore list test with origin url already set' => [
+                'http://feedproxy.google.com/~r/Wallabag/~3/helloworld',
+                'https://example.org/this-is-source',
+                'https://example.org/hello-wallabag',
+                'https://example.org/hello-wallabag',
+                'https://example.org/this-is-source',
+                'example.org',
+            ],
+            'lemonde ignore pattern test' => [
+                'http://www.lemonde.fr/tiny/url',
+                null,
+                'http://example.com/hello-world',
+                'http://example.com/hello-world',
+                null,
+                'example.com',
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider dataForChangedUrl
+     */
+    public function testWithChangedUrl($entry_url, $origin_url, $content_url, $expected_entry_url, $expected_origin_url, $expected_domain)
+    {
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, true);
+        $entry = new Entry(new User());
+        $entry->setOriginUrl($origin_url);
+        $proxy->updateEntry(
+            $entry,
+            $entry_url,
+            [
+                'html' => false,
+                'title' => '',
+                'url' => $content_url,
+                'content_type' => '',
+                'language' => '',
+            ],
+            true
+        );
+
+        $this->assertSame($expected_entry_url, $entry->getUrl());
+        $this->assertSame($expected_domain, $entry->getDomainName());
+        $this->assertSame($expected_origin_url, $entry->getOriginUrl());
+    }
+
+    /**
      * https://stackoverflow.com/a/18506801.
      *
      * @param $string
