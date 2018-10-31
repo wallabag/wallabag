@@ -157,8 +157,8 @@ config:
         #         not_equal_to: 'Not equal to...'
         #         or: 'One rule OR another'
         #         and: 'One rule AND another'
-        #         matches: 'Tests that a <i>subject</i> is matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>'
-        #         notmatches: 'Tests that a <i>subject</i> is not matches a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
+        #         matches: 'Tests that a <i>subject</i> matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>'
+        #         notmatches: 'Tests that a <i>subject</i> doesn't match a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
 
 entry:
     # default_title: 'Title of the entry'
