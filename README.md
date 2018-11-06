@@ -13,7 +13,7 @@ If you do not have your own server, consider [the wallabag.it hosting solution](
 ![wallabag logo](https://raw.githubusercontent.com/wallabag/logo/master/_default/typo-horizontal/png/sm/logo-typo-horizontal-black-no-bg-no-border-sm.png)
 
 # Install wallabag
-Please read [the documentation to see the wallabag requirements](http://doc.wallabag.org/en/master/user/installation.html#requirements).
+Please read [the documentation to see the wallabag requirements](https://doc.wallabag.org/en/admin/installation/requirements.html).
 
 Then you can install wallabag by executing the following commands:
 
