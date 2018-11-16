@@ -72,9 +72,9 @@ config:
             300_word: 'I read ~300 words per minute'
             400_word: 'I read ~400 words per minute'
         action_mark_as_read:
-            label: 'Where do you want to be redirected to after marking an article as read?'
-            redirect_homepage: 'To the homepage'
-            redirect_current_page: 'To the current page'
+            label: 'What to do after removing, starring or marking as read an article?'
+            redirect_homepage: 'Go to the homepage'
+            redirect_current_page: 'Stay on the current page'
         pocket_consumer_key_label: Consumer key for Pocket to import contents
         android_configuration: Configure your Android application
         android_instruction: "Touch here to prefill your Android application"
