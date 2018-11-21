@@ -7,11 +7,8 @@
             {% endfor %}
             </ul>
             <a href="{{ path('view', { 'id': entry.id }) }}">
-              {% if entry.previewPicture is null %}
-                <span class="preview placeholder" style="background-image: url({{ asset('wallassets/themes/_global/img/logo-square.svg') }});"></span>
-              {% else %}
-                <span class="preview" style="background-image: url({{ entry.previewPicture }})"></span>
-              {% endif %}
+                {% set previewClassModifier = entry.previewPicture ? '' : ' preview--default' %}
+                <span class="preview{{ previewClassModifier }}" style="background-image: url({{ entry.previewPicture | default(asset('wallassets/themes/_global/img/logo-square.svg')) }})"></span>
             </a>
         </div>
         {% include "@WallabagCore/themes/material/Entry/Card/_content.html.twig" with {'entry': entry, 'withPreview': true} only %}

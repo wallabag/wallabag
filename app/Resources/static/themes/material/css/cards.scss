@@ -118,15 +118,14 @@ main {
 
   .card-image .preview,
   .card-fullimage .preview {
-    height: 14em;
+    height: 100%;
     background: no-repeat 50%/cover;
+    background-color: #efefef;
     display: block;
-  }
 
-  .card-image .placeholder {
-    background-color: #111;
-    filter: invert(100%);
-    -webkit-filter: invert(100%);
+    &--default {
+      background-size: contain;
+    }
   }
 
   &.sw {
