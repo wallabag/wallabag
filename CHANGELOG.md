@@ -1,5 +1,42 @@
 # Changelog
 
+## [2.3.4](https://github.com/wallabag/wallabag/tree/2.3.4)
+   [Full Changelog](https://github.com/wallabag/wallabag/compare/2.3.3...2.3.4)
+
+### Fixes
+
+- Fix image downloading on null image path [#3684](https://github.com/wallabag/wallabag/pull/3684)
+- Remove remaining deprecation notices [#3686](https://github.com/wallabag/wallabag/pull/3686)
+- Fix mobile viewport on big iframe and video elements [#3683](https://github.com/wallabag/wallabag/pull/3683)
+- Autofocus the username field on the login page [#3691](https://github.com/wallabag/wallabag/pull/3691)
+- Feature/svg logo [#3692](https://github.com/wallabag/wallabag/pull/3692)
+- Fixes a typo [#3702](https://github.com/wallabag/wallabag/pull/3702)
+- Update release script [#3705](https://github.com/wallabag/wallabag/pull/3705)
+- Removing failing test from Travis [#3707](https://github.com/wallabag/wallabag/pull/3707)
+- Replace SO url by lemonde.fr to avoid random failing test [#3685](https://github.com/wallabag/wallabag/pull/3685)
+- php-cs-fixer: native_function_invocation [#3716](https://github.com/wallabag/wallabag/pull/3716)
+- PHP 7.2 shouldn't fail [#3717](https://github.com/wallabag/wallabag/pull/3717)
+- Liberation goes https [#3726](https://github.com/wallabag/wallabag/pull/3726)
+- Bugfix: Sanitize the title of a saved webpage from invalid UTF-8 characters. [#3725](https://github.com/wallabag/wallabag/pull/3725)
+- Fix dockerfile php72 [#3734](https://github.com/wallabag/wallabag/pull/3734)
+- Fix sort parameters [#3719](https://github.com/wallabag/wallabag/pull/3719)
+- Add note on GitHub PR template to auto-close issues [#3763](https://github.com/wallabag/wallabag/pull/3763)
+- Fix link to wallabag requirements in documentation [#3766](https://github.com/wallabag/wallabag/pull/3766)
+- Update translation when marking as read [#3772](https://github.com/wallabag/wallabag/pull/3772)
+- Makefile fixes for non GNU systems [#3706](https://github.com/wallabag/wallabag/pull/3706)
+- Card no preview replaced by wallabag logo [#3774](https://github.com/wallabag/wallabag/pull/3774)
+
+### Changes
+
+- Propose YunoHost badge for installing [#3678](https://github.com/wallabag/wallabag/pull/3678)
+- More robust srcset image attribute handling [#3690](https://github.com/wallabag/wallabag/pull/3690)
+- Rename getBuilderByUser and refactor query for untagged entries [#3712](https://github.com/wallabag/wallabag/pull/3712)
+- Show tags on non-image gallery preview card [#3743](https://github.com/wallabag/wallabag/pull/3743)
+- add manifest.json for android pwa [#3606](https://github.com/wallabag/wallabag/pull/3606)
+- Add placeholder image to card-based gallery entries page [#3745](https://github.com/wallabag/wallabag/pull/3745)
+- Abort running install and update script if root [#3733](https://github.com/wallabag/wallabag/pull/3733)
+- Swap entry url with origin url if graby provides an updated one [#3553](https://github.com/wallabag/wallabag/pull/3553)
+
 ## [2.3.3](https://github.com/wallabag/wallabag/tree/2.3.3)
    [Full Changelog](https://github.com/wallabag/wallabag/compare/2.3.2...2.3.3)
 
