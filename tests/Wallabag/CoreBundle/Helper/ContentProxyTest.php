@@ -531,6 +531,377 @@ class ContentProxyTest extends TestCase
         $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
+    public function testWebsiteWithValidUTF8Title_doNothing()
+    {
+        // You can use https://www.online-toolz.com/tools/text-hex-convertor.php to convert UTF-8 text <=> hex
+        // See http://graphemica.com for more info about the characters
+        // '😻ℤz' (U+1F63B or F09F98BB; U+2124 or E284A4; U+007A or 7A) in hexadecimal and UTF-8
+        $actualTitle = $this->hexToStr('F09F98BB' . 'E284A4' . '7A');
+
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $graby = $this->getMockBuilder('Graby\Graby')
+            ->setMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn([
+                'html' => false,
+                'title' => $actualTitle,
+                'url' => '',
+                'content_type' => 'text/html',
+                'language' => '',
+            ]);
+
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'http://0.0.0.0');
+
+        // '😻ℤz' (U+1F63B or F09F98BB; U+2124 or E284A4; U+007A or 7A) in hexadecimal and UTF-8
+        $expectedTitle = 'F09F98BB' . 'E284A4' . '7A';
+        $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
+    }
+
+    public function testWebsiteWithInvalidUTF8Title_removeInvalidCharacter()
+    {
+        // See http://graphemica.com for more info about the characters
+        // 'a€b' (61;80;62) in hexadecimal and WINDOWS-1252 - but 80 is a invalid UTF-8 character.
+        // The correct UTF-8 € character (U+20AC) is E282AC
+        $actualTitle = $this->hexToStr('61' . '80' . '62');
+
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $graby = $this->getMockBuilder('Graby\Graby')
+            ->setMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn([
+                'html' => false,
+                'title' => $actualTitle,
+                'url' => '',
+                'content_type' => 'text/html',
+                'language' => '',
+            ]);
+
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'http://0.0.0.0');
+
+        // 'ab' (61;62) because all invalid UTF-8 character (like 80) are removed
+        $expectedTitle = '61' . '62';
+        $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
+    }
+
+    public function testPdfWithUTF16BETitle_convertToUTF8()
+    {
+        // See http://graphemica.com for more info about the characters
+        // '😻' (U+1F63B;D83DDE3B) in hexadecimal and as UTF16BE
+        $actualTitle = $this->hexToStr('D83DDE3B');
+
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $graby = $this->getMockBuilder('Graby\Graby')
+            ->setMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn([
+                'html' => false,
+                'title' => $actualTitle,
+                'url' => '',
+                'content_type' => 'application/pdf',
+                'language' => '',
+            ]);
+
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'http://0.0.0.0');
+
+        // '😻' (U+1F63B or F09F98BB) in hexadecimal and UTF-8
+        $expectedTitle = 'F09F98BB';
+        $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
+    }
+
+    public function testPdfWithUTF8Title_doNothing()
+    {
+        // See http://graphemica.com for more info about the characters
+        // '😻' (U+1F63B;D83DDE3B) in hexadecimal and as UTF8
+        $actualTitle = $this->hexToStr('F09F98BB');
+
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $graby = $this->getMockBuilder('Graby\Graby')
+            ->setMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn([
+                'html' => false,
+                'title' => $actualTitle,
+                'url' => '',
+                'content_type' => 'application/pdf',
+                'language' => '',
+            ]);
+
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'http://0.0.0.0');
+
+        // '😻' (U+1F63B or F09F98BB) in hexadecimal and UTF-8
+        $expectedTitle = 'F09F98BB';
+        $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
+    }
+
+    public function testPdfWithWINDOWS1252Title_convertToUTF8()
+    {
+        // See http://graphemica.com for more info about the characters
+        // '€' (80) in hexadecimal and WINDOWS-1252
+        $actualTitle = $this->hexToStr('80');
+
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $graby = $this->getMockBuilder('Graby\Graby')
+            ->setMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn([
+                'html' => false,
+                'title' => $actualTitle,
+                'url' => '',
+                'content_type' => 'application/pdf',
+                'language' => '',
+            ]);
+
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'http://0.0.0.0');
+
+        // '€' (U+20AC or E282AC) in hexadecimal and UTF-8
+        $expectedTitle = 'E282AC';
+        $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
+    }
+
+    public function testPdfWithInvalidCharacterInTitle_removeInvalidCharacter()
+    {
+        // See http://graphemica.com for more info about the characters
+        // '😻ℤ�z' (U+1F63B or F09F98BB; U+2124 or E284A4; invalid character 81; U+007A or 7A) in hexadecimal and UTF-8
+        // 0x81 is not a valid character for UTF16, UTF8 and WINDOWS-1252
+        $actualTitle = $this->hexToStr('F09F98BB' . 'E284A4' . '81' . '7A');
+
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $graby = $this->getMockBuilder('Graby\Graby')
+            ->setMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn([
+                'html' => false,
+                'title' => $actualTitle,
+                'url' => '',
+                'content_type' => 'application/pdf',
+                'language' => '',
+            ]);
+
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'http://0.0.0.0');
+
+        // '😻ℤz' (U+1F63B or F09F98BB; U+2124 or E284A4; U+007A or 7A) in hexadecimal and UTF-8
+        // the 0x81 (represented by �) is invalid for UTF16, UTF8 and WINDOWS-1252 and is removed
+        $expectedTitle = 'F09F98BB' . 'E284A4' . '7A';
+        $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
+    }
+
+    /**
+     * Data provider for testWithChangedUrl.
+     *
+     * Arrays contain the following values:
+     * $entry_url
+     * $origin_url
+     * $content_url
+     * $expected_entry_url
+     * $expected_origin_url
+     * $expected_domain
+     */
+    public function dataForChangedUrl()
+    {
+        return [
+            'normal' => [
+                'http://0.0.0.0',
+                null,
+                'http://1.1.1.1',
+                'http://1.1.1.1',
+                'http://0.0.0.0',
+                '1.1.1.1',
+            ],
+            'origin already set' => [
+                'http://0.0.0.0',
+                'http://hello',
+                'http://1.1.1.1',
+                'http://1.1.1.1',
+                'http://hello',
+                '1.1.1.1',
+            ],
+            'trailing slash' => [
+                'https://example.com/hello-world',
+                null,
+                'https://example.com/hello-world/',
+                'https://example.com/hello-world/',
+                null,
+                'example.com',
+            ],
+            'query string in fetched content' => [
+                'https://example.org/hello',
+                null,
+                'https://example.org/hello?world=1',
+                'https://example.org/hello?world=1',
+                'https://example.org/hello',
+                'example.org',
+            ],
+            'fragment in fetched content' => [
+                'https://example.org/hello',
+                null,
+                'https://example.org/hello#world',
+                'https://example.org/hello',
+                null,
+                'example.org',
+            ],
+            'fragment and query string in fetched content' => [
+                'https://example.org/hello',
+                null,
+                'https://example.org/hello?foo#world',
+                'https://example.org/hello?foo#world',
+                'https://example.org/hello',
+                'example.org',
+            ],
+            'different path and query string in fetch content' => [
+                'https://example.org/hello',
+                null,
+                'https://example.org/world?foo',
+                'https://example.org/world?foo',
+                'https://example.org/hello',
+                'example.org',
+            ],
+            'feedproxy ignore list test' => [
+                'http://feedproxy.google.com/~r/Wallabag/~3/helloworld',
+                null,
+                'https://example.org/hello-wallabag',
+                'https://example.org/hello-wallabag',
+                null,
+                'example.org',
+            ],
+            'feedproxy ignore list test with origin url already set' => [
+                'http://feedproxy.google.com/~r/Wallabag/~3/helloworld',
+                'https://example.org/this-is-source',
+                'https://example.org/hello-wallabag',
+                'https://example.org/hello-wallabag',
+                'https://example.org/this-is-source',
+                'example.org',
+            ],
+            'lemonde ignore pattern test' => [
+                'http://www.lemonde.fr/tiny/url',
+                null,
+                'http://example.com/hello-world',
+                'http://example.com/hello-world',
+                null,
+                'example.com',
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider dataForChangedUrl
+     */
+    public function testWithChangedUrl($entry_url, $origin_url, $content_url, $expected_entry_url, $expected_origin_url, $expected_domain)
+    {
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, true);
+        $entry = new Entry(new User());
+        $entry->setOriginUrl($origin_url);
+        $proxy->updateEntry(
+            $entry,
+            $entry_url,
+            [
+                'html' => false,
+                'title' => '',
+                'url' => $content_url,
+                'content_type' => '',
+                'language' => '',
+            ],
+            true
+        );
+
+        $this->assertSame($expected_entry_url, $entry->getUrl());
+        $this->assertSame($expected_domain, $entry->getDomainName());
+        $this->assertSame($expected_origin_url, $entry->getOriginUrl());
+    }
+
+    /**
+     * https://stackoverflow.com/a/18506801.
+     *
+     * @param $string
+     *
+     * @return string
+     */
+    private function strToHex($string)
+    {
+        $hex = '';
+        for ($i = 0; $i < \strlen($string); ++$i) {
+            $ord = \ord($string[$i]);
+            $hexCode = dechex($ord);
+            $hex .= substr('0' . $hexCode, -2);
+        }
+
+        return strtoupper($hex);
+    }
+
+    /**
+     * https://stackoverflow.com/a/18506801.
+     *
+     * @param $hex
+     *
+     * @return string
+     */
+    private function hexToStr($hex)
+    {
+        $string = '';
+        for ($i = 0; $i < \strlen($hex) - 1; $i += 2) {
+            $string .= \chr(hexdec($hex[$i] . $hex[$i + 1]));
+        }
+
+        return $string;
+    }
+
     private function getTaggerMock()
     {
         return $this->getMockBuilder(RuleBasedTagger::class)

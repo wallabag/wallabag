@@ -11,7 +11,7 @@
         <div id="article_toolbar">
             <ul class="links">
                 <li class="topPosF"><a href="#top" title="{{ 'entry.view.left_menu.back_to_top'|trans }}" class="tool top icon icon-arrow-up-thick"><span>{{ 'entry.view.left_menu.set_as_read'|trans }}</span></a></li>
-                <li><a href="{{ entry.url|e }}" target="_blank" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e }}" class="tool link icon icon-link original"><span>{{ entry.domainName|removeWww }}</span></a></li>
+                <li><a href="{{ entry.url|e }}" target="_blank" rel="noopener" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e }}" class="tool link icon icon-link original"><span>{{ entry.domainName|removeWww }}</span></a></li>
                 <li><a title="{{ 'entry.view.left_menu.re_fetch_content'|trans }}" class="tool icon icon-reload" href="{{ path('reload_entry', { 'id': entry.id }) }}"><span>{{ 'entry.view.left_menu.re_fetch_content'|trans }}</span></a></li>
 
                 {% set markAsReadLabel = 'entry.view.left_menu.set_as_unread' %}
@@ -27,13 +27,13 @@
                     <li><a href="{{ path('share', {'id': entry.id }) }}" target="_blank" class="tool icon icon-eye" title="{{ 'entry.view.left_menu.public_link'|trans }}"><span>{{ 'entry.view.left_menu.public_link'|trans }}</span></a></li>
                     <li><a href="{{ path('delete_share', {'id': entry.id }) }}" class="tool icon icon-no-eye" title="{{ 'entry.view.left_menu.delete_public_link'|trans }}"><span>{{ 'entry.view.left_menu.delete_public_link'|trans }}</span></a></li>
                 {% endif %}
-                {% if craue_setting('share_twitter') %}<li><a href="https://twitter.com/home?status={{entry.title|url_encode}}%20{{ entry.url|url_encode }}%20via%20@wallabagapp" target="_blank" class="tool twitter icon icon-twitter" title="Tweet"><span>Tweet</span></a></li>{% endif %}
+                {% if craue_setting('share_twitter') %}<li><a href="https://twitter.com/home?status={{entry.title|url_encode}}%20{{ entry.url|url_encode }}%20via%20@wallabagapp" target="_blank" rel="noopener" class="tool twitter icon icon-twitter" title="Tweet"><span>Tweet</span></a></li>{% endif %}
                 {% if craue_setting('share_mail') %}<li><a href="mailto:?subject={{ entry.title|url_encode }}&amp;body={{ entry.url|url_encode }}%20via%20@wallabagapp" class="tool email icon icon-mail" title="Email"><span>Email</span></a></li>{% endif %}
-                {% if craue_setting('share_shaarli') %}<li><a href="{{ craue_setting('shaarli_url') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}&amp;tags={{ entry.tags|join(',')|url_encode }}{% if craue_setting('shaarli_share_origin_url') %}&amp;original_url={{ entry.originUrl|url_encode }}{% endif %}" target="_blank" class="tool icon-image icon-image--shaarli" title="shaarli"><span>shaarli</span></a></li>{% endif %}
-                {% if craue_setting('share_scuttle') %}<li><a href="{{ craue_setting('scuttle_url') }}/bookmarks.php?action=add&amp;address={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}&amp;tags={{ entry.tags|join(',')|url_encode }}" target="_blank" class="tool icon-image icon-image--scuttle" title="scuttle"><span>scuttle</span></a></li>{% endif %}
-                {% if craue_setting('share_diaspora') %}<li><a href="{{ craue_setting('diaspora_url') }}/bookmarklet?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}&notes=&v=1&noui=1&jump=doclose" target="_blank" class="tool diaspora icon-image icon-image--diaspora" title="diaspora"><span>diaspora</span></a></li>{% endif %}
-                {% if craue_setting('share_unmark') %}<li><a href="{{ craue_setting('unmark_url') }}/mark/add?url={{ entry.url|url_encode }}&amp;title={{entry.title|url_encode}}&amp;v=6" target="_blank" class="tool unmark icon-image icon-image--unmark" title="unmark"><span>unmark.it</span></a></li>{% endif %}
-                {% if craue_setting('carrot') %}<li><a href="https://secure.carrot.org/GiveAndGetBack.do?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}" class="tool carrot icon-image icon-image--carrot" target="_blank" title="carrot"><span>Carrot</span></a></li>{% endif %}
+                {% if craue_setting('share_shaarli') %}<li><a href="{{ craue_setting('shaarli_url') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}&amp;tags={{ entry.tags|join(',')|url_encode }}{% if craue_setting('shaarli_share_origin_url') %}&amp;original_url={{ entry.originUrl|url_encode }}{% endif %}" target="_blank" rel="noopener" class="tool icon-image icon-image--shaarli" title="shaarli"><span>shaarli</span></a></li>{% endif %}
+                {% if craue_setting('share_scuttle') %}<li><a href="{{ craue_setting('scuttle_url') }}/bookmarks.php?action=add&amp;address={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}&amp;tags={{ entry.tags|join(',')|url_encode }}" target="_blank" rel="noopener" class="tool icon-image icon-image--scuttle" title="scuttle"><span>scuttle</span></a></li>{% endif %}
+                {% if craue_setting('share_diaspora') %}<li><a href="{{ craue_setting('diaspora_url') }}/bookmarklet?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}&notes=&v=1&noui=1&jump=doclose" target="_blank" rel="noopener" class="tool diaspora icon-image icon-image--diaspora" title="diaspora"><span>diaspora</span></a></li>{% endif %}
+                {% if craue_setting('share_unmark') %}<li><a href="{{ craue_setting('unmark_url') }}/mark/add?url={{ entry.url|url_encode }}&amp;title={{entry.title|url_encode}}&amp;v=6" target="_blank" rel="noopener" class="tool unmark icon-image icon-image--unmark" title="unmark"><span>unmark.it</span></a></li>{% endif %}
+                {% if craue_setting('carrot') %}<li><a href="https://secure.carrot.org/GiveAndGetBack.do?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}" class="tool carrot icon-image icon-image--carrot" target="_blank" rel="noopener" title="carrot"><span>Carrot</span></a></li>{% endif %}
                 {% if craue_setting('show_printlink') %}<li><a title="{{ 'entry.view.left_menu.print'|trans }}" class="tool icon icon-print" href="javascript: window.print();"><span>{{ 'entry.view.left_menu.print'|trans }}</span></a></li>{% endif %}
                 {% if craue_setting('export_epub') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'epub' }) }}" title="Generate ePub file">EPUB</a></li>{% endif %}
                 {% if craue_setting('export_mobi') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'mobi' }) }}" title="Generate Mobi file">MOBI</a></li>{% endif %}
@@ -74,7 +74,7 @@
 
             {% if entry.originUrl is not empty %}
                 <i class="material-icons" title="{{ 'entry.view.provided_by'|trans }}">launch</i>
-                <a href="{{ entry.originUrl|e }}" target="_blank" class="tool">
+                <a href="{{ entry.originUrl|e }}" target="_blank" rel="noopener" class="tool">
                     {{ entry.originUrl|striptags|removeSchemeAndWww|truncate(32) }}
                 </a>
             {% endif %}
