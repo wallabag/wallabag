@@ -116,18 +116,6 @@ main {
     height: 13.5em;
   }
 
-  .card-image .preview,
-  .card-fullimage .preview {
-    height: 100%;
-    background: no-repeat 50%/cover;
-    background-color: #efefef;
-    display: block;
-
-    &--default {
-      background-size: contain;
-    }
-  }
-
   &.sw {
     max-width: 370px;
     margin-left: auto;
@@ -140,6 +128,19 @@ a.original:not(.waves-effect) {
   white-space: nowrap;
   overflow: hidden;
   display: block;
+}
+
+.card .card-image .preview,
+.card .card-fullimage .preview,
+.card-stacked .preview {
+  height: 100%;
+  background: no-repeat 50%/cover;
+  background-color: #efefef;
+  display: block;
+
+  &--default {
+    background-size: contain;
+  }
 }
 
 .card-entry-labels li,
@@ -210,16 +211,11 @@ a.original:not(.waves-effect) {
     text-align: right;
   }
 
-  .preview {
+  .card-preview {
     max-width: 100px;
-    height: auto;
+    max-height: 50px;
     margin-right: 10px;
     flex: 1;
-
-    img {
-      max-width: 100%;
-      max-height: 100%;
-    }
   }
 
   div.metadata {

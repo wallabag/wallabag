@@ -1,10 +1,9 @@
 <div class="card-stacked">
-    <div class="preview">
-        {% if entry.previewPicture is not null %}
-            <a href="{{ path('view', { 'id': entry.id }) }}">
-                <img src="{{ entry.previewPicture }}" />
-            </a>
-        {% endif %}
+    <div class="card-preview">
+        <a href="{{ path('view', { 'id': entry.id }) }}">
+            {% set previewClassModifier = entry.previewPicture ? '' : ' preview--default' %}
+            <span class="preview{{ previewClassModifier }}" style="background-image: url({{ entry.previewPicture | default(asset('wallassets/themes/_global/img/logo-square.svg')) }})"></span>
+        </a>
     </div>
     {% include "@WallabagCore/themes/material/Entry/Card/_content.html.twig" with {'entry': entry, 'withTags': true, 'subClass': 'metadata'} only %}
     <ul class="tools-list hide-on-small-only">
