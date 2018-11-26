@@ -275,10 +275,6 @@
                 {{ render(controller( "WallabagCoreBundle:Tag:addTagForm", { 'id': entry.id } )) }}
             </div>
 
-            {% if entry.previewPicture is not null %}
-                <div><img class="preview" src="{{ entry.previewPicture }}" alt="{{ entry.title|striptags|default('entry.default_title'|trans)|raw }}" /></div>
-            {% endif %}
-
         </aside>
         <article>
             {{ entry.content | raw }}
