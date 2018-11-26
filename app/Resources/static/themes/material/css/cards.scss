@@ -124,7 +124,9 @@ main {
     display: block;
 
     &--default {
+      background-color: #181818;
       background-size: contain;
+      filter: invert(100);
     }
   }
 
