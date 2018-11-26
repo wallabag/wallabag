@@ -221,9 +221,11 @@ a.original:not(.waves-effect) {
   div.metadata {
     .chip {
       background-color: $blueAccentColor;
-      padding: 0 15px 0 10px;
+      padding: 0 7px;
       margin: auto 2px;
       border-radius: 6px;
+      line-height: 22px;
+      height: 22px;
 
       a,
       i {
