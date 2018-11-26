@@ -46,7 +46,6 @@ twig:
 doctrine:
     dbal:
         driver: "%database_driver%"
-        driver_class: "%database_driver_class%"
         host: "%database_host%"
         port: "%database_port%"
         dbname: "%database_name%"
