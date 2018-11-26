@@ -1,15 +1,15 @@
 <?php
 
-namespace Wallabag\CoreBundle\DataFixtures\ORM;
+namespace Wallabag\CoreBundle\DataFixtures;
 
 use Craue\ConfigBundle\Entity\Setting;
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadSettingData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class SettingFixtures extends Fixture implements ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
@@ -35,13 +35,5 @@ class LoadSettingData extends AbstractFixture implements OrderedFixtureInterface
         }
 
         $manager->flush();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOrder()
-    {
-        return 29;
     }
 }

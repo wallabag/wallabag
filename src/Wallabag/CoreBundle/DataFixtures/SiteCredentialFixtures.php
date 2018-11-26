@@ -1,13 +1,14 @@
 <?php
 
-namespace Wallabag\CoreBundle\DataFixtures\ORM;
+namespace Wallabag\CoreBundle\DataFixtures;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Wallabag\CoreBundle\Entity\SiteCredential;
+use Wallabag\UserBundle\DataFixtures\UserFixtures;
 
-class LoadSiteCredentialData extends AbstractFixture implements OrderedFixtureInterface
+class SiteCredentialFixtures extends Fixture implements DependentFixtureInterface
 {
     /**
      * {@inheritdoc}
@@ -27,8 +28,10 @@ class LoadSiteCredentialData extends AbstractFixture implements OrderedFixtureIn
     /**
      * {@inheritdoc}
      */
-    public function getOrder()
+    public function getDependencies()
     {
-        return 50;
+        return [
+            UserFixtures::class,
+        ];
     }
 }

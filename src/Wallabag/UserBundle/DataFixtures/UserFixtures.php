@@ -1,13 +1,12 @@
 <?php
 
-namespace Wallabag\UserBundle\DataFixtures\ORM;
+namespace Wallabag\UserBundle\DataFixtures;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Wallabag\UserBundle\Entity\User;
 
-class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
+class UserFixtures extends Fixture
 {
     /**
      * {@inheritdoc}
@@ -49,13 +48,5 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
         $this->addReference('empty-user', $emptyUser);
 
         $manager->flush();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOrder()
-    {
-        return 10;
     }
 }
