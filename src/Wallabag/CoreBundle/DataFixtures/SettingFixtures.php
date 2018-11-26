@@ -4,7 +4,6 @@ namespace Wallabag\CoreBundle\DataFixtures;
 
 use Craue\ConfigBundle\Entity\Setting;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;

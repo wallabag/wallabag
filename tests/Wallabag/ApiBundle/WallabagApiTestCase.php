@@ -54,11 +54,11 @@ abstract class WallabagApiTestCase extends WebTestCase
      * Used because on heavy testing we don't want to re-create the database on each run.
      * Which means "admin" user won't have id 1 all the time.
      *
-     * @param  string $username
+     * @param string $username
      *
      * @return int
      */
-    public function getUserId($username = 'admin')
+    protected function getUserId($username = 'admin')
     {
         return $this->client
             ->getContainer()
