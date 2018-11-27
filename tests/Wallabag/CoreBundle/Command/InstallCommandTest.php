@@ -62,6 +62,7 @@ class InstallCommandTest extends WallabagCoreTestCase
         $databasePath = getenv('TEST_DATABASE_PATH');
         // Remove variable environnement
         putenv('TEST_DATABASE_PATH');
+
         if ($databasePath && file_exists($databasePath)) {
             unlink($databasePath);
         } else {
