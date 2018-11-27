@@ -8,6 +8,7 @@ module.exports = function () {
   return {
     entry: {
       material: path.join(rootDir, './app/Resources/static/themes/material/index.js'),
+      darkmateria: path.join(rootDir, './app/Resources/static/themes/darkmateria/index.js'),
       baggy: path.join(rootDir, './app/Resources/static/themes/baggy/index.js'),
       public: path.join(rootDir, './app/Resources/static/themes/_global/share.js'),
     },
