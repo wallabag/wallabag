@@ -48,4 +48,23 @@ abstract class WallabagApiTestCase extends WebTestCase
 
         return $client;
     }
+
+    /**
+     * Return the ID for the user admin.
+     * Used because on heavy testing we don't want to re-create the database on each run.
+     * Which means "admin" user won't have id 1 all the time.
+     *
+     * @param string $username
+     *
+     * @return int
+     */
+    protected function getUserId($username = 'admin')
+    {
+        return $this->client
+            ->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUserName($username)
+            ->getId();
+    }
 }

@@ -1,13 +1,15 @@
 <?php
 
-namespace Wallabag\AnnotationBundle\DataFixtures\ORM;
+namespace Wallabag\AnnotationBundle\DataFixtures;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Wallabag\AnnotationBundle\Entity\Annotation;
+use Wallabag\CoreBundle\DataFixtures\EntryFixtures;
+use Wallabag\UserBundle\DataFixtures\UserFixtures;
 
-class LoadAnnotationData extends AbstractFixture implements OrderedFixtureInterface
+class AnnotationFixtures extends Fixture implements DependentFixtureInterface
 {
     /**
      * {@inheritdoc}
@@ -38,8 +40,11 @@ class LoadAnnotationData extends AbstractFixture implements OrderedFixtureInterf
     /**
      * {@inheritdoc}
      */
-    public function getOrder()
+    public function getDependencies()
     {
-        return 35;
+        return [
+            EntryFixtures::class,
+            UserFixtures::class,
+        ];
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace Wallabag\CoreBundle\DataFixtures\ORM;
+namespace Wallabag\CoreBundle\DataFixtures;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Wallabag\CoreBundle\Entity\TaggingRule;
 
-class LoadTaggingRuleData extends AbstractFixture implements OrderedFixtureInterface
+class TaggingRuleFixtures extends Fixture implements DependentFixtureInterface
 {
     /**
      * {@inheritdoc}
@@ -49,8 +49,10 @@ class LoadTaggingRuleData extends AbstractFixture implements OrderedFixtureInter
     /**
      * {@inheritdoc}
      */
-    public function getOrder()
+    public function getDependencies()
     {
-        return 40;
+        return [
+            ConfigFixtures::class,
+        ];
     }
 }

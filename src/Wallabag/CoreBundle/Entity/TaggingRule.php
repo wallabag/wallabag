@@ -3,7 +3,7 @@
 namespace Wallabag\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use KPhoen\RulerZBundle\Validator\Constraints as RulerZAssert;
+use Symfony\Bridge\RulerZ\Validator\Constraints as RulerZAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**

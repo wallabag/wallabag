@@ -100,8 +100,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
         $this->assertSame('my quote', $content['quote']);
 
         /** @var Annotation $annotation */
-        $annotation = $this->client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+        $annotation = $em
             ->getRepository('WallabagAnnotationBundle:Annotation')
             ->findLastAnnotationByPageId($entry->getId(), 1);
 
