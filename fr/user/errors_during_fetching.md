@@ -17,7 +17,7 @@ Si la récupération de l'article échoue, il peut être utile d'essayer une nou
 
 Par défaut, si le contenu d'un site ne peut pas être correctement analysé à cause d'une erreur dans la requête (une page inexistante, un temps de réponse trop long etc.), un message d'erreur sera affiché dans le fichier `WALLABAG_DIR/var/logs/prod.log`.
 
-Si vous voyez une ligne qui commence par `graby.ERROR` et qui correspond à votre période de test, c'est que la requête a échoué à cause d'une erreur. La nature de l'erreur peut déjà donner quelques indications sur son origine : une erreur `404` indiquera que wallabag n'a pas trouvé d'article à l'URL indiquée, une erreur `403` pourra indiquer que l'URL renvoie vers une page à l'accès interdit (ou que le site a mis en place des mesures pour empêcher la récupération de son contenu), une erreur `500` pourra indiquer un problème sur le serveur distant ou de votre connexion internet etc.
+Si vous voyez une ligne qui commence par `graby.ERROR` et qui correspond à votre période de test, c'est que la requête a échoué à cause d'une erreur. La nature de l'erreur peut déjà donner quelques indications sur son origine : une erreur `404` indiquera que wallabag n'a pas trouvé d'article à l'URL indiquée, une erreur `403` pourra indiquer que l'URL renvoie vers une page à l'accès interdit (ou que le site a mis en place des mesures pour empêcher la récupération de son contenu), une erreur `500` pourra indiquer un problème sur le serveur distant ou de votre connexion internet, une erreur `504` ou `408` pourra indiquer que le serveur met trop longtemps à répondre etc.
 
 Merci d'indiquer tout le passage correspondant à l'erreur dans le ticket que vous ouvrirez sur [GitHub](https://github.com/wallabag/wallabag/issues).
 
@@ -37,8 +37,7 @@ Si vous hébergez votre propre instance de wallabag, vous pouvez nous joindre de
 
 Si l'étude des logs « basiques » n'a pas permis d'identifier une erreur criante et que vous n'avez pas le contenu de l'article, l'erreur est peut-être ailleurs. Dans ce cas, vous devrez activer les logs sur votre instance wallabag pour nous aider à trouver ce qui ne va pas.
 
-- éditez le fichier `app/config/config_prod.yml` ;
-- à [la ligne 18](https://github.com/wallabag/wallabag/blob/master/app/config/config_prod.yml#L18), remplacez `error` par `debug` ;
+- dans le fichier `app/config/config_prod.yml`, à [la ligne 18](https://github.com/wallabag/wallabag/blob/master/app/config/config_prod.yml#L18), remplacez `error` par `debug` ;
 - videz le cache avec la commande `rm -rf var/cache/*` ;
 - videz le contenu du fichier de log avec `cat /dev/null > var/logs/prod.log` ;
 - rechargez votre instance wallabag et rechargez le contenu qui pose souci ;
@@ -69,7 +68,7 @@ test_url: https://www.unsitedinformation.com/xxx/mon-article.html
 
 Les `[XPath]` correspondent aux adresses des éléments d'intérêt dans le code HTML de la page web ; les indiquer dans le fichier de configuration permet à wallabag d'aller chercher directement le contenu voulu sans devoir déterminer qui est quoi.
 
-Vous pouvez déterminer ces chemins `XPath` à l'aide de [ce site web](http://siteconfig.fivefilters.org/) : chargez la page de votre article en indiquant son URL, puis sélectionnez la ou les parties du contenu qui correspondent à ce que vous souhaitez garder, le `XPath` est indiqué en bas de page. Vous pouvez également regarder directement le code de la page (`Ctrl`+`U` et/ou `F12` sur la plupart des navigateurs modernes) et déterminer les `XPath` à l'aide des règles décrites dans la partie suivante.
+Vous pouvez déterminer ces chemins _XPath_ à l'aide de [ce site web](http://siteconfig.fivefilters.org/) : chargez la page de votre article en indiquant son URL, puis sélectionnez la ou les parties du contenu qui correspondent à ce que vous souhaitez garder, le _XPath_ est indiqué en bas de page. Vous pouvez également regarder directement le code de la page (`Ctrl`+`U` et/ou `F12` sur la plupart des navigateurs modernes) et déterminer les _XPath_ à l'aide des règles décrites dans la partie suivante.
 
 Il est possible d'indiquer d'autres éléments dans un fichier de configuration (date, auteur(s), suppressions généralisées etc.), nous vous conseillons la lecture de [cette documentation](https://help.fivefilters.org/full-text-rss/site-patterns.html#pattern-format) pour connaître l'étendue des possibles.
 
@@ -82,3 +81,98 @@ Une fois que votre fichier de configuration vous convient, vous pouvez créer un
 
 #### Quelques bases de XPath 1.0
 
+_XPath_ (pour _XML Path Language_) est une norme permettant de décrire précisément le chemin d'accès à un élément dans un document _XML_, et _a fortiori_ dans une page web. Ces chemins sont principalement déterminés par les relations parent/enfant(s) des balises HTML (`<div></div>`, `<a></a>`, `<p></p>`, `<section></section>` etc.) et leur(s) attribut(s) (`class`, `id`, `src`, `href` etc.). La norme est illisible, mais [cette section](https://www.w3.org/TR/1999/REC-xpath-19991116/#path-abbrev) donne un bon résumé de ce qui est possible.
+
+Quelques exemples étant cependant plus parlants, nous nous baserons sur le (faux) document suivant :
+```html
+<html>
+    <head>
+        <!-- metadonnées de la page web -->
+    </head>
+    <body>
+        <div class="header">
+            <header>
+                <h1>Le titre de mon site</h1>
+            </header>
+        </div>
+        <div itemprop="articleBody">
+            <article>
+                <h1>Le titre de mon article</h1>
+                <p class="author">par Jean Dupont</p>
+                <section>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+                    <p><strong>Lire aussi : </strong><a href="http://...">Lien vers un autre article</a></p>
+
+                    <div class="ads spam">Une publicité.</div>
+                </section>
+                <section>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </section>
+            </article>
+        </div>
+        <div id="footer">
+            <footer>
+                <!-- plein de publicités -->
+            </footer>
+        </div>
+    </body>
+</html>
+```
+
+##### Sélection du titre
+
+Le titre du document est contenu dans le _header_ de plus haut niveau, c'est-à-dire `<h1>[...]</h1>`. Son _XPath_ complet est `/html/body/div[2]/article/h1` : partant de la racine `/`, il faut aller dans la balise `html`, puis `body`, puis la seconde `div` rencontrée, puis dans `article` pour enfin arriver au `h1`. (Notez que mon `header` contient également un `h1` correspondant au titre du site.) Cependant, ce chemin complet est beaucoup trop complexe dans le cas de pages avec beaucoup d'éléments imbriqués ; il existe donc un certain nombre de raccourcis utiles.
+
+Le premier est `//` qui permet de sauter un nombre indéfini de balises avant (ou entre) les éléments indiqués :
+*   `//h1` sélectionnerait à la fois le titre du site et de l'article ;
+*   `//div//h1` sélectionnerait également le titre du site et de l'article (les balises `header` et `article` étant ici ignorées) ;
+*   `//article/h1` permet de sélectionner le(s) `h1` directement contenus dans `article`, donc le titre de l'article !
+
+Enfin, il est recommandé lorsque cela est possible de s'appuyer sur les attributs des balises. Il paraît en effet logique de différencier les `h1` par le fait que l'un est contenu dans la `div` possédant `class="header"` et l'autre dans la `div` possédant `itemprop="ArticleBody`. Pour cela, on ajoutera au nom de la balise `[@class="header"]` ou `[@itemprop="articleBody"]` :
+*   `//div[@class="header"]//h1` sélectionnerait le titre du site ;
+*   `//div[@itemprop="articleBody"]//h1` sélectionnerait le titre de l'article.
+
+_Note : dans ce cas très simple, comme les attributs sont différents, on pourrait mettre uniquement `//div[@itemprop]//h1` sans préciser la valeur de l'attribut. Cela est cependant moins restrictif et a donc plus de chances de poser des problèmes dans un document complexe._
+
+Le fichier de configuration de ce site pourra au final indiquer `title: //div[@itemprop="articleBody"]//h1` ou `title: //article/h1`.
+
+##### Sélection du corps et suppression des éléments superflus
+
+La sélection du corps de l'article est ici assez triviale, tout étant contenu dans la balise `article` et ses enfants. On pourra ainsi indiquer dans notre fichier de configuration `body: //article` ou `body: //div[@itemprop="articleBody"]`.
+
+Cependant, l'article récupéré contiendra alors les publicités contenues dans `<div class="ads spam">[...]</div>`, ainsi que des liens que l'on peut vouloir supprimer (_Lire aussi : [...]_). Heureusement, les fichiers de configuration permettent d'utiliser une instruction `strip: [XPath]` pour enlever les éléments superflus !
+
+_XPath_ ne permet pas d'identifier une valeur parmi d'autres dans un attribut : les chemins `//div[@class="ads"]` ou `//div[@class="spam"]` n'indiqueront pas celui du bloc contenant ici une publicité !
+La fonction `contains()` permet de chercher une chaine de caractère dans une autre (ici dans la valeur de l'attribut `class`) : `//div[contains(@class, "ads")]` ou `//div[contains(@class, "spam")]` réussiront à sélectionner le contenu souhaité.
+
+**Cette solution avec `contains()` n'est toutefois à utiliser que dans des cas très simples.** En effet, ces chemins pourront également sélectionner des `div` dont la classe est `pads`, `mads`, `adsaaaaaaaa` etc. Pour sélectionner précisément une balise dont un attribut est composé d'une liste, il faudra utiliser l'instruction barbare suivante :
+
+**`//div[contains(concat(' ', normalize-space(@class), ' '), ' ads ')]`**
+
+Au final, le fichier de configuration pourra contenir indifféremment :
+```
+strip: //div[contains(concat(' ', normalize-space(@class), ' '), ' ads ')]
+strip: //div[contains(concat(' ', normalize-space(@class), ' '), ' spam ')]
+
+# Mais cela fonctionne aussi (très restrictif) !
+strip: //div[@class="ads spam"]
+```
+
+Enfin, nous souhaitons supprimer les liens connexes de l'article afin de ne pas perturber la lecture dans wallabag, et il faudra donc sélectionner le paragraphe suivant :
+```html
+<p><strong>Lire aussi : </strong><a href="...">Lien vers un autre site</a></p>
+```
+Ici, il n'est pas possible de sélectionner le paragraphe grâce à un attribut et on ne peut décemment pas supprimer toutes les balises `strong` ou `a` du document. _XPath_ permet toutefois de préciser le ou les enfant(s) que doit avoir une balise pour être sélectionnée, avec la notation `//balise[enfant]`.
+
+_Note : ne pas confondre la notation `//balise[@attribut]` (p. ex. `//div[@class="..."]`) et `//balise[enfant]` (p.ex. `//p[strong]`). De même, ne pas confondre `//p/strong` qui sélectionne la balise `strong` et son contenu avec `//p[strong]` qui sélectionne le(s) paragraphe(s) contenant au moins une balise `strong`._
+
+Comme de multiples types de paragraphes peuvent contenir un lien `a` ou une balise `strong`, on pourra restreindre le chemin en utilisant l'opérateur `and` : `//p[strong and a]` permettra ainsi de sélectionner seulement un paragraphe ayant les deux éléments. Pour cibler encore plus précisément ce paragraphe, on pourra aussi examiner le contenu d'une balise avec `contains()`, pour finalement obtenir dans notre fichier de configuration :
+
+`strip: //p[contains(strong, 'Lire') and a]`
+
+#### Liens utiles
+
+Si vous souhaitez plus d'informations sur _XPath_, la norme [contient un résumé assez clair de ce qui est faisable](https://www.w3.org/TR/1999/REC-xpath-19991116/#path-abbrev). Le site **devhints.io** a également [une anti-sèche très complète sur _XPath_](https://devhints.io/xpath).
+
+Si vous voulez tester de manière dynamique si un _XPath_ fonctionne pour sélectionner un ou plusieurs éléments d'une page, vous pouvez également utiliser [ce bac à sable](http://www.whitebeam.org/library/guide/TechNotes/xpathtestbed.rhtm) qui évalue des chemins sur un code HTML/XML que vous pouvez _uploader_.
