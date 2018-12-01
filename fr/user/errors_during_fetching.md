@@ -17,13 +17,21 @@ Si la récupération de l'article échoue, il peut être utile d'essayer une nou
 
 Par défaut, si le contenu d'un site ne peut pas être correctement analysé à cause d'une erreur dans la requête (une page inexistante, un temps de réponse trop long etc.), un message d'erreur sera affiché dans le fichier `WALLABAG_DIR/var/logs/prod.log`.
 
-Si vous voyez une ligne qui commence par `graby.ERROR` et qui correspond à votre période de test, c'est que la requête a échoué à cause d'une erreur. La nature de l'erreur peut déjà donner quelques indications sur son origine : une erreur `404` indiquera que wallabag n'a pas trouvé d'article à l'URL indiquée, une erreur `403` pourra indiquer que l'URL renvoie vers une page à l'accès interdit (ou que le site a mis en place des mesures pour empêcher la récupération de son contenu), une erreur `500` pourra indiquer un problème sur le serveur distant ou de votre connexion internet, une erreur `504` ou `408` pourra indiquer que le serveur met trop longtemps à répondre etc.
+Si vous voyez une ligne qui commence par `graby.ERROR` et qui correspond à votre période de test, c'est que la requête a échoué à cause d'une erreur. La nature de l'erreur peut déjà donner quelques indications sur son origine : 
+
+ - une erreur `404` indiquera que wallabag n'a pas trouvé d'article à l'URL indiquée,
+ - une erreur `403` pourra indiquer que l'URL renvoie vers une page à l'accès interdit (ou que le site a mis en place des mesures pour empêcher la récupération de son contenu),
+ - une erreur `500` pourra indiquer un problème sur le serveur distant ou de votre connexion internet,
+ - une erreur `504` ou `408` pourra indiquer que le serveur met trop longtemps à répondre etc.
 
 Merci d'indiquer tout le passage correspondant à l'erreur dans le ticket que vous ouvrirez sur [GitHub](https://github.com/wallabag/wallabag/issues).
 
 ## Le contenu n'est pas celui attendu ou il est incomplet
 
-Wallabag utilise une conjonction de deux systèmes pour récupérer le contenu d'un article : l'utilisation de fichiers de configuration spécifiques à chaque domaine (souvent appelés _site config_, que vous pouvez trouver dans `vendor/j0k3r/graby-site-config/`) et _php-readability_, qui analyse automatiquement le contenu d'une page web pour déterminer ce qui a la plus de chance d'être le contenu recherché.
+Wallabag utilise une conjonction de deux systèmes pour récupérer le contenu d'un article :
+
+- l'utilisation de fichiers de configuration spécifiques à chaque domaine (souvent appelés _site config_, que vous pouvez trouver dans `vendor/j0k3r/graby-site-config/`)
+- et [php-readability](https://github.com/j0k3r/php-readability), qui analyse automatiquement le contenu d'une page web pour déterminer ce qui a la plus de chance d'être le contenu recherché.
 
 Ces systèmes ne sont pas infaillibles et il faudra parfois mâcher le travail à wallabag ! Afin de faciliter le travail des développeurs, il faut d'abord vérifier l'origine du problème en activant les logs détaillés de wallabag, puis éventuellement créer (ou mettre à jour) le fichier de configuration du site hébergeant l'article voulu.
 
@@ -43,9 +51,9 @@ Si l'étude des logs « basiques » n'a pas permis d'identifier une erreur crian
 - rechargez votre instance wallabag et rechargez le contenu qui pose souci ;
 - si vous ne réussissez pas à déterminer avec les logs l'origine du problème, copiez/collez le contenu du fichier `var/logs/prod.log` dans un nouveau [ticket d'incident GitHub](https://github.com/wallabag/wallabag/issues/new).
 
-### Création ou mise à jour d'un fichier de configuration (_site config_)
+### Création ou mise à jour d'un fichier de configuration (_site_config_)
 
-Le plus souvent, les erreurs de récupération de contenu ne sont pas dues à une erreur du serveur distant mais se résument à des fichiers de configuration absents ou dépassés (suite par exemple à une refonte du site hébergeant le contenu). On pourra ainsi avoir le titre de l'article non renseigné, pas de corps d'article, des éléments surnuméraires ou manquants etc.
+Le plus souvent, les erreurs de récupération de contenu ne sont pas dues à une erreur du serveur distant mais se résument à des fichiers de configuration absents ou dépassés (par exemple, suite à une refonte du site hébergeant le contenu). On pourra ainsi avoir le titre de l'article non renseigné, pas de corps d'article, des éléments surnuméraires ou manquants etc.
 
 Vous pouvez essayer de résoudre ce problème vous-même en créant ou modifiant un fichier de configuration (comme ça, nous restons concentrés pour améliorer wallabag au lieu d'écrire ces fichiers de configuration :) ) ! De (très) nombreux exemples sont disponibles sur le dépôt [fivefilters/ftr-site-config](https://github.com/fivefilters/ftr-site-config) qui est le projet principal pour stocker les fichiers de configuration.
 
