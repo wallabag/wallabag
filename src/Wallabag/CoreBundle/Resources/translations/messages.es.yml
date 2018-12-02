@@ -99,11 +99,11 @@ config:
             # all: 'All'
         rss_limit: 'Límite de artículos en feed RSS'
     form_user:
-        two_factor_description: "Con la autenticación en dos pasos recibirá código por e-mail en cada nueva conexión que no sea de confianza."
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'Nombre'
         email_label: 'Dirección de e-mail'
-        twoFactorAuthentication_label: 'Autenticación en dos pasos'
-        help_twoFactorAuthentication: "Si activas la autenticación en dos pasos, cada vez que quieras iniciar sesión en wallabag recibirás un código por e-mail."
+        # emailTwoFactor_label: 'Using email (receive a code by email)'
+        # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, to get a one time code)'
         delete:
             title: Eliminar mi cuenta (Zona peligrosa)
             description: Si eliminas tu cuenta, TODOS tus artículos, TODAS tus etiquetas, TODAS tus anotaciones y tu cuenta serán eliminadas de forma PERMANENTE (no se puede deshacer). Después serás desconectado.
@@ -533,7 +533,8 @@ user:
         email_label: 'E-mail'
         enabled_label: 'Activado'
         last_login_label: 'Último inicio de sesión'
-        twofactor_label: Autenticación en dos pasos
+        # twofactor_email_label: Two factor authentication by email
+        # twofactor_google_label: Two factor authentication by Google
         save: Guardar
         delete: Eliminar
         delete_confirm: ¿Estás seguro?

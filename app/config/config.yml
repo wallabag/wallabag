@@ -198,10 +198,14 @@ fos_oauth_server:
             refresh_token_lifetime: 1209600
 
 scheb_two_factor:
-    trusted_computer:
+    trusted_device:
         enabled: true
         cookie_name: wllbg_trusted_computer
-        cookie_lifetime: 2592000
+        lifetime: 2592000
+
+    google:
+        enabled: "%twofactor_auth%"
+        template: WallabagUserBundle:Authentication:form.html.twig
 
     email:
         enabled: "%twofactor_auth%"

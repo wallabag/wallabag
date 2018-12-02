@@ -112,8 +112,7 @@
                                     <img id="androidQrcode" class="hide-on-med-and-down" />
                                 </div>
                                 <script>
-                                    const imgBase64 = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');
-                                    document.getElementById('androidQrcode').src = imgBase64;
+                                    document.getElementById('androidQrcode').src = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');;
                                 </script>
                             </div>
 
@@ -198,22 +197,38 @@
                             </div>
 
                             {% if twofactor_auth %}
-                            <div class="row">
-                                <div class="input-field col s11">
+                                <div class="row">
                                     {{ 'config.form_user.two_factor_description'|trans }}
 
-                                    <br />
+                                    <div class="input-field col s11">
+                                        {{ form_widget(form.user.emailTwoFactor) }}
+                                        {{ form_label(form.user.emailTwoFactor) }}
+                                        {{ form_errors(form.user.emailTwoFactor) }}
+                                    </div>
+                                    <div class="input-field col s11">
+                                        {{ form_widget(form.user.googleTwoFactor) }}
+                                        {{ form_label(form.user.googleTwoFactor) }}
+                                        {{ form_errors(form.user.googleTwoFactor) }}
+                                    </div>
+                                </div>
 
-                                    {{ form_widget(form.user.twoFactorAuthentication) }}
-                                    {{ form_label(form.user.twoFactorAuthentication) }}
-                                    {{ form_errors(form.user.twoFactorAuthentication) }}
-                                </div>
-                                <div class="input-field col s1">
-                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_user.help_twoFactorAuthentication'|trans }}">
-                                        <i class="material-icons">live_help</i>
-                                    </a>
-                                </div>
-                            </div>
+                                {% for OTPSecret in app.session.flashbag.get('OTPSecret') %}
+                                    <div class="card-panel yellow darken-1 black-text">
+                                        You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password.
+                                        <br/>
+                                        That code will disapear after a page reload.
+                                        <br/><br/>
+                                        <strong>{{ OTPSecret.code }}</strong>
+                                        <br/><br/>
+                                        Or you can scan that QR Code with your app:
+                                        <br/>
+                                        <img id="2faQrcode" class="hide-on-med-and-down" />
+
+                                        <script>
+                                            document.getElementById('2faQrcode').src = jrQrcode.getQrBase64('{{ OTPSecret.qrCode }}');;
+                                        </script>
+                                    </div>
+                                {% endfor %}
                             {% endif %}
 
                             {{ form_widget(form.user.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}

@@ -46,7 +46,7 @@ class ConfigController extends Controller
             $activeTheme = $this->get('liip_theme.active_theme');
             $activeTheme->setName($config->getTheme());
 
-            $this->get('session')->getFlashBag()->add(
+            $this->addFlash(
                 'notice',
                 'flashes.config.notice.config_saved'
             );
@@ -68,7 +68,7 @@ class ConfigController extends Controller
                 $userManager->updateUser($user, true);
             }
 
-            $this->get('session')->getFlashBag()->add('notice', $message);
+            $this->addFlash('notice', $message);
 
             return $this->redirect($this->generateUrl('config') . '#set4');
         }
@@ -80,10 +80,29 @@ class ConfigController extends Controller
         ]);
         $userForm->handleRequest($request);
 
+        // `googleTwoFactor` isn't a field within the User entity, we need to define it's value in a different way
+        if (true === $user->isGoogleAuthenticatorEnabled() && false === $userForm->isSubmitted()) {
+            $userForm->get('googleTwoFactor')->setData(true);
+        }
+
         if ($userForm->isSubmitted() && $userForm->isValid()) {
+            // handle creation / reset of the OTP secret if checkbox changed from the previous state
+            if (true === $userForm->get('googleTwoFactor')->getData() && false === $user->isGoogleAuthenticatorEnabled()) {
+                $secret = $this->get('scheb_two_factor.security.google_authenticator')->generateSecret();
+
+                $user->setGoogleAuthenticatorSecret($secret);
+                $user->setEmailTwoFactor(false);
+
+                $qrCode = $this->get('scheb_two_factor.security.google_authenticator')->getQRContent($user);
+
+                $this->addFlash('OTPSecret', ['code' => $secret, 'qrCode' => $qrCode]);
+            } elseif (false === $userForm->get('googleTwoFactor')->getData() && true === $user->isGoogleAuthenticatorEnabled()) {
+                $user->setGoogleAuthenticatorSecret(null);
+            }
+
             $userManager->updateUser($user, true);
 
-            $this->get('session')->getFlashBag()->add(
+            $this->addFlash(
                 'notice',
                 'flashes.config.notice.user_updated'
             );
@@ -99,7 +118,7 @@ class ConfigController extends Controller
             $em->persist($config);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add(
+            $this->addFlash(
                 'notice',
                 'flashes.config.notice.rss_updated'
             );
@@ -131,7 +150,7 @@ class ConfigController extends Controller
             $em->persist($taggingRule);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add(
+            $this->addFlash(
                 'notice',
                 'flashes.config.notice.tagging_rules_updated'
             );
@@ -178,7 +197,7 @@ class ConfigController extends Controller
             return new JsonResponse(['token' => $config->getRssToken()]);
         }
 
-        $this->get('session')->getFlashBag()->add(
+        $this->addFlash(
             'notice',
             'flashes.config.notice.rss_token_updated'
         );
@@ -203,7 +222,7 @@ class ConfigController extends Controller
         $em->remove($rule);
         $em->flush();
 
-        $this->get('session')->getFlashBag()->add(
+        $this->addFlash(
             'notice',
             'flashes.config.notice.tagging_rules_deleted'
         );
@@ -269,7 +288,7 @@ class ConfigController extends Controller
                 break;
         }
 
-        $this->get('session')->getFlashBag()->add(
+        $this->addFlash(
             'notice',
             'flashes.config.notice.' . $type . '_reset'
         );

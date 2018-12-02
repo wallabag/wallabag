@@ -99,11 +99,11 @@ config:
             all: "Tous"
         rss_limit: "Nombre d’articles dans le flux"
     form_user:
-        two_factor_description: "Activer l’authentification double-facteur veut dire que vous allez recevoir un code par courriel à chaque nouvelle connexion non approuvée."
+        two_factor_description: "Activer l’authentification double-facteur veut dire que vous allez recevoir un code par courriel OU que vous devriez utiliser une application de mot de passe à usage unique (comme Google Authenticator) pour obtenir un code temporaire à chaque nouvelle connexion non approuvée. Vous ne pouvez pas choisir les deux options."
         name_label: "Nom"
         email_label: "Adresse courriel"
-        twoFactorAuthentication_label: "Double authentification"
-        help_twoFactorAuthentication: "Si vous activez 2FA, à chaque tentative de connexion à wallabag, vous recevrez un code par email."
+        emailTwoFactor_label: 'En utlisant l’email (recevez un code par email)'
+        googleTwoFactor_label: 'En utilisant une application de mot de passe à usage unique (ouvrez l’app, comme Google Authenticator, pour obtenir un mot de passe à usage unique)'
         delete:
             title: "Supprimer mon compte (attention danger !)"
             description: "Si vous confirmez la suppression de votre compte, TOUS les articles, TOUS les tags, TOUTES les annotations et votre compte seront DÉFINITIVEMENT supprimé (c’est IRRÉVERSIBLE). Vous serez ensuite déconnecté."
@@ -534,6 +534,8 @@ user:
         enabled_label: "Activé"
         last_login_label: "Dernière connexion"
         twofactor_label: "Double authentification"
+        twofactor_email_label: Double authentification par email
+        twofactor_google_label: Double authentification par Google
         save: "Sauvegarder"
         delete: "Supprimer"
         delete_confirm: "Êtes-vous sûr ?"

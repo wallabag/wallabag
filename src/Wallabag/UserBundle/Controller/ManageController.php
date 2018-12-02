@@ -8,6 +8,7 @@ use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\UserBundle\Entity\User;
@@ -31,10 +32,10 @@ class ManageController extends Controller
         // enable created user by default
         $user->setEnabled(true);
 
-        $form = $this->createForm('Wallabag\UserBundle\Form\NewUserType', $user);
-        $form->handleRequest($request);
+        $form = $this->createEditForm('NewUserType', $user, $request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->handleOtp($form, $user);
             $userManager->updateUser($user);
 
             // dispatch a created event so the associated config will be created
@@ -62,14 +63,14 @@ class ManageController extends Controller
      */
     public function editAction(Request $request, User $user)
     {
-        $deleteForm = $this->createDeleteForm($user);
-        $editForm = $this->createForm('Wallabag\UserBundle\Form\UserType', $user);
-        $editForm->handleRequest($request);
+        $userManager = $this->container->get('fos_user.user_manager');
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+        $deleteForm = $this->createDeleteForm($user);
+        $form = $this->createEditForm('UserType', $user, $request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->handleOtp($form, $user);
+            $userManager->updateUser($user);
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
@@ -81,7 +82,7 @@ class ManageController extends Controller
 
         return $this->render('WallabagUserBundle:Manage:edit.html.twig', [
             'user' => $user,
-            'edit_form' => $editForm->createView(),
+            'edit_form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
             'twofactor_auth' => $this->getParameter('twofactor_auth'),
         ]);
@@ -157,7 +158,7 @@ class ManageController extends Controller
     }
 
     /**
-     * Creates a form to delete a User entity.
+     * Create a form to delete a User entity.
      *
      * @param User $user The User entity
      *
@@ -170,5 +171,51 @@ class ManageController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * Create a form to create or edit a User entity.
+     *
+     * @param string  $type    Might be NewUserType or UserType
+     * @param User    $user    The new / edit user
+     * @param Request $request The request
+     *
+     * @return FormInterface
+     */
+    private function createEditForm($type, User $user, Request $request)
+    {
+        $form = $this->createForm('Wallabag\UserBundle\Form\\' . $type, $user);
+        $form->handleRequest($request);
+
+        // `googleTwoFactor` isn't a field within the User entity, we need to define it's value in a different way
+        if (true === $user->isGoogleAuthenticatorEnabled() && false === $form->isSubmitted()) {
+            $form->get('googleTwoFactor')->setData(true);
+        }
+
+        return $form;
+    }
+
+    /**
+     * Handle OTP update, taking care to only have one 2fa enable at a time.
+     *
+     * @see  ConfigController
+     *
+     * @param FormInterface $form
+     * @param User          $user
+     *
+     * @return User
+     */
+    private function handleOtp(FormInterface $form, User $user)
+    {
+        if (true === $form->get('googleTwoFactor')->getData() && false === $user->isGoogleAuthenticatorEnabled()) {
+            $user->setGoogleAuthenticatorSecret($this->get('scheb_two_factor.security.google_authenticator')->generateSecret());
+            $user->setEmailTwoFactor(false);
+
+            return $user;
+        }
+
+        $user->setGoogleAuthenticatorSecret(null);
+
+        return $user;
     }
 }

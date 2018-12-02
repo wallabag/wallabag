@@ -99,11 +99,11 @@ config:
             # all: 'All'
         # rss_limit: 'Number of items in the feed'
     form_user:
-        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion"
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'Navn'
         email_label: 'Emailadresse'
-        # twoFactorAuthentication_label: 'Two factor authentication'
-        # help_twoFactorAuthentication: "If you enable 2FA, each time you want to login to wallabag, you'll receive a code by email."
+        # emailTwoFactor_label: 'Using email (receive a code by email)'
+        # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, to get a one time code)'
         delete:
             # title: Delete my account (a.k.a danger zone)
             # description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
@@ -533,7 +533,8 @@ user:
         email_label: 'Emailadresse'
         # enabled_label: 'Enabled'
         # last_login_label: 'Last login'
-        # twofactor_label: Two factor authentication
+        # twofactor_email_label: Two factor authentication by email
+        # twofactor_google_label: Two factor authentication by Google
         # save: Save
         # delete: Delete
         # delete_confirm: Are you sure?

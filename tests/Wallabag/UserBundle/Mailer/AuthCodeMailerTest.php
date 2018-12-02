@@ -33,7 +33,7 @@ TWIG;
     public function testSendEmail()
     {
         $user = new User();
-        $user->setTwoFactorAuthentication(true);
+        $user->setEmailTwoFactor(true);
         $user->setEmailAuthCode(666666);
         $user->setEmail('test@wallabag.io');
         $user->setName('Bob');

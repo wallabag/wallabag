@@ -99,11 +99,11 @@ config:
             all: 'Totes'
         rss_limit: "Nombre d'articles dins un flux RSS"
     form_user:
-        two_factor_description: "Activar l'autentificacion en dos temps vòl dire que recebretz un còdi per corrièl per cada novèla connexion pas aprovada."
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'Nom'
         email_label: 'Adreça de corrièl'
-        twoFactorAuthentication_label: 'Dobla autentificacion'
-        help_twoFactorAuthentication: "S'avètz activat l'autentificacion en dos temps, cada còp que volètz vos connectar a wallabag, recebretz un còdi per corrièl."
+        # emailTwoFactor_label: 'Using email (receive a code by email)'
+        # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, to get a one time code)'
         delete:
             title: Suprimir mon compte (Mèfi zòna perilhosa)
             description: Se confirmatz la supression de vòstre compte, TOTES vòstres articles, TOTAS vòstras etiquetas, TOTAS vòstras anotacions e vòstre compte seràn suprimits per totjorn. E aquò es IRREVERSIBLE. Puèi seretz desconnectat.
@@ -533,7 +533,8 @@ user:
         email_label: 'Adreça de corrièl'
         enabled_label: 'Actiu'
         last_login_label: 'Darrièra connexion'
-        twofactor_label: 'Autentificacion doble-factor'
+        # twofactor_email_label: Two factor authentication by email
+        # twofactor_google_label: Two factor authentication by Google
         save: 'Enregistrar'
         delete: 'Suprimir'
         delete_confirm: 'Sètz segur ?'

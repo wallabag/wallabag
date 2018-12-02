@@ -96,11 +96,11 @@ config:
             archive: 'архивные'
         rss_limit: 'Количество записей в фиде'
     form_user:
-        two_factor_description: "Включить двухфакторную аутентификацию, Вы получите сообщение на указанный email с кодом, при каждом новом непроверенном подключении."
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'Имя'
         email_label: 'Email'
-        twoFactorAuthentication_label: 'Двухфакторная аутентификация'
-        help_twoFactorAuthentication: "Если Вы включите двухфакторную аутентификацию, то Вы будете получать код на указанный ранее email, каждый раз при входе в wallabag."
+        # emailTwoFactor_label: 'Using email (receive a code by email)'
+        # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, to get a one time code)'
         delete:
             title: "Удалить мой аккаунт (или опасная зона)"
             description: "Если Вы удалите ваш аккаунт, ВСЕ ваши записи, теги и другие данные, будут БЕЗВОЗВРАТНО удалены (операция не может быть отменена после). Затем Вы выйдете из системы."
@@ -521,7 +521,8 @@ user:
         email_label: 'Email'
         enabled_label: 'Включить'
         last_login_label: 'Последний вход'
-        twofactor_label: "Двухфакторная аутентификация"
+        # twofactor_email_label: Two factor authentication by email
+        # twofactor_google_label: Two factor authentication by Google
         save: "Сохранить"
         delete: "Удалить"
         delete_confirm: "Вы уверены?"

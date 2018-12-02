@@ -8,8 +8,8 @@ use FOS\UserBundle\Model\User as BaseUser;
 use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\XmlRoot;
-use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
-use Scheb\TwoFactorBundle\Model\TrustedComputerInterface;
+use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface as EmailTwoFactorInterface;
+use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface as GoogleTwoFactorInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Wallabag\ApiBundle\Entity\Client;
@@ -28,7 +28,7 @@ use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
  * @UniqueEntity("email")
  * @UniqueEntity("username")
  */
-class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterface
+class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorInterface
 {
     use EntityTimestampsTrait;
 
@@ -123,16 +123,16 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     private $authCode;
 
     /**
+     * @ORM\Column(name="googleAuthenticatorSecret", type="string", nullable=true)
+     */
+    private $googleAuthenticatorSecret;
+
+    /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    private $twoFactorAuthentication = false;
-
-    /**
-     * @ORM\Column(type="json_array", nullable=true)
-     */
-    private $trusted;
+    private $emailTwoFactor = false;
 
     public function __construct()
     {
@@ -233,49 +233,89 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     /**
      * @return bool
      */
-    public function isTwoFactorAuthentication()
+    public function isEmailTwoFactor()
     {
-        return $this->twoFactorAuthentication;
+        return $this->emailTwoFactor;
     }
 
     /**
-     * @param bool $twoFactorAuthentication
+     * @param bool $emailTwoFactor
      */
-    public function setTwoFactorAuthentication($twoFactorAuthentication)
+    public function setEmailTwoFactor($emailTwoFactor)
     {
-        $this->twoFactorAuthentication = $twoFactorAuthentication;
+        $this->emailTwoFactor = $emailTwoFactor;
     }
 
-    public function isEmailAuthEnabled()
+    /**
+     * Used in the user config form to be "like" the email option.
+     */
+    public function isGoogleTwoFactor()
     {
-        return $this->twoFactorAuthentication;
+        return $this->isGoogleAuthenticatorEnabled();
     }
 
-    public function getEmailAuthCode()
+    /**
+     * {@inheritdoc}
+     */
+    public function isEmailAuthEnabled(): bool
+    {
+        return $this->emailTwoFactor;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEmailAuthCode(): string
     {
         return $this->authCode;
     }
 
-    public function setEmailAuthCode($authCode)
+    /**
+     * {@inheritdoc}
+     */
+    public function setEmailAuthCode(string $authCode): void
     {
         $this->authCode = $authCode;
     }
 
-    public function addTrustedComputer($token, \DateTime $validUntil)
+    /**
+     * {@inheritdoc}
+     */
+    public function getEmailAuthRecipient(): string
     {
-        $this->trusted[$token] = $validUntil->format('r');
+        return $this->email;
     }
 
-    public function isTrustedComputer($token)
+    /**
+     * {@inheritdoc}
+     */
+    public function isGoogleAuthenticatorEnabled(): bool
     {
-        if (isset($this->trusted[$token])) {
-            $now = new \DateTime();
-            $validUntil = new \DateTime($this->trusted[$token]);
+        return $this->googleAuthenticatorSecret ? true : false;
+    }
 
-            return $now < $validUntil;
-        }
+    /**
+     * {@inheritdoc}
+     */
+    public function getGoogleAuthenticatorUsername(): string
+    {
+        return $this->username;
+    }
 
-        return false;
+    /**
+     * {@inheritdoc}
+     */
+    public function getGoogleAuthenticatorSecret(): string
+    {
+        return $this->googleAuthenticatorSecret;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setGoogleAuthenticatorSecret(?string $googleAuthenticatorSecret): void
+    {
+        $this->googleAuthenticatorSecret = $googleAuthenticatorSecret;
     }
 
     /**

@@ -99,11 +99,11 @@ config:
             # all: 'All'
         rss_limit: 'Numero di elementi nel feed'
     form_user:
-        two_factor_description: "Abilitando l'autenticazione a due fattori riceverai una e-mail con un codice per ogni nuova connesione non verificata"
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'Nome'
         email_label: 'E-mail'
-        twoFactorAuthentication_label: 'Autenticazione a due fattori'
-        help_twoFactorAuthentication: "Se abiliti l'autenticazione a due fattori, ogni volta che vorrai connetterti a wallabag, riceverai un codice via E-mail."
+        # emailTwoFactor_label: 'Using email (receive a code by email)'
+        # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, to get a one time code)'
         delete:
             title: Cancella il mio account (zona pericolosa)
             description: Rimuovendo il tuo account, TUTTI i tuoi articoli, TUTTE le tue etichette, TUTTE le tue annotazioni ed il tuo account verranno rimossi PERMANENTEMENTE (impossibile da ANNULLARE). Verrai poi disconnesso.
@@ -533,7 +533,8 @@ user:
         email_label: 'E-mail'
         enabled_label: 'Abilitato'
         last_login_label: 'Ultima connessione'
-        twofactor_label: Autenticazione a due fattori
+        # twofactor_email_label: Two factor authentication by email
+        # twofactor_google_label: Two factor authentication by Google
         save: Salva
         delete: Cancella
         delete_confirm: Sei sicuro?

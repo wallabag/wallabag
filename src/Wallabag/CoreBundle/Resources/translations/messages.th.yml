@@ -99,11 +99,11 @@ config:
             all: 'ทั้งหมด'
         rss_limit: 'จำนวนไอเทมที่เก็บ'
     form_user:
-        two_factor_description: "การเปิดใช้งาน two factor authentication คือคุณจะต้องได้รับอีเมลกับ code ที่ยังไม่ตรวจสอบในการเชื่อมต่อ"
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'ชื่อ'
         email_label: 'อีเมล'
-        twoFactorAuthentication_label: 'Two factor authentication'
-        help_twoFactorAuthentication: "ถ้าคุณเปิด 2FA, ในแต่ละช่วงเวลาที่คุณต้องการลงชื่อเข้าใช wallabag, คุณจะต้องได้รับ code จากอีเมล"
+        # emailTwoFactor_label: 'Using email (receive a code by email)'
+        # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, to get a one time code)'
         delete:
             title: ลบบัญชีของฉัน (โซนที่เป็นภัย!)
             description: ถ้าคุณลบบัญชีของคุณIf , รายการทั้งหมดของคุณ, แท็กทั้งหมดของคุณ, หมายเหตุทั้งหมดของคุณและบัญชีของคุณจะถูกลบอย่างถาวร (มันไม่สามารถยกเลิกได้) คุณจะต้องลงชื่อออก
@@ -531,7 +531,8 @@ user:
         email_label: 'อีเมล'
         enabled_label: 'เปิดใช้งาน'
         last_login_label: 'ลงชื้อเข้าใช้ครั้งสุดท้าย'
-        twofactor_label: Two factor authentication
+        # twofactor_email_label: Two factor authentication by email
+        # twofactor_google_label: Two factor authentication by Google
         save: บันทึก
         delete: ลบ
         delete_confirm: ตุณแน่ใจหรือไม่?

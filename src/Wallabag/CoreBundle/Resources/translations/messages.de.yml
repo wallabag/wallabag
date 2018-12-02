@@ -99,11 +99,11 @@ config:
             all: 'Alle'
         rss_limit: 'Anzahl der Einträge pro Feed'
     form_user:
-        two_factor_description: "Wenn du die Zwei-Faktor-Authentifizierung aktivierst, erhältst du eine E-Mail mit einem Code bei jeder nicht vertrauenswürdigen Verbindung"
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'Name'
         email_label: 'E-Mail-Adresse'
-        twoFactorAuthentication_label: 'Zwei-Faktor-Authentifizierung'
-        help_twoFactorAuthentication: "Wenn du 2FA aktivierst, wirst du bei jedem Login einen Code per E-Mail bekommen."
+        # emailTwoFactor_label: 'Using email (receive a code by email)'
+        # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, to get a one time code)'
         delete:
             title: 'Lösche mein Konto (a.k.a Gefahrenzone)'
             description: 'Wenn du dein Konto löschst, werden ALL deine Artikel, ALL deine Tags, ALL deine Anmerkungen und dein Konto dauerhaft gelöscht (kann NICHT RÜCKGÄNGIG gemacht werden). Du wirst anschließend ausgeloggt.'
@@ -533,7 +533,8 @@ user:
         email_label: 'E-Mail-Adresse'
         enabled_label: 'Aktiviert'
         last_login_label: 'Letzter Login'
-        twofactor_label: 'Zwei-Faktor-Authentifizierung'
+        # twofactor_email_label: Two factor authentication by email
+        # twofactor_google_label: Two factor authentication by Google
         save: 'Speichern'
         delete: 'Löschen'
         delete_confirm: 'Bist du sicher?'

@@ -176,42 +176,35 @@
 
         <fieldset class="w500p inline">
             <div class="row">
-                {{ form_label(form.user.twoFactorAuthentication) }}
-                {{ form_errors(form.user.twoFactorAuthentication) }}
-                {{ form_widget(form.user.twoFactorAuthentication) }}
+                {{ form_label(form.user.emailTwoFactor) }}
+                {{ form_errors(form.user.emailTwoFactor) }}
+                {{ form_widget(form.user.emailTwoFactor) }}
             </div>
-            <a href="#" title="{{ 'config.form_user.help_twoFactorAuthentication'|trans }}">
-                <i class="material-icons">live_help</i>
-            </a>
+            <br/>
+            <div class="row">
+                {{ form_label(form.user.googleTwoFactor) }}
+                {{ form_widget(form.user.googleTwoFactor) }}
+                {{ form_errors(form.user.googleTwoFactor) }}
+            </div>
+            {% for OTPSecret in app.session.flashbag.get('OTPSecret') %}
+                <div class="row">
+                    You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password.
+                    <br/>
+                    That code will disapear after a page reload.
+                    <br/><br/>
+                    <strong>{{ OTPSecret.code }}</strong>
+                    <br/><br/>
+                    Or you can scan that QR Code with your app:
+                    <br/>
+                    <img id="2faQrcode" class="hide-on-med-and-down" />
+
+                    <script>
+                        document.getElementById('2faQrcode').src = jrQrcode.getQrBase64('{{ OTPSecret.qrCode }}');;
+                    </script>
+                </div>
+            {% endfor %}
         </fieldset>
         {% endif %}
-
-        <h2>{{ 'config.reset.title'|trans }}</h2>
-        <fieldset class="w500p inline">
-            <p>{{ 'config.reset.description'|trans }}</p>
-            <ul>
-                <li>
-                    <a href="{{ path('config_reset', { type: 'annotations'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
-                        {{ 'config.reset.annotations'|trans }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('config_reset', { type: 'tags'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
-                        {{ 'config.reset.tags'|trans }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('config_reset', { type: 'archived'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
-                        {{ 'config.reset.archived'|trans }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('config_reset', { type: 'entries'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
-                        {{ 'config.reset.entries'|trans }}
-                    </a>
-                </li>
-            </ul>
-        </fieldset>
 
         {{ form_widget(form.user._token) }}
         {{ form_widget(form.user.save) }}
@@ -277,7 +270,7 @@
         {% endfor %}
     </ul>
 
-        {{ form_start(form.new_tagging_rule) }}
+    {{ form_start(form.new_tagging_rule) }}
         {{ form_errors(form.new_tagging_rule) }}
 
         <fieldset class="w500p inline">
@@ -382,4 +375,31 @@
             </table>
         </div>
     </div>
+
+    <h2>{{ 'config.reset.title'|trans }}</h2>
+    <fieldset class="w500p inline">
+        <p>{{ 'config.reset.description'|trans }}</p>
+        <ul>
+            <li>
+                <a href="{{ path('config_reset', { type: 'annotations'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                    {{ 'config.reset.annotations'|trans }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('config_reset', { type: 'tags'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                    {{ 'config.reset.tags'|trans }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('config_reset', { type: 'archived'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                    {{ 'config.reset.archived'|trans }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('config_reset', { type: 'entries'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                    {{ 'config.reset.entries'|trans }}
+                </a>
+            </li>
+        </ul>
+    </fieldset>
 {% endblock %}
