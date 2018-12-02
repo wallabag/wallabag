@@ -59,6 +59,7 @@ config:
         password: "Mot de passe"
         rules: "Règles de tag automatiques"
         new_user: "Créer un compte"
+        reset: "Réinitialisation"
     form:
         save: "Enregistrer"
     form_settings:

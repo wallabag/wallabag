@@ -59,6 +59,7 @@ config:
         password: 'Senhal'
         rules: "Règlas d'etiquetas automaticas"
         new_user: 'Crear un compte'
+        reset: 'Zòna de reïnicializacion'
     form:
         save: 'Enregistrar'
     form_settings:

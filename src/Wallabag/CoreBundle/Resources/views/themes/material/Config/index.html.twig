@@ -16,6 +16,7 @@
                             <li class="tab col s12 m6 l3"><a href="#set3">{{ 'config.tab_menu.user_info'|trans }}</a></li>
                             <li class="tab col s12 m6 l3"><a href="#set4">{{ 'config.tab_menu.password'|trans }}</a></li>
                             <li class="tab col s12 m6 l3"><a href="#set5">{{ 'config.tab_menu.rules'|trans }}</a></li>
+                            <li class="tab col s12 m6 l3"><a href="#set6">{{ 'config.tab_menu.reset'|trans }}</a></li>
                         </ul>
                     </div>
 
@@ -218,37 +219,6 @@
                             {{ form_widget(form.user.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
                             {{ form_widget(form.user._token) }}
                         </form>
-
-                        <br /><hr /><br />
-
-                        <div class="row">
-                            <h5>{{ 'config.reset.title'|trans }}</h5>
-                            <p>{{ 'config.reset.description'|trans }}</p>
-                            <a href="{{ path('config_reset', { type: 'annotations'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
-                                {{ 'config.reset.annotations'|trans }}
-                            </a>
-                            <a href="{{ path('config_reset', { type: 'tags'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
-                                {{ 'config.reset.tags'|trans }}
-                            </a>
-                            <a href="{{ path('config_reset', { type: 'archived'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
-                                {{ 'config.reset.archived'|trans }}
-                            </a>
-                            <a href="{{ path('config_reset', { type: 'entries'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
-                                {{ 'config.reset.entries'|trans }}
-                            </a>
-                        </div>
-
-                        {% if enabled_users > 1 %}
-                            <br /><hr /><br />
-
-                            <div class="row">
-                                <h5>{{ 'config.form_user.delete.title'|trans }}</h5>
-                                <p>{{ 'config.form_user.delete.description'|trans }}</p>
-                                <a href="{{ path('delete_account') }}" onclick="return confirm('{{ 'config.form_user.delete.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red delete-account">
-                                    {{ 'config.form_user.delete.button'|trans }}
-                                </a>
-                            </div>
-                        {% endif %}
                     </div>
 
                     <div id="set4" class="col s12">
@@ -421,6 +391,37 @@
                                 </table>
                             </div>
                         </div>
+                    </div>
+
+                    <div id="set6" class="col s12">
+                        <div class="row">
+                            <h5>{{ 'config.reset.title'|trans }}</h5>
+                            <p>{{ 'config.reset.description'|trans }}</p>
+                            <a href="{{ path('config_reset', { type: 'annotations'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                                {{ 'config.reset.annotations'|trans }}
+                            </a>
+                            <a href="{{ path('config_reset', { type: 'tags'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                                {{ 'config.reset.tags'|trans }}
+                            </a>
+                            <a href="{{ path('config_reset', { type: 'archived'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                                {{ 'config.reset.archived'|trans }}
+                            </a>
+                            <a href="{{ path('config_reset', { type: 'entries'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                                {{ 'config.reset.entries'|trans }}
+                            </a>
+                        </div>
+
+                        {% if enabled_users > 1 %}
+                            <br /><hr /><br />
+
+                            <div class="row">
+                                <h5>{{ 'config.form_user.delete.title'|trans }}</h5>
+                                <p>{{ 'config.form_user.delete.description'|trans }}</p>
+                                <a href="{{ path('delete_account') }}" onclick="return confirm('{{ 'config.form_user.delete.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red delete-account">
+                                    {{ 'config.form_user.delete.button'|trans }}
+                                </a>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
 

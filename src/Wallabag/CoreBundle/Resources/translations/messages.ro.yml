@@ -59,6 +59,7 @@ config:
         password: 'Parolă'
         # rules: 'Tagging rules'
         new_user: 'Crează un utilizator'
+        # reset: 'Reset area'
     form:
         save: 'Salvează'
     form_settings:

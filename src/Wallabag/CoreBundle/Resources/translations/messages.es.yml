@@ -59,6 +59,7 @@ config:
         password: 'Contraseña'
         rules: 'Reglas de etiquetado automáticas'
         new_user: 'Añadir un usuario'
+        reset: 'Reiniciar mi cuenta'
     form:
         save: 'Guardar'
     form_settings:

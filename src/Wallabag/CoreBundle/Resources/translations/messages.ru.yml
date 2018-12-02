@@ -58,6 +58,7 @@ config:
         password: 'Пароль'
         rules: 'Правила настройки простановки тегов'
         new_user: 'Добавить пользователя'
+        reset: 'Сброс данных'
     form:
         save: 'Сохранить'
     form_settings:

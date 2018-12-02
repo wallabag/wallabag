@@ -59,6 +59,7 @@ config:
         password: 'رمز'
         rules: 'برچسب‌گذاری خودکار'
         new_user: 'افزودن کاربر'
+        # reset: 'Reset area'
     form:
         save: 'ذخیره'
     form_settings:

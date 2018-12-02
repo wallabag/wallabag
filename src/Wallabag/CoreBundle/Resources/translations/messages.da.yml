@@ -59,6 +59,7 @@ config:
         password: 'Adgangskode'
         # rules: 'Tagging rules'
         new_user: 'Tilføj bruger'
+        # reset: 'Reset area'
     form:
         save: 'Gem'
     form_settings:

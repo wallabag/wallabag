@@ -59,6 +59,7 @@ config:
         password: 'Password'
         rules: 'Regole di etichettatura'
         new_user: 'Aggiungi utente'
+        reset: 'Area di reset'
     form:
         save: 'Salva'
     form_settings:

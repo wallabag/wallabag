@@ -59,6 +59,7 @@ config:
         password: 'Password'
         rules: 'Tagging rules'
         new_user: 'Add a user'
+        reset: 'Reset area'
     form:
         save: 'Save'
     form_settings:

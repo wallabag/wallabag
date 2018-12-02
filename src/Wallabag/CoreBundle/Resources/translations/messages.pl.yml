@@ -59,6 +59,7 @@ config:
         password: 'Hasło'
         rules: 'Zasady tagowania'
         new_user: 'Dodaj użytkownika'
+        reset: 'Reset'
     form:
         save: 'Zapisz'
     form_settings:

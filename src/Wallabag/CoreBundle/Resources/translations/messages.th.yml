@@ -59,6 +59,7 @@ config:
         password: 'รหัสผ่าน'
         rules: 'การแท็กข้อบังคับ'
         new_user: 'เพิ่มผู้ใช้'
+        reset: 'รีเซ็ตพื้นที่ '
     form:
         save: 'บันทึก'
     form_settings:
