@@ -212,20 +212,20 @@
                                     </div>
                                 </div>
 
-                                {% for OTPSecret in app.session.flashbag.get('OTPSecret') %}
+                                {% for OtpQrCode in app.session.flashbag.get('OtpQrCode') %}
                                     <div class="card-panel yellow darken-1 black-text">
                                         You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password.
                                         <br/>
                                         That code will disapear after a page reload.
                                         <br/><br/>
-                                        <strong>{{ OTPSecret.code }}</strong>
+                                        <strong>{{ app.user.getGoogleAuthenticatorSecret }}</strong>
                                         <br/><br/>
                                         Or you can scan that QR Code with your app:
                                         <br/>
                                         <img id="2faQrcode" class="hide-on-med-and-down" />
 
                                         <script>
-                                            document.getElementById('2faQrcode').src = jrQrcode.getQrBase64('{{ OTPSecret.qrCode }}');;
+                                            document.getElementById('2faQrcode').src = jrQrcode.getQrBase64('{{ OtpQrCode }}');;
                                         </script>
                                     </div>
                                 {% endfor %}

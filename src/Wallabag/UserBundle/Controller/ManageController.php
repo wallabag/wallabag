@@ -8,7 +8,6 @@ use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\UserBundle\Entity\User;
@@ -32,10 +31,10 @@ class ManageController extends Controller
         // enable created user by default
         $user->setEnabled(true);
 
-        $form = $this->createEditForm('NewUserType', $user, $request);
+        $form = $this->createForm('Wallabag\UserBundle\Form\NewUserType', $user);
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = $this->handleOtp($form, $user);
             $userManager->updateUser($user);
 
             // dispatch a created event so the associated config will be created
@@ -66,10 +65,25 @@ class ManageController extends Controller
         $userManager = $this->container->get('fos_user.user_manager');
 
         $deleteForm = $this->createDeleteForm($user);
-        $form = $this->createEditForm('UserType', $user, $request);
+        $form = $this->createForm('Wallabag\UserBundle\Form\UserType', $user);
+        $form->handleRequest($request);
+
+        // `googleTwoFactor` isn't a field within the User entity, we need to define it's value in a different way
+        if ($this->getParameter('twofactor_auth') && true === $user->isGoogleAuthenticatorEnabled() && false === $form->isSubmitted()) {
+            $form->get('googleTwoFactor')->setData(true);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = $this->handleOtp($form, $user);
+            // handle creation / reset of the OTP secret if checkbox changed from the previous state
+            if ($this->getParameter('twofactor_auth')) {
+                if (true === $form->get('googleTwoFactor')->getData() && false === $user->isGoogleAuthenticatorEnabled()) {
+                    $user->setGoogleAuthenticatorSecret($this->get('scheb_two_factor.security.google_authenticator')->generateSecret());
+                    $user->setEmailTwoFactor(false);
+                } elseif (false === $form->get('googleTwoFactor')->getData() && true === $user->isGoogleAuthenticatorEnabled()) {
+                    $user->setGoogleAuthenticatorSecret(null);
+                }
+            }
+
             $userManager->updateUser($user);
 
             $this->get('session')->getFlashBag()->add(
@@ -171,51 +185,5 @@ class ManageController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
-    }
-
-    /**
-     * Create a form to create or edit a User entity.
-     *
-     * @param string  $type    Might be NewUserType or UserType
-     * @param User    $user    The new / edit user
-     * @param Request $request The request
-     *
-     * @return FormInterface
-     */
-    private function createEditForm($type, User $user, Request $request)
-    {
-        $form = $this->createForm('Wallabag\UserBundle\Form\\' . $type, $user);
-        $form->handleRequest($request);
-
-        // `googleTwoFactor` isn't a field within the User entity, we need to define it's value in a different way
-        if (true === $user->isGoogleAuthenticatorEnabled() && false === $form->isSubmitted()) {
-            $form->get('googleTwoFactor')->setData(true);
-        }
-
-        return $form;
-    }
-
-    /**
-     * Handle OTP update, taking care to only have one 2fa enable at a time.
-     *
-     * @see  ConfigController
-     *
-     * @param FormInterface $form
-     * @param User          $user
-     *
-     * @return User
-     */
-    private function handleOtp(FormInterface $form, User $user)
-    {
-        if (true === $form->get('googleTwoFactor')->getData() && false === $user->isGoogleAuthenticatorEnabled()) {
-            $user->setGoogleAuthenticatorSecret($this->get('scheb_two_factor.security.google_authenticator')->generateSecret());
-            $user->setEmailTwoFactor(false);
-
-            return $user;
-        }
-
-        $user->setGoogleAuthenticatorSecret(null);
-
-        return $user;
     }
 }
