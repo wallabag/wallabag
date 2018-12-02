@@ -146,8 +146,6 @@ class ManageController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->get('logger')->info('searching users');
-
             $searchTerm = (isset($request->get('search_user')['term']) ? $request->get('search_user')['term'] : '');
 
             $qb = $em->getRepository('WallabagUserBundle:User')->getQueryBuilderForSearch($searchTerm);
