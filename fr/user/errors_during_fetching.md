@@ -12,16 +12,15 @@ Si la récupération de l'article échoue, il peut être utile d'essayer une nou
 
 ![Réessayer de récupérer le contenu](../../img/user/refetch.png)
 
-
 ## Vérifier les logs de production pour les messages d'erreurs
 
 Par défaut, si le contenu d'un site ne peut pas être correctement analysé à cause d'une erreur dans la requête (une page inexistante, un temps de réponse trop long etc.), un message d'erreur sera affiché dans le fichier `WALLABAG_DIR/var/logs/prod.log`.
 
-Si vous voyez une ligne qui commence par `graby.ERROR` et qui correspond à votre période de test, c'est que la requête a échoué à cause d'une erreur. La nature de l'erreur peut déjà donner quelques indications sur son origine : 
+Si vous voyez une ligne qui commence par `graby.ERROR` et qui correspond à votre période de test, c'est que la requête a échoué à cause d'une erreur. La nature de l'erreur peut déjà donner quelques indications sur son origine :
 
- - une erreur `404` indiquera que wallabag n'a pas trouvé d'article à l'URL indiquée,
- - une erreur `403` pourra indiquer que l'URL renvoie vers une page à l'accès interdit (ou que le site a mis en place des mesures pour empêcher la récupération de son contenu),
- - une erreur `500` pourra indiquer un problème sur le serveur distant ou de votre connexion internet,
+ - une erreur `404` indiquera que wallabag n'a pas trouvé d'article à l'URL indiquée ;
+ - une erreur `403` pourra indiquer que l'URL renvoie vers une page à l'accès interdit (ou que le site a mis en place des mesures pour empêcher la récupération de son contenu) ;
+ - une erreur `500` pourra indiquer un problème sur le serveur distant ou de votre connexion internet ;
  - une erreur `504` ou `408` pourra indiquer que le serveur met trop longtemps à répondre etc.
 
 Merci d'indiquer tout le passage correspondant à l'erreur dans le ticket que vous ouvrirez sur [GitHub](https://github.com/wallabag/wallabag/issues).
@@ -30,8 +29,8 @@ Merci d'indiquer tout le passage correspondant à l'erreur dans le ticket que vo
 
 Wallabag utilise une conjonction de deux systèmes pour récupérer le contenu d'un article :
 
-- l'utilisation de fichiers de configuration spécifiques à chaque domaine (souvent appelés _site config_, que vous pouvez trouver dans `vendor/j0k3r/graby-site-config/`)
-- et [php-readability](https://github.com/j0k3r/php-readability), qui analyse automatiquement le contenu d'une page web pour déterminer ce qui a la plus de chance d'être le contenu recherché.
+- l'utilisation de fichiers de configuration spécifiques à chaque domaine (souvent appelés _site config_, que vous pouvez trouver dans `vendor/j0k3r/graby-site-config/`) ;
+- [php-readability](https://github.com/j0k3r/php-readability), qui analyse automatiquement le contenu d'une page web pour déterminer ce qui a la plus de chance d'être le contenu recherché.
 
 Ces systèmes ne sont pas infaillibles et il faudra parfois mâcher le travail à wallabag ! Afin de faciliter le travail des développeurs, il faut d'abord vérifier l'origine du problème en activant les logs détaillés de wallabag, puis éventuellement créer (ou mettre à jour) le fichier de configuration du site hébergeant l'article voulu.
 
@@ -45,13 +44,32 @@ Si vous hébergez votre propre instance de wallabag, vous pouvez nous joindre de
 
 Si l'étude des logs « basiques » n'a pas permis d'identifier une erreur criante et que vous n'avez pas le contenu de l'article, l'erreur est peut-être ailleurs. Dans ce cas, vous devrez activer les logs sur votre instance wallabag pour nous aider à trouver ce qui ne va pas.
 
-- dans le fichier `app/config/config_prod.yml`, à [la ligne 18](https://github.com/wallabag/wallabag/blob/master/app/config/config_prod.yml#L18), remplacez `error` par `debug` ;
+- dans le fichier `app/config/config_prod.yml`, modifiez la section `monolog` comme suit :
+```yaml
+monolog:
+    handlers:
+        main:
+            type: fingers_crossed
+            action_level: error
+            handler: nested
+            channels: ['!graby']
+        nested:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+        graby:
+            type: stream
+            path: "%kernel.logs_dir%/graby.log"
+            level: debug
+            channels: ['graby']
+        console:
+            type: console
+```
 - videz le cache avec la commande `rm -rf var/cache/*` ;
-- videz le contenu du fichier de log avec `cat /dev/null > var/logs/prod.log` ;
 - rechargez votre instance wallabag et rechargez le contenu qui pose souci ;
-- si vous ne réussissez pas à déterminer avec les logs l'origine du problème, copiez/collez le contenu du fichier `var/logs/prod.log` dans un nouveau [ticket d'incident GitHub](https://github.com/wallabag/wallabag/issues/new).
+- si vous ne réussissez pas à déterminer avec les logs l'origine du problème, copiez/collez le contenu du fichier `var/logs/graby.log` dans un nouveau [ticket d'incident GitHub](https://github.com/wallabag/wallabag/issues/new).
 
-### Création ou mise à jour d'un fichier de configuration (_site_config_)
+ ### Création ou mise à jour d'un fichier de configuration (_site_config_)
 
 Le plus souvent, les erreurs de récupération de contenu ne sont pas dues à une erreur du serveur distant mais se résument à des fichiers de configuration absents ou dépassés (par exemple, suite à une refonte du site hébergeant le contenu). On pourra ainsi avoir le titre de l'article non renseigné, pas de corps d'article, des éléments surnuméraires ou manquants etc.
 
@@ -183,4 +201,4 @@ Comme de multiples types de paragraphes peuvent contenir un lien `a` ou une bali
 
 Si vous souhaitez plus d'informations sur _XPath_, la norme [contient un résumé assez clair de ce qui est faisable](https://www.w3.org/TR/1999/REC-xpath-19991116/#path-abbrev). Le site **devhints.io** a également [une anti-sèche très complète sur _XPath_](https://devhints.io/xpath).
 
-Si vous voulez tester de manière dynamique si un _XPath_ fonctionne pour sélectionner un ou plusieurs éléments d'une page, vous pouvez également utiliser [ce bac à sable](http://www.whitebeam.org/library/guide/TechNotes/xpathtestbed.rhtm) qui évalue des chemins sur un code HTML/XML que vous pouvez _uploader_.
+ Si vous voulez tester de manière dynamique si un _XPath_ fonctionne pour sélectionner un ou plusieurs éléments d'une page, vous pouvez également utiliser [ce bac à sable](http://www.whitebeam.org/library/guide/TechNotes/xpathtestbed.rhtm) qui évalue des chemins sur un code HTML/XML que vous pouvez _uploader_.
