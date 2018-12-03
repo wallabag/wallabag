@@ -203,6 +203,9 @@ scheb_two_factor:
         cookie_name: wllbg_trusted_computer
         lifetime: 2592000
 
+    backup_codes:
+        enabled: "%twofactor_auth%"
+
     google:
         enabled: "%twofactor_auth%"
         template: WallabagUserBundle:Authentication:form.html.twig

@@ -107,6 +107,7 @@ config:
         two_factor_code_description_1: Vous venez d’activer l’authentification double-facteur, ouvrez votre application OTP pour configurer la génération du mot de passe à usage unique. Ces informations disparaîtront après un rechargement de la page.
         two_factor_code_description_2: 'Vous pouvez scanner le QR code avec votre application :'
         two_factor_code_description_3: 'Ou utiliser le code suivant :'
+        two_factor_code_description_4: 'N’oubliez pas de sauvegarder ces codes de secours dans un endroit sûr, vous pourrez les utiliser si vous ne pouvez plus accéder à votre application OTP :'
         delete:
             title: "Supprimer mon compte (attention danger !)"
             description: "Si vous confirmez la suppression de votre compte, TOUS les articles, TOUS les tags, TOUTES les annotations et votre compte seront DÉFINITIVEMENT supprimé (c’est IRRÉVERSIBLE). Vous serez ensuite déconnecté."

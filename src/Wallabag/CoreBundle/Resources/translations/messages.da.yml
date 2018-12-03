@@ -107,6 +107,7 @@ config:
         # two_factor_code_description_1: You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password. It'll disapear after a page reload.
         # two_factor_code_description_2: 'You can scan that QR Code with your app:'
         # two_factor_code_description_3: 'Or use that code:'
+        # two_factor_code_description_4: 'Also, save these backup codes in a safe place, you can use them in case you lose access to your OTP app:'
         delete:
             # title: Delete my account (a.k.a danger zone)
             # description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.

@@ -8,6 +8,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\XmlRoot;
+use Scheb\TwoFactorBundle\Model\BackupCodeInterface;
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface as EmailTwoFactorInterface;
 use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface as GoogleTwoFactorInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -28,7 +29,7 @@ use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
  * @UniqueEntity("email")
  * @UniqueEntity("username")
  */
-class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorInterface
+class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorInterface, BackupCodeInterface
 {
     use EntityTimestampsTrait;
 
@@ -126,6 +127,11 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      * @ORM\Column(name="googleAuthenticatorSecret", type="string", nullable=true)
      */
     private $googleAuthenticatorSecret;
+
+    /**
+     * @ORM\Column(type="json_array", nullable=true)
+     */
+    private $backupCodes;
 
     /**
      * @var bool
@@ -316,6 +322,36 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     public function setGoogleAuthenticatorSecret(?string $googleAuthenticatorSecret): void
     {
         $this->googleAuthenticatorSecret = $googleAuthenticatorSecret;
+    }
+
+    public function setBackupCodes(array $codes = null)
+    {
+        $this->backupCodes = $codes;
+    }
+
+    public function getBackupCodes()
+    {
+        return $this->backupCodes;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isBackupCode(string $code): bool
+    {
+        return \in_array($code, $this->backupCodes, true);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function invalidateBackupCode(string $code): void
+    {
+        $key = array_search($code, $this->backupCodes, true);
+
+        if (false !== $key) {
+            unset($this->backupCodes[$key]);
+        }
     }
 
     /**

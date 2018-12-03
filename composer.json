@@ -87,7 +87,8 @@
         "friendsofsymfony/jsrouting-bundle": "^2.2",
         "bdunogier/guzzle-site-authenticator": "^1.0.0",
         "defuse/php-encryption": "^2.1",
-        "html2text/html2text": "^4.1"
+        "html2text/html2text": "^4.1",
+        "pragmarx/recovery": "^0.1.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~3.0",

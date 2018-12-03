@@ -187,19 +187,22 @@
             </div>
             {% for OtpQrCode in app.session.flashbag.get('OtpQrCode') %}
                 <div class="row">
-                    You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password.
+                    {{ 'config.form_user.two_factor_code_description_1'|trans }}
                     <br/>
-                    That code will disapear after a page reload.
+                    {{ 'config.form_user.two_factor_code_description_2'|trans }}
+                    <br/><br/>
+                    <img id="2faQrcode" class="hide-on-med-and-down" />
+                    <script>
+                        document.getElementById('2faQrcode').src = jrQrcode.getQrBase64('{{ OtpQrCode }}');
+                    </script>
+                    <br/><br/>
+                    {{ 'config.form_user.two_factor_code_description_3'|trans }}
                     <br/><br/>
                     <strong>{{ app.user.getGoogleAuthenticatorSecret }}</strong>
                     <br/><br/>
-                    Or you can scan that QR Code with your app:
-                    <br/>
-                    <img id="2faQrcode" class="hide-on-med-and-down" />
-
-                    <script>
-                        document.getElementById('2faQrcode').src = jrQrcode.getQrBase64('{{ OtpQrCode }}');;
-                    </script>
+                    {{ 'config.form_user.two_factor_code_description_4'|trans }}
+                    <br/><br/>
+                    <strong>{{ app.user.getBackupCodes|join("\n")|nl2br }}</strong>
                 </div>
             {% endfor %}
         </fieldset>

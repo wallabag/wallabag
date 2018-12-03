@@ -112,7 +112,7 @@
                                     <img id="androidQrcode" class="hide-on-med-and-down" />
                                 </div>
                                 <script>
-                                    document.getElementById('androidQrcode').src = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');;
+                                    document.getElementById('androidQrcode').src = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');
                                 </script>
                             </div>
 
@@ -220,12 +220,16 @@
                                         <br/><br/>
                                         <img id="2faQrcode" class="hide-on-med-and-down" />
                                         <script>
-                                            document.getElementById('2faQrcode').src = jrQrcode.getQrBase64('{{ OtpQrCode }}');;
+                                            document.getElementById('2faQrcode').src = jrQrcode.getQrBase64('{{ OtpQrCode }}');
                                         </script>
                                         <br/><br/>
                                         {{ 'config.form_user.two_factor_code_description_3'|trans }}
                                         <br/><br/>
                                         <strong>{{ app.user.getGoogleAuthenticatorSecret }}</strong>
+                                        <br/><br/>
+                                        {{ 'config.form_user.two_factor_code_description_4'|trans }}
+                                        <br/><br/>
+                                        <strong>{{ app.user.getBackupCodes|join("\n")|nl2br }}</strong>
                                     </div>
                                 {% endfor %}
                             {% endif %}

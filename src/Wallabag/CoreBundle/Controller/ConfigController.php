@@ -2,6 +2,7 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
+use PragmaRX\Recovery\Recovery as BackupCodes;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -93,10 +94,12 @@ class ConfigController extends Controller
 
                     $user->setGoogleAuthenticatorSecret($secret);
                     $user->setEmailTwoFactor(false);
+                    $user->setBackupCodes((new BackupCodes())->toArray());
 
                     $this->addFlash('OtpQrCode', $this->get('scheb_two_factor.security.google_authenticator')->getQRContent($user));
                 } elseif (false === $userForm->get('googleTwoFactor')->getData() && true === $user->isGoogleAuthenticatorEnabled()) {
                     $user->setGoogleAuthenticatorSecret(null);
+                    $user->setBackupCodes(null);
                 }
             }
 
