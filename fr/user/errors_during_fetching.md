@@ -4,9 +4,9 @@
 
 Il peut y avoir plusieurs raisons :
 
--   problème de connexion internet ;
--   problème au niveau du serveur hébergeant l'article ;
--   wallabag ne peut pas récupérer le contenu à cause de la structure du site web.
+- problème de connexion internet ;
+- problème au niveau du serveur hébergeant l'article ;
+- wallabag ne peut pas récupérer le contenu à cause de la structure du site web.
 
 Si la récupération de l'article échoue, il peut être utile d'essayer une nouvelle fois de récupérer le contenu en cliquant dans la barre latérale sur le bouton **Recharger le contenu**. (Note : ce bouton est également très utile pour recharger un article en prenant en compte les modifications locales sur les _site configs_, voir ci-dessous.)
 
@@ -66,10 +66,11 @@ monolog:
             type: console
 ```
 - videz le cache avec la commande `rm -rf var/cache/*` ;
-- rechargez votre instance wallabag et rechargez le contenu qui pose souci ;
-- si vous ne réussissez pas à déterminer avec les logs l'origine du problème, copiez/collez le contenu du fichier `var/logs/graby.log` dans un nouveau [ticket d'incident GitHub](https://github.com/wallabag/wallabag/issues/new).
+- rechargez votre instance wallabag et rechargez le contenu qui pose souci.
 
- ### Création ou mise à jour d'un fichier de configuration (_site_config_)
+Si vous ne réussissez pas à déterminer avec les logs l'origine du problème, copiez/collez le contenu du fichier `var/logs/graby.log` dans un nouveau [ticket d'incident GitHub](https://github.com/wallabag/wallabag/issues/new).
+
+### Création ou mise à jour d'un fichier de configuration (_site config_)
 
 Le plus souvent, les erreurs de récupération de contenu ne sont pas dues à une erreur du serveur distant mais se résument à des fichiers de configuration absents ou dépassés (par exemple, suite à une refonte du site hébergeant le contenu). On pourra ainsi avoir le titre de l'article non renseigné, pas de corps d'article, des éléments surnuméraires ou manquants etc.
 
@@ -100,8 +101,8 @@ Il est possible d'indiquer d'autres éléments dans un fichier de configuration 
 
 Enfin, il est possible de tester au fur et à mesure votre fichier de configuration, jusqu'à obtenir le résultat souhaité :
 
-*   en enregistrant votre fichier de configuration dans `vendor/j0k3r/graby-site-config`, puis en rechargeant le contenu de l'article comme expliqué plus haut ;
-*   sur [*f43.me*](https://f43.me/feed/test), en cliquant sur _Want to try a custom siteconfig?_ et en copiant le contenu de votre configuration avant de cliquer sur _Test_. Notez que vous aurez alors des informations supplémentaires après récupération en cliquant sur l'onglet _Debug_.
+* en enregistrant votre fichier de configuration dans `vendor/j0k3r/graby-site-config`, puis en rechargeant le contenu de l'article comme expliqué plus haut ;
+* sur [*f43.me*](https://f43.me/feed/test), en cliquant sur _Want to try a custom siteconfig?_ et en copiant le contenu de votre configuration avant de cliquer sur _Test_. Notez que vous aurez alors des informations supplémentaires après récupération en cliquant sur l'onglet _Debug_.
 
 Une fois que votre fichier de configuration vous convient, vous pouvez créer une _pull request_ sur le dépôt rassemblant tous les fichiers de configuration : [fivefilters/ftr-site-config](https://github.com/fivefilters/ftr-site-config). (Note : même si vous ne maîtrisez pas _git_, il est possible de [créer ou de modifier des fichiers sur ce dépôt directement depuis votre navigateur web](https://help.github.com/articles/editing-files-in-another-user-s-repository/)). En attendant que les ajouts sur ce dépôt soient acceptés puis répercutés dans wallabag, vous pouvez conserver ce fichier de configuration dans le répertoire `vendor/j0k3r/graby-site-config` de votre wallabag (ces modifications sont cependant supprimées quand vous mettez à jour wallabag).
 
@@ -151,13 +152,13 @@ Quelques exemples étant cependant plus parlants, nous nous baserons sur le (fau
 Le titre du document est contenu dans le _header_ de plus haut niveau, c'est-à-dire `<h1>[...]</h1>`. Son _XPath_ complet est `/html/body/div[2]/article/h1` : partant de la racine `/`, il faut aller dans la balise `html`, puis `body`, puis la seconde `div` rencontrée, puis dans `article` pour enfin arriver au `h1`. (Notez que mon `header` contient également un `h1` correspondant au titre du site.) Cependant, ce chemin complet est beaucoup trop complexe dans le cas de pages avec beaucoup d'éléments imbriqués ; il existe donc un certain nombre de raccourcis utiles.
 
 Le premier est `//` qui permet de sauter un nombre indéfini de balises avant (ou entre) les éléments indiqués :
-*   `//h1` sélectionnerait à la fois le titre du site et de l'article ;
-*   `//div//h1` sélectionnerait également le titre du site et de l'article (les balises `header` et `article` étant ici ignorées) ;
-*   `//article/h1` permet de sélectionner le(s) `h1` directement contenus dans `article`, donc le titre de l'article !
+* `//h1` sélectionnerait à la fois le titre du site et de l'article ;
+* `//div//h1` sélectionnerait également le titre du site et de l'article (les balises `header` et `article` étant ici ignorées) ;
+* `//article/h1` permet de sélectionner le(s) `h1` directement contenus dans `article`, donc le titre de l'article !
 
 Enfin, il est recommandé lorsque cela est possible de s'appuyer sur les attributs des balises. Il paraît en effet logique de différencier les `h1` par le fait que l'un est contenu dans la `div` possédant `class="header"` et l'autre dans la `div` possédant `itemprop="ArticleBody`. Pour cela, on ajoutera au nom de la balise `[@class="header"]` ou `[@itemprop="articleBody"]` :
-*   `//div[@class="header"]//h1` sélectionnerait le titre du site ;
-*   `//div[@itemprop="articleBody"]//h1` sélectionnerait le titre de l'article.
+* `//div[@class="header"]//h1` sélectionnerait le titre du site ;
+* `//div[@itemprop="articleBody"]//h1` sélectionnerait le titre de l'article.
 
 _Note : dans ce cas très simple, comme les attributs sont différents, on pourrait mettre uniquement `//div[@itemprop]//h1` sans préciser la valeur de l'attribut. Cela est cependant moins restrictif et a donc plus de chances de poser des problèmes dans un document complexe._
 
@@ -201,4 +202,4 @@ Comme de multiples types de paragraphes peuvent contenir un lien `a` ou une bali
 
 Si vous souhaitez plus d'informations sur _XPath_, la norme [contient un résumé assez clair de ce qui est faisable](https://www.w3.org/TR/1999/REC-xpath-19991116/#path-abbrev). Le site **devhints.io** a également [une anti-sèche très complète sur _XPath_](https://devhints.io/xpath).
 
- Si vous voulez tester de manière dynamique si un _XPath_ fonctionne pour sélectionner un ou plusieurs éléments d'une page, vous pouvez également utiliser [ce bac à sable](http://www.whitebeam.org/library/guide/TechNotes/xpathtestbed.rhtm) qui évalue des chemins sur un code HTML/XML que vous pouvez _uploader_.
+Si vous voulez tester de manière dynamique si un _XPath_ fonctionne pour sélectionner un ou plusieurs éléments d'une page, vous pouvez également utiliser [ce bac à sable](http://www.whitebeam.org/library/guide/TechNotes/xpathtestbed.rhtm) qui évalue des chemins sur un code HTML/XML que vous pouvez _uploader_.
