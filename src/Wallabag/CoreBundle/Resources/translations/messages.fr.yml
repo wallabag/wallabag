@@ -99,11 +99,14 @@ config:
             all: "Tous"
         rss_limit: "Nombre d’articles dans le flux"
     form_user:
-        two_factor_description: "Activer l’authentification double-facteur veut dire que vous allez recevoir un code par courriel OU que vous devriez utiliser une application de mot de passe à usage unique (comme Google Authenticator) pour obtenir un code temporaire à chaque nouvelle connexion non approuvée. Vous ne pouvez pas choisir les deux options."
+        two_factor_description: "Activer l’authentification double-facteur veut dire que vous allez recevoir un code par courriel OU que vous devriez utiliser une application de mot de passe à usage unique (comme Google Authenticator, Authy or FreeOTP) pour obtenir un code temporaire à chaque nouvelle connexion non approuvée. Vous ne pouvez pas choisir les deux options."
         name_label: "Nom"
         email_label: "Adresse courriel"
         emailTwoFactor_label: 'En utlisant l’email (recevez un code par email)'
-        googleTwoFactor_label: 'En utilisant une application de mot de passe à usage unique (ouvrez l’app, comme Google Authenticator, pour obtenir un mot de passe à usage unique)'
+        googleTwoFactor_label: 'En utilisant une application de mot de passe à usage unique (ouvrez l’app, comme Google Authenticator, Authy or FreeOTP, pour obtenir un mot de passe à usage unique)'
+        two_factor_code_description_1: Vous venez d’activer l’authentification double-facteur, ouvrez votre application OTP pour configurer la génération du mot de passe à usage unique. Ces informations disparaîtront après un rechargement de la page.
+        two_factor_code_description_2: 'Vous pouvez scanner le QR code avec votre application :'
+        two_factor_code_description_3: 'Ou utiliser le code suivant :'
         delete:
             title: "Supprimer mon compte (attention danger !)"
             description: "Si vous confirmez la suppression de votre compte, TOUS les articles, TOUS les tags, TOUTES les annotations et votre compte seront DÉFINITIVEMENT supprimé (c’est IRRÉVERSIBLE). Vous serez ensuite déconnecté."

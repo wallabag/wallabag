@@ -96,11 +96,14 @@ config:
             archive: 'архивные'
         rss_limit: 'Количество записей в фиде'
     form_user:
-        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator) to get a one time code on every new untrusted connection. You can't choose both option."
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'Имя'
         email_label: 'Email'
         # emailTwoFactor_label: 'Using email (receive a code by email)'
-        # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, to get a one time code)'
+        # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, Authy or FreeOTP, to get a one time code)'
+        # two_factor_code_description_1: You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password. It'll disapear after a page reload.
+        # two_factor_code_description_2: 'You can scan that QR Code with your app:'
+        # two_factor_code_description_3: 'Or use that code:'
         delete:
             title: "Удалить мой аккаунт (или опасная зона)"
             description: "Если Вы удалите ваш аккаунт, ВСЕ ваши записи, теги и другие данные, будут БЕЗВОЗВРАТНО удалены (операция не может быть отменена после). Затем Вы выйдете из системы."
