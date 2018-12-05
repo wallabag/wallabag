@@ -25,6 +25,12 @@ run: ## Run the wallabag built-in server
 build: ## Run webpack
 	@npm run build:$(ENV)
 
+prepare-travis-pg: ## Custom prepare for Travis & Postgres (do not drop/create the database)
+ifdef DB
+	cp app/config/tests/parameters_test.$(DB).yml app/config/parameters_test.yml
+endif
+	php bin/console doctrine:migrations:migrate --no-interaction --env=test
+
 prepare: clean ## Prepare database for testsuite
 ifdef DB
 	cp app/config/tests/parameters_test.$(DB).yml app/config/parameters_test.yml
