@@ -59,12 +59,6 @@
                                         {{ form_label(edit_form.googleTwoFactor) }}
                                         {{ form_errors(edit_form.googleTwoFactor) }}
                                     </div>
-
-                                    {% if user.isGoogleAuthenticatorEnabled %}
-                                    <div class="input-field col s12">
-                                        <p><strong>OTP Secret</strong>: {{ user.googleAuthenticatorSecret }}</p>
-                                    </div>
-                                    {% endif %}
                                 </div>
                                 {% endif %}
 
