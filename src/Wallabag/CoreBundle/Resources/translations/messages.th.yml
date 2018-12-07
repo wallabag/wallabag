@@ -536,7 +536,7 @@ user:
         enabled_label: 'เปิดใช้งาน'
         last_login_label: 'ลงชื้อเข้าใช้ครั้งสุดท้าย'
         # twofactor_email_label: Two factor authentication by email
-        # twofactor_google_label: Two factor authentication by Google
+        # twofactor_google_label: Two factor authentication by OTP app
         save: บันทึก
         delete: ลบ
         delete_confirm: ตุณแน่ใจหรือไม่?

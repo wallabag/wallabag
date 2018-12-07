@@ -538,7 +538,7 @@ user:
         enabled_label: 'Actiu'
         last_login_label: 'Darrièra connexion'
         # twofactor_email_label: Two factor authentication by email
-        # twofactor_google_label: Two factor authentication by Google
+        # twofactor_google_label: Two factor authentication by OTP app
         save: 'Enregistrar'
         delete: 'Suprimir'
         delete_confirm: 'Sètz segur ?'

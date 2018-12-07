@@ -538,7 +538,7 @@ user:
         enabled_label: 'Habilitado'
         last_login_label: 'Último login'
         # twofactor_email_label: Two factor authentication by email
-        # twofactor_google_label: Two factor authentication by Google
+        # twofactor_google_label: Two factor authentication by OTP app
         save: 'Salvar'
         delete: 'Apagar'
         delete_confirm: 'Tem certeza?'

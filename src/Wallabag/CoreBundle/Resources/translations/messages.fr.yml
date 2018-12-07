@@ -539,7 +539,7 @@ user:
         last_login_label: "Dernière connexion"
         twofactor_label: "Double authentification"
         twofactor_email_label: Double authentification par email
-        twofactor_google_label: Double authentification par Google
+        twofactor_google_label: Double authentification par OTP app
         save: "Sauvegarder"
         delete: "Supprimer"
         delete_confirm: "Êtes-vous sûr ?"

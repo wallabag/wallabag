@@ -526,7 +526,7 @@ user:
         enabled_label: 'Включить'
         last_login_label: 'Последний вход'
         # twofactor_email_label: Two factor authentication by email
-        # twofactor_google_label: Two factor authentication by Google
+        # twofactor_google_label: Two factor authentication by OTP app
         save: "Сохранить"
         delete: "Удалить"
         delete_confirm: "Вы уверены?"
