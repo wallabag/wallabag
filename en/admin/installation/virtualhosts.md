@@ -1,15 +1,18 @@
 # Virtual hosts
 
+> **[info] Setup directory**
+>
+> We assume that wallabag was installed in the `/var/www/wallabag` folder.
+
+
+> **[warning] Warning**
+>
+> The following configurations are given as examples, assuming that wallabag will be directly accessed at the root of `domain.tld` (or a `wallabag.domain.tld` subdomain).
+> Installation in folders can work, but is not supported by the maintainers.
+
 ## Configuration on Apache
 
-Do not forget to activate the *rewrite* mod of Apache:
-
-```bash
-a2enmod rewrite && systemctl reload apache2
-```
-
-Assuming you install wallabag in the `/var/www/wallabag` folder and that
-you want to use PHP as an Apache module, here's a vhost for wallabag:
+### Using Apache and mod_php
 
 ```apache
 <VirtualHost *:80>
@@ -49,9 +52,13 @@ you want to use PHP as an Apache module, here's a vhost for wallabag:
 </VirtualHost>
 ```
 
-Note for Apache 2.4, in the section
-&lt;Directory /var/www/wallabag/web&gt; you have to replace the
-directives:
+> **[warning]** _Rewrite_ mod
+>
+> Do not forget to activate the *rewrite* mod of Apache:
+> `a2enmod rewrite && systemctl reload apache2`
+
+
+Note for Apache 2.4, in the section `<Directory /var/www/wallabag/web>`, you have to replace the directives:
 
 ```apache
 AllowOverride None
@@ -65,10 +72,9 @@ by
 Require all granted
 ```
 
-After reloading or restarting Apache, you should now be able to access
-wallabag at <http://domain.tld>.
+After reloading or restarting Apache, you should now be able to access wallabag at <http://domain.tld>.
 
-### PHP-FPM instead of mod_php
+### Using Apache and PHP-FPM
 
 If you use PHP-FPM (via mod_proxy_fcgi or similar) then Apache must be
 instructed to *keep* the Authorization header in requests for the API to work.
@@ -88,9 +94,6 @@ SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
 ```
 
 ## Configuration on Nginx
-
-Assuming you installed wallabag in the `/var/www/wallabag` folder,
-here's the recipe for wallabag :
 
 ```nginx
 server {
@@ -142,9 +145,7 @@ line in your nginx configuration
 
 ## Configuration on lighttpd
 
-Assuming you install wallabag in the `/var/www/wallabag` folder, here's
-the recipe for wallabag (edit your `lighttpd.conf` file and paste this
-configuration into it):
+Edit your `lighttpd.conf` file and paste this configuration into it:
 
 ```lighttpd
 server.modules = (
@@ -181,10 +182,10 @@ url.rewrite-if-not-file = (
 
 ## Configuration on Caddy
 
-For caddy server configuration might be just like this (assuming wallabag installation folder is `/var/www/wallabag`):
+For caddy server, configuration might be:
 
 ```caddy
-yourdomain.ru {
+domain.tld {
   root /var/www/wallabag/web
   fastcgi / /var/run/php7-fpm.sock php {
     index app.php
@@ -198,4 +199,4 @@ yourdomain.ru {
 }
 ```
 
-You can also add `push` directive for http/2 and `gzip` for compression. Tested with caddy v0.10.4
+You can also add `push` directive for http/2 and `gzip` for compression. Tested with caddy `=v0.10.4`.
