@@ -1,8 +1,8 @@
 # Configurer l'accès à un paywall
 
-> **[warning] Important**
->
-> C'est la partie technique à propos du paywall. Si vous cherchez la partie utilisateur, allez plutôt [voir cette page](../user/articles/restricted.md).
+{% hint style="working" %}
+C'est la partie technique à propos du paywall. Si vous cherchez la partie utilisateur, allez plutôt [voir cette page](../user/articles/restricted.md).
+{% endhint %}
 
 
 Lisez [cette documentation](../user/errors_during_fetching.md)
