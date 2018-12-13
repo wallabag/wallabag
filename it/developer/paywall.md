@@ -1,8 +1,8 @@
 # Configurare l'accesso al paywall
 
-> **[attenzione] Importante**
->
-> Questa è la parte tecnica a proposito del paywall. Se state cercando la sezione dedicata all'utente, si prega di leggere [questa pagina](../user/articles/restricted.md).
+{% hint style="working" %}
+Questa è la parte tecnica a proposito del paywall. Se state cercando la sezione dedicata all'utente, si prega di leggere [questa pagina](../user/articles/restricted.md).
+{% endhint %}
 
 Leggete [questa parte della documentazione](../user/errors_during_fetching.md)
 per capire i file di configurazione, i quali si trovano sotto `vendor/j0k3r/graby-site-config/`. Per la maggior parte dei siti, questo file è già configurato: le istruzioni seguenti sono valide solo per i siti web che non sono ancora configurati.
