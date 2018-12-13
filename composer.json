@@ -83,7 +83,7 @@
         "javibravo/simpleue": "^2.0",
         "symfony/dom-crawler": "^3.3.13",
         "friendsofsymfony/jsrouting-bundle": "^1.6.3",
-        "bdunogier/guzzle-site-authenticator": "^1.0.0@dev",
+        "bdunogier/guzzle-site-authenticator": "^1.0.0",
         "defuse/php-encryption": "^2.1",
         "html2text/html2text": "^4.1"
     },
