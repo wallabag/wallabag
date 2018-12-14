@@ -6,12 +6,15 @@ A release is mostly a git tag of http://github.com/wallabag/wallabag, following 
 
 During this documentation, we assume the release is `$LAST_WALLABAG_RELEASE` (like 2.3.4).
 
-#### Files to edit
+#### Prepare the release
 
-- `app/config/wallabag.yml` (`wallabag_core.version`)
-- `CHANGELOG.md`
+- Update these files with new information
+    - `app/config/wallabag.yml` (`wallabag_core.version`)
+    - `CHANGELOG.md`
+- Create a PR named "Prepare $LAST_WALLABAG_RELEASE release".
+- Wait for test to be ok, merge it.
 
-#### Create release on GitHub
+#### Create a new release on GitHub
 
 - Run these commands to create the tag:
 
