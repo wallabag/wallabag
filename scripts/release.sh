@@ -15,6 +15,6 @@ cd $TMP_FOLDER/$RELEASE_FOLDER/$VERSION && php bin/console wallabag:install --en
 cd $TMP_FOLDER/$RELEASE_FOLDER/$VERSION && php bin/console assets:install --env=$ENV --symlink --relative
 cd $TMP_FOLDER/$RELEASE_FOLDER && tar czf wallabag-$VERSION.tar.gz --exclude="var/cache/*" --exclude="var/logs/*" --exclude="var/sessions/*" --exclude=".git" $VERSION
 echo "MD5 checksum of the package for wallabag $VERSION"
-md5 $TMP_FOLDER/$RELEASE_FOLDER/wallabag-release-$VERSION.tar.gz
+md5 $TMP_FOLDER/$RELEASE_FOLDER/wallabag-$VERSION.tar.gz
 echo "Package to upload to the release server:"
-echo $TMP_FOLDER/$RELEASE_FOLDER/wallabag-release-$VERSION.tar.gz
+echo $TMP_FOLDER/$RELEASE_FOLDER/wallabag-$VERSION.tar.gz
