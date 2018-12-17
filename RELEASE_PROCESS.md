@@ -53,7 +53,7 @@ make release VERSION=$LAST_WALLABAG_RELEASE
 - Update the URL shortener (used on `wllbg.org` to generate links like `https://wllbg.org/latest-v2-package` or `http://wllbg.org/latest-v2`)
 - Update Dockerfile https://github.com/wallabag/docker (and create a new tag)
 - Update wallabag.org website (downloads, MD5 sum, releases and new blog post)
-- Put the next patch version suffixed with `-dev` in `app/config/config.yml` (`wallabag_core.version`)
+- Put the next patch version suffixed with `-dev` in `app/config/wallabag.yml` (`wallabag_core.version`)
 - Drink a :beer:!
 
 ### `composer.lock`
