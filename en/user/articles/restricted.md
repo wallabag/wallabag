@@ -30,9 +30,9 @@ Once enable, you'll see a new item in the left menu: **Site Credentials**.
 
 Click on it to go to the management of your site credentials. You'll be able to add many login / password.
 
-> **[info] Information**
->
-> These information will only be accessible by **YOU** and no other users on the wallabag instance.
+{% hint style="info" %}
+These information will only be accessible by **YOU** and no other users on the wallabag instance.
+{% endhint %}
 
 ## Security
 

@@ -1,8 +1,9 @@
 # Configuring paywall access
 
-> **[warning] Important**
->
-> This is the technical part about the paywall. If you are looking for the user part, please check [that page instead](../user/articles/restricted.md).
+
+{% hint style="working" %}
+This is the technical part about the paywall. If you are looking for the user part, please check [that page instead](../user/articles/restricted.md).
+{% endhint %}
 
 Read [this part of the documentation](../user/errors_during_fetching.md)
 to understand the configuration files, which are located under `vendor/j0k3r/graby-site-config/`. For most of the websites, this file

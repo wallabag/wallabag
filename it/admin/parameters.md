@@ -6,10 +6,9 @@ Ecco l'ultima versione del file app/config/parameters.yml di default.
 Assicuratevi che la vostra rispetti questa. Se non sapete quale
 parametro dovete impostare, si prega di lasciare quello di default.
 
-> **[pericolo] Informazione**
->
-> Per applicare i cambiamenti a `parameters.yml`, dovete pulire la cache eliminando tutti i contenuti della cartella `var/cache` con questo comando: `bin/console cache:clear -e=prod`.
-
+{% hint style="tip" %}
+Per applicare i cambiamenti a `parameters.yml`, dovete pulire la cache eliminando tutti i contenuti della cartella `var/cache` con questo comando: `bin/console cache:clear -e=prod`.
+{% endhint %}
 
 ```yaml
 parameters:

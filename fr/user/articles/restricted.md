@@ -31,9 +31,9 @@ Une fois activée, vous verrez une nouvelle entrée dans le menu de gauche: **Ac
 
 Cliquez sur le lien pour aller à la gestion de vos accès aux sites. Vous pourrez ajouter autant de login / mot de passe que vous le souhaitez.
 
-> **[info] Information**
->
-> Ces informations sont accessible uniquement par **VOUS** et aucun autre utilisateur de l'instance wallabag.
+{% hint style="info" %}
+Ces informations sont accessible uniquement par **VOUS** et aucun autre utilisateur de l'instance wallabag.
+{% endhint %}
 
 ## Sécurité
 

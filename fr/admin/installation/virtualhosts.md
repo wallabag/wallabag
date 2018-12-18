@@ -1,14 +1,14 @@
 # Virtual hosts
 
-> **[info] Répertoire d'installation**
->
-> Nous supposons que wallabag a été installé dans le répertoire `/var/www/wallabag`.
+{% hint style="tip" %}
+Nous supposons que wallabag a été installé dans le répertoire `/var/www/wallabag`.
+{% endhint %}
 
 
-> **[warn] Avertissement**
->
-> Les exemples de configuration ci-dessous sont fournis en supposant que wallabag sera accessible à la racine d'un domaine `domain.tld` (ou d'un sous-domaine `wallabag.domain.tld`).
-> S'il est possible d'accéder à wallabag dans un sous-dossier (p.ex. `domain.tld/wallabag`), cette option n'est pas préconisée ni supportée par les développeurs.
+{% hint style="danger" %}
+Les exemples de configuration ci-dessous sont fournis en supposant que wallabag sera accessible à la racine d'un domaine `domain.tld` (ou d'un sous-domaine `wallabag.domain.tld`).
+S'il est possible d'accéder à wallabag dans un sous-dossier (p.ex. `domain.tld/wallabag`), cette option n'est pas préconisée ni supportée par les développeurs.
+{% endhint %}
 
 ## Configuration avec Apache
 
@@ -52,10 +52,10 @@
 </VirtualHost>
 ```
 
-> **[info] _rewrite_**
->
-> N'oubliez pas d'activer le mod *rewrite* d'Apache :
-> `a2enmod rewrite && systemctl reload apache2`
+{% hint style="info" %}
+N'oubliez pas d'activer le mod *rewrite* d'Apache :
+`a2enmod rewrite && systemctl reload apache2`
+{% endhint %}
 
 Pour Apache 2.4, dans la section `<Directory /var/www/wallabag/web>`, vous devez remplacer les directives suivantes :
 
