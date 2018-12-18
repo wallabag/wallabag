@@ -83,6 +83,18 @@ class PinboardImport extends AbstractImport
     /**
      * {@inheritdoc}
      */
+    public function validateEntry(array $importedEntry)
+    {
+        if (empty($importedEntry['href'])) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function parseEntry(array $importedEntry)
     {
         $existingEntry = $this->em

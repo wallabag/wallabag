@@ -170,6 +170,18 @@ class PocketImport extends AbstractImport
 
     /**
      * {@inheritdoc}
+     */
+    public function validateEntry(array $importedEntry)
+    {
+        if (empty($importedEntry['resolved_url']) && empty($importedEntry['given_url'])) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
      *
      * @see https://getpocket.com/developer/docs/v3/retrieve
      */

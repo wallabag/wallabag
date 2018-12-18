@@ -119,6 +119,15 @@ abstract class AbstractImport implements ImportInterface
     abstract public function parseEntry(array $importedEntry);
 
     /**
+     * Validate that an entry is valid (like has some required keys, etc.).
+     *
+     * @param array $importedEntry
+     *
+     * @return bool
+     */
+    abstract public function validateEntry(array $importedEntry);
+
+    /**
      * Fetch content from the ContentProxy (using graby).
      * If it fails return the given entry to be saved in all case (to avoid user to loose the content).
      *
@@ -141,9 +150,9 @@ abstract class AbstractImport implements ImportInterface
     /**
      * Parse and insert all given entries.
      *
-     * @param $entries
+     * @param array $entries
      */
-    protected function parseEntries($entries)
+    protected function parseEntries(array $entries)
     {
         $i = 1;
         $entryToBeFlushed = [];
@@ -151,6 +160,10 @@ abstract class AbstractImport implements ImportInterface
         foreach ($entries as $importedEntry) {
             if ($this->markAsRead) {
                 $importedEntry = $this->setEntryAsRead($importedEntry);
+            }
+
+            if (false === $this->validateEntry($importedEntry)) {
+                continue;
             }
 
             $entry = $this->parseEntry($importedEntry);

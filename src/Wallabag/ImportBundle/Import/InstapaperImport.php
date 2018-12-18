@@ -108,6 +108,18 @@ class InstapaperImport extends AbstractImport
     /**
      * {@inheritdoc}
      */
+    public function validateEntry(array $importedEntry)
+    {
+        if (empty($importedEntry['url'])) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function parseEntry(array $importedEntry)
     {
         $existingEntry = $this->em
