@@ -206,10 +206,10 @@ class PocketImport extends AbstractImport
         $this->fetchContent($entry, $url);
 
         // 0, 1, 2 - 1 if the item is archived - 2 if the item should be deleted
-        $entry->setArchived(1 === $importedEntry['status'] || $this->markAsRead);
+        $entry->setArchived(1 == $importedEntry['status'] || $this->markAsRead);
 
         // 0 or 1 - 1 If the item is starred
-        $entry->setStarred(1 === $importedEntry['favorite']);
+        $entry->setStarred(1 == $importedEntry['favorite']);
 
         $title = 'Untitled';
         if (isset($importedEntry['resolved_title']) && '' !== $importedEntry['resolved_title']) {
