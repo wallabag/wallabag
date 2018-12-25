@@ -29,6 +29,6 @@ class Utils
      */
     public static function getReadingTime($text)
     {
-        return floor(\count(preg_split('~[^\p{L}\p{N}\']+~u', strip_tags($text))) / 200);
+        return floor(\count(preg_split('~([^\p{L}\p{N}\']+|\p{Han}|\p{Hiragana}|\p{Katakana}|\p{Hangul})~u', strip_tags($text))) / 200);
     }
 }
