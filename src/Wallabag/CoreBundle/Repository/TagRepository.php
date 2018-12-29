@@ -75,6 +75,23 @@ class TagRepository extends EntityRepository
             ->getArrayResult();
     }
 
+    public function findByLabelsAndUser($labels, $userId)
+    {
+        $qb = $this->getQueryBuilderByUser($userId)
+            ->select('t.id');
+
+        $ids = $qb->andWhere($qb->expr()->in('t.label', $labels))
+            ->getQuery()
+            ->getArrayResult();
+
+        $tags = [];
+        foreach ($ids as $id) {
+            $tags[] = $this->find($id);
+        }
+
+        return $tags;
+    }
+
     /**
      * Used only in test case to get a tag for our entry.
      *
