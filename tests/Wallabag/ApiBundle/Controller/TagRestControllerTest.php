@@ -32,12 +32,22 @@ class TagRestControllerTest extends WallabagApiTestCase
 
     public function testDeleteUserTag()
     {
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $entry = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneWithTags($this->user->getId());
+
+        $entry = $entry[0];
+
         $tagLabel = 'tagtest';
         $tag = new Tag();
         $tag->setLabel($tagLabel);
-
-        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
         $em->persist($tag);
+
+        $entry->addTag($tag);
+
+        $em->persist($entry);
         $em->flush();
         $em->clear();
 
