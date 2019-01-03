@@ -46,11 +46,13 @@ class TagRestController extends WallabagRestController
         $this->validateAuthentication();
         $label = $request->get('tag', '');
 
-        $tag = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findOneByLabel($label);
+        $tags = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findByLabelsAndUser([$label], $this->getUser()->getId());
 
-        if (empty($tag)) {
+        if (empty($tags)) {
             throw $this->createNotFoundException('Tag not found');
         }
+
+        $tag = $tags[0];
 
         $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
@@ -80,15 +82,7 @@ class TagRestController extends WallabagRestController
 
         $tagsLabels = $request->get('tags', '');
 
-        $tags = [];
-
-        foreach (explode(',', $tagsLabels) as $tagLabel) {
-            $tagEntity = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findOneByLabel($tagLabel);
-
-            if (!empty($tagEntity)) {
-                $tags[] = $tagEntity;
-            }
-        }
+        $tags = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findByLabelsAndUser(explode(',', $tagsLabels), $this->getUser()->getId());
 
         if (empty($tags)) {
             throw $this->createNotFoundException('Tags not found');
@@ -119,6 +113,12 @@ class TagRestController extends WallabagRestController
     public function deleteTagAction(Tag $tag)
     {
         $this->validateAuthentication();
+
+        $tagFromDb = $this->getDoctrine()->getRepository('WallabagCoreBundle:Tag')->findByLabelsAndUser([$tag->getLabel()], $this->getUser()->getId());
+
+        if (empty($tagFromDb)) {
+            throw $this->createNotFoundException('Tag not found');
+        }
 
         $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Entry')
