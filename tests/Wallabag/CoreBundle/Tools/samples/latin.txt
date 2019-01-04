@@ -1,3 +1,4 @@
+-----CONTENT-----
 Lorem ipsum dolor sit amet, pro vivendo oporteat pertinacia ei. Vim fabellas molestiae cu, vel nibh legimus ea, in qui atomorum democritum. Ius ne agam soluta ignota, his sale aperiri complectitur te, omnis volumus accusam an eos. Ut mentitum appetere mel, minim temporibus eloquentiam sea ea.
 
 Tation nominati pro ad. Pri eros eloquentiam reformidans ea, et liber epicurei erroribus pro, pri patrioque repudiandae et. Cetero perfecto at eam. Eros hendrerit constituto vix at, brute aperiri adolescens pro eu. Vix lucilius consulatu ei, ullum tantas munere vel in, regione feugiat eligendi at eam.
@@ -7,3 +8,5 @@ Eam an lucilius iracundia, audire diceret facilisi his in, ex paulo pertinacia p
 Nec ut quod probo eligendi, cu dico iriure aperiam vis. Augue causae abhorreant per ut, iriure repudiandae no nam, exerci equidem deleniti nam te. Et duo saperet debitis adipiscing, quo odio audiam no, ex iudico delenit propriae duo. Eu eum eros abhorreant, an tractatos expetendis est.
 
 Vix.
+-----READING_TIME-----
+1

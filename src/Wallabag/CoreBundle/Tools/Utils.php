@@ -20,10 +20,9 @@ class Utils
     }
 
     /**
-     * For a given text, we calculate reading time for an article
-     * based on 200 words per minute.
+     * For a given text, we calculate reading time for an article based on 200 words per minute.
      *
-     * @param $text
+     * @param string $text
      *
      * @return float
      */
