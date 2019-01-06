@@ -253,6 +253,11 @@ entry:
     confirm:
         delete: "Sètz segur de voler suprimir aqueste article ?"
         delete_tag: "Sètz segur de voler levar aquesta etiqueta de l'article ?"
+    metadata:
+        # reading_time: "Estimated reading time"
+        # reading_time_minutes_short: "%readingTime% min"
+        # address: "Address"
+        # added_on: "Added on"
 
 about:
     page_title: 'A prepaus'
@@ -402,6 +407,7 @@ tag:
 
 export:
     footer_template: '<div style="text-align:center;"><p>Produch per wallabag amb %method%</p><p>Mercés de dobrir <a href="https://github.com/wallabag/wallabag/issues">una sollicitacion</a> s’avètz de problèmas amb l’afichatge d’aqueste E-Book sus vòstre periferic.</p></div>'
+    # unknown: 'Unknown'
 
 import:
     page_title: 'Importar'

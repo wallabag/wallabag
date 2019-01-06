@@ -253,6 +253,11 @@ entry:
     confirm:
         delete: "Voulez-vous vraiment supprimer cet article ?"
         delete_tag: "Voulez-vous vraiment supprimer ce tag de cet article ?"
+    metadata:
+        reading_time: "Durée de lecture estimée"
+        reading_time_minutes_short: "%readingTime% min"
+        address: "Adresse"
+        added_on: "Ajouté le"
 
 about:
     page_title: "À propos"
@@ -402,6 +407,7 @@ tag:
 
 export:
     footer_template: '<div style="text-align:center;"><p>Généré par wallabag with %method%</p><p>Merci d''ouvrir <a href="https://github.com/wallabag/wallabag/issues">un ticket</a> si vous rencontrez des soucis d''affichage avec ce document sur votre support.</p></div>'
+    unknown: 'Inconnu'
 
 import:
     page_title: "Importer"

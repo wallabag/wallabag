@@ -253,6 +253,11 @@ entry:
     confirm:
         delete: "Are you sure you want to remove that article?"
         delete_tag: "Are you sure you want to remove that tag from that article?"
+    metadata:
+        reading_time: "Estimated reading time"
+        reading_time_minutes_short: "%readingTime% min"
+        address: "Address"
+        added_on: "Added on"
 
 about:
     page_title: 'About'
@@ -402,6 +407,7 @@ tag:
 
 export:
     footer_template: '<div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p></div>'
+    unknown: 'Unknown'
 
 import:
     page_title: 'Import'
