@@ -85,7 +85,7 @@ class EntriesExport
     public function updateAuthor($method)
     {
         if ('entry' !== $method) {
-            $this->author = $method . ' authors';
+            $this->author = 'Various authors';
 
             return $this;
         }
