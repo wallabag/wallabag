@@ -173,6 +173,8 @@ class EntriesExport
         }
 
         $entryIds = [];
+        $entryCount = \count($this->entries);
+        $i = 0;
 
         /*
          * Adding actual entries
@@ -180,20 +182,18 @@ class EntriesExport
 
         // set tags as subjects
         foreach ($this->entries as $entry) {
+            ++$i;
             foreach ($entry->getTags() as $tag) {
                 $book->setSubject($tag->getLabel());
             }
-
-            // the reader in Kobo Devices doesn't likes special caracters
-            // in filenames, we limit to A-z/0-9
-            $filename = preg_replace('/[^A-Za-z0-9\-]/', '', $entry->getTitle());
+            $filename = sha1($entry->getTitle());
 
             $titlepage = $content_start . '<h1>' . $entry->getTitle() . '</h1>' . $this->getExportInformation('PHPePub') . $bookEnd;
-            $book->addChapter('Title', 'Title.html', $titlepage, true, EPub::EXTERNAL_REF_ADD);
+            $book->addChapter("Entry {$i} of {$entryCount}", "{$filename}_cover.html", $titlepage, true, EPub::EXTERNAL_REF_ADD);
             $chapter = $content_start . $entry->getContent() . $bookEnd;
-            $book->addChapter($entry->getTitle(), htmlspecialchars($filename) . '.html', $chapter, true, EPub::EXTERNAL_REF_ADD);
 
             $entryIds[] = $entry->getId();
+            $book->addChapter($entry->getTitle(), "{$filename}.html", $chapter, true, EPub::EXTERNAL_REF_ADD);
         }
 
         // Could also be the ISBN number, prefered for published books, or a UUID.
