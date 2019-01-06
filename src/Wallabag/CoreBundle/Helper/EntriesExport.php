@@ -200,8 +200,6 @@ class EntriesExport
         $hash = sha1(sprintf('%s:%s', $this->wallabagUrl, implode(',', $entryIds)));
         $book->setIdentifier(sprintf('urn:wallabag:%s', $hash), EPub::IDENTIFIER_URI);
 
-        $book->buildTOC();
-
         return Response::create(
             $book->getBook(),
             200,
