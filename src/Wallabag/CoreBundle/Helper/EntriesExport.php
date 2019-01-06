@@ -150,8 +150,6 @@ class EntriesExport
          */
 
         $book->setTitle($this->title);
-        // Could also be the ISBN number, prefered for published books, or a UUID.
-        $book->setIdentifier($this->title, EPub::IDENTIFIER_URI);
         // Not needed, but included for the example, Language is mandatory, but EPub defaults to "en". Use RFC3066 Language codes, such as "en", "da", "fr" etc.
         $book->setLanguage($this->language);
         $book->setDescription('Some articles saved on my wallabag');
@@ -174,6 +172,8 @@ class EntriesExport
             $book->setCoverImage('Cover.png', file_get_contents($this->logoPath), 'image/png');
         }
 
+        $entryIds = [];
+
         /*
          * Adding actual entries
          */
@@ -192,7 +192,13 @@ class EntriesExport
             $book->addChapter('Title', 'Title.html', $titlepage, true, EPub::EXTERNAL_REF_ADD);
             $chapter = $content_start . $entry->getContent() . $bookEnd;
             $book->addChapter($entry->getTitle(), htmlspecialchars($filename) . '.html', $chapter, true, EPub::EXTERNAL_REF_ADD);
+
+            $entryIds[] = $entry->getId();
         }
+
+        // Could also be the ISBN number, prefered for published books, or a UUID.
+        $hash = sha1(sprintf('%s:%s', $this->wallabagUrl, implode(',', $entryIds)));
+        $book->setIdentifier(sprintf('urn:wallabag:%s', $hash), EPub::IDENTIFIER_URI);
 
         $book->buildTOC();
 
