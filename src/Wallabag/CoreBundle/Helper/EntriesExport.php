@@ -188,7 +188,22 @@ class EntriesExport
             }
             $filename = sha1($entry->getTitle());
 
-            $titlepage = $content_start . '<h1>' . $entry->getTitle() . '</h1>' . $bookEnd;
+            $publishedBy = $entry->getPublishedBy();
+            if (!empty($publishedBy)) {
+                $authors = implode(',', $publishedBy);
+            } else {
+                $authors = $this->translator->trans('export.unknown');
+            }
+
+            $titlepage = $content_start .
+                '<h1>' . $entry->getTitle() . '</h1>' .
+                '<dl>' .
+                '<dt>' . $this->translator->trans('entry.view.published_by') . '</dt><dd>' . $authors . '</dd>' .
+                '<dt>' . $this->translator->trans('entry.metadata.reading_time') . '</dt><dd>' . $this->translator->trans('entry.metadata.reading_time_minutes_short', ['%readingTime%' => $entry->getReadingTime()]) . '</dd>' .
+                '<dt>' . $this->translator->trans('entry.metadata.added_on') . '</dt><dd>' . $entry->getCreatedAt()->format('Y-m-d') . '</dd>' .
+                '<dt>' . $this->translator->trans('entry.metadata.address') . '</dt><dd><a href="' . $entry->getUrl() . '">' . $entry->getUrl() . '</a></dd>' .
+                '</dl>' .
+                $bookEnd;
             $book->addChapter("Entry {$i} of {$entryCount}", "{$filename}_cover.html", $titlepage, true, EPub::EXTERNAL_REF_ADD);
             $chapter = $content_start . $entry->getContent() . $bookEnd;
 
