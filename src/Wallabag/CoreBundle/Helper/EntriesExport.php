@@ -300,14 +300,6 @@ class EntriesExport
         $pdf->SetKeywords('wallabag');
 
         /*
-         * Front page
-         */
-        $pdf->AddPage();
-        $intro = '<h1>' . $this->title . '</h1>' . $this->getExportInformation('tcpdf');
-
-        $pdf->writeHTMLCell(0, 0, '', '', $intro, 0, 1, 0, true, '', true);
-
-        /*
          * Adding actual entries
          */
         foreach ($this->entries as $entry) {
@@ -315,12 +307,37 @@ class EntriesExport
                 $pdf->SetKeywords($tag->getLabel());
             }
 
+            $publishedBy = $entry->getPublishedBy();
+            if (!empty($publishedBy)) {
+                $authors = implode(',', $publishedBy);
+            } else {
+                $authors = $this->translator->trans('export.unknown');
+            }
+
+            $pdf->addPage();
+            $html = '<h1>' . $entry->getTitle() . '</h1>' .
+                '<dl>' .
+                '<dt>' . $this->translator->trans('entry.view.published_by') . '</dt><dd>' . $authors . '</dd>' .
+                '<dt>' . $this->translator->trans('entry.metadata.reading_time') . '</dt><dd>' . $this->translator->trans('entry.metadata.reading_time_minutes_short', ['%readingTime%' => $entry->getReadingTime()]) . '</dd>' .
+                '<dt>' . $this->translator->trans('entry.metadata.added_on') . '</dt><dd>' . $entry->getCreatedAt()->format('Y-m-d') . '</dd>' .
+                '<dt>' . $this->translator->trans('entry.metadata.address') . '</dt><dd><a href="' . $entry->getUrl() . '">' . $entry->getUrl() . '</a></dd>' .
+                '</dl>';
+            $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+
             $pdf->AddPage();
             $html = '<h1>' . $entry->getTitle() . '</h1>';
             $html .= $entry->getContent();
 
             $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
         }
+
+        /*
+         * Last page
+         */
+        $pdf->AddPage();
+        $html = $this->getExportInformation('tcpdf');
+
+        $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
 
         // set image scale factor
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
