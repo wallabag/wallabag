@@ -223,7 +223,7 @@ class EntriesExport
             [
                 'Content-Description' => 'File Transfer',
                 'Content-type' => 'application/epub+zip',
-                'Content-Disposition' => 'attachment; filename="' . $this->title . '.epub"',
+                'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.epub"',
                 'Content-Transfer-Encoding' => 'binary',
             ]
         );
@@ -265,9 +265,6 @@ class EntriesExport
         }
         $mobi->setContentProvider($content);
 
-        // the browser inside Kindle Devices doesn't likes special caracters either, we limit to A-z/0-9
-        $this->title = preg_replace('/[^A-Za-z0-9\-]/', '', $this->title);
-
         return Response::create(
             $mobi->toString(),
             200,
@@ -275,7 +272,7 @@ class EntriesExport
                 'Accept-Ranges' => 'bytes',
                 'Content-Description' => 'File Transfer',
                 'Content-type' => 'application/x-mobipocket-ebook',
-                'Content-Disposition' => 'attachment; filename="' . $this->title . '.mobi"',
+                'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.mobi"',
                 'Content-Transfer-Encoding' => 'binary',
             ]
         );
@@ -348,7 +345,7 @@ class EntriesExport
             [
                 'Content-Description' => 'File Transfer',
                 'Content-type' => 'application/pdf',
-                'Content-Disposition' => 'attachment; filename="' . $this->title . '.pdf"',
+                'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.pdf"',
                 'Content-Transfer-Encoding' => 'binary',
             ]
         );
@@ -394,7 +391,7 @@ class EntriesExport
             200,
             [
                 'Content-type' => 'application/csv',
-                'Content-Disposition' => 'attachment; filename="' . $this->title . '.csv"',
+                'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.csv"',
                 'Content-Transfer-Encoding' => 'UTF-8',
             ]
         );
@@ -412,7 +409,7 @@ class EntriesExport
             200,
             [
                 'Content-type' => 'application/json',
-                'Content-Disposition' => 'attachment; filename="' . $this->title . '.json"',
+                'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.json"',
                 'Content-Transfer-Encoding' => 'UTF-8',
             ]
         );
@@ -430,7 +427,7 @@ class EntriesExport
             200,
             [
                 'Content-type' => 'application/xml',
-                'Content-Disposition' => 'attachment; filename="' . $this->title . '.xml"',
+                'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.xml"',
                 'Content-Transfer-Encoding' => 'UTF-8',
             ]
         );
@@ -456,7 +453,7 @@ class EntriesExport
             200,
             [
                 'Content-type' => 'text/plain',
-                'Content-Disposition' => 'attachment; filename="' . $this->title . '.txt"',
+                'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.txt"',
                 'Content-Transfer-Encoding' => 'UTF-8',
             ]
         );
@@ -498,5 +495,16 @@ class EntriesExport
         }
 
         return str_replace('%IMAGE%', '', $info);
+    }
+
+    /**
+     * Return a sanitized version of the title by applying translit iconv
+     * and removing non alphanumeric characters, - and space.
+     *
+     * @return string Sanitized filename
+     */
+    private function getSanitizedFilename()
+    {
+        return preg_replace('/[^A-Za-z0-9\- \']/', '', iconv('utf-8', 'us-ascii//TRANSLIT', $this->title));
     }
 }
