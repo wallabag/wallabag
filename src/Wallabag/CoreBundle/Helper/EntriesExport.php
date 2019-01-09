@@ -189,10 +189,9 @@ class EntriesExport
             $filename = sha1($entry->getTitle());
 
             $publishedBy = $entry->getPublishedBy();
+            $authors = $this->translator->trans('export.unknown');
             if (!empty($publishedBy)) {
                 $authors = implode(',', $publishedBy);
-            } else {
-                $authors = $this->translator->trans('export.unknown');
             }
 
             $titlepage = $content_start .
@@ -305,10 +304,9 @@ class EntriesExport
             }
 
             $publishedBy = $entry->getPublishedBy();
+            $authors = $this->translator->trans('export.unknown');
             if (!empty($publishedBy)) {
                 $authors = implode(',', $publishedBy);
-            } else {
-                $authors = $this->translator->trans('export.unknown');
             }
 
             $pdf->addPage();
