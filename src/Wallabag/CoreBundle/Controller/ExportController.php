@@ -58,6 +58,7 @@ class ExportController extends Controller
         $method = ucfirst($category);
         $methodBuilder = 'getBuilderFor' . $method . 'ByUser';
         $repository = $this->get('wallabag_core.entry_repository');
+        $title = $method;
 
         if ('tag_entries' === $category) {
             $tag = $this->get('wallabag_core.tag_repository')->findOneBySlug($request->query->get('tag'));
@@ -66,6 +67,8 @@ class ExportController extends Controller
                 $this->getUser()->getId(),
                 $tag->getId()
             );
+
+            $title = 'Tag ' . $tag->getLabel();
         } else {
             $entries = $repository
                 ->$methodBuilder($this->getUser()->getId())
@@ -76,7 +79,7 @@ class ExportController extends Controller
         try {
             return $this->get('wallabag_core.helper.entries_export')
                 ->setEntries($entries)
-                ->updateTitle($method)
+                ->updateTitle($title)
                 ->updateAuthor($method)
                 ->exportAs($format);
         } catch (\InvalidArgumentException $e) {
