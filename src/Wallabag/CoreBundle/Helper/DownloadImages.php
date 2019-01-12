@@ -56,7 +56,7 @@ class DownloadImages
             $imagePath = $this->processSingleImage($entryId, $image, $url, $relativePath);
 
             if (false === $imagePath) {
-                continue;
+                break;
             }
 
             // if image contains "&" and we can't find it in the html it might be because it's encoded as &amp;

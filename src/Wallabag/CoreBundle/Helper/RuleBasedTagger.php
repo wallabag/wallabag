@@ -37,7 +37,7 @@ class RuleBasedTagger
 
         foreach ($rules as $rule) {
             if (!$this->rulerz->satisfies($entry, $rule->getRule())) {
-                continue;
+                break;
             }
 
             $this->logger->info('Matching rule.', [

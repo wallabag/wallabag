@@ -65,7 +65,7 @@ class InstapaperImport extends AbstractImport
         $handle = fopen($this->filepath, 'r');
         while (false !== ($data = fgetcsv($handle, 10240))) {
             if ('URL' === $data[0]) {
-                continue;
+                break;
             }
 
             // last element in the csv is the folder where the content belong

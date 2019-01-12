@@ -169,7 +169,7 @@ abstract class AbstractImport implements ImportInterface
             $entry = $this->parseEntry($importedEntry);
 
             if (null === $entry) {
-                continue;
+                break;
             }
 
             // store each entry to be flushed so we can trigger the entry.saved event for each of them
