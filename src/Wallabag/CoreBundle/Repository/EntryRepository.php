@@ -142,7 +142,7 @@ class EntryRepository extends EntityRepository
      *
      * @return Pagerfanta
      */
-    public function findEntries($userId, $isArchived = null, $isStarred = null, $isPublic = null, $sort = 'created', $order = 'ASC', $since = 0, $tags = '')
+    public function findEntries($userId, $isArchived = null, $isStarred = null, $isPublic = null, $sort = 'created', $order = 'asc', $since = 0, $tags = '')
     {
         $qb = $this->createQueryBuilder('e')
             ->leftJoin('e.tags', 't')
@@ -183,6 +183,10 @@ class EntryRepository extends EntityRepository
                 // bound parameter to the main query builder
                 $qb->setParameter('label' . $i, $tag);
             }
+        }
+
+        if (!\in_array(strtolower($order), ['asc', 'desc'], true)) {
+            throw new \Exception('Order "' . $order . '" parameter is wrong, allowed: asc or desc');
         }
 
         if ('created' === $sort) {
