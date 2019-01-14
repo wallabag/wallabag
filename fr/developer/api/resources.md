@@ -20,9 +20,9 @@ une liste non exhaustive :
 -   [Golang wrapper for the wallabag
     API](https://github.com/Strubbl/wallabago) par Strubbl, pour son
     projets [wallabag-stats
-    graphe](https://github.com/Strubbl/wallabag-stats) et l'outil de
+    graphe](https://gitlab.com/Strubbl/wallabag-stats) et l'outil de
     ligne de commande
-    [wallabag-add-article](https://github.com/Strubbl/wallabag-add-article).
+    [wallabag-add-article](https://gitlab.com/Strubbl/wallabag-add-article).
 -   Tool to automatically download Wallabag articles into your local
     computer or Kobo ebook reader
     [wallabako](https://gitlab.com/anarcat/wallabako) par anarcat.
