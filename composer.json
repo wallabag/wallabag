@@ -91,7 +91,7 @@
         "doctrine/doctrine-fixtures-bundle": "~2.2",
         "doctrine/data-fixtures": "~1.1",
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "3.4.x-dev",
+        "symfony/phpunit-bridge": "^4.2",
         "friendsofphp/php-cs-fixer": "~2.0",
         "m6web/redis-mock": "^2.0",
         "dama/doctrine-test-bundle": "^4.0"
