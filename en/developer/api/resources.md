@@ -17,9 +17,9 @@ list of them:
 -   [Golang wrapper for the wallabag
     API](https://github.com/Strubbl/wallabago) by Strubbl, for his
     projects [wallabag-stats
-    graph](https://github.com/Strubbl/wallabag-stats) and the command
+    graph](https://gitlab.com/Strubbl/wallabag-stats) and the command
     line tool
-    [wallabag-add-article](https://github.com/Strubbl/wallabag-add-article).
+    [wallabag-add-article](https://gitlab.com/Strubbl/wallabag-add-article).
 -   Tool to automatically download Wallabag articles into your local
     computer or Kobo ebook reader
     [wallabako](https://gitlab.com/anarcat/wallabako) by anarcat.
