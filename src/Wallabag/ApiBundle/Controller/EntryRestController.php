@@ -9,6 +9,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -98,24 +99,28 @@ class EntryRestController extends WallabagRestController
         $isArchived = (null === $request->query->get('archive')) ? null : (bool) $request->query->get('archive');
         $isStarred = (null === $request->query->get('starred')) ? null : (bool) $request->query->get('starred');
         $isPublic = (null === $request->query->get('public')) ? null : (bool) $request->query->get('public');
-        $sort = $request->query->get('sort', 'created');
-        $order = $request->query->get('order', 'desc');
+        $sort = strtolower($request->query->get('sort', 'created'));
+        $order = strtolower($request->query->get('order', 'desc'));
         $page = (int) $request->query->get('page', 1);
         $perPage = (int) $request->query->get('perPage', 30);
         $tags = \is_array($request->query->get('tags')) ? '' : (string) $request->query->get('tags', '');
         $since = $request->query->get('since', 0);
 
-        /** @var \Pagerfanta\Pagerfanta $pager */
-        $pager = $this->get('wallabag_core.entry_repository')->findEntries(
-            $this->getUser()->getId(),
-            $isArchived,
-            $isStarred,
-            $isPublic,
-            $sort,
-            $order,
-            $since,
-            $tags
-        );
+        try {
+            /** @var \Pagerfanta\Pagerfanta $pager */
+            $pager = $this->get('wallabag_core.entry_repository')->findEntries(
+                $this->getUser()->getId(),
+                $isArchived,
+                $isStarred,
+                $isPublic,
+                $sort,
+                $order,
+                $since,
+                $tags
+            );
+        } catch (\Exception $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
 
         $pager->setMaxPerPage($perPage);
         $pager->setCurrentPage($page);
