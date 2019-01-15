@@ -57,9 +57,7 @@ security:
                 target: /
 
     access_control:
-        - { path: ^/api/doc, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api/version, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api/user, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/(doc|version|info|user), roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }

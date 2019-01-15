@@ -14,6 +14,8 @@ class WallabagRestController extends FOSRestController
      *
      * @ApiDoc()
      *
+     * @deprecated Should use info endpoint instead
+     *
      * @return JsonResponse
      */
     public function getVersionAction()
@@ -22,6 +24,24 @@ class WallabagRestController extends FOSRestController
         $json = $this->get('jms_serializer')->serialize($version, 'json');
 
         return (new JsonResponse())->setJson($json);
+    }
+
+    /**
+     * Retrieve information about the wallabag instance.
+     *
+     * @ApiDoc()
+     *
+     * @return JsonResponse
+     */
+    public function getInfoAction()
+    {
+        $info = [
+            'appname' => 'wallabag',
+            'version' => $this->container->getParameter('wallabag_core.version'),
+            'allowed_registration' => $this->container->getParameter('wallabag_user.registration_enabled'),
+        ];
+
+        return (new JsonResponse())->setJson($this->get('jms_serializer')->serialize($info, 'json'));
     }
 
     protected function validateAuthentication()
