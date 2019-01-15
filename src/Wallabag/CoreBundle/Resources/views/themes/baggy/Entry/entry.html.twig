@@ -96,9 +96,6 @@
                 </div>
             </aside>
         </div>
-        {% if entry.previewPicture is not null %}
-            <div><img class="preview" src="{{ entry.previewPicture }}" alt="{{ entry.title|e|raw }}" /></div>
-        {% endif %}
         <article>
             {{ entry.content | raw }}
         </article>

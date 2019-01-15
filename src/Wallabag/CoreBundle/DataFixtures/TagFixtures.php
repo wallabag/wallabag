@@ -13,33 +13,22 @@ class TagFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $tag1 = new Tag();
-        $tag1->setLabel('foo bar');
+        $tags = [
+            'foo-bar-tag' => 'foo bar', //tag used for EntryControllerTest
+            'bar-tag' => 'bar',
+            'baz-tag' => 'baz', // tag used for ExportControllerTest
+            'foo-tag' => 'foo',
+            'bob-tag' => 'bob', // tag used for TagRestControllerTest
+        ];
 
-        $manager->persist($tag1);
+        foreach ($tags as $reference => $label) {
+            $tag = new Tag();
+            $tag->setLabel($label);
 
-        $this->addReference('foo-bar-tag', $tag1);
+            $manager->persist($tag);
 
-        $tag2 = new Tag();
-        $tag2->setLabel('bar');
-
-        $manager->persist($tag2);
-
-        $this->addReference('bar-tag', $tag2);
-
-        $tag3 = new Tag();
-        $tag3->setLabel('baz');
-
-        $manager->persist($tag3);
-
-        $this->addReference('baz-tag', $tag3);
-
-        $tag4 = new Tag();
-        $tag4->setLabel('foo');
-
-        $manager->persist($tag4);
-
-        $this->addReference('foo-tag', $tag4);
+            $this->addReference($reference, $tag);
+        }
 
         $manager->flush();
     }

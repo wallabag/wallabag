@@ -242,6 +242,15 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame(2, $content['limit']);
     }
 
+    public function testGetStarredEntriesWithBadSort()
+    {
+        $this->client->request('GET', '/api/entries', ['starred' => 1, 'sort' => 'updated', 'order' => 'unknown']);
+
+        $this->assertSame(400, $this->client->getResponse()->getStatusCode());
+
+        $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
+    }
+
     public function testGetStarredEntries()
     {
         $this->client->request('GET', '/api/entries', ['starred' => 1, 'sort' => 'updated']);

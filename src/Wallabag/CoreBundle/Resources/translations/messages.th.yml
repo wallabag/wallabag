@@ -251,6 +251,11 @@ entry:
     confirm:
         delete: "คุณแน่ใจหรือไม่ว่าคุณต้องการลบบทความนี้?"
         delete_tag: "คุณแน่ใจหรือไม่ว่าคุณต้องการลบแท็กจากบทความนี้?"
+    metadata:
+        # reading_time: "Estimated reading time"
+        # reading_time_minutes_short: "%readingTime% min"
+        # address: "Address"
+        # added_on: "Added on"
 
 about:
     page_title: 'เกี่ยวกับ'
@@ -402,6 +407,7 @@ tag:
 
 export:
     footer_template: '<div style="text-align:center;"><p>ผลิตโดย wallabag กับ %method%</p><p>ให้ทำการเปิด <a href="https://github.com/wallabag/wallabag/issues">ฉบับนี้</a> ถ้าคุณมีข้อบกพร่องif you have trouble with the display of this E-Book on your device.</p></div>'
+    # unknown: 'Unknown'
 
 import:
     page_title: 'นำข้อมูลเช้า'

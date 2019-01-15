@@ -1,5 +1,32 @@
 # Changelog
 
+## [2.3.6](https://github.com/wallabag/wallabag/tree/2.3.6)
+   [Full Changelog](https://github.com/wallabag/wallabag/compare/2.3.5...2.3.6)
+
+### Fixes
+
+- Jump to 2.3.6-dev and update release process [#3814](https://github.com/wallabag/wallabag/pull/3814)
+- Fix tag API leak [#3823](https://github.com/wallabag/wallabag/pull/3823)
+- Validate imported entry to avoid error on import [#3816](https://github.com/wallabag/wallabag/pull/3816)
+- Fix incorrect reading time calculation for entries with CJK characters [#3820](https://github.com/wallabag/wallabag/pull/3820)
+- EntriesExport/epub: replace epub identifier with unique urn [#3827](https://github.com/wallabag/wallabag/pull/3827)
+- Fix settings field inverted [#3833](https://github.com/wallabag/wallabag/pull/3833)
+- Cast client id to avoid PG error [#3831](https://github.com/wallabag/wallabag/pull/3831)
+- Rework of EPUB/PDF exports [#3826](https://github.com/wallabag/wallabag/pull/3826)
+
+## [2.3.5](https://github.com/wallabag/wallabag/tree/2.3.5)
+   [Full Changelog](https://github.com/wallabag/wallabag/compare/2.3.4...2.3.5)
+
+### Fixes
+
+- Jump to 2.3.5-dev and update release process [#3778](https://github.com/wallabag/wallabag/pull/3778)
+- Remove preview picture from single entry view page [#3765](https://github.com/wallabag/wallabag/pull/3765)
+- Fix Android app login issue [#3784](https://github.com/wallabag/wallabag/pull/3784)
+- material: fix missing thumbnail on list view [#3782](https://github.com/wallabag/wallabag/pull/3782)
+- material: decrease size of tags on list view [#3783](https://github.com/wallabag/wallabag/pull/3783)
+- build: upgrade yarn dependencies, update prod assets [#3781](https://github.com/wallabag/wallabag/pull/3781)
+- No more dev for guzzle-site-authenticator [#3810](https://github.com/wallabag/wallabag/pull/3810)
+
 ## [2.3.4](https://github.com/wallabag/wallabag/tree/2.3.4)
    [Full Changelog](https://github.com/wallabag/wallabag/compare/2.3.3...2.3.4)
 

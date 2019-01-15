@@ -3,6 +3,7 @@
 namespace Wallabag\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Wallabag\CoreBundle\Entity\Tag;
 
 class TagRepository extends EntityRepository
@@ -45,12 +46,8 @@ class TagRepository extends EntityRepository
      */
     public function findAllTags($userId)
     {
-        $ids = $this->createQueryBuilder('t')
+        $ids = $this->getQueryBuilderByUser($userId)
             ->select('t.id')
-            ->leftJoin('t.entries', 'e')
-            ->where('e.user = :userId')->setParameter('userId', $userId)
-            ->groupBy('t.id')
-            ->orderBy('t.slug')
             ->getQuery()
             ->getArrayResult();
 
@@ -71,16 +68,28 @@ class TagRepository extends EntityRepository
      */
     public function findAllFlatTagsWithNbEntries($userId)
     {
-        return $this->createQueryBuilder('t')
+        return $this->getQueryBuilderByUser($userId)
             ->select('t.id, t.label, t.slug, count(e.id) as nbEntries')
             ->distinct(true)
-            ->leftJoin('t.entries', 'e')
-            ->where('e.user = :userId')
-            ->groupBy('t.id')
-            ->orderBy('t.slug')
-            ->setParameter('userId', $userId)
             ->getQuery()
             ->getArrayResult();
+    }
+
+    public function findByLabelsAndUser($labels, $userId)
+    {
+        $qb = $this->getQueryBuilderByUser($userId)
+            ->select('t.id');
+
+        $ids = $qb->andWhere($qb->expr()->in('t.label', $labels))
+            ->getQuery()
+            ->getArrayResult();
+
+        $tags = [];
+        foreach ($ids as $id) {
+            $tags[] = $this->find($id);
+        }
+
+        return $tags;
     }
 
     /**
@@ -101,13 +110,9 @@ class TagRepository extends EntityRepository
 
     public function findForArchivedArticlesByUser($userId)
     {
-        $ids = $this->createQueryBuilder('t')
+        $ids = $this->getQueryBuilderByUser($userId)
             ->select('t.id')
-            ->leftJoin('t.entries', 'e')
-            ->where('e.user = :userId')->setParameter('userId', $userId)
             ->andWhere('e.isArchived = true')
-            ->groupBy('t.id')
-            ->orderBy('t.slug')
             ->getQuery()
             ->getArrayResult();
 
@@ -117,5 +122,21 @@ class TagRepository extends EntityRepository
         }
 
         return $tags;
+    }
+
+    /**
+     * Retrieve a sorted list of tags used by a user.
+     *
+     * @param int $userId
+     *
+     * @return QueryBuilder
+     */
+    private function getQueryBuilderByUser($userId)
+    {
+        return $this->createQueryBuilder('t')
+            ->leftJoin('t.entries', 'e')
+            ->where('e.user = :userId')->setParameter('userId', $userId)
+            ->groupBy('t.id')
+            ->orderBy('t.slug');
     }
 }

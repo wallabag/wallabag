@@ -4,14 +4,17 @@ A release is mostly a git tag of http://github.com/wallabag/wallabag, following 
 
 ### Steps to release
 
-During this documentation, we assume the release is `$LAST_WALLABAG_RELEASE`.
+During this documentation, we assume the release is `$LAST_WALLABAG_RELEASE` (like 2.3.4).
 
-#### Files to edit
+#### Prepare the release
 
-- `app/config/wallabag.yml` (`wallabag_core.version`)
-- `CHANGELOG.md`
+- Update these files with new information
+    - `app/config/wallabag.yml` (`wallabag_core.version`)
+    - `CHANGELOG.md`
+- Create a PR named "Prepare $LAST_WALLABAG_RELEASE release".
+- Wait for test to be ok, merge it.
 
-#### Create release on GitHub
+#### Create a new release on GitHub
 
 - Run these commands to create the tag:
 
@@ -26,8 +29,8 @@ SYMFONY_ENV=prod composer up --no-dev
 
 ```diff
 script:
--    - travis_wait bash composer install -o  --no-interaction --no-progress --prefer-dist
-+    - travis_wait composer update --no-interaction --no-progress
+-    - travis_wait bash composer install -o --no-interaction --no-progress --prefer-dist
++    - travis_wait bash composer update -o --no-interaction --no-progress --prefer-dist
 ```
 
 - Then continue with these commands:
@@ -42,16 +45,15 @@ git push origin release-$LAST_WALLABAG_RELEASE
 - Run these command to create the package:
 
 ```
-make release master /tmp wllbg-release prod
+make release VERSION=$LAST_WALLABAG_RELEASE
 ```
 
-- [Create the new release on GitHub](https://github.com/wallabag/wallabag/releases/new). You have to upload on this page the package.
-- Delete the `release-$LAST_WALLABAG_RELEASE` branch and close the pull request (**DO NOT MERGE IT**).
+- [Create the new release on GitHub](https://github.com/wallabag/wallabag/releases/new) by targetting the `release-$LAST_WALLABAG_RELEASE` branch. You have to upload the package (generated previously).
+- Close the previously created pull request (**DO NOT MERGE IT**) and delete the `release-$LAST_WALLABAG_RELEASE` branch.
 - Update the URL shortener (used on `wllbg.org` to generate links like `https://wllbg.org/latest-v2-package` or `http://wllbg.org/latest-v2`)
-- Update [the downloads page](https://github.com/wallabag/wallabag.org/blob/master/content/pages/download.md) on the website (MD5 sum, release date)
 - Update Dockerfile https://github.com/wallabag/docker (and create a new tag)
-- Update wallabag.org website (downloads, releases and new blog post)
-- Put the next patch version suffixed with `-dev` in `app/config/config.yml` (`wallabag_core.version`)
+- Update wallabag.org website (downloads, MD5 sum, releases and new blog post)
+- Put the next patch version suffixed with `-dev` in `app/config/wallabag.yml` (`wallabag_core.version`)
 - Drink a :beer:!
 
 ### `composer.lock`

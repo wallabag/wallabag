@@ -33,6 +33,18 @@ class FirefoxImport extends BrowserImport
     /**
      * {@inheritdoc}
      */
+    public function validateEntry(array $importedEntry)
+    {
+        if (empty($importedEntry['uri'])) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function prepareEntry(array $entry = [])
     {
         $data = [

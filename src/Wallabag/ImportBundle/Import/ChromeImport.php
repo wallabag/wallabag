@@ -33,6 +33,18 @@ class ChromeImport extends BrowserImport
     /**
      * {@inheritdoc}
      */
+    public function validateEntry(array $importedEntry)
+    {
+        if (empty($importedEntry['url'])) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function prepareEntry(array $entry = [])
     {
         $data = [

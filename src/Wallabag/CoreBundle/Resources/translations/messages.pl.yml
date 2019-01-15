@@ -253,6 +253,11 @@ entry:
     confirm:
         delete: "Czy jesteś pewien, że chcesz usunąć ten artykuł?"
         delete_tag: "Czy jesteś pewien, że chcesz usunąć ten tag, z tego artykułu?"
+    metadata:
+        # reading_time: "Estimated reading time"
+        # reading_time_minutes_short: "%readingTime% min"
+        # address: "Address"
+        # added_on: "Added on"
 
 about:
     page_title: 'O nas'
@@ -403,7 +408,8 @@ tag:
         placeholder: 'Możesz zaktualizować nazwę taga.'
 
 export:
-     footer_template: '<div style="text-align:center;"><p>Stworzone przez wallabag z %method%</p><p>Proszę zgłoś <a href="https://github.com/wallabag/wallabag/issues">sprawę</a>, jeżeli masz problem z wyświetleniem tego e-booka na swoim urządzeniu.</p></div>'
+    footer_template: '<div style="text-align:center;"><p>Stworzone przez wallabag z %method%</p><p>Proszę zgłoś <a href="https://github.com/wallabag/wallabag/issues">sprawę</a>, jeżeli masz problem z wyświetleniem tego e-booka na swoim urządzeniu.</p></div>'
+    # unknown: 'Unknown'
 
 import:
     page_title: 'Import'

@@ -149,9 +149,9 @@ abstract class BrowserImport extends AbstractImport
     /**
      * Parse and insert all given entries.
      *
-     * @param $entries
+     * @param array $entries
      */
-    protected function parseEntries($entries)
+    protected function parseEntries(array $entries)
     {
         $i = 1;
         $entryToBeFlushed = [];

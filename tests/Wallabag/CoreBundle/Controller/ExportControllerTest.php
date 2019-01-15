@@ -98,7 +98,7 @@ class ExportControllerTest extends WallabagCoreTestCase
 
         $headers = $client->getResponse()->headers;
         $this->assertSame('application/x-mobipocket-ebook', $headers->get('content-type'));
-        $this->assertSame('attachment; filename="' . preg_replace('/[^A-Za-z0-9\-]/', '', $content->getTitle()) . '.mobi"', $headers->get('content-disposition'));
+        $this->assertSame('attachment; filename="' . $this->getSanitizedFilename($content->getTitle()) . '.mobi"', $headers->get('content-disposition'));
         $this->assertSame('binary', $headers->get('content-transfer-encoding'));
     }
 
@@ -126,7 +126,7 @@ class ExportControllerTest extends WallabagCoreTestCase
 
         $headers = $client->getResponse()->headers;
         $this->assertSame('application/pdf', $headers->get('content-type'));
-        $this->assertSame('attachment; filename="Tag_entries articles.pdf"', $headers->get('content-disposition'));
+        $this->assertSame('attachment; filename="Tag foo bar articles.pdf"', $headers->get('content-disposition'));
         $this->assertSame('binary', $headers->get('content-transfer-encoding'));
     }
 
@@ -212,7 +212,7 @@ class ExportControllerTest extends WallabagCoreTestCase
 
         $headers = $client->getResponse()->headers;
         $this->assertSame('application/json', $headers->get('content-type'));
-        $this->assertSame('attachment; filename="' . $contentInDB->getTitle() . '.json"', $headers->get('content-disposition'));
+        $this->assertSame('attachment; filename="' . $this->getSanitizedFilename($contentInDB->getTitle()) . '.json"', $headers->get('content-disposition'));
         $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
 
         $content = json_decode($client->getResponse()->getContent(), true);
@@ -280,5 +280,10 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty('domain_name', (string) $content->entry[0]->domain_name);
         $this->assertNotEmpty('created_at', (string) $content->entry[0]->created_at);
         $this->assertNotEmpty('updated_at', (string) $content->entry[0]->updated_at);
+    }
+
+    private function getSanitizedFilename($title)
+    {
+        return preg_replace('/[^A-Za-z0-9\- \']/', '', iconv('utf-8', 'us-ascii//TRANSLIT', $title));
     }
 }

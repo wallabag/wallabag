@@ -82,14 +82,14 @@
         "javibravo/simpleue": "^2.0",
         "symfony/dom-crawler": "^3.4",
         "friendsofsymfony/jsrouting-bundle": "^2.2",
-        "bdunogier/guzzle-site-authenticator": "^1.0.0@dev",
+        "bdunogier/guzzle-site-authenticator": "^1.0.0",
         "defuse/php-encryption": "^2.1",
         "html2text/html2text": "^4.1"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~3.0",
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.4",
+        "symfony/phpunit-bridge": "^4.2",
         "friendsofphp/php-cs-fixer": "~2.13",
         "m6web/redis-mock": "^4.1",
         "dama/doctrine-test-bundle": "^5.0"

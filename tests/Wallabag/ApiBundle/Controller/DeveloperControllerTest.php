@@ -56,6 +56,20 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $this->assertArrayHasKey('refresh_token', $data);
     }
 
+    public function testCreateTokenWithBadClientId()
+    {
+        $client = $this->getClient();
+        $client->request('POST', '/oauth/v2/token', [
+            'grant_type' => 'password',
+            'client_id' => '$WALLABAG_CLIENT_ID',
+            'client_secret' => 'secret',
+            'username' => 'admin',
+            'password' => 'mypassword',
+        ]);
+
+        $this->assertSame(400, $client->getResponse()->getStatusCode());
+    }
+
     public function testListingClient()
     {
         $this->logInAs('admin');
