@@ -6,9 +6,13 @@ services:
 
 # used for HHVM
 addons:
+    hosts:
+      - wallabag
     apt:
         packages:
             - tidy
+    sauce_connect: true
+    
 
 # cache vendor dirs
 cache:
@@ -31,6 +35,9 @@ node_js:
     - "5"
 
 env:
+   global:
+    - SELENIUM_URL=http://$SAUCE_USERNAME:$SAUCE_ACCESS_KEY@localhost:4445/wd/hub
+   matrix:
     - DB=mysql
     - DB=pgsql
     - DB=sqlite
@@ -40,6 +47,8 @@ matrix:
     include:
         - php: 7.0
           env: CS_FIXER=run VALIDATE_TRANSLATION_FILE=run ASSETS=build DB=sqlite
+        - php: 7.0
+          env: CS_FIXER=run ASSETS=build RUN_UI_TEST=true DB=mysql
     allow_failures:
         - php: nightly
 
@@ -57,12 +66,14 @@ install:
     - if [[ $ASSETS = build ]]; then yarn install; fi;
 
 before_script:
+    - export BEHAT_PARAMS='{"extensions":{"Behat\\MinkExtension":{"selenium2":{"wd_host":"'${SELENIUM_URL}'"}}}}'
     - PHP=$TRAVIS_PHP_VERSION
     - if [[ ! $PHP = hhvm* ]]; then echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi;
     # xdebug isn't enable for PHP 7.1
     - if [[ ! $PHP = hhvm* ]]; then phpenv config-rm xdebug.ini || echo "xdebug not available"; fi
     - composer self-update --no-progress
     - if [[ $DB = pgsql ]]; then psql -c 'create database wallabag_test;' -U postgres; fi;
+    - if [[ $DB = mysql ]]; then mysql -e 'create database wallabag_test;' -u root; fi;
     # increase swap to avoid "proc_open(): fork failed - Cannot allocate memory"
     # this should be removed when no more PHP 5 build will be defined
     - sudo swapon -s
@@ -73,7 +84,7 @@ before_script:
     - sudo swapon -s
 
 script:
-    - travis_wait bash composer install -o --no-interaction --no-progress --prefer-dist
+    - travis_wait bash composer update -o --no-interaction --no-progress --prefer-dist
     - echo "travis_fold:start:prepare"
     - make prepare DB=$DB
     - echo "travis_fold:end:prepare"
@@ -87,4 +98,8 @@ script:
     - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml src/Wallabag/CoreBundle/Resources/translations -v ; fi;
     - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml app/Resources/CraueConfigBundle/translations -v ; fi;
     - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml src/Wallabag/UserBundle/Resources/translations -v ; fi;
-    - if [[ $ASSETS = build ]]; then yarn run build:prod; fi;
+    - if [[ $ASSETS = build ]] && [[ $RUN_UI_TEST != true ]]; then yarn run build:prod; fi;
+    - if [[ $RUN_UI_TEST = true ]]; then mv app/config/parameters_acceptance.yml app/config/parameters.yml; fi;
+    - if [[ $RUN_UI_TEST = true ]]; then yarn run build:dev; fi; 
+    - if [[ $RUN_UI_TEST = true ]]; then php bin/console server:start; fi;
+    - if [[ $RUN_UI_TEST = true ]]; then php bin/behat --profile=test; fi;

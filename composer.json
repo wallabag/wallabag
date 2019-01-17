@@ -94,7 +94,13 @@
         "symfony/phpunit-bridge": "3.4.x-dev",
         "friendsofphp/php-cs-fixer": "~2.0",
         "m6web/redis-mock": "^2.0",
-        "dama/doctrine-test-bundle": "^4.0"
+        "dama/doctrine-test-bundle": "^4.0",
+        "behat/behat": "~3.5.0",
+        "behat/mink": "~1.7.1",
+        "behat/mink-extension": "2.3.1",
+        "behat/mink-selenium2-driver":"dev-master",
+        "bossa/phpspec2-expect": "1.*",
+        "sensiolabs/behat-page-object-extension": "^2.0"
     },
     "scripts": {
         "post-cmd": [

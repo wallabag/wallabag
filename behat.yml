@@ -1,0 +1,33 @@
+default:
+  suites:
+    default:
+      contexts:
+        - FeatureContext: &common_feature_context_params
+           parameters:
+            adminUserName: admin
+            adminPassword: mypassword
+  extensions:
+     SensioLabs\Behat\PageObjectExtension: ~
+     Behat\MinkExtension:
+      base_url: "http://localhost:8000"
+      browser_name: chrome
+      sessions:
+        default: 
+          selenium2:
+            wd_host: "http://localhost:4444/wd/hub"
+            capabilities: {"browserName":"chrome","version":"71","platform":"ANY","browserVersion":"71","browser":"chrome","name":"Behat Test"}
+            
+test:
+  suites:
+    default:
+      contexts:
+        - FeatureContext: *common_feature_context_params
+  extensions:
+     SensioLabs\Behat\PageObjectExtension: ~
+     Behat\MinkExtension:
+        base_url: "http://wallabag:8000"
+        browser_name: chrome
+        sessions:
+           default: 
+             selenium2:
+               capabilities: {"browserName":"chrome","version":"71","platform":"ANY","browserVersion":"71","browser":"chrome","name":"Behat Test"}

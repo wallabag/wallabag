@@ -57,3 +57,8 @@ app/Resources/build/
 admin-export.json
 specialexport.json
 /data/site-credentials-secret-key.txt
+
+#UI test generated file
+.buildpath
+.project
+.settings/
