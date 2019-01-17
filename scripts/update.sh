@@ -28,10 +28,14 @@ set -e
 set -u
 
 COMPOSER_COMMAND='composer'
+REQUIRE_FILE='scripts/require.sh'
 
-DIR="${BASH_SOURCE}"
-if [ ! -d "$DIR" ]; then DIR="$PWD/scripts"; fi
-. "$DIR/require.sh"
+if [ ! -f "$REQUIRE_FILE" ]; then
+  echo "Cannot find $REQUIRE_FILE"
+  exit 1
+fi
+
+. "$REQUIRE_FILE"
 
 rm -rf var/cache/*
 git fetch origin
