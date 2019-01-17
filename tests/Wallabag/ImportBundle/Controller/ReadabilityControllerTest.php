@@ -125,7 +125,7 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
 
         $tags = $content->getTags();
         $this->assertContains('foot', $tags, 'It includes the "foot" tag');
-        $this->assertSame(1, \count($tags));
+        $this->assertCount(1, $tags);
 
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
         $this->assertSame('2016-09-08', $content->getCreatedAt()->format('Y-m-d'));

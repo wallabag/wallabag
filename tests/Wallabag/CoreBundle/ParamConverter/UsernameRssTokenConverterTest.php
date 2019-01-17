@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Command;
+namespace Tests\Wallabag\CoreBundle\ParamConverter;
 
 use PHPUnit\Framework\TestCase;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;

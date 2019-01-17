@@ -794,7 +794,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertArrayHasKey('tags', $content);
-        $this->assertSame($nbTags + 3, \count($content['tags']));
+        $this->assertCount($nbTags + 3, $content['tags']);
 
         $entryDB = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
@@ -834,7 +834,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertArrayHasKey('tags', $content);
-        $this->assertSame($nbTags - 1, \count($content['tags']));
+        $this->assertCount($nbTags - 1, $content['tags']);
     }
 
     public function testSaveIsArchivedAfterPost()

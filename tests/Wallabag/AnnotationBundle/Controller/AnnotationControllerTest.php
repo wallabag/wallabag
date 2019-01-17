@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\AnnotationBundle\Controller;
+namespace Tests\Wallabag\AnnotationBundle\Controller;
 
 use Tests\Wallabag\AnnotationBundle\WallabagAnnotationTestCase;
 use Wallabag\AnnotationBundle\Entity\Annotation;

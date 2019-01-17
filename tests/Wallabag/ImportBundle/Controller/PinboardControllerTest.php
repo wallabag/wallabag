@@ -127,7 +127,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
         $this->assertContains('foot', $tags, 'It includes the "foot" tag');
         $this->assertContains('varnish', $tags, 'It includes the "varnish" tag');
         $this->assertContains('php', $tags, 'It includes the "php" tag');
-        $this->assertSame(3, \count($tags));
+        $this->assertCount(3, $tags);
 
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
         $this->assertSame('2016-10-26', $content->getCreatedAt()->format('Y-m-d'));

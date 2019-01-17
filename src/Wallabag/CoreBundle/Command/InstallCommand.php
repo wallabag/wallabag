@@ -94,8 +94,9 @@ class InstallCommand extends ContainerAwareCommand
         $status = '<info>OK!</info>';
         $help = '';
 
+        $conn = $this->getContainer()->get('doctrine')->getManager()->getConnection();
+
         try {
-            $conn = $this->getContainer()->get('doctrine')->getManager()->getConnection();
             $conn->connect();
         } catch (\Exception $e) {
             if (false === strpos($e->getMessage(), 'Unknown database')
