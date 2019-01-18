@@ -81,28 +81,7 @@ class ConfigController extends Controller
         ]);
         $userForm->handleRequest($request);
 
-        // `googleTwoFactor` isn't a field within the User entity, we need to define it's value in a different way
-        if ($this->getParameter('twofactor_auth') && true === $user->isGoogleAuthenticatorEnabled() && false === $userForm->isSubmitted()) {
-            $userForm->get('googleTwoFactor')->setData(true);
-        }
-
         if ($userForm->isSubmitted() && $userForm->isValid()) {
-            // handle creation / reset of the OTP secret if checkbox changed from the previous state
-            if ($this->getParameter('twofactor_auth')) {
-                if (true === $userForm->get('googleTwoFactor')->getData() && false === $user->isGoogleAuthenticatorEnabled()) {
-                    $secret = $this->get('scheb_two_factor.security.google_authenticator')->generateSecret();
-
-                    $user->setGoogleAuthenticatorSecret($secret);
-                    $user->setEmailTwoFactor(false);
-                    $user->setBackupCodes((new BackupCodes())->toArray());
-
-                    $this->addFlash('OtpQrCode', $this->get('scheb_two_factor.security.google_authenticator')->getQRContent($user));
-                } elseif (false === $userForm->get('googleTwoFactor')->getData() && true === $user->isGoogleAuthenticatorEnabled()) {
-                    $user->setGoogleAuthenticatorSecret(null);
-                    $user->setBackupCodes(null);
-                }
-            }
-
             $userManager->updateUser($user, true);
 
             $this->addFlash(
@@ -175,9 +154,116 @@ class ConfigController extends Controller
             ],
             'twofactor_auth' => $this->getParameter('twofactor_auth'),
             'wallabag_url' => $this->getParameter('domain_name'),
-            'enabled_users' => $this->get('wallabag_user.user_repository')
-                ->getSumEnabledUsers(),
+            'enabled_users' => $this->get('wallabag_user.user_repository')->getSumEnabledUsers(),
         ]);
+    }
+
+    /**
+     * Enable 2FA using email.
+     *
+     * @param Request $request
+     *
+     * @Route("/config/otp/email", name="config_otp_email")
+     */
+    public function otpEmailAction(Request $request)
+    {
+        if (!$this->getParameter('twofactor_auth')) {
+            return $this->createNotFoundException('two_factor not enabled');
+        }
+
+        $user = $this->getUser();
+
+        $user->setGoogleAuthenticatorSecret(null);
+        $user->setBackupCodes(null);
+        $user->setEmailTwoFactor(true);
+
+        $this->container->get('fos_user.user_manager')->updateUser($user, true);
+
+        $this->addFlash(
+            'notice',
+            'flashes.config.notice.otp_enabled'
+        );
+
+        return $this->redirect($this->generateUrl('config') . '#set3');
+    }
+
+    /**
+     * Enable 2FA using OTP app, user will need to confirm the generated code from the app.
+     *
+     * @Route("/config/otp/app", name="config_otp_app")
+     */
+    public function otpAppAction()
+    {
+        if (!$this->getParameter('twofactor_auth')) {
+            return $this->createNotFoundException('two_factor not enabled');
+        }
+
+        $user = $this->getUser();
+
+        if (!$user->isGoogleTwoFactor()) {
+            $secret = $this->get('scheb_two_factor.security.google_authenticator')->generateSecret();
+
+            $user->setGoogleAuthenticatorSecret($secret);
+            $user->setEmailTwoFactor(false);
+            $user->setBackupCodes((new BackupCodes())->toArray());
+
+            $this->container->get('fos_user.user_manager')->updateUser($user, true);
+        }
+
+        return $this->render('WallabagCoreBundle:Config:otp_app.html.twig', [
+            'qr_code' => $this->get('scheb_two_factor.security.google_authenticator')->getQRContent($user),
+        ]);
+    }
+
+    /**
+     * Cancelling 2FA using OTP app.
+     *
+     * @Route("/config/otp/app/cancel", name="config_otp_app_cancel")
+     */
+    public function otpAppCancelAction()
+    {
+        if (!$this->getParameter('twofactor_auth')) {
+            return $this->createNotFoundException('two_factor not enabled');
+        }
+
+        $user = $this->getUser();
+        $user->setGoogleAuthenticatorSecret(null);
+        $user->setBackupCodes(null);
+
+        $this->container->get('fos_user.user_manager')->updateUser($user, true);
+
+        return $this->redirect($this->generateUrl('config') . '#set3');
+    }
+
+    /**
+     * Validate OTP code.
+     *
+     * @param Request $request
+     *
+     * @Route("/config/otp/app/check", name="config_otp_app_check")
+     */
+    public function otpAppCheckAction(Request $request)
+    {
+        $isValid = $this->get('scheb_two_factor.security.google_authenticator')->checkCode(
+            $this->getUser(),
+            $request->get('_auth_code')
+        );
+
+        if (true === $isValid) {
+            $this->addFlash(
+                'notice',
+                'flashes.config.notice.otp_enabled'
+            );
+
+            return $this->redirect($this->generateUrl('config') . '#set3');
+        }
+
+        $this->addFlash(
+            'two_factor',
+            'scheb_two_factor.code_invalid'
+        );
+
+        return $this->redirect($this->generateUrl('config_otp_app'));
     }
 
     /**

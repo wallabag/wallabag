@@ -102,12 +102,16 @@ config:
         two_factor_description: "Activer l’authentification double-facteur veut dire que vous allez recevoir un code par courriel OU que vous devriez utiliser une application de mot de passe à usage unique (comme Google Authenticator, Authy or FreeOTP) pour obtenir un code temporaire à chaque nouvelle connexion non approuvée. Vous ne pouvez pas choisir les deux options."
         name_label: "Nom"
         email_label: "Adresse courriel"
-        emailTwoFactor_label: 'En utlisant l’email (recevez un code par email)'
-        googleTwoFactor_label: 'En utilisant une application de mot de passe à usage unique (ouvrez l’app, comme Google Authenticator, Authy or FreeOTP, pour obtenir un mot de passe à usage unique)'
-        two_factor_code_description_1: Vous venez d’activer l’authentification double-facteur, ouvrez votre application OTP pour configurer la génération du mot de passe à usage unique. Ces informations disparaîtront après un rechargement de la page.
-        two_factor_code_description_2: 'Vous pouvez scanner le QR code avec votre application :'
-        two_factor_code_description_3: 'Ou utiliser le code suivant :'
-        two_factor_code_description_4: 'N’oubliez pas de sauvegarder ces codes de secours dans un endroit sûr, vous pourrez les utiliser si vous ne pouvez plus accéder à votre application OTP :'
+        two_factor:
+            emailTwoFactor_label: 'En utlisant l’email (recevez un code par email)'
+            googleTwoFactor_label: 'En utilisant une application de mot de passe à usage unique (ouvrez l’app, comme Google Authenticator, Authy or FreeOTP, pour obtenir un mot de passe à usage unique)'
+            table_method: Méthode
+            table_state: État
+            table_action: Action
+            state_enabled: Activé
+            state_disabled: Désactivé
+            action_email: Utiliser l'email
+            action_app: Utiliser une app OTP
         delete:
             title: "Supprimer mon compte (attention danger !)"
             description: "Si vous confirmez la suppression de votre compte, TOUS les articles, TOUS les tags, TOUTES les annotations et votre compte seront DÉFINITIVEMENT supprimé (c’est IRRÉVERSIBLE). Vous serez ensuite déconnecté."
@@ -165,6 +169,15 @@ config:
                 and: "Une règle ET l’autre"
                 matches: "Teste si un <i>sujet</i> correspond à une <i>recherche</i> (non sensible à la casse).<br />Exemple : <code>title matches \"football\"</code>"
                 notmatches: "Teste si un <i>sujet</i> ne correspond pas à une <i>recherche</i> (non sensible à la casse).<br />Exemple : <code>title notmatches \"football\"</code>"
+    otp:
+        page_title: Authentification double-facteur
+        app:
+            two_factor_code_description_1: Vous venez d’activer l’authentification double-facteur, ouvrez votre application OTP pour configurer la génération du mot de passe à usage unique. Ces informations disparaîtront après un rechargement de la page.
+            two_factor_code_description_2: 'Vous pouvez scanner le QR code avec votre application :'
+            two_factor_code_description_3: 'N’oubliez pas de sauvegarder ces codes de secours dans un endroit sûr, vous pourrez les utiliser si vous ne pouvez plus accéder à votre application OTP :'
+            two_factor_code_description_4: 'Testez un code généré par votre application OTP :'
+            cancel: Annuler
+            enable: Activer
 
 entry:
     default_title: "Titre de l’article"
@@ -585,6 +598,7 @@ flashes:
             tags_reset: "Tags supprimés"
             entries_reset: "Articles supprimés"
             archived_reset: "Articles archivés supprimés"
+            otp_enabled: "Authentification à double-facteur activée"
     entry:
         notice:
             entry_already_saved: "Article déjà sauvegardé le %date%"
