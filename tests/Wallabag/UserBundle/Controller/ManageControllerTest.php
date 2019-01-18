@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\UserBundle\Tests\Controller;
+namespace Tests\Wallabag\UserBundle\Controller;
 
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 

@@ -67,6 +67,8 @@ script:
     - make fixtures
 
     - if [[ $VALIDATE_TRANSLATION_FILE = '' ]]; then SYMFONY_PHPUNIT_VERSION=6.5 ./bin/simple-phpunit -v ; fi;
+    # PHPStan needs PHPUnit to be installed and cache app to be generated
+    - if [[ $VALIDATE_TRANSLATION_FILE = '' ]]; then php bin/phpstan analyse src tests --no-progress --level 1 ; fi;
     - if [[ $CS_FIXER = run ]]; then php bin/php-cs-fixer fix --verbose --dry-run ; fi;
     - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml src/Wallabag/CoreBundle/Resources/translations -v ; fi;
     - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml app/Resources/CraueConfigBundle/translations -v ; fi;

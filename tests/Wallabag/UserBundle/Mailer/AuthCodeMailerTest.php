@@ -6,22 +6,6 @@ use PHPUnit\Framework\TestCase;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\UserBundle\Mailer\AuthCodeMailer;
 
-/**
- * @see https://www.pmg.com/blog/integration-testing-swift-mailer/
- */
-final class CountableMemorySpool extends \Swift_MemorySpool implements \Countable
-{
-    public function count()
-    {
-        return \count($this->messages);
-    }
-
-    public function getMessages()
-    {
-        return $this->messages;
-    }
-}
-
 class AuthCodeMailerTest extends TestCase
 {
     protected $mailer;

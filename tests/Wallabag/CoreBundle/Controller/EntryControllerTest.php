@@ -522,9 +522,12 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $title = $crawler->filter('div[id=article] h1')->extract(['_text']));
+        $title = $crawler->filter('div[id=article] h1')->extract(['_text']);
+        $this->assertGreaterThan(1, $title);
         $this->assertContains('My updated title hehe :)', $title[0]);
-        $this->assertSame(1, \count($stats = $crawler->filter('div[class=tools] ul[class=stats] li a[class=tool]')->extract(['_text'])));
+
+        $stats = $crawler->filter('div[class=tools] ul[class=stats] li a[class=tool]')->extract(['_text']);
+        $this->assertCount(1, $stats);
         $this->assertNotContains('example.io', trim($stats[0]));
     }
 
@@ -1326,10 +1329,6 @@ class EntryControllerTest extends WallabagCoreTestCase
             'zh_CN' => [
                 'http://www.hao123.com/shequ?__noscript__-=1',
                 'zh_CN',
-            ],
-            'ru' => [
-                'https://www.kp.ru/daily/26879.7/3921982/',
-                'ru',
             ],
             'pt_BR' => [
                 'https://politica.estadao.com.br/noticias/eleicoes,campanha-catatonica,70002491983',

@@ -11,7 +11,7 @@ class RssControllerTest extends WallabagCoreTestCase
         $doc = new \DOMDocument();
         $doc->loadXML($xml);
 
-        $xpath = new \DOMXpath($doc);
+        $xpath = new \DOMXPath($doc);
 
         if (null === $nb) {
             $this->assertGreaterThan(0, $xpath->query('//item')->length);
