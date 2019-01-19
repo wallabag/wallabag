@@ -325,8 +325,8 @@ class EntryRepository extends EntityRepository
      * Find an entry by its url and its owner.
      * If it exists, return the entry otherwise return false.
      *
-     * @param $url
-     * @param $userId
+     * @param string $url
+     * @param int    $userId
      *
      * @return Entry|bool
      */
@@ -417,8 +417,8 @@ class EntryRepository extends EntityRepository
     /**
      * Find all entries by url and owner.
      *
-     * @param $url
-     * @param $userId
+     * @param string $url
+     * @param int    $userId
      *
      * @return array
      */
@@ -434,20 +434,17 @@ class EntryRepository extends EntityRepository
     /**
      * Returns a random entry, filtering by status.
      *
-     * @param $userId
-     * @param string $type can be unread, archive, starred, etc
+     * @param int    $userId
+     * @param string $type   Can be unread, archive, starred, etc
      *
      * @throws \Doctrine\ORM\NoResultException
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     *
-     * @see https://github.com/doctrine/doctrine2/issues/5479#issuecomment-403862934
      *
      * @return Entry
      */
     public function getRandomEntry($userId, $type = '')
     {
         $qb = $this->getQueryBuilderByUser($userId)
-            ->select('MIN(e.id)', 'MAX(e.id)');
+            ->select('e.id');
 
         switch ($type) {
             case 'unread':
@@ -465,18 +462,12 @@ class EntryRepository extends EntityRepository
                 break;
         }
 
-        $idLimits = $qb
-            ->getQuery()
-            ->getOneOrNullResult();
-        $randomPossibleIds = rand($idLimits[1], $idLimits[2]);
+        $ids = $qb->getQuery()->getArrayResult();
 
-        return $qb
-            ->select('e')
-            ->andWhere('e.id >= :random_id')
-            ->setParameter('random_id', $randomPossibleIds)
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getSingleResult();
+        // random select one in the list
+        $randomId = $ids[mt_rand(0, \count($ids) - 1)]['id'];
+
+        return $this->find($randomId);
     }
 
     /**

@@ -253,7 +253,7 @@ class EntryController extends Controller
      *
      * @param string $type
      *
-     * @Route("/{type}/random", name="random_entry", requirements={"_locale": "unread|starred|archive|untagged|all"})
+     * @Route("/{type}/random", name="random_entry", requirements={"type": "unread|starred|archive|untagged|all"})
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

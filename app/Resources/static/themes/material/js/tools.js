@@ -8,6 +8,7 @@ function initFilters() {
     $('#clear_form_filters').on('click', () => {
       $('#filters input').val('');
       $('#filters :checked').removeAttr('checked');
+
       return false;
     });
   }
@@ -21,4 +22,15 @@ function initExport() {
   }
 }
 
-export { initExport, initFilters };
+function initRandom() {
+  // no display if export (ie: entries) not available
+  if ($('div').is('#export')) {
+    $('#button_random').show();
+  }
+}
+
+export {
+  initExport,
+  initFilters,
+  initRandom,
+};

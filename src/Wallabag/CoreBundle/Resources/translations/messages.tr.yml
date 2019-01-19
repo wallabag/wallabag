@@ -37,6 +37,7 @@ menu:
         add_new_entry: 'Yeni bir makale ekle'
         search: 'Ara'
         filter_entries: 'Filtrele'
+        # random_entry: Jump to a random entry from that list
         export: 'Dışa Aktar'
     search_form:
         input_label: 'Aramak istediğiniz herhangi bir şey yazın'

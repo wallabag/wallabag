@@ -37,6 +37,7 @@ menu:
         add_new_entry: 'افزودن مقالهٔ تازه'
         search: 'جستجو'
         filter_entries: 'فیلترکردن مقاله‌ها'
+        # random_entry: Jump to a random entry from that list
         export: 'برون‌بری'
     search_form:
         input_label: 'جستجوی خود را این‌جا بنویسید:'

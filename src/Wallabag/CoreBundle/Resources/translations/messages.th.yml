@@ -37,6 +37,7 @@ menu:
         add_new_entry: 'เพิ่มรายการใหม่'
         search: 'ค้นหา'
         filter_entries: 'ตัวกรองรายการ'
+        # random_entry: Jump to a random entry from that list
         export: 'นำข้อมูลออก'
     search_form:
         input_label: 'ค้นหาที่นี้'

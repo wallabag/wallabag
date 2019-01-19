@@ -37,6 +37,7 @@ menu:
         add_new_entry: 'Add a new entry'
         search: 'Search'
         filter_entries: 'Filter entries'
+        random_entry: Jump to a random entry from that list
         export: 'Export'
     search_form:
         input_label: 'Enter your search here'

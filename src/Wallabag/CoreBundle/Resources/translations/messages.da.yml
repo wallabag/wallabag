@@ -37,6 +37,7 @@ menu:
         add_new_entry: 'Tilføj ny artikel'
         search: 'Søg'
         filter_entries: 'Filtrer artikler'
+        # random_entry: Jump to a random entry from that list
         # export: 'Export'
     search_form:
         input_label: 'Indtast søgning'

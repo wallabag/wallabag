@@ -28,9 +28,11 @@
         <div class="nb-results">{{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}</div>
         <div class="pagination">
             <a href="{{ path('switch_view_mode') }}"><i class="listMode-btn material-icons md-24">{% if listMode == 0 %}list{% else %}view_module{% endif %}</i></a>
-            <a href="{{ path('random_entry', { 'type': currentRoute }) }}">random</a>
             {% if app.user.config.rssToken %}
                 {% include "@WallabagCore/themes/common/Entry/_rss_link.html.twig" %}
+            {% endif %}
+            {% if currentRoute in ['unread', 'starred', 'archive', 'untagged', 'all'] %}
+                <a href="{{ path('random_entry', { 'type': currentRoute }) }}"><i class="btn-clickable material-icons md-24 js-random-action">shuffle</i></a>
             {% endif %}
             <i class="btn-clickable download-btn material-icons md-24 js-export-action">file_download</i>
             <i class="btn-clickable filter-btn material-icons md-24 js-filters-action">filter_list</i>

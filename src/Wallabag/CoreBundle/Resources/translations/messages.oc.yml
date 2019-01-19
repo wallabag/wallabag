@@ -37,6 +37,7 @@ menu:
         add_new_entry: 'Enregistrar un novèl article'
         search: 'Cercar'
         filter_entries: 'Filtrar los articles'
+        # random_entry: Jump to a random entry from that list
         export: 'Exportar'
     search_form:
         input_label: 'Picatz vòstre mot-clau a cercar aquí'

@@ -8,7 +8,7 @@ import 'materialize-css/dist/js/materialize';
 import '../_global/index';
 
 /* Tools */
-import { initExport, initFilters } from './js/tools';
+import { initExport, initFilters, initRandom } from './js/tools';
 
 /* Import shortcuts */
 import './js/shortcuts/main';
@@ -32,8 +32,10 @@ $(document).ready(() => {
     format: 'dd/mm/yyyy',
     container: 'body',
   });
+
   initFilters();
   initExport();
+  initRandom();
 
   const toggleNav = (toShow, toFocus) => {
     $('.nav-panel-actions').hide(100);

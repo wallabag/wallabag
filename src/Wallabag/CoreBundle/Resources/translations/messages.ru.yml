@@ -36,6 +36,7 @@ menu:
         add_new_entry: 'Добавить новую запись'
         search: 'Поиск'
         filter_entries: 'Фильтр записей'
+        # random_entry: Jump to a random entry from that list
         export: 'Экспорт'
     search_form:
         input_label: 'Введите текст для поиска'
