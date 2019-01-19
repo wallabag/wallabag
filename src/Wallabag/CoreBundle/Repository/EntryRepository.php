@@ -3,6 +3,7 @@
 namespace Wallabag\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
@@ -437,7 +438,7 @@ class EntryRepository extends EntityRepository
      * @param int    $userId
      * @param string $type   Can be unread, archive, starred, etc
      *
-     * @throws \Doctrine\ORM\NoResultException
+     * @throws NoResultException
      *
      * @return Entry
      */
@@ -463,6 +464,10 @@ class EntryRepository extends EntityRepository
         }
 
         $ids = $qb->getQuery()->getArrayResult();
+
+        if (empty($ids)) {
+            throw new NoResultException();
+        }
 
         // random select one in the list
         $randomId = $ids[mt_rand(0, \count($ids) - 1)]['id'];
