@@ -161,11 +161,9 @@ class ConfigController extends Controller
     /**
      * Enable 2FA using email.
      *
-     * @param Request $request
-     *
      * @Route("/config/otp/email", name="config_otp_email")
      */
-    public function otpEmailAction(Request $request)
+    public function otpEmailAction()
     {
         if (!$this->getParameter('twofactor_auth')) {
             return $this->createNotFoundException('two_factor not enabled');
