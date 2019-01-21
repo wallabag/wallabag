@@ -1,1 +1,6 @@
-{}
+auth_code:
+  on: på
+  mailer:
+    subject: wallabag-identitetsbekreftelseskode
+    body:
+      signature: Hilsen wallabag-laget
