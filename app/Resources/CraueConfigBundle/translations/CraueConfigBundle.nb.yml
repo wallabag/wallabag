@@ -1,1 +1,34 @@
-{}
+settings_changed: Oppsett oppdatert
+download_pictures: Last ned bilder til tjeneren din
+carrot: Skru på deling til Carrot
+diaspora_url: Diaspora-nettadresse, hvis tjenesten er avskrudd
+export_epub: Skru på ePub-eksport
+export_mobi: Skru på .mobi-eksport
+export_pdf: Skru på PDF-eksport
+export_csv: Skru på CSV-eksport
+export_json: Skru på JSON-eksport
+export_txt: Skru på TXT-eksport
+export_xml: Skru på XML-eksport
+import_with_rabbitmq: Skru på RabbitMQ for å importere data asynkront
+import_with_redis: Skru på Redis for å importere data asynkront
+shaarli_url: Shaarli-nettadresse, hvis tjenesten er avskrudd
+share_diaspora: Skru på deling til Diaspora
+share_mail: Skru på deling via e-post
+share_shaarli: Skru på deling til Shaarli
+share_twitter: Skru på deling til Twitter
+share_unmark: Skru på deling til Unmark.it
+show_printlink: Vis en lenke for å skrive ut innhold
+wallabag_support_url: Støtte-nettadresse for wallabag
+entry: artikkel
+export: eksporter
+import: importer
+misc: ymse
+modify_settings: bruk
+piwik_host: Vertskap for din nettside hos Piwik (uten http:// eller https://)
+piwik_site_id: ID for din nettside hos Piwik
+piwik_enabled: Skru på Piwik
+demo_mode_enabled: Skru på demo-modus? (Kun brukt for offentlig wallabag-demo)
+demo_mode_username: Demo-bruker
+share_public: Tillat offentlige nettadresser for oppføringer
+download_images_enabled: Last ned bilder lokalt
+restricted_access: Skru på identitetsbekreftelse for nettsider med betalingsmur
