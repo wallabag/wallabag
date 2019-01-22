@@ -37,6 +37,7 @@ menu:
         add_new_entry: 'Introdu un nou articol'
         search: 'Căutare'
         filter_entries: 'Filtrează articolele'
+        # random_entry: Jump to a random entry from that list
         # export: 'Export'
     search_form:
         input_label: 'Introdu căutarea ta'
@@ -590,6 +591,7 @@ flashes:
             entry_starred: 'Articol adăugat la favorite'
             entry_unstarred: 'Articol șters de la favorite'
             entry_deleted: 'Articol șters'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             # tag_added: 'Tag added'

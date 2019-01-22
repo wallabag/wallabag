@@ -37,6 +37,7 @@ menu:
         add_new_entry: 'Aggiungi un nuovo contenuto'
         search: 'Cerca'
         filter_entries: 'Filtra contenuti'
+        # random_entry: Jump to a random entry from that list
         export: 'Esporta'
     search_form:
         input_label: 'Inserisci qui la tua ricerca'
@@ -590,6 +591,7 @@ flashes:
             entry_starred: 'Contenuto segnato come preferito'
             entry_unstarred: 'Contenuto rimosso dai preferiti'
             entry_deleted: 'Contenuto eliminato'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'Etichetta aggiunta'

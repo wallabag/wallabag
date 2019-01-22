@@ -79,7 +79,6 @@ class InstapaperImport extends AbstractImport
             $entries[] = [
                 'url' => $data[0],
                 'title' => $data[1],
-                'status' => $data[3],
                 'is_archived' => 'Archive' === $data[3] || 'Starred' === $data[3],
                 'is_starred' => 'Starred' === $data[3],
                 'html' => false,

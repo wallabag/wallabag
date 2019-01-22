@@ -37,6 +37,7 @@ menu:
         add_new_entry: 'Adicionar uma nova entrada'
         search: 'Pesquisa'
         filter_entries: 'Filtrar entradas'
+        # random_entry: Jump to a random entry from that list
         export: 'Exportar'
     search_form:
         input_label: 'Digite aqui sua pesquisa'
@@ -590,6 +591,7 @@ flashes:
             entry_starred: 'Entrada destacada'
             entry_unstarred: 'Entrada não destacada'
             entry_deleted: 'Entrada apagada'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'Tag adicionada'

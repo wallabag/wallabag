@@ -37,6 +37,7 @@ menu:
         add_new_entry: 'Dodaj nowy wpis'
         search: 'Szukaj'
         filter_entries: 'Filtruj wpisy'
+        # random_entry: Jump to a random entry from that list
         export: 'Eksportuj'
     search_form:
         input_label: 'Wpisz swoje zapytanie tutaj'
@@ -590,6 +591,7 @@ flashes:
             entry_starred: 'Wpis oznaczony gwiazdką'
             entry_unstarred: 'Wpis odznaczony gwiazdką'
             entry_deleted: 'Wpis usunięty'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'Tag dodany'

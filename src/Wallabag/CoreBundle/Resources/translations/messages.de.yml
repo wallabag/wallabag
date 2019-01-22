@@ -37,6 +37,7 @@ menu:
         add_new_entry: 'Neuen Artikel hinzufügen'
         search: 'Suche'
         filter_entries: 'Artikel filtern'
+        # random_entry: Jump to a random entry from that list
         export: 'Exportieren'
     search_form:
         input_label: 'Suchbegriff hier eingeben'
@@ -590,6 +591,7 @@ flashes:
             entry_starred: 'Eintrag favorisiert'
             entry_unstarred: 'Eintrag defavorisiert'
             entry_deleted: 'Eintrag gelöscht'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'Tag hinzugefügt'

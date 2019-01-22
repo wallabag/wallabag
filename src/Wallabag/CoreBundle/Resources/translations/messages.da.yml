@@ -37,6 +37,7 @@ menu:
         add_new_entry: 'Tilføj ny artikel'
         search: 'Søg'
         filter_entries: 'Filtrer artikler'
+        # random_entry: Jump to a random entry from that list
         # export: 'Export'
     search_form:
         input_label: 'Indtast søgning'
@@ -590,6 +591,7 @@ flashes:
             entry_starred: 'Artikel markeret som favorit'
             entry_unstarred: 'Artikel ikke længere markeret som favorit'
             entry_deleted: 'Artikel slettet'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             # tag_added: 'Tag added'

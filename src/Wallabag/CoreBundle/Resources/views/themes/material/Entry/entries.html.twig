@@ -21,6 +21,9 @@
 {% block content %}
     {% set listMode = app.user.config.listMode %}
     {% set currentRoute = app.request.attributes.get('_route') %}
+    {% if currentRoute == 'homepage' %}
+        {% set currentRoute = 'unread' %}
+    {% endif %}
     <div class="results">
         <div class="nb-results">
             {{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}
@@ -59,9 +62,6 @@
     {% set currentTag = null %}
     {% if tag is defined %}
         {% set currentTag = tag.slug %}
-    {% endif %}
-    {% if currentRoute == 'homepage' %}
-        {% set currentRoute = 'unread' %}
     {% endif %}
         <h4 class="center">{{ 'entry.list.export_title'|trans }}</h4>
         <ul>

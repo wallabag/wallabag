@@ -37,6 +37,7 @@ menu:
         add_new_entry: 'Añadir un nuevo artículo'
         search: 'Buscar'
         filter_entries: 'Filtrar los artículos'
+        # random_entry: Jump to a random entry from that list
         export: 'Exportar'
     search_form:
         input_label: 'Introduzca su búsqueda aquí'
@@ -590,6 +591,7 @@ flashes:
             entry_starred: 'Artículo marcado como favorito'
             entry_unstarred: 'Artículo desmarcado como favorito'
             entry_deleted: 'Artículo eliminado'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'Etiqueta añadida'

@@ -37,6 +37,7 @@ menu:
         add_new_entry: "Sauvegarder un nouvel article"
         search: "Rechercher"
         filter_entries: "Filtrer les articles"
+        random_entry: Aller à un article aléatoire de cette liste
         export: "Exporter"
     search_form:
         input_label: "Saisissez votre terme de recherche"
@@ -590,6 +591,7 @@ flashes:
             entry_starred: "Article ajouté dans les favoris"
             entry_unstarred: "Article retiré des favoris"
             entry_deleted: "Article supprimé"
+            no_random_entry: "Aucun article correspond aux critères n'a été trouvé"
     tag:
         notice:
             tag_added: "Tag ajouté"

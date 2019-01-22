@@ -20,6 +20,9 @@
 
 {% block content %}
     {% set currentRoute = app.request.attributes.get('_route') %}
+    {% if currentRoute == 'homepage' %}
+        {% set currentRoute = 'unread' %}
+    {% endif %}
     {% set listMode = app.user.config.listMode %}
     <div class="results">
         <div class="nb-results">{{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}</div>
@@ -27,6 +30,9 @@
             <a href="{{ path('switch_view_mode') }}"><i class="listMode-btn material-icons md-24">{% if listMode == 0 %}list{% else %}view_module{% endif %}</i></a>
             {% if app.user.config.rssToken %}
                 {% include "@WallabagCore/themes/common/Entry/_rss_link.html.twig" %}
+            {% endif %}
+            {% if currentRoute in ['unread', 'starred', 'archive', 'untagged', 'all'] %}
+                <a href="{{ path('random_entry', { 'type': currentRoute }) }}"><i class="btn-clickable material-icons md-24 js-random-action">casino</i></a>
             {% endif %}
             <i class="btn-clickable download-btn material-icons md-24 js-export-action">file_download</i>
             <i class="btn-clickable filter-btn material-icons md-24 js-filters-action">filter_list</i>
@@ -89,9 +95,6 @@
     {% set currentTag = null %}
     {% if tag is defined %}
         {% set currentTag = tag %}
-    {% endif %}
-    {% if currentRoute == 'homepage' %}
-        {% set currentRoute = 'unread' %}
     {% endif %}
         <h2>{{ 'entry.list.export_title'|trans }}</h2>
         <a href="javascript: void(null);" id="download-form-close" class="close-button--popup close-button">&times;</a>

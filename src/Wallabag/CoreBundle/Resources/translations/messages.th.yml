@@ -37,6 +37,7 @@ menu:
         add_new_entry: 'เพิ่มรายการใหม่'
         search: 'ค้นหา'
         filter_entries: 'ตัวกรองรายการ'
+        # random_entry: Jump to a random entry from that list
         export: 'นำข้อมูลออก'
     search_form:
         input_label: 'ค้นหาที่นี้'
@@ -588,6 +589,7 @@ flashes:
             entry_starred: 'รายการที่แสดง'
             entry_unstarred: 'รายการที่ไม่ได้แสดง'
             entry_deleted: 'รายการที่ถูกลบ'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'แท็กที่เพิ่ม'

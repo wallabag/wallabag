@@ -3,6 +3,7 @@
 namespace Wallabag\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
@@ -110,8 +111,7 @@ class EntryRepository extends EntityRepository
      */
     public function getBuilderForUntaggedByUser($userId)
     {
-        return $this
-            ->sortQueryBuilder($this->getRawBuilderForUntaggedByUser($userId));
+        return $this->sortQueryBuilder($this->getRawBuilderForUntaggedByUser($userId));
     }
 
     /**
@@ -326,8 +326,8 @@ class EntryRepository extends EntityRepository
      * Find an entry by its url and its owner.
      * If it exists, return the entry otherwise return false.
      *
-     * @param $url
-     * @param $userId
+     * @param string $url
+     * @param int    $userId
      *
      * @return Entry|bool
      */
@@ -418,8 +418,8 @@ class EntryRepository extends EntityRepository
     /**
      * Find all entries by url and owner.
      *
-     * @param $url
-     * @param $userId
+     * @param string $url
+     * @param int    $userId
      *
      * @return array
      */
@@ -430,6 +430,49 @@ class EntryRepository extends EntityRepository
             ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * Returns a random entry, filtering by status.
+     *
+     * @param int    $userId
+     * @param string $type   Can be unread, archive, starred, etc
+     *
+     * @throws NoResultException
+     *
+     * @return Entry
+     */
+    public function getRandomEntry($userId, $type = '')
+    {
+        $qb = $this->getQueryBuilderByUser($userId)
+            ->select('e.id');
+
+        switch ($type) {
+            case 'unread':
+                $qb->andWhere('e.isArchived = false');
+                break;
+            case 'archive':
+                $qb->andWhere('e.isArchived = true');
+                break;
+            case 'starred':
+                $qb->andWhere('e.isStarred = true');
+                break;
+            case 'untagged':
+                $qb->leftJoin('e.tags', 't');
+                $qb->andWhere('t.id is null');
+                break;
+        }
+
+        $ids = $qb->getQuery()->getArrayResult();
+
+        if (empty($ids)) {
+            throw new NoResultException();
+        }
+
+        // random select one in the list
+        $randomId = $ids[mt_rand(0, \count($ids) - 1)]['id'];
+
+        return $this->find($randomId);
     }
 
     /**
@@ -470,7 +513,6 @@ class EntryRepository extends EntityRepository
      */
     private function sortQueryBuilder(QueryBuilder $qb, $sortBy = 'createdAt', $direction = 'desc')
     {
-        return $qb
-            ->orderBy(sprintf('e.%s', $sortBy), $direction);
+        return $qb->orderBy(sprintf('e.%s', $sortBy), $direction);
     }
 }
