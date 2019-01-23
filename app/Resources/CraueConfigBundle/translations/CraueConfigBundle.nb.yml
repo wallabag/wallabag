@@ -1,7 +1,7 @@
 settings_changed: Oppsett oppdatert
 download_pictures: Last ned bilder til tjeneren din
 carrot: Skru på deling til Carrot
-diaspora_url: Diaspora-nettadresse, hvis tjenesten er avskrudd
+diaspora_url: diaspora*-nettadresse, hvis tjenesten er avskrudd
 export_epub: Skru på ePub-eksport
 export_mobi: Skru på .mobi-eksport
 export_pdf: Skru på PDF-eksport
@@ -12,7 +12,7 @@ export_xml: Skru på XML-eksport
 import_with_rabbitmq: Skru på RabbitMQ for å importere data asynkront
 import_with_redis: Skru på Redis for å importere data asynkront
 shaarli_url: Shaarli-nettadresse, hvis tjenesten er avskrudd
-share_diaspora: Skru på deling til Diaspora
+share_diaspora: Skru på deling til diaspora*
 share_mail: Skru på deling via e-post
 share_shaarli: Skru på deling til Shaarli
 share_twitter: Skru på deling til Twitter
@@ -32,3 +32,10 @@ demo_mode_username: Demo-bruker
 share_public: Tillat offentlige nettadresser for oppføringer
 download_images_enabled: Last ned bilder lokalt
 restricted_access: Skru på identitetsbekreftelse for nettsider med betalingsmur
+scuttle_url: Scuttle-nettadresse, hvis tjenesten er påskrudd
+unmark_url: Unmark-nettadresse, hvis tjenesten er påskrudd
+share_scuttle: Skru på deling til Scuttle
+api_user_registration: Skru på brukerregistrering via API-et
+store_article_headers: Skru på hvis wallabag lagrer HTTP-hoder for hver artikkel
+shaarli_share_origin_url: Skru på deling av opprinnelsesnettadresse til Shaarli, hvis
+  tjenesten er påskrudd
