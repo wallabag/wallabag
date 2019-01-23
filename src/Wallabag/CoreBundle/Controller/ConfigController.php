@@ -197,18 +197,25 @@ class ConfigController extends Controller
         }
 
         $user = $this->getUser();
+        $secret = $this->get('scheb_two_factor.security.google_authenticator')->generateSecret();
 
-        if (!$user->isGoogleTwoFactor()) {
-            $secret = $this->get('scheb_two_factor.security.google_authenticator')->generateSecret();
+        $user->setGoogleAuthenticatorSecret($secret);
+        $user->setEmailTwoFactor(false);
 
-            $user->setGoogleAuthenticatorSecret($secret);
-            $user->setEmailTwoFactor(false);
-            $user->setBackupCodes((new BackupCodes())->toArray());
+        $backupCodes = (new BackupCodes())->toArray();
+        $backupCodesHashed = array_map(
+            function ($backupCode) {
+                return password_hash($backupCode, PASSWORD_DEFAULT);
+            },
+            $backupCodes
+        );
 
-            $this->container->get('fos_user.user_manager')->updateUser($user, true);
-        }
+        $user->setBackupCodes($backupCodesHashed);
+
+        $this->container->get('fos_user.user_manager')->updateUser($user, true);
 
         return $this->render('WallabagCoreBundle:Config:otp_app.html.twig', [
+            'backupCodes' => $backupCodes,
             'qr_code' => $this->get('scheb_two_factor.security.google_authenticator')->getQRContent($user),
         ]);
     }

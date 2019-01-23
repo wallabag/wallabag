@@ -339,7 +339,7 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      */
     public function isBackupCode(string $code): bool
     {
-        return \in_array($code, $this->backupCodes, true);
+        return false === $this->findBackupCode($code) ? false : true;
     }
 
     /**
@@ -347,7 +347,7 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      */
     public function invalidateBackupCode(string $code): void
     {
-        $key = array_search($code, $this->backupCodes, true);
+        $key = $this->findBackupCode($code);
 
         if (false !== $key) {
             unset($this->backupCodes[$key]);
@@ -384,5 +384,25 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
         if (!empty($this->clients)) {
             return $this->clients->first();
         }
+    }
+
+    /**
+     * Try to find a backup code from the list of backup codes of the current user.
+     *
+     * @param string $code Given code from the user
+     *
+     * @return string|false
+     */
+    private function findBackupCode(string $code)
+    {
+        foreach ($this->backupCodes as $key => $backupCode) {
+            // backup code are hashed using `password_hash`
+            // see ConfigController->otpAppAction
+            if (password_verify($code, $backupCode)) {
+                return $key;
+            }
+        }
+
+        return false;
     }
 }
