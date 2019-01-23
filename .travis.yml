@@ -59,9 +59,7 @@ script:
     - travis_wait bash composer install -o --no-interaction --no-progress --prefer-dist
 
     - echo "travis_fold:start:prepare"
-    # custom "prepare" for PG because the database should be created with a different user (see "before_script")
-    - if [[ ! $DB = pgsql ]]; then make prepare DB=$DB; fi;
-    - if [[ $DB = pgsql ]]; then make prepare-travis-pg DB=$DB; fi;
+    - make prepare DB=$DB
     - echo "travis_fold:end:prepare"
 
     - make fixtures
