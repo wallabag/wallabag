@@ -35,7 +35,6 @@ matrix:
           env: CS_FIXER=run VALIDATE_TRANSLATION_FILE=run ASSETS=build DB=sqlite
     allow_failures:
         - php: nightly
-        - php: 7.3
 
 # exclude v1 branches
 branches:
@@ -56,7 +55,6 @@ before_script:
     # xdebug isn't enable for PHP 7.1
     - if [[ ! $PHP = hhvm* ]]; then phpenv config-rm xdebug.ini || echo "xdebug not available"; fi
     - composer self-update --no-progress
-    - if [[ $DB = pgsql ]]; then psql -c 'create database wallabag_test;' -U postgres; fi;
 
 script:
     - travis_wait bash composer install -o --no-interaction --no-progress --prefer-dist
