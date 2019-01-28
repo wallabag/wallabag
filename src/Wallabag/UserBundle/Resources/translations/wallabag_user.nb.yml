@@ -1,0 +1,11 @@
+auth_code:
+  on: på
+  mailer:
+    subject: wallabag-identitetsbekreftelseskode
+    body:
+      signature: Hilsen wallabag-laget
+      hello: Hei %user%
+      first_para: Siden du krever tofaktorbekreftelse for å logge inn på din wallabag-konto,
+        og en ny enhet akkurat brukte den, sender vi deg en kode for å bekrefte tilkoblingen.
+      second_para: 'Her er koden:'
+      support: 'Ikke nøl med å kontakte oss hvis du opplever problemer:'
