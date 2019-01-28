@@ -226,6 +226,13 @@ class PocketImportTest extends TestCase
             ->method('getRepository')
             ->willReturn($entryRepo);
 
+        $this->em
+            ->expects($this->any())
+            ->method('persist')
+            ->with($this->callback(function ($persistedEntry) {
+                return $persistedEntry->isArchived() && $persistedEntry->isStarred();
+            }));
+
         $entry = new Entry($this->user);
 
         $this->contentProxy
