@@ -312,7 +312,7 @@ class DownloadImages
      * Retrieve and validate the extension from the response of the url of the image.
      *
      * @param ResponseInterface $res       Http Response
-     * @param string   $imagePath Path from the src image from the content (used for log only)
+     * @param string            $imagePath Path from the src image from the content (used for log only)
      *
      * @return string|false Extension name or false if validation failed
      */

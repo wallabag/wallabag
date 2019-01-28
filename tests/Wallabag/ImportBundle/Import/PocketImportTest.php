@@ -2,8 +2,8 @@
 
 namespace Tests\Wallabag\ImportBundle\Import;
 
-use Http\Mock\Client as HttpMockClient;
 use GuzzleHttp\Psr7\Response;
+use Http\Mock\Client as HttpMockClient;
 use M6Web\Component\RedisMock\RedisMockFactory;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;

@@ -5,12 +5,12 @@ namespace Wallabag\ImportBundle\Import;
 use Http\Client\Common\HttpMethodsClient;
 use Http\Client\Common\Plugin\ErrorPlugin;
 use Http\Client\Common\PluginClient;
+use Http\Client\Exception\RequestException;
 use Http\Client\HttpClient;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\MessageFactory;
-use Http\Client\Exception\RequestException;
-use Wallabag\CoreBundle\Entity\Entry;
 use Psr\Http\Message\ResponseInterface;
+use Wallabag\CoreBundle\Entity\Entry;
 
 class PocketImport extends AbstractImport
 {
@@ -88,7 +88,6 @@ class PocketImport extends AbstractImport
      */
     public function authorize($code)
     {
-
         try {
             $response = $this->client->post('https://getpocket.com/v3/oauth/authorize', [], json_encode([
                 'consumer_key' => $this->user->getConfig()->getPocketConsumerKey(),
@@ -153,7 +152,7 @@ class PocketImport extends AbstractImport
     /**
      * Set the Http client.
      *
-     * @param HttpClient $client
+     * @param HttpClient          $client
      * @param MessageFactory|null $messageFactory
      */
     public function setClient(HttpClient $client, MessageFactory $messageFactory = null)

@@ -6,9 +6,9 @@ use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Event\SubscriberInterface;
 use Http\Adapter\Guzzle5\Client as GuzzleAdapter;
-use Psr\Log\LoggerInterface;
 use Http\Client\HttpClient;
 use Http\HttplugBundle\ClientFactory\ClientFactory;
+use Psr\Log\LoggerInterface;
 
 /**
  * Builds and configures the HTTP client.

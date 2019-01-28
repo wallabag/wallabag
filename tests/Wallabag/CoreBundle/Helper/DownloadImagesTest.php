@@ -3,10 +3,10 @@
 namespace Tests\Wallabag\CoreBundle\Helper;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\Mock;
 use Http\Mock\Client as HttpMockClient;
-use GuzzleHttp\Psr7\Response;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
