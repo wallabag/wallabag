@@ -59,6 +59,7 @@ config:
         password: 'Password'
         rules: 'Regole di etichettatura'
         new_user: 'Aggiungi utente'
+        reset: 'Area di reset'
     form:
         save: 'Salva'
     form_settings:
@@ -98,11 +99,18 @@ config:
             # all: 'All'
         rss_limit: 'Numero di elementi nel feed'
     form_user:
-        two_factor_description: "Abilitando l'autenticazione a due fattori riceverai una e-mail con un codice per ogni nuova connesione non verificata"
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'Nome'
         email_label: 'E-mail'
-        twoFactorAuthentication_label: 'Autenticazione a due fattori'
-        help_twoFactorAuthentication: "Se abiliti l'autenticazione a due fattori, ogni volta che vorrai connetterti a wallabag, riceverai un codice via E-mail."
+            # emailTwoFactor_label: 'Using email (receive a code by email)'
+            # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, Authy or FreeOTP, to get a one time code)'
+            # table_method: Method
+            # table_state: State
+            # table_action: Action
+            # state_enabled: Enabled
+            # state_disabled: Disabled
+            # action_email: Use email
+            # action_app: Use OTP App
         delete:
             title: Cancella il mio account (zona pericolosa)
             description: Rimuovendo il tuo account, TUTTI i tuoi articoli, TUTTE le tue etichette, TUTTE le tue annotazioni ed il tuo account verranno rimossi PERMANENTEMENTE (impossibile da ANNULLARE). Verrai poi disconnesso.
@@ -160,6 +168,15 @@ config:
                 and: "Una regola E un'altra"
                 matches: 'Verifica che un <i>oggetto</i> risulti in una <i>ricerca</i> (case-insensitive).<br />Esempio: <code>titolo contiene "football"</code>'
                 # notmatches: 'Tests that a <i>subject</i> doesn''t match match a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
+    otp:
+        # page_title: Two-factor authentication
+        # app:
+        #     two_factor_code_description_1: You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password. It'll disapear after a page reload.
+        #     two_factor_code_description_2: 'You can scan that QR Code with your app:'
+        #     two_factor_code_description_3: 'Also, save these backup codes in a safe place, you can use them in case you lose access to your OTP app:'
+        #     two_factor_code_description_4: 'Test an OTP code from your configured app:'
+        #     cancel: Cancel
+        #     enable: Enable
 
 entry:
     default_title: "Titolo del contenuto"
@@ -532,7 +549,8 @@ user:
         email_label: 'E-mail'
         enabled_label: 'Abilitato'
         last_login_label: 'Ultima connessione'
-        twofactor_label: Autenticazione a due fattori
+        # twofactor_email_label: Two factor authentication by email
+        # twofactor_google_label: Two factor authentication by OTP app
         save: Salva
         delete: Cancella
         delete_confirm: Sei sicuro?

@@ -59,6 +59,7 @@ config:
         password: 'Senhal'
         rules: "Règlas d'etiquetas automaticas"
         new_user: 'Crear un compte'
+        reset: 'Zòna de reïnicializacion'
     form:
         save: 'Enregistrar'
     form_settings:
@@ -98,11 +99,18 @@ config:
             all: 'Totes'
         rss_limit: "Nombre d'articles dins un flux RSS"
     form_user:
-        two_factor_description: "Activar l'autentificacion en dos temps vòl dire que recebretz un còdi per corrièl per cada novèla connexion pas aprovada."
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'Nom'
         email_label: 'Adreça de corrièl'
-        twoFactorAuthentication_label: 'Dobla autentificacion'
-        help_twoFactorAuthentication: "S'avètz activat l'autentificacion en dos temps, cada còp que volètz vos connectar a wallabag, recebretz un còdi per corrièl."
+            # emailTwoFactor_label: 'Using email (receive a code by email)'
+            # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, Authy or FreeOTP, to get a one time code)'
+            # table_method: Method
+            # table_state: State
+            # table_action: Action
+            # state_enabled: Enabled
+            # state_disabled: Disabled
+            # action_email: Use email
+            # action_app: Use OTP App
         delete:
             title: Suprimir mon compte (Mèfi zòna perilhosa)
             description: Se confirmatz la supression de vòstre compte, TOTES vòstres articles, TOTAS vòstras etiquetas, TOTAS vòstras anotacions e vòstre compte seràn suprimits per totjorn. E aquò es IRREVERSIBLE. Puèi seretz desconnectat.
@@ -160,6 +168,15 @@ config:
                 and: "Una règla E l'autra"
                 matches: 'Teste se un <i>subjècte</i> correspond a una <i>recèrca</i> (non sensibla a la cassa).<br />Exemple : <code>title matches \"football\"</code>'
                 notmatches: 'Teste se <i>subjècte</i> correspond pas a una <i>recèrca</i> (sensibla a la cassa).<br />Example : <code>title notmatches "football"</code>'
+    otp:
+        # page_title: Two-factor authentication
+        # app:
+        #     two_factor_code_description_1: You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password. It'll disapear after a page reload.
+        #     two_factor_code_description_2: 'You can scan that QR Code with your app:'
+        #     two_factor_code_description_3: 'Also, save these backup codes in a safe place, you can use them in case you lose access to your OTP app:'
+        #     two_factor_code_description_4: 'Test an OTP code from your configured app:'
+        #     cancel: Cancel
+        #     enable: Enable
 
 entry:
     default_title: "Títol de l'article"
@@ -532,7 +549,8 @@ user:
         email_label: 'Adreça de corrièl'
         enabled_label: 'Actiu'
         last_login_label: 'Darrièra connexion'
-        twofactor_label: 'Autentificacion doble-factor'
+        # twofactor_email_label: Two factor authentication by email
+        # twofactor_google_label: Two factor authentication by OTP app
         save: 'Enregistrar'
         delete: 'Suprimir'
         delete_confirm: 'Sètz segur ?'

@@ -2,6 +2,7 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
+use PragmaRX\Recovery\Recovery as BackupCodes;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -46,7 +47,7 @@ class ConfigController extends Controller
             $activeTheme = $this->get('liip_theme.active_theme');
             $activeTheme->setName($config->getTheme());
 
-            $this->get('session')->getFlashBag()->add(
+            $this->addFlash(
                 'notice',
                 'flashes.config.notice.config_saved'
             );
@@ -68,7 +69,7 @@ class ConfigController extends Controller
                 $userManager->updateUser($user, true);
             }
 
-            $this->get('session')->getFlashBag()->add('notice', $message);
+            $this->addFlash('notice', $message);
 
             return $this->redirect($this->generateUrl('config') . '#set4');
         }
@@ -83,7 +84,7 @@ class ConfigController extends Controller
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             $userManager->updateUser($user, true);
 
-            $this->get('session')->getFlashBag()->add(
+            $this->addFlash(
                 'notice',
                 'flashes.config.notice.user_updated'
             );
@@ -99,7 +100,7 @@ class ConfigController extends Controller
             $em->persist($config);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add(
+            $this->addFlash(
                 'notice',
                 'flashes.config.notice.rss_updated'
             );
@@ -131,7 +132,7 @@ class ConfigController extends Controller
             $em->persist($taggingRule);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add(
+            $this->addFlash(
                 'notice',
                 'flashes.config.notice.tagging_rules_updated'
             );
@@ -153,9 +154,121 @@ class ConfigController extends Controller
             ],
             'twofactor_auth' => $this->getParameter('twofactor_auth'),
             'wallabag_url' => $this->getParameter('domain_name'),
-            'enabled_users' => $this->get('wallabag_user.user_repository')
-                ->getSumEnabledUsers(),
+            'enabled_users' => $this->get('wallabag_user.user_repository')->getSumEnabledUsers(),
         ]);
+    }
+
+    /**
+     * Enable 2FA using email.
+     *
+     * @Route("/config/otp/email", name="config_otp_email")
+     */
+    public function otpEmailAction()
+    {
+        if (!$this->getParameter('twofactor_auth')) {
+            return $this->createNotFoundException('two_factor not enabled');
+        }
+
+        $user = $this->getUser();
+
+        $user->setGoogleAuthenticatorSecret(null);
+        $user->setBackupCodes(null);
+        $user->setEmailTwoFactor(true);
+
+        $this->container->get('fos_user.user_manager')->updateUser($user, true);
+
+        $this->addFlash(
+            'notice',
+            'flashes.config.notice.otp_enabled'
+        );
+
+        return $this->redirect($this->generateUrl('config') . '#set3');
+    }
+
+    /**
+     * Enable 2FA using OTP app, user will need to confirm the generated code from the app.
+     *
+     * @Route("/config/otp/app", name="config_otp_app")
+     */
+    public function otpAppAction()
+    {
+        if (!$this->getParameter('twofactor_auth')) {
+            return $this->createNotFoundException('two_factor not enabled');
+        }
+
+        $user = $this->getUser();
+        $secret = $this->get('scheb_two_factor.security.google_authenticator')->generateSecret();
+
+        $user->setGoogleAuthenticatorSecret($secret);
+        $user->setEmailTwoFactor(false);
+
+        $backupCodes = (new BackupCodes())->toArray();
+        $backupCodesHashed = array_map(
+            function ($backupCode) {
+                return password_hash($backupCode, PASSWORD_DEFAULT);
+            },
+            $backupCodes
+        );
+
+        $user->setBackupCodes($backupCodesHashed);
+
+        $this->container->get('fos_user.user_manager')->updateUser($user, true);
+
+        return $this->render('WallabagCoreBundle:Config:otp_app.html.twig', [
+            'backupCodes' => $backupCodes,
+            'qr_code' => $this->get('scheb_two_factor.security.google_authenticator')->getQRContent($user),
+        ]);
+    }
+
+    /**
+     * Cancelling 2FA using OTP app.
+     *
+     * @Route("/config/otp/app/cancel", name="config_otp_app_cancel")
+     */
+    public function otpAppCancelAction()
+    {
+        if (!$this->getParameter('twofactor_auth')) {
+            return $this->createNotFoundException('two_factor not enabled');
+        }
+
+        $user = $this->getUser();
+        $user->setGoogleAuthenticatorSecret(null);
+        $user->setBackupCodes(null);
+
+        $this->container->get('fos_user.user_manager')->updateUser($user, true);
+
+        return $this->redirect($this->generateUrl('config') . '#set3');
+    }
+
+    /**
+     * Validate OTP code.
+     *
+     * @param Request $request
+     *
+     * @Route("/config/otp/app/check", name="config_otp_app_check")
+     */
+    public function otpAppCheckAction(Request $request)
+    {
+        $isValid = $this->get('scheb_two_factor.security.google_authenticator')->checkCode(
+            $this->getUser(),
+            $request->get('_auth_code')
+        );
+
+        if (true === $isValid) {
+            $this->addFlash(
+                'notice',
+                'flashes.config.notice.otp_enabled'
+            );
+
+            return $this->redirect($this->generateUrl('config') . '#set3');
+        }
+
+        $this->addFlash(
+            'two_factor',
+            'scheb_two_factor.code_invalid'
+        );
+
+        return $this->redirect($this->generateUrl('config_otp_app'));
     }
 
     /**
@@ -178,7 +291,7 @@ class ConfigController extends Controller
             return new JsonResponse(['token' => $config->getRssToken()]);
         }
 
-        $this->get('session')->getFlashBag()->add(
+        $this->addFlash(
             'notice',
             'flashes.config.notice.rss_token_updated'
         );
@@ -203,7 +316,7 @@ class ConfigController extends Controller
         $em->remove($rule);
         $em->flush();
 
-        $this->get('session')->getFlashBag()->add(
+        $this->addFlash(
             'notice',
             'flashes.config.notice.tagging_rules_deleted'
         );
@@ -269,7 +382,7 @@ class ConfigController extends Controller
                 break;
         }
 
-        $this->get('session')->getFlashBag()->add(
+        $this->addFlash(
             'notice',
             'flashes.config.notice.' . $type . '_reset'
         );

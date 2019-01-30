@@ -51,13 +51,13 @@ install:
 
 before_script:
     - PHP=$TRAVIS_PHP_VERSION
-    - if [[ ! $PHP = hhvm* ]]; then echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi;
-    # xdebug isn't enable for PHP 7.1
-    - if [[ ! $PHP = hhvm* ]]; then phpenv config-rm xdebug.ini || echo "xdebug not available"; fi
+    - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+    - phpenv config-rm xdebug.ini || echo "xdebug not available"
     - composer self-update --no-progress
 
 script:
     - travis_wait bash composer install -o --no-interaction --no-progress --prefer-dist
+
     - echo "travis_fold:start:prepare"
     - make prepare DB=$DB
     - echo "travis_fold:end:prepare"

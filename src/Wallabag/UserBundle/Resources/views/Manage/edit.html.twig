@@ -50,9 +50,14 @@
                                 {% if twofactor_auth %}
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        {{ form_widget(edit_form.twoFactorAuthentication) }}
-                                        {{ form_label(edit_form.twoFactorAuthentication) }}
-                                        {{ form_errors(edit_form.twoFactorAuthentication) }}
+                                        {{ form_widget(edit_form.emailTwoFactor) }}
+                                        {{ form_label(edit_form.emailTwoFactor) }}
+                                        {{ form_errors(edit_form.emailTwoFactor) }}
+                                    </div>
+                                    <div class="input-field col s12">
+                                        {{ form_widget(edit_form.googleTwoFactor) }}
+                                        {{ form_label(edit_form.googleTwoFactor) }}
+                                        {{ form_errors(edit_form.googleTwoFactor) }}
                                     </div>
                                 </div>
                                 {% endif %}

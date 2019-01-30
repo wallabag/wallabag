@@ -31,7 +31,7 @@
         "issues": "https://github.com/wallabag/wallabag/issues"
     },
     "require": {
-        "php": ">=7.1.0",
+        "php": ">=7.1.3",
         "ext-pcre": "*",
         "ext-dom": "*",
         "ext-curl": "*",
@@ -70,7 +70,7 @@
         "friendsofsymfony/user-bundle": "2.0.*",
         "friendsofsymfony/oauth-server-bundle": "^1.5",
         "stof/doctrine-extensions-bundle": "^1.2",
-        "scheb/two-factor-bundle": "^2.14",
+        "scheb/two-factor-bundle": "^3.0",
         "grandt/phpepub": "dev-master",
         "wallabag/php-mobi": "~1.0",
         "kphoen/rulerz-bundle": "~0.13",
@@ -87,7 +87,8 @@
         "friendsofsymfony/jsrouting-bundle": "^2.2",
         "bdunogier/guzzle-site-authenticator": "^1.0.0",
         "defuse/php-encryption": "^2.1",
-        "html2text/html2text": "^4.1"
+        "html2text/html2text": "^4.1",
+        "pragmarx/recovery": "^0.1.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~3.0",
@@ -147,7 +148,7 @@
     "config": {
         "bin-dir": "bin",
         "platform": {
-            "php": "7.1"
+            "php": "7.1.3"
         }
     },
     "minimum-stability": "dev",

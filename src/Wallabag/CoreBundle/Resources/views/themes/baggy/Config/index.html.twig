@@ -86,8 +86,7 @@
                 <br/>
                 <img id="androidQrcode" />
                 <script>
-                    const imgBase64 = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');
-                    document.getElementById('androidQrcode').src = imgBase64;
+                    document.getElementById('androidQrcode').src = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');
                 </script>
             </div>
         </fieldset>
@@ -169,52 +168,41 @@
             </div>
         </fieldset>
 
+        {{ form_widget(form.user.save) }}
+
         {% if twofactor_auth %}
+        <h5>{{ 'config.otp.page_title'|trans }}</h5>
+
         <div class="row">
             {{ 'config.form_user.two_factor_description'|trans }}
         </div>
 
-        <fieldset class="w500p inline">
-            <div class="row">
-                {{ form_label(form.user.twoFactorAuthentication) }}
-                {{ form_errors(form.user.twoFactorAuthentication) }}
-                {{ form_widget(form.user.twoFactorAuthentication) }}
-            </div>
-            <a href="#" title="{{ 'config.form_user.help_twoFactorAuthentication'|trans }}">
-                <i class="material-icons">live_help</i>
-            </a>
-        </fieldset>
+        <table>
+            <thead>
+                <tr>
+                    <th>{{ 'config.form_user.two_factor.table_method'|trans }}</th>
+                    <th>{{ 'config.form_user.two_factor.table_state'|trans }}</th>
+                    <th>{{ 'config.form_user.two_factor.table_action'|trans }}</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>{{ 'config.form_user.two_factor.emailTwoFactor_label'|trans }}</td>
+                    <td>{% if app.user.isEmailTwoFactor %}<b>{{ 'config.form_user.two_factor.state_enabled'|trans }}</b>{% else %}{{ 'config.form_user.two_factor.state_disabled'|trans }}{% endif %}</td>
+                    <td><a href="{{ path('config_otp_email') }}" class="waves-effect waves-light btn{% if app.user.isEmailTwoFactor %} disabled{% endif %}">{{ 'config.form_user.two_factor.action_email'|trans }}</a></td>
+                </tr>
+                <tr>
+                    <td>{{ 'config.form_user.two_factor.googleTwoFactor_label'|trans }}</td>
+                    <td>{% if app.user.isGoogleTwoFactor %}<b>{{ 'config.form_user.two_factor.state_enabled'|trans }}</b>{% else %}{{ 'config.form_user.two_factor.state_disabled'|trans }}{% endif %}</td>
+                    <td><a href="{{ path('config_otp_app') }}" class="waves-effect waves-light btn{% if app.user.isGoogleTwoFactor %} disabled{% endif %}">{{ 'config.form_user.two_factor.action_app'|trans }}</a></td>
+                </tr>
+            </tbody>
+        </table>
+
         {% endif %}
 
-        <h2>{{ 'config.reset.title'|trans }}</h2>
-        <fieldset class="w500p inline">
-            <p>{{ 'config.reset.description'|trans }}</p>
-            <ul>
-                <li>
-                    <a href="{{ path('config_reset', { type: 'annotations'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
-                        {{ 'config.reset.annotations'|trans }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('config_reset', { type: 'tags'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
-                        {{ 'config.reset.tags'|trans }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('config_reset', { type: 'archived'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
-                        {{ 'config.reset.archived'|trans }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('config_reset', { type: 'entries'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
-                        {{ 'config.reset.entries'|trans }}
-                    </a>
-                </li>
-            </ul>
-        </fieldset>
-
         {{ form_widget(form.user._token) }}
-        {{ form_widget(form.user.save) }}
     </form>
 
     {% if enabled_users > 1 %}
@@ -277,7 +265,7 @@
         {% endfor %}
     </ul>
 
-        {{ form_start(form.new_tagging_rule) }}
+    {{ form_start(form.new_tagging_rule) }}
         {{ form_errors(form.new_tagging_rule) }}
 
         <fieldset class="w500p inline">
@@ -382,4 +370,31 @@
             </table>
         </div>
     </div>
+
+    <h2>{{ 'config.reset.title'|trans }}</h2>
+    <fieldset class="w500p inline">
+        <p>{{ 'config.reset.description'|trans }}</p>
+        <ul>
+            <li>
+                <a href="{{ path('config_reset', { type: 'annotations'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                    {{ 'config.reset.annotations'|trans }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('config_reset', { type: 'tags'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                    {{ 'config.reset.tags'|trans }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('config_reset', { type: 'archived'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                    {{ 'config.reset.archived'|trans }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('config_reset', { type: 'entries'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                    {{ 'config.reset.entries'|trans }}
+                </a>
+            </li>
+        </ul>
+    </fieldset>
 {% endblock %}

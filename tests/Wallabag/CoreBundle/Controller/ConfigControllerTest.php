@@ -1000,4 +1000,85 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertNotSame('yuyuyuyu', $client->getRequest()->getLocale());
         $this->assertNotSame('yuyuyuyu', $client->getContainer()->get('session')->get('_locale'));
     }
+
+    public function testUserEnable2faEmail()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/config/otp/email');
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+
+        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(['_text']));
+        $this->assertContains('flashes.config.notice.otp_enabled', $alert[0]);
+
+        // restore user
+        $em = $this->getEntityManager();
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUsername('admin');
+
+        $this->assertTrue($user->isEmailTwoFactor());
+
+        $user->setEmailTwoFactor(false);
+        $em->persist($user);
+        $em->flush();
+    }
+
+    public function testUserEnable2faGoogle()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/config/otp/app');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        // restore user
+        $em = $this->getEntityManager();
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUsername('admin');
+
+        $this->assertTrue($user->isGoogleTwoFactor());
+        $this->assertGreaterThan(0, $user->getBackupCodes());
+
+        $user->setGoogleAuthenticatorSecret(false);
+        $user->setBackupCodes(null);
+        $em->persist($user);
+        $em->flush();
+    }
+
+    public function testUserEnable2faGoogleCancel()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/config/otp/app');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        // restore user
+        $em = $this->getEntityManager();
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUsername('admin');
+
+        $this->assertTrue($user->isGoogleTwoFactor());
+        $this->assertGreaterThan(0, $user->getBackupCodes());
+
+        $crawler = $client->request('GET', '/config/otp/app/cancel');
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUsername('admin');
+
+        $this->assertFalse($user->isGoogleTwoFactor());
+        $this->assertEmpty($user->getBackupCodes());
+    }
 }
