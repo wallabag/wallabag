@@ -4,12 +4,6 @@ services:
     - rabbitmq
     - redis
 
-# used for HHVM
-addons:
-    apt:
-        packages:
-            - tidy
-
 # cache vendor dirs
 cache:
     apt: true
