@@ -54,7 +54,11 @@ class ContentProxy
 
         if ((empty($content) || false === $this->validateContent($content)) && false === $disableContentUpdate) {
             $fetchedContent = $this->graby->fetchContent($url);
-            $fetchedContent['title'] = $this->sanitizeContentTitle($fetchedContent['title'], $fetchedContent['content_type']);
+
+            $fetchedContent['title'] = $this->sanitizeContentTitle(
+                $fetchedContent['title'],
+                isset($fetchedContent['headers']['content-type']) ? $fetchedContent['headers']['content-type'] : ''
+            );
 
             // when content is imported, we have information in $content
             // in case fetching content goes bad, we'll keep the imported information instead of overriding them
@@ -188,8 +192,8 @@ class ContentProxy
     /**
      * Try to sanitize the title of the fetched content from wrong character encodings and invalid UTF-8 character.
      *
-     * @param $title
-     * @param $contentType
+     * @param string $title
+     * @param string $contentType
      *
      * @return string
      */
@@ -293,12 +297,15 @@ class ContentProxy
         }
 
         // if content is an image, define it as a preview too
-        if (!empty($content['headers']['content_type']) && \in_array($this->mimeGuesser->guess($content['headers']['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
+        if (!empty($content['headers']['content-type']) && \in_array($this->mimeGuesser->guess($content['headers']['content-type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
             $previewPictureUrl = $content['url'];
+
+            $entry->setMimetype($content['headers']['content-type']);
         } elseif (empty($previewPictureUrl)) {
             $this->logger->debug('Extracting images from content to provide a default preview picture');
             $imagesUrls = DownloadImages::extractImagesUrlsFromHtml($content['html']);
             $this->logger->debug(\count($imagesUrls) . ' pictures found');
+
             if (!empty($imagesUrls)) {
                 $previewPictureUrl = $imagesUrls[0];
             }
@@ -306,10 +313,6 @@ class ContentProxy
 
         if (!empty($previewPictureUrl)) {
             $this->updatePreviewPicture($entry, $previewPictureUrl);
-        }
-
-        if (!empty($content['headers']['content-type'])) {
-            $entry->setMimetype($content['headers']['content-type']);
         }
 
         try {
