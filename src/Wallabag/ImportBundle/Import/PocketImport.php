@@ -247,7 +247,7 @@ class PocketImport extends AbstractImport
 
     protected function jsonDecode(ResponseInterface $response)
     {
-        $data = \json_decode((string) $response->getBody(), true);
+        $data = json_decode((string) $response->getBody(), true);
 
         if (JSON_ERROR_NONE !== json_last_error()) {
             throw new \InvalidArgumentException('Unable to parse JSON data: ' . json_last_error_msg());
