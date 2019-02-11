@@ -36,7 +36,9 @@ class ContentProxyTest extends TestCase
                 'html' => false,
                 'title' => '',
                 'url' => '',
-                'content_type' => '',
+                'headers' => [
+                    'content-type' => '',
+                ],
                 'language' => '',
             ]);
 
@@ -71,7 +73,9 @@ class ContentProxyTest extends TestCase
                 'html' => false,
                 'title' => '',
                 'url' => '',
-                'content_type' => '',
+                'headers' => [
+                    'content-type' => '',
+                ],
                 'language' => '',
             ]);
 
@@ -106,7 +110,9 @@ class ContentProxyTest extends TestCase
                 'html' => false,
                 'title' => 'my title',
                 'url' => '',
-                'content_type' => '',
+                'headers' => [
+                    'content-type' => '',
+                ],
                 'language' => '',
                 'status' => '',
                 'description' => 'desc',
@@ -361,14 +367,13 @@ class ContentProxyTest extends TestCase
                 'html' => str_repeat('this is my content', 325),
                 'title' => 'this is my title',
                 'url' => 'http://1.1.1.1',
-                'content_type' => 'text/html',
+                'headers' => [
+                    'content-type' => 'text/html',
+                ],
                 'language' => 'fr',
                 'status' => '200',
                 'description' => 'OG desc',
                 'image' => 'https://',
-                'headers' => [
-                    'content-type' => 'text/html',
-                ],
             ]);
 
         $proxy = new ContentProxy($graby, $tagger, $validator, $this->getLogger(), $this->fetchingErrorMessage);
@@ -641,7 +646,9 @@ class ContentProxyTest extends TestCase
                 'html' => false,
                 'title' => $actualTitle,
                 'url' => '',
-                'content_type' => 'text/html',
+                'headers' => [
+                    'content-type' => 'text/html',
+                ],
                 'language' => '',
             ]);
 
@@ -676,7 +683,9 @@ class ContentProxyTest extends TestCase
                 'html' => false,
                 'title' => $actualTitle,
                 'url' => '',
-                'content_type' => 'text/html',
+                'headers' => [
+                    'content-type' => 'text/html',
+                ],
                 'language' => '',
             ]);
 
@@ -710,7 +719,9 @@ class ContentProxyTest extends TestCase
                 'html' => false,
                 'title' => $actualTitle,
                 'url' => '',
-                'content_type' => 'application/pdf',
+                'headers' => [
+                    'content-type' => 'application/pdf',
+                ],
                 'language' => '',
             ]);
 
@@ -744,7 +755,9 @@ class ContentProxyTest extends TestCase
                 'html' => false,
                 'title' => $actualTitle,
                 'url' => '',
-                'content_type' => 'application/pdf',
+                'headers' => [
+                    'content-type' => 'application/pdf',
+                ],
                 'language' => '',
             ]);
 
@@ -778,7 +791,9 @@ class ContentProxyTest extends TestCase
                 'html' => false,
                 'title' => $actualTitle,
                 'url' => '',
-                'content_type' => 'application/pdf',
+                'headers' => [
+                    'content-type' => 'application/pdf',
+                ],
                 'language' => '',
             ]);
 
@@ -813,7 +828,9 @@ class ContentProxyTest extends TestCase
                 'html' => false,
                 'title' => $actualTitle,
                 'url' => '',
-                'content_type' => 'application/pdf',
+                'headers' => [
+                    'content-type' => 'application/pdf',
+                ],
                 'language' => '',
             ]);
 
@@ -943,7 +960,9 @@ class ContentProxyTest extends TestCase
                 'html' => false,
                 'title' => '',
                 'url' => $content_url,
-                'content_type' => '',
+                'headers' => [
+                    'content-type' => '',
+                ],
                 'language' => '',
             ],
             true
@@ -974,7 +993,9 @@ class ContentProxyTest extends TestCase
     }
 
     /**
-     * https://stackoverflow.com/a/18506801.
+     * Convert hex to string.
+     *
+     * @see https://stackoverflow.com/a/18506801
      *
      * @param $hex
      *
