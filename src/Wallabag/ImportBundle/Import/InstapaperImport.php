@@ -62,7 +62,7 @@ class InstapaperImport extends AbstractImport
         }
 
         $entries = [];
-        $handle = fopen($this->filepath, 'r');
+        $handle = fopen($this->filepath, 'rb');
         while (false !== ($data = fgetcsv($handle, 10240))) {
             if ('URL' === $data[0]) {
                 continue;
