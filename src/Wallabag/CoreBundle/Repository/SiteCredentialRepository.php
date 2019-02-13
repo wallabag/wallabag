@@ -22,7 +22,7 @@ class SiteCredentialRepository extends \Doctrine\ORM\EntityRepository
      * @param string $host
      * @param int    $userId
      *
-     * @return null|array
+     * @return array|null
      */
     public function findOneByHostAndUser($host, $userId)
     {
