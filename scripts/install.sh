@@ -5,9 +5,17 @@
 IGNORE_ROOT_ARG="--ignore-root-warning"
 IGNORE_ROOT=0
 
-if [ "$1" == "$IGNORE_ROOT_ARG" ]; then
-    IGNORE_ROOT=1
-fi
+while :; do
+    case $1 in
+        $IGNORE_ROOT_ARG) IGNORE_ROOT=1
+        ;;
+        *[a-zA-Z]) ENV=$1
+        ;;
+        *) break
+        ;;
+    esac
+    shift
+done
 
 # Abort running this script if root
 if [ "$IGNORE_ROOT" -eq 0 ] && [ "$EUID" == "0" ]; then
@@ -22,7 +30,6 @@ DIR="${BASH_SOURCE}"
 if [ ! -d "$DIR" ]; then DIR="$PWD/scripts"; fi
 . "$DIR/require.sh"
 
-ENV=$1
 TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
 
 git checkout $TAG
