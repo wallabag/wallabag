@@ -431,18 +431,29 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame(404, $this->client->getResponse()->getStatusCode());
     }
 
-        $this->client->request('DELETE', '/api/entries/' . $entry->getId() . '.json');
+    public function testDeleteEntryExpectId()
+    {
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $entry = new Entry($em->getReference(User::class, 1));
+        $entry->setUrl('http://0.0.0.0/test-delete-entry-id');
+        $em->persist($entry);
+        $em->flush();
+
+        $em->clear();
+
+        $id = $entry->getId();
+
+        $this->client->request('DELETE', '/api/entries/' . $id . '.json?expect=id');
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertSame($entry->getTitle(), $content['title']);
-        $this->assertSame($entry->getUrl(), $content['url']);
-        $this->assertSame($entry->getId(), $content['id']);
+        $this->assertSame($id, $content['id']);
+        $this->assertArrayNotHasKey('url', $content);
 
         // We'll try to delete this entry again
-        $this->client->request('DELETE', '/api/entries/' . $entry->getId() . '.json');
+        $this->client->request('DELETE', '/api/entries/' . $id . '.json');
 
         $this->assertSame(404, $this->client->getResponse()->getStatusCode());
     }
