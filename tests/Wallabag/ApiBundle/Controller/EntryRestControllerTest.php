@@ -426,9 +426,10 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame($e['id'], $content['id']);
 
         // We'll try to delete this entry again
-        $this->client->request('DELETE', '/api/entries/' . $e['id'] . '.json');
+        $client = $this->createAuthorizedClient();
+        $client->request('DELETE', '/api/entries/' . $e['id'] . '.json');
 
-        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
     public function testDeleteEntryExpectId()
@@ -453,9 +454,17 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertArrayNotHasKey('url', $content);
 
         // We'll try to delete this entry again
-        $this->client->request('DELETE', '/api/entries/' . $id . '.json');
+        $client = $this->createAuthorizedClient();
+        $client->request('DELETE', '/api/entries/' . $id . '.json');
 
-        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
+    }
+
+    public function testDeleteEntryExpectBadRequest()
+    {
+        $this->client->request('DELETE', '/api/entries/1.json?expect=badrequest');
+
+        $this->assertSame(400, $this->client->getResponse()->getStatusCode());
     }
 
     public function testPostEntry()
