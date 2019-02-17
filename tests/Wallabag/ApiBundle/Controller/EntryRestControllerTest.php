@@ -400,14 +400,36 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testDeleteEntry()
     {
-        $entry = $this->client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUser(1, ['id' => 'asc']);
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $entry = new Entry($em->getReference(User::class, 1));
+        $entry->setUrl('http://0.0.0.0/test-delete-entry');
+        $entry->setTitle('Test delete entry');
+        $em->persist($entry);
+        $em->flush();
 
-        if (!$entry) {
-            $this->markTestSkipped('No content found in db.');
-        }
+        $em->clear();
+
+        $e = [
+            'title' => $entry->getTitle(),
+            'url' => $entry->getUrl(),
+            'id' => $entry->getId(),
+        ];
+
+        $this->client->request('DELETE', '/api/entries/' . $e['id'] . '.json');
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertSame($e['title'], $content['title']);
+        $this->assertSame($e['url'], $content['url']);
+        $this->assertSame($e['id'], $content['id']);
+
+        // We'll try to delete this entry again
+        $this->client->request('DELETE', '/api/entries/' . $e['id'] . '.json');
+
+        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
+    }
 
         $this->client->request('DELETE', '/api/entries/' . $entry->getId() . '.json');
 
