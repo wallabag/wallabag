@@ -46,13 +46,13 @@ menu:
         input_label: 'Enter your search here'
 
 footer:
-    wallabag:
-        elsewhere: 'Take wallabag with you'
-        social: 'Social'
-        powered_by: 'powered by'
-        about: 'About'
-    stats: Since %user_creation% you read %nb_archives% articles. That is about %per_day% a day!
-
+  wallabag:
+    elsewhere: Take wallabag with you
+    social: Social
+    powered_by: powered by
+    about: About
+  stats: Since %user_creation% you read %nb_archives% articles. That is about %per_day%
+    a day!
 config:
     page_title: 'Config'
     tab_menu:
@@ -309,88 +309,88 @@ entry:
         published_on: "Published on"
 
 about:
-    page_title: 'About'
-    top_menu:
-        who_behind_wallabag: 'Who is behind wallabag'
-        getting_help: 'Getting help'
-        helping: 'Helping wallabag'
-        contributors: 'Contributors'
-        third_party: 'Third-party libraries'
-    who_behind_wallabag:
-        developped_by: 'Developed by'
-        website: 'website'
-        many_contributors: 'And many others contributors ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">on GitHub</a>'
-        project_website: 'Project website'
-        license: 'License'
-        version: 'Version'
-    getting_help:
-        documentation: 'Documentation'
-        bug_reports: 'Bug reports'
-        support: '<a href="https://github.com/wallabag/wallabag/issues">on GitHub</a>'
-    helping:
-        description: 'wallabag is free and open source. You can help us:'
-        by_contributing: 'by contributing to the project:'
-        by_contributing_2: 'an issue lists all our needs'
-        by_paypal: 'via Paypal'
-    contributors:
-        description: 'Thank you to contributors on wallabag web application'
-    third_party:
-        description: 'Here is the list of third-party libraries used in wallabag (with their licenses):'
-        package: 'Package'
-        license: 'License'
-
+  page_title: About
+  top_menu:
+    who_behind_wallabag: Who is behind wallabag
+    getting_help: Getting help
+    helping: Helping wallabag
+    contributors: Contributors
+    third_party: Third-party libraries
+  who_behind_wallabag:
+    developped_by: Developed by
+    website: website
+    many_contributors: And many others contributors ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">on
+      GitHub</a>
+    project_website: Project website
+    license: License
+    version: Version
+  getting_help:
+    documentation: Documentation
+    bug_reports: Bug reports
+    support: <a href="https://github.com/wallabag/wallabag/issues">on GitHub</a>
+  helping:
+    description: 'wallabag is free and open source. You can help us:'
+    by_contributing: 'by contributing to the project:'
+    by_contributing_2: an issue lists all our needs
+    by_paypal: via Paypal
+  contributors:
+    description: Thank you to contributors on wallabag web application
+  third_party:
+    description: 'Here is the list of third-party libraries used in wallabag (with
+      their licenses):'
+    package: Package
+    license: License
 howto:
-    page_title: 'How to'
-    tab_menu:
-        add_link: "Add a link"
-        shortcuts: "Use shortcuts"
-    page_description: 'There are several ways to save an article:'
-    top_menu:
-        browser_addons: 'Browser addons'
-        mobile_apps: 'Mobile apps'
-        bookmarklet: 'Bookmarklet'
-    form:
-        description: 'Thanks to this form'
-    browser_addons:
-        firefox: 'Firefox addon'
-        chrome: 'Chrome addon'
-        opera: 'Opera addon'
-    mobile_apps:
-        android:
-            via_f_droid: 'via F-Droid'
-            via_google_play: 'via Google Play'
-        ios: 'on the iTunes Store'
-        windows: 'on the Microsoft Store'
-    bookmarklet:
-        description: 'Drag & drop this link to your bookmarks bar:'
-    shortcuts:
-        page_description: Here are the shortcuts available in wallabag.
-        shortcut: Shortcut
-        action: Action
-        all_pages_title: Shortcuts available in all pages
-        go_unread: Go to unread
-        go_starred: Go to starred
-        go_archive: Go to archive
-        go_all: Go to all entries
-        go_tags: Go to tags
-        go_config: Go to config
-        go_import: Go to import
-        go_developers: Go to developers
-        go_howto: Go to howto (this page!)
-        go_logout: Log out
-        list_title: Shortcuts available in listing pages
-        search: Display the search form
-        article_title: Shortcuts available in entry view
-        open_original: Open original URL of the entry
-        toggle_favorite: Toggle star status for the entry
-        toggle_archive: Toggle read status for the entry
-        delete: Delete the entry
-        material_title: Shortcuts available with Material theme only
-        add_link: Add a new link
-        hide_form: Hide the current form (search or new link)
-        arrows_navigation: Navigate through articles
-        open_article: Display the selected entry
-
+  page_title: How to
+  tab_menu:
+    add_link: Add a link
+    shortcuts: Use shortcuts
+  page_description: 'There are several ways to save an article:'
+  top_menu:
+    browser_addons: Browser addons
+    mobile_apps: Mobile apps
+    bookmarklet: Bookmarklet
+  form:
+    description: Thanks to this form
+  browser_addons:
+    firefox: Firefox addon
+    chrome: Chrome addon
+    opera: Opera addon
+  mobile_apps:
+    android:
+      via_f_droid: via F-Droid
+      via_google_play: via Google Play
+    ios: on the iTunes Store
+    windows: on the Microsoft Store
+  bookmarklet:
+    description: 'Drag & drop this link to your bookmarks bar:'
+  shortcuts:
+    page_description: Here are the shortcuts available in wallabag.
+    shortcut: Shortcut
+    action: Action
+    all_pages_title: Shortcuts available in all pages
+    go_unread: Go to unread
+    go_starred: Go to starred
+    go_archive: Go to archive
+    go_all: Go to all entries
+    go_tags: Go to tags
+    go_config: Go to config
+    go_import: Go to import
+    go_developers: Go to developers
+    go_howto: Go to howto (this page!)
+    go_logout: Log out
+    list_title: Shortcuts available in listing pages
+    search: Display the search form
+    article_title: Shortcuts available in entry view
+    open_original: Open original URL of the entry
+    toggle_favorite: Toggle star status for the entry
+    toggle_archive: Toggle read status for the entry
+    delete: Delete the entry
+    material_title: Shortcuts available with Material theme only
+    add_link: Add a new link
+    hide_form: Hide the current form (search or new link)
+    arrows_navigation: Navigate through articles
+    open_article: Display the selected entry
 quickstart:
     page_title: 'Quickstart'
     more: 'More…'
@@ -459,9 +459,10 @@ tag:
         placeholder: 'You can update tag name.'
 
 export:
-    footer_template: '<div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p></div>'
-    unknown: 'Unknown'
-
+  footer_template: <div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please
+    open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you
+    have trouble with the display of this E-Book on your device.</p></div>
+  unknown: Unknown
 import:
     page_title: 'Import'
     page_description: 'Welcome to wallabag importer. Please select your previous service from which you want to migrate.'
@@ -634,8 +635,7 @@ ignore_origin_instance_rule:
         back_to_list: Back to list
 
 error:
-    page_title: An error occurred
-
+  page_title: An error occurred
 flashes:
     config:
         notice:
