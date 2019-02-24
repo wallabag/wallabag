@@ -1,661 +1,382 @@
 security:
-    login:
-        page_title: 'Wallabag へようこそ！'
-        keep_logged_in: 'ログインを維持する'
-        forgot_password: 'パスワードをお忘れですか？'
-        submit: 'ログイン'
-        register: '新規登録'
-        username: 'ユーザー名'
-        password: 'パスワード'
-        cancel: 'キャンセル'
-    resetting:
-        description: "以下にメールアドレスを入力すると、パスワードのリセット手順をお送りします。"
-    register:
-        page_title: 'アカウント作成'
-        go_to_account: 'あなたのアカウントへ'
-
+  login:
+    page_title: Wallabag へようこそ!
+    keep_logged_in: ログインを維持
+    forgot_password: パスワードをお忘れですか?
+    submit: ログイン
+    register: 登録
+    username: ユーザー名
+    password: パスワード
+    cancel: キャンセル
+  resetting:
+    description: 下記にメール アドレスを入力してください。パスワードのリセット手順をお送りします。
+  register:
+    page_title: アカウントを作成
+    go_to_account: あなたのアカウントに移動
 menu:
-    left:
-        unread: '未読'
-        starred: 'お気に入り'
-        archive: 'アーカイブ済み'
-        all_articles: '全ての記事'
-        config: '設定'
-        tags: 'タグ'
-        internal_settings: '内部設定'
-        import: 'インポート'
-        howto: '使い方'
-        developer: 'API クライアント管理'
-        logout: 'ログアウト'
-        about: 'アプリについて'
-        search: '検索'
-        save_link: 'リンクを保存'
-        back_to_unread: '未読の記事へ戻る'
-        users_management: 'ユーザー管理'
-        site_credentials: 'サイト資格情報'
-        quickstart: "はじめに"
-    top:
-        add_new_entry: '新しい記事を追加'
-        search: '検索'
-        filter_entries: 'フィルターを使用'
-        random_entry: このリストの中からランダムに記事に記事を表示
-        export: 'エクスポート'
-        # account: 'My account'
-    search_form:
-        input_label: '検索内容を入力'
-
+  left:
+    unread: 未読
+    starred: スター
+    archive: アーカイブ
+    all_articles: すべてのエントリ
+    config: 設定
+    tags: タグ
+    internal_settings: 内部設定
+    import: インポート
+    howto: 使い方
+    developer: API クライアント管理
+    logout: ログアウト
+    about: アプリについて
+    search: 検索
+    save_link: リンクを保存
+    back_to_unread: 未読の記事に戻る
+    users_management: ユーザー管理
+    site_credentials: サイトの資格情報
+  top:
+    add_new_entry: 新しいエントリーを追加
+    search: 検索
+    filter_entries: エントリーのフィルター
+    export: エクスポート
+  search_form:
+    input_label: ここに検索を入力します
 footer:
-    wallabag:
-        elsewhere: 'Wallabag と共に'
-        social: 'ソーシャル'
-        powered_by: '提供元：'
-        about: 'アプリについて'
-    stats: あなたは %user_creation% から1日平均で %per_day% 件、合計で %nb_archives% 件の記事を読みました。
-
+  wallabag:
+    elsewhere: wallabag をあなたとともに
+    social: ソーシャル
+    powered_by: powered by
+    about: アプリについて
+  stats: '%user_creation% から、%nb_archives% 記事を読みました。 つまり 1 日約 %per_day% です!'
 config:
-    page_title: '設定'
-    tab_menu:
-        settings: '設定'
-        feed: 'フィード'
-        user_info: 'ユーザー情報'
-        password: 'パスワード'
-        rules: 'タグ付けルール'
-        new_user: 'ユーザーの追加'
-        reset: 'リセット関連'
-    form:
-        save: '保存'
-    form_settings:
-        theme_label: 'テーマ'
-        items_per_page_label: '1ページあたりの表示数'
-        language_label: '言語'
-        reading_speed:
-            label: '読む速度 (1分あたりの単語数)'
-            help_message: 'オンラインツールを使用して読む速度を調べることもできます：'
-        action_mark_as_read:
-            label: '記事を削除・お気に入り・アーカイブした際の動作'
-            redirect_homepage: 'ホームへ戻る'
-            redirect_current_page: 'そのページにとどまる'
-        pocket_consumer_key_label: コンテンツをインポートするための Pocket のコンシューマキー
-        android_configuration: あなたの Android アプリを設定
-        android_instruction: "ここをタッチするとあなたの Android アプリケーションを設定できます"
-        help_theme: "Wallabag はカスタマイズ可能です。ここで好みのテーマを選択できます。"
-        help_items_per_page: "各ページに表示される記事の数を変更できます。"
-        help_reading_speed: "Wallabag は、各記事を読む時間を計算します。あなたが記事を読む速度が通常よりも早いまたは遅い場合、ここで設定を変更することができます。Wallabag は、各記事を読む時間を再計算します。"
-        help_language: "Wallabag の表示に用いる言語を選択できます。"
-        help_pocket_consumer_key: "Pocket からのインポートに必要です。 Pocket の設定画面から作成できます。"
-    form_feed:
-        description: 'Wallabag の Atom フィードを使用すると、お気に入りの Atom リーダーで保存した記事を読むことができます。最初にトークンを生成する必要があります。'
-        token_label: 'フィードトークン'
-        no_token: 'トークンがありません'
-        token_create: 'トークンを作成する'
-        token_reset: 'トークンを再生成する'
-        token_revoke: 'トークンを取り消す'
-        feed_links: 'フィードリンク'
-        feed_link:
-            unread: '未読'
-            starred: 'お気に入り'
-            archive: 'アーカイブ済み'
-            all: '全て'
-        feed_limit: 'フィード内のアイテム数'
-    form_user:
-        two_factor_description: "2要素認証を有効にすると、認証コードが記載されたメールまたは、OTPアプリ(Google 認証システム、Authy、FreeOTPなど)を使用して、信頼のおけない新しい接続ごとに1回限りの認証コードを取得する必要があります。同時に両方のオプションを選択することはできません。"
-        login_label: 'ユーザー名 (変更不可)'
-        name_label: '名前'
-        email_label: 'メールアドレス'
-        two_factor:
-            emailTwoFactor_label: '電子メールを使用 (電子メールでコードが送信されます)'
-            googleTwoFactor_label: 'OTP アプリを使用 (Google 認証システム、Authy、FreeOTPなどのアプリでコードを生成します)'
-            table_method: 方式
-            table_state: 状態
-            table_action: 操作
-            state_enabled: 有効
-            state_disabled: 無効
-            action_email: 電子メールを選択
-            action_app: OTP アプリを選択
-        delete:
-            title: アカウントの削除 (注意が必要な操作)
-            description: アカウントを削除すると、あなたの全ての記事、全てのタグ、全ての注釈、およびあなたのアカウントが完全に削除されます(この操作は取り消せません)。その後、ログアウトされます。
-            confirm: 本当にアカウントを削除してよろしいですか？ (この操作は取り消せません)
-            button: アカウントを削除する
-    reset:
-        title: リセットの操作 (注意が必要な操作)
-        description: 以下のボタンを押すと、アカウントから一部の情報を削除できます。これらの操作は取り消すことができないためご注意ください。
-        annotations: 全ての注釈を削除
-        tags: 全てのタグを削除
-        entries: 全ての記事を削除
-        archived: 全てのアーカイブ済み記事を削除
-        confirm: 本当に削除してよろしいですか？ (この操作は取り消せません)
-    form_password:
-        description: "ここではパスワードを変更できます。新しいパスワードは8文字以上である必要があります。"
-        old_password_label: '現在のパスワード'
-        new_password_label: '新しいパスワード'
-        repeat_new_password_label: '新しいパスワードの確認'
-    form_rules:
-        if_label: 'もしも'
-        then_tag_as_label: 'ならば、次のタグを付ける'
-        delete_rule_label: '削除'
-        edit_rule_label: '編集'
-        rule_label: 'ルール'
-        tags_label: 'タグ'
-        card:
-            new_tagging_rule: タグ付けルールを作成
-            import_tagging_rules: タグ付けルールをインポート
-            import_tagging_rules_detail: 以前にエクスポートした JSON ファイルを選択する必要があります。
-            export_tagging_rules: タグ付けルールをエクスポート
-            export_tagging_rules_detail: これにより、タグ付けルールを他の場所にインポートしたり、バックアップしたりするために使用できる JSON ファイルがダウンロードされます。
-        file_label: JSON ファイル
-        import_submit: インポート
-        export: エクスポート
-        faq:
-            title: 'よくある質問'
-            tagging_rules_definition_title: '« タグ付けルール » とは何ですか？'
-            tagging_rules_definition_description: 'これらは、新しく追加された記事に自動的にタグを付けるために、Wallabag が使用するルールです。<br />新しい記事が追加されるたびに、すべてのタグ付けルールを使用して設定したタグが追加されるため、記事に手動でタグ付けする手間が省けます。'
-            how_to_use_them_title: 'どのように使用できますか？'
-            how_to_use_them_description: '推定読書時間が3分以下のときに、新しい記事を « <i>短めの記事</i> » としてタグ付けしたいと仮定しましょう。<br />その場合は、<i>ルール</i>項目に « readingTime &lt;= 3 » 、<i>タグ</i>項目に « <i>短めの記事</i> » と入力します。<br />カンマで区切って複数のタグを同時に追加することもできます： « <i>短めの記事, 後で読む</i> » <br />複雑なルールは定義済みの演算子を使用して記述できます： もしも « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » ならば、次のタグを付ける « <i>長めの記事, github</i> »'
-            variables_available_title: 'ルールを作成するために使用できる変数と演算子は何ですか？'
-            variables_available_description: '以下の変数と演算子を使用して、タグ付けルールを作成できます：'
-            meaning: '説明'
-            variable_description:
-                label: '変数'
-                title: '記事のタイトル'
-                url: '記事の URL'
-                isArchived: '記事がアーカイブされているかどうか'
-                isStarred: '記事がお気に入りかどうか'
-                content: "記事の内容"
-                language: "記事の言語"
-                mimetype: "記事の MIME 形式"
-                readingTime: "記事を読むのにかかる推定時間 (分単位)"
-                domainName: '記事のドメイン名'
-            operator_description:
-                label: '演算子'
-                less_than: '以下'
-                strictly_less_than: '厳密に小さい'
-                greater_than: '以上'
-                strictly_greater_than: '厳密に大きい'
-                equal_to: '等しい'
-                not_equal_to: '等しくない'
-                or: 'または (例：ルールA OR ルールB)'
-                and: 'かつ (例：ルールA AND ルールB)'
-                matches: '<i>タイトル</i> が <i>検索内容</i> (大文字小文字を区別しない) に一致する例。<br />例：<code>title matches "football"</code>'
-                notmatches: '<i>タイトル</i> が <i>検索内容</i> (大文字小文字を区別しない) に一致しない例。<br />例：<code>title notmatches "football"</code>'
-    otp:
-        page_title: 2要素認証
-        app:
-            two_factor_code_description_1: 2要素認証を有効にすると、ログインの際に OTP アプリで生成された認証コード(ワンタイムパスワード)が要求される用になります。この設定はあなたのアカウントのセキュリティを向上させます。このページは再読み込みすると、閲覧できなくなります。
-            two_factor_code_description_2: 'OTP アプリでこちらの QR コードをスキャンしてください：'
-            two_factor_code_description_3: '以下のコードはバックアップコードです。このバックアップコードはあなたが OTP アプリへのアクセスを失った場合に必要となります。このバックアップコードは安全に保管し、絶対に第三者に教えないでください。：'
-            two_factor_code_description_4: 'OTP アプリの設定が完了したら、設定が正常に行われたことを確認するためにここに認証コードを入力してください：'
-            cancel: キャンセル
-            enable: 2要素認証を有効にする
-
+  page_title: 設定
+  tab_menu:
+    settings: 設定
+    rss: RSS
+    user_info: ユーザー情報
+    password: パスワード
+    rules: タグ付けのルール
+    new_user: ユーザーを追加
+  form:
+    save: 保存
+  form_settings:
+    theme_label: テーマ
+    items_per_page_label: ページあたりのアイテム
+    language_label: 言語
+    reading_speed:
+      label: 読む速度
+      help_message: 'オンライン ツールを使用して、読む速度を推定することができます:'
+      100_word: 1 分あたり ~100 語読みます
+      200_word: 1 分あたり ~200 語読みます
+      300_word: 1 分あたり ~300 語読みます
+      400_word: 1 分あたり ~400 語読みます
+    pocket_consumer_key_label: コンテンツをインポートする Pocket のコンシューマー キー
+    help_items_per_page: 各ページに表示する記事の数を変更できます。
+    help_reading_speed: wallabag は、各記事を読む時間を計算します。あなたの読む速度が速い、または遅い場合は、このリストのおかげで、ここで定義することができます。
+      wallabag は、各記事の読む時間を再計算します。
+    help_language: wallabag のインターフェイスの言語を変更することができます。
+    help_pocket_consumer_key: Pocket  のインポートに必要です。 Pocket のアカウントで作成することができます。
+  form_rss:
+    description: wallabag が提供する RSS フィードは、お好みの RSS リーダーで保存した記事を読むできます。最初にトークンを生成する必要があります。
+    token_label: RSS トークン
+    no_token: トークンがありません
+    token_create: トークンを作成
+    token_reset: トークンを再生成
+    rss_links: RSS のリンク
+    rss_limit: フィード内のアイテムの数
+  form_user:
+    two_factor_description: 二要素認証を有効にすると、信頼されていない新しい接続ごとに、コードを記載したメールが届きます。
+    help_twoFactorAuthentication: 二要素認証を有効にした場合、wallabag にログインするたびに、メールでコードを受信します。
+  form_password:
+    old_password_label: 現在のパスワード
+    new_password_label: 新しいパスワード
+  form_rules:
+    if_label: もし
+    then_tag_as_label: ならばタグ付け
+    rule_label: ルール
+    faq:
+      title: FAQ
+      tagging_rules_definition_title: «タグ付けルール» とは?
+      how_to_use_them_title: 使用する方法は?
+      variables_available_title: ルールを記述するために、どの変数と演算子が使用できますか?
+      variables_available_description: 'タグ付けのルールを作成するのに、次の変数と演算子が使用できます:'
+      meaning: 意味
+      variable_description:
+        label: 変数
+        url: エントリーの URL
+        isArchived: エントリーがアーカイブかどうか
+        isStarred: エントリーにスターがつけられたかどうか
+        content: エントリーのコンテンツ
+        language: エントリーの言語
+        mimetype: エントリーの mime タイプ
+        readingTime: 推定されるエントリーを読む時間。分で
+        domainName: エントリーのドメイン名
+      operator_description:
+        label: 演算子
+        less_than: 未満...
+        strictly_less_than: 厳密に小さい...
+        greater_than: より大きい...
+        strictly_greater_than: 厳密に大きい...
+        equal_to: 等しい...
+        not_equal_to: 等しくない...
+        or: 1 つのルール または 別のルール
+        and: 1 つのルール かつ 別のルール
 entry:
-    default_title: '記事のタイトル'
-    page_titles:
-        unread: '未読の記事'
-        starred: 'お気に入りの記事'
-        archived: 'アーカイブ済みの記事'
-        filtered: '記事の絞り込み'
-        filtered_tags: 'タグ検索：'
-        filtered_search: '単語検索：'
-        untagged: 'タグの無い記事'
-        all: '全ての記事'
-    list:
-        number_on_the_page: '{0} 記事がありません|{1} 1 件の記事|]1,Inf[ %count% 件の記事'
-        reading_time: '推定読書時間'
-        reading_time_minutes: '推定読書時間： %readingTime% 分'
-        reading_time_less_one_minute: '推定読書時間： 1 分未満'
-        number_of_tags: '{1}他 1 件のタグ|]1,Inf[他 %count% 件のタグ'
-        reading_time_minutes_short: '%readingTime% 分'
-        reading_time_less_one_minute_short: '1 分未満'
-        original_article: '元 URL'
-        toogle_as_read: '既読・未読の切り替え'
-        toogle_as_star: 'お気に入りの切り替え'
-        delete: '削除'
-        export_title: 'エクスポート'
-    filters:
-        title: 'フィルター'
-        status_label: '状態'
-        archived_label: 'アーカイブ済み'
-        starred_label: 'お気に入り'
-        unread_label: '未読'
-        preview_picture_label: 'プレビュー画像がある'
-        preview_picture_help: 'プレビュー画像'
-        is_public_label: '公開リンクがある'
-        is_public_help: '公開リンク'
-        language_label: '言語'
-        http_status_label: 'HTTP ステータス'
-        reading_time:
-            label: '推定読書時間'
-            from: '最小時間'
-            to: '最大時間'
-        domain_label: 'ドメイン名'
-        created_at:
-            label: '作成日'
-            from: '開始日'
-            to: '終了日'
-        action:
-            clear: '解除'
-            filter: '検索'
-    view:
-        left_menu:
-            back_to_top: 'トップへ戻る'
-            back_to_homepage: '戻る'
-            set_as_read: '既読としてマーク'
-            set_as_unread: '未読としてマーク'
-            set_as_starred: 'お気に入りの切替え'
-            view_original_article: 'オリジナルの記事'
-            re_fetch_content: 'コンテンツを再取得'
-            delete: '削除'
-            add_a_tag: 'タグを追加'
-            share_content: '共有'
-            share_email_label: '電子メール'
-            public_link: '公開リンク'
-            delete_public_link: '公開リンクを削除'
-            export: 'エクスポート'
-            print: '印刷'
-            problem:
-                label: '問題がありますか？'
-                description: 'この記事に表示上の問題が発生していますか？'
-        edit_title: 'タイトルを編集'
-        original_article: '元 URL'
-        annotations_on_the_entry: '{0} 注釈なし|{1} 1 件の注釈|]1,Inf[ %count% 件の注釈'
-        created_at: '作成日'
-        published_at: '公開日'
-        published_by: '公開者'
-        provided_by: '提供元'
-    new:
-        page_title: '新しい記事を保存'
-        placeholder: 'https://website.com'
-        form_new:
-            url_label: URL
-    search:
-        placeholder: '何をお探しですか？'
-    edit:
-        page_title: '記事を編集'
-        title_label: 'タイトル'
-        url_label: 'URL'
-        origin_url_label: '元 URL (記事を見つけた場所)'
-        save_label: '保存'
-    public:
-        shared_by_wallabag: "これは %username% と <a href='%wallabag_instance%'>Wallabag</a> によって共有された記事です。"
-    confirm:
-        delete: "記事を削除してよろしいですか？"
-        delete_tag: "記事からタグを削除してよろしいですか？"
-    metadata:
-        reading_time: "推定読書時間"
-        reading_time_minutes_short: "%readingTime% 分"
-        address: "アドレス"
-        added_on: "追加日"
-        # published_on: "Published on"
-
-about:
-    page_title: 'アプリについて'
-    top_menu:
-        who_behind_wallabag: 'Wallabag の開発'
-        getting_help: '助けを得る'
-        helping: 'Wallabag を支援'
-        contributors: '貢献者'
-        third_party: 'サードパーティライブラリ'
-    who_behind_wallabag:
-        developped_by: '開発者:'
-        website: 'ウェブサイト'
-        many_contributors: 'そして、他の多くの <a href="https://github.com/wallabag/wallabag/graphs/contributors">GitHub</a> 上での貢献者'
-        project_website: 'プロジェクトのウェブサイト'
-        license: 'ライセンス'
-        version: 'バージョン'
-    getting_help:
-        documentation: 'ドキュメント'
-        bug_reports: 'バグ報告'
-        support: '<a href="https://github.com/wallabag/wallabag/issues">GitHub上で</a>'
-    helping:
-        description: 'Wallabag はフリーでオープンソースのソフトウェアです。ご支援いただけると幸いです。：'
-        by_contributing: 'プロジェクトに貢献する：'
-        by_contributing_2: 'こちらが現在やるべきことのリストです'
-        by_paypal: 'PayPal 経由で寄付する'
-    contributors:
-        description: 'Wallabag ウェブアプリケーションの開発貢献者に感謝します。'
-    third_party:
-        description: 'Wallabag で使用されているサードパーティ製ライブラリの一覧を次に示します(ライセンス併記)：'
-        package: 'パッケージ'
-        license: 'ライセンス'
-
-howto:
-    page_title: '使い方'
-    tab_menu:
-        add_link: "リンク追加"
-        shortcuts: "ショートカット"
-    page_description: '記事を保存する方法は複数あります：'
-    top_menu:
-        browser_addons: 'ブラウザアドオン'
-        mobile_apps: 'モバイルアプリ'
-        bookmarklet: 'ブックマークレット'
-    form:
-        description: 'こちらのフォームから'
-    browser_addons:
-        firefox: 'Firefox アドオン'
-        chrome: 'Chrome アドオン'
-        opera: 'Opera アドオン'
-    mobile_apps:
-        android:
-            via_f_droid: 'F-Droid'
-            via_google_play: 'Google Play'
-        ios: 'iTunes Store'
-        windows: 'Microsoft Store'
-    bookmarklet:
-        description: 'このリンクをブックマークバーにドラッグ＆ドロップします：'
-    shortcuts:
-        page_description: こちらが Wallabag で使用可能なショートカットです。
-        shortcut: ショートカット
-        action: 操作
-        all_pages_title: すべてのページで使用できるショートカット
-        go_unread: 未読へ
-        go_starred: お気に入りへ
-        go_archive: アーカイブ済みへ
-        go_all: 全ての記事へ
-        go_tags: タグへ
-        go_config: 設定へ
-        go_import: インポートへ
-        go_developers: Developerへ
-        go_howto: 使い方へ (このページ)
-        go_logout: ログアウト
-        list_title: 一覧ページで使用できるショートカット
-        search: 検索欄を表示
-        article_title: 記事表示中に使用できるショートカット
-        open_original: 記事の元 URL を開く
-        toggle_favorite: 記事のお気に入りの切り替え
-        toggle_archive: 記事の既読・未読の切り替え
-        delete: 記事を削除
-        material_title: Material テーマ時のみ使用できるショートカット
-        add_link: 新しいリンクを追加
-        hide_form: 現在開いているフォームを隠す (検索または新しいリンク)
-        arrows_navigation: 記事を選択
-        open_article: 選択された記事を表示
-
-quickstart:
-    page_title: 'はじめに'
-    more: 'さらに見る…'
-    intro:
-        title: 'Wallabag へようこそ！'
-        paragraph_1: "あなたが興味を持つかもしれない Wallabag の機能をご紹介します。"
-        paragraph_2: '私たちをフォローする'
-    configure:
-        title: '構成をカスタマイズ'
-        description: 'Wallabag を使いやすくするために、構成を変更できます。'
-        language: '表示言語や表示形式を変更する'
-        feed: 'フィードを有効にする'
-        tagging_rules: '記事に自動的にタグ付するためのルールを記述する'
-    admin:
-        title: '管理者向け'
-        description: 'あなたは管理者として、 Wallabag に対する以下のような権限を持っています：'
-        new_user: '新しいユーザーの作成'
-        analytics: '構成の分析'
-        sharing: '記事の共有に関する一部のパラメータを有効にする'
-        export: '構成のエクスポート'
-        import: '構成のインポート'
-    first_steps:
-        title: '最初のステップ'
-        description: "Wallabag で、ウェブを保存する準備ができました。右上の「+(プラス記号)」をクリックしてリンクを追加できます。"
-        new_article: '一番最初の記事を追加する'
-        unread_articles: 'そして、追加した記事を整理する！'
-    migrate:
-        title: '他のサービスからデータを移行する'
-        description: "今まで他のサービスを使用していましたか？私たちは、今までのデータを Wallabag に移行するツールをご用意しています。"
-        pocket: 'Pocket からデータを移行'
-        wallabag_v1: 'Wallabag v1 からデータを移行'
-        wallabag_v2: 'Wallabag v2 からデータを移行'
-        readability: 'Readability からデータを移行'
-        instapaper: 'Instapaper からデータを移行'
-    developer:
-        title: '開発者向け情報'
-        description: '開発者のことも考えています： Docker、API、翻訳...'
-        create_application: 'アプリケーションを作成する'
-        use_docker: 'Docker に Wallabag をインストールする'
-    docs:
-        title: '完全なドキュメント'
-        description: "Wallabag には非常に多くの機能があります。マニュアルを読むことで、それらの機能を知ることができます。"
-        annotate: '記事に注釈を付ける方法'
-        export: '記事を ePUB や PDF に変換する方法'
-        search_filters: '検索エンジンとフィルターを使用して記事を検索する方法'
-        fetching_errors: '記事の取得中にエラーが発生した場合、どうしたらよいですか？'
-        all_docs: 'その他様々な機能のマニュアル'
-    support:
-        title: 'サポート'
-        description: 'あなたが助けを必要とするならば、私たちはここにいます。'
-        github: 'GitHub'
-        email: '電子メール'
-        gitter: 'Gitter'
-
-tag:
-    page_title: 'タグ'
-    list:
-        number_on_the_page: '{0} タグはありません|{1} 1 件のタグ|]1,Inf[ %count% 件のタグ'
-        see_untagged_entries: 'タグの無い記事を見る'
-        no_untagged_entries: 'タグの付いていない記事は存在しません。'
-        untagged: 'タグの無い記事'
-    new:
-        add: '追加'
-        placeholder: 'コンマ「,」で区切ることで、複数のタグを追加できます。'
-    rename:
-        placeholder: 'タグ名は更新できます。'
-
-export:
-    footer_template: '<div style="text-align:center;"><p>Wallabag と %method% によるプロデュース</p><p>あなたの端末上での表示に問題がある場合は <a href="https://github.com/wallabag/wallabag/issues">Issue</a> から報告してください。</p></div>'
-    unknown: '不明'
-
-import:
-    page_title: 'インポート'
-    page_description: 'Wallabag インポータへようこそ。移行元のサービスを選択してください。'
+  page_titles:
+    unread: 未読エントリー
+    starred: スター付きのエントリー
+    archived: アーカイブ済のエントリー
+    filtered: フィルターされたエントリー
+    filtered_tags: 'タグによるフィルター:'
+    untagged: タグの付いていないエントリー
+  list:
+    number_on_the_page: '{0} エントリーはありません。|{1} 1 つエントリーがあります。|]1,Inf[ %count% のエントリーがあります。'
+    reading_time_minutes: '推定の読む時間: %readingTime% 分'
+    number_of_tags: '{1}と他の 1 つのタグ|]1,Inf[と %count% の他のタグ'
+    toogle_as_read: 既読を切り替える
+  filters:
+    title: フィルター
+    status_label: ステータス
+    preview_picture_label: プレビュー画像を持つ
+    preview_picture_help: プレビュー画像
+    reading_time:
+      label: 分単位の読む時間
+    domain_label: ドメイン名
     action:
-        import_contents: 'コンテンツをインポート'
-    form:
-        mark_as_read_title: '全てを既読としてマークしますか？'
-        mark_as_read_label: 'インポートされた全ての記事を既読としてマークする'
-        file_label: 'ファイル'
-        save_label: 'ファイルをアップロード'
-    pocket:
-        page_title: 'インポート > Pocket'
-        description: "ここでは、 Pocket の全てのデータをインポートします。 Pocket はサービスからコンテンツを取得することができないので、各記事の読み取り可能なコンテンツは Wallabag によって再取得されます。"
-        config_missing:
-            description: "Pocket からのインポートが構成されていません。"
-            admin_message: '%keyurls%pocket_consumer_key%keyurle% を定義する必要があります。'
-            user_message: 'サーバー管理者は、 Pocket の API キーを定義する必要があります。'
-        authorize_message: 'Pocket のアカウントからデータをインポートできます。その場合、下のボタンをクリックして、 getpocket.com で接続するアプリケーションを承認する必要があります。'
-        connect_to_pocket: 'Pocket に接続しデータをインポート'
-    wallabag_v1:
-        page_title: 'インポート > Wallabag v1'
-        description: 'ここでは、 Wallabag v1 の全ての記事をインポートします。設定ページで、「Export your wallabag data」という項目の「JSON export」をクリックします。そうすると「wallabag-export-1-xxxx-xx-xx.json」というファイルを入手できます。'
-        how_to: 'あなたの Wallabag のエクスポートデータを選択して、下のボタンをクリックしてアップロードしてインポートしてください。'
-    wallabag_v2:
-        page_title: 'インポート > Wallabag v2'
-        description: 'ここでは、 Wallabag v2 の全ての記事をインポートします。「全ての記事」で、スライドバーから「エクスポート」を選択後「JSON」を選択します。そうすると「All articles.json」というファイルを入手できます。'
-    elcurator:
-        page_title: 'インポート > elCurator'
-        description: 'ここでは、 elCurator の全ての記事をインポートします。あなたの elCurator アカウントの設定で、コンテンツをエクスポートしてください。そうすると JSON ファイルを入手できます。'
-    readability:
-        page_title: 'インポート > Readability'
-        description: 'ここでは、 Readability の全ての記事をインポートします。ツールページ(https://www.readability.com/tools/)で、「Data Export」という項目の「Export your data」をクリックします。そうすると JSON ファイルをダウンロードするための電子メールを受け取ります(拡張子が .json ではありません)。'
-        how_to: 'あなたの Readability のエクスポートデータを選択して、下のボタンをクリックしてアップロードしてインポートしてください。'
-    worker:
-        enabled: "インポートは非同期的に行われます。インポートタスクが開始されると、外部のワーカーは1度に1つずつジョブを処理します。現在のサービスは："
-        download_images_warning: "記事の画像のダウンロードを有効にしました。クラシックなインポートと組み合わせると、進行に時間がかかる(または失敗する)場合があります。エラーを回避するために、非同期インポートを有効にすることを<strong>強くお勧めします</strong>。"
-    firefox:
-        page_title: 'インポート > Firefox'
-        description: "ここでは、 Firefox の全てのブックマークをインポートします。 Firefox のメニューから「すべてのブックマークを表示」を選択し「ブラウジングライブラリー」に移動します。その後「インポートとバックアップ」から「バックアップ...」を選択して .json 形式のファイルを入手してください。"
-        how_to: "ブックマークのバックアップファイルを選択し、下のボタンをクリックしてインポートしてください。すべての記事を取得する必要があるため、この作業には時間がかかる場合があります。"
-    chrome:
-        page_title: 'インポート > Chrome'
-        description: "ここでは、 Chrome の全てのブックマークをインポートします。ファイルの場所は、オペレーティングシステムの種類によって異なります：<ul><li>Linux の場合は <code>~/.config/chromium/Default/</code> というディレクトリの中</li><li>Windows の場合は <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>OS X の場合は <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>それを <code>Bookmarks</code> にコピーしてください。<em><br>( Chrome ではなく Chromium をご利用の場合は、それに応じてパスを修正する必要があります。)</em></p>"
-        how_to: "ブックマークのバックアップファイルを選択し、下のボタンをクリックしてインポートしてください。すべての記事を取得する必要があるため、この作業には時間がかかる場合があります。"
-    instapaper:
-        page_title: 'インポート > Instapaper'
-        description: 'ここでは、 Instapaper の全ての記事をインポートします。設定ページ(https://www.instapaper.com/user)で、「Export」という項目の「Download .CSV file」をクリックします。そうすると「instapaper-export.csv」のよるな CSV ファイルをダウンロードできます。'
-        how_to: 'あなたの Instapaper のエクスポートデータを選択して、下のボタンをクリックしてアップロードしてインポートしてください。'
-    pinboard:
-        page_title: "インポート > Pinboard"
-        description: 'ここでは、 Pinboard の全ての記事をインポートします。バックアップページ(https://pinboard.in/settings/backup)で、「Bookmarks」という項目の「JSON」をクリックします。そうすると「pinboard_export」のような JSON ファイルをダウンロードできます。'
-        how_to: 'あなたの Pinboard のエクスポートデータを選択して、下のボタンをクリックしてアップロードしてインポートしてください。'
-
+      clear: クリア
+      filter: フィルター
+  view:
+    left_menu:
+      back_to_top: トップへ戻る
+      set_as_read: 既読にする
+      set_as_unread: 未読にする
+      view_original_article: オリジナルの記事
+      re_fetch_content: コンテンツを再取得
+      add_a_tag: タグを追加
+      share_content: 共有
+      delete_public_link: 公開リンクを削除
+      print: 印刷
+      problem:
+        label: 問題がありますか?
+        description: この記事が間違って表示されますか?
+    edit_title: タイトルを編集
+    annotations_on_the_entry: '{0} 注釈はありません|{1} 1 注釈|]1,Inf[ %count% 注釈'
+  new:
+    page_title: 新しいエントリーを保存
+    placeholder: http://website.com
+  edit:
+    page_title: エントリーを編集
+    title_label: タイトル
+about:
+  top_menu:
+    who_behind_wallabag: wallabag の背後にいるのは誰ですか
+    getting_help: ヘルプの入手
+    helping: wallabag のヘルプ
+    contributors: 貢献者
+    third_party: サードパーティ ライブラリー
+  who_behind_wallabag:
+    developped_by: 開発者
+    website: ウェブサイト
+    project_website: プロジェクトのウェブサイト
+    version: バージョン
+  getting_help:
+    bug_reports: バグ報告
+  helping:
+    description: 'wallabag はフリーでオープン ソースです。私たちを支援することができます:'
+    by_contributing: 'プロジェクトへの貢献:'
+    by_contributing_2: 問題のリスト、すべてのニーズ
+    by_paypal: Paypal 経由で
+  contributors:
+    description: Wallabag web アプリケーションの貢献者に感謝します
+  third_party:
+    description: 'これは wallabag で使用するサード パーティ ライブラリー (とそのライセンス) のリストです:'
+    package: パッケージ
+howto:
+  page_description: '記事を保存するいくつかの方法があります:'
+  top_menu:
+    browser_addons: ブラウザーのアドオン
+    mobile_apps: モバイルアプリ
+    bookmarklet: ブックマークレット
+  form:
+    description: このフォームのおかげで
+  mobile_apps:
+    android:
+      via_f_droid: F-Droid 経由で
+      via_google_play: Google Play 経由で
+    ios: iTunes ストアで
+    windows: Microsoft Store で
+quickstart:
+  page_title: クイック スタート
+  more: さらに…
+  intro:
+    paragraph_1: wallabag への訪問に同行し、あなたが興味を持ちそうないくつかの機能について説明します。
+    paragraph_2: 私たちについてきてください!
+  configure:
+    title: アプリケーションを構成します
+    description: あなたに合ったアプリケーションにするために wallabag の構成をご覧ください。
+    language: 言語とデザインを変更します
+    rss: RSS フィードを有効にします
+    tagging_rules: 自動的にあなたの記事にタグ付けするルールを記述します
+  admin:
+    title: 管理
+    description: '管理者として wallabag に対する権限があります。できること:'
+    analytics: 分析を構成
+    sharing: 記事の共有に関するいくつかのパラメーターを有効にする
+    export: エクスポートを構成
+    import: インポートを構成
+  first_steps:
+    title: 最初のステップ
+    description: wallabag は正しく構成されました。web をアーカイブする時間です。右上の + 記号をクリックして、リンクを追加することができます。
+    new_article: 最初の記事を保存しましょう
+    unread_articles: そして、それを分類しましょう!
+  migrate:
+    title: 既存のサービスから移行します
+    description: 別のサービスを使用していますか? wallabag 上のデータを取得するためのお手伝いをします。
+    pocket: Pocket からの移行
+    wallabag_v1: wallabag v1 からの移行
+    wallabag_v2: wallabag v2 からの移行
+    readability: Readability からの移行
+    instapaper: Instapaper からの移行
+  developer:
+    title: 開発者
+    use_docker: Docker を使用して wallabag をインストールする
+  docs:
+    title: 完全なドキュメント
+    description: wallabag には多くの機能があります。気軽にマニュアルを読んで、それらについて知り、使用する方法について学習してください。
+    annotate: あなたの記事に注釈を付ける
+    export: ePUB や PDF にあなたの記事を変換します
+    search_filters: 検索エンジンやフィルターを使用して、記事を検索する方法をご覧ください
+    fetching_errors: 記事の取得中にエラーが発生した場合に、何をすることができますか?
+    all_docs: その他非常に多くの記事!
+  support:
+    title: サポート
+    description: 何か助けが必要な場合は、私たちがお役に立ちます。
+    github: GitHub 上で
+    email: メールで
+    gitter: Gitter 上で
+tag:
+  list:
+    number_on_the_page: '{0} タグはありません。|{1} 1 つタグがあります。|]1,Inf[ %count% タグがあります。'
+    see_untagged_entries: タグのないエントリーを参照
+import:
+  page_description: wallabag インポーターへようこそ。移行元となる前のサービスを選択してください。
+  action:
+    import_contents: コンテンツをインポート
+  form:
+    mark_as_read_title: すべて既読にしますか?
+    mark_as_read_label: インポートされたエントリーをすべて既読にする
+    file_label: ファイル
+    save_label: ファイルをアップロード
+  pocket:
+    description: このインポーターは、すべての Pocket のデータをインポートします。Pocket は、私たちが彼らのサービスからコンテンツを取得することはできないため、各記事の読み取り可能なコンテンツは
+      wallabag によって再取得されます。
+    config_missing:
+      description: Pocket のインポートが構成されていません。
+      admin_message: '%keyurls%a pocket_consumer_key%keyurle% を定義する必要があります。'
+      user_message: サーバー管理者が Pocket の API キーを定義する必要があります。
+    authorize_message: あなたの Pocket のアカウントからデータをインポートできます。下のボタンをクリックするだけで、アプリケーションを承認して
+      getpocket.com に接続します。
+    connect_to_pocket: Pocket に接続して、データをインポート
+  wallabag_v1:
+    description: このインポーターは、あなたの wallabag v1 の記事をすべてインポートします。構成ページで、"wallabag データをエクスポート"
+      セクションで "JSON のエクスポート" をクリックします。"wallabag-export-1-xxxx-xx-xx.json" ファイルができます。
+    how_to: wallabag エクスポートを選択して、下のボタンをクリックし、アップロードおよびインポートしてください。
+  wallabag_v2:
+    description: このインポーターは、あなたの wallabag v2 の記事をすべてインポートします。すべての記事に移動し、エクスポート サイドバーで
+      "JSON" をクリックしてください "All articles.json" ファイルができます。
+  readability:
+    description: このインポーターは、Readability の記事をすべてインポートします。ツール (https://www.readability.com/tools/)
+      ページで "データのエクスポート" セクションの "データをエクスポート" をクリックしてします。json をダウンロードするメールを受け取ります (実は
+      .json で終わらない)。
+    how_to: Readability エクスポートを選択して、下のボタンをクリックし、アップロードおよびインポートしてください。
+  worker:
+    enabled: 'インポートは非同期に行われます。インポート タスクが開始されると、外部のワーカーが一度に 1 つのジョブを処理します。現在のサービスは:'
+  firefox:
+    description: このインポーターは Firefox のブックマークをインポートします。ブックマーク (Ctrl+Shift+B) に移動して、"インポートとバックアップ"
+      で、"バックアップ..." を選択します。.json ファイルが得られます。
+  instapaper:
+    description: このインポーターは Instapaper の記事すべてをインポートします。設定 (https://www.instapaper.com/user)
+      ページで、"エクスポート" の ".CSV をダウンロード" をクリックしてください。CSV ファイルがダウンロードされます ("instapaper-export.csv"
+      のような)。
+    how_to: Instapaper エクスポートを選択して、下のボタンをクリックし、アップロードおよびインポートしてください。
 developer:
-    page_title: 'API クライアントの管理'
-    welcome_message: 'Wallabag API へようこそ'
-    documentation: 'ドキュメント'
-    how_to_first_app: '初めてのアプリケーションの作成方法'
-    full_documentation: '完全な API ドキュメントを閲覧'
-    list_methods: 'API メソッドの一覧を閲覧'
-    clients:
-        title: 'クライアント'
-        create_new: '新しいクライアントを作成'
-    existing_clients:
-        title: '既存のクライアント'
-        field_id: 'クライアント ID'
-        field_secret: 'クライアントシークレット'
-        field_uris: 'リダイレクト URI'
-        field_grant_types: '許可されたタイプ'
-        no_client: 'クライアントがありません。'
-    remove:
-        warn_message_1: 'クライアント %name% を削除しますか？この操作は不可逆的で、元に戻すことはできません。'
-        warn_message_2: "削除すると、そのクライアントで構成されているすべてのアプリが、 Wallabag で認証できなくなります。"
-        action: 'クライアント %name% を削除'
-    client:
-        page_title: 'API クライアントの管理 > 新しいクライアント'
-        page_description: 'あなたは、新しいクライアントを作成しようとしています。アプリケーションのリダイレクト URI は下の欄に入力してください。'
-        form:
-            name_label: 'クライアント名'
-            redirect_uris_label: 'リダイレクト URI (オプション)'
-            save_label: '新しいクライアントを作成'
-        action_back: '戻る'
-        copy_to_clipboard: コピー
-    client_parameter:
-        page_title: 'API クライアントの管理 > クライアントパラメーター'
-        page_description: 'こちらがクライアントパラメーターです。'
-        field_name: 'クライアント名'
-        field_id: 'クライアント ID'
-        field_secret: 'クライアントシークレット'
-        back: '戻る'
-        read_howto: '「初めてのアプリケーションの作り方」を読む'
-    howto:
-        page_title: 'API クライアントの管理 > 初めてのアプリケーションの作り方'
-        description:
-            paragraph_1: '次のコマンドは <a href="https://github.com/jkbrzt/httpie">HTTPie library</a> を使用します。使用する前に、これがシステムにインストールされていることを確認してください。'
-            paragraph_2: 'サードパーティアプリケーションと、 Wallabag API との間で通信するには、トークンが必要です。'
-            paragraph_3: 'トークンを作成するには、<a href="%link%">新しいクライアントを作成する</a>必要があります。'
-            paragraph_4: 'トークンを作成します ( client_id 、 client_secret 、 username 、 password の値はあなたの環境に合わせて置き換えてください)：'
-            paragraph_5: 'API は次の例のような応答を返します：'
-            paragraph_6: 'access_token は、 API エンドポイントの呼び出しを行う場合に便利です。例：'
-            paragraph_7: 'この呼び出しは、ユーザーのすべての記事を返します。'
-            paragraph_8: 'すべての API エンドポイントを表示したい場合は、<a href="%link%"> API ドキュメント</a>を参照してください。'
-        back: '戻る'
-
+  welcome_message: wallabag API へようこそ
+  how_to_first_app: 最初のアプリケーションを作成する方法
+  full_documentation: 完全な API ドキュメントを表示
+  list_methods: API メソッドの一覧
+  clients:
+    title: クライアント
+  existing_clients:
+    title: 既存のクライアント
+    field_uris: リダイレクト URI
+    field_grant_types: 許可の種類
+    no_client: まだクライアントはありません。
+  remove:
+    warn_message_1: クライアント %name% を削除することができます。この操作は不可逆的です !
+    warn_message_2: 削除すると、そのクライアントで構成されているすべてのアプリはあなた wallabag で認証することができません。
+    action: クライアント %name% を削除
+  client:
+    page_description: 新しいクライアントを作成しようとしています。アプリケーションのリダイレクト URI を下のフィールドに入力してください。
+    form:
+      name_label: クライアントの名前
+      redirect_uris_label: リダイレクト URI (オプション)
+  client_parameter:
+    page_description: これはクライアントのパラメーターです。
+    field_name: クライアント名
+    read_howto: '"最初のアプリケーションを作成する" 方法をお読みください'
+  howto:
+    description:
+      paragraph_2: あなたの第三者アプリケーションと wallabag API 間の通信にトークンが必要です。
+      paragraph_4: '今から、トークンを作成します (クライアント_ID、クライアントの秘密、ユーザー名、パスワードを適切な値に置き換えてください):'
+      paragraph_5: 'API はこのようなレスポンスを返します:'
+      paragraph_6: 'アクセストークンは API エンドポイントの呼び出しを行う際に便利です。例えば:'
+      paragraph_7: この呼び出しは、ユーザーのすべてのエントリーが返されます。
 user:
-    page_title: ユーザー管理
-    new_user: 新しいユーザーを作成
-    edit_user: 既存のユーザーを編集
-    description: "ここでは全てのユーザーを管理(作成、編集、管理)できます"
-    list:
-        actions: 操作
-        edit_action: 編集
-        yes: はい
-        no: いいえ
-        create_new_one: 新しいユーザーを作成
-    form:
-        username_label: 'ユーザー名'
-        name_label: '名前'
-        password_label: 'パスワード'
-        repeat_new_password_label: '新しいパスワードの確認'
-        plain_password_label: '????'
-        email_label: 'メールアドレス'
-        enabled_label: '有効'
-        last_login_label: '前回のログイン'
-        twofactor_email_label: 電子メールによる2要素認証
-        twofactor_google_label: OTP アプリによる2要素認証
-        save: 保存
-        delete: 削除
-        delete_confirm: 本当によろしいですか？
-        back_to_list: リストに戻る
-    search:
-        placeholder: ユーザー名またはメールアドレスで検索
-
-site_credential:
-    page_title: サイト資格情報管理
-    new_site_credential: 資格情報を作成
-    edit_site_credential: 既存の資格情報を編集
-    description: "ここでは、ペイウォール、認証などが必要なサイトに関するすべての資格情報を管理(作成、編集、削除)できます。"
-    list:
-        actions: 操作
-        edit_action: 編集
-        yes: はい
-        no: いいえ
-        create_new_one: 新しい資格情報を作成
-    form:
-        username_label: 'ユーザー名'
-        host_label: 'ホスト (例：subdomain.example.org、 .example.org ...)'
-        password_label: 'パスワード'
-        save: 保存
-        delete: 削除
-        delete_confirm: 本当によろしいですか？
-        back_to_list: リストに戻る
-
+  edit_user: 既存のユーザーを編集
+  description: ここですべてのユーザーを管理できます (作成、編集、および削除)
+  form:
+    plain_password_label: ????
+    enabled_label: 有効
+    last_login_label: 最終ログイン
 error:
-    page_title: エラーが発生しました
-
+  page_title: エラーが発生しました
 flashes:
-    config:
-        notice:
-            config_saved: '設定が保存されました'
-            password_updated: 'パスワードが更新されました'
-            password_not_updated_demo: "デモモードでは、このユーザーのパスワードを変更することはできません。"
-            user_updated: '情報が更新されました'
-            feed_updated: 'フィード情報が更新されました'
-            tagging_rules_updated: 'タグ付けルールが更新されました'
-            tagging_rules_deleted: 'タグ付けルールが削除されました'
-            feed_token_updated: 'フィードトークンが更新されました'
-            feed_token_revoked: 'フィードトークンが取り消されました'
-            annotations_reset: 注釈がリセットされました
-            tags_reset: タグがリセットされました
-            entries_reset: 記事がリセットされました
-            archived_reset: アーカイブ済みの記事がリセットされました
-            otp_enabled: 2要素認証が有効化されました
-            # otp_disabled: Two-factor authentication disabled
-            tagging_rules_imported: タグ付けルールがインポートされました
-            tagging_rules_not_imported: タグ付けルールのインポート中にエラーが発生しました
-    entry:
-        notice:
-            entry_already_saved: 'この記事は既に %date% に保存済みです'
-            entry_saved: '記事が保存されました'
-            entry_saved_failed: '記事の保存を試みましたがコンテンツの呼び出しに失敗しました'
-            entry_updated: '記事が更新されました'
-            entry_reloaded: '記事が再読込されました'
-            entry_reloaded_failed: '記事の再読込を試みましたがコンテンツの呼び出しに失敗しました'
-            entry_archived: '記事がアーカイブされました'
-            entry_unarchived: '記事のアーカイブが解除されました'
-            entry_starred: '記事がお気に入りとして登録されました'
-            entry_unstarred: '記事がお気に入りから除外されました'
-            entry_deleted: '記事が削除されました'
-            no_random_entry: '条件に当てはまる記事が見つかりませんでした'
-    tag:
-        notice:
-            tag_added: 'タグを追加しました'
-            tag_renamed: 'タグ名を変更しました'
-    import:
-        notice:
-            failed: 'インポートに失敗しました。もう一度お試しください。'
-            failed_on_file: 'インポート処理中にエラーが発生しました。インポートファイルを確認してください。'
-            summary: 'インポート概要：%imported% 件がインポートされました。%skipped% 件は既に保存されていました。'
-            summary_with_queue: 'インポート概要：%queued% 件を処理中。'
-        error:
-            redis_enabled_not_installed: Redis はハンドルの非同期インポートを有効にしていますが、<u>それに接続できない</u>のように見えます。Redis の構成を確認してください。
-            rabbit_enabled_not_installed: RabbitMQ はハンドルの非同期インポートを有効にしていますが、<u>それに接続できない</u>のように見えます。RabbitMQ の構成を確認してください。
-    developer:
-        notice:
-            client_created: '新しいクライアント %name% が作成されました'
-            client_deleted: 'クライアント %name% が削除されました'
-    user:
-        notice:
-            added: 'ユーザー "%username%" が追加されました'
-            updated: 'ユーザー "%username%" が更新されました'
-            deleted: 'ユーザー "%username%" が削除されました'
-    site_credential:
-        notice:
-            added: '"%host%" のサイト資格情報が追加されました'
-            updated: '"%host%" のサイト資格情報が更新されました'
-            deleted: '"%host%" のサイト資格情報が削除されました'
+  config:
+    notice:
+      config_saved: 較正を保存しました。
+      password_updated: パスワードを更新しました
+      password_not_updated_demo: デモ モードでは、このユーザーのパスワードを変更できません。
+      user_updated: 情報を更新しました
+      rss_updated: RSS 情報を更新しました
+      tagging_rules_updated: タグ付けのルールを更新しました
+      tagging_rules_deleted: タグ付けルールを削除しました
+      rss_token_updated: RSS トークンを更新しました
+  entry:
+    notice:
+      entry_already_saved: エントリーは %date% に既に保存されています
+      entry_saved: エントリーを保存しました
+      entry_saved_failed: エントリーを保存しましたが、コンテンツの取得に失敗しました
+      entry_updated: エントリを更新しました
+      entry_reloaded: エントリーを再ロードしました
+      entry_reloaded_failed: エントリーを再ロードしましたが、コンテンツの取得に失敗しました
+      entry_archived: エントリーをアーカイブしました
+      entry_unarchived: エントリーのアーカイブを解除しました
+      entry_starred: エントリーにスターを付けました
+      entry_unstarred: エントリーのスターを解除しました
+      entry_deleted: エントリーを削除しました
+  tag:
+    notice:
+      tag_added: タグを追加しました
+  import:
+    notice:
+      failed: インポートに失敗しました, もう一度やり直してください。
+      failed_on_file: インポートの処理中にエラーが発生しました。インポート ファイルを確認してください。
+      summary: 'インポートの概要: %imported% インポートしました。 %skipped% 既に保存されています。'
+      summary_with_queue: 'インポートの概要: %queued% キューに登録しました。'
+  developer:
+    notice:
+      client_created: 新しいクライアント %name% を作成しました。
+      client_deleted: クライアント %name% を削除しました
+  user:
+    notice:
+      added: ユーザー "%username%" を追加しました
+      updated: ユーザー "%username%" を更新しました
+      deleted: ユーザー "%username%" を削除しました
