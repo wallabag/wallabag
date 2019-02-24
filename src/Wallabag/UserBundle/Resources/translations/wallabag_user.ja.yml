@@ -1,1 +1,10 @@
-{}
+auth_code:
+  on: オン
+  mailer:
+    subject: wallabag 認証コード
+    body:
+      hello: '%user% さん、こんにちは'
+      first_para: wallabag アカウント ログオンするために二要素認証が必要ですが、新しいデバイスで使用されたため、接続を検証するコードを送信します。
+      second_para: 'これがコードです:'
+      support: 何か問題があればお気軽にご連絡ください。
+      signature: Wallabag チーム
