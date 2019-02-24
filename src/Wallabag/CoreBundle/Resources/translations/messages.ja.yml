@@ -1,1 +1,382 @@
-{}
+security:
+  login:
+    page_title: Wallabag へようこそ!
+    keep_logged_in: ログインを維持
+    forgot_password: パスワードをお忘れですか?
+    submit: ログイン
+    register: 登録
+    username: ユーザー名
+    password: パスワード
+    cancel: キャンセル
+  resetting:
+    description: 下記にメール アドレスを入力してください。パスワードのリセット手順をお送りします。
+  register:
+    page_title: アカウントを作成
+    go_to_account: あなたのアカウントに移動
+menu:
+  left:
+    unread: 未読
+    starred: スター
+    archive: アーカイブ
+    all_articles: すべてのエントリ
+    config: 設定
+    tags: タグ
+    internal_settings: 内部設定
+    import: インポート
+    howto: 使い方
+    developer: API クライアント管理
+    logout: ログアウト
+    about: アプリについて
+    search: 検索
+    save_link: リンクを保存
+    back_to_unread: 未読の記事に戻る
+    users_management: ユーザー管理
+    site_credentials: サイトの資格情報
+  top:
+    add_new_entry: 新しいエントリーを追加
+    search: 検索
+    filter_entries: エントリーのフィルター
+    export: エクスポート
+  search_form:
+    input_label: ここに検索を入力します
+footer:
+  wallabag:
+    elsewhere: wallabag をあなたとともに
+    social: ソーシャル
+    powered_by: powered by
+    about: アプリについて
+  stats: '%user_creation% から、%nb_archives% 記事を読みました。 つまり 1 日約 %per_day% です!'
+config:
+  page_title: 設定
+  tab_menu:
+    settings: 設定
+    rss: RSS
+    user_info: ユーザー情報
+    password: パスワード
+    rules: タグ付けのルール
+    new_user: ユーザーを追加
+  form:
+    save: 保存
+  form_settings:
+    theme_label: テーマ
+    items_per_page_label: ページあたりのアイテム
+    language_label: 言語
+    reading_speed:
+      label: 読む速度
+      help_message: 'オンライン ツールを使用して、読む速度を推定することができます:'
+      100_word: 1 分あたり ~100 語読みます
+      200_word: 1 分あたり ~200 語読みます
+      300_word: 1 分あたり ~300 語読みます
+      400_word: 1 分あたり ~400 語読みます
+    pocket_consumer_key_label: コンテンツをインポートする Pocket のコンシューマー キー
+    help_items_per_page: 各ページに表示する記事の数を変更できます。
+    help_reading_speed: wallabag は、各記事を読む時間を計算します。あなたの読む速度が速い、または遅い場合は、このリストのおかげで、ここで定義することができます。
+      wallabag は、各記事の読む時間を再計算します。
+    help_language: wallabag のインターフェイスの言語を変更することができます。
+    help_pocket_consumer_key: Pocket  のインポートに必要です。 Pocket のアカウントで作成することができます。
+  form_rss:
+    description: wallabag が提供する RSS フィードは、お好みの RSS リーダーで保存した記事を読むできます。最初にトークンを生成する必要があります。
+    token_label: RSS トークン
+    no_token: トークンがありません
+    token_create: トークンを作成
+    token_reset: トークンを再生成
+    rss_links: RSS のリンク
+    rss_limit: フィード内のアイテムの数
+  form_user:
+    two_factor_description: 二要素認証を有効にすると、信頼されていない新しい接続ごとに、コードを記載したメールが届きます。
+    help_twoFactorAuthentication: 二要素認証を有効にした場合、wallabag にログインするたびに、メールでコードを受信します。
+  form_password:
+    old_password_label: 現在のパスワード
+    new_password_label: 新しいパスワード
+  form_rules:
+    if_label: もし
+    then_tag_as_label: ならばタグ付け
+    rule_label: ルール
+    faq:
+      title: FAQ
+      tagging_rules_definition_title: «タグ付けルール» とは?
+      how_to_use_them_title: 使用する方法は?
+      variables_available_title: ルールを記述するために、どの変数と演算子が使用できますか?
+      variables_available_description: 'タグ付けのルールを作成するのに、次の変数と演算子が使用できます:'
+      meaning: 意味
+      variable_description:
+        label: 変数
+        url: エントリーの URL
+        isArchived: エントリーがアーカイブかどうか
+        isStarred: エントリーにスターがつけられたかどうか
+        content: エントリーのコンテンツ
+        language: エントリーの言語
+        mimetype: エントリーの mime タイプ
+        readingTime: 推定されるエントリーを読む時間。分で
+        domainName: エントリーのドメイン名
+      operator_description:
+        label: 演算子
+        less_than: 未満...
+        strictly_less_than: 厳密に小さい...
+        greater_than: より大きい...
+        strictly_greater_than: 厳密に大きい...
+        equal_to: 等しい...
+        not_equal_to: 等しくない...
+        or: 1 つのルール または 別のルール
+        and: 1 つのルール かつ 別のルール
+entry:
+  page_titles:
+    unread: 未読エントリー
+    starred: スター付きのエントリー
+    archived: アーカイブ済のエントリー
+    filtered: フィルターされたエントリー
+    filtered_tags: 'タグによるフィルター:'
+    untagged: タグの付いていないエントリー
+  list:
+    number_on_the_page: '{0} エントリーはありません。|{1} 1 つエントリーがあります。|]1,Inf[ %count% のエントリーがあります。'
+    reading_time_minutes: '推定の読む時間: %readingTime% 分'
+    number_of_tags: '{1}と他の 1 つのタグ|]1,Inf[と %count% の他のタグ'
+    toogle_as_read: 既読を切り替える
+  filters:
+    title: フィルター
+    status_label: ステータス
+    preview_picture_label: プレビュー画像を持つ
+    preview_picture_help: プレビュー画像
+    reading_time:
+      label: 分単位の読む時間
+    domain_label: ドメイン名
+    action:
+      clear: クリア
+      filter: フィルター
+  view:
+    left_menu:
+      back_to_top: トップへ戻る
+      set_as_read: 既読にする
+      set_as_unread: 未読にする
+      view_original_article: オリジナルの記事
+      re_fetch_content: コンテンツを再取得
+      add_a_tag: タグを追加
+      share_content: 共有
+      delete_public_link: 公開リンクを削除
+      print: 印刷
+      problem:
+        label: 問題がありますか?
+        description: この記事が間違って表示されますか?
+    edit_title: タイトルを編集
+    annotations_on_the_entry: '{0} 注釈はありません|{1} 1 注釈|]1,Inf[ %count% 注釈'
+  new:
+    page_title: 新しいエントリーを保存
+    placeholder: http://website.com
+  edit:
+    page_title: エントリーを編集
+    title_label: タイトル
+about:
+  top_menu:
+    who_behind_wallabag: wallabag の背後にいるのは誰ですか
+    getting_help: ヘルプの入手
+    helping: wallabag のヘルプ
+    contributors: 貢献者
+    third_party: サードパーティ ライブラリー
+  who_behind_wallabag:
+    developped_by: 開発者
+    website: ウェブサイト
+    project_website: プロジェクトのウェブサイト
+    version: バージョン
+  getting_help:
+    bug_reports: バグ報告
+  helping:
+    description: 'wallabag はフリーでオープン ソースです。私たちを支援することができます:'
+    by_contributing: 'プロジェクトへの貢献:'
+    by_contributing_2: 問題のリスト、すべてのニーズ
+    by_paypal: Paypal 経由で
+  contributors:
+    description: Wallabag web アプリケーションの貢献者に感謝します
+  third_party:
+    description: 'これは wallabag で使用するサード パーティ ライブラリー (とそのライセンス) のリストです:'
+    package: パッケージ
+howto:
+  page_description: '記事を保存するいくつかの方法があります:'
+  top_menu:
+    browser_addons: ブラウザーのアドオン
+    mobile_apps: モバイルアプリ
+    bookmarklet: ブックマークレット
+  form:
+    description: このフォームのおかげで
+  mobile_apps:
+    android:
+      via_f_droid: F-Droid 経由で
+      via_google_play: Google Play 経由で
+    ios: iTunes ストアで
+    windows: Microsoft Store で
+quickstart:
+  page_title: クイック スタート
+  more: さらに…
+  intro:
+    paragraph_1: wallabag への訪問に同行し、あなたが興味を持ちそうないくつかの機能について説明します。
+    paragraph_2: 私たちについてきてください!
+  configure:
+    title: アプリケーションを構成します
+    description: あなたに合ったアプリケーションにするために wallabag の構成をご覧ください。
+    language: 言語とデザインを変更します
+    rss: RSS フィードを有効にします
+    tagging_rules: 自動的にあなたの記事にタグ付けするルールを記述します
+  admin:
+    title: 管理
+    description: '管理者として wallabag に対する権限があります。できること:'
+    analytics: 分析を構成
+    sharing: 記事の共有に関するいくつかのパラメーターを有効にする
+    export: エクスポートを構成
+    import: インポートを構成
+  first_steps:
+    title: 最初のステップ
+    description: wallabag は正しく構成されました。web をアーカイブする時間です。右上の + 記号をクリックして、リンクを追加することができます。
+    new_article: 最初の記事を保存しましょう
+    unread_articles: そして、それを分類しましょう!
+  migrate:
+    title: 既存のサービスから移行します
+    description: 別のサービスを使用していますか? wallabag 上のデータを取得するためのお手伝いをします。
+    pocket: Pocket からの移行
+    wallabag_v1: wallabag v1 からの移行
+    wallabag_v2: wallabag v2 からの移行
+    readability: Readability からの移行
+    instapaper: Instapaper からの移行
+  developer:
+    title: 開発者
+    use_docker: Docker を使用して wallabag をインストールする
+  docs:
+    title: 完全なドキュメント
+    description: wallabag には多くの機能があります。気軽にマニュアルを読んで、それらについて知り、使用する方法について学習してください。
+    annotate: あなたの記事に注釈を付ける
+    export: ePUB や PDF にあなたの記事を変換します
+    search_filters: 検索エンジンやフィルターを使用して、記事を検索する方法をご覧ください
+    fetching_errors: 記事の取得中にエラーが発生した場合に、何をすることができますか?
+    all_docs: その他非常に多くの記事!
+  support:
+    title: サポート
+    description: 何か助けが必要な場合は、私たちがお役に立ちます。
+    github: GitHub 上で
+    email: メールで
+    gitter: Gitter 上で
+tag:
+  list:
+    number_on_the_page: '{0} タグはありません。|{1} 1 つタグがあります。|]1,Inf[ %count% タグがあります。'
+    see_untagged_entries: タグのないエントリーを参照
+import:
+  page_description: wallabag インポーターへようこそ。移行元となる前のサービスを選択してください。
+  action:
+    import_contents: コンテンツをインポート
+  form:
+    mark_as_read_title: すべて既読にしますか?
+    mark_as_read_label: インポートされたエントリーをすべて既読にする
+    file_label: ファイル
+    save_label: ファイルをアップロード
+  pocket:
+    description: このインポーターは、すべての Pocket のデータをインポートします。Pocket は、私たちが彼らのサービスからコンテンツを取得することはできないため、各記事の読み取り可能なコンテンツは
+      wallabag によって再取得されます。
+    config_missing:
+      description: Pocket のインポートが構成されていません。
+      admin_message: '%keyurls%a pocket_consumer_key%keyurle% を定義する必要があります。'
+      user_message: サーバー管理者が Pocket の API キーを定義する必要があります。
+    authorize_message: あなたの Pocket のアカウントからデータをインポートできます。下のボタンをクリックするだけで、アプリケーションを承認して
+      getpocket.com に接続します。
+    connect_to_pocket: Pocket に接続して、データをインポート
+  wallabag_v1:
+    description: このインポーターは、あなたの wallabag v1 の記事をすべてインポートします。構成ページで、"wallabag データをエクスポート"
+      セクションで "JSON のエクスポート" をクリックします。"wallabag-export-1-xxxx-xx-xx.json" ファイルができます。
+    how_to: wallabag エクスポートを選択して、下のボタンをクリックし、アップロードおよびインポートしてください。
+  wallabag_v2:
+    description: このインポーターは、あなたの wallabag v2 の記事をすべてインポートします。すべての記事に移動し、エクスポート サイドバーで
+      "JSON" をクリックしてください "All articles.json" ファイルができます。
+  readability:
+    description: このインポーターは、Readability の記事をすべてインポートします。ツール (https://www.readability.com/tools/)
+      ページで "データのエクスポート" セクションの "データをエクスポート" をクリックしてします。json をダウンロードするメールを受け取ります (実は
+      .json で終わらない)。
+    how_to: Readability エクスポートを選択して、下のボタンをクリックし、アップロードおよびインポートしてください。
+  worker:
+    enabled: 'インポートは非同期に行われます。インポート タスクが開始されると、外部のワーカーが一度に 1 つのジョブを処理します。現在のサービスは:'
+  firefox:
+    description: このインポーターは Firefox のブックマークをインポートします。ブックマーク (Ctrl+Shift+B) に移動して、"インポートとバックアップ"
+      で、"バックアップ..." を選択します。.json ファイルが得られます。
+  instapaper:
+    description: このインポーターは Instapaper の記事すべてをインポートします。設定 (https://www.instapaper.com/user)
+      ページで、"エクスポート" の ".CSV をダウンロード" をクリックしてください。CSV ファイルがダウンロードされます ("instapaper-export.csv"
+      のような)。
+    how_to: Instapaper エクスポートを選択して、下のボタンをクリックし、アップロードおよびインポートしてください。
+developer:
+  welcome_message: wallabag API へようこそ
+  how_to_first_app: 最初のアプリケーションを作成する方法
+  full_documentation: 完全な API ドキュメントを表示
+  list_methods: API メソッドの一覧
+  clients:
+    title: クライアント
+  existing_clients:
+    title: 既存のクライアント
+    field_uris: リダイレクト URI
+    field_grant_types: 許可の種類
+    no_client: まだクライアントはありません。
+  remove:
+    warn_message_1: クライアント %name% を削除することができます。この操作は不可逆的です !
+    warn_message_2: 削除すると、そのクライアントで構成されているすべてのアプリはあなた wallabag で認証することができません。
+    action: クライアント %name% を削除
+  client:
+    page_description: 新しいクライアントを作成しようとしています。アプリケーションのリダイレクト URI を下のフィールドに入力してください。
+    form:
+      name_label: クライアントの名前
+      redirect_uris_label: リダイレクト URI (オプション)
+  client_parameter:
+    page_description: これはクライアントのパラメーターです。
+    field_name: クライアント名
+    read_howto: '"最初のアプリケーションを作成する" 方法をお読みください'
+  howto:
+    description:
+      paragraph_2: あなたの第三者アプリケーションと wallabag API 間の通信にトークンが必要です。
+      paragraph_4: '今から、トークンを作成します (クライアント_ID、クライアントの秘密、ユーザー名、パスワードを適切な値に置き換えてください):'
+      paragraph_5: 'API はこのようなレスポンスを返します:'
+      paragraph_6: 'アクセストークンは API エンドポイントの呼び出しを行う際に便利です。例えば:'
+      paragraph_7: この呼び出しは、ユーザーのすべてのエントリーが返されます。
+user:
+  edit_user: 既存のユーザーを編集
+  description: ここですべてのユーザーを管理できます (作成、編集、および削除)
+  form:
+    plain_password_label: ????
+    enabled_label: 有効
+    last_login_label: 最終ログイン
+error:
+  page_title: エラーが発生しました
+flashes:
+  config:
+    notice:
+      config_saved: 較正を保存しました。
+      password_updated: パスワードを更新しました
+      password_not_updated_demo: デモ モードでは、このユーザーのパスワードを変更できません。
+      user_updated: 情報を更新しました
+      rss_updated: RSS 情報を更新しました
+      tagging_rules_updated: タグ付けのルールを更新しました
+      tagging_rules_deleted: タグ付けルールを削除しました
+      rss_token_updated: RSS トークンを更新しました
+  entry:
+    notice:
+      entry_already_saved: エントリーは %date% に既に保存されています
+      entry_saved: エントリーを保存しました
+      entry_saved_failed: エントリーを保存しましたが、コンテンツの取得に失敗しました
+      entry_updated: エントリを更新しました
+      entry_reloaded: エントリーを再ロードしました
+      entry_reloaded_failed: エントリーを再ロードしましたが、コンテンツの取得に失敗しました
+      entry_archived: エントリーをアーカイブしました
+      entry_unarchived: エントリーのアーカイブを解除しました
+      entry_starred: エントリーにスターを付けました
+      entry_unstarred: エントリーのスターを解除しました
+      entry_deleted: エントリーを削除しました
+  tag:
+    notice:
+      tag_added: タグを追加しました
+  import:
+    notice:
+      failed: インポートに失敗しました, もう一度やり直してください。
+      failed_on_file: インポートの処理中にエラーが発生しました。インポート ファイルを確認してください。
+      summary: 'インポートの概要: %imported% インポートしました。 %skipped% 既に保存されています。'
+      summary_with_queue: 'インポートの概要: %queued% キューに登録しました。'
+  developer:
+    notice:
+      client_created: 新しいクライアント %name% を作成しました。
+      client_deleted: クライアント %name% を削除しました
+  user:
+    notice:
+      added: ユーザー "%username%" を追加しました
+      updated: ユーザー "%username%" を更新しました
+      deleted: ユーザー "%username%" を削除しました
