@@ -1,40 +1,40 @@
-settings_changed: 構成が更新されました
-download_pictures: 画像をあなたのサーバにダウンロード
+settings_changed: 設定を更新しました
+download_pictures: サーバー上の画像をダウンロード
 carrot: Carrot への共有を有効にする
-diaspora_url: diaspora* URL、サービスが有効な場合
-export_epub: ePub 形式でのエクスポートを有効にする
-export_mobi: .mobi 形式でのエクスポートを有効にする
-export_pdf: PDF 形式でのエクスポートを有効にする
-export_csv: CSV 形式でのエクスポートを有効にする
-export_json: JSON 形式でのエクスポートを有効にする
-export_txt: TXT 形式でのエクスポートを有効にする
-export_xml: XML 形式でのエクスポートを有効にする
-import_with_rabbitmq: データを非同期的にインポートする RabbitMQ を有効にする
-import_with_redis: データを非同期的にインポートする Redis を有効にする
-shaarli_url: Shaarli URL、サービスが有効な場合
-scuttle_url: Scuttle URL、サービスが有効な場合
+diaspora_url: diaspora*  URL、サービスが有効になっている場合
+export_epub: ePub のエクスポートを有効にする
+export_mobi: .mobi のエクスポートを有効にする
+export_pdf: PDF のエクスポートを有効にする
+export_csv: CSV のエクスポートを有効にする
+export_json: JSON のエクスポートを有効にする
+export_txt: TXT のエクスポートを有効にする
+export_xml: XML のエクスポートを有効にする
+import_with_rabbitmq: RabbitMQ を有効にして、データを非同期的にインポートする
+import_with_redis: Redis を有効にして、データを非同期的にインポートする
+shaarli_url: サービスが有効になっている場合、Shaarli URL
+scuttle_url: Scuttle URL、サービスが有効になっている場合
 unmark_url: Unmark URL、サービスが有効な場合
-share_diaspora: diaspora* への共有を有効にする
-share_mail: 電子メールでの共有を有効にする
-share_shaarli: Shaarli への共有を有効にする
-share_scuttle: Scuttle への共有を有効にする
-share_twitter: Twitter への共有を有効にする
-share_unmark: Unmark.it への共有を有効にする
-show_printlink: コンテンツを印刷するためのリンクを表示する
-wallabag_support_url: Wallabag のサポート URL
-entry: "記事"
-export: "エクスポート"
-import: "インポート"
-misc: "misc"
-modify_settings: "適用"
-piwik_host: Piwik でのウェブサイトのホスト (http:// または https:// は不要)
+share_diaspora: diaspora* に共有を有効にする
+share_mail: メールで共有を有効にする
+share_shaarli: Shaarli に共有を有効にする
+share_scuttle: Scuttle  に共有を有効にする
+share_twitter: Twitter に共有を有効にする
+share_unmark: Unmark.it に共有を有効にする
+show_printlink: 印刷するコンテンツへのリンクを表示
+wallabag_support_url: wallabag のサポート URL
+entry: 記事
+export: エクスポート
+import: インポート
+misc: その他
+modify_settings: 適用
+piwik_host: Piwik のウェブサイトのホスト (http:// および https:// なし)
 piwik_site_id: Piwik でのあなたのウェブサイトの ID
 piwik_enabled: Piwik を有効にする
-demo_mode_enabled: "デモモードを有効にしますか？ (パブリック Wallabag のデモにのみ使用)"
-demo_mode_username: "デモユーザー"
-share_public: 記事の公開 URL を許可する
-download_images_enabled: 画像をローカルにダウンロードする
-restricted_access: ペイウォールウェブサイトの認証を有効にする
-api_user_registration: API を使用してユーザーを登録できるようにする
-store_article_headers: 各記事の HTTP ヘッダーを Wallabag が格納する場合に有効にする
-shaarli_share_origin_url: サービスが有効になっている場合、Shaarli へのオリジン URL の共有を有効にする
+demo_mode_enabled: デモモードを有効にしますか? (公開 wallabag デモでのみ使用)
+demo_mode_username: デモユーザー
+share_public: エントリの公開 URL を許可する
+download_images_enabled: 画像をローカルにダウンロード
+restricted_access: paywalled ウェブサイトの認証を有効にする
+api_user_registration: API を使ってユーザを登録できるようにする
+store_article_headers: wallabag が各記事の HTTP ヘッダーを格納するかどうかを有効にする
+shaarli_share_origin_url: サービスが有効な場合に Shaarli に元の url の共有を有効にする
