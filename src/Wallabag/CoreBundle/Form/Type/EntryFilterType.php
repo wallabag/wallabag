@@ -108,7 +108,7 @@ class EntryFilterType extends AbstractType
             ->add('httpStatus', TextFilterType::class, [
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                     $value = $values['value'];
-                    if (false === array_key_exists($value, Response::$statusTexts)) {
+                    if (false === \array_key_exists($value, Response::$statusTexts)) {
                         return;
                     }
 
