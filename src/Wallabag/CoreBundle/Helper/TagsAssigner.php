@@ -49,7 +49,7 @@ class TagsAssigner
 
             // avoid empty tag
             if (0 === \strlen($label)) {
-                break;
+                continue;
             }
 
             if (isset($tagsNotYetFlushed[$label])) {

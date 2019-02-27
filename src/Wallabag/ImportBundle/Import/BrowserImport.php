@@ -158,13 +158,13 @@ abstract class BrowserImport extends AbstractImport
 
         foreach ($entries as $importedEntry) {
             if ((array) $importedEntry !== $importedEntry) {
-                break;
+                continue;
             }
 
             $entry = $this->parseEntry($importedEntry);
 
             if (null === $entry) {
-                break;
+                continue;
             }
 
             // @see AbstractImport
@@ -206,7 +206,7 @@ abstract class BrowserImport extends AbstractImport
     {
         foreach ($entries as $importedEntry) {
             if ((array) $importedEntry !== $importedEntry) {
-                break;
+                continue;
             }
 
             // set userId for the producer (it won't know which user is connected)

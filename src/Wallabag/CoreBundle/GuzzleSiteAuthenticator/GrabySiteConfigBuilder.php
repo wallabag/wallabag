@@ -114,7 +114,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
         $extraFields = [];
         foreach ($extraFieldsStrings as $extraField) {
             if (false === strpos($extraField, '=')) {
-                break;
+                continue;
             }
 
             list($fieldName, $fieldValue) = explode('=', $extraField, 2);
