@@ -142,11 +142,6 @@ final class Version20190129120000 extends WallabagMigration
      */
     public function down(Schema $schema)
     {
-        foreach ($this->settings as $setting) {
-            $this->addSql('
-                DELETE FROM ' . $this->getTable('craue_config_setting') . "
-                WHERE name = '" . $setting['name'] . "';
-            ");
-        }
+        $this->skipIf(true, 'These settings are required and should not be removed.');
     }
 }
