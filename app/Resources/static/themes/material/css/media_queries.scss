@@ -174,3 +174,12 @@
     padding: 0;
   }
 }
+
+@media screen and (max-width: 310px),
+  screen and (min-width: 601px) and (max-width: 660px),
+  screen and (min-width: 993px) and (max-width: 1050px),
+  screen and (min-width: 1201px) and (max-width: 1250px) {
+  .card .card-action .reading-time .card-created-at {
+    display: none;
+  }
+}
