@@ -102,6 +102,11 @@ main {
       display: inline-flex;
       vertical-align: middle;
 
+      .card-reading-time,
+      .card-created-at {
+        display: inline-flex;
+      }
+
       span {
         margin-right: 5px;
       }
