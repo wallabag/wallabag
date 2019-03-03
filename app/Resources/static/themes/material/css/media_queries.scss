@@ -12,6 +12,16 @@
   .pagination {
     margin-left: auto;
   }
+
+  .card-tag-labels li {
+    max-width: 50%;
+  }
+}
+
+@media screen and (min-width: 993px) {
+  main #content {
+    padding-left: 70px;
+  }
 }
 
 @media only screen and (max-width: 992px) {
