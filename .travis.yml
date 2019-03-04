@@ -73,7 +73,7 @@ before_script:
     - sudo swapon -s
 
 script:
-    - travis_wait bash composer install -o --no-interaction --no-progress --prefer-dist
+    - travis_wait bash composer update -o --no-interaction --no-progress --prefer-dist
     - echo "travis_fold:start:prepare"
     - make prepare DB=$DB
     - echo "travis_fold:end:prepare"
