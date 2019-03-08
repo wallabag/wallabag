@@ -155,10 +155,22 @@ config:
         not_equal_to: Eşit değildir…
         or: Bir kural veya birbaşkası
         and: Bir kural ve diğeri
-      tagging_rules_definition_description: Bunlar Wallabag'in yeni girdileri otomatik
+        matches: '<i>konu</i>nun <i>arama</i> kriterine (büyük küçük harf duyarsız)
+          eşleştiğini test eder.<br />Örnek: <code>title matches "futbol"</code>'
+        notmatches: '<i>konu</i>nun <i>arama</i> kriterine (büyük küçük harf duyarsız)
+          eşleşmediğini test eder.<br />Örnek: <code>title nonmatches "futbol"</code>'
+      tagging_rules_definition_description: Bunlar Wallabag'in yeni makaleleri otomatik
         olarak etiketleyebilmesi için tanımlanmış kurallardır.<br />Her yeni girdi
         eklendiğinde, ayarladığınız tüm etiket kuralları kullanılarak makaleniz etiketlenecektir.
         Bu sayede her bir girdiyi tek tek etiketlemekle uğraşmanız gerekmeyecek.
+      how_to_use_them_description: 'Örneğin, 3 dakikadan kısa okuma süresi olan yeni
+        girdileri « <i>kısa okumalar</i>» etiketi ile etiketlemek istiyorsunuz diyelim.<br
+        />Bu durumda, <i>Kural</i> alanına « readingTime &lt; = 3 » değeri, ve de
+        <i>Etiketler</i> alanına da <i>kısa okumalar</i> değerini girmelisiniz.<br
+        /> Eğer birden fazla etiket tanımlamak istiyorsanız arasına virgül koyabilirsiniz:
+        « <i>kısa okumalar, mutlaka oku »<br />Daha kompleks kurallar önden tanımlanmış
+        operatörlerle girilebilir: Eğer « <i> readingTime &gt; = AND domainName =
+        "github.com"</i> » ise, o zaman « <i>uzun okumalar, GitHub</i> » gibi girebilirsiniz'
     if_label: eğer
     then_tag_as_label: ise, şu şekilde etiketle
     delete_rule_label: sil
@@ -187,6 +199,7 @@ entry:
     toogle_as_star: Favorilere ekle/çıkar
     delete: Sil
     export_title: Dışa Aktar
+    number_of_tags: '{1}ve başka etiket|]1,Inf[ve %count% başka etiket'
   filters:
     title: Filtreler
     status_label: Durum
@@ -208,6 +221,9 @@ entry:
     action:
       clear: Temizle
       filter: Filtrele
+    is_public_label: Herkese açık linki var
+    is_public_help: Herkese açık link
+    http_status_label: HTTP durumu
   view:
     left_menu:
       back_to_homepage: Back
@@ -224,9 +240,18 @@ entry:
       problem:
         label: Bir sorun mu var?
         description: Bu makalede herhangi bir yanlışlık mı var?
+      back_to_top: En başa dön
+      public_link: herkese açık link
+      delete_public_link: herkese açık linki sil
+      print: Yazdır
     edit_title: Başlığı düzenle
     original_article: orijinal
     created_at: Oluşturulma tarihi
+    annotations_on_the_entry: '{0} İçerik bilgisi yok|{1} Bir içerik bilgisi var|]1,Inf[
+      %count% içerik bilgisi var'
+    published_at: Yayımlanma tarihi
+    published_by: Yayımlayan
+    provided_by: Sağlayıcı
   new:
     page_title: Yeni makaleyi kaydet
     placeholder: http://website.com
@@ -237,12 +262,37 @@ entry:
     title_label: Başlık
     url_label: Url
     save_label: Kaydet
+    origin_url_label: Orijinal link (makaleyi nereden buldunuz)
+  page_titles:
+    unread: Okunmamış makaleler
+    starred: Favorilenmiş makaleler
+    archived: Arşivlenmiş makaleler
+    filtered: Fitrelenmiş makaleler
+    filtered_tags: 'Etiket ile filtrele:'
+    filtered_search: 'Arama kriteri ile filtrele:'
+    untagged: Etiketlenmemiş makaleler
+    all: Tüm makaleler
+  search:
+    placeholder: Neye bakıyordunuz?
+  public:
+    shared_by_wallabag: Bu makale %username% tarafından <a href='%wallabag_instance%'>wallabag</a>
+      üzerinden favorilere eklendi
+  confirm:
+    delete: Makaleyi kaldırmak istediğinizen emin misiniz?
+    delete_tag: Makaleden etiketi kaldırmak istediğinizden emin misiniz?
+  metadata:
+    reading_time: Tahmini okuma süresi
+    reading_time_minutes_short: '%readingTime% dakika'
+    address: Adres
+    added_on: Eklenme tarihi
 about:
   page_title: Hakkımızda
   top_menu:
     who_behind_wallabag: wallabag'in arkasındakiler
     getting_help: Yardım
     helping: wallabag destek olun
+    contributors: Katkıda bulunanlar
+    third_party: Üçüncü parti kütüphaneler
   who_behind_wallabag:
     developped_by: Geliştiriciler
     website: i̇nternet sitesi
@@ -262,6 +312,11 @@ about:
     by_paypal: PayPal ile
   third_party:
     license: Lisans
+    description: 'Aşağıda wallabag uygulamasında kullanılan üçüncü parti uygulamaları
+      (ve lisanslarını) bulabilirsiniz:'
+    package: Paket
+  contributors:
+    description: Wallabag web uygulamasına katkıda bulunan herkese teşekkürler
 howto:
   page_title: Yardım
   top_menu:
@@ -276,6 +331,43 @@ howto:
     opera: Opera Eklentisi
   bookmarklet:
     description: "Bu bağlantı ile yer imlerinizi sürükleyip bırakarak wallabag'e ekleyebilirsiniz:"
+  tab_menu:
+    add_link: Link ekle
+    shortcuts: Kısayolları kullan
+  page_description: 'Bir makaleyi kaydetmek için pek çok yol bulunmakta:'
+  mobile_apps:
+    android:
+      via_f_droid: F-Droid üzerinden
+      via_google_play: Google Play üzerinden
+    ios: iTunes Store üzerinden
+    windows: Microsoft Store üzerinden
+  shortcuts:
+    page_description: Aşağıda wallabag üzerinde kullanabileceğiniz kısayolları bulabilirsiniz.
+    shortcut: Kısayol
+    action: İşlem
+    all_pages_title: Tüm sayfalarda kullanılabilecek kısayollar
+    go_unread: Okunmamışlara git
+    go_starred: Favorilenmişlere git
+    go_archive: Arşivlenmişlere git
+    go_all: Tüm makalelere git
+    go_tags: Etiketlere git
+    go_config: Ayarlara git
+    go_import: İçe aktarıma git
+    go_developers: Geliştirici kısmına git
+    go_howto: Nasıl yapılır sayfasına git (bu sayfa!)
+    go_logout: Çıkış yap
+    list_title: Listeleme sayfasında kullanılabilen kısayollar
+    search: Arama formunu görüntüle
+    article_title: Makale görünümünde kısayollar mevcut
+    open_original: Makalenin orijinal linkini aç
+    toggle_favorite: Makalenin favorileme durumunu değiştir
+    toggle_archive: Makalenin okundu durumunu değiştir
+    delete: Makaleyi sil
+    material_title: Sadece material temasında kullanılabilen kısayollar
+    add_link: Yeni bir link ekle
+    hide_form: Mevcut formu gizle (arama veya yeni link)
+    arrows_navigation: Makaleler arasında geçiş yap
+    open_article: Seçili makaleyi görüntüle
 quickstart:
   page_title: Hızlı başlangıç
   intro:
@@ -287,10 +379,15 @@ quickstart:
     title: Uygulamayı Yapılandırma
     language: Dili ve tasarımı değiştirme
     rss: RSS akışını aktifleştirme
+    description: Tam olarak ihtiyaçlarınızı karşılar bir uygulama deneyimi yaşamak
+      wallabag için ayarlar sayfasını inceleyebilirsiniz.
+    tagging_rules: Makaleleri otomatik olarak etiketleme kuralları
   first_steps:
     title: İlk adım
     new_article: İlk makalenizi kaydedin
     unread_articles: Ve bunu sınıflandırın!
+    description: Wallabag şimdi istediğiniz biçimde ayarlandı, artık internet'teki
+      sayfaları arşivlemeye hazırsınız! Sağ üstteki+ butonu ile link ekleyebilirsiniz.
   migrate:
     title: Varolan servislerden veri aktarma
     description: Kullanmakta olduğunuz farklı bir hizmet mi var? Biz size yardımcı
@@ -305,17 +402,40 @@ quickstart:
     export: Makalelerinizi ePUB ya da PDF formatına çevirme
     search_filters: Makaleleri görüntülemek için arama motorlarını ve filteri kullanma
     all_docs: Ve daha fazlası!
+    description: Wallabag üzerinde pek çok özellik var. Bu özellikleri öğrenmek ve
+      kullanmak için dökümantasyonu incelemeyi es geçmeyin.
+    annotate: Makale içerik bilgisi ekle
+    fetching_errors: Eğer makale çekimi sırasında hata yaşanırsa ne yapabilirim?
   support:
     title: Destek
     description: Eğer yardıma ihtiyacınız varsa, biz her daim senin için burada olacağız.
     github: GitHub
     email: E-posta
     gitter: Gitter
+  more: Daha fazlası…
+  admin:
+    title: Yönetim
+    description: 'Yönetici olarak wallabag üzerinde özel yetkileriniz var. Bunlar:'
+    new_user: Yeni üye oluşturma
+    analytics: Analitik kısmını ayarlama
+    sharing: Makale paylaşımı hakkında parametreler belirleme
+    export: Dışarı aktarma özelliğini ayarlama
+    import: İçeri aktarma özelliğini ayarlama
+  developer:
+    title: Geliştiriciler
+    description: 'Ayrıca şu geliştiricileri de düşünüyoruz: Docker, API, tercümanlar
+      vs.'
+    create_application: Üçüncü parti uygulamanızı oluşturun
+    use_docker: Wallabag uygulamasını kurmak için Docker kullanın
 tag:
   page_title: Etiketler
   list:
     number_on_the_page: '{0} Herhangi bir etiket yok.|{1} Burada bir adet etiket var.|]1,Inf[
       Burada %count% adet etiket var.'
+    see_untagged_entries: Etiketlenmemiş makaleleri görüntüle
+  new:
+    add: Ekle
+    placeholder: Virgülle ayırarak birden fazla etiket ekleyebilirsiniz.
 import:
   page_title: İçe Aktar
   page_description: wallabag içe aktarma aracına hoşgeldiniz. Lütfen içe aktarmak
@@ -325,6 +445,8 @@ import:
   form:
     file_label: Dosya
     save_label: Dosyayı yükle
+    mark_as_read_title: Tümünü okundu olarak işaretlensin mi?
+    mark_as_read_label: Tüm içe aktarılmış makaleleri okundu olarak işaretle
   pocket:
     page_title: İçe Aktar > Pocket
     description: Bu araç tüm Pocket verinizi içe aktarır. Pocket içeriklerin getirilmesine
@@ -333,6 +455,10 @@ import:
       aşağıdaki butona tıklayın. Daha sonra, getpocket.com üzerindeki uygulamamıza
       gereken izinleri verin. Hepsi bu kadar!
     connect_to_pocket: Pocket'a bağlanın ve verilerinizi içe aktarın
+    config_missing:
+      description: Pocket üzerinden içe aktarım ayarlanmamış.
+      admin_message: '%keyurls%bir pocket_consumer_key%keyurle% tanımlamalısınız.'
+      user_message: Sunucu yöneticiniz Pocket için bir API anahtarı tanımlamalıdır.
   wallabag_v1:
     page_title: İçe Aktar > Wallabag v1
     description: Bu araç wallabag v1 üzerindeki tüm makalelerinizi içe aktarır. Yapılandırma
@@ -342,14 +468,59 @@ import:
       yükleyin.
   wallabag_v2:
     page_title: İçe Aktar > Wallabag v2
+    description: Bu içe aktarıcı tüm wallabag v2 makalelerinizi içe aktarır. Makaleler
+      kısmına gidip, export sidebaru üzeridnen "JSON" seçeneğine tıklayın. Bunun ardından
+      "All articles.json" dosyanız oluşacak.
   readability:
     page_title: İçe Aktar > Readability
+    description: Bu içe aktarıcı tüm Readability makalelerinizi içe aktaracak. Readability
+      araçlar sayfasında (https://www.readability.com/tools/), "Data Export" kısmından
+      "Export your data" butonuna tıklayın. E-posta adresinize json dosyası gönderilecek
+      (dosya json olsa da dosya adı .json olmayabilir).
+    how_to: Lütfen Readability dışarı aktarılmış dosyanızı seçin ve de aşağıdaki butona
+      basarak içe aktarın.
   firefox:
     page_title: İçe Aktar > Firefox
+    description: Bu içe aktarıcı Firefox yer imlerinizi içe aktaracak. Yer imleri
+      sayfasınızı ziyaret ederek (Ctrl+Maj+O), ve ardından "İçe aktar ve Yedekle"
+      menüsünden "Yedekle..." tuşuna basın. Bir .json dosyası alacaksınız.
+    how_to: Yer imleri yedek dosyasınızı seçip aşağıdaki butona tıklayarak içe aktarabilirsiniz.
+      Bu işlem, tüm linklerin işlenip kaydedileceği için uzun zaman alabilir.
   chrome:
     page_title: İçe Aktar > Chrome
+    description: "Bu içe aktarıcı tüm Chrome yer imlerinizi içe aktaracak. Bu işlem\
+      \ işletim sisteminize göre değişebilir: <ul><li>Linux'ta, <code>~/.config/chromium/Default/</code>\
+      \ klasörüne gidin</li><li>Windows'ta, <code>%LOCALAPPDATA%\\Google\\Chrome\\\
+      User Data\\Default</code> klasörüne gidin</li><li>macOS'ta <code>~/Library/Application\
+      \ Support/Google/Chrome/Default/Bookmarks</code> klasörüne gidin</li></ul>Klasöre\
+      \ gittiğinizde <code>Bookmarks</code> dosyasını bir yere kopyalayın. <br><em>Eğer\
+      \ Chromium yerine Chrome kullanıyorsanız yolları ona göre düzeltmeniz gerekebilir.</em></p>"
+    how_to: Yer imleri yedek dosyanızı seçip aşağıdaki butona tıklayarak içeri aktarabilirsiniz.
+      Bu işlem, tüm linklerin işlenip kaydedileceği için uzun zaman alabilir.
   instapaper:
     page_title: İçe Aktar > Instapaper
+    description: Bu içe aktarıcı tüm Instapaper makalelerinizi içe aktaracak. Ayarlar
+      sayfasında (https://www.instapaper.com/user) "Export" kısmından  "Download .CSV
+      file" linkine tıklayıp indirebilirsiniz. Bir CSV dosyası cihazınıza inecek ("instapaper-export.csv"
+      gibi bir dosya).
+    how_to: Lütfen Instapaper dışa aktarım dosyanızı seçin ve aşağıdaki butona tıklayarak
+      içe aktarın.
+  worker:
+    enabled: 'İçe aktarım işlemi asenkron olarak gerçekleşmektedir. İçeri aktarma
+      işlemi başladığı anda, harici bir çalışan kod (worker) işleri tek tek yönetecek.
+      Mevcut servis:'
+    download_images_warning: Makaleleriniz için resimleri indirme özelliğini aktif.
+      Klasik içe aktarmayla birlikte bu işlem uzun zaman alabilir (veya hatalı sonuç
+      verebilir). Biz olası bir hata olmaması adına asenkron içe aktarım özelliğini
+      kullanmanızı <strong>şiddetle öneriyoruz</strong>.
+  pinboard:
+    page_title: İçe Aktar > Pinboard
+    description: Bu içe aktarıcı tüm Pinboard makalelerinizi içe aktarır. Yedekleme
+      sayfasında (https://pinboard.in/settings/backup) "Bookmarks" kısmında "JSON"
+      seçeneğine tıklayın. Cihazınıza bir JSON dosyası inecek ("pinboard_export" gibi
+      bir dosya).
+    how_to: Pinboard dışa aktarım dosyanızı seçip aşağıdaki butona tıklayarak içe
+      aktarabilirsiniz.
 user:
   form:
     username_label: Kullanıcı adı
@@ -371,7 +542,7 @@ flashes:
       rss_token_updated: RSS token updated
   entry:
     notice:
-      entry_already_saved: Entry already saved on %date%
+      entry_already_saved: Makale zaten %date% tarihinde kaydedilmiş
       entry_saved: Makale kaydedildi
       entry_reloaded: Makale içeriği yenilendi
       entry_archived: Makale arşivlendi
@@ -379,6 +550,20 @@ flashes:
       entry_starred: Makale favorilere eklendi
       entry_unstarred: Makale favorilerden çıkartıldı
       entry_deleted: Makale silindi
+      entry_saved_failed: Makale kaydedildi, ama içeriği çekilemedi
+      entry_updated: Makale güncellendi
+      entry_reloaded_failed: Makale yeniden yüklendi, ama içeriği çekilemedi
   tag:
     notice:
       tag_added: Etiket eklendi
+export:
+  footer_template: <div style="text-align:center;"><p>Wallabag ile, %method% metodu
+    ile üretilmiştir.</p><p>Eğer bu e-kitabı cihazınızda okumada sorun yaşıyorsanız
+    <a href="https://github.com/wallabag/wallabag/issues">bu adresten</a> yaşadığınız
+    sorunu paylaşmaktan çekinmeyin
+  unknown: Bilinmeyen
+developer:
+  page_title: API istemcileri yönetimi
+  welcome_message: Wallabag API bölümüne hoş geldiniz
+  documentation: Dökümantasyon
+  how_to_first_app: İlk uygulamamı nasıl oluştururum?
