@@ -567,3 +567,48 @@ developer:
   welcome_message: Wallabag API bölümüne hoş geldiniz
   documentation: Dökümantasyon
   how_to_first_app: İlk uygulamamı nasıl oluştururum?
+  full_documentation: API dökümantasyonunu görüntüle
+  list_methods: API metotlarını listele
+  clients:
+    title: İstemciler
+    create_new: Yeni bir istemci oluştur
+  existing_clients:
+    title: Mevcut istemciler
+    field_id: İstemci ID
+    field_secret: İstemci gizli kodu
+    field_uris: Yönlendirilecek URI
+    field_grant_types: İzin verilen tipler
+    no_client: İstemci bulunamadı.
+  remove:
+    warn_message_1: '%name% isimli istemciyi kaldırma yetkiniz var. Bu işlem GERİ
+      ALINAMAZ!'
+    warn_message_2: Eğer kaldırırsanız, bu istemciye göre ayarlanmış büyün uygulamalar
+      çalışmaz duruma düşecek ve wallabag ile iletişim kuramayacak.
+    action: '%name% isimli istemciyi kaldır'
+  client:
+    page_title: API istemci yönetimi > Yeni istemci
+    page_description: Yeni bir istemci oluşturmak üzeresiniz. Lütfen uygulamanız için
+      aşağıdaki alanları ve URI yönlendirme yolunu doldurun.
+    form:
+      name_label: İstemci ismi
+      redirect_uris_label: Yönlendirme URI (opsiyonel)
+      save_label: Yeni bir istemci oluştur
+    action_back: Geri
+  client_parameter:
+    page_title: API istemci yönetimi > İstemci parametreleri
+    page_description: İstemci parametrelerinizi aşağıda bulabilirsiniz.
+    field_name: İstemci ismi
+    field_id: İstemci ID
+    field_secret: İstemci gizli kodu
+    back: Geri
+    read_howto: '"İlk uygulamamı nasıl oluştururum?" makalesini oku'
+  howto:
+    page_title: API istemci yönetimi > İlk uygulamamı nasıl oluştururum
+    description:
+      paragraph_1: Aşağıdaki komutlar <a href="https://github.com/jkbrzt/httpie">HTTPie</a>
+        kütüphanesini kullanmaktadır. Lütfen çalıştırmadan önce sisteminizde yüklü
+        olduğundan emin olun.
+      paragraph_2: Üçüncü parti uygulamanız ve wallabag API arasında iletişim kurmak
+        için token anahtarına ihtiyacınız var.
+      paragraph_3: Bu token anahtarını oluşturmak için <a href="%link%">yeni bir istemci
+        oluşturmalısınız</a>.
