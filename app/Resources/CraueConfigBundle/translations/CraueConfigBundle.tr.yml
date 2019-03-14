@@ -1,41 +1,43 @@
-# settings_changed: Configuration updated
-# download_pictures: Download pictures on your server
-# carrot: Enable share to Carrot
-# diaspora_url: Diaspora URL, if the service is enabled
-# export_epub: Enable ePub export
-# export_mobi: Enable .mobi export
-# export_pdf: Enable PDF export
-# export_csv: Enable CSV export
-# export_json: Enable JSON export
-# export_txt: Enable TXT export
-# export_xml: Enable XML export
-# import_with_rabbitmq: Enable RabbitMQ to import data asynchronously
-# import_with_redis: Enable Redis to import data asynchronously
-# shaarli_url: Shaarli URL, if the service is enabled
-# scuttle_url: Scuttle URL, if the service is enabled
-# unmark_url: Unmark URL, if the service is enabled
-# share_diaspora: Enable share to Diaspora
-# share_mail: Enable share by email
-# share_shaarli: Enable share to Shaarli
-# share_scuttle: Enable share to Scuttle
-# share_twitter: Enable share to Twitter
-# share_unmark: Enable share to Unmark.it
-# show_printlink: Display a link to print content
-# wallabag_support_url: Support URL for wallabag
-# wallabag_url: URL of *your* wallabag instance
-# entry: "article"
-# export: "export"
-# import: "import"
-# misc: "misc"
-# modify_settings: "apply"
-# piwik_host: Host of your website in Piwik (without http:// or https://)
-# piwik_site_id: ID of your website in Piwik
-# piwik_enabled: Enable Piwik
-# demo_mode_enabled: "Enable demo mode ? (only used for the wallabag public demo)"
-# demo_mode_username: "Demo user"
-# share_public: Allow public url for entries
-# download_images_enabled: Download images locally
-# restricted_access: Enable authentication for websites with paywall
-# api_user_registration: Enable user to be registered using the API
-# store_article_headers: Enable if wallabag stores HTTP headers for each article
-# shaarli_share_origin_url: Enable sharing origin url to Shaarli, if the service is enabled
+settings_changed: Ayarlar güncellendi
+download_pictures: Resimleri sunucuya indir
+carrot: Carrot'a paylaşımı aktifleştir
+diaspora_url: diaspora* URL'i (eğer servis aktifse)
+export_epub: ePub çıktı alımını aktifleştir
+export_mobi: .mobi çıktı alımını aktifleştir
+export_pdf: PDF çıktı alımını aktifleştir
+export_csv: CSV çıktı alımını aktifleştir
+export_json: JSON çıktı alımını aktifleştir
+export_txt: TXT çıktı alımını aktifleştir
+export_xml: XML çıktı alımını aktifleştir
+import_with_rabbitmq: Verileri asenkron olarak içeri alabilmek için RabbitMQ'yu aktifleştir
+import_with_redis: Verileri asenkron olarak içeri alabilmek için Redis'i aktifleştir
+shaarli_url: Shaarli URL'i (eğer servis aktifse)
+scuttle_url: Scuttle URL'i (eğer servis aktifse)
+unmark_url: Unmark URL'i (eğer servis aktifse)
+share_diaspora: diaspora*'ya paylaşımı aktifleştir
+share_mail: E-posta'ya paylaşımı aktifleştir
+share_shaarli: Shaarli'ye paylaşımı aktifleştir
+share_scuttle: Scuttle'a paylaşımı aktifleştir
+share_twitter: Twitter'a paylaşımı aktifleştir
+share_unmark: Unmark.it'e paylaşımı aktifleştir
+show_printlink: İçeriği çıktı alabilmek için bir link görüntüle
+wallabag_support_url: Wallabag destek URL'i
+entry: makale
+export: dışarı aktar
+import: içe aktar
+misc: çeşitli
+modify_settings: uygula
+piwik_host: Piwik'teki web sitenizin host adresi (başında http:// veya https:// olmadan)
+piwik_site_id: Piwik'teki web sitenizin ID'si
+piwik_enabled: Piwik'i aktifleştir
+demo_mode_enabled: Demo mod aktifleştirilsin mi (Sadece herkese açık wallabag demoları
+  için kullanılmakta)
+demo_mode_username: Demo kullanıcısı
+share_public: Makaleler için herkese açık URL'lere izin ver
+download_images_enabled: Resimleri lokale indir
+restricted_access: Ödeme ile erişim sağlanabilen sitelere doğrulama özelliğini aktifleştir
+api_user_registration: API ile üye kaydını aktifleştir
+store_article_headers: Eğer wallabag her makale için HTTP header'larını saklıyorsa
+  aktifleştirin
+shaarli_share_origin_url: Shaarli'ye orijinal URL'in paylaşımını aktifleştir (eğer
+  servis aktifse)
