@@ -1,6 +1,6 @@
 security:
   login:
-    page_title: wallabag
+    page_title: Wallabag'e hoş geldiniz!
     keep_logged_in: Oturumumu açık tut
     forgot_password: Şifrenizi mi unuttunuz?
     submit: Giriş Yap
@@ -44,7 +44,7 @@ footer:
   wallabag:
     elsewhere: wallabag her an seninle
     social: Sosyal
-    powered_by: powered by
+    powered_by: Powered By
     about: Hakkımızda
   stats: '%user_creation% tarihinden bu yana %nb_archives% makale okudunuz. Bu da
     günde ortalama %per_day% makaleye tekabül ediyor!'
@@ -138,8 +138,8 @@ config:
         label: Değişken
         title: Makalenin başlığı
         url: Makalenin bağlantısı
-        isArchived: Makale arşivlendi mi? Arşivlenmedi mi?
-        isStarred: Makale favorilere eklendi mi? Eklenmedi mi?
+        isArchived: Makale arşivlendi mi, arşivlenmedi mi
+        isStarred: Makale favorilere eklendi mi, eklenmedi mi
         content: Makalenin içeriği
         language: Makalenin dili
         mimetype: Makalenin mime türü
@@ -160,15 +160,15 @@ config:
         notmatches: '<i>konu</i>nun <i>arama</i> kriterine (büyük küçük harf duyarsız)
           eşleşmediğini test eder.<br />Örnek: <code>title nonmatches "futbol"</code>'
       tagging_rules_definition_description: Bunlar Wallabag'in yeni makaleleri otomatik
-        olarak etiketleyebilmesi için tanımlanmış kurallardır.<br />Her yeni girdi
+        olarak etiketleyebilmesi için tanımlanmış kurallardır.<br />Her yeni makale
         eklendiğinde, ayarladığınız tüm etiket kuralları kullanılarak makaleniz etiketlenecektir.
-        Bu sayede her bir girdiyi tek tek etiketlemekle uğraşmanız gerekmeyecek.
+        Bu sayede her bir makaleyi tek tek etiketlemekle uğraşmanız gerekmeyecek.
       how_to_use_them_description: 'Örneğin, 3 dakikadan kısa okuma süresi olan yeni
-        girdileri « <i>kısa okumalar</i>» etiketi ile etiketlemek istiyorsunuz diyelim.<br
+        makaleleri « <i>kısa okumalar</i>» etiketi ile etiketlemek istiyorsunuz diyelim.<br
         />Bu durumda, <i>Kural</i> alanına « readingTime &lt; = 3 » değeri, ve de
         <i>Etiketler</i> alanına da <i>kısa okumalar</i> değerini girmelisiniz.<br
         /> Eğer birden fazla etiket tanımlamak istiyorsanız arasına virgül koyabilirsiniz:
-        « <i>kısa okumalar, mutlaka oku »<br />Daha kompleks kurallar önden tanımlanmış
+        « <i>kısa okumalar, mutlaka oku</i> »<br />Daha kompleks kurallar önden tanımlanmış
         operatörlerle girilebilir: Eğer « <i> readingTime &gt; = AND domainName =
         "github.com"</i> » ise, o zaman « <i>uzun okumalar, GitHub</i> » gibi girebilirsiniz'
     if_label: eğer
@@ -192,7 +192,7 @@ entry:
     reading_time: tahmini okuma süresi
     reading_time_minutes: 'tahmini okuma süresi: %readingTime% min'
     reading_time_less_one_minute: 'tahmini okuma süresi: &lt; 1 min'
-    reading_time_minutes_short: '%readingTime% min'
+    reading_time_minutes_short: '%readingTime% dk'
     reading_time_less_one_minute_short: '&lt; 1 min'
     original_article: orijinal
     toogle_as_read: Okundu/okunmadı olarak işaretle
@@ -226,7 +226,7 @@ entry:
     http_status_label: HTTP durumu
   view:
     left_menu:
-      back_to_homepage: Back
+      back_to_homepage: Geri
       set_as_read: Okundu olarak işaretle
       set_as_unread: Okunmadı olarak işaretle
       set_as_starred: Favorilere ekle/çıkar
@@ -371,7 +371,7 @@ howto:
 quickstart:
   page_title: Hızlı başlangıç
   intro:
-    title: wallabag
+    title: Wallabag'e hoş geldiniz!
     paragraph_1: wallabag kurduğunuz için teşekkür ederiz. Bu sayfada biz size eşlik
       edecek ve ilginizi çekecek birkaç özellik göstereceğim.
     paragraph_2: Bizi takip edin!
@@ -453,7 +453,7 @@ import:
       izin vermez, okunabilen içerikler wallabag tarafından yeniden getirilir.
     authorize_message: Pocket hesabınızda verilerinizi içe aktarabilmemiz için öncelikle
       aşağıdaki butona tıklayın. Daha sonra, getpocket.com üzerindeki uygulamamıza
-      gereken izinleri verin. Hepsi bu kadar!
+      gereken izinleri verin.
     connect_to_pocket: Pocket'a bağlanın ve verilerinizi içe aktarın
     config_missing:
       description: Pocket üzerinden içe aktarım ayarlanmamış.
@@ -525,21 +525,46 @@ user:
   form:
     username_label: Kullanıcı adı
     password_label: Şifre
-    repeat_new_password_label: Yeni şifrenin tekrarı
+    repeat_new_password_label: Yeni parolanın tekrarı
     plain_password_label: ????
     email_label: E-posta
+    name_label: İsim
+    enabled_label: Aktif
+    last_login_label: Son giriş
+    twofactor_label: İki aşamalı doğrulama
+    save: Kaydet
+    delete: Sil
+    delete_confirm: Emin misiniz?
+    back_to_list: Listeye geri dön
+  page_title: Kullanıcı Yönetimi
+  new_user: Yeni bir kullanıcı oluştur
+  edit_user: Mevcut kullanıcıyı düzenle
+  description: Buradan tüm kullanıcıları yönetebilirsiniz (oluşturma, düzenleme ve
+    silme)
+  list:
+    actions: İşlem
+    edit_action: Düzenle
+    yes: Evet
+    no: Hayır
+    create_new_one: Yeni bir kullanıcı oluştur
+  search:
+    placeholder: Kullanıcı adı veya e-posta ile filtrele
 flashes:
   config:
     notice:
       config_saved: Yapılandırma ayarları kaydedildi.
       password_updated: Şifre güncellendi
-      password_not_updated_demo: In demonstration mode, you can't change password
-        for this user.
+      password_not_updated_demo: Tanıtım demo modunda bu kullanıcı için parolanızı
+        değiştiremezsiniz.
       user_updated: Bilgiler güncellendi
       rss_updated: RSS bilgiler güncellendi
-      tagging_rules_updated: Tagging rules updated
-      tagging_rules_deleted: Tagging rule deleted
-      rss_token_updated: RSS token updated
+      tagging_rules_updated: Etiketleme kuralları güncellendi
+      tagging_rules_deleted: Etiketleme kuralı eklendi
+      rss_token_updated: RSS token anahtarı güncellendi
+      annotations_reset: İçerik bilgileri sıfırlandı
+      tags_reset: Etiketler sıfırlandı
+      entries_reset: Makaleler sıfırlandı
+      archived_reset: Arşivlenmiş makaleler silindi
   entry:
     notice:
       entry_already_saved: Makale zaten %date% tarihinde kaydedilmiş
@@ -556,17 +581,46 @@ flashes:
   tag:
     notice:
       tag_added: Etiket eklendi
+  import:
+    notice:
+      failed: İçe aktarım başarısız, lütfen yeniden deneyin.
+      failed_on_file: İçe aktarım yapılırken bir hata ile karşılaşıldı. Lütfen içe
+        aktarım dosyanızı kontrol edin.
+      summary: 'İçe aktarım özeti: %imported% makale içe aktarıldı, %skipped% makale
+        hali hazırda kayıtlı.'
+      summary_with_queue: 'İçe aktarım özeti: %queued% makale sırada.'
+    error:
+      redis_enabled_not_installed: Asenkron içe aktarım işlemlerini yönetmek için
+        Redis aktifleştirilmiş, ama <u>sistem buna erişim sağlayamıyor</u>. Lütfen
+        Redis ayarlarınızı kontrol edin.
+      rabbit_enabled_not_installed: Asenkron içe aktarım işlemlerini yönetmek için
+        RabbitMQ aktifleştirilmiş, ama <u>sistem buna erişim sağlayamıyor</u>. Lütfen
+        RabbitMQ ayarlarınızı kontrol edin.
+  developer:
+    notice:
+      client_created: Yeni istemci %name% oluşturuldu.
+      client_deleted: İstemci %name% silindi
+  user:
+    notice:
+      added: Kullanıcı "%username%" oluşturuldu
+      updated: Kullanıcı "%username%" güncellendi
+      deleted: Kullanıcı "%username%" silindi
+  site_credential:
+    notice:
+      added: '"%host%" için site erişim bilgileri oluşturuldu'
+      updated: '"%host%" için site erişim bilgileri güncellendi'
+      deleted: '"%host%" için site erişim bilgileri silindi'
 export:
   footer_template: <div style="text-align:center;"><p>Wallabag ile, %method% metodu
     ile üretilmiştir.</p><p>Eğer bu e-kitabı cihazınızda okumada sorun yaşıyorsanız
     <a href="https://github.com/wallabag/wallabag/issues">bu adresten</a> yaşadığınız
-    sorunu paylaşmaktan çekinmeyin
+    sorunu paylaşmaktan çekinmeyin.</p></div>
   unknown: Bilinmeyen
 developer:
   page_title: API istemcileri yönetimi
   welcome_message: Wallabag API bölümüne hoş geldiniz
   documentation: Dökümantasyon
-  how_to_first_app: İlk uygulamamı nasıl oluştururum?
+  how_to_first_app: İlk uygulamamı nasıl oluştururum
   full_documentation: API dökümantasyonunu görüntüle
   list_methods: API metotlarını listele
   clients:
@@ -612,3 +666,34 @@ developer:
         için token anahtarına ihtiyacınız var.
       paragraph_3: Bu token anahtarını oluşturmak için <a href="%link%">yeni bir istemci
         oluşturmalısınız</a>.
+      paragraph_4: 'Şimdi, yeni bir token anahtarı oluşturun (istemci id, istemci
+        gizli anahtarı, kullanıcı adı ve parola için sağlam değerler girmelisiniz):'
+      paragraph_5: 'API aşağıdaki gibi bir cevap dönecek:'
+      paragraph_6: 'access_token erişim anahtarı API ucuna istek yapmak için oldukça
+        kullanışlıdır. Örneğin:'
+      paragraph_7: Bu istek kullanıcınız için olan tüm makaleleri döndürecektir.
+      paragraph_8: Eğer tüm API uçlarını görmek isterseniz, <a href="%link%">API dökümantasyonumuzu</a>
+        inceleyebilirsiniz.
+    back: Geri
+site_credential:
+  page_title: Site erişim bilgileri yönetimi
+  new_site_credential: Site erişim bilgisi oluştur
+  edit_site_credential: Mevcut site erişim bilgilerini düzenle
+  description: Buradan tüm site erişim bilgilerinizi yönetebilirsiniz. Paywall, bir
+    doğrulama sistemi gibi sistemler bu bilgilere ihtiyaç duyabilir.
+  list:
+    actions: İşlem
+    edit_action: Düzenle
+    yes: Evet
+    no: Hayır
+    create_new_one: Yeni bir site erişim bilgisi oluştur
+  form:
+    username_label: Kullanıcı adı
+    host_label: Host
+    password_label: Parola
+    save: Kaydet
+    delete: Sil
+    delete_confirm: Emin misiniz?
+    back_to_list: Listeye geri dön
+error:
+  page_title: Bir hata oluştu
