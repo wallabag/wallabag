@@ -256,18 +256,17 @@ class ContentProxy
             $entry->setTitle($content['open_graph']['og_title']);
         }
 
-        $html = $content['html'];
-        if (false === $html) {
-            $html = $this->fetchingErrorMessage;
+        if (empty($content['html'])) {
+            $content['html'] = $this->fetchingErrorMessage;
 
             if (!empty($content['open_graph']['og_description'])) {
-                $html .= '<p><i>But we found a short description: </i></p>';
-                $html .= $content['open_graph']['og_description'];
+                $content['html'] .= '<p><i>But we found a short description: </i></p>';
+                $content['html'] .= $content['open_graph']['og_description'];
             }
         }
 
-        $entry->setContent($html);
-        $entry->setReadingTime(Utils::getReadingTime($html));
+        $entry->setContent($content['html']);
+        $entry->setReadingTime(Utils::getReadingTime($content['html']));
 
         if (!empty($content['status'])) {
             $entry->setHttpStatus($content['status']);
