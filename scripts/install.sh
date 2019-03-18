@@ -25,10 +25,14 @@ if [ "$IGNORE_ROOT" -eq 0 ] && [ "$EUID" == "0" ]; then
 fi
 
 COMPOSER_COMMAND='composer'
+REQUIRE_FILE='scripts/require.sh'
 
-DIR="${BASH_SOURCE}"
-if [ ! -d "$DIR" ]; then DIR="$PWD/scripts"; fi
-. "$DIR/require.sh"
+if [ ! -f "$REQUIRE_FILE" ]; then
+  echo "Cannot find $REQUIRE_FILE"
+  exit 1
+fi
+
+. "$REQUIRE_FILE"
 
 TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
 
