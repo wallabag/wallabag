@@ -188,7 +188,7 @@ class EntriesExport
             foreach ($entry->getTags() as $tag) {
                 $book->setSubject($tag->getLabel());
             }
-            $filename = sha1($entry->getTitle());
+            $filename = sha1(sprintf('%s:%s', $entry->getUrl(), $entry->getTitle()));
 
             $publishedBy = $entry->getPublishedBy();
             $authors = $this->translator->trans('export.unknown');
