@@ -1,5 +1,9 @@
 # Creare un nuovo client API
 
+{% hint style="danger" %}
+This translated documentation might be out of date. For more recent features or requirements, please refer to the [English documentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Sul vostro account wallabag potete creare un nuovo client API presso
 questo URL https://app.wallabag.it/developer/client/create.
 

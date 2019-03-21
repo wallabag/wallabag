@@ -1,6 +1,10 @@
 Installazione
 -------------
 
+{% hint style="danger" %}
+This translated documentation might be out of date. For more recent features or requirements, please refer to the [English documentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 ### Su un web server dedicato (raccomandato)
 
 Per installare wallabag stesso dovete eseguire i seguenti comandi:

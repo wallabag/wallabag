@@ -1,6 +1,10 @@
 Speichere deinen ersten Artikel
 -------------------------------
 
+{% hint style="danger" %}
+This translated documentation might be out of date. For more recent features or requirements, please refer to the [English documentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Die Hauptzweck von wallabag ist es, Artikel aus dem Web zu speichern. Es
 gibt viele Wege, dieses Ziel zu erreichen. Wenn du denkst, dass ein
 Artikel falsch angezeigt wird, kannst du [diese Dokumentation lesen](../errors_during_fetching.md).

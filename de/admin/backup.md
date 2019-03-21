@@ -1,6 +1,10 @@
 wallabag sichern
 ================
 
+{% hint style="danger" %}
+This translated documentation might be out of date. For more recent features or requirements, please refer to the [English documentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Da es manchmal vorkommen kann, dass dir ein Fehler mit deiner wallabag
 unterläuft und du Daten verlierst oder deine wallabag auf einen anderen
 Server verschieben willst, ist eine Sicherung der Daten sicher ratsam.

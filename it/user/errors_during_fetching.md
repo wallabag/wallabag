@@ -1,5 +1,9 @@
 # Errori nell'ottenere gli articoli
 
+{% hint style="danger" %}
+This translated documentation might be out of date. For more recent features or requirements, please refer to the [English documentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 ## Perché l'ottenimento di un articolo fallisce?
 
 Ci possono essere varie ragioni:

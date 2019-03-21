@@ -1,5 +1,9 @@
 # Configurare l'accesso al paywall
 
+{% hint style="danger" %}
+This translated documentation might be out of date. For more recent features or requirements, please refer to the [English documentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 {% hint style="working" %}
 Questa è la parte tecnica a proposito del paywall. Se state cercando la sezione dedicata all'utente, si prega di leggere [questa pagina](../user/articles/restricted.md).
 {% endhint %}
