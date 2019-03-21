@@ -1,5 +1,9 @@
 # Qual'è il significato dei parametri?
 
+{% hint style="danger" %}
+This translated documentation might be out of date. For more recent features or requirements, please refer to the [English documentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 ## File parameters.yml di default
 
 Ecco l'ultima versione del file app/config/parameters.yml di default.

@@ -1,6 +1,10 @@
 API Dokumentation
 =================
 
+{% hint style="danger" %}
+This translated documentation might be out of date. For more recent features or requirements, please refer to the [English documentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Dank dieser Dokumentation werden wir sehen, wie wir mit der wallabag API
 interagieren.
 

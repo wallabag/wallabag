@@ -1,6 +1,10 @@
 Tagging-Regeln
 --------------
 
+{% hint style="danger" %}
+This translated documentation might be out of date. For more recent features or requirements, please refer to the [English documentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Wenn du automatisch einen Tag zu einem neuen Artikel zuweisen lassen
 möchtest, ist dieser Teil der Konfiguration, was du suchst.
 

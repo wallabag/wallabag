@@ -1,6 +1,10 @@
 Artikel-Anmerkungen
 -------------------
 
+{% hint style="danger" %}
+This translated documentation might be out of date. For more recent features or requirements, please refer to the [English documentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 In jedem Artikel, den du liest, kannst du Anmerkungen hinzufügen. Es ist
 einfacher mit ein paar Bilder erklärt.
 

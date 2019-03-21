@@ -1,5 +1,9 @@
 # Informazioni utente
 
+{% hint style="danger" %}
+This translated documentation might be out of date. For more recent features or requirements, please refer to the [English documentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Potete cambiare il vostro nome, il vostro indirizzo e-mail e abilitare
 l'`Autenticazione a due fattori`.
 

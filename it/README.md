@@ -1,6 +1,10 @@
 Documentazione di wallabag
 ==========================
 
+{% hint style="danger" %}
+This translated documentation might be out of date. For more recent features or requirements, please refer to the [English documentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 ![wallabag logo](../img/wallabag.png)
 
 **wallabag** è un'applicazione read-it-later: salva una pagina web

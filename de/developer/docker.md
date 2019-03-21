@@ -1,6 +1,10 @@
 Lasse wallabag in docker-compose laufen
 =======================================
 
+{% hint style="danger" %}
+This translated documentation might be out of date. For more recent features or requirements, please refer to the [English documentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Um deine eigene Entwicklungsinstanz von wallabag laufen zu lassen,
 möchtest du vielleicht die vorkonfigurierten docker compose Dateien
 nutzen.
