@@ -15,7 +15,7 @@ Requirements
 
 Make sure to have
 [Docker](https://docs.docker.com/installation/ubuntulinux/) and [Docker
-Compose](https://docs.docker.com/compose/install/) availables on your
+Compose](https://docs.docker.com/compose/install/) available on your
 system and up to date.
 
 Switch DBMS
