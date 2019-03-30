@@ -372,3 +372,8 @@ howto:
     hide_form: A jelenlegi mező elrejtése (keresés vagy új hivatkozás)
     arrows_navigation: Navigálás a cikkek között
     open_article: A kiválasztott bejegyzés megjelenítése
+quickstart:
+  page_title: Bevezetés a wallabag-ba
+  more: Továbbiak…
+  intro:
+    title: Üdvözöljük a wallabag-ban!
