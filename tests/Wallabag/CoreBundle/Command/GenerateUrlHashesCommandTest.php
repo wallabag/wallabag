@@ -72,10 +72,7 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
         $entry1->setUrl($url);
 
         $em->persist($entry1);
-
         $em->flush();
-
-        $this->assertNull($entry1->getHashedUrl());
 
         $application = new Application($this->getClient()->getKernel());
         $application->add(new GenerateUrlHashesCommand());
@@ -92,7 +89,7 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
 
         $entry = $em->getRepository('WallabagCoreBundle:Entry')->findOneByUrl($url);
 
-        $this->assertSame($entry->getHashedUrl(), hash('md5', $url));
+        $this->assertSame($entry->getHashedUrl(), hash('sha1', $url));
 
         $query = $em->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\Entry e WHERE e.url = :url');
         $query->setParameter('url', $url);

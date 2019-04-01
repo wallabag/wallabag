@@ -248,8 +248,6 @@ class ContentProxy
     {
         $this->updateOriginUrl($entry, $content['url']);
 
-        $entry->setHashedUrl(hash('md5', $entry->getUrl()));
-
         $this->setEntryDomainName($entry);
 
         if (!empty($content['title'])) {

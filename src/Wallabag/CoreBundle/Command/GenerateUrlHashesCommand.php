@@ -69,7 +69,7 @@ class GenerateUrlHashesCommand extends ContainerAwareCommand
 
         $i = 1;
         foreach ($entries as $entry) {
-            $entry->setHashedUrl(hash('md5', $entry->getUrl()));
+            $entry->setHashedUrl(hash('sha1', $entry->getUrl()));
             $em->persist($entry);
 
             if (0 === ($i % 20)) {

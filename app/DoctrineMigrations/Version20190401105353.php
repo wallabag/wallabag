@@ -20,7 +20,7 @@ class Version20190401105353 extends WallabagMigration
         $this->skipIf($entryTable->hasColumn('hashed_url'), 'It seems that you already played this migration.');
 
         $entryTable->addColumn('hashed_url', 'text', [
-            'length' => 32,
+            'length' => 40,
             'notnull' => false,
         ]);
 
@@ -28,6 +28,8 @@ class Version20190401105353 extends WallabagMigration
         if ('sqlite' !== $this->connection->getDatabasePlatform()->getName()) {
             $this->addSql('UPDATE ' . $this->getTable('entry') . ' SET hashed_url = MD5(url)');
         }
+
+        $entryTable->addIndex(['user_id', 'hashed_url'], 'hashed_url_user_id');
     }
 
     /**
@@ -39,6 +41,7 @@ class Version20190401105353 extends WallabagMigration
 
         $this->skipIf(!$entryTable->hasColumn('hashed_url'), 'It seems that you already played this migration.');
 
+        $entryTable->dropIndex('hashed_url_user_id');
         $entryTable->dropColumn('hashed_url');
     }
 }

@@ -26,7 +26,7 @@ use Wallabag\UserBundle\Entity\User;
  *     indexes={
  *         @ORM\Index(name="created_at", columns={"created_at"}),
  *         @ORM\Index(name="uid", columns={"uid"}),
- *         @ORM\Index(name="hashed_url", columns={"hashed_url"})
+ *         @ORM\Index(name="hashed_url_user_id", columns={"user_id", "hashed_url"})
  *     }
  * )
  * @ORM\HasLifecycleCallbacks()
@@ -79,7 +79,7 @@ class Entry
     /**
      * @var string
      *
-     * @ORM\Column(name="hashed_url", type="string", length=32, nullable=true)
+     * @ORM\Column(name="hashed_url", type="string", length=40, nullable=true)
      */
     private $hashedUrl;
 
@@ -324,6 +324,7 @@ class Entry
     public function setUrl($url)
     {
         $this->url = $url;
+        $this->hashedUrl = hash('sha1', $url);
 
         return $this;
     }

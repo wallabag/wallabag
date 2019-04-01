@@ -973,7 +973,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function dataForEntriesExistWithUrl()
     {
-        $url = hash('md5', 'http://0.0.0.0/entry2');
+        $url = hash('sha1', 'http://0.0.0.0/entry2');
 
         return [
             'with_id' => [
@@ -1047,37 +1047,37 @@ class EntryRestControllerTest extends WallabagApiTestCase
     {
         $url1 = 'http://0.0.0.0/entry2';
         $url2 = 'http://0.0.0.0/entry10';
-        $this->client->request('GET', '/api/entries/exists?hashed_urls[]=' . hash('md5', $url1) . '&hashed_urls[]=' . hash('md5', $url2) . '&return_id=1');
+        $this->client->request('GET', '/api/entries/exists?hashed_urls[]=' . hash('sha1', $url1) . '&hashed_urls[]=' . hash('sha1', $url2) . '&return_id=1');
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertArrayHasKey(hash('md5', $url1), $content);
-        $this->assertArrayHasKey(hash('md5', $url2), $content);
-        $this->assertSame(2, $content[hash('md5', $url1)]);
-        $this->assertNull($content[hash('md5', $url2)]);
+        $this->assertArrayHasKey(hash('sha1', $url1), $content);
+        $this->assertArrayHasKey(hash('sha1', $url2), $content);
+        $this->assertSame(2, $content[hash('sha1', $url1)]);
+        $this->assertNull($content[hash('sha1', $url2)]);
     }
 
     public function testGetEntriesExistsWithManyUrlsHashedReturnBool()
     {
         $url1 = 'http://0.0.0.0/entry2';
         $url2 = 'http://0.0.0.0/entry10';
-        $this->client->request('GET', '/api/entries/exists?hashed_urls[]=' . hash('md5', $url1) . '&hashed_urls[]=' . hash('md5', $url2));
+        $this->client->request('GET', '/api/entries/exists?hashed_urls[]=' . hash('sha1', $url1) . '&hashed_urls[]=' . hash('sha1', $url2));
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertArrayHasKey(hash('md5', $url1), $content);
-        $this->assertArrayHasKey(hash('md5', $url2), $content);
-        $this->assertTrue($content[hash('md5', $url1)]);
-        $this->assertFalse($content[hash('md5', $url2)]);
+        $this->assertArrayHasKey(hash('sha1', $url1), $content);
+        $this->assertArrayHasKey(hash('sha1', $url2), $content);
+        $this->assertTrue($content[hash('sha1', $url1)]);
+        $this->assertFalse($content[hash('sha1', $url2)]);
     }
 
     public function testGetEntriesExistsWhichDoesNotExists()
     {
-        $this->client->request('GET', '/api/entries/exists?hashed_url=' . hash('md5', 'http://google.com/entry2'));
+        $this->client->request('GET', '/api/entries/exists?hashed_url=' . hash('sha1', 'http://google.com/entry2'));
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 

@@ -89,7 +89,6 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
         foreach ($entries as $reference => $item) {
             $entry = new Entry($this->getReference($item['user']));
             $entry->setUrl($item['url']);
-            $entry->setHashedUrl(hash('md5', $item['url']));
             $entry->setReadingTime($item['reading_time']);
             $entry->setDomainName($item['domain']);
             $entry->setMimetype($item['mime']);
