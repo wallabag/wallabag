@@ -350,15 +350,15 @@ class EntryRepository extends EntityRepository
      * Find an entry by its hashed url and its owner.
      * If it exists, return the entry otherwise return false.
      *
-     * @param $hashedUrl
-     * @param $userId
+     * @param string $hashedUrl Url hashed using sha1
+     * @param int    $userId
      *
      * @return Entry|bool
      */
     public function findByHashedUrlAndUserId($hashedUrl, $userId)
     {
         $res = $this->createQueryBuilder('e')
-            ->where('e.hashedUrl = :hashed_url')->setParameter('hashed_url', urldecode($hashedUrl))
+            ->where('e.hashedUrl = :hashed_url')->setParameter('hashed_url', $hashedUrl)
             ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
             ->getQuery()
             ->getResult();

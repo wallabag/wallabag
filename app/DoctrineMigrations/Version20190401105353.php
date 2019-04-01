@@ -24,11 +24,6 @@ class Version20190401105353 extends WallabagMigration
             'notnull' => false,
         ]);
 
-        // sqlite doesn't have the MD5 function by default
-        if ('sqlite' !== $this->connection->getDatabasePlatform()->getName()) {
-            $this->addSql('UPDATE ' . $this->getTable('entry') . ' SET hashed_url = MD5(url)');
-        }
-
         $entryTable->addIndex(['user_id', 'hashed_url'], 'hashed_url_user_id');
     }
 

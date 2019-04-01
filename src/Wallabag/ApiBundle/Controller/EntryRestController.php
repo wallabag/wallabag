@@ -52,7 +52,6 @@ class EntryRestController extends WallabagRestController
             foreach ($hashedUrls as $hashedUrl) {
                 $res = $repo->findByHashedUrlAndUserId($hashedUrl, $this->getUser()->getId());
 
-                // $results[$url] = $this->returnExistInformation($res, $returnId);
                 $results[$hashedUrl] = $this->returnExistInformation($res, $returnId);
             }
 

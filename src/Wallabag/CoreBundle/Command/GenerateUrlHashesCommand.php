@@ -20,18 +20,14 @@ class GenerateUrlHashesCommand extends ContainerAwareCommand
             ->setName('wallabag:generate-hashed-urls')
             ->setDescription('Generates hashed urls for each entry')
             ->setHelp('This command helps you to generates hashes of the url of each entry, to check through API if an URL is already saved')
-            ->addArgument(
-                'username',
-                InputArgument::OPTIONAL,
-                'User to process entries'
-            );
+            ->addArgument('username', InputArgument::OPTIONAL, 'User to process entries');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->output = $output;
 
-        $username = $input->getArgument('username');
+        $username = (string) $input->getArgument('username');
 
         if ($username) {
             try {
