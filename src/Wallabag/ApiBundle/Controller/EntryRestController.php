@@ -568,18 +568,31 @@ class EntryRestController extends WallabagRestController
      * @ApiDoc(
      *      requirements={
      *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
+     *      },
+     *      parameters={
+     *          {"name"="expect", "dataType"="string", "required"=false, "format"="id or entry", "description"="Only returns the id instead of the deleted entry's full entity if 'id' is specified. Default to entry"},
      *      }
      * )
      *
      * @return JsonResponse
      */
-    public function deleteEntriesAction(Entry $entry)
+    public function deleteEntriesAction(Entry $entry, Request $request)
     {
+        $expect = $request->query->get('expect', 'entry');
+        if (!\in_array($expect, ['id', 'entry'], true)) {
+            throw new BadRequestHttpException(sprintf("expect: 'id' or 'entry' expected, %s given", $expect));
+        }
         $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
 
-        // We copy $entry to keep id in returned object
-        $e = $entry;
+        $response = $this->sendResponse([
+            'id' => $entry->getId(),
+        ]);
+        // We clone $entry to keep id in returned object
+        if ('entry' === $expect) {
+            $e = clone $entry;
+            $response = $this->sendResponse($e);
+        }
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($entry);
@@ -588,7 +601,7 @@ class EntryRestController extends WallabagRestController
         // entry deleted, dispatch event about it!
         $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
 
-        return $this->sendResponse($e);
+        return $response;
     }
 
     /**

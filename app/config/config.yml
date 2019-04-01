@@ -148,18 +148,18 @@ nelmio_cors:
     paths:
         '^/api/':
             allow_origin: ['*']
-            allow_headers: ['X-Custom-Auth']
+            allow_headers: ['Authorization','content-type']
             allow_methods: ['POST', 'PUT', 'PATCH','GET', 'DELETE']
             max_age: 3600
         '^/oauth/':
             allow_origin: ['*']
-            allow_headers: ['X-Custom-Auth']
+            allow_headers: ['Authorization','content-type']
             allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
             max_age: 3600
         '^/':
             #origin_regex: true
-            allow_origin: ['^http://localhost:[0-9]+']
-            allow_headers: ['X-Custom-Auth']
+            allow_origin: ['*']
+            allow_headers: ['Authorization','content-type']
             allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
             max_age: 3600
             hosts: ['^api\.']

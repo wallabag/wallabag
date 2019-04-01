@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.3.7](https://github.com/wallabag/wallabag/tree/2.3.7)
+   [Full Changelog](https://github.com/wallabag/wallabag/compare/2.3.6...2.3.7)
+
+### Fixes
+
+- Jump to 2.3.7-dev [#3837](https://github.com/wallabag/wallabag/pull/3837)
+- Fix bad order parameter in the API [#3841](https://github.com/wallabag/wallabag/pull/3841)
+- Update composer.json to add php-tidy (ext-tidy) [#3853](https://github.com/wallabag/wallabag/pull/3853)
+- Add dedicated email for site config issue [#3861](https://github.com/wallabag/wallabag/pull/3861)
+- Fix read & starred status in Pocket import [#3819](https://github.com/wallabag/wallabag/pull/3819)
+- Fix broken 2 factor auth logo image [#3869](https://github.com/wallabag/wallabag/pull/3869)
+- Fix CORS for API [#3882](https://github.com/wallabag/wallabag/pull/3882)
+- Add support of expect parameter to change return object when deleting entry [#3887](https://github.com/wallabag/wallabag/pull/3887)
+- epub export: fix missing cover image, only for exports of one article [#3886](https://github.com/wallabag/wallabag/pull/3886)
+- Allow optional --ignore-root-warning [#3885](https://github.com/wallabag/wallabag/pull/3885)
+- material: fix left padding of content on medium screens [#3893](https://github.com/wallabag/wallabag/pull/3893)
+- material: hide creation date from card actions on specific sizes [#3894](https://github.com/wallabag/wallabag/pull/3894)
+
 ## [2.3.6](https://github.com/wallabag/wallabag/tree/2.3.6)
    [Full Changelog](https://github.com/wallabag/wallabag/compare/2.3.5...2.3.6)
 

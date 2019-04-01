@@ -165,13 +165,6 @@ class EntriesExport
         $book->addDublinCoreMetadata(DublinCore::CONTRIBUTOR, 'PHP');
         $book->addDublinCoreMetadata(DublinCore::CONTRIBUTOR, 'wallabag');
 
-        /*
-         * Front page
-         */
-        if (file_exists($this->logoPath)) {
-            $book->setCoverImage('Cover.png', file_get_contents($this->logoPath), 'image/png');
-        }
-
         $entryIds = [];
         $entryCount = \count($this->entries);
         $i = 0;
@@ -183,10 +176,19 @@ class EntriesExport
         // set tags as subjects
         foreach ($this->entries as $entry) {
             ++$i;
+
+            /*
+             * Front page
+             * Set if there's only one entry in the given set
+             */
+            if (1 === $entryCount && null !== $entry->getPreviewPicture()) {
+                $book->setCoverImage($entry->getPreviewPicture());
+            }
+
             foreach ($entry->getTags() as $tag) {
                 $book->setSubject($tag->getLabel());
             }
-            $filename = sha1($entry->getTitle());
+            $filename = sha1(sprintf('%s:%s', $entry->getUrl(), $entry->getTitle()));
 
             $publishedBy = $entry->getPublishedBy();
             $authors = $this->translator->trans('export.unknown');

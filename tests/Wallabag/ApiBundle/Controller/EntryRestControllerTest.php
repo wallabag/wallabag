@@ -400,29 +400,71 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testDeleteEntry()
     {
-        $entry = $this->client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUser($this->getUserId(), ['id' => 'asc']);
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $entry = new Entry($em->getReference(User::class, 1));
+        $entry->setUrl('http://0.0.0.0/test-delete-entry');
+        $entry->setTitle('Test delete entry');
+        $em->persist($entry);
+        $em->flush();
 
-        if (!$entry) {
-            $this->markTestSkipped('No content found in db.');
-        }
+        $em->clear();
 
-        $this->client->request('DELETE', '/api/entries/' . $entry->getId() . '.json');
+        $e = [
+            'title' => $entry->getTitle(),
+            'url' => $entry->getUrl(),
+            'id' => $entry->getId(),
+        ];
+
+        $this->client->request('DELETE', '/api/entries/' . $e['id'] . '.json');
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertSame($entry->getTitle(), $content['title']);
-        $this->assertSame($entry->getUrl(), $content['url']);
-        $this->assertSame($entry->getId(), $content['id']);
+        $this->assertSame($e['title'], $content['title']);
+        $this->assertSame($e['url'], $content['url']);
+        $this->assertSame($e['id'], $content['id']);
 
         // We'll try to delete this entry again
-        $this->client->request('DELETE', '/api/entries/' . $entry->getId() . '.json');
+        $client = $this->createAuthorizedClient();
+        $client->request('DELETE', '/api/entries/' . $e['id'] . '.json');
 
-        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
+    }
+
+    public function testDeleteEntryExpectId()
+    {
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $entry = new Entry($em->getReference(User::class, 1));
+        $entry->setUrl('http://0.0.0.0/test-delete-entry-id');
+        $em->persist($entry);
+        $em->flush();
+
+        $em->clear();
+
+        $id = $entry->getId();
+
+        $this->client->request('DELETE', '/api/entries/' . $id . '.json?expect=id');
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertSame($id, $content['id']);
+        $this->assertArrayNotHasKey('url', $content);
+
+        // We'll try to delete this entry again
+        $client = $this->createAuthorizedClient();
+        $client->request('DELETE', '/api/entries/' . $id . '.json');
+
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
+    }
+
+    public function testDeleteEntryExpectBadRequest()
+    {
+        $this->client->request('DELETE', '/api/entries/1.json?expect=badrequest');
+
+        $this->assertSame(400, $this->client->getResponse()->getStatusCode());
     }
 
     public function testPostEntry()
