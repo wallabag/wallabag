@@ -26,7 +26,7 @@ use Wallabag\UserBundle\Entity\User;
  *     indexes={
  *         @ORM\Index(name="created_at", columns={"created_at"}),
  *         @ORM\Index(name="uid", columns={"uid"}),
- *         @ORM\Index(name="hashed_url_user_id", columns={"user_id", "hashed_url"})
+ *         @ORM\Index(name="hashed_url_user_id", columns={"user_id", "hashed_url"}, options={"lengths"={null, 40}})
  *     }
  * )
  * @ORM\HasLifecycleCallbacks()

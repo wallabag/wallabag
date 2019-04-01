@@ -24,7 +24,7 @@ class Version20190401105353 extends WallabagMigration
             'notnull' => false,
         ]);
 
-        $entryTable->addIndex(['user_id', 'hashed_url'], 'hashed_url_user_id');
+        $entryTable->addIndex(['user_id', 'hashed_url'], 'hashed_url_user_id', [], ['lengths' => [null, 40]]);
     }
 
     /**
