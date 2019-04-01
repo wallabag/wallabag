@@ -30,7 +30,6 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
             'entry2' => [
                 'user' => 'admin-user',
                 'url' => 'http://0.0.0.0/entry2',
-                'hashed_url' => hash('md5', 'http://0.0.0.0/entry2'),
                 'reading_time' => 1,
                 'domain' => 'domain.io',
                 'mime' => 'text/html',
@@ -90,6 +89,7 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
         foreach ($entries as $reference => $item) {
             $entry = new Entry($this->getReference($item['user']));
             $entry->setUrl($item['url']);
+            $entry->setHashedUrl(hash('md5', $item['url']));
             $entry->setReadingTime($item['reading_time']);
             $entry->setDomainName($item['domain']);
             $entry->setMimetype($item['mime']);

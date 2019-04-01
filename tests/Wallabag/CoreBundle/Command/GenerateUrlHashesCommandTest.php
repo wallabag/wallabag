@@ -22,7 +22,7 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
             'command' => $command->getName(),
         ]);
 
-        $this->assertContains('Generating hashed urls for the 3 user account entries', $tester->getDisplay());
+        $this->assertContains('Generating hashed urls for "3" users', $tester->getDisplay());
         $this->assertContains('Finished generated hashed urls', $tester->getDisplay());
     }
 
@@ -55,7 +55,7 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
             'username' => 'admin',
         ]);
 
-        $this->assertContains('Generated hashed urls for user admin', $tester->getDisplay());
+        $this->assertContains('Generated hashed urls for user: admin', $tester->getDisplay());
     }
 
     public function testGenerateUrls()
@@ -88,11 +88,11 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
             'username' => 'admin',
         ]);
 
-        $this->assertContains('Generated hashed urls for user admin', $tester->getDisplay());
+        $this->assertContains('Generated hashed urls for user: admin', $tester->getDisplay());
 
         $entry = $em->getRepository('WallabagCoreBundle:Entry')->findOneByUrl($url);
 
-        $this->assertEquals($entry->getHashedUrl(), hash('sha512', $url));
+        $this->assertSame($entry->getHashedUrl(), hash('md5', $url));
 
         $query = $em->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\Entry e WHERE e.url = :url');
         $query->setParameter('url', $url);

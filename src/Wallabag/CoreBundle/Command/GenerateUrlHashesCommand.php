@@ -45,13 +45,13 @@ class GenerateUrlHashesCommand extends ContainerAwareCommand
         } else {
             $users = $this->getDoctrine()->getRepository('WallabagUserBundle:User')->findAll();
 
-            $output->writeln(sprintf('Generating hashed urls for the %d user account entries', count($users)));
+            $output->writeln(sprintf('Generating hashed urls for "%d" users', \count($users)));
 
             foreach ($users as $user) {
-                $output->writeln(sprintf('Processing user %s', $user->getUsername()));
+                $output->writeln(sprintf('Processing user: %s', $user->getUsername()));
                 $this->generateHashedUrls($user);
             }
-            $output->writeln(sprintf('Finished generated hashed urls'));
+            $output->writeln('Finished generated hashed urls');
         }
 
         return 0;
@@ -67,13 +67,20 @@ class GenerateUrlHashesCommand extends ContainerAwareCommand
 
         $entries = $repo->findByUser($user->getId());
 
+        $i = 1;
         foreach ($entries as $entry) {
-            $entry->setHashedUrl(hash('sha512', $entry->getUrl()));
+            $entry->setHashedUrl(hash('md5', $entry->getUrl()));
             $em->persist($entry);
-            $em->flush();
+
+            if (0 === ($i % 20)) {
+                $em->flush();
+            }
+            ++$i;
         }
 
-        $this->output->writeln(sprintf('Generated hashed urls for user %s', $user->getUserName()));
+        $em->flush();
+
+        $this->output->writeln(sprintf('Generated hashed urls for user: %s', $user->getUserName()));
     }
 
     /**

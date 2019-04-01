@@ -347,6 +347,30 @@ class EntryRepository extends EntityRepository
     }
 
     /**
+     * Find an entry by its hashed url and its owner.
+     * If it exists, return the entry otherwise return false.
+     *
+     * @param $hashedUrl
+     * @param $userId
+     *
+     * @return Entry|bool
+     */
+    public function findByHashedUrlAndUserId($hashedUrl, $userId)
+    {
+        $res = $this->createQueryBuilder('e')
+            ->where('e.hashedUrl = :hashed_url')->setParameter('hashed_url', urldecode($hashedUrl))
+            ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
+            ->getQuery()
+            ->getResult();
+
+        if (\count($res)) {
+            return current($res);
+        }
+
+        return false;
+    }
+
+    /**
      * Count all entries for a user.
      *
      * @param int $userId
