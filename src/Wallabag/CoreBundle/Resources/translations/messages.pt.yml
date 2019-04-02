@@ -38,6 +38,7 @@ menu:
         search: 'Pesquisa'
         filter_entries: 'Filtrar entradas'
         export: 'Exportar'
+        random_entry: 'Artigo aleatório'
     search_form:
         input_label: 'Digite aqui sua pesquisa'
 

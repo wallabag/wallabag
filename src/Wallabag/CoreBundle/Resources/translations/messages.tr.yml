@@ -38,6 +38,7 @@ menu:
         search: 'Ara'
         filter_entries: 'Filtrele'
         export: 'Dışa Aktar'
+        random_entry: 'Rastgele makale'
     search_form:
         input_label: 'Aramak istediğiniz herhangi bir şey yazın'
 

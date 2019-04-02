@@ -37,6 +37,7 @@ menu:
         search: 'Поиск'
         filter_entries: 'Фильтр записей'
         export: 'Экспорт'
+        random_entry: 'Случайная статья'
     search_form:
         input_label: 'Введите текст для поиска'
 

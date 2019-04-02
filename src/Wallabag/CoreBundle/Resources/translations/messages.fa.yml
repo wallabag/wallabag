@@ -38,6 +38,7 @@ menu:
         search: 'جستجو'
         filter_entries: 'فیلترکردن مقاله‌ها'
         export: 'برون‌بری'
+        random_entry: 'مقاله تصادفی'
     search_form:
         input_label: 'جستجوی خود را این‌جا بنویسید:'
 

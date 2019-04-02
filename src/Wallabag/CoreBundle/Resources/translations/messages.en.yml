@@ -38,6 +38,7 @@ menu:
         search: 'Search'
         filter_entries: 'Filter entries'
         export: 'Export'
+        random_entry: 'Random entry'
     search_form:
         input_label: 'Enter your search here'
 

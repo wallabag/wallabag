@@ -38,6 +38,7 @@ menu:
         search: 'Căutare'
         filter_entries: 'Filtrează articolele'
         # export: 'Export'
+        random_entry: 'Articolul random'
     search_form:
         input_label: 'Introdu căutarea ta'
 

@@ -38,6 +38,7 @@ menu:
         search: 'Cercar'
         filter_entries: 'Filtrar los articles'
         export: 'Exportar'
+        random_entry: 'Article aleatori'
     search_form:
         input_label: 'Picatz vòstre mot-clau a cercar aquí'
 

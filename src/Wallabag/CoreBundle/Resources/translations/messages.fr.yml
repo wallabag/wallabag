@@ -38,6 +38,7 @@ menu:
         search: "Rechercher"
         filter_entries: "Filtrer les articles"
         export: "Exporter"
+        random_entry: 'Article aléatoire'
     search_form:
         input_label: "Saisissez votre terme de recherche"
 
