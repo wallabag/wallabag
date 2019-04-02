@@ -29,8 +29,8 @@ class EntryRestController extends WallabagRestController
      *          {"name"="return_id", "dataType"="string", "required"=false, "format"="1 or 0", "description"="Set 1 if you want to retrieve ID in case entry(ies) exists, 0 by default"},
      *          {"name"="url", "dataType"="string", "required"=true, "format"="An url", "description"="DEPRECATED, use hashed_url instead"},
      *          {"name"="urls", "dataType"="string", "required"=false, "format"="An array of urls (?urls[]=http...&urls[]=http...)", "description"="DEPRECATED, use hashed_urls instead"},
-     *          {"name"="hashed_url", "dataType"="string", "required"=true, "format"="An url", "description"="Md5 url to check if it exists"},
-     *          {"name"="hashed_urls", "dataType"="string", "required"=false, "format"="An array of urls (?urls[]=http...&urls[]=http...)", "description"="Md5 urls (as an array) to check if it exists"}
+     *          {"name"="hashed_url", "dataType"="string", "required"=false, "format"="A hashed url", "description"="Hashed url using SHA1 to check if it exists"},
+     *          {"name"="hashed_urls", "dataType"="string", "required"=false, "format"="An array of hashed urls (?hashed_urls[]=xxx...&hashed_urls[]=xxx...)", "description"="An array of hashed urls using SHA1 to check if they exist"}
      *       }
      * )
      *
