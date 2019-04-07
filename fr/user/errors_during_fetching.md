@@ -72,7 +72,7 @@ Vous aurez désormais dans le fichier `var/logs/graby.log` des détails sur les 
 
 {% hint style="tip" %}Il est possible d'obtenir des informations **extrêmement** détaillées sur les modifications effectuées par graby lors de la récupération, l'analyse et le nettoyage du code d'un article en passant `level: debug` au lieu de `level: info` dans la section `graby:` ci-dessus.
 
-Cela peut être très pratique lors de fichiers de configuration (_site config_, voir ci-dessous) ; il faut cependant être conscient que l'activation du `level: debug` engendre le stockage du code HTML complet de l'article à plusieurs étapes du traitement. Le fichier de log va donc grossir très rapidement ! :){% endhint %}
+Cela peut être très pratique lors de la création de fichiers de configuration (_site config_, voir ci-dessous) ; il faut cependant être conscient que l'activation du `level: debug` engendre le stockage du code HTML complet de l'article à plusieurs étapes du traitement. Le fichier de log va donc grossir très rapidement ! :){% endhint %}
 
 ### Création ou mise à jour d'un fichier de configuration (_site config_)
 
