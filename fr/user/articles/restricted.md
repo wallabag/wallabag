@@ -10,13 +10,20 @@ En version 2.2, seul l'administrateur pouvait mettre ses identifiants dans un fi
 
 | Nom | Disponible à partir de la version |
 | ------|-------- |
+| Alternatives Economiques | 2.3 |
 | Arrêt sur Images | 2.2 |
+| Canard PC | 2.3 |
 | Courrier International | 2.3 |
+| GameKult | 2.3 |
 | Le Figaro | 2.3 |
 | Le Monde | 2.3 |
 | Le Monde Diplomatique | 2.3 |
+| Le Point | 2.3 |
+| LWN.net | 2.3 |
 | Mediapart | 2.2 |
 | Next INpact | 2.2 |
+| Reflets.info | 2.3 |
+| The Economist | 2.3 |
 
 ## Activer l'authentification pour les paywall
 
