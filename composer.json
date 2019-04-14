@@ -44,7 +44,7 @@
         "ext-tokenizer": "*",
         "ext-pdo": "*",
         "ext-tidy": "*",
-        "symfony/symfony": "~3.3.13",
+        "symfony/symfony": "3.4.*",
         "doctrine/orm": "^2.5.12",
         "doctrine/doctrine-bundle": "^1.8.0",
         "doctrine/doctrine-cache-bundle": "^1.3.2",
