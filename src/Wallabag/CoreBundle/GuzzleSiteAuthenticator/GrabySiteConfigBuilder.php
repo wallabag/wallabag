@@ -64,7 +64,17 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
 
         $credentials = null;
         if ($this->currentUser) {
-            $credentials = $this->credentialRepository->findOneByHostAndUser($host, $this->currentUser->getId());
+            $hosts = [$host];
+            // will try to see for a host without the first subdomain (fr.example.org & .example.org)
+            $split = explode('.', $host);
+
+            if (\count($split) > 1) {
+                // remove first subdomain
+                array_shift($split);
+                $hosts[] = '.' . implode('.', $split);
+            }
+
+            $credentials = $this->credentialRepository->findOneByHostsAndUser($hosts, $this->currentUser->getId());
         }
 
         if (null === $credentials) {

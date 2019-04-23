@@ -24,7 +24,7 @@ class GrabySiteConfigBuilderTest extends TestCase
 
         $grabySiteConfig = new GrabySiteConfig();
         $grabySiteConfig->requires_login = true;
-        $grabySiteConfig->login_uri = 'http://www.example.com/login';
+        $grabySiteConfig->login_uri = 'http://api.example.com/login';
         $grabySiteConfig->login_username_field = 'login';
         $grabySiteConfig->login_password_field = 'password';
         $grabySiteConfig->login_extra_fields = ['field=value'];
@@ -32,7 +32,7 @@ class GrabySiteConfigBuilderTest extends TestCase
 
         $grabyConfigBuilderMock
             ->method('buildForHost')
-            ->with('example.com')
+            ->with('api.example.com')
             ->will($this->returnValue($grabySiteConfig));
 
         $logger = new Logger('foo');
@@ -43,8 +43,8 @@ class GrabySiteConfigBuilderTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
         $siteCrentialRepo->expects($this->once())
-            ->method('findOneByHostAndUser')
-            ->with('example.com', 1)
+            ->method('findOneByHostsAndUser')
+            ->with(['api.example.com', '.example.com'], 1)
             ->willReturn(['username' => 'foo', 'password' => 'bar']);
 
         $user = $this->getMockBuilder('Wallabag\UserBundle\Entity\User')
@@ -66,11 +66,11 @@ class GrabySiteConfigBuilderTest extends TestCase
             $logger
         );
 
-        $config = $this->builder->buildForHost('www.example.com');
+        $config = $this->builder->buildForHost('api.example.com');
 
-        $this->assertSame('example.com', $config->getHost());
+        $this->assertSame('api.example.com', $config->getHost());
         $this->assertTrue($config->requiresLogin());
-        $this->assertSame('http://www.example.com/login', $config->getLoginUri());
+        $this->assertSame('http://api.example.com/login', $config->getLoginUri());
         $this->assertSame('login', $config->getUsernameField());
         $this->assertSame('password', $config->getPasswordField());
         $this->assertSame(['field' => 'value'], $config->getExtraFields());
@@ -103,8 +103,8 @@ class GrabySiteConfigBuilderTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
         $siteCrentialRepo->expects($this->once())
-            ->method('findOneByHostAndUser')
-            ->with('unknown.com', 1)
+            ->method('findOneByHostsAndUser')
+            ->with(['unknown.com', '.com'], 1)
             ->willReturn(null);
 
         $user = $this->getMockBuilder('Wallabag\UserBundle\Entity\User')

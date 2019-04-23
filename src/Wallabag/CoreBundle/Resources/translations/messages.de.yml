@@ -550,7 +550,7 @@ site_credential:
         create_new_one: 'Einen neuen Seitenzugang anlegen'
     form:
         username_label: 'Benutzername'
-        host_label: 'Host'
+        host_label: 'Host (subdomain.example.org, .example.org, etc.)'
         password_label: 'Passwort'
         save: 'Speichern'
         delete: 'Löschen'

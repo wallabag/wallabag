@@ -550,7 +550,7 @@ site_credential:
         create_new_one: Créer un nouvel accès à un site
     form:
         username_label: 'Identifiant'
-        host_label: 'Domaine'
+        host_label: 'Domaine (subdomain.example.org, .example.org, etc.)'
         password_label: 'Mot de passe'
         save: "Sauvegarder"
         delete: "Supprimer"
