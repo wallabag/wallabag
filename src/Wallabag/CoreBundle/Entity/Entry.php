@@ -25,7 +25,8 @@ use Wallabag\UserBundle\Entity\User;
  *     options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"},
  *     indexes={
  *         @ORM\Index(name="created_at", columns={"created_at"}),
- *         @ORM\Index(name="uid", columns={"uid"})
+ *         @ORM\Index(name="uid", columns={"uid"}),
+ *         @ORM\Index(name="hashed_url_user_id", columns={"user_id", "hashed_url"}, options={"lengths"={null, 40}})
  *     }
  * )
  * @ORM\HasLifecycleCallbacks()
@@ -74,6 +75,13 @@ class Entry
      * @Groups({"entries_for_user", "export_all"})
      */
     private $url;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="hashed_url", type="string", length=40, nullable=true)
+     */
+    private $hashedUrl;
 
     /**
      * @var bool
@@ -316,6 +324,7 @@ class Entry
     public function setUrl($url)
     {
         $this->url = $url;
+        $this->hashedUrl = hash('sha1', $url);
 
         return $this;
     }
@@ -910,5 +919,25 @@ class Entry
     public function getOriginUrl()
     {
         return $this->originUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHashedUrl()
+    {
+        return $this->hashedUrl;
+    }
+
+    /**
+     * @param mixed $hashedUrl
+     *
+     * @return Entry
+     */
+    public function setHashedUrl($hashedUrl)
+    {
+        $this->hashedUrl = $hashedUrl;
+
+        return $this;
     }
 }
