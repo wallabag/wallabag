@@ -11,48 +11,48 @@ class FeedControllerTest extends WallabagCoreTestCase
         $doc = new \DOMDocument();
         $doc->loadXML($xml);
 
-        $xpath = new \DOMXpath($doc);
+        $xpath = new \DOMXPath($doc);
         $xpath->registerNamespace('a', 'http://www.w3.org/2005/Atom');
 
         if (null === $nb) {
             $this->assertGreaterThan(0, $xpath->query('//a:entry')->length);
         } else {
-            $this->assertEquals($nb, $xpath->query('//a:entry')->length);
+            $this->assertSame($nb, $xpath->query('//a:entry')->length);
         }
 
-        $this->assertEquals(1, $xpath->query('/a:feed')->length);
+        $this->assertSame(1, $xpath->query('/a:feed')->length);
 
-        $this->assertEquals(1, $xpath->query('/a:feed/a:title')->length);
+        $this->assertSame(1, $xpath->query('/a:feed/a:title')->length);
         $this->assertContains('favicon.ico', $xpath->query('/a:feed/a:icon')->item(0)->nodeValue);
         $this->assertContains('logo-square.png', $xpath->query('/a:feed/a:logo')->item(0)->nodeValue);
 
-        $this->assertEquals(1, $xpath->query('/a:feed/a:updated')->length);
+        $this->assertSame(1, $xpath->query('/a:feed/a:updated')->length);
 
-        $this->assertEquals(1, $xpath->query('/a:feed/a:generator')->length);
-        $this->assertEquals('wallabag', $xpath->query('/a:feed/a:generator')->item(0)->nodeValue);
-        $this->assertEquals('admin', $xpath->query('/a:feed/a:author/a:name')->item(0)->nodeValue);
+        $this->assertSame(1, $xpath->query('/a:feed/a:generator')->length);
+        $this->assertSame('wallabag', $xpath->query('/a:feed/a:generator')->item(0)->nodeValue);
+        $this->assertSame('admin', $xpath->query('/a:feed/a:author/a:name')->item(0)->nodeValue);
 
-        $this->assertEquals(1, $xpath->query('/a:feed/a:subtitle')->length);
+        $this->assertSame(1, $xpath->query('/a:feed/a:subtitle')->length);
         if (null !== $tagValue && 0 === strpos($type, 'tag')) {
-            $this->assertEquals('wallabag — '.$type.' '.$tagValue.' feed', $xpath->query('/a:feed/a:title')->item(0)->nodeValue);
-            $this->assertEquals('Atom feed for entries tagged with ' . $tagValue, $xpath->query('/a:feed/a:subtitle')->item(0)->nodeValue);
+            $this->assertSame('wallabag — ' . $type . ' ' . $tagValue . ' feed', $xpath->query('/a:feed/a:title')->item(0)->nodeValue);
+            $this->assertSame('Atom feed for entries tagged with ' . $tagValue, $xpath->query('/a:feed/a:subtitle')->item(0)->nodeValue);
         } else {
-            $this->assertEquals('wallabag — '.$type.' feed', $xpath->query('/a:feed/a:title')->item(0)->nodeValue);
-            $this->assertEquals('Atom feed for ' . $type . ' entries', $xpath->query('/a:feed/a:subtitle')->item(0)->nodeValue);
+            $this->assertSame('wallabag — ' . $type . ' feed', $xpath->query('/a:feed/a:title')->item(0)->nodeValue);
+            $this->assertSame('Atom feed for ' . $type . ' entries', $xpath->query('/a:feed/a:subtitle')->item(0)->nodeValue);
         }
 
-        $this->assertEquals(1, $xpath->query('/a:feed/a:link[@rel="self"]')->length);
+        $this->assertSame(1, $xpath->query('/a:feed/a:link[@rel="self"]')->length);
         $this->assertContains($type, $xpath->query('/a:feed/a:link[@rel="self"]')->item(0)->getAttribute('href'));
 
-        $this->assertEquals(1, $xpath->query('/a:feed/a:link[@rel="last"]')->length);
+        $this->assertSame(1, $xpath->query('/a:feed/a:link[@rel="last"]')->length);
 
         foreach ($xpath->query('//a:entry') as $item) {
-            $this->assertEquals(1, $xpath->query('a:title', $item)->length);
-            $this->assertEquals(1, $xpath->query('a:link[@rel="via"]', $item)->length);
-            $this->assertEquals(1, $xpath->query('a:link[@rel="alternate"]', $item)->length);
-            $this->assertEquals(1, $xpath->query('a:id', $item)->length);
-            $this->assertEquals(1, $xpath->query('a:published', $item)->length);
-            $this->assertEquals(1, $xpath->query('a:content', $item)->length);
+            $this->assertSame(1, $xpath->query('a:title', $item)->length);
+            $this->assertSame(1, $xpath->query('a:link[@rel="via"]', $item)->length);
+            $this->assertSame(1, $xpath->query('a:link[@rel="alternate"]', $item)->length);
+            $this->assertSame(1, $xpath->query('a:id', $item)->length);
+            $this->assertSame(1, $xpath->query('a:published', $item)->length);
+            $this->assertSame(1, $xpath->query('a:content', $item)->length);
         }
     }
 
@@ -190,15 +190,15 @@ class FeedControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         $client->request('GET', '/feed/admin/SUPERTOKEN/unread');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->validateDom($client->getResponse()->getContent(), 'unread');
 
         $client->request('GET', '/feed/admin/SUPERTOKEN/unread/2');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->validateDom($client->getResponse()->getContent(), 'unread');
 
         $client->request('GET', '/feed/admin/SUPERTOKEN/unread/3000');
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
     }
 
     public function testTags()
@@ -216,13 +216,13 @@ class FeedControllerTest extends WallabagCoreTestCase
         $em->flush();
 
         $client = $this->getClient();
-        $client->request('GET', '/admin/SUPERTOKEN/tags/foo-bar.xml');
+        $client->request('GET', '/feed/admin/SUPERTOKEN/tags/foo');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $this->validateDom($client->getResponse()->getContent(), 'tag', 2, 'foo-bar');
+        $this->validateDom($client->getResponse()->getContent(), 'tag', 2, 'foo');
 
-        $client->request('GET', '/admin/SUPERTOKEN/tags/foo-bar.xml?page=3000');
+        $client->request('GET', '/feed/admin/SUPERTOKEN/tags/foo/3000');
         $this->assertSame(302, $client->getResponse()->getStatusCode());
     }
 }

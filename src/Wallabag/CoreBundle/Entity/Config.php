@@ -60,14 +60,14 @@ class Config
     /**
      * @var string
      *
-     * @ORM\Column(name="rss_token", type="string", nullable=true)
+     * @ORM\Column(name="feed_token", type="string", nullable=true)
      */
     private $feedToken;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="rss_limit", type="integer", nullable=true)
+     * @ORM\Column(name="feed_limit", type="integer", nullable=true)
      * @Assert\Range(
      *      min = 1,
      *      max = 100000,

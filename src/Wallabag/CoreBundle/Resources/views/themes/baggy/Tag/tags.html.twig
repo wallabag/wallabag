@@ -21,7 +21,7 @@
                 <i class="material-icons">mode_edit</i>
             </a>
             {% endif %}
-            {% if app.user.config.rssToken %}
+            {% if app.user.config.feedToken %}
                 <a rel="alternate" type="application/atom+xml" href="{{ path('tag_feed', {'username': app.user.username, 'token': app.user.config.feedToken, 'slug': tag.slug}) }}" class="right">
                     <i class="material-icons md-24">rss_feed</i>
                 </a>

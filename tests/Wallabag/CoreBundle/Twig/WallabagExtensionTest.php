@@ -52,9 +52,9 @@ class WallabagExtensionTest extends TestCase
 
         $extension = new WallabagExtension($entryRepository, $tagRepository, $tokenStorage, 0, $translator);
 
-        $this->assertEquals('lemonde.fr', $extension->removeScheme('lemonde.fr'));
-        $this->assertEquals('gist.github.com', $extension->removeScheme('gist.github.com'));
-        $this->assertEquals('gist.github.com', $extension->removeScheme('https://gist.github.com'));
+        $this->assertSame('lemonde.fr', $extension->removeScheme('lemonde.fr'));
+        $this->assertSame('gist.github.com', $extension->removeScheme('gist.github.com'));
+        $this->assertSame('gist.github.com', $extension->removeScheme('https://gist.github.com'));
     }
 
     public function testRemoveSchemeAndWww()

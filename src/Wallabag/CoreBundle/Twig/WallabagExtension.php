@@ -54,7 +54,7 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
 
     public function removeSchemeAndWww($url)
     {
-        return $this->removeWww($this->removeScheme($url)
+        return $this->removeWww($this->removeScheme($url));
     }
 
     /**

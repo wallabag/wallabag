@@ -8,7 +8,6 @@ use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -20,8 +19,8 @@ class FeedController extends Controller
     /**
      * Shows unread entries for current user.
      *
-     * @Route("/feed/{username}/{token}/unread/{page}", name="unread_feed", defaults={"page": 1})
-     * @Route("/{username}/{token}/unread.xml", defaults={"page": 1})
+     * @Route("/feed/{username}/{token}/unread/{page}", name="unread_feed", defaults={"page"=1, "_format"="xml"})
+     *
      * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
      *
      * @param User $user
@@ -37,8 +36,8 @@ class FeedController extends Controller
     /**
      * Shows read entries for current user.
      *
-     * @Route("/feed/{username}/{token}/archive/{page}", name="archive_feed", defaults={"page": 1})
-     * @Route("/{username}/{token}/archive.xml", defaults={"page": 1})
+     * @Route("/feed/{username}/{token}/archive/{page}", name="archive_feed", defaults={"page"=1, "_format"="xml"})
+     *
      * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
      *
      * @param User $user
@@ -54,8 +53,8 @@ class FeedController extends Controller
     /**
      * Shows starred entries for current user.
      *
-     * @Route("/feed/{username}/{token}/starred/{page}", name="starred_feed", defaults={"page": 1})
-     * @Route("/{username}/{token}/starred.xml", defaults={"page": 1})
+     * @Route("/feed/{username}/{token}/starred/{page}", name="starred_feed", defaults={"page"=1, "_format"="xml"})
+     *
      * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
      *
      * @param User $user
@@ -71,29 +70,29 @@ class FeedController extends Controller
     /**
      * Shows all entries for current user.
      *
-     * @Route("/{username}/{token}/all.xml", name="all_feed", defaults={"_format"="xml"})
+     * @Route("/feed/{username}/{token}/all/{page}", name="all_feed", defaults={"page"=1, "_format"="xml"})
+     *
      * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAllFeedAction(Request $request, User $user)
+    public function showAllFeedAction(User $user, $page)
     {
-        return $this->showEntries('all', $user, $request->query->get('page', 1));
+        return $this->showEntries('all', $user, $page);
     }
 
     /**
      * Shows entries associated to a tag for current user.
      *
-     * @Route("/{username}/{token}/tags/{slug}.xml", name="tag_feed", defaults={"_format"="xml"})
+     * @Route("/feed/{username}/{token}/tags/{slug}/{page}", name="tag_feed", defaults={"page"=1, "_format"="xml"})
+     *
      * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showTagsFeedAction(Request $request, User $user, Tag $tag)
+    public function showTagsFeedAction(User $user, Tag $tag, $page)
     {
-        $page = $request->query->get('page', 1);
-
         $url = $this->generateUrl(
             'tag_feed',
             [

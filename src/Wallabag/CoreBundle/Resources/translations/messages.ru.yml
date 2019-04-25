@@ -53,7 +53,7 @@ config:
     page_title: 'Настройки'
     tab_menu:
         settings: 'Настройки'
-        rss: 'RSS'
+        feed: 'RSS'
         user_info: 'Информация о пользователе'
         password: 'Пароль'
         rules: 'Правила настройки простановки тегов'
@@ -83,18 +83,18 @@ config:
         help_reading_speed: "wallabag посчитает сколько времени занимает чтение каждой записи. Вы можете определить здесь, как быстро вы читаете. wallabag пересчитает время чтения для каждой записи."
         help_language: "Вы можете изменить язык интерфейса wallabag."
         help_pocket_consumer_key: "Обязательно для импорта из Pocket. Вы можете создать это в Вашем аккаунте на Pocket."
-    form_rss:
+    form_feed:
         description: 'RSS фид созданный с помощью wallabag позволяет читать Ваши записи через Ваш любимый RSS агрегатор. Для начала Вам потребуется создать ключ.'
         token_label: 'RSS ключ'
         no_token: 'Ключ не задан'
         token_create: 'Создать ключ'
         token_reset: 'Пересоздать ключ'
-        rss_links: 'ссылка на RSS'
-        rss_link:
+        feed_links: 'ссылка на RSS'
+        feed_link:
             unread: 'непрочитанные'
             starred: 'помеченные'
             archive: 'архивные'
-        rss_limit: 'Количество записей в фиде'
+        feed_limit: 'Количество записей в фиде'
     form_user:
         # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'Имя'
@@ -359,7 +359,7 @@ quickstart:
         title: 'Настроить приложение'
         description: 'Чтобы иметь приложение, которое вам подходит, ознакомьтесь с конфигурацией wallabag.'
         language: 'Выбрать язык и дизайн'
-        rss: 'Включить RSS фид'
+        feed: 'Включить RSS фид'
         tagging_rules: 'Создать правило для автоматической установки тегов'
     admin:
         title: 'Администрирование'
@@ -554,10 +554,10 @@ flashes:
             password_updated: 'Пароль обновлен'
             password_not_updated_demo: "В режиме демонстрации нельзя изменять пароль для этого пользователя."
             user_updated: 'Информация обновлена'
-            rss_updated: 'RSS информация обновлена'
+            feed_updated: 'RSS информация обновлена'
             tagging_rules_updated: 'Правила тегировния обновлены'
             tagging_rules_deleted: 'Правила тегировния удалены'
-            rss_token_updated: 'RSS ключ обновлен'
+            feed_token_updated: 'RSS ключ обновлен'
             annotations_reset: "Аннотации сброшены"
             tags_reset: "Теги сброшены"
             entries_reset: "Записи сброшены"
