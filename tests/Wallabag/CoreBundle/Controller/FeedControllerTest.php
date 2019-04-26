@@ -225,4 +225,37 @@ class FeedControllerTest extends WallabagCoreTestCase
         $client->request('GET', '/feed/admin/SUPERTOKEN/tags/foo/3000');
         $this->assertSame(302, $client->getResponse()->getStatusCode());
     }
+
+    public function dataForRedirect()
+    {
+        return [
+            [
+                '/admin/YZIOAUZIAO/unread.xml',
+            ],
+            [
+                '/admin/YZIOAUZIAO/starred.xml',
+            ],
+            [
+                '/admin/YZIOAUZIAO/archive.xml',
+            ],
+            [
+                '/admin/YZIOAUZIAO/all.xml',
+            ],
+            [
+                '/admin/YZIOAUZIAO/tags/foo.xml',
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider dataForRedirect
+     */
+    public function testRedirectFromRssToAtom($url)
+    {
+        $client = $this->getClient();
+
+        $client->request('GET', $url);
+
+        $this->assertSame(301, $client->getResponse()->getStatusCode());
+    }
 }
