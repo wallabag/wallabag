@@ -8,8 +8,11 @@
 
     <div class="{{ subClass|default('original grey-text') }}">
         <a href="{{ entry.url|e }}" target="_blank" title="{{ entry.domainName|removeWww }}" class="tool grey-text">{{ entry.domainName|removeWww }}</a>
-        {% if withTags is defined %}
+        {% if withMetadata is defined %}
             {% include "@WallabagCore/themes/material/Entry/_tags.html.twig" with {'tags': entry.tags | slice(0, 3), 'entryId': entry.id, 'listClass': ' hide-on-med-and-down'} only %}
+            <div class="reading-time grey-text">
+                <div class="card-reading-time">{% include "@WallabagCore/themes/material/Entry/_reading_time.html.twig" with {'entry': entry} only %}</div>
+            </div>
         {% endif %}
     </div>
 </div>
