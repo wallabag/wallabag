@@ -47,6 +47,7 @@ class ContentProxy
      */
     public function updateEntry(Entry $entry, $url, array $content = [], $disableContentUpdate = false)
     {
+        $this->graby->toggleImgNoReferrer(true);
         if (!empty($content['html'])) {
             $content['html'] = $this->graby->cleanupHtml($content['html'], $url);
         }
