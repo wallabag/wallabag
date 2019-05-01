@@ -377,3 +377,19 @@ quickstart:
   more: Továbbiak…
   intro:
     title: Üdvözöljük a wallabag-ban!
+    paragraph_1: Végigvezetjük a wallabag-ban tett látogatása során és bemutatunk
+      néhány olyan funkciót ami Önt is érdekelheti.
+    paragraph_2: Kövessen minket!
+  configure:
+    title: Az alkalmazás konfigurálása
+    description: Tekintse át a wallabag beállításait ahhoz, hogy egy Önnek megfelelő
+      alkalmazása lehessen.
+    language: A nyelv és a kinézet megváltoztatása
+    rss: RSS hírcsatornák engedélyezése
+    tagging_rules: Írjon szabályokat a cikkek automatikus címkézéséhez
+  admin:
+    title: Adminisztráció
+    description: 'Adminisztrátorként jogosultságokkal rendelkezik a wallabag-ban.
+      Ezeket teheti:'
+    new_user: Új felhasználó létrehozása
+    analytics: Analitika konfigurálása
