@@ -43,50 +43,59 @@ class EntryRestController extends WallabagRestController
 
         $returnId = (null === $request->query->get('return_id')) ? false : (bool) $request->query->get('return_id');
 
-        $urls = $request->query->get('urls', []);
         $hashedUrls = $request->query->get('hashed_urls', []);
-
-        // handle multiple urls first
-        if (!empty($hashedUrls)) {
-            $results = [];
-            foreach ($hashedUrls as $hashedUrl) {
-                $res = $repo->findByHashedUrlAndUserId($hashedUrl, $this->getUser()->getId());
-
-                $results[$hashedUrl] = $this->returnExistInformation($res, $returnId);
-            }
-
-            return $this->sendResponse($results);
-        }
-
-        // @deprecated, to be remove in 3.0
-        if (!empty($urls)) {
-            $results = [];
-            foreach ($urls as $url) {
-                $res = $repo->findByUrlAndUserId($url, $this->getUser()->getId());
-
-                $results[$url] = $this->returnExistInformation($res, $returnId);
-            }
-
-            return $this->sendResponse($results);
-        }
-
-        // let's see if it is a simple url?
-        $url = $request->query->get('url', '');
         $hashedUrl = $request->query->get('hashed_url', '');
+        if (!empty($hashedUrl)) {
+            $hashedUrls[] = $hashedUrl;
+        }
 
-        if (empty($url) && empty($hashedUrl)) {
+        $urls = $request->query->get('urls', []);
+        $url = $request->query->get('url', '');
+        if (!empty($url)) {
+            $urls[] = $url;
+        }
+
+        $urlHashMap = [];
+        foreach($urls as $urlToHash) {
+            $urlHash = hash('sha1', $urlToHash); // XXX: the hash logic would better be in a separate util to avoid duplication with GenerateUrlHashesCommand::generateHashedUrls
+            $hashedUrls[] = $urlHash;
+            $urlHashMap[$urlHash] = $urlToHash;
+        }
+
+        if (empty($hashedUrls)) {
             throw $this->createAccessDeniedException('URL is empty?, logged user id: ' . $this->getUser()->getId());
         }
 
-        $method = 'findByUrlAndUserId';
-        if (!empty($hashedUrl)) {
-            $method = 'findByHashedUrlAndUserId';
-            $url = $hashedUrl;
+        $results = [];
+        foreach ($hashedUrls as $hashedUrlToSearch) {
+            $res = $repo->findByHashedUrlAndUserId($hashedUrlToSearch, $this->getUser()->getId());
+
+            $results[$hashedUrlToSearch] = $this->returnExistInformation($res, $returnId);
         }
 
-        $res = $repo->$method($url, $this->getUser()->getId());
+        $results = $this->replaceUrlHashes($results, $urlHashMap);
 
-        return $this->sendResponse(['exists' => $this->returnExistInformation($res, $returnId)]);
+        if (!empty($url) || !empty($hashedUrl)) {
+            $hu = array_keys($results)[0];
+            return $this->sendResponse(['exists' => $results[$hu]]);
+        }
+        return $this->sendResponse($results);
+    }
+
+    /**
+     * Replace the hashedUrl keys in $results with the unhashed URL from the
+     * request, as recorded in $urlHashMap.
+     */
+    private function replaceUrlHashes(array $results, array $urlHashMap) {
+        $newResults = [];
+        foreach($results as $hash => $res) {
+            if (isset($urlHashMap[$hash])) {
+                $newResults[$urlHashMap[$hash]] = $res;
+            } else {
+                $newResults[$hash] = $res;
+            }
+        }
+        return $newResults;
     }
 
     /**
