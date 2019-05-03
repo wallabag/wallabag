@@ -348,17 +348,9 @@ class EntryRepository extends EntityRepository
      */
     public function findByUrlAndUserId($url, $userId)
     {
-        $res = $this->createQueryBuilder('e')
-            ->where('e.url = :url')->setParameter('url', urldecode($url))
-            ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
-            ->getQuery()
-            ->getResult();
-
-        if (\count($res)) {
-            return current($res);
-        }
-
-        return false;
+        return $this->findByHashedUrlAndUserId(
+            hash('sha1', $url), // XXX: the hash logic would better be in a separate util to avoid duplication with GenerateUrlHashesCommand::generateHashedUrls
+            $userId);
     }
 
     /**
