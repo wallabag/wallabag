@@ -1,7 +1,8 @@
 validator:
-    password_must_match: 'Os campos de senha devem coincidir.'
-    password_too_short: 'A senha deve ter pelo menos 8 caracteres'
-    password_wrong_value: 'A senha atual informada está errada'
-    item_per_page_too_high: 'Certamente isso pode matar a aplicação'
-    rss_limit_too_high: 'Certamente isso pode matar a aplicação'
-    # quote_length_too_high: 'The quote is too long. It should have {{ limit }} characters or less.'
+  password_must_match: Os campos de palavras-passe devem coincidir.
+  password_too_short: A palavra-passe deve ter pelo menos 8 caracteres.
+  password_wrong_value: A palavra-passe atual está errada.
+  item_per_page_too_high: Certamente isso pode matar a aplicação
+  rss_limit_too_high: Certamente isso pode matar a aplicação
+  quote_length_too_high: A citação é longa demais. Ela deve ter {{ limite }} caracteres
+    ou menos.
