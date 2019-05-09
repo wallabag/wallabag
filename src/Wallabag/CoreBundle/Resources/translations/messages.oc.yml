@@ -54,7 +54,7 @@ config:
     page_title: 'Configuracion'
     tab_menu:
         settings: 'Paramètres'
-        rss: 'RSS'
+        feed: 'RSS'
         user_info: 'Mon compte'
         password: 'Senhal'
         rules: "Règlas d'etiquetas automaticas"
@@ -85,19 +85,19 @@ config:
         help_reading_speed: "wallabag calcula lo temps de lectura per cada article. Podètz lo definir aquí, gràcias a aquesta lista, se sètz un legeire rapid o lent. wallabag tornarà calcular lo temps de lectura per cada article."
         help_language: "Podètz cambiar la lenga de l'interfàcia de wallabag."
         help_pocket_consumer_key: "Requesida per l'importacion de Pocket. Podètz la crear dins vòstre compte Pocket."
-    form_rss:
+    form_feed:
         description: "Los fluxes RSS fornits per wallabag vos permeton de legir vòstres articles salvagardats dins vòstre lector de fluxes preferit. Per los poder emplegar, vos cal, d'en primièr crear un geton."
         token_label: 'Geton RSS'
         no_token: 'Pas cap de geton generat'
         token_create: 'Creatz vòstre geton'
         token_reset: 'Reïnicializatz vòstre geton'
-        rss_links: 'URLs de vòstres fluxes RSS'
-        rss_link:
+        feed_links: 'URLs de vòstres fluxes RSS'
+        feed_link:
             unread: 'Pas legits'
             starred: 'Favorits'
             archive: 'Legits'
             all: 'Totes'
-        rss_limit: "Nombre d'articles dins un flux RSS"
+        feed_limit: "Nombre d'articles dins un flux"
     form_user:
         # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'Nom'
@@ -371,7 +371,7 @@ quickstart:
         title: "Configuratz l'aplicacion"
         description: "Per fin d'aver una aplicacion que vos va ben, anatz veire la configuracion de wallabag."
         language: "Cambiatz la lenga e l'estil de l'aplicacion"
-        rss: 'Activatz los fluxes RSS'
+        feed: 'Activatz los fluxes RSS'
         tagging_rules: 'Escrivètz de règlas per classar automaticament vòstres articles'
     admin:
         title: 'Administracion'
@@ -588,10 +588,10 @@ flashes:
             password_updated: 'Vòstre senhal es ben estat mes a jorn'
             password_not_updated_demo: "En demostracion, podètz pas cambiar lo senhal d'aqueste utilizaire."
             user_updated: 'Vòstres informacions personnelas son ben estadas mesas a jorn'
-            rss_updated: 'La configuracion dels fluxes RSS es ben estada mesa a jorn'
+            feed_updated: 'La configuracion dels fluxes RSS es ben estada mesa a jorn'
             tagging_rules_updated: 'Règlas misa a jorn'
             tagging_rules_deleted: 'Règla suprimida'
-            rss_token_updated: 'Geton RSS mes a jorn'
+            feed_token_updated: 'Geton RSS mes a jorn'
             annotations_reset: Anotacions levadas
             tags_reset: Etiquetas levadas
             entries_reset: Articles levats

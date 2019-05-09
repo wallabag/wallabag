@@ -54,7 +54,7 @@ config:
     page_title: 'Opsætning'
     tab_menu:
         settings: 'Indstillinger'
-        rss: 'RSS'
+        feed: 'RSS'
         user_info: 'Brugeroplysninger'
         password: 'Adgangskode'
         # rules: 'Tagging rules'
@@ -85,19 +85,19 @@ config:
         # help_reading_speed: "wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article."
         # help_language: "You can change the language of wallabag interface."
         # help_pocket_consumer_key: "Required for Pocket import. You can create it in your Pocket account."
-    form_rss:
+    form_feed:
         description: 'RSS-feeds fra wallabag gør det muligt at læse de artikler, der gemmes i wallabag, med din RSS-læser. Det kræver, at du genererer et token først.'
         token_label: 'RSS-Token'
         no_token: 'Intet token'
         token_create: 'Opret token'
         token_reset: 'Nulstil token'
-        rss_links: 'RSS-Links'
-        rss_link:
+        feed_links: 'RSS-Links'
+        feed_link:
             unread: 'Ulæst'
             starred: 'Favoritter'
             archive: 'Arkiv'
             # all: 'All'
-        # rss_limit: 'Number of items in the feed'
+        # feed_limit: 'Number of items in the feed'
     form_user:
         # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'Navn'
@@ -372,7 +372,7 @@ quickstart:
     #     title: 'Configure the application'
     #     description: 'In order to have an application which suits you, have a look into the configuration of wallabag.'
     #     language: 'Change language and design'
-    #     rss: 'Enable RSS feeds'
+    #     feed: 'Enable RSS feeds'
     #     tagging_rules: 'Write rules to automatically tag your articles'
     # admin:
     #     title: 'Administration'
@@ -589,10 +589,10 @@ flashes:
             password_updated: 'Adgangskode opdateret'
             # password_not_updated_demo: "In demonstration mode, you can't change password for this user."
             user_updated: 'Oplysninger opdateret'
-            rss_updated: 'RSS-oplysninger opdateret'
+            feed_updated: 'RSS-oplysninger opdateret'
             # tagging_rules_updated: 'Tagging rules updated'
             # tagging_rules_deleted: 'Tagging rule deleted'
-            # rss_token_updated: 'RSS token updated'
+            # feed_token_updated: 'RSS token updated'
             # annotations_reset: Annotations reset
             # tags_reset: Tags reset
             # entries_reset: Entries reset

@@ -33,7 +33,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertCount(1, $crawler->filter('button[id=config_save]'));
         $this->assertCount(1, $crawler->filter('button[id=change_passwd_save]'));
         $this->assertCount(1, $crawler->filter('button[id=update_user_save]'));
-        $this->assertCount(1, $crawler->filter('button[id=rss_config_save]'));
+        $this->assertCount(1, $crawler->filter('button[id=feed_config_save]'));
     }
 
     public function testUpdate()
@@ -297,7 +297,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertContains('flashes.config.notice.user_updated', $alert[0]);
     }
 
-    public function testRssUpdateResetToken()
+    public function testFeedUpdateResetToken()
     {
         $this->logInAs('admin');
         $client = $this->getClient();
@@ -313,7 +313,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         }
 
         $config = $user->getConfig();
-        $config->setRssToken(null);
+        $config->setFeedToken(null);
         $em->persist($config);
         $em->flush();
 
@@ -322,7 +322,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertContains('config.form_rss.no_token', $body[0]);
+        $this->assertContains('config.form_feed.no_token', $body[0]);
 
         $client->request('GET', '/generate-token');
         $this->assertSame(302, $client->getResponse()->getStatusCode());
@@ -330,7 +330,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $crawler = $client->followRedirect();
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertNotContains('config.form_rss.no_token', $body[0]);
+        $this->assertNotContains('config.form_feed.no_token', $body[0]);
     }
 
     public function testGenerateTokenAjax()
@@ -351,7 +351,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertArrayHasKey('token', $content);
     }
 
-    public function testRssUpdate()
+    public function testFeedUpdate()
     {
         $this->logInAs('admin');
         $client = $this->getClient();
@@ -360,10 +360,10 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $form = $crawler->filter('button[id=rss_config_save]')->form();
+        $form = $crawler->filter('button[id=feed_config_save]')->form();
 
         $data = [
-            'rss_config[rss_limit]' => 12,
+            'feed_config[feed_limit]' => 12,
         ];
 
         $client->submit($form, $data);
@@ -372,31 +372,31 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertContains('flashes.config.notice.rss_updated', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertContains('flashes.config.notice.feed_updated', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
-    public function dataForRssFailed()
+    public function dataForFeedFailed()
     {
         return [
             [
                 [
-                    'rss_config[rss_limit]' => 0,
+                    'feed_config[feed_limit]' => 0,
                 ],
                 'This value should be 1 or more.',
             ],
             [
                 [
-                    'rss_config[rss_limit]' => 1000000000000,
+                    'feed_config[feed_limit]' => 1000000000000,
                 ],
-                'validator.rss_limit_too_high',
+                'validator.feed_limit_too_high',
             ],
         ];
     }
 
     /**
-     * @dataProvider dataForRssFailed
+     * @dataProvider dataForFeedFailed
      */
-    public function testRssFailed($data, $expectedMessage)
+    public function testFeedFailed($data, $expectedMessage)
     {
         $this->logInAs('admin');
         $client = $this->getClient();
@@ -405,7 +405,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $form = $crawler->filter('button[id=rss_config_save]')->form();
+        $form = $crawler->filter('button[id=feed_config_save]')->form();
 
         $crawler = $client->submit($form, $data);
 

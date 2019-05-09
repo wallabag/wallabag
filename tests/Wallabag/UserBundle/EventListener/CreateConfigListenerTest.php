@@ -62,7 +62,7 @@ class CreateConfigListenerTest extends TestCase
         $config = new Config($user);
         $config->setTheme('baggy');
         $config->setItemsPerPage(20);
-        $config->setRssLimit(50);
+        $config->setFeedLimit(50);
         $config->setLanguage('fr');
         $config->setReadingSpeed(1);
 

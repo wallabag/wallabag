@@ -54,7 +54,7 @@ config:
     page_title: 'Configurație'
     tab_menu:
         settings: 'Setări'
-        rss: 'RSS'
+        feed: 'RSS'
         user_info: 'Informații despre utilizator'
         password: 'Parolă'
         # rules: 'Tagging rules'
@@ -85,19 +85,19 @@ config:
         # help_reading_speed: "wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article."
         # help_language: "You can change the language of wallabag interface."
         # help_pocket_consumer_key: "Required for Pocket import. You can create it in your Pocket account."
-    form_rss:
+    form_feed:
         description: 'Feed-urile RSS oferite de wallabag îți permit să-ți citești articolele salvate în reader-ul tău preferat RSS.'
         token_label: 'RSS-Token'
         no_token: 'Fără token'
         token_create: 'Crează-ți token'
         token_reset: 'Resetează-ți token-ul'
-        rss_links: 'Link-uri RSS'
-        rss_link:
+        feed_links: 'Link-uri RSS'
+        feed_link:
             unread: 'Unread'
             starred: 'Starred'
             archive: 'Archived'
             # all: 'All'
-        rss_limit: 'Limită RSS'
+        feed_limit: 'Limită RSS'
     form_user:
         # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'Nume'
@@ -371,7 +371,7 @@ quickstart:
     #     title: 'Configure the application'
     #     description: 'In order to have an application which suits you, have a look into the configuration of wallabag.'
     #     language: 'Change language and design'
-    #     rss: 'Enable RSS feeds'
+    #     feed: 'Enable RSS feeds'
     #     tagging_rules: 'Write rules to automatically tag your articles'
     # admin:
     #     title: 'Administration'
@@ -588,10 +588,10 @@ flashes:
             password_updated: 'Parolă actualizată'
             password_not_updated_demo: "In demonstration mode, you can't change password for this user."
             user_updated: 'Informație actualizată'
-            rss_updated: 'Informație RSS actualizată'
+            feed_updated: 'Informație RSS actualizată'
             # tagging_rules_updated: 'Tagging rules updated'
             # tagging_rules_deleted: 'Tagging rule deleted'
-            # rss_token_updated: 'RSS token updated'
+            # feed_token_updated: 'RSS token updated'
             # annotations_reset: Annotations reset
             # tags_reset: Tags reset
             # entries_reset: Entries reset

@@ -54,7 +54,7 @@ config:
     page_title: "Configuration"
     tab_menu:
         settings: "Paramètres"
-        rss: "RSS"
+        feed: "Flux"
         user_info: "Mon compte"
         password: "Mot de passe"
         rules: "Règles de tag automatiques"
@@ -85,19 +85,19 @@ config:
         help_reading_speed: "wallabag calcule une durée de lecture pour chaque article. Vous pouvez définir ici, grâce à cette liste déroulante, si vous lisez plus ou moins vite. wallabag recalculera la durée de lecture de chaque article."
         help_language: "Vous pouvez définir la langue de l’interface de wallabag."
         help_pocket_consumer_key: "Nécessaire pour l’import depuis Pocket. Vous pouvez le créer depuis votre compte Pocket."
-    form_rss:
-        description: "Les flux RSS fournis par wallabag vous permettent de lire vos articles sauvegardés dans votre lecteur de flux préféré. Pour pouvoir les utiliser, vous devez d’abord créer un jeton."
-        token_label: "Jeton RSS"
+    form_feed:
+        description: "Les flux Atom fournis par wallabag vous permettent de lire vos articles sauvegardés dans votre lecteur de flux préféré. Pour pouvoir les utiliser, vous devez d’abord créer un jeton."
+        token_label: "Jeton de flux"
         no_token: "Aucun jeton généré"
         token_create: "Créez votre jeton"
         token_reset: "Réinitialisez votre jeton"
-        rss_links: "Adresses de vos flux RSS"
-        rss_link:
+        feed_links: "Adresses de vos flux"
+        feed_link:
             unread: "Non lus"
             starred: "Favoris"
             archive: "Lus"
             all: "Tous"
-        rss_limit: "Nombre d’articles dans le flux"
+        feed_limit: "Nombre d’articles dans le flux"
     form_user:
         two_factor_description: "Activer l’authentification double-facteur veut dire que vous allez recevoir un code par courriel OU que vous devriez utiliser une application de mot de passe à usage unique (comme Google Authenticator, Authy or FreeOTP) pour obtenir un code temporaire à chaque nouvelle connexion non approuvée. Vous ne pouvez pas choisir les deux options."
         name_label: "Nom"
@@ -372,7 +372,7 @@ quickstart:
         title: "Configurez l’application"
         description: "Pour voir une application qui vous correspond, allez voir du côté de la configuration de wallabag."
         language: "Changez la langue et le design de l’application"
-        rss: "Activez les flux RSS"
+        feed: "Activez les flux Atom"
         tagging_rules: "Écrivez des règles pour classer automatiquement vos articles"
     admin:
         title: "Administration"
@@ -590,10 +590,10 @@ flashes:
             password_updated: "Votre mot de passe a bien été mis à jour"
             password_not_updated_demo: "En démo, vous ne pouvez pas changer le mot de passe de cet utilisateur."
             user_updated: "Vos informations personnelles ont bien été mises à jour"
-            rss_updated: "La configuration des flux RSS a bien été mise à jour"
+            feed_updated: "La configuration des flux a bien été mise à jour"
             tagging_rules_updated: "Règles mises à jour"
             tagging_rules_deleted: "Règle supprimée"
-            rss_token_updated: "Jeton RSS mis à jour"
+            feed_token_updated: "Jeton des flux mis à jour"
             annotations_reset: "Annotations supprimées"
             tags_reset: "Tags supprimés"
             entries_reset: "Articles supprimés"

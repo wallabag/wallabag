@@ -1,0 +1,11 @@
+{% if tag is defined %}
+    <a rel="alternate" type="application/atom+xml" href="{{ path('tag_feed', {'username': app.user.username, 'token': app.user.config.feedToken, 'slug': tag.slug}) }}" class="right"><i class="material-icons md-24">rss_feed</i></a>
+{% elseif currentRoute in ['homepage', 'unread', 'starred', 'archive', 'all'] %}
+    {% set feedRoute = currentRoute %}
+    {% if currentRoute == 'homepage' %}
+        {% set feedRoute = 'unread' %}
+    {% endif %}
+    {% set feedRoute = feedRoute ~ '_feed' %}
+
+    <a rel="alternate" type="application/atom+xml" href="{{ path(feedRoute, {'username': app.user.username, 'token': app.user.config.feedToken}) }}" class="right"><i class="material-icons">rss_feed</i></a>
+{% endif %}

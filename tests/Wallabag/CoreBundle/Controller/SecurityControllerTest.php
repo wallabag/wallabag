@@ -13,7 +13,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
         $client->followRedirects();
 
         $crawler = $client->request('GET', '/config');
-        $this->assertContains('config.form_rss.description', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertContains('config.form_feed.description', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
     public function testLoginWithout2Factor()
@@ -23,7 +23,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
         $client->followRedirects();
 
         $crawler = $client->request('GET', '/config');
-        $this->assertContains('config.form_rss.description', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertContains('config.form_feed.description', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
     public function testLoginWith2FactorEmail()
