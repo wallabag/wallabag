@@ -173,6 +173,10 @@
   .row .col {
     padding: 0;
   }
+
+  .card-stacked div.metadata .reading-time {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 310px),

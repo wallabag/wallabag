@@ -18,6 +18,24 @@ main {
   overflow: hidden;
 }
 
+@mixin mixin-reading-time {
+  .reading-time {
+    display: inline-flex;
+    vertical-align: middle;
+
+    .card-reading-time,
+    .card-created-at {
+      display: inline-flex;
+    }
+
+    span {
+      margin-right: 5px;
+    }
+
+    @content;
+  }
+}
+
 .card {
   .card-content .card-title,
   .card-reveal .card-title {
@@ -98,19 +116,7 @@ main {
       margin-right: 5px !important;
     }
 
-    .reading-time {
-      display: inline-flex;
-      vertical-align: middle;
-
-      .card-reading-time,
-      .card-created-at {
-        display: inline-flex;
-      }
-
-      span {
-        margin-right: 5px;
-      }
-    }
+    @include mixin-reading-time;
   }
 
   .card-image {
@@ -224,10 +230,18 @@ a.original:not(.waves-effect) {
   }
 
   div.metadata {
+    overflow: hidden;
+    height: 1.5em;
+    display: flex;
+
+    ul.tags {
+      margin-left: 4px;
+    }
+
     .chip {
       background-color: $blueAccentColor;
       padding: 0 7px;
-      margin: auto 2px;
+      margin: auto 1px;
       border-radius: 6px;
       line-height: 22px;
       height: 22px;
@@ -242,6 +256,16 @@ a.original:not(.waves-effect) {
         font-size: 20px;
         line-height: 32px;
         padding-left: 8px;
+      }
+    }
+
+    @include mixin-reading-time {
+      padding: 0 5px;
+      flex-wrap: wrap;
+      margin-left: auto;
+
+      i.material-icons {
+        font-size: 20px;
       }
     }
   }
