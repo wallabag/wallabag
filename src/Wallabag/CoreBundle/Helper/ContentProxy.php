@@ -12,8 +12,8 @@ use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Tools\Utils;
 
 /**
- * This kind of proxy class take care of getting the content from an url
- * and update the entry with what it found.
+ * This kind of proxy class takes care of getting the content from an url
+ * and updates the entry with what it found.
  */
 class ContentProxy
 {
@@ -289,13 +289,25 @@ class ContentProxy
             $this->updateLanguage($entry, $content['language']);
         }
 
+        $previewPictureUrl = '';
         if (!empty($content['open_graph']['og_image'])) {
-            $this->updatePreviewPicture($entry, $content['open_graph']['og_image']);
+            $previewPictureUrl = $content['open_graph']['og_image'];
         }
 
         // if content is an image, define it as a preview too
         if (!empty($content['content_type']) && \in_array($this->mimeGuesser->guess($content['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
-            $this->updatePreviewPicture($entry, $content['url']);
+            $previewPictureUrl = $content['url'];
+        } elseif (empty($previewPictureUrl)) {
+            $this->logger->debug('Extracting images from content to provide a default preview picture');
+            $imagesUrls = DownloadImages::extractImagesUrlsFromHtml($content['html']);
+            $this->logger->debug(\count($imagesUrls) . ' pictures found');
+            if (!empty($imagesUrls)) {
+                $previewPictureUrl = $imagesUrls[0];
+            }
+        }
+
+        if (!empty($previewPictureUrl)) {
+            $this->updatePreviewPicture($entry, $previewPictureUrl);
         }
 
         if (!empty($content['content_type'])) {
