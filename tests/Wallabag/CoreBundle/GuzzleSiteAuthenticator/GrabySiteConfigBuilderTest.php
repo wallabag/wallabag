@@ -33,7 +33,7 @@ class GrabySiteConfigBuilderTest extends TestCase
         $grabyConfigBuilderMock
             ->method('buildForHost')
             ->with('example.com')
-            ->will($this->returnValue($grabySiteConfig));
+            ->willReturn($grabySiteConfig);
 
         $logger = new Logger('foo');
         $handler = new TestHandler();
@@ -93,7 +93,7 @@ class GrabySiteConfigBuilderTest extends TestCase
         $grabyConfigBuilderMock
             ->method('buildForHost')
             ->with('unknown.com')
-            ->will($this->returnValue(new GrabySiteConfig()));
+            ->willReturn(new GrabySiteConfig());
 
         $logger = new Logger('foo');
         $handler = new TestHandler();
@@ -153,7 +153,7 @@ class GrabySiteConfigBuilderTest extends TestCase
         $grabyConfigBuilderMock
             ->method('buildForHost')
             ->with('example.com')
-            ->will($this->returnValue($grabySiteConfig));
+            ->willReturn($grabySiteConfig);
 
         $logger = new Logger('foo');
         $handler = new TestHandler();
