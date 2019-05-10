@@ -135,7 +135,16 @@ class DownloadImages
 
         switch ($ext) {
             case 'gif':
-                imagegif($im, $localPath);
+                // use Imagick if available to keep GIF animation
+                if (class_exists('\\Imagick')) {
+                    $imagick = new \Imagick();
+                    $imagick->readImageBlob($res->getBody());
+                    $imagick->setImageFormat('gif');
+                    $imagick->writeImages($localPath, true);
+                } else {
+                    imagegif($im, $localPath);
+                }
+
                 $this->logger->debug('DownloadImages: Re-creating gif');
                 break;
             case 'jpeg':

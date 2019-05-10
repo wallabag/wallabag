@@ -103,6 +103,9 @@
         "phpstan/phpstan-symfony": "^0.11.0",
         "phpstan/phpstan-doctrine": "^0.11.0"
     },
+    "suggest": {
+        "ext-imagick": "To keep GIF animation when downloading image is enabled"
+    },
     "scripts": {
         "post-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
