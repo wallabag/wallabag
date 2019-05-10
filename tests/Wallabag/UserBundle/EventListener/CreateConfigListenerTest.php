@@ -68,7 +68,7 @@ class CreateConfigListenerTest extends TestCase
 
         $this->em->expects($this->once())
             ->method('persist')
-            ->will($this->returnValue($config));
+            ->willReturn($config);
         $this->em->expects($this->once())
             ->method('flush');
 

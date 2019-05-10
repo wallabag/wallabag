@@ -26,7 +26,7 @@ class UsernameFeedTokenConverterTest extends TestCase
 
         $registry->expects($this->once())
             ->method('getManagers')
-            ->will($this->returnValue([]));
+            ->willReturn([]);
 
         $params = new ParamConverter([]);
         $converter = new UsernameFeedTokenConverter($registry);
@@ -42,7 +42,7 @@ class UsernameFeedTokenConverterTest extends TestCase
 
         $registry->expects($this->once())
             ->method('getManagers')
-            ->will($this->returnValue(['default' => null]));
+            ->willReturn(['default' => null]);
 
         $params = new ParamConverter([]);
         $converter = new UsernameFeedTokenConverter($registry);
@@ -58,7 +58,7 @@ class UsernameFeedTokenConverterTest extends TestCase
 
         $meta->expects($this->once())
             ->method('getName')
-            ->will($this->returnValue('nothingrelated'));
+            ->willReturn('nothingrelated');
 
         $em = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')
             ->disableOriginalConstructor()
@@ -67,7 +67,7 @@ class UsernameFeedTokenConverterTest extends TestCase
         $em->expects($this->once())
             ->method('getClassMetadata')
             ->with('superclass')
-            ->will($this->returnValue($meta));
+            ->willReturn($meta);
 
         $registry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
             ->disableOriginalConstructor()
@@ -75,12 +75,12 @@ class UsernameFeedTokenConverterTest extends TestCase
 
         $registry->expects($this->once())
             ->method('getManagers')
-            ->will($this->returnValue(['default' => null]));
+            ->willReturn(['default' => null]);
 
         $registry->expects($this->once())
             ->method('getManagerForClass')
             ->with('superclass')
-            ->will($this->returnValue($em));
+            ->willReturn($em);
 
         $params = new ParamConverter(['class' => 'superclass']);
         $converter = new UsernameFeedTokenConverter($registry);
@@ -96,7 +96,7 @@ class UsernameFeedTokenConverterTest extends TestCase
 
         $meta->expects($this->once())
             ->method('getName')
-            ->will($this->returnValue('Wallabag\UserBundle\Entity\User'));
+            ->willReturn('Wallabag\UserBundle\Entity\User');
 
         $em = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')
             ->disableOriginalConstructor()
@@ -105,7 +105,7 @@ class UsernameFeedTokenConverterTest extends TestCase
         $em->expects($this->once())
             ->method('getClassMetadata')
             ->with('WallabagUserBundle:User')
-            ->will($this->returnValue($meta));
+            ->willReturn($meta);
 
         $registry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
             ->disableOriginalConstructor()
@@ -113,12 +113,12 @@ class UsernameFeedTokenConverterTest extends TestCase
 
         $registry->expects($this->once())
             ->method('getManagers')
-            ->will($this->returnValue(['default' => null]));
+            ->willReturn(['default' => null]);
 
         $registry->expects($this->once())
             ->method('getManagerForClass')
             ->with('WallabagUserBundle:User')
-            ->will($this->returnValue($em));
+            ->willReturn($em);
 
         $params = new ParamConverter(['class' => 'WallabagUserBundle:User']);
         $converter = new UsernameFeedTokenConverter($registry);
@@ -149,7 +149,7 @@ class UsernameFeedTokenConverterTest extends TestCase
         $repo->expects($this->once())
             ->method('findOneByUsernameAndFeedToken')
             ->with('test', 'test')
-            ->will($this->returnValue(null));
+            ->willReturn(null);
 
         $em = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')
             ->disableOriginalConstructor()
@@ -158,7 +158,7 @@ class UsernameFeedTokenConverterTest extends TestCase
         $em->expects($this->once())
             ->method('getRepository')
             ->with('WallabagUserBundle:User')
-            ->will($this->returnValue($repo));
+            ->willReturn($repo);
 
         $registry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
             ->disableOriginalConstructor()
@@ -167,7 +167,7 @@ class UsernameFeedTokenConverterTest extends TestCase
         $registry->expects($this->once())
             ->method('getManagerForClass')
             ->with('WallabagUserBundle:User')
-            ->will($this->returnValue($em));
+            ->willReturn($em);
 
         $params = new ParamConverter(['class' => 'WallabagUserBundle:User']);
         $converter = new UsernameFeedTokenConverter($registry);
@@ -187,7 +187,7 @@ class UsernameFeedTokenConverterTest extends TestCase
         $repo->expects($this->once())
             ->method('findOneByUsernameAndFeedtoken')
             ->with('test', 'test')
-            ->will($this->returnValue($user));
+            ->willReturn($user);
 
         $em = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')
             ->disableOriginalConstructor()
@@ -196,7 +196,7 @@ class UsernameFeedTokenConverterTest extends TestCase
         $em->expects($this->once())
             ->method('getRepository')
             ->with('WallabagUserBundle:User')
-            ->will($this->returnValue($repo));
+            ->willReturn($repo);
 
         $registry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
             ->disableOriginalConstructor()
@@ -205,7 +205,7 @@ class UsernameFeedTokenConverterTest extends TestCase
         $registry->expects($this->once())
             ->method('getManagerForClass')
             ->with('WallabagUserBundle:User')
-            ->will($this->returnValue($em));
+            ->willReturn($em);
 
         $params = new ParamConverter(['class' => 'WallabagUserBundle:User', 'name' => 'user']);
         $converter = new UsernameFeedTokenConverter($registry);
