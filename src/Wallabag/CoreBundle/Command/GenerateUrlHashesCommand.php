@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Wallabag\CoreBundle\Helper\UrlHasher;
 use Wallabag\UserBundle\Entity\User;
 
 class GenerateUrlHashesCommand extends ContainerAwareCommand
@@ -65,7 +66,9 @@ class GenerateUrlHashesCommand extends ContainerAwareCommand
 
         $i = 1;
         foreach ($entries as $entry) {
-            $entry->setHashedUrl(hash('sha1', $entry->getUrl()));
+            $entry->setHashedUrl(
+                UrlHasher::hashUrl($entry->getUrl())
+            );
             $em->persist($entry);
 
             if (0 === ($i % 20)) {

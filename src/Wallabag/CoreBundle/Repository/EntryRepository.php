@@ -9,6 +9,7 @@ use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Helper\UrlHasher;
 
 class EntryRepository extends EntityRepository
 {
@@ -349,7 +350,7 @@ class EntryRepository extends EntityRepository
     public function findByUrlAndUserId($url, $userId)
     {
         return $this->findByHashedUrlAndUserId(
-            hash('sha1', $url), // XXX: the hash logic would better be in a separate util to avoid duplication with GenerateUrlHashesCommand::generateHashedUrls
+            UrlHasher::hashUrl($url),
             $userId);
     }
 
@@ -504,6 +505,32 @@ class EntryRepository extends EntityRepository
         $randomId = $ids[mt_rand(0, \count($ids) - 1)]['id'];
 
         return $this->find($randomId);
+    }
+
+    /**
+     * Inject a UrlHasher.
+     *
+     * @param UrlHasher $hasher
+     */
+    public function setUrlHasher(UrlHasher $hasher)
+    {
+        $this->urlHasher = $hasher;
+    }
+
+    /**
+     * Get the UrlHasher, or create a default one if not injected.
+     *
+     * XXX: the default uses the default hash algorithm
+     *
+     * @return UrlHasher
+     */
+    protected function getUrlHasher()
+    {
+        if (!isset($this->urlHasher)) {
+            $this->setUrlHasher(new UrlHasher());
+        }
+
+        return $this->urlHasher;
     }
 
     /**

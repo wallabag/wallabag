@@ -14,6 +14,7 @@ use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Event\EntryDeletedEvent;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
+use Wallabag\CoreBundle\Helper\UrlHasher;
 
 class EntryRestController extends WallabagRestController
 {
@@ -56,8 +57,8 @@ class EntryRestController extends WallabagRestController
         }
 
         $urlHashMap = [];
-        foreach($urls as $urlToHash) {
-            $urlHash = hash('sha1', $urlToHash); // XXX: the hash logic would better be in a separate util to avoid duplication with GenerateUrlHashesCommand::generateHashedUrls
+        foreach ($urls as $urlToHash) {
+            $urlHash = UrlHasher::hashUrl($urlToHash);
             $hashedUrls[] = $urlHash;
             $urlHashMap[$urlHash] = $urlToHash;
         }
@@ -77,25 +78,11 @@ class EntryRestController extends WallabagRestController
 
         if (!empty($url) || !empty($hashedUrl)) {
             $hu = array_keys($results)[0];
+
             return $this->sendResponse(['exists' => $results[$hu]]);
         }
-        return $this->sendResponse($results);
-    }
 
-    /**
-     * Replace the hashedUrl keys in $results with the unhashed URL from the
-     * request, as recorded in $urlHashMap.
-     */
-    private function replaceUrlHashes(array $results, array $urlHashMap) {
-        $newResults = [];
-        foreach($results as $hash => $res) {
-            if (isset($urlHashMap[$hash])) {
-                $newResults[$urlHashMap[$hash]] = $res;
-            } else {
-                $newResults[$hash] = $res;
-            }
-        }
-        return $newResults;
+        return $this->sendResponse($results);
     }
 
     /**
@@ -813,6 +800,24 @@ class EntryRestController extends WallabagRestController
         }
 
         return $this->sendResponse($results);
+    }
+
+    /**
+     * Replace the hashedUrl keys in $results with the unhashed URL from the
+     * request, as recorded in $urlHashMap.
+     */
+    private function replaceUrlHashes(array $results, array $urlHashMap)
+    {
+        $newResults = [];
+        foreach ($results as $hash => $res) {
+            if (isset($urlHashMap[$hash])) {
+                $newResults[$urlHashMap[$hash]] = $res;
+            } else {
+                $newResults[$hash] = $res;
+            }
+        }
+
+        return $newResults;
     }
 
     /**
