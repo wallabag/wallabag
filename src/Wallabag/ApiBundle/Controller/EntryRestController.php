@@ -103,6 +103,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="tags", "dataType"="string", "required"=false, "format"="api,rest", "description"="a list of tags url encoded. Will returns entries that matches ALL tags."},
      *          {"name"="since", "dataType"="integer", "required"=false, "format"="default '0'", "description"="The timestamp since when you want entries updated."},
      *          {"name"="public", "dataType"="integer", "required"=false, "format"="1 or 0, all entries by default", "description"="filter by entries with a public link"},
+     *          {"name"="detail", "dataType"="string", "required"=false, "format"="metadata or full, metadata by default", "description"="include content field if 'full'. 'full' by default for backward compatibility."},
      *       }
      * )
      *
@@ -121,6 +122,7 @@ class EntryRestController extends WallabagRestController
         $perPage = (int) $request->query->get('perPage', 30);
         $tags = \is_array($request->query->get('tags')) ? '' : (string) $request->query->get('tags', '');
         $since = $request->query->get('since', 0);
+        $detail = strtolower($request->query->get('detail', 'full'));
 
         try {
             /** @var \Pagerfanta\Pagerfanta $pager */
@@ -132,7 +134,8 @@ class EntryRestController extends WallabagRestController
                 $sort,
                 $order,
                 $since,
-                $tags
+                $tags,
+                $detail
             );
         } catch (\Exception $e) {
             throw new BadRequestHttpException($e->getMessage());
@@ -156,6 +159,7 @@ class EntryRestController extends WallabagRestController
                     'perPage' => $perPage,
                     'tags' => $tags,
                     'since' => $since,
+                    'detail' => $detail,
                 ],
                 true
             )
