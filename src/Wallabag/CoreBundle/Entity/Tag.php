@@ -13,7 +13,10 @@ use JMS\Serializer\Annotation\XmlRoot;
  * Tag.
  *
  * @XmlRoot("tag")
- * @ORM\Table(name="`tag`")
+ * @ORM\Table(
+ *     name="`tag`",
+ *     options={"collate"="utf8mb4_bin", "charset"="utf8mb4"},
+ * )
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\TagRepository")
  * @ExclusionPolicy("all")
  */
