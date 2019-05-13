@@ -86,7 +86,8 @@
         "friendsofsymfony/jsrouting-bundle": "^1.6.3",
         "bdunogier/guzzle-site-authenticator": "^1.0.0",
         "defuse/php-encryption": "^2.1",
-        "html2text/html2text": "^4.1"
+        "html2text/html2text": "^4.1",
+        "sulu/symfony-intl-fix": "^1.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~2.2",
@@ -125,7 +126,11 @@
     },
     "autoload": {
         "psr-4": { "Wallabag\\": "src/Wallabag/" },
-        "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
+        "classmap": [ "app/AppKernel.php", "app/AppCache.php" ],
+        "exclude-from-classmap": [
+             "vendor/symfony/intl/Locale.php",
+             "vendor/symfony/symfony/src/Symfony/Component/Intl/Locale.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": { "Tests\\": "tests/" }
