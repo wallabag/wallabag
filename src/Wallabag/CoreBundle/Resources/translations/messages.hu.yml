@@ -393,3 +393,24 @@ quickstart:
       Ezeket teheti:'
     new_user: Új felhasználó létrehozása
     analytics: Analitika konfigurálása
+    sharing: A cikkmegosztással kapcsolatos paraméterek engedélyezése
+    export: Exportálás konfigurálása
+    import: Importálás konfigurálása
+  first_steps:
+    title: Kezdő lépések
+    description: A wallabag most már jól be lett állítva, itt az ideje a web archiválásának.
+      Hivatkozás hozzáadásához kattintson a jobb felső sarokban lévő + jelre.
+    new_article: Az első cikkének elmentése
+    unread_articles: És osztályozása!
+  migrate:
+    title: Áttérés meglévő szolgáltatásról
+    description: Más szolgáltatást is használ? Segítünk, hogy megszerezze adatait
+      a wallabag-ra.
+    pocket: Áttérés Pocket-ről
+    wallabag_v1: Áttérés wallabag v1-ről
+    wallabag_v2: Áttérés wallabag v2-ről
+    readability: Áttérés Readability-ről
+    instapaper: Áttérés az Instapaper-ről
+  developer:
+    title: Fejlesztők
+    description: 'A fejlesztőkre is gondoltunk: Docker, API, fordítások, stb.'
