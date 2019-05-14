@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.3.8](https://github.com/wallabag/wallabag/tree/2.3.8)
+   [Full Changelog](https://github.com/wallabag/wallabag/compare/2.3.7...2.3.8)
+
+### Fixes
+
+- Jump to 2.3.8-dev [#3897](https://github.com/wallabag/wallabag/pull/3897)
+- material: fix left padding on non-entry pages [#3901](https://github.com/wallabag/wallabag/pull/3901)
+- Make dev/install/update script posix compatible [#3860](https://github.com/wallabag/wallabag/pull/3860)
+- epub: fix exception when articles have the same title [#3908](https://github.com/wallabag/wallabag/pull/3908)
+- Fix PHP warning [#3909](https://github.com/wallabag/wallabag/pull/3909)
+- Add ability to match many domains for credentials [#3937](https://github.com/wallabag/wallabag/pull/3937)
+- material: add metadata to list view [#3942](https://github.com/wallabag/wallabag/pull/3942)
+- Enable no-referrer on img tags, enable strict-origin-when-cross-origin by default [#3943](https://github.com/wallabag/wallabag/pull/3943)
+- Remove preview picture from share view page#3922
+- Fix Intl Locale issue [#3964](https://github.com/wallabag/wallabag/pull/3964)
+
 ## [2.3.7](https://github.com/wallabag/wallabag/tree/2.3.7)
    [Full Changelog](https://github.com/wallabag/wallabag/compare/2.3.6...2.3.7)
 
