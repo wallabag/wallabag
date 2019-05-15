@@ -12,6 +12,8 @@ use Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder;
 
 class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
 {
+    private $builder;
+
     public function testBuildConfigExists()
     {
         $grabyConfigBuilderMock = $this->getMockBuilder('Graby\SiteConfig\ConfigBuilder')
@@ -157,8 +159,8 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
             ->disableOriginalConstructor()
             ->getMock();
         $siteCrentialRepo->expects($this->once())
-            ->method('findOneByHostAndUser')
-            ->with('example.com', 1)
+            ->method('findOneByHostsAndUser')
+            ->with(['example.com', '.com'], 1)
             ->willReturn(['username' => 'foo', 'password' => 'bar']);
 
         $user = $this->getMockBuilder('Wallabag\UserBundle\Entity\User')
