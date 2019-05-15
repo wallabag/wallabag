@@ -569,7 +569,7 @@ site_credential:
         create_new_one: สร้างข้อมูลส่วนตัวใหม่
     form:
         username_label: 'ชื่อผู้ใช้'
-        host_label: 'โฮส'
+        host_label: 'โฮส (subdomain.example.org, .example.org, etc.)'
         password_label: 'รหัสผ่าน'
         save: บันทึก
         delete: ลบ

@@ -572,7 +572,7 @@ site_credential:
         create_new_one: Create a new credential
     form:
         username_label: 'Username'
-        host_label: 'Host'
+        host_label: 'Host (subdomain.example.org, .example.org, etc.)'
         password_label: 'Password'
         save: Save
         delete: Delete

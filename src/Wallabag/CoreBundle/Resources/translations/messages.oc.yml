@@ -571,7 +571,7 @@ site_credential:
          create_new_one: Crear un novèl identificant
     form:
         username_label: "Nom d'utilizaire"
-        host_label: 'Òste'
+        host_label: 'Òste (subdomain.example.org, .example.org, etc.)'
         password_label: 'Senhal'
         save: 'Enregistrar'
         delete: 'Suprimir'

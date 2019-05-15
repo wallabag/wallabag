@@ -5,7 +5,7 @@
             <span class="preview{{ previewClassModifier }}" style="background-image: url({{ entry.previewPicture | default(asset('wallassets/themes/_global/img/logo-square.svg')) }})"></span>
         </a>
     </div>
-    {% include "@WallabagCore/themes/material/Entry/Card/_content.html.twig" with {'entry': entry, 'withTags': true, 'subClass': 'metadata'} only %}
+    {% include "@WallabagCore/themes/material/Entry/Card/_content.html.twig" with {'entry': entry, 'withMetadata': true, 'subClass': 'metadata'} only %}
     <ul class="tools-list hide-on-small-only">
         <li>
             <a title="{{ 'entry.list.toogle_as_read'|trans }}" class="tool grey-text" href="{{ path('archive_entry', { 'id': entry.id }) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i></a>
