@@ -139,14 +139,29 @@ class EntryRepository extends EntityRepository
      * @param string $order
      * @param int    $since
      * @param string $tags
+     * @param string $detail     'metadata' or 'full'. Include content field if 'full'
+     *
+     * @todo Breaking change: replace default detail=full by detail=metadata in a future version
      *
      * @return Pagerfanta
      */
-    public function findEntries($userId, $isArchived = null, $isStarred = null, $isPublic = null, $sort = 'created', $order = 'asc', $since = 0, $tags = '')
+    public function findEntries($userId, $isArchived = null, $isStarred = null, $isPublic = null, $sort = 'created', $order = 'asc', $since = 0, $tags = '', $detail = 'full')
     {
+        if (!\in_array(strtolower($detail), ['full', 'metadata'], true)) {
+            throw new \Exception('Detail "' . $detail . '" parameter is wrong, allowed: full or metadata');
+        }
+
         $qb = $this->createQueryBuilder('e')
             ->leftJoin('e.tags', 't')
             ->where('e.user = :userId')->setParameter('userId', $userId);
+
+        if ('metadata' === $detail) {
+            $fieldNames = $this->getClassMetadata()->getFieldNames();
+            $fields = array_filter($fieldNames, function ($k) {
+                return 'content' !== $k;
+            });
+            $qb->select(sprintf('partial e.{%s}', implode(',', $fields)));
+        }
 
         if (null !== $isArchived) {
             $qb->andWhere('e.isArchived = :isArchived')->setParameter('isArchived', (bool) $isArchived);

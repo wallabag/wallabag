@@ -133,6 +133,27 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame(1, $content['page']);
         $this->assertGreaterThanOrEqual(1, $content['pages']);
 
+        $this->assertNotNull($content['_embedded']['items'][0]['content']);
+
+        $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
+    }
+
+    public function testGetEntriesDetailMetadata()
+    {
+        $this->client->request('GET', '/api/entries?detail=metadata');
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThanOrEqual(1, \count($content));
+        $this->assertNotEmpty($content['_embedded']['items']);
+        $this->assertGreaterThanOrEqual(1, $content['total']);
+        $this->assertSame(1, $content['page']);
+        $this->assertGreaterThanOrEqual(1, $content['pages']);
+
+        $this->assertNull($content['_embedded']['items'][0]['content']);
+
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
 
