@@ -499,7 +499,7 @@ class ContentProxyTest extends TestCase
 
         $records = $handler->getRecords();
 
-        $this->assertCount(1, $records);
+        $this->assertCount(3, $records);
         $this->assertContains('Error while defining date', $records[0]['message']);
     }
 

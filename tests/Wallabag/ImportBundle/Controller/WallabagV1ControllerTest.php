@@ -121,7 +121,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
         $this->assertEmpty($content->getMimetype(), 'Mimetype for http://www.framablog.org is empty');
-        $this->assertEmpty($content->getPreviewPicture(), 'Preview picture for http://www.framablog.org is empty');
+        $this->assertSame($content->getPreviewPicture(), 'http://www.framablog.org/public/_img/framablog/wallaby_baby.jpg');
         $this->assertEmpty($content->getLanguage(), 'Language for http://www.framablog.org is empty');
 
         $tags = $content->getTags();
