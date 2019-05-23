@@ -1,4 +1,4 @@
-FROM php:fpm
+FROM php:7.2-fpm
 
 # Default timezone. To change it, use the argument in the docker-compose.yml file
 ARG timezone='Europe/Paris'
