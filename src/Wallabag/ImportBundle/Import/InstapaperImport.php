@@ -93,6 +93,10 @@ class InstapaperImport extends AbstractImport
             return false;
         }
 
+        // most recent articles are first, which means we should create them at the end so they will show up first
+        // as Instapaper doesn't export the creation date of the article
+        $entries = array_reverse($entries);
+
         if ($this->producer) {
             $this->parseEntriesForProducer($entries);
 
