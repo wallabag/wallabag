@@ -509,32 +509,6 @@ class EntryRepository extends EntityRepository
     }
 
     /**
-     * Inject a UrlHasher.
-     *
-     * @param UrlHasher $hasher
-     */
-    public function setUrlHasher(UrlHasher $hasher)
-    {
-        $this->urlHasher = $hasher;
-    }
-
-    /**
-     * Get the UrlHasher, or create a default one if not injected.
-     *
-     * XXX: the default uses the default hash algorithm
-     *
-     * @return UrlHasher
-     */
-    protected function getUrlHasher()
-    {
-        if (!isset($this->urlHasher)) {
-            $this->setUrlHasher(new UrlHasher());
-        }
-
-        return $this->urlHasher;
-    }
-
-    /**
      * Return a query builder to be used by other getBuilderFor* method.
      *
      * @param int $userId

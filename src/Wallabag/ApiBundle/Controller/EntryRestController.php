@@ -848,8 +848,8 @@ class EntryRestController extends WallabagRestController
     /**
      * Return information about the entry if it exist and depending on the id or not.
      *
-     * @param Entry|null $entry
-     * @param bool       $returnId
+     * @param Entry|bool|null $entry
+     * @param bool            $returnId
      *
      * @return bool|int
      */
