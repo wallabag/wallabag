@@ -66,9 +66,7 @@ class GenerateUrlHashesCommand extends ContainerAwareCommand
 
         $i = 1;
         foreach ($entries as $entry) {
-            $entry->setHashedUrl(
-                UrlHasher::hashUrl($entry->getUrl())
-            );
+            $entry->setHashedUrl(UrlHasher::hashUrl($entry->getUrl()));
             $em->persist($entry);
 
             if (0 === ($i % 20)) {
@@ -87,7 +85,7 @@ class GenerateUrlHashesCommand extends ContainerAwareCommand
      *
      * @param string $username
      *
-     * @return \Wallabag\UserBundle\Entity\User
+     * @return User
      */
     private function getUser($username)
     {

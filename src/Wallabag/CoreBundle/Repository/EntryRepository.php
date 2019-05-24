@@ -351,7 +351,8 @@ class EntryRepository extends EntityRepository
     {
         return $this->findByHashedUrlAndUserId(
             UrlHasher::hashUrl($url),
-            $userId);
+            $userId
+        );
     }
 
     /**

@@ -7,16 +7,17 @@ namespace Wallabag\CoreBundle\Helper;
  */
 class UrlHasher
 {
-    /** @var string */
-    const ALGORITHM = 'sha1';
-
     /**
-     * @param string $url
+     * Hash the given url using the given algorithm.
+     * Hashed url are faster to be retrieved in the database than the real url.
      *
-     * @return string hashed $url
+     * @param string $url
+     * @param string $algorithm
+     *
+     * @return string
      */
-    public static function hashUrl(string $url)
+    public static function hashUrl(string $url, $algorithm = 'sha1')
     {
-        return hash(static::ALGORITHM, $url);
+        return hash($algorithm, urldecode($url));
     }
 }
