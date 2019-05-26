@@ -214,6 +214,90 @@ class ContentProxyTest extends TestCase
         $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
+    public function testWithContentAndContentImage()
+    {
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $graby = $this->getMockBuilder('Graby\Graby')
+            ->setMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn([
+                'html' => "<h1>Test</h1><p><img src='http://3.3.3.3/cover.jpg'/></p>",
+                'title' => 'this is my title',
+                'url' => 'http://1.1.1.1',
+                'content_type' => 'text/html',
+                'language' => 'fr',
+                'status' => '200',
+                'open_graph' => [
+                    'og_title' => 'my OG title',
+                    'og_description' => 'OG desc',
+                    'og_image' => null,
+                ],
+            ]);
+
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'http://0.0.0.0');
+
+        $this->assertSame('http://1.1.1.1', $entry->getUrl());
+        $this->assertSame('this is my title', $entry->getTitle());
+        $this->assertSame("<h1>Test</h1><p><img src='http://3.3.3.3/cover.jpg'/></p>", $entry->getContent());
+        $this->assertSame('http://3.3.3.3/cover.jpg', $entry->getPreviewPicture());
+        $this->assertSame('text/html', $entry->getMimetype());
+        $this->assertSame('fr', $entry->getLanguage());
+        $this->assertSame('200', $entry->getHttpStatus());
+        $this->assertSame(0.0, $entry->getReadingTime());
+        $this->assertSame('1.1.1.1', $entry->getDomainName());
+    }
+
+    public function testWithContentImageAndOgImage()
+    {
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $graby = $this->getMockBuilder('Graby\Graby')
+            ->setMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn([
+                'html' => "<h1>Test</h1><p><img src='http://3.3.3.3/nevermind.jpg'/></p>",
+                'title' => 'this is my title',
+                'url' => 'http://1.1.1.1',
+                'content_type' => 'text/html',
+                'language' => 'fr',
+                'status' => '200',
+                'open_graph' => [
+                    'og_title' => 'my OG title',
+                    'og_description' => 'OG desc',
+                    'og_image' => 'http://3.3.3.3/cover.jpg',
+                ],
+            ]);
+
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'http://0.0.0.0');
+
+        $this->assertSame('http://1.1.1.1', $entry->getUrl());
+        $this->assertSame('this is my title', $entry->getTitle());
+        $this->assertSame("<h1>Test</h1><p><img src='http://3.3.3.3/nevermind.jpg'/></p>", $entry->getContent());
+        $this->assertSame('http://3.3.3.3/cover.jpg', $entry->getPreviewPicture());
+        $this->assertSame('text/html', $entry->getMimetype());
+        $this->assertSame('fr', $entry->getLanguage());
+        $this->assertSame('200', $entry->getHttpStatus());
+        $this->assertSame(0.0, $entry->getReadingTime());
+        $this->assertSame('1.1.1.1', $entry->getDomainName());
+    }
+
     public function testWithContentAndBadLanguage()
     {
         $tagger = $this->getTaggerMock();
@@ -415,7 +499,7 @@ class ContentProxyTest extends TestCase
 
         $records = $handler->getRecords();
 
-        $this->assertCount(1, $records);
+        $this->assertCount(3, $records);
         $this->assertContains('Error while defining date', $records[0]['message']);
     }
 

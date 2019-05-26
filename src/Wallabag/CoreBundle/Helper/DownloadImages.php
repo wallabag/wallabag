@@ -31,6 +31,25 @@ class DownloadImages
     }
 
     /**
+     * Process the html and extract images URLs from it.
+     *
+     * @param string $html
+     *
+     * @return string[]
+     */
+    public static function extractImagesUrlsFromHtml($html)
+    {
+        $crawler = new Crawler($html);
+        $imagesCrawler = $crawler
+            ->filterXpath('//img');
+        $imagesUrls = $imagesCrawler
+            ->extract(['src']);
+        $imagesSrcsetUrls = self::getSrcsetUrls($imagesCrawler);
+
+        return array_unique(array_merge($imagesUrls, $imagesSrcsetUrls));
+    }
+
+    /**
      * Process the html and extract image from it, save them to local and return the updated html.
      *
      * @param int    $entryId ID of the entry
@@ -41,13 +60,7 @@ class DownloadImages
      */
     public function processHtml($entryId, $html, $url)
     {
-        $crawler = new Crawler($html);
-        $imagesCrawler = $crawler
-            ->filterXpath('//img');
-        $imagesUrls = $imagesCrawler
-            ->extract(['src']);
-        $imagesSrcsetUrls = $this->getSrcsetUrls($imagesCrawler);
-        $imagesUrls = array_unique(array_merge($imagesUrls, $imagesSrcsetUrls));
+        $imagesUrls = self::extractImagesUrlsFromHtml($html);
 
         $relativePath = $this->getRelativePath($entryId);
 
@@ -199,7 +212,7 @@ class DownloadImages
      *
      * @return array An array of urls
      */
-    private function getSrcsetUrls(Crawler $imagesCrawler)
+    private static function getSrcsetUrls(Crawler $imagesCrawler)
     {
         $urls = [];
         $iterator = $imagesCrawler
