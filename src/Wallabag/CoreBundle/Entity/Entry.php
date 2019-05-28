@@ -13,6 +13,7 @@ use JMS\Serializer\Annotation\XmlRoot;
 use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
+use Wallabag\CoreBundle\Helper\UrlHasher;
 use Wallabag\UserBundle\Entity\User;
 
 /**
@@ -324,7 +325,7 @@ class Entry
     public function setUrl($url)
     {
         $this->url = $url;
-        $this->hashedUrl = hash('sha1', $url);
+        $this->hashedUrl = UrlHasher::hashUrl($url);
 
         return $this;
     }

@@ -9,6 +9,7 @@ use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Helper\UrlHasher;
 
 class EntryRepository extends EntityRepository
 {
@@ -348,17 +349,10 @@ class EntryRepository extends EntityRepository
      */
     public function findByUrlAndUserId($url, $userId)
     {
-        $res = $this->createQueryBuilder('e')
-            ->where('e.url = :url')->setParameter('url', urldecode($url))
-            ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
-            ->getQuery()
-            ->getResult();
-
-        if (\count($res)) {
-            return current($res);
-        }
-
-        return false;
+        return $this->findByHashedUrlAndUserId(
+            UrlHasher::hashUrl($url),
+            $userId
+        );
     }
 
     /**
