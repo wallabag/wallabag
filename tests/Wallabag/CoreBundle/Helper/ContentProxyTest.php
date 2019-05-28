@@ -232,14 +232,12 @@ class ContentProxyTest extends TestCase
                 'html' => "<h1>Test</h1><p><img src='http://3.3.3.3/cover.jpg'/></p>",
                 'title' => 'this is my title',
                 'url' => 'http://1.1.1.1',
-                'content_type' => 'text/html',
+                'headers' => [
+                    'content-type' => 'text/html',
+                ],
                 'language' => 'fr',
                 'status' => '200',
-                'open_graph' => [
-                    'og_title' => 'my OG title',
-                    'og_description' => 'OG desc',
-                    'og_image' => null,
-                ],
+                'image' => null,
             ]);
 
         $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
@@ -274,14 +272,12 @@ class ContentProxyTest extends TestCase
                 'html' => "<h1>Test</h1><p><img src='http://3.3.3.3/nevermind.jpg'/></p>",
                 'title' => 'this is my title',
                 'url' => 'http://1.1.1.1',
-                'content_type' => 'text/html',
+                'headers' => [
+                    'content-type' => 'text/html',
+                ],
                 'language' => 'fr',
                 'status' => '200',
-                'open_graph' => [
-                    'og_title' => 'my OG title',
-                    'og_description' => 'OG desc',
-                    'og_image' => 'http://3.3.3.3/cover.jpg',
-                ],
+                'image' => 'http://3.3.3.3/cover.jpg',
             ]);
 
         $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);

@@ -299,8 +299,6 @@ class ContentProxy
         // if content is an image, define it as a preview too
         if (!empty($content['headers']['content-type']) && \in_array($this->mimeGuesser->guess($content['headers']['content-type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
             $previewPictureUrl = $content['url'];
-
-            $entry->setMimetype($content['headers']['content-type']);
         } elseif (empty($previewPictureUrl)) {
             $this->logger->debug('Extracting images from content to provide a default preview picture');
             $imagesUrls = DownloadImages::extractImagesUrlsFromHtml($content['html']);
@@ -309,6 +307,10 @@ class ContentProxy
             if (!empty($imagesUrls)) {
                 $previewPictureUrl = $imagesUrls[0];
             }
+        }
+
+        if (!empty($content['headers']['content-type'])) {
+            $entry->setMimetype($content['headers']['content-type']);
         }
 
         if (!empty($previewPictureUrl)) {
