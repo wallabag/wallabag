@@ -2,16 +2,18 @@
 
 namespace Wallabag\CoreBundle\Helper;
 
-use Graby\Ring\Client\SafeCurlHandler;
-use GuzzleHttp\Client;
+use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Event\SubscriberInterface;
+use Http\Adapter\Guzzle5\Client as GuzzleAdapter;
+use Http\Client\HttpClient;
+use Http\HttplugBundle\ClientFactory\ClientFactory;
 use Psr\Log\LoggerInterface;
 
 /**
- * Builds and configures the Guzzle HTTP client.
+ * Builds and configures the HTTP client.
  */
-class HttpClientFactory
+class HttpClientFactory implements ClientFactory
 {
     /** @var [\GuzzleHttp\Event\SubscriberInterface] */
     private $subscribers = [];
@@ -37,29 +39,6 @@ class HttpClientFactory
     }
 
     /**
-     * @return \GuzzleHttp\Client|null
-     */
-    public function buildHttpClient()
-    {
-        $this->logger->log('debug', 'Restricted access config enabled?', ['enabled' => (int) $this->restrictedAccess]);
-
-        if (0 === (int) $this->restrictedAccess) {
-            return;
-        }
-
-        // we clear the cookie to avoid websites who use cookies for analytics
-        $this->cookieJar->clear();
-        // need to set the (shared) cookie jar
-        $client = new Client(['handler' => new SafeCurlHandler(), 'defaults' => ['cookies' => $this->cookieJar]]);
-
-        foreach ($this->subscribers as $subscriber) {
-            $client->getEmitter()->attach($subscriber);
-        }
-
-        return $client;
-    }
-
-    /**
      * Adds a subscriber to the HTTP client.
      *
      * @param SubscriberInterface $subscriber
@@ -67,5 +46,35 @@ class HttpClientFactory
     public function addSubscriber(SubscriberInterface $subscriber)
     {
         $this->subscribers[] = $subscriber;
+    }
+
+    /**
+     * Input an array of configuration to be able to create a HttpClient.
+     *
+     * @param array $config
+     *
+     * @return HttpClient
+     */
+    public function createClient(array $config = [])
+    {
+        $this->logger->log('debug', 'Restricted access config enabled?', ['enabled' => (int) $this->restrictedAccess]);
+
+        if (0 === (int) $this->restrictedAccess) {
+            return new GuzzleAdapter(new GuzzleClient($config));
+        }
+
+        // we clear the cookie to avoid websites who use cookies for analytics
+        $this->cookieJar->clear();
+        if (!isset($config['defaults']['cookies'])) {
+            // need to set the (shared) cookie jar
+            $config['defaults']['cookies'] = $this->cookieJar;
+        }
+
+        $guzzle = new GuzzleClient($config);
+        foreach ($this->subscribers as $subscriber) {
+            $guzzle->getEmitter()->attach($subscriber);
+        }
+
+        return new GuzzleAdapter($guzzle);
     }
 }

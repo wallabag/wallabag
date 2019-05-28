@@ -7,13 +7,7 @@ services:
         class: Wallabag\ImportBundle\Import\ImportChain
 
     wallabag_import.pocket.client:
-        class: GuzzleHttp\Client
-        arguments:
-            -
-                defaults:
-                    headers:
-                        content-type: "application/json"
-                        X-Accept: "application/json"
+        alias: 'httplug.client.wallabag_import.pocket.client'
 
     wallabag_import.pocket.import:
         class: Wallabag\ImportBundle\Import\PocketImport

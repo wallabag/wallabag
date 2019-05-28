@@ -369,9 +369,7 @@ class EntryRestController extends WallabagRestController
                     'language' => !empty($data['language']) ? $data['language'] : $entry->getLanguage(),
                     'date' => !empty($data['publishedAt']) ? $data['publishedAt'] : $entry->getPublishedAt(),
                     // faking the open graph preview picture
-                    'open_graph' => [
-                        'og_image' => !empty($data['picture']) ? $data['picture'] : $entry->getPreviewPicture(),
-                    ],
+                    'image' => !empty($data['picture']) ? $data['picture'] : $entry->getPreviewPicture(),
                     'authors' => \is_string($data['authors']) ? explode(',', $data['authors']) : $entry->getPublishedBy(),
                 ]
             );
