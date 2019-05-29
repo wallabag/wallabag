@@ -368,7 +368,7 @@ class EntryRepository extends EntityRepository
     {
         $res = $this->createQueryBuilder('e')
             ->where('e.hashedUrl = :hashed_url')->setParameter('hashed_url', $hashedUrl)
-            // ->orWhere('e.givenUrl = :url')->setParameter('url', $url)
+            ->orWhere('e.hashedGivenUrl = :hashed_given_url')->setParameter('hashed_given_url', $hashedUrl)
             ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
             ->getQuery()
             ->getResult();

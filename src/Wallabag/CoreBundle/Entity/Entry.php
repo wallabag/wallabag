@@ -27,9 +27,8 @@ use Wallabag\UserBundle\Entity\User;
  *     indexes={
  *         @ORM\Index(name="created_at", columns={"created_at"}),
  *         @ORM\Index(name="uid", columns={"uid"}),
- *         @ORM\Index(name="hashed_url_user_id", columns={"user_id", "hashed_url"}, options={"lengths"={null, 40}})
- *     },
- *     uniqueConstraints={@ORM\UniqueConstraint(name="IDX_entry_given_url",columns={"url", "given_url", "user_id"})}
+ *         @ORM\Index(name="hashed_urls_user_id", columns={"user_id", "hashed_url", "hashed_given_url"}, options={"lengths"={null, 40, 40}})
+ *     }
  * )
  * @ORM\HasLifecycleCallbacks()
  * @Hateoas\Relation("self", href = "expr('/api/entries/' ~ object.getId())")
@@ -69,15 +68,8 @@ class Entry
     private $title;
 
     /**
-     * @var string
+     * Define the url fetched by wallabag (the final url after potential redirections).
      *
-     * @ORM\Column(name="given_url", type="text", nullable=true)
-     *
-     * @Groups({"entries_for_user", "export_all"})
-     */
-    private $givenUrl;
-
-    /**
      * @var string
      *
      * @Assert\NotBlank()
@@ -93,6 +85,35 @@ class Entry
      * @ORM\Column(name="hashed_url", type="string", length=40, nullable=true)
      */
     private $hashedUrl;
+
+    /**
+     * From where user retrieved/found the url (an other article, a twitter, or the given_url if non are provided).
+     *
+     * @var string
+     *
+     * @ORM\Column(name="origin_url", type="text", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $originUrl;
+
+    /**
+     * Define the url entered by the user (without redirections).
+     *
+     * @var string
+     *
+     * @ORM\Column(name="given_url", type="text", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $givenUrl;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="hashed_given_url", type="string", length=40, nullable=true)
+     */
+    private $hashedGivenUrl;
 
     /**
      * @var bool
@@ -273,15 +294,6 @@ class Entry
      */
     private $tags;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="origin_url", type="text", nullable=true)
-     *
-     * @Groups({"entries_for_user", "export_all"})
-     */
-    private $originUrl;
-
     /*
      * @param User     $user
      */
@@ -323,30 +335,6 @@ class Entry
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Set given url.
-     *
-     * @param string $givenUrl
-     *
-     * @return Entry
-     */
-    public function setGivenUrl($givenUrl)
-    {
-        $this->givenUrl = $givenUrl;
-
-        return $this;
-    }
-
-    /**
-     * Get given Url.
-     *
-     * @return string
-     */
-    public function getGivenUrl()
-    {
-        return $this->givenUrl;
     }
 
     /**
@@ -954,6 +942,31 @@ class Entry
     public function getOriginUrl()
     {
         return $this->originUrl;
+    }
+
+    /**
+     * Set origin url.
+     *
+     * @param string $givenUrl
+     *
+     * @return Entry
+     */
+    public function setGivenUrl($givenUrl)
+    {
+        $this->givenUrl = $givenUrl;
+        $this->hashedGivenUrl = UrlHasher::hashUrl($givenUrl);
+
+        return $this;
+    }
+
+    /**
+     * Get origin url.
+     *
+     * @return string
+     */
+    public function getGivenUrl()
+    {
+        return $this->givenUrl;
     }
 
     /**
