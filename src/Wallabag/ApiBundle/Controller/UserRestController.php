@@ -45,7 +45,7 @@ class UserRestController extends WallabagRestController
      */
     public function putUserAction(Request $request)
     {
-        if (!$this->getParameter('fosuser_registration') || !$this->get('craue_config')->get('api_user_registration')) {
+        if (!$this->container->getParameter('fosuser_registration') || !$this->get('craue_config')->get('api_user_registration')) {
             $json = $this->get('jms_serializer')->serialize(['error' => "Server doesn't allow registrations"], 'json');
 
             return (new JsonResponse())

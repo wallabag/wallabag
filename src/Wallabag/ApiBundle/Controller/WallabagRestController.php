@@ -2,13 +2,13 @@
 
 namespace Wallabag\ApiBundle\Controller;
 
-use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-class WallabagRestController extends FOSRestController
+class WallabagRestController extends AbstractFOSRestController
 {
     /**
      * Retrieve version number.

@@ -564,7 +564,7 @@ class EntryRestController extends WallabagRestController
         }
 
         // if refreshing entry failed, don't save it
-        if ($this->getParameter('wallabag_core.fetching_error_message') === $entry->getContent()) {
+        if ($this->container->getParameter('wallabag_core.fetching_error_message') === $entry->getContent()) {
             return new JsonResponse([], 304);
         }
 

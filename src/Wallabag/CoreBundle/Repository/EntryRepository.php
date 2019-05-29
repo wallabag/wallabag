@@ -345,7 +345,7 @@ class EntryRepository extends EntityRepository
      * @param string $url
      * @param int    $userId
      *
-     * @return Entry|bool
+     * @return Entry|false
      */
     public function findByUrlAndUserId($url, $userId)
     {
@@ -362,7 +362,7 @@ class EntryRepository extends EntityRepository
      * @param string $hashedUrl Url hashed using sha1
      * @param int    $userId
      *
-     * @return Entry|bool
+     * @return Entry|false
      */
     public function findByHashedUrlAndUserId($hashedUrl, $userId)
     {

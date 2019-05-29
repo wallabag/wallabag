@@ -771,7 +771,7 @@ class Entry
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getUid()
     {
