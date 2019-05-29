@@ -15,7 +15,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneBy(['user' => 1, 'isArchived' => false]);
+            ->findOneBy(['user' => $this->getUserId(), 'isArchived' => false]);
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -41,7 +41,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneBy(['user' => 1, 'url' => 'http://0.0.0.0/entry2']);
+            ->findOneBy(['user' => $this->getUserId(), 'url' => 'http://0.0.0.0/entry2']);
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -60,7 +60,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneBy(['user' => 1, 'isArchived' => false]);
+            ->findOneBy(['user' => $this->getUserId(), 'isArchived' => false]);
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -108,7 +108,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneBy(['user' => 2, 'isArchived' => false]);
+            ->findOneBy(['user' => $this->getUserId('bob'), 'isArchived' => false]);
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -132,6 +132,27 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertGreaterThanOrEqual(1, $content['total']);
         $this->assertSame(1, $content['page']);
         $this->assertGreaterThanOrEqual(1, $content['pages']);
+
+        $this->assertNotNull($content['_embedded']['items'][0]['content']);
+
+        $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
+    }
+
+    public function testGetEntriesDetailMetadata()
+    {
+        $this->client->request('GET', '/api/entries?detail=metadata');
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThanOrEqual(1, \count($content));
+        $this->assertNotEmpty($content['_embedded']['items']);
+        $this->assertGreaterThanOrEqual(1, $content['total']);
+        $this->assertSame(1, $content['page']);
+        $this->assertGreaterThanOrEqual(1, $content['pages']);
+
+        $this->assertNull($content['_embedded']['items'][0]['content']);
 
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
@@ -185,7 +206,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUser(1);
+            ->findOneByUser($this->getUserId());
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -489,8 +510,9 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame(0, $content['is_archived']);
         $this->assertSame(0, $content['is_starred']);
         $this->assertNull($content['starred_at']);
+        $this->assertNull($content['archived_at']);
         $this->assertSame('New title for my article', $content['title']);
-        $this->assertSame(1, $content['user_id']);
+        $this->assertSame($this->getUserId(), $content['user_id']);
         $this->assertCount(2, $content['tags']);
         $this->assertNull($content['origin_url']);
         $this->assertSame('my content', $content['content']);
@@ -505,7 +527,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testPostSameEntry()
     {
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
-        $entry = new Entry($em->getReference(User::class, 1));
+        $entry = new Entry($em->getReference(User::class, $this->getUserId()));
         $entry->setUrl('https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html');
         $entry->setArchived(true);
         $entry->addTag((new Tag())->setLabel('google'));
@@ -584,7 +606,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame(1, $content['is_archived']);
         $this->assertSame(1, $content['is_starred']);
         $this->assertGreaterThanOrEqual($now->getTimestamp(), (new \DateTime($content['starred_at']))->getTimestamp());
-        $this->assertSame(1, $content['user_id']);
+        $this->assertGreaterThanOrEqual($now->getTimestamp(), (new \DateTime($content['archived_at']))->getTimestamp());
+        $this->assertSame($this->getUserId(), $content['user_id']);
     }
 
     public function testPostArchivedAndStarredEntryWithoutQuotes()
@@ -633,7 +656,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUser(1);
+            ->findOneByUser($this->getUserId());
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -660,7 +683,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame($entry->getUrl(), $content['url']);
         $this->assertSame('New awesome title', $content['title']);
         $this->assertGreaterThanOrEqual(1, \count($content['tags']), 'We force only one tag');
-        $this->assertSame(1, $content['user_id']);
+        $this->assertSame($this->getUserId(), $content['user_id']);
         $this->assertSame('de_AT', $content['language']);
         $this->assertSame('http://preview.io/picture.jpg', $content['preview_picture']);
         $this->assertContains('sponge', $content['published_by']);
@@ -675,7 +698,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUser(1);
+            ->findOneByUser($this->getUserId());
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -709,7 +732,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUser(1);
+            ->findOneByUser($this->getUserId());
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -740,7 +763,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $entry = $this->client->getContainer()
         ->get('doctrine.orm.entity_manager')
         ->getRepository('WallabagCoreBundle:Entry')
-        ->findOneByUser(1);
+        ->findOneByUser($this->getUserId());
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -772,7 +795,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUser(1);
+            ->findOneByUser($this->getUserId());
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -817,7 +840,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUser(1);
+            ->findOneByUser($this->getUserId());
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -834,7 +857,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertArrayHasKey('tags', $content);
-        $this->assertSame($nbTags + 3, \count($content['tags']));
+        $this->assertCount($nbTags + 3, $content['tags']);
 
         $entryDB = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
@@ -874,7 +897,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertArrayHasKey('tags', $content);
-        $this->assertSame($nbTags - 1, \count($content['tags']));
+        $this->assertCount($nbTags - 1, $content['tags']);
     }
 
     public function testSaveIsArchivedAfterPost()
@@ -882,7 +905,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneBy(['user' => 1, 'isArchived' => true]);
+            ->findOneBy(['user' => $this->getUserId(), 'isArchived' => true]);
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -904,7 +927,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneBy(['user' => 1, 'isStarred' => true]);
+            ->findOneBy(['user' => $this->getUserId(), 'isStarred' => true]);
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -926,7 +949,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneBy(['user' => 1, 'isArchived' => true]);
+            ->findOneBy(['user' => $this->getUserId(), 'isArchived' => true]);
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -952,7 +975,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneBy(['user' => 1, 'isStarred' => true]);
+            ->findOneBy(['user' => $this->getUserId(), 'isStarred' => true]);
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -971,6 +994,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function dataForEntriesExistWithUrl()
     {
+        $url = hash('sha1', 'http://0.0.0.0/entry2');
+
         return [
             'with_id' => [
                 'url' => '/api/entries/exists?url=http://0.0.0.0/entry2&return_id=1',
@@ -978,6 +1003,14 @@ class EntryRestControllerTest extends WallabagApiTestCase
             ],
             'without_id' => [
                 'url' => '/api/entries/exists?url=http://0.0.0.0/entry2',
+                'expectedValue' => true,
+            ],
+            'hashed_url_with_id' => [
+                'url' => '/api/entries/exists?hashed_url=' . $url . '&return_id=1',
+                'expectedValue' => 2,
+            ],
+            'hashed_url_without_id' => [
+                'url' => '/api/entries/exists?hashed_url=' . $url . '',
                 'expectedValue' => true,
             ],
         ];
@@ -1001,6 +1034,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
     {
         $url1 = 'http://0.0.0.0/entry2';
         $url2 = 'http://0.0.0.0/entry10';
+
         $this->client->request('GET', '/api/entries/exists?urls[]=' . $url1 . '&urls[]=' . $url2 . '&return_id=1');
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
@@ -1009,7 +1043,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertArrayHasKey($url1, $content);
         $this->assertArrayHasKey($url2, $content);
-        $this->assertSame(2, $content[$url1]);
+        // it returns a database id, we don't know it, so we only check it's greater than the lowest possible value
+        $this->assertGreaterThan(1, $content[$url1]);
         $this->assertNull($content[$url2]);
     }
 
@@ -1029,9 +1064,52 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertFalse($content[$url2]);
     }
 
+    public function testGetEntriesExistsWithManyUrlsHashed()
+    {
+        $url1 = 'http://0.0.0.0/entry2';
+        $url2 = 'http://0.0.0.0/entry10';
+        $this->client->request('GET', '/api/entries/exists?hashed_urls[]=' . hash('sha1', $url1) . '&hashed_urls[]=' . hash('sha1', $url2) . '&return_id=1');
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey(hash('sha1', $url1), $content);
+        $this->assertArrayHasKey(hash('sha1', $url2), $content);
+        $this->assertSame(2, $content[hash('sha1', $url1)]);
+        $this->assertNull($content[hash('sha1', $url2)]);
+    }
+
+    public function testGetEntriesExistsWithManyUrlsHashedReturnBool()
+    {
+        $url1 = 'http://0.0.0.0/entry2';
+        $url2 = 'http://0.0.0.0/entry10';
+        $this->client->request('GET', '/api/entries/exists?hashed_urls[]=' . hash('sha1', $url1) . '&hashed_urls[]=' . hash('sha1', $url2));
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey(hash('sha1', $url1), $content);
+        $this->assertArrayHasKey(hash('sha1', $url2), $content);
+        $this->assertTrue($content[hash('sha1', $url1)]);
+        $this->assertFalse($content[hash('sha1', $url2)]);
+    }
+
     public function testGetEntriesExistsWhichDoesNotExists()
     {
         $this->client->request('GET', '/api/entries/exists?url=http://google.com/entry2');
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertFalse($content['exists']);
+    }
+
+    public function testGetEntriesExistsWhichDoesNotExistsWithHashedUrl()
+    {
+        $this->client->request('GET', '/api/entries/exists?hashed_url=' . hash('sha1', 'http://google.com/entry2'));
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
@@ -1047,11 +1125,18 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame(403, $this->client->getResponse()->getStatusCode());
     }
 
+    public function testGetEntriesExistsWithNoHashedUrl()
+    {
+        $this->client->request('GET', '/api/entries/exists?hashed_url=');
+
+        $this->assertSame(403, $this->client->getResponse()->getStatusCode());
+    }
+
     public function testReloadEntryErrorWhileFetching()
     {
         $entry = $this->client->getContainer()->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId('http://0.0.0.0/entry4', 1);
+            ->findByUrlAndUserId('http://0.0.0.0/entry4', $this->getUserId());
 
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
@@ -1087,7 +1172,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
     {
         $entry = $this->client->getContainer()->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId('http://0.0.0.0/entry4', 1);
+            ->findByUrlAndUserId('http://0.0.0.0/entry4', $this->getUserId());
 
         $tags = $entry->getTags();
 
@@ -1111,7 +1196,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $entry = $this->client->getContainer()->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId('http://0.0.0.0/entry4', 1);
+            ->findByUrlAndUserId('http://0.0.0.0/entry4', $this->getUserId());
 
         $tags = $entry->getTags();
         $this->assertCount(4, $tags);
@@ -1131,7 +1216,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testDeleteEntriesTagsListAction()
     {
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
-        $entry = new Entry($em->getReference(User::class, 1));
+        $entry = new Entry($em->getReference(User::class, $this->getUserId()));
         $entry->setUrl('http://0.0.0.0/test-entry');
         $entry->addTag((new Tag())->setLabel('foo-tag'));
         $entry->addTag((new Tag())->setLabel('bar-tag'));
@@ -1199,7 +1284,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testDeleteEntriesListAction()
     {
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
-        $em->persist((new Entry($em->getReference(User::class, 1)))->setUrl('http://0.0.0.0/test-entry1'));
+        $em->persist((new Entry($em->getReference(User::class, $this->getUserId())))->setUrl('http://0.0.0.0/test-entry1'));
 
         $em->flush();
         $em->clear();
@@ -1257,7 +1342,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testRePostEntryAndReUsePublishedAt()
     {
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
-        $entry = new Entry($em->getReference(User::class, 1));
+        $entry = new Entry($em->getReference(User::class, $this->getUserId()));
         $entry->setTitle('Antoine de Caunes : « Je veux avoir le droit de tâtonner »');
         $entry->setContent('hihi');
         $entry->setUrl('https://www.lemonde.fr/m-perso/article/2017/06/25/antoine-de-caunes-je-veux-avoir-le-droit-de-tatonner_5150728_4497916.html');

@@ -121,7 +121,7 @@ class ChromeControllerTest extends WallabagCoreTestCase
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://www.usinenouvelle.com is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for http://www.usinenouvelle.com is ok');
-        $this->assertSame(1, \count($content->getTags()));
+        $this->assertCount(1, $content->getTags());
 
         $createdAt = $content->getCreatedAt();
         $this->assertSame('2011', $createdAt->format('Y'));

@@ -15,6 +15,7 @@ class NewEntryType extends AbstractType
             ->add('url', UrlType::class, [
                 'required' => true,
                 'label' => 'entry.new.form_new.url_label',
+                'default_protocol' => null,
             ])
         ;
     }

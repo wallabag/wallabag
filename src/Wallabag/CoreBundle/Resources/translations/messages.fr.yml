@@ -37,6 +37,7 @@ menu:
         add_new_entry: "Sauvegarder un nouvel article"
         search: "Rechercher"
         filter_entries: "Filtrer les articles"
+        random_entry: Aller à un article aléatoire de cette liste
         export: "Exporter"
     search_form:
         input_label: "Saisissez votre terme de recherche"
@@ -53,11 +54,12 @@ config:
     page_title: "Configuration"
     tab_menu:
         settings: "Paramètres"
-        rss: "RSS"
+        feed: "Flux"
         user_info: "Mon compte"
         password: "Mot de passe"
         rules: "Règles de tag automatiques"
         new_user: "Créer un compte"
+        reset: "Réinitialisation"
     form:
         save: "Enregistrer"
     form_settings:
@@ -83,25 +85,33 @@ config:
         help_reading_speed: "wallabag calcule une durée de lecture pour chaque article. Vous pouvez définir ici, grâce à cette liste déroulante, si vous lisez plus ou moins vite. wallabag recalculera la durée de lecture de chaque article."
         help_language: "Vous pouvez définir la langue de l’interface de wallabag."
         help_pocket_consumer_key: "Nécessaire pour l’import depuis Pocket. Vous pouvez le créer depuis votre compte Pocket."
-    form_rss:
-        description: "Les flux RSS fournis par wallabag vous permettent de lire vos articles sauvegardés dans votre lecteur de flux préféré. Pour pouvoir les utiliser, vous devez d’abord créer un jeton."
-        token_label: "Jeton RSS"
+    form_feed:
+        description: "Les flux Atom fournis par wallabag vous permettent de lire vos articles sauvegardés dans votre lecteur de flux préféré. Pour pouvoir les utiliser, vous devez d’abord créer un jeton."
+        token_label: "Jeton de flux"
         no_token: "Aucun jeton généré"
         token_create: "Créez votre jeton"
         token_reset: "Réinitialisez votre jeton"
-        rss_links: "Adresses de vos flux RSS"
-        rss_link:
+        feed_links: "Adresses de vos flux"
+        feed_link:
             unread: "Non lus"
             starred: "Favoris"
             archive: "Lus"
             all: "Tous"
-        rss_limit: "Nombre d’articles dans le flux"
+        feed_limit: "Nombre d’articles dans le flux"
     form_user:
-        two_factor_description: "Activer l’authentification double-facteur veut dire que vous allez recevoir un code par courriel à chaque nouvelle connexion non approuvée."
+        two_factor_description: "Activer l’authentification double-facteur veut dire que vous allez recevoir un code par courriel OU que vous devriez utiliser une application de mot de passe à usage unique (comme Google Authenticator, Authy or FreeOTP) pour obtenir un code temporaire à chaque nouvelle connexion non approuvée. Vous ne pouvez pas choisir les deux options."
         name_label: "Nom"
         email_label: "Adresse courriel"
-        twoFactorAuthentication_label: "Double authentification"
-        help_twoFactorAuthentication: "Si vous activez 2FA, à chaque tentative de connexion à wallabag, vous recevrez un code par email."
+        two_factor:
+            emailTwoFactor_label: 'En utlisant l’email (recevez un code par email)'
+            googleTwoFactor_label: 'En utilisant une application de mot de passe à usage unique (ouvrez l’app, comme Google Authenticator, Authy or FreeOTP, pour obtenir un mot de passe à usage unique)'
+            table_method: Méthode
+            table_state: État
+            table_action: Action
+            state_enabled: Activé
+            state_disabled: Désactivé
+            action_email: Utiliser l'email
+            action_app: Utiliser une app OTP
         delete:
             title: "Supprimer mon compte (attention danger !)"
             description: "Si vous confirmez la suppression de votre compte, TOUS les articles, TOUS les tags, TOUTES les annotations et votre compte seront DÉFINITIVEMENT supprimé (c’est IRRÉVERSIBLE). Vous serez ensuite déconnecté."
@@ -159,6 +169,15 @@ config:
                 and: "Une règle ET l’autre"
                 matches: "Teste si un <i>sujet</i> correspond à une <i>recherche</i> (non sensible à la casse).<br />Exemple : <code>title matches \"football\"</code>"
                 notmatches: "Teste si un <i>sujet</i> ne correspond pas à une <i>recherche</i> (non sensible à la casse).<br />Exemple : <code>title notmatches \"football\"</code>"
+    otp:
+        page_title: Authentification double-facteur
+        app:
+            two_factor_code_description_1: Vous venez d’activer l’authentification double-facteur, ouvrez votre application OTP pour configurer la génération du mot de passe à usage unique. Ces informations disparaîtront après un rechargement de la page.
+            two_factor_code_description_2: 'Vous pouvez scanner le QR code avec votre application :'
+            two_factor_code_description_3: 'N’oubliez pas de sauvegarder ces codes de secours dans un endroit sûr, vous pourrez les utiliser si vous ne pouvez plus accéder à votre application OTP :'
+            two_factor_code_description_4: 'Testez un code généré par votre application OTP :'
+            cancel: Annuler
+            enable: Activer
 
 entry:
     default_title: "Titre de l’article"
@@ -353,7 +372,7 @@ quickstart:
         title: "Configurez l’application"
         description: "Pour voir une application qui vous correspond, allez voir du côté de la configuration de wallabag."
         language: "Changez la langue et le design de l’application"
-        rss: "Activez les flux RSS"
+        feed: "Activez les flux Atom"
         tagging_rules: "Écrivez des règles pour classer automatiquement vos articles"
     admin:
         title: "Administration"
@@ -404,6 +423,8 @@ tag:
     new:
         add: "Ajouter"
         placeholder: "Vous pouvez ajouter plusieurs tags, séparés par une virgule."
+    rename:
+        placeholder: 'Vous pouvez changer le nom de votre tag.'
 
 export:
     footer_template: '<div style="text-align:center;"><p>Généré par wallabag with %method%</p><p>Merci d''ouvrir <a href="https://github.com/wallabag/wallabag/issues">un ticket</a> si vous rencontrez des soucis d''affichage avec ce document sur votre support.</p></div>'
@@ -530,6 +551,8 @@ user:
         enabled_label: "Activé"
         last_login_label: "Dernière connexion"
         twofactor_label: "Double authentification"
+        twofactor_email_label: Double authentification par email
+        twofactor_google_label: Double authentification par OTP app
         save: "Sauvegarder"
         delete: "Supprimer"
         delete_confirm: "Êtes-vous sûr ?"
@@ -567,14 +590,15 @@ flashes:
             password_updated: "Votre mot de passe a bien été mis à jour"
             password_not_updated_demo: "En démo, vous ne pouvez pas changer le mot de passe de cet utilisateur."
             user_updated: "Vos informations personnelles ont bien été mises à jour"
-            rss_updated: "La configuration des flux RSS a bien été mise à jour"
+            feed_updated: "La configuration des flux a bien été mise à jour"
             tagging_rules_updated: "Règles mises à jour"
             tagging_rules_deleted: "Règle supprimée"
-            rss_token_updated: "Jeton RSS mis à jour"
+            feed_token_updated: "Jeton des flux mis à jour"
             annotations_reset: "Annotations supprimées"
             tags_reset: "Tags supprimés"
             entries_reset: "Articles supprimés"
             archived_reset: "Articles archivés supprimés"
+            otp_enabled: "Authentification à double-facteur activée"
     entry:
         notice:
             entry_already_saved: "Article déjà sauvegardé le %date%"
@@ -588,9 +612,11 @@ flashes:
             entry_starred: "Article ajouté dans les favoris"
             entry_unstarred: "Article retiré des favoris"
             entry_deleted: "Article supprimé"
+            no_random_entry: "Aucun article correspond aux critères n'a été trouvé"
     tag:
         notice:
             tag_added: "Tag ajouté"
+            tag_renamed: "Tag renommé"
     import:
         notice:
             failed: "L’import a échoué, veuillez ré-essayer"

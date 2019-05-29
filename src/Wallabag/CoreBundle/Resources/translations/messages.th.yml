@@ -37,6 +37,7 @@ menu:
         add_new_entry: 'เพิ่มรายการใหม่'
         search: 'ค้นหา'
         filter_entries: 'ตัวกรองรายการ'
+        # random_entry: Jump to a random entry from that list
         export: 'นำข้อมูลออก'
     search_form:
         input_label: 'ค้นหาที่นี้'
@@ -53,11 +54,12 @@ config:
     page_title: 'กำหนดค่า'
     tab_menu:
         settings: 'ตั้งค่า'
-        rss: 'RSS'
+        feed: 'RSS'
         user_info: 'ข้อมูลผู้ใช้'
         password: 'รหัสผ่าน'
         rules: 'การแท็กข้อบังคับ'
         new_user: 'เพิ่มผู้ใช้'
+        reset: 'รีเซ็ตพื้นที่ '
     form:
         save: 'บันทึก'
     form_settings:
@@ -83,25 +85,32 @@ config:
         help_reading_speed: "wallabag จะคำนวณเวลาการอ่านในแต่ละรายการซึ่งคุณสามารถกำหนดได้ที่นี้,ต้องขอบคุณรายการนี้,หากคุณเป็นนักอ่านที่เร็วหรือช้า wallabag จะทำการคำนวณเวลาที่อ่านใหม่ในแต่ละรายการ"
         help_language: "คุณสามารถเปลี่ยภาษาของ wallabag interface ได้"
         help_pocket_consumer_key: "การ้องขอการเก็บการนำข้อมูลเข้า คุณสามารถสร้างบัญชีการเก็บของคุณ"
-    form_rss:
+    form_feed:
         description: 'RSS จะเก็บเงื่อนไขโดย wallabag ต้องยอมรับการอ่านรายการของคุณกับผู้อ่านที่ชอบ RSS คุณต้องทำเครื่องหมายก่อน'
         token_label: 'เครื่องหมาย RSS'
         no_token: 'ไม่มีเครื่องหมาย'
         token_create: 'สร้างเครื่องหมาย'
         token_reset: 'ทำเครื่องหมาย'
-        rss_links: 'ลิงค์ RSS'
-        rss_link:
+        feed_links: 'ลิงค์ RSS'
+        feed_link:
             unread: 'ยังไมได้่อ่าน'
             starred: 'ทำการแสดง'
             archive: 'เอกสาร'
             all: 'ทั้งหมด'
-        rss_limit: 'จำนวนไอเทมที่เก็บ'
+        feed_limit: 'จำนวนไอเทมที่เก็บ'
     form_user:
-        two_factor_description: "การเปิดใช้งาน two factor authentication คือคุณจะต้องได้รับอีเมลกับ code ที่ยังไม่ตรวจสอบในการเชื่อมต่อ"
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'ชื่อ'
         email_label: 'อีเมล'
-        twoFactorAuthentication_label: 'Two factor authentication'
-        help_twoFactorAuthentication: "ถ้าคุณเปิด 2FA, ในแต่ละช่วงเวลาที่คุณต้องการลงชื่อเข้าใช wallabag, คุณจะต้องได้รับ code จากอีเมล"
+            # emailTwoFactor_label: 'Using email (receive a code by email)'
+            # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, Authy or FreeOTP, to get a one time code)'
+            # table_method: Method
+            # table_state: State
+            # table_action: Action
+            # state_enabled: Enabled
+            # state_disabled: Disabled
+            # action_email: Use email
+            # action_app: Use OTP App
         delete:
             title: ลบบัญชีของฉัน (โซนที่เป็นภัย!)
             description: ถ้าคุณลบบัญชีของคุณIf , รายการทั้งหมดของคุณ, แท็กทั้งหมดของคุณ, หมายเหตุทั้งหมดของคุณและบัญชีของคุณจะถูกลบอย่างถาวร (มันไม่สามารถยกเลิกได้) คุณจะต้องลงชื่อออก
@@ -159,6 +168,15 @@ config:
                 and: 'หนึ่งข้อบังคับและอื่นๆ'
                 matches: 'ทดสอบว่า <i>เรื่อง</i> นี้ตรงกับ <i>การต้นหา</i> (กรณีไม่ทราบ).<br />ตัวอย่าง: <code>หัวข้อที่ตรงกับ "football"</code>'
                 notmatches: 'ทดสอบว่า <i>เรื่อง</i> นี้ไม่ตรงกับ <i>การต้นหา</i> (กรณีไม่ทราบ).<br />ตัวอย่าง: <code>หัวข้อทีไม่ตรงกับ "football"</code>'
+    otp:
+        # page_title: Two-factor authentication
+        # app:
+        #     two_factor_code_description_1: You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password. It'll disapear after a page reload.
+        #     two_factor_code_description_2: 'You can scan that QR Code with your app:'
+        #     two_factor_code_description_3: 'Also, save these backup codes in a safe place, you can use them in case you lose access to your OTP app:'
+        #     two_factor_code_description_4: 'Test an OTP code from your configured app:'
+        #     cancel: Cancel
+        #     enable: Enable
 
 entry:
     default_title: 'หัวข้อรายการ'
@@ -351,7 +369,7 @@ quickstart:
         title: 'กำหนดค่าแอพพลิเคชั่น'
         description: 'ภายใน order จะมี application suit ของคุณ, จะมองหาองค์ประกอบของ wallabag'
         language: 'เปลี่ยนภาษาและออกแบบ'
-        rss: 'เปิดใช้ RSS'
+        feed: 'เปิดใช้ RSS'
         tagging_rules: 'เขียนข้อบังคับการแท็กอัตโนมัติของบทความของคุณ'
     admin:
         title: 'ผู้ดูแลระบบ'
@@ -402,6 +420,8 @@ tag:
     new:
         add: 'เพิ่ม'
         placeholder: 'คุณสามารถเพิ่มได้หลายแท็ก, จากการแบ่งโดย comma'
+    rename:
+        # placeholder: 'You can update tag name.'
 
 export:
     footer_template: '<div style="text-align:center;"><p>ผลิตโดย wallabag กับ %method%</p><p>ให้ทำการเปิด <a href="https://github.com/wallabag/wallabag/issues">ฉบับนี้</a> ถ้าคุณมีข้อบกพร่องif you have trouble with the display of this E-Book on your device.</p></div>'
@@ -527,7 +547,8 @@ user:
         email_label: 'อีเมล'
         enabled_label: 'เปิดใช้งาน'
         last_login_label: 'ลงชื้อเข้าใช้ครั้งสุดท้าย'
-        twofactor_label: Two factor authentication
+        # twofactor_email_label: Two factor authentication by email
+        # twofactor_google_label: Two factor authentication by OTP app
         save: บันทึก
         delete: ลบ
         delete_confirm: ตุณแน่ใจหรือไม่?
@@ -565,10 +586,10 @@ flashes:
             password_updated: 'อัปเดตรหัสผ่าน'
             password_not_updated_demo: "In demonstration mode, you can't change password for this user."
             user_updated: 'อัปเดตข้อมูล'
-            rss_updated: 'อัปเดตข้อมูล RSS'
+            feed_updated: 'อัปเดตข้อมูล RSS'
             tagging_rules_updated: 'อัปเดตการแท็กข้อบังคับ'
             tagging_rules_deleted: 'การลบข้อบังคับของแท็ก'
-            rss_token_updated: 'อัปเดตเครื่องหมาย RSS '
+            feed_token_updated: 'อัปเดตเครื่องหมาย RSS '
             annotations_reset: รีเซ็ตหมายเหตุ
             tags_reset: รีเซ็ตแท็ก
             entries_reset: รีเซ็ตรายการ
@@ -586,9 +607,11 @@ flashes:
             entry_starred: 'รายการที่แสดง'
             entry_unstarred: 'รายการที่ไม่ได้แสดง'
             entry_deleted: 'รายการที่ถูกลบ'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'แท็กที่เพิ่ม'
+            # tag_renamed: 'Tag renamed'
     import:
         notice:
             failed: 'นำข้อมูลเข้าล้มเหลว, ลองใหม่อีกครั้ง'

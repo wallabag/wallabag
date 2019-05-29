@@ -3,5 +3,5 @@ validator:
     password_too_short: "Le mot de passe doit contenir au moins 8 caractères"
     password_wrong_value: "Votre mot de passe actuel est faux"
     item_per_page_too_high: "Ça ne va pas plaire à l’application"
-    rss_limit_too_high: "Ça ne va pas plaire à l’application"
+    feed_limit_too_high: "Ça ne va pas plaire à l’application"
     quote_length_too_high: "La citation est trop longue. Elle doit avoir au maximum {{ limit }} caractères."

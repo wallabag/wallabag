@@ -12,6 +12,8 @@ use Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder;
 
 class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
 {
+    private $builder;
+
     public function testBuildConfigExists()
     {
         $grabyConfigBuilderMock = $this->getMockBuilder('Graby\SiteConfig\ConfigBuilder')
@@ -29,7 +31,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
         $grabyConfigBuilderMock
             ->method('buildForHost')
             ->with('api.example.com')
-            ->will($this->returnValue($grabySiteConfig));
+            ->willReturn($grabySiteConfig);
 
         $logger = new Logger('foo');
         $handler = new TestHandler();
@@ -88,7 +90,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
         $grabyConfigBuilderMock
             ->method('buildForHost')
             ->with('unknown.com')
-            ->will($this->returnValue(new GrabySiteConfig()));
+            ->willReturn(new GrabySiteConfig());
 
         $logger = new Logger('foo');
         $handler = new TestHandler();
@@ -130,6 +132,73 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
         $this->assertCount(1, $records, 'One log was recorded');
     }
 
+    public function testBuildConfigWithBadExtraFields()
+    {
+        $grabyConfigBuilderMock = $this->getMockBuilder('Graby\SiteConfig\ConfigBuilder')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $grabySiteConfig = new GrabySiteConfig();
+        $grabySiteConfig->requires_login = true;
+        $grabySiteConfig->login_uri = 'http://www.example.com/login';
+        $grabySiteConfig->login_username_field = 'login';
+        $grabySiteConfig->login_password_field = 'password';
+        $grabySiteConfig->login_extra_fields = ['field'];
+        $grabySiteConfig->not_logged_in_xpath = '//div[@class="need-login"]';
+
+        $grabyConfigBuilderMock
+            ->method('buildForHost')
+            ->with('example.com')
+            ->willReturn($grabySiteConfig);
+
+        $logger = new Logger('foo');
+        $handler = new TestHandler();
+        $logger->pushHandler($handler);
+
+        $siteCrentialRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\SiteCredentialRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $siteCrentialRepo->expects($this->once())
+            ->method('findOneByHostsAndUser')
+            ->with(['example.com', '.com'], 1)
+            ->willReturn(['username' => 'foo', 'password' => 'bar']);
+
+        $user = $this->getMockBuilder('Wallabag\UserBundle\Entity\User')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $user->expects($this->once())
+            ->method('getId')
+            ->willReturn(1);
+
+        $token = new UsernamePasswordToken($user, 'pass', 'provider');
+
+        $tokenStorage = new TokenStorage();
+        $tokenStorage->setToken($token);
+
+        $this->builder = new GrabySiteConfigBuilder(
+            $grabyConfigBuilderMock,
+            $tokenStorage,
+            $siteCrentialRepo,
+            $logger
+        );
+
+        $config = $this->builder->buildForHost('www.example.com');
+
+        $this->assertSame('example.com', $config->getHost());
+        $this->assertTrue($config->requiresLogin());
+        $this->assertSame('http://www.example.com/login', $config->getLoginUri());
+        $this->assertSame('login', $config->getUsernameField());
+        $this->assertSame('password', $config->getPasswordField());
+        $this->assertSame([], $config->getExtraFields());
+        $this->assertSame('//div[@class="need-login"]', $config->getNotLoggedInXpath());
+        $this->assertSame('foo', $config->getUsername());
+        $this->assertSame('bar', $config->getPassword());
+
+        $records = $handler->getRecords();
+
+        $this->assertCount(1, $records, 'One log was recorded');
+    }
+
     public function testBuildConfigUserNotDefined()
     {
         $grabyConfigBuilderMock = $this->getMockBuilder('\Graby\SiteConfig\ConfigBuilder')
@@ -139,7 +208,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
         $grabyConfigBuilderMock
             ->method('buildForHost')
             ->with('unknown.com')
-            ->will($this->returnValue(new GrabySiteConfig()));
+            ->willReturn(new GrabySiteConfig());
 
         $logger = new Logger('foo');
         $handler = new TestHandler();
@@ -210,7 +279,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
         $grabyConfigBuilderMock
             ->method('buildForHost')
             ->with($host)
-            ->will($this->returnValue($grabySiteConfig));
+            ->willReturn($grabySiteConfig);
 
         $user = $this->getMockBuilder('Wallabag\UserBundle\Entity\User')
             ->disableOriginalConstructor()

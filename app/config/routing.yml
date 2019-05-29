@@ -51,3 +51,47 @@ craue_config_settings_modify:
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+2fa_login:
+    path: /2fa
+    defaults:
+        _controller: "scheb_two_factor.form_controller:form"
+
+2fa_login_check:
+    path: /2fa_check
+
+# redirect RSS feed to Atom
+rss_to_atom_unread:
+    path: /{username}/{token}/unread.xml
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: unread_feed
+        permanent: true
+
+rss_to_atom_archive:
+    path: /{username}/{token}/archive.xml
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: archive_feed
+        permanent: true
+
+rss_to_atom_starred:
+    path: /{username}/{token}/starred.xml
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: starred_feed
+        permanent: true
+
+rss_to_atom_all:
+    path: /{username}/{token}/all.xml
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: all_feed
+        permanent: true
+
+rss_to_atom_tags:
+    path: /{username}/{token}/tags/{slug}.xml
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: tag_feed
+        permanent: true

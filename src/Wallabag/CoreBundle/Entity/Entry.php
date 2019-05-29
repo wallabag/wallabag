@@ -13,6 +13,7 @@ use JMS\Serializer\Annotation\XmlRoot;
 use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
+use Wallabag\CoreBundle\Helper\UrlHasher;
 use Wallabag\UserBundle\Entity\User;
 
 /**
@@ -25,7 +26,8 @@ use Wallabag\UserBundle\Entity\User;
  *     options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"},
  *     indexes={
  *         @ORM\Index(name="created_at", columns={"created_at"}),
- *         @ORM\Index(name="uid", columns={"uid"})
+ *         @ORM\Index(name="uid", columns={"uid"}),
+ *         @ORM\Index(name="hashed_url_user_id", columns={"user_id", "hashed_url"}, options={"lengths"={null, 40}})
  *     }
  * )
  * @ORM\HasLifecycleCallbacks()
@@ -76,6 +78,13 @@ class Entry
     private $url;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="hashed_url", type="string", length=40, nullable=true)
+     */
+    private $hashedUrl;
+
+    /**
      * @var bool
      *
      * @Exclude
@@ -85,6 +94,15 @@ class Entry
      * @Groups({"entries_for_user", "export_all"})
      */
     private $isArchived = false;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="archived_at", type="datetime", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $archivedAt = null;
 
     /**
      * @var bool
@@ -307,6 +325,7 @@ class Entry
     public function setUrl($url)
     {
         $this->url = $url;
+        $this->hashedUrl = UrlHasher::hashUrl($url);
 
         return $this;
     }
@@ -336,6 +355,44 @@ class Entry
     }
 
     /**
+     * update isArchived and archive_at fields.
+     *
+     * @param bool $isArchived
+     *
+     * @return Entry
+     */
+    public function updateArchived($isArchived = false)
+    {
+        $this->setArchived($isArchived);
+        $this->setArchivedAt(null);
+        if ($this->isArchived()) {
+            $this->setArchivedAt(new \DateTime());
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getArchivedAt()
+    {
+        return $this->archivedAt;
+    }
+
+    /**
+     * @param \DateTime|null $archivedAt
+     *
+     * @return Entry
+     */
+    public function setArchivedAt($archivedAt = null)
+    {
+        $this->archivedAt = $archivedAt;
+
+        return $this;
+    }
+
+    /**
      * Get isArchived.
      *
      * @return bool
@@ -357,7 +414,7 @@ class Entry
 
     public function toggleArchive()
     {
-        $this->isArchived = $this->isArchived() ^ 1;
+        $this->updateArchived($this->isArchived() ^ 1);
 
         return $this;
     }
@@ -863,5 +920,25 @@ class Entry
     public function getOriginUrl()
     {
         return $this->originUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHashedUrl()
+    {
+        return $this->hashedUrl;
+    }
+
+    /**
+     * @param mixed $hashedUrl
+     *
+     * @return Entry
+     */
+    public function setHashedUrl($hashedUrl)
+    {
+        $this->hashedUrl = $hashedUrl;
+
+        return $this;
     }
 }

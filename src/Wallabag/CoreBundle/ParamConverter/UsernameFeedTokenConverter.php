@@ -10,12 +10,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Wallabag\UserBundle\Entity\User;
 
 /**
- * ParamConverter used in the RSS controller to retrieve the right user according to
+ * ParamConverter used in the Feed controller to retrieve the right user according to
  * username & token given in the url.
  *
  * @see http://stfalcon.com/en/blog/post/symfony2-custom-paramconverter
  */
-class UsernameRssTokenConverter implements ParamConverterInterface
+class UsernameFeedTokenConverter implements ParamConverterInterface
 {
     private $registry;
 
@@ -67,7 +67,7 @@ class UsernameRssTokenConverter implements ParamConverterInterface
     public function apply(Request $request, ParamConverter $configuration)
     {
         $username = $request->attributes->get('username');
-        $rssToken = $request->attributes->get('token');
+        $feedToken = $request->attributes->get('token');
 
         if (!$request->attributes->has('username') || !$request->attributes->has('token')) {
             return false;
@@ -78,8 +78,8 @@ class UsernameRssTokenConverter implements ParamConverterInterface
 
         $userRepository = $em->getRepository($configuration->getClass());
 
-        // Try to find user by its username and config rss_token
-        $user = $userRepository->findOneByUsernameAndRsstoken($username, $rssToken);
+        // Try to find user by its username and config feed_token
+        $user = $userRepository->findOneByUsernameAndFeedtoken($username, $feedToken);
 
         if (null === $user || !($user instanceof User)) {
             throw new NotFoundHttpException(sprintf('%s not found.', $configuration->getClass()));

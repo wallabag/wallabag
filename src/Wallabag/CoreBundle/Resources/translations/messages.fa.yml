@@ -37,6 +37,7 @@ menu:
         add_new_entry: 'افزودن مقالهٔ تازه'
         search: 'جستجو'
         filter_entries: 'فیلترکردن مقاله‌ها'
+        # random_entry: Jump to a random entry from that list
         export: 'برون‌بری'
     search_form:
         input_label: 'جستجوی خود را این‌جا بنویسید:'
@@ -53,11 +54,12 @@ config:
     page_title: 'پیکربندی'
     tab_menu:
         settings: 'تنظیمات'
-        rss: 'آر-اس-اس'
+        feed: 'آر-اس-اس'
         user_info: 'اطلاعات کاربر'
         password: 'رمز'
         rules: 'برچسب‌گذاری خودکار'
         new_user: 'افزودن کاربر'
+        # reset: 'Reset area'
     form:
         save: 'ذخیره'
     form_settings:
@@ -83,25 +85,33 @@ config:
         # help_reading_speed: "wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article."
         # help_language: "You can change the language of wallabag interface."
         # help_pocket_consumer_key: "Required for Pocket import. You can create it in your Pocket account."
-    form_rss:
+    form_feed:
         description: 'با خوراک آر-اس-اس که wallabag در اختیارتان می‌گذارد، می‌توانید مقاله‌های ذخیره‌شده را در نرم‌افزار آر-اس-اس دلخواه خود بخوانید. برای این کار نخست باید یک کد بسازید.'
         token_label: 'کد آر-اس-اس'
         no_token: 'بدون کد'
         token_create: 'کد خود را بسازید'
         token_reset: 'بازنشانی کد'
-        rss_links: 'پیوند آر-اس-اس'
-        rss_link:
+        feed_links: 'پیوند آر-اس-اس'
+        feed_link:
             unread: 'خوانده‌نشده'
             starred: 'برگزیده'
             archive: 'بایگانی'
             # all: 'All'
-        rss_limit: 'محدودیت آر-اس-اس'
+        feed_limit: 'محدودیت آر-اس-اس'
     form_user:
-        two_factor_description: "با فعال‌کردن تأیید ۲مرحله‌ای هر بار که اتصال تأییدنشده‌ای برقرار شد، به شما یک کد از راه ایمیل فرستاده می‌شود"
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'نام'
         email_label: 'نشانی ایمیل'
-        twoFactorAuthentication_label: 'تأیید ۲مرحله‌ای'
-        # help_twoFactorAuthentication: "If you enable 2FA, each time you want to login to wallabag, you'll receive a code by email."
+        two_factor:
+            # emailTwoFactor_label: 'Using email (receive a code by email)'
+            # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, Authy or FreeOTP, to get a one time code)'
+            # table_method: Method
+            # table_state: State
+            # table_action: Action
+            # state_enabled: Enabled
+            # state_disabled: Disabled
+            # action_email: Use email
+            # action_app: Use OTP App
         delete:
             # title: Delete my account (a.k.a danger zone)
             # description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
@@ -159,6 +169,15 @@ config:
         #         and: 'One rule AND another'
         #         matches: 'Tests that a <i>subject</i> matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>'
         #         notmatches: 'Tests that a <i>subject</i> doesn''t match match a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
+    otp:
+        # page_title: Two-factor authentication
+        # app:
+        #     two_factor_code_description_1: You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password. It'll disapear after a page reload.
+        #     two_factor_code_description_2: 'You can scan that QR Code with your app:'
+        #     two_factor_code_description_3: 'Also, save these backup codes in a safe place, you can use them in case you lose access to your OTP app:'
+        #     two_factor_code_description_4: 'Test an OTP code from your configured app:'
+        #     cancel: Cancel
+        #     enable: Enable
 
 entry:
     # default_title: 'Title of the entry'
@@ -353,7 +372,7 @@ quickstart:
         title: 'برنامه را تنظیم کنید'
         # description: 'In order to have an application which suits you, have a look into the configuration of wallabag.'
         language: 'زبان و نمای برنامه را تغییر دهید'
-        rss: 'خوراک آر-اس-اس را فعال کنید'
+        feed: 'خوراک آر-اس-اس را فعال کنید'
         tagging_rules: 'قانون‌های برچسب‌گذاری خودکار مقاله‌هایتان را تعریف کنید'
     admin:
         title: 'مدیریت'
@@ -404,6 +423,8 @@ tag:
     new:
         # add: 'Add'
         # placeholder: 'You can add several tags, separated by a comma.'
+    rename:
+        # placeholder: 'You can update tag name.'
 
 # export:
 #     footer_template: '<div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p></div>'
@@ -529,7 +550,8 @@ user:
         email_label: 'نشانی ایمیل'
         # enabled_label: 'Enabled'
         # last_login_label: 'Last login'
-        # twofactor_label: Two factor authentication
+        # twofactor_email_label: Two factor authentication by email
+        # twofactor_google_label: Two factor authentication by OTP app
         # save: Save
         # delete: Delete
         # delete_confirm: Are you sure?
@@ -567,10 +589,10 @@ flashes:
             password_updated: 'رمز به‌روز شد'
             password_not_updated_demo: "در حالت نمایشی نمی‌توانید رمز کاربر را عوض کنید."
             user_updated: 'اطلاعات به‌روز شد'
-            rss_updated: 'اطلاعات آر-اس-اس به‌روز شد'
+            feed_updated: 'اطلاعات آر-اس-اس به‌روز شد'
             tagging_rules_updated: 'برچسب‌گذاری خودکار به‌روز شد'
             tagging_rules_deleted: 'قانون برچسب‌گذاری پاک شد'
-            rss_token_updated: 'کد آر-اس-اس به‌روز شد'
+            feed_token_updated: 'کد آر-اس-اس به‌روز شد'
             # annotations_reset: Annotations reset
             # tags_reset: Tags reset
             # entries_reset: Entries reset
@@ -588,9 +610,11 @@ flashes:
             entry_starred: 'مقاله برگزیده شد'
             entry_unstarred: 'مقاله نابرگزیده شد'
             entry_deleted: 'مقاله پاک شد'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'برچسب افزوده شد'
+            # tag_renamed: 'Tag renamed'
     import:
         notice:
             failed: 'درون‌ریزی شکست خورد. لطفاً دوباره تلاش کنید.'

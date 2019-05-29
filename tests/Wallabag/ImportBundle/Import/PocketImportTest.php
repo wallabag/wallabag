@@ -2,10 +2,8 @@
 
 namespace Tests\Wallabag\ImportBundle\Import;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
-use GuzzleHttp\Subscriber\Mock;
+use GuzzleHttp\Psr7\Response;
+use Http\Mock\Client as HttpMockClient;
 use M6Web\Component\RedisMock\RedisMockFactory;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
@@ -38,16 +36,11 @@ class PocketImportTest extends TestCase
 
     public function testOAuthRequest()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, ['Content-Type' => 'application/json'], Stream::factory(json_encode(['code' => 'wunderbar_code']))),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], json_encode(['code' => 'wunderbar_code'])));
 
         $pocketImport = $this->getPocketImport();
-        $pocketImport->setClient($client);
+        $pocketImport->setClient($httpMockClient);
 
         $code = $pocketImport->getRequestToken('http://0.0.0.0/redirect');
 
@@ -56,16 +49,11 @@ class PocketImportTest extends TestCase
 
     public function testOAuthRequestBadResponse()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(403),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(403));
 
         $pocketImport = $this->getPocketImport();
-        $pocketImport->setClient($client);
+        $pocketImport->setClient($httpMockClient);
 
         $code = $pocketImport->getRequestToken('http://0.0.0.0/redirect');
 
@@ -78,16 +66,11 @@ class PocketImportTest extends TestCase
 
     public function testOAuthAuthorize()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, ['Content-Type' => 'application/json'], Stream::factory(json_encode(['access_token' => 'wunderbar_token']))),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], json_encode(['access_token' => 'wunderbar_token'])));
 
         $pocketImport = $this->getPocketImport();
-        $pocketImport->setClient($client);
+        $pocketImport->setClient($httpMockClient);
 
         $res = $pocketImport->authorize('wunderbar_code');
 
@@ -97,16 +80,11 @@ class PocketImportTest extends TestCase
 
     public function testOAuthAuthorizeBadResponse()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(403),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(403));
 
         $pocketImport = $this->getPocketImport();
-        $pocketImport->setClient($client);
+        $pocketImport->setClient($httpMockClient);
 
         $res = $pocketImport->authorize('wunderbar_code');
 
@@ -122,94 +100,90 @@ class PocketImportTest extends TestCase
      */
     public function testImport()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, ['Content-Type' => 'application/json'], Stream::factory(json_encode(['access_token' => 'wunderbar_token']))),
-            new Response(200, ['Content-Type' => 'application/json'], Stream::factory('
-                {
-                    "status": 1,
-                    "list": {
-                        "229279689": {
-                            "item_id": "229279689",
-                            "resolved_id": "229279689",
-                            "given_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview",
-                            "given_title": "The Massive Ryder Cup Preview - The Triangle Blog - Grantland",
-                            "favorite": "1",
-                            "status": "1",
-                            "time_added": "1473020899",
-                            "time_updated": "1473020899",
-                            "time_read": "0",
-                            "time_favorited": "0",
-                            "sort_id": 0,
-                            "resolved_title": "The Massive Ryder Cup Preview",
-                            "resolved_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview",
-                            "excerpt": "The list of things I love about the Ryder Cup is so long that it could fill a (tedious) novel, and golf fans can probably guess most of them.",
-                            "is_article": "1",
-                            "is_index": "0",
-                            "has_video": "1",
-                            "has_image": "1",
-                            "word_count": "3197",
-                            "images": {
-                                "1": {
-                                    "item_id": "229279689",
-                                    "image_id": "1",
-                                    "src": "http://a.espncdn.com/combiner/i?img=/photo/2012/0927/grant_g_ryder_cr_640.jpg&w=640&h=360",
-                                    "width": "0",
-                                    "height": "0",
-                                    "credit": "Jamie Squire/Getty Images",
-                                    "caption": ""
-                                }
-                            },
-                            "videos": {
-                                "1": {
-                                    "item_id": "229279689",
-                                    "video_id": "1",
-                                    "src": "http://www.youtube.com/v/Er34PbFkVGk?version=3&hl=en_US&rel=0",
-                                    "width": "420",
-                                    "height": "315",
-                                    "type": "1",
-                                    "vid": "Er34PbFkVGk"
-                                }
-                            },
-                            "tags": {
-                                "grantland": {
-                                    "item_id": "1147652870",
-                                    "tag": "grantland"
-                                },
-                                "Ryder Cup": {
-                                    "item_id": "1147652870",
-                                    "tag": "Ryder Cup"
-                                }
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], json_encode(['access_token' => 'wunderbar_token'])));
+        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], <<<'JSON'
+            {
+                "status": 1,
+                "list": {
+                    "229279689": {
+                        "item_id": "229279689",
+                        "resolved_id": "229279689",
+                        "given_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview",
+                        "given_title": "The Massive Ryder Cup Preview - The Triangle Blog - Grantland",
+                        "favorite": "1",
+                        "status": "1",
+                        "time_added": "1473020899",
+                        "time_updated": "1473020899",
+                        "time_read": "0",
+                        "time_favorited": "0",
+                        "sort_id": 0,
+                        "resolved_title": "The Massive Ryder Cup Preview",
+                        "resolved_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview",
+                        "excerpt": "The list of things I love about the Ryder Cup is so long that it could fill a (tedious) novel, and golf fans can probably guess most of them.",
+                        "is_article": "1",
+                        "is_index": "0",
+                        "has_video": "1",
+                        "has_image": "1",
+                        "word_count": "3197",
+                        "images": {
+                            "1": {
+                                "item_id": "229279689",
+                                "image_id": "1",
+                                "src": "http://a.espncdn.com/combiner/i?img=/photo/2012/0927/grant_g_ryder_cr_640.jpg&w=640&h=360",
+                                "width": "0",
+                                "height": "0",
+                                "credit": "Jamie Squire/Getty Images",
+                                "caption": ""
                             }
                         },
-                        "229279690": {
-                            "item_id": "229279689",
-                            "resolved_id": "229279689",
-                            "given_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview",
-                            "given_title": "The Massive Ryder Cup Preview - The Triangle Blog - Grantland",
-                            "favorite": "1",
-                            "status": "1",
-                            "time_added": "1473020899",
-                            "time_updated": "1473020899",
-                            "time_read": "0",
-                            "time_favorited": "0",
-                            "sort_id": 1,
-                            "resolved_title": "The Massive Ryder Cup Preview",
-                            "resolved_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview",
-                            "excerpt": "The list of things I love about the Ryder Cup is so long that it could fill a (tedious) novel, and golf fans can probably guess most of them.",
-                            "is_article": "1",
-                            "is_index": "0",
-                            "has_video": "0",
-                            "has_image": "0",
-                            "word_count": "3197"
+                        "videos": {
+                            "1": {
+                                "item_id": "229279689",
+                                "video_id": "1",
+                                "src": "http://www.youtube.com/v/Er34PbFkVGk?version=3&hl=en_US&rel=0",
+                                "width": "420",
+                                "height": "315",
+                                "type": "1",
+                                "vid": "Er34PbFkVGk"
+                            }
+                        },
+                        "tags": {
+                            "grantland": {
+                                "item_id": "1147652870",
+                                "tag": "grantland"
+                            },
+                            "Ryder Cup": {
+                                "item_id": "1147652870",
+                                "tag": "Ryder Cup"
+                            }
                         }
+                    },
+                    "229279690": {
+                        "item_id": "229279689",
+                        "resolved_id": "229279689",
+                        "given_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview",
+                        "given_title": "The Massive Ryder Cup Preview - The Triangle Blog - Grantland",
+                        "favorite": "1",
+                        "status": "1",
+                        "time_added": "1473020899",
+                        "time_updated": "1473020899",
+                        "time_read": "0",
+                        "time_favorited": "0",
+                        "sort_id": 1,
+                        "resolved_title": "The Massive Ryder Cup Preview",
+                        "resolved_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview",
+                        "excerpt": "The list of things I love about the Ryder Cup is so long that it could fill a (tedious) novel, and golf fans can probably guess most of them.",
+                        "is_article": "1",
+                        "is_index": "0",
+                        "has_video": "0",
+                        "has_image": "0",
+                        "word_count": "3197"
                     }
                 }
-            ')),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+            }
+JSON
+));
 
         $pocketImport = $this->getPocketImport('ConsumerKey', 1);
 
@@ -240,7 +214,7 @@ class PocketImportTest extends TestCase
             ->method('updateEntry')
             ->willReturn($entry);
 
-        $pocketImport->setClient($client);
+        $pocketImport->setClient($httpMockClient);
         $pocketImport->authorize('wunderbar_code');
 
         $res = $pocketImport->import();
@@ -254,56 +228,52 @@ class PocketImportTest extends TestCase
      */
     public function testImportAndMarkAllAsRead()
     {
-        $client = new Client();
-
-        $mock = new Mock([
-            new Response(200, ['Content-Type' => 'application/json'], Stream::factory(json_encode(['access_token' => 'wunderbar_token']))),
-            new Response(200, ['Content-Type' => 'application/json'], Stream::factory('
-                {
-                    "status": 1,
-                    "list": {
-                        "229279689": {
-                            "item_id": "229279689",
-                            "resolved_id": "229279689",
-                            "given_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview",
-                            "given_title": "The Massive Ryder Cup Preview - The Triangle Blog - Grantland",
-                            "favorite": "1",
-                            "status": "1",
-                            "time_added": "1473020899",
-                            "time_updated": "1473020899",
-                            "time_read": "0",
-                            "time_favorited": "0",
-                            "sort_id": 0,
-                            "excerpt": "The list of things I love about the Ryder Cup is so long that it could fill a (tedious) novel, and golf fans can probably guess most of them.",
-                            "is_article": "1",
-                            "has_video": "1",
-                            "has_image": "1",
-                            "word_count": "3197"
-                        },
-                        "229279690": {
-                            "item_id": "229279689",
-                            "resolved_id": "229279689",
-                            "given_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview/2",
-                            "given_title": "The Massive Ryder Cup Preview - The Triangle Blog - Grantland",
-                            "favorite": "1",
-                            "status": "0",
-                            "time_added": "1473020899",
-                            "time_updated": "1473020899",
-                            "time_read": "0",
-                            "time_favorited": "0",
-                            "sort_id": 1,
-                            "excerpt": "The list of things I love about the Ryder Cup is so long that it could fill a (tedious) novel, and golf fans can probably guess most of them.",
-                            "is_article": "1",
-                            "has_video": "0",
-                            "has_image": "0",
-                            "word_count": "3197"
-                        }
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], json_encode(['access_token' => 'wunderbar_token'])));
+        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], <<<'JSON'
+            {
+                "status": 1,
+                "list": {
+                    "229279689": {
+                        "item_id": "229279689",
+                        "resolved_id": "229279689",
+                        "given_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview",
+                        "given_title": "The Massive Ryder Cup Preview - The Triangle Blog - Grantland",
+                        "favorite": "1",
+                        "status": "1",
+                        "time_added": "1473020899",
+                        "time_updated": "1473020899",
+                        "time_read": "0",
+                        "time_favorited": "0",
+                        "sort_id": 0,
+                        "excerpt": "The list of things I love about the Ryder Cup is so long that it could fill a (tedious) novel, and golf fans can probably guess most of them.",
+                        "is_article": "1",
+                        "has_video": "1",
+                        "has_image": "1",
+                        "word_count": "3197"
+                    },
+                    "229279690": {
+                        "item_id": "229279689",
+                        "resolved_id": "229279689",
+                        "given_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview/2",
+                        "given_title": "The Massive Ryder Cup Preview - The Triangle Blog - Grantland",
+                        "favorite": "1",
+                        "status": "0",
+                        "time_added": "1473020899",
+                        "time_updated": "1473020899",
+                        "time_read": "0",
+                        "time_favorited": "0",
+                        "sort_id": 1,
+                        "excerpt": "The list of things I love about the Ryder Cup is so long that it could fill a (tedious) novel, and golf fans can probably guess most of them.",
+                        "is_article": "1",
+                        "has_video": "0",
+                        "has_image": "0",
+                        "word_count": "3197"
                     }
                 }
-            ')),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+            }
+JSON
+));
 
         $pocketImport = $this->getPocketImport('ConsumerKey', 2);
 
@@ -335,7 +305,7 @@ class PocketImportTest extends TestCase
             ->method('updateEntry')
             ->willReturn($entry);
 
-        $pocketImport->setClient($client);
+        $pocketImport->setClient($httpMockClient);
         $pocketImport->authorize('wunderbar_code');
 
         $res = $pocketImport->setMarkAsRead(true)->import();
@@ -349,7 +319,7 @@ class PocketImportTest extends TestCase
      */
     public function testImportWithRabbit()
     {
-        $client = new Client();
+        $httpMockClient = new HttpMockClient();
 
         $body = <<<'JSON'
 {
@@ -374,19 +344,16 @@ class PocketImportTest extends TestCase
 }
 JSON;
 
-        $mock = new Mock([
-            new Response(200, ['Content-Type' => 'application/json'], Stream::factory(json_encode(['access_token' => 'wunderbar_token']))),
-            new Response(200, ['Content-Type' => 'application/json'], Stream::factory('
-                {
-                    "status": 1,
-                    "list": {
-                        "229279690": ' . $body . '
-                    }
+        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], json_encode(['access_token' => 'wunderbar_token'])));
+        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], <<<JSON
+            {
+                "status": 1,
+                "list": {
+                    "229279690": $body
                 }
-            ')),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+            }
+JSON
+        ));
 
         $pocketImport = $this->getPocketImport();
 
@@ -420,7 +387,7 @@ JSON;
             ->method('publish')
             ->with(json_encode($bodyAsArray));
 
-        $pocketImport->setClient($client);
+        $pocketImport->setClient($httpMockClient);
         $pocketImport->setProducer($producer);
         $pocketImport->authorize('wunderbar_code');
 
@@ -435,7 +402,7 @@ JSON;
      */
     public function testImportWithRedis()
     {
-        $client = new Client();
+        $httpMockClient = new HttpMockClient();
 
         $body = <<<'JSON'
 {
@@ -460,19 +427,16 @@ JSON;
 }
 JSON;
 
-        $mock = new Mock([
-            new Response(200, ['Content-Type' => 'application/json'], Stream::factory(json_encode(['access_token' => 'wunderbar_token']))),
-            new Response(200, ['Content-Type' => 'application/json'], Stream::factory('
-                {
-                    "status": 1,
-                    "list": {
-                        "229279690": ' . $body . '
-                    }
+        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], json_encode(['access_token' => 'wunderbar_token'])));
+        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], <<<JSON
+            {
+                "status": 1,
+                "list": {
+                    "229279690": $body
                 }
-            ')),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+            }
+JSON
+        ));
 
         $pocketImport = $this->getPocketImport();
 
@@ -499,7 +463,7 @@ JSON;
         $queue = new RedisQueue($redisMock, 'pocket');
         $producer = new Producer($queue);
 
-        $pocketImport->setClient($client);
+        $pocketImport->setClient($httpMockClient);
         $pocketImport->setProducer($producer);
         $pocketImport->authorize('wunderbar_code');
 
@@ -513,17 +477,13 @@ JSON;
 
     public function testImportBadResponse()
     {
-        $client = new Client();
+        $httpMockClient = new HttpMockClient();
 
-        $mock = new Mock([
-            new Response(200, ['Content-Type' => 'application/json'], Stream::factory(json_encode(['access_token' => 'wunderbar_token']))),
-            new Response(403),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], json_encode(['access_token' => 'wunderbar_token'])));
+        $httpMockClient->addResponse(new Response(403));
 
         $pocketImport = $this->getPocketImport();
-        $pocketImport->setClient($client);
+        $pocketImport->setClient($httpMockClient);
         $pocketImport->authorize('wunderbar_code');
 
         $res = $pocketImport->import();
@@ -537,25 +497,23 @@ JSON;
 
     public function testImportWithExceptionFromGraby()
     {
-        $client = new Client();
+        $httpMockClient = new HttpMockClient();
 
-        $mock = new Mock([
-            new Response(200, ['Content-Type' => 'application/json'], Stream::factory(json_encode(['access_token' => 'wunderbar_token']))),
-            new Response(200, ['Content-Type' => 'application/json'], Stream::factory('
-                {
-                    "status": 1,
-                    "list": {
-                        "229279689": {
-                            "status": "1",
-                            "favorite": "1",
-                            "resolved_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview"
-                        }
+        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], json_encode(['access_token' => 'wunderbar_token'])));
+        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], <<<'JSON'
+            {
+                "status": 1,
+                "list": {
+                    "229279689": {
+                        "status": "1",
+                        "favorite": "1",
+                        "resolved_url": "http://www.grantland.com/blog/the-triangle/post/_/id/38347/ryder-cup-preview"
                     }
                 }
-            ')),
-        ]);
-
-        $client->getEmitter()->attach($mock);
+            }
+            
+JSON
+        ));
 
         $pocketImport = $this->getPocketImport('ConsumerKey', 1);
 
@@ -579,7 +537,7 @@ JSON;
             ->method('updateEntry')
             ->will($this->throwException(new \Exception()));
 
-        $pocketImport->setClient($client);
+        $pocketImport->setClient($httpMockClient);
         $pocketImport->authorize('wunderbar_code');
 
         $res = $pocketImport->import();

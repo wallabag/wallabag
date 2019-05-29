@@ -8,4 +8,3 @@ parameters:
     test_database_path: "%env(TEST_DATABASE_PATH)%"
     env(TEST_DATABASE_PATH): "%kernel.project_dir%/data/db/wallabag_test.sqlite"
     test_database_charset: utf8
-    test_database_driver_class: ~

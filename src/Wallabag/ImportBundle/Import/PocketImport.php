@@ -2,13 +2,22 @@
 
 namespace Wallabag\ImportBundle\Import;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
+use Http\Client\Common\HttpMethodsClient;
+use Http\Client\Common\Plugin\ErrorPlugin;
+use Http\Client\Common\PluginClient;
+use Http\Client\Exception\RequestException;
+use Http\Client\HttpClient;
+use Http\Discovery\MessageFactoryDiscovery;
+use Http\Message\MessageFactory;
+use Psr\Http\Message\ResponseInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 
 class PocketImport extends AbstractImport
 {
     const NB_ELEMENTS = 5000;
+    /**
+     * @var HttpMethodsClient
+     */
     private $client;
     private $accessToken;
 
@@ -55,24 +64,18 @@ class PocketImport extends AbstractImport
      */
     public function getRequestToken($redirectUri)
     {
-        $request = $this->client->createRequest('POST', 'https://getpocket.com/v3/oauth/request',
-            [
-                'body' => json_encode([
-                    'consumer_key' => $this->user->getConfig()->getPocketConsumerKey(),
-                    'redirect_uri' => $redirectUri,
-                ]),
-            ]
-        );
-
         try {
-            $response = $this->client->send($request);
+            $response = $this->client->post('https://getpocket.com/v3/oauth/request', [], json_encode([
+                'consumer_key' => $this->user->getConfig()->getPocketConsumerKey(),
+                'redirect_uri' => $redirectUri,
+            ]));
         } catch (RequestException $e) {
             $this->logger->error(sprintf('PocketImport: Failed to request token: %s', $e->getMessage()), ['exception' => $e]);
 
             return false;
         }
 
-        return $response->json()['code'];
+        return $this->jsonDecode($response)['code'];
     }
 
     /**
@@ -85,24 +88,18 @@ class PocketImport extends AbstractImport
      */
     public function authorize($code)
     {
-        $request = $this->client->createRequest('POST', 'https://getpocket.com/v3/oauth/authorize',
-            [
-                'body' => json_encode([
-                    'consumer_key' => $this->user->getConfig()->getPocketConsumerKey(),
-                    'code' => $code,
-                ]),
-            ]
-        );
-
         try {
-            $response = $this->client->send($request);
+            $response = $this->client->post('https://getpocket.com/v3/oauth/authorize', [], json_encode([
+                'consumer_key' => $this->user->getConfig()->getPocketConsumerKey(),
+                'code' => $code,
+            ]));
         } catch (RequestException $e) {
             $this->logger->error(sprintf('PocketImport: Failed to authorize client: %s', $e->getMessage()), ['exception' => $e]);
 
             return false;
         }
 
-        $this->accessToken = $response->json()['access_token'];
+        $this->accessToken = $this->jsonDecode($response)['access_token'];
 
         return true;
     }
@@ -114,29 +111,23 @@ class PocketImport extends AbstractImport
     {
         static $run = 0;
 
-        $request = $this->client->createRequest('POST', 'https://getpocket.com/v3/get',
-            [
-                'body' => json_encode([
-                    'consumer_key' => $this->user->getConfig()->getPocketConsumerKey(),
-                    'access_token' => $this->accessToken,
-                    'detailType' => 'complete',
-                    'state' => 'all',
-                    'sort' => 'newest',
-                    'count' => self::NB_ELEMENTS,
-                    'offset' => $offset,
-                ]),
-            ]
-        );
-
         try {
-            $response = $this->client->send($request);
+            $response = $this->client->post('https://getpocket.com/v3/get', [], json_encode([
+                'consumer_key' => $this->user->getConfig()->getPocketConsumerKey(),
+                'access_token' => $this->accessToken,
+                'detailType' => 'complete',
+                'state' => 'all',
+                'sort' => 'newest',
+                'count' => self::NB_ELEMENTS,
+                'offset' => $offset,
+            ]));
         } catch (RequestException $e) {
             $this->logger->error(sprintf('PocketImport: Failed to import: %s', $e->getMessage()), ['exception' => $e]);
 
             return false;
         }
 
-        $entries = $response->json();
+        $entries = $this->jsonDecode($response);
 
         if ($this->producer) {
             $this->parseEntriesForProducer($entries['list']);
@@ -159,13 +150,14 @@ class PocketImport extends AbstractImport
     }
 
     /**
-     * Set the Guzzle client.
+     * Set the Http client.
      *
-     * @param Client $client
+     * @param HttpClient          $client
+     * @param MessageFactory|null $messageFactory
      */
-    public function setClient(Client $client)
+    public function setClient(HttpClient $client, MessageFactory $messageFactory = null)
     {
-        $this->client = $client;
+        $this->client = new HttpMethodsClient(new PluginClient($client, [new ErrorPlugin()]), $messageFactory ?: MessageFactoryDiscovery::find());
     }
 
     /**
@@ -206,7 +198,7 @@ class PocketImport extends AbstractImport
         $this->fetchContent($entry, $url);
 
         // 0, 1, 2 - 1 if the item is archived - 2 if the item should be deleted
-        $entry->setArchived(1 === (int) $importedEntry['status'] || $this->markAsRead);
+        $entry->updateArchived(1 === (int) $importedEntry['status'] || $this->markAsRead);
 
         // 0 or 1 - 1 if the item is starred
         $entry->setStarred(1 === (int) $importedEntry['favorite']);
@@ -251,5 +243,16 @@ class PocketImport extends AbstractImport
         $importedEntry['status'] = '1';
 
         return $importedEntry;
+    }
+
+    protected function jsonDecode(ResponseInterface $response)
+    {
+        $data = json_decode((string) $response->getBody(), true);
+
+        if (JSON_ERROR_NONE !== json_last_error()) {
+            throw new \InvalidArgumentException('Unable to parse JSON data: ' . json_last_error_msg());
+        }
+
+        return $data;
     }
 }

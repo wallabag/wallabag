@@ -522,9 +522,12 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $title = $crawler->filter('div[id=article] h1')->extract(['_text']));
+        $title = $crawler->filter('div[id=article] h1')->extract(['_text']);
+        $this->assertGreaterThan(1, $title);
         $this->assertContains('My updated title hehe :)', $title[0]);
-        $this->assertSame(1, \count($stats = $crawler->filter('div[class=tools] ul[class=stats] li a[class=tool]')->extract(['_text'])));
+
+        $stats = $crawler->filter('div[class=tools] ul[class=stats] li a[class=tool]')->extract(['_text']);
+        $this->assertCount(1, $stats);
         $this->assertNotContains('example.io', trim($stats[0]));
     }
 
@@ -620,7 +623,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $content->setMimetype('text/html');
         $content->setTitle('test title entry');
         $content->setContent('This is my content /o/');
-        $content->setArchived(true);
+        $content->updateArchived(true);
         $content->setLanguage('fr');
 
         $em->persist($content);
@@ -773,7 +776,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl($this->url);
-        $entry->setArchived(false);
+        $entry->updateArchived(false);
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
 
@@ -984,8 +987,13 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client->request('GET', '/share/' . $content->getId());
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
-        // follow link with uid
-        $crawler = $client->followRedirect();
+        $shareUrl = $client->getResponse()->getTargetUrl();
+
+        // use a new client to have a fresh empty session (instead of a logged one from the previous client)
+        $client->restart();
+
+        $client->request('GET', $shareUrl);
+
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertContains('max-age=25200', $client->getResponse()->headers->get('cache-control'));
         $this->assertContains('public', $client->getResponse()->headers->get('cache-control'));
@@ -1000,9 +1008,6 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client->getContainer()->get('craue_config')->set('share_public', 0);
         $client->request('GET', '/share/' . $content->getUid());
         $this->assertSame(404, $client->getResponse()->getStatusCode());
-
-        $client->request('GET', '/view/' . $content->getId());
-        $this->assertContains('no-cache', $client->getResponse()->headers->get('cache-control'));
 
         // removing the share
         $client->request('GET', '/share/delete/' . $content->getId());
@@ -1244,7 +1249,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl('http://0.0.0.0/foo/baz/qux');
         $entry->setTitle('Le manège');
-        $entry->setArchived(true);
+        $entry->updateArchived(true);
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
 
@@ -1274,7 +1279,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl('http://domain/qux');
         $entry->setTitle('Le manège');
-        $entry->setArchived(true);
+        $entry->updateArchived(true);
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
 
@@ -1324,10 +1329,6 @@ class EntryControllerTest extends WallabagCoreTestCase
             'zh_CN' => [
                 'http://www.hao123.com/shequ?__noscript__-=1',
                 'zh_CN',
-            ],
-            'ru' => [
-                'https://www.kp.ru/daily/26879.7/3921982/',
-                'ru',
             ],
             'pt_BR' => [
                 'https://politica.estadao.com.br/noticias/eleicoes,campanha-catatonica,70002491983',
@@ -1493,5 +1494,31 @@ class EntryControllerTest extends WallabagCoreTestCase
         $link = $crawler->filter('body div#article div.tools ul.tags li.chip a')->extract('href')[1];
 
         $this->assertSame(sprintf('/remove-tag/%s/%s', $entry->getId(), $tag->getId()), $link);
+    }
+
+    public function testRandom()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $client->request('GET', '/unread/random');
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'Unread random');
+
+        $client->request('GET', '/starred/random');
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'Starred random');
+
+        $client->request('GET', '/archive/random');
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'Archive random');
+
+        $client->request('GET', '/untagged/random');
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'Untagged random');
+
+        $client->request('GET', '/all/random');
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'All random');
     }
 }

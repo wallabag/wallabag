@@ -11,8 +11,6 @@ parameters:
     # database_password: %env.database_password%
 
     database_driver: pdo_mysql
-    database_driver_class: ~
-    # database_driver_class: Wallabag\CoreBundle\Doctrine\DBAL\Driver\CustomPostgreSQLDriver
     database_host: 127.0.0.1
     database_port: ~
     database_name: wallabag
@@ -27,10 +25,13 @@ parameters:
 
     domain_name: https://your-wallabag-url-instance.com
 
-    mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: ~
-    mailer_password: ~
+    mailer_transport:  smtp
+    mailer_user:       ~
+    mailer_password:   ~
+    mailer_host:       127.0.0.1
+    mailer_port:       false
+    mailer_encryption: ~
+    mailer_auth_mode:  ~
 
     locale: en
 

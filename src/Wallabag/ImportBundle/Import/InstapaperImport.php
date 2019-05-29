@@ -62,7 +62,7 @@ class InstapaperImport extends AbstractImport
         }
 
         $entries = [];
-        $handle = fopen($this->filepath, 'rb');
+        $handle = fopen($this->filepath, 'r');
         while (false !== ($data = fgetcsv($handle, 10240))) {
             if ('URL' === $data[0]) {
                 continue;
@@ -79,7 +79,6 @@ class InstapaperImport extends AbstractImport
             $entries[] = [
                 'url' => $data[0],
                 'title' => $data[1],
-                'status' => $data[3],
                 'is_archived' => 'Archive' === $data[3] || 'Starred' === $data[3],
                 'is_starred' => 'Starred' === $data[3],
                 'html' => false,
@@ -93,6 +92,10 @@ class InstapaperImport extends AbstractImport
 
             return false;
         }
+
+        // most recent articles are first, which means we should create them at the end so they will show up first
+        // as Instapaper doesn't export the creation date of the article
+        $entries = array_reverse($entries);
 
         if ($this->producer) {
             $this->parseEntriesForProducer($entries);
@@ -147,7 +150,7 @@ class InstapaperImport extends AbstractImport
             );
         }
 
-        $entry->setArchived($importedEntry['is_archived']);
+        $entry->updateArchived($importedEntry['is_archived']);
         $entry->setStarred($importedEntry['is_starred']);
 
         $this->em->persist($entry);

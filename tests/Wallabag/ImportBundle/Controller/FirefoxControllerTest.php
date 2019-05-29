@@ -122,7 +122,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty($content->getMimetype(), 'Mimetype for http://lexpansion.lexpress.fr is ok');
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://lexpansion.lexpress.fr is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for http://lexpansion.lexpress.fr is ok');
-        $this->assertSame(3, \count($content->getTags()));
+        $this->assertCount(3, $content->getTags());
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')

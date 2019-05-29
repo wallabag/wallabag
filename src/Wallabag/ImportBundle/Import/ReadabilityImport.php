@@ -123,7 +123,7 @@ class ReadabilityImport extends AbstractImport
         // update entry with content (in case fetching failed, the given entry will be return)
         $this->fetchContent($entry, $data['url'], $data);
 
-        $entry->setArchived($data['is_archived']);
+        $entry->updateArchived($data['is_archived']);
         $entry->setStarred($data['is_starred']);
         $entry->setCreatedAt(new \DateTime($data['created_at']));
 

@@ -94,8 +94,9 @@ class InstallCommand extends ContainerAwareCommand
         $status = '<info>OK!</info>';
         $help = '';
 
+        $conn = $this->getContainer()->get('doctrine')->getManager()->getConnection();
+
         try {
-            $conn = $this->getContainer()->get('doctrine')->getManager()->getConnection();
             $conn->connect();
         } catch (\Exception $e) {
             if (false === strpos($e->getMessage(), 'Unknown database')
@@ -253,7 +254,7 @@ class InstallCommand extends ContainerAwareCommand
         $question->setHidden(true);
         $user->setPlainPassword($this->io->askQuestion($question));
 
-        $user->setEmail($this->io->ask('Email', ''));
+        $user->setEmail($this->io->ask('Email', 'wallabag@wallabag.io'));
 
         $user->setEnabled(true);
         $user->addRole('ROLE_SUPER_ADMIN');

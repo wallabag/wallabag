@@ -31,9 +31,9 @@ abstract class WallabagApiTestCase extends WebTestCase
         $container = $client->getContainer();
 
         /** @var $userManager \FOS\UserBundle\Doctrine\UserManager */
-        $userManager = $container->get('fos_user.user_manager');
+        $userManager = $container->get('fos_user.user_manager.test');
         /** @var $loginManager \FOS\UserBundle\Security\LoginManager */
-        $loginManager = $container->get('fos_user.security.login_manager');
+        $loginManager = $container->get('fos_user.security.login_manager.test');
         $firewallName = $container->getParameter('fos_user.firewall_name');
 
         $this->user = $userManager->findUserBy(['username' => 'admin']);
@@ -47,5 +47,24 @@ abstract class WallabagApiTestCase extends WebTestCase
         $client->getCookieJar()->set(new Cookie($session->getName(), $session->getId()));
 
         return $client;
+    }
+
+    /**
+     * Return the ID for the user admin.
+     * Used because on heavy testing we don't want to re-create the database on each run.
+     * Which means "admin" user won't have id 1 all the time.
+     *
+     * @param string $username
+     *
+     * @return int
+     */
+    protected function getUserId($username = 'admin')
+    {
+        return $this->client
+            ->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUserName($username)
+            ->getId();
     }
 }

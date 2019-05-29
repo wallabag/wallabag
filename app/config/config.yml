@@ -46,7 +46,6 @@ twig:
 doctrine:
     dbal:
         driver: "%database_driver%"
-        driver_class: "%database_driver_class%"
         host: "%database_host%"
         port: "%database_port%"
         dbname: "%database_name%"
@@ -55,7 +54,6 @@ doctrine:
         charset: "%database_charset%"
         path: "%database_path%"
         unix_socket: "%database_socket%"
-        server_version: 5.6
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
@@ -79,10 +77,13 @@ doctrine_migrations:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host: "%mailer_host%"
-    username: "%mailer_user%"
-    password: "%mailer_password%"
+    transport:   "%mailer_transport%"
+    username:    "%mailer_user%"
+    password:    "%mailer_password%"
+    host:        "%mailer_host%"
+    port:        "%mailer_port%"
+    encryption:  "%mailer_encryption%"
+    auth_mode:   "%mailer_auth_mode%"
     spool:
         type: memory
 
@@ -197,10 +198,17 @@ fos_oauth_server:
             refresh_token_lifetime: 1209600
 
 scheb_two_factor:
-    trusted_computer:
+    trusted_device:
         enabled: true
         cookie_name: wllbg_trusted_computer
-        cookie_lifetime: 2592000
+        lifetime: 2592000
+
+    backup_codes:
+        enabled: "%twofactor_auth%"
+
+    google:
+        enabled: "%twofactor_auth%"
+        template: WallabagUserBundle:Authentication:form.html.twig
 
     email:
         enabled: "%twofactor_auth%"
@@ -357,3 +365,30 @@ jms_serializer:
         # see: https://github.com/schmittjoh/JMSSerializerBundle/pull/494
         datetime:
             default_format: "Y-m-d\\TH:i:sO" # ATOM
+
+# see https://github.com/symfony/symfony-standard/pull/1133
+sensio_framework_extra:
+   router:
+        annotations: false
+
+httplug:
+    clients:
+        wallabag_core:
+            factory: 'wallabag_core.http_client_factory'
+            config:
+                defaults:
+                    timeout: 10
+            plugins: ['httplug.plugin.logger']
+        wallabag_core.entry.download_images:
+            factory: 'httplug.factory.auto'
+            plugins: ['httplug.plugin.logger']
+        wallabag_import.pocket.client:
+            factory: 'httplug.factory.auto'
+            plugins:
+                - 'httplug.plugin.logger'
+                - header_defaults:
+                      headers:
+                          'content-type': 'application/json'
+                          'X-Accept': 'application/json'
+    discovery:
+        client: false

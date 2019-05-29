@@ -7,14 +7,14 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RssType extends AbstractType
+class FeedType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('rss_limit', null, [
-                'label' => 'config.form_rss.rss_limit',
-                'property_path' => 'rssLimit',
+            ->add('feed_limit', null, [
+                'label' => 'config.form_feed.feed_limit',
+                'property_path' => 'feedLimit',
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'config.form.save',
@@ -31,6 +31,6 @@ class RssType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'rss_config';
+        return 'feed_config';
     }
 }

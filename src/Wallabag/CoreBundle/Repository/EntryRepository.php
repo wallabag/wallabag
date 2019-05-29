@@ -3,11 +3,13 @@
 namespace Wallabag\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Helper\UrlHasher;
 
 class EntryRepository extends EntityRepository
 {
@@ -50,7 +52,7 @@ class EntryRepository extends EntityRepository
     public function getBuilderForArchiveByUser($userId)
     {
         return $this
-            ->getSortedQueryBuilderByUser($userId)
+            ->getSortedQueryBuilderByUser($userId, 'archivedAt', 'desc')
             ->andWhere('e.isArchived = true')
         ;
     }
@@ -110,8 +112,7 @@ class EntryRepository extends EntityRepository
      */
     public function getBuilderForUntaggedByUser($userId)
     {
-        return $this
-            ->sortQueryBuilder($this->getRawBuilderForUntaggedByUser($userId));
+        return $this->sortQueryBuilder($this->getRawBuilderForUntaggedByUser($userId));
     }
 
     /**
@@ -139,14 +140,29 @@ class EntryRepository extends EntityRepository
      * @param string $order
      * @param int    $since
      * @param string $tags
+     * @param string $detail     'metadata' or 'full'. Include content field if 'full'
+     *
+     * @todo Breaking change: replace default detail=full by detail=metadata in a future version
      *
      * @return Pagerfanta
      */
-    public function findEntries($userId, $isArchived = null, $isStarred = null, $isPublic = null, $sort = 'created', $order = 'asc', $since = 0, $tags = '')
+    public function findEntries($userId, $isArchived = null, $isStarred = null, $isPublic = null, $sort = 'created', $order = 'asc', $since = 0, $tags = '', $detail = 'full')
     {
+        if (!\in_array(strtolower($detail), ['full', 'metadata'], true)) {
+            throw new \Exception('Detail "' . $detail . '" parameter is wrong, allowed: full or metadata');
+        }
+
         $qb = $this->createQueryBuilder('e')
             ->leftJoin('e.tags', 't')
             ->where('e.user = :userId')->setParameter('userId', $userId);
+
+        if ('metadata' === $detail) {
+            $fieldNames = $this->getClassMetadata()->getFieldNames();
+            $fields = array_filter($fieldNames, function ($k) {
+                return 'content' !== $k;
+            });
+            $qb->select(sprintf('partial e.{%s}', implode(',', $fields)));
+        }
 
         if (null !== $isArchived) {
             $qb->andWhere('e.isArchived = :isArchived')->setParameter('isArchived', (bool) $isArchived);
@@ -193,6 +209,8 @@ class EntryRepository extends EntityRepository
             $qb->orderBy('e.id', $order);
         } elseif ('updated' === $sort) {
             $qb->orderBy('e.updatedAt', $order);
+        } elseif ('archived' === $sort) {
+            $qb->orderBy('e.archivedAt', $order);
         }
 
         $pagerAdapter = new DoctrineORMAdapter($qb, true, false);
@@ -324,15 +342,32 @@ class EntryRepository extends EntityRepository
      * Find an entry by its url and its owner.
      * If it exists, return the entry otherwise return false.
      *
-     * @param $url
-     * @param $userId
+     * @param string $url
+     * @param int    $userId
      *
      * @return Entry|bool
      */
     public function findByUrlAndUserId($url, $userId)
     {
+        return $this->findByHashedUrlAndUserId(
+            UrlHasher::hashUrl($url),
+            $userId
+        );
+    }
+
+    /**
+     * Find an entry by its hashed url and its owner.
+     * If it exists, return the entry otherwise return false.
+     *
+     * @param string $hashedUrl Url hashed using sha1
+     * @param int    $userId
+     *
+     * @return Entry|bool
+     */
+    public function findByHashedUrlAndUserId($hashedUrl, $userId)
+    {
         $res = $this->createQueryBuilder('e')
-            ->where('e.url = :url')->setParameter('url', urldecode($url))
+            ->where('e.hashedUrl = :hashed_url')->setParameter('hashed_url', $hashedUrl)
             ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
             ->getQuery()
             ->getResult();
@@ -416,8 +451,8 @@ class EntryRepository extends EntityRepository
     /**
      * Find all entries by url and owner.
      *
-     * @param $url
-     * @param $userId
+     * @param string $url
+     * @param int    $userId
      *
      * @return array
      */
@@ -428,6 +463,49 @@ class EntryRepository extends EntityRepository
             ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * Returns a random entry, filtering by status.
+     *
+     * @param int    $userId
+     * @param string $type   Can be unread, archive, starred, etc
+     *
+     * @throws NoResultException
+     *
+     * @return Entry
+     */
+    public function getRandomEntry($userId, $type = '')
+    {
+        $qb = $this->getQueryBuilderByUser($userId)
+            ->select('e.id');
+
+        switch ($type) {
+            case 'unread':
+                $qb->andWhere('e.isArchived = false');
+                break;
+            case 'archive':
+                $qb->andWhere('e.isArchived = true');
+                break;
+            case 'starred':
+                $qb->andWhere('e.isStarred = true');
+                break;
+            case 'untagged':
+                $qb->leftJoin('e.tags', 't');
+                $qb->andWhere('t.id is null');
+                break;
+        }
+
+        $ids = $qb->getQuery()->getArrayResult();
+
+        if (empty($ids)) {
+            throw new NoResultException();
+        }
+
+        // random select one in the list
+        $randomId = $ids[mt_rand(0, \count($ids) - 1)]['id'];
+
+        return $this->find($randomId);
     }
 
     /**
@@ -468,7 +546,6 @@ class EntryRepository extends EntityRepository
      */
     private function sortQueryBuilder(QueryBuilder $qb, $sortBy = 'createdAt', $direction = 'desc')
     {
-        return $qb
-            ->orderBy(sprintf('e.%s', $sortBy), $direction);
+        return $qb->orderBy(sprintf('e.%s', $sortBy), $direction);
     }
 }

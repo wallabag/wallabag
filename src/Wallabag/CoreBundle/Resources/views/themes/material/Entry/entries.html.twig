@@ -2,8 +2,8 @@
 
 {% block head %}
     {{ parent() }}
-    {% if tag is defined and app.user.config.rssToken %}
-        <link rel="alternate" type="application/rss+xml" href="{{ path('tag_rss', {'username': app.user.username, 'token': app.user.config.rssToken, 'slug': tag.slug}) }}" />
+    {% if tag is defined and app.user.config.feedToken %}
+        <link rel="alternate" type="application/atom+xml" href="{{ path('tag_feed', {'username': app.user.username, 'token': app.user.config.feedToken, 'slug': tag.slug}) }}" />
     {% endif %}
 {% endblock %}
 
@@ -21,12 +21,15 @@
 {% block content %}
     {% set listMode = app.user.config.listMode %}
     {% set currentRoute = app.request.attributes.get('_route') %}
+    {% if currentRoute == 'homepage' %}
+        {% set currentRoute = 'unread' %}
+    {% endif %}
     <div class="results">
         <div class="nb-results">
             {{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}
             <a href="{{ path('switch_view_mode') }}"><i class="material-icons">{% if listMode == 0 %}view_list{% else %}view_module{% endif %}</i></a>
-            {% if app.user.config.rssToken %}
-                {% include "@WallabagCore/themes/common/Entry/_rss_link.html.twig" %}
+            {% if app.user.config.feedToken %}
+                {% include "@WallabagCore/themes/common/Entry/_feed_link.html.twig" %}
             {% endif %}
         </div>
         {% if entries.getNbPages > 1 %}
@@ -59,9 +62,6 @@
     {% set currentTag = null %}
     {% if tag is defined %}
         {% set currentTag = tag.slug %}
-    {% endif %}
-    {% if currentRoute == 'homepage' %}
-        {% set currentRoute = 'unread' %}
     {% endif %}
         <h4 class="center">{{ 'entry.list.export_title'|trans }}</h4>
         <ul>

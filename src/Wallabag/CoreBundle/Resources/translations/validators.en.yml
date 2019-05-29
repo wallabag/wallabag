@@ -3,5 +3,5 @@ validator:
     password_too_short: 'Password should by at least 8 chars long'
     password_wrong_value: 'Wrong value for your current password'
     item_per_page_too_high: 'This will certainly kill the app'
-    rss_limit_too_high: 'This will certainly kill the app'
+    feed_limit_too_high: 'This will certainly kill the app'
     quote_length_too_high: 'The quote is too long. It should have {{ limit }} characters or less.'

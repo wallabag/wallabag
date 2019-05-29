@@ -37,6 +37,7 @@ menu:
         add_new_entry: 'Neuen Artikel hinzufügen'
         search: 'Suche'
         filter_entries: 'Artikel filtern'
+        # random_entry: Jump to a random entry from that list
         export: 'Exportieren'
     search_form:
         input_label: 'Suchbegriff hier eingeben'
@@ -53,11 +54,12 @@ config:
     page_title: 'Einstellungen'
     tab_menu:
         settings: 'Einstellungen'
-        rss: 'RSS'
+        feed: 'RSS'
         user_info: 'Benutzerinformation'
         password: 'Kennwort'
         rules: 'Tagging-Regeln'
         new_user: 'Benutzer hinzufügen'
+        reset: 'Zurücksetzen'
     form:
         save: 'Speichern'
     form_settings:
@@ -83,25 +85,33 @@ config:
         help_reading_speed: "wallabag berechnet eine Lesezeit pro Artikel. Hier kannst du definieren, ob du ein schneller oder langsamer Leser bist. wallabag wird die Lesezeiten danach neu berechnen."
         help_language: "Du kannst die Sprache der wallabag-Oberfläche ändern."
         help_pocket_consumer_key: "Nötig für den Pocket-Import. Du kannst ihn in deinem Pocket account einrichten."
-    form_rss:
+    form_feed:
         description: 'Die RSS-Feeds von wallabag erlauben es dir, deine gespeicherten Artikel mit deinem bevorzugten RSS-Reader zu lesen. Vorher musst du jedoch einen Token erstellen.'
         token_label: 'RSS-Token'
         no_token: 'Kein Token'
         token_create: 'Token erstellen'
         token_reset: 'Token zurücksetzen'
-        rss_links: 'RSS-Links'
-        rss_link:
+        feed_links: 'RSS-Links'
+        feed_link:
             unread: 'Ungelesene'
             starred: 'Favoriten'
             archive: 'Archivierte'
             all: 'Alle'
-        rss_limit: 'Anzahl der Einträge pro Feed'
+        feed_limit: 'Anzahl der Einträge pro Feed'
     form_user:
-        two_factor_description: "Wenn du die Zwei-Faktor-Authentifizierung aktivierst, erhältst du eine E-Mail mit einem Code bei jeder nicht vertrauenswürdigen Verbindung"
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'Name'
         email_label: 'E-Mail-Adresse'
-        twoFactorAuthentication_label: 'Zwei-Faktor-Authentifizierung'
-        help_twoFactorAuthentication: "Wenn du 2FA aktivierst, wirst du bei jedem Login einen Code per E-Mail bekommen."
+        two_factor:
+            # emailTwoFactor_label: 'Using email (receive a code by email)'
+            # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, Authy or FreeOTP, to get a one time code)'
+            # table_method: Method
+            # table_state: State
+            # table_action: Action
+            # state_enabled: Enabled
+            # state_disabled: Disabled
+            # action_email: Use email
+            # action_app: Use OTP App
         delete:
             title: 'Lösche mein Konto (a.k.a Gefahrenzone)'
             description: 'Wenn du dein Konto löschst, werden ALL deine Artikel, ALL deine Tags, ALL deine Anmerkungen und dein Konto dauerhaft gelöscht (kann NICHT RÜCKGÄNGIG gemacht werden). Du wirst anschließend ausgeloggt.'
@@ -353,7 +363,7 @@ quickstart:
         title: 'Anwendung konfigurieren'
         description: 'Um die Applikation für dich anzupassen, schau in die Konfiguration von wallabag.'
         language: 'Sprache und Design ändern'
-        rss: 'RSS-Feeds aktivieren'
+        feed: 'RSS-Feeds aktivieren'
         tagging_rules: 'Schreibe Regeln, um deine Beiträge automatisch zu taggen (verschlagworten)'
     admin:
         title: 'Administration'
@@ -404,6 +414,8 @@ tag:
     new:
         add: 'Hinzufügen'
         placeholder: 'Du kannst verschiedene Tags, getrennt von einem Komma, hinzufügen.'
+    rename:
+        # placeholder: 'You can update tag name.'
 
 export:
     footer_template: '<div style="text-align:center;"><p>Generiert von wallabag mit Hilfe von %method%</p><p>Bitte öffne <a href="https://github.com/wallabag/wallabag/issues">ein Ticket</a> wenn du ein Problem mit der Darstellung von diesem E-Book auf deinem Gerät hast.</p></div>'
@@ -529,7 +541,8 @@ user:
         email_label: 'E-Mail-Adresse'
         enabled_label: 'Aktiviert'
         last_login_label: 'Letzter Login'
-        twofactor_label: 'Zwei-Faktor-Authentifizierung'
+        # twofactor_email_label: Two factor authentication by email
+        # twofactor_google_label: Two factor authentication by OTP app
         save: 'Speichern'
         delete: 'Löschen'
         delete_confirm: 'Bist du sicher?'
@@ -567,14 +580,14 @@ flashes:
             password_updated: 'Kennwort aktualisiert'
             password_not_updated_demo: 'Im Testmodus kannst du das Kennwort nicht ändern.'
             user_updated: 'Information aktualisiert'
-            rss_updated: 'RSS-Informationen aktualisiert'
+            feed_updated: 'RSS-Informationen aktualisiert'
             tagging_rules_updated: 'Tagging-Regeln aktualisiert'
             tagging_rules_deleted: 'Tagging-Regel gelöscht'
-            rss_token_updated: 'RSS-Token aktualisiert'
-            annotations_reset: 'Anmerkungen zurücksetzen'
-            tags_reset: 'Tags zurücksetzen'
-            entries_reset: 'Einträge zurücksetzen'
-            archived_reset: 'Archiverte Einträge zurücksetzen'
+            feed_token_updated: 'RSS-Token aktualisiert'
+            annotations_reset: Anmerkungen zurücksetzen
+            tags_reset: Tags zurücksetzen
+            entries_reset: Einträge zurücksetzen
+            archived_reset: Archiverte Einträge zurücksetzen
     entry:
         notice:
             entry_already_saved: 'Eintrag bereits am %date% gespeichert'
@@ -588,9 +601,11 @@ flashes:
             entry_starred: 'Eintrag favorisiert'
             entry_unstarred: 'Eintrag defavorisiert'
             entry_deleted: 'Eintrag gelöscht'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'Tag hinzugefügt'
+            #tag_renamed: 'Tag renamed'
     import:
         notice:
             failed: 'Import fehlgeschlagen, bitte erneut probieren.'

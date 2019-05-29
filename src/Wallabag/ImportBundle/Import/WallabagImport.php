@@ -134,7 +134,7 @@ abstract class WallabagImport extends AbstractImport
             $entry->setPreviewPicture($importedEntry['preview_picture']);
         }
 
-        $entry->setArchived($data['is_archived']);
+        $entry->updateArchived($data['is_archived']);
         $entry->setStarred($data['is_starred']);
 
         if (!empty($data['created_at'])) {

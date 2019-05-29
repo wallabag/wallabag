@@ -37,6 +37,7 @@ menu:
         add_new_entry: 'Introdu un nou articol'
         search: 'Căutare'
         filter_entries: 'Filtrează articolele'
+        # random_entry: Jump to a random entry from that list
         # export: 'Export'
     search_form:
         input_label: 'Introdu căutarea ta'
@@ -53,11 +54,12 @@ config:
     page_title: 'Configurație'
     tab_menu:
         settings: 'Setări'
-        rss: 'RSS'
+        feed: 'RSS'
         user_info: 'Informații despre utilizator'
         password: 'Parolă'
         # rules: 'Tagging rules'
         new_user: 'Crează un utilizator'
+        # reset: 'Reset area'
     form:
         save: 'Salvează'
     form_settings:
@@ -83,25 +85,32 @@ config:
         # help_reading_speed: "wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article."
         # help_language: "You can change the language of wallabag interface."
         # help_pocket_consumer_key: "Required for Pocket import. You can create it in your Pocket account."
-    form_rss:
+    form_feed:
         description: 'Feed-urile RSS oferite de wallabag îți permit să-ți citești articolele salvate în reader-ul tău preferat RSS.'
         token_label: 'RSS-Token'
         no_token: 'Fără token'
         token_create: 'Crează-ți token'
         token_reset: 'Resetează-ți token-ul'
-        rss_links: 'Link-uri RSS'
-        rss_link:
+        feed_links: 'Link-uri RSS'
+        feed_link:
             unread: 'Unread'
             starred: 'Starred'
             archive: 'Archived'
             # all: 'All'
-        rss_limit: 'Limită RSS'
+        feed_limit: 'Limită RSS'
     form_user:
-        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion"
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'Nume'
         email_label: 'E-mail'
-        # twoFactorAuthentication_label: 'Two factor authentication'
-        # help_twoFactorAuthentication: "If you enable 2FA, each time you want to login to wallabag, you'll receive a code by email."
+            # emailTwoFactor_label: 'Using email (receive a code by email)'
+            # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, Authy or FreeOTP, to get a one time code)'
+            # table_method: Method
+            # table_state: State
+            # table_action: Action
+            # state_enabled: Enabled
+            # state_disabled: Disabled
+            # action_email: Use email
+            # action_app: Use OTP App
         delete:
             # title: Delete my account (a.k.a danger zone)
             # description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
@@ -159,6 +168,15 @@ config:
         #         and: 'One rule AND another'
         #         matches: 'Tests that a <i>subject</i> matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>'
         #         notmatches: 'Tests that a <i>subject</i> doesn''t match match a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
+    otp:
+        # page_title: Two-factor authentication
+        # app:
+        #     two_factor_code_description_1: You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password. It'll disapear after a page reload.
+        #     two_factor_code_description_2: 'You can scan that QR Code with your app:'
+        #     two_factor_code_description_3: 'Also, save these backup codes in a safe place, you can use them in case you lose access to your OTP app:'
+        #     two_factor_code_description_4: 'Test an OTP code from your configured app:'
+        #     cancel: Cancel
+        #     enable: Enable
 
 entry:
     # default_title: 'Title of the entry'
@@ -353,7 +371,7 @@ quickstart:
     #     title: 'Configure the application'
     #     description: 'In order to have an application which suits you, have a look into the configuration of wallabag.'
     #     language: 'Change language and design'
-    #     rss: 'Enable RSS feeds'
+    #     feed: 'Enable RSS feeds'
     #     tagging_rules: 'Write rules to automatically tag your articles'
     # admin:
     #     title: 'Administration'
@@ -404,6 +422,8 @@ tag:
     new:
         # add: 'Add'
         # placeholder: 'You can add several tags, separated by a comma.'
+    rename:
+        # placeholder: 'You can update tag name.'
 
 # export:
 #     footer_template: '<div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p></div>'
@@ -529,7 +549,8 @@ user:
         email_label: 'E-mail'
         # enabled_label: 'Enabled'
         # last_login_label: 'Last login'
-        # twofactor_label: Two factor authentication
+        # twofactor_email_label: Two factor authentication by email
+        # twofactor_google_label: Two factor authentication by OTP app
         # save: Save
         # delete: Delete
         # delete_confirm: Are you sure?
@@ -567,10 +588,10 @@ flashes:
             password_updated: 'Parolă actualizată'
             password_not_updated_demo: "In demonstration mode, you can't change password for this user."
             user_updated: 'Informație actualizată'
-            rss_updated: 'Informație RSS actualizată'
+            feed_updated: 'Informație RSS actualizată'
             # tagging_rules_updated: 'Tagging rules updated'
             # tagging_rules_deleted: 'Tagging rule deleted'
-            # rss_token_updated: 'RSS token updated'
+            # feed_token_updated: 'RSS token updated'
             # annotations_reset: Annotations reset
             # tags_reset: Tags reset
             # entries_reset: Entries reset
@@ -588,9 +609,11 @@ flashes:
             entry_starred: 'Articol adăugat la favorite'
             entry_unstarred: 'Articol șters de la favorite'
             entry_deleted: 'Articol șters'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             # tag_added: 'Tag added'
+            # tag_renamed: 'Tag renamed'
     import:
         notice:
             # failed: 'Import failed, please try again.'

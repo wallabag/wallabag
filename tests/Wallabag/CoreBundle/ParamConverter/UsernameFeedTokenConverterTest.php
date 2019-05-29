@@ -1,19 +1,19 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Command;
+namespace Tests\Wallabag\CoreBundle\ParamConverter;
 
 use PHPUnit\Framework\TestCase;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
-use Wallabag\CoreBundle\ParamConverter\UsernameRssTokenConverter;
+use Wallabag\CoreBundle\ParamConverter\UsernameFeedTokenConverter;
 use Wallabag\UserBundle\Entity\User;
 
-class UsernameRssTokenConverterTest extends TestCase
+class UsernameFeedTokenConverterTest extends TestCase
 {
     public function testSupportsWithNoRegistry()
     {
         $params = new ParamConverter([]);
-        $converter = new UsernameRssTokenConverter();
+        $converter = new UsernameFeedTokenConverter();
 
         $this->assertFalse($converter->supports($params));
     }
@@ -26,10 +26,10 @@ class UsernameRssTokenConverterTest extends TestCase
 
         $registry->expects($this->once())
             ->method('getManagers')
-            ->will($this->returnValue([]));
+            ->willReturn([]);
 
         $params = new ParamConverter([]);
-        $converter = new UsernameRssTokenConverter($registry);
+        $converter = new UsernameFeedTokenConverter($registry);
 
         $this->assertFalse($converter->supports($params));
     }
@@ -42,10 +42,10 @@ class UsernameRssTokenConverterTest extends TestCase
 
         $registry->expects($this->once())
             ->method('getManagers')
-            ->will($this->returnValue(['default' => null]));
+            ->willReturn(['default' => null]);
 
         $params = new ParamConverter([]);
-        $converter = new UsernameRssTokenConverter($registry);
+        $converter = new UsernameFeedTokenConverter($registry);
 
         $this->assertFalse($converter->supports($params));
     }
@@ -58,7 +58,7 @@ class UsernameRssTokenConverterTest extends TestCase
 
         $meta->expects($this->once())
             ->method('getName')
-            ->will($this->returnValue('nothingrelated'));
+            ->willReturn('nothingrelated');
 
         $em = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')
             ->disableOriginalConstructor()
@@ -67,7 +67,7 @@ class UsernameRssTokenConverterTest extends TestCase
         $em->expects($this->once())
             ->method('getClassMetadata')
             ->with('superclass')
-            ->will($this->returnValue($meta));
+            ->willReturn($meta);
 
         $registry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
             ->disableOriginalConstructor()
@@ -75,15 +75,15 @@ class UsernameRssTokenConverterTest extends TestCase
 
         $registry->expects($this->once())
             ->method('getManagers')
-            ->will($this->returnValue(['default' => null]));
+            ->willReturn(['default' => null]);
 
         $registry->expects($this->once())
             ->method('getManagerForClass')
             ->with('superclass')
-            ->will($this->returnValue($em));
+            ->willReturn($em);
 
         $params = new ParamConverter(['class' => 'superclass']);
-        $converter = new UsernameRssTokenConverter($registry);
+        $converter = new UsernameFeedTokenConverter($registry);
 
         $this->assertFalse($converter->supports($params));
     }
@@ -96,7 +96,7 @@ class UsernameRssTokenConverterTest extends TestCase
 
         $meta->expects($this->once())
             ->method('getName')
-            ->will($this->returnValue('Wallabag\UserBundle\Entity\User'));
+            ->willReturn('Wallabag\UserBundle\Entity\User');
 
         $em = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')
             ->disableOriginalConstructor()
@@ -105,7 +105,7 @@ class UsernameRssTokenConverterTest extends TestCase
         $em->expects($this->once())
             ->method('getClassMetadata')
             ->with('WallabagUserBundle:User')
-            ->will($this->returnValue($meta));
+            ->willReturn($meta);
 
         $registry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
             ->disableOriginalConstructor()
@@ -113,15 +113,15 @@ class UsernameRssTokenConverterTest extends TestCase
 
         $registry->expects($this->once())
             ->method('getManagers')
-            ->will($this->returnValue(['default' => null]));
+            ->willReturn(['default' => null]);
 
         $registry->expects($this->once())
             ->method('getManagerForClass')
             ->with('WallabagUserBundle:User')
-            ->will($this->returnValue($em));
+            ->willReturn($em);
 
         $params = new ParamConverter(['class' => 'WallabagUserBundle:User']);
-        $converter = new UsernameRssTokenConverter($registry);
+        $converter = new UsernameFeedTokenConverter($registry);
 
         $this->assertTrue($converter->supports($params));
     }
@@ -129,7 +129,7 @@ class UsernameRssTokenConverterTest extends TestCase
     public function testApplyEmptyRequest()
     {
         $params = new ParamConverter([]);
-        $converter = new UsernameRssTokenConverter();
+        $converter = new UsernameFeedTokenConverter();
 
         $res = $converter->apply(new Request(), $params);
 
@@ -147,9 +147,9 @@ class UsernameRssTokenConverterTest extends TestCase
             ->getMock();
 
         $repo->expects($this->once())
-            ->method('findOneByUsernameAndRsstoken')
+            ->method('findOneByUsernameAndFeedToken')
             ->with('test', 'test')
-            ->will($this->returnValue(null));
+            ->willReturn(null);
 
         $em = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')
             ->disableOriginalConstructor()
@@ -158,7 +158,7 @@ class UsernameRssTokenConverterTest extends TestCase
         $em->expects($this->once())
             ->method('getRepository')
             ->with('WallabagUserBundle:User')
-            ->will($this->returnValue($repo));
+            ->willReturn($repo);
 
         $registry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
             ->disableOriginalConstructor()
@@ -167,10 +167,10 @@ class UsernameRssTokenConverterTest extends TestCase
         $registry->expects($this->once())
             ->method('getManagerForClass')
             ->with('WallabagUserBundle:User')
-            ->will($this->returnValue($em));
+            ->willReturn($em);
 
         $params = new ParamConverter(['class' => 'WallabagUserBundle:User']);
-        $converter = new UsernameRssTokenConverter($registry);
+        $converter = new UsernameFeedTokenConverter($registry);
         $request = new Request([], [], ['username' => 'test', 'token' => 'test']);
 
         $converter->apply($request, $params);
@@ -185,9 +185,9 @@ class UsernameRssTokenConverterTest extends TestCase
             ->getMock();
 
         $repo->expects($this->once())
-            ->method('findOneByUsernameAndRsstoken')
+            ->method('findOneByUsernameAndFeedtoken')
             ->with('test', 'test')
-            ->will($this->returnValue($user));
+            ->willReturn($user);
 
         $em = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')
             ->disableOriginalConstructor()
@@ -196,7 +196,7 @@ class UsernameRssTokenConverterTest extends TestCase
         $em->expects($this->once())
             ->method('getRepository')
             ->with('WallabagUserBundle:User')
-            ->will($this->returnValue($repo));
+            ->willReturn($repo);
 
         $registry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
             ->disableOriginalConstructor()
@@ -205,10 +205,10 @@ class UsernameRssTokenConverterTest extends TestCase
         $registry->expects($this->once())
             ->method('getManagerForClass')
             ->with('WallabagUserBundle:User')
-            ->will($this->returnValue($em));
+            ->willReturn($em);
 
         $params = new ParamConverter(['class' => 'WallabagUserBundle:User', 'name' => 'user']);
-        $converter = new UsernameRssTokenConverter($registry);
+        $converter = new UsernameFeedTokenConverter($registry);
         $request = new Request([], [], ['username' => 'test', 'token' => 'test']);
 
         $converter->apply($request, $params);

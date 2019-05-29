@@ -3,7 +3,6 @@
 {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
     <div class="card-content">
         <div class="row">
-
             {{ form_widget(form._token) }}
 
             {% for flashMessage in app.session.flashbag.get('notice') %}

@@ -37,6 +37,7 @@ menu:
         add_new_entry: 'Adicionar uma nova entrada'
         search: 'Pesquisa'
         filter_entries: 'Filtrar entradas'
+        # random_entry: Jump to a random entry from that list
         export: 'Exportar'
     search_form:
         input_label: 'Digite aqui sua pesquisa'
@@ -53,11 +54,12 @@ config:
     page_title: 'Config'
     tab_menu:
         settings: 'Configurações'
-        rss: 'RSS'
+        feed: 'RSS'
         user_info: 'Informação do Usuário'
         password: 'Senha'
         rules: 'Regras de tags'
         new_user: 'Adicionar um usuário'
+        # reset: 'Reset area'
     form:
         save: 'Salvar'
     form_settings:
@@ -83,25 +85,32 @@ config:
         # help_reading_speed: "wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article."
         # help_language: "You can change the language of wallabag interface."
         # help_pocket_consumer_key: "Required for Pocket import. You can create it in your Pocket account."
-    form_rss:
+    form_feed:
         description: 'Feeds RSS providos pelo wallabag permitem que você leia seus artigos salvos em seu leitor de RSS favorito. Você precisa gerar um token primeiro.'
         token_label: 'Token RSS'
         no_token: 'Nenhum Token'
         token_create: 'Criar seu token'
         token_reset: 'Gerar novamente seu token'
-        rss_links: 'Links RSS'
-        rss_link:
+        feed_links: 'Links RSS'
+        feed_link:
             unread: 'Não lido'
             starred: 'Destacado'
             archive: 'Arquivado'
             # all: 'All'
-        rss_limit: 'Número de itens no feed'
+        feed_limit: 'Número de itens no feed'
     form_user:
-        two_factor_description: 'Habilitar autenticação de dois passos significa que você receberá um e-mail com um código a cada nova conexão desconhecida.'
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'Nome'
         email_label: 'E-mail'
-        twoFactorAuthentication_label: 'Autenticação de dois passos'
-        # help_twoFactorAuthentication: "If you enable 2FA, each time you want to login to wallabag, you'll receive a code by email."
+            # emailTwoFactor_label: 'Using email (receive a code by email)'
+            # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, Authy or FreeOTP, to get a one time code)'
+            # table_method: Method
+            # table_state: State
+            # table_action: Action
+            # state_enabled: Enabled
+            # state_disabled: Disabled
+            # action_email: Use email
+            # action_app: Use OTP App
         delete:
             # title: Delete my account (a.k.a danger zone)
             # description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
@@ -159,6 +168,15 @@ config:
                 and: 'Uma regra E outra'
                 matches: 'Testa que um <i>assunto</i> corresponde a uma <i>pesquisa</i> (maiúscula ou minúscula).<br />Exemplo: <code>título corresponde a "futebol"</code>'
                 # notmatches: 'Tests that a <i>subject</i> doesn''t match match a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
+    otp:
+        # page_title: Two-factor authentication
+        # app:
+        #     two_factor_code_description_1: You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password. It'll disapear after a page reload.
+        #     two_factor_code_description_2: 'You can scan that QR Code with your app:'
+        #     two_factor_code_description_3: 'Also, save these backup codes in a safe place, you can use them in case you lose access to your OTP app:'
+        #     two_factor_code_description_4: 'Test an OTP code from your configured app:'
+        #     cancel: Cancel
+        #     enable: Enable
 
 entry:
     default_title: 'Título da entrada'
@@ -353,7 +371,7 @@ quickstart:
         title: 'Configurar a aplicação'
         description: 'Para ter uma aplicação que atende você, dê uma olhada na configuração do wallabag.'
         language: 'Alterar idioma e design'
-        rss: 'Habilitar feeds RSS'
+        feed: 'Habilitar feeds RSS'
         tagging_rules: 'Escrever regras para acrescentar tags automaticamente em seus artigos'
     admin:
         title: 'Administração'
@@ -404,6 +422,8 @@ tag:
     new:
         # add: 'Add'
         # placeholder: 'You can add several tags, separated by a comma.'
+    rename:
+        # placeholder: 'You can update tag name.'
 
 # export:
 #     footer_template: '<div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p></div>'
@@ -529,7 +549,8 @@ user:
         email_label: 'E-mail'
         enabled_label: 'Habilitado'
         last_login_label: 'Último login'
-        twofactor_label: 'Autenticação de dois passos'
+        # twofactor_email_label: Two factor authentication by email
+        # twofactor_google_label: Two factor authentication by OTP app
         save: 'Salvar'
         delete: 'Apagar'
         delete_confirm: 'Tem certeza?'
@@ -567,10 +588,10 @@ flashes:
             password_updated: 'Senha atualizada'
             password_not_updated_demo: 'Em modo de demonstração, você não pode alterar a senha deste usuário.'
             # user_updated: 'Information updated'
-            rss_updated: 'Informação de RSS atualizada'
+            feed_updated: 'Informação de RSS atualizada'
             tagging_rules_updated: 'Regras de tags atualizadas'
             tagging_rules_deleted: 'Regra de tag apagada'
-            rss_token_updated: 'Token RSS atualizado'
+            feed_token_updated: 'Token RSS atualizado'
             # annotations_reset: Annotations reset
             # tags_reset: Tags reset
             # entries_reset: Entries reset
@@ -588,9 +609,11 @@ flashes:
             entry_starred: 'Entrada destacada'
             entry_unstarred: 'Entrada não destacada'
             entry_deleted: 'Entrada apagada'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'Tag adicionada'
+            # tag_renamed: 'Tag renamed'
     import:
         notice:
             failed: 'Importação falhou, por favor tente novamente.'

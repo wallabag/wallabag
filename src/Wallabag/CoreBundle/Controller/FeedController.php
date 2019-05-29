@@ -7,86 +7,97 @@ use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\UserBundle\Entity\User;
 
-class RssController extends Controller
+class FeedController extends Controller
 {
     /**
      * Shows unread entries for current user.
      *
-     * @Route("/{username}/{token}/unread.xml", name="unread_rss", defaults={"_format"="xml"})
-     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_rsstoken_converter")
+     * @Route("/feed/{username}/{token}/unread/{page}", name="unread_feed", defaults={"page"=1, "_format"="xml"})
+     *
+     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
+     *
+     * @param User $user
+     * @param $page
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showUnreadRSSAction(Request $request, User $user)
+    public function showUnreadFeedAction(User $user, $page)
     {
-        return $this->showEntries('unread', $user, $request->query->get('page', 1));
+        return $this->showEntries('unread', $user, $page);
     }
 
     /**
      * Shows read entries for current user.
      *
-     * @Route("/{username}/{token}/archive.xml", name="archive_rss", defaults={"_format"="xml"})
-     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_rsstoken_converter")
+     * @Route("/feed/{username}/{token}/archive/{page}", name="archive_feed", defaults={"page"=1, "_format"="xml"})
+     *
+     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
+     *
+     * @param User $user
+     * @param $page
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showArchiveRSSAction(Request $request, User $user)
+    public function showArchiveFeedAction(User $user, $page)
     {
-        return $this->showEntries('archive', $user, $request->query->get('page', 1));
+        return $this->showEntries('archive', $user, $page);
     }
 
     /**
      * Shows starred entries for current user.
      *
-     * @Route("/{username}/{token}/starred.xml", name="starred_rss", defaults={"_format"="xml"})
-     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_rsstoken_converter")
+     * @Route("/feed/{username}/{token}/starred/{page}", name="starred_feed", defaults={"page"=1, "_format"="xml"})
+     *
+     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
+     *
+     * @param User $user
+     * @param $page
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showStarredRSSAction(Request $request, User $user)
+    public function showStarredFeedAction(User $user, $page)
     {
-        return $this->showEntries('starred', $user, $request->query->get('page', 1));
+        return $this->showEntries('starred', $user, $page);
     }
 
     /**
      * Shows all entries for current user.
      *
-     * @Route("/{username}/{token}/all.xml", name="all_rss", defaults={"_format"="xml"})
-     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_rsstoken_converter")
+     * @Route("/feed/{username}/{token}/all/{page}", name="all_feed", defaults={"page"=1, "_format"="xml"})
+     *
+     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAllRSSAction(Request $request, User $user)
+    public function showAllFeedAction(User $user, $page)
     {
-        return $this->showEntries('all', $user, $request->query->get('page', 1));
+        return $this->showEntries('all', $user, $page);
     }
 
     /**
      * Shows entries associated to a tag for current user.
      *
-     * @Route("/{username}/{token}/tags/{slug}.xml", name="tag_rss", defaults={"_format"="xml"})
-     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_rsstoken_converter")
+     * @Route("/feed/{username}/{token}/tags/{slug}/{page}", name="tag_feed", defaults={"page"=1, "_format"="xml"})
+     *
+     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showTagsAction(Request $request, User $user, Tag $tag)
+    public function showTagsFeedAction(User $user, Tag $tag, $page)
     {
-        $page = $request->query->get('page', 1);
-
         $url = $this->generateUrl(
-            'tag_rss',
+            'tag_feed',
             [
                 'username' => $user->getUsername(),
-                'token' => $user->getConfig()->getRssToken(),
+                'token' => $user->getConfig()->getFeedToken(),
                 'slug' => $tag->getSlug(),
             ],
             UrlGeneratorInterface::ABSOLUTE_URL
@@ -119,12 +130,15 @@ class RssController extends Controller
         return $this->render(
             '@WallabagCore/themes/common/Entry/entries.xml.twig',
             [
-                'url_html' => $this->generateUrl('tag_entries', ['slug' => $tag->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL),
-                'type' => 'tag (' . $tag->getLabel() . ')',
+                'type' => 'tag',
                 'url' => $url,
                 'entries' => $entries,
+                'user' => $user->getUsername(),
+                'domainName' => $this->getParameter('domain_name'),
+                'version' => $this->getParameter('wallabag_core.version'),
+                'tag' => $tag->getSlug(),
             ],
-            new Response('', 200, ['Content-Type' => 'application/rss+xml'])
+            new Response('', 200, ['Content-Type' => 'application/atom+xml'])
         );
     }
 
@@ -162,14 +176,14 @@ class RssController extends Controller
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
         $entries = new Pagerfanta($pagerAdapter);
 
-        $perPage = $user->getConfig()->getRssLimit() ?: $this->getParameter('wallabag_core.rss_limit');
+        $perPage = $user->getConfig()->getFeedLimit() ?: $this->getParameter('wallabag_core.Feed_limit');
         $entries->setMaxPerPage($perPage);
 
         $url = $this->generateUrl(
-            $type . '_rss',
+            $type . '_feed',
             [
                 'username' => $user->getUsername(),
-                'token' => $user->getConfig()->getRssToken(),
+                'token' => $user->getConfig()->getFeedToken(),
             ],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
@@ -178,19 +192,19 @@ class RssController extends Controller
             $entries->setCurrentPage((int) $page);
         } catch (OutOfRangeCurrentPageException $e) {
             if ($page > 1) {
-                return $this->redirect($url . '?page=' . $entries->getNbPages(), 302);
+                return $this->redirect($url . '/' . $entries->getNbPages());
             }
         }
 
-        return $this->render(
-            '@WallabagCore/themes/common/Entry/entries.xml.twig',
-            [
-                'url_html' => $this->generateUrl($type, [], UrlGeneratorInterface::ABSOLUTE_URL),
-                'type' => $type,
-                'url' => $url,
-                'entries' => $entries,
-            ],
-            new Response('', 200, ['Content-Type' => 'application/rss+xml'])
+        return $this->render('@WallabagCore/themes/common/Entry/entries.xml.twig', [
+            'type' => $type,
+            'url' => $url,
+            'entries' => $entries,
+            'user' => $user->getUsername(),
+            'domainName' => $this->getParameter('domain_name'),
+            'version' => $this->getParameter('wallabag_core.version'),
+        ],
+        new Response('', 200, ['Content-Type' => 'application/atom+xml'])
         );
     }
 }

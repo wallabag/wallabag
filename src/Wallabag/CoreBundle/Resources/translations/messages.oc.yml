@@ -37,6 +37,7 @@ menu:
         add_new_entry: 'Enregistrar un novèl article'
         search: 'Cercar'
         filter_entries: 'Filtrar los articles'
+        # random_entry: Jump to a random entry from that list
         export: 'Exportar'
     search_form:
         input_label: 'Picatz vòstre mot-clau a cercar aquí'
@@ -53,11 +54,12 @@ config:
     page_title: 'Configuracion'
     tab_menu:
         settings: 'Paramètres'
-        rss: 'RSS'
+        feed: 'RSS'
         user_info: 'Mon compte'
         password: 'Senhal'
         rules: "Règlas d'etiquetas automaticas"
         new_user: 'Crear un compte'
+        reset: 'Zòna de reïnicializacion'
     form:
         save: 'Enregistrar'
     form_settings:
@@ -83,25 +85,32 @@ config:
         help_reading_speed: "wallabag calcula lo temps de lectura per cada article. Podètz lo definir aquí, gràcias a aquesta lista, se sètz un legeire rapid o lent. wallabag tornarà calcular lo temps de lectura per cada article."
         help_language: "Podètz cambiar la lenga de l'interfàcia de wallabag."
         help_pocket_consumer_key: "Requesida per l'importacion de Pocket. Podètz la crear dins vòstre compte Pocket."
-    form_rss:
+    form_feed:
         description: "Los fluxes RSS fornits per wallabag vos permeton de legir vòstres articles salvagardats dins vòstre lector de fluxes preferit. Per los poder emplegar, vos cal, d'en primièr crear un geton."
         token_label: 'Geton RSS'
         no_token: 'Pas cap de geton generat'
         token_create: 'Creatz vòstre geton'
         token_reset: 'Reïnicializatz vòstre geton'
-        rss_links: 'URLs de vòstres fluxes RSS'
-        rss_link:
+        feed_links: 'URLs de vòstres fluxes RSS'
+        feed_link:
             unread: 'Pas legits'
             starred: 'Favorits'
             archive: 'Legits'
             all: 'Totes'
-        rss_limit: "Nombre d'articles dins un flux RSS"
+        feed_limit: "Nombre d'articles dins un flux"
     form_user:
-        two_factor_description: "Activar l'autentificacion en dos temps vòl dire que recebretz un còdi per corrièl per cada novèla connexion pas aprovada."
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
         name_label: 'Nom'
         email_label: 'Adreça de corrièl'
-        twoFactorAuthentication_label: 'Dobla autentificacion'
-        help_twoFactorAuthentication: "S'avètz activat l'autentificacion en dos temps, cada còp que volètz vos connectar a wallabag, recebretz un còdi per corrièl."
+            # emailTwoFactor_label: 'Using email (receive a code by email)'
+            # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, Authy or FreeOTP, to get a one time code)'
+            # table_method: Method
+            # table_state: State
+            # table_action: Action
+            # state_enabled: Enabled
+            # state_disabled: Disabled
+            # action_email: Use email
+            # action_app: Use OTP App
         delete:
             title: Suprimir mon compte (Mèfi zòna perilhosa)
             description: Se confirmatz la supression de vòstre compte, TOTES vòstres articles, TOTAS vòstras etiquetas, TOTAS vòstras anotacions e vòstre compte seràn suprimits per totjorn. E aquò es IRREVERSIBLE. Puèi seretz desconnectat.
@@ -159,6 +168,15 @@ config:
                 and: "Una règla E l'autra"
                 matches: 'Teste se un <i>subjècte</i> correspond a una <i>recèrca</i> (non sensibla a la cassa).<br />Exemple : <code>title matches \"football\"</code>'
                 notmatches: 'Teste se <i>subjècte</i> correspond pas a una <i>recèrca</i> (sensibla a la cassa).<br />Example : <code>title notmatches "football"</code>'
+    otp:
+        # page_title: Two-factor authentication
+        # app:
+        #     two_factor_code_description_1: You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password. It'll disapear after a page reload.
+        #     two_factor_code_description_2: 'You can scan that QR Code with your app:'
+        #     two_factor_code_description_3: 'Also, save these backup codes in a safe place, you can use them in case you lose access to your OTP app:'
+        #     two_factor_code_description_4: 'Test an OTP code from your configured app:'
+        #     cancel: Cancel
+        #     enable: Enable
 
 entry:
     default_title: "Títol de l'article"
@@ -353,7 +371,7 @@ quickstart:
         title: "Configuratz l'aplicacion"
         description: "Per fin d'aver una aplicacion que vos va ben, anatz veire la configuracion de wallabag."
         language: "Cambiatz la lenga e l'estil de l'aplicacion"
-        rss: 'Activatz los fluxes RSS'
+        feed: 'Activatz los fluxes RSS'
         tagging_rules: 'Escrivètz de règlas per classar automaticament vòstres articles'
     admin:
         title: 'Administracion'
@@ -404,6 +422,8 @@ tag:
     new:
         add: 'Ajustar'
         placeholder: "Podètz ajustar mai qu'una etiqueta, separadas per de virgula."
+    rename:
+        # placeholder: 'You can update tag name.'
 
 export:
     footer_template: '<div style="text-align:center;"><p>Produch per wallabag amb %method%</p><p>Mercés de dobrir <a href="https://github.com/wallabag/wallabag/issues">una sollicitacion</a> s’avètz de problèmas amb l’afichatge d’aqueste E-Book sus vòstre periferic.</p></div>'
@@ -529,7 +549,8 @@ user:
         email_label: 'Adreça de corrièl'
         enabled_label: 'Actiu'
         last_login_label: 'Darrièra connexion'
-        twofactor_label: 'Autentificacion doble-factor'
+        # twofactor_email_label: Two factor authentication by email
+        # twofactor_google_label: Two factor authentication by OTP app
         save: 'Enregistrar'
         delete: 'Suprimir'
         delete_confirm: 'Sètz segur ?'
@@ -567,10 +588,10 @@ flashes:
             password_updated: 'Vòstre senhal es ben estat mes a jorn'
             password_not_updated_demo: "En demostracion, podètz pas cambiar lo senhal d'aqueste utilizaire."
             user_updated: 'Vòstres informacions personnelas son ben estadas mesas a jorn'
-            rss_updated: 'La configuracion dels fluxes RSS es ben estada mesa a jorn'
+            feed_updated: 'La configuracion dels fluxes RSS es ben estada mesa a jorn'
             tagging_rules_updated: 'Règlas misa a jorn'
             tagging_rules_deleted: 'Règla suprimida'
-            rss_token_updated: 'Geton RSS mes a jorn'
+            feed_token_updated: 'Geton RSS mes a jorn'
             annotations_reset: Anotacions levadas
             tags_reset: Etiquetas levadas
             entries_reset: Articles levats
@@ -588,9 +609,11 @@ flashes:
             entry_starred: 'Article ajustat dins los favorits'
             entry_unstarred: 'Article quitat dels favorits'
             entry_deleted: 'Article suprimit'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'Etiqueta ajustada'
+            # tag_renamed: 'Tag renamed'
     import:
         notice:
             failed: "L'importacion a fracassat, mercés de tornar ensajar."

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\AnnotationBundle\Controller;
+namespace Tests\Wallabag\AnnotationBundle\Controller;
 
 use Tests\Wallabag\AnnotationBundle\WallabagAnnotationTestCase;
 use Wallabag\AnnotationBundle\Entity\Annotation;
@@ -100,8 +100,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
         $this->assertSame('my quote', $content['quote']);
 
         /** @var Annotation $annotation */
-        $annotation = $this->client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+        $annotation = $em
             ->getRepository('WallabagAnnotationBundle:Annotation')
             ->findLastAnnotationByPageId($entry->getId(), 1);
 

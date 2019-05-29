@@ -35,9 +35,14 @@ class UserType extends AbstractType
                 'required' => false,
                 'label' => 'user.form.enabled_label',
             ])
-            ->add('twoFactorAuthentication', CheckboxType::class, [
+            ->add('emailTwoFactor', CheckboxType::class, [
                 'required' => false,
-                'label' => 'user.form.twofactor_label',
+                'label' => 'user.form.twofactor_email_label',
+            ])
+            ->add('googleTwoFactor', CheckboxType::class, [
+                'required' => false,
+                'label' => 'user.form.twofactor_google_label',
+                'mapped' => false,
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'user.form.save',

@@ -12,8 +12,8 @@ use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Tools\Utils;
 
 /**
- * This kind of proxy class take care of getting the content from an url
- * and update the entry with what it found.
+ * This kind of proxy class takes care of getting the content from an url
+ * and updates the entry with what it found.
  */
 class ContentProxy
 {
@@ -54,7 +54,11 @@ class ContentProxy
 
         if ((empty($content) || false === $this->validateContent($content)) && false === $disableContentUpdate) {
             $fetchedContent = $this->graby->fetchContent($url);
-            $fetchedContent['title'] = $this->sanitizeContentTitle($fetchedContent['title'], $fetchedContent['content_type']);
+
+            $fetchedContent['title'] = $this->sanitizeContentTitle(
+                $fetchedContent['title'],
+                isset($fetchedContent['headers']['content-type']) ? $fetchedContent['headers']['content-type'] : ''
+            );
 
             // when content is imported, we have information in $content
             // in case fetching content goes bad, we'll keep the imported information instead of overriding them
@@ -188,8 +192,8 @@ class ContentProxy
     /**
      * Try to sanitize the title of the fetched content from wrong character encodings and invalid UTF-8 character.
      *
-     * @param $title
-     * @param $contentType
+     * @param string $title
+     * @param string $contentType
      *
      * @return string
      */
@@ -253,16 +257,14 @@ class ContentProxy
 
         if (!empty($content['title'])) {
             $entry->setTitle($content['title']);
-        } elseif (!empty($content['open_graph']['og_title'])) {
-            $entry->setTitle($content['open_graph']['og_title']);
         }
 
         if (empty($content['html'])) {
             $content['html'] = $this->fetchingErrorMessage;
 
-            if (!empty($content['open_graph']['og_description'])) {
+            if (!empty($content['description'])) {
                 $content['html'] .= '<p><i>But we found a short description: </i></p>';
-                $content['html'] .= $content['open_graph']['og_description'];
+                $content['html'] .= $content['description'];
             }
         }
 
@@ -277,8 +279,8 @@ class ContentProxy
             $entry->setPublishedBy($content['authors']);
         }
 
-        if (!empty($content['all_headers']) && $this->storeArticleHeaders) {
-            $entry->setHeaders($content['all_headers']);
+        if (!empty($content['headers'])) {
+            $entry->setHeaders($content['headers']);
         }
 
         if (!empty($content['date'])) {
@@ -289,17 +291,30 @@ class ContentProxy
             $this->updateLanguage($entry, $content['language']);
         }
 
-        if (!empty($content['open_graph']['og_image'])) {
-            $this->updatePreviewPicture($entry, $content['open_graph']['og_image']);
+        $previewPictureUrl = '';
+        if (!empty($content['image'])) {
+            $previewPictureUrl = $content['image'];
         }
 
         // if content is an image, define it as a preview too
-        if (!empty($content['content_type']) && \in_array($this->mimeGuesser->guess($content['content_type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
-            $this->updatePreviewPicture($entry, $content['url']);
+        if (!empty($content['headers']['content-type']) && \in_array($this->mimeGuesser->guess($content['headers']['content-type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
+            $previewPictureUrl = $content['url'];
+        } elseif (empty($previewPictureUrl)) {
+            $this->logger->debug('Extracting images from content to provide a default preview picture');
+            $imagesUrls = DownloadImages::extractImagesUrlsFromHtml($content['html']);
+            $this->logger->debug(\count($imagesUrls) . ' pictures found');
+
+            if (!empty($imagesUrls)) {
+                $previewPictureUrl = $imagesUrls[0];
+            }
         }
 
-        if (!empty($content['content_type'])) {
-            $entry->setMimetype($content['content_type']);
+        if (!empty($content['headers']['content-type'])) {
+            $entry->setMimetype($content['headers']['content-type']);
+        }
+
+        if (!empty($previewPictureUrl)) {
+            $this->updatePreviewPicture($entry, $previewPictureUrl);
         }
 
         try {
