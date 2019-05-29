@@ -2,6 +2,8 @@
 
 namespace Wallabag\CoreBundle\Helper;
 
+use GuzzleHttp\Psr7\Uri;
+use GuzzleHttp\Psr7\UriResolver;
 use Http\Client\Common\HttpMethodsClient;
 use Http\Client\Common\Plugin\ErrorPlugin;
 use Http\Client\Common\PluginClient;
@@ -45,10 +47,8 @@ class DownloadImages
     public static function extractImagesUrlsFromHtml($html)
     {
         $crawler = new Crawler($html);
-        $imagesCrawler = $crawler
-            ->filterXpath('//img');
-        $imagesUrls = $imagesCrawler
-            ->extract(['src']);
+        $imagesCrawler = $crawler->filterXpath('//img');
+        $imagesUrls = $imagesCrawler->extract(['src']);
         $imagesSrcsetUrls = self::getSrcsetUrls($imagesCrawler);
 
         return array_unique(array_merge($imagesUrls, $imagesSrcsetUrls));
@@ -220,22 +220,25 @@ class DownloadImages
     private static function getSrcsetUrls(Crawler $imagesCrawler)
     {
         $urls = [];
-        $iterator = $imagesCrawler
-            ->getIterator();
+        $iterator = $imagesCrawler->getIterator();
+
         while ($iterator->valid()) {
             $srcsetAttribute = $iterator->current()->getAttribute('srcset');
+
             if ('' !== $srcsetAttribute) {
                 // Couldn't start with " OR ' OR a white space
                 // Could be one or more white space
                 // Must be one or more digits followed by w OR x
                 $pattern = "/(?:[^\"'\s]+\s*(?:\d+[wx])+)/";
                 preg_match_all($pattern, $srcsetAttribute, $matches);
+
                 $srcset = \call_user_func_array('array_merge', $matches);
                 $srcsetUrls = array_map(function ($src) {
                     return trim(explode(' ', $src, 2)[0]);
                 }, $srcset);
                 $urls = array_merge($srcsetUrls, $urls);
             }
+
             $iterator->next();
         }
 
@@ -292,20 +295,16 @@ class DownloadImages
             return $url;
         }
 
-        $base = new \SimplePie_IRI($base);
+        $base = new Uri($base);
 
-        // remove '//' in URL path (causes URLs not to resolve properly)
-        if (isset($base->ipath)) {
-            $base->ipath = preg_replace('!//+!', '/', $base->ipath);
+        // in case the url has no scheme & host
+        if ('' === $base->getAuthority() || '' === $base->getScheme()) {
+            $this->logger->error('DownloadImages: Can not make an absolute link', ['base' => $base, 'url' => $url]);
+
+            return false;
         }
 
-        if ($absolute = \SimplePie_IRI::absolutize($base, $url)) {
-            return $absolute->get_uri();
-        }
-
-        $this->logger->error('DownloadImages: Can not make an absolute link', ['base' => $base, 'url' => $url]);
-
-        return false;
+        return (string) UriResolver::resolve($base, new Uri($url));
     }
 
     /**

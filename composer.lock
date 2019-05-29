@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "883f44eda34a48c8ddabc3294498d996",
+    "content-hash": "c42e1b50f4a2b8a59ca06c5ccb24e6a3",
     "packages": [
         {
             "name": "bdunogier/guzzle-site-authenticator",
