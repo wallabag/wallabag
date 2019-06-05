@@ -39,6 +39,7 @@ It has to be the same for the following folders
 -   /var/www/wallabag/app/config/
 -   /var/www/wallabag/vendor/
 -   /var/www/wallabag/data/
+-   /var/www/wallabag/web/
 
 by entering
 
@@ -47,6 +48,7 @@ chown -R www-data:www-data /var/www/wallabag/bin
 chown -R www-data:www-data /var/www/wallabag/app/config
 chown -R www-data:www-data /var/www/wallabag/vendor
 chown -R www-data:www-data /var/www/wallabag/data/
+chown -R www-data:www-data /var/www/wallabag/web/
 ```
 
 otherwise, sooner or later you will see these error messages:
