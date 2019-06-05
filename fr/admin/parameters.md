@@ -16,18 +16,22 @@ parameters:
     database_driver: pdo_mysql
     database_driver_class: ~
     database_host: 127.0.0.1
-    database_port: null
+    database_port: ~
     database_name: wallabag
     database_user: root
-    database_password: null
-    database_path: null
+    database_password: ~
+    database_path: ~
     database_table_prefix: wallabag_
-    database_socket: null
+    database_socket: ~
     database_charset: utf8mb4
+    domain_name: https://your-wallabag-url-instance.com
     mailer_transport: smtp
+    mailer_user: ~
+    mailer_password: ~
     mailer_host: 127.0.0.1
-    mailer_user: null
-    mailer_password: null
+    mailer_port: false
+    mailer_encryption: ~
+    mailer_auth_mode: ~
     locale: en
     secret: ovmpmAWXRCabNlMgzlzFXDYmCFfzGv
     twofactor_auth: true
@@ -43,9 +47,9 @@ parameters:
     redis_scheme: tcp
     redis_host: localhost
     redis_port: 6379
-    redis_path: null
-    redis_password: null
-    domain_name: https://your-wallabag-url-instance.com
+    redis_path: ~
+    redis_password: ~
+    sentry_dsn: ~
 ```
 
 ## Signification de chaque paramètre
@@ -70,10 +74,13 @@ parameters:
 
 | Nom  | Description | Valeur par défaut |
 | -----|-------------|-------- |
-| mailer_transport | Méthode de transport exacte utilisée pour envoyer des emails. Les valeurs correctes sont : smtp, gmail, mail, sendmail, null (ce qui désactivera l'envoi des emails) | smtp |
-| mailer_host | Hôte sur lequel se connecter quand on utilise smtp comme transport. | 127.0.0.1 |
-| mailer_user | Utilisateur smtp. | ~ |
+| mailer_transport | Méthode de transport exacte utilisée pour envoyer des emails. Les valeurs correctes sont : `smtp`, `gmail`, `mail`, `sendmail`, `null` (ce qui désactivera l'envoi des emails) | smtp |
+| mailer_user | Utilisateur `smtp`. | ~ |
 | mailer_password | Mot de passe de cet utilisateur. | ~ |
+| mailer_host | Hôte sur lequel se connecter quand on utilise `smtp` comme transport. | 127.0.0.1 |
+| mailer_port (**depuis la 2.4.0**) | Port quand on utilise `smtp` comme transport. Par défaut à 465 si le cryptage vaut `ssl` et 25 le cas échéant.| false |
+| mailer_encryption (**depuis la 2.4.0**) | Le cryptage utilisé quand le transport est `smtp`. Les valeurs correctes sont : `tls`, `ssl`, ou `null` (ce qui désactivera le cryptage).| ~ |
+| mailer_auth_mode (**depuis la 2.4.0**) | Le mode d'authentication quand le transport est `smtp`. Les valeurs correctes sont `plain`, `login`, `cram-md5`, ou `null`.| ~ |
 
 ## Autres paramètres de wallabag
 
@@ -88,6 +95,7 @@ parameters:
 | from_email | Email de l'expéditeur pour chaque email envoyé | no-reply@wallabag.org |
 | rss_limit | Limite pour les flux RSS | 50 |
 | domain_name | URL complète de votre instance wallabag (sans le / de fin) | https://your-wallabag-url-instance.com |
+| sentry_dsn (**depuis la 2.4.0**) | DSN de [Sentry](https://sentry.io/welcome/) qui permet de capter les erreurs | null |
 
 ## Options de RabbitMQ
 
