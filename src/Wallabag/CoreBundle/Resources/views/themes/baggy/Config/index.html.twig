@@ -111,14 +111,14 @@
                 {% else %}
                     <em>{{ 'config.form_feed.no_token'|trans }}</em>
                 {% endif %}
-                –
-                <a href="{{ path('generate_token') }}">
-                    {% if feed.token %}
-                        {{ 'config.form_feed.token_reset'|trans }}
-                    {% else %}
-                        {{ 'config.form_feed.token_create'|trans }}
-                    {% endif %}
-                </a>
+
+                {% if feed.token %}
+                    – <a href="{{ path('generate_token') }}">{{ 'config.form_feed.token_reset'|trans }}</a>
+                    – <a href="{{ path('revoke_token') }}">{{ 'config.form_feed.token_revoke'|trans }}</a>
+                {% else %}
+                    – <a href="{{ path('generate_token') }}">{{ 'config.form_feed.token_create'|trans }}</a>
+                {% endif %}
+
             </div>
         </fieldset>
 

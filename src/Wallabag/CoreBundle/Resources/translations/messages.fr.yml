@@ -92,6 +92,7 @@ config:
         no_token: "Aucun jeton généré"
         token_create: "Créez votre jeton"
         token_reset: "Réinitialisez votre jeton"
+        token_revoke: 'Supprimer le jeton'
         feed_links: "Adresses de vos flux"
         feed_link:
             unread: "Non lus"
@@ -595,6 +596,7 @@ flashes:
             tagging_rules_updated: "Règles mises à jour"
             tagging_rules_deleted: "Règle supprimée"
             feed_token_updated: "Jeton des flux mis à jour"
+            feed_token_revoked: 'Jeton des flux supprimé'
             annotations_reset: "Annotations supprimées"
             tags_reset: "Tags supprimés"
             entries_reset: "Articles supprimés"

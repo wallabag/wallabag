@@ -91,6 +91,7 @@ config:
         no_token: 'Ключ не задан'
         token_create: 'Создать ключ'
         token_reset: 'Пересоздать ключ'
+        # token_revoke: 'Revoke the token'
         feed_links: 'ссылка на RSS'
         feed_link:
             unread: 'непрочитанные'
@@ -560,6 +561,7 @@ flashes:
             tagging_rules_updated: 'Правила тегировния обновлены'
             tagging_rules_deleted: 'Правила тегировния удалены'
             feed_token_updated: 'RSS ключ обновлен'
+            # feed_token_revoked: 'RSS token revoked'
             annotations_reset: "Аннотации сброшены"
             tags_reset: "Теги сброшены"
             entries_reset: "Записи сброшены"
