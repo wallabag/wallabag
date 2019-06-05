@@ -102,17 +102,17 @@ URL of your Unmark.it instance.
 
 ## Import
 
-### Enable RabbitMQ to import data asynchronously
+### Enable RabbitMQ
 
 `1` to activate RabbitMQ, `0` to deactivate (see [Asynchronous tasks](../asynchronous.md)).
 
-### Enable Redis to import data asynchronously
+### Enable Redis
 
 `1` to activate Redis, `0` to deactivate (see [Asynchronous tasks](../asynchronous.md)).
 
 ## Misc
 
-### Enable demo mode ? (only used for the wallabag public demo)
+### Enable demo mode?
 
 `1` to activate demo mode, `0` to deactivate (it's not possible to modify the user account).
 
@@ -125,6 +125,10 @@ Username of the account used for demo.
 `1` to activate local pictures downloading, `0`, to deactivate.
 
 Once this feature is activated, the articles pictures will be downloaded in the `/web/assets/images` folder of your wallabag instance. The path of pictures in articles will also be updated to the path of pictures which are on your instance.
+
+{% hint style="tip" %}
+If you want GIFs to keep animation, install `imagick` PHP extension (something like `pecl install imagick`)
+{% endhint %}
 
 ### Support URL for wallabag
 
