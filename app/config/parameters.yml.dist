@@ -63,3 +63,6 @@ parameters:
     redis_port: 6379
     redis_path: null
     redis_password: null
+
+    # sentry logging
+    sentry_dsn: ~
