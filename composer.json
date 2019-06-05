@@ -90,7 +90,8 @@
         "defuse/php-encryption": "^2.1",
         "html2text/html2text": "^4.1",
         "pragmarx/recovery": "^0.1.0",
-        "php-http/httplug-bundle": "^1.14"
+        "php-http/httplug-bundle": "^1.14",
+        "sentry/sentry-symfony": "^3.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~3.0",
