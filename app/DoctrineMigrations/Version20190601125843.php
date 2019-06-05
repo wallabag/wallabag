@@ -30,27 +30,8 @@ class Version20190601125843 extends WallabagMigration
             ]);
         }
 
-        $entryTable->dropIndex('hashed_url_user_id');
-        $entryTable->addIndex(
-            [
-                'user_id',
-                'hashed_url',
-                'hashed_given_url',
-            ],
-            'hashed_urls_user_id',
-            [],
-            [
-                // specify length for index which is required by MySQL on text field
-                'lengths' => [
-                    // user_id
-                    null,
-                    // hashed_url
-                    40,
-                    // hashed_given_url
-                    40,
-                ],
-            ]
-        );
+        // 40 = length of sha1 field hashed_given_url
+        $entryTable->addIndex(['user_id', 'hashed_given_url'], 'hashed_given_url_user_id', [], ['lengths' => [null, 40]]);
     }
 
     /**
@@ -68,7 +49,6 @@ class Version20190601125843 extends WallabagMigration
             $entryTable->dropColumn('hashed_given_url');
         }
 
-        $entryTable->dropIndex('hashed_urls_user_id');
-        $entryTable->addIndex(['user_id', 'hashed_url'], 'hashed_url_user_id', [], ['lengths' => [null, 40]]);
+        $entryTable->dropIndex('hashed_given_url_user_id');
     }
 }

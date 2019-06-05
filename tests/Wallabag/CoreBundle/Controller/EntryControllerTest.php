@@ -265,6 +265,9 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertContains('/view/', $client->getResponse()->getTargetUrl());
     }
 
+    /**
+     * This test will require an internet connection.
+     */
     public function testPostNewOkUrlExistWithRedirection()
     {
         $this->logInAs('admin');
