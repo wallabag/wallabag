@@ -91,6 +91,7 @@ config:
         no_token: 'ไม่มีเครื่องหมาย'
         token_create: 'สร้างเครื่องหมาย'
         token_reset: 'ทำเครื่องหมาย'
+        # token_revoke: 'Revoke the token'
         feed_links: 'ลิงค์ RSS'
         feed_link:
             unread: 'ยังไมได้่อ่าน'
@@ -590,6 +591,7 @@ flashes:
             tagging_rules_updated: 'อัปเดตการแท็กข้อบังคับ'
             tagging_rules_deleted: 'การลบข้อบังคับของแท็ก'
             feed_token_updated: 'อัปเดตเครื่องหมาย RSS '
+            # feed_token_revoked: 'RSS token revoked'
             annotations_reset: รีเซ็ตหมายเหตุ
             tags_reset: รีเซ็ตแท็ก
             entries_reset: รีเซ็ตรายการ

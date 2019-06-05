@@ -91,6 +91,7 @@ config:
         no_token: 'Pas cap de geton generat'
         token_create: 'Creatz vòstre geton'
         token_reset: 'Reïnicializatz vòstre geton'
+        # token_revoke: 'Revoke the token'
         feed_links: 'URLs de vòstres fluxes RSS'
         feed_link:
             unread: 'Pas legits'
@@ -592,6 +593,7 @@ flashes:
             tagging_rules_updated: 'Règlas misa a jorn'
             tagging_rules_deleted: 'Règla suprimida'
             feed_token_updated: 'Geton RSS mes a jorn'
+            # feed_token_revoked: 'RSS token revoked'
             annotations_reset: Anotacions levadas
             tags_reset: Etiquetas levadas
             entries_reset: Articles levats

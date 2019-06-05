@@ -91,6 +91,7 @@ config:
         no_token: 'Nessun token'
         token_create: 'Crea il tuo token'
         token_reset: 'Rigenera il tuo token'
+        # token_revoke: 'Revoke the token'
         feed_links: 'Collegamenti RSS'
         feed_link:
             unread: 'Non letti'
@@ -592,6 +593,7 @@ flashes:
             tagging_rules_updated: 'Regole di etichettatura aggiornate'
             tagging_rules_deleted: 'Regola di etichettatura eliminate'
             feed_token_updated: 'RSS token aggiornato'
+            # feed_token_revoked: 'RSS token revoked'
             annotations_reset: Reset annotazioni
             tags_reset: Reset etichette
             entries_reset: Reset articoli

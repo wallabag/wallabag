@@ -91,6 +91,7 @@ config:
         no_token: 'Sin token'
         token_create: 'Crear token'
         token_reset: 'Reiniciar token'
+        # token_revoke: 'Revoke the token'
         feed_links: 'URLs de feeds RSS'
         feed_link:
             unread: 'sin leer'
@@ -593,6 +594,7 @@ flashes:
             tagging_rules_updated: 'Regla de etiquetado actualizada'
             tagging_rules_deleted: 'Regla de etiquetado eliminada'
             feed_token_updated: 'Token RSS actualizado'
+            # feed_token_revoked: 'RSS token revoked'
             annotations_reset: Anotaciones reiniciadas
             tags_reset: Etiquetas reiniciadas
             entries_reset: Artículos reiniciados

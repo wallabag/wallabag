@@ -91,6 +91,7 @@ config:
         no_token: 'Brak tokena'
         token_create: 'Stwórz tokena'
         token_reset: 'Zresetuj swojego tokena'
+        # token_revoke: 'Revoke the token'
         feed_links: 'RSS links'
         feed_link:
             unread: 'Nieprzeczytane'
@@ -592,6 +593,7 @@ flashes:
             tagging_rules_updated: 'Reguły tagowania zaktualizowane'
             tagging_rules_deleted: 'Reguła tagowania usunięta'
             feed_token_updated: 'Token kanału RSS zaktualizowany'
+            # feed_token_revoked: 'RSS token revoked'
             annotations_reset: Zresetuj adnotacje
             tags_reset: Zresetuj tagi
             entries_reset: Zresetuj wpisy

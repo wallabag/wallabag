@@ -300,6 +300,34 @@ class ConfigController extends Controller
     }
 
     /**
+     * @param Request $request
+     *
+     * @Route("/revoke-token", name="revoke_token")
+     *
+     * @return RedirectResponse|JsonResponse
+     */
+    public function revokeTokenAction(Request $request)
+    {
+        $config = $this->getConfig();
+        $config->setFeedToken(null);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($config);
+        $em->flush();
+
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse();
+        }
+
+        $this->addFlash(
+            'notice',
+            'flashes.config.notice.feed_token_revoked'
+        );
+
+        return $this->redirect($this->generateUrl('config') . '#set2');
+    }
+
+    /**
      * Deletes a tagging rule and redirect to the config homepage.
      *
      * @param TaggingRule $rule

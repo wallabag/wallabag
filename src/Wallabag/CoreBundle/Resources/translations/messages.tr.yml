@@ -91,6 +91,7 @@ config:
         no_token: 'Belirteç (token) yok'
         token_create: 'Yeni belirteç (token) oluştur'
         token_reset: 'Belirteci (token) sıfırla'
+        # token_revoke: 'Revoke the token'
         feed_links: 'RSS akış bağlantıları'
         feed_link:
             unread: 'Okunmayan'
