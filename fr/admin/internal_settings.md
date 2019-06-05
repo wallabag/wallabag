@@ -128,7 +128,7 @@ Nom d'utilisateur du compte utilisé pour la démo.
 Une fois cette fonctionnalité activée, les images des articles seront téléchargées dans le répertoire `/web/assets/images` de votre instance wallabag. De plus, le chemin des images dans les articles sera remplacé par l'image qui se trouve sur votre instance.
 
 {% hint style="tip" %}
-Si vous voulez que les GIFs restent animés, installer l'extension PHP `imagick` (par exemple : `pecl install imagick`)
+Si vous voulez que les GIFs restent animés, installer l'extension PHP `imagick`. C'est généralement disponible dans un paquet de votre distribution avec comme nom `php-imagick`.
 {% endhint %}
 
 ### URL de support de wallabag
