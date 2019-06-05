@@ -127,7 +127,7 @@ Username of the account used for demo.
 Once this feature is activated, the articles pictures will be downloaded in the `/web/assets/images` folder of your wallabag instance. The path of pictures in articles will also be updated to the path of pictures which are on your instance.
 
 {% hint style="tip" %}
-If you want GIFs to keep animation, install `imagick` PHP extension (something like `pecl install imagick`)
+If you want GIFs to keep animation, install `imagick` PHP extension. It's mostly available through distros packet management as `php-imagick`.
 {% endhint %}
 
 ### Support URL for wallabag
