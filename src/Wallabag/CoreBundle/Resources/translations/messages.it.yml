@@ -33,6 +33,7 @@ menu:
         back_to_unread: 'Torna ai contenuti non letti'
         users_management: 'Gestione utenti'
         site_credentials: 'Credenziali sito'
+        quickstart: "Introduzione"
     top:
         add_new_entry: 'Aggiungi un nuovo contenuto'
         search: 'Cerca'

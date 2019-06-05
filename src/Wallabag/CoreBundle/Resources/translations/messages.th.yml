@@ -33,6 +33,7 @@ menu:
         back_to_unread: 'กลับไปยังรายการที่ไม่ได้อ่าน'
         users_management: 'การจัดการผู้ใช้'
         site_credentials: 'การรับรองไซต์'
+        quickstart: "เริ่มแบบด่วน"
     top:
         add_new_entry: 'เพิ่มรายการใหม่'
         search: 'ค้นหา'

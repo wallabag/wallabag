@@ -91,6 +91,9 @@
             <li class="bold {% if currentRoute == 'howto' %}active{% endif %}">
                 <a class="waves-effect" href="{{ path('howto') }}">{{ 'menu.left.howto'|trans }}</a>
             </li>
+            <li class="bold {% if currentRoute == 'quickstart' %}active{% endif %}">
+                <a class="waves-effect" href="{{ path('quickstart') }}">{{ 'menu.left.quickstart'|trans }}</a>
+            </li>
             <li class="bold">
                 <a class="waves-effect icon icon-power" href="{{ path('fos_user_security_logout') }}">{{ 'menu.left.logout'|trans }}</a>
             </li>
