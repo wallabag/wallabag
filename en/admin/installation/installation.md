@@ -9,7 +9,9 @@ git clone https://github.com/wallabag/wallabag.git
 cd wallabag && make install
 ```
 
-Now, read the following documentation to create your virtual host, then
+If it's your first installation, you can safely answer "yes" when asking to reset the database.
+
+Now, read the next step to create your virtual host, then
 access your wallabag.
 
 {% hint style="info" %}
@@ -44,7 +46,7 @@ wget https://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 You will find the [md5 hash of the latest package on our
 website](https://wallabag.org/en#download).
 
-Now, read the following documentation to create your virtual host, then
+Now, read the next step to create your virtual host, then
 access your wallabag.
 
 To create a new user, please use the register form. Then, in order to have admin
@@ -83,7 +85,7 @@ store.
 [Install wallabag on your
 Cloudron](https://cloudron.io/store/org.wallabag.cloudronapp.html)
 
-### Installation on YunoHost
+## Installation on YunoHost
 
 YunoHost provides an easy way to install webapps on your server with a
 focus on sysadmin automation and keeping apps updated. wallabag is
@@ -93,9 +95,8 @@ official repository.
 [![Install wallabag with
 YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=wallabag2)
 
-### Installation on Synology
+## Installation on Synology
 
 The SynoCommunity provides a package to install wallabag on your Synology NAS.
 
 [Install wallabag with Synology](https://synocommunity.com/package/wallabag)
-

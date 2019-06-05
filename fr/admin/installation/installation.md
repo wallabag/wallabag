@@ -1,6 +1,6 @@
 # Installation
 
-### Sur un serveur dédié (méthode conseillée)
+## Sur un serveur dédié (méthode conseillée)
 
 Pour installer wallabag, vous devez exécuter ces commandes :
 
@@ -9,22 +9,27 @@ git clone https://github.com/wallabag/wallabag.git
 cd wallabag && make install
 ```
 
-Pour démarrer le serveur interne à php et vérifier que tout s'est
-installé correctement, vous pouvez exécuter :
+Si c'est votre première installation, vous pouvez répondre, sans crainte, "yes" lorsqu'on vous demandera de "reset" la base de donnée.
 
-```bash
-make run
-```
+Maintenant, lisez la documentation ci-dessous pour crééer un virtual host.
 
-Et accéder wallabag à l'adresse <http://lipdevotreserveur:8000>
-
+{% hint style="info" %}
 Pour définir des paramètres via des variables d'environnement, vous
 pouvez les spécifier avec le préfixe `SYMFONY__`. Par exemple,
 `SYMFONY__DATABASE_DRIVER`. Vous pouvez lire la [documentation
 Symfony](http://symfony.com/doc/current/cookbook/configuration/external_parameters.html)
 pour en savoir plus.
+{% endhint %}
 
-### Sur un serveur mutualisé
+{% hint style="tip" %}
+Si vous voulez utiliser SQLite en tant que base de donnée, mettez `%kernel.root_dir%/../data/db/wallabag.sqlite` dans la valeur du paramètre `database_path` pendant l'installation.
+{% endhint %}
+
+{% hint style="info" %}
+Si vous utilisez wallabag derrière Squid comme reverse proxy, assurez-vous de mettre à jour la configuration `squid.conf` pour inclure `login=PASS` au niveau de la ligne `cache_peer`. C'est nécessaire pour le fonctionnement de l'API.
+{% endhint %}
+
+## Sur un serveur mutualisé
 
 Nous mettons à votre disposition une archive avec toutes les dépendances
 à l'intérieur. La configuration par défaut utilise SQLite pour la base
@@ -54,20 +59,20 @@ changé la configuration pour modifier le type de stockage (MySQL ou
 PostgreSQL), vous devrez vous créer un utilisateur via la commande
 `php bin/console wallabag:install --env=prod`.
 
-### Installation avec Docker
+## Installation avec Docker
 
 Nous vous proposons une image Docker pour installer wallabag facilement.
 Allez voir du côté de [Docker
 Hub](https://hub.docker.com/r/wallabag/wallabag/) pour plus
 d'informations.
 
-#### Commande pour démarrer le containeur
+### Commande pour démarrer le containeur
 
 ```bash
 docker pull wallabag/wallabag
 ```
 
-### Installation sur Cloudron
+## Installation sur Cloudron
 
 Cloudron permet d'installer des applications web sur votre serveur
 wallabag est proposé en tant qu'application Cloudron et est disponible
@@ -76,11 +81,17 @@ directement depuis le store.
 [Installer wallabag sur
 Cloudron](https://cloudron.io/store/org.wallabag.cloudronapp.html)
 
-### Installation sur YunoHost
+## Installation sur YunoHost
 
 YunoHost permet d'installer simplement des applications web sur votre serveur.
 wallabag est proposé en tant qu'application YunoHost officielle et est disponible
 directement depuis le dépôt officiel.
 
-[![Installer wallabag sur 
+[![Installer wallabag sur
 YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=wallabag2)
+
+## Installation on Synology
+
+SynoCommunity fournit un package pour installer wallabag sur votre NAS Synology.
+
+[Installer wallabag sur Synology](https://synocommunity.com/package/wallabag)
