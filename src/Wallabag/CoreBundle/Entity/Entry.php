@@ -946,7 +946,7 @@ class Entry
     }
 
     /**
-     * Set origin url.
+     * Set given url.
      *
      * @param string $givenUrl
      *
@@ -961,7 +961,7 @@ class Entry
     }
 
     /**
-     * Get origin url.
+     * Get given url.
      *
      * @return string
      */
