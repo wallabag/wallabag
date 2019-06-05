@@ -166,7 +166,6 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame($this->url, $content->getUrl());
         $this->assertContains('Google', $content->getTitle());
         $this->assertSame('fr', $content->getLanguage());
-        $this->assertSame('2015-03-28 11:43:19', $content->getPublishedAt()->format('Y-m-d H:i:s'));
         $this->assertArrayHasKey('x-frame-options', $content->getHeaders());
         $client->getContainer()->get('craue_config')->set('store_article_headers', 0);
     }
@@ -237,6 +236,44 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         $url = 'https://www.aritylabs.com/post/106091708292/des-contr%C3%B4leurs-optionnels-gr%C3%A2ce-%C3%A0-constmissing';
+
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => $url,
+        ];
+
+        $client->submit($form, $data);
+
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => $url,
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/', $client->getResponse()->getTargetUrl());
+    }
+
+    /**
+     * This test will require an internet connection.
+     */
+    public function testPostNewOkUrlExistWithRedirection()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $url = 'https://wllbg.org/test-redirect/c51c';
 
         $crawler = $client->request('GET', '/new');
 

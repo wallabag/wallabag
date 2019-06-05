@@ -366,8 +366,20 @@ class EntryRepository extends EntityRepository
      */
     public function findByHashedUrlAndUserId($hashedUrl, $userId)
     {
+        // try first using hashed_url (to use the database index)
         $res = $this->createQueryBuilder('e')
             ->where('e.hashedUrl = :hashed_url')->setParameter('hashed_url', $hashedUrl)
+            ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
+            ->getQuery()
+            ->getResult();
+
+        if (\count($res)) {
+            return current($res);
+        }
+
+        // then try using hashed_given_url (to use the database index)
+        $res = $this->createQueryBuilder('e')
+            ->where('e.hashedGivenUrl = :hashed_given_url')->setParameter('hashed_given_url', $hashedUrl)
             ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
             ->getQuery()
             ->getResult();

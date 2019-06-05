@@ -78,6 +78,8 @@ class ContentProxy
             $entry->setUrl($url);
         }
 
+        $entry->setGivenUrl($url);
+
         $this->stockEntry($entry, $content);
     }
 
