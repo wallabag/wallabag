@@ -33,6 +33,7 @@ menu:
         back_to_unread: 'Tornar als articles pas legits'
         users_management: 'Gestion dels utilizaires'
         site_credentials: 'Identificants del site'
+        quickstart: "Per ben començar"
     top:
         add_new_entry: 'Enregistrar un novèl article'
         search: 'Cercar'

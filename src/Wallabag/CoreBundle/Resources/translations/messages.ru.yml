@@ -32,6 +32,8 @@ menu:
         save_link: 'Сохранить ссылку'
         back_to_unread: 'Назад к непрочитанным записям'
         users_management: 'Управление пользователями'
+        site_credentials: 'Site credentials'
+        quickstart: "Быстрый старт"
     top:
         add_new_entry: 'Добавить новую запись'
         search: 'Поиск'

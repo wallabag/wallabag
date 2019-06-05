@@ -33,6 +33,7 @@ menu:
         back_to_unread: 'Tilbage til de ulæste artikler'
         # users_management: 'Users management'
         # site_credentials: 'Site credentials'
+        # quickstart: "Quickstart"
     top:
         add_new_entry: 'Tilføj ny artikel'
         search: 'Søg'

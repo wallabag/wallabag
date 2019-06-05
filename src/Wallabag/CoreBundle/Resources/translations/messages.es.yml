@@ -33,6 +33,7 @@ menu:
         back_to_unread: 'Volver a los artículos sin leer'
         users_management: 'Configuración de usuarios'
         # site_credentials: 'Site credentials'
+        quickstart: "Inicio rápido"
     top:
         add_new_entry: 'Añadir un nuevo artículo'
         search: 'Buscar'

@@ -33,6 +33,7 @@ menu:
         back_to_unread: 'Powrót do nieprzeczytanych artykułów'
         users_management: 'Zarządzanie użytkownikami'
         site_credentials: 'Poświadczenia strony'
+        quickstart: "Szybki start"
     top:
         add_new_entry: 'Dodaj nowy wpis'
         search: 'Szukaj'

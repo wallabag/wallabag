@@ -33,6 +33,7 @@ menu:
         back_to_unread: 'Okunmayan makalelere geri dön'
         # users_management: 'Users management'
         # site_credentials: 'Site credentials'
+        quickstart: "Hızlı başlangıç"
     top:
         add_new_entry: 'Yeni bir makale ekle'
         search: 'Ara'

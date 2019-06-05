@@ -33,6 +33,7 @@ menu:
         back_to_unread: 'Back to unread articles'
         users_management: 'Users management'
         site_credentials: 'Site credentials'
+        quickstart: "Quickstart"
     top:
         add_new_entry: 'Add a new entry'
         search: 'Search'
