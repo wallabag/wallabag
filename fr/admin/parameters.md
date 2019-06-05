@@ -95,7 +95,7 @@ parameters:
 | from_email | Email de l'expéditeur pour chaque email envoyé | no-reply@wallabag.org |
 | rss_limit | Limite pour les flux RSS | 50 |
 | domain_name | URL complète de votre instance wallabag (sans le / de fin) | https://your-wallabag-url-instance.com |
-| sentry_dsn (**depuis la 2.4.0**) | DSN de [Sentry](https://sentry.io/welcome/) qui permet de capter les erreurs | null |
+| sentry_dsn (**depuis la 2.4.0**) | DSN de [Sentry](https://sentry.io/welcome/) qui permet de récolter les erreurs | null |
 
 ## Options de RabbitMQ
 
