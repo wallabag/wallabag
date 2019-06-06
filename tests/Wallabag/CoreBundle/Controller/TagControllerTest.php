@@ -221,4 +221,50 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->assertInstanceOf(Tag::class, $newTag, 'Tag "specific label" exists.');
         $this->assertTrue($newTag->hasEntry($freshEntry), 'Tag "specific label" is assigned to the entry.');
     }
+
+    public function testAddUnicodeTagLabel()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl('http://0.0.0.0/tag-caché');
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+        $this->getEntityManager()->clear();
+
+        $crawler = $client->request('GET', '/view/' . $entry->getId());
+
+        $form = $crawler->filter('form[name=tag]')->form();
+
+        $data = [
+            'tag[label]' => 'cache',
+        ];
+
+        $client->submit($form, $data);
+
+        $crawler = $client->request('GET', '/view/' . $entry->getId());
+
+        $form = $crawler->filter('form[name=tag]')->form();
+
+        $data = [
+            'tag[label]' => 'caché',
+        ];
+
+        $client->submit($form, $data);
+
+        $newEntry = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->find($entry->getId());
+
+        $tags = $newEntry->getTags()->toArray();
+        foreach ($tags as $key => $tag) {
+            $tags[$key] = $tag->getLabel();
+        }
+
+        $this->assertGreaterThanOrEqual(2, \count($tags));
+        $this->assertNotFalse(array_search('cache', $tags, true), 'Tag cache is assigned to the entry');
+        $this->assertNotFalse(array_search('caché', $tags, true), 'Tag caché is assigned to the entry');
+    }
 }
