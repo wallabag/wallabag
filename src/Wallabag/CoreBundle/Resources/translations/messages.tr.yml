@@ -322,11 +322,11 @@ howto:
   top_menu:
     browser_addons: Tarayıcı eklentileri
     mobile_apps: Mobil uygulamalar
-    bookmarklet: Bookmarklet
+    bookmarklet: Bookmarklet imi
   form:
     description: Yeni makale kaydet
   browser_addons:
-    firefox: Standart Firefox Eklentisi
+    firefox: Firefox Eklentisi
     chrome: Chrome Eklentisi
     opera: Opera Eklentisi
   bookmarklet:
