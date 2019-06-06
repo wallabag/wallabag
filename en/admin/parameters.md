@@ -15,18 +15,22 @@ parameters:
     database_driver: pdo_mysql
     database_driver_class: ~
     database_host: 127.0.0.1
-    database_port: null
+    database_port: ~
     database_name: wallabag
     database_user: root
-    database_password: null
-    database_path: null
+    database_password: ~
+    database_path: ~
     database_table_prefix: wallabag_
-    database_socket: null
+    database_socket: ~
     database_charset: utf8mb4
+    domain_name: https://your-wallabag-url-instance.com
     mailer_transport: smtp
+    mailer_user: ~
+    mailer_password: ~
     mailer_host: 127.0.0.1
-    mailer_user: null
-    mailer_password: null
+    mailer_port: false
+    mailer_encryption: ~
+    mailer_auth_mode: ~
     locale: en
     secret: ovmpmAWXRCabNlMgzlzFXDYmCFfzGv
     twofactor_auth: true
@@ -42,9 +46,9 @@ parameters:
     redis_scheme: tcp
     redis_host: localhost
     redis_port: 6379
-    redis_path: null
-    redis_password: null
-    domain_name: https://your-wallabag-url-instance.com
+    redis_path: ~
+    redis_password: ~
+    sentry_dsn: ~
 ```
 
 ## Meaning of each parameter
@@ -69,10 +73,13 @@ parameters:
 
 | Name | Description | Default |
 | -----|-------------|-------- |
-| mailer_transport | The exact transport method to use to deliver emails. Valid values are: smtp, gmail, mail, sendmail, null (which will disable the mailer) | smtp |
-| mailer_host | The host to connect to when using smtp as the transport.| 127.0.0.1 |
-| mailer_user | The username when using smtp as the transport. | ~ |
-| mailer_password | The password when using smtp as the transport. | ~ |
+| mailer_transport | The exact transport method to use to deliver emails. Valid values are: `smtp`, `gmail`, `mail`, `sendmail`, `null` (which will disable the mailer) | smtp |
+| mailer_user | The username when using `smtp` as the transport. | ~ |
+| mailer_password | The password when using `smtp` as the transport. | ~ |
+| mailer_host | The host to connect to when using `smtp` as the transport.| 127.0.0.1 |
+| mailer_port (**new in 2.4.0**) | The port when using `smtp` as the transport. This defaults to 465 if encryption is `ssl` and 25 otherwise.| false |
+| mailer_encryption (**new in 2.4.0**) | The encryption mode to use when using smtp as the transport. Valid values are `tls`, `ssl`, or `null` (indicating no encryption).| ~ |
+| mailer_auth_mode (**new in 2.4.0**) | The authentication mode to use when using smtp as the transport. Valid values are `plain`, `login`, `cram-md5`, or `null`.| ~ |
 
 ## Other wallabag options
 
@@ -86,7 +93,8 @@ parameters:
 | fosuser_confirmation | true to send a confirmation by email for each registration | true |
 | from_email | email address used in From: field in each email | no-reply@wallabag.org |
 | rss_limit | item limit for RSS feeds | 50 |
-| domain_name (**new in 2.3.0**) | Full URL of your wallabag instance (without the trailing slash) | https://your-wallabag-url-instance.com |
+| domain_name | Full URL of your wallabag instance (without the trailing slash) | https://your-wallabag-url-instance.com |
+| sentry_dsn (**new in 2.4.0**) | DSN from [Sentry](https://sentry.io/welcome/) which logs errors | null |
 
 ## RabbitMQ options
 
