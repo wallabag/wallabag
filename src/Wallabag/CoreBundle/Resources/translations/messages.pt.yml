@@ -419,6 +419,7 @@ tag:
     list:
         number_on_the_page: '{0} Não existem tags.|{1} Uma tag.|]1,Inf[ Existem %count% tags.'
         see_untagged_entries: 'Ver entradas sem tags'
+        # no_untagged_entries: 'There are no untagged entries.'
     new:
         # add: 'Add'
         # placeholder: 'You can add several tags, separated by a comma.'

@@ -407,6 +407,7 @@ tag:
     list:
         number_on_the_page: '{0} Теги не найдены.|{1} Найден один тег.|]1,Inf[ Найдено %count% тегов.'
         see_untagged_entries: 'Просмотреть записи без тегов'
+        # no_untagged_entries: 'There are no untagged entries.'
     new:
         add: 'Добавить'
         placeholder: 'Вы можете добавить несколько тегов, разделенных запятой.'

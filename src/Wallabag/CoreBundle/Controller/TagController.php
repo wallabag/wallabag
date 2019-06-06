@@ -87,7 +87,7 @@ class TagController extends Controller
     {
         $tags = $this->get('wallabag_core.tag_repository')
             ->findAllFlatTagsWithNbEntries($this->getUser()->getId());
-        $untagged = $this->get('wallabag_core.entry_repository')
+        $nbEntriesUntagged = $this->get('wallabag_core.entry_repository')
             ->countUntaggedEntriesByUser($this->getUser()->getId());
 
         $renameForms = [];
@@ -98,7 +98,7 @@ class TagController extends Controller
         return $this->render('WallabagCoreBundle:Tag:tags.html.twig', [
             'tags' => $tags,
             'renameForms' => $renameForms,
-            'untagged' => $untagged,
+            'nbEntriesUntagged' => $nbEntriesUntagged,
         ]);
     }
 

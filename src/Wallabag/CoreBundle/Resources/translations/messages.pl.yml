@@ -419,6 +419,7 @@ tag:
     list:
         number_on_the_page: '{0} Nie ma tagów.|{1} Jest jeden tag.|]1,Inf[ Są %count% tagi.'
         see_untagged_entries: 'Zobacz nieotagowane wpisy'
+        # no_untagged_entries: 'There are no untagged entries.'
     new:
         add: 'Dodaj'
         placeholder: 'Możesz dodać kilka tagów, oddzielając je przecinkami.'
