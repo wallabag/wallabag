@@ -421,6 +421,7 @@ tag:
     list:
         number_on_the_page: "{0} I a pas cap d'etiquetas.|{1} I a una etiqueta.|]1,Inf[ I a %count% etiquetas."
         see_untagged_entries: "Afichar las entradas sens etiquetas"
+        # no_untagged_entries: 'There are no untagged entries.'
     new:
         add: 'Ajustar'
         placeholder: "Podètz ajustar mai qu'una etiqueta, separadas per de virgula."

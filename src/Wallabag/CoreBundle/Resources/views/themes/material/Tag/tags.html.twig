@@ -34,6 +34,10 @@
     </div>
 
     <div>
-        <a href="{{ path('untagged') }}">{{ 'tag.list.see_untagged_entries'|trans }}</a>
+        {% if nbEntriesUntagged == 0 %}
+            {{ 'tag.list.no_untagged_entries'|trans }}
+        {% else %}
+            <a href="{{ path('untagged') }}">{{ 'tag.list.see_untagged_entries'|trans }} ({{nbEntriesUntagged}})</a>
+        {% endif %}
     </div>
 {% endblock %}

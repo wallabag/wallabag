@@ -419,6 +419,7 @@ tag:
     list:
         number_on_the_page: '{0} ไม่มีการแท็ก|{1} มีหนึ่งแท็ก|]1,Inf[ มี %count% แท็ก'
         see_untagged_entries: 'พบรายการที่ไม่ได้แท็ก'
+        # no_untagged_entries: 'There are no untagged entries.'
     new:
         add: 'เพิ่ม'
         placeholder: 'คุณสามารถเพิ่มได้หลายแท็ก, จากการแบ่งโดย comma'
