@@ -545,7 +545,7 @@ user:
         no: "Non"
         create_new_one: "Créer un nouvel utilisateur"
     form:
-        username_label: "Identifiant"
+        username_label: "Identifiant (ne peut être changé)"
         name_label: "Nom"
         password_label: "Mot de passe"
         repeat_new_password_label: "Confirmez votre nouveau mot de passe"
