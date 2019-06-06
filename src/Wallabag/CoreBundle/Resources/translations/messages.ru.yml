@@ -100,6 +100,7 @@ config:
         feed_limit: 'Количество записей в фиде'
     form_user:
         # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
+        # login_label: 'Login'
         name_label: 'Имя'
         email_label: 'Email'
             # emailTwoFactor_label: 'Using email (receive a code by email)'

@@ -5,7 +5,7 @@ security:
         forgot_password: 'Forgot your password?'
         submit: 'Login'
         register: 'Register'
-        username: 'Username'
+        username: 'Login'
         password: 'Password'
         cancel: 'Cancel'
     resetting:
@@ -102,6 +102,7 @@ config:
         feed_limit: 'Number of items in the feed'
     form_user:
         two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
+        login_label: 'Login'
         name_label: 'Name'
         email_label: 'Email'
         two_factor:
@@ -544,7 +545,7 @@ user:
         no: No
         create_new_one: Create a new user
     form:
-        username_label: 'Username'
+        username_label: 'Login'
         name_label: 'Name'
         password_label: 'Password'
         repeat_new_password_label: 'Repeat new password'
@@ -559,7 +560,7 @@ user:
         delete_confirm: Are you sure?
         back_to_list: Back to list
     search:
-        placeholder: Filter by username or email
+        placeholder: Filter by login or email
 
 site_credential:
     page_title: Site credentials management
@@ -573,7 +574,7 @@ site_credential:
         no: No
         create_new_one: Create a new credential
     form:
-        username_label: 'Username'
+        username_label: 'Login'
         host_label: 'Host (subdomain.example.org, .example.org, etc.)'
         password_label: 'Password'
         save: Save

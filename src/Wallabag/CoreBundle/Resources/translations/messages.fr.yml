@@ -5,7 +5,7 @@ security:
         forgot_password: "Mot de passe oublié ?"
         submit: "Se connecter"
         register: "Créer un compte"
-        username: "Nom d’utilisateur"
+        username: "Identifiant"
         password: "Mot de passe"
         cancel: "Annuler"
     resetting:
@@ -102,6 +102,7 @@ config:
         feed_limit: "Nombre d’articles dans le flux"
     form_user:
         two_factor_description: "Activer l’authentification double-facteur veut dire que vous allez recevoir un code par courriel OU que vous devriez utiliser une application de mot de passe à usage unique (comme Google Authenticator, Authy or FreeOTP) pour obtenir un code temporaire à chaque nouvelle connexion non approuvée. Vous ne pouvez pas choisir les deux options."
+        login_label: 'Identifiant'
         name_label: "Nom"
         email_label: "Adresse courriel"
         two_factor:
@@ -544,7 +545,7 @@ user:
         no: "Non"
         create_new_one: "Créer un nouvel utilisateur"
     form:
-        username_label: "Nom d’utilisateur"
+        username_label: "Identifiant"
         name_label: "Nom"
         password_label: "Mot de passe"
         repeat_new_password_label: "Confirmez votre nouveau mot de passe"
@@ -560,7 +561,7 @@ user:
         delete_confirm: "Êtes-vous sûr ?"
         back_to_list: "Revenir à la liste"
     search:
-        placeholder: "Filtrer par nom d’utilisateur ou email"
+        placeholder: "Filtrer par identifiant ou email"
 
 site_credential:
     page_title: Gestion des accès aux sites
