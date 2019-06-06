@@ -29,7 +29,7 @@ Par exemple :
 
 ### URL de Diaspora, si le service Diaspora est activé
 
-URL de votre instance Diaspora*.
+URL de votre instance Diaspora\*.
 
 ### Activer l'authentification pour les articles derrière un paywall
 
@@ -41,7 +41,7 @@ URL de votre instance Shaarli.
 
 ### Activer le partage vers Diaspora
 
-`1` pour activer le partage vers [Diaspora*](https://diasporafoundation.org/), `0` pour désactiver.
+`1` pour activer le partage vers [Diaspora\*](https://diasporafoundation.org/), `0` pour désactiver.
 
 ### Activer le partage par email
 
@@ -103,17 +103,17 @@ URL de votre instance Unmark.it.
 
 ## Import
 
-### Activer RabbitMQ pour gérer les imports de façon asynchrone
+### Activer RabbitMQ
 
 `1` pour activer RabbitMQ, `0` pour le désactiver (cf [Tâches asynchrones](../asynchronous.md)).
 
-### Activer Redis pour gérer les imports de façon asynchrone
+### Activer Redis
 
 `1` pour activer Redis, `0` pour le désactiver (cf [Tâches asynchrones](../asynchronous.md)).
 
 ## Divers
 
-### Activer le mode démo ? (utiliser uniquement pour la démo publique de wallabag)
+### Activer le mode démo ?
 
 `1` pour activer le mode démo, `0` pour le désactiver (il est impossible de modifier le compte utilisateur).
 
@@ -126,6 +126,10 @@ Nom d'utilisateur du compte utilisé pour la démo.
 `1` pour activer le téléchargement des images en local, `0`, pour désactiver.
 
 Une fois cette fonctionnalité activée, les images des articles seront téléchargées dans le répertoire `/web/assets/images` de votre instance wallabag. De plus, le chemin des images dans les articles sera remplacé par l'image qui se trouve sur votre instance.
+
+{% hint style="tip" %}
+Si vous voulez que les GIFs restent animés, installer l'extension PHP `imagick`. C'est généralement disponible dans un paquet de votre distribution avec comme nom `php-imagick`.
+{% endhint %}
 
 ### URL de support de wallabag
 
