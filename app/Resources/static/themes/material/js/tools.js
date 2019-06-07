@@ -29,8 +29,16 @@ function initRandom() {
   }
 }
 
+function initSort() {
+  // no display if export (ie: entries) not available
+  if ($('div').is('#sort')) {
+    $('#button_sort').show();
+  }
+}
+
 export {
   initExport,
   initFilters,
   initRandom,
+  initSort,
 };

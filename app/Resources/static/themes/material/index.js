@@ -8,7 +8,7 @@ import 'materialize-css/dist/js/materialize';
 import '../_global/index';
 
 /* Tools */
-import { initExport, initFilters, initRandom } from './js/tools';
+import { initExport, initFilters, initRandom, initSort } from './js/tools';
 
 /* Import shortcuts */
 import './js/shortcuts/main';
@@ -70,6 +70,7 @@ $(document).ready(() => {
   initRandom();
   stickyNav();
   articleScroll();
+  initSort();
 
   const toggleNav = (toShow, toFocus) => {
     $('.nav-panel-actions').hide(100);
