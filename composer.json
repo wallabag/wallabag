@@ -68,7 +68,7 @@
         "lexik/form-filter-bundle": "^5.0.4",
         "j0k3r/graby": "^2.0",
         "php-http/guzzle5-adapter": "^2.0",
-        "friendsofsymfony/user-bundle": "2.0.*",
+        "friendsofsymfony/user-bundle": "2.1.*",
         "friendsofsymfony/oauth-server-bundle": "^1.5",
         "stof/doctrine-extensions-bundle": "^1.2",
         "scheb/two-factor-bundle": "^3.0",
