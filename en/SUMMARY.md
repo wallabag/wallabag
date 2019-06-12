@@ -48,6 +48,7 @@
 * [Internal settings](admin/internal_settings.md)
 * [Upgrade](admin/upgrade.md)
     * [Upgrade from 2.1 to 2.2](admin/query-upgrade-21-22.md)
+    * [Upgrade from 2.2 to 2.3](admin/query-upgrade-22-23.md)
 
 ## Developer
 
