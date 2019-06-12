@@ -118,7 +118,6 @@
                 {% else %}
                     – <a href="{{ path('generate_token') }}">{{ 'config.form_feed.token_create'|trans }}</a>
                 {% endif %}
-
             </div>
         </fieldset>
 
@@ -151,6 +150,12 @@
 
     {{ form_start(form.user) }}
         {{ form_errors(form.user) }}
+        <fieldset class="w500p inline">
+            <div class="row">
+                <label>{{ 'config.form_user.login_label'|trans }}</label>
+                {{ app.user.username }}
+            </div>
+        </fieldset>
 
         <fieldset class="w500p inline">
             <div class="row">

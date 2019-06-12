@@ -102,6 +102,7 @@ config:
         feed_limit: 'Link do RSS'
     form_user:
         # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
+        # login_label: 'Login (can not be changed)'
         name_label: 'Nazwa'
         email_label: 'Adres email'
             # emailTwoFactor_label: 'Using email (receive a code by email)'

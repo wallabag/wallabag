@@ -182,6 +182,15 @@
                             {{ form_errors(form.user) }}
 
                             <div class="row">
+                                <div class="col s12">
+                                    <h6 class="grey-text">{{ 'config.form_user.login_label'|trans }}</h6>
+                                    <div>
+                                        {{ app.user.username }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
                                 <div class="input-field col s12">
                                     {{ form_label(form.user.name) }}
                                     {{ form_errors(form.user.name) }}
