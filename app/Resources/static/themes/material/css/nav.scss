@@ -136,6 +136,10 @@ nav {
   top: 0;
 }
 
+#button_sort {
+  display: none;
+}
+
 @media (min-width: 993px) {
   .button-collapse {
     display: none;
