@@ -40,7 +40,7 @@ fi
 # Check for wallabag .git folder
 if [ ! -d .git ]; then
     echo "Can not update because wallabag wasn't installed using git (see https://doc.wallabag.org/en/admin/upgrade.html#upgrade-on-a-shared-hosting). Aborting.";
-    exit 1;
+    exit 2;
 fi
 
 rm -rf var/cache/*
