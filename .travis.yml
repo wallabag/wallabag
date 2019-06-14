@@ -1,6 +1,8 @@
 language: php
 
 services:
+    - mysql
+    - postgresql
     - rabbitmq
     - redis
 
