@@ -1,3 +1,11 @@
+# Queries when upgrading from 2.1.x to 2.2.x
+
+You'll find all queries to run when upgrading.
+
+We assume that the table prefix is `wallabag_`. Don't forget to backup your database before migrating.
+
+You may encounter issues with indexes names: if so, please change queries with the correct index name.
+
 # Migration 20161001072726
 
 ## MySQL
