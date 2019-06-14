@@ -122,13 +122,17 @@ class EntryRepository extends EntityRepository
     /**
      * Retrieve a sorted list of untagged entries for a user.
      *
-     * @param int $userId
+     * @param int    $userId
+     * @param string $sortBy    Field to sort
+     * @param string $direction Direction of the order
      *
      * @return QueryBuilder
      */
-    public function getBuilderForUntaggedByUser($userId)
+    public function getBuilderForUntaggedByUser($userId, $sortBy = 'starredAt', $direction = 'DESC')
     {
-        return $this->sortQueryBuilder($this->getRawBuilderForUntaggedByUser($userId));
+        $sortBy = $sortBy ?: 'id';
+
+        return $this->sortQueryBuilder($this->getRawBuilderForUntaggedByUser($userId), $sortBy, $direction);
     }
 
     /**
