@@ -75,16 +75,16 @@ final class Version20190510141130 extends WallabagMigration
                 break;
             case 'postgresql':
                 $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_access_tokens') . ' DROP CONSTRAINT FK_368A4209A76ED395');
-                $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_access_tokens') . ' ADD CONSTRAINT FK_368A4209A76ED395 FOREIGN KEY (user_id) REFERENCES "' . $this->getTable('user') . '" (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+                $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_access_tokens') . ' ADD CONSTRAINT FK_368A4209A76ED395 FOREIGN KEY (user_id) REFERENCES ' . $this->getTable('user') . ' (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
 
                 $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_clients') . ' DROP CONSTRAINT idx_user_oauth_client');
-                $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_clients') . ' ADD CONSTRAINT FK_635D765EA76ED395 FOREIGN KEY (user_id) REFERENCES "' . $this->getTable('user') . '" (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+                $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_clients') . ' ADD CONSTRAINT FK_635D765EA76ED395 FOREIGN KEY (user_id) REFERENCES ' . $this->getTable('user') . ' (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
 
                 $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_refresh_tokens') . ' DROP CONSTRAINT FK_20C9FB24A76ED395');
-                $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_refresh_tokens') . ' ADD CONSTRAINT FK_20C9FB24A76ED395 FOREIGN KEY (user_id) REFERENCES "' . $this->getTable('user') . '" (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+                $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_refresh_tokens') . ' ADD CONSTRAINT FK_20C9FB24A76ED395 FOREIGN KEY (user_id) REFERENCES ' . $this->getTable('user') . ' (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
 
                 $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_auth_codes') . ' DROP CONSTRAINT FK_EE52E3FAA76ED395');
-                $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_auth_codes') . ' ADD CONSTRAINT FK_EE52E3FAA76ED395 FOREIGN KEY (user_id) REFERENCES "' . $this->getTable('user') . '" (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+                $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_auth_codes') . ' ADD CONSTRAINT FK_EE52E3FAA76ED395 FOREIGN KEY (user_id) REFERENCES ' . $this->getTable('user') . ' (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
                 break;
         }
     }
