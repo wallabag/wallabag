@@ -153,62 +153,6 @@
             "time": "2019-04-09T12:31:48+00:00"
         },
         {
-            "name": "composer/ca-bundle",
-            "version": "1.1.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/composer/ca-bundle.git",
-                "reference": "558f321c52faeb4828c03e7dc0cfe39a09e09a2d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/558f321c52faeb4828c03e7dc0cfe39a09e09a2d",
-                "reference": "558f321c52faeb4828c03e7dc0cfe39a09e09a2d",
-                "shasum": ""
-            },
-            "require": {
-                "ext-openssl": "*",
-                "ext-pcre": "*",
-                "php": "^5.3.2 || ^7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5",
-                "psr/log": "^1.0",
-                "symfony/process": "^2.5 || ^3.0 || ^4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Composer\\CaBundle\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jordi Boggiano",
-                    "email": "j.boggiano@seld.be",
-                    "homepage": "http://seld.be"
-                }
-            ],
-            "description": "Lets you find a path to the system CA bundle, and includes a fallback to the Mozilla CA bundle.",
-            "keywords": [
-                "cabundle",
-                "cacert",
-                "certificate",
-                "ssl",
-                "tls"
-            ],
-            "time": "2019-01-28T09:30:10+00:00"
-        },
-        {
             "name": "craue/config-bundle",
             "version": "dev-utf8mb4",
             "source": {
@@ -7127,21 +7071,21 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v5.0.24",
+            "version": "v5.0.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "59eac70f15f97ee945924948a6f5e2f6f86b7a4b"
+                "reference": "80a38234bde8321fb92aa0b8c27978a272bb4baf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/59eac70f15f97ee945924948a6f5e2f6f86b7a4b",
-                "reference": "59eac70f15f97ee945924948a6f5e2f6f86b7a4b",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/80a38234bde8321fb92aa0b8c27978a272bb4baf",
+                "reference": "80a38234bde8321fb92aa0b8c27978a272bb4baf",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.9",
-                "sensiolabs/security-checker": "~5.0",
+                "sensiolabs/security-checker": "~5.0|~6.0",
                 "symfony/class-loader": "~2.3|~3.0",
                 "symfony/config": "~2.3|~3.0",
                 "symfony/dependency-injection": "~2.3|~3.0",
@@ -7175,7 +7119,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2018-12-14T17:36:15+00:00"
+            "time": "2019-06-18T15:43:58+00:00"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -7252,22 +7196,24 @@
         },
         {
             "name": "sensiolabs/security-checker",
-            "version": "v5.0.3",
+            "version": "v6.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/security-checker.git",
-                "reference": "46be3f58adac13084497961e10eed9a7fb4d44d1"
+                "reference": "ce8d0552dcb8d3677ab9adb6d19a5837949bfec4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/46be3f58adac13084497961e10eed9a7fb4d44d1",
-                "reference": "46be3f58adac13084497961e10eed9a7fb4d44d1",
+                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/ce8d0552dcb8d3677ab9adb6d19a5837949bfec4",
+                "reference": "ce8d0552dcb8d3677ab9adb6d19a5837949bfec4",
                 "shasum": ""
             },
             "require": {
-                "composer/ca-bundle": "^1.0",
-                "php": ">=5.5.9",
-                "symfony/console": "~2.7|~3.0|~4.0"
+                "php": ">=7.1.3",
+                "symfony/console": "^2.8|^3.4|^4.2",
+                "symfony/http-client": "^4.3",
+                "symfony/mime": "^4.3",
+                "symfony/polyfill-ctype": "^1.11"
             },
             "bin": [
                 "security-checker"
@@ -7275,7 +7221,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.0-dev"
+                    "dev-master": "6.0-dev"
                 }
             },
             "autoload": {
@@ -7294,7 +7240,7 @@
                 }
             ],
             "description": "A security checker for your composer.lock",
-            "time": "2018-12-19T17:14:59+00:00"
+            "time": "2019-06-08T06:46:26+00:00"
         },
         {
             "name": "sentry/sdk",
@@ -7780,6 +7726,184 @@
                 "mailer"
             ],
             "time": "2019-04-21T09:21:45+00:00"
+        },
+        {
+            "name": "symfony/http-client",
+            "version": "v4.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/http-client.git",
+                "reference": "c453b1bb8e8a8b79c9db65a1bd86822f8c6e2bb7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/c453b1bb8e8a8b79c9db65a1bd86822f8c6e2bb7",
+                "reference": "c453b1bb8e8a8b79c9db65a1bd86822f8c6e2bb7",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3",
+                "psr/log": "^1.0",
+                "symfony/http-client-contracts": "^1.1.3",
+                "symfony/polyfill-php73": "^1.11"
+            },
+            "provide": {
+                "psr/http-client-implementation": "1.0",
+                "symfony/http-client-implementation": "1.1"
+            },
+            "require-dev": {
+                "nyholm/psr7": "^1.0",
+                "psr/http-client": "^1.0",
+                "symfony/http-kernel": "^4.3",
+                "symfony/process": "^4.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\HttpClient\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony HttpClient component",
+            "homepage": "https://symfony.com",
+            "time": "2019-06-05T13:19:12+00:00"
+        },
+        {
+            "name": "symfony/http-client-contracts",
+            "version": "v1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/http-client-contracts.git",
+                "reference": "05201f91d4f03c58f7324d019bdd791c8e8e418b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/http-client-contracts/zipball/05201f91d4f03c58f7324d019bdd791c8e8e418b",
+                "reference": "05201f91d4f03c58f7324d019bdd791c8e8e418b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3"
+            },
+            "suggest": {
+                "symfony/http-client-implementation": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Contracts\\HttpClient\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Generic abstractions related to HTTP clients",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "abstractions",
+                "contracts",
+                "decoupling",
+                "interfaces",
+                "interoperability",
+                "standards"
+            ],
+            "time": "2019-06-05T13:28:50+00:00"
+        },
+        {
+            "name": "symfony/mime",
+            "version": "v4.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/mime.git",
+                "reference": "ec2c5565de60e03f33d4296a655e3273f0ad1f8b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/ec2c5565de60e03f33d4296a655e3273f0ad1f8b",
+                "reference": "ec2c5565de60e03f33d4296a655e3273f0ad1f8b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3",
+                "symfony/polyfill-intl-idn": "^1.10",
+                "symfony/polyfill-mbstring": "^1.0"
+            },
+            "require-dev": {
+                "egulias/email-validator": "^2.0",
+                "symfony/dependency-injection": "~3.4|^4.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Mime\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "A library to manipulate MIME messages",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "mime",
+                "mime-type"
+            ],
+            "time": "2019-06-04T09:22:54+00:00"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -8357,6 +8481,64 @@
                 }
             ],
             "description": "Symfony polyfill backporting some PHP 7.2+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2019-02-06T07:57:58+00:00"
+        },
+        {
+            "name": "symfony/polyfill-php73",
+            "version": "v1.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php73.git",
+                "reference": "d1fb4abcc0c47be136208ad9d68bf59f1ee17abd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php73/zipball/d1fb4abcc0c47be136208ad9d68bf59f1ee17abd",
+                "reference": "d1fb4abcc0c47be136208ad9d68bf59f1ee17abd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.11-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php73\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ],
+                "classmap": [
+                    "Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 7.3+ features to lower PHP versions",
             "homepage": "https://symfony.com",
             "keywords": [
                 "compatibility",
