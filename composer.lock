@@ -4618,34 +4618,34 @@
         },
         {
             "name": "liip/theme-bundle",
-            "version": "1.6.1",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/liip/LiipThemeBundle.git",
-                "reference": "f40637ce0523a4e0968e203c09a46acfa4b95d4d"
+                "reference": "362394821ff8dcc90b06272e289e7dafe4dab52a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liip/LiipThemeBundle/zipball/f40637ce0523a4e0968e203c09a46acfa4b95d4d",
-                "reference": "f40637ce0523a4e0968e203c09a46acfa4b95d4d",
+                "url": "https://api.github.com/repos/liip/LiipThemeBundle/zipball/362394821ff8dcc90b06272e289e7dafe4dab52a",
+                "reference": "362394821ff8dcc90b06272e289e7dafe4dab52a",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3.9|^7.0",
+                "php": "^7.0",
                 "psr/log": "~1.0",
-                "symfony/finder": "^2.7|^3.0|^4.0",
-                "symfony/framework-bundle": "^2.7|^3.0|^4.0",
-                "symfony/templating": "^2.7|^3.0|^4.0",
-                "symfony/twig-bundle": "^2.7|^3.0|^4.0",
-                "twig/twig": "^1.27|^2.0"
+                "symfony/finder": "^3.0|^4.0",
+                "symfony/framework-bundle": "^3.0|^4.0",
+                "symfony/templating": "^3.0|^4.0",
+                "symfony/twig-bundle": "^3.0|^4.0",
+                "twig/twig": "^1.34|^2.4"
             },
             "conflict": {
                 "sebastian/comparator": "1.2.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.35|^6.0",
-                "symfony/console": "^2.7|^3.0|^4.0",
-                "symfony/expression-language": "^2.7|^3.0|^4.0"
+                "phpunit/phpunit": "^6.0",
+                "symfony/console": "^3.0|^4.0",
+                "symfony/expression-language": "^3.0|^4.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -4677,7 +4677,7 @@
                 "themes",
                 "theming"
             ],
-            "time": "2018-10-08T07:20:20+00:00"
+            "time": "2019-06-19T12:53:08+00:00"
         },
         {
             "name": "masterminds/html5",
@@ -8738,16 +8738,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.42.1",
+            "version": "v1.42.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "671347603760a88b1e7288aaa9378f33687d7edf"
+                "reference": "21707d6ebd05476854805e4f91b836531941bcd4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/671347603760a88b1e7288aaa9378f33687d7edf",
-                "reference": "671347603760a88b1e7288aaa9378f33687d7edf",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/21707d6ebd05476854805e4f91b836531941bcd4",
+                "reference": "21707d6ebd05476854805e4f91b836531941bcd4",
                 "shasum": ""
             },
             "require": {
@@ -8800,7 +8800,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2019-06-04T11:31:08+00:00"
+            "time": "2019-06-18T15:35:16+00:00"
         },
         {
             "name": "wallabag/php-mobi",
