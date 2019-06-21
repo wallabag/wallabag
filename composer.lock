@@ -3669,16 +3669,16 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.84",
+            "version": "1.0.85",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "37ae71639d3844d022ea402a1f87af7e28d12cac"
+                "reference": "64e6092f583ecc55db0b9e8e33162a4fca2f6659"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/37ae71639d3844d022ea402a1f87af7e28d12cac",
-                "reference": "37ae71639d3844d022ea402a1f87af7e28d12cac",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/64e6092f583ecc55db0b9e8e33162a4fca2f6659",
+                "reference": "64e6092f583ecc55db0b9e8e33162a4fca2f6659",
                 "shasum": ""
             },
             "require": {
@@ -3705,7 +3705,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2019-05-23T07:28:03+00:00"
+            "time": "2019-06-07T20:24:21+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -7277,16 +7277,16 @@
         },
         {
             "name": "sentry/sentry",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-php.git",
-                "reference": "1f1704806820c16dcefcbf2e80b920024fda2234"
+                "reference": "8e27e6c5fcf6f01fc2e5235dd14cc0b2b347d793"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/1f1704806820c16dcefcbf2e80b920024fda2234",
-                "reference": "1f1704806820c16dcefcbf2e80b920024fda2234",
+                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/8e27e6c5fcf6f01fc2e5235dd14cc0b2b347d793",
+                "reference": "8e27e6c5fcf6f01fc2e5235dd14cc0b2b347d793",
                 "shasum": ""
             },
             "require": {
@@ -7352,7 +7352,7 @@
                 "logging",
                 "sentry"
             ],
-            "time": "2019-05-22T07:44:47+00:00"
+            "time": "2019-06-13T11:27:23+00:00"
         },
         {
             "name": "sentry/sentry-symfony",
@@ -7791,16 +7791,16 @@
         },
         {
             "name": "symfony/http-client-contracts",
-            "version": "v1.1.3",
+            "version": "v1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client-contracts.git",
-                "reference": "05201f91d4f03c58f7324d019bdd791c8e8e418b"
+                "reference": "e1924aea9c70ae3e69fff05afa3cb8ce541bf3bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client-contracts/zipball/05201f91d4f03c58f7324d019bdd791c8e8e418b",
-                "reference": "05201f91d4f03c58f7324d019bdd791c8e8e418b",
+                "url": "https://api.github.com/repos/symfony/http-client-contracts/zipball/e1924aea9c70ae3e69fff05afa3cb8ce541bf3bb",
+                "reference": "e1924aea9c70ae3e69fff05afa3cb8ce541bf3bb",
                 "shasum": ""
             },
             "require": {
@@ -7844,7 +7844,7 @@
                 "interoperability",
                 "standards"
             ],
-            "time": "2019-06-05T13:28:50+00:00"
+            "time": "2019-06-17T17:43:54+00:00"
         },
         {
             "name": "symfony/mime",
@@ -8069,7 +8069,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "BackEndTea@gmail.com"
+                    "email": "backendtea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
@@ -10654,16 +10654,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "0.3.4",
+            "version": "0.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "ab518a5fc8f1d90f58bd2c5552ba915e2c477b66"
+                "reference": "8c4ef2aefd9788238897b678a985e1d5c8df6db4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/ab518a5fc8f1d90f58bd2c5552ba915e2c477b66",
-                "reference": "ab518a5fc8f1d90f58bd2c5552ba915e2c477b66",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/8c4ef2aefd9788238897b678a985e1d5c8df6db4",
+                "reference": "8c4ef2aefd9788238897b678a985e1d5c8df6db4",
                 "shasum": ""
             },
             "require": {
@@ -10697,7 +10697,7 @@
                 "MIT"
             ],
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
-            "time": "2019-05-28T11:40:00+00:00"
+            "time": "2019-06-07T19:13:52+00:00"
         },
         {
             "name": "phpstan/phpstan",
