@@ -176,7 +176,7 @@ class FeedController extends Controller
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
         $entries = new Pagerfanta($pagerAdapter);
 
-        $perPage = $user->getConfig()->getFeedLimit() ?: $this->getParameter('wallabag_core.Feed_limit');
+        $perPage = $user->getConfig()->getFeedLimit() ?: $this->getParameter('wallabag_core.feed_limit');
         $entries->setMaxPerPage($perPage);
 
         $url = $this->generateUrl(

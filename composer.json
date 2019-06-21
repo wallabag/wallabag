@@ -78,7 +78,7 @@
         "guzzlehttp/guzzle": "^5.3.1",
         "doctrine/doctrine-migrations-bundle": "^1.3",
         "craue/config-bundle": "dev-utf8mb4",
-        "mnapoli/piwik-twig-extension": "^1.0",
+        "mnapoli/piwik-twig-extension": "^2.0",
         "ocramius/proxy-manager": "^2.1.1",
         "white-october/pagerfanta-bundle": "^1.1",
         "php-amqplib/rabbitmq-bundle": "^1.14",
