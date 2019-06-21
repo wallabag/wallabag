@@ -22,7 +22,7 @@ class AuthCodeMailer implements AuthCodeMailerInterface
     /**
      * Twig to render the html's email.
      *
-     * @var \Twig_Environment
+     * @var Environment
      */
     private $twig;
 
