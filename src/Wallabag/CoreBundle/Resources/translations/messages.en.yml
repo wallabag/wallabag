@@ -165,7 +165,7 @@ config:
         isStarred: Whether the entry is starred or not
         content: The entry's content
         language: The entry's language
-        mimetype: The entry's mime-type
+        mimetype: The entry's media type
         readingTime: The estimated entry's reading time, in minutes
         domainName: The domain name of the entry
       operator_description:
