@@ -131,6 +131,12 @@ services:
         calls:
             - [ setCrypto, [ "@wallabag_core.helper.crypto_proxy" ] ]
 
+    wallabag_core.ignore_origin_instance_rule_repository:
+        class: Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository
+        factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
+        arguments:
+            - WallabagCoreBundle:IgnoreOriginInstanceRule
+
     wallabag_core.helper.entries_export:
         class: Wallabag\CoreBundle\Helper\EntriesExport
         arguments:
