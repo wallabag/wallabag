@@ -59,6 +59,7 @@ config:
         user_info: 'Información de usuario'
         password: 'Contraseña'
         rules: 'Reglas de etiquetado automáticas'
+        # ignore_origin: 'Ignore origin rules'
         new_user: 'Añadir un usuario'
         reset: 'Reiniciar mi cuenta'
     form:
@@ -617,6 +618,8 @@ flashes:
             # otp_disabled: Two-factor authentication disabled
             tagging_rules_imported: Reglas de etiquetado importadas
             tagging_rules_not_imported: Un error se ha producico en la importación de las reglas de etiquetado
+            # ignore_origin_rules_deleted: 'Ignore origin rule deleted'
+            # ignore_origin_rules_updated: 'Ignore origin rule updated'
     entry:
         notice:
             entry_already_saved: 'Artículo ya guardado el %fecha%'

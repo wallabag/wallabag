@@ -16,7 +16,8 @@
                             <li class="tab col s12 m6 l3"><a href="#set3">{{ 'config.tab_menu.user_info'|trans }}</a></li>
                             <li class="tab col s12 m6 l3"><a href="#set4">{{ 'config.tab_menu.password'|trans }}</a></li>
                             <li class="tab col s12 m6 l3"><a href="#set5">{{ 'config.tab_menu.rules'|trans }}</a></li>
-                            <li class="tab col s12 m6 l3"><a href="#set6">{{ 'config.tab_menu.reset'|trans }}</a></li>
+                            <li class="tab col s12 m6 l3"><a href="#set6">{{ 'config.tab_menu.ignore_origin'|trans }}</a></li>
+                            <li class="tab col s12 m6 l3"><a href="#set7">{{ 'config.tab_menu.reset'|trans }}</a></li>
                         </ul>
                     </div>
 
@@ -294,11 +295,11 @@
                                         « {{ tagging_rule.rule }} »
                                         {{ 'config.form_rules.then_tag_as_label'|trans }}
                                         « {{ tagging_rule.tags|join(', ') }} »
-                                        <a href="{{ path('edit_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}">
-                                            <i class="tool grey-text mode_edit material-icons">mode_edit</i>
+                                        <a href="{{ path('edit_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="mode_edit">
+                                            <i class="tool grey-text material-icons">mode_edit</i>
                                         </a>
-                                        <a href="{{ path('delete_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.delete_rule_label'|trans }}">
-                                            <i class="tool grey-text delete material-icons">delete</i>
+                                        <a href="{{ path('delete_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="delete">
+                                            <i class="tool grey-text material-icons">delete</i>
                                         </a>
                                     </li>
                                     {% endfor %}
@@ -466,6 +467,44 @@
                     </div>
 
                     <div id="set6" class="col s12">
+                        {% if app.user.config.ignoreOriginRules is not empty %}
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <ul>
+                                    {% for ignore_origin_rule in app.user.config.ignoreOriginRules %}
+                                    <li>
+                                        {{ 'config.form_rules.if_label'|trans }}
+                                        « {{ ignore_origin_rule.rule }} »
+                                        <a href="{{ path('edit_ignore_origin_rule', {id: ignore_origin_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="mode_edit">
+                                            <i class="tool grey-text material-icons">mode_edit</i>
+                                        </a>
+                                        <a href="{{ path('delete_ignore_origin_rule', {id: ignore_origin_rule.id}) }}" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="delete">
+                                            <i class="tool grey-text material-icons">delete</i>
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {{ form_start(form.new_ignore_origin_user_rule) }}
+                            {{ form_errors(form.new_ignore_origin_user_rule) }}
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    {{ form_label(form.new_ignore_origin_user_rule.rule) }}
+                                    {{ form_errors(form.new_ignore_origin_user_rule.rule) }}
+                                    {{ form_widget(form.new_ignore_origin_user_rule.rule) }}
+                                </div>
+                            </div>
+
+                            {{ form_widget(form.new_ignore_origin_user_rule.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+                            {{ form_rest(form.new_ignore_origin_user_rule) }}
+                        </form>
+                    </div>
+                    
+                    <div id="set7" class="col s12">
                         <div class="row">
                             <h5>{{ 'config.reset.title'|trans }}</h5>
                             <p>{{ 'config.reset.description'|trans }}</p>

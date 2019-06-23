@@ -59,6 +59,7 @@ config:
         user_info: 'Mon compte'
         password: 'Senhal'
         rules: "Règlas d'etiquetas automaticas"
+        # ignore_origin: 'Ignore origin rules'
         new_user: 'Crear un compte'
         reset: 'Zòna de reïnicializacion'
     form:
@@ -617,6 +618,8 @@ flashes:
             # otp_disabled: Two-factor authentication disabled
             tagging_rules_imported: Règlas d’etiquetatge importadas
             tagging_rules_not_imported: Error en important las règlas d’etiquetatge
+            # ignore_origin_rules_deleted: 'Ignore origin rule deleted'
+            # ignore_origin_rules_updated: 'Ignore origin rule updated'
     entry:
         notice:
             entry_already_saved: 'Article ja salvagardat lo %date%'

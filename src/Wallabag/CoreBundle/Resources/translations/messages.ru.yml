@@ -59,6 +59,7 @@ config:
         user_info: 'Информация о пользователе'
         password: 'Пароль'
         rules: 'Правила настройки простановки тегов'
+        # ignore_origin: 'Ignore origin rules'
         new_user: 'Добавить пользователя'
         reset: 'Сброс данных'
     form:
@@ -616,6 +617,8 @@ flashes:
             # otp_disabled: Two-factor authentication disabled
             # tagging_rules_imported: Tagging rules imported
             # tagging_rules_not_imported: Error while importing tagging rules
+            # ignore_origin_rules_deleted: 'Ignore origin rule deleted'
+            # ignore_origin_rules_updated: 'Ignore origin rule updated'
     entry:
         notice:
             entry_already_saved: 'Запись была сохранена ранее %date%'

@@ -59,6 +59,7 @@ config:
         user_info: 'Informação do Usuário'
         password: 'Senha'
         rules: 'Regras de tags'
+        # ignore_origin: 'Ignore origin rules'
         new_user: 'Adicionar um usuário'
         reset: 'Reiniciar minha conta'
     form:

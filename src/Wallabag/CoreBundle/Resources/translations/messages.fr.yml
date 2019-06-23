@@ -59,6 +59,7 @@ config:
         user_info: "Mon compte"
         password: "Mot de passe"
         rules: "Règles de tag automatiques"
+        ignore_origin: "Règles d'omission d'origine"
         new_user: "Créer un compte"
         reset: "Réinitialisation"
     form:
@@ -618,6 +619,11 @@ flashes:
             otp_disabled: "Authentification à double-facteur désactivée"
             tagging_rules_imported: Règles bien importées
             tagging_rules_not_imported: Impossible d'importer les règles
+<<<<<<< HEAD
+=======
+            ignore_origin_rules_deleted: "Règle d'omission d'origine supprimée"
+            ignore_origin_rules_updated: "Règle d'omission d'origine mise à jour"
+>>>>>>> 4c595340... fixup! Add new Ignore Origin rules tab, update ConfigController
     entry:
         notice:
             entry_already_saved: "Article déjà sauvegardé le %date%"

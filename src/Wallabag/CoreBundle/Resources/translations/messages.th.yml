@@ -59,6 +59,7 @@ config:
         user_info: 'ข้อมูลผู้ใช้'
         password: 'รหัสผ่าน'
         rules: 'การแท็กข้อบังคับ'
+        # ignore_origin: 'Ignore origin rules'
         new_user: 'เพิ่มผู้ใช้'
         reset: 'รีเซ็ตพื้นที่ '
     form:
@@ -616,6 +617,8 @@ flashes:
             # otp_disabled: Two-factor authentication disabled
             # tagging_rules_imported: Tagging rules imported
             # tagging_rules_not_imported: Error while importing tagging rules
+            # ignore_origin_rules_deleted: 'Ignore origin rule deleted'
+            # ignore_origin_rules_updated: 'Ignore origin rule updated'
     entry:
         notice:
             entry_already_saved: 'รายการพร้อมบันทึกที่ %date%'

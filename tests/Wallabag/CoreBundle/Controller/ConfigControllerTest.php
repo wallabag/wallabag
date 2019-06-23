@@ -435,7 +435,6 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testTaggingRuleCreation()
     {
         $this->logInAs('admin');
-        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/config');
@@ -457,7 +456,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertContains('flashes.config.notice.tagging_rules_updated', $crawler->filter('body')->extract(['_text'])[0]);
 
-        $editLink = $crawler->filter('.mode_edit')->last()->link();
+        $editLink = $crawler->filter('div[id=set5] a.mode_edit')->last()->link();
 
         $crawler = $client->click($editLink);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
@@ -482,7 +481,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertContains('readingTime <= 30', $crawler->filter('body')->extract(['_text'])[0]);
 
-        $deleteLink = $crawler->filter('.delete')->last()->link();
+        $deleteLink = $crawler->filter('div[id=set5] a.delete')->last()->link();
 
         $crawler = $client->click($deleteLink);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
@@ -574,11 +573,11 @@ class ConfigControllerTest extends WallabagCoreTestCase
             ->getRepository('WallabagCoreBundle:TaggingRule')
             ->findAll()[0];
 
-        $crawler = $client->request('GET', '/tagging-rule/edit/' . $rule->getId());
+        $crawler = $client->request('GET', '/tagging-rule/delete/' . $rule->getId());
 
         $this->assertSame(403, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertContains('You can not access this tagging rule', $body[0]);
+        $this->assertContains('You can not access this rule', $body[0]);
     }
 
     public function testEditingTaggingRuleFromAnOtherUser()
@@ -594,7 +593,144 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertSame(403, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertContains('You can not access this tagging rule', $body[0]);
+        $this->assertContains('You can not access this rule', $body[0]);
+    }
+
+    public function testIgnoreOriginRuleCreation()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/config');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('button[id=ignore_origin_user_rule_save]')->form();
+
+        $data = [
+            'ignore_origin_user_rule[rule]' => 'host = "example.com"',
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+
+        $this->assertContains('flashes.config.notice.ignore_origin_rules_updated', $crawler->filter('body')->extract(['_text'])[0]);
+
+        $editLink = $crawler->filter('div[id=set6] a.mode_edit')->last()->link();
+
+        $crawler = $client->click($editLink);
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('?ignore-origin-user-rule=', $client->getResponse()->headers->get('location'));
+
+        $crawler = $client->followRedirect();
+
+        $form = $crawler->filter('button[id=ignore_origin_user_rule_save]')->form();
+
+        $data = [
+            'ignore_origin_user_rule[rule]' => 'host = "example.org"',
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+
+        $this->assertContains('flashes.config.notice.ignore_origin_rules_updated', $crawler->filter('body')->extract(['_text'])[0]);
+
+        $this->assertContains('host = "example.org"', $crawler->filter('body')->extract(['_text'])[0]);
+
+        $deleteLink = $crawler->filter('div[id=set6] a.delete')->last()->link();
+
+        $crawler = $client->click($deleteLink);
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+        $this->assertContains('flashes.config.notice.ignore_origin_rules_deleted', $crawler->filter('body')->extract(['_text'])[0]);
+    }
+
+    public function dataForIgnoreOriginRuleCreationFail()
+    {
+        return [
+            [
+                [
+                    'ignore_origin_user_rule[rule]' => 'foo = "bar"',
+                ],
+                [
+                    'The variable',
+                    'does not exist.',
+                ],
+            ],
+            [
+                [
+                    'ignore_origin_user_rule[rule]' => '_all != "none"',
+                ],
+                [
+                    'The operator',
+                    'does not exist.',
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider dataForIgnoreOriginRuleCreationFail
+     */
+    public function testIgnoreOriginRuleCreationFail($data, $messages)
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/config');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('button[id=ignore_origin_user_rule_save]')->form();
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+
+        foreach ($messages as $message) {
+            $this->assertContains($message, $body[0]);
+        }
+    }
+
+    public function testDeletingIgnoreOriginRuleFromAnOtherUser()
+    {
+        $this->logInAs('bob');
+        $client = $this->getClient();
+
+        $rule = $client->getContainer()->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:IgnoreOriginUserRule')
+            ->findAll()[0];
+
+        $crawler = $client->request('GET', '/ignore-origin-user-rule/edit/' . $rule->getId());
+
+        $this->assertSame(403, $client->getResponse()->getStatusCode());
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+        $this->assertContains('You can not access this rule', $body[0]);
+    }
+
+    public function testEditingIgnoreOriginRuleFromAnOtherUser()
+    {
+        $this->logInAs('bob');
+        $client = $this->getClient();
+
+        $rule = $client->getContainer()->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:IgnoreOriginUserRule')
+            ->findAll()[0];
+
+        $crawler = $client->request('GET', '/ignore-origin-user-rule/edit/' . $rule->getId());
+
+        $this->assertSame(403, $client->getResponse()->getStatusCode());
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+        $this->assertContains('You can not access this rule', $body[0]);
     }
 
     public function testDemoMode()

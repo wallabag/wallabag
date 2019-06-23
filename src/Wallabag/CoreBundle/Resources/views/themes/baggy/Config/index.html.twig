@@ -404,6 +404,33 @@
         </div>
     </div>
 
+    <h2>{{ 'config.tab_menu.ignore_origin'|trans }}</h2>
+
+    <ul>
+        {% for ignore_origin_rule in app.user.config.ignoreOriginRules %}
+            <li>
+                {{ 'config.form_rules.if_label'|trans }}
+                « {{ ignore_origin_rule.rule }} »
+                <a href="{{ path('edit_ignore_origin_rule', {id: ignore_origin_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="tool mode_edit">✎</a>
+                <a href="{{ path('delete_ignore_origin_rule', {id: ignore_origin_rule.id}) }}" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="tool delete icon-trash icon"></a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    {{ form_start(form.new_ignore_origin_user_rule) }}
+        {{ form_errors(form.new_ignore_origin_user_rule) }}
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(form.new_ignore_origin_user_rule.rule) }}
+                {{ form_errors(form.new_ignore_origin_user_rule.rule) }}
+                {{ form_widget(form.new_ignore_origin_user_rule.rule) }}
+            </div>
+        </fieldset>
+
+        {{ form_rest(form.new_ignore_origin_user_rule) }}
+    </form>
+
     <h2>{{ 'config.reset.title'|trans }}</h2>
     <fieldset class="w500p inline">
         <p>{{ 'config.reset.description'|trans }}</p>
