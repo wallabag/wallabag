@@ -4783,16 +4783,16 @@
         },
         {
             "name": "mnapoli/piwik-twig-extension",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mnapoli/PiwikTwigExtension.git",
-                "reference": "95cafbaca13e436b1939fe0e70079f6db893fd51"
+                "reference": "e1746d20730426d7098b4a9a3f5c6c99c6f04612"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mnapoli/PiwikTwigExtension/zipball/95cafbaca13e436b1939fe0e70079f6db893fd51",
-                "reference": "95cafbaca13e436b1939fe0e70079f6db893fd51",
+                "url": "https://api.github.com/repos/mnapoli/PiwikTwigExtension/zipball/e1746d20730426d7098b4a9a3f5c6c99c6f04612",
+                "reference": "e1746d20730426d7098b4a9a3f5c6c99c6f04612",
                 "shasum": ""
             },
             "require": {
@@ -4800,6 +4800,7 @@
                 "twig/twig": "~2.10"
             },
             "require-dev": {
+                "friendsofphp/php-cs-fixer": "~2.13",
                 "php-coveralls/php-coveralls": "^2.0",
                 "symfony/phpunit-bridge": "^4.2"
             },
@@ -4813,7 +4814,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2019-06-21T10:24:22+00:00"
+            "time": "2019-06-21T10:58:04+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -8070,7 +8071,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "backendtea@gmail.com"
+                    "email": "BackEndTea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
