@@ -58,25 +58,25 @@ one (or many if you want to support many) cron job:
 
 ```
 # for Pocket import
-bin/console rabbitmq:consumer -e=prod import_pocket -w
+bin/console rabbitmq:consumer -env=prod import_pocket -w
 
 # for Readability import
-bin/console rabbitmq:consumer -e=prod import_readability -w
+bin/console rabbitmq:consumer -env=prod import_readability -w
 
 # for Instapaper import
-bin/console rabbitmq:consumer -e=prod import_instapaper -w
+bin/console rabbitmq:consumer -env=prod import_instapaper -w
 
 # for wallabag v1 import
-bin/console rabbitmq:consumer -e=prod import_wallabag_v1 -w
+bin/console rabbitmq:consumer -env=prod import_wallabag_v1 -w
 
 # for wallabag v2 import
-bin/console rabbitmq:consumer -e=prod import_wallabag_v2 -w
+bin/console rabbitmq:consumer -env=prod import_wallabag_v2 -w
 
 # for Firefox import
-bin/console rabbitmq:consumer -e=prod import_firefox -w
+bin/console rabbitmq:consumer -env=prod import_firefox -w
 
 # for Chrome import
-bin/console rabbitmq:consumer -e=prod import_chrome -w
+bin/console rabbitmq:consumer -env=prod import_chrome -w
 ```
 
 Install Redis for asynchronous tasks
@@ -126,25 +126,25 @@ one (or many if you want to support many) cron job:
 
 ```
 # for Pocket import
-bin/console wallabag:import:redis-worker -e=prod pocket -vv >> /path/to/wallabag/var/logs/redis-pocket.log
+bin/console wallabag:import:redis-worker -env=prod pocket -vv >> /path/to/wallabag/var/logs/redis-pocket.log
 
 # for Readability import
-bin/console wallabag:import:redis-worker -e=prod readability -vv >> /path/to/wallabag/var/logs/redis-readability.log
+bin/console wallabag:import:redis-worker -env=prod readability -vv >> /path/to/wallabag/var/logs/redis-readability.log
 
 # for Instapaper import
-bin/console wallabag:import:redis-worker -e=prod instapaper -vv >> /path/to/wallabag/var/logs/redis-instapaper.log
+bin/console wallabag:import:redis-worker -env=prod instapaper -vv >> /path/to/wallabag/var/logs/redis-instapaper.log
 
 # for wallabag v1 import
-bin/console wallabag:import:redis-worker -e=prod wallabag_v1 -vv >> /path/to/wallabag/var/logs/redis-wallabag_v1.log
+bin/console wallabag:import:redis-worker -env=prod wallabag_v1 -vv >> /path/to/wallabag/var/logs/redis-wallabag_v1.log
 
 # for wallabag v2 import
-bin/console wallabag:import:redis-worker -e=prod wallabag_v2 -vv >> /path/to/wallabag/var/logs/redis-wallabag_v2.log
+bin/console wallabag:import:redis-worker -env=prod wallabag_v2 -vv >> /path/to/wallabag/var/logs/redis-wallabag_v2.log
 
 # for Firefox import
-bin/console wallabag:import:redis-worker -e=prod firefox -vv >> /path/to/wallabag/var/logs/redis-firefox.log
+bin/console wallabag:import:redis-worker -env=prod firefox -vv >> /path/to/wallabag/var/logs/redis-firefox.log
 
 # for Chrome import
-bin/console wallabag:import:redis-worker -e=prod chrome -vv >> /path/to/wallabag/var/logs/redis-chrome.log
+bin/console wallabag:import:redis-worker -env=prod chrome -vv >> /path/to/wallabag/var/logs/redis-chrome.log
 ```
 
 If you want to launch the import only for some messages and not all, you
@@ -152,5 +152,5 @@ can specify this number (here 12) and the worker will stop right after
 the 12th message :
 
 ```
-bin/console wallabag:import:redis-worker -e=prod pocket -vv --maxIterations=12
+bin/console wallabag:import:redis-worker -env=prod pocket -vv --maxIterations=12
 ```
