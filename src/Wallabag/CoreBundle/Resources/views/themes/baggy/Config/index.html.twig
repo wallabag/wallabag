@@ -291,6 +291,34 @@
 
         {{ form_rest(form.new_tagging_rule) }}
     </form>
+
+    <div class="row">
+        <h3>{{ 'config.form_rules.card.import_tagging_rules'|trans }}</h3>
+        <p>{{ 'config.form_rules.card.import_tagging_rules_detail'|trans }}</p>
+    </div>
+
+    {{ form_start(form.import_tagging_rule) }}
+        {{ form_errors(form.import_tagging_rule) }}
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(form.import_tagging_rule.file) }}
+                {{ form_errors(form.import_tagging_rule.file) }}
+                {{ form_widget(form.import_tagging_rule.file) }}
+            </div>
+        </fieldset>
+
+        {{ form_rest(form.import_tagging_rule) }}
+    </form>
+
+    {% if app.user.config.taggingRules is not empty %}
+    <div class="row">
+        <h3>{{ 'config.form_rules.card.export_tagging_rules'|trans }}</h3>
+        <p>{{ 'config.form_rules.card.export_tagging_rules_detail'|trans }}</p>
+        <p><a href="{{ path('export_tagging_rule') }}" class="waves-effect waves-light btn">{{ 'config.form_rules.export'|trans }}</a></p>
+    </div>
+    {% endif %}
+
     <div class="row">
         <div class="input-field col s12">
             <h3>{{ 'config.form_rules.faq.title'|trans }}</h3>

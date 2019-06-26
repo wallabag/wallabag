@@ -13,6 +13,11 @@ tag:
   resource: "WallabagApiBundle:TagRest"
   name_prefix:  api_
 
+tagging_rule:
+  type: rest
+  resource: "WallabagApiBundle:TaggingRuleRest"
+  name_prefix:  api_
+
 annotation:
   type: rest
   resource: "WallabagApiBundle:AnnotationRest"

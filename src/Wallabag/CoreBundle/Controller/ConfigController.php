@@ -2,11 +2,14 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
+use JMS\Serializer\SerializationContext;
+use JMS\Serializer\SerializerBuilder;
 use PragmaRX\Recovery\Recovery as BackupCodes;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Locale as LocaleConstraint;
@@ -15,6 +18,7 @@ use Wallabag\CoreBundle\Entity\TaggingRule;
 use Wallabag\CoreBundle\Form\Type\ChangePasswordType;
 use Wallabag\CoreBundle\Form\Type\ConfigType;
 use Wallabag\CoreBundle\Form\Type\FeedType;
+use Wallabag\CoreBundle\Form\Type\TaggingRuleImportType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleType;
 use Wallabag\CoreBundle\Form\Type\UserInformationType;
 use Wallabag\CoreBundle\Tools\Utils;
@@ -140,6 +144,37 @@ class ConfigController extends Controller
             return $this->redirect($this->generateUrl('config') . '#set5');
         }
 
+        // handle tagging rules import
+        $taggingRulesImportform = $this->createForm(TaggingRuleImportType::class);
+        $taggingRulesImportform->handleRequest($request);
+
+        if ($taggingRulesImportform->isSubmitted() && $taggingRulesImportform->isValid()) {
+            $message = 'flashes.config.notice.tagging_rules_not_imported';
+            $file = $taggingRulesImportform->get('file')->getData();
+
+            if (null !== $file && $file->isValid() && \in_array($file->getClientMimeType(), ['application/json', 'application/octet-stream'], true)) {
+                $content = json_decode(file_get_contents($file->getPathname()), true);
+
+                if (\is_array($content)) {
+                    foreach ($content as $rule) {
+                        $taggingRule = new TaggingRule();
+                        $taggingRule->setRule($rule['rule']);
+                        $taggingRule->setTags($rule['tags']);
+                        $taggingRule->setConfig($config);
+                        $em->persist($taggingRule);
+                    }
+
+                    $em->flush();
+
+                    $message = 'flashes.config.notice.tagging_rules_imported';
+                }
+            }
+
+            $this->addFlash('notice', $message);
+
+            return $this->redirect($this->generateUrl('config') . '#set5');
+        }
+
         return $this->render('WallabagCoreBundle:Config:index.html.twig', [
             'form' => [
                 'config' => $configForm->createView(),
@@ -147,6 +182,7 @@ class ConfigController extends Controller
                 'pwd' => $pwdForm->createView(),
                 'user' => $userForm->createView(),
                 'new_tagging_rule' => $newTaggingRule->createView(),
+                'import_tagging_rule' => $taggingRulesImportform->createView(),
             ],
             'feed' => [
                 'username' => $user->getUsername(),
@@ -490,6 +526,32 @@ class ConfigController extends Controller
         }
 
         return $this->redirect($request->headers->get('referer', $this->generateUrl('homepage')));
+    }
+
+    /**
+     * Export tagging rules for the logged in user.
+     *
+     * @Route("/tagging-rule/export", name="export_tagging_rule")
+     *
+     * @return Response
+     */
+    public function exportTaggingRulesAction()
+    {
+        $data = SerializerBuilder::create()->build()->serialize(
+            $this->getUser()->getConfig()->getTaggingRules(),
+            'json',
+            SerializationContext::create()->setGroups(['export_tagging_rule'])
+        );
+
+        return Response::create(
+            $data,
+            200,
+            [
+                'Content-type' => 'application/json',
+                'Content-Disposition' => 'attachment; filename="tagging_rules_' . $this->getUser()->getUsername() . '.json"',
+                'Content-Transfer-Encoding' => 'UTF-8',
+            ]
+        );
     }
 
     /**

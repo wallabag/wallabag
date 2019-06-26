@@ -105,6 +105,7 @@ config:
         # login_label: 'Login (can not be changed)'
         name_label: 'İsim'
         email_label: 'E-posta'
+        two_factor:
             # emailTwoFactor_label: 'Using email (receive a code by email)'
             # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, Authy or FreeOTP, to get a one time code)'
             # table_method: Method
@@ -139,6 +140,15 @@ config:
         # edit_rule_label: 'edit'
         rule_label: 'Kural'
         tags_label: 'Etiketler'
+        # card:
+        #     new_tagging_rule: Create a tagging rule
+        #     import_tagging_rules: Import tagging rules
+        #     import_tagging_rules_detail: You have to select the JSON file you previously exported.
+        #     export_tagging_rules: Export tagging rules
+        #     export_tagging_rules_detail: This will download a JSON file that you can use to import tagging rules elsewhere or to backup them.
+        # file_label: JSON file
+        # import_submit: Import
+        # export: Export
         faq:
             title: 'S.S.S.'
             tagging_rules_definition_title: '« etiketleme kuralları » ne anlama geliyor?'
@@ -213,6 +223,8 @@ entry:
         unread_label: 'Okunmayan'
         preview_picture_label: 'Resim önizlemesi varsa'
         preview_picture_help: 'Resim önizlemesi'
+        # is_public_label: 'Has a public link'
+        # is_public_help: 'Public link'
         language_label: 'Dil'
         # http_status_label: 'HTTP status'
         reading_time:
@@ -427,9 +439,9 @@ tag:
     rename:
         # placeholder: 'You can update tag name.'
 
-# export:
-#     footer_template: '<div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p></div>'
-#     unknown: 'Unknown'
+export:
+    # footer_template: '<div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p></div>'
+    # unknown: 'Unknown'
 
 import:
     page_title: 'İçe Aktar'
@@ -560,6 +572,26 @@ user:
     search:
         # placeholder: Filter by username or email
 
+site_credential:
+    # page_title: Site credentials management
+    # new_site_credential: Create a credential
+    # edit_site_credential: Edit an existing credential
+    # description: "Here you can manage all credentials for sites which required them (create, edit and delete), like a paywall, an authentication, etc."
+    # list:
+    #     actions: Actions
+    #     edit_action: Edit
+    #     yes: Yes
+    #     no: No
+    #     create_new_one: Create a new credential
+    # form:
+    #     username_label: 'Login'
+    #     host_label: 'Host (subdomain.example.org, .example.org, etc.)'
+    #     password_label: 'Password'
+    #     save: Save
+    #     delete: Delete
+    #     delete_confirm: Are you sure?
+    #     back_to_list: Back to list
+
 error:
     # page_title: An error occurred
 
@@ -571,13 +603,17 @@ flashes:
             password_not_updated_demo: "In demonstration mode, you can't change password for this user."
             user_updated: 'Bilgiler güncellendi'
             feed_updated: 'RSS bilgiler güncellendi'
-            tagging_rules_updated: 'Tagging rules updated'
-            tagging_rules_deleted: 'Tagging rule deleted'
-            feed_token_updated: 'RSS token updated'
+            # tagging_rules_updated: 'Tagging rules updated'
+            # tagging_rules_deleted: 'Tagging rule deleted'
+            # feed_token_updated: 'RSS token updated'
+            # feed_token_revoked: 'RSS token revoked'
             # annotations_reset: Annotations reset
             # tags_reset: Tags reset
             # entries_reset: Entries reset
             # archived_reset: Archived entries deleted
+            # otp_enabled: Two-factor authentication enabled
+            # tagging_rules_imported: Tagging rules imported
+            # tagging_rules_not_imported: Error while importing tagging rules
     entry:
         notice:
             entry_already_saved: 'Entry already saved on %date%'

@@ -140,6 +140,15 @@ config:
         edit_rule_label: 'bearbeiten'
         rule_label: 'Regel'
         tags_label: 'Tags'
+        # card:
+        #     new_tagging_rule: Create a tagging rule
+        #     import_tagging_rules: Import tagging rules
+        #     import_tagging_rules_detail: You have to select the JSON file you previously exported.
+        #     export_tagging_rules: Export tagging rules
+        #     export_tagging_rules_detail: This will download a JSON file that you can use to import tagging rules elsewhere or to backup them.
+        # file_label: JSON file
+        # import_submit: Import
+        # export: Export
         faq:
             title: 'FAQ'
             tagging_rules_definition_title: 'Was bedeuten die "Tagging-Regeln"?'
@@ -172,6 +181,15 @@ config:
                 and: 'Eine Regel UND eine andere'
                 matches: 'Testet, ob eine <i>Variable</i> auf eine <i>Suche</i> zutrifft (Groß- und Kleinschreibung wird nicht berücksichtigt).<br />Beispiel: <code>title matches "Fußball"</code>'
                 notmatches: 'Testet, ob ein <i>Titel</i> nicht auf eine <i>Suche</i> zutrifft (Groß- und Kleinschreibung wird nicht berücksichtigt).<br />Beispiel: <code>title notmatches "Fußball"</code>'
+    otp:
+        # page_title: Two-factor authentication
+        # app:
+        #     two_factor_code_description_1: You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password. It'll disapear after a page reload.
+        #     two_factor_code_description_2: 'You can scan that QR Code with your app:'
+        #     two_factor_code_description_3: 'Also, save these backup codes in a safe place, you can use them in case you lose access to your OTP app:'
+        #     two_factor_code_description_4: 'Test an OTP code from your configured app:'
+        #     cancel: Cancel
+        #     enable: Enable
 
 entry:
     default_title: 'Titel des Eintrags'
@@ -593,6 +611,9 @@ flashes:
             tags_reset: Tags zurücksetzen
             entries_reset: Einträge zurücksetzen
             archived_reset: Archiverte Einträge zurücksetzen
+            # otp_enabled: Two-factor authentication enabled
+            # tagging_rules_imported: Tagging rules imported
+            # tagging_rules_not_imported: Error while importing tagging rules
     entry:
         notice:
             entry_already_saved: 'Eintrag bereits am %date% gespeichert'
