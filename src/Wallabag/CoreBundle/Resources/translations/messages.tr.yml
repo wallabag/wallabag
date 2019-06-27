@@ -142,7 +142,7 @@ config:
         isStarred: Makale favorilere eklendi mi, eklenmedi mi
         content: Makalenin içeriği
         language: Makalenin dili
-        mimetype: Makalenin mime türü
+        mimetype: Makalenin ortam türü
         readingTime: Makalenin dakika cinsinden tahmini okuma süresi
         domainName: Makalenin bulunduğu internet sitesinin alan adı
       operator_description:
