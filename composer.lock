@@ -8669,16 +8669,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.4.28",
+            "version": "v3.4.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "5e05ffeb1c2e538127e5a33b419edb8b2904b99e"
+                "reference": "4c9b6d7d898457ae2189efdfaca58712269fc994"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/5e05ffeb1c2e538127e5a33b419edb8b2904b99e",
-                "reference": "5e05ffeb1c2e538127e5a33b419edb8b2904b99e",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/4c9b6d7d898457ae2189efdfaca58712269fc994",
+                "reference": "4c9b6d7d898457ae2189efdfaca58712269fc994",
                 "shasum": ""
             },
             "require": {
@@ -8776,7 +8776,7 @@
                 "ocramius/proxy-manager": "~0.4|~1.0|~2.0",
                 "phpdocumentor/reflection-docblock": "^3.0|^4.0",
                 "predis/predis": "~1.0",
-                "symfony/phpunit-bridge": "~3.4|~4.0",
+                "symfony/phpunit-bridge": "~3.4|~4.0|~5.0",
                 "symfony/security-acl": "~2.8|~3.0"
             },
             "type": "library",
@@ -8820,7 +8820,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2019-05-28T09:24:58+00:00"
+            "time": "2019-06-26T13:56:55+00:00"
         },
         {
             "name": "true/punycode",
