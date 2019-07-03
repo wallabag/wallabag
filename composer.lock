@@ -5551,28 +5551,29 @@
         },
         {
             "name": "php-http/discovery",
-            "version": "1.6.1",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/discovery.git",
-                "reference": "684855f2c2e9d0a61868b8f8d6bd0295c8a4b651"
+                "reference": "e822f86a6983790aa17ab13aa7e69631e86806b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/discovery/zipball/684855f2c2e9d0a61868b8f8d6bd0295c8a4b651",
-                "reference": "684855f2c2e9d0a61868b8f8d6bd0295c8a4b651",
+                "url": "https://api.github.com/repos/php-http/discovery/zipball/e822f86a6983790aa17ab13aa7e69631e86806b6",
+                "reference": "e822f86a6983790aa17ab13aa7e69631e86806b6",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.5 || ^7.0"
+                "php": "^7.1"
             },
             "conflict": {
                 "nyholm/psr7": "<1.0"
             },
             "require-dev": {
+                "akeneo/phpspec-skip-example-extension": "^4.0",
                 "php-http/httplug": "^1.0 || ^2.0",
                 "php-http/message-factory": "^1.0",
-                "phpspec/phpspec": "^2.4",
+                "phpspec/phpspec": "^5.1",
                 "puli/composer-plugin": "1.0.0-beta10"
             },
             "suggest": {
@@ -5582,7 +5583,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.5-dev"
+                    "dev-master": "1.7-dev"
                 }
             },
             "autoload": {
@@ -5611,7 +5612,7 @@
                 "message",
                 "psr7"
             ],
-            "time": "2019-02-23T07:42:53+00:00"
+            "time": "2019-06-30T09:04:27+00:00"
         },
         {
             "name": "php-http/guzzle5-adapter",
@@ -7358,28 +7359,28 @@
         },
         {
             "name": "sentry/sentry-symfony",
-            "version": "3.0.0",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-symfony.git",
-                "reference": "3fd045a5ce9279db5687a560bc9ebabd6b0468a7"
+                "reference": "0a12cde953e60e35cdf2f6ca3a80a8def641ce33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/3fd045a5ce9279db5687a560bc9ebabd6b0468a7",
-                "reference": "3fd045a5ce9279db5687a560bc9ebabd6b0468a7",
+                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/0a12cde953e60e35cdf2f6ca3a80a8def641ce33",
+                "reference": "0a12cde953e60e35cdf2f6ca3a80a8def641ce33",
                 "shasum": ""
             },
             "require": {
                 "jean85/pretty-package-versions": "^1.0",
                 "php": "^7.1",
                 "sentry/sdk": "^2.0",
-                "symfony/config": "^3.0||^4.0",
-                "symfony/console": "^3.0||^4.0",
-                "symfony/dependency-injection": "^3.0||^4.0",
-                "symfony/event-dispatcher": "^3.0||^4.0",
-                "symfony/http-kernel": "^3.0||^4.0",
-                "symfony/security-core": "^3.0||^4.0"
+                "symfony/config": "^2.8||^3.0||^4.0",
+                "symfony/console": "^2.8||^3.0||^4.0",
+                "symfony/dependency-injection": "^2.8||^3.0||^4.0",
+                "symfony/event-dispatcher": "^2.8||^3.0||^4.0",
+                "symfony/http-kernel": "^2.8||^3.0||^4.0",
+                "symfony/security-core": "^2.8||^3.0||^4.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.8",
@@ -7389,7 +7390,7 @@
                 "phpstan/phpstan-phpunit": "^0.11",
                 "phpunit/phpunit": "^7.5",
                 "scrutinizer/ocular": "^1.4",
-                "symfony/expression-language": "^3.0||^4.0"
+                "symfony/expression-language": "^2.8||^3.0||^4.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -7426,7 +7427,7 @@
                 "sentry",
                 "symfony"
             ],
-            "time": "2019-05-10T11:37:47+00:00"
+            "time": "2019-07-02T08:46:15+00:00"
         },
         {
             "name": "simplepie/simplepie",
