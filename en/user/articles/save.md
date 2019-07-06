@@ -57,7 +57,7 @@ wallabagger is a browser extension to add pages to wallabag, with the ability to
 
 #### Options
 
-First of all you have to create a new client on your wallabag installation. How to do that is described in [Documentation](https://doc.wallabag.org/en/developer/api/oauth.html#creating-a-new-api-client)
+First of all you have to create a new client on your wallabag installation. How to do that is described in that part of the [documentation](/developer/api/oauth.html#creating-a-new-api-client).
 
 What we need from that client is two strings: Client ID and Client secret.
 
