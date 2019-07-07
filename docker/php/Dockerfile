@@ -12,7 +12,8 @@ RUN apt-get update && apt-get install -y \
         libjpeg-dev \
         libsqlite3-dev \
         imagemagick \
-        libmagickwand-dev
+        libmagickwand-dev \
+        libtidy-dev
 RUN docker-php-ext-install \
         iconv \
         mbstring \
@@ -20,7 +21,8 @@ RUN docker-php-ext-install \
         pdo \
         pdo_mysql \
         pdo_pgsql \
-        pdo_sqlite
+        pdo_sqlite \
+        tidy
 
 RUN printf "\n" | pecl install imagick && docker-php-ext-enable imagick
 
