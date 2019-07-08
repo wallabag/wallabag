@@ -10712,16 +10712,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.11.9",
+            "version": "0.11.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "6771e622ad93f0aff16a100547811e1e50781acb"
+                "reference": "d5eb89ba61eee89f5380a31c9599626430c25649"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/6771e622ad93f0aff16a100547811e1e50781acb",
-                "reference": "6771e622ad93f0aff16a100547811e1e50781acb",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d5eb89ba61eee89f5380a31c9599626430c25649",
+                "reference": "d5eb89ba61eee89f5380a31c9599626430c25649",
                 "shasum": ""
             },
             "require": {
@@ -10783,7 +10783,7 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
-            "time": "2019-07-03T21:25:16+00:00"
+            "time": "2019-07-07T13:50:30+00:00"
         },
         {
             "name": "phpstan/phpstan-doctrine",
