@@ -10,4 +10,6 @@ parameters:
 
     # https://github.com/phpstan/phpstan/issues/694#issuecomment-350724288
     autoload_files:
-        - vendor/bin/.phpunit/phpunit-6.5/vendor/autoload.php
+        - vendor/bin/.phpunit/phpunit-7.4/vendor/autoload.php
+
+    inferPrivatePropertyTypeFromConstructor: true
