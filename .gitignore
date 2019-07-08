@@ -32,6 +32,7 @@ web/uploads/
 # Build
 /app/build
 /build
+/coverage
 
 # Composer PHAR
 /composer.phar

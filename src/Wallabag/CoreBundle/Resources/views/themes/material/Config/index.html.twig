@@ -307,28 +307,77 @@
                         </div>
                         {% endif %}
 
-                        {{ form_start(form.new_tagging_rule) }}
-                            {{ form_errors(form.new_tagging_rule) }}
+                        <ul class="row">
+                            <li class="col l6 m6 s12">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <span class="card-title">{{ 'config.form_rules.card.new_tagging_rule'|trans }}</span>
 
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    {{ form_label(form.new_tagging_rule.rule) }}
-                                    {{ form_errors(form.new_tagging_rule.rule) }}
-                                    {{ form_widget(form.new_tagging_rule.rule) }}
+                                        {{ form_start(form.new_tagging_rule) }}
+                                        {{ form_errors(form.new_tagging_rule) }}
+
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                {{ form_label(form.new_tagging_rule.rule) }}
+                                                {{ form_errors(form.new_tagging_rule.rule) }}
+                                                {{ form_widget(form.new_tagging_rule.rule) }}
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                {{ form_label(form.new_tagging_rule.tags) }}
+                                                {{ form_errors(form.new_tagging_rule.tags) }}
+                                                {{ form_widget(form.new_tagging_rule.tags) }}
+                                            </div>
+                                        </div>
+
+                                        {{ form_widget(form.new_tagging_rule.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+                                        {{ form_rest(form.new_tagging_rule) }}
+                                    </form>
+                                    </div>
                                 </div>
-                            </div>
+                            </li>
+                            <li class="col l6 m6 s12">
+                                <div class="card z-depth-1">
+                                    <div class="card-content">
+                                        <span class="card-title">{{ 'config.form_rules.card.import_tagging_rules'|trans }}</span>
+                                        <p>{{ 'config.form_rules.card.import_tagging_rules_detail'|trans }}</p>
+                                        {{ form_start(form.import_tagging_rule) }}
+                                            {{ form_errors(form.import_tagging_rule) }}
+                                            <div class="row">
+                                                <div class="file-field input-field col s12">
+                                                    {{ form_errors(form.import_tagging_rule.file) }}
+                                                    <div class="btn">
+                                                        <span>{{ form.import_tagging_rule.file.vars.label|trans }}</span>
+                                                        {{ form_widget(form.import_tagging_rule.file) }}
+                                                    </div>
+                                                    <div class="file-path-wrapper">
+                                                        <input class="file-path validate" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    {{ form_label(form.new_tagging_rule.tags) }}
-                                    {{ form_errors(form.new_tagging_rule.tags) }}
-                                    {{ form_widget(form.new_tagging_rule.tags) }}
+                                            {{ form_widget(form.import_tagging_rule.import, { 'attr': {'class': 'btn waves-effect waves-light'} }) }}
+
+                                            {{ form_rest(form.import_tagging_rule) }}
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-
-                            {{ form_widget(form.new_tagging_rule.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
-                            {{ form_rest(form.new_tagging_rule) }}
-                        </form>
+                            </li>
+                            {% if app.user.config.taggingRules is not empty %}
+                            <li class="col l6 m6 s12">
+                                <div class="card z-depth-1">
+                                    <div class="card-content">
+                                        <span class="card-title">{{ 'config.form_rules.card.export_tagging_rules'|trans }}</span>
+                                        <p>{{ 'config.form_rules.card.export_tagging_rules_detail'|trans }}</p>
+                                        <br/>
+                                        <p><a href="{{ path('export_tagging_rule') }}" class="waves-effect waves-light btn">{{ 'config.form_rules.export'|trans }}</a></p>
+                                    </div>
+                                </div>
+                            </li>
+                            {% endif %}
+                        </ul>
 
                         <div class="row">
                             <div class="input-field col s12">

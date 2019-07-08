@@ -140,6 +140,15 @@ config:
         edit_rule_label: "éditer"
         rule_label: "Règle"
         tags_label: "Tags"
+        card:
+            new_tagging_rule: Créer une règle
+            import_tagging_rules: Importer des règles
+            import_tagging_rules_detail: Vous devez sélectionné un fichier JSON que vous avez précédemment exporté.
+            export_tagging_rules: Exporter les règles
+            export_tagging_rules_detail: Un fichier JSON sera téléchargé et vous pourrez l'utiliser pour ré-importer les règles ou comme sauvegarde.
+        file_label: Fichier JSON
+        import_submit: Importer
+        export: Export
         faq:
             title: "FAQ"
             tagging_rules_definition_title: "Que signifient les règles de tag automatiques ?"
@@ -604,6 +613,8 @@ flashes:
             entries_reset: "Articles supprimés"
             archived_reset: "Articles archivés supprimés"
             otp_enabled: "Authentification à double-facteur activée"
+            tagging_rules_imported: Règles bien importées
+            tagging_rules_not_imported: Impossible d'importer les règles
     entry:
         notice:
             entry_already_saved: "Article déjà sauvegardé le %date%"

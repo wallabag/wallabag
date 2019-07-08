@@ -105,6 +105,7 @@ config:
         # login_label: 'Login (can not be changed)'
         name_label: 'Nazwa'
         email_label: 'Adres email'
+        two_factor:
             # emailTwoFactor_label: 'Using email (receive a code by email)'
             # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, Authy or FreeOTP, to get a one time code)'
             # table_method: Method
@@ -139,6 +140,15 @@ config:
         edit_rule_label: 'edytuj'
         rule_label: 'Reguła'
         tags_label: 'Tagi'
+        # card:
+        #     new_tagging_rule: Create a tagging rule
+        #     import_tagging_rules: Import tagging rules
+        #     import_tagging_rules_detail: You have to select the JSON file you previously exported.
+        #     export_tagging_rules: Export tagging rules
+        #     export_tagging_rules_detail: This will download a JSON file that you can use to import tagging rules elsewhere or to backup them.
+        # file_label: JSON file
+        # import_submit: Import
+        # export: Export
         faq:
             title: 'FAQ'
             tagging_rules_definition_title: 'Co oznaczają « reguły tagowania » ?'
@@ -601,6 +611,9 @@ flashes:
             tags_reset: Zresetuj tagi
             entries_reset: Zresetuj wpisy
             archived_reset: Zarchiwizowane wpisy usunięte
+            # otp_enabled: Two-factor authentication enabled
+            # tagging_rules_imported: Tagging rules imported
+            # tagging_rules_not_imported: Error while importing tagging rules
     entry:
         notice:
             entry_already_saved: 'Wpis już został dodany %date%'

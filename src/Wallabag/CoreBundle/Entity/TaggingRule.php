@@ -3,12 +3,16 @@
 namespace Wallabag\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Exclude;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\XmlRoot;
 use Symfony\Bridge\RulerZ\Validator\Constraints as RulerZAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Tagging rule.
  *
+ * @XmlRoot("tagging_rule")
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\TaggingRuleRepository")
  * @ORM\Table(name="`tagging_rule`")
  * @ORM\Entity
@@ -34,6 +38,8 @@ class TaggingRule
      *  allowed_operators={">", "<", ">=", "<=", "=", "is", "!=", "and", "not", "or", "matches", "notmatches"}
      * )
      * @ORM\Column(name="rule", type="string", nullable=false)
+     *
+     * @Groups({"export_tagging_rule"})
      */
     private $rule;
 
@@ -42,10 +48,14 @@ class TaggingRule
      *
      * @Assert\NotBlank()
      * @ORM\Column(name="tags", type="simple_array", nullable=false)
+     *
+     * @Groups({"export_tagging_rule"})
      */
     private $tags = [];
 
     /**
+     * @Exclude
+     *
      * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\Config", inversedBy="taggingRules")
      */
     private $config;

@@ -140,6 +140,15 @@ config:
         edit_rule_label: 'editar'
         rule_label: 'Regla'
         tags_label: 'Etiquetas'
+        # card:
+        #     new_tagging_rule: Create a tagging rule
+        #     import_tagging_rules: Import tagging rules
+        #     import_tagging_rules_detail: You have to select the JSON file you previously exported.
+        #     export_tagging_rules: Export tagging rules
+        #     export_tagging_rules_detail: This will download a JSON file that you can use to import tagging rules elsewhere or to backup them.
+        # file_label: JSON file
+        # import_submit: Import
+        # export: Export
         faq:
             title: 'Preguntas frecuentes'
             tagging_rules_definition_title: '¿Qué significa « reglas de etiquetado automático »?'
@@ -602,6 +611,9 @@ flashes:
             tags_reset: Etiquetas reiniciadas
             entries_reset: Artículos reiniciados
             # archived_reset: Archived entries deleted
+            # otp_enabled: Two-factor authentication enabled
+            # tagging_rules_imported: Tagging rules imported
+            # tagging_rules_not_imported: Error while importing tagging rules
     entry:
         notice:
             entry_already_saved: 'Artículo ya guardado el %fecha%'

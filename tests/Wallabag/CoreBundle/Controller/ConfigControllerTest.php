@@ -2,6 +2,7 @@
 
 namespace Tests\Wallabag\CoreBundle\Controller;
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Config;
@@ -1096,5 +1097,68 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertFalse($user->isGoogleTwoFactor());
         $this->assertEmpty($user->getBackupCodes());
+    }
+
+    public function testExportTaggingRule()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        ob_start();
+        $crawler = $client->request('GET', '/tagging-rule/export');
+        ob_end_clean();
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $headers = $client->getResponse()->headers;
+        $this->assertSame('application/json', $headers->get('content-type'));
+        $this->assertSame('attachment; filename="tagging_rules_admin.json"', $headers->get('content-disposition'));
+        $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
+
+        $content = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertCount(4, $content);
+        $this->assertSame('content matches "spurs"', $content[0]['rule']);
+        $this->assertSame('sport', $content[0]['tags'][0]);
+    }
+
+    public function testImportTagginfRuleBadFile()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/config');
+        $form = $crawler->filter('form[name=upload_tagging_rule_file] > button[type=submit]')->form();
+
+        $data = [
+            'upload_tagging_rule_file[file]' => '',
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+    }
+
+    public function testImportTagginfRuleFile()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/config');
+        $form = $crawler->filter('form[name=upload_tagging_rule_file] > button[type=submit]')->form();
+
+        $file = new UploadedFile(__DIR__ . '/../fixtures/tagging_rules_admin.json', 'tagging_rules_admin.json');
+
+        $data = [
+            'upload_tagging_rule_file[file]' => $file,
+        ];
+
+        $client->submit($form, $data);
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $user = $client->getContainer()->get('fos_user.user_manager.test')->findUserBy(['username' => 'admin']);
+        $taggingRules = $user->getConfig()->getTaggingRules()->toArray();
+        $this->assertCount(5, $taggingRules);
+        $this->assertSame('title matches "football"', $taggingRules[4]->getRule());
     }
 }
