@@ -68,12 +68,8 @@ config:
         items_per_page_label: 'تعداد مقاله در هر صفحه'
         language_label: 'زبان'
         reading_speed:
-            label: 'سرعت خواندن'
+            # label: 'Reading speed (words per minute)'
             help_message: 'سرعت خواندن‌تان را با ابزارهای آنلاین تخمین بزنید:'
-            100_word: 'من تقریباً ۱۰۰ واژه را در دقیقه می‌خوانم'
-            200_word: 'من تقریباً ۲۰۰ واژه را در دقیقه می‌خوانم'
-            300_word: 'من تقریباً ۳۰۰ واژه را در دقیقه می‌خوانم'
-            400_word: 'من تقریباً ۴۰۰ واژه را در دقیقه می‌خوانم'
         action_mark_as_read:
             # label: 'Where do you want to be redirected to after marking an article as read?'
             # redirect_homepage: 'To the homepage'

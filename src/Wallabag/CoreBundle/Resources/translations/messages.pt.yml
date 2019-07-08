@@ -68,12 +68,8 @@ config:
         items_per_page_label: 'Itens por página'
         language_label: 'Idioma'
         reading_speed:
-            label: 'Velocidade de leitura'
+            label: 'Velocidade de leitura (palavras por minuto)'
             help_message: 'Você pode usar ferramentas online para estimar sua velocidade de leitura:'
-            100_word: 'Posso ler ~100 palavras por minuto'
-            200_word: 'Posso ler ~200 palavras por minuto'
-            300_word: 'Posso ler ~300 palavras por minuto'
-            400_word: 'Posso ler ~400 palavras por minuto'
         action_mark_as_read:
             # label: 'Where do you want to be redirected to after marking an article as read?'
             # redirect_homepage: 'To the homepage'

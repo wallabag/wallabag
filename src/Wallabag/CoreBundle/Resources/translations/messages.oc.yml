@@ -68,12 +68,8 @@ config:
         items_per_page_label: "Nombre d'articles per pagina"
         language_label: 'Lenga'
         reading_speed:
-            label: 'Velocitat  de lectura'
+            label: 'Velocitat  de lectura (mots per minuta)'
             help_message: 'Podètz utilizar una aisina en linha per estimar vòstra velocitat de lectura :'
-            100_word: "Legissi a l'entorn de 100 mots per minuta"
-            200_word: "Legissi a l'entorn de 200 mots per minuta"
-            300_word: "Legissi a l'entorn de 300 mots per minuta"
-            400_word: "Legissi a l'entorn de 400 mots per minuta"
         action_mark_as_read:
             label: 'Ont volètz èsser menat aprèp aver marcat un article coma legit ?'
             redirect_homepage: "A la pagina d’acuèlh"
