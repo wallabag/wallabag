@@ -518,6 +518,7 @@ developer:
             redirect_uris_label: 'Ссылка перенаправления (опционально)'
             save_label: 'Создать нового клиента'
         action_back: 'Назад'
+        # copy_to_clipboard: Copy to clipboard
     client_parameter:
         page_title: 'Управление клиентским API > Параметры клиента'
         page_description: 'Здесь ваши параметры клиента.'

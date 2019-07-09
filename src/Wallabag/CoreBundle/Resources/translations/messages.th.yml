@@ -518,6 +518,7 @@ developer:
             redirect_uris_label: 'เส้นทางใหม่ของ URIs (ให้เลือกได้)'
             save_label: 'สร่้างลูกข่ายใหม'
         action_back: 'กลับ'
+        # copy_to_clipboard: Copy to clipboard
     client_parameter:
         page_title: 'การจัดการลูกข่ายของ API > พารามิเตอร์ของลูกข่าย'
         page_description: 'ที่นี้เป็นพารามิเตอร์ของลูกข่ายของคุณ'
