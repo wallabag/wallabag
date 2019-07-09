@@ -113,8 +113,6 @@ $(document).ready(() => {
   // handle copy to clipboard for developer stuff
   const clipboard = new ClipboardJS('.btn');
   clipboard.on('success', (e) => {
-    console.info(e.text);
-
     e.clearSelection();
   });
 });

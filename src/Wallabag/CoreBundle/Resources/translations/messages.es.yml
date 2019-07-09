@@ -518,7 +518,7 @@ developer:
             redirect_uris_label: 'URIs de redirección'
             save_label: 'Crear un nuevo cliente'
         action_back: 'Volver'
-        # copy_to_clipboard: Copy to clipboard
+        # copy_to_clipboard: Copy
     client_parameter:
         page_title: 'Gestión de clientes API > Parámetros del cliente'
         page_description: 'Aquí están los parámetros del cliente.'

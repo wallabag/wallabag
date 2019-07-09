@@ -518,7 +518,7 @@ developer:
     #         redirect_uris_label: 'Redirect URIs'
     #         save_label: 'Create a new client'
     #     action_back: 'Back'
-    #     copy_to_clipboard: Copy to clipboard
+    #     copy_to_clipboard: Copy
     # client_parameter:
     #     page_title: 'API clients management > Client parameters'
     #     page_description: 'Here are your client parameters.'
