@@ -68,12 +68,8 @@ config:
         items_per_page_label: 'Items per page'
         language_label: 'Language'
         reading_speed:
-            label: 'Reading speed'
+            label: 'Reading speed (words per minute)'
             help_message: 'You can use online tools to estimate your reading speed:'
-            100_word: 'I read ~100 words per minute'
-            200_word: 'I read ~200 words per minute'
-            300_word: 'I read ~300 words per minute'
-            400_word: 'I read ~400 words per minute'
         action_mark_as_read:
             label: 'What to do after removing, starring or marking as read an article?'
             redirect_homepage: 'Go to the homepage'

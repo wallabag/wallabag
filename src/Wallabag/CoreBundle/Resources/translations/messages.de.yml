@@ -68,12 +68,8 @@ config:
         items_per_page_label: 'Einträge pro Seite'
         language_label: 'Sprache'
         reading_speed:
-            label: 'Lesegeschwindigkeit'
+            label: 'Lesegeschwindigkeit (Wörter pro Minute)'
             help_message: 'Du kannst Online-Tools nutzen, um deine Lesegeschwindigkeit herauszufinden.'
-            100_word: 'Ich lese ~100 Wörter pro Minute'
-            200_word: 'Ich lese ~200 Wörter pro Minute'
-            300_word: 'Ich lese ~300 Wörter pro Minute'
-            400_word: 'Ich lese ~400 Wörter pro Minute'
         action_mark_as_read:
             label: 'Wohin soll nach dem Gelesenmarkieren eines Artikels weitergeleitet werden?'
             redirect_homepage: 'Zur Homepage'

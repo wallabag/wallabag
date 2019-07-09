@@ -46,7 +46,7 @@
         <div id="entry-{{ entry.id|e }}" class="{% if listMode == 0 %}entry{% else %}listmode entry{% endif %}">
             <h2><a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title|e|raw }}">{{ entry.title | striptags | truncate(80, true, '…') | default('entry.default_title'|trans) | raw }}</a></h2>
 
-            {% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
+            {% set readingTime = entry.readingTime / app.user.config.readingSpeed * 200 %}
             <div class="estimatedTime">
                     <span class="tool reading-time">
             {% if readingTime > 0 %}

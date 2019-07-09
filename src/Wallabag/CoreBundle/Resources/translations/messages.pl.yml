@@ -68,12 +68,8 @@ config:
         items_per_page_label: 'Ilość elementów na stronie'
         language_label: 'Język'
         reading_speed:
-            label: 'Prędkość czytania'
+            label: 'Prędkość czytania (słów na minutę)'
             help_message: 'Możesz skorzystać z narzędzi online do określenia twojej prędkości czytania:'
-            100_word: 'Czytam ~100 słów na minutę'
-            200_word: 'Czytam ~200 słów na minutę'
-            300_word: 'Czytam ~300 słów na minutę'
-            400_word: 'Czytam ~400 słów na minutę'
         action_mark_as_read:
             label: 'Gdzie zostaniesz przekierowany po oznaczeniu artukuły jako przeczytanego'
             redirect_homepage: 'do strony głównej'

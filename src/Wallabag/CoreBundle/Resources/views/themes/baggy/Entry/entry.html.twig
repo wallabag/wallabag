@@ -62,7 +62,7 @@
             {% endif %}
 
             <i class="tool icon icon-time">
-                {% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
+                {% set readingTime = entry.readingTime / app.user.config.readingSpeed * 200 %}
                 {% if readingTime > 0 %}
                     {{ 'entry.list.reading_time_minutes_short'|trans({'%readingTime%': readingTime|round}) }}
                 {% else %}

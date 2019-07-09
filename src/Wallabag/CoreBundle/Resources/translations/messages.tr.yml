@@ -68,12 +68,8 @@ config:
         items_per_page_label: 'Sayfa başına makale sayısı'
         language_label: 'Dil'
         reading_speed:
-            # label: 'Reading speed'
+            # label: 'Reading speed (words per minute)'
             # help_message: 'You can use online tools to estimate your reading speed:'
-            # 100_word: 'I read ~100 words per minute'
-            # 200_word: 'I read ~200 words per minute'
-            # 300_word: 'I read ~300 words per minute'
-            # 400_word: 'I read ~400 words per minute'
         action_mark_as_read:
             # label: 'Where do you want to be redirected to after marking an article as read?'
             # redirect_homepage: 'To the homepage'

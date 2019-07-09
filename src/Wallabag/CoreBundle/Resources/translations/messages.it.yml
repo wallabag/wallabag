@@ -68,12 +68,8 @@ config:
         items_per_page_label: 'Elementi per pagina'
         language_label: 'Lingua'
         reading_speed:
-            label: 'Velocità di lettura'
+            label: 'Velocità di lettura (parole al minuto)'
             help_message: 'Puoi utilizzare degli strumenti online per valutare la tua velocità di lettura:'
-            100_word: 'Leggo ~100 parole al minuto'
-            200_word: 'Leggo ~200 parole al minuto'
-            300_word: 'Leggo ~300 parole al minuto'
-            400_word: 'Leggo ~400 parole al minuto'
         action_mark_as_read:
             label: "Dove vuoi essere reindirizzato dopo aver segnato l'articolo come già letto?"
             redirect_homepage: 'Alla homepage'

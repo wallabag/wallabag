@@ -54,8 +54,8 @@ class EntryFilterType extends AbstractType
                     $lower = $values['value']['left_number'][0];
                     $upper = $values['value']['right_number'][0];
 
-                    $min = (int) ($lower * $this->user->getConfig()->getReadingSpeed());
-                    $max = (int) ($upper * $this->user->getConfig()->getReadingSpeed());
+                    $min = (int) ($lower * $this->user->getConfig()->getReadingSpeed() / 200);
+                    $max = (int) ($upper * $this->user->getConfig()->getReadingSpeed() / 200);
 
                     if (null === $lower && null === $upper) {
                         // no value? no filter

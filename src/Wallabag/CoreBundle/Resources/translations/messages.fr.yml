@@ -68,12 +68,8 @@ config:
         items_per_page_label: "Nombre d’articles par page"
         language_label: "Langue"
         reading_speed:
-            label: "Vitesse de lecture"
+            label: "Vitesse de lecture (mots par minute)"
             help_message: "Vous pouvez utiliser un outil en ligne pour estimer votre vitesse de lecture :"
-            100_word: "Je lis environ 100 mots par minute"
-            200_word: "Je lis environ 200 mots par minute"
-            300_word: "Je lis environ 300 mots par minute"
-            400_word: "Je lis environ 400 mots par minute"
         action_mark_as_read:
             label: "Que faire lorsqu'un article est supprimé, marqué comme lu ou marqué comme favoris ?"
             redirect_homepage: "Retourner à la page d’accueil"

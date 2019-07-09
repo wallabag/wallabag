@@ -51,7 +51,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $data = [
             'config[theme]' => 'baggy',
             'config[items_per_page]' => '30',
-            'config[reading_speed]' => '0.5',
+            'config[reading_speed]' => '100',
             'config[action_mark_as_read]' => '0',
             'config[language]' => 'en',
         ];
@@ -92,7 +92,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/config');
         $form = $crawler->filter('button[id=config_save]')->form();
         $data = [
-            'config[reading_speed]' => '2',
+            'config[reading_speed]' => '400',
         ];
         $client->submit($form, $data);
 
@@ -106,7 +106,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/config');
         $form = $crawler->filter('button[id=config_save]')->form();
         $data = [
-            'config[reading_speed]' => '0.5',
+            'config[reading_speed]' => '100',
         ];
         $client->submit($form, $data);
     }
