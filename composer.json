@@ -71,7 +71,7 @@
         "friendsofsymfony/user-bundle": "2.0.*",
         "friendsofsymfony/oauth-server-bundle": "^1.5",
         "stof/doctrine-extensions-bundle": "^1.2",
-        "scheb/two-factor-bundle": "^3.0",
+        "scheb/two-factor-bundle": "^4.3",
         "grandt/phpepub": "dev-master",
         "wallabag/php-mobi": "~1.0",
         "kphoen/rulerz-bundle": "~0.13",
