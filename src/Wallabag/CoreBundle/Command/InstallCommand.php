@@ -54,7 +54,7 @@ class InstallCommand extends ContainerAwareCommand
 
         $this->io = new SymfonyStyle($input, $output);
 
-        $this->io->title('Wallabag installer');
+        $this->io->title('wallabag installer');
 
         $this
             ->checkRequirements()
@@ -63,7 +63,7 @@ class InstallCommand extends ContainerAwareCommand
             ->setupConfig()
         ;
 
-        $this->io->success('Wallabag has been successfully installed.');
+        $this->io->success('wallabag has been successfully installed.');
         $this->io->success('You can now configure your web server, see https://doc.wallabag.org');
     }
 
