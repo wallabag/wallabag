@@ -172,7 +172,7 @@ config:
         isStarred: A bejegyzés csillagozott-e vagy sem
         content: A bejegyzés tartalma
         language: A bejegyzés nyelve
-        mimetype: A bejegyzés MIME-típusa
+        mimetype: A bejegyzés médiatípusa
         readingTime: A bejegyzés becsült elolvasási ideje, percben
         domainName: A bejegyzés doménneve
       operator_description:
@@ -414,3 +414,7 @@ quickstart:
   developer:
     title: Fejlesztők
     description: 'A fejlesztőkre is gondoltunk: Docker, API, fordítások, stb.'
+    create_application: Hozza létre a saját harmadik féltől származó alkalmazását
+    use_docker: Használjon Docker-t a wallabag telepítéséhez
+  docs:
+    title: Teljes dokumentáció
