@@ -4,6 +4,8 @@ import $ from 'jquery';
 /* Annotations */
 import annotator from 'annotator';
 
+import ClipboardJS from 'clipboard';
+
 /* Fonts */
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import 'lato-font/css/lato-font.css';
@@ -106,5 +108,11 @@ $(document).ready(() => {
 
   $('#user_emailTwoFactor').on('change', () => {
     $('#user_googleTwoFactor').prop('checked', false);
+  });
+
+  // handle copy to clipboard for developer stuff
+  const clipboard = new ClipboardJS('.btn');
+  clipboard.on('success', (e) => {
+    e.clearSelection();
   });
 });

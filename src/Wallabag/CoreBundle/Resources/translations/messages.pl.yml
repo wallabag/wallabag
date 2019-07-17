@@ -518,6 +518,7 @@ developer:
             redirect_uris_label: 'Przekieruj adresy URI'
             save_label: 'Stwórz nowego klienta'
         action_back: 'Cofnij'
+        # copy_to_clipboard: Copy
     client_parameter:
         page_title: 'Zarządzanie klientami API > Parametry klienta'
         page_description: 'Tutaj znajdują się parametry klienta.'
