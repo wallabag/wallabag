@@ -82,7 +82,7 @@ services:
             - ["addSubscriber", ["@bd_guzzle_site_authenticator.authenticator_subscriber"]]
 
     wallabag_core.guzzle.cookie_jar:
-        class: GuzzleHttp\Cookie\FileCookieJar
+        class: Wallabag\CoreBundle\Helper\FileCookieJar
         arguments: ["%kernel.cache_dir%/cookiejar.json"]
 
     wallabag_core.content_proxy:
