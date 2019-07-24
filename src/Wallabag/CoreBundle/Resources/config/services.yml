@@ -83,7 +83,9 @@ services:
 
     wallabag_core.guzzle.cookie_jar:
         class: Wallabag\CoreBundle\Helper\FileCookieJar
-        arguments: ["%kernel.cache_dir%/cookiejar.json"]
+        arguments:
+            - "@logger"
+            - "%kernel.cache_dir%/cookiejar.json"
 
     wallabag_core.content_proxy:
         class: Wallabag\CoreBundle\Helper\ContentProxy

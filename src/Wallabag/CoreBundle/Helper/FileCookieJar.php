@@ -5,6 +5,7 @@ namespace Wallabag\CoreBundle\Helper;
 use GuzzleHttp\Cookie\FileCookieJar as BaseFileCookieJar;
 use GuzzleHttp\Cookie\SetCookie;
 use GuzzleHttp\Utils;
+use Psr\Log\LoggerInterface;
 
 /**
  * Overidden Cookie behavior to:
@@ -13,6 +14,19 @@ use GuzzleHttp\Utils;
  */
 class FileCookieJar extends BaseFileCookieJar
 {
+    private $logger;
+
+    /**
+     * @param LoggerInterface $logger     Only used to log info when something goes wrong
+     * @param string          $cookieFile File to store the cookie data
+     */
+    public function __construct(LoggerInterface $logger, $cookieFile)
+    {
+        parent::__construct($cookieFile);
+
+        $this->logger = $logger;
+    }
+
     /**
      * Saves the cookies to a file.
      *
@@ -57,6 +71,11 @@ class FileCookieJar extends BaseFileCookieJar
         try {
             $data = Utils::jsonDecode($json, true);
         } catch (\InvalidArgumentException $e) {
+            $this->logger->error('JSON inside the cookie is broken', [
+                'json' => $json,
+                'error_msg' => $e->getMessage(),
+            ]);
+
             // cookie file is invalid, just ignore the exception and it'll reset the whole cookie file
             $data = '';
         }
