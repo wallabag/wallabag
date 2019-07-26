@@ -48,7 +48,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
 
         $this->logInAsUsingHttp('admin');
         $crawler = $client->request('GET', '/config');
-        $this->assertContains('scheb_two_factor.trusted', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertContains('trusted', $crawler->filter('body')->extract(['_text'])[0]);
 
         // restore user
         $user = $em
@@ -81,7 +81,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
 
         $this->logInAsUsingHttp('admin');
         $crawler = $client->request('GET', '/config');
-        $this->assertContains('scheb_two_factor.trusted', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertContains('trusted', $crawler->filter('body')->extract(['_text'])[0]);
 
         // restore user
         $user = $em
