@@ -1557,13 +1557,13 @@
             "authors": [
                 {
                     "name": "Multiple users",
-                    "homepage": "https://code.google.com/p/html5lib/",
-                    "role": "Original developers"
+                    "role": "Original developers",
+                    "homepage": "https://code.google.com/p/html5lib/"
                 },
                 {
                     "name": "Sébastien Lavoie",
-                    "homepage": "http://blog.lavoie.sl",
-                    "role": "Packager"
+                    "role": "Packager",
+                    "homepage": "http://blog.lavoie.sl"
                 },
                 {
                     "name": "didier Belot",
@@ -3600,16 +3600,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "da49da0202096eca8d477487753fca61893521e3"
+                "reference": "5ed35e8959be03cb36335605a70e05571eb8157a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/da49da0202096eca8d477487753fca61893521e3",
-                "reference": "da49da0202096eca8d477487753fca61893521e3",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/5ed35e8959be03cb36335605a70e05571eb8157a",
+                "reference": "5ed35e8959be03cb36335605a70e05571eb8157a",
                 "shasum": ""
             },
             "require": {
@@ -3660,17 +3660,17 @@
             "authors": [
                 {
                     "name": "Jeremy Benoist",
-                    "email": "jeremy.benoist@gmail.com",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "jeremy.benoist@gmail.com"
                 },
                 {
                     "name": "FiveFilters.org",
-                    "email": "fivefilters@fivefilters.org",
-                    "role": "Developer (original version)"
+                    "role": "Developer (original version)",
+                    "email": "fivefilters@fivefilters.org"
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2019-06-27T20:29:28+00:00"
+            "time": "2019-07-22T07:05:28+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
@@ -3825,25 +3825,25 @@
             "authors": [
                 {
                     "name": "Keyvan Minoukadeh",
+                    "role": "Developer (ported original JS code to PHP)",
                     "email": "keyvan@keyvan.net",
-                    "homepage": "http://keyvan.net",
-                    "role": "Developer (ported original JS code to PHP)"
+                    "homepage": "http://keyvan.net"
                 },
                 {
                     "name": "Arc90",
-                    "homepage": "http://arc90.com",
-                    "role": "Developer (original JS version)"
+                    "role": "Developer (original JS version)",
+                    "homepage": "http://arc90.com"
                 },
                 {
                     "name": "Jeremy Benoist",
+                    "role": "Developer",
                     "email": "jeremy.benoist@gmail.com",
-                    "homepage": "http://www.j0k3r.net",
-                    "role": "Developer"
+                    "homepage": "http://www.j0k3r.net"
                 },
                 {
                     "name": "DitherSky",
-                    "homepage": "https://github.com/Dither",
-                    "role": "Developer (https://github.com/Dither/full-text-rss)"
+                    "role": "Developer (https://github.com/Dither/full-text-rss)",
+                    "homepage": "https://github.com/Dither"
                 }
             ],
             "description": "Automatic article extraction from HTML",
@@ -5330,18 +5330,18 @@
                 },
                 {
                     "name": "John Kelly",
-                    "email": "johnmkelly86@gmail.com",
-                    "role": "Maintainer"
+                    "role": "Maintainer",
+                    "email": "johnmkelly86@gmail.com"
                 },
                 {
                     "name": "Raúl Araya",
-                    "email": "nubeiro@gmail.com",
-                    "role": "Maintainer"
+                    "role": "Maintainer",
+                    "email": "nubeiro@gmail.com"
                 },
                 {
                     "name": "Luke Bakken",
-                    "email": "luke@bakken.io",
-                    "role": "Maintainer"
+                    "role": "Maintainer",
+                    "email": "luke@bakken.io"
                 }
             ],
             "description": "Formerly videlalvaro/php-amqplib.  This library is a pure PHP implementation of the AMQP protocol. It's been tested against RabbitMQ.",
@@ -6325,9 +6325,9 @@
             "authors": [
                 {
                     "name": "Antonio Carlos Ribeiro",
+                    "role": "Developer",
                     "email": "acr@antoniocarlosribeiro.com",
-                    "homepage": "https://antoniocarlosribeiro.com",
-                    "role": "Developer"
+                    "homepage": "https://antoniocarlosribeiro.com"
                 }
             ],
             "description": "Create random chars, numbers, strings",
@@ -6387,9 +6387,9 @@
             "authors": [
                 {
                     "name": "Antonio Carlos Ribeiro",
+                    "role": "Developer",
                     "email": "acr@antoniocarlosribeiro.com",
-                    "homepage": "https://antoniocarlosribeiro.com",
-                    "role": "Developer"
+                    "homepage": "https://antoniocarlosribeiro.com"
                 }
             ],
             "description": "Create recovery codes for two factor auth",
@@ -8077,7 +8077,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "backendtea@gmail.com"
+                    "email": "BackEndTea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
@@ -9091,14 +9091,14 @@
             "authors": [
                 {
                     "name": "Nicola Asuni",
+                    "role": "Main developer",
                     "email": "info@tecnick.com",
-                    "homepage": "http://nicolaasuni.tecnick.com",
-                    "role": "Main developer"
+                    "homepage": "http://nicolaasuni.tecnick.com"
                 },
                 {
                     "name": "wallabag/core",
-                    "homepage": "https://www.wallabag.org",
-                    "role": "Developers"
+                    "role": "Developers",
+                    "homepage": "https://www.wallabag.org"
                 }
             ],
             "description": "Keeping a working 6.2.x TCPDF version.",
@@ -9229,7 +9229,7 @@
                     "email": "adrien.brault@gmail.com"
                 },
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -9279,7 +9279,7 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],
