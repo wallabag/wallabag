@@ -2228,8 +2228,8 @@
             "authors": [
                 {
                     "name": "A. Grandt",
-                    "email": "php@grandt.com",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "php@grandt.com"
                 }
             ],
             "description": "A class for working around the use of mbstring.func_override",
@@ -2337,9 +2337,9 @@
             "authors": [
                 {
                     "name": "A. Grandt",
+                    "role": "Developer",
                     "email": "php@grandt.com",
-                    "homepage": "http://grandt.com",
-                    "role": "Developer"
+                    "homepage": "http://grandt.com"
                 }
             ],
             "description": "GIF89a compliant Gif resizer, including transparency and optimized gifs with sub sized elements.",
@@ -2384,14 +2384,14 @@
             "authors": [
                 {
                     "name": "A. Grandt",
+                    "role": "Developer",
                     "email": "php@grandt.com",
-                    "homepage": "http://grandt.com",
-                    "role": "Developer"
+                    "homepage": "http://grandt.com"
                 },
                 {
                     "name": "Greg Kappatos",
-                    "homepage": "http://websiteconnect.com.au",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "homepage": "http://websiteconnect.com.au"
                 }
             ],
             "description": "Merge and stream multiple Zip files on the fly.",
@@ -2438,8 +2438,8 @@
             "authors": [
                 {
                     "name": "A. Grandt",
-                    "email": "php@grandt.com",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "php@grandt.com"
                 }
             ],
             "description": "A class for cleaning up/collapsing relative paths. Like real_path, but without the need for the path to exist on the filesystem.",
@@ -8797,16 +8797,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.4.29",
+            "version": "v3.4.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "4c9b6d7d898457ae2189efdfaca58712269fc994"
+                "reference": "4d911e98e1f70538edcca4576c65395ef0fbfa84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/4c9b6d7d898457ae2189efdfaca58712269fc994",
-                "reference": "4c9b6d7d898457ae2189efdfaca58712269fc994",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/4d911e98e1f70538edcca4576c65395ef0fbfa84",
+                "reference": "4d911e98e1f70538edcca4576c65395ef0fbfa84",
                 "shasum": ""
             },
             "require": {
@@ -8904,7 +8904,7 @@
                 "ocramius/proxy-manager": "~0.4|~1.0|~2.0",
                 "phpdocumentor/reflection-docblock": "^3.0|^4.0",
                 "predis/predis": "~1.0",
-                "symfony/phpunit-bridge": "~3.4|~4.0|~5.0",
+                "symfony/phpunit-bridge": "^3.4.19|^4.1.8|~5.0",
                 "symfony/security-acl": "~2.8|~3.0"
             },
             "type": "library",
@@ -8948,7 +8948,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2019-06-26T13:56:55+00:00"
+            "time": "2019-07-27T17:14:21+00:00"
         },
         {
             "name": "true/punycode",
