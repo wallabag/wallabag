@@ -5319,15 +5319,15 @@
             "authors": [
                 {
                     "name": "Paragon Initiative Enterprises",
+                    "role": "Maintainer",
                     "email": "security@paragonie.com",
-                    "homepage": "https://paragonie.com",
-                    "role": "Maintainer"
+                    "homepage": "https://paragonie.com"
                 },
                 {
                     "name": "Steve 'Sc00bz' Thomas",
+                    "role": "Original Developer",
                     "email": "steve@tobtu.com",
-                    "homepage": "https://www.tobtu.com",
-                    "role": "Original Developer"
+                    "homepage": "https://www.tobtu.com"
                 }
             ],
             "description": "Constant-time Implementations of RFC 4648 Encoding (Base-64, Base-32, Base-16)",
@@ -7595,19 +7595,19 @@
             "authors": [
                 {
                     "name": "Ryan Parman",
-                    "homepage": "http://ryanparman.com/",
-                    "role": "Creator, alumnus developer"
+                    "role": "Creator, alumnus developer",
+                    "homepage": "http://ryanparman.com/"
                 },
                 {
                     "name": "Geoffrey Sneddon",
-                    "homepage": "http://gsnedders.com/",
-                    "role": "Alumnus developer"
+                    "role": "Alumnus developer",
+                    "homepage": "http://gsnedders.com/"
                 },
                 {
                     "name": "Ryan McCue",
+                    "role": "Developer",
                     "email": "me@ryanmccue.info",
-                    "homepage": "http://ryanmccue.info/",
-                    "role": "Developer"
+                    "homepage": "http://ryanmccue.info/"
                 }
             ],
             "description": "A simple Atom/RSS parsing library for PHP",
@@ -10058,16 +10058,16 @@
         },
         {
             "name": "m6web/redis-mock",
-            "version": "v4.4.1",
+            "version": "v4.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/M6Web/RedisMock.git",
-                "reference": "ad5099bf4c00cf02c8e9ca2e178a20b8fd3055c2"
+                "reference": "61a517efc2cb1f19d73661de84cc288a1a560ce4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/M6Web/RedisMock/zipball/ad5099bf4c00cf02c8e9ca2e178a20b8fd3055c2",
-                "reference": "ad5099bf4c00cf02c8e9ca2e178a20b8fd3055c2",
+                "url": "https://api.github.com/repos/M6Web/RedisMock/zipball/61a517efc2cb1f19d73661de84cc288a1a560ce4",
+                "reference": "61a517efc2cb1f19d73661de84cc288a1a560ce4",
                 "shasum": ""
             },
             "require": {
@@ -10099,7 +10099,7 @@
                 "mock",
                 "redis"
             ],
-            "time": "2019-07-17T12:08:10+00:00"
+            "time": "2019-07-31T14:07:07+00:00"
         },
         {
             "name": "nette/bootstrap",
