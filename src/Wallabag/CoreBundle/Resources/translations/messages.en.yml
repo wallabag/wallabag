@@ -244,6 +244,7 @@ entry:
             set_as_starred: 'Toggle starred'
             view_original_article: 'Original article'
             re_fetch_content: 'Re-fetch content'
+            edit_content: 'Edit content'
             delete: 'Delete'
             add_a_tag: 'Add a tag'
             share_content: 'Share'
