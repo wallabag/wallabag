@@ -393,3 +393,51 @@ httplug:
                           'X-Accept': 'application/json'
     discovery:
         client: false
+
+fos_ck_editor:
+    default_config: default
+    configs:
+        default:
+            toolbar: basic
+        article_editor:
+            toolbar:
+                - name: 'basicstyles'
+                  items:
+                    - 'Bold'
+                    - 'Italic'
+                    - 'Underline'
+                    - 'Strike'
+                    - 'Subscript'
+                    - 'Superscript'
+                    - '-'
+                    - 'RemoveFormat'
+                - name: 'paragraph'
+                  items:
+                    - 'NumberedList'
+                    - 'BulletedList'
+                    - '-'
+                    - 'Outdent'
+                    - 'Indent'
+                    - '-'
+                    - 'Blockquote'
+                    - 'CreateDiv'
+                    - '-'
+                    - 'JustifyLeft'
+                    - 'JustifyCenter'
+                    - 'JustifyRight'
+                    - 'JustifyBlock'
+                - name: 'links'
+                  items:
+                    - 'Link'
+                    - 'Unlink'
+                    - 'Anchor'
+                - '/'
+                - name: 'styles'
+                  items:
+                    - 'Format'
+                    - 'Font'
+                    - 'FontSize'
+                - '/'
+                - name: 'document'
+                  items:
+                    - 'Source'
