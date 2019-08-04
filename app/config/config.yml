@@ -40,6 +40,7 @@ twig:
     strict_variables: "%kernel.debug%"
     form_themes:
         - "LexikFormFilterBundle:Form:form_div_layout.html.twig"
+        - "@FOSCKEditor/Form/ckeditor_widget.html.twig"
     exception_controller: wallabag_core.exception_controller:showAction
 
 # Doctrine Configuration

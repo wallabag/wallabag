@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
             new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
+            new FOS\CKEditorBundle\FOSCKEditorBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Scheb\TwoFactorBundle\SchebTwoFactorBundle(),
             new KPhoen\RulerZBundle\KPhoenRulerZBundle(),
