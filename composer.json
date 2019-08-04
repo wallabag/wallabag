@@ -70,6 +70,7 @@
         "php-http/guzzle5-adapter": "^2.0",
         "friendsofsymfony/user-bundle": "2.0.*",
         "friendsofsymfony/oauth-server-bundle": "^1.5",
+        "friendsofsymfony/ckeditor-bundle": "^1.2",
         "stof/doctrine-extensions-bundle": "^1.2",
         "scheb/two-factor-bundle": "^4.4",
         "grandt/phpepub": "dev-master",
@@ -115,6 +116,7 @@
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "FOS\\CKEditorBundle\\Composer\\CKEditorScriptHandler::install",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
         ],
