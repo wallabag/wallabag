@@ -32,6 +32,11 @@
                             {{ form_label(form.origin_url) }}
                             {{ form_widget(form.origin_url) }}
                         </div>
+
+                        <div class="s12">
+                            {{ form_label(form.content) }}
+                            {{ form_widget(form.content, {'attr': {'style': 'height:20em; resize:vertical;'}}) }}
+                        </div>
                         <br>
 
                         {{ form_widget(form.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}

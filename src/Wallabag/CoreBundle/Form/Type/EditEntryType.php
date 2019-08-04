@@ -2,6 +2,7 @@
 
 namespace Wallabag\CoreBundle\Form\Type;
 
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -29,6 +30,10 @@ class EditEntryType extends AbstractType
                 'property_path' => 'originUrl',
                 'label' => 'entry.edit.origin_url_label',
                 'default_protocol' => null,
+            ])
+            ->add('content', CKEditorType::class, [
+                'label' => 'entry.edit.content_label',
+                'config_name' => 'article_editor',
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'entry.edit.save_label',
