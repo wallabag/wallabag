@@ -28,7 +28,8 @@ use Wallabag\UserBundle\Entity\User;
  *         @ORM\Index(name="created_at", columns={"created_at"}),
  *         @ORM\Index(name="uid", columns={"uid"}),
  *         @ORM\Index(name="hashed_url_user_id", columns={"user_id", "hashed_url"}, options={"lengths"={null, 40}}),
- *         @ORM\Index(name="hashed_given_url_user_id", columns={"user_id", "hashed_given_url"}, options={"lengths"={null, 40}})
+ *         @ORM\Index(name="hashed_given_url_user_id", columns={"user_id", "hashed_given_url"}, options={"lengths"={null, 40}}),
+ *         @ORM\Index(name="user_language", columns={"language", "user_id"})
  *     }
  * )
  * @ORM\HasLifecycleCallbacks()
@@ -221,7 +222,7 @@ class Entry
     /**
      * @var string
      *
-     * @ORM\Column(name="language", type="text", nullable=true)
+     * @ORM\Column(name="language", type="string", length=20, nullable=true)
      *
      * @Groups({"entries_for_user", "export_all"})
      */
