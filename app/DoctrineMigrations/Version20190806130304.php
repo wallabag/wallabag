@@ -40,7 +40,7 @@ final class Version20190806130304 extends WallabagMigration
                 $this->addSql('CREATE INDEX user_starred ON ' . $this->getTable('entry') . ' (user_id, is_starred, starred_at)');
                 break;
             case 'postgresql':
-                $this->addSql('ALTER TABLE ' . $this->getTable('entry') . ' ALTER COLUMN language VARCHAR(20) DEFAULT NULL');
+                $this->addSql('ALTER TABLE ' . $this->getTable('entry') . ' ALTER language TYPE VARCHAR(20)');
                 $this->addSql('CREATE INDEX user_language ON ' . $this->getTable('entry') . ' (language, user_id)');
                 $this->addSql('CREATE INDEX user_starred ON ' . $this->getTable('entry') . ' (user_id, is_starred, starred_at)');
                 break;
@@ -77,7 +77,7 @@ final class Version20190806130304 extends WallabagMigration
                 $this->addSql('DROP INDEX user_starred ON ' . $this->getTable('entry'));
                 break;
             case 'postgresql':
-                $this->addSql('ALTER TABLE ' . $this->getTable('entry') . ' ALTER COLUMN language LONGTEXT DEFAULT NULL');
+                $this->addSql('ALTER TABLE ' . $this->getTable('entry') . ' ALTER language TYPE TEXT');
                 $this->addSql('DROP INDEX user_language ON ' . $this->getTable('entry'));
                 $this->addSql('DROP INDEX user_starred ON ' . $this->getTable('entry'));
                 break;
