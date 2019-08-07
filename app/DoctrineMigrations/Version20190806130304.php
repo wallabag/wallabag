@@ -33,18 +33,21 @@ final class Version20190806130304 extends WallabagMigration
                 $this->addSql('CREATE INDEX hashed_given_url_user_id ON ' . $this->getTable('entry', true) . ' (user_id, hashed_given_url)');
                 $this->addSql('CREATE INDEX user_language ON ' . $this->getTable('entry', true) . ' (language, user_id)');
                 $this->addSql('CREATE INDEX user_archived ON ' . $this->getTable('entry', true) . ' (user_id, is_archived, archived_at)');
+                $this->addSql('CREATE INDEX user_created ON ' . $this->getTable('entry', true) . ' (user_id, created_at)');
                 $this->addSql('CREATE INDEX user_starred ON ' . $this->getTable('entry', true) . ' (user_id, is_starred, starred_at)');
                 break;
             case 'mysql':
                 $this->addSql('ALTER TABLE ' . $this->getTable('entry') . ' MODIFY language VARCHAR(20) DEFAULT NULL');
                 $this->addSql('CREATE INDEX user_language ON ' . $this->getTable('entry') . ' (language, user_id)');
                 $this->addSql('CREATE INDEX user_archived ON ' . $this->getTable('entry') . ' (user_id, is_archived, archived_at)');
+                $this->addSql('CREATE INDEX user_created ON ' . $this->getTable('entry') . ' (user_id, created_at)');
                 $this->addSql('CREATE INDEX user_starred ON ' . $this->getTable('entry') . ' (user_id, is_starred, starred_at)');
                 break;
             case 'postgresql':
                 $this->addSql('ALTER TABLE ' . $this->getTable('entry') . ' ALTER language TYPE VARCHAR(20)');
                 $this->addSql('CREATE INDEX user_language ON ' . $this->getTable('entry') . ' (language, user_id)');
                 $this->addSql('CREATE INDEX user_archived ON ' . $this->getTable('entry') . ' (user_id, is_archived, archived_at)');
+                $this->addSql('CREATE INDEX user_created ON ' . $this->getTable('entry') . ' (user_id, created_at)');
                 $this->addSql('CREATE INDEX user_starred ON ' . $this->getTable('entry') . ' (user_id, is_starred, starred_at)');
                 break;
         }
@@ -61,6 +64,7 @@ final class Version20190806130304 extends WallabagMigration
                 $this->addSql('DROP INDEX hashed_given_url_user_id');
                 $this->addSql('DROP INDEX user_language');
                 $this->addSql('DROP INDEX user_archived');
+                $this->addSql('DROP INDEX user_created');
                 $this->addSql('DROP INDEX user_starred');
                 $this->addSql('CREATE TEMPORARY TABLE __temp__wallabag_entry AS SELECT id, user_id, uid, title, url, hashed_url, origin_url, given_url, hashed_given_url, is_archived, archived_at, is_starred, content, created_at, updated_at, published_at, published_by, starred_at, mimetype, language, reading_time, domain_name, preview_picture, http_status, headers FROM ' . $this->getTable('entry', true));
                 $this->addSql('DROP TABLE ' . $this->getTable('entry', true));
@@ -79,12 +83,14 @@ final class Version20190806130304 extends WallabagMigration
                 $this->addSql('ALTER TABLE ' . $this->getTable('entry') . ' MODIFY language LONGTEXT DEFAULT NULL');
                 $this->addSql('DROP INDEX user_language ON ' . $this->getTable('entry'));
                 $this->addSql('DROP INDEX user_archived ON ' . $this->getTable('entry'));
+                $this->addSql('DROP INDEX user_created ON ' . $this->getTable('entry'));
                 $this->addSql('DROP INDEX user_starred ON ' . $this->getTable('entry'));
                 break;
             case 'postgresql':
                 $this->addSql('ALTER TABLE ' . $this->getTable('entry') . ' ALTER language TYPE TEXT');
                 $this->addSql('DROP INDEX user_language ON ' . $this->getTable('entry'));
                 $this->addSql('DROP INDEX user_archived ON ' . $this->getTable('entry'));
+                $this->addSql('DROP INDEX user_created ON ' . $this->getTable('entry'));
                 $this->addSql('DROP INDEX user_starred ON ' . $this->getTable('entry'));
                 break;
         }
