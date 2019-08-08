@@ -17,7 +17,6 @@ use Wallabag\UserBundle\Entity\User;
  *         @ORM\Index(name="config_feed_token", columns={"feed_token"}, options={"lengths"={255}}),
  *     }
  * )
- * @ORM\Entity
  */
 class Config
 {
