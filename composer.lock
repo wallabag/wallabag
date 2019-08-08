@@ -3823,8 +3823,8 @@
                 },
                 {
                     "name": "Jack W",
-                    "email": "jack@fin1te.net",
-                    "role": "Developer (SafeCurl original version)"
+                    "role": "Developer (SafeCurl original version)",
+                    "email": "jack@fin1te.net"
                 }
             ],
             "description": "Server-Side Request Forgery (SSRF) protection plugin for HTTPlug",
@@ -7654,7 +7654,7 @@
             ],
             "authors": [
                 {
-                    "name": "Sebastien MALOT",
+                    "name": "Sebastien Malot",
                     "email": "sebastien@malot.fr"
                 }
             ],
@@ -9096,19 +9096,19 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
+                    "role": "Lead Developer",
                     "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "homepage": "http://fabien.potencier.org"
                 },
                 {
                     "name": "Armin Ronacher",
-                    "email": "armin.ronacher@active-4.com",
-                    "role": "Project Founder"
+                    "role": "Project Founder",
+                    "email": "armin.ronacher@active-4.com"
                 },
                 {
                     "name": "Twig Team",
-                    "homepage": "https://twig.symfony.com/contributors",
-                    "role": "Contributors"
+                    "role": "Contributors",
+                    "homepage": "https://twig.symfony.com/contributors"
                 }
             ],
             "description": "Twig, the flexible, fast, and secure template language for PHP",
@@ -9156,8 +9156,8 @@
                 },
                 {
                     "name": "Sander Kromwijk",
-                    "email": "s.kromwijk@gmail.co",
-                    "role": "Original developer"
+                    "role": "Original developer",
+                    "email": "s.kromwijk@gmail.co"
                 }
             ],
             "description": "A Mobipocket file (.mobi) creator in PHP.",
@@ -10058,16 +10058,16 @@
         },
         {
             "name": "m6web/redis-mock",
-            "version": "v4.5.0",
+            "version": "v4.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/M6Web/RedisMock.git",
-                "reference": "61a517efc2cb1f19d73661de84cc288a1a560ce4"
+                "reference": "3f308e4ebe0887205a3760049f9265bdb0127a81"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/M6Web/RedisMock/zipball/61a517efc2cb1f19d73661de84cc288a1a560ce4",
-                "reference": "61a517efc2cb1f19d73661de84cc288a1a560ce4",
+                "url": "https://api.github.com/repos/M6Web/RedisMock/zipball/3f308e4ebe0887205a3760049f9265bdb0127a81",
+                "reference": "3f308e4ebe0887205a3760049f9265bdb0127a81",
                 "shasum": ""
             },
             "require": {
@@ -10099,7 +10099,7 @@
                 "mock",
                 "redis"
             ],
-            "time": "2019-07-31T14:07:07+00:00"
+            "time": "2019-08-07T15:48:19+00:00"
         },
         {
             "name": "nette/bootstrap",
