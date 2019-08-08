@@ -12,7 +12,7 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  *     - user_created
  *     - user_starred
  *     - tag_label
- *     - config_feed_token
+ *     - config_feed_token.
  */
 final class Version20190806130304 extends WallabagMigration
 {
