@@ -11,7 +11,12 @@ use Wallabag\UserBundle\Entity\User;
  * Config.
  *
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\ConfigRepository")
- * @ORM\Table(name="`config`")
+ * @ORM\Table(
+ *     name="`config`",
+ *     indexes={
+ *         @ORM\Index(name="config_feed_token", columns={"feed_token"}, options={"lengths"={255}}),
+ *     }
+ * )
  * @ORM\Entity
  */
 class Config

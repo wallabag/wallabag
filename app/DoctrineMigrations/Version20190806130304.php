@@ -6,7 +6,13 @@ use Doctrine\DBAL\Schema\Schema;
 use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
 /**
- * Adding more index to kill some slow queries.
+ * Adding more index to kill some slow queries:
+ *     - user_language
+ *     - user_archived
+ *     - user_created
+ *     - user_starred
+ *     - tag_label
+ *     - config_feed_token
  */
 final class Version20190806130304 extends WallabagMigration
 {
@@ -35,6 +41,8 @@ final class Version20190806130304 extends WallabagMigration
                 $this->addSql('CREATE INDEX user_archived ON ' . $this->getTable('entry', true) . ' (user_id, is_archived, archived_at)');
                 $this->addSql('CREATE INDEX user_created ON ' . $this->getTable('entry', true) . ' (user_id, created_at)');
                 $this->addSql('CREATE INDEX user_starred ON ' . $this->getTable('entry', true) . ' (user_id, is_starred, starred_at)');
+                $this->addSql('CREATE INDEX tag_label ON ' . $this->getTable('tag', true) . ' (label)');
+                $this->addSql('CREATE INDEX config_feed_token ON ' . $this->getTable('config', true) . ' (feed_token)');
                 break;
             case 'mysql':
                 $this->addSql('ALTER TABLE ' . $this->getTable('entry') . ' MODIFY language VARCHAR(20) DEFAULT NULL');
@@ -42,6 +50,8 @@ final class Version20190806130304 extends WallabagMigration
                 $this->addSql('CREATE INDEX user_archived ON ' . $this->getTable('entry') . ' (user_id, is_archived, archived_at)');
                 $this->addSql('CREATE INDEX user_created ON ' . $this->getTable('entry') . ' (user_id, created_at)');
                 $this->addSql('CREATE INDEX user_starred ON ' . $this->getTable('entry') . ' (user_id, is_starred, starred_at)');
+                $this->addSql('CREATE INDEX tag_label ON ' . $this->getTable('tag') . ' (label (255))');
+                $this->addSql('CREATE INDEX config_feed_token ON ' . $this->getTable('config') . ' (feed_token (255))');
                 break;
             case 'postgresql':
                 $this->addSql('ALTER TABLE ' . $this->getTable('entry') . ' ALTER language TYPE VARCHAR(20)');
@@ -49,6 +59,8 @@ final class Version20190806130304 extends WallabagMigration
                 $this->addSql('CREATE INDEX user_archived ON ' . $this->getTable('entry') . ' (user_id, is_archived, archived_at)');
                 $this->addSql('CREATE INDEX user_created ON ' . $this->getTable('entry') . ' (user_id, created_at)');
                 $this->addSql('CREATE INDEX user_starred ON ' . $this->getTable('entry') . ' (user_id, is_starred, starred_at)');
+                $this->addSql('CREATE INDEX tag_label ON ' . $this->getTable('tag') . ' (label)');
+                $this->addSql('CREATE INDEX config_feed_token ON ' . $this->getTable('config') . ' (feed_token)');
                 break;
         }
     }
@@ -66,6 +78,8 @@ final class Version20190806130304 extends WallabagMigration
                 $this->addSql('DROP INDEX user_archived');
                 $this->addSql('DROP INDEX user_created');
                 $this->addSql('DROP INDEX user_starred');
+                $this->addSql('DROP INDEX tag_label');
+                $this->addSql('DROP INDEX config_feed_token');
                 $this->addSql('CREATE TEMPORARY TABLE __temp__wallabag_entry AS SELECT id, user_id, uid, title, url, hashed_url, origin_url, given_url, hashed_given_url, is_archived, archived_at, is_starred, content, created_at, updated_at, published_at, published_by, starred_at, mimetype, language, reading_time, domain_name, preview_picture, http_status, headers FROM ' . $this->getTable('entry', true));
                 $this->addSql('DROP TABLE ' . $this->getTable('entry', true));
                 $this->addSql('CREATE TABLE ' . $this->getTable('entry', true) . ' (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, user_id INTEGER DEFAULT NULL, uid VARCHAR(23) DEFAULT NULL, title CLOB DEFAULT NULL, url CLOB DEFAULT NULL, hashed_url VARCHAR(40) DEFAULT NULL, origin_url CLOB DEFAULT NULL, given_url CLOB DEFAULT NULL, hashed_given_url VARCHAR(40) DEFAULT NULL, is_archived BOOLEAN NOT NULL, archived_at DATETIME DEFAULT NULL, is_starred BOOLEAN NOT NULL, content CLOB DEFAULT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, published_at DATETIME DEFAULT NULL, published_by CLOB DEFAULT NULL --(DC2Type:array)
@@ -85,6 +99,8 @@ final class Version20190806130304 extends WallabagMigration
                 $this->addSql('DROP INDEX user_archived ON ' . $this->getTable('entry'));
                 $this->addSql('DROP INDEX user_created ON ' . $this->getTable('entry'));
                 $this->addSql('DROP INDEX user_starred ON ' . $this->getTable('entry'));
+                $this->addSql('DROP INDEX tag_label ON ' . $this->getTable('tag'));
+                $this->addSql('DROP INDEX config_feed_token ON ' . $this->getTable('config'));
                 break;
             case 'postgresql':
                 $this->addSql('ALTER TABLE ' . $this->getTable('entry') . ' ALTER language TYPE TEXT');
@@ -92,6 +108,8 @@ final class Version20190806130304 extends WallabagMigration
                 $this->addSql('DROP INDEX user_archived ON ' . $this->getTable('entry'));
                 $this->addSql('DROP INDEX user_created ON ' . $this->getTable('entry'));
                 $this->addSql('DROP INDEX user_starred ON ' . $this->getTable('entry'));
+                $this->addSql('DROP INDEX tag_label ON ' . $this->getTable('tag'));
+                $this->addSql('DROP INDEX config_feed_token ON ' . $this->getTable('config'));
                 break;
         }
     }
