@@ -92,6 +92,7 @@ services:
         arguments:
             - "@wallabag_core.graby"
             - "@wallabag_core.rule_based_tagger"
+            - "@wallabag_core.rule_based_ignore_origin_processor"
             - "@validator"
             - "@logger"
             - '%wallabag_core.fetching_error_message%'
@@ -109,6 +110,13 @@ services:
             - "@wallabag_core.tag_repository"
             - "@wallabag_core.entry_repository"
             - "@logger"
+
+    wallabag_core.rule_based_ignore_origin_processor:
+        class: Wallabag\CoreBundle\Helper\RuleBasedIgnoreOriginProcessor
+        arguments:
+            - "@rulerz"
+            - "@logger"
+            - "@wallabag_core.ignore_origin_instance_rule_repository"
 
     # repository as a service
     wallabag_core.entry_repository:
@@ -163,6 +171,11 @@ services:
         class: Wallabag\CoreBundle\Operator\Doctrine\NotMatches
         tags:
             - { name: rulerz.operator, target: doctrine, operator: notmatches, inline: true }
+
+    wallabag.operator.array.pattern_matches:
+        class: Wallabag\CoreBundle\Operator\PHP\PatternMatches
+        tags:
+            - { name: rulerz.operator, target: native, operator: "~" }
 
     wallabag_core.helper.redirect:
         class: Wallabag\CoreBundle\Helper\Redirect
