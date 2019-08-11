@@ -12,6 +12,7 @@ use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule;
 use Wallabag\CoreBundle\Entity\InternalSetting;
 
 class InstallCommand extends ContainerAwareCommand
@@ -277,6 +278,7 @@ class InstallCommand extends ContainerAwareCommand
 
         // cleanup before insert new stuff
         $em->createQuery('DELETE FROM WallabagCoreBundle:InternalSetting')->execute();
+        $em->createQuery('DELETE FROM WallabagCoreBundle:IgnoreOriginInstanceRule')->execute();
 
         foreach ($this->getContainer()->getParameter('wallabag_core.default_internal_settings') as $setting) {
             $newSetting = new InternalSetting();
@@ -284,6 +286,12 @@ class InstallCommand extends ContainerAwareCommand
             $newSetting->setValue($setting['value']);
             $newSetting->setSection($setting['section']);
             $em->persist($newSetting);
+        }
+
+        foreach ($this->getContainer()->getParameter('wallabag_core.default_ignore_origin_instance_rules') as $ignore_origin_instance_rule) {
+            $newIgnoreOriginInstanceRule = new IgnoreOriginInstanceRule();
+            $newIgnoreOriginInstanceRule->setRule($ignore_origin_instance_rule['rule']);
+            $em->persist($newIgnoreOriginInstanceRule);
         }
 
         $em->flush();
