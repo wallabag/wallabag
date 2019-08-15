@@ -418,3 +418,48 @@ quickstart:
     use_docker: Használjon Docker-t a wallabag telepítéséhez
   docs:
     title: Teljes dokumentáció
+    description: A wallabag rengeteg funkcióval rendelkezik. Ne habozzon, olvassa
+      el a kézikönyvet hogy megismerje és hogy megtanulja hogyan használhatja azokat.
+    annotate: Adjon jegyzetet a cikkéhez
+    export: Konvertálja a cikkeit ePUB vagy PDF formátumba
+    search_filters: Tekintse meg hogyan találhat meg egy cikket a keresőmotor és szűrők
+      használatával
+    fetching_errors: Mit tehetek ha egy cikk letöltése hibákba ütközik?
+    all_docs: És még sok más cikk!
+  support:
+    title: Támogatás
+    description: Ha segítségre van szüksége, itt vagyunk az Ön számára.
+    github: A GitHub-on
+    email: E-mailben
+    gitter: A Gitter-en
+tag:
+  page_title: Címkék
+  list:
+    number_on_the_page: '{0} Nincsenek címkék.|{1} Egy címke.|]1,Inf[ %count% címke.'
+    see_untagged_entries: Címkézetlen bejegyzések megtekintése
+  new:
+    add: Hozzáad
+    placeholder: Több címkét is hozzáadhat, vesszővel elválasztva.
+export:
+  footer_template: '<div style="text-align:center;"><p>A wallabag készítette ezzel:
+    %method%</p><p>Kérjük, jelentse a <a href="https://github.com/wallabag/wallabag/issues">problémát</a>
+    ha ez az E-Book nem megfelelően jelenik meg az eszközén.</p></div>'
+  unknown: Ismeretlen
+import:
+  page_title: Importálás
+  page_description: Üdvözöljük a wallabag importálóban. Válassza ki a korábbi szolgáltatást,
+    amelyből át kíván térni.
+  action:
+    import_contents: Tartalom importálása
+  form:
+    mark_as_read_title: Összes megjelölése olvasottként?
+    mark_as_read_label: Az összes importált bejegyzés megjelölése olvasottként
+    file_label: Fájl
+    save_label: Fájl feltöltése
+  pocket:
+    page_title: Importálás > Pocket
+    description: Ez az importáló az összes Pocket adatát be fogja importálni. Mivel
+      a Pocket nem engedélyezi nekünk hogy tartalmakat szerezzünk a szolgáltatásukból,
+      így az egyes cikkek olvasható tartalmát a wallabag újra le fogja tölteni.
+    config_missing:
+      description: A Pocket import nincs konfigurálva.
