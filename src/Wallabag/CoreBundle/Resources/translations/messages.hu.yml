@@ -463,3 +463,5 @@ import:
       így az egyes cikkek olvasható tartalmát a wallabag újra le fogja tölteni.
     config_missing:
       description: A Pocket import nincs konfigurálva.
+  wallabag_v1:
+    page_title: Importálás > Wallabag v1
