@@ -70,7 +70,7 @@
                 {% endif %}
             </i>
 
-            <span class="tool link"><i class="material-icons link">comment</i> {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}</span>
+            <span class="tool link"><i class="material-icons">comment</i> {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}</span>
 
             {% if entry.originUrl is not empty %}
                 <i class="material-icons" title="{{ 'entry.view.provided_by'|trans }}">launch</i>

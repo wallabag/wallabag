@@ -250,13 +250,13 @@
                         </li>
                     {% endif %}
                     <li>
-                        <i class="material-icons link">link</i>
+                        <i class="material-icons">link</i>
                         <a href="{{ entry.url|e }}" target="_blank" rel="noopener" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|striptags }}" class="tool">
                             {{ entry.domainName|removeWww }}
                         </a>
                     </li>
                     <li>
-                        <i class="material-icons link">comment</i>
+                        <i class="material-icons">comment</i>
                         {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}
                     </li>
                     {% if entry.originUrl is not empty %}
