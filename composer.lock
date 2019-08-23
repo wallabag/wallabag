@@ -337,16 +337,16 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "v1.6.1",
+            "version": "v1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "53120e0eb10355388d6ccbe462f1fea34ddadb24"
+                "reference": "fa4c4e861e809d6a1103bd620cce63ed91aedfeb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/53120e0eb10355388d6ccbe462f1fea34ddadb24",
-                "reference": "53120e0eb10355388d6ccbe462f1fea34ddadb24",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/fa4c4e861e809d6a1103bd620cce63ed91aedfeb",
+                "reference": "fa4c4e861e809d6a1103bd620cce63ed91aedfeb",
                 "shasum": ""
             },
             "require": {
@@ -355,12 +355,12 @@
             },
             "require-dev": {
                 "doctrine/cache": "1.*",
-                "phpunit/phpunit": "^6.4"
+                "phpunit/phpunit": "^7.5@dev"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.6.x-dev"
+                    "dev-master": "1.7.x-dev"
                 }
             },
             "autoload": {
@@ -374,16 +374,16 @@
             ],
             "authors": [
                 {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
                     "name": "Roman Borschel",
                     "email": "roman@code-factory.org"
                 },
                 {
                     "name": "Benjamin Eberlei",
                     "email": "kontakt@beberlei.de"
-                },
-                {
-                    "name": "Guilherme Blanco",
-                    "email": "guilhermeblanco@gmail.com"
                 },
                 {
                     "name": "Jonathan Wage",
@@ -401,7 +401,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2019-03-25T19:12:02+00:00"
+            "time": "2019-08-08T18:11:40+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -1524,16 +1524,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "2.1.10",
+            "version": "2.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "a6c8d7101b19a451c1707b1b79bbbc56e4bdb7ec"
+                "reference": "92dd169c32f6f55ba570c309d83f5209cefb5e23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/a6c8d7101b19a451c1707b1b79bbbc56e4bdb7ec",
-                "reference": "a6c8d7101b19a451c1707b1b79bbbc56e4bdb7ec",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/92dd169c32f6f55ba570c309d83f5209cefb5e23",
+                "reference": "92dd169c32f6f55ba570c309d83f5209cefb5e23",
                 "shasum": ""
             },
             "require": {
@@ -1552,7 +1552,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "2.1.x-dev"
                 }
             },
             "autoload": {
@@ -1578,7 +1578,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2019-07-19T20:52:08+00:00"
+            "time": "2019-08-13T17:33:27+00:00"
         },
         {
             "name": "electrolinux/php-html5lib",
@@ -1611,13 +1611,13 @@
             "authors": [
                 {
                     "name": "Multiple users",
-                    "role": "Original developers",
-                    "homepage": "https://code.google.com/p/html5lib/"
+                    "homepage": "https://code.google.com/p/html5lib/",
+                    "role": "Original developers"
                 },
                 {
                     "name": "Sébastien Lavoie",
-                    "role": "Packager",
-                    "homepage": "http://blog.lavoie.sl"
+                    "homepage": "http://blog.lavoie.sl",
+                    "role": "Packager"
                 },
                 {
                     "name": "didier Belot",
@@ -1720,8 +1720,8 @@
             "authors": [
                 {
                     "name": "Santosh Patnaik",
-                    "role": "Developer",
-                    "homepage": "http://www.bioinformatics.org/people/index.php?user_hash=558b661f92d0ff7b"
+                    "homepage": "http://www.bioinformatics.org/people/index.php?user_hash=558b661f92d0ff7b",
+                    "role": "Developer"
                 }
             ],
             "description": "htmLawed - Process text with HTML markup to make it more compliant with HTML standards and administrative policies",
@@ -2227,8 +2227,8 @@
             "authors": [
                 {
                     "name": "A. Grandt",
-                    "role": "Developer",
-                    "email": "php@grandt.com"
+                    "email": "php@grandt.com",
+                    "role": "Developer"
                 }
             ],
             "description": "A class for working around the use of mbstring.func_override",
@@ -2336,9 +2336,9 @@
             "authors": [
                 {
                     "name": "A. Grandt",
-                    "role": "Developer",
                     "email": "php@grandt.com",
-                    "homepage": "http://grandt.com"
+                    "homepage": "http://grandt.com",
+                    "role": "Developer"
                 }
             ],
             "description": "GIF89a compliant Gif resizer, including transparency and optimized gifs with sub sized elements.",
@@ -2383,14 +2383,14 @@
             "authors": [
                 {
                     "name": "A. Grandt",
-                    "role": "Developer",
                     "email": "php@grandt.com",
-                    "homepage": "http://grandt.com"
+                    "homepage": "http://grandt.com",
+                    "role": "Developer"
                 },
                 {
                     "name": "Greg Kappatos",
-                    "role": "Developer",
-                    "homepage": "http://websiteconnect.com.au"
+                    "homepage": "http://websiteconnect.com.au",
+                    "role": "Developer"
                 }
             ],
             "description": "Merge and stream multiple Zip files on the fly.",
@@ -2437,8 +2437,8 @@
             "authors": [
                 {
                     "name": "A. Grandt",
-                    "role": "Developer",
-                    "email": "php@grandt.com"
+                    "email": "php@grandt.com",
+                    "role": "Developer"
                 }
             ],
             "description": "A class for cleaning up/collapsing relative paths. Like real_path, but without the need for the path to exist on the filesystem.",
@@ -3822,8 +3822,8 @@
                 },
                 {
                     "name": "Jack W",
-                    "role": "Developer (SafeCurl original version)",
-                    "email": "jack@fin1te.net"
+                    "email": "jack@fin1te.net",
+                    "role": "Developer (SafeCurl original version)"
                 }
             ],
             "description": "Server-Side Request Forgery (SSRF) protection plugin for HTTPlug",
@@ -3879,25 +3879,25 @@
             "authors": [
                 {
                     "name": "Keyvan Minoukadeh",
-                    "role": "Developer (ported original JS code to PHP)",
                     "email": "keyvan@keyvan.net",
-                    "homepage": "http://keyvan.net"
+                    "homepage": "http://keyvan.net",
+                    "role": "Developer (ported original JS code to PHP)"
                 },
                 {
                     "name": "Arc90",
-                    "role": "Developer (original JS version)",
-                    "homepage": "http://arc90.com"
+                    "homepage": "http://arc90.com",
+                    "role": "Developer (original JS version)"
                 },
                 {
                     "name": "Jeremy Benoist",
-                    "role": "Developer",
                     "email": "jeremy.benoist@gmail.com",
-                    "homepage": "http://www.j0k3r.net"
+                    "homepage": "http://www.j0k3r.net",
+                    "role": "Developer"
                 },
                 {
                     "name": "DitherSky",
-                    "role": "Developer (https://github.com/Dither/full-text-rss)",
-                    "homepage": "https://github.com/Dither"
+                    "homepage": "https://github.com/Dither",
+                    "role": "Developer (https://github.com/Dither/full-text-rss)"
                 }
             ],
             "description": "Automatic article extraction from HTML",
@@ -4545,8 +4545,8 @@
             "authors": [
                 {
                     "name": "Luís Otávio Cobucci Oblonczyk",
-                    "role": "Developer",
-                    "email": "lcobucci@gmail.com"
+                    "email": "lcobucci@gmail.com",
+                    "role": "Developer"
                 }
             ],
             "description": "A simple library to work with JSON Web Token and JSON Web Signature",
@@ -4824,9 +4824,9 @@
             "authors": [
                 {
                     "name": "Michel Fortin",
-                    "role": "Developer",
                     "email": "michel.fortin@michelf.ca",
-                    "homepage": "https://michelf.ca/"
+                    "homepage": "https://michelf.ca/",
+                    "role": "Developer"
                 },
                 {
                     "name": "John Gruber",
@@ -5397,22 +5397,22 @@
         },
         {
             "name": "php-amqplib/php-amqplib",
-            "version": "v2.9.2",
+            "version": "v2.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-amqplib/php-amqplib.git",
-                "reference": "76faddcd668dabb8d4f7c00e86b8a9decd781a59"
+                "reference": "04e5366f032906d5f716890427e425e71307d3a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/76faddcd668dabb8d4f7c00e86b8a9decd781a59",
-                "reference": "76faddcd668dabb8d4f7c00e86b8a9decd781a59",
+                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/04e5366f032906d5f716890427e425e71307d3a8",
+                "reference": "04e5366f032906d5f716890427e425e71307d3a8",
                 "shasum": ""
             },
             "require": {
                 "ext-bcmath": "*",
                 "ext-sockets": "*",
-                "php": ">=5.4.0"
+                "php": ">=5.6"
             },
             "replace": {
                 "videlalvaro/php-amqplib": "self.version"
@@ -5420,14 +5420,14 @@
             "require-dev": {
                 "ext-curl": "*",
                 "nategood/httpful": "^0.2.20",
-                "phpdocumentor/phpdocumentor": "^2.9",
-                "phpunit/phpunit": "^4.8",
+                "phpdocumentor/phpdocumentor": "dev-master",
+                "phpunit/phpunit": "^5.7|^6.5|^7.0",
                 "squizlabs/php_codesniffer": "^2.5"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.8-dev"
+                    "dev-master": "2.10-dev"
                 }
             },
             "autoload": {
@@ -5467,7 +5467,7 @@
                 "queue",
                 "rabbitmq"
             ],
-            "time": "2019-04-24T15:36:21+00:00"
+            "time": "2019-08-08T18:28:18+00:00"
         },
         {
             "name": "php-amqplib/rabbitmq-bundle",
@@ -6368,19 +6368,19 @@
             "authors": [
                 {
                     "name": "Adam Schmalhofer",
-                    "role": "Developer",
-                    "email": "Adam.Schmalhofer@gmx.de"
+                    "email": "Adam.Schmalhofer@gmx.de",
+                    "role": "Developer"
                 },
                 {
                     "name": "A. Grandt",
-                    "role": "Developer",
                     "email": "php@grandt.com",
-                    "homepage": "http://grandt.com"
+                    "homepage": "http://grandt.com",
+                    "role": "Developer"
                 },
                 {
                     "name": "Greg Kappatos",
-                    "role": "Developer",
-                    "homepage": "http://websiteconnect.com.au"
+                    "homepage": "http://websiteconnect.com.au",
+                    "role": "Developer"
                 }
             ],
             "description": "Package to create and stream archives of compressed files in ZIP format with PHP 5.3+",
@@ -6441,9 +6441,9 @@
             "authors": [
                 {
                     "name": "Antonio Carlos Ribeiro",
-                    "role": "Developer",
                     "email": "acr@antoniocarlosribeiro.com",
-                    "homepage": "https://antoniocarlosribeiro.com"
+                    "homepage": "https://antoniocarlosribeiro.com",
+                    "role": "Developer"
                 }
             ],
             "description": "Create random chars, numbers, strings",
@@ -6503,9 +6503,9 @@
             "authors": [
                 {
                     "name": "Antonio Carlos Ribeiro",
-                    "role": "Developer",
                     "email": "acr@antoniocarlosribeiro.com",
-                    "homepage": "https://antoniocarlosribeiro.com"
+                    "homepage": "https://antoniocarlosribeiro.com",
+                    "role": "Developer"
                 }
             ],
             "description": "Create recovery codes for two factor auth",
@@ -7402,16 +7402,16 @@
         },
         {
             "name": "sentry/sentry",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-php.git",
-                "reference": "8e27e6c5fcf6f01fc2e5235dd14cc0b2b347d793"
+                "reference": "646f6ada8b89a08063e31f54ed6d260bd6879239"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/8e27e6c5fcf6f01fc2e5235dd14cc0b2b347d793",
-                "reference": "8e27e6c5fcf6f01fc2e5235dd14cc0b2b347d793",
+                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/646f6ada8b89a08063e31f54ed6d260bd6879239",
+                "reference": "646f6ada8b89a08063e31f54ed6d260bd6879239",
                 "shasum": ""
             },
             "require": {
@@ -7440,12 +7440,12 @@
                 "phpstan/phpstan": "^0.10.3",
                 "phpstan/phpstan-phpunit": "^0.10",
                 "phpunit/phpunit": "^7.0",
-                "symfony/phpunit-bridge": "^4.1.6"
+                "symfony/phpunit-bridge": "^4.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "2.1.x-dev"
                 }
             },
             "autoload": {
@@ -7477,7 +7477,7 @@
                 "logging",
                 "sentry"
             ],
-            "time": "2019-06-13T11:27:23+00:00"
+            "time": "2019-08-22T07:37:30+00:00"
         },
         {
             "name": "sentry/sentry-symfony",
@@ -7594,19 +7594,19 @@
             "authors": [
                 {
                     "name": "Ryan Parman",
-                    "role": "Creator, alumnus developer",
-                    "homepage": "http://ryanparman.com/"
+                    "homepage": "http://ryanparman.com/",
+                    "role": "Creator, alumnus developer"
                 },
                 {
                     "name": "Geoffrey Sneddon",
-                    "role": "Alumnus developer",
-                    "homepage": "http://gsnedders.com/"
+                    "homepage": "http://gsnedders.com/",
+                    "role": "Alumnus developer"
                 },
                 {
                     "name": "Ryan McCue",
-                    "role": "Developer",
                     "email": "me@ryanmccue.info",
-                    "homepage": "http://ryanmccue.info/"
+                    "homepage": "http://ryanmccue.info/",
+                    "role": "Developer"
                 }
             ],
             "description": "A simple Atom/RSS parsing library for PHP",
@@ -7653,7 +7653,7 @@
             ],
             "authors": [
                 {
-                    "name": "Sebastien Malot",
+                    "name": "Sebastien MALOT",
                     "email": "sebastien@malot.fr"
                 }
             ],
@@ -9095,19 +9095,19 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "role": "Lead Developer",
                     "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org"
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
                 },
                 {
                     "name": "Armin Ronacher",
-                    "role": "Project Founder",
-                    "email": "armin.ronacher@active-4.com"
+                    "email": "armin.ronacher@active-4.com",
+                    "role": "Project Founder"
                 },
                 {
                     "name": "Twig Team",
-                    "role": "Contributors",
-                    "homepage": "https://twig.symfony.com/contributors"
+                    "homepage": "https://twig.symfony.com/contributors",
+                    "role": "Contributors"
                 }
             ],
             "description": "Twig, the flexible, fast, and secure template language for PHP",
@@ -9210,14 +9210,14 @@
             "authors": [
                 {
                     "name": "Nicola Asuni",
-                    "role": "Main developer",
                     "email": "info@tecnick.com",
-                    "homepage": "http://nicolaasuni.tecnick.com"
+                    "homepage": "http://nicolaasuni.tecnick.com",
+                    "role": "Main developer"
                 },
                 {
                     "name": "wallabag/core",
-                    "role": "Developers",
-                    "homepage": "https://www.wallabag.org"
+                    "homepage": "https://www.wallabag.org",
+                    "role": "Developers"
                 }
             ],
             "description": "Keeping a working 6.2.x TCPDF version.",
@@ -9348,7 +9348,7 @@
                     "email": "adrien.brault@gmail.com"
                 },
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -9398,7 +9398,7 @@
             ],
             "authors": [
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com"
                 }
             ],
