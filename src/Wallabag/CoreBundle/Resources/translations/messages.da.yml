@@ -33,6 +33,7 @@ menu:
         back_to_unread: 'Tilbage til de ulæste artikler'
         # users_management: 'Users management'
         # site_credentials: 'Site credentials'
+        # ignore_origin_instance_rules: 'Global ignore origin rules'
         # quickstart: "Quickstart"
     top:
         add_new_entry: 'Tilføj ny artikel'
@@ -661,3 +662,8 @@ flashes:
             # added: 'Site credential for "%host%" added'
             # updated: 'Site credential for "%host%" updated'
             # deleted: 'Site credential for "%host%" deleted'
+    ignore_origin_instance_rule:
+        notice:
+            # added: 'Global ignore origin rule added'
+            # updated: 'Global ignore origin rule updated'
+            # deleted: 'Global ignore origin rule deleted'

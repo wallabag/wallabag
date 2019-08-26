@@ -33,6 +33,7 @@ menu:
         back_to_unread: "Retour aux articles non lus"
         users_management: "Gestion des utilisateurs"
         site_credentials: 'Accès aux sites'
+        ignore_origin_instance_rules: "Règles globales d'omission d'origine"
         quickstart: "Pour bien débuter"
     top:
         add_new_entry: "Sauvegarder un nouvel article"
@@ -619,11 +620,8 @@ flashes:
             otp_disabled: "Authentification à double-facteur désactivée"
             tagging_rules_imported: Règles bien importées
             tagging_rules_not_imported: Impossible d'importer les règles
-<<<<<<< HEAD
-=======
             ignore_origin_rules_deleted: "Règle d'omission d'origine supprimée"
             ignore_origin_rules_updated: "Règle d'omission d'origine mise à jour"
->>>>>>> 4c595340... fixup! Add new Ignore Origin rules tab, update ConfigController
     entry:
         notice:
             entry_already_saved: "Article déjà sauvegardé le %date%"

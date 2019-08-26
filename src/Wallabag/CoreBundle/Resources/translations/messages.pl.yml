@@ -33,6 +33,7 @@ menu:
         back_to_unread: 'Powrót do nieprzeczytanych artykułów'
         users_management: 'Zarządzanie użytkownikami'
         site_credentials: 'Poświadczenia strony'
+        # ignore_origin_instance_rules: 'Global ignore origin rules'
         quickstart: "Szybki start"
     top:
         add_new_entry: 'Dodaj nowy wpis'
@@ -661,3 +662,8 @@ flashes:
             added: 'Poświadczenie dla "%host%" dodane'
             updated: 'Poświadczenie dla "%host%" zaktualizowane'
             deleted: 'Poświadczenie dla "%host%" usuniętę'
+    ignore_origin_instance_rule:
+        notice:
+            # added: 'Global ignore origin rule added'
+            # updated: 'Global ignore origin rule updated'
+            # deleted: 'Global ignore origin rule deleted'

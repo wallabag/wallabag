@@ -33,6 +33,7 @@ menu:
         back_to_unread: 'Zurück zu ungelesenen Artikeln'
         users_management: 'Benutzerverwaltung'
         site_credentials: 'Zugangsdaten'
+        # ignore_origin_instance_rules: 'Global ignore origin rules'
         quickstart: "Schnelleinstieg"
     top:
         add_new_entry: 'Neuen Artikel hinzufügen'
@@ -661,3 +662,8 @@ flashes:
             added: 'Zugangsdaten für "%host%" hinzugefügt'
             updated: 'Zugangsdaten für "%host%" aktualisiert'
             deleted: 'Zugangsdaten für "%host%" gelöscht'
+    ignore_origin_instance_rule:
+        notice:
+            # added: 'Global ignore origin rule added'
+            # updated: 'Global ignore origin rule updated'
+            # deleted: 'Global ignore origin rule deleted'

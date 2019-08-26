@@ -45,6 +45,7 @@
         {% if is_granted('ROLE_SUPER_ADMIN') %}
             <li class="menu users"><a href="{{ path('user_index') }}">{{ 'menu.left.users_management'|trans }}</a></li>
             <li class="menu internal"><a href="{{ path('craue_config_settings_modify') }}">{{ 'menu.left.internal_settings'|trans }}</a></li>
+            <li class="menu ignore"><a href="{{ path('ignore_origin_instance_rules_index') }}">{{ 'menu.left.ignore_origin_instance_rules'|trans }}</a></li>
         {% endif %}
         <li class="menu import"><a href="{{ path('import') }}">{{ 'menu.left.import'|trans }}</a></li>
         <li class="menu howto"><a href="{{ path('howto') }}">{{ 'menu.left.howto'|trans }}</a></li>

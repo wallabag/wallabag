@@ -33,6 +33,7 @@ menu:
         back_to_unread: 'กลับไปยังรายการที่ไม่ได้อ่าน'
         users_management: 'การจัดการผู้ใช้'
         site_credentials: 'การรับรองไซต์'
+        # ignore_origin_instance_rules: 'Global ignore origin rules'
         quickstart: "เริ่มแบบด่วน"
     top:
         add_new_entry: 'เพิ่มรายการใหม่'
@@ -660,3 +661,8 @@ flashes:
             added: 'ไซต์ข้อมูลประจำตัวสำหรับ "%host%" ที่ทำการเพิ่ม'
             updated: 'ไซต์ข้อมูลประจำตัวสำหรับ "%host%" ที่ทำการอัปเดต'
             deleted: 'ไซต์ข้อมูลประจำตัวสำหรับ "%host%" ที่ทำการลบ'
+    ignore_origin_instance_rule:
+        notice:
+            # added: 'Global ignore origin rule added'
+            # updated: 'Global ignore origin rule updated'
+            # deleted: 'Global ignore origin rule deleted'

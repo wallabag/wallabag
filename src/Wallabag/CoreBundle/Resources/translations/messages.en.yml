@@ -33,6 +33,7 @@ menu:
         back_to_unread: 'Back to unread articles'
         users_management: 'Users management'
         site_credentials: 'Site credentials'
+        ignore_origin_instance_rules: 'Global ignore origin rules'
         quickstart: "Quickstart"
     top:
         add_new_entry: 'Add a new entry'
@@ -595,6 +596,24 @@ site_credential:
         delete_confirm: Are you sure?
         back_to_list: Back to list
 
+ignore_origin_instance_rule:
+    page_title: Global ignore origin rules
+    new_ignore_origin_instance_rule: Create a global ignore origin rule
+    edit_ignore_origin_instance_rule: Edit an existing ignore origin rule
+    description: "Here you can manage the global ignore origin rules used to ignore some patterns of origin url."
+    list:
+        actions: Actions
+        edit_action: Edit
+        yes: Yes
+        no: No
+        create_new_one: Create a new global ignore origin rule
+    form:
+        rule_label: Rule
+        save: Save
+        delete: Delete
+        delete_confirm: Are you sure?
+        back_to_list: Back to list
+
 error:
     page_title: An error occurred
 
@@ -661,3 +680,8 @@ flashes:
             added: 'Site credential for "%host%" added'
             updated: 'Site credential for "%host%" updated'
             deleted: 'Site credential for "%host%" deleted'
+    ignore_origin_instance_rule:
+        notice:
+            added: 'Global ignore origin rule added'
+            updated: 'Global ignore origin rule updated'
+            deleted: 'Global ignore origin rule deleted'

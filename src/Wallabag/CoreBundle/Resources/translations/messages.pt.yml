@@ -33,6 +33,7 @@ menu:
         back_to_unread: 'Voltar para os artigos não lidos'
         users_management: 'Gestão de Usuários'
         site_credentials: 'Credenciais do site'
+        # ignore_origin_instance_rules: 'Global ignore origin rules'
         quickstart: "Começo Rápido"
     top:
         add_new_entry: 'Adicionar um novo artigo'
@@ -658,3 +659,8 @@ flashes:
             added: 'Credencial do site para "%host%" foi adicionada'
             updated: 'Credencial do site pa "%host%" atualizada'
             deleted: 'Credencial do site pa "%host%" removida'
+    ignore_origin_instance_rule:
+        notice:
+            # added: 'Global ignore origin rule added'
+            # updated: 'Global ignore origin rule updated'
+            # deleted: 'Global ignore origin rule deleted'
