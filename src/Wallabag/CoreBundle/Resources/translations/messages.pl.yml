@@ -2,7 +2,7 @@ security:
   login:
     page_title: Witaj w wallabag!
     keep_logged_in: Zapamiętaj mnie
-    forgot_password: Zapomniałeś hasła
+    forgot_password: Zapomniałeś hasła?
     submit: Loguj
     register: Zarejestruj
     username: Nazwa użytkownika
@@ -72,7 +72,7 @@ config:
       300_word: Czytam ~300 słów na minutę
       400_word: Czytam ~400 słów na minutę
     action_mark_as_read:
-      label: Gdzie zostaniesz przekierowany po oznaczeniu artukuły jako przeczytanego
+      label: Gdzie zostaniesz przekierowany po oznaczeniu artukuły jako przeczytanego?
       redirect_homepage: do strony głównej
       redirect_current_page: do bieżącej strony
     pocket_consumer_key_label: Klucz klienta Pocket do importu zawartości
@@ -253,7 +253,7 @@ entry:
       export: Export
       print: Drukuj
       problem:
-        label: Problemy
+        label: Problemy?
         description: Czy ten artykuł wygląda źle?
     edit_title: Edytuj tytuł
     original_article: oryginalny
