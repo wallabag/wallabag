@@ -58,19 +58,24 @@
         },
         {
             "name": "beberlei/assert",
-            "version": "v3.2.1",
+            "version": "v3.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/assert.git",
-                "reference": "ce139b6bf8f07fb8389d2c8e15b98dc24fdd93c7"
+                "reference": "65b8152224aef7d3c197d5db05211d4319711b66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/assert/zipball/ce139b6bf8f07fb8389d2c8e15b98dc24fdd93c7",
-                "reference": "ce139b6bf8f07fb8389d2c8e15b98dc24fdd93c7",
+                "url": "https://api.github.com/repos/beberlei/assert/zipball/65b8152224aef7d3c197d5db05211d4319711b66",
+                "reference": "65b8152224aef7d3c197d5db05211d4319711b66",
                 "shasum": ""
             },
             "require": {
+                "ext-ctype": "*",
+                "ext-intl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "ext-simplexml": "*",
                 "php": "^7"
             },
             "require-dev": {
@@ -109,7 +114,7 @@
                 "assertion",
                 "validation"
             ],
-            "time": "2019-05-28T15:18:28+00:00"
+            "time": "2019-08-23T17:56:26+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -1611,13 +1616,13 @@
             "authors": [
                 {
                     "name": "Multiple users",
-                    "homepage": "https://code.google.com/p/html5lib/",
-                    "role": "Original developers"
+                    "role": "Original developers",
+                    "homepage": "https://code.google.com/p/html5lib/"
                 },
                 {
                     "name": "Sébastien Lavoie",
-                    "homepage": "http://blog.lavoie.sl",
-                    "role": "Packager"
+                    "role": "Packager",
+                    "homepage": "http://blog.lavoie.sl"
                 },
                 {
                     "name": "didier Belot",
@@ -1720,8 +1725,8 @@
             "authors": [
                 {
                     "name": "Santosh Patnaik",
-                    "homepage": "http://www.bioinformatics.org/people/index.php?user_hash=558b661f92d0ff7b",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "homepage": "http://www.bioinformatics.org/people/index.php?user_hash=558b661f92d0ff7b"
                 }
             ],
             "description": "htmLawed - Process text with HTML markup to make it more compliant with HTML standards and administrative policies",
@@ -2227,8 +2232,8 @@
             "authors": [
                 {
                     "name": "A. Grandt",
-                    "email": "php@grandt.com",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "php@grandt.com"
                 }
             ],
             "description": "A class for working around the use of mbstring.func_override",
@@ -2336,9 +2341,9 @@
             "authors": [
                 {
                     "name": "A. Grandt",
+                    "role": "Developer",
                     "email": "php@grandt.com",
-                    "homepage": "http://grandt.com",
-                    "role": "Developer"
+                    "homepage": "http://grandt.com"
                 }
             ],
             "description": "GIF89a compliant Gif resizer, including transparency and optimized gifs with sub sized elements.",
@@ -2383,14 +2388,14 @@
             "authors": [
                 {
                     "name": "A. Grandt",
+                    "role": "Developer",
                     "email": "php@grandt.com",
-                    "homepage": "http://grandt.com",
-                    "role": "Developer"
+                    "homepage": "http://grandt.com"
                 },
                 {
                     "name": "Greg Kappatos",
-                    "homepage": "http://websiteconnect.com.au",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "homepage": "http://websiteconnect.com.au"
                 }
             ],
             "description": "Merge and stream multiple Zip files on the fly.",
@@ -2437,8 +2442,8 @@
             "authors": [
                 {
                     "name": "A. Grandt",
-                    "email": "php@grandt.com",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "php@grandt.com"
                 }
             ],
             "description": "A class for cleaning up/collapsing relative paths. Like real_path, but without the need for the path to exist on the filesystem.",
@@ -3822,8 +3827,8 @@
                 },
                 {
                     "name": "Jack W",
-                    "email": "jack@fin1te.net",
-                    "role": "Developer (SafeCurl original version)"
+                    "role": "Developer (SafeCurl original version)",
+                    "email": "jack@fin1te.net"
                 }
             ],
             "description": "Server-Side Request Forgery (SSRF) protection plugin for HTTPlug",
@@ -3879,25 +3884,25 @@
             "authors": [
                 {
                     "name": "Keyvan Minoukadeh",
+                    "role": "Developer (ported original JS code to PHP)",
                     "email": "keyvan@keyvan.net",
-                    "homepage": "http://keyvan.net",
-                    "role": "Developer (ported original JS code to PHP)"
+                    "homepage": "http://keyvan.net"
                 },
                 {
                     "name": "Arc90",
-                    "homepage": "http://arc90.com",
-                    "role": "Developer (original JS version)"
+                    "role": "Developer (original JS version)",
+                    "homepage": "http://arc90.com"
                 },
                 {
                     "name": "Jeremy Benoist",
+                    "role": "Developer",
                     "email": "jeremy.benoist@gmail.com",
-                    "homepage": "http://www.j0k3r.net",
-                    "role": "Developer"
+                    "homepage": "http://www.j0k3r.net"
                 },
                 {
                     "name": "DitherSky",
-                    "homepage": "https://github.com/Dither",
-                    "role": "Developer (https://github.com/Dither/full-text-rss)"
+                    "role": "Developer (https://github.com/Dither/full-text-rss)",
+                    "homepage": "https://github.com/Dither"
                 }
             ],
             "description": "Automatic article extraction from HTML",
@@ -4545,8 +4550,8 @@
             "authors": [
                 {
                     "name": "Luís Otávio Cobucci Oblonczyk",
-                    "email": "lcobucci@gmail.com",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "lcobucci@gmail.com"
                 }
             ],
             "description": "A simple library to work with JSON Web Token and JSON Web Signature",
@@ -4824,9 +4829,9 @@
             "authors": [
                 {
                     "name": "Michel Fortin",
+                    "role": "Developer",
                     "email": "michel.fortin@michelf.ca",
-                    "homepage": "https://michelf.ca/",
-                    "role": "Developer"
+                    "homepage": "https://michelf.ca/"
                 },
                 {
                     "name": "John Gruber",
@@ -6368,19 +6373,19 @@
             "authors": [
                 {
                     "name": "Adam Schmalhofer",
-                    "email": "Adam.Schmalhofer@gmx.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "Adam.Schmalhofer@gmx.de"
                 },
                 {
                     "name": "A. Grandt",
+                    "role": "Developer",
                     "email": "php@grandt.com",
-                    "homepage": "http://grandt.com",
-                    "role": "Developer"
+                    "homepage": "http://grandt.com"
                 },
                 {
                     "name": "Greg Kappatos",
-                    "homepage": "http://websiteconnect.com.au",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "homepage": "http://websiteconnect.com.au"
                 }
             ],
             "description": "Package to create and stream archives of compressed files in ZIP format with PHP 5.3+",
@@ -6441,9 +6446,9 @@
             "authors": [
                 {
                     "name": "Antonio Carlos Ribeiro",
+                    "role": "Developer",
                     "email": "acr@antoniocarlosribeiro.com",
-                    "homepage": "https://antoniocarlosribeiro.com",
-                    "role": "Developer"
+                    "homepage": "https://antoniocarlosribeiro.com"
                 }
             ],
             "description": "Create random chars, numbers, strings",
@@ -6503,9 +6508,9 @@
             "authors": [
                 {
                     "name": "Antonio Carlos Ribeiro",
+                    "role": "Developer",
                     "email": "acr@antoniocarlosribeiro.com",
-                    "homepage": "https://antoniocarlosribeiro.com",
-                    "role": "Developer"
+                    "homepage": "https://antoniocarlosribeiro.com"
                 }
             ],
             "description": "Create recovery codes for two factor auth",
@@ -7133,16 +7138,16 @@
         },
         {
             "name": "scheb/two-factor-bundle",
-            "version": "v4.6.0",
+            "version": "v4.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scheb/two-factor-bundle.git",
-                "reference": "02b8d865df7ab0e999b0f61c73d3b3f95f7e4cbf"
+                "reference": "15bad1e41b2f660760221f5022b632c212245f07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/02b8d865df7ab0e999b0f61c73d3b3f95f7e4cbf",
-                "reference": "02b8d865df7ab0e999b0f61c73d3b3f95f7e4cbf",
+                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/15bad1e41b2f660760221f5022b632c212245f07",
+                "reference": "15bad1e41b2f660760221f5022b632c212245f07",
                 "shasum": ""
             },
             "require": {
@@ -7192,7 +7197,7 @@
                 "two-factor",
                 "two-step"
             ],
-            "time": "2019-08-22T14:32:07+00:00"
+            "time": "2019-08-24T12:39:57+00:00"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -7594,19 +7599,19 @@
             "authors": [
                 {
                     "name": "Ryan Parman",
-                    "homepage": "http://ryanparman.com/",
-                    "role": "Creator, alumnus developer"
+                    "role": "Creator, alumnus developer",
+                    "homepage": "http://ryanparman.com/"
                 },
                 {
                     "name": "Geoffrey Sneddon",
-                    "homepage": "http://gsnedders.com/",
-                    "role": "Alumnus developer"
+                    "role": "Alumnus developer",
+                    "homepage": "http://gsnedders.com/"
                 },
                 {
                     "name": "Ryan McCue",
+                    "role": "Developer",
                     "email": "me@ryanmccue.info",
-                    "homepage": "http://ryanmccue.info/",
-                    "role": "Developer"
+                    "homepage": "http://ryanmccue.info/"
                 }
             ],
             "description": "A simple Atom/RSS parsing library for PHP",
@@ -7653,7 +7658,7 @@
             ],
             "authors": [
                 {
-                    "name": "Sebastien MALOT",
+                    "name": "Sebastien Malot",
                     "email": "sebastien@malot.fr"
                 }
             ],
@@ -9095,19 +9100,19 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
+                    "role": "Lead Developer",
                     "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "homepage": "http://fabien.potencier.org"
                 },
                 {
                     "name": "Armin Ronacher",
-                    "email": "armin.ronacher@active-4.com",
-                    "role": "Project Founder"
+                    "role": "Project Founder",
+                    "email": "armin.ronacher@active-4.com"
                 },
                 {
                     "name": "Twig Team",
-                    "homepage": "https://twig.symfony.com/contributors",
-                    "role": "Contributors"
+                    "role": "Contributors",
+                    "homepage": "https://twig.symfony.com/contributors"
                 }
             ],
             "description": "Twig, the flexible, fast, and secure template language for PHP",
@@ -9210,14 +9215,14 @@
             "authors": [
                 {
                     "name": "Nicola Asuni",
+                    "role": "Main developer",
                     "email": "info@tecnick.com",
-                    "homepage": "http://nicolaasuni.tecnick.com",
-                    "role": "Main developer"
+                    "homepage": "http://nicolaasuni.tecnick.com"
                 },
                 {
                     "name": "wallabag/core",
-                    "homepage": "https://www.wallabag.org",
-                    "role": "Developers"
+                    "role": "Developers",
+                    "homepage": "https://www.wallabag.org"
                 }
             ],
             "description": "Keeping a working 6.2.x TCPDF version.",
@@ -9348,7 +9353,7 @@
                     "email": "adrien.brault@gmail.com"
                 },
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -9398,7 +9403,7 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],
