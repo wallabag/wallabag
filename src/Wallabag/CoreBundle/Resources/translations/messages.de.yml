@@ -167,7 +167,7 @@ config:
         isStarred: gibt an, ob der Eintrag favorisiert ist oder nicht
         content: Inhalt des Eintrags
         language: Sprache des Eintrags
-        mimetype: MIME-Typ des Eintrags
+        mimetype: Der Medientyp des Eintrags
         readingTime: Die geschätzte Lesezeit in Minuten
         domainName: Der Domainname des Eintrags
       operator_description:
@@ -693,11 +693,11 @@ flashes:
       client_deleted: Client gelöscht
   user:
     notice:
-      added: Benutzer "%username%" hinzugefügt
-      updated: Benutzer "%username%" aktualisiert
-      deleted: Benutzer "%username%" gelöscht
+      added: Benutzer „%username%“ hinzugefügt
+      updated: Benutzer „%username%“ aktualisiert
+      deleted: Benutzer „%username%“ gelöscht
   site_credential:
     notice:
-      added: Zugangsdaten für "%host%" hinzugefügt
-      updated: Zugangsdaten für "%host%" aktualisiert
-      deleted: Zugangsdaten für "%host%" gelöscht
+      added: Zugangsdaten für „%host%“ hinzugefügt
+      updated: Zugangsdaten für „%host%“ aktualisiert
+      deleted: Zugangsdaten für „%host%“ gelöscht
