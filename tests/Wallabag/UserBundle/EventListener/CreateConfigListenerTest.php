@@ -64,7 +64,7 @@ class CreateConfigListenerTest extends TestCase
         $config->setItemsPerPage(20);
         $config->setFeedLimit(50);
         $config->setLanguage('fr');
-        $config->setReadingSpeed(1);
+        $config->setReadingSpeed(200);
 
         $this->em->expects($this->once())
             ->method('persist')

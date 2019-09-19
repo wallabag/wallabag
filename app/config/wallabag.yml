@@ -20,7 +20,7 @@ wallabag_core:
     theme: material
     language: '%locale%'
     rss_limit: 50
-    reading_speed: 1
+    reading_speed: 200
     cache_lifetime: 10
     action_mark_as_read: 1
     list_mode: 0

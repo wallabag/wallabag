@@ -42,7 +42,7 @@ class RedirectTest extends TestCase
         $config = new Config($user);
         $config->setTheme('material');
         $config->setItemsPerPage(30);
-        $config->setReadingSpeed(1);
+        $config->setReadingSpeed(200);
         $config->setLanguage('en');
         $config->setPocketConsumerKey('xxxxx');
         $config->setActionMarkAsRead(Config::REDIRECT_TO_CURRENT_PAGE);
