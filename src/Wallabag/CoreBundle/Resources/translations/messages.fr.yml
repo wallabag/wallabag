@@ -179,6 +179,24 @@ config:
                 and: "Une règle ET l’autre"
                 matches: "Teste si un <i>sujet</i> correspond à une <i>recherche</i> (non sensible à la casse).<br />Exemple : <code>title matches \"football\"</code>"
                 notmatches: "Teste si un <i>sujet</i> ne correspond pas à une <i>recherche</i> (non sensible à la casse).<br />Exemple : <code>title notmatches \"football\"</code>"
+    form_ignore_origin_rules:
+        faq:
+            title: "FAQ"
+            ignore_origin_rules_definition_title: "Que signifient les règles d'omission d'origine ?"
+            ignore_origin_rules_definition_description: "Ce sont des règles utilisées par wallabag pour omettre automatiquement l'adresse d'origine après une redirection.<br />Si une redirection intervient pendant la récupération d'un nouvel article, toutes les règles d'omission (<i>règles utilisateur et instance</i>) seront utilisées afin d'ignorer ou non l'adresse d'origine."
+            how_to_use_them_title: "Comment les utiliser ?"
+            how_to_use_them_description: "Imaginons que vous vouliez omettre l'origine d'un article provenant de « <i>rss.example.com</i> » (<i>sachant qu'après la redirection, l'adresse réelle est example.com</i>).<br />Dans ce cas, vous devriez mettre « host = \"rss.example.com\" » dans le champ <i>Règle</i>."
+            variables_available_title: "Quelles variables et opérateurs puis-je utiliser pour écrire des règles ?"
+            variables_available_description: "Les variables et opérateurs suivants peuvent être utilisés pour écrire des règles d'omission d'origine :"
+            meaning: "Signification"
+            variable_description:
+                label: "Variable"
+                host: "Hôte"
+                _all: "Adresse complète, utile pour les expressions régulières"
+            operator_description:
+                label: "Opérateur"
+                equal_to: "Égal à…"
+                matches: "Teste si un <i>sujet</i> correspond à une <i>recherche</i> (non sensible à la casse).<br />Exemple : <code>_all ~ \"https?://rss.example.com/foobar/.*\"</code>"
     otp:
         page_title: Authentification double-facteur
         app:

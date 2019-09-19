@@ -179,6 +179,24 @@ config:
                 and: 'หนึ่งข้อบังคับและอื่นๆ'
                 matches: 'ทดสอบว่า <i>เรื่อง</i> นี้ตรงกับ <i>การต้นหา</i> (กรณีไม่ทราบ).<br />ตัวอย่าง: <code>หัวข้อที่ตรงกับ "football"</code>'
                 notmatches: 'ทดสอบว่า <i>เรื่อง</i> นี้ไม่ตรงกับ <i>การต้นหา</i> (กรณีไม่ทราบ).<br />ตัวอย่าง: <code>หัวข้อทีไม่ตรงกับ "football"</code>'
+    form_ignore_origin_rules:
+        # faq:
+        #     title: 'FAQ'
+        #     ignore_origin_rules_definition_title: 'What does « ignore origin rules » mean?'
+        #     ignore_origin_rules_definition_description: 'They are used by wallabag to automatically ignore an origin address after a redirect.<br />If a redirect occurs while fetching a new entry, all the ignore origin rules (<i>user defined and instance defined</i>) will be used to ignore the origin address.'
+        #     how_to_use_them_title: 'How do I use them?'
+        #     how_to_use_them_description: 'Let us assume you want to ignore the origin of an entry coming from « <i>rss.example.com</i> » (<i>knowing that after a redirect, the actual address is example.com</i>).<br />In that case, you should put « host = "rss.example.com" » in the <i>Rule</i> field.'
+        #     variables_available_title: 'Which variables and operators can I use to write rules?'
+        #     variables_available_description: 'The following variables and operators can be used to create ignore origin rules:'
+        #     meaning: 'Meaning'
+        #     variable_description:
+        #         label: 'Variable'
+        #         host: 'Host of the address'
+        #         _all: 'Full address, mainly for pattern matching'
+        #     operator_description:
+        #         label: 'Operator'
+        #         equal_to: 'Equal to…'
+        #         matches: 'Tests that a <i>subject</i> matches a <i>search</i> (case-insensitive).<br />Example: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
     otp:
         # page_title: Two-factor authentication
         # app:
