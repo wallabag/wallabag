@@ -695,7 +695,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $config->setTheme('material');
         $config->setItemsPerPage(30);
-        $config->setReadingSpeed(1);
+        $config->setReadingSpeed(200);
         $config->setLanguage('en');
         $config->setPocketConsumerKey('xxxxx');
 
