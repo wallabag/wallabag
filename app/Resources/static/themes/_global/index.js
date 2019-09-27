@@ -5,6 +5,7 @@ import $ from 'jquery';
 import annotator from 'annotator';
 
 import ClipboardJS from 'clipboard';
+import 'mathjax/es5/tex-svg';
 
 /* Fonts */
 import 'material-design-icons-iconfont/dist/material-design-icons.css';

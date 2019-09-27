@@ -73,6 +73,7 @@
     "jr-qrcode": "^1.0.7",
     "material-design-icons-iconfont": "^5.0.1",
     "materialize-css": "^0.98.1",
+    "mathjax": "^3.0.0",
     "mousetrap": "^1.6.0",
     "ptsans-npm-webfont": "^0.0.4",
     "roboto-fontface": "^0.7.0",
