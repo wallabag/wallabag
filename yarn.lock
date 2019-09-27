@@ -1485,6 +1485,11 @@ combined-stream@^1.0.6, combined-stream@~1.0.6:
   dependencies:
     delayed-stream "~1.0.0"
 
+commander@*:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-3.0.2.tgz#6837c3fb677ad9933d1cfba42dd14d5117d6b39e"
+  integrity sha512-Gar0ASD4BDyKC4hl4DwHqDrmvjoxWKZigVnAbn5H1owvm4CxCPdb0HQDehwNYMJpla5+M2tPmPARzhtYuwpHow==
+
 commander@2.1.x:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.1.0.tgz#d121bbae860d9992a3d517ba96f56588e47c6781"
@@ -2265,6 +2270,11 @@ eslint@^4.0.0:
     strip-json-comments "~2.0.1"
     table "4.0.2"
     text-table "~0.2.0"
+
+esm@^3.2.25:
+  version "3.2.25"
+  resolved "https://registry.yarnpkg.com/esm/-/esm-3.2.25.tgz#342c18c29d56157688ba5ce31f8431fbb795cc10"
+  integrity sha512-U1suiZ2oDVWv4zPO56S0NcR5QriEahGtdN2OR6FiOG4WJvcjBVFB0qI4+eKoWFH483PKGuLuu6V8Z4T5g63UVA==
 
 espree@^3.5.4:
   version "3.5.4"
@@ -4010,6 +4020,21 @@ math-random@^1.0.1:
   resolved "https://registry.yarnpkg.com/math-random/-/math-random-1.0.1.tgz#8b3aac588b8a66e4975e3cdea67f7bb329601fac"
   integrity sha1-izqsWIuKZuSXXjzepn97sylgH6w=
 
+"mathjax-full@git://github.com/mathjax/MathJax-src.git":
+  version "3.0.0"
+  resolved "git://github.com/mathjax/MathJax-src.git#0d74266e1820220d33cb6b29d4ca3575b352ac0d"
+  dependencies:
+    esm "^3.2.25"
+    mj-context-menu "^0.2.0"
+    speech-rule-engine "^3.0.0-beta.6"
+
+mathjax@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/mathjax/-/mathjax-3.0.0.tgz#b9566b4c621b6b7cab23ef6e2c8c5f567cf11797"
+  integrity sha512-z4uLbDHNbs/aRuR6zCcnzwFQuMixkHCcWqgVaommfK/3cA1Ahq7OXemn+m8JwTYcBApSHgcrSbPr9sm3sZFL+A==
+  dependencies:
+    mathjax-full "git://github.com/mathjax/MathJax-src.git"
+
 mathml-tag-names@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/mathml-tag-names/-/mathml-tag-names-2.1.0.tgz#490b70e062ee24636536e3d9481e333733d00f2c"
@@ -4210,6 +4235,11 @@ mixin-object@^2.0.1:
   dependencies:
     for-in "^0.1.3"
     is-extendable "^0.1.1"
+
+mj-context-menu@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/mj-context-menu/-/mj-context-menu-0.2.0.tgz#e1947dbb1771ede33f0c9405ecca9b49d109b86d"
+  integrity sha512-yJxrWBHCjFZEHsZgfs7m5g9OSCNzsVYadW6f6lX3pgZL67vmodtSW/4zhsYmuDKweXfHs0M1kJge1uQIasWA+g==
 
 mkdirp@0.5.1, mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@~0.5.1:
   version "0.5.1"
@@ -6119,6 +6149,15 @@ specificity@^0.3.0:
   resolved "https://registry.yarnpkg.com/specificity/-/specificity-0.3.2.tgz#99e6511eceef0f8d9b57924937aac2cb13d13c42"
   integrity sha512-Nc/QN/A425Qog7j9aHmwOrlwX2e7pNI47ciwxwy4jOlvbbMHkNNJchit+FX+UjF3IAdiaaV5BKeWuDUnws6G1A==
 
+speech-rule-engine@^3.0.0-beta.6:
+  version "3.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/speech-rule-engine/-/speech-rule-engine-3.0.0-beta.6.tgz#77b0ed9570eccd0a5f71d387ae0da8221d720fd0"
+  integrity sha512-B7gcT53jAsKpx7WvFYQcyUlFmgS3Wa9KlDy0FY8SOTa+Wz5EqmI0MpCD5/fYm8/2qiCPp8HwZg+H3cBgM+sNVw==
+  dependencies:
+    commander "*"
+    wicked-good-xpath "*"
+    xmldom-sre "^0.1.31"
+
 split-string@^3.0.1, split-string@^3.0.2:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/split-string/-/split-string-3.1.0.tgz#7cb09dda3a86585705c64b39a6466038682e8fe2"
@@ -6931,6 +6970,11 @@ which@1, which@^1.2.9:
   dependencies:
     isexe "^2.0.0"
 
+wicked-good-xpath@*:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/wicked-good-xpath/-/wicked-good-xpath-1.3.0.tgz#81b0e95e8650e49c94b22298fff8686b5553cf6c"
+  integrity sha1-gbDpXoZQ5JyUsiKY//hoa1VTz2w=
+
 wide-align@^1.1.0:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/wide-align/-/wide-align-1.1.3.tgz#ae074e6bdc0c14a431e804e624549c633b000457"
@@ -6982,6 +7026,11 @@ write@^0.2.1:
   integrity sha1-X8A4KOJkzqP+kUVUdvejxWbLB1c=
   dependencies:
     mkdirp "^0.5.1"
+
+xmldom-sre@^0.1.31:
+  version "0.1.31"
+  resolved "https://registry.yarnpkg.com/xmldom-sre/-/xmldom-sre-0.1.31.tgz#10860d5bab2c603144597d04bf2c4980e98067f4"
+  integrity sha512-f9s+fUkX04BxQf+7mMWAp5zk61pciie+fFLC9hX9UVvCeJQfNHRHXpeo5MPcR0EUf57PYLdt+ZO4f3Ipk2oZUw==
 
 xpath-range@0.0.5:
   version "0.0.5"
