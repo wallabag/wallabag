@@ -12,7 +12,7 @@
 
             {# Authentication errors #}
             {% if authenticationError %}
-            <p class="error">{{ authenticationError|trans(authenticationErrorData) }}</p>
+            <p class="error">{{ authenticationError|trans(authenticationErrorData, 'SchebTwoFactorBundle') }}</p>
             {% endif %}
 
             <div class="input-field col s12">
