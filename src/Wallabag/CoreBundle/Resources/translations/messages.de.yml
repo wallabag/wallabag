@@ -430,6 +430,7 @@ tag:
         number_on_the_page: '{0} Es gibt keine Tags.|{1} Es gibt einen Tag.|]1,Inf[ Es gibt %count% Tags.'
         see_untagged_entries: 'Zeige nicht getaggte Einträge'
         # no_untagged_entries: 'There are no untagged entries.'
+        untagged: 'Nicht getaggte Einträge'
     new:
         add: 'Hinzufügen'
         placeholder: 'Du kannst verschiedene Tags, getrennt von einem Komma, hinzufügen.'

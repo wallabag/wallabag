@@ -430,6 +430,7 @@ tag:
         number_on_the_page: "{0} Non ci sono etichette.|{1} C'è un'etichetta.|]1,Inf[ ci sono %count% etichette."
         see_untagged_entries: 'Vedi articoli non etichettati'
         # no_untagged_entries: 'There are no untagged entries.'
+        untagged: 'Articoli non etichettati'
     new:
         add: 'Aggiungi'
         placeholder: 'Puoi aggiungere varie etichette, separate da una virgola.'
