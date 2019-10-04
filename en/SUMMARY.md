@@ -32,6 +32,7 @@
 ## Apps
 
 * [Android](apps/android.md)
+* [iOS](apps/ios.md)
 
 ## Administrator
 
