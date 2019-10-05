@@ -410,7 +410,7 @@ quickstart:
         use_docker: 'Utilice Docker para instalar wallabag'
     docs:
         title: 'Documentación completa'
-        description: "Hay muchas funcionalidades en wallabag. No dudes en leer el manual para conocerlas y aprender a utilizarlas."
+        description: "Hay muchas funcionalidades en wallabag. No dude en leer el manual para conocerlas y aprender a utilizarlas."
         annotate: 'Anotar en un artículo'
         export: 'Convertir tus artículos a ePUB o PDF'
         search_filters: 'Aprender a utilizar el buscador y los filtros para encontrar artículos'
@@ -544,7 +544,7 @@ user:
     page_title: Gestión de usuarios
     new_user: Crear un usuario
     edit_user: Editar un usuario existente
-    description: "Aquí puedes gestionar todos los usuarios (crear, editar y eliminar)"
+    description: "Aquí puede gestionar todos los usuarios (crear, editar y eliminar)"
     list:
         actions: Acciones
         edit_action: Editar
@@ -564,7 +564,7 @@ user:
         # twofactor_google_label: Two factor authentication by OTP app
         save: Guardar
         delete: Eliminar
-        delete_confirm: ¿Estás seguro?
+        delete_confirm: ¿Está seguro?
         back_to_list: Volver a la lista
     search:
         # placeholder: Filter by username or email
