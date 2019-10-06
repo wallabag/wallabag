@@ -9,8 +9,8 @@ security:
     password: Hasło
     cancel: Anuluj
   resetting:
-    description: Wpisz swój adres email poniżej. Wyślemy Ci instrukcję resetowania
-      hasła
+    description: Wpisz swój adres e-mail poniżej. Wyślemy Ci instrukcję resetowania
+      hasła.
   register:
     page_title: Utwórz konto
     go_to_account: Idź do konta
@@ -24,7 +24,7 @@ menu:
     tags: Tagi
     internal_settings: Wewnętrzne ustawienia
     import: Importuj
-    howto: Howto
+    howto: How to
     developer: Zarządzanie klientami API
     logout: Wyloguj
     about: O nas
@@ -89,7 +89,7 @@ config:
       swoim koncie Pocket.
   form_rss:
     description: Kanały RSS prowadzone przez wallabag pozwalają Ci na czytanie twoich
-      zapisanych artykułów w twoim ulubionym czytniku RSS. Musisz najpierw wynegenerować
+      zapisanych artykułów w twoim ulubionym czytniku RSS. Musisz najpierw wygenerować
       tokena.‌
     token_label: Token RSS
     no_token: Brak tokena
@@ -104,7 +104,7 @@ config:
     rss_limit: Link do RSS
   form_user:
     two_factor_description: Włączenie autoryzacji dwuetapowej oznacza, że będziesz
-      otrzymywał maile z kodem przy każdym nowym, niezaufanym połączeniu
+      otrzymywał maile z kodem przy każdym nowym, niezaufanym połączeniu.
     name_label: Nazwa
     email_label: Adres email
     twoFactorAuthentication_label: Autoryzacja dwuetapowa
@@ -148,14 +148,13 @@ config:
         Dzięki temu unikniesz konieczności ręcznego ich klasyfikowania.
       how_to_use_them_title: Jak ich użyć?
       how_to_use_them_description: 'Załóżmy, że chcesz otagować nowe wpisy jako «
-        <i>do szybkiego przeczytania</i> » jeżeli czas czytania wynosi mniej niż 3
-        minuty.<br />W tym przypadku ponienieneś umieścić « czasCzytania &lt;= 3 »
-        w  polu <i>Reguła</i> i « <i><do szybkiego przeczytania</i> » w polu <i>Tagi</i>.<br
-        />Wiele tagów może zostać dodanych jednocześnie rozdzielając je przecinkami:
-        « <i>do szybkiego przeczytania, koniecznie przeczytać</i> »<br />Kompleksowe
-        reguły mogą być napisane przy użyciu operatorów: jeżeli « <i>czasCzytania
-        &gt;= 5 I nazwaDomeny = "github.com"</i> » wtedy otaguj jako « <i>dłuższy
-        tekst, github </i> »'
+        <i>krótki tekst</i> » jeżeli czas czytania wynosi mniej niż 3 minuty.<br />W
+        tym przypadku powinieneś umieścić « czasCzytania &lt;= 3 » w polu <i>Reguła</i>
+        i « <i>krótki tekst</i> » w polu <i>Tags</i> .<br />Wiele tagów może zostać
+        dodanych jednocześnie rozdzielając je przecinkami: « <i>do szybkiego przeczytania,
+        koniecznie przeczytać</i> »<br />Kompleksowe reguły mogą być napisane przy
+        użyciu operatorów: jeżeli « <i>czasCzytania &gt;= 5 I nazwaDomeny = "github.com"</i>
+        » wtedy otaguj jako « <i>dłuższy tekst, GitHub </i> »'
       variables_available_title: Jakich zmiennych i operatorów mogę użyć przy pisaniu
         reguł?
       variables_available_description: 'Następujące zmienne i operatory mogą być użyte
@@ -204,7 +203,7 @@ entry:
     reading_time_minutes: 'szacunkowy czas czytania: %readingTime% min'
     reading_time_less_one_minute: 'szacunkowy czas czytania: &lt; 1 min'
     number_of_tags: '{1} i inny tag|]1,Inf[i %count% innych tagów'
-    reading_time_minutes_short: '%readingTime% min'
+    reading_time_minutes_short: '%czasCzytania% min'
     reading_time_less_one_minute_short: '&lt; 1 min'
     original_article: oryginał
     toogle_as_read: Oznacz jako przeczytane
@@ -281,6 +280,11 @@ entry:
   confirm:
     delete: Czy jesteś pewien, że chcesz usunąć ten artykuł?
     delete_tag: Czy jesteś pewien, że chcesz usunąć ten tag, z tego artykułu?
+  metadata:
+    reading_time: Szacowany czas czytania
+    reading_time_minutes_short: '%czasCzytania% min'
+    address: Adres
+    added_on: Dodano
 about:
   page_title: O nas
   top_menu:
@@ -323,7 +327,7 @@ howto:
   top_menu:
     browser_addons: Wtyczki dla przeglądarki
     mobile_apps: Aplikacje mobilne
-    bookmarklet: Bookmarklet
+    bookmarklet: Skryptozakładka
   form:
     description: Podziękuj przez ten formularz
   browser_addons:
@@ -337,7 +341,7 @@ howto:
     ios: w iTunes Store
     windows: w Microsoft Store
   bookmarklet:
-    description: Przeciągnij i upuść ten link na swój pasek zakładek
+    description: 'Przeciągnij i upuść ten link na swój pasek zakładek:'
   shortcuts:
     page_description: Tutaj znajdują się skróty dostępne w wallabag.
     shortcut: Skrót
@@ -375,8 +379,8 @@ quickstart:
     paragraph_2: Śledź nas!
   configure:
     title: Konfiguruj aplikację
-    description: W celu dopasowania aplikacji do swoich upodobań, zobacz konfigurację
-      aplikacji
+    description: W celu dopasowania aplikacji do swoich upodobań zobacz konfigurację
+      aplikacji.
     language: Zmień język i wygląd
     rss: Włącz kanały RSS
     tagging_rules: Napisz reguły pozwalające na automatyczne otagowanie twoich artykułów
@@ -391,7 +395,7 @@ quickstart:
   first_steps:
     title: Pierwsze kroki
     description: Teraz wallabag jest poprawnie skonfigurowany, więc czas zarchiwizować
-      Internet. Klinknij w prawym górnym rogu na znak +, aby dodać link
+      Internet. Kliknij w prawym górnym rogu na znak +, aby dodać link.
     new_article: Zapisz swój pierwszy artukuł
     unread_articles: I sklasyfikuj go!
   migrate:
@@ -436,6 +440,7 @@ export:
   footer_template: <div style="text-align:center;"><p>Stworzone przez wallabag z %method%</p><p>Proszę
     zgłoś <a href="https://github.com/wallabag/wallabag/issues">sprawę</a>, jeżeli
     masz problem z wyświetleniem tego e-booka na swoim urządzeniu.</p></div>
+  unknown: Nieznany
 import:
   page_title: Import
   page_description: Witaj w importerze Wallabag. Wybierz swoją poprzednią usługę,
@@ -448,7 +453,7 @@ import:
     file_label: Plik
     save_label: Właduj plik
   pocket:
-    page_title: Import > Pocket
+    page_title: Importuj > Pocket
     description: Ten importer, zaimportuje dane z usługi Pocket. Pocket nie pozwala
       na nam na pobranie zawartości ze swojej usługi, więc kontent każdego artykułu
       zostanie ponownie pobrany przez wallabag.
@@ -460,19 +465,19 @@ import:
       przycisk i autoryzuj aplikacje aby połączyć się z getpocket.com.
     connect_to_pocket: Połącz z Pocket i importuj dane
   wallabag_v1:
-    page_title: Import > Wallabag v1
+    page_title: Importuj > Wallabag v1
     description: Ten importer, zaimportuje wszystkie twoje artykułu z wallabag v1.
       Na swojej stronie konfiguracyjnej kliknij "JSON eksport" w sekcji "Eksportuj
       swoje dane wallabag". Otrzymasz plik "wallabag-export-1-xxxx-xx-xx.json".
     how_to: Wybierz swój plik eksportu z wallabag i kliknij poniższy przycisk, aby
       go załadować.
   wallabag_v2:
-    page_title: Import > Wallabag v2
+    page_title: Importuj > Wallabag v2
     description: Ten importer, zaimportuje wszystkie twoje artykułu z wallabag v2.
       Idź do wszystkich artykułów, a następnie na panelu exportu kliknij na "JSON".
       Otrzymasz plik "All articles.json".
   readability:
-    page_title: Import > Readability
+    page_title: Importuj > Readability
     description: Ten importer, zaimportuje wszystkie twoje artykuły z Readability.
       Na stronie narzędzi (https://www.readability.com/tools/), kliknij na "Export
       your data" w sekcji "Data Export". Otrzymach email z plikiem JSON (plik nie
@@ -488,14 +493,14 @@ import:
       niepowodzeniem).<strong>Zdecydowanie zalecamy</strong> włączenie asynchronicznego
       importu, w celu uniknięcia błędów.
   firefox:
-    page_title: Import > Firefox
+    page_title: Importuj > Firefox
     description: Ten importer zaimportuje wszystkie twoje zakładki z Firefoksa. Idź
       do twoich zakładek (Ctrl+Shift+O), następnie w "Import i kopie zapasowe", wybierz
       "Utwórz kopię zapasową...". Uzyskasz plik .json.
     how_to: Wybierz swój plik z zakładkami i naciśnij poniższy przycisk, aby je zaimportować.
       Może to zająć dłuższą chwilę, zanim wszystkie artykuły zostaną przeniesione.
   chrome:
-    page_title: Import > Chrome
+    page_title: Importuj > Chrome
     description: 'Ten importer zaimportuje wszystkie twoje zakładki z Chrome. Lokalizacja
       pliku jest zależna od twojego systemy operacyjnego : <ul><li>Pod Linuksem, idź
       do katalogu <code>~/.config/chromium/Default/</code></li><li>Pod Windowsem,
@@ -506,14 +511,14 @@ import:
     how_to: Wybierz swój plik z zakładkami i naciśnij poniższy przycisk, aby je zaimportować.
       Może to zająć dłuższą chwilę, zanim wszystkie artykuły zostaną przeniesione.
   instapaper:
-    page_title: Import > Instapaper
+    page_title: Importuj > Instapaper
     description: Ten importer, zaimportuje wszystkie twoje artykuły z Instapaper.
       W ustawieniach (https://www.instapaper.com/user), kliknij na "Download .CSV
       file"  w sekcji "Export". Otrzymasz plik CSV.
     how_to: Wybierz swój plik eksportu z Instapaper i kliknij poniższy przycisk, aby
       go załadować.
   pinboard:
-    page_title: Import > Pinboard
+    page_title: Importuj > Pinboard
     description: Ten importer, zaimportuje wszystkie twoje artykuły z Pinboard. W
       ustawieniach kopii zapasowej (https://pinboard.in/settings/backup), kliknij
       na "JSON" w sekcji "Bookmarks". Otrzymasz plik "pinboard_export".
@@ -532,7 +537,7 @@ developer:
   existing_clients:
     title: Istniejący klienci
     field_id: ID klienta
-    field_secret: Client secret
+    field_secret: Sekret klienta
     field_uris: Przekieruj URIs
     field_grant_types: Przyznaj pozwolenie
     no_client: Nie ma jeszcze klienta.
@@ -556,15 +561,15 @@ developer:
     page_description: Tutaj znajdują się parametry klienta.
     field_name: Nazwa klienta
     field_id: Client ID
-    field_secret: Client secret
+    field_secret: Sekret klienta
     back: Cofnij
     read_howto: Przeczytaj jak "Stworzyć moją pierwszą aplikację"
   howto:
     page_title: Zarządzanie klientami API > Jak stworzyć moją pierwszą aplikację
     description:
       paragraph_1: Następujące komendy korzystają <a href="https://github.com/jkbrzt/httpie">Biblioteka
-        HTTPie</a>. Upewnij się, czy zainstalowałeś ją w swoim systemie zanim z niej
-        skorzystasz
+        HTTPie</a>. Upewnij się, czy zainstalowałeś ją w swoim systemie, zanim z niej
+        skorzystasz.
       paragraph_2: Potrzebujesz tokena w celu nawiązania komunikacji między swoją
         aplikacją a API wallabag.
       paragraph_3: W celu stworzenia tokena musisz <a href="%link%">stwórz nowego
@@ -632,8 +637,8 @@ flashes:
     notice:
       config_saved: Konfiguracja zapisana.
       password_updated: Hasło zaktualizowane
-      password_not_updated_demo: In demonstration mode, you can't change password
-        for this user.
+      password_not_updated_demo: W trybie demonstracyjnym nie możesz zmienić hasła
+        dla tego użytkownika.
       user_updated: Informacje zaktualizowane
       rss_updated: Informacje RSS zaktualizowane
       tagging_rules_updated: Reguły tagowania zaktualizowane
