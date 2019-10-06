@@ -1,11 +1,12 @@
-# Two factor mail
 auth_code:
-    on: 'włączony'
-    mailer:
-        subject: 'Kod autoryzacyjny Wallabag'
-        body:
-            hello: "Cześć %user%,"
-            first_para: "Od momentu włączenia na swoim koncie autoryzacji dwuetapowej i zalogowaniu się na nowym urzączeniu (komputer, telefon, etc.), wyślemy do ciebie kod potwierdzający twoje połączenie"
-            second_para: "Tutaj jest twój kod:"
-            support: "Nie wahaj się skontaktować z nami, jeżeli masz jakiekolwiek problemy:"
-            signature: "Zespół wallabag"
+  on: włączony
+  mailer:
+    subject: Kod autoryzacyjny Wallabag
+    body:
+      hello: Cześć %user%,
+      first_para: Od momentu włączenia na swoim koncie autoryzacji dwuetapowej i zalogowaniu
+        się na nowym urządzeniu (komputer, telefon, etc.), wyślemy do ciebie kod potwierdzający
+        twoje połączenie.
+      second_para: 'Tutaj jest twój kod:'
+      support: 'Nie wahaj się skontaktować z nami, jeżeli masz jakiekolwiek problemy:'
+      signature: Zespół wallabag
