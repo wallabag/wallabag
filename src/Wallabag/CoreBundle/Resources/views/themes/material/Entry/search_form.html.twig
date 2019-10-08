@@ -2,7 +2,7 @@
     {% if form_errors(form) %}
         <span class="black-text">{{ form_errors(form) }}</span>
     {% endif %}
-    <button type="submit" class="nav-form-button"><i class="material-icons search">search</i></button>
+    <button type="submit" class="nav-form-button" aria-label="search"><i class="material-icons search" aria-hidden="true"></i></button>
 
     {% if form_errors(form.term) %}
         <span class="black-text">{{ form_errors(form.term) }}</span>
@@ -11,7 +11,7 @@
     <input type="hidden" name="currentRoute" value="{{ currentRoute }}" />
 
     {{ form_widget(form.term, { 'attr': {'autocomplete': 'off', 'placeholder': 'entry.search.placeholder'} }) }}
-    <i class="material-icons close">clear</i>
+    <i class="material-icons close" aria-label="clear" role="button"></i>
 
     {{ form_rest(form) }}
 </form>
