@@ -10,14 +10,14 @@ help: ## Display this help menu
 clean: ## Clear the application cache
 	rm -rf var/cache/*
 
-install: ## Install wallabag with the latest version
+install: customcss ## Install wallabag with the latest version
 	@./scripts/install.sh $(ENV)
 
 update: ## Update the wallabag installation to the latest version
 	@./scripts/update.sh $(ENV)
 
 dev: ENV=dev
-dev: build ## Install the latest dev version
+dev: build customcss ## Install the latest dev version
 	@./scripts/dev.sh
 
 run: ## Run the wallabag built-in server
@@ -26,6 +26,9 @@ run: ## Run the wallabag built-in server
 build: ## Run webpack
 	@npm install
 	@npm run build:$(ENV)
+
+customcss:
+	@touch web/custom.css
 
 prepare: clean ## Prepare database for testsuite
 ifdef DB

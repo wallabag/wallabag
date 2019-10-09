@@ -55,3 +55,6 @@ app/Resources/build/
 admin-export.json
 specialexport.json
 /data/site-credentials-secret-key.txt
+
+# Custom CSS file
+web/custom.css
