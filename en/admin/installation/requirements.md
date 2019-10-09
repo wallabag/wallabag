@@ -40,6 +40,7 @@ You'll also need the following extensions. Some of these may already activated, 
 -   php-gettext
 -   php-tokenizer
 -   php-bcmath
+-   php-intl
 
 wallabag uses PDO to connect to the database, so you'll need one of the following:
 
