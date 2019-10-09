@@ -117,6 +117,12 @@
             <a href="javascript: void(null);" id="filter-form-close" class="close-button--popup close-button">&times;</a>
 
             <div id="filter-status" class="filter-group">
+                {% if currentRoute != 'untagged' and nbEntriesUntagged != 0 %}
+                    <div class="">
+                        <a href="{{ path('untagged') }}">{{ 'tag.list.see_untagged_entries'|trans }} ({{nbEntriesUntagged}})</a>
+                    </div>
+                {% endif %}
+
                 <div class="">
                     <label>{{ 'entry.filters.status_label'|trans }}</label>
                 </div>
