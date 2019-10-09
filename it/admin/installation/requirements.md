@@ -42,6 +42,7 @@ i pacchetti corrispondenti.
 -   php-gettext
 -   php-tokenizer
 -   php-bcmath
+-   php-intl
 
 wallabag usa PDO per connettersi, per cui avrete bisogno di uno dei
 seguenti:
