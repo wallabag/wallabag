@@ -22,6 +22,8 @@ curl -s https://getcomposer.org/installer | php
 Vous pouvez trouver des instructions spécifiques [ici (en
 anglais)](https://getcomposer.org/doc/00-intro.md).
 
+## Extensions PHP
+
 Vous aurez besoin des extensions suivantes pour que wallabag fonctionne.
 Il est possible que certaines de ces extensions soient déjà activées
 dans votre version de PHP, donc vous n'avez pas forcément besoin
@@ -42,6 +44,7 @@ d'installer tous les paquets correspondants.
 -   php-gettext
 -   php-tokenizer
 -   php-bcmath
+-   php-intl
 
 wallabag utilise PDO afin de se connecter à une base de données, donc
 vous aurez besoin d'une extension et d'un système de bases de données
