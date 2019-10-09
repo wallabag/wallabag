@@ -3,8 +3,7 @@
 ## Purpose of this document
 
 This document describes how you can setup your iOS application to
-work with your wallabag instance. There is no difference in this
-procedure for wallabag v1 or v2.
+work with your Wallabag V2 instance.
 
 ## Steps to configure your app
 
