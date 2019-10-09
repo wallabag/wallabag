@@ -40,6 +40,7 @@ installieren.
 -   php-gettext
 -   php-tokenizer
 -   php-bcmath
+-   php-intl
 
 wallabag nutzt PDO, um sich mit der Datenbank zu verbinden, darum
 benötigst du eines der folgenden Komponenten:
