@@ -39,3 +39,9 @@ login_password_field: password
 
 not_logged_in_xpath: //body[@class="not-logged-in"]
 ```
+
+Si vous voulez ajouter des paramètres à votre requête de connexion, vous pouvez les définir ainsi : 
+
+```
+login_extra_fields: myParameter=value
+```
