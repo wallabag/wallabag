@@ -1,11 +1,12 @@
 {
     "plugins": [
-      "edit-link",
-      "toggle-chapters",
-      "page-toc",
-      "-sharing",
-      "versions",
-      "hints"
+        "edit-link",
+        "toggle-chapters",
+        "page-toc",
+        "-sharing",
+        "versions",
+        "hints",
+        "localized-footer"
     ],
     "pluginsConfig": {
         "edit-link": {
@@ -19,6 +20,10 @@
         },
         "versions": {
             "type": "branches"
+        },
+        "localized-footer": {
+            "hline": true,
+            "filename": "../FOOTER.md"
         }
     }
 }
