@@ -36,3 +36,9 @@ login_password_field: password
 
 not_logged_in_xpath: //body[@class="not-logged-in"]
 ```
+
+If you want to add some parameters to the login query, you can set them like that:
+
+```
+login_extra_fields: myParameter=value
+```
