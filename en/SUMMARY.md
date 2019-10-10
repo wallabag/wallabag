@@ -59,6 +59,7 @@
     * [Resources](developer/api/resources.md)
 * [Docker](developer/docker.md)
 * [Documentation](developer/documentation.md)
+* [Back-End](developer/back-end.md)
 * [Front-End](developer/front_end.md)
 * [Test Suite](developer/testsuite.md)
 * [Translate](developer/translate.md)
