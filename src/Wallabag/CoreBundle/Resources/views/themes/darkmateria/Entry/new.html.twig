@@ -1,7 +1,0 @@
-{% extends "WallabagCoreBundle::layout.html.twig" %}
-
-{% block title %}{{ 'entry.new.page_title'|trans }}{% endblock %}
-
-{% block content %}
-    {{ render(controller( "WallabagCoreBundle:Entry:addEntryForm" )) }}
-{% endblock %}
