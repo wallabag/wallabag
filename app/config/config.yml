@@ -169,6 +169,7 @@ liip_theme:
     themes:
         - baggy
         - material
+        - darkmaterial
     autodetect_theme: wallabag_core.helper.detect_active_theme
 
     path_patterns:
