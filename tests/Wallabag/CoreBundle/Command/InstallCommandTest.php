@@ -18,6 +18,18 @@ use Wallabag\CoreBundle\Command\InstallCommand;
 
 class InstallCommandTest extends WallabagCoreTestCase
 {
+    public static function setUpBeforeClass()
+    {
+        // disable doctrine-test-bundle
+        StaticDriver::setKeepStaticConnections(false);
+    }
+
+    public static function tearDownAfterClass()
+    {
+        // enable doctrine-test-bundle
+        StaticDriver::setKeepStaticConnections(true);
+    }
+
     public function setUp()
     {
         parent::setUp();
@@ -51,9 +63,6 @@ class InstallCommandTest extends WallabagCoreTestCase
             parent::setUp();
         }
 
-        // disable doctrine-test-bundle
-        StaticDriver::setKeepStaticConnections(false);
-
         $this->resetDatabase($this->getClient());
     }
 
@@ -62,6 +71,7 @@ class InstallCommandTest extends WallabagCoreTestCase
         $databasePath = getenv('TEST_DATABASE_PATH');
         // Remove variable environnement
         putenv('TEST_DATABASE_PATH');
+
         if ($databasePath && file_exists($databasePath)) {
             unlink($databasePath);
         } else {
@@ -71,8 +81,6 @@ class InstallCommandTest extends WallabagCoreTestCase
             $this->resetDatabase($client);
         }
 
-        // enable doctrine-test-bundle
-        StaticDriver::setKeepStaticConnections(true);
         parent::tearDown();
     }
 

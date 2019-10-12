@@ -2,7 +2,6 @@
 
 namespace Wallabag\CoreBundle\Command;
 
-use Craue\ConfigBundle\Entity\Setting;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -13,6 +12,7 @@ use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Wallabag\CoreBundle\Entity\InternalSetting;
 
 class InstallCommand extends ContainerAwareCommand
 {
@@ -54,7 +54,7 @@ class InstallCommand extends ContainerAwareCommand
 
         $this->io = new SymfonyStyle($input, $output);
 
-        $this->io->title('Wallabag installer');
+        $this->io->title('wallabag installer');
 
         $this
             ->checkRequirements()
@@ -63,7 +63,7 @@ class InstallCommand extends ContainerAwareCommand
             ->setupConfig()
         ;
 
-        $this->io->success('Wallabag has been successfully installed.');
+        $this->io->success('wallabag has been successfully installed.');
         $this->io->success('You can now configure your web server, see https://doc.wallabag.org');
     }
 
@@ -94,8 +94,9 @@ class InstallCommand extends ContainerAwareCommand
         $status = '<info>OK!</info>';
         $help = '';
 
+        $conn = $this->getContainer()->get('doctrine')->getManager()->getConnection();
+
         try {
-            $conn = $this->getContainer()->get('doctrine')->getManager()->getConnection();
             $conn->connect();
         } catch (\Exception $e) {
             if (false === strpos($e->getMessage(), 'Unknown database')
@@ -253,7 +254,7 @@ class InstallCommand extends ContainerAwareCommand
         $question->setHidden(true);
         $user->setPlainPassword($this->io->askQuestion($question));
 
-        $user->setEmail($this->io->ask('Email', ''));
+        $user->setEmail($this->io->ask('Email', 'wallabag@wallabag.io'));
 
         $user->setEnabled(true);
         $user->addRole('ROLE_SUPER_ADMIN');
@@ -275,10 +276,10 @@ class InstallCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
         // cleanup before insert new stuff
-        $em->createQuery('DELETE FROM CraueConfigBundle:Setting')->execute();
+        $em->createQuery('DELETE FROM WallabagCoreBundle:InternalSetting')->execute();
 
         foreach ($this->getContainer()->getParameter('wallabag_core.default_internal_settings') as $setting) {
-            $newSetting = new Setting();
+            $newSetting = new InternalSetting();
             $newSetting->setName($setting['name']);
             $newSetting->setValue($setting['value']);
             $newSetting->setSection($setting['section']);

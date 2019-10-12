@@ -32,10 +32,13 @@ menu:
         save_link: 'Сохранить ссылку'
         back_to_unread: 'Назад к непрочитанным записям'
         users_management: 'Управление пользователями'
+        site_credentials: 'Site credentials'
+        quickstart: "Быстрый старт"
     top:
         add_new_entry: 'Добавить новую запись'
         search: 'Поиск'
         filter_entries: 'Фильтр записей'
+        # random_entry: Jump to a random entry from that list
         export: 'Экспорт'
     search_form:
         input_label: 'Введите текст для поиска'
@@ -52,11 +55,12 @@ config:
     page_title: 'Настройки'
     tab_menu:
         settings: 'Настройки'
-        rss: 'RSS'
+        feed: 'RSS'
         user_info: 'Информация о пользователе'
         password: 'Пароль'
         rules: 'Правила настройки простановки тегов'
         new_user: 'Добавить пользователя'
+        reset: 'Сброс данных'
     form:
         save: 'Сохранить'
     form_settings:
@@ -64,41 +68,49 @@ config:
         items_per_page_label: 'Записей на странице'
         language_label: 'Язык'
         reading_speed:
-            label: 'Скорость чтения'
+            label: 'Скорость чтения (слов в минуту)'
             help_message: 'Вы можете использовать онлайн-инструменты для оценки скорости чтения:'
-            100_word: 'Я читаю ~100 слов в минуту'
-            200_word: 'Я читаю ~200 слов в минуту'
-            300_word: 'Я читаю ~300 слов в минуту'
-            400_word: 'Я читаю ~400 слов в минуту'
         action_mark_as_read:
             label: 'Куда Вы хотите быть перенаправлены, после пометки записи, как прочитанная?'
             redirect_homepage: 'На домашнюю страницу'
             redirect_current_page: 'На текущую страницу'
         pocket_consumer_key_label: "Ключ от Pocket для импорта контента"
         android_configuration: "Настройте Ваше Android приложение"
+        # android_instruction: "Touch here to prefill your Android application"
         help_theme: "wallabag настраиваемый, здесь Вы можете выбрать тему."
         help_items_per_page: "Вы можете выбрать количество отображаемых записей на странице."
         help_reading_speed: "wallabag посчитает сколько времени занимает чтение каждой записи. Вы можете определить здесь, как быстро вы читаете. wallabag пересчитает время чтения для каждой записи."
         help_language: "Вы можете изменить язык интерфейса wallabag."
         help_pocket_consumer_key: "Обязательно для импорта из Pocket. Вы можете создать это в Вашем аккаунте на Pocket."
-    form_rss:
+    form_feed:
         description: 'RSS фид созданный с помощью wallabag позволяет читать Ваши записи через Ваш любимый RSS агрегатор. Для начала Вам потребуется создать ключ.'
         token_label: 'RSS ключ'
         no_token: 'Ключ не задан'
         token_create: 'Создать ключ'
         token_reset: 'Пересоздать ключ'
-        rss_links: 'ссылка на RSS'
-        rss_link:
+        # token_revoke: 'Revoke the token'
+        feed_links: 'ссылка на RSS'
+        feed_link:
             unread: 'непрочитанные'
             starred: 'помеченные'
             archive: 'архивные'
-        rss_limit: 'Количество записей в фиде'
+            # all: 'All'
+        feed_limit: 'Количество записей в фиде'
     form_user:
-        two_factor_description: "Включить двухфакторную аутентификацию, Вы получите сообщение на указанный email с кодом, при каждом новом непроверенном подключении."
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
+        # login_label: 'Login (can not be changed)'
         name_label: 'Имя'
         email_label: 'Email'
-        twoFactorAuthentication_label: 'Двухфакторная аутентификация'
-        help_twoFactorAuthentication: "Если Вы включите двухфакторную аутентификацию, то Вы будете получать код на указанный ранее email, каждый раз при входе в wallabag."
+        two_factor:
+            # emailTwoFactor_label: 'Using email (receive a code by email)'
+            # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, Authy or FreeOTP, to get a one time code)'
+            # table_method: Method
+            # table_state: State
+            # table_action: Action
+            # state_enabled: Enabled
+            # state_disabled: Disabled
+            # action_email: Use email
+            # action_app: Use OTP App
         delete:
             title: "Удалить мой аккаунт (или опасная зона)"
             description: "Если Вы удалите ваш аккаунт, ВСЕ ваши записи, теги и другие данные, будут БЕЗВОЗВРАТНО удалены (операция не может быть отменена после). Затем Вы выйдете из системы."
@@ -110,6 +122,7 @@ config:
         annotations: "Удалить все аннотации"
         tags: "Удалить все теги"
         entries: "Удалить все записи"
+        # archived: Remove ALL archived entries
         confirm: "Вы уверены? (Данные будут БЕЗВОЗВРАТНО удалены, эти действия необратимы)"
     form_password:
         description: "Здесь Вы можете поменять своя пароль. Ваш пароль должен быть длиннее 8 символов."
@@ -123,6 +136,15 @@ config:
         edit_rule_label: 'изменить'
         rule_label: 'Правило'
         tags_label: 'теги'
+        # card:
+        #     new_tagging_rule: Create a tagging rule
+        #     import_tagging_rules: Import tagging rules
+        #     import_tagging_rules_detail: You have to select the JSON file you previously exported.
+        #     export_tagging_rules: Export tagging rules
+        #     export_tagging_rules_detail: This will download a JSON file that you can use to import tagging rules elsewhere or to backup them.
+        # file_label: JSON file
+        # import_submit: Import
+        # export: Export
         faq:
             title: 'FAQ'
             tagging_rules_definition_title: 'Что значит "правило тегирования"?'
@@ -154,6 +176,16 @@ config:
                 or: 'Одно правило ИЛИ другое'
                 and: 'Одно правило И другое'
                 matches: 'Тесты, в которых <i> тема </i> соответствует <i> поиску </i> (без учета регистра). Пример: <code> title matches "футбол" </code>'
+                # notmatches: 'Tests that a <i>subject</i> doesn''t match match a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
+    otp:
+        # page_title: Two-factor authentication
+        # app:
+        #     two_factor_code_description_1: You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password. It'll disapear after a page reload.
+        #     two_factor_code_description_2: 'You can scan that QR Code with your app:'
+        #     two_factor_code_description_3: 'Also, save these backup codes in a safe place, you can use them in case you lose access to your OTP app:'
+        #     two_factor_code_description_4: 'Test an OTP code from your configured app:'
+        #     cancel: Cancel
+        #     enable: Enable
 
 entry:
     default_title: 'Название записи'
@@ -165,6 +197,7 @@ entry:
         filtered_tags: 'Отфильтрованные по тегу:'
         filtered_search: 'Отфильтрованные по поиску:'
         untagged: 'Записи без тегов'
+        # all: 'All entries'
     list:
         number_on_the_page: '{0} Записей не обнаружено.|{1} Одна запись.|]1,Inf[ Найдено %count% записей.'
         reading_time: 'расчетное время чтения'
@@ -186,6 +219,8 @@ entry:
         unread_label: 'Непрочитанная'
         preview_picture_label: 'Есть картинка предварительного просмотра'
         preview_picture_help: 'Картинка предварительного просмотра'
+        # is_public_label: 'Has a public link'
+        # is_public_help: 'Public link'
         language_label: 'Язык'
         http_status_label: 'статус HTTP'
         reading_time:
@@ -224,6 +259,8 @@ entry:
         original_article: 'оригинал'
         annotations_on_the_entry: '{0} Нет аннотации|{1} Одна аннотация|]1,Inf[ %count% аннотаций'
         created_at: 'Дата создания'
+        # published_at: 'Publication date'
+        # published_by: 'Published by'
         # provided_by: 'Provided by'
     new:
         page_title: 'Сохранить новую запись'
@@ -237,10 +274,17 @@ entry:
         title_label: 'Название'
         url_label: 'Ссылка'
         # origin_url_label: 'Origin url (from where you found that entry)'
-        is_public_label: 'Публичная'
         save_label: 'Сохранить'
     public:
         shared_by_wallabag: "Запись была опубликована <a href='%wallabag_instance%'>wallabag</a>"
+    confirm:
+        # delete: "Are you sure you want to remove that article?"
+        # delete_tag: "Are you sure you want to remove that tag from that article?"
+    metadata:
+        # reading_time: "Estimated reading time"
+        # reading_time_minutes_short: "%readingTime% min"
+        # address: "Address"
+        # added_on: "Added on"
 
 about:
     page_title: 'О'
@@ -336,7 +380,7 @@ quickstart:
         title: 'Настроить приложение'
         description: 'Чтобы иметь приложение, которое вам подходит, ознакомьтесь с конфигурацией wallabag.'
         language: 'Выбрать язык и дизайн'
-        rss: 'Включить RSS фид'
+        feed: 'Включить RSS фид'
         tagging_rules: 'Создать правило для автоматической установки тегов'
     admin:
         title: 'Администрирование'
@@ -384,11 +428,16 @@ tag:
     list:
         number_on_the_page: '{0} Теги не найдены.|{1} Найден один тег.|]1,Inf[ Найдено %count% тегов.'
         see_untagged_entries: 'Просмотреть записи без тегов'
+        # no_untagged_entries: 'There are no untagged entries.'
     new:
         add: 'Добавить'
         placeholder: 'Вы можете добавить несколько тегов, разделенных запятой.'
     rename:
         # placeholder: 'You can update tag name.'
+
+export:
+    # footer_template: '<div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p></div>'
+    # unknown: 'Unknown'
 
 import:
     page_title: 'Импорт'
@@ -469,6 +518,7 @@ developer:
             redirect_uris_label: 'Ссылка перенаправления (опционально)'
             save_label: 'Создать нового клиента'
         action_back: 'Назад'
+        # copy_to_clipboard: Copy
     client_parameter:
         page_title: 'Управление клиентским API > Параметры клиента'
         page_description: 'Здесь ваши параметры клиента.'
@@ -510,11 +560,34 @@ user:
         email_label: 'Email'
         enabled_label: 'Включить'
         last_login_label: 'Последний вход'
-        twofactor_label: "Двухфакторная аутентификация"
+        # twofactor_email_label: Two factor authentication by email
+        # twofactor_google_label: Two factor authentication by OTP app
         save: "Сохранить"
         delete: "Удалить"
         delete_confirm: "Вы уверены?"
         back_to_list: "Назад к списку"
+    search:
+        # placeholder: Filter by login or email
+
+site_credential:
+    # page_title: Site credentials management
+    # new_site_credential: Create a credential
+    # edit_site_credential: Edit an existing credential
+    # description: "Here you can manage all credentials for sites which required them (create, edit and delete), like a paywall, an authentication, etc."
+    # list:
+    #     actions: Actions
+    #     edit_action: Edit
+    #     yes: Yes
+    #     no: No
+    #     create_new_one: Create a new credential
+    # form:
+    #     username_label: 'Login'
+    #     host_label: 'Host (subdomain.example.org, .example.org, etc.)'
+    #     password_label: 'Password'
+    #     save: Save
+    #     delete: Delete
+    #     delete_confirm: Are you sure?
+    #     back_to_list: Back to list
 
 error:
     page_title: "Произошла ошибка"
@@ -526,13 +599,18 @@ flashes:
             password_updated: 'Пароль обновлен'
             password_not_updated_demo: "В режиме демонстрации нельзя изменять пароль для этого пользователя."
             user_updated: 'Информация обновлена'
-            rss_updated: 'RSS информация обновлена'
+            feed_updated: 'RSS информация обновлена'
             tagging_rules_updated: 'Правила тегировния обновлены'
             tagging_rules_deleted: 'Правила тегировния удалены'
-            rss_token_updated: 'RSS ключ обновлен'
+            feed_token_updated: 'RSS ключ обновлен'
+            # feed_token_revoked: 'RSS token revoked'
             annotations_reset: "Аннотации сброшены"
             tags_reset: "Теги сброшены"
             entries_reset: "Записи сброшены"
+            # archived_reset: Archived entries deleted
+            # otp_enabled: Two-factor authentication enabled
+            # tagging_rules_imported: Tagging rules imported
+            # tagging_rules_not_imported: Error while importing tagging rules
     entry:
         notice:
             entry_already_saved: 'Запись была сохранена ранее %date%'
@@ -546,6 +624,7 @@ flashes:
             entry_starred: 'Запись помечена звездочкой'
             entry_unstarred: 'Пометка звездочкой у записи убрана'
             entry_deleted: 'Запись удалена'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'Тег добавлен'
@@ -568,3 +647,8 @@ flashes:
             added: 'Пользователь "%username%" добавлен'
             updated: 'Пользователь "%username%" обновлен'
             deleted: 'Пользователь "%username%" удален'
+    site_credential:
+        notice:
+            # added: 'Site credential for "%host%" added'
+            # updated: 'Site credential for "%host%" updated'
+            # deleted: 'Site credential for "%host%" deleted'

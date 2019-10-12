@@ -4,17 +4,17 @@ namespace Wallabag\ApiBundle\Controller;
 
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
-use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Event\EntryDeletedEvent;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
+use Wallabag\CoreBundle\Helper\UrlHasher;
 
 class EntryRestController extends WallabagRestController
 {
@@ -28,8 +28,10 @@ class EntryRestController extends WallabagRestController
      * @ApiDoc(
      *       parameters={
      *          {"name"="return_id", "dataType"="string", "required"=false, "format"="1 or 0", "description"="Set 1 if you want to retrieve ID in case entry(ies) exists, 0 by default"},
-     *          {"name"="url", "dataType"="string", "required"=true, "format"="An url", "description"="Url to check if it exists"},
-     *          {"name"="urls", "dataType"="string", "required"=false, "format"="An array of urls (?urls[]=http...&urls[]=http...)", "description"="Urls (as an array) to check if it exists"}
+     *          {"name"="url", "dataType"="string", "required"=true, "format"="An url", "description"="DEPRECATED, use hashed_url instead"},
+     *          {"name"="urls", "dataType"="string", "required"=false, "format"="An array of urls (?urls[]=http...&urls[]=http...)", "description"="DEPRECATED, use hashed_urls instead"},
+     *          {"name"="hashed_url", "dataType"="string", "required"=false, "format"="A hashed url", "description"="Hashed url using SHA1 to check if it exists"},
+     *          {"name"="hashed_urls", "dataType"="string", "required"=false, "format"="An array of hashed urls (?hashed_urls[]=xxx...&hashed_urls[]=xxx...)", "description"="An array of hashed urls using SHA1 to check if they exist"}
      *       }
      * )
      *
@@ -38,38 +40,49 @@ class EntryRestController extends WallabagRestController
     public function getEntriesExistsAction(Request $request)
     {
         $this->validateAuthentication();
+        $repo = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entry');
 
         $returnId = (null === $request->query->get('return_id')) ? false : (bool) $request->query->get('return_id');
-        $urls = $request->query->get('urls', []);
 
-        // handle multiple urls first
-        if (!empty($urls)) {
-            $results = [];
-            foreach ($urls as $url) {
-                $res = $this->getDoctrine()
-                    ->getRepository('WallabagCoreBundle:Entry')
-                    ->findByUrlAndUserId($url, $this->getUser()->getId());
-
-                $results[$url] = $this->returnExistInformation($res, $returnId);
-            }
-
-            return $this->sendResponse($results);
+        $hashedUrls = $request->query->get('hashed_urls', []);
+        $hashedUrl = $request->query->get('hashed_url', '');
+        if (!empty($hashedUrl)) {
+            $hashedUrls[] = $hashedUrl;
         }
 
-        // let's see if it is a simple url?
+        $urls = $request->query->get('urls', []);
         $url = $request->query->get('url', '');
+        if (!empty($url)) {
+            $urls[] = $url;
+        }
 
-        if (empty($url)) {
+        $urlHashMap = [];
+        foreach ($urls as $urlToHash) {
+            $urlHash = UrlHasher::hashUrl($urlToHash);
+            $hashedUrls[] = $urlHash;
+            $urlHashMap[$urlHash] = $urlToHash;
+        }
+
+        if (empty($hashedUrls)) {
             throw $this->createAccessDeniedException('URL is empty?, logged user id: ' . $this->getUser()->getId());
         }
 
-        $res = $this->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Entry')
-            ->findByUrlAndUserId($url, $this->getUser()->getId());
+        $results = [];
+        foreach ($hashedUrls as $hashedUrlToSearch) {
+            $res = $repo->findByHashedUrlAndUserId($hashedUrlToSearch, $this->getUser()->getId());
 
-        $exists = $this->returnExistInformation($res, $returnId);
+            $results[$hashedUrlToSearch] = $this->returnExistInformation($res, $returnId);
+        }
 
-        return $this->sendResponse(['exists' => $exists]);
+        $results = $this->replaceUrlHashes($results, $urlHashMap);
+
+        if (!empty($url) || !empty($hashedUrl)) {
+            $hu = array_keys($results)[0];
+
+            return $this->sendResponse(['exists' => $results[$hu]]);
+        }
+
+        return $this->sendResponse($results);
     }
 
     /**
@@ -86,6 +99,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="tags", "dataType"="string", "required"=false, "format"="api,rest", "description"="a list of tags url encoded. Will returns entries that matches ALL tags."},
      *          {"name"="since", "dataType"="integer", "required"=false, "format"="default '0'", "description"="The timestamp since when you want entries updated."},
      *          {"name"="public", "dataType"="integer", "required"=false, "format"="1 or 0, all entries by default", "description"="filter by entries with a public link"},
+     *          {"name"="detail", "dataType"="string", "required"=false, "format"="metadata or full, metadata by default", "description"="include content field if 'full'. 'full' by default for backward compatibility."},
      *       }
      * )
      *
@@ -98,24 +112,30 @@ class EntryRestController extends WallabagRestController
         $isArchived = (null === $request->query->get('archive')) ? null : (bool) $request->query->get('archive');
         $isStarred = (null === $request->query->get('starred')) ? null : (bool) $request->query->get('starred');
         $isPublic = (null === $request->query->get('public')) ? null : (bool) $request->query->get('public');
-        $sort = $request->query->get('sort', 'created');
-        $order = $request->query->get('order', 'desc');
+        $sort = strtolower($request->query->get('sort', 'created'));
+        $order = strtolower($request->query->get('order', 'desc'));
         $page = (int) $request->query->get('page', 1);
         $perPage = (int) $request->query->get('perPage', 30);
         $tags = \is_array($request->query->get('tags')) ? '' : (string) $request->query->get('tags', '');
         $since = $request->query->get('since', 0);
+        $detail = strtolower($request->query->get('detail', 'full'));
 
-        /** @var \Pagerfanta\Pagerfanta $pager */
-        $pager = $this->get('wallabag_core.entry_repository')->findEntries(
-            $this->getUser()->getId(),
-            $isArchived,
-            $isStarred,
-            $isPublic,
-            $sort,
-            $order,
-            $since,
-            $tags
-        );
+        try {
+            /** @var \Pagerfanta\Pagerfanta $pager */
+            $pager = $this->get('wallabag_core.entry_repository')->findEntries(
+                $this->getUser()->getId(),
+                $isArchived,
+                $isStarred,
+                $isPublic,
+                $sort,
+                $order,
+                $since,
+                $tags,
+                $detail
+            );
+        } catch (\Exception $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
 
         $pager->setMaxPerPage($perPage);
         $pager->setCurrentPage($page);
@@ -135,8 +155,9 @@ class EntryRestController extends WallabagRestController
                     'perPage' => $perPage,
                     'tags' => $tags,
                     'since' => $since,
+                    'detail' => $detail,
                 ],
-                UrlGeneratorInterface::ABSOLUTE_URL
+                true
             )
         );
 
@@ -344,9 +365,7 @@ class EntryRestController extends WallabagRestController
                     'language' => !empty($data['language']) ? $data['language'] : $entry->getLanguage(),
                     'date' => !empty($data['publishedAt']) ? $data['publishedAt'] : $entry->getPublishedAt(),
                     // faking the open graph preview picture
-                    'open_graph' => [
-                        'og_image' => !empty($data['picture']) ? $data['picture'] : $entry->getPreviewPicture(),
-                    ],
+                    'image' => !empty($data['picture']) ? $data['picture'] : $entry->getPreviewPicture(),
                     'authors' => \is_string($data['authors']) ? explode(',', $data['authors']) : $entry->getPublishedBy(),
                 ]
             );
@@ -545,7 +564,7 @@ class EntryRestController extends WallabagRestController
         }
 
         // if refreshing entry failed, don't save it
-        if ($this->getParameter('wallabag_core.fetching_error_message') === $entry->getContent()) {
+        if ($this->container->getParameter('wallabag_core.fetching_error_message') === $entry->getContent()) {
             return new JsonResponse([], 304);
         }
 
@@ -565,18 +584,31 @@ class EntryRestController extends WallabagRestController
      * @ApiDoc(
      *      requirements={
      *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
+     *      },
+     *      parameters={
+     *          {"name"="expect", "dataType"="string", "required"=false, "format"="id or entry", "description"="Only returns the id instead of the deleted entry's full entity if 'id' is specified. Default to entry"},
      *      }
      * )
      *
      * @return JsonResponse
      */
-    public function deleteEntriesAction(Entry $entry)
+    public function deleteEntriesAction(Entry $entry, Request $request)
     {
+        $expect = $request->query->get('expect', 'entry');
+        if (!\in_array($expect, ['id', 'entry'], true)) {
+            throw new BadRequestHttpException(sprintf("expect: 'id' or 'entry' expected, %s given", $expect));
+        }
         $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
 
-        // We copy $entry to keep id in returned object
-        $e = $entry;
+        $response = $this->sendResponse([
+            'id' => $entry->getId(),
+        ]);
+        // We clone $entry to keep id in returned object
+        if ('entry' === $expect) {
+            $e = clone $entry;
+            $response = $this->sendResponse($e);
+        }
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($entry);
@@ -585,7 +617,7 @@ class EntryRestController extends WallabagRestController
         // entry deleted, dispatch event about it!
         $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
 
-        return $this->sendResponse($e);
+        return $response;
     }
 
     /**
@@ -769,21 +801,21 @@ class EntryRestController extends WallabagRestController
     }
 
     /**
-     * Shortcut to send data serialized in json.
-     *
-     * @param mixed $data
-     *
-     * @return JsonResponse
+     * Replace the hashedUrl keys in $results with the unhashed URL from the
+     * request, as recorded in $urlHashMap.
      */
-    private function sendResponse($data)
+    private function replaceUrlHashes(array $results, array $urlHashMap)
     {
-        // https://github.com/schmittjoh/JMSSerializerBundle/issues/293
-        $context = new SerializationContext();
-        $context->setSerializeNull(true);
+        $newResults = [];
+        foreach ($results as $hash => $res) {
+            if (isset($urlHashMap[$hash])) {
+                $newResults[$urlHashMap[$hash]] = $res;
+            } else {
+                $newResults[$hash] = $res;
+            }
+        }
 
-        $json = $this->get('jms_serializer')->serialize($data, 'json', $context);
-
-        return (new JsonResponse())->setJson($json);
+        return $newResults;
     }
 
     /**
@@ -814,8 +846,8 @@ class EntryRestController extends WallabagRestController
     /**
      * Return information about the entry if it exist and depending on the id or not.
      *
-     * @param Entry|null $entry
-     * @param bool       $returnId
+     * @param Entry|bool|null $entry
+     * @param bool            $returnId
      *
      * @return bool|int
      */

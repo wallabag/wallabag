@@ -11,8 +11,12 @@ use Wallabag\UserBundle\Entity\User;
  * Config.
  *
  * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\ConfigRepository")
- * @ORM\Table(name="`config`")
- * @ORM\Entity
+ * @ORM\Table(
+ *     name="`config`",
+ *     indexes={
+ *         @ORM\Index(name="config_feed_token", columns={"feed_token"}, options={"lengths"={255}}),
+ *     }
+ * )
  */
 class Config
 {
@@ -60,21 +64,21 @@ class Config
     /**
      * @var string
      *
-     * @ORM\Column(name="rss_token", type="string", nullable=true)
+     * @ORM\Column(name="feed_token", type="string", nullable=true)
      */
-    private $rssToken;
+    private $feedToken;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="rss_limit", type="integer", nullable=true)
+     * @ORM\Column(name="feed_limit", type="integer", nullable=true)
      * @Assert\Range(
      *      min = 1,
      *      max = 100000,
-     *      maxMessage = "validator.rss_limit_too_high"
+     *      maxMessage = "validator.feed_limit_too_high"
      * )
      */
-    private $rssLimit;
+    private $feedLimit;
 
     /**
      * @var float
@@ -231,51 +235,51 @@ class Config
     }
 
     /**
-     * Set rssToken.
+     * Set feed Token.
      *
-     * @param string $rssToken
+     * @param string $feedToken
      *
      * @return Config
      */
-    public function setRssToken($rssToken)
+    public function setFeedToken($feedToken)
     {
-        $this->rssToken = $rssToken;
+        $this->feedToken = $feedToken;
 
         return $this;
     }
 
     /**
-     * Get rssToken.
+     * Get feedToken.
      *
      * @return string
      */
-    public function getRssToken()
+    public function getFeedToken()
     {
-        return $this->rssToken;
+        return $this->feedToken;
     }
 
     /**
-     * Set rssLimit.
+     * Set Feed Limit.
      *
-     * @param int $rssLimit
+     * @param int $feedLimit
      *
      * @return Config
      */
-    public function setRssLimit($rssLimit)
+    public function setFeedLimit($feedLimit)
     {
-        $this->rssLimit = $rssLimit;
+        $this->feedLimit = $feedLimit;
 
         return $this;
     }
 
     /**
-     * Get rssLimit.
+     * Get Feed Limit.
      *
      * @return int
      */
-    public function getRssLimit()
+    public function getFeedLimit()
     {
-        return $this->rssLimit;
+        return $this->feedLimit;
     }
 
     /**

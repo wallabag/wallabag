@@ -13,7 +13,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 {
     const AN_URL_CONTAINING_AN_ARTICLE_WITH_IMAGE = 'https://www.lemonde.fr/judo/article/2017/11/11/judo-la-decima-de-teddy-riner_5213605_1556020.html';
     public $downloadImagesEnabled = false;
-    public $url = 'https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html';
+    public $url = 'https://www.lemonde.fr/pixels/article/2019/06/18/ce-qu-il-faut-savoir-sur-le-libra-la-cryptomonnaie-de-facebook_5477887_4408996.html';
 
     /**
      * @after
@@ -164,9 +164,8 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
         $this->assertSame($this->url, $content->getUrl());
-        $this->assertContains('Google', $content->getTitle());
+        $this->assertContains('la cryptomonnaie de Facebook', $content->getTitle());
         $this->assertSame('fr', $content->getLanguage());
-        $this->assertSame('2016-04-07 19:01:35', $content->getPublishedAt()->format('Y-m-d H:i:s'));
         $this->assertArrayHasKey('x-frame-options', $content->getHeaders());
         $client->getContainer()->get('craue_config')->set('store_article_headers', 0);
     }
@@ -236,7 +235,45 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $url = 'http://www.aritylabs.com/post/106091708292/des-contr%C3%B4leurs-optionnels-gr%C3%A2ce-%C3%A0-constmissing';
+        $url = 'https://www.aritylabs.com/post/106091708292/des-contr%C3%B4leurs-optionnels-gr%C3%A2ce-%C3%A0-constmissing';
+
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => $url,
+        ];
+
+        $client->submit($form, $data);
+
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => $url,
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/', $client->getResponse()->getTargetUrl());
+    }
+
+    /**
+     * This test will require an internet connection.
+     */
+    public function testPostNewOkUrlExistWithRedirection()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $url = 'https://wllbg.org/test-redirect/c51c';
 
         $crawler = $client->request('GET', '/new');
 
@@ -522,9 +559,12 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertGreaterThan(1, $title = $crawler->filter('div[id=article] h1')->extract(['_text']));
+        $title = $crawler->filter('div[id=article] h1')->extract(['_text']);
+        $this->assertGreaterThan(1, $title);
         $this->assertContains('My updated title hehe :)', $title[0]);
-        $this->assertSame(1, \count($stats = $crawler->filter('div[class=tools] ul[class=stats] li a[class=tool]')->extract(['_text'])));
+
+        $stats = $crawler->filter('div[class=tools] ul[class=stats] li a[class=tool]')->extract(['_text']);
+        $this->assertCount(1, $stats);
         $this->assertNotContains('example.io', trim($stats[0]));
     }
 
@@ -1327,10 +1367,6 @@ class EntryControllerTest extends WallabagCoreTestCase
                 'http://www.hao123.com/shequ?__noscript__-=1',
                 'zh_CN',
             ],
-            'ru' => [
-                'https://www.kp.ru/daily/26879.7/3921982/',
-                'ru',
-            ],
             'pt_BR' => [
                 'https://politica.estadao.com.br/noticias/eleicoes,campanha-catatonica,70002491983',
                 'pt_BR',
@@ -1495,5 +1531,31 @@ class EntryControllerTest extends WallabagCoreTestCase
         $link = $crawler->filter('body div#article div.tools ul.tags li.chip a')->extract('href')[1];
 
         $this->assertSame(sprintf('/remove-tag/%s/%s', $entry->getId(), $tag->getId()), $link);
+    }
+
+    public function testRandom()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $client->request('GET', '/unread/random');
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'Unread random');
+
+        $client->request('GET', '/starred/random');
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'Starred random');
+
+        $client->request('GET', '/archive/random');
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'Archive random');
+
+        $client->request('GET', '/untagged/random');
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'Untagged random');
+
+        $client->request('GET', '/all/random');
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'All random');
     }
 }

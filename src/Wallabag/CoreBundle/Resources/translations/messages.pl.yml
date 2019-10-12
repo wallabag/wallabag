@@ -33,10 +33,12 @@ menu:
         back_to_unread: 'Powrót do nieprzeczytanych artykułów'
         users_management: 'Zarządzanie użytkownikami'
         site_credentials: 'Poświadczenia strony'
+        quickstart: "Szybki start"
     top:
         add_new_entry: 'Dodaj nowy wpis'
         search: 'Szukaj'
         filter_entries: 'Filtruj wpisy'
+        # random_entry: Jump to a random entry from that list
         export: 'Eksportuj'
     search_form:
         input_label: 'Wpisz swoje zapytanie tutaj'
@@ -53,11 +55,12 @@ config:
     page_title: 'Konfiguracja'
     tab_menu:
         settings: 'Ustawienia'
-        rss: 'Kanał RSS'
+        feed: 'Kanał RSS'
         user_info: 'Informacje o użytkowniku'
         password: 'Hasło'
         rules: 'Zasady tagowania'
         new_user: 'Dodaj użytkownika'
+        reset: 'Reset'
     form:
         save: 'Zapisz'
     form_settings:
@@ -65,12 +68,8 @@ config:
         items_per_page_label: 'Ilość elementów na stronie'
         language_label: 'Język'
         reading_speed:
-            label: 'Prędkość czytania'
+            label: 'Prędkość czytania (słów na minutę)'
             help_message: 'Możesz skorzystać z narzędzi online do określenia twojej prędkości czytania:'
-            100_word: 'Czytam ~100 słów na minutę'
-            200_word: 'Czytam ~200 słów na minutę'
-            300_word: 'Czytam ~300 słów na minutę'
-            400_word: 'Czytam ~400 słów na minutę'
         action_mark_as_read:
             label: 'Gdzie zostaniesz przekierowany po oznaczeniu artukuły jako przeczytanego'
             redirect_homepage: 'do strony głównej'
@@ -83,25 +82,35 @@ config:
         help_reading_speed: "wallabag oblicza czas czytania każdego artykułu. Dzięki tej liście możesz określić swoje tempo. Wallabag przeliczy ponownie czas potrzebny, na przeczytanie każdego z artykułów."
         help_language: "Możesz zmienić język interfejsu wallabag."
         help_pocket_consumer_key: "Wymagane dla importu z Pocket. Możesz go stworzyć na swoim koncie Pocket."
-    form_rss:
+    form_feed:
         description: 'Kanały RSS prowadzone przez wallabag pozwalają Ci na czytanie twoich zapisanych artykułów w twoim ulubionym czytniku RSS. Musisz najpierw wynegenerować tokena.‌'
         token_label: 'Token RSS'
         no_token: 'Brak tokena'
         token_create: 'Stwórz tokena'
         token_reset: 'Zresetuj swojego tokena'
-        rss_links: 'RSS links'
-        rss_link:
+        # token_revoke: 'Revoke the token'
+        feed_links: 'RSS links'
+        feed_link:
             unread: 'Nieprzeczytane'
             starred: 'Oznaczone gwiazdką'
             archive: 'Archiwum'
             all: 'Wszystkie'
-        rss_limit: 'Link do RSS'
+        feed_limit: 'Link do RSS'
     form_user:
-        two_factor_description: "Włączenie autoryzacji dwuetapowej oznacza, że będziesz otrzymywał maile z kodem przy każdym nowym, niezaufanym połączeniu"
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
+        # login_label: 'Login (can not be changed)'
         name_label: 'Nazwa'
         email_label: 'Adres email'
-        twoFactorAuthentication_label: 'Autoryzacja dwuetapowa'
-        help_twoFactorAuthentication: "Jeżeli włączysz autoryzację dwuetapową. Za każdym razem, kiedy będziesz chciał się zalogować, dostaniesz kod na swój e-mail."
+        two_factor:
+            # emailTwoFactor_label: 'Using email (receive a code by email)'
+            # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, Authy or FreeOTP, to get a one time code)'
+            # table_method: Method
+            # table_state: State
+            # table_action: Action
+            # state_enabled: Enabled
+            # state_disabled: Disabled
+            # action_email: Use email
+            # action_app: Use OTP App
         delete:
             title: Usuń moje konto (niebezpieczna strefa !)
             description: Jeżeli usuniesz swoje konto, wszystkie twoje artykuły, tagi, adnotacje, oraz konto zostaną trwale usunięte (operacja jest NIEODWRACALNA). Następnie zostaniesz wylogowany.
@@ -127,6 +136,15 @@ config:
         edit_rule_label: 'edytuj'
         rule_label: 'Reguła'
         tags_label: 'Tagi'
+        # card:
+        #     new_tagging_rule: Create a tagging rule
+        #     import_tagging_rules: Import tagging rules
+        #     import_tagging_rules_detail: You have to select the JSON file you previously exported.
+        #     export_tagging_rules: Export tagging rules
+        #     export_tagging_rules_detail: This will download a JSON file that you can use to import tagging rules elsewhere or to backup them.
+        # file_label: JSON file
+        # import_submit: Import
+        # export: Export
         faq:
             title: 'FAQ'
             tagging_rules_definition_title: 'Co oznaczają « reguły tagowania » ?'
@@ -159,6 +177,15 @@ config:
                 and: 'Jedna reguła I inna'
                 matches: 'Sprawdź czy <i>temat</i> pasuje <i>szukaj</i> (duże lub małe litery).<br />Przykład: <code>tytuł zawiera "piłka nożna"</code>'
                 notmatches: 'Sprawdź czy <i>temat</i> nie zawiera <i>szukaj</i> (duże lub małe litery).<br />Przykład: <code>tytuł nie zawiera "piłka nożna"</code>'
+    otp:
+        # page_title: Two-factor authentication
+        # app:
+        #     two_factor_code_description_1: You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password. It'll disapear after a page reload.
+        #     two_factor_code_description_2: 'You can scan that QR Code with your app:'
+        #     two_factor_code_description_3: 'Also, save these backup codes in a safe place, you can use them in case you lose access to your OTP app:'
+        #     two_factor_code_description_4: 'Test an OTP code from your configured app:'
+        #     cancel: Cancel
+        #     enable: Enable
 
 entry:
     default_title: 'Tytuł wpisu'
@@ -253,6 +280,11 @@ entry:
     confirm:
         delete: "Czy jesteś pewien, że chcesz usunąć ten artykuł?"
         delete_tag: "Czy jesteś pewien, że chcesz usunąć ten tag, z tego artykułu?"
+    metadata:
+        # reading_time: "Estimated reading time"
+        # reading_time_minutes_short: "%readingTime% min"
+        # address: "Address"
+        # added_on: "Added on"
 
 about:
     page_title: 'O nas'
@@ -348,7 +380,7 @@ quickstart:
          title: 'Konfiguruj aplikację'
          description: 'W celu dopasowania aplikacji do swoich upodobań, zobacz konfigurację aplikacji'
          language: 'Zmień język i wygląd'
-         rss: 'Włącz kanały RSS'
+         feed: 'Włącz kanały RSS'
          tagging_rules: 'Napisz reguły pozwalające na automatyczne otagowanie twoich artykułów'
     admin:
          title: 'Administracja'
@@ -396,14 +428,16 @@ tag:
     list:
         number_on_the_page: '{0} Nie ma tagów.|{1} Jest jeden tag.|]1,Inf[ Są %count% tagi.'
         see_untagged_entries: 'Zobacz nieotagowane wpisy'
+        # no_untagged_entries: 'There are no untagged entries.'
     new:
         add: 'Dodaj'
         placeholder: 'Możesz dodać kilka tagów, oddzielając je przecinkami.'
     rename:
-        # placeholder: 'You can update tag name.'
+        placeholder: 'Możesz zaktualizować nazwę taga.'
 
 export:
-     footer_template: '<div style="text-align:center;"><p>Stworzone przez wallabag z %method%</p><p>Proszę zgłoś <a href="https://github.com/wallabag/wallabag/issues">sprawę</a>, jeżeli masz problem z wyświetleniem tego e-booka na swoim urządzeniu.</p></div>'
+    footer_template: '<div style="text-align:center;"><p>Stworzone przez wallabag z %method%</p><p>Proszę zgłoś <a href="https://github.com/wallabag/wallabag/issues">sprawę</a>, jeżeli masz problem z wyświetleniem tego e-booka na swoim urządzeniu.</p></div>'
+    # unknown: 'Unknown'
 
 import:
     page_title: 'Import'
@@ -484,6 +518,7 @@ developer:
             redirect_uris_label: 'Przekieruj adresy URI'
             save_label: 'Stwórz nowego klienta'
         action_back: 'Cofnij'
+        # copy_to_clipboard: Copy
     client_parameter:
         page_title: 'Zarządzanie klientami API > Parametry klienta'
         page_description: 'Tutaj znajdują się parametry klienta.'
@@ -525,7 +560,8 @@ user:
         email_label: 'Adres email'
         enabled_label: 'Włączony'
         last_login_label: 'Ostatnie logowanie'
-        twofactor_label: Autoryzacja dwuetapowa
+        # twofactor_email_label: Two factor authentication by email
+        # twofactor_google_label: Two factor authentication by OTP app
         save: Zapisz
         delete: Usuń
         delete_confirm: Jesteś pewien?
@@ -546,7 +582,7 @@ site_credential:
         create_new_one: Stwórz nowe poświadczenie
     form:
         username_label: 'Nazwa użytkownika'
-        host_label: 'Host'
+        host_label: 'Host (subdomain.example.org, .example.org, etc.)'
         password_label: 'Hasło'
         save: Zapisz
         delete: Usuń
@@ -563,14 +599,18 @@ flashes:
             password_updated: 'Hasło zaktualizowane'
             password_not_updated_demo: "In demonstration mode, you can't change password for this user."
             user_updated: 'Informacje zaktualizowane'
-            rss_updated: 'Informacje RSS zaktualizowane'
+            feed_updated: 'Informacje RSS zaktualizowane'
             tagging_rules_updated: 'Reguły tagowania zaktualizowane'
             tagging_rules_deleted: 'Reguła tagowania usunięta'
-            rss_token_updated: 'Token kanału RSS zaktualizowany'
+            feed_token_updated: 'Token kanału RSS zaktualizowany'
+            # feed_token_revoked: 'RSS token revoked'
             annotations_reset: Zresetuj adnotacje
             tags_reset: Zresetuj tagi
             entries_reset: Zresetuj wpisy
             archived_reset: Zarchiwizowane wpisy usunięte
+            # otp_enabled: Two-factor authentication enabled
+            # tagging_rules_imported: Tagging rules imported
+            # tagging_rules_not_imported: Error while importing tagging rules
     entry:
         notice:
             entry_already_saved: 'Wpis już został dodany %date%'
@@ -584,10 +624,11 @@ flashes:
             entry_starred: 'Wpis oznaczony gwiazdką'
             entry_unstarred: 'Wpis odznaczony gwiazdką'
             entry_deleted: 'Wpis usunięty'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'Tag dodany'
-            # tag_renamed: 'Tag renamed'
+            tag_renamed: 'Nazwa taga zmieniona'
     import:
         notice:
             failed: 'Nieudany import, prosimy spróbować ponownie.'

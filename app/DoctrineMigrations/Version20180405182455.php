@@ -2,26 +2,14 @@
 
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
 /**
  * Add archived_at column and set its value to updated_at for is_archived entries.
  */
-class Version20180405182455 extends AbstractMigration implements ContainerAwareInterface
+class Version20180405182455 extends WallabagMigration
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
-
     /**
      * @param Schema $schema
      */
@@ -59,10 +47,5 @@ class Version20180405182455 extends AbstractMigration implements ContainerAwareI
         $this->skipIf(!$entryTable->hasColumn('archived_at'), 'It seems that you already played this migration.');
 
         $entryTable->dropColumn('archived_at');
-    }
-
-    private function getTable($tableName)
-    {
-        return $this->container->getParameter('database_table_prefix') . $tableName;
     }
 }

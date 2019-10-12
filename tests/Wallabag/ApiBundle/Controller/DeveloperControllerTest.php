@@ -30,7 +30,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $newNbClients = $em->getRepository('WallabagApiBundle:Client')->findAll();
         $this->assertGreaterThan(\count($nbClients), \count($newNbClients));
 
-        $this->assertGreaterThan(1, $alert = $crawler->filter('.settings ul li strong')->extract(['_text']));
+        $this->assertGreaterThan(1, $alert = $crawler->filter('.settings table strong')->extract(['_text']));
         $this->assertContains('My app', $alert[0]);
     }
 
@@ -54,6 +54,20 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $this->assertArrayHasKey('expires_in', $data);
         $this->assertArrayHasKey('token_type', $data);
         $this->assertArrayHasKey('refresh_token', $data);
+    }
+
+    public function testCreateTokenWithBadClientId()
+    {
+        $client = $this->getClient();
+        $client->request('POST', '/oauth/v2/token', [
+            'grant_type' => 'password',
+            'client_id' => '$WALLABAG_CLIENT_ID',
+            'client_secret' => 'secret',
+            'username' => 'admin',
+            'password' => 'mypassword',
+        ]);
+
+        $this->assertSame(400, $client->getResponse()->getStatusCode());
     }
 
     public function testListingClient()

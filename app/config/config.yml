@@ -46,7 +46,6 @@ twig:
 doctrine:
     dbal:
         driver: "%database_driver%"
-        driver_class: "%database_driver_class%"
         host: "%database_host%"
         port: "%database_port%"
         dbname: "%database_name%"
@@ -55,7 +54,6 @@ doctrine:
         charset: "%database_charset%"
         path: "%database_path%"
         unix_socket: "%database_socket%"
-        server_version: 5.6
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
@@ -150,18 +148,18 @@ nelmio_cors:
     paths:
         '^/api/':
             allow_origin: ['*']
-            allow_headers: ['X-Custom-Auth']
+            allow_headers: ['Authorization','content-type']
             allow_methods: ['POST', 'PUT', 'PATCH','GET', 'DELETE']
             max_age: 3600
         '^/oauth/':
             allow_origin: ['*']
-            allow_headers: ['X-Custom-Auth']
+            allow_headers: ['Authorization','content-type']
             allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
             max_age: 3600
         '^/':
             #origin_regex: true
-            allow_origin: ['^http://localhost:[0-9]+']
-            allow_headers: ['X-Custom-Auth']
+            allow_origin: ['*']
+            allow_headers: ['Authorization','content-type']
             allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
             max_age: 3600
             hosts: ['^api\.']
@@ -171,7 +169,8 @@ liip_theme:
     themes:
         - baggy
         - material
-        - darkmateria
+        - darkmaterial
+
     autodetect_theme: wallabag_core.helper.detect_active_theme
 
     path_patterns:
@@ -201,10 +200,17 @@ fos_oauth_server:
             refresh_token_lifetime: 1209600
 
 scheb_two_factor:
-    trusted_computer:
+    trusted_device:
         enabled: true
         cookie_name: wllbg_trusted_computer
-        cookie_lifetime: 2592000
+        lifetime: 2592000
+
+    backup_codes:
+        enabled: "%twofactor_auth%"
+
+    google:
+        enabled: "%twofactor_auth%"
+        template: WallabagUserBundle:Authentication:form.html.twig
 
     email:
         enabled: "%twofactor_auth%"
@@ -366,3 +372,29 @@ jms_serializer:
 sensio_framework_extra:
    router:
         annotations: false
+
+httplug:
+    clients:
+        wallabag_core:
+            factory: 'wallabag_core.http_client_factory'
+            config:
+                defaults:
+                    timeout: 10
+            plugins: ['httplug.plugin.logger']
+        wallabag_core.entry.download_images:
+            factory: 'httplug.factory.auto'
+            plugins: ['httplug.plugin.logger']
+        wallabag_import.pocket.client:
+            factory: 'httplug.factory.auto'
+            plugins:
+                - 'httplug.plugin.logger'
+                - header_defaults:
+                      headers:
+                          'content-type': 'application/json'
+                          'X-Accept': 'application/json'
+    discovery:
+        client: false
+
+# define custom entity so we can override length attribute to fix utf8mb4 issue
+craue_config:
+    entity_name: Wallabag\CoreBundle\Entity\InternalSetting

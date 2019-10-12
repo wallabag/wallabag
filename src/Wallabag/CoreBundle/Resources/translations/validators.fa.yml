@@ -3,5 +3,5 @@ validator:
     password_too_short: 'رمز شما باید ۸ حرف یا بیشتر باشد'
     password_wrong_value: 'رمز فعلی را اشتباه وارد کرده‌اید'
     item_per_page_too_high: 'با این تعداد برنامه به فنا می‌رود'
-    rss_limit_too_high: 'با این تعداد برنامه به فنا می‌رود'
+    feed_limit_too_high: 'با این تعداد برنامه به فنا می‌رود'
     # quote_length_too_high: 'The quote is too long. It should have {{ limit }} characters or less.'

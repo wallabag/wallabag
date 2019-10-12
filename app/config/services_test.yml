@@ -22,17 +22,17 @@ services:
             - "%kernel.cache_dir%/doctrine/metadata"
 
     # fixtures
-    Wallabag\AnnotationBundle\DataFixtures\ORM\:
-        resource: '../../src/Wallabag/AnnotationBundle/DataFixtures/ORM/*'
+    Wallabag\UserBundle\DataFixtures\:
+        resource: '../../src/Wallabag/UserBundle/DataFixtures/*'
         tags: ['doctrine.fixture.orm']
         autowire: true
 
-    Wallabag\CoreBundle\DataFixtures\ORM\:
-        resource: '../../src/Wallabag/CoreBundle/DataFixtures/ORM/*'
+    Wallabag\CoreBundle\DataFixtures\:
+        resource: '../../src/Wallabag/CoreBundle/DataFixtures/*'
         tags: ['doctrine.fixture.orm']
         autowire: true
 
-    Wallabag\UserBundle\DataFixtures\ORM\:
-        resource: '../../src/Wallabag/UserBundle/DataFixtures/ORM/*'
+    Wallabag\AnnotationBundle\DataFixtures\:
+        resource: '../../src/Wallabag/AnnotationBundle/DataFixtures/*'
         tags: ['doctrine.fixture.orm']
         autowire: true

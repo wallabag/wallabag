@@ -38,7 +38,7 @@
                 {% if craue_setting('export_epub') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'epub' }) }}" title="Generate ePub file">EPUB</a></li>{% endif %}
                 {% if craue_setting('export_mobi') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'mobi' }) }}" title="Generate Mobi file">MOBI</a></li>{% endif %}
                 {% if craue_setting('export_pdf') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'pdf' }) }}" title="Generate PDF file">PDF</a></li>{% endif %}
-                <li><a href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{{ 'entry.view.left_menu.problem.label'|trans }}" class="tool bad-display icon icon-delete"><span>{{ 'entry.view.left_menu.problem.label'|trans }}</span></a></li>
+                <li><a href="mailto:siteconfig@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{{ 'entry.view.left_menu.problem.label'|trans }}" class="tool bad-display icon icon-delete"><span>{{ 'entry.view.left_menu.problem.label'|trans }}</span></a></li>
             </ul>
         </div>
 
@@ -62,7 +62,7 @@
             {% endif %}
 
             <i class="tool icon icon-time">
-                {% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
+                {% set readingTime = entry.readingTime / app.user.config.readingSpeed * 200 %}
                 {% if readingTime > 0 %}
                     {{ 'entry.list.reading_time_minutes_short'|trans({'%readingTime%': readingTime|round}) }}
                 {% else %}
@@ -70,7 +70,7 @@
                 {% endif %}
             </i>
 
-            <span class="tool link"><i class="material-icons link">comment</i> {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}</span>
+            <span class="tool link"><i class="material-icons">comment</i> {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}</span>
 
             {% if entry.originUrl is not empty %}
                 <i class="material-icons" title="{{ 'entry.view.provided_by'|trans }}">launch</i>
@@ -96,9 +96,6 @@
                 </div>
             </aside>
         </div>
-        {% if entry.previewPicture is not null %}
-            <div><img class="preview" src="{{ entry.previewPicture }}" alt="{{ entry.title|e|raw }}" /></div>
-        {% endif %}
         <article>
             {{ entry.content | raw }}
         </article>

@@ -86,8 +86,7 @@
                 <br/>
                 <img id="androidQrcode" />
                 <script>
-                    const imgBase64 = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');
-                    document.getElementById('androidQrcode').src = imgBase64;
+                    document.getElementById('androidQrcode').src = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');
                 </script>
             </div>
         </fieldset>
@@ -95,43 +94,42 @@
         {{ form_rest(form.config) }}
     </form>
 
-    <h2>{{ 'config.tab_menu.rss'|trans }}</h2>
+    <h2>{{ 'config.tab_menu.feed'|trans }}</h2>
 
-        {{ form_start(form.rss) }}
-        {{ form_errors(form.rss) }}
+        {{ form_start(form.feed) }}
+        {{ form_errors(form.feed) }}
 
         <div class="row">
-            {{ 'config.form_rss.description'|trans }}
+            {{ 'config.form_feed.description'|trans }}
         </div>
 
         <fieldset class="w500p inline">
             <div class="row">
-                <label>{{ 'config.form_rss.token_label'|trans }}</label>
-                {% if rss.token %}
-                    {{ rss.token }}
+                <label>{{ 'config.form_feed.token_label'|trans }}</label>
+                {% if feed.token %}
+                    {{ feed.token }}
                 {% else %}
-                    <em>{{ 'config.form_rss.no_token'|trans }}</em>
+                    <em>{{ 'config.form_feed.no_token'|trans }}</em>
                 {% endif %}
-                –
-                <a href="{{ path('generate_token') }}">
-                    {% if rss.token %}
-                        {{ 'config.form_rss.token_reset'|trans }}
-                    {% else %}
-                        {{ 'config.form_rss.token_create'|trans }}
-                    {% endif %}
-                </a>
+
+                {% if feed.token %}
+                    – <a href="{{ path('generate_token') }}">{{ 'config.form_feed.token_reset'|trans }}</a>
+                    – <a href="{{ path('revoke_token') }}">{{ 'config.form_feed.token_revoke'|trans }}</a>
+                {% else %}
+                    – <a href="{{ path('generate_token') }}">{{ 'config.form_feed.token_create'|trans }}</a>
+                {% endif %}
             </div>
         </fieldset>
 
-        {% if rss.token %}
+        {% if feed.token %}
         <fieldset class="w500p inline">
             <div class="row">
-                <label>{{ 'config.form_rss.rss_links'|trans }}</label>
+                <label>{{ 'config.form_feed.feed_links'|trans }}</label>
                 <ul>
-                    <li><a href="{{ path('unread_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.unread'|trans }}</a></li>
-                    <li><a href="{{ path('starred_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.starred'|trans }}</a></li>
-                    <li><a href="{{ path('archive_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.archive'|trans }}</a></li>
-                    <li><a href="{{ path('all_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.all'|trans }}</a></li>
+                    <li><a href="{{ path('unread_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.unread'|trans }}</a></li>
+                    <li><a href="{{ path('starred_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.starred'|trans }}</a></li>
+                    <li><a href="{{ path('archive_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.archive'|trans }}</a></li>
+                    <li><a href="{{ path('all_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.all'|trans }}</a></li>
                 </ul>
             </div>
         </fieldset>
@@ -139,19 +137,25 @@
 
         <fieldset class="w500p inline">
             <div class="row">
-                {{ form_label(form.rss.rss_limit) }}
-                {{ form_errors(form.rss.rss_limit) }}
-                {{ form_widget(form.rss.rss_limit) }}
+                {{ form_label(form.feed.feed_limit) }}
+                {{ form_errors(form.feed.feed_limit) }}
+                {{ form_widget(form.feed.feed_limit) }}
             </div>
         </fieldset>
 
-        {{ form_rest(form.rss) }}
+        {{ form_rest(form.feed) }}
     </form>
 
     <h2>{{ 'config.tab_menu.user_info'|trans }}</h2>
 
     {{ form_start(form.user) }}
         {{ form_errors(form.user) }}
+        <fieldset class="w500p inline">
+            <div class="row">
+                <label>{{ 'config.form_user.login_label'|trans }}</label>
+                {{ app.user.username }}
+            </div>
+        </fieldset>
 
         <fieldset class="w500p inline">
             <div class="row">
@@ -169,52 +173,41 @@
             </div>
         </fieldset>
 
+        {{ form_widget(form.user.save) }}
+
         {% if twofactor_auth %}
+        <h5>{{ 'config.otp.page_title'|trans }}</h5>
+
         <div class="row">
             {{ 'config.form_user.two_factor_description'|trans }}
         </div>
 
-        <fieldset class="w500p inline">
-            <div class="row">
-                {{ form_label(form.user.twoFactorAuthentication) }}
-                {{ form_errors(form.user.twoFactorAuthentication) }}
-                {{ form_widget(form.user.twoFactorAuthentication) }}
-            </div>
-            <a href="#" title="{{ 'config.form_user.help_twoFactorAuthentication'|trans }}">
-                <i class="material-icons">live_help</i>
-            </a>
-        </fieldset>
+        <table>
+            <thead>
+                <tr>
+                    <th>{{ 'config.form_user.two_factor.table_method'|trans }}</th>
+                    <th>{{ 'config.form_user.two_factor.table_state'|trans }}</th>
+                    <th>{{ 'config.form_user.two_factor.table_action'|trans }}</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>{{ 'config.form_user.two_factor.emailTwoFactor_label'|trans }}</td>
+                    <td>{% if app.user.isEmailTwoFactor %}<b>{{ 'config.form_user.two_factor.state_enabled'|trans }}</b>{% else %}{{ 'config.form_user.two_factor.state_disabled'|trans }}{% endif %}</td>
+                    <td><a href="{{ path('config_otp_email') }}" class="waves-effect waves-light btn{% if app.user.isEmailTwoFactor %} disabled{% endif %}">{{ 'config.form_user.two_factor.action_email'|trans }}</a></td>
+                </tr>
+                <tr>
+                    <td>{{ 'config.form_user.two_factor.googleTwoFactor_label'|trans }}</td>
+                    <td>{% if app.user.isGoogleTwoFactor %}<b>{{ 'config.form_user.two_factor.state_enabled'|trans }}</b>{% else %}{{ 'config.form_user.two_factor.state_disabled'|trans }}{% endif %}</td>
+                    <td><a href="{{ path('config_otp_app') }}" class="waves-effect waves-light btn{% if app.user.isGoogleTwoFactor %} disabled{% endif %}">{{ 'config.form_user.two_factor.action_app'|trans }}</a></td>
+                </tr>
+            </tbody>
+        </table>
+
         {% endif %}
 
-        <h2>{{ 'config.reset.title'|trans }}</h2>
-        <fieldset class="w500p inline">
-            <p>{{ 'config.reset.description'|trans }}</p>
-            <ul>
-                <li>
-                    <a href="{{ path('config_reset', { type: 'annotations'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
-                        {{ 'config.reset.annotations'|trans }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('config_reset', { type: 'tags'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
-                        {{ 'config.reset.tags'|trans }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('config_reset', { type: 'archived'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
-                        {{ 'config.reset.archived'|trans }}
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('config_reset', { type: 'entries'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
-                        {{ 'config.reset.entries'|trans }}
-                    </a>
-                </li>
-            </ul>
-        </fieldset>
-
         {{ form_widget(form.user._token) }}
-        {{ form_widget(form.user.save) }}
     </form>
 
     {% if enabled_users > 1 %}
@@ -277,7 +270,7 @@
         {% endfor %}
     </ul>
 
-        {{ form_start(form.new_tagging_rule) }}
+    {{ form_start(form.new_tagging_rule) }}
         {{ form_errors(form.new_tagging_rule) }}
 
         <fieldset class="w500p inline">
@@ -298,6 +291,34 @@
 
         {{ form_rest(form.new_tagging_rule) }}
     </form>
+
+    <div class="row">
+        <h3>{{ 'config.form_rules.card.import_tagging_rules'|trans }}</h3>
+        <p>{{ 'config.form_rules.card.import_tagging_rules_detail'|trans }}</p>
+    </div>
+
+    {{ form_start(form.import_tagging_rule) }}
+        {{ form_errors(form.import_tagging_rule) }}
+
+        <fieldset class="w500p inline">
+            <div class="row">
+                {{ form_label(form.import_tagging_rule.file) }}
+                {{ form_errors(form.import_tagging_rule.file) }}
+                {{ form_widget(form.import_tagging_rule.file) }}
+            </div>
+        </fieldset>
+
+        {{ form_rest(form.import_tagging_rule) }}
+    </form>
+
+    {% if app.user.config.taggingRules is not empty %}
+    <div class="row">
+        <h3>{{ 'config.form_rules.card.export_tagging_rules'|trans }}</h3>
+        <p>{{ 'config.form_rules.card.export_tagging_rules_detail'|trans }}</p>
+        <p><a href="{{ path('export_tagging_rule') }}" class="waves-effect waves-light btn">{{ 'config.form_rules.export'|trans }}</a></p>
+    </div>
+    {% endif %}
+
     <div class="row">
         <div class="input-field col s12">
             <h3>{{ 'config.form_rules.faq.title'|trans }}</h3>
@@ -382,4 +403,31 @@
             </table>
         </div>
     </div>
+
+    <h2>{{ 'config.reset.title'|trans }}</h2>
+    <fieldset class="w500p inline">
+        <p>{{ 'config.reset.description'|trans }}</p>
+        <ul>
+            <li>
+                <a href="{{ path('config_reset', { type: 'annotations'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                    {{ 'config.reset.annotations'|trans }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('config_reset', { type: 'tags'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                    {{ 'config.reset.tags'|trans }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('config_reset', { type: 'archived'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                    {{ 'config.reset.archived'|trans }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('config_reset', { type: 'entries'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                    {{ 'config.reset.entries'|trans }}
+                </a>
+            </li>
+        </ul>
+    </fieldset>
 {% endblock %}

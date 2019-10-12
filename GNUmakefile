@@ -16,13 +16,15 @@ install: ## Install wallabag with the latest version
 update: ## Update the wallabag installation to the latest version
 	@./scripts/update.sh $(ENV)
 
-dev: ## Install the latest dev version
+dev: ENV=dev
+dev: build ## Install the latest dev version
 	@./scripts/dev.sh
 
 run: ## Run the wallabag built-in server
 	@php bin/console server:run --env=dev
 
 build: ## Run webpack
+	@npm install
 	@npm run build:$(ENV)
 
 prepare: clean ## Prepare database for testsuite

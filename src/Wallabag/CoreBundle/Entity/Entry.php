@@ -13,6 +13,7 @@ use JMS\Serializer\Annotation\XmlRoot;
 use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
+use Wallabag\CoreBundle\Helper\UrlHasher;
 use Wallabag\UserBundle\Entity\User;
 
 /**
@@ -25,7 +26,13 @@ use Wallabag\UserBundle\Entity\User;
  *     options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"},
  *     indexes={
  *         @ORM\Index(name="created_at", columns={"created_at"}),
- *         @ORM\Index(name="uid", columns={"uid"})
+ *         @ORM\Index(name="uid", columns={"uid"}),
+ *         @ORM\Index(name="hashed_url_user_id", columns={"user_id", "hashed_url"}, options={"lengths"={null, 40}}),
+ *         @ORM\Index(name="hashed_given_url_user_id", columns={"user_id", "hashed_given_url"}, options={"lengths"={null, 40}}),
+ *         @ORM\Index(name="user_language", columns={"language", "user_id"}),
+ *         @ORM\Index(name="user_archived", columns={"user_id", "is_archived", "archived_at"}),
+ *         @ORM\Index(name="user_created", columns={"user_id", "created_at"}),
+ *         @ORM\Index(name="user_starred", columns={"user_id", "is_starred", "starred_at"})
  *     }
  * )
  * @ORM\HasLifecycleCallbacks()
@@ -66,6 +73,8 @@ class Entry
     private $title;
 
     /**
+     * Define the url fetched by wallabag (the final url after potential redirections).
+     *
      * @var string
      *
      * @Assert\NotBlank()
@@ -74,6 +83,42 @@ class Entry
      * @Groups({"entries_for_user", "export_all"})
      */
     private $url;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="hashed_url", type="string", length=40, nullable=true)
+     */
+    private $hashedUrl;
+
+    /**
+     * From where user retrieved/found the url (an other article, a twitter, or the given_url if non are provided).
+     *
+     * @var string
+     *
+     * @ORM\Column(name="origin_url", type="text", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $originUrl;
+
+    /**
+     * Define the url entered by the user (without redirections).
+     *
+     * @var string
+     *
+     * @ORM\Column(name="given_url", type="text", nullable=true)
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $givenUrl;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="hashed_given_url", type="string", length=40, nullable=true)
+     */
+    private $hashedGivenUrl;
 
     /**
      * @var bool
@@ -180,7 +225,7 @@ class Entry
     /**
      * @var string
      *
-     * @ORM\Column(name="language", type="text", nullable=true)
+     * @ORM\Column(name="language", type="string", length=20, nullable=true)
      *
      * @Groups({"entries_for_user", "export_all"})
      */
@@ -254,15 +299,6 @@ class Entry
      */
     private $tags;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="origin_url", type="text", nullable=true)
-     *
-     * @Groups({"entries_for_user", "export_all"})
-     */
-    private $originUrl;
-
     /*
      * @param User     $user
      */
@@ -316,6 +352,7 @@ class Entry
     public function setUrl($url)
     {
         $this->url = $url;
+        $this->hashedUrl = UrlHasher::hashUrl($url);
 
         return $this;
     }
@@ -761,7 +798,7 @@ class Entry
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getUid()
     {
@@ -910,5 +947,50 @@ class Entry
     public function getOriginUrl()
     {
         return $this->originUrl;
+    }
+
+    /**
+     * Set given url.
+     *
+     * @param string $givenUrl
+     *
+     * @return Entry
+     */
+    public function setGivenUrl($givenUrl)
+    {
+        $this->givenUrl = $givenUrl;
+        $this->hashedGivenUrl = UrlHasher::hashUrl($givenUrl);
+
+        return $this;
+    }
+
+    /**
+     * Get given url.
+     *
+     * @return string
+     */
+    public function getGivenUrl()
+    {
+        return $this->givenUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHashedUrl()
+    {
+        return $this->hashedUrl;
+    }
+
+    /**
+     * @param mixed $hashedUrl
+     *
+     * @return Entry
+     */
+    public function setHashedUrl($hashedUrl)
+    {
+        $this->hashedUrl = $hashedUrl;
+
+        return $this;
     }
 }

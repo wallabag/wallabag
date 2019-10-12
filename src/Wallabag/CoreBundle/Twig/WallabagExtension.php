@@ -4,10 +4,14 @@ namespace Wallabag\CoreBundle\Twig;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\Extension\GlobalsInterface;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
 use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\CoreBundle\Repository\TagRepository;
 
-class WallabagExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
+class WallabagExtension extends AbstractExtension implements GlobalsInterface
 {
     private $tokenStorage;
     private $entryRepository;
@@ -24,20 +28,26 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
         $this->translator = $translator;
     }
 
+    public function getGlobals()
+    {
+        return [];
+    }
+
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('removeWww', [$this, 'removeWww']),
-            new \Twig_SimpleFilter('removeSchemeAndWww', [$this, 'removeSchemeAndWww']),
+            new TwigFilter('removeWww', [$this, 'removeWww']),
+            new TwigFilter('removeScheme', [$this, 'removeScheme']),
+            new TwigFilter('removeSchemeAndWww', [$this, 'removeSchemeAndWww']),
         ];
     }
 
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('count_entries', [$this, 'countEntries']),
-            new \Twig_SimpleFunction('count_tags', [$this, 'countTags']),
-            new \Twig_SimpleFunction('display_stats', [$this, 'displayStats']),
+            new TwigFunction('count_entries', [$this, 'countEntries']),
+            new TwigFunction('count_tags', [$this, 'countTags']),
+            new TwigFunction('display_stats', [$this, 'displayStats']),
         ];
     }
 
@@ -46,11 +56,14 @@ class WallabagExtension extends \Twig_Extension implements \Twig_Extension_Globa
         return preg_replace('/^www\./i', '', $url);
     }
 
+    public function removeScheme($url)
+    {
+        return preg_replace('#^https?://#i', '', $url);
+    }
+
     public function removeSchemeAndWww($url)
     {
-        return $this->removeWww(
-            preg_replace('@^https?://@i', '', $url)
-        );
+        return $this->removeWww($this->removeScheme($url));
     }
 
     /**

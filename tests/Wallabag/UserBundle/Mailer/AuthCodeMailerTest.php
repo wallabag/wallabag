@@ -3,24 +3,10 @@
 namespace Tests\Wallabag\UserBundle\Mailer;
 
 use PHPUnit\Framework\TestCase;
+use Twig\Environment;
+use Twig\Loader\ArrayLoader;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\UserBundle\Mailer\AuthCodeMailer;
-
-/**
- * @see https://www.pmg.com/blog/integration-testing-swift-mailer/
- */
-final class CountableMemorySpool extends \Swift_MemorySpool implements \Countable
-{
-    public function count()
-    {
-        return \count($this->messages);
-    }
-
-    public function getMessages()
-    {
-        return $this->messages;
-    }
-}
 
 class AuthCodeMailerTest extends TestCase
 {
@@ -43,13 +29,13 @@ class AuthCodeMailerTest extends TestCase
 {% block body_text %}text body {{ support_url }}{% endblock %}
 TWIG;
 
-        $this->twig = new \Twig_Environment(new \Twig_Loader_Array(['WallabagUserBundle:TwoFactor:email_auth_code.html.twig' => $twigTemplate]));
+        $this->twig = new Environment(new ArrayLoader(['WallabagUserBundle:TwoFactor:email_auth_code.html.twig' => $twigTemplate]));
     }
 
     public function testSendEmail()
     {
         $user = new User();
-        $user->setTwoFactorAuthentication(true);
+        $user->setEmailTwoFactor(true);
         $user->setEmailAuthCode(666666);
         $user->setEmail('test@wallabag.io');
         $user->setName('Bob');

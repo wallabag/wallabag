@@ -4,6 +4,9 @@ import $ from 'jquery';
 /* Annotations */
 import annotator from 'annotator';
 
+import ClipboardJS from 'clipboard';
+import 'mathjax/es5/tex-svg';
+
 /* Fonts */
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import 'lato-font/css/lato-font.css';
@@ -88,5 +91,29 @@ $(document).ready(() => {
         target.parentNode.querySelector('[data-handle=tag-rename-form]').submit();
       }
     };
+  });
+
+  // mimic radio button because emailTwoFactor is a boolean
+  $('#update_user_googleTwoFactor').on('change', () => {
+    $('#update_user_emailTwoFactor').prop('checked', false);
+  });
+
+  $('#update_user_emailTwoFactor').on('change', () => {
+    $('#update_user_googleTwoFactor').prop('checked', false);
+  });
+
+  // same mimic for super admin
+  $('#user_googleTwoFactor').on('change', () => {
+    $('#user_emailTwoFactor').prop('checked', false);
+  });
+
+  $('#user_emailTwoFactor').on('change', () => {
+    $('#user_googleTwoFactor').prop('checked', false);
+  });
+
+  // handle copy to clipboard for developer stuff
+  const clipboard = new ClipboardJS('.btn');
+  clipboard.on('success', (e) => {
+    e.clearSelection();
   });
 });

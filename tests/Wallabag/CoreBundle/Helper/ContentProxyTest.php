@@ -36,7 +36,9 @@ class ContentProxyTest extends TestCase
                 'html' => false,
                 'title' => '',
                 'url' => '',
-                'content_type' => '',
+                'headers' => [
+                    'content-type' => '',
+                ],
                 'language' => '',
             ]);
 
@@ -71,7 +73,9 @@ class ContentProxyTest extends TestCase
                 'html' => false,
                 'title' => '',
                 'url' => '',
-                'content_type' => '',
+                'headers' => [
+                    'content-type' => '',
+                ],
                 'language' => '',
             ]);
 
@@ -104,15 +108,14 @@ class ContentProxyTest extends TestCase
             ->method('fetchContent')
             ->willReturn([
                 'html' => false,
-                'title' => '',
+                'title' => 'my title',
                 'url' => '',
-                'content_type' => '',
+                'headers' => [
+                    'content-type' => '',
+                ],
                 'language' => '',
                 'status' => '',
-                'open_graph' => [
-                    'og_title' => 'my title',
-                    'og_description' => 'desc',
-                ],
+                'description' => 'desc',
             ]);
 
         $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
@@ -147,13 +150,12 @@ class ContentProxyTest extends TestCase
                 'html' => str_repeat('this is my content', 325),
                 'title' => 'this is my title',
                 'url' => 'http://1.1.1.1',
-                'content_type' => 'text/html',
                 'language' => 'fr',
                 'status' => '200',
-                'open_graph' => [
-                    'og_title' => 'my OG title',
-                    'og_description' => 'OG desc',
-                    'og_image' => 'http://3.3.3.3/cover.jpg',
+                'description' => 'OG desc',
+                'image' => 'http://3.3.3.3/cover.jpg',
+                'headers' => [
+                    'content-type' => 'text/html',
                 ],
             ]);
 
@@ -163,7 +165,7 @@ class ContentProxyTest extends TestCase
 
         $this->assertSame('http://1.1.1.1', $entry->getUrl());
         $this->assertSame('this is my title', $entry->getTitle());
-        $this->assertContains('this is my content', $entry->getContent());
+        $this->assertContains('content', $entry->getContent());
         $this->assertSame('http://3.3.3.3/cover.jpg', $entry->getPreviewPicture());
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
@@ -189,13 +191,12 @@ class ContentProxyTest extends TestCase
                 'html' => str_repeat('this is my content', 325),
                 'title' => 'this is my title',
                 'url' => 'http://1.1.1.1',
-                'content_type' => 'text/html',
                 'language' => 'fr',
                 'status' => '200',
-                'open_graph' => [
-                    'og_title' => 'my OG title',
-                    'og_description' => 'OG desc',
-                    'og_image' => null,
+                'description' => 'OG desc',
+                'image' => null,
+                'headers' => [
+                    'content-type' => 'text/html',
                 ],
             ]);
 
@@ -205,12 +206,92 @@ class ContentProxyTest extends TestCase
 
         $this->assertSame('http://1.1.1.1', $entry->getUrl());
         $this->assertSame('this is my title', $entry->getTitle());
-        $this->assertContains('this is my content', $entry->getContent());
+        $this->assertContains('content', $entry->getContent());
         $this->assertNull($entry->getPreviewPicture());
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
         $this->assertSame('200', $entry->getHttpStatus());
         $this->assertSame(4.0, $entry->getReadingTime());
+        $this->assertSame('1.1.1.1', $entry->getDomainName());
+    }
+
+    public function testWithContentAndContentImage()
+    {
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $graby = $this->getMockBuilder('Graby\Graby')
+            ->setMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn([
+                'html' => "<h1>Test</h1><p><img src='http://3.3.3.3/cover.jpg'/></p>",
+                'title' => 'this is my title',
+                'url' => 'http://1.1.1.1',
+                'headers' => [
+                    'content-type' => 'text/html',
+                ],
+                'language' => 'fr',
+                'status' => '200',
+                'image' => null,
+            ]);
+
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'http://0.0.0.0');
+
+        $this->assertSame('http://1.1.1.1', $entry->getUrl());
+        $this->assertSame('this is my title', $entry->getTitle());
+        $this->assertSame("<h1>Test</h1><p><img src='http://3.3.3.3/cover.jpg'/></p>", $entry->getContent());
+        $this->assertSame('http://3.3.3.3/cover.jpg', $entry->getPreviewPicture());
+        $this->assertSame('text/html', $entry->getMimetype());
+        $this->assertSame('fr', $entry->getLanguage());
+        $this->assertSame('200', $entry->getHttpStatus());
+        $this->assertSame(0.0, $entry->getReadingTime());
+        $this->assertSame('1.1.1.1', $entry->getDomainName());
+    }
+
+    public function testWithContentImageAndOgImage()
+    {
+        $tagger = $this->getTaggerMock();
+        $tagger->expects($this->once())
+            ->method('tag');
+
+        $graby = $this->getMockBuilder('Graby\Graby')
+            ->setMethods(['fetchContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $graby->expects($this->any())
+            ->method('fetchContent')
+            ->willReturn([
+                'html' => "<h1>Test</h1><p><img src='http://3.3.3.3/nevermind.jpg'/></p>",
+                'title' => 'this is my title',
+                'url' => 'http://1.1.1.1',
+                'headers' => [
+                    'content-type' => 'text/html',
+                ],
+                'language' => 'fr',
+                'status' => '200',
+                'image' => 'http://3.3.3.3/cover.jpg',
+            ]);
+
+        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $entry = new Entry(new User());
+        $proxy->updateEntry($entry, 'http://0.0.0.0');
+
+        $this->assertSame('http://1.1.1.1', $entry->getUrl());
+        $this->assertSame('this is my title', $entry->getTitle());
+        $this->assertSame("<h1>Test</h1><p><img src='http://3.3.3.3/nevermind.jpg'/></p>", $entry->getContent());
+        $this->assertSame('http://3.3.3.3/cover.jpg', $entry->getPreviewPicture());
+        $this->assertSame('text/html', $entry->getMimetype());
+        $this->assertSame('fr', $entry->getLanguage());
+        $this->assertSame('200', $entry->getHttpStatus());
+        $this->assertSame(0.0, $entry->getReadingTime());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
@@ -236,9 +317,11 @@ class ContentProxyTest extends TestCase
                 'html' => str_repeat('this is my content', 325),
                 'title' => 'this is my title',
                 'url' => 'http://1.1.1.1',
-                'content_type' => 'text/html',
                 'language' => 'dontexist',
                 'status' => '200',
+                'headers' => [
+                    'content-type' => 'text/html',
+                ],
             ]);
 
         $proxy = new ContentProxy($graby, $tagger, $validator, $this->getLogger(), $this->fetchingErrorMessage);
@@ -247,7 +330,7 @@ class ContentProxyTest extends TestCase
 
         $this->assertSame('http://1.1.1.1', $entry->getUrl());
         $this->assertSame('this is my title', $entry->getTitle());
-        $this->assertContains('this is my content', $entry->getContent());
+        $this->assertContains('content', $entry->getContent());
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertNull($entry->getLanguage());
         $this->assertSame('200', $entry->getHttpStatus());
@@ -280,14 +363,13 @@ class ContentProxyTest extends TestCase
                 'html' => str_repeat('this is my content', 325),
                 'title' => 'this is my title',
                 'url' => 'http://1.1.1.1',
-                'content_type' => 'text/html',
+                'headers' => [
+                    'content-type' => 'text/html',
+                ],
                 'language' => 'fr',
                 'status' => '200',
-                'open_graph' => [
-                    'og_title' => 'my OG title',
-                    'og_description' => 'OG desc',
-                    'og_image' => 'https://',
-                ],
+                'description' => 'OG desc',
+                'image' => 'https://',
             ]);
 
         $proxy = new ContentProxy($graby, $tagger, $validator, $this->getLogger(), $this->fetchingErrorMessage);
@@ -296,7 +378,7 @@ class ContentProxyTest extends TestCase
 
         $this->assertSame('http://1.1.1.1', $entry->getUrl());
         $this->assertSame('this is my title', $entry->getTitle());
-        $this->assertContains('this is my content', $entry->getContent());
+        $this->assertContains('content', $entry->getContent());
         $this->assertNull($entry->getPreviewPicture());
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
@@ -320,19 +402,19 @@ class ContentProxyTest extends TestCase
                 'html' => str_repeat('this is my content', 325),
                 'title' => 'this is my title',
                 'url' => 'http://1.1.1.1',
-                'content_type' => 'text/html',
                 'language' => 'fr',
                 'date' => '1395635872',
                 'authors' => ['Jeremy', 'Nico', 'Thomas'],
-                'all_headers' => [
-                    'Cache-Control' => 'no-cache',
+                'headers' => [
+                    'cache-control' => 'no-cache',
+                    'content-type' => 'text/html',
                 ],
             ]
         );
 
         $this->assertSame('http://1.1.1.1', $entry->getUrl());
         $this->assertSame('this is my title', $entry->getTitle());
-        $this->assertContains('this is my content', $entry->getContent());
+        $this->assertContains('content', $entry->getContent());
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
         $this->assertSame(4.0, $entry->getReadingTime());
@@ -363,15 +445,17 @@ class ContentProxyTest extends TestCase
                 'html' => str_repeat('this is my content', 325),
                 'title' => 'this is my title',
                 'url' => 'http://1.1.1.1',
-                'content_type' => 'text/html',
                 'language' => 'fr',
                 'date' => '2016-09-08T11:55:58+0200',
+                'headers' => [
+                    'content-type' => 'text/html',
+                ],
             ]
         );
 
         $this->assertSame('http://1.1.1.1', $entry->getUrl());
         $this->assertSame('this is my title', $entry->getTitle());
-        $this->assertContains('this is my content', $entry->getContent());
+        $this->assertContains('content', $entry->getContent());
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
         $this->assertSame(4.0, $entry->getReadingTime());
@@ -398,15 +482,17 @@ class ContentProxyTest extends TestCase
                 'html' => str_repeat('this is my content', 325),
                 'title' => 'this is my title',
                 'url' => 'http://1.1.1.1',
-                'content_type' => 'text/html',
                 'language' => 'fr',
                 'date' => '01 02 2012',
+                'headers' => [
+                    'content-type' => 'text/html',
+                ],
             ]
         );
 
         $this->assertSame('http://1.1.1.1', $entry->getUrl());
         $this->assertSame('this is my title', $entry->getTitle());
-        $this->assertContains('this is my content', $entry->getContent());
+        $this->assertContains('content', $entry->getContent());
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
         $this->assertSame(4.0, $entry->getReadingTime());
@@ -415,7 +501,7 @@ class ContentProxyTest extends TestCase
 
         $records = $handler->getRecords();
 
-        $this->assertCount(1, $records);
+        $this->assertCount(3, $records);
         $this->assertContains('Error while defining date', $records[0]['message']);
     }
 
@@ -435,8 +521,10 @@ class ContentProxyTest extends TestCase
                 'html' => str_repeat('this is my content', 325),
                 'title' => 'this is my title',
                 'url' => 'http://1.1.1.1',
-                'content_type' => 'text/html',
                 'language' => 'fr',
+                'headers' => [
+                    'content-type' => 'text/html',
+                ],
             ]
         );
 
@@ -475,13 +563,13 @@ class ContentProxyTest extends TestCase
                 'html' => $html,
                 'title' => 'this is my title',
                 'url' => 'http://1.1.1.1',
-                'content_type' => 'text/html',
                 'language' => 'fr',
                 'status' => '200',
-                'open_graph' => [
-                    'og_title' => 'my OG title',
-                    'og_description' => 'OG desc',
-                    'og_image' => 'http://3.3.3.3/cover.jpg',
+                //'og_title' => 'my OG title',
+                'description' => 'OG desc',
+                'image' => 'http://3.3.3.3/cover.jpg',
+                'headers' => [
+                    'content-type' => 'text/html',
                 ],
             ]
         );
@@ -513,9 +601,10 @@ class ContentProxyTest extends TestCase
                 'html' => '<p><img src="http://1.1.1.1/image.jpg" /></p>',
                 'title' => 'this is my title',
                 'url' => 'http://1.1.1.1/image.jpg',
-                'content_type' => 'image/jpeg',
                 'status' => '200',
-                'open_graph' => [],
+                'headers' => [
+                    'content-type' => 'image/jpeg',
+                ],
             ]);
 
         $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
@@ -553,7 +642,9 @@ class ContentProxyTest extends TestCase
                 'html' => false,
                 'title' => $actualTitle,
                 'url' => '',
-                'content_type' => 'text/html',
+                'headers' => [
+                    'content-type' => 'text/html',
+                ],
                 'language' => '',
             ]);
 
@@ -588,7 +679,9 @@ class ContentProxyTest extends TestCase
                 'html' => false,
                 'title' => $actualTitle,
                 'url' => '',
-                'content_type' => 'text/html',
+                'headers' => [
+                    'content-type' => 'text/html',
+                ],
                 'language' => '',
             ]);
 
@@ -622,7 +715,9 @@ class ContentProxyTest extends TestCase
                 'html' => false,
                 'title' => $actualTitle,
                 'url' => '',
-                'content_type' => 'application/pdf',
+                'headers' => [
+                    'content-type' => 'application/pdf',
+                ],
                 'language' => '',
             ]);
 
@@ -656,7 +751,9 @@ class ContentProxyTest extends TestCase
                 'html' => false,
                 'title' => $actualTitle,
                 'url' => '',
-                'content_type' => 'application/pdf',
+                'headers' => [
+                    'content-type' => 'application/pdf',
+                ],
                 'language' => '',
             ]);
 
@@ -690,7 +787,9 @@ class ContentProxyTest extends TestCase
                 'html' => false,
                 'title' => $actualTitle,
                 'url' => '',
-                'content_type' => 'application/pdf',
+                'headers' => [
+                    'content-type' => 'application/pdf',
+                ],
                 'language' => '',
             ]);
 
@@ -725,7 +824,9 @@ class ContentProxyTest extends TestCase
                 'html' => false,
                 'title' => $actualTitle,
                 'url' => '',
-                'content_type' => 'application/pdf',
+                'headers' => [
+                    'content-type' => 'application/pdf',
+                ],
                 'language' => '',
             ]);
 
@@ -855,7 +956,9 @@ class ContentProxyTest extends TestCase
                 'html' => false,
                 'title' => '',
                 'url' => $content_url,
-                'content_type' => '',
+                'headers' => [
+                    'content-type' => '',
+                ],
                 'language' => '',
             ],
             true
@@ -886,7 +989,9 @@ class ContentProxyTest extends TestCase
     }
 
     /**
-     * https://stackoverflow.com/a/18506801.
+     * Convert hex to string.
+     *
+     * @see https://stackoverflow.com/a/18506801
      *
      * @param $hex
      *

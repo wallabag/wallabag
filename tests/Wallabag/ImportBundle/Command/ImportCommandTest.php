@@ -84,6 +84,8 @@ class ImportCommandTest extends WallabagCoreTestCase
 
     public function testRunImportCommandWithUserId()
     {
+        $this->logInAs('admin');
+
         $application = new Application($this->getClient()->getKernel());
         $application->add(new ImportCommand());
 
@@ -92,7 +94,7 @@ class ImportCommandTest extends WallabagCoreTestCase
         $tester = new CommandTester($command);
         $tester->execute([
             'command' => $command->getName(),
-            'username' => 1,
+            'username' => $this->getLoggedInUserId(),
             'filepath' => $application->getKernel()->getContainer()->getParameter('kernel.project_dir') . '/tests/Wallabag/ImportBundle/fixtures/wallabag-v2-read.json',
             '--useUserId' => true,
             '--importer' => 'v2',

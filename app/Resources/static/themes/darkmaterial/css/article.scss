@@ -1,0 +1,196 @@
+/* ==========================================================================
+   Article
+   ========================================================================== */
+
+#article {
+  font-size: 20px;
+  margin: 0 auto;
+  max-width: 45em;
+
+  article {
+    color: #424242;
+    font-size: 18px;
+    line-height: 1.7em;
+    overflow-wrap: break-word;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: #212121;
+
+      strong {
+        font-weight: 500;
+      }
+    }
+
+    h6 {
+      font-size: 1.2rem;
+    }
+
+    h5 {
+      font-size: 1.6rem;
+    }
+
+    h4 {
+      font-size: 1.9rem;
+    }
+
+    h3 {
+      font-size: 2.2rem;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+    }
+
+    h1 {
+      font-size: 2.7rem;
+    }
+
+    a {
+      border-bottom: 1px dotted #03a9f4;
+      text-decoration: none;
+    }
+
+    a:hover {
+      border-bottom-style: solid;
+    }
+
+    ul {
+      padding-left: 30px;
+    }
+
+    ul,
+    ul li {
+      list-style-type: disc;
+    }
+
+    blockquote {
+      font-style: italic;
+    }
+
+    strong {
+      font-weight: bold;
+    }
+  }
+
+  img,
+  figure {
+    max-width: 100%;
+    height: auto;
+  }
+
+  pre {
+    box-sizing: border-box;
+    margin: 0 0 1.75em;
+    border: #e3f2fd 1px solid;
+    width: 100%;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 0.8em;
+    white-space: pre;
+    overflow: auto;
+    background: #f5f5f5;
+    border-radius: 3px;
+  }
+
+  > header > h1 {
+    font-size: 2em;
+    margin: 2.1rem 0 0.68rem;
+  }
+
+  aside {
+    .tools {
+      display: flex;
+      flex-flow: row wrap;
+
+      .stats {
+        font-size: 0.8em;
+        margin: 8px 5px 5px;
+
+        li {
+          display: inline-flex;
+          vertical-align: middle;
+          margin: 3px 5px;
+
+          i.material-icons {
+            color: #3e3e3e;
+            margin-right: 3px;
+          }
+        }
+
+        a {
+          color: #000;
+          text-decoration: none;
+        }
+      }
+
+      .tags {
+        float: right;
+        margin: 5px 15px 10px;
+      }
+    }
+
+    .chip {
+      background-color: $blueAccentColor;
+      padding: 0 15px 0 10px;
+      margin: auto 2px;
+      border-radius: 6px;
+
+      a,
+      i {
+        color: #fff;
+      }
+
+      i.material-icons {
+        float: right;
+        font-size: 20px;
+        line-height: 32px;
+        padding-left: 8px;
+      }
+    }
+  }
+}
+
+.reader-mode {
+  width: 70px !important;
+  transition: width 0.2s ease;
+
+  .collapsible-body {
+    height: 0;
+    overflow: hidden;
+  }
+
+  span {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  &:hover {
+    width: 260px !important;
+
+    .collapsible-body {
+      height: auto;
+
+      li a i.material-icons {
+        margin: auto 5px auto -8px;
+      }
+    }
+
+    span {
+      opacity: 1;
+    }
+  }
+}
+
+.progress {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 3px;
+  margin: 0;
+  z-index: 9999;
+}

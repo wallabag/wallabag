@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\ImportBundle\Consumer\AMQP;
+namespace Tests\Wallabag\ImportBundle\Consumer;
 
 use PHPUnit\Framework\TestCase;
 use Wallabag\CoreBundle\Entity\Entry;

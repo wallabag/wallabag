@@ -33,10 +33,12 @@ menu:
         back_to_unread: 'Înapoi la articolele necitite'
         # users_management: 'Users management'
         # site_credentials: 'Site credentials'
+        # quickstart: "Quickstart"
     top:
         add_new_entry: 'Introdu un nou articol'
         search: 'Căutare'
         filter_entries: 'Filtrează articolele'
+        # random_entry: Jump to a random entry from that list
         # export: 'Export'
     search_form:
         input_label: 'Introdu căutarea ta'
@@ -53,11 +55,12 @@ config:
     page_title: 'Configurație'
     tab_menu:
         settings: 'Setări'
-        rss: 'RSS'
+        feed: 'RSS'
         user_info: 'Informații despre utilizator'
         password: 'Parolă'
         # rules: 'Tagging rules'
         new_user: 'Crează un utilizator'
+        # reset: 'Reset area'
     form:
         save: 'Salvează'
     form_settings:
@@ -65,12 +68,8 @@ config:
         items_per_page_label: 'Articole pe pagină'
         language_label: 'Limbă'
         reading_speed:
-            # label: 'Reading speed'
+            # label: 'Reading speed (words per minute)'
             # help_message: 'You can use online tools to estimate your reading speed:'
-            # 100_word: 'I read ~100 words per minute'
-            # 200_word: 'I read ~200 words per minute'
-            # 300_word: 'I read ~300 words per minute'
-            # 400_word: 'I read ~400 words per minute'
         action_mark_as_read:
             # label: 'Where do you want to be redirected to after marking an article as read?'
             # redirect_homepage: 'To the homepage'
@@ -83,25 +82,35 @@ config:
         # help_reading_speed: "wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article."
         # help_language: "You can change the language of wallabag interface."
         # help_pocket_consumer_key: "Required for Pocket import. You can create it in your Pocket account."
-    form_rss:
+    form_feed:
         description: 'Feed-urile RSS oferite de wallabag îți permit să-ți citești articolele salvate în reader-ul tău preferat RSS.'
         token_label: 'RSS-Token'
         no_token: 'Fără token'
         token_create: 'Crează-ți token'
         token_reset: 'Resetează-ți token-ul'
-        rss_links: 'Link-uri RSS'
-        rss_link:
+        # token_revoke: 'Revoke the token'
+        feed_links: 'Link-uri RSS'
+        feed_link:
             unread: 'Unread'
             starred: 'Starred'
             archive: 'Archived'
             # all: 'All'
-        rss_limit: 'Limită RSS'
+        feed_limit: 'Limită RSS'
     form_user:
-        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code on every new untrusted connexion"
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
+        # login_label: 'Login (can not be changed)'
         name_label: 'Nume'
         email_label: 'E-mail'
-        # twoFactorAuthentication_label: 'Two factor authentication'
-        # help_twoFactorAuthentication: "If you enable 2FA, each time you want to login to wallabag, you'll receive a code by email."
+        two_factor:
+            # emailTwoFactor_label: 'Using email (receive a code by email)'
+            # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, Authy or FreeOTP, to get a one time code)'
+            # table_method: Method
+            # table_state: State
+            # table_action: Action
+            # state_enabled: Enabled
+            # state_disabled: Disabled
+            # action_email: Use email
+            # action_app: Use OTP App
         delete:
             # title: Delete my account (a.k.a danger zone)
             # description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
@@ -127,6 +136,15 @@ config:
         # edit_rule_label: 'edit'
         # rule_label: 'Rule'
         # tags_label: 'Tags'
+        # card:
+        #     new_tagging_rule: Create a tagging rule
+        #     import_tagging_rules: Import tagging rules
+        #     import_tagging_rules_detail: You have to select the JSON file you previously exported.
+        #     export_tagging_rules: Export tagging rules
+        #     export_tagging_rules_detail: This will download a JSON file that you can use to import tagging rules elsewhere or to backup them.
+        # file_label: JSON file
+        # import_submit: Import
+        # export: Export
         # faq:
         #     title: 'FAQ'
         #     tagging_rules_definition_title: 'What does « tagging rules » mean?'
@@ -159,6 +177,15 @@ config:
         #         and: 'One rule AND another'
         #         matches: 'Tests that a <i>subject</i> matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>'
         #         notmatches: 'Tests that a <i>subject</i> doesn''t match match a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
+    otp:
+        # page_title: Two-factor authentication
+        # app:
+        #     two_factor_code_description_1: You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password. It'll disapear after a page reload.
+        #     two_factor_code_description_2: 'You can scan that QR Code with your app:'
+        #     two_factor_code_description_3: 'Also, save these backup codes in a safe place, you can use them in case you lose access to your OTP app:'
+        #     two_factor_code_description_4: 'Test an OTP code from your configured app:'
+        #     cancel: Cancel
+        #     enable: Enable
 
 entry:
     # default_title: 'Title of the entry'
@@ -253,6 +280,11 @@ entry:
     confirm:
         # delete: "Are you sure you want to remove that article?"
         # delete_tag: "Are you sure you want to remove that tag from that article?"
+    metadata:
+        # reading_time: "Estimated reading time"
+        # reading_time_minutes_short: "%readingTime% min"
+        # address: "Address"
+        # added_on: "Added on"
 
 about:
     page_title: 'Despre'
@@ -348,7 +380,7 @@ quickstart:
     #     title: 'Configure the application'
     #     description: 'In order to have an application which suits you, have a look into the configuration of wallabag.'
     #     language: 'Change language and design'
-    #     rss: 'Enable RSS feeds'
+    #     feed: 'Enable RSS feeds'
     #     tagging_rules: 'Write rules to automatically tag your articles'
     # admin:
     #     title: 'Administration'
@@ -396,14 +428,16 @@ tag:
     list:
         # number_on_the_page: '{0} There is no tag.|{1} There is one tag.|]1,Inf[ There are %count% tags.'
         # see_untagged_entries: 'See untagged entries'
+        # no_untagged_entries: 'There are no untagged entries.'
     new:
         # add: 'Add'
         # placeholder: 'You can add several tags, separated by a comma.'
     rename:
         # placeholder: 'You can update tag name.'
 
-# export:
-#     footer_template: '<div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p></div>'
+export:
+    # footer_template: '<div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p></div>'
+    # unknown: 'Unknown'
 
 import:
     # page_title: 'Import'
@@ -484,6 +518,7 @@ developer:
     #         redirect_uris_label: 'Redirect URIs'
     #         save_label: 'Create a new client'
     #     action_back: 'Back'
+    #     copy_to_clipboard: Copy
     # client_parameter:
     #     page_title: 'API clients management > Client parameters'
     #     page_description: 'Here are your client parameters.'
@@ -525,7 +560,8 @@ user:
         email_label: 'E-mail'
         # enabled_label: 'Enabled'
         # last_login_label: 'Last login'
-        # twofactor_label: Two factor authentication
+        # twofactor_email_label: Two factor authentication by email
+        # twofactor_google_label: Two factor authentication by OTP app
         # save: Save
         # delete: Delete
         # delete_confirm: Are you sure?
@@ -546,7 +582,7 @@ site_credential:
     #     create_new_one: Create a new credential
     # form:
     #     username_label: 'Username'
-    #     host_label: 'Host'
+    #     host_label: 'Host (subdomain.example.org, .example.org, etc.)'
     #     password_label: 'Password'
     #     save: Save
     #     delete: Delete
@@ -563,14 +599,18 @@ flashes:
             password_updated: 'Parolă actualizată'
             password_not_updated_demo: "In demonstration mode, you can't change password for this user."
             user_updated: 'Informație actualizată'
-            rss_updated: 'Informație RSS actualizată'
+            feed_updated: 'Informație RSS actualizată'
             # tagging_rules_updated: 'Tagging rules updated'
             # tagging_rules_deleted: 'Tagging rule deleted'
-            # rss_token_updated: 'RSS token updated'
+            # feed_token_updated: 'RSS token updated'
+            # feed_token_revoked: 'RSS token revoked'
             # annotations_reset: Annotations reset
             # tags_reset: Tags reset
             # entries_reset: Entries reset
             # archived_reset: Archived entries deleted
+            # otp_enabled: Two-factor authentication enabled
+            # tagging_rules_imported: Tagging rules imported
+            # tagging_rules_not_imported: Error while importing tagging rules
     entry:
         notice:
             # entry_already_saved: 'Entry already saved on %date%'
@@ -584,6 +624,7 @@ flashes:
             entry_starred: 'Articol adăugat la favorite'
             entry_unstarred: 'Articol șters de la favorite'
             entry_deleted: 'Articol șters'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             # tag_added: 'Tag added'

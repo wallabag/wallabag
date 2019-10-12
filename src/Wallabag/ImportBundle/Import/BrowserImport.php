@@ -77,7 +77,7 @@ abstract class BrowserImport extends AbstractImport
      */
     public function parseEntry(array $importedEntry)
     {
-        if ((!array_key_exists('guid', $importedEntry) || (!array_key_exists('id', $importedEntry))) && \is_array(reset($importedEntry))) {
+        if ((!\array_key_exists('guid', $importedEntry) || (!\array_key_exists('id', $importedEntry))) && \is_array(reset($importedEntry))) {
             if ($this->producer) {
                 $this->parseEntriesForProducer($importedEntry);
 
@@ -89,7 +89,7 @@ abstract class BrowserImport extends AbstractImport
             return;
         }
 
-        if (array_key_exists('children', $importedEntry)) {
+        if (\array_key_exists('children', $importedEntry)) {
             if ($this->producer) {
                 $this->parseEntriesForProducer($importedEntry['children']);
 
@@ -101,11 +101,11 @@ abstract class BrowserImport extends AbstractImport
             return;
         }
 
-        if (!array_key_exists('uri', $importedEntry) && !array_key_exists('url', $importedEntry)) {
+        if (!\array_key_exists('uri', $importedEntry) && !\array_key_exists('url', $importedEntry)) {
             return;
         }
 
-        $url = array_key_exists('uri', $importedEntry) ? $importedEntry['uri'] : $importedEntry['url'];
+        $url = \array_key_exists('uri', $importedEntry) ? $importedEntry['uri'] : $importedEntry['url'];
 
         $existingEntry = $this->em
             ->getRepository('WallabagCoreBundle:Entry')
@@ -126,7 +126,7 @@ abstract class BrowserImport extends AbstractImport
         // update entry with content (in case fetching failed, the given entry will be return)
         $this->fetchContent($entry, $data['url'], $data);
 
-        if (array_key_exists('tags', $data)) {
+        if (\array_key_exists('tags', $data)) {
             $this->tagsAssigner->assignTagsToEntry(
                 $entry,
                 $data['tags']
@@ -149,9 +149,9 @@ abstract class BrowserImport extends AbstractImport
     /**
      * Parse and insert all given entries.
      *
-     * @param $entries
+     * @param array $entries
      */
-    protected function parseEntries($entries)
+    protected function parseEntries(array $entries)
     {
         $i = 1;
         $entryToBeFlushed = [];

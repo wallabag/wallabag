@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\ImportBundle\Consumer\AMQP;
+namespace Tests\Wallabag\ImportBundle\Consumer;
 
 use PhpAmqpLib\Message\AMQPMessage;
 use PHPUnit\Framework\TestCase;
