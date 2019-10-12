@@ -1,0 +1,277 @@
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+
+main {
+  #content {
+    padding: 0 0.5rem;
+  }
+
+  ul.row {
+    margin: 0.4rem 0 0;
+    padding: 0 0.75rem;
+  }
+}
+
+.data .card .card-body {
+  height: 19em;
+  overflow: hidden;
+}
+
+.card {
+  .card-content .card-title,
+  .card-reveal .card-title {
+    line-height: 22.8px;
+    max-height: 80px;
+    font-size: 19px;
+    font-family: roberto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .card-stacked .card-content .card-title {
+    display: inline-block;
+  }
+
+  .card-content .activator,
+  .card-reveal .activator {
+    cursor: pointer;
+    font-family: "Material Icons";
+  }
+
+  .card-content i.right,
+  .card-reveal i.right {
+    margin-left: 0;
+  }
+
+  .card-content .original {
+    line-height: 24px;
+    font-size: 15px;
+  }
+
+  .card-entry-labels {
+    position: absolute;
+    top: 10px;
+    z-index: 90;
+    max-width: 50%;
+  }
+
+  .card-entry-labels-hidden {
+    margin: 2.5px auto;
+  }
+
+  .card-entry-labels-hidden li {
+    display: inline-block;
+    background-color: $blueAccentColor;
+    margin: 0 5px;
+    padding: 5px 12px;
+    border-radius: 3px;
+    color: #fff;
+    max-height: 2em;
+    max-width: calc(100% - 15px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .card-content .estimatedTime {
+    margin-bottom: 10px;
+  }
+
+  .card-action {
+    padding: 10px 5px 10px 15px;
+
+    ul.links {
+      margin: 0;
+      font-size: 24px;
+      line-height: 24px;
+    }
+
+    a {
+      color: #fff;
+      margin: 0;
+    }
+
+    a:hover {
+      color: #fff;
+    }
+
+    ul.tools li a.tool {
+      margin-right: 5px !important;
+    }
+
+    .reading-time {
+      display: inline-flex;
+      vertical-align: middle;
+
+      span {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .card-image {
+    height: 10em;
+  }
+
+  .card-fullimage {
+    height: 13.5em;
+  }
+
+  .card-image .preview,
+  .card-fullimage .preview {
+    height: 14em;
+    background: no-repeat 50%/cover;
+    display: block;
+  }
+
+  &.sw {
+    max-width: 370px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+a.original:not(.waves-effect) {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+}
+
+.card-entry-labels li,
+.card-tag-labels li {
+  margin: 10px 10px 10px auto;
+  padding: 5px 12px 5px 16px !important;
+  background-color: $blueAccentColor;
+  border-radius: 3px;
+  color: #fff;
+  cursor: default;
+}
+
+.card-entry-labels li {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 0 3px 3px 0;
+  overflow: hidden;
+}
+
+.card-tag-labels li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-entry-tags a,
+.card-entry-labels a,
+.card-tag-labels a,
+.card-entry-labels-hidden a,
+#list .chip a {
+  text-decoration: none;
+  font-weight: normal;
+  color: #fff;
+}
+
+.card-tag-labels a {
+  height: 100%;
+  align-items: center;
+}
+
+.card-tag-link {
+  display: flex;
+  min-width: 100px;
+  flex-grow: 1;
+}
+
+.card-tag-rss {
+  display: flex;
+}
+
+.card-tag-labels {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-tag-labels li {
+  margin: 10px;
+  flex-basis: 19%;
+  flex-grow: 1;
+  align-items: center;
+}
+
+.card-stacked {
+  display: flex;
+  flex-flow: row wrap;
+
+  &:hover ul.tools-list {
+    display: inline;
+    text-align: right;
+  }
+
+  .preview {
+    max-width: 100px;
+    height: auto;
+    margin-right: 10px;
+    flex: 1;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+
+  div.metadata {
+    .chip {
+      background-color: $blueAccentColor;
+      padding: 0 15px 0 10px;
+      margin: auto 2px;
+      border-radius: 6px;
+
+      a,
+      i {
+        color: #fff;
+      }
+
+      i.material-icons {
+        float: right;
+        font-size: 20px;
+        line-height: 32px;
+        padding-left: 8px;
+      }
+    }
+  }
+
+  div.card-content {
+    flex: 4;
+  }
+
+  ul.tools-list {
+    flex: 1;
+    display: none;
+    flex-basis: 5em;
+    align-self: flex-end;
+    float: right;
+    max-width: 6em;
+  }
+
+  .tags {
+    display: inline-block;
+  }
+}
+
+#content .collection .collection-item {
+  min-height: 65px;
+  height: auto;
+}
+
+.quickstart .card .card-action a,
+.quickstart .card .card-action a:hover {
+  color: #fff !important;
+}
+
+.settings .div_tabs {
+  padding-bottom: 15px;
+}
+
+@media only screen and (min-width: 992px) {
+  .card-tag-labels li {
+    max-width: 50%;
+  }
+}

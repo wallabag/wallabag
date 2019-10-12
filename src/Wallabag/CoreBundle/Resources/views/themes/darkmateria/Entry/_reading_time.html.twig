@@ -1,0 +1,7 @@
+{% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
+<i class="material-icons grey-text text-darken-1">timer</i>
+{% if readingTime > 0 %}
+    <span>{{ 'entry.list.reading_time_minutes_short'|trans({'%readingTime%': readingTime|round}) }}</span>
+{% else %}
+    <span>{{ 'entry.list.reading_time_less_one_minute_short'|trans|raw }}</span>
+{% endif %}

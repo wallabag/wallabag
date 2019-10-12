@@ -1,0 +1,14 @@
+<form name="tag" method="post" action="{{ path('new_tag', { 'entry': entry.id })}}">
+    {% if form_errors(form) %}
+        <span class="white-text">{{ form_errors(form) }}</span>
+    {% endif %}
+
+    {% if form_errors(form.label) %}
+        <span class="white-text">{{ form_errors(form.label) }}</span>
+    {% endif %}
+
+    {{ form_widget(form.label, { 'attr': {'autocomplete': 'off'} }) }}
+
+    {{ form_widget(form.add, {'attr': {'class': 'btn waves-effect waves-light hide-on-large-only'}}) }}
+    {{ form_widget(form._token) }}
+</form>
