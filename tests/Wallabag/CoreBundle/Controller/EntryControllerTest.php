@@ -1377,7 +1377,7 @@ class EntryControllerTest extends WallabagCoreTestCase
             ],
             'es-ES' => [
                 'https://www.20minutos.es/noticia/3360685/0/gobierno-sanchez-primero-historia-mas-mujeres-que-hombres/',
-                'es',
+                'es_ES',
             ],
         ];
     }
