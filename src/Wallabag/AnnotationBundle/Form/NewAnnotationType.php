@@ -18,6 +18,7 @@ class NewAnnotationType extends AbstractType
             ])
             ->add('quote', null, [
                 'empty_data' => null,
+                'trim' => false,
             ])
             ->add('ranges', CollectionType::class, [
                 'entry_type' => RangeType::class,

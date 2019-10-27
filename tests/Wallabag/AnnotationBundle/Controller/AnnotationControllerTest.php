@@ -107,6 +107,36 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
         $this->assertSame('my annotation', $annotation->getText());
     }
 
+    public function testCouldNotSetAnnotationWithoutQuote()
+    {
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+
+        /** @var Entry $entry */
+        $entry = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUsernameAndNotArchived('admin');
+
+        $headers = ['CONTENT_TYPE' => 'application/json'];
+        $content = json_encode([
+            'text' => 'my annotation',
+            'quote' => null,
+            'ranges' => [
+                ['start' => '', 'startOffset' => 24, 'end' => '', 'endOffset' => 31],
+            ],
+        ]);
+        $this->client->request('POST', '/api/annotations/' . $entry->getId() . '.json', [], [], $headers, $content);
+
+        $this->assertSame(400, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertCount(
+            1,
+            $content['errors']['children']['quote']['errors'],
+            'The quote field should contains an error'
+        );
+    }
+
     /**
      * @dataProvider dataForEachAnnotations
      */

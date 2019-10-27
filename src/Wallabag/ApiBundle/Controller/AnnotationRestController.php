@@ -37,7 +37,7 @@ class AnnotationRestController extends WallabagRestController
      * @ApiDoc(
      *      requirements={
      *          {"name"="ranges", "dataType"="array", "requirement"="\w+", "description"="The range array for the annotation"},
-     *          {"name"="quote", "dataType"="string", "required"=false, "description"="Optional, quote for the annotation"},
+     *          {"name"="quote", "dataType"="string", "required"=true, "description"="Quote for the annotation"},
      *          {"name"="text", "dataType"="string", "required"=true, "description"=""},
      *      }
      * )

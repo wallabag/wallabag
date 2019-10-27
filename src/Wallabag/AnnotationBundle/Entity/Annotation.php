@@ -60,6 +60,7 @@ class Annotation
     /**
      * @var string
      *
+     * @Assert\NotNull()
      * @Assert\Length(
      *     max = 10000,
      *     maxMessage = "validator.quote_length_too_high"
