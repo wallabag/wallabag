@@ -2,6 +2,7 @@ FROM php:7.2-fpm
 
 # Default timezone. To change it, use the argument in the docker-compose.yml file
 ARG timezone='Europe/Paris'
+ARG memorylimit='512M'
 
 RUN apt-get update && apt-get install -y \
         libmcrypt-dev \
@@ -27,6 +28,7 @@ RUN docker-php-ext-install \
 RUN printf "\n" | pecl install imagick && docker-php-ext-enable imagick
 
 RUN echo "date.timezone="$timezone > /usr/local/etc/php/conf.d/date_timezone.ini
+RUN echo "memory_limit ="$memorylimit > /usr/local/etc/php/conf.d/memory_limit.ini
 
 RUN usermod -u 1000 www-data
 
