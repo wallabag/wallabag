@@ -1,0 +1,17 @@
+<div class="card-action">
+    <div class="reading-time grey-text">
+        <div class="card-reading-time">{% include "@WallabagCore/themes/material/Entry/_reading_time.html.twig" with {'entry': entry} only %}</div>
+        <div class="card-created-at">
+            <i class="material-icons" title="{{ 'entry.view.created_at'|trans }}">today</i>
+            <span>&nbsp;{{ entry.createdAt|date('Y-m-d') }}</span>
+        </div>
+    </div>
+
+    <ul class="tools right">
+        <li>
+            <a title="{{ 'entry.list.toogle_as_read'|trans }}" class="tool grey-text" href="{{ path('archive_entry', { 'id': entry.id }) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i></a>
+            <a title="{{ 'entry.list.toogle_as_star'|trans }}" class="tool grey-text" href="{{ path('star_entry', { 'id': entry.id }) }}"><i class="material-icons">{% if entry.isStarred == 0 %}star_border{% else %}star{% endif %}</i></a>
+            <a title="{{ 'entry.list.delete'|trans }}" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" class="tool grey-text delete" href="{{ path('delete_entry', { 'id': entry.id }) }}"><i class="material-icons">delete</i></a>
+        </li>
+    </ul>
+</div>

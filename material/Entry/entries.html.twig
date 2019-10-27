@@ -1,0 +1,184 @@
+{% extends "WallabagCoreBundle::layout.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+    {% if tag is defined and app.user.config.feedToken %}
+        <link rel="alternate" type="application/atom+xml" href="{{ path('tag_feed', {'username': app.user.username, 'token': app.user.config.feedToken, 'slug': tag.slug}) }}" />
+    {% endif %}
+{% endblock %}
+
+{% block title %}
+    {% set filter = '' %}
+    {% if tag is defined %}
+        {% set filter = tag.slug %}
+    {% endif %}
+    {% if searchTerm is defined and searchTerm is not empty %}
+        {% set filter = searchTerm %}
+    {% endif %}
+    {% include "@WallabagCore/themes/common/Entry/_title.html.twig" with {'filter': filter} %}
+{% endblock %}
+
+{% block content %}
+    {% set listMode = app.user.config.listMode %}
+    {% set currentRoute = app.request.attributes.get('_route') %}
+    {% if currentRoute == 'homepage' %}
+        {% set currentRoute = 'unread' %}
+    {% endif %}
+    <div class="results">
+        <div class="nb-results">
+            {{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}
+            <a href="{{ path('switch_view_mode') }}"><i class="material-icons">{% if listMode == 0 %}view_list{% else %}view_module{% endif %}</i></a>
+            {% if app.user.config.feedToken %}
+                {% include "@WallabagCore/themes/common/Entry/_feed_link.html.twig" %}
+            {% endif %}
+        </div>
+        {% if entries.getNbPages > 1 %}
+            {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+        {% endif %}
+    </div>
+
+    <ul class="{% if listMode == 1 %}collection{% else %}row data{% endif %}">
+        {% for entry in entries %}
+            <li id="entry-{{ entry.id|e }}" class="col {% if listMode == 0 %}l3 m6{% else %}collection-item{% endif %} s12">
+                {% if listMode == 1 %}
+                    {% include "@WallabagCore/themes/material/Entry/_card_list.html.twig" with {'entry': entry} only %}
+                {% elseif not entry.previewPicture is null and entry.mimetype starts with 'image/' %}
+                    {% include "@WallabagCore/themes/material/Entry/_card_full_image.html.twig" with {'entry': entry} only %}
+                {% else %}
+                    {% include "@WallabagCore/themes/material/Entry/_card_preview.html.twig" with {'entry': entry} only %}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% if entries.getNbPages > 1 %}
+        <div class="results">
+            {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+        </div>
+    {% endif %}
+
+    <!-- Export -->
+    <div id="export" class="side-nav right-aligned">
+    {% set currentTag = null %}
+    {% if tag is defined %}
+        {% set currentTag = tag.slug %}
+    {% endif %}
+        <h4 class="center">{{ 'entry.list.export_title'|trans }}</h4>
+        <ul>
+            {% if craue_setting('export_epub') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'epub', 'tag' : currentTag }) }}">EPUB</a></li>{% endif %}
+            {% if craue_setting('export_mobi') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'mobi', 'tag' : currentTag }) }}">MOBI</a></li>{% endif %}
+            {% if craue_setting('export_pdf') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'pdf', 'tag' : currentTag }) }}">PDF</a></li>{% endif %}
+            {% if craue_setting('export_json') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'json', 'tag' : currentTag }) }}">JSON</a></li>{% endif %}
+            {% if craue_setting('export_csv') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'csv', 'tag' : currentTag }) }}">CSV</a></li>{% endif %}
+            {% if craue_setting('export_txt') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'txt', 'tag' : currentTag }) }}">TXT</a></li>{% endif %}
+            {% if craue_setting('export_xml') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'xml', 'tag' : currentTag }) }}">XML</a></li>{% endif %}
+        </ul>
+    </div>
+
+    <!-- Filters -->
+    {% if form is not null %}
+    <div id="filters" class="side-nav right-aligned">
+        <form action="{{ path('all') }}">
+
+            <h4 class="center">{{ 'entry.filters.title'|trans }}</h4>
+
+            <div class="row">
+                <div class="col s12">
+                    <label>{{ 'entry.filters.status_label'|trans }}</label>
+                </div>
+
+                <div class="input-field col s6 with-checkbox">
+                    {{ form_widget(form.isArchived) }}
+                    {{ form_label(form.isArchived) }}
+                </div>
+
+                <div class="input-field col s6 with-checkbox">
+                    {{ form_widget(form.isStarred) }}
+                    {{ form_label(form.isStarred) }}
+                </div>
+
+                <div class="input-field col s6 with-checkbox">
+                    {{ form_widget(form.isUnread) }}
+                    {{ form_label(form.isUnread) }}
+                </div>
+
+                <div class="col s12">
+                    <label>{{ 'entry.filters.preview_picture_help'|trans }}</label>
+                </div>
+
+                <div class="input-field col s12 with-checkbox">
+                    {{ form_widget(form.previewPicture) }}
+                    {{ form_label(form.previewPicture) }}
+                </div>
+
+                <div class="col s12">
+                    <label>{{ 'entry.filters.is_public_help'|trans }}</label>
+                </div>
+
+                <div class="input-field col s12 with-checkbox">
+                    {{ form_widget(form.isPublic) }}
+                    {{ form_label(form.isPublic) }}
+                </div>
+
+                <div class="col s12">
+                    {{ form_label(form.language) }}
+                </div>
+
+                <div class="input-field col s12">
+                    {{ form_widget(form.language) }}
+                </div>
+
+                <div class="col s12">
+                    {{ form_label(form.httpStatus) }}
+                </div>
+
+                <div class="input-field col s12">
+                    {{ form_widget(form.httpStatus) }}
+                </div>
+
+                <div class="col s12">
+                    {{ form_label(form.readingTime) }}
+                </div>
+
+                <div class="input-field col s6">
+                    {{ form_widget(form.readingTime.left_number, {'type': 'number'}) }}
+                    <label for="entry_filter_readingTime_left_number">{{ 'entry.filters.reading_time.from'|trans }}</label>
+                </div>
+
+                <div class="input-field col s6">
+                    {{ form_widget(form.readingTime.right_number, {'type': 'number'}) }}
+                    <label for="entry_filter_readingTime_right_number">{{ 'entry.filters.reading_time.to'|trans }}</label>
+                </div>
+
+                <div class="input-field col s12">
+                    {{ form_widget(form.domainName, {'type': 'text', 'attr' : {'placeholder': 'website.com'} }) }}
+                    {{ form_label(form.domainName) }}
+                </div>
+
+                <div class="col s12">
+                    {{ form_label(form.createdAt) }}
+                </div>
+
+                <div class="input-field col s6">
+                    {{ form_widget(form.createdAt.left_date, {'type': 'date', 'attr': {'class': 'datepicker', 'data-value': form.createdAt.left_date.vars.value} }) }}
+                    <label for="entry_filter_createdAt_left_date" class="active">{{ 'entry.filters.created_at.from'|trans }}</label>
+                </div>
+                <div class="input-field col s6">
+                    {{ form_widget(form.createdAt.right_date, {'type': 'date', 'attr': {'class': 'datepicker', 'data-value': form.createdAt.right_date.vars.value} }) }}
+                    <label for="entry_filter_createdAt_right_date" class="active">{{ 'entry.filters.created_at.to'|trans }}</label>
+                </div>
+
+                <div class="col s6">
+                    <a href="#!" class="center waves-effect waves-green btn-flat" id="clear_form_filters">{{ 'entry.filters.action.clear'|trans }}</a>
+                </div>
+
+                <div class="col s6">
+                    <button class="btn waves-effect waves-light" type="submit" id="submit-filter" value="filter">{{ 'entry.filters.action.filter'|trans }}</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    {% endif %}
+
+{% endblock %}
