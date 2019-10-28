@@ -1,5 +1,7 @@
-# Material Theme
+# DarkMaterial Theme
 
-Theme created by Danilow (@modos189) Alexandr  http://modos189.ru/
+CSS changes by BoyMechanicus
+
+Based on theme created by Danilow (@modos189) Alexandr  http://modos189.ru/
 
 Used framework  http://materializecss.com/
