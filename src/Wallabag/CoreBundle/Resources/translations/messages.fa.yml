@@ -465,6 +465,9 @@ import:
     wallabag_v2:
         page_title: 'درون‌ریزی > Wallabag v2'
         description: 'این برنامه همهٔ داده‌های شما را در نسخهٔ ۲ wallabag درون‌ریزی می‌کند. به بخش «همهٔ مقاله‌ها» بروید و در بخش «برون‌ریزی» روی "JSON" کلیک کنید. با این کار شما پرونده‌ای به شکل "All articles.json" دریافت خواهید کرد.'
+    # elcurator:
+    #     page_title: 'Import > elCurator'
+    #     description: 'This importer will import all your elCurator articles. Go to your preferences in your elCurator account and then, export your content. You will have a JSON file.'
     readability:
         page_title: 'درون‌ریزی > Readability'
         # description: 'This importer will import all your Readability articles. On the tools (https://www.readability.com/tools/) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).'

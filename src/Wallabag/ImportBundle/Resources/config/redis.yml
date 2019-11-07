@@ -126,6 +126,27 @@ services:
             - "@event_dispatcher"
             - "@logger"
 
+    # elcurator
+    wallabag_import.queue.redis.elcurator:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            - "@wallabag_core.redis.client"
+            - "wallabag.import.elcurator"
+
+    wallabag_import.producer.redis.elcurator:
+        class: Wallabag\ImportBundle\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.elcurator"
+
+    wallabag_import.consumer.redis.elcurator:
+        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_user.user_repository"
+            - "@wallabag_import.elcurator.import"
+            - "@event_dispatcher"
+            - "@logger"
+
     # firefox
     wallabag_import.queue.redis.firefox:
         class: Simpleue\Queue\RedisQueue

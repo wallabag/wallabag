@@ -465,6 +465,9 @@ import:
     wallabag_v2:
         page_title: 'นำเข้าข้อมูล > Wallabag v2'
         description: 'สำหรับผู้นำเข้าข้อมูลจะ import บทความ wallabag v2 ทั้งหมดของคุณ ไปยังบทความทั้งหมด, ดังนั้น, บน export sidebar, click ที่ "JSON" คุณจะมีไฟล์ "All articles.json"'
+    # elcurator:
+    #     page_title: 'Import > elCurator'
+    #     description: 'This importer will import all your elCurator articles. Go to your preferences in your elCurator account and then, export your content. You will have a JSON file.'
     readability:
         page_title: 'นำเข้าข้อมูล > Readability'
         description: 'สำหรับผู้นำเข้าข้อมูลจะ import บทความ Readability ทั้งหมดของคุณ ไปที่เครื่องมือ (https://www.readability.com/tools/) ของหน้านั้น, click ที่ "Export your data" ในส่วน "Data Export" คุณจะได้รับ email ไป download json (which does not end with .json in fact).'
