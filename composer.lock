@@ -5344,24 +5344,24 @@
         },
         {
             "name": "paragonie/constant_time_encoding",
-            "version": "v2.2.3",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/constant_time_encoding.git",
-                "reference": "55af0dc01992b4d0da7f6372e2eac097bbbaffdb"
+                "reference": "47a1cedd2e4d52688eb8c96469c05ebc8fd28fa2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/55af0dc01992b4d0da7f6372e2eac097bbbaffdb",
-                "reference": "55af0dc01992b4d0da7f6372e2eac097bbbaffdb",
+                "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/47a1cedd2e4d52688eb8c96469c05ebc8fd28fa2",
+                "reference": "47a1cedd2e4d52688eb8c96469c05ebc8fd28fa2",
                 "shasum": ""
             },
             "require": {
-                "php": "^7"
+                "php": "^7|^8"
             },
             "require-dev": {
                 "phpunit/phpunit": "^6|^7",
-                "vimeo/psalm": "^1|^2"
+                "vimeo/psalm": "^1|^2|^3"
             },
             "type": "library",
             "autoload": {
@@ -5402,7 +5402,7 @@
                 "hex2bin",
                 "rfc4648"
             ],
-            "time": "2019-01-03T20:26:31+00:00"
+            "time": "2019-11-06T19:20:29+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -7190,16 +7190,16 @@
         },
         {
             "name": "scheb/two-factor-bundle",
-            "version": "v4.7.1",
+            "version": "v4.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scheb/two-factor-bundle.git",
-                "reference": "170895e91bdbe2c21983f195271d42e2fcfb3d62"
+                "reference": "2864c770fedb723ac05aa56ff2761e4a8e1537ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/170895e91bdbe2c21983f195271d42e2fcfb3d62",
-                "reference": "170895e91bdbe2c21983f195271d42e2fcfb3d62",
+                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/2864c770fedb723ac05aa56ff2761e4a8e1537ca",
+                "reference": "2864c770fedb723ac05aa56ff2761e4a8e1537ca",
                 "shasum": ""
             },
             "require": {
@@ -7220,7 +7220,9 @@
             "require-dev": {
                 "doctrine/lexer": "^1.0.1",
                 "doctrine/orm": "^2.6",
+                "escapestudios/symfony2-coding-standard": "^3.9",
                 "phpunit/phpunit": "^7.0|^8.0",
+                "squizlabs/php_codesniffer": "^3.5",
                 "swiftmailer/swiftmailer": "^6.0",
                 "symfony/yaml": "^3.4|^4.0"
             },
@@ -7228,7 +7230,10 @@
             "autoload": {
                 "psr-4": {
                     "Scheb\\TwoFactorBundle\\": ""
-                }
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -7249,7 +7254,7 @@
                 "two-factor",
                 "two-step"
             ],
-            "time": "2019-09-02T18:36:37+00:00"
+            "time": "2019-11-07T19:29:43+00:00"
         },
         {
             "name": "sensio/distribution-bundle",
