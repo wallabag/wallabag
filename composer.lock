@@ -10121,16 +10121,16 @@
         },
         {
             "name": "m6web/redis-mock",
-            "version": "v4.6.1",
+            "version": "v4.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/M6Web/RedisMock.git",
-                "reference": "5f8821e8a39055ca4ef0d4b51dbc063aa000a2dc"
+                "reference": "057ad8e1bea903aee54642e310d900bdb794372c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/M6Web/RedisMock/zipball/5f8821e8a39055ca4ef0d4b51dbc063aa000a2dc",
-                "reference": "5f8821e8a39055ca4ef0d4b51dbc063aa000a2dc",
+                "url": "https://api.github.com/repos/M6Web/RedisMock/zipball/057ad8e1bea903aee54642e310d900bdb794372c",
+                "reference": "057ad8e1bea903aee54642e310d900bdb794372c",
                 "shasum": ""
             },
             "require": {
@@ -10162,7 +10162,7 @@
                 "mock",
                 "redis"
             ],
-            "time": "2019-08-20T13:03:26+00:00"
+            "time": "2019-11-04T09:03:23+00:00"
         },
         {
             "name": "nette/bootstrap",
