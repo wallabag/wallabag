@@ -51,6 +51,7 @@
         "doctrine/orm": "^2.6",
         "doctrine/doctrine-bundle": "^1.9",
         "doctrine/doctrine-cache-bundle": "^1.3",
+        "doctrine/dbal": "2.9.2",
         "twig/extensions": "^1.5",
         "symfony/swiftmailer-bundle": "^3.2",
         "symfony/monolog-bundle": "^3.1",
