@@ -148,8 +148,6 @@ abstract class BrowserImport extends AbstractImport
 
     /**
      * Parse and insert all given entries.
-     *
-     * @param array $entries
      */
     protected function parseEntries(array $entries)
     {
@@ -199,8 +197,6 @@ abstract class BrowserImport extends AbstractImport
      *
      * Faster parse entries for Producer.
      * We don't care to make check at this time. They'll be done by the consumer.
-     *
-     * @param array $entries
      */
     protected function parseEntriesForProducer(array $entries)
     {

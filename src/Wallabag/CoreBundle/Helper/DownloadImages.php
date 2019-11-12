@@ -213,8 +213,6 @@ class DownloadImages
     /**
      * Get images urls from the srcset image attribute.
      *
-     * @param Crawler $imagesCrawler
-     *
      * @return array An array of urls
      */
     private static function getSrcsetUrls(Crawler $imagesCrawler)

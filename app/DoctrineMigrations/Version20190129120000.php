@@ -118,9 +118,6 @@ final class Version20190129120000 extends WallabagMigration
         ],
     ];
 
-    /**
-     * @param Schema $schema
-     */
     public function up(Schema $schema)
     {
         foreach ($this->settings as $setting) {
@@ -137,9 +134,6 @@ final class Version20190129120000 extends WallabagMigration
         }
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function down(Schema $schema)
     {
         $this->skipIf(true, 'These settings are required and should not be removed.');

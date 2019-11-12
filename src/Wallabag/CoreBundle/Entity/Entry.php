@@ -550,8 +550,6 @@ class Entry
      * Set created_at.
      * Only used when importing data from an other service.
      *
-     * @param \DateTime $createdAt
-     *
      * @return Entry
      */
     public function setCreatedAt(\DateTime $createdAt)
@@ -623,9 +621,6 @@ class Entry
         return $this->annotations;
     }
 
-    /**
-     * @param Annotation $annotation
-     */
     public function setAnnotation(Annotation $annotation)
     {
         $this->annotations[] = $annotation;
@@ -702,9 +697,6 @@ class Entry
         return $data;
     }
 
-    /**
-     * @param Tag $tag
-     */
     public function addTag(Tag $tag)
     {
         if ($this->tags->contains($tag)) {
@@ -725,8 +717,6 @@ class Entry
 
     /**
      * Remove the given tag from the entry (if the tag is associated).
-     *
-     * @param Tag $tag
      */
     public function removeTag(Tag $tag)
     {
@@ -874,8 +864,6 @@ class Entry
     }
 
     /**
-     * @param \Datetime $publishedAt
-     *
      * @return Entry
      */
     public function setPublishedAt(\Datetime $publishedAt)

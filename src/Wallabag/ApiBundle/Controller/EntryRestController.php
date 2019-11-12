@@ -822,8 +822,6 @@ class EntryRestController extends WallabagRestController
      * Retrieve value from the request.
      * Used for POST & PATCH on a an entry.
      *
-     * @param Request $request
-     *
      * @return array
      */
     private function retrieveValueFromRequest(Request $request)

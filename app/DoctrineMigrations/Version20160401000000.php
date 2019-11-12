@@ -10,9 +10,6 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  */
 class Version20160401000000 extends WallabagMigration
 {
-    /**
-     * @param Schema $schema
-     */
     public function up(Schema $schema)
     {
         $this->skipIf($schema->hasTable($this->getTable('entry')), 'Database already initialized');
@@ -167,9 +164,6 @@ SQL
         }
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function down(Schema $schema)
     {
         $this->addSql("DROP TABLE {$this->getTable('craue_config_setting')}");

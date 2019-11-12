@@ -16,9 +16,6 @@ use Wallabag\CoreBundle\Form\Type\RenameTagType;
 class TagController extends Controller
 {
     /**
-     * @param Request $request
-     * @param Entry   $entry
-     *
      * @Route("/new-tag/{entry}", requirements={"entry" = "\d+"}, name="new_tag")
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -103,7 +100,6 @@ class TagController extends Controller
     }
 
     /**
-     * @param Tag $tag
      * @param int $page
      *
      * @Route("/tag/list/{slug}/{page}", name="tag_entries", defaults={"page" = "1"})
@@ -144,9 +140,6 @@ class TagController extends Controller
     /**
      * Rename a given tag with a new label
      * Create a new tag with the new name and drop the old one.
-     *
-     * @param Tag     $tag
-     * @param Request $request
      *
      * @Route("/tag/rename/{slug}", name="tag_rename")
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})

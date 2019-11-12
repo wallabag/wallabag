@@ -11,7 +11,6 @@ class UrlHasher
      * Hash the given url using the given algorithm.
      * Hashed url are faster to be retrieved in the database than the real url.
      *
-     * @param string $url
      * @param string $algorithm
      *
      * @return string

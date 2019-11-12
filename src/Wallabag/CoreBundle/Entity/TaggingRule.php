@@ -121,8 +121,6 @@ class TaggingRule
     /**
      * Set config.
      *
-     * @param Config $config
-     *
      * @return TaggingRule
      */
     public function setConfig(Config $config)

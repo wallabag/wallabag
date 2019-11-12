@@ -10,9 +10,6 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  */
 class Version20170501115751 extends WallabagMigration
 {
-    /**
-     * @param Schema $schema
-     */
     public function up(Schema $schema)
     {
         $this->skipIf($schema->hasTable($this->getTable('site_credential')), 'It seems that you already played this migration.');
@@ -34,9 +31,6 @@ class Version20170501115751 extends WallabagMigration
         }
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function down(Schema $schema)
     {
         $schema->dropTable($this->getTable('site_credential'));

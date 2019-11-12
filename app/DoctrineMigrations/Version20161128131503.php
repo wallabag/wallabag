@@ -16,9 +16,6 @@ class Version20161128131503 extends WallabagMigration
         'expires_at' => 'datetime',
     ];
 
-    /**
-     * @param Schema $schema
-     */
     public function up(Schema $schema)
     {
         $userTable = $schema->getTable($this->getTable('user'));
@@ -29,9 +26,6 @@ class Version20161128131503 extends WallabagMigration
         }
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function down(Schema $schema)
     {
         $userTable = $schema->getTable($this->getTable('user'));

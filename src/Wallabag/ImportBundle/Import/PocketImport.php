@@ -151,9 +151,6 @@ class PocketImport extends AbstractImport
 
     /**
      * Set the Http client.
-     *
-     * @param HttpClient          $client
-     * @param MessageFactory|null $messageFactory
      */
     public function setClient(HttpClient $client, MessageFactory $messageFactory = null)
     {

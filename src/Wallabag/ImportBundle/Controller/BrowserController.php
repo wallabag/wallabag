@@ -13,8 +13,6 @@ abstract class BrowserController extends Controller
     /**
      * @Route("/browser", name="import_browser")
      *
-     * @param Request $request
-     *
      * @return Response
      */
     public function indexAction(Request $request)

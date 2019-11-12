@@ -46,9 +46,6 @@ class ShowUserCommand extends ContainerAwareCommand
         return 0;
     }
 
-    /**
-     * @param User $user
-     */
     private function showUser(User $user)
     {
         $this->io->listing([

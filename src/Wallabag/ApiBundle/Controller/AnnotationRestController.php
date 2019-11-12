@@ -20,8 +20,6 @@ class AnnotationRestController extends WallabagRestController
      *      }
      * )
      *
-     * @param Entry $entry
-     *
      * @return JsonResponse
      */
     public function getAnnotationsAction(Entry $entry)
@@ -43,9 +41,6 @@ class AnnotationRestController extends WallabagRestController
      *          {"name"="text", "dataType"="string", "required"=true, "description"=""},
      *      }
      * )
-     *
-     * @param Request $request
-     * @param Entry   $entry
      *
      * @return JsonResponse
      */
@@ -70,9 +65,6 @@ class AnnotationRestController extends WallabagRestController
      *
      * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
      *
-     * @param Annotation $annotation
-     * @param Request    $request
-     *
      * @return JsonResponse
      */
     public function putAnnotationAction(Annotation $annotation, Request $request)
@@ -95,8 +87,6 @@ class AnnotationRestController extends WallabagRestController
      * )
      *
      * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
-     *
-     * @param Annotation $annotation
      *
      * @return JsonResponse
      */

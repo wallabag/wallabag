@@ -23,7 +23,6 @@ class FeedController extends Controller
      *
      * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
      *
-     * @param User $user
      * @param $page
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -40,7 +39,6 @@ class FeedController extends Controller
      *
      * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
      *
-     * @param User $user
      * @param $page
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -57,7 +55,6 @@ class FeedController extends Controller
      *
      * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
      *
-     * @param User $user
      * @param $page
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -147,7 +144,6 @@ class FeedController extends Controller
      * It returns the response to be send.
      *
      * @param string $type Entries type: unread, starred or archive
-     * @param User   $user
      * @param int    $page
      *
      * @return \Symfony\Component\HttpFoundation\Response

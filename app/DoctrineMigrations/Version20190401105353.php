@@ -10,9 +10,6 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  */
 class Version20190401105353 extends WallabagMigration
 {
-    /**
-     * @param Schema $schema
-     */
     public function up(Schema $schema)
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
@@ -27,9 +24,6 @@ class Version20190401105353 extends WallabagMigration
         $entryTable->addIndex(['user_id', 'hashed_url'], 'hashed_url_user_id', [], ['lengths' => [null, 40]]);
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function down(Schema $schema)
     {
         $entryTable = $schema->getTable($this->getTable('entry'));

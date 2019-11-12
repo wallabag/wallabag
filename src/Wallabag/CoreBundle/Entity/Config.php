@@ -371,8 +371,6 @@ class Config
     }
 
     /**
-     * @param TaggingRule $rule
-     *
      * @return Config
      */
     public function addTaggingRule(TaggingRule $rule)

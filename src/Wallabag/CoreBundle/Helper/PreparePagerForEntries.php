@@ -20,8 +20,7 @@ class PreparePagerForEntries
     }
 
     /**
-     * @param AdapterInterface $adapter
-     * @param User             $user    If user isn't logged in, we can force it (like for feed)
+     * @param User $user If user isn't logged in, we can force it (like for feed)
      *
      * @return Pagerfanta|null
      */

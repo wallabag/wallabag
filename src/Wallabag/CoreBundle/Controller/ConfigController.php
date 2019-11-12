@@ -26,8 +26,6 @@ use Wallabag\CoreBundle\Tools\Utils;
 class ConfigController extends Controller
 {
     /**
-     * @param Request $request
-     *
      * @Route("/config", name="config")
      */
     public function indexAction(Request $request)
@@ -279,8 +277,6 @@ class ConfigController extends Controller
     /**
      * Validate OTP code.
      *
-     * @param Request $request
-     *
      * @Route("/config/otp/app/check", name="config_otp_app_check")
      */
     public function otpAppCheckAction(Request $request)
@@ -308,8 +304,6 @@ class ConfigController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
      * @Route("/generate-token", name="generate_token")
      *
      * @return RedirectResponse|JsonResponse
@@ -336,8 +330,6 @@ class ConfigController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
      * @Route("/revoke-token", name="revoke_token")
      *
      * @return RedirectResponse|JsonResponse
@@ -366,8 +358,6 @@ class ConfigController extends Controller
     /**
      * Deletes a tagging rule and redirect to the config homepage.
      *
-     * @param TaggingRule $rule
-     *
      * @Route("/tagging-rule/delete/{id}", requirements={"id" = "\d+"}, name="delete_tagging_rule")
      *
      * @return RedirectResponse
@@ -390,8 +380,6 @@ class ConfigController extends Controller
 
     /**
      * Edit a tagging rule.
-     *
-     * @param TaggingRule $rule
      *
      * @Route("/tagging-rule/edit/{id}", requirements={"id" = "\d+"}, name="edit_tagging_rule")
      *
@@ -459,8 +447,6 @@ class ConfigController extends Controller
      *
      * @Route("/account/delete", name="delete_account")
      *
-     * @param Request $request
-     *
      * @throws AccessDeniedHttpException
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
@@ -491,8 +477,6 @@ class ConfigController extends Controller
      *
      * @Route("/config/view-mode", name="switch_view_mode")
      *
-     * @param Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function changeViewModeAction(Request $request)
@@ -510,8 +494,7 @@ class ConfigController extends Controller
     /**
      * Change the locale for the current user.
      *
-     * @param Request $request
-     * @param string  $language
+     * @param string $language
      *
      * @Route("/locale/{language}", name="changeLocale")
      *
@@ -620,8 +603,6 @@ class ConfigController extends Controller
 
     /**
      * Validate that a rule can be edited/deleted by the current user.
-     *
-     * @param TaggingRule $rule
      */
     private function validateRuleAction(TaggingRule $rule)
     {

@@ -306,7 +306,6 @@ class EntryRepository extends EntityRepository
      * DELETE et FROM entry_tag et WHERE et.entry_id IN ( SELECT e.id FROM entry e WHERE e.user_id = :userId ) AND et.tag_id = :tagId
      *
      * @param int $userId
-     * @param Tag $tag
      */
     public function removeTag($userId, Tag $tag)
     {
@@ -565,9 +564,8 @@ class EntryRepository extends EntityRepository
     /**
      * Return the given QueryBuilder with an orderBy() call.
      *
-     * @param QueryBuilder $qb
-     * @param string       $sortBy
-     * @param string       $direction
+     * @param string $sortBy
+     * @param string $direction
      *
      * @return QueryBuilder
      */

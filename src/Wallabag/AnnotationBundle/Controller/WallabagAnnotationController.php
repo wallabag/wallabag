@@ -16,8 +16,6 @@ class WallabagAnnotationController extends FOSRestController
     /**
      * Retrieve annotations for an entry.
      *
-     * @param Entry $entry
-     *
      * @see Wallabag\ApiBundle\Controller\WallabagRestController
      *
      * @return JsonResponse
@@ -38,9 +36,6 @@ class WallabagAnnotationController extends FOSRestController
 
     /**
      * Creates a new annotation.
-     *
-     * @param Request $request
-     * @param Entry   $entry
      *
      * @return JsonResponse
      *
@@ -79,9 +74,6 @@ class WallabagAnnotationController extends FOSRestController
      *
      * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
      *
-     * @param Annotation $annotation
-     * @param Request    $request
-     *
      * @return JsonResponse
      */
     public function putAnnotationAction(Annotation $annotation, Request $request)
@@ -113,8 +105,6 @@ class WallabagAnnotationController extends FOSRestController
      * @see Wallabag\ApiBundle\Controller\WallabagRestController
      *
      * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
-     *
-     * @param Annotation $annotation
      *
      * @return JsonResponse
      */
