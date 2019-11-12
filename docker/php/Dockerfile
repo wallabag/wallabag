@@ -13,16 +13,21 @@ RUN apt-get update && apt-get install -y \
         libsqlite3-dev \
         imagemagick \
         libmagickwand-dev \
-        libtidy-dev
+        libtidy-dev \
+        git
 RUN docker-php-ext-install \
         iconv \
         mbstring \
+        gd \
         intl \
         pdo \
         pdo_mysql \
         pdo_pgsql \
         pdo_sqlite \
-        tidy
+        sockets \
+        tidy \
+        bcmath \
+        zip
 
 RUN printf "\n" | pecl install imagick && docker-php-ext-enable imagick
 
