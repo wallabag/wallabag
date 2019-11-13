@@ -3712,16 +3712,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "2.0.2",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "5ed35e8959be03cb36335605a70e05571eb8157a"
+                "reference": "8dcacf79bd2bc18438dc3c93cdee1fa59f9a848b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/5ed35e8959be03cb36335605a70e05571eb8157a",
-                "reference": "5ed35e8959be03cb36335605a70e05571eb8157a",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/8dcacf79bd2bc18438dc3c93cdee1fa59f9a848b",
+                "reference": "8dcacf79bd2bc18438dc3c93cdee1fa59f9a848b",
                 "shasum": ""
             },
             "require": {
@@ -3782,20 +3782,20 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2019-07-22T07:05:28+00:00"
+            "time": "2019-11-12T13:10:23+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.93",
+            "version": "1.0.94",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "018ebc5ccd8e631243fcc515fb05b39bac423b31"
+                "reference": "429ee12aa7d9dd95596b15ec0889bd7202d5723a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/018ebc5ccd8e631243fcc515fb05b39bac423b31",
-                "reference": "018ebc5ccd8e631243fcc515fb05b39bac423b31",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/429ee12aa7d9dd95596b15ec0889bd7202d5723a",
+                "reference": "429ee12aa7d9dd95596b15ec0889bd7202d5723a",
                 "shasum": ""
             },
             "require": {
@@ -3822,7 +3822,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2019-10-15T15:51:35+00:00"
+            "time": "2019-11-12T06:56:59+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
