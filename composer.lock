@@ -1629,13 +1629,13 @@
             "authors": [
                 {
                     "name": "Multiple users",
-                    "role": "Original developers",
-                    "homepage": "https://code.google.com/p/html5lib/"
+                    "homepage": "https://code.google.com/p/html5lib/",
+                    "role": "Original developers"
                 },
                 {
                     "name": "Sébastien Lavoie",
-                    "role": "Packager",
-                    "homepage": "http://blog.lavoie.sl"
+                    "homepage": "http://blog.lavoie.sl",
+                    "role": "Packager"
                 },
                 {
                     "name": "didier Belot",
@@ -2244,8 +2244,8 @@
             "authors": [
                 {
                     "name": "A. Grandt",
-                    "role": "Developer",
-                    "email": "php@grandt.com"
+                    "email": "php@grandt.com",
+                    "role": "Developer"
                 }
             ],
             "description": "A class for working around the use of mbstring.func_override",
@@ -2353,9 +2353,9 @@
             "authors": [
                 {
                     "name": "A. Grandt",
-                    "role": "Developer",
                     "email": "php@grandt.com",
-                    "homepage": "http://grandt.com"
+                    "homepage": "http://grandt.com",
+                    "role": "Developer"
                 }
             ],
             "description": "GIF89a compliant Gif resizer, including transparency and optimized gifs with sub sized elements.",
@@ -2400,14 +2400,14 @@
             "authors": [
                 {
                     "name": "A. Grandt",
-                    "role": "Developer",
                     "email": "php@grandt.com",
-                    "homepage": "http://grandt.com"
+                    "homepage": "http://grandt.com",
+                    "role": "Developer"
                 },
                 {
                     "name": "Greg Kappatos",
-                    "role": "Developer",
-                    "homepage": "http://websiteconnect.com.au"
+                    "homepage": "http://websiteconnect.com.au",
+                    "role": "Developer"
                 }
             ],
             "description": "Merge and stream multiple Zip files on the fly.",
@@ -2454,8 +2454,8 @@
             "authors": [
                 {
                     "name": "A. Grandt",
-                    "role": "Developer",
-                    "email": "php@grandt.com"
+                    "email": "php@grandt.com",
+                    "role": "Developer"
                 }
             ],
             "description": "A class for cleaning up/collapsing relative paths. Like real_path, but without the need for the path to exist on the filesystem.",
@@ -3722,16 +3722,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "2.0.2",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "5ed35e8959be03cb36335605a70e05571eb8157a"
+                "reference": "8dcacf79bd2bc18438dc3c93cdee1fa59f9a848b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/5ed35e8959be03cb36335605a70e05571eb8157a",
-                "reference": "5ed35e8959be03cb36335605a70e05571eb8157a",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/8dcacf79bd2bc18438dc3c93cdee1fa59f9a848b",
+                "reference": "8dcacf79bd2bc18438dc3c93cdee1fa59f9a848b",
                 "shasum": ""
             },
             "require": {
@@ -3782,17 +3782,17 @@
             "authors": [
                 {
                     "name": "Jeremy Benoist",
-                    "role": "Developer",
-                    "email": "jeremy.benoist@gmail.com"
+                    "email": "jeremy.benoist@gmail.com",
+                    "role": "Developer"
                 },
                 {
                     "name": "FiveFilters.org",
-                    "role": "Developer (original version)",
-                    "email": "fivefilters@fivefilters.org"
+                    "email": "fivefilters@fivefilters.org",
+                    "role": "Developer (original version)"
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2019-07-22T07:05:28+00:00"
+            "time": "2019-11-12T13:10:23+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
@@ -3890,8 +3890,8 @@
                 },
                 {
                     "name": "Jack W",
-                    "role": "Developer (SafeCurl original version)",
-                    "email": "jack@fin1te.net"
+                    "email": "jack@fin1te.net",
+                    "role": "Developer (SafeCurl original version)"
                 }
             ],
             "description": "Server-Side Request Forgery (SSRF) protection plugin for HTTPlug",
@@ -3947,25 +3947,25 @@
             "authors": [
                 {
                     "name": "Keyvan Minoukadeh",
-                    "role": "Developer (ported original JS code to PHP)",
                     "email": "keyvan@keyvan.net",
-                    "homepage": "http://keyvan.net"
+                    "homepage": "http://keyvan.net",
+                    "role": "Developer (ported original JS code to PHP)"
                 },
                 {
                     "name": "Arc90",
-                    "role": "Developer (original JS version)",
-                    "homepage": "http://arc90.com"
+                    "homepage": "http://arc90.com",
+                    "role": "Developer (original JS version)"
                 },
                 {
                     "name": "Jeremy Benoist",
-                    "role": "Developer",
                     "email": "jeremy.benoist@gmail.com",
-                    "homepage": "http://www.j0k3r.net"
+                    "homepage": "http://www.j0k3r.net",
+                    "role": "Developer"
                 },
                 {
                     "name": "DitherSky",
-                    "role": "Developer (https://github.com/Dither/full-text-rss)",
-                    "homepage": "https://github.com/Dither"
+                    "homepage": "https://github.com/Dither",
+                    "role": "Developer (https://github.com/Dither/full-text-rss)"
                 }
             ],
             "description": "Automatic article extraction from HTML",
@@ -4613,8 +4613,8 @@
             "authors": [
                 {
                     "name": "Luís Otávio Cobucci Oblonczyk",
-                    "role": "Developer",
-                    "email": "lcobucci@gmail.com"
+                    "email": "lcobucci@gmail.com",
+                    "role": "Developer"
                 }
             ],
             "description": "A simple library to work with JSON Web Token and JSON Web Signature",
@@ -4945,16 +4945,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.25.1",
+            "version": "1.25.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "70e65a5470a42cfec1a7da00d30edb6e617e8dcf"
+                "reference": "d5e2fb341cb44f7e2ab639d12a1e5901091ec287"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/70e65a5470a42cfec1a7da00d30edb6e617e8dcf",
-                "reference": "70e65a5470a42cfec1a7da00d30edb6e617e8dcf",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/d5e2fb341cb44f7e2ab639d12a1e5901091ec287",
+                "reference": "d5e2fb341cb44f7e2ab639d12a1e5901091ec287",
                 "shasum": ""
             },
             "require": {
@@ -5019,7 +5019,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2019-09-06T13:49:17+00:00"
+            "time": "2019-11-13T10:00:05+00:00"
         },
         {
             "name": "nelmio/api-doc-bundle",
@@ -6508,9 +6508,9 @@
             "authors": [
                 {
                     "name": "Antonio Carlos Ribeiro",
-                    "role": "Developer",
                     "email": "acr@antoniocarlosribeiro.com",
-                    "homepage": "https://antoniocarlosribeiro.com"
+                    "homepage": "https://antoniocarlosribeiro.com",
+                    "role": "Developer"
                 }
             ],
             "description": "Create random chars, numbers, strings",
@@ -6570,9 +6570,9 @@
             "authors": [
                 {
                     "name": "Antonio Carlos Ribeiro",
-                    "role": "Developer",
                     "email": "acr@antoniocarlosribeiro.com",
-                    "homepage": "https://antoniocarlosribeiro.com"
+                    "homepage": "https://antoniocarlosribeiro.com",
+                    "role": "Developer"
                 }
             ],
             "description": "Create recovery codes for two factor auth",
@@ -7735,7 +7735,7 @@
             ],
             "authors": [
                 {
-                    "name": "Sebastien Malot",
+                    "name": "Sebastien MALOT",
                     "email": "sebastien@malot.fr"
                 }
             ],
@@ -7940,7 +7940,7 @@
         },
         {
             "name": "symfony/http-client",
-            "version": "v4.3.7",
+            "version": "v4.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
@@ -8059,16 +8059,16 @@
         },
         {
             "name": "symfony/mime",
-            "version": "v4.3.7",
+            "version": "v4.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mime.git",
-                "reference": "3c0e197529da6e59b217615ba8ee7604df88b551"
+                "reference": "22aecf6b11638ef378fab25d6c5a2da8a31a1448"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mime/zipball/3c0e197529da6e59b217615ba8ee7604df88b551",
-                "reference": "3c0e197529da6e59b217615ba8ee7604df88b551",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/22aecf6b11638ef378fab25d6c5a2da8a31a1448",
+                "reference": "22aecf6b11638ef378fab25d6c5a2da8a31a1448",
                 "shasum": ""
             },
             "require": {
@@ -8114,7 +8114,7 @@
                 "mime",
                 "mime-type"
             ],
-            "time": "2019-10-30T12:58:49+00:00"
+            "time": "2019-11-12T13:10:02+00:00"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -8878,16 +8878,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.4.34",
+            "version": "v3.4.35",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "c461582064eabe9b93b225be589dd6740620ce0f"
+                "reference": "2adc85d49cbe14e346068fa7e9c2e1f08ab31de6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/c461582064eabe9b93b225be589dd6740620ce0f",
-                "reference": "c461582064eabe9b93b225be589dd6740620ce0f",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/2adc85d49cbe14e346068fa7e9c2e1f08ab31de6",
+                "reference": "2adc85d49cbe14e346068fa7e9c2e1f08ab31de6",
                 "shasum": ""
             },
             "require": {
@@ -9029,7 +9029,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2019-11-11T16:11:40+00:00"
+            "time": "2019-11-13T08:45:05+00:00"
         },
         {
             "name": "true/punycode",
@@ -9292,14 +9292,14 @@
             "authors": [
                 {
                     "name": "Nicola Asuni",
-                    "role": "Main developer",
                     "email": "info@tecnick.com",
-                    "homepage": "http://nicolaasuni.tecnick.com"
+                    "homepage": "http://nicolaasuni.tecnick.com",
+                    "role": "Main developer"
                 },
                 {
                     "name": "wallabag/core",
-                    "role": "Developers",
-                    "homepage": "https://www.wallabag.org"
+                    "homepage": "https://www.wallabag.org",
+                    "role": "Developers"
                 }
             ],
             "description": "Keeping a working 6.2.x TCPDF version.",
@@ -9430,7 +9430,7 @@
                     "email": "adrien.brault@gmail.com"
                 },
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -9480,7 +9480,7 @@
             ],
             "authors": [
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -9638,16 +9638,16 @@
         },
         {
             "name": "zendframework/zend-diactoros",
-            "version": "2.1.5",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-diactoros.git",
-                "reference": "6dcf9e760a6b476f3e9d80abbc9ce9c4aa921f9c"
+                "reference": "66eded992a75bfe75a829005a2884aae5ca86daa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/6dcf9e760a6b476f3e9d80abbc9ce9c4aa921f9c",
-                "reference": "6dcf9e760a6b476f3e9d80abbc9ce9c4aa921f9c",
+                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/66eded992a75bfe75a829005a2884aae5ca86daa",
+                "reference": "66eded992a75bfe75a829005a2884aae5ca86daa",
                 "shasum": ""
             },
             "require": {
@@ -9701,7 +9701,7 @@
                 "psr",
                 "psr-7"
             ],
-            "time": "2019-10-10T17:38:20+00:00"
+            "time": "2019-11-12T17:26:16+00:00"
         },
         {
             "name": "zendframework/zend-eventmanager",
@@ -11242,7 +11242,7 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v4.3.7",
+            "version": "v4.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
