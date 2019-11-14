@@ -127,8 +127,7 @@ class ManageController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param int     $page
+     * @param int $page
      *
      * @Route("/list/{page}", name="user_index", defaults={"page" = 1})
      *

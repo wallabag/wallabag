@@ -104,9 +104,6 @@ class Tag
         return $this->slug;
     }
 
-    /**
-     * @param Entry $entry
-     */
     public function addEntry(Entry $entry)
     {
         if ($this->entries->contains($entry)) {
@@ -117,9 +114,6 @@ class Tag
         $entry->addTag($this);
     }
 
-    /**
-     * @param Entry $entry
-     */
     public function removeEntry(Entry $entry)
     {
         if (!$this->entries->contains($entry)) {

@@ -54,9 +54,6 @@ class GenerateUrlHashesCommand extends ContainerAwareCommand
         return 0;
     }
 
-    /**
-     * @param User $user
-     */
     private function generateHashedUrls(User $user)
     {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');

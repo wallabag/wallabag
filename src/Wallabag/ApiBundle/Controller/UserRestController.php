@@ -119,7 +119,6 @@ class UserRestController extends WallabagRestController
     /**
      * Send user response.
      *
-     * @param User   $user
      * @param string $group  Used to define with serialized group might be used
      * @param int    $status HTTP Status code to send
      *

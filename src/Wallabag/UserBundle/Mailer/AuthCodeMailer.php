@@ -57,12 +57,10 @@ class AuthCodeMailer implements AuthCodeMailerInterface
     /**
      * Initialize the auth code mailer with the SwiftMailer object.
      *
-     * @param \Swift_Mailer $mailer
-     * @param Environment   $twig
-     * @param string        $senderEmail
-     * @param string        $senderName
-     * @param string        $supportUrl  wallabag support url
-     * @param string        $wallabagUrl wallabag instance url
+     * @param string $senderEmail
+     * @param string $senderName
+     * @param string $supportUrl  wallabag support url
+     * @param string $wallabagUrl wallabag instance url
      */
     public function __construct(\Swift_Mailer $mailer, Environment $twig, $senderEmail, $senderName, $supportUrl, $wallabagUrl)
     {
@@ -76,8 +74,6 @@ class AuthCodeMailer implements AuthCodeMailerInterface
 
     /**
      * Send the auth code to the user via email.
-     *
-     * @param TwoFactorInterface $user
      */
     public function sendAuthCode(TwoFactorInterface $user): void
     {

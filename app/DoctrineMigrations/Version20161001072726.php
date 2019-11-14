@@ -11,9 +11,6 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  */
 class Version20161001072726 extends WallabagMigration
 {
-    /**
-     * @param Schema $schema
-     */
     public function up(Schema $schema)
     {
         $this->skipIf('sqlite' === $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
@@ -98,9 +95,6 @@ class Version20161001072726 extends WallabagMigration
         $this->addSql('ALTER TABLE ' . $this->getTable('annotation') . ' ADD CONSTRAINT FK_annotation_entry FOREIGN KEY (entry_id) REFERENCES ' . $this->getTable('entry') . ' (id) ON DELETE CASCADE');
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function down(Schema $schema)
     {
         throw new SkipMigrationException('Too complex ...');

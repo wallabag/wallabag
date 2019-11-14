@@ -14,8 +14,7 @@ class ImportChain
     /**
      * Add an import to the chain.
      *
-     * @param ImportInterface $import
-     * @param string          $alias
+     * @param string $alias
      */
     public function addImport(ImportInterface $import, $alias)
     {

@@ -34,11 +34,6 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
 
     /**
      * GrabySiteConfigBuilder constructor.
-     *
-     * @param ConfigBuilder            $grabyConfigBuilder
-     * @param TokenStorage             $token
-     * @param SiteCredentialRepository $credentialRepository
-     * @param LoggerInterface          $logger
      */
     public function __construct(ConfigBuilder $grabyConfigBuilder, TokenStorage $token, SiteCredentialRepository $credentialRepository, LoggerInterface $logger)
     {

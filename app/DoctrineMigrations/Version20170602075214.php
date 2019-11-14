@@ -10,9 +10,6 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  */
 class Version20170602075214 extends WallabagMigration
 {
-    /**
-     * @param Schema $schema
-     */
     public function up(Schema $schema)
     {
         $apiUserRegistration = $this->container
@@ -25,9 +22,6 @@ class Version20170602075214 extends WallabagMigration
         $this->addSql('INSERT INTO ' . $this->getTable('craue_config_setting') . " (name, value, section) VALUES ('api_user_registration', '0', 'api')");
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function down(Schema $schema)
     {
         $this->addSql('DELETE FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'api_user_registration';");

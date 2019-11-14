@@ -29,8 +29,6 @@ class DeveloperController extends Controller
     /**
      * Create a client (an app).
      *
-     * @param Request $request
-     *
      * @Route("/developer/client/create", name="developer_create_client")
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -66,8 +64,6 @@ class DeveloperController extends Controller
 
     /**
      * Remove a client.
-     *
-     * @param Client $client
      *
      * @Route("/developer/client/delete/{id}", requirements={"id" = "\d+"}, name="developer_delete_client")
      *

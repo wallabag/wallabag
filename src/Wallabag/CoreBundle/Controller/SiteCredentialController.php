@@ -36,8 +36,6 @@ class SiteCredentialController extends Controller
      *
      * @Route("/new", name="site_credentials_new", methods={"GET", "POST"})
      *
-     * @param Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function newAction(Request $request)
@@ -75,9 +73,6 @@ class SiteCredentialController extends Controller
      * Displays a form to edit an existing site credential entity.
      *
      * @Route("/{id}/edit", name="site_credentials_edit", methods={"GET", "POST"})
-     *
-     * @param Request        $request
-     * @param SiteCredential $siteCredential
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -118,9 +113,6 @@ class SiteCredentialController extends Controller
      * Deletes a site credential entity.
      *
      * @Route("/{id}", name="site_credentials_delete", methods={"DELETE"})
-     *
-     * @param Request        $request
-     * @param SiteCredential $siteCredential
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

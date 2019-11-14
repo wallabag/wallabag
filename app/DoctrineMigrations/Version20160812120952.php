@@ -10,9 +10,6 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  */
 class Version20160812120952 extends WallabagMigration
 {
-    /**
-     * @param Schema $schema
-     */
     public function up(Schema $schema)
     {
         $clientsTable = $schema->getTable($this->getTable('oauth2_clients'));
@@ -34,9 +31,6 @@ class Version20160812120952 extends WallabagMigration
         }
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function down(Schema $schema)
     {
         $clientsTable = $schema->getTable($this->getTable('oauth2_clients'));

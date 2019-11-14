@@ -188,8 +188,6 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     }
 
     /**
-     * @param Entry $entry
-     *
      * @return User
      */
     public function addEntry(Entry $entry)
@@ -355,8 +353,6 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     }
 
     /**
-     * @param Client $client
-     *
      * @return User
      */
     public function addClient(Client $client)

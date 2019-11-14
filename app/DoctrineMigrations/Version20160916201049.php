@@ -10,9 +10,6 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  */
 class Version20160916201049 extends WallabagMigration
 {
-    /**
-     * @param Schema $schema
-     */
     public function up(Schema $schema)
     {
         $configTable = $schema->getTable($this->getTable('config'));
@@ -23,9 +20,6 @@ class Version20160916201049 extends WallabagMigration
         $this->addSql('DELETE FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'pocket_consumer_key';");
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function down(Schema $schema)
     {
         $configTable = $schema->getTable($this->getTable('config'));

@@ -12,9 +12,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class CustomDoctrineORMSubscriber extends DoctrineORMSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @param GetFilterConditionEvent $event
-     */
     public function filterDateRange(GetFilterConditionEvent $event)
     {
         $expr = $event->getFilterQuery()->getExpressionBuilder();

@@ -56,8 +56,6 @@ class RuleBasedTagger
     /**
      * Apply all the tagging rules defined by a user on its entries.
      *
-     * @param User $user
-     *
      * @return array<Entry> A list of modified entries
      */
     public function tagAllForUser(User $user)
@@ -108,8 +106,6 @@ class RuleBasedTagger
 
     /**
      * Retrieves the tagging rules for a given user.
-     *
-     * @param User $user
      *
      * @return array<TaggingRule>
      */

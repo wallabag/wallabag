@@ -10,9 +10,6 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  */
 class Version20170407200919 extends WallabagMigration
 {
-    /**
-     * @param Schema $schema
-     */
     public function up(Schema $schema)
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
@@ -21,9 +18,6 @@ class Version20170407200919 extends WallabagMigration
         $entryTable->dropColumn('is_public');
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function down(Schema $schema)
     {
         $entryTable = $schema->getTable($this->getTable('entry'));

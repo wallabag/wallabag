@@ -86,7 +86,6 @@ class ContentProxy
     /**
      * Use a Symfony validator to ensure the language is well formatted.
      *
-     * @param Entry  $entry
      * @param string $value Language to validate and save
      */
     public function updateLanguage(Entry $entry, $value)
@@ -112,7 +111,6 @@ class ContentProxy
     /**
      * Use a Symfony validator to ensure the preview picture is a real url.
      *
-     * @param Entry  $entry
      * @param string $value URL to validate and save
      */
     public function updatePreviewPicture(Entry $entry, $value)
@@ -134,7 +132,6 @@ class ContentProxy
     /**
      * Update date.
      *
-     * @param Entry  $entry
      * @param string $value Date to validate and save
      */
     public function updatePublishedAt(Entry $entry, $value)
@@ -161,8 +158,6 @@ class ContentProxy
 
     /**
      * Helper to extract and save host from entry url.
-     *
-     * @param Entry $entry
      */
     public function setEntryDomainName(Entry $entry)
     {
@@ -176,8 +171,6 @@ class ContentProxy
      * Helper to set a default title using:
      * - url basename, if applicable
      * - hostname.
-     *
-     * @param Entry $entry
      */
     public function setDefaultEntryTitle(Entry $entry)
     {
@@ -333,7 +326,6 @@ class ContentProxy
      * Update the origin_url field when a redirection occurs
      * This field is set if it is empty and new url does not match ignore list.
      *
-     * @param Entry  $entry
      * @param string $url
      */
     private function updateOriginUrl(Entry $entry, $url)
@@ -440,8 +432,6 @@ class ContentProxy
 
     /**
      * Validate that the given content has at least a title, an html and a url.
-     *
-     * @param array $content
      *
      * @return bool true if valid otherwise false
      */

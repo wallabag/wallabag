@@ -13,9 +13,6 @@ class Version20170127093841 extends WallabagMigration
     private $indexStarredName = 'IDX_entry_starred';
     private $indexArchivedName = 'IDX_entry_archived';
 
-    /**
-     * @param Schema $schema
-     */
     public function up(Schema $schema)
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
@@ -25,9 +22,6 @@ class Version20170127093841 extends WallabagMigration
         $entryTable->addIndex(['is_archived'], $this->indexArchivedName);
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function down(Schema $schema)
     {
         $entryTable = $schema->getTable($this->getTable('entry'));

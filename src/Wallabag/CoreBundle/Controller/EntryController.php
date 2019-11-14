@@ -21,8 +21,7 @@ use Wallabag\CoreBundle\Form\Type\SearchEntryType;
 class EntryController extends Controller
 {
     /**
-     * @param Request $request
-     * @param int     $page
+     * @param int $page
      *
      * @Route("/search/{page}", name="search", defaults={"page" = 1})
      *
@@ -53,8 +52,6 @@ class EntryController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
      * @Route("/new-entry", name="new_entry")
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -97,8 +94,6 @@ class EntryController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
      * @Route("/bookmarklet", name="bookmarklet")
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -135,9 +130,6 @@ class EntryController extends Controller
     /**
      * Edit an entry content.
      *
-     * @param Request $request
-     * @param Entry   $entry
-     *
      * @Route("/edit/{id}", requirements={"id" = "\d+"}, name="edit")
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -171,8 +163,7 @@ class EntryController extends Controller
     /**
      * Shows all entries for current user.
      *
-     * @param Request $request
-     * @param int     $page
+     * @param int $page
      *
      * @Route("/all/list/{page}", name="all", defaults={"page" = "1"})
      *
@@ -186,8 +177,7 @@ class EntryController extends Controller
     /**
      * Shows unread entries for current user.
      *
-     * @param Request $request
-     * @param int     $page
+     * @param int $page
      *
      * @Route("/unread/list/{page}", name="unread", defaults={"page" = "1"})
      *
@@ -206,8 +196,7 @@ class EntryController extends Controller
     /**
      * Shows read entries for current user.
      *
-     * @param Request $request
-     * @param int     $page
+     * @param int $page
      *
      * @Route("/archive/list/{page}", name="archive", defaults={"page" = "1"})
      *
@@ -221,8 +210,7 @@ class EntryController extends Controller
     /**
      * Shows starred entries for current user.
      *
-     * @param Request $request
-     * @param int     $page
+     * @param int $page
      *
      * @Route("/starred/list/{page}", name="starred", defaults={"page" = "1"})
      *
@@ -236,8 +224,7 @@ class EntryController extends Controller
     /**
      * Shows untagged articles for current user.
      *
-     * @param Request $request
-     * @param int     $page
+     * @param int $page
      *
      * @Route("/untagged/list/{page}", name="untagged", defaults={"page" = "1"})
      *
@@ -276,8 +263,6 @@ class EntryController extends Controller
     /**
      * Shows entry content.
      *
-     * @param Entry $entry
-     *
      * @Route("/view/{id}", requirements={"id" = "\d+"}, name="view")
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -295,8 +280,6 @@ class EntryController extends Controller
     /**
      * Reload an entry.
      * Refetch content from the website and make it readable again.
-     *
-     * @param Entry $entry
      *
      * @Route("/reload/{id}", requirements={"id" = "\d+"}, name="reload_entry")
      *
@@ -330,9 +313,6 @@ class EntryController extends Controller
     /**
      * Changes read status for an entry.
      *
-     * @param Request $request
-     * @param Entry   $entry
-     *
      * @Route("/archive/{id}", requirements={"id" = "\d+"}, name="archive_entry")
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
@@ -361,9 +341,6 @@ class EntryController extends Controller
 
     /**
      * Changes starred status for an entry.
-     *
-     * @param Request $request
-     * @param Entry   $entry
      *
      * @Route("/star/{id}", requirements={"id" = "\d+"}, name="star_entry")
      *
@@ -394,8 +371,6 @@ class EntryController extends Controller
 
     /**
      * Deletes entry and redirect to the homepage or the last viewed page.
-     *
-     * @param Entry $entry
      *
      * @Route("/delete/{id}", requirements={"id" = "\d+"}, name="delete_entry")
      *
@@ -437,8 +412,6 @@ class EntryController extends Controller
     /**
      * Get public URL for entry (and generate it if necessary).
      *
-     * @param Entry $entry
-     *
      * @Route("/share/{id}", requirements={"id" = "\d+"}, name="share")
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -463,8 +436,6 @@ class EntryController extends Controller
     /**
      * Disable public sharing for an entry.
      *
-     * @param Entry $entry
-     *
      * @Route("/share/delete/{id}", requirements={"id" = "\d+"}, name="delete_share")
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -487,8 +458,6 @@ class EntryController extends Controller
     /**
      * Ability to view a content publicly.
      *
-     * @param Entry $entry
-     *
      * @Route("/share/{uid}", requirements={"uid" = ".+"}, name="share_entry")
      * @Cache(maxage="25200", smaxage="25200", public=true)
      *
@@ -510,9 +479,8 @@ class EntryController extends Controller
      * Global method to retrieve entries depending on the given type
      * It returns the response to be send.
      *
-     * @param string  $type    Entries type: unread, starred or archive
-     * @param Request $request
-     * @param int     $page
+     * @param string $type Entries type: unread, starred or archive
+     * @param int    $page
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -582,7 +550,6 @@ class EntryController extends Controller
      * Fetch content and update entry.
      * In case it fails, $entry->getContent will return an error message.
      *
-     * @param Entry  $entry
      * @param string $prefixMessage Should be the translation key: entry_saved or entry_reloaded
      */
     private function updateEntry(Entry $entry, $prefixMessage = 'entry_saved')
@@ -613,8 +580,6 @@ class EntryController extends Controller
 
     /**
      * Check if the logged user can manage the given entry.
-     *
-     * @param Entry $entry
      */
     private function checkUserAction(Entry $entry)
     {
@@ -625,8 +590,6 @@ class EntryController extends Controller
 
     /**
      * Check for existing entry, if it exists, redirect to it with a message.
-     *
-     * @param Entry $entry
      *
      * @return Entry|bool
      */

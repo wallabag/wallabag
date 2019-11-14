@@ -17,7 +17,6 @@ class ExportController extends Controller
     /**
      * Gets one entry content.
      *
-     * @param Entry  $entry
      * @param string $format
      *
      * @Route("/export/{id}.{format}", name="export_entry", requirements={

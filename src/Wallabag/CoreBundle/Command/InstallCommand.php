@@ -326,9 +326,7 @@ class InstallCommand extends ContainerAwareCommand
         if (0 !== $exitCode) {
             $this->getApplication()->setAutoExit(true);
 
-            throw new \RuntimeException(
-                'The command "' . $command . "\" generates some errors: \n\n"
-                . $output->fetch());
+            throw new \RuntimeException('The command "' . $command . "\" generates some errors: \n\n" . $output->fetch());
         }
 
         return $this;

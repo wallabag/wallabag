@@ -27,9 +27,7 @@ class HttpClientFactory implements ClientFactory
     /**
      * HttpClientFactory constructor.
      *
-     * @param \GuzzleHttp\Cookie\CookieJar $cookieJar
-     * @param string                       $restrictedAccess This param is a kind of boolean. Values: 0 or 1
-     * @param LoggerInterface              $logger
+     * @param string $restrictedAccess This param is a kind of boolean. Values: 0 or 1
      */
     public function __construct(CookieJar $cookieJar, $restrictedAccess, LoggerInterface $logger)
     {
@@ -40,8 +38,6 @@ class HttpClientFactory implements ClientFactory
 
     /**
      * Adds a subscriber to the HTTP client.
-     *
-     * @param SubscriberInterface $subscriber
      */
     public function addSubscriber(SubscriberInterface $subscriber)
     {
@@ -50,8 +46,6 @@ class HttpClientFactory implements ClientFactory
 
     /**
      * Input an array of configuration to be able to create a HttpClient.
-     *
-     * @param array $config
      *
      * @return HttpClient
      */

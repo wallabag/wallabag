@@ -10,9 +10,6 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  */
 class Version20171105202000 extends WallabagMigration
 {
-    /**
-     * @param Schema $schema
-     */
     public function up(Schema $schema)
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
@@ -24,9 +21,6 @@ class Version20171105202000 extends WallabagMigration
         ]);
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function down(Schema $schema)
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
