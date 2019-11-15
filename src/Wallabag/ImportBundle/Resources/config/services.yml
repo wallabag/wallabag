@@ -48,6 +48,18 @@ services:
         tags:
             -  { name: wallabag_import.import, alias: wallabag_v2 }
 
+    wallabag_import.elcurator.import:
+        class: Wallabag\ImportBundle\Import\ElcuratorImport
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_core.content_proxy"
+            - "@wallabag_core.tags_assigner"
+            - "@event_dispatcher"
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: wallabag_import.import, alias: elcurator }
+
     wallabag_import.readability.import:
         class: Wallabag\ImportBundle\Import\ReadabilityImport
         arguments:

@@ -465,6 +465,9 @@ import:
     wallabag_v2:
         page_title: 'Импорт > Wallabag v2'
         description: 'Функция импорта добавит все ваши записи wallabag v2. Перейдите ко всем статьям, затем на боковой панели экспорта нажмите "JSON". У вас появится файл со всеми записями "All articles.json".'
+    # elcurator:
+    #     page_title: 'Import > elCurator'
+    #     description: 'This importer will import all your elCurator articles. Go to your preferences in your elCurator account and then, export your content. You will have a JSON file.'
     readability:
         page_title: 'Импорт > Readability'
         description: 'Функция импорта добавит все ваши записи для чтения. На странице инструментов (https://www.readability.com/tools/) нажмите "Экспорт ваших данных" в разделе "Экспорт данных". Вы получите электронное письмо для загрузки json (что не заканчивается только .json файлом).'

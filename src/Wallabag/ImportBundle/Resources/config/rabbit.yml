@@ -48,6 +48,14 @@ services:
             - "@wallabag_import.wallabag_v2.import"
             - "@event_dispatcher"
             - "@logger"
+    wallabag_import.consumer.amqp.elcurator:
+        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_user.user_repository"
+            - "@wallabag_import.elcurator.import"
+            - "@event_dispatcher"
+            - "@logger"
     wallabag_import.consumer.amqp.firefox:
         class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
         arguments:

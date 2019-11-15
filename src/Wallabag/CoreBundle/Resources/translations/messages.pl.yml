@@ -465,6 +465,9 @@ import:
     wallabag_v2:
         page_title: 'Import > Wallabag v2'
         description: 'Ten importer, zaimportuje wszystkie twoje artykułu z wallabag v2. Idź do wszystkich artykułów, a następnie na panelu exportu kliknij na "JSON". Otrzymasz plik "All articles.json".'
+    # elcurator:
+    #     page_title: 'Import > elCurator'
+    #     description: 'This importer will import all your elCurator articles. Go to your preferences in your elCurator account and then, export your content. You will have a JSON file.'
     readability:
         page_title: 'Import > Readability'
         description: 'Ten importer, zaimportuje wszystkie twoje artykuły z Readability. Na stronie narzędzi (https://www.readability.com/tools/), kliknij na "Export your data" w sekcji "Data Export". Otrzymach email z plikiem JSON (plik nie będzie zawierał rozszerzenia .json).'
