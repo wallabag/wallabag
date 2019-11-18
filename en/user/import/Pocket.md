@@ -17,7 +17,7 @@ Pocket will give you a **Consumer Key** (for example,
 
 Now, all is fine to migrate from Pocket.
 
-## Import your data into wallabag 2.x
+## Import your data into wallabag
 
 Click on `Import` link in the menu, on `Import contents` in Pocket
 section and then on `Connect to Pocket and import data`.
