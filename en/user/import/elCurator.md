@@ -3,7 +3,7 @@
 ## Export your elCurator data
 
 On the settings
-([https://www.elcurator.net/settings>](https://www.elcurator.net/settings))
+([https://www.elcurator.net/settings](https://www.elcurator.net/settings))
 page, click on "Préparer mon export" button. A JSON file will be
 send to your email address.
 
