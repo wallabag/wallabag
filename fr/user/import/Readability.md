@@ -7,7 +7,7 @@ Sur la page des outils
 cliquez sur "Export your data" dans la section "Data Export". Vous allez
 recevoir un email avec un lien pour télécharger le json.
 
-## Importez vos données dans wallabag 2.x
+## Importez vos données dans wallabag
 
 Cliquez sur le lien `Importer` dans le menu, sur `Importer les contenus`
 dans la section Readability et ensuite sélectionnez votre fichier json

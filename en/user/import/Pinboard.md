@@ -7,7 +7,7 @@ On the backup
 page, click on "JSON" in the "Bookmarks" section. A JSON file will be
 downloaded (like `pinboard_export`).
 
-## Import your data into wallabag 2.x
+## Import your data into wallabag
 
 Click on `Import` link in the menu, on `Import contents` in Pinboard
 section and then select your json file and upload it.

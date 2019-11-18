@@ -7,7 +7,7 @@ Sur la page des paramètres
 cliquez sur "Download .CSV file" dans la section "Export". Un fichier
 CSV se téléchargera (`instapaper-export.csv`).
 
-## Importez vos données dans wallabag 2.x
+## Importez vos données dans wallabag
 
 Cliquez sur le lien `Importer` dans le menu, sur `Importer les contenus`
 dans la section Instapaper et ensuite sélectionnez votre fichier CSV
