@@ -2,13 +2,8 @@
 
 ## Exportez vos données de elCurator
 
-On the settings
-([https://www.elcurator.net/settings>](https://www.elcurator.net/settings))
-page, click on "Préparer mon export" button. A JSON file will be
-send to your email address.
-
 Sur la page « paramètres »
-([https://www.elcurator.net/settings>](https://www.elcurator.net/settings)),
+([https://www.elcurator.net/settings](https://www.elcurator.net/settings)),
 cliquez sur le bouton « Préparer mon export ». Un fichier json vous sera
 envoyé par email.
 
