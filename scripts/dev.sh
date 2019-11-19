@@ -13,5 +13,8 @@ fi
 . "$REQUIRE_FILE"
 
 $COMPOSER_COMMAND install
-php bin/console wallabag:install
-php bin/console server:run
+if [ -z "$SKIP_WALLABAG_INITIALIZATION" ]
+then
+    php bin/console wallabag:install
+fi
+php bin/console server:run $HOST
