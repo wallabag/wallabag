@@ -6,6 +6,7 @@ Dans wallabag 2.x, vous pouvez importer des données depuis :
 -   [Instapaper](Instapaper.md)
 -   [Readability](Readability.md)
 -   [Pinboard](Pinboard.md)
+-   [elCurator](elCurator.md)
 -   [wallabag 1.x](wallabagv1.md)
 -   [wallabag 2.x](wallabagv2.md)
 
