@@ -6,7 +6,7 @@ In wallabag 2.x, you can import data from:
 -   [Instapaper](Instapaper.md)
 -   [Readability](Readability.md)
 -   [Pinboard](Pinboard.md)
--   [elCurator](elCurator.md)
+-   [elCurator](Elcurator.md)
 -   [wallabag 1.x](wallabagv1.md)
 -   [wallabag 2.x](wallabagv2.md)
 
