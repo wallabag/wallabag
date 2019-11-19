@@ -115,7 +115,7 @@ class ElcuratorControllerTest extends WallabagCoreTestCase
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId(
-                'https://devblog.lexik.fr/qualite-de-code-integration-de-php-git-hooks-dans-symfony2/',
+                'https://devblog.lexik.fr/git/qualite-de-code-integration-de-php-git-hooks-dans-symfony2-2842',
                 $this->getLoggedInUserId()
             );
 
