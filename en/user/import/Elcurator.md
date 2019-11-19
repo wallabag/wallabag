@@ -4,8 +4,7 @@
 
 On the settings
 ([https://www.elcurator.net/settings](https://www.elcurator.net/settings))
-page, click on "Préparer mon export" button. A JSON file will be
-send to your email address.
+page, click on "Prepare my export": you will receive an email once available with a JSON file inside.
 
 ## Import your data into wallabag
 
