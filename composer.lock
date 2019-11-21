@@ -7201,16 +7201,16 @@
         },
         {
             "name": "scheb/two-factor-bundle",
-            "version": "v4.8.0",
+            "version": "v4.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scheb/two-factor-bundle.git",
-                "reference": "2864c770fedb723ac05aa56ff2761e4a8e1537ca"
+                "reference": "310e2991e2d10f8a1d9e07e05fbaaacadf9bb7ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/2864c770fedb723ac05aa56ff2761e4a8e1537ca",
-                "reference": "2864c770fedb723ac05aa56ff2761e4a8e1537ca",
+                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/310e2991e2d10f8a1d9e07e05fbaaacadf9bb7ec",
+                "reference": "310e2991e2d10f8a1d9e07e05fbaaacadf9bb7ec",
                 "shasum": ""
             },
             "require": {
@@ -7218,15 +7218,15 @@
                 "paragonie/constant_time_encoding": "^2.2",
                 "php": "^7.1.3",
                 "spomky-labs/otphp": "^9.1",
-                "symfony/config": "^3.4|^4.0",
-                "symfony/dependency-injection": "^3.4|^4.0",
-                "symfony/event-dispatcher": "^3.4|^4.0",
-                "symfony/framework-bundle": "^3.4|^4.0",
-                "symfony/http-foundation": "^3.4|^4.0",
-                "symfony/http-kernel": "^3.4|^4.0",
-                "symfony/property-access": "^3.4|^4.0",
-                "symfony/security-bundle": "^3.4|^4.0",
-                "symfony/twig-bundle": "^3.4|^4.0"
+                "symfony/config": "^3.4|^4.0|^5.0",
+                "symfony/dependency-injection": "^3.4|^4.0|^5.0",
+                "symfony/event-dispatcher": "^3.4|^4.0|^5.0",
+                "symfony/framework-bundle": "^3.4|^4.0|^5.0",
+                "symfony/http-foundation": "^3.4|^4.0|^5.0",
+                "symfony/http-kernel": "^3.4|^4.0|^5.0",
+                "symfony/property-access": "^3.4|^4.0|^5.0",
+                "symfony/security-bundle": "^3.4|^4.0|^5.0",
+                "symfony/twig-bundle": "^3.4|^4.0|^5.0"
             },
             "require-dev": {
                 "doctrine/lexer": "^1.0.1",
@@ -7235,7 +7235,7 @@
                 "phpunit/phpunit": "^7.0|^8.0",
                 "squizlabs/php_codesniffer": "^3.5",
                 "swiftmailer/swiftmailer": "^6.0",
-                "symfony/yaml": "^3.4|^4.0"
+                "symfony/yaml": "^3.4|^4.0|^5.0"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -7265,7 +7265,7 @@
                 "two-factor",
                 "two-step"
             ],
-            "time": "2019-11-07T19:29:43+00:00"
+            "time": "2019-11-20T18:56:50+00:00"
         },
         {
             "name": "sensio/distribution-bundle",
