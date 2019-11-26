@@ -97,7 +97,7 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "~3.0",
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "~4.3.8",
+        "symfony/phpunit-bridge": "~4.4.0",
         "friendsofphp/php-cs-fixer": "~2.13",
         "m6web/redis-mock": "^4.1",
         "dama/doctrine-test-bundle": "^5.0",
