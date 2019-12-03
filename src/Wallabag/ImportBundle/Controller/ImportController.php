@@ -43,6 +43,7 @@ class ImportController extends Controller
                     + $this->getTotalMessageInRabbitQueue('chrome')
                     + $this->getTotalMessageInRabbitQueue('instapaper')
                     + $this->getTotalMessageInRabbitQueue('pinboard')
+                    + $this->getTotalMessageInRabbitQueue('elcurator')
                 ;
             } catch (\Exception $e) {
                 $rabbitNotInstalled = true;
@@ -59,6 +60,7 @@ class ImportController extends Controller
                     + $redis->llen('wallabag.import.chrome')
                     + $redis->llen('wallabag.import.instapaper')
                     + $redis->llen('wallabag.import.pinboard')
+                    + $redis->llen('wallabag.import.elcurator')
                 ;
             } catch (\Exception $e) {
                 $redisNotInstalled = true;
