@@ -9414,16 +9414,16 @@
         },
         {
             "name": "white-october/pagerfanta-bundle",
-            "version": "v1.3.1",
+            "version": "v1.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/whiteoctober/WhiteOctoberPagerfantaBundle.git",
-                "reference": "5421d5e79b72495b34b745d37e4d341e6fa2190d"
+                "reference": "6df560869b5e09a3acf920890ab40598998b30ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/whiteoctober/WhiteOctoberPagerfantaBundle/zipball/5421d5e79b72495b34b745d37e4d341e6fa2190d",
-                "reference": "5421d5e79b72495b34b745d37e4d341e6fa2190d",
+                "url": "https://api.github.com/repos/whiteoctober/WhiteOctoberPagerfantaBundle/zipball/6df560869b5e09a3acf920890ab40598998b30ae",
+                "reference": "6df560869b5e09a3acf920890ab40598998b30ae",
                 "shasum": ""
             },
             "require": {
@@ -9471,7 +9471,7 @@
                 "page",
                 "paging"
             ],
-            "time": "2019-11-21T17:13:04+00:00"
+            "time": "2019-12-02T14:19:37+00:00"
         },
         {
             "name": "willdurand/hateoas",
