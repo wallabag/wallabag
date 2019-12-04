@@ -216,36 +216,43 @@
         },
         {
             "name": "craue/config-bundle",
-            "version": "2.3.0",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/craue/CraueConfigBundle.git",
-                "reference": "7cf7447c7ee47853b3c60e5fc08a1c8f7112bd72"
+                "reference": "ad474f63d6b51da0d346a7873b3a54f98fa96e32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craue/CraueConfigBundle/zipball/7cf7447c7ee47853b3c60e5fc08a1c8f7112bd72",
-                "reference": "7cf7447c7ee47853b3c60e5fc08a1c8f7112bd72",
+                "url": "https://api.github.com/repos/craue/CraueConfigBundle/zipball/ad474f63d6b51da0d346a7873b3a54f98fa96e32",
+                "reference": "ad474f63d6b51da0d346a7873b3a54f98fa96e32",
                 "shasum": ""
             },
             "require": {
-                "doctrine/doctrine-bundle": "^1.5.1",
+                "doctrine/doctrine-bundle": "^1.5.1|~2.0",
                 "php": "~7.0",
                 "psr/simple-cache": "^1.0",
-                "symfony/framework-bundle": "~3.4|~4.1"
+                "symfony/cache": "~3.4|~4.2|~5.0",
+                "symfony/config": "~3.4|~4.2|~5.0",
+                "symfony/dependency-injection": "~3.4|~4.2|~5.0",
+                "symfony/form": "~3.4|~4.2|~5.0",
+                "symfony/framework-bundle": "~3.4|~4.2|~5.0",
+                "symfony/http-foundation": "~3.4|~4.2|~5.0",
+                "symfony/http-kernel": "~3.4|~4.2|~5.0",
+                "symfony/options-resolver": "~3.4|~4.2|~5.0",
+                "symfony/validator": "~3.4|~4.2|~5.0"
             },
             "require-dev": {
-                "doctrine/doctrine-cache-bundle": "^1.3.5",
                 "doctrine/instantiator": "^1.0.5",
                 "doctrine/orm": "^2.5.14",
                 "phpunit/phpunit": "^6.5.13|^7.5.1",
-                "symfony/phpunit-bridge": "~3.4|~4.1",
-                "symfony/symfony": "~3.4|~4.1"
+                "symfony/phpunit-bridge": "~5.0",
+                "symfony/symfony": "~3.4|~4.2|~5.0"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3.x-dev"
+                    "dev-master": "2.4.x-dev"
                 }
             },
             "autoload": {
@@ -274,10 +281,9 @@
             "homepage": "https://github.com/craue/CraueConfigBundle",
             "keywords": [
                 "config",
-                "symfony3",
-                "symfony4"
+                "symfony"
             ],
-            "time": "2019-08-01T15:52:03+00:00"
+            "time": "2019-12-03T08:32:04+00:00"
         },
         {
             "name": "defuse/php-encryption",
