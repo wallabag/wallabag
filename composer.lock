@@ -58,16 +58,16 @@
         },
         {
             "name": "beberlei/assert",
-            "version": "v3.2.6",
+            "version": "v3.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/assert.git",
-                "reference": "99508be011753690fe108ded450f5caaae180cfa"
+                "reference": "d63a6943fc4fd1a2aedb65994e3548715105abcf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/assert/zipball/99508be011753690fe108ded450f5caaae180cfa",
-                "reference": "99508be011753690fe108ded450f5caaae180cfa",
+                "url": "https://api.github.com/repos/beberlei/assert/zipball/d63a6943fc4fd1a2aedb65994e3548715105abcf",
+                "reference": "d63a6943fc4fd1a2aedb65994e3548715105abcf",
                 "shasum": ""
             },
             "require": {
@@ -116,7 +116,7 @@
                 "assertion",
                 "validation"
             ],
-            "time": "2019-10-10T10:33:57+00:00"
+            "time": "2019-12-19T17:51:41+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -7317,16 +7317,16 @@
         },
         {
             "name": "scheb/two-factor-bundle",
-            "version": "v4.11.0",
+            "version": "v4.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scheb/two-factor-bundle.git",
-                "reference": "eadac02014233ab45dac215d42fd06aaf629b09a"
+                "reference": "f9198cfcd5b2a92691926fd10406e8817232ac16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/eadac02014233ab45dac215d42fd06aaf629b09a",
-                "reference": "eadac02014233ab45dac215d42fd06aaf629b09a",
+                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/f9198cfcd5b2a92691926fd10406e8817232ac16",
+                "reference": "f9198cfcd5b2a92691926fd10406e8817232ac16",
                 "shasum": ""
             },
             "require": {
@@ -7381,7 +7381,7 @@
                 "two-factor",
                 "two-step"
             ],
-            "time": "2019-12-08T16:03:05+00:00"
+            "time": "2019-12-19T12:07:42+00:00"
         },
         {
             "name": "sensio/distribution-bundle",
