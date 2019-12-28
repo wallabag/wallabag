@@ -1552,16 +1552,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "2.1.11",
+            "version": "2.1.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "92dd169c32f6f55ba570c309d83f5209cefb5e23"
+                "reference": "a6255605af39f2db7f5cb62e672bd8a7bad8d208"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/92dd169c32f6f55ba570c309d83f5209cefb5e23",
-                "reference": "92dd169c32f6f55ba570c309d83f5209cefb5e23",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/a6255605af39f2db7f5cb62e672bd8a7bad8d208",
+                "reference": "a6255605af39f2db7f5cb62e672bd8a7bad8d208",
                 "shasum": ""
             },
             "require": {
@@ -1606,7 +1606,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2019-08-13T17:33:27+00:00"
+            "time": "2019-12-20T12:49:39+00:00"
         },
         {
             "name": "electrolinux/php-html5lib",
@@ -1662,21 +1662,24 @@
         },
         {
             "name": "fig/link-util",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/link-util.git",
-                "reference": "1a07821801a148be4add11ab0603e4af55a72fac"
+                "reference": "47f55860678a9e202206047bc02767556d298106"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/link-util/zipball/1a07821801a148be4add11ab0603e4af55a72fac",
-                "reference": "1a07821801a148be4add11ab0603e4af55a72fac",
+                "url": "https://api.github.com/repos/php-fig/link-util/zipball/47f55860678a9e202206047bc02767556d298106",
+                "reference": "47f55860678a9e202206047bc02767556d298106",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.5.0",
                 "psr/link": "~1.0@dev"
+            },
+            "provide": {
+                "psr/link-implementation": "1.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^5.1",
@@ -1712,7 +1715,7 @@
                 "psr-13",
                 "rest"
             ],
-            "time": "2016-10-17T18:31:11+00:00"
+            "time": "2019-12-18T15:40:05+00:00"
         },
         {
             "name": "fossar/htmlawed",
@@ -3807,16 +3810,16 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.97",
+            "version": "1.0.98",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "a6e0b976c191c58a523e66835881e2bc9979b2a8"
+                "reference": "8bf1ec3c9d0cc4e055f95d6b6f5d187ad6267724"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/a6e0b976c191c58a523e66835881e2bc9979b2a8",
-                "reference": "a6e0b976c191c58a523e66835881e2bc9979b2a8",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/8bf1ec3c9d0cc4e055f95d6b6f5d187ad6267724",
+                "reference": "8bf1ec3c9d0cc4e055f95d6b6f5d187ad6267724",
                 "shasum": ""
             },
             "require": {
@@ -3843,7 +3846,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2019-12-16T15:56:50+00:00"
+            "time": "2019-12-27T15:55:20+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -4959,16 +4962,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.25.2",
+            "version": "1.25.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "d5e2fb341cb44f7e2ab639d12a1e5901091ec287"
+                "reference": "fa82921994db851a8becaf3787a9e73c5976b6f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/d5e2fb341cb44f7e2ab639d12a1e5901091ec287",
-                "reference": "d5e2fb341cb44f7e2ab639d12a1e5901091ec287",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/fa82921994db851a8becaf3787a9e73c5976b6f1",
+                "reference": "fa82921994db851a8becaf3787a9e73c5976b6f1",
                 "shasum": ""
             },
             "require": {
@@ -5033,7 +5036,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2019-11-13T10:00:05+00:00"
+            "time": "2019-12-20T14:15:16+00:00"
         },
         {
             "name": "nelmio/api-doc-bundle",
@@ -5690,16 +5693,16 @@
         },
         {
             "name": "php-http/curl-client",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/curl-client.git",
-                "reference": "e7a2a5ebcce1ff7d75eaf02b7c85634a6fac00da"
+                "reference": "9e79355af46d72e10da50be20b66f74b26143441"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/curl-client/zipball/e7a2a5ebcce1ff7d75eaf02b7c85634a6fac00da",
-                "reference": "e7a2a5ebcce1ff7d75eaf02b7c85634a6fac00da",
+                "url": "https://api.github.com/repos/php-http/curl-client/zipball/9e79355af46d72e10da50be20b66f74b26143441",
+                "reference": "9e79355af46d72e10da50be20b66f74b26143441",
                 "shasum": ""
             },
             "require": {
@@ -5710,11 +5713,12 @@
                 "php-http/message": "^1.2",
                 "psr/http-client": "^1.0",
                 "psr/http-factory": "^1.0",
-                "symfony/options-resolver": "^3.4 || ^4.0"
+                "symfony/options-resolver": "^3.4 || ^4.0 || ^5.0"
             },
             "provide": {
                 "php-http/async-client-implementation": "1.0",
-                "php-http/client-implementation": "1.0"
+                "php-http/client-implementation": "1.0",
+                "psr/http-client-implementation": "1.0"
             },
             "require-dev": {
                 "guzzlehttp/psr7": "^1.0",
@@ -5750,20 +5754,20 @@
                 "http",
                 "psr-18"
             ],
-            "time": "2019-03-05T19:59:23+00:00"
+            "time": "2019-12-27T11:02:07+00:00"
         },
         {
             "name": "php-http/discovery",
-            "version": "1.7.0",
+            "version": "1.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/discovery.git",
-                "reference": "e822f86a6983790aa17ab13aa7e69631e86806b6"
+                "reference": "16a3327861ae291006a2df8fc22e991806f720d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/discovery/zipball/e822f86a6983790aa17ab13aa7e69631e86806b6",
-                "reference": "e822f86a6983790aa17ab13aa7e69631e86806b6",
+                "url": "https://api.github.com/repos/php-http/discovery/zipball/16a3327861ae291006a2df8fc22e991806f720d7",
+                "reference": "16a3327861ae291006a2df8fc22e991806f720d7",
                 "shasum": ""
             },
             "require": {
@@ -5815,7 +5819,7 @@
                 "message",
                 "psr7"
             ],
-            "time": "2019-06-30T09:04:27+00:00"
+            "time": "2019-12-27T09:22:53+00:00"
         },
         {
             "name": "php-http/guzzle5-adapter",
@@ -5882,16 +5886,16 @@
         },
         {
             "name": "php-http/httplug",
-            "version": "v2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/httplug.git",
-                "reference": "b3842537338c949f2469557ef4ad4bdc47b58603"
+                "reference": "72d2b129a48f0490d55b7f89be0d6aa0597ffb06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/httplug/zipball/b3842537338c949f2469557ef4ad4bdc47b58603",
-                "reference": "b3842537338c949f2469557ef4ad4bdc47b58603",
+                "url": "https://api.github.com/repos/php-http/httplug/zipball/72d2b129a48f0490d55b7f89be0d6aa0597ffb06",
+                "reference": "72d2b129a48f0490d55b7f89be0d6aa0597ffb06",
                 "shasum": ""
             },
             "require": {
@@ -5901,13 +5905,13 @@
                 "psr/http-message": "^1.0"
             },
             "require-dev": {
-                "henrikbjorn/phpspec-code-coverage": "^1.0",
-                "phpspec/phpspec": "^2.4"
+                "friends-of-phpspec/phpspec-code-coverage": "^4.1",
+                "phpspec/phpspec": "^4.3.4|^5.0|^6.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -5935,7 +5939,7 @@
                 "client",
                 "http"
             ],
-            "time": "2018-10-31T09:14:44+00:00"
+            "time": "2019-12-27T10:07:11+00:00"
         },
         {
             "name": "php-http/httplug-bundle",
@@ -6268,22 +6272,22 @@
         },
         {
             "name": "php-http/stopwatch-plugin",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/stopwatch-plugin.git",
-                "reference": "520419dd18755a1e7b29077e677fbeb16b6629e7"
+                "reference": "de6f39c96f57c60a43d535e27122de505e683f98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/stopwatch-plugin/zipball/520419dd18755a1e7b29077e677fbeb16b6629e7",
-                "reference": "520419dd18755a1e7b29077e677fbeb16b6629e7",
+                "url": "https://api.github.com/repos/php-http/stopwatch-plugin/zipball/de6f39c96f57c60a43d535e27122de505e683f98",
+                "reference": "de6f39c96f57c60a43d535e27122de505e683f98",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.4 || ^7.0",
+                "php": "^7.1",
                 "php-http/client-common": "^1.9 || ^2.0",
-                "symfony/stopwatch": "^2.7 || ^3.0 || ^4.0"
+                "symfony/stopwatch": "^3.4 || ^4.0 || ^5.0"
             },
             "require-dev": {
                 "phpspec/phpspec": "^2.5 || ^3.0 || ^4.0"
@@ -6291,7 +6295,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2-dev"
+                    "dev-master": "1.3-dev"
                 }
             },
             "autoload": {
@@ -6317,7 +6321,7 @@
                 "plugin",
                 "stopwatch"
             ],
-            "time": "2019-01-30T12:01:37+00:00"
+            "time": "2019-11-18T08:10:48+00:00"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -7753,16 +7757,16 @@
         },
         {
             "name": "simplepie/simplepie",
-            "version": "1.5.3",
+            "version": "1.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplepie/simplepie.git",
-                "reference": "173663382a9346acd53df60c7ffb20689c9cf1f6"
+                "reference": "f4c8246511a38fc9d99a59fb42f61eeeafb31663"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplepie/simplepie/zipball/173663382a9346acd53df60c7ffb20689c9cf1f6",
-                "reference": "173663382a9346acd53df60c7ffb20689c9cf1f6",
+                "url": "https://api.github.com/repos/simplepie/simplepie/zipball/f4c8246511a38fc9d99a59fb42f61eeeafb31663",
+                "reference": "f4c8246511a38fc9d99a59fb42f61eeeafb31663",
                 "shasum": ""
             },
             "require": {
@@ -7816,7 +7820,7 @@
                 "feeds",
                 "rss"
             ],
-            "time": "2019-09-22T23:21:30+00:00"
+            "time": "2019-11-23T07:05:15+00:00"
         },
         {
             "name": "smalot/pdfparser",
@@ -7853,7 +7857,7 @@
             ],
             "authors": [
                 {
-                    "name": "Sebastien Malot",
+                    "name": "Sebastien MALOT",
                     "email": "sebastien@malot.fr"
                 }
             ],
@@ -8183,7 +8187,7 @@
         },
         {
             "name": "symfony/mime",
-            "version": "v4.4.1",
+            "version": "v4.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mime.git",
@@ -9416,8 +9420,8 @@
             "authors": [
                 {
                     "name": "Sander Kromwijk",
-                    "email": "s.kromwijk@gmail.co",
-                    "role": "Original developer"
+                    "role": "Original developer",
+                    "email": "s.kromwijk@gmail.co"
                 },
                 {
                     "name": "Nicolas Lœuillet",
@@ -9619,7 +9623,7 @@
                     "email": "adrien.brault@gmail.com"
                 },
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -9669,7 +9673,7 @@
             ],
             "authors": [
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -10458,22 +10462,22 @@
         },
         {
             "name": "nette/di",
-            "version": "v3.0.1",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/di.git",
-                "reference": "4aff517a1c6bb5c36fa09733d4cea089f529de6d"
+                "reference": "7ae47daa94b8dafbd0e8b6164e22e2d18d3e73ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/di/zipball/4aff517a1c6bb5c36fa09733d4cea089f529de6d",
-                "reference": "4aff517a1c6bb5c36fa09733d4cea089f529de6d",
+                "url": "https://api.github.com/repos/nette/di/zipball/7ae47daa94b8dafbd0e8b6164e22e2d18d3e73ac",
+                "reference": "7ae47daa94b8dafbd0e8b6164e22e2d18d3e73ac",
                 "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
                 "nette/neon": "^3.0",
-                "nette/php-generator": "^3.2.2",
+                "nette/php-generator": "^3.3",
                 "nette/robot-loader": "^3.2",
                 "nette/schema": "^1.0",
                 "nette/utils": "^3.0",
@@ -10484,6 +10488,7 @@
             },
             "require-dev": {
                 "nette/tester": "^2.2",
+                "phpstan/phpstan": "^0.12",
                 "tracy/tracy": "^2.3"
             },
             "type": "library",
@@ -10527,7 +10532,7 @@
                 "nette",
                 "static"
             ],
-            "time": "2019-08-07T12:11:33+00:00"
+            "time": "2019-12-17T04:03:21+00:00"
         },
         {
             "name": "nette/finder",
@@ -10593,31 +10598,32 @@
         },
         {
             "name": "nette/neon",
-            "version": "v3.0.0",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/neon.git",
-                "reference": "cbff32059cbdd8720deccf9e9eace6ee516f02eb"
+                "reference": "0a18fc88801a14d66587932de133eeca01f7ce8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/neon/zipball/cbff32059cbdd8720deccf9e9eace6ee516f02eb",
-                "reference": "cbff32059cbdd8720deccf9e9eace6ee516f02eb",
+                "url": "https://api.github.com/repos/nette/neon/zipball/0a18fc88801a14d66587932de133eeca01f7ce8e",
+                "reference": "0a18fc88801a14d66587932de133eeca01f7ce8e",
                 "shasum": ""
             },
             "require": {
                 "ext-iconv": "*",
                 "ext-json": "*",
-                "php": ">=7.0"
+                "php": ">=7.1"
             },
             "require-dev": {
                 "nette/tester": "^2.0",
+                "phpstan/phpstan": "^0.12",
                 "tracy/tracy": "^2.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
@@ -10641,7 +10647,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "? Nette NEON: encodes and decodes NEON file format.",
+            "description": "🍸 Nette NEON: encodes and decodes NEON file format.",
             "homepage": "http://ne-on.org",
             "keywords": [
                 "export",
@@ -10650,7 +10656,7 @@
                 "nette",
                 "yaml"
             ],
-            "time": "2019-02-05T21:30:40+00:00"
+            "time": "2019-12-27T04:00:04+00:00"
         },
         {
             "name": "nette/php-generator",
@@ -10713,26 +10719,27 @@
         },
         {
             "name": "nette/robot-loader",
-            "version": "v3.2.0",
+            "version": "v3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/robot-loader.git",
-                "reference": "0712a0e39ae7956d6a94c0ab6ad41aa842544b5c"
+                "reference": "d2a100e1f5cab390c78bc88709abbc91249c3993"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/robot-loader/zipball/0712a0e39ae7956d6a94c0ab6ad41aa842544b5c",
-                "reference": "0712a0e39ae7956d6a94c0ab6ad41aa842544b5c",
+                "url": "https://api.github.com/repos/nette/robot-loader/zipball/d2a100e1f5cab390c78bc88709abbc91249c3993",
+                "reference": "d2a100e1f5cab390c78bc88709abbc91249c3993",
                 "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
-                "nette/finder": "^2.5",
+                "nette/finder": "^2.5 || ^3.0",
                 "nette/utils": "^3.0",
                 "php": ">=7.1"
             },
             "require-dev": {
                 "nette/tester": "^2.0",
+                "phpstan/phpstan": "^0.12",
                 "tracy/tracy": "^2.3"
             },
             "type": "library",
@@ -10762,7 +10769,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "? Nette RobotLoader: high performance and comfortable autoloader that will search and autoload classes within your application.",
+            "description": "🍀 Nette RobotLoader: high performance and comfortable autoloader that will search and autoload classes within your application.",
             "homepage": "https://nette.org",
             "keywords": [
                 "autoload",
@@ -10771,7 +10778,7 @@
                 "nette",
                 "trait"
             ],
-            "time": "2019-03-08T21:57:24+00:00"
+            "time": "2019-12-26T22:32:02+00:00"
         },
         {
             "name": "nette/schema",
@@ -10832,16 +10839,16 @@
         },
         {
             "name": "nette/utils",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/utils.git",
-                "reference": "c133e18c922dcf3ad07673077d92d92cef25a148"
+                "reference": "f1b5ce0fae07f13e066e64f9a8f59e53b8f4982e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/utils/zipball/c133e18c922dcf3ad07673077d92d92cef25a148",
-                "reference": "c133e18c922dcf3ad07673077d92d92cef25a148",
+                "url": "https://api.github.com/repos/nette/utils/zipball/f1b5ce0fae07f13e066e64f9a8f59e53b8f4982e",
+                "reference": "f1b5ce0fae07f13e066e64f9a8f59e53b8f4982e",
                 "shasum": ""
             },
             "require": {
@@ -10849,6 +10856,7 @@
             },
             "require-dev": {
                 "nette/tester": "~2.0",
+                "phpstan/phpstan": "^0.12",
                 "tracy/tracy": "^2.3"
             },
             "suggest": {
@@ -10905,7 +10913,7 @@
                 "utility",
                 "validation"
             ],
-            "time": "2019-10-21T20:40:16+00:00"
+            "time": "2019-12-27T03:47:50+00:00"
         },
         {
             "name": "nikic/php-parser",
