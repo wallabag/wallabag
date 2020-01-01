@@ -25,6 +25,7 @@ Installation in folders can work, but is not supported by the maintainers.
         Allow from All
 
         <IfModule mod_rewrite.c>
+            Options +SymLinksIfOwnerMatch
             Options -MultiViews
             RewriteEngine On
             RewriteCond %{REQUEST_FILENAME} !-f
