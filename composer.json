@@ -99,7 +99,7 @@
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "~4.3.8",
         "friendsofphp/php-cs-fixer": "~2.13",
-        "m6web/redis-mock": "^4.1",
+        "m6web/redis-mock": "^5.0",
         "dama/doctrine-test-bundle": "^5.0",
         "phpstan/phpstan": "^0.11.0",
         "phpstan/phpstan-phpunit": "^0.11.0",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8d0908fbb4c4987466d1c0593a2fe15a",
+    "content-hash": "4458551b4c0cddd988d7bbbc76dc38dc",
     "packages": [
         {
             "name": "bdunogier/guzzle-site-authenticator",
@@ -7857,7 +7857,7 @@
             ],
             "authors": [
                 {
-                    "name": "Sebastien MALOT",
+                    "name": "Sebastien Malot",
                     "email": "sebastien@malot.fr"
                 }
             ],
@@ -9420,8 +9420,8 @@
             "authors": [
                 {
                     "name": "Sander Kromwijk",
-                    "role": "Original developer",
-                    "email": "s.kromwijk@gmail.co"
+                    "email": "s.kromwijk@gmail.co",
+                    "role": "Original developer"
                 },
                 {
                     "name": "Nicolas Lœuillet",
@@ -9623,7 +9623,7 @@
                     "email": "adrien.brault@gmail.com"
                 },
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -9673,7 +9673,7 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -9831,6 +9831,7 @@
                 "code",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-code",
             "time": "2019-12-10T19:21:15+00:00"
         },
         {
@@ -9898,6 +9899,7 @@
                 "psr",
                 "psr-7"
             ],
+            "abandoned": "laminas/laminas-diactoros",
             "time": "2019-11-13T19:16:13+00:00"
         },
         {
@@ -9952,6 +9954,7 @@
                 "events",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-eventmanager",
             "time": "2018-04-25T15:33:34+00:00"
         }
     ],
@@ -10341,16 +10344,16 @@
         },
         {
             "name": "m6web/redis-mock",
-            "version": "v4.7.0",
+            "version": "v5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/M6Web/RedisMock.git",
-                "reference": "057ad8e1bea903aee54642e310d900bdb794372c"
+                "reference": "1b7a1bcbb63d636b003643e88f785615e0a316bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/M6Web/RedisMock/zipball/057ad8e1bea903aee54642e310d900bdb794372c",
-                "reference": "057ad8e1bea903aee54642e310d900bdb794372c",
+                "url": "https://api.github.com/repos/M6Web/RedisMock/zipball/1b7a1bcbb63d636b003643e88f785615e0a316bd",
+                "reference": "1b7a1bcbb63d636b003643e88f785615e0a316bd",
                 "shasum": ""
             },
             "require": {
@@ -10382,7 +10385,7 @@
                 "mock",
                 "redis"
             ],
-            "time": "2019-11-04T09:03:23+00:00"
+            "time": "2020-01-08T08:03:01+00:00"
         },
         {
             "name": "nette/bootstrap",
