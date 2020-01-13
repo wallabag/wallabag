@@ -3,12 +3,9 @@ TMP_FOLDER=/tmp
 RELEASE_FOLDER=wllbg-release
 
 # ensure the ENV variable is well defined
-ifeq ($(origin ENV), prod)
-	# all good ("prod" is a valid env)
-else ifeq ($(origin ENV), dev)
-	# all good ("dev" is a valid env)
-else ifeq ($(origin ENV), test)
-	# all good ("test" is a valid env)
+AVAILABLE_ENV := prod dev test
+ifneq ($(filter $(ENV),$(AVAILABLE_ENV)),)
+	# all good
 else
 	# not good, force it to "prod"
 	override ENV = prod
