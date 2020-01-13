@@ -2,7 +2,17 @@ SHELL=bash
 TMP_FOLDER=/tmp
 RELEASE_FOLDER=wllbg-release
 
-ENV ?= prod
+# ensure the ENV variable is well defined
+ifeq ($(origin ENV), prod)
+	# all good ("prod" is a valid env)
+else ifeq ($(origin ENV), dev)
+	# all good ("dev" is a valid env)
+else ifeq ($(origin ENV), test)
+	# all good ("test" is a valid env)
+else
+	# not good, force it to "prod"
+	override ENV = prod
+endif
 
 help: ## Display this help menu
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
