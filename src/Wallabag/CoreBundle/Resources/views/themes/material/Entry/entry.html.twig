@@ -127,7 +127,7 @@
                     {% endif %}
                     {% if craue_setting('share_twitter') %}
                         <li>
-                            <a href="https://twitter.com/home?status={{entry.title|striptags|url_encode}}%20{{ entry.url|url_encode }}%20via%20@wallabagapp" target="_blank" rel="noopener" class="tool icon-twitter" title="twitter">
+                            <a href="https://twitter.com/share?text={{entry.title|striptags|url_encode}}%20{{ entry.url|url_encode }}%20via%20@wallabagapp" target="_blank" rel="noopener" class="tool icon-twitter" title="twitter">
                                 <span>twitter</span>
                             </a>
                         </li>
