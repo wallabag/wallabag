@@ -107,6 +107,7 @@ services:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: firefox }
+
     wallabag_import.chrome.import:
         class: Wallabag\ImportBundle\Import\ChromeImport
         arguments:
@@ -118,6 +119,18 @@ services:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: chrome }
+
+    wallabag_import.rss.import:
+        class: Wallabag\ImportBundle\Import\RssImport
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_core.content_proxy"
+            - "@wallabag_core.tags_assigner"
+            - "@event_dispatcher"
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: wallabag_import.import, alias: rss }
 
     wallabag_import.command.import:
         class: Wallabag\ImportBundle\Command\ImportCommand
