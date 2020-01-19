@@ -24,6 +24,29 @@ const stickyNav = () => {
   });
 };
 
+const articleScroll = () => {
+  const articleEl = $('#article');
+  if (articleEl.length > 0) {
+    $(window).scroll(() => {
+      const s = $(window).scrollTop();
+      const d = $(document).height();
+      const c = $(window).height();
+      const articleElBottom = articleEl.offset().top + articleEl.height();
+      const scrollPercent = (s / (d - c)) * 100;
+      $('.progress .determinate').css('width', `${scrollPercent}%`);
+      const fixedActionBtn = $('.js-fixed-action-btn');
+      const toggleScrollDataName = 'toggle-auto';
+      if ((s + c) > articleElBottom) {
+        fixedActionBtn.data(toggleScrollDataName, true);
+        fixedActionBtn.openFAB();
+      } else if (fixedActionBtn.data(toggleScrollDataName) === true) {
+        fixedActionBtn.data(toggleScrollDataName, false);
+        fixedActionBtn.closeFAB();
+      }
+    });
+  }
+};
+
 $(document).ready(() => {
   // sideNav
   $('.button-collapse').sideNav();
@@ -44,6 +67,7 @@ $(document).ready(() => {
   initExport();
   initRandom();
   stickyNav();
+  articleScroll();
 
   const toggleNav = (toShow, toFocus) => {
     $('.nav-panel-actions').hide(100);
@@ -80,13 +104,5 @@ $(document).ready(() => {
     $('.nav-panel-actions').show(100);
     $('.nav-panels').css('background', 'transparent');
     return false;
-  });
-
-  $(window).scroll(() => {
-    const s = $(window).scrollTop();
-    const d = $(document).height();
-    const c = $(window).height();
-    const scrollPercent = (s / (d - c)) * 100;
-    $('.progress .determinate').css('width', `${scrollPercent}%`);
   });
 });
