@@ -17,6 +17,13 @@ import './js/shortcuts/entry';
 /* Theme style */
 import './css/index.scss';
 
+const stickyNav = () => {
+  const nav = $('.js-entry-nav-top');
+  $('[data-toggle="actions"]').click(() => {
+    nav.toggleClass('entry-nav-top--sticky');
+  });
+};
+
 $(document).ready(() => {
   // sideNav
   $('.button-collapse').sideNav();
@@ -36,6 +43,7 @@ $(document).ready(() => {
   initFilters();
   initExport();
   initRandom();
+  stickyNav();
 
   const toggleNav = (toShow, toFocus) => {
     $('.nav-panel-actions').hide(100);
