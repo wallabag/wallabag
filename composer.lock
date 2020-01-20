@@ -735,16 +735,16 @@
         },
         {
             "name": "doctrine/doctrine-bundle",
-            "version": "1.12.6",
+            "version": "1.12.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "08f944760ac471aa97a9b0386dfdb559db80b32d"
+                "reference": "18fb7d271676dcb8e882adb0157ac1445c8fe89c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/08f944760ac471aa97a9b0386dfdb559db80b32d",
-                "reference": "08f944760ac471aa97a9b0386dfdb559db80b32d",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/18fb7d271676dcb8e882adb0157ac1445c8fe89c",
+                "reference": "18fb7d271676dcb8e882adb0157ac1445c8fe89c",
                 "shasum": ""
             },
             "require": {
@@ -773,6 +773,7 @@
                 "phpunit/phpunit": "^7.5",
                 "symfony/phpunit-bridge": "^4.2",
                 "symfony/property-info": "^3.4.30|^4.3.3",
+                "symfony/proxy-manager-bridge": "^3.4|^4|^5",
                 "symfony/twig-bridge": "^3.4|^4.1",
                 "symfony/validator": "^3.4.30|^4.3.3",
                 "symfony/web-profiler-bundle": "^3.4.30|^4.3.3",
@@ -824,7 +825,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2019-12-19T09:08:00+00:00"
+            "time": "2020-01-10T12:25:22+00:00"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -1394,16 +1395,16 @@
         },
         {
             "name": "doctrine/persistence",
-            "version": "1.3.3",
+            "version": "1.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/persistence.git",
-                "reference": "99b196bbd4715a94fa100fac664a351ffa46d6a5"
+                "reference": "5dd3ac5eebef2d0b074daa4440bb18f93132dee4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/persistence/zipball/99b196bbd4715a94fa100fac664a351ffa46d6a5",
-                "reference": "99b196bbd4715a94fa100fac664a351ffa46d6a5",
+                "url": "https://api.github.com/repos/doctrine/persistence/zipball/5dd3ac5eebef2d0b074daa4440bb18f93132dee4",
+                "reference": "5dd3ac5eebef2d0b074daa4440bb18f93132dee4",
                 "shasum": ""
             },
             "require": {
@@ -1411,7 +1412,7 @@
                 "doctrine/cache": "^1.0",
                 "doctrine/collections": "^1.0",
                 "doctrine/event-manager": "^1.0",
-                "doctrine/reflection": "^1.0",
+                "doctrine/reflection": "^1.1",
                 "php": "^7.1"
             },
             "conflict": {
@@ -1473,20 +1474,20 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2019-12-13T10:43:02+00:00"
+            "time": "2020-01-16T22:06:23+00:00"
         },
         {
             "name": "doctrine/reflection",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/reflection.git",
-                "reference": "02538d3f95e88eb397a5f86274deb2c6175c2ab6"
+                "reference": "bc420ead87fdfe08c03ecc3549db603a45b06d4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/reflection/zipball/02538d3f95e88eb397a5f86274deb2c6175c2ab6",
-                "reference": "02538d3f95e88eb397a5f86274deb2c6175c2ab6",
+                "url": "https://api.github.com/repos/doctrine/reflection/zipball/bc420ead87fdfe08c03ecc3549db603a45b06d4c",
+                "reference": "bc420ead87fdfe08c03ecc3549db603a45b06d4c",
                 "shasum": ""
             },
             "require": {
@@ -1494,13 +1495,15 @@
                 "ext-tokenizer": "*",
                 "php": "^7.1"
             },
+            "conflict": {
+                "doctrine/common": "<2.9"
+            },
             "require-dev": {
-                "doctrine/coding-standard": "^4.0",
-                "doctrine/common": "^2.8",
-                "phpstan/phpstan": "^0.9.2",
-                "phpstan/phpstan-phpunit": "^0.9.4",
-                "phpunit/phpunit": "^7.0",
-                "squizlabs/php_codesniffer": "^3.0"
+                "doctrine/coding-standard": "^5.0",
+                "doctrine/common": "^2.10",
+                "phpstan/phpstan": "^0.11.0",
+                "phpstan/phpstan-phpunit": "^0.11.0",
+                "phpunit/phpunit": "^7.0"
             },
             "type": "library",
             "extra": {
@@ -1519,16 +1522,16 @@
             ],
             "authors": [
                 {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
                     "name": "Roman Borschel",
                     "email": "roman@code-factory.org"
                 },
                 {
                     "name": "Benjamin Eberlei",
                     "email": "kontakt@beberlei.de"
-                },
-                {
-                    "name": "Guilherme Blanco",
-                    "email": "guilhermeblanco@gmail.com"
                 },
                 {
                     "name": "Jonathan Wage",
@@ -1543,12 +1546,13 @@
                     "email": "ocramius@gmail.com"
                 }
             ],
-            "description": "Doctrine Reflection component",
+            "description": "The Doctrine Reflection project is a simple library used by the various Doctrine projects which adds some additional functionality on top of the reflection functionality that comes with PHP. It allows you to get the reflection information about classes, methods and properties statically.",
             "homepage": "https://www.doctrine-project.org/projects/reflection.html",
             "keywords": [
-                "reflection"
+                "reflection",
+                "static"
             ],
-            "time": "2018-06-14T14:45:07+00:00"
+            "time": "2020-01-08T19:53:19+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -1768,16 +1772,16 @@
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
-            "version": "v2.5.3",
+            "version": "2.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSJsRoutingBundle.git",
-                "reference": "ce486b619a440d186edf7f303df4822fbee1d1ae"
+                "reference": "165b3f4ae1f798ec320b9942f6db921f7b568bed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/ce486b619a440d186edf7f303df4822fbee1d1ae",
-                "reference": "ce486b619a440d186edf7f303df4822fbee1d1ae",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/165b3f4ae1f798ec320b9942f6db921f7b568bed",
+                "reference": "165b3f4ae1f798ec320b9942f6db921f7b568bed",
                 "shasum": ""
             },
             "require": {
@@ -1826,7 +1830,7 @@
                 "javascript",
                 "routing"
             ],
-            "time": "2020-01-12T22:12:55+00:00"
+            "time": "2020-01-13T14:06:12+00:00"
         },
         {
             "name": "friendsofsymfony/oauth-server-bundle",
