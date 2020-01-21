@@ -8,7 +8,7 @@
     <div class="progress">
         <div class="determinate"></div>
     </div>
-    <nav class="hide-on-large-only">
+    <nav class="hide-on-large-only js-entry-nav-top">
         <div class="nav-panel-item cyan darken-1">
             <ul>
                 <li>
@@ -280,8 +280,8 @@
             {{ entry.content | raw }}
         </article>
 
-        <div class="fixed-action-btn horizontal click-to-toggle hide-on-large-only">
-            <a class="btn-floating btn-large">
+        <div class="fixed-action-btn js-fixed-action-btn horizontal click-to-toggle hide-on-large-only">
+            <a class="btn-floating btn-large" data-toggle="actions">
               <i class="material-icons">menu</i>
             </a>
             <ul>
