@@ -3741,16 +3741,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "8dcacf79bd2bc18438dc3c93cdee1fa59f9a848b"
+                "reference": "6b3e53b2dd3c85b8128dde3307b838885515764b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/8dcacf79bd2bc18438dc3c93cdee1fa59f9a848b",
-                "reference": "8dcacf79bd2bc18438dc3c93cdee1fa59f9a848b",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/6b3e53b2dd3c85b8128dde3307b838885515764b",
+                "reference": "6b3e53b2dd3c85b8128dde3307b838885515764b",
                 "shasum": ""
             },
             "require": {
@@ -3811,20 +3811,20 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2019-11-12T13:10:23+00:00"
+            "time": "2020-01-23T08:59:01+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.98",
+            "version": "1.0.100",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "8bf1ec3c9d0cc4e055f95d6b6f5d187ad6267724"
+                "reference": "d97cfd935302337604f5d778969bc94c12de086a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/8bf1ec3c9d0cc4e055f95d6b6f5d187ad6267724",
-                "reference": "8bf1ec3c9d0cc4e055f95d6b6f5d187ad6267724",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/d97cfd935302337604f5d778969bc94c12de086a",
+                "reference": "d97cfd935302337604f5d778969bc94c12de086a",
                 "shasum": ""
             },
             "require": {
@@ -3851,20 +3851,20 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2019-12-27T15:55:20+00:00"
+            "time": "2020-01-23T09:05:19+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
-            "version": "v2.0.0",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/httplug-ssrf-plugin.git",
-                "reference": "ea8599016240d2a49b91e267550ea3eb243ddd74"
+                "reference": "fb68804e3bace2b894d1b9f39ad2b59078f5eac2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/httplug-ssrf-plugin/zipball/ea8599016240d2a49b91e267550ea3eb243ddd74",
-                "reference": "ea8599016240d2a49b91e267550ea3eb243ddd74",
+                "url": "https://api.github.com/repos/j0k3r/httplug-ssrf-plugin/zipball/fb68804e3bace2b894d1b9f39ad2b59078f5eac2",
+                "reference": "fb68804e3bace2b894d1b9f39ad2b59078f5eac2",
                 "shasum": ""
             },
             "require": {
@@ -3884,11 +3884,6 @@
                 "symfony/phpunit-bridge": "~3.4.19|~4.0"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Graby\\HttpClient\\Plugin\\ServerSideRequestForgeryProtection\\": "src/"
@@ -3922,7 +3917,7 @@
                 "security",
                 "ssrf"
             ],
-            "time": "2019-02-06T10:58:53+00:00"
+            "time": "2020-01-06T13:44:13+00:00"
         },
         {
             "name": "j0k3r/php-readability",
@@ -5763,16 +5758,16 @@
         },
         {
             "name": "php-http/discovery",
-            "version": "1.7.2",
+            "version": "1.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/discovery.git",
-                "reference": "16a3327861ae291006a2df8fc22e991806f720d7"
+                "reference": "82dbef649ccffd8e4f22e1953c3a5265992b83c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/discovery/zipball/16a3327861ae291006a2df8fc22e991806f720d7",
-                "reference": "16a3327861ae291006a2df8fc22e991806f720d7",
+                "url": "https://api.github.com/repos/php-http/discovery/zipball/82dbef649ccffd8e4f22e1953c3a5265992b83c0",
+                "reference": "82dbef649ccffd8e4f22e1953c3a5265992b83c0",
                 "shasum": ""
             },
             "require": {
@@ -5824,7 +5819,7 @@
                 "message",
                 "psr7"
             ],
-            "time": "2019-12-27T09:22:53+00:00"
+            "time": "2020-01-03T11:25:47+00:00"
         },
         {
             "name": "php-http/guzzle5-adapter",
