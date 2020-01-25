@@ -36,7 +36,7 @@ monolog:
             channels: [doctrine]
 
 swiftmailer:
-    # see http://mailcatcher.me/
+    # see https://mailcatcher.me/
     transport: smtp
     host: 'localhost'
     port: 1025

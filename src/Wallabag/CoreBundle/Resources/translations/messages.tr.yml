@@ -264,7 +264,7 @@ entry:
         # provided_by: 'Provided by'
     new:
         page_title: 'Yeni makaleyi kaydet'
-        placeholder: 'http://website.com'
+        placeholder: 'https://website.tr'
         form_new:
             url_label: Url
     search:

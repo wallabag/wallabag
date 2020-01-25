@@ -26,7 +26,7 @@ wallabag_core:
     list_mode: 0
     fetching_error_message_title: 'No title found'
     fetching_error_message: |
-        wallabag can't retrieve contents for this article. Please <a href="http://doc.wallabag.org/en/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.
+        wallabag can't retrieve contents for this article. Please <a href="https://doc.wallabag.org/en/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.
     api_limit_mass_actions: 10
     encryption_key_path: "%kernel.project_dir%/data/site-credentials-secret-key.txt"
     default_internal_settings:
@@ -44,7 +44,7 @@ wallabag_core:
             section: entry
         -
             name: diaspora_url
-            value: http://diasporapod.com
+            value: https://diasporafoundation.org/
             section: entry
         -
             name: share_unmark
@@ -64,11 +64,11 @@ wallabag_core:
             section: entry
         -
             name: shaarli_url
-            value: http://myshaarli.com
+            value: https://github.com/shaarli/Shaarli
             section: entry
         -
             name: scuttle_url
-            value: http://scuttle.org
+            value: https://github.com/scronide/scuttle
             section: entry
         -
             name: share_mail

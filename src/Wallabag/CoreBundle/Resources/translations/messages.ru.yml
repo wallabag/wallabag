@@ -264,7 +264,7 @@ entry:
         # provided_by: 'Provided by'
     new:
         page_title: 'Сохранить новую запись'
-        placeholder: 'http://website.com'
+        placeholder: 'https://website.ru'
         form_new:
             url_label: Ссылка
     search:

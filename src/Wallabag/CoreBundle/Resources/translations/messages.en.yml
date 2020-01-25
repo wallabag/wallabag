@@ -264,7 +264,7 @@ entry:
         provided_by: 'Provided by'
     new:
         page_title: 'Save new entry'
-        placeholder: 'http://website.com'
+        placeholder: 'https://website.com'
         form_new:
             url_label: Url
     search:
