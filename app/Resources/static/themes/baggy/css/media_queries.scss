@@ -170,3 +170,9 @@
     width: 100%;
   }
 }
+
+@media only print {
+  header h1.logo {
+    display: none;
+  }
+}
