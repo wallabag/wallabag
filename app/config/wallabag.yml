@@ -44,7 +44,7 @@ wallabag_core:
             section: entry
         -
             name: diaspora_url
-            value: https://diasporafoundation.org/
+            value: https://diasporapod.com/
             section: entry
         -
             name: share_unmark
@@ -64,10 +64,10 @@ wallabag_core:
             section: entry
         -
             name: shaarli_url
-            value: https://github.com/shaarli/Shaarli
+            value: https://myshaarli.com
             section: entry
         -
-            name: scuttle_url
+            name: https://scuttle.org
             value: https://github.com/scronide/scuttle
             section: entry
         -
