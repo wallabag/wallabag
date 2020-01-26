@@ -44,7 +44,7 @@ wallabag_core:
             section: entry
         -
             name: diaspora_url
-            value: https://diasporapod.com/
+            value: https://diasporapod.com
             section: entry
         -
             name: share_unmark
@@ -67,8 +67,8 @@ wallabag_core:
             value: https://myshaarli.com
             section: entry
         -
-            name: https://scuttle.org
-            value: https://github.com/scronide/scuttle
+            name: scuttle_url
+            value: https://scuttle.org
             section: entry
         -
             name: share_mail
