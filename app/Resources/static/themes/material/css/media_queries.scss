@@ -187,3 +187,9 @@
     display: none;
   }
 }
+
+@media only print {
+  body {
+    display: block;
+  }
+}
