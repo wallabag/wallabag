@@ -788,6 +788,19 @@ class Entry
     }
 
     /**
+     * Format the entry language to a valid html lang attribute.
+     */
+    public function getHTMLLanguage()
+    {
+        $parsedLocale = \Locale::parseLocale($this->getLanguage());
+        $lang = '';
+        $lang .= $parsedLocale['language'] ?? '';
+        $lang .= isset($parsedLocale['region']) ? '-' . $parsedLocale['region'] : '';
+
+        return $lang;
+    }
+
+    /**
      * @return string|null
      */
     public function getUid()

@@ -5,7 +5,7 @@
 {% block content %}
     <div id="article">
         <header class="mbm">
-            <h1>{{ entry.title|e|default('entry.default_title'|trans)|raw }} <a href="{{ path('edit', { 'id': entry.id }) }}" class="nostyle" title="{{ 'entry.view.edit_title'|trans }}">✎</a></h1>
+            <h1><span{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>{{ entry.title|e|default('entry.default_title'|trans)|raw }}</span> <a href="{{ path('edit', { 'id': entry.id }) }}" class="nostyle" title="{{ 'entry.view.edit_title'|trans }}">✎</a></h1>
         </header>
 
         <div id="article_toolbar">
@@ -96,7 +96,7 @@
                 </div>
             </aside>
         </div>
-        <article>
+        <article{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>
             {{ entry.content | raw }}
         </article>
     </div>
