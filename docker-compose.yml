@@ -16,7 +16,7 @@ services:
         build:
             context: docker/php
             args:
-                # Set here your timezone using one of this: http://php.net/manual/en/timezones.php
+                # Set here your timezone using one of this: https://php.net/manual/en/timezones.php
                 timezone: 'Europe/Monaco'
         ports:
             - "9000:9000"

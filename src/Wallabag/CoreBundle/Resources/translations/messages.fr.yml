@@ -264,7 +264,7 @@ entry:
         provided_by: "Fourni par"
     new:
         page_title: "Sauvegarder un nouvel article"
-        placeholder: "http://website.com"
+        placeholder: "https://website.fr"
         form_new:
             url_label: "Adresse"
     search:

@@ -264,7 +264,7 @@ entry:
         provided_by: 'Fornecido por'
     new:
         page_title: 'Salvar novo artigo'
-        placeholder: 'http://website.com'
+        placeholder: 'https://website.pt'
         form_new:
             url_label: Url
     search:

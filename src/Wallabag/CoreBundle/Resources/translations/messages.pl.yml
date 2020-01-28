@@ -264,7 +264,7 @@ entry:
         provided_by: 'Dostarczony przez'
     new:
         page_title: 'Zapisz nowy wpis'
-        placeholder: 'http://website.com'
+        placeholder: 'https://website.pl'
         form_new:
             url_label: Url
     search:

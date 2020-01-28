@@ -264,7 +264,7 @@ entry:
         # provided_by: 'Provided by'
     new:
         page_title: 'Salva un nuovo contenuto'
-        placeholder: 'http://website.com'
+        placeholder: 'https://website.it'
         form_new:
             url_label: Url
     search:

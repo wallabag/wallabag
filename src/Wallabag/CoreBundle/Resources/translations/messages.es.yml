@@ -264,7 +264,7 @@ entry:
         provided_by: 'Proporcionado por'
     new:
         page_title: 'Guardar un nuevo artículo'
-        placeholder: 'http://sitioweb.com'
+        placeholder: 'https://sitioweb.es'
         form_new:
             url_label: URL
     search:

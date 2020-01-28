@@ -264,7 +264,7 @@ entry:
         # provided_by: 'Provided by'
     new:
         page_title: 'ذخیرهٔ مقالهٔ تازه'
-        placeholder: 'http://website.com'
+        placeholder: 'https://website.ir'
         form_new:
             url_label: نشانی
     search:
