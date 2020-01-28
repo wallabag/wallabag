@@ -184,20 +184,20 @@ config:
             two_factor_code_description_2: 'You can scan that QR Code with your app:'
             two_factor_code_description_3: 'Also, save these backup codes in a safe place, you can use them in case you lose access to your OTP app:'
             two_factor_code_description_4: 'Test an OTP code from your configured app:'
-            cancel: Cancel
+            cancel: キャンセル
             enable: Enable
 
 entry:
-    default_title: 'Title of the entry'
+    default_title: '記事のタイトル'
     page_titles:
-        unread: 'Unread entries'
-        starred: 'Starred entries'
-        archived: 'Archived entries'
+        unread: '未読の記事'
+        starred: '星印月の記事'
+        archived: 'アーカイブ済みの記事'
         filtered: 'Filtered entries'
         filtered_tags: 'Filtered by tags:'
         filtered_search: 'Filtered by search:'
-        untagged: 'Untagged entries'
-        all: 'All entries'
+        untagged: 'タグの無い記事'
+        all: '全ての記事'
     list:
         number_on_the_page: '{0} There are no entries.|{1} There is one entry.|]1,Inf[ There are %count% entries.'
         reading_time: 'estimated reading time'
@@ -209,49 +209,49 @@ entry:
         original_article: 'original'
         toogle_as_read: 'Toggle mark as read'
         toogle_as_star: 'Toggle starred'
-        delete: 'Delete'
-        export_title: 'Export'
+        delete: '削除'
+        export_title: 'エクスポート'
     filters:
-        title: 'Filters'
-        status_label: 'Status'
-        archived_label: 'Archived'
-        starred_label: 'Starred'
-        unread_label: 'Unread'
-        preview_picture_label: 'Has a preview picture'
-        preview_picture_help: 'Preview picture'
-        is_public_label: 'Has a public link'
-        is_public_help: 'Public link'
-        language_label: 'Language'
-        http_status_label: 'HTTP status'
+        title: 'フィルター'
+        status_label: '状態'
+        archived_label: 'アーカイブ済み'
+        starred_label: '星印付き'
+        unread_label: '未読'
+        preview_picture_label: 'プレビュー画像がある'
+        preview_picture_help: 'プレビュー画像'
+        is_public_label: '公開リンクがある'
+        is_public_help: '公開リンク'
+        language_label: '言語'
+        http_status_label: 'HTTP ステータス'
         reading_time:
-            label: 'Reading time in minutes'
-            from: 'from'
-            to: 'to'
-        domain_label: 'Domain name'
+            label: '読むのにかかる推定時間'
+            from: '最小時間'
+            to: '最大時間'
+        domain_label: 'ドメイン名'
         created_at:
-            label: 'Creation date'
-            from: 'from'
-            to: 'to'
+            label: '作成日'
+            from: '開始日'
+            to: '終了日'
         action:
-            clear: 'Clear'
-            filter: 'Filter'
+            clear: '解除'
+            filter: '検索'
     view:
         left_menu:
-            back_to_top: 'Back to top'
-            back_to_homepage: 'Back'
-            set_as_read: 'Mark as read'
-            set_as_unread: 'Mark as unread'
+            back_to_top: 'トップへ戻る'
+            back_to_homepage: '戻る'
+            set_as_read: '既読としてマーク'
+            set_as_unread: '未読としてマーク'
             set_as_starred: 'Toggle starred'
-            view_original_article: 'Original article'
+            view_original_article: 'オリジナルの記事'
             re_fetch_content: 'Re-fetch content'
-            delete: 'Delete'
-            add_a_tag: 'Add a tag'
-            share_content: 'Share'
-            share_email_label: 'Email'
-            public_link: 'public link'
-            delete_public_link: 'delete public link'
-            export: 'Export'
-            print: 'Print'
+            delete: '削除'
+            add_a_tag: 'タグを追加'
+            share_content: '共有'
+            share_email_label: '電子メール'
+            public_link: '公開リンク'
+            delete_public_link: '公開リンクを削除'
+            export: 'エクスポート'
+            print: '印刷'
             problem:
                 label: 'Problems?'
                 description: 'Does this article appear wrong?'
@@ -302,9 +302,9 @@ about:
         license: 'ライセンス'
         version: 'バージョン'
     getting_help:
-        documentation: 'Documentation'
-        bug_reports: 'Bug reports'
-        support: '<a href="https://github.com/wallabag/wallabag/issues">on GitHub</a>'
+        documentation: 'ドキュメント'
+        bug_reports: 'バグ報告'
+        support: '<a href="https://github.com/wallabag/wallabag/issues">GitHub上で</a>'
     helping:
         description: 'wallabag is free and open source. You can help us:'
         by_contributing: 'by contributing to the project:'
@@ -314,8 +314,8 @@ about:
         description: 'Thank you to contributors on wallabag web application'
     third_party:
         description: 'Here is the list of third-party libraries used in wallabag (with their licenses):'
-        package: 'Package'
-        license: 'License'
+        package: 'パッケージ'
+        license: 'ライセンス'
 
 howto:
     page_title: '使い方'
@@ -343,19 +343,19 @@ howto:
         description: 'このリンクをブックマークバーにドラッグ＆ドロップします：'
     shortcuts:
         page_description: Here are the shortcuts available in wallabag.
-        shortcut: Shortcut
-        action: Action
+        shortcut: ショートカット
+        action: 操作
         all_pages_title: Shortcuts available in all pages
-        go_unread: Go to unread
-        go_starred: Go to starred
-        go_archive: Go to archive
-        go_all: Go to all entries
-        go_tags: Go to tags
-        go_config: Go to config
-        go_import: Go to import
-        go_developers: Go to developers
-        go_howto: Go to howto (this page!)
-        go_logout: Log out
+        go_unread: 未読へ
+        go_starred: 星印付きへ
+        go_archive: アーカイブ済みへ
+        go_all: 全ての記事へ
+        go_tags: タグへ
+        go_config: 設定へ
+        go_import: インポートへ
+        go_developers: Developerへ
+        go_howto: 使い方へ (このページ)
+        go_logout: ログアウト
         list_title: Shortcuts available in listing pages
         search: Display the search form
         article_title: Shortcuts available in entry view
@@ -370,10 +370,10 @@ howto:
         open_article: Display the selected entry
 
 quickstart:
-    page_title: 'Quickstart'
-    more: 'More…'
+    page_title: 'はじめに'
+    more: 'さらに見る…'
     intro:
-        title: 'Welcome to wallabag!'
+        title: 'Wallabag へようこそ！'
         paragraph_1: "We'll accompany you on your visit to wallabag and show you some features that might interest you."
         paragraph_2: 'Follow us!'
     configure:
@@ -404,12 +404,12 @@ quickstart:
         readability: 'Migrate from Readability'
         instapaper: 'Migrate from Instapaper'
     developer:
-        title: 'Developers'
-        description: 'We also thought of the developers: Docker, API, translations, etc.'
-        create_application: 'Create your third-party application'
-        use_docker: 'Use Docker to install wallabag'
+        title: '開発者向け情報'
+        description: '開発者のことも考えています： Docker、API、翻訳...'
+        create_application: 'アプリケーションを作成する'
+        use_docker: 'Docker に Wallabag をインストールする'
     docs:
-        title: 'Full documentation'
+        title: '完全なドキュメント'
         description: "There are so much features in wallabag. Don't hesitate to read the manual to know them and to learn how to use them."
         annotate: 'Annotate your article'
         export: 'Convert your articles into ePUB or PDF'
@@ -417,41 +417,41 @@ quickstart:
         fetching_errors: 'What can I do if an article encounters errors during fetching?'
         all_docs: 'And so many other articles!'
     support:
-        title: 'Support'
-        description: 'If you need some help, we are here for you.'
-        github: 'On GitHub'
-        email: 'By email'
-        gitter: 'On Gitter'
+        title: 'サポート'
+        description: 'あなたが助けを必要とするならば、私たちはここにいます。'
+        github: 'GitHub'
+        email: '電子メール'
+        gitter: 'Gitter'
 
 tag:
-    page_title: 'Tags'
+    page_title: 'タグ'
     list:
         number_on_the_page: '{0} There are no tags.|{1} There is one tag.|]1,Inf[ There are %count% tags.'
         see_untagged_entries: 'See untagged entries'
         no_untagged_entries: 'There are no untagged entries.'
     new:
-        add: 'Add'
+        add: '追加'
         placeholder: 'You can add several tags, separated by a comma.'
     rename:
         placeholder: 'You can update tag name.'
 
 export:
     footer_template: '<div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p></div>'
-    unknown: 'Unknown'
+    unknown: '不明'
 
 import:
-    page_title: 'Import'
-    page_description: 'Welcome to wallabag importer. Please select your previous service from which you want to migrate.'
+    page_title: 'インポート'
+    page_description: 'Wallabag インポータへようこそ。移行元のサービスを選択してください。'
     action:
-        import_contents: 'Import contents'
+        import_contents: 'コンテンツをインポート'
     form:
-        mark_as_read_title: 'Mark all as read?'
-        mark_as_read_label: 'Mark all imported entries as read'
-        file_label: 'File'
-        save_label: 'Upload file'
+        mark_as_read_title: '全てを既読としてマークしますか？'
+        mark_as_read_label: 'インポートされた全ての記事を既読としてマークする'
+        file_label: 'ファイル'
+        save_label: 'ファイルをアップロード'
     pocket:
-        page_title: 'Import > Pocket'
-        description: "This importer will import all of your Pocket data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag."
+        page_title: 'インポート > Pocket'
+        description: "このインポータは、すべての Pocket データをインポートします。Pocket はサービスからコンテンツを取得することができないので、各記事の読み取り可能なコンテンツは Wallabag によって再取得されます。"
         config_missing:
             description: "Pocket import isn't configured."
             admin_message: 'You need to define %keyurls%a pocket_consumer_key%keyurle%.'
@@ -459,69 +459,69 @@ import:
         authorize_message: 'You can import your data from your Pocket account. You just have to click on the below button and authorize the application to connect to getpocket.com.'
         connect_to_pocket: 'Connect to Pocket and import data'
     wallabag_v1:
-        page_title: 'Import > Wallabag v1'
+        page_title: 'インポート > Wallabag v1'
         description: 'This importer will import all your wallabag v1 articles. On your config page, click on "JSON export" in the "Export your wallabag data" section. You will have a "wallabag-export-1-xxxx-xx-xx.json" file.'
         how_to: 'Please select your wallabag export and click on the below button to upload and import it.'
     wallabag_v2:
-        page_title: 'Import > Wallabag v2'
+        page_title: 'インポート > Wallabag v2'
         description: 'This importer will import all your wallabag v2 articles. Go to All articles, then, on the export sidebar, click on "JSON". You will have a "All articles.json" file.'
     elcurator:
-        page_title: 'Import > elCurator'
+        page_title: 'インポート > elCurator'
         description: 'This importer will import all your elCurator articles. Go to your preferences in your elCurator account and then, export your content. You will have a JSON file.'
     readability:
-        page_title: 'Import > Readability'
+        page_title: 'インポート > Readability'
         description: 'This importer will import all your Readability articles. On the tools (https://www.readability.com/tools/) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).'
         how_to: 'Please select your Readability export and click on the below button to upload and import it.'
     worker:
         enabled: "Import is made asynchronously. Once the import task is started, an external worker will handle jobs one at a time. The current service is:"
         download_images_warning: "You enabled downloading images for your articles. Combined with classic import it can take ages to proceed (or maybe failed). We <strong>strongly recommend</strong> to enable asynchronous import to avoid errors."
     firefox:
-        page_title: 'Import > Firefox'
+        page_title: 'インポート > Firefox'
         description: "This importer will import all your Firefox bookmarks. Just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
         how_to: "Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched."
     chrome:
-        page_title: 'Import > Chrome'
+        page_title: 'インポート > Chrome'
         description: "This importer will import all your Chrome bookmarks. The location of the file depends on your operating system : <ul><li>On Linux, go into the <code>~/.config/chromium/Default/</code> directory</li><li>On Windows, it should be at <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>On OS X, it should be at <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Once you got there, copy the <code>Bookmarks</code> file someplace you'll find.<em><br>Note that if you have Chromium instead of Chrome, you'll have to correct paths accordingly.</em></p>"
         how_to: "Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched."
     instapaper:
-        page_title: 'Import > Instapaper'
+        page_title: 'インポート > Instapaper'
         description: 'This importer will import all your Instapaper articles. On the settings (https://www.instapaper.com/user) page, click on "Download .CSV file" in the "Export" section. A CSV file will be downloaded (like "instapaper-export.csv").'
         how_to: 'Please select your Instapaper export and click on the below button to upload and import it.'
     pinboard:
-        page_title: "Import > Pinboard"
+        page_title: "インポート > Pinboard"
         description: 'This importer will import all your Pinboard articles. On the backup (https://pinboard.in/settings/backup) page, click on "JSON" in the "Bookmarks" section. A JSON file will be downloaded (like "pinboard_export").'
         how_to: 'Please select your Pinboard export and click on the below button to upload and import it.'
 
 developer:
-    page_title: 'API clients management'
-    welcome_message: 'Welcome to the wallabag API'
-    documentation: 'Documentation'
-    how_to_first_app: 'How to create my first application'
-    full_documentation: 'View full API documentation'
-    list_methods: 'List API methods'
+    page_title: 'API クライアントの管理'
+    welcome_message: 'Wallabag API へようこそ'
+    documentation: 'ドキュメント'
+    how_to_first_app: '初めてのアプリケーションの作成方法'
+    full_documentation: '完全な API ドキュメントを閲覧'
+    list_methods: 'API メソッドの一覧を閲覧'
     clients:
-        title: 'Clients'
-        create_new: 'Create a new client'
+        title: 'クライアント'
+        create_new: '新しいクライアントを作成'
     existing_clients:
-        title: 'Existing clients'
-        field_id: 'Client ID'
-        field_secret: 'Client secret'
-        field_uris: 'Redirect URIs'
+        title: '既存のクライアント'
+        field_id: 'クライアント ID'
+        field_secret: 'クライアントシークレット'
+        field_uris: 'リダイレクト URI'
         field_grant_types: 'Grant type allowed'
-        no_client: 'No client yet.'
+        no_client: 'クライアントがありません。'
     remove:
         warn_message_1: 'You have the ability to remove the client %name%. This action is IRREVERSIBLE !'
         warn_message_2: "If you remove it, every app configured with that client won't be able to auth on your wallabag."
         action: 'Remove the client %name%'
     client:
-        page_title: 'API clients management > New client'
+        page_title: 'API クライアントの管理 > 新しいクライアント'
         page_description: 'You are about to create a new client. Please fill the field below for the redirect URI of your application.'
         form:
             name_label: 'Name of the client'
             redirect_uris_label: 'Redirect URIs (optional)'
             save_label: 'Create a new client'
-        action_back: 'Back'
-        copy_to_clipboard: Copy
+        action_back: '戻る'
+        copy_to_clipboard: コピー
     client_parameter:
         page_title: 'API clients management > Client parameters'
         page_description: 'Here are your client parameters.'
