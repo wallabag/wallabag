@@ -1,0 +1,11 @@
+# Two factor mail
+auth_code:
+    on: 'on'
+    mailer:
+        subject: 'Wallabag 認証コード'
+        body:
+            hello: "こんにちは %user%、"
+            first_para: "あなたの Wallabag アカウントには2要素認証が設定されており、新しいデバイスへのログインが試行されたため、私たちは、そのログインを検証するためのコードを送信しています。"
+            second_para: "認証コード："
+            support: "何か問題がある場合は、お気軽にお問い合わせください："
+            signature: "The wallabag team"

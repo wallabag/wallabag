@@ -1,0 +1,7 @@
+validator:
+    password_must_match: 'パスワードが一致していません。'
+    password_too_short: 'パスワードは8文字以上にする必要があります'
+    password_wrong_value: '正しい現在のパスワードが入力されていません'
+    item_per_page_too_high: 'この設定はアプリを強制終了させる原因となる可能性があります'
+    feed_limit_too_high: 'この設定はアプリを強制終了させる原因となる可能性があります'
+    quote_length_too_high: '引用が長すぎます。{{ limit }} 文字以下にする必要があります。'
