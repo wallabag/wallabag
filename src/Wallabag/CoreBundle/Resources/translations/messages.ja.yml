@@ -103,7 +103,7 @@ config:
         email_label: 'メールアドレス'
         two_factor:
             emailTwoFactor_label: '電子メールを使用 (電子メールでコードが送信されます)'
-            googleTwoFactor_label: 'OTP アプリを使用 (Google Authenticator、Authy、FreeOTPなどのアプリでコードを生成します)'
+            googleTwoFactor_label: 'OTP アプリを使用 (Google 認証システム、Authy、FreeOTPなどのアプリでコードを生成します)'
             table_method: 方式
             table_state: 状態
             table_action: 操作
@@ -150,7 +150,7 @@ config:
             tagging_rules_definition_title: '« タグ付けルール » とは何ですか？'
             tagging_rules_definition_description: 'これらは、新しく追加された記事に自動的にタグを付けるために、Wallabag が使用するルールです。<br />新しい記事が追加されるたびに、すべてのタグ付けルールを使用して設定したタグが追加されるため、記事に手動でタグ付けする手間が省けます。'
             how_to_use_them_title: 'どのように使用できますか？'
-            how_to_use_them_description: '読む時間が3分以下のときに、新しい記事を « <i>短めの記事</i> » としてタグ付けしたいと仮定しましょう。<br />その場合は、<i>ルール</i>項目に « readingTime &lt;= 3 » 、<i>タグ</i>項目に « <i>短めの記事</i> » と入力します。<br />カンマで区切って複数のタグを同時に追加することもできます： « <i>短めの記事, 後で読む</i> » <br />複雑なルールは定義済みの演算子を使用して記述できます： もしも « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » ならば、次のタグを付ける « <i>長めの記事, github</i> »'
+            how_to_use_them_description: '推定読書時間が3分以下のときに、新しい記事を « <i>短めの記事</i> » としてタグ付けしたいと仮定しましょう。<br />その場合は、<i>ルール</i>項目に « readingTime &lt;= 3 » 、<i>タグ</i>項目に « <i>短めの記事</i> » と入力します。<br />カンマで区切って複数のタグを同時に追加することもできます： « <i>短めの記事, 後で読む</i> » <br />複雑なルールは定義済みの演算子を使用して記述できます： もしも « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » ならば、次のタグを付ける « <i>長めの記事, github</i> »'
             variables_available_title: 'ルールを作成するために使用できる変数と演算子は何ですか？'
             variables_available_description: '以下の変数と演算子を使用して、タグ付けルールを作成できます：'
             meaning: '説明'
@@ -180,12 +180,12 @@ config:
     otp:
         page_title: 2要素認証
         app:
-            two_factor_code_description_1: You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password. It'll disapear after a page reload.
-            two_factor_code_description_2: 'You can scan that QR Code with your app:'
-            two_factor_code_description_3: 'Also, save these backup codes in a safe place, you can use them in case you lose access to your OTP app:'
-            two_factor_code_description_4: 'Test an OTP code from your configured app:'
+            two_factor_code_description_1: 2要素認証を有効にすると、ログインの際に OTP アプリで生成された認証コード(ワンタイムパスワード)が要求される用になります。この設定はあなたのアカウントのセキュリティを向上させます。このページは再読み込みすると、閲覧できなくなります。
+            two_factor_code_description_2: 'OTP アプリでこちらの QR コードをスキャンしてください：'
+            two_factor_code_description_3: '以下のコードはバックアップコードです。このバックアップコードはあなたが OTP アプリへのアクセスを失った場合に必要となります。このバックアップコードは安全に保管し、絶対に第三者に教えないでください。：'
+            two_factor_code_description_4: 'OTP アプリの設定が完了したら、設定が正常に行われたことを確認するためにここに認証コードを入力してください：'
             cancel: キャンセル
-            enable: Enable
+            enable: 2要素認証を有効にする
 
 entry:
     default_title: '記事のタイトル'
@@ -193,19 +193,19 @@ entry:
         unread: '未読の記事'
         starred: 'お気に入りの記事'
         archived: 'アーカイブ済みの記事'
-        filtered: 'Filtered entries'
-        filtered_tags: 'Filtered by tags:'
-        filtered_search: 'Filtered by search:'
+        filtered: '記事の絞り込み'
+        filtered_tags: 'タグ検索：'
+        filtered_search: '単語検索：'
         untagged: 'タグの無い記事'
         all: '全ての記事'
     list:
-        number_on_the_page: '{0} There are no entries.|{1} There is one entry.|]1,Inf[ There are %count% entries.'
-        reading_time: 'estimated reading time'
-        reading_time_minutes: 'estimated reading time: %readingTime% 分'
-        reading_time_less_one_minute: 'estimated reading time: &lt; 1 分'
+        number_on_the_page: '{0} 記事がありません|{1} 1 件の記事|]1,Inf[ %count% 件の記事'
+        reading_time: '推定読書時間'
+        reading_time_minutes: '推定読書時間： %readingTime% 分'
+        reading_time_less_one_minute: '推定読書時間： 1 分未満'
         number_of_tags: '{1}and one other tag|]1,Inf[and %count% other tags'
         reading_time_minutes_short: '%readingTime% 分'
-        reading_time_less_one_minute_short: '&lt; 1 分'
+        reading_time_less_one_minute_short: '1 分未満'
         original_article: '元URL'
         toogle_as_read: '既読・未読の切替え'
         toogle_as_star: 'お気に入りの切替え'
@@ -224,7 +224,7 @@ entry:
         language_label: '言語'
         http_status_label: 'HTTP ステータス'
         reading_time:
-            label: '読むのにかかる推定時間'
+            label: '推定読書時間'
             from: '最小時間'
             to: '最大時間'
         domain_label: 'ドメイン名'
@@ -268,20 +268,20 @@ entry:
         form_new:
             url_label: Url
     search:
-        placeholder: 'What are you looking for?'
+        placeholder: '何をお探しですか？'
     edit:
-        page_title: 'Edit an entry'
+        page_title: '記事を編集'
         title_label: 'タイトル'
-        url_label: 'Url'
-        origin_url_label: 'Origin url (from where you found that entry)'
+        url_label: 'URL'
+        origin_url_label: '元URL (from where you found that entry)'
         save_label: '保存'
     public:
-        shared_by_wallabag: "This article has been shared by %username% with <a href='%wallabag_instance%'>wallabag</a>"
+        shared_by_wallabag: "これは %username% と <a href='%wallabag_instance%'>Wallabag</a> によって共有された記事です。"
     confirm:
-        delete: "Are you sure you want to remove that article?"
-        delete_tag: "Are you sure you want to remove that tag from that article?"
+        delete: "記事を削除してよろしいですか？"
+        delete_tag: "記事からタグを削除してよろしいですか？"
     metadata:
-        reading_time: "Estimated reading time"
+        reading_time: "推定読書時間"
         reading_time_minutes_short: "%readingTime% 分"
         address: "Address"
         added_on: "Added on"
@@ -290,14 +290,14 @@ about:
     page_title: 'アプリについて'
     top_menu:
         who_behind_wallabag: 'Who is behind wallabag'
-        getting_help: 'Getting help'
-        helping: 'Helping wallabag'
-        contributors: 'Contributors'
-        third_party: 'Third-party libraries'
+        getting_help: '助けを得る'
+        helping: 'Wallabag を支援'
+        contributors: '貢献者'
+        third_party: 'サードパーティライブラリ'
     who_behind_wallabag:
-        developped_by: 'Developed by'
-        website: 'website'
-        many_contributors: 'And many others contributors ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">on GitHub</a>'
+        developped_by: '開発者:'
+        website: 'ウェブサイト'
+        many_contributors: 'そして、他の多くの <a href="https://github.com/wallabag/wallabag/graphs/contributors">GitHub</a> 上での貢献者'
         project_website: 'プロジェクトのウェブサイト'
         license: 'ライセンス'
         version: 'バージョン'
@@ -306,14 +306,14 @@ about:
         bug_reports: 'バグ報告'
         support: '<a href="https://github.com/wallabag/wallabag/issues">GitHub上で</a>'
     helping:
-        description: 'wallabag is free and open source. You can help us:'
-        by_contributing: 'by contributing to the project:'
-        by_contributing_2: 'an issue lists all our needs'
-        by_paypal: 'via Paypal'
+        description: 'Wallabag はフリーでオープンソースのソフトウェアです。ご支援いただけると幸いです。：'
+        by_contributing: 'プロジェクトに貢献する：'
+        by_contributing_2: 'こちらが現在やるべきことのリストです'
+        by_paypal: 'PayPal 経由で寄付する'
     contributors:
-        description: 'Thank you to contributors on wallabag web application'
+        description: 'Wallabag ウェブアプリケーションの開発貢献者に感謝します。'
     third_party:
-        description: 'Here is the list of third-party libraries used in wallabag (with their licenses):'
+        description: 'Wallabag で使用されているサードパーティ製ライブラリの一覧を次に示します(ライセンス併記)：'
         package: 'パッケージ'
         license: 'ライセンス'
 
@@ -362,9 +362,9 @@ howto:
         open_original: Open original URL of the entry
         toggle_favorite: Toggle star status for the entry
         toggle_archive: Toggle read status for the entry
-        delete: Delete the entry
+        delete: 記事を削除
         material_title: Shortcuts available with Material theme only
-        add_link: Add a new link
+        add_link: 新しいリンクを追加
         hide_form: Hide the current form (search or new link)
         arrows_navigation: Navigate through articles
         open_article: Display the selected entry
@@ -393,16 +393,16 @@ quickstart:
     first_steps:
         title: '最初のステップ'
         description: "Now wallabag is well configured, it's time to archive the web. You can click on the top right sign + to add a link."
-        new_article: 'Save your first article'
-        unread_articles: 'And classify it!'
+        new_article: '一番最初の記事を追加する'
+        unread_articles: 'そして、追加した記事を整理する！'
     migrate:
-        title: 'Migrate from an existing service'
-        description: "Are you using another service? We'll help you to retrieve your data on wallabag."
-        pocket: 'Migrate from Pocket'
-        wallabag_v1: 'Migrate from wallabag v1'
-        wallabag_v2: 'Migrate from wallabag v2'
-        readability: 'Migrate from Readability'
-        instapaper: 'Migrate from Instapaper'
+        title: '他のサービスからデータを移行する'
+        description: "今まで他のサービスを使用していましたか？私たちは、今までのデータを Wallabag に移行するツールをご用意しています。"
+        pocket: 'Pocket からデータを移行'
+        wallabag_v1: 'Wallabag v1 からデータを移行'
+        wallabag_v2: 'Wallabag v2 からデータを移行'
+        readability: 'Readability からデータを移行'
+        instapaper: 'Instapaper からデータを移行'
     developer:
         title: '開発者向け情報'
         description: '開発者のことも考えています： Docker、API、翻訳...'
@@ -451,7 +451,7 @@ import:
         save_label: 'ファイルをアップロード'
     pocket:
         page_title: 'インポート > Pocket'
-        description: "このインポータは、すべての Pocket データをインポートします。Pocket はサービスからコンテンツを取得することができないので、各記事の読み取り可能なコンテンツは Wallabag によって再取得されます。"
+        description: "ここでは、すべての Pocket 内のデータをインポートします。Pocket はサービスからコンテンツを取得することができないので、各記事の読み取り可能なコンテンツは Wallabag によって再取得されます。"
         config_missing:
             description: "Pocket import isn't configured."
             admin_message: 'You need to define %keyurls%a pocket_consumer_key%keyurle%.'
@@ -477,12 +477,12 @@ import:
         download_images_warning: "You enabled downloading images for your articles. Combined with classic import it can take ages to proceed (or maybe failed). We <strong>strongly recommend</strong> to enable asynchronous import to avoid errors."
     firefox:
         page_title: 'インポート > Firefox'
-        description: "This importer will import all your Firefox bookmarks. Just go to your bookmarks (Ctrl+Maj+O), then into \"Import and backup\", choose \"Backup...\". You will obtain a .json file."
-        how_to: "Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched."
+        description: "ここでは、すべての Firefox 内のブックマークをインポートします。Firefox のメニューから「すべてのブックマークを表示」を選択し「ブラウジングライブラリー」に移動します。その後「インポートとバックアップ」から「バックアップ...」を選択して .json 形式のファイルを入手してください。"
+        how_to: "ブックマークのバックアップファイルを選択し、下のボタンをクリックしてインポートしてください。すべての記事を取得する必要があるため、この作業には時間がかかる場合があります。"
     chrome:
         page_title: 'インポート > Chrome'
         description: "This importer will import all your Chrome bookmarks. The location of the file depends on your operating system : <ul><li>On Linux, go into the <code>~/.config/chromium/Default/</code> directory</li><li>On Windows, it should be at <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>On OS X, it should be at <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Once you got there, copy the <code>Bookmarks</code> file someplace you'll find.<em><br>Note that if you have Chromium instead of Chrome, you'll have to correct paths accordingly.</em></p>"
-        how_to: "Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched."
+        how_to: "ブックマークのバックアップファイルを選択し、下のボタンをクリックしてインポートしてください。すべての記事を取得する必要があるため、この作業には時間がかかる場合があります。"
     instapaper:
         page_title: 'インポート > Instapaper'
         description: 'This importer will import all your Instapaper articles. On the settings (https://www.instapaper.com/user) page, click on "Download .CSV file" in the "Export" section. A CSV file will be downloaded (like "instapaper-export.csv").'
@@ -531,7 +531,7 @@ developer:
         back: '戻る'
         read_howto: 'Read the howto "Create my first application"'
     howto:
-        page_title: 'API clients management > How to create my first application'
+        page_title: 'API クライアントの管理 > 初めてのアプリケーションの作り方'
         description:
             paragraph_1: 'The following commands make use of the <a href="https://github.com/jkbrzt/httpie">HTTPie library</a>. Make sure it is installed on your system before using it.'
             paragraph_2: 'You need a token to communicate between your 3rd application and wallabag API.'
@@ -541,7 +541,7 @@ developer:
             paragraph_6: 'The access_token is useful to do a call to the API endpoint. For example:'
             paragraph_7: 'This call will return all the entries for your user.'
             paragraph_8: 'If you want to see all the API endpoints, you can have a look <a href="%link%">to our API documentation</a>.'
-        back: 'Back'
+        back: '戻る'
 
 user:
     page_title: ユーザー管理
@@ -600,7 +600,7 @@ flashes:
         notice:
             config_saved: '設定が保存されました'
             password_updated: 'パスワードが更新されました'
-            password_not_updated_demo: "In demonstration mode, you can't change password for this user."
+            password_not_updated_demo: "デモモードでは、このユーザーのパスワードを変更することはできません。"
             user_updated: '情報が更新されました'
             feed_updated: 'フィード情報が更新されました'
             tagging_rules_updated: 'タグ付けルールが更新されました'
