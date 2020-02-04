@@ -68,6 +68,18 @@ class ExportController extends Controller
             );
 
             $title = 'Tag ' . $tag->getLabel();
+        } elseif ('search' === $category) {
+            $searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
+            $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
+
+            $entries = $repository->getBuilderForSearchByUser(
+                    $this->getUser()->getId(),
+                    $searchTerm,
+                    $currentRoute
+            )->getQuery()
+             ->getResult();
+
+            $title = 'Search ' . $searchTerm;
         } else {
             $entries = $repository
                 ->$methodBuilder($this->getUser()->getId())

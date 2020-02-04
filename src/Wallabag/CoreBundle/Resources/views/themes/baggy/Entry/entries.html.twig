@@ -96,16 +96,21 @@
     {% if tag is defined %}
         {% set currentTag = tag %}
     {% endif %}
+    {% set exportSearchTerm = null %}
+    {% if searchTerm is defined %}
+        {% set exportSearchTerm = searchTerm %}
+    {% endif %}
+    {% set previousRoute = app.request.attributes.get('currentRoute') %}
         <h2>{{ 'entry.list.export_title'|trans }}</h2>
         <a href="javascript: void(null);" id="download-form-close" class="close-button--popup close-button">&times;</a>
         <ul>
-            {% if craue_setting('export_epub') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'epub', 'tag' : currentTag }) }}">EPUB</a></li>{% endif %}
-            {% if craue_setting('export_mobi') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'mobi', 'tag' : currentTag }) }}">MOBI</a></li>{% endif %}
-            {% if craue_setting('export_pdf') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'pdf', 'tag' : currentTag }) }}">PDF</a></li>{% endif %}
-            {% if craue_setting('export_json') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'json', 'tag' : currentTag }) }}">JSON</a></li>{% endif %}
-            {% if craue_setting('export_csv') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'csv', 'tag' : currentTag }) }}">CSV</a></li>{% endif %}
-            {% if craue_setting('export_txt') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'txt', 'tag' : currentTag }) }}">TXT</a></li>{% endif %}
-            {% if craue_setting('export_xml') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'xml', 'tag' : currentTag }) }}">XML</a></li>{% endif %}
+            {% if craue_setting('export_epub') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'epub', 'tag' : currentTag, 'search_entry[term]' : exportSearchTerm, 'currentRoute' : previousRoute }) }}">EPUB</a></li>{% endif %}
+            {% if craue_setting('export_mobi') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'mobi', 'tag' : currentTag, 'search_entry[term]' : exportSearchTerm, 'currentRoute' : previousRoute  }) }}">MOBI</a></li>{% endif %}
+            {% if craue_setting('export_pdf') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'pdf', 'tag' : currentTag, 'search_entry[term]' : exportSearchTerm, 'currentRoute' : previousRoute  }) }}">PDF</a></li>{% endif %}
+            {% if craue_setting('export_json') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'json', 'tag' : currentTag, 'search_entry[term]' : exportSearchTerm, 'currentRoute' : previousRoute  }) }}">JSON</a></li>{% endif %}
+            {% if craue_setting('export_csv') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'csv', 'tag' : currentTag, 'search_entry[term]' : exportSearchTerm, 'currentRoute' : previousRoute  }) }}">CSV</a></li>{% endif %}
+            {% if craue_setting('export_txt') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'txt', 'tag' : currentTag, 'search_entry[term]' : exportSearchTerm, 'currentRoute' : previousRoute  }) }}">TXT</a></li>{% endif %}
+            {% if craue_setting('export_xml') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'xml', 'tag' : currentTag, 'search_entry[term]' : exportSearchTerm, 'currentRoute' : previousRoute  }) }}">XML</a></li>{% endif %}
         </ul>
     </aside>
 

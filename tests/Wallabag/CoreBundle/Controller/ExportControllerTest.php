@@ -3,9 +3,13 @@
 namespace Tests\Wallabag\CoreBundle\Controller;
 
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Entity\Entry;
 
 class ExportControllerTest extends WallabagCoreTestCase
 {
+    private $adminEntry;
+    private $bobEntry;
+
     public function testLogin()
     {
         $client = $this->getClient();
@@ -243,6 +247,30 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertContains('foo', $content[0]['tags']);
     }
 
+    public function testJsonExportFromSearch()
+    {
+        $this->setUpForJsonExportFromSearch();
+
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        ob_start();
+        $crawler = $client->request('GET', '/export/search.json?search_entry[term]=entry+search&currentRoute=homepage');
+        ob_end_clean();
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $headers = $client->getResponse()->headers;
+        $this->assertSame('application/json', $headers->get('content-type'));
+        $this->assertSame('attachment; filename="Search entry search articles.json"', $headers->get('content-disposition'));
+        $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
+
+        $content = json_decode($client->getResponse()->getContent(), true);
+        $this->assertCount(1, $content);
+
+        $this->tearDownForJsonExportFromSearch();
+    }
+
     public function testXmlExport()
     {
         $this->logInAs('admin');
@@ -280,6 +308,41 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty('domain_name', (string) $content->entry[0]->domain_name);
         $this->assertNotEmpty('created_at', (string) $content->entry[0]->created_at);
         $this->assertNotEmpty('updated_at', (string) $content->entry[0]->updated_at);
+    }
+
+    private function setUpForJsonExportFromSearch()
+    {
+        $client = $this->getClient();
+        $em = $this->getEntityManager();
+
+        $userRepository = $client->getContainer()
+            ->get('wallabag_user.user_repository.test');
+
+        $user = $userRepository->findOneByUserName('admin');
+        $this->adminEntry = new Entry($user);
+        $this->adminEntry->setUrl('http://0.0.0.0/entry-search-admin');
+        $this->adminEntry->setTitle('test title entry search admin');
+        $this->adminEntry->setContent('this is my content /o/');
+        $em->persist($this->adminEntry);
+
+        $user = $userRepository->findOneByUserName('bob');
+        $this->bobEntry = new Entry($user);
+        $this->bobEntry->setUrl('http://0.0.0.0/entry-search-bob');
+        $this->bobEntry->setTitle('test title entry search bob');
+        $this->bobEntry->setContent('this is my content /o/');
+        $em->persist($this->bobEntry);
+
+        $em->flush();
+    }
+
+    private function tearDownForJsonExportFromSearch()
+    {
+        $em = $this->getEntityManager();
+
+        $em->remove($this->adminEntry);
+        $em->remove($this->bobEntry);
+
+        $em->flush();
     }
 
     private function getSanitizedFilename($title)
