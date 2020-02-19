@@ -7323,16 +7323,16 @@
         },
         {
             "name": "scheb/two-factor-bundle",
-            "version": "v4.13.0",
+            "version": "v4.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scheb/two-factor-bundle.git",
-                "reference": "ebbd21a767b21e62272a67d50e4265a0dccd87c4"
+                "reference": "6393d304ee51a703711e5f5cc3e76f04ce4e238c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/ebbd21a767b21e62272a67d50e4265a0dccd87c4",
-                "reference": "ebbd21a767b21e62272a67d50e4265a0dccd87c4",
+                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/6393d304ee51a703711e5f5cc3e76f04ce4e238c",
+                "reference": "6393d304ee51a703711e5f5cc3e76f04ce4e238c",
                 "shasum": ""
             },
             "require": {
@@ -7387,7 +7387,7 @@
                 "two-factor",
                 "two-step"
             ],
-            "time": "2020-02-02T19:54:11+00:00"
+            "time": "2020-02-15T13:01:16+00:00"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -11445,7 +11445,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "abandoned": true,
+            "abandoned": "symfony/maker-bundle",
             "time": "2017-12-07T15:36:41+00:00"
         },
         {
