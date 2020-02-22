@@ -16,12 +16,15 @@ cache:
         - $HOME/.npm
         - $HOME/.yarn-cache
 
+if: |
+    type = pull_request OR \
+    branch = master
+
 php:
     - 7.1
     - 7.2
     - 7.3
     - 7.4
-    - nightly
 
 node_js:
     - "5"
@@ -34,11 +37,10 @@ env:
 matrix:
     fast_finish: true
     include:
-        - php: 7.2
+        - php: 7.3
           env: CS_FIXER=run VALIDATE_TRANSLATION_FILE=run ASSETS=build DB=sqlite
     allow_failures:
         - php: 7.4
-        - php: nightly
 
 # exclude v1 branches
 branches:
