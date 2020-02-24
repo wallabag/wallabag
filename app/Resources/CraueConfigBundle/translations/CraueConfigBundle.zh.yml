@@ -1,0 +1,40 @@
+settings_changed: 配置已更新
+download_pictures: 在你的服务器上缓存图片
+carrot: 启用分享到 Carrot
+diaspora_url: diaspora* 链接，如果该服务已被启用
+export_epub: 启用 ePub 导出
+export_mobi: 启用 .mobi 导出
+export_pdf: 启用 PDF 导出
+export_csv: 启用 CSV 导出
+export_json: 启用 JSON 导出
+export_txt: 启用 TXT 导出
+export_xml: 启用 XML 导出
+import_with_rabbitmq: 启用 RabbitMQ 来异步导入数据
+import_with_redis: 启用 Redis 来异步导入数据
+shaarli_url: Shaarli 链接，如果该服务已被启用
+scuttle_url: Scuttle 链接，如果该服务已被启用
+unmark_url: Unmark 链接，如果该服务已被启用
+share_diaspora: 启用分享到 diaspora*
+share_mail: 启用邮件分享
+share_shaarli: 启用分享到 Shaarli
+share_scuttle: 启用分享到 Scuttle
+share_twitter: 启用分享到 Twitter
+share_unmark: 启用分享到 Unmark.it
+show_printlink: 展示一个用于打印内容的链接
+wallabag_support_url: wallabag 的支持链接
+entry: "文章"
+export: "导出"
+import: "导入"
+misc: "杂项"
+modify_settings: "申请"
+piwik_host: 你的网站在 Piwik 的主机名（不包括 http:// or https://）
+piwik_site_id: 你的网站在 Piwik 的 ID
+piwik_enabled: 启用 Piwik
+demo_mode_enabled: "启用演示模式？(仅用于 wallabag 公开演示)"
+demo_mode_username: "Demo user"
+share_public: 允许为项目启用公开链接
+download_images_enabled: 在本地缓存图片
+restricted_access: 启用针对带有付费墙网站的认证
+api_user_registration: 允许新用户通过 API 注册
+store_article_headers: 让 wallabag 存储每篇文章的 HTTP header
+shaarli_share_origin_url: 选择分享原始链接到 Shaarli，如果该服务已被启用
