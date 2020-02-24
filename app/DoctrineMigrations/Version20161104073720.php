@@ -12,9 +12,6 @@ class Version20161104073720 extends WallabagMigration
 {
     private $indexName = 'IDX_entry_created_at';
 
-    /**
-     * @param Schema $schema
-     */
     public function up(Schema $schema)
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
@@ -23,9 +20,6 @@ class Version20161104073720 extends WallabagMigration
         $entryTable->addIndex(['created_at'], $this->indexName);
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function down(Schema $schema)
     {
         $entryTable = $schema->getTable($this->getTable('entry'));

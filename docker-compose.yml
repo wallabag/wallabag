@@ -1,9 +1,9 @@
 version: '2'
 services:
     nginx:
-        image: nginx
+        image: nginx:alpine
         ports:
-            - "8080:80"
+            - "8000:80"
         volumes:
             - ./docker/nginx/nginx.conf:/nginx.conf
             - ./docker/logs/nginx:/var/log/nginx
@@ -16,7 +16,7 @@ services:
         build:
             context: docker/php
             args:
-                # Set here your timezone using one of this: http://php.net/manual/en/timezones.php
+                # Set here your timezone using one of this: https://php.net/manual/en/timezones.php
                 timezone: 'Europe/Monaco'
         ports:
             - "9000:9000"
@@ -32,8 +32,8 @@ services:
             # - ./docker/postgres/env
             # - ./docker/mariadb/env
 
-    #postgres:
-    #    image: postgres:9
+    # postgres:
+    #    image: postgres:11-alpine
     #    ports:
     #        - "5432:5432"
     #    volumes:
@@ -41,7 +41,7 @@ services:
     #    env_file:
     #        - ./docker/postgres/env
 
-    #mariadb:
+    # mariadb:
     #    image: mariadb:10
     #    ports:
     #        - "3306:3306"
@@ -50,12 +50,12 @@ services:
     #    env_file:
     #        - ./docker/mariadb/env
 
-    rabbitmq:
-        image: rabbitmq:3-management
-        ports:
-            - "15672:15672"
+    # rabbitmq:
+    #     image: rabbitmq:3-management-alpine
+    #     ports:
+    #         - "15672:15672"
 
     redis:
-        image: redis
+        image: redis:4-alpine
         ports:
             - "6379:6379"

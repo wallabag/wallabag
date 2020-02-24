@@ -2,9 +2,9 @@
 
 namespace Wallabag\ApiBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\ApiBundle\Entity\Client;
 use Wallabag\ApiBundle\Form\Type\ClientType;
 
@@ -28,8 +28,6 @@ class DeveloperController extends Controller
 
     /**
      * Create a client (an app).
-     *
-     * @param Request $request
      *
      * @Route("/developer/client/create", name="developer_create_client")
      *
@@ -66,8 +64,6 @@ class DeveloperController extends Controller
 
     /**
      * Remove a client.
-     *
-     * @param Client $client
      *
      * @Route("/developer/client/delete/{id}", requirements={"id" = "\d+"}, name="developer_delete_client")
      *

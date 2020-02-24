@@ -2,8 +2,8 @@
 
 {% block head %}
     {{ parent() }}
-    {% if tag is defined and app.user.config.rssToken %}
-        <link rel="alternate" type="application/rss+xml" href="{{ path('tag_rss', {'username': app.user.username, 'token': app.user.config.rssToken, 'slug': tag.slug}) }}" />
+    {% if tag is defined and app.user.config.feedToken %}
+        <link rel="alternate" type="application/atom+xml" href="{{ path('tag_feed', {'username': app.user.username, 'token': app.user.config.feedToken, 'slug': tag.slug}) }}" />
     {% endif %}
 {% endblock %}
 
@@ -21,12 +21,15 @@
 {% block content %}
     {% set listMode = app.user.config.listMode %}
     {% set currentRoute = app.request.attributes.get('_route') %}
+    {% if currentRoute == 'homepage' %}
+        {% set currentRoute = 'unread' %}
+    {% endif %}
     <div class="results">
         <div class="nb-results">
             {{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}
             <a href="{{ path('switch_view_mode') }}"><i class="material-icons">{% if listMode == 0 %}view_list{% else %}view_module{% endif %}</i></a>
-            {% if app.user.config.rssToken %}
-                {% include "@WallabagCore/themes/common/Entry/_rss_link.html.twig" %}
+            {% if app.user.config.feedToken %}
+                {% include "@WallabagCore/themes/common/Entry/_feed_link.html.twig" %}
             {% endif %}
         </div>
         {% if entries.getNbPages > 1 %}
@@ -60,16 +63,13 @@
     {% if tag is defined %}
         {% set currentTag = tag.slug %}
     {% endif %}
-    {% if currentRoute == 'homepage' %}
-        {% set currentRoute = 'unread' %}
-    {% endif %}
         <h4 class="center">{{ 'entry.list.export_title'|trans }}</h4>
         <ul>
             {% if craue_setting('export_epub') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'epub', 'tag' : currentTag }) }}">EPUB</a></li>{% endif %}
             {% if craue_setting('export_mobi') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'mobi', 'tag' : currentTag }) }}">MOBI</a></li>{% endif %}
             {% if craue_setting('export_pdf') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'pdf', 'tag' : currentTag }) }}">PDF</a></li>{% endif %}
-            {% if craue_setting('export_csv') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'json', 'tag' : currentTag }) }}">JSON</a></li>{% endif %}
-            {% if craue_setting('export_json') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'csv', 'tag' : currentTag }) }}">CSV</a></li>{% endif %}
+            {% if craue_setting('export_json') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'json', 'tag' : currentTag }) }}">JSON</a></li>{% endif %}
+            {% if craue_setting('export_csv') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'csv', 'tag' : currentTag }) }}">CSV</a></li>{% endif %}
             {% if craue_setting('export_txt') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'txt', 'tag' : currentTag }) }}">TXT</a></li>{% endif %}
             {% if craue_setting('export_xml') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'xml', 'tag' : currentTag }) }}">XML</a></li>{% endif %}
         </ul>
@@ -83,6 +83,12 @@
             <h4 class="center">{{ 'entry.filters.title'|trans }}</h4>
 
             <div class="row">
+                {% if currentRoute != 'untagged' and nbEntriesUntagged != 0 %}
+                    <div class="col s12 center-align">
+                        <a href="{{ path('untagged') }}">{{ 'tag.list.see_untagged_entries'|trans }} ({{nbEntriesUntagged}})</a>
+                    </div>
+                {% endif %}
+
                 <div class="col s12">
                     <label>{{ 'entry.filters.status_label'|trans }}</label>
                 </div>

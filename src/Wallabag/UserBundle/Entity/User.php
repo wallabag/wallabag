@@ -8,8 +8,9 @@ use FOS\UserBundle\Model\User as BaseUser;
 use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\XmlRoot;
-use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
-use Scheb\TwoFactorBundle\Model\TrustedComputerInterface;
+use Scheb\TwoFactorBundle\Model\BackupCodeInterface;
+use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface as EmailTwoFactorInterface;
+use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface as GoogleTwoFactorInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Wallabag\ApiBundle\Entity\Client;
@@ -28,7 +29,7 @@ use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
  * @UniqueEntity("email")
  * @UniqueEntity("username")
  */
-class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterface
+class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorInterface, BackupCodeInterface
 {
     use EntityTimestampsTrait;
 
@@ -123,16 +124,21 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     private $authCode;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(name="googleAuthenticatorSecret", type="string", nullable=true)
      */
-    private $twoFactorAuthentication = false;
+    private $googleAuthenticatorSecret;
 
     /**
      * @ORM\Column(type="json_array", nullable=true)
      */
-    private $trusted;
+    private $backupCodes;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $emailTwoFactor = false;
 
     public function __construct()
     {
@@ -182,8 +188,6 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     }
 
     /**
-     * @param Entry $entry
-     *
      * @return User
      */
     public function addEntry(Entry $entry)
@@ -233,54 +237,122 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
     /**
      * @return bool
      */
-    public function isTwoFactorAuthentication()
+    public function isEmailTwoFactor()
     {
-        return $this->twoFactorAuthentication;
+        return $this->emailTwoFactor;
     }
 
     /**
-     * @param bool $twoFactorAuthentication
+     * @param bool $emailTwoFactor
      */
-    public function setTwoFactorAuthentication($twoFactorAuthentication)
+    public function setEmailTwoFactor($emailTwoFactor)
     {
-        $this->twoFactorAuthentication = $twoFactorAuthentication;
+        $this->emailTwoFactor = $emailTwoFactor;
     }
 
-    public function isEmailAuthEnabled()
+    /**
+     * Used in the user config form to be "like" the email option.
+     */
+    public function isGoogleTwoFactor()
     {
-        return $this->twoFactorAuthentication;
+        return $this->isGoogleAuthenticatorEnabled();
     }
 
-    public function getEmailAuthCode()
+    /**
+     * {@inheritdoc}
+     */
+    public function isEmailAuthEnabled(): bool
+    {
+        return $this->emailTwoFactor;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEmailAuthCode(): string
     {
         return $this->authCode;
     }
 
-    public function setEmailAuthCode($authCode)
+    /**
+     * {@inheritdoc}
+     */
+    public function setEmailAuthCode(string $authCode): void
     {
         $this->authCode = $authCode;
     }
 
-    public function addTrustedComputer($token, \DateTime $validUntil)
+    /**
+     * {@inheritdoc}
+     */
+    public function getEmailAuthRecipient(): string
     {
-        $this->trusted[$token] = $validUntil->format('r');
-    }
-
-    public function isTrustedComputer($token)
-    {
-        if (isset($this->trusted[$token])) {
-            $now = new \DateTime();
-            $validUntil = new \DateTime($this->trusted[$token]);
-
-            return $now < $validUntil;
-        }
-
-        return false;
+        return $this->email;
     }
 
     /**
-     * @param Client $client
-     *
+     * {@inheritdoc}
+     */
+    public function isGoogleAuthenticatorEnabled(): bool
+    {
+        return $this->googleAuthenticatorSecret ? true : false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getGoogleAuthenticatorUsername(): string
+    {
+        return $this->username;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getGoogleAuthenticatorSecret(): string
+    {
+        return $this->googleAuthenticatorSecret;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setGoogleAuthenticatorSecret(?string $googleAuthenticatorSecret): void
+    {
+        $this->googleAuthenticatorSecret = $googleAuthenticatorSecret;
+    }
+
+    public function setBackupCodes(array $codes = null)
+    {
+        $this->backupCodes = $codes;
+    }
+
+    public function getBackupCodes()
+    {
+        return $this->backupCodes;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isBackupCode(string $code): bool
+    {
+        return false === $this->findBackupCode($code) ? false : true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function invalidateBackupCode(string $code): void
+    {
+        $key = $this->findBackupCode($code);
+
+        if (false !== $key) {
+            unset($this->backupCodes[$key]);
+        }
+    }
+
+    /**
      * @return User
      */
     public function addClient(Client $client)
@@ -308,5 +380,25 @@ class User extends BaseUser implements TwoFactorInterface, TrustedComputerInterf
         if (!empty($this->clients)) {
             return $this->clients->first();
         }
+    }
+
+    /**
+     * Try to find a backup code from the list of backup codes of the current user.
+     *
+     * @param string $code Given code from the user
+     *
+     * @return string|false
+     */
+    private function findBackupCode(string $code)
+    {
+        foreach ($this->backupCodes as $key => $backupCode) {
+            // backup code are hashed using `password_hash`
+            // see ConfigController->otpAppAction
+            if (password_verify($code, $backupCode)) {
+                return $key;
+            }
+        }
+
+        return false;
     }
 }

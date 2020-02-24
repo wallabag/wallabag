@@ -12,9 +12,6 @@ class Version20161024212538 extends WallabagMigration
 {
     private $constraintName = 'IDX_user_oauth_client';
 
-    /**
-     * @param Schema $schema
-     */
     public function up(Schema $schema)
     {
         $clientsTable = $schema->getTable($this->getTable('oauth2_clients'));
@@ -32,9 +29,6 @@ class Version20161024212538 extends WallabagMigration
         );
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function down(Schema $schema)
     {
         $clientsTable = $schema->getTable($this->getTable('oauth2_clients'));

@@ -35,8 +35,6 @@ class DownloadImagesSubscriber implements EventSubscriberInterface
 
     /**
      * Download images and updated the data into the entry.
-     *
-     * @param EntrySavedEvent $event
      */
     public function onEntrySaved(EntrySavedEvent $event)
     {
@@ -69,8 +67,6 @@ class DownloadImagesSubscriber implements EventSubscriberInterface
 
     /**
      * Remove images related to the entry.
-     *
-     * @param EntryDeletedEvent $event
      */
     public function onEntryDeleted(EntryDeletedEvent $event)
     {
@@ -88,8 +84,6 @@ class DownloadImagesSubscriber implements EventSubscriberInterface
      *
      * @todo If we want to add async download, it should be done in that method
      *
-     * @param Entry $entry
-     *
      * @return string|false False in case of async
      */
     private function downloadImages(Entry $entry)
@@ -105,8 +99,6 @@ class DownloadImagesSubscriber implements EventSubscriberInterface
      * Download the preview picture.
      *
      * @todo If we want to add async download, it should be done in that method
-     *
-     * @param Entry $entry
      *
      * @return string|false False in case of async
      */

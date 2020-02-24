@@ -295,6 +295,15 @@ div.pagination ul {
   }
 }
 
-.hide {
+.card-tag-form {
+  display: inline-block;
+}
+
+.card-tag-form input[type="text"] {
+  min-width: 20em;
+}
+
+.hide,
+.hidden {
   display: none;
 }

@@ -131,6 +131,11 @@ nav {
   display: none;
 }
 
+.entry-nav-top--sticky {
+  position: sticky;
+  top: 0;
+}
+
 @media (min-width: 993px) {
   .button-collapse {
     display: none;

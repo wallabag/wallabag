@@ -124,7 +124,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.liberation.fr is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.liberation.fr is ok');
         $this->assertContains('foot', $content->getTags(), 'It includes the "foot" tag');
-        $this->assertSame(1, \count($content->getTags()));
+        $this->assertCount(1, $content->getTags());
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
 
         $content = $client->getContainer()
@@ -138,7 +138,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
         $this->assertContains('foot', $content->getTags());
         $this->assertContains('test_tag', $content->getTags());
 
-        $this->assertSame(2, \count($content->getTags()));
+        $this->assertCount(2, $content->getTags());
     }
 
     public function testImportInstapaperWithFileAndMarkAllAsRead()

@@ -3,6 +3,5 @@ validator:
     password_too_short: 'Kennwort-Mindestlänge von acht Zeichen nicht erfüllt'
     password_wrong_value: 'Falscher Wert für dein aktuelles Kennwort'
     item_per_page_too_high: 'Dies wird die Anwendung möglicherweise beenden'
-    rss_limit_too_high: 'Dies wird die Anwendung möglicherweise beenden'
+    feed_limit_too_high: 'Dies wird die Anwendung möglicherweise beenden'
     quote_length_too_high: 'Das Zitat ist zu lang. Es sollte nicht mehr als {{ limit }} Zeichen enthalten.'
-    

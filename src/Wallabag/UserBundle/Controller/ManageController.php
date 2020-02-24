@@ -7,10 +7,9 @@ use FOS\UserBundle\FOSUserEvents;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\UserBundle\Form\SearchUserType;
 
@@ -22,8 +21,7 @@ class ManageController extends Controller
     /**
      * Creates a new User entity.
      *
-     * @Route("/new", name="user_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", name="user_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -60,19 +58,33 @@ class ManageController extends Controller
     /**
      * Displays a form to edit an existing User entity.
      *
-     * @Route("/{id}/edit", name="user_edit")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", name="user_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, User $user)
     {
-        $deleteForm = $this->createDeleteForm($user);
-        $editForm = $this->createForm('Wallabag\UserBundle\Form\UserType', $user);
-        $editForm->handleRequest($request);
+        $userManager = $this->container->get('fos_user.user_manager');
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+        $deleteForm = $this->createDeleteForm($user);
+        $form = $this->createForm('Wallabag\UserBundle\Form\UserType', $user);
+        $form->handleRequest($request);
+
+        // `googleTwoFactor` isn't a field within the User entity, we need to define it's value in a different way
+        if ($this->getParameter('twofactor_auth') && true === $user->isGoogleAuthenticatorEnabled() && false === $form->isSubmitted()) {
+            $form->get('googleTwoFactor')->setData(true);
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // handle creation / reset of the OTP secret if checkbox changed from the previous state
+            if ($this->getParameter('twofactor_auth')) {
+                if (true === $form->get('googleTwoFactor')->getData() && false === $user->isGoogleAuthenticatorEnabled()) {
+                    $user->setGoogleAuthenticatorSecret($this->get('scheb_two_factor.security.google_authenticator')->generateSecret());
+                    $user->setEmailTwoFactor(false);
+                } elseif (false === $form->get('googleTwoFactor')->getData() && true === $user->isGoogleAuthenticatorEnabled()) {
+                    $user->setGoogleAuthenticatorSecret(null);
+                }
+            }
+
+            $userManager->updateUser($user);
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
@@ -84,7 +96,7 @@ class ManageController extends Controller
 
         return $this->render('WallabagUserBundle:Manage:edit.html.twig', [
             'user' => $user,
-            'edit_form' => $editForm->createView(),
+            'edit_form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
             'twofactor_auth' => $this->getParameter('twofactor_auth'),
         ]);
@@ -93,8 +105,7 @@ class ManageController extends Controller
     /**
      * Deletes a User entity.
      *
-     * @Route("/{id}", name="user_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="user_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, User $user)
     {
@@ -116,8 +127,7 @@ class ManageController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param int     $page
+     * @param int $page
      *
      * @Route("/list/{page}", name="user_index", defaults={"page" = 1})
      *
@@ -135,8 +145,6 @@ class ManageController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->get('logger')->info('searching users');
-
             $searchTerm = (isset($request->get('search_user')['term']) ? $request->get('search_user')['term'] : '');
 
             $qb = $em->getRepository('WallabagUserBundle:User')->getQueryBuilderForSearch($searchTerm);
@@ -161,7 +169,7 @@ class ManageController extends Controller
     }
 
     /**
-     * Creates a form to delete a User entity.
+     * Create a form to delete a User entity.
      *
      * @param User $user The User entity
      *

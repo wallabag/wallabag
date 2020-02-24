@@ -2,8 +2,15 @@
 
 namespace Wallabag\CoreBundle\Helper;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Message\Response;
+use GuzzleHttp\Psr7\Uri;
+use GuzzleHttp\Psr7\UriResolver;
+use Http\Client\Common\HttpMethodsClient;
+use Http\Client\Common\Plugin\ErrorPlugin;
+use Http\Client\Common\PluginClient;
+use Http\Client\HttpClient;
+use Http\Discovery\MessageFactoryDiscovery;
+use Http\Message\MessageFactory;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Finder\Finder;
@@ -19,15 +26,32 @@ class DownloadImages
     private $mimeGuesser;
     private $wallabagUrl;
 
-    public function __construct(Client $client, $baseFolder, $wallabagUrl, LoggerInterface $logger)
+    public function __construct(HttpClient $client, $baseFolder, $wallabagUrl, LoggerInterface $logger, MessageFactory $messageFactory = null)
     {
-        $this->client = $client;
+        $this->client = new HttpMethodsClient(new PluginClient($client, [new ErrorPlugin()]), $messageFactory ?: MessageFactoryDiscovery::find());
         $this->baseFolder = $baseFolder;
         $this->wallabagUrl = rtrim($wallabagUrl, '/');
         $this->logger = $logger;
         $this->mimeGuesser = new MimeTypeExtensionGuesser();
 
         $this->setFolder();
+    }
+
+    /**
+     * Process the html and extract images URLs from it.
+     *
+     * @param string $html
+     *
+     * @return string[]
+     */
+    public static function extractImagesUrlsFromHtml($html)
+    {
+        $crawler = new Crawler($html);
+        $imagesCrawler = $crawler->filterXpath('//img');
+        $imagesUrls = $imagesCrawler->extract(['src']);
+        $imagesSrcsetUrls = self::getSrcsetUrls($imagesCrawler);
+
+        return array_unique(array_merge($imagesUrls, $imagesSrcsetUrls));
     }
 
     /**
@@ -41,13 +65,7 @@ class DownloadImages
      */
     public function processHtml($entryId, $html, $url)
     {
-        $crawler = new Crawler($html);
-        $imagesCrawler = $crawler
-            ->filterXpath('//img');
-        $imagesUrls = $imagesCrawler
-            ->extract(['src']);
-        $imagesSrcsetUrls = $this->getSrcsetUrls($imagesCrawler);
-        $imagesUrls = array_unique(array_merge($imagesUrls, $imagesSrcsetUrls));
+        $imagesUrls = self::extractImagesUrlsFromHtml($html);
 
         $relativePath = $this->getRelativePath($entryId);
 
@@ -122,7 +140,7 @@ class DownloadImages
         $localPath = $folderPath . '/' . $hashImage . '.' . $ext;
 
         try {
-            $im = imagecreatefromstring($res->getBody());
+            $im = imagecreatefromstring((string) $res->getBody());
         } catch (\Exception $e) {
             $im = false;
         }
@@ -135,7 +153,21 @@ class DownloadImages
 
         switch ($ext) {
             case 'gif':
-                imagegif($im, $localPath);
+                // use Imagick if available to keep GIF animation
+                if (class_exists('\\Imagick')) {
+                    try {
+                        $imagick = new \Imagick();
+                        $imagick->readImageBlob($res->getBody());
+                        $imagick->setImageFormat('gif');
+                        $imagick->writeImages($localPath, true);
+                    } catch (\Exception $e) {
+                        // if Imagick fail, fallback to the default solution
+                        imagegif($im, $localPath);
+                    }
+                } else {
+                    imagegif($im, $localPath);
+                }
+
                 $this->logger->debug('DownloadImages: Re-creating gif');
                 break;
             case 'jpeg':
@@ -181,29 +213,30 @@ class DownloadImages
     /**
      * Get images urls from the srcset image attribute.
      *
-     * @param Crawler $imagesCrawler
-     *
      * @return array An array of urls
      */
-    private function getSrcsetUrls(Crawler $imagesCrawler)
+    private static function getSrcsetUrls(Crawler $imagesCrawler)
     {
         $urls = [];
-        $iterator = $imagesCrawler
-            ->getIterator();
+        $iterator = $imagesCrawler->getIterator();
+
         while ($iterator->valid()) {
             $srcsetAttribute = $iterator->current()->getAttribute('srcset');
+
             if ('' !== $srcsetAttribute) {
                 // Couldn't start with " OR ' OR a white space
                 // Could be one or more white space
                 // Must be one or more digits followed by w OR x
                 $pattern = "/(?:[^\"'\s]+\s*(?:\d+[wx])+)/";
                 preg_match_all($pattern, $srcsetAttribute, $matches);
+
                 $srcset = \call_user_func_array('array_merge', $matches);
                 $srcsetUrls = array_map(function ($src) {
                     return trim(explode(' ', $src, 2)[0]);
                 }, $srcset);
                 $urls = array_merge($srcsetUrls, $urls);
             }
+
             $iterator->next();
         }
 
@@ -260,33 +293,29 @@ class DownloadImages
             return $url;
         }
 
-        $base = new \SimplePie_IRI($base);
+        $base = new Uri($base);
 
-        // remove '//' in URL path (causes URLs not to resolve properly)
-        if (isset($base->ipath)) {
-            $base->ipath = preg_replace('!//+!', '/', $base->ipath);
+        // in case the url has no scheme & host
+        if ('' === $base->getAuthority() || '' === $base->getScheme()) {
+            $this->logger->error('DownloadImages: Can not make an absolute link', ['base' => $base, 'url' => $url]);
+
+            return false;
         }
 
-        if ($absolute = \SimplePie_IRI::absolutize($base, $url)) {
-            return $absolute->get_uri();
-        }
-
-        $this->logger->error('DownloadImages: Can not make an absolute link', ['base' => $base, 'url' => $url]);
-
-        return false;
+        return (string) UriResolver::resolve($base, new Uri($url));
     }
 
     /**
      * Retrieve and validate the extension from the response of the url of the image.
      *
-     * @param Response $res       Guzzle Response
-     * @param string   $imagePath Path from the src image from the content (used for log only)
+     * @param ResponseInterface $res       Http Response
+     * @param string            $imagePath Path from the src image from the content (used for log only)
      *
      * @return string|false Extension name or false if validation failed
      */
-    private function getExtensionFromResponse(Response $res, $imagePath)
+    private function getExtensionFromResponse(ResponseInterface $res, $imagePath)
     {
-        $ext = $this->mimeGuesser->guess($res->getHeader('content-type'));
+        $ext = $this->mimeGuesser->guess(current($res->getHeader('content-type')));
         $this->logger->debug('DownloadImages: Checking extension', ['ext' => $ext, 'header' => $res->getHeader('content-type')]);
 
         // ok header doesn't have the extension, try a different way

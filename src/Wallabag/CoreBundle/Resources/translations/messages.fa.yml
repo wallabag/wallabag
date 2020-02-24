@@ -33,10 +33,12 @@ menu:
         back_to_unread: 'بازگشت به خوانده‌نشده‌ها'
         # users_management: 'Users management'
         # site_credentials: 'Site credentials'
+        quickstart: "Quickstart"
     top:
         add_new_entry: 'افزودن مقالهٔ تازه'
         search: 'جستجو'
         filter_entries: 'فیلترکردن مقاله‌ها'
+        # random_entry: Jump to a random entry from that list
         export: 'برون‌بری'
     search_form:
         input_label: 'جستجوی خود را این‌جا بنویسید:'
@@ -53,11 +55,12 @@ config:
     page_title: 'پیکربندی'
     tab_menu:
         settings: 'تنظیمات'
-        rss: 'آر-اس-اس'
+        feed: 'آر-اس-اس'
         user_info: 'اطلاعات کاربر'
         password: 'رمز'
         rules: 'برچسب‌گذاری خودکار'
         new_user: 'افزودن کاربر'
+        # reset: 'Reset area'
     form:
         save: 'ذخیره'
     form_settings:
@@ -65,12 +68,8 @@ config:
         items_per_page_label: 'تعداد مقاله در هر صفحه'
         language_label: 'زبان'
         reading_speed:
-            label: 'سرعت خواندن'
+            # label: 'Reading speed (words per minute)'
             help_message: 'سرعت خواندن‌تان را با ابزارهای آنلاین تخمین بزنید:'
-            100_word: 'من تقریباً ۱۰۰ واژه را در دقیقه می‌خوانم'
-            200_word: 'من تقریباً ۲۰۰ واژه را در دقیقه می‌خوانم'
-            300_word: 'من تقریباً ۳۰۰ واژه را در دقیقه می‌خوانم'
-            400_word: 'من تقریباً ۴۰۰ واژه را در دقیقه می‌خوانم'
         action_mark_as_read:
             # label: 'Where do you want to be redirected to after marking an article as read?'
             # redirect_homepage: 'To the homepage'
@@ -83,25 +82,35 @@ config:
         # help_reading_speed: "wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article."
         # help_language: "You can change the language of wallabag interface."
         # help_pocket_consumer_key: "Required for Pocket import. You can create it in your Pocket account."
-    form_rss:
+    form_feed:
         description: 'با خوراک آر-اس-اس که wallabag در اختیارتان می‌گذارد، می‌توانید مقاله‌های ذخیره‌شده را در نرم‌افزار آر-اس-اس دلخواه خود بخوانید. برای این کار نخست باید یک کد بسازید.'
         token_label: 'کد آر-اس-اس'
         no_token: 'بدون کد'
         token_create: 'کد خود را بسازید'
         token_reset: 'بازنشانی کد'
-        rss_links: 'پیوند آر-اس-اس'
-        rss_link:
+        # token_revoke: 'Revoke the token'
+        feed_links: 'پیوند آر-اس-اس'
+        feed_link:
             unread: 'خوانده‌نشده'
             starred: 'برگزیده'
             archive: 'بایگانی'
             # all: 'All'
-        rss_limit: 'محدودیت آر-اس-اس'
+        feed_limit: 'محدودیت آر-اس-اس'
     form_user:
-        two_factor_description: "با فعال‌کردن تأیید ۲مرحله‌ای هر بار که اتصال تأییدنشده‌ای برقرار شد، به شما یک کد از راه ایمیل فرستاده می‌شود"
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
+        # login_label: 'Login (can not be changed)'
         name_label: 'نام'
         email_label: 'نشانی ایمیل'
-        twoFactorAuthentication_label: 'تأیید ۲مرحله‌ای'
-        # help_twoFactorAuthentication: "If you enable 2FA, each time you want to login to wallabag, you'll receive a code by email."
+        two_factor:
+            # emailTwoFactor_label: 'Using email (receive a code by email)'
+            # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, Authy or FreeOTP, to get a one time code)'
+            # table_method: Method
+            # table_state: State
+            # table_action: Action
+            # state_enabled: Enabled
+            # state_disabled: Disabled
+            # action_email: Use email
+            # action_app: Use OTP App
         delete:
             # title: Delete my account (a.k.a danger zone)
             # description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
@@ -127,6 +136,15 @@ config:
         # edit_rule_label: 'edit'
         rule_label: 'قانون'
         tags_label: 'برچسب‌ها'
+        # card:
+        #     new_tagging_rule: Create a tagging rule
+        #     import_tagging_rules: Import tagging rules
+        #     import_tagging_rules_detail: You have to select the JSON file you previously exported.
+        #     export_tagging_rules: Export tagging rules
+        #     export_tagging_rules_detail: This will download a JSON file that you can use to import tagging rules elsewhere or to backup them.
+        # file_label: JSON file
+        # import_submit: Import
+        # export: Export
         faq:
             title: 'پرسش‌های متداول'
             tagging_rules_definition_title: 'برچسب‌گذاری خودکار یعنی چه؟'
@@ -159,6 +177,15 @@ config:
         #         and: 'One rule AND another'
         #         matches: 'Tests that a <i>subject</i> matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>'
         #         notmatches: 'Tests that a <i>subject</i> doesn''t match match a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
+    otp:
+        # page_title: Two-factor authentication
+        # app:
+        #     two_factor_code_description_1: You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password. It'll disapear after a page reload.
+        #     two_factor_code_description_2: 'You can scan that QR Code with your app:'
+        #     two_factor_code_description_3: 'Also, save these backup codes in a safe place, you can use them in case you lose access to your OTP app:'
+        #     two_factor_code_description_4: 'Test an OTP code from your configured app:'
+        #     cancel: Cancel
+        #     enable: Enable
 
 entry:
     # default_title: 'Title of the entry'
@@ -237,7 +264,7 @@ entry:
         # provided_by: 'Provided by'
     new:
         page_title: 'ذخیرهٔ مقالهٔ تازه'
-        placeholder: 'http://website.com'
+        placeholder: 'https://website.ir'
         form_new:
             url_label: نشانی
     search:
@@ -253,6 +280,11 @@ entry:
     confirm:
         # delete: "Are you sure you want to remove that article?"
         # delete_tag: "Are you sure you want to remove that tag from that article?"
+    metadata:
+        # reading_time: "Estimated reading time"
+        # reading_time_minutes_short: "%readingTime% min"
+        # address: "Address"
+        # added_on: "Added on"
 
 about:
     page_title: 'درباره'
@@ -348,7 +380,7 @@ quickstart:
         title: 'برنامه را تنظیم کنید'
         # description: 'In order to have an application which suits you, have a look into the configuration of wallabag.'
         language: 'زبان و نمای برنامه را تغییر دهید'
-        rss: 'خوراک آر-اس-اس را فعال کنید'
+        feed: 'خوراک آر-اس-اس را فعال کنید'
         tagging_rules: 'قانون‌های برچسب‌گذاری خودکار مقاله‌هایتان را تعریف کنید'
     admin:
         title: 'مدیریت'
@@ -396,12 +428,16 @@ tag:
     list:
         number_on_the_page: '{0} هیچ برچسبی نیست.|{1} یک برچسب هست.|]1,Inf[ %count% برچسب هست.'
         # see_untagged_entries: 'See untagged entries'
+        # no_untagged_entries: 'There are no untagged entries.'
     new:
         # add: 'Add'
         # placeholder: 'You can add several tags, separated by a comma.'
+    rename:
+        # placeholder: 'You can update tag name.'
 
 # export:
 #     footer_template: '<div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p></div>'
+#     unknown: 'Unknown'
 
 import:
     page_title: 'درون‌ریزی'
@@ -429,6 +465,9 @@ import:
     wallabag_v2:
         page_title: 'درون‌ریزی > Wallabag v2'
         description: 'این برنامه همهٔ داده‌های شما را در نسخهٔ ۲ wallabag درون‌ریزی می‌کند. به بخش «همهٔ مقاله‌ها» بروید و در بخش «برون‌ریزی» روی "JSON" کلیک کنید. با این کار شما پرونده‌ای به شکل "All articles.json" دریافت خواهید کرد.'
+    # elcurator:
+    #     page_title: 'Import > elCurator'
+    #     description: 'This importer will import all your elCurator articles. Go to your preferences in your elCurator account and then, export your content. You will have a JSON file.'
     readability:
         page_title: 'درون‌ریزی > Readability'
         # description: 'This importer will import all your Readability articles. On the tools (https://www.readability.com/tools/) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).'
@@ -482,6 +521,7 @@ developer:
     #         redirect_uris_label: 'Redirect URIs'
     #         save_label: 'Create a new client'
     #     action_back: 'بازگشت'
+    #     copy_to_clipboard: Copy
     # client_parameter:
     #     page_title: 'API clients management > Client parameters'
     #     page_description: 'Here are your client parameters.'
@@ -523,7 +563,8 @@ user:
         email_label: 'نشانی ایمیل'
         # enabled_label: 'Enabled'
         # last_login_label: 'Last login'
-        # twofactor_label: Two factor authentication
+        # twofactor_email_label: Two factor authentication by email
+        # twofactor_google_label: Two factor authentication by OTP app
         # save: Save
         # delete: Delete
         # delete_confirm: Are you sure?
@@ -544,7 +585,7 @@ site_credential:
     #     create_new_one: Create a new credential
     # form:
     #     username_label: 'Username'
-    #     host_label: 'Host'
+    #     host_label: 'Host (subdomain.example.org, .example.org, etc.)'
     #     password_label: 'Password'
     #     save: Save
     #     delete: Delete
@@ -561,14 +602,18 @@ flashes:
             password_updated: 'رمز به‌روز شد'
             password_not_updated_demo: "در حالت نمایشی نمی‌توانید رمز کاربر را عوض کنید."
             user_updated: 'اطلاعات به‌روز شد'
-            rss_updated: 'اطلاعات آر-اس-اس به‌روز شد'
+            feed_updated: 'اطلاعات آر-اس-اس به‌روز شد'
             tagging_rules_updated: 'برچسب‌گذاری خودکار به‌روز شد'
             tagging_rules_deleted: 'قانون برچسب‌گذاری پاک شد'
-            rss_token_updated: 'کد آر-اس-اس به‌روز شد'
+            feed_token_updated: 'کد آر-اس-اس به‌روز شد'
+            # feed_token_revoked: 'RSS token revoked'
             # annotations_reset: Annotations reset
             # tags_reset: Tags reset
             # entries_reset: Entries reset
             # archived_reset: Archived entries deleted
+            # otp_enabled: Two-factor authentication enabled
+            # tagging_rules_imported: Tagging rules imported
+            # tagging_rules_not_imported: Error while importing tagging rules
     entry:
         notice:
             entry_already_saved: 'این مقاله در تاریخ %date% ذخیره شده بود'
@@ -582,9 +627,11 @@ flashes:
             entry_starred: 'مقاله برگزیده شد'
             entry_unstarred: 'مقاله نابرگزیده شد'
             entry_deleted: 'مقاله پاک شد'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'برچسب افزوده شد'
+            # tag_renamed: 'Tag renamed'
     import:
         notice:
             failed: 'درون‌ریزی شکست خورد. لطفاً دوباره تلاش کنید.'

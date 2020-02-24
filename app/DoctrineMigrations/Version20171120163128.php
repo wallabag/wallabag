@@ -10,9 +10,6 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  */
 class Version20171120163128 extends WallabagMigration
 {
-    /**
-     * @param Schema $schema
-     */
     public function up(Schema $schema)
     {
         $storeArticleHeaders = $this->container
@@ -25,9 +22,6 @@ class Version20171120163128 extends WallabagMigration
         $this->addSql('INSERT INTO ' . $this->getTable('craue_config_setting') . " (name, value, section) VALUES ('store_article_headers', '0', 'entry')");
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function down(Schema $schema)
     {
         $this->addSql('DELETE FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'store_article_headers';");

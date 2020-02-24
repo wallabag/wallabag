@@ -31,12 +31,15 @@ security:
             fos_oauth: true
             stateless: true
             anonymous: true
+            provider: fos_userbundle
 
         login_firewall:
+            logout_on_user_change: true
             pattern: ^/login$
             anonymous:  ~
 
         secured_area:
+            logout_on_user_change: true
             pattern: ^/
             form_login:
                 provider: fos_userbundle
@@ -53,17 +56,27 @@ security:
                 path:   /logout
                 target: /
 
+            two_factor:
+                provider: fos_userbundle
+                auth_form_path: 2fa_login
+                check_path: 2fa_login_check
+
     access_control:
-        - { path: ^/api/doc, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api/version, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api/user, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/(doc|version|info|user), roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # force role for logout otherwise when 2fa enable, you won't be able to logout
+        # https://github.com/scheb/two-factor-bundle/issues/168#issuecomment-430822478
+        - { path: ^/logout, roles: [IS_AUTHENTICATED_ANONYMOUSLY, IS_AUTHENTICATED_2FA_IN_PROGRESS] }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: /(unread|starred|archive|all).xml$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/locale, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: /tags/(.*).xml$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/feed, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /(unread|starred|archive).xml$, roles: IS_AUTHENTICATED_ANONYMOUSLY } # For backwards compatibility
         - { path: ^/share, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/settings, roles: ROLE_SUPER_ADMIN }
         - { path: ^/annotations, roles: ROLE_USER }
+        - { path: ^/2fa, role: IS_AUTHENTICATED_2FA_IN_PROGRESS }
         - { path: ^/users, roles: ROLE_SUPER_ADMIN }
         - { path: ^/, roles: ROLE_USER }

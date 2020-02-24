@@ -32,6 +32,7 @@ web/uploads/
 # Build
 /app/build
 /build
+/coverage
 
 # Composer PHAR
 /composer.phar
@@ -42,9 +43,6 @@ data/db/wallabag*.sqlite
 # Docker container logs and data
 docker/logs/
 docker/data/
-
-# To avoid crazy stuff on some PR, we must manually FORCE ADD IT on each new release
-composer.lock
 
 # assets stuff
 node_modules/
@@ -57,3 +55,6 @@ app/Resources/build/
 admin-export.json
 specialexport.json
 /data/site-credentials-secret-key.txt
+
+# Custom CSS file
+web/custom.css

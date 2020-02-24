@@ -1,6 +1,5 @@
 parameters:
     test_database_driver: pdo_pgsql
-    test_database_driver_class: Wallabag\CoreBundle\Doctrine\DBAL\Driver\CustomPostgreSQLDriver
     test_database_host: localhost
     test_database_port:
     test_database_name: wallabag_test

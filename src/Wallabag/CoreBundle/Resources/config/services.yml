@@ -22,10 +22,10 @@ services:
         tags:
             - { name: form.type }
 
-    wallabag_core.param_converter.username_rsstoken_converter:
-        class: Wallabag\CoreBundle\ParamConverter\UsernameRssTokenConverter
+    wallabag_core.param_converter.username_feed_token_converter:
+        class: Wallabag\CoreBundle\ParamConverter\UsernameFeedTokenConverter
         tags:
-            - { name: request.param_converter, converter: username_rsstoken_converter }
+            - { name: request.param_converter, converter: username_feed_token_converter }
         arguments:
             - "@doctrine"
 
@@ -42,7 +42,7 @@ services:
             -
                 error_message: '%wallabag_core.fetching_error_message%'
                 error_message_title: '%wallabag_core.fetching_error_message_title%'
-            - "@wallabag_core.guzzle.http_client"
+            - "@wallabag_core.http_client"
             - "@wallabag_core.graby.config_builder"
         calls:
             - [ setLogger, [ "@logger" ] ]
@@ -55,9 +55,8 @@ services:
             - {}
             - "@logger"
 
-    wallabag_core.guzzle.http_client:
-        class: GuzzleHttp\ClientInterface
-        factory: ["@wallabag_core.guzzle.http_client_factory", buildHttpClient]
+    wallabag_core.http_client:
+        alias: 'httplug.client.wallabag_core'
 
     wallabag_core.guzzle_authenticator.config_builder:
         class: Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder
@@ -73,7 +72,7 @@ services:
     bd_guzzle_site_authenticator.site_config_builder:
         alias: wallabag_core.guzzle_authenticator.config_builder
 
-    wallabag_core.guzzle.http_client_factory:
+    wallabag_core.http_client_factory:
         class: Wallabag\CoreBundle\Helper\HttpClientFactory
         arguments:
             - "@wallabag_core.guzzle.cookie_jar"
@@ -83,8 +82,10 @@ services:
             - ["addSubscriber", ["@bd_guzzle_site_authenticator.authenticator_subscriber"]]
 
     wallabag_core.guzzle.cookie_jar:
-        class: GuzzleHttp\Cookie\FileCookieJar
-        arguments: ["%kernel.cache_dir%/cookiejar.json"]
+        class: Wallabag\CoreBundle\Helper\FileCookieJar
+        arguments:
+            - "@logger"
+            - "%kernel.cache_dir%/cookiejar.json"
 
     wallabag_core.content_proxy:
         class: Wallabag\CoreBundle\Helper\ContentProxy
@@ -181,6 +182,7 @@ services:
 
     wallabag_core.exception_controller:
         class: Wallabag\CoreBundle\Controller\ExceptionController
+        public: true
         arguments:
             - '@twig'
             - '%kernel.debug%'
@@ -211,10 +213,38 @@ services:
             - "@logger"
 
     wallabag_core.entry.download_images.client:
-        class: GuzzleHttp\Client
+        alias: 'httplug.client.wallabag_core.entry.download_images'
 
     wallabag_core.helper.crypto_proxy:
         class: Wallabag\CoreBundle\Helper\CryptoProxy
         arguments:
             - "%wallabag_core.site_credentials.encryption_key_path%"
             - "@logger"
+
+    wallabag_core.command.clean_duplicates:
+        class: Wallabag\CoreBundle\Command\CleanDuplicatesCommand
+        tags: ['console.command']
+
+    wallabag_core.command.export:
+        class: Wallabag\CoreBundle\Command\ExportCommand
+        tags: ['console.command']
+
+    wallabag_core.command.install:
+        class: Wallabag\CoreBundle\Command\InstallCommand
+        tags: ['console.command']
+
+    wallabag_core.command.list_user:
+        class: Wallabag\CoreBundle\Command\ListUserCommand
+        tags: ['console.command']
+
+    wallabag_core.command.reload_entry:
+        class: Wallabag\CoreBundle\Command\ReloadEntryCommand
+        tags: ['console.command']
+
+    wallabag_core.command.show_user:
+        class: Wallabag\CoreBundle\Command\ShowUserCommand
+        tags: ['console.command']
+
+    wallabag_core.command.tag_all:
+        class: Wallabag\CoreBundle\Command\TagAllCommand
+        tags: ['console.command']

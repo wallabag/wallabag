@@ -20,6 +20,7 @@ class ClientType extends AbstractType
                 'required' => false,
                 'label' => 'developer.client.form.redirect_uris_label',
                 'property_path' => 'redirectUris',
+                'default_protocol' => null,
             ])
             ->add('save', SubmitType::class, ['label' => 'developer.client.form.save_label'])
         ;

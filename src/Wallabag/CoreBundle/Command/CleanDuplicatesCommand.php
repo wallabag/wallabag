@@ -63,9 +63,6 @@ class CleanDuplicatesCommand extends ContainerAwareCommand
         return 0;
     }
 
-    /**
-     * @param User $user
-     */
     private function cleanDuplicates(User $user)
     {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');

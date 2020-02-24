@@ -33,10 +33,12 @@ menu:
         back_to_unread: 'กลับไปยังรายการที่ไม่ได้อ่าน'
         users_management: 'การจัดการผู้ใช้'
         site_credentials: 'การรับรองไซต์'
+        quickstart: "เริ่มแบบด่วน"
     top:
         add_new_entry: 'เพิ่มรายการใหม่'
         search: 'ค้นหา'
         filter_entries: 'ตัวกรองรายการ'
+        # random_entry: Jump to a random entry from that list
         export: 'นำข้อมูลออก'
     search_form:
         input_label: 'ค้นหาที่นี้'
@@ -53,11 +55,12 @@ config:
     page_title: 'กำหนดค่า'
     tab_menu:
         settings: 'ตั้งค่า'
-        rss: 'RSS'
+        feed: 'RSS'
         user_info: 'ข้อมูลผู้ใช้'
         password: 'รหัสผ่าน'
         rules: 'การแท็กข้อบังคับ'
         new_user: 'เพิ่มผู้ใช้'
+        reset: 'รีเซ็ตพื้นที่ '
     form:
         save: 'บันทึก'
     form_settings:
@@ -65,12 +68,8 @@ config:
         items_per_page_label: 'ไอเทมต่อหน้า'
         language_label: 'ภาษา'
         reading_speed:
-            label: 'การอ่านแบบด่วน'
+            label: 'การอ่านแบบด่วน (คำต่อนาที)'
             help_message: 'คุณสามารถใช้เครื่องมือออนไลน์เพื่อประเมินการอ่านแบบด่วน:'
-            100_word: 'ฉันอ่าน ~100 คำต่อนาที'
-            200_word: 'ฉันอ่าน ~200 คำต่อนาท'
-            300_word: 'ฉันอ่าน ~300 คำต่อนาท'
-            400_word: 'ฉันอ่าน ~400 คำต่อนาท'
         action_mark_as_read:
             label: 'คุณต้องการเปลี่ยนทิศทางหลังจากระบุเครื่องหมายรายการอ่านที่ไหน?'
             redirect_homepage: 'ไปยังโฮมเพจ'
@@ -83,25 +82,35 @@ config:
         help_reading_speed: "wallabag จะคำนวณเวลาการอ่านในแต่ละรายการซึ่งคุณสามารถกำหนดได้ที่นี้,ต้องขอบคุณรายการนี้,หากคุณเป็นนักอ่านที่เร็วหรือช้า wallabag จะทำการคำนวณเวลาที่อ่านใหม่ในแต่ละรายการ"
         help_language: "คุณสามารถเปลี่ยภาษาของ wallabag interface ได้"
         help_pocket_consumer_key: "การ้องขอการเก็บการนำข้อมูลเข้า คุณสามารถสร้างบัญชีการเก็บของคุณ"
-    form_rss:
+    form_feed:
         description: 'RSS จะเก็บเงื่อนไขโดย wallabag ต้องยอมรับการอ่านรายการของคุณกับผู้อ่านที่ชอบ RSS คุณต้องทำเครื่องหมายก่อน'
         token_label: 'เครื่องหมาย RSS'
         no_token: 'ไม่มีเครื่องหมาย'
         token_create: 'สร้างเครื่องหมาย'
         token_reset: 'ทำเครื่องหมาย'
-        rss_links: 'ลิงค์ RSS'
-        rss_link:
+        # token_revoke: 'Revoke the token'
+        feed_links: 'ลิงค์ RSS'
+        feed_link:
             unread: 'ยังไมได้่อ่าน'
             starred: 'ทำการแสดง'
             archive: 'เอกสาร'
             all: 'ทั้งหมด'
-        rss_limit: 'จำนวนไอเทมที่เก็บ'
+        feed_limit: 'จำนวนไอเทมที่เก็บ'
     form_user:
-        two_factor_description: "การเปิดใช้งาน two factor authentication คือคุณจะต้องได้รับอีเมลกับ code ที่ยังไม่ตรวจสอบในการเชื่อมต่อ"
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
+        # login_label: 'Login (can not be changed)'
         name_label: 'ชื่อ'
         email_label: 'อีเมล'
-        twoFactorAuthentication_label: 'Two factor authentication'
-        help_twoFactorAuthentication: "ถ้าคุณเปิด 2FA, ในแต่ละช่วงเวลาที่คุณต้องการลงชื่อเข้าใช wallabag, คุณจะต้องได้รับ code จากอีเมล"
+        two_factor:
+            # emailTwoFactor_label: 'Using email (receive a code by email)'
+            # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, Authy or FreeOTP, to get a one time code)'
+            # table_method: Method
+            # table_state: State
+            # table_action: Action
+            # state_enabled: Enabled
+            # state_disabled: Disabled
+            # action_email: Use email
+            # action_app: Use OTP App
         delete:
             title: ลบบัญชีของฉัน (โซนที่เป็นภัย!)
             description: ถ้าคุณลบบัญชีของคุณIf , รายการทั้งหมดของคุณ, แท็กทั้งหมดของคุณ, หมายเหตุทั้งหมดของคุณและบัญชีของคุณจะถูกลบอย่างถาวร (มันไม่สามารถยกเลิกได้) คุณจะต้องลงชื่อออก
@@ -127,6 +136,15 @@ config:
         edit_rule_label: 'ปรับแก้'
         rule_label: 'ข้อบังคับ'
         tags_label: 'แท็ก'
+        # card:
+        #     new_tagging_rule: Create a tagging rule
+        #     import_tagging_rules: Import tagging rules
+        #     import_tagging_rules_detail: You have to select the JSON file you previously exported.
+        #     export_tagging_rules: Export tagging rules
+        #     export_tagging_rules_detail: This will download a JSON file that you can use to import tagging rules elsewhere or to backup them.
+        # file_label: JSON file
+        # import_submit: Import
+        # export: Export
         faq:
             title: 'FAQ'
             tagging_rules_definition_title: 'ข้อบังคับการแท็กคืออะไร?'
@@ -159,6 +177,15 @@ config:
                 and: 'หนึ่งข้อบังคับและอื่นๆ'
                 matches: 'ทดสอบว่า <i>เรื่อง</i> นี้ตรงกับ <i>การต้นหา</i> (กรณีไม่ทราบ).<br />ตัวอย่าง: <code>หัวข้อที่ตรงกับ "football"</code>'
                 notmatches: 'ทดสอบว่า <i>เรื่อง</i> นี้ไม่ตรงกับ <i>การต้นหา</i> (กรณีไม่ทราบ).<br />ตัวอย่าง: <code>หัวข้อทีไม่ตรงกับ "football"</code>'
+    otp:
+        # page_title: Two-factor authentication
+        # app:
+        #     two_factor_code_description_1: You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password. It'll disapear after a page reload.
+        #     two_factor_code_description_2: 'You can scan that QR Code with your app:'
+        #     two_factor_code_description_3: 'Also, save these backup codes in a safe place, you can use them in case you lose access to your OTP app:'
+        #     two_factor_code_description_4: 'Test an OTP code from your configured app:'
+        #     cancel: Cancel
+        #     enable: Enable
 
 entry:
     default_title: 'หัวข้อรายการ'
@@ -234,9 +261,10 @@ entry:
         created_at: 'วันที่สร้าง'
         published_at: 'วันที่ประกาศ'
         published_by: 'ประกาศโดย'
+        # provided_by: 'Provided by'
     new:
         page_title: 'บันทึกรายการใหม่'
-        placeholder: 'http://website.com'
+        placeholder: 'https://website.th'
         form_new:
             url_label: Url
     search:
@@ -245,12 +273,18 @@ entry:
         page_title: 'แก้ไขรายการ'
         title_label: 'หัวข้อ'
         url_label: 'Url'
+        # origin_url_label: 'Origin url (from where you found that entry)'
         save_label: 'บันทึก'
     public:
         shared_by_wallabag: "บทความนี้จะมีการแชร์โดย %username% กับ <a href='%wallabag_instance%'>wallabag</a>"
     confirm:
         delete: "คุณแน่ใจหรือไม่ว่าคุณต้องการลบบทความนี้?"
         delete_tag: "คุณแน่ใจหรือไม่ว่าคุณต้องการลบแท็กจากบทความนี้?"
+    metadata:
+        # reading_time: "Estimated reading time"
+        # reading_time_minutes_short: "%readingTime% min"
+        # address: "Address"
+        # added_on: "Added on"
 
 about:
     page_title: 'เกี่ยวกับ'
@@ -346,7 +380,7 @@ quickstart:
         title: 'กำหนดค่าแอพพลิเคชั่น'
         description: 'ภายใน order จะมี application suit ของคุณ, จะมองหาองค์ประกอบของ wallabag'
         language: 'เปลี่ยนภาษาและออกแบบ'
-        rss: 'เปิดใช้ RSS'
+        feed: 'เปิดใช้ RSS'
         tagging_rules: 'เขียนข้อบังคับการแท็กอัตโนมัติของบทความของคุณ'
     admin:
         title: 'ผู้ดูแลระบบ'
@@ -394,12 +428,16 @@ tag:
     list:
         number_on_the_page: '{0} ไม่มีการแท็ก|{1} มีหนึ่งแท็ก|]1,Inf[ มี %count% แท็ก'
         see_untagged_entries: 'พบรายการที่ไม่ได้แท็ก'
+        # no_untagged_entries: 'There are no untagged entries.'
     new:
         add: 'เพิ่ม'
         placeholder: 'คุณสามารถเพิ่มได้หลายแท็ก, จากการแบ่งโดย comma'
+    rename:
+        # placeholder: 'You can update tag name.'
 
 export:
     footer_template: '<div style="text-align:center;"><p>ผลิตโดย wallabag กับ %method%</p><p>ให้ทำการเปิด <a href="https://github.com/wallabag/wallabag/issues">ฉบับนี้</a> ถ้าคุณมีข้อบกพร่องif you have trouble with the display of this E-Book on your device.</p></div>'
+    # unknown: 'Unknown'
 
 import:
     page_title: 'นำข้อมูลเช้า'
@@ -427,6 +465,9 @@ import:
     wallabag_v2:
         page_title: 'นำเข้าข้อมูล > Wallabag v2'
         description: 'สำหรับผู้นำเข้าข้อมูลจะ import บทความ wallabag v2 ทั้งหมดของคุณ ไปยังบทความทั้งหมด, ดังนั้น, บน export sidebar, click ที่ "JSON" คุณจะมีไฟล์ "All articles.json"'
+    # elcurator:
+    #     page_title: 'Import > elCurator'
+    #     description: 'This importer will import all your elCurator articles. Go to your preferences in your elCurator account and then, export your content. You will have a JSON file.'
     readability:
         page_title: 'นำเข้าข้อมูล > Readability'
         description: 'สำหรับผู้นำเข้าข้อมูลจะ import บทความ Readability ทั้งหมดของคุณ ไปที่เครื่องมือ (https://www.readability.com/tools/) ของหน้านั้น, click ที่ "Export your data" ในส่วน "Data Export" คุณจะได้รับ email ไป download json (which does not end with .json in fact).'
@@ -480,6 +521,7 @@ developer:
             redirect_uris_label: 'เส้นทางใหม่ของ URIs (ให้เลือกได้)'
             save_label: 'สร่้างลูกข่ายใหม'
         action_back: 'กลับ'
+        # copy_to_clipboard: Copy
     client_parameter:
         page_title: 'การจัดการลูกข่ายของ API > พารามิเตอร์ของลูกข่าย'
         page_description: 'ที่นี้เป็นพารามิเตอร์ของลูกข่ายของคุณ'
@@ -521,7 +563,8 @@ user:
         email_label: 'อีเมล'
         enabled_label: 'เปิดใช้งาน'
         last_login_label: 'ลงชื้อเข้าใช้ครั้งสุดท้าย'
-        twofactor_label: Two factor authentication
+        # twofactor_email_label: Two factor authentication by email
+        # twofactor_google_label: Two factor authentication by OTP app
         save: บันทึก
         delete: ลบ
         delete_confirm: ตุณแน่ใจหรือไม่?
@@ -542,7 +585,7 @@ site_credential:
         create_new_one: สร้างข้อมูลส่วนตัวใหม่
     form:
         username_label: 'ชื่อผู้ใช้'
-        host_label: 'โฮส'
+        host_label: 'โฮส (subdomain.example.org, .example.org, etc.)'
         password_label: 'รหัสผ่าน'
         save: บันทึก
         delete: ลบ
@@ -559,14 +602,18 @@ flashes:
             password_updated: 'อัปเดตรหัสผ่าน'
             password_not_updated_demo: "In demonstration mode, you can't change password for this user."
             user_updated: 'อัปเดตข้อมูล'
-            rss_updated: 'อัปเดตข้อมูล RSS'
+            feed_updated: 'อัปเดตข้อมูล RSS'
             tagging_rules_updated: 'อัปเดตการแท็กข้อบังคับ'
             tagging_rules_deleted: 'การลบข้อบังคับของแท็ก'
-            rss_token_updated: 'อัปเดตเครื่องหมาย RSS '
+            feed_token_updated: 'อัปเดตเครื่องหมาย RSS '
+            # feed_token_revoked: 'RSS token revoked'
             annotations_reset: รีเซ็ตหมายเหตุ
             tags_reset: รีเซ็ตแท็ก
             entries_reset: รีเซ็ตรายการ
             archived_reset: การลบเอกสารของรายการ
+            # otp_enabled: Two-factor authentication enabled
+            # tagging_rules_imported: Tagging rules imported
+            # tagging_rules_not_imported: Error while importing tagging rules
     entry:
         notice:
             entry_already_saved: 'รายการพร้อมบันทึกที่ %date%'
@@ -580,9 +627,11 @@ flashes:
             entry_starred: 'รายการที่แสดง'
             entry_unstarred: 'รายการที่ไม่ได้แสดง'
             entry_deleted: 'รายการที่ถูกลบ'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'แท็กที่เพิ่ม'
+            # tag_renamed: 'Tag renamed'
     import:
         notice:
             failed: 'นำข้อมูลเข้าล้มเหลว, ลองใหม่อีกครั้ง'

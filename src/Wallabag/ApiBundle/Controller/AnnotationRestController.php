@@ -20,8 +20,6 @@ class AnnotationRestController extends WallabagRestController
      *      }
      * )
      *
-     * @param Entry $entry
-     *
      * @return JsonResponse
      */
     public function getAnnotationsAction(Entry $entry)
@@ -39,13 +37,10 @@ class AnnotationRestController extends WallabagRestController
      * @ApiDoc(
      *      requirements={
      *          {"name"="ranges", "dataType"="array", "requirement"="\w+", "description"="The range array for the annotation"},
-     *          {"name"="quote", "dataType"="string", "required"=false, "description"="Optional, quote for the annotation"},
-     *          {"name"="text", "dataType"="string", "required"=true, "description"=""},
+     *          {"name"="quote", "dataType"="string", "description"="The annotated text"},
+     *          {"name"="text", "dataType"="string", "required"=true, "description"="Content of annotation"},
      *      }
      * )
-     *
-     * @param Request $request
-     * @param Entry   $entry
      *
      * @return JsonResponse
      */
@@ -70,9 +65,6 @@ class AnnotationRestController extends WallabagRestController
      *
      * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
      *
-     * @param Annotation $annotation
-     * @param Request    $request
-     *
      * @return JsonResponse
      */
     public function putAnnotationAction(Annotation $annotation, Request $request)
@@ -95,8 +87,6 @@ class AnnotationRestController extends WallabagRestController
      * )
      *
      * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
-     *
-     * @param Annotation $annotation
      *
      * @return JsonResponse
      */

@@ -18,7 +18,7 @@
                 <p>{{ 'developer.howto.description.paragraph_3'|trans({'%link%': path('developer_create_client')})|raw }}</p>
                 <p>{{ 'developer.howto.description.paragraph_4'|trans }}</p>
                 <p>
-                    <pre><code class="language-bash">http POST http://v2.wallabag.org/oauth/v2/token \
+                    <pre><code class="language-bash">http POST https://app.wallabag.it/oauth/v2/token \
     grant_type=password \
     client_id=12_5um6nz50ceg4088c0840wwc0kgg44g00kk84og044ggkscso0k \
     client_secret=3qd12zpeaxes8cwg8c0404g888co4wo8kc4gcw0occww8cgw4k \
@@ -47,7 +47,7 @@ X-Powered-By: PHP/5.5.9-1ubuntu4.13
                 </p>
                 <p>{{ 'developer.howto.description.paragraph_6'|trans }}</p>
                 <p>
-                    <pre><code class="language-bash">http GET http://v2.wallabag.org/api/entries.json \
+                    <pre><code class="language-bash">http GET https://app.wallabag.it/api/entries.json \
     "Authorization:Bearer ZWFjNjA3ZWMwYWVmYzRkYTBlMmQ3NTllYmVhOGJiZDE0ZTg1NjE4MjczOTVlNzM0ZTRlMWQ0MmRlMmYwNTk5Mw"</code></pre>
                 </p>
                 <p>{{ 'developer.howto.description.paragraph_7'|trans }}</p>

@@ -10,9 +10,6 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  */
 class Version20161128084725 extends WallabagMigration
 {
-    /**
-     * @param Schema $schema
-     */
     public function up(Schema $schema)
     {
         $configTable = $schema->getTable($this->getTable('config'));
@@ -21,9 +18,6 @@ class Version20161128084725 extends WallabagMigration
         $configTable->addColumn('list_mode', 'integer', ['notnull' => false]);
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function down(Schema $schema)
     {
         $configTable = $schema->getTable($this->getTable('config'));

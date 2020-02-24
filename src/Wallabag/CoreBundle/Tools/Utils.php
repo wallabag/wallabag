@@ -5,7 +5,7 @@ namespace Wallabag\CoreBundle\Tools;
 class Utils
 {
     /**
-     * Generate a token used for RSS.
+     * Generate a token used for Feeds.
      *
      * @param int $length Length of the token
      *
@@ -20,15 +20,14 @@ class Utils
     }
 
     /**
-     * For a given text, we calculate reading time for an article
-     * based on 200 words per minute.
+     * For a given text, we calculate reading time for an article based on 200 words per minute.
      *
-     * @param $text
+     * @param string $text
      *
      * @return float
      */
     public static function getReadingTime($text)
     {
-        return floor(\count(preg_split('~[^\p{L}\p{N}\']+~u', strip_tags($text))) / 200);
+        return floor(\count(preg_split('~([^\p{L}\p{N}\']+|(\p{Han}|\p{Hiragana}|\p{Katakana}|\p{Hangul}){1,2})~u', strip_tags($text))) / 200);
     }
 }

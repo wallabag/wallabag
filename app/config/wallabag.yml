@@ -1,5 +1,5 @@
 wallabag_core:
-    version: 2.3.6-dev
+    version: 2.4.0-dev
     paypal_url: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9UBA65LG3FX9Y&lc=gb"
     languages:
         en: 'English'
@@ -20,13 +20,13 @@ wallabag_core:
     theme: material
     language: '%locale%'
     rss_limit: 50
-    reading_speed: 1
+    reading_speed: 200
     cache_lifetime: 10
     action_mark_as_read: 1
     list_mode: 0
     fetching_error_message_title: 'No title found'
     fetching_error_message: |
-        wallabag can't retrieve contents for this article. Please <a href="http://doc.wallabag.org/en/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.
+        wallabag can't retrieve contents for this article. Please <a href="https://doc.wallabag.org/en/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.
     api_limit_mass_actions: 10
     encryption_key_path: "%kernel.project_dir%/data/site-credentials-secret-key.txt"
     default_internal_settings:
@@ -44,7 +44,7 @@ wallabag_core:
             section: entry
         -
             name: diaspora_url
-            value: http://diasporapod.com
+            value: https://diasporapod.com
             section: entry
         -
             name: share_unmark
@@ -64,11 +64,11 @@ wallabag_core:
             section: entry
         -
             name: shaarli_url
-            value: http://myshaarli.com
+            value: https://myshaarli.com
             section: entry
         -
             name: scuttle_url
-            value: http://scuttle.org
+            value: https://scuttle.org
             section: entry
         -
             name: share_mail

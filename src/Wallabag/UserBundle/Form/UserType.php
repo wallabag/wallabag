@@ -12,10 +12,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserType extends AbstractType
 {
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -35,9 +31,14 @@ class UserType extends AbstractType
                 'required' => false,
                 'label' => 'user.form.enabled_label',
             ])
-            ->add('twoFactorAuthentication', CheckboxType::class, [
+            ->add('emailTwoFactor', CheckboxType::class, [
                 'required' => false,
-                'label' => 'user.form.twofactor_label',
+                'label' => 'user.form.twofactor_email_label',
+            ])
+            ->add('googleTwoFactor', CheckboxType::class, [
+                'required' => false,
+                'label' => 'user.form.twofactor_google_label',
+                'mapped' => false,
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'user.form.save',
@@ -45,9 +46,6 @@ class UserType extends AbstractType
         ;
     }
 
-    /**
-     * @param OptionsResolver $resolver
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

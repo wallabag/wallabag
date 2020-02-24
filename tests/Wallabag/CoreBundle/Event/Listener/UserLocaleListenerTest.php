@@ -56,4 +56,27 @@ class UserLocaleListenerTest extends TestCase
 
         $this->assertNull($session->get('_locale'));
     }
+
+    public function testWithLanguageFromSession()
+    {
+        $session = new Session(new MockArraySessionStorage());
+        $listener = new UserLocaleListener($session);
+        $session->set('_locale', 'de');
+
+        $user = new User();
+        $user->setEnabled(true);
+
+        $config = new Config($user);
+        $config->setLanguage('fr');
+
+        $user->setConfig($config);
+
+        $userToken = new UsernamePasswordToken($user, '', 'test');
+        $request = Request::create('/');
+        $event = new InteractiveLoginEvent($request, $userToken);
+
+        $listener->onInteractiveLogin($event);
+
+        $this->assertSame('de', $session->get('_locale'));
+    }
 }

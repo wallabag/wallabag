@@ -10,9 +10,6 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  */
 class Version20161122144743 extends WallabagMigration
 {
-    /**
-     * @param Schema $schema
-     */
     public function up(Schema $schema)
     {
         $access = $this->container
@@ -25,9 +22,6 @@ class Version20161122144743 extends WallabagMigration
         $this->addSql('INSERT INTO ' . $this->getTable('craue_config_setting') . " (name, value, section) VALUES ('restricted_access', 0, 'entry')");
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function down(Schema $schema)
     {
         $this->addSql('DELETE FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'restricted_access';");

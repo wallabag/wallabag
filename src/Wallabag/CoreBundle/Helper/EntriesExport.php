@@ -85,7 +85,7 @@ class EntriesExport
     public function updateAuthor($method)
     {
         if ('entry' !== $method) {
-            $this->author = $method . ' authors';
+            $this->author = 'Various authors';
 
             return $this;
         }
@@ -150,8 +150,6 @@ class EntriesExport
          */
 
         $book->setTitle($this->title);
-        // Could also be the ISBN number, prefered for published books, or a UUID.
-        $book->setIdentifier($this->title, EPub::IDENTIFIER_URI);
         // Not needed, but included for the example, Language is mandatory, but EPub defaults to "en". Use RFC3066 Language codes, such as "en", "da", "fr" etc.
         $book->setLanguage($this->language);
         $book->setDescription('Some articles saved on my wallabag');
@@ -167,12 +165,9 @@ class EntriesExport
         $book->addDublinCoreMetadata(DublinCore::CONTRIBUTOR, 'PHP');
         $book->addDublinCoreMetadata(DublinCore::CONTRIBUTOR, 'wallabag');
 
-        /*
-         * Front page
-         */
-        if (file_exists($this->logoPath)) {
-            $book->setCoverImage('Cover.png', file_get_contents($this->logoPath), 'image/png');
-        }
+        $entryIds = [];
+        $entryCount = \count($this->entries);
+        $i = 0;
 
         /*
          * Adding actual entries
@@ -180,21 +175,48 @@ class EntriesExport
 
         // set tags as subjects
         foreach ($this->entries as $entry) {
+            ++$i;
+
+            /*
+             * Front page
+             * Set if there's only one entry in the given set
+             */
+            if (1 === $entryCount && null !== $entry->getPreviewPicture()) {
+                $book->setCoverImage($entry->getPreviewPicture());
+            }
+
             foreach ($entry->getTags() as $tag) {
                 $book->setSubject($tag->getLabel());
             }
+            $filename = sha1(sprintf('%s:%s', $entry->getUrl(), $entry->getTitle()));
 
-            // the reader in Kobo Devices doesn't likes special caracters
-            // in filenames, we limit to A-z/0-9
-            $filename = preg_replace('/[^A-Za-z0-9\-]/', '', $entry->getTitle());
+            $publishedBy = $entry->getPublishedBy();
+            $authors = $this->translator->trans('export.unknown');
+            if (!empty($publishedBy)) {
+                $authors = implode(',', $publishedBy);
+            }
 
-            $titlepage = $content_start . '<h1>' . $entry->getTitle() . '</h1>' . $this->getExportInformation('PHPePub') . $bookEnd;
-            $book->addChapter('Title', 'Title.html', $titlepage, true, EPub::EXTERNAL_REF_ADD);
+            $titlepage = $content_start .
+                '<h1>' . $entry->getTitle() . '</h1>' .
+                '<dl>' .
+                '<dt>' . $this->translator->trans('entry.view.published_by') . '</dt><dd>' . $authors . '</dd>' .
+                '<dt>' . $this->translator->trans('entry.metadata.reading_time') . '</dt><dd>' . $this->translator->trans('entry.metadata.reading_time_minutes_short', ['%readingTime%' => $entry->getReadingTime()]) . '</dd>' .
+                '<dt>' . $this->translator->trans('entry.metadata.added_on') . '</dt><dd>' . $entry->getCreatedAt()->format('Y-m-d') . '</dd>' .
+                '<dt>' . $this->translator->trans('entry.metadata.address') . '</dt><dd><a href="' . $entry->getUrl() . '">' . $entry->getUrl() . '</a></dd>' .
+                '</dl>' .
+                $bookEnd;
+            $book->addChapter("Entry {$i} of {$entryCount}", "{$filename}_cover.html", $titlepage, true, EPub::EXTERNAL_REF_ADD);
             $chapter = $content_start . $entry->getContent() . $bookEnd;
-            $book->addChapter($entry->getTitle(), htmlspecialchars($filename) . '.html', $chapter, true, EPub::EXTERNAL_REF_ADD);
+
+            $entryIds[] = $entry->getId();
+            $book->addChapter($entry->getTitle(), "{$filename}.html", $chapter, true, EPub::EXTERNAL_REF_ADD);
         }
 
-        $book->buildTOC();
+        $book->addChapter('Notices', 'Cover2.html', $content_start . $this->getExportInformation('PHPePub') . $bookEnd);
+
+        // Could also be the ISBN number, prefered for published books, or a UUID.
+        $hash = sha1(sprintf('%s:%s', $this->wallabagUrl, implode(',', $entryIds)));
+        $book->setIdentifier(sprintf('urn:wallabag:%s', $hash), EPub::IDENTIFIER_URI);
 
         return Response::create(
             $book->getBook(),
@@ -202,7 +224,7 @@ class EntriesExport
             [
                 'Content-Description' => 'File Transfer',
                 'Content-type' => 'application/epub+zip',
-                'Content-Disposition' => 'attachment; filename="' . $this->title . '.epub"',
+                'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.epub"',
                 'Content-Transfer-Encoding' => 'binary',
             ]
         );
@@ -244,9 +266,6 @@ class EntriesExport
         }
         $mobi->setContentProvider($content);
 
-        // the browser inside Kindle Devices doesn't likes special caracters either, we limit to A-z/0-9
-        $this->title = preg_replace('/[^A-Za-z0-9\-]/', '', $this->title);
-
         return Response::create(
             $mobi->toString(),
             200,
@@ -254,7 +273,7 @@ class EntriesExport
                 'Accept-Ranges' => 'bytes',
                 'Content-Description' => 'File Transfer',
                 'Content-type' => 'application/x-mobipocket-ebook',
-                'Content-Disposition' => 'attachment; filename="' . $this->title . '.mobi"',
+                'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.mobi"',
                 'Content-Transfer-Encoding' => 'binary',
             ]
         );
@@ -279,14 +298,6 @@ class EntriesExport
         $pdf->SetKeywords('wallabag');
 
         /*
-         * Front page
-         */
-        $pdf->AddPage();
-        $intro = '<h1>' . $this->title . '</h1>' . $this->getExportInformation('tcpdf');
-
-        $pdf->writeHTMLCell(0, 0, '', '', $intro, 0, 1, 0, true, '', true);
-
-        /*
          * Adding actual entries
          */
         foreach ($this->entries as $entry) {
@@ -294,12 +305,36 @@ class EntriesExport
                 $pdf->SetKeywords($tag->getLabel());
             }
 
+            $publishedBy = $entry->getPublishedBy();
+            $authors = $this->translator->trans('export.unknown');
+            if (!empty($publishedBy)) {
+                $authors = implode(',', $publishedBy);
+            }
+
+            $pdf->addPage();
+            $html = '<h1>' . $entry->getTitle() . '</h1>' .
+                '<dl>' .
+                '<dt>' . $this->translator->trans('entry.view.published_by') . '</dt><dd>' . $authors . '</dd>' .
+                '<dt>' . $this->translator->trans('entry.metadata.reading_time') . '</dt><dd>' . $this->translator->trans('entry.metadata.reading_time_minutes_short', ['%readingTime%' => $entry->getReadingTime()]) . '</dd>' .
+                '<dt>' . $this->translator->trans('entry.metadata.added_on') . '</dt><dd>' . $entry->getCreatedAt()->format('Y-m-d') . '</dd>' .
+                '<dt>' . $this->translator->trans('entry.metadata.address') . '</dt><dd><a href="' . $entry->getUrl() . '">' . $entry->getUrl() . '</a></dd>' .
+                '</dl>';
+            $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+
             $pdf->AddPage();
             $html = '<h1>' . $entry->getTitle() . '</h1>';
             $html .= $entry->getContent();
 
             $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
         }
+
+        /*
+         * Last page
+         */
+        $pdf->AddPage();
+        $html = $this->getExportInformation('tcpdf');
+
+        $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
 
         // set image scale factor
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
@@ -310,7 +345,7 @@ class EntriesExport
             [
                 'Content-Description' => 'File Transfer',
                 'Content-type' => 'application/pdf',
-                'Content-Disposition' => 'attachment; filename="' . $this->title . '.pdf"',
+                'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.pdf"',
                 'Content-Transfer-Encoding' => 'binary',
             ]
         );
@@ -356,7 +391,7 @@ class EntriesExport
             200,
             [
                 'Content-type' => 'application/csv',
-                'Content-Disposition' => 'attachment; filename="' . $this->title . '.csv"',
+                'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.csv"',
                 'Content-Transfer-Encoding' => 'UTF-8',
             ]
         );
@@ -374,7 +409,7 @@ class EntriesExport
             200,
             [
                 'Content-type' => 'application/json',
-                'Content-Disposition' => 'attachment; filename="' . $this->title . '.json"',
+                'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.json"',
                 'Content-Transfer-Encoding' => 'UTF-8',
             ]
         );
@@ -392,7 +427,7 @@ class EntriesExport
             200,
             [
                 'Content-type' => 'application/xml',
-                'Content-Disposition' => 'attachment; filename="' . $this->title . '.xml"',
+                'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.xml"',
                 'Content-Transfer-Encoding' => 'UTF-8',
             ]
         );
@@ -418,7 +453,7 @@ class EntriesExport
             200,
             [
                 'Content-type' => 'text/plain',
-                'Content-Disposition' => 'attachment; filename="' . $this->title . '.txt"',
+                'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.txt"',
                 'Content-Transfer-Encoding' => 'UTF-8',
             ]
         );
@@ -460,5 +495,16 @@ class EntriesExport
         }
 
         return str_replace('%IMAGE%', '', $info);
+    }
+
+    /**
+     * Return a sanitized version of the title by applying translit iconv
+     * and removing non alphanumeric characters, - and space.
+     *
+     * @return string Sanitized filename
+     */
+    private function getSanitizedFilename()
+    {
+        return preg_replace('/[^A-Za-z0-9\- \']/', '', iconv('utf-8', 'us-ascii//TRANSLIT', $this->title));
     }
 }

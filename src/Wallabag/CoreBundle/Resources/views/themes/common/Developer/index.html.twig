@@ -33,11 +33,17 @@
                                     <table class="striped">
                                         <tr>
                                             <td>{{ 'developer.existing_clients.field_id'|trans }}</td>
-                                            <td><strong><code>{{ client.clientId }}</code></strong></td>
+                                            <td>
+                                                <strong><code>{{ client.clientId }}</code></strong>
+                                                <button class="btn" data-clipboard-text="{{ client.clientId }}">{{ 'developer.client.copy_to_clipboard'|trans }}</button>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>{{ 'developer.existing_clients.field_secret'|trans }}</td>
-                                            <td><strong><code>{{ client.secret }}</code></strong></td>
+                                            <td>
+                                                <strong><code>{{ client.secret }}</code></strong>
+                                                <button class="btn" data-clipboard-text="{{ client.secret }}">{{ 'developer.client.copy_to_clipboard'|trans }}</button>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>{{ 'developer.existing_clients.field_uris'|trans }}</td>
@@ -48,9 +54,10 @@
                                             <td><strong><code>{{ client.allowedGrantTypes|json_encode() }}</code></strong></td>
                                         </tr>
                                     </table>
+
+                                    <p>{{ 'developer.remove.warn_message_1'|trans({'%name%': client.name }) }}</p>
+                                    <p>{{ 'developer.remove.warn_message_2'|trans({'%name%': client.name }) }}</p>
                                     <p>
-                                        {{ 'developer.remove.warn_message_1'|trans({'%name%': client.name }) }}<br/>
-                                        {{ 'developer.remove.warn_message_2'|trans({'%name%': client.name }) }}<br/>
                                         <a class="waves-effect waves-light red btn" href="{{ path('developer_delete_client', {'id': client.id}) }}">{{ 'developer.remove.action'|trans({'%name%': client.name }) }}</a>
                                     </p>
                                 </div>

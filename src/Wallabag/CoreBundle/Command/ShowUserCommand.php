@@ -46,9 +46,6 @@ class ShowUserCommand extends ContainerAwareCommand
         return 0;
     }
 
-    /**
-     * @param User $user
-     */
     private function showUser(User $user)
     {
         $this->io->listing([
@@ -57,7 +54,8 @@ class ShowUserCommand extends ContainerAwareCommand
             sprintf('Display name: %s', $user->getName()),
             sprintf('Creation date: %s', $user->getCreatedAt()->format('Y-m-d H:i:s')),
             sprintf('Last login: %s', null !== $user->getLastLogin() ? $user->getLastLogin()->format('Y-m-d H:i:s') : 'never'),
-            sprintf('2FA activated: %s', $user->isTwoFactorAuthentication() ? 'yes' : 'no'),
+            sprintf('2FA (email) activated: %s', $user->isEmailTwoFactor() ? 'yes' : 'no'),
+            sprintf('2FA (OTP) activated: %s', $user->isGoogleAuthenticatorEnabled() ? 'yes' : 'no'),
         ]);
     }
 

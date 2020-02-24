@@ -5,19 +5,17 @@ namespace Wallabag\CoreBundle\Controller;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Form\Type\NewTagType;
+use Wallabag\CoreBundle\Form\Type\RenameTagType;
 
 class TagController extends Controller
 {
     /**
-     * @param Request $request
-     * @param Entry   $entry
-     *
      * @Route("/new-tag/{entry}", requirements={"entry" = "\d+"}, name="new_tag")
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -86,14 +84,22 @@ class TagController extends Controller
     {
         $tags = $this->get('wallabag_core.tag_repository')
             ->findAllFlatTagsWithNbEntries($this->getUser()->getId());
+        $nbEntriesUntagged = $this->get('wallabag_core.entry_repository')
+            ->countUntaggedEntriesByUser($this->getUser()->getId());
+
+        $renameForms = [];
+        foreach ($tags as $tag) {
+            $renameForms[$tag['id']] = $this->createForm(RenameTagType::class, new Tag())->createView();
+        }
 
         return $this->render('WallabagCoreBundle:Tag:tags.html.twig', [
             'tags' => $tags,
+            'renameForms' => $renameForms,
+            'nbEntriesUntagged' => $nbEntriesUntagged,
         ]);
     }
 
     /**
-     * @param Tag $tag
      * @param int $page
      *
      * @Route("/tag/list/{slug}/{page}", name="tag_entries", defaults={"page" = "1"})
@@ -129,5 +135,46 @@ class TagController extends Controller
             'currentPage' => $page,
             'tag' => $tag,
         ]);
+    }
+
+    /**
+     * Rename a given tag with a new label
+     * Create a new tag with the new name and drop the old one.
+     *
+     * @Route("/tag/rename/{slug}", name="tag_rename")
+     * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function renameTagAction(Tag $tag, Request $request)
+    {
+        $form = $this->createForm(RenameTagType::class, new Tag());
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entries = $this->get('wallabag_core.entry_repository')->findAllByTagId(
+                $this->getUser()->getId(),
+                $tag->getId()
+            );
+            foreach ($entries as $entry) {
+                $this->get('wallabag_core.tags_assigner')->assignTagsToEntry(
+                    $entry,
+                    $form->get('label')->getData()
+                );
+                $entry->removeTag($tag);
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+        }
+
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            'flashes.tag.notice.tag_renamed'
+        );
+
+        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'), '', true);
+
+        return $this->redirect($redirectUrl);
     }
 }

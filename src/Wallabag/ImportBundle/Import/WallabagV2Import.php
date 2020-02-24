@@ -35,7 +35,9 @@ class WallabagV2Import extends WallabagImport
     {
         return [
             'html' => $entry['content'],
-            'content_type' => $entry['mimetype'],
+            'headers' => [
+                'content-type' => $entry['mimetype'],
+            ],
             'is_archived' => (bool) ($entry['is_archived'] || $this->markAsRead),
             'is_starred' => (bool) $entry['is_starred'],
         ] + $entry;

@@ -3,9 +3,19 @@ entry:
   resource: "WallabagApiBundle:EntryRest"
   name_prefix:  api_
 
+search:
+  type: rest
+  resource: "WallabagApiBundle:SearchRest"
+  name_prefix:  api_
+
 tag:
   type: rest
   resource: "WallabagApiBundle:TagRest"
+  name_prefix:  api_
+
+tagging_rule:
+  type: rest
+  resource: "WallabagApiBundle:TaggingRuleRest"
   name_prefix:  api_
 
 annotation:

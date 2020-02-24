@@ -1,6 +1,7 @@
 imports:
     - { resource: config_dev.yml }
     - { resource: parameters_test.yml }
+    - { resource: services_test.yml }
 
 framework:
     test: ~
@@ -23,7 +24,6 @@ swiftmailer:
 doctrine:
     dbal:
         driver: "%test_database_driver%"
-        driver_class: "%test_database_driver_class%"
         host: "%test_database_host%"
         port: "%test_database_port%"
         dbname: "%test_database_name%"

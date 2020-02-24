@@ -11,8 +11,6 @@ parameters:
     # database_password: %env.database_password%
 
     database_driver: pdo_mysql
-    database_driver_class: ~
-    # database_driver_class: Wallabag\CoreBundle\Doctrine\DBAL\Driver\CustomPostgreSQLDriver
     database_host: 127.0.0.1
     database_port: ~
     database_name: wallabag
@@ -27,15 +25,18 @@ parameters:
 
     domain_name: https://your-wallabag-url-instance.com
 
-    mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: ~
-    mailer_password: ~
+    mailer_transport:  smtp
+    mailer_user:       ~
+    mailer_password:   ~
+    mailer_host:       127.0.0.1
+    mailer_port:       false
+    mailer_encryption: ~
+    mailer_auth_mode:  ~
 
     locale: en
 
     # A secret key that's used to generate certain security-related tokens
-    secret: ovmpmAWXRCabNlMgzlzFXDYmCFfzGv
+    secret: CHANGE_ME_TO_SOMETHING_SECRET_AND_RANDOM
 
     # two factor stuff
     twofactor_auth: true
@@ -62,3 +63,6 @@ parameters:
     redis_port: 6379
     redis_path: null
     redis_password: null
+
+    # sentry logging
+    sentry_dsn: ~

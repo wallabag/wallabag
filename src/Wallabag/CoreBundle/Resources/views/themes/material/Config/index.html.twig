@@ -12,10 +12,11 @@
                     <div class="div_tabs col s12">
                         <ul class="tabs">
                             <li class="tab col s12 m6 l3"><a class="active" href="#set1">{{ 'config.tab_menu.settings'|trans }}</a></li>
-                            <li class="tab col s12 m6 l3"><a href="#set2">{{ 'config.tab_menu.rss'|trans }}</a></li>
+                            <li class="tab col s12 m6 l3"><a href="#set2">{{ 'config.tab_menu.feed'|trans }}</a></li>
                             <li class="tab col s12 m6 l3"><a href="#set3">{{ 'config.tab_menu.user_info'|trans }}</a></li>
                             <li class="tab col s12 m6 l3"><a href="#set4">{{ 'config.tab_menu.password'|trans }}</a></li>
                             <li class="tab col s12 m6 l3"><a href="#set5">{{ 'config.tab_menu.rules'|trans }}</a></li>
+                            <li class="tab col s12 m6 l3"><a href="#set6">{{ 'config.tab_menu.reset'|trans }}</a></li>
                         </ul>
                     </div>
 
@@ -111,8 +112,7 @@
                                     <img id="androidQrcode" class="hide-on-med-and-down" />
                                 </div>
                                 <script>
-                                    const imgBase64 = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');
-                                    document.getElementById('androidQrcode').src = imgBase64;
+                                    document.getElementById('androidQrcode').src = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');
                                 </script>
                             </div>
 
@@ -122,42 +122,43 @@
                     </div>
 
                     <div id="set2" class="col s12">
-                        {{ form_start(form.rss) }}
-                            {{ form_errors(form.rss) }}
+                        {{ form_start(form.feed) }}
+                            {{ form_errors(form.feed) }}
 
                             <div class="row">
                                 <div class="input-field col s12">
-                                    {{ 'config.form_rss.description'|trans }}
+                                    {{ 'config.form_feed.description'|trans }}
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col s12">
-                                    <h6 class="grey-text">{{ 'config.form_rss.token_label'|trans }}</h6>
+                                    <h6 class="grey-text">{{ 'config.form_feed.token_label'|trans }}</h6>
                                     <div>
-                                        {% if rss.token %}
-                                            {{ rss.token }}
+                                        {% if feed.token %}
+                                            {{ feed.token }}
                                         {% else %}
-                                            <em>{{ 'config.form_rss.no_token'|trans }}</em>
+                                            <em>{{ 'config.form_feed.no_token'|trans }}</em>
                                         {% endif %}
-                                        – <a href="{{ path('generate_token') }}">
-                                        {% if rss.token %}
-                                            {{ 'config.form_rss.token_reset'|trans }}
+
+                                        {% if feed.token %}
+                                            – <a href="{{ path('generate_token') }}">{{ 'config.form_feed.token_reset'|trans }}</a>
+                                            – <a href="{{ path('revoke_token') }}">{{ 'config.form_feed.token_revoke'|trans }}</a>
                                         {% else %}
-                                            {{ 'config.form_rss.token_create'|trans }}
-                                        {% endif %}</a>
+                                            – <a href="{{ path('generate_token') }}">{{ 'config.form_feed.token_create'|trans }}</a>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
-                            {% if rss.token %}
+                            {% if feed.token %}
                             <div class="row">
                                 <div class="col s12">
-                                    <h6 class="grey-text">{{ 'config.form_rss.rss_links'|trans }}</h6>
+                                    <h6 class="grey-text">{{ 'config.form_feed.feed_links'|trans }}</h6>
                                     <ul>
-                                        <li><a href="{{ path('unread_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.unread'|trans }}</a></li>
-                                        <li><a href="{{ path('starred_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.starred'|trans }}</a></li>
-                                        <li><a href="{{ path('archive_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.archive'|trans }}</a></li>
-                                        <li><a href="{{ path('all_rss', {'username': rss.username, 'token': rss.token}) }}">{{ 'config.form_rss.rss_link.all'|trans }}</a></li>
+                                        <li><a href="{{ path('unread_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.unread'|trans }}</a></li>
+                                        <li><a href="{{ path('starred_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.starred'|trans }}</a></li>
+                                        <li><a href="{{ path('archive_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.archive'|trans }}</a></li>
+                                        <li><a href="{{ path('all_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.all'|trans }}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -165,20 +166,29 @@
 
                             <div class="row">
                                 <div class="input-field col s12">
-                                    {{ form_label(form.rss.rss_limit) }}
-                                    {{ form_errors(form.rss.rss_limit) }}
-                                    {{ form_widget(form.rss.rss_limit) }}
+                                    {{ form_label(form.feed.feed_limit) }}
+                                    {{ form_errors(form.feed.feed_limit) }}
+                                    {{ form_widget(form.feed.feed_limit) }}
                                 </div>
                             </div>
 
-                            {{ form_widget(form.rss.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
-                            {{ form_rest(form.rss) }}
+                            {{ form_widget(form.feed.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+                            {{ form_rest(form.feed) }}
                         </form>
                     </div>
 
                     <div id="set3" class="col s12">
                         {{ form_start(form.user) }}
                             {{ form_errors(form.user) }}
+
+                            <div class="row">
+                                <div class="col s12">
+                                    <h6 class="grey-text">{{ 'config.form_user.login_label'|trans }}</h6>
+                                    <div>
+                                        {{ app.user.username }}
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="row">
                                 <div class="input-field col s12">
@@ -196,59 +206,42 @@
                                 </div>
                             </div>
 
-                            {% if twofactor_auth %}
-                            <div class="row">
-                                <div class="input-field col s11">
-                                    {{ 'config.form_user.two_factor_description'|trans }}
-
-                                    <br />
-
-                                    {{ form_widget(form.user.twoFactorAuthentication) }}
-                                    {{ form_label(form.user.twoFactorAuthentication) }}
-                                    {{ form_errors(form.user.twoFactorAuthentication) }}
-                                </div>
-                                <div class="input-field col s1">
-                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_user.help_twoFactorAuthentication'|trans }}">
-                                        <i class="material-icons">live_help</i>
-                                    </a>
-                                </div>
-                            </div>
-                            {% endif %}
-
                             {{ form_widget(form.user.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+
+                            {% if twofactor_auth %}
+                                <br/>
+                                <br/>
+                                <div class="row">
+                                    <h5>{{ 'config.otp.page_title'|trans }}</h5>
+
+                                    <p>{{ 'config.form_user.two_factor_description'|trans }}</p>
+
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>{{ 'config.form_user.two_factor.table_method'|trans }}</th>
+                                                <th>{{ 'config.form_user.two_factor.table_state'|trans }}</th>
+                                                <th>{{ 'config.form_user.two_factor.table_action'|trans }}</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>{{ 'config.form_user.two_factor.emailTwoFactor_label'|trans }}</td>
+                                                <td>{% if app.user.isEmailTwoFactor %}<b>{{ 'config.form_user.two_factor.state_enabled'|trans }}</b>{% else %}{{ 'config.form_user.two_factor.state_disabled'|trans }}{% endif %}</td>
+                                                <td><a href="{{ path('config_otp_email') }}" class="waves-effect waves-light btn{% if app.user.isEmailTwoFactor %} disabled{% endif %}">{{ 'config.form_user.two_factor.action_email'|trans }}</a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ 'config.form_user.two_factor.googleTwoFactor_label'|trans }}</td>
+                                                <td>{% if app.user.isGoogleTwoFactor %}<b>{{ 'config.form_user.two_factor.state_enabled'|trans }}</b>{% else %}{{ 'config.form_user.two_factor.state_disabled'|trans }}{% endif %}</td>
+                                                <td><a href="{{ path('config_otp_app') }}" class="waves-effect waves-light btn{% if app.user.isGoogleTwoFactor %} disabled{% endif %}">{{ 'config.form_user.two_factor.action_app'|trans }}</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            {% endif %}
                             {{ form_widget(form.user._token) }}
                         </form>
-
-                        <br /><hr /><br />
-
-                        <div class="row">
-                            <h5>{{ 'config.reset.title'|trans }}</h5>
-                            <p>{{ 'config.reset.description'|trans }}</p>
-                            <a href="{{ path('config_reset', { type: 'annotations'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
-                                {{ 'config.reset.annotations'|trans }}
-                            </a>
-                            <a href="{{ path('config_reset', { type: 'tags'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
-                                {{ 'config.reset.tags'|trans }}
-                            </a>
-                            <a href="{{ path('config_reset', { type: 'archived'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
-                                {{ 'config.reset.archived'|trans }}
-                            </a>
-                            <a href="{{ path('config_reset', { type: 'entries'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
-                                {{ 'config.reset.entries'|trans }}
-                            </a>
-                        </div>
-
-                        {% if enabled_users > 1 %}
-                            <br /><hr /><br />
-
-                            <div class="row">
-                                <h5>{{ 'config.form_user.delete.title'|trans }}</h5>
-                                <p>{{ 'config.form_user.delete.description'|trans }}</p>
-                                <a href="{{ path('delete_account') }}" onclick="return confirm('{{ 'config.form_user.delete.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red delete-account">
-                                    {{ 'config.form_user.delete.button'|trans }}
-                                </a>
-                            </div>
-                        {% endif %}
                     </div>
 
                     <div id="set4" class="col s12">
@@ -314,28 +307,77 @@
                         </div>
                         {% endif %}
 
-                        {{ form_start(form.new_tagging_rule) }}
-                            {{ form_errors(form.new_tagging_rule) }}
+                        <ul class="row">
+                            <li class="col l6 m6 s12">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <span class="card-title">{{ 'config.form_rules.card.new_tagging_rule'|trans }}</span>
 
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    {{ form_label(form.new_tagging_rule.rule) }}
-                                    {{ form_errors(form.new_tagging_rule.rule) }}
-                                    {{ form_widget(form.new_tagging_rule.rule) }}
+                                        {{ form_start(form.new_tagging_rule) }}
+                                        {{ form_errors(form.new_tagging_rule) }}
+
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                {{ form_label(form.new_tagging_rule.rule) }}
+                                                {{ form_errors(form.new_tagging_rule.rule) }}
+                                                {{ form_widget(form.new_tagging_rule.rule) }}
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                {{ form_label(form.new_tagging_rule.tags) }}
+                                                {{ form_errors(form.new_tagging_rule.tags) }}
+                                                {{ form_widget(form.new_tagging_rule.tags) }}
+                                            </div>
+                                        </div>
+
+                                        {{ form_widget(form.new_tagging_rule.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+                                        {{ form_rest(form.new_tagging_rule) }}
+                                    </form>
+                                    </div>
                                 </div>
-                            </div>
+                            </li>
+                            <li class="col l6 m6 s12">
+                                <div class="card z-depth-1">
+                                    <div class="card-content">
+                                        <span class="card-title">{{ 'config.form_rules.card.import_tagging_rules'|trans }}</span>
+                                        <p>{{ 'config.form_rules.card.import_tagging_rules_detail'|trans }}</p>
+                                        {{ form_start(form.import_tagging_rule) }}
+                                            {{ form_errors(form.import_tagging_rule) }}
+                                            <div class="row">
+                                                <div class="file-field input-field col s12">
+                                                    {{ form_errors(form.import_tagging_rule.file) }}
+                                                    <div class="btn">
+                                                        <span>{{ form.import_tagging_rule.file.vars.label|trans }}</span>
+                                                        {{ form_widget(form.import_tagging_rule.file) }}
+                                                    </div>
+                                                    <div class="file-path-wrapper">
+                                                        <input class="file-path validate" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    {{ form_label(form.new_tagging_rule.tags) }}
-                                    {{ form_errors(form.new_tagging_rule.tags) }}
-                                    {{ form_widget(form.new_tagging_rule.tags) }}
+                                            {{ form_widget(form.import_tagging_rule.import, { 'attr': {'class': 'btn waves-effect waves-light'} }) }}
+
+                                            {{ form_rest(form.import_tagging_rule) }}
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-
-                            {{ form_widget(form.new_tagging_rule.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
-                            {{ form_rest(form.new_tagging_rule) }}
-                        </form>
+                            </li>
+                            {% if app.user.config.taggingRules is not empty %}
+                            <li class="col l6 m6 s12">
+                                <div class="card z-depth-1">
+                                    <div class="card-content">
+                                        <span class="card-title">{{ 'config.form_rules.card.export_tagging_rules'|trans }}</span>
+                                        <p>{{ 'config.form_rules.card.export_tagging_rules_detail'|trans }}</p>
+                                        <br/>
+                                        <p><a href="{{ path('export_tagging_rule') }}" class="waves-effect waves-light btn">{{ 'config.form_rules.export'|trans }}</a></p>
+                                    </div>
+                                </div>
+                            </li>
+                            {% endif %}
+                        </ul>
 
                         <div class="row">
                             <div class="input-field col s12">
@@ -421,6 +463,37 @@
                                 </table>
                             </div>
                         </div>
+                    </div>
+
+                    <div id="set6" class="col s12">
+                        <div class="row">
+                            <h5>{{ 'config.reset.title'|trans }}</h5>
+                            <p>{{ 'config.reset.description'|trans }}</p>
+                            <a href="{{ path('config_reset', { type: 'annotations'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                                {{ 'config.reset.annotations'|trans }}
+                            </a>
+                            <a href="{{ path('config_reset', { type: 'tags'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                                {{ 'config.reset.tags'|trans }}
+                            </a>
+                            <a href="{{ path('config_reset', { type: 'archived'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                                {{ 'config.reset.archived'|trans }}
+                            </a>
+                            <a href="{{ path('config_reset', { type: 'entries'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                                {{ 'config.reset.entries'|trans }}
+                            </a>
+                        </div>
+
+                        {% if enabled_users > 1 %}
+                            <br /><hr /><br />
+
+                            <div class="row">
+                                <h5>{{ 'config.form_user.delete.title'|trans }}</h5>
+                                <p>{{ 'config.form_user.delete.description'|trans }}</p>
+                                <a href="{{ path('delete_account') }}" onclick="return confirm('{{ 'config.form_user.delete.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red delete-account">
+                                    {{ 'config.form_user.delete.button'|trans }}
+                                </a>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
 

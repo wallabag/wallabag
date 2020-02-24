@@ -46,6 +46,8 @@
                {% set activeRoute = 'starred' %}
             {% elseif currentRoute == 'unread' or currentRoute == 'homepage' or currentRouteFromQueryParams == 'unread' %}
                {% set activeRoute = 'unread' %}
+            {% elseif currentRoute == 'untagged' %}
+               {% set activeRoute = 'untagged' %}
             {% endif %}
 
             <li class="bold {% if activeRoute == 'unread' %}active{% endif %}">
@@ -89,6 +91,9 @@
             <li class="bold {% if currentRoute == 'howto' %}active{% endif %}">
                 <a class="waves-effect" href="{{ path('howto') }}">{{ 'menu.left.howto'|trans }}</a>
             </li>
+            <li class="bold {% if currentRoute == 'quickstart' %}active{% endif %}">
+                <a class="waves-effect" href="{{ path('quickstart') }}">{{ 'menu.left.quickstart'|trans }}</a>
+            </li>
             <li class="bold">
                 <a class="waves-effect icon icon-power" href="{{ path('fos_user_security_logout') }}">{{ 'menu.left.logout'|trans }}</a>
             </li>
@@ -113,6 +118,13 @@
                             <i class="material-icons">search</i>
                         </a>
                     </li>
+                    {% if activeRoute %}
+                    <li id="button_random">
+                        <a class="waves-effect tooltipped js-random-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', { 'type': activeRoute }) }}">
+                            <i class="material-icons">casino</i>
+                        </a>
+                    </li>
+                    {% endif %}
                     <li id="button_filters">
                         <a class="nav-panel-menu button-collapse-right tooltipped js-filters-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-activates="filters">
                             <i class="material-icons">filter_list</i>
@@ -125,7 +137,7 @@
                     </li>
                 </ul>
             </div>
-            {{ render(controller("WallabagCoreBundle:Entry:searchForm", {'currentRoute': app.request.attributes.get('_route')})) }}
+            {{ render(controller("WallabagCoreBundle:Entry:searchForm", {'currentRoute': currentRoute})) }}
             {{ render(controller("WallabagCoreBundle:Entry:addEntryForm")) }}
         </div>
     </nav>

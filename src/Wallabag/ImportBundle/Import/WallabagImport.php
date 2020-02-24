@@ -89,6 +89,18 @@ abstract class WallabagImport extends AbstractImport
     /**
      * {@inheritdoc}
      */
+    public function validateEntry(array $importedEntry)
+    {
+        if (empty($importedEntry['url'])) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function parseEntry(array $importedEntry)
     {
         $existingEntry = $this->em
@@ -110,7 +122,7 @@ abstract class WallabagImport extends AbstractImport
         // update entry with content (in case fetching failed, the given entry will be return)
         $this->fetchContent($entry, $data['url'], $data);
 
-        if (array_key_exists('tags', $data)) {
+        if (\array_key_exists('tags', $data)) {
             $this->tagsAssigner->assignTagsToEntry(
                 $entry,
                 $data['tags'],
@@ -122,7 +134,7 @@ abstract class WallabagImport extends AbstractImport
             $entry->setPreviewPicture($importedEntry['preview_picture']);
         }
 
-        $entry->setArchived($data['is_archived']);
+        $entry->updateArchived($data['is_archived']);
         $entry->setStarred($data['is_starred']);
 
         if (!empty($data['created_at'])) {

@@ -46,8 +46,6 @@ abstract class AbstractImport implements ImportInterface
     /**
      * Set RabbitMQ/Redis Producer to send each entry to a queue.
      * This method should be called when user has enabled RabbitMQ.
-     *
-     * @param ProducerInterface $producer
      */
     public function setProducer(ProducerInterface $producer)
     {
@@ -57,8 +55,6 @@ abstract class AbstractImport implements ImportInterface
     /**
      * Set current user.
      * Could the current *connected* user or one retrieve by the consumer.
-     *
-     * @param User $user
      */
     public function setUser(User $user)
     {
@@ -112,11 +108,16 @@ abstract class AbstractImport implements ImportInterface
     /**
      * Parse one entry.
      *
-     * @param array $importedEntry
-     *
      * @return Entry
      */
     abstract public function parseEntry(array $importedEntry);
+
+    /**
+     * Validate that an entry is valid (like has some required keys, etc.).
+     *
+     * @return bool
+     */
+    abstract public function validateEntry(array $importedEntry);
 
     /**
      * Fetch content from the ContentProxy (using graby).
@@ -140,10 +141,8 @@ abstract class AbstractImport implements ImportInterface
 
     /**
      * Parse and insert all given entries.
-     *
-     * @param $entries
      */
-    protected function parseEntries($entries)
+    protected function parseEntries(array $entries)
     {
         $i = 1;
         $entryToBeFlushed = [];
@@ -151,6 +150,10 @@ abstract class AbstractImport implements ImportInterface
         foreach ($entries as $importedEntry) {
             if ($this->markAsRead) {
                 $importedEntry = $this->setEntryAsRead($importedEntry);
+            }
+
+            if (false === $this->validateEntry($importedEntry)) {
+                continue;
             }
 
             $entry = $this->parseEntry($importedEntry);
@@ -197,8 +200,6 @@ abstract class AbstractImport implements ImportInterface
      *
      * Faster parse entries for Producer.
      * We don't care to make check at this time. They'll be done by the consumer.
-     *
-     * @param array $entries
      */
     protected function parseEntriesForProducer(array $entries)
     {
@@ -219,8 +220,6 @@ abstract class AbstractImport implements ImportInterface
     /**
      * Set current imported entry to archived / read.
      * Implementation is different accross all imports.
-     *
-     * @param array $importedEntry
      *
      * @return array
      */

@@ -1,7 +1,7 @@
 validator:
     password_must_match: 'Las contraseñas no coinciden'
-    password_too_short: 'La contraseña debe tener al menos 8 carácteres'
-    password_wrong_value: 'Entrada equivocada para su contraseña actual'
+    password_too_short: 'La contraseña debe tener al menos 8 caracteres'
+    password_wrong_value: 'La contraseña actual es incorrecta'
     item_per_page_too_high: 'Esto matará la aplicación'
-    rss_limit_too_high: 'Esto matará la aplicación'
-    # quote_length_too_high: 'The quote is too long. It should have {{ limit }} characters or less.'
+    feed_limit_too_high: 'Esto matará la aplicación'
+    quote_length_too_high: 'La cita es demasiado larga. Debe tener {{ limit }} caracteres o menos.'

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\AnnotationBundle\Controller;
+namespace Tests\Wallabag\AnnotationBundle\Controller;
 
 use Tests\Wallabag\AnnotationBundle\WallabagAnnotationTestCase;
 use Wallabag\AnnotationBundle\Entity\Annotation;
@@ -100,12 +100,68 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
         $this->assertSame('my quote', $content['quote']);
 
         /** @var Annotation $annotation */
-        $annotation = $this->client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+        $annotation = $em
             ->getRepository('WallabagAnnotationBundle:Annotation')
             ->findLastAnnotationByPageId($entry->getId(), 1);
 
         $this->assertSame('my annotation', $annotation->getText());
+    }
+
+    public function testAllowEmptyQuote()
+    {
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+
+        /** @var Entry $entry */
+        $entry = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUsernameAndNotArchived('admin');
+
+        $headers = ['CONTENT_TYPE' => 'application/json'];
+        $content = json_encode([
+            'text' => 'my annotation',
+            'quote' => null,
+            'ranges' => [
+                ['start' => '', 'startOffset' => 24, 'end' => '', 'endOffset' => 31],
+            ],
+        ]);
+        $this->client->request('POST', '/api/annotations/' . $entry->getId() . '.json', [], [], $headers, $content);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertSame('Big boss', $content['user']);
+        $this->assertSame('v1.0', $content['annotator_schema_version']);
+        $this->assertSame('my annotation', $content['text']);
+        $this->assertSame('', $content['quote']);
+    }
+
+    public function testAllowOmmittedQuote()
+    {
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+
+        /** @var Entry $entry */
+        $entry = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUsernameAndNotArchived('admin');
+
+        $headers = ['CONTENT_TYPE' => 'application/json'];
+        $content = json_encode([
+            'text' => 'my new annotation',
+            'ranges' => [
+                ['start' => '', 'startOffset' => 25, 'end' => '', 'endOffset' => 32],
+            ],
+        ]);
+        $this->client->request('POST', '/api/annotations/' . $entry->getId() . '.json', [], [], $headers, $content);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertSame('Big boss', $content['user']);
+        $this->assertSame('v1.0', $content['annotator_schema_version']);
+        $this->assertSame('my new annotation', $content['text']);
+        $this->assertSame('', $content['quote']);
     }
 
     /**

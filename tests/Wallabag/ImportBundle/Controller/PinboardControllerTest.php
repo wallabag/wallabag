@@ -121,13 +121,13 @@ class PinboardControllerTest extends WallabagCoreTestCase
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
         $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://ma.ttias.be is ok');
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://ma.ttias.be is ok');
-        $this->assertNotEmpty($content->getLanguage(), 'Language for https://ma.ttias.be is ok');
+        $this->assertNull($content->getLanguage(), 'Language for https://ma.ttias.be is null');
 
         $tags = $content->getTags();
         $this->assertContains('foot', $tags, 'It includes the "foot" tag');
         $this->assertContains('varnish', $tags, 'It includes the "varnish" tag');
         $this->assertContains('php', $tags, 'It includes the "php" tag');
-        $this->assertSame(3, \count($tags));
+        $this->assertCount(3, $tags);
 
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
         $this->assertSame('2016-10-26', $content->getCreatedAt()->format('Y-m-d'));

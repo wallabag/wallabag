@@ -33,10 +33,12 @@ menu:
         back_to_unread: 'Tornar als articles pas legits'
         users_management: 'Gestion dels utilizaires'
         site_credentials: 'Identificants del site'
+        quickstart: "Per ben començar"
     top:
         add_new_entry: 'Enregistrar un novèl article'
         search: 'Cercar'
         filter_entries: 'Filtrar los articles'
+        random_entry: "Sautar a un article a l'azard"
         export: 'Exportar'
     search_form:
         input_label: 'Picatz vòstre mot-clau a cercar aquí'
@@ -53,11 +55,12 @@ config:
     page_title: 'Configuracion'
     tab_menu:
         settings: 'Paramètres'
-        rss: 'RSS'
+        feed: 'RSS'
         user_info: 'Mon compte'
         password: 'Senhal'
         rules: "Règlas d'etiquetas automaticas"
         new_user: 'Crear un compte'
+        reset: 'Zòna de reïnicializacion'
     form:
         save: 'Enregistrar'
     form_settings:
@@ -65,12 +68,8 @@ config:
         items_per_page_label: "Nombre d'articles per pagina"
         language_label: 'Lenga'
         reading_speed:
-            label: 'Velocitat  de lectura'
+            label: 'Velocitat  de lectura (mots per minuta)'
             help_message: 'Podètz utilizar una aisina en linha per estimar vòstra velocitat de lectura :'
-            100_word: "Legissi a l'entorn de 100 mots per minuta"
-            200_word: "Legissi a l'entorn de 200 mots per minuta"
-            300_word: "Legissi a l'entorn de 300 mots per minuta"
-            400_word: "Legissi a l'entorn de 400 mots per minuta"
         action_mark_as_read:
             label: 'Ont volètz èsser menat aprèp aver marcat un article coma legit ?'
             redirect_homepage: "A la pagina d’acuèlh"
@@ -83,25 +82,35 @@ config:
         help_reading_speed: "wallabag calcula lo temps de lectura per cada article. Podètz lo definir aquí, gràcias a aquesta lista, se sètz un legeire rapid o lent. wallabag tornarà calcular lo temps de lectura per cada article."
         help_language: "Podètz cambiar la lenga de l'interfàcia de wallabag."
         help_pocket_consumer_key: "Requesida per l'importacion de Pocket. Podètz la crear dins vòstre compte Pocket."
-    form_rss:
+    form_feed:
         description: "Los fluxes RSS fornits per wallabag vos permeton de legir vòstres articles salvagardats dins vòstre lector de fluxes preferit. Per los poder emplegar, vos cal, d'en primièr crear un geton."
         token_label: 'Geton RSS'
         no_token: 'Pas cap de geton generat'
         token_create: 'Creatz vòstre geton'
         token_reset: 'Reïnicializatz vòstre geton'
-        rss_links: 'URLs de vòstres fluxes RSS'
-        rss_link:
+        oken_revoke: 'Revocar lo geton'
+        feed_links: 'URLs de vòstres fluxes RSS'
+        feed_link:
             unread: 'Pas legits'
             starred: 'Favorits'
             archive: 'Legits'
             all: 'Totes'
-        rss_limit: "Nombre d'articles dins un flux RSS"
+        feed_limit: "Nombre d'articles dins un flux"
     form_user:
-        two_factor_description: "Activar l'autentificacion en dos temps vòl dire que recebretz un còdi per corrièl per cada novèla connexion pas aprovada."
+        two_factor_description: "L’activacion de l’autentificacion en dos temps indica que recebretz un còdi per corrièl amb un còdi O que vos cal utilizar una aplicacion OTP (coma Google Authenticator, Authy o FreeOTP) per obténer un còdi a usatge unic cada còp qu’i a una connexion pas fisabla. Podètz pas causir las doas opcions."
+        login_label: 'Identificant (se pòt pas cambiar)'
         name_label: 'Nom'
         email_label: 'Adreça de corrièl'
-        twoFactorAuthentication_label: 'Dobla autentificacion'
-        help_twoFactorAuthentication: "S'avètz activat l'autentificacion en dos temps, cada còp que volètz vos connectar a wallabag, recebretz un còdi per corrièl."
+        two_factor:
+            emailTwoFactor_label: 'En utilizar lo corrièl (recebre un còdi per corrièl)'
+            googleTwoFactor_label: 'En utilizar una aplicacion OTP (Dobrir l’aplicacion, coma Google Authenticator, Authy o FreeOTP, per obténer un còdi a usatge unic)'
+            table_method: Metòde
+            table_state: Estat
+            table_action: Accion
+            state_enabled: Activada
+            state_disabled: Desactivada
+            action_email: Utilizar lo corrièl
+            action_app: Utilizar una aplicacion OTP
         delete:
             title: Suprimir mon compte (Mèfi zòna perilhosa)
             description: Se confirmatz la supression de vòstre compte, TOTES vòstres articles, TOTAS vòstras etiquetas, TOTAS vòstras anotacions e vòstre compte seràn suprimits per totjorn. E aquò es IRREVERSIBLE. Puèi seretz desconnectat.
@@ -127,6 +136,15 @@ config:
         edit_rule_label: 'modificar'
         rule_label: 'Règla'
         tags_label: 'Etiquetas'
+        card:
+            new_tagging_rule: Crear una règla d’etiquetatge
+            import_tagging_rules: Importar de règlas d’etiquetatge
+            import_tagging_rules_detail: Vos cal causir un fichièr JSON qu’importèretz per abans.
+            export_tagging_rules: Exportar las règlas d’etiquetatge
+            export_tagging_rules_detail: Telecargarà un fichièr JSON que podètz utilizar per importar las règlas d’etiquetatge endacòm mai o per las salvagardar.
+        file_label: fichièr JSON
+        import_submit: Importar
+        export: Exportar
         faq:
             title: 'FAQ'
             tagging_rules_definition_title: "Qué significa las règlas d'etiquetas automaticas ?"
@@ -159,6 +177,15 @@ config:
                 and: "Una règla E l'autra"
                 matches: 'Teste se un <i>subjècte</i> correspond a una <i>recèrca</i> (non sensibla a la cassa).<br />Exemple : <code>title matches \"football\"</code>'
                 notmatches: 'Teste se <i>subjècte</i> correspond pas a una <i>recèrca</i> (sensibla a la cassa).<br />Example : <code>title notmatches "football"</code>'
+    otp:
+        page_title: Autentificacion en dos temps
+        app:
+            two_factor_code_description_1: Avètz pas qu’activat l’autentificacion en dos temps, dobrissètz l’aplicacion OTP e utilizatz aqueste còdi per obténer un senhal unic. Apareisserà aprèp un recargament de pagina.
+            two_factor_code_description_2: 'Podètz numerizar aqueste còdi QR amb l’aplicacion :'
+            two_factor_code_description_3: 'Amai, enregistratz aquestes còdis de recuperacion dins un lòc segur, los podètz utilizar se per cas perdatz l’accès a l’aplicacion OTP :'
+            two_factor_code_description_4: 'Ensajatz un còdi de vòstra aplicacion configurada app :'
+            cancel: Anullar
+            enable: Activar
 
 entry:
     default_title: "Títol de l'article"
@@ -186,7 +213,7 @@ entry:
         export_title: 'Exportar'
     filters:
         title: 'Filtres'
-        status_label: 'Estatus'
+        status_label: 'Estat'
         archived_label: 'Legits'
         starred_label: 'Favorits'
         unread_label: 'Pas legits'
@@ -195,7 +222,7 @@ entry:
         is_public_label: 'Ten un ligam public'
         is_public_help: 'Ligam public'
         language_label: 'Lenga'
-        http_status_label: 'Estatut HTTP'
+        http_status_label: 'Estat HTTP'
         reading_time:
             label: 'Durada de lectura en minutas'
             from: 'de'
@@ -237,7 +264,7 @@ entry:
         provided_by: 'Provesit per'
     new:
         page_title: 'Enregistrar un novèl article'
-        placeholder: 'http://website.com'
+        placeholder: 'https://website.cat'
         form_new:
             url_label: Url
     search:
@@ -253,6 +280,11 @@ entry:
     confirm:
         delete: "Sètz segur de voler suprimir aqueste article ?"
         delete_tag: "Sètz segur de voler levar aquesta etiqueta de l'article ?"
+    metadata:
+        reading_time: "Temps de lectura estimat"
+        reading_time_minutes_short: "%readingTime% min"
+        address: "Adreça"
+        added_on: "Ajustat a"
 
 about:
     page_title: 'A prepaus'
@@ -348,7 +380,7 @@ quickstart:
         title: "Configuratz l'aplicacion"
         description: "Per fin d'aver una aplicacion que vos va ben, anatz veire la configuracion de wallabag."
         language: "Cambiatz la lenga e l'estil de l'aplicacion"
-        rss: 'Activatz los fluxes RSS'
+        feed: 'Activatz los fluxes RSS'
         tagging_rules: 'Escrivètz de règlas per classar automaticament vòstres articles'
     admin:
         title: 'Administracion'
@@ -396,12 +428,16 @@ tag:
     list:
         number_on_the_page: "{0} I a pas cap d'etiquetas.|{1} I a una etiqueta.|]1,Inf[ I a %count% etiquetas."
         see_untagged_entries: "Afichar las entradas sens etiquetas"
+        no_untagged_entries: 'I a pas cap d’article pas etiquetat.'
     new:
         add: 'Ajustar'
         placeholder: "Podètz ajustar mai qu'una etiqueta, separadas per de virgula."
+    rename:
+        placeholder: 'Podètz actualizar lo nom de l’etiqueta.'
 
 export:
     footer_template: '<div style="text-align:center;"><p>Produch per wallabag amb %method%</p><p>Mercés de dobrir <a href="https://github.com/wallabag/wallabag/issues">una sollicitacion</a> s’avètz de problèmas amb l’afichatge d’aqueste E-Book sus vòstre periferic.</p></div>'
+    unknown: 'Desconegut'
 
 import:
     page_title: 'Importar'
@@ -429,6 +465,9 @@ import:
     wallabag_v2:
         page_title: 'Importar > Wallabag v2'
         description: "Aquesta aisina importarà totas vòstras donadas d'una instància mai de wallabag v2. Anatz dins totes vòstres articles, puèi, sus la barra laterala, clicatz sus \"JSON\". Traparetz un fichièr \"All articles.json\"."
+    # elcurator:
+    #     page_title: 'Import > elCurator'
+    #     description: 'This importer will import all your elCurator articles. Go to your preferences in your elCurator account and then, export your content. You will have a JSON file.'
     readability:
         page_title: 'Importar > Readability'
         description: "Aquesta aisina importarà totas vòstres articles de Readability. Sus la pagina de l'aisina (https://www.readability.com/tools/), clicatz sus \"Export your data\" dins la seccion \"Data Export\". Recebretz un corrièl per telecargar un json (qu'acaba pas amb un .json de fach)."
@@ -482,6 +521,7 @@ developer:
             redirect_uris_label: 'URLs de redireccion'
             save_label: 'Crear un novèl client'
         action_back: 'Retorn'
+        copy_to_clipboard: Copiar
     client_parameter:
         page_title: 'Gestion dels clients API > Los paramètres de vòstre client'
         page_description: 'Vaquí los paramètres de vòstre client.'
@@ -523,7 +563,8 @@ user:
         email_label: 'Adreça de corrièl'
         enabled_label: 'Actiu'
         last_login_label: 'Darrièra connexion'
-        twofactor_label: 'Autentificacion doble-factor'
+        twofactor_email_label: Autentificacion en dos temps per corrièl
+        twofactor_google_label: Autentificacion en dos temps per aplicacion OTP
         save: 'Enregistrar'
         delete: 'Suprimir'
         delete_confirm: 'Sètz segur ?'
@@ -544,7 +585,7 @@ site_credential:
          create_new_one: Crear un novèl identificant
     form:
         username_label: "Nom d'utilizaire"
-        host_label: 'Òste'
+        host_label: 'Òste (subdomain.example.org, .example.org, etc.)'
         password_label: 'Senhal'
         save: 'Enregistrar'
         delete: 'Suprimir'
@@ -561,14 +602,18 @@ flashes:
             password_updated: 'Vòstre senhal es ben estat mes a jorn'
             password_not_updated_demo: "En demostracion, podètz pas cambiar lo senhal d'aqueste utilizaire."
             user_updated: 'Vòstres informacions personnelas son ben estadas mesas a jorn'
-            rss_updated: 'La configuracion dels fluxes RSS es ben estada mesa a jorn'
+            feed_updated: 'La configuracion dels fluxes RSS es ben estada mesa a jorn'
             tagging_rules_updated: 'Règlas misa a jorn'
             tagging_rules_deleted: 'Règla suprimida'
-            rss_token_updated: 'Geton RSS mes a jorn'
+            feed_token_updated: 'Geton RSS mes a jorn'
+            feed_token_revoked: 'Geton RSS revocat'
             annotations_reset: Anotacions levadas
             tags_reset: Etiquetas levadas
             entries_reset: Articles levats
             archived_reset: Articles archivat suprimits
+            otp_enabled: Autentificacion en dos temps activada
+            tagging_rules_imported: Règlas d’etiquetatge importadas
+            tagging_rules_not_imported: Error en important las règlas d’etiquetatge
     entry:
         notice:
             entry_already_saved: 'Article ja salvagardat lo %date%'
@@ -582,9 +627,11 @@ flashes:
             entry_starred: 'Article ajustat dins los favorits'
             entry_unstarred: 'Article quitat dels favorits'
             entry_deleted: 'Article suprimit'
+            no_random_entry: 'Cap d’article pas trobat amb aquestes critèris'
     tag:
         notice:
             tag_added: 'Etiqueta ajustada'
+            tag_renamed: 'Etiqueta renomenada'
     import:
         notice:
             failed: "L'importacion a fracassat, mercés de tornar ensajar."

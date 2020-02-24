@@ -33,6 +33,18 @@ class FirefoxImport extends BrowserImport
     /**
      * {@inheritdoc}
      */
+    public function validateEntry(array $importedEntry)
+    {
+        if (empty($importedEntry['uri'])) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function prepareEntry(array $entry = [])
     {
         $data = [
@@ -45,7 +57,7 @@ class FirefoxImport extends BrowserImport
             'created_at' => substr($entry['dateAdded'], 0, 10),
         ];
 
-        if (array_key_exists('tags', $entry) && '' !== $entry['tags']) {
+        if (\array_key_exists('tags', $entry) && '' !== $entry['tags']) {
             $data['tags'] = $entry['tags'];
         }
 

@@ -7,13 +7,7 @@ services:
         class: Wallabag\ImportBundle\Import\ImportChain
 
     wallabag_import.pocket.client:
-        class: GuzzleHttp\Client
-        arguments:
-            -
-                defaults:
-                    headers:
-                        content-type: "application/json"
-                        X-Accept: "application/json"
+        alias: 'httplug.client.wallabag_import.pocket.client'
 
     wallabag_import.pocket.import:
         class: Wallabag\ImportBundle\Import\PocketImport
@@ -53,6 +47,18 @@ services:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: wallabag_v2 }
+
+    wallabag_import.elcurator.import:
+        class: Wallabag\ImportBundle\Import\ElcuratorImport
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_core.content_proxy"
+            - "@wallabag_core.tags_assigner"
+            - "@event_dispatcher"
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: wallabag_import.import, alias: elcurator }
 
     wallabag_import.readability.import:
         class: Wallabag\ImportBundle\Import\ReadabilityImport
@@ -112,3 +118,11 @@ services:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: chrome }
+
+    wallabag_import.command.import:
+        class: Wallabag\ImportBundle\Command\ImportCommand
+        tags: ['console.command']
+
+    wallabag_import.command.redis_worker:
+        class: Wallabag\ImportBundle\Command\RedisWorkerCommand
+        tags: ['console.command']

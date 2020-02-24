@@ -16,8 +16,6 @@ abstract class WallabagController extends Controller
     /**
      * Handle import request.
      *
-     * @param Request $request
-     *
      * @return Response|RedirectResponse
      */
     public function indexAction(Request $request)

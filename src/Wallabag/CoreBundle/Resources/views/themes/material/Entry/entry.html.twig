@@ -8,7 +8,7 @@
     <div class="progress">
         <div class="determinate"></div>
     </div>
-    <nav class="hide-on-large-only">
+    <nav class="hide-on-large-only js-entry-nav-top">
         <div class="nav-panel-item cyan darken-1">
             <ul>
                 <li>
@@ -127,7 +127,7 @@
                     {% endif %}
                     {% if craue_setting('share_twitter') %}
                         <li>
-                            <a href="https://twitter.com/home?status={{entry.title|striptags|url_encode}}%20{{ entry.url|url_encode }}%20via%20@wallabagapp" target="_blank" rel="noopener" class="tool icon-twitter" title="twitter">
+                            <a href="https://twitter.com/share?text={{entry.title|striptags|url_encode}}%20{{ entry.url|url_encode }}%20via%20@wallabagapp" target="_blank" rel="noopener" class="tool icon-twitter" title="twitter">
                                 <span>twitter</span>
                             </a>
                         </li>
@@ -209,7 +209,7 @@
         </li>
 
         <li class="bold">
-            <a class="waves-effect collapsible-header" href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{{ 'entry.view.left_menu.problem.description'|trans }}">
+            <a class="waves-effect collapsible-header" href="mailto:siteconfig@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{{ 'entry.view.left_menu.problem.description'|trans }}">
                 <i class="material-icons small">error</i>
                 <span>{{ 'entry.view.left_menu.problem.label'|trans }}</span>
             </a>
@@ -223,7 +223,7 @@
 {% block content %}
     <div id="article">
         <header class="mbm">
-            <h1>{{ entry.title|striptags|default('entry.default_title'|trans)|raw }} <a href="{{ path('edit', { 'id': entry.id }) }}" title="{{ 'entry.view.edit_title'|trans }}">✎</a></h1>
+            <h1><span{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>{{ entry.title|striptags|default('entry.default_title'|trans)|raw }}</span> <a href="{{ path('edit', { 'id': entry.id }) }}" title="{{ 'entry.view.edit_title'|trans }}">✎</a></h1>
         </header>
         <aside>
             <div class="tools">
@@ -250,13 +250,13 @@
                         </li>
                     {% endif %}
                     <li>
-                        <i class="material-icons link">link</i>
+                        <i class="material-icons">link</i>
                         <a href="{{ entry.url|e }}" target="_blank" rel="noopener" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|striptags }}" class="tool">
                             {{ entry.domainName|removeWww }}
                         </a>
                     </li>
                     <li>
-                        <i class="material-icons link">comment</i>
+                        <i class="material-icons">comment</i>
                         {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}
                     </li>
                     {% if entry.originUrl is not empty %}
@@ -276,12 +276,12 @@
             </div>
 
         </aside>
-        <article>
+        <article{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>
             {{ entry.content | raw }}
         </article>
 
-        <div class="fixed-action-btn horizontal click-to-toggle hide-on-large-only">
-            <a class="btn-floating btn-large">
+        <div class="fixed-action-btn js-fixed-action-btn horizontal click-to-toggle hide-on-large-only">
+            <a class="btn-floating btn-large" data-toggle="actions">
               <i class="material-icons">menu</i>
             </a>
             <ul>

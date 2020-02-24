@@ -28,11 +28,12 @@ services:
             - "@doctrine.orm.entity_manager"
             - "%wallabag_core.theme%"
             - "%wallabag_core.items_on_page%"
-            - "%wallabag_core.rss_limit%"
+            - "%wallabag_core.feed_limit%"
             - "%wallabag_core.language%"
             - "%wallabag_core.reading_speed%"
             - "%wallabag_core.action_mark_as_read%"
             - "%wallabag_core.list_mode%"
+            - "@session"
         tags:
             - { name: kernel.event_subscriber }
 

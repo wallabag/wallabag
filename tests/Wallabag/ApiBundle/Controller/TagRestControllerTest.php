@@ -7,6 +7,8 @@ use Wallabag\CoreBundle\Entity\Tag;
 
 class TagRestControllerTest extends WallabagApiTestCase
 {
+    private $otherUserTagLabel = 'bob';
+
     public function testGetUserTags()
     {
         $this->client->request('GET', '/api/tags.json');
@@ -19,17 +21,33 @@ class TagRestControllerTest extends WallabagApiTestCase
         $this->assertArrayHasKey('id', $content[0]);
         $this->assertArrayHasKey('label', $content[0]);
 
+        $tagLabels = array_map(function ($i) {
+            return $i['label'];
+        }, $content);
+
+        $this->assertNotContains($this->otherUserTagLabel, $tagLabels, 'There is a possible tag leak');
+
         return end($content);
     }
 
     public function testDeleteUserTag()
     {
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $entry = $this->client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneWithTags($this->user->getId());
+
+        $entry = $entry[0];
+
         $tagLabel = 'tagtest';
         $tag = new Tag();
         $tag->setLabel($tagLabel);
-
-        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
         $em->persist($tag);
+
+        $entry->addTag($tag);
+
+        $em->persist($entry);
         $em->flush();
         $em->clear();
 
@@ -51,6 +69,16 @@ class TagRestControllerTest extends WallabagApiTestCase
         $tag = $em->getRepository('WallabagCoreBundle:Tag')->findOneByLabel($tagLabel);
 
         $this->assertNull($tag, $tagLabel . ' was removed because it begun an orphan tag');
+    }
+
+    public function testDeleteOtherUserTag()
+    {
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $tag = $em->getRepository('WallabagCoreBundle:Tag')->findOneByLabel($this->otherUserTagLabel);
+
+        $this->client->request('DELETE', '/api/tags/' . $tag->getId() . '.json');
+
+        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
     }
 
     public function dataForDeletingTagByLabel()
@@ -108,6 +136,13 @@ class TagRestControllerTest extends WallabagApiTestCase
     public function testDeleteTagByLabelNotFound()
     {
         $this->client->request('DELETE', '/api/tag/label.json', ['tag' => 'does not exist']);
+
+        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testDeleteTagByLabelOtherUser()
+    {
+        $this->client->request('DELETE', '/api/tag/label.json', ['tag' => $this->otherUserTagLabel]);
 
         $this->assertSame(404, $this->client->getResponse()->getStatusCode());
     }
@@ -177,6 +212,13 @@ class TagRestControllerTest extends WallabagApiTestCase
     public function testDeleteTagsByLabelNotFound()
     {
         $this->client->request('DELETE', '/api/tags/label.json', ['tags' => 'does not exist']);
+
+        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testDeleteTagsByLabelOtherUser()
+    {
+        $this->client->request('DELETE', '/api/tags/label.json', ['tags' => $this->otherUserTagLabel]);
 
         $this->assertSame(404, $this->client->getResponse()->getStatusCode());
     }

@@ -33,10 +33,12 @@ menu:
         back_to_unread: 'Zurück zu ungelesenen Artikeln'
         users_management: 'Benutzerverwaltung'
         site_credentials: 'Zugangsdaten'
+        quickstart: "Schnelleinstieg"
     top:
         add_new_entry: 'Neuen Artikel hinzufügen'
         search: 'Suche'
         filter_entries: 'Artikel filtern'
+        # random_entry: Jump to a random entry from that list
         export: 'Exportieren'
     search_form:
         input_label: 'Suchbegriff hier eingeben'
@@ -53,11 +55,12 @@ config:
     page_title: 'Einstellungen'
     tab_menu:
         settings: 'Einstellungen'
-        rss: 'RSS'
+        feed: 'RSS'
         user_info: 'Benutzerinformation'
         password: 'Kennwort'
         rules: 'Tagging-Regeln'
         new_user: 'Benutzer hinzufügen'
+        reset: 'Zurücksetzen'
     form:
         save: 'Speichern'
     form_settings:
@@ -65,12 +68,8 @@ config:
         items_per_page_label: 'Einträge pro Seite'
         language_label: 'Sprache'
         reading_speed:
-            label: 'Lesegeschwindigkeit'
+            label: 'Lesegeschwindigkeit (Wörter pro Minute)'
             help_message: 'Du kannst Online-Tools nutzen, um deine Lesegeschwindigkeit herauszufinden.'
-            100_word: 'Ich lese ~100 Wörter pro Minute'
-            200_word: 'Ich lese ~200 Wörter pro Minute'
-            300_word: 'Ich lese ~300 Wörter pro Minute'
-            400_word: 'Ich lese ~400 Wörter pro Minute'
         action_mark_as_read:
             label: 'Wohin soll nach dem Gelesenmarkieren eines Artikels weitergeleitet werden?'
             redirect_homepage: 'Zur Homepage'
@@ -83,25 +82,35 @@ config:
         help_reading_speed: "wallabag berechnet eine Lesezeit pro Artikel. Hier kannst du definieren, ob du ein schneller oder langsamer Leser bist. wallabag wird die Lesezeiten danach neu berechnen."
         help_language: "Du kannst die Sprache der wallabag-Oberfläche ändern."
         help_pocket_consumer_key: "Nötig für den Pocket-Import. Du kannst ihn in deinem Pocket account einrichten."
-    form_rss:
+    form_feed:
         description: 'Die RSS-Feeds von wallabag erlauben es dir, deine gespeicherten Artikel mit deinem bevorzugten RSS-Reader zu lesen. Vorher musst du jedoch einen Token erstellen.'
         token_label: 'RSS-Token'
         no_token: 'Kein Token'
         token_create: 'Token erstellen'
         token_reset: 'Token zurücksetzen'
-        rss_links: 'RSS-Links'
-        rss_link:
+        # token_revoke: 'Revoke the token'
+        feed_links: 'RSS-Links'
+        feed_link:
             unread: 'Ungelesene'
             starred: 'Favoriten'
             archive: 'Archivierte'
             all: 'Alle'
-        rss_limit: 'Anzahl der Einträge pro Feed'
+        feed_limit: 'Anzahl der Einträge pro Feed'
     form_user:
-        two_factor_description: "Wenn du die Zwei-Faktor-Authentifizierung aktivierst, erhältst du eine E-Mail mit einem Code bei jeder nicht vertrauenswürdigen Verbindung"
+        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
+        # login_label: 'Login (can not be changed)'
         name_label: 'Name'
         email_label: 'E-Mail-Adresse'
-        twoFactorAuthentication_label: 'Zwei-Faktor-Authentifizierung'
-        help_twoFactorAuthentication: "Wenn du 2FA aktivierst, wirst du bei jedem Login einen Code per E-Mail bekommen."
+        two_factor:
+            # emailTwoFactor_label: 'Using email (receive a code by email)'
+            # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, Authy or FreeOTP, to get a one time code)'
+            # table_method: Method
+            # table_state: State
+            # table_action: Action
+            # state_enabled: Enabled
+            # state_disabled: Disabled
+            # action_email: Use email
+            # action_app: Use OTP App
         delete:
             title: 'Lösche mein Konto (a.k.a Gefahrenzone)'
             description: 'Wenn du dein Konto löschst, werden ALL deine Artikel, ALL deine Tags, ALL deine Anmerkungen und dein Konto dauerhaft gelöscht (kann NICHT RÜCKGÄNGIG gemacht werden). Du wirst anschließend ausgeloggt.'
@@ -127,6 +136,15 @@ config:
         edit_rule_label: 'bearbeiten'
         rule_label: 'Regel'
         tags_label: 'Tags'
+        # card:
+        #     new_tagging_rule: Create a tagging rule
+        #     import_tagging_rules: Import tagging rules
+        #     import_tagging_rules_detail: You have to select the JSON file you previously exported.
+        #     export_tagging_rules: Export tagging rules
+        #     export_tagging_rules_detail: This will download a JSON file that you can use to import tagging rules elsewhere or to backup them.
+        # file_label: JSON file
+        # import_submit: Import
+        # export: Export
         faq:
             title: 'FAQ'
             tagging_rules_definition_title: 'Was bedeuten die "Tagging-Regeln"?'
@@ -159,6 +177,15 @@ config:
                 and: 'Eine Regel UND eine andere'
                 matches: 'Testet, ob eine <i>Variable</i> auf eine <i>Suche</i> zutrifft (Groß- und Kleinschreibung wird nicht berücksichtigt).<br />Beispiel: <code>title matches "Fußball"</code>'
                 notmatches: 'Testet, ob ein <i>Titel</i> nicht auf eine <i>Suche</i> zutrifft (Groß- und Kleinschreibung wird nicht berücksichtigt).<br />Beispiel: <code>title notmatches "Fußball"</code>'
+    otp:
+        # page_title: Two-factor authentication
+        # app:
+        #     two_factor_code_description_1: You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password. It'll disapear after a page reload.
+        #     two_factor_code_description_2: 'You can scan that QR Code with your app:'
+        #     two_factor_code_description_3: 'Also, save these backup codes in a safe place, you can use them in case you lose access to your OTP app:'
+        #     two_factor_code_description_4: 'Test an OTP code from your configured app:'
+        #     cancel: Cancel
+        #     enable: Enable
 
 entry:
     default_title: 'Titel des Eintrags'
@@ -253,6 +280,11 @@ entry:
     confirm:
         delete: 'Bist du sicher, dass du diesen Artikel löschen möchtest?'
         delete_tag: 'Bist du sicher, dass du diesen Tag vom Artikel entfernen möchtest?'
+    metadata:
+        # reading_time: "Estimated reading time"
+        # reading_time_minutes_short: "%readingTime% min"
+        # address: "Address"
+        # added_on: "Added on"
 
 about:
     page_title: 'Über'
@@ -348,7 +380,7 @@ quickstart:
         title: 'Anwendung konfigurieren'
         description: 'Um die Applikation für dich anzupassen, schau in die Konfiguration von wallabag.'
         language: 'Sprache und Design ändern'
-        rss: 'RSS-Feeds aktivieren'
+        feed: 'RSS-Feeds aktivieren'
         tagging_rules: 'Schreibe Regeln, um deine Beiträge automatisch zu taggen (verschlagworten)'
     admin:
         title: 'Administration'
@@ -396,12 +428,16 @@ tag:
     list:
         number_on_the_page: '{0} Es gibt keine Tags.|{1} Es gibt einen Tag.|]1,Inf[ Es gibt %count% Tags.'
         see_untagged_entries: 'Zeige nicht getaggte Einträge'
+        # no_untagged_entries: 'There are no untagged entries.'
     new:
         add: 'Hinzufügen'
         placeholder: 'Du kannst verschiedene Tags, getrennt von einem Komma, hinzufügen.'
+    rename:
+        # placeholder: 'You can update tag name.'
 
 export:
     footer_template: '<div style="text-align:center;"><p>Generiert von wallabag mit Hilfe von %method%</p><p>Bitte öffne <a href="https://github.com/wallabag/wallabag/issues">ein Ticket</a> wenn du ein Problem mit der Darstellung von diesem E-Book auf deinem Gerät hast.</p></div>'
+    # unknown: 'Unknown'
 
 import:
     page_title: 'Importieren'
@@ -429,6 +465,9 @@ import:
     wallabag_v2:
         page_title: 'Aus wallabag v2 importieren'
         description: 'Dieser Import wird all deine Artikel aus wallabag v2 importieren. Gehe auf "Alle Artikel" und dann, in der Exportieren-Seitenleiste auf "JSON". Dabei erhältst du eine "All articles.json"-Datei.'
+    # elcurator:
+    #     page_title: 'Import > elCurator'
+    #     description: 'This importer will import all your elCurator articles. Go to your preferences in your elCurator account and then, export your content. You will have a JSON file.'
     readability:
         page_title: 'Aus Readability importieren'
         description: 'Dieser Import wird all deine Artikel aus Readability importieren. Auf der Tools Seite (https://www.readability.com/tools/) klickst du auf "Exportiere deine Daten" in dem Abschnitt "Datenexport". Du wirst eine E-Mail mit einem Downloadlink zu einer json Datei, die aber nicht auf .json endet, erhalten'
@@ -482,6 +521,7 @@ developer:
             redirect_uris_label: 'Weiterleitungs-URIs'
             save_label: 'Neuen Client erstellen'
         action_back: 'Zurück'
+        # copy_to_clipboard: Copy
     client_parameter:
         page_title: 'API-Client-Verwaltung > Client-Parameter'
         page_description: 'Dies sind deine Client-Parameter.'
@@ -523,7 +563,8 @@ user:
         email_label: 'E-Mail-Adresse'
         enabled_label: 'Aktiviert'
         last_login_label: 'Letzter Login'
-        twofactor_label: 'Zwei-Faktor-Authentifizierung'
+        # twofactor_email_label: Two factor authentication by email
+        # twofactor_google_label: Two factor authentication by OTP app
         save: 'Speichern'
         delete: 'Löschen'
         delete_confirm: 'Bist du sicher?'
@@ -544,7 +585,7 @@ site_credential:
         create_new_one: 'Einen neuen Seitenzugang anlegen'
     form:
         username_label: 'Benutzername'
-        host_label: 'Host'
+        host_label: 'Host (subdomain.example.org, .example.org, etc.)'
         password_label: 'Passwort'
         save: 'Speichern'
         delete: 'Löschen'
@@ -561,14 +602,18 @@ flashes:
             password_updated: 'Kennwort aktualisiert'
             password_not_updated_demo: 'Im Testmodus kannst du das Kennwort nicht ändern.'
             user_updated: 'Information aktualisiert'
-            rss_updated: 'RSS-Informationen aktualisiert'
+            feed_updated: 'RSS-Informationen aktualisiert'
             tagging_rules_updated: 'Tagging-Regeln aktualisiert'
             tagging_rules_deleted: 'Tagging-Regel gelöscht'
-            rss_token_updated: 'RSS-Token aktualisiert'
-            annotations_reset: 'Anmerkungen zurücksetzen'
-            tags_reset: 'Tags zurücksetzen'
-            entries_reset: 'Einträge zurücksetzen'
-            archived_reset: 'Archiverte Einträge zurücksetzen'
+            feed_token_updated: 'RSS-Token aktualisiert'
+            # feed_token_revoked: 'RSS token revoked'
+            annotations_reset: Anmerkungen zurücksetzen
+            tags_reset: Tags zurücksetzen
+            entries_reset: Einträge zurücksetzen
+            archived_reset: Archiverte Einträge zurücksetzen
+            # otp_enabled: Two-factor authentication enabled
+            # tagging_rules_imported: Tagging rules imported
+            # tagging_rules_not_imported: Error while importing tagging rules
     entry:
         notice:
             entry_already_saved: 'Eintrag bereits am %date% gespeichert'
@@ -582,9 +627,11 @@ flashes:
             entry_starred: 'Eintrag favorisiert'
             entry_unstarred: 'Eintrag defavorisiert'
             entry_deleted: 'Eintrag gelöscht'
+            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'Tag hinzugefügt'
+            #tag_renamed: 'Tag renamed'
     import:
         notice:
             failed: 'Import fehlgeschlagen, bitte erneut probieren.'

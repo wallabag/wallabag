@@ -6,6 +6,7 @@ use Psr\Log\LoggerInterface;
 use RulerZ\RulerZ;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Entity\TaggingRule;
 use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\CoreBundle\Repository\TagRepository;
 use Wallabag\UserBundle\Entity\User;
@@ -54,8 +55,6 @@ class RuleBasedTagger
 
     /**
      * Apply all the tagging rules defined by a user on its entries.
-     *
-     * @param User $user
      *
      * @return array<Entry> A list of modified entries
      */
@@ -107,8 +106,6 @@ class RuleBasedTagger
 
     /**
      * Retrieves the tagging rules for a given user.
-     *
-     * @param User $user
      *
      * @return array<TaggingRule>
      */

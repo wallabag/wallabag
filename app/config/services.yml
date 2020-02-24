@@ -2,12 +2,6 @@ parameters:
     lexik_form_filter.get_filter.doctrine_orm.class: Wallabag\CoreBundle\Event\Subscriber\CustomDoctrineORMSubscriber
 
 services:
-    # used for tests
-    filesystem_cache:
-        class: Doctrine\Common\Cache\FilesystemCache
-        arguments:
-            - "%kernel.cache_dir%/doctrine/metadata"
-
     twig.extension.text:
         class: Twig_Extensions_Extension_Text
         tags:

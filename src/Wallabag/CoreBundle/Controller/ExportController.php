@@ -2,10 +2,10 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\CoreBundle\Entity\Entry;
 
 /**
@@ -17,7 +17,6 @@ class ExportController extends Controller
     /**
      * Gets one entry content.
      *
-     * @param Entry  $entry
      * @param string $format
      *
      * @Route("/export/{id}.{format}", name="export_entry", requirements={
@@ -58,6 +57,7 @@ class ExportController extends Controller
         $method = ucfirst($category);
         $methodBuilder = 'getBuilderFor' . $method . 'ByUser';
         $repository = $this->get('wallabag_core.entry_repository');
+        $title = $method;
 
         if ('tag_entries' === $category) {
             $tag = $this->get('wallabag_core.tag_repository')->findOneBySlug($request->query->get('tag'));
@@ -66,6 +66,8 @@ class ExportController extends Controller
                 $this->getUser()->getId(),
                 $tag->getId()
             );
+
+            $title = 'Tag ' . $tag->getLabel();
         } else {
             $entries = $repository
                 ->$methodBuilder($this->getUser()->getId())
@@ -76,7 +78,7 @@ class ExportController extends Controller
         try {
             return $this->get('wallabag_core.helper.entries_export')
                 ->setEntries($entries)
-                ->updateTitle($method)
+                ->updateTitle($title)
                 ->updateAuthor($method)
                 ->exportAs($format);
         } catch (\InvalidArgumentException $e) {

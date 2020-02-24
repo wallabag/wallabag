@@ -1,14 +1,10 @@
 language: php
 
 services:
+    - mysql
+    - postgresql
     - rabbitmq
     - redis
-
-# used for HHVM
-addons:
-    apt:
-        packages:
-            - tidy
 
 # cache vendor dirs
 cache:
@@ -21,10 +17,10 @@ cache:
         - $HOME/.yarn-cache
 
 php:
-    - 5.6
-    - 7.0
     - 7.1
     - 7.2
+    - 7.3
+    - 7.4
     - nightly
 
 node_js:
@@ -38,9 +34,10 @@ env:
 matrix:
     fast_finish: true
     include:
-        - php: 7.0
+        - php: 7.2
           env: CS_FIXER=run VALIDATE_TRANSLATION_FILE=run ASSETS=build DB=sqlite
     allow_failures:
+        - php: 7.4
         - php: nightly
 
 # exclude v1 branches
@@ -58,31 +55,26 @@ install:
 
 before_script:
     - PHP=$TRAVIS_PHP_VERSION
-    - if [[ ! $PHP = hhvm* ]]; then echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi;
-    # xdebug isn't enable for PHP 7.1
-    - if [[ ! $PHP = hhvm* ]]; then phpenv config-rm xdebug.ini || echo "xdebug not available"; fi
+    - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+    - phpenv config-rm xdebug.ini || echo "xdebug not available"
     - composer self-update --no-progress
-    - if [[ $DB = pgsql ]]; then psql -c 'create database wallabag_test;' -U postgres; fi;
-    # increase swap to avoid "proc_open(): fork failed - Cannot allocate memory"
-    # this should be removed when no more PHP 5 build will be defined
-    - sudo swapon -s
-    - sudo fallocate -l 4G /swapfile
-    - sudo chmod 600 /swapfile
-    - sudo mkswap /swapfile
-    - sudo swapon /swapfile
-    - sudo swapon -s
+    # install imagick
+    - pear config-set preferred_state beta
+    - pecl channel-update pecl.php.net
+    - yes | pecl install imagick
 
 script:
     - travis_wait bash composer install -o --no-interaction --no-progress --prefer-dist
+
     - echo "travis_fold:start:prepare"
     - make prepare DB=$DB
     - echo "travis_fold:end:prepare"
 
-    - echo "travis_fold:start:fixtures"
-    - php bin/console doctrine:fixtures:load --no-interaction --env=test
-    - echo "travis_fold:end:fixtures"
+    - make fixtures
 
     - if [[ $VALIDATE_TRANSLATION_FILE = '' ]]; then ./bin/simple-phpunit -v ; fi;
+    # PHPStan needs PHPUnit to be installed and cache app to be generated
+    - if [[ $VALIDATE_TRANSLATION_FILE = '' ]]; then php bin/phpstan analyse src tests --no-progress --level 1 ; fi;
     - if [[ $CS_FIXER = run ]]; then php bin/php-cs-fixer fix --verbose --dry-run ; fi;
     - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml src/Wallabag/CoreBundle/Resources/translations -v ; fi;
     - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml app/Resources/CraueConfigBundle/translations -v ; fi;

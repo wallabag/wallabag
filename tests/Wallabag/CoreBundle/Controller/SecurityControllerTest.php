@@ -13,7 +13,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
         $client->followRedirects();
 
         $crawler = $client->request('GET', '/config');
-        $this->assertContains('config.form_rss.description', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertContains('config.form_feed.description', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
     public function testLoginWithout2Factor()
@@ -23,10 +23,10 @@ class SecurityControllerTest extends WallabagCoreTestCase
         $client->followRedirects();
 
         $crawler = $client->request('GET', '/config');
-        $this->assertContains('config.form_rss.description', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertContains('config.form_feed.description', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
-    public function testLoginWith2Factor()
+    public function testLoginWith2FactorEmail()
     {
         $client = $this->getClient();
 
@@ -42,24 +42,24 @@ class SecurityControllerTest extends WallabagCoreTestCase
         $user = $em
             ->getRepository('WallabagUserBundle:User')
             ->findOneByUsername('admin');
-        $user->setTwoFactorAuthentication(true);
+        $user->setEmailTwoFactor(true);
         $em->persist($user);
         $em->flush();
 
         $this->logInAsUsingHttp('admin');
         $crawler = $client->request('GET', '/config');
-        $this->assertContains('scheb_two_factor.trusted', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertContains('trusted', $crawler->filter('body')->extract(['_text'])[0]);
 
         // restore user
         $user = $em
             ->getRepository('WallabagUserBundle:User')
             ->findOneByUsername('admin');
-        $user->setTwoFactorAuthentication(false);
+        $user->setEmailTwoFactor(false);
         $em->persist($user);
         $em->flush();
     }
 
-    public function testTrustedComputer()
+    public function testLoginWith2FactorGoogle()
     {
         $client = $this->getClient();
 
@@ -69,15 +69,27 @@ class SecurityControllerTest extends WallabagCoreTestCase
             return;
         }
 
+        $client->followRedirects();
+
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
         $user = $em
             ->getRepository('WallabagUserBundle:User')
             ->findOneByUsername('admin');
+        $user->setGoogleAuthenticatorSecret('26LDIHYGHNELOQEM');
+        $em->persist($user);
+        $em->flush();
 
-        $date = new \DateTime();
-        $user->addTrustedComputer('ABCDEF', $date->add(new \DateInterval('P1M')));
-        $this->assertTrue($user->isTrustedComputer('ABCDEF'));
-        $this->assertFalse($user->isTrustedComputer('FEDCBA'));
+        $this->logInAsUsingHttp('admin');
+        $crawler = $client->request('GET', '/config');
+        $this->assertContains('trusted', $crawler->filter('body')->extract(['_text'])[0]);
+
+        // restore user
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUsername('admin');
+        $user->setGoogleAuthenticatorSecret(null);
+        $em->persist($user);
+        $em->flush();
     }
 
     public function testEnabledRegistration()

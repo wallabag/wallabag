@@ -34,11 +34,6 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
 
     /**
      * GrabySiteConfigBuilder constructor.
-     *
-     * @param ConfigBuilder            $grabyConfigBuilder
-     * @param TokenStorage             $token
-     * @param SiteCredentialRepository $credentialRepository
-     * @param LoggerInterface          $logger
      */
     public function __construct(ConfigBuilder $grabyConfigBuilder, TokenStorage $token, SiteCredentialRepository $credentialRepository, LoggerInterface $logger)
     {
@@ -62,10 +57,23 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
             $host = substr($host, 4);
         }
 
-        $credentials = null;
-        if ($this->currentUser) {
-            $credentials = $this->credentialRepository->findOneByHostAndUser($host, $this->currentUser->getId());
+        if (!$this->currentUser) {
+            $this->logger->debug('Auth: no current user defined.');
+
+            return false;
         }
+
+        $hosts = [$host];
+        // will try to see for a host without the first subdomain (fr.example.org & .example.org)
+        $split = explode('.', $host);
+
+        if (\count($split) > 1) {
+            // remove first subdomain
+            array_shift($split);
+            $hosts[] = '.' . implode('.', $split);
+        }
+
+        $credentials = $this->credentialRepository->findOneByHostsAndUser($hosts, $this->currentUser->getId());
 
         if (null === $credentials) {
             $this->logger->debug('Auth: no credentials available for host.', ['host' => $host]);

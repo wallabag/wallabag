@@ -3,5 +3,5 @@ validator:
     password_too_short: 'La password deve essere lunga almeno 8 caratteri'
     password_wrong_value: 'Valore inserito per la password corrente errato'
     item_per_page_too_high: 'Questo valore è troppo alto'
-    rss_limit_too_high: 'Questo valore è troppo alto'
+    feed_limit_too_high: 'Questo valore è troppo alto'
     # quote_length_too_high: 'The quote is too long. It should have {{ limit }} characters or less.'

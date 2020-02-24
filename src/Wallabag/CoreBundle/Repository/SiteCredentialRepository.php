@@ -19,16 +19,16 @@ class SiteCredentialRepository extends \Doctrine\ORM\EntityRepository
     /**
      * Retrieve one username/password for the given host and userId.
      *
-     * @param string $host
-     * @param int    $userId
+     * @param array $hosts  An array of host to look for
+     * @param int   $userId
      *
-     * @return null|array
+     * @return array|null
      */
-    public function findOneByHostAndUser($host, $userId)
+    public function findOneByHostsAndUser($hosts, $userId)
     {
         $res = $this->createQueryBuilder('s')
             ->select('s.username', 's.password')
-            ->where('s.host = :hostname')->setParameter('hostname', $host)
+            ->where('s.host IN (:hosts)')->setParameter('hosts', $hosts)
             ->andWhere('s.user = :userId')->setParameter('userId', $userId)
             ->setMaxResults(1)
             ->getQuery()

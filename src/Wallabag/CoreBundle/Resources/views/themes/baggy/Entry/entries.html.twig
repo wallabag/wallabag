@@ -2,8 +2,8 @@
 
 {% block head %}
     {{ parent() }}
-    {% if tag is defined and app.user.config.rssToken %}
-        <link rel="alternate" type="application/rss+xml" href="{{ path('tag_rss', {'username': app.user.username, 'token': app.user.config.rssToken, 'slug': tag.slug}) }}" />
+    {% if tag is defined and app.user.config.feedToken %}
+        <link rel="alternate" type="application/atom+xml" href="{{ path('tag_feed', {'username': app.user.username, 'token': app.user.config.feedToken, 'slug': tag.slug}) }}" />
     {% endif %}
 {% endblock %}
 
@@ -20,13 +20,19 @@
 
 {% block content %}
     {% set currentRoute = app.request.attributes.get('_route') %}
+    {% if currentRoute == 'homepage' %}
+        {% set currentRoute = 'unread' %}
+    {% endif %}
     {% set listMode = app.user.config.listMode %}
     <div class="results">
         <div class="nb-results">{{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}</div>
         <div class="pagination">
             <a href="{{ path('switch_view_mode') }}"><i class="listMode-btn material-icons md-24">{% if listMode == 0 %}list{% else %}view_module{% endif %}</i></a>
-            {% if app.user.config.rssToken %}
-                {% include "@WallabagCore/themes/common/Entry/_rss_link.html.twig" %}
+            {% if app.user.config.feedToken %}
+                {% include "@WallabagCore/themes/common/Entry/_feed_link.html.twig" %}
+            {% endif %}
+            {% if currentRoute in ['unread', 'starred', 'archive', 'untagged', 'all'] %}
+                <a href="{{ path('random_entry', { 'type': currentRoute }) }}"><i class="btn-clickable material-icons md-24 js-random-action">casino</i></a>
             {% endif %}
             <i class="btn-clickable download-btn material-icons md-24 js-export-action">file_download</i>
             <i class="btn-clickable filter-btn material-icons md-24 js-filters-action">filter_list</i>
@@ -40,7 +46,7 @@
         <div id="entry-{{ entry.id|e }}" class="{% if listMode == 0 %}entry{% else %}listmode entry{% endif %}">
             <h2><a href="{{ path('view', { 'id': entry.id }) }}" title="{{ entry.title|e|raw }}">{{ entry.title | striptags | truncate(80, true, '…') | default('entry.default_title'|trans) | raw }}</a></h2>
 
-            {% set readingTime = entry.readingTime / app.user.config.readingSpeed %}
+            {% set readingTime = entry.readingTime / app.user.config.readingSpeed * 200 %}
             <div class="estimatedTime">
                     <span class="tool reading-time">
             {% if readingTime > 0 %}
@@ -90,17 +96,14 @@
     {% if tag is defined %}
         {% set currentTag = tag %}
     {% endif %}
-    {% if currentRoute == 'homepage' %}
-        {% set currentRoute = 'unread' %}
-    {% endif %}
         <h2>{{ 'entry.list.export_title'|trans }}</h2>
         <a href="javascript: void(null);" id="download-form-close" class="close-button--popup close-button">&times;</a>
         <ul>
             {% if craue_setting('export_epub') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'epub', 'tag' : currentTag }) }}">EPUB</a></li>{% endif %}
             {% if craue_setting('export_mobi') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'mobi', 'tag' : currentTag }) }}">MOBI</a></li>{% endif %}
             {% if craue_setting('export_pdf') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'pdf', 'tag' : currentTag }) }}">PDF</a></li>{% endif %}
-            {% if craue_setting('export_csv') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'json', 'tag' : currentTag }) }}">JSON</a></li>{% endif %}
-            {% if craue_setting('export_json') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'csv', 'tag' : currentTag }) }}">CSV</a></li>{% endif %}
+            {% if craue_setting('export_json') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'json', 'tag' : currentTag }) }}">JSON</a></li>{% endif %}
+            {% if craue_setting('export_csv') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'csv', 'tag' : currentTag }) }}">CSV</a></li>{% endif %}
             {% if craue_setting('export_txt') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'txt', 'tag' : currentTag }) }}">TXT</a></li>{% endif %}
             {% if craue_setting('export_xml') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', { 'category': currentRoute, 'format': 'xml', 'tag' : currentTag }) }}">XML</a></li>{% endif %}
         </ul>
@@ -114,6 +117,12 @@
             <a href="javascript: void(null);" id="filter-form-close" class="close-button--popup close-button">&times;</a>
 
             <div id="filter-status" class="filter-group">
+                {% if currentRoute != 'untagged' and nbEntriesUntagged != 0 %}
+                    <div class="">
+                        <a href="{{ path('untagged') }}">{{ 'tag.list.see_untagged_entries'|trans }} ({{nbEntriesUntagged}})</a>
+                    </div>
+                {% endif %}
+
                 <div class="">
                     <label>{{ 'entry.filters.status_label'|trans }}</label>
                 </div>

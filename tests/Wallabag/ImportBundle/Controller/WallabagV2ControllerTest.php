@@ -128,7 +128,7 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
 
         $tags = $content->getTags();
         $this->assertContains('foot', $tags, 'It includes the "foot" tag');
-        $this->assertSame(1, \count($tags));
+        $this->assertCount(1, $tags);
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
@@ -147,7 +147,7 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
         $this->assertContains('foot', $tags, 'It includes the "foot" tag');
         $this->assertContains('mediapart', $tags, 'It includes the "mediapart" tag');
         $this->assertContains('blog', $tags, 'It includes the "blog" tag');
-        $this->assertSame(3, \count($tags));
+        $this->assertCount(3, $tags);
 
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
         $this->assertSame('2016-09-08', $content->getCreatedAt()->format('Y-m-d'));

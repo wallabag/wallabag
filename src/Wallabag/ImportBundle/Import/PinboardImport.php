@@ -83,6 +83,18 @@ class PinboardImport extends AbstractImport
     /**
      * {@inheritdoc}
      */
+    public function validateEntry(array $importedEntry)
+    {
+        if (empty($importedEntry['href'])) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function parseEntry(array $importedEntry)
     {
         $existingEntry = $this->em
@@ -119,7 +131,7 @@ class PinboardImport extends AbstractImport
             );
         }
 
-        $entry->setArchived($data['is_archived']);
+        $entry->updateArchived($data['is_archived']);
         $entry->setStarred($data['is_starred']);
         $entry->setCreatedAt(new \DateTime($data['created_at']));
 
