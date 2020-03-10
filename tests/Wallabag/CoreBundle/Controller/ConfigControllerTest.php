@@ -812,6 +812,9 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $em->flush();
     }
 
+    /**
+     * @group NetworkCalls
+     */
     public function testDeleteAccount()
     {
         $client = $this->getClient();

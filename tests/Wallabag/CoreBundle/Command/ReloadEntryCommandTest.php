@@ -45,6 +45,9 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * @group NetworkCalls
+     */
     public function testRunReloadEntryCommand()
     {
         $application = new Application($this->getClient()->getKernel());
@@ -70,6 +73,9 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
         $this->assertContains('Done', $tester->getDisplay());
     }
 
+    /**
+     * @group NetworkCalls
+     */
     public function testRunReloadEntryWithUsernameCommand()
     {
         $application = new Application($this->getClient()->getKernel());
