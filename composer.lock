@@ -1918,24 +1918,24 @@
         },
         {
             "name": "friendsofsymfony/oauth2-php",
-            "version": "1.2.3",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/oauth2-php.git",
-                "reference": "a41fef63f81ef2ef632350a6c7dc66d15baa9240"
+                "reference": "606b8ea1c3c927c272ac1409116332ad5a2ed94c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/oauth2-php/zipball/a41fef63f81ef2ef632350a6c7dc66d15baa9240",
-                "reference": "a41fef63f81ef2ef632350a6c7dc66d15baa9240",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/oauth2-php/zipball/606b8ea1c3c927c272ac1409116332ad5a2ed94c",
+                "reference": "606b8ea1c3c927c272ac1409116332ad5a2ed94c",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.5.9|>=7.0.8",
-                "symfony/http-foundation": "~3.0|~4.0"
+                "php": "^5.5.9|^7.0.8|^7.1.3|^7.2.5",
+                "symfony/http-foundation": "~3.0|~4.0|~5.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "^4.8 || ^5.0"
             },
             "type": "library",
             "extra": {
@@ -1946,7 +1946,10 @@
             "autoload": {
                 "psr-4": {
                     "OAuth2\\": "lib/"
-                }
+                },
+                "exclude-from-classmap": [
+                    "/tests/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1968,7 +1971,7 @@
                 "oauth",
                 "oauth2"
             ],
-            "time": "2018-01-30T19:58:25+00:00"
+            "time": "2020-03-03T22:14:46+00:00"
         },
         {
             "name": "friendsofsymfony/rest-bundle",
