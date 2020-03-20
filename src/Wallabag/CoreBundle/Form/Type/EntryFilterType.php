@@ -73,23 +73,22 @@ class EntryFilterType extends AbstractType
                 'label' => 'entry.filters.reading_time.label',
             ])
             ->add('createdAt', DateRangeFilterType::class, [
-                    'left_date_options' => [
-                        'attr' => [
-                            'placeholder' => 'dd/mm/yyyy',
-                        ],
-                        'format' => 'dd/MM/yyyy',
-                        'widget' => 'single_text',
+                'left_date_options' => [
+                    'attr' => [
+                        'placeholder' => 'dd/mm/yyyy',
                     ],
-                    'right_date_options' => [
-                        'attr' => [
-                            'placeholder' => 'dd/mm/yyyy',
-                        ],
-                        'format' => 'dd/MM/yyyy',
-                        'widget' => 'single_text',
+                    'format' => 'dd/MM/yyyy',
+                    'widget' => 'single_text',
+                ],
+                'right_date_options' => [
+                    'attr' => [
+                        'placeholder' => 'dd/mm/yyyy',
                     ],
-                    'label' => 'entry.filters.created_at.label',
-                ]
-            )
+                    'format' => 'dd/MM/yyyy',
+                    'widget' => 'single_text',
+                ],
+                'label' => 'entry.filters.created_at.label',
+            ])
             ->add('domainName', TextFilterType::class, [
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                     $value = $values['value'];
