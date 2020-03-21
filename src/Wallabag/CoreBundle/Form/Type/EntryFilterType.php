@@ -75,16 +75,16 @@ class EntryFilterType extends AbstractType
             ->add('createdAt', DateRangeFilterType::class, [
                 'left_date_options' => [
                     'attr' => [
-                        'placeholder' => 'dd/mm/yyyy',
+                        'placeholder' => 'yyyy-mm-dd',
                     ],
-                    'format' => 'dd/MM/yyyy',
+                    'format' => 'yyyy-MM-dd',
                     'widget' => 'single_text',
                 ],
                 'right_date_options' => [
                     'attr' => [
-                        'placeholder' => 'dd/mm/yyyy',
+                        'placeholder' => 'yyyy-mm-dd',
                     ],
-                    'format' => 'dd/MM/yyyy',
+                    'format' => 'yyyy-MM-dd',
                     'widget' => 'single_text',
                 ],
                 'label' => 'entry.filters.created_at.label',

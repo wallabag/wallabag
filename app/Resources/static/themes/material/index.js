@@ -57,9 +57,9 @@ $(document).ready(() => {
   $('.datepicker').pickadate({
     selectMonths: true,
     selectYears: 15,
-    formatSubmit: 'dd/mm/yyyy',
-    hiddenName: true,
-    format: 'dd/mm/yyyy',
+    formatSubmit: 'yyyy-mm-dd',
+    hiddenName: false,
+    format: 'yyyy-mm-dd',
     container: 'body',
   });
 
