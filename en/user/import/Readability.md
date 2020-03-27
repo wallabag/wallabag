@@ -8,7 +8,7 @@ page, click on "Export your data" in the "Data Export" section. You will
 received an email to download a json (which does not end with .json in
 fact).
 
-## Import your data into wallabag 2.x
+## Import your data into wallabag
 
 Click on `Import` link in the menu, on `Import contents` in Readability
 section and then select your json file and upload it.
