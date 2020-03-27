@@ -7,7 +7,7 @@ Sur la page « Backup »
 cliquez sur « JSON » dans la section « Bookmarks ». Un fichier json
 (sans extension) sera téléchargé (`pinboard_export`).
 
-## Importez vos données dans wallabag 2.x
+## Importez vos données dans wallabag
 
 Cliquez sur le lien `Importer` dans le menu, sur `Importer les contenus`
 dans la section Pinboard et ensuite sélectionnez votre fichier json pour
