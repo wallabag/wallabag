@@ -90,19 +90,18 @@ class EntryControllerTest extends WallabagCoreTestCase
     public function testPostNewViaBookmarklet()
     {
         $this->logInAs('admin');
-        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/');
 
-        $this->assertCount(4, $crawler->filter('div[class=entry]'));
+        $this->assertCount(4, $crawler->filter('li.entry'));
 
         // Good URL
         $client->request('GET', '/bookmarklet', ['url' => $this->url]);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $client->followRedirect();
         $crawler = $client->request('GET', '/');
-        $this->assertCount(5, $crawler->filter('div[class=entry]'));
+        $this->assertCount(5, $crawler->filter('li.entry'));
 
         $em = $client->getContainer()
             ->get('doctrine.orm.entity_manager');
@@ -694,7 +693,6 @@ class EntryControllerTest extends WallabagCoreTestCase
     public function testFilterOnReadingTime()
     {
         $this->logInAs('admin');
-        $this->useTheme('baggy');
         $client = $this->getClient();
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl($this->url);
@@ -713,7 +711,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+        $this->assertCount(1, $crawler->filter('li.entry'));
     }
 
     public function testFilterOnReadingTimeWithNegativeValue()
@@ -733,17 +731,16 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->submit($form, $data);
 
         // forcing negative value results in no entry displayed
-        $this->assertCount(0, $crawler->filter('div[class=entry]'));
+        $this->assertCount(0, $crawler->filter('li.entry'));
     }
 
     public function testFilterOnReadingTimeOnlyUpper()
     {
         $this->logInAs('admin');
-        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/all/list');
-        $this->assertCount(5, $crawler->filter('div[class=entry]'));
+        $this->assertCount(5, $crawler->filter('li.entry'));
 
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl($this->url);
@@ -752,7 +749,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->flush();
 
         $crawler = $client->request('GET', '/all/list');
-        $this->assertCount(6, $crawler->filter('div[class=entry]'));
+        $this->assertCount(6, $crawler->filter('li.entry'));
 
         $form = $crawler->filter('button[id=submit-filter]')->form();
 
@@ -762,13 +759,12 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(5, $crawler->filter('div[class=entry]'));
+        $this->assertCount(5, $crawler->filter('li.entry'));
     }
 
     public function testFilterOnReadingTimeOnlyLower()
     {
         $this->logInAs('admin');
-        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/unread/list');
@@ -781,7 +777,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(0, $crawler->filter('div[class=entry]'));
+        $this->assertCount(0, $crawler->filter('li.entry'));
 
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl($this->url);
@@ -790,13 +786,12 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->flush();
 
         $crawler = $client->submit($form, $data);
-        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+        $this->assertCount(1, $crawler->filter('li.entry'));
     }
 
     public function testFilterOnUnreadStatus()
     {
         $this->logInAs('admin');
-        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/all/list');
@@ -809,7 +804,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(4, $crawler->filter('div[class=entry]'));
+        $this->assertCount(4, $crawler->filter('li.entry'));
 
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl($this->url);
@@ -819,45 +814,56 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(5, $crawler->filter('div[class=entry]'));
+        $this->assertCount(5, $crawler->filter('li.entry'));
     }
 
     public function testFilterOnCreationDate()
     {
         $this->logInAs('admin');
-        $this->useTheme('baggy');
         $client = $this->getClient();
+
+        $em = $this->getEntityManager();
+
+        $today = new \DateTimeImmutable();
+        $tomorrow = $today->add(new \DateInterval('P1D'));
+        $yesterday = $today->sub(new \DateInterval('P1D'));
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl('http://0.0.0.0/testFilterOnCreationDate');
+        $entry->setCreatedAt($yesterday);
+        $em->persist($entry);
+        $em->flush();
 
         $crawler = $client->request('GET', '/unread/list');
 
         $form = $crawler->filter('button[id=submit-filter]')->form();
 
         $data = [
-            'entry_filter[createdAt][left_date]' => date('d/m/Y'),
-            'entry_filter[createdAt][right_date]' => date('d/m/Y', strtotime('+1 day')),
+            'entry_filter[createdAt][left_date]' => $today->format('Y-m-d'),
+            'entry_filter[createdAt][right_date]' => $tomorrow->format('Y-m-d'),
         ];
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(5, $crawler->filter('div[class=entry]'));
+        $this->assertCount(5, $crawler->filter('li.entry'));
 
         $data = [
-            'entry_filter[createdAt][left_date]' => date('d/m/Y'),
-            'entry_filter[createdAt][right_date]' => date('d/m/Y'),
+            'entry_filter[createdAt][left_date]' => $today->format('Y-m-d'),
+            'entry_filter[createdAt][right_date]' => $today->format('Y-m-d'),
         ];
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(5, $crawler->filter('div[class=entry]'));
+        $this->assertCount(5, $crawler->filter('li.entry'));
 
         $data = [
-            'entry_filter[createdAt][left_date]' => '01/01/1970',
-            'entry_filter[createdAt][right_date]' => '01/01/1970',
+            'entry_filter[createdAt][left_date]' => '1970-01-01',
+            'entry_filter[createdAt][right_date]' => '1970-01-01',
         ];
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(0, $crawler->filter('div[class=entry]'));
+        $this->assertCount(0, $crawler->filter('li.entry'));
     }
 
     public function testPaginationWithFilter()
@@ -892,7 +898,6 @@ class EntryControllerTest extends WallabagCoreTestCase
     public function testFilterOnDomainName()
     {
         $this->logInAs('admin');
-        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/unread/list');
@@ -902,7 +907,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         ];
 
         $crawler = $client->submit($form, $data);
-        $this->assertCount(5, $crawler->filter('div[class=entry]'));
+        $this->assertCount(5, $crawler->filter('li.entry'));
 
         $crawler = $client->request('GET', '/unread/list');
         $form = $crawler->filter('button[id=submit-filter]')->form();
@@ -911,7 +916,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         ];
 
         $crawler = $client->submit($form, $data);
-        $this->assertCount(5, $crawler->filter('div[class=entry]'));
+        $this->assertCount(5, $crawler->filter('li.entry'));
 
         $form = $crawler->filter('button[id=submit-filter]')->form();
         $data = [
@@ -919,13 +924,12 @@ class EntryControllerTest extends WallabagCoreTestCase
         ];
 
         $crawler = $client->submit($form, $data);
-        $this->assertCount(0, $crawler->filter('div[class=entry]'));
+        $this->assertCount(0, $crawler->filter('li.entry'));
     }
 
     public function testFilterOnStatus()
     {
         $this->logInAs('admin');
-        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/unread/list');
@@ -934,20 +938,19 @@ class EntryControllerTest extends WallabagCoreTestCase
         $form['entry_filter[isStarred]']->untick();
 
         $crawler = $client->submit($form);
-        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+        $this->assertCount(1, $crawler->filter('li.entry'));
 
         $form = $crawler->filter('button[id=submit-filter]')->form();
         $form['entry_filter[isArchived]']->untick();
         $form['entry_filter[isStarred]']->tick();
 
         $crawler = $client->submit($form);
-        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+        $this->assertCount(1, $crawler->filter('li.entry'));
     }
 
     public function testFilterOnIsPublic()
     {
         $this->logInAs('admin');
-        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/unread/list');
@@ -955,13 +958,12 @@ class EntryControllerTest extends WallabagCoreTestCase
         $form['entry_filter[isPublic]']->tick();
 
         $crawler = $client->submit($form);
-        $this->assertCount(0, $crawler->filter('div[class=entry]'));
+        $this->assertCount(0, $crawler->filter('li.entry'));
     }
 
     public function testPreviewPictureFilter()
     {
         $this->logInAs('admin');
-        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/unread/list');
@@ -969,13 +971,12 @@ class EntryControllerTest extends WallabagCoreTestCase
         $form['entry_filter[previewPicture]']->tick();
 
         $crawler = $client->submit($form);
-        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+        $this->assertCount(1, $crawler->filter('li.entry'));
     }
 
     public function testFilterOnLanguage()
     {
         $this->logInAs('admin');
-        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $entry = new Entry($this->getLoggedInUser());
@@ -991,7 +992,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         ];
 
         $crawler = $client->submit($form, $data);
-        $this->assertCount(3, $crawler->filter('div[class=entry]'));
+        $this->assertCount(3, $crawler->filter('li.entry'));
 
         $form = $crawler->filter('button[id=submit-filter]')->form();
         $data = [
@@ -999,7 +1000,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         ];
 
         $crawler = $client->submit($form, $data);
-        $this->assertCount(2, $crawler->filter('div[class=entry]'));
+        $this->assertCount(2, $crawler->filter('li.entry'));
     }
 
     public function testShareEntryPublicly()
@@ -1181,7 +1182,6 @@ class EntryControllerTest extends WallabagCoreTestCase
     public function testFilterOnHttpStatus()
     {
         $this->logInAs('admin');
-        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $entry = new Entry($this->getLoggedInUser());
@@ -1200,7 +1200,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+        $this->assertCount(1, $crawler->filter('li.entry'));
 
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl($this->url);
@@ -1223,7 +1223,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(2, $crawler->filter('div[class=entry]'));
+        $this->assertCount(2, $crawler->filter('li.entry'));
 
         $crawler = $client->request('GET', '/all/list');
         $form = $crawler->filter('button[id=submit-filter]')->form();
@@ -1234,13 +1234,12 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(8, $crawler->filter('div[class=entry]'));
+        $this->assertCount(8, $crawler->filter('li.entry'));
     }
 
     public function testSearch()
     {
         $this->logInAs('admin');
-        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $entry = new Entry($this->getLoggedInUser());
@@ -1259,7 +1258,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(4, $crawler->filter('div[class=entry]'));
+        $this->assertCount(4, $crawler->filter('li.entry'));
 
         // Search on starred list
         $crawler = $client->request('GET', '/starred/list');
@@ -1278,7 +1277,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+        $this->assertCount(1, $crawler->filter('li.entry'));
 
         $crawler = $client->request('GET', '/archive/list');
 
@@ -1297,7 +1296,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+        $this->assertCount(1, $crawler->filter('li.entry'));
         $client->request('GET', '/delete/' . $entry->getId());
 
         // test on list of all articles
@@ -1310,7 +1309,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(0, $crawler->filter('div[class=entry]'));
+        $this->assertCount(0, $crawler->filter('li.entry'));
 
         // test url search on list of all articles
         $entry = new Entry($this->getLoggedInUser());
@@ -1329,7 +1328,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+        $this->assertCount(1, $crawler->filter('li.entry'));
 
         // same as previous test but for case-sensitivity
         $crawler = $client->request('GET', '/all/list');
@@ -1341,7 +1340,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+        $this->assertCount(1, $crawler->filter('li.entry'));
     }
 
     public function dataForLanguage()
