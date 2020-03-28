@@ -25,7 +25,7 @@ class WallabagExtensionTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $extension = new WallabagExtension($entryRepository, $tagRepository, $tokenStorage, 0, $translator);
+        $extension = new WallabagExtension($entryRepository, $tagRepository, $tokenStorage, 0, $translator, '');
 
         $this->assertSame('lemonde.fr', $extension->removeWww('www.lemonde.fr'));
         $this->assertSame('lemonde.fr', $extension->removeWww('lemonde.fr'));
@@ -50,7 +50,7 @@ class WallabagExtensionTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $extension = new WallabagExtension($entryRepository, $tagRepository, $tokenStorage, 0, $translator);
+        $extension = new WallabagExtension($entryRepository, $tagRepository, $tokenStorage, 0, $translator, '');
 
         $this->assertSame('lemonde.fr', $extension->removeScheme('lemonde.fr'));
         $this->assertSame('gist.github.com', $extension->removeScheme('gist.github.com'));
@@ -75,7 +75,7 @@ class WallabagExtensionTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $extension = new WallabagExtension($entryRepository, $tagRepository, $tokenStorage, 0, $translator);
+        $extension = new WallabagExtension($entryRepository, $tagRepository, $tokenStorage, 0, $translator, '');
 
         $this->assertSame('lemonde.fr', $extension->removeSchemeAndWww('www.lemonde.fr'));
         $this->assertSame('lemonde.fr', $extension->removeSchemeAndWww('http://lemonde.fr'));

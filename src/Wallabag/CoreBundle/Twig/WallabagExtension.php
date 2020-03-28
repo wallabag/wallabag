@@ -18,14 +18,16 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
     private $tagRepository;
     private $lifeTime;
     private $translator;
+    private $rootDir;
 
-    public function __construct(EntryRepository $entryRepository, TagRepository $tagRepository, TokenStorageInterface $tokenStorage, $lifeTime, TranslatorInterface $translator)
+    public function __construct(EntryRepository $entryRepository, TagRepository $tagRepository, TokenStorageInterface $tokenStorage, $lifeTime, TranslatorInterface $translator, string $rootDir)
     {
         $this->entryRepository = $entryRepository;
         $this->tagRepository = $tagRepository;
         $this->tokenStorage = $tokenStorage;
         $this->lifeTime = $lifeTime;
         $this->translator = $translator;
+        $this->rootDir = $rootDir;
     }
 
     public function getGlobals()
@@ -48,6 +50,7 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
             new TwigFunction('count_entries', [$this, 'countEntries']),
             new TwigFunction('count_tags', [$this, 'countTags']),
             new TwigFunction('display_stats', [$this, 'displayStats']),
+            new TwigFunction('asset_file_exists', [$this, 'assetFileExists']),
         ];
     }
 
@@ -163,6 +166,11 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
             '%nb_archives%' => $nbArchives,
             '%per_day%' => round($nbArchives / $nbDays, 2),
         ]);
+    }
+
+    public function assetFileExists($name)
+    {
+        return file_exists(realpath($this->rootDir . '/../web/' . $name));
     }
 
     public function getName()

@@ -16,6 +16,7 @@ services:
             - "@security.token_storage"
             - "%wallabag_core.cache_lifetime%"
             - "@translator"
+            - "%kernel.root_dir%"
         tags:
             - { name: twig.extension }
 
