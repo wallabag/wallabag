@@ -1,0 +1,11 @@
+# Two factor mail
+auth_code:
+    on: '启用'
+    mailer:
+        subject: 'wallabag 验证码'
+        body:
+            hello: "嗨，%user%，"
+            first_para: "因为你要求在登录到你的 wallabag 账号前需要完成两步验证，而刚刚一个新的设备请求完成该验证，为此我们给你发送了这个代码以供验证。"
+            second_para: "以下是需要用到的代码："
+            support: "如果遇到任何问题，欢迎联系我们："
+            signature: "wallabag 团队"
