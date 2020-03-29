@@ -9,7 +9,6 @@ use Psr\Log\LoggerInterface;
 
 /**
  * Overidden Cookie behavior to:
- *     - fix multiple concurrent writes (see https://github.com/guzzle/guzzle/pull/1884)
  *     - ignore error when the cookie file is malformatted (resulting in clearing it).
  */
 class FileCookieJar extends BaseFileCookieJar
@@ -25,29 +24,6 @@ class FileCookieJar extends BaseFileCookieJar
         parent::__construct($cookieFile);
 
         $this->logger = $logger;
-    }
-
-    /**
-     * Saves the cookies to a file.
-     *
-     * @param string $filename File to save
-     *
-     * @throws \RuntimeException if the file cannot be found or created
-     */
-    public function save($filename)
-    {
-        $json = [];
-        foreach ($this as $cookie) {
-            if ($cookie->getExpires() && !$cookie->getDiscard()) {
-                $json[] = $cookie->toArray();
-            }
-        }
-
-        if (false === file_put_contents($filename, json_encode($json), LOCK_EX)) {
-            // @codeCoverageIgnoreStart
-            throw new \RuntimeException("Unable to save file {$filename}");
-            // @codeCoverageIgnoreEnd
-        }
     }
 
     /**
