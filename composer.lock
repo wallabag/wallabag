@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4458551b4c0cddd988d7bbbc76dc38dc",
+    "content-hash": "60ce056a3ba44dfa4e039261a2326ae9",
     "packages": [
         {
             "name": "bdunogier/guzzle-site-authenticator",
@@ -2278,69 +2278,6 @@
                 "mbstring"
             ],
             "time": "2015-08-13T06:14:41+00:00"
-        },
-        {
-            "name": "grandt/phpepub",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Daniel-KM/PHPePub.git",
-                "reference": "78546d9a49d59ad9a32b13f3d95cc2f548add1c3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Daniel-KM/PHPePub/zipball/78546d9a49d59ad9a32b13f3d95cc2f548add1c3",
-                "reference": "78546d9a49d59ad9a32b13f3d95cc2f548add1c3",
-                "shasum": ""
-            },
-            "require": {
-                "grandt/phpresizegif": "~1.0.3",
-                "grandt/relativepath": "~1.0.1",
-                "masterminds/html5": "~2.3",
-                "php": ">=5.3.0",
-                "phpzip/phpzip": "~2.0.7"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "PHPePub\\": "src/PHPePub"
-                },
-                "classmap": [
-                    "src/lib.uuid.php"
-                ]
-            },
-            "license": [
-                "LGPL-2.1"
-            ],
-            "authors": [
-                {
-                    "name": "A. Grandt",
-                    "email": "php@grandt.com",
-                    "homepage": "http://grandt.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "An, Hyeong-woo",
-                    "email": "mail@mytory.net",
-                    "homepage": "https://mytory.net",
-                    "role": "Contributor"
-                },
-                {
-                    "name": "Daniel Berthereau",
-                    "email": "daniel.composer@berthereau.net",
-                    "role": "Contributor"
-                }
-            ],
-            "description": "Package to create and stream e-books in the ePub 2.0 and 3.0 formats.",
-            "homepage": "https://github.com/Grandt/PHPePub",
-            "keywords": [
-                "e-book",
-                "epub"
-            ],
-            "support": {
-                "source": "https://github.com/Daniel-KM/PHPePub/tree/master"
-            },
-            "time": "2018-10-21T22:00:00+00:00"
         },
         {
             "name": "grandt/phpresizegif",
@@ -7863,7 +7800,7 @@
             ],
             "authors": [
                 {
-                    "name": "Sebastien Malot",
+                    "name": "Sebastien MALOT",
                     "email": "sebastien@malot.fr"
                 }
             ],
@@ -9424,8 +9361,8 @@
             "authors": [
                 {
                     "name": "Sander Kromwijk",
-                    "email": "s.kromwijk@gmail.co",
-                    "role": "Original developer"
+                    "role": "Original developer",
+                    "email": "s.kromwijk@gmail.co"
                 },
                 {
                     "name": "Nicolas Lœuillet",
@@ -9436,6 +9373,72 @@
             "description": "A Mobipocket file (.mobi) creator in PHP.",
             "homepage": "https://github.com/wallabag/php-mobi",
             "time": "2019-08-08T12:26:23+00:00"
+        },
+        {
+            "name": "wallabag/phpepub",
+            "version": "4.0.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wallabag/PHPePub.git",
+                "reference": "ae4861e970fed1c6ae9ed85eefe03ac7c0113518"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wallabag/PHPePub/zipball/ae4861e970fed1c6ae9ed85eefe03ac7c0113518",
+                "reference": "ae4861e970fed1c6ae9ed85eefe03ac7c0113518",
+                "shasum": ""
+            },
+            "require": {
+                "grandt/phpresizegif": "~1.0.3",
+                "grandt/relativepath": "~1.0.1",
+                "masterminds/html5": "~2.3",
+                "php": ">=5.3.0",
+                "phpzip/phpzip": "~2.0.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHPePub\\": "src/PHPePub"
+                },
+                "classmap": [
+                    "src/lib.uuid.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "A. Grandt",
+                    "email": "php@grandt.com",
+                    "homepage": "http://grandt.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "An, Hyeong-woo",
+                    "email": "mail@mytory.net",
+                    "homepage": "https://mytory.net",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Daniel Berthereau",
+                    "email": "daniel.composer@berthereau.net",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Kevin Decherf",
+                    "homepage": "https://kdecherf.com",
+                    "role": "Contributor"
+                }
+            ],
+            "description": "Package to create and stream e-books in the ePub 2.0 and 3.0 formats.",
+            "homepage": "https://github.com/wallabag/PHPePub",
+            "keywords": [
+                "e-book",
+                "epub"
+            ],
+            "time": "2020-03-22T16:24:31+00:00"
         },
         {
             "name": "wallabag/tcpdf",
@@ -9627,7 +9630,7 @@
                     "email": "adrien.brault@gmail.com"
                 },
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -9677,7 +9680,7 @@
             ],
             "authors": [
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -11521,7 +11524,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "grandt/phpepub": 20,
         "predis/predis": 20
     },
     "prefer-stable": true,

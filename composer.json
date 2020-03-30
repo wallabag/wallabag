@@ -73,7 +73,7 @@
         "friendsofsymfony/oauth-server-bundle": "^1.5",
         "stof/doctrine-extensions-bundle": "^1.2",
         "scheb/two-factor-bundle": "^4.4",
-        "grandt/phpepub": "dev-master",
+        "wallabag/phpepub": "^4.0.7.2",
         "wallabag/php-mobi": "~1.0",
         "kphoen/rulerz-bundle": "~0.13",
         "guzzlehttp/guzzle": "^5.3.1",
@@ -161,12 +161,5 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/Daniel-KM/PHPePub",
-            "comment": "The most up-to-date PHPePub as of now"
-        }
-    ]
+    "prefer-stable": true
 }
