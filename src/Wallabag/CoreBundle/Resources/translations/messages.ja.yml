@@ -49,7 +49,7 @@ footer:
         social: 'ソーシャル'
         powered_by: '提供元：'
         about: 'アプリについて'
-    stats: あなたは %user_creation% からの %per_day% 日間で %nb_archives% 件の記事を読みました。
+    stats: あなたは %user_creation% から1日平均で %per_day% 件、合計で %nb_archives% 件の記事を読みました。
 
 config:
     page_title: '設定'
@@ -112,12 +112,12 @@ config:
             action_email: 電子メールを選択
             action_app: OTP アプリを選択
         delete:
-            title: アカウントの削除 (危険を伴う操作)
+            title: アカウントの削除 (注意が必要な操作)
             description: アカウントを削除すると、あなたの全ての記事、全てのタグ、全ての注釈、およびあなたのアカウントが完全に削除されます(この操作は取り消せません)。その後、ログアウトされます。
             confirm: 本当にアカウントを削除してよろしいですか？ (この操作は取り消せません)
             button: アカウントを削除する
     reset:
-        title: リセットの操作 (危険を伴う操作)
+        title: リセットの操作 (注意が必要な操作)
         description: 以下のボタンを押すと、アカウントから一部の情報を削除できます。これらの操作は取り消すことができないためご注意ください。
         annotations: 全ての注釈を削除
         tags: 全てのタグを削除
@@ -428,7 +428,7 @@ tag:
     list:
         number_on_the_page: '{0} タグはありません|{1} 1 件のタグ|]1,Inf[ %count% 件のタグ'
         see_untagged_entries: 'タグの無い記事を見る'
-        no_untagged_entries: 'タグの無い記事は存在しません。'
+        no_untagged_entries: 'タグの付いていない記事は存在しません。'
     new:
         add: '追加'
         placeholder: 'コンマ「,」で区切ることで、複数のタグを追加できます。'
