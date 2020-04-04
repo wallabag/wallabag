@@ -152,6 +152,10 @@ class TagController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $newTagLabel = $form->get('label')->getData();
+            $newTag = new Tag();
+            $newTag->setLabel($newTagLabel);
+
             $entries = $this->get('wallabag_core.entry_repository')->findAllByTagId(
                 $this->getUser()->getId(),
                 $tag->getId()
@@ -159,7 +163,8 @@ class TagController extends Controller
             foreach ($entries as $entry) {
                 $this->get('wallabag_core.tags_assigner')->assignTagsToEntry(
                     $entry,
-                    $form->get('label')->getData()
+                    $newTagLabel,
+                    [$newTag]
                 );
                 $entry->removeTag($tag);
             }

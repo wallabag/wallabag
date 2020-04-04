@@ -179,15 +179,24 @@ class TagControllerTest extends WallabagCoreTestCase
 
     public function testRenameTagUsingTheFormInsideTagList()
     {
+        $newTagLabel = 'rename label';
+
         $this->logInAs('admin');
         $client = $this->getClient();
 
         $tag = new Tag();
         $tag->setLabel($this->tagName);
+
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl('http://0.0.0.0/foo');
         $entry->addTag($tag);
         $this->getEntityManager()->persist($entry);
+
+        $entry2 = new Entry($this->getLoggedInUser());
+        $entry2->setUrl('http://0.0.0.0/bar');
+        $entry2->addTag($tag);
+        $this->getEntityManager()->persist($entry);
+
         $this->getEntityManager()->flush();
         $this->getEntityManager()->clear();
 
@@ -196,7 +205,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $form = $crawler->filter('#tag-' . $tag->getId() . ' form')->form();
 
         $data = [
-            'tag[label]' => 'specific label',
+            'tag[label]' => $newTagLabel,
         ];
 
         $client->submit($form, $data);
@@ -207,19 +216,34 @@ class TagControllerTest extends WallabagCoreTestCase
             ->getRepository('WallabagCoreBundle:Entry')
             ->find($entry->getId());
 
-        $tags = $freshEntry->getTags()->toArray();
-        foreach ($tags as $key => $item) {
+        $freshEntry2 = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->find($entry2->getId());
+
+        $tags = [];
+
+        $tagsFromEntry = $freshEntry->getTags()->toArray();
+        foreach ($tagsFromEntry as $key => $item) {
             $tags[$key] = $item->getLabel();
         }
 
-        $this->assertFalse(array_search($tag->getLabel(), $tags, true), 'Previous tag is not attach to entry anymore.');
+        $tagsFromEntry2 = $freshEntry2->getTags()->toArray();
+        foreach ($tagsFromEntry2 as $key => $item) {
+            $tags[$key] = $item->getLabel();
+        }
+
+        $this->assertFalse(array_search($tag->getLabel(), $tags, true), 'Previous tag is not attach to entries anymore.');
 
         $newTag = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Tag')
-            ->findOneByLabel('specific label');
-        $this->assertInstanceOf(Tag::class, $newTag, 'Tag "specific label" exists.');
-        $this->assertTrue($newTag->hasEntry($freshEntry), 'Tag "specific label" is assigned to the entry.');
+            ->findByLabel($newTagLabel);
+
+        $this->assertCount(1, $newTag, 'New tag exists.');
+
+        $this->assertTrue($newTag[0]->hasEntry($freshEntry), 'New tag is assigned to the entry.');
+        $this->assertTrue($newTag[0]->hasEntry($freshEntry2), 'New tag is assigned to the entry2.');
     }
 
     public function testAddUnicodeTagLabel()
