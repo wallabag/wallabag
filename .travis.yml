@@ -39,8 +39,6 @@ matrix:
     include:
         - php: 7.3
           env: CS_FIXER=run VALIDATE_TRANSLATION_FILE=run ASSETS=build DB=sqlite
-    allow_failures:
-        - php: 7.4
 
 # exclude v1 branches
 branches:

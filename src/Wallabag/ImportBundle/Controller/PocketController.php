@@ -47,8 +47,12 @@ class PocketController extends Controller
             return $this->redirect($this->generateUrl('import_pocket'));
         }
 
+        $form = $request->request->get('form');
+
         $this->get('session')->set('import.pocket.code', $requestToken);
-        $this->get('session')->set('mark_as_read', $request->request->get('form')['mark_as_read']);
+        if (null !== $form && \array_key_exists('mark_as_read', $form)) {
+            $this->get('session')->set('mark_as_read', $form['mark_as_read']);
+        }
 
         return $this->redirect(
             'https://getpocket.com/auth/authorize?request_token=' . $requestToken . '&redirect_uri=' . $this->generateUrl('import_pocket_callback', [], UrlGeneratorInterface::ABSOLUTE_URL),
@@ -80,11 +84,11 @@ class PocketController extends Controller
         if (true === $pocket->setMarkAsRead($markAsRead)->import()) {
             $summary = $pocket->getSummary();
             $message = $this->get('translator')->trans('flashes.import.notice.summary', [
-                '%imported%' => $summary['imported'],
-                '%skipped%' => $summary['skipped'],
+                '%imported%' => null !== $summary && \array_key_exists('imported', $summary) ? $summary['imported'] : 0,
+                '%skipped%' => null !== $summary && \array_key_exists('skipped', $summary) ? $summary['skipped'] : 0,
             ]);
 
-            if (0 < $summary['queued']) {
+            if (null !== $summary && \array_key_exists('queued', $summary) && 0 < $summary['queued']) {
                 $message = $this->get('translator')->trans('flashes.import.notice.summary_with_queue', [
                     '%queued%' => $summary['queued'],
                 ]);
