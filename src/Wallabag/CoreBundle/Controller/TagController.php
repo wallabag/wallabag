@@ -151,7 +151,10 @@ class TagController extends Controller
         $form = $this->createForm(RenameTagType::class, new Tag());
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()
+            && $form->isValid()
+            && $form->get('label')->getData() !== $tag->getLabel()
+           ) {
             $newTagLabel = $form->get('label')->getData();
             $newTag = new Tag();
             $newTag->setLabel($newTagLabel);
@@ -171,12 +174,12 @@ class TagController extends Controller
 
             $em = $this->getDoctrine()->getManager();
             $em->flush();
-        }
 
-        $this->get('session')->getFlashBag()->add(
-            'notice',
-            'flashes.tag.notice.tag_renamed'
-        );
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'flashes.tag.notice.tag_renamed'
+            );
+        }
 
         $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'), '', true);
 
