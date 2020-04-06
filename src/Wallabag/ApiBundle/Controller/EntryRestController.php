@@ -239,12 +239,12 @@ class EntryRestController extends WallabagRestController
             $results[$key]['url'] = $url;
 
             if (false !== $entry) {
+                // entry deleted, dispatch event about it!
+                $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
+
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($entry);
                 $em->flush();
-
-                // entry deleted, dispatch event about it!
-                $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
             }
 
             $results[$key]['entry'] = $entry instanceof Entry ? true : false;
@@ -610,12 +610,12 @@ class EntryRestController extends WallabagRestController
             $response = $this->sendResponse($e);
         }
 
+        // entry deleted, dispatch event about it!
+        $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($entry);
         $em->flush();
-
-        // entry deleted, dispatch event about it!
-        $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
 
         return $response;
     }
