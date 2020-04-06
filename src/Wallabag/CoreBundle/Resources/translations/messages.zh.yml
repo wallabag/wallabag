@@ -285,6 +285,7 @@ entry:
         reading_time_minutes_short: "%readingTime% 分钟"
         address: "地址"
         added_on: "添加于"
+        # published_on: "Published on"
 
 about:
     page_title: '关于'

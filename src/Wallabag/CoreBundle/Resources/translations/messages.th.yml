@@ -285,6 +285,7 @@ entry:
         # reading_time_minutes_short: "%readingTime% min"
         # address: "Address"
         # added_on: "Added on"
+        # published_on: "Published on"
 
 about:
     page_title: 'เกี่ยวกับ'
