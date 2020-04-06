@@ -196,10 +196,17 @@ class EntriesExport
                 $authors = implode(',', $publishedBy);
             }
 
+            $publishedAt = $entry->getPublishedAt();
+            $publishedDate = $this->translator->trans('export.unknown');
+            if (!empty($publishedAt)) {
+                $publishedDate = $entry->getPublishedAt()->format('Y-m-d');
+            }
+
             $titlepage = $content_start .
                 '<h1>' . $entry->getTitle() . '</h1>' .
                 '<dl>' .
                 '<dt>' . $this->translator->trans('entry.view.published_by') . '</dt><dd>' . $authors . '</dd>' .
+                '<dt>' . $this->translator->trans('entry.metadata.published_on') . '</dt><dd>' . $publishedDate . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.reading_time') . '</dt><dd>' . $this->translator->trans('entry.metadata.reading_time_minutes_short', ['%readingTime%' => $entry->getReadingTime()]) . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.added_on') . '</dt><dd>' . $entry->getCreatedAt()->format('Y-m-d') . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.address') . '</dt><dd><a href="' . $entry->getUrl() . '">' . $entry->getUrl() . '</a></dd>' .

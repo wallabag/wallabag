@@ -285,6 +285,7 @@ entry:
         reading_time_minutes_short: "%readingTime% min"
         address: "Endereço"
         added_on: "Adicionado o"
+        # published_on: "Published on"
 
 about:
     page_title: 'Sobre'

@@ -285,6 +285,7 @@ entry:
         reading_time_minutes_short: "%readingTime% min"
         address: "Adreça"
         added_on: "Ajustat a"
+        # published_on: "Published on"
 
 about:
     page_title: 'A prepaus'
