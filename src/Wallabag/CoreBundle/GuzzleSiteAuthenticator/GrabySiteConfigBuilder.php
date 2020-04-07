@@ -8,7 +8,6 @@ use Graby\SiteConfig\ConfigBuilder;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Wallabag\CoreBundle\Repository\SiteCredentialRepository;
-use Wallabag\UserBundle\Entity\User;
 
 class GrabySiteConfigBuilder implements SiteConfigBuilder
 {
@@ -28,9 +27,9 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
     private $logger;
 
     /**
-     * @var User|null
+     * @var TokenStorage
      */
-    private $currentUser;
+    private $token;
 
     /**
      * GrabySiteConfigBuilder constructor.
@@ -40,10 +39,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
         $this->grabyConfigBuilder = $grabyConfigBuilder;
         $this->credentialRepository = $credentialRepository;
         $this->logger = $logger;
-
-        if ($token->getToken()) {
-            $this->currentUser = $token->getToken()->getUser();
-        }
+        $this->token = $token;
     }
 
     /**
@@ -51,13 +47,15 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
      */
     public function buildForHost($host)
     {
+        $user = $this->getUser();
+
         // required by credentials below
         $host = strtolower($host);
         if ('www.' === substr($host, 0, 4)) {
             $host = substr($host, 4);
         }
 
-        if (!$this->currentUser) {
+        if (!$user) {
             $this->logger->debug('Auth: no current user defined.');
 
             return false;
@@ -73,7 +71,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
             $hosts[] = '.' . implode('.', $split);
         }
 
-        $credentials = $this->credentialRepository->findOneByHostsAndUser($hosts, $this->currentUser->getId());
+        $credentials = $this->credentialRepository->findOneByHostsAndUser($hosts, $user->getId());
 
         if (null === $credentials) {
             $this->logger->debug('Auth: no credentials available for host.', ['host' => $host]);
@@ -130,5 +128,14 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
         }
 
         return $extraFields;
+    }
+
+    private function getUser()
+    {
+        if ($this->token->getToken() && null !== $this->token->getToken()->getUser()) {
+            return $this->token->getToken()->getUser();
+        }
+
+        return null;
     }
 }
