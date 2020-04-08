@@ -1,5 +1,9 @@
 language: php
 
+# to avoid using default value from Travis
+os: linux
+dist: xenial
+
 services:
     - mysql
     - postgresql
@@ -34,13 +38,11 @@ env:
     - DB=pgsql
     - DB=sqlite
 
-matrix:
+jobs:
     fast_finish: true
     include:
         - php: 7.3
           env: CS_FIXER=run VALIDATE_TRANSLATION_FILE=run ASSETS=build DB=sqlite
-    allow_failures:
-        - php: 7.4
 
 # exclude v1 branches
 branches:
