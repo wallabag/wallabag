@@ -195,7 +195,8 @@ fos_oauth_server:
     service:
         user_provider: fos_user.user_provider.username_email
         options:
-            refresh_token_lifetime: 1209600
+            refresh_token_lifetime: "%fos_oauth_server_refresh_token_lifetime%"
+            access_token_lifetime: "%fos_oauth_server_access_token_lifetime%"
 
 scheb_two_factor:
     trusted_device:
