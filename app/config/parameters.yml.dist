@@ -46,6 +46,11 @@ parameters:
     fosuser_registration: true
     fosuser_confirmation: true
 
+    # how long the access token should live in seconds for the API
+    fos_oauth_server_access_token_lifetime: 3600
+    # how long the refresh token should life in seconds for the API
+    fos_oauth_server_refresh_token_lifetime: 1209600
+
     from_email: no-reply@wallabag.org
 
     rss_limit: 50
