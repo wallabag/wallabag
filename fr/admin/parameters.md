@@ -38,6 +38,8 @@ parameters:
     twofactor_sender: no-reply@wallabag.org
     fosuser_registration: true
     fosuser_confirmation: true
+    fos_oauth_server_access_token_lifetime: 3600
+    fos_oauth_server_refresh_token_lifetime: 1209600
     from_email: no-reply@wallabag.org
     rss_limit: 50
     rabbitmq_host: localhost
@@ -92,6 +94,8 @@ parameters:
 | twofactor_sender | Email de l'expéditeur du code de l'authentification à deux facteurs | no-reply@wallabag.org |
 | fosuser_registration | true pour activer l'inscription publique | true |
 | fosuser_confirmation | true pour envoyer un email de confirmation pour chaque création de compte | true |
+| fos_oauth_server_access_token_lifetime | durée du token d'accès pour l'API | 3600 |
+| fos_oauth_server_refresh_token_lifetime | durée du token de rafraichissement du token pour l'API | 1209600 |
 | from_email | Email de l'expéditeur pour chaque email envoyé | no-reply@wallabag.org |
 | rss_limit | Limite pour les flux RSS | 50 |
 | domain_name | URL complète de votre instance wallabag (sans le / de fin) | https://your-wallabag-url-instance.com |
