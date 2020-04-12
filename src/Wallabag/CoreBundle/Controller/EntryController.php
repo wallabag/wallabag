@@ -21,6 +21,48 @@ use Wallabag\CoreBundle\Form\Type\SearchEntryType;
 class EntryController extends Controller
 {
     /**
+     * @Route("/mass", name="mass_action")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function massAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $values = $request->request->all();
+
+        $action = 'toggle-read';
+        if (isset($values['toggle-star'])) {
+            $action = 'toggle-star';
+        } elseif (isset($values['delete'])) {
+            $action = 'delete';
+        }
+
+        if (isset($values['entry-checkbox'])) {
+            foreach ($values['entry-checkbox'] as $id) {
+                /** @var Entry * */
+                $entry = $this->get('wallabag_core.entry_repository')->findById((int) $id)[0];
+
+                $this->checkUserAction($entry);
+
+                if ('toggle-read' === $action) {
+                    $entry->toggleArchive();
+                } elseif ('toggle-star' === $action) {
+                    $entry->toggleStar();
+                } elseif ('delete' === $action) {
+                    $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
+                    $em->remove($entry);
+                }
+            }
+
+            $em->flush();
+        }
+
+        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'));
+
+        return $this->redirect($redirectUrl);
+    }
+
+    /**
      * @param int $page
      *
      * @Route("/search/{page}", name="search", defaults={"page" = 1})

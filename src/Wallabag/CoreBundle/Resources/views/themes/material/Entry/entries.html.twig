@@ -24,6 +24,7 @@
     {% if currentRoute == 'homepage' %}
         {% set currentRoute = 'unread' %}
     {% endif %}
+    <form name="form_mass_action" action="{{ path('mass_action') }}" method="post">
     <div class="results">
         <div class="nb-results">
             {{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}
@@ -38,6 +39,21 @@
     </div>
 
     <ul class="{% if listMode == 1 %}collection{% else %}row data{% endif %}">
+
+        <li class="mass-buttons">
+            {% if entries.count > 0 and listMode == 1 %}
+                <span>
+                    <input id="selectAll" type="checkbox" data-toggle="[data-js='entry-checkbox']" data-js="checkboxes-toggle" />&nbsp;
+                </span>
+
+                <span>
+                    <button class="btn cyan darken-1" type="submit" name="toggle-read" title="{{ 'entry.list.toogle_as_read'|trans }}"><i class="material-icons">done</i></button>
+                    <button class="btn cyan darken-1" type="submit" name="toggle-star" title="{{ 'entry.list.toogle_as_star'|trans }}" ><i class="material-icons">star</i></button>
+                    <button class="btn cyan darken-1" type="submit" name="delete" title="{{ 'entry.list.delete'|trans }}"><i class="material-icons">delete</i></button>
+                </span>
+            {% endif %}
+        </li>
+
         {% for entry in entries %}
             <li id="entry-{{ entry.id|e }}" class="entry col {% if listMode == 0 %}l3 m6{% else %}collection-item{% endif %} s12">
                 {% if listMode == 1 %}
@@ -50,6 +66,7 @@
             </li>
         {% endfor %}
     </ul>
+</form>
 
     {% if entries.getNbPages > 1 %}
         <div class="results">
