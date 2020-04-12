@@ -22,6 +22,13 @@ services:
         tags:
             - { name: form.type }
 
+    wallabag_core.sort.type.entry:
+        class: Wallabag\CoreBundle\Form\Type\EntrySortType
+        arguments:
+            - "@security.token_storage"
+        tags:
+            - { name: form.type }
+
     wallabag_core.param_converter.username_feed_token_converter:
         class: Wallabag\CoreBundle\ParamConverter\UsernameFeedTokenConverter
         tags:
