@@ -613,6 +613,7 @@ flashes:
             entries_reset: Artigos reinicializados
             archived_reset: Artigos arquivados apagados
             otp_enabled: Autenticação de dois fatores ativada
+            # otp_disabled: Two-factor authentication disabled
             tagging_rules_imported: Regras de tags importadas
             tagging_rules_not_imported: Erro ao importar regras de tags
     entry:
