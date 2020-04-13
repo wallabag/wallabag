@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class ImportCommand extends ContainerAwareCommand
 {
@@ -38,14 +39,24 @@ class ImportCommand extends ContainerAwareCommand
         $em->getConnection()->getConfiguration()->setSQLLogger(null);
 
         if ($input->getOption('useUserId')) {
-            $user = $em->getRepository('WallabagUserBundle:User')->findOneById($input->getArgument('username'));
+            $entityUser = $em->getRepository('WallabagUserBundle:User')->findOneById($input->getArgument('username'));
         } else {
-            $user = $em->getRepository('WallabagUserBundle:User')->findOneByUsername($input->getArgument('username'));
+            $entityUser = $em->getRepository('WallabagUserBundle:User')->findOneByUsername($input->getArgument('username'));
         }
 
-        if (!\is_object($user)) {
+        if (!\is_object($entityUser)) {
             throw new Exception(sprintf('User "%s" not found', $input->getArgument('username')));
         }
+
+        // Authenticate user for paywalled websites
+        $token = new UsernamePasswordToken(
+            $entityUser,
+            null,
+            'main',
+            $entityUser->getRoles());
+
+        $this->getContainer()->get('security.token_storage')->setToken($token);
+        $user = $this->getContainer()->get('security.token_storage')->getToken()->getUser();
 
         switch ($input->getOption('importer')) {
             case 'v2':
