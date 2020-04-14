@@ -613,6 +613,7 @@ flashes:
             entries_reset: 项目列表已重置
             archived_reset: 所有存档项目已删除
             otp_enabled: 两步验证已启用
+            # otp_disabled: Two-factor authentication disabled
             tagging_rules_imported: 标签规则已导入
             tagging_rules_not_imported: 导入标签规则时发生了错误
     entry:

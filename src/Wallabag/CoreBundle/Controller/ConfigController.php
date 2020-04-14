@@ -193,6 +193,30 @@ class ConfigController extends Controller
     }
 
     /**
+     * Disable 2FA using email.
+     *
+     * @Route("/config/otp/email/disable", name="disable_otp_email")
+     */
+    public function disableOtpEmailAction()
+    {
+        if (!$this->getParameter('twofactor_auth')) {
+            return $this->createNotFoundException('two_factor not enabled');
+        }
+
+        $user = $this->getUser();
+        $user->setEmailTwoFactor(false);
+
+        $this->container->get('fos_user.user_manager')->updateUser($user, true);
+
+        $this->addFlash(
+            'notice',
+            'flashes.config.notice.otp_disabled'
+        );
+
+        return $this->redirect($this->generateUrl('config') . '#set3');
+    }
+
+    /**
      * Enable 2FA using email.
      *
      * @Route("/config/otp/email", name="config_otp_email")
@@ -214,6 +238,32 @@ class ConfigController extends Controller
         $this->addFlash(
             'notice',
             'flashes.config.notice.otp_enabled'
+        );
+
+        return $this->redirect($this->generateUrl('config') . '#set3');
+    }
+
+    /**
+     * Disable 2FA using OTP app.
+     *
+     * @Route("/config/otp/app/disable", name="disable_otp_app")
+     */
+    public function disableOtpAppAction()
+    {
+        if (!$this->getParameter('twofactor_auth')) {
+            return $this->createNotFoundException('two_factor not enabled');
+        }
+
+        $user = $this->getUser();
+
+        $user->setGoogleAuthenticatorSecret('');
+        $user->setBackupCodes(null);
+
+        $this->container->get('fos_user.user_manager')->updateUser($user, true);
+
+        $this->addFlash(
+            'notice',
+            'flashes.config.notice.otp_disabled'
         );
 
         return $this->redirect($this->generateUrl('config') . '#set3');
@@ -247,6 +297,11 @@ class ConfigController extends Controller
         $user->setBackupCodes($backupCodesHashed);
 
         $this->container->get('fos_user.user_manager')->updateUser($user, true);
+
+        $this->addFlash(
+            'notice',
+            'flashes.config.notice.otp_enabled'
+        );
 
         return $this->render('WallabagCoreBundle:Config:otp_app.html.twig', [
             'backupCodes' => $backupCodes,

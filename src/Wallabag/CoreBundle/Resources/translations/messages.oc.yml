@@ -613,6 +613,7 @@ flashes:
             entries_reset: Articles levats
             archived_reset: Articles archivat suprimits
             otp_enabled: Autentificacion en dos temps activada
+            # otp_disabled: Two-factor authentication disabled
             tagging_rules_imported: Règlas d’etiquetatge importadas
             tagging_rules_not_imported: Error en important las règlas d’etiquetatge
     entry:

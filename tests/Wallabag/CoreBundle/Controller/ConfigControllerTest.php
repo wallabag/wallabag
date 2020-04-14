@@ -1045,6 +1045,29 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $em->flush();
     }
 
+    public function testUserDisable2faEmail()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/config/otp/email/disable');
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+
+        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(['_text']));
+        $this->assertContains('flashes.config.notice.otp_disabled', $alert[0]);
+
+        // restore user
+        $em = $this->getEntityManager();
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUsername('admin');
+
+        $this->assertFalse($user->isEmailTwoFactor());
+    }
+
     public function testUserEnable2faGoogle()
     {
         $this->logInAs('admin');
@@ -1096,6 +1119,30 @@ class ConfigControllerTest extends WallabagCoreTestCase
             ->findOneByUsername('admin');
 
         $this->assertFalse($user->isGoogleTwoFactor());
+        $this->assertEmpty($user->getBackupCodes());
+    }
+
+    public function testUserDisable2faGoogle()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/config/otp/app/disable');
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+
+        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(['_text']));
+        $this->assertContains('flashes.config.notice.otp_disabled', $alert[0]);
+
+        // restore user
+        $em = $this->getEntityManager();
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUsername('admin');
+
+        $this->assertEmpty($user->getGoogleAuthenticatorSecret());
         $this->assertEmpty($user->getBackupCodes());
     }
 

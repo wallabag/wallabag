@@ -614,6 +614,7 @@ flashes:
             entries_reset: "Articles supprimés"
             archived_reset: "Articles archivés supprimés"
             otp_enabled: "Authentification à double-facteur activée"
+            otp_disabled: "Authentification à double-facteur désactivée"
             tagging_rules_imported: Règles bien importées
             tagging_rules_not_imported: Impossible d'importer les règles
     entry:
