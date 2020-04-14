@@ -1,7 +1,7 @@
 # Wozu sind die internen Einstellungen?
 
 {% hint style="danger" %}
-This translated documentation might be out of date. For more recent features or requirements, please refer to the [English documentation](https://doc.wallabag.org/en/).
+Diese übersetzte Dokumentation ist möglicherweise veraltet. Neuere Funktionen oder Anforderungen finden Sie in der [englischen Dokumentation](https://doc.wallabag.org/en/).
 {% endhint %}
 
 Die Seite interne Einstellungen ist nur für den Administrator der Instanz verfügbar. Sie erlaubt die Verwaltungen von weiteren Einstellungen, wie z.B. die Aktivierung einiger Featuers.

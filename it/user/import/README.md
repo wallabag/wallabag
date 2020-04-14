@@ -1,7 +1,7 @@
 # Migrare da...
 
 {% hint style="danger" %}
-This translated documentation might be out of date. For more recent features or requirements, please refer to the [English documentation](https://doc.wallabag.org/en/).
+Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
 {% endhint %}
 
 In wallabag 2.x, potete importare dati da:
@@ -34,7 +34,7 @@ Si prega di rimpiazzare i valori:
     file esportato da wallabag v1
 
 Se volete segnare tutti questi articoli come già letti, potete
-aggiungere l'opzione `--markAsRead`. 
+aggiungere l'opzione `--markAsRead`.
 
 Per importare un file di wallabag
 v2, dovete aggiungere l'opzione `--importer=v2`.
