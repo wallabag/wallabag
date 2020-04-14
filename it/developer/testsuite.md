@@ -2,11 +2,11 @@ Testsuite
 =========
 
 {% hint style="danger" %}
-This translated documentation might be out of date. For more recent features or requirements, please refer to the [English documentation](https://doc.wallabag.org/en/).
+Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
 {% endhint %}
 
 Per assicurare la qualità di sviluppo di wallabag, abbiamo scritto i
-test con [PHPUnit](https://phpunit.de). 
+test con [PHPUnit](https://phpunit.de).
 
 Se contribuite al progetto
 (traducendo l'applicazione, risolvendo i bug o aggiungendo nuove

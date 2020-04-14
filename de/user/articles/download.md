@@ -2,7 +2,7 @@ Artikel herunterladen
 ---------------------
 
 {% hint style="danger" %}
-This translated documentation might be out of date. For more recent features or requirements, please refer to the [English documentation](https://doc.wallabag.org/en/).
+Diese übersetzte Dokumentation ist möglicherweise veraltet. Neuere Funktionen oder Anforderungen finden Sie in der [englischen Dokumentation](https://doc.wallabag.org/en/).
 {% endhint %}
 
 Du kannst jeden Artikel in verschiedenen Formaten herunterladen: ePUB,
