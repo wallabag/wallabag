@@ -55,7 +55,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $form = $crawler->filter('button[id=config_save]')->form();
 
         $data = [
-            'config[theme]' => 'baggy',
+            'config[theme]' => 'material',
             'config[items_per_page]' => '30',
             'config[reading_speed]' => '100',
             'config[action_mark_as_read]' => '0',
@@ -74,7 +74,6 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testChangeReadingSpeed()
     {
         $this->logInAs('admin');
-        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $entry = new Entry($this->getLoggedInUser());
@@ -92,7 +91,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
             'entry_filter[readingTime][left_number]' => 22,
         ];
         $crawler = $client->submit($form, $dataFilters);
-        $this->assertCount(1, $crawler->filter('div[class=entry]'));
+        $this->assertCount(0, $crawler->filter('div[class=entry]'));
 
         // Change reading speed
         $crawler = $client->request('GET', '/config');
@@ -121,7 +120,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     {
         return [
             [[
-                'config[theme]' => 'baggy',
+                'config[theme]' => 'material',
                 'config[items_per_page]' => '',
                 'config[language]' => 'en',
             ]],
@@ -462,7 +461,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertStringContainsString('flashes.config.notice.tagging_rules_updated', $crawler->filter('body')->extract(['_text'])[0]);
 
-        $editLink = $crawler->filter('div[id=set5] a.mode_edit')->last()->link();
+        $editLink = $crawler->filter('.edit-rule')->last()->link();
 
         $crawler = $client->click($editLink);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
@@ -487,7 +486,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertStringContainsString('readingTime <= 30', $crawler->filter('body')->extract(['_text'])[0]);
 
-        $deleteLink = $crawler->filter('div[id=set5] a.delete')->last()->link();
+        $deleteLink = $crawler->filter('.delete-rule')->last()->link();
 
         $crawler = $client->click($deleteLink);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
@@ -1111,19 +1110,18 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testSwitchViewMode()
     {
         $this->logInAs('admin');
-        $this->useTheme('baggy');
         $client = $this->getClient();
 
         $client->request('GET', '/unread/list');
 
-        $this->assertStringNotContainsString('listmode', $client->getResponse()->getContent());
+        $this->assertNotContains('collection', $client->getResponse()->getContent());
 
         $client->request('GET', '/config/view-mode');
         $crawler = $client->followRedirect();
 
         $client->request('GET', '/unread/list');
 
-        $this->assertStringContainsString('listmode', $client->getResponse()->getContent());
+        $this->assertContains('collection', $client->getResponse()->getContent());
 
         $client->request('GET', '/config/view-mode');
     }
