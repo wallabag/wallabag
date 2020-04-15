@@ -78,5 +78,8 @@
         {% if craue_setting('piwik_enabled') %}
             {{ piwik(craue_setting('piwik_host'), craue_setting('piwik_site_id')) }}
         {% endif %}
+        
+        {% block javascripts %}
+        {% endblock %}
     </body>
 </html>

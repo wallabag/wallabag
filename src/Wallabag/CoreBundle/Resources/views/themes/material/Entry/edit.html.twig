@@ -29,6 +29,11 @@
                         </div>
 
                         <div class="input-field s12">
+                            {{ form_label(form.content) }}
+                            {{ form_widget(form.content) }}
+                        </div>
+
+                        <div class="input-field s12">
                             {{ form_label(form.origin_url) }}
                             {{ form_widget(form.origin_url) }}
                         </div>
@@ -43,4 +48,14 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
+    <script type="text/javascript">
+        tinymce.init({
+        selector: '#entry_content',
+        menubar: 'edit view format'
+        });
+    </script>
 {% endblock %}
