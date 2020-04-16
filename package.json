@@ -77,7 +77,6 @@
     "mousetrap": "^1.6.0",
     "ptsans-npm-webfont": "^0.0.4",
     "roboto-fontface": "^0.7.0",
-    "tinymce"="^5.2.1",
     "waypoints": "^4.0.1"
   },
   "scripts": {
