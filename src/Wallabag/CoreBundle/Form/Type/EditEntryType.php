@@ -35,7 +35,7 @@ class EditEntryType extends AbstractType
             ->add('content', TextareaType::class, [
                 'required' => true,
                 'label' => 'Content',
-                'attr' => [ 'style' => 'height: 20em; padding: 10px' ]
+                'attr' => [ 'style' => 'height: 20em; padding: 10px' ],
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'entry.edit.save_label',
