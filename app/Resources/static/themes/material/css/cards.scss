@@ -173,7 +173,6 @@ a.original:not(.waves-effect) {
 
 .card-tag-labels li {
   display: flex;
-  justify-content: space-between;
 }
 
 .card-entry-tags a,
@@ -186,15 +185,12 @@ a.original:not(.waves-effect) {
   color: #fff;
 }
 
-.card-tag-labels a {
-  height: 100%;
-  align-items: center;
-}
-
 .card-tag-link {
-  display: flex;
-  min-width: 100px;
-  flex-grow: 1;
+  width: calc(100% - 48px);
+  line-height: 1.3;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .card-tag-form {
@@ -205,22 +201,20 @@ a.original:not(.waves-effect) {
 
 .card-tag-form input {
   margin-bottom: 0;
-  height: 2rem;
+  height: 1.8rem;
 }
 
-.card-tag-rss {
+.card-tag-icon {
   display: flex;
 }
 
 .card-tag-labels {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 
 .card-tag-labels li {
   margin: 10px;
-  flex-basis: 19%;
-  flex-grow: 1;
   align-items: center;
 }
 
