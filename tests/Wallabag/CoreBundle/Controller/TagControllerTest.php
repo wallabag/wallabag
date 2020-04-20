@@ -179,15 +179,24 @@ class TagControllerTest extends WallabagCoreTestCase
 
     public function testRenameTagUsingTheFormInsideTagList()
     {
+        $newTagLabel = 'rename label';
+
         $this->logInAs('admin');
         $client = $this->getClient();
 
         $tag = new Tag();
         $tag->setLabel($this->tagName);
+
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl('http://0.0.0.0/foo');
         $entry->addTag($tag);
         $this->getEntityManager()->persist($entry);
+
+        $entry2 = new Entry($this->getLoggedInUser());
+        $entry2->setUrl('http://0.0.0.0/bar');
+        $entry2->addTag($tag);
+        $this->getEntityManager()->persist($entry);
+
         $this->getEntityManager()->flush();
         $this->getEntityManager()->clear();
 
@@ -196,30 +205,230 @@ class TagControllerTest extends WallabagCoreTestCase
         $form = $crawler->filter('#tag-' . $tag->getId() . ' form')->form();
 
         $data = [
-            'tag[label]' => 'specific label',
+            'tag[label]' => $newTagLabel,
         ];
 
         $client->submit($form, $data);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+
+        $this->assertContains('flashes.tag.notice.tag_renamed', $crawler->filter('body')->extract(['_text'])[0]);
 
         $freshEntry = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->find($entry->getId());
 
-        $tags = $freshEntry->getTags()->toArray();
-        foreach ($tags as $key => $item) {
+        $freshEntry2 = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->find($entry2->getId());
+
+        $tags = [];
+
+        $tagsFromEntry = $freshEntry->getTags()->toArray();
+        foreach ($tagsFromEntry as $key => $item) {
             $tags[$key] = $item->getLabel();
         }
 
-        $this->assertFalse(array_search($tag->getLabel(), $tags, true), 'Previous tag is not attach to entry anymore.');
+        $tagsFromEntry2 = $freshEntry2->getTags()->toArray();
+        foreach ($tagsFromEntry2 as $key => $item) {
+            $tags[$key] = $item->getLabel();
+        }
+
+        $this->assertFalse(array_search($tag->getLabel(), $tags, true), 'Previous tag is not attach to entries anymore.');
 
         $newTag = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Tag')
-            ->findOneByLabel('specific label');
-        $this->assertInstanceOf(Tag::class, $newTag, 'Tag "specific label" exists.');
-        $this->assertTrue($newTag->hasEntry($freshEntry), 'Tag "specific label" is assigned to the entry.');
+            ->findByLabel($newTagLabel);
+
+        $this->assertCount(1, $newTag, 'New tag exists.');
+
+        $this->assertTrue($newTag[0]->hasEntry($freshEntry), 'New tag is assigned to the entry.');
+        $this->assertTrue($newTag[0]->hasEntry($freshEntry2), 'New tag is assigned to the entry2.');
+    }
+
+    public function testRenameTagWithSameLabel()
+    {
+        $tagLabel = 'same label';
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $tag = new Tag();
+        $tag->setLabel($tagLabel);
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl('http://0.0.0.0/foobar');
+        $entry->addTag($tag);
+        $this->getEntityManager()->persist($entry);
+
+        $this->getEntityManager()->flush();
+        $this->getEntityManager()->clear();
+
+        // We make a first request to set an history and test redirection after tag deletion
+        $crawler = $client->request('GET', '/tag/list');
+        $form = $crawler->filter('#tag-' . $tag->getId() . ' form')->form();
+
+        $data = [
+            'tag[label]' => $tagLabel,
+        ];
+
+        $client->submit($form, $data);
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertNotContains('flashes.tag.notice.tag_renamed', $crawler->filter('body')->extract(['_text'])[0]);
+
+        $freshEntry = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->find($entry->getId());
+
+        $tags = [];
+
+        $tagsFromEntry = $freshEntry->getTags()->toArray();
+        foreach ($tagsFromEntry as $key => $item) {
+            $tags[$key] = $item->getLabel();
+        }
+
+        $this->assertNotFalse(array_search($tag->getLabel(), $tags, true), 'Tag is still assigned to the entry.');
+
+        $newTag = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Tag')
+            ->findByLabel($tagLabel);
+
+        $this->assertCount(1, $newTag);
+        $this->assertSame($tag->getId(), $newTag[0]->getId(), 'Tag is unchanged.');
+
+        $this->assertTrue($newTag[0]->hasEntry($freshEntry), 'Tag is still assigned to the entry.');
+    }
+
+    public function testRenameTagWithSameLabelDifferentCase()
+    {
+        $tagLabel = 'same label';
+        $newTagLabel = 'saMe labEl';
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $tag = new Tag();
+        $tag->setLabel($tagLabel);
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl('http://0.0.0.0/foobar');
+        $entry->addTag($tag);
+        $this->getEntityManager()->persist($entry);
+
+        $this->getEntityManager()->flush();
+        $this->getEntityManager()->clear();
+
+        // We make a first request to set an history and test redirection after tag deletion
+        $crawler = $client->request('GET', '/tag/list');
+        $form = $crawler->filter('#tag-' . $tag->getId() . ' form')->form();
+
+        $data = [
+            'tag[label]' => $newTagLabel,
+        ];
+
+        $client->submit($form, $data);
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertNotContains('flashes.tag.notice.tag_renamed', $crawler->filter('body')->extract(['_text'])[0]);
+
+        $freshEntry = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->find($entry->getId());
+
+        $tags = [];
+
+        $tagsFromEntry = $freshEntry->getTags()->toArray();
+        foreach ($tagsFromEntry as $key => $item) {
+            $tags[$key] = $item->getLabel();
+        }
+
+        $this->assertFalse(array_search($newTagLabel, $tags, true));
+
+        $tagFromRepo = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Tag')
+            ->findByLabel($tagLabel);
+
+        $newTagFromRepo = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Tag')
+            ->findByLabel($newTagLabel);
+
+        $this->assertCount(0, $newTagFromRepo);
+        $this->assertCount(1, $tagFromRepo);
+
+        $this->assertSame($tag->getId(), $tagFromRepo[0]->getId(), 'Tag is unchanged.');
+
+        $this->assertTrue($tagFromRepo[0]->hasEntry($freshEntry), 'Tag is still assigned to the entry.');
+    }
+
+    public function testRenameTagWithExistingLabel()
+    {
+        $tagLabel = 'existing label';
+        $previousTagLabel = 'previous label';
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $tag = new Tag();
+        $tag->setLabel($tagLabel);
+
+        $previousTag = new Tag();
+        $previousTag->setLabel($previousTagLabel);
+
+        $entry1 = new Entry($this->getLoggedInUser());
+        $entry1->setUrl('http://0.0.0.0/foobar');
+        $entry1->addTag($previousTag);
+        $this->getEntityManager()->persist($entry1);
+
+        $entry2 = new Entry($this->getLoggedInUser());
+        $entry2->setUrl('http://0.0.0.0/baz');
+        $entry2->addTag($tag);
+        $this->getEntityManager()->persist($entry2);
+
+        $this->getEntityManager()->flush();
+        $this->getEntityManager()->clear();
+
+        // We make a first request to set an history and test redirection after tag deletion
+        $crawler = $client->request('GET', '/tag/list');
+        $form = $crawler->filter('#tag-' . $previousTag->getId() . ' form')->form();
+
+        $data = [
+            'tag[label]' => $tagLabel,
+        ];
+
+        $client->submit($form, $data);
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertNotContains('flashes.tag.notice.tag_renamed', $crawler->filter('body')->extract(['_text'])[0]);
+
+        $freshEntry1 = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->find($entry1->getId());
+
+        $freshEntry2 = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->find($entry2->getId());
+
+        $tagFromRepo = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Tag')
+            ->findByLabel($tagLabel);
+
+        $previousTagFromRepo = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Tag')
+            ->findByLabel($previousTagLabel);
+
+        $this->assertCount(1, $tagFromRepo);
+
+        $this->assertTrue($tagFromRepo[0]->hasEntry($freshEntry1));
+        $this->assertTrue($tagFromRepo[0]->hasEntry($freshEntry2), 'Tag is assigned to the entry.');
+        $this->assertFalse($previousTagFromRepo[0]->hasEntry($freshEntry1));
     }
 
     public function testAddUnicodeTagLabel()

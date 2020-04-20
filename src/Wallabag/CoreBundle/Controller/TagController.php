@@ -151,7 +151,22 @@ class TagController extends Controller
         $form = $this->createForm(RenameTagType::class, new Tag());
         $form->handleRequest($request);
 
+        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'), '', true);
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $newTag = new Tag();
+            $newTag->setLabel($form->get('label')->getData());
+
+            if ($newTag->getLabel() === $tag->getLabel()) {
+                return $this->redirect($redirectUrl);
+            }
+
+            $tagFromRepo = $this->get('wallabag_core.tag_repository')->findOneByLabel($newTag->getLabel());
+
+            if (null !== $tagFromRepo) {
+                $newTag = $tagFromRepo;
+            }
+
             $entries = $this->get('wallabag_core.entry_repository')->findAllByTagId(
                 $this->getUser()->getId(),
                 $tag->getId()
@@ -159,21 +174,19 @@ class TagController extends Controller
             foreach ($entries as $entry) {
                 $this->get('wallabag_core.tags_assigner')->assignTagsToEntry(
                     $entry,
-                    $form->get('label')->getData()
+                    $newTag->getLabel(),
+                    [$newTag]
                 );
                 $entry->removeTag($tag);
             }
 
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'flashes.tag.notice.tag_renamed'
+            );
         }
-
-        $this->get('session')->getFlashBag()->add(
-            'notice',
-            'flashes.tag.notice.tag_renamed'
-        );
-
-        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'), '', true);
 
         return $this->redirect($redirectUrl);
     }
