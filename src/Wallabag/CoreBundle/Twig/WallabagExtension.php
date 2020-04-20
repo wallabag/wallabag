@@ -95,6 +95,9 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
             case 'unread':
                 $qb = $this->entryRepository->getBuilderForUnreadByUser($user->getId());
                 break;
+            case 'with_annotations':
+                $qb = $this->entryRepository->getBuilderForAnnotationsByUser($user->getId());
+                break;
             case 'all':
                 $qb = $this->entryRepository->getBuilderForAllByUser($user->getId());
                 break;

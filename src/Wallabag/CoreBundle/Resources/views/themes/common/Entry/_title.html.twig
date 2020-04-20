@@ -14,6 +14,8 @@
     {{ 'entry.page_titles.untagged'|trans }}
 {% elseif currentRoute == 'same_domain' %}
     {{ 'entry.page_titles.same_domain'|trans }}
+{% elseif currentRoute == 'with_annotations' %}
+    {{ 'entry.page_titles.with_annotations'|trans }}
 {% else %}
     {{ 'entry.page_titles.unread'|trans }}
 {% endif %}

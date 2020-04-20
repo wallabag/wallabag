@@ -69,11 +69,11 @@ security:
         - { path: ^/logout, roles: [IS_AUTHENTICATED_ANONYMOUSLY, IS_AUTHENTICATED_2FA_IN_PROGRESS] }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: /(unread|starred|archive|all).xml$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: /(unread|starred|archive|with_annotations|all).xml$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/locale, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: /tags/(.*).xml$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/feed, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: /(unread|starred|archive).xml$, roles: IS_AUTHENTICATED_ANONYMOUSLY } # For backwards compatibility
+        - { path: /(unread|starred|archive|with_annotations).xml$, roles: IS_AUTHENTICATED_ANONYMOUSLY } # For backwards compatibility
         - { path: ^/share, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/settings, roles: ROLE_SUPER_ADMIN }
         - { path: ^/annotations, roles: ROLE_USER }

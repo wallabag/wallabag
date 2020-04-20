@@ -15,6 +15,7 @@ security:
         go_to_account: حساب خود را ببینید
 menu:
     left:
+<<<<<<< HEAD
         unread: خوانده‌نشده
         starred: برگزیده
         archive: بایگانی
@@ -32,6 +33,27 @@ menu:
         site_credentials: اعتبارنامه‌های وب‌گاه
         users_management: مدیریت کاربران
         developer: مدیریت کارخواه‌های API
+=======
+        unread: 'خوانده‌نشده'
+        starred: 'برگزیده'
+        archive: 'بایگانی'
+        all_articles: 'همه'
+        # with_annotations: 'With annotations'
+        config: 'پیکربندی'
+        tags: 'برچسب‌ها'
+        internal_settings: 'تنظیمات درونی'
+        import: 'درون‌ریزی'
+        howto: 'خودآموز'
+        # developer: 'API clients management'
+        logout: 'خروج'
+        about: 'درباره'
+        search: 'جستجو'
+        save_link: 'ذخیرهٔ یک پیوند'
+        back_to_unread: 'بازگشت به خوانده‌نشده‌ها'
+        # users_management: 'Users management'
+        # site_credentials: 'Site credentials'
+        quickstart: "Quickstart"
+>>>>>>> 4b997bc8 (Added route to list entries with annotations)
     top:
         add_new_entry: افزودن مقالهٔ تازه
         search: جستجو
@@ -106,10 +128,22 @@ config:
             tagging_rules_definition_title: برچسب‌گذاری خودکار یعنی چه؟
 entry:
     page_titles:
+<<<<<<< HEAD
         unread: مقاله‌های خوانده‌نشده
         starred: مقاله‌های برگزیده
         archived: مقاله‌های بایگانی‌شده
         filtered: مقاله‌های فیلترشده
+=======
+        unread: 'مقاله‌های خوانده‌نشده'
+        starred: 'مقاله‌های برگزیده'
+        archived: 'مقاله‌های بایگانی‌شده'
+        filtered: 'مقاله‌های فیلترشده'
+        # with_annotations: 'Entries with annotations'
+        # filtered_tags: 'Filtered by tags:'
+        # filtered_search: 'Filtered by search:'
+        # untagged: 'Untagged entries'
+        # all: 'All entries'
+>>>>>>> 4b997bc8 (Added route to list entries with annotations)
     list:
         number_on_the_page: '{0} هیج مقاله‌ای نیست.|{1} یک مقاله هست.|]1,Inf[ %count% مقاله هست.'
         reading_time: زمان تخمینی برای خواندن

@@ -19,6 +19,7 @@ menu:
         starred: Oznaczone gwiazdką
         archive: Archiwum
         all_articles: Wszystkie
+        # with_annotations: 'With annotations'
         config: Konfiguracja
         tags: Tagi
         internal_settings: Wewnętrzne ustawienia
@@ -210,6 +211,7 @@ entry:
         starred: Wpisy oznaczone gwiazdką
         archived: Zarchiwizowane wpisy
         filtered: Odfiltrowane wpisy
+        # with_annotations: 'Entries with annotations'
         filtered_tags: 'Filtrowane po tagach:'
         filtered_search: 'Filtrowanie po wyszukiwaniu:'
         untagged: Odtaguj wpisy

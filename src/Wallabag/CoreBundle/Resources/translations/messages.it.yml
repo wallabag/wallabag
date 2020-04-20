@@ -15,10 +15,12 @@ security:
         go_to_account: Vai al tuo account
 menu:
     left:
+
         unread: Non letti
         starred: Preferiti
         archive: Archivio
         all_articles: Tutti
+        # with_annotations: 'With annotations'
         config: Configurazione
         tags: Etichette
         internal_settings: Strumenti
@@ -175,10 +177,12 @@ config:
 entry:
     default_title: Titolo del contenuto
     page_titles:
+
         unread: Contenuti non letti
         starred: Contenuti preferiti
         archived: Contenuti archiviati
         filtered: Contenuti filtrati
+        # with_annotations: 'Entries with annotations'
         filtered_tags: 'Filtrati per etichetta:'
         filtered_search: 'Filtrati per ricerca:'
         untagged: Articoli non etichettati

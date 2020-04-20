@@ -19,6 +19,7 @@ menu:
         starred: 'Destacado'
         archive: 'Arquivo'
         all_articles: 'Todas as entradas'
+        # with_annotations: 'With annotations'
         config: 'Configurações'
         tags: 'Tags'
         internal_settings: 'Configurações Internas'
@@ -148,6 +149,7 @@ entry:
         starred: 'Entradas destacadas'
         archived: 'Entradas arquivadas'
         filtered: 'Entradas filtradas'
+        # with_annotations: 'Entries with annotations'
         filtered_tags: 'Filtrar por tags:'
         untagged: 'Entradas sem tags'
     list:

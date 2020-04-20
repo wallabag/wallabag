@@ -13,6 +13,7 @@ menu:
         starred: 'Favoritter'
         archive: 'Arkiv'
         all_articles: 'Alle artikler'
+        # with_annotations: 'With annotations'
         config: 'Opsætning'
         tags: 'Tags'
         howto: 'KUow-to'
@@ -65,6 +66,17 @@ config:
         new_password_label: 'Ny adgangskode'
         repeat_new_password_label: 'Gentag adgangskode'
 entry:
+    # default_title: 'Title of the entry'
+    page_titles:
+        # unread: 'Unread entries'
+        # starred: 'Starred entries'
+        # archived: 'Archived entries'
+        # filtered: 'Filtered entries'
+        # with_annotations: 'Entries with annotations'
+        # filtered_tags: 'Filtered by tags:'
+        # filtered_search: 'Filtered by search:'
+        # untagged: 'Untagged entries'
+        # all: 'All entries'
     list:
         reading_time: 'estimeret læsetid'
         reading_time_minutes: 'estimeret læsetid: %readingTime% min'

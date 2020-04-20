@@ -19,6 +19,7 @@ menu:
         starred: Favoris
         archive: Lus
         all_articles: Tous les articles
+        with_annotations: Avec annotations
         config: Configuration
         tags: Étiquettes
         internal_settings: Configuration interne
@@ -220,6 +221,7 @@ entry:
         starred: Articles favoris
         archived: Articles lus
         filtered: Articles filtrés
+        with_annotations: Articles avec annotations
         filtered_tags: 'Articles filtrés par étiquettes :'
         filtered_search: 'Articles filtrés par recherche :'
         untagged: Article sans étiquette

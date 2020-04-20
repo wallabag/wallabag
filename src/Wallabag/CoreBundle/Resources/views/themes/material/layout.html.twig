@@ -40,6 +40,8 @@
             {% set activeRoute = null %}
             {% if currentRoute == 'all' or currentRouteFromQueryParams == 'all' %}
                {% set activeRoute = 'all' %}
+            {% elseif currentRoute == 'with_annotations' or currentRouteFromQueryParams == 'with_annotations' %}
+               {% set activeRoute = 'with_annotations' %}
             {% elseif currentRoute == 'archive' or currentRouteFromQueryParams == 'archive' %}
                {% set activeRoute = 'archive' %}
             {% elseif currentRoute == 'starred' or currentRouteFromQueryParams == 'starred' %}
@@ -58,6 +60,9 @@
             </li>
             <li class="bold {% if activeRoute == 'archive' %}active{% endif %}">
                 <a class="waves-effect" href="{{ path('archive') }}">{{ 'menu.left.archive'|trans }} <span class="numberItems grey-text">{{ count_entries('archive') }}</span></a>
+            </li>
+            <li class="bold {% if activeRoute == 'with_annotations' %}active{% endif %}">
+                <a class="waves-effect" href="{{ path('with_annotations') }}">{{ 'menu.left.with_annotations'|trans }} <span class="numberItems grey-text">{{ count_entries('with_annotations') }}</span></a>
             </li>
             <li class="bold {% if activeRoute == 'all' %}active{% endif %}">
                 <a class="waves-effect" href="{{ path('all') }}">{{ 'menu.left.all_articles'|trans }} <span class="numberItems grey-text">{{ count_entries('all') }}</span></a>

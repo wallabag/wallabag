@@ -19,6 +19,7 @@ menu:
         starred: Favoriler
         archive: Arşiv
         all_articles: Hepsi
+        # with_annotations: 'With annotations'
         config: Yapılandırma
         tags: Etiketler
         import: İçe Aktar
@@ -315,6 +316,7 @@ entry:
         starred: Favorilenmiş makaleler
         archived: Arşivlenmiş makaleler
         filtered: Fitrelenmiş makaleler
+        # with_annotations: 'Entries with annotations'
         filtered_tags: 'Etiket ile filtrele:'
         filtered_search: 'Arama kriteri ile filtrele:'
         untagged: Etiketlenmemiş makaleler

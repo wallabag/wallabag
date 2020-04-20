@@ -13,6 +13,7 @@ menu:
         starred: 'Cu steluță'
         archive: 'Arhivă'
         all_articles: 'Toate'
+        # with_annotations: 'With annotations'
         config: 'Configurație'
         tags: 'Tag-uri'
         howto: 'Cum să'
@@ -64,6 +65,17 @@ config:
         new_password_label: 'Parola nouă'
         repeat_new_password_label: ''
 entry:
+    # default_title: 'Title of the entry'
+    page_titles:
+        # unread: 'Unread entries'
+        # starred: 'Starred entries'
+        # archived: 'Archived entries'
+        # filtered: 'Filtered entries'
+        # with_annotations: 'Entries with annotations'
+        # filtered_tags: 'Filtered by tags:'
+        # filtered_search: 'Filtered by search:'
+        # untagged: 'Untagged entries'
+        # all: 'All entries'
     list:
         reading_time: 'timp estimat de citire'
         reading_time_minutes: 'timp estimat de citire: %readingTime% min'

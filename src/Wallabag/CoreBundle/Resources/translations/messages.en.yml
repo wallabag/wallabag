@@ -19,6 +19,7 @@ menu:
         starred: Starred
         archive: Archive
         all_articles: All entries
+        with_annotations: With annotations
         config: Config
         tags: Tags
         internal_settings: Internal Settings
@@ -220,6 +221,7 @@ entry:
         starred: Starred entries
         archived: Archived entries
         filtered: Filtered entries
+        with_annotations: Entries with annotations
         filtered_tags: 'Filtered by tags:'
         filtered_search: 'Filtered by search:'
         untagged: Untagged entries
