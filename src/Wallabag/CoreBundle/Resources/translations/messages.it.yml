@@ -41,6 +41,7 @@ menu:
         filter_entries: 'Filtra contenuti'
         # random_entry: Jump to a random entry from that list
         export: 'Esporta'
+        # account: 'My account'
     search_form:
         input_label: 'Inserisci qui la tua ricerca'
 

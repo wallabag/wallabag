@@ -41,6 +41,7 @@ menu:
         filter_entries: 'ตัวกรองรายการ'
         # random_entry: Jump to a random entry from that list
         export: 'นำข้อมูลออก'
+        # account: 'My account'
     search_form:
         input_label: 'ค้นหาที่นี้'
 

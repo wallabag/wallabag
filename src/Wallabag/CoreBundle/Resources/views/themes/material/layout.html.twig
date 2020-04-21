@@ -62,44 +62,8 @@
             <li class="bold {% if activeRoute == 'all' %}active{% endif %}">
                 <a class="waves-effect" href="{{ path('all') }}">{{ 'menu.left.all_articles'|trans }} <span class="numberItems grey-text">{{ count_entries('all') }}</span></a>
             </li>
-            <li class="bold border-bottom {% if currentRoute == 'tags' %}active{% endif %}">
+            <li class="bold {% if currentRoute == 'tags' %}active{% endif %}">
                 <a class="waves-effect" href="{{ path('tag') }}">{{ 'menu.left.tags'|trans }} <span class="numberItems grey-text">{{ count_tags() }}</span></a>
-            </li>
-            <li class="bold {% if currentRoute == 'config' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('config') }}">{{ 'menu.left.config'|trans }}</a>
-            </li>
-            {% if craue_setting('restricted_access') %}
-            <li class="bold {% if currentRoute starts with 'site_credentials_' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('site_credentials_index') }}">{{ 'menu.left.site_credentials'|trans }}</a>
-            </li>
-            {% endif %}
-            {% if is_granted('ROLE_SUPER_ADMIN') %}
-                <li class="bold {% if currentRoute starts with 'user_' %}active{% endif %}">
-                    <a class="waves-effect" href="{{ path('user_index') }}">{{ 'menu.left.users_management'|trans }}</a>
-                </li>
-
-                <li class="bold {% if currentRoute == 'craue_config_settings_modify' %}active{% endif %}">
-                    <a class="waves-effect" href="{{ path('craue_config_settings_modify') }}">{{ 'menu.left.internal_settings'|trans }}</a>
-                </li>
-
-                <li class="bold border-bottom {% if currentRoute == 'ignore_origin_instance_rules_index' %}active{% endif %}">
-                    <a class="waves-effect" href="{{ path('ignore_origin_instance_rules_index') }}">{{ 'menu.left.ignore_origin_instance_rules'|trans }}</a>
-                </li>
-            {% endif %}
-            <li class="bold {% if currentRoute == 'import' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('import') }}">{{ 'menu.left.import'|trans }}</a>
-            </li>
-            <li class="bold {% if currentRoute == 'developer' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('developer') }}">{{ 'menu.left.developer'|trans }}</a>
-            </li>
-            <li class="bold {% if currentRoute == 'howto' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('howto') }}">{{ 'menu.left.howto'|trans }}</a>
-            </li>
-            <li class="bold {% if currentRoute == 'quickstart' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('quickstart') }}">{{ 'menu.left.quickstart'|trans }}</a>
-            </li>
-            <li class="bold">
-                <a class="waves-effect icon icon-power" href="{{ path('fos_user_security_logout') }}">{{ 'menu.left.logout'|trans }}</a>
             </li>
         </ul>
         <div class="nav-panels">
@@ -128,7 +92,6 @@
                             <i class="material-icons">casino</i>
                         </a>
                     </li>
-                    {% endif %}
                     <li id="button_filters">
                         <a class="nav-panel-menu button-collapse-right tooltipped js-filters-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-activates="filters">
                             <i class="material-icons">filter_list</i>
@@ -139,7 +102,33 @@
                             <i class="material-icons">file_download</i>
                         </a>
                     </li>
+                    {% endif %}
+                    <li class="bold">
+                        <a class="wave-effect tooltipped dropdown-button" data-beloworigin="true" data-constrainwidth="false" data-activates="dropdown-account" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.account'|trans }}" href="#" id="news_menu">
+                            <i class="material-icons" id="news_link">account_circle</i>
+                        </a>
+                    </li>
                 </ul>
+                <ul id="dropdown-account" class="dropdown-content">
+                    <li><a href="{{ path('config') }}"><i class="material-icons">settings</i> {{ 'menu.left.config'|trans }}</a></li>
+                    <li><a href="{{ path('developer') }}"><i class="material-icons">smartphone</i> {{ 'menu.left.developer'|trans }}</a></li>
+                    <li><a href="{{ path('import') }}"><i class="material-icons">import_export</i> {{ 'menu.left.import'|trans }}</a></li>
+                    {% if craue_setting('restricted_access') %}
+                        <li><a href="{{ path('site_credentials_index') }}"><i class="material-icons">vpn_key</i> {{ 'menu.left.site_credentials'|trans }}</a></li>
+                    {% endif %}
+                    <li class="divider"></li>
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        <li><a href="{{ path('user_index') }}"><i class="material-icons">people</i>{{ 'menu.left.users_management'|trans }}</a></li>
+                        <li><a href="{{ path('craue_config_settings_modify') }}"><i class="material-icons">settings</i> {{ 'menu.left.internal_settings'|trans }}</a></li>
+                        <li><a href="{{ path('ignore_origin_instance_rules_index') }}"><i class="material-icons">build</i> {{ 'menu.left.ignore_origin_instance_rules'|trans }}</a></li>
+                    {% endif %}
+                    <li class="divider"></li>
+                    <li><a href="{{ path('howto') }}"><i class="material-icons">live_help</i> {{ 'menu.left.howto'|trans }}</a></li>
+                    <li><a href="{{ path('quickstart') }}"><i class="material-icons">assistant_photo</i> {{ 'menu.left.quickstart'|trans }}</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}"><i class="material-icons">input</i> {{ 'menu.left.logout'|trans }}</a></li>
+                </ul>
+
             </div>
             {{ render(controller("WallabagCoreBundle:Entry:searchForm", {'currentRoute': currentRoute})) }}
             {{ render(controller("WallabagCoreBundle:Entry:addEntryForm")) }}

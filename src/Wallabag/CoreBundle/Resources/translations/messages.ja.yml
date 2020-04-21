@@ -40,6 +40,7 @@ menu:
         filter_entries: 'フィルターを使用'
         random_entry: このリストの中からランダムに記事に記事を表示
         export: 'エクスポート'
+        # account: 'My account'
     search_form:
         input_label: '検索内容を入力'
 

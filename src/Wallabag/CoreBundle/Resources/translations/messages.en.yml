@@ -41,6 +41,7 @@ menu:
         filter_entries: 'Filter entries'
         random_entry: Jump to a random entry from that list
         export: 'Export'
+        account: 'My account'
     search_form:
         input_label: 'Enter your search here'
 

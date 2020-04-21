@@ -41,6 +41,7 @@ menu:
         filter_entries: 'Filtrar los articles'
         random_entry: "Sautar a un article a l'azard"
         export: 'Exportar'
+        # account: 'My account'
     search_form:
         input_label: 'Picatz vòstre mot-clau a cercar aquí'
 

@@ -41,6 +41,7 @@ menu:
         filter_entries: 'Filtrar los artículos'
         random_entry: 'Ir a un artículo aleatório de esta lista'
         export: 'Exportar'
+        # account: 'My account'
     search_form:
         input_label: 'Introduzca su búsqueda aquí'
 

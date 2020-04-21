@@ -41,6 +41,7 @@ menu:
         filter_entries: 'Filtrele'
         # random_entry: Jump to a random entry from that list
         export: 'Dışa Aktar'
+        # account: 'My account'
     search_form:
         input_label: 'Aramak istediğiniz herhangi bir şey yazın'
 

@@ -41,6 +41,7 @@ menu:
         filter_entries: 'Фильтр записей'
         # random_entry: Jump to a random entry from that list
         export: 'Экспорт'
+        # account: 'My account'
     search_form:
         input_label: 'Введите текст для поиска'
 

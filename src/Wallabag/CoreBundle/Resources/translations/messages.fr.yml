@@ -41,6 +41,7 @@ menu:
         filter_entries: "Filtrer les articles"
         random_entry: Aller à un article aléatoire de cette liste
         export: "Exporter"
+        account: "Mon compte"
     search_form:
         input_label: "Saisissez votre terme de recherche"
 
