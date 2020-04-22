@@ -373,6 +373,7 @@ fos_js_routing:
         - howto
         - fos_user_security_logout
         - new
+        - archive_entry
 
 jms_serializer:
     handlers:

@@ -120,4 +120,30 @@ $(document).ready(() => {
       });
     });
   }
+
+  $('.markasread').on('click', () => {
+    const article = document.getElementById('article');
+    const link = document.getElementById('link-archive');
+    const articleId = article.dataset.id;
+    const xhr = new XMLHttpRequest();
+
+    xhr.onload = function toggleArchive() {
+      if (xhr.status === 200) {
+        const previousStatus = document.getElementById('archive-icon').innerHTML;
+        let status = link.dataset.iconUnread;
+        let label = link.dataset.labelUnread;
+        if (previousStatus === 'unarchive') {
+          status = link.dataset.iconRead;
+          label = link.dataset.labelRead;
+        }
+        document.getElementById('archive-icon').innerHTML = status;
+        document.getElementById('archive-label').innerHTML = label;
+        window.Materialize.toast(xhr.responseText, 4000);
+      }
+    };
+
+    const url = `${Routing.generate('archive_entry', { id: articleId })}?some_var_name=true`;
+    xhr.open('GET', url, false);
+    xhr.send(null);
+  });
 });

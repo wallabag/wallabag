@@ -67,9 +67,9 @@
         {% endif %}
 
         <li class="bold hide-on-med-and-down">
-            <a class="waves-effect collapsible-header markasread" title="{{ markAsReadLabel|trans }}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
-                <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
-                <span>{{ markAsReadLabel|trans }}</span>
+            <a class="waves-effect collapsible-header markasread" title="{{ markAsReadLabel|trans }}" href="#" data-icon-read="done" data-icon-unread="unarchive" data-label-read="{{ 'entry.view.left_menu.set_as_read'|trans }}" data-label-unread="{{ 'entry.view.left_menu.set_as_unread'|trans }}" id="link-archive">
+                <i class="material-icons small" id="archive-icon">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
+                <span id="archive-label">{{ markAsReadLabel|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
@@ -221,7 +221,7 @@
 {% endblock %}
 
 {% block content %}
-    <div id="article">
+    <div id="article" data-id="{{ entry.id }}">
         <header class="mbm">
             <h1><span{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>{{ entry.title|striptags|default('entry.default_title'|trans)|raw }}</span> <a href="{{ path('edit', { 'id': entry.id }) }}" title="{{ 'entry.view.edit_title'|trans }}"><i class="material-icons grey-text">create</i></a></h1>
         </header>
@@ -291,7 +291,6 @@
             </ul>
         </div>
     </div>
-
 <script id="annotationroutes" type="application/json">
 {
     "prefix": "",

@@ -7,6 +7,7 @@ use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -371,6 +372,11 @@ class EntryController extends Controller
             $message = 'flashes.entry.notice.entry_archived';
         }
 
+        if ($request->query->get('some_var_name')) {
+
+            return new JsonResponse($this->get('translator')->trans($message));
+        }
+
         $this->get('session')->getFlashBag()->add(
             'notice',
             $message
@@ -380,6 +386,8 @@ class EntryController extends Controller
 
         return $this->redirect($redirectUrl);
     }
+
+    
 
     /**
      * Changes starred status for an entry.
