@@ -223,46 +223,46 @@
 {% block content %}
     <div id="article">
         <header class="mbm">
-            <h1><span{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>{{ entry.title|striptags|default('entry.default_title'|trans)|raw }}</span> <a href="{{ path('edit', { 'id': entry.id }) }}" title="{{ 'entry.view.edit_title'|trans }}">✎</a></h1>
+            <h1><span{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>{{ entry.title|striptags|default('entry.default_title'|trans)|raw }}</span> <a href="{{ path('edit', { 'id': entry.id }) }}" title="{{ 'entry.view.edit_title'|trans }}"><i class="material-icons grey-text">create</i></a></h1>
         </header>
         <aside>
-            <div class="tools">
+            <div class="tools grey-text">
                 <ul class="stats">
                     <li>
                         {% include "@WallabagCore/themes/material/Entry/_reading_time.html.twig" with {'entry': entry} only %}
                     </li>
                     <li>
-                        <i class="material-icons" title="{{ 'entry.view.created_at'|trans }}">today</i>
+                        <i class="material-icons grey-text" title="{{ 'entry.view.created_at'|trans }}">today</i>
                         {{ entry.createdAt|date('Y-m-d H:i') }}
                     </li>
                     {% if entry.publishedAt is not null %}
                     <li>
-                        <i class="material-icons" title="{{ 'entry.view.published_at'|trans }}">create</i>
+                        <i class="material-icons grey-text" title="{{ 'entry.view.published_at'|trans }}">create</i>
                         {{ entry.publishedAt|date('Y-m-d H:i') }}
                     </li>
                     {% endif %}
                     {% if entry.publishedBy is not empty %}
                         <li>
-                            <i class="material-icons" title="{{ 'entry.view.published_by'|trans }}">person</i>
+                            <i class="material-icons grey-text" title="{{ 'entry.view.published_by'|trans }}">person</i>
                             {% for author in entry.publishedBy %}
                                 {{ author|raw }}{% if not loop.last %}, {% endif %}
                             {% endfor %}
                         </li>
                     {% endif %}
                     <li>
-                        <i class="material-icons">link</i>
-                        <a href="{{ entry.url|e }}" target="_blank" rel="noopener" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|striptags }}" class="tool">
+                        <i class="material-icons grey-text">link</i>
+                        <a href="{{ entry.url|e }}" target="_blank" rel="noopener" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|striptags }}" class="tool grey-text">
                             {{ entry.domainName|removeWww }}
                         </a>
                     </li>
                     <li>
-                        <i class="material-icons">comment</i>
+                        <i class="material-icons grey-text">comment</i>
                         {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}
                     </li>
                     {% if entry.originUrl is not empty %}
                         <li>
-                            <i class="material-icons" title="{{ 'entry.view.provided_by'|trans }}">launch</i>
-                            <a href="{{ entry.originUrl|e }}" target="_blank" rel="noopener" class="tool">
+                            <i class="material-icons grey-text" title="{{ 'entry.view.provided_by'|trans }}">launch</i>
+                            <a href="{{ entry.originUrl|e }}" target="_blank" rel="noopener" class="tool grey-text">
                                 {{ entry.originUrl|striptags|removeSchemeAndWww|truncate(32) }}
                             </a>
                         </li>
