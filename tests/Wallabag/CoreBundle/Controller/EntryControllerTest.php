@@ -527,7 +527,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertGreaterThan(1, $title = $crawler->filter('div[id=article] h1')->extract(['_text']));
         $this->assertContains('My updated title hehe :)', $title[0]);
-        $this->assertGreaterThan(1, $stats = $crawler->filter('div[class=tools] ul[class=stats] li a[class=tool]')->extract(['_text']));
+        $this->assertGreaterThan(1, $stats = $crawler->filter('div[class="tools grey-text"] ul[class=stats] li a[class="tool grey-text"]')->extract(['_text']));
         $this->assertContains('example.io', trim($stats[1]));
     }
 
@@ -562,7 +562,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $title);
         $this->assertContains('My updated title hehe :)', $title[0]);
 
-        $stats = $crawler->filter('div[class=tools] ul[class=stats] li a[class=tool]')->extract(['_text']);
+        $stats = $crawler->filter('div[class="tools grey-text"] ul[class=stats] li a[class="tool grey-text"]')->extract(['_text']);
         $this->assertCount(1, $stats);
         $this->assertNotContains('example.io', trim($stats[0]));
     }
