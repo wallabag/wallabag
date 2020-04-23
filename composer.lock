@@ -3685,16 +3685,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "2.1.1",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "6b3e53b2dd3c85b8128dde3307b838885515764b"
+                "reference": "deb677eb45eddb99e1dfcfe56bb4216fd12894ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/6b3e53b2dd3c85b8128dde3307b838885515764b",
-                "reference": "6b3e53b2dd3c85b8128dde3307b838885515764b",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/deb677eb45eddb99e1dfcfe56bb4216fd12894ed",
+                "reference": "deb677eb45eddb99e1dfcfe56bb4216fd12894ed",
                 "shasum": ""
             },
             "require": {
@@ -3714,9 +3714,8 @@
                 "psr/http-message": "^1.0",
                 "simplepie/simplepie": "^1.3.1",
                 "smalot/pdfparser": "~0.11",
-                "symfony/options-resolver": "~2.6|~3.0|~4.0",
-                "true/punycode": "~2.1",
-                "wallabag/tcpdf": "^6.2.26"
+                "symfony/options-resolver": "~2.6|~3.0|~4.0|~5.0",
+                "true/punycode": "~2.1"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "~2.14",
@@ -3725,7 +3724,7 @@
                 "php-http/mock-client": "^1.2",
                 "phpstan/phpstan": "^0.11",
                 "phpstan/phpstan-phpunit": "^0.11",
-                "symfony/phpunit-bridge": "~2.6|~3.0|~4.0"
+                "symfony/phpunit-bridge": "~2.6|~3.0|~4.0|^5.0"
             },
             "type": "library",
             "extra": {
@@ -3755,28 +3754,28 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2020-01-23T08:59:01+00:00"
+            "time": "2020-04-15T11:37:45+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.100",
+            "version": "1.0.105",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "d97cfd935302337604f5d778969bc94c12de086a"
+                "reference": "489208b33e9f43f3812626b0543cfe42ef896052"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/d97cfd935302337604f5d778969bc94c12de086a",
-                "reference": "d97cfd935302337604f5d778969bc94c12de086a",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/489208b33e9f43f3812626b0543cfe42ef896052",
+                "reference": "489208b33e9f43f3812626b0543cfe42ef896052",
                 "shasum": ""
             },
             "require": {
-                "symfony/finder": "~2.6|~3.0|~4.0"
+                "symfony/finder": "~2.6|~3.0|~4.0|~5.0"
             },
             "require-dev": {
                 "liip/rmt": "1.2.*",
-                "symfony/phpunit-bridge": "^4.3"
+                "symfony/phpunit-bridge": "^4.3|^5.0"
             },
             "type": "library",
             "autoload": {
@@ -3795,7 +3794,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2020-01-23T09:05:19+00:00"
+            "time": "2020-04-21T12:42:03+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -7768,16 +7767,16 @@
         },
         {
             "name": "smalot/pdfparser",
-            "version": "v0.14.0",
+            "version": "v0.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smalot/pdfparser.git",
-                "reference": "ec72a99028ba5e21a0acad92047b85e128cbf81f"
+                "reference": "a53df87a048b943ff7380765b300e2b002e61de4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smalot/pdfparser/zipball/ec72a99028ba5e21a0acad92047b85e128cbf81f",
-                "reference": "ec72a99028ba5e21a0acad92047b85e128cbf81f",
+                "url": "https://api.github.com/repos/smalot/pdfparser/zipball/a53df87a048b943ff7380765b300e2b002e61de4",
+                "reference": "a53df87a048b943ff7380765b300e2b002e61de4",
                 "shasum": ""
             },
             "require": {
@@ -7801,7 +7800,7 @@
             ],
             "authors": [
                 {
-                    "name": "Sebastien Malot",
+                    "name": "Sebastien MALOT",
                     "email": "sebastien@malot.fr"
                 }
             ],
@@ -7814,7 +7813,7 @@
                 "pdf",
                 "text"
             ],
-            "time": "2019-01-23T09:14:37+00:00"
+            "time": "2020-04-21T07:28:21+00:00"
         },
         {
             "name": "spomky-labs/otphp",
