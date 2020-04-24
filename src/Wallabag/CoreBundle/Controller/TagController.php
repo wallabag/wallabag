@@ -131,6 +131,7 @@ class TagController extends Controller
 
         return $this->render('WallabagCoreBundle:Entry:entries.html.twig', [
             'form' => null,
+            'sortForm' => null,
             'entries' => $entries,
             'currentPage' => $page,
             'tag' => $tag,

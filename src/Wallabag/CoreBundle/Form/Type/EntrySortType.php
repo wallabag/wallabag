@@ -2,8 +2,6 @@
 
 namespace Wallabag\CoreBundle\Form\Type;
 
-use Doctrine\ORM\EntityRepository;
-use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\CheckboxFilterType;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\ChoiceFilterType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,12 +24,20 @@ class EntrySortType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('sortOrder', CheckboxFilterType::class)
+            ->add('sortOrder', ChoiceFilterType::class, [
+                'choices' => [
+                    'entry.sort.ascending' => 'asc',
+                    'entry.sort.descending' => 'desc',
+                ],
+                'label' => 'entry.sort.order_label',
+            ])
             ->add('sortType', ChoiceFilterType::class, [
                 'choices' => [
-                    'createdAt' => 'createdAt',
-                    'title' => 'title',
-                    'updatedAt' => 'updatedAt',
+                    'entry.sort.by.creation_date' => 'createdAt',
+                    'entry.sort.by.starred_date' => 'starredAt',
+                    'entry.sort.by.archive_date' => 'archivedAt',
+                    'entry.sort.by.title' => 'title',
+                    'entry.sort.by.last_updated' => 'updatedAt',
                 ],
                 'label' => 'entry.sort.status_label',
             ])

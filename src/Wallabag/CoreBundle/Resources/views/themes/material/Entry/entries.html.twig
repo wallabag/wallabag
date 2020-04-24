@@ -211,22 +211,24 @@
     <!-- Sort -->
     {% if sortForm is not null %}
     <div id="sort" class="side-nav right-aligned">
-        <form action="{{ path('all') }}">
+        <form action="{{ previousRoute }}">
         <h4 class="center">{{ 'entry.sort.title'|trans }}</h4>
 
             <div class="row">
-                <div class="input-field col s6 with-checkbox">
-                    {{ form_widget(sortForm.sortType) }}
+                <div class="col s12">
                     {{ form_label(sortForm.sortType) }}
                 </div>
 
+                <div class="input-field col s12">
+                    {{ form_widget(sortForm.sortType) }}
+                </div>
+
                 <div class="col s12">
-                    <div class="switch">
-                        <label>Ascendant
-                        {{ form_widget(sortForm.sortOrder) }} <span class="lever"></span>
-                            Descendant
-                        </label>
-                    </div>
+                    {{ form_label(sortForm.sortOrder) }}
+                </div>
+
+                <div class="input-field col s12">
+                    {{ form_widget(sortForm.sortOrder) }}
                 </div>
 
                 <div class="col s12">

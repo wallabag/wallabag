@@ -260,11 +260,12 @@ entry:
     sort:
         title: 'Sort options'
         status_label: 'Sort by'
+        order_label: 'Order'
         by:
             creation_date: 'Creation date'
             title: 'Title'
             last_updated: 'Last updated'
-        ascending: 'Asencending'
+        ascending: 'Ascending'
         descending: 'Descending'
     view:
         left_menu:
