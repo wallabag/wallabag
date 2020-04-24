@@ -1015,6 +1015,52 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertCount(2, $crawler->filter('li.entry'));
     }
 
+    public function testSortOnTitle()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/unread/list');
+        $form = $crawler->filter('button[id=submit-sort]')->form();
+        $data = [
+            'entry_sort[sortType]' => 'title',
+            'entry_sort[sortOrder]' => 'asc',
+        ];
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(4, $crawler->filter('li.entry'));
+
+        $matches = [];
+        preg_match_all('/test title entry([0-9])/', $client->getResponse()->getContent(), $matches);
+
+        $results = array_values(array_unique($matches[0]));
+
+        $ids = [1, 2, 4, 5];
+
+        foreach ($results as $key => $result) {
+            $this->assertSame('test title entry' . $ids[$key], $result);
+        }
+
+        rsort($ids);
+
+        $crawler = $client->request('GET', '/unread/list');
+        $form = $crawler->filter('button[id=submit-sort]')->form();
+        $data = [
+            'entry_sort[sortType]' => 'title',
+            'entry_sort[sortOrder]' => 'desc',
+        ];
+        $crawler = $client->submit($form, $data);
+
+        $matches = [];
+        preg_match_all('/test title entry([0-9])/', $client->getResponse()->getContent(), $matches);
+
+        $results = array_values(array_unique($matches[0]));
+
+        foreach ($results as $key => $result) {
+            $this->assertSame('test title entry' . $ids[$key], $result);
+        }
+    }
+
     public function testShareEntryPublicly()
     {
         $this->logInAs('admin');

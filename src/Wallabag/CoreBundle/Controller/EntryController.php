@@ -532,13 +532,17 @@ class EntryController extends Controller
         $repository = $this->get('wallabag_core.entry_repository');
         $searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
         $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
-        $direction = (null !== $request->query->get('entry_sort')['sortOrder'] ? $request->query->get('entry_sort')['sortOrder'] : 'asc');
-
-        // defined as null by default because each repository method have the right field as default value too
-        // like `getBuilderForStarredByUser` will have `starredAt` sort by default
+        $direction = 'asc';
         $sortBy = null;
-        if (\in_array($request->get('entry_sort')['sortType'], ['id', 'title', 'createdAt', 'updatedAt', 'starredAt', 'archivedAt'], true)) {
-            $sortBy = $request->get('entry_sort')['sortType'];
+
+        if (null !== ($request->query->get('entry_sort'))) {
+            $direction = (null !== $request->query->get('entry_sort')['sortOrder'] ? $request->query->get('entry_sort')['sortOrder'] : 'asc');
+
+            // defined as null by default because each repository method have the right field as default value too
+            // like `getBuilderForStarredByUser` will have `starredAt` sort by default
+            if (\in_array($request->get('entry_sort')['sortType'], ['id', 'title', 'createdAt', 'updatedAt', 'starredAt', 'archivedAt'], true)) {
+                $sortBy = $request->get('entry_sort')['sortType'];
+            }
         }
 
         switch ($type) {
