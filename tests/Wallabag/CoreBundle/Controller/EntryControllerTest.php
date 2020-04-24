@@ -1557,4 +1557,81 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'All random');
     }
+
+    public function testMass()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $entry1 = new Entry($this->getLoggedInUser());
+        $entry1->setUrl($this->url);
+        $this->getEntityManager()->persist($entry1);
+
+        $entry2 = new Entry($this->getLoggedInUser());
+        $entry2->setUrl($this->url);
+        $this->getEntityManager()->persist($entry2);
+
+        $this->getEntityManager()->flush();
+        $this->getEntityManager()->clear();
+
+        $entries = [];
+        $entries[] = $entry1->getId();
+        $entries[] = $entry2->getId();
+
+        // Mass actions : archive
+        $client->request('POST', '/mass', [
+            'toggle-archive' => '',
+            'entry-checkbox' => $entries,
+        ]);
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $res = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->find($entry1->getId());
+
+        $this->assertSame(1, $res->isArchived());
+
+        $res = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->find($entry2->getId());
+
+        $this->assertSame(1, $res->isArchived());
+
+        // Mass actions : star
+        $client->request('POST', '/mass', [
+            'toggle-star' => '',
+            'entry-checkbox' => $entries,
+        ]);
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $res = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->find($entry1->getId());
+
+        $this->assertSame(1, $res->isStarred());
+
+        $res = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->find($entry2->getId());
+
+        $this->assertSame(1, $res->isStarred());
+
+        // Mass actions : delete
+        $client->request('POST', '/mass', [
+            'delete' => '',
+            'entry-checkbox' => $entries,
+        ]);
+
+        $client->request('GET', '/delete/' . $entry1->getId());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
+
+        $client->request('GET', '/delete/' . $entry2->getId());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
+    }
 }

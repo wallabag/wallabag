@@ -105,4 +105,17 @@ $(document).ready(() => {
     $('.nav-panels').css('background', 'transparent');
     return false;
   });
+
+  const mainCheckboxes = document.querySelectorAll('[data-js="checkboxes-toggle"]');
+  if (mainCheckboxes.length) {
+    [...mainCheckboxes].forEach((el) => {
+      el.addEventListener('click', () => {
+        const checkboxes = document.querySelectorAll(el.dataset.toggle);
+        [...checkboxes].forEach((checkbox) => {
+          const checkboxClone = checkbox;
+          checkboxClone.checked = el.checked;
+        });
+      });
+    });
+  }
 });

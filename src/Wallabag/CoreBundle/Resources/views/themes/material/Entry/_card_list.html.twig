@@ -1,4 +1,5 @@
 <div class="card-stacked">
+    {% include "@WallabagCore/themes/material/Entry/Card/_mass_checkbox.html.twig" with {'entry': entry} only %}
     <div class="card-preview">
         <a href="{{ path('view', { 'id': entry.id }) }}">
             {% set previewClassModifier = entry.previewPicture ? '' : ' preview--default' %}
