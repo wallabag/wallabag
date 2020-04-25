@@ -111,7 +111,7 @@ config:
     email_label: Adresse courriel
     twoFactorAuthentication_label: Double authentification
     help_twoFactorAuthentication: Si vous activez 2FA, à chaque tentative de connexion
-      à wallabag, vous recevrez un code par email.
+      à wallabag, vous recevrez un code par courriel.
     delete:
       title: Supprimer mon compte (attention danger !)
       description: Si vous confirmez la suppression de votre compte, TOUS les articles,
