@@ -269,7 +269,7 @@ entry:
             # last_updated: 'Last updated'
         # ascending: 'Ascending'
         # descending: 'Descending'
-        # sort: 'Sort'
+        # button: 'Sort'
     view:
         left_menu:
             # back_to_top: 'Back to top'

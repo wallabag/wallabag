@@ -269,7 +269,7 @@ entry:
             last_updated: 'Dernière mise à jour'
         ascending: 'Ascendant'
         descending: 'Descendant'
-        sort: 'Trier'
+        button: 'Trier'
     view:
         left_menu:
             back_to_top: "Revenir en haut"
