@@ -1,7 +1,7 @@
 # settings_changed: Configuration updated
 download_pictures: Scarica le immagini sul tuo server
 carrot: Abilita la condivisione con Carrot
-diaspora_url: Diaspora URL, se il servizio è abilitato
+diaspora_url: URL di diaspora*, se il servizio è abilitato
 export_epub: Abilita esportazione ePub
 export_mobi: Abilita esportazione .mobi
 export_pdf: Abilita esportazione PDF
@@ -15,7 +15,7 @@ shaarli_url: Shaarli URL, se il servizio è abilitato
 scuttle_url: Scuttle URL, se il servizio è abilitato
 unmark_url: Unmark URL, se il servizio è abilitato
 share_diaspora: Abilita la condivisione con Diaspora
-share_mail: Abilita la condivisione per email
+share_mail: Abilita la condivisione per e-mail
 share_shaarli: Abilita la condivisione con Shaarli
 share_scuttle: Abilita la condivisione con Scuttle
 share_twitter: Abilita la condivisione con Twitter
@@ -38,3 +38,4 @@ demo_mode_username: "Utente Demo"
 api_user_registration: Abilita la registrazione dell'utente attraverso l'API
 # store_article_headers: Enable if wallabag stores HTTP headers for each article
 # shaarli_share_origin_url: Enable sharing origin url to Shaarli, if the service is enabled
+settings_changed: Configurazione aggiornata
