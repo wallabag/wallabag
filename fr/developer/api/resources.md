@@ -10,12 +10,9 @@ une liste non exhaustive :
     Bogdanov.
 -   [.NET library for the wallabag v2
     API](https://github.com/jlnostr/wallabag-api) par Julian Oster.
--   [Python API for wallabag](https://github.com/foxmask/wallabag_api)
-    par FoxMaSk, pour son projet [Trigger
-    Happy](https://blog.trigger-happy.eu/).
 -   [Un plugin](https://github.com/joshp23/ttrss-to-wallabag-v2) conçu
     pour [Tiny Tiny
-    RSS](https://tt-rss.org/gitlab/fox/tt-rss/wikis/home) qui utilise
+    RSS](https://tt-rss.org/) qui utilise
     l'API wallabag v2. Par Josh Panter.
 -   [Golang wrapper for the wallabag
     API](https://github.com/Strubbl/wallabago) par Strubbl, pour son
