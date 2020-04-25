@@ -1041,12 +1041,207 @@ class EntryControllerTest extends WallabagCoreTestCase
             $this->assertSame('test title entry' . $ids[$key], $result);
         }
 
-        rsort($ids);
+        $ids = array_reverse($ids);
 
         $crawler = $client->request('GET', '/unread/list');
         $form = $crawler->filter('button[id=submit-sort]')->form();
         $data = [
             'entry_sort[sortType]' => 'title',
+            'entry_sort[sortOrder]' => 'desc',
+        ];
+        $crawler = $client->submit($form, $data);
+
+        $matches = [];
+        preg_match_all('/test title entry([0-9])/', $client->getResponse()->getContent(), $matches);
+
+        $results = array_values(array_unique($matches[0]));
+
+        foreach ($results as $key => $result) {
+            $this->assertSame('test title entry' . $ids[$key], $result);
+        }
+    }
+
+    public function testSortOnCreationDate()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $entry1 = new Entry($this->getLoggedInUser());
+        $entry1->setTitle('test title entry7');
+        $entry1->setCreatedAt(new \DateTime('2013-04-03T13:37:00'));
+        $this->getEntityManager()->persist($entry1);
+
+        $entry2 = new Entry($this->getLoggedInUser());
+        $entry2->setTitle('test title entry8');
+        $entry2->setCreatedAt(new \DateTime('2012-04-03T13:37:00'));
+        $this->getEntityManager()->persist($entry2);
+
+        $entry3 = new Entry($this->getLoggedInUser());
+        $entry3->setTitle('test title entry9');
+        $entry3->setCreatedAt(new \DateTime('2014-04-03T13:37:00'));
+        $this->getEntityManager()->persist($entry3);
+
+        $this->getEntityManager()->flush();
+
+        $crawler = $client->request('GET', '/unread/list');
+        $form = $crawler->filter('button[id=submit-sort]')->form();
+        $data = [
+            'entry_sort[sortType]' => 'createdAt',
+            'entry_sort[sortOrder]' => 'asc',
+        ];
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(7, $crawler->filter('li.entry'));
+
+        $matches = [];
+        preg_match_all('/test title entry([0-9])/', $client->getResponse()->getContent(), $matches);
+
+        $results = array_values(array_unique($matches[0]));
+
+        $ids = [8, 7, 9, 1, 2, 4, 5];
+
+        foreach ($results as $key => $result) {
+            $this->assertSame('test title entry' . $ids[$key], $result);
+        }
+
+        $ids = array_reverse($ids);
+
+        $crawler = $client->request('GET', '/unread/list');
+        $form = $crawler->filter('button[id=submit-sort]')->form();
+        $data = [
+            'entry_sort[sortType]' => 'createdAt',
+            'entry_sort[sortOrder]' => 'desc',
+        ];
+        $crawler = $client->submit($form, $data);
+
+        $matches = [];
+        preg_match_all('/test title entry([0-9])/', $client->getResponse()->getContent(), $matches);
+
+        $results = array_values(array_unique($matches[0]));
+
+        foreach ($results as $key => $result) {
+            $this->assertSame('test title entry' . $ids[$key], $result);
+        }
+    }
+
+    public function testSortOnStarredDate()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $entry1 = new Entry($this->getLoggedInUser());
+        $entry1->setTitle('test title entry7');
+        $entry1->setStarred(true);
+        $entry1->setStarredAt(new \DateTime('2013-04-03T13:37:00'));
+        $this->getEntityManager()->persist($entry1);
+
+        $entry2 = new Entry($this->getLoggedInUser());
+        $entry2->setTitle('test title entry8');
+        $entry2->setStarred(true);
+        $entry2->setStarredAt(new \DateTime('2012-04-03T13:37:00'));
+        $this->getEntityManager()->persist($entry2);
+
+        $entry3 = new Entry($this->getLoggedInUser());
+        $entry3->setTitle('test title entry9');
+        $entry3->setStarred(true);
+        $entry3->setStarredAt(new \DateTime('2014-04-03T13:37:00'));
+        $this->getEntityManager()->persist($entry3);
+
+        $this->getEntityManager()->flush();
+
+        $crawler = $client->request('GET', '/starred/list');
+        $form = $crawler->filter('button[id=submit-sort]')->form();
+        $data = [
+            'entry_sort[sortType]' => 'starredAt',
+            'entry_sort[sortOrder]' => 'asc',
+        ];
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(4, $crawler->filter('li.entry'));
+
+        $matches = [];
+        preg_match_all('/test title entry([0-9])/', $client->getResponse()->getContent(), $matches);
+
+        $results = array_values(array_unique($matches[0]));
+
+        $ids = [5, 8, 7, 9];
+
+        foreach ($results as $key => $result) {
+            $this->assertSame('test title entry' . $ids[$key], $result);
+        }
+
+        $ids = array_reverse($ids);
+
+        $crawler = $client->request('GET', '/starred/list');
+        $form = $crawler->filter('button[id=submit-sort]')->form();
+        $data = [
+            'entry_sort[sortType]' => 'starredAt',
+            'entry_sort[sortOrder]' => 'desc',
+        ];
+        $crawler = $client->submit($form, $data);
+
+        $matches = [];
+        preg_match_all('/test title entry([0-9])/', $client->getResponse()->getContent(), $matches);
+
+        $results = array_values(array_unique($matches[0]));
+
+        foreach ($results as $key => $result) {
+            $this->assertSame('test title entry' . $ids[$key], $result);
+        }
+    }
+
+    public function testSortOnArchivedDate()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $entry1 = new Entry($this->getLoggedInUser());
+        $entry1->setTitle('test title entry7');
+        $entry1->setArchived(true);
+        $entry1->setArchivedAt(new \DateTime('2010-04-03T13:37:00'));
+        $this->getEntityManager()->persist($entry1);
+
+        $entry2 = new Entry($this->getLoggedInUser());
+        $entry2->setTitle('test title entry8');
+        $entry2->setArchived(true);
+        $entry2->setArchivedAt(new \DateTime('2000-04-03T13:37:00'));
+        $this->getEntityManager()->persist($entry2);
+
+        $entry3 = new Entry($this->getLoggedInUser());
+        $entry3->setTitle('test title entry9');
+        $entry3->setArchived(true);
+        $entry3->setArchivedAt(new \DateTime('2020-04-03T13:37:00'));
+        $this->getEntityManager()->persist($entry3);
+
+        $this->getEntityManager()->flush();
+
+        $crawler = $client->request('GET', '/archive/list');
+        $form = $crawler->filter('button[id=submit-sort]')->form();
+        $data = [
+            'entry_sort[sortType]' => 'archivedAt',
+            'entry_sort[sortOrder]' => 'asc',
+        ];
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(4, $crawler->filter('li.entry'));
+
+        $matches = [];
+        preg_match_all('/test title entry([0-9])/', $client->getResponse()->getContent(), $matches);
+
+        $results = array_values(array_unique($matches[0]));
+
+        $ids = [6, 8, 7, 9];
+
+        foreach ($results as $key => $result) {
+            $this->assertSame('test title entry' . $ids[$key], $result);
+        }
+
+        $ids = array_reverse($ids);
+
+        $crawler = $client->request('GET', '/archive/list');
+        $form = $crawler->filter('button[id=submit-sort]')->form();
+        $data = [
+            'entry_sort[sortType]' => 'archivedAt',
             'entry_sort[sortOrder]' => 'desc',
         ];
         $crawler = $client->submit($form, $data);

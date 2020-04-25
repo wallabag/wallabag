@@ -36,8 +36,8 @@ class EntrySortType extends AbstractType
                     'entry.sort.by.creation_date' => 'createdAt',
                     'entry.sort.by.starred_date' => 'starredAt',
                     'entry.sort.by.archive_date' => 'archivedAt',
-                    'entry.sort.by.title' => 'title',
                     'entry.sort.by.last_updated' => 'updatedAt',
+                    'entry.sort.by.title' => 'title',
                 ],
                 'label' => 'entry.sort.status_label',
             ])

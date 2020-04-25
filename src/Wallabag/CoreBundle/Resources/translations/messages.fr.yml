@@ -260,12 +260,16 @@ entry:
     sort:
         title: 'Options de tri'
         status_label: 'Trier par'
+        order_label: 'Ordre'
         by:
             creation_date: 'Date de création'
+            starred_date: 'Date de mise en favori date'
+            archive_date: "Date d'archivage"
             title: 'Titre'
             last_updated: 'Dernière mise à jour'
         ascending: 'Ascendant'
         descending: 'Descendant'
+        sort: 'Trier'
     view:
         left_menu:
             back_to_top: "Revenir en haut"

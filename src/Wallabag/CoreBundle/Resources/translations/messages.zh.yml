@@ -236,6 +236,19 @@ entry:
         action:
             clear: '清除'
             filter: '筛选'
+    sort:
+        # title: 'Sort options'
+        # status_label: 'Sort by'
+        # order_label: 'Order'
+        # by:
+            # creation_date: 'Creation date'
+            # starred_date: 'Starred date'
+            # archive_date: 'Archived date'
+            # title: 'Title'
+            # last_updated: 'Last updated'
+        # ascending: 'Ascending'
+        # descending: 'Descending'
+        # sort: 'Sort'
     view:
         left_menu:
             back_to_top: '返回顶部'
