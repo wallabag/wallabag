@@ -24,6 +24,7 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
                 'mime' => 'text/html',
                 'title' => 'test title entry1',
                 'content' => 'This is my content /o/',
+                'created_at' => '2020-04-26 10:00:00',
                 'language' => 'en',
                 'tags' => ['foo-tag', 'baz-tag'],
             ],
@@ -35,6 +36,7 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
                 'mime' => 'text/html',
                 'title' => 'test title entry2',
                 'content' => 'This is my content /o/',
+                'created_at' => '2020-04-26 10:01:00',
                 'origin' => 'ftp://oneftp.tld',
                 'language' => 'fr',
             ],
@@ -46,6 +48,7 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
                 'mime' => 'text/html',
                 'title' => 'test title entry3',
                 'content' => 'This is my content /o/',
+                'created_at' => '2020-04-26 10:02:00',
                 'language' => 'en',
                 'tags' => ['foo-tag', 'bar-tag', 'bob-tag'],
             ],
@@ -57,6 +60,7 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
                 'mime' => 'text/html',
                 'title' => 'test title entry4',
                 'content' => 'This is my content /o/',
+                'created_at' => '2020-04-26 10:03:00',
                 'language' => 'en',
                 'tags' => ['foo-tag', 'bar-tag'],
             ],
@@ -68,6 +72,7 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
                 'mime' => 'text/html',
                 'title' => 'test title entry5',
                 'content' => 'This is my content /o/',
+                'created_at' => '2020-04-26 10:04:00',
                 'language' => 'fr',
                 'starred' => true,
                 'preview' => 'http://0.0.0.0/image.jpg',
@@ -80,6 +85,7 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
                 'mime' => 'text/html',
                 'title' => 'test title entry6',
                 'content' => 'This is my content /o/',
+                'created_at' => '2020-04-26 10:05:00',
                 'language' => 'de',
                 'archived' => true,
                 'tags' => ['bar-tag'],
@@ -94,6 +100,7 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
             $entry->setMimetype($item['mime']);
             $entry->setTitle($item['title']);
             $entry->setContent($item['content']);
+            $entry->setCreatedAt(new \DateTime($item['created_at']));
             $entry->setLanguage($item['language']);
 
             if (isset($item['tags'])) {
