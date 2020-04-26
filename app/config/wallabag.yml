@@ -165,6 +165,14 @@ wallabag_core:
             value: 0
             section: entry
 
+    default_ignore_origin_instance_rules:
+        -
+            rule: host = "feedproxy.google.com"
+        -
+            rule: host = "feeds.reuters.com"
+        -
+            rule: _all ~ "https?://www\.lemonde\.fr/tiny.*"
+
 wallabag_user:
     registration_enabled: "%fosuser_registration%"
 

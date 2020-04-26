@@ -14,10 +14,13 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Locale as LocaleConstraint;
 use Wallabag\CoreBundle\Entity\Config;
+use Wallabag\CoreBundle\Entity\IgnoreOriginUserRule;
+use Wallabag\CoreBundle\Entity\RuleInterface;
 use Wallabag\CoreBundle\Entity\TaggingRule;
 use Wallabag\CoreBundle\Form\Type\ChangePasswordType;
 use Wallabag\CoreBundle\Form\Type\ConfigType;
 use Wallabag\CoreBundle\Form\Type\FeedType;
+use Wallabag\CoreBundle\Form\Type\IgnoreOriginUserRuleType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleImportType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleType;
 use Wallabag\CoreBundle\Form\Type\UserInformationType;
@@ -173,6 +176,40 @@ class ConfigController extends Controller
             return $this->redirect($this->generateUrl('config') . '#set5');
         }
 
+        // handle ignore origin rules
+        $ignoreOriginUserRule = new IgnoreOriginUserRule();
+        $action = $this->generateUrl('config') . '#set6';
+
+        if ($request->query->has('ignore-origin-user-rule')) {
+            $ignoreOriginUserRule = $this->getDoctrine()
+                ->getRepository('WallabagCoreBundle:IgnoreOriginUserRule')
+                ->find($request->query->get('ignore-origin-user-rule'));
+
+            if ($this->getUser()->getId() !== $ignoreOriginUserRule->getConfig()->getUser()->getId()) {
+                return $this->redirect($action);
+            }
+
+            $action = $this->generateUrl('config', [
+                'ignore-origin-user-rule' => $ignoreOriginUserRule->getId(),
+            ]) . '#set6';
+        }
+
+        $newIgnoreOriginUserRule = $this->createForm(IgnoreOriginUserRuleType::class, $ignoreOriginUserRule, ['action' => $action]);
+        $newIgnoreOriginUserRule->handleRequest($request);
+
+        if ($newIgnoreOriginUserRule->isSubmitted() && $newIgnoreOriginUserRule->isValid()) {
+            $ignoreOriginUserRule->setConfig($config);
+            $em->persist($ignoreOriginUserRule);
+            $em->flush();
+
+            $this->addFlash(
+                'notice',
+                'flashes.config.notice.ignore_origin_rules_updated'
+            );
+
+            return $this->redirect($this->generateUrl('config') . '#set6');
+        }
+
         return $this->render('WallabagCoreBundle:Config:index.html.twig', [
             'form' => [
                 'config' => $configForm->createView(),
@@ -181,6 +218,7 @@ class ConfigController extends Controller
                 'user' => $userForm->createView(),
                 'new_tagging_rule' => $newTaggingRule->createView(),
                 'import_tagging_rule' => $taggingRulesImportform->createView(),
+                'new_ignore_origin_user_rule' => $newIgnoreOriginUserRule->createView(),
             ],
             'feed' => [
                 'username' => $user->getUsername(),
@@ -448,6 +486,43 @@ class ConfigController extends Controller
     }
 
     /**
+     * Deletes an ignore origin rule and redirect to the config homepage.
+     *
+     * @Route("/ignore-origin-user-rule/delete/{id}", requirements={"id" = "\d+"}, name="delete_ignore_origin_rule")
+     *
+     * @return RedirectResponse
+     */
+    public function deleteIgnoreOriginRuleAction(IgnoreOriginUserRule $rule)
+    {
+        $this->validateRuleAction($rule);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($rule);
+        $em->flush();
+
+        $this->addFlash(
+            'notice',
+            'flashes.config.notice.ignore_origin_rules_deleted'
+        );
+
+        return $this->redirect($this->generateUrl('config') . '#set6');
+    }
+
+    /**
+     * Edit an ignore origin rule.
+     *
+     * @Route("/ignore-origin-user-rule/edit/{id}", requirements={"id" = "\d+"}, name="edit_ignore_origin_rule")
+     *
+     * @return RedirectResponse
+     */
+    public function editIgnoreOriginRuleAction(IgnoreOriginUserRule $rule)
+    {
+        $this->validateRuleAction($rule);
+
+        return $this->redirect($this->generateUrl('config') . '?ignore-origin-user-rule=' . $rule->getId() . '#set6');
+    }
+
+    /**
      * Remove all annotations OR tags OR entries for the current user.
      *
      * @Route("/reset/{type}", requirements={"id" = "annotations|tags|entries"}, name="config_reset")
@@ -659,10 +734,10 @@ class ConfigController extends Controller
     /**
      * Validate that a rule can be edited/deleted by the current user.
      */
-    private function validateRuleAction(TaggingRule $rule)
+    private function validateRuleAction(RuleInterface $rule)
     {
         if ($this->getUser()->getId() !== $rule->getConfig()->getUser()->getId()) {
-            throw $this->createAccessDeniedException('You can not access this tagging rule.');
+            throw $this->createAccessDeniedException('You can not access this rule.');
         }
     }
 

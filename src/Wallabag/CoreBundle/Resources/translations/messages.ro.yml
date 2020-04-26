@@ -33,6 +33,7 @@ menu:
         back_to_unread: 'Înapoi la articolele necitite'
         # users_management: 'Users management'
         # site_credentials: 'Site credentials'
+        # ignore_origin_instance_rules: 'Global ignore origin rules'
         # quickstart: "Quickstart"
     top:
         add_new_entry: 'Introdu un nou articol'
@@ -59,6 +60,7 @@ config:
         user_info: 'Informații despre utilizator'
         password: 'Parolă'
         # rules: 'Tagging rules'
+        # ignore_origin: 'Ignore origin rules'
         new_user: 'Crează un utilizator'
         # reset: 'Reset area'
     form:
@@ -177,6 +179,24 @@ config:
         #         and: 'One rule AND another'
         #         matches: 'Tests that a <i>subject</i> matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>'
         #         notmatches: 'Tests that a <i>subject</i> doesn''t match match a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
+    form_ignore_origin_rules:
+        # faq:
+        #     title: 'FAQ'
+        #     ignore_origin_rules_definition_title: 'What does « ignore origin rules » mean?'
+        #     ignore_origin_rules_definition_description: 'They are used by wallabag to automatically ignore an origin address after a redirect.<br />If a redirect occurs while fetching a new entry, all the ignore origin rules (<i>user defined and instance defined</i>) will be used to ignore the origin address.'
+        #     how_to_use_them_title: 'How do I use them?'
+        #     how_to_use_them_description: 'Let us assume you want to ignore the origin of an entry coming from « <i>rss.example.com</i> » (<i>knowing that after a redirect, the actual address is example.com</i>).<br />In that case, you should put « host = "rss.example.com" » in the <i>Rule</i> field.'
+        #     variables_available_title: 'Which variables and operators can I use to write rules?'
+        #     variables_available_description: 'The following variables and operators can be used to create ignore origin rules:'
+        #     meaning: 'Meaning'
+        #     variable_description:
+        #         label: 'Variable'
+        #         host: 'Host of the address'
+        #         _all: 'Full address, mainly for pattern matching'
+        #     operator_description:
+        #         label: 'Operator'
+        #         equal_to: 'Equal to…'
+        #         matches: 'Tests that a <i>subject</i> matches a <i>search</i> (case-insensitive).<br />Example: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
     otp:
         # page_title: Two-factor authentication
         # app:
@@ -616,6 +636,8 @@ flashes:
             # otp_disabled: Two-factor authentication disabled
             # tagging_rules_imported: Tagging rules imported
             # tagging_rules_not_imported: Error while importing tagging rules
+            # ignore_origin_rules_deleted: 'Ignore origin rule deleted'
+            # ignore_origin_rules_updated: 'Ignore origin rule updated'
     entry:
         notice:
             # entry_already_saved: 'Entry already saved on %date%'
@@ -657,3 +679,8 @@ flashes:
             # added: 'Site credential for "%host%" added'
             # updated: 'Site credential for "%host%" updated'
             # deleted: 'Site credential for "%host%" deleted'
+    ignore_origin_instance_rule:
+        notice:
+            # added: 'Global ignore origin rule added'
+            # updated: 'Global ignore origin rule updated'
+            # deleted: 'Global ignore origin rule deleted'

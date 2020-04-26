@@ -65,6 +65,13 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->scalarNode('encryption_key_path')
                 ->end()
+                ->arrayNode('default_ignore_origin_instance_rules')
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('rule')->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

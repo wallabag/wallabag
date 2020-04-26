@@ -33,6 +33,7 @@ menu:
         back_to_unread: 'Volver a los artículos sin leer'
         users_management: 'Configuración de usuarios'
         site_credentials: 'Credenciales del sitio'
+        # ignore_origin_instance_rules: 'Global ignore origin rules'
         quickstart: "Inicio rápido"
     top:
         add_new_entry: 'Añadir un nuevo artículo'
@@ -59,6 +60,7 @@ config:
         user_info: 'Información de usuario'
         password: 'Contraseña'
         rules: 'Reglas de etiquetado automáticas'
+        # ignore_origin: 'Ignore origin rules'
         new_user: 'Añadir un usuario'
         reset: 'Reiniciar mi cuenta'
     form:
@@ -177,6 +179,24 @@ config:
                 and: 'Una regla Y la otra'
                 matches: 'Prueba si un <i>sujeto</i> corresponde a una <i>búsqueda</i> (insensible a mayúsculas).<br />Ejemplo : <code>title matches "fútbol"</code>'
                 notmatches: 'Prueba si <i>subject</i> no corresponde a una <i>búsqueda</i> (insensible a mayúsculas).<br />Example: <code>title notmatches "fútbol"</code>'
+    form_ignore_origin_rules:
+        # faq:
+        #     title: 'FAQ'
+        #     ignore_origin_rules_definition_title: 'What does « ignore origin rules » mean?'
+        #     ignore_origin_rules_definition_description: 'They are used by wallabag to automatically ignore an origin address after a redirect.<br />If a redirect occurs while fetching a new entry, all the ignore origin rules (<i>user defined and instance defined</i>) will be used to ignore the origin address.'
+        #     how_to_use_them_title: 'How do I use them?'
+        #     how_to_use_them_description: 'Let us assume you want to ignore the origin of an entry coming from « <i>rss.example.com</i> » (<i>knowing that after a redirect, the actual address is example.com</i>).<br />In that case, you should put « host = "rss.example.com" » in the <i>Rule</i> field.'
+        #     variables_available_title: 'Which variables and operators can I use to write rules?'
+        #     variables_available_description: 'The following variables and operators can be used to create ignore origin rules:'
+        #     meaning: 'Meaning'
+        #     variable_description:
+        #         label: 'Variable'
+        #         host: 'Host of the address'
+        #         _all: 'Full address, mainly for pattern matching'
+        #     operator_description:
+        #         label: 'Operator'
+        #         equal_to: 'Equal to…'
+        #         matches: 'Tests that a <i>subject</i> matches a <i>search</i> (case-insensitive).<br />Example: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
     otp:
         page_title: Autenticación de dos pasos
         app:
@@ -617,6 +637,8 @@ flashes:
             # otp_disabled: Two-factor authentication disabled
             tagging_rules_imported: Reglas de etiquetado importadas
             tagging_rules_not_imported: Un error se ha producico en la importación de las reglas de etiquetado
+            # ignore_origin_rules_deleted: 'Ignore origin rule deleted'
+            # ignore_origin_rules_updated: 'Ignore origin rule updated'
     entry:
         notice:
             entry_already_saved: 'Artículo ya guardado el %fecha%'
@@ -658,3 +680,8 @@ flashes:
              added: 'Credenciales del sitio añadidas para "%host%"'
              updated: 'Credenciales del sitio actualizadas para "%host%"'
              deleted: 'Credenciales del sitio eliminadas para "%host%"'
+    ignore_origin_instance_rule:
+        notice:
+            # added: 'Global ignore origin rule added'
+            # updated: 'Global ignore origin rule updated'
+            # deleted: 'Global ignore origin rule deleted'

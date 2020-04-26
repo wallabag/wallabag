@@ -79,4 +79,5 @@ security:
         - { path: ^/annotations, roles: ROLE_USER }
         - { path: ^/2fa, role: IS_AUTHENTICATED_2FA_IN_PROGRESS }
         - { path: ^/users, roles: ROLE_SUPER_ADMIN }
+        - { path: ^/ignore-origin-instance-rules, roles: ROLE_SUPER_ADMIN }
         - { path: ^/, roles: ROLE_USER }

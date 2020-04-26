@@ -12,6 +12,7 @@ use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\RecursiveValidator;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Helper\ContentProxy;
+use Wallabag\CoreBundle\Helper\RuleBasedIgnoreOriginProcessor;
 use Wallabag\CoreBundle\Helper\RuleBasedTagger;
 use Wallabag\UserBundle\Entity\User;
 
@@ -24,6 +25,8 @@ class ContentProxyTest extends TestCase
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
             ->method('tag');
+
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
 
         $graby = $this->getMockBuilder('Graby\Graby')
             ->setMethods(['fetchContent'])
@@ -42,7 +45,7 @@ class ContentProxyTest extends TestCase
                 'language' => '',
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy($graby, $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://user@:80');
 
@@ -62,6 +65,8 @@ class ContentProxyTest extends TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+
         $graby = $this->getMockBuilder('Graby\Graby')
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
@@ -79,7 +84,7 @@ class ContentProxyTest extends TestCase
                 'language' => '',
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy($graby, $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
@@ -98,6 +103,8 @@ class ContentProxyTest extends TestCase
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
             ->method('tag');
+
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
 
         $graby = $this->getMockBuilder('Graby\Graby')
             ->setMethods(['fetchContent'])
@@ -118,7 +125,7 @@ class ContentProxyTest extends TestCase
                 'description' => 'desc',
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy($graby, $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://domain.io');
 
@@ -139,6 +146,10 @@ class ContentProxyTest extends TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+        $ruleBasedIgnoreOriginProcessor->expects($this->once())
+            ->method('process');
+
         $graby = $this->getMockBuilder('Graby\Graby')
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
@@ -159,7 +170,7 @@ class ContentProxyTest extends TestCase
                 ],
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy($graby, $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
@@ -180,6 +191,10 @@ class ContentProxyTest extends TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+        $ruleBasedIgnoreOriginProcessor->expects($this->once())
+            ->method('process');
+
         $graby = $this->getMockBuilder('Graby\Graby')
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
@@ -200,7 +215,7 @@ class ContentProxyTest extends TestCase
                 ],
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy($graby, $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
@@ -221,6 +236,10 @@ class ContentProxyTest extends TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+        $ruleBasedIgnoreOriginProcessor->expects($this->once())
+            ->method('process');
+
         $graby = $this->getMockBuilder('Graby\Graby')
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
@@ -240,7 +259,7 @@ class ContentProxyTest extends TestCase
                 'image' => null,
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy($graby, $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
@@ -261,6 +280,10 @@ class ContentProxyTest extends TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+        $ruleBasedIgnoreOriginProcessor->expects($this->once())
+            ->method('process');
+
         $graby = $this->getMockBuilder('Graby\Graby')
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
@@ -280,7 +303,7 @@ class ContentProxyTest extends TestCase
                 'image' => 'http://3.3.3.3/cover.jpg',
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy($graby, $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
@@ -300,6 +323,10 @@ class ContentProxyTest extends TestCase
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
             ->method('tag');
+
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+        $ruleBasedIgnoreOriginProcessor->expects($this->once())
+            ->method('process');
 
         $validator = $this->getValidator(false);
         $validator->expects($this->once())
@@ -324,7 +351,7 @@ class ContentProxyTest extends TestCase
                 ],
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $validator, $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy($graby, $tagger, $ruleBasedIgnoreOriginProcessor, $validator, $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
@@ -343,6 +370,10 @@ class ContentProxyTest extends TestCase
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
             ->method('tag');
+
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+        $ruleBasedIgnoreOriginProcessor->expects($this->once())
+            ->method('process');
 
         $validator = $this->getValidator(false);
         $validator->expects($this->exactly(2))
@@ -372,7 +403,7 @@ class ContentProxyTest extends TestCase
                 'image' => 'https://',
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $validator, $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy($graby, $tagger, $ruleBasedIgnoreOriginProcessor, $validator, $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
@@ -393,7 +424,11 @@ class ContentProxyTest extends TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, true);
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+        $ruleBasedIgnoreOriginProcessor->expects($this->once())
+            ->method('process');
+
+        $proxy = new ContentProxy((new Graby()), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, true);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -433,10 +468,12 @@ class ContentProxyTest extends TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $logger, $this->fetchingErrorMessage);
+        $proxy = new ContentProxy((new Graby()), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $logger, $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -469,11 +506,13 @@ class ContentProxyTest extends TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+
         $logger = new Logger('foo');
         $handler = new TestHandler();
         $logger->pushHandler($handler);
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $logger, $this->fetchingErrorMessage);
+        $proxy = new ContentProxy((new Graby()), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $logger, $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -512,7 +551,9 @@ class ContentProxyTest extends TestCase
             ->method('tag')
             ->will($this->throwException(new \Exception()));
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+
+        $proxy = new ContentProxy((new Graby()), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -554,7 +595,9 @@ class ContentProxyTest extends TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+
+        $proxy = new ContentProxy((new Graby()), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -590,6 +633,8 @@ class ContentProxyTest extends TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+
         $graby = $this->getMockBuilder('Graby\Graby')
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
@@ -607,7 +652,7 @@ class ContentProxyTest extends TestCase
                 ],
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy($graby, $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
@@ -631,6 +676,8 @@ class ContentProxyTest extends TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+
         $graby = $this->getMockBuilder('Graby\Graby')
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
@@ -648,7 +695,7 @@ class ContentProxyTest extends TestCase
                 'language' => '',
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy($graby, $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
@@ -668,6 +715,8 @@ class ContentProxyTest extends TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+
         $graby = $this->getMockBuilder('Graby\Graby')
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
@@ -685,7 +734,7 @@ class ContentProxyTest extends TestCase
                 'language' => '',
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy($graby, $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
@@ -704,6 +753,8 @@ class ContentProxyTest extends TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+
         $graby = $this->getMockBuilder('Graby\Graby')
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
@@ -721,7 +772,7 @@ class ContentProxyTest extends TestCase
                 'language' => '',
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy($graby, $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
@@ -740,6 +791,8 @@ class ContentProxyTest extends TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+
         $graby = $this->getMockBuilder('Graby\Graby')
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
@@ -757,7 +810,7 @@ class ContentProxyTest extends TestCase
                 'language' => '',
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy($graby, $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
@@ -776,6 +829,8 @@ class ContentProxyTest extends TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+
         $graby = $this->getMockBuilder('Graby\Graby')
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
@@ -793,7 +848,7 @@ class ContentProxyTest extends TestCase
                 'language' => '',
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy($graby, $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
@@ -813,6 +868,8 @@ class ContentProxyTest extends TestCase
         $tagger->expects($this->once())
             ->method('tag');
 
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+
         $graby = $this->getMockBuilder('Graby\Graby')
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
@@ -830,7 +887,7 @@ class ContentProxyTest extends TestCase
                 'language' => '',
             ]);
 
-        $proxy = new ContentProxy($graby, $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy($graby, $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry($entry, 'http://0.0.0.0');
 
@@ -850,6 +907,7 @@ class ContentProxyTest extends TestCase
      * $expected_entry_url
      * $expected_origin_url
      * $expected_domain
+     * $processor_result
      */
     public function dataForChangedUrl()
     {
@@ -861,6 +919,7 @@ class ContentProxyTest extends TestCase
                 'http://1.1.1.1',
                 'http://0.0.0.0',
                 '1.1.1.1',
+                false,
             ],
             'origin already set' => [
                 'http://0.0.0.0',
@@ -869,6 +928,7 @@ class ContentProxyTest extends TestCase
                 'http://1.1.1.1',
                 'http://hello',
                 '1.1.1.1',
+                false,
             ],
             'trailing slash' => [
                 'https://example.com/hello-world',
@@ -877,6 +937,7 @@ class ContentProxyTest extends TestCase
                 'https://example.com/hello-world/',
                 null,
                 'example.com',
+                false,
             ],
             'query string in fetched content' => [
                 'https://example.org/hello',
@@ -885,6 +946,7 @@ class ContentProxyTest extends TestCase
                 'https://example.org/hello?world=1',
                 'https://example.org/hello',
                 'example.org',
+                false,
             ],
             'fragment in fetched content' => [
                 'https://example.org/hello',
@@ -893,6 +955,7 @@ class ContentProxyTest extends TestCase
                 'https://example.org/hello',
                 null,
                 'example.org',
+                false,
             ],
             'fragment and query string in fetched content' => [
                 'https://example.org/hello',
@@ -901,6 +964,7 @@ class ContentProxyTest extends TestCase
                 'https://example.org/hello?foo#world',
                 'https://example.org/hello',
                 'example.org',
+                false,
             ],
             'different path and query string in fetch content' => [
                 'https://example.org/hello',
@@ -909,6 +973,7 @@ class ContentProxyTest extends TestCase
                 'https://example.org/world?foo',
                 'https://example.org/hello',
                 'example.org',
+                false,
             ],
             'feedproxy ignore list test' => [
                 'http://feedproxy.google.com/~r/Wallabag/~3/helloworld',
@@ -917,6 +982,7 @@ class ContentProxyTest extends TestCase
                 'https://example.org/hello-wallabag',
                 null,
                 'example.org',
+                true,
             ],
             'feedproxy ignore list test with origin url already set' => [
                 'http://feedproxy.google.com/~r/Wallabag/~3/helloworld',
@@ -925,6 +991,7 @@ class ContentProxyTest extends TestCase
                 'https://example.org/hello-wallabag',
                 'https://example.org/this-is-source',
                 'example.org',
+                true,
             ],
             'lemonde ignore pattern test' => [
                 'http://www.lemonde.fr/tiny/url',
@@ -933,6 +1000,7 @@ class ContentProxyTest extends TestCase
                 'http://example.com/hello-world',
                 null,
                 'example.com',
+                true,
             ],
         ];
     }
@@ -940,13 +1008,18 @@ class ContentProxyTest extends TestCase
     /**
      * @dataProvider dataForChangedUrl
      */
-    public function testWithChangedUrl($entry_url, $origin_url, $content_url, $expected_entry_url, $expected_origin_url, $expected_domain)
+    public function testWithChangedUrl($entry_url, $origin_url, $content_url, $expected_entry_url, $expected_origin_url, $expected_domain, $processor_result)
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
             ->method('tag');
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, true);
+        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+        $ruleBasedIgnoreOriginProcessor->expects($this->once())
+            ->method('process')
+            ->willReturn($processor_result);
+
+        $proxy = new ContentProxy((new Graby()), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, true);
         $entry = new Entry(new User());
         $entry->setOriginUrl($origin_url);
         $proxy->updateEntry(
@@ -1011,6 +1084,14 @@ class ContentProxyTest extends TestCase
     {
         return $this->getMockBuilder(RuleBasedTagger::class)
             ->setMethods(['tag'])
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    private function getRuleBasedIgnoreOriginProcessorMock()
+    {
+        return $this->getMockBuilder(RuleBasedIgnoreOriginProcessor::class)
+            ->setMethods(['process'])
             ->disableOriginalConstructor()
             ->getMock();
     }

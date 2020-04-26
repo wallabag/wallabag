@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="`tagging_rule`")
  * @ORM\Entity
  */
-class TaggingRule
+class TaggingRule implements RuleInterface
 {
     /**
      * @var int

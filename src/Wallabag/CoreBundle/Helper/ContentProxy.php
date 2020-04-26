@@ -19,6 +19,7 @@ class ContentProxy
 {
     protected $graby;
     protected $tagger;
+    protected $ignoreOriginProcessor;
     protected $validator;
     protected $logger;
     protected $mimeGuesser;
@@ -26,10 +27,11 @@ class ContentProxy
     protected $eventDispatcher;
     protected $storeArticleHeaders;
 
-    public function __construct(Graby $graby, RuleBasedTagger $tagger, ValidatorInterface $validator, LoggerInterface $logger, $fetchingErrorMessage, $storeArticleHeaders = false)
+    public function __construct(Graby $graby, RuleBasedTagger $tagger, RuleBasedIgnoreOriginProcessor $ignoreOriginProcessor, ValidatorInterface $validator, LoggerInterface $logger, $fetchingErrorMessage, $storeArticleHeaders = false)
     {
         $this->graby = $graby;
         $this->tagger = $tagger;
+        $this->ignoreOriginProcessor = $ignoreOriginProcessor;
         $this->validator = $validator;
         $this->logger = $logger;
         $this->mimeGuesser = new MimeTypeExtensionGuesser();
@@ -356,7 +358,7 @@ class ContentProxy
         $diff_keys = array_keys($diff);
         sort($diff_keys);
 
-        if ($this->ignoreUrl($entry->getUrl())) {
+        if ($this->ignoreOriginProcessor->process($entry)) {
             $entry->setUrl($url);
 
             return false;
@@ -393,41 +395,6 @@ class ContentProxy
                 $entry->setUrl($url);
                 break;
         }
-    }
-
-    /**
-     * Check entry url against an ignore list to replace with content url.
-     *
-     * XXX: move the ignore list in the database to let users handle it
-     *
-     * @param string $url url to test
-     *
-     * @return bool true if url matches ignore list otherwise false
-     */
-    private function ignoreUrl($url)
-    {
-        $ignored_hosts = ['feedproxy.google.com', 'feeds.reuters.com'];
-        $ignored_patterns = ['https?://www\.lemonde\.fr/tiny.*'];
-
-        $parsed_url = parse_url($url);
-
-        $filtered = array_filter($ignored_hosts, function ($var) use ($parsed_url) {
-            return $var === $parsed_url['host'];
-        });
-
-        if ([] !== $filtered) {
-            return true;
-        }
-
-        $filtered = array_filter($ignored_patterns, function ($var) use ($url) {
-            return preg_match("`$var`i", $url);
-        });
-
-        if ([] !== $filtered) {
-            return true;
-        }
-
-        return false;
     }
 
     /**
