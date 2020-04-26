@@ -416,9 +416,9 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $client->request('GET', '/with_annotations/list');
-
+        $crawler = $client->request('GET', '/annotated/list');
         $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertCount(2, $crawler->filter('li.entry'));
     }
 
     public function testRangeException()
@@ -1600,7 +1600,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertStringContainsString('/view/', $client->getResponse()->getTargetUrl(), 'Untagged random');
 
-        $client->request('GET', '/with_annotations/random');
+        $client->request('GET', '/annotated/random');
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'With annotations random');
 
