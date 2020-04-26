@@ -75,6 +75,7 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
                 'created_at' => '2020-04-26 10:04:00',
                 'language' => 'fr',
                 'starred' => true,
+                'starred_at' => '2042-04-26 10:04:00',
                 'preview' => 'http://0.0.0.0/image.jpg',
             ],
             'entry6' => [
@@ -88,6 +89,7 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
                 'created_at' => '2020-04-26 10:05:00',
                 'language' => 'de',
                 'archived' => true,
+                'archived_at' => '2020-04-26 10:05:00',
                 'tags' => ['bar-tag'],
             ],
         ];
@@ -115,10 +117,12 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
 
             if (isset($item['starred'])) {
                 $entry->setStarred($item['starred']);
+                $entry->setStarredAt(new \DateTime($item['starred_at']));
             }
 
             if (isset($item['archived'])) {
                 $entry->setArchived($item['archived']);
+                $entry->setArchivedAt(new \DateTime($item['archived_at']));
             }
 
             if (isset($item['preview'])) {
