@@ -1,6 +1,9 @@
-
 RSS
 ---
+
+{% hint style="danger" %}
+Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
+{% endhint %}
 
 wallabag offre feed RSS per ogni stato dell'articolo: non letto,
 preferito e archiviato.

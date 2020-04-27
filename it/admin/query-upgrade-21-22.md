@@ -1,5 +1,9 @@
 # Migrazione 20161001072726
 
+{% hint style="danger" %}
+Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
+{% endhint %}
+
 ## MySQL
 
 ### Migrazione su

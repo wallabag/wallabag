@@ -1,5 +1,9 @@
 # Installation
 
+{% hint style="danger" %}
+Diese übersetzte Dokumentation ist möglicherweise veraltet. Neuere Funktionen oder Anforderungen finden Sie in der [englischen Dokumentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 ## Auf einem dedizierten Webserver (empfohlener Weg)
 
 Um wallabag selbst zu installieren, musst du die folgenden Kommandos

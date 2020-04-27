@@ -1,5 +1,9 @@
 # Fehler während des Artikelladens
 
+{% hint style="danger" %}
+Diese übersetzte Dokumentation ist möglicherweise veraltet. Neuere Funktionen oder Anforderungen finden Sie in der [englischen Dokumentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 ## Warum schlägt das Laden eines Artikels fehl?
 
 Das kann verschiedene Ursachen haben:

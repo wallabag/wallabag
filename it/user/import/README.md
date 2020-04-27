@@ -1,5 +1,9 @@
 # Migrare da...
 
+{% hint style="danger" %}
+Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
+{% endhint %}
+
 In wallabag 2.x, potete importare dati da:
 
 -   [Pocket](Pocket.md)
@@ -30,7 +34,7 @@ Si prega di rimpiazzare i valori:
     file esportato da wallabag v1
 
 Se volete segnare tutti questi articoli come già letti, potete
-aggiungere l'opzione `--markAsRead`. 
+aggiungere l'opzione `--markAsRead`.
 
 Per importare un file di wallabag
 v2, dovete aggiungere l'opzione `--importer=v2`.

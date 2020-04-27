@@ -1,5 +1,9 @@
 # Articoli con accesso ristretto
 
+{% hint style="danger" %}
+Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
+{% endhint %}
+
 wallabag ha un sistema per ottenere articoli dietro ad un paywall, offrendo le vostre credenziali quando l'articolo viene ottenuto.
 
 Nella versione 2.2, solo l'amministratore poteva inserire le proprie credenziali nel file di configurazione, rendendo la funzionalità accessibile a tutti gli utenti dell'istanza. Dalla versione 2.3, tutti gli utenti hanno un pannello in cui inserire le proprie credenziali.

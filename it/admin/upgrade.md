@@ -1,5 +1,9 @@
 # Aggiornate la vostra installazione di wallabag
 
+{% hint style="danger" %}
+Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Troverete qui i differenti modi per aggiornare il vostro wallabag:
 
 -   [da 2.0.x a 2.1.1](#aggiornamento-da-2-1-x-a-2-2-x)
@@ -97,7 +101,7 @@ php bin/console cache:clear --env=prod
 
 ### Aggiornamento su un hosting condiviso
 
-Fate un backup del file `app/config/parameters.yml`. 
+Fate un backup del file `app/config/parameters.yml`.
 
 Scaricate la versione 2.1.1 di wallabag:
 

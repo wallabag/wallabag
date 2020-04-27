@@ -1,5 +1,9 @@
 # Consigli per sviluppatori front-end
 
+{% hint style="danger" %}
+Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Iniziando dalla versione 2.3, wallabag usa webpack per raggruppare le sue risorse.
 
 ## Modalità sviluppatore

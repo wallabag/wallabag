@@ -1,6 +1,10 @@
 Migration von einem Drittanbieter
 =================================
 
+{% hint style="danger" %}
+Diese übersetzte Dokumentation ist möglicherweise veraltet. Neuere Funktionen oder Anforderungen finden Sie in der [englischen Dokumentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 In wallabag 2.x kannst du Daten von folgenden Anbietern importieren:
 
 -   [Pocket](Pocket.md)

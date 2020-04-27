@@ -1,5 +1,9 @@
 # A cosa servono le impostazioni interne?
 
+{% hint style="danger" %}
+Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
+{% endhint %}
+
 La pagina delle impostazioni interne è disponibile solo per l'amministratore dell'istanza. Questa permette di gestire impostazioni più sensibili, come l'attivazione di alcune funzioni.
 
 ## Analytics

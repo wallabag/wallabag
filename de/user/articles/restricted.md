@@ -1,5 +1,9 @@
 # Restriktierte Artikel
 
+{% hint style="danger" %}
+Diese übersetzte Dokumentation ist möglicherweise veraltet. Neuere Funktionen oder Anforderungen finden Sie in der [englischen Dokumentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 wallabag hat ein System, um Artikel hinter einer Paywall zu verarbeiten, indem die Login-Daten zur Verfügung gestellt werden,
 wenn der Artikel geladen wird.
 

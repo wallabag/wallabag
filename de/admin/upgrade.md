@@ -1,6 +1,10 @@
 wallabag-Installation aktualisieren
 ===================================
 
+{% hint style="danger" %}
+Diese übersetzte Dokumentation ist möglicherweise veraltet. Neuere Funktionen oder Anforderungen finden Sie in der [englischen Dokumentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Du wirst hier mehrere Wege finden, um deine wallabag zu aktualisieren:
 
 -   [von 2.1.x zu 2.2.x](#upgrade-von-2-1-x-zu-2-2-x)

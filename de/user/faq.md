@@ -1,6 +1,10 @@
 Häufig gestellte Fragen
 =======================
 
+{% hint style="danger" %}
+Diese übersetzte Dokumentation ist möglicherweise veraltet. Neuere Funktionen oder Anforderungen finden Sie in der [englischen Dokumentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Während der Installation sehe ich den Fehler `Error Output: sh: 1: @post-cmd: not found`
 ----------------------------------------------------------------------------------------
 

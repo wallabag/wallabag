@@ -1,5 +1,9 @@
 # Domande frequenti
 
+{% hint style="danger" %}
+Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
+{% endhint %}
+
 ## Durante l'installazione ho riscontrato l'errore `Error Output: sh: 1: @post-cmd: not found`
 
 Sembra che ci sia un problema con la vostra installazione di `composer`.

@@ -1,6 +1,10 @@
 Kommandozeilenbefehle
 =====================
 
+{% hint style="danger" %}
+Diese übersetzte Dokumentation ist möglicherweise veraltet. Neuere Funktionen oder Anforderungen finden Sie in der [englischen Dokumentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 wallabag hat ein paar Kommandos, um einige Aufgaben zu managen. Du kannst
 alle Kommandos auflisten, in dem du `bin/console` in dem wallabag Ordner
 ausführst.

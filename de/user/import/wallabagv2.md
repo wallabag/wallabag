@@ -1,5 +1,9 @@
 # wallabag 2.x
 
+{% hint style="danger" %}
+Diese übersetzte Dokumentation ist möglicherweise veraltet. Neuere Funktionen oder Anforderungen finden Sie in der [englischen Dokumentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Gehe auf der alten wallabag-Instanz, die du vorher genutzt hast, auf
 Alle Artikel und exportiere diese dann als JSON.
 

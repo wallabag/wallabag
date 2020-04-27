@@ -1,6 +1,10 @@
 wallabag Dokumentation
 ======================
 
+{% hint style="danger" %}
+Diese übersetzte Dokumentation ist möglicherweise veraltet. Neuere Funktionen oder Anforderungen finden Sie in der [englischen Dokumentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 ![wallabag Logo](../img/wallabag.png)
 
 **wallabag** ist eine Read-it-later Applikation: Sie speichert Websites,

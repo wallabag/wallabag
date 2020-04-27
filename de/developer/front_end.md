@@ -1,5 +1,9 @@
 # Tipps für Front-End Entwickler
 
+{% hint style="danger" %}
+Diese übersetzte Dokumentation ist möglicherweise veraltet. Neuere Funktionen oder Anforderungen finden Sie in der [englischen Dokumentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Mit der Version 2.3 nutzt wallabag webpack, um seine Assets zu packen.
 
 ## Entwicklermodus
@@ -31,7 +35,7 @@ Wenn du deine Änderungen nutzen willst, baue sie in der
 Produktionsumgebung durch das Ausführen von `yarn run build:prod`.
 Dies wird alle Assets für wallabag erstellen. Um zu testen, dass
 alles ordentlich funktioniert, wirst du einen im Produktionsmodus
-laufenden Server bruachen, z.B. mit 
+laufenden Server bruachen, z.B. mit
 `bin/console server:run -e=prod`.
 
 Vergiss nicht, die Produktions-Builds zu erstellen bevor du sie

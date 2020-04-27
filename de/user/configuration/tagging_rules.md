@@ -1,6 +1,10 @@
 Tagging-Regeln
 --------------
 
+{% hint style="danger" %}
+Diese übersetzte Dokumentation ist möglicherweise veraltet. Neuere Funktionen oder Anforderungen finden Sie in der [englischen Dokumentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Wenn du automatisch einen Tag zu einem neuen Artikel zuweisen lassen
 möchtest, ist dieser Teil der Konfiguration, was du suchst.
 
@@ -30,7 +34,7 @@ Tagging-Regeln zu erstellen (sei vorsichtig, denn bei einigen Werten
 musst du Anführungszeichen hinzufügen, z.B. `language = "de"`):
 
 
-  Variable      | Bedeutung                                          
+  Variable      | Bedeutung
   ------------- | -------------------
   title         | Titel des Artikels
   url           | URL des Artikels
