@@ -190,7 +190,7 @@ config:
         #     variables_available_description: 'The following variables and operators can be used to create ignore origin rules:'
         #     meaning: 'Meaning'
         #     variable_description:
-              label: 'Variabla'
+            label: 'Variabla'
         #         host: 'Host of the address'
         #         _all: 'Full address, mainly for pattern matching'
             operator_description:
