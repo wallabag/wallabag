@@ -1,6 +1,10 @@
 Tests
 =====
 
+{% hint style="danger" %}
+Diese übersetzte Dokumentation ist möglicherweise veraltet. Neuere Funktionen oder Anforderungen finden Sie in der [englischen Dokumentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Um die Entwicklungsqualität von wallabag sicherzustellen,
 haben wir Tests mit [PHPUnit](https://phpunit.de) geschrieben.
 

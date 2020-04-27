@@ -1,5 +1,9 @@
 # Regole di etichettatura
 
+{% hint style="danger" %}
+Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Se volete assegnare un'etichetta ai nuovi articoli, questa parte della
 configurazione fa per voi.
 
@@ -29,7 +33,7 @@ di tagging (attenzione, per alcuni valori, dovete aggiungere le
 virgolette, per esempio `language = "en"`):
 
 
-  Variable      | Significato                                          
+  Variable      | Significato
   ------------- | -------------------
   title         | Titolo dell'articolo
   url           | URL dell'articolo

@@ -1,5 +1,9 @@
 # Documentazione su API
 
+{% hint style="danger" %}
+Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Grazie a questa documentazione, vedremo come interagire con l'API di
 wallabag.
 

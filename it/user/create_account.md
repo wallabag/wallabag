@@ -1,5 +1,9 @@
 # Creare di un account ed autenticarsi
 
+{% hint style="danger" %}
+Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
+{% endhint %}
+
 ## Registrazione
 
 Sulla pagina di accesso, cliccate sul bottone `Registrati`

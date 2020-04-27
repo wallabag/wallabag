@@ -1,5 +1,9 @@
 # Annotate i vostri articoli
 
+{% hint style="danger" %}
+Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
+{% endhint %}
+
 in ogni articolo che leggete potete scrivere delle note. È più facile
 da capire con delle immagini.
 

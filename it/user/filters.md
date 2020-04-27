@@ -1,5 +1,9 @@
 # Trovate i vostri articoli grazie ai filtri
 
+{% hint style="danger" %}
+Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Per trovare facilmente gli articoli, potete usare i filtri. Cliccate sulla terza icona nella barra superiore.
 
 ![Barra superiore](../../img/user/topbar.png)

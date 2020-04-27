@@ -1,6 +1,10 @@
 Einstellungen
 -------------
 
+{% hint style="danger" %}
+Diese übersetzte Dokumentation ist möglicherweise veraltet. Neuere Funktionen oder Anforderungen finden Sie in der [englischen Dokumentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 ### Theme
 
 wallabag ist anpassbar. Du kannst dein bevorzugtes Theme hier auswählen.

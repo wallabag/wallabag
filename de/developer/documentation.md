@@ -1,6 +1,10 @@
 Wirke an dieser Dokumentation mit
 =================================
 
+{% hint style="danger" %}
+Diese übersetzte Dokumentation ist möglicherweise veraltet. Neuere Funktionen oder Anforderungen finden Sie in der [englischen Dokumentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Quellen der Dokumentation sind hier zu finden
 https://github.com/wallabag/doc/
 

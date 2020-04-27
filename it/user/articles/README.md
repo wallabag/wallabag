@@ -1,5 +1,9 @@
 # Articoli
 
+{% hint style="danger" %}
+Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Gli articoli sono la caratteristica principale di wallabag. Il parser del contenuto di wallabag, chiamato Graby, prende solamente il contenuto dagli articoli.
 
 ## Mark articles as read

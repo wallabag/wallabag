@@ -1,6 +1,10 @@
 Eseguire il backup di wallabag
 ==============================
 
+{% hint style="danger" %}
+Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Siccome a volte potreste commettere errori con il vostro wallabag e
 perdere i vostri dati, oppure in caso dobbiate spostare il vostro
 wallabag su un altro server, dovete fare un backup dei vostri dati.

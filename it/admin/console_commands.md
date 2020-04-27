@@ -1,5 +1,9 @@
 # Comandi Console
 
+{% hint style="danger" %}
+Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
+{% endhint %}
+
 
 wallabag possiede alcuni comandi CLI per gestire alcuni compiti. Potete elencare tutti i comandi eseguendo `bin/console` nella cartella wallabag.
 
@@ -95,7 +99,7 @@ Opzioni:
 wallabag:import:redis-worker
 --------------------------------------
 
-Questo comando vi aiuta ad avviare il worker di Redis.		
+Questo comando vi aiuta ad avviare il worker di Redis.
 
 Uso:
 

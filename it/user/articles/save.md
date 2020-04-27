@@ -1,6 +1,10 @@
 
 # Salvare articoli
 
+{% hint style="danger" %}
+Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Il proposito principale di wallabag è di salvare articoli web, e potete
 farlo in molti modi. Se pensate che l'articolo sia mostrato in modo
 sbagliato, [potete leggere questa documentazione](../errors_during_fetching.md).

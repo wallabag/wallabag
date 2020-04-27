@@ -1,6 +1,10 @@
 Asynchrone Aufgaben
 ===================
 
+{% hint style="danger" %}
+Diese übersetzte Dokumentation ist möglicherweise veraltet. Neuere Funktionen oder Anforderungen finden Sie in der [englischen Dokumentation](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Um große asynchrone Aufgaben zu starten (etwa für große Importe), können
 wir RabbitMQ oder Redis nutzen.
 

@@ -1,5 +1,9 @@
 # wallabag 1.x
 
+{% hint style="danger" %}
+Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Se state usando wallabag 1.x, dovete esportare i dati prima di migrare a
 wallabag 2.x, poiché l'applicazione ed il suo database sono cambiati
 molto. Potete esportare i vostri dati dalla vostra vecchia installazione

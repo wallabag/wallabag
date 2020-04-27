@@ -1,5 +1,9 @@
 # Eseguire wallabag in docker-compose
 
+{% hint style="danger" %}
+Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
+{% endhint %}
+
 Per eseguire la vostra istanza di sviluppo di wallabag, dovreste
 usare i file docker compose preconfigurati.
 
