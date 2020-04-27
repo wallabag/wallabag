@@ -1,5 +1,84 @@
 # Changelog
 
+## [2.4.0](https://github.com/wallabag/wallabag/tree/2.4.0)
+   [Full Changelog](https://github.com/wallabag/wallabag/compare/2.3.8...2.4.0)
+
+### Features
+
+- Allow to rename tags from the web interface [#3574](https://github.com/wallabag/wallabag/pull/3574)
+- Added possibility to change locale from login/register pages [#3216](https://github.com/wallabag/wallabag/pull/3216)
+- Add ability to import/export tagging rules [#4028](https://github.com/wallabag/wallabag/pull/4028)
+- Add quickstart into the menu [#3992](https://github.com/wallabag/wallabag/pull/3992)
+- Enable OTP 2FA via third apps (Google Authenticator, Authy or FreeOTP) [#3798](https://github.com/wallabag/wallabag/pull/3798)
+- Show untagged entries count on tag list [#3993](https://github.com/wallabag/wallabag/pull/3993)
+- Add random feature [#3526](https://github.com/wallabag/wallabag/pull/3526)
+- Added ability to revoke feed token [#3994](https://github.com/wallabag/wallabag/pull/3994)
+- Display login in config / user [#3995](https://github.com/wallabag/wallabag/pull/3995)
+- Move Ignore Origin rules to database [#4026](https://github.com/wallabag/wallabag/pull/4026)
+- Add ability to manually define the reading speed [#4053](https://github.com/wallabag/wallabag/pull/4053)
+- Added MathJax support [#4128](https://github.com/wallabag/wallabag/pull/4128)
+- Improved tags list [#4136](https://github.com/wallabag/wallabag/pull/4136)
+- Add untagged list link to filter menu [#4150](https://github.com/wallabag/wallabag/pull/4150)
+- Allow custom styles system wide [#4151](https://github.com/wallabag/wallabag/pull/4151)
+- Added elCurator import [#4175](https://github.com/wallabag/wallabag/pull/4175)
+- Added language support for Simplified Chinese（简体中文）[#4281](https://github.com/wallabag/wallabag/pull/4281)
+- add Japanese translation [#4274](https://github.com/wallabag/wallabag/pull/4274)
+- Added publication date on epub export [#4315](https://github.com/wallabag/wallabag/pull/4315)
+- Enhanced article display [#4317](https://github.com/wallabag/wallabag/pull/4317)
+- Added mass actions for Material design in list view [#4326](https://github.com/wallabag/wallabag/pull/4326)
+- Added a button to disable 2FA when enabled [#4329](https://github.com/wallabag/wallabag/pull/4329)
+- Enhanced navigation menu in material theme [#4343](https://github.com/wallabag/wallabag/pull/4343)
+
+### API
+
+- Added a basic search endpoint [#3627](https://github.com/wallabag/wallabag/pull/3627)
+- Entries: added add parameter detail to exclude or include content in response [#3960](https://github.com/wallabag/wallabag/pull/3960)
+- Add a new endpoint to retrieve information from the wallabag instance [#3845](https://github.com/wallabag/wallabag/pull/3845)
+- Copy client info to clipboard [#4058](https://github.com/wallabag/wallabag/pull/4058)
+- API return an error with empty quote [#4161](https://github.com/wallabag/wallabag/pull/4161)
+- Fixed bug when we delete entry via API [#4316](https://github.com/wallabag/wallabag/pull/4316)
+- Add ability to define lifetime token for the API [#4319](https://github.com/wallabag/wallabag/pull/4319)
+
+### Technical stuff
+
+- Added support for secured emails via SMTP [#3596](https://github.com/wallabag/wallabag/pull/3596)
+- Add `given_url` in Entry table to check if a redirected url has already added [#3271](https://github.com/wallabag/wallabag/pull/3271)
+- Storage of hash of URL to check if pages already saved [#3158](https://github.com/wallabag/wallabag/pull/3158)
+- Changed RSS to Atom feed and improve paging [#3223](https://github.com/wallabag/wallabag/pull/3223) 
+- MySQL: change collation of tag label [#3959](https://github.com/wallabag/wallabag/pull/3959)
+- Use httplug and graby 2.0 [#3390](https://github.com/wallabag/wallabag/pull/3390)
+- Use Imagick to keep GIF animation [#3955](https://github.com/wallabag/wallabag/pull/3955)
+- Jump to Symfony 3.4 [#3731](https://github.com/wallabag/wallabag/pull/3731)
+- Added archived_at property and updateArchived method [#3630](https://github.com/wallabag/wallabag/pull/3630)
+- Removed hardcoded database version [#3864](https://github.com/wallabag/wallabag/pull/3864)
+- Dropping PHP < 7.1 [#3758](https://github.com/wallabag/wallabag/pull/3758)
+- Force default_protocol to generate an url input [#3879](https://github.com/wallabag/wallabag/pull/3879)
+- Cascade delete on oauth2 table when deleting a user [#3956](https://github.com/wallabag/wallabag/pull/3956)
+- Preview picture: use the 1st pic retrieved if no og:image set [#3965](https://github.com/wallabag/wallabag/pull/3965)
+- Force PHP version in Dockerfile [#3977](https://github.com/wallabag/wallabag/pull/3977) 
+- Add Sentry support [#3990](https://github.com/wallabag/wallabag/pull/3990)
+- Fix slow/unindexed queries [#4081](https://github.com/wallabag/wallabag/pull/4081)
+- Rename internal settings table [#4084](https://github.com/wallabag/wallabag/pull/4084)
+- Add environment variables to control scripts/dev.sh behavior [#4152](https://github.com/wallabag/wallabag/pull/4152)
+- Increase php memory limit PHP Docker [#4163](https://github.com/wallabag/wallabag/pull/4163)
+- Ensure ENV is well defined when using make [#4249](https://github.com/wallabag/wallabag/pull/4249)
+
+### Fixes
+
+- Fixed Instapaper import date order [#3980](https://github.com/wallabag/wallabag/pull/3980)
+- Add missing entries in craue_config_setting. [#3868](https://github.com/wallabag/wallabag/pull/3868)
+- Fix `reading_time` being NULL on SQLite [#4020](https://github.com/wallabag/wallabag/pull/4020) 
+- Fix createdAt filter on material [#4299](https://github.com/wallabag/wallabag/pull/4299)
+- Fix duplicated icons on "Search engine" and "new link" forms [#4149](https://github.com/wallabag/wallabag/pull/4149)
+- Fix entries export from search view [#4278](https://github.com/wallabag/wallabag/pull/4278)
+- Fixed URL to share entry via twitter [#4250](https://github.com/wallabag/wallabag/pull/4250)
+- Sidebar sub entries not conditioned by hover anymore [#4254](https://github.com/wallabag/wallabag/pull/4254)
+- Fix print of long pages [#4263](https://github.com/wallabag/wallabag/pull/4263)
+- Fixed duplicated tags when renaming them [#4310](https://github.com/wallabag/wallabag/pull/4310)
+- Added authentication during import command for paywalled websites [#4325](https://github.com/wallabag/wallabag/pull/4325)
+- Added more coherence with color links for material theme [#4346](https://github.com/wallabag/wallabag/pull/4346)
+- Changed visibility for article stats [#4347](https://github.com/wallabag/wallabag/pull/4347)
+
 ## [2.3.8](https://github.com/wallabag/wallabag/tree/2.3.8)
    [Full Changelog](https://github.com/wallabag/wallabag/compare/2.3.7...2.3.8)
 
