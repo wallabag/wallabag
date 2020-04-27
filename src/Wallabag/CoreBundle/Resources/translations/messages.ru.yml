@@ -300,6 +300,7 @@ entry:
         shared_by_wallabag: "Запись была опубликована <a href='%wallabag_instance%'>wallabag</a>"
     confirm:
         # delete: "Are you sure you want to remove that article?"
+        # delete_entries: "Are you sure you want to remove those articles?"
         # delete_tag: "Are you sure you want to remove that tag from that article?"
     metadata:
         # reading_time: "Estimated reading time"

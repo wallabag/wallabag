@@ -300,6 +300,7 @@ entry:
         shared_by_wallabag: "Cet article a été partagé par %username% avec <a href=\"%wallabag_instance%\">wallabag</a>"
     confirm:
         delete: "Voulez-vous vraiment supprimer cet article ?"
+        delete_entries: "Voulez-vous vraiment supprimer ces articles ?"
         delete_tag: "Voulez-vous vraiment supprimer ce tag de cet article ?"
     metadata:
         reading_time: "Durée de lecture estimée"

@@ -300,6 +300,7 @@ entry:
         shared_by_wallabag: "Ten artykuł został udostępniony przez <a href='%wallabag_instance%'>wallabag</a>"
     confirm:
         delete: "Czy jesteś pewien, że chcesz usunąć ten artykuł?"
+        # delete_entries: "Are you sure you want to remove those articles?"
         delete_tag: "Czy jesteś pewien, że chcesz usunąć ten tag, z tego artykułu?"
     metadata:
         # reading_time: "Estimated reading time"

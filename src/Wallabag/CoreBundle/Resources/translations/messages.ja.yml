@@ -280,6 +280,7 @@ entry:
         shared_by_wallabag: "これは %username% と <a href='%wallabag_instance%'>Wallabag</a> によって共有された記事です。"
     confirm:
         delete: "記事を削除してよろしいですか？"
+        # delete_entries: "Are you sure you want to remove those articles?"
         delete_tag: "記事からタグを削除してよろしいですか？"
     metadata:
         reading_time: "推定読書時間"

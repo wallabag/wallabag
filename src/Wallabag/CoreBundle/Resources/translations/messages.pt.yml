@@ -299,7 +299,8 @@ entry:
     public:
         shared_by_wallabag: "Este artigo foi compartilhado pelo <a href='%wallabag_instance%'>wallabag</a>"
     confirm:
-        delete: Tem certeza de que deseja remover este artigo?"
+        delete: Tem certeza de que deseja remover este artigo?
+        # delete_entries: "Are you sure you want to remove those articles?"
         delete_tag: "Tem certeza de que deseja remover este tag deste artigo?"
     metadata:
         reading_time: "Tempo estimado de leitura"
