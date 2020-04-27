@@ -14,7 +14,7 @@ export_xml: Abilita esportazione XML
 shaarli_url: Shaarli URL, se il servizio è abilitato
 scuttle_url: Scuttle URL, se il servizio è abilitato
 unmark_url: Unmark URL, se il servizio è abilitato
-share_diaspora: Abilita la condivisione con Diaspora
+share_diaspora: Abilita la condivisione con diaspora*
 share_mail: Abilita la condivisione per e-mail
 share_shaarli: Abilita la condivisione con Shaarli
 share_scuttle: Abilita la condivisione con Scuttle
