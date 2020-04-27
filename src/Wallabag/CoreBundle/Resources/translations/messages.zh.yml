@@ -280,6 +280,7 @@ entry:
         shared_by_wallabag: "这篇文章由 %username% 于 <a href='%wallabag_instance%'>wallabag</a> 分享"
     confirm:
         delete: "你确定要删除这篇文章吗？"
+        # delete_entries: "Are you sure you want to remove those articles?"
         delete_tag: "你确定要从这篇文章删除该标签吗？"
     metadata:
         reading_time: "预计阅读时间"
