@@ -40,6 +40,7 @@ menu:
         filter_entries: '筛选项目'
         random_entry: '随机跳到该列表中的一个项目'
         export: '导出'
+        # account: 'My account'
     search_form:
         input_label: '输入搜索关键词'
 

@@ -41,6 +41,7 @@ menu:
         filter_entries: 'Filtruj wpisy'
         # random_entry: Jump to a random entry from that list
         export: 'Eksportuj'
+        # account: 'My account'
     search_form:
         input_label: 'Wpisz swoje zapytanie tutaj'
 

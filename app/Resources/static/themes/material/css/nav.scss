@@ -141,3 +141,15 @@ nav {
     display: none;
   }
 }
+
+.dropdown-content {
+  min-width: 300px;
+
+  .material-icons {
+    line-height: initial !important;
+  }
+
+  li > a {
+    padding: 10px;
+  }
+}

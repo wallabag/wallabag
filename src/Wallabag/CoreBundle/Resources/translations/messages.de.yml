@@ -41,6 +41,7 @@ menu:
         filter_entries: 'Artikel filtern'
         # random_entry: Jump to a random entry from that list
         export: 'Exportieren'
+        # account: 'My account'
     search_form:
         input_label: 'Suchbegriff hier eingeben'
 

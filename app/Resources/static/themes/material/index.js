@@ -63,6 +63,8 @@ $(document).ready(() => {
     container: 'body',
   });
 
+  $('.dropdown-trigger').dropdown({ hover: false });
+
   initFilters();
   initExport();
   initRandom();
