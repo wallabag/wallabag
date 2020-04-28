@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "934e7fcdcc82a110216efe0a9364ba2c",
+    "content-hash": "552a7c133014fd0a95d78a04fab4beba",
     "packages": [
         {
             "name": "bdunogier/guzzle-site-authenticator",
@@ -3904,25 +3904,25 @@
             "authors": [
                 {
                     "name": "Keyvan Minoukadeh",
+                    "role": "Developer (ported original JS code to PHP)",
                     "email": "keyvan@keyvan.net",
-                    "homepage": "http://keyvan.net",
-                    "role": "Developer (ported original JS code to PHP)"
+                    "homepage": "http://keyvan.net"
                 },
                 {
                     "name": "Arc90",
-                    "homepage": "http://arc90.com",
-                    "role": "Developer (original JS version)"
+                    "role": "Developer (original JS version)",
+                    "homepage": "http://arc90.com"
                 },
                 {
                     "name": "Jeremy Benoist",
+                    "role": "Developer",
                     "email": "jeremy.benoist@gmail.com",
-                    "homepage": "http://www.j0k3r.net",
-                    "role": "Developer"
+                    "homepage": "http://www.j0k3r.net"
                 },
                 {
                     "name": "DitherSky",
-                    "homepage": "https://github.com/Dither",
-                    "role": "Developer (https://github.com/Dither/full-text-rss)"
+                    "role": "Developer (https://github.com/Dither/full-text-rss)",
+                    "homepage": "https://github.com/Dither"
                 }
             ],
             "description": "Automatic article extraction from HTML",
@@ -4870,38 +4870,39 @@
         },
         {
             "name": "mnapoli/piwik-twig-extension",
-            "version": "2.0.1",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/mnapoli/PiwikTwigExtension.git",
-                "reference": "e1746d20730426d7098b4a9a3f5c6c99c6f04612"
+                "url": "https://github.com/mnapoli/MatomoTwigExtension.git",
+                "reference": "472fd49157d64e78081b7a626095ea989cae8471"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mnapoli/PiwikTwigExtension/zipball/e1746d20730426d7098b4a9a3f5c6c99c6f04612",
-                "reference": "e1746d20730426d7098b4a9a3f5c6c99c6f04612",
+                "url": "https://api.github.com/repos/mnapoli/MatomoTwigExtension/zipball/472fd49157d64e78081b7a626095ea989cae8471",
+                "reference": "472fd49157d64e78081b7a626095ea989cae8471",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.0",
-                "twig/twig": "~2.10"
+                "twig/twig": "~2.10|~3.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "~2.13",
                 "php-coveralls/php-coveralls": "^2.0",
-                "symfony/phpunit-bridge": "^4.2"
+                "symfony/phpunit-bridge": "^5.0"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "PiwikTwigExtension\\": "src/"
+                    "MatomoTwigExtension\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-            "time": "2019-06-21T10:58:04+00:00"
+            "description": "This library integrates Matomo into Twig",
+            "time": "2020-04-24T14:45:43+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -9620,7 +9621,7 @@
                     "email": "adrien.brault@gmail.com"
                 },
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -9670,7 +9671,7 @@
             ],
             "authors": [
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com"
                 }
             ],

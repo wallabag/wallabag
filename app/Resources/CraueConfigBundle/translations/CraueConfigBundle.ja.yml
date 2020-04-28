@@ -27,9 +27,9 @@ export: "エクスポート"
 import: "インポート"
 misc: "misc"
 modify_settings: "適用"
-piwik_host: Piwik でのウェブサイトのホスト (http:// または https:// は不要)
-piwik_site_id: Piwik でのあなたのウェブサイトの ID
-piwik_enabled: Piwik を有効にする
+matomo_host: Matomo でのウェブサイトのホスト (http:// または https:// は不要)
+matomo_site_id: Matomo でのあなたのウェブサイトの ID
+matomo_enabled: Matomo を有効にする
 demo_mode_enabled: "デモモードを有効にしますか？ (パブリック Wallabag のデモにのみ使用)"
 demo_mode_username: "デモユーザー"
 share_public: 記事の公開 URL を許可する

@@ -28,9 +28,9 @@ export: "exportar"
 import: "importar"
 misc: "misc"
 modify_settings: "aplicar"
-piwik_host: Host de seu website Piwik
-piwik_site_id: ID de seu website Piwik
-piwik_enabled: Habilitar Piwik
+matomo_host: Host de seu website Matomo
+matomo_site_id: ID de seu website Matomo
+matomo_enabled: Habilitar Matomo
 demo_mode_enabled: "Habilitar modo demo? (somente usado para o demo público do wallabag)"
 demo_mode_username: "Usuário demo"
 # share_public: Allow public url for entries

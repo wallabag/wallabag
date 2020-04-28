@@ -26,9 +26,9 @@ export: "eksport"
 import: "import"
 misc: "różne"
 modify_settings: "zatwierdź"
-piwik_host: Host twojej strony Piwik (bez http:// lub https://)
-piwik_site_id: ID twojej strony Piwik
-piwik_enabled: Włacz Piwik
+matomo_host: Host twojej strony Matomo (bez http:// lub https://)
+matomo_site_id: ID twojej strony Matomo
+matomo_enabled: Włacz Matomo
 demo_mode_enabled: "Włacz tryb demo? (używany wyłącznie dla publicznej demonstracji Wallabag)"
 demo_mode_username: "Użytkownik Demonstracyjny"
 share_public: Zezwalaj na publiczny adres url dla wpisow

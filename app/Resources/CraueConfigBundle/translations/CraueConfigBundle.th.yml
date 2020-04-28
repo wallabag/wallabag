@@ -25,9 +25,9 @@ export: "นำข้อมูลออก"
 import: "นำเข้าข้อมูล"
 misc: "เบ็ดเตล็ด"
 modify_settings: "ปรับใช้"
-piwik_host: โฮสบนเว็บไซต์ของคุณใน Piwik (ยกเว้น http:// หรือ https://)
-piwik_site_id: ไอดีบนเว็บไซต์ของคุณใน Piwik
-piwik_enabled: เปิดการใช้ Piwik
+matomo_host: โฮสบนเว็บไซต์ของคุณใน Matomo (ยกเว้น http:// หรือ https://)
+matomo_site_id: ไอดีบนเว็บไซต์ของคุณใน Matomo
+matomo_enabled: เปิดการใช้ Matomo
 demo_mode_enabled: "เปิดการใช้งานโหมดเดโม ? (เฉพาะการใช้สำหรับเดโมสาธารณะของ wallabag)"
 demo_mode_username: "ผู้ใช้ส่วนเดโม"
 share_public: ยอมรับ URL สาธารณะจากการเข้าถึงข้อมูล
