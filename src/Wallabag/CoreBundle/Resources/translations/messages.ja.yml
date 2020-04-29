@@ -33,6 +33,7 @@ menu:
         back_to_unread: '未読の記事へ戻る'
         users_management: 'ユーザー管理'
         site_credentials: 'サイト資格情報'
+        ignore_origin_instance_rules: 'グローバルなオリジン無視ルール'
         quickstart: "はじめに"
     top:
         add_new_entry: '新しい記事を追加'
@@ -40,7 +41,7 @@ menu:
         filter_entries: 'フィルターを使用'
         random_entry: このリストの中からランダムに記事に記事を表示
         export: 'エクスポート'
-        # account: 'My account'
+        account: 'マイアカウント'
     search_form:
         input_label: '検索内容を入力'
 
@@ -60,6 +61,7 @@ config:
         user_info: 'ユーザー情報'
         password: 'パスワード'
         rules: 'タグ付けルール'
+        ignore_origin: 'オリジン無視ルール'
         new_user: 'ユーザーの追加'
         reset: 'リセット関連'
     form:
@@ -178,6 +180,24 @@ config:
                 and: 'かつ (例：ルールA AND ルールB)'
                 matches: '<i>タイトル</i> が <i>検索内容</i> (大文字小文字を区別しない) に一致する例。<br />例：<code>title matches "football"</code>'
                 notmatches: '<i>タイトル</i> が <i>検索内容</i> (大文字小文字を区別しない) に一致しない例。<br />例：<code>title notmatches "football"</code>'
+    form_ignore_origin_rules:
+        faq:
+            title: 'よくある質問'
+            ignore_origin_rules_definition_title: '« オリジン無視ルール » とは何ですか？'
+            ignore_origin_rules_definition_description: 'これらは、リダイレクト後に自動的に元のアドレスを無視するために、Wallabag が使用するルールです。<br />新しい記事を取得中にリダイレクトが発生した場合、すべてのオリジン無視ルール(<i>ユーザー定義およびインスタンス定義</i>)がオリジンアドレスを無視するために使用されます。'
+            how_to_use_them_title: 'どのように使用できますか？'
+            how_to_use_them_description: '« <i>rss.example.com</i> » というオリジンからの記事を無視したいと仮定してみましょう(<i>リダイレクト後の実際のアドレスが example.com であることを知っています</i>)。<br />その場合は、<i>ルール</i>項目に  « host = "rss.example.com" » と入力します。'
+            variables_available_title: 'ルールを作成するために使用できる変数と演算子は何ですか？'
+            variables_available_description: '以下の変数と演算子を使用して、オリジン無視ルールを作成できます：'
+            meaning: '説明'
+            variable_description:
+                label: '変数'
+                host: 'アドレスのホスト名'
+                _all: '完全なアドレス、主にパターンマッチング用'
+            operator_description:
+                label: '演算子'
+                equal_to: '等しい'
+                matches: '<i>タイトル</i> が <i>検索内容</i> (大文字小文字を区別しない) に一致する例。<br />例：<code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
     otp:
         page_title: 2要素認証
         app:
@@ -280,14 +300,14 @@ entry:
         shared_by_wallabag: "これは %username% と <a href='%wallabag_instance%'>Wallabag</a> によって共有された記事です。"
     confirm:
         delete: "記事を削除してよろしいですか？"
-        # delete_entries: "Are you sure you want to remove those articles?"
+        delete_entries: "複数の記事を削除してよろしいですか？"
         delete_tag: "記事からタグを削除してよろしいですか？"
     metadata:
         reading_time: "推定読書時間"
         reading_time_minutes_short: "%readingTime% 分"
         address: "アドレス"
         added_on: "追加日"
-        # published_on: "Published on"
+        published_on: "公開日"
 
 about:
     page_title: 'アプリについて'
@@ -596,6 +616,24 @@ site_credential:
         delete_confirm: 本当によろしいですか？
         back_to_list: リストに戻る
 
+ignore_origin_instance_rule:
+    page_title: グローバルなオリジン無視ルール
+    new_ignore_origin_instance_rule: グローバルなオリジン無視ルールの作成
+    edit_ignore_origin_instance_rule: 既存のオリジン無視ルールの編集
+    description: "ここでは、特定のパターンのオリジン URL を無視するために使用されるグローバルなオリジン無視ルールを管理することができます。"
+    list:
+        actions: 操作
+        edit_action: 編集
+        yes: はい
+        no: いいえ
+        create_new_one: 新しいグローバルなオリジン無視ルールの作成
+    form:
+        rule_label: ルール
+        save: 保存
+        delete: 削除
+        delete_confirm: よろしいですか？
+        back_to_list: リストに戻る
+
 error:
     page_title: エラーが発生しました
 
@@ -616,9 +654,11 @@ flashes:
             entries_reset: 記事がリセットされました
             archived_reset: アーカイブ済みの記事がリセットされました
             otp_enabled: 2要素認証が有効化されました
-            # otp_disabled: Two-factor authentication disabled
+            otp_disabled: 2要素認証が無効化されました
             tagging_rules_imported: タグ付けルールがインポートされました
             tagging_rules_not_imported: タグ付けルールのインポート中にエラーが発生しました
+            ignore_origin_rules_deleted: 'オリジン無視ルールが削除されました'
+            ignore_origin_rules_updated: 'オリジン無視ルールが更新されました'
     entry:
         notice:
             entry_already_saved: 'この記事は既に %date% に保存済みです'
@@ -660,3 +700,8 @@ flashes:
             added: '"%host%" のサイト資格情報が追加されました'
             updated: '"%host%" のサイト資格情報が更新されました'
             deleted: '"%host%" のサイト資格情報が削除されました'
+    ignore_origin_instance_rule:
+        notice:
+            added: 'グローバルなオリジン無視ルールが追加されました'
+            updated: 'グローバルなオリジン無視ルールが更新されました'
+            deleted: 'グローバルなオリジン無視ルールが削除されました'
