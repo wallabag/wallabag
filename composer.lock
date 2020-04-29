@@ -1667,16 +1667,16 @@
         },
         {
             "name": "fig/link-util",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/link-util.git",
-                "reference": "47f55860678a9e202206047bc02767556d298106"
+                "reference": "c038ee75ca13663ddc2d1f185fe6f7533c00832a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/link-util/zipball/47f55860678a9e202206047bc02767556d298106",
-                "reference": "47f55860678a9e202206047bc02767556d298106",
+                "url": "https://api.github.com/repos/php-fig/link-util/zipball/c038ee75ca13663ddc2d1f185fe6f7533c00832a",
+                "reference": "c038ee75ca13663ddc2d1f185fe6f7533c00832a",
                 "shasum": ""
             },
             "require": {
@@ -1720,7 +1720,7 @@
                 "psr-13",
                 "rest"
             ],
-            "time": "2019-12-18T15:40:05+00:00"
+            "time": "2020-04-27T06:40:36+00:00"
         },
         {
             "name": "fossar/htmlawed",
@@ -9010,16 +9010,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.4.39",
+            "version": "v3.4.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "29ccc948a87d72c991fff9dbb92bd64f728e7b75"
+                "reference": "ad6f8608e92b548e5695f9213a81d14c2ef274b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/29ccc948a87d72c991fff9dbb92bd64f728e7b75",
-                "reference": "29ccc948a87d72c991fff9dbb92bd64f728e7b75",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/ad6f8608e92b548e5695f9213a81d14c2ef274b5",
+                "reference": "ad6f8608e92b548e5695f9213a81d14c2ef274b5",
                 "shasum": ""
             },
             "require": {
@@ -9162,7 +9162,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2020-03-30T06:25:29+00:00"
+            "time": "2020-04-28T17:41:57+00:00"
         },
         {
             "name": "tecnickcom/tcpdf",
