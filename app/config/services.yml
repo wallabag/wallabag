@@ -20,8 +20,8 @@ services:
         tags:
             - { name: twig.extension }
 
-    wallabag.twig_piwik_extension:
-        class: PiwikTwigExtension\PiwikTwigExtension
+    wallabag.twig_matomo_extension:
+        class: MatomoTwigExtension\MatomoTwigExtension
         public: false
         tags:
             - { name: twig.extension }

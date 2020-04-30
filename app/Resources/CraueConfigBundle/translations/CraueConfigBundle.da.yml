@@ -27,9 +27,9 @@ export: "eksport"
 import: "import"
 misc: "misc"
 modify_settings: "Gem ændring"
-piwik_host: Hosting af din side hos Piwik (uden http:// eller https://)
-piwik_site_id: ID for din side hos Piwik
-piwik_enabled: Aktiver Piwik
+matomo_host: Hosting af din side hos Matomo (uden http:// eller https://)
+matomo_site_id: ID for din side hos Matomo
+matomo_enabled: Aktiver Matomo
 demo_mode_enabled: "Aktiver demo-indstilling? (anvendes kun til wallabags offentlige demo)"
 demo_mode_username: "Demobruger"
 # share_public: Allow public url for entries

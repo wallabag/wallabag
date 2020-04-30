@@ -125,15 +125,15 @@ wallabag_core:
             value: 0
             section: import
         -
-            name: piwik_enabled
+            name: matomo_enabled
             value: 0
             section: analytics
         -
-            name: piwik_host
-            value: v2.wallabag.org
+            name: matomo_host
+            value: matomo.wallabag.org
             section: analytics
         -
-            name: piwik_site_id
+            name: matomo_site_id
             value: 1
             section: analytics
         -

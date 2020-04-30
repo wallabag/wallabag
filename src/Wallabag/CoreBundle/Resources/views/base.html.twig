@@ -75,8 +75,8 @@
 
         {% block footer %}{% endblock %}
 
-        {% if craue_setting('piwik_enabled') %}
-            {{ piwik(craue_setting('piwik_host'), craue_setting('piwik_site_id')) }}
+        {% if craue_setting('matomo_enabled') %}
+            {{ matomo(craue_setting('matomo_host'), craue_setting('matomo_site_id')) }}
         {% endif %}
     </body>
 </html>
