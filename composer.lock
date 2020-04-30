@@ -7264,16 +7264,16 @@
         },
         {
             "name": "scheb/two-factor-bundle",
-            "version": "v4.14.0",
+            "version": "v4.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scheb/two-factor-bundle.git",
-                "reference": "6393d304ee51a703711e5f5cc3e76f04ce4e238c"
+                "reference": "253ed9ed43078c9408acfcd32402784c383cd31d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/6393d304ee51a703711e5f5cc3e76f04ce4e238c",
-                "reference": "6393d304ee51a703711e5f5cc3e76f04ce4e238c",
+                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/253ed9ed43078c9408acfcd32402784c383cd31d",
+                "reference": "253ed9ed43078c9408acfcd32402784c383cd31d",
                 "shasum": ""
             },
             "require": {
@@ -7328,7 +7328,7 @@
                 "two-factor",
                 "two-step"
             ],
-            "time": "2020-02-15T13:01:16+00:00"
+            "time": "2020-04-29T10:32:37+00:00"
         },
         {
             "name": "sensio/distribution-bundle",
