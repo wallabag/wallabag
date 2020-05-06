@@ -17,6 +17,8 @@ import './js/shortcuts/entry';
 /* Theme style */
 import './css/index.scss';
 
+const mobileMaxWidth = 993;
+
 const stickyNav = () => {
   const nav = $('.js-entry-nav-top');
   $('[data-toggle="actions"]').click(() => {
@@ -81,6 +83,9 @@ $(document).ready(() => {
   $('#nav-btn-add-tag').on('click', () => {
     $('.nav-panel-add-tag').toggle(100);
     $('.nav-panel-menu').addClass('hidden');
+    if (window.innerWidth < mobileMaxWidth) {
+      $('.side-nav').sideNav('hide');
+    }
     $('#tag_label').focus();
     return false;
   });
