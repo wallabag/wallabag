@@ -3904,25 +3904,25 @@
             "authors": [
                 {
                     "name": "Keyvan Minoukadeh",
-                    "role": "Developer (ported original JS code to PHP)",
                     "email": "keyvan@keyvan.net",
-                    "homepage": "http://keyvan.net"
+                    "homepage": "http://keyvan.net",
+                    "role": "Developer (ported original JS code to PHP)"
                 },
                 {
                     "name": "Arc90",
-                    "role": "Developer (original JS version)",
-                    "homepage": "http://arc90.com"
+                    "homepage": "http://arc90.com",
+                    "role": "Developer (original JS version)"
                 },
                 {
                     "name": "Jeremy Benoist",
-                    "role": "Developer",
                     "email": "jeremy.benoist@gmail.com",
-                    "homepage": "http://www.j0k3r.net"
+                    "homepage": "http://www.j0k3r.net",
+                    "role": "Developer"
                 },
                 {
                     "name": "DitherSky",
-                    "role": "Developer (https://github.com/Dither/full-text-rss)",
-                    "homepage": "https://github.com/Dither"
+                    "homepage": "https://github.com/Dither",
+                    "role": "Developer (https://github.com/Dither/full-text-rss)"
                 }
             ],
             "description": "Automatic article extraction from HTML",
@@ -7265,16 +7265,16 @@
         },
         {
             "name": "scheb/two-factor-bundle",
-            "version": "v4.15.0",
+            "version": "v4.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scheb/two-factor-bundle.git",
-                "reference": "253ed9ed43078c9408acfcd32402784c383cd31d"
+                "reference": "44ae7d1394296ed54aa621dd96516786ade2eeed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/253ed9ed43078c9408acfcd32402784c383cd31d",
-                "reference": "253ed9ed43078c9408acfcd32402784c383cd31d",
+                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/44ae7d1394296ed54aa621dd96516786ade2eeed",
+                "reference": "44ae7d1394296ed54aa621dd96516786ade2eeed",
                 "shasum": ""
             },
             "require": {
@@ -7293,13 +7293,14 @@
                 "symfony/twig-bundle": "^3.4|^4.0|^5.0"
             },
             "require-dev": {
-                "doctrine/lexer": "^1.0.1",
-                "doctrine/orm": "^2.6",
+                "doctrine/persistence": "^1.3",
                 "escapestudios/symfony2-coding-standard": "^3.9",
-                "phpunit/phpunit": "^7.0|^8.0",
+                "phpunit/phpunit": "^7.0|^8.0|^9.0",
                 "squizlabs/php_codesniffer": "^3.5",
                 "swiftmailer/swiftmailer": "^6.0",
-                "symfony/yaml": "^3.4|^4.0|^5.0"
+                "symfony/polyfill-php80": "^1.15",
+                "symfony/yaml": "^3.4|^4.0|^5.0",
+                "vimeo/psalm": "^3.11"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -7329,7 +7330,7 @@
                 "two-factor",
                 "two-step"
             ],
-            "time": "2020-04-29T10:32:37+00:00"
+            "time": "2020-05-08T19:32:30+00:00"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -9621,7 +9622,7 @@
                     "email": "adrien.brault@gmail.com"
                 },
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -9671,7 +9672,7 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],
