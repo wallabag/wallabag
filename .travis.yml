@@ -1,3 +1,5 @@
+os: linux
+dist: xenial
 language: php
 
 services:
@@ -10,8 +12,7 @@ services:
 cache:
     apt: true
     directories:
-        - vendor
-        - $HOME/.composer/cache
+        - $HOME/.composer/cache/files
         - node_modules
         - $HOME/.npm
         - $HOME/.yarn-cache
@@ -34,7 +35,7 @@ env:
     - DB=pgsql
     - DB=sqlite
 
-matrix:
+jobs:
     fast_finish: true
     include:
         - php: 7.3
@@ -47,13 +48,6 @@ branches:
 
 before_install:
     - if [[ $TRAVIS_REPO_SLUG = wallabag/wallabag ]]; then cp .composer-auth.json ~/.composer/auth.json; fi;
-
-install:
-    - if [[ $ASSETS = build ]]; then source ~/.nvm/nvm.sh && nvm install 6.10; fi;
-    - if [[ $ASSETS = build ]]; then npm install -g yarn@latest; fi;
-    - if [[ $ASSETS = build ]]; then yarn install; fi;
-
-before_script:
     - PHP=$TRAVIS_PHP_VERSION
     - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
     - phpenv config-rm xdebug.ini || echo "xdebug not available"
@@ -63,15 +57,18 @@ before_script:
     - pecl channel-update pecl.php.net
     - yes | pecl install imagick
 
-script:
-    - travis_wait bash composer install -o --no-interaction --no-progress --prefer-dist
+install:
+    - if [[ $ASSETS = build ]]; then source ~/.nvm/nvm.sh && nvm install 6.10; fi;
+    - if [[ $ASSETS = build ]]; then npm install -g yarn@latest; fi;
+    - if [[ $ASSETS = build ]]; then yarn install; fi;
+    - composer install -o --no-interaction --no-progress --prefer-dist --no-suggest
+    - php bin/simple-phpunit install
 
-    - echo "travis_fold:start:prepare"
+before_script:
     - make prepare DB=$DB
-    - echo "travis_fold:end:prepare"
-
     - make fixtures
 
+script:
     - if [[ $VALIDATE_TRANSLATION_FILE = '' ]]; then ./bin/simple-phpunit -v ; fi;
     # PHPStan needs PHPUnit to be installed and cache app to be generated
     - if [[ $VALIDATE_TRANSLATION_FILE = '' ]]; then php bin/phpstan analyse src tests --no-progress --level 1 ; fi;
