@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9460c8c5f1534c0655a9639167c3e1a1",
+    "content-hash": "a15e144b13372f6f01473012e7567338",
     "packages": [
         {
             "name": "bdunogier/guzzle-site-authenticator",
@@ -7434,45 +7434,50 @@
         },
         {
             "name": "scheb/two-factor-bundle",
-            "version": "v4.5.0",
+            "version": "v4.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scheb/two-factor-bundle.git",
-                "reference": "8dd92c33aeff4a5274e782629a0c1df4bbf77db2"
+                "reference": "eadac02014233ab45dac215d42fd06aaf629b09a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/8dd92c33aeff4a5274e782629a0c1df4bbf77db2",
-                "reference": "8dd92c33aeff4a5274e782629a0c1df4bbf77db2",
+                "url": "https://api.github.com/repos/scheb/two-factor-bundle/zipball/eadac02014233ab45dac215d42fd06aaf629b09a",
+                "reference": "eadac02014233ab45dac215d42fd06aaf629b09a",
                 "shasum": ""
             },
             "require": {
                 "lcobucci/jwt": "^3.2",
                 "paragonie/constant_time_encoding": "^2.2",
                 "php": "^7.1.3",
-                "spomky-labs/otphp": "^9.1",
-                "symfony/config": "^3.4|^4.0",
-                "symfony/dependency-injection": "^3.4|^4.0",
-                "symfony/event-dispatcher": "^3.4|^4.0",
-                "symfony/framework-bundle": "^3.4|^4.0",
-                "symfony/http-foundation": "^3.4|^4.0",
-                "symfony/http-kernel": "^3.4|^4.0",
-                "symfony/property-access": "^3.4|^4.0",
-                "symfony/security-bundle": "^3.4|^4.0",
-                "symfony/twig-bundle": "^3.4|^4.0"
+                "spomky-labs/otphp": "^9.1|^10.0",
+                "symfony/config": "^3.4|^4.0|^5.0",
+                "symfony/dependency-injection": "^3.4|^4.0|^5.0",
+                "symfony/event-dispatcher": "^3.4|^4.0|^5.0",
+                "symfony/framework-bundle": "^3.4|^4.0|^5.0",
+                "symfony/http-foundation": "^3.4|^4.0|^5.0",
+                "symfony/http-kernel": "^3.4|^4.0|^5.0",
+                "symfony/property-access": "^3.4|^4.0|^5.0",
+                "symfony/security-bundle": "^3.4|^4.0|^5.0",
+                "symfony/twig-bundle": "^3.4|^4.0|^5.0"
             },
             "require-dev": {
                 "doctrine/lexer": "^1.0.1",
                 "doctrine/orm": "^2.6",
+                "escapestudios/symfony2-coding-standard": "^3.9",
                 "phpunit/phpunit": "^7.0|^8.0",
+                "squizlabs/php_codesniffer": "^3.5",
                 "swiftmailer/swiftmailer": "^6.0",
-                "symfony/yaml": "^3.4|^4.0"
+                "symfony/yaml": "^3.4|^4.0|^5.0"
             },
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
                     "Scheb\\TwoFactorBundle\\": ""
-                }
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -7493,7 +7498,7 @@
                 "two-factor",
                 "two-step"
             ],
-            "time": "2019-08-07T18:26:54+00:00"
+            "time": "2019-12-08T16:03:05+00:00"
         },
         {
             "name": "sensio/distribution-bundle",
