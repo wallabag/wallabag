@@ -3681,46 +3681,45 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "deb677eb45eddb99e1dfcfe56bb4216fd12894ed"
+                "reference": "12e967939bb3c79af5047eb62eb6b1ad73a7b647"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/deb677eb45eddb99e1dfcfe56bb4216fd12894ed",
-                "reference": "deb677eb45eddb99e1dfcfe56bb4216fd12894ed",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/12e967939bb3c79af5047eb62eb6b1ad73a7b647",
+                "reference": "12e967939bb3c79af5047eb62eb6b1ad73a7b647",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "ext-tidy": "*",
-                "fossar/htmlawed": "^1.2.4",
+                "fossar/htmlawed": "^1.2.7",
                 "guzzlehttp/psr7": "^1.5",
-                "j0k3r/graby-site-config": "^1.0",
+                "j0k3r/graby-site-config": "^1.0.100",
                 "j0k3r/httplug-ssrf-plugin": "^2.0",
-                "j0k3r/php-readability": "^1.1",
-                "monolog/monolog": "^1.13.1",
+                "j0k3r/php-readability": "^1.2.3",
+                "monolog/monolog": "^1.18.0|^2.0",
                 "php": ">=7.1",
                 "php-http/client-common": "^2.0",
-                "php-http/discovery": "^1.0",
+                "php-http/discovery": "^1.5",
                 "php-http/httplug": "^2.0",
                 "php-http/message": "^1.7",
-                "psr/http-message": "^1.0",
-                "simplepie/simplepie": "^1.3.1",
-                "smalot/pdfparser": "~0.11",
-                "symfony/options-resolver": "~2.6|~3.0|~4.0|~5.0",
-                "true/punycode": "~2.1"
+                "simplepie/simplepie": "^1.5",
+                "smalot/pdfparser": "^0.15.1",
+                "symfony/options-resolver": "^3.4|^4.0|^5.0",
+                "true/punycode": "^2.1"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "~2.14",
-                "php-coveralls/php-coveralls": "^2.0",
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "guzzlehttp/guzzle": "^6.3.0",
                 "php-http/guzzle6-adapter": "^2.0",
-                "php-http/mock-client": "^1.2",
-                "phpstan/phpstan": "^0.11",
-                "phpstan/phpstan-phpunit": "^0.11",
-                "symfony/phpunit-bridge": "~2.6|~3.0|~4.0|^5.0"
+                "php-http/mock-client": "^1.3",
+                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-phpunit": "^0.12",
+                "symfony/phpunit-bridge": "^5.1"
             },
             "type": "library",
             "extra": {
@@ -3750,20 +3749,20 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2020-04-15T11:37:45+00:00"
+            "time": "2020-06-02T13:48:42+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.106",
+            "version": "1.0.107",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "d50dbfe2644c684a9fe0d99c74ca0734354cc3c0"
+                "reference": "cc66dcbdeb9368a8eb385e21dcc88183b280412e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/d50dbfe2644c684a9fe0d99c74ca0734354cc3c0",
-                "reference": "d50dbfe2644c684a9fe0d99c74ca0734354cc3c0",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/cc66dcbdeb9368a8eb385e21dcc88183b280412e",
+                "reference": "cc66dcbdeb9368a8eb385e21dcc88183b280412e",
                 "shasum": ""
             },
             "require": {
@@ -3790,7 +3789,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2020-05-13T05:29:30+00:00"
+            "time": "2020-06-03T09:43:28+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -7939,26 +7938,27 @@
         },
         {
             "name": "smalot/pdfparser",
-            "version": "v0.15.0",
+            "version": "v0.15.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smalot/pdfparser.git",
-                "reference": "a53df87a048b943ff7380765b300e2b002e61de4"
+                "reference": "6bc9dcbab5154f7d9f4c99e9cd3391f7ba019dc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smalot/pdfparser/zipball/a53df87a048b943ff7380765b300e2b002e61de4",
-                "reference": "a53df87a048b943ff7380765b300e2b002e61de4",
+                "url": "https://api.github.com/repos/smalot/pdfparser/zipball/6bc9dcbab5154f7d9f4c99e9cd3391f7ba019dc1",
+                "reference": "6bc9dcbab5154f7d9f4c99e9cd3391f7ba019dc1",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "ext-zlib": "*",
-                "php": ">=5.3.0",
-                "tecnickcom/tcpdf": "~6.0"
+                "php": "^5.6|^7.0",
+                "tecnickcom/tcpdf": "^6.2.22"
             },
             "require-dev": {
-                "atoum/atoum": "^2.8 | ^3.0"
+                "atoum/atoum": "^3.1",
+                "friendsofphp/php-cs-fixer": "^2.16.3"
             },
             "type": "library",
             "autoload": {
@@ -7985,7 +7985,7 @@
                 "pdf",
                 "text"
             ],
-            "time": "2020-04-21T07:28:21+00:00"
+            "time": "2020-05-27T07:55:41+00:00"
         },
         {
             "name": "spomky-labs/otphp",
