@@ -1972,16 +1972,16 @@
         },
         {
             "name": "friendsofsymfony/rest-bundle",
-            "version": "2.7.4",
+            "version": "2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle.git",
-                "reference": "3d8501dbdfa48811ef942f5f93c358c80d5ad8eb"
+                "reference": "cc53e997761a56f657d2cae2d49e91dd64a7da76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/3d8501dbdfa48811ef942f5f93c358c80d5ad8eb",
-                "reference": "3d8501dbdfa48811ef942f5f93c358c80d5ad8eb",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/cc53e997761a56f657d2cae2d49e91dd64a7da76",
+                "reference": "cc53e997761a56f657d2cae2d49e91dd64a7da76",
                 "shasum": ""
             },
             "require": {
@@ -2002,6 +2002,7 @@
                 "willdurand/negotiation": "^2.0"
             },
             "conflict": {
+                "doctrine/inflector": "1.4.0",
                 "jms/serializer": "<1.13.0",
                 "jms/serializer-bundle": "<2.0.0",
                 "sensio/framework-extra-bundle": "<3.0.13"
@@ -2037,6 +2038,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
+                    "2.x-dev": "2.8-dev",
                     "dev-master": "2.7-dev"
                 }
             },
@@ -2072,7 +2074,7 @@
             "keywords": [
                 "rest"
             ],
-            "time": "2020-04-23T17:34:09+00:00"
+            "time": "2020-06-03T06:41:50+00:00"
         },
         {
             "name": "friendsofsymfony/user-bundle",
