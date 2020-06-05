@@ -51,8 +51,6 @@ wget https://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 Vous trouverez [le hash md5 du dernier package sur notre
 site](https://static.wallabag.org/releases/).
 
-
-
 Maintenant, lisez la documentation ci-dessous pour crééer un virtual
 host. 
 
