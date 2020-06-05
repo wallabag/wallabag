@@ -32,9 +32,7 @@ Si vous utilisez wallabag derrière Squid comme reverse proxy, assurez-vous de m
 ## Sur un serveur mutualisé
 
 Nous mettons à votre disposition une archive avec toutes les dépendances
-à l'intérieur. La configuration par défaut utilise SQLite pour la base
-de données. Si vous souhaitez changer ces paramètres, vous devez
-modifier le fichier `app/config/parameters.yml`.
+à l'intérieur. La configuration par défaut utilise MySQL (SQLite n'est plus pris en charge à partir de la version 2.4) pour la base de données. Il est nécessaire de renseigner les informations de base de données dans le fichier `app/config/parameters.yml`. Attention : les mots de passes doivent être entourés de single quote ( ' )
 
 Nous avons déjà créé un utilisateur : le login et le mot de passe sont
 `wallabag`.
@@ -53,11 +51,16 @@ wget https://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 Vous trouverez [le hash md5 du dernier package sur notre
 site](https://static.wallabag.org/releases/).
 
+
+
 Maintenant, lisez la documentation ci-dessous pour crééer un virtual
-host. Accédez ensuite à votre installation de wallabag. Si vous avez
-changé la configuration pour modifier le type de stockage (MySQL ou
-PostgreSQL), vous devrez vous créer un utilisateur via la commande
+host. 
+
+Accédez ensuite à votre installation de wallabag. 
+Vous devrez vous créer un utilisateur via la commande
 `php bin/console wallabag:install --env=prod`.
+
+Si une erreur apparaît à cette étape, nettoyez le cache avec la commande `php bin/console cache:clear --env=prod` avant de relancer la commande précédente.
 
 ## Installation avec Docker
 
