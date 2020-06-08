@@ -30,8 +30,7 @@ If you're installing Wallabag behind Squid as a reverse proxy, make sure to upda
 ## On shared hosting
 
 We provide a package with all dependencies inside. The default
-configuration uses MySQL for the database. If you want to change these
-settings, please edit `app/config/parameters.yml`.
+configuration uses MySQL (SQLite is no longer supported from version 2.4) for the database. To add the setting for your database, please edit `app/config/parameters.yml`. Beware that passwords must be surrounded by single quotes ( ' ).
 
 With this package, wallabag doesn't check for mandatory extensions used
 in the application (theses checks are made during `composer install`
@@ -46,16 +45,12 @@ wget https://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 You will find the [md5 hash of the latest package on our
 website](https://wallabag.org/en#download).
 
-Now, read the next step to create your virtual host, then
-access your wallabag.
+Now, read the next step to create your virtual host. 
 
-To create a new user, please use the register form. Then, in order to have admin
-permissions, please run this query in your favorite DMBS (by replacing `1` with
-the id for this new user):
+You must create your first user by using the command `php bin/console wallabag:install --env=prod`
+If an error occurs at this step due to bad settings, you must clear the cache with `php bin/console cache:clear --env=prod` before you try again the previous command.
 
-```sql
-UPDATE wallabag_user SET roles = 'a:2:{i:0;s:9:"ROLE_USER";i:1;s:16:"ROLE_SUPER_ADMIN";}' where id = 1;
-```
+Then you can access your wallabag.
 
 ## Usage of wallabag.it
 
