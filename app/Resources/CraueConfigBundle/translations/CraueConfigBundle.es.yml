@@ -35,9 +35,6 @@ demo_mode_username: "Nombre de usuario demo"
 share_public: Permitir URLs públicas para los artículos
 download_images_enabled: Descargar imágenes localmente
 restricted_access: Activar autenticación para websites con paywall
-# api_user_registration: Enable user to be registered using the API
-# store_article_headers: Enable if wallabag stores HTTP headers for each article
-# shaarli_share_origin_url: Enable sharing origin url to Shaarli, if the service is enabled
 api_user_registration: Permitir el registro de usuarios utilizando el API
 shaarli_share_origin_url: Activar compartir en Shaarli, si el servicio está habilitado
 store_article_headers: Activar si wallabag almacena encabezados HTTP para cada artículo

@@ -13,7 +13,6 @@ security:
     register:
         page_title: '创建一个新账户'
         go_to_account: '前往你的账户'
-
 menu:
     left:
         unread: '未读'
@@ -40,10 +39,8 @@ menu:
         filter_entries: '筛选项目'
         random_entry: '随机跳到该列表中的一个项目'
         export: '导出'
-        # account: 'My account'
     search_form:
         input_label: '输入搜索关键词'
-
 footer:
     wallabag:
         elsewhere: '将 wallabag 随身携带'
@@ -51,7 +48,6 @@ footer:
         powered_by: '运行'
         about: '关于'
     stats: '自从 %user_creation% 以来你已经读了 %nb_archives% 篇文章。 这相当于每天 %per_day% 篇！'
-
 config:
     page_title: '配置'
     tab_menu:
@@ -187,7 +183,6 @@ config:
             two_factor_code_description_4: '从你配置好的应用中测试 OTP 码'
             cancel: "取消"
             enable: "启用"
-
 entry:
     default_title: '项目标题'
     page_titles:
@@ -280,15 +275,12 @@ entry:
         shared_by_wallabag: "这篇文章由 %username% 于 <a href='%wallabag_instance%'>wallabag</a> 分享"
     confirm:
         delete: "你确定要删除这篇文章吗？"
-        # delete_entries: "Are you sure you want to remove those articles?"
         delete_tag: "你确定要从这篇文章删除该标签吗？"
     metadata:
         reading_time: "预计阅读时间"
         reading_time_minutes_short: "%readingTime% 分钟"
         address: "地址"
         added_on: "添加于"
-        # published_on: "Published on"
-
 about:
     page_title: '关于'
     top_menu:
@@ -319,7 +311,6 @@ about:
         description: '这里是 wallabag 使用的第三方库列表（以及它们的许可证）：'
         package: '包'
         license: '许可证'
-
 howto:
     page_title: '教程'
     tab_menu:
@@ -371,7 +362,6 @@ howto:
         hide_form: 隐藏当前表单（搜索或添加新链接时)
         arrows_navigation: 在项目间导航
         open_article: 打开选中项目
-
 quickstart:
     page_title: '快速开始'
     more: '更多…'
@@ -425,7 +415,6 @@ quickstart:
         github: 'GitHub 上'
         email: '通过 email'
         gitter: 'Gitter 上'
-
 tag:
     page_title: '标签'
     list:
@@ -437,11 +426,9 @@ tag:
         placeholder: '你可以添加数个标签，彼此之间用逗号分隔。'
     rename:
         placeholder: '你可以更新标签名称。'
-
 export:
     footer_template: '<div style="text-align:center;"><p> 由 wallabag 通过 %method% 生成</p><p>如果该电子书在你的设备上显示有问题，请在 Github 上 <a href="https://github.com/wallabag/wallabag/issues">汇报</a>。</p></div>'
     unknown: '未知'
-
 import:
     page_title: '导入'
     page_description: '欢迎来到 wallabag 导入器，请选择你想要从哪个服务导入已有内容。'
@@ -494,7 +481,6 @@ import:
         page_title: "Import > Pinboard"
         description: '这个导入器会导入你 Pinboard 账户中的所有内容。 在 backup 页面（https://pinboard.in/settings/backup），点击 "Bookmarks" 一栏下的 "JSON"。你将会下载得到一个 JSON 文件（比如"pinboard_export"）。'
         how_to: '请选择你的 Pinboard 导出文件并点击下方按钮来上传和导入它。'
-
 developer:
     page_title: 'API 客户端管理'
     welcome_message: '欢迎来到 wallabag API'
@@ -545,7 +531,6 @@ developer:
             paragraph_7: '这个请求可以返回你的用户的所有项目。'
             paragraph_8: '如果你想要查看所有 API 端点，你可以看看<a href="%link%">我们的 API 文档</a>。'
         back: '返回'
-
 user:
     page_title: 用户管理
     new_user: 创建一个新用户
@@ -574,7 +559,6 @@ user:
         back_to_list: 返回列表
     search:
         placeholder: 通过用户名或者邮箱筛选
-
 site_credential:
     page_title: 网站登录凭证管理
     new_site_credential: 创建一个凭证
@@ -594,10 +578,8 @@ site_credential:
         delete: 删除
         delete_confirm: 确定这么做吗？
         back_to_list: 返回列表
-
 error:
     page_title: 发生了一个错误
-
 flashes:
     config:
         notice:
@@ -615,7 +597,6 @@ flashes:
             entries_reset: 项目列表已重置
             archived_reset: 所有存档项目已删除
             otp_enabled: 两步验证已启用
-            # otp_disabled: Two-factor authentication disabled
             tagging_rules_imported: 标签规则已导入
             tagging_rules_not_imported: 导入标签规则时发生了错误
     entry:

@@ -1,4 +1,3 @@
-# settings_changed: Configuration updated
 download_pictures: تصاویر را در کارگزار خودتان باربگیرید
 carrot: فعال‌سازی هم‌رسانی به Carrot
 diaspora_url: نشانی Diaspora، اگر فعال بود
@@ -9,8 +8,6 @@ export_csv:  فعال‌سازی برون‌سپاری به CSV
 export_json:  فعال‌سازی برون‌سپاری به JSON
 export_txt:  فعال‌سازی برون‌سپاری به TXT
 export_xml:  فعال‌سازی برون‌سپاری به XML
-# import_with_rabbitmq: Enable RabbitMQ to import data asynchronously
-# import_with_redis: Enable Redis to import data asynchronously
 shaarli_url: نشانی Shaarli، اگر فعال بود
 scuttle_url: نشانی Scuttle، اگر فعال بود
 unmark_url: نشانی Unmark، اگر فعال بود
@@ -27,14 +24,3 @@ export: "برون‌سپاری"
 import: "درون‌ریزی"
 misc: "غیره"
 modify_settings: "اعمال"
-# matomo_host: Host of your website in Matomo (without http:// or https://)
-# matomo_site_id: ID of your website in Matomo
-# matomo_enabled: Enable Matomo
-# demo_mode_enabled: "Enable demo mode ? (only used for the wallabag public demo)"
-# demo_mode_username: "Demo user"
-# share_public: Allow public url for entries
-# download_images_enabled: Download images locally
-# restricted_access: Enable authentication for websites with paywall
-# api_user_registration: Enable user to be registered using the API
-# store_article_headers: Enable if wallabag stores HTTP headers for each article
-# shaarli_share_origin_url: Enable sharing origin url to Shaarli, if the service is enabled

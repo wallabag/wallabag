@@ -13,7 +13,6 @@ security:
     register:
         page_title: 'Создать новый аккаунт'
         go_to_account: 'Перейти в аккаунт'
-
 menu:
     left:
         unread: 'Непрочитанные'
@@ -39,7 +38,6 @@ menu:
         export: 'Экспорт'
     search_form:
         input_label: 'Введите текст для поиска'
-
 footer:
     wallabag:
         elsewhere: 'Возьмите wallabag с собой'
@@ -48,7 +46,6 @@ footer:
         about: 'О wallabag'
     stats: "Поскольку %user_creation% вы читаете %nb_archives% записей, это около %per_day%\
         \ в день!"
-
 config:
     page_title: 'Настройки'
     tab_menu:
@@ -181,7 +178,6 @@ config:
                 and: 'Одно правило И другое'
                 matches: 'Тесты, в которых <i> тема </i> соответствует <i> поиску </i> (без
                     учета регистра). <br />Пример: <code> title matches "футбол" </code>'
-
 entry:
     default_title: 'Название записи'
     page_titles:
@@ -268,7 +264,6 @@ entry:
         save_label: 'Сохранить'
     public:
         shared_by_wallabag: "Запись была опубликована <a href='%wallabag_instance%'>wallabag</a>"
-
 about:
     page_title: 'О'
     top_menu:
@@ -302,7 +297,6 @@ about:
             (с их лицензиями):'
         package: 'Пакет'
         license: 'Лицензия'
-
 howto:
     page_title: 'How to'
     tab_menu:
@@ -354,7 +348,6 @@ howto:
         hide_form: "Скрыть текущую форму (поисковую или новой ссылки)"
         arrows_navigation: "Навигация по статьям"
         open_article: "Отобразить выбранную запись"
-
 quickstart:
     page_title: 'Быстрый старт'
     more: 'Еще…'
@@ -414,7 +407,6 @@ quickstart:
         github: 'На GitHub'
         email: 'По email'
         gitter: 'На Gitter'
-
 tag:
     page_title: 'Теги'
     list:
@@ -424,7 +416,6 @@ tag:
     new:
         add: 'Добавить'
         placeholder: 'Вы можете добавить несколько тегов, разделенных запятой.'
-
 import:
     page_title: 'Импорт'
     page_description: 'Добро пожаловать в импортер wallabag. Выберите сервис, из которого
@@ -509,7 +500,6 @@ import:
             резервирования (https://pinboard.in/settings/backup), нажмите на "JSON" в разделе
             "Закладки". JSON файл будет загружен (наподобии "pinboard_export").'
         how_to: 'Выберите файл Pinboard и нажмите кнопку ниже, чтобы импортировать его.'
-
 developer:
     page_title: 'Управление клиентским API'
     welcome_message: 'Добро пожаловать в API wallabag'
@@ -568,7 +558,6 @@ developer:
             paragraph_8: 'Если Вы хотите увидеть все конечные точки API, то смотрите <a
                 href="%link%">в нашу документацию по API</a>.'
         back: 'Назад'
-
 user:
     page_title: "Управление пользователями"
     new_user: "Создать нового пользователя"
@@ -595,10 +584,8 @@ user:
         delete: "Удалить"
         delete_confirm: "Вы уверены?"
         back_to_list: "Назад к списку"
-
 error:
     page_title: "Произошла ошибка"
-
 flashes:
     config:
         notice:
