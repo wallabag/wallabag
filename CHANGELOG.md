@@ -28,46 +28,48 @@
 - Added mass actions for Material design in list view [#4326](https://github.com/wallabag/wallabag/pull/4326)
 - Added a button to disable 2FA when enabled [#4329](https://github.com/wallabag/wallabag/pull/4329)
 - Enhanced navigation menu in material theme [#4343](https://github.com/wallabag/wallabag/pull/4343)
+- Copy client info to clipboard [#4058](https://github.com/wallabag/wallabag/pull/4058)
+- Upgrade Piwik Twig Extension to Matomo [#4363](https://github.com/wallabag/wallabag/pull/4363)
 
 ### API
 
+- Storage of hash of URL to check if pages already saved [#3158](https://github.com/wallabag/wallabag/pull/3158)
 - Added a basic search endpoint [#3627](https://github.com/wallabag/wallabag/pull/3627)
 - Entries: added add parameter detail to exclude or include content in response [#3960](https://github.com/wallabag/wallabag/pull/3960)
 - Add a new endpoint to retrieve information from the wallabag instance [#3845](https://github.com/wallabag/wallabag/pull/3845)
-- Copy client info to clipboard [#4058](https://github.com/wallabag/wallabag/pull/4058)
 - API return an error with empty quote [#4161](https://github.com/wallabag/wallabag/pull/4161)
 - Fixed bug when we delete entry via API [#4316](https://github.com/wallabag/wallabag/pull/4316)
 - Add ability to define lifetime token for the API [#4319](https://github.com/wallabag/wallabag/pull/4319)
+- Added archived_at property and updateArchived method [#3630](https://github.com/wallabag/wallabag/pull/3630)
+- Add `given_url` in Entry table to check if a redirected url has already added [#3271](https://github.com/wallabag/wallabag/pull/3271)
 
 ### Technical stuff
 
 - Added support for secured emails via SMTP [#3596](https://github.com/wallabag/wallabag/pull/3596)
-- Add `given_url` in Entry table to check if a redirected url has already added [#3271](https://github.com/wallabag/wallabag/pull/3271)
-- Storage of hash of URL to check if pages already saved [#3158](https://github.com/wallabag/wallabag/pull/3158)
-- Changed RSS to Atom feed and improve paging [#3223](https://github.com/wallabag/wallabag/pull/3223) 
+- Changed RSS to Atom feed and improve paging [#3223](https://github.com/wallabag/wallabag/pull/3223)
 - MySQL: change collation of tag label [#3959](https://github.com/wallabag/wallabag/pull/3959)
 - Use httplug and graby 2.0 [#3390](https://github.com/wallabag/wallabag/pull/3390)
 - Use Imagick to keep GIF animation [#3955](https://github.com/wallabag/wallabag/pull/3955)
 - Jump to Symfony 3.4 [#3731](https://github.com/wallabag/wallabag/pull/3731)
-- Added archived_at property and updateArchived method [#3630](https://github.com/wallabag/wallabag/pull/3630)
 - Removed hardcoded database version [#3864](https://github.com/wallabag/wallabag/pull/3864)
 - Dropping PHP < 7.1 [#3758](https://github.com/wallabag/wallabag/pull/3758)
 - Force default_protocol to generate an url input [#3879](https://github.com/wallabag/wallabag/pull/3879)
 - Cascade delete on oauth2 table when deleting a user [#3956](https://github.com/wallabag/wallabag/pull/3956)
 - Preview picture: use the 1st pic retrieved if no og:image set [#3965](https://github.com/wallabag/wallabag/pull/3965)
-- Force PHP version in Dockerfile [#3977](https://github.com/wallabag/wallabag/pull/3977) 
+- Force PHP version in Dockerfile [#3977](https://github.com/wallabag/wallabag/pull/3977)
 - Add Sentry support [#3990](https://github.com/wallabag/wallabag/pull/3990)
 - Fix slow/unindexed queries [#4081](https://github.com/wallabag/wallabag/pull/4081)
 - Rename internal settings table [#4084](https://github.com/wallabag/wallabag/pull/4084)
 - Add environment variables to control scripts/dev.sh behavior [#4152](https://github.com/wallabag/wallabag/pull/4152)
 - Increase php memory limit PHP Docker [#4163](https://github.com/wallabag/wallabag/pull/4163)
 - Ensure ENV is well defined when using make [#4249](https://github.com/wallabag/wallabag/pull/4249)
+- Ensure ENV is well defined when using make [#4249](https://github.com/wallabag/wallabag/pull/4249)
 
 ### Fixes
 
 - Fixed Instapaper import date order [#3980](https://github.com/wallabag/wallabag/pull/3980)
 - Add missing entries in craue_config_setting. [#3868](https://github.com/wallabag/wallabag/pull/3868)
-- Fix `reading_time` being NULL on SQLite [#4020](https://github.com/wallabag/wallabag/pull/4020) 
+- Fix `reading_time` being NULL on SQLite [#4020](https://github.com/wallabag/wallabag/pull/4020)
 - Fix createdAt filter on material [#4299](https://github.com/wallabag/wallabag/pull/4299)
 - Fix duplicated icons on "Search engine" and "new link" forms [#4149](https://github.com/wallabag/wallabag/pull/4149)
 - Fix entries export from search view [#4278](https://github.com/wallabag/wallabag/pull/4278)
@@ -78,6 +80,7 @@
 - Added authentication during import command for paywalled websites [#4325](https://github.com/wallabag/wallabag/pull/4325)
 - Added more coherence with color links for material theme [#4346](https://github.com/wallabag/wallabag/pull/4346)
 - Changed visibility for article stats [#4347](https://github.com/wallabag/wallabag/pull/4347)
+- PHP 7.4 support [#4309](https://github.com/wallabag/wallabag/pull/4309)
 
 ## [2.3.8](https://github.com/wallabag/wallabag/tree/2.3.8)
    [Full Changelog](https://github.com/wallabag/wallabag/compare/2.3.7...2.3.8)
