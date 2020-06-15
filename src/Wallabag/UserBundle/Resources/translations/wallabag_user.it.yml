@@ -1,0 +1,12 @@
+auth_code:
+  on: attivato
+  mailer:
+    subject: Codice di autenticazione wallabag
+    body:
+      signature: La squadra wallabag
+      hello: Ciao %user%,
+      first_para: Poiché hai attivato l'autenticazione a due fattori per accedere
+        al tuo account wallabag e ce l'accedi con un nuovo dispositivo (computer,
+        telefono), ti inviamo un codice per convalidare la sua connessione.
+      support: 'Non esitare a contattarci in caso di problemi:'
+      second_para: 'Ecco il codice:'

@@ -32,16 +32,11 @@ menu:
         save_link: 'Сохранить ссылку'
         back_to_unread: 'Назад к непрочитанным записям'
         users_management: 'Управление пользователями'
-        site_credentials: 'Site credentials'
-        # ignore_origin_instance_rules: 'Global ignore origin rules'
-        quickstart: "Быстрый старт"
     top:
         add_new_entry: 'Добавить новую запись'
         search: 'Поиск'
         filter_entries: 'Фильтр записей'
-        # random_entry: Jump to a random entry from that list
         export: 'Экспорт'
-        # account: 'My account'
     search_form:
         input_label: 'Введите текст для поиска'
 
@@ -51,19 +46,18 @@ footer:
         social: 'Соц. сети'
         powered_by: 'создано с помощью'
         about: 'О wallabag'
-    stats: "Поскольку %user_creation% вы читаете %nb_archives% записей, это около %per_day% в день!"
+    stats: "Поскольку %user_creation% вы читаете %nb_archives% записей, это около %per_day%\
+        \ в день!"
 
 config:
     page_title: 'Настройки'
     tab_menu:
         settings: 'Настройки'
-        feed: 'RSS'
+        rss: 'RSS'
         user_info: 'Информация о пользователе'
         password: 'Пароль'
         rules: 'Правила настройки простановки тегов'
-        # ignore_origin: 'Ignore origin rules'
         new_user: 'Добавить пользователя'
-        reset: 'Сброс данных'
     form:
         save: 'Сохранить'
     form_settings:
@@ -71,64 +65,68 @@ config:
         items_per_page_label: 'Записей на странице'
         language_label: 'Язык'
         reading_speed:
-            label: 'Скорость чтения (слов в минуту)'
-            help_message: 'Вы можете использовать онлайн-инструменты для оценки скорости чтения:'
+            label: 'Скорость чтения'
+            help_message: 'Вы можете использовать онлайн-инструменты для оценки скорости
+                чтения:'
+            100_word: 'Я читаю ~100 слов в минуту'
+            200_word: 'Я читаю ~200 слов в минуту'
+            300_word: 'Я читаю ~300 слов в минуту'
+            400_word: 'Я читаю ~400 слов в минуту'
         action_mark_as_read:
             label: 'Куда Вы хотите быть перенаправлены, после пометки записи, как прочитанная?'
             redirect_homepage: 'На домашнюю страницу'
             redirect_current_page: 'На текущую страницу'
         pocket_consumer_key_label: "Ключ от Pocket для импорта контента"
         android_configuration: "Настройте Ваше Android приложение"
-        # android_instruction: "Touch here to prefill your Android application"
         help_theme: "wallabag настраиваемый, здесь Вы можете выбрать тему."
         help_items_per_page: "Вы можете выбрать количество отображаемых записей на странице."
-        help_reading_speed: "wallabag посчитает сколько времени занимает чтение каждой записи. Вы можете определить здесь, как быстро вы читаете. wallabag пересчитает время чтения для каждой записи."
+        help_reading_speed: "wallabag посчитает сколько времени занимает чтение каждой\
+            \ записи. Вы можете определить здесь, как быстро вы читаете. wallabag пересчитает\
+            \ время чтения для каждой записи."
         help_language: "Вы можете изменить язык интерфейса wallabag."
-        help_pocket_consumer_key: "Обязательно для импорта из Pocket. Вы можете создать это в Вашем аккаунте на Pocket."
-    form_feed:
-        description: 'RSS фид созданный с помощью wallabag позволяет читать Ваши записи через Ваш любимый RSS агрегатор. Для начала Вам потребуется создать ключ.'
+        help_pocket_consumer_key: "Обязательно для импорта из Pocket. Вы можете создать\
+            \ это в Вашем аккаунте на Pocket."
+    form_rss:
+        description: 'RSS фид созданный с помощью wallabag позволяет читать Ваши записи
+            через Ваш любимый RSS агрегатор. Для начала Вам потребуется создать ключ.'
         token_label: 'RSS ключ'
         no_token: 'Ключ не задан'
         token_create: 'Создать ключ'
         token_reset: 'Пересоздать ключ'
-        # token_revoke: 'Revoke the token'
-        feed_links: 'ссылка на RSS'
-        feed_link:
+        rss_links: 'ссылка на RSS'
+        rss_link:
             unread: 'непрочитанные'
             starred: 'помеченные'
             archive: 'архивные'
-            # all: 'All'
-        feed_limit: 'Количество записей в фиде'
+        rss_limit: 'Количество записей в фиде'
     form_user:
-        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
-        # login_label: 'Login (can not be changed)'
+        two_factor_description: "Включить двухфакторную аутентификацию, Вы получите сообщение\
+            \ на указанный email с кодом, при каждом новом непроверенном подключении."
         name_label: 'Имя'
         email_label: 'Email'
-        two_factor:
-            # emailTwoFactor_label: 'Using email (receive a code by email)'
-            # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, Authy or FreeOTP, to get a one time code)'
-            # table_method: Method
-            # table_state: State
-            # table_action: Action
-            # state_enabled: Enabled
-            # state_disabled: Disabled
-            # action_email: Use email
-            # action_app: Use OTP App
+        twoFactorAuthentication_label: 'Двухфакторная аутентификация'
+        help_twoFactorAuthentication: "Если Вы включите двухфакторную аутентификацию,\
+            \ то Вы будете получать код на указанный ранее email, каждый раз при входе в\
+            \ wallabag."
         delete:
             title: "Удалить мой аккаунт (или опасная зона)"
-            description: "Если Вы удалите ваш аккаунт, ВСЕ ваши записи, теги и другие данные, будут БЕЗВОЗВРАТНО удалены (операция не может быть отменена после). Затем Вы выйдете из системы."
-            confirm: "Вы точно уверены? (Данные будут БЕЗВОЗВРАТНО удалены, эти действия необратимы)"
+            description: "Если Вы удалите ваш аккаунт, ВСЕ ваши записи, теги и другие данные,\
+                \ будут БЕЗВОЗВРАТНО удалены (операция не может быть отменена после). Затем\
+                \ Вы выйдете из системы."
+            confirm: "Вы точно уверены? (Данные будут БЕЗВОЗВРАТНО удалены, эти действия\
+                \ необратимы)"
             button: "Удалить мой аккаунт"
     reset:
         title: "Сброс данных (или опасная зона)"
-        description: "По нажатию на кнопки ниже, Вы сможете удалить часть данных из Вашего аккаунта. Будьте осторожны, эти действия необратимы."
+        description: "По нажатию на кнопки ниже, Вы сможете удалить часть данных из Вашего\
+            \ аккаунта. Будьте осторожны, эти действия необратимы."
         annotations: "Удалить все аннотации"
         tags: "Удалить все теги"
         entries: "Удалить все записи"
-        # archived: Remove ALL archived entries
         confirm: "Вы уверены? (Данные будут БЕЗВОЗВРАТНО удалены, эти действия необратимы)"
     form_password:
-        description: "Здесь Вы можете поменять своя пароль. Ваш пароль должен быть длиннее 8 символов."
+        description: "Здесь Вы можете поменять своя пароль. Ваш пароль должен быть длиннее\
+            \ 8 символов."
         old_password_label: 'Текущий пароль'
         new_password_label: 'Новый пароль'
         repeat_new_password_label: 'Повторите новый пароль'
@@ -139,23 +137,26 @@ config:
         edit_rule_label: 'изменить'
         rule_label: 'Правило'
         tags_label: 'теги'
-        # card:
-        #     new_tagging_rule: Create a tagging rule
-        #     import_tagging_rules: Import tagging rules
-        #     import_tagging_rules_detail: You have to select the JSON file you previously exported.
-        #     export_tagging_rules: Export tagging rules
-        #     export_tagging_rules_detail: This will download a JSON file that you can use to import tagging rules elsewhere or to backup them.
-        # file_label: JSON file
-        # import_submit: Import
-        # export: Export
         faq:
             title: 'FAQ'
             tagging_rules_definition_title: 'Что значит "правило тегирования"?'
-            tagging_rules_definition_description: 'Правила, по которым Wallabag автоматически добавит теги для новых записей.<br />Каждый раз, при добавлении новых записей, будут проставляться теги к записям, согласно настроенным правилам тегирования, это избавит Вас от необходимости проставлять теги для каждой записи вручную.'
+            tagging_rules_definition_description: 'Правила, по которым Wallabag автоматически
+                добавит теги для новых записей.<br />Каждый раз, при добавлении новых записей,
+                будут проставляться теги к записям, согласно настроенным правилам тегирования,
+                это избавит Вас от необходимости проставлять теги для каждой записи вручную.'
             how_to_use_them_title: 'Как мне их использовать?'
-            how_to_use_them_description: 'Предположим, вы хотите пометить новые записи как "<i>короткая</i>", когда на чтение уйдет меньше 3 минут.<br />В этом случае, установите " readingTime &lt;= 3 " в поле <i>Правила</i> и "<i>короткая</i>" в поле <i>Теги</i>.<br />Несколько тегов могут добавляться одновременно, разделяя их запятой: "<i>короткая, прочитать обязательно</i>" <br />Сложные правила могут быть записаны с использованием предопределенных операторов: если "<i>readingTime &gt;= 5 AND domainName = \"github.com\"</i> " тогда тег будет "<i>долго читать, github </i>"'
-            variables_available_title: 'Какие переменные и операторы я могу использовать для написания правил?'
-            variables_available_description: 'Следующие переменные и операторы могут использоваться для создания правил тегов:'
+            how_to_use_them_description: 'Предположим, вы хотите пометить новые записи как
+                "<i>короткая</i>", когда на чтение уйдет меньше 3 минут.<br />В этом случае,
+                установите " readingTime &lt;= 3 " в поле <i>Правила</i> и "<i>короткая</i>"
+                в поле <i>Теги</i>.<br />Несколько тегов могут добавляться одновременно, разделяя
+                их запятой: "<i>короткая, прочитать обязательно</i>" <br />Сложные правила
+                могут быть записаны с использованием предопределенных операторов: если "<i>readingTime
+                &gt;= 5 AND domainName = \"github.com\"</i> " тогда тег будет "<i>долго читать,
+                github </i>"'
+            variables_available_title: 'Какие переменные и операторы я могу использовать
+                для написания правил?'
+            variables_available_description: 'Следующие переменные и операторы могут использоваться
+                для создания правил тегов:'
             meaning: 'Смысл'
             variable_description:
                 label: 'Переменные'
@@ -178,35 +179,8 @@ config:
                 not_equal_to: 'Не равно...'
                 or: 'Одно правило ИЛИ другое'
                 and: 'Одно правило И другое'
-                matches: 'Тесты, в которых <i> тема </i> соответствует <i> поиску </i> (без учета регистра). Пример: <code> title matches "футбол" </code>'
-                # notmatches: 'Tests that a <i>subject</i> doesn''t match match a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches "football"</code>'
-    form_ignore_origin_rules:
-        # faq:
-        #     title: 'FAQ'
-        #     ignore_origin_rules_definition_title: 'What does « ignore origin rules » mean?'
-        #     ignore_origin_rules_definition_description: 'They are used by wallabag to automatically ignore an origin address after a redirect.<br />If a redirect occurs while fetching a new entry, all the ignore origin rules (<i>user defined and instance defined</i>) will be used to ignore the origin address.'
-        #     how_to_use_them_title: 'How do I use them?'
-        #     how_to_use_them_description: 'Let us assume you want to ignore the origin of an entry coming from « <i>rss.example.com</i> » (<i>knowing that after a redirect, the actual address is example.com</i>).<br />In that case, you should put « host = "rss.example.com" » in the <i>Rule</i> field.'
-        #     variables_available_title: 'Which variables and operators can I use to write rules?'
-        #     variables_available_description: 'The following variables and operators can be used to create ignore origin rules:'
-        #     meaning: 'Meaning'
-        #     variable_description:
-        #         label: 'Variable'
-        #         host: 'Host of the address'
-        #         _all: 'Full address, mainly for pattern matching'
-        #     operator_description:
-        #         label: 'Operator'
-        #         equal_to: 'Equal to…'
-        #         matches: 'Tests that a <i>subject</i> matches a <i>search</i> (case-insensitive).<br />Example: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
-    otp:
-        # page_title: Two-factor authentication
-        # app:
-        #     two_factor_code_description_1: You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password. It'll disapear after a page reload.
-        #     two_factor_code_description_2: 'You can scan that QR Code with your app:'
-        #     two_factor_code_description_3: 'Also, save these backup codes in a safe place, you can use them in case you lose access to your OTP app:'
-        #     two_factor_code_description_4: 'Test an OTP code from your configured app:'
-        #     cancel: Cancel
-        #     enable: Enable
+                matches: 'Тесты, в которых <i> тема </i> соответствует <i> поиску </i> (без
+                    учета регистра). <br />Пример: <code> title matches "футбол" </code>'
 
 entry:
     default_title: 'Название записи'
@@ -218,9 +192,9 @@ entry:
         filtered_tags: 'Отфильтрованные по тегу:'
         filtered_search: 'Отфильтрованные по поиску:'
         untagged: 'Записи без тегов'
-        # all: 'All entries'
     list:
-        number_on_the_page: '{0} Записей не обнаружено.|{1} Одна запись.|]1,Inf[ Найдено %count% записей.'
+        number_on_the_page: '{0} Записей не обнаружено.|{1} Одна запись.|]1,Inf[ Найдено
+            %count% записей.'
         reading_time: 'расчетное время чтения'
         reading_time_minutes: 'расчетное время чтения: %readingTime% мин'
         reading_time_less_one_minute: 'расчетное время чтения: &lt; 1 мин'
@@ -240,8 +214,6 @@ entry:
         unread_label: 'Непрочитанная'
         preview_picture_label: 'Есть картинка предварительного просмотра'
         preview_picture_help: 'Картинка предварительного просмотра'
-        # is_public_label: 'Has a public link'
-        # is_public_help: 'Public link'
         language_label: 'Язык'
         http_status_label: 'статус HTTP'
         reading_time:
@@ -278,14 +250,12 @@ entry:
                 description: 'Что-то не так с записью?'
         edit_title: 'Изменить название'
         original_article: 'оригинал'
-        annotations_on_the_entry: '{0} Нет аннотации|{1} Одна аннотация|]1,Inf[ %count% аннотаций'
+        annotations_on_the_entry: '{0} Нет аннотации|{1} Одна аннотация|]1,Inf[ %count%
+            аннотаций'
         created_at: 'Дата создания'
-        # published_at: 'Publication date'
-        # published_by: 'Published by'
-        # provided_by: 'Provided by'
     new:
         page_title: 'Сохранить новую запись'
-        placeholder: 'https://website.ru'
+        placeholder: 'http://website.com'
         form_new:
             url_label: Ссылка
     search:
@@ -294,20 +264,10 @@ entry:
         page_title: 'Изменить запись'
         title_label: 'Название'
         url_label: 'Ссылка'
-        # origin_url_label: 'Origin url (from where you found that entry)'
+        is_public_label: 'Публичная'
         save_label: 'Сохранить'
     public:
         shared_by_wallabag: "Запись была опубликована <a href='%wallabag_instance%'>wallabag</a>"
-    confirm:
-        # delete: "Are you sure you want to remove that article?"
-        # delete_entries: "Are you sure you want to remove those articles?"
-        # delete_tag: "Are you sure you want to remove that tag from that article?"
-    metadata:
-        # reading_time: "Estimated reading time"
-        # reading_time_minutes_short: "%readingTime% min"
-        # address: "Address"
-        # added_on: "Added on"
-        # published_on: "Published on"
 
 about:
     page_title: 'О'
@@ -320,7 +280,8 @@ about:
     who_behind_wallabag:
         developped_by: 'Разработано'
         website: 'веб-сайт'
-        many_contributors: 'и другие разработчики ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">на Github</a>'
+        many_contributors: 'и другие разработчики ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">на
+            Github</a>'
         project_website: 'Веб-сайт проекта'
         license: 'Лицензия'
         version: 'Версия'
@@ -329,14 +290,16 @@ about:
         bug_reports: 'Отчеты об ошибках'
         support: '<a href="https://github.com/wallabag/wallabag/issues">на GitHub</a>'
     helping:
-        description: 'wallabag является бесплатным и открытым исходным кодом. Вы можете помочь нам:'
+        description: 'wallabag является бесплатным и открытым исходным кодом. Вы можете
+            помочь нам:'
         by_contributing: 'путем внесения вклада в проект:'
         by_contributing_2: 'с решением наших проблем'
         by_paypal: 'с помощью Paypal'
     contributors:
         description: 'Спасибо вам за вклад в веб-приложение wallabag'
     third_party:
-        description: 'Ниже приведен список сторонних библиотек, используемых в wallabag (с их лицензиями):'
+        description: 'Ниже приведен список сторонних библиотек, используемых в wallabag
+            (с их лицензиями):'
         package: 'Пакет'
         license: 'Лицензия'
 
@@ -397,13 +360,15 @@ quickstart:
     more: 'Еще…'
     intro:
         title: 'Приветствую в wallabag!'
-        paragraph_1: "Мы будем сопровождать вас при посещении wallabag и покажем вам некоторые функции, которые могут вас заинтересовать."
+        paragraph_1: "Мы будем сопровождать вас при посещении wallabag и покажем вам некоторые\
+            \ функции, которые могут вас заинтересовать."
         paragraph_2: 'Следите за нами!'
     configure:
         title: 'Настроить приложение'
-        description: 'Чтобы иметь приложение, которое вам подходит, ознакомьтесь с конфигурацией wallabag.'
+        description: 'Чтобы иметь приложение, которое вам подходит, ознакомьтесь с конфигурацией
+            wallabag.'
         language: 'Выбрать язык и дизайн'
-        feed: 'Включить RSS фид'
+        rss: 'Включить RSS фид'
         tagging_rules: 'Создать правило для автоматической установки тегов'
     admin:
         title: 'Администрирование'
@@ -415,7 +380,8 @@ quickstart:
         import: 'Настроить импорт'
     first_steps:
         title: 'Первый шаг'
-        description: "Теперь wallabag хорошо настроен, пришло время архивировать Интернет. Вы можете нажать на верхний правый знак +, чтобы добавить ссылку."
+        description: "Теперь wallabag хорошо настроен, пришло время архивировать Интернет.\
+            \ Вы можете нажать на верхний правый знак +, чтобы добавить ссылку."
         new_article: 'Сохраните свою первую запись'
         unread_articles: 'И добавьте к ней тег!'
     migrate:
@@ -433,11 +399,14 @@ quickstart:
         use_docker: 'Использовать Docker для установки wallabag'
     docs:
         title: 'Полная документация'
-        description: "В wallabag есть так много особенностей. Не стесняйтесь читать руководство, чтобы узнать эти особенности и как их использовать."
+        description: "В wallabag есть так много особенностей. Не стесняйтесь читать руководство,\
+            \ чтобы узнать эти особенности и как их использовать."
         annotate: 'Комментирование своей статьи'
         export: 'Конвертировать ваши статьи в ePUB или PDF'
-        search_filters: 'Посмотрите, как Вы можете искать записи с помощью поисковой системы и фильтров'
-        fetching_errors: 'Что я могу сделать, если во время извлечения записей произошла ошибка?'
+        search_filters: 'Посмотрите, как Вы можете искать записи с помощью поисковой системы
+            и фильтров'
+        fetching_errors: 'Что я могу сделать, если во время извлечения записей произошла
+            ошибка?'
         all_docs: 'И много других записей!'
     support:
         title: 'Поддержка'
@@ -449,22 +418,17 @@ quickstart:
 tag:
     page_title: 'Теги'
     list:
-        number_on_the_page: '{0} Теги не найдены.|{1} Найден один тег.|]1,Inf[ Найдено %count% тегов.'
+        number_on_the_page: '{0} Теги не найдены.|{1} Найден один тег.|]1,Inf[ Найдено
+            %count% тегов.'
         see_untagged_entries: 'Просмотреть записи без тегов'
-        # no_untagged_entries: 'There are no untagged entries.'
     new:
         add: 'Добавить'
         placeholder: 'Вы можете добавить несколько тегов, разделенных запятой.'
-    rename:
-        # placeholder: 'You can update tag name.'
-
-export:
-    # footer_template: '<div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p></div>'
-    # unknown: 'Unknown'
 
 import:
     page_title: 'Импорт'
-    page_description: 'Добро пожаловать в импортер wallabag. Выберите сервис, из которого вы хотите перенести данные.'
+    page_description: 'Добро пожаловать в импортер wallabag. Выберите сервис, из которого
+        вы хотите перенести данные.'
     action:
         import_contents: 'Импортировать данные'
     form:
@@ -474,45 +438,76 @@ import:
         save_label: 'Загрузить файл'
     pocket:
         page_title: 'Импорт в Pocket'
-        description: "Функция импрота добавит все ваши данные в формате Pocket. Pocket не позволяет нам извлекать контент из своего сервиса, поэтому содержимое записей будет повторно перезакачана."
+        description: "Функция импрота добавит все ваши данные в формате Pocket. Pocket\
+            \ не позволяет нам извлекать контент из своего сервиса, поэтому содержимое записей\
+            \ будет повторно перезакачана."
         config_missing:
             description: "Импорт из Pocket не настроен."
             admin_message: 'Вам нужно добавить %keyurls% pocket_consumer_key%keyurle%.'
             user_message: 'Администратор сервера должен добавить ключ для API Pocket.'
-        authorize_message: 'Вы можете импортировать свои данные из своего аккаунта на Pocket. Вам просто нужно нажать на кнопку ниже и разрешить приложению подключение к getpocket.com.'
+        authorize_message: 'Вы можете импортировать свои данные из своего аккаунта на
+            Pocket. Вам просто нужно нажать на кнопку ниже и разрешить приложению подключение
+            к getpocket.com.'
         connect_to_pocket: 'Подключиться к Pocket и импортировать данные'
     wallabag_v1:
         page_title: 'Импорт > Wallabag v1'
-        description: 'Функция импорта добавит все ваши записи из wallabag v1. На странице конфигурации нажмите "Экспорт JSON" в разделе "Экспорт данных wallabag". У вас появится файл "wallabag-export-1-xxxx-xx-xx.json".'
-        how_to: 'Выберите свой файл с настройками экспорта wallabag и нажмите кнопку ниже, чтобы загрузить файл и начать импорт.'
+        description: 'Функция импорта добавит все ваши записи из wallabag v1. На странице
+            конфигурации нажмите "Экспорт JSON" в разделе "Экспорт данных wallabag". У вас
+            появится файл "wallabag-export-1-xxxx-xx-xx.json".'
+        how_to: 'Выберите свой файл с настройками экспорта wallabag и нажмите кнопку ниже,
+            чтобы загрузить файл и начать импорт.'
     wallabag_v2:
         page_title: 'Импорт > Wallabag v2'
-        description: 'Функция импорта добавит все ваши записи wallabag v2. Перейдите ко всем статьям, затем на боковой панели экспорта нажмите "JSON". У вас появится файл со всеми записями "All articles.json".'
-    # elcurator:
-    #     page_title: 'Import > elCurator'
-    #     description: 'This importer will import all your elCurator articles. Go to your preferences in your elCurator account and then, export your content. You will have a JSON file.'
+        description: 'Функция импорта добавит все ваши записи wallabag v2. Перейдите ко
+            всем статьям, затем на боковой панели экспорта нажмите "JSON". У вас появится
+            файл со всеми записями "All articles.json".'
     readability:
         page_title: 'Импорт > Readability'
-        description: 'Функция импорта добавит все ваши записи для чтения. На странице инструментов (https://www.readability.com/tools/) нажмите "Экспорт ваших данных" в разделе "Экспорт данных". Вы получите электронное письмо для загрузки json (что не заканчивается только .json файлом).'
-        how_to: 'Выберите экспорт Readability и нажмите кнопку ниже, чтобы загрузить файл и начать импорт.'
+        description: 'Функция импорта добавит все ваши записи для чтения. На странице
+            инструментов (https://www.readability.com/tools/) нажмите "Экспорт ваших данных"
+            в разделе "Экспорт данных". Вы получите электронное письмо для загрузки json
+            (что не заканчивается только .json файлом).'
+        how_to: 'Выберите экспорт Readability и нажмите кнопку ниже, чтобы загрузить файл
+            и начать импорт.'
     worker:
-        enabled: "Импорт производится асинхронно. После запуска задачи импорта внешний процесс будет обрабатывать задания по одному за раз. Текущая процедура:"
-        download_images_warning: "Вы включили загрузку изображений для своих записей. В сочетании с обычным импортом может потребоваться много времени, что может привести к ошибке. Мы <strong>настоятельно рекомендуем</strong> включить асинхронный импорт, чтобы избежать ошибок."
+        enabled: "Импорт производится асинхронно. После запуска задачи импорта внешний\
+            \ процесс будет обрабатывать задания по одному за раз. Текущая процедура:"
+        download_images_warning: "Вы включили загрузку изображений для своих записей.\
+            \ В сочетании с обычным импортом может потребоваться много времени, что может\
+            \ привести к ошибке. Мы <strong>настоятельно рекомендуем</strong> включить асинхронный\
+            \ импорт, чтобы избежать ошибок."
     firefox:
         page_title: 'Импорт > Firefox'
-        description: "Функция импорта добавит все ваши закладки из Firefox. Просто зайдите в закладки (Ctrl + Maj + O), затем в \"Импорт и резервное копирование\", выберите \"Резервное копирование ...\". Вы получите файл .json."
-        how_to: "Выберите файл резервной копии закладок и нажмите кнопку ниже, чтобы импортировать его. Обратите внимание, что процесс может занять много времени, поскольку все статьи должны быть загружены."
+        description: "Функция импорта добавит все ваши закладки из Firefox. Просто зайдите\
+            \ в закладки (Ctrl + Maj + O), затем в \"Импорт и резервное копирование\", выберите\
+            \ \"Резервное копирование ...\". Вы получите файл .json."
+        how_to: "Выберите файл резервной копии закладок и нажмите кнопку ниже, чтобы импортировать\
+            \ его. Обратите внимание, что процесс может занять много времени, поскольку\
+            \ все статьи должны быть загружены."
     chrome:
         page_title: 'Импорт > Chrome'
-        description: "Функция импорта добавит все ваши закладки из Chrome. Расположение фйла зависит от операционной системы: <ul><li>На Linux, перейдите в папку <code>~/.config/chromium/Default/</code></li><li>На Windows, должно находиться в <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>На OS X, должно находиться в <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>После того, как перейдете в папку, скопируйте файл <code>Bookmarks</code>. <em><br>Примечание, если у вас есть Chromium вместо Chrome, вам потребуется скорректировать пути соответственно.</em></p>"
-        how_to: "Выберите файл резервной копии закладок и нажмите кнопку ниже, чтобы импортировать его. Обратите внимание, что процесс может занять много времени, поскольку все статьи должны быть загружены."
+        description: "Функция импорта добавит все ваши закладки из Chrome. Расположение\
+            \ фйла зависит от операционной системы: <ul><li>На Linux, перейдите в папку\
+            \ <code>~/.config/chromium/Default/</code></li><li>На Windows, должно находиться\
+            \ в <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>На\
+            \ OS X, должно находиться в <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>После\
+            \ того, как перейдете в папку, скопируйте файл <code>Bookmarks</code>. <em><br>Примечание,\
+            \ если у вас есть Chromium вместо Chrome, вам потребуется скорректировать пути\
+            \ соответственно.</em></p>"
+        how_to: "Выберите файл резервной копии закладок и нажмите кнопку ниже, чтобы импортировать\
+            \ его. Обратите внимание, что процесс может занять много времени, поскольку\
+            \ все статьи должны быть загружены."
     instapaper:
         page_title: 'Импорт > Instapaper'
-        description: 'Функция импорта добавит все ваши закладки из Instapaper. На странице настроек (https://www.instapaper.com/user), нажмите на "Скачать .CSV файл" в разделе "Экспорт". CSV файл будет загружен (наподобии "instapaper-export.csv").'
+        description: 'Функция импорта добавит все ваши закладки из Instapaper. На странице
+            настроек (https://www.instapaper.com/user), нажмите на "Скачать .CSV файл" в
+            разделе "Экспорт". CSV файл будет загружен (наподобии "instapaper-export.csv").'
         how_to: 'Выберите файл Instapaper и нажмите кнопку ниже, чтобы импортировать его.'
     pinboard:
         page_title: "Импорт > Pinboard"
-        description: 'Функция импорта добавит все ваши закладки из Pinboard. На странице резервирования (https://pinboard.in/settings/backup), нажмите на "JSON" в разделе "Закладки". JSON файл будет загружен (наподобии "pinboard_export").'
+        description: 'Функция импорта добавит все ваши закладки из Pinboard. На странице
+            резервирования (https://pinboard.in/settings/backup), нажмите на "JSON" в разделе
+            "Закладки". JSON файл будет загружен (наподобии "pinboard_export").'
         how_to: 'Выберите файл Pinboard и нажмите кнопку ниже, чтобы импортировать его.'
 
 developer:
@@ -533,18 +528,20 @@ developer:
         field_grant_types: 'Разрешенные типы доступа'
         no_client: 'Нет клиентов.'
     remove:
-        warn_message_1: 'Вы имеете возможность удалить клиента %name%. Данные клиента будут удалены БЕЗВОЗВРАТНО!'
-        warn_message_2: "Если вы удалите его, каждое приложение настроенное через этого  клиента не сможет авторизоваться в вашем wallabag."
+        warn_message_1: 'Вы имеете возможность удалить клиента %name%. Данные клиента
+            будут удалены БЕЗВОЗВРАТНО!'
+        warn_message_2: "Если вы удалите его, каждое приложение настроенное через этого\
+            \  клиента не сможет авторизоваться в вашем wallabag."
         action: 'Удалить клиента %name%'
     client:
         page_title: 'Управление клиентским API > Новый клиент'
-        page_description: 'Вы находитесь в разделе создания нового клиента. Пожалуйста заполните поля ниже для перенаправления к вашему приложению.'
+        page_description: 'Вы находитесь в разделе создания нового клиента. Пожалуйста
+            заполните поля ниже для перенаправления к вашему приложению.'
         form:
             name_label: 'Название клиента'
             redirect_uris_label: 'Ссылка перенаправления (опционально)'
             save_label: 'Создать нового клиента'
         action_back: 'Назад'
-        # copy_to_clipboard: Copy
     client_parameter:
         page_title: 'Управление клиентским API > Параметры клиента'
         page_description: 'Здесь ваши параметры клиента.'
@@ -556,21 +553,28 @@ developer:
     howto:
         page_title: 'Управление клиентским API > Как создать мое первое приложение'
         description:
-            paragraph_1: 'Следующие комманды используют библиотеку <a href="https://github.com/jkbrzt/httpie">HTTPie</a>. Убедитесь, что она у вас установлена, прежде чем использовать ее.'
-            paragraph_2: 'Вам нужен ключ для того, чтобы ваше стороннее приложение и wallabag API могли обмениваться данными.'
-            paragraph_3: 'Для создания ключа, вам необходимо <a href="%link%">создать нового клиента</a>.'
-            paragraph_4: 'Теперь создать ключ (замените client_id, client_secret, username and password на ваши значения):'
+            paragraph_1: 'Следующие комманды используют библиотеку <a href="https://github.com/jkbrzt/httpie">HTTPie</a>.
+                Убедитесь, что она у вас установлена, прежде чем использовать ее.'
+            paragraph_2: 'Вам нужен ключ для того, чтобы ваше стороннее приложение и wallabag
+                API могли обмениваться данными.'
+            paragraph_3: 'Для создания ключа, вам необходимо <a href="%link%">создать нового
+                клиента</a>.'
+            paragraph_4: 'Теперь создать ключ (замените client_id, client_secret, username
+                and password на ваши значения):'
             paragraph_5: 'API вернет рабочую ссылку, наподобии:'
-            paragraph_6: 'Ключ доступа access_token используется для вызова конечной точки API. Пример:'
+            paragraph_6: 'Ключ доступа access_token используется для вызова конечной точки
+                API. Пример:'
             paragraph_7: 'Этот вызов вернет все записи для вашего пользователя.'
-            paragraph_8: 'Если Вы хотите увидеть все конечные точки API, то смотрите <a href="%link%">в нашу документацию по API</a>.'
+            paragraph_8: 'Если Вы хотите увидеть все конечные точки API, то смотрите <a
+                href="%link%">в нашу документацию по API</a>.'
         back: 'Назад'
 
 user:
     page_title: "Управление пользователями"
     new_user: "Создать нового пользователя"
     edit_user: "Изменить существующего пользователя"
-    description: "Здесь Вы можете управлять всеми пользователями (создание, изменение и удаление)"
+    description: "Здесь Вы можете управлять всеми пользователями (создание, изменение\
+        \ и удаление)"
     list:
         actions: "Действия"
         edit_action: "Изменить"
@@ -586,34 +590,11 @@ user:
         email_label: 'Email'
         enabled_label: 'Включить'
         last_login_label: 'Последний вход'
-        # twofactor_email_label: Two factor authentication by email
-        # twofactor_google_label: Two factor authentication by OTP app
+        twofactor_label: "Двухфакторная аутентификация"
         save: "Сохранить"
         delete: "Удалить"
         delete_confirm: "Вы уверены?"
         back_to_list: "Назад к списку"
-    search:
-        # placeholder: Filter by login or email
-
-site_credential:
-    # page_title: Site credentials management
-    # new_site_credential: Create a credential
-    # edit_site_credential: Edit an existing credential
-    # description: "Here you can manage all credentials for sites which required them (create, edit and delete), like a paywall, an authentication, etc."
-    # list:
-    #     actions: Actions
-    #     edit_action: Edit
-    #     yes: Yes
-    #     no: No
-    #     create_new_one: Create a new credential
-    # form:
-    #     username_label: 'Login'
-    #     host_label: 'Host (subdomain.example.org, .example.org, etc.)'
-    #     password_label: 'Password'
-    #     save: Save
-    #     delete: Delete
-    #     delete_confirm: Are you sure?
-    #     back_to_list: Back to list
 
 error:
     page_title: "Произошла ошибка"
@@ -623,23 +604,16 @@ flashes:
         notice:
             config_saved: 'Настройки сохранены.'
             password_updated: 'Пароль обновлен'
-            password_not_updated_demo: "В режиме демонстрации нельзя изменять пароль для этого пользователя."
+            password_not_updated_demo: "В режиме демонстрации нельзя изменять пароль для\
+                \ этого пользователя."
             user_updated: 'Информация обновлена'
-            feed_updated: 'RSS информация обновлена'
+            rss_updated: 'RSS информация обновлена'
             tagging_rules_updated: 'Правила тегировния обновлены'
             tagging_rules_deleted: 'Правила тегировния удалены'
-            feed_token_updated: 'RSS ключ обновлен'
-            # feed_token_revoked: 'RSS token revoked'
+            rss_token_updated: 'RSS ключ обновлен'
             annotations_reset: "Аннотации сброшены"
             tags_reset: "Теги сброшены"
             entries_reset: "Записи сброшены"
-            # archived_reset: Archived entries deleted
-            # otp_enabled: Two-factor authentication enabled
-            # otp_disabled: Two-factor authentication disabled
-            # tagging_rules_imported: Tagging rules imported
-            # tagging_rules_not_imported: Error while importing tagging rules
-            # ignore_origin_rules_deleted: 'Ignore origin rule deleted'
-            # ignore_origin_rules_updated: 'Ignore origin rule updated'
     entry:
         notice:
             entry_already_saved: 'Запись была сохранена ранее %date%'
@@ -653,20 +627,23 @@ flashes:
             entry_starred: 'Запись помечена звездочкой'
             entry_unstarred: 'Пометка звездочкой у записи убрана'
             entry_deleted: 'Запись удалена'
-            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'Тег добавлен'
-            # tag_renamed: 'Tag renamed'
     import:
         notice:
             failed: 'Во время импорта произошла ошибка, повторите попытку.'
-            failed_on_file: 'Ошибка при обработке данных для импорта. Пожалуйста проверьте свой файл импорта.'
+            failed_on_file: 'Ошибка при обработке данных для импорта. Пожалуйста проверьте
+                свой файл импорта.'
             summary: 'Статистика импорта: %imported% импортировано, %skipped% уже сохранено.'
             summary_with_queue: 'Статистика импорта: %queued% в очереди.'
         error:
-            redis_enabled_not_installed: "Redis включен, для приема асинхронного импорта, но похоже, что <u>мы не можем к нему подключиться</u>. Пожалуйста проверьте настройки Redis."
-            rabbit_enabled_not_installed: "RabbitMQ включен, для приема асинхронного импорта, но похоже, что <u>мы не можем к нему подключиться</u>. Пожалуйста проверьте настройки RabbitMQ."
+            redis_enabled_not_installed: "Redis включен, для приема асинхронного импорта,\
+                \ но похоже, что <u>мы не можем к нему подключиться</u>. Пожалуйста проверьте\
+                \ настройки Redis."
+            rabbit_enabled_not_installed: "RabbitMQ включен, для приема асинхронного импорта,\
+                \ но похоже, что <u>мы не можем к нему подключиться</u>. Пожалуйста проверьте\
+                \ настройки RabbitMQ."
     developer:
         notice:
             client_created: 'Новый клиент %name% добавлен.'
@@ -676,13 +653,3 @@ flashes:
             added: 'Пользователь "%username%" добавлен'
             updated: 'Пользователь "%username%" обновлен'
             deleted: 'Пользователь "%username%" удален'
-    site_credential:
-        notice:
-            # added: 'Site credential for "%host%" added'
-            # updated: 'Site credential for "%host%" updated'
-            # deleted: 'Site credential for "%host%" deleted'
-    ignore_origin_instance_rule:
-        notice:
-            # added: 'Global ignore origin rule added'
-            # updated: 'Global ignore origin rule updated'
-            # deleted: 'Global ignore origin rule deleted'

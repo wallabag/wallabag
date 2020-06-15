@@ -1,0 +1,10 @@
+auth_code:
+  on: 上
+  mailer:
+    subject: wallabag 認證碼
+    body:
+      hello: 嗨! %user%，
+      first_para: 由於您需要雙重身份驗證才能登錄您的 wallabag 帳戶，而新的裝置剛剛使用它，我們會向您發送驗證連接的代碼。
+      second_para: 這是代碼：
+      support: 如果您有任何問題，請隨時與我們聯繫：
+      signature: wallabag 團隊

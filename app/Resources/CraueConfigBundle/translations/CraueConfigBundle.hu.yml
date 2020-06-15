@@ -1,0 +1,42 @@
+settings_changed: Beállítások frissítve
+download_pictures: Képek letöltése a kiszolgálóra
+carrot: Megosztás engedélyezése a Carrot-ra
+diaspora_url: diaspora* URL, ha a szolgáltatás engedélyezett
+export_epub: ePub-ba exportálás engedélyezése
+export_mobi: .mobi-ba exportálás engedélyezése
+export_pdf: PDF-be exportálás engedélyezése
+export_csv: CSV-be exportálás engedélyezése
+export_json: JSON-ba exportálás engedélyezése
+export_txt: TXT-be exportálás engedélyezése
+export_xml: XML-be exportálás engedélyezése
+import_with_rabbitmq: A RabbitMQ aszinkron adatimportálásának engedélyezése
+import_with_redis: A Redis aszinkron adatimportálásának engedélyezése
+shaarli_url: Shaarli URL, ha a szolgáltatás engedélyezett
+scuttle_url: Scuttle URL, ha a szolgáltatás engedélyezett
+unmark_url: Unmark URL, ha a szolgáltatás engedélyezett
+share_diaspora: Megosztás engedélyezése a diaspora*-ra
+share_mail: Megosztás engedélyezése e-mail-ben
+share_shaarli: Megosztás engedélyezése a Shaarli-ra
+share_scuttle: Megosztás engedélyezése a Scuttle-ra
+share_twitter: Megosztás engedélyezése a Twitter-re
+share_unmark: Megosztás engedélyezése az Unmark.it-ra
+show_printlink: Hivatkozás mutatása a tartalom nyomtatására
+wallabag_support_url: Támogatási URL a wallabag-hoz
+entry: cikk
+export: exportál
+import: importál
+misc: egyéb
+modify_settings: alkalmaz
+piwik_host: Weboldalának hosztja a Piwik-en (http:// vagy https:// nélkül)
+piwik_site_id: Weboldalának azonosítója (ID-je) a Piwik-en
+piwik_enabled: Piwik engedélyezése
+demo_mode_enabled: Engedélyezi a bemutató (demó) módot? (Csak a nyilvános wallabag
+  demóhoz használva)
+demo_mode_username: Demó felhasználó
+share_public: Nyilvános URL-ek engedélyezése a bejegyzésekhez
+download_images_enabled: Képek letöltése helyileg
+restricted_access: Hitelesítés engedélyezése paywalled weboldalakhoz
+api_user_registration: Felhasználó API-n keresztüli regisztrálásának engedélyezése
+store_article_headers: HTTP fejlécek tárolása az összes cikkhez
+shaarli_share_origin_url: Az eredeti URL megosztásának engedélyezése a Shaarli-n,
+  ha a szolgáltatás engedélyezett

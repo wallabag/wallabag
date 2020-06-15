@@ -1,0 +1,13 @@
+auth_code:
+  on: 'innen:'
+  mailer:
+    subject: wallabag hitelesítési kód
+    body:
+      hello: Üdv, %user%!
+      first_para: Mivel két tényezős hitelesítést igényelt a wallabag fiókjába való
+        bejelentkezéshez és éppen egy új eszköz használta, egy kódot küldtünk a kapcsolat
+        érvényesítéséhez.
+      second_para: 'Íme az érvényesítő kód:'
+      support: 'Kérjük, ne habozzon kapcsolatba lépni velünk, ha bármilyen probléma
+        merülne fel:'
+      signature: A wallabag csapat
