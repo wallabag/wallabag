@@ -20,7 +20,7 @@ class RedirectTest extends TestCase
     /** @var UsernamePasswordToken */
     private $token;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->routerMock = $this->getMockBuilder('Symfony\Component\Routing\Router')
             ->disableOriginalConstructor()

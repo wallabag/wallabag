@@ -20,7 +20,7 @@ class RuleBasedIgnoreOriginProcessorTest extends TestCase
     private $logger;
     private $handler;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->rulerz = $this->getRulerZMock();
         $this->logger = $this->getLogger();

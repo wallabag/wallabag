@@ -3,7 +3,7 @@
 namespace Wallabag\CoreBundle\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Wallabag\CoreBundle\Entity\Tag;
 
 class TagFixtures extends Fixture
@@ -11,7 +11,7 @@ class TagFixtures extends Fixture
     /**
      * {@inheritdoc}
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $tags = [
             'foo-bar-tag' => 'foo bar', //tag used for EntryControllerTest

@@ -18,7 +18,7 @@ abstract class WallabagCoreTestCase extends WebTestCase
      */
     private $client = null;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

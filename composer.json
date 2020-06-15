@@ -3,6 +3,8 @@
     "type": "project",
     "description": "open source self hostable read-it-later web application",
     "keywords": [
+        "poche",
+        "wallabag",
         "read-it-later",
         "read it later"
     ],
@@ -22,7 +24,7 @@
         },
         {
             "name": "Jérémy Benoist",
-            "homepage": "http://www.j0k3r.net",
+            "homepage": "https://www.j0k3r.net",
             "role": "Developer"
         }
     ],
@@ -31,7 +33,7 @@
         "issues": "https://github.com/wallabag/wallabag/issues"
     },
     "require": {
-        "php": ">=7.1.3",
+        "php": ">=7.2.5",
         "ext-ctype": "*",
         "ext-curl": "*",
         "ext-dom": "*",
@@ -47,6 +49,7 @@
         "ext-tidy": "*",
         "ext-tokenizer": "*",
         "ext-xml": "*",
+        "babdev/pagerfanta-bundle": "^2.4",
         "bdunogier/guzzle-site-authenticator": "^1.0.0",
         "craue/config-bundle": "^2.3.0",
         "defuse/php-encryption": "^2.1",
@@ -64,7 +67,7 @@
         "incenteev/composer-parameter-handler": "^2.1",
         "j0k3r/graby": "^2.0",
         "javibravo/simpleue": "^2.0",
-        "jms/serializer-bundle": "~2.2",
+        "jms/serializer-bundle": "~3.6",
         "kphoen/rulerz-bundle": "~0.13",
         "laminas/laminas-code": "^3.4",
         "laminas/laminas-diactoros": "^2.3",
@@ -93,22 +96,22 @@
         "twig/extensions": "^1.5",
         "wallabag/php-mobi": "~1.0",
         "wallabag/phpepub": "^4.0.7.2",
-        "white-october/pagerfanta-bundle": "^1.1",
-        "willdurand/hateoas-bundle": "~1.3"
+        "willdurand/hateoas-bundle": "~2.1"
     },
     "require-dev": {
-        "dama/doctrine-test-bundle": "^5.0",
+        "dama/doctrine-test-bundle": "^6.0",
         "doctrine/doctrine-fixtures-bundle": "~3.0",
         "friendsofphp/php-cs-fixer": "~2.13",
         "guzzlehttp/psr7": "^1.0",
         "m6web/redis-mock": "^5.0",
         "php-http/mock-client": "^1.0",
-        "phpstan/phpstan": "^0.11.0",
-        "phpstan/phpstan-doctrine": "^0.11.0",
-        "phpstan/phpstan-phpunit": "^0.11.0",
-        "phpstan/phpstan-symfony": "^0.11.0",
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan": "^0.12.0",
+        "phpstan/phpstan-doctrine": "^0.12.0",
+        "phpstan/phpstan-phpunit": "^0.12.0",
+        "phpstan/phpstan-symfony": "^0.12.0",
         "symfony/maker-bundle": "^1.18",
-        "symfony/phpunit-bridge": "~4.3.8"
+        "symfony/phpunit-bridge": "~5.1.1"
     },
     "suggest": {
         "ext-imagick": "To keep GIF animation when downloading image is enabled"
@@ -159,7 +162,7 @@
     "config": {
         "bin-dir": "bin",
         "platform": {
-            "php": "7.1.3"
+            "php": "7.2.5"
         },
         "sort-packages": true
     },

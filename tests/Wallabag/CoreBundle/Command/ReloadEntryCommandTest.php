@@ -22,7 +22,7 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
      */
     public $bobEntry;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

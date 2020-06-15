@@ -18,19 +18,19 @@ use Wallabag\CoreBundle\Command\InstallCommand;
 
 class InstallCommandTest extends WallabagCoreTestCase
 {
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         // disable doctrine-test-bundle
         StaticDriver::setKeepStaticConnections(false);
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         // enable doctrine-test-bundle
         StaticDriver::setKeepStaticConnections(true);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -66,7 +66,7 @@ class InstallCommandTest extends WallabagCoreTestCase
         $this->resetDatabase($this->getClient());
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $databasePath = getenv('TEST_DATABASE_PATH');
         // Remove variable environnement

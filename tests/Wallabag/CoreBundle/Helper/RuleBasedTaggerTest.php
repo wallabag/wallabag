@@ -21,7 +21,7 @@ class RuleBasedTaggerTest extends TestCase
     private $logger;
     private $handler;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->rulerz = $this->getRulerZMock();
         $this->tagRepository = $this->getTagRepositoryMock();

@@ -14,7 +14,7 @@ class AuthCodeMailerTest extends TestCase
     protected $spool;
     protected $twig;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->spool = new CountableMemorySpool();
         $transport = new \Swift_Transport_SpoolTransport(

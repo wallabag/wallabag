@@ -4,7 +4,7 @@ namespace Wallabag\CoreBundle\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\UserBundle\DataFixtures\UserFixtures;
 
@@ -13,7 +13,7 @@ class ConfigFixtures extends Fixture implements DependentFixtureInterface
     /**
      * {@inheritdoc}
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $adminConfig = new Config($this->getReference('admin-user'));
 

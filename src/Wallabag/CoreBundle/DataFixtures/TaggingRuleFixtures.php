@@ -4,7 +4,7 @@ namespace Wallabag\CoreBundle\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Wallabag\CoreBundle\Entity\TaggingRule;
 
 class TaggingRuleFixtures extends Fixture implements DependentFixtureInterface
@@ -12,7 +12,7 @@ class TaggingRuleFixtures extends Fixture implements DependentFixtureInterface
     /**
      * {@inheritdoc}
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $tr1 = new TaggingRule();
         $tr1->setRule('content matches "spurs"');

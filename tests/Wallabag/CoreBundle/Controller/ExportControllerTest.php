@@ -300,7 +300,7 @@ class ExportControllerTest extends WallabagCoreTestCase
 
         $content = new \SimpleXMLElement($client->getResponse()->getContent());
         $this->assertGreaterThan(0, $content->count());
-        $this->assertSame(\count($contentInDB), $content->count());
+        $this->assertCount($contentInDB, $content);
         $this->assertNotEmpty('id', (string) $content->entry[0]->id);
         $this->assertNotEmpty('title', (string) $content->entry[0]->title);
         $this->assertNotEmpty('url', (string) $content->entry[0]->url);
