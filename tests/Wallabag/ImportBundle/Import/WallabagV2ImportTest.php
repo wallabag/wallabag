@@ -87,7 +87,7 @@ class WallabagV2ImportTest extends TestCase
             ->expects($this->any())
             ->method('persist')
             ->with($this->callback(function ($persistedEntry) {
-                return $persistedEntry->isArchived();
+                return (bool) $persistedEntry->isArchived();
             }));
 
         $res = $wallabagV2Import->setMarkAsRead(true)->import();
@@ -179,7 +179,7 @@ class WallabagV2ImportTest extends TestCase
         $this->assertFalse($res);
 
         $records = $this->logHandler->getRecords();
-        $this->assertContains('WallabagImport: unable to read file', $records[0]['message']);
+        $this->assertStringContainsString('WallabagImport: unable to read file', $records[0]['message']);
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
@@ -193,7 +193,7 @@ class WallabagV2ImportTest extends TestCase
         $this->assertFalse($res);
 
         $records = $this->logHandler->getRecords();
-        $this->assertContains('WallabagImport: user is not defined', $records[0]['message']);
+        $this->assertStringContainsString('WallabagImport: user is not defined', $records[0]['message']);
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 

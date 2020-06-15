@@ -22,8 +22,8 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
             'command' => $command->getName(),
         ]);
 
-        $this->assertContains('Generating hashed urls for "3" users', $tester->getDisplay());
-        $this->assertContains('Finished generated hashed urls', $tester->getDisplay());
+        $this->assertStringContainsString('Generating hashed urls for "3" users', $tester->getDisplay());
+        $this->assertStringContainsString('Finished generated hashed urls', $tester->getDisplay());
     }
 
     public function testRunGenerateUrlHashesCommandWithBadUsername()
@@ -39,7 +39,7 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
             'username' => 'unknown',
         ]);
 
-        $this->assertContains('User "unknown" not found', $tester->getDisplay());
+        $this->assertStringContainsString('User "unknown" not found', $tester->getDisplay());
     }
 
     public function testRunGenerateUrlHashesCommandForUser()
@@ -55,7 +55,7 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
             'username' => 'admin',
         ]);
 
-        $this->assertContains('Generated hashed urls for user: admin', $tester->getDisplay());
+        $this->assertStringContainsString('Generated hashed urls for user: admin', $tester->getDisplay());
     }
 
     public function testGenerateUrls()
@@ -85,7 +85,7 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
             'username' => 'admin',
         ]);
 
-        $this->assertContains('Generated hashed urls for user: admin', $tester->getDisplay());
+        $this->assertStringContainsString('Generated hashed urls for user: admin', $tester->getDisplay());
 
         $entry = $em->getRepository('WallabagCoreBundle:Entry')->findOneByUrl($url);
 

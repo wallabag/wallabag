@@ -13,7 +13,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
         $client->followRedirects();
 
         $crawler = $client->request('GET', '/config');
-        $this->assertContains('config.form_feed.description', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertStringContainsString('config.form_feed.description', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
     public function testLoginWithout2Factor()
@@ -23,7 +23,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
         $client->followRedirects();
 
         $crawler = $client->request('GET', '/config');
-        $this->assertContains('config.form_feed.description', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertStringContainsString('config.form_feed.description', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
     public function testLoginWith2FactorEmail()
@@ -48,7 +48,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
 
         $this->logInAsUsingHttp('admin');
         $crawler = $client->request('GET', '/config');
-        $this->assertContains('trusted', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertStringContainsString('trusted', $crawler->filter('body')->extract(['_text'])[0]);
 
         // restore user
         $user = $em
@@ -81,7 +81,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
 
         $this->logInAsUsingHttp('admin');
         $crawler = $client->request('GET', '/config');
-        $this->assertContains('trusted', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertStringContainsString('trusted', $crawler->filter('body')->extract(['_text'])[0]);
 
         // restore user
         $user = $em
@@ -104,6 +104,6 @@ class SecurityControllerTest extends WallabagCoreTestCase
 
         $client->followRedirects();
         $client->request('GET', '/register');
-        $this->assertContains('registration.submit', $client->getResponse()->getContent());
+        $this->assertStringContainsString('registration.submit', $client->getResponse()->getContent());
     }
 }

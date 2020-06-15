@@ -10,12 +10,11 @@ use Wallabag\ImportBundle\Command\RedisWorkerCommand;
 
 class RedisWorkerCommandTest extends WallabagCoreTestCase
 {
-    /**
-     * @expectedException \Symfony\Component\Console\Exception\RuntimeException
-     * @expectedExceptionMessage Not enough arguments (missing: "serviceName")
-     */
     public function testRunRedisWorkerCommandWithoutArguments()
     {
+        $this->expectException(\Symfony\Component\Console\Exception\RuntimeException::class);
+        $this->expectExceptionMessage('Not enough arguments (missing: "serviceName")');
+
         $application = new Application($this->getClient()->getKernel());
         $application->add(new RedisWorkerCommand());
 
@@ -27,12 +26,11 @@ class RedisWorkerCommandTest extends WallabagCoreTestCase
         ]);
     }
 
-    /**
-     * @expectedException \Symfony\Component\Config\Definition\Exception\Exception
-     * @expectedExceptionMessage No queue or consumer found for service name
-     */
     public function testRunRedisWorkerCommandWithBadService()
     {
+        $this->expectException(\Symfony\Component\Config\Definition\Exception\Exception::class);
+        $this->expectExceptionMessage('No queue or consumer found for service name');
+
         $application = new Application($this->getClient()->getKernel());
         $application->add(new RedisWorkerCommand());
 
@@ -68,7 +66,7 @@ class RedisWorkerCommandTest extends WallabagCoreTestCase
             '--maxIterations' => 1,
         ]);
 
-        $this->assertContains('Worker started at', $tester->getDisplay());
-        $this->assertContains('Waiting for message', $tester->getDisplay());
+        $this->assertStringContainsString('Worker started at', $tester->getDisplay());
+        $this->assertStringContainsString('Waiting for message', $tester->getDisplay());
     }
 }

@@ -60,7 +60,7 @@ class PocketImportTest extends TestCase
         $this->assertFalse($code);
 
         $records = $this->logHandler->getRecords();
-        $this->assertContains('PocketImport: Failed to request token', $records[0]['message']);
+        $this->assertStringContainsString('PocketImport: Failed to request token', $records[0]['message']);
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
@@ -91,7 +91,7 @@ class PocketImportTest extends TestCase
         $this->assertFalse($res);
 
         $records = $this->logHandler->getRecords();
-        $this->assertContains('PocketImport: Failed to authorize client', $records[0]['message']);
+        $this->assertStringContainsString('PocketImport: Failed to authorize client', $records[0]['message']);
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
@@ -204,7 +204,7 @@ JSON
             ->expects($this->any())
             ->method('persist')
             ->with($this->callback(function ($persistedEntry) {
-                return $persistedEntry->isArchived() && $persistedEntry->isStarred();
+                return (bool) $persistedEntry->isArchived() && (bool) $persistedEntry->isStarred();
             }));
 
         $entry = new Entry($this->user);
@@ -295,7 +295,7 @@ JSON
             ->expects($this->any())
             ->method('persist')
             ->with($this->callback(function ($persistedEntry) {
-                return $persistedEntry->isArchived();
+                return (bool) $persistedEntry->isArchived();
             }));
 
         $entry = new Entry($this->user);
@@ -491,7 +491,7 @@ JSON
         $this->assertFalse($res);
 
         $records = $this->logHandler->getRecords();
-        $this->assertContains('PocketImport: Failed to import', $records[0]['message']);
+        $this->assertStringContainsString('PocketImport: Failed to import', $records[0]['message']);
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
@@ -511,7 +511,7 @@ JSON
                     }
                 }
             }
-            
+
 JSON
         ));
 

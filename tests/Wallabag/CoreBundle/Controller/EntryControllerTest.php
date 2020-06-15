@@ -37,7 +37,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client->request('GET', '/new');
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('login', $client->getResponse()->headers->get('location'));
+        $this->assertStringContainsString('login', $client->getResponse()->headers->get('location'));
     }
 
     /**
@@ -54,7 +54,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertContains('quickstart.intro.title', $body[0]);
+        $this->assertStringContainsString('quickstart.intro.title', $body[0]);
 
         // Test if quickstart is disabled when user has 1 entry
         $crawler = $client->request('GET', '/new');
@@ -73,7 +73,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/unread/list');
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertContains('entry.list.number_on_the_page', $body[0]);
+        $this->assertStringContainsString('entry.list.number_on_the_page', $body[0]);
     }
 
     public function testGetNew()
@@ -169,7 +169,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
         $this->assertSame($this->url, $content->getUrl());
-        $this->assertContains('la cryptomonnaie de Facebook', $content->getTitle());
+        $this->assertStringContainsString('la cryptomonnaie de Facebook', $content->getTitle());
         $this->assertSame('fr', $content->getLanguage());
         $this->assertArrayHasKey('x-frame-options', $content->getHeaders());
         $client->getContainer()->get('craue_config')->set('store_article_headers', 0);
@@ -235,7 +235,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client->submit($form, $data);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('/view/', $client->getResponse()->getTargetUrl());
+        $this->assertStringContainsString('/view/', $client->getResponse()->getTargetUrl());
     }
 
     /**
@@ -273,7 +273,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client->submit($form, $data);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('/view/', $client->getResponse()->getTargetUrl());
+        $this->assertStringContainsString('/view/', $client->getResponse()->getTargetUrl());
     }
 
     /**
@@ -311,7 +311,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client->submit($form, $data);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('/view/', $client->getResponse()->getTargetUrl());
+        $this->assertStringContainsString('/view/', $client->getResponse()->getTargetUrl());
     }
 
     /**
@@ -335,7 +335,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client->submit($form, $data);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('/', $client->getResponse()->getTargetUrl());
+        $this->assertStringContainsString('/', $client->getResponse()->getTargetUrl());
 
         $em = $client->getContainer()
             ->get('doctrine.orm.entity_manager');
@@ -366,7 +366,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client->submit($form, $data);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('/', $client->getResponse()->getTargetUrl());
+        $this->assertStringContainsString('/', $client->getResponse()->getTargetUrl());
 
         $entry = $em
             ->getRepository('WallabagCoreBundle:Entry')
@@ -438,7 +438,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertContains($entry->getTitle(), $body[0]);
+        $this->assertStringContainsString($entry->getTitle(), $body[0]);
     }
 
     /**
@@ -538,9 +538,9 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->followRedirect();
 
         $this->assertGreaterThan(1, $title = $crawler->filter('div[id=article] h1')->extract(['_text']));
-        $this->assertContains('My updated title hehe :)', $title[0]);
+        $this->assertStringContainsString('My updated title hehe :)', $title[0]);
         $this->assertGreaterThan(1, $stats = $crawler->filter('div[class="tools grey-text"] ul[class=stats] li a[class="tool grey-text"]')->extract(['_text']));
-        $this->assertContains('example.io', trim($stats[1]));
+        $this->assertStringContainsString('example.io', trim($stats[1]));
     }
 
     public function testEditRemoveOriginUrl()
@@ -572,11 +572,11 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $title = $crawler->filter('div[id=article] h1')->extract(['_text']);
         $this->assertGreaterThan(1, $title);
-        $this->assertContains('My updated title hehe :)', $title[0]);
+        $this->assertStringContainsString('My updated title hehe :)', $title[0]);
 
         $stats = $crawler->filter('div[class="tools grey-text"] ul[class=stats] li a[class="tool grey-text"]')->extract(['_text']);
         $this->assertCount(1, $stats);
-        $this->assertNotContains('example.io', trim($stats[0]));
+        $this->assertStringNotContainsString('example.io', trim($stats[0]));
     }
 
     public function testToggleArchive()
@@ -896,7 +896,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', 'unread/list' . $parameters);
 
-        $this->assertContains($parameters, $client->getResponse()->getContent());
+        $this->assertStringContainsString($parameters, $client->getResponse()->getContent());
 
         // reset pagination
         $crawler = $client->request('GET', '/config');
@@ -1045,14 +1045,14 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client->request('GET', $shareUrl);
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('max-age=25200', $client->getResponse()->headers->get('cache-control'));
-        $this->assertContains('public', $client->getResponse()->headers->get('cache-control'));
-        $this->assertContains('s-maxage=25200', $client->getResponse()->headers->get('cache-control'));
-        $this->assertNotContains('no-cache', $client->getResponse()->headers->get('cache-control'));
-        $this->assertContains('og:title', $client->getResponse()->getContent());
-        $this->assertContains('og:type', $client->getResponse()->getContent());
-        $this->assertContains('og:url', $client->getResponse()->getContent());
-        $this->assertContains('og:image', $client->getResponse()->getContent());
+        $this->assertStringContainsString('max-age=25200', $client->getResponse()->headers->get('cache-control'));
+        $this->assertStringContainsString('public', $client->getResponse()->headers->get('cache-control'));
+        $this->assertStringContainsString('s-maxage=25200', $client->getResponse()->headers->get('cache-control'));
+        $this->assertStringNotContainsString('no-cache', $client->getResponse()->headers->get('cache-control'));
+        $this->assertStringContainsString('og:title', $client->getResponse()->getContent());
+        $this->assertStringContainsString('og:type', $client->getResponse()->getContent());
+        $this->assertStringContainsString('og:url', $client->getResponse()->getContent());
+        $this->assertStringContainsString('og:image', $client->getResponse()->getContent());
 
         // sharing is now disabled
         $client->getContainer()->get('craue_config')->set('share_public', 0);
@@ -1103,9 +1103,9 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $entry);
         $this->assertSame($url, $entry->getUrl());
-        $this->assertContains('Judo', $entry->getTitle());
+        $this->assertStringContainsString('Judo', $entry->getTitle());
         // instead of checking for the filename (which might change) check that the image is now local
-        $this->assertContains(rtrim($client->getContainer()->getParameter('domain_name'), '/') . '/assets/images/', $entry->getContent());
+        $this->assertStringContainsString(rtrim($client->getContainer()->getParameter('domain_name'), '/') . '/assets/images/', $entry->getContent());
 
         $client->getContainer()->get('craue_config')->set('download_images_enabled', 0);
     }
@@ -1191,7 +1191,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client->request('GET', '/archive/' . $entry->getId());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('/view/' . $entry->getId(), $client->getResponse()->headers->get('location'));
+        $this->assertStringContainsString('/view/' . $entry->getId(), $client->getResponse()->headers->get('location'));
     }
 
     public function testFilterOnHttpStatus()
@@ -1469,7 +1469,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->followRedirect();
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('flashes.entry.notice.entry_saved', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertStringContainsString('flashes.entry.notice.entry_saved', $crawler->filter('body')->extract(['_text'])[0]);
 
         $content = $em
             ->getRepository('WallabagCoreBundle:Entry')
@@ -1555,23 +1555,23 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/unread/random');
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'Unread random');
+        $this->assertStringContainsString('/view/', $client->getResponse()->getTargetUrl(), 'Unread random');
 
         $client->request('GET', '/starred/random');
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'Starred random');
+        $this->assertStringContainsString('/view/', $client->getResponse()->getTargetUrl(), 'Starred random');
 
         $client->request('GET', '/archive/random');
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'Archive random');
+        $this->assertStringContainsString('/view/', $client->getResponse()->getTargetUrl(), 'Archive random');
 
         $client->request('GET', '/untagged/random');
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'Untagged random');
+        $this->assertStringContainsString('/view/', $client->getResponse()->getTargetUrl(), 'Untagged random');
 
         $client->request('GET', '/all/random');
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'All random');
+        $this->assertStringContainsString('/view/', $client->getResponse()->getTargetUrl(), 'All random');
     }
 
     public function testMass()

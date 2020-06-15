@@ -81,7 +81,7 @@ class ElcuratorControllerTest extends WallabagCoreTestCase
         $crawler = $client->followRedirect();
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertContains('flashes.import.notice.summary', $body[0]);
+        $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
         $this->assertNotEmpty($client->getContainer()->get('wallabag_core.redis.client')->lpop('wallabag.import.elcurator'));
 
@@ -109,7 +109,7 @@ class ElcuratorControllerTest extends WallabagCoreTestCase
         $crawler = $client->followRedirect();
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertContains('flashes.import.notice.summary', $body[0]);
+        $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')

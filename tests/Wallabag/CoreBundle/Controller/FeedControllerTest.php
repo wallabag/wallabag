@@ -23,8 +23,8 @@ class FeedControllerTest extends WallabagCoreTestCase
         $this->assertSame(1, $xpath->query('/a:feed')->length);
 
         $this->assertSame(1, $xpath->query('/a:feed/a:title')->length);
-        $this->assertContains('favicon.ico', $xpath->query('/a:feed/a:icon')->item(0)->nodeValue);
-        $this->assertContains('logo-square.png', $xpath->query('/a:feed/a:logo')->item(0)->nodeValue);
+        $this->assertStringContainsString('favicon.ico', $xpath->query('/a:feed/a:icon')->item(0)->nodeValue);
+        $this->assertStringContainsString('logo-square.png', $xpath->query('/a:feed/a:logo')->item(0)->nodeValue);
 
         $this->assertSame(1, $xpath->query('/a:feed/a:updated')->length);
 
@@ -42,7 +42,7 @@ class FeedControllerTest extends WallabagCoreTestCase
         }
 
         $this->assertSame(1, $xpath->query('/a:feed/a:link[@rel="self"]')->length);
-        $this->assertContains($type, $xpath->query('/a:feed/a:link[@rel="self"]')->item(0)->getAttribute('href'));
+        $this->assertStringContainsString($type, $xpath->query('/a:feed/a:link[@rel="self"]')->item(0)->getAttribute('href'));
 
         $this->assertSame(1, $xpath->query('/a:feed/a:link[@rel="last"]')->length);
 

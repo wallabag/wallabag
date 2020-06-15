@@ -213,7 +213,7 @@ class TagControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertContains('flashes.tag.notice.tag_renamed', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertStringContainsString('flashes.tag.notice.tag_renamed', $crawler->filter('body')->extract(['_text'])[0]);
 
         $freshEntry = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
@@ -277,7 +277,7 @@ class TagControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertNotContains('flashes.tag.notice.tag_renamed', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertStringNotContainsString('flashes.tag.notice.tag_renamed', $crawler->filter('body')->extract(['_text'])[0]);
 
         $freshEntry = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
@@ -332,7 +332,7 @@ class TagControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertNotContains('flashes.tag.notice.tag_renamed', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertStringNotContainsString('flashes.tag.notice.tag_renamed', $crawler->filter('body')->extract(['_text'])[0]);
 
         $freshEntry = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
@@ -402,7 +402,7 @@ class TagControllerTest extends WallabagCoreTestCase
 
         $client->submit($form, $data);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertNotContains('flashes.tag.notice.tag_renamed', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertStringNotContainsString('flashes.tag.notice.tag_renamed', $crawler->filter('body')->extract(['_text'])[0]);
 
         $freshEntry1 = $client->getContainer()
             ->get('doctrine.orm.entity_manager')

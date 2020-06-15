@@ -42,7 +42,7 @@ class DownloadImagesTest extends TestCase
         $res = $download->processHtml(123, $html, $url);
 
         // this the base path of all image (since it's calculated using the entry id: 123)
-        $this->assertContains('http://wallabag.io/assets/images/9/b/9b0ead26/', $res);
+        $this->assertStringContainsString('http://wallabag.io/assets/images/9/b/9b0ead26/', $res);
     }
 
     public function testProcessHtmlWithBadImage()
@@ -56,7 +56,7 @@ class DownloadImagesTest extends TestCase
         $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
         $res = $download->processHtml(123, '<div><img src="http://i.imgur.com/T9qgcHc.jpg" /></div>', 'http://imgur.com/gallery/WxtWY');
 
-        $this->assertContains('http://i.imgur.com/T9qgcHc.jpg', $res, 'Image were not replace because of content-type');
+        $this->assertStringContainsString('http://i.imgur.com/T9qgcHc.jpg', $res, 'Image were not replace because of content-type');
     }
 
     public function singleImage()
@@ -83,7 +83,7 @@ class DownloadImagesTest extends TestCase
         $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
         $res = $download->processSingleImage(123, 'T9qgcHc.jpg', 'http://imgur.com/gallery/WxtWY');
 
-        $this->assertContains('/assets/images/9/b/9b0ead26/ebe60399.' . $extension, $res);
+        $this->assertStringContainsString('/assets/images/9/b/9b0ead26/ebe60399.' . $extension, $res);
     }
 
     public function testProcessSingleImageWithBadUrl()
@@ -144,8 +144,8 @@ class DownloadImagesTest extends TestCase
             'https://theconversation.com/conversation-avec-gerald-bronner-ce-nest-pas-la-post-verite-qui-nous-menace-mais-lextension-de-notre-credulite-73089'
         );
 
-        $this->assertContains('http://wallabag.io/assets/images/9/b/9b0ead26/', $res, 'Content-Type was empty but data is ok for an image');
-        $this->assertContains('DownloadImages: Checking extension (alternative)', $logHandler->getRecords()[3]['message']);
+        $this->assertStringContainsString('http://wallabag.io/assets/images/9/b/9b0ead26/', $res, 'Content-Type was empty but data is ok for an image');
+        $this->assertStringContainsString('DownloadImages: Checking extension (alternative)', $logHandler->getRecords()[3]['message']);
     }
 
     public function testProcessImageWithSrcset()
@@ -161,7 +161,7 @@ class DownloadImagesTest extends TestCase
         $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
         $res = $download->processHtml(123, '<p><img class="alignnone wp-image-1153" src="http://piketty.blog.lemonde.fr/files/2017/10/F1FR-530x375.jpg" alt="" width="628" height="444" srcset="http://piketty.blog.lemonde.fr/files/2017/10/F1FR-530x375.jpg 530w, http://piketty.blog.lemonde.fr/files/2017/10/F1FR-768x543.jpg 768w, http://piketty.blog.lemonde.fr/files/2017/10/F1FR-900x636.jpg 900w" sizes="(max-width: 628px) 100vw, 628px" /></p>', 'http://piketty.blog.lemonde.fr/2017/10/12/budget-2018-la-jeunesse-sacrifiee/');
 
-        $this->assertNotContains('http://piketty.blog.lemonde.fr/', $res, 'Image srcset attribute were not replaced');
+        $this->assertStringNotContainsString('http://piketty.blog.lemonde.fr/', $res, 'Image srcset attribute were not replaced');
     }
 
     public function testProcessImageWithTrickySrcset()
@@ -181,7 +181,7 @@ class DownloadImagesTest extends TestCase
        (min-width: 626px)  calc(100vw - 335px)
                            calc(100vw - 30px)" alt="" /></figure>', 'https://css-tricks.com/the-critical-request/');
 
-        $this->assertNotContains('f_auto,q_auto', $res, 'Image srcset attribute were not replaced');
+        $this->assertStringNotContainsString('f_auto,q_auto', $res, 'Image srcset attribute were not replaced');
     }
 
     public function testProcessImageWithNullPath()

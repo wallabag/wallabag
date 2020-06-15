@@ -70,7 +70,7 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
             $this->assertNotEmpty($reloadedEntry->getContent());
         }
 
-        $this->assertContains('Done', $tester->getDisplay());
+        $this->assertStringContainsString('Done', $tester->getDisplay());
     }
 
     /**
@@ -98,7 +98,7 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
         $reloadedBobEntry = $entryRepository->find($this->bobEntry->getId());
         $this->assertEmpty($reloadedBobEntry->getContent());
 
-        $this->assertContains('Done', $tester->getDisplay());
+        $this->assertStringContainsString('Done', $tester->getDisplay());
     }
 
     public function testRunReloadEntryWithoutEntryCommand()
@@ -115,7 +115,7 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
             'interactive' => false,
         ]);
 
-        $this->assertContains('No entry to reload', $tester->getDisplay());
-        $this->assertNotContains('Done', $tester->getDisplay());
+        $this->assertStringContainsString('No entry to reload', $tester->getDisplay());
+        $this->assertStringNotContainsString('Done', $tester->getDisplay());
     }
 }

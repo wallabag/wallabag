@@ -9,12 +9,11 @@ use Wallabag\ImportBundle\Command\ImportCommand;
 
 class ImportCommandTest extends WallabagCoreTestCase
 {
-    /**
-     * @expectedException \Symfony\Component\Console\Exception\RuntimeException
-     * @expectedExceptionMessage Not enough arguments
-     */
     public function testRunImportCommandWithoutArguments()
     {
+        $this->expectException(\Symfony\Component\Console\Exception\RuntimeException::class);
+        $this->expectExceptionMessage('Not enough arguments');
+
         $application = new Application($this->getClient()->getKernel());
         $application->add(new ImportCommand());
 
@@ -26,12 +25,11 @@ class ImportCommandTest extends WallabagCoreTestCase
         ]);
     }
 
-    /**
-     * @expectedException \Symfony\Component\Config\Definition\Exception\Exception
-     * @expectedExceptionMessage not found
-     */
     public function testRunImportCommandWithoutFilepath()
     {
+        $this->expectException(\Symfony\Component\Config\Definition\Exception\Exception::class);
+        $this->expectExceptionMessage('not found');
+
         $application = new Application($this->getClient()->getKernel());
         $application->add(new ImportCommand());
 
@@ -45,11 +43,10 @@ class ImportCommandTest extends WallabagCoreTestCase
         ]);
     }
 
-    /**
-     * @expectedException \Doctrine\ORM\NoResultException
-     */
     public function testRunImportCommandWithWrongUsername()
     {
+        $this->expectException(\Doctrine\ORM\NoResultException::class);
+
         $application = new Application($this->getClient()->getKernel());
         $application->add(new ImportCommand());
 
@@ -78,8 +75,8 @@ class ImportCommandTest extends WallabagCoreTestCase
             '--importer' => 'v2',
         ]);
 
-        $this->assertContains('imported', $tester->getDisplay());
-        $this->assertContains('already saved', $tester->getDisplay());
+        $this->assertStringContainsString('imported', $tester->getDisplay());
+        $this->assertStringContainsString('already saved', $tester->getDisplay());
     }
 
     public function testRunImportCommandWithUserId()
@@ -100,7 +97,7 @@ class ImportCommandTest extends WallabagCoreTestCase
             '--importer' => 'v2',
         ]);
 
-        $this->assertContains('imported', $tester->getDisplay());
-        $this->assertContains('already saved', $tester->getDisplay());
+        $this->assertStringContainsString('imported', $tester->getDisplay());
+        $this->assertStringContainsString('already saved', $tester->getDisplay());
     }
 }

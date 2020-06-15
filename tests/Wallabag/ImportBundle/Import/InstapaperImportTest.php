@@ -91,7 +91,7 @@ class InstapaperImportTest extends TestCase
             ->expects($this->once())
             ->method('persist')
             ->with($this->callback(function ($persistedEntry) {
-                return $persistedEntry->isArchived();
+                return (bool) $persistedEntry->isArchived();
             }));
 
         $res = $instapaperImport->setMarkAsRead(true)->import();
@@ -191,7 +191,7 @@ class InstapaperImportTest extends TestCase
         $this->assertFalse($res);
 
         $records = $this->logHandler->getRecords();
-        $this->assertContains('InstapaperImport: unable to read file', $records[0]['message']);
+        $this->assertStringContainsString('InstapaperImport: unable to read file', $records[0]['message']);
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
@@ -205,7 +205,7 @@ class InstapaperImportTest extends TestCase
         $this->assertFalse($res);
 
         $records = $this->logHandler->getRecords();
-        $this->assertContains('InstapaperImport: user is not defined', $records[0]['message']);
+        $this->assertStringContainsString('InstapaperImport: user is not defined', $records[0]['message']);
         $this->assertSame('ERROR', $records[0]['level_name']);
     }
 
