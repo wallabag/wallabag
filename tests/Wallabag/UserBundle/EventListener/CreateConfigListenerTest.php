@@ -22,7 +22,7 @@ class CreateConfigListenerTest extends TestCase
     private $request;
     private $response;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $session = new Session(new MockArraySessionStorage());
         $this->em = $this->getMockBuilder('Doctrine\ORM\EntityManager')

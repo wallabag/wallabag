@@ -9,12 +9,11 @@ use Wallabag\CoreBundle\Command\ExportCommand;
 
 class ExportCommandTest extends WallabagCoreTestCase
 {
-    /**
-     * @expectedException \Symfony\Component\Console\Exception\RuntimeException
-     * @expectedExceptionMessage Not enough arguments (missing: "username")
-     */
     public function testExportCommandWithoutUsername()
     {
+        $this->expectException(\Symfony\Component\Console\Exception\RuntimeException::class);
+        $this->expectExceptionMessage('Not enough arguments (missing: "username")');
+
         $application = new Application($this->getClient()->getKernel());
         $application->add(new ExportCommand());
 
@@ -39,7 +38,7 @@ class ExportCommandTest extends WallabagCoreTestCase
             'username' => 'unknown',
         ]);
 
-        $this->assertContains('User "unknown" not found', $tester->getDisplay());
+        $this->assertStringContainsString('User "unknown" not found', $tester->getDisplay());
     }
 
     public function testExportCommand()
@@ -55,8 +54,8 @@ class ExportCommandTest extends WallabagCoreTestCase
             'username' => 'admin',
         ]);
 
-        $this->assertContains('Exporting 5 entrie(s) for user admin...', $tester->getDisplay());
-        $this->assertContains('Done', $tester->getDisplay());
+        $this->assertStringContainsString('Exporting 5 entrie(s) for user admin...', $tester->getDisplay());
+        $this->assertStringContainsString('Done', $tester->getDisplay());
         $this->assertFileExists('admin-export.json');
     }
 

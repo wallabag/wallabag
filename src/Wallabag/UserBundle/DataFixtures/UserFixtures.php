@@ -3,7 +3,7 @@
 namespace Wallabag\UserBundle\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Wallabag\UserBundle\Entity\User;
 
 class UserFixtures extends Fixture

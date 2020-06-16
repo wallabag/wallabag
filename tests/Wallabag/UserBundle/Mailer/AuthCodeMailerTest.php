@@ -14,7 +14,7 @@ class AuthCodeMailerTest extends TestCase
     protected $spool;
     protected $twig;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->spool = new CountableMemorySpool();
         $transport = new \Swift_Transport_SpoolTransport(
@@ -57,7 +57,7 @@ TWIG;
         $this->assertArrayHasKey('test@wallabag.io', $msg->getTo());
         $this->assertSame(['nobody@test.io' => 'wallabag test'], $msg->getFrom());
         $this->assertSame('subject', $msg->getSubject());
-        $this->assertContains('text body http://0.0.0.0/support', $msg->toString());
-        $this->assertContains('html body 666666', $msg->toString());
+        $this->assertStringContainsString('text body http://0.0.0.0/support', $msg->toString());
+        $this->assertStringContainsString('html body 666666', $msg->toString());
     }
 }

@@ -33,8 +33,8 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
 
         $body = $crawler->filter('body')->extract(['_text'])[0];
 
-        $this->assertContains('site_credential.description', $body);
-        $this->assertContains('site_credential.list.create_new_one', $body);
+        $this->assertStringContainsString('site_credential.description', $body);
+        $this->assertStringContainsString('site_credential.list.create_new_one', $body);
     }
 
     public function testNewSiteCredential()
@@ -48,8 +48,8 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
 
         $body = $crawler->filter('body')->extract(['_text'])[0];
 
-        $this->assertContains('site_credential.new_site_credential', $body);
-        $this->assertContains('site_credential.form.back_to_list', $body);
+        $this->assertStringContainsString('site_credential.new_site_credential', $body);
+        $this->assertStringContainsString('site_credential.form.back_to_list', $body);
 
         $form = $crawler->filter('button[id=site_credential_save]')->form();
 
@@ -65,7 +65,7 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertContains('flashes.site_credential.notice.added', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertStringContainsString('flashes.site_credential.notice.added', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
     public function testEditSiteCredential()
@@ -81,8 +81,8 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
 
         $body = $crawler->filter('body')->extract(['_text'])[0];
 
-        $this->assertContains('site_credential.edit_site_credential', $body);
-        $this->assertContains('site_credential.form.back_to_list', $body);
+        $this->assertStringContainsString('site_credential.edit_site_credential', $body);
+        $this->assertStringContainsString('site_credential.form.back_to_list', $body);
 
         $form = $crawler->filter('button[id=site_credential_save]')->form();
 
@@ -98,7 +98,7 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertContains('flashes.site_credential.notice.updated', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertStringContainsString('flashes.site_credential.notice.updated', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
     public function testEditFromADifferentUserSiteCredential()
@@ -134,7 +134,7 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertContains('flashes.site_credential.notice.deleted', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertStringContainsString('flashes.site_credential.notice.deleted', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
     private function createSiteCredential(Client $client)

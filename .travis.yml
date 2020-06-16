@@ -22,7 +22,6 @@ if: |
     branch = master
 
 php:
-    - 7.1
     - 7.2
     - 7.3
     - 7.4
@@ -51,7 +50,6 @@ before_install:
     - PHP=$TRAVIS_PHP_VERSION
     - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
     - phpenv config-rm xdebug.ini || echo "xdebug not available"
-    - composer self-update --no-progress
     # install imagick
     - pear config-set preferred_state beta
     - pecl channel-update pecl.php.net
@@ -71,7 +69,7 @@ before_script:
 script:
     - if [[ $VALIDATE_TRANSLATION_FILE = '' ]]; then ./bin/simple-phpunit -v ; fi;
     # PHPStan needs PHPUnit to be installed and cache app to be generated
-    - if [[ $VALIDATE_TRANSLATION_FILE = '' ]]; then php bin/phpstan analyse src tests --no-progress --level 1 ; fi;
+    - if [[ $CS_FIXER = run ]]; then php bin/phpstan analyse ; fi;
     - if [[ $CS_FIXER = run ]]; then php bin/php-cs-fixer fix --verbose --dry-run ; fi;
     - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml src/Wallabag/CoreBundle/Resources/translations -v ; fi;
     - if [[ $VALIDATE_TRANSLATION_FILE = run ]]; then php bin/console lint:yaml app/Resources/CraueConfigBundle/translations -v ; fi;

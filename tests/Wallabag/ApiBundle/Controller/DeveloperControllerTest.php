@@ -31,7 +31,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(\count($nbClients), \count($newNbClients));
 
         $this->assertGreaterThan(1, $alert = $crawler->filter('.settings table strong')->extract(['_text']));
-        $this->assertContains('My app', $alert[0]);
+        $this->assertStringContainsString('My app', $alert[0]);
     }
 
     public function testCreateToken()
@@ -100,7 +100,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         // Try to remove an admin's client with a wrong user
         $this->logInAs('bob');
         $client->request('GET', '/developer');
-        $this->assertContains('no_client', $client->getResponse()->getContent());
+        $this->assertStringContainsString('no_client', $client->getResponse()->getContent());
 
         $this->logInAs('bob');
         $client->request('GET', '/developer/client/delete/' . $adminApiClient->getId());

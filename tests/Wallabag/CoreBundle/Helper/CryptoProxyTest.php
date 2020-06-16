@@ -23,18 +23,15 @@ class CryptoProxyTest extends TestCase
 
         $records = $logHandler->getRecords();
         $this->assertCount(2, $records);
-        $this->assertContains('Crypto: crypting value', $records[0]['message']);
-        $this->assertContains('Crypto: decrypting value', $records[1]['message']);
+        $this->assertStringContainsString('Crypto: crypting value', $records[0]['message']);
+        $this->assertStringContainsString('Crypto: decrypting value', $records[1]['message']);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Decrypt fail
-     *
-     * @return [type] [description]
-     */
     public function testDecryptBadValue()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Decrypt fail');
+
         $crypto = new CryptoProxy(sys_get_temp_dir() . '/' . uniqid('', true) . '.txt', new NullLogger());
         $crypto->decrypt('badvalue');
     }

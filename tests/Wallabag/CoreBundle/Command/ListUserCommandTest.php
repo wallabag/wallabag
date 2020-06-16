@@ -21,7 +21,7 @@ class ListUserCommandTest extends WallabagCoreTestCase
             'command' => $command->getName(),
         ]);
 
-        $this->assertContains('3/3 user(s) displayed.', $tester->getDisplay());
+        $this->assertStringContainsString('3/3 user(s) displayed.', $tester->getDisplay());
     }
 
     public function testRunListUserCommandWithLimit()
@@ -37,7 +37,7 @@ class ListUserCommandTest extends WallabagCoreTestCase
             '--limit' => 2,
         ]);
 
-        $this->assertContains('2/3 user(s) displayed.', $tester->getDisplay());
+        $this->assertStringContainsString('2/3 user(s) displayed.', $tester->getDisplay());
     }
 
     public function testRunListUserCommandWithSearch()
@@ -53,7 +53,7 @@ class ListUserCommandTest extends WallabagCoreTestCase
             'search' => 'boss',
         ]);
 
-        $this->assertContains('1/3 (filtered) user(s) displayed.', $tester->getDisplay());
+        $this->assertStringContainsString('1/3 (filtered) user(s) displayed.', $tester->getDisplay());
     }
 
     public function testRunListUserCommandWithSearchAndLimit()
@@ -70,6 +70,6 @@ class ListUserCommandTest extends WallabagCoreTestCase
             '--limit' => 1,
         ]);
 
-        $this->assertContains('1/3 (filtered) user(s) displayed.', $tester->getDisplay());
+        $this->assertStringContainsString('1/3 (filtered) user(s) displayed.', $tester->getDisplay());
     }
 }

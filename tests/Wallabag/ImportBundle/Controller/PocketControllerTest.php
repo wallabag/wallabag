@@ -77,7 +77,7 @@ class PocketControllerTest extends WallabagCoreTestCase
         $client->request('GET', '/import/pocket/auth');
 
         $this->assertSame(301, $client->getResponse()->getStatusCode());
-        $this->assertContains('getpocket.com/auth/authorize', $client->getResponse()->headers->get('location'));
+        $this->assertStringContainsString('getpocket.com/auth/authorize', $client->getResponse()->headers->get('location'));
     }
 
     public function testImportPocketCallbackWithBadToken()
@@ -99,7 +99,7 @@ class PocketControllerTest extends WallabagCoreTestCase
         $client->request('GET', '/import/pocket/callback');
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('/', $client->getResponse()->headers->get('location'), 'Import is ok, redirect to homepage');
+        $this->assertStringContainsString('/', $client->getResponse()->headers->get('location'), 'Import is ok, redirect to homepage');
         $this->assertSame('flashes.import.notice.failed', $client->getContainer()->get('session')->getFlashBag()->peek('notice')[0]);
     }
 
@@ -133,7 +133,7 @@ class PocketControllerTest extends WallabagCoreTestCase
         $client->request('GET', '/import/pocket/callback');
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('/', $client->getResponse()->headers->get('location'), 'Import is ok, redirect to homepage');
+        $this->assertStringContainsString('/', $client->getResponse()->headers->get('location'), 'Import is ok, redirect to homepage');
         $this->assertSame('flashes.import.notice.summary', $client->getContainer()->get('session')->getFlashBag()->peek('notice')[0]);
     }
 }

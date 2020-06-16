@@ -70,7 +70,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
         // epub format got the content type in the content
-        $this->assertContains('application/epub', $this->client->getResponse()->getContent());
+        $this->assertStringContainsString('application/epub', $this->client->getResponse()->getContent());
         $this->assertSame('application/epub+zip', $this->client->getResponse()->headers->get('Content-Type'));
 
         // re-auth client for mobi
@@ -85,7 +85,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $client->request('GET', '/api/entries/' . $entry->getId() . '/export.pdf');
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $this->assertContains('PDF-', $client->getResponse()->getContent());
+        $this->assertStringContainsString('PDF-', $client->getResponse()->getContent());
         $this->assertSame('application/pdf', $client->getResponse()->headers->get('Content-Type'));
 
         // re-auth client for pdf
@@ -93,14 +93,14 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $client->request('GET', '/api/entries/' . $entry->getId() . '/export.txt');
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $this->assertContains('text/plain', $client->getResponse()->headers->get('Content-Type'));
+        $this->assertStringContainsString('text/plain', $client->getResponse()->headers->get('Content-Type'));
 
         // re-auth client for pdf
         $client = $this->createAuthorizedClient();
         $client->request('GET', '/api/entries/' . $entry->getId() . '/export.csv');
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $this->assertContains('application/csv', $client->getResponse()->headers->get('Content-Type'));
+        $this->assertStringContainsString('application/csv', $client->getResponse()->headers->get('Content-Type'));
     }
 
     public function testGetOneEntryWrongUser()
@@ -189,13 +189,13 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         foreach (['self', 'first', 'last'] as $link) {
             $this->assertArrayHasKey('href', $content['_links'][$link]);
-            $this->assertContains('archive=1', $content['_links'][$link]['href']);
-            $this->assertContains('starred=1', $content['_links'][$link]['href']);
-            $this->assertContains('sort=updated', $content['_links'][$link]['href']);
-            $this->assertContains('order=asc', $content['_links'][$link]['href']);
-            $this->assertContains('tags=foo', $content['_links'][$link]['href']);
-            $this->assertContains('since=1443274283', $content['_links'][$link]['href']);
-            $this->assertContains('public=0', $content['_links'][$link]['href']);
+            $this->assertStringContainsString('archive=1', $content['_links'][$link]['href']);
+            $this->assertStringContainsString('starred=1', $content['_links'][$link]['href']);
+            $this->assertStringContainsString('sort=updated', $content['_links'][$link]['href']);
+            $this->assertStringContainsString('order=asc', $content['_links'][$link]['href']);
+            $this->assertStringContainsString('tags=foo', $content['_links'][$link]['href']);
+            $this->assertStringContainsString('since=1443274283', $content['_links'][$link]['href']);
+            $this->assertStringContainsString('public=0', $content['_links'][$link]['href']);
         }
 
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
@@ -241,7 +241,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         foreach (['self', 'first', 'last'] as $link) {
             $this->assertArrayHasKey('href', $content['_links'][$link]);
-            $this->assertContains('public=1', $content['_links'][$link]['href']);
+            $this->assertStringContainsString('public=1', $content['_links'][$link]['href']);
         }
 
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
@@ -293,8 +293,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         foreach (['self', 'first', 'last'] as $link) {
             $this->assertArrayHasKey('href', $content['_links'][$link]);
-            $this->assertContains('starred=1', $content['_links'][$link]['href']);
-            $this->assertContains('sort=updated', $content['_links'][$link]['href']);
+            $this->assertStringContainsString('starred=1', $content['_links'][$link]['href']);
+            $this->assertStringContainsString('sort=updated', $content['_links'][$link]['href']);
         }
 
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
@@ -321,7 +321,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         foreach (['self', 'first', 'last'] as $link) {
             $this->assertArrayHasKey('href', $content['_links'][$link]);
-            $this->assertContains('archive=1', $content['_links'][$link]['href']);
+            $this->assertStringContainsString('archive=1', $content['_links'][$link]['href']);
         }
 
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
@@ -351,7 +351,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         foreach (['self', 'first', 'last'] as $link) {
             $this->assertArrayHasKey('href', $content['_links'][$link]);
-            $this->assertContains('tags=' . urlencode('foo,bar'), $content['_links'][$link]['href']);
+            $this->assertStringContainsString('tags=' . urlencode('foo,bar'), $content['_links'][$link]['href']);
         }
 
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
@@ -385,7 +385,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         foreach (['self', 'first', 'last'] as $link) {
             $this->assertArrayHasKey('href', $content['_links'][$link]);
-            $this->assertContains('since=1443274283', $content['_links'][$link]['href']);
+            $this->assertStringContainsString('since=1443274283', $content['_links'][$link]['href']);
         }
 
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
@@ -413,7 +413,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         foreach (['self', 'first', 'last'] as $link) {
             $this->assertArrayHasKey('href', $content['_links'][$link]);
-            $this->assertContains('since=' . ($future->getTimestamp() + 1000), $content['_links'][$link]['href']);
+            $this->assertStringContainsString('since=' . ($future->getTimestamp() + 1000), $content['_links'][$link]['href']);
         }
 
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
@@ -690,7 +690,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertContains('bob', $content['published_by']);
         $this->assertSame('awesome', $content['content']);
         $this->assertFalse($content['is_public'], 'Entry is no more shared');
-        $this->assertContains('2017-03-06', $content['published_at']);
+        $this->assertStringContainsString('2017-03-06', $content['published_at']);
     }
 
     public function testPatchEntryWithoutQuotes()
@@ -1191,7 +1191,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertInternalType('int', $content[0]['entry']);
+        $this->assertIsInt($content[0]['entry']);
         $this->assertSame('http://0.0.0.0/entry4', $content[0]['url']);
 
         $entry = $this->client->getContainer()->get('doctrine.orm.entity_manager')
@@ -1263,10 +1263,10 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertInternalType('int', $content[0]['entry']);
+        $this->assertIsInt($content[0]['entry']);
         $this->assertSame('https://www.lemonde.fr/musiques/article/2017/04/23/loin-de-la-politique-le-printemps-de-bourges-retombe-en-enfance_5115862_1654986.html', $content[0]['url']);
 
-        $this->assertInternalType('int', $content[1]['entry']);
+        $this->assertIsInt($content[1]['entry']);
         $this->assertSame('http://0.0.0.0/entry2', $content[1]['url']);
     }
 
@@ -1336,7 +1336,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->client->request('POST', '/api/entries/lists?urls=' . json_encode($list));
 
         $this->assertSame(400, $this->client->getResponse()->getStatusCode());
-        $this->assertContains('API limit reached', $this->client->getResponse()->getContent());
+        $this->assertStringContainsString('API limit reached', $this->client->getResponse()->getContent());
     }
 
     public function testRePostEntryAndReUsePublishedAt()

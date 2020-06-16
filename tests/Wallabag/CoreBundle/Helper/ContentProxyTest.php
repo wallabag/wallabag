@@ -176,7 +176,7 @@ class ContentProxyTest extends TestCase
 
         $this->assertSame('http://1.1.1.1', $entry->getUrl());
         $this->assertSame('this is my title', $entry->getTitle());
-        $this->assertContains('content', $entry->getContent());
+        $this->assertStringContainsString('content', $entry->getContent());
         $this->assertSame('http://3.3.3.3/cover.jpg', $entry->getPreviewPicture());
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
@@ -221,7 +221,7 @@ class ContentProxyTest extends TestCase
 
         $this->assertSame('http://1.1.1.1', $entry->getUrl());
         $this->assertSame('this is my title', $entry->getTitle());
-        $this->assertContains('content', $entry->getContent());
+        $this->assertStringContainsString('content', $entry->getContent());
         $this->assertNull($entry->getPreviewPicture());
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
@@ -357,7 +357,7 @@ class ContentProxyTest extends TestCase
 
         $this->assertSame('http://1.1.1.1', $entry->getUrl());
         $this->assertSame('this is my title', $entry->getTitle());
-        $this->assertContains('content', $entry->getContent());
+        $this->assertStringContainsString('content', $entry->getContent());
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertNull($entry->getLanguage());
         $this->assertSame('200', $entry->getHttpStatus());
@@ -409,7 +409,7 @@ class ContentProxyTest extends TestCase
 
         $this->assertSame('http://1.1.1.1', $entry->getUrl());
         $this->assertSame('this is my title', $entry->getTitle());
-        $this->assertContains('content', $entry->getContent());
+        $this->assertStringContainsString('content', $entry->getContent());
         $this->assertNull($entry->getPreviewPicture());
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
@@ -449,7 +449,7 @@ class ContentProxyTest extends TestCase
 
         $this->assertSame('http://1.1.1.1', $entry->getUrl());
         $this->assertSame('this is my title', $entry->getTitle());
-        $this->assertContains('content', $entry->getContent());
+        $this->assertStringContainsString('content', $entry->getContent());
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
         $this->assertSame(4.0, $entry->getReadingTime());
@@ -492,7 +492,7 @@ class ContentProxyTest extends TestCase
 
         $this->assertSame('http://1.1.1.1', $entry->getUrl());
         $this->assertSame('this is my title', $entry->getTitle());
-        $this->assertContains('content', $entry->getContent());
+        $this->assertStringContainsString('content', $entry->getContent());
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
         $this->assertSame(4.0, $entry->getReadingTime());
@@ -531,7 +531,7 @@ class ContentProxyTest extends TestCase
 
         $this->assertSame('http://1.1.1.1', $entry->getUrl());
         $this->assertSame('this is my title', $entry->getTitle());
-        $this->assertContains('content', $entry->getContent());
+        $this->assertStringContainsString('content', $entry->getContent());
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
         $this->assertSame(4.0, $entry->getReadingTime());
@@ -541,7 +541,7 @@ class ContentProxyTest extends TestCase
         $records = $handler->getRecords();
 
         $this->assertCount(3, $records);
-        $this->assertContains('Error while defining date', $records[0]['message']);
+        $this->assertStringContainsString('Error while defining date', $records[0]['message']);
     }
 
     public function testTaggerThrowException()
@@ -619,7 +619,7 @@ class ContentProxyTest extends TestCase
 
         $this->assertSame('http://1.1.1.1', $entry->getUrl());
         $this->assertSame('this is my title', $entry->getTitle());
-        $this->assertNotContains($escapedString, $entry->getContent());
+        $this->assertStringNotContainsString($escapedString, $entry->getContent());
         $this->assertSame('http://3.3.3.3/cover.jpg', $entry->getPreviewPicture());
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
@@ -658,7 +658,7 @@ class ContentProxyTest extends TestCase
 
         $this->assertSame('http://1.1.1.1/image.jpg', $entry->getUrl());
         $this->assertSame('this is my title', $entry->getTitle());
-        $this->assertContains('http://1.1.1.1/image.jpg', $entry->getContent());
+        $this->assertStringContainsString('http://1.1.1.1/image.jpg', $entry->getContent());
         $this->assertSame('http://1.1.1.1/image.jpg', $entry->getPreviewPicture());
         $this->assertSame('image/jpeg', $entry->getMimetype());
         $this->assertSame('200', $entry->getHttpStatus());

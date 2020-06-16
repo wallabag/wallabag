@@ -9,12 +9,11 @@ use Wallabag\CoreBundle\Command\TagAllCommand;
 
 class TagAllCommandTest extends WallabagCoreTestCase
 {
-    /**
-     * @expectedException \Symfony\Component\Console\Exception\RuntimeException
-     * @expectedExceptionMessage Not enough arguments (missing: "username")
-     */
     public function testRunTagAllCommandWithoutUsername()
     {
+        $this->expectException(\Symfony\Component\Console\Exception\RuntimeException::class);
+        $this->expectExceptionMessage('Not enough arguments (missing: "username")');
+
         $application = new Application($this->getClient()->getKernel());
         $application->add(new TagAllCommand());
 
@@ -39,7 +38,7 @@ class TagAllCommandTest extends WallabagCoreTestCase
             'username' => 'unknown',
         ]);
 
-        $this->assertContains('User "unknown" not found', $tester->getDisplay());
+        $this->assertStringContainsString('User "unknown" not found', $tester->getDisplay());
     }
 
     public function testRunTagAllCommand()
@@ -55,7 +54,7 @@ class TagAllCommandTest extends WallabagCoreTestCase
             'username' => 'admin',
         ]);
 
-        $this->assertContains('Tagging entries for user admin...', $tester->getDisplay());
-        $this->assertContains('Done', $tester->getDisplay());
+        $this->assertStringContainsString('Tagging entries for user admin...', $tester->getDisplay());
+        $this->assertStringContainsString('Done', $tester->getDisplay());
     }
 }

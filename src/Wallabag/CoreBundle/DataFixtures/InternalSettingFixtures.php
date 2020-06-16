@@ -3,7 +3,7 @@
 namespace Wallabag\CoreBundle\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Wallabag\CoreBundle\Entity\InternalSetting;
@@ -23,7 +23,7 @@ class InternalSettingFixtures extends Fixture implements ContainerAwareInterface
     /**
      * {@inheritdoc}
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         foreach ($this->container->getParameter('wallabag_core.default_internal_settings') as $setting) {
             $newSetting = new InternalSetting();

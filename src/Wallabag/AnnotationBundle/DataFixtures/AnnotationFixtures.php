@@ -4,7 +4,7 @@ namespace Wallabag\AnnotationBundle\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\DataFixtures\EntryFixtures;
 use Wallabag\UserBundle\DataFixtures\UserFixtures;

@@ -136,12 +136,11 @@ class UsernameFeedTokenConverterTest extends TestCase
         $this->assertFalse($res);
     }
 
-    /**
-     * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @expectedExceptionMessage User not found
-     */
     public function testApplyUserNotFound()
     {
+        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $this->expectExceptionMessage('User not found');
+
         $repo = $this->getMockBuilder('Wallabag\UserBundle\Repository\UserRepository')
             ->disableOriginalConstructor()
             ->getMock();

@@ -17,7 +17,7 @@ abstract class WallabagApiTestCase extends WebTestCase
      */
     protected $user;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->client = $this->createAuthorizedClient();
     }

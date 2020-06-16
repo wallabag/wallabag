@@ -17,8 +17,8 @@ class IgnoreOriginInstanceRuleControllerTest extends WallabagCoreTestCase
 
         $body = $crawler->filter('body')->extract(['_text'])[0];
 
-        $this->assertContains('ignore_origin_instance_rule.description', $body);
-        $this->assertContains('ignore_origin_instance_rule.list.create_new_one', $body);
+        $this->assertStringContainsString('ignore_origin_instance_rule.description', $body);
+        $this->assertStringContainsString('ignore_origin_instance_rule.list.create_new_one', $body);
     }
 
     public function testIgnoreOriginInstanceRuleCreationEditionDeletion()
@@ -33,8 +33,8 @@ class IgnoreOriginInstanceRuleControllerTest extends WallabagCoreTestCase
 
         $body = $crawler->filter('body')->extract(['_text'])[0];
 
-        $this->assertContains('ignore_origin_instance_rule.new_ignore_origin_instance_rule', $body);
-        $this->assertContains('ignore_origin_instance_rule.form.back_to_list', $body);
+        $this->assertStringContainsString('ignore_origin_instance_rule.new_ignore_origin_instance_rule', $body);
+        $this->assertStringContainsString('ignore_origin_instance_rule.form.back_to_list', $body);
 
         $form = $crawler->filter('button[id=ignore_origin_instance_rule_save]')->form();
 
@@ -48,7 +48,7 @@ class IgnoreOriginInstanceRuleControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertContains('flashes.ignore_origin_instance_rule.notice.added', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertStringContainsString('flashes.ignore_origin_instance_rule.notice.added', $crawler->filter('body')->extract(['_text'])[0]);
 
         // Edition
         $editLink = $crawler->filter('div[id=content] table a')->last()->link();
@@ -57,12 +57,12 @@ class IgnoreOriginInstanceRuleControllerTest extends WallabagCoreTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $this->assertContains('foo.example.com', $crawler->filter('form[name=ignore_origin_instance_rule] input[type=text]')->extract(['value'])[0]);
+        $this->assertStringContainsString('foo.example.com', $crawler->filter('form[name=ignore_origin_instance_rule] input[type=text]')->extract(['value'])[0]);
 
         $body = $crawler->filter('body')->extract(['_text'])[0];
 
-        $this->assertContains('ignore_origin_instance_rule.edit_ignore_origin_instance_rule', $body);
-        $this->assertContains('ignore_origin_instance_rule.form.back_to_list', $body);
+        $this->assertStringContainsString('ignore_origin_instance_rule.edit_ignore_origin_instance_rule', $body);
+        $this->assertStringContainsString('ignore_origin_instance_rule.form.back_to_list', $body);
 
         $form = $crawler->filter('button[id=ignore_origin_instance_rule_save]')->form();
 
@@ -76,7 +76,7 @@ class IgnoreOriginInstanceRuleControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertContains('flashes.ignore_origin_instance_rule.notice.updated', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertStringContainsString('flashes.ignore_origin_instance_rule.notice.updated', $crawler->filter('body')->extract(['_text'])[0]);
 
         $editLink = $crawler->filter('div[id=content] table a')->last()->link();
 
@@ -84,7 +84,7 @@ class IgnoreOriginInstanceRuleControllerTest extends WallabagCoreTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $this->assertContains('bar.example.com', $crawler->filter('form[name=ignore_origin_instance_rule] input[type=text]')->extract(['value'])[0]);
+        $this->assertStringContainsString('bar.example.com', $crawler->filter('form[name=ignore_origin_instance_rule] input[type=text]')->extract(['value'])[0]);
 
         $deleteForm = $crawler->filter('body')->selectButton('ignore_origin_instance_rule.form.delete')->form();
 
@@ -94,7 +94,7 @@ class IgnoreOriginInstanceRuleControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
-        $this->assertContains('flashes.ignore_origin_instance_rule.notice.deleted', $crawler->filter('body')->extract(['_text'])[0]);
+        $this->assertStringContainsString('flashes.ignore_origin_instance_rule.notice.deleted', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
     public function dataForIgnoreOriginInstanceRuleCreationFail()
@@ -142,7 +142,7 @@ class IgnoreOriginInstanceRuleControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
 
         foreach ($messages as $message) {
-            $this->assertContains($message, $body[0]);
+            $this->assertStringContainsString($message, $body[0]);
         }
     }
 }

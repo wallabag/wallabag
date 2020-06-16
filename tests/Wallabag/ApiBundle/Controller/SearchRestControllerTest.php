@@ -32,7 +32,7 @@ class SearchRestControllerTest extends WallabagApiTestCase
 
         foreach (['self', 'first', 'last'] as $link) {
             $this->assertArrayHasKey('href', $content['_links'][$link]);
-            $this->assertContains('term=entry', $content['_links'][$link]['href']);
+            $this->assertStringContainsString('term=entry', $content['_links'][$link]['href']);
         }
 
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
@@ -61,7 +61,7 @@ class SearchRestControllerTest extends WallabagApiTestCase
 
         foreach (['self', 'first', 'last'] as $link) {
             $this->assertArrayHasKey('href', $content['_links'][$link]);
-            $this->assertContains('term=entry', $content['_links'][$link]['href']);
+            $this->assertStringContainsString('term=entry', $content['_links'][$link]['href']);
         }
 
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));

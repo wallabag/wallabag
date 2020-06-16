@@ -19,7 +19,7 @@ class AuthenticationFailureListenerTest extends TestCase
     private $listener;
     private $dispatcher;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $request = Request::create('/');
         $request->request->set('_username', 'admin');

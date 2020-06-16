@@ -30,7 +30,7 @@ class AppKernel extends Kernel
             new KPhoen\RulerZBundle\KPhoenRulerZBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Craue\ConfigBundle\CraueConfigBundle(),
-            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new BabDev\PagerfantaBundle\BabDevPagerfantaBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new BD\GuzzleSiteAuthenticatorBundle\BDGuzzleSiteAuthenticatorBundle(),
             new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),

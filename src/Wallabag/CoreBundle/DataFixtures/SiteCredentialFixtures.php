@@ -4,7 +4,7 @@ namespace Wallabag\CoreBundle\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Wallabag\CoreBundle\Entity\SiteCredential;
@@ -25,7 +25,7 @@ class SiteCredentialFixtures extends Fixture implements DependentFixtureInterfac
     /**
      * {@inheritdoc}
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $credential = new SiteCredential($this->getReference('admin-user'));
         $credential->setHost('.super.com');

@@ -17,7 +17,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $client->request('GET', '/export/unread.csv');
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('login', $client->getResponse()->headers->get('location'));
+        $this->assertStringContainsString('login', $client->getResponse()->headers->get('location'));
     }
 
     public function testUnknownCategoryExport()
@@ -186,15 +186,15 @@ class ExportControllerTest extends WallabagCoreTestCase
         // +1 for title line
         $this->assertCount(\count($contentInDB) + 1, $csv);
         $this->assertSame('Title;URL;Content;Tags;"MIME Type";Language;"Creation date"', $csv[0]);
-        $this->assertContains($contentInDB[0]['title'], $csv[1]);
-        $this->assertContains($contentInDB[0]['url'], $csv[1]);
-        $this->assertContains($contentInDB[0]['content'], $csv[1]);
-        $this->assertContains($contentInDB[0]['mimetype'], $csv[1]);
-        $this->assertContains($contentInDB[0]['language'], $csv[1]);
-        $this->assertContains($contentInDB[0]['createdAt']->format('d/m/Y h:i:s'), $csv[1]);
+        $this->assertStringContainsString($contentInDB[0]['title'], $csv[1]);
+        $this->assertStringContainsString($contentInDB[0]['url'], $csv[1]);
+        $this->assertStringContainsString($contentInDB[0]['content'], $csv[1]);
+        $this->assertStringContainsString($contentInDB[0]['mimetype'], $csv[1]);
+        $this->assertStringContainsString($contentInDB[0]['language'], $csv[1]);
+        $this->assertStringContainsString($contentInDB[0]['createdAt']->format('d/m/Y h:i:s'), $csv[1]);
 
         foreach ($contentInDB[0]['tags'] as $tag) {
-            $this->assertContains($tag['label'], $csv[1]);
+            $this->assertStringContainsString($tag['label'], $csv[1]);
         }
     }
 
@@ -300,7 +300,7 @@ class ExportControllerTest extends WallabagCoreTestCase
 
         $content = new \SimpleXMLElement($client->getResponse()->getContent());
         $this->assertGreaterThan(0, $content->count());
-        $this->assertSame(\count($contentInDB), $content->count());
+        $this->assertCount(\count($contentInDB), $content);
         $this->assertNotEmpty('id', (string) $content->entry[0]->id);
         $this->assertNotEmpty('title', (string) $content->entry[0]->title);
         $this->assertNotEmpty('url', (string) $content->entry[0]->url);

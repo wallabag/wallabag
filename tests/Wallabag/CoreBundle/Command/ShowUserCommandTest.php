@@ -10,12 +10,11 @@ use Wallabag\UserBundle\Entity\User;
 
 class ShowUserCommandTest extends WallabagCoreTestCase
 {
-    /**
-     * @expectedException \Symfony\Component\Console\Exception\RuntimeException
-     * @expectedExceptionMessage Not enough arguments
-     */
     public function testRunShowUserCommandWithoutUsername()
     {
+        $this->expectException(\Symfony\Component\Console\Exception\RuntimeException::class);
+        $this->expectExceptionMessage('Not enough arguments');
+
         $application = new Application($this->getClient()->getKernel());
         $application->add(new ShowUserCommand());
 
@@ -40,7 +39,7 @@ class ShowUserCommandTest extends WallabagCoreTestCase
             'username' => 'unknown',
         ]);
 
-        $this->assertContains('User "unknown" not found', $tester->getDisplay());
+        $this->assertStringContainsString('User "unknown" not found', $tester->getDisplay());
     }
 
     public function testRunShowUserCommandForUser()
@@ -56,11 +55,11 @@ class ShowUserCommandTest extends WallabagCoreTestCase
             'username' => 'admin',
         ]);
 
-        $this->assertContains('Username: admin', $tester->getDisplay());
-        $this->assertContains('Email: bigboss@wallabag.org', $tester->getDisplay());
-        $this->assertContains('Display name: Big boss', $tester->getDisplay());
-        $this->assertContains('2FA (email) activated', $tester->getDisplay());
-        $this->assertContains('2FA (OTP) activated', $tester->getDisplay());
+        $this->assertStringContainsString('Username: admin', $tester->getDisplay());
+        $this->assertStringContainsString('Email: bigboss@wallabag.org', $tester->getDisplay());
+        $this->assertStringContainsString('Display name: Big boss', $tester->getDisplay());
+        $this->assertStringContainsString('2FA (email) activated', $tester->getDisplay());
+        $this->assertStringContainsString('2FA (OTP) activated', $tester->getDisplay());
     }
 
     public function testShowUser()
@@ -89,6 +88,6 @@ class ShowUserCommandTest extends WallabagCoreTestCase
             'username' => 'admin',
         ]);
 
-        $this->assertContains('Display name: Bug boss', $tester->getDisplay());
+        $this->assertStringContainsString('Display name: Bug boss', $tester->getDisplay());
     }
 }
