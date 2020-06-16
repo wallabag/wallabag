@@ -1,7 +1,3 @@
 validator:
     password_must_match: 'De indtastede adgangskoder skal være ens'
     password_too_short: 'Adgangskoden skal være mindst 8 tegn'
-    # password_wrong_value: 'Wrong value for your current password'
-    # item_per_page_too_high: 'This will certainly kill the app'
-    # feed_limit_too_high: 'This will certainly kill the app'
-    # quote_length_too_high: 'The quote is too long. It should have {{ limit }} characters or less.'

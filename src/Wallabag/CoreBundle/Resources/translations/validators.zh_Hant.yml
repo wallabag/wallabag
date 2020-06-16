@@ -1,0 +1,7 @@
+validator:
+    password_must_match: 密碼必須相符。
+    password_too_short: 您的密碼必須至少8個字。
+    password_wrong_value: 提供了錯誤的密碼。
+    item_per_page_too_high: 這肯定會毀了應用程式
+    rss_limit_too_high: 這肯定會毀了應用程式
+    quote_length_too_high: 密碼太長了。 它應該要有{{limit}}個字或更少。

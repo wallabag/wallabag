@@ -35,6 +35,3 @@ demo_mode_username: "Демо пользователь"
 share_public: "Разрешить публичные ссылки на записи"
 download_images_enabled: "Скачивать изображения локально"
 restricted_access: "Включить авторизацию на сайте с помощью paywall"
-# api_user_registration: Enable user to be registered using the API
-# store_article_headers: Enable if wallabag stores HTTP headers for each article
-# shaarli_share_origin_url: Enable sharing origin url to Shaarli, if the service is enabled

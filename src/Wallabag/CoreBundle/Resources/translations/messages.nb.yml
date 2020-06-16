@@ -1,0 +1,92 @@
+security:
+    login:
+        register: Registrer
+        username: Brukernavn
+        password: Passord
+        cancel: Avbryt
+    register:
+        page_title: Opprett en konto
+        go_to_account: Gå til din konto
+menu:
+    left:
+        unread: Ulest
+        starred: Stjernemerket
+        archive: Arkiv
+        all_articles: Alle oppføringer
+        config: Oppsett
+        tags: Etiketter
+        internal_settings: Interne innstillinger
+        import: Importere
+        howto: Hvordan
+        logout: Logg ut
+        about: Om
+        search: Søk
+        save_link: Lagre en lenke
+        back_to_unread: Tilbake til uleste artikler
+    top:
+        add_new_entry: Legg til en ny oppføring
+        search: Søk
+        filter_entries: Filtrer oppføringer
+        export: Eksporter
+    search_form:
+        input_label: Skriv inn ditt søk her
+footer:
+    wallabag:
+        elsewhere: Ta wallabag med deg
+        social: Sosialt
+        powered_by: drevet av
+        about: Om
+config:
+    page_title: Oppsett
+    tab_menu:
+        settings: Innstillinger
+        rss: RSS
+        user_info: Brukerinfo
+        password: Passord
+        rules: Etikettregler
+        new_user: Legg til en bruker
+    form:
+        save: Lagre
+    form_settings:
+        theme_label: Drakt
+        items_per_page_label: Elementer per side
+        language_label: Språk
+        reading_speed:
+            label: Lesehastighet
+            help_message: 'Du kan bruke nettbaserte verktøy til å anslå din lesehastighet:'
+            100_word: Jeg leser ~100 ord i minuttet
+            200_word: Jeg leser ~200 ord i minuttet
+            300_word: Jeg leser ~300 ord i minuttet
+            400_word: Jeg leser ~400 ord i minuttet
+        action_mark_as_read:
+            redirect_homepage: Til hjemmesiden
+            redirect_current_page: Til nåværende side
+    form_rss:
+        token_label: RSS-symbol
+        no_token: Inget symbol
+        token_create: Opprett ditt symbol
+        token_reset: Regenerer ditt symbol
+        rss_links: RSS-lenker
+        rss_link:
+            unread: ulest
+            starred: stjernemerket
+            archive: arkivert
+    form_user:
+        name_label: Navn
+        email_label: E-post
+        delete:
+            confirm: Er du virkelig sikker? (DETTE KAN IKKE ANGRES)
+            button: Slett kontoen min
+    form_password:
+        old_password_label: Nåværende passord
+        new_password_label: Nytt passord
+        repeat_new_password_label: Gjenta nytt passord
+    form_rules:
+        if_label: hvis
+        then_tag_as_label: merk som
+        delete_rule_label: slett
+        edit_rule_label: rediger
+        rule_label: Regel
+        tags_label: Etiketter
+        faq:
+            title: O-S-S

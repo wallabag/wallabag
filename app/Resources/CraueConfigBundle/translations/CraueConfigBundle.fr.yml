@@ -1,7 +1,7 @@
 settings_changed: Configuration mise à jour
 download_pictures: Télécharger les images sur le serveur
 carrot: Activer le partage vers Carrot
-diaspora_url: URL de Diaspora, si le service Diaspora est activé
+diaspora_url: URL de diaspora*, si le service est activé
 export_epub: Activer l'export ePub
 export_mobi: Activer l'export .mobi
 export_pdf: Activer l'export PDF
@@ -14,27 +14,29 @@ import_with_redis: Activer Redis pour gérer les imports de façon asynchrone
 shaarli_url: URL de Shaarli, si le service Shaarli est activé
 scuttle_url: URL de Scuttle, si le service Scuttle est activé
 unmark_url: URL de Unmark, si le service Unmark est activé
-share_diaspora: Activer le partage vers Diaspora
-share_mail: Activer le partage par email
+share_diaspora: Activer le partage vers diaspora*
+share_mail: Activer le partage par courriel
 share_shaarli: Activer le partage vers Shaarli
 share_scuttle: Activer le partage vers Scuttle
 share_twitter: Activer le partage vers Twitter
 share_unmark: Activer le partage vers Unmark.it
 show_printlink: Afficher un lien pour imprimer
 wallabag_support_url: URL de support de wallabag
-entry: "article"
-export: "export"
-import: "import"
-misc: "divers"
-modify_settings: "appliquer"
-matomo_host: URL de votre site dans Matomo (sans http:// ou https://)
-matomo_site_id: ID de votre site dans Matomo
-matomo_enabled: Activer Matomo
-demo_mode_enabled: "Activer le mode démo ? (utiliser uniquement pour la démo publique de wallabag)"
-demo_mode_username: "Utilisateur de la démo"
-share_public: Autoriser une URL publique pour les articles
+entry: article
+export: export
+import: import
+misc: divers
+modify_settings: appliquer
+matomo_host: URL de votre site dans Piwik (sans http:// ou https://)
+matomo_site_id: ID de votre site dans Piwik
+matomo_enabled: Activer Piwik
+demo_mode_enabled: Activer le mode démo ? (Utiliser uniquement pour la démo publique
+  de wallabag)
+demo_mode_username: Utilisateur de la démo
+share_public: Autoriser les URL publiques pour les articles
 download_images_enabled: Télécharger les images en local
-restricted_access: Activer l'authentification pour les articles derrière un paywall
+restricted_access: Activer l'authentification pour les sites avec paywall
 api_user_registration: Activer la création de compte depuis l'API
 store_article_headers: Activer le stockage des en-têtes HTTP de chaque article
-shaarli_share_origin_url: Activer le partage de l'adresse d'origine vers Shaarli, si le service est activé
+shaarli_share_origin_url: Activer le partage de l'adresse d'origine vers Shaarli,
+  si le service est activé

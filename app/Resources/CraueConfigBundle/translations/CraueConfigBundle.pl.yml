@@ -14,26 +14,28 @@ import_with_redis: Włącz Redis dla asynchronicznego importu danych
 shaarli_url: Adress URL Shaarli, jeżeli usługa jest włączona
 scuttle_url: Adress URL Scuttle, jeżeli usługa jest włączona
 share_diaspora: Włącz udostępnianie dla Diaspora
-share_mail: Włącz udostępnianie przez email
+share_mail: Włącz udostępnianie przez e-mail
 share_shaarli: Włącz udostępnianie dla Shaarli
 share_scuttle: Włącz udostępnianie dla Scuttle
 share_twitter: Włącz udostępnianie dla Twitter
 share_unmark: Włącz udostępnianie dla Unmark.it
 show_printlink: Pokaż link do wydrukowania zawartości
 wallabag_support_url: Adres URL wsparcia dla wallabag
-entry: "artykuł"
-export: "eksport"
-import: "import"
-misc: "różne"
-modify_settings: "zatwierdź"
+entry: artykuł
+export: eksport
+import: import
+misc: różne
+modify_settings: zatwierdź
 matomo_host: Host twojej strony Matomo (bez http:// lub https://)
 matomo_site_id: ID twojej strony Matomo
 matomo_enabled: Włacz Matomo
-demo_mode_enabled: "Włacz tryb demo? (używany wyłącznie dla publicznej demonstracji Wallabag)"
-demo_mode_username: "Użytkownik Demonstracyjny"
-share_public: Zezwalaj na publiczny adres url dla wpisow
+demo_mode_enabled: Włącz tryb demo? (używany wyłącznie dla publicznej demonstracji
+  Wallabag)
+demo_mode_username: Użytkownik Demonstracyjny
+share_public: Zezwalaj na publiczne adresy url dla wpisów
 download_images_enabled: Pobierz obrazy lokalnie
-restricted_access: Włącz autoryzację dla stron z paywallem
+restricted_access: Włącz autoryzację dla stron za paywallem
 api_user_registration: Włącz rejestrację użytkownika przy użyciu API
-# store_article_headers: Enable if wallabag stores HTTP headers for each article
-# shaarli_share_origin_url: Enable sharing origin url to Shaarli, if the service is enabled
+unmark_url: Odznacz URL, jeżeli usługa jest włączona
+store_article_headers: Włącz, jeżeli Wallabag zapisuje nagłówki HTTP dla każdego artykułu
+shaarli_share_origin_url: Włącz udostępnianie URL Shaarli, jeżeli usługa jest włączona

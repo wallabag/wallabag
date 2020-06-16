@@ -13,7 +13,6 @@ security:
     register:
         page_title: 'สร้างบัญชึของคุณ'
         go_to_account: 'ไปยังบัญชีของคุณ'
-
 menu:
     left:
         unread: 'ยังไม่ได้อ่าน'
@@ -33,18 +32,14 @@ menu:
         back_to_unread: 'กลับไปยังรายการที่ไม่ได้อ่าน'
         users_management: 'การจัดการผู้ใช้'
         site_credentials: 'การรับรองไซต์'
-        # ignore_origin_instance_rules: 'Global ignore origin rules'
         quickstart: "เริ่มแบบด่วน"
     top:
         add_new_entry: 'เพิ่มรายการใหม่'
         search: 'ค้นหา'
         filter_entries: 'ตัวกรองรายการ'
-        # random_entry: Jump to a random entry from that list
         export: 'นำข้อมูลออก'
-        # account: 'My account'
     search_form:
         input_label: 'ค้นหาที่นี้'
-
 footer:
     wallabag:
         elsewhere: 'การใช้ wallabag กับคุณ'
@@ -52,7 +47,6 @@ footer:
         powered_by: 'สนับสนุนโดย'
         about: 'เกี่ยวกับ'
     stats: ตั้งแต่ %user_creation% ที่คุณอ่านรายการ %nb_archives% นี้จะเกี่ยวกับ %per_day% ของวันนั้น!
-
 config:
     page_title: 'กำหนดค่า'
     tab_menu:
@@ -61,7 +55,6 @@ config:
         user_info: 'ข้อมูลผู้ใช้'
         password: 'รหัสผ่าน'
         rules: 'การแท็กข้อบังคับ'
-        # ignore_origin: 'Ignore origin rules'
         new_user: 'เพิ่มผู้ใช้'
         reset: 'รีเซ็ตพื้นที่ '
     form:
@@ -91,7 +84,6 @@ config:
         no_token: 'ไม่มีเครื่องหมาย'
         token_create: 'สร้างเครื่องหมาย'
         token_reset: 'ทำเครื่องหมาย'
-        # token_revoke: 'Revoke the token'
         feed_links: 'ลิงค์ RSS'
         feed_link:
             unread: 'ยังไมได้่อ่าน'
@@ -100,20 +92,8 @@ config:
             all: 'ทั้งหมด'
         feed_limit: 'จำนวนไอเทมที่เก็บ'
     form_user:
-        # two_factor_description: "Enabling two factor authentication means you'll receive an email with a code OR need to use an OTP app (like Google Authenticator, Authy or FreeOTP) to get a one time code on every new untrusted connection. You can't choose both option."
-        # login_label: 'Login (can not be changed)'
         name_label: 'ชื่อ'
         email_label: 'อีเมล'
-        two_factor:
-            # emailTwoFactor_label: 'Using email (receive a code by email)'
-            # googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, Authy or FreeOTP, to get a one time code)'
-            # table_method: Method
-            # table_state: State
-            # table_action: Action
-            # state_enabled: Enabled
-            # state_disabled: Disabled
-            # action_email: Use email
-            # action_app: Use OTP App
         delete:
             title: ลบบัญชีของฉัน (โซนที่เป็นภัย!)
             description: ถ้าคุณลบบัญชีของคุณIf , รายการทั้งหมดของคุณ, แท็กทั้งหมดของคุณ, หมายเหตุทั้งหมดของคุณและบัญชีของคุณจะถูกลบอย่างถาวร (มันไม่สามารถยกเลิกได้) คุณจะต้องลงชื่อออก
@@ -139,15 +119,6 @@ config:
         edit_rule_label: 'ปรับแก้'
         rule_label: 'ข้อบังคับ'
         tags_label: 'แท็ก'
-        # card:
-        #     new_tagging_rule: Create a tagging rule
-        #     import_tagging_rules: Import tagging rules
-        #     import_tagging_rules_detail: You have to select the JSON file you previously exported.
-        #     export_tagging_rules: Export tagging rules
-        #     export_tagging_rules_detail: This will download a JSON file that you can use to import tagging rules elsewhere or to backup them.
-        # file_label: JSON file
-        # import_submit: Import
-        # export: Export
         faq:
             title: 'FAQ'
             tagging_rules_definition_title: 'ข้อบังคับการแท็กคืออะไร?'
@@ -180,34 +151,6 @@ config:
                 and: 'หนึ่งข้อบังคับและอื่นๆ'
                 matches: 'ทดสอบว่า <i>เรื่อง</i> นี้ตรงกับ <i>การต้นหา</i> (กรณีไม่ทราบ).<br />ตัวอย่าง: <code>หัวข้อที่ตรงกับ "football"</code>'
                 notmatches: 'ทดสอบว่า <i>เรื่อง</i> นี้ไม่ตรงกับ <i>การต้นหา</i> (กรณีไม่ทราบ).<br />ตัวอย่าง: <code>หัวข้อทีไม่ตรงกับ "football"</code>'
-    form_ignore_origin_rules:
-        # faq:
-        #     title: 'FAQ'
-        #     ignore_origin_rules_definition_title: 'What does « ignore origin rules » mean?'
-        #     ignore_origin_rules_definition_description: 'They are used by wallabag to automatically ignore an origin address after a redirect.<br />If a redirect occurs while fetching a new entry, all the ignore origin rules (<i>user defined and instance defined</i>) will be used to ignore the origin address.'
-        #     how_to_use_them_title: 'How do I use them?'
-        #     how_to_use_them_description: 'Let us assume you want to ignore the origin of an entry coming from « <i>rss.example.com</i> » (<i>knowing that after a redirect, the actual address is example.com</i>).<br />In that case, you should put « host = "rss.example.com" » in the <i>Rule</i> field.'
-        #     variables_available_title: 'Which variables and operators can I use to write rules?'
-        #     variables_available_description: 'The following variables and operators can be used to create ignore origin rules:'
-        #     meaning: 'Meaning'
-        #     variable_description:
-        #         label: 'Variable'
-        #         host: 'Host of the address'
-        #         _all: 'Full address, mainly for pattern matching'
-        #     operator_description:
-        #         label: 'Operator'
-        #         equal_to: 'Equal to…'
-        #         matches: 'Tests that a <i>subject</i> matches a <i>search</i> (case-insensitive).<br />Example: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
-    otp:
-        # page_title: Two-factor authentication
-        # app:
-        #     two_factor_code_description_1: You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password. It'll disapear after a page reload.
-        #     two_factor_code_description_2: 'You can scan that QR Code with your app:'
-        #     two_factor_code_description_3: 'Also, save these backup codes in a safe place, you can use them in case you lose access to your OTP app:'
-        #     two_factor_code_description_4: 'Test an OTP code from your configured app:'
-        #     cancel: Cancel
-        #     enable: Enable
-
 entry:
     default_title: 'หัวข้อรายการ'
     page_titles:
@@ -282,7 +225,6 @@ entry:
         created_at: 'วันที่สร้าง'
         published_at: 'วันที่ประกาศ'
         published_by: 'ประกาศโดย'
-        # provided_by: 'Provided by'
     new:
         page_title: 'บันทึกรายการใหม่'
         placeholder: 'https://website.th'
@@ -294,21 +236,12 @@ entry:
         page_title: 'แก้ไขรายการ'
         title_label: 'หัวข้อ'
         url_label: 'Url'
-        # origin_url_label: 'Origin url (from where you found that entry)'
         save_label: 'บันทึก'
     public:
         shared_by_wallabag: "บทความนี้จะมีการแชร์โดย %username% กับ <a href='%wallabag_instance%'>wallabag</a>"
     confirm:
         delete: "คุณแน่ใจหรือไม่ว่าคุณต้องการลบบทความนี้?"
-        # delete_entries: "Are you sure you want to remove those articles?"
         delete_tag: "คุณแน่ใจหรือไม่ว่าคุณต้องการลบแท็กจากบทความนี้?"
-    metadata:
-        # reading_time: "Estimated reading time"
-        # reading_time_minutes_short: "%readingTime% min"
-        # address: "Address"
-        # added_on: "Added on"
-        # published_on: "Published on"
-
 about:
     page_title: 'เกี่ยวกับ'
     top_menu:
@@ -339,7 +272,6 @@ about:
         description: 'ที่นี้เป็นรายการของไลบรารี่ของบุคคลนอกจะใช้ใน wallabag (กับการอนุญาตของพวกเขา):'
         package: 'แพ็กเกจ'
         license: 'การอนุญาต'
-
 howto:
     page_title: 'อย่างไร'
     tab_menu:
@@ -391,7 +323,6 @@ howto:
         hide_form: ซ่อนในปัจุบันจาก (ค้นหา หรือ ลิงค์ใหม่)
         arrows_navigation: นำไปที่บทความ
         open_article: แสดงตัวเลือกรายการ
-
 quickstart:
     page_title: 'เริ่มแบบด่วน'
     more: 'มากกว่านี้…'
@@ -445,23 +376,16 @@ quickstart:
         github: 'บน GitHub'
         email: 'โดยอีเมล'
         gitter: 'บน Gitter'
-
 tag:
     page_title: 'แท็ก'
     list:
         number_on_the_page: '{0} ไม่มีการแท็ก|{1} มีหนึ่งแท็ก|]1,Inf[ มี %count% แท็ก'
         see_untagged_entries: 'พบรายการที่ไม่ได้แท็ก'
-        # no_untagged_entries: 'There are no untagged entries.'
     new:
         add: 'เพิ่ม'
         placeholder: 'คุณสามารถเพิ่มได้หลายแท็ก, จากการแบ่งโดย comma'
-    rename:
-        # placeholder: 'You can update tag name.'
-
 export:
     footer_template: '<div style="text-align:center;"><p>ผลิตโดย wallabag กับ %method%</p><p>ให้ทำการเปิด <a href="https://github.com/wallabag/wallabag/issues">ฉบับนี้</a> ถ้าคุณมีข้อบกพร่องif you have trouble with the display of this E-Book on your device.</p></div>'
-    # unknown: 'Unknown'
-
 import:
     page_title: 'นำข้อมูลเช้า'
     page_description: 'ยินดีตต้อนรับสู wallabag สำหรับผู้นำเข้าข้อมูล ทำการเลือกการบริการครั้งก่อนของคุณจากสิ่งที่ตุณต้องการโอนย้าย'
@@ -488,9 +412,6 @@ import:
     wallabag_v2:
         page_title: 'นำเข้าข้อมูล > Wallabag v2'
         description: 'สำหรับผู้นำเข้าข้อมูลจะ import บทความ wallabag v2 ทั้งหมดของคุณ ไปยังบทความทั้งหมด, ดังนั้น, บน export sidebar, click ที่ "JSON" คุณจะมีไฟล์ "All articles.json"'
-    # elcurator:
-    #     page_title: 'Import > elCurator'
-    #     description: 'This importer will import all your elCurator articles. Go to your preferences in your elCurator account and then, export your content. You will have a JSON file.'
     readability:
         page_title: 'นำเข้าข้อมูล > Readability'
         description: 'สำหรับผู้นำเข้าข้อมูลจะ import บทความ Readability ทั้งหมดของคุณ ไปที่เครื่องมือ (https://www.readability.com/tools/) ของหน้านั้น, click ที่ "Export your data" ในส่วน "Data Export" คุณจะได้รับ email ไป download json (which does not end with .json in fact).'
@@ -514,7 +435,6 @@ import:
         page_title: "นำเข้าข้อมูล > Pinboard"
         description: 'สำหรับผู้นำเข้าข้อมูลจะ import Pinboard articles ทั้งหมดของคุณ ที่หน้า backup (https://pinboard.in/settings/backup), click ที่ "JSON" ในส่วน "Bookmarks" ซึ่งไฟล์ JSON file จะ download (เหมือน "pinboard_export").'
         how_to: 'ทำการเลือก Pinboard export ของคุณและ click ข้างใต้ button ที่ upload และทำการ import'
-
 developer:
     page_title: 'การจัดการลูกข่ายของ API'
     welcome_message: 'ยินดีต้อนรับสู่ wallabag API'
@@ -544,7 +464,6 @@ developer:
             redirect_uris_label: 'เส้นทางใหม่ของ URIs (ให้เลือกได้)'
             save_label: 'สร่้างลูกข่ายใหม'
         action_back: 'กลับ'
-        # copy_to_clipboard: Copy
     client_parameter:
         page_title: 'การจัดการลูกข่ายของ API > พารามิเตอร์ของลูกข่าย'
         page_description: 'ที่นี้เป็นพารามิเตอร์ของลูกข่ายของคุณ'
@@ -565,7 +484,6 @@ developer:
             paragraph_7: 'การเรียกนี้จะกลับไปที่รายการทั้งหมดสำหรับผู้ใช้'
             paragraph_8: 'ถ้าคุณต้องการเห็น API endpoint ทั้งหมด, คุณสามารถดูได้ที่ <a href="%link%">ไปที่เอกสาร API ของพวกเรา</a>.'
         back: 'กลับ'
-
 user:
     page_title: การจัดการผู้ใช้
     new_user: สร้างผู้ใช้ใหม่
@@ -586,15 +504,12 @@ user:
         email_label: 'อีเมล'
         enabled_label: 'เปิดใช้งาน'
         last_login_label: 'ลงชื้อเข้าใช้ครั้งสุดท้าย'
-        # twofactor_email_label: Two factor authentication by email
-        # twofactor_google_label: Two factor authentication by OTP app
         save: บันทึก
         delete: ลบ
         delete_confirm: ตุณแน่ใจหรือไม่?
         back_to_list: กลับไปยังรายการ
     search:
         placeholder: กลั่นกรองโดย ชื่อผู้ใช้ หรือ อีเมล
-
 site_credential:
     page_title: ไซต์การจัดการข้อมูลส่วนตัว
     new_site_credential: สร้างข้อมูลส่วนตัว
@@ -614,10 +529,8 @@ site_credential:
         delete: ลบ
         delete_confirm: คุณแน่ใจหรือไม่?
         back_to_list: กลับไปยังรายการ
-
 error:
     page_title: ข้อผิดพลาดที่เกิดขึ้น
-
 flashes:
     config:
         notice:
@@ -629,17 +542,10 @@ flashes:
             tagging_rules_updated: 'อัปเดตการแท็กข้อบังคับ'
             tagging_rules_deleted: 'การลบข้อบังคับของแท็ก'
             feed_token_updated: 'อัปเดตเครื่องหมาย RSS '
-            # feed_token_revoked: 'RSS token revoked'
             annotations_reset: รีเซ็ตหมายเหตุ
             tags_reset: รีเซ็ตแท็ก
             entries_reset: รีเซ็ตรายการ
             archived_reset: การลบเอกสารของรายการ
-            # otp_enabled: Two-factor authentication enabled
-            # otp_disabled: Two-factor authentication disabled
-            # tagging_rules_imported: Tagging rules imported
-            # tagging_rules_not_imported: Error while importing tagging rules
-            # ignore_origin_rules_deleted: 'Ignore origin rule deleted'
-            # ignore_origin_rules_updated: 'Ignore origin rule updated'
     entry:
         notice:
             entry_already_saved: 'รายการพร้อมบันทึกที่ %date%'
@@ -653,11 +559,9 @@ flashes:
             entry_starred: 'รายการที่แสดง'
             entry_unstarred: 'รายการที่ไม่ได้แสดง'
             entry_deleted: 'รายการที่ถูกลบ'
-            # no_random_entry: 'No article with these criterias was found'
     tag:
         notice:
             tag_added: 'แท็กที่เพิ่ม'
-            # tag_renamed: 'Tag renamed'
     import:
         notice:
             failed: 'นำข้อมูลเข้าล้มเหลว, ลองใหม่อีกครั้ง'
@@ -681,8 +585,3 @@ flashes:
             added: 'ไซต์ข้อมูลประจำตัวสำหรับ "%host%" ที่ทำการเพิ่ม'
             updated: 'ไซต์ข้อมูลประจำตัวสำหรับ "%host%" ที่ทำการอัปเดต'
             deleted: 'ไซต์ข้อมูลประจำตัวสำหรับ "%host%" ที่ทำการลบ'
-    ignore_origin_instance_rule:
-        notice:
-            # added: 'Global ignore origin rule added'
-            # updated: 'Global ignore origin rule updated'
-            # deleted: 'Global ignore origin rule deleted'

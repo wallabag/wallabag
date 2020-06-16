@@ -1,7 +1,7 @@
 settings_changed: Configuración actualizada
 download_pictures: Descargar imágenes en el servidor
-carrot: Activar compartir con Carrot
-diaspora_url: URL de Diaspora, si el servicio está activado
+carrot: Activar compartir en Carrot
+diaspora_url: URL de diaspora*, si el servicio está activado
 export_epub: Activar exportación a ePub
 export_mobi: Activar exportación a .mobi
 export_pdf: Activar exportación a PDF
@@ -14,13 +14,13 @@ import_with_redis: Activar Redis para importar datos de forma asíncrona
 shaarli_url: URL de Shaarli, si el servicio está activado
 scuttle_url: URL de Scuttle, si el servicio está activado
 unmark_url: URL de Unmark, si el servicio está activado
-share_diaspora: Activar compartir con Diaspora
-share_mail: Activar compartir con Email
-share_shaarli: Activar compartir con Shaarli
-share_scuttle: Activar compartir con Scuttle
-share_twitter: Activar compartir con Twitter
-share_unmark: Activar compartir con Unmark.it
-show_printlink: Mostrar un enlace para imprimir contenido
+share_diaspora: Activar compartir en diaspora*
+share_mail: Activar compartir por Email
+share_shaarli: Activar compartir en Shaarli
+share_scuttle: Activar compartir en Scuttle
+share_twitter: Activar compartir en Twitter
+share_unmark: Activar compartir en Unmark.it
+show_printlink: Mostrar un enlace para imprimir el contenido
 wallabag_support_url: URL de soporte de wallabag
 entry: "artículo"
 export: "exportar"
@@ -32,9 +32,9 @@ matomo_site_id: ID de tu website en Matomo
 matomo_enabled: Activar Matomo
 demo_mode_enabled: "Activar modo demo (sólo usado en la demo pública de wallabag)"
 demo_mode_username: "Nombre de usuario demo"
-share_public: Permitir URL pública para los artículos
+share_public: Permitir URLs públicas para los artículos
 download_images_enabled: Descargar imágenes localmente
 restricted_access: Activar autenticación para websites con paywall
-# api_user_registration: Enable user to be registered using the API
-# store_article_headers: Enable if wallabag stores HTTP headers for each article
-# shaarli_share_origin_url: Enable sharing origin url to Shaarli, if the service is enabled
+api_user_registration: Permitir el registro de usuarios utilizando el API
+shaarli_share_origin_url: Activar compartir en Shaarli, si el servicio está habilitado
+store_article_headers: Activar si wallabag almacena encabezados HTTP para cada artículo

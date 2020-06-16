@@ -1,4 +1,3 @@
-# settings_changed: Configuration updated
 download_pictures: Download billeder på din server
 carrot: Aktiver deling til Carrot
 diaspora_url: Diaspora URL, hvis tjenesten er aktiv
@@ -9,8 +8,6 @@ export_csv: Aktiver eksport til CSV
 export_json: Aktiver eksport til JSON
 export_txt: Aktiver eksport til TXT
 export_xml: Aktiver eksport til XML
-# import_with_rabbitmq: Enable RabbitMQ to import data asynchronously
-# import_with_redis: Enable Redis to import data asynchronously
 shaarli_url: Shaarli-URL, hvis tjenesten er aktiv
 scuttle_url: Scuttle-URL, hvis tjenesten er aktiv
 unmark_url: Unmark-URL, hvis tjenesten er aktiv
@@ -32,9 +29,3 @@ matomo_site_id: ID for din side hos Matomo
 matomo_enabled: Aktiver Matomo
 demo_mode_enabled: "Aktiver demo-indstilling? (anvendes kun til wallabags offentlige demo)"
 demo_mode_username: "Demobruger"
-# share_public: Allow public url for entries
-# download_images_enabled: Download images locally
-# restricted_access: Enable authentication for websites with paywall
-# api_user_registration: Enable user to be registered using the API
-# store_article_headers: Enable if wallabag stores HTTP headers for each article
-# shaarli_share_origin_url: Enable sharing origin url to Shaarli, if the service is enabled

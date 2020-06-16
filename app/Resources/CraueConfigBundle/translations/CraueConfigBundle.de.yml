@@ -1,40 +1,43 @@
-settings_changed: 'Konfiguration aktualisiert'
-download_pictures: 'Bilder auf den Server herunterladen'
-carrot: 'Teilen zu Carrot aktivieren'
-diaspora_url: 'Diaspora-URL, sofern der Service aktiviert ist'
-export_epub: 'ePUB-Export aktivieren'
-export_mobi: 'mobi-Export aktivieren'
-export_pdf: 'PDF-Export aktivieren'
-export_csv: 'CSV-Export aktivieren'
-export_json: 'JSON-Export aktivieren'
-export_txt: 'TXT-Export aktivieren'
-export_xml: 'XML-Export aktivieren'
-import_with_rabbitmq: 'Aktiviere RabbitMQ, um Artikel asynchron zu importieren'
-import_with_redis: 'Aktiviere Redis, um Artikel asynchron zu importieren'
-shaarli_url: 'Shaarli-URL, sofern der Service aktiviert ist'
-scuttle_url: 'Scuttle-URL, sofern der Service aktiviert ist'
-unmark_url: 'Unmark-URL, sofern der Service aktiviert ist'
-share_diaspora: 'Teilen zu Diaspora aktiveren'
-share_mail: 'Teilen via E-Mail aktiveren'
-share_shaarli: 'Teilen zu Shaarli aktiveren'
-share_twitter: 'Teilen zu Twitter aktiveren'
-share_unmark: 'Teilen zu Unmark.it aktiveren'
-show_printlink: 'Link anzeigen, um den Inhalt auszudrucken'
-wallabag_support_url: 'Support-URL für wallabag'
-wallabag_url: 'URL von *deiner* wallabag-Instanz'
-entry: 'Artikel'
-export: 'Export'
-import: 'Import'
-misc: 'Verschiedenes'
-modify_settings: 'Übernehmen'
-matomo_host: 'Host deiner Webseite in Matomo (ohne http:// oder https://)'
-matomo_site_id: 'ID deiner Webseite in Matomo'
-matomo_enabled: 'Matomo aktivieren'
-demo_mode_enabled: 'Test-Modus aktivieren? (nur für die öffentliche wallabag-Demo genutzt)'
-demo_mode_username: 'Test-Benutzer'
-share_public: 'Erlaube eine öffentliche URL für Einträge'
-download_images_enabled: 'Bilder lokal herunterladen'
-restricted_access: 'Authentifizierung für Webseiten mit Paywall aktivieren'
-api_user_registration: 'Registrierung eines Benutzers über die API ermöglichen'
-store_article_headers: 'Speichern von HTTP-Headern für jeden Artikel aktivieren'
-shaarli_share_origin_url: 'Original-URL mit Shaarli teilen, wenn der Service aktiviert ist'
+settings_changed: Konfiguration aktualisiert
+download_pictures: Bilder auf den Server herunterladen
+carrot: Teilen zu Carrot aktivieren
+diaspora_url: diaspora*-URL, sofern der Service aktiviert ist
+export_epub: ePUB-Export aktivieren
+export_mobi: mobi-Export aktivieren
+export_pdf: PDF-Export aktivieren
+export_csv: CSV-Export aktivieren
+export_json: JSON-Export aktivieren
+export_txt: TXT-Export aktivieren
+export_xml: XML-Export aktivieren
+import_with_rabbitmq: Aktiviere RabbitMQ, um Artikel asynchron zu importieren
+import_with_redis: Aktiviere Redis, um Artikel asynchron zu importieren
+shaarli_url: Shaarli-URL, sofern der Service aktiviert ist
+scuttle_url: Scuttle-URL, sofern der Service aktiviert ist
+unmark_url: Unmark-URL, sofern der Service aktiviert ist
+share_diaspora: Freigabe für diaspora* aktivieren
+share_mail: Freigabe per E-Mail aktivieren
+share_shaarli: Freigabe für Shaarli aktivieren
+share_twitter: Freigabe für Twitter aktivieren
+share_unmark: Freigabe für Unmark.it aktivieren
+show_printlink: Link anzeigen, um den Inhalt auszudrucken
+wallabag_support_url: Support-URL für wallabag
+wallabag_url: URL von *deiner* wallabag-Instanz
+entry: Artikel
+export: Export
+import: Import
+misc: Verschiedenes
+modify_settings: Übernehmen
+matomo_host: Host deiner Webseite in Matomo (ohne http:// oder https://)
+matomo_site_id: ID deiner Webseite in Matomo
+matomo_enabled: Matomo aktivieren
+demo_mode_enabled: Demo-Modus aktivieren? (Wird nur für die öffentliche Wallabag-Demo
+  verwendet)
+demo_mode_username: Test-Benutzer
+share_public: Öffentliche URLs für Einträge zulassen
+download_images_enabled: Bilder lokal herunterladen
+restricted_access: Authentifizierung für Webseiten mit Paywall aktivieren
+api_user_registration: Registrierung eines Benutzers über die API ermöglichen
+store_article_headers: Speichern von HTTP-Headern für jeden Artikel aktivieren
+shaarli_share_origin_url: Original-URL mit Shaarli teilen, wenn der Service aktiviert
+  ist
+share_scuttle: Freigabe für Scuttle aktivieren

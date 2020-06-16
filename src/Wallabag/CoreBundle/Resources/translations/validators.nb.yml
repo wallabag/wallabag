@@ -1,0 +1,7 @@
+validator:
+    password_must_match: Passordfeltene må samsvare.
+    password_too_short: Passordet ditt må være minst åtte tegn.
+    password_wrong_value: Feil nåværende passord angitt.
+    item_per_page_too_high: Dette vil drepe programmet
+    rss_limit_too_high: Dette vil drepe programmet
+    quote_length_too_high: Sitatet er for langt. De bør minst være {{ limit }} tegn eller mindre.

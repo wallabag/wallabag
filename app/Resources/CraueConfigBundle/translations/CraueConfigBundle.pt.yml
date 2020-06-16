@@ -1,4 +1,3 @@
-# settings_changed: Configuration updated
 download_pictures: Download imagens no seu servidor
 carrot: Habilitar compartilhamento para o Carrot
 diaspora_url: URL Diaspora caso o serviço esteja habilitado
@@ -9,8 +8,6 @@ export_csv: Habilita exportação para CSV
 export_json: Habilita exportação para JSON
 export_txt: Habilita exportação para TXT
 export_xml: Habilita exportação para XML
-# import_with_rabbitmq: Enable RabbitMQ to import data asynchronously
-# import_with_redis: Enable Redis to import data asynchronously
 shaarli_url: URL Shaarli caso o serviço esteja habilitado
 scuttle_url: URL Scuttle caso o serviço esteja habilitado
 unmark_url: URL Unmark caso o serviço esteja habilitado
@@ -33,9 +30,3 @@ matomo_site_id: ID de seu website Matomo
 matomo_enabled: Habilitar Matomo
 demo_mode_enabled: "Habilitar modo demo? (somente usado para o demo público do wallabag)"
 demo_mode_username: "Usuário demo"
-# share_public: Allow public url for entries
-# download_images_enabled: Download images locally
-# restricted_access: Enable authentication for websites with paywall
-# api_user_registration: Enable user to be registered using the API
-# store_article_headers: Enable if wallabag stores HTTP headers for each article
-# shaarli_share_origin_url: Enable sharing origin url to Shaarli, if the service is enabled
