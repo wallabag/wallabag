@@ -53,6 +53,7 @@
 - Jump to Symfony 3.4 [#3731](https://github.com/wallabag/wallabag/pull/3731)
 - Removed hardcoded database version [#3864](https://github.com/wallabag/wallabag/pull/3864)
 - Dropping PHP < 7.1 [#3758](https://github.com/wallabag/wallabag/pull/3758)
+- Dropping PHP < 7.2 [#4441](https://github.com/wallabag/wallabag/pull/4441)
 - Force default_protocol to generate an url input [#3879](https://github.com/wallabag/wallabag/pull/3879)
 - Cascade delete on oauth2 table when deleting a user [#3956](https://github.com/wallabag/wallabag/pull/3956)
 - Preview picture: use the 1st pic retrieved if no og:image set [#3965](https://github.com/wallabag/wallabag/pull/3965)
