@@ -63,7 +63,7 @@
 - Add environment variables to control scripts/dev.sh behavior [#4152](https://github.com/wallabag/wallabag/pull/4152)
 - Increase php memory limit PHP Docker [#4163](https://github.com/wallabag/wallabag/pull/4163)
 - Ensure ENV is well defined when using make [#4249](https://github.com/wallabag/wallabag/pull/4249)
-- Ensure ENV is well defined when using make [#4249](https://github.com/wallabag/wallabag/pull/4249)
+- Update translations from Weblate [#4442](https://github.com/wallabag/wallabag/pull/4442)
 
 ### Fixes
 
