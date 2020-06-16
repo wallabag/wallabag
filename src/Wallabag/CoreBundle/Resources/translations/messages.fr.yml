@@ -9,8 +9,7 @@ security:
         password: Mot de passe
         cancel: Annuler
     resetting:
-        description: Saisissez votre adresse courriel ci-dessous, nous vous enverrons
-            les instructions pour réinitialiser votre mot de passe.
+        description: Saisissez votre adresse courriel ci-dessous, nous vous enverrons les instructions pour réinitialiser votre mot de passe.
     register:
         page_title: Se créer un compte
         go_to_account: Aller sur votre compte
@@ -46,8 +45,7 @@ footer:
         social: Social
         powered_by: propulsé par
         about: À propos
-    stats: Depuis le %user_creation%, vous avez lu %nb_archives% articles. Ce qui fait
-        %per_day% par jour !
+    stats: Depuis le %user_creation%, vous avez lu %nb_archives% articles. Ce qui fait %per_day% par jour !
 config:
     page_title: Configuration
     tab_menu:
@@ -65,34 +63,25 @@ config:
         language_label: Langue
         reading_speed:
             label: Vitesse de lecture
-            help_message: 'Vous pouvez utiliser un outil en ligne pour estimer votre vitesse
-                de lecture :'
+            help_message: 'Vous pouvez utiliser un outil en ligne pour estimer votre vitesse de lecture :'
             100_word: Je lis environ 100 mots par minute
             200_word: Je lis environ 200 mots par minute
             300_word: Je lis environ 300 mots par minute
             400_word: Je lis environ 400 mots par minute
         action_mark_as_read:
-            label: Que faire lorsqu'un article est supprimé, marqué comme lu ou marqué comme
-                favoris ?
+            label: Que faire lorsqu'un article est supprimé, marqué comme lu ou marqué comme favoris ?
             redirect_homepage: Retourner à la page d’accueil
             redirect_current_page: Rester sur la page actuelle
         pocket_consumer_key_label: Clé d’authentification Pocket pour importer les données
         android_configuration: Configurez votre application Android
         android_instruction: Appuyez ici pour préremplir votre application Android
-        help_theme: L’affichage de wallabag est personnalisable. C’est ici que vous choisissez
-            le thème que vous préférez.
-        help_items_per_page: Vous pouvez définir le nombre d’articles affichés sur chaque
-            page.
-        help_reading_speed: wallabag calcule une durée de lecture pour chaque article.
-            Vous pouvez définir ici, grâce à cette liste déroulante, si vous lisez plus
-            ou moins vite. wallabag recalculera la durée de lecture de chaque article.
+        help_theme: L’affichage de wallabag est personnalisable. C’est ici que vous choisissez le thème que vous préférez.
+        help_items_per_page: Vous pouvez définir le nombre d’articles affichés sur chaque page.
+        help_reading_speed: wallabag calcule une durée de lecture pour chaque article. Vous pouvez définir ici, grâce à cette liste déroulante, si vous lisez plus ou moins vite. wallabag recalculera la durée de lecture de chaque article.
         help_language: Vous pouvez définir la langue de l’interface de wallabag.
-        help_pocket_consumer_key: Nécessaire pour l’import depuis Pocket. Vous pouvez
-            le créer depuis votre compte Pocket.
+        help_pocket_consumer_key: Nécessaire pour l’import depuis Pocket. Vous pouvez le créer depuis votre compte Pocket.
     form_rss:
-        description: Les flux RSS fournis par wallabag vous permettent de lire vos articles
-            sauvegardés dans votre lecteur de flux préféré. Pour pouvoir les utiliser, vous
-            devez d’abord créer un jeton.
+        description: Les flux RSS fournis par wallabag vous permettent de lire vos articles sauvegardés dans votre lecteur de flux préféré. Pour pouvoir les utiliser, vous devez d’abord créer un jeton.
         token_label: Jeton RSS
         no_token: Aucun jeton généré
         token_create: Créez votre jeton
@@ -105,33 +94,26 @@ config:
             all: Tous
         rss_limit: Nombre d’articles dans le flux
     form_user:
-        two_factor_description: Activer l’authentification double-facteur veut dire que
-            vous allez recevoir un code par courriel à chaque nouvelle connexion non approuvée.
+        two_factor_description: Activer l’authentification double-facteur veut dire que vous allez recevoir un code par courriel à chaque nouvelle connexion non approuvée.
         name_label: Nom
         email_label: Adresse courriel
         twoFactorAuthentication_label: Double authentification
-        help_twoFactorAuthentication: Si vous activez 2FA, à chaque tentative de connexion
-            à wallabag, vous recevrez un code par courriel.
+        help_twoFactorAuthentication: Si vous activez 2FA, à chaque tentative de connexion à wallabag, vous recevrez un code par courriel.
         delete:
             title: Supprimer mon compte (attention danger !)
-            description: Si vous confirmez la suppression de votre compte, TOUS les articles,
-                TOUS les tags, TOUTES les annotations et votre compte seront DÉFINITIVEMENT
-                supprimé (c’est IRRÉVERSIBLE). Vous serez ensuite déconnecté.
+            description: Si vous confirmez la suppression de votre compte, TOUS les articles, TOUS les tags, TOUTES les annotations et votre compte seront DÉFINITIVEMENT supprimé (c’est IRRÉVERSIBLE). Vous serez ensuite déconnecté.
             confirm: Vous êtes vraiment sûr ? (C’EST IRRÉVERSIBLE)
             button: Supprimer mon compte
     reset:
         title: Réinitialisation (attention danger !)
-        description: En cliquant sur les boutons ci-dessous vous avez la possibilité de
-            supprimer certaines informations de votre compte. Attention, ces actions sont
-            IRRÉVERSIBLES.
+        description: En cliquant sur les boutons ci-dessous vous avez la possibilité de supprimer certaines informations de votre compte. Attention, ces actions sont IRRÉVERSIBLES.
         annotations: Supprimer TOUTES les annotations
         tags: Supprimer TOUS les tags
         entries: Supprimer TOUS les articles
         archived: Supprimer TOUS les articles archivés
-        confirm: Êtes-vous vraiment vraiment sûr ? (C’EST IRRÉVERSIBLE)
+        confirm: Êtes-vous vraiment sûr ? (C’EST IRRÉVERSIBLE)
     form_password:
-        description: Vous pouvez changer ici votre mot de passe. Le mot de passe doit
-            contenir au moins 8 caractères.
+        description: Vous pouvez changer ici votre mot de passe. Le mot de passe doit contenir au moins 8 caractères.
         old_password_label: Mot de passe actuel
         new_password_label: Nouveau mot de passe
         repeat_new_password_label: Confirmez votre nouveau mot de passe
@@ -144,27 +126,12 @@ config:
         tags_label: Tags
         faq:
             title: FAQ
-            tagging_rules_definition_title: Que signifient les règles de tag automatiques
-                ?
-            tagging_rules_definition_description: Ce sont des règles utilisées par wallabag
-                pour classer automatiquement vos nouveaux articles.<br />À chaque fois qu’un
-                nouvel article est ajouté, toutes les règles de tag automatiques seront utilisées
-                afin d’ajouter les tags que vous avez configurés, vous épargnant ainsi l’effort
-                de classifier vos articles manuellement.
+            tagging_rules_definition_title: Que signifient les règles de tag automatiques ?
+            tagging_rules_definition_description: Ce sont des règles utilisées par wallabag pour classer automatiquement vos nouveaux articles.<br />À chaque fois qu’un nouvel article est ajouté, toutes les règles de tag automatiques seront utilisées afin d’ajouter les tags que vous avez configurés, vous épargnant ainsi l’effort de classifier vos articles manuellement.
             how_to_use_them_title: Comment les utiliser ?
-            how_to_use_them_description: 'Imaginons que voulez attribuer aux nouveaux articles
-                le tag « <i>lecture courte</i> » lorsque le temps de lecture est inférieur
-                à 3 minutes.<br />Dans ce cas, vous devriez mettre « readingTime &lt;= 3 »
-                dans le champ <i>Règle</i> et « <i>lecture courte</i> » dans le champ <i>Tag</i>.<br
-                />Plusieurs tags peuvent être ajoutés simultanément en les séparant par des
-                virgules : « <i>lecture courte, à lire</i> »<br />Des règles complexes peuvent
-                être créées en utilisant des opérateurs prédéfinis: si « <i>readingTime &gt;=
-                5 AND domainName = "github.com"</i> » alors attribuer les tags « <i>lecture
-                longue, GitHub</i> »'
-            variables_available_title: Quelles variables et opérateurs puis-je utiliser
-                pour écrire des règles ?
-            variables_available_description: 'Les variables et opérateurs suivants peuvent
-                être utilisés pour écrire des règles de tag automatiques :'
+            how_to_use_them_description: 'Imaginons que voulez attribuer aux nouveaux articles le tag « <i>lecture courte</i> » lorsque le temps de lecture est inférieur à 3 minutes.<br />Dans ce cas, vous devriez mettre « readingTime &lt;= 3 » dans le champ <i>Règle</i> et « <i>lecture courte</i> » dans le champ <i>Tag</i>.<br />Plusieurs tags peuvent être ajoutés simultanément en les séparant par des virgules : « <i>lecture courte, à lire</i> »<br />Des règles complexes peuvent être créées en utilisant des opérateurs prédéfinis: si « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » alors attribuer les tags « <i>lecture longue, GitHub</i> »'
+            variables_available_title: Quelles variables et opérateurs puis-je utiliser pour écrire des règles ?
+            variables_available_description: 'Les variables et opérateurs suivants peuvent être utilisés pour écrire des règles de tag automatiques :'
             meaning: Signification
             variable_description:
                 label: Variable
@@ -187,10 +154,8 @@ config:
                 not_equal_to: Différent de…
                 or: Une règle OU l’autre
                 and: Une règle ET l’autre
-                matches: 'Teste si un <i>sujet</i> correspond à une <i>recherche</i> (non
-                    sensible à la casse).<br />Exemple : <code>title matches "football"</code>'
-                notmatches: 'Teste si un <i>sujet</i> ne correspond pas à une <i>recherche</i>
-                    (non sensible à la casse).<br />Exemple : <code>title notmatches "football"</code>'
+                matches: 'Teste si un <i>sujet</i> correspond à une <i>recherche</i> (non sensible à la casse).<br />Exemple : <code>title matches "football"</code>'
+                notmatches: 'Teste si un <i>sujet</i> ne correspond pas à une <i>recherche</i> (non sensible à la casse).<br />Exemple : <code>title notmatches "football"</code>'
 entry:
     default_title: Titre de l’article
     page_titles:
@@ -203,11 +168,10 @@ entry:
         untagged: Article sans tag
         all: Tous les articles
     list:
-        number_on_the_page: '{0} Il n’y a pas d’article.|{1} Il y a un article.|]1,Inf[
-            Il y a %count% articles.'
+        number_on_the_page: '{0} Il n’y a pas d’article.|{1} Il y a un article.|]1,Inf[ Il y a %count% articles.'
         reading_time: durée de lecture
-        reading_time_minutes: 'durée de lecture: %readingTime% min'
-        reading_time_less_one_minute: 'durée de lecture: &lt; 1 min'
+        reading_time_minutes: 'durée de lecture : %readingTime% min'
+        reading_time_less_one_minute: 'durée de lecture : &lt; 1 min'
         number_of_tags: '{1}et un autre tag|]1,Inf[et %count% autres tags'
         reading_time_minutes_short: '%readingTime% min'
         reading_time_less_one_minute_short: '&lt; 1 min'
@@ -262,8 +226,7 @@ entry:
                 description: Est-ce que cet article s’affiche mal ?
         edit_title: Modifier le titre
         original_article: original
-        annotations_on_the_entry: '{0} Aucune annotation|{1} Une annotation|]1,Inf[ %count%
-            annotations'
+        annotations_on_the_entry: '{0} Aucune annotation|{1} Une annotation|]1,Inf[ %count% annotations'
         created_at: Date de création
         published_at: Date de publication
         published_by: Publié par
@@ -302,8 +265,7 @@ about:
     who_behind_wallabag:
         developped_by: Développé par
         website: Site web
-        many_contributors: Et plein de contributeurs ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">sur
-            Github</a>
+        many_contributors: Et plein de contributeurs ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">sur Github</a>
         project_website: Site web du projet
         license: Licence
         version: Version
@@ -319,8 +281,7 @@ about:
     contributors:
         description: Merci aux contributeurs de l’application web de wallabag
     third_party:
-        description: 'Voici la liste des dépendances utilisées dans wallabag (et leur
-            license) :'
+        description: 'Voici la liste des dépendances utilisées dans wallabag (et leur license) :'
         package: Dépendance
         license: Licence
 howto:
@@ -379,21 +340,17 @@ quickstart:
     more: Et plus encore…
     intro:
         title: Bienvenue sur wallabag !
-        paragraph_1: Nous allons vous accompagner pour vous faire faire le tour de la
-            maison et vous présenter quelques fonctionnalités qui pourraient vous intéresser
-            pour vous approprier cet outil.
+        paragraph_1: Nous allons vous accompagner pour vous faire faire le tour de la maison et vous présenter quelques fonctionnalités qui pourraient vous intéresser pour vous approprier cet outil.
         paragraph_2: Suivez-nous !
     configure:
         title: Configurez l’application
-        description: Pour voir une application qui vous correspond, allez voir du côté
-            de la configuration de wallabag.
+        description: Pour voir une application qui vous correspond, allez voir du côté de la configuration de wallabag.
         language: Changez la langue et le design de l’application
         rss: Activez les flux RSS
         tagging_rules: Écrivez des règles pour classer automatiquement vos articles
     admin:
         title: Administration
-        description: 'En tant qu’administrateur sur wallabag, vous avez des privilèges
-            qui vous permettent de :'
+        description: 'En tant qu’administrateur sur wallabag, vous avez des privilèges qui vous permettent de :'
         new_user: Créez un nouvel utilisateur
         analytics: Configurez les statistiques
         sharing: Activez des paramètres de partage
@@ -401,14 +358,12 @@ quickstart:
         import: Configurer l’import
     first_steps:
         title: Premiers pas
-        description: Maintenant que wallabag est bien configuré, il est temps d’archiver
-            le web. Vous pouvez cliquer sur le signe + dans le coin en haut à droite.
+        description: Maintenant que wallabag est bien configuré, il est temps d’archiver le web. Vous pouvez cliquer sur le signe + dans le coin en haut à droite.
         new_article: Ajoutez votre premier article
         unread_articles: Et rangez-le !
     migrate:
         title: Migrez depuis un service existant
-        description: Vous êtes un ancien utilisateur d’un service existant ? Nous allons
-            vous aider à récupérer vos données sur wallabag.
+        description: Vous êtes un ancien utilisateur d’un service existant ? Nous allons vous aider à récupérer vos données sur wallabag.
         pocket: Migrez depuis Pocket
         wallabag_v1: Migrez depuis wallabag v1
         wallabag_v2: Migrez depuis wallabag v2
@@ -416,45 +371,37 @@ quickstart:
         instapaper: Migrez depuis Instapaper
     developer:
         title: Pour les développeurs
-        description: 'Nous avons aussi pensé aux développeurs : Docker, API, traductions,
-            etc.'
+        description: 'Nous avons aussi pensé aux développeurs : Docker, API, traductions, etc.'
         create_application: Créez votre application tierce
         use_docker: Utilisez Docker pour installer wallabag
     docs:
         title: Documentation complète
-        description: Il y a tellement de fonctionnalités dans wallabag. N’hésitez pas
-            à lire le manuel pour les connaitre et apprendre comment les utiliser.
+        description: Il y a tellement de fonctionnalités dans wallabag. N’hésitez pas à lire le manuel pour les connaitre et apprendre comment les utiliser.
         annotate: Annotez votre article
         export: Convertissez vos articles en ePub ou en PDF
-        search_filters: Apprenez à utiliser le moteur de recherche et les filtres pour
-            retrouver l’article qui vous intéresse
+        search_filters: Apprenez à utiliser le moteur de recherche et les filtres pour retrouver l’article qui vous intéresse
         fetching_errors: Que faire si mon article n’est pas correctement récupéré ?
         all_docs: Et encore plein d’autres choses !
     support:
         title: Support
-        description: Parce que vous avez peut-être besoin de nous poser une question,
-            nous sommes disponibles pour vous.
+        description: Parce que vous avez peut-être besoin de nous poser une question, nous sommes disponibles pour vous.
         github: Sur GitHub
         email: Par courriel
         gitter: Sur Gitter
 tag:
     page_title: Tags
     list:
-        number_on_the_page: '{0} Il n’y a pas de tag.|{1} Il y a un tag.|]1,Inf[ Il y
-            a %count% tags.'
+        number_on_the_page: '{0} Il n’y a pas de tag.|{1} Il y a un tag.|]1,Inf[ Il y a %count% tags.'
         see_untagged_entries: Voir les articles sans tag
     new:
         add: Ajouter
         placeholder: Vous pouvez ajouter plusieurs tags, séparés par une virgule.
 export:
-    footer_template: <div style="text-align:center;"><p>Généré par wallabag with %method%</p><p>Merci
-        d'ouvrir <a href="https://github.com/wallabag/wallabag/issues">un ticket</a> si
-        vous rencontrez des soucis d'affichage avec ce document sur votre support.</p></div>
+    footer_template: <div style="text-align:center;"><p>Généré par wallabag with %method%</p><p>Merci d'ouvrir <a href="https://github.com/wallabag/wallabag/issues">un ticket</a> si vous rencontrez des soucis d'affichage avec ce document sur votre support.</p></div>
     unknown: Inconnu
 import:
     page_title: Importer
-    page_description: Bienvenue dans l’outil de migration de wallabag. Choisissez ci-dessous
-        le service depuis lequel vous souhaitez migrer.
+    page_description: Bienvenue dans l’outil de migration de wallabag. Choisissez ci-dessous le service depuis lequel vous souhaitez migrer.
     action:
         import_contents: Importer les contenus
     form:
@@ -464,82 +411,43 @@ import:
         save_label: Importer le fichier
     pocket:
         page_title: Importer > Pocket
-        description: Cet outil va importer toutes vos données de Pocket. Pocket ne nous
-            autorise pas à récupérer le contenu depuis leur service, donc wallabag doit
-            reparcourir chaque article pour récupérer son contenu.
+        description: Cet outil va importer toutes vos données de Pocket. Pocket ne nous autorise pas à récupérer le contenu depuis leur service, donc wallabag doit reparcourir chaque article pour récupérer son contenu.
         config_missing:
             description: L’import à partir de Pocket n’est pas configuré.
             admin_message: Vous devez définir %keyurls%une clé pour l’API Pocket%keyurle%.
-            user_message: L’administrateur de votre serveur doit définir une clé pour l’API
-                Pocket.
-        authorize_message: Vous pouvez importer vos données depuis votre compte Pocket.
-            Vous n’avez qu’à cliquer sur le bouton ci-dessous et à autoriser wallabag à
-            se connecter à getpocket.com.
+            user_message: L’administrateur de votre serveur doit définir une clé pour l’API Pocket.
+        authorize_message: Vous pouvez importer vos données depuis votre compte Pocket. Vous n’avez qu’à cliquer sur le bouton ci-dessous et à autoriser wallabag à se connecter à getpocket.com.
         connect_to_pocket: Se connecter à Pocket et importer les données
     wallabag_v1:
         page_title: Importer > wallabag v1
-        description: Cet outil va importer toutes vos données de wallabag v1. Sur votre
-            page de configuration de wallabag v1, cliquez sur « Export JSON » dans la section
-            « Exporter vos données de wallabag ». Vous allez récupérer un fichier « wallabag-export-1-xxxx-xx-xx.json
-            ».
-        how_to: Choisissez le fichier de votre export wallabag v1 et cliquez sur le bouton
-            ci-dessous pour l’importer.
+        description: Cet outil va importer toutes vos données de wallabag v1. Sur votre page de configuration de wallabag v1, cliquez sur « Export JSON » dans la section « Exporter vos données de wallabag ». Vous allez récupérer un fichier « wallabag-export-1-xxxx-xx-xx.json ».
+        how_to: Choisissez le fichier de votre export wallabag v1 et cliquez sur le bouton ci-dessous pour l’importer.
     wallabag_v2:
         page_title: Importer > wallabag v2
-        description: Cet outil va importer tous vos articles d’une autre instance de wallabag
-            v2. Allez dans tous vos articles, puis, sur la barre latérale, cliquez sur «
-            JSON ». Vous allez récupérer un fichier « All articles.json ».
+        description: Cet outil va importer tous vos articles d’une autre instance de wallabag v2. Allez dans tous vos articles, puis, sur la barre latérale, cliquez sur « JSON ». Vous allez récupérer un fichier « All articles.json ».
     readability:
         page_title: Importer > Readability
-        description: Cet outil va importer toutes vos données de Readability. Sur la page
-            des outils (https://www.readability.com/tools/), cliquez sur « Export your data
-            » dans la section « Data Export ». Vous allez recevoir un courriel avec un lien
-            pour télécharger le json.
-        how_to: Choisissez le fichier de votre export Readability et cliquez sur le bouton
-            ci-dessous pour l’importer.
+        description: Cet outil va importer toutes vos données de Readability. Sur la page des outils (https://www.readability.com/tools/), cliquez sur « Export your data » dans la section « Data Export ». Vous allez recevoir un courriel avec un lien pour télécharger le json.
+        how_to: Choisissez le fichier de votre export Readability et cliquez sur le bouton ci-dessous pour l’importer.
     worker:
-        enabled: 'Les imports sont asynchrones. Une fois l’import commencé un worker externe
-            traitera les messages un par un. Le service activé est :'
-        download_images_warning: Vous avez configuré le téléchagement des images pour
-            vos articles. Combiné à l’import classique, cette opération peut être très très
-            longue (voire échouer). Nous vous conseillons <strong>vivement</strong> d’activer
-            les imports asynchrones.
+        enabled: 'Les imports sont asynchrones. Une fois l’import commencé un worker externe traitera les messages un par un. Le service activé est :'
+        download_images_warning: Vous avez configuré le téléchargement des images pour vos articles. Combiné à l’import classique, cette opération peut être très longue (voire échouer). Nous vous conseillons <strong>vivement</strong> d’activer les imports asynchrones.
     firefox:
         page_title: Importer > Firefox
-        description: Cet outil  importera tous vos marques-pages de Firefox. Ouvrez le
-            panneau des marques-pages (Ctrl+Maj+O), puis dans « Importation et sauvegarde
-            », choisissez « Sauvegarde… ». Vous récupérerez un fichier .json.
-        how_to: Choisissez le fichier de sauvegarde de vos marques-page et cliquez sur
-            le bouton pour l’importer. Soyez avertis que le processus peut prendre un temps
-            assez long car tous les articles doivent être récupérés en ligne.
+        description: Cet outil importera tous vos marques-pages de Firefox. Ouvrez le panneau des marques-pages (Ctrl+Maj+O), puis dans « Importation et sauvegarde », choisissez « Sauvegarde… ». Vous récupérerez un fichier .json.
+        how_to: Choisissez le fichier de sauvegarde de vos marques-page et cliquez sur le bouton pour l’importer. Soyez avertis que le processus peut prendre un temps assez long car tous les articles doivent être récupérés en ligne.
     chrome:
         page_title: Importer > Chrome
-        description: 'Cet outil va vous permettre d’importer tous vos marques-pages de
-            Google Chrome/Chromium. Pour Google Chrome, la situation du fichier dépend de
-            votre système d’exploitation : <ul><li>Sur GNU/Linux, allez dans le répertoire
-            <code>~/.config/google-chrome/Default/</code></li><li>Sous Windows, il devrait
-            se trouver à <code>%LOCALAPPDATA%\Google\Chrome\User Data\Default</code></li><li>Sur
-            OS X, il devrait se trouver dans le fichier <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Une
-            fois que vous y êtes, copiez le fichier Bookmarks à un endroit où vous le retrouverez.<em><br>Notez
-            que si vous utilisez Chromium à la place de Chrome, vous devez corriger les
-            chemins en conséquence.</em></p>'
-        how_to: Choisissez le fichier de sauvegarde de vos marques-page et cliquez sur
-            le bouton pour l’importer. Soyez avertis que le processus peut prendre un temps
-            assez long car tous les articles doivent être récupérés en ligne.
+        description: 'Cet outil va vous permettre d’importer tous vos marques-pages de Google Chrome/Chromium. Pour Google Chrome, la situation du fichier dépend de votre système d’exploitation : <ul><li>Sur GNU/Linux, allez dans le répertoire <code>~/.config/google-chrome/Default/</code></li><li>Sous Windows, il devrait se trouver à <code>%LOCALAPPDATA%\Google\Chrome\User Data\Default</code></li><li>Sur OS X, il devrait se trouver dans le fichier <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Une fois que vous y êtes, copiez le fichier Bookmarks à un endroit où vous le retrouverez.<em><br>Notez que si vous utilisez Chromium à la place de Chrome, vous devez corriger les chemins en conséquence.</em></p>'
+        how_to: Choisissez le fichier de sauvegarde de vos marques-page et cliquez sur le bouton pour l’importer. Soyez avertis que le processus peut prendre un temps assez long car tous les articles doivent être récupérés en ligne.
     instapaper:
         page_title: Importer > Instapaper
-        description: Sur la page des paramètres (https://www.instapaper.com/user), cliquez
-            sur « Download .CSV file » dans la section « Export ». Un fichier CSV sera téléchargé
-            (« instapaper-export.csv »).
-        how_to: Choisissez le fichier de votre export Instapaper et cliquez sur le bouton
-            ci-dessous pour l’importer.
+        description: Sur la page des paramètres (https://www.instapaper.com/user), cliquez sur « Download .CSV file » dans la section « Export ». Un fichier CSV sera téléchargé (« instapaper-export.csv »).
+        how_to: Choisissez le fichier de votre export Instapaper et cliquez sur le bouton ci-dessous pour l’importer.
     pinboard:
         page_title: Importer > Pinboard
-        description: Sur la page « Backup » (https://pinboard.in/settings/backup), cliquez
-            sur « JSON » dans la section « Bookmarks ». Un fichier json (sans extension)
-            sera téléchargé (« pinboard_export »).
-        how_to: Choisissez le fichier de votre export Pinboard et cliquez sur le bouton
-            ci-dessous pour l’importer.
+        description: Sur la page « Backup » (https://pinboard.in/settings/backup), cliquez sur « JSON » dans la section « Bookmarks ». Un fichier json (sans extension) sera téléchargé (« pinboard_export »).
+        how_to: Choisissez le fichier de votre export Pinboard et cliquez sur le bouton ci-dessous pour l’importer.
 developer:
     page_title: Gestion des clients API
     welcome_message: Bienvenue sur l’API de wallabag
@@ -558,15 +466,12 @@ developer:
         field_grant_types: Type de privilège accordé
         no_client: Aucun client pour le moment.
     remove:
-        warn_message_1: Vous avez la possibilité de supprimer le client %name%. Cette
-            action est IRRÉVERSIBLE !
-        warn_message_2: Si vous supprimez le client %name%, toutes les applications qui
-            l’utilisaient ne fonctionneront plus avec votre compte wallabag.
+        warn_message_1: Vous avez la possibilité de supprimer le client %name%. Cette action est IRRÉVERSIBLE !
+        warn_message_2: Si vous supprimez le client %name%, toutes les applications qui l’utilisaient ne fonctionneront plus avec votre compte wallabag.
         action: Supprimer le client %name%
     client:
         page_title: Gestion des clients API > Nouveau client
-        page_description: Vous allez créer un nouveau client. Merci de remplir l’adresse
-            de redirection vers votre application.
+        page_description: Vous allez créer un nouveau client. Merci de remplir l’adresse de redirection vers votre application.
         form:
             name_label: Nom du client
             redirect_uris_label: Adresses de redirection (optionnel)
@@ -583,20 +488,14 @@ developer:
     howto:
         page_title: Gestion des clients API > Comment créer votre première application
         description:
-            paragraph_1: Les commandes suivantes utilisent la <a href="https://github.com/jkbrzt/httpie">librarie
-                HTTPie</a>. Assurez-vous qu’elle soit installée avant de l’utiliser.
-            paragraph_2: Vous avez besoin d’un token pour échanger entre votre application
-                et l’API de wallabag.
-            paragraph_3: Pour créer un token, vous devez <a href="%link%">créer un nouveau
-                client</a>.
-            paragraph_4: 'Maintenant créez votre token (remplacer client_id, client_secret,
-                username et password avec les bonnes valeurs) :'
+            paragraph_1: Les commandes suivantes utilisent la <a href="https://github.com/jkbrzt/httpie">librarie HTTPie</a>. Assurez-vous qu’elle soit installée avant de l’utiliser.
+            paragraph_2: Vous avez besoin d’un token pour échanger entre votre application et l’API de wallabag.
+            paragraph_3: Pour créer un token, vous devez <a href="%link%">créer un nouveau client</a>.
+            paragraph_4: 'Maintenant créez votre token (remplacer client_id, client_secret, username et password avec les bonnes valeurs) :'
             paragraph_5: 'L’API vous retournera une réponse comme ça :'
-            paragraph_6: 'L’access_token doit être utilisé pour faire un appel à l’API.
-                Par exemple :'
+            paragraph_6: 'L’access_token doit être utilisé pour faire un appel à l’API. Par exemple :'
             paragraph_7: Cet appel va retourner tous les articles de l’utilisateur.
-            paragraph_8: Si vous voulez toutes les méthodes de l’API, jetez un oeil <a href="%link%">à
-                la documentation de l’API</a>.
+            paragraph_8: Si vous voulez toutes les méthodes de l’API, jetez un oeil <a href="%link%">à la documentation de l’API</a>.
         back: Retour
 user:
     page_title: Gestion des utilisateurs
@@ -629,9 +528,7 @@ site_credential:
     page_title: Gestion des accès aux sites
     new_site_credential: Créer un accès à un site
     edit_site_credential: Éditer l'accès d'un site
-    description: Ici, vous pouvez gérer toutes les informations d'identification pour
-        les sites qui les ont exigées (créer, modifier et supprimer), comme un péage numérique,
-        une authentification, etc.
+    description: Ici, vous pouvez gérer toutes les informations d'identification pour les sites qui les ont exigées (créer, modifier et supprimer), comme un péage numérique, une authentification, etc.
     list:
         actions: Actions
         edit_action: Éditer
@@ -653,8 +550,7 @@ flashes:
         notice:
             config_saved: Les paramètres ont bien été mis à jour.
             password_updated: Votre mot de passe a bien été mis à jour
-            password_not_updated_demo: En démo, vous ne pouvez pas changer le mot de passe
-                de cet utilisateur.
+            password_not_updated_demo: En démo, vous ne pouvez pas changer le mot de passe de cet utilisateur.
             user_updated: Vos informations personnelles ont bien été mises à jour
             rss_updated: La configuration des flux RSS a bien été mise à jour
             tagging_rules_updated: Règles mises à jour
@@ -685,12 +581,10 @@ flashes:
             failed: L’import a échoué, veuillez réessayer.
             failed_on_file: Erreur lors du traitement de l’import. Vérifiez votre fichier.
             summary: 'Rapport d’import : %imported% importés, %skipped% déjà présents.'
-            summary_with_queue: 'Rapport d’import:  %queued% en cours de traitement.'
+            summary_with_queue: 'Rapport d’import : %queued% en cours de traitement.'
         error:
-            redis_enabled_not_installed: Redis est activé pour les imports asynchrones mais
-                <u>impossible de s’y connecter</u>. Vérifier la configuration de Redis.
-            rabbit_enabled_not_installed: RabbitMQ est activé pour les imports asynchrones
-                mais <u>impossible de s’y connecter</u>. Vérifier la configuration de RabbitMQ.
+            redis_enabled_not_installed: Redis est activé pour les imports asynchrones mais <u>impossible de s’y connecter</u>. Vérifier la configuration de Redis.
+            rabbit_enabled_not_installed: RabbitMQ est activé pour les imports asynchrones mais <u>impossible de s’y connecter</u>. Vérifier la configuration de RabbitMQ.
     developer:
         notice:
             client_created: Nouveau client %name% créé.
