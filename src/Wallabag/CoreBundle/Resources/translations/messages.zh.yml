@@ -58,6 +58,7 @@ config:
         rules: '标签规则'
         new_user: '添加用户'
         reset: '重置区域'
+        rss: RSS
     form:
         save: '保存'
     form_settings:
@@ -67,6 +68,10 @@ config:
         reading_speed:
             label: '阅读速度（词 / 每分钟）'
             help_message: '你可以使用在线工具来估计自己的阅读速度：'
+            400_word: 我每分钟能读大概400个单词
+            300_word: 我每分钟能读大概300个单词
+            200_word: 我每分钟能读大概200个单词
+            100_word: 我每分钟能读大概100个单词
         action_mark_as_read:
             label: '将一个项目删除、加星标或是标记为已读后该做什么？'
             redirect_homepage: '返回主页'
@@ -113,6 +118,8 @@ config:
             description: '如果你删除你的账号，你的所有文章、标签以及账号本身都会被永久删除(且无法撤销)，然后你将会被登出。'
             confirm: '你真的确定的吗？（这不能被撤销）'
             button: '删除我的账号'
+        help_twoFactorAuthentication: 如果你启用双因素认证，每次你想登录到wallabag，你会通过电子邮件收到一个代码。
+        twoFactorAuthentication_label: 双因素认证
     reset:
         title: '重置区（危险区域）'
         description: '一旦你点击这个按钮，你就可以移除你账号中的某些信息。请注意这些操作是不可撤销的。'
@@ -183,6 +190,19 @@ config:
             two_factor_code_description_4: '从你配置好的应用中测试 OTP 码'
             cancel: "取消"
             enable: "启用"
+    form_rss:
+        rss_limit: RSS源中的条目数
+        rss_link:
+            all: 全部
+            archive: 已存档
+            starred: 已标星
+            unread: 未读
+        rss_links: RSS链接
+        token_reset: 重新生成你的令牌
+        token_create: 创建你的令牌
+        no_token: 没有令牌
+        token_label: RSS令牌
+        description: wallabag提供的RSS源可以让你用你喜欢的RSS阅读器阅读你保存的文章。首先需要生成一个令牌。
 entry:
     default_title: '项目标题'
     page_titles:
@@ -375,6 +395,7 @@ quickstart:
         language: '变更语言和设计'
         feed: '启用订阅源'
         tagging_rules: '编写规则来给你的文章自动加上标签'
+        rss: 启用RSS源
     admin:
         title: '管理员'
         description: '作为一名管理员，你在 wallabag 上享有特权。你可以：'
@@ -557,6 +578,7 @@ user:
         delete: 删除
         delete_confirm: 确定要这么做吗？
         back_to_list: 返回列表
+        twofactor_label: 双因素认证
     search:
         placeholder: 通过用户名或者邮箱筛选
 site_credential:
@@ -599,6 +621,8 @@ flashes:
             otp_enabled: 两步验证已启用
             tagging_rules_imported: 标签规则已导入
             tagging_rules_not_imported: 导入标签规则时发生了错误
+            rss_token_updated: RSS令牌已更新
+            rss_updated: RSS信息已更新
     entry:
         notice:
             entry_already_saved: '该项目已于 %date% 保存'
