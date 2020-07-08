@@ -109,8 +109,7 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
             ->getQuery();
 
         $query->useQueryCache(true);
-        $query->useResultCache(true);
-        $query->setResultCacheLifetime($this->lifeTime);
+        $query->enableResultCache($this->lifeTime);
 
         return \count($query->getArrayResult());
     }
@@ -150,8 +149,7 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
             ->getQuery();
 
         $query->useQueryCache(true);
-        $query->useResultCache(true);
-        $query->setResultCacheLifetime($this->lifeTime);
+        $query->enableResultCache($this->lifeTime);
 
         $nbArchives = \count($query->getArrayResult());
 

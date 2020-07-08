@@ -27,8 +27,7 @@ class TagRepository extends EntityRepository
 
         if (null !== $cacheLifeTime) {
             $query->useQueryCache(true);
-            $query->useResultCache(true);
-            $query->setResultCacheLifetime($cacheLifeTime);
+            $query->enableResultCache($cacheLifeTime);
         }
 
         return \count($query->getArrayResult());
