@@ -293,6 +293,11 @@ a.original:not(.waves-effect) {
   }
 }
 
+.card.archived,
+.card-stacked.archived {
+  opacity: 0.5;
+}
+
 #content .collection .collection-item {
   min-height: 65px;
   height: auto;
