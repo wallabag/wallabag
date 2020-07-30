@@ -1,0 +1,7 @@
+validator:
+    password_must_match: Паролі повинні співпадати.
+    password_too_short: Довжина пароля повинна бути не менше 8-ми символів.
+    password_wrong_value: Введено неправильний поточний пароль.
+    item_per_page_too_high: Вибрано завелику кількість
+    rss_limit_too_high: Вибрано завелику кількість
+    quote_length_too_high: Цитата занадто довга. Вона повинна мати не більше {{ limit }} символів.
