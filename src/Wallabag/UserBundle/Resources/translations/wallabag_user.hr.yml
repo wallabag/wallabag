@@ -1,1 +1,10 @@
-{}
+auth_code:
+    on: uključeno
+    mailer:
+        subject: wallabag kod za autentifikaciju
+        body:
+            support: 'Slobodno nas kontaktiraj, ako imaš bilo kakvih problema:'
+            first_para: Budući da je potrebna dvofaktorska autentifikacija za prijavu na vlastiti wallabag račun, a jedan novi uređaj ju je upravo upotrijebio, šaljemo ti kod za potvrdu njegove veze.
+            second_para: 'Ovdje je tvoj kod:'
+            hello: Pozdrav %user%,
+            signature: Tim wallabag
