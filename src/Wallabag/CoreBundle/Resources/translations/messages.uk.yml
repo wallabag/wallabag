@@ -9,8 +9,7 @@ security:
         password: Пароль
         cancel: Скасувати
     resetting:
-        description: Введіть вашу електронну адресу, на яку ми вишлемо інструкцію
-            щодо відновлення пароля.
+        description: Введіть вашу електронну адресу, на яку ми вишлемо інструкцію щодо відновлення пароля.
     register:
         page_title: Створення облікового запису
         go_to_account: Перейти до облікового запису
@@ -49,8 +48,7 @@ footer:
         social: Соціальні мережі
         powered_by: Працює на
         about: Про Wallabag
-    stats: З %user_creation% ви прочитали %nb_archives% статтю(ей). Це приблизно %per_day%
-        на день!
+    stats: З %user_creation% ви прочитали %nb_archives% статтю(ей). Це приблизно %per_day% на день!
 config:
     page_title: Конфігурація
     tab_menu:
@@ -62,6 +60,7 @@ config:
         new_user: Створити користувача
         ignore_origin: Правила ігнорування
         reset: Скидання налаштувань
+        rss: RSS
     form:
         save: Зберегти
     form_settings:
@@ -84,15 +83,11 @@ config:
         android_instruction: Touch here to prefill your Android application
         help_theme: wallabag is customizable. You can choose your prefered theme here.
         help_items_per_page: You can change the number of articles displayed on each page.
-        help_reading_speed: wallabag calculates a reading time for each article. You can
-            define here, thanks to this list, if you are a fast or a slow reader. wallabag
-            will recalculate the reading time for each article.
+        help_reading_speed: wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article.
         help_language: You can change the language of wallabag interface.
-        help_pocket_consumer_key: Required for Pocket import. You can create it in your
-            Pocket account.
+        help_pocket_consumer_key: Required for Pocket import. You can create it in your Pocket account.
     form_feed:
-        description: RSS-стрічки wallabag надають можливість читати збережені статті
-            вашим улюбленим RSS-читачем. Спочатку вам потрібно згенерувати особистий код.
+        description: RSS-стрічки wallabag надають можливість читати збережені статті вашим улюбленим RSS-читачем. Спочатку вам потрібно згенерувати особистий код.
         token_label: Особистий код для RSS
         no_token: Код відсутній
         token_create: Створити код
@@ -106,8 +101,7 @@ config:
             all: Всі
         feed_limit: Кількість записів у стрічці
     form_user:
-        two_factor_description: Вмикання двофакторної аутентифікації означає, що вам буде потрібно
-            зробити додаткову дію після введення пароля (ввести код або перейти по посиланню з листа).
+        two_factor_description: Вмикання двофакторної аутентифікації означає, що вам буде потрібно зробити додаткову дію після введення пароля (ввести код або перейти по посиланню з листа).
         login_label: Логін
         name_label: Ім'я
         email_label: Електронна адреса
@@ -122,13 +116,10 @@ config:
             action_email: Увімкнути
             action_app: Налаштувати
         twoFactorAuthentication_label: Two factor authentication
-        help_twoFactorAuthentication: If you enable 2FA, each time you want to login to
-            wallabag, you'll receive a code by email.
+        help_twoFactorAuthentication: If you enable 2FA, each time you want to login to wallabag, you'll receive a code by email.
         delete:
             title: Delete my account (a.k.a danger zone)
-            description: If you remove your account, ALL your articles, ALL your tags, ALL
-                your annotations and your account will be PERMANENTLY removed (it can't be
-                UNDONE). You'll then be logged out.
+            description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
             confirm: Are you really sure? (THIS CAN'T BE UNDONE)
             button: Delete my account
     otp:
@@ -142,16 +133,14 @@ config:
             enable: Зберегти
     reset:
         title: Зона скидання (a.k.a зона небезпеки)
-        description: Використовуючи ці кнопки ви матимете можливість видалити інформацію
-            з вашого облікового запису. Враховуйте, що ці дії є НЕЗВОРОТНІМИ.
+        description: Використовуючи ці кнопки ви матимете можливість видалити інформацію з вашого облікового запису. Враховуйте, що ці дії є НЕЗВОРОТНІМИ.
         annotations: Видалити ВСІ анотації
         tags: Видалити ВСІ теги
         entries: Видалити ВСІ статті
         archived: Видалити ВСІ архівні статті
         confirm: Ви впевнені? (ЦЮ ДІЮ НЕ МОЖНА БУДЕ ПОВЕРНУТИ НАЗАД)
     form_password:
-        description: Тут ви можете змінити пароль. Довжина нового пароля повинна бути
-            не менше 8 символів.
+        description: Тут ви можете змінити пароль. Довжина нового пароля повинна бути не менше 8 символів.
         old_password_label: Поточний пароль
         new_password_label: Новий пароль
         repeat_new_password_label: Повторіть новий пароль
@@ -174,23 +163,11 @@ config:
         faq:
             title: Довідка
             tagging_rules_definition_title: Що таке « правила тегування »?
-            tagging_rules_definition_description: They are rules used by Wallabag to automatically
-                tag new entries.<br />Each time a new entry is added, all the tagging rules
-                will be used to add the tags you configured, thus saving you the trouble of
-                manually classifying your entries.
+            tagging_rules_definition_description: They are rules used by Wallabag to automatically tag new entries.<br />Each time a new entry is added, all the tagging rules will be used to add the tags you configured, thus saving you the trouble of manually classifying your entries.
             how_to_use_them_title: Як їх використовувати?
-            how_to_use_them_description: 'Let us assume you want to tag new entries as «
-                <i>short reading</i> » when the reading time is under 3 minutes.<br />In that
-                case, you should put « readingTime &lt;= 3 » in the <i>Rule</i> field and
-                « <i>short reading</i> » in the <i>Tags</i> field.<br />Several tags can added
-                simultaneously by separating them with a comma: « <i>short reading, must read</i>
-                »<br />Complex rules can be written by using predefined operators: if « <i>readingTime
-                &gt;= 5 AND domainName = "github.com"</i> » then tag as « <i>long reading,
-                GitHub </i> »'
-            variables_available_title: Які змінні та оператори можна використовувати для написання
-                правил?
-            variables_available_description: 'The following variables and operators can
-                be used to create tagging rules:'
+            how_to_use_them_description: 'Let us assume you want to tag new entries as « <i>short reading</i> » when the reading time is under 3 minutes.<br />In that case, you should put « readingTime &lt;= 3 » in the <i>Rule</i> field and « <i>short reading</i> » in the <i>Tags</i> field.<br />Several tags can added simultaneously by separating them with a comma: « <i>short reading, must read</i> »<br />Complex rules can be written by using predefined operators: if « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » then tag as « <i>long reading, GitHub </i> »'
+            variables_available_title: Які змінні та оператори можна використовувати для написання правил?
+            variables_available_description: 'The following variables and operators can be used to create tagging rules:'
             meaning: Значення
             variable_description:
                 label: Змінна
@@ -213,11 +190,8 @@ config:
                 not_equal_to: Not equal to...
                 or: One rule OR another
                 and: One rule AND another
-                matches: 'Tests that a <i>subject</i> matches a <i>search</i> (case-insensitive).<br
-                    />Example: <code>title matches "football"</code>'
-                notmatches: "Tests that a <i>subject</i> doesn't match match a <i>search</i>\
-                    \ (case-insensitive).<br />Example: <code>title notmatches \"football\"\
-                    </code>"
+                matches: 'Tests that a <i>subject</i> matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>'
+                notmatches: "Tests that a <i>subject</i> doesn't match match a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches \"football\"</code>"
 entry:
     default_title: Заголовок статті
     page_titles:
@@ -230,8 +204,7 @@ entry:
         untagged: Статті без тегів
         all: Всі статті
     list:
-        number_on_the_page: '{0} Немає записів.|{1} Знайдено одну статтю.|]1,Inf[
-            Знайдено %count% статтю(ей).'
+        number_on_the_page: '{0} Немає записів.|{1} Знайдено одну статтю.|]1,Inf[ Знайдено %count% статтю(ей).'
         reading_time: приблизний час читання
         reading_time_minutes: 'приблизний час читання: %readingTime% хв'
         reading_time_less_one_minute: 'приблизний час читання: &lt; 1 хв'
@@ -289,8 +262,7 @@ entry:
                 description: Стаття виглядає неправильно?
         edit_title: Редагувати заголовок
         original_article: оригінальна
-        annotations_on_the_entry: '{0} Немає анотацій|{1} Одна аннотація|]1,Inf[ %count%
-            аннотації(ій)'
+        annotations_on_the_entry: '{0} Немає анотацій|{1} Одна аннотація|]1,Inf[ %count% аннотації(ій)'
         created_at: Дата створення
         published_at: Дата публікації
         published_by: Опубліковано
@@ -329,8 +301,7 @@ about:
     who_behind_wallabag:
         developped_by: Розробники
         website: вебсайт
-        many_contributors: Та багато інших контрібюторів ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">на
-            GitHub</a>
+        many_contributors: Та багато інших контрібюторів ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">на GitHub</a>
         project_website: Вебсайт проєкту
         license: Ліцензія
         version: Версія
@@ -346,8 +317,7 @@ about:
     contributors:
         description: Дякуємо усім, хто долучився до розробки веб-застосунку wallabag
     third_party:
-        description: 'Тут представлено список сторонніх бібліотек використаних при розробці wallabag (з
-            їхніми ліцензіями):'
+        description: 'Тут представлено список сторонніх бібліотек використаних при розробці wallabag (з їхніми ліцензіями):'
         package: Пакет
         license: Ліцензія
 howto:
@@ -355,7 +325,7 @@ howto:
     tab_menu:
         add_link: Як додати посилання
         shortcuts: Використання гарячих клавіш
-    page_description: 'There are several ways to save an article:'
+    page_description: 'Є декілька способів зберегти статтю:'
     top_menu:
         browser_addons: Browser addons
         mobile_apps: Mobile apps
@@ -363,27 +333,27 @@ howto:
     form:
         description: Thanks to this form
     browser_addons:
-        firefox: Firefox addon
-        chrome: Chrome addon
-        opera: Opera addon
+        firefox: Розширення для Firefox
+        chrome: Розширення для Chrome
+        opera: Розширення для Opera
     mobile_apps:
         android:
-            via_f_droid: via F-Droid
-            via_google_play: via Google Play
-        ios: on the iTunes Store
-        windows: on the Microsoft Store
+            via_f_droid: у F-Droid
+            via_google_play: у Google Play
+        ios: в iTunes Store
+        windows: у Microsoft Store
     bookmarklet:
-        description: 'Drag & drop this link to your bookmarks bar:'
+        description: 'Перетягніть посилання на панель закладок:'
     shortcuts:
         page_description: Here are the shortcuts available in wallabag.
         shortcut: Shortcut
         action: Action
-        all_pages_title: Shortcuts available in all pages
-        go_unread: Go to unread
-        go_starred: Go to starred
+        all_pages_title: Гарячі клавіші доступні на всіх сторінках
+        go_unread: Перейти до непрочитаних
+        go_starred: Перейти до закладок
         go_archive: Go to archive
-        go_all: Go to all entries
-        go_tags: Go to tags
+        go_all: Перейти до всіх статтей
+        go_tags: Перейти до тегів
         go_config: Go to config
         go_import: Go to import
         go_developers: Go to developers
@@ -391,28 +361,26 @@ howto:
         go_logout: Log out
         list_title: Shortcuts available in listing pages
         search: Display the search form
-        article_title: Shortcuts available in entry view
+        article_title: Гарячі клавіші на сторінці статті
         open_original: Open original URL of the entry
         toggle_favorite: Toggle star status for the entry
         toggle_archive: Toggle read status for the entry
-        delete: Delete the entry
-        material_title: Shortcuts available with Material theme only
-        add_link: Add a new link
+        delete: Видалити запис
+        material_title: Гарячі клавіші доступні тільки у темі Material
+        add_link: Додати нове посилання
         hide_form: Hide the current form (search or new link)
-        arrows_navigation: Navigate through articles
+        arrows_navigation: Навігація по статтях
         open_article: Display the selected entry
 quickstart:
     page_title: Швидкий старт
     more: Більше…
     intro:
         title: Ласкаво просимо до wallabag!
-        paragraph_1: We'll accompany you on your visit to wallabag and show you some features
-            that might interest you.
+        paragraph_1: We'll accompany you on your visit to wallabag and show you some features that might interest you.
         paragraph_2: Стежте за нашими новинами!
     configure:
         title: Налаштуйте Wallabag
-        description: Щоб зробити застосунок зручнішим, прогляньте
-            розділ конфігурації wallabag.
+        description: Щоб зробити застосунок зручнішим, прогляньте розділ конфігурації wallabag.
         language: Змініть мову чи дизайн
         feed: Увімкніть стрічки RSS
         tagging_rules: Write rules to automatically tag your articles
@@ -426,14 +394,12 @@ quickstart:
         import: Configure import
     first_steps:
         title: Перші кроки
-        description: Тепер, коли wallabag добре налаштовано, час почати зберігати веб-мережу. Ви
-            можете клікнути по знаку + у верхньому правому кутку, щоб додати посилання.
+        description: Тепер, коли wallabag добре налаштовано, час почати зберігати веб-мережу. Ви можете клікнути по знаку + у верхньому правому кутку, щоб додати посилання.
         new_article: Збережіть свою першу статтю
         unread_articles: Та класифікуйте її!
     migrate:
         title: Мігруйте з іншого сервісу
-        description: Використовуєте інший сервіс? Ми допоможемо перенести дані
-            у wallabag.
+        description: Використовуєте інший сервіс? Ми допоможемо перенести дані у wallabag.
         pocket: Мігрувати з Pocket
         wallabag_v1: Мігрувати з wallabag v1
         wallabag_v2: Мігрувати з wallabag v2
@@ -446,12 +412,10 @@ quickstart:
         use_docker: Використовуйте Docker для встановлення wallabag
     docs:
         title: Документація
-        description: У wallabag багато можливостей. Не зволікайте, щоб прочитати
-            інструкцію, щоб дізнатись про них і про те як їх використовувати.
+        description: У wallabag багато можливостей. Не зволікайте, щоб прочитати інструкцію, щоб дізнатись про них і про те як їх використовувати.
         annotate: Створити анотацію для статті
         export: Конвертація статей в ePUB чи PDF
-        search_filters: See how you can look for an article by using the search engine
-            and filters
+        search_filters: See how you can look for an article by using the search engine and filters
         fetching_errors: What can I do if an article encounters errors during fetching?
         all_docs: Та багато інших статей!
     support:
@@ -463,22 +427,18 @@ quickstart:
 tag:
     page_title: Теги
     list:
-        number_on_the_page: '{0} Немає тегів.|{1} Є один тег.|]1,Inf[ Є
-            %count% теги(ів).'
+        number_on_the_page: '{0} Немає тегів.|{1} Є один тег.|]1,Inf[ Є %count% теги(ів).'
         see_untagged_entries: Переглянути статті без тегів
         untagged: Без тегів
     new:
         add: Додати
         placeholder: Ви можете додати кілька тегів розділених комами.
 export:
-    footer_template: <div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please
-        open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you
-        have trouble with the display of this E-Book on your device.</p></div>
+    footer_template: <div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p></div>
     unknown: Unknown
 import:
     page_title: Імпорт
-    page_description: Welcome to wallabag importer. Please select your previous service
-        from which you want to migrate.
+    page_description: Welcome to wallabag importer. Please select your previous service from which you want to migrate.
     action:
         import_contents: Import contents
     form:
@@ -488,78 +448,43 @@ import:
         save_label: Upload file
     pocket:
         page_title: Import > Pocket
-        description: This importer will import all of your Pocket data. Pocket doesn't
-            allow us to retrieve content from their service, so the readable content of
-            each article will be re-fetched by wallabag.
+        description: This importer will import all of your Pocket data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag.
         config_missing:
             description: Pocket import isn't configured.
             admin_message: You need to define %keyurls%a pocket_consumer_key%keyurle%.
             user_message: Your server admin needs to define an API Key for Pocket.
-        authorize_message: You can import your data from your Pocket account. You just
-            have to click on the below button and authorize the application to connect to
-            getpocket.com.
+        authorize_message: You can import your data from your Pocket account. You just have to click on the below button and authorize the application to connect to getpocket.com.
         connect_to_pocket: Connect to Pocket and import data
     wallabag_v1:
         page_title: Import > Wallabag v1
-        description: This importer will import all your wallabag v1 articles. On your
-            config page, click on "JSON export" in the "Export your wallabag data" section.
-            You will have a "wallabag-export-1-xxxx-xx-xx.json" file.
-        how_to: Please select your wallabag export and click on the below button to upload
-            and import it.
+        description: This importer will import all your wallabag v1 articles. On your config page, click on "JSON export" in the "Export your wallabag data" section. You will have a "wallabag-export-1-xxxx-xx-xx.json" file.
+        how_to: Please select your wallabag export and click on the below button to upload and import it.
     wallabag_v2:
         page_title: Import > Wallabag v2
-        description: This importer will import all your wallabag v2 articles. Go to All
-            articles, then, on the export sidebar, click on "JSON". You will have a "All
-            articles.json" file.
+        description: This importer will import all your wallabag v2 articles. Go to All articles, then, on the export sidebar, click on "JSON". You will have a "All articles.json" file.
     readability:
         page_title: Import > Readability
-        description: This importer will import all your Readability articles. On the tools
-            (https://www.readability.com/tools/) page, click on "Export your data" in the
-            "Data Export" section. You will received an email to download a json (which
-            does not end with .json in fact).
-        how_to: Please select your Readability export and click on the below button to
-            upload and import it.
+        description: This importer will import all your Readability articles. On the tools (https://www.readability.com/tools/) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).
+        how_to: Please select your Readability export and click on the below button to upload and import it.
     worker:
-        enabled: 'Import is made asynchronously. Once the import task is started, an external
-            worker will handle jobs one at a time. The current service is:'
-        download_images_warning: You enabled downloading images for your articles. Combined
-            with classic import it can take ages to proceed (or maybe failed). We <strong>strongly
-            recommend</strong> to enable asynchronous import to avoid errors.
+        enabled: 'Import is made asynchronously. Once the import task is started, an external worker will handle jobs one at a time. The current service is:'
+        download_images_warning: You enabled downloading images for your articles. Combined with classic import it can take ages to proceed (or maybe failed). We <strong>strongly recommend</strong> to enable asynchronous import to avoid errors.
     firefox:
         page_title: Import > Firefox
-        description: This importer will import all your Firefox bookmarks. Just go to
-            your bookmarks (Ctrl+Maj+O), then into "Import and backup", choose "Backup...".
-            You will obtain a .json file.
-        how_to: Please choose the bookmark backup file and click on the button below to
-            import it. Note that the process may take a long time since all articles have
-            to be fetched.
+        description: This importer will import all your Firefox bookmarks. Just go to your bookmarks (Ctrl+Maj+O), then into "Import and backup", choose "Backup...". You will obtain a .json file.
+        how_to: Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched.
     chrome:
         page_title: Import > Chrome
-        description: "This importer will import all your Chrome bookmarks. The location\
-            \ of the file depends on your operating system : <ul><li>On Linux, go into the\
-            \ <code>~/.config/chromium/Default/</code> directory</li><li>On Windows, it\
-            \ should be at <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>On\
-            \ OS X, it should be at <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Once\
-            \ you got there, copy the <code>Bookmarks</code> file someplace you'll find.<em><br>Note\
-            \ that if you have Chromium instead of Chrome, you'll have to correct paths\
-            \ accordingly.</em></p>"
-        how_to: Please choose the bookmark backup file and click on the button below to
-            import it. Note that the process may take a long time since all articles have
-            to be fetched.
+        description: "This importer will import all your Chrome bookmarks. The location of the file depends on your operating system : <ul><li>On Linux, go into the <code>~/.config/chromium/Default/</code> directory</li><li>On Windows, it should be at <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>On OS X, it should be at <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Once you got there, copy the <code>Bookmarks</code> file someplace you'll find.<em><br>Note that if you have Chromium instead of Chrome, you'll have to correct paths accordingly.</em></p>"
+        how_to: Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched.
     instapaper:
         page_title: Import > Instapaper
-        description: This importer will import all your Instapaper articles. On the settings
-            (https://www.instapaper.com/user) page, click on "Download .CSV file" in the
-            "Export" section. A CSV file will be downloaded (like "instapaper-export.csv").
-        how_to: Please select your Instapaper export and click on the below button to
-            upload and import it.
+        description: This importer will import all your Instapaper articles. On the settings (https://www.instapaper.com/user) page, click on "Download .CSV file" in the "Export" section. A CSV file will be downloaded (like "instapaper-export.csv").
+        how_to: Please select your Instapaper export and click on the below button to upload and import it.
     pinboard:
         page_title: Import > Pinboard
-        description: This importer will import all your Pinboard articles. On the backup
-            (https://pinboard.in/settings/backup) page, click on "JSON" in the "Bookmarks"
-            section. A JSON file will be downloaded (like "pinboard_export").
-        how_to: Please select your Pinboard export and click on the below button to upload
-            and import it.
+        description: This importer will import all your Pinboard articles. On the backup (https://pinboard.in/settings/backup) page, click on "JSON" in the "Bookmarks" section. A JSON file will be downloaded (like "pinboard_export").
+        how_to: Please select your Pinboard export and click on the below button to upload and import it.
 developer:
     page_title: Керування клієнтами API
     welcome_message: Ласкаво просимо до wallabag API
@@ -578,15 +503,12 @@ developer:
         field_grant_types: Права клієнта
         no_client: Поки немає клієнтів.
     remove:
-        warn_message_1: У вас є можливість видалити клієнта %name%. Ця дія
-            є незворотною !
-        warn_message_2: Якщо ви його видалите, то кожен застосунок, сконфігурований цим клієнтом, не
-            буде мати змоги авторизуватись у вашому wallabag.
+        warn_message_1: У вас є можливість видалити клієнта %name%. Ця дія є незворотною !
+        warn_message_2: Якщо ви його видалите, то кожен застосунок, сконфігурований цим клієнтом, не буде мати змоги авторизуватись у вашому wallabag.
         action: Видалити клієнта %name%
     client:
         page_title: Керування клієнтами API > Створення клієнта
-        page_description: Ви от-от створите клієнт для API. Заповніть поле нижче
-            інформацією про URI перенаправлення вашого застосунку.
+        page_description: Ви от-от створите клієнт для API. Заповніть поле нижче інформацією про URI перенаправлення вашого застосунку.
         form:
             name_label: Назва клієнта
             redirect_uris_label: URI перенаправлення (необов'язково)
@@ -604,17 +526,14 @@ developer:
     howto:
         page_title: Керування клієнтами API > Створення першого застосунку
         description:
-            paragraph_1: У наступник командах використовується утиліта <a href="https://github.com/jkbrzt/httpie">HTTPie
-                library</a>. Спочатку переконайтесь, що вона встановлена у вашій системі.
+            paragraph_1: У наступник командах використовується утиліта <a href="https://github.com/jkbrzt/httpie">HTTPie library</a>. Спочатку переконайтесь, що вона встановлена у вашій системі.
             paragraph_2: Щоб комунікувати з wallabag API, вашому застосунку потрібен ключ.
             paragraph_3: Щоб згенерувати ключ, вам потрібно <a href="%link%">створити клієнта</a>.
-            paragraph_4: 'Тепер створимо ключ (замініть значення полів client_id, client_secret, username
-                та password на свої):'
+            paragraph_4: 'Тепер створимо ключ (замініть значення полів client_id, client_secret, username та password на свої):'
             paragraph_5: 'Відповідь API буде схожою на цю:'
             paragraph_6: 'access_token використовується для посилання запитів на API. Для прикладу:'
             paragraph_7: Цей запит поверне всі статті вашого користувача.
-            paragraph_8: Щоб ознайомитись зі всіма методами API, вам потрібно переглянути <a
-                href="%link%">нашу документацію API</a>.
+            paragraph_8: Щоб ознайомитись зі всіма методами API, вам потрібно переглянути <a href="%link%">нашу документацію API</a>.
         back: Назад
 user:
     page_title: Users management
@@ -647,8 +566,7 @@ site_credential:
     page_title: Site credentials management
     new_site_credential: Create a credential
     edit_site_credential: Edit an existing credential
-    description: Here you can manage all credentials for sites which required them (create,
-        edit and delete), like a paywall, an authentication, etc.
+    description: Here you can manage all credentials for sites which required them (create, edit and delete), like a paywall, an authentication, etc.
     list:
         actions: Actions
         edit_action: Edit
@@ -670,8 +588,7 @@ flashes:
         notice:
             config_saved: Конфігурацію збережено.
             password_updated: Пароль оновлено
-            password_not_updated_demo: У режимі демонстрації ви не можете змінити пароль
-                цього користувача.
+            password_not_updated_demo: У режимі демонстрації ви не можете змінити пароль цього користувача.
             user_updated: Інформацію оновлено
             feed_updated: Інформацію про RSS оновлено
             tagging_rules_updated: Правила тегування оновлено
@@ -703,14 +620,12 @@ flashes:
     import:
         notice:
             failed: Не вдалось імпортувати, спробуйте ще раз.
-            failed_on_file: Error while processing import. Please verify your import file.
+            failed_on_file: Сталась помилка під час імпорту. Перевірте файл імпорту.
             summary: 'Import summary: %imported% imported, %skipped% already saved.'
             summary_with_queue: 'Import summary: %queued% queued.'
         error:
-            redis_enabled_not_installed: Redis is enabled for handle asynchronous import
-                but it looks like <u>we can't connect to it</u>. Please check Redis configuration.
-            rabbit_enabled_not_installed: RabbitMQ is enabled for handle asynchronous import
-                but it looks like <u>we can't connect to it</u>. Please check RabbitMQ configuration.
+            redis_enabled_not_installed: Redis is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check Redis configuration.
+            rabbit_enabled_not_installed: RabbitMQ is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check RabbitMQ configuration.
     developer:
         notice:
             client_created: Створено клієнта "%name%".
