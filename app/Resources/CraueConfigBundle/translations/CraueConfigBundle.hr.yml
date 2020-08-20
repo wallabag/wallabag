@@ -1,24 +1,24 @@
 share_diaspora: Aktiviraj dijeljenje na diaspora*
 share_twitter: Aktiviraj dijeljenje na Twitter
 shaarli_share_origin_url: Aktiviraj dijeljenje URL-a izvora na Shaarli, ako je usluga aktivirana
-export_csv: Aktiviraj CSV-izvoz
+export_csv: Aktiviraj CSV izvoz
 matomo_site_id: ID tvoje web-stranice u Piwiku
 share_mail: Aktiviraj dijeljenje putem e-maila
-export_txt: Aktiviraj TXT-izvoz
+export_txt: Aktiviraj TXT izvoz
 download_images_enabled: Preuzmi slike lokalno
 share_scuttle: Aktiviraj dijeljenje na Scuttle
 export: izvezi
-export_json: Aktiviraj JSON-izvoz
+export_json: Aktiviraj JSON izvoz
 store_article_headers: Aktiviraj, ako wallabag sprema HTTP zaglavlja za svaki članak
 entry: članak
 share_shaarli: Aktiviraj dijeljenje na Shaarli
 scuttle_url: Scuttle URL, ako je usluga aktivirana
 share_unmark: Aktiviraj dijeljenje na Unmark.it
-export_pdf: Aktiviraj PDF-izvoz
+export_pdf: Aktiviraj PDF izvoz
 matomo_enabled: Aktiviraj Piwik
 import_with_redis: Aktiviraj Redis za asinkroni uvoz podataka
 restricted_access: Aktiviraj autentifikaciju za naplatne web-stranice
-export_mobi: Aktiviraj .mobi-izvoz
+export_mobi: Aktiviraj .mobi izvoz
 demo_mode_enabled: Aktivirati demo modus? (Koristi se samo za javnu wallabag demonstraciju)
 carrot: Aktiviraj dijeljenje na Carrot
 diaspora_url: diaspora* URL, ako je usluga aktivirana
@@ -30,10 +30,10 @@ unmark_url: Unmark URL, ako je usluga aktivirana
 shaarli_url: Shaarli URL, ako je usluga aktivirana
 download_pictures: Preuzmi slike na vlastiti poslužitelj
 modify_settings: primijeni
-export_epub: Aktiviraj ePub-izvoz
+export_epub: Aktiviraj ePub izvoz
 misc: razno
 wallabag_support_url: URL podrške za wallabag
-export_xml: Aktiviraj XML-izvoz
+export_xml: Aktiviraj XML izvoz
 show_printlink: Za ispis sadržaja, prikaži poveznicu
 demo_mode_username: Demo korisnik
 import: uvezi
