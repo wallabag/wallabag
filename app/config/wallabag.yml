@@ -19,6 +19,7 @@ wallabag_core:
         ja: '日本語'
         zh: '简体中文'
         uk: 'Українська'
+        hr: 'Hrvatski'
     items_on_page: 12
     theme: material
     language: '%locale%'
