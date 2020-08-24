@@ -35,3 +35,7 @@ demo_mode_username: "Демо пользователь"
 share_public: "Разрешить публичные ссылки на записи"
 download_images_enabled: "Скачивать изображения локально"
 restricted_access: "Включить авторизацию на сайте с помощью paywall"
+shaarli_share_origin_url: Включите отправку URL-адреса источника для Shaarli, если услуга включена
+store_article_headers: Включите, если wallabag хранит заголовки HTTP для каждой статьи
+api_user_registration: Разрешить пользователю регистрироваться с помощью API
+share_scuttle: Включить возможность поделиться в Shaarli

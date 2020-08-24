@@ -57,6 +57,7 @@ config:
         rules: 'Reglas de etiquetado'
         new_user: 'Añadir un usuario'
         reset: 'Reiniciar mi cuenta'
+        rss: RSS
     form:
         save: 'Guardar'
     form_settings:
@@ -66,6 +67,10 @@ config:
         reading_speed:
             label: 'Velocidad de lectura (palabras por minuto)'
             help_message: 'Puede utilizar herramientas en línea para calcular su velocidad de lectura:'
+            400_word: Leo ~400 palabras por minuto
+            300_word: Leo ~300 palabras por minuto
+            200_word: Leo ~200 palabras por minuto
+            100_word: Leo ~100 palabras por minuto
         action_mark_as_read:
             label: '¿Qué hacer después de eliminar, marcar como favorito o marcar un artículo como leído?'
             redirect_homepage: 'Ir a la página de inicio'
@@ -110,6 +115,8 @@ config:
             description: Si eliminas tu cuenta, TODOS tus artículos, TODAS tus etiquetas, TODAS tus anotaciones y tu cuenta serán eliminadas de forma PERMANENTE (no se puede DESHACER). Después serás desconectado.
             confirm: ¿Estás completamente seguro? (NO SE PUEDE DESHACER)
             button: Eliminar mi cuenta
+        help_twoFactorAuthentication: Si habilita la autenticación de dos factores (2FA), cada vez que desee iniciar sesión en wallabag, recibirá un código por correo electrónico.
+        twoFactorAuthentication_label: Autenticación de dos factores
     reset:
         title: Reiniciar mi cuenta (zona peligrosa)
         description: Pulsando los botones de abajo puedes eliminar alguna información de tu cuenta. Ten en cuenta que estas acciones son IRREVERSIBLES.
@@ -363,6 +370,7 @@ quickstart:
         language: 'Cambie el idioma y el diseño'
         feed: 'Activar los feeds RSS'
         tagging_rules: 'Escribe reglas para etiquetar automáticamente tus artículos'
+        rss: Habilitar canales RSS
     admin:
         title: 'Administración'
         description: 'Como administrador, tienes algunos privilegios en wallabag. Puedes:'
@@ -538,6 +546,7 @@ user:
         delete: Eliminar
         delete_confirm: ¿Estás seguro?
         back_to_list: Volver a la lista
+        twofactor_label: Autenticación de dos factores
     search:
         placeholder: Filtrar por nombre de usuario o correo electrónico
 site_credential:
@@ -577,6 +586,8 @@ flashes:
             tags_reset: Etiquetas reiniciadas
             entries_reset: Artículos reiniciados
             archived_reset: Artículos archivados eliminados
+            rss_token_updated: Token RSS actualizado
+            rss_updated: Información RSS actualizada
     entry:
         notice:
             entry_already_saved: 'Artículo ya guardado el %fecha%'

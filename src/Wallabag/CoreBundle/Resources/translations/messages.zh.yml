@@ -58,6 +58,7 @@ config:
         rules: '标签规则'
         new_user: '添加用户'
         reset: '重置区域'
+        rss: RSS
     form:
         save: '保存'
     form_settings:
@@ -67,6 +68,10 @@ config:
         reading_speed:
             label: '阅读速度（词 / 每分钟）'
             help_message: '你可以使用在线工具来估计自己的阅读速度：'
+            400_word: 我每分钟能读大概400个单词
+            300_word: 我每分钟能读大概300个单词
+            200_word: 我每分钟能读大概200个单词
+            100_word: 我每分钟能读大概100个单词
         action_mark_as_read:
             label: '将一个项目删除、加星标或是标记为已读后该做什么？'
             redirect_homepage: '返回主页'
@@ -113,6 +118,8 @@ config:
             description: '如果你删除你的账号，你的所有文章、标签以及账号本身都会被永久删除(且无法撤销)，然后你将会被登出。'
             confirm: '你真的确定的吗？（这不能被撤销）'
             button: '删除我的账号'
+        help_twoFactorAuthentication: 如果你启用双因素认证，每次你想登录到wallabag，你会通过电子邮件收到一个代码。
+        twoFactorAuthentication_label: 双因素认证
     reset:
         title: '重置区（危险区域）'
         description: '一旦你点击这个按钮，你就可以移除你账号中的某些信息。请注意这些操作是不可撤销的。'
@@ -183,6 +190,19 @@ config:
             two_factor_code_description_4: '从你配置好的应用中测试 OTP 码'
             cancel: "取消"
             enable: "启用"
+    form_rss:
+        rss_limit: RSS源中的条目数
+        rss_link:
+            all: 全部
+            archive: 已存档
+            starred: 已标星
+            unread: 未读
+        rss_links: RSS链接
+        token_reset: 重新生成你的令牌
+        token_create: 创建你的令牌
+        no_token: 没有令牌
+        token_label: RSS令牌
+        description: wallabag提供的RSS源可以让你用你喜欢的RSS阅读器阅读你保存的文章。首先需要生成一个令牌。
 entry:
     default_title: '项目标题'
     page_titles:
@@ -306,7 +326,7 @@ about:
         by_contributing_2: '这里列出了我们的需求'
         by_paypal: '通过 Paypal'
     contributors:
-        description: '感谢为 wallabag 网页程序做出贡献的人们！'
+        description: '感谢为 wallabag 网页程序做出贡献的人们'
     third_party:
         description: '这里是 wallabag 使用的第三方库列表（以及它们的许可证）：'
         package: '包'
@@ -375,6 +395,7 @@ quickstart:
         language: '变更语言和设计'
         feed: '启用订阅源'
         tagging_rules: '编写规则来给你的文章自动加上标签'
+        rss: 启用RSS源
     admin:
         title: '管理员'
         description: '作为一名管理员，你在 wallabag 上享有特权。你可以：'
@@ -444,7 +465,7 @@ import:
         description: "这个导入器会导入你 Pocket 账户中的所有内容。Pocket 不允许我们从它的服务器获取文章全文，所以导入的文章将由 wallabag 来重新抓取可读内容。"
         config_missing:
             description: "尚未配置好从 Pocket 中导入的功能。"
-            admin_message: 'You need to define %keyurls%a pocket_consumer_key%keyurle%.'
+            admin_message: '你需要定义 %keyurls%a pocket_consumer_key%keyurle%.'
             user_message: '你的服务器管理员需要先为 Pocket 配置一个 API Key。'
         authorize_message: '你可以从你的 Pocket 账号中汇入数据。只需要点击下方按钮并授权该应用程序连接 getpocket.com。'
         connect_to_pocket: '连接到 Pocket 并导入数据'
@@ -459,7 +480,7 @@ import:
         page_title: 'Import > elCurator'
         description: '这个导入器会导入你 elCurator 账户中的所有内容。前往你 elCurator 账户的偏好设置页面，然后导出你的内容。你将得到一个 JSON 文件。'
     readability:
-        page_title: 'Import > Readability'
+        page_title: '导入 > Readability'
         description: '这个导入器会导入你 Readability 账户中的所有内容。在 tools（https://www.readability.com/tools/）页面，点击 "Data Export" 一栏下的 "Export your data"，你将会收到一封邮件，根据邮件指示下载得到一个 JSON 文件(尽管它并不以. json 结尾)。'
         how_to: '请选择你的 Readability 导出文件并点击下方按钮来上传和导入它。'
     worker:
@@ -470,15 +491,15 @@ import:
         description: "这个导入器会导入你 Firefox 中的所有书签。只需要前往你的 bookmarks 页面(Ctrl+Maj+O)，然后进入 \"Import and backup\"，选择 \"Backup...\"你将得到一个 .json 文件。"
         how_to: "请选择书签备份文件然后点击下方的按钮来导入它。请注意这一过程可能会持续一段时间，因为需要获取所有的文章。"
     chrome:
-        page_title: 'Import > Chrome'
+        page_title: '导入> Chrome'
         description: "这个导入器会导入你 Chrome 中的所有书签。文件的位置取决于你的操作系统: <ul><li>在 Linux 上，前往 <code>~/.config/chromium/Default/</code> 目录</li><li> 在 Windows 上，它应该位于 <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>在 OS X 上，它应该在 <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>到达对应目录后， 把 <code>Bookmarks</code> 文件复制到一个你能找到的地方。<em><br>请注意如果你使用 Chromium 而不是 Chrome，你需要对应地纠正目录。</em></p>"
         how_to: "请选择书签备份文件然后点击下方的按钮来导入它。请注意这一过程可能会持续一段时间，因为需要获取所有的文章。"
     instapaper:
-        page_title: 'Import > Instapaper'
+        page_title: '导入> Instapaper'
         description: '这个导入器会导入你 Instapaper 账户中的所有内容。在设置页面（https://www.instapaper.com/user），点击 "Export" 一栏下的 "Download .CSV file"。你将会下载得到一个 CSV 文件（比如"instapaper-export.csv"）。'
         how_to: '请选择你的 Instapaper 导出文件并点击下方按钮来上传和导入它。'
     pinboard:
-        page_title: "Import > Pinboard"
+        page_title: "导入 > Pinboard"
         description: '这个导入器会导入你 Pinboard 账户中的所有内容。 在 backup 页面（https://pinboard.in/settings/backup），点击 "Bookmarks" 一栏下的 "JSON"。你将会下载得到一个 JSON 文件（比如"pinboard_export"）。'
         how_to: '请选择你的 Pinboard 导出文件并点击下方按钮来上传和导入它。'
 developer:
@@ -494,8 +515,8 @@ developer:
     existing_clients:
         title: '现有客户端'
         field_id: 'Client ID'
-        field_secret: 'Client secret'
-        field_uris: 'Redirect URIs'
+        field_secret: '客户端secret'
+        field_uris: '重定向URIs'
         field_grant_types: '允许的授权形式'
         no_client: '目前还没有客户端。'
     remove:
@@ -516,7 +537,7 @@ developer:
         page_description: '以下是你客户端的参数。'
         field_name: 'Client name'
         field_id: 'Client ID'
-        field_secret: 'Client secret'
+        field_secret: '客户端 secret'
         back: '返回'
         read_howto: '阅读教程 "如何创建我的第一个应用程序" '
     howto:
@@ -557,6 +578,7 @@ user:
         delete: 删除
         delete_confirm: 确定要这么做吗？
         back_to_list: 返回列表
+        twofactor_label: 双因素认证
     search:
         placeholder: 通过用户名或者邮箱筛选
 site_credential:
@@ -599,6 +621,8 @@ flashes:
             otp_enabled: 两步验证已启用
             tagging_rules_imported: 标签规则已导入
             tagging_rules_not_imported: 导入标签规则时发生了错误
+            rss_token_updated: RSS令牌已更新
+            rss_updated: RSS信息已更新
     entry:
         notice:
             entry_already_saved: '该项目已于 %date% 保存'
