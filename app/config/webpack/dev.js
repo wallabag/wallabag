@@ -1,18 +1,17 @@
-const webpackMerge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const webpack = require('webpack');
 const commonConfig = require('./common.js');
 
 module.exports = function () {
-  return webpackMerge(commonConfig(), {
+  return merge(commonConfig(), {
     devtool: 'eval-source-map',
     output: {
       filename: '[name].dev.js',
     },
-
+    mode: 'development',
     devServer: {
       hot: true,
       // enable HMR on the server
-
       contentBase: './web',
       // match the output path
     },
@@ -33,7 +32,7 @@ module.exports = function () {
           use: {
             loader: 'babel-loader',
             options: {
-              presets: ['env'],
+              presets: ['@babel/preset-env']
             },
           },
         },
@@ -47,7 +46,12 @@ module.exports = function () {
                 importLoaders: 1,
               },
             },
-            'postcss-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: [require('autoprefixer')({})],
+              },
+            },
             'sass-loader',
           ],
         },
