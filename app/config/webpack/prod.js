@@ -1,35 +1,43 @@
 const webpack = require('webpack');
-const webpackMerge = require('webpack-merge');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const { merge } = require('webpack-merge');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const commonConfig = require('./common.js');
 
 module.exports = function () {
-  return webpackMerge(commonConfig(), {
+  return merge(commonConfig(), {
     output: {
       filename: '[name].js',
     },
+    mode: 'production',
     devtool: 'source-map',
+    optimization: {
+      minimizer: [
+        new TerserPlugin({
+          cache: true,
+          parallel: true,
+          sourceMap: true,
+          terserOptions: {
+            output: {
+              comments: false,
+            },
+          },
+          extractComments: false,
+        }),
+      ]
+    },
     plugins: [
       new webpack.DefinePlugin({
         'process.env': {
           'NODE_ENV': JSON.stringify('production'),
         },
       }),
-      new webpack.optimize.UglifyJsPlugin({
-        beautify: false,
-        mangle: {
-          screw_ie8: true,
-          keep_fnames: true,
-        },
-        compress: {
-          screw_ie8: true,
-          warnings: false,
-        },
-        comments: false,
+      new MiniCssExtractPlugin({
+        filename: '[name].css',
+        chunkFilename: '[id].css',
       }),
-      new ExtractTextPlugin('[name].css'),
       new ManifestPlugin({
         fileName: 'manifest.json',
       }),
@@ -48,32 +56,33 @@ module.exports = function () {
           use: {
             loader: 'babel-loader',
             options: {
-              presets: ['env'],
+              presets: ['@babel/preset-env']
             },
           },
         },
         {
-          test: /\.(s)?css$/,
-          use: ExtractTextPlugin.extract({
-            fallback: 'style-loader',
-            use: [
-              {
-                loader: 'css-loader',
-                options: {
-                  importLoaders: 1,
-                  minimize: {
-                    discardComments: {
-                      removeAll: true,
-                    },
-                    core: true,
-                    minifyFontValues: true,
-                  },
-                },
+          test: /\.(sa|sc|c)ss$/,
+          use: [
+            {
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                hmr: process.env.NODE_ENV === 'development',
               },
-              'postcss-loader',
-              'sass-loader',
-            ],
-          }),
+            },
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+              },
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: [require('autoprefixer')({})],
+              },
+            },
+            'sass-loader',
+          ],
         },
         {
           test: /\.(jpg|png|gif|svg|ico)$/,

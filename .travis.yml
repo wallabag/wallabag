@@ -26,9 +26,6 @@ php:
     - 7.3
     - 7.4
 
-node_js:
-    - "5"
-
 env:
     - DB=mysql
     - DB=pgsql
@@ -56,7 +53,7 @@ before_install:
     - yes | pecl install imagick
 
 install:
-    - if [[ $ASSETS = build ]]; then source ~/.nvm/nvm.sh && nvm install 6.10; fi;
+    - if [[ $ASSETS = build ]]; then source ~/.nvm/nvm.sh && nvm install 12; fi;
     - if [[ $ASSETS = build ]]; then npm install -g yarn@latest; fi;
     - if [[ $ASSETS = build ]]; then yarn install; fi;
     - composer install -o --no-interaction --no-progress --prefer-dist --no-suggest
