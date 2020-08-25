@@ -82,7 +82,7 @@
         "php-http/guzzle5-adapter": "^2.0",
         "php-http/httplug-bundle": "^1.14",
         "pragmarx/recovery": "^0.1.0",
-        "predis/predis": "v1.1.x-dev",
+        "predis/predis": "^1.1.3",
         "scheb/two-factor-bundle": "^4.11.0",
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^5.2",
