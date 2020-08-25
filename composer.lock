@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
-            "version": "v2.5.0",
+            "version": "v2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BabDev/PagerfantaBundle.git",
-                "reference": "3eaedef12af657238dfd9307b8892481916cb655"
+                "reference": "08c6fa740176cd84182c403adc4971b7cc020f6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BabDev/PagerfantaBundle/zipball/3eaedef12af657238dfd9307b8892481916cb655",
-                "reference": "3eaedef12af657238dfd9307b8892481916cb655",
+                "url": "https://api.github.com/repos/BabDev/PagerfantaBundle/zipball/08c6fa740176cd84182c403adc4971b7cc020f6d",
+                "reference": "08c6fa740176cd84182c403adc4971b7cc020f6d",
                 "shasum": ""
             },
             "require": {
@@ -40,8 +40,8 @@
                 "friendsofphp/php-cs-fixer": "^2.16",
                 "matthiasnoback/symfony-dependency-injection-test": "^4.1",
                 "phpstan/extension-installer": "^1.0.3",
-                "phpstan/phpstan": "^0.12.33",
-                "phpstan/phpstan-phpunit": "^0.12.13",
+                "phpstan/phpstan": "^0.12.37",
+                "phpstan/phpstan-phpunit": "^0.12.16",
                 "phpstan/phpstan-symfony": "^0.12.7",
                 "phpunit/phpunit": "^8.5 || ^9.0",
                 "symfony/translation": "^3.4 || ^4.4 || ^5.0",
@@ -78,7 +78,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-07-25T21:24:07+00:00"
+            "time": "2020-08-25T04:47:00+00:00"
         },
         {
             "name": "bdunogier/guzzle-site-authenticator",
