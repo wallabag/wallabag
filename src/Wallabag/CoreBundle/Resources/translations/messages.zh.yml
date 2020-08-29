@@ -424,7 +424,7 @@ quickstart:
         use_docker: '使用 Docker 来安装 wallabag'
     docs:
         title: '完整文档'
-        description: "wallabag 中是有如此多的功能。欢迎阅读文档来了解和学习使用它们。"
+        description: "wallabag 中有如此多的功能。不要犹豫，阅读使用手册，了解它们，学习如何使用它们。"
         annotate: '标注你的文章'
         export: '将你的文章转换成 ePUB 或者 PDF'
         search_filters: '看看你能如何运用搜索和筛选功能来找到一篇文章'
