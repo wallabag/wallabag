@@ -9,8 +9,7 @@ security:
         password: Password
         cancel: Cancel
     resetting:
-        description: Enter your email address below and we'll send you password reset
-            instructions.
+        description: Enter your email address below and we'll send you password reset instructions.
     register:
         page_title: Create an account
         go_to_account: Go to your account
@@ -46,8 +45,7 @@ footer:
         social: Social
         powered_by: powered by
         about: About
-    stats: Since %user_creation% you read %nb_archives% articles. That is about %per_day%
-        a day!
+    stats: Since %user_creation% you read %nb_archives% articles. That is about %per_day% a day!
 config:
     page_title: Config
     tab_menu:
@@ -79,15 +77,11 @@ config:
         android_instruction: Touch here to prefill your Android application
         help_theme: wallabag is customizable. You can choose your prefered theme here.
         help_items_per_page: You can change the number of articles displayed on each page.
-        help_reading_speed: wallabag calculates a reading time for each article. You can
-            define here, thanks to this list, if you are a fast or a slow reader. wallabag
-            will recalculate the reading time for each article.
+        help_reading_speed: wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article.
         help_language: You can change the language of wallabag interface.
-        help_pocket_consumer_key: Required for Pocket import. You can create it in your
-            Pocket account.
+        help_pocket_consumer_key: Required for Pocket import. You can create it in your Pocket account.
     form_rss:
-        description: RSS feeds provided by wallabag allow you to read your saved articles
-            with your favourite RSS reader. You need to generate a token first.
+        description: RSS feeds provided by wallabag allow you to read your saved articles with your favourite RSS reader. You need to generate a token first.
         token_label: RSS token
         no_token: No token
         token_create: Create your token
@@ -100,32 +94,26 @@ config:
             all: All
         rss_limit: Number of items in the feed
     form_user:
-        two_factor_description: Enabling two factor authentication means you'll receive
-            an email with a code on every new untrusted connection.
+        two_factor_description: Enabling two factor authentication means you'll receive an email with a code on every new untrusted connection.
         name_label: Name
         email_label: Email
         twoFactorAuthentication_label: Two factor authentication
-        help_twoFactorAuthentication: If you enable 2FA, each time you want to login to
-            wallabag, you'll receive a code by email.
+        help_twoFactorAuthentication: If you enable 2FA, each time you want to login to wallabag, you'll receive a code by email.
         delete:
             title: Delete my account (a.k.a danger zone)
-            description: If you remove your account, ALL your articles, ALL your tags, ALL
-                your annotations and your account will be PERMANENTLY removed (it can't be
-                UNDONE). You'll then be logged out.
+            description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
             confirm: Are you really sure? (THIS CAN'T BE UNDONE)
             button: Delete my account
     reset:
         title: Reset area (a.k.a danger zone)
-        description: By hitting buttons below you'll have ability to remove some information
-            from your account. Be aware that these actions are IRREVERSIBLE.
+        description: By hitting buttons below you'll have ability to remove some information from your account. Be aware that these actions are IRREVERSIBLE.
         annotations: Remove ALL annotations
         tags: Remove ALL tags
         entries: Remove ALL entries
         archived: Remove ALL archived entries
         confirm: Are you really sure? (THIS CAN'T BE UNDONE)
     form_password:
-        description: You can change your password here. Your new password should be at
-            least 8 characters long.
+        description: You can change your password here. Your new password should be at least 8 characters long.
         old_password_label: Current password
         new_password_label: New password
         repeat_new_password_label: Repeat new password
@@ -139,23 +127,11 @@ config:
         faq:
             title: FAQ
             tagging_rules_definition_title: What does « tagging rules » mean?
-            tagging_rules_definition_description: They are rules used by Wallabag to automatically
-                tag new entries.<br />Each time a new entry is added, all the tagging rules
-                will be used to add the tags you configured, thus saving you the trouble of
-                manually classifying your entries.
+            tagging_rules_definition_description: They are rules used by Wallabag to automatically tag new entries.<br />Each time a new entry is added, all the tagging rules will be used to add the tags you configured, thus saving you the trouble of manually classifying your entries.
             how_to_use_them_title: How do I use them?
-            how_to_use_them_description: 'Let us assume you want to tag new entries as «
-                <i>short reading</i> » when the reading time is under 3 minutes.<br />In that
-                case, you should put « readingTime &lt;= 3 » in the <i>Rule</i> field and
-                « <i>short reading</i> » in the <i>Tags</i> field.<br />Several tags can added
-                simultaneously by separating them with a comma: « <i>short reading, must read</i>
-                »<br />Complex rules can be written by using predefined operators: if « <i>readingTime
-                &gt;= 5 AND domainName = "github.com"</i> » then tag as « <i>long reading,
-                GitHub </i> »'
-            variables_available_title: Which variables and operators can I use to write
-                rules?
-            variables_available_description: 'The following variables and operators can
-                be used to create tagging rules:'
+            how_to_use_them_description: 'Let us assume you want to tag new entries as « <i>short reading</i> » when the reading time is under 3 minutes.<br />In that case, you should put « readingTime &lt;= 3 » in the <i>Rule</i> field and « <i>short reading</i> » in the <i>Tags</i> field.<br />Several tags can added simultaneously by separating them with a comma: « <i>short reading, must read</i> »<br />Complex rules can be written by using predefined operators: if « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » then tag as « <i>long reading, GitHub </i> »'
+            variables_available_title: Which variables and operators can I use to write rules?
+            variables_available_description: 'The following variables and operators can be used to create tagging rules:'
             meaning: Meaning
             variable_description:
                 label: Variable
@@ -178,11 +154,8 @@ config:
                 not_equal_to: Not equal to...
                 or: One rule OR another
                 and: One rule AND another
-                matches: 'Tests that a <i>subject</i> matches a <i>search</i> (case-insensitive).<br
-                    />Example: <code>title matches "football"</code>'
-                notmatches: "Tests that a <i>subject</i> doesn't match match a <i>search</i>\
-                    \ (case-insensitive).<br />Example: <code>title notmatches \"football\"\
-                    </code>"
+                matches: 'Tests that a <i>subject</i> matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>'
+                notmatches: "Tests that a <i>subject</i> doesn't match match a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches \"football\"</code>"
 entry:
     default_title: Title of the entry
     page_titles:
@@ -195,8 +168,7 @@ entry:
         untagged: Untagged entries
         all: All entries
     list:
-        number_on_the_page: '{0} There are no entries.|{1} There is one entry.|]1,Inf[
-            There are %count% entries.'
+        number_on_the_page: '{0} There are no entries.|{1} There is one entry.|]1,Inf[ There are %count% entries.'
         reading_time: estimated reading time
         reading_time_minutes: 'estimated reading time: %readingTime% min'
         reading_time_less_one_minute: 'estimated reading time: &lt; 1 min'
@@ -254,8 +226,7 @@ entry:
                 description: Does this article appear wrong?
         edit_title: Edit title
         original_article: original
-        annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %count%
-            annotations'
+        annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %count% annotations'
         created_at: Creation date
         published_at: Publication date
         published_by: Published by
@@ -294,8 +265,7 @@ about:
     who_behind_wallabag:
         developped_by: Developed by
         website: website
-        many_contributors: And many others contributors ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">on
-            GitHub</a>
+        many_contributors: And many others contributors ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">on GitHub</a>
         project_website: Project website
         license: License
         version: Version
@@ -311,8 +281,7 @@ about:
     contributors:
         description: Thank you to contributors on wallabag web application
     third_party:
-        description: 'Here is the list of third-party libraries used in wallabag (with
-            their licenses):'
+        description: 'Here is the list of third-party libraries used in wallabag (with their licenses):'
         package: Package
         license: License
 howto:
@@ -371,13 +340,11 @@ quickstart:
     more: More…
     intro:
         title: Welcome to wallabag!
-        paragraph_1: We'll accompany you on your visit to wallabag and show you some features
-            that might interest you.
+        paragraph_1: We'll accompany you on your visit to wallabag and show you some features that might interest you.
         paragraph_2: Follow us!
     configure:
         title: Configure the application
-        description: In order to have an application which suits you, have a look into
-            the configuration of wallabag.
+        description: In order to have an application which suits you, have a look into the configuration of wallabag.
         language: Change language and design
         rss: Enable RSS feeds
         tagging_rules: Write rules to automatically tag your articles
@@ -391,14 +358,12 @@ quickstart:
         import: Configure import
     first_steps:
         title: First steps
-        description: Now wallabag is well configured, it's time to archive the web. You
-            can click on the top right sign + to add a link.
+        description: Now wallabag is well configured, it's time to archive the web. You can click on the top right sign + to add a link.
         new_article: Save your first article
         unread_articles: And classify it!
     migrate:
         title: Migrate from an existing service
-        description: Are you using another service? We'll help you to retrieve your data
-            on wallabag.
+        description: Are you using another service? We'll help you to retrieve your data on wallabag.
         pocket: Migrate from Pocket
         wallabag_v1: Migrate from wallabag v1
         wallabag_v2: Migrate from wallabag v2
@@ -411,12 +376,10 @@ quickstart:
         use_docker: Use Docker to install wallabag
     docs:
         title: Full documentation
-        description: There are so much features in wallabag. Don't hesitate to read the
-            manual to know them and to learn how to use them.
+        description: There are so many features in wallabag. Don't hesitate to read the manual to know them and to learn how to use them.
         annotate: Annotate your article
         export: Convert your articles into ePUB or PDF
-        search_filters: See how you can look for an article by using the search engine
-            and filters
+        search_filters: See how you can look for an article by using the search engine and filters
         fetching_errors: What can I do if an article encounters errors during fetching?
         all_docs: And so many other articles!
     support:
@@ -428,21 +391,17 @@ quickstart:
 tag:
     page_title: Tags
     list:
-        number_on_the_page: '{0} There are no tags.|{1} There is one tag.|]1,Inf[ There
-            are %count% tags.'
+        number_on_the_page: '{0} There are no tags.|{1} There is one tag.|]1,Inf[ There are %count% tags.'
         see_untagged_entries: See untagged entries
     new:
         add: Add
         placeholder: You can add several tags, separated by a comma.
 export:
-    footer_template: <div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please
-        open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you
-        have trouble with the display of this E-Book on your device.</p></div>
+    footer_template: <div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p></div>
     unknown: Unknown
 import:
     page_title: Import
-    page_description: Welcome to wallabag importer. Please select your previous service
-        from which you want to migrate.
+    page_description: Welcome to wallabag importer. Please select your previous service from which you want to migrate.
     action:
         import_contents: Import contents
     form:
@@ -452,78 +411,43 @@ import:
         save_label: Upload file
     pocket:
         page_title: Import > Pocket
-        description: This importer will import all of your Pocket data. Pocket doesn't
-            allow us to retrieve content from their service, so the readable content of
-            each article will be re-fetched by wallabag.
+        description: This importer will import all of your Pocket data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag.
         config_missing:
             description: Pocket import isn't configured.
             admin_message: You need to define %keyurls%a pocket_consumer_key%keyurle%.
             user_message: Your server admin needs to define an API Key for Pocket.
-        authorize_message: You can import your data from your Pocket account. You just
-            have to click on the below button and authorize the application to connect to
-            getpocket.com.
+        authorize_message: You can import your data from your Pocket account. You just have to click on the below button and authorize the application to connect to getpocket.com.
         connect_to_pocket: Connect to Pocket and import data
     wallabag_v1:
         page_title: Import > Wallabag v1
-        description: This importer will import all your wallabag v1 articles. On your
-            config page, click on "JSON export" in the "Export your wallabag data" section.
-            You will have a "wallabag-export-1-xxxx-xx-xx.json" file.
-        how_to: Please select your wallabag export and click on the below button to upload
-            and import it.
+        description: This importer will import all your wallabag v1 articles. On your config page, click on "JSON export" in the "Export your wallabag data" section. You will have a "wallabag-export-1-xxxx-xx-xx.json" file.
+        how_to: Please select your wallabag export and click on the below button to upload and import it.
     wallabag_v2:
         page_title: Import > Wallabag v2
-        description: This importer will import all your wallabag v2 articles. Go to All
-            articles, then, on the export sidebar, click on "JSON". You will have a "All
-            articles.json" file.
+        description: This importer will import all your wallabag v2 articles. Go to All articles, then, on the export sidebar, click on "JSON". You will have a "All articles.json" file.
     readability:
         page_title: Import > Readability
-        description: This importer will import all your Readability articles. On the tools
-            (https://www.readability.com/tools/) page, click on "Export your data" in the
-            "Data Export" section. You will received an email to download a json (which
-            does not end with .json in fact).
-        how_to: Please select your Readability export and click on the below button to
-            upload and import it.
+        description: This importer will import all your Readability articles. On the tools (https://www.readability.com/tools/) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).
+        how_to: Please select your Readability export and click on the below button to upload and import it.
     worker:
-        enabled: 'Import is made asynchronously. Once the import task is started, an external
-            worker will handle jobs one at a time. The current service is:'
-        download_images_warning: You enabled downloading images for your articles. Combined
-            with classic import it can take ages to proceed (or maybe failed). We <strong>strongly
-            recommend</strong> to enable asynchronous import to avoid errors.
+        enabled: 'Import is made asynchronously. Once the import task is started, an external worker will handle jobs one at a time. The current service is:'
+        download_images_warning: You enabled downloading images for your articles. Combined with classic import it can take ages to proceed (or maybe failed). We <strong>strongly recommend</strong> to enable asynchronous import to avoid errors.
     firefox:
         page_title: Import > Firefox
-        description: This importer will import all your Firefox bookmarks. Just go to
-            your bookmarks (Ctrl+Maj+O), then into "Import and backup", choose "Backup...".
-            You will obtain a .json file.
-        how_to: Please choose the bookmark backup file and click on the button below to
-            import it. Note that the process may take a long time since all articles have
-            to be fetched.
+        description: This importer will import all your Firefox bookmarks. Just go to your bookmarks (Ctrl+Maj+O), then into "Import and backup", choose "Backup...". You will obtain a .json file.
+        how_to: Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched.
     chrome:
         page_title: Import > Chrome
-        description: "This importer will import all your Chrome bookmarks. The location\
-            \ of the file depends on your operating system : <ul><li>On Linux, go into the\
-            \ <code>~/.config/chromium/Default/</code> directory</li><li>On Windows, it\
-            \ should be at <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>On\
-            \ OS X, it should be at <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Once\
-            \ you got there, copy the <code>Bookmarks</code> file someplace you'll find.<em><br>Note\
-            \ that if you have Chromium instead of Chrome, you'll have to correct paths\
-            \ accordingly.</em></p>"
-        how_to: Please choose the bookmark backup file and click on the button below to
-            import it. Note that the process may take a long time since all articles have
-            to be fetched.
+        description: "This importer will import all your Chrome bookmarks. The location of the file depends on your operating system : <ul><li>On Linux, go into the <code>~/.config/chromium/Default/</code> directory</li><li>On Windows, it should be at <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>On OS X, it should be at <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Once you got there, copy the <code>Bookmarks</code> file someplace you'll find.<em><br>Note that if you have Chromium instead of Chrome, you'll have to correct paths accordingly.</em></p>"
+        how_to: Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched.
     instapaper:
         page_title: Import > Instapaper
-        description: This importer will import all your Instapaper articles. On the settings
-            (https://www.instapaper.com/user) page, click on "Download .CSV file" in the
-            "Export" section. A CSV file will be downloaded (like "instapaper-export.csv").
-        how_to: Please select your Instapaper export and click on the below button to
-            upload and import it.
+        description: This importer will import all your Instapaper articles. On the settings (https://www.instapaper.com/user) page, click on "Download .CSV file" in the "Export" section. A CSV file will be downloaded (like "instapaper-export.csv").
+        how_to: Please select your Instapaper export and click on the below button to upload and import it.
     pinboard:
         page_title: Import > Pinboard
-        description: This importer will import all your Pinboard articles. On the backup
-            (https://pinboard.in/settings/backup) page, click on "JSON" in the "Bookmarks"
-            section. A JSON file will be downloaded (like "pinboard_export").
-        how_to: Please select your Pinboard export and click on the below button to upload
-            and import it.
+        description: This importer will import all your Pinboard articles. On the backup (https://pinboard.in/settings/backup) page, click on "JSON" in the "Bookmarks" section. A JSON file will be downloaded (like "pinboard_export").
+        how_to: Please select your Pinboard export and click on the below button to upload and import it.
 developer:
     page_title: API clients management
     welcome_message: Welcome to the wallabag API
@@ -542,15 +466,12 @@ developer:
         field_grant_types: Grant type allowed
         no_client: No client yet.
     remove:
-        warn_message_1: You have the ability to remove the client %name%. This action
-            is IRREVERSIBLE !
-        warn_message_2: If you remove it, every app configured with that client won't
-            be able to auth on your wallabag.
+        warn_message_1: You have the ability to remove the client %name%. This action is IRREVERSIBLE !
+        warn_message_2: If you remove it, every app configured with that client won't be able to auth on your wallabag.
         action: Remove the client %name%
     client:
         page_title: API clients management > New client
-        page_description: You are about to create a new client. Please fill the field
-            below for the redirect URI of your application.
+        page_description: You are about to create a new client. Please fill the field below for the redirect URI of your application.
         form:
             name_label: Name of the client
             redirect_uris_label: Redirect URIs (optional)
@@ -567,20 +488,14 @@ developer:
     howto:
         page_title: API clients management > How to create my first application
         description:
-            paragraph_1: The following commands make use of the <a href="https://github.com/jkbrzt/httpie">HTTPie
-                library</a>. Make sure it is installed on your system before using it.
-            paragraph_2: You need a token to communicate between your 3rd application and
-                wallabag API.
-            paragraph_3: To create this token, you need <a href="%link%">to create a new
-                client</a>.
-            paragraph_4: 'Now, create your token (replace client_id, client_secret, username
-                and password with the good values):'
+            paragraph_1: The following commands make use of the <a href="https://github.com/jkbrzt/httpie">HTTPie library</a>. Make sure it is installed on your system before using it.
+            paragraph_2: You need a token to communicate between your 3rd application and wallabag API.
+            paragraph_3: To create this token, you need <a href="%link%">to create a new client</a>.
+            paragraph_4: 'Now, create your token (replace client_id, client_secret, username and password with the good values):'
             paragraph_5: 'The API will return a response like this:'
-            paragraph_6: 'The access_token is useful to do a call to the API endpoint. For
-                example:'
+            paragraph_6: 'The access_token is useful to do a call to the API endpoint. For example:'
             paragraph_7: This call will return all the entries for your user.
-            paragraph_8: If you want to see all the API endpoints, you can have a look <a
-                href="%link%">to our API documentation</a>.
+            paragraph_8: If you want to see all the API endpoints, you can have a look <a href="%link%">to our API documentation</a>.
         back: Back
 user:
     page_title: Users management
@@ -613,8 +528,7 @@ site_credential:
     page_title: Site credentials management
     new_site_credential: Create a credential
     edit_site_credential: Edit an existing credential
-    description: Here you can manage all credentials for sites which required them (create,
-        edit and delete), like a paywall, an authentication, etc.
+    description: Here you can manage all credentials for sites which required them (create, edit and delete), like a paywall, an authentication, etc.
     list:
         actions: Actions
         edit_action: Edit
@@ -636,8 +550,7 @@ flashes:
         notice:
             config_saved: Config saved.
             password_updated: Password updated
-            password_not_updated_demo: In demonstration mode, you can't change password
-                for this user.
+            password_not_updated_demo: In demonstration mode, you can't change password for this user.
             user_updated: Information updated
             rss_updated: RSS information updated
             tagging_rules_updated: Tagging rules updated
@@ -670,10 +583,8 @@ flashes:
             summary: 'Import summary: %imported% imported, %skipped% already saved.'
             summary_with_queue: 'Import summary: %queued% queued.'
         error:
-            redis_enabled_not_installed: Redis is enabled for handle asynchronous import
-                but it looks like <u>we can't connect to it</u>. Please check Redis configuration.
-            rabbit_enabled_not_installed: RabbitMQ is enabled for handle asynchronous import
-                but it looks like <u>we can't connect to it</u>. Please check RabbitMQ configuration.
+            redis_enabled_not_installed: Redis is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check Redis configuration.
+            rabbit_enabled_not_installed: RabbitMQ is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check RabbitMQ configuration.
     developer:
         notice:
             client_created: New client %name% created.
