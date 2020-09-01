@@ -9969,16 +9969,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.4.43",
+            "version": "v3.4.44",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "21e652ffdb8c908c8606f923b903be5b8af21e01"
+                "reference": "d7f1e2c7603cfa200c8e745c24dd3be4c2178b03"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/21e652ffdb8c908c8606f923b903be5b8af21e01",
-                "reference": "21e652ffdb8c908c8606f923b903be5b8af21e01",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/d7f1e2c7603cfa200c8e745c24dd3be4c2178b03",
+                "reference": "d7f1e2c7603cfa200c8e745c24dd3be4c2178b03",
                 "shasum": ""
             },
             "require": {
@@ -10077,7 +10077,7 @@
                 "ocramius/proxy-manager": "~0.4|~1.0|~2.0",
                 "phpdocumentor/reflection-docblock": "^3.0|^4.0",
                 "predis/predis": "~1.0",
-                "symfony/phpunit-bridge": "^3.4.31|^4.3.4|~5.0",
+                "symfony/phpunit-bridge": "^5.2",
                 "symfony/security-acl": "~2.8|~3.0"
             },
             "type": "library",
@@ -10135,7 +10135,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-24T03:49:18+00:00"
+            "time": "2020-08-31T05:54:22+00:00"
         },
         {
             "name": "tecnickcom/tcpdf",
