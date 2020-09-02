@@ -42,6 +42,7 @@
     * [VirtualHosts](admin/installation/virtualhosts.md)
     * [Right Access](admin/installation/rightaccess.md)
 * [Common errors](admin/common_errors.md)
+* [Custom CSS](admin/custom_css.md)
 * [Backup](admin/backup.md)
 * [Console commands](admin/console_commands.md)
 * [Asynchronous](admin/asynchronous.md)
