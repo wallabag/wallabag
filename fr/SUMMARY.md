@@ -40,6 +40,7 @@
     * [Installation](admin/installation/installation.md)
     * [Hôtes virtuels](admin/installation/virtualhosts.md)
     * [Droits d'accès](admin/installation/rightaccess.md)
+* [CSS personnalisés](admin/custom_css.md)
 * [Sauvegarde](admin/backup.md)
 * [Commandes en terminal](admin/console_commands.md)
 * [Tâches asynchrones](admin/asynchronous.md)
