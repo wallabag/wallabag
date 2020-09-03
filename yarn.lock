@@ -4646,10 +4646,10 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-material-design-icons-iconfont@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/material-design-icons-iconfont/-/material-design-icons-iconfont-5.0.1.tgz#371875ed7fe9c8c520bc7123c3231feeab731c31"
-  integrity sha512-Xg6rIdGrfySTqiTZ6d+nQbcFepS6R4uKbJP0oAqyeZXJY/bX6mZDnOmmUJusqLXfhIwirs0c++a6JpqVa8RFvA==
+material-design-icons-iconfont@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/material-design-icons-iconfont/-/material-design-icons-iconfont-6.0.2.tgz#33186024b7ae940be4931c7b4cd958923134825e"
+  integrity sha512-ks9SbeJL5sG/su3AGzd1OuYbtaAY5KTwYvhWchcNUjdbQiddD3A+Vqi9nag1Ag0Rv9zGs34kyWWYTAUF3ynpyA==
 
 materialize-css@^0.98.1:
   version "0.98.2"
