@@ -3949,16 +3949,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "2.2.1",
+            "version": "v2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "12e967939bb3c79af5047eb62eb6b1ad73a7b647"
+                "reference": "fedf2e0c849376efd5af7fedc68f6a5099a5c8a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/12e967939bb3c79af5047eb62eb6b1ad73a7b647",
-                "reference": "12e967939bb3c79af5047eb62eb6b1ad73a7b647",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/fedf2e0c849376efd5af7fedc68f6a5099a5c8a5",
+                "reference": "fedf2e0c849376efd5af7fedc68f6a5099a5c8a5",
                 "shasum": ""
             },
             "require": {
@@ -3976,7 +3976,7 @@
                 "php-http/httplug": "^2.0",
                 "php-http/message": "^1.7",
                 "simplepie/simplepie": "^1.5",
-                "smalot/pdfparser": "^0.15.1",
+                "smalot/pdfparser": "^0.16",
                 "symfony/options-resolver": "^3.4|^4.0|^5.0",
                 "true/punycode": "^2.1"
             },
@@ -4017,20 +4017,20 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2020-06-02T13:48:42+00:00"
+            "time": "2020-06-25T13:38:36+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.111",
+            "version": "1.0.113",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "2e713509d026fcac23b2eb911a79001d5573607f"
+                "reference": "c83fc7763e3f3e23dd4e68f98ebe3a76db2c765e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/2e713509d026fcac23b2eb911a79001d5573607f",
-                "reference": "2e713509d026fcac23b2eb911a79001d5573607f",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/c83fc7763e3f3e23dd4e68f98ebe3a76db2c765e",
+                "reference": "c83fc7763e3f3e23dd4e68f98ebe3a76db2c765e",
                 "shasum": ""
             },
             "require": {
@@ -4057,7 +4057,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2020-08-20T07:30:58+00:00"
+            "time": "2020-09-09T12:35:58+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -6206,16 +6206,16 @@
         },
         {
             "name": "php-http/discovery",
-            "version": "1.9.1",
+            "version": "1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/discovery.git",
-                "reference": "64a18cc891957e05d91910b3c717d6bd11fbede9"
+                "reference": "88ff14cad4a0db68b343260fa7ac3f1599703660"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/discovery/zipball/64a18cc891957e05d91910b3c717d6bd11fbede9",
-                "reference": "64a18cc891957e05d91910b3c717d6bd11fbede9",
+                "url": "https://api.github.com/repos/php-http/discovery/zipball/88ff14cad4a0db68b343260fa7ac3f1599703660",
+                "reference": "88ff14cad4a0db68b343260fa7ac3f1599703660",
                 "shasum": ""
             },
             "require": {
@@ -6267,7 +6267,7 @@
                 "message",
                 "psr7"
             ],
-            "time": "2020-07-13T15:44:45+00:00"
+            "time": "2020-09-04T08:41:23+00:00"
         },
         {
             "name": "php-http/guzzle5-adapter",
@@ -6549,20 +6549,20 @@
         },
         {
             "name": "php-http/message",
-            "version": "1.8.0",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/message.git",
-                "reference": "ce8f43ac1e294b54aabf5808515c3554a19c1e1c"
+                "reference": "2c7256e3c1aba0bfca70f099810f1c7712e00945"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/message/zipball/ce8f43ac1e294b54aabf5808515c3554a19c1e1c",
-                "reference": "ce8f43ac1e294b54aabf5808515c3554a19c1e1c",
+                "url": "https://api.github.com/repos/php-http/message/zipball/2c7256e3c1aba0bfca70f099810f1c7712e00945",
+                "reference": "2c7256e3c1aba0bfca70f099810f1c7712e00945",
                 "shasum": ""
             },
             "require": {
-                "clue/stream-filter": "^1.4",
+                "clue/stream-filter": "^1.4.1",
                 "php": "^7.1",
                 "php-http/message-factory": "^1.0.2",
                 "psr/http-message": "^1.0"
@@ -6573,6 +6573,7 @@
             "require-dev": {
                 "akeneo/phpspec-skip-example-extension": "^1.0",
                 "coduo/phpspec-data-provider-extension": "^1.0",
+                "ergebnis/composer-normalize": "^2.1",
                 "ext-zlib": "*",
                 "guzzlehttp/psr7": "^1.0",
                 "henrikbjorn/phpspec-code-coverage": "^1.0",
@@ -6617,7 +6618,7 @@
                 "message",
                 "psr-7"
             ],
-            "time": "2019-08-05T06:55:08+00:00"
+            "time": "2020-08-17T06:33:14+00:00"
         },
         {
             "name": "php-http/message-factory",
@@ -8139,27 +8140,26 @@
         },
         {
             "name": "smalot/pdfparser",
-            "version": "v0.15.1",
+            "version": "v0.16.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smalot/pdfparser.git",
-                "reference": "6bc9dcbab5154f7d9f4c99e9cd3391f7ba019dc1"
+                "reference": "5faf073f308b084496ed6bd512deabb680ca7128"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smalot/pdfparser/zipball/6bc9dcbab5154f7d9f4c99e9cd3391f7ba019dc1",
-                "reference": "6bc9dcbab5154f7d9f4c99e9cd3391f7ba019dc1",
+                "url": "https://api.github.com/repos/smalot/pdfparser/zipball/5faf073f308b084496ed6bd512deabb680ca7128",
+                "reference": "5faf073f308b084496ed6bd512deabb680ca7128",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "ext-zlib": "*",
-                "php": "^5.6|^7.0",
-                "tecnickcom/tcpdf": "^6.2.22"
+                "php": ">=5.6"
             },
             "require-dev": {
-                "atoum/atoum": "^3.1",
-                "friendsofphp/php-cs-fixer": "^2.16.3"
+                "friendsofphp/php-cs-fixer": "^2.16.3",
+                "symfony/phpunit-bridge": "^4.2.3"
             },
             "type": "library",
             "autoload": {
@@ -8178,7 +8178,7 @@
                 }
             ],
             "description": "Pdf parser library. Can read and extract information from pdf file.",
-            "homepage": "http://www.pdfparser.org",
+            "homepage": "https://www.pdfparser.org",
             "keywords": [
                 "extract",
                 "parse",
@@ -8186,7 +8186,7 @@
                 "pdf",
                 "text"
             ],
-            "time": "2020-05-27T07:55:41+00:00"
+            "time": "2020-08-31T11:26:29+00:00"
         },
         {
             "name": "spomky-labs/otphp",
