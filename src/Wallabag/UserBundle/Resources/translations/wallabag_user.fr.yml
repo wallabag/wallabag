@@ -1,13 +1,10 @@
 auth_code:
-  on: activé
-  mailer:
-    subject: Code d’authentification wallabag
-    body:
-      hello: Bonjour %user%,
-      first_para: Comme vous avez activé la double authentification sur votre compte
-        wallabag et que vous venez de vous connecter depuis un nouvel appareil (ordinateur,
-        téléphone, etc.), nous vous envoyons un code pour valider votre connexion.
-      second_para: 'Voici le code à renseigner :'
-      support: 'Si vous avez un problème de connexion, n’hésitez pas à contacter le
-        support :'
-      signature: L’équipe wallabag
+    on: activé
+    mailer:
+        subject: Code d’authentification wallabag
+        body:
+            hello: Bonjour %user%,
+            first_para: Comme vous avez activé la double authentification sur votre compte wallabag et que vous venez de vous connecter depuis un nouvel appareil (ordinateur, téléphone, etc.), nous vous envoyons un code pour valider votre connexion.
+            second_para: 'Voici le code à renseigner :'
+            support: 'Si vous avez un problème de connexion, n’hésitez pas à contacter l’assistance :'
+            signature: L’équipe wallabag
