@@ -235,13 +235,13 @@ entry:
         page_title: 'Сохранить новую запись'
         placeholder: 'http://website.com'
         form_new:
-            url_label: Ссылка
+            url_label: URL-адрес
     search:
         placeholder: 'Что Вы ищете?'
     edit:
         page_title: 'Изменить запись'
         title_label: 'Название'
-        url_label: 'Ссылка'
+        url_label: 'URL-адрес'
         is_public_label: 'Публичная'
         save_label: 'Сохранить'
         origin_url_label: Исходный URL (откуда вы нашли эту запись)
