@@ -96,6 +96,9 @@ tag:
 quickstart:
     support:
         title: Podpora
+        gitter: Na Gitteru
+        email: Emailem
+        github: Na GitHubu
     docs:
         title: Úplná dokumentace
     developer:
@@ -107,8 +110,14 @@ quickstart:
 developer:
     existing_clients:
         no_client: Zatím tu není žádný klient.
+        title: Existující klienti
     howto:
         back: Zpět
+    client:
+        form:
+            name_label: Název klienta
+            save_label: Vytvořit nového klienta
+        action_back: Zpět
 user:
     form:
         enabled_label: Povoleno
@@ -116,6 +125,9 @@ user:
         plain_password_label: ????
         password_label: Heslo
         username_label: Uživatelské jméno
+        back_to_list: Zpátky na seznam
+        delete_confirm: Jste si jistí?
+        delete: Smazat
     list:
         create_new_one: Vytvořit nového uživatele
         no: Ne
@@ -126,7 +138,27 @@ user:
     edit_user: Upravit existujícího uživatele
     new_user: Vytvořit nového uživatele
     page_title: Správa uživatelů
+    search:
+        placeholder: Filtrovat podle uživatelského jména nebo emailu
 site_credential:
     form:
         password_label: Heslo
         username_label: Uživatelské jméno
+        back_to_list: Zpátky na seznam
+        delete_confirm: Jste si jistí?
+        delete: Smazat
+        save: Uložit
+    list:
+        no: Ne
+        yes: Ano
+        edit_action: Upravit
+import:
+    form:
+        save_label: Nahrát soubor
+        file_label: Soubor
+flashes:
+    config:
+        notice:
+            password_updated: Heslo bylo aktualizováno
+error:
+    page_title: Vyskytla se chyba
