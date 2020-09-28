@@ -17,3 +17,5 @@ export_pdf: Povolit export do PDF
 export_mobi: Povolit export do .mobi
 diaspora_url: diaspora* URL adresa, pokud je služba povolena
 carrot: Povolit sdílet na Carrot
+download_pictures: Stáhnout obrázky na váš server
+settings_changed: Nastavení bylo aktualizováno
