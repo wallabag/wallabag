@@ -9,8 +9,7 @@ security:
         password: 'Senha'
         cancel: 'Cancelar'
     resetting:
-        description: 'Digite seu endereço de e-mail abaixo e enviaremos instruções para
-            resetar sua senha.'
+        description: 'Digite seu endereço de e-mail abaixo e enviaremos instruções para resetar sua senha.'
     register:
         page_title: 'Criar uma conta'
         go_to_account: 'Ir para sua conta'
@@ -44,8 +43,7 @@ footer:
         social: 'Social'
         powered_by: 'provido por'
         about: 'Sobre'
-    stats: 'Desde %user_creation% você leu %nb_archives% artigos. Isso é %per_day% por
-        dia!'
+    stats: 'Desde %user_creation% você leu %nb_archives% artigos. Isso é %per_day% por dia!'
 config:
     page_title: 'Config'
     tab_menu:
@@ -63,16 +61,14 @@ config:
         language_label: 'Idioma'
         reading_speed:
             label: 'Velocidade de leitura'
-            help_message: 'Você pode usar ferramentas online para estimar sua velocidade
-                de leitura:'
+            help_message: 'Você pode usar ferramentas online para estimar sua velocidade de leitura:'
             100_word: 'Posso ler ~100 palavras por minuto'
             200_word: 'Posso ler ~200 palavras por minuto'
             300_word: 'Posso ler ~300 palavras por minuto'
             400_word: 'Posso ler ~400 palavras por minuto'
         pocket_consumer_key_label: 'Chave do consumidor do Pocket para importar conteúdo'
     form_rss:
-        description: 'Feeds RSS providos pelo wallabag permitem que você leia seus artigos
-            salvos em seu leitor de RSS favorito. Você precisa gerar um token primeiro.'
+        description: 'Feeds RSS providos pelo wallabag permitem que você leia seus artigos salvos em seu leitor de RSS favorito. Você precisa gerar um token primeiro.'
         token_label: 'Token RSS'
         no_token: 'Nenhum Token'
         token_create: 'Criar seu token'
@@ -84,8 +80,7 @@ config:
             archive: 'Arquivado'
         rss_limit: 'Número de itens no feed'
     form_user:
-        two_factor_description: 'Habilitar autenticação de dois passos significa que você
-            receberá um e-mail com um código a cada nova conexão desconhecida.'
+        two_factor_description: 'Habilitar autenticação de dois passos significa que você receberá um e-mail com um código a cada nova conexão desconhecida.'
         name_label: 'Nome'
         email_label: 'E-mail'
         twoFactorAuthentication_label: 'Autenticação de dois passos'
@@ -103,25 +98,11 @@ config:
         faq:
             title: 'FAQ'
             tagging_rules_definition_title: 'O que as « regras de tags » significam?'
-            tagging_rules_definition_description: 'São regras usadas pelo Wallabag para
-                automaticamente adicionar tags em novos artigos.<br />Cada vez que um novo
-                artigo é adicionado, todas as regras de tags podem ser usadas para adicionar
-                as tags que você configurou, ajudando-o com o problema de classificar manualmente
-                seus artigos.'
+            tagging_rules_definition_description: 'São regras usadas pelo Wallabag para automaticamente adicionar tags em novos artigos.<br />Cada vez que um novo artigo é adicionado, todas as regras de tags podem ser usadas para adicionar as tags que você configurou, ajudando-o com o problema de classificar manualmente seus artigos.'
             how_to_use_them_title: 'Como eu as utilizo?'
-            how_to_use_them_description: 'Vamos dizer que você deseja adicionar a tag «
-                <i>leitura rápida</i> » quando o tempo de leitura for menor que 3 minutos.<br
-                />Neste caso, você deve « readingTime &lt;= 3 » no campo <i>Regra</i> e «
-                <i>leitura rápida</i> » no campo <i>Tags</i>.<br />Diversas tags podem ser
-                adicionadas simultâneamente separando-as com vírgula: « <i>leitura rápida,
-                precisa ser lido</i> »<br />Regras complexas podem ser escritas usando os
-                seguintes operadores pré-definidos: if « <i>readingTime &gt;= 5 AND domainName
-                = "github.com"</i> » então adicione a tag « <i>leitura longa, github </i>
-                »'
-            variables_available_title: 'Quais variáveis e operadores eu posso usar para
-                escrever regras?'
-            variables_available_description: 'As seguintes variáveis e operadores podem
-                ser usados para criar regras de tags:'
+            how_to_use_them_description: 'Vamos dizer que você deseja adicionar a tag « <i>leitura rápida</i> » quando o tempo de leitura for menor que 3 minutos.<br />Neste caso, você deve « readingTime &lt;= 3 » no campo <i>Regra</i> e « <i>leitura rápida</i> » no campo <i>Tags</i>.<br />Diversas tags podem ser adicionadas simultâneamente separando-as com vírgula: « <i>leitura rápida, precisa ser lido</i> »<br />Regras complexas podem ser escritas usando os seguintes operadores pré-definidos: if « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » então adicione a tag « <i>leitura longa, github </i> »'
+            variables_available_title: 'Quais variáveis e operadores eu posso usar para escrever regras?'
+            variables_available_description: 'As seguintes variáveis e operadores podem ser usados para criar regras de tags:'
             meaning: 'Meaning'
             variable_description:
                 label: 'Variável'
@@ -144,8 +125,7 @@ config:
                 not_equal_to: 'Diferente de...'
                 or: 'Uma regra OU outra'
                 and: 'Uma regra E outra'
-                matches: 'Testa que um <i>assunto</i> corresponde a uma <i>pesquisa</i> (maiúscula
-                    ou minúscula).<br />Exemplo: <code>título corresponde a "futebol"</code>'
+                matches: 'Testa que um <i>assunto</i> corresponde a uma <i>pesquisa</i> (maiúscula ou minúscula).<br />Exemplo: <code>título corresponde a "futebol"</code>'
 entry:
     default_title: 'Título da entrada'
     page_titles:
@@ -156,8 +136,7 @@ entry:
         filtered_tags: 'Filtrar por tags:'
         untagged: 'Entradas sem tags'
     list:
-        number_on_the_page: '{0} Não existem entradas.|{1} Existe uma entrada.|]1,Inf[
-            Existem %count% entradas.'
+        number_on_the_page: '{0} Não existem entradas.|{1} Existe uma entrada.|]1,Inf[ Existem %count% entradas.'
         reading_time: 'tempo estimado de leitura'
         reading_time_minutes: 'tempo estimado de leitura: %readingTime% min'
         reading_time_less_one_minute: 'tempo estimado de leitura: &lt; 1 min'
@@ -212,8 +191,7 @@ entry:
                 description: 'este artigo aparece errado?'
         edit_title: 'Editar título'
         original_article: 'original'
-        annotations_on_the_entry: '{0} Sem anotações|{1} Uma anotação|]1,Inf[ %nbAnnotations%
-            anotações'
+        annotations_on_the_entry: '{0} Sem anotações|{1} Uma anotação|]1,Inf[ %nbAnnotations% anotações'
         created_at: 'Data de criação'
     new:
         page_title: 'Salvar nova entrada'
@@ -238,8 +216,7 @@ about:
     who_behind_wallabag:
         developped_by: 'Desenvolvido por'
         website: 'website'
-        many_contributors: 'E muitos outros contribuidores ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">no
-            Github</a>'
+        many_contributors: 'E muitos outros contribuidores ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">no Github</a>'
         project_website: 'Website do projeto'
         license: 'Licença'
         version: 'Versão'
@@ -255,8 +232,7 @@ about:
     contributors:
         description: 'Obrigado por contribuir com a aplicação web wallabag'
     third_party:
-        description: 'Aqui está a lista de bibliotecas terceiras usadas no wallabag (com
-            suas licenças):'
+        description: 'Aqui está a lista de bibliotecas terceiras usadas no wallabag (com suas licenças):'
         package: 'Pacote'
         license: 'Licença'
 howto:
@@ -285,17 +261,14 @@ quickstart:
     more: 'Mais...'
     intro:
         title: 'Bem-vindo ao wallabag!'
-        paragraph_1: 'Nós podemos acompanhar você em sua visita ao wallabag e mostrar
-            algumas funcionalidades que podem lhe interessar.'
+        paragraph_1: 'Nós podemos acompanhar você em sua visita ao wallabag e mostrar algumas funcionalidades que podem lhe interessar.'
         paragraph_2: 'Siga-nos!'
     configure:
         title: 'Configurar a aplicação'
-        description: 'Para ter uma aplicação que atende você, dê uma olhada na configuração
-            do wallabag.'
+        description: 'Para ter uma aplicação que atende você, dê uma olhada na configuração do wallabag.'
         language: 'Alterar idioma e design'
         rss: 'Habilitar feeds RSS'
-        tagging_rules: 'Escrever regras para acrescentar tags automaticamente em seus
-            artigos'
+        tagging_rules: 'Escrever regras para acrescentar tags automaticamente em seus artigos'
     admin:
         title: 'Administração'
         description: 'Como administrador você tem privilégios no wallabag. Você pode:'
@@ -306,14 +279,12 @@ quickstart:
         import: 'Configurar importação'
     first_steps:
         title: 'Primeiros passos'
-        description: "Agora o wallabag está bem configurado, é hora de arquivar a web.\
-            \ Você pode clicar no sinal de + no topo a direita para adicionar um link."
+        description: "Agora o wallabag está bem configurado, é hora de arquivar a web. Você pode clicar no sinal de + no topo a direita para adicionar um link."
         new_article: 'Salvar seu primeiro artigo'
         unread_articles: 'E classificá-lo!'
     migrate:
         title: 'Migrar de um serviço existente'
-        description: 'Você está usando um outro serviço? Nós podemos ajudá-lo a recuperar
-            seus dados para o wallabag.'
+        description: 'Você está usando um outro serviço? Nós podemos ajudá-lo a recuperar seus dados para o wallabag.'
         pocket: 'Migrar do Pocket'
         wallabag_v1: 'Migrar do wallabag v1'
         wallabag_v2: 'Migrar do wallabag v2'
@@ -321,18 +292,15 @@ quickstart:
         instapaper: 'Migrate from Instapaper'
     developer:
         title: 'Desenvolvedores'
-        description: 'Nós também agradecemos os desenvolvedores: Docker, API, traduções,
-            etc.'
+        description: 'Nós também agradecemos os desenvolvedores: Docker, API, traduções, etc.'
         create_application: 'Criar sua aplicação terceira'
         use_docker: 'Usar o Docker para instalar o wallabag'
     docs:
         title: 'Documentação completa'
-        description: "Existem muitas funcionalidades no wallabag. Não hesite em ler o\
-            \ manual para conhecê-las e aprender como usá-las."
+        description: "Existem muitas funcionalidades no wallabag. Não hesite em ler o manual para conhecê-las e aprender como usá-las."
         annotate: 'Anotar seu artigo'
         export: 'Converter seu artigo em ePUB ou PDF'
-        search_filters: 'veja coo você pode encontrar um artigo usanndo o motor de busca
-            e filtros'
+        search_filters: 'veja coo você pode encontrar um artigo usanndo o motor de busca e filtros'
         fetching_errors: 'O que eu posso fazer quando um artigo encontra erros na recuperação?'
         all_docs: 'E outros muitos artigos!'
     support:
@@ -344,13 +312,11 @@ quickstart:
 tag:
     page_title: 'Tags'
     list:
-        number_on_the_page: '{0} Não existem tags.|{1} Uma tag.|]1,Inf[ Existem %count%
-            tags.'
+        number_on_the_page: '{0} Não existem tags.|{1} Uma tag.|]1,Inf[ Existem %count% tags.'
         see_untagged_entries: 'Ver entradas sem tags'
 import:
     page_title: 'Importar'
-    page_description: 'Bem-vindo ao importador do wallabag. Por favo selecione o serviço
-        do qual deseja migrar.'
+    page_description: 'Bem-vindo ao importador do wallabag. Por favo selecione o serviço do qual deseja migrar.'
     action:
         import_contents: 'Importar conteúdos'
     form:
@@ -360,69 +326,38 @@ import:
         save_label: Enviar ficheiro
     pocket:
         page_title: 'Importar > Pocket'
-        description: 'Com este importador você importa todos os seus dados do Pocket.
-            O Pocket não nos permite recuperar o conteúdo de seu serviço, então o conteúdo
-            que pode ser lido é recarregado pelo wallabag.'
+        description: 'Com este importador você importa todos os seus dados do Pocket. O Pocket não nos permite recuperar o conteúdo de seu serviço, então o conteúdo que pode ser lido é recarregado pelo wallabag.'
         config_missing:
             description: 'O importador do Pocket não está configurado.'
             admin_message: 'Você precisa definir uma %keyurls%a pocket_consumer_key%keyurle%.'
-            user_message: 'Seu administrador do servidor precisa definir uma chave de API
-                para o Pocket.'
-        authorize_message: 'Você pode importar seus dados de sua conta do Pocket. Você
-            somente precisa clicar no botão abaixo e autorizar a aplicação a conectar-se
-            ao getpocket.com.'
+            user_message: 'Seu administrador do servidor precisa definir uma chave de API para o Pocket.'
+        authorize_message: 'Você pode importar seus dados de sua conta do Pocket. Você somente precisa clicar no botão abaixo e autorizar a aplicação a conectar-se ao getpocket.com.'
         connect_to_pocket: 'Conecte ao Pocket e importe os dados'
     wallabag_v1:
         page_title: 'Importar > Wallabag v1'
-        description: Com este importador você importa todos os seus artigos do wallabag
-            v1. Na sua página de configuração, clique em "JSON export" na opção "Export
-            your wallabag data". Você irá criar um ficheiro "wallabag-export-1-xxxx-xx-xx.json".
-        how_to: 'Por favor, selecione seu exportador wallabag e clique no botão abaixo
-            para carregar e importar.'
+        description: Com este importador você importa todos os seus artigos do wallabag v1. Na sua página de configuração, clique em "JSON export" na opção "Export your wallabag data". Você irá criar um ficheiro "wallabag-export-1-xxxx-xx-xx.json".
+        how_to: 'Por favor, selecione seu exportador wallabag e clique no botão abaixo para carregar e importar.'
     wallabag_v2:
         page_title: 'Importar > Wallabag v2'
-        description: Com este importador você importa todos os seus artigos do wallabag
-            v2. Vá em Todos os artigos e então, na barra lateral de exportação, clique em
-            "JSON". Você irá criar um ficheiro "All articles.json".
+        description: Com este importador você importa todos os seus artigos do wallabag v2. Vá em Todos os artigos e então, na barra lateral de exportação, clique em "JSON". Você irá criar um ficheiro "All articles.json".
     readability:
         page_title: 'Importar > Readability'
-        description: 'Este importador pode importar todos os artigos do Readability. Nas
-            página ferramentas (https://www.readability.com/tools/), clique em "Export your
-            data" na seção "Data Export". Você receberá um e-mail para fazer o download
-            de um json (que de fato não termina com .json).'
-        how_to: 'Por favor, selecione sua exportação do Readability e clique no botão
-            abaixo para importá-la.'
+        description: 'Este importador pode importar todos os artigos do Readability. Nas página ferramentas (https://www.readability.com/tools/), clique em "Export your data" na seção "Data Export". Você receberá um e-mail para fazer o download de um json (que de fato não termina com .json).'
+        how_to: 'Por favor, selecione sua exportação do Readability e clique no botão abaixo para importá-la.'
     worker:
-        enabled: "A importação é feita assíncronamente. Uma vez que a tarefa de importação\
-            \ é iniciada, um trabalho externo pode executar tarefas uma por vez. O serviço\
-            \ atual é:"
+        enabled: "A importação é feita assíncronamente. Uma vez que a tarefa de importação é iniciada, um trabalho externo pode executar tarefas uma por vez. O serviço atual é:"
     firefox:
         page_title: 'Importar > Firefox'
-        description: Com este importador você importa todos os favoritos de seu Firefox.
-            Somente vá até seus favoritos (Ctrl+Maj+O), e em "Importar e Backup" e escolha
-            "Backup...". Você terá então um ficheiro .json.
-        how_to: Por favor, escolha o ficheiro de backup dos favoritos e clique no botão
-            abaixo para importá-lo. Note que o processo pode demorar até que todos os artigos
-            tenham sido copiados.
+        description: Com este importador você importa todos os favoritos de seu Firefox. Somente vá até seus favoritos (Ctrl+Maj+O), e em "Importar e Backup" e escolha "Backup...". Você terá então um ficheiro .json.
+        how_to: Por favor, escolha o ficheiro de backup dos favoritos e clique no botão abaixo para importá-lo. Note que o processo pode demorar até que todos os artigos tenham sido copiados.
     chrome:
         page_title: 'Importar > Chrome'
-        description: 'Com este importador você importa todos os favoritos de seu Chrome.
-            A localização do ficheiro depende de seu sistema operacional: <ul><li>Em Linux,
-            vá para o diretório <code>~/.config/chromium/Default/</code></li><li>Em Windows,
-            ele deve estar em <code>%LOCALAPPDATA%\Google\Chrome\User Data\Default</code></li><li>Em
-            OS X, ele deve estar em <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Uma
-            vez que encontrou o ficheiro, copie-o para algum lugar que você o encontre.<em><br>Note
-            que se você possui o Chromium ao invés do Chrome, você precisa corrigir os caminhos.</em></p>'
-        how_to: Por favor, escolha o ficheiro de backup dos favoritos e clique no botão
-            abaixo para importá-lo. Note que o processo pode demorar até que todos os artigos
-            tenham sido copiados.
+        description: 'Com este importador você importa todos os favoritos de seu Chrome. A localização do ficheiro depende de seu sistema operacional: <ul><li>Em Linux, vá para o diretório <code>~/.config/chromium/Default/</code></li><li>Em Windows, ele deve estar em <code>%LOCALAPPDATA%\Google\Chrome\User Data\Default</code></li><li>Em OS X, ele deve estar em <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Uma vez que encontrou o ficheiro, copie-o para algum lugar que você o encontre.<em><br>Note que se você possui o Chromium ao invés do Chrome, você precisa corrigir os caminhos.</em></p>'
+        how_to: Por favor, escolha o ficheiro de backup dos favoritos e clique no botão abaixo para importá-lo. Note que o processo pode demorar até que todos os artigos tenham sido copiados.
     instapaper:
         page_title: 'Importar > Instapaper'
-        description: Este importador pode importar todos os artigos do seu Instapaper.
-            Nas página de configurações (https://www.instapaper.com/user), clique em "Download
-            .CSV file" na seção "Export". Um ficheiro CSV será descarregado (algo como "instapaper-export.csv").
-        how_to: 'Por favor, selecione sua exportação do seu Instapaper e clique no botão
-            abaixo para importá-la.'
+        description: Este importador pode importar todos os artigos do seu Instapaper. Nas página de configurações (https://www.instapaper.com/user), clique em "Download .CSV file" na seção "Export". Um ficheiro CSV será descarregado (algo como "instapaper-export.csv").
+        how_to: 'Por favor, selecione sua exportação do seu Instapaper e clique no botão abaixo para importá-la.'
 developer:
     welcome_message: 'Bem-vindo a API do wallabag'
     documentation: 'Documentação'
@@ -440,14 +375,11 @@ developer:
         field_grant_types: 'Tipo permitido'
         no_client: 'Nenhum cliente até agora.'
     remove:
-        warn_message_1: 'Você tem permissão pare remover este cliente. Esta ação é IRREVERSÍVEL
-            !'
-        warn_message_2: 'Se você remover isso, todo o aplicativo configurado com este
-            cliente não poderá se autenticar no seu wallabag.'
+        warn_message_1: 'Você tem permissão pare remover este cliente. Esta ação é IRREVERSÍVEL !'
+        warn_message_2: 'Se remover isso, todas as apps configuradas com este cliente não se poderá autenticar no seu wallabag.'
         action: 'Remover este cliente'
     client:
-        page_description: 'Você está prestes a criar um novo cliente. Por favor preencha
-            o campo abaixo para a URI de redirecionamento de sua aplicação.'
+        page_description: 'Você está prestes a criar um novo cliente. Por favor preencha o campo abaixo para a URI de redirecionamento de sua aplicação.'
         form:
             name_label: 'Nome do cliente'
             redirect_uris_label: 'URIs de redirecionamento'
@@ -462,21 +394,14 @@ developer:
         read_howto: 'Leia o how-to "Criar minha primeira aplicação"'
     howto:
         description:
-            paragraph_1: 'Os seguintes comandos fazem uso da <a href="https://github.com/jkbrzt/httpie">biblioteca
-                HTTPie</a>. Tenha certeza que ela está instalada em seu servidor antes de
-                usá-la.'
-            paragraph_2: 'Você precisa de um token para a comunicação entre sua aplicação
-                terceira e a API do wallabag.'
-            paragraph_3: 'Para criar este token, você precisa <a href="%link%">criar um
-                novo cliente</a>.'
-            paragraph_4: 'Agora, crie seu token (altere client_id, client_secret, username
-                e password com os valores corretos):'
+            paragraph_1: 'Os seguintes comandos fazem uso da <a href="https://github.com/jkbrzt/httpie">biblioteca HTTPie</a>. Tenha certeza que ela está instalada em seu servidor antes de usá-la.'
+            paragraph_2: 'Você precisa de um token para a comunicação entre sua aplicação terceira e a API do wallabag.'
+            paragraph_3: 'Para criar este token, você precisa <a href="%link%">criar um novo cliente</a>.'
+            paragraph_4: 'Agora, crie seu token (altere client_id, client_secret, username e password com os valores corretos):'
             paragraph_5: 'A API pode retornar uma resposta como essa:'
-            paragraph_6: 'O access_token é utilizável para fazer uma chamada para o endpoint
-                da API. Por exemplo:'
+            paragraph_6: 'O access_token é utilizável para fazer uma chamada para o endpoint da API. Por exemplo:'
             paragraph_7: 'Esta chamada pode retornar todas as entradas de seu usuário.'
-            paragraph_8: 'Se você deseja ver todos os endpoints da API, dê uma olhada <a
-                href="%link%">em nossa documentação da API</a>.'
+            paragraph_8: 'Se você deseja ver todos os endpoints da API, dê uma olhada <a href="%link%">em nossa documentação da API</a>.'
         back: 'Voltar'
 user:
     page_title: 'Gerenciamento de Usuários'
@@ -519,8 +444,7 @@ flashes:
         notice:
             config_saved: 'Configiração salva.'
             password_updated: 'Senha atualizada'
-            password_not_updated_demo: 'Em modo de demonstração, você não pode alterar a
-                senha deste usuário.'
+            password_not_updated_demo: 'Em modo de demonstração, você não pode alterar a senha deste usuário.'
             rss_updated: 'Informação de RSS atualizada'
             tagging_rules_updated: 'Regras de tags atualizadas'
             tagging_rules_deleted: 'Regra de tag apagada'
@@ -544,17 +468,12 @@ flashes:
     import:
         notice:
             failed: 'Importação falhou, por favor tente novamente.'
-            failed_on_file: Erro ao processar a importação. Por favor verifique o seu ficheiro
-                de importação.
+            failed_on_file: Erro ao processar a importação. Por favor verifique o seu ficheiro de importação.
             summary: 'relatório de importação: %imported% importados, %skipped% já existem.'
             summary_with_queue: 'Importar sumáario: %queued% agendados.'
         error:
-            redis_enabled_not_installed: 'O Redis está habilitado para importação assíncrona
-                mas parece que <u>não podemos nos conectar nele</u>. Por favor verifique as
-                configurações do Redis.'
-            rabbit_enabled_not_installed: 'O RabbitMQ está habilitado para importação assíncrona
-                mas parece que <u>não podemos nos conectar nele</u>. Por favor verifique as
-                configurações do RabbitMQ.'
+            redis_enabled_not_installed: 'O Redis está habilitado para importação assíncrona mas parece que <u>não podemos nos conectar nele</u>. Por favor verifique as configurações do Redis.'
+            rabbit_enabled_not_installed: 'O RabbitMQ está habilitado para importação assíncrona mas parece que <u>não podemos nos conectar nele</u>. Por favor verifique as configurações do RabbitMQ.'
     developer:
         notice:
             client_created: 'Novo cliente criado.'
