@@ -1,0 +1,164 @@
+entry:
+    filters:
+        action:
+            filter: Filtrovat
+            clear: Pročistit
+        created_at:
+            to: do
+            from: od
+            label: Datum vytvoření
+        domain_label: Název domény
+        reading_time:
+            to: do
+            from: od
+            label: Čas čtení v minutách
+        status_label: Stav
+        title: Filtry
+        language_label: Jazyk
+        unread_label: Nepřečtené
+        archived_label: Archivované
+    search:
+        placeholder: Co hledáte?
+    view:
+        left_menu:
+            share_content: Sdílet
+            add_a_tag: Přidat štítek
+            set_as_unread: Označit jako nepřečtené
+            set_as_read: Označit jako přečtené
+    page_titles:
+        all: Všechny položky
+        untagged: Položky bez štítků
+menu:
+    top:
+        search: Hledat
+        add_new_entry: Přidat novou položku
+    left:
+        tags: Štítky
+        all_articles: Všechny položky
+        archive: Archiv
+        unread: Nepřečtené
+config:
+    form_rules:
+        faq:
+            variable_description:
+                readingTime: Odhadovaný čas čtení položky, v minutách
+                language: Jazyk položky
+                isArchived: Zda je položka archivovaná nebo ne
+                url: URL adresa položky
+                title: Název položky
+                label: Proměnná
+    form_user:
+        name_label: Jméno
+        delete:
+            description: Pokud odstraníte váš účet, VŠECHNY vaše články, VŠECHNY vaše štítky, VŠECHNY vaše anotace a váš účet budou TRVALE odstraněny (tuto akci NELZE VRÁTIT ZPĚT). Pak budete odhlášeni.
+    form_settings:
+        help_language: Zde můžete změnit jazyk uživatelského rozhraní wallabagu.
+        help_reading_speed: wallabag spočítá pro každý článek čas potřebný k jeho čtení. Zde můžete určit, pomocí tohoto seznamu, jestli jste rychlý nebo pomalý čtenář a wallabag následně přepočítá čas potřebný ke čtení každého článku.
+        items_per_page_label: Položek na stránku
+        action_mark_as_read:
+            redirect_current_page: Zůstat na aktuální stránce
+        reading_speed:
+            400_word: Čtu ~ 400 slov za minutu
+            300_word: Čtu ~ 300 slov za minutu
+            200_word: Čtu ~ 200 slov za minutu
+            100_word: Čtu ~ 100 slov za minutu
+            label: Rychlost čtení
+        language_label: Jazyk
+    form_password:
+        new_password_label: Nové heslo
+        old_password_label: Aktuální heslo
+        description: Zde můžete změnit vaše heslo. Vaše nové heslo by mělo mít nejméně 8 znaků.
+    form_rss:
+        rss_limit: Počet položek v novinkovém kanálu
+        rss_link:
+            all: Všechny
+            archive: Archivované
+            unread: Nepřečtené
+    tab_menu:
+        rss: RSS
+        settings: Nastavení
+        password: Heslo
+security:
+    register:
+        page_title: Vytvořit účet
+    login:
+        cancel: Zrušit
+        register: Zaregistrovat se
+        submit: Přihlásit se
+        forgot_password: Zapomněli jste vaše heslo?
+        page_title: Vítejte ve wallabagu!
+        password: Heslo
+        username: Uživatelské jméno
+tag:
+    new:
+        add: Přidat
+    page_title: Štítky
+quickstart:
+    support:
+        title: Podpora
+        gitter: Na Gitteru
+        email: Emailem
+        github: Na GitHubu
+    docs:
+        title: Úplná dokumentace
+    developer:
+        title: Vývojáři
+    migrate:
+        description: Používáte jinou službu? Pomůžeme vám načíst vaše data na wallabag.
+    first_steps:
+        description: Nyní je wallabag správně nakonfigurován a je načase začít archivovat web. Pomocí znaku + vpravo nahoře můžete přidat odkaz.
+developer:
+    existing_clients:
+        no_client: Zatím tu není žádný klient.
+        title: Existující klienti
+    howto:
+        back: Zpět
+    client:
+        form:
+            name_label: Název klienta
+            save_label: Vytvořit nového klienta
+        action_back: Zpět
+user:
+    form:
+        enabled_label: Povoleno
+        email_label: Email
+        plain_password_label: ????
+        password_label: Heslo
+        username_label: Uživatelské jméno
+        back_to_list: Zpátky na seznam
+        delete_confirm: Jste si jistí?
+        delete: Smazat
+    list:
+        create_new_one: Vytvořit nového uživatele
+        no: Ne
+        yes: Ano
+        edit_action: Upravit
+        actions: Akce
+    description: Zde můžete spravovat všechny uživatele (vytvářet je, upravovat a mazat)
+    edit_user: Upravit existujícího uživatele
+    new_user: Vytvořit nového uživatele
+    page_title: Správa uživatelů
+    search:
+        placeholder: Filtrovat podle uživatelského jména nebo emailu
+site_credential:
+    form:
+        password_label: Heslo
+        username_label: Uživatelské jméno
+        back_to_list: Zpátky na seznam
+        delete_confirm: Jste si jistí?
+        delete: Smazat
+        save: Uložit
+    list:
+        no: Ne
+        yes: Ano
+        edit_action: Upravit
+import:
+    form:
+        save_label: Nahrát soubor
+        file_label: Soubor
+flashes:
+    config:
+        notice:
+            password_updated: Heslo bylo aktualizováno
+error:
+    page_title: Vyskytla se chyba

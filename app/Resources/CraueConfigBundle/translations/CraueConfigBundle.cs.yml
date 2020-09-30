@@ -1,0 +1,21 @@
+matomo_enabled: Povolit Piwik
+unmark_url: Unmark URL adresa, pokud je služba povolena
+scuttle_url: Scuttle URL adresa, pokud je služba povolena
+shaarli_url: Shaarli URL adresa, pokud je služba povolena
+share_unmark: Povolit sdílení na Unmark.it
+share_twitter: Povolit sdílení na Twitteru
+share_scuttle: Povolit sdílení na Scuttle
+share_shaarli: Povolit sdílení na Shaarli
+share_mail: Povolit sdílení emailem
+share_diaspora: Povolit sdílení na diaspora*
+export_xml: Povolit export do XML
+export_txt: Povolit export do TXT
+export_epub: Povolit export do ePub
+export_json: Povolit export do JSON
+export_csv: Povolit export do CSV
+export_pdf: Povolit export do PDF
+export_mobi: Povolit export do .mobi
+diaspora_url: diaspora* URL adresa, pokud je služba povolena
+carrot: Povolit sdílet na Carrot
+download_pictures: Stáhnout obrázky na váš server
+settings_changed: Nastavení bylo aktualizováno

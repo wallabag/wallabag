@@ -1,0 +1,4 @@
+validator:
+    password_wrong_value: Špatně zadané heslo.
+    password_too_short: Vaše heslo musí mít alespoň 8 znaků.
+    password_must_match: Heslo musí být v obou polích stejné.
