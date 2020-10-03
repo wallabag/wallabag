@@ -45,3 +45,7 @@ services:
             - 'craue_config'
             - 0
             - '%kernel.cache_dir%'
+
+    seb_user_manager:
+        class: Wallabag\UserBundle\Security\FOSUserManagerBridge
+        autowire: true

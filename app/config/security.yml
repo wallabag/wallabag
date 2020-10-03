@@ -41,9 +41,11 @@ security:
         secured_area:
             logout_on_user_change: true
             pattern: ^/
-            form_login:
-                provider: fos_userbundle
-                csrf_token_generator: security.csrf.token_manager
+            guard:
+                authenticators:
+                    - seb_authenticator.guards.local_accounts
+                    - seb_authenticator.guards.imap_accounts
+            entry_point: seb_authenticator.guards.local_accounts
 
             anonymous: true
             remember_me:

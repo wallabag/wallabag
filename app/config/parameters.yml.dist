@@ -55,6 +55,9 @@ parameters:
 
     rss_limit: 50
 
+    # Authenticator
+    seb_authenticator_imap_mailbox: '{127.0.0.1:143/imap}'
+
     # RabbitMQ processing
     rabbitmq_host: localhost
     rabbitmq_port: 5672

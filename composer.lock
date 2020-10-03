@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e26891992eaad86a76d88a80c9716352",
+    "content-hash": "3f83c9443244c443f58e3ab1a9c57f37",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -7691,6 +7691,50 @@
             "time": "2020-09-21T13:24:40+00:00"
         },
         {
+            "name": "seb/authenticator-bundle",
+            "version": "0.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/exeba/SebAuthenticatorBundle.git",
+                "reference": "4173e9af156d9f30311be00f82abe33dcde976c3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/exeba/SebAuthenticatorBundle/zipball/4173e9af156d9f30311be00f82abe33dcde976c3",
+                "reference": "4173e9af156d9f30311be00f82abe33dcde976c3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-imap": "*",
+                "php": "^7.1",
+                "symfony/security-bundle": "^3.0 || ^4.0 || ^5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Seb\\AuthenticatorBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastiano Degan",
+                    "email": "sebdeg87@gmail.com"
+                }
+            ],
+            "description": "Symfony SebAuthenticatorBundle",
+            "keywords": [
+                "user authentication"
+            ],
+            "time": "2020-10-03T14:07:49+00:00"
+        },
+        {
             "name": "sensio/distribution-bundle",
             "version": "v5.0.25",
             "source": {
@@ -10429,6 +10473,7 @@
                 "i18n",
                 "text"
             ],
+            "abandoned": true,
             "time": "2018-12-05T18:34:18+00:00"
         },
         {

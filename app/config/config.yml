@@ -411,3 +411,15 @@ httplug:
 # define custom entity so we can override length attribute to fix utf8mb4 issue
 craue_config:
     entity_name: Wallabag\CoreBundle\Entity\InternalSetting
+
+seb_authenticator:
+    guards:
+        local_accounts:
+            form_login: ~
+            local_credentials: ~
+            bad_credentials: 'try_next'
+        imap_accounts:
+            form_login: ~
+            imap_credentials:
+                mailbox: "%seb_authenticator_imap_mailbox%"
+            missing_user: 'create'
