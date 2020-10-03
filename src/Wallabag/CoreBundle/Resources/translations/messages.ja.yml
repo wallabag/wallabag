@@ -313,7 +313,7 @@ quickstart:
         sharing: 記事の共有に関するいくつかのパラメーターを有効にする
         export: エクスポートを構成
         import: インポートを構成
-        new_user: 新しいユーザを作成する
+        new_user: 新しいユーザーを作成する
     first_steps:
         title: 最初のステップ
         description: wallabag は正しく構成されました。web をアーカイブする時間です。右上の + 記号をクリックして、リンクを追加することができます。
@@ -393,9 +393,16 @@ import:
     instapaper:
         description: このインポーターは Instapaper の記事すべてをインポートします。設定 (https://www.instapaper.com/user) ページで、"エクスポート" の ".CSV をダウンロード" をクリックしてください。CSV ファイルがダウンロードされます ("instapaper-export.csv" のような)。
         how_to: Instapaper エクスポートを選択して、下のボタンをクリックし、アップロードおよびインポートしてください。
+        page_title: インポート > Instapaper
     chrome:
         page_title: インポート > Chrome
+        how_to: インポートするには、ブックマークのバックアップファイルを選択してボタンをクリックしてください。すべての記事を読み込む必要があるため、処理に時間のかかる場合があります。
+        description: 'このインポーターは Chrome のすべてのブックマークをインポートします。ファイルの場所はオペレーティングシステムに依存します : <ul><li>Linuxの場合、 <code>~/.config/chromium/Default/</code> ディレクトリの中です</li><li>Windowsの場合、 <code>%LOCALAPPDATA%\Google\Chrome\User Data\Default</code> のはずです</li><li>OS Xの場合、 <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code> のはずです</li></ul>入手したら、 <code>ブックマーク</code> をどこかへコピーしてください<em><br>ChromeでなくChromiumの場合、適切にパスを修正する必要があります。</em></p>'
     page_title: インポート
+    pinboard:
+        how_to: アップロードとインポートのためにPinboardでエクスポートしたものを選択してボタンをクリックしてください。
+        description: このインポーターは Pinboard の記事すべてをインポートします。バックアップ (https://pinboard.in/settings/backup) ページの "Bookmarks" セクションで "JSON" をクリックしてください。JSONファイルがダウンロードされます（"pinboard_export"のように）。
+        page_title: インポート > Pinboard
 developer:
     welcome_message: wallabag API へようこそ
     how_to_first_app: 最初のアプリケーションを作成する方法
@@ -403,11 +410,14 @@ developer:
     list_methods: API メソッドの一覧
     clients:
         title: クライアント
+        create_new: 新しいクライアントを作成
     existing_clients:
         title: 既存のクライアント
         field_uris: リダイレクト URI
         field_grant_types: 許可の種類
         no_client: まだクライアントはありません。
+        field_secret: Client secret
+        field_id: Client ID
     remove:
         warn_message_1: クライアント %name% を削除することができます。この操作は不可逆的です !
         warn_message_2: 削除すると、そのクライアントで構成されているすべてのアプリはあなた wallabag で認証することができません。
@@ -417,10 +427,17 @@ developer:
         form:
             name_label: クライアントの名前
             redirect_uris_label: リダイレクト URI (オプション)
+            save_label: 新しいクライアントを作成
+        action_back: 戻る
+        page_title: APIクライアント管理 > 新しいクライアント
     client_parameter:
         page_description: これはクライアントのパラメーターです。
         field_name: クライアント名
         read_howto: '"最初のアプリケーションを作成する" 方法をお読みください'
+        back: 戻る
+        field_secret: Client secret
+        field_id: Client ID
+        page_title: APIクライアント管理 > クライアントのパラメーター
     howto:
         description:
             paragraph_2: あなたの第三者アプリケーションと wallabag API 間の通信にトークンが必要です。
@@ -428,6 +445,13 @@ developer:
             paragraph_5: 'API はこのようなレスポンスを返します:'
             paragraph_6: 'アクセストークンは API エンドポイントの呼び出しを行う際に便利です。例えば:'
             paragraph_7: この呼び出しは、ユーザーのすべてのエントリーが返されます。
+            paragraph_8: もしすべてのAPIエンドポイントを見たい場合、<a href="%link%">APIドキュメント</a>を見ることができます。
+            paragraph_3: このトークンを作成するために、<a href="%link%">新しいクライアントを作成</a>する必要があります。
+            paragraph_1: 以下のコマンドは<a href="https://github.com/jkbrzt/httpie">HTTPie library</a>を使用して作成しています。これを使用する前にあなたのシステムへインストールされていることを確認してください。
+        back: 戻る
+        page_title: APIクライアント管理 > 最初のアプリケーションを作成する方法
+    documentation: ドキュメント
+    page_title: APIクライアント管理
 user:
     edit_user: 既存のユーザーを編集
     description: ここですべてのユーザーを管理できます (作成、編集、および削除)
@@ -436,6 +460,25 @@ user:
         plain_password_label: パスワード
         enabled_label: 有効
         last_login_label: 最終ログイン
+        back_to_list: リストに戻る
+        delete_confirm: 本当によろしいですか？
+        delete: 削除
+        save: 保存
+        twofactor_label: 二要素認証
+        email_label: メールアドレス
+        repeat_new_password_label: 新しいパスワードを再記入
+        name_label: 名前
+        username_label: ユーザー名
+    search:
+        placeholder: ユーザー名かメールアドレスでフィルター
+    list:
+        create_new_one: 新しいユーザーを作成
+        no: いいえ
+        yes: はい
+        edit_action: 編集
+        actions: 操作
+    new_user: 新しいユーザーを作成
+    page_title: ユーザー管理
 error:
     page_title: エラーが発生しました
 flashes:
