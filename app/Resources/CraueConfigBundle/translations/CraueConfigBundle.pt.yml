@@ -29,4 +29,4 @@ matomo_host: Host de seu website Matomo
 matomo_site_id: ID de seu website Matomo
 matomo_enabled: Habilitar Matomo
 demo_mode_enabled: "Habilitar modo demo? (somente usado para o demo público do wallabag)"
-demo_mode_username: "Usuário demo"
+demo_mode_username: "Utilizador demo"

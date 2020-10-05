@@ -4,12 +4,12 @@ security:
         keep_logged_in: 'Mantenha-me autenticado'
         forgot_password: 'Esqueceu a senha?'
         submit: 'Login'
-        register: 'Registre-se'
-        username: 'Nome de usuário'
+        register: 'Registe-se'
+        username: 'Nome de utilizador'
         password: 'Senha'
         cancel: 'Cancelar'
     resetting:
-        description: 'Digite seu endereço de e-mail abaixo e enviaremos instruções para resetar sua senha.'
+        description: 'Digite o seu endereço de e-mail abaixo e enviaremos instruções para resetar a sua palavra-passe.'
     register:
         page_title: 'Criar uma conta'
         go_to_account: 'Ir para sua conta'
@@ -29,7 +29,7 @@ menu:
         search: 'Pesquisa'
         save_link: 'Salvar um link'
         back_to_unread: 'Voltar para os artigos não lidos'
-        users_management: 'Gestão de Usuários'
+        users_management: 'Gestão de Utilizadores'
     top:
         add_new_entry: 'Adicionar uma nova entrada'
         search: 'Pesquisa'
@@ -49,10 +49,10 @@ config:
     tab_menu:
         settings: 'Configurações'
         rss: 'RSS'
-        user_info: 'Informação do Usuário'
+        user_info: 'Informação do Utilizador'
         password: 'Senha'
         rules: 'Regras de tags'
-        new_user: 'Adicionar um usuário'
+        new_user: 'Adicionar um utilizador'
     form:
         save: 'Salvar'
     form_settings:
@@ -272,7 +272,7 @@ quickstart:
     admin:
         title: 'Administração'
         description: 'Como administrador você tem privilégios no wallabag. Você pode:'
-        new_user: 'Criar um novo usuário'
+        new_user: 'Criar um novo utilizador'
         analytics: 'Configurar o analytics'
         sharing: 'habilitar alguns parâmetros para compartilhamento de artigos'
         export: 'Configurar exportação'
@@ -342,7 +342,7 @@ import:
         description: Com este importador você importa todos os seus artigos do wallabag v2. Vá em Todos os artigos e então, na barra lateral de exportação, clique em "JSON". Você irá criar um ficheiro "All articles.json".
     readability:
         page_title: 'Importar > Readability'
-        description: 'Este importador pode importar todos os artigos do Readability. Nas página ferramentas (https://www.readability.com/tools/), clique em "Export your data" na seção "Data Export". Você receberá um e-mail para fazer o download de um json (que de fato não termina com .json).'
+        description: 'Este importador pode importar todos os artigos do Readability. Na página ferramentas (https://www.readability.com/tools/), clique em "Export your data" na secção "Data Export". Receberá um e-mail para descarregar um json (que de fato não termina com .json).'
         how_to: 'Por favor, selecione sua exportação do Readability e clique no botão abaixo para importá-la.'
     worker:
         enabled: "A importação é feita assíncronamente. Uma vez que a tarefa de importação é iniciada, um trabalho externo pode executar tarefas uma por vez. O serviço atual é:"
@@ -356,7 +356,7 @@ import:
         how_to: Por favor, escolha o ficheiro de backup dos favoritos e clique no botão abaixo para importá-lo. Note que o processo pode demorar até que todos os artigos tenham sido copiados.
     instapaper:
         page_title: 'Importar > Instapaper'
-        description: Este importador pode importar todos os artigos do seu Instapaper. Nas página de configurações (https://www.instapaper.com/user), clique em "Download .CSV file" na seção "Export". Um ficheiro CSV será descarregado (algo como "instapaper-export.csv").
+        description: Este importador pode importar todos os artigos do seu Instapaper. Na página de configurações (https://www.instapaper.com/user), clique em "Download .CSV file" na secção "Export". Um ficheiro CSV será descarregado (algo como "instapaper-export.csv").
         how_to: 'Por favor, selecione sua exportação do seu Instapaper e clique no botão abaixo para importá-la.'
 developer:
     welcome_message: 'Bem-vindo a API do wallabag'
@@ -400,22 +400,22 @@ developer:
             paragraph_4: 'Agora, crie seu token (altere client_id, client_secret, username e password com os valores corretos):'
             paragraph_5: 'A API pode retornar uma resposta como essa:'
             paragraph_6: 'O access_token é utilizável para fazer uma chamada para o endpoint da API. Por exemplo:'
-            paragraph_7: 'Esta chamada pode retornar todas as entradas de seu usuário.'
+            paragraph_7: 'Esta chamada pode retornar todas as entradas de seu utilizador.'
             paragraph_8: 'Se você deseja ver todos os endpoints da API, dê uma olhada <a href="%link%">em nossa documentação da API</a>.'
         back: 'Voltar'
 user:
-    page_title: 'Gerenciamento de Usuários'
-    new_user: 'Criar um novo usuário'
-    edit_user: 'Editar um usuário existente'
-    description: 'Aqui você gerencia todos os usuários (cria, edita e apaga)'
+    page_title: 'Gestão de utilizadores'
+    new_user: 'Criar um novo utilizador'
+    edit_user: 'Editar um utilizador existente'
+    description: 'Aqui você gerencia todos os utilizadores (cria, edita e apaga)'
     list:
         actions: 'Ações'
         edit_action: 'Editar'
         yes: 'Sim'
         no: 'Não'
-        create_new_one: 'Criar um novo usuário'
+        create_new_one: 'Criar um novo utilizador'
     form:
-        username_label: 'Nome de Usuário'
+        username_label: 'Nome de Utilizador'
         name_label: 'Nome'
         password_label: 'Senha'
         repeat_new_password_label: 'Repita a nova senha'
@@ -443,8 +443,8 @@ flashes:
     config:
         notice:
             config_saved: 'Configiração salva.'
-            password_updated: 'Senha atualizada'
-            password_not_updated_demo: 'Em modo de demonstração, você não pode alterar a senha deste usuário.'
+            password_updated: 'Palavra-passe atualizada'
+            password_not_updated_demo: 'Em modo de demonstração, não pode alterar a palavra-passe deste utilizador.'
             rss_updated: 'Informação de RSS atualizada'
             tagging_rules_updated: 'Regras de tags atualizadas'
             tagging_rules_deleted: 'Regra de tag apagada'
@@ -480,6 +480,6 @@ flashes:
             client_deleted: 'Cliente removido'
     user:
         notice:
-            added: 'Usuário "%username%" adicionado'
-            updated: 'Usuário "%username%" atualizado'
-            deleted: 'Usuário "%username%" removido'
+            added: 'Utilizador "%username%" adicionado'
+            updated: 'Utilizador "%username%" atualizado'
+            deleted: 'Utilizador "%username%" removido'

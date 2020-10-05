@@ -37,6 +37,8 @@ menu:
         all_articles: Všechny položky
         archive: Archiv
         unread: Nepřečtené
+        logout: Odhlásit se
+        import: Import
 config:
     form_rules:
         faq:
@@ -162,3 +164,8 @@ flashes:
             password_updated: Heslo bylo aktualizováno
 error:
     page_title: Vyskytla se chyba
+about:
+    getting_help:
+        documentation: Dokumentace
+    who_behind_wallabag:
+        version: Verze

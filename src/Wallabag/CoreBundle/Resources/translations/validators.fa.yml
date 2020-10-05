@@ -1,7 +1,7 @@
 validator:
-    password_must_match: رمزها باید یکی باشند
-    password_too_short: رمز شما باید حداقل ۸ کاراکتر باشد.
-    password_wrong_value: رمز فعلی را اشتباه وارد کرده‌اید.
+    password_must_match: گذرواژه‌ها باید یکی باشند.
+    password_too_short: گذرواژه شما باید حداقل ۸ حرف باشد.
+    password_wrong_value: گذواژه فعلی را اشتباه وارد کرده‌اید.
     item_per_page_too_high: با این تعداد برنامه به فنا می‌رود
     rss_limit_too_high: با این تعداد برنامه به فنا می‌رود
-    quote_length_too_high: متن انتخاب شده طولانی است. میبایست {{ limit }} کاراکتر یا کمتر باشد.
+    quote_length_too_high: نقل‌قول بسیار طولانی است. می‌بایست {{ limit }} حرف یا کمتر باشد.
