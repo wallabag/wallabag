@@ -150,7 +150,7 @@ entry:
         export_title: 'Exportar'
     filters:
         title: 'Filtros'
-        status_label: 'Status'
+        status_label: 'Estado'
         archived_label: 'Arquivado'
         starred_label: 'Destacado'
         unread_label: 'Não Lido'
