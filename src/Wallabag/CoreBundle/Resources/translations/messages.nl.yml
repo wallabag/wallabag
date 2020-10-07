@@ -1,1 +1,74 @@
-{}
+config:
+    form_settings:
+        action_mark_as_read:
+            redirect_current_page: Blijf op de huidige pagina
+            redirect_homepage: Ga naar de startpagina
+            label: Wat te doen na het verwijderen, markeren of lezen van een artikel?
+        reading_speed:
+            400_word: Ik lees ~400 woorden per minuut
+            300_word: Ik lees ~300 woorden per minuut
+            200_word: Ik lees ~200 woorden per minuut
+            100_word: Ik lees ~100 woorden per minuut
+            help_message: 'U can online tooling gebruiken om uw leessnelheid te bepalen:'
+            label: Leessnelheid
+        language_label: Taal
+        items_per_page_label: Items per pagina
+        theme_label: Thema
+    form:
+        save: Opslaan
+    tab_menu:
+        new_user: Voeg gebruiker toe
+        rules: Label regels
+        password: Wachtwoord
+        user_info: Gebruikers informatie
+        rss: RSS
+        settings: Instellingen
+    page_title: Configuratie
+footer:
+    stats: Sinds %user_creation% heeft u %nb_archives% artikelen gelezen. Dat is ongeveer %per_day% per dag!
+    wallabag:
+        about: Over
+        powered_by: mogelijk gemaakt door
+        social: Sociaal
+        elsewhere: Neem wallabag met u mee
+menu:
+    search_form:
+        input_label: Vul uw zoeksuggestie hier in
+    top:
+        export: Exporteer
+        filter_entries: Filter items
+        search: Zoeken
+        add_new_entry: Voeg nieuw item toe
+    left:
+        site_credentials: Site inloggegevens
+        users_management: Gebruikeresbeheer
+        back_to_unread: Terug naar ongelezen artikelen
+        save_link: Bewaar een link
+        search: Zoeken
+        about: Over
+        logout: Uitloggen
+        developer: API clients beheren
+        howto: Hoe
+        import: Importeer
+        internal_settings: Interne Instellingen
+        tags: Labels
+        config: Configuratie
+        all_articles: Alle items
+        archive: Archief
+        starred: Gemarkeerd
+        unread: Ongelezen
+security:
+    login:
+        password: Wachtwoord
+        cancel: Afbreken
+        username: Gebruikersnaam
+        register: Registreer
+        page_title: Welkom bij wallabag!
+        submit: Login
+        forgot_password: Wachtwoord vergeten?
+        keep_logged_in: Houdt mij ingelogd
+    register:
+        go_to_account: Ga naar uw account
+        page_title: Maak een account
+    resetting:
+        description: Voer uw e-mailadres hieronder in en wij sturen u instructies voor het opnieuw instellen van uw wachtwoord.
