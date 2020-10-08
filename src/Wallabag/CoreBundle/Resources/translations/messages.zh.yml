@@ -143,7 +143,7 @@ config:
         card:
             new_tagging_rule: "创建新的标签规则"
             import_tagging_rules: "导入标签规则"
-            import_tagging_rules_detail: "你需要选择你之前导出得到的 JSON 文件"
+            import_tagging_rules_detail: "你需要选择你之前导出得到的 JSON 文件."
             export_tagging_rules: "导出标签规则"
             export_tagging_rules_detail: "提供一个 JSON 文件供你下载，可以在别处导入或是用做备份。"
         file_label: "JSON 文件"
@@ -539,7 +539,7 @@ developer:
         field_id: 'Client ID'
         field_secret: '客户端 secret'
         back: '返回'
-        read_howto: '阅读教程 "如何创建我的第一个应用程序" '
+        read_howto: '阅读教程 "如何创建我的第一个应用程序"'
     howto:
         page_title: 'API 客户端管理 > 如何创建我的第一个应用程序'
         description:
