@@ -39,6 +39,7 @@ menu:
         unread: Nepřečtené
         logout: Odhlásit se
         import: Import
+        developer: Správa API klientů
 config:
     form_rules:
         faq:
@@ -49,6 +50,8 @@ config:
                 url: URL adresa položky
                 title: Název položky
                 label: Proměnná
+            operator_description:
+                greater_than: Větší než…
     form_user:
         name_label: Jméno
         delete:
@@ -76,10 +79,15 @@ config:
             all: Všechny
             archive: Archivované
             unread: Nepřečtené
+        token_create: Vytvořit váš token
+        no_token: Žádný token
     tab_menu:
         rss: RSS
         settings: Nastavení
         password: Heslo
+        new_user: Přidat uživatele
+    form:
+        save: Uložit
 security:
     register:
         page_title: Vytvořit účet
@@ -91,6 +99,7 @@ security:
         page_title: Vítejte ve wallabagu!
         password: Heslo
         username: Uživatelské jméno
+        keep_logged_in: Neodhlašovat mě
 tag:
     new:
         add: Přidat
@@ -115,11 +124,20 @@ developer:
         title: Existující klienti
     howto:
         back: Zpět
+        page_title: Správa API klientů > Jak vytvořit moji první aplikaci
     client:
         form:
             name_label: Název klienta
             save_label: Vytvořit nového klienta
         action_back: Zpět
+        page_title: Správa API klientů > Nový klient
+    client_parameter:
+        back: Zpět
+        field_id: ID klienta
+        field_name: Název klienta
+        page_title: Správa API klientů > Parametry klienta
+    page_title: Správa API klientů
+    how_to_first_app: Jak vytvořit moji první aplikaci
 user:
     form:
         enabled_label: Povoleno
@@ -158,6 +176,8 @@ import:
     form:
         save_label: Nahrát soubor
         file_label: Soubor
+    pocket:
+        connect_to_pocket: Připojit se k Pocketu a importovat data
 flashes:
     config:
         notice:
