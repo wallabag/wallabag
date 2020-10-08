@@ -32,11 +32,14 @@ menu:
         save_link: Linki kaydet
         users_management: Kullanıcı yönetimi
         site_credentials: Site bilgileri
+        quickstart: Hızlı başlangıç
     top:
         add_new_entry: Yeni bir makale ekle
         search: Ara
         filter_entries: Filtrele
         export: Dışa Aktar
+        account: Hesabım
+        random_entry: Bu listeden rastgele bir makaleye atla
     search_form:
         input_label: Aramak istediğiniz herhangi bir şey yazın
 footer:
@@ -55,6 +58,7 @@ config:
         password: Şifre
         rules: Etiketleme kuralları
         new_user: Bir kullanıcı ekle
+        feed: Akışlar
     form:
         save: Kaydet
     form_settings:
@@ -104,6 +108,16 @@ config:
             description: Eğer hesabınızı kaldırırsanız, TÜM makaleleriniz, TÜM etiketleriniz, TÜM açıklama metinleriniz ve hesabınız KALICI OLARAK kaldırılacak (bu işlem GERİ ALINAMAZ).
             confirm: Emin misiniz? (BU İŞLEM GERİ ALINAMAZ)
             button: Hesabımı sil
+        two_factor:
+            table_action: İşlem
+            googleTwoFactor_label: Tek seferlik parola (OTP) uygulaması kullanarak (tek seferlik bir kod almak için Google Authenticator, Authy veya FreeOTP gibi bir uygulamayı açın)
+            action_app: OTP uygulaması kullan
+            action_email: E-posta kullan
+            state_disabled: Devre dışı
+            state_enabled: Etkin
+            table_state: Durum
+            table_method: Yöntem
+            emailTwoFactor_label: E-posta kullanarak (e-posta ile bir kod alın)
     form_password:
         old_password_label: Eski şifre
         new_password_label: Yeni şifre
@@ -148,6 +162,15 @@ config:
         then_tag_as_label: ise, şu şekilde etiketle
         delete_rule_label: sil
         edit_rule_label: düzenle
+        export: Dışa Aktar
+        import_submit: İçe Aktar
+        file_label: JSON dosyası
+        card:
+            export_tagging_rules_detail: Bu, etiketleme kurallarını başka bir yere aktarmak veya yedeklemek için kullanabileceğiniz bir JSON dosyası indirecektir.
+            export_tagging_rules: Etiketleme kurallarını dışa aktar
+            import_tagging_rules_detail: Daha önce dışa aktardığınız JSON dosyasını seçmelisiniz.
+            import_tagging_rules: Etiketleme kurallarını içe aktar
+            new_tagging_rule: Etiketleme kuralı oluştur
     reset:
         title: Sıfırlama alanı (tehlikeli alan)
         description: Aşağıdaki butonlara basarak hesabınızdan bazı bilgileri kaldırabilirsiniz. Bu işlemlerin bazılarının GERİ DÖNDÜRÜLEMEZ olduğunu unutmayın.
@@ -156,6 +179,40 @@ config:
         entries: TÜM girdileri sil
         archived: TÜM arşivlenmiş girdileri sil
         confirm: Emin misiniz? (BU İŞLEM GERİ ALINAMAZ)
+    otp:
+        app:
+            two_factor_code_description_1: OTP iki aşamalı kimlik doğrulamasını etkinleştirdiniz, OTP uygulamanızı açın ve tek seferlik bir parola almak için bu kodu kullanın. Sayfa yeniden yüklendikten sonra kaybolacaktır.
+            enable: Etkinleştir
+            cancel: İptal
+            two_factor_code_description_4: 'Yapılandırılmış uygulamanızdan bir OTP kodunu test edin:'
+            two_factor_code_description_3: 'Ayrıca, bu yedek kodları güvenli bir yere kaydedin, OTP uygulamanıza erişiminizi kaybetmeniz durumunda kullanabilirsiniz:'
+            two_factor_code_description_2: 'Bu QR Kodunu uygulamanızla tarayabilirsiniz:'
+        page_title: İki aşamalı kimlik doğrulama
+    form_ignore_origin_rules:
+        faq:
+            operator_description:
+                equal_to: Eşittir…
+                label: Operatör
+            variable_description:
+                label: Değişken
+            meaning: Anlamı
+            variables_available_title: Kurallar içerisinde hangi değişken ve operatörleri kullanabilirim?
+            how_to_use_them_title: Bunu nasıl kullanırım?
+            title: S.S.S.
+    form_feed:
+        feed_limit: Akıştaki makale sayısı
+        feed_link:
+            all: Tümü
+            archive: Arşiv
+            starred: Favoriler
+            unread: Okunmamış
+        feed_links: Akış bağlantıları
+        token_revoke: Belirteci iptal edin
+        token_reset: Belirtecinizi yeniden oluşturun
+        token_create: Belirtecinizi oluşturun
+        no_token: Belirteç yok
+        token_label: Akış belirteci
+        description: wallabag tarafından sağlanan Atom akışları, kaydettiğiniz makaleleri favori Atom okuyucunuzla okumanızı sağlar. Önce bir belirteç (token) oluşturmanız gerekir.
 entry:
     default_title: Makalenin başlığı
     list:
@@ -347,6 +404,7 @@ quickstart:
         rss: RSS akışını aktifleştirme
         description: Tam olarak ihtiyaçlarınızı karşılar bir uygulama deneyimi yaşamak wallabag için ayarlar sayfasını inceleyebilirsiniz.
         tagging_rules: Makaleleri otomatik olarak etiketleme kuralları
+        feed: Akışları etkinleştir
     first_steps:
         title: İlk adım
         new_article: İlk makalenizi kaydedin
@@ -393,6 +451,8 @@ tag:
     list:
         number_on_the_page: '{0} Herhangi bir etiket yok.|{1} Burada bir adet etiket var.|]1,Inf[ Burada %count% adet etiket var.'
         see_untagged_entries: Etiketlenmemiş makaleleri görüntüle
+        untagged: Etiketlenmemiş makaleler
+        no_untagged_entries: Etiketlenmemiş makale yok.
     new:
         add: Ekle
         placeholder: Virgülle ayırarak birden fazla etiket ekleyebilirsiniz.
@@ -428,12 +488,12 @@ import:
         how_to: Lütfen Readability dışarı aktarılmış dosyanızı seçin ve de aşağıdaki butona basarak içe aktarın.
     firefox:
         page_title: İçe Aktar > Firefox
-        description: Bu içe aktarıcı Firefox yer imlerinizi içe aktaracak. Yer imleri sayfasınızı ziyaret ederek (Ctrl+Maj+O), ve ardından "İçe aktar ve Yedekle" menüsünden "Yedekle..." tuşuna basın. Bir .json dosyası alacaksınız.
-        how_to: Yer imleri yedek dosyasınızı seçip aşağıdaki butona tıklayarak içe aktarabilirsiniz. Bu işlem, tüm linklerin işlenip kaydedileceği için uzun zaman alabilir.
+        description: Bu içe aktarıcı tüm Firefox yer imlerinizi içe aktaracak. Yer imleri sayfanıza gidin (Ctrl+Maj+O), ve ardından "İçe aktar ve yedekle" menüsünden "Yedekle…" seçeneğini seçin. Bir JSON dosyası alacaksınız.
+        how_to: Yer imleri yedek dosyanızı seçip aşağıdaki butona tıklayarak içe aktarabilirsiniz. Bu işlem, tüm linkler işlenip kaydedileceği için uzun zaman alabilir.
     chrome:
         page_title: İçe Aktar > Chrome
         description: "Bu içe aktarıcı tüm Chrome yer imlerinizi içe aktaracak. Bu işlem işletim sisteminize göre değişebilir: <ul><li>Linux'ta, <code>~/.config/chromium/Default/</code> klasörüne gidin</li><li>Windows'ta, <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code> klasörüne gidin</li><li>macOS'ta <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code> klasörüne gidin</li></ul>Klasöre gittiğinizde <code>Bookmarks</code> dosyasını bir yere kopyalayın. <br><em>Eğer Chromium yerine Chrome kullanıyorsanız yolları ona göre düzeltmeniz gerekebilir.</em></p>"
-        how_to: Yer imleri yedek dosyanızı seçip aşağıdaki butona tıklayarak içeri aktarabilirsiniz. Bu işlem, tüm linklerin işlenip kaydedileceği için uzun zaman alabilir.
+        how_to: Yer imleri yedek dosyanızı seçip aşağıdaki butona tıklayarak içeri aktarabilirsiniz. Bu işlem, tüm linkler işlenip kaydedileceği için uzun zaman alabilir.
     instapaper:
         page_title: İçe Aktar > Instapaper
         description: Bu içe aktarıcı tüm Instapaper makalelerinizi içe aktaracak. Ayarlar sayfasında (https://www.instapaper.com/user) "Export" kısmından "Download .CSV file" linkine tıklayıp indirebilirsiniz. Bir CSV dosyası cihazınıza inecek ("instapaper-export.csv" gibi bir dosya).
@@ -445,6 +505,9 @@ import:
         page_title: İçe Aktar > Pinboard
         description: Bu içe aktarıcı tüm Pinboard makalelerinizi içe aktarır. Yedekleme sayfasında (https://pinboard.in/settings/backup) "Bookmarks" kısmında "JSON" seçeneğine tıklayın. Cihazınıza bir JSON dosyası inecek ("pinboard_export" gibi bir dosya).
         how_to: Pinboard dışa aktarım dosyanızı seçip aşağıdaki butona tıklayarak içe aktarabilirsiniz.
+    elcurator:
+        description: Bu içe aktarıcı tüm elCurator makalelerinizi içe aktaracak. elCurator hesabınızda tercihlerinize gidin ve ardından içeriğinizi dışa aktarın. Bir JSON dosyanız olacak.
+        page_title: İçe Aktar > elCurator
 user:
     form:
         username_label: Kullanıcı adı
@@ -460,6 +523,8 @@ user:
         delete: Sil
         delete_confirm: Emin misiniz?
         back_to_list: Listeye geri dön
+        twofactor_google_label: OTP uygulamasıyla iki aşamalı kimlik doğrulama
+        twofactor_email_label: E-posta ile iki aşamalı kimlik doğrulama
     page_title: Kullanıcı Yönetimi
     new_user: Yeni bir kullanıcı oluştur
     edit_user: Mevcut kullanıcıyı düzenle
@@ -487,6 +552,13 @@ flashes:
             tags_reset: Etiketler sıfırlandı
             entries_reset: Makaleler sıfırlandı
             archived_reset: Arşivlenmiş makaleler silindi
+            tagging_rules_not_imported: Etiketleme kuralları içe aktarılırken hata oluştu
+            tagging_rules_imported: Etiketleme kuralları içe aktarıldı
+            otp_disabled: İki aşamalı kimlik doğrulama devre dışı bırakıldı
+            otp_enabled: İki aşamalı kimlik doğrulama etkinleştirildi
+            feed_token_revoked: Akış belirteci iptal edildi
+            feed_token_updated: Akış belirteci güncellendi
+            feed_updated: Akış bilgileri güncellendi
     entry:
         notice:
             entry_already_saved: Makale zaten %date% tarihinde kaydedilmiş
@@ -500,9 +572,11 @@ flashes:
             entry_saved_failed: Makale kaydedildi, ama içeriği çekilemedi
             entry_updated: Makale güncellendi
             entry_reloaded_failed: Makale yeniden yüklendi, ama içeriği çekilemedi
+            no_random_entry: Bu koşullara sahip makale bulunamadı
     tag:
         notice:
             tag_added: Etiket eklendi
+            tag_renamed: Etiket yeniden adlandırıldı
     import:
         notice:
             failed: İçe aktarım başarısız, lütfen yeniden deneyin.
@@ -535,7 +609,7 @@ developer:
     documentation: Dökümantasyon
     how_to_first_app: İlk uygulamamı nasıl oluştururum
     full_documentation: API dökümantasyonunu görüntüle
-    list_methods: API metotlarını listele
+    list_methods: API yöntemlerini listele
     clients:
         title: İstemciler
         create_new: Yeni bir istemci oluştur
@@ -558,6 +632,7 @@ developer:
             redirect_uris_label: Yönlendirme URI (opsiyonel)
             save_label: Yeni bir istemci oluştur
         action_back: Geri
+        copy_to_clipboard: Kopyala
     client_parameter:
         page_title: API istemci yönetimi > İstemci parametreleri
         page_description: İstemci parametrelerinizi aşağıda bulabilirsiniz.
@@ -599,3 +674,15 @@ site_credential:
         back_to_list: Listeye geri dön
 error:
     page_title: Bir hata oluştu
+ignore_origin_instance_rule:
+    form:
+        back_to_list: Listeye geri dön
+        delete_confirm: Emin misiniz?
+        delete: Sil
+        save: Kaydet
+        rule_label: Kural
+    list:
+        no: Hayır
+        yes: Evet
+        edit_action: Düzenle
+        actions: İşlem
