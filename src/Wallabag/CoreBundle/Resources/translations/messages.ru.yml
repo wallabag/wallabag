@@ -33,11 +33,14 @@ menu:
         users_management: 'Управление пользователями'
         site_credentials: Реквизиты сайта
         ignore_origin_instance_rules: Глобальные правила игнорирования источника
+        quickstart: Быстрый старт
     top:
         add_new_entry: 'Добавить новую запись'
         search: 'Поиск'
         filter_entries: 'Фильтр записей'
         export: 'Экспорт'
+        account: Моя учётная запись
+        random_entry: Перейти к случайной записи из этого списка
     search_form:
         input_label: 'Введите текст для поиска'
 footer:
