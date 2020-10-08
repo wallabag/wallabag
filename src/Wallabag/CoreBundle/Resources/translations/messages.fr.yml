@@ -401,6 +401,7 @@ quickstart:
         language: Changez la langue et le design de l’application
         rss: Activez les flux RSS
         tagging_rules: Écrivez des règles pour classer automatiquement vos articles
+        feed: Activer les flux RSS
     admin:
         title: Administration
         description: 'En tant qu’administrateur sur wallabag, vous avez des privilèges qui vous permettent de :'
@@ -489,7 +490,7 @@ import:
         download_images_warning: Vous avez configuré le téléchargement des images pour vos articles. Combiné à l’import classique, cette opération peut être très longue (voire échouer). Nous vous conseillons <strong>vivement</strong> d’activer les imports asynchrones.
     firefox:
         page_title: Importer > Firefox
-        description: Cet outil importera tous vos marques-pages de Firefox. Ouvrez le panneau des marques-pages (Ctrl+Maj+O), puis dans « Importation et sauvegarde », choisissez « Sauvegarde… ». Vous récupérerez un fichier .json.
+        description: Cet outil importera tous vos marques-pages de Firefox. Ouvrez le panneau des marques-pages (Ctrl+Maj+O), puis dans « Importation et sauvegarde », choisissez « Sauvegarde… ». Vous récupérerez un fichier JSON.
         how_to: Choisissez le fichier de sauvegarde de vos marques-page et cliquez sur le bouton pour l’importer. Soyez avertis que le processus peut prendre un temps assez long car tous les articles doivent être récupérés en ligne.
     chrome:
         page_title: Importer > Chrome
@@ -503,6 +504,9 @@ import:
         page_title: Importer > Pinboard
         description: Sur la page « Backup » (https://pinboard.in/settings/backup), cliquez sur « JSON » dans la section « Bookmarks ». Un fichier json (sans extension) sera téléchargé (« pinboard_export »).
         how_to: Choisissez le fichier de votre export Pinboard et cliquez sur le bouton ci-dessous pour l’importer.
+    elcurator:
+        description: Cet outil va importer tous vos articles depuis elCurator. Allez dans vos préférences sur elCurator et exportez vos contenus. Vous allez récupérer un fichier JSON.
+        page_title: Importer > elCurator
 developer:
     page_title: Gestion des clients API
     welcome_message: Bienvenue sur l’API de wallabag
@@ -594,7 +598,7 @@ site_credential:
         create_new_one: Créer un nouvel accès à un site
     form:
         username_label: Identifiant
-        host_label: Domaine
+        host_label: Domaine (subdomain.example.org, .example.org, etc.)
         password_label: Mot de passe
         save: Sauvegarder
         delete: Supprimer
@@ -665,3 +669,25 @@ flashes:
             added: Accès au site « %host% » ajouté
             updated: Accès au site « %host% » mis à jour
             deleted: Accès au site « %host% » supprimé
+    ignore_origin_instance_rule:
+        notice:
+            deleted: Règle globale d'omission d'origine supprimée
+            updated: Règle globale d'omission d'origine mise à jour
+            added: Règle globale d'omission d'origine ajoutée
+ignore_origin_instance_rule:
+    list:
+        create_new_one: Créer une règle globale d'omission d'origine
+        no: Non
+        yes: Oui
+        edit_action: Éditer
+        actions: Actions
+    description: Ici vous pouvez gérer les règles globales d'omission d'origine utilisées pour ignorer des modèles d'url d'origine.
+    edit_ignore_origin_instance_rule: Éditer une règle globale d'omission d'origine
+    new_ignore_origin_instance_rule: Créer une règle globale d'omission d'origine
+    page_title: Règles globales d'omission d'origine
+    form:
+        back_to_list: Revenir à la liste
+        delete_confirm: Êtes-vous sûr ?
+        delete: Supprimer
+        save: Sauvegarder
+        rule_label: Règle
