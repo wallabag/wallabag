@@ -23,7 +23,7 @@ menu:
         tags: 'Теги'
         internal_settings: 'Внутренние настройки'
         import: 'Импорт'
-        howto: 'Как'
+        howto: 'Справка'
         developer: 'Настройки клиентского API'
         logout: 'Выход'
         about: 'о wallabag'
@@ -32,6 +32,7 @@ menu:
         back_to_unread: 'Назад к непрочитанным записям'
         users_management: 'Управление пользователями'
         site_credentials: Реквизиты сайта
+        ignore_origin_instance_rules: Глобальные правила игнорирования источника
     top:
         add_new_entry: 'Добавить новую запись'
         search: 'Поиск'
@@ -55,6 +56,9 @@ config:
         password: 'Пароль'
         rules: 'Правила настройки простановки тегов'
         new_user: 'Добавить пользователя'
+        reset: Сброс
+        ignore_origin: Правила игнорирования источника
+        feed: Ленты
     form:
         save: 'Сохранить'
     form_settings:
@@ -104,6 +108,17 @@ config:
             description: "Если Вы удалите ваш аккаунт, ВСЕ ваши записи, теги и другие данные, будут БЕЗВОЗВРАТНО удалены (операция не может быть отменена после). Затем Вы выйдете из системы."
             confirm: "Вы точно уверены? (Данные будут БЕЗВОЗВРАТНО удалены, эти действия необратимы)"
             button: "Удалить мой аккаунт"
+        two_factor:
+            action_app: Использовать OTP-приложение
+            action_email: Использовать е-мейл
+            state_disabled: Выключено
+            state_enabled: Включено
+            table_action: Действие
+            table_state: Состояние
+            table_method: Метод
+            googleTwoFactor_label: Используя OTP-приложение (откройте приложение, например, Google Authenticator, Authy или FreeOTP, чтобы получить одноразовый код)
+            emailTwoFactor_label: Используя электронную почту (получить код по электронной почте)
+        login_label: Логин (не может быть изменён)
     reset:
         title: "Сброс данных (или опасная зона)"
         description: "По нажатию на кнопки ниже, Вы сможете удалить часть данных из Вашего аккаунта. Будьте осторожны, эти действия необратимы."
@@ -146,16 +161,66 @@ config:
                 domainName: 'Домен, с которого была скачана запись'
             operator_description:
                 label: 'Оператор'
-                less_than: 'Меньше чем...'
-                strictly_less_than: 'Строго меньше чем...'
-                greater_than: 'Больше чем...'
-                strictly_greater_than: 'Строго больше чем...'
-                equal_to: 'Равно...'
-                not_equal_to: 'Не равно...'
+                less_than: 'Меньше чем…'
+                strictly_less_than: 'Строго меньше чем…'
+                greater_than: 'Больше чем…'
+                strictly_greater_than: 'Строго больше чем…'
+                equal_to: 'Равно…'
+                not_equal_to: 'Не равно…'
                 or: 'Одно правило ИЛИ другое'
                 and: 'Одно правило И другое'
                 matches: 'Тесты, в которых <i> тема </i> соответствует <i> поиску </i> (без учета регистра). <br />Пример: <code> title matches "футбол" </code>'
                 notmatches: 'Тесты, в которых <i> объект </i> не соответствует <i> поиску </i> (без учета регистра). <br/>Пример: <code> название совпадает "футбол" </code>'
+        export: Экспортировать
+        card:
+            export_tagging_rules: Экспорт правил тегирования
+            export_tagging_rules_detail: Это загрузит JSON-файл, который вы можете использовать для импорта правил тегирования в другом месте или для их резервного копирования.
+            import_tagging_rules_detail: Вы должны выбрать JSON-файл, который вы ранее экспортировали.
+            import_tagging_rules: Импортировать правила тегирования
+            new_tagging_rule: Создать правило тегирования
+        import_submit: Импортировать
+        file_label: JSON-файл
+    otp:
+        app:
+            cancel: Отменить
+            enable: Включить
+            two_factor_code_description_4: 'Проверьте OTP-код из настроенного приложения:'
+            two_factor_code_description_3: 'Также, сохраните эти резервные коды в безопасном месте, вы можете использовать их в случае потери доступа к вашему OTP-приложению:'
+            two_factor_code_description_2: 'Вы можете отсканировать этот QR-код своим приложением:'
+            two_factor_code_description_1: Вы только что включили двухфакторную аутентификацию OTP, откройте OTP-приложение и используйте этот код, чтобы получить одноразовый пароль. Он исчезнет после перезагрузки страницы.
+        page_title: Двухфакторная аутентификация
+    form_ignore_origin_rules:
+        faq:
+            operator_description:
+                matches: 'Проверяет, что <i>объект</i> соответствует <i>поиску</i> (без учёта регистра).<br />Пример: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
+                equal_to: Равно…
+                label: Оператор
+            variable_description:
+                _all: Полный адрес, в основном для сопоставления с шаблоном
+                host: Хост адреса
+                label: Переменная
+            meaning: Значение
+            variables_available_description: 'Следующие переменные и операторы могут быть использованы для создания правил игнорирования источника:'
+            variables_available_title: Какие переменные и операторы я могу использовать для написания правил?
+            how_to_use_them_description: Допустим, вы хотите игнорировать источник записи, поступающей с «<i>rss.example.com</i>» (<i>зная, что после перенаправления фактическим адресом является example.com</i>).<br />В этом случае вам следует указать «host = "rss.example.com"» в поле <i>Правило</i>.
+            how_to_use_them_title: Как их использовать?
+            ignore_origin_rules_definition_description: Они используются wallabag для автоматического игнорирования исходного адреса после перенаправления.<br />Если перенаправление происходит во время получения новой записи, все правила игнорирования источника (<i>определённые пользователем и глобальные</i>) будут использоваться для игнорирования исходного адреса.
+            ignore_origin_rules_definition_title: Что означает «правила игнорирования источника»?
+            title: Часто задаваемые вопросы
+    form_feed:
+        feed_limit: Количество элементов в ленте
+        feed_link:
+            all: Все
+            archive: Архивные
+            starred: Помеченные
+            unread: Непрочитанные
+        feed_links: Ссылки на ленты
+        token_revoke: Аннулировать токен
+        token_reset: Пересоздать токен
+        token_create: Создать токен
+        no_token: Нет токена
+        token_label: Токен ленты
+        description: Новостные ленты Atom, предоставляемые wallabag, позволяют читать сохранённые статьи при помощи предпочитаемой вами Atom-читалки. Сначала вам нужно сгенерировать токен.
 entry:
     default_title: 'Название записи'
     page_titles:
@@ -211,7 +276,7 @@ entry:
             set_as_read: 'Пометить, как прочитанное'
             set_as_unread: 'Пометить, как не прочитанное'
             set_as_starred: 'Пометить звездочкой'
-            view_original_article: 'Оригинальное название'
+            view_original_article: 'Оригинальная статья'
             re_fetch_content: 'Перезагрузить содержимое'
             delete: 'Удалить'
             add_a_tag: 'Добавить тег'
@@ -248,10 +313,11 @@ entry:
     public:
         shared_by_wallabag: "Запись была опубликована <a href='%wallabag_instance%'>wallabag</a>"
     metadata:
-        added_on: Добавлено на
+        added_on: Добавлено
         address: Адрес
         reading_time_minutes_short: '%readingTime% мин'
         reading_time: Приблизительное время чтения
+        published_on: Опубликовано
     confirm:
         delete_tag: Вы уверены, что хотите удалить этот тег из статьи?
         delete: Вы уверены, что хотите удалить эту статью?
@@ -327,7 +393,7 @@ howto:
         list_title: "Горячие клавиши, доступные на страницу списков"
         search: "Отобразить форму поиска"
         article_title: "Горячие клавиши доступные во время просмотра записи"
-        open_original: "Открыть оригинальную ссылку на запись"
+        open_original: "Открыть ссылку на оригинал"
         toggle_favorite: "Переключить пометку звездочкой для записи"
         toggle_archive: "Переключить пометку о прочтении для записи"
         delete: "Удалить запись"
@@ -349,6 +415,7 @@ quickstart:
         language: 'Выбрать язык и дизайн'
         rss: 'Включить RSS фид'
         tagging_rules: 'Создать правило для автоматической установки тегов'
+        feed: Включить ленты
     admin:
         title: 'Администрирование'
         description: 'Как администратор, у Вас есть привилегии на wallabag. Вы можете:'
@@ -394,6 +461,8 @@ tag:
     list:
         number_on_the_page: '{0} Теги не найдены.|{1} Найден один тег.|]1,Inf[ Найдено %count% тегов.'
         see_untagged_entries: 'Просмотреть записи без тегов'
+        untagged: Записи без тегов
+        no_untagged_entries: Нет записей без тегов.
     new:
         add: 'Добавить'
         placeholder: 'Вы можете добавить несколько тегов, разделенных запятой.'
@@ -432,7 +501,7 @@ import:
         download_images_warning: "Вы включили загрузку изображений для своих записей. В сочетании с обычным импортом может потребоваться много времени, что может привести к ошибке. Мы <strong>настоятельно рекомендуем</strong> включить асинхронный импорт, чтобы избежать ошибок."
     firefox:
         page_title: 'Импорт > Firefox'
-        description: "Функция импорта добавит все ваши закладки из Firefox. Просто зайдите в закладки (Ctrl + Maj + O), затем в \"Импорт и резервное копирование\", выберите \"Резервное копирование ...\". Вы получите файл .json."
+        description: "Этот импортер импортирует все ваши закладки из Firefox. Просто зайдите в закладки (Ctrl+Shift+O), затем в \"Импорт и резервное копирование\", выберите \"Резервное копирование…\". Вы получите JSON-файл."
         how_to: "Выберите файл резервной копии закладок и нажмите кнопку ниже, чтобы импортировать его. Обратите внимание, что процесс может занять много времени, поскольку все статьи должны быть загружены."
     chrome:
         page_title: 'Импорт > Chrome'
@@ -446,6 +515,9 @@ import:
         page_title: "Импорт > Pinboard"
         description: 'Функция импорта добавит все ваши закладки из Pinboard. На странице резервирования (https://pinboard.in/settings/backup), нажмите на "JSON" в разделе "Закладки". JSON файл будет загружен (наподобии "pinboard_export").'
         how_to: 'Выберите файл Pinboard и нажмите кнопку ниже, чтобы импортировать его.'
+    elcurator:
+        description: Этот импортер импортирует все ваши статьи из elCurator. Зайдите в настройки в учётной записи elCurator и экспортируйте свой контент. У вас будет JSON-файл.
+        page_title: Импорт > elCurator
 developer:
     page_title: 'Управление клиентским API'
     welcome_message: 'Добро пожаловать в API wallabag'
@@ -475,6 +547,7 @@ developer:
             redirect_uris_label: 'Ссылка перенаправления (опционально)'
             save_label: 'Создать нового клиента'
         action_back: 'Назад'
+        copy_to_clipboard: Копировать
     client_parameter:
         page_title: 'Управление клиентским API > Параметры клиента'
         page_description: 'Здесь ваши параметры клиента.'
@@ -520,6 +593,8 @@ user:
         delete: "Удалить"
         delete_confirm: "Вы уверены?"
         back_to_list: "Назад к списку"
+        twofactor_google_label: Двухфакторная аутентификация с помощью OTP-приложения
+        twofactor_email_label: Двухфакторная аутентификация по электронной почте
     search:
         placeholder: Фильтр по имени пользователя или электронной почте
 error:
@@ -539,6 +614,15 @@ flashes:
             tags_reset: "Теги сброшены"
             entries_reset: "Записи сброшены"
             archived_reset: Архивные записи удалены
+            ignore_origin_rules_updated: Правило игнорирования источника обновлено
+            ignore_origin_rules_deleted: Правило игнорирования источника удалено
+            tagging_rules_not_imported: Ошибка при импорте правил тегирования
+            tagging_rules_imported: Правила тегирования импортированы
+            otp_disabled: Двухфакторная аутентификация отключена
+            otp_enabled: Двухфакторная аутентификация включена
+            feed_token_revoked: Токен ленты аннулирован
+            feed_token_updated: Токен ленты обновлён
+            feed_updated: Информация о ленте обновлена
     entry:
         notice:
             entry_already_saved: 'Запись была сохранена ранее %date%'
@@ -552,9 +636,11 @@ flashes:
             entry_starred: 'Запись помечена звездочкой'
             entry_unstarred: 'Пометка звездочкой у записи убрана'
             entry_deleted: 'Запись удалена'
+            no_random_entry: Статьи с этими критериями не найдены
     tag:
         notice:
             tag_added: 'Тег добавлен'
+            tag_renamed: Тег переименован
     import:
         notice:
             failed: 'Во время импорта произошла ошибка, повторите попытку.'
@@ -578,6 +664,11 @@ flashes:
             deleted: Реквизиты для "%host%" удалены
             updated: Реквизиты для "%host%" обновлены
             added: Добавлены реквизиты для "%host%"
+    ignore_origin_instance_rule:
+        notice:
+            deleted: Глобальное правило игнорирования источника удалено
+            updated: Глобальное правило игнорирования источника обновлено
+            added: Глобальное правило игнорирования источника добавлено
 site_credential:
     form:
         back_to_list: Назад к списку
@@ -585,8 +676,8 @@ site_credential:
         delete: Удалить
         save: Сохранить
         password_label: Пароль
-        host_label: Хост
-        username_label: Имя пользователя
+        host_label: Хост (subdomain.example.org, .example.org и т.п.)
+        username_label: Логин
     list:
         create_new_one: Создать реквизиты
         no: Нет
@@ -600,3 +691,20 @@ site_credential:
 export:
     unknown: Неизвестный
     footer_template: <div style="text-align:center;"><p>Создано wallabag с помощью %method%</p><p> Пожалуйста, откройте <a href="https://github.com/wallabag/wallabag/issues">проблемы</a>, если у вас возникли проблемы с отображением этой электронной книги на вашем устройстве.</p></div>
+ignore_origin_instance_rule:
+    form:
+        back_to_list: Вернуться к списку
+        delete_confirm: Вы уверены?
+        delete: Удалить
+        save: Сохранить
+        rule_label: Правило
+    list:
+        create_new_one: Создать новое глобальное правило игнорирования источника
+        no: Нет
+        yes: Да
+        edit_action: Редактировать
+        actions: Действия
+    description: Здесь вы можете управлять глобальными правилами игнорирования источника, используемыми для игнорирования некоторых шаблонов исходного URL.
+    edit_ignore_origin_instance_rule: Редактировать существующее правило игнорирования источника
+    new_ignore_origin_instance_rule: Создать глобальное правило игнорирования источника
+    page_title: Глобальные правила игнорирования источника
