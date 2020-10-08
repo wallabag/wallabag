@@ -488,7 +488,7 @@ import:
         how_to: Lütfen Readability dışarı aktarılmış dosyanızı seçin ve de aşağıdaki butona basarak içe aktarın.
     firefox:
         page_title: İçe Aktar > Firefox
-        description: Bu içe aktarıcı tüm Firefox yer imlerinizi içe aktaracak. Yer imleri sayfanıza gidin (Ctrl+Maj+O), ve ardından "İçe aktar ve yedekle" menüsünden "Yedekle…" seçeneğini seçin. Bir JSON dosyası alacaksınız.
+        description: Bu içe aktarıcı tüm Firefox yer imlerinizi içe aktaracak. Yer imleri sayfanıza gidin (Ctrl+Shift+O), ve ardından "İçe aktar ve yedekle" menüsünden "Yedekle…" seçeneğini seçin. Bir JSON dosyası alacaksınız.
         how_to: Yer imleri yedek dosyanızı seçip aşağıdaki butona tıklayarak içe aktarabilirsiniz. Bu işlem, tüm linkler işlenip kaydedileceği için uzun zaman alabilir.
     chrome:
         page_title: İçe Aktar > Chrome
