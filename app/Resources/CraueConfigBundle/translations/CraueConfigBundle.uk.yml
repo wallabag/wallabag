@@ -28,8 +28,8 @@ import: імпорт
 misc: інше
 modify_settings: застосувати
 matomo_host: Host вашого сайту в Piwik (без http:// чи https://)
-matomo_site_id: ID вашого сайту в Piwik/Matomo
-matomo_enabled: Увімкнути Piwik/Matomo
+matomo_site_id: ID вашого сайту в Piwik
+matomo_enabled: Увімкнути Piwik
 demo_mode_enabled: Увімкнути демо-режим? (Використовується тільки для публічних демонстрацій wallabag)
 demo_mode_username: Демо-користувач
 share_public: Дозволити публічні посилання на статті
