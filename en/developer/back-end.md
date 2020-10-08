@@ -10,7 +10,7 @@ To install PHP dependencies, build the `dev` version of the front-end, configure
 make dev
 ```
 
-Note that you will need [npm](https://nodejs.org/en/download/) and [yarn](https://yarnpkg.com/en/docs/install) to build the front-end `dev` version.
+Note that you will need [yarn](https://yarnpkg.com/en/docs/install) to build the front-end `dev` version.
 
 ## Linting
 
