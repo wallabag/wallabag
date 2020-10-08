@@ -31,8 +31,8 @@ run: ## Run the wallabag built-in server
 	@php bin/console server:run --env=dev
 
 build: ## Run webpack
-	@npm install
-	@npm run build:$(ENV)
+	@yarn install
+	@yarn build:$(ENV)
 
 prepare: clean ## Prepare database for testsuite
 ifdef DB
