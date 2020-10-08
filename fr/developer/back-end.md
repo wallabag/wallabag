@@ -10,7 +10,7 @@ Pour installer les dépendances PHP, construire la version `dev` du front-end, c
 make dev
 ```
 
-Notez que vous aurez besoin de [npm](https://nodejs.org/fr/download/) et [yarn](https://yarnpkg.com/fr/docs/install) pour construire la version `dev` du front-end.
+Notez que vous aurez besoin de [yarn](https://yarnpkg.com/fr/docs/install) pour construire la version `dev` du front-end.
 
 ## Linting
 

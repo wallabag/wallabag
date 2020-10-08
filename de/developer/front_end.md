@@ -8,10 +8,10 @@ Mit der Version 2.3 nutzt wallabag webpack, um seine Assets zu packen.
 
 ## Entwicklermodus
 
-Wenn der Server im Entwicklermodus läuft, musst du `yarn run build:dev`
+Wenn der Server im Entwicklermodus läuft, musst du `yarn build:dev`
 ausführen, um die JavaScript-Dateien für jedes Designthema zu generieren.
 Diese Dateien werden `%thema%.dev.js` genannt und werden von git
-ignoriert. Du musst jedes Mal `yarn run build:dev` erneut ausführen,
+ignoriert. Du musst jedes Mal `yarn build:dev` erneut ausführen,
 sobald auch nur eine der Asset-Dateien (js, css, Bilder, Schriftarten,
 ...).
 
@@ -23,7 +23,7 @@ Assets für jede Änderung neu genieren musst und auch nicht die Seite
 manuell neu laden musst. Änderungen werden automatisch in der Seite
 widergespiegelt. Setze nut die Option `use_webpack_dev_server` auf den
 Wert `true` in der Datei `app/config/config.yml` und führe
-`yarn run watch` aus und es geht los.
+`yarn watch` aus und es geht los.
 
 Vergiss nicht `use_webpack_dev_server` wieder auf `false` zu setzen,
 wenn du die Funktionalität Live Neuladen nicht mehr nutzen möchtest.
@@ -32,7 +32,7 @@ wenn du die Funktionalität Live Neuladen nicht mehr nutzen möchtest.
 ## Produktions-Builds
 
 Wenn du deine Änderungen nutzen willst, baue sie in der
-Produktionsumgebung durch das Ausführen von `yarn run build:prod`.
+Produktionsumgebung durch das Ausführen von `yarn build:prod`.
 Dies wird alle Assets für wallabag erstellen. Um zu testen, dass
 alles ordentlich funktioniert, wirst du einen im Produktionsmodus
 laufenden Server bruachen, z.B. mit
