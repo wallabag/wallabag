@@ -9,8 +9,7 @@ security:
         password: Senhal
         cancel: Anullar
     resetting:
-        description: Picatz vòstra adreça de corrièl çai-jos, vos mandarem las instruccions
-            per reïnicializar vòstre senhal.
+        description: Picatz vòstra adreça de corrièl çai-jos, vos mandarem las instruccions per reïnicializar vòstre senhal.
     register:
         page_title: Crear un compte
         go_to_account: Anar a vòstre compte
@@ -46,8 +45,7 @@ footer:
         social: Social
         powered_by: propulsat per
         about: A prepaus
-    stats: Dempuèi %user_creation% avètz legit %nb_archives% articles. Es a l'entorn
-        de %per_day% per jorn !
+    stats: Dempuèi %user_creation% avètz legit %nb_archives% articles. Es a l'entorn de %per_day% per jorn !
 config:
     page_title: Configuracion
     tab_menu:
@@ -65,8 +63,7 @@ config:
         language_label: Lenga
         reading_speed:
             label: Velocitat  de lectura
-            help_message: 'Podètz utilizar una aisina en linha per estimar vòstra velocitat
-                de lectura :'
+            help_message: 'Podètz utilizar una aisina en linha per estimar vòstra velocitat de lectura :'
             100_word: Legissi a l'entorn de 100 mots per minuta
             200_word: Legissi a l'entorn de 200 mots per minuta
             300_word: Legissi a l'entorn de 300 mots per minuta
@@ -80,16 +77,11 @@ config:
         android_instruction: Tocatz aquí per garnir las informacions de l'aplicacion Android
         help_theme: wallabag es personalizable. Podètz causir vòstre tèma preferit aquí.
         help_items_per_page: Podètz cambiar lo nombre d'articles afichats per pagina.
-        help_reading_speed: wallabag calcula lo temps de lectura per cada article. Podètz
-            lo definir aquí, gràcias a aquesta lista, se sètz un legeire rapid o lent. wallabag
-            tornarà calcular lo temps de lectura per cada article.
+        help_reading_speed: wallabag calcula lo temps de lectura per cada article. Podètz lo definir aquí, gràcias a aquesta lista, se sètz un legeire rapid o lent. wallabag tornarà calcular lo temps de lectura per cada article.
         help_language: Podètz cambiar la lenga de l'interfàcia de wallabag.
-        help_pocket_consumer_key: Requesida per l'importacion de Pocket. Podètz la crear
-            dins vòstre compte Pocket.
+        help_pocket_consumer_key: Requesida per l'importacion de Pocket. Podètz la crear dins vòstre compte Pocket.
     form_rss:
-        description: Los fluxes RSS fornits per wallabag vos permeton de legir vòstres
-            articles salvagardats dins vòstre lector de fluxes preferit. Per los poder emplegar,
-            vos cal, d'en primièr crear un geton.
+        description: Los fluxes RSS fornits per wallabag vos permeton de legir vòstres articles salvagardats dins vòstre lector de fluxes preferit. Per los poder emplegar, vos cal, d'en primièr crear un geton.
         token_label: Geton RSS
         no_token: Pas cap de geton generat
         token_create: Creatz vòstre geton
@@ -102,32 +94,26 @@ config:
             all: Totes
         rss_limit: Nombre d'articles dins un flux RSS
     form_user:
-        two_factor_description: Activar l'autentificacion en dos temps vòl dire que recebretz
-            un còdi per corrièl per cada novèla connexion pas aprovada.
+        two_factor_description: Activar l'autentificacion en dos temps vòl dire que recebretz un còdi per corrièl per cada novèla connexion pas aprovada.
         name_label: Nom
         email_label: Adreça de corrièl
         twoFactorAuthentication_label: Dobla autentificacion
-        help_twoFactorAuthentication: S'avètz activat l'autentificacion en dos temps,
-            cada còp que volètz vos connectar a wallabag, recebretz un còdi per corrièl.
+        help_twoFactorAuthentication: S'avètz activat l'autentificacion en dos temps, cada còp que volètz vos connectar a wallabag, recebretz un còdi per corrièl.
         delete:
             title: Suprimir mon compte (Mèfi zòna perilhosa)
-            description: Se confirmatz la supression de vòstre compte, TOTES vòstres articles,
-                TOTAS vòstras etiquetas, TOTAS vòstras anotacions e vòstre compte seràn suprimits
-                per totjorn. E aquò es IRREVERSIBLE. Puèi seretz desconnectat.
+            description: Se confirmatz la supression de vòstre compte, TOTES vòstres articles, TOTAS vòstras etiquetas, TOTAS vòstras anotacions e vòstre compte seràn suprimits per totjorn. E aquò es IRREVERSIBLE. Puèi seretz desconnectat.
             confirm: Sètz vertadièrament segur ? (AQUÒ ES IRREVERSIBLE)
             button: Suprimir mon compte
     reset:
         title: Zòna de reïnicializacion (Mèfi zòna perilhosa)
-        description: En clicant sul boton çai-jos auretz la possibilitat de levar qualques
-            informacions de vòstre compte. Mèfi que totas aquelas accions son IRREVERSIBLAS.
+        description: En clicant sul boton çai-jos auretz la possibilitat de levar qualques informacions de vòstre compte. Mèfi que totas aquelas accions son IRREVERSIBLAS.
         annotations: Levar TOTAS las anotacions
         tags: Levar TOTAS las etiquetas
         entries: Levar TOTES los articles
         archived: Levar TOTES los articles archivats
         confirm: Sètz vertadièrament segur ? (AQUÒ ES IRREVERSIBLE)
     form_password:
-        description: Podètz cambiar vòstre senhal aquí. Vòstre senhal deu èsser long d'almens
-            8 caractèrs.
+        description: Podètz cambiar vòstre senhal aquí. Vòstre senhal deu èsser long d'almens 8 caractèrs.
         old_password_label: Senhal actual
         new_password_label: Senhal novèl
         repeat_new_password_label: Confirmatz vòstre novèl senhal
@@ -141,25 +127,11 @@ config:
         faq:
             title: FAQ
             tagging_rules_definition_title: Qué significa las règlas d'etiquetas automaticas ?
-            tagging_rules_definition_description: Son de règlas utilizadas per wallabad
-                per classar automaticament vòstres novèls articles.<br />Cada còp qu'un novèl
-                article es apondut, totas las règlas d'etiquetas automaticas seràn utilizadas
-                per ajustar d'etiquetas qu'avètz configuradas, en vos esparnhant l'esfòrç
-                de classificar vòstres articles manualament.
+            tagging_rules_definition_description: Son de règlas utilizadas per wallabad per classar automaticament vòstres novèls articles.<br />Cada còp qu'un novèl article es apondut, totas las règlas d'etiquetas automaticas seràn utilizadas per ajustar d'etiquetas qu'avètz configuradas, en vos esparnhant l'esfòrç de classificar vòstres articles manualament.
             how_to_use_them_title: Cossí las utilizar ?
-            how_to_use_them_description: Imaginem que volètz atribuir als novèls article
-                l'etiqueta « <i>lectura corta</i> » quand lo temps per legir es inferior a
-                3 minutas.<br />Dins aquel cas, deuriatz metre « readingTime &lt;= 3 » dins
-                lo camp <i>Règla</i> e « <i>lectura corta</i> » dins lo camp <i>Etiqueta</i>.<br
-                />Mai d'una etiquetas pòdon èsser apondudas simultanèament ne las separant
-                amb de virgulas : « <i>lectura corta, per ligir</i> »<br />De règlas complèxas
-                pòdon èsser creadas n'emplegant d'operators predefinits : se « <i>readingTime
-                &gt;= 5 AND domainName = "github.com"</i> » alara atribuir las etiquetas «
-                <i>lectura longa, github </i> »
-            variables_available_title: Quinas variablas e operators pòdi utilizar per escriure
-                de règlas ?
-            variables_available_description: Las variablas e operators seguents pòdon èsser
-                utilizats per escriure de règlas d'etiquetas automaticas : 
+            how_to_use_them_description: Imaginem que volètz atribuir als novèls article l'etiqueta « <i>lectura corta</i> » quand lo temps per legir es inferior a 3 minutas.<br />Dins aquel cas, deuriatz metre « readingTime &lt;= 3 » dins lo camp <i>Règla</i> e « <i>lectura corta</i> » dins lo camp <i>Etiqueta</i>.<br />Mai d'una etiquetas pòdon èsser apondudas simultanèament ne las separant amb de virgulas : « <i>lectura corta, per ligir</i> »<br />De règlas complèxas pòdon èsser creadas n'emplegant d'operators predefinits : se « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » alara atribuir las etiquetas « <i>lectura longa, github </i> »
+            variables_available_title: Quinas variablas e operators pòdi utilizar per escriure de règlas ?
+            variables_available_description: Las variablas e operators seguents pòdon èsser utilizats per escriure de règlas d'etiquetas automaticas : 
             meaning: Significacion
             variable_description:
                 label: Variabla
@@ -174,7 +146,7 @@ config:
                 domainName: Lo nom de domeni de l'article
             operator_description:
                 label: Operator
-                less_than: Mens que…...
+                less_than: Mens que…
                 strictly_less_than: Estrictament mens que…
                 greater_than: Mai que…
                 strictly_greater_than: Estrictament mai que…
@@ -182,10 +154,8 @@ config:
                 not_equal_to: Diferent de…
                 or: Una règla O l'autra
                 and: Una règla E l'autra
-                matches: Teste se un <i>subjècte</i> correspond a una <i>recèrca</i> (non
-                    sensibla a la cassa).<br />Exemple : <code>title matches \"football\"</code>
-                notmatches: Teste se <i>subjècte</i> correspond pas a una <i>recèrca</i> (sensibla
-                    a la cassa).<br />Example : <code>title notmatches "football"</code>
+                matches: Teste se un <i>subjècte</i> correspond a una <i>recèrca</i> (non sensibla a la cassa).<br />Exemple : <code>title matches \"football\"</code>
+                notmatches: Teste se <i>subjècte</i> correspond pas a una <i>recèrca</i> (sensibla a la cassa).<br />Example : <code>title notmatches "football"</code>
 entry:
     default_title: Títol de l'article
     page_titles:
@@ -198,8 +168,7 @@ entry:
         untagged: Articles sens etiqueta
         all: Totes los articles
     list:
-        number_on_the_page: "{0} I a pas cap d'article.|{1} I a un article.|]1,Inf[ I\
-            \ a %count% articles."
+        number_on_the_page: "{0} I a pas cap d'article.|{1} I a un article.|]1,Inf[ I a %count% articles."
         reading_time: durada de lectura
         reading_time_minutes: durada de lectura : %readingTime% min
         reading_time_less_one_minute: durada de lectura : &lt; 1 min
@@ -257,8 +226,7 @@ entry:
                 description: Marca mal la presentacion d'aqueste article ?
         edit_title: Modificar lo títol
         original_article: original
-        annotations_on_the_entry: "{0} Pas cap d'anotacion|{1} Una anotacion|]1,Inf[ %count%\
-            \ anotacions"
+        annotations_on_the_entry: "{0} Pas cap d'anotacion|{1} Una anotacion|]1,Inf[ %count% anotacions"
         created_at: Data de creacion
         published_at: Data de publicacion
         published_by: Publicat per
@@ -292,8 +260,7 @@ about:
     who_behind_wallabag:
         developped_by: Desvolopat per
         website: Site web
-        many_contributors: E un fum de contributors ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">sur
-            Github</a>
+        many_contributors: E un fum de contributors ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">sur Github</a>
         project_website: Site web del projècte
         license: Licéncia
         version: Version
@@ -309,8 +276,7 @@ about:
     contributors:
         description: Mercés als contributors de l'aplicacion web de wallabag
     third_party:
-        description: 'Aquí la lista de las dependéncias utilizadas dins wallabag (e lor
-            licéncia) :'
+        description: 'Aquí la lista de las dependéncias utilizadas dins wallabag (e lor licéncia) :'
         package: Dependéncia
         license: Licéncia
 howto:
@@ -369,20 +335,17 @@ quickstart:
     more: Mai…
     intro:
         title: Benvenguda sus wallabag !
-        paragraph_1: Anem vos guidar per far lo torn de la proprietat e vos presentar
-            unas foncionalitats que vos poirián interessar per vos apropriar aquesta aisina.
+        paragraph_1: Anem vos guidar per far lo torn de la proprietat e vos presentar unas foncionalitats que vos poirián interessar per vos apropriar aquesta aisina.
         paragraph_2: Seguètz-nos !
     configure:
         title: Configuratz l'aplicacion
-        description: Per fin d'aver una aplicacion que vos va ben, anatz veire la configuracion
-            de wallabag.
+        description: Per fin d'aver una aplicacion que vos va ben, anatz veire la configuracion de wallabag.
         language: Cambiatz la lenga e l'estil de l'aplicacion
         rss: Activatz los fluxes RSS
         tagging_rules: Escrivètz de règlas per classar automaticament vòstres articles
     admin:
         title: Administracion
-        description: "En qualitat d'adminitrastor sus wallabag, avètz de privilègis que\
-            \ vos permeton de :"
+        description: "En qualitat d'adminitrastor sus wallabag, avètz de privilègis que vos permeton de :"
         new_user: Crear un novèl utilizaire
         analytics: Configurar las estadisticas
         sharing: Activar de paramètres de partatge
@@ -390,14 +353,12 @@ quickstart:
         import: Configurar los impòrts
     first_steps:
         title: Primièrs passes
-        description: Ara wallabag es ben configurat, es lo moment d'archivar lo web. Podètz
-            clicar sul signe + a man drecha amont per ajustar un ligam.
+        description: Ara wallabag es ben configurat, es lo moment d'archivar lo web. Podètz clicar sul signe + a man drecha amont per ajustar un ligam.
         new_article: Ajustatz vòstre primièr article
         unread_articles: E recaptatz-lo !
     migrate:
         title: Migrar dempuèi un servici existent
-        description: Sètz un ancian utilizaire d'un servici existent ? Vos ajudarem a
-            trapar vòstras donadas sus wallabag.
+        description: Sètz un ancian utilizaire d'un servici existent ? Vos ajudarem a trapar vòstras donadas sus wallabag.
         pocket: Migrar dempuèi Pocket
         wallabag_v1: Migrar dempuèi wallabag v1
         wallabag_v2: Migrar dempuèi wallabag v2
@@ -405,44 +366,36 @@ quickstart:
         instapaper: Migrar dempuèi Instapaper
     developer:
         title: Pels desvolopaires
-        description: Avèm tanben pensat als desvolopaires : Docker, API, traduccions,
-            etc.
+        description: Avèm tanben pensat als desvolopaires : Docker, API, traduccions, etc.
         create_application: Crear vòstra aplicacion tèrça
         use_docker: Utilizar Docker per installar wallabag
     docs:
         title: Documentacion complèta
-        description: I a un fum de foncionalitats dins wallabag. Esitetz pas a legir lo
-            manual per las conéisser e aprendre a las utilizar.
+        description: I a un fum de foncionalitats dins wallabag. Esitetz pas a legir lo manual per las conéisser e aprendre a las utilizar.
         annotate: Anotar vòstre article
         export: Convertissètz vòstres articles en ePub o en PDF
-        search_filters: Aprenètz a utilizar lo motor de recèrca e los filtres per retrobar
-            l'article que vos interèssa
+        search_filters: Aprenètz a utilizar lo motor de recèrca e los filtres per retrobar l'article que vos interèssa
         fetching_errors: Qué far se mon article es pas recuperat coma cal ?
         all_docs: E encara plen de causas mai !
     support:
         title: Assisténcia
-        description: Perque avètz benlèu besonh de nos pausar una question, sèm disponibles
-            per vosautres.
+        description: Perque avètz benlèu besonh de nos pausar una question, sèm disponibles per vosautres.
         github: Sus GitHub
         email: Per e-mail
         gitter: Sus Gitter
 tag:
     page_title: Etiquetas
     list:
-        number_on_the_page: "{0} I a pas cap d'etiquetas.|{1} I a una etiqueta.|]1,Inf[\
-            \ I a %count% etiquetas."
+        number_on_the_page: "{0} I a pas cap d'etiquetas.|{1} I a una etiqueta.|]1,Inf[ I a %count% etiquetas."
         see_untagged_entries: Afichar las entradas sens etiquetas
     new:
         add: Ajustar
         placeholder: Podètz ajustar mai qu'una etiqueta, separadas per de virgula.
 export:
-    footer_template: <div style="text-align:center;"><p>Produch per wallabag amb %method%</p><p>Mercés
-        de dobrir <a href="https://github.com/wallabag/wallabag/issues">una sollicitacion</a>
-        s’avètz de problèmas amb l’afichatge d’aqueste E-Book sus vòstre periferic.</p></div>
+    footer_template: <div style="text-align:center;"><p>Produch per wallabag amb %method%</p><p>Mercés de dobrir <a href="https://github.com/wallabag/wallabag/issues">una sollicitacion</a> s’avètz de problèmas amb l’afichatge d’aqueste E-Book sus vòstre periferic.</p></div>
 import:
     page_title: Importar
-    page_description: Benvenguda sus l'aisina de migracion de wallabag. Causissètz çai-jos
-        lo servici dempuèi lo qual volètz migrar.
+    page_description: Benvenguda sus l'aisina de migracion de wallabag. Causissètz çai-jos lo servici dempuèi lo qual volètz migrar.
     action:
         import_contents: Importar lo contengut
     form:
@@ -452,81 +405,43 @@ import:
         save_label: Importar lo fichièr
     pocket:
         page_title: Importar > Pocket
-        description: Aquesta aisina importarà totas vòstras donadas de Pocket. Pocket
-            nos permet pas de recuperar lo contengut dempuèi lor servidor, alara wallabag
-            deu tornar fulhetar cada article per recuperar son contengut.
+        description: Aquesta aisina importarà totas vòstras donadas de Pocket. Pocket nos permet pas de recuperar lo contengut dempuèi lor servidor, alara wallabag deu tornar fulhetar cada article per recuperar son contengut.
         config_missing:
             description: L'importacion dempuèi Pocket es pas configurada.
             admin_message: Vos cal definir %keyurls% una clau per l'API Pocket %keyurle%.
-            user_message: L'administrator de vòstre servidor deu definir una clau per l'API
-                Pocket.
-        authorize_message: Podètz importar vòstras donadas dempuèi vòstre compte Pocket.
-            Vos cal pas que clicar sul boton çai-jos e autorizar wallabag a se connectar
-            a getpocket.com.
+            user_message: L'administrator de vòstre servidor deu definir una clau per l'API Pocket.
+        authorize_message: Podètz importar vòstras donadas dempuèi vòstre compte Pocket. Vos cal pas que clicar sul boton çai-jos e autorizar wallabag a se connectar a getpocket.com.
         connect_to_pocket: Se connectar a Pocket e importar las donadas
     wallabag_v1:
         page_title: Importar > Wallabag v1
-        description: Aquesta aisina importarà totas vòstras donadas de wallabag v1. Sus
-            vòstre pagina de configuracion de wallabag v1, clicatz sus \"Export JSON\" dins
-            la seccion \"Exportar vòstras donadas de wallabag\". Traparetz un fichièr \"wallabag-export-1-xxxx-xx-xx.json\".
-        how_to: Causissètz lo fichièr de vòstra exportacion wallabag v1 e clicatz sul
-            boton çai-jos per l'importar.
+        description: Aquesta aisina importarà totas vòstras donadas de wallabag v1. Sus vòstre pagina de configuracion de wallabag v1, clicatz sus \"Export JSON\" dins la seccion \"Exportar vòstras donadas de wallabag\". Traparetz un fichièr \"wallabag-export-1-xxxx-xx-xx.json\".
+        how_to: Causissètz lo fichièr de vòstra exportacion wallabag v1 e clicatz sul boton çai-jos per l'importar.
     wallabag_v2:
         page_title: Importar > Wallabag v2
-        description: Aquesta aisina importarà totas vòstras donadas d'una instància mai
-            de wallabag v2. Anatz dins totes vòstres articles, puèi, sus la barra laterala,
-            clicatz sus "JSON". Traparetz un fichièr "All articles.json".
+        description: Aquesta aisina importarà totas vòstras donadas d'una instància mai de wallabag v2. Anatz dins totes vòstres articles, puèi, sus la barra laterala, clicatz sus "JSON". Traparetz un fichièr "All articles.json".
     readability:
         page_title: Importar > Readability
-        description: Aquesta aisina importarà totas vòstres articles de Readability. Sus
-            la pagina de l'aisina (https://www.readability.com/tools/), clicatz sus "Export
-            your data" dins la seccion "Data Export". Recebretz un corrièl per telecargar
-            un json (qu'acaba pas amb un .json de fach).
-        how_to: Mercés de seleccionar vòstre Readability fichièr e de clicar sul boton
-            dejós per lo telecargar e l'importar.
+        description: Aquesta aisina importarà totas vòstres articles de Readability. Sus la pagina de l'aisina (https://www.readability.com/tools/), clicatz sus "Export your data" dins la seccion "Data Export". Recebretz un corrièl per telecargar un json (qu'acaba pas amb un .json de fach).
+        how_to: Mercés de seleccionar vòstre Readability fichièr e de clicar sul boton dejós per lo telecargar e l'importar.
     worker:
-        enabled: L'importacion se fa de manièra asincròna. Un còp l'importacion lançada,
-            una aisina extèrna s'ocuparà dels articles un per un. Lo servici actual es : 
-        download_images_warning: Avètz activat lo telecargament de los imatges de vòstres
-            articles. Combinat amb l'importacion classica, aquò pòt tardar un long moment
-            (o benlèu fracassar). <strong>Recomandem fòrtament</strong> l'activacion de
-            l'importacion asincròna per evitar las errors.
+        enabled: L'importacion se fa de manièra asincròna. Un còp l'importacion lançada, una aisina extèrna s'ocuparà dels articles un per un. Lo servici actual es : 
+        download_images_warning: Avètz activat lo telecargament de los imatges de vòstres articles. Combinat amb l'importacion classica, aquò pòt tardar un long moment (o benlèu fracassar). <strong>Recomandem fòrtament</strong> l'activacion de l'importacion asincròna per evitar las errors.
     firefox:
         page_title: Importar > Firefox
-        description: Aquesta aisina importarà totas vòstres favorits de Firefox. Anatz
-            simplament dins vòstres marcapaginas (Ctrl+Maj+O), puèi dins "Impòrt e salvagarda",
-            causissètz "Salvagardar...". Auretz un fichièr .json.
-        how_to: Mercés de causir lo fichièr de salvagarda e de clicar sul boton dejós
-            per l'importar. Notatz que lo tractament pòt durar un moment ja que totes los
-            articles an d'èsser recuperats.
+        description: Aquesta aisina importarà totas vòstres favorits de Firefox. Anatz simplament dins vòstres marcapaginas (Ctrl+Maj+O), puèi dins "Impòrt e salvagarda", causissètz "Salvagardar...". Auretz un fichièr .json.
+        how_to: Mercés de causir lo fichièr de salvagarda e de clicar sul boton dejós per l'importar. Notatz que lo tractament pòt durar un moment ja que totes los articles an d'èsser recuperats.
     chrome:
         page_title: Importar > Chrome
-        description: Aquesta aisina importarà totas vòstres favorits de Chrome. L'emplaçament
-            del fichièr depend de vòstre sistèma operatiu : <ul><li>Sus Linux, anatz al
-            dorsièr <code>~/.config/chromium/Default/</code></li><li>Sus Windows, deu èsser
-            dins <code>%LOCALAPPDATA%\Google\Chrome\User Data\Default</code></li><li>sus
-            OS X, deu èsser dins <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Un
-            còp enlà, copiatz lo fichièr de favorits dins un endrech que volètz.<em><br>Notatz
-            que s'avètz Chromium al lòc de Chrome, vos cal cambiar lo camin segon aquesta
-            situacion.</em></p>
-        how_to: Mercés de causir lo fichièr de salvagarda e de clicar sul boton dejós
-            per l'importar. Notatz que lo tractament pòt durar un moment ja que totes los
-            articles an d'èsser recuperats.
+        description: Aquesta aisina importarà totas vòstres favorits de Chrome. L'emplaçament del fichièr depend de vòstre sistèma operatiu : <ul><li>Sus Linux, anatz al dorsièr <code>~/.config/chromium/Default/</code></li><li>Sus Windows, deu èsser dins <code>%LOCALAPPDATA%\Google\Chrome\User Data\Default</code></li><li>sus OS X, deu èsser dins <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Un còp enlà, copiatz lo fichièr de favorits dins un endrech que volètz.<em><br>Notatz que s'avètz Chromium al lòc de Chrome, vos cal cambiar lo camin segon aquesta situacion.</em></p>
+        how_to: Mercés de causir lo fichièr de salvagarda e de clicar sul boton dejós per l'importar. Notatz que lo tractament pòt durar un moment ja que totes los articles an d'èsser recuperats.
     instapaper:
         page_title: Importar > Instapaper
-        description: Aquesta aisina importarà totas vòstres articles d'Instapaper. Sus
-            la pagina de paramètres (https://www.instapaper.com/user), clicatz sus "Download
-            .CSV file" dins la seccion "Export". Un fichièr CSV serà telecargat (aital "instapaper-export.csv").
-        how_to: Mercés de causir vòstre fichièr Instapaper e de clicar sul boton dejós
-            per lo telecargar e l'importar.
+        description: Aquesta aisina importarà totas vòstres articles d'Instapaper. Sus la pagina de paramètres (https://www.instapaper.com/user), clicatz sus "Download .CSV file" dins la seccion "Export". Un fichièr CSV serà telecargat (aital "instapaper-export.csv").
+        how_to: Mercés de causir vòstre fichièr Instapaper e de clicar sul boton dejós per lo telecargar e l'importar.
     pinboard:
         page_title: Importar > Pinboard
-        description: Aquesta aisina importarà totas vòstres articles de Pinboard. Sus
-            la pagina de salvagarda (https://pinboard.in/settings/backup) , clicatz sus
-            "JSON" dins la seccion "Bookmarks". Se poirà telecargar un fichièr JSON (coma
-            "pinboard_export").
-        how_to: Mercés de causir vòstre fichièr Pinboard e de clicar sul boton dejós per
-            lo telecargar e l'importar.
+        description: Aquesta aisina importarà totas vòstres articles de Pinboard. Sus la pagina de salvagarda (https://pinboard.in/settings/backup) , clicatz sus "JSON" dins la seccion "Bookmarks". Se poirà telecargar un fichièr JSON (coma "pinboard_export").
+        how_to: Mercés de causir vòstre fichièr Pinboard e de clicar sul boton dejós per lo telecargar e l'importar.
 developer:
     page_title: Gestion dels clients API
     welcome_message: Vos desirem la benvenguda sus l'API de wallabag
@@ -545,15 +460,12 @@ developer:
         field_grant_types: Tipe de privilègi acordat
         no_client: Pas cap de client pel moment.
     remove:
-        warn_message_1: Avètz la possibilitat de suprimir un client. Aquesta accion es
-            IRREVERSIBLA !
-        warn_message_2: Se suprimissètz un client, totas las aplicacions que l'emplegan
-            foncionaràn pas mai amb vòstre compte wallabag.
+        warn_message_1: Avètz la possibilitat de suprimir un client. Aquesta accion es IRREVERSIBLA !
+        warn_message_2: Se suprimissètz un client, totas las aplicacions que l'emplegan foncionaràn pas mai amb vòstre compte wallabag.
         action: Suprimir aqueste client
     client:
         page_title: Gestion dels clients API > Novèl client
-        page_description: Anatz crear un novèl client. Mercés de garnir l'url de redireccion
-            cap a vòstra aplicacion.
+        page_description: Anatz crear un novèl client. Mercés de garnir l'url de redireccion cap a vòstra aplicacion.
         form:
             name_label: Nom del client
             redirect_uris_label: URLs de redireccion
@@ -570,19 +482,14 @@ developer:
     howto:
         page_title: Gestion dels clients API > Cossí crear ma primièra aplicacion
         description:
-            paragraph_1: Las comandas seguentas utilizan la <a href="https://github.com/jkbrzt/httpie">bibliotèca
-                HTTPie</a>. Asseguratz-vos que siasqueòu installadas abans de l'utilizar.
-            paragraph_2: Vos cal un geton per escambiar entre vòstra aplicacion e l'API
-                de wallabar.
+            paragraph_1: Las comandas seguentas utilizan la <a href="https://github.com/jkbrzt/httpie">bibliotèca HTTPie</a>. Asseguratz-vos que siasqueòu installadas abans de l'utilizar.
+            paragraph_2: Vos cal un geton per escambiar entre vòstra aplicacion e l'API de wallabar.
             paragraph_3: Per crear un geton, vos cal <a href="%link%">crear un novèl client</a>.
-            paragraph_4: 'Ara creatz un geton (remplaçar client_id, client_secret, username
-                e password amb las bonas valors) :'
+            paragraph_4: 'Ara creatz un geton (remplaçar client_id, client_secret, username e password amb las bonas valors) :'
             paragraph_5: "L'API vos tornarà una responsa coma aquò :"
-            paragraph_6: "L'access_token deu èsser emplegat per far una requèsta a l'API.\
-                \ Per exemple :"
+            paragraph_6: "L'access_token deu èsser emplegat per far una requèsta a l'API. Per exemple :"
             paragraph_7: Aquesta requèsta tornarà totes los articles de l'utilizaire.
-            paragraph_8: Se volètz totas las adreças d'accès de l'API, donatz un còp d’uèlh
-                <a href="%link%">a la documentacion de l'API</a>.
+            paragraph_8: Se volètz totas las adreças d'accès de l'API, donatz un còp d’uèlh <a href="%link%">a la documentacion de l'API</a>.
         back: Retorn
 user:
     page_title: Gestion dels utilizaires
@@ -615,8 +522,7 @@ site_credential:
     page_title: Gestion dels identificants
     new_site_credential: Crear un identificant
     edit_site_credential: Modificar un identificant
-    description: Aquí podètz gerir vòstres identificants pels sites que los demandan
-        (ne crear, ne modifiar, ne suprimir) coma los sites a peatge, etc.
+    description: Aquí podètz gerir vòstres identificants pels sites que los demandan (ne crear, ne modifiar, ne suprimir) coma los sites a peatge, etc.
     list:
         actions: Accions
         edit_action: Modificar
@@ -638,8 +544,7 @@ flashes:
         notice:
             config_saved: Los paramètres son ben estats meses a jorn.
             password_updated: Vòstre senhal es ben estat mes a jorn
-            password_not_updated_demo: En demostracion, podètz pas cambiar lo senhal d'aqueste
-                utilizaire.
+            password_not_updated_demo: En demostracion, podètz pas cambiar lo senhal d'aqueste utilizaire.
             user_updated: Vòstres informacions personnelas son ben estadas mesas a jorn
             rss_updated: La configuracion dels fluxes RSS es ben estada mesa a jorn
             tagging_rules_updated: Règlas misa a jorn
@@ -656,8 +561,7 @@ flashes:
             entry_saved_failed: Article salvat mai fracàs de la recuperacion del contengut
             entry_updated: Article mes a jorn
             entry_reloaded: Article recargat
-            entry_reloaded_failed: L'article es estat cargat de nòu mai la recuperacion
-                del contengut a fracassat
+            entry_reloaded_failed: L'article es estat cargat de nòu mai la recuperacion del contengut a fracassat
             entry_archived: Article marcat coma legit
             entry_unarchived: Article marcat coma pas legit
             entry_starred: Article ajustat dins los favorits
@@ -673,12 +577,8 @@ flashes:
             summary: "Rapòrt d'impòrt: %imported% importats, %skipped% ja presents."
             summary_with_queue: Rapòrt d'impòrt : %queued% en espèra de tractament.
         error:
-            redis_enabled_not_installed: Redis es capable d'importar de manièra asincròna
-                mai sembla que <u>podèm pas nos conectar amb el</u>. Mercés de verificar la
-                configuracion de Redis.
-            rabbit_enabled_not_installed: RabbitMQ es capable d'importar de manièra asincròna
-                mai sembla que <u>podèm pas nos conectar amb el</u>. Mercés de verificar la
-                configuracion de RabbitMQ.
+            redis_enabled_not_installed: Redis es capable d'importar de manièra asincròna mai sembla que <u>podèm pas nos conectar amb el</u>. Mercés de verificar la configuracion de Redis.
+            rabbit_enabled_not_installed: RabbitMQ es capable d'importar de manièra asincròna mai sembla que <u>podèm pas nos conectar amb el</u>. Mercés de verificar la configuracion de RabbitMQ.
     developer:
         notice:
             client_created: Novèl client creat.
