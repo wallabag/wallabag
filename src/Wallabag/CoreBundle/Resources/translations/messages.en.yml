@@ -492,7 +492,7 @@ import:
         download_images_warning: You enabled downloading images for your articles. Combined with classic import it can take ages to proceed (or maybe failed). We <strong>strongly recommend</strong> to enable asynchronous import to avoid errors.
     firefox:
         page_title: Import > Firefox
-        description: This importer will import all your Firefox bookmarks. Just go to your bookmarks (Ctrl+Maj+O), then into "Import and backup", choose "Backup…". You will obtain a JSON file.
+        description: This importer will import all your Firefox bookmarks. Just go to your bookmarks (Ctrl+Shift+O), then into "Import and backup", choose "Backup…". You will obtain a JSON file.
         how_to: Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched.
     chrome:
         page_title: Import > Chrome
