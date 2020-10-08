@@ -81,8 +81,8 @@
     "waypoints": "^4.0.1"
   },
   "scripts": {
-    "watch": "./node_modules/.bin/webpack-dev-server --env=dev",
-    "build:dev": "./node_modules/.bin/webpack --env=dev",
-    "build:prod": "./node_modules/.bin/webpack --env=prod"
+    "watch": "webpack-dev-server --env=dev",
+    "build:dev": "webpack --env=dev",
+    "build:prod": "webpack --env=prod"
   }
 }
