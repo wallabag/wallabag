@@ -5,9 +5,9 @@ Depuis la version 2.3, wallabag utilise webpack pour générer ses assets.
 ## Mode développeur
 
 Si le serveur fonctionne en mode dev, vous devez lancer la commande
-`yarn run build:dev` pour générer les fichiers de sortie javascript pour
+`yarn build:dev` pour générer les fichiers de sortie javascript pour
 chaque thème. Ils sont nommés `%theme%.dev.js` et sont ignorés par git.
-Vous devez relancer la commande `yarn run build:dev` pour chaque
+Vous devez relancer la commande `yarn build:dev` pour chaque
 changement que vous effectuez dans les fichiers assets (js, css, images,
 polices,...).
 
@@ -18,7 +18,7 @@ signifie que vous n'avez pas besoin de regénérer manuellement le fichier
 de sortie javascript ni de rafraichir la page dans votre navigateur. Les
 changements sont appliqués automatiquement. Vous avez juste besoin de
 mettre le paramètre `use_webpack_dev_server` à `true` dans
-`app/config/config.yml` et de lancer `yarn run watch` pour que cela soit
+`app/config/config.yml` et de lancer `yarn watch` pour que cela soit
 actif.
 
 N'oubliez pas de remettre `use_webpack_dev_server` à `false` lorsque
@@ -27,7 +27,7 @@ vous n'utilisez pas la fonctionnalité de live reload.
 ## Builds en production
 
 Lorsque vous committez vos changements, vous devez les compiler dans un
-environnement de production en exécutant `yarn run build:prod`. Cela
+environnement de production en exécutant `yarn build:prod`. Cela
 compilera tous les assets nécessaires pour wallabag. Pour tester que
 cela fonctionne proprement, vous devrez avoir un serveur en mode de
 production, par exemple avec `bin/console server:run -e=prod`.
