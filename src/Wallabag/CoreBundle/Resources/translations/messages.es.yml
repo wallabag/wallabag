@@ -32,6 +32,7 @@ menu:
         back_to_unread: 'Volver a los artículos sin leer'
         users_management: 'Configuración de usuarios'
         site_credentials: Credenciales del sitio
+        quickstart: Inicio rápido
     top:
         add_new_entry: 'Añadir un nuevo artículo'
         search: 'Buscar'
@@ -178,6 +179,26 @@ config:
                 and: 'Una regla Y la otra'
                 matches: 'Prueba si un <i>sujeto</i> corresponde a una <i>búsqueda</i> (insensible a mayúsculas).<br />Ejemplo : <code>title matches "fútbol"</code>'
                 notmatches: 'Prueba si un <i>sujeto</i> no corresponde a una <i>búsqueda</i> (insensible a mayúsculas).<br />Ejemplo : <code>title notmatches "fútbol"</code>'
+    otp:
+        app:
+            cancel: Cancelar
+    form_ignore_origin_rules:
+        faq:
+            operator_description:
+                equal_to: Igual a…
+                label: Operador
+            variable_description:
+                label: Variable
+            meaning: Significado
+            variables_available_title: ¿Qué variables y operadores se pueden utilizar para escribir las reglas?
+            how_to_use_them_title: ¿Cómo se utilizan?
+            title: Preguntas frecuentes (FAQ)
+    form_feed:
+        feed_link:
+            all: Todos
+            archive: Archivados
+            starred: Favorito
+            unread: No leídos
 entry:
     default_title: 'Título del artículo'
     page_titles:
@@ -456,7 +477,7 @@ import:
         download_images_warning: "Tienes activado la descarga de imágenes de los artículos. Esto junto con la importación clásica de artículos puede tardar mucho tiempo en ser procesado (o incluso fallar). <strong>Recomendamos encarecidamente</strong> habilitar la importación asíncrona para evitar errores."
     firefox:
         page_title: 'Importar > Firefox'
-        description: "Importa todos tus marcadores de Firefox. En la ventana de marcadores (Ctrl+Mayus+O), en \"Importar y respaldar\", elige \"Copiar...\". Obtendrás un archivo .json."
+        description: "Importa todos tus marcadores de Firefox. En la ventana de marcadores (Ctrl+Mayus+O), en \"Importar y respaldar\", elige \"Copiar…\". Obtendrás un archivo JSON."
         how_to: "Seleccione el archivo exportado de Firefox y haga clic en el botón para importarlo. Tenga en cuenta que este proceso puede tardar ya que se tienen que descargar todos los artículos."
     chrome:
         page_title: 'Importar > Chrome'
@@ -632,3 +653,15 @@ flashes:
 export:
     unknown: Desconocido
     footer_template: <div style="text-align:center;"><p>Producido por wallabag con %method%</p><p>Por favor, abre <a href="https://github.com/wallabag/wallabag/issues">un issue</a> si tiene problemas con la visualización de este libro electrónico en su dispositivo.</p></div>
+ignore_origin_instance_rule:
+    form:
+        back_to_list: Volver a la lista
+        delete_confirm: ¿Estás seguro?
+        delete: Eliminar
+        save: Guardar
+        rule_label: Regla
+    list:
+        no: No
+        yes: Sí
+        edit_action: Editar
+        actions: Acciones
