@@ -5,6 +5,7 @@ wallabag_core:
         en: 'English'
         fr: 'Français'
         de: 'Deutsch'
+        nl: 'Dutch'
         th: 'ไทย'
         tr: 'Türkçe'
         fa: 'فارسی'
