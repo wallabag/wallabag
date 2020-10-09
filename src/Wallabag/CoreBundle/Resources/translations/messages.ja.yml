@@ -353,7 +353,7 @@ howto:
     browser_addons:
         opera: Opera のアドオン
         chrome: Chrome のアドオン
-        firefox: Firefox  のアドオン
+        firefox: Firefox のアドオン
     tab_menu:
         shortcuts: ショートカットを使う
         add_link: リンクの追加
