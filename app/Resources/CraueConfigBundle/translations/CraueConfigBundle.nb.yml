@@ -38,6 +38,6 @@ share_scuttle: Skru på deling til Scuttle
 api_user_registration: Skru på brukerregistrering via API-et
 store_article_headers: Skru på hvis wallabag lagrer HTTP-hoder for hver artikkel
 shaarli_share_origin_url: Skru på deling av opprinnelsesnettadresse til Shaarli, hvis tjenesten er påskrudd
-matomo_host: Vertstjen din nettside i Piwik (uten http:// eller http://)
-matomo_enabled: Skru på Piwik
-matomo_site_id: ID for din nettside i Piwik
+matomo_host: Vertstjen din nettside i Matomo (uten http:// eller http://)
+matomo_enabled: Skru på Matomo
+matomo_site_id: ID for din nettside i Matomo
