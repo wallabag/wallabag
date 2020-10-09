@@ -129,7 +129,7 @@ config:
         archived: "删除所有已存档项目"
         confirm: '你真的确定的吗？（这不能被撤销）'
     form_password:
-        description: "你可以在此更改你的密码，你的新密码至少应包含 8 个字符"
+        description: "你可以在此更改你的密码，你的新密码至少应包含 8 个字符."
         old_password_label: '现有密码'
         new_password_label: '新密码'
         repeat_new_password_label: '重新输入新密码'
@@ -184,10 +184,10 @@ config:
     otp:
         page_title: "两步验证"
         app:
-            two_factor_code_description_1: '你刚刚启用了基于 OTP（动态密码）的两步验证，打开你的 OTP 应用，使用该代码来得到一次性密码，页面刷新后该代码便会消失'
+            two_factor_code_description_1: '你刚刚启用了基于 OTP（动态密码）的两步验证，打开你的 OTP 应用，使用该代码来得到一次性密码，页面刷新后该代码便会消失.'
             two_factor_code_description_2: '你可以用你的 OTP 应用来扫描这个二维码：'
-            two_factor_code_description_3: '另外，将这些备用码保存在一个安全的地方，以防万一你需要用它们来恢复对 OTP 应用的访问权'
-            two_factor_code_description_4: '从你配置好的应用中测试 OTP 码'
+            two_factor_code_description_3: '另外，将这些备用码保存在一个安全的地方，以防万一你需要用它们来恢复对 OTP 应用的访问权:'
+            two_factor_code_description_4: '从你配置好的应用中测试 OTP 码:'
             cancel: "取消"
             enable: "启用"
     form_rss:
@@ -203,6 +203,17 @@ config:
         no_token: 没有令牌
         token_label: RSS令牌
         description: wallabag提供的RSS源可以让你用你喜欢的RSS阅读器阅读你保存的文章。首先需要生成一个令牌。
+    form_ignore_origin_rules:
+        faq:
+            operator_description:
+                equal_to: 等于…
+                label: 操作符
+            variable_description:
+                label: 变量
+            meaning: 含义
+            variables_available_title: 我可以使用哪些变量和操作符来编写规则？
+            how_to_use_them_title: 我该怎么使用它们？
+            title: 常见问题
 entry:
     default_title: '项目标题'
     page_titles:
@@ -310,7 +321,7 @@ about:
         contributors: '贡献者'
         third_party: '第三方库'
     who_behind_wallabag:
-        developped_by: '开发者：'
+        developped_by: '开发者'
         website: '网站'
         many_contributors: '以及 <a href="https://github.com/wallabag/wallabag/graphs/contributors">GitHub 上</a> 的许多其它贡献者 ♥'
         project_website: '项目官网'
@@ -356,7 +367,7 @@ howto:
     bookmarklet:
         description: '点按并拖动这个链接到你的书签栏上：'
     shortcuts:
-        page_description: 以下是 wallabag 中可用的快捷键
+        page_description: 以下是 wallabag 中可用的快捷键.
         shortcut: 快捷键
         action: 操作
         all_pages_title: 所有页面中均可用的快捷键
@@ -442,6 +453,7 @@ tag:
         number_on_the_page: '{0} 暂时没有标签。|{1} 目前有 1 个标签。|]1,Inf[ 目前有 %count% 个标签。'
         see_untagged_entries: '查看未分配标签的项目'
         no_untagged_entries: '目前没有未分配标签的项目。'
+        untagged: 无标签项目
     new:
         add: '添加'
         placeholder: '你可以添加数个标签，彼此之间用逗号分隔。'
@@ -456,7 +468,7 @@ import:
     action:
         import_contents: '导入内容'
     form:
-        mark_as_read_title: '是否全部标记为已读'
+        mark_as_read_title: '是否全部标记为已读?'
         mark_as_read_label: '将全部项目标记为已读'
         file_label: '文件'
         save_label: '上传文件'
@@ -488,7 +500,7 @@ import:
         download_images_warning: "你选择了为你导入的文章下载图片。这和导入流程一起进行时，可能需要非常久才能完成（甚至可能失败）。我们<strong>强烈建议</strong>启用异步导入来避免可能的错误。"
     firefox:
         page_title: 'Import > Firefox'
-        description: "这个导入器会导入你 Firefox 中的所有书签。只需要前往你的 bookmarks 页面(Ctrl+Maj+O)，然后进入 \"Import and backup\"，选择 \"Backup...\"你将得到一个 .json 文件。"
+        description: "这个导入器会导入你 Firefox 中的所有书签。只需要前往你的 bookmarks 页面(Ctrl+Shift+O)，然后进入 \"Import and backup\"，选择 \"Backup…\"你将得到一个 JSON 文件。"
         how_to: "请选择书签备份文件然后点击下方的按钮来导入它。请注意这一过程可能会持续一段时间，因为需要获取所有的文章。"
     chrome:
         page_title: '导入> Chrome'
@@ -593,7 +605,7 @@ site_credential:
         no: 否
         create_new_one: 创建新的凭证
     form:
-        username_label: '登录名'
+        username_label: '登录'
         host_label: '主机（subdomain.example.org，.example.org，等等）'
         password_label: '密码'
         save: 保存
@@ -664,3 +676,15 @@ flashes:
             added: '"%host%" 的登录凭证已添加'
             updated: '"%host%" 的登录凭证已更新'
             deleted: '"%host%" 的登录凭证已删除'
+ignore_origin_instance_rule:
+    form:
+        back_to_list: 返回列表
+        delete_confirm: 确定这么做吗？
+        delete: 删除
+        save: 保存
+        rule_label: 规则
+    list:
+        no: 否
+        yes: 是
+        edit_action: 编辑
+        actions: 操作
