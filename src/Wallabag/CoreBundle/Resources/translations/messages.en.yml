@@ -338,7 +338,7 @@ about:
         package: Package
         license: License
 howto:
-    page_title: How to
+    page_title: Howto
     tab_menu:
         add_link: Add a link
         shortcuts: Use shortcuts
