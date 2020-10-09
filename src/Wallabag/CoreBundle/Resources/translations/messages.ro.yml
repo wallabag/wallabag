@@ -140,7 +140,7 @@ about:
     helping:
         description: 'wallabag este gratis și Open-Source. Cum ne poți ajuta:'
         by_contributing: 'contribuind la proiect:'
-        by_contributing_2: 'o problemă ne listează toate nevoile:'
+        by_contributing_2: 'o problemă ne listează toate nevoile'
         by_paypal: 'prin Paypal'
     third_party:
         license: 'Licență'
@@ -179,7 +179,7 @@ flashes:
         notice:
             config_saved: 'Configurație salvată.'
             password_updated: 'Parolă actualizată'
-            password_not_updated_demo: "In demonstration mode, you can't change password for this user."
+            password_not_updated_demo: ""
             user_updated: 'Informație actualizată'
             feed_updated: 'Informație RSS actualizată'
     entry:
