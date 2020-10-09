@@ -261,6 +261,7 @@ flashes:
             entry_reloaded: Item herladen
             entry_updated: Item geüpdatet
             entry_saved: Item opgeslagen
+            no_random_entry: Er is geen artikel met deze criteria gevonden
     config:
         notice:
             archived_reset: Gearchiveerde items verwijderd
@@ -275,9 +276,24 @@ flashes:
             user_updated: Informatie veranderd
             password_updated: Wachtwoord veranderd
             config_saved: Configuratie opgeslagen.
+            ignore_origin_rules_updated: Negeer oorsprongregel gewijzigd
+            ignore_origin_rules_deleted: Negeer oorsprongregel verwijderd
+            tagging_rules_not_imported: Fout bij importeren van labeling regels
+            tagging_rules_imported: Labeling regels geïmporteerd
+            otp_disabled: Twee factor authenticatie uitgeschakeld
+            otp_enabled: Twee factor authenticatie ingeschakeld
+            feed_token_revoked: Feed token ingetrokken
+            feed_token_updated: Feed token gewijzigd
+            feed_updated: Feed informatie gewijzigd
     tag:
         notice:
             tag_added: Label toegevoegd
+            tag_renamed: Label hernoemd
+    ignore_origin_instance_rule:
+        notice:
+            deleted: Globale oorsprongregel voor negeren verwijderd
+            updated: Globale oorsprongregel voor negeren gewijzigd
+            added: Globale oorsprongregel voor negeren toegevoegd
 error:
     page_title: Een fout heeft zich voorgedaan
 site_credential:
@@ -681,7 +697,16 @@ ignore_origin_instance_rule:
     list:
         edit_action: Wijzig
         actions: Acties
+        create_new_one: Maak een nieuwe algemene regel voor het negeren van de oorsprong
+        no: Nee
+        yes: Ja
     description: Hier kunt u de algemene regels voor het negeren van oorsprong beheren die worden gebruikt om bepaalde patronen van de oorspronkelijke URL te negeren.
     edit_ignore_origin_instance_rule: Bewerk een bestaande regel voor het negeren van de oorsprong
     new_ignore_origin_instance_rule: Maak een algemene regel voor het negeren van de oorsprong
     page_title: Globale negeer oorsprongsregels
+    form:
+        back_to_list: Terug naar lijst
+        delete_confirm: Weet u het zeker?
+        delete: Verwijder
+        save: Opslaan
+        rule_label: Regel
