@@ -194,6 +194,29 @@ config:
         no_token: トークンはありません
         token_label: フィード トークン
         description: WallabagからAtomフィードを提供することにより保存した記事をあなたのお気に入りのAtomリーダーで読むことができます。初めにトークンを生成する必要があります。
+    otp:
+        app:
+            two_factor_code_description_2: 'アプリでQRコードをスキャンしてください:'
+            two_factor_code_description_1: OTPによる二要素認証を有効化します、OTPアプリを開いてコードを使用しワンタイムパスワードを入手します。これはページをリロードすると消失します。
+        page_title: 二要素認証
+    form_ignore_origin_rules:
+        faq:
+            operator_description:
+                matches: '<i>対象</i>が<i>検索</i>と一致するかテストする（大文字小文字の区別なし）。<br />例: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
+                equal_to: 等しい…
+                label: 演算子
+            variable_description:
+                _all: フルアドレス、主にパターンマッチング向け
+                host: ドメイン名
+                label: 変数
+            meaning: 意味
+            variables_available_description: '転送元無視ルールを作成するのに、次の変数と演算子が使用できます:'
+            variables_available_title: ルールを記述するために、どの変数と演算子が使用できますか?
+            how_to_use_them_description: あなたはエントリーの転送元の « <i>rss.example.com</i> » を無視したいとします（<i>リダイレクト後はexample.comであることを知っているものとします</i>）。<br />この場合、<i>ルール</i>に « host = "rss.example.com" » と設定する必要があります。
+            how_to_use_them_title: 使用する方法は?
+            ignore_origin_rules_definition_description: リダイレクト後に転送元アドレスを自動的に無視するためにwallabagで使用されます。<br />新しいエントリーを取得する際にすべての転送元無視ルール（<i>ユーザー定義およびインスタンス定義</i>）を使用して転送元アドレスを無視します。
+            ignore_origin_rules_definition_title: « 転送元無視ルール » とは?
+            title: よくある質問
 entry:
     page_titles:
         unread: 未読エントリー
