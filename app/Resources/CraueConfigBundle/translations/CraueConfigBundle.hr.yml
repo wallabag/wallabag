@@ -37,3 +37,4 @@ export_xml: Aktiviraj XML izvoz
 show_printlink: Za ispis sadržaja, prikaži poveznicu
 demo_mode_username: Demo korisnik
 import: uvezi
+share_public: Dozvoli javne URL-ove za unose
