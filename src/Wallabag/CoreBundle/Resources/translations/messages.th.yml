@@ -56,7 +56,7 @@ config:
         password: 'รหัสผ่าน'
         rules: 'การแท็กข้อบังคับ'
         new_user: 'เพิ่มผู้ใช้'
-        reset: 'รีเซ็ตพื้นที่ '
+        reset: 'รีเซ็ตพื้นที่'
     form:
         save: 'บันทึก'
     form_settings:
@@ -141,12 +141,12 @@ config:
                 domainName: 'ชื่อโดเมนของรายการ'
             operator_description:
                 label: 'ตัวดำเนินการ'
-                less_than: 'น้อยกว่า...'
-                strictly_less_than: 'เคร่งครัดน้อยกว่า...'
-                greater_than: 'มากกว่า...'
-                strictly_greater_than: 'เคร่งครัดมากกว่า...'
-                equal_to: 'เท่ากับ...'
-                not_equal_to: 'ไม่เท่ากับ...'
+                less_than: 'น้อยกว่า…'
+                strictly_less_than: 'เคร่งครัดน้อยกว่า…'
+                greater_than: 'มากกว่า…'
+                strictly_greater_than: 'เคร่งครัดมากกว่า…'
+                equal_to: 'เท่ากับ…'
+                not_equal_to: 'ไม่เท่ากับ…'
                 or: 'หนึ่งข้อบังคับหรืออื่นๆ'
                 and: 'หนึ่งข้อบังคับและอื่นๆ'
                 matches: 'ทดสอบว่า <i>เรื่อง</i> นี้ตรงกับ <i>การต้นหา</i> (กรณีไม่ทราบ).<br />ตัวอย่าง: <code>หัวข้อที่ตรงกับ "football"</code>'
@@ -425,7 +425,7 @@ import:
         how_to: "ทำการเลือกไฟล์ bookmark backup และ click ที่ button ข้างใต้ที่จะ import ซึ่ง Note ของกระบวนการนี้อาจใช้เวลานานงจากบทความที่รับมา"
     chrome:
         page_title: 'นำเข้าข้อมูล > Chrome'
-        description: "สำหรับผู้นำเข้าข้อมูลจะ import Chrome bookmarks ทั้งหมดของคุณ ตำแน่งของไฟล์จะขึ้นอยู่กับระบบปฏิบัติการของคุณ : <ul><li>บน Linux, ไปยัง <code>~/.config/chromium/Default/</code> ของ directory</li><li>บน Windows, ควรจะเป็น <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>บน OS X, ควรจะเป็น <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Once ครั้งที่คุณได้รับสิ่งนั้น, copy  <code>Bookmarks</code> ไฟล์บางที่ คุณจะหา <em><br>Note สิ่งนี้ถ้าคุณมี Chromium instead ของ Chrome, คุณจะมี paths according ที่ถูกต้อง</em></p>"
+        description: "สำหรับผู้นำเข้าข้อมูลจะ import Chrome bookmarks ทั้งหมดของคุณ ตำแน่งของไฟล์จะขึ้นอยู่กับระบบปฏิบัติการของคุณ : <ul><li>บน Linux, ไปยัง <code>~/.config/chromium/Default/</code> ของ directory</li><li>บน Windows, ควรจะเป็น <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>บน OS X, ควรจะเป็น <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Once ครั้งที่คุณได้รับสิ่งนั้น, copy <code>Bookmarks</code> ไฟล์บางที่ คุณจะหา <em><br>Note สิ่งนี้ถ้าคุณมี Chromium instead ของ Chrome, คุณจะมี paths according ที่ถูกต้อง</em></p>"
         how_to: "ทำการเลือกไฟล์ bookmark backu และ click ที่ button ข้างใตที่จะ import ซึ่ง Note ของกระบวนการนี้อาจใช้เวลานานงจากบทความที่รับมา"
     instapaper:
         page_title: นำเข้าข้อมูล > Instapaper'
@@ -536,12 +536,12 @@ flashes:
         notice:
             config_saved: 'กำหนดการบันทึก'
             password_updated: 'อัปเดตรหัสผ่าน'
-            password_not_updated_demo: "In demonstration mode, you can't change password for this user."
+            password_not_updated_demo: ""
             user_updated: 'อัปเดตข้อมูล'
             feed_updated: 'อัปเดตข้อมูล RSS'
             tagging_rules_updated: 'อัปเดตการแท็กข้อบังคับ'
             tagging_rules_deleted: 'การลบข้อบังคับของแท็ก'
-            feed_token_updated: 'อัปเดตเครื่องหมาย RSS '
+            feed_token_updated: 'อัปเดตเครื่องหมาย RSS'
             annotations_reset: รีเซ็ตหมายเหตุ
             tags_reset: รีเซ็ตแท็ก
             entries_reset: รีเซ็ตรายการ

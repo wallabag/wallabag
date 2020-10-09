@@ -1,5 +1,5 @@
 settings_changed: Configuration updated
-download_pictures: Download pictures on your server
+download_pictures: Download pictures onto your server
 carrot: Enable share to Carrot
 diaspora_url: diaspora* URL, if the service is enabled
 export_epub: Enable ePub export
@@ -27,15 +27,14 @@ export: export
 import: import
 misc: misc
 modify_settings: apply
-matomo_host: Host of your website in Piwik (without http:// or https://)
-matomo_site_id: ID of your website in Piwik
-matomo_enabled: Enable Piwik
+matomo_host: Host of your website in Matomo (without http:// or https://)
+matomo_site_id: ID of your website in Matomo
+matomo_enabled: Enable Matomo
 demo_mode_enabled: Enable demo mode? (Only used for the public wallabag demo)
 demo_mode_username: Demo user
 share_public: Allow public URLs for entries
 download_images_enabled: Download images locally
 restricted_access: Enable authentication for paywalled websites
-api_user_registration: Enable user to be registered using the API
+api_user_registration: Turn on user registration via the API
 store_article_headers: Enable if wallabag stores HTTP headers for each article
-shaarli_share_origin_url: Enable sharing origin url to Shaarli, if the service is
-  enabled
+shaarli_share_origin_url: Enable sharing origin URL to Shaarli, if the service is enabled

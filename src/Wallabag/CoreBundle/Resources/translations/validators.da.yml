@@ -1,3 +1,3 @@
 validator:
-    password_must_match: 'De indtastede adgangskoder skal være ens'
-    password_too_short: 'Adgangskoden skal være mindst 8 tegn'
+    password_must_match: 'De indtastede adgangskoder skal være ens.'
+    password_too_short: 'Adgangskoden skal være mindst 8 tegn.'

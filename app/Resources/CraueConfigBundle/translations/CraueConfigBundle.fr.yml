@@ -27,16 +27,14 @@ export: export
 import: import
 misc: divers
 modify_settings: appliquer
-matomo_host: URL de votre site dans Piwik (sans http:// ou https://)
-matomo_site_id: ID de votre site dans Piwik
-matomo_enabled: Activer Piwik
-demo_mode_enabled: Activer le mode démo ? (Utiliser uniquement pour la démo publique
-  de wallabag)
+matomo_host: URL de votre site dans Matomo (sans http:// ou https://)
+matomo_site_id: ID de votre site dans Matomo
+matomo_enabled: Activer Matomo
+demo_mode_enabled: Activer le mode démo ? (Utiliser uniquement pour la démo publique de wallabag)
 demo_mode_username: Utilisateur de la démo
 share_public: Autoriser les URL publiques pour les articles
 download_images_enabled: Télécharger les images en local
 restricted_access: Activer l'authentification pour les sites avec paywall
 api_user_registration: Activer la création de compte depuis l'API
 store_article_headers: Activer le stockage des en-têtes HTTP de chaque article
-shaarli_share_origin_url: Activer le partage de l'adresse d'origine vers Shaarli,
-  si le service est activé
+shaarli_share_origin_url: Activer le partage de l'adresse d'origine vers Shaarli, si le service est activé

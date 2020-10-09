@@ -31,17 +31,32 @@ config:
         user_info: Gebruikers informatie
         rss: RSS
         settings: Instellingen
+        ignore_origin: Negeer oorsprong regels
+        feed: Feeds
+        reset: Reset gebied
     page_title: Configuratie
     form_user:
         delete:
             title: Verwijder mijn account (a.k.a gevaarlijke zone)
             button: Verwijder mijn account
             confirm: Weet u het zeker? (DIT KAN NIET ONGEDAAN GEMAAKT WORDEN)
+            description: Als je je account verwijdert, worden AL je artikelen, AL je tags, AL je annotaties en je account PERMANENT verwijderd (het kan niet ONGEDAAN gemaakt worden). U wordt vervolgens uitgelogd.
         help_twoFactorAuthentication: Wanneer u 2FA inschakelt, krijgt u bij elke inlogactie bij wallabag een code per mail.
         twoFactorAuthentication_label: Twee factor authenticatie
         email_label: E-mailadres
         name_label: Naam
         two_factor_description: Inschakken van 2-factor-authenticatie betekend dat u een email krijgt met een code elke keer als verbinding maakt met een nieuw niet vertrouwd apparaat.
+        two_factor:
+            action_app: Gebruik OTP app
+            action_email: Gebruik email
+            state_disabled: Uitgeschakeld
+            state_enabled: Ingeschakeld
+            table_action: Actie
+            table_state: Status
+            table_method: Methode
+            googleTwoFactor_label: Gebruik maken van OTP app (open de app, zoals Google Authenticator, Authy of FreeOTP, om een eenmalige code te krijgen)
+            emailTwoFactor_label: Gebruik maken van email (ontvang een code per mail)
+        login_label: Login (kan niet veranderd worden)
     form_rss:
         rss_limit: Aantal items in de lijst
         rss_link:
@@ -63,12 +78,12 @@ config:
                 notmatches: 'Valideert dat een <i>onderwerp</i> niet gelijk is aan <i>zoek</i> (hoofdletter-ongevoelig.<br />Voorbeeld: <code>titel niet gelijk aan "voetbal"</code>'
                 and: Één regel EN een andere
                 or: Één regel OF een andere
-                not_equal_to: Niet gelijk aan...
-                equal_to: Gelijk aan...
-                strictly_greater_than: Strikt groter dan...
-                greater_than: Groter dan...
-                strictly_less_than: Strikt minder dan...
-                less_than: Minder dan...
+                not_equal_to: Niet gelijk aan…
+                equal_to: Gelijk aan…
+                strictly_greater_than: Strikt groter dan…
+                greater_than: Groter dan…
+                strictly_less_than: Strikt minder dan…
+                less_than: Minder dan…
                 label: Operator
             variable_description:
                 domainName: De domeinnaam van het item
@@ -87,12 +102,22 @@ config:
             how_to_use_them_title: Hoe gebruik is ze?
             tagging_rules_definition_title: Wat betekend « label regels »?
             title: FAQ
+            how_to_use_them_description: 'Laten we aannemen dat u nieuwe vermeldingen wilt labelen als « <i>korte lezing</i> » wanneer de leestijd minder dan 3 minuten bedraagt.<br />In dat geval moet u « readingTime &lt;= 3 » in het <i>Regelveld</i> en « <i>korte lezing</i> » in het <i>Labels</i> veld.<br />Meerdere labels kunnen tegelijkertijd worden toegevoegd door ze te scheiden met een komma:« <i>korte lezing, belangrijk</i> »<br />Complexe regels kunnen worden geschreven met behulp van vooraf gedefinieerde operators: if « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » label dan als« <i>lange lezing, GitHub </i> »'
         tags_label: Labels
         rule_label: Regel
         edit_rule_label: wijzig
         delete_rule_label: verwijder
         then_tag_as_label: dan label als
         if_label: als
+        export: Exporteer
+        import_submit: Importeer
+        file_label: JSON bestand
+        card:
+            export_tagging_rules_detail: Hiermee wordt een JSON-bestand gedownload dat u kunt gebruiken om labelregels elders te importeren of om er een back-up van te maken.
+            new_tagging_rule: Maak een labelregel
+            import_tagging_rules: Importeer labelregels
+            export_tagging_rules: Exporteer labelregels
+            import_tagging_rules_detail: Selecteer het JSON-bestand dat u eerder hebt geëxporteerd.
     form_password:
         repeat_new_password_label: Herhaal nieuw wachtwoord
         new_password_label: Nieuw wachtwoord
@@ -106,6 +131,47 @@ config:
         annotations: Verwijder ALLE annotaties
         description: Door onderstaande knoppen te gebruiken kan u bepaalde informatie van uw account verwijderen. Wees gewaarschuwd dat NIET niet ongedaan gemaakt kan worden.
         title: Reset opties (a.k.a gevaarlijke zone)
+    otp:
+        app:
+            enable: Inschakelen
+            cancel: Annuleer
+            two_factor_code_description_4: 'Test een OTP-code van uw geconfigureerde app:'
+            two_factor_code_description_3: 'Bewaar deze back-upcodes op een veilige plaats, u kunt dit gebruiken voor het geval u de toegang tot uw OTP-app verliest:'
+            two_factor_code_description_2: 'U kunt de QR-code scannen met uw app:'
+            two_factor_code_description_1: U hebt zojuist de OTP-tweefactorauthenticatie ingeschakeld, uw OTP-app geopend en die code gebruikt om een eenmalig wachtwoord te krijgen. Het verdwijnt nadat de pagina opnieuw is geladen.
+        page_title: Twee-factor authenticatie
+    form_ignore_origin_rules:
+        faq:
+            ignore_origin_rules_definition_title: Wat betekend « Negeer oorsprong regels »?
+            operator_description:
+                matches: 'Test of een <i>onderwerp</i> overeenkomt met een <i>zoekopdracht</i> (niet hoofdlettergevoelig). <br />Voorbeeld: <code>_all ~ "https?: //rss.example.com/ foobar /.* "</code>'
+                equal_to: Gelijk aan…
+                label: Operator
+            variable_description:
+                _all: Volledig adres, hoofdzakelijk voor patroon matching
+                host: Host van het adres
+                label: Variabele
+            meaning: Betekenis
+            variables_available_description: 'De volgende variabelen en operatoren kunnen worden gebruikt om regels voor het negeren van oorsprong te creëren:'
+            variables_available_title: Welke variabelen en operatoren kunnen gebruikt worden om regels te schrijven?
+            how_to_use_them_description: Laten we aannemen dat u de oorsprong van een item wilt negeren dat afkomstig is van «<i>rss.example.com</i>» (<i>wetende dat na een omleiding het daadwerkelijke adres example.com is</i>) . <br />In dat geval moet u «host =" rss.example.com "» in het veld <i> Regel </i> plaatsen.
+            how_to_use_them_title: Hoe gebruik ik ze?
+            ignore_origin_rules_definition_description: Ze worden door wallabag gebruikt om automatisch een oorsprongsadres te negeren na een omleiding. <br />Als een omleiding plaatsvindt tijdens het ophalen van een nieuw item, zullen alle regels voor het negeren van de oorsprong (<i>door de gebruiker gedefinieerd en door de instantie gedefinieerd</i>) gebruikt worden om het oorspronkelijke adres te negeren.
+            title: Veelgestelde vragen
+    form_feed:
+        feed_links: Feedlinks
+        feed_limit: Aantal items in de feed
+        feed_link:
+            all: Alles
+            archive: Gearchiveerd
+            starred: Gemarkeerd
+            unread: Ongelezen
+        token_revoke: Token intrekken
+        token_reset: Token opnieuw genereren
+        token_create: Creëer uw token
+        no_token: Geen token
+        token_label: Feed token
+        description: Met Atom-feeds van wallabag kunt u uw opgeslagen artikelen lezen met uw favoriete Atom-lezer. U moet wel eerst een token genereren.
 footer:
     stats: Sinds %user_creation% heeft u %nb_archives% artikelen gelezen. Dat is ongeveer %per_day% per dag!
     wallabag:
@@ -121,6 +187,8 @@ menu:
         filter_entries: Filter items
         search: Zoeken
         add_new_entry: Voeg nieuw item toe
+        account: Mijn account
+        random_entry: Spring naar een willekeurig item van de lijst
     left:
         site_credentials: Site inloggegevens
         users_management: Gebruikeresbeheer
@@ -130,7 +198,7 @@ menu:
         about: Over
         logout: Uitloggen
         developer: API clients beheren
-        howto: Hoe
+        howto: Handleidingen
         import: Importeer
         internal_settings: Interne Instellingen
         tags: Labels
@@ -139,6 +207,8 @@ menu:
         archive: Archief
         starred: Gemarkeerd
         unread: Ongelezen
+        ignore_origin_instance_rules: Globaal negeer-oorsprongsregels
+        quickstart: Snelstart
 security:
     login:
         password: Wachtwoord
@@ -191,6 +261,7 @@ flashes:
             entry_reloaded: Item herladen
             entry_updated: Item geüpdatet
             entry_saved: Item opgeslagen
+            no_random_entry: Er is geen artikel met deze criteria gevonden
     config:
         notice:
             archived_reset: Gearchiveerde items verwijderd
@@ -205,9 +276,24 @@ flashes:
             user_updated: Informatie veranderd
             password_updated: Wachtwoord veranderd
             config_saved: Configuratie opgeslagen.
+            ignore_origin_rules_updated: Negeer oorsprongregel gewijzigd
+            ignore_origin_rules_deleted: Negeer oorsprongregel verwijderd
+            tagging_rules_not_imported: Fout bij importeren van labeling regels
+            tagging_rules_imported: Labeling regels geïmporteerd
+            otp_disabled: Twee factor authenticatie uitgeschakeld
+            otp_enabled: Twee factor authenticatie ingeschakeld
+            feed_token_revoked: Feed token ingetrokken
+            feed_token_updated: Feed token gewijzigd
+            feed_updated: Feed informatie gewijzigd
     tag:
         notice:
             tag_added: Label toegevoegd
+            tag_renamed: Label hernoemd
+    ignore_origin_instance_rule:
+        notice:
+            deleted: Globale oorsprongregel voor negeren verwijderd
+            updated: Globale oorsprongregel voor negeren gewijzigd
+            added: Globale oorsprongregel voor negeren toegevoegd
 error:
     page_title: Een fout heeft zich voorgedaan
 site_credential:
@@ -217,8 +303,8 @@ site_credential:
         delete: Verwijder
         save: Opslaan
         password_label: Wachtwoord
-        host_label: Host
-        username_label: Gebruikersnaam
+        host_label: Host (subdomain.example.org, .example.org, etc.)
+        username_label: Login
     list:
         create_new_one: Creëer nieuwe inloggegevens
         no: Nee
@@ -244,6 +330,8 @@ user:
         email_label: E-mail
         plain_password_label: ????
         last_login_label: Laatste login
+        twofactor_google_label: Twee factor authenticatie met OTP app
+        twofactor_email_label: Twee factor authenticatie met email
     list:
         create_new_one: Maak een nieuwe gebruiker
         no: Nee
@@ -285,6 +373,7 @@ developer:
             redirect_uris_label: Omleiding URLs (optioneel)
             name_label: Naam van de client
         page_description: U staat op het punt een nieuwe client aan te maken. Vul het onderstaande veld in voor de omleidings-URI van uw applicatie.
+        copy_to_clipboard: Kopieer
     existing_clients:
         field_grant_types: Grant type toegestaan
         no_client: Geen clients momenteel.
@@ -347,13 +436,16 @@ import:
     page_title: Importeren
     firefox:
         page_title: Importeer > Firefox
-        description: Deze importeur importeert al uw Firefox-bladwijzers. Ga naar uw bladwijzers (Ctrl + Shift + O), en kies dan "Importeren en back-up", kies "Back-up ...". U krijgt een .json-bestand.
+        description: Deze importeur importeert al uw Firefox-bladwijzers. Ga naar uw bladwijzers (Ctrl + Shift + O), en kies dan "Importeren en back-up", kies "Back-up…". U krijgt een .json-bestand.
         how_to: Kies het back-upbestand van de bladwijzer en klik op de onderstaande knop om het te importeren. Houd er rekening mee dat het proces lang kan duren, aangezien alle artikelen moeten worden opgehaald.
     action:
         import_contents: Importeer inhoud
     worker:
         enabled: 'Het importeren wordt asynchroon uitgevoerd. Zodra de importeer taak is gestart, zal een extern proces de taken één voor één afhandelen. De huidige service is:'
         download_images_warning: U heeft het downloaden van afbeeldingen voor uw artikelen ingeschakeld. In combinatie met de klassieke import kan het eeuwen duren om door te gaan (of het mislukt misschien). We <strong> raden sterk aan </strong> om asynchroon importeren in te schakelen om fouten te voorkomen.
+    elcurator:
+        description: Deze importeur importeert al je elCurator-artikelen. Ga naar voorkeuren in uw elCurator-account en exporteer vervolgens uw inhoud. Je krijgt een JSON-bestand.
+        page_title: Importeer > elCurator
 export:
     unknown: Onbekend
     footer_template: <div style="text-align:center;"><p>Gemaakt door wallabag met %method%</p><p>Open <a href="https://github.com/wallabag/wallabag/issues">een probleem</a> als u problemen ondervind met dit E-Book op uw apparaat.</p></div>
@@ -364,6 +456,8 @@ tag:
     list:
         number_on_the_page: '{0} Er zijn geen labels.|{1} Er is één label.|]1,Inf[ Er zijn %count% labels.'
         see_untagged_entries: Toon niet gelabelde items
+        no_untagged_entries: Er zijn geen items zonder labels.
+        untagged: Niet gelabelde items
     page_title: Labels
 quickstart:
     support:
@@ -416,6 +510,7 @@ quickstart:
         language: Verander taal en uiterlijk
         description: Om een applicatie te vinden die bij u past kan u een kijkje nemen op de configuratiepagina van wallabag.
         title: Configureer de applicatie
+        feed: Ingeschakelde feeds
     more: Meer…
     page_title: Snelstart
 howto:
@@ -532,6 +627,7 @@ entry:
         address: Adres
         reading_time_minutes_short: '%readingTime% min'
         reading_time: Geschatte leestijd
+        published_on: Gepubliceerd op
     confirm:
         delete_tag: Weet u zeker dat u dit label wilt verwijderen van dit artikel?
         delete: Weet u zeker dat u dit artikel wilt verwijderen?
@@ -597,3 +693,20 @@ entry:
         starred: Gemarkeerde items
         unread: Ongelezen items
     default_title: Titel van het item
+ignore_origin_instance_rule:
+    list:
+        edit_action: Wijzig
+        actions: Acties
+        create_new_one: Maak een nieuwe algemene regel voor het negeren van de oorsprong
+        no: Nee
+        yes: Ja
+    description: Hier kunt u de algemene regels voor het negeren van oorsprong beheren die worden gebruikt om bepaalde patronen van de oorspronkelijke URL te negeren.
+    edit_ignore_origin_instance_rule: Bewerk een bestaande regel voor het negeren van de oorsprong
+    new_ignore_origin_instance_rule: Maak een algemene regel voor het negeren van de oorsprong
+    page_title: Globale negeer oorsprongsregels
+    form:
+        back_to_list: Terug naar lijst
+        delete_confirm: Weet u het zeker?
+        delete: Verwijder
+        save: Opslaan
+        rule_label: Regel

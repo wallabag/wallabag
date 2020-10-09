@@ -117,12 +117,12 @@ config:
                 domainName: 'O domínio da entrada'
             operator_description:
                 label: 'Operador'
-                less_than: 'Menor que...'
-                strictly_less_than: 'Estritamente menor que...'
-                greater_than: 'Maior que...'
-                strictly_greater_than: 'Estritamente maior que...'
-                equal_to: 'Igual a...'
-                not_equal_to: 'Diferente de...'
+                less_than: 'Menor que…'
+                strictly_less_than: 'Estritamente menor que…'
+                greater_than: 'Maior que…'
+                strictly_greater_than: 'Estritamente maior que…'
+                equal_to: 'Igual a…'
+                not_equal_to: 'Diferente de…'
                 or: 'Uma regra OU outra'
                 and: 'Uma regra E outra'
                 matches: 'Testa que um <i>assunto</i> corresponde a uma <i>pesquisa</i> (maiúscula ou minúscula).<br />Exemplo: <code>título corresponde a "futebol"</code>'
@@ -258,7 +258,7 @@ howto:
         description: 'Arraste e solve este link na sua barra de favoritos:'
 quickstart:
     page_title: 'Começo Rápido'
-    more: 'Mais...'
+    more: 'Mais…'
     intro:
         title: 'Bem-vindo ao wallabag!'
         paragraph_1: 'Nós podemos acompanhar você em sua visita ao wallabag e mostrar algumas funcionalidades que podem lhe interessar.'

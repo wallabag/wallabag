@@ -1,6 +1,6 @@
 # Two factor mail
 auth_code:
-    on: 'on'
+    on: ''
     mailer:
         subject: 'wallabag — код автентифікації'
         body:
