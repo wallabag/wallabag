@@ -38,7 +38,7 @@ menu:
         filter_entries: فیلترکردن مقاله‌ها
         export: برون‌بری
     search_form:
-        input_label: 'جستجوی خود را این‌جا بنویسید:'
+        input_label: 'جستجوی خود را این‌جا بنویسید'
 footer:
     wallabag:
         elsewhere: wallabag همراه شما
@@ -87,7 +87,7 @@ config:
             archive: بایگانی
         rss_limit: محدودیت آر-اس-اس
     form_user:
-        two_factor_description: با فعال‌کردن تأیید ۲مرحله‌ای هر بار که اتصال تأییدنشده‌ای برقرار شد، به شما یک کد از راه ایمیل فرستاده می‌شود
+        two_factor_description: با فعال‌کردن تأیید ۲مرحله‌ای هر بار که اتصال تأییدنشده‌ای برقرار شد، به شما یک کد از راه ایمیل فرستاده می‌شود.
         name_label: نام
         email_label: نشانی ایمیل
         twoFactorAuthentication_label: تأیید ۲مرحله‌ای
@@ -197,10 +197,10 @@ about:
     helping:
         description: 'wallabag رایگان، آزاد، و متن‌باز است. شما می‌توانید به ما کمک کنید:'
         by_contributing: 'با مشارکت در پروژه:'
-        by_contributing_2: 'فهرست نیازمندی‌های ما در این صفحه است:'
+        by_contributing_2: 'فهرست نیازمندی‌های ما در این صفحه است'
         by_paypal: از راه Paypal
     contributors:
-        description: از مشارکت شما در برنامهٔ وب wallabag ممنونیم.
+        description: از مشارکت شما در برنامهٔ وب wallabag ممنونیم
     third_party:
         description: 'فهرست کتابخانه‌های نرم‌افزاری که در wallabag به کار رفته‌اند (به همراه پروانهٔ آن‌ها) :'
         package: بسته
@@ -229,7 +229,7 @@ quickstart:
     page_title: Quickstart
     intro:
         title: به wallabag خوش آمدید!!
-        paragraph_1: به شما کمک خواهیم کرد تا wallabag را بشناسید و با برخی از ویژگی‌های جالبش آشنا شوید
+        paragraph_1: به شما کمک خواهیم کرد تا wallabag را بشناسید و با برخی از ویژگی‌های جالبش آشنا شوید.
         paragraph_2: ادامه دهید!
     configure:
         title: برنامه را تنظیم کنید
@@ -265,10 +265,10 @@ quickstart:
         export: مقاله‌هایتان را به قالب ePUB یا PDF دربیاورید
         search_filters: به کمک موتور جستجو و فیلترها به دنبال مقاله‌هایتان بگردید
         fetching_errors: اگر مقاله‌ای هنگام ذخیره‌ شدن به مشکل برخورد چه کار کنید؟
-        all_docs: و بسیاری از موضوعات دیگر
+        all_docs: و بسیاری از موضوعات دیگر!
     support:
         title: پشتیبانی
-        description: به کمک نیاز دارید؟ ما پشتیبان شما هستیم!
+        description: به کمک نیاز دارید؟ ما پشتیبان شما هستیم.
         github: روی گیت‌هاب
         email: با ایمیل
         gitter: روی گیتر
@@ -345,5 +345,5 @@ flashes:
     import:
         notice:
             failed: درون‌ریزی شکست خورد. لطفاً دوباره تلاش کنید.
-            failed_on_file: خطا هنگام پردازش پروندهٔ ورودی. آیا پروندهٔ درون‌ریزی شده سالم است؟
+            failed_on_file: خطا هنگام پردازش پروندهٔ ورودی. آیا پروندهٔ درون‌ریزی شده سالم است.
             summary: 'گزارش درون‌ریزی: %imported% وارد شد, %skipped% از قبل ذخیره شده بود.'
