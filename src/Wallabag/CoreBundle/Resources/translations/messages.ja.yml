@@ -198,6 +198,10 @@ config:
         app:
             two_factor_code_description_2: 'アプリでQRコードをスキャンしてください:'
             two_factor_code_description_1: OTPによる二要素認証を有効化します、OTPアプリを開いてコードを使用しワンタイムパスワードを入手します。これはページをリロードすると消失します。
+            enable: 有効化
+            cancel: キャンセル
+            two_factor_code_description_4: '設定したアプリのOTPコードをテストします:'
+            two_factor_code_description_3: 'また、このバックアップコードを安全な場所に保管してください。OTPアプリへアクセスできなくなった場合に使用することができます。:'
         page_title: 二要素認証
     form_ignore_origin_rules:
         faq:
@@ -272,6 +276,7 @@ entry:
         address: アドレス
         reading_time_minutes_short: '%readingTime% 分'
         reading_time: 推定読了時間
+        published_on: 公開日
     confirm:
         delete_tag: 本当にこのタグを記事から削除してよろしいですか？
         delete: 本当にこの記事を削除してよろしいですか？
@@ -371,6 +376,7 @@ quickstart:
         language: 言語とデザインを変更します
         rss: RSS フィードを有効にします
         tagging_rules: 自動的にあなたの記事にタグ付けするルールを記述します
+        feed: フィードを有効化します
     admin:
         title: 管理
         description: '管理者として wallabag に対する権限があります。できること:'
@@ -415,6 +421,8 @@ tag:
     list:
         number_on_the_page: '{0} タグはありません。|{1} 1 つタグがあります。|]1,Inf[ %count% タグがあります。'
         see_untagged_entries: タグのないエントリーを参照
+        untagged: タグの付いていないエントリー
+        no_untagged_entries: タグの付いていないエントリーはありません。
     new:
         placeholder: コンマで区切ると複数のタグを追加することができます。
         add: 追加
@@ -452,7 +460,7 @@ import:
         enabled: 'インポートは非同期に行われます。インポート タスクが開始されると、外部のワーカーが一度に 1 つのジョブを処理します。現在のサービスは:'
         download_images_warning: 記事の画像ダウンロードを有効にしました。旧式のインポートと組み合わさると時間がかかります（または失敗するかもしれません）。エラーを避けるために非同期インポートの有効化を<strong>強く推奨</strong>します。
     firefox:
-        description: このインポーターは Firefox のブックマークをインポートします。ブックマーク (Ctrl+Shift+B) に移動して、"インポートとバックアップ" で、"バックアップ..." を選択します。.json ファイルが得られます。
+        description: このインポーターは Firefox のブックマークをインポートします。ブックマーク (Ctrl+Shift+B) に移動して、"インポートとバックアップ" で、"バックアップ…" を選択します。JSONファイルが得られます。
         how_to: インポートするには、ブックマークのバックアップファイルを選択してボタンをクリックしてください。すべての記事を読み込む必要があるため、処理に時間のかかる場合があります。
         page_title: インポート > Firefox
     instapaper:
@@ -468,6 +476,9 @@ import:
         how_to: アップロードとインポートのためにPinboardでエクスポートしたものを選択してボタンをクリックしてください。
         description: このインポーターは Pinboard の記事すべてをインポートします。バックアップ (https://pinboard.in/settings/backup) ページの "Bookmarks" セクションで "JSON" をクリックしてください。JSONファイルがダウンロードされます（"pinboard_export"のように）。
         page_title: インポート > Pinboard
+    elcurator:
+        description: このインポーターは elCurator の記事すべてをインポートします。あなたのアカウントのpreferences へ行き、コンテンツをエクスポートします。JSONファイルができます。
+        page_title: インポート > elCurator
 developer:
     welcome_message: wallabag API へようこそ
     how_to_first_app: 最初のアプリケーションを作成する方法
@@ -495,6 +506,7 @@ developer:
             save_label: 新しいクライアントを作成
         action_back: 戻る
         page_title: APIクライアント管理 > 新しいクライアント
+        copy_to_clipboard: コピー
     client_parameter:
         page_description: これはクライアントのパラメーターです。
         field_name: クライアント名
@@ -534,6 +546,8 @@ user:
         repeat_new_password_label: 新しいパスワードを再記入
         name_label: 名前
         username_label: ユーザー名
+        twofactor_google_label: OTPアプリによる二要素認証
+        twofactor_email_label: メールによる二要素認証
     search:
         placeholder: ユーザー名かメールアドレスでフィルター
     list:
@@ -591,3 +605,7 @@ flashes:
 export:
     unknown: 不明
     footer_template: <div style="text-align:center;"><p>%method% は wallabag で生成されました</p><p>もしあなたのデバイスでこの電子書籍の表示に問題がある場合は、<a href="https://github.com/wallabag/wallabag/issues">issue</a>をオープンしてください。</p></div>
+ignore_origin_instance_rule:
+    edit_ignore_origin_instance_rule: 既存の転送元無視ルールの編集
+    new_ignore_origin_instance_rule: グローバル転送元無視ルールを作成
+    page_title: グローバル転送元無視ルール
