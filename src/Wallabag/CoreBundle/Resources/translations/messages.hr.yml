@@ -15,6 +15,7 @@ developer:
             name_label: Ime klijenta
         page_title: Upravljanje klijentima sučelja > Novi klijent
         page_description: Stvorit ćeš novog klijenta. Ispuni donja polja za preusmjeravanje URI adrese tvojeg programa.
+        copy_to_clipboard: Kopiraj
     clients:
         create_new: Stvori novog klijenta
         title: Klijent
@@ -52,7 +53,7 @@ import:
     firefox:
         how_to: 'Odaberi datoteku sigurnosne kopije zabilježaka i pritisni donji gumb za uvoz datoteke. Napomena: uvoz može potrajati, jer se moraju dohvatiti svi članci.'
         page_title: Uvoz > Firefox
-        description: Ovaj uvoznik uvozi sve tvoje Firefox zabilješke. Idi na zabilješke (Ctrl+Maj+O), zatim u „Uvoz i sigurnosna kopija“, odaberi „Sigurnosna kopija …“. Dobit ćete .json datoteku.
+        description: Ovaj uvoznik uvozi sve tvoje Firefox zabilješke. Idi na zabilješke (Ctrl+Shift+O), zatim u „Uvoz i sigurnosna kopija“, odaberi „Sigurnosna kopija …“. Dobit ćeš .json datoteku.
     wallabag_v2:
         description: Ovaj uvoznik uvozi sve tvoje wallabag v2 članke. Idi na „Svi članci”, zatim na bočnoj traci za izvoz, pritisni „JSON”. Dobit ćeš datoteku „Svi članci.json”.
         page_title: Uvoz > Wallabag v2
@@ -96,6 +97,9 @@ import:
     page_description: Dobro došao/dobro došla u uvoznik wallabaga. Odaberi prethodnu uslugu s koje želiš premjestiti podatke.
     action:
         import_contents: Sadržaj uvoza
+    elcurator:
+        description: Ovaj će uvoznik uvesti sve tvoje elCurator članke. Prijeđi na postavke na tvom elCurator računu, a zatim izvezi sadržaj. Dobit ćete JSON datoteku.
+        page_title: Uvezi > elCurator
 about:
     helping:
         by_contributing: 'doprinošenjem projektu:'
@@ -178,6 +182,15 @@ config:
         then_tag_as_label: zatim etiketiraj kao
         tags_label: Etikete
         rule_label: Pravilo
+        card:
+            export_tagging_rules_detail: Ovime će se preuzeti JSON datoteku koju možeš koristiti za uvoz pravila označivanja na drugim mjestima ili za izradu sigurnosne kopije.
+            import_tagging_rules_detail: Moraš odabrati prethodno izvezenu JSON datoteku.
+            export_tagging_rules: Izvezi pravila za označivanje
+            import_tagging_rules: Uvezi pravila za označivanje
+            new_tagging_rule: Stvori pravilo za označivanje
+        export: Izvezi
+        import_submit: Uvezi
+        file_label: JSON datoteka
     form_settings:
         theme_label: Tema
         help_items_per_page: Možeš promijeniti broj prikazanih članaka na svakoj stranici.
@@ -212,6 +225,17 @@ config:
         twoFactorAuthentication_label: Dvofaktorska autentifikacija
         help_twoFactorAuthentication: Ako aktiviraš dvofaktorsku autentifikaciju, pri svakoj prijavi na wallabag primit ćeš e-mail s kodom.
         email_label: E-mail
+        two_factor:
+            action_app: Koristi OTP program
+            action_email: Koristi e-mail
+            state_disabled: Deaktivirano
+            state_enabled: Aktivirano
+            table_action: Radnja
+            table_state: Stanje
+            table_method: Metoda
+            emailTwoFactor_label: Upotreba e-maila (primi kod putem e-maila)
+            googleTwoFactor_label: Upotreba OTP programa (otvori program – npr. Google Authenticator, Authy or FreeOTP – za dobivanje jednokratnog koda)
+        login_label: Prijava (ne može se promijeniti)
     page_title: Konfiguracija
     reset:
         archived: Ukloni SVE arhivirane zapise
@@ -235,6 +259,48 @@ config:
         password: Lozinka
         rss: RSS
         settings: Postavke
+        reset: Ponovo postavi područje
+        ignore_origin: Zanemari pravila izvora
+        feed: Feedovi
+    otp:
+        app:
+            two_factor_code_description_3: 'Također, spremi ove sigurnosne kodove na sigurno mjesto. Možeš ih koristiti u slučaju da izgubiš pristup OTP programu:'
+            two_factor_code_description_1: Upravo si aktivirao/la dvofaktorsku OTP autentifikaciju. Otvori OTP program i koristi taj kod za dobivanje jednokratne lozinke. Lozinka će nestati nakon ponovnog učitavanja stranice.
+            two_factor_code_description_4: 'Testiraj OTP kod iz tvog konfiguriranog programa:'
+            two_factor_code_description_2: 'QR kod možeš skenirati pomoću tvog programa:'
+            enable: Aktiviraj
+            cancel: Odustani
+        page_title: Dvofaktorska autentifikacija
+    form_ignore_origin_rules:
+        faq:
+            operator_description:
+                matches: 'Provjerava, poklapa li se <i>subjekt</i> s <i>traženim pojmom</i> (razlikuje velika/mala slova).<br />Primjer: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
+                equal_to: Jednako …
+                label: Operator
+            variable_description:
+                _all: Potpuna adresa, uglavnom za poklapanje uzoraka
+                host: Računalo adrese
+                label: Varijabla
+            meaning: Značenje
+            variables_available_description: 'Za zanemarivanje pravila izvora mogu se koristiti sljedeće varijable i operatori:'
+            variables_available_title: Koje se varijable i operatori mogu koristiti za pisanje pravila?
+            how_to_use_them_title: Kako ih koristiti?
+            ignore_origin_rules_definition_title: Što znači „zanemarivanje pravila izvora”?
+            title: ČPP
+    form_feed:
+        description: Atom feedovi koje pruža wallabag omogućuju čitanje spremljenih članaka pomoću tvojeg omiljenog Atom čitača. Najprije moraš generirati token.
+        no_token: Nema tokena
+        token_label: Token feeda
+        feed_limit: Broj elemenata u feedu
+        feed_link:
+            all: Sve
+            archive: Arhivirano
+            starred: Označeno
+            unread: Nepročitano
+        feed_links: Poveznice feeda
+        token_revoke: Odbaci tvoj token
+        token_reset: Ponovo generiraj tvoj token
+        token_create: Stvori tvoj token
 howto:
     mobile_apps:
         android:
@@ -307,6 +373,7 @@ flashes:
             entry_reloaded: Zapis ponovo učitan
             entry_saved: Zapis spremljen
             entry_archived: Zapis arhiviran
+            no_random_entry: Nema članaka s ovim kriterijima
     user:
         notice:
             added: Korisnik „%username%” dodan
@@ -339,6 +406,15 @@ flashes:
             rss_updated: RSS podatak aktualiziran
             user_updated: Podaci aktualizirani
             entries_reset: Zapis resetiran
+            ignore_origin_rules_updated: Pravilo za zanemarivanje izvora aktualizirano
+            ignore_origin_rules_deleted: Pravilo za zanemarivanje izvora izbrisano
+            tagging_rules_not_imported: Greška pri uvozu pravila označivanja
+            tagging_rules_imported: Pravila označivanja uvezena
+            otp_disabled: Dvofaktorska autentifikacija deaktivirana
+            otp_enabled: Dvofaktorska autentifikacija aktivirana
+            feed_token_revoked: Token feeda opozvan
+            feed_token_updated: Token feeda aktualiziran
+            feed_updated: Podaci feeda aktualizirani
     site_credential:
         notice:
             deleted: Podaci za prijavu na stranicu „%host%” izbrisani
@@ -347,6 +423,12 @@ flashes:
     tag:
         notice:
             tag_added: Etiketa dodana
+            tag_renamed: Oznaka preimenovana
+    ignore_origin_instance_rule:
+        notice:
+            deleted: Globalno pravilo za zanemarivanje izvora izbrisano
+            updated: Globalno pravilo za zanemarivanje izvora aktualizirano
+            added: Globalno pravilo za zanemarivanje izvora dodano
 site_credential:
     list:
         yes: Da
@@ -356,10 +438,10 @@ site_credential:
         edit_action: Uredi
     form:
         password_label: Lozinka
-        host_label: Računalo
+        host_label: Računalo (poddomena.primjer.org, .primjer.org, itd.)
         save: Spremi
         delete_confirm: Stvarno?
-        username_label: Korisničko ime
+        username_label: Prijava
         delete: Izbriši
         back_to_list: Natrag na popis
     edit_site_credential: Uredi jedan postojeći podatak za prijavu
@@ -445,6 +527,7 @@ entry:
         added_on: Dodano
         reading_time: Procijenjeno vrijeme čitanja
         address: Adresa
+        published_on: Datum objavljivanja
     confirm:
         delete: Stvarno želiš ukloniti taj članak?
         delete_tag: Stvarno želiš ukloniti tu etiketu za taj članak?
@@ -480,6 +563,8 @@ user:
         password_label: Lozinka
         name_label: Ime
         email_label: E-mail
+        twofactor_google_label: Dvofaktorska autentifikacija putem OTP programa
+        twofactor_email_label: Dvofaktorska autentifikacija putem e-maila
     description: Ovdje možeš upravljati svim korisnicima (stvoriti, urediti i brisati)
     list:
         create_new_one: Stvori novog korisnika
@@ -514,6 +599,7 @@ quickstart:
         tagging_rules: Odredi pravila za automatsko etiketiranje članaka
         title: Konfiguriraj program
         language: Promijeni jezik i dizajn
+        feed: Aktiviraj feedove
     developer:
         description: 'Mislili smo i na pregramere: Docker, sučelje (API), prijevodi itd.'
         create_application: Stvori tvoj program
@@ -551,7 +637,7 @@ menu:
         config: Konfiguracija
         logout: Odjava
         about: Informacije
-        tags: Etikete
+        tags: Oznake
         starred: Favorizirano
         site_credentials: Podaci za prijavu na stranicu
         archive: Arhiv
@@ -563,17 +649,23 @@ menu:
         users_management: Upravljanje korisnicima
         import: Uvoz
         developer: Upravljanje klijentima sučelja
+        ignore_origin_instance_rules: Globalna pravila za zanemarivanje izvora
+        quickstart: Brzo pokretanje
     top:
         add_new_entry: Dodaj novi zapis
         filter_entries: Filtriraj zapise
         search: Traži
         export: Izvoz
+        random_entry: Prijeđi na slučajni unos tog popisa
+        account: Moj račun
     search_form:
         input_label: Ovdje upiši što tražiš
 tag:
     list:
         number_on_the_page: '{0} Nema etiketa.|{1} Postoji jedna etiketa.|]1,Inf[ Broj etiketa: %count%.'
         see_untagged_entries: Pogledaj neetiketirane zapise
+        untagged: Neoznačeni unosi
+        no_untagged_entries: Nema neoznačenih unosa.
     page_title: Etikete
     new:
         add: Dodaj
@@ -598,3 +690,20 @@ export:
     unknown: Nepoznato
 error:
     page_title: Došlo je do greške
+ignore_origin_instance_rule:
+    description: Ovdje možeš upravljati globalnim pravilima za zanemarivanje izvora koja se koriste za zanemarivanje nekih URL uzoraka izvora.
+    list:
+        create_new_one: Stvori novo globalno pravilo za zanemarivanje izvora
+        no: Ne
+        yes: Da
+        edit_action: Uredi
+        actions: Radnje
+    edit_ignore_origin_instance_rule: Uredi postojeće globalno pravilo za zanemarivanje izvora
+    new_ignore_origin_instance_rule: Stvori globalno pravilo za zanemarivanje izvora
+    page_title: Globalna pravila za zanemarivanje izvora
+    form:
+        back_to_list: Natrag na popis
+        delete_confirm: Stvarno?
+        delete: Izbriši
+        save: Spremi
+        rule_label: Pravilo
