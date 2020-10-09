@@ -125,7 +125,7 @@ config:
     otp:
         page_title: Двофакторна авторизація
         app:
-            two_factor_code_description_1: Налаштуйте Google Authenticator
+            two_factor_code_description_1: Налаштуйте Google Authenticator.
             two_factor_code_description_2: 'Відкрийте застосунок на телефоні та сфотографуйте QR-код:'
             two_factor_code_description_3: 'На той випадок, якщо щось трапиться із телефоном, збережіть ці коди доступу:'
             two_factor_code_description_4: 'Введіть сюди код із застосунка:'
@@ -159,7 +159,7 @@ config:
             import_tagging_rules: Імпорт правил тегування
             import_tagging_rules_detail: Імпорт попередньо експортованих із wallabag правил.
             export_tagging_rules: Експорт правил тегування
-            export_tagging_rules_detail: Експортувавши правила, ви зможете імпортувати їх у будь-який інший wallabag-сервер
+            export_tagging_rules_detail: Експортувавши правила, ви зможете імпортувати їх у будь-який інший wallabag-сервер.
         faq:
             title: Довідка
             tagging_rules_definition_title: Що таке « правила тегування »?
