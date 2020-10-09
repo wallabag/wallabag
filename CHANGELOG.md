@@ -71,6 +71,7 @@
 - Add Croatian translation [#4518](https://github.com/wallabag/wallabag/pull/4518), [#4517](https://github.com/wallabag/wallabag/pull/4517)
 - Add Ukrainian translation [#4489](https://github.com/wallabag/wallabag/pull/4489)
 - Add language support for Simplified Chinese（简体中文）[#4281](https://github.com/wallabag/wallabag/pull/4281)
+- Add Dutch translation to the settings）[#4632](https://github.com/wallabag/wallabag/pull/4632)
 
 ### Fixes
 
