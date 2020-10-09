@@ -62,7 +62,7 @@ config:
         items_per_page_label: Nombre d'articles per pagina
         language_label: Lenga
         reading_speed:
-            label: Velocitat  de lectura
+            label: Velocitat de lectura
             help_message: 'Podètz utilizar una aisina en linha per estimar vòstra velocitat de lectura :'
             100_word: Legissi a l'entorn de 100 mots per minuta
             200_word: Legissi a l'entorn de 200 mots per minuta
@@ -131,7 +131,7 @@ config:
             how_to_use_them_title: Cossí las utilizar ?
             how_to_use_them_description: Imaginem que volètz atribuir als novèls article l'etiqueta « <i>lectura corta</i> » quand lo temps per legir es inferior a 3 minutas.<br />Dins aquel cas, deuriatz metre « readingTime &lt;= 3 » dins lo camp <i>Règla</i> e « <i>lectura corta</i> » dins lo camp <i>Etiqueta</i>.<br />Mai d'una etiquetas pòdon èsser apondudas simultanèament ne las separant amb de virgulas : « <i>lectura corta, per ligir</i> »<br />De règlas complèxas pòdon èsser creadas n'emplegant d'operators predefinits : se « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » alara atribuir las etiquetas « <i>lectura longa, github </i> »
             variables_available_title: Quinas variablas e operators pòdi utilizar per escriure de règlas ?
-            variables_available_description: Las variablas e operators seguents pòdon èsser utilizats per escriure de règlas d'etiquetas automaticas : 
+            variables_available_description: "Las variablas e operators seguents pòdon èsser utilizats per escriure de règlas d'etiquetas automaticas :"
             meaning: Significacion
             variable_description:
                 label: Variabla
@@ -269,8 +269,8 @@ about:
         bug_reports: Rapòrt de bugs
         support: <a href="https://github.com/wallabag/wallabag/issues">sur GitHub</a>
     helping:
-        description: wallabag es a gratuit e opensource. Nos podètz ajudar : 
-        by_contributing: en participant lo projècte : 
+        description: 'wallabag es a gratuit e opensource. Nos podètz ajudar :'
+        by_contributing: 'en participant lo projècte :'
         by_contributing_2: un bilhet recensa totes nòstres besonhs
         by_paypal: via Paypal
     contributors:
@@ -424,7 +424,7 @@ import:
         description: Aquesta aisina importarà totas vòstres articles de Readability. Sus la pagina de l'aisina (https://www.readability.com/tools/), clicatz sus "Export your data" dins la seccion "Data Export". Recebretz un corrièl per telecargar un json (qu'acaba pas amb un .json de fach).
         how_to: Mercés de seleccionar vòstre Readability fichièr e de clicar sul boton dejós per lo telecargar e l'importar.
     worker:
-        enabled: L'importacion se fa de manièra asincròna. Un còp l'importacion lançada, una aisina extèrna s'ocuparà dels articles un per un. Lo servici actual es : 
+        enabled: "L'importacion se fa de manièra asincròna. Un còp l'importacion lançada, una aisina extèrna s'ocuparà dels articles un per un. Lo servici actual es :"
         download_images_warning: Avètz activat lo telecargament de los imatges de vòstres articles. Combinat amb l'importacion classica, aquò pòt tardar un long moment (o benlèu fracassar). <strong>Recomandem fòrtament</strong> l'activacion de l'importacion asincròna per evitar las errors.
     firefox:
         page_title: Importar > Firefox
