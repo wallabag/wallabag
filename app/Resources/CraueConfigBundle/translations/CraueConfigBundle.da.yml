@@ -1,6 +1,6 @@
 download_pictures: Download billeder på din server
 carrot: Aktiver deling til Carrot
-diaspora_url: Diaspora URL, hvis tjenesten er aktiv
+diaspora_url: diaspora* URL, hvis tjenesten er aktiv
 export_epub: Aktiver eksport til ePub
 export_mobi: Aktiver eksport til .mobi
 export_pdf: Aktiver eksport til PDF
@@ -11,7 +11,7 @@ export_xml: Aktiver eksport til XML
 shaarli_url: Shaarli-URL, hvis tjenesten er aktiv
 scuttle_url: Scuttle-URL, hvis tjenesten er aktiv
 unmark_url: Unmark-URL, hvis tjenesten er aktiv
-share_diaspora: Aktiver deling til Diaspora
+share_diaspora: Aktiver deling til diaspora*
 share_mail: Aktiver deling med email
 share_shaarli: Aktiver deling gennem Shaarli
 share_scuttle: Aktiver deling gennem Scuttle
