@@ -32,11 +32,14 @@ menu:
         back_to_unread: Zurück zu ungelesenen Artikeln
         users_management: Benutzerverwaltung
         site_credentials: Zugangsdaten
+        quickstart: Schnellstart
     top:
         add_new_entry: Neuen Artikel hinzufügen
         search: Suche
         filter_entries: Artikel filtern
         export: Exportieren
+        account: Mein Konto
+        random_entry: Springe zu einem zufälligen Eintrag aus der Liste
     search_form:
         input_label: Suchbegriff hier eingeben
 footer:
@@ -104,6 +107,9 @@ config:
             description: Wenn du dein Konto löschst, werden ALL deine Artikel, ALL deine Tags, ALL deine Anmerkungen und dein Konto dauerhaft gelöscht (kann NICHT RÜCKGÄNGIG gemacht werden). Du wirst anschließend ausgeloggt.
             confirm: Bist du wirklich sicher? (DIES KANN NICHT RÜCKGÄNGIG GEMACHT WERDEN)
             button: Lösche mein Konto
+        two_factor:
+            state_enabled: Aktiviert
+            table_action: Aktion
     reset:
         title: Zurücksetzen (a.k.a Gefahrenzone)
         description: Beim Nutzen der folgenden Schaltflächenhast du die Möglichkeit, einige Informationen von deinem Konto zu entfernen. Sei dir bewusst, dass dies NICHT RÜCKGÄNGIG zu machen ist.
@@ -156,6 +162,29 @@ config:
                 and: Eine Regel UND eine andere
                 matches: 'Testet, ob eine <i>Variable</i> auf eine <i>Suche</i> zutrifft (Groß- und Kleinschreibung wird nicht berücksichtigt).<br />Beispiel: <code>title matches "Fußball"</code>'
                 notmatches: 'Testet, ob ein <i>Titel</i> nicht auf eine <i>Suche</i> zutrifft (Groß- und Kleinschreibung wird nicht berücksichtigt).<br />Beispiel: <code>title notmatches "Fußball"</code>'
+        export: Exportieren
+        import_submit: Importieren
+    otp:
+        app:
+            cancel: Abbrechen
+    form_ignore_origin_rules:
+        faq:
+            operator_description:
+                equal_to: Gleich…
+                label: Operator
+            variable_description:
+                label: Variable
+            meaning: Bedeutung
+            variables_available_title: Welche Variablen und Operatoren kann ich benutzen, um Regeln zu schreiben?
+            how_to_use_them_title: Wie nutze ich sie?
+            title: FAQ
+    form_feed:
+        feed_link:
+            all: Alle
+            archive: Archiviert
+        token_create: Erstelle deinen Token
+        no_token: Kein Token
+        description: Durch Wallabag bereitgestellte Atom Feeds erlauben es dir, deine gespeicherten Artikel später mit deinem favorisierten Atom Reader zu lesen. Du musst zuerst einen Token erstellen.
 entry:
     default_title: Titel des Eintrags
     page_titles:
@@ -393,6 +422,7 @@ tag:
     list:
         number_on_the_page: '{0} Es gibt keine Tags.|{1} Es gibt einen Tag.|]1,Inf[ Es gibt %count% Tags.'
         see_untagged_entries: Zeige nicht getaggte Einträge
+        untagged: Nicht getaggte Einträge
     new:
         add: Hinzufügen
         placeholder: Du kannst verschiedene Tags, getrennt von einem Komma, hinzufügen.
@@ -434,7 +464,7 @@ import:
         download_images_warning: Du hast das Herunterladen von Bildern für deine Artikel aktiviert. Verbunden mit dem klassischen Import kann es ewig dauern fortzufahren (oder sogar fehlschlagen). Wir <strong>empfehlen</strong> den asynchronen Import zu aktivieren, um Fehler zu vermeiden.
     firefox:
         page_title: Aus Firefox importieren
-        description: Dieser Import wird all deine Lesezeichen aus Firefox importieren. Gehe zu deinen Lesezeichen (Strg+Shift+O), dann auf "Importen und Sichern", wähle "Sichern…". Du erhälst eine .json Datei.
+        description: Dieser Import wird all deine Lesezeichen aus Firefox importieren. Gehe zu deinen Lesezeichen (Strg+Shift+O), dann auf "Importen und Sichern", wähle "Sichern…". Du erhälst eine JSON Datei.
         how_to: Bitte wähle deine Lesezeichensicherungsdatei aus und klicke den nachfolgenden Button zum Importieren. Beachte, dass dieser Prozess eine lange Zeit in Anspruch nehmen kann, da alle Artikel geladen werden müssen.
     chrome:
         page_title: Aus Chrome importieren
@@ -536,7 +566,7 @@ site_credential:
         no: Nein
         create_new_one: Einen neuen Seitenzugang anlegen
     form:
-        username_label: Benutzername
+        username_label: Anmelden
         host_label: Host
         password_label: Passwort
         save: Speichern
@@ -599,3 +629,15 @@ flashes:
             added: Zugangsdaten für „%host%“ hinzugefügt
             updated: Zugangsdaten für „%host%“ aktualisiert
             deleted: Zugangsdaten für „%host%“ gelöscht
+ignore_origin_instance_rule:
+    form:
+        back_to_list: Zurück zur Liste
+        delete_confirm: Bist du sicher?
+        delete: Löschen
+        save: Speichern
+        rule_label: Regel
+    list:
+        no: Nein
+        yes: Ja
+        edit_action: Bearbeiten
+        actions: Aktionen
