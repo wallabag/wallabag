@@ -140,7 +140,7 @@ about:
     helping:
         description: 'wallabag er gratis og Open source. Du kan hjælpe os:'
         by_contributing: 'ved at bidrage til projektet:'
-        by_contributing_2: 'et Github-issue fortæller om alt, hvad vi har brug for:'
+        by_contributing_2: 'et Github-issue fortæller om alt, hvad vi har brug for'
         by_paypal: 'via Paypal'
     third_party:
         license: 'Licens'
