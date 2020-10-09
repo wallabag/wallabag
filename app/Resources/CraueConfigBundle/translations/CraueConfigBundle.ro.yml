@@ -1,6 +1,6 @@
 download_pictures: Descarcă poze pe server
 carrot: Permite share către Carrot
-diaspora_url: Diaspora URL, dacă serviciul este permis
+diaspora_url: diaspora* URL, dacă serviciul este permis
 export_epub: Permite exportare ePub
 export_mobi: Permite exportare .mobi
 export_pdf: Permite exportare PDF
@@ -11,7 +11,7 @@ export_xml: Permite exportare XML
 shaarli_url: Shaarli URL, dacă serviciul este permis
 scuttle_url: Scuttle URL, dacă serviciul este permis
 unmark_url: Unmark URL, dacă serviciul este permis
-share_diaspora: Permite share către Diaspora
+share_diaspora: Permite share către diaspora*
 share_mail: Permite share prin email
 share_shaarli: Permite share către Shaarli
 share_scuttle: Permite share către Scuttle
