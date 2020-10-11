@@ -233,7 +233,7 @@ entry:
         filtered_tags: 'タグによるフィルター:'
         untagged: タグがない記事
         all: すべての記事
-        filtered_search: 検索による絞込み
+        filtered_search: '検索による絞込み:'
     list:
         number_on_the_page: '{0} 記事はありません。|{1} 1 つ記事があります。|]1,Inf[ %count% の記事があります。'
         reading_time_minutes: '推定の読む時間: %readingTime% 分'
