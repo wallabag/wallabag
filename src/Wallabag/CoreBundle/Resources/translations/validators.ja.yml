@@ -2,6 +2,6 @@ validator:
     password_must_match: パスワードは一致させる必要があります。
     password_too_short: パスワードは 8 文字以上で入力してください。
     password_wrong_value: 現在のパスワードが間違っています。
-    item_per_page_too_high: これは確実にアプリを終了します
-    rss_limit_too_high: これは確実にアプリを終了します
+    item_per_page_too_high: 確実にアプリを終了します
+    rss_limit_too_high: 確実にアプリを終了します
     quote_length_too_high: 引用が長すぎます。{{ limit }} 文字以下にする必要があります。
