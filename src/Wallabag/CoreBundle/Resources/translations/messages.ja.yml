@@ -110,7 +110,7 @@ config:
             button: アカウントを削除する
             description: もしアカウントを削除した場合、すべての記事、すべてのタグ、すべての注釈とあなたのアカウントが永久的に削除されます（この操作は取り消すことができません）。その後にあなたはログアウトされます。
             title: アカウントを削除する（危険な操作です）
-            confirm: よろしいですか？（取り消しができません）
+            confirm: 本当によろしいですか？（取り消しができません）
         two_factor:
             action_app: OTPアプリを使用
             action_email: メールを使用
@@ -125,7 +125,7 @@ config:
     form_password:
         old_password_label: 現在のパスワード
         new_password_label: 新しいパスワード
-        repeat_new_password_label: 新しいパスワードを再記入する
+        repeat_new_password_label: 新しいパスワードを再記入
         description: あなたのパスワードを変更することができます。新しいパスワードは8文字以上である必要があります。
     form_rules:
         if_label: もし
@@ -178,7 +178,7 @@ config:
     reset:
         tags: すべてのタグを削除する
         entries: すべての記事を削除する
-        archived: すべてのアーカイブ記事を削除する
+        archived: すべてのアーカイブした記事を削除する
         confirm: 本当によろしいですか？（この操作は取り消すことができません）
         annotations: すべての注釈を削除する
         description: ボタンを押すとあなたのアカウントから情報を削除することができます。この操作は不可逆的であることに注意してください。
@@ -232,8 +232,8 @@ entry:
         filtered: フィルターされた記事
         filtered_tags: 'タグによるフィルター:'
         untagged: タグがない記事
-        all: 全エントリー
-        filtered_search: 高度な検索：
+        all: すべての記事
+        filtered_search: 検索による絞込み
     list:
         number_on_the_page: '{0} 記事はありません。|{1} 1 つ記事があります。|]1,Inf[ %count% の記事があります。'
         reading_time_minutes: '推定の読む時間: %readingTime% 分'
@@ -244,9 +244,9 @@ entry:
         reading_time_less_one_minute: 推定される読了時間。&lt; 1分
         export_title: エクスポート
         delete: 削除
-        toogle_as_star: 変更：星あり／なし
+        toogle_as_star: スター有無の切り替え
         original_article: オリジナル
-        reading_time: 読むのに必要な時間
+        reading_time: 所要時間
     filters:
         title: フィルター
         status_label: ステータス
@@ -269,7 +269,7 @@ entry:
         is_public_help: 公開リンク
         is_public_label: 公開リンクあり
         unread_label: 未読
-        starred_label: 星あり
+        starred_label: スター付
         archived_label: アーカイブ
     view:
         left_menu:
@@ -287,9 +287,9 @@ entry:
                 description: この記事が間違って表示されますか?
             public_link: 公開リンク
             export: エクスポート
-            share_email_label: メールアドレス
+            share_email_label: 電子メール
             delete: 削除
-            set_as_starred: 変更：星あり／なし
+            set_as_starred: スター有無の切り替え
             back_to_homepage: 戻る
         edit_title: タイトルを編集
         annotations_on_the_entry: '{0} 注釈はありません|{1} 1 注釈|]1,Inf[ %count% 注釈'
@@ -322,7 +322,7 @@ entry:
         shared_by_wallabag: この記事は %username% が <a href='%wallabag_instance%'>wallabag</a> で共有しました
     search:
         placeholder: 何をお探しですか？
-    default_title: エントリーのタイトル
+    default_title: 記事のタイトル
 about:
     top_menu:
         who_behind_wallabag: wallabag の背後にいるのは誰ですか
