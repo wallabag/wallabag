@@ -428,7 +428,7 @@ import:
         download_images_warning: Avètz activat lo telecargament de los imatges de vòstres articles. Combinat amb l'importacion classica, aquò pòt tardar un long moment (o benlèu fracassar). <strong>Recomandem fòrtament</strong> l'activacion de l'importacion asincròna per evitar las errors.
     firefox:
         page_title: Importar > Firefox
-        description: Aquesta aisina importarà totas vòstres favorits de Firefox. Anatz simplament dins vòstres marcapaginas (Ctrl+Maj+O), puèi dins "Impòrt e salvagarda", causissètz "Salvagardar...". Auretz un fichièr .json.
+        description: Aquesta aisina importarà totas vòstres favorits de Firefox. Anatz simplament dins vòstres marcapaginas (Ctrl+Maj+O), puèi dins "Impòrt e salvagarda", causissètz "Salvagardar…". Auretz un fichièr JSON.
         how_to: Mercés de causir lo fichièr de salvagarda e de clicar sul boton dejós per l'importar. Notatz que lo tractament pòt durar un moment ja que totes los articles an d'èsser recuperats.
     chrome:
         page_title: Importar > Chrome
