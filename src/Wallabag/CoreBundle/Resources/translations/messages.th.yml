@@ -285,9 +285,9 @@ howto:
     form:
         description: 'ขอบคุณสิ่งนี้จาก'
     browser_addons:
-        firefox: 'Firefox addon'
-        chrome: 'Chrome addon'
-        opera: 'Opera addon'
+        firefox: ''
+        chrome: ''
+        opera: ''
     mobile_apps:
         android:
             via_f_droid: 'ผ่านทาง F-Droid'
@@ -298,7 +298,7 @@ howto:
         description: 'Drag & drop สื่งนี้บน bookmarks bar ของคุณ:'
     shortcuts:
         page_description: ที่นึ้จะใช้ Shortcut ใน wallabag
-        shortcut: Shortcut
+        shortcut: ''
         action: แอ็คชั่น
         all_pages_title: ใช้ Shortcut ในหน้าทั้งหมด
         go_unread: ไปยังที่ยังไม่ได้อ่าน
@@ -421,7 +421,7 @@ import:
         download_images_warning: "คุณจะเปิดการใช้ download images สำหรับบทความของคุณ รวมกับ classic import ทำให้สามารถใช้ ages ไปดำเนินการต่อ (หรืออาจเกิดความล้มเหลว) พวกเรา <strong>strongly recommend</strong> เปิดใช้ asynchronous import เพื่อหลีกเลี่ยงข้อผิดพลาด"
     firefox:
         page_title: 'นำเข้าข้อมูล > Firefox'
-        description: "สำหรับผู้นำเข้าข้อมูลจะ import Firefox bookmarks ทั้งหมดของคุณ ไปที่ bookmarks (Ctrl+Maj+O) ของคุณ, ดังนั้นใน \"Import และ backup\", choose \"Backup...\" คุณจะได้รับไฟล์ .json"
+        description: "สำหรับผู้นำเข้าข้อมูลจะ import Firefox bookmarks ทั้งหมดของคุณ ไปที่ bookmarks (Ctrl+Maj+O) ของคุณ, ดังนั้นใน \"Import และ backup\", choose \"Backup…\" คุณจะได้รับไฟล์ JSON"
         how_to: "ทำการเลือกไฟล์ bookmark backup และ click ที่ button ข้างใต้ที่จะ import ซึ่ง Note ของกระบวนการนี้อาจใช้เวลานานงจากบทความที่รับมา"
     chrome:
         page_title: 'นำเข้าข้อมูล > Chrome'
