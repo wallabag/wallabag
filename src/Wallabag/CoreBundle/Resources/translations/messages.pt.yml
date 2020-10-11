@@ -103,7 +103,7 @@ config:
             how_to_use_them_description: 'Vamos dizer que você deseja adicionar a tag « <i>leitura rápida</i> » quando o tempo de leitura for menor que 3 minutos.<br />Neste caso, você deve « readingTime &lt;= 3 » no campo <i>Regra</i> e « <i>leitura rápida</i> » no campo <i>Tags</i>.<br />Diversas tags podem ser adicionadas simultâneamente separando-as com vírgula: « <i>leitura rápida, precisa ser lido</i> »<br />Regras complexas podem ser escritas usando os seguintes operadores pré-definidos: if « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » então adicione a tag « <i>leitura longa, github </i> »'
             variables_available_title: 'Quais variáveis e operadores eu posso usar para escrever regras?'
             variables_available_description: 'As seguintes variáveis e operadores podem ser usados para criar regras de tags:'
-            meaning: 'Meaning'
+            meaning: ''
             variable_description:
                 label: 'Variável'
                 title: 'Título da entrada'
@@ -112,7 +112,7 @@ config:
                 isDestacado: 'Se a entrada está destacada ou não'
                 content: 'O conteúdo da entrada'
                 language: 'O idioma da entrada'
-                mimetype: 'O mime-type da entrada'
+                mimetype: 'O media-type da entrada'
                 readingTime: 'O tempo estimado de leitura da entrada, em minutos'
                 domainName: 'O domínio da entrada'
             operator_description:
@@ -141,7 +141,7 @@ entry:
         reading_time_minutes: 'tempo estimado de leitura: %readingTime% min'
         reading_time_less_one_minute: 'tempo estimado de leitura: &lt; 1 min'
         number_of_tags: '{1}e uma outra tag|]1,Inf[e %count% outras tags'
-        reading_time_minutes_short: '%readingTime% min'
+        reading_time_minutes_short: ''
         reading_time_less_one_minute_short: '&lt; 1 min'
         original_article: 'original'
         toogle_as_read: 'Marcar como lido'
@@ -228,7 +228,7 @@ about:
         description: 'wallabag é livre e software livre. Você pode nos ajudar:'
         by_contributing: 'contribuindo com o projeto:'
         by_contributing_2: 'uma lista de todas as nossas necessidades'
-        by_paypal: 'via Paypal'
+        by_paypal: ''
     contributors:
         description: 'Obrigado por contribuir com a aplicação web wallabag'
     third_party:
@@ -241,7 +241,7 @@ howto:
     top_menu:
         browser_addons: 'Extensões de navegadores'
         mobile_apps: "App's móveis"
-        bookmarklet: 'Bookmarklet'
+        bookmarklet: ''
     form:
         description: 'Obrigado por este formulário'
     browser_addons:
@@ -250,8 +250,8 @@ howto:
         opera: 'Extensão do Opera'
     mobile_apps:
         android:
-            via_f_droid: 'via F-Droid'
-            via_google_play: 'via Google Play'
+            via_f_droid: ''
+            via_google_play: ''
         ios: 'na iTunes Store'
         windows: 'na Microsoft Store'
     bookmarklet:
@@ -288,8 +288,8 @@ quickstart:
         pocket: 'Migrar do Pocket'
         wallabag_v1: 'Migrar do wallabag v1'
         wallabag_v2: 'Migrar do wallabag v2'
-        readability: 'Migrate from Readability'
-        instapaper: 'Migrate from Instapaper'
+        readability: ''
+        instapaper: ''
     developer:
         title: 'Desenvolvedores'
         description: 'Nós também agradecemos os desenvolvedores: Docker, API, traduções, etc.'
