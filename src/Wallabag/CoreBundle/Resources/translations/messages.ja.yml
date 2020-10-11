@@ -110,6 +110,7 @@ config:
             button: アカウントを削除する
             description: もしアカウントを削除した場合、すべての記事、すべてのタグ、すべての注釈とあなたのアカウントが永久的に削除されます（この操作は取り消すことができません）。その後にあなたはログアウトされます。
             title: アカウントを削除する（危険な操作です）
+            confirm: よろしいですか？（取り消しができません）
         two_factor:
             action_app: OTPアプリを使用
             action_email: メールを使用
@@ -172,6 +173,8 @@ config:
             import_tagging_rules_detail: 以前にエクスポートしたJSONファイルを選択してください。
             import_tagging_rules: タグ付けルールのインポート
             new_tagging_rule: タグ付けルールの作成
+        tags_label: タグ
+        edit_rule_label: 編集
     reset:
         tags: すべてのタグを削除する
         entries: すべての記事を削除する
@@ -229,6 +232,8 @@ entry:
         filtered: フィルターされた記事
         filtered_tags: 'タグによるフィルター:'
         untagged: タグがない記事
+        all: 全エントリー
+        filtered_search: 高度な検索：
     list:
         number_on_the_page: '{0} 記事はありません。|{1} 1 つ記事があります。|]1,Inf[ %count% の記事があります。'
         reading_time_minutes: '推定の読む時間: %readingTime% 分'
@@ -237,6 +242,11 @@ entry:
         reading_time_less_one_minute_short: '&lt; 1分'
         reading_time_minutes_short: '%readingTime% 分'
         reading_time_less_one_minute: 推定される読了時間。&lt; 1分
+        export_title: エクスポート
+        delete: 削除
+        toogle_as_star: 変更：星あり／なし
+        original_article: オリジナル
+        reading_time: 読むのに必要な時間
     filters:
         title: フィルター
         status_label: ステータス
@@ -244,10 +254,23 @@ entry:
         preview_picture_help: プレビュー画像
         reading_time:
             label: 分単位の読む時間
+            to: へ
+            from: から
         domain_label: ドメイン名
         action:
             clear: クリア
             filter: フィルター
+        created_at:
+            to: へ
+            from: から
+            label: 作成日
+        http_status_label: HTTPステータス
+        language_label: 言語
+        is_public_help: 公開リンク
+        is_public_label: 公開リンクあり
+        unread_label: 未読
+        starred_label: 星あり
+        archived_label: アーカイブ
     view:
         left_menu:
             back_to_top: トップへ戻る
@@ -267,6 +290,7 @@ entry:
             share_email_label: メールアドレス
             delete: 削除
             set_as_starred: 変更：星あり／なし
+            back_to_homepage: 戻る
         edit_title: タイトルを編集
         annotations_on_the_entry: '{0} 注釈はありません|{1} 1 注釈|]1,Inf[ %count% 注釈'
         provided_by: による提供
@@ -298,6 +322,7 @@ entry:
         shared_by_wallabag: この記事は %username% が <a href='%wallabag_instance%'>wallabag</a> で共有しました
     search:
         placeholder: 何をお探しですか？
+    default_title: エントリーのタイトル
 about:
     top_menu:
         who_behind_wallabag: wallabag の背後にいるのは誰ですか
