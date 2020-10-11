@@ -84,8 +84,8 @@ config:
             redirect_homepage: ホームページに戻る
             redirect_current_page: 現在のページに留まる
             label: 記事に既読やスターをつけた後、どこに移動しますか？
-        android_configuration: Android アプリを設定する
-        help_theme: wallabagはカスタマイズできます。お気に入りのテーマを選べます。
+        android_configuration: Androidアプリの設定をする
+        help_theme: wallabagはカスタマイズ可能です。お気に入りのテーマを選べます。
         android_instruction: ここをタッチするとあなたのAndroid アプリに自動入力します
     form_rss:
         description: wallabag が提供する RSS フィードは、お好みの RSS リーダーで保存した記事を読むできます。最初にトークンを生成する必要があります。
@@ -262,15 +262,22 @@ entry:
             problem:
                 label: 問題がありますか?
                 description: この記事が間違って表示されますか?
+            public_link: 公開リンク
         edit_title: タイトルを編集
         annotations_on_the_entry: '{0} 注釈はありません|{1} 1 注釈|]1,Inf[ %count% 注釈'
+        provided_by: による提供
+        published_by: による公開
+        published_at: 公開日
     new:
         page_title: 新しい記事を保存
         placeholder: http://website.com
+        form_new:
+            url_label: URL
     edit:
         page_title: 記事を編集
         title_label: タイトル
         origin_url_label: オリジナルURL（この記事を見つけた場所）
+        url_label: URL
     metadata:
         added_on: タイムスタンプ
         address: アドレス
@@ -282,6 +289,8 @@ entry:
         delete: 本当にこの記事を削除してよろしいですか？
     public:
         shared_by_wallabag: この記事は %username% が <a href='%wallabag_instance%'>wallabag</a> で共有しました
+    search:
+        placeholder: 何をお探しですか？
 about:
     top_menu:
         who_behind_wallabag: wallabag の背後にいるのは誰ですか
