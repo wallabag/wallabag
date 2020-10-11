@@ -263,11 +263,17 @@ entry:
                 label: 問題がありますか?
                 description: この記事が間違って表示されますか?
             public_link: 公開リンク
+            export: エクスポート
+            share_email_label: メールアドレス
+            delete: 削除
+            set_as_starred: 変更：星あり／なし
         edit_title: タイトルを編集
         annotations_on_the_entry: '{0} 注釈はありません|{1} 1 注釈|]1,Inf[ %count% 注釈'
         provided_by: による提供
         published_by: による公開
         published_at: 公開日
+        created_at: 作成日
+        original_article: オリジナル
     new:
         page_title: 新しい記事を保存
         placeholder: http://website.com
@@ -278,6 +284,7 @@ entry:
         title_label: タイトル
         origin_url_label: オリジナルURL（この記事を見つけた場所）
         url_label: URL
+        save_label: 保存
     metadata:
         added_on: タイムスタンプ
         address: アドレス
@@ -659,3 +666,16 @@ ignore_origin_instance_rule:
         edit_action: 編集
         actions: 操作
     description: ここでは様々なパターンの転送元URLの無視に使用するグローバル転送元無視ルールを管理します。
+site_credential:
+    form:
+        back_to_list: リストに戻る
+        delete_confirm: 本当によろしいですか？
+        delete: 削除
+        save: 保存
+        password_label: パスワード
+        username_label: ログイン
+    list:
+        no: いいえ
+        yes: はい
+        edit_action: 編集
+        actions: 操作
