@@ -421,7 +421,7 @@ user:
         repeat_new_password_label: 'Repita a nova senha'
         plain_password_label: '????'
         email_label: 'E-mail'
-        enabled_label: 'Habilitado'
+        enabled_label: 'Ativado'
         last_login_label: 'Último login'
         twofactor_label: 'Autenticação de dois passos'
         save: 'Salvar'
@@ -472,8 +472,8 @@ flashes:
             summary: 'relatório de importação: %imported% importados, %skipped% já existem.'
             summary_with_queue: 'Importar sumáario: %queued% agendados.'
         error:
-            redis_enabled_not_installed: 'O Redis está habilitado para importação assíncrona mas parece que <u>não podemos nos conectar nele</u>. Por favor verifique as configurações do Redis.'
-            rabbit_enabled_not_installed: 'O RabbitMQ está habilitado para importação assíncrona mas parece que <u>não podemos nos conectar nele</u>. Por favor verifique as configurações do RabbitMQ.'
+            redis_enabled_not_installed: 'O Redis está ativado para importação assíncrona, mas parece que <u>não podemos nos conectar nele</u>. Por favor verifique as configurações do Redis.'
+            rabbit_enabled_not_installed: 'O RabbitMQ está ativado para importação assíncrona, mas parece que <u>não podemos nos conectar nele</u>. Por favor verifique as configurações do RabbitMQ.'
     developer:
         notice:
             client_created: 'Novo cliente criado.'
