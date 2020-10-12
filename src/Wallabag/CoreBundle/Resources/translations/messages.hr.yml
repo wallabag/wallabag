@@ -55,7 +55,7 @@ import:
         page_title: Uvoz > Firefox
         description: Ovaj uvoznik uvozi sve tvoje Firefox zabilješke. Idi na zabilješke (Ctrl+Shift+O), zatim u „Uvoz i sigurnosna kopija“, odaberi „Sigurnosna kopija …“. Dobit ćeš .json datoteku.
     wallabag_v2:
-        description: Ovaj uvoznik uvozi sve tvoje wallabag v2 članke. Idi na „Svi članci”, zatim na bočnoj traci za izvoz, pritisni „JSON”. Dobit ćeš datoteku „Svi članci.json”.
+        description: Ovaj uvoznik uvozi sve tvoje članke wallabaga verzije 2. Idi na „Svi članci”, zatim na bočnoj traci za izvoz, pritisni „JSON”. Dobit ćeš datoteku „Svi članci.json”.
         page_title: Uvoz > Wallabag v2
     chrome:
         page_title: Uvoz > Chrome
@@ -66,7 +66,7 @@ import:
         page_title: Uvoz > Readability
         description: Ovaj uvoznik uvozi sve tvoje Readability članke. Na stranici alata (https://www.readability.com/tools/), pritisni „Izvezi svoje podatke” u odjeljku „Izvoz podataka”. Primit ćeš e-mail za preuzimanje json-a (što zapravo ne završava s .json).
     worker:
-        enabled: 'Uvoz se vrši asinkrono. Nakon što se zadatak uvoza pokrene, jedna vanjska usluga obradit će poslove jedan po jedan. Trenutačna usluga je:'
+        enabled: 'Uvoz se vrši asinkrono. Nakon što se uvoz zadatak pokrene, jedna vanjska usluga obradit će poslove jedan po jedan. Trenutačna usluga je:'
         download_images_warning: Aktivirao(la) si preuzimanje slika za članke. U kombinaciji s klasičnim uvozom, postupak može potrajati godinama (ili možda ne uspije). <strong>Preporučujemo</strong> aktivirati asinkroniziran uvoz za izbjegavanje grešaka.
     pinboard:
         page_title: Uvoz > Pinboard
@@ -93,7 +93,7 @@ import:
     wallabag_v1:
         page_title: Uvoz > Wallabag v1
         how_to: Odaberi wallabag izvoz i pritisni donji gumb za preuzimanje i uvoz datoteke.
-        description: Ovaj uvoznik uvozi sve tvoje wallabag v1 članke. Na tvojoj stranici konfiguracije, pritisni „JSON izvoz” u odjeljku „Izvezi svoje wallabag podatke”. Dobit ćeš datoteku „wallabag-export-1-xxxx-xx-xx.json”.
+        description: Ovaj uvoznik uvozi sve tvoje članke wallabaga verzije 1. Na tvojoj stranici konfiguracije, pritisni „JSON izvoz” u odjeljku „Izvezi svoje wallabag podatke”. Dobit ćeš datoteku „wallabag-export-1-xxxx-xx-xx.json”.
     page_description: Dobro došao/dobro došla u uvoznik wallabaga. Odaberi prethodnu uslugu s koje želiš premjestiti podatke.
     action:
         import_contents: Sadržaj uvoza
@@ -154,7 +154,7 @@ config:
                 domainName: Ime domene zapisa
                 language: Jezik zapisa
                 title: Naslov zapisa
-                isStarred: Je li zapis favoriziran ili ne
+                isStarred: Je li zapis omiljen ili nije
                 url: URL zapisa
                 readingTime: Procijenjeno vrijeme čitanja zapisa, u minutama
             operator_description:
@@ -167,23 +167,24 @@ config:
                 not_equal_to: Nije jednako …
                 and: Jedno pravilo I jedno drugo
                 strictly_less_than: Strogo manje od …
-                notmatches: 'Provjerava nepoklapanje <i>predmeta</i> s <i>traženim izrazom</i> (razlikuje mala/velika slova).<br /> Primjer: <code> naslov se ne poklapa s „nogomet”</code>'
-                matches: 'Provjerava poklapanje <i>predmeta</i> s <i>traženim izrazom</i> (razlikuje mala/velika slova).<br /> Primjer: <code> naslov se poklapa s „nogomet”</code>'
-            tagging_rules_definition_description: To su pravila koja wallabag koristi za automatsko etiketiranje novih zapisa.<br />Pri svakom dodavanju novog zapisa, primijenjuju se sva tvoja pravila za etiketiranje. Na taj način izbjegavaš pojedinačnu klasifikaciju zapisa.
-            tagging_rules_definition_title: Što znači „Pravila za etiketiranje”?
+                notmatches: 'Provjerava nepoklapanje <i>teme</i> s <i>traženim izrazom</i> (razlikuje mala/velika slova).<br /> Primjer: <code> naslov se ne poklapa s „nogomet”</code>'
+                matches: 'Provjerava poklapanje <i>teme</i> s <i>traženim izrazom</i> (razlikuje mala/velika slova).<br /> Primjer: <code> naslov se poklapa s „nogomet”</code>'
+            tagging_rules_definition_description: To su pravila koja wallabag koristi za automatsko označivanje novih zapisa.<br />Pri svakom dodavanju novog zapisa, primijenjuju se sva tvoja pravila za označivanje, kako bi se dodale konfigurirane oznake. Na taj način izbjegavaš pojedinačnu klasifikaciju zapisa.
+            tagging_rules_definition_title: Što znači „Pravila za označivanje”?
             how_to_use_them_title: Kako ih koristiti?
-            variables_available_description: 'Sljedeće varijable i opretori mogu se koristiti za izradu pravila za etiketiranje:'
+            variables_available_description: 'Sljedeće varijable i opretori mogu se koristiti za izradu pravila za označivanje:'
             title: ČPP
             meaning: Značenje
             variables_available_title: Koje varijable i operateri mogu koristiti za pisanje pravila?
+            how_to_use_them_description: 'Pretpostavimo da želiš označiti nove zapise kao <i>kratko čitanje</i> kad je vrijeme čitanja manje od 3 minute.<br />U tom slučaju, postavi „readingTime &lt;= 3” u polju <i>Pravilo</i> i <i>kratko čitanje</i> u polju <i>Oznake</i>.<br />Moguće je dodati više oznaka istovremeno, odvajajući ih zarezom: „<i>kratko čitanje, moram čitati</i>”<br />Složena pravila mogu se napisati pomoću unaprijed definiranih operatora: ako „<i>readingTime &gt;= 5 AND domainName = "github.com"</i>”, onda označi kao „<i>dugo čitanje, GitHub </i>”'
         delete_rule_label: ukloni
         edit_rule_label: uredi
         if_label: ako
-        then_tag_as_label: zatim etiketiraj kao
-        tags_label: Etikete
+        then_tag_as_label: zatim označi kao
+        tags_label: Oznake
         rule_label: Pravilo
         card:
-            export_tagging_rules_detail: Ovime će se preuzeti JSON datoteku koju možeš koristiti za uvoz pravila označivanja na drugim mjestima ili za izradu sigurnosne kopije.
+            export_tagging_rules_detail: Ovime će se preuzeti JSON datoteka koju možeš koristiti za uvoz pravila za označivanja na drugim mjestima ili za izradu sigurnosne kopije.
             import_tagging_rules_detail: Moraš odabrati prethodno izvezenu JSON datoteku.
             export_tagging_rules: Izvezi pravila za označivanje
             import_tagging_rules: Uvezi pravila za označivanje
@@ -196,7 +197,7 @@ config:
         help_items_per_page: Možeš promijeniti broj prikazanih članaka na svakoj stranici.
         help_theme: wallabag je prilagodljiv. Ovdje možeš odabrati željenu temu.
         action_mark_as_read:
-            label: Što učiniti nakon uklanjanja, favoriziranja ili označavanja kao pročitano članka?
+            label: Što učiniti nakon što se članak ukloni, označi kao omiljeni ili kao pročitani?
             redirect_current_page: Ostani na trenutačnoj stranici
             redirect_homepage: Idi na naslovnu web-stranicu
         android_configuration: Konfiguriraj svoj Android program
@@ -218,7 +219,7 @@ config:
         delete:
             confirm: Sigurno? (OVO JE NEPOVRATNA RADNJA)
             title: Izbriši moj račun (poznato kao područje opasnosti)
-            description: Ako ukloniš svoj račun, SVI članci, SVE etikete, SVE napomene i tvoj račun TRAJNO će se ukloniti (ovo je NEPOVRATNA radnja). Tada ćeš biti odjavljen(a).
+            description: Ako ukloniš svoj račun, SVI članci, SVE oznake, SVE napomene i tvoj račun TRAJNO će se ukloniti (ovo je NEPOVRATNA radnja). Tada ćeš biti odjavljen(a).
             button: Izbriši moj račun
         name_label: Ime
         two_factor_description: Aktiviranje dvofaktorske autentifikacije znači, da ćeš primati e-mail s kodom za svaku novu nepouzdanu vezu.
@@ -244,7 +245,7 @@ config:
         entries: Ukloni SVE zapise
         confirm: Stvarno? (OVO JE NEPOVRATNA RADNJA)
         annotations: Ukloni SVE napomene
-        tags: Ukloni SVE etikete
+        tags: Ukloni SVE oznake
     form_password:
         repeat_new_password_label: Ponovi novu lozinku
         old_password_label: Trenutačna lozinka
@@ -255,12 +256,12 @@ config:
     tab_menu:
         user_info: Korisnički podaci
         new_user: Dodaj korisnika
-        rules: Pravila za etiketiranje
+        rules: Pravila za označivanje
         password: Lozinka
         rss: RSS
         settings: Postavke
         reset: Ponovo postavi područje
-        ignore_origin: Zanemari pravila izvora
+        ignore_origin: Pravila za zanemarivanje izvora
         feed: Feedovi
     otp:
         app:
@@ -274,19 +275,21 @@ config:
     form_ignore_origin_rules:
         faq:
             operator_description:
-                matches: 'Provjerava, poklapa li se <i>subjekt</i> s <i>traženim pojmom</i> (razlikuje velika/mala slova).<br />Primjer: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
+                matches: 'Provjerava poklapanje <i>teme</i> s <i>traženim izrazom</i> (ne razlikuje mala/velika slova).<br />Primjer: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
                 equal_to: Jednako …
                 label: Operator
             variable_description:
-                _all: Potpuna adresa, uglavnom za poklapanje uzoraka
+                _all: Potpuna adresa, uglavnom za poklapanje s uzorcima
                 host: Računalo adrese
                 label: Varijabla
             meaning: Značenje
-            variables_available_description: 'Za zanemarivanje pravila izvora mogu se koristiti sljedeće varijable i operatori:'
+            variables_available_description: 'Za izradu pravila za zanemarivanje izvora mogu se koristiti sljedeće varijable i operatori:'
             variables_available_title: Koje se varijable i operatori mogu koristiti za pisanje pravila?
             how_to_use_them_title: Kako ih koristiti?
-            ignore_origin_rules_definition_title: Što znači „zanemarivanje pravila izvora”?
+            ignore_origin_rules_definition_title: Čemu služe „pravila za zanemarivanje izvora”?
             title: ČPP
+            ignore_origin_rules_definition_description: Wallabag ih koristi za automatsko zanemarivanje adrese izvora nakon preusmjeravanja.<br />Ako dođe do preusmjeravanja tijekom dohvaćanja novog zapisa, sva pravila za zanemarivanje izvora (<i>definirana od korisnika i primjerka programa</i>) koristit će se za zanemarivanje adrese izvora.
+            how_to_use_them_description: Pretpostavimo da želiš zanemariti izvor unosa koji dolazi od „<i>rss.example.com</i>” (<i>znajući da je nakon preusmjeravanja, stvarna adresa example.com</i>).<br />U tom slučaju, postavi host = "rss.example.com" u polje <i>Pravilo</i>.
     form_feed:
         description: Atom feedovi koje pruža wallabag omogućuju čitanje spremljenih članaka pomoću tvojeg omiljenog Atom čitača. Najprije moraš generirati token.
         no_token: Nema tokena
@@ -294,9 +297,9 @@ config:
         feed_limit: Broj elemenata u feedu
         feed_link:
             all: Sve
-            archive: Arhivirano
-            starred: Označeno
-            unread: Nepročitano
+            archive: Arhivirani
+            starred: Omiljeni
+            unread: Nepročitani
         feed_links: Poveznice feeda
         token_revoke: Odbaci tvoj token
         token_reset: Ponovo generiraj tvoj token
@@ -314,15 +317,15 @@ howto:
     shortcuts:
         hide_form: Sakrij trenutačni obrazac (traži ili nova poveznica)
         all_pages_title: Dostupni prečaci na svim stranicama
-        go_starred: Idi na favorizirano
+        go_starred: Idi na omiljene
         delete: Izbriši zapis
         go_archive: Idi na arhivu
         shortcut: Prečac
         go_howto: Idi na kako koristiti (ova stranica!)
         page_description: Ovo su dostupni prečaci u wallabagu.
-        go_tags: Idi na etikete
+        go_tags: Idi na oznake
         open_article: Prikaži odabrani zapis
-        go_unread: Idi na nepročitano
+        go_unread: Idi na nepročitane
         go_config: Idi na konfiguraciju
         open_original: Kopiraj izvorni URL zapisa
         go_developers: Idi na programere
@@ -334,7 +337,7 @@ howto:
         go_all: Idi na sve zapise
         material_title: Dostupni prečaci samo za Material temu
         add_link: Dodaj novu poveznicu
-        toggle_archive: Uklj/isklj stanje čitanja za zapis
+        toggle_archive: Uklj/Isklj stanje čitanja za zapis
         list_title: Dostupni prečaci na stranicama popisa
         go_logout: Odjava
         article_title: Dostupni prečaci u prikazu zapisa
@@ -362,14 +365,14 @@ footer:
 flashes:
     entry:
         notice:
-            entry_unstarred: Zapis nefavoriziran
+            entry_unstarred: Zapis isključen iz omiljenih
             entry_already_saved: Zapis je već spremljen %date%
-            entry_unarchived: Zapis uklonjen iz arhive
+            entry_unarchived: Zapis uklonjen iz arhiva
             entry_reloaded_failed: Zapis ponovo učitan, ali dohvaćanje sadržaja neuspjelo
             entry_saved_failed: Zapis spremljen, ali dohvaćanje sadržaja neuspjelo
             entry_updated: Zapis aktualiziran
             entry_deleted: Zapis izbrisan
-            entry_starred: Zapis favoriziran
+            entry_starred: Zapis uključen u omiljene
             entry_reloaded: Zapis ponovo učitan
             entry_saved: Zapis spremljen
             entry_archived: Zapis arhiviran
@@ -395,20 +398,20 @@ flashes:
     config:
         notice:
             password_not_updated_demo: U demonstracijskom modusu ne možeš promijeniti lozinku za ovog korisnika.
-            tags_reset: Resetiranje etiketa
+            tags_reset: Oznake resetirane
             password_updated: Lozinka aktualizirana
             config_saved: Konfiguracija spremljena.
-            tagging_rules_updated: Pravila za etiketiranje aktualizirana
+            tagging_rules_updated: Pravila za označivanje aktualizirana
             rss_token_updated: RSS token aktualiziran
             annotations_reset: Napomene resetirane
-            tagging_rules_deleted: Pravilo za etiketiranje izbrisano
+            tagging_rules_deleted: Pravilo za označivanje izbrisano
             archived_reset: Arhivirani zapisi izbrisani
             rss_updated: RSS podatak aktualiziran
             user_updated: Podaci aktualizirani
             entries_reset: Zapis resetiran
             ignore_origin_rules_updated: Pravilo za zanemarivanje izvora aktualizirano
             ignore_origin_rules_deleted: Pravilo za zanemarivanje izvora izbrisano
-            tagging_rules_not_imported: Greška pri uvozu pravila označivanja
+            tagging_rules_not_imported: Greška pri uvozu pravila za označivanje
             tagging_rules_imported: Pravila označivanja uvezena
             otp_disabled: Dvofaktorska autentifikacija deaktivirana
             otp_enabled: Dvofaktorska autentifikacija aktivirana
@@ -422,7 +425,7 @@ flashes:
             updated: Podaci za prijavu na stranicu „%host%” aktualizirani
     tag:
         notice:
-            tag_added: Etiketa dodana
+            tag_added: Oznaka dodana
             tag_renamed: Oznaka preimenovana
     ignore_origin_instance_rule:
         notice:
@@ -453,7 +456,7 @@ entry:
         preview_picture_label: Ima sliku za pretprikaz
         is_public_help: Javna poveznica
         domain_label: Ime domene
-        starred_label: Favorizirano
+        starred_label: Omiljeni
         reading_time:
             to: do
             from: od
@@ -469,26 +472,26 @@ entry:
             from: od
             to: do
             label: Datum stvaranja
-        archived_label: Arhivirano
+        archived_label: Arhivirani
         http_status_label: Stanje HTTP-a
         title: Filtri
-        unread_label: Nepročitano
+        unread_label: Nepročitani
     list:
         delete: Izbriši
         reading_time_less_one_minute: 'procijenjeno vrijeme čitanja: &lt; 1 min'
         original_article: izvorni
         number_on_the_page: '{0} Nema zapisa.|{1} Postoji jedan zapis.|]1,Inf[ Broj zapisa: %count%.'
-        toogle_as_star: Uklj/isklj favorizirano
+        toogle_as_star: Uklj/Isklj omiljene
         reading_time_minutes_short: '%readingTime% min'
         reading_time: procijenjeno vrijeme čitanja
         export_title: Izvoz
         reading_time_minutes: 'procijenjeno vrijeme čitanja: %readingTime% min'
-        toogle_as_read: Uklj/isklj označi kao pročitano
-        number_of_tags: '{1}i još jedna druga etiketa|]1,Inf[i %count% druge etikete'
+        toogle_as_read: Uklj/Isklj oznaku kao pročitano
+        number_of_tags: '{1}i još jedna druga oznaka|]1,Inf[i %count% druge oznake'
         reading_time_less_one_minute_short: '&lt; 1 min'
     view:
         left_menu:
-            set_as_starred: Uklj/isklj favorizirano
+            set_as_starred: Uklj/Isklj omiljene
             back_to_homepage: Natrag
             share_email_label: E-mail
             back_to_top: Natrag na vrh
@@ -502,7 +505,7 @@ entry:
             problem:
                 description: Izgleda li članak pogrešno?
                 label: Problemi?
-            add_a_tag: Dodaj etiketu
+            add_a_tag: Dodaj oznaku
             delete: Izbriši
             share_content: Dijeli
             print: Ispis
@@ -515,12 +518,12 @@ entry:
         annotations_on_the_entry: '{0} Bez napomena|{1} Jedna napomena|]1,Inf[ %count% napomene'
     page_titles:
         unread: Nepročitani zapisi
-        starred: Favorizirani zapisi
+        starred: Omiljeni zapisi
         filtered: Filtrirani zapisi
         all: Svi zapisi
         archived: Arhivirani zapisi
-        untagged: Neetiketirani zapisi
-        filtered_tags: 'Filtrirano po etiketama:'
+        untagged: Zapisi bez oznaka
+        filtered_tags: 'Filtrirano po oznakama:'
         filtered_search: 'Filtrirano po pretrazi:'
     metadata:
         reading_time_minutes_short: '%readingTime% min'
@@ -530,7 +533,7 @@ entry:
         published_on: Datum objavljivanja
     confirm:
         delete: Stvarno želiš ukloniti taj članak?
-        delete_tag: Stvarno želiš ukloniti tu etiketu za taj članak?
+        delete_tag: Stvarno želiš ukloniti tu oznaku za taj članak?
     edit:
         title_label: Naslov
         url_label: Url
@@ -541,7 +544,7 @@ entry:
         placeholder: http://website.com
         form_new:
             url_label: Url
-        page_title: Spremi novi unos
+        page_title: Spremi novi zapis
     public:
         shared_by_wallabag: "%username% je dijelio/dijelila ovaj članak s <a href='%wallabag_instance%'>wallabagom</a>"
     default_title: Naslov zapisa
@@ -596,7 +599,7 @@ quickstart:
     configure:
         rss: Aktiviraj RSS feedove
         description: Za dobivanje programa koji tebi najviše odgovara, pogledaj konfiguraciju wallabaga.
-        tagging_rules: Odredi pravila za automatsko etiketiranje članaka
+        tagging_rules: Odredi pravila za automatsko označivanje članaka
         title: Konfiguriraj program
         language: Promijeni jezik i dizajn
         feed: Aktiviraj feedove
@@ -638,7 +641,7 @@ menu:
         logout: Odjava
         about: Informacije
         tags: Oznake
-        starred: Favorizirano
+        starred: Omiljeni
         site_credentials: Podaci za prijavu na stranicu
         archive: Arhiv
         all_articles: Svi zapisi
@@ -656,20 +659,20 @@ menu:
         filter_entries: Filtriraj zapise
         search: Traži
         export: Izvoz
-        random_entry: Prijeđi na slučajni unos tog popisa
+        random_entry: Prijeđi na slučajno odabrani zapis tog popisa
         account: Moj račun
     search_form:
         input_label: Ovdje upiši što tražiš
 tag:
     list:
-        number_on_the_page: '{0} Nema etiketa.|{1} Postoji jedna etiketa.|]1,Inf[ Broj etiketa: %count%.'
-        see_untagged_entries: Pogledaj neetiketirane zapise
-        untagged: Neoznačeni unosi
-        no_untagged_entries: Nema neoznačenih unosa.
-    page_title: Etikete
+        number_on_the_page: '{0} Nema oznaka.|{1} Postoji jedna oznaka.|]1,Inf[ Broj oznaka: %count%.'
+        see_untagged_entries: Pogledaj zapise bez oznaka
+        untagged: Zapisi bez oznaka
+        no_untagged_entries: Nema zapisa bez oznaka.
+    page_title: Oznake
     new:
         add: Dodaj
-        placeholder: Dodaj više etiketa odjednom, odvojene zarezom.
+        placeholder: Dodaj više oznaka odjednom, odvojene zarezom.
 security:
     register:
         page_title: Stvori račun
@@ -691,7 +694,7 @@ export:
 error:
     page_title: Došlo je do greške
 ignore_origin_instance_rule:
-    description: Ovdje možeš upravljati globalnim pravilima za zanemarivanje izvora koja se koriste za zanemarivanje nekih URL uzoraka izvora.
+    description: Ovdje možeš upravljati globalnim pravilima za zanemarivanje izvora koja se koriste za zanemarivanje nekih uzoraka URL-a izvora.
     list:
         create_new_one: Stvori novo globalno pravilo za zanemarivanje izvora
         no: Ne
