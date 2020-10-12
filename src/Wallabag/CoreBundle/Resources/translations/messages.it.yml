@@ -431,7 +431,7 @@ import:
         download_images_warning: Hai abilitato il download delle immagini per i tuoi articoli. Insieme all'importazione classica potrebbe volerci molto tempo per procedere (oppure potrebbe fallire). <strong>Raccomandiamo fortemente</strong> di abilitare l'importazione asincrona per evitare errori.
     firefox:
         page_title: Importa da > Firefox
-        description: Questo importatore copierà tutti i tuoi preferiti di Firefox. Vai sui tuoi preferiti (Ctrl+Maj+O), poi su "Import and backup", scegli "Backup...". Otterrai un file .json.
+        description: Questo importatore copierà tutti i tuoi preferiti di Firefox. Vai sui tuoi preferiti (Ctrl+Maj+O), poi su "Import and backup", scegli "Backup…". Otterrai un file JSON.
         how_to: Scegli il file di backup dei preferiti e clicca sul bottone sottostante per importarlo. Tieni presente che questo processo potrebbe richiedere molto tempo poiché tutti gli articoli devono essere recuperati.
     chrome:
         page_title: Importa da > Chrome

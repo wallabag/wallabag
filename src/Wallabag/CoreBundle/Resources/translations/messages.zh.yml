@@ -33,12 +33,14 @@ menu:
         users_management: '用户管理'
         site_credentials: '网站凭证'
         quickstart: "快速开始"
+        ignore_origin_instance_rules: 全局性忽略来源规则
     top:
         add_new_entry: '添加新项目'
         search: '搜索'
         filter_entries: '筛选项目'
         random_entry: '随机跳到该列表中的一个项目'
         export: '导出'
+        account: 我的帐户
     search_form:
         input_label: '输入搜索关键词'
 footer:
@@ -59,6 +61,7 @@ config:
         new_user: '添加用户'
         reset: '重置区域'
         rss: RSS
+        ignore_origin: 忽略来源规则
     form:
         save: '保存'
     form_settings:
@@ -208,12 +211,19 @@ config:
             operator_description:
                 equal_to: 等于…
                 label: 操作符
+                matches: '测试一个<i>主题</i>匹配一个<i>搜索</i>(区分大小写)。<br />例: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
             variable_description:
                 label: 变量
+                _all: 完整地址，主要用于模式匹配
+                host: 网址的主机
             meaning: 含义
             variables_available_title: 我可以使用哪些变量和操作符来编写规则？
             how_to_use_them_title: 我该怎么使用它们？
             title: 常见问题
+            ignore_origin_rules_definition_title: «忽略来源规则»是什么意思？
+            ignore_origin_rules_definition_description: wallabag用它们在重定向后自动忽略源地址。<br />如果在获取新条目时发生重定向，则所有忽略来源规则(<i>用户定义和实例定义</i>)都将被用于忽略源地址。
+            variables_available_description: '下列变量和操作符可以用来创建忽略来源规则:'
+            how_to_use_them_description: 让我们假设你想忽略一个源自 «<i>rss.example.com</i>»的条目的来源 (<i>知道重定向后，实际地址是example.com</i>)。<br />在那种情况下，你应当把« host = "rss.example.com" »放在<i>规则</i>字段中。
 entry:
     default_title: '项目标题'
     page_titles:
@@ -312,6 +322,7 @@ entry:
         reading_time_minutes_short: "%readingTime% 分钟"
         address: "地址"
         added_on: "添加于"
+        published_on: 发布于
 about:
     page_title: '关于'
     top_menu:
@@ -635,6 +646,9 @@ flashes:
             tagging_rules_not_imported: 导入标签规则时发生了错误
             rss_token_updated: RSS令牌已更新
             rss_updated: RSS信息已更新
+            ignore_origin_rules_updated: 已更新忽略来源规则
+            ignore_origin_rules_deleted: 已删除忽略来源规则
+            otp_disabled: 双因素身份验证已禁用
     entry:
         notice:
             entry_already_saved: '该项目已于 %date% 保存'
@@ -676,6 +690,11 @@ flashes:
             added: '"%host%" 的登录凭证已添加'
             updated: '"%host%" 的登录凭证已更新'
             deleted: '"%host%" 的登录凭证已删除'
+    ignore_origin_instance_rule:
+        notice:
+            deleted: 已删除全局性忽略来源规则
+            updated: 已更新全局性忽略来源规则
+            added: 已添加全局性忽略来源规则
 ignore_origin_instance_rule:
     form:
         back_to_list: 返回列表
@@ -688,3 +707,8 @@ ignore_origin_instance_rule:
         yes: 是
         edit_action: 编辑
         actions: 操作
+        create_new_one: 创建一条新的全局性忽略来源规则
+    description: 你可以在这里管理用来无视原始url的一些模式的全局性忽略来源规则。
+    edit_ignore_origin_instance_rule: 编辑一条现有的忽略来源规则
+    new_ignore_origin_instance_rule: 新建一条全局性忽略来源规则
+    page_title: 全局性忽略来源规则

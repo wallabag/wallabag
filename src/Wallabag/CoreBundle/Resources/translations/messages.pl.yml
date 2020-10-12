@@ -38,6 +38,8 @@ menu:
         search: Szukaj
         filter_entries: Filtruj wpisy
         export: Eksportuj
+        account: Moje konto
+        random_entry: Przejdź do losowego wpisu z tej listy
     search_form:
         input_label: Wpisz swoje zapytanie tutaj
 footer:
@@ -286,7 +288,7 @@ about:
         package: Paczka
         license: Licencja
 howto:
-    page_title: Howto
+    page_title: How to
     page_description: 'Sposoby zapisania artykułu:'
     tab_menu:
         add_link: Dodaj link
@@ -435,7 +437,7 @@ import:
         download_images_warning: Włączyłeś pobieranie obrazów dla swoich artykułów. W połączeniu z klasycznym importem, może to zająć dużo czasu (lub zakończyć się niepowodzeniem).<strong>Zdecydowanie zalecamy</strong> włączenie asynchronicznego importu, w celu uniknięcia błędów.
     firefox:
         page_title: Importuj > Firefox
-        description: Ten importer zaimportuje wszystkie twoje zakładki z Firefoksa. Idź do twoich zakładek (Ctrl+Shift+O), następnie w "Import i kopie zapasowe", wybierz "Utwórz kopię zapasową...". Uzyskasz plik .json.
+        description: Ten importer zaimportuje wszystkie twoje zakładki z Firefoksa. Idź do twoich zakładek (Ctrl+Shift+O), następnie w "Import i kopie zapasowe", wybierz "Utwórz kopię zapasową…". Uzyskasz plik JSON.
         how_to: Wybierz swój plik z zakładkami i naciśnij poniższy przycisk, aby je zaimportować. Może to zająć dłuższą chwilę, zanim wszystkie artykuły zostaną przeniesione.
     chrome:
         page_title: Importuj > Chrome

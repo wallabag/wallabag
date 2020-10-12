@@ -52,9 +52,9 @@ config:
         token_reset: 'Resetează-ți token-ul'
         feed_links: 'Link-uri RSS'
         feed_link:
-            unread: 'Unread'
-            starred: 'Starred'
-            archive: 'Archived'
+            unread: 'Necitite'
+            starred: 'Steluțe'
+            archive: 'Arhivat'
         feed_limit: 'Limită RSS'
     form_user:
         name_label: 'Nume'
@@ -62,7 +62,7 @@ config:
     form_password:
         old_password_label: 'Parola veche'
         new_password_label: 'Parola nouă'
-        repeat_new_password_label: 'Repeat new password'
+        repeat_new_password_label: ''
 entry:
     list:
         reading_time: 'timp estimat de citire'
@@ -150,7 +150,7 @@ howto:
     top_menu:
         browser_addons: 'Add-On-uri de Browser'
         mobile_apps: 'Aplicații mobile'
-        bookmarklet: 'Bookmarklet'
+        bookmarklet: ''
     form:
         description: 'Mulțumită acestui formular'
     browser_addons:
@@ -171,7 +171,7 @@ user:
     form:
         username_label: 'Nume de utilizator'
         password_label: 'Parolă'
-        repeat_new_password_label: 'Repeat new password'
+        repeat_new_password_label: ''
         plain_password_label: '????'
         email_label: 'E-mail'
 flashes:
