@@ -462,7 +462,7 @@ tag:
     list:
         number_on_the_page: '{0} タグはありません。|{1} 1 つタグがあります。|]1,Inf[ %count% タグがあります。'
         see_untagged_entries: タグのない記事を見る
-        untagged: タグの付いていない記事
+        untagged: タグがない記事
         no_untagged_entries: タグの付いていない記事はありません。
     new:
         placeholder: コンマで区切ると複数のタグを追加することができます。
