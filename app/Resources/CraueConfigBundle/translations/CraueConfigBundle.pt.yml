@@ -1,6 +1,6 @@
 download_pictures: Download imagens no seu servidor
 carrot: Habilitar compartilhamento para o Carrot
-diaspora_url: URL Diaspora caso o serviço esteja habilitado
+diaspora_url: URL de diaspora* caso o serviço esteja ativado
 export_epub: Habilita exportação para ePub
 export_mobi: Habilita exportação para .mobi
 export_pdf: Habilita exportação para PDF
@@ -8,9 +8,9 @@ export_csv: Habilita exportação para CSV
 export_json: Habilita exportação para JSON
 export_txt: Habilita exportação para TXT
 export_xml: Habilita exportação para XML
-shaarli_url: URL Shaarli caso o serviço esteja habilitado
-scuttle_url: URL Scuttle caso o serviço esteja habilitado
-unmark_url: URL Unmark caso o serviço esteja habilitado
+shaarli_url: URL de Shaarli caso o serviço esteja ativado
+scuttle_url: URL de Scuttle caso o serviço esteja ativado
+unmark_url: URL de Unmark caso o serviço esteja ativado
 pocket_consumer_key: Chave de consumidor do Pocket para importar conteúdo (https://getpocket.com/developer/docs/authentication)
 share_diaspora: Habilitar compartilhamento para o diaspora*
 share_mail: Habilitar compartilhamento por e-mail
@@ -35,4 +35,7 @@ download_images_enabled: Baixar imagens localmente
 import_with_redis: Habilitar Redis para importar dados assincronamente
 import_with_rabbitmq: Permitir que RabbitMQ importe dados assincronamente
 settings_changed: Configuração atualizada
-share_public: ''
+share_public: 'Permitir URLs públicas para entradas'
+shaarli_share_origin_url: Ativar o URL de origem de compartilhamento para Shaarli, se o serviço estiver ativado
+store_article_headers: Ativar se o wallabag armazena cabeçalhos de HTTP para cada artigo
+api_user_registration: Ative o registo do utilizador através da API
