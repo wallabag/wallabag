@@ -31,7 +31,7 @@ menu:
         save_link: リンクを保存
         back_to_unread: 未読の記事に戻る
         users_management: ユーザー管理
-        site_credentials: サイトの資格情報
+        site_credentials: サイトの認証情報
         quickstart: はじめに
         ignore_origin_instance_rules: グローバル転送元無視ルール
     top:
@@ -699,8 +699,14 @@ site_credential:
         save: 保存
         password_label: パスワード
         username_label: ログイン
+        host_label: ホスト名（subdomain.example.org、.example.org 等）
     list:
         no: いいえ
         yes: はい
         edit_action: 編集
         actions: 操作
+        create_new_one: 新しい認証情報を作成
+    description: ここではペイウォールや認証などを必要とするサイトの認証情報のすべてを管理（作成、編集、削除）することができます。
+    edit_site_credential: 既存の認証情報を編集
+    new_site_credential: 認証情報を作成
+    page_title: サイト認証情報管理
