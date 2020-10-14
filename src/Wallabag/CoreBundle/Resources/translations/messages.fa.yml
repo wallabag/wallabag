@@ -226,7 +226,7 @@ howto:
     bookmarklet:
         description: 'این پیوند را به نوار بوک‌مارک مرورگرتان بکشید:'
 quickstart:
-    page_title: Quickstart
+    page_title: ''
     intro:
         title: به wallabag خوش آمدید!!
         paragraph_1: به شما کمک خواهیم کرد تا wallabag را بشناسید و با برخی از ویژگی‌های جالبش آشنا شوید.
