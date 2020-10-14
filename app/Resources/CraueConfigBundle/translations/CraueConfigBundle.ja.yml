@@ -34,7 +34,7 @@ demo_mode_enabled: デモモードを有効にしますか? (公開 wallabag デ
 demo_mode_username: デモユーザー
 share_public: エントリの公開 URL を許可する
 download_images_enabled: 画像をローカルにダウンロード
-restricted_access: paywalled ウェブサイトの認証を有効にする
+restricted_access: ペイウォールのあるウェブサイトへの認証を有効にする
 api_user_registration: API を使ってユーザを登録できるようにする
 store_article_headers: wallabag が各記事の HTTP ヘッダーを格納するかどうかを有効にする
 shaarli_share_origin_url: サービスが有効な場合に Shaarli に元の url の共有を有効にする
