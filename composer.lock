@@ -11570,16 +11570,16 @@
         },
         {
             "name": "phpstan/phpstan-doctrine",
-            "version": "0.12.20",
+            "version": "0.12.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-doctrine.git",
-                "reference": "207a6aedf0ca95c57fb041f3b3c82bcb6e66ad27"
+                "reference": "6e76d431376d7fc00f26d4bd59d6f60201c79334"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/207a6aedf0ca95c57fb041f3b3c82bcb6e66ad27",
-                "reference": "207a6aedf0ca95c57fb041f3b3c82bcb6e66ad27",
+                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/6e76d431376d7fc00f26d4bd59d6f60201c79334",
+                "reference": "6e76d431376d7fc00f26d4bd59d6f60201c79334",
                 "shasum": ""
             },
             "require": {
@@ -11602,8 +11602,8 @@
                 "doctrine/orm": "^2.5",
                 "doctrine/persistence": "^1.1 || ^2.0",
                 "ergebnis/composer-normalize": "^2.0.2",
-                "jakub-onderka/php-parallel-lint": "^1.0",
                 "phing/phing": "^2.16.0",
+                "php-parallel-lint/php-parallel-lint": "^1.2",
                 "phpstan/phpstan-phpunit": "^0.12",
                 "phpstan/phpstan-strict-rules": "^0.12",
                 "phpunit/phpunit": "^7.0",
@@ -11632,7 +11632,7 @@
                 "MIT"
             ],
             "description": "Doctrine extensions for PHPStan",
-            "time": "2020-09-25T13:34:35+00:00"
+            "time": "2020-10-14T16:25:45+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
