@@ -500,7 +500,7 @@ import:
         page_title: 'Import > Wallabag v2'
         description: '这个导入器会导入你 wallabag v2 账户中的所有文章。前往 “所有项目”，然后在“导出” 侧边栏上，点击"JSON"。 你会得到一个名为"All articles.json"的文件。'
     elcurator:
-        page_title: 'Import > elCurator'
+        page_title: '导入 > elCurator'
         description: '这个导入器会导入你 elCurator 账户中的所有内容。前往你 elCurator 账户的偏好设置页面，然后导出你的内容。你将得到一个 JSON 文件。'
     readability:
         page_title: '导入 > Readability'
