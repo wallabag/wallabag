@@ -20,7 +20,7 @@ share_shaarli: Shaarli'ye paylaşımı aktifleştir
 share_scuttle: Scuttle'a paylaşımı aktifleştir
 share_twitter: Twitter'a paylaşımı aktifleştir
 share_unmark: Unmark.it'e paylaşımı aktifleştir
-show_printlink: İçeriği çıktı alabilmek için bir link görüntüle
+show_printlink: İçeriği yazdırabilmek için bir bağlantı görüntüle
 wallabag_support_url: Wallabag destek URL'i
 entry: makale
 export: dışarı aktar
@@ -30,14 +30,11 @@ modify_settings: uygula
 matomo_host: Matomo'teki web sitenizin host adresi (başında http:// veya https:// olmadan)
 matomo_site_id: Matomo'teki web sitenizin ID'si
 matomo_enabled: Matomo'i aktifleştir
-demo_mode_enabled: Demo mod aktifleştirilsin mi (Sadece herkese açık wallabag demoları
-  için kullanılmakta)
+demo_mode_enabled: Demo mod aktifleştirilsin mi (Sadece herkese açık wallabag demoları için kullanılmakta)
 demo_mode_username: Demo kullanıcısı
 share_public: Makaleler için herkese açık URL'lere izin ver
 download_images_enabled: Resimleri lokale indir
 restricted_access: Ödeme ile erişim sağlanabilen sitelere doğrulama özelliğini aktifleştir
 api_user_registration: API ile üye kaydını aktifleştir
-store_article_headers: Eğer wallabag her makale için HTTP header'larını saklıyorsa
-  aktifleştirin
-shaarli_share_origin_url: Shaarli'ye orijinal URL'in paylaşımını aktifleştir (eğer
-  servis aktifse)
+store_article_headers: Eğer wallabag her makale için HTTP header'larını saklıyorsa aktifleştirin
+shaarli_share_origin_url: Shaarli'ye orijinal URL'in paylaşımını aktifleştir (eğer servis aktifse)
