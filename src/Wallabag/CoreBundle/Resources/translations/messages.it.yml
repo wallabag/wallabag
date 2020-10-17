@@ -32,6 +32,8 @@ menu:
         back_to_unread: Torna ai contenuti non letti
         users_management: Gestione utenti
         site_credentials: Credenziali sito
+        quickstart: Introduzione
+        ignore_origin_instance_rules: Regole globali per ignorare l'origine
     top:
         add_new_entry: Aggiungi un nuovo contenuto
         search: Cerca
@@ -123,10 +125,10 @@ config:
         delete_rule_label: elimina
         edit_rule_label: modifica
         rule_label: Regola
-        tags_label: Etichetta
+        tags_label: Etichette
         faq:
             title: FAQ
-            tagging_rules_definition_title: Cosa significa « regole di etichettatura » ?
+            tagging_rules_definition_title: Cosa significa «regole di etichettatura»?
             tagging_rules_definition_description: Sono regole utilizzate da wallabag per etichettare automaticamente i contenuti.<br />Ogni volta che viene aggiunto un contenuto, tutte le regole di etichettatura vengono utilizzate per aggiungere le etichette configurate, risparmiandoti il lavoro di classificare i contenuti manualmente.
             how_to_use_them_title: Come si usano?
             how_to_use_them_description: 'Diciamo che vuoi etichettare un contenuto come « <i>lettura veloce</i> » quando il tempo di lettura è inferiore ai 3 minuti.<br />In questo case, devi mettere « readingTime &lt;= 3 » nel campo <i>Regola</i> e « <i>lettura veloce</i> » nel campo <i>Etichette</i>.<br />Molte etichette si possono aggiungere contemporanemente separandole con una virgola: « <i>lettura veloce, da leggere</i> »<br />Regole complesse possono essere scritte utilizzando gli operatori predefiniti: se « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » allora etichetta « <i>lettura lunga, GitHub </i> »'
@@ -156,6 +158,11 @@ config:
                 and: Una regola E un'altra
                 matches: 'Verifica che un <i>oggetto</i> risulti in una <i>ricerca</i> (case-insensitive).<br />Esempio: <code>titolo contiene "football"</code>'
                 notmatches: 'Verifica che un <i>oggetto</i> non corrisponda a una <i>ricerca</i> (senza distinzione tra maiuscole e minuscole).<br/>Esempio: <code>titolo non corrisponda a notmatches «calcio»</code>'
+        card:
+            export_tagging_rules: Esporta le regole di etichettatura
+            import_tagging_rules_detail: Devi selezionare il file JSON che hai precedentemente esportato.
+            import_tagging_rules: Importa le regole di etichettatura
+            new_tagging_rule: Crea una regola di etichettatura
 entry:
     default_title: Titolo del contenuto
     page_titles:
@@ -347,7 +354,7 @@ quickstart:
         description: Per avere un'applicazione che ti soddisfi, dai un'occhiata alla configurazione di wallabag.
         language: Cambia lingua e design
         rss: Abilita i feed RSS
-        tagging_rules: Scrivi delle regole per taggare automaticamente i contenuti
+        tagging_rules: Scrivi delle regole per etichettare automaticamente i contenuti
     admin:
         title: Amministrazione
         description: 'Come amministratore, hai la possibilità di svolgere le seguenti operazioni in wallabag:'
@@ -481,7 +488,7 @@ developer:
         field_id: ID Client
         field_secret: Chiave segreta
         back: Indietro
-        read_howto: Leggi Come fare "Come creare la mia prima applicazione"
+        read_howto: Leggi Come fare «Come creare la mia prima applicazione»
     howto:
         page_title: Gestione client API > Come creare la mia prima applicazione
         description:
