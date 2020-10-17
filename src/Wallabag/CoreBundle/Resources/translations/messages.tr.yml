@@ -29,10 +29,11 @@ menu:
         back_to_unread: Okunmayan makalelere geri dön
         internal_settings: Dahili Ayarlar
         developer: API istemcileri yönetimi
-        save_link: Linki kaydet
+        save_link: Bağlantıyı kaydet
         users_management: Kullanıcı yönetimi
         site_credentials: Site bilgileri
         quickstart: Hızlı başlangıç
+        ignore_origin_instance_rules: Genel orijinal kaynağı yok say kuralları
     top:
         add_new_entry: Yeni bir makale ekle
         search: Ara
@@ -59,6 +60,8 @@ config:
         rules: Etiketleme kuralları
         new_user: Bir kullanıcı ekle
         feed: Akışlar
+        ignore_origin: Orijinal kaynağı yok say kuralları
+        reset: Sıfırlama alanı
     form:
         save: Kaydet
     form_settings:
@@ -118,6 +121,7 @@ config:
             table_state: Durum
             table_method: Yöntem
             emailTwoFactor_label: E-posta kullanarak (e-posta ile bir kod alın)
+        login_label: Giriş (değiştirilemez)
     form_password:
         old_password_label: Eski şifre
         new_password_label: Yeni şifre
@@ -131,7 +135,7 @@ config:
             tagging_rules_definition_title: « etiketleme kuralları » ne anlama geliyor?
             how_to_use_them_title: Bunu nasıl kullanırım?
             variables_available_title: Kurallar içerisinde hangi değişken ve operatörleri kullanabilirim?
-            variables_available_description: 'Etiket kuralı oluşturmak istediğinizde aşağıdaki değişken ve operatörleri kullanabilirsin:'
+            variables_available_description: 'Etiketleme kuralları oluşturmak için aşağıdaki değişken ve operatörler kullanılabilir:'
             meaning: Anlamı
             variable_description:
                 label: Değişken
@@ -173,7 +177,7 @@ config:
             new_tagging_rule: Etiketleme kuralı oluştur
     reset:
         title: Sıfırlama alanı (tehlikeli alan)
-        description: Aşağıdaki butonlara basarak hesabınızdan bazı bilgileri kaldırabilirsiniz. Bu işlemlerin bazılarının GERİ DÖNDÜRÜLEMEZ olduğunu unutmayın.
+        description: Aşağıdaki düğmelere basarak hesabınızdan bazı bilgileri kaldırabilirsiniz. Bu işlemlerin GERİ DÖNDÜRÜLEMEZ olduğunu unutmayın.
         annotations: TÜM açıklama metinlerini sil
         tags: TÜM etiketleri sil
         entries: TÜM girdileri sil
@@ -193,12 +197,19 @@ config:
             operator_description:
                 equal_to: Eşittir…
                 label: Operatör
+                matches: '<i>Hedefin</i> bir <i>aramayla</i> (büyük/küçük harf farketmeden) eşleştiğini test eder.<br />Örnek: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
             variable_description:
                 label: Değişken
+                _all: Tam adres, genellikle kalıp eşleştirme için kullanılır
+                host: Host adresi
             meaning: Anlamı
             variables_available_title: Kurallar içerisinde hangi değişken ve operatörleri kullanabilirim?
             how_to_use_them_title: Bunu nasıl kullanırım?
             title: S.S.S.
+            variables_available_description: 'Orijinal kaynağı yok say kuralları oluşturmak için aşağıdaki değişken ve operatörler kullanılabilir:'
+            ignore_origin_rules_definition_description: Wallabag tarafından bir yeniden yönlendirmeden sonra bir orijinal kaynak adresini otomatik olarak yok saymak için kullanılırlar.<br />Yeni bir makale çekilirken bir yönlendirme meydana gelirse, tüm orijinal kaynağı yok say kuralları (<i>kullanıcı tanımlı ve örnek tanımlı</i>) orijinal kaynak adresini yok saymak için kullanılacaktır.
+            ignore_origin_rules_definition_title: « Orijinal kaynağı yok say kuralları » ne demektir?
+            how_to_use_them_description: « <i>rss.example.com</i> » adresinden gelen bir makalenin (<i>bir yönlendirmeden sonra gerçek adresin example.com olduğunu bilerek</i>) orijinal kaynağını yok saymak istediğinizi varsayalım.<br />Bu durumda, <i>Kural</i> alanına « host = "rss.example.com" » değerini koymalısınız.
     form_feed:
         feed_limit: Akıştaki makale sayısı
         feed_link:
@@ -249,8 +260,8 @@ entry:
         action:
             clear: Temizle
             filter: Filtrele
-        is_public_label: Herkese açık linki var
-        is_public_help: Herkese açık link
+        is_public_label: Herkese açık bağlantısı var
+        is_public_help: Herkese açık bağlantı
         http_status_label: HTTP durumu
     view:
         left_menu:
@@ -269,8 +280,8 @@ entry:
                 label: Bir sorun mu var?
                 description: Bu makalede herhangi bir yanlışlık mı var?
             back_to_top: En başa dön
-            public_link: herkese açık link
-            delete_public_link: herkese açık linki sil
+            public_link: herkese açık bağlantı
+            delete_public_link: herkese açık bağlantıyı sil
             print: Yazdır
         edit_title: Başlığı düzenle
         original_article: orijinal
@@ -289,7 +300,7 @@ entry:
         title_label: Başlık
         url_label: Url
         save_label: Kaydet
-        origin_url_label: Orijinal link (makaleyi nereden buldunuz)
+        origin_url_label: Orijinal URL (makaleyi nereden buldunuz)
     page_titles:
         unread: Okunmamış makaleler
         starred: Favorilenmiş makaleler
@@ -311,6 +322,7 @@ entry:
         reading_time_minutes_short: '%readingTime% dakika'
         address: Adres
         added_on: Eklenme tarihi
+        published_on: Yayımlanma tarihi
 about:
     page_title: Hakkımızda
     top_menu:
@@ -356,7 +368,7 @@ howto:
     bookmarklet:
         description: "Bu bağlantı ile yer imlerinizi sürükleyip bırakarak wallabag'e ekleyebilirsiniz:"
     tab_menu:
-        add_link: Link ekle
+        add_link: Bağlantı ekle
         shortcuts: Kısayolları kullan
     page_description: 'Bir makaleyi kaydetmek için pek çok yol bulunmakta:'
     mobile_apps:
@@ -383,13 +395,13 @@ howto:
         list_title: Listeleme sayfasında kullanılabilen kısayollar
         search: Arama formunu görüntüle
         article_title: Makale görünümünde kısayollar mevcut
-        open_original: Makalenin orijinal linkini aç
+        open_original: Makalenin orijinal URL'sini aç
         toggle_favorite: Makalenin favorileme durumunu değiştir
         toggle_archive: Makalenin okundu durumunu değiştir
         delete: Makaleyi sil
         material_title: Sadece material temasında kullanılabilen kısayollar
-        add_link: Yeni bir link ekle
-        hide_form: Mevcut formu gizle (arama veya yeni link)
+        add_link: Yeni bir bağlantı ekle
+        hide_form: Mevcut formu gizle (arama veya yeni bağlantı)
         arrows_navigation: Makaleler arasında geçiş yap
         open_article: Seçili makaleyi görüntüle
 quickstart:
@@ -409,7 +421,7 @@ quickstart:
         title: İlk adım
         new_article: İlk makalenizi kaydedin
         unread_articles: Ve bunu sınıflandırın!
-        description: Wallabag şimdi istediğiniz biçimde ayarlandı, artık internet'teki sayfaları arşivlemeye hazırsınız! Sağ üstteki+ butonu ile link ekleyebilirsiniz.
+        description: Wallabag şimdi istediğiniz biçimde ayarlandı, artık internetteki sayfaları arşivlemeye hazırsınız! Sağ üstteki + düğmesi ile bağlantı ekleyebilirsiniz.
     migrate:
         title: Varolan servislerden veri aktarma
         description: Kullanmakta olduğunuz farklı bir hizmet mi var? Biz size yardımcı olacak ve verilerinizi wallabag'e aktarmanıza yardımcı olacağız.
@@ -469,7 +481,7 @@ import:
     pocket:
         page_title: İçe Aktar > Pocket
         description: Bu araç tüm Pocket verinizi içe aktarır. Pocket içeriklerin getirilmesine izin vermez, okunabilen içerikler wallabag tarafından yeniden getirilir.
-        authorize_message: Pocket hesabınızda verilerinizi içe aktarabilmemiz için öncelikle aşağıdaki butona tıklayın. Daha sonra, getpocket.com üzerindeki uygulamamıza gereken izinleri verin.
+        authorize_message: Pocket hesabınızda verilerinizi içe aktarabilmemiz için öncelikle aşağıdaki düğmeye tıklayın. Daha sonra, getpocket.com üzerindeki uygulamamıza gereken izinleri verin.
         connect_to_pocket: Pocket'a bağlanın ve verilerinizi içe aktarın
         config_missing:
             description: Pocket üzerinden içe aktarım ayarlanmamış.
@@ -478,33 +490,33 @@ import:
     wallabag_v1:
         page_title: İçe Aktar > Wallabag v1
         description: Bu araç wallabag v1 üzerindeki tüm makalelerinizi içe aktarır. Yapılandırma sayfasında, "Export your wallabag data" sekmesinden "JSON export" adımını izleyin. Bu adım size "wallabag-export-1-xxxx-xx-xx.json" isimli bir dosya verecektir.
-        how_to: Aşağıdaki butona tıklayarak wallabag v1 tarafından dışa aktarılmış dosyanızı yükleyin.
+        how_to: Aşağıdaki düğmeye tıklayarak wallabag v1 tarafından dışa aktarılmış dosyanızı yükleyin.
     wallabag_v2:
         page_title: İçe Aktar > Wallabag v2
         description: Bu içe aktarıcı tüm wallabag v2 makalelerinizi içe aktarır. Makaleler kısmına gidip, export sidebaru üzeridnen "JSON" seçeneğine tıklayın. Bunun ardından "All articles.json" dosyanız oluşacak.
     readability:
         page_title: İçe Aktar > Readability
-        description: Bu içe aktarıcı tüm Readability makalelerinizi içe aktaracak. Readability araçlar sayfasında (https://www.readability.com/tools/), "Data Export" kısmından "Export your data" butonuna tıklayın. E-posta adresinize json dosyası gönderilecek (dosya json olsa da dosya adı .json olmayabilir).
-        how_to: Lütfen Readability dışarı aktarılmış dosyanızı seçin ve de aşağıdaki butona basarak içe aktarın.
+        description: Bu içe aktarıcı tüm Readability makalelerinizi içe aktaracak. Readability araçlar sayfasında (https://www.readability.com/tools/), "Data Export" kısmından "Export your data" düğmesine tıklayın. E-posta adresinize json dosyası gönderilecek (dosya json olsa da dosya adı .json ile bitmeyebilir).
+        how_to: Lütfen Readability dışarı aktarılmış dosyanızı seçin ve aşağıdaki düğmeye basarak içe aktarın.
     firefox:
         page_title: İçe Aktar > Firefox
         description: Bu içe aktarıcı tüm Firefox yer imlerinizi içe aktaracak. Yer imleri sayfanıza gidin (Ctrl+Shift+O), ve ardından "İçe aktar ve yedekle" menüsünden "Yedekle…" seçeneğini seçin. Bir JSON dosyası alacaksınız.
-        how_to: Yer imleri yedek dosyanızı seçip aşağıdaki butona tıklayarak içe aktarabilirsiniz. Bu işlem, tüm linkler işlenip kaydedileceği için uzun zaman alabilir.
+        how_to: Yer imleri yedek dosyanızı seçip aşağıdaki düğmeye tıklayarak içe aktarabilirsiniz. Bu işlem, tüm bağlantılar işlenip kaydedileceği için uzun zaman alabilir.
     chrome:
         page_title: İçe Aktar > Chrome
         description: "Bu içe aktarıcı tüm Chrome yer imlerinizi içe aktaracak. Bu işlem işletim sisteminize göre değişebilir: <ul><li>Linux'ta, <code>~/.config/chromium/Default/</code> klasörüne gidin</li><li>Windows'ta, <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code> klasörüne gidin</li><li>macOS'ta <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code> klasörüne gidin</li></ul>Klasöre gittiğinizde <code>Bookmarks</code> dosyasını bir yere kopyalayın. <br><em>Eğer Chromium yerine Chrome kullanıyorsanız yolları ona göre düzeltmeniz gerekebilir.</em></p>"
-        how_to: Yer imleri yedek dosyanızı seçip aşağıdaki butona tıklayarak içeri aktarabilirsiniz. Bu işlem, tüm linkler işlenip kaydedileceği için uzun zaman alabilir.
+        how_to: Yer imleri yedek dosyanızı seçip aşağıdaki düğmeye tıklayarak içeri aktarabilirsiniz. Bu işlem, tüm bağlantılar işlenip kaydedileceği için uzun zaman alabilir.
     instapaper:
         page_title: İçe Aktar > Instapaper
-        description: Bu içe aktarıcı tüm Instapaper makalelerinizi içe aktaracak. Ayarlar sayfasında (https://www.instapaper.com/user) "Export" kısmından "Download .CSV file" linkine tıklayıp indirebilirsiniz. Bir CSV dosyası cihazınıza inecek ("instapaper-export.csv" gibi bir dosya).
-        how_to: Lütfen Instapaper dışa aktarım dosyanızı seçin ve aşağıdaki butona tıklayarak içe aktarın.
+        description: Bu içe aktarıcı tüm Instapaper makalelerinizi içe aktaracak. Ayarlar sayfasında (https://www.instapaper.com/user) "Export" kısmından "Download .CSV file" bağlantısına tıklayıp indirebilirsiniz. Bir CSV dosyası cihazınıza inecek ("instapaper-export.csv" gibi bir dosya).
+        how_to: Lütfen Instapaper dışa aktarım dosyanızı seçin ve aşağıdaki düğmeye tıklayarak içe aktarın.
     worker:
         enabled: 'İçe aktarım işlemi asenkron olarak gerçekleşmektedir. İçeri aktarma işlemi başladığı anda, harici bir çalışan kod (worker) işleri tek tek yönetecek. Mevcut servis:'
         download_images_warning: Makaleleriniz için resimleri indirme özelliğini aktif. Klasik içe aktarmayla birlikte bu işlem uzun zaman alabilir (veya hatalı sonuç verebilir). Biz olası bir hata olmaması adına asenkron içe aktarım özelliğini kullanmanızı <strong>şiddetle öneriyoruz</strong>.
     pinboard:
         page_title: İçe Aktar > Pinboard
         description: Bu içe aktarıcı tüm Pinboard makalelerinizi içe aktarır. Yedekleme sayfasında (https://pinboard.in/settings/backup) "Bookmarks" kısmında "JSON" seçeneğine tıklayın. Cihazınıza bir JSON dosyası inecek ("pinboard_export" gibi bir dosya).
-        how_to: Pinboard dışa aktarım dosyanızı seçip aşağıdaki butona tıklayarak içe aktarabilirsiniz.
+        how_to: Pinboard dışa aktarım dosyanızı seçip aşağıdaki düğmeye tıklayarak içe aktarabilirsiniz.
     elcurator:
         description: Bu içe aktarıcı tüm elCurator makalelerinizi içe aktaracak. elCurator hesabınızda tercihlerinize gidin ve ardından içeriğinizi dışa aktarın. Bir JSON dosyanız olacak.
         page_title: İçe Aktar > elCurator
@@ -559,6 +571,8 @@ flashes:
             feed_token_revoked: Akış belirteci iptal edildi
             feed_token_updated: Akış belirteci güncellendi
             feed_updated: Akış bilgileri güncellendi
+            ignore_origin_rules_updated: Orijinal kaynağı yok say kuralı güncellendi
+            ignore_origin_rules_deleted: Orijinal kaynağı yok say kuralı silindi
     entry:
         notice:
             entry_already_saved: Makale zaten %date% tarihinde kaydedilmiş
@@ -600,6 +614,11 @@ flashes:
             added: '"%host%" için site erişim bilgileri oluşturuldu'
             updated: '"%host%" için site erişim bilgileri güncellendi'
             deleted: '"%host%" için site erişim bilgileri silindi'
+    ignore_origin_instance_rule:
+        notice:
+            deleted: Genel orijinal kaynağı yok say kuralı silindi
+            updated: Genel orijinal kaynağı yok say kuralı güncellendi
+            added: Genel orijinal kaynağı yok say kuralı eklendi
 export:
     footer_template: <div style="text-align:center;"><p>Wallabag ile, %method% metodu ile üretilmiştir.</p><p>Eğer bu e-kitabı cihazınızda okumada sorun yaşıyorsanız <a href="https://github.com/wallabag/wallabag/issues">bu adresten</a> yaşadığınız sorunu paylaşmaktan çekinmeyin.</p></div>
     unknown: Bilinmeyen
@@ -686,3 +705,8 @@ ignore_origin_instance_rule:
         yes: Evet
         edit_action: Düzenle
         actions: İşlem
+        create_new_one: Yeni bir genel orijinal kaynağı yok say kuralı oluştur
+    description: Burada, bazı orijinal kaynak URL kalıplarını yok saymak için kullanılan genel orijinal kaynağı yok say kurallarını yönetebilirsiniz.
+    edit_ignore_origin_instance_rule: Mevcut bir orijinal kaynağı yok say kuralını düzenle
+    new_ignore_origin_instance_rule: Genel orijinal kaynağı yok say kuralı oluştur
+    page_title: Genel orijinal kaynağı yok say kuralları
