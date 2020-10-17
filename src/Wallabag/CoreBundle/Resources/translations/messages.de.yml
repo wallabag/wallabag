@@ -110,6 +110,7 @@ config:
         two_factor:
             state_enabled: Aktiviert
             table_action: Aktion
+            table_state: Zustand
     reset:
         title: Zurücksetzen (a.k.a Gefahrenzone)
         description: Beim Nutzen der folgenden Schaltflächenhast du die Möglichkeit, einige Informationen von deinem Konto zu entfernen. Sei dir bewusst, dass dies NICHT RÜCKGÄNGIG zu machen ist.
@@ -167,6 +168,7 @@ config:
     otp:
         app:
             cancel: Abbrechen
+            enable: Aktivieren
     form_ignore_origin_rules:
         faq:
             operator_description:
@@ -174,6 +176,7 @@ config:
                 label: Operator
             variable_description:
                 label: Variable
+                host: Host-Rechner der Adresse
             meaning: Bedeutung
             variables_available_title: Welche Variablen und Operatoren kann ich benutzen, um Regeln zu schreiben?
             how_to_use_them_title: Wie nutze ich sie?
@@ -182,6 +185,7 @@ config:
         feed_link:
             all: Alle
             archive: Archiviert
+            starred: Favoriten
         token_create: Erstelle deinen Token
         no_token: Kein Token
         description: Durch Wallabag bereitgestellte Atom Feeds erlauben es dir, deine gespeicherten Artikel später mit deinem favorisierten Atom Reader zu lesen. Du musst zuerst einen Token erstellen.
@@ -283,6 +287,7 @@ entry:
         reading_time_minutes_short: '%readingTime% min'
         address: Adresse
         added_on: Hinzugefügt am
+        published_on: Veröffentlicht am
 about:
     page_title: Über
     top_menu:
@@ -377,6 +382,7 @@ quickstart:
         language: Sprache und Design ändern
         rss: RSS-Feeds aktivieren
         tagging_rules: Schreibe Regeln, um deine Beiträge automatisch zu taggen (verschlagworten)
+        feed: Feeds aktivieren
     admin:
         title: Administration
         description: 'Als Adminstrator hast du einige Privilegien. Du kannst:'
@@ -478,6 +484,8 @@ import:
         page_title: Aus Pinboard importieren
         description: Dieser Import wird all deine Pinboard Artikel importieren. Auf der Seite Backup (https://pinboard.in/settings/backup) klickst du auf "JSON" in dem Abschnitt "Lesezeichen". Eine JSON Datei wird dann heruntergeladen (z.B. "pinboard_export").
         how_to: Bitte wähle deinen Pinboard Export aus und klicke den nachfolgenden Button zum Importieren.
+    elcurator:
+        page_title: Importieren > elCurator
 developer:
     page_title: API-Client-Verwaltung
     welcome_message: Willkomen zur wallabag API
@@ -507,6 +515,7 @@ developer:
             redirect_uris_label: Weiterleitungs-URIs
             save_label: Neuen Client erstellen
         action_back: Zurück
+        copy_to_clipboard: Kopieren
     client_parameter:
         page_title: API-Client-Verwaltung > Client-Parameter
         page_description: Dies sind deine Client-Parameter.
@@ -552,6 +561,7 @@ user:
         delete: Löschen
         delete_confirm: Bist du sicher?
         back_to_list: Zurück zur Liste
+        twofactor_google_label: Zwei-Faktor-Authentifizierung per OTP-App
     search:
         placeholder: Filtere nach Benutzer oder E-Mail-Adresse
 site_credential:
@@ -590,6 +600,8 @@ flashes:
             tags_reset: Tags zurücksetzen
             entries_reset: Einträge zurücksetzen
             archived_reset: Archiverte Einträge zurücksetzen
+            ignore_origin_rules_deleted: Regel fürs Ignorieren des Ursprungs gelöscht
+            ignore_origin_rules_updated: Regel fürs Ignorieren des Ursprungs aktualisiert
     entry:
         notice:
             entry_already_saved: Eintrag bereits am %date% gespeichert
@@ -629,6 +641,11 @@ flashes:
             added: Zugangsdaten für „%host%“ hinzugefügt
             updated: Zugangsdaten für „%host%“ aktualisiert
             deleted: Zugangsdaten für „%host%“ gelöscht
+    ignore_origin_instance_rule:
+        notice:
+            deleted: Globale Regel fürs Ignorieren des Ursprungs gelöscht
+            updated: Globale Regel fürs Ignorieren des Ursprungs aktualisiert
+            added: Globale Regel fürs Ignorieren des Ursprungs hinzugefügt
 ignore_origin_instance_rule:
     form:
         back_to_list: Zurück zur Liste
@@ -641,3 +658,7 @@ ignore_origin_instance_rule:
         yes: Ja
         edit_action: Bearbeiten
         actions: Aktionen
+        create_new_one: Erstelle eine neue globale Regel fürs Ignorieren des Ursprungs
+    edit_ignore_origin_instance_rule: Bearbeite eine globale Regel fürs Ignorieren des Ursprungs
+    new_ignore_origin_instance_rule: Erstelle globale Regeln fürs Ignorieren des Ursprungs
+    page_title: Globale Regeln fürs Ignorieren des Ursprungs
