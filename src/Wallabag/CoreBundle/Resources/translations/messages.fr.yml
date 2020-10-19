@@ -20,7 +20,7 @@ menu:
         archive: Lus
         all_articles: Tous les articles
         config: Configuration
-        tags: Tags
+        tags: Étiquettes
         internal_settings: Configuration interne
         import: Importer
         howto: Aide
@@ -56,7 +56,7 @@ config:
         settings: Paramètres
         user_info: Mon compte
         password: Mot de passe
-        rules: Règles de tag automatiques
+        rules: Règles d'étiquetage
         new_user: Créer un compte
         feed: "Flux"
         ignore_origin: "Règles d'omission d'origine"
@@ -101,30 +101,30 @@ config:
             all: "Tous"
         feed_limit: "Nombre d’articles dans le flux"
     form_user:
-        two_factor_description: Activer l’authentification double-facteur veut dire que vous allez recevoir un code par courriel à chaque nouvelle connexion non approuvée.
+        two_factor_description: Activer l’authentification à deux facteurs signifie que vous allez recevoir un code par courriel à chaque nouvelle connexion non approuvée.
         name_label: Nom
         email_label: Adresse courriel
         login_label: 'Identifiant'
         two_factor:
-            emailTwoFactor_label: 'En utlisant l’email (recevez un code par email)'
-            googleTwoFactor_label: 'En utilisant une application de mot de passe à usage unique (ouvrez l’app, comme Google Authenticator, Authy or FreeOTP, pour obtenir un mot de passe à usage unique)'
+            emailTwoFactor_label: 'En utilisant le courriel (recevez un code par courriel)'
+            googleTwoFactor_label: 'En utilisant une application A2F (ouvrez l’appli, comme Google Authenticator, Authy ou FreeOTP, pour obtenir un mot de passe à usage unique)'
             table_method: Méthode
             table_state: État
             table_action: Action
             state_enabled: Activé
             state_disabled: Désactivé
-            action_email: Utiliser l'email
-            action_app: Utiliser une app OTP
+            action_email: Utiliser le courriel
+            action_app: Utiliser une appli A2F
         delete:
             title: Supprimer mon compte (attention danger !)
-            description: Si vous confirmez la suppression de votre compte, TOUS les articles, TOUS les tags, TOUTES les annotations et votre compte seront DÉFINITIVEMENT supprimé (c’est IRRÉVERSIBLE). Vous serez ensuite déconnecté.
+            description: Si vous confirmez la suppression de votre compte, TOUS les articles, TOUTES les étiquettes, TOUTES les annotations et votre compte seront DÉFINITIVEMENT supprimé (c’est IRRÉVERSIBLE). Vous serez ensuite déconnecté·e.
             confirm: Vous êtes vraiment sûr ? (C’EST IRRÉVERSIBLE)
             button: Supprimer mon compte
     reset:
         title: Réinitialisation (attention danger !)
         description: En cliquant sur les boutons ci-dessous vous avez la possibilité de supprimer certaines informations de votre compte. Attention, ces actions sont IRRÉVERSIBLES.
         annotations: Supprimer TOUTES les annotations
-        tags: Supprimer TOUS les tags
+        tags: Supprimer TOUTES les étiquettes
         entries: Supprimer TOUS les articles
         archived: Supprimer TOUS les articles archivés
         confirm: Êtes-vous vraiment sûr ? (C’EST IRRÉVERSIBLE)
@@ -135,13 +135,13 @@ config:
         repeat_new_password_label: Confirmez votre nouveau mot de passe
     form_rules:
         if_label: si
-        then_tag_as_label: alors attribuer les tags
+        then_tag_as_label: alors attribuer les étiquettes
         delete_rule_label: supprimer
         edit_rule_label: éditer
         rule_label: Règle
-        tags_label: Tags
+        tags_label: Étiquettes
         card:
-            new_tagging_rule: Créer une règle
+            new_tagging_rule: Créer une règle d'étiquetage
             import_tagging_rules: Importer des règles
             import_tagging_rules_detail: Vous devez sélectionné un fichier JSON que vous avez précédemment exporté.
             export_tagging_rules: Exporter les règles
@@ -151,12 +151,12 @@ config:
         export: Export
         faq:
             title: FAQ
-            tagging_rules_definition_title: Que signifient les règles de tag automatiques ?
-            tagging_rules_definition_description: Ce sont des règles utilisées par wallabag pour classer automatiquement vos nouveaux articles.<br />À chaque fois qu’un nouvel article est ajouté, toutes les règles de tag automatiques seront utilisées afin d’ajouter les tags que vous avez configurés, vous épargnant ainsi l’effort de classifier vos articles manuellement.
+            tagging_rules_definition_title: Que signifient les règles d'étiquetage automatiques ?
+            tagging_rules_definition_description: Ce sont des règles utilisées par wallabag pour classer automatiquement vos nouveaux articles.<br />À chaque fois qu’un nouvel article est ajouté, toutes les règles d'étiquetage automatiques seront utilisées afin d’ajouter les tags que vous avez configurés, vous épargnant ainsi l’effort de classifier vos articles manuellement.
             how_to_use_them_title: Comment les utiliser ?
-            how_to_use_them_description: 'Imaginons que voulez attribuer aux nouveaux articles le tag « <i>lecture courte</i> » lorsque le temps de lecture est inférieur à 3 minutes.<br />Dans ce cas, vous devriez mettre « readingTime &lt;= 3 » dans le champ <i>Règle</i> et « <i>lecture courte</i> » dans le champ <i>Tag</i>.<br />Plusieurs tags peuvent être ajoutés simultanément en les séparant par des virgules : « <i>lecture courte, à lire</i> »<br />Des règles complexes peuvent être créées en utilisant des opérateurs prédéfinis: si « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » alors attribuer les tags « <i>lecture longue, GitHub</i> »'
+            how_to_use_them_description: 'Imaginons que voulez attribuer aux nouveaux articles l''étiquette « <i>lecture courte</i> » lorsque le temps de lecture est inférieur à 3 minutes.<br />Dans ce cas, vous devriez mettre « readingTime &lt;= 3 » dans le champ <i>Règle</i> et « <i>lecture courte</i> » dans le champ <i>Tag</i>.<br />Plusieurs tags peuvent être ajoutés simultanément en les séparant par des virgules : « <i>lecture courte, à lire</i> »<br />Des règles complexes peuvent être créées en utilisant des opérateurs prédéfinis: si « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » alors attribuer les étiquettes « <i>lecture longue, GitHub</i> »'
             variables_available_title: Quelles variables et opérateurs puis-je utiliser pour écrire des règles ?
-            variables_available_description: 'Les variables et opérateurs suivants peuvent être utilisés pour écrire des règles de tag automatiques :'
+            variables_available_description: 'Les variables et opérateurs suivants peuvent être utilisés pour écrire des règles d''étiquetage automatiques :'
             meaning: Signification
             variable_description:
                 label: Variable
@@ -200,12 +200,12 @@ config:
                 equal_to: "Égal à…"
                 matches: "Teste si un <i>sujet</i> correspond à une <i>recherche</i> (non sensible à la casse).<br />Exemple : <code>_all ~ \"https?://rss.example.com/foobar/.*\"</code>"
     otp:
-        page_title: Authentification double-facteur
+        page_title: Authentification à deux facteurs
         app:
-            two_factor_code_description_1: Vous venez d’activer l’authentification double-facteur, ouvrez votre application OTP pour configurer la génération du mot de passe à usage unique. Ces informations disparaîtront après un rechargement de la page.
-            two_factor_code_description_2: 'Vous pouvez scanner le QR code avec votre application :'
-            two_factor_code_description_3: 'N’oubliez pas de sauvegarder ces codes de secours dans un endroit sûr, vous pourrez les utiliser si vous ne pouvez plus accéder à votre application OTP :'
-            two_factor_code_description_4: 'Testez un code généré par votre application OTP :'
+            two_factor_code_description_1: Vous venez d’activer l’authentification à deux facteurs, ouvrez votre application A2F pour configurer la génération du mot de passe à usage unique. Ces informations disparaîtront après un rechargement de la page.
+            two_factor_code_description_2: 'Vous pouvez scanner le code QR avec votre application :'
+            two_factor_code_description_3: 'N’oubliez pas de sauvegarder ces codes de secours dans un endroit sûr, vous pourrez les utiliser si vous ne pouvez plus accéder à votre application A2F :'
+            two_factor_code_description_4: 'Testez un code généré par votre application A2F :'
             cancel: Annuler
             enable: Activer
 entry:
@@ -215,16 +215,16 @@ entry:
         starred: Articles favoris
         archived: Articles lus
         filtered: Articles filtrés
-        filtered_tags: 'Articles filtrés par tags :'
+        filtered_tags: 'Articles filtrés par étiquettes :'
         filtered_search: 'Articles filtrés par recherche :'
-        untagged: Article sans tag
+        untagged: Article sans étiquette
         all: Tous les articles
     list:
         number_on_the_page: '{0} Il n’y a pas d’article.|{1} Il y a un article.|]1,Inf[ Il y a %count% articles.'
         reading_time: durée de lecture
         reading_time_minutes: 'durée de lecture : %readingTime% min'
         reading_time_less_one_minute: 'durée de lecture : &lt; 1 min'
-        number_of_tags: '{1}et un autre tag|]1,Inf[et %count% autres tags'
+        number_of_tags: '{1}et un autre étiquette|]1,Inf[et %count% autres étiquettes'
         reading_time_minutes_short: '%readingTime% min'
         reading_time_less_one_minute_short: '&lt; 1 min'
         original_article: original
@@ -266,7 +266,7 @@ entry:
             view_original_article: Article original
             re_fetch_content: Recharger le contenu
             delete: Supprimer
-            add_a_tag: Ajouter un tag
+            add_a_tag: Ajouter une étiquette
             share_content: Partager
             share_email_label: Courriel
             public_link: Lien public
@@ -300,7 +300,7 @@ entry:
         shared_by_wallabag: Cet article a été partagé par %username% avec <a href="%wallabag_instance%">wallabag</a>
     confirm:
         delete: Voulez-vous vraiment supprimer cet article ?
-        delete_tag: Voulez-vous vraiment supprimer ce tag de cet article ?
+        delete_tag: Voulez-vous vraiment supprimer cette étiquette de cet article ?
     metadata:
         reading_time: Durée de lecture estimée
         reading_time_minutes_short: '%readingTime% min'
@@ -345,7 +345,7 @@ howto:
     page_description: 'Il y a plusieurs façon d’enregistrer un article :'
     top_menu:
         browser_addons: Extensions de navigateur
-        mobile_apps: Applications smartphone
+        mobile_apps: Applications mobiles
         bookmarklet: via Bookmarklet
     form:
         description: Grâce à ce formulaire
@@ -370,7 +370,7 @@ howto:
         go_starred: Afficher les articles favoris
         go_archive: Afficher les articles lus
         go_all: Afficher tous les articles
-        go_tags: Afficher les tags
+        go_tags: Afficher les étiquettes
         go_config: Aller à la configuration
         go_import: Aller aux imports
         go_developers: Aller à la section Développeurs
@@ -443,15 +443,15 @@ quickstart:
         email: Par courriel
         gitter: Sur Gitter
 tag:
-    page_title: Tags
+    page_title: Étiquettes
     list:
-        number_on_the_page: '{0} Il n’y a pas de tag.|{1} Il y a un tag.|]1,Inf[ Il y a %count% tags.'
-        see_untagged_entries: Voir les articles sans tag
-        no_untagged_entries: 'Aucun article sans tag.'
-        untagged: "Article sans tag"
+        number_on_the_page: '{0} Il n’y a pas d''étiquette.|{1} Il y a une étiquette.|]1,Inf[ Il y a %count% étiquettes.'
+        see_untagged_entries: Voir les articles sans étiquette
+        no_untagged_entries: 'Aucun article sans étiquette.'
+        untagged: "Article sans étiquette"
     new:
         add: Ajouter
-        placeholder: Vous pouvez ajouter plusieurs tags, séparés par une virgule.
+        placeholder: Vous pouvez ajouter plusieurs étiquettes séparées par une virgule.
 export:
     footer_template: <div style="text-align:center;"><p>Généré par wallabag with %method%</p><p>Merci d'ouvrir <a href="https://github.com/wallabag/wallabag/issues">un ticket</a> si vous rencontrez des soucis d'affichage avec ce document sur votre support.</p></div>
     unknown: Inconnu
@@ -483,7 +483,7 @@ import:
         description: Cet outil va importer tous vos articles d’une autre instance de wallabag v2. Allez dans tous vos articles, puis, sur la barre latérale, cliquez sur « JSON ». Vous allez récupérer un fichier « All articles.json ».
     readability:
         page_title: Importer > Readability
-        description: Cet outil va importer toutes vos données de Readability. Sur la page des outils (https://www.readability.com/tools/), cliquez sur « Export your data » dans la section « Data Export ». Vous allez recevoir un courriel avec un lien pour télécharger le json.
+        description: Cet outil va importer toutes vos données de Readability. Sur la page des outils (https://www.readability.com/tools/), cliquez sur « Export your data » dans la section « Data Export ». Vous allez recevoir un courriel avec un lien pour télécharger le json (qui ne se finit pas par .json).
         how_to: Choisissez le fichier de votre export Readability et cliquez sur le bouton ci-dessous pour l’importer.
     worker:
         enabled: 'Les imports sont asynchrones. Une fois l’import commencé un worker externe traitera les messages un par un. Le service activé est :'
@@ -574,10 +574,10 @@ user:
         password_label: "Mot de passe"
         repeat_new_password_label: "Confirmez votre nouveau mot de passe"
         plain_password_label: "Mot de passe en clair"
-        email_label: "Adresse courriel"
+        email_label: "Courriel"
         enabled_label: "Activé"
         last_login_label: "Dernière connexion"
-        twofactor_email_label: Double authentification par email
+        twofactor_email_label: Authentification à deux facteurs par courriel
         twofactor_google_label: Double authentification par OTP app
         save: "Sauvegarder"
         delete: "Supprimer"
@@ -619,11 +619,11 @@ flashes:
             feed_token_updated: "Jeton des flux mis à jour"
             feed_token_revoked: 'Jeton des flux supprimé'
             annotations_reset: "Annotations supprimées"
-            tags_reset: "Tags supprimés"
+            tags_reset: "Étiquettes supprimées"
             entries_reset: "Articles supprimés"
             archived_reset: "Articles archivés supprimés"
-            otp_enabled: "Authentification à double-facteur activée"
-            otp_disabled: "Authentification à double-facteur désactivée"
+            otp_enabled: "Authentification à deux facteurs activée"
+            otp_disabled: "Authentification à deux facteurs désactivée"
             tagging_rules_imported: Règles bien importées
             tagging_rules_not_imported: Impossible d'importer les règles
             ignore_origin_rules_deleted: "Règle d'omission d'origine supprimée"
@@ -644,8 +644,8 @@ flashes:
             no_random_entry: "Aucun article correspond aux critères n'a été trouvé"
     tag:
         notice:
-            tag_added: Tag ajouté
-            tag_renamed: "Tag renommé"
+            tag_added: Étiquette ajoutée
+            tag_renamed: "Étiquette renommée"
     import:
         notice:
             failed: L’import a échoué, veuillez réessayer.
