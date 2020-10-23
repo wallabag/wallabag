@@ -4806,10 +4806,10 @@ mime@^2.4.4:
   resolved "https://registry.yarnpkg.com/mime/-/mime-2.4.6.tgz#e5b407c90db442f2beb5b162373d07b69affa4d1"
   integrity sha512-RZKhC3EmpBchfTGBVb8fb+RL2cWyw/32lshnsETttkBAyAUXSGHxbEJWWRXc751DrIxG1q04b8QwMbAwkRPpUA==
 
-mini-css-extract-plugin@^1.0.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-1.1.1.tgz#4ab9948b7be38cf3a730cb4c9a881eb7f62baadb"
-  integrity sha512-pzlnOi/lMkwIkdb7zoRQvbkW18AFCQffouSBpxy+e3pnKTKMC5IuMVHYndexKZmacfsOZS2LXCe8gIgkrC+yqg==
+mini-css-extract-plugin@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-1.1.2.tgz#34877f631eb4bc8f9d99f0ade2ccacadb0317def"
+  integrity sha512-tIq578wiGzmo9Ll+JOgHPssV4eoMDTcj3MKkjPbzgooaakMklViJG1qbT0zcwoogUKKliFy/kKjUJaFb4DBHxQ==
   dependencies:
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
