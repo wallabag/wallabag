@@ -1,8 +1,8 @@
 # Two factor mail
 auth_code:
-    on: 'on'
+    on: 'ativo'
     mailer:
-        subject: 'Código de Autenticação do Wallabag'
+        subject: 'Código de autenticação do wallabag'
         body:
             hello: "Olá %user%,"
             first_para: "Como você habilitou a autenticação de dois passos para sua conta do wallabag, você precisa se autenticar com um novo dispositivo (computador, telefone, etc.), e nós enviamos um código para validar sua conexão."

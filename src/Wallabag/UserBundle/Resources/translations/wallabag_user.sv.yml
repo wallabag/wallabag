@@ -1,0 +1,6 @@
+auth_code:
+    mailer:
+        body:
+            hello: Hej %user%,
+        subject: Wallabag autentiseringskod
+    on: På
