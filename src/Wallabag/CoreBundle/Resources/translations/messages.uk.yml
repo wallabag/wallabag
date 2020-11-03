@@ -329,7 +329,7 @@ howto:
     top_menu:
         browser_addons: ''
         mobile_apps: ''
-        bookmarklet: ''
+        bookmarklet: 'Букмарклет'
     form:
         description: ''
     browser_addons:
