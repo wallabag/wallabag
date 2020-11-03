@@ -49,7 +49,7 @@
     "file-loader": "^6.2.0",
     "lato-font": "^3.0.0",
     "mini-css-extract-plugin": "^1.2.1",
-    "node-sass": "^4.14.1",
+    "node-sass": "^5.0.0",
     "postcss-loader": "^3.0.0",
     "sass-loader": "^10.0.5",
     "style-loader": "^2.0.0",
