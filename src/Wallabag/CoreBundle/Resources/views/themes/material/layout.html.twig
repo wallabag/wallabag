@@ -117,6 +117,13 @@
                         <li><a href="{{ path('site_credentials_index') }}"><i class="material-icons">vpn_key</i> {{ 'menu.left.site_credentials'|trans }}</a></li>
                     {% endif %}
                     <li class="divider"></li>
+                    <li>
+                        <a class="waves-effect js-theme-toggle">
+                            <i class="material-icons small">brightness_medium</i>
+                            <span>{{ 'menu.left.theme_toggle'|trans }}</span>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                         <li><a href="{{ path('user_index') }}"><i class="material-icons">people</i>{{ 'menu.left.users_management'|trans }}</a></li>
                         <li><a href="{{ path('craue_config_settings_modify') }}"><i class="material-icons">settings</i> {{ 'menu.left.internal_settings'|trans }}</a></li>

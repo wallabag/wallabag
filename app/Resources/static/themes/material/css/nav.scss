@@ -71,7 +71,6 @@ nav {
   }
 
   .input-field input:focus {
-    background-color: #fff;
     border: 0;
     box-shadow: none;
     color: #444;
@@ -106,6 +105,11 @@ nav {
   &.nav-panel-add.disabled input {
     background-color: whitesmoke;
   }
+}
+
+.nav-panel-add,
+.nav-panel-search {
+  background-color: white;
 }
 
 .nav-form-button {

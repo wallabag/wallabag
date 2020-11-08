@@ -19,6 +19,62 @@ import './css/index.scss';
 
 const mobileMaxWidth = 993;
 
+function darkTheme() {
+  const rootEl = document.querySelector('html');
+  const themeDom = {
+    darkClass: 'dark-theme',
+
+    toggleClass(el) {
+      return el.classList.toggle(this.darkClass);
+    },
+
+    addClass(el) {
+      return el.classList.add(this.darkClass);
+    },
+
+    removeClass(el) {
+      return el.classList.remove(this.darkClass);
+    },
+  };
+  const themeCookie = {
+    values: {
+      light: 'light',
+      dark: 'dark',
+    },
+
+    name: 'theme',
+
+    getValue(isDarkTheme) {
+      return isDarkTheme ? this.values.dark : this.values.light;
+    },
+
+    setCookie(isDarkTheme) {
+      const value = this.getValue(isDarkTheme);
+      document.cookie = `${this.name}=${value};samesite=Lax;path=/;max-age=31536000`;
+    },
+
+    exists() {
+      return document.cookie.split(';').map((cookie) => cookie.split('=')).filter((cookie) => cookie[0] === 'theme').length;
+    },
+  };
+  if (themeCookie.exists() === 0 && typeof window.matchMedia === 'function') {
+    const isPreferedColorSchemeDark = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+    if (isPreferedColorSchemeDark) {
+      themeDom.addClass(rootEl);
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(
+      (e) => themeDom[e.matches ? 'addClass' : 'removeClass'](rootEl),
+    );
+  }
+  const themeButton = document.querySelector('.js-theme-toggle');
+  if (themeButton) {
+    themeButton.addEventListener('click', () => {
+      const isDarkTheme = themeDom.toggleClass(rootEl);
+      themeCookie.setCookie(isDarkTheme);
+    });
+  }
+}
+
 const stickyNav = () => {
   const nav = $('.js-entry-nav-top');
   $('[data-toggle="actions"]').click(() => {
@@ -52,6 +108,7 @@ const articleScroll = () => {
 $(document).ready(() => {
   // sideNav
   $('.button-collapse').sideNav();
+  darkTheme();
   $('select').material_select();
   $('.collapsible').collapsible({
     accordion: false,
@@ -76,7 +133,6 @@ $(document).ready(() => {
   const toggleNav = (toShow, toFocus) => {
     $('.nav-panel-actions').hide(100);
     $(toShow).show(100);
-    $('.nav-panels').css('background', 'white');
     $(toFocus).focus();
   };
 
@@ -109,7 +165,6 @@ $(document).ready(() => {
   $('.close').on('click', (e) => {
     $(e.target).parent('.nav-panel-item').hide(100);
     $('.nav-panel-actions').show(100);
-    $('.nav-panels').css('background', 'transparent');
     return false;
   });
 

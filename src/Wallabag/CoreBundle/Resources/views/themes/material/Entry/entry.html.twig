@@ -97,6 +97,12 @@
             <div class="collapsible-body"></div>
         </li>
 
+        <li class="bold">
+            <a class="waves-effect collapsible-header js-theme-toggle">
+                <i class="material-icons small">brightness_medium</i>
+                <span>{{ 'entry.view.left_menu.theme_toggle'|trans }}</span>
+            </a>
+        </li>
         {% if craue_setting('share_public')
            or craue_setting('share_twitter')
            or craue_setting('share_shaarli')

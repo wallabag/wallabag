@@ -1,0 +1,73 @@
+.dark-theme {
+  body,
+  main #content,
+  #article,
+  .card,
+  .card-panel,
+  .card .card-reveal,
+  .card-stacked .preview:not(.preview--default),
+  .card .preview:not(.preview--default),
+  .collapsible-header,
+  .collection .collection-item,
+  .dropdown-content,
+  .nav-panel-add,
+  .nav-panel-search,
+  .side-nav,
+  .side-nav .collapsible-body,
+  .side-nav.fixed .collapsible-body,
+  .tabs {
+    background-color: black;
+  }
+
+  .dropdown-content li:hover,
+  .dropdown-content li.active,
+  .dropdown-content li.selected {
+    background-color: #575757;
+  }
+
+  main #content,
+  #article article,
+  #article article h1,
+  #article article h2,
+  #article article h3,
+  #article article h4,
+  #article article h5,
+  #article article h6,
+  .results a,
+  .side-nav li > a,
+  .side-nav li > a > i.material-icons {
+    color: #dfdfdf;
+  }
+
+  .grey-text.text-darken-4 {
+    color: #dfdfdf !important;
+  }
+
+  .side-nav li.active,
+  .side-nav li:not(.logo) > a:hover,
+  .side-nav .collapsible-header:hover,
+  .side-nav.fixed .collapsible-header:hover {
+    background-color: #333;
+  }
+
+  #article {
+    box-shadow: 0 0 10px #575757;
+  }
+
+  nav,
+  .card,
+  .side-nav {
+    box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.4), 0 1px 5px 0 rgba(255, 255, 255, 0.4), 0 3px 1px -2px rgba(255, 255, 255, 0.4);
+  }
+
+  .logo img,
+  .preview.preview--default,
+  .typo-logo {
+    filter: invert(100%);
+  }
+
+  .border-bottom,
+  .collapsible {
+    border-color: #222;
+  }
+}
