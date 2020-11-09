@@ -43,7 +43,7 @@
     "babel-loader": "^8.1.0",
     "css-loader": "^4.3.0",
     "eslint": "^7.13.0",
-    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-airbnb-base": "^14.2.1",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-import": "^2.22.1",
     "file-loader": "^6.2.0",
