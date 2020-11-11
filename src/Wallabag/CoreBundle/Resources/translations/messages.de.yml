@@ -187,21 +187,29 @@ config:
         app:
             cancel: Abbrechen
             enable: Aktivieren
+            two_factor_code_description_4: 'Teste einen OTP-Code von deiner OTP-App:'
+            two_factor_code_description_3: 'Du solltest diese Backup-Codes an einem sicheren Ort abspeichern. Du kannst sie nutzen, falls du den Zugang zu deiner OTP-App verlierst:'
+            two_factor_code_description_2: 'Du kannst diesen QR-Code mit deiner App scannen:'
+            two_factor_code_description_1: Du hast soeben die OTP-Zwei-Faktor-Authentifizierung aktiviert. Öffne deine OTP-App und nutze diesen Code, um ein Einmalkennwort zu erhalten. Der Code wird verschwinden, sobald du die Seite neulädst.
         page_title: Zwei-Faktor-Authentifizierung
     form_ignore_origin_rules:
         faq:
             operator_description:
                 equal_to: Gleich…
                 label: Operator
+                matches: 'Prüft, ob <i>Titel</i> auf eine <i>Suche</i> zutrifft (beachtet Groß- und Kleinschreibung).<br />Beispiel: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
             variable_description:
                 label: Variable
                 host: Host-Rechner der Adresse
+                _all: Vollständige Adresse, hauptsächlich zum Musterabgleich (“pattern matching”)
             meaning: Bedeutung
             variables_available_title: Welche Variablen und Operatoren kann ich benutzen, um Regeln zu schreiben?
             how_to_use_them_title: Wie nutze ich sie?
             title: FAQ
             how_to_use_them_description: Nehmen wir an, du möchtest den Ursprung eines Eintrags ignorieren, der von „<i>rss.beispiel.com</i>“ stammt (<i>da du weißt, dass nach einer Umleitung die tatsächliche Adresse beispiel.com</i> ist).<br />In diesem Fall sollst du „host = "rss.example.com"“ in das Feld <i>Regel</i> eingeben.
             ignore_origin_rules_definition_title: Was bedeutet „Ursprungsregeln ignorieren“?
+            ignore_origin_rules_definition_description: Sie werden von wallabag benutzt, um automatisch eine Ursprungsadresse nach einer Umleitung zu ignorieren. <br />Falls eine Umleitung beim Holen eines neues Eintrags geschieht, werden alle Regeln zum Ignorieren des Ursprungs angewendet (<i>sowohl benutzerdefinierte als auch instanzspezifische</i>), um die Urprungsadresse zu ignorieren.
+            variables_available_description: 'Die folgenden Variablen und Operatoren können genutzt werden, um Regeln zum Ignorieren des Ursprungs zu erstellen:'
     form_feed:
         feed_link:
             all: Alle
@@ -514,6 +522,7 @@ import:
         how_to: Bitte wähle deinen Pinboard Export aus und klicke den nachfolgenden Button zum Importieren.
     elcurator:
         page_title: Importieren > elCurator
+        description: Dieses Tool wird all deine ElCurator-Artikel importieren. Öffne die Einstellungen in deinem ElCurator-Konto und exportiere dort den Inhalt; du wirst eine JSON-Datei erhalten.
 developer:
     page_title: API-Client-Verwaltung
     welcome_message: Willkomen zur wallabag API
@@ -700,3 +709,4 @@ ignore_origin_instance_rule:
     edit_ignore_origin_instance_rule: Bearbeite eine globale Regel fürs Ignorieren des Ursprungs
     new_ignore_origin_instance_rule: Erstelle globale Regeln fürs Ignorieren des Ursprungs
     page_title: Globale Regeln fürs Ignorieren des Ursprungs
+    description: Hier kannst du die globalen Regeln zum Ignorieren des Ursprungs festlegen, um einige Muster einer Ursprungs-URL zu ignorieren.
