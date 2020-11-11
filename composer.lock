@@ -8,21 +8,21 @@
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
-            "version": "v2.7.0",
+            "version": "v2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BabDev/PagerfantaBundle.git",
-                "reference": "1f3078a9134d7073cdba73343ad3cf9401086a8a"
+                "reference": "803f762404267880cc1a7e0f69cc938698786183"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BabDev/PagerfantaBundle/zipball/1f3078a9134d7073cdba73343ad3cf9401086a8a",
-                "reference": "1f3078a9134d7073cdba73343ad3cf9401086a8a",
+                "url": "https://api.github.com/repos/BabDev/PagerfantaBundle/zipball/803f762404267880cc1a7e0f69cc938698786183",
+                "reference": "803f762404267880cc1a7e0f69cc938698786183",
                 "shasum": ""
             },
             "require": {
                 "pagerfanta/pagerfanta": "^2.4",
-                "php": "^7.2",
+                "php": "^7.2 || ^8.0",
                 "symfony/config": "^3.4 || ^4.4 || ^5.1",
                 "symfony/dependency-injection": "^3.4 || ^4.4 || ^5.1",
                 "symfony/deprecation-contracts": "^2.1",
@@ -83,7 +83,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-14T22:45:11+00:00"
+            "time": "2020-11-11T01:03:13+00:00"
         },
         {
             "name": "bdunogier/guzzle-site-authenticator",
