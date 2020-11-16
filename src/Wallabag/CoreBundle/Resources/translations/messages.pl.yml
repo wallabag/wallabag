@@ -33,6 +33,7 @@ menu:
         users_management: Zarządzanie użytkownikami
         site_credentials: Poświadczenia strony
         quickstart: Szybki start
+        ignore_origin_instance_rules: Ignoruj globalne zasady pochodzenia
     top:
         add_new_entry: Dodaj nowy wpis
         search: Szukaj
@@ -58,6 +59,9 @@ config:
         password: Hasło
         rules: Zasady tagowania
         new_user: Dodaj użytkownika
+        reset: Zresetuj obszar
+        ignore_origin: Ignoruj zasady pochodzenia
+        feed: Źródła
     form:
         save: Zapisz
     form_settings:
@@ -107,6 +111,17 @@ config:
             description: Jeżeli usuniesz swoje konto, wszystkie twoje artykuły, tagi, adnotacje, oraz konto zostaną trwale usunięte (operacja jest NIEODWRACALNA). Następnie zostaniesz wylogowany.
             confirm: Jesteś pewien? (tej operacji NIE MOŻNA cofnąć)
             button: Usuń moje konto
+        two_factor:
+            action_app: Użyj aplikacji do jednorazowych kodów
+            action_email: Użyj e-mail’a
+            state_disabled: Wyłączone
+            state_enabled: Włączone
+            table_action: Akcja
+            table_state: Stan
+            table_method: Metoda
+            googleTwoFactor_label: Używając aplikacji do jednorazowych kodów logowania (uruchom aplikacje w stylu Google Authenticator, Authy lub FreeOTP by uzyskać kod)
+            emailTwoFactor_label: Używając email’a (otrzymasz kod na podany adres)
+        login_label: Login (nie może zostać później zmieniony)
     reset:
         title: Reset (niebezpieczna strefa)
         description: Poniższe przyciski pozwalają usunąć pewne informacje z twojego konta. Uważaj te operacje są NIEODWRACALNE.
@@ -159,6 +174,28 @@ config:
                 and: Jedna reguła I inna
                 matches: 'Sprawdź czy <i>temat</i> pasuje <i>szukaj</i> (duże lub małe litery).<br />Przykład: <code>tytuł zawiera "piłka nożna"</code>'
                 notmatches: 'Sprawdź czy <i>temat</i> nie zawiera <i>szukaj</i> (duże lub małe litery).<br />Przykład: <code>tytuł nie zawiera "piłka nożna"</code>'
+        card:
+            export_tagging_rules_detail: Pobierz plik JSON z ustawieniami tagowania.
+            import_tagging_rules_detail: Musisz zaznaczyć plik z rozszerzeniem JSON który wcześniej zapisałeś.
+            export_tagging_rules: Eksportuj/zapisz plik z zasadami tagowania
+            import_tagging_rules: Importuj zasady tagowania
+            new_tagging_rule: Utwórz zasadę oznaczania tagami
+        import_submit: Importuj
+        file_label: Plik JSON
+    form_feed:
+        description: Lista artykułów Atom pozwala czytać zapisane artykuły w twoim ulubionym programie. Musisz najpierw wygenerować token Atom’a.
+        feed_limit: Liczba artykułów w aktualnościach
+        feed_link:
+            all: Wszystko
+            archive: Zarchiwizowane
+            starred: Wyróżnione
+            unread: Nieodczytane
+        feed_links: Linki do aktualności
+        token_revoke: Anuluj token
+        token_reset: Stwórz ponownie token
+        token_create: Stwórz swój token
+        no_token: Brak token’a
+        token_label: Token listy
 entry:
     default_title: Tytuł wpisu
     page_titles:
