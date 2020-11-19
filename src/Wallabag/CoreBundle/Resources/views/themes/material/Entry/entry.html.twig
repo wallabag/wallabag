@@ -98,10 +98,30 @@
         </li>
 
         <li class="bold">
-            <a class="waves-effect collapsible-header js-theme-toggle">
+            <a class="waves-effect collapsible-header">
                 <i class="material-icons small">brightness_medium</i>
                 <span>{{ 'entry.view.left_menu.theme_toggle'|trans }}</span>
             </a>
+            <ul class="collapsible-body">
+                <li>
+                    <a href="#" class="js-theme-toggle" data-theme="light">
+                        <i class="theme-toggle-icon material-icons tiny">brightness_high</i>
+                        <span>{{ 'entry.view.left_menu.theme_toggle_light'|trans }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="js-theme-toggle" data-theme="dark">
+                        <i class="theme-toggle-icon material-icons tiny">brightness_low</i>
+                        <span>{{ 'entry.view.left_menu.theme_toggle_dark'|trans }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="js-theme-toggle" data-theme="auto">
+                        <i class="theme-toggle-icon material-icons tiny">brightness_auto</i>
+                        <span>{{ 'entry.view.left_menu.theme_toggle_auto'|trans }}</span>
+                    </a>
+                </li>
+            </ul>
         </li>
         {% if craue_setting('share_public')
            or craue_setting('share_twitter')

@@ -117,18 +117,30 @@
                         <li><a href="{{ path('site_credentials_index') }}"><i class="material-icons">vpn_key</i> {{ 'menu.left.site_credentials'|trans }}</a></li>
                     {% endif %}
                     <li class="divider"></li>
-                    <li>
-                        <a class="waves-effect js-theme-toggle">
-                            <i class="material-icons small">brightness_medium</i>
-                            <span>{{ 'menu.left.theme_toggle'|trans }}</span>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                         <li><a href="{{ path('user_index') }}"><i class="material-icons">people</i>{{ 'menu.left.users_management'|trans }}</a></li>
                         <li><a href="{{ path('craue_config_settings_modify') }}"><i class="material-icons">settings</i> {{ 'menu.left.internal_settings'|trans }}</a></li>
                         <li><a href="{{ path('ignore_origin_instance_rules_index') }}"><i class="material-icons">build</i> {{ 'menu.left.ignore_origin_instance_rules'|trans }}</a></li>
+                        <li class="divider"></li>
                     {% endif %}
+                    <li>
+                        <a href="#" class="js-theme-toggle" data-theme="light">
+                            <i class="theme-toggle-icon material-icons tiny">brightness_high</i>
+                            <span>{{ 'menu.left.theme_toggle_light'|trans }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="js-theme-toggle" data-theme="dark">
+                            <i class="theme-toggle-icon material-icons tiny">brightness_low</i>
+                            <span>{{ 'menu.left.theme_toggle_dark'|trans }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="js-theme-toggle" data-theme="auto">
+                            <i class="theme-toggle-icon material-icons tiny">brightness_auto</i>
+                            <span>{{ 'menu.left.theme_toggle_auto'|trans }}</span>
+                        </a>
+                    </li>
                     <li class="divider"></li>
                     <li><a href="{{ path('howto') }}"><i class="material-icons">live_help</i> {{ 'menu.left.howto'|trans }}</a></li>
                     <li><a href="{{ path('quickstart') }}"><i class="material-icons">assistant_photo</i> {{ 'menu.left.quickstart'|trans }}</a></li>

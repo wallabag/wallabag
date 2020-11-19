@@ -34,6 +34,9 @@ menu:
         site_credentials: Site credentials
         ignore_origin_instance_rules: 'Global ignore origin rules'
         quickstart: "Quickstart"
+        theme_toggle_light: "Light theme"
+        theme_toggle_dark: "Dark theme"
+        theme_toggle_auto: "Automatic theme"
     top:
         add_new_entry: Add a new entry
         search: Search
@@ -273,6 +276,10 @@ entry:
             delete_public_link: delete public link
             export: Export
             print: Print
+            theme_toggle: Theme toggle
+            theme_toggle_light: Light
+            theme_toggle_dark: Dark
+            theme_toggle_auto: Automatic
             problem:
                 label: Problems?
                 description: Does this article appear wrong?

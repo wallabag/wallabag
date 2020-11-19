@@ -53,26 +53,64 @@ function darkTheme() {
       document.cookie = `${this.name}=${value};samesite=Lax;path=/;max-age=31536000`;
     },
 
+    removeCookie() {
+      document.cookie = `${this.name}=auto;samesite=Lax;path=/;max-age=0`;
+    },
+
     exists() {
       return document.cookie.split(';').map((cookie) => cookie.split('=')).filter((cookie) => cookie[0] === 'theme').length;
     },
   };
-  if (themeCookie.exists() === 0 && typeof window.matchMedia === 'function') {
-    const isPreferedColorSchemeDark = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-    if (isPreferedColorSchemeDark) {
-      themeDom.addClass(rootEl);
-    }
-    window.matchMedia('(prefers-color-scheme: dark)').addListener(
-      (e) => themeDom[e.matches ? 'addClass' : 'removeClass'](rootEl),
-    );
-  }
-  const themeButton = document.querySelector('.js-theme-toggle');
-  if (themeButton) {
-    themeButton.addEventListener('click', () => {
-      const isDarkTheme = themeDom.toggleClass(rootEl);
-      themeCookie.setCookie(isDarkTheme);
+  const preferedColorScheme = {
+    choose() {
+      if (this.isAvailable() && themeCookie.exists() === 0) {
+        const isPreferedColorSchemeDark = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+        if (themeCookie.exists() === 0) {
+          themeDom[isPreferedColorSchemeDark ? 'addClass' : 'removeClass'](rootEl);
+        }
+      }
+    },
+
+    isAvailable() {
+      return typeof window.matchMedia === 'function';
+    },
+
+    init() {
+      if (!this.isAvailable()) {
+        return false;
+      }
+      this.choose();
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(() => {
+        this.choose();
+      });
+      return true;
+    },
+  };
+  preferedColorScheme.init();
+  const lightThemeButtons = document.querySelectorAll('.js-theme-toggle[data-theme="light"]');
+  [...lightThemeButtons].map((lightThemeButton) => {
+    lightThemeButton.addEventListener('click', () => {
+      themeDom.removeClass(rootEl);
+      themeCookie.setCookie(false);
     });
-  }
+    return true;
+  });
+  const darkThemeButtons = document.querySelectorAll('.js-theme-toggle[data-theme="dark"]');
+  [...darkThemeButtons].map((darkThemeButton) => {
+    darkThemeButton.addEventListener('click', () => {
+      themeDom.addClass(rootEl);
+      themeCookie.setCookie(true);
+    });
+    return true;
+  });
+  const autoThemeButtons = document.querySelectorAll('.js-theme-toggle[data-theme="auto"]');
+  [...autoThemeButtons].map((autoThemeButton) => {
+    autoThemeButton.addEventListener('click', () => {
+      themeCookie.removeCookie();
+      preferedColorScheme.choose();
+    });
+    return true;
+  });
 }
 
 const stickyNav = () => {
