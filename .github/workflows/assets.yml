@@ -1,0 +1,32 @@
+name: "Assets"
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  js:
+    name: "Building assets"
+    runs-on: "ubuntu-20.04"
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v2"
+
+      - name: "Install Node"
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+
+      - name: "Install dependencies with Yarn"
+        run: "yarn install"
+
+      - name: "Build dev assets"
+        run: "yarn run build:dev"
+
+      - name: "Build prod assets"
+        run: "yarn run build:prod"

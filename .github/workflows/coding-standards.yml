@@ -1,0 +1,55 @@
+name: "CS"
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  coding-standards:
+    name: "CS Fixer & PHPStan"
+    runs-on: "ubuntu-16.04"
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v2"
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          coverage: "none"
+          php-version: "7.3"
+          tools: cs2pr, pecl, composer:v1
+          extensions: pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
+          ini-values: "date.timezone=Europe/Paris"
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: "Cache dependencies installed with composer"
+        uses: "actions/cache@v2"
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: "php-${{ matrix.php }}-composer-locked-${{ hashFiles('composer.lock') }}"
+          restore-keys: "php-${{ matrix.php }}-composer-locked-"
+
+      - name: "Install dependencies with Composer"
+        run: "composer install --no-interaction --optimize-autoloader --no-progress --prefer-dist"
+
+      - name: "Run PHP CS Fixer"
+        run: "bin/php-cs-fixer fix --verbose --dry-run --format=checkstyle | cs2pr"
+
+      - name: "Generate test cache for PHPStan"
+        run: "php bin/console cache:clear --env=test"
+
+      - name: "Install PHPUnit for PHPStan"
+        run: "php bin/simple-phpunit install"
+
+      - name: "Run PHPStan"
+        run: "php bin/phpstan analyse --no-progress --error-format=checkstyle | cs2pr"
