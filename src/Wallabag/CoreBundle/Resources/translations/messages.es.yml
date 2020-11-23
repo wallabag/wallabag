@@ -39,6 +39,7 @@ menu:
         filter_entries: 'Filtrar los artículos'
         random_entry: 'Ir a un artículo aleatório de esta lista'
         export: 'Exportar'
+        account: Mi cuenta
     search_form:
         input_label: 'Introduzca su búsqueda aquí'
 footer:
@@ -182,6 +183,9 @@ config:
     otp:
         app:
             cancel: Cancelar
+            enable: Habilitar
+            two_factor_code_description_2: 'Puedes escanear ese Código QR con tu applicación:'
+        page_title: Autenticación de doble factor
     form_ignore_origin_rules:
         faq:
             operator_description:
@@ -297,6 +301,7 @@ entry:
         address: Dirección
         reading_time_minutes_short: '%readingTime% min'
         reading_time: Tiempo estimado de lectura
+        published_on: Publicado en
 about:
     page_title: 'Acerca de'
     top_menu:
@@ -609,6 +614,8 @@ flashes:
             archived_reset: Artículos archivados eliminados
             rss_token_updated: Token RSS actualizado
             rss_updated: Información RSS actualizada
+            otp_disabled: Autenticación de doble factor deshabilitada
+            otp_enabled: Autenticación de doble factor habilitada
     entry:
         notice:
             entry_already_saved: 'Artículo ya guardado el %fecha%'
