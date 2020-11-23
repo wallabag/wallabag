@@ -51,6 +51,7 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
             new TwigFunction('count_tags', [$this, 'countTags']),
             new TwigFunction('display_stats', [$this, 'displayStats']),
             new TwigFunction('asset_file_exists', [$this, 'assetFileExists']),
+            new TwigFunction('theme_class', [$this, 'themeClass']),
         ];
     }
 
@@ -169,6 +170,11 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
     public function assetFileExists($name)
     {
         return file_exists(realpath($this->rootDir . '/../web/' . $name));
+    }
+
+    public function themeClass()
+    {
+        return isset($_COOKIE['theme']) && 'dark' === $_COOKIE['theme'] ? 'dark-theme' : '';
     }
 
     public function getName()

@@ -11,6 +11,11 @@
     &.logo > a:hover {
       background: initial;
     }
+
+    & > a > i.material-icons.theme-toggle-icon {
+      float: none;
+      margin-left: 0;
+    }
   }
 
   a {

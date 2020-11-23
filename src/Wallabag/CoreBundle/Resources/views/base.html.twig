@@ -4,7 +4,7 @@
 <!--[if lte IE 7]><html class="no-js ie7 ie67 ie678"{% if lang is not empty %} lang="{{ lang }}"{% endif %}><![endif]-->
 <!--[if IE 8]><html class="no-js ie8 ie678"{% if lang is not empty %} lang="{{ lang }}"{% endif %}><![endif]-->
 <!--[if gt IE 8]><html class="no-js"{% if lang is not empty %} lang="{{ lang }}"{% endif %}><![endif]-->
-<html{% if lang is not empty %} lang="{{ lang }}"{% endif %}>
+<html{% if lang is not empty %} class="{{ theme_class() }}" lang="{{ lang }}"{% endif %}>
     <head>
         {% block head %}
             <meta name="viewport" content="initial-scale=1.0">
