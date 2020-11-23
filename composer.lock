@@ -2038,20 +2038,20 @@
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
-            "version": "2.6.0",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSJsRoutingBundle.git",
-                "reference": "9deaf916760ce1d64cf46460473260b02751cee5"
+                "reference": "d56600542504148bf2faa2b6bd7571a6adf6799e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/9deaf916760ce1d64cf46460473260b02751cee5",
-                "reference": "9deaf916760ce1d64cf46460473260b02751cee5",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/d56600542504148bf2faa2b6bd7571a6adf6799e",
+                "reference": "d56600542504148bf2faa2b6bd7571a6adf6799e",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1",
+                "php": "^7.1|^8.0",
                 "symfony/console": "~3.3|^4.0|^5.0",
                 "symfony/framework-bundle": "~3.3|^4.0|^5.0",
                 "symfony/serializer": "~3.3|^4.0|^5.0",
@@ -2059,12 +2059,12 @@
             },
             "require-dev": {
                 "symfony/expression-language": "~3.3|^4.0|^5.0",
-                "symfony/phpunit-bridge": "^3.3|^4.0"
+                "symfony/phpunit-bridge": "^5.1"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -2096,7 +2096,7 @@
                 "javascript",
                 "routing"
             ],
-            "time": "2020-05-20T09:38:45+00:00"
+            "time": "2020-11-20T10:38:12+00:00"
         },
         {
             "name": "friendsofsymfony/oauth-server-bundle",
