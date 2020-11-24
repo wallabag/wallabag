@@ -34,6 +34,9 @@ menu:
         site_credentials: '网站凭证'
         quickstart: "快速开始"
         ignore_origin_instance_rules: 全局性忽略来源规则
+        theme_toggle_auto: 自动根据系统设置应用主题
+        theme_toggle_dark: 深色主题
+        theme_toggle_light: 浅色主题
     top:
         add_new_entry: '添加新项目'
         search: '搜索'
@@ -292,6 +295,10 @@ entry:
             problem:
                 label: '遇到问题？'
                 description: '这篇文章显示不正常？'
+            theme_toggle_auto: 自动
+            theme_toggle_dark: 深色
+            theme_toggle_light: 浅色
+            theme_toggle: 主题切换
         edit_title: '编辑标题'
         original_article: '原始文章'
         annotations_on_the_entry: '{0} 没有标注|{1} 1 个标注 |]1,Inf[ %count% 个标注'
