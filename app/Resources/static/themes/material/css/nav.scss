@@ -20,7 +20,8 @@ nav {
 .nav-panel-item .button-collapse {
   margin-left: 0;
   margin-right: 0.5rem;
-  padding: 0 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   height: auto;
   line-height: 1;
   background-color: transparent;
@@ -33,11 +34,15 @@ nav {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+
+  a {
+    padding: 10px 15px;
+  }
 }
 
 .nav-panel-item .material-icons {
-  height: 46px;
-  line-height: 46px;
+  height: auto;
+  line-height: 1;
 }
 
 .nav-input {
@@ -149,11 +154,14 @@ nav {
 .dropdown-content {
   min-width: 300px;
 
-  .material-icons {
-    line-height: initial !important;
+  li {
+    min-height: auto;
   }
 
   li > a {
-    padding: 10px;
+    display: flex;
+    padding: 14px 10px;
+    align-items: center;
+    white-space: initial;
   }
 }
