@@ -37,6 +37,6 @@ jobs:
           if [ "$GITDIFF" == "" ]; then
             exit 0
           else
-            echo $GITDIFF
+            git diff
             exit 1
           fi
