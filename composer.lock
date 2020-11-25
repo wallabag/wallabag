@@ -5221,6 +5221,7 @@
                 "themes",
                 "theming"
             ],
+            "abandoned": "sylius/theme-bundle",
             "time": "2019-06-19T12:53:08+00:00"
         },
         {
@@ -11472,21 +11473,21 @@
         },
         {
             "name": "phpstan/phpstan-doctrine",
-            "version": "0.12.22",
+            "version": "0.12.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-doctrine.git",
-                "reference": "a4966eee1fb42383e752e9c84bd5b7b07b01e57a"
+                "reference": "92c21846ed5663512d7750633a1c352e1f2a7c8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/a4966eee1fb42383e752e9c84bd5b7b07b01e57a",
-                "reference": "a4966eee1fb42383e752e9c84bd5b7b07b01e57a",
+                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/92c21846ed5663512d7750633a1c352e1f2a7c8c",
+                "reference": "92c21846ed5663512d7750633a1c352e1f2a7c8c",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1 || ^8.0",
-                "phpstan/phpstan": "^0.12.33"
+                "phpstan/phpstan": "^0.12.56"
             },
             "conflict": {
                 "doctrine/collections": "<1.0",
@@ -11503,7 +11504,6 @@
                 "doctrine/mongodb-odm": "^1.3 || ^2.1",
                 "doctrine/orm": "^2.5",
                 "doctrine/persistence": "^1.1 || ^2.0",
-                "ergebnis/composer-normalize": "^2.0.2",
                 "phing/phing": "^2.16.0",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
                 "phpstan/phpstan-phpunit": "^0.12",
@@ -11534,7 +11534,7 @@
                 "MIT"
             ],
             "description": "Doctrine extensions for PHPStan",
-            "time": "2020-10-24T20:53:39+00:00"
+            "time": "2020-11-24T19:50:22+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
