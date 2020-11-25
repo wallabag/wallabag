@@ -38,6 +38,7 @@ return PhpCsFixer\Config::create()
     ->setFinder(
         PhpCsFixer\Finder::create()
             ->exclude([
+                'node_modules',
                 'vendor',
                 'var',
                 'web'
