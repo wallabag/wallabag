@@ -30,3 +30,13 @@ jobs:
 
       - name: "Build prod assets"
         run: "yarn run build:prod"
+
+      - name: "Validate no change were created"
+        run: |
+          GITDIFF=`git diff`
+          if [ "$GITDIFF" == "" ]; then
+            exit 0
+          else
+            echo $GITDIFF
+            exit 1
+          fi
