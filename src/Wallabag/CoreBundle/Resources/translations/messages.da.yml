@@ -145,7 +145,7 @@ about:
     third_party:
         license: 'Licens'
 howto:
-    page_title: 'KUow-to'
+    page_title: ''
     top_menu:
         browser_addons: 'Browserudvidelser'
         mobile_apps: 'Apps'
