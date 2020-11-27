@@ -89,7 +89,8 @@ function darkTheme() {
   preferedColorScheme.init();
   const lightThemeButtons = document.querySelectorAll('.js-theme-toggle[data-theme="light"]');
   [...lightThemeButtons].map((lightThemeButton) => {
-    lightThemeButton.addEventListener('click', () => {
+    lightThemeButton.addEventListener('click', (e) => {
+      e.preventDefault();
       themeDom.removeClass(rootEl);
       themeCookie.setCookie(false);
     });
@@ -97,7 +98,8 @@ function darkTheme() {
   });
   const darkThemeButtons = document.querySelectorAll('.js-theme-toggle[data-theme="dark"]');
   [...darkThemeButtons].map((darkThemeButton) => {
-    darkThemeButton.addEventListener('click', () => {
+    darkThemeButton.addEventListener('click', (e) => {
+      e.preventDefault();
       themeDom.addClass(rootEl);
       themeCookie.setCookie(true);
     });
@@ -105,7 +107,8 @@ function darkTheme() {
   });
   const autoThemeButtons = document.querySelectorAll('.js-theme-toggle[data-theme="auto"]');
   [...autoThemeButtons].map((autoThemeButton) => {
-    autoThemeButton.addEventListener('click', () => {
+    autoThemeButton.addEventListener('click', (e) => {
+      e.preventDefault();
       themeCookie.removeCookie();
       preferedColorScheme.choose();
     });
