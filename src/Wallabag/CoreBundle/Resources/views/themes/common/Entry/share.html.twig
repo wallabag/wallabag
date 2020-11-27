@@ -7,7 +7,7 @@
         <meta property="og:title" content="{{ entry.title|e|raw }}" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="{{ app.request.uri }}" />
-        {% set picturePath = app.request.schemeAndHttpHost ~ asset('wallassets/themes/_global/img/logo-wallabag.svg') %}
+        {% set picturePath = app.request.schemeAndHttpHost ~ asset('img/logo-wallabag.svg') %}
         {% if entry.previewPicture is not null %}
             {% set picturePath = entry.previewPicture %}
         {% endif %}

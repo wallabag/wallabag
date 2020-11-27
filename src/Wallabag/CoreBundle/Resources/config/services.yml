@@ -150,7 +150,7 @@ services:
         arguments:
             - "@translator"
             - '%domain_name%'
-            - src/Wallabag/CoreBundle/Resources/public/themes/_global/img/appicon/apple-touch-icon-152.png
+            - web/img/appicon/apple-touch-icon-152.png
 
     wallabag.operator.array.matches:
         class: Wallabag\CoreBundle\Operator\PHP\Matches

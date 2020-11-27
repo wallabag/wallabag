@@ -3,7 +3,7 @@
     <div class="card-preview">
         <a href="{{ path('view', { 'id': entry.id }) }}">
             {% set previewClassModifier = entry.previewPicture ? '' : ' preview--default' %}
-            <span class="preview{{ previewClassModifier }}" style="background-image: url({{ entry.previewPicture | default(asset('wallassets/themes/_global/img/logo-square.svg')) }})"></span>
+            <span class="preview{{ previewClassModifier }}" style="background-image: url({{ entry.previewPicture | default(asset('img/logo-square.svg')) }})"></span>
         </a>
     </div>
     {% include "@WallabagCore/themes/material/Entry/Card/_content.html.twig" with {'entry': entry, 'withMetadata': true, 'subClass': 'metadata'} only %}
