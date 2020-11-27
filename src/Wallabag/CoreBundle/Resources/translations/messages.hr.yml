@@ -14,7 +14,7 @@ developer:
             save_label: Stvori novog klijenta
             name_label: Ime klijenta
         page_title: Upravljanje klijentima sučelja > Novi klijent
-        page_description: Stvorit ćeš novog klijenta. Ispuni donja polja za preusmjeravanje URI adrese tvojeg programa.
+        page_description: Stvorit ćeš novog klijenta. Ispuni donja polja za preusmjeravanje URI adrese tvog programa.
         copy_to_clipboard: Kopiraj
     clients:
         create_new: Stvori novog klijenta
@@ -31,7 +31,7 @@ developer:
     remove:
         action: Ukloni klijenta %name%
         warn_message_1: Imaš mogućnost ukloniti klijenta %name%. Ova je radnja NEPOVRATNA!
-        warn_message_2: Ako ga ukloniš, svaki program konfiguriran s tim klijentom, neće se moći autorizirati na tvom wallabagu.
+        warn_message_2: Ako ga ukloniš, nijedan program konfiguriran s tim klijentom neće se moći autorizirati na tvom wallabagu.
     howto:
         page_title: Upravljanje klijentima sučelja > Kako stvoriti moj prvi program
         back: Natrag
@@ -124,7 +124,7 @@ about:
         description: 'Ovdje se nalazi popis biblioteka trećih strana koje se koriste u wallabagu (s njihovim licencama):'
         package: Paket
     contributors:
-        description: Hvala ti na dorpinosu web-aplikaciji wallabag
+        description: Hvala ti na dorpinosu web-programu wallabag
     getting_help:
         documentation: Dokumentacija
         support: <a href="https://github.com/wallabag/wallabag/issues">na GitHub-u</a>
@@ -200,9 +200,9 @@ config:
             label: Što učiniti nakon što se članak ukloni, označi kao omiljeni ili kao pročitani?
             redirect_current_page: Ostani na trenutačnoj stranici
             redirect_homepage: Idi na naslovnu web-stranicu
-        android_configuration: Konfiguriraj svoj Android program
+        android_configuration: Konfiguriraj tvoj Android program
         help_language: Mošeš promijeniti jezik sučelja wallabaga.
-        android_instruction: Dodirni ovdje za automatkso ispunjavanje tvog Android-programa
+        android_instruction: Dodirni ovdje za automatkso ispunjavanje tvog Android programa
         reading_speed:
             200_word: Čitam ~200 riječi u minuti
             label: Brzina čitanja
@@ -509,6 +509,10 @@ entry:
             delete: Izbriši
             share_content: Dijeli
             print: Ispis
+            theme_toggle_auto: Automatski
+            theme_toggle_dark: Tamna
+            theme_toggle_light: Svijetla
+            theme_toggle: Mijenjanje teme
         created_at: Datum stvaranja
         original_article: izvorni
         edit_title: Uredi naslov
@@ -654,6 +658,9 @@ menu:
         developer: Upravljanje klijentima sučelja
         ignore_origin_instance_rules: Globalna pravila za zanemarivanje izvora
         quickstart: Brzo pokretanje
+        theme_toggle_auto: Automatska tema
+        theme_toggle_dark: Tamna tema
+        theme_toggle_light: Svijetla tema
     top:
         add_new_entry: Dodaj novi zapis
         filter_entries: Filtriraj zapise
