@@ -34,6 +34,9 @@ menu:
         site_credentials: Zugangsdaten
         quickstart: Schnellstart
         ignore_origin_instance_rules: Globale Regeln fürs Ignorieren des Ursprungs
+        theme_toggle_auto: Automatisches Design
+        theme_toggle_dark: Dunkles Design
+        theme_toggle_light: Helles Design
     top:
         add_new_entry: Neuen Artikel hinzufügen
         search: Suche
@@ -81,7 +84,7 @@ config:
             redirect_current_page: Zur aktuellen Seite
         pocket_consumer_key_label: Consumer-Key für Pocket, um Inhalte zu importieren
         android_configuration: Konfiguriere deine Android-App
-        android_instruction: Klicke hier, um deine Android-App auszufüllen
+        android_instruction: Hier berühren, um deine Android-App auszufüllen
         help_theme: wallabag ist anpassbar. Du kannst dein bevorzugtes Theme hier auswählen.
         help_items_per_page: Du kannst die Nummer von Artikeln pro Seite anpassen.
         help_reading_speed: wallabag berechnet eine Lesezeit pro Artikel. Hier kannst du definieren, ob du ein schneller oder langsamer Leser bist. wallabag wird die Lesezeiten danach neu berechnen.
@@ -145,7 +148,7 @@ config:
         faq:
             title: FAQ
             tagging_rules_definition_title: Was bedeuten die „Markierungsregeln“?
-            tagging_rules_definition_description: Dies sind Regeln von wallabag, um neu hinzugefügte Einträge automatisch zu taggen.<br />Jedes Mal, wenn ein neuer Eintrag hinzugefügt wird, werden die Markierungsregeln angewandt. Dies erleichtert dir die Arbeit, deine Einträge manuell zu kategorisieren.
+            tagging_rules_definition_description: Dies sind Regeln von wallabag, um neu hinzugefügte Einträge automatisch zu markieren.<br />Jedes Mal, wenn ein neuer Eintrag hinzugefügt wird, werden die Markierungsregeln angewandt. Dies erleichtert dir die Arbeit, deine Einträge manuell zu kategorisieren.
             how_to_use_them_title: Wie nutze ich sie?
             how_to_use_them_description: 'Nehmen wir an, du möchtest deine Einträge als „<i>schnell lesbar</i>“ markiert, wenn die Lesezeit kürzer als drei Minuten ist.<br />In diesem Fall solltest du „readingTime &lt;= 3“ in das Feld <i>Regel</i> und „<i>schnell lesbar</i>“ in das Feld <i>Markierungen</i> schreiben.<br />Mehrere Markierungen können gleichzeitig hinzugefügt werden, indem sie durch ein Komma getrennt werden: „<i>schnell lesbar, interessant</i>“.<br />Komplexe Regeln können durch vordefinierte Operatoren geschrieben werden: wenn „<i>readingTime &gt;= 5 AND domainName = "github.com"</i>“ dann markiere als „<i>länger lesen, GitHub</i>“'
             variables_available_title: Welche Variablen und Operatoren kann ich benutzen, um Regeln zu schreiben?
@@ -292,6 +295,10 @@ entry:
             problem:
                 label: Probleme?
                 description: Erscheint dieser Artikel falsch?
+            theme_toggle_auto: Automatisch
+            theme_toggle_dark: Dunkel
+            theme_toggle_light: Hell
+            theme_toggle: Design umschalten
         edit_title: Titel ändern
         original_article: Originalartikel
         annotations_on_the_entry: '{0} Keine Anmerkungen|{1} Eine Anmerkung|]1,Inf[ %count% Anmerkungen'
