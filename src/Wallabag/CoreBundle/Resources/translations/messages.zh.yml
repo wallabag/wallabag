@@ -157,8 +157,8 @@ config:
         export: "导出"
         faq:
             title: '常见问题'
-            tagging_rules_definition_title: '« 标签规则 » 是什么意思？'
-            tagging_rules_definition_description: '它们是 wallabag 用来给新项目自动打上标签的规则。<br />每次一个新项目被添加进来时，所有的标签规则都会作用于这个项目，为它打上你配置好的标签，免去你手动分类项目的麻烦。'
+            tagging_rules_definition_title: '“ 标签规则 ” 是什么意思？'
+            tagging_rules_definition_description: '它们是 Wallabag 用来给新项目自动打上标签的规则。<br />每次一个新项目被添加进来时，所有的标签规则都会作用于这个项目，为它打上你配置好的标签，免去你手动分类项目的麻烦。'
             how_to_use_them_title: '我该怎么使用它们？'
             how_to_use_them_description: '假设你想要在一个新项目的阅读时间短于 3 分钟时，将其标记为 « <i>短阅读</i> »。<br /> 这样的话，你应该在 <i>规则</i> 区域输入 « readingTime &lt;= 3 »，并在 <i>标签</i> 区域输入 « <i>短阅读</i> »。<br /> 可以同时添加数个标签，只需要用半角逗号来隔开它们： « <i>短阅读, 必读</i> »<br /> 可以使用预定义的操作符来编写复杂的规则：if « <i>readingTime &gt;= 5 AND domainName ="github.com"</i> » then tag as « <i>长阅读, github</i> »'
             variables_available_title: '我可以使用哪些变量和操作符来编写规则？'
@@ -223,7 +223,7 @@ config:
             variables_available_title: 我可以使用哪些变量和操作符来编写规则？
             how_to_use_them_title: 我该怎么使用它们？
             title: 常见问题
-            ignore_origin_rules_definition_title: «忽略来源规则»是什么意思？
+            ignore_origin_rules_definition_title: “忽略来源规则”是什么意思？
             ignore_origin_rules_definition_description: wallabag用它们在重定向后自动忽略源地址。<br />如果在获取新条目时发生重定向，则所有忽略来源规则(<i>用户定义和实例定义</i>)都将被用于忽略源地址。
             variables_available_description: '下列变量和操作符可以用来创建忽略来源规则:'
             how_to_use_them_description: 让我们假设你想忽略一个源自 «<i>rss.example.com</i>»的条目的来源 (<i>知道重定向后，实际地址是example.com</i>)。<br />在那种情况下，你应当把« host = "rss.example.com" »放在<i>规则</i>字段中。
@@ -383,7 +383,7 @@ howto:
         ios: '位于 App Store'
         windows: '位于 Microsoft Store'
     bookmarklet:
-        description: '点按并拖动这个链接到你的书签栏上：'
+        description: '拖放这个链接到你的书签栏上：'
     shortcuts:
         page_description: 以下是 wallabag 中可用的快捷键.
         shortcut: 快捷键
