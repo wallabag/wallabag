@@ -1,0 +1,57 @@
+name: "Translations"
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  translations:
+    name: "Translations"
+    runs-on: "ubuntu-18.04"
+
+    strategy:
+      matrix:
+        php:
+          - "7.3"
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v2"
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          coverage: "none"
+          php-version: "${{ matrix.php }}"
+          tools: pecl, composer:v1
+          extensions: pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
+          ini-values: "date.timezone=Europe/Paris"
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: "Cache dependencies installed with composer"
+        uses: "actions/cache@v2"
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: "php-${{ matrix.php }}-composer-locked-${{ hashFiles('composer.lock') }}"
+          restore-keys: "php-${{ matrix.php }}-composer-locked-"
+
+      - name: "Install dependencies with Composer"
+        run: "composer install --no-interaction --optimize-autoloader --no-progress --prefer-dist"
+
+      - name: "Validate Core translations"
+        run: "php bin/console lint:yaml src/Wallabag/CoreBundle/Resources/translations -v"
+
+      - name: "Validate CraueConfig translations"
+        run: "php bin/console lint:yaml app/Resources/CraueConfigBundle/translations -v"
+
+      - name: "Validate User translations"
+        run: "php bin/console lint:yaml src/Wallabag/UserBundle/Resources/translations -v"

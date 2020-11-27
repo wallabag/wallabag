@@ -1,6 +1,6 @@
 <img src="https://raw.githubusercontent.com/wallabag/logo/master/_default/typo-horizontal/png/sm/logo-typo-horizontal-black-no-bg-no-border-sm.png" align="right" />
 
-[![Build Status](https://api.travis-ci.org/wallabag/wallabag.svg?branch=master)](https://travis-ci.org/wallabag/wallabag)
+![CI](https://github.com/wallabag/wallabag/workflows/CI/badge.svg)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/wallabag/wallabag/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/wallabag/wallabag/?branch=master)
 [![Gitter](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/wallabag/wallabag)
 [![Donation Status](https://img.shields.io/liberapay/goal/wallabag.svg?logo=liberapay)](https://liberapay.com/wallabag/donate)

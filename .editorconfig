@@ -15,3 +15,6 @@ indent_size = 2
 
 [*akefile]
 indent_style = tab
+
+[.github/**.yml]
+indent_size = 2
