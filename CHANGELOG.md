@@ -29,6 +29,7 @@
 - Enhanced navigation menu in material theme [#4343](https://github.com/wallabag/wallabag/pull/4343)
 - Copy client info to clipboard [#4058](https://github.com/wallabag/wallabag/pull/4058)
 - Upgrade Piwik Twig Extension to Matomo [#4363](https://github.com/wallabag/wallabag/pull/4363)
+- Dark theme to Material [#4725](https://github.com/wallabag/wallabag/pull/4725)
 
 ### API
 
@@ -64,6 +65,8 @@
 - Increase php memory limit PHP Docker [#4163](https://github.com/wallabag/wallabag/pull/4163)
 - Ensure ENV is well defined when using make [#4249](https://github.com/wallabag/wallabag/pull/4249)
 - Update translations from Weblate [#4442](https://github.com/wallabag/wallabag/pull/4442)
+- Ditch Travis to use GitHub Actions [#4747](https://github.com/wallabag/wallabag/pull/4747)
+- Upgrade Webpack from v4 to v5 [#4727](https://github.com/wallabag/wallabag/pull/4727)
 
 ### Translations
 
