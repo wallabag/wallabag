@@ -77,6 +77,7 @@ config:
         action_mark_as_read:
             redirect_homepage: Til hjemmesiden
             redirect_current_page: Til nåværende side
+            label: Foretagende etter fjerning, stjernemerking eller markering av artikkel som lest?
         help_reading_speed: wallabag beregner lesetid for hver artikkel. Du kan definere om du er en rask eller treg leser her. wallabag regner ut igjen lesetid for hver artikkel
         pocket_consumer_key_label: Brukernøkkel for Pocket brukt til import av innhold
         help_pocket_consumer_key: Kreves for Pocket-import. Kan opprettes i din Pocket-konto.
@@ -169,6 +170,8 @@ config:
         app:
             enable: Skru på
             cancel: Avbryt
+            two_factor_code_description_4: 'Test en OTP-kode fra ditt oppsatte program:'
+            two_factor_code_description_2: 'Du kan skanne den QR-koden med programmet ditt:'
     reset:
         description: Ved å trykke på knappen nedenfor har du muligheten til å fjerne noe info fra din konto. Husk at disse handlingene er IRREVERSIBLE.
         confirm: Er du virkelig sikker? (DETTE KAN IKKE ANGRES)
@@ -199,6 +202,7 @@ config:
                 label: Variabel
             meaning: Betydning
             title: O-S-S
+            how_to_use_them_title: Hvordan brukes de?
 flashes:
     entry:
         notice:
@@ -208,6 +212,7 @@ flashes:
             entry_unarchived: Oppføring fjernet fra arkiv
             entry_archived: Oppføring arkivert
             entry_saved: Oppføring lagret
+            entry_already_saved: Oppføring allerede lagret %date%
     config:
         notice:
             tagging_rules_not_imported: Kunne ikke importere etikettmerkingsregler
@@ -227,6 +232,22 @@ flashes:
             password_updated: Passord oppdatert
             config_saved: Oppsett lagret.
             annotations_reset: Anføringer tilbakestilt
+    user:
+        notice:
+            updated: Bruker «%username%» er oppdatert
+            deleted: Brukeren «%username%» ble slettet
+            added: Brukernavn «%username%» lagt til
+    developer:
+        notice:
+            client_created: Ny klient ved navn %name% opprettet.
+            client_deleted: Klient ved navn %name% slettet
+    import:
+        notice:
+            failed: Kunne ikke importere, prøv igjen.
+    tag:
+        notice:
+            tag_renamed: Navn på etikett endret
+            tag_added: Etikett lagt til
 error:
     page_title: En feil inntraff
 ignore_origin_instance_rule:
@@ -291,6 +312,7 @@ developer:
         back: Tilbake
         description:
             paragraph_2: Du trenger et symbol for å kommunisere mellom dine tredjepartsprogrammmer og wallabag-API-et.
+            paragraph_3: For å opprette dette symbolet, trenger du å <a href="%link%">opprette en ny klient</a>.
         page_title: Håndtering av API-klienter > Hvordan opprette mitt første program
     client_parameter:
         read_howto: Les kunnskapsbasens «Opprett mitt første program»
@@ -307,6 +329,7 @@ developer:
             save_label: Opprett en ny klient
             redirect_uris_label: Videresendings-URI-er (valgfritt)
             name_label: Navnet på klienten
+        page_title: API-klienthåndtering > Ny klient
     remove:
         action: Fjern klienten %name%
     existing_clients:
@@ -331,6 +354,7 @@ import:
             user_message: Din tjener-administrator må definere en API-nøkkel for Pocket.
             admin_message: Du må definere %keyurls%a pocket_consumer_key%keyurle%.
             description: Pocket-import er ikke oppsatt.
+        page_title: Importer > Pocket
     form:
         save_label: Last opp fil
         file_label: Fil
@@ -338,6 +362,20 @@ import:
     action:
         import_contents: Importer innhold
     page_title: Importer
+    pinboard:
+        page_title: Importer > Pinboard
+    instapaper:
+        page_title: Importer > Instapaper
+    chrome:
+        page_title: Importer > Chrome
+    firefox:
+        page_title: Importer > Firefox
+    readability:
+        page_title: Importer > Readability
+    wallabag_v2:
+        page_title: Importer > Wallabag v2
+    wallabag_v1:
+        page_title: Importer > Wallabag v1
 tag:
     new:
         placeholder: Du kan legge til flere (kommainndelte) etiketter.
@@ -415,6 +453,7 @@ howto:
         all_pages_title: Snarvei tilgjengelig på alle sider
         action: Handling
         shortcut: Snarvei
+        page_description: Her er snarveiene som finnes i wallabag.
     bookmarklet:
         description: 'Dra og slipp denne lenken i ditt bokmerkefelt:'
     browser_addons:
@@ -435,6 +474,8 @@ howto:
     tab_menu:
         shortcuts: Bruk snarveier
         add_link: Legg til en lenke
+    form:
+        description: Takket være dette skjemaet
 about:
     third_party:
         description: 'Tredjepartsbibliotek brukt i wallabag (og lisensene deres):'
