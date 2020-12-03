@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const commonConfig = require('./common.js');
@@ -33,7 +33,7 @@ module.exports = merge(commonConfig, {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
-    new ManifestPlugin({
+    new WebpackManifestPlugin({
       fileName: 'manifest.json',
     }),
   ],
