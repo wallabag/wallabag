@@ -67,19 +67,10 @@ jobs:
           createdb -h localhost -p 5432 -U wallabag wallabag_test
           pg_isready -d wallabag_test -h localhost -p 5432 -U wallabag
 
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-      - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v2"
+      - name: "Install dependencies with Composer"
+        uses: "ramsey/composer-install@v1"
         with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: "php-${{ matrix.php }}-composer-locked-${{ hashFiles('composer.lock') }}"
-          restore-keys: "php-${{ matrix.php }}-composer-locked-"
-
-      - name: "Install dependencies with composer"
-        run: "composer install --no-interaction --optimize-autoloader --no-progress --prefer-dist"
+          composer-options: "--optimize-autoloader --prefer-dist"
 
       - name: "Prepare database"
         run: "make prepare DB=${{ matrix.database }}"
