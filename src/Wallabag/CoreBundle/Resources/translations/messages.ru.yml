@@ -34,6 +34,9 @@ menu:
         site_credentials: Реквизиты сайта
         ignore_origin_instance_rules: Глобальные правила игнорирования источника
         quickstart: Быстрый старт
+        theme_toggle_auto: Выбирать тему автоматически
+        theme_toggle_dark: Темная тема
+        theme_toggle_light: Светлая тема
     top:
         add_new_entry: 'Добавить новую запись'
         search: 'Поиск'
@@ -144,8 +147,8 @@ config:
         tags_label: 'теги'
         faq:
             title: 'FAQ'
-            tagging_rules_definition_title: 'Что значит "правило тегирования"?'
-            tagging_rules_definition_description: 'Правила, по которым Wallabag автоматически добавит теги для новых записей.<br />Каждый раз, при добавлении новых записей, будут проставляться теги к записям, согласно настроенным правилам тегирования, это избавит Вас от необходимости проставлять теги для каждой записи вручную.'
+            tagging_rules_definition_title: 'Что значит "правила тегирования"?'
+            tagging_rules_definition_description: 'Правила, по которым wallabag автоматически добавит теги для новых записей.<br />Каждый раз, при добавлении новых записей, будут проставляться теги к записям, согласно настроенным правилам тегирования, это избавит Вас от необходимости проставлять теги для каждой записи вручную.'
             how_to_use_them_title: 'Как мне их использовать?'
             how_to_use_them_description: 'Предположим, вы хотите пометить новые записи как "<i>короткая</i>", когда на чтение уйдет меньше 3 минут.<br />В этом случае, установите " readingTime &lt;= 3 " в поле <i>Правила</i> и "<i>короткая</i>" в поле <i>Теги</i>.<br />Несколько тегов могут добавляться одновременно, разделяя их запятой: "<i>короткая, прочитать обязательно</i>" <br />Сложные правила могут быть записаны с использованием предопределенных операторов: если "<i>readingTime &gt;= 5 AND domainName = \"github.com\"</i> " тогда тег будет "<i>долго читать, GitHub </i>"'
             variables_available_title: 'Какие переменные и операторы я могу использовать для написания правил?'
@@ -292,6 +295,10 @@ entry:
             problem:
                 label: 'Проблемы?'
                 description: 'Что-то не так с записью?'
+            theme_toggle_auto: Авто
+            theme_toggle_dark: Темная
+            theme_toggle_light: Светлая
+            theme_toggle: Выбор темы
         edit_title: 'Изменить название'
         original_article: 'оригинал'
         annotations_on_the_entry: '{0} Нет аннотации|{1} Одна аннотация|]1,Inf[ %count% аннотаций'
@@ -377,7 +384,7 @@ howto:
         ios: 'в iTunes Store'
         windows: 'в Microsoft Store'
     bookmarklet:
-        description: 'Drag & drop эту ссылку в ваши закладки:'
+        description: 'Перетащите эту ссылку в ваши закладки:'
     shortcuts:
         page_description: "Здесь доступны горячие клавиши wallabag."
         shortcut: "Горячие клавиши"
