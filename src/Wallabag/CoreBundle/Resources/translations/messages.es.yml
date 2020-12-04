@@ -33,6 +33,9 @@ menu:
         users_management: 'Configuración de usuarios'
         site_credentials: Credenciales del sitio
         quickstart: Inicio rápido
+        theme_toggle_auto: Tema automático
+        theme_toggle_dark: Tema oscuro
+        theme_toggle_light: Tema claro
     top:
         add_new_entry: 'Añadir un nuevo artículo'
         search: 'Buscar'
@@ -99,9 +102,9 @@ config:
             all: Todos
         rss_limit: 'Número de artículos en el feed RSS'
     form_user:
-        two_factor_description: "Activar la autenticación en dos pasos significa que recibirás un código por e-mail en cada nueva conexión que no sea de confianza."
+        two_factor_description: "Activar la autenticación en dos pasos significa que recibirás un código por correo electrónico en cada nueva conexión que no sea de confianza."
         name_label: 'Nombre'
-        email_label: 'Dirección de correo electrónico'
+        email_label: 'Correo electrónico'
         two_factor:
             emailTwoFactor_label: 'Usando el correo electrónico (recibe un código por correo electrónico)'
             googleTwoFactor_label: 'Usando una aplicación OTP (abre la aplicación, por ejemplo Google Authenticator, Authy o FreeOTP, para conseguir un código de utilización única)'
@@ -150,7 +153,7 @@ config:
         export: Exportar
         faq:
             title: 'Preguntas frecuentes (FAQ)'
-            tagging_rules_definition_title: '¿Qué significa « reglas de etiquetado »?'
+            tagging_rules_definition_title: '¿Qué significa «reglas de etiquetado»?'
             tagging_rules_definition_description: 'Son las reglas usadas por wallabag para etiquetar automáticamente los nuevos artículos.<br />Cada vez que un artículo es añadido, todas las reglas de etiquetado automático serán usadas para etiquetarlo, ayudándote a clasificar automáticamente tus artículos.'
             how_to_use_them_title: '¿Cómo se utilizan?'
             how_to_use_them_description: 'Supongamos que quiere etiquetar los artículos nuevos como « <i>lectura corta</i> » cuando el tiempo de lectura sea menos de 3 minutos.<br /> En este caso, debe poner « readingTime &lt;= 3 » en el campo <i>Regla</i> y « <i>lectura corta</i> » en el campo <i>Etiquetas</i>.<br />Se pueden añadir varias etiquetas al mismo tiempo separadas por comas: « <i>lectura corta, lectura obligada</i> »<br />Se pueden escribir reglas complejas utilizando los operadores predefinidos: si « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » entonces etiqueta como « <i>lectura larga, GitHub </i> »'
@@ -475,7 +478,7 @@ import:
         description: 'Importa todos tus artículos de wallabag v2. En la sección Todos los artículos, en la barra lateral, haga clic en "JSON". Obtendrás un archivo llamado "All articles.json".'
     readability:
         page_title: 'Importar > Readability'
-        description: 'Importa todos tus artículos de Readability. En la página de herramientas (https://www.readability.com/tools/), haga clic en "Exportar tus datos" en la sección "Exportar datos". Recibirás un e-mail para descargar un JSON (aunque no tiene extensión .json).'
+        description: 'Importa todos tus artículos de Readability. En la página de herramientas (https://www.readability.com/tools/), haga clic en «Exportar tus datos» en la sección «Exportar datos». Recibirás un correo electrónico para descargar un JSON (aunque no tiene extensión .json).'
         how_to: 'Seleccione el archivo exportado de Readability y haga clic en el botón para subirlo e importarlo.'
     worker:
         enabled: "La importación se realiza de forma asíncrona. Una vez que la tarea de importación ha comenzado, un trabajador externo se encargará de procesar los artículos uno a uno. El servicio actual es:"
