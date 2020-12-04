@@ -3,13 +3,13 @@ security:
         page_title: Benvenuto in wallabag!
         keep_logged_in: Resta connesso
         forgot_password: Hai dimenticato la password?
-        submit: Login
+        submit: Accedi
         register: Registrati
         username: Nome utente
         password: Password
         cancel: Cancella
     resetting:
-        description: Inserisci il tuo indirizzo e-mail nel campo sottostante e ti invieremo le istruzioni per il reset della password.
+        description: Inserisci il tuo indirizzo di posta elettronica di seguito e ti invieremo le istruzioni per reimpostare la password.
     register:
         page_title: Crea un account
         go_to_account: Vai al tuo account
@@ -34,11 +34,16 @@ menu:
         site_credentials: Credenziali sito
         quickstart: Introduzione
         ignore_origin_instance_rules: Regole globali per ignorare l'origine
+        theme_toggle_auto: Tema automatico
+        theme_toggle_dark: Tema scuro
+        theme_toggle_light: Tema chiaro
     top:
         add_new_entry: Aggiungi un nuovo contenuto
         search: Cerca
         filter_entries: Filtra contenuti
         export: Esporta
+        account: Il mio account
+        random_entry: Passa a una voce casuale da quella lista
     search_form:
         input_label: Inserisci qui la tua ricerca
 footer:
@@ -57,6 +62,7 @@ config:
         password: Password
         rules: Regole di etichettatura
         new_user: Aggiungi utente
+        feed: Flussi
     form:
         save: Salva
     form_settings:
@@ -106,6 +112,9 @@ config:
             description: Rimuovendo il tuo account, TUTTI i tuoi articoli, TUTTE le tue etichette, TUTTE le tue annotazioni ed il tuo account verranno rimossi PERMANENTEMENTE (impossibile da ANNULLARE). Verrai poi disconnesso.
             confirm: Sei veramente sicuro? (NON PUOI TORNARE INDIETRO)
             button: Cancella il mio account
+        two_factor:
+            action_email: Usa l'e-mail
+            emailTwoFactor_label: Utilizzando la posta elettronica (ricevere un codice tramite posta elettronica)
     reset:
         title: Area di reset (zona pericolosa)
         description: Premendo i tasti sottostanti potrai rimuovere delle informazioni dal tuo account. Ricorda che queste azioni sono IRREVERSIBILI.
@@ -314,7 +323,7 @@ howto:
         ios: sullo store di iTunes
         windows: sullo store di Microsoft
     bookmarklet:
-        description: 'Trascinando e rilasciando questo link sulla barra dei preferiti del tuo browser:'
+        description: 'Trascinando e rilasciando questo collegamento sulla barra dei preferiti del tuo browser:'
     shortcuts:
         page_description: Ecco le scorciatoie disponibili su wallabag.
         shortcut: Scorciatoia
@@ -526,6 +535,7 @@ user:
         delete: Cancella
         delete_confirm: Sei sicuro?
         back_to_list: Torna alla lista
+        twofactor_email_label: Autenticazione a due fattori tramite e-mail
     search:
         placeholder: Filtra per nome utente o e-mail
 error:
