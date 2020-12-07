@@ -8,20 +8,9 @@ updates:
     timezone: Europe/Paris
   open-pull-requests-limit: 10
   ignore:
-  - dependency-name: stylelint
+  - dependency-name: materialize-css
     versions:
-    - "> 7.13.0"
-  - dependency-name: stylelint-config-standard
-    versions:
-    - "> 16.0.0"
-  - dependency-name: stylelint-webpack-plugin
-    versions:
-    - ">= 2.a"
-    - "< 3"
-  - dependency-name: webpack-cli
-    versions:
-    - ">= 4.a"
-    - "< 5"
+    - "> 0.98.2"
 - package-ecosystem: composer
   directory: "/"
   schedule:
@@ -45,11 +34,3 @@ updates:
   - dependency-name: nelmio/api-doc-bundle
     versions:
     - "> 2.13.4"
-  - dependency-name: symfony/phpunit-bridge
-    versions:
-    - ">= 4.4.a"
-    - "< 4.5"
-  - dependency-name: symfony/phpunit-bridge
-    versions:
-    - ">= 5.0.a"
-    - "< 5.1"
