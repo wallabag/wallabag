@@ -15,7 +15,7 @@ shaarli_url: URL de Shaarli, si el servicio está activado
 scuttle_url: URL de Scuttle, si el servicio está activado
 unmark_url: URL de Unmark, si el servicio está activado
 share_diaspora: Activar compartir en diaspora*
-share_mail: Activar compartir por Email
+share_mail: Activar compartir por correo electrónico
 share_shaarli: Activar compartir en Shaarli
 share_scuttle: Activar compartir en Scuttle
 share_twitter: Activar compartir en Twitter

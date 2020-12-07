@@ -34,6 +34,9 @@ menu:
         site_credentials: サイトの認証情報
         quickstart: はじめに
         ignore_origin_instance_rules: グローバル転送元無視ルール
+        theme_toggle_auto: テーマを自動切換
+        theme_toggle_dark: ダークテーマ
+        theme_toggle_light: ライトテーマ
     top:
         add_new_entry: 新しい記事を追加
         search: 検索
@@ -133,7 +136,7 @@ config:
         rule_label: ルール
         faq:
             title: よくある質問
-            tagging_rules_definition_title: «タグ付けルール» とは?
+            tagging_rules_definition_title: “タグ付けルール” とは?
             how_to_use_them_title: 使用する方法は?
             variables_available_title: ルールを記述するために、どの変数と演算子が使用できますか?
             variables_available_description: 'タグ付けルールを作成するのに、次の変数と演算子が使用できます:'
@@ -161,7 +164,7 @@ config:
                 and: 1 つのルール かつ 別のルール
                 notmatches: <i>対象</i>が<i>検索</i>と一致しないことをテストする（大文字小文字の区別なし）。<br />例:<code>title notmatches "football"</code>
                 matches: <i>対象</i>が<i>検索</i>と一致するかテストする（大文字小文字の区別なし）。<br />例:<code>title matches "football"</code>
-            tagging_rules_definition_description: Wallabag ではルールを使用することで新しい記事へ自動的にタグ付けする事ができます。<br />新しい記事が追加されるたびに、あなたが設定したすべてのタグ付けルールを使用してタグが追加されるので、記事を手動で分類する手間が省けます。
+            tagging_rules_definition_description: wallabag ではルールを使用することで新しい記事へ自動的にタグ付けする事ができます。<br />新しい記事が追加されるたびに、あなたが設定したすべてのタグ付けルールを使用してタグが追加されるので、記事を手動で分類する手間が省けます。
             how_to_use_them_description: 'あなたは読了時間が3分以下の時に新しい記事へ « <i>短い文章</i> » のタグ付けをしたいとします。<br />この場合、<i>ルール</i>に « readingTime &lt;= 3 »と<i>タグ</i>に « <i>短い文章</i> » を設定します。<br />コンマで区切ることにより複数のタグを追加することができます: « <i>短い文章, 必読</i> »<br />演算子を使用することにより複雑なルールを書くことができます: もし « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> »ならばタグ付け « <i>長い文章, GitHub </i> »'
         delete_rule_label: 削除
         export: エクスポート
@@ -222,7 +225,7 @@ config:
             how_to_use_them_description: あなたは記事の転送元の « <i>rss.example.com</i> » を無視したいとします（<i>リダイレクト後はexample.comであることを知っているものとします</i>）。<br />この場合、<i>ルール</i>に « host = "rss.example.com" » と設定する必要があります。
             how_to_use_them_title: 使用する方法は?
             ignore_origin_rules_definition_description: リダイレクト後に転送元アドレスを自動的に無視するためにwallabagで使用されます。<br />新しい記事を取得する際にすべての転送元無視ルール（<i>ユーザー定義およびインスタンス定義</i>）を使用して転送元アドレスを無視します。
-            ignore_origin_rules_definition_title: « 転送元無視ルール » とは?
+            ignore_origin_rules_definition_title: “転送元無視ルール” とは?
             title: よくある質問
 entry:
     page_titles:
@@ -291,6 +294,10 @@ entry:
             delete: 削除
             set_as_starred: スター有無の切り替え
             back_to_homepage: 戻る
+            theme_toggle_auto: 自動
+            theme_toggle_dark: ダーク
+            theme_toggle_light: ライト
+            theme_toggle: テーマの切替
         edit_title: タイトルを編集
         annotations_on_the_entry: '{0} 注釈はありません|{1} 1 注釈|]1,Inf[ %count% 注釈'
         provided_by: による提供
@@ -395,7 +402,7 @@ howto:
         shortcut: ショートカット
         page_description: wallabagで使用可能なショートカットは以下の通りです。
     bookmarklet:
-        description: 'このリンクをブックマークバーに ドラッグ＆ドロップ してください:'
+        description: 'このリンクをブックマークバーに ドラッグ アンド ドロップ :'
     browser_addons:
         opera: Opera のアドオン
         chrome: Chrome のアドオン

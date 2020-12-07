@@ -187,7 +187,7 @@ config:
     form_ignore_origin_rules:
         faq:
             title: "FAQ"
-            ignore_origin_rules_definition_title: "Que signifient les règles d'omission d'origine ?"
+            ignore_origin_rules_definition_title: "Que signifient les règles d'omission d'origine ?"
             ignore_origin_rules_definition_description: "Ce sont des règles utilisées par wallabag pour omettre automatiquement l'adresse d'origine après une redirection.<br />Si une redirection intervient pendant la récupération d'un nouvel article, toutes les règles d'omission (<i>règles utilisateur et instance</i>) seront utilisées afin d'ignorer ou non l'adresse d'origine."
             how_to_use_them_title: "Comment les utiliser ?"
             how_to_use_them_description: "Imaginons que vous vouliez omettre l'origine d'un article provenant de « <i>rss.example.com</i> » (<i>sachant qu'après la redirection, l'adresse réelle est example.com</i>).<br />Dans ce cas, vous devriez mettre « host = \"rss.example.com\" » dans le champ <i>Règle</i>."
