@@ -35,6 +35,7 @@ module.exports = merge(commonConfig, {
     }),
     new WebpackManifestPlugin({
       fileName: 'manifest.json',
+      sort: (file1, file2) => file1.path.localeCompare(file2.path),
     }),
   ],
   module: {
