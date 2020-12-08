@@ -3953,32 +3953,32 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "v2.2.2",
+            "version": "v2.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "fedf2e0c849376efd5af7fedc68f6a5099a5c8a5"
+                "reference": "131f069877017778742f19da8038fe829fc91262"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/fedf2e0c849376efd5af7fedc68f6a5099a5c8a5",
-                "reference": "fedf2e0c849376efd5af7fedc68f6a5099a5c8a5",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/131f069877017778742f19da8038fe829fc91262",
+                "reference": "131f069877017778742f19da8038fe829fc91262",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "ext-tidy": "*",
                 "fossar/htmlawed": "^1.2.7",
-                "guzzlehttp/psr7": "^1.5",
-                "j0k3r/graby-site-config": "^1.0.100",
+                "http-interop/http-factory-guzzle": "^1.0",
+                "j0k3r/graby-site-config": "^1.0.110",
                 "j0k3r/httplug-ssrf-plugin": "^2.0",
                 "j0k3r/php-readability": "^1.2.3",
                 "monolog/monolog": "^1.18.0|^2.0",
                 "php": ">=7.1",
-                "php-http/client-common": "^2.0",
-                "php-http/discovery": "^1.5",
-                "php-http/httplug": "^2.0",
-                "php-http/message": "^1.7",
+                "php-http/client-common": "^2.3",
+                "php-http/discovery": "^1.12",
+                "php-http/httplug": "^2.2",
+                "php-http/message": "^1.9",
                 "simplepie/simplepie": "^1.5",
                 "smalot/pdfparser": "^0.16",
                 "symfony/options-resolver": "^3.4|^4.0|^5.0",
@@ -3988,8 +3988,10 @@
                 "friendsofphp/php-cs-fixer": "^2.16",
                 "guzzlehttp/guzzle": "^6.3.0",
                 "php-http/guzzle6-adapter": "^2.0",
-                "php-http/mock-client": "^1.3",
+                "php-http/mock-client": "^1.4",
+                "phpstan/extension-installer": "^1.0",
                 "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-deprecation-rules": "^0.12",
                 "phpstan/phpstan-phpunit": "^0.12",
                 "symfony/phpunit-bridge": "^5.1"
             },
@@ -4021,20 +4023,20 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2020-06-25T13:38:36+00:00"
+            "time": "2020-11-30T12:40:39+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.119",
+            "version": "1.0.120",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "0351385ba4d0fdb99368d30b8f2fc9c2ff3500ab"
+                "reference": "a068f3999ef41bcfd5ee1416cd9f0598f12660e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/0351385ba4d0fdb99368d30b8f2fc9c2ff3500ab",
-                "reference": "0351385ba4d0fdb99368d30b8f2fc9c2ff3500ab",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/a068f3999ef41bcfd5ee1416cd9f0598f12660e0",
+                "reference": "a068f3999ef41bcfd5ee1416cd9f0598f12660e0",
                 "shasum": ""
             },
             "require": {
@@ -4061,7 +4063,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2020-11-30T10:27:06+00:00"
+            "time": "2020-12-07T20:58:40+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -4131,16 +4133,16 @@
         },
         {
             "name": "j0k3r/php-readability",
-            "version": "1.2.5",
+            "version": "v1.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/php-readability.git",
-                "reference": "3fa88461a057158d8b06c6e575909d0aa1e822ef"
+                "reference": "9632c4df8c606adf5a57ea0a2920f1179fe39ff9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/3fa88461a057158d8b06c6e575909d0aa1e822ef",
-                "reference": "3fa88461a057158d8b06c6e575909d0aa1e822ef",
+                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/9632c4df8c606adf5a57ea0a2920f1179fe39ff9",
+                "reference": "9632c4df8c606adf5a57ea0a2920f1179fe39ff9",
                 "shasum": ""
             },
             "require": {
@@ -4200,7 +4202,7 @@
                 "extraction",
                 "html"
             ],
-            "time": "2020-06-08T05:59:42+00:00"
+            "time": "2020-11-30T13:34:46+00:00"
         },
         {
             "name": "javibravo/simpleue",
