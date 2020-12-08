@@ -30,7 +30,7 @@ class InstallCommandTest extends WallabagCoreTestCase
         StaticDriver::setKeepStaticConnections(true);
     }
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -66,7 +66,7 @@ class InstallCommandTest extends WallabagCoreTestCase
         $this->resetDatabase($this->getClient());
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         $databasePath = getenv('TEST_DATABASE_PATH');
         // Remove variable environnement

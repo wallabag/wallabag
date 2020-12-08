@@ -665,7 +665,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('1.1.1.1', $entry->getDomainName());
     }
 
-    public function testWebsiteWithValidUTF8Title_doNothing()
+    public function testWebsiteWithValidUTF8TitleDoNothing()
     {
         // You can use https://www.online-toolz.com/tools/text-hex-convertor.php to convert UTF-8 text <=> hex
         // See http://graphemica.com for more info about the characters
@@ -704,7 +704,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
     }
 
-    public function testWebsiteWithInvalidUTF8Title_removeInvalidCharacter()
+    public function testWebsiteWithInvalidUTF8TitleRemoveInvalidCharacter()
     {
         // See http://graphemica.com for more info about the characters
         // 'a€b' (61;80;62) in hexadecimal and WINDOWS-1252 - but 80 is a invalid UTF-8 character.
@@ -743,7 +743,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
     }
 
-    public function testPdfWithUTF16BETitle_convertToUTF8()
+    public function testPdfWithUTF16BETitleConvertToUTF8()
     {
         // See http://graphemica.com for more info about the characters
         // '😻' (U+1F63B;D83DDE3B) in hexadecimal and as UTF16BE
@@ -781,7 +781,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
     }
 
-    public function testPdfWithUTF8Title_doNothing()
+    public function testPdfWithUTF8TitleDoNothing()
     {
         // See http://graphemica.com for more info about the characters
         // '😻' (U+1F63B;D83DDE3B) in hexadecimal and as UTF8
@@ -819,7 +819,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
     }
 
-    public function testPdfWithWINDOWS1252Title_convertToUTF8()
+    public function testPdfWithWINDOWS1252TitleConvertToUTF8()
     {
         // See http://graphemica.com for more info about the characters
         // '€' (80) in hexadecimal and WINDOWS-1252
@@ -857,7 +857,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
     }
 
-    public function testPdfWithInvalidCharacterInTitle_removeInvalidCharacter()
+    public function testPdfWithInvalidCharacterInTitleRemoveInvalidCharacter()
     {
         // See http://graphemica.com for more info about the characters
         // '😻ℤ�z' (U+1F63B or F09F98BB; U+2124 or E284A4; invalid character 81; U+007A or 7A) in hexadecimal and UTF-8
