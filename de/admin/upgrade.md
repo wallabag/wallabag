@@ -20,7 +20,7 @@ Upgrade von 2.1.x zu 2.2.x
 
 ```bash
 make update
-php bin/console doctrine:migrations:migrate --no-interaction -e=prod
+php bin/console doctrine:migrations:migrate --no-interaction --env=prod
 ```
 
 **Von 2.2.0:**

@@ -19,7 +19,7 @@ l'`Autenticazione a due fattori`.
 possibile solamente se ciò è stato abilitato precedentemente in
 app/config/parameters.yml impostando la proprietà twofactor\_auth su
 true (non dimenticate di eseguire il comando
-php bin/console cache:clear -e=prod dopo la modifica).
+php bin/console cache:clear --env=prod dopo la modifica).
 
 Se abilitate la 2FA, ogni volta che vogliate accedere a wallabag,
 riceverete un codice via email. Dovrete inserire il codice nel seguente
