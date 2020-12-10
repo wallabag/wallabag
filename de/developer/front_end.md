@@ -36,7 +36,7 @@ Produktionsumgebung durch das Ausführen von `yarn build:prod`.
 Dies wird alle Assets für wallabag erstellen. Um zu testen, dass
 alles ordentlich funktioniert, wirst du einen im Produktionsmodus
 laufenden Server bruachen, z.B. mit
-`bin/console server:run -e=prod`.
+`bin/console server:run --env=prod`.
 
 Vergiss nicht, die Produktions-Builds zu erstellen bevor du sie
 einstellst.

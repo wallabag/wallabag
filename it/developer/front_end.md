@@ -25,7 +25,7 @@ Non dimenticate di cambiare `use_webpack_dev_server` in `false` quando la funzio
 ## Build di produzione
 
 Quando vorrete fare un commit con i vostri cambiamenti, costruiteli in un ambiente di produzione usando `yarn build:prod`. Questo costruirà tutte le risorse necessarie per wallabag. Per assicurarsi che ciò funzioni a dovere, dovrete avere il vostro server in modalità produzione, per esempio con
-`bin/console server:run -e=prod`.
+`bin/console server:run --env=prod`.
 
 Non dimenticate di generare le build di produzione prima di fare un commit!
 

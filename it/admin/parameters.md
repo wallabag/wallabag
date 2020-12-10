@@ -11,7 +11,7 @@ Assicuratevi che la vostra rispetti questa. Se non sapete quale
 parametro dovete impostare, si prega di lasciare quello di default.
 
 {% hint style="tip" %}
-Per applicare i cambiamenti a `parameters.yml`, dovete pulire la cache eliminando tutti i contenuti della cartella `var/cache` con questo comando: `bin/console cache:clear -e=prod`.
+Per applicare i cambiamenti a `parameters.yml`, dovete pulire la cache eliminando tutti i contenuti della cartella `var/cache` con questo comando: `bin/console cache:clear --env=prod`.
 {% endhint %}
 
 ```yaml

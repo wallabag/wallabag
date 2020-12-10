@@ -18,7 +18,7 @@ Troverete qui i differenti modi per aggiornare il vostro wallabag:
 
 ```bash
 make update
-php bin/console doctrine:migrations:migrate --no-interaction -e=prod
+php bin/console doctrine:migrations:migrate --no-interaction --env=prod
 ```
 
 **Da 2.2.0:**

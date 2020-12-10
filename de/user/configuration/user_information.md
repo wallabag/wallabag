@@ -20,7 +20,7 @@ Zwei-Faktor-Authentifizierung aktivieren.
 ist nur möglich, wenn vorher in der app/config/parameters.yml die
 twofactor\_auth-Eigenschaft auf true gesetzt wurde (nach der
 Konfiguration das Leeren des Cache mit
-php bin/console cache:clear -e=prod nicht vergessen).
+php bin/console cache:clear --env=prod nicht vergessen).
 
 Wenn du 2FA aktivierst, erhälst du jedes Mal, wenn du dich bei wallabag
 einloggen willst, einen Code per Mail. Du musst den Code in das folgende

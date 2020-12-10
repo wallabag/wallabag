@@ -17,7 +17,7 @@ your account here. **Take care, we delete all your data**.
 **Warning**: enabling 2FA from the configuration interface is only
 possible if it has been authorized before in app/config/parameters.yml
 by setting the *twofactor_auth* parameter to true (do not forget to run
-`php bin/console cache:clear -e=prod` after modification).
+`php bin/console cache:clear --env=prod` after modification).
 
 If you enable 2FA, each time you want to login to wallabag, you'll
 receive a code by email. You have to put this code on the following
