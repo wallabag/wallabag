@@ -1,44 +1,46 @@
 {
+  "name": "wallabag",
   "short_name": "wallabag",
-  "name": "Save and classify articles. Read them later. Freely.",
+  "description": "Save and classify articles. Read them later. Freely.",
+  "start_url": ".",
   "icons": [
     {
-      "src": "wallassets/themes/_global/img/appicon/apple-touch-icon-57.png",
+      "src": "img/appicon/apple-touch-icon-57.png",
       "type": "image/png",
       "sizes": "57x57"
     },
     {
-      "src": "wallassets/themes/_global/img/appicon/apple-touch-icon-72.png",
+      "src": "img/appicon/apple-touch-icon-72.png",
       "type": "image/png",
       "sizes": "72x72"
     },
     {
-      "src": "wallassets/themes/_global/img/appicon/apple-touch-icon-76.png",
+      "src": "img/appicon/apple-touch-icon-76.png",
       "type": "image/png",
       "sizes": "76x76"
     },
     {
-      "src": "wallassets/themes/_global/img/appicon/apple-touch-icon-114.png",
+      "src": "img/appicon/apple-touch-icon-114.png",
       "type": "image/png",
       "sizes": "114x114"
     },
     {
-      "src": "wallassets/themes/_global/img/appicon/apple-touch-icon-120.png",
+      "src": "img/appicon/apple-touch-icon-120.png",
       "type": "image/png",
       "sizes": "120x120"
     },
     {
-      "src": "wallassets/themes/_global/img/appicon/apple-touch-icon-144.png",
+      "src": "img/appicon/apple-touch-icon-144.png",
       "type": "image/png",
       "sizes": "144x144"
     },
     {
-      "src": "wallassets/themes/_global/img/appicon/apple-touch-icon-152.png",
+      "src": "img/appicon/apple-touch-icon-152.png",
       "type": "image/png",
       "sizes": "152x152"
     },
     {
-      "src": "wallassets/themes/_global/img/appicon/apple-touch-icon-512.png",
+      "src": "img/appicon/apple-touch-icon-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
