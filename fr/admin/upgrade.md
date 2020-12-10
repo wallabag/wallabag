@@ -16,7 +16,7 @@ Mettre à jour de la 2.1.x à la 2.2.x
 
 ```bash
 make update
-php bin/console doctrine:migrations:migrate --no-interaction -e=prod
+php bin/console doctrine:migrations:migrate --no-interaction --env=prod
 ```
 
 **Depuis 2.2.0:**

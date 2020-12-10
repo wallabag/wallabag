@@ -62,25 +62,25 @@ den entsprechenden (oder mehrere) Cronjob aktivieren:
 
 ```bash
 # für den Pocket-Import
-bin/console rabbitmq:consumer -e=prod import_pocket -w
+bin/console rabbitmq:consumer --env=prod import_pocket -w
 
 # für den Readability-Import
-bin/console rabbitmq:consumer -e=prod import_readability -w
+bin/console rabbitmq:consumer --env=prod import_readability -w
 
 # für den Instapaper-Import
-bin/console rabbitmq:consumer -e=prod import_instapaper -w
+bin/console rabbitmq:consumer --env=prod import_instapaper -w
 
 # für den wallabag v1-Import
-bin/console rabbitmq:consumer -e=prod import_wallabag_v1 -w
+bin/console rabbitmq:consumer --env=prod import_wallabag_v1 -w
 
 # für den wallabag v2-Import
-bin/console rabbitmq:consumer -e=prod import_wallabag_v2 -w
+bin/console rabbitmq:consumer --env=prod import_wallabag_v2 -w
 
 # für den Firefox-Import
-bin/console rabbitmq:consumer -e=prod import_firefox -w
+bin/console rabbitmq:consumer --env=prod import_firefox -w
 
 # für den Chrome-Import
-bin/console rabbitmq:consumer -e=prod import_chrome -w
+bin/console rabbitmq:consumer --env=prod import_chrome -w
 ```
 
 Redis für asynchrone Aufgaben installieren
@@ -130,25 +130,25 @@ den entsprechenden (oder mehrere) Cronjob aktivieren:
 
 ```bash
 # für den Pocket-Import
-bin/console wallabag:import:redis-worker -e=prod pocket -vv >> /path/to/wallabag/var/logs/redis-pocket.log
+bin/console wallabag:import:redis-worker --env=prod pocket -vv >> /path/to/wallabag/var/logs/redis-pocket.log
 
 # für den Readability-Import
-bin/console wallabag:import:redis-worker -e=prod readability -vv >> /path/to/wallabag/var/logs/redis-readability.log
+bin/console wallabag:import:redis-worker --env=prod readability -vv >> /path/to/wallabag/var/logs/redis-readability.log
 
 # für den Instapaper-Import
-bin/console wallabag:import:redis-worker -e=prod instapaper -vv >> /path/to/wallabag/var/logs/redis-instapaper.log
+bin/console wallabag:import:redis-worker --env=prod instapaper -vv >> /path/to/wallabag/var/logs/redis-instapaper.log
 
 # für den wallabag v1-Import
-bin/console wallabag:import:redis-worker -e=prod wallabag_v1 -vv >> /path/to/wallabag/var/logs/redis-wallabag_v1.log
+bin/console wallabag:import:redis-worker --env=prod wallabag_v1 -vv >> /path/to/wallabag/var/logs/redis-wallabag_v1.log
 
 # für den wallabag v2-Import
-bin/console wallabag:import:redis-worker -e=prod wallabag_v2 -vv >> /path/to/wallabag/var/logs/redis-wallabag_v2.log
+bin/console wallabag:import:redis-worker --env=prod wallabag_v2 -vv >> /path/to/wallabag/var/logs/redis-wallabag_v2.log
 
 # für den Firefox-Import
-bin/console wallabag:import:redis-worker -e=prod firefox -vv >> /path/to/wallabag/var/logs/redis-firefox.log
+bin/console wallabag:import:redis-worker --env=prod firefox -vv >> /path/to/wallabag/var/logs/redis-firefox.log
 
 # für den Chrome-Import
-bin/console wallabag:import:redis-worker -e=prod chrome -vv >> /path/to/wallabag/var/logs/redis-chrome.log
+bin/console wallabag:import:redis-worker --env=prod chrome -vv >> /path/to/wallabag/var/logs/redis-chrome.log
 ```
 
 Wenn du den Import nur für einige Artikel nutzen willst, kannst du die
@@ -156,5 +156,5 @@ Nummer festlegen (hier: 12) und der Consumer wird nach dem zwölften
 Artikel aufhören:
 
 ```bash
-bin/console wallabag:import:redis-worker -e=prod pocket -vv --maxIterations=12
+bin/console wallabag:import:redis-worker --env=prod pocket -vv --maxIterations=12
 ```

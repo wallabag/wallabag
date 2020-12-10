@@ -28,7 +28,7 @@ When you want to commit your changes, build them in production
 environment by using `yarn build:prod`. This will build all the
 assets needed for wallabag. To test that it properly works, you'll need
 to have a server in production mode, for instance with
-`bin/console server:run -e=prod`.
+`bin/console server:run --env=prod`.
 
 Don't forget to generate production builds before committing !
 

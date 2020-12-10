@@ -30,7 +30,7 @@ Lorsque vous committez vos changements, vous devez les compiler dans un
 environnement de production en exécutant `yarn build:prod`. Cela
 compilera tous les assets nécessaires pour wallabag. Pour tester que
 cela fonctionne proprement, vous devrez avoir un serveur en mode de
-production, par exemple avec `bin/console server:run -e=prod`.
+production, par exemple avec `bin/console server:run --env=prod`.
 
 N'oubliez pas de générer des fichiers en mode production avant de
 committer !
