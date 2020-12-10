@@ -1,4 +1,4 @@
-# Queries when upgrading from 2.2.x to 2.3.x
+# Queries when upgrading from 2.3.x to 2.4.x
 
 You'll find all queries to run when upgrading.
 
