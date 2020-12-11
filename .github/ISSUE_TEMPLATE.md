@@ -3,7 +3,7 @@
 ### Issue details
 
 Please provide issue details here.
-Remember, this is _not_ a place to ask questions. For that, go to https://community.wallabag.org/ (forum) or http://gitter.im/wallabag/wallabag (chat).
+Remember, this is _not_ a place to ask questions. For that, go to our chat at http://gitter.im/wallabag/wallabag or https://matrix.to/#/#wallabag_wallabag:gitter.im.
 
 ### Environment
 
