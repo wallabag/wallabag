@@ -2,11 +2,11 @@ security:
     login:
         page_title: 'Bem vindo ao wallabag!'
         keep_logged_in: 'Mantenha-me autenticado'
-        forgot_password: 'Esqueceu a senha?'
+        forgot_password: 'Esqueceu a sua palavra-passe?'
         submit: 'Login'
         register: 'Registe-se'
         username: 'Nome de utilizador'
-        password: 'Senha'
+        password: 'Palavra-passe'
         cancel: 'Cancelar'
     resetting:
         description: 'Digite o seu endereço de e-mail abaixo e enviaremos instruções para resetar a sua palavra-passe.'
@@ -50,7 +50,7 @@ config:
         settings: 'Configurações'
         rss: 'RSS'
         user_info: 'Informação do Utilizador'
-        password: 'Senha'
+        password: 'Palavra-passe'
         rules: 'Regras de tags'
         new_user: 'Adicionar um utilizador'
     form:
@@ -85,9 +85,9 @@ config:
         email_label: 'E-mail'
         twoFactorAuthentication_label: 'Autenticação de dois passos'
     form_password:
-        old_password_label: 'Senha atual'
-        new_password_label: 'Nova senha'
-        repeat_new_password_label: 'Repita a nova senha'
+        old_password_label: 'Palavra-passe atual'
+        new_password_label: 'Nova palavra-passe'
+        repeat_new_password_label: 'Repita a nova palavra-passe'
     form_rules:
         if_label: 'if'
         then_tag_as_label: 'então coloque a tag'
@@ -417,8 +417,8 @@ user:
     form:
         username_label: 'Nome de Utilizador'
         name_label: 'Nome'
-        password_label: 'Senha'
-        repeat_new_password_label: 'Repita a nova senha'
+        password_label: 'Palavra-passe'
+        repeat_new_password_label: 'Repita a nova palavra-passe'
         plain_password_label: '????'
         email_label: 'E-mail'
         enabled_label: 'Ativado'
