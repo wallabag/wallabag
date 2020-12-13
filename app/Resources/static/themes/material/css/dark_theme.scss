@@ -26,6 +26,7 @@
   }
 
   main #content,
+  table.striped > tbody > tr > td,
   #article article,
   #article article h1,
   #article article h2,
@@ -69,5 +70,9 @@
   .border-bottom,
   .collapsible {
     border-color: #222;
+  }
+
+  table.striped > tbody > tr:nth-child(2n+1) {
+    background-color: #0c0c0c;
   }
 }
