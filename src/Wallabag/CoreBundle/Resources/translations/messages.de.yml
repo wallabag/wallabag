@@ -20,7 +20,7 @@ menu:
         archive: Archiv
         all_articles: Alle Artikel
         config: Konfiguration
-        tags: Markierungen
+        tags: Tags
         internal_settings: Interne Einstellungen
         import: Importieren
         howto: How-To
@@ -60,7 +60,7 @@ config:
         rss: RSS
         user_info: Benutzerinformation
         password: Kennwort
-        rules: Markierungsregeln
+        rules: Tagging Regeln
         new_user: Benutzer hinzufügen
         reset: Zurücksetzen
         ignore_origin: Regeln fürs Ignorieren des Ursprungs
@@ -111,7 +111,7 @@ config:
         help_twoFactorAuthentication: Wenn du 2FA aktivierst, wirst du bei jedem Login einen Code per E-Mail bekommen.
         delete:
             title: Lösche mein Konto (a.k.a Gefahrenzone)
-            description: Wenn du dein Konto löschst, werden ALL deine Artikel, ALL deine Markierungen, ALL deine Anmerkungen und dein Konto dauerhaft gelöscht (kann NICHT RÜCKGÄNGIG gemacht werden). Du wirst anschließend abgemeldet.
+            description: Wenn du dein Konto löschst, werden ALL deine Artikel, ALL deine Tags, ALL deine Anmerkungen und dein Konto dauerhaft gelöscht (kann NICHT RÜCKGÄNGIG gemacht werden). Du wirst anschließend abgemeldet.
             confirm: Bist du wirklich sicher? (DIES KANN NICHT RÜCKGÄNGIG GEMACHT WERDEN)
             button: Lösche mein Konto
         two_factor:
@@ -129,7 +129,7 @@ config:
         title: Zurücksetzen (a.k.a Gefahrenzone)
         description: Beim Nutzen der folgenden Schaltflächenhast du die Möglichkeit, einige Informationen von deinem Konto zu entfernen. Sei dir bewusst, dass dies NICHT RÜCKGÄNGIG zu machen ist.
         annotations: Entferne ALLE Annotationen
-        tags: Entferne ALLE Markierungen
+        tags: Entferne ALLE Tags
         entries: Entferne ALLE Einträge
         archived: Entferne ALLE archivierten Einträge
         confirm: Bist du wirklich sicher? (DIES KANN NICHT RÜCKGÄNGIG GEMACHT WERDEN)
@@ -144,15 +144,15 @@ config:
         delete_rule_label: löschen
         edit_rule_label: bearbeiten
         rule_label: Regel
-        tags_label: Markierungen
+        tags_label: Tags
         faq:
             title: FAQ
-            tagging_rules_definition_title: Was bedeuten die „Markierungsregeln“?
-            tagging_rules_definition_description: Dies sind Regeln von wallabag, um neu hinzugefügte Einträge automatisch zu markieren.<br />Jedes Mal, wenn ein neuer Eintrag hinzugefügt wird, werden die Markierungsregeln angewandt. Dies erleichtert dir die Arbeit, deine Einträge manuell zu kategorisieren.
+            tagging_rules_definition_title: Was bedeuten die „Tagging-Regeln“?
+            tagging_rules_definition_description: Dies sind Regeln von wallabag, um neu hinzugefügte Einträge automatisch zu taggen.<br />Jedes Mal, wenn ein neuer Eintrag hinzugefügt wird, werden die Tagging-Regeln angewandt. Dies erleichtert dir die Arbeit, deine Einträge manuell zu kategorisieren.
             how_to_use_them_title: Wie nutze ich sie?
-            how_to_use_them_description: 'Nehmen wir an, du möchtest deine Einträge als „<i>schnell lesbar</i>“ markiert, wenn die Lesezeit kürzer als drei Minuten ist.<br />In diesem Fall solltest du „readingTime &lt;= 3“ in das Feld <i>Regel</i> und „<i>schnell lesbar</i>“ in das Feld <i>Markierungen</i> schreiben.<br />Mehrere Markierungen können gleichzeitig hinzugefügt werden, indem sie durch ein Komma getrennt werden: „<i>schnell lesbar, interessant</i>“.<br />Komplexe Regeln können durch vordefinierte Operatoren geschrieben werden: wenn „<i>readingTime &gt;= 5 AND domainName = "github.com"</i>“ dann markiere als „<i>länger lesen, GitHub</i>“'
+            how_to_use_them_description: 'Nehmen wir an, du möchtest deine Einträge als „<i>schnell lesbar</i>“ markiert, wenn die Lesezeit kürzer als drei Minuten ist.<br />In diesem Fall solltest du „readingTime &lt;= 3“ in das Feld <i>Regel</i> und „<i>schnell lesbar</i>“ in das Feld <i>Tags</i> schreiben.<br />Mehrere Tags können gleichzeitig hinzugefügt werden, indem sie durch ein Komma getrennt werden: „<i>schnell lesbar, interessant</i>“.<br />Komplexe Regeln können durch vordefinierte Operatoren geschrieben werden: wenn „<i>readingTime &gt;= 5 AND domainName = "github.com"</i>“ dann tagge als „<i>länger lesen, GitHub</i>“'
             variables_available_title: Welche Variablen und Operatoren kann ich benutzen, um Regeln zu schreiben?
-            variables_available_description: 'Die folgenden Variablen und Operatoren können genutzt werden, um Markierungsregeln zu erstellen:'
+            variables_available_description: 'Die folgenden Variablen und Operatoren können genutzt werden, um Tagging-Regeln zu erstellen:'
             meaning: Bedeutung
             variable_description:
                 label: Variable
@@ -180,11 +180,11 @@ config:
         export: Exportieren
         import_submit: Importieren
         card:
-            export_tagging_rules_detail: Dadurch wird eine JSON-Datei heruntergeladen, mit der du Markierungsegeln an anderer Stelle importieren oder sichern kannst.
+            export_tagging_rules_detail: Dadurch wird eine JSON-Datei heruntergeladen, mit der du Tagging-Regeln an anderer Stelle importieren oder sichern kannst.
             import_tagging_rules_detail: Du musst die zuvor exportierte JSON-Datei auswählen.
-            export_tagging_rules: Markierungsregeln exportieren
-            import_tagging_rules: Markierungsregeln importieren
-            new_tagging_rule: Markierungsregel erstellen
+            export_tagging_rules: Tagging-Regeln exportieren
+            import_tagging_rules: Tagging-Regeln importieren
+            new_tagging_rule: Tagging-Regel erstellen
         file_label: JSON-Datei
     otp:
         app:
@@ -234,7 +234,7 @@ entry:
         starred: Favorisierte Einträge
         archived: Archivierte Einträge
         filtered: Gefilterte Einträge
-        filtered_tags: 'Gefiltert nach Markierungen:'
+        filtered_tags: 'Gefiltert nach Tags:'
         filtered_search: 'Gefiltert nach Suche:'
         untagged: Nicht markierte Einträge
         all: Alle Einträge
@@ -243,7 +243,7 @@ entry:
         reading_time: geschätzte Lesezeit
         reading_time_minutes: 'geschätzte Lesezeit: %readingTime% min'
         reading_time_less_one_minute: 'geschätzte Lesezeit: &lt; 1 min'
-        number_of_tags: '{1}und eine andere Markierung|]1,Inf[und %count% andere Markierungen'
+        number_of_tags: '{1}und eine anderer Tag|]1,Inf[und %count% andere Tags'
         reading_time_minutes_short: '%readingTime% min'
         reading_time_less_one_minute_short: '&lt; 1 min'
         original_article: Originalartikel
@@ -285,7 +285,7 @@ entry:
             view_original_article: Originalartikel
             re_fetch_content: Inhalt neu laden
             delete: Löschen
-            add_a_tag: Markierung hinzufügen
+            add_a_tag: Tag hinzufügen
             share_content: Teilen
             share_email_label: E-Mail
             public_link: Öffentlicher Link
@@ -323,7 +323,7 @@ entry:
         shared_by_wallabag: Dieser Artikel wurde von %username% mittels <a href="%wallabag_instance%">wallabag</a> geteilt
     confirm:
         delete: Bist du sicher, dass du diesen Artikel löschen möchtest?
-        delete_tag: Bist du sicher, dass du diese Markierung vom Artikel entfernen möchtest?
+        delete_tag: Bist du sicher, dass du diesen Tag vom Artikel entfernen möchtest?
     metadata:
         reading_time: Geschätzte Lesezeit
         reading_time_minutes_short: '%readingTime% min'
@@ -393,7 +393,7 @@ howto:
         go_starred: Zu Favoriten gehen
         go_archive: Zu archivierten gehen
         go_all: Zu allen Artikel gehen
-        go_tags: Zu den Markierungen gehen
+        go_tags: Zu den Tags gehen
         go_config: Einstellungen öffnen
         go_import: Import-Sektion öffnen
         go_developers: Zur Entwickler-Seite gehen
@@ -466,15 +466,15 @@ quickstart:
         email: Über E-Mail
         gitter: Auf Gitter
 tag:
-    page_title: Markierungen
+    page_title: Tags
     list:
-        number_on_the_page: '{0} Es gibt keine Markierungen.|{1} Es gibt eine Markierung.|]1,Inf[ Es gibt %count% Markierungen.'
+        number_on_the_page: '{0} Es gibt keine Tags.|{1} Es gibt einen Tag.|]1,Inf[ Es gibt %count% Tags.'
         see_untagged_entries: Zeige nicht markierte Einträge
         untagged: Nicht markierte Einträge
         no_untagged_entries: Es gibt keine nicht markierte Einträge.
     new:
         add: Hinzufügen
-        placeholder: Du kannst verschiedene Markierungen, getrennt von einem Komma, hinzufügen.
+        placeholder: Du kannst verschiedene Tags, getrennt von einem Komma, hinzufügen.
 export:
     footer_template: <div style="text-align:center;"><p>Generiert von wallabag mit Hilfe von %method%</p><p>Bitte öffne <a href="https://github.com/wallabag/wallabag/issues">ein Ticket</a> wenn du ein Problem mit der Darstellung von diesem E-Book auf deinem Gerät hast.</p></div>
     unknown: Unbekannt
@@ -638,11 +638,11 @@ flashes:
             password_not_updated_demo: Im Testmodus kannst du das Kennwort nicht ändern.
             user_updated: Information aktualisiert
             rss_updated: RSS-Informationen aktualisiert
-            tagging_rules_updated: Markierungsregeln aktualisiert
-            tagging_rules_deleted: Markierungsregel gelöscht
+            tagging_rules_updated: Tagging-Regeln aktualisiert
+            tagging_rules_deleted: Tagging-Regel gelöscht
             rss_token_updated: RSS-Token aktualisiert
             annotations_reset: Anmerkungen zurücksetzen
-            tags_reset: Markierungen zurücksetzen
+            tags_reset: Tags zurücksetzen
             entries_reset: Einträge zurücksetzen
             archived_reset: Archiverte Einträge zurücksetzen
             ignore_origin_rules_deleted: Regel fürs Ignorieren des Ursprungs gelöscht
@@ -652,8 +652,8 @@ flashes:
             feed_updated: Feed-Informationen aktualisiert
             otp_disabled: Zwei-Faktor-Authentifizierung deaktiviert
             otp_enabled: Zwei-Faktor-Authentifizierung aktiviert
-            tagging_rules_not_imported: Fehler beim Importieren von Markierungsregeln
-            tagging_rules_imported: Markierungsregeln importiert
+            tagging_rules_not_imported: Fehler beim Importieren von Tagging-Regeln
+            tagging_rules_imported: Tagging-Regeln importiert
     entry:
         notice:
             entry_already_saved: Eintrag bereits am %date% gespeichert
@@ -670,8 +670,8 @@ flashes:
             no_random_entry: Es wurde kein Artikel mit diesen Kriterien gefunden
     tag:
         notice:
-            tag_added: Markierung hinzugefügt
-            tag_renamed: Markierung umbenannt
+            tag_added: Tag hinzugefügt
+            tag_renamed: Tag umbenannt
     import:
         notice:
             failed: Import fehlgeschlagen, bitte erneut probieren.
