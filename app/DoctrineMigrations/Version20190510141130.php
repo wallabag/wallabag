@@ -64,8 +64,10 @@ final class Version20190510141130 extends WallabagMigration
                 $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_access_tokens') . ' DROP FOREIGN KEY FK_368A4209A76ED395');
                 $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_access_tokens') . ' ADD CONSTRAINT FK_368A4209A76ED395 FOREIGN KEY (user_id) REFERENCES ' . $this->getTable('user') . ' (id) ON DELETE CASCADE');
 
-                $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_clients') . ' DROP FOREIGN KEY IDX_user_oauth_client');
-                $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_clients') . ' ADD CONSTRAINT FK_635D765EA76ED395 FOREIGN KEY (user_id) REFERENCES ' . $this->getTable('user') . ' (id)');
+                if ($schema->getTable($this->getTable('oauth2_clients'))->hasForeignKey('IDX_user_oauth_client')) {
+                    $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_clients') . ' DROP FOREIGN KEY IDX_user_oauth_client');
+                    $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_clients') . ' ADD CONSTRAINT FK_635D765EA76ED395 FOREIGN KEY (user_id) REFERENCES ' . $this->getTable('user') . ' (id)');
+                }
 
                 $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_refresh_tokens') . ' DROP FOREIGN KEY FK_20C9FB24A76ED395');
                 $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_refresh_tokens') . ' ADD CONSTRAINT FK_20C9FB24A76ED395 FOREIGN KEY (user_id) REFERENCES ' . $this->getTable('user') . ' (id) ON DELETE CASCADE');
