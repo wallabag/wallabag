@@ -19,8 +19,8 @@ config:
         help_reading_speed: wallabag berekend een leestijd voor ieder artikel. U kan hier aangeven of u een snelle of langzame lezer bent waardoor wallabag een accurate tijd kan berekenen per artikel.
         help_items_per_page: U kan de hoeveelheid getoonde artikelen per pagina aanpassen.
         help_theme: wallabag is aanpasbaar. U can uw gewenste thema hier selecteren.
-        android_instruction: Tik hier om uw Android-applicatie vooraf in te vullen
-        android_configuration: Configureer uw android applicatie
+        android_instruction: Tik hier om uw Android-appvooraf in te vullen
+        android_configuration: Configureer uw Android-applicatie
         pocket_consumer_key_label: Consumer key voor Pocket om inhoud te importeren
     form:
         save: Opslaan
@@ -100,7 +100,7 @@ config:
             variables_available_description: 'De volgende variabelen en operatoren kunnen gebruikt worden om label regels te maken:'
             variables_available_title: Welke variabelen en operatoren kan ik gebruiken om regels te schrijven?
             how_to_use_them_title: Hoe gebruik is ze?
-            tagging_rules_definition_title: Wat betekend « label regels »?
+            tagging_rules_definition_title: Wat betekend "label regels"?
             title: FAQ
             how_to_use_them_description: 'Laten we aannemen dat u nieuwe vermeldingen wilt labelen als « <i>korte lezing</i> » wanneer de leestijd minder dan 3 minuten bedraagt.<br />In dat geval moet u « readingTime &lt;= 3 » in het <i>Regelveld</i> en « <i>korte lezing</i> » in het <i>Labels</i> veld.<br />Meerdere labels kunnen tegelijkertijd worden toegevoegd door ze te scheiden met een komma:« <i>korte lezing, belangrijk</i> »<br />Complexe regels kunnen worden geschreven met behulp van vooraf gedefinieerde operators: if « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » label dan als« <i>lange lezing, GitHub </i> »'
         tags_label: Labels
@@ -142,7 +142,7 @@ config:
         page_title: Twee-factor authenticatie
     form_ignore_origin_rules:
         faq:
-            ignore_origin_rules_definition_title: Wat betekend « Negeer oorsprong regels »?
+            ignore_origin_rules_definition_title: Wat betekent “negeer oorsprong regels”?
             operator_description:
                 matches: 'Test of een <i>onderwerp</i> overeenkomt met een <i>zoekopdracht</i> (niet hoofdlettergevoelig). <br />Voorbeeld: <code>_all ~ "https?: //rss.example.com/ foobar /.* "</code>'
                 equal_to: Gelijk aan…
@@ -209,6 +209,9 @@ menu:
         unread: Ongelezen
         ignore_origin_instance_rules: Globaal negeer-oorsprongsregels
         quickstart: Snelstart
+        theme_toggle_auto: Automatisch thema
+        theme_toggle_dark: Donker thema
+        theme_toggle_light: Licht thema
 security:
     login:
         password: Wachtwoord
@@ -216,7 +219,7 @@ security:
         username: Gebruikersnaam
         register: Registreer
         page_title: Welkom bij wallabag!
-        submit: Login
+        submit: Aanmelden
         forgot_password: Wachtwoord vergeten?
         keep_logged_in: Houdt mij ingelogd
     register:
@@ -622,6 +625,10 @@ entry:
             set_as_read: Markeer als gelezen
             back_to_homepage: Terug
             back_to_top: Terug naar boven
+            theme_toggle_auto: Automatisch
+            theme_toggle_dark: Donker
+            theme_toggle_light: Licht
+            theme_toggle: Schakel tussen thema's
     metadata:
         added_on: Toegevoegd op
         address: Adres
