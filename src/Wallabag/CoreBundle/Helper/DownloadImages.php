@@ -37,6 +37,11 @@ class DownloadImages
         $this->setFolder();
     }
 
+    public function getBaseFolder()
+    {
+        return $this->baseFolder;
+    }
+
     /**
      * Process the html and extract images URLs from it.
      *
@@ -211,6 +216,29 @@ class DownloadImages
     }
 
     /**
+     * Generate the folder where we are going to save images based on the entry url.
+     *
+     * @param int  $entryId      ID of the entry
+     * @param bool $createFolder Should we create the folder for the given id?
+     *
+     * @return string
+     */
+    public function getRelativePath($entryId, $createFolder = true)
+    {
+        $hashId = hash('crc32', $entryId);
+        $relativePath = $hashId[0] . '/' . $hashId[1] . '/' . $hashId;
+        $folderPath = $this->baseFolder . '/' . $relativePath;
+
+        if (!file_exists($folderPath) && $createFolder) {
+            mkdir($folderPath, 0777, true);
+        }
+
+        $this->logger->debug('DownloadImages: Folder used for that Entry id', ['folder' => $folderPath, 'entryId' => $entryId]);
+
+        return $relativePath;
+    }
+
+    /**
      * Get images urls from the srcset image attribute.
      *
      * @return array An array of urls
@@ -252,28 +280,6 @@ class DownloadImages
         if (!file_exists($this->baseFolder)) {
             mkdir($this->baseFolder, 0755, true);
         }
-    }
-
-    /**
-     * Generate the folder where we are going to save images based on the entry url.
-     *
-     * @param int $entryId ID of the entry
-     *
-     * @return string
-     */
-    private function getRelativePath($entryId)
-    {
-        $hashId = hash('crc32', $entryId);
-        $relativePath = $hashId[0] . '/' . $hashId[1] . '/' . $hashId;
-        $folderPath = $this->baseFolder . '/' . $relativePath;
-
-        if (!file_exists($folderPath)) {
-            mkdir($folderPath, 0777, true);
-        }
-
-        $this->logger->debug('DownloadImages: Folder used for that Entry id', ['folder' => $folderPath, 'entryId' => $entryId]);
-
-        return $relativePath;
     }
 
     /**
