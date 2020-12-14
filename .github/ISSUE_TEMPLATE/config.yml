@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Want to ask something?
+    url: https://gitter.im/wallabag/wallabag
+    about: Use Gitter to ask questions.
