@@ -1362,7 +1362,7 @@ class EntryControllerTest extends WallabagCoreTestCase
     {
         return [
             'ru' => [
-                'https://www.pravda.ru/world/09-06-2017/1337283-qatar-0/',
+                'https://www.vtimes.io/2020/12/14/ubiistvo-kotorogo-ne-bilo-a1981',
                 'ru',
             ],
             'fr' => [
