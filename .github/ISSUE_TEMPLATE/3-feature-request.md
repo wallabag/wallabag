@@ -7,6 +7,12 @@ assignees: ''
 
 ---
 
+<!--
+Thank you for suggesting an idea to make wallabag better.
+
+Please fill in as much of the template below as you're able.
+-->
+
 **Is your feature request related to a problem? Please describe.**
 A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
 
