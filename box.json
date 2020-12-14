@@ -1,0 +1,10 @@
+{
+    "main": "web/app.php",
+    "blacklist": [
+        "docker",
+        "scripts",
+        "tests"
+    ],
+    "output": "wallabag.phar",
+    "compression": "GZ"
+}
