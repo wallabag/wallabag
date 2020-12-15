@@ -26,9 +26,14 @@ Parameters:   Paste the content of your app/config/parameters.yml (hide sensitiv
 * **PHP version**:
 * **OS**:
 * **Database**:
-* **Parameters**: <details>
-  <summary>Your `app/config/parameters.yml` below</summary>
+* **Parameters**:
+
+<details>
+  <summary>My <code>app/config/parameters.yml</code> is:</summary>
+
+  ```
   PASTE HERE
+  ```
 </details>
 
 ### What steps will reproduce the bug?
