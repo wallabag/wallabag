@@ -104,7 +104,7 @@ class DownloadImages
      * @param string $url          Url from where the image were found
      * @param string $relativePath Relative local path to saved the image
      *
-     * @return string Relative url to access the image from the web
+     * @return string|false Relative url to access the image from the web
      */
     public function processSingleImage($entryId, $imagePath, $url, $relativePath = null)
     {
