@@ -76,7 +76,7 @@ parameters:
 
 | Nom  | Description | Valeur par défaut |
 | -----|-------------|-------- |
-| mailer_transport | Méthode de transport exacte utilisée pour envoyer des emails. Les valeurs correctes sont : `smtp`, `gmail`, `mail`, `sendmail`, `null` (ce qui désactivera l'envoi des emails) | smtp |
+| mailer_transport | Méthode de transport exacte utilisée pour envoyer des emails. Les valeurs correctes sont : `smtp`, `gmail`, `sendmail`, `null` (ce qui désactivera l'envoi des emails) | smtp |
 | mailer_user | Utilisateur `smtp`. | ~ |
 | mailer_password | Mot de passe de cet utilisateur. | ~ |
 | mailer_host | Hôte sur lequel se connecter quand on utilise `smtp` comme transport. | 127.0.0.1 |
