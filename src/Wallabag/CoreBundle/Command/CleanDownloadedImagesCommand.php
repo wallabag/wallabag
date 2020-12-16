@@ -8,14 +8,16 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
+use Wallabag\CoreBundle\Helper\DownloadImages;
 use Wallabag\UserBundle\Entity\User;
 
 class CleanDownloadedImagesCommand extends ContainerAwareCommand
 {
     /** @var SymfonyStyle */
     protected $io;
-
     protected $deleted = 0;
+    /** @var DownloadImages */
+    protected $downloadImages;
 
     protected function configure()
     {
@@ -44,8 +46,23 @@ class CleanDownloadedImagesCommand extends ContainerAwareCommand
             $this->io->text('Dry run mode <info>enabled</info> (no images will be removed)');
         }
 
+        $this->downloadImages = $this->getContainer()->get('wallabag_core.entry.download_images');
+
+        // retrieve _existing_ folders in the image folder
+        $finder = new Finder();
+        $finder
+            ->directories()
+            ->ignoreDotFiles(true)
+            ->depth(2)
+            ->in($this->downloadImages->getBaseFolder());
+
+        $existingPaths = [];
+        foreach ($finder as $file) {
+            $existingPaths[] = $file->getFilename();
+        }
+
         foreach ($users as $user) {
-            $this->clean($user, $dryRun);
+            $this->clean($user, $existingPaths, $dryRun);
         }
 
         $this->io->success(sprintf('Finished cleaning. %d deleted images', $this->deleted));
@@ -53,45 +70,27 @@ class CleanDownloadedImagesCommand extends ContainerAwareCommand
         return 0;
     }
 
-    private function clean(User $user, bool $dryRun)
+    private function clean(User $user, array $existingPaths, bool $dryRun)
     {
         $this->io->text(sprintf('Processing user <info>%s</info>', $user->getUsername()));
 
         $repo = $this->getContainer()->get('wallabag_core.entry_repository');
-        $downloadImages = $this->getContainer()->get('wallabag_core.entry.download_images');
-        $baseFolder = $downloadImages->getBaseFolder();
-
+        $baseFolder = $this->downloadImages->getBaseFolder();
         $entries = $repo->findAllEntriesIdByUserId($user->getId());
 
         $deletedCount = 0;
 
-        // first retrieve _valid_ folders from existing entries
-        $hashToId = [];
+        // retrieve _valid_ folders from existing entries
         $validPaths = [];
         foreach ($entries as $entry) {
-            $path = $downloadImages->getRelativePath($entry['id']);
+            $path = $this->downloadImages->getRelativePath($entry['id']);
 
             if (!file_exists($baseFolder . '/' . $path)) {
                 continue;
             }
 
             // only store the hash, not the full path
-            $hash = explode('/', $path)[2];
-            $validPaths[] = $hash;
-            $hashToId[$hash] = $entry['id'];
-        }
-
-        // then retrieve _existing_ folders in the image folder
-        $finder = new Finder();
-        $finder
-            ->directories()
-            ->ignoreDotFiles(true)
-            ->depth(2)
-            ->in($baseFolder);
-
-        $existingPaths = [];
-        foreach ($finder as $file) {
-            $existingPaths[] = $file->getFilename();
+            $validPaths[] = explode('/', $path)[2];
         }
 
         // check if existing path are valid, if not, remove all images and the folder
