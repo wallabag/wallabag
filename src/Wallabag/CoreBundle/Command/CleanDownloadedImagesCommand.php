@@ -2,10 +2,9 @@
 
 namespace Wallabag\CoreBundle\Command;
 
-use Doctrine\ORM\NoResultException;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
@@ -23,10 +22,11 @@ class CleanDownloadedImagesCommand extends ContainerAwareCommand
         $this
             ->setName('wallabag:clean-downloaded-images')
             ->setDescription('Cleans downloaded images which are no more associated to an entry')
-            ->addArgument(
-                'username',
-                InputArgument::OPTIONAL,
-                'User to clean'
+            ->addOption(
+               'dry-run',
+               null,
+               InputOption::VALUE_NONE,
+               'Do not remove images, just dump counters'
             );
     }
 
@@ -34,34 +34,26 @@ class CleanDownloadedImagesCommand extends ContainerAwareCommand
     {
         $this->io = new SymfonyStyle($input, $output);
 
-        $username = $input->getArgument('username');
+        $dryRun = (bool) $input->getOption('dry-run');
 
-        if ($username) {
-            try {
-                $user = $this->getContainer()->get('wallabag_user.user_repository')->findOneByUserName($username);
-                $this->clean($user);
-            } catch (NoResultException $e) {
-                $this->io->error(sprintf('User "%s" not found.', $username));
+        $users = $this->getContainer()->get('wallabag_user.user_repository')->findAll();
 
-                return 1;
-            }
+        $this->io->text(sprintf('Cleaning through <info>%d</info> user accounts', \count($users)));
 
-            $this->io->success('Finished cleaning.');
-        } else {
-            $users = $this->getContainer()->get('wallabag_user.user_repository')->findAll();
-
-            $this->io->text(sprintf('Cleaning through <info>%d</info> user accounts', \count($users)));
-
-            foreach ($users as $user) {
-                $this->clean($user);
-            }
-            $this->io->success(sprintf('Finished cleaning. %d deleted images', $this->deleted));
+        if ($dryRun) {
+            $this->io->text('Dry run mode <info>enabled</info> (no images will be removed)');
         }
+
+        foreach ($users as $user) {
+            $this->clean($user, $dryRun);
+        }
+
+        $this->io->success(sprintf('Finished cleaning. %d deleted images', $this->deleted));
 
         return 0;
     }
 
-    private function clean(User $user)
+    private function clean(User $user, bool $dryRun)
     {
         $this->io->text(sprintf('Processing user <info>%s</info>', $user->getUsername()));
 
@@ -106,13 +98,16 @@ class CleanDownloadedImagesCommand extends ContainerAwareCommand
         foreach ($existingPaths as $existingPath) {
             if (!\in_array($existingPath, $validPaths, true)) {
                 $fullPath = $baseFolder . '/' . $existingPath[0] . '/' . $existingPath[1] . '/' . $existingPath;
-                $res = array_map('unlink', glob($fullPath . '/*.*'));
+                $files = glob($fullPath . '/*.*');
 
-                rmdir($fullPath);
+                if (!$dryRun) {
+                    array_map('unlink', $files);
+                    rmdir($fullPath);
+                }
 
-                $deletedCount += \count($res);
+                $deletedCount += \count($files);
 
-                $this->io->text(sprintf('Deleted images in <info>%s</info>: <info>%d</info>', $existingPath, \count($res)));
+                $this->io->text(sprintf('Deleted images in <info>%s</info>: <info>%d</info>', $existingPath, \count($files)));
             }
         }
 
