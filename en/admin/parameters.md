@@ -75,7 +75,7 @@ parameters:
 
 | Name | Description | Default |
 | -----|-------------|-------- |
-| mailer_transport | The exact transport method to use to deliver emails. Valid values are: `smtp`, `gmail`, `mail`, `sendmail`, `null` (which will disable the mailer) | smtp |
+| mailer_transport | The exact transport method to use to deliver emails. Valid values are: `smtp`, `gmail`, `sendmail`, `null` (which will disable the mailer) | smtp |
 | mailer_user | The username when using `smtp` as the transport. | ~ |
 | mailer_password | The password when using `smtp` as the transport. | ~ |
 | mailer_host | The host to connect to when using `smtp` as the transport.| 127.0.0.1 |

@@ -73,7 +73,7 @@ parameters:
 
 | Name  | Beschreibung | Standardwert |
 | -----|-------------|-------- |
-| mailer_transport | Die exakte Transportmethode, um E-Mails zuzustellen. Gültige Werte sind: smtp, gmail, mail, sendmail, null (was das Mailen deaktivert) | smtp |
+| mailer_transport | Die exakte Transportmethode, um E-Mails zuzustellen. Gültige Werte sind: `smtp`, `gmail`, `sendmail`, `null` (was das Mailen deaktivert) | smtp |
 | mailer_host | Der Host, zu dem sich verbunden wird, wenn SMTP als Transport genutzt wird. | 127.0.0.1 |
 | mailer_user | Der Benutzername, wenn SMTP als Transport genutzt wird. | ~ |
 | mailer_password | Das Passwort, wenn SMTP als Transport genutzt wird. | ~ |
