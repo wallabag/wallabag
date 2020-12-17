@@ -12,7 +12,7 @@ ausführst.
 Jedes Kommando hat eine Hilfefunktion, die durch
 `bin/console help %kommando%` einsehbar ist.
 
-> Wenn du in einer produktiven Umgebung bist, denke daran, `-e prod` zu
+> Wenn du in einer produktiven Umgebung bist, denke daran, `--env=prod` zu
 jedem Kommando hinzuzufügen.
 
 Wichtige Kommandos

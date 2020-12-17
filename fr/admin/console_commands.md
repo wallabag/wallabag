@@ -10,7 +10,7 @@ Chaque commande a une aide correspondante accessible via
 <div class="admonition note">
 
 Si vous êtes dans un environnement de production, souvenez-vous
-d'ajouter `-e prod` à chaque commande.
+d'ajouter `--env=prod` à chaque commande.
 
 </div>
 

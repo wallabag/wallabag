@@ -7,7 +7,7 @@ folder.
 
 Each command has a help accessible through `bin/console help %command%`.
 
-> If you're in a production environment, remember to add `-e prod` to each
+> If you're in a production environment, remember to add `--env=prod` to each
 command.
 
 Notable commands
@@ -28,15 +28,32 @@ From Symfony:
 
 Custom to wallabag:
 
+ - `wallabag:clean-downloaded-images`: Cleans downloaded images which are no more associated to an entry
  - `wallabag:clean-duplicates`: Removes all entry duplicates for one user or all users
+ - `wallabag:entry:reload`: Reload entries.
  - `wallabag:export`: Exports all entries for a user. You can choose the output path of the file.
+ - `wallabag:generate-hashed-urls`: Generates hashed urls for each entry
  - `wallabag:import`: Import entries to different formats to a user account.
  - `wallabag:import:redis-worker`: Useful if you use Redis.
  - `wallabag:install`: (re)Install wallabag
  - `wallabag:tag:all`: Tag all entries for a user using his/her tagging rules.
  - `wallabag:user:show`: Shows the details for a user.
  - `wallabag:user:list`: List all existing users.
- - `wallabag:entry:reload`: Reload entries.
+
+wallabag:clean-downloaded-images
+-------------------------
+
+This command cleans downloaded images which are no more associated to an entry. This is useful if you enabled "Download images locally" before 2.4.0 because there were a bug in removing images from an entry when you removed that entry.
+
+Usage:
+
+```
+wallabag:clean-downloaded-images
+```
+
+Options:
+ - `--dry-run`: Don't remove images, just dump number of images which might be removed
+
 
 wallabag:clean-duplicates
 -------------------------
@@ -54,6 +71,21 @@ Arguments:
  - username: User to clean
 
 
+wallabag:entry:reload
+---------------------
+
+This command reload entries.
+
+Usage:
+
+```
+wallabag:entry:reload [<username>]
+```
+
+Arguments:
+ - username: Reload entries only for the given user.
+
+
 wallabag:export
 ---------------
 
@@ -69,6 +101,22 @@ Arguments:
 
  - username: User from which to export entries
  - filepath: Path of the exported file
+
+
+wallabag:generate-hashed-urls
+---------------
+
+This command helps you to generates hashes of the url of each entry, to check through API if an URL is already saved. Only available since 2.4.0.
+
+Usage:
+
+```
+wallabag:generate-hashed-urls <username>
+```
+
+Arguments:
+
+ - username: User to process entries
 
 
 wallabag:import
@@ -155,7 +203,7 @@ wallabag:user:show <username>
 
 Arguments:
  - username: User to show details for.
- 
+
 
 wallabag:user:list
 ------------------
@@ -173,18 +221,3 @@ Arguments:
 
 Options:
  - `--limit=LIMIT`: Max number of users displayed in the list
-
-
-wallabag:entry:reload
----------------------
-
-This command reload entries.
-
-Usage:
-
-```
-wallabag:entry:reload [<username>]
-```
-
-Arguments:
- - username: Reload entries only for the given user.
