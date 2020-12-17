@@ -9,7 +9,7 @@ wallabag possiede alcuni comandi CLI per gestire alcuni compiti. Potete elencare
 
 Ogni comando ha un aiuto corrispondente accessibile attraverso `bin/console help %command%`.
 
-> Se siete in una ambiente di produzione, ricordate di aggiungere `-e prod` ad ogni comando.
+> Se siete in una ambiente di produzione, ricordate di aggiungere `--env=prod` ad ogni comando.
 
 Comandi rilevanti
 -----------------------
