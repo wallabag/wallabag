@@ -2242,16 +2242,16 @@
         },
         {
             "name": "friendsofsymfony/rest-bundle",
-            "version": "2.8.3",
+            "version": "2.8.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle.git",
-                "reference": "2000204f4ac6bf5515222fc5d9be1652ed138e8f"
+                "reference": "d60e0ba3cc1f3dce11cedf65d8535cb17c506bd3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/2000204f4ac6bf5515222fc5d9be1652ed138e8f",
-                "reference": "2000204f4ac6bf5515222fc5d9be1652ed138e8f",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/d60e0ba3cc1f3dce11cedf65d8535cb17c506bd3",
+                "reference": "d60e0ba3cc1f3dce11cedf65d8535cb17c506bd3",
                 "shasum": ""
             },
             "require": {
@@ -2269,7 +2269,7 @@
                 "symfony/routing": "^3.4|^4.3",
                 "symfony/security-core": "^3.4|^4.3",
                 "willdurand/jsonp-callback-validator": "^1.0",
-                "willdurand/negotiation": "^2.0"
+                "willdurand/negotiation": "^2.0|^3.0"
             },
             "conflict": {
                 "doctrine/inflector": "1.4.0",
@@ -2289,7 +2289,7 @@
                 "symfony/css-selector": "^3.4|^4.3",
                 "symfony/expression-language": "^3.4|^4.3",
                 "symfony/form": "^3.4|^4.3",
-                "symfony/phpunit-bridge": "^4.1.8",
+                "symfony/phpunit-bridge": "^5.2",
                 "symfony/security-bundle": "^3.4|^4.3",
                 "symfony/serializer": "^3.4|^4.3",
                 "symfony/templating": "^3.4|^4.3",
@@ -2344,7 +2344,7 @@
             "keywords": [
                 "rest"
             ],
-            "time": "2020-09-10T06:51:53+00:00"
+            "time": "2020-12-10T19:24:58+00:00"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -10678,28 +10678,28 @@
         },
         {
             "name": "willdurand/negotiation",
-            "version": "v2.3.1",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/Negotiation.git",
-                "reference": "03436ededa67c6e83b9b12defac15384cb399dc9"
+                "reference": "04e14f38d4edfcc974114a07d2777d90c98f3d9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/Negotiation/zipball/03436ededa67c6e83b9b12defac15384cb399dc9",
-                "reference": "03436ededa67c6e83b9b12defac15384cb399dc9",
+                "url": "https://api.github.com/repos/willdurand/Negotiation/zipball/04e14f38d4edfcc974114a07d2777d90c98f3d9c",
+                "reference": "04e14f38d4edfcc974114a07d2777d90c98f3d9c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0"
+                "php": ">=7.1.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.5"
+                "symfony/phpunit-bridge": "^5.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.3-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -10726,7 +10726,7 @@
                 "header",
                 "negotiation"
             ],
-            "time": "2017-05-14T17:21:12+00:00"
+            "time": "2020-09-25T08:01:41+00:00"
         }
     ],
     "packages-dev": [
