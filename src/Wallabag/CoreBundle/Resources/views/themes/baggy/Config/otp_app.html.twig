@@ -13,7 +13,7 @@
             <p>
                 <img id="2faQrcode" class="hide-on-med-and-down" />
                 <script>
-                    document.getElementById('2faQrcode').src = jrQrcode.getQrBase64('{{ qr_code }}');
+                    document.getElementById('2faQrcode').src = jrQrcode.getQrBase64('{{ qr_code|raw }}');
                 </script>
             </p>
         </li>
