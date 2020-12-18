@@ -2242,16 +2242,16 @@
         },
         {
             "name": "friendsofsymfony/rest-bundle",
-            "version": "2.8.4",
+            "version": "2.8.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSRestBundle.git",
-                "reference": "d60e0ba3cc1f3dce11cedf65d8535cb17c506bd3"
+                "reference": "09e01fa59e927a12baa98472b1ec8ad7aa857a0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/d60e0ba3cc1f3dce11cedf65d8535cb17c506bd3",
-                "reference": "d60e0ba3cc1f3dce11cedf65d8535cb17c506bd3",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/09e01fa59e927a12baa98472b1ec8ad7aa857a0e",
+                "reference": "09e01fa59e927a12baa98472b1ec8ad7aa857a0e",
                 "shasum": ""
             },
             "require": {
@@ -2344,7 +2344,7 @@
             "keywords": [
                 "rest"
             ],
-            "time": "2020-12-10T19:24:58+00:00"
+            "time": "2020-12-17T13:19:05+00:00"
         },
         {
             "name": "friendsofsymfony/user-bundle",
