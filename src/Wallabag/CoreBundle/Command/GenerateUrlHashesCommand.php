@@ -59,7 +59,7 @@ class GenerateUrlHashesCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $repo = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entry');
 
-        $entries = $repo->findByUser($user->getId());
+        $entries = $repo->findByEmptyHashedUrlAndUserId($user->getId());
 
         $i = 1;
         foreach ($entries as $entry) {
