@@ -11664,16 +11664,16 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.25.0",
+            "version": "v1.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "6d2da12632f5c8b9aa7b159f0bb46f245289434a"
+                "reference": "9dcdb6c7f274e8f1645f5adf32b53d05f124d24e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/6d2da12632f5c8b9aa7b159f0bb46f245289434a",
-                "reference": "6d2da12632f5c8b9aa7b159f0bb46f245289434a",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/9dcdb6c7f274e8f1645f5adf32b53d05f124d24e",
+                "reference": "9dcdb6c7f274e8f1645f5adf32b53d05f124d24e",
                 "shasum": ""
             },
             "require": {
@@ -11744,7 +11744,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-12-07T14:47:57+00:00"
+            "time": "2020-12-17T19:59:08+00:00"
         },
         {
             "name": "symfony/phpunit-bridge",
