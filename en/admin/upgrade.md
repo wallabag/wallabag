@@ -16,6 +16,8 @@ But **first**, ensure you have `composer` installed on your server (or at least 
 
 Same steps as for [upgrading from 2.2.x to 2.3.x](#upgrading-from-22x-to-23x).
 
+For shared hosting , run the [specific data queries](./query-upgrade-23-24.md) on the database.
+
 ## Upgrading from 2.3.x to 2.3.y
 
 ```bash
