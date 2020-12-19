@@ -20,6 +20,10 @@
                                     document.getElementById('2faQrcode').src = jrQrcode.getQrBase64('{{ qr_code }}');
                                 </script>
                             </p>
+
+                            <p>
+                                {{ 'config.otp.app.two_factor_code_description_5'|trans }} <pre>{{ secret }}</pre>
+                            </p>
                         </li>
                         <li>
                             <p>{{ 'config.otp.app.two_factor_code_description_3'|trans }}</p>

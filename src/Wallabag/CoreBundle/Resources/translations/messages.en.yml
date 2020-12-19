@@ -209,6 +209,7 @@ config:
             two_factor_code_description_2: 'You can scan that QR Code with your app:'
             two_factor_code_description_3: 'Also, save these backup codes in a safe place, you can use them in case you lose access to your OTP app:'
             two_factor_code_description_4: 'Test an OTP code from your configured app:'
+            two_factor_code_description_5: "If you can't see the QR Code or can't scan it, enter the following secret in your app:"
             cancel: Cancel
             enable: Enable
 entry:
