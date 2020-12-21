@@ -11224,16 +11224,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.10.3",
+            "version": "v4.10.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "dbe56d23de8fcb157bbc0cfb3ad7c7de0cfb0984"
+                "reference": "c6d052fc58cb876152f89f532b95a8d7907e7f0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/dbe56d23de8fcb157bbc0cfb3ad7c7de0cfb0984",
-                "reference": "dbe56d23de8fcb157bbc0cfb3ad7c7de0cfb0984",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/c6d052fc58cb876152f89f532b95a8d7907e7f0e",
+                "reference": "c6d052fc58cb876152f89f532b95a8d7907e7f0e",
                 "shasum": ""
             },
             "require": {
@@ -11272,7 +11272,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2020-12-03T17:45:45+00:00"
+            "time": "2020-12-20T10:01:03+00:00"
         },
         {
             "name": "php-cs-fixer/diff",
@@ -11666,16 +11666,16 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.26.0",
+            "version": "v1.26.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "9dcdb6c7f274e8f1645f5adf32b53d05f124d24e"
+                "reference": "0f1d3ed2584349dc8700d7908e8a92b3742b1c99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/9dcdb6c7f274e8f1645f5adf32b53d05f124d24e",
-                "reference": "9dcdb6c7f274e8f1645f5adf32b53d05f124d24e",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/0f1d3ed2584349dc8700d7908e8a92b3742b1c99",
+                "reference": "0f1d3ed2584349dc8700d7908e8a92b3742b1c99",
                 "shasum": ""
             },
             "require": {
@@ -11746,7 +11746,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-12-17T19:59:08+00:00"
+            "time": "2020-12-18T17:08:39+00:00"
         },
         {
             "name": "symfony/phpunit-bridge",
