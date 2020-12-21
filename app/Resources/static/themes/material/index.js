@@ -58,7 +58,7 @@ function darkTheme() {
     },
 
     exists() {
-      return document.cookie.split(';').map((cookie) => cookie.split('=')).filter((cookie) => cookie[0] === 'theme').length;
+      return document.cookie.split(';').some((cookie) => cookie.trim().startsWith(`${this.name}=`));
     },
   };
   const preferedColorScheme = {
