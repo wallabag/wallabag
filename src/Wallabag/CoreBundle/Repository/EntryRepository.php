@@ -378,7 +378,9 @@ class EntryRepository extends EntityRepository
     {
         return $this->createQueryBuilder('e')
             ->where('e.hashedUrl = :empty')->setParameter('empty', '')
+            ->orWhere('e.hashedUrl is null')
             ->andWhere('e.user = :user_id')->setParameter('user_id', $userId)
+            ->andWhere('e.url is not null')
             ->getQuery()
             ->getResult();
     }
