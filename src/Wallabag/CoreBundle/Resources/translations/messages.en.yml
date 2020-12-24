@@ -103,6 +103,7 @@ config:
             archive: 'Archived'
             all: 'All'
         feed_limit: 'Number of items in the feed'
+        feed_use_source: 'Return source url by default into ATOM feed instead of wallabag uri'
     form_user:
         two_factor_description: Enabling two factor authentication means you'll receive an email with a code on every new untrusted connection.
         login_label: 'Login (can not be changed)'

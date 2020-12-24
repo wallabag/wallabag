@@ -103,6 +103,7 @@ config:
             archive: "Lus"
             all: "Tous"
         feed_limit: "Nombre d’articles dans le flux"
+        feed_use_source: "Retourne l'URL de l'article source par défaut dans le flux ATOM à la place de l'url wallabag"
     form_user:
         two_factor_description: Activer l’authentification à deux facteurs signifie que vous allez recevoir un code par courriel à chaque nouvelle connexion non approuvée.
         name_label: Nom

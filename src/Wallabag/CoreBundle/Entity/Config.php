@@ -81,6 +81,15 @@ class Config
     private $feedLimit;
 
     /**
+     * If true, will return source article as <link rel="alternate"> in ATOM feed.
+     *
+     * @var bool
+     *
+     * @ORM\Column(name="feed_use_source", type="boolean", nullable=false)
+     */
+    private $feedUseSource = false;
+
+    /**
      * @var float
      *
      * @ORM\Column(name="reading_speed", type="float", nullable=true)
@@ -287,6 +296,16 @@ class Config
     public function getFeedLimit()
     {
         return $this->feedLimit;
+    }
+
+    public function isFeedUseSource(): bool
+    {
+        return $this->feedUseSource;
+    }
+
+    public function setFeedUseSource(bool $feedUseSource): void
+    {
+        $this->feedUseSource = $feedUseSource;
     }
 
     /**

@@ -6,7 +6,7 @@ use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 
 class FeedControllerTest extends WallabagCoreTestCase
 {
-    public function validateDom($xml, $type, $nb = null, $tagValue = null)
+    public function validateDom($xml, $type, $nb = null, $tagValue = null, $feedUseSource = false)
     {
         $doc = new \DOMDocument();
         $doc->loadXML($xml);
@@ -48,8 +48,13 @@ class FeedControllerTest extends WallabagCoreTestCase
 
         foreach ($xpath->query('//a:entry') as $item) {
             $this->assertSame(1, $xpath->query('a:title', $item)->length);
-            $this->assertSame(1, $xpath->query('a:link[@rel="via"]', $item)->length);
-            $this->assertSame(1, $xpath->query('a:link[@rel="alternate"]', $item)->length);
+            if ($feedUseSource) {
+                $this->assertSame(0, $xpath->query('a:link[@rel="via"]', $item)->length);
+                $this->assertSame(1, $xpath->query('a:link[@rel="alternate"]', $item)->length);
+            } else {
+                $this->assertSame(1, $xpath->query('a:link[@rel="via"]', $item)->length);
+                $this->assertSame(1, $xpath->query('a:link[@rel="alternate"]', $item)->length);
+            }
             $this->assertSame(1, $xpath->query('a:id', $item)->length);
             $this->assertSame(1, $xpath->query('a:published', $item)->length);
             $this->assertSame(1, $xpath->query('a:content', $item)->length);
@@ -107,7 +112,10 @@ class FeedControllerTest extends WallabagCoreTestCase
         $this->validateDom($client->getResponse()->getContent(), 'unread', 2);
     }
 
-    public function testStarred()
+    /**
+     * @dataProvider dataTestStarred
+     */
+    public function testStarred($feedUseSource)
     {
         $client = $this->getClient();
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
@@ -118,6 +126,7 @@ class FeedControllerTest extends WallabagCoreTestCase
         $config = $user->getConfig();
         $config->setFeedToken('SUPERTOKEN');
         $config->setFeedLimit(1);
+        $config->setFeedUseSource($feedUseSource);
         $em->persist($config);
         $em->flush();
 
@@ -126,7 +135,15 @@ class FeedControllerTest extends WallabagCoreTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode(), 1);
 
-        $this->validateDom($client->getResponse()->getContent(), 'starred');
+        $this->validateDom($client->getResponse()->getContent(), 'starred', null, null, $feedUseSource);
+    }
+
+    public function dataTestStarred()
+    {
+        return [
+            [true],
+            [false],
+        ];
     }
 
     public function testArchives()

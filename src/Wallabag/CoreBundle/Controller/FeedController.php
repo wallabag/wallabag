@@ -134,6 +134,7 @@ class FeedController extends Controller
                 'domainName' => $this->getParameter('domain_name'),
                 'version' => $this->getParameter('wallabag_core.version'),
                 'tag' => $tag->getSlug(),
+                'isFeedUseSource' => $user->getConfig()->isFeedUseSource(),
             ],
             new Response('', 200, ['Content-Type' => 'application/atom+xml'])
         );
@@ -199,6 +200,7 @@ class FeedController extends Controller
             'user' => $user->getUsername(),
             'domainName' => $this->getParameter('domain_name'),
             'version' => $this->getParameter('wallabag_core.version'),
+            'isFeedUseSource' => $user->getConfig()->isFeedUseSource(),
         ],
         new Response('', 200, ['Content-Type' => 'application/atom+xml'])
         );

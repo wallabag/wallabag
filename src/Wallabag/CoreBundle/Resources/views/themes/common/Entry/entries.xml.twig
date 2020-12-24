@@ -31,9 +31,12 @@
     {% for entry in entries %}
     <entry>
         <title><![CDATA[{{ entry.title|e }}]]></title>
-        <link rel="alternate" type="text/html"
-              href="{{ url('view', {'id': entry.id}) }}"/>
-        <link rel="via">{{ entry.url }}</link>
+        {% if isFeedUseSource %}
+            <link rel="alternate" type="text/html" href="{{ entry.url }}"/>
+        {%  else %}
+            <link rel="alternate" type="text/html" href="{{ url('view', {'id': entry.id}) }}"/>
+            <link rel="via" href="{{ entry.url }}" />
+        {% endif -%}
         <id>wallabag:{{ domainName | removeScheme | removeWww }}:{{ user }}:entry:{{ entry.id }}</id>
         <updated>{{ entry.updatedAt|date('c') }}</updated>
         <published>{{ entry.createdAt|date('c') }}</published>

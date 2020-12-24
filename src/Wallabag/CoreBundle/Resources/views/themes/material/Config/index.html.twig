@@ -173,6 +173,14 @@
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="input-field col s12 with-checkbox">
+                                    {{ form_widget(form.feed.feed_use_source) }}
+                                    {{ form_label(form.feed.feed_use_source) }}
+                                    {{ form_errors(form.feed.feed_use_source) }}
+                                </div>
+                            </div>
+
                             {{ form_widget(form.feed.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
                             {{ form_rest(form.feed) }}
                         </form>
@@ -548,7 +556,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div id="set7" class="col s12">
                         <div class="row">
                             <h5>{{ 'config.reset.title'|trans }}</h5>
