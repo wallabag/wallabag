@@ -16,7 +16,18 @@ But **first**, ensure you have `composer` installed on your server (or at least 
 
 Same steps as for [upgrading from 2.2.x to 2.3.x](#upgrading-from-22x-to-23x).
 
-For shared hosting , run the [specific data queries](./query-upgrade-23-24.md) on the database.
+### For shared hosting
+
+PHP version compatibility have changed, check the [release notes](https://github.com/wallabag/wallabag/releases/tag/2.4.0) for details.
+
+[Apply the general steps for upgrades on the shared hosting](#upgrade-on-a-shared-hosting) with the following modifications :
+
+Use these [data queries for the database upgrade to 2.4](./query-upgrade-23-24.md).
+
+Three parameters were created and MUST be added to your `app/config/parameters.yml` file : `mailer_port`, `mailer_encryption`, `mailer_auth_mode` and `sentry_dsn` 
+
+Do not forget to run `bin/console cache:clear --env=prod` in the wallabag directory afterwards
+
 
 ## Upgrading from 2.3.x to 2.3.y
 
@@ -48,7 +59,8 @@ make update
     You will find the [md5 hash of the latest package on our website](https://wallabag.org/en#download).
 
 1. Extract the archive in your wallabag folder and replace `app/config/parameters.yml` with yours.
-1. Please check that your `app/config/parameters.yml` contains all the required parameters. You can find [here a documentation about parameters](./parameters.md).
+1. Please check that your `app/config/parameters.yml` contains all the parameters as they are **all mandatory**. You can find [here a documentation about parameters](./parameters.md).
+1. I you have modified the `app/config/parameters.yml` file, run `bin/console cache:clear --env=prod` afterwards in the wallabag directory. A warning will appear if a parameter was forgotten.
 1. If you use SQLite, you must also copy your `data/` folder inside the new installation.
 1. Empty `var/cache` folder.
 1. You must run some SQL queries to upgrade your database. We assume that the table prefix is `wallabag_`. Don't forget to backup your database before migrating.
