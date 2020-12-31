@@ -51,6 +51,7 @@ parameters:
     redis_path: ~
     redis_password: ~
     sentry_dsn: ~
+    server_name: "Your wallabag instance"
 ```
 
 ## Meaning of each parameter
@@ -99,6 +100,7 @@ parameters:
 | rss_limit | item limit for RSS feeds | 50 |
 | domain_name | Full URL of your wallabag instance (without the trailing slash) | https://your-wallabag-url-instance.com |
 | sentry_dsn (**new in 2.4.0**) | DSN from [Sentry](https://sentry.io/welcome/) which logs errors | null |
+| server_name (**new in 2.4.1**) | User-friendly name of your instance for the 2FA issuer | "Your wallabag instance" |
 
 ## RabbitMQ options
 
