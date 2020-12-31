@@ -2,11 +2,10 @@ name: "Translations"
 
 on:
   pull_request:
-    branches:
-      - master
   push:
     branches:
       - master
+      - 2.*
 
 jobs:
   translations:
