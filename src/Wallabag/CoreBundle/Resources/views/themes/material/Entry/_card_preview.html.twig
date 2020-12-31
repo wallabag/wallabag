@@ -3,7 +3,7 @@
         <div class="card-image waves-effect waves-block waves-light">
             <ul class="card-entry-labels">
             {% for tag in entry.tags | slice(0, 3) %}
-                <li><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
+                <li title="{{ tag.label }}"><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
             {% endfor %}
             </ul>
             <a href="{{ path('view', { 'id': entry.id }) }}">
@@ -26,7 +26,7 @@
 
         <ul class="card-entry-labels-hidden">
             {% for tag in entry.tags %}
-                <li><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
+                <li title="{{ tag.label }}"><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
             {% endfor %}
         </ul>
     </div>
