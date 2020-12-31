@@ -209,6 +209,7 @@ config:
             two_factor_code_description_2: 'Vous pouvez scanner le code QR avec votre application :'
             two_factor_code_description_3: 'N’oubliez pas de sauvegarder ces codes de secours dans un endroit sûr, vous pourrez les utiliser si vous ne pouvez plus accéder à votre application A2F :'
             two_factor_code_description_4: 'Testez un code généré par votre application A2F :'
+            two_factor_code_description_5: 'Si vous ne voyez pas le code QR ou ne pouvez pas le scanner, saisissez la clé suivante dans votre application :'
             cancel: Annuler
             enable: Activer
 entry:
