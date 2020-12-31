@@ -2,11 +2,10 @@ name: "CI"
 
 on:
   pull_request:
-    branches:
-      - "master"
   push:
     branches:
-      - "master"
+      - master
+      - 2.*
 
 env:
   PGPASSWORD: wallabagrocks
