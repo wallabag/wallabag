@@ -205,6 +205,75 @@ class EntryFilterType extends AbstractType
                 'choices' => array_flip($this->repository->findDistinctLanguageByUser($user->getId())),
                 'label' => 'entry.filters.language_label',
             ])
+            ->add('tags', TextFilterType::class, [
+                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                    $arr = explode(',', $values['value']);
+                    $inLabels = array_filter($arr, function($v) {
+                        $label = trim($v);
+                        return \strlen($label) > 2 && 0 !== \strpos($label, '-') && false === \strpos($label, '%');
+                    });
+                    $notInLabels = array_map(function($m) {
+                        return ltrim($m, '-');
+                    }, array_filter($arr, function($v) {
+                        $label = trim($v);
+                        return \strlen($label) > 2 && 0 === \strpos($label, '-') && false === \strpos($label, '%');
+                    }));
+                    $likeLabels = array_filter($arr, function($v) {
+                        $label = trim($v);
+                        return \strlen($label) > 2 && 0 !== \strpos($label, '-') && false !== \strpos($label, '%');
+                    });
+                    $notLikeLabels = array_map(function($m) {
+                        return ltrim($m, '-');
+                    }, array_filter($arr, function($v) {
+                        $label = trim($v);
+                        return \strlen($label) > 2 && 0 === \strpos($label, '-') && false !== \strpos($label, '%');
+                    }));
+
+                    if ([] === $inLabels && [] === $notInLabels && [] === $likeLabels && [] === $notLikeLabels) {
+                        return;
+                    }
+
+                    $filterQuery->getQueryBuilder()->leftJoin('e.tags', 't');
+                    $andExpr = $filterQuery->getExpr()->andX();
+                    $orExpr = $filterQuery->getExpr()->orX();
+                    $andNotExpr = $filterQuery->getExpr()->andX();
+
+                    if ([] !== $inLabels) {
+                        $orExpr->add($filterQuery->getExpr()->in('t.label', ':inLabels'));
+                        $filterQuery->getQueryBuilder()->setParameter(':inLabels', $inLabels);
+                    }
+
+                    if ([] !== $likeLabels) {
+                        foreach ($likeLabels as $k => $label) {
+                            $orExpr->add($filterQuery->getExpr()->like('t.label', ':likeLabel' . $k));
+                            $filterQuery->getQueryBuilder()->setParameter(':likeLabel' . $k, $label);
+                        }
+                    }
+
+                    if ([] !== $notInLabels) {
+                        $sub = $this->repository->createQueryBuilder('e0')->select('e0.id')->leftJoin('e0.tags', 't0')->andWhere('e0.user = :userId')->andWhere('t0.label IN (:notInLabels)');
+                        $andNotExpr->add($filterQuery->getExpr()->notIn('e.id', $sub->getDQL()));
+                        $filterQuery->getQueryBuilder()->setParameter(':notInLabels', $notInLabels);
+                    }
+
+                    if ([] !== $notLikeLabels) {
+                        $orSubExpr = $filterQuery->getExpr()->orX();
+                        $sub = $this->repository->createQueryBuilder("e1")->select("e1.id")->leftJoin("e1.tags", "t1")->andWhere("e1.user = :userId");
+                        foreach ($notLikeLabels as $k => $label) {
+                            $orSubExpr->add($filterQuery->getExpr()->like('t1.label', ":notLikeLabel$k"));
+                            $filterQuery->getQueryBuilder()->setParameter(":notLikeLabel$k", $label);
+                        }
+                        $sub->andWhere($orSubExpr);
+                        $andNotExpr->add($filterQuery->getExpr()->notIn('e.id', $sub->getDQL()));
+                    }
+
+                    $andExpr->add($orExpr);
+                    $andExpr->add($andNotExpr);
+
+                    return $filterQuery->createCondition($andExpr);
+                },
+                'label' => 'entry.filters.tags_label',
+            ])
         ;
     }
 
