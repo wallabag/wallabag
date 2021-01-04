@@ -20,7 +20,7 @@ config:
         help_items_per_page: U kan de hoeveelheid getoonde artikelen per pagina aanpassen.
         help_theme: wallabag is aanpasbaar. U can uw gewenste thema hier selecteren.
         android_instruction: Tik hier om uw Android-appvooraf in te vullen
-        android_configuration: Configureer uw Android-applicatie
+        android_configuration: Configureer uw Android applicatie
         pocket_consumer_key_label: Consumer key voor Pocket om inhoud te importeren
     form:
         save: Opslaan
@@ -209,7 +209,7 @@ menu:
         unread: Ongelezen
         ignore_origin_instance_rules: Globaal negeer-oorsprongsregels
         quickstart: Snelstart
-        theme_toggle_auto: Automatisch thema
+        theme_toggle_auto: Thema automatisch
         theme_toggle_dark: Donker thema
         theme_toggle_light: Licht thema
 security:
