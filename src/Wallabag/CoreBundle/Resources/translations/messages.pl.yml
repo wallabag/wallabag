@@ -3,7 +3,7 @@ security:
         page_title: Witaj w wallabag!
         keep_logged_in: Zapamiętaj mnie
         forgot_password: Zapomniałeś hasła?
-        submit: Loguj
+        submit: Zaloguj się
         register: Zarejestruj
         username: Nazwa użytkownika
         password: Hasło
