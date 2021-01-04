@@ -24,6 +24,7 @@ parameters:
     database_charset: utf8mb4
 
     domain_name: https://your-wallabag-url-instance.com
+    server_name: "Your wallabag instance"
 
     mailer_transport:  smtp
     mailer_user:       ~
