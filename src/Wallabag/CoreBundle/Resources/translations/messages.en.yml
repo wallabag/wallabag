@@ -556,7 +556,7 @@ developer:
         page_title: API clients management > How to create my first application
         description:
             paragraph_1: The following commands make use of the <a href="https://github.com/jkbrzt/httpie">HTTPie library</a>. Make sure it is installed on your system before using it.
-            paragraph_2: You need a token to communicate between your 3rd application and wallabag API.
+            paragraph_2: You need a token to communicate between your third-party application and wallabag API.
             paragraph_3: To create this token, you need <a href="%link%">to create a new client</a>.
             paragraph_4: 'Now, create your token (replace client_id, client_secret, username and password with the good values):'
             paragraph_5: 'The API will return a response like this:'

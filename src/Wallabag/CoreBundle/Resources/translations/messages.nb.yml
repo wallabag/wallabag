@@ -7,7 +7,7 @@ security:
         submit: Logg inn
         forgot_password: Glemt passordet ditt?
         keep_logged_in: Hold meg innlogget
-        page_title: Velkomen til wallabag.
+        page_title: Velkomen til wallabag!
     register:
         page_title: Opprett en konto
         go_to_account: Gå til din konto
@@ -78,7 +78,7 @@ config:
             redirect_homepage: Til hjemmesiden
             redirect_current_page: Til nåværende side
             label: Foretagende etter fjerning, stjernemerking eller markering av artikkel som lest?
-        help_reading_speed: wallabag beregner lesetid for hver artikkel. Du kan definere om du er en rask eller treg leser her. wallabag regner ut igjen lesetid for hver artikkel
+        help_reading_speed: wallabag beregner lesetid for hver artikkel. Du kan definere om du er en rask eller treg leser her. wallabag regner ut igjen lesetid for hver artikkel.
         pocket_consumer_key_label: Brukernøkkel for Pocket brukt til import av innhold
         help_pocket_consumer_key: Kreves for Pocket-import. Kan opprettes i din Pocket-konto.
         help_language: Du kan endre språk for wallabag-grensesnittet.
@@ -387,7 +387,7 @@ tag:
     page_title: Etiketter
 quickstart:
     docs:
-        all_docs: I tillegg til så mange andre artikler.
+        all_docs: I tillegg til så mange andre artikler!
         export: Konverter dine artikler til ePUB eller PDF
         title: Full dokumentasjon
     migrate:
@@ -423,8 +423,8 @@ quickstart:
     first_steps:
         new_article: Lagre din første artikkel
     intro:
-        paragraph_2: Følg oss.
-        title: Velkommen til wallabag.
+        paragraph_2: Følg oss!
+        title: Velkommen til wallabag!
     more: Mer …
     page_title: Hurtigstart
 howto:
