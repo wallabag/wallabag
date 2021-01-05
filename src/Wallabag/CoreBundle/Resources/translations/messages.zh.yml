@@ -575,7 +575,7 @@ developer:
         page_title: 'API 客户端管理 > 如何创建我的第一个应用程序'
         description:
             paragraph_1: '以下命令使用了 <a href="https://github.com/jkbrzt/httpie">HTTPie 库</a>。 使用前请确保你已经在系统中安装了它。'
-            paragraph_2: '你需要一个 token 来在你的第三方应用程序和 wallabag API 之间通讯。'
+            paragraph_2: '你需要一个 token 在你的第三方应用程序和 wallabag API 之间通讯。'
             paragraph_3: '为了创建这个 token，你需要 <a href="%link%">创建一个新的客户端</a>。'
             paragraph_4: '现在，创建你的 token（将以下 client_id，client_secret，username and password 替换为有效值)：'
             paragraph_5: 'API 将会返回一个类似下面这样的 response：'
