@@ -42,6 +42,7 @@ menu:
         filter_entries: Filtrar los articles
         export: Exportar
         account: Mon compte
+        random_entry: Anar a un article aleatòri d’aquesta lista
     search_form:
         input_label: Picatz vòstre mot-clau a cercar aquí
 footer:
