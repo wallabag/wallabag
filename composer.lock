@@ -3953,16 +3953,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "v2.2.3",
+            "version": "2.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "131f069877017778742f19da8038fe829fc91262"
+                "reference": "987aa6cb4d548492f27a2552e6c7f1193bde0ccf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/131f069877017778742f19da8038fe829fc91262",
-                "reference": "131f069877017778742f19da8038fe829fc91262",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/987aa6cb4d548492f27a2552e6c7f1193bde0ccf",
+                "reference": "987aa6cb4d548492f27a2552e6c7f1193bde0ccf",
                 "shasum": ""
             },
             "require": {
@@ -3980,7 +3980,7 @@
                 "php-http/httplug": "^2.2",
                 "php-http/message": "^1.9",
                 "simplepie/simplepie": "^1.5",
-                "smalot/pdfparser": "^0.16",
+                "smalot/pdfparser": "~0.16",
                 "symfony/options-resolver": "^3.4|^4.0|^5.0",
                 "true/punycode": "^2.1"
             },
@@ -4023,20 +4023,26 @@
                 }
             ],
             "description": "Graby helps you extract article content from web pages",
-            "time": "2020-11-30T12:40:39+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/j0k3r",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-01-04T09:08:02+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.120",
+            "version": "1.0.122",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "a068f3999ef41bcfd5ee1416cd9f0598f12660e0"
+                "reference": "f18f0421685a2680327db6dbc37939276ba3e45b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/a068f3999ef41bcfd5ee1416cd9f0598f12660e0",
-                "reference": "a068f3999ef41bcfd5ee1416cd9f0598f12660e0",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/f18f0421685a2680327db6dbc37939276ba3e45b",
+                "reference": "f18f0421685a2680327db6dbc37939276ba3e45b",
                 "shasum": ""
             },
             "require": {
@@ -4063,7 +4069,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2020-12-07T20:58:40+00:00"
+            "time": "2021-01-04T08:36:00+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -5432,16 +5438,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.25.5",
+            "version": "1.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "1817faadd1846cd08be9a49e905dc68823bc38c0"
+                "reference": "2209ddd84e7ef1256b7af205d0717fb62cfc9c33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1817faadd1846cd08be9a49e905dc68823bc38c0",
-                "reference": "1817faadd1846cd08be9a49e905dc68823bc38c0",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/2209ddd84e7ef1256b7af205d0717fb62cfc9c33",
+                "reference": "2209ddd84e7ef1256b7af205d0717fb62cfc9c33",
                 "shasum": ""
             },
             "require": {
@@ -5457,7 +5463,7 @@
                 "graylog2/gelf-php": "~1.0",
                 "php-amqplib/php-amqplib": "~2.4",
                 "php-console/php-console": "^3.1.3",
-                "php-parallel-lint/php-parallel-lint": "^1.0",
+                "phpstan/phpstan": "^0.12.59",
                 "phpunit/phpunit": "~4.5",
                 "ruflin/elastica": ">=0.90 <3.0",
                 "sentry/sentry": "^0.13",
@@ -5477,11 +5483,6 @@
                 "sentry/sentry": "Allow sending log messages to a Sentry server"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Monolog\\": "src/Monolog"
@@ -5515,7 +5516,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-23T08:35:51+00:00"
+            "time": "2020-12-14T12:56:38+00:00"
         },
         {
             "name": "nelmio/api-doc-bundle",
@@ -8118,26 +8119,26 @@
         },
         {
             "name": "smalot/pdfparser",
-            "version": "v0.16.2",
+            "version": "v0.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smalot/pdfparser.git",
-                "reference": "5faf073f308b084496ed6bd512deabb680ca7128"
+                "reference": "8b8a157050655c7380ae7a4ba3765a1dc9f768d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smalot/pdfparser/zipball/5faf073f308b084496ed6bd512deabb680ca7128",
-                "reference": "5faf073f308b084496ed6bd512deabb680ca7128",
+                "url": "https://api.github.com/repos/smalot/pdfparser/zipball/8b8a157050655c7380ae7a4ba3765a1dc9f768d0",
+                "reference": "8b8a157050655c7380ae7a4ba3765a1dc9f768d0",
                 "shasum": ""
             },
             "require": {
-                "ext-mbstring": "*",
                 "ext-zlib": "*",
-                "php": ">=5.6"
+                "php": ">=5.6",
+                "symfony/polyfill-mbstring": "^1.18"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.16.3",
-                "symfony/phpunit-bridge": "^4.2.3"
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "symfony/phpunit-bridge": "^5.2"
             },
             "type": "library",
             "autoload": {
@@ -8164,7 +8165,7 @@
                 "pdf",
                 "text"
             ],
-            "time": "2020-08-31T11:26:29+00:00"
+            "time": "2020-12-30T16:59:42+00:00"
         },
         {
             "name": "spomky-labs/otphp",
