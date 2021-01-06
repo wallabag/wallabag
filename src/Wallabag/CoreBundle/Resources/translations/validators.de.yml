@@ -1,5 +1,5 @@
 validator:
-    password_must_match: Die Kennwort-Felder müssen übereinstimmen.
+    password_must_match: Die Kennwörter müssen übereinstimmen.
     password_too_short: Ihr Passwort muss mindestens 8 Zeichen lang sein.
     password_wrong_value: Falsches aktuelles Passwort angegeben.
     item_per_page_too_high: Dies wird die Anwendung möglicherweise beenden
