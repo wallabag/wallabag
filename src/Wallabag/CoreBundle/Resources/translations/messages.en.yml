@@ -212,7 +212,7 @@ config:
             two_factor_code_description_5: "If you can't see the QR Code or can't scan it, enter the following secret in your app:"
             cancel: Cancel
             enable: Enable
-            qrcode_label : QR code
+            qrcode_label: QR code
 entry:
     default_title: Title of the entry
     page_titles:
