@@ -1650,4 +1650,13 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client->request('GET', '/delete/' . $entry2->getId());
         $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
+
+    public function testGetSameDomainEntries()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/domain/1');
+        $this->assertCount(4, $crawler->filter('li.entry'));
+    }
 }
