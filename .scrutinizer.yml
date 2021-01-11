@@ -30,6 +30,10 @@ checks:
 # use the new PHP analysis engine
 # https://scrutinizer-ci.com/docs/tools/php/php-analyzer/guides/migrate_to_new_php_analysis
 build:
+    environment:
+        php:
+            version: 7.4
+
     nodes:
         analysis:
             tests:
