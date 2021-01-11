@@ -194,6 +194,7 @@ config:
             two_factor_code_description_3: 'Du solltest diese Backup-Codes an einem sicheren Ort abspeichern. Du kannst sie nutzen, falls du den Zugang zu deiner OTP-App verlierst:'
             two_factor_code_description_2: 'Du kannst diesen QR-Code mit deiner App scannen:'
             two_factor_code_description_1: Du hast soeben die OTP-Zwei-Faktor-Authentifizierung aktiviert. Öffne deine OTP-App und nutze diesen Code, um ein Einmalkennwort zu erhalten. Der Code wird verschwinden, sobald du die Seite neulädst.
+            two_factor_code_description_5: 'Wenn du den QR-Code nicht sehen oder nicht scannen kannst, trage in deine App folgendes Geheimnis ein:'
         page_title: Zwei-Faktor-Authentifizierung
     form_ignore_origin_rules:
         faq:

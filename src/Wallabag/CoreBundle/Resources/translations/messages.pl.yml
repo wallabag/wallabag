@@ -34,6 +34,9 @@ menu:
         site_credentials: Poświadczenia strony
         quickstart: Szybki start
         ignore_origin_instance_rules: Ignoruj globalne zasady pochodzenia
+        theme_toggle_auto: Automatyczny motyw
+        theme_toggle_dark: Ciemny motyw
+        theme_toggle_light: Jasny motyw
     top:
         add_new_entry: Dodaj nowy wpis
         search: Szukaj
@@ -182,6 +185,7 @@ config:
             new_tagging_rule: Utwórz zasadę oznaczania tagami
         import_submit: Importuj
         file_label: Plik JSON
+        export: Eksportuj
     form_feed:
         description: Lista artykułów Atom pozwala czytać zapisane artykuły w twoim ulubionym programie. Musisz najpierw wygenerować token Atom’a.
         feed_limit: Liczba artykułów w aktualnościach
@@ -196,6 +200,9 @@ config:
         token_create: Stwórz swój token
         no_token: Brak token’a
         token_label: Token listy
+    form_ignore_origin_rules:
+        faq:
+            title: FAQ
 entry:
     default_title: Tytuł wpisu
     page_titles:
@@ -213,7 +220,7 @@ entry:
         reading_time_minutes: 'szacunkowy czas czytania: %readingTime% min'
         reading_time_less_one_minute: 'szacunkowy czas czytania: &lt; 1 min'
         number_of_tags: '{1} i inny tag|]1,Inf[i %count% innych tagów'
-        reading_time_minutes_short: '%czasCzytania% min'
+        reading_time_minutes_short: '%readingTime% min'
         reading_time_less_one_minute_short: '&lt; 1 min'
         original_article: oryginał
         toogle_as_read: Oznacz jako przeczytane
@@ -291,7 +298,7 @@ entry:
         delete_tag: Czy jesteś pewien, że chcesz usunąć ten tag, z tego artykułu?
     metadata:
         reading_time: Szacowany czas czytania
-        reading_time_minutes_short: '%czasCzytania% min'
+        reading_time_minutes_short: '%readingTime% min'
         address: Adres
         added_on: Dodano
 about:
