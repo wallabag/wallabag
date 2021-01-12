@@ -34,6 +34,9 @@ menu:
         site_credentials: Site bilgileri
         quickstart: Hızlı başlangıç
         ignore_origin_instance_rules: Genel orijinal kaynağı yok say kuralları
+        theme_toggle_auto: Otomatik tema
+        theme_toggle_dark: Koyu renk tema
+        theme_toggle_light: Açık renk tema
     top:
         add_new_entry: Yeni bir makale ekle
         search: Ara
@@ -191,6 +194,7 @@ config:
             two_factor_code_description_4: 'Yapılandırılmış uygulamanızdan bir OTP kodunu test edin:'
             two_factor_code_description_3: 'Ayrıca, bu yedek kodları güvenli bir yere kaydedin, OTP uygulamanıza erişiminizi kaybetmeniz durumunda kullanabilirsiniz:'
             two_factor_code_description_2: 'Bu QR Kodunu uygulamanızla tarayabilirsiniz:'
+            two_factor_code_description_5: 'Eğer QR Kodu göremiyor veya tarayamıyorsanız, bu kodu uygulamanıza girin:'
         page_title: İki aşamalı kimlik doğrulama
     form_ignore_origin_rules:
         faq:
@@ -283,6 +287,10 @@ entry:
             public_link: herkese açık bağlantı
             delete_public_link: herkese açık bağlantıyı sil
             print: Yazdır
+            theme_toggle_auto: Otomatik
+            theme_toggle_dark: Koyu renk
+            theme_toggle_light: Açık renk
+            theme_toggle: Tema değiştir
         edit_title: Başlığı düzenle
         original_article: orijinal
         created_at: Oluşturulma tarihi
