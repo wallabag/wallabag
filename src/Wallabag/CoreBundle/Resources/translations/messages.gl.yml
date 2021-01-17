@@ -398,6 +398,7 @@ security:
 import:
     wallabag_v2:
         page_title: Importar > Wallabag v2
+        description: Este importador vai importar tódolos teus artigos de wallabag v2. Vai a Todos os artigos, e após, na barra lateral de exportación, preme en "JSON". Obterás un ficheiro "JSON".
     wallabag_v1:
         how_to: Selecciona o ficheiro de wallabag e preme no botón inferior para subilo e importalo.
         description: Este importador traerá todos os teus artigos desde wallabag v1. Na páxina de configuración, preme en "Exportar JSON" na sección "Exportar datos wallabag". Obterás un ficheiro "wallabag-export-1-xxxx-xx-xx.json".
@@ -420,6 +421,30 @@ import:
         import_contents: Importar contidos
     page_description: Benvida ó importador de wallabag. Elixe o servizo que utilizabas e desde o que queres migrar.
     page_title: Importar
+    pinboard:
+        page_title: Importar > Pinboard
+    instapaper:
+        how_to: Elixe o ficheiro de exportación de Instapaper e preme no botón inferior para subilo e importalo.
+        description: Este importador vai traer tódolos teus artigos de Instapaper. Na páxina dos axustes (https://www.instapaper.com/user), preme en "Descargar ficheiro .CSV) na sección "Exportar". Descargarás un ficheiro CSV (de tipo "instapaper-export.csv").
+        page_title: Importar > Instapaper
+    chrome:
+        how_to: Escolle o ficheiro de copia de apoio dos marcadores e preme no botón inferior para importalo. O proceso podería tomar moito tempo xa que hai que obter tódolos artigos.
+        description: 'Este importador traerá tódolos marcadores de Chrome. A localización do ficheiro depende do teu sistema operativo: <ul><li>En Linux, vai ó directorio <code>~/.config/chromium/Default/</code> </li><li>En Windows, debería estar en <code>%LOCALAPPDATA%\Google\Chrome\User Data\Default</code></li><li>En OS X, debería estar en <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Unha vez alí, copia o ficheiro <code>Marcadores</code> onde ti queiras.<em><br>Ten en conta que se usas Chromium no lugar de Chrome terás que correxir a ruta de xeito acorde.</em></p>'
+        page_title: Importar > Chrome
+    firefox:
+        how_to: Escolle o ficheiro de copia de apoio e preme no botón inferior para importalo. O proceso podería demorarse xa que hai que obter todos os artigos.
+        description: Este importador traerá tódolos teus marcadores de Firefox. Simplemente vai a marcadores (Ctrl+Shift+O), após en "Importación e copias", escolle "Copia...". Obeterás un ficheiro JSON.
+        page_title: Importar > Firefox
+    worker:
+        download_images_warning: Activaches a descarga de imaxes para os teus artigos. Combinado coa importación clásica pódelle levar moito tempo rematar (incluso fallar). <strong>Recomendámosche encarecidamente</strong> que actives a sincronización asíncrona para evitar erros.
+        enabled: 'A importación faise de xeito asíncrono. Unha vez se inicia a tarefa de importación, un servizo externo ocuparase delas dunha en unha. O servizo actual é:'
+    readability:
+        how_to: Escolle o teu ficheiro de Readability e preme no botón inferior para subilo e importalo.
+        description: Este importador vai traer todos os teus artigos Readability. Nas ferramentas (https://www.readability.com/tools/), preme en "Exporta os teus datos" na sección "Exportar Datos". Obterás un email para descargar un json (que en realidade non remata en .json).
+        page_title: Importar > Readability
+    elcurator:
+        description: Este importador traerá todos os teus ficheiros de elCurator. Vai ós axustes na túa conta elCurator e após exporta o teu contido. Obterás un ficheiro JSON.
+        page_title: Importar > elCurator
 export:
     unknown: Descoñecido
     footer_template: <div style="text-align:center;"><p>Producido por wallabag con %method%</p><p>Abre <a href="https://github.com/wallabag/wallabag/issues">un issue</a> se tes problemas para visualizar este E-Book no teu dispositivo.</p></div>
