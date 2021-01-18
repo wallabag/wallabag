@@ -1,1 +1,10 @@
-{}
+auth_code:
+    mailer:
+        body:
+            signature: O equipo de wallabag
+            support: 'Non dubides en contactarnos se tes atopas problemas:'
+            second_para: 'Aquí tes o código:'
+            first_para: Como activaches o segundo factor de autenticación para a túa conta, e un novo dispositivo utilizouno, enviamosche un código para validar esta conexión.
+            hello: Ola %user%,
+        subject: código de autenticación de wallabag
+    on: on
