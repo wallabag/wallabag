@@ -832,7 +832,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->client->request('GET', '/api/entries/' . $entry->getId() . '/tags');
 
-        $this->assertSame(json_encode($tags, JSON_HEX_QUOT), $this->client->getResponse()->getContent());
+        $this->assertSame(json_encode($tags, \JSON_HEX_QUOT), $this->client->getResponse()->getContent());
     }
 
     public function testPostTagsOnEntry()

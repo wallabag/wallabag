@@ -141,7 +141,7 @@ class ContentProxy
         $date = $value;
 
         // is it a timestamp?
-        if (false !== filter_var($date, FILTER_VALIDATE_INT)) {
+        if (false !== filter_var($date, \FILTER_VALIDATE_INT)) {
             $date = '@' . $date;
         }
 
@@ -163,7 +163,7 @@ class ContentProxy
      */
     public function setEntryDomainName(Entry $entry)
     {
-        $domainName = parse_url($entry->getUrl(), PHP_URL_HOST);
+        $domainName = parse_url($entry->getUrl(), \PHP_URL_HOST);
         if (false !== $domainName) {
             $entry->setDomainName($domainName);
         }
@@ -177,7 +177,7 @@ class ContentProxy
     public function setDefaultEntryTitle(Entry $entry)
     {
         $url = parse_url($entry->getUrl());
-        $path = pathinfo($url['path'], PATHINFO_BASENAME);
+        $path = pathinfo($url['path'], \PATHINFO_BASENAME);
 
         if (empty($path)) {
             $path = $url['host'];
