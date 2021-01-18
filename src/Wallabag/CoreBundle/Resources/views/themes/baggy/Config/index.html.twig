@@ -84,7 +84,7 @@
                 <h3>{{ 'config.form_settings.android_configuration'|trans }}</h3>
                 <a href="wallabag://{{ app.user.username }}@{{ wallabag_url }}">{{ 'config.form_settings.android_instruction' | trans }}</a>
                 <br/>
-                <img id="androidQrcode" />
+                <img id="androidQrcode" alt="{{ 'config.otp.app.qrcode_label' | trans }}" />
                 <script>
                     document.getElementById('androidQrcode').src = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');
                 </script>
