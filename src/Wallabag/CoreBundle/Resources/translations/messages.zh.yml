@@ -197,6 +197,7 @@ config:
             cancel: "取消"
             enable: "启用"
             two_factor_code_description_5: 如果你看不到二维码或无法扫描它，请在你的应用程序中输入下列双因素认证代码：
+            qrcode_label: 二维码
     form_rss:
         rss_limit: RSS源中的条目数
         rss_link:
