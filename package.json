@@ -52,7 +52,7 @@
     "node-sass": "^5.0.0",
     "postcss": "^8.2.4",
     "postcss-loader": "^4.0.4",
-    "sass": "^1.32.4",
+    "sass": "^1.32.5",
     "sass-loader": "^10.1.1",
     "style-loader": "^2.0.0",
     "stylelint": "^13.9.0",
