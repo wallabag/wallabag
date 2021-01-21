@@ -133,7 +133,7 @@ ALTER TABLE wallabag_entry ADD COLUMN archived_at DATETIME DEFAULT NULL;
 DROP INDEX UNIQ_1D63E7E5C05FB297;
 DROP INDEX UNIQ_1D63E7E5A0D96FBF;
 DROP INDEX UNIQ_1D63E7E592FC23A8;
-CREATE TEMPORARY TABLE __temp__user AS SELECT id, username, username_canonical, email, email_canonical, enabled, salt, password, last_login, confirmation_token, password_requested_at, roles, name, created_at, updated_at, authCode, twoFactorAuthenticatiON FROM wallabag_user;
+CREATE TEMPORARY TABLE __temp__user AS SELECT id, username, username_canonical, email, email_canonical, enabled, salt, password, last_login, confirmation_token, password_requested_at, roles, name, created_at, updated_at, authCode, twoFactorAuthentication FROM wallabag_user;
 DROP TABLE wallabag_user;
 CREATE TABLE wallabag_user (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, username VARCHAR(180) NOT NULL COLLATE BINARY, username_canonical VARCHAR(180) NOT NULL COLLATE BINARY, email VARCHAR(180) NOT NULL COLLATE BINARY, email_canonical VARCHAR(180) NOT NULL COLLATE BINARY, enabled BOOLEAN NOT NULL, password VARCHAR(255) NOT NULL COLLATE BINARY, last_login DATETIME DEFAULT NULL, password_requested_at DATETIME DEFAULT NULL, name CLOB DEFAULT NULL COLLATE BINARY, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, authCode INTEGER DEFAULT NULL, emailTwoFactor BOOLEAN NOT NULL, salt VARCHAR(255) DEFAULT NULL, confirmation_token VARCHAR(180) DEFAULT NULL, roles CLOB NOT NULL --(DC2Type:array)
   , googleAuthenticatorSecret VARCHAR(255) DEFAULT NULL, backupCodes CLOB DEFAULT NULL --(DC2Type:json_array)
