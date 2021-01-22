@@ -145,15 +145,12 @@ nav {
   top: 0;
 }
 
-@media (min-width: 993px) {
-  .button-collapse {
-    display: none;
-  }
-}
-
 .dropdown-content {
+  width: 100%;
+
   li {
     min-height: auto;
+    padding-right: 15px;
   }
 
   li > a {
@@ -161,5 +158,16 @@ nav {
     padding: 14px 10px;
     align-items: center;
     white-space: initial;
+  }
+}
+
+@media (min-width: 993px) {
+  .button-collapse {
+    display: none;
+  }
+
+  .dropdown-content {
+    min-width: 300px;
+    width: initial;
   }
 }
