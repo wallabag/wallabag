@@ -257,6 +257,7 @@ config:
             two_factor_code_description_3: 'Igualmente, garda unha copia destos códigos nun lugar seguro, podes usalos en caso de perder o acceso á app OTP:'
             two_factor_code_description_2: 'Podes escanear o Código QR coa túa app:'
             two_factor_code_description_1: Activaches o segundo factor de autenticación OTP, abre a túa app OTP e usa o código para obter un contrasinal dun só uso. Desaparecerá tras a recarga da páxina.
+            qrcode_label: Código QR
         page_title: Autenticación con dous factores
     form_settings:
         android_instruction: Toca aquí para precompletar a aap Android
@@ -423,6 +424,8 @@ import:
     page_title: Importar
     pinboard:
         page_title: Importar > Pinboard
+        how_to: Elixe o ficheiro de exportación Pinboard e preme no botón inferior para subilo e importalo.
+        description: Este importador traerá tódolos teus artigos de Pinboard. Na páxina de copia de apoio (https://pinboard.in/settings/backup), preme en "JSON" na sección "Marcadores". Baixarás un ficheiro JSON (como "pinboard_export").
     instapaper:
         how_to: Elixe o ficheiro de exportación de Instapaper e preme no botón inferior para subilo e importalo.
         description: Este importador vai traer tódolos teus artigos de Instapaper. Na páxina dos axustes (https://www.instapaper.com/user), preme en "Descargar ficheiro .CSV) na sección "Exportar". Descargarás un ficheiro CSV (de tipo "instapaper-export.csv").
@@ -511,3 +514,187 @@ quickstart:
         title: Benvida a wallabag!
     more: Máis…
     page_title: Inicio rápido
+developer:
+    existing_clients:
+        field_grant_types: Tipos de acceso permitidos
+        no_client: Sen clientes.
+        field_uris: Redirixir URIs
+        field_secret: Segreda do cliente
+        field_id: ID do cliente
+        title: Clientes existentes
+    howto:
+        back: Atrás
+        description:
+            paragraph_8: Se queres ver tódolos accesos á API, mira a <a href="%link%">nosa documentación da API</a>.
+            paragraph_7: Esta chamada devolverá todas as entradas do teu usuario.
+            paragraph_6: 'O access_token é útil para chamar ao punto de acceso da API. Por exemplo:'
+            paragraph_5: 'A API responderá con algo semellante a:'
+            paragraph_4: 'Agora, crea o token (substitúe client_id, client_secret, username e password cos valores axeitados):'
+            paragraph_3: Para crear este token, tes que <a href="%link%">crear un novo cliente</a>.
+            paragraph_2: Precisas un token para comunicarte entre a túa app de terceiros e a API de wallabag.
+            paragraph_1: As seguintes ordes fan uso da <a href="https://github.com/jkbrzt/httpie">biblioteca HTTPie</a>. Comproba que está instalada no teu sistema antes de utilizala.
+        page_title: Xestión de clientes API > Como crear a miña primeira aplicación
+    client_parameter:
+        read_howto: Ler o titorial "Crear a miña primeira aplicación"
+        back: Atrás
+        field_secret: Segreda do cliente
+        field_id: ID do cliente
+        field_name: Nome do cliente
+        page_description: Aquí están os parámetros do cliente.
+        page_title: Xestión de clientes API > Parámetros do cliente
+    client:
+        copy_to_clipboard: Copiar
+        action_back: Atrás
+        form:
+            save_label: Crear un novo cliente
+            redirect_uris_label: URIs de redirección (optativo)
+            name_label: Nome do cliente
+        page_description: Vas crear un novo cliene. Completa o campo inferior para a URI de redirección da túa aplicación.
+        page_title: Xestión de clientes API > Novo cliente
+    remove:
+        action: Eliminar o cliente %name%
+        warn_message_2: Se o eliminas, cada app configurada con ese cliente non poderá acceder ao teu wallabag.
+        warn_message_1: Podes eliminar o cliente %name%. Esta acción non se pode desfacer!
+    clients:
+        create_new: Crear un novo cliente
+        title: Clientes
+    list_methods: Listaxe dos métodos API
+    full_documentation: Ver a documentación completa da API
+    how_to_first_app: Como crear a miña primeira aplicación
+    documentation: Documentación
+    welcome_message: Benvida á API wallabag
+    page_title: Xestión dos clientes API
+flashes:
+    ignore_origin_instance_rule:
+        notice:
+            deleted: Eliminada regra para ignorar orixe
+            updated: Actualizada regra para ignorar orixe
+            added: Engadida regra para ignorar orixe
+    site_credential:
+        notice:
+            deleted: Eliminada credencial de sitio de "%host%"
+            updated: Actualizada credencial de sitio para "%host%"
+            added: Engadida credencial de sitio para "%host%"
+    user:
+        notice:
+            deleted: Eliminada a usuaria "%username%"
+            updated: Actualizada a usuaria "%username%"
+            added: Engadida a usuaria "%username%"
+    developer:
+        notice:
+            client_deleted: Eliminado o cliente %name%
+            client_created: Creouse o novo cliente %name%.
+    import:
+        error:
+            rabbit_enabled_not_installed: RabbitMQ está activado para xestionar a importación asíncrona pero semella que <u>non podemos conectar con el</u>. Comproba a configuración de RabbitMQ.
+            redis_enabled_not_installed: Redis está activado para xestionar importacións asíncronas pero semella que <u>non podemos conectar co servizo</u>. Comproba a configuración de Redis.
+        notice:
+            summary_with_queue: 'Resumo da importación: %queued% en cola.'
+            summary: 'Resumo da importación: %imported% importados, %skipped% anteriormente engadidos.'
+            failed_on_file: Fallou o proceso de importación. Verifica o ficheiro de importación.
+            failed: Fallou a importación, inténtao outra vez.
+    tag:
+        notice:
+            tag_renamed: Etiqueta renomeada
+            tag_added: Etiqueta engadida
+    entry:
+        notice:
+            no_random_entry: Non se atopan artigos con este criterio
+            entry_deleted: Entrada eliminada
+            entry_unstarred: Entrada sen estrela
+            entry_starred: Entrada marcada con estrela
+            entry_unarchived: Entrada desarquivada
+            entry_archived: Entrada arquivada
+            entry_reloaded_failed: Entrada recargada pero fallou a obtención do contido
+            entry_reloaded: Entrada recargada
+            entry_updated: Entrada actualizada
+            entry_saved_failed: A entrada gardouse pero fallou a obtención do contido
+            entry_saved: Entrada gardada
+            entry_already_saved: Xa gardaches esta entrada o %date%
+    config:
+        notice:
+            ignore_origin_rules_updated: Actualizada a regra para ignorar orixe
+            ignore_origin_rules_deleted: Eliminada a regra para ignorar orixe
+            tagging_rules_not_imported: Erro ao importar as regras de etiquetado
+            tagging_rules_imported: Importadas as regras de etiquetado
+            otp_disabled: Desactivado o segundo factor de autenticación
+            otp_enabled: Activado o segundo factor de autenticación
+            archived_reset: Eliminadas as entradas arquivadas
+            entries_reset: Restablecemento das entradas
+            tags_reset: Restablecemento das etiquetas
+            annotations_reset: Restablecemento das anotacións
+            feed_token_revoked: Revogado o token da fonte
+            feed_token_updated: Actualizado o token da fonte
+            feed_updated: Actualizada a información da fonte
+            tagging_rules_deleted: Regra de etiquetado eliminada
+            tagging_rules_updated: Regras de etiquetado actualizadas
+            user_updated: Información actualizada
+            password_not_updated_demo: No modo demostración non podes cambiar o contrasinal da usuaria.
+            password_updated: Contrasinal actualizado
+            config_saved: Gardouse o axuste.
+error:
+    page_title: Houbo un fallo
+ignore_origin_instance_rule:
+    form:
+        back_to_list: Volver á lista
+        delete_confirm: Tes a certeza?
+        delete: Eliminar
+        save: Gardar
+        rule_label: Regra
+    list:
+        create_new_one: Crear unha nova regra global para ignorar orixe
+        no: Non
+        yes: Si
+        edit_action: Editar
+        actions: Acccións
+    description: Aquí podes xestionar as regras globais sobre a orixe utilizadas para ignorar algúns patróns do url de orixe.
+    edit_ignore_origin_instance_rule: Editar regra de orixe existente
+    new_ignore_origin_instance_rule: Crear unha regra para ignorar regras de orixe
+    page_title: Ignorar globalmente regras de orixe
+site_credential:
+    form:
+        back_to_list: Volver á lista
+        delete_confirm: Tes a certeza?
+        delete: Eliminar
+        save: Gardar
+        password_label: Contrasinal
+        host_label: Servidor (subdominio.exemplo.org, .exemplo.org, etc.)
+        username_label: Conectar
+    list:
+        create_new_one: Crear unha nova credencial
+        no: Non
+        yes: Si
+        edit_action: Editar
+        actions: Accións
+    description: Aquí podes xestionar tódalas credenciais para sitios que as requiran (crear, editar e eliminar), como un valado de pagamento, autenticación, etc.
+    edit_site_credential: Editar unha credencial existente
+    new_site_credential: Crear unha credencial
+    page_title: Xestión das credenciais do sitio
+user:
+    search:
+        placeholder: Filtrar por nome de usuaria ou email
+    form:
+        back_to_list: Volver á lista
+        delete_confirm: Tes a certeza?
+        delete: Eliminar
+        save: Gardar
+        twofactor_google_label: Segundo factor de autenticación por app OTP
+        twofactor_email_label: Segundo factor de autenticación por email
+        last_login_label: Última conexión
+        enabled_label: Activado
+        email_label: Email
+        plain_password_label: ????
+        repeat_new_password_label: Repetir o novo contrasinal
+        password_label: Contrasinal
+        name_label: Nome
+        username_label: Nome de usuaria
+    list:
+        create_new_one: Crear nova usuaria
+        no: Non
+        yes: Si
+        edit_action: Editar
+        actions: Accións
+    description: Aquí podes xestionar tódalas usuarias (crear, editar e eliminar)
+    edit_user: Editar usuaria existente
+    new_user: Crear unha nova usuaria
+    page_title: Xestión de usuarias

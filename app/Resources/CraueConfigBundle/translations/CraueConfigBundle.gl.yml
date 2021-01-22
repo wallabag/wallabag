@@ -1,1 +1,40 @@
-{}
+shaarli_share_origin_url: Activar a compartición do URL de orixe en Shaarli, se o servizo está activo
+store_article_headers: Activar se wallabag garda cabeceiras HTTP para cada artigo
+api_user_registration: Activar rexistro de usuarias a través da API
+restricted_access: Activar autenticación para sitios web con acceso de pagamento
+download_images_enabled: Descargar imaxes localmente
+share_public: Permitir URLs públicos para entradas
+demo_mode_username: Usuaria Demo
+demo_mode_enabled: Activar modo demostración? (Só se usa na demo pública de wallabag)
+matomo_enabled: Activar Matomo
+matomo_site_id: ID do teu sitio web en Matomo
+matomo_host: Servidor do teu sitio web en Matomo (sen http:// ou https://)
+modify_settings: aplicar
+misc: varios
+import: importar
+export: exportar
+entry: artigo
+wallabag_support_url: URL de axuda de wallabag
+show_printlink: Mostrar unha ligazón para imprimir o contido
+share_unmark: Activar a compartición en Unmark.it
+share_twitter: Activar a compartición en Twitter
+share_scuttle: Activar a compartición en Scuttle
+share_shaarli: Activar a compartición en Shaarli
+share_mail: Activar a compartición por email
+share_diaspora: Activar a compartición en diaspora*
+unmark_url: URL Unmark, se o servizo está activo
+scuttle_url: URL Scuttle, se o servizo está activo
+shaarli_url: URL Shaarli, se o servizo está activo
+import_with_redis: Activar a importación asíncrona con Redis
+import_with_rabbitmq: Activar a importación asíncrona con RabbitMQ
+export_xml: Activar exportación XML
+export_txt: Activar exportación TXT
+export_json: Activar exportación JSON
+export_csv: Activar exportación CSV
+export_pdf: Activar exportación PDF
+export_mobi: Activar exportación .mobi
+export_epub: Activar exportación ePub
+diaspora_url: URL de diaspora*, se o servizo está activo
+carrot: Activar compartir en Carrot
+download_pictures: Descargar imaxes no teu servidor
+settings_changed: Configuración actualizada
