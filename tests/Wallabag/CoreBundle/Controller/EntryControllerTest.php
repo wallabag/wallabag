@@ -857,7 +857,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(5, $crawler->filter('li.entry'));
+        $this->assertCount(4, $crawler->filter('li.entry'));
 
         $data = [
             'entry_filter[createdAt][left_date]' => $today->format('Y-m-d'),
@@ -866,7 +866,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(5, $crawler->filter('li.entry'));
+        $this->assertCount(4, $crawler->filter('li.entry'));
 
         $data = [
             'entry_filter[createdAt][left_date]' => '1970-01-01',
@@ -919,7 +919,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         ];
 
         $crawler = $client->submit($form, $data);
-        $this->assertCount(5, $crawler->filter('li.entry'));
+        $this->assertCount(4, $crawler->filter('li.entry'));
 
         $crawler = $client->request('GET', '/unread/list');
         $form = $crawler->filter('button[id=submit-filter]')->form();
@@ -928,7 +928,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         ];
 
         $crawler = $client->submit($form, $data);
-        $this->assertCount(5, $crawler->filter('li.entry'));
+        $this->assertCount(4, $crawler->filter('li.entry'));
 
         $form = $crawler->filter('button[id=submit-filter]')->form();
         $data = [
@@ -948,6 +948,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $form = $crawler->filter('button[id=submit-filter]')->form();
         $form['entry_filter[isArchived]']->tick();
         $form['entry_filter[isStarred]']->untick();
+        $form['entry_filter[isUnread]']->untick();
 
         $crawler = $client->submit($form);
         $this->assertCount(1, $crawler->filter('li.entry'));
@@ -958,6 +959,30 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form);
         $this->assertCount(1, $crawler->filter('li.entry'));
+    }
+
+    public function testFilterPreselectedStatus()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/unread/list');
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+        $this->assertTrue($form['entry_filter[isUnread]']->hasValue());
+        $this->assertFalse($form['entry_filter[isArchived]']->hasValue());
+        $this->assertFalse($form['entry_filter[isStarred]']->hasValue());
+
+        $crawler = $client->request('GET', '/starred/list');
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+        $this->assertFalse($form['entry_filter[isUnread]']->hasValue());
+        $this->assertFalse($form['entry_filter[isArchived]']->hasValue());
+        $this->assertTrue($form['entry_filter[isStarred]']->hasValue());
+
+        $crawler = $client->request('GET', '/all/list');
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+        $this->assertFalse($form['entry_filter[isUnread]']->hasValue());
+        $this->assertFalse($form['entry_filter[isArchived]']->hasValue());
+        $this->assertFalse($form['entry_filter[isStarred]']->hasValue());
     }
 
     public function testFilterOnIsPublic()

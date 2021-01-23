@@ -118,12 +118,15 @@ class EntryFilterType extends AbstractType
             ])
             ->add('isArchived', CheckboxFilterType::class, [
                 'label' => 'entry.filters.archived_label',
+                'data' => $options['filter_archived'],
             ])
             ->add('isStarred', CheckboxFilterType::class, [
                 'label' => 'entry.filters.starred_label',
+                'data' => $options['filter_starred'],
             ])
             ->add('isUnread', CheckboxFilterType::class, [
                 'label' => 'entry.filters.unread_label',
+                'data' => $options['filter_unread'],
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                     if (false === $values['value']) {
                         return;
@@ -177,6 +180,9 @@ class EntryFilterType extends AbstractType
         $resolver->setDefaults([
             'csrf_protection' => false,
             'validation_groups' => ['filtering'],
+            'filter_archived' => false,
+            'filter_starred' => false,
+            'filter_unread' => false,
         ]);
     }
 }
