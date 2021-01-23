@@ -158,10 +158,11 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
         $nbDays = (int) $interval->format('%a') ?: 1;
 
         // force setlocale for date translation
-        setlocale(\LC_TIME, strtolower($user->getConfig()->getLanguage()) . '_' . strtoupper(strtolower($user->getConfig()->getLanguage())));
+        $locale = strtolower($user->getConfig()->getLanguage()) . '_' . strtoupper(strtolower($user->getConfig()->getLanguage()));
+        $intlDateFormatter = new \IntlDateFormatter($locale, \IntlDateFormatter::LONG, \IntlDateFormatter::NONE);
 
         return $this->translator->trans('footer.stats', [
-            '%user_creation%' => strftime('%e %B %Y', $user->getCreatedAt()->getTimestamp()),
+            '%user_creation%' => $intlDateFormatter->format($user->getCreatedAt()),
             '%nb_archives%' => $nbArchives,
             '%per_day%' => round($nbArchives / $nbDays, 2),
         ]);
