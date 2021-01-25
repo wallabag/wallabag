@@ -272,6 +272,7 @@ config:
             enable: Aktiviraj
             cancel: Odustani
             two_factor_code_description_5: 'Ako ne vidiš QR kod ili ako ga ne možeš skenirati, upiši sljedeću tajnu u tvoj program:'
+            qrcode_label: QR kod
         page_title: Dvofaktorska autentifikacija
     form_ignore_origin_rules:
         faq:
