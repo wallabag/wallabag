@@ -532,6 +532,8 @@ class EntryController extends Controller
         $searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
         $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
 
+        $formOptions = [];
+
         switch ($type) {
             case 'search':
                 $qb = $repository->getBuilderForSearchByUser($this->getUser()->getId(), $searchTerm, $currentRoute);
@@ -541,12 +543,15 @@ class EntryController extends Controller
                 break;
             case 'starred':
                 $qb = $repository->getBuilderForStarredByUser($this->getUser()->getId());
+                $formOptions['filter_starred'] = true;
                 break;
             case 'archive':
                 $qb = $repository->getBuilderForArchiveByUser($this->getUser()->getId());
+                $formOptions['filter_archived'] = true;
                 break;
             case 'unread':
                 $qb = $repository->getBuilderForUnreadByUser($this->getUser()->getId());
+                $formOptions['filter_unread'] = true;
                 break;
             case 'all':
                 $qb = $repository->getBuilderForAllByUser($this->getUser()->getId());
@@ -555,7 +560,7 @@ class EntryController extends Controller
                 throw new \InvalidArgumentException(sprintf('Type "%s" is not implemented.', $type));
         }
 
-        $form = $this->createForm(EntryFilterType::class);
+        $form = $this->createForm(EntryFilterType::class, [], $formOptions);
 
         if ($request->query->has($form->getName())) {
             // manually bind values from the request
