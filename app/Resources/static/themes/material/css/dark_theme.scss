@@ -8,7 +8,7 @@
   .card-stacked .preview:not(.preview--default),
   .card .preview:not(.preview--default),
   .collapsible-header,
-  .collection .collection-item,
+  .collection,
   .dropdown-content,
   .nav-panel-add,
   .nav-panel-search,
@@ -16,17 +16,49 @@
   .side-nav .collapsible-body,
   .side-nav.fixed .collapsible-body,
   .tabs {
-    background-color: black;
+    background-color: #121212;
+  }
+
+  .cyan,
+  .cyan.darken-1,
+  .cyan.darken-2 {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+  }
+
+  .dropdown-content li {
+    background-color: rgba(255, 255, 255, 0.07);
   }
 
   .dropdown-content li:hover,
   .dropdown-content li.active,
   .dropdown-content li.selected {
-    background-color: #575757;
+    background-color: rgba(255, 255, 255, 0.11);
+  }
+
+  .dropdown-content li > a {
+    color: #dfdfdf;
+  }
+
+  .dropdown-content li.divider {
+    background-color: rgba(255, 255, 255, 0.16);
+  }
+
+  .collection {
+    border: 0;
+  }
+
+  .collection .collection-item {
+    background-color: rgba(255, 255, 255, 0.05);
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border: 0;
+  }
+
+  .collection li.collection-item:hover {
+    background-color: rgba(255, 255, 255, 0.09);
   }
 
   main #content,
-  table.striped > tbody > tr > td,
   #article article,
   #article article h1,
   #article article h2,
@@ -44,21 +76,35 @@
     color: #dfdfdf !important;
   }
 
-  .side-nav li.active,
+  #article li.chip {
+    background-color: rgba(255, 255, 255, 0.11);
+  }
+
+  .side-nav li.active {
+    background-color: rgba(255, 255, 255, 0.12);
+  }
+
   .side-nav li:not(.logo) > a:hover,
   .side-nav .collapsible-header:hover,
   .side-nav.fixed .collapsible-header:hover {
-    background-color: #333;
+    background-color: rgba(255, 255, 255, 0.04);
   }
 
   #article {
-    box-shadow: 0 0 10px #575757;
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 10px #1d1d1d;
   }
 
-  nav,
-  .card,
-  .side-nav {
-    box-shadow: 0 2px 2px 0 rgba(255, 255, 255, 0.4), 0 1px 5px 0 rgba(255, 255, 255, 0.4), 0 3px 1px -2px rgba(255, 255, 255, 0.4);
+  .card {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .card:hover {
+    background-color: rgba(255, 255, 255, 0.09);
+  }
+
+  .card-action {
+    background-color: transparent;
   }
 
   .logo img,
@@ -70,9 +116,5 @@
   .border-bottom,
   .collapsible {
     border-color: #222;
-  }
-
-  table.striped > tbody > tr:nth-child(2n+1) {
-    background-color: #0c0c0c;
   }
 }
