@@ -205,10 +205,10 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
         $authors = $content->getPublishedBy();
-        $this->assertSame('2017-04-05 19:26:13', $content->getPublishedAt()->format('Y-m-d H:i:s'));
+        $this->assertSame('2017-04-05', $content->getPublishedAt()->format('Y-m-d'));
         $this->assertSame('fr', $content->getLanguage());
-        $this->assertSame('Raphaël Balenieri', $authors[0]);
-        $this->assertSame('Frédéric Autran', $authors[1]);
+        $this->assertContains('Balenieri', $authors[0]);
+        $this->assertContains('Autran', $authors[1]);
     }
 
     public function testPostNewOkUrlExist()
