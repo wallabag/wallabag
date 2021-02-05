@@ -195,6 +195,7 @@ config:
             two_factor_code_description_3: 'Ayrıca, bu yedek kodları güvenli bir yere kaydedin, OTP uygulamanıza erişiminizi kaybetmeniz durumunda kullanabilirsiniz:'
             two_factor_code_description_2: 'Bu QR Kodunu uygulamanızla tarayabilirsiniz:'
             two_factor_code_description_5: 'Eğer QR Kodu göremiyor veya tarayamıyorsanız, bu kodu uygulamanıza girin:'
+            qrcode_label: Kare kod
         page_title: İki aşamalı kimlik doğrulama
     form_ignore_origin_rules:
         faq:
