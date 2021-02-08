@@ -1459,7 +1459,7 @@ class EntryControllerTest extends WallabagCoreTestCase
      */
     public function testRestrictedArticle()
     {
-        $url = 'https://www.monde-diplomatique.fr/2017/05/BONNET/57475';
+        $url = 'https://www.monde-diplomatique.fr/2017/05/BONNET/57476';
         $this->logInAs('admin');
         $client = $this->getClient();
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
@@ -1501,7 +1501,7 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
-        $this->assertSame('Crimes et réformes aux Philippines', $content->getTitle());
+        $this->assertSame('Quand Manille manœuvre', $content->getTitle());
 
         $client->getContainer()->get('craue_config')->set('restricted_access', 0);
     }
