@@ -248,6 +248,11 @@ old_sound_rabbit_mq:
             exchange_options:
                 name: 'wallabag.import.pinboard'
                 type: topic
+        import_delicious:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.delicious'
+                type: topic
         import_instapaper:
             connection: default
             exchange_options:
@@ -314,6 +319,15 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.pinboard'
             callback: wallabag_import.consumer.amqp.pinboard
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+        import_delicious:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.delicious'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.delicious'
+            callback: wallabag_import.consumer.amqp.delicious
             qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_wallabag_v1:
             connection: default

@@ -517,6 +517,10 @@ import:
         page_title: Import > Pinboard
         description: This importer will import all your Pinboard articles. On the backup (https://pinboard.in/settings/backup) page, click on "JSON" in the "Bookmarks" section. A JSON file will be downloaded (like "pinboard_export").
         how_to: Please select your Pinboard export and click on the below button to upload and import it.
+    delicious:
+        page_title: Import > del.icio.us
+        description: This importer will import all your Delicious bookmarks. Since 2021, you can export again your data from it using the export page (https://del.icio.us/export). Choose the "JSON" format and download it (like "delicious_export.2021.02.06_21.10.json").
+        how_to: Please select your Delicious export and click on the below button to upload and import it.
 developer:
     page_title: API clients management
     welcome_message: Welcome to the wallabag API

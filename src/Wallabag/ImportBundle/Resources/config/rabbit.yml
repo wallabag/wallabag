@@ -32,6 +32,14 @@ services:
             - "@wallabag_import.pinboard.import"
             - "@event_dispatcher"
             - "@logger"
+    wallabag_import.consumer.amqp.delicious:
+        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_user.user_repository"
+            - "@wallabag_import.delicious.import"
+            - "@event_dispatcher"
+            - "@logger"
     wallabag_import.consumer.amqp.wallabag_v1:
         class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
         arguments:

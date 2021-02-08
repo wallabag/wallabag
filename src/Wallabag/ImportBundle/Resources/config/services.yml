@@ -96,6 +96,18 @@ services:
         tags:
             -  { name: wallabag_import.import, alias: pinboard }
 
+    wallabag_import.delicious.import:
+        class: Wallabag\ImportBundle\Import\DeliciousImport
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_core.content_proxy"
+            - "@wallabag_core.tags_assigner"
+            - "@event_dispatcher"
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: wallabag_import.import, alias: delicious }
+
     wallabag_import.firefox.import:
         class: Wallabag\ImportBundle\Import\FirefoxImport
         arguments:

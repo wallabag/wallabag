@@ -1,63 +1,63 @@
 {
-    "guid": "root________",
-    "title": "",
-    "index": 0,
-    "dateAdded": 1388166091504000,
-    "lastModified": 1472897622350000,
-    "id": 1,
-    "type": "text/x-moz-place-container",
-    "root": "placesRoot",
-    "children": [
+  "guid": "root________",
+  "title": "",
+  "index": 0,
+  "dateAdded": 1388166091504000,
+  "lastModified": 1472897622350000,
+  "id": 1,
+  "type": "text/x-moz-place-container",
+  "root": "placesRoot",
+  "children": [
+    {
+      "guid": "toolbar_____",
+      "title": "Barre personnelle",
+      "index": 1,
+      "dateAdded": 1388166091504000,
+      "lastModified": 1472897622263000,
+      "id": 3,
+      "annos": [
         {
-            "guid": "toolbar_____",
-            "title": "Barre personnelle",
-            "index": 1,
-            "dateAdded": 1388166091504000,
-            "lastModified": 1472897622263000,
-            "id": 3,
-            "annos": [
-                {
-                    "name": "bookmarkProperties/description",
-                    "flags": 0,
-                    "expires": 4,
-                    "value": "Ajoutez des marque-pages dans ce dossier pour les voir apparaître sur votre barre personnelle"
-                }
-            ],
-            "type": "text/x-moz-place-container",
-            "root": "toolbarFolder",
-            "children": [
-                {
-                    "guid": "tard77lzbC5H",
-                    "title": "Orange offre un meilleur réseau mobile que Bouygues et SFR, Free derrière - L'Express L'Expansion",
-                    "index": 1,
-                    "dateAdded": 1388166091644000,
-                    "lastModified": 1388166091644000,
-                    "tags":"test,tag",
-                    "id": 4,
-                    "type": "text/x-moz-place",
-                    "uri": "http://lexpansion.lexpress.fr/high-tech/orange-offre-un-meilleur-reseau-mobile-que-bouygues-et-sfr-free-derriere_1811554.html"
-                },
-                {
-                    "guid": "E385l9vZ_LVn",
-                    "title": "Le journaliste et cinéaste Claude Lanzmann est mort",
-                    "index": 1,
-                    "dateAdded": 1388166091544000,
-                    "lastModified": 1388166091545000,
-                    "id": 5,
-                    "type": "text/x-moz-place",
-                    "uri": "https://www.lemonde.fr/disparitions/article/2018/07/05/le-journaliste-et-cineaste-claude-lanzmann-est-mort_5326313_3382.html"
-                }
-            ]
+          "name": "bookmarkProperties/description",
+          "flags": 0,
+          "expires": 4,
+          "value": "Ajoutez des marque-pages dans ce dossier pour les voir apparaître sur votre barre personnelle"
+        }
+      ],
+      "type": "text/x-moz-place-container",
+      "root": "toolbarFolder",
+      "children": [
+        {
+          "guid": "tard77lzbC5H",
+          "title": "Orange offre un meilleur réseau mobile que Bouygues et SFR, Free derrière - L'Express L'Expansion",
+          "index": 1,
+          "dateAdded": 1388166091644000,
+          "lastModified": 1388166091644000,
+          "tags": "test,tag",
+          "id": 4,
+          "type": "text/x-moz-place",
+          "uri": "http://lexpansion.lexpress.fr/high-tech/orange-offre-un-meilleur-reseau-mobile-que-bouygues-et-sfr-free-derriere_1811554.html"
         },
         {
-            "guid": "unfiled_____",
-            "title": "Autres marque-pages",
-            "index": 3,
-            "dateAdded": 1388166091504000,
-            "lastModified": 1388166091542000,
-            "id": 6,
-            "type": "text/x-moz-place-container",
-            "root": "unfiledBookmarksFolder"
+          "guid": "E385l9vZ_LVn",
+          "title": "Le journaliste et cinéaste Claude Lanzmann est mort",
+          "index": 1,
+          "dateAdded": 1388166091544000,
+          "lastModified": 1388166091545000,
+          "id": 5,
+          "type": "text/x-moz-place",
+          "uri": "https://www.lemonde.fr/disparitions/article/2018/07/05/le-journaliste-et-cineaste-claude-lanzmann-est-mort_5326313_3382.html"
         }
-    ]
+      ]
+    },
+    {
+      "guid": "unfiled_____",
+      "title": "Autres marque-pages",
+      "index": 3,
+      "dateAdded": 1388166091504000,
+      "lastModified": 1388166091542000,
+      "id": 6,
+      "type": "text/x-moz-place-container",
+      "root": "unfiledBookmarksFolder"
+    }
+  ]
 }
