@@ -61,7 +61,7 @@
     "stylelint-webpack-plugin": "^2.1.1",
     "url-loader": "^4.1.1",
     "webpack": "^5.21.2",
-    "webpack-cli": "^4.4.0",
+    "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2",
     "webpack-manifest-plugin": "^3.0.0",
     "webpack-merge": "^5.7.3"
