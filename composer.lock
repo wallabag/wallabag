@@ -11490,16 +11490,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.71",
+            "version": "0.12.73",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "d508fa3b0ecc5fc91ac70c6c7ac2862f968ba2b5"
+                "reference": "a08c2759d132b4247b32e03066401c3232ad99b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d508fa3b0ecc5fc91ac70c6c7ac2862f968ba2b5",
-                "reference": "d508fa3b0ecc5fc91ac70c6c7ac2862f968ba2b5",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a08c2759d132b4247b32e03066401c3232ad99b7",
+                "reference": "a08c2759d132b4247b32e03066401c3232ad99b7",
                 "shasum": ""
             },
             "require": {
@@ -11542,7 +11542,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-02-01T18:24:00+00:00"
+            "time": "2021-02-07T16:26:54+00:00"
         },
         {
             "name": "phpstan/phpstan-doctrine",
