@@ -122,7 +122,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
 
         $tags = $content->getTags();
         $this->assertContains('osx', $tags, 'It includes the "osx" tag');
-        $this->assertGreaterThanOrEqual(4, count($tags));
+        $this->assertGreaterThanOrEqual(4, \count($tags));
 
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
         $this->assertSame('2013-01-17', $content->getCreatedAt()->format('Y-m-d'));
