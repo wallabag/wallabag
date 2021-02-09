@@ -482,12 +482,12 @@ import:
             description: Pocket import isn't configured.
             admin_message: You need to define %keyurls%a pocket_consumer_key%keyurle%.
             user_message: Your server admin needs to define an API Key for Pocket.
-        authorize_message: You can import your data from your Pocket account. You just have to click on the below button and authorize the application to connect to getpocket.com.
+        authorize_message: You can import your data from your Pocket account. You just have to click on the button below and authorize the application to connect to getpocket.com.
         connect_to_pocket: Connect to Pocket and import data
     wallabag_v1:
         page_title: Import > Wallabag v1
         description: This importer will import all your wallabag v1 articles. On your config page, click on "JSON export" in the "Export your wallabag data" section. You will have a "wallabag-export-1-xxxx-xx-xx.json" file.
-        how_to: Please select your wallabag export and click on the below button to upload and import it.
+        how_to: Please select your wallabag export and click on the button below to upload and import it.
     wallabag_v2:
         page_title: Import > Wallabag v2
         description: This importer will import all your wallabag v2 articles. Go to All articles, then, on the export sidebar, click on "JSON". You will have a "All articles.json" file.
@@ -497,7 +497,7 @@ import:
     readability:
         page_title: Import > Readability
         description: This importer will import all your Readability articles. On the tools (https://www.readability.com/tools/) page, click on "Export your data" in the "Data Export" section. You will received an email to download a json (which does not end with .json in fact).
-        how_to: Please select your Readability export and click on the below button to upload and import it.
+        how_to: Please select your Readability export and click on the button below to upload and import it.
     worker:
         enabled: 'Import is made asynchronously. Once the import task is started, an external worker will handle jobs one at a time. The current service is:'
         download_images_warning: You enabled downloading images for your articles. Combined with classic import it can take ages to proceed (or maybe failed). We <strong>strongly recommend</strong> to enable asynchronous import to avoid errors.
@@ -512,15 +512,15 @@ import:
     instapaper:
         page_title: Import > Instapaper
         description: This importer will import all your Instapaper articles. On the settings (https://www.instapaper.com/user) page, click on "Download .CSV file" in the "Export" section. A CSV file will be downloaded (like "instapaper-export.csv").
-        how_to: Please select your Instapaper export and click on the below button to upload and import it.
+        how_to: Please select your Instapaper export and click on the button below to upload and import it.
     pinboard:
         page_title: Import > Pinboard
         description: This importer will import all your Pinboard articles. On the backup (https://pinboard.in/settings/backup) page, click on "JSON" in the "Bookmarks" section. A JSON file will be downloaded (like "pinboard_export").
-        how_to: Please select your Pinboard export and click on the below button to upload and import it.
+        how_to: Please select your Pinboard export and click on the button below to upload and import it.
     delicious:
         page_title: Import > del.icio.us
         description: This importer will import all your Delicious bookmarks. Since 2021, you can export again your data from it using the export page (https://del.icio.us/export). Choose the "JSON" format and download it (like "delicious_export.2021.02.06_21.10.json").
-        how_to: Please select your Delicious export and click on the below button to upload and import it.
+        how_to: Please select your Delicious export and click on the button below to upload and import it.
 developer:
     page_title: API clients management
     welcome_message: Welcome to the wallabag API
