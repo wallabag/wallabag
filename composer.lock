@@ -1990,16 +1990,16 @@
         },
         {
             "name": "fossar/htmlawed",
-            "version": "1.2.7",
+            "version": "1.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fossar/HTMLawed.git",
-                "reference": "4f7505e9622a96242923895c3008719b2c2283d3"
+                "reference": "08cb7a12b667afb4fc7b24504b24b65647b6d502"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fossar/HTMLawed/zipball/4f7505e9622a96242923895c3008719b2c2283d3",
-                "reference": "4f7505e9622a96242923895c3008719b2c2283d3",
+                "url": "https://api.github.com/repos/fossar/HTMLawed/zipball/08cb7a12b667afb4fc7b24504b24b65647b6d502",
+                "reference": "08cb7a12b667afb4fc7b24504b24b65647b6d502",
                 "shasum": ""
             },
             "require": {
@@ -2035,7 +2035,7 @@
                 "strip",
                 "tags"
             ],
-            "time": "2019-05-09T11:53:40+00:00"
+            "time": "2021-01-25T08:08:04+00:00"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -3953,16 +3953,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "2.2.4",
+            "version": "2.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "987aa6cb4d548492f27a2552e6c7f1193bde0ccf"
+                "reference": "e1154098851dd347002314445c18847655f5a289"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/987aa6cb4d548492f27a2552e6c7f1193bde0ccf",
-                "reference": "987aa6cb4d548492f27a2552e6c7f1193bde0ccf",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/e1154098851dd347002314445c18847655f5a289",
+                "reference": "e1154098851dd347002314445c18847655f5a289",
                 "shasum": ""
             },
             "require": {
@@ -4029,20 +4029,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-01-04T09:08:02+00:00"
+            "time": "2021-01-20T04:02:40+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.122",
+            "version": "1.0.126",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "f18f0421685a2680327db6dbc37939276ba3e45b"
+                "reference": "293d1448026c5d911b276b79e08640c36d63d677"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/f18f0421685a2680327db6dbc37939276ba3e45b",
-                "reference": "f18f0421685a2680327db6dbc37939276ba3e45b",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/293d1448026c5d911b276b79e08640c36d63d677",
+                "reference": "293d1448026c5d911b276b79e08640c36d63d677",
                 "shasum": ""
             },
             "require": {
@@ -4069,7 +4069,7 @@
                 }
             ],
             "description": "Graby site config files",
-            "time": "2021-01-04T08:36:00+00:00"
+            "time": "2021-02-10T13:53:53+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -6498,16 +6498,16 @@
         },
         {
             "name": "php-http/message",
-            "version": "1.10.0",
+            "version": "1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/message.git",
-                "reference": "39db36d5972e9e6d00ea852b650953f928d8f10d"
+                "reference": "fb0dbce7355cad4f4f6a225f537c34d013571f29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/message/zipball/39db36d5972e9e6d00ea852b650953f928d8f10d",
-                "reference": "39db36d5972e9e6d00ea852b650953f928d8f10d",
+                "url": "https://api.github.com/repos/php-http/message/zipball/fb0dbce7355cad4f4f6a225f537c34d013571f29",
+                "reference": "fb0dbce7355cad4f4f6a225f537c34d013571f29",
                 "shasum": ""
             },
             "require": {
@@ -6523,15 +6523,15 @@
                 "ergebnis/composer-normalize": "^2.6",
                 "ext-zlib": "*",
                 "guzzlehttp/psr7": "^1.0",
+                "laminas/laminas-diactoros": "^2.0",
                 "phpspec/phpspec": "^5.1 || ^6.3",
-                "slim/slim": "^3.0",
-                "zendframework/zend-diactoros": "^1.0"
+                "slim/slim": "^3.0"
             },
             "suggest": {
                 "ext-zlib": "Used with compressor/decompressor streams",
                 "guzzlehttp/psr7": "Used with Guzzle PSR-7 Factories",
-                "slim/slim": "Used with Slim Framework PSR-7 implementation",
-                "zendframework/zend-diactoros": "Used with Diactoros Factories"
+                "laminas/laminas-diactoros": "Used with Diactoros Factories",
+                "slim/slim": "Used with Slim Framework PSR-7 implementation"
             },
             "type": "library",
             "extra": {
@@ -6564,7 +6564,7 @@
                 "message",
                 "psr-7"
             ],
-            "time": "2020-11-11T10:19:56+00:00"
+            "time": "2021-02-01T08:54:58+00:00"
         },
         {
             "name": "php-http/message-factory",
@@ -8169,16 +8169,16 @@
         },
         {
             "name": "smalot/pdfparser",
-            "version": "v0.18.0",
+            "version": "v0.18.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smalot/pdfparser.git",
-                "reference": "8b8a157050655c7380ae7a4ba3765a1dc9f768d0"
+                "reference": "b47f26425e32a814dc1ee55e3ce669b9e73b8458"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smalot/pdfparser/zipball/8b8a157050655c7380ae7a4ba3765a1dc9f768d0",
-                "reference": "8b8a157050655c7380ae7a4ba3765a1dc9f768d0",
+                "url": "https://api.github.com/repos/smalot/pdfparser/zipball/b47f26425e32a814dc1ee55e3ce669b9e73b8458",
+                "reference": "b47f26425e32a814dc1ee55e3ce669b9e73b8458",
                 "shasum": ""
             },
             "require": {
@@ -8215,7 +8215,7 @@
                 "pdf",
                 "text"
             ],
-            "time": "2020-12-30T16:59:42+00:00"
+            "time": "2021-01-05T08:52:07+00:00"
         },
         {
             "name": "spomky-labs/otphp",
@@ -9271,16 +9271,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.20.0",
+            "version": "v1.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "39d483bdf39be819deabf04ec872eb0b2410b531"
+                "reference": "f377a3dd1fde44d37b9831d68dc8dea3ffd28e13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/39d483bdf39be819deabf04ec872eb0b2410b531",
-                "reference": "39d483bdf39be819deabf04ec872eb0b2410b531",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/f377a3dd1fde44d37b9831d68dc8dea3ffd28e13",
+                "reference": "f377a3dd1fde44d37b9831d68dc8dea3ffd28e13",
                 "shasum": ""
             },
             "require": {
@@ -9292,7 +9292,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.20-dev"
+                    "dev-main": "1.22-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -9344,7 +9344,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-23T14:02:19+00:00"
+            "time": "2021-01-07T16:49:33+00:00"
         },
         {
             "name": "symfony/polyfill-php56",
@@ -9627,16 +9627,16 @@
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.20.0",
+            "version": "v1.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "e70aa8b064c5b72d3df2abd5ab1e90464ad009de"
+                "reference": "dc3063ba22c2a1fd2f45ed856374d79114998f91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/e70aa8b064c5b72d3df2abd5ab1e90464ad009de",
-                "reference": "e70aa8b064c5b72d3df2abd5ab1e90464ad009de",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/dc3063ba22c2a1fd2f45ed856374d79114998f91",
+                "reference": "dc3063ba22c2a1fd2f45ed856374d79114998f91",
                 "shasum": ""
             },
             "require": {
@@ -9645,7 +9645,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.20-dev"
+                    "dev-main": "1.22-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -9703,7 +9703,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-23T14:02:19+00:00"
+            "time": "2021-01-07T16:49:33+00:00"
         },
         {
             "name": "symfony/polyfill-uuid",
