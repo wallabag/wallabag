@@ -11661,16 +11661,16 @@
         },
         {
             "name": "phpstan/phpstan-symfony",
-            "version": "0.12.16",
+            "version": "0.12.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-symfony.git",
-                "reference": "c50afb8f4e27d4ab3b47ac370838aefac3c15e9e"
+                "reference": "6f270710294b1b5a029464765bcb6d0f564ff3a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/c50afb8f4e27d4ab3b47ac370838aefac3c15e9e",
-                "reference": "c50afb8f4e27d4ab3b47ac370838aefac3c15e9e",
+                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/6f270710294b1b5a029464765bcb6d0f564ff3a1",
+                "reference": "6f270710294b1b5a029464765bcb6d0f564ff3a1",
                 "shasum": ""
             },
             "require": {
@@ -11687,6 +11687,7 @@
                 "phpstan/phpstan-phpunit": "^0.12.16",
                 "phpstan/phpstan-strict-rules": "^0.12.5",
                 "phpunit/phpunit": "^7.5.20",
+                "symfony/config": "^4.2",
                 "symfony/console": "^4.0",
                 "symfony/framework-bundle": "^4.0",
                 "symfony/http-foundation": "^4.0",
@@ -11722,7 +11723,7 @@
                 }
             ],
             "description": "Symfony Framework extensions and rules for PHPStan",
-            "time": "2021-01-25T12:30:55+00:00"
+            "time": "2021-02-11T18:45:32+00:00"
         },
         {
             "name": "symfony/maker-bundle",
