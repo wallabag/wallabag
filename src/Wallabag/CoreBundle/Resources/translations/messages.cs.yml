@@ -28,6 +28,7 @@ entry:
     page_titles:
         all: Všechny položky
         untagged: Položky bez štítků
+    default_title: Název položky
 menu:
     top:
         search: Hledat
@@ -88,6 +89,11 @@ config:
         new_user: Přidat uživatele
     form:
         save: Uložit
+    otp:
+        app:
+            qrcode_label: QR kód
+            enable: Povolit
+            cancel: Zrušit
 security:
     register:
         page_title: Vytvořit účet
