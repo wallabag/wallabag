@@ -78,7 +78,7 @@ packaged as a Cloudron app and available to install directly from the
 store.
 
 [Install wallabag on your
-Cloudron](https://cloudron.io/store/org.wallabag.cloudronapp.html)
+Cloudron](https://cloudron.io/store/org.wallabag.cloudronapp2.html)
 
 ## Installation on YunoHost
 
