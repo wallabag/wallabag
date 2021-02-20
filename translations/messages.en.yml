@@ -237,6 +237,14 @@ entry:
         untagged: Untagged entries
         all: All entries
         same_domain: Same domain
+    sort:
+        status_label: Sort by
+        order_label: Order
+        by:
+            creation_date: Creation date
+            title: Title
+        ascending: Ascending
+        descending: Descending
     list:
         number_on_the_page: '{0} There are no entries.|{1} There is one entry.|]1,Inf[ There are %count% entries.'
         reading_time: estimated reading time

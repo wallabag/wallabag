@@ -30,10 +30,11 @@ class EntryRepository extends ServiceEntityRepository
      *
      * @return QueryBuilder
      */
-    public function getBuilderForAllByUser($userId)
+    public function getBuilderForAllByUser($userId, $sortBy = 'createdAt', $direction = 'desc')
     {
+        $sortBy = $sortBy ?: 'createdAt';
         return $this
-            ->getSortedQueryBuilderByUser($userId)
+            ->getSortedQueryBuilderByUser($userId, $sortBy, $direction)
         ;
     }
 
