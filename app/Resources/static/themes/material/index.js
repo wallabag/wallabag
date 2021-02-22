@@ -63,9 +63,10 @@ function darkTheme() {
   };
   const preferedColorScheme = {
     choose() {
-      if (this.isAvailable() && themeCookie.exists() === 0) {
+      const themeCookieExists = themeCookie.exists();
+      if (this.isAvailable() && !themeCookieExists) {
         const isPreferedColorSchemeDark = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-        if (themeCookie.exists() === 0) {
+        if (!themeCookieExists) {
           themeDom[isPreferedColorSchemeDark ? 'addClass' : 'removeClass'](rootEl);
         }
       }
