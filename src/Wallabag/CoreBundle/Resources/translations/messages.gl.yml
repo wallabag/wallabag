@@ -60,6 +60,7 @@ about:
         by_paypal: vía Paypal
         by_contributing: 'colaborando co proxecto:'
         description: 'wallabag é libre e de código aberto. Podes axudarnos:'
+        by_contributing_2: un tema resume tódalas nosas necesidades
     getting_help:
         support: <a href="https://github.com/wallabag/wallabag/issues">en GitHub</a>
         bug_reports: Informes de fallos
