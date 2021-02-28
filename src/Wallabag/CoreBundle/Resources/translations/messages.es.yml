@@ -122,6 +122,7 @@ config:
             button: Eliminar mi cuenta
         help_twoFactorAuthentication: Si habilita la autenticación de dos factores (2FA), cada vez que desee iniciar sesión en wallabag, recibirá un código por correo electrónico.
         twoFactorAuthentication_label: Autenticación de dos factores
+        login_label: Login (no puede ser cambiado)
     reset:
         title: Reiniciar mi cuenta (zona peligrosa)
         description: Pulsando los botones de abajo puedes eliminar alguna información de tu cuenta. Ten en cuenta que estas acciones son IRREVERSIBLES.
