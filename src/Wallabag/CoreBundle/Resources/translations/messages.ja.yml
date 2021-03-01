@@ -208,6 +208,8 @@ config:
             cancel: キャンセル
             two_factor_code_description_4: '設定したアプリのOTPコードをテストします:'
             two_factor_code_description_3: 'また、このバックアップコードを安全な場所に保管してください。OTPアプリへアクセスできなくなった場合に使用することができます。:'
+            qrcode_label: QR コード
+            two_factor_code_description_5: 'QRコードが表示されないか、スキャンできない場合は、次のシークレットをアプリに入力してください:'
         page_title: 二要素認証
     form_ignore_origin_rules:
         faq:
@@ -540,7 +542,7 @@ developer:
         field_uris: リダイレクト URI
         field_grant_types: 許可の種類
         no_client: まだクライアントはありません。
-        field_secret: Client secret
+        field_secret: クライアントシークレット
         field_id: Client ID
     remove:
         warn_message_1: クライアント %name% を削除することができます。この操作は不可逆的です !
@@ -560,13 +562,13 @@ developer:
         field_name: クライアント名
         read_howto: '"最初のアプリケーションを作成する" 方法をお読みください'
         back: 戻る
-        field_secret: Client secret
+        field_secret: クライアントシークレット
         field_id: Client ID
         page_title: APIクライアント管理 > クライアントのパラメーター
     howto:
         description:
             paragraph_2: あなたの第三者アプリケーションと wallabag API 間の通信にトークンが必要です。
-            paragraph_4: '今から、トークンを作成します (クライアント_ID、クライアントの秘密、ユーザー名、パスワードを適切な値に置き換えてください):'
+            paragraph_4: '今から、トークンを作成します (クライアント_ID、クライアントシークレット、ユーザー名、パスワードを適切な値に置き換えてください):'
             paragraph_5: 'API はこのようなレスポンスを返します:'
             paragraph_6: 'アクセストークンは API エンドポイントの呼び出しを行う際に便利です。例えば:'
             paragraph_7: この呼び出しは、ユーザーのすべての記事が返されます。
