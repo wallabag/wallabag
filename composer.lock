@@ -5736,16 +5736,16 @@
         },
         {
             "name": "pagerfanta/pagerfanta",
-            "version": "v2.7.0",
+            "version": "v2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BabDev/Pagerfanta.git",
-                "reference": "116ff1132681a68f9f612480312238ad599dfbba"
+                "reference": "630f38d57c86b67565b644db9d270ffb6d67123f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BabDev/Pagerfanta/zipball/116ff1132681a68f9f612480312238ad599dfbba",
-                "reference": "116ff1132681a68f9f612480312238ad599dfbba",
+                "url": "https://api.github.com/repos/BabDev/Pagerfanta/zipball/630f38d57c86b67565b644db9d270ffb6d67123f",
+                "reference": "630f38d57c86b67565b644db9d270ffb6d67123f",
                 "shasum": ""
             },
             "require": {
@@ -5777,7 +5777,7 @@
                 "jackalope/jackalope-doctrine-dbal": "^1.3",
                 "mandango/mandango": "^1.0@dev",
                 "phpstan/extension-installer": "^1.0.4",
-                "phpstan/phpstan": "^0.12.71",
+                "phpstan/phpstan": "^0.12.79",
                 "phpstan/phpstan-phpunit": "^0.12.17",
                 "phpunit/phpunit": "^8.5 || ^9.0",
                 "propel/propel": "^2.0@dev",
@@ -5821,7 +5821,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-02-19T00:33:42+00:00"
+            "time": "2021-02-28T18:15:42+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
