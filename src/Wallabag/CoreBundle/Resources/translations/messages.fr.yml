@@ -212,6 +212,7 @@ config:
             two_factor_code_description_5: 'Si vous ne voyez pas le code QR ou ne pouvez pas le scanner, saisissez la clé suivante dans votre application :'
             cancel: Annuler
             enable: Activer
+            qrcode_label: Code QR
 entry:
     default_title: Titre de l’article
     page_titles:
