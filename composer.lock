@@ -11811,16 +11811,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v5.2.3",
+            "version": "v5.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "587f2b6bbcda8c473b91c18165958ffbb8af3c4c"
+                "reference": "9d85d900c1afe29138a0d5854505eb684bc3ac6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/587f2b6bbcda8c473b91c18165958ffbb8af3c4c",
-                "reference": "587f2b6bbcda8c473b91c18165958ffbb8af3c4c",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/9d85d900c1afe29138a0d5854505eb684bc3ac6d",
+                "reference": "9d85d900c1afe29138a0d5854505eb684bc3ac6d",
                 "shasum": ""
             },
             "require": {
@@ -11887,7 +11887,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-25T13:54:05+00:00"
+            "time": "2021-02-04T18:05:54+00:00"
         }
     ],
     "aliases": [],
