@@ -402,7 +402,7 @@ quickstart:
     more: Et plus encore…
     intro:
         title: Bienvenue sur wallabag !
-        paragraph_1: Nous allons vous accompagner pour vous faire faire le tour de la maison et vous présenter quelques fonctionnalités qui pourraient vous intéresser pour vous approprier cet outil.
+        paragraph_1: Nous allons vous accompagner pour vous faire le tour de la maison et vous présenter quelques fonctionnalités qui pourraient vous intéresser pour vous approprier cet outil.
         paragraph_2: Suivez-nous !
     configure:
         title: Configurez l’application
