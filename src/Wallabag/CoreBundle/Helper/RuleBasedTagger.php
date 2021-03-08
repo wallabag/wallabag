@@ -94,6 +94,7 @@ class RuleBasedTagger
      */
     private function getTag($label)
     {
+        $label = mb_convert_case($label, \MB_CASE_LOWER);
         $tag = $this->tagRepository->findOneByLabel($label);
 
         if (!$tag) {
