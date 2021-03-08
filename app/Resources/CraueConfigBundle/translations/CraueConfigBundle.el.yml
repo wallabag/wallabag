@@ -1,1 +1,40 @@
-{}
+shaarli_share_origin_url: Ενεργοποίηση κοινοποίησης πρωτότυπου URL στο Shaarli, αν είναι ενεργοποιημένη η υπηρεσία
+store_article_headers: Ενεργοποίηση αποθήκευσης επικεφαλίδων HTTP για κάθε άρθρο
+api_user_registration: Ενεργοποίηση εγγραφής χρήστη μέσω του API
+restricted_access: Ενεργοποίηση επαλήθευσης για ιστοσελίδες με paywall
+download_images_enabled: Λήψη εικόνων τοπικά
+share_public: Να επιτρέπονται URL για τα άρθρα
+demo_mode_username: Χρήστης demo
+demo_mode_enabled: Ενεργοποίηση λειτουργίας demo; (Χρησιμοποιείται μόνο για το δημόσιο demo του wallabag)
+matomo_enabled: Ενεργοποίηση Matomo
+matomo_site_id: ID της ιστοσελίδας σας στο Matomo
+matomo_host: Διεύθυνση της ιστοσελίδας σας στο Matomo (χωρίς http:// ή https://)
+modify_settings: εφαρμογή
+misc: ποικίλα
+import: εισαγωγή
+export: εξαγωγή
+entry: άρθρο
+wallabag_support_url: Υποστήριξη URL για wallabag
+show_printlink: Προβολή συνδέσμου για εκτύπωση περιεχομένου
+share_unmark: Ενεργοποίηση κοινοποίησης στο Unmark.it
+share_twitter: Ενεργοποίηση κοινοποίησης στο Twitter
+share_scuttle: Ενεργοποίηση κοινοποίησης στο Scuttle
+share_shaarli: Ενεργοποίηση κοινοποίησης στο Shaarli
+share_mail: Ενεργοποίηση κοινοποίησης με ηλεκτρονικό ταχυδρομείο
+share_diaspora: Ενεργοποίηση κοινοποίησης στο diaspora*
+unmark_url: URL του Unmark, αν είναι ενεργοποιημένη η υπηρεσία
+scuttle_url: URL του Scuttle, αν είναι ενεργοποιημένη η υπηρεσία
+shaarli_url: URL του Shaarli, αν είναι ενεργοποιημένη η υπηρεσία
+import_with_redis: Ενεργοποίηση Redis για την ασύγχρονη εισαγωγή δεδομένων
+import_with_rabbitmq: Ενεργοποίηση RabbitMQ για την ασύγχρονη εισαγωγή δεδομένων
+export_xml: Ενεργοποίηση εξαγωγής ΧΜΛ
+export_txt: Ενεργοποίηση εξαγωγής TXT
+export_json: Ενεργοποίηση εξαγωγής JSON
+export_csv: Ενεργοποίηση εξαγωγής CSV
+export_pdf: Ενεργοποίηση εξαγωγής PDF
+export_mobi: Ενεργοποίηση εξαγωγής .mobi
+export_epub: Ενεργοποίηση εξαγωγής ePub
+diaspora_url: URL του diaspora*, αν είναι ενεργοποιημένη η υπηρεσία
+carrot: Ενεργοποίηση κοινοποίησης στο Carrot
+download_pictures: Λήψη των εικόνων στον διακομιστή σας
+settings_changed: Η ρύθμιση παραμέτρων ενημερώθηκε
