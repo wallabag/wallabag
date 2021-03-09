@@ -10510,16 +10510,16 @@
         },
         {
             "name": "wallabag/phpepub",
-            "version": "4.0.7.2",
+            "version": "4.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wallabag/PHPePub.git",
-                "reference": "ae4861e970fed1c6ae9ed85eefe03ac7c0113518"
+                "reference": "cf94d02dce43b470752ef9e6dd0a1c8484af1f8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wallabag/PHPePub/zipball/ae4861e970fed1c6ae9ed85eefe03ac7c0113518",
-                "reference": "ae4861e970fed1c6ae9ed85eefe03ac7c0113518",
+                "url": "https://api.github.com/repos/wallabag/PHPePub/zipball/cf94d02dce43b470752ef9e6dd0a1c8484af1f8f",
+                "reference": "cf94d02dce43b470752ef9e6dd0a1c8484af1f8f",
                 "shasum": ""
             },
             "require": {
@@ -10572,7 +10572,7 @@
                 "e-book",
                 "epub"
             ],
-            "time": "2020-03-22T16:24:31+00:00"
+            "time": "2021-03-08T08:31:34+00:00"
         },
         {
             "name": "willdurand/hateoas",
