@@ -60,7 +60,7 @@
     "stylelint-scss": "^3.19.0",
     "stylelint-webpack-plugin": "^2.1.1",
     "url-loader": "^4.1.1",
-    "webpack": "^5.24.4",
+    "webpack": "^5.25.1",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2",
     "webpack-manifest-plugin": "^3.1.0",
