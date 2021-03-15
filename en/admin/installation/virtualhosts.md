@@ -181,6 +181,27 @@ url.rewrite-if-not-file = (
 
 ## Configuration on Caddy
 
+### Caddy 2
+
+The following configuration works on caddy 2 (tested on 2.3.0):
+
+```caddy
+domain.tld {
+  root * /var/www/wallabag/web
+  file_server
+  php_fastcgi unix//var/run/php7-fpm.sock {
+    index app.php
+  }
+  try_files {path} {path}/ /app.php?{query}
+  tls your@email.ru
+  log {
+    output file /var/log/caddy/wbg.access.log
+  }
+}
+```
+
+### Caddy 1 
+
 For caddy server, configuration might be:
 
 ```caddy
