@@ -712,7 +712,6 @@ class Entry
         }
 
         $this->tags->add($tag);
-        $tag->addEntry($this);
     }
 
     /**
