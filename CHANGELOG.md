@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.4.2](https://github.com/wallabag/wallabag/tree/2.4.2)
+   [Full Changelog](https://github.com/wallabag/wallabag/compare/2.4.1...2.4.2)
+
+### Fixes
+- Fix nav lang filter [#4908](https://github.com/wallabag/wallabag/pull/4908)
+- Fix accessibility problem with the 2FA QR code [#4915](https://github.com/wallabag/wallabag/pull/4915)
+- Preselect currently active section in the filter menu [#4972](https://github.com/wallabag/wallabag/pull/4972)
+- Fix translation of date in the footer using IntlDateFormatter [#4971](https://github.com/wallabag/wallabag/pull/4971)
+- Update dark theme [#4921](https://github.com/wallabag/wallabag/pull/4921)
+- Dark theme updated [#4983](https://github.com/wallabag/wallabag/pull/4983)
+- Fix account dropdown width [#4969](https://github.com/wallabag/wallabag/pull/4969)
+- Fix auto prefered color scheme [#5071](https://github.com/wallabag/wallabag/pull/5071)
+- Convert tag label to lowercase in RuleBasedTagger [#5111](https://github.com/wallabag/wallabag/pull/5111)
+- Fix myreadspeed links [#5113](https://github.com/wallabag/wallabag/pull/5113)
+- Internal server error while exporting to epub [#5052](https://github.com/wallabag/wallabag/issues/5052)
+- Error parsing image URL (with scrset) [#4914](https://github.com/wallabag/wallabag/issues/4914)
+
 ## [2.4.1](https://github.com/wallabag/wallabag/tree/2.4.1)
    [Full Changelog](https://github.com/wallabag/wallabag/compare/2.4.0...2.4.1)
 
