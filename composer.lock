@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bab074283482b16cce81ebeeca458a8a",
+    "content-hash": "53c97b89b8f1fec2a7902da7a987ff5d",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -7503,26 +7503,26 @@
         },
         {
             "name": "pragmarx/recovery",
-            "version": "v0.1.0",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antonioribeiro/recovery.git",
-                "reference": "e16573a1ae5345cc3b100eec6d0296a1a15a90fe"
+                "reference": "03db473434ce84212b8991020929b162fe15f01f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antonioribeiro/recovery/zipball/e16573a1ae5345cc3b100eec6d0296a1a15a90fe",
-                "reference": "e16573a1ae5345cc3b100eec6d0296a1a15a90fe",
+                "url": "https://api.github.com/repos/antonioribeiro/recovery/zipball/03db473434ce84212b8991020929b162fe15f01f",
+                "reference": "03db473434ce84212b8991020929b162fe15f01f",
                 "shasum": ""
             },
             "require": {
-                "php": "~7.0",
+                "php": ">=7.0",
                 "pragmarx/random": "~0.1"
             },
             "require-dev": {
                 "phpunit/phpunit": ">=5.4.3",
                 "squizlabs/php_codesniffer": "^2.3",
-                "tightenco/collect": "^5"
+                "tightenco/collect": "^5.0"
             },
             "suggest": {
                 "tightenco/collect": "Allows to generate recovery codes as collections"
@@ -7565,9 +7565,9 @@
             ],
             "support": {
                 "issues": "https://github.com/antonioribeiro/recovery/issues",
-                "source": "https://github.com/antonioribeiro/recovery/tree/master"
+                "source": "https://github.com/antonioribeiro/recovery/tree/v0.2.0"
             },
-            "time": "2017-09-19T16:58:00+00:00"
+            "time": "2021-03-23T22:57:38+00:00"
         },
         {
             "name": "predis/predis",
