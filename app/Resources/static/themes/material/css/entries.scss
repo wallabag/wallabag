@@ -77,6 +77,16 @@
 
   li {
     padding: 0;
+
+    &:not(.active) a:hover,
+    &:not(.active) a:active,
+    &:not(.active) a:focus {
+      background-color: #e6e6e6;
+    }
+
+    &:not(:last-of-type) {
+      margin-right: 10px;
+    }
   }
 
   span,
