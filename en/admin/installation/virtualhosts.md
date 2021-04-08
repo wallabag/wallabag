@@ -33,6 +33,32 @@ Installation in folders can work, but is not supported by the maintainers.
         </IfModule>
     </Directory>
 
+    # If you don't want this caching strategy for your assets
+    # you have to comment the two following blocks
+    <IfModule mod_expires.c>
+        ExpiresActive On
+        ExpiresByType application/javascript A259200
+        ExpiresByType image/avif "access plus 2592000 seconds"
+        ExpiresByType image/gif "access plus 2592000 seconds"
+        ExpiresByType image/jpg "access plus 2592000 seconds"
+        ExpiresByType image/jpeg "access plus 2592000 seconds"
+        ExpiresByType image/png "access plus 2592000 seconds"
+        ExpiresByType image/webp "access plus 2592000 seconds"
+        ExpiresByType text/css "access plus 2592000 seconds"
+    </IfModule>
+
+    <IfModule mod_headers.c>
+        <FilesMatch "\\.css$">
+            Header set Cache-Control "max-age=2592000, public"
+        </FilesMatch>
+        <FilesMatch "\\.(gif|ico|jpe?g|png|svg|webp)$">
+            Header set Cache-Control "max-age=2592000, public, immutable"
+        </FilesMatch>
+        <FilesMatch "\\.js$">
+            Header set Cache-Control "max-age=2592000, private"
+        </FilesMatch>
+    </IfModule>
+
     # uncomment the following lines if you install assets as symlinks
     # or run into problems when compiling LESS/Sass/CoffeScript assets
     # <Directory /var/www/wallabag>
