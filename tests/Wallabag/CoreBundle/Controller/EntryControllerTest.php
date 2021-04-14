@@ -207,8 +207,8 @@ class EntryControllerTest extends WallabagCoreTestCase
         $authors = $content->getPublishedBy();
         $this->assertSame('2017-04-05', $content->getPublishedAt()->format('Y-m-d'));
         $this->assertSame('fr', $content->getLanguage());
-        $this->assertContains('Balenieri', $authors[0]);
-        $this->assertContains('Autran', $authors[1]);
+        $this->assertStringContainsString('Balenieri', $authors[0]);
+        $this->assertStringContainsString('Autran', $authors[1]);
     }
 
     public function testPostNewOkUrlExist()
