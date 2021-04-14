@@ -114,7 +114,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId(
-                'https://www.liberation.fr/societe/2012/12/06/baumettes-un-tour-en-cellule_865551',
+                'https://www.liberation.fr/societe/police-justice/cours-dassises-on-efface-le-peuple-dun-processus-judiciaire-dont-il-est-pourtant-le-coeur-battant-20210414_FYUNIZENHRGHZLAZEKSMKZYEPI/',
                 $this->getLoggedInUserId()
             );
 
