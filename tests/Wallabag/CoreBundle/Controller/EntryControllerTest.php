@@ -1698,6 +1698,10 @@ class EntryControllerTest extends WallabagCoreTestCase
         $entry2->setUrl($this->url);
         $this->getEntityManager()->persist($entry2);
 
+        $entry3 = new Entry($this->getLoggedInUser());
+        $entry3->setUrl($this->url);
+        $this->getEntityManager()->persist($entry3);
+
         $this->getEntityManager()->flush();
         $this->getEntityManager()->clear();
 
@@ -1748,6 +1752,36 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->find($entry2->getId());
 
         $this->assertSame(1, $res->isStarred());
+
+        // Mass actions : tag
+        $client->request('POST', '/mass', [
+            'tag' => '',
+            'tags' => 'foo',
+            'entry-checkbox' => $entries,
+        ]);
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $res = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->find($entry1->getId());
+
+        $this->assertContains('foo', $res->getTagsLabel());
+
+        $res = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->find($entry2->getId());
+
+        $this->assertContains('foo', $res->getTagsLabel());
+
+        $res = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->find($entry3->getId());
+
+        $this->assertNotContains('foo', $res->getTagsLabel());
 
         // Mass actions : delete
         $client->request('POST', '/mass', [
