@@ -67,11 +67,24 @@ class EntryRestController extends WallabagRestController
             throw $this->createAccessDeniedException('URL is empty?, logged user id: ' . $this->getUser()->getId());
         }
 
-        $results = [];
-        foreach ($hashedUrls as $hashedUrlToSearch) {
-            $res = $repo->findByHashedUrlAndUserId($hashedUrlToSearch, $this->getUser()->getId());
+        $results = array_fill_keys($hashedUrls, null);
+        $res = $repo->findByUserIdAndBatchHashedUrls($this->getUser()->getId(), $hashedUrls);
+        foreach ($res as $e) {
+            $_hashedUrl = array_keys($hashedUrls, 'blah', true);
+            if ([] !== array_keys($hashedUrls, $e['hashedUrl'], true)) {
+                $_hashedUrl = $e['hashedUrl'];
+            } elseif ([] !== array_keys($hashedUrls, $e['hashedGivenUrl'], true)) {
+                $_hashedUrl = $e['hashedGivenUrl'];
+            } else {
+                continue;
+            }
+            $results[$_hashedUrl] = $e['id'];
+        }
 
-            $results[$hashedUrlToSearch] = $this->returnExistInformation($res, $returnId);
+        if (false === $returnId) {
+            $results = array_map(function ($v) {
+                return null !== $v;
+            }, $results);
         }
 
         $results = $this->replaceUrlHashes($results, $urlHashMap);
@@ -839,22 +852,5 @@ class EntryRestController extends WallabagRestController
             'authors' => $request->request->get('authors', ''),
             'origin_url' => $request->request->get('origin_url', ''),
         ];
-    }
-
-    /**
-     * Return information about the entry if it exist and depending on the id or not.
-     *
-     * @param Entry|bool|null $entry
-     * @param bool            $returnId
-     *
-     * @return bool|int
-     */
-    private function returnExistInformation($entry, $returnId)
-    {
-        if ($returnId) {
-            return $entry instanceof Entry ? $entry->getId() : null;
-        }
-
-        return $entry instanceof Entry;
     }
 }
