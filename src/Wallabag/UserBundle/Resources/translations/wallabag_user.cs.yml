@@ -1,1 +1,10 @@
-{}
+auth_code:
+    mailer:
+        subject: Ověřovací kód Wallabag
+        body:
+            signature: Tým Wallabag
+            support: 'Pokud máte jakékoliv potíže, neváhejte se na nás obrátit:'
+            second_para: 'Zde je kód:'
+            first_para: Protože pro přihlášení ke svému účtu Wallabag vyžadujete dvojúrovňové ověřování a nové zařízení ho právě použilo, pošleme vám kód k ověření jeho připojení.
+            hello: Ahoj %user%,
+    on: zapnuto
