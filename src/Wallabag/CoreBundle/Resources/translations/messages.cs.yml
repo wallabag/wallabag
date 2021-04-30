@@ -2,7 +2,7 @@ entry:
     filters:
         action:
             filter: Filtrovat
-            clear: Pročistit
+            clear: Vymazat
         created_at:
             to: do
             from: od
@@ -17,6 +17,12 @@ entry:
         language_label: Jazyk
         unread_label: Nepřečtené
         archived_label: Archivované
+        http_status_label: Stav HTTP
+        is_public_help: Veřejný odkaz
+        is_public_label: Má veřejný odkaz
+        preview_picture_help: Náhledový obrázek
+        preview_picture_label: Má náhledový obrázek
+        starred_label: S hvězdičkou
     search:
         placeholder: Co hledáte?
     view:
@@ -25,14 +31,49 @@ entry:
             add_a_tag: Přidat štítek
             set_as_unread: Označit jako nepřečtené
             set_as_read: Označit jako přečtené
+            theme_toggle: Přepnout motiv
+            print: Vytisknout
+            export: Export
+            delete_public_link: odstranit veřejný odkaz
+            public_link: veřejný odkaz
+            share_email_label: E-mail
+            delete: Odstranit
+            re_fetch_content: Znovu načíst obsah
+            view_original_article: Původní článek
+            set_as_starred: Přepnout označení s hvězdičkou
+            back_to_homepage: Zpět
+            back_to_top: Zpět na začátek
     page_titles:
         all: Všechny položky
         untagged: Položky bez štítků
+        filtered_search: 'Filtrované podle hledání:'
+        filtered_tags: 'Filtrované podle štítků:'
+        filtered: Filtrované položky
+        archived: Archivované položky
+        starred: Položky s hvězdičkou
+        unread: Nepřečtené položky
     default_title: Název položky
+    list:
+        export_title: Export
+        delete: Odstranit
+        toogle_as_star: Přepnout označení s hvězdičkou
+        toogle_as_read: Přepnout označení jako přečtené
+        original_article: původní
+        reading_time_less_one_minute_short: '&lt; 1 min'
+        reading_time_minutes_short: '%readingTime% min'
+        number_of_tags: '{1}a jeden jiný štítek|]1,4[a %count% jiné štítky|]4,Inf[a %count% jiných štítků'
+        reading_time_less_one_minute: 'odhadovaný čas čtení: &lt; 1 min'
+        reading_time_minutes: 'odhadovaný čas čtení: %readingTime% min'
+        reading_time: odhadovaný čas čtení
+        number_on_the_page: '{0} Nemáte žádné položky.|{1} Máte jednu položku.|]1,4[ Máte %count% položky.|]4,Inf[ Máte %count% položek.'
 menu:
     top:
         search: Hledat
         add_new_entry: Přidat novou položku
+        account: Můj účet
+        random_entry: Přejít na náhodnou položku z tohoto seznamu
+        export: Export
+        filter_entries: Filtrovat položky
     left:
         tags: Štítky
         all_articles: Všechny položky
@@ -41,6 +82,23 @@ menu:
         logout: Odhlásit se
         import: Import
         developer: Správa API klientů
+        theme_toggle_auto: Automatický motiv
+        theme_toggle_dark: Tmavý motiv
+        theme_toggle_light: Světlý motiv
+        quickstart: Rychlé spuštění
+        ignore_origin_instance_rules: Globální pravidla ignorování původu
+        site_credentials: Přihlašovací údaje pro stránku
+        users_management: Správa uživatelů
+        back_to_unread: Zpět na nepřečtené články
+        save_link: Uložit odkaz
+        search: Hledat
+        about: O aplikaci
+        howto: Nápověda
+        internal_settings: Vnitřní nastavení
+        config: Konfigurace
+        starred: S hvězdičkou
+    search_form:
+        input_label: Zadejte sem své hledání
 config:
     form_rules:
         faq:
@@ -48,32 +106,96 @@ config:
                 readingTime: Odhadovaný čas čtení položky, v minutách
                 language: Jazyk položky
                 isArchived: Zda je položka archivovaná nebo ne
-                url: URL adresa položky
+                url: Adresa URL položky
                 title: Název položky
                 label: Proměnná
+                domainName: Název domény položky
+                mimetype: Typ média položky
+                content: Obsah položky
+                isStarred: Zda je položka označena hvězdičkou nebo ne
             operator_description:
                 greater_than: Větší než…
+                notmatches: 'Testuje, zda <i>předmět</i> neodpovídá <i>vyhledávání</i> (nerozlišuje velká a malá písmena).<br />Příklad: <code>title nomatches "fotbal"</code>'
+                matches: 'Testuje, zda <i>předmět</i> odpovídá <i>vyhledávání</i> (nerozlišuje velká a malá písmena).<br />Příklad: <code>title matches "fotbal"</code>'
+                and: Jedno pravidlo A jiné
+                or: Jedno pravidlo NEBO jiné
+                not_equal_to: Není rovno…
+                equal_to: Je rovno…
+                strictly_greater_than: Přesně větší o než…
+                strictly_less_than: Přesně menší o než…
+                less_than: Menší než…
+                label: Operátor
+            meaning: Význam
+            variables_available_description: 'Pro vytvoření pravidel štítkování mohou být použity následující proměnné a operátory:'
+            variables_available_title: Které proměnné a operátory mohu pro psaní pravidel použít?
+            how_to_use_them_description: 'Předpokládejme, že chcete označit nové položky štítkem jako je « <i>krátké čtení</i> », pokud je doba čtení kratší než 3 minuty.<br />V takovém případě byste měli do pole <i>Pravidlo</i> zadat « readingTime &lt;= 3 » a do pole <i>Štítky</i> zadat « <i>krátké čtení</i> ».<br />Několik štítků současně lze přidat jejich oddělením čárkou: « <i>krátké čtení, musím přečíst</i> »<br />Složitá pravidla lze zapsat pomocí předdefinovaných operátorů: if « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » pak označit štítkem jako « <i>dlouhé čtení, GitHub</i> »'
+            how_to_use_them_title: Jak je použiji?
+            tagging_rules_definition_description: Jsou to pravidla používaná programem wallabag k automatickému označování nových položek štítkem. <br />Pokaždé, když je přidána nová položky, všechna pravidla štítkování budou použita k přidání štítků, které jste nakonfigurovali, čímž vám ušetří potíže s ručním označováním vašich položek.
+            tagging_rules_definition_title: Co znamenají „pravidla štítkování“?
+            title: Časté otázky
+        export: Exportovat
+        import_submit: Importovat
+        file_label: Soubor JSON
+        card:
+            export_tagging_rules_detail: Toto stáhne soubor JSON, který můžete použít pro import pravidel štítkování někde jinde nebo pro jejich zálohu.
+            import_tagging_rules_detail: Musíte vybrat soubor JSON, který jste dříve exportovali.
+            export_tagging_rules: Exportovat pravidla štítkování
+            import_tagging_rules: Importovat pravidla štítkování
+            new_tagging_rule: Vytvořit pravidlo štítkování
+        tags_label: Štítky
+        rule_label: Pravidlo
+        edit_rule_label: upravit
+        delete_rule_label: odstranit
+        then_tag_as_label: pak označit štítkem jako
+        if_label: pokud
     form_user:
         name_label: Jméno
         delete:
-            description: Pokud odstraníte váš účet, VŠECHNY vaše články, VŠECHNY vaše štítky, VŠECHNY vaše anotace a váš účet budou TRVALE odstraněny (tuto akci NELZE VRÁTIT ZPĚT). Pak budete odhlášeni.
+            description: Pokud odeberete svůj účet, VŠECHNY vaše články, VŠECHNY vaše štítky, VŠECHNY vaše anotace a váš účet budou TRVALE odebrány (tuto akci NELZE VRÁTIT ZPĚT). Pak budete odhlášeni.
+            button: Odstranit můj účet
+            confirm: Opravdu to chcete? (TUTO AKCI NELZE VRÁTIT ZPĚT)
+            title: Odstranit můj účet (alias nebezpečná zóna)
+        two_factor:
+            action_app: Použít aplikaci OTP
+            action_email: Použít e-mail
+            state_disabled: Zakázáno
+            state_enabled: Povoleno
+            table_action: Akce
+            table_state: Stav
+            table_method: Metoda
+            googleTwoFactor_label: Pomocí aplikace OTP (otevřete aplikaci, jako je Google Authenticator, Authy nebo FreeOTP, abyste získali jednorázový kód)
+            emailTwoFactor_label: Pomocí e-mailu (obdržíte e-mailem kód)
+        email_label: E-mail
+        login_label: Uživatelské jméno (nelze změnit)
+        two_factor_description: Povolení dvojúrovňového ověřování znamená, že při každém novém nedůvěryhodném připojení obdržíte e-mail s kódem.
     form_settings:
-        help_language: Zde můžete změnit jazyk uživatelského rozhraní wallabagu.
-        help_reading_speed: wallabag spočítá pro každý článek čas potřebný k jeho čtení. Zde můžete určit, pomocí tohoto seznamu, jestli jste rychlý nebo pomalý čtenář a wallabag následně přepočítá čas potřebný ke čtení každého článku.
+        help_language: Můžete změnit jazyk rozhraní wallabagu.
+        help_reading_speed: wallabag spočítá čas čtení pro každý článek. Zde můžete určit, pomocí tohoto seznamu, jestli jste rychlý nebo pomalý čtenář. wallabag přepočítá čas čtení pro každý článek.
         items_per_page_label: Položek na stránku
         action_mark_as_read:
             redirect_current_page: Zůstat na aktuální stránce
+            redirect_homepage: Přejít na domovskou stránku
+            label: Co dělat po odebrání článku, jeho označení hvězdičkou nebo označení jako přečteného?
         reading_speed:
-            400_word: Čtu ~ 400 slov za minutu
-            300_word: Čtu ~ 300 slov za minutu
-            200_word: Čtu ~ 200 slov za minutu
-            100_word: Čtu ~ 100 slov za minutu
+            400_word: Čtu cca 400 slov za minutu
+            300_word: Čtu cca 300 slov za minutu
+            200_word: Čtu cca 200 slov za minutu
+            100_word: Čtu cca 100 slov za minutu
             label: Rychlost čtení
+            help_message: 'Pro odhad vaší rychlosti čtení můžete použít online nástroje:'
         language_label: Jazyk
+        help_pocket_consumer_key: Vyžadováno pro import z Pocketu. Můžete ho vytvořit ve svém účtu Pocket.
+        help_items_per_page: Můžete změnit počet článků zobrazených na každé stránce.
+        help_theme: wallabag je přizpůsobitelný. Zde si můžete vybrat upřednostňovaný motiv.
+        android_instruction: Klepnutím sem předvyplníte svou aplikaci pro Android
+        android_configuration: Nakonfigurujte svou aplikaci pro Android
+        pocket_consumer_key_label: Zákaznický klíč pro Pocket k importu obsahu
+        theme_label: Motiv
     form_password:
         new_password_label: Nové heslo
         old_password_label: Aktuální heslo
-        description: Zde můžete změnit vaše heslo. Vaše nové heslo by mělo mít nejméně 8 znaků.
+        description: Zde můžete změnit své heslo. Vaše nové heslo by mělo být alespoň 8 znaků dlouhé.
+        repeat_new_password_label: Zopakujte nové heslo
     form_rss:
         rss_limit: Počet položek v novinkovém kanálu
         rss_link:
@@ -87,6 +209,11 @@ config:
         settings: Nastavení
         password: Heslo
         new_user: Přidat uživatele
+        reset: Oblast obnovení
+        ignore_origin: Pravidla ignorování původu
+        rules: Pravidla štítkování
+        user_info: Informace o uživateli
+        feed: Kanály
     form:
         save: Uložit
     otp:
@@ -94,18 +221,68 @@ config:
             qrcode_label: QR kód
             enable: Povolit
             cancel: Zrušit
+            two_factor_code_description_5: 'Pokud nevidíte QR kód nebo ho nemůžete naskenovat, zadejte v aplikaci následující tajný klíč:'
+            two_factor_code_description_4: 'Otestujte kód OTP z nakonfigurované aplikace:'
+            two_factor_code_description_3: 'Tyto záložní kódy si také uložte na bezpečné místo, můžete je použít v případě, že ztratíte přístup k aplikaci OTP:'
+            two_factor_code_description_2: 'Tento QR kód můžete naskenovat pomocí aplikace:'
+            two_factor_code_description_1: Právě jste povolili dvojúrovňové ověřování OTP, otevřete aplikaci OTP a použijte tento kód pro získání jednorázového hesla. Po opětovném načtení stránky zmizí.
+        page_title: Dvojúrovňové ověřování
+    form_ignore_origin_rules:
+        faq:
+            operator_description:
+                matches: 'Testuje, zda <i>předmět</i> odpovídá <i>vyhledávání</i> (nerozlišuje velká a malá písmena).<br />Příklad: <code>_all ~ "https?://rss.domena.cz/foobar/.*"</code>'
+                equal_to: Je rovno…
+                label: Operátor
+            variable_description:
+                _all: Úplná adresa, zejména pro porovnávání vzorů
+                host: Hostitel adresy
+                label: Proměnná
+            meaning: Význam
+            variables_available_description: 'K vytvoření pravidel ignorování původu lze použít následující proměnné a operátory:'
+            variables_available_title: Které proměnné a operátory mohu použít k zápisu pravidel?
+            how_to_use_them_description: Předpokládejme, že chcete ignorovat původ položky přicházející z « <i>rss.domena.cz</i> » (<i>s vědomím, že po přesměrování je skutečná adresa domena.cz</i>).<br />V takovém případě byste měli do pole <i>Pravidlo</i> zadat « host = "rss.domena.cz" ».
+            how_to_use_them_title: Jak je použiji?
+            ignore_origin_rules_definition_description: Jsou používána programem wallabag k automatickému ignorování adresy původu po přesměrování.<br />Pokud dojde k přesměrování při načítání nové položky, budou všechna pravidla ignorování původu (<i>uživatelem definovaná a definovaná instancí</i>) použita k ignorování adresy původu.
+            ignore_origin_rules_definition_title: Co znamená „ignorovat pravidla původu“?
+            title: Časté otázky
+    reset:
+        confirm: Opravdu to chcete? (TUTO AKCI NELZE VRÁTIT ZPĚT)
+        archived: Odebrat VŠECHNY archivované položky
+        entries: Odebrat VŠECHNY položky
+        tags: Odebrat VŠECHNY štítky
+        annotations: Odebrat VŠECHNY anotace
+        description: Stisknutím níže uvedených tlačítek budete mít možnost odebrat některé informace ze svého účtu. Uvědomte si, že tyto akce jsou NEVRATNÉ.
+        title: Oblast obnovení (alias nebezpečná zóna)
+    form_feed:
+        feed_limit: Počet položek v kanálu
+        feed_link:
+            all: Vše
+            archive: Archivované
+            starred: S hvězdičkou
+            unread: Nepřečtené
+        feed_links: Odkazy na kanál
+        token_revoke: Odvolat token
+        token_reset: Znovu vygenerujte svůj token
+        token_create: Vytvořte svůj token
+        no_token: Žádný token
+        token_label: Token kanálu
+        description: Informační kanály Atom poskytované wallabagem vám umožní číst vaše uložené články pomocí vaší oblíbené čtečky Atom. Nejprve musíte vygenerovat token.
+    page_title: Konfigurace
 security:
     register:
         page_title: Vytvořit účet
+        go_to_account: Přejít do účtu
     login:
         cancel: Zrušit
         register: Zaregistrovat se
         submit: Přihlásit se
-        forgot_password: Zapomněli jste vaše heslo?
+        forgot_password: Zapomněli jste své heslo?
         page_title: Vítejte ve wallabagu!
         password: Heslo
         username: Uživatelské jméno
         keep_logged_in: Neodhlašovat mě
+    resetting:
+        description: Níže zadejte svou e-mailovou adresu a my vám zašleme pokyny pro obnovení hesla.
 tag:
     new:
         add: Přidat
@@ -195,3 +372,10 @@ about:
         documentation: Dokumentace
     who_behind_wallabag:
         version: Verze
+footer:
+    stats: Od %user_creation% jste přečetli %nb_archives% článků. To je asi %per_day% denně!
+    wallabag:
+        about: O aplikaci
+        powered_by: používá technologii
+        social: Sociální
+        elsewhere: Vezměte si wallabag s sebou
