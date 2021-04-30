@@ -43,6 +43,19 @@ entry:
             set_as_starred: Přepnout označení s hvězdičkou
             back_to_homepage: Zpět
             back_to_top: Zpět na začátek
+            problem:
+                description: Zobrazuje se tento článek špatně?
+                label: Problémy?
+            theme_toggle_auto: Automatický
+            theme_toggle_dark: Tmavý
+            theme_toggle_light: Světlý
+        provided_by: Poskytuje
+        published_by: Zveřejnil
+        published_at: Datum zveřejnění
+        created_at: Datum vytvoření
+        annotations_on_the_entry: '{0} Žádná anotace|{1} Jedna anotace|]1,4[ %count% anotace|]4,Inf[ %count% anotací'
+        original_article: původní
+        edit_title: Upravit název
     page_titles:
         all: Všechny položky
         untagged: Položky bez štítků
@@ -66,6 +79,28 @@ entry:
         reading_time_minutes: 'odhadovaný čas čtení: %readingTime% min'
         reading_time: odhadovaný čas čtení
         number_on_the_page: '{0} Nemáte žádné položky.|{1} Máte jednu položku.|]1,4[ Máte %count% položky.|]4,Inf[ Máte %count% položek.'
+    metadata:
+        published_on: Zveřejněno
+        added_on: Přidáno
+        address: Adresa
+        reading_time_minutes_short: '%readingTime% min'
+        reading_time: Odhadovaný čas čtení
+    confirm:
+        delete_tag: Opravdu chcete odebrat tento štítek z tohoto článku?
+        delete: Opravdu chcete tento článek odebrat?
+    public:
+        shared_by_wallabag: Tento článek již sdílel %username% s <a href='%wallabag_instance%'>wallabagem</a>
+    edit:
+        save_label: Uložit
+        origin_url_label: Původní URL (kde jste danou položku našli)
+        url_label: URL
+        title_label: Název
+        page_title: Upravit položku
+    new:
+        form_new:
+            url_label: URL
+        placeholder: http://stranka.cz
+        page_title: Uložit novou položku
 menu:
     top:
         search: Hledat
@@ -301,6 +336,8 @@ quickstart:
         description: Používáte jinou službu? Pomůžeme vám načíst vaše data na wallabag.
     first_steps:
         description: Nyní je wallabag správně nakonfigurován a je načase začít archivovat web. Pomocí znaku + vpravo nahoře můžete přidat odkaz.
+    more: Více…
+    page_title: Rychlé spuštění
 developer:
     existing_clients:
         no_client: Zatím tu není žádný klient.
@@ -370,8 +407,33 @@ error:
 about:
     getting_help:
         documentation: Dokumentace
+        support: <a href="https://github.com/wallabag/wallabag/issues">na GitHub</a>
+        bug_reports: Hlášení chyb
     who_behind_wallabag:
         version: Verze
+        license: Licence
+        project_website: Webová stránka projektu
+        many_contributors: A mnoho dalších přispěvatelů ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">na GitHub</a>
+        website: webová stránka
+        developped_by: Vyvinul
+    third_party:
+        license: Licence
+        package: Balíček
+        description: 'Zde je seznam knihoven třetích stran použitých ve wallabagu (s jejich licencemi):'
+    contributors:
+        description: Děkujeme přispěvatelům webové aplikace wallabag
+    helping:
+        by_paypal: prostřednictvím Paypal
+        by_contributing_2: vydání obsahuje seznam všech našich potřeb
+        by_contributing: 'přispěním k projektu:'
+        description: 'wallabag je zdarma a má otevřený zdrojový kód. Můžete nám pomoci:'
+    top_menu:
+        third_party: Knihovny třetích stran
+        contributors: Přispěvatelé
+        helping: Pomozte wallabagu
+        getting_help: Jak získat pomoc
+        who_behind_wallabag: Kdo stojí za wallabagem
+    page_title: O aplikaci
 footer:
     stats: Od %user_creation% jste přečetli %nb_archives% článků. To je asi %per_day% denně!
     wallabag:
@@ -379,3 +441,54 @@ footer:
         powered_by: používá technologii
         social: Sociální
         elsewhere: Vezměte si wallabag s sebou
+howto:
+    shortcuts:
+        open_article: Zobrazit vybranou položku
+        arrows_navigation: Procházet články
+        hide_form: Skrýt aktuální formulář (hledat nebo nový odkaz)
+        add_link: Přidat nový odkaz
+        material_title: Klávesové zkratky dostupné pouze s motivem Material
+        delete: Odstranit položku
+        toggle_favorite: Přepnout stav označení hvězdičkou pro položku
+        toggle_archive: Přepnout stav přečtení pro položku
+        open_original: Otevřít původní adresu URL položky
+        article_title: Klávesové zkratky dostupné v zobrazení položek
+        search: Zobrazit vyhledávací formulář
+        list_title: Klávesové zkratky dostupné na stránkách se seznamy
+        go_logout: Odhlásit se
+        go_howto: Přejít na nápovědu (tato stránka!)
+        go_developers: Přejít na vývojáře
+        go_import: Přejít na import
+        go_config: Přejít na konfiguraci
+        go_tags: Přejít na štítky
+        go_all: Přejít na všechny položky
+        go_archive: Přejít na archivované
+        go_starred: Přejít na označené hvězdičkou
+        go_unread: Přejít na nepřečtené
+        all_pages_title: Klávesové zkratky dostupné na všech stránkách
+        action: Akce
+        shortcut: Klávesová zkratka
+        page_description: Zde jsou uvedeny klávesové zkratky dostupné v aplikaci wallabag.
+    bookmarklet:
+        description: 'Přetáhněte tento odkaz na svůj panel záložek:'
+    mobile_apps:
+        windows: na Microsoft Store
+        ios: na iTunes Store
+        android:
+            via_google_play: prostřednictvím Google Play
+            via_f_droid: prostřednictvím F-Droid
+    browser_addons:
+        opera: Rozšíření pro Operu
+        chrome: Rozšíření pro Chrome
+        firefox: Rozšíření pro Firefox
+    form:
+        description: Díky tomuto formuláři
+    top_menu:
+        bookmarklet: Záložkový aplet
+        mobile_apps: Mobilní aplikace
+        browser_addons: Rozšíření prohlížeče
+    page_description: 'Článek lze uložit několika způsoby:'
+    tab_menu:
+        add_link: Přidání odkazu
+        shortcuts: Použití klávesových zkratek
+    page_title: Jak na to
