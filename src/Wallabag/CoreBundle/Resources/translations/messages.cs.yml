@@ -321,23 +321,66 @@ security:
 tag:
     new:
         add: Přidat
+        placeholder: Můžete přidat několik štítků oddělených čárkou.
     page_title: Štítky
+    list:
+        untagged: Položky bez štítků
+        no_untagged_entries: Nejsou žádné položky bez štítků.
+        see_untagged_entries: Zobrazit položky bez štítků
+        number_on_the_page: '{0}Nejsou žádné štítky.|{1} Je jeden štítek.|]1,4[ Jsou %count% štítky.|]4,Inf[ Je %count% štítků.'
 quickstart:
     support:
         title: Podpora
         gitter: Na Gitteru
-        email: Emailem
+        email: E-mailem
         github: Na GitHubu
+        description: Pokud potřebujete pomoc, jsme tu pro vás.
     docs:
         title: Úplná dokumentace
+        all_docs: A spousta dalších článků!
+        fetching_errors: Co mohu dělat, pokud se při načítání článku vyskytnou chyby?
+        search_filters: Podívejte se, jak můžete vyhledat článek pomocí vyhledávače a filtrů
+        export: Převeďte své články do ePUB nebo PDF
+        annotate: Anotujte svůj článek
+        description: Ve wallabagu je spousta funkcí. Neváhejte si přečíst návod, abyste se s nimi seznámili a naučili se je používat.
     developer:
         title: Vývojáři
+        use_docker: Použijte Docker pro instalaci aplikace wallabag
+        create_application: Vytvořte svou aplikaci třetí strany
+        description: 'Mysleli jsme také na vývojáře: Docker, API, překlady atd.'
     migrate:
         description: Používáte jinou službu? Pomůžeme vám načíst vaše data na wallabag.
+        instapaper: Migrace z Instapaper
+        readability: Migrace z Readability
+        wallabag_v2: Migrace z wallabag v2
+        wallabag_v1: Migrace z wallabag v1
+        pocket: Migrace z Pocket
+        title: Migrace ze stávající služby
     first_steps:
-        description: Nyní je wallabag správně nakonfigurován a je načase začít archivovat web. Pomocí znaku + vpravo nahoře můžete přidat odkaz.
+        description: Nyní je wallabag správně nakonfigurován a je načase začít archivovat web. Pro přidání odkazu můžete kliknout na znak + vpravo nahoře.
+        unread_articles: A utřiďte ho!
+        new_article: Uložte svůj první článek
+        title: První kroky
     more: Více…
     page_title: Rychlé spuštění
+    admin:
+        import: Konfigurovat import
+        export: Konfigurovat export
+        sharing: Povolit některé parametry ohledně sdílení článků
+        analytics: Konfigurovat analýzu
+        new_user: Vytvořit nového uživatele
+        title: Správa
+        description: 'Jako správce máte oprávnění k wallabagu. Můžete:'
+    configure:
+        tagging_rules: Napište pravidla pro automatické štítkování článků
+        feed: Povolte kanály
+        language: Změňte jazyk a vzhled
+        description: Abyste měli aplikaci, která vám vyhovuje, podívejte se na konfiguraci wallabagu.
+        title: Nakonfigurujte aplikaci
+    intro:
+        paragraph_2: Sledujte nás!
+        paragraph_1: Doprovodíme vás při návštěvě aplikace wallabag a ukážeme vám některé funkce, které by vás mohly zajímat.
+        title: Vítejte v aplikaci wallabag!
 developer:
     existing_clients:
         no_client: Zatím tu není žádný klient.
@@ -396,8 +439,24 @@ import:
     form:
         save_label: Nahrát soubor
         file_label: Soubor
+        mark_as_read_label: Označit všechny importované položky jako přečtené
+        mark_as_read_title: Označit vše jako přečtené?
     pocket:
         connect_to_pocket: Připojit se k Pocketu a importovat data
+        authorize_message: Můžete importovat data z účtu Pocket. Stačí kliknout na níže uvedené tlačítko a autorizovat aplikaci pro připojení k webu getpocket.com.
+        config_missing:
+            user_message: Správce serveru musí definovat klíč API pro službu Pocket.
+            admin_message: Musíte definovat %keyurls%a pocket_consumer_key%keyurle%.
+            description: Import z Pocket není nakonfigurován.
+        description: Tento nástroj pro import importuje všechna vaše data z Pocket. Pocket nám neumožňuje načítat obsah z jejich služby, takže čitelný obsah každého článku bude znovu načten pomocí aplikace wallabag.
+        page_title: Import > Pocket
+    wallabag_v1:
+        description: Tento nástroj pro import importuje všechny vaše články z wallabagu v1. Na stránce konfigurace klikněte na "JSON export" v části "Exportovat vaše data wallabagu". Získáte soubor "wallabag-export-1-xxxx-xx-xx.json".
+        page_title: Import > Wallabag v1
+    action:
+        import_contents: Importovat obsah
+    page_description: Vítejte v nástroji wallabagu pro import. Vyberte svou předchozí službu, ze které chcete migrovat.
+    page_title: Import
 flashes:
     config:
         notice:
@@ -492,3 +551,6 @@ howto:
         add_link: Přidání odkazu
         shortcuts: Použití klávesových zkratek
     page_title: Jak na to
+export:
+    unknown: Neznámý
+    footer_template: <div style="text-align:center;"><p>Vytvořeno ve wallabagu pomocí %method%</p><p>Otevřete prosím <a href="https://github.com/wallabag/wallabag/issues">problém</a>, pokud máte potíže se zobrazením této e-knihy na svém zařízení.</p></div>
