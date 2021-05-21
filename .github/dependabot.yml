@@ -3,7 +3,7 @@ updates:
 - package-ecosystem: npm
   directory: "/"
   schedule:
-    interval: daily
+    interval: monthly
     time: "04:00"
     timezone: Europe/Paris
   open-pull-requests-limit: 10
@@ -14,7 +14,7 @@ updates:
 - package-ecosystem: composer
   directory: "/"
   schedule:
-    interval: daily
+    interval: monthly
     time: "04:00"
     timezone: Europe/Paris
   open-pull-requests-limit: 10
