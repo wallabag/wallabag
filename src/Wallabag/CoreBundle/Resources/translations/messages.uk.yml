@@ -33,6 +33,9 @@ menu:
         users_management: Керування користувачами
         site_credentials: Облікові записи сайтів
         quickstart: Швидкий старт
+        theme_toggle_auto: Автоматичний вибір оформлення
+        theme_toggle_dark: Темне оформлення
+        theme_toggle_light: Світле оформлення
     top:
         add_new_entry: Додати новий запис
         search: Пошук
@@ -601,6 +604,8 @@ flashes:
             archived_reset: Видалено архівні статті
             otp_enabled: Увімкнено двофакторну авторизацію
             otp_disabled: Вимкнено двофакторну авторизацію
+            tagging_rules_not_imported: Виникла помилка з завантаженням правил для тегів
+            tagging_rules_imported: Завантаження правил для тегів закінчено
     entry:
         notice:
             entry_already_saved: Стаття вже була збережена %date%
@@ -614,9 +619,11 @@ flashes:
             entry_starred: Додано в закладки
             entry_unstarred: Видалено із закладок
             entry_deleted: Видалено
+            no_random_entry: Не було знайдено жодної статті за заданими критеріями
     tag:
         notice:
             tag_added: Тег створено
+            tag_renamed: Змінено ім'я тегу
     import:
         notice:
             failed: Не вдалось імпортувати, спробуйте ще раз.
