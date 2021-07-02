@@ -700,3 +700,6 @@ ignore_origin_instance_rule:
         delete: Supprimer
         save: Sauvegarder
         rule_label: Règle
+pager:
+    previous: Précédent
+    next: Suivant

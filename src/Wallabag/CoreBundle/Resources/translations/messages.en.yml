@@ -699,3 +699,6 @@ flashes:
             added: 'Global ignore origin rule added'
             updated: 'Global ignore origin rule updated'
             deleted: 'Global ignore origin rule deleted'
+pager:
+    previous: Previous
+    next: Next

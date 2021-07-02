@@ -8,7 +8,7 @@
         <div class="col s12">
             <div class="card-panel">
                 {% if users.getNbPages > 1 %}
-                    {{ pagerfanta(users, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+                    {{ pagerfanta(users, 'twitter_bootstrap', {'proximity': 1, 'prev_message': 'pager.previous'|trans, 'next_message': 'pager.next'|trans}) }}
                 {% endif %}
                 <div class="row">
                     <div class="col s6">
@@ -59,7 +59,7 @@
                         <a href="{{ path('user_new') }}" class="waves-effect waves-light btn">{{ 'user.list.create_new_one'|trans }}</a>
                     </p>
                     {% if users.getNbPages > 1 %}
-                        {{ pagerfanta(users, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+                        {{ pagerfanta(users, 'twitter_bootstrap', {'proximity': 1, 'prev_message': 'pager.previous'|trans, 'next_message': 'pager.next'|trans}) }}
                     {% endif %}
                 </div>
             </div>

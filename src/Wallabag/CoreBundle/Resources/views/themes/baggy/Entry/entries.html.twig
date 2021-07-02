@@ -37,7 +37,7 @@
             <i class="btn-clickable download-btn material-icons md-24 js-export-action">file_download</i>
             <i class="btn-clickable filter-btn material-icons md-24 js-filters-action">filter_list</i>
             {% if entries.getNbPages > 1 %}
-                {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+                {{ pagerfanta(entries, 'twitter_bootstrap', {'proximity': 1, 'prev_message': 'pager.previous'|trans, 'next_message': 'pager.next'|trans}) }}
             {% endif %}
         </div>
     </div>
@@ -87,7 +87,7 @@
     {% endfor %}
 
     {% if entries.getNbPages > 1 %}
-        {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+        {{ pagerfanta(entries, 'twitter_bootstrap', {'proximity': 1, 'prev_message': 'pager.previous'|trans, 'next_message': 'pager.next'|trans}) }}
     {% endif %}
 
     <!-- Export -->

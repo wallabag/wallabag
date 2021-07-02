@@ -35,7 +35,7 @@
             {% endif %}
         </div>
         {% if entries.getNbPages > 1 %}
-            {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+            {{ pagerfanta(entries, 'twitter_bootstrap', {'proximity': 1, 'prev_message': 'pager.previous'|trans, 'next_message': 'pager.next'|trans}) }}
         {% endif %}
     </div>
 
@@ -71,7 +71,7 @@
 
     {% if entries.getNbPages > 1 %}
         <div class="results">
-            {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+            {{ pagerfanta(entries, 'twitter_bootstrap', {'proximity': 1, 'prev_message': 'pager.previous'|trans, 'next_message': 'pager.next'|trans}) }}
         </div>
     {% endif %}
 
