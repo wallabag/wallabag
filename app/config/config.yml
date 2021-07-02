@@ -110,12 +110,7 @@ fos_rest:
             pdf: true
             epub: true
             mobi: true
-        templating_formats:
-            html: false
-        force_redirects:
-            html: true
         failed_validation: HTTP_BAD_REQUEST
-        default_engine: twig
     routing_loader:
         default_format: json
     format_listener:
