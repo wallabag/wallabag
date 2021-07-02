@@ -2,6 +2,10 @@
 
 namespace Wallabag\ApiBundle\Controller;
 
+use FOS\RestBundle\Controller\Annotations\Delete;
+use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Post;
+use FOS\RestBundle\Controller\Annotations\Put;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -21,6 +25,17 @@ class AnnotationRestController extends WallabagRestController
      * )
      *
      * @return JsonResponse
+     *
+     * @Get(
+     *  path="/api/annotations/{entry}.{_format}",
+     *  name="api_get_annotations",
+     *  defaults={
+     *      "_format"="json"
+     *  },
+     *  requirements={
+     *      "_format"="json"
+     *  }
+     *  )
      */
     public function getAnnotationsAction(Entry $entry)
     {
@@ -43,6 +58,17 @@ class AnnotationRestController extends WallabagRestController
      * )
      *
      * @return JsonResponse
+     *
+     * @Post(
+     *  path="/api/annotations/{entry}.{_format}",
+     *  name="api_post_annotation",
+     *  defaults={
+     *      "_format"="json"
+     *  },
+     *  requirements={
+     *      "_format"="json"
+     *  }
+     * )
      */
     public function postAnnotationAction(Request $request, Entry $entry)
     {
@@ -66,6 +92,17 @@ class AnnotationRestController extends WallabagRestController
      * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
      *
      * @return JsonResponse
+     *
+     * @Put(
+     *  path="/api/annotations/{annotation}.{_format}",
+     *  name="api_put_annotation",
+     *  defaults={
+     *      "_format"="json"
+     *  },
+     *  requirements={
+     *      "_format"="json"
+     *  }
+     * )
      */
     public function putAnnotationAction(Annotation $annotation, Request $request)
     {
@@ -89,6 +126,17 @@ class AnnotationRestController extends WallabagRestController
      * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
      *
      * @return JsonResponse
+     *
+     * @Delete(
+     *  path="/api/annotations/{annotation}.{_format}",
+     *  name="api_delete_annotation",
+     *  defaults={
+     *      "_format"="json"
+     *  },
+     *  requirements={
+     *      "_format"="json"
+     *  }
+     * )
      */
     public function deleteAnnotationAction(Annotation $annotation)
     {

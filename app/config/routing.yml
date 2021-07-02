@@ -1,6 +1,7 @@
 wallabag_annotation:
-  type : rest
-  resource: "@WallabagAnnotationBundle/Resources/config/routing_annotations.yml"
+  type : annotation
+  resource: "@WallabagAnnotationBundle/Controller/"
+  defaults: {_format: json}
 
 wallabag_import:
     resource: "@WallabagImportBundle/Controller/"
@@ -25,8 +26,8 @@ doc-api:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix: /api/doc
 
-rest :
-    type : rest
+rest:
+    type : annotation
     resource : "routing_rest.yml"
     prefix : /api
 

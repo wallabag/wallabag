@@ -111,8 +111,7 @@ fos_rest:
             epub: true
             mobi: true
         failed_validation: HTTP_BAD_REQUEST
-    routing_loader:
-        default_format: json
+    routing_loader: false
     format_listener:
         enabled: true
         rules:

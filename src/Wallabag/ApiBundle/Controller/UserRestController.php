@@ -2,6 +2,8 @@
 
 namespace Wallabag\ApiBundle\Controller;
 
+use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use JMS\Serializer\SerializationContext;
@@ -19,6 +21,17 @@ class UserRestController extends WallabagRestController
      * @ApiDoc()
      *
      * @return JsonResponse
+     *
+     * @Get(
+     *  path="/api/user.{_format}",
+     *  name="api_get_user",
+     *  defaults={
+     *      "_format"="json"
+     *  },
+     *  requirements={
+     *      "_format"="json"
+     *  }
+     * )
      */
     public function getUserAction()
     {
@@ -42,6 +55,17 @@ class UserRestController extends WallabagRestController
      * @todo Make this method (or the whole API) accessible only through https
      *
      * @return JsonResponse
+     *
+     * @Put(
+     *  path="/api/user.{_format}",
+     *  name="api_put_user",
+     *  defaults={
+     *      "_format"="json"
+     *  },
+     *  requirements={
+     *      "_format"="json"
+     *  }
+     * )
      */
     public function putUserAction(Request $request)
     {

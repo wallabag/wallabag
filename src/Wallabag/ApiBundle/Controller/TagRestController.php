@@ -2,10 +2,11 @@
 
 namespace Wallabag\ApiBundle\Controller;
 
+use FOS\RestBundle\Controller\Annotations\Delete;
+use FOS\RestBundle\Controller\Annotations\Get;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 
 class TagRestController extends WallabagRestController
@@ -16,6 +17,17 @@ class TagRestController extends WallabagRestController
      * @ApiDoc()
      *
      * @return JsonResponse
+     *
+     * @Get(
+     *  path="/api/tags.{_format}",
+     *  name="api_get_tags",
+     *  defaults={
+     *      "_format"="json"
+     *  },
+     *  requirements={
+     *      "_format"="json"
+     *  }
+     * )
      */
     public function getTagsAction()
     {
@@ -40,6 +52,17 @@ class TagRestController extends WallabagRestController
      * )
      *
      * @return JsonResponse
+     *
+     * @Delete(
+     *  path="/api/tag/label.{_format}",
+     *  name="api_delete_tag_label",
+     *  defaults={
+     *      "_format"="json"
+     *  },
+     *  requirements={
+     *      "_format"="json"
+     *  }
+     * )
      */
     public function deleteTagLabelAction(Request $request)
     {
@@ -75,6 +98,17 @@ class TagRestController extends WallabagRestController
      * )
      *
      * @return JsonResponse
+     *
+     * @Delete(
+     *  path="/api/tags/label.{_format}",
+     *  name="api_delete_tags_label",
+     *  defaults={
+     *      "_format"="json"
+     *  },
+     *  requirements={
+     *      "_format"="json"
+     *  }
+     * )
      */
     public function deleteTagsLabelAction(Request $request)
     {
@@ -109,6 +143,17 @@ class TagRestController extends WallabagRestController
      * )
      *
      * @return JsonResponse
+     *
+     * @Delete(
+     *  path="/api/tags/{tag}.{_format}",
+     *  name="api_delete_tag",
+     *  defaults={
+     *      "_format"="json"
+     *  },
+     *  requirements={
+     *      "_format"="json"
+     *  }
+     * )
      */
     public function deleteTagAction(Tag $tag)
     {

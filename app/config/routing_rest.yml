@@ -1,3 +1,3 @@
 Rest_Wallabag:
-    type : rest
+    type : annotation
     resource: "@WallabagApiBundle/Resources/config/routing_rest.yml"
