@@ -461,7 +461,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertStringContainsString('flashes.config.notice.tagging_rules_updated', $crawler->filter('body')->extract(['_text'])[0]);
 
-        $editLink = $crawler->filter('.edit-rule')->last()->link();
+        $editLink = $crawler->filter('.mode_edit')->last()->link();
 
         $crawler = $client->click($editLink);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
@@ -486,7 +486,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertStringContainsString('readingTime <= 30', $crawler->filter('body')->extract(['_text'])[0]);
 
-        $deleteLink = $crawler->filter('.delete-rule')->last()->link();
+        $deleteLink = $crawler->filter('.delete')->last()->link();
 
         $crawler = $client->click($deleteLink);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
