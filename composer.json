@@ -60,7 +60,6 @@
         "friendsofsymfony/jsrouting-bundle": "^2.2",
         "friendsofsymfony/oauth-server-bundle": "^1.5",
         "friendsofsymfony/rest-bundle": "~2.1",
-        "friendsofsymfony/user-bundle": "2.0.*",
         "guzzlehttp/guzzle": "^5.3.1",
         "html2text/html2text": "^4.1",
         "incenteev/composer-parameter-handler": "^2.1",
