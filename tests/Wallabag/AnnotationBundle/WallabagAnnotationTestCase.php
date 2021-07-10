@@ -24,14 +24,26 @@ abstract class WallabagAnnotationTestCase extends WebTestCase
 
     public function logInAs($username)
     {
-        $crawler = $this->client->request('GET', '/login');
-        $form = $crawler->filter('button[type=submit]')->form();
-        $data = [
-            '_username' => $username,
-            '_password' => 'mypassword',
-        ];
+        $container = $this->client->getContainer();
+        $session = $container->get('session');
 
-        $this->client->submit($form, $data);
+        $userManager = $container->get('fos_user.user_manager.test');
+        $loginManager = $container->get('fos_user.security.login_manager.test');
+        $firewallName = $container->getParameter('fos_user.firewall_name');
+
+        $user = $userManager->findUserBy(['username' => $username]);
+
+        if (null === $user) {
+            throw new \Exception('Unable to find user "' . $username . '". Does fixtures were loaded?');
+        }
+
+        $loginManager->logInUser($firewallName, $user);
+
+        $session->set('_security_' . $firewallName, serialize($container->get('security.token_storage')->getToken()));
+        $session->save();
+
+        $cookie = new Cookie($session->getName(), $session->getId());
+        $this->client->getCookieJar()->set($cookie);
     }
 
     /**
