@@ -1,7 +1,16 @@
 <?php
 
-return PhpCsFixer\Config::create()
-    ->setRiskyAllowed(true)
+$finder = PhpCsFixer\Finder::create()
+    ->exclude([
+        'node_modules',
+        'vendor',
+        'var',
+        'web'
+    ])
+    ->in(__DIR__);
+
+$config = new PhpCsFixer\Config();
+$config->setRiskyAllowed(true)
     ->setRules([
         '@Symfony' => true,
         '@Symfony:risky' => true,
@@ -10,16 +19,18 @@ return PhpCsFixer\Config::create()
         ],
         'combine_consecutive_unsets' => true,
         'heredoc_to_nowdoc' => true,
-        'no_extra_consecutive_blank_lines' => [
-        'break',
-            'continue',
-            'extra',
-            'return',
-            'throw',
-            'use',
-            'parenthesis_brace_block',
-            'square_brace_block',
-            'curly_brace_block'
+        'no_extra_blank_lines' => [
+            'tokens' => [
+                'break',
+                'continue',
+                'extra',
+                'return',
+                'throw',
+                'use',
+                'parenthesis_brace_block',
+                'square_brace_block',
+                'curly_brace_block',
+            ],
         ],
         'no_unreachable_default_argument_value' => true,
         'no_useless_else' => true,
@@ -35,14 +46,7 @@ return PhpCsFixer\Config::create()
             'spacing' => 'one'
         ],
     ])
-    ->setFinder(
-        PhpCsFixer\Finder::create()
-            ->exclude([
-                'node_modules',
-                'vendor',
-                'var',
-                'web'
-            ])
-            ->in(__DIR__)
-    )
+    ->setFinder($finder)
 ;
+
+return $config;
