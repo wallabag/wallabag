@@ -2,13 +2,14 @@
 
 namespace Wallabag\ApiBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Wallabag\CoreBundle\Controller\AbstractWallabagController;
 use Wallabag\ApiBundle\Entity\Client;
 use Wallabag\ApiBundle\Form\Type\ClientType;
+use Wallabag\ApiBundle\Repository\ClientRepository;
 
-class DeveloperController extends Controller
+class DeveloperController extends AbstractWallabagController
 {
     /**
      * List all clients and link to create a new one.
@@ -19,7 +20,7 @@ class DeveloperController extends Controller
      */
     public function indexAction()
     {
-        $clients = $this->getDoctrine()->getRepository('WallabagApiBundle:Client')->findByUser($this->getUser()->getId());
+        $clients = $this->get('wallabag_api.client_repository')->findByUser($this->getUser()->getId());
 
         return $this->render('@WallabagCore/themes/common/Developer/index.html.twig', [
             'clients' => $clients,
@@ -97,5 +98,15 @@ class DeveloperController extends Controller
     public function howtoFirstAppAction()
     {
         return $this->render('@WallabagCore/themes/common/Developer/howto_app.html.twig');
+    }
+
+    public static function getSubscribedServices()
+    {
+        return array_merge(
+            parent::getSubscribedServices(),
+            [
+                'wallabag_api.client_repository' => ClientRepository::class,
+            ]
+        );
     }
 }

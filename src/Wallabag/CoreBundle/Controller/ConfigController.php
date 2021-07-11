@@ -5,7 +5,7 @@ namespace Wallabag\CoreBundle\Controller;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use PragmaRX\Recovery\Recovery as BackupCodes;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,10 +24,22 @@ use Wallabag\CoreBundle\Form\Type\IgnoreOriginUserRuleType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleImportType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleType;
 use Wallabag\CoreBundle\Form\Type\UserInformationType;
+use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\CoreBundle\Repository\TagRepository;
 use Wallabag\CoreBundle\Tools\Utils;
+use Wallabag\UserBundle\Repository\UserRepository;
 
-class ConfigController extends Controller
+class ConfigController extends AbstractWallabagController
 {
+    private $domainName;
+    private $twoFactorAuth;
+
+    public function __construct(string $domainName, bool $twoFactorAuth)
+    {
+        $this->domainName = $domainName;
+        $this->twoFactorAuth = $twoFactorAuth;
+    }
+
     /**
      * @Route("/config", name="config")
      */
@@ -224,8 +236,8 @@ class ConfigController extends Controller
                 'username' => $user->getUsername(),
                 'token' => $config->getFeedToken(),
             ],
-            'twofactor_auth' => $this->getParameter('twofactor_auth'),
-            'wallabag_url' => $this->getParameter('domain_name'),
+            'twofactor_auth' => $this->twoFactorAuth,
+            'wallabag_url' => $this->domainName,
             'enabled_users' => $this->get('wallabag_user.user_repository')->getSumEnabledUsers(),
         ]);
     }
@@ -237,7 +249,7 @@ class ConfigController extends Controller
      */
     public function disableOtpEmailAction()
     {
-        if (!$this->getParameter('twofactor_auth')) {
+        if (!$this->twoFactorAuth) {
             return $this->createNotFoundException('two_factor not enabled');
         }
 
@@ -261,7 +273,7 @@ class ConfigController extends Controller
      */
     public function otpEmailAction()
     {
-        if (!$this->getParameter('twofactor_auth')) {
+        if (!$this->twoFactorAuth) {
             return $this->createNotFoundException('two_factor not enabled');
         }
 
@@ -288,7 +300,7 @@ class ConfigController extends Controller
      */
     public function disableOtpAppAction()
     {
-        if (!$this->getParameter('twofactor_auth')) {
+        if (!$this->twoFactorAuth) {
             return $this->createNotFoundException('two_factor not enabled');
         }
 
@@ -314,7 +326,7 @@ class ConfigController extends Controller
      */
     public function otpAppAction()
     {
-        if (!$this->getParameter('twofactor_auth')) {
+        if (!$this->twoFactorAuth) {
             return $this->createNotFoundException('two_factor not enabled');
         }
 
@@ -355,7 +367,7 @@ class ConfigController extends Controller
      */
     public function otpAppCancelAction()
     {
-        if (!$this->getParameter('twofactor_auth')) {
+        if (!$this->twoFactorAuth) {
             return $this->createNotFoundException('two_factor not enabled');
         }
 
@@ -664,6 +676,19 @@ class ConfigController extends Controller
                 'Content-type' => 'application/json',
                 'Content-Disposition' => 'attachment; filename="tagging_rules_' . $this->getUser()->getUsername() . '.json"',
                 'Content-Transfer-Encoding' => 'UTF-8',
+            ]
+        );
+    }
+
+    public static function getSubscribedServices()
+    {
+        return array_merge(
+            parent::getSubscribedServices(),
+            [
+                'scheb_two_factor.security.google_authenticator' => GoogleAuthenticatorInterface::class,
+                'wallabag_core.entry_repository' => EntryRepository::class,
+                'wallabag_core.tag_repository' => TagRepository::class,
+                'wallabag_user.user_repository' => UserRepository::class,
             ]
         );
     }

@@ -13,8 +13,6 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
     public function testRunCleanDuplicates()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new CleanDuplicatesCommand());
-
         $command = $application->find('wallabag:clean-duplicates');
 
         $tester = new CommandTester($command);
@@ -29,8 +27,6 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
     public function testRunCleanDuplicatesCommandWithBadUsername()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new CleanDuplicatesCommand());
-
         $command = $application->find('wallabag:clean-duplicates');
 
         $tester = new CommandTester($command);
@@ -45,8 +41,6 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
     public function testRunCleanDuplicatesCommandForUser()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new CleanDuplicatesCommand());
-
         $command = $application->find('wallabag:clean-duplicates');
 
         $tester = new CommandTester($command);
@@ -86,8 +80,6 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
         $this->assertCount(2, $nbEntries);
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new CleanDuplicatesCommand());
-
         $command = $application->find('wallabag:clean-duplicates');
 
         $tester = new CommandTester($command);

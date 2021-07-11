@@ -2,18 +2,34 @@
 
 namespace Wallabag\CoreBundle\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NoResultException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Wallabag\CoreBundle\Helper\UrlHasher;
+use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\UserBundle\Entity\User;
+use Wallabag\UserBundle\Repository\UserRepository;
 
 class GenerateUrlHashesCommand extends Command
 {
     /** @var OutputInterface */
     protected $output;
+
+    private $entityManager;
+    private $entryRepository;
+    private $userRepository;
+
+    public function __construct(EntityManagerInterface $entityManager, EntryRepository $entryRepository, UserRepository $userRepository)
+    {
+        $this->entityManager = $entityManager;
+        $this->entryRepository = $entryRepository;
+        $this->userRepository = $userRepository;
+
+        parent::__construct();
+    }
 
     protected function configure()
     {
@@ -40,7 +56,7 @@ class GenerateUrlHashesCommand extends Command
                 return 1;
             }
         } else {
-            $users = $this->getDoctrine()->getRepository('WallabagUserBundle:User')->findAll();
+            $users = $this->userRepository->findAll();
 
             $output->writeln(sprintf('Generating hashed urls for "%d" users', \count($users)));
 
@@ -56,23 +72,20 @@ class GenerateUrlHashesCommand extends Command
 
     private function generateHashedUrls(User $user)
     {
-        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $repo = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entry');
-
-        $entries = $repo->findByEmptyHashedUrlAndUserId($user->getId());
+        $entries = $this->entryRepository->findByEmptyHashedUrlAndUserId($user->getId());
 
         $i = 1;
         foreach ($entries as $entry) {
             $entry->setHashedUrl(UrlHasher::hashUrl($entry->getUrl()));
-            $em->persist($entry);
+            $this->entityManager->persist($entry);
 
             if (0 === ($i % 20)) {
-                $em->flush();
+                $this->entityManager->flush();
             }
             ++$i;
         }
 
-        $em->flush();
+        $this->entityManager->flush();
 
         $this->output->writeln(sprintf('Generated hashed urls for user: %s', $user->getUserName()));
     }
@@ -86,11 +99,6 @@ class GenerateUrlHashesCommand extends Command
      */
     private function getUser($username)
     {
-        return $this->getDoctrine()->getRepository('WallabagUserBundle:User')->findOneByUserName($username);
-    }
-
-    private function getDoctrine()
-    {
-        return $this->getContainer()->get('doctrine');
+        return $this->userRepository->findOneByUserName($username);
     }
 }

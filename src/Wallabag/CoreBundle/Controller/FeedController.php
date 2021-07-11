@@ -7,15 +7,27 @@ use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Helper\PreparePagerForEntries;
+use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\UserBundle\Entity\User;
 
-class FeedController extends Controller
+class FeedController extends AbstractWallabagController
 {
+    private $domainName;
+    private $feedLimit;
+    private $version;
+
+    public function __construct(string $domainName, string $feedLimit, string $version)
+    {
+        $this->domainName = $domainName;
+        $this->feedLimit = $feedLimit;
+        $this->version = $version;
+    }
+
     /**
      * Shows unread entries for current user.
      *
@@ -131,11 +143,22 @@ class FeedController extends Controller
                 'url' => $url,
                 'entries' => $entries,
                 'user' => $user->getUsername(),
-                'domainName' => $this->getParameter('domain_name'),
-                'version' => $this->getParameter('wallabag_core.version'),
+                'domainName' => $this->domainName,
+                'version' => $this->version,
                 'tag' => $tag->getSlug(),
             ],
             new Response('', 200, ['Content-Type' => 'application/atom+xml'])
+        );
+    }
+
+    public static function getSubscribedServices()
+    {
+        return array_merge(
+            parent::getSubscribedServices(),
+            [
+                'wallabag_core.entry_repository' => EntryRepository::class,
+                'wallabag_core.helper.prepare_pager_for_entries' => PreparePagerForEntries::class,
+            ]
         );
     }
 
@@ -172,7 +195,7 @@ class FeedController extends Controller
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
         $entries = new Pagerfanta($pagerAdapter);
 
-        $perPage = $user->getConfig()->getFeedLimit() ?: $this->getParameter('wallabag_core.feed_limit');
+        $perPage = $user->getConfig()->getFeedLimit() ?: $this->feedLimit;
         $entries->setMaxPerPage($perPage);
 
         $url = $this->generateUrl(
@@ -197,8 +220,8 @@ class FeedController extends Controller
             'url' => $url,
             'entries' => $entries,
             'user' => $user->getUsername(),
-            'domainName' => $this->getParameter('domain_name'),
-            'version' => $this->getParameter('wallabag_core.version'),
+            'domainName' => $this->domainName,
+            'version' => $this->version,
         ],
         new Response('', 200, ['Content-Type' => 'application/atom+xml'])
         );

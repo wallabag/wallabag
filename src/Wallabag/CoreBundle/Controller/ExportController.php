@@ -2,18 +2,26 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Helper\EntriesExport;
+use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\CoreBundle\Repository\TagRepository;
 
 /**
  * The try/catch can be removed once all formats will be implemented.
  * Still need implementation: txt.
  */
-class ExportController extends Controller
+class ExportController extends AbstractWallabagController
 {
+    private $entriesExport;
+
+    public function __construct(EntriesExport $entriesExport)
+    {
+        $this->entriesExport = $entriesExport;
+    }
     /**
      * Gets one entry content.
      *
@@ -29,7 +37,7 @@ class ExportController extends Controller
     public function downloadEntryAction(Entry $entry, $format)
     {
         try {
-            return $this->get('wallabag_core.helper.entries_export')
+            return $this->entriesExport
                 ->setEntries($entry)
                 ->updateTitle('entry')
                 ->updateAuthor('entry')
@@ -88,7 +96,7 @@ class ExportController extends Controller
         }
 
         try {
-            return $this->get('wallabag_core.helper.entries_export')
+            return $this->entriesExport
                 ->setEntries($entries)
                 ->updateTitle($title)
                 ->updateAuthor($method)
@@ -96,5 +104,16 @@ class ExportController extends Controller
         } catch (\InvalidArgumentException $e) {
             throw new NotFoundHttpException($e->getMessage());
         }
+    }
+
+    public static function getSubscribedServices()
+    {
+        return array_merge(
+            parent::getSubscribedServices(),
+            [
+                'wallabag_core.entry_repository' => EntryRepository::class,
+                'wallabag_core.tag_repository' => TagRepository::class,
+            ]
+        );
     }
 }

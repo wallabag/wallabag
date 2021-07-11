@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Entry;
 
-class AnnotationRestController extends WallabagRestController
+class AnnotationRestController extends AbstractWallabagRestController
 {
     /**
      * Retrieve annotations for an entry.

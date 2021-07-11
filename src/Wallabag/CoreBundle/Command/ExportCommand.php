@@ -8,9 +8,27 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Wallabag\CoreBundle\Helper\EntriesExport;
+use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\UserBundle\Repository\UserRepository;
 
 class ExportCommand extends Command
 {
+    private $entryRepository;
+    private $userRepository;
+    private $entriesExport;
+    private $projectDir;
+
+    public function __construct(EntryRepository $entryRepository, UserRepository $userRepository, EntriesExport $entriesExport, string $projectDir)
+    {
+        $this->entryRepository = $entryRepository;
+        $this->userRepository = $userRepository;
+        $this->entriesExport = $entriesExport;
+        $this->projectDir = $projectDir;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -35,14 +53,14 @@ class ExportCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         try {
-            $user = $this->getContainer()->get('wallabag_user.user_repository')->findOneByUserName($input->getArgument('username'));
+            $user = $this->userRepository->findOneByUserName($input->getArgument('username'));
         } catch (NoResultException $e) {
             $io->error(sprintf('User "%s" not found.', $input->getArgument('username')));
 
             return 1;
         }
 
-        $entries = $this->getContainer()->get('wallabag_core.entry_repository')
+        $entries = $this->entryRepository
             ->getBuilderForAllByUser($user->getId())
             ->getQuery()
             ->getResult();
@@ -52,11 +70,11 @@ class ExportCommand extends Command
         $filePath = $input->getArgument('filepath');
 
         if (!$filePath) {
-            $filePath = $this->getContainer()->getParameter('kernel.project_dir') . '/' . sprintf('%s-export.json', $user->getUsername());
+            $filePath = $this->projectDir . '/' . sprintf('%s-export.json', $user->getUsername());
         }
 
         try {
-            $data = $this->getContainer()->get('wallabag_core.helper.entries_export')
+            $data = $this->entriesExport
                 ->setEntries($entries)
                 ->updateTitle('All')
                 ->updateAuthor('All')

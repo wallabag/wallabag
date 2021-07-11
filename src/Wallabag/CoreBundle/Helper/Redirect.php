@@ -2,7 +2,7 @@
 
 namespace Wallabag\CoreBundle\Helper;
 
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\CoreBundle\Entity\Config;
 
@@ -14,7 +14,7 @@ class Redirect
     private $router;
     private $tokenStorage;
 
-    public function __construct(Router $router, TokenStorageInterface $tokenStorage)
+    public function __construct(RouterInterface $router, TokenStorageInterface $tokenStorage)
     {
         $this->router = $router;
         $this->tokenStorage = $tokenStorage;

@@ -2,8 +2,10 @@
 
 namespace Wallabag\CoreBundle\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,6 +14,7 @@ use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule;
 use Wallabag\CoreBundle\Entity\InternalSetting;
 
@@ -34,6 +37,27 @@ class InstallCommand extends Command
         'curl_exec',
         'curl_multi_init',
     ];
+
+    private $entityManager;
+    private $dispatcher;
+    private $userManager;
+    private $databaseDriver;
+    private $databaseName;
+    private $defaultSettings;
+    private $defaultIgnoreOriginInstanceRules;
+
+    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $dispatcher, UserManagerInterface $userManager, string $databaseDriver, string $databaseName, array $defaultSettings, array $defaultIgnoreOriginInstanceRules)
+    {
+        $this->entityManager = $entityManager;
+        $this->dispatcher = $dispatcher;
+        $this->userManager = $userManager;
+        $this->databaseDriver = $databaseDriver;
+        $this->databaseName = $databaseName;
+        $this->defaultSettings = $defaultSettings;
+        $this->defaultIgnoreOriginInstanceRules = $defaultIgnoreOriginInstanceRules;
+
+        parent::__construct();
+    }
 
     protected function configure()
     {
@@ -72,8 +96,6 @@ class InstallCommand extends Command
     {
         $this->io->section('Step 1 of 4: Checking system requirements.');
 
-        $doctrineManager = $this->getContainer()->get('doctrine')->getManager();
-
         $rows = [];
 
         // testing if database driver exists
@@ -82,26 +104,26 @@ class InstallCommand extends Command
         $status = '<info>OK!</info>';
         $help = '';
 
-        if (!\extension_loaded($this->getContainer()->getParameter('database_driver'))) {
+        if (!\extension_loaded($this->databaseDriver)) {
             $fulfilled = false;
             $status = '<error>ERROR!</error>';
-            $help = 'Database driver "' . $this->getContainer()->getParameter('database_driver') . '" is not installed.';
+            $help = 'Database driver "' . $this->databaseDriver . '" is not installed.';
         }
 
-        $rows[] = [sprintf($label, $this->getContainer()->getParameter('database_driver')), $status, $help];
+        $rows[] = [sprintf($label, $this->databaseDriver), $status, $help];
 
         // testing if connection to the database can be etablished
         $label = '<comment>Database connection</comment>';
         $status = '<info>OK!</info>';
         $help = '';
 
-        $conn = $this->getContainer()->get('doctrine')->getManager()->getConnection();
+        $conn = $this->entityManager->getConnection();
 
         try {
             $conn->connect();
         } catch (\Exception $e) {
             if (false === strpos($e->getMessage(), 'Unknown database')
-                && false === strpos($e->getMessage(), 'database "' . $this->getContainer()->getParameter('database_name') . '" does not exist')) {
+                && false === strpos($e->getMessage(), 'database "' . $this->databaseName . '" does not exist')) {
                 $fulfilled = false;
                 $status = '<error>ERROR!</error>';
                 $help = 'Can\'t connect to the database: ' . $e->getMessage();
@@ -130,7 +152,7 @@ class InstallCommand extends Command
         // testing if PostgreSQL > 9.1
         if ($conn->isConnected() && 'postgresql' === $conn->getDatabasePlatform()->getName()) {
             // return version should be like "PostgreSQL 9.5.4 on x86_64-apple-darwin15.6.0, compiled by Apple LLVM version 8.0.0 (clang-800.0.38), 64-bit"
-            $version = $doctrineManager->getConnection()->query('SELECT version();')->fetchColumn();
+            $version = $conn->query('SELECT version();')->fetchColumn();
 
             preg_match('/PostgreSQL ([0-9\.]+)/i', $version, $matches);
 
@@ -244,10 +266,7 @@ class InstallCommand extends Command
             return $this;
         }
 
-        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-
-        $userManager = $this->getContainer()->get('fos_user.user_manager');
-        $user = $userManager->createUser();
+        $user = $this->userManager->createUser();
 
         $user->setUsername($this->io->ask('Username', 'wallabag'));
 
@@ -260,11 +279,11 @@ class InstallCommand extends Command
         $user->setEnabled(true);
         $user->addRole('ROLE_SUPER_ADMIN');
 
-        $em->persist($user);
+        $this->entityManager->persist($user);
 
         // dispatch a created event so the associated config will be created
         $event = new UserEvent($user);
-        $this->getContainer()->get('event_dispatcher')->dispatch(FOSUserEvents::USER_CREATED, $event);
+        $this->dispatcher->dispatch(FOSUserEvents::USER_CREATED, $event);
 
         $this->io->text('<info>Administration successfully setup.</info>');
 
@@ -274,27 +293,26 @@ class InstallCommand extends Command
     protected function setupConfig()
     {
         $this->io->section('Step 4 of 4: Config setup.');
-        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
         // cleanup before insert new stuff
-        $em->createQuery('DELETE FROM WallabagCoreBundle:InternalSetting')->execute();
-        $em->createQuery('DELETE FROM WallabagCoreBundle:IgnoreOriginInstanceRule')->execute();
+        $this->entityManager->createQuery('DELETE FROM WallabagCoreBundle:InternalSetting')->execute();
+        $this->entityManager->createQuery('DELETE FROM WallabagCoreBundle:IgnoreOriginInstanceRule')->execute();
 
-        foreach ($this->getContainer()->getParameter('wallabag_core.default_internal_settings') as $setting) {
+        foreach ($this->defaultSettings as $setting) {
             $newSetting = new InternalSetting();
             $newSetting->setName($setting['name']);
             $newSetting->setValue($setting['value']);
             $newSetting->setSection($setting['section']);
-            $em->persist($newSetting);
+            $this->entityManager->persist($newSetting);
         }
 
-        foreach ($this->getContainer()->getParameter('wallabag_core.default_ignore_origin_instance_rules') as $ignore_origin_instance_rule) {
+        foreach ($this->defaultIgnoreOriginInstanceRules as $ignore_origin_instance_rule) {
             $newIgnoreOriginInstanceRule = new IgnoreOriginInstanceRule();
             $newIgnoreOriginInstanceRule->setRule($ignore_origin_instance_rule['rule']);
-            $em->persist($newIgnoreOriginInstanceRule);
+            $this->entityManager->persist($newIgnoreOriginInstanceRule);
         }
 
-        $em->flush();
+        $this->entityManager->flush();
 
         $this->io->text('<info>Config successfully setup.</info>');
 
@@ -329,7 +347,7 @@ class InstallCommand extends Command
 
         // PDO does not always close the connection after Doctrine commands.
         // See https://github.com/symfony/symfony/issues/11750.
-        $this->getContainer()->get('doctrine')->getManager()->getConnection()->close();
+        $this->entityManager->getConnection()->close();
 
         if (0 !== $exitCode) {
             $this->getApplication()->setAutoExit(true);
@@ -347,7 +365,7 @@ class InstallCommand extends Command
      */
     private function isDatabasePresent()
     {
-        $connection = $this->getContainer()->get('doctrine')->getManager()->getConnection();
+        $connection = $this->entityManager->getConnection();
         $databaseName = $connection->getDatabase();
 
         try {
@@ -368,7 +386,7 @@ class InstallCommand extends Command
 
         // custom verification for sqlite, since `getListDatabasesSQL` doesn't work for sqlite
         if ('sqlite' === $schemaManager->getDatabasePlatform()->getName()) {
-            $params = $this->getContainer()->get('doctrine.dbal.default_connection')->getParams();
+            $params = $connection->getParams();
 
             if (isset($params['path']) && file_exists($params['path'])) {
                 return true;
@@ -394,7 +412,7 @@ class InstallCommand extends Command
      */
     private function isSchemaPresent()
     {
-        $schemaManager = $this->getContainer()->get('doctrine')->getManager()->getConnection()->getSchemaManager();
+        $schemaManager = $this->entityManager->getConnection()->getSchemaManager();
 
         return \count($schemaManager->listTableNames()) > 0 ? true : false;
     }

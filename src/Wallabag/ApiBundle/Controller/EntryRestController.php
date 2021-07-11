@@ -18,10 +18,25 @@ use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Event\EntryDeletedEvent;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
+use Wallabag\CoreBundle\Helper\ContentProxy;
+use Wallabag\CoreBundle\Helper\EntriesExport;
+use Wallabag\CoreBundle\Helper\TagsAssigner;
 use Wallabag\CoreBundle\Helper\UrlHasher;
+use Wallabag\CoreBundle\Repository\EntryRepository;
 
-class EntryRestController extends WallabagRestController
+class EntryRestController extends AbstractWallabagRestController
 {
+    private $entryRepository;
+    private $fetchingErrorMessage;
+    private $apiLimitMassActions;
+
+    public function __construct(EntryRepository $entryRepository, string $fetchingErrorMessage, string $apiLimitMassActions)
+    {
+        $this->entryRepository = $entryRepository;
+        $this->fetchingErrorMessage = $fetchingErrorMessage;
+        $this->apiLimitMassActions = $apiLimitMassActions;
+    }
+
     /**
      * Check if an entry exist by url.
      * Return ID if entry(ies) exist (and if you give the return_id parameter).
@@ -55,7 +70,6 @@ class EntryRestController extends WallabagRestController
     public function getEntriesExistsAction(Request $request)
     {
         $this->validateAuthentication();
-        $repo = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entry');
 
         $returnId = (null === $request->query->get('return_id')) ? false : (bool) $request->query->get('return_id');
 
@@ -83,7 +97,7 @@ class EntryRestController extends WallabagRestController
         }
 
         $results = array_fill_keys($hashedUrls, null);
-        $res = $repo->findByUserIdAndBatchHashedUrls($this->getUser()->getId(), $hashedUrls);
+        $res = $this->entryRepository->findByUserIdAndBatchHashedUrls($this->getUser()->getId(), $hashedUrls);
         foreach ($res as $e) {
             $_hashedUrl = array_keys($hashedUrls, 'blah', true);
             if ([] !== array_keys($hashedUrls, $e['hashedUrl'], true)) {
@@ -161,7 +175,7 @@ class EntryRestController extends WallabagRestController
 
         try {
             /** @var \Pagerfanta\Pagerfanta $pager */
-            $pager = $this->get('wallabag_core.entry_repository')->findEntries(
+            $pager = $this->entryRepository->findEntries(
                 $this->getUser()->getId(),
                 $isArchived,
                 $isStarred,
@@ -303,7 +317,7 @@ class EntryRestController extends WallabagRestController
 
         // handle multiple urls
         foreach ($urls as $key => $url) {
-            $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
+            $entry = $this->entryRepository->findByUrlAndUserId(
                 $url,
                 $this->getUser()->getId()
             );
@@ -355,7 +369,7 @@ class EntryRestController extends WallabagRestController
 
         $urls = json_decode($request->query->get('urls', []));
 
-        $limit = $this->container->getParameter('wallabag_core.api_limit_mass_actions');
+        $limit = $this->apiLimitMassActions;
 
         if (\count($urls) > $limit) {
             throw new HttpException(400, 'API limit reached');
@@ -368,7 +382,7 @@ class EntryRestController extends WallabagRestController
 
         // handle multiple urls
         foreach ($urls as $key => $url) {
-            $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
+            $entry = $this->entryRepository->findByUrlAndUserId(
                 $url,
                 $this->getUser()->getId()
             );
@@ -436,7 +450,7 @@ class EntryRestController extends WallabagRestController
 
         $url = $request->request->get('url');
 
-        $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
+        $entry = $this->entryRepository->findByUrlAndUserId(
             $url,
             $this->getUser()->getId()
         );
@@ -680,7 +694,7 @@ class EntryRestController extends WallabagRestController
         }
 
         // if refreshing entry failed, don't save it
-        if ($this->container->getParameter('wallabag_core.fetching_error_message') === $entry->getContent()) {
+        if ($this->fetchingErrorMessage === $entry->getContent()) {
             return new JsonResponse([], 304);
         }
 
@@ -891,7 +905,7 @@ class EntryRestController extends WallabagRestController
         $results = [];
 
         foreach ($list as $key => $element) {
-            $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
+            $entry = $this->entryRepository->findByUrlAndUserId(
                 $element->url,
                 $this->getUser()->getId()
             );
@@ -960,7 +974,7 @@ class EntryRestController extends WallabagRestController
 
         // handle multiple urls
         foreach ($list as $key => $element) {
-            $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
+            $entry = $this->entryRepository->findByUrlAndUserId(
                 $element->url,
                 $this->getUser()->getId()
             );
@@ -980,6 +994,18 @@ class EntryRestController extends WallabagRestController
         }
 
         return $this->sendResponse($results);
+    }
+
+    public static function getSubscribedServices()
+    {
+        return array_merge(
+            parent::getSubscribedServices(),
+            [
+                'wallabag_core.content_proxy' => ContentProxy::class,
+                'wallabag_core.tags_assigner' => TagsAssigner::class,
+                'wallabag_core.helper.entries_export' => EntriesExport::class,
+            ]
+        );
     }
 
     /**

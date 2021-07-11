@@ -5,15 +5,19 @@ namespace Wallabag\CoreBundle\Controller;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Form\Type\NewTagType;
 use Wallabag\CoreBundle\Form\Type\RenameTagType;
+use Wallabag\CoreBundle\Helper\PreparePagerForEntries;
+use Wallabag\CoreBundle\Helper\Redirect;
+use Wallabag\CoreBundle\Helper\TagsAssigner;
+use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\CoreBundle\Repository\TagRepository;
 
-class TagController extends Controller
+class TagController extends AbstractWallabagController
 {
     /**
      * @Route("/new-tag/{entry}", requirements={"entry" = "\d+"}, name="new_tag")
@@ -189,5 +193,19 @@ class TagController extends Controller
         }
 
         return $this->redirect($redirectUrl);
+    }
+
+    public static function getSubscribedServices()
+    {
+        return array_merge(
+            parent::getSubscribedServices(),
+            [
+                'wallabag_core.entry_repository' => EntryRepository::class,
+                'wallabag_core.tags_assigner' => TagsAssigner::class,
+                'wallabag_core.tag_repository' => TagRepository::class,
+                'wallabag_core.helper.prepare_pager_for_entries' => PreparePagerForEntries::class,
+                'wallabag_core.helper.redirect' => Redirect::class,
+            ]
+        );
     }
 }

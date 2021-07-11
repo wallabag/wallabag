@@ -2,7 +2,7 @@
 
 namespace Wallabag\ImportBundle\Consumer;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -20,7 +20,7 @@ abstract class AbstractConsumer
     protected $eventDispatcher;
     protected $logger;
 
-    public function __construct(EntityManager $em, UserRepository $userRepository, AbstractImport $import, EventDispatcherInterface $eventDispatcher, LoggerInterface $logger = null)
+    public function __construct(EntityManagerInterface $em, UserRepository $userRepository, AbstractImport $import, EventDispatcherInterface $eventDispatcher, LoggerInterface $logger = null)
     {
         $this->em = $em;
         $this->userRepository = $userRepository;

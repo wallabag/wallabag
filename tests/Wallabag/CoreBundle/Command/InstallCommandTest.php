@@ -87,7 +87,6 @@ class InstallCommandTest extends WallabagCoreTestCase
     public function testRunInstallCommand()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new InstallCommandMock());
 
         $command = $application->find('wallabag:install');
 
@@ -112,7 +111,6 @@ class InstallCommandTest extends WallabagCoreTestCase
     public function testRunInstallCommandWithReset()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new InstallCommandMock());
 
         $command = $application->find('wallabag:install');
 
@@ -147,7 +145,6 @@ class InstallCommandTest extends WallabagCoreTestCase
         }
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new DropDatabaseDoctrineCommand());
 
         // drop database first, so the install command won't ask to reset things
         $command = $application->find('doctrine:database:drop');
@@ -159,8 +156,6 @@ class InstallCommandTest extends WallabagCoreTestCase
         // start a new application to avoid lagging connexion to pgsql
         $client = static::createClient();
         $application = new Application($client->getKernel());
-        $application->add(new InstallCommand());
-
         $command = $application->find('wallabag:install');
 
         $tester = new CommandTester($command);
@@ -186,7 +181,6 @@ class InstallCommandTest extends WallabagCoreTestCase
     public function testRunInstallCommandChooseResetSchema()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new InstallCommandMock());
 
         $command = $application->find('wallabag:install');
 
@@ -211,10 +205,6 @@ class InstallCommandTest extends WallabagCoreTestCase
     public function testRunInstallCommandChooseNothing()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new InstallCommand());
-        $application->add(new DropDatabaseDoctrineCommand());
-        $application->add(new CreateDatabaseDoctrineCommand());
-        $application->add(new MigrationsMigrateDoctrineCommand());
 
         // drop database first, so the install command won't ask to reset things
         $command = new DropDatabaseDoctrineCommand();
@@ -255,7 +245,6 @@ class InstallCommandTest extends WallabagCoreTestCase
     public function testRunInstallCommandNoInteraction()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new InstallCommandMock());
 
         $command = $application->find('wallabag:install');
 

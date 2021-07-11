@@ -4,7 +4,7 @@ namespace Wallabag\CoreBundle\Helper;
 
 use Pagerfanta\Adapter\AdapterInterface;
 use Pagerfanta\Pagerfanta;
-use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\UserBundle\Entity\User;
 
@@ -13,7 +13,7 @@ class PreparePagerForEntries
     private $router;
     private $tokenStorage;
 
-    public function __construct(TokenStorageInterface $tokenStorage, Router $router)
+    public function __construct(TokenStorageInterface $tokenStorage, RouterInterface $router)
     {
         $this->tokenStorage = $tokenStorage;
         $this->router = $router;

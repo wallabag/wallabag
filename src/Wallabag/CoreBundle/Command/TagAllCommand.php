@@ -2,15 +2,31 @@
 
 namespace Wallabag\CoreBundle\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NoResultException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Wallabag\CoreBundle\Helper\RuleBasedTagger;
+use Wallabag\UserBundle\Repository\UserRepository;
 
 class TagAllCommand extends Command
 {
+    private $entityManager;
+    private $ruleBasedTagger;
+    private $userRepository;
+
+    public function __construct(EntityManagerInterface $entityManager, RuleBasedTagger $ruleBasedTagger, UserRepository $userRepository)
+    {
+        $this->entityManager = $entityManager;
+        $this->ruleBasedTagger = $ruleBasedTagger;
+        $this->userRepository = $userRepository;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -35,19 +51,16 @@ class TagAllCommand extends Command
 
             return 1;
         }
-        $tagger = $this->getContainer()->get('wallabag_core.rule_based_tagger');
-
         $io->text(sprintf('Tagging entries for user <info>%s</info>...', $user->getUserName()));
 
-        $entries = $tagger->tagAllForUser($user);
+        $entries = $this->ruleBasedTagger->tagAllForUser($user);
 
         $io->text('Persist entries... ');
 
-        $em = $this->getDoctrine()->getManager();
         foreach ($entries as $entry) {
-            $em->persist($entry);
+            $this->entityManager->persist($entry);
         }
-        $em->flush();
+        $this->entityManager->flush();
 
         $io->success('Done.');
 
@@ -63,11 +76,6 @@ class TagAllCommand extends Command
      */
     private function getUser($username)
     {
-        return $this->getContainer()->get('wallabag_user.user_repository')->findOneByUserName($username);
-    }
-
-    private function getDoctrine()
-    {
-        return $this->getContainer()->get('doctrine');
+        return $this->userRepository->findOneByUserName($username);
     }
 }

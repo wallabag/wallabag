@@ -15,8 +15,6 @@ class TagAllCommandTest extends WallabagCoreTestCase
         $this->expectExceptionMessage('Not enough arguments (missing: "username")');
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new TagAllCommand());
-
         $command = $application->find('wallabag:tag:all');
 
         $tester = new CommandTester($command);
@@ -28,8 +26,6 @@ class TagAllCommandTest extends WallabagCoreTestCase
     public function testRunTagAllCommandWithBadUsername()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new TagAllCommand());
-
         $command = $application->find('wallabag:tag:all');
 
         $tester = new CommandTester($command);
@@ -44,8 +40,6 @@ class TagAllCommandTest extends WallabagCoreTestCase
     public function testRunTagAllCommand()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new TagAllCommand());
-
         $command = $application->find('wallabag:tag:all');
 
         $tester = new CommandTester($command);

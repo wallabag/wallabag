@@ -51,8 +51,6 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
     public function testRunReloadEntryCommand()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ReloadEntryCommand());
-
         $command = $application->find('wallabag:entry:reload');
         $tester = new CommandTester($command);
         $tester->execute([
@@ -79,8 +77,6 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
     public function testRunReloadEntryWithUsernameCommand()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ReloadEntryCommand());
-
         $command = $application->find('wallabag:entry:reload');
         $tester = new CommandTester($command);
         $tester->execute([
@@ -104,8 +100,6 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
     public function testRunReloadEntryWithoutEntryCommand()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ReloadEntryCommand());
-
         $command = $application->find('wallabag:entry:reload');
         $tester = new CommandTester($command);
         $tester->execute([

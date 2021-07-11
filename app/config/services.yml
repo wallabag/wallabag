@@ -1,24 +1,195 @@
+imports:
+    - { resource: redis.yml }
+
 parameters:
     lexik_form_filter.get_filter.doctrine_orm.class: Wallabag\CoreBundle\Event\Subscriber\CustomDoctrineORMSubscriber
 
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        bind:
+            $fetchingErrorMessage: '%wallabag_core.fetching_error_message%'
+            $apiLimitMassActions: '%wallabag_core.api_limit_mass_actions%'
+
+    Wallabag\:
+        resource: '../../src/Wallabag/*'
+        exclude: '../../src/Wallabag/{CoreBundle/{Controller/ExceptionController.php,Event/Subscriber,Twig},ImportBundle/{Consumer,Redis},UserBundle/EventListener}'
+
+    Wallabag\CoreBundle\Controller\:
+        resource: '../../src/Wallabag/CoreBundle/Controller/*'
+        tags: ['controller.service_arguments']
+
+    Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder:
+        tags:
+            - { name: monolog.logger, channel: graby }
+
+    # service alias override
+    bd_guzzle_site_authenticator.site_config_builder:
+        alias: Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder
+        public: true
+
+    Graby\Graby:
+        arguments:
+            $config:
+                error_message: '%wallabag_core.fetching_error_message%'
+                error_message_title: '%wallabag_core.fetching_error_message_title%'
+            $client: '@httplug.client.wallabag_core'
+            $configBuilder: '@Graby\SiteConfig\ConfigBuilder'
+        calls:
+            - [ setLogger, [ "@logger" ] ]
+        tags:
+            - { name: monolog.logger, channel: graby }
+
+    Graby\SiteConfig\ConfigBuilder:
+        arguments:
+            $config: []
+
+    Wallabag\CoreBundle\Helper\ContentProxy:
+        arguments:
+            $fetchingErrorMessage: '%wallabag_core.fetching_error_message%'
+            $storeArticleHeaders: '@=service(''craue_config'').get(''store_article_headers'')'
+
+    Wallabag\ImportBundle\Import\WallabagV1Import:
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: wallabag_import.import, alias: wallabag_v1 }
+        arguments:
+            $fetchingErrorMessageTitle: "%wallabag_core.fetching_error_message_title%"
+            $fetchingErrorMessage: "%wallabag_core.fetching_error_message%"
+
+    Wallabag\ImportBundle\Import\WallabagV2Import:
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: wallabag_import.import, alias: wallabag_v2 }
+
+    Wallabag\ImportBundle\Import\ChromeImport:
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: wallabag_import.import, alias: chrome }
+
+    Wallabag\ImportBundle\Import\FirefoxImport:
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: wallabag_import.import, alias: firefox }
+
+    Wallabag\ImportBundle\Import\PocketImport:
+        calls:
+            - [ setClient, [ '@httplug.client.wallabag_import.pocket.client' ] ]
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: wallabag_import.import, alias: pocket }
+
+    Wallabag\ImportBundle\Import\PinboardImport:
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: wallabag_import.import, alias: pinboard }
+
+    Wallabag\ImportBundle\Import\ElcuratorImport:
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: wallabag_import.import, alias: elcurator }
+
+    Wallabag\ImportBundle\Import\ReadabilityImport:
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: wallabag_import.import, alias: readability }
+
+    Wallabag\ImportBundle\Import\InstapaperImport:
+        calls:
+            - [ setLogger, [ "@logger" ]]
+        tags:
+            -  { name: wallabag_import.import, alias: instapaper }
+
+    # XXX import controllers are mainly blocked by the old version of
+    # old_sound_rabbit_mq thus keeping service aliases until we move to 2.x
+    wallabag_import.chrome.import:
+        alias: Wallabag\ImportBundle\Import\ChromeImport
+        public: true
+
+    wallabag_import.wallabag_v1.import:
+        alias: Wallabag\ImportBundle\Import\WallabagV1Import
+        public: true
+
+    wallabag_import.wallabag_v2.import:
+        alias: Wallabag\ImportBundle\Import\WallabagV2Import
+        public: true
+
+    wallabag_import.firefox.import:
+        alias: Wallabag\ImportBundle\Import\FirefoxImport
+        public: true
+
+    wallabag_import.pocket.import:
+        alias: Wallabag\ImportBundle\Import\PocketImport
+        public: true
+
+    wallabag_import.pinboard.import:
+        alias: Wallabag\ImportBundle\Import\PinboardImport
+        public: true
+
+    wallabag_import.readability.import:
+        alias: Wallabag\ImportBundle\Import\ReadabilityImport
+        public: true
+
+    wallabag_import.elcurator.import:
+        alias: Wallabag\ImportBundle\Import\ElcuratorImport
+        public: true
+
+    wallabag_import.instapaper.import:
+        alias: Wallabag\ImportBundle\Import\InstapaperImport
+        public: true
+
+    Wallabag\UserBundle\Mailer\AuthCodeMailer:
+        arguments:
+            $senderEmail: "%scheb_two_factor.email.sender_email%"
+            $senderName: "%scheb_two_factor.email.sender_name%"
+            $supportUrl: '@=service(''craue_config'').get(''wallabag_support_url'')'
+            $wallabagUrl: '%domain_name%'
+
     twig.extension.text:
         class: Twig_Extensions_Extension_Text
         tags:
             - { name: twig.extension }
 
-    wallabag.twig_extension:
-        class: Wallabag\CoreBundle\Twig\WallabagExtension
-        public: false
+    Wallabag\CoreBundle\Twig\WallabagExtension:
         arguments:
-            - "@wallabag_core.entry_repository"
-            - "@wallabag_core.tag_repository"
-            - "@security.token_storage"
-            - "%wallabag_core.cache_lifetime%"
-            - "@translator"
-            - "%kernel.root_dir%"
-        tags:
-            - { name: twig.extension }
+            $lifeTime: "%wallabag_core.cache_lifetime%"
+            $rootDir: "%kernel.root_dir%"
+
+    Wallabag\CoreBundle\Helper\DetectActiveTheme:
+        arguments:
+            $defaultTheme: "%wallabag_core.theme%"
+
+    Wallabag\CoreBundle\Helper\CryptoProxy:
+        arguments:
+            $encryptionKeyPath: "%wallabag_core.site_credentials.encryption_key_path%"
+
+    Wallabag\CoreBundle\Helper\DownloadImages:
+        arguments:
+            $baseFolder: "%kernel.project_dir%/web/assets/images"
+            $wallabagUrl: '%domain_name%'
+
+    Wallabag\CoreBundle\Helper\EntriesExport:
+        arguments:
+            $wallabagUrl: '%domain_name%'
+            $logoPath: web/img/appicon/apple-touch-icon-152.png
+
+    Wallabag\CoreBundle\Helper\FileCookieJar:
+        arguments:
+            $cookieFile: "%kernel.cache_dir%/cookiejar.json"
+
+    Wallabag\CoreBundle\Helper\HttpClientFactory:
+        arguments:
+            $restrictedAccess: '@=service(''craue_config'').get(''restricted_access'')'
+        calls:
+            - ["addSubscriber", ["@bd_guzzle_site_authenticator.authenticator_subscriber"]]
 
     wallabag.twig_matomo_extension:
         class: MatomoTwigExtension\MatomoTwigExtension
@@ -45,3 +216,146 @@ services:
             - 'craue_config'
             - 0
             - '%kernel.cache_dir%'
+
+    Wallabag\CoreBundle\Controller\ExceptionController:
+        arguments:
+            $debug: '%kernel.debug%'
+
+    Wallabag\ApiBundle\Controller\UserRestController:
+        arguments:
+            $fosUserRegistration: '%fosuser_registration%'
+
+    Wallabag\ApiBundle\Controller\WallabagRestController:
+        arguments:
+            $version: '%wallabag_core.version%'
+            $registrationEnabled: '%wallabag_user.registration_enabled%'
+
+    Wallabag\CoreBundle\Controller\ConfigController:
+        arguments:
+            $domainName: '%domain_name%'
+            $twoFactorAuth: '%twofactor_auth%'
+
+    Wallabag\CoreBundle\Controller\FeedController:
+        arguments:
+            $domainName: '%domain_name%'
+            $feedLimit: '%wallabag_core.feed_limit%'
+            $version: '%wallabag_core.version%'
+
+    Wallabag\CoreBundle\Event\Subscriber\DownloadImagesSubscriber:
+        arguments:
+            $enabled: '@=service(''craue_config'').get(''download_images_enabled'')'
+        tags:
+            - { name: kernel.event_subscriber }
+
+    Wallabag\CoreBundle\Event\Subscriber\SQLiteCascadeDeleteSubscriber:
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    Wallabag\CoreBundle\Event\Subscriber\TablePrefixSubscriber:
+        arguments:
+            $prefix: "%database_table_prefix%"
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    # RabbitMQ stuff for ImportBundle
+    wallabag_import.consumer.amqp.pocket:
+        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: Wallabag\ImportBundle\Import\PocketImport
+
+    wallabag_import.consumer.amqp.readability:
+        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: Wallabag\ImportBundle\Import\ReadabilityImport
+
+    wallabag_import.consumer.amqp.instapaper:
+        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: Wallabag\ImportBundle\Import\InstapaperImport
+
+    wallabag_import.consumer.amqp.pinboard:
+        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: Wallabag\ImportBundle\Import\PinboardImport
+
+    wallabag_import.consumer.amqp.wallabag_v1:
+        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: Wallabag\ImportBundle\Import\WallabagV1Import
+
+    wallabag_import.consumer.amqp.wallabag_v2:
+        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: Wallabag\ImportBundle\Import\WallabagV2Import
+
+    wallabag_import.consumer.amqp.elcurator:
+        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: Wallabag\ImportBundle\Import\ElcuratorImport
+
+    wallabag_import.consumer.amqp.firefox:
+        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: Wallabag\ImportBundle\Import\FirefoxImport
+
+    wallabag_import.consumer.amqp.chrome:
+        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: Wallabag\ImportBundle\Import\ChromeImport
+
+    Wallabag\CoreBundle\Form\Type\ConfigType:
+        arguments:
+            $themes: "%liip_theme.themes%"
+            $languages: "%wallabag_core.languages%"
+
+    Wallabag\CoreBundle\Operator\PHP\Matches:
+        tags:
+            - { name: rulerz.operator, target: native, operator: matches }
+
+    Wallabag\CoreBundle\Operator\Doctrine\Matches:
+        tags:
+            - { name: rulerz.operator, target: doctrine, operator: matches, inline: true }
+
+    Wallabag\CoreBundle\Operator\PHP\NotMatches:
+        tags:
+            - { name: rulerz.operator, target: native, operator: notmatches }
+
+    Wallabag\CoreBundle\Operator\Doctrine\NotMatches:
+        tags:
+            - { name: rulerz.operator, target: doctrine, operator: notmatches, inline: true }
+
+    Wallabag\CoreBundle\Operator\PHP\PatternMatches:
+        tags:
+            - { name: rulerz.operator, target: native, operator: "~" }
+
+    Wallabag\CoreBundle\ParamConverter\UsernameFeedTokenConverter:
+        tags:
+            - { name: request.param_converter, converter: username_feed_token_converter }
+
+    Wallabag\CoreBundle\Command\ExportCommand:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+
+    Wallabag\CoreBundle\Controller\StaticController:
+        arguments:
+            $version: '%wallabag_core.version%'
+            $paypalUrl: '%wallabag_core.paypal_url%'
+            $addonsUrl: '%addons_url%'
+
+    Wallabag\CoreBundle\Command\InstallCommand:
+        arguments:
+            $databaseDriver: '%database_driver%'
+            $databaseName: '%database_name%'
+            $defaultSettings: '%wallabag_core.default_internal_settings%'
+            $defaultIgnoreOriginInstanceRules: '%wallabag_core.default_ignore_origin_instance_rules%'
+
+    wallabag_core.redis.client:
+        class: Predis\Client
+        public: true
+        arguments:
+            -
+                scheme: '%redis_scheme%'
+                host: '%redis_host%'
+                port: '%redis_port%'
+                path: '%redis_path%'
+                password: '%redis_password%'

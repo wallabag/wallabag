@@ -10,9 +10,17 @@ use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Wallabag\CoreBundle\Repository\EntryRepository;
 
-class SearchRestController extends WallabagRestController
+class SearchRestController extends AbstractWallabagRestController
 {
+    private $entryRepository;
+
+    public function __construct(EntryRepository $entryRepository)
+    {
+        $this->entryRepository = $entryRepository;
+    }
+
     /**
      * Search all entries by term.
      *
@@ -45,7 +53,7 @@ class SearchRestController extends WallabagRestController
         $page = (int) $request->query->get('page', 1);
         $perPage = (int) $request->query->get('perPage', 30);
 
-        $qb = $this->get('wallabag_core.entry_repository')
+        $qb = $this->entryRepository
             ->getBuilderForSearchByUser(
                 $this->getUser()->getId(),
                 $term,

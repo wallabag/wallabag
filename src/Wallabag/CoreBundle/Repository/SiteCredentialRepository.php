@@ -2,18 +2,22 @@
 
 namespace Wallabag\CoreBundle\Repository;
 
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Wallabag\CoreBundle\Entity\SiteCredential;
 use Wallabag\CoreBundle\Helper\CryptoProxy;
 
 /**
  * SiteCredentialRepository.
  */
-class SiteCredentialRepository extends \Doctrine\ORM\EntityRepository
+class SiteCredentialRepository extends ServiceEntityRepository
 {
     private $cryptoProxy;
 
-    public function setCrypto(CryptoProxy $cryptoProxy)
+    public function __construct(ManagerRegistry $registry, CryptoProxy $cryptoProxy)
     {
         $this->cryptoProxy = $cryptoProxy;
+        parent::__construct($registry, SiteCredential::class);
     }
 
     /**

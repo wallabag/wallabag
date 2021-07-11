@@ -14,12 +14,6 @@ services:
 
     wallabag_import.consumer.redis.readability:
         class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@wallabag_user.user_repository"
-            - "@wallabag_import.readability.import"
-            - "@event_dispatcher"
-            - "@logger"
 
     # instapaper
     wallabag_import.queue.redis.instapaper:
@@ -35,12 +29,6 @@ services:
 
     wallabag_import.consumer.redis.instapaper:
         class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@wallabag_user.user_repository"
-            - "@wallabag_import.instapaper.import"
-            - "@event_dispatcher"
-            - "@logger"
 
     # pinboard
     wallabag_import.queue.redis.pinboard:
@@ -56,12 +44,6 @@ services:
 
     wallabag_import.consumer.redis.pinboard:
         class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@wallabag_user.user_repository"
-            - "@wallabag_import.pinboard.import"
-            - "@event_dispatcher"
-            - "@logger"
 
     # pocket
     wallabag_import.queue.redis.pocket:
@@ -77,12 +59,6 @@ services:
 
     wallabag_import.consumer.redis.pocket:
         class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@wallabag_user.user_repository"
-            - "@wallabag_import.pocket.import"
-            - "@event_dispatcher"
-            - "@logger"
 
     # wallabag v1
     wallabag_import.queue.redis.wallabag_v1:
@@ -98,12 +74,6 @@ services:
 
     wallabag_import.consumer.redis.wallabag_v1:
         class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@wallabag_user.user_repository"
-            - "@wallabag_import.wallabag_v1.import"
-            - "@event_dispatcher"
-            - "@logger"
 
     # wallabag v2
     wallabag_import.queue.redis.wallabag_v2:
@@ -119,12 +89,6 @@ services:
 
     wallabag_import.consumer.redis.wallabag_v2:
         class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@wallabag_user.user_repository"
-            - "@wallabag_import.wallabag_v2.import"
-            - "@event_dispatcher"
-            - "@logger"
 
     # elcurator
     wallabag_import.queue.redis.elcurator:
@@ -140,12 +104,6 @@ services:
 
     wallabag_import.consumer.redis.elcurator:
         class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@wallabag_user.user_repository"
-            - "@wallabag_import.elcurator.import"
-            - "@event_dispatcher"
-            - "@logger"
 
     # firefox
     wallabag_import.queue.redis.firefox:
@@ -161,12 +119,6 @@ services:
 
     wallabag_import.consumer.redis.firefox:
         class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@wallabag_user.user_repository"
-            - "@wallabag_import.firefox.import"
-            - "@event_dispatcher"
-            - "@logger"
 
     # chrome
     wallabag_import.queue.redis.chrome:
@@ -182,9 +134,3 @@ services:
 
     wallabag_import.consumer.redis.chrome:
         class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - "@wallabag_user.user_repository"
-            - "@wallabag_import.chrome.import"
-            - "@event_dispatcher"
-            - "@logger"

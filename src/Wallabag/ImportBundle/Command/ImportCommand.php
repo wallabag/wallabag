@@ -2,16 +2,32 @@
 
 namespace Wallabag\ImportBundle\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Wallabag\UserBundle\Repository\UserRepository;
 
 class ImportCommand extends Command
 {
+    private $entityManager;
+    private $tokenStorage;
+    private $userRepository;
+
+    public function __construct(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage, UserRepository $userRepository)
+    {
+        $this->entityManager = $entityManager;
+        $this->tokenStorage = $tokenStorage;
+        $this->userRepository = $userRepository;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -34,14 +50,13 @@ class ImportCommand extends Command
             throw new Exception(sprintf('File "%s" not found', $input->getArgument('filepath')));
         }
 
-        $em = $this->getContainer()->get('doctrine')->getManager();
         // Turning off doctrine default logs queries for saving memory
-        $em->getConnection()->getConfiguration()->setSQLLogger(null);
+        $this->entityManager->getConnection()->getConfiguration()->setSQLLogger(null);
 
         if ($input->getOption('useUserId')) {
-            $entityUser = $em->getRepository('WallabagUserBundle:User')->findOneById($input->getArgument('username'));
+            $entityUser = $this->userRepository->findOneById($input->getArgument('username'));
         } else {
-            $entityUser = $em->getRepository('WallabagUserBundle:User')->findOneByUsername($input->getArgument('username'));
+            $entityUser = $this->userRepository->findOneByUsername($input->getArgument('username'));
         }
 
         if (!\is_object($entityUser)) {
@@ -55,8 +70,8 @@ class ImportCommand extends Command
             'main',
             $entityUser->getRoles());
 
-        $this->getContainer()->get('security.token_storage')->setToken($token);
-        $user = $this->getContainer()->get('security.token_storage')->getToken()->getUser();
+        $this->tokenStorage->setToken($token);
+        $user = $this->tokenStorage->getToken()->getUser();
 
         switch ($input->getOption('importer')) {
             case 'v2':
@@ -95,7 +110,7 @@ class ImportCommand extends Command
             $output->writeln('<comment>' . $summary['skipped'] . ' already saved</comment>');
         }
 
-        $em->clear();
+        $this->entityManager->clear();
 
         $output->writeln('End : ' . (new \DateTime())->format('d-m-Y G:i:s') . ' ---');
     }

@@ -8,7 +8,7 @@ use JMS\Serializer\SerializerBuilder;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Response;
 
-class TaggingRuleRestController extends WallabagRestController
+class TaggingRuleRestController extends AbstractWallabagRestController
 {
     /**
      * Export all tagging rules as a json file.

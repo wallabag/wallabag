@@ -16,8 +16,6 @@ class ShowUserCommandTest extends WallabagCoreTestCase
         $this->expectExceptionMessage('Not enough arguments');
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ShowUserCommand());
-
         $command = $application->find('wallabag:user:show');
 
         $tester = new CommandTester($command);
@@ -29,8 +27,6 @@ class ShowUserCommandTest extends WallabagCoreTestCase
     public function testRunShowUserCommandWithBadUsername()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ShowUserCommand());
-
         $command = $application->find('wallabag:user:show');
 
         $tester = new CommandTester($command);
@@ -45,8 +41,6 @@ class ShowUserCommandTest extends WallabagCoreTestCase
     public function testRunShowUserCommandForUser()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ShowUserCommand());
-
         $command = $application->find('wallabag:user:show');
 
         $tester = new CommandTester($command);
@@ -78,8 +72,6 @@ class ShowUserCommandTest extends WallabagCoreTestCase
         $em->flush();
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ShowUserCommand());
-
         $command = $application->find('wallabag:user:show');
 
         $tester = new CommandTester($command);

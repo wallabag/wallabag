@@ -7,12 +7,14 @@ use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Put;
+use JMS\Serializer\SerializerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\AnnotationBundle\Form\EditAnnotationType;
 use Wallabag\AnnotationBundle\Form\NewAnnotationType;
+use Wallabag\AnnotationBundle\Repository\AnnotationRepository;
 use Wallabag\CoreBundle\Entity\Entry;
 
 class WallabagAnnotationController extends AbstractFOSRestController
@@ -28,9 +30,7 @@ class WallabagAnnotationController extends AbstractFOSRestController
      */
     public function getAnnotationsAction(Entry $entry)
     {
-        $annotationRows = $this
-            ->getDoctrine()
-            ->getRepository('WallabagAnnotationBundle:Annotation')
+        $annotationRows = $this->get('wallabag_core.annotation_repository')
             ->findAnnotationsByPageId($entry->getId(), $this->getUser()->getId());
         $total = \count($annotationRows);
         $annotations = ['total' => $total, 'rows' => $annotationRows];
@@ -129,5 +129,16 @@ class WallabagAnnotationController extends AbstractFOSRestController
         $json = $this->get('jms_serializer')->serialize($annotation, 'json');
 
         return (new JsonResponse())->setJson($json);
+    }
+
+    public static function getSubscribedServices()
+    {
+        return array_merge(
+            parent::getSubscribedServices(),
+            [
+                'jms_serializer' => SerializerInterface::class,
+                'wallabag_core.annotation_repository' => AnnotationRepository::class,
+            ]
+        );
     }
 }

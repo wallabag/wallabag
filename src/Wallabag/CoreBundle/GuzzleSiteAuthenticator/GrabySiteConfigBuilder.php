@@ -7,6 +7,7 @@ use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfigBuilder;
 use Graby\SiteConfig\ConfigBuilder;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\CoreBundle\Repository\SiteCredentialRepository;
 
 class GrabySiteConfigBuilder implements SiteConfigBuilder
@@ -34,7 +35,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
     /**
      * GrabySiteConfigBuilder constructor.
      */
-    public function __construct(ConfigBuilder $grabyConfigBuilder, TokenStorage $token, SiteCredentialRepository $credentialRepository, LoggerInterface $logger)
+    public function __construct(ConfigBuilder $grabyConfigBuilder, TokenStorageInterface $token, SiteCredentialRepository $credentialRepository, LoggerInterface $logger)
     {
         $this->grabyConfigBuilder = $grabyConfigBuilder;
         $this->credentialRepository = $credentialRepository;

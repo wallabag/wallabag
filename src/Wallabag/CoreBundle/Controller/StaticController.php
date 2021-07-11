@@ -2,22 +2,30 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
-class StaticController extends Controller
+class StaticController extends AbstractWallabagController
 {
+    private $version;
+    private $paypalUrl;
+    private $addonsUrl;
+
+    public function __construct(string $version, string $paypalUrl, array $addonsUrl)
+    {
+        $this->version = $version;
+        $this->paypalUrl = $paypalUrl;
+        $this->addonsUrl = $addonsUrl;
+    }
+
     /**
      * @Route("/howto", name="howto")
      */
     public function howtoAction()
     {
-        $addonsUrl = $this->container->getParameter('addons_url');
-
         return $this->render(
             '@WallabagCore/themes/common/Static/howto.html.twig',
             [
-                'addonsUrl' => $addonsUrl,
+                'addonsUrl' => $this->addonsUrl,
             ]
         );
     }
@@ -30,8 +38,8 @@ class StaticController extends Controller
         return $this->render(
             '@WallabagCore/themes/common/Static/about.html.twig',
             [
-                'version' => $this->getParameter('wallabag_core.version'),
-                'paypal_url' => $this->getParameter('wallabag_core.paypal_url'),
+                'version' => $this->version,
+                'paypal_url' => $this->paypalUrl,
             ]
         );
     }

@@ -15,8 +15,6 @@ class ExportCommandTest extends WallabagCoreTestCase
         $this->expectExceptionMessage('Not enough arguments (missing: "username")');
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ExportCommand());
-
         $command = $application->find('wallabag:export');
 
         $tester = new CommandTester($command);
@@ -28,8 +26,6 @@ class ExportCommandTest extends WallabagCoreTestCase
     public function testExportCommandWithBadUsername()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ExportCommand());
-
         $command = $application->find('wallabag:export');
 
         $tester = new CommandTester($command);
@@ -44,8 +40,6 @@ class ExportCommandTest extends WallabagCoreTestCase
     public function testExportCommand()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ExportCommand());
-
         $command = $application->find('wallabag:export');
 
         $tester = new CommandTester($command);
@@ -62,8 +56,6 @@ class ExportCommandTest extends WallabagCoreTestCase
     public function testExportCommandWithSpecialPath()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ExportCommand());
-
         $command = $application->find('wallabag:export');
 
         $tester = new CommandTester($command);

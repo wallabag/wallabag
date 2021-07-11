@@ -13,8 +13,6 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
     public function testRunGenerateUrlHashesCommand()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new GenerateUrlHashesCommand());
-
         $command = $application->find('wallabag:generate-hashed-urls');
 
         $tester = new CommandTester($command);
@@ -29,8 +27,6 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
     public function testRunGenerateUrlHashesCommandWithBadUsername()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new GenerateUrlHashesCommand());
-
         $command = $application->find('wallabag:generate-hashed-urls');
 
         $tester = new CommandTester($command);
@@ -45,8 +41,6 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
     public function testRunGenerateUrlHashesCommandForUser()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new GenerateUrlHashesCommand());
-
         $command = $application->find('wallabag:generate-hashed-urls');
 
         $tester = new CommandTester($command);
@@ -75,8 +69,6 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
         $em->flush();
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new GenerateUrlHashesCommand());
-
         $command = $application->find('wallabag:generate-hashed-urls');
 
         $tester = new CommandTester($command);
