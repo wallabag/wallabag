@@ -12,6 +12,10 @@ services:
         alias: Wallabag\CoreBundle\Repository\EntryRepository
         public: true
 
+    wallabag_core.site_credential_repository.test:
+        alias: Wallabag\CoreBundle\Repository\SiteCredentialRepository
+        public: true
+
     wallabag_user.user_repository.test:
         alias: Wallabag\UserBundle\Repository\UserRepository
         public: true
