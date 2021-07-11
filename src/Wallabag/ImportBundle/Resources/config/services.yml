@@ -118,11 +118,3 @@ services:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: chrome }
-
-    wallabag_import.command.import:
-        class: Wallabag\ImportBundle\Command\ImportCommand
-        tags: ['console.command']
-
-    wallabag_import.command.redis_worker:
-        class: Wallabag\ImportBundle\Command\RedisWorkerCommand
-        tags: ['console.command']

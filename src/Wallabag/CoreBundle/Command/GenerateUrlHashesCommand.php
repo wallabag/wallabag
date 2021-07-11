@@ -3,14 +3,14 @@
 namespace Wallabag\CoreBundle\Command;
 
 use Doctrine\ORM\NoResultException;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Wallabag\CoreBundle\Helper\UrlHasher;
 use Wallabag\UserBundle\Entity\User;
 
-class GenerateUrlHashesCommand extends ContainerAwareCommand
+class GenerateUrlHashesCommand extends Command
 {
     /** @var OutputInterface */
     protected $output;

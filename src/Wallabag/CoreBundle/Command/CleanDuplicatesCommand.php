@@ -3,7 +3,7 @@
 namespace Wallabag\CoreBundle\Command;
 
 use Doctrine\ORM\NoResultException;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
 
-class CleanDuplicatesCommand extends ContainerAwareCommand
+class CleanDuplicatesCommand extends Command
 {
     /** @var SymfonyStyle */
     protected $io;

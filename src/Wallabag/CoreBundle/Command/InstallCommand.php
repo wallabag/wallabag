@@ -4,7 +4,7 @@ namespace Wallabag\CoreBundle\Command;
 
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -15,7 +15,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule;
 use Wallabag\CoreBundle\Entity\InternalSetting;
 
-class InstallCommand extends ContainerAwareCommand
+class InstallCommand extends Command
 {
     /**
      * @var InputInterface
