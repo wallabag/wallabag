@@ -10,12 +10,12 @@ class ImportCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('wallabag_import.chain')) {
+        if (!$container->hasDefinition('Wallabag\ImportBundle\Import\ImportChain')) {
             return;
         }
 
         $definition = $container->getDefinition(
-            'wallabag_import.chain'
+            'Wallabag\ImportBundle\Import\ImportChain'
         );
 
         $taggedServices = $container->findTaggedServiceIds(

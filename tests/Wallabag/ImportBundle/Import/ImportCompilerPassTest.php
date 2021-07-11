@@ -20,7 +20,7 @@ class ImportCompilerPassTest extends TestCase
     {
         $container = new ContainerBuilder();
         $container
-            ->register('wallabag_import.chain')
+            ->register('Wallabag\ImportBundle\Import\ImportChain')
             ->setPublic(false)
         ;
 
@@ -31,9 +31,9 @@ class ImportCompilerPassTest extends TestCase
 
         $this->process($container);
 
-        $this->assertTrue($container->hasDefinition('wallabag_import.chain'));
+        $this->assertTrue($container->hasDefinition('Wallabag\ImportBundle\Import\ImportChain'));
 
-        $definition = $container->getDefinition('wallabag_import.chain');
+        $definition = $container->getDefinition('Wallabag\ImportBundle\Import\ImportChain');
         $this->assertTrue($definition->hasMethodCall('addImport'));
 
         $calls = $definition->getMethodCalls();
