@@ -30,4 +30,10 @@ class ImportChain
     {
         return $this->imports;
     }
+
+    // XXX add tests
+    public function get($alias)
+    {
+        return $this->imports[$alias] ?? null;
+    }
 }

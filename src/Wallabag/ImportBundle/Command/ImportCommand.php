@@ -11,6 +11,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Wallabag\ImportBundle\Import\ImportChain;
 use Wallabag\UserBundle\Repository\UserRepository;
 
 class ImportCommand extends Command
@@ -18,12 +19,14 @@ class ImportCommand extends Command
     private $entityManager;
     private $tokenStorage;
     private $userRepository;
+    private $importChain;
 
-    public function __construct(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage, UserRepository $userRepository)
+    public function __construct(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage, UserRepository $userRepository, ImportChain $importChain)
     {
         $this->entityManager = $entityManager;
         $this->tokenStorage = $tokenStorage;
         $this->userRepository = $userRepository;
+        $this->importChain = $importChain;
 
         parent::__construct();
     }
@@ -75,25 +78,25 @@ class ImportCommand extends Command
 
         switch ($input->getOption('importer')) {
             case 'v2':
-                $import = $this->getContainer()->get('wallabag_import.wallabag_v2.import');
+                $import = $this->importChain->get('wallabag_v2');
                 break;
             case 'firefox':
-                $import = $this->getContainer()->get('wallabag_import.firefox.import');
+                $import = $this->importChain->get('firefox');
                 break;
             case 'chrome':
-                $import = $this->getContainer()->get('wallabag_import.chrome.import');
+                $import = $this->importChain->get('chrome');
                 break;
             case 'readability':
-                $import = $this->getContainer()->get('wallabag_import.readability.import');
+                $import = $this->importChain->get('readability');
                 break;
             case 'instapaper':
-                $import = $this->getContainer()->get('wallabag_import.instapaper.import');
+                $import = $this->importChain->get('instapaper');
                 break;
             case 'pinboard':
-                $import = $this->getContainer()->get('wallabag_import.pinboard.import');
+                $import = $this->importChain->get('pinboard');
                 break;
             default:
-                $import = $this->getContainer()->get('wallabag_import.wallabag_v1.import');
+                $import = $this->importChain->get('wallabag_v1');
         }
 
         $import->setMarkAsRead($input->getOption('markAsRead'));
