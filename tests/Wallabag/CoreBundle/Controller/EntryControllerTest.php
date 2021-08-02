@@ -3,6 +3,7 @@
 namespace Tests\Wallabag\CoreBundle\Controller;
 
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\SiteCredential;
@@ -886,6 +887,44 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->submit($form, $data);
 
         $this->assertCount(0, $crawler->filter('li.entry'));
+    }
+
+    public function testFilterOnAnnotatedStatus()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/all/list');
+
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+
+        $data = [
+            'entry_filter[isAnnotated]' => true,
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(2, $crawler->filter('li.entry'));
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+
+        $em = $this->getClient()->getContainer()->get('doctrine.orm.entity_manager');
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUserName('admin');
+
+        $annotation = new Annotation($user);
+        $annotation->setEntry($entry);
+        $annotation->setText('This is my annotation /o/');
+        $annotation->setQuote('content');
+
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(3, $crawler->filter('li.entry'));
     }
 
     public function testPaginationWithFilter()

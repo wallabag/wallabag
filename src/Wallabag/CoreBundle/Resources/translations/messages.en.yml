@@ -247,6 +247,7 @@ entry:
         archived_label: Archived
         starred_label: Starred
         unread_label: Unread
+        annotated_label: Annotated
         preview_picture_label: Has a preview picture
         preview_picture_help: Preview picture
         is_public_label: Has a public link
