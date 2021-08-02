@@ -1387,7 +1387,7 @@ class EntryControllerTest extends WallabagCoreTestCase
     {
         return [
             'ru' => [
-                'https://www.vtimes.io/2020/12/14/ubiistvo-kotorogo-ne-bilo-a1981',
+                'https://ru.wikipedia.org/wiki/Открытое_программное_обеспечение',
                 'ru',
             ],
             'fr' => [
