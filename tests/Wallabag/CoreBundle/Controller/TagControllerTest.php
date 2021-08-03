@@ -195,7 +195,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $entry2 = new Entry($this->getLoggedInUser());
         $entry2->setUrl('http://0.0.0.0/bar');
         $entry2->addTag($tag);
-        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->persist($entry2);
 
         $this->getEntityManager()->flush();
         $this->getEntityManager()->clear();
