@@ -88,7 +88,7 @@ class EntryRepository extends EntityRepository
 
         if ('starred' === $currentRoute) {
             $qb->andWhere('e.isStarred = true');
-        } elseif ('unread' === $currentRoute) {
+        } elseif ('unread' === $currentRoute || 'homepage' === $currentRoute) {
             $qb->andWhere('e.isArchived = false');
         } elseif ('archive' === $currentRoute) {
             $qb->andWhere('e.isArchived = true');
