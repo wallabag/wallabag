@@ -216,6 +216,13 @@
         </li>
         {% endif %}
 
+        <li class="bold border-top border-bottom">
+            <a class="waves-effect collapsible-header" title="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', { 'type': 'all' }) }}">
+                <i class="material-icons small">casino</i>
+                <span>{{ 'menu.top.random_entry'|trans }}</span>
+            </a>
+        </li>
+
         <li class="bold">
             <a class="waves-effect collapsible-header">
                 <i class="material-icons small">file_download</i>
