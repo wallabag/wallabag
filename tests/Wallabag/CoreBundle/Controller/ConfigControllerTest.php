@@ -1114,7 +1114,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/unread/list');
 
-        $this->assertStringContainsString('collection', $client->getResponse()->getContent());
+        $this->assertStringContainsString('row data', $client->getResponse()->getContent());
 
         $client->request('GET', '/config/view-mode');
         $crawler = $client->followRedirect();
