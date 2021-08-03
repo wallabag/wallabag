@@ -476,4 +476,39 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->assertNotFalse(array_search('cache', $tags, true), 'Tag cache is assigned to the entry');
         $this->assertNotFalse(array_search('caché', $tags, true), 'Tag caché is assigned to the entry');
     }
+
+    public function testAssignTagsOnSearchResults()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl('https://wallabag/');
+        $entry->setTitle('title');
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+
+        // Search on unread list
+        $crawler = $client->request('GET', '/unread/list');
+
+        $form = $crawler->filter('form[name=search]')->form();
+        $data = [
+            'search_entry[term]' => 'title',
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $crawler = $client->click($crawler->selectLink('entry.list.assign_search_tag')->link());
+        $crawler = $client->followRedirect();
+
+        $entries = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->getBuilderForSearchByUser($this->getLoggedInUserId(), 'title', 'unread');
+
+        foreach ($entries as $entry) {
+            $tags = $entry->getTags()->toArray();
+            $this->assertStringContainsString('title', $tags);
+        }
+    }
 }
