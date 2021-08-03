@@ -1,8 +1,4 @@
 {
-  "baggy.css": "baggy.css",
-  "baggy.css.map": "baggy.css.map",
-  "baggy.js": "baggy.js",
-  "baggy.js.map": "baggy.js.map",
   "fonts/IcoMoon-Free.ttf": "fonts/IcoMoon-Free.ttf",
   "fonts/lato-black-italic.woff": "fonts/lato-black-italic.woff",
   "fonts/lato-black-italic.woff2": "fonts/lato-black-italic.woff2",
@@ -63,12 +59,7 @@
   "public.css": "public.css",
   "public.css.map": "public.css.map",
   "public.js": "public.js",
-  "themes/_global/img/bg-select.png": "themes/_global/img/bg-select.png",
-  "themes/_global/img/icons/Diaspora-asterisk.svg": "themes/_global/img/icons/Diaspora-asterisk.svg",
   "themes/_global/img/icons/diaspora-icon--black.png": "themes/_global/img/icons/diaspora-icon--black.png",
-  "themes/_global/img/icons/scuttle.png": "themes/_global/img/icons/scuttle.png",
   "themes/_global/img/icons/shaarli.png": "themes/_global/img/icons/shaarli.png",
-  "themes/_global/img/icons/unmark-icon--black.png": "themes/_global/img/icons/unmark-icon--black.png",
-  "themes/_global/img/list.png": "themes/_global/img/list.png",
-  "themes/_global/img/table.png": "themes/_global/img/table.png"
+  "themes/_global/img/icons/unmark-icon--black.png": "themes/_global/img/icons/unmark-icon--black.png"
 }
