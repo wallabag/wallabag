@@ -461,7 +461,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertStringContainsString('flashes.config.notice.tagging_rules_updated', $crawler->filter('body')->extract(['_text'])[0]);
 
-        $editLink = $crawler->filter('.mode_edit')->last()->link();
+        $editLink = $crawler->filter('.mode_edit_tagging_rule')->last()->link();
 
         $crawler = $client->click($editLink);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
@@ -486,7 +486,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertStringContainsString('readingTime <= 30', $crawler->filter('body')->extract(['_text'])[0]);
 
-        $deleteLink = $crawler->filter('.delete')->last()->link();
+        $deleteLink = $crawler->filter('.delete_tagging_rule')->last()->link();
 
         $crawler = $client->click($deleteLink);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
@@ -1114,14 +1114,14 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/unread/list');
 
-        $this->assertNotContains('collection', $client->getResponse()->getContent());
+        $this->assertStringContainsString('collection', $client->getResponse()->getContent());
 
         $client->request('GET', '/config/view-mode');
         $crawler = $client->followRedirect();
 
         $client->request('GET', '/unread/list');
 
-        $this->assertContains('collection', $client->getResponse()->getContent());
+        $this->assertStringContainsString('collection', $client->getResponse()->getContent());
 
         $client->request('GET', '/config/view-mode');
     }

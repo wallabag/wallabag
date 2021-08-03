@@ -296,10 +296,10 @@
                                         {{ 'config.form_rules.then_tag_as_label'|trans }}
                                         « {{ tagging_rule.tags|join(', ') }} »
 
-                                        <a href="{{ path('edit_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="mode_edit">
+                                        <a href="{{ path('edit_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="mode_edit_tagging_rule">
                                             <i class="tool grey-text material-icons">mode_edit</i>
                                         </a>
-                                        <a href="{{ path('delete_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="delete">
+                                        <a href="{{ path('delete_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="delete_tagging_rule">
                                             <i class="tool grey-text material-icons">delete</i>
                                         </a>
                                     </li>
