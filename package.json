@@ -41,7 +41,7 @@
     "@babel/preset-env": "^7.14.4",
     "autoprefixer": "^10.2.5",
     "babel-loader": "^8.2.2",
-    "css-loader": "^5.2.6",
+    "css-loader": "^6.2.0",
     "eslint": "^7.27.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
