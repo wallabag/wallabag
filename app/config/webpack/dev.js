@@ -1,6 +1,7 @@
 const { merge } = require('webpack-merge');
 const webpack = require('webpack');
 const commonConfig = require('./common.js');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = merge(commonConfig, {
   devtool: 'eval-source-map',
@@ -15,16 +16,11 @@ module.exports = merge(commonConfig, {
     // match the output path
   },
   plugins: [
+    new ESLintPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ],
   module: {
     rules: [
-      {
-        enforce: 'pre',
-        test: /\.js$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/,
-      },
       {
         test: /\.js$/,
         exclude: /(node_modules)/,

@@ -8,6 +8,6 @@ parameters:
         container_xml_path: %rootDir%/../../../var/cache/test/appTestDebugProjectContainer.xml
 
     bootstrapFiles:
-        - vendor/bin/.phpunit/phpunit-8.3-0/vendor/autoload.php
+        - vendor/bin/.phpunit/phpunit-8.5-0/vendor/autoload.php
 
     inferPrivatePropertyTypeFromConstructor: true

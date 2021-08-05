@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -27,6 +28,7 @@ module.exports = merge(commonConfig, {
     ],
   },
   plugins: [
+    new ESLintPlugin(),
     new MiniCssExtractPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
@@ -40,12 +42,6 @@ module.exports = merge(commonConfig, {
   ],
   module: {
     rules: [
-      {
-        enforce: 'pre',
-        test: /\.js$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/,
-      },
       {
         test: /\.js$/,
         exclude: /(node_modules)/,

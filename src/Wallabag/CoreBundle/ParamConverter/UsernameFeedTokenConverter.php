@@ -87,5 +87,7 @@ class UsernameFeedTokenConverter implements ParamConverterInterface
 
         // Map found user to the route's parameter
         $request->attributes->set($configuration->getName(), $user);
+
+        return true;
     }
 }

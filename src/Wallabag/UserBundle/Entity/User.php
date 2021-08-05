@@ -373,13 +373,15 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     /**
      * Only used by the API when creating a new user it'll also return the first client (which was also created at the same time).
      *
-     * @return Client
+     * @return Client|false
      */
     public function getFirstClient()
     {
         if (!empty($this->clients)) {
             return $this->clients->first();
         }
+
+        return false;
     }
 
     /**
