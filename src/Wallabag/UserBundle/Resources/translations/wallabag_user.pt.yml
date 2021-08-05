@@ -5,7 +5,7 @@ auth_code:
         subject: 'Código de autenticação do wallabag'
         body:
             hello: "Olá %user%,"
-            first_para: "Como você habilitou a autenticação de dois passos para sua conta do wallabag, você precisa se autenticar com um novo dispositivo (computador, telefone, etc.), e nós enviamos um código para validar sua conexão."
+            first_para: "Como ativou a autenticação de dois passos para a sua conta do wallabag, precisa autenticar-se com um novo aparelho (computador, telefone, etc.), e nós enviamos um código para validar a sua conexão."
             second_para: "Aqui está o código:"
             support: "Por favor, se você tiver qualquer problema, não hesite em nos contatar:"
             signature: "O time do wallabag"

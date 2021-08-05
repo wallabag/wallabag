@@ -166,7 +166,7 @@ entry:
         toogle_as_read: Marcar como lido
         original_article: orixinal
         reading_time_less_one_minute_short: '&lt; 1 min'
-        reading_time_minutes_short: '%readingTime% min.'
+        reading_time_minutes_short: '%readingTime% min'
         number_of_tags: '{1} e outra etiqueta|]1,Inf[e %count% outras etiquetas'
         reading_time_less_one_minute: 'tempo estimado de lectura: &lt; 1 min'
         reading_time_minutes: 'tempo estimado de lectura: %readingTime% min'

@@ -571,7 +571,7 @@ user:
         enabled_label: Aktivirano
         password_label: Lozinka
         name_label: Ime
-        email_label: E-mail
+        email_label: E-pošta
         twofactor_google_label: Dvofaktorska autentifikacija putem OTP programa
         twofactor_email_label: Dvofaktorska autentifikacija putem e-maila
     description: Ovdje možeš upravljati svim korisnicima (stvoriti, urediti i brisati)

@@ -1,12 +1,12 @@
 matomo_enabled: Povolit Matomo
-unmark_url: Unmark URL adresa, pokud je služba povolena
-scuttle_url: Scuttle URL adresa, pokud je služba povolena
-shaarli_url: Shaarli URL adresa, pokud je služba povolena
+unmark_url: Adresa URL Unmark, pokud je služba povolena
+scuttle_url: Adresa URL Scuttle, pokud je služba povolena
+shaarli_url: Adresa URL Shaarli, pokud je služba povolena
 share_unmark: Povolit sdílení na Unmark.it
 share_twitter: Povolit sdílení na Twitteru
 share_scuttle: Povolit sdílení na Scuttle
 share_shaarli: Povolit sdílení na Shaarli
-share_mail: Povolit sdílení emailem
+share_mail: Povolit sdílení e-mailem
 share_diaspora: Povolit sdílení na diaspora*
 export_xml: Povolit export do XML
 export_txt: Povolit export do TXT
@@ -15,7 +15,26 @@ export_json: Povolit export do JSON
 export_csv: Povolit export do CSV
 export_pdf: Povolit export do PDF
 export_mobi: Povolit export do .mobi
-diaspora_url: diaspora* URL adresa, pokud je služba povolena
-carrot: Povolit sdílet na Carrot
+diaspora_url: Adresa URL diaspora*, pokud je služba povolena
+carrot: Povolit sdílení na Carrot
 download_pictures: Stáhnout obrázky na váš server
-settings_changed: Nastavení bylo aktualizováno
+settings_changed: Konfigurace byla aktualizována
+shaarli_share_origin_url: Povolit sdílení původní adresy URL na Shaarli, pokud je služba povolena
+store_article_headers: Povolit, pokud Wallabag ukládá záhlaví HTTP pro každý článek
+api_user_registration: Zapnout registraci uživatelů prostřednictvím API
+restricted_access: Povolit ověřování pro placené webové stránky
+download_images_enabled: Stahovat obrázky místně
+share_public: Povolit veřejné adresy URL pro položky
+demo_mode_username: Ukázkový uživatel
+demo_mode_enabled: Povolit ukázkový režim (Používá se pouze pro veřejnou ukázku Wallabag)
+matomo_site_id: ID vaší webové stránky na Matomo
+matomo_host: Hostitel vaší webové stránky na Matomo (bez http:// nebo https://)
+modify_settings: použít
+misc: různé
+import: import
+export: export
+entry: článek
+wallabag_support_url: Adresa URL pro podporu Wallabag
+show_printlink: Zobrazit odkaz pro vytištění obsahu
+import_with_redis: Povolit Redis pro asynchronní import dat
+import_with_rabbitmq: Povolit RabbitMQ pro asynchronní import dat

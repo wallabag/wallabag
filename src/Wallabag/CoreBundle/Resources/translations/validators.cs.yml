@@ -1,4 +1,7 @@
 validator:
-    password_wrong_value: Špatně zadané heslo.
+    password_wrong_value: Zadáno špatné aktuální heslo.
     password_too_short: Vaše heslo musí mít alespoň 8 znaků.
-    password_must_match: Heslo musí být v obou polích stejné.
+    password_must_match: Hesla se musí shodovat.
+    quote_length_too_high: Citace je příliš dlouhá. Měla by mít {{ limit }} znaků nebo méně.
+    rss_limit_too_high: Toto určitě ukončí aplikaci
+    item_per_page_too_high: Toto určitě ukončí aplikaci

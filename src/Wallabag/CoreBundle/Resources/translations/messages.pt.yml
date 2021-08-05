@@ -407,7 +407,7 @@ user:
     page_title: 'Gestão de utilizadores'
     new_user: 'Criar um novo utilizador'
     edit_user: 'Editar um utilizador existente'
-    description: 'Aqui você gerencia todos os utilizadores (cria, edita e apaga)'
+    description: 'Aqui gira todos os utilizadores (cria, edita e apaga)'
     list:
         actions: 'Ações'
         edit_action: 'Editar'
