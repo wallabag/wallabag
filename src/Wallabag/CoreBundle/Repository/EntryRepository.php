@@ -421,6 +421,22 @@ class EntryRepository extends EntityRepository
         return false;
     }
 
+    public function findByUserIdAndBatchHashedUrls($userId, $hashedUrls)
+    {
+        $qb = $this->createQueryBuilder('e')->select(['e.id', 'e.hashedUrl', 'e.hashedGivenUrl']);
+        $res = $qb->where('e.user = :user_id')->setParameter('user_id', $userId)
+                    ->andWhere(
+                        $qb->expr()->orX(
+                            $qb->expr()->in('e.hashedUrl', $hashedUrls),
+                            $qb->expr()->in('e.hashedGivenUrl', $hashedUrls)
+                        )
+                    )
+                    ->getQuery()
+                    ->getResult();
+
+        return $res;
+    }
+
     /**
      * Count all entries for a user.
      *
