@@ -245,6 +245,7 @@ entry:
         archived_label: Lus
         starred_label: Favoris
         unread_label: Non lus
+        annotated_label: Annotés
         preview_picture_label: A une photo
         preview_picture_help: Photo
         is_public_label: A un lien public
