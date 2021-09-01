@@ -12007,16 +12007,16 @@
         },
         {
             "name": "m6web/redis-mock",
-            "version": "v5.0.0",
+            "version": "v5.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/M6Web/RedisMock.git",
-                "reference": "1b7a1bcbb63d636b003643e88f785615e0a316bd"
+                "url": "https://github.com/BedrockStreaming/RedisMock.git",
+                "reference": "86a7b33c6ba57ca97330454378e484cf2abbefdd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/M6Web/RedisMock/zipball/1b7a1bcbb63d636b003643e88f785615e0a316bd",
-                "reference": "1b7a1bcbb63d636b003643e88f785615e0a316bd",
+                "url": "https://api.github.com/repos/BedrockStreaming/RedisMock/zipball/86a7b33c6ba57ca97330454378e484cf2abbefdd",
+                "reference": "86a7b33c6ba57ca97330454378e484cf2abbefdd",
                 "shasum": ""
             },
             "require": {
@@ -12049,10 +12049,10 @@
                 "redis"
             ],
             "support": {
-                "issues": "https://github.com/M6Web/RedisMock/issues",
-                "source": "https://github.com/M6Web/RedisMock/tree/master"
+                "issues": "https://github.com/BedrockStreaming/RedisMock/issues",
+                "source": "https://github.com/BedrockStreaming/RedisMock/tree/v5.0.1"
             },
-            "time": "2020-01-08T08:03:01+00:00"
+            "time": "2021-08-16T09:35:42+00:00"
         },
         {
             "name": "nikic/php-parser",
