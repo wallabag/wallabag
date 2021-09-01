@@ -1,1 +1,8 @@
-{}
+auth_code:
+    mailer:
+        body:
+            signature: Tim wallabag
+            support: 'Silakan hubungi kami jika Anda memiliki sebuah masalah:'
+            second_para: 'Ini kodenya:'
+            hello: Hai %user%,
+        subject: kode otentikasi wallabag
