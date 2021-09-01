@@ -7545,16 +7545,16 @@
         },
         {
             "name": "pragmarx/recovery",
-            "version": "v0.2.0",
+            "version": "v0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antonioribeiro/recovery.git",
-                "reference": "03db473434ce84212b8991020929b162fe15f01f"
+                "reference": "b5ce4082f059afac6761714a84497816f45271cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antonioribeiro/recovery/zipball/03db473434ce84212b8991020929b162fe15f01f",
-                "reference": "03db473434ce84212b8991020929b162fe15f01f",
+                "url": "https://api.github.com/repos/antonioribeiro/recovery/zipball/b5ce4082f059afac6761714a84497816f45271cc",
+                "reference": "b5ce4082f059afac6761714a84497816f45271cc",
                 "shasum": ""
             },
             "require": {
@@ -7607,9 +7607,9 @@
             ],
             "support": {
                 "issues": "https://github.com/antonioribeiro/recovery/issues",
-                "source": "https://github.com/antonioribeiro/recovery/tree/v0.2.0"
+                "source": "https://github.com/antonioribeiro/recovery/tree/v0.2.1"
             },
-            "time": "2021-03-23T22:57:38+00:00"
+            "time": "2021-08-15T12:26:51+00:00"
         },
         {
             "name": "predis/predis",
