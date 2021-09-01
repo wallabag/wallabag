@@ -44,7 +44,7 @@
     "css-loader": "^5.2.6",
     "eslint": "^7.27.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-import": "^2.24.2",
     "eslint-webpack-plugin": "^2.5.4",
     "file-loader": "^6.2.0",
     "lato-font": "^3.0.0",
