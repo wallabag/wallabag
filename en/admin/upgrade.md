@@ -24,7 +24,7 @@ PHP version compatibility have changed, check the [release notes](https://github
 
 Use these [data queries for the database upgrade to 2.4](./query-upgrade-23-24.md).
 
-Three parameters were created and MUST be added to your `app/config/parameters.yml` file : `mailer_port`, `mailer_encryption`, `mailer_auth_mode` and `sentry_dsn` 
+Four parameters were created and MUST be added to your `app/config/parameters.yml` file : `mailer_port`, `mailer_encryption`, `mailer_auth_mode` and `sentry_dsn` 
 
 Do not forget to run `bin/console cache:clear --env=prod` in the wallabag directory afterwards
 
