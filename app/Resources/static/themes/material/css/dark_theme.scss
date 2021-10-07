@@ -19,6 +19,7 @@
     background-color: #121212;
   }
 
+  table.striped > tbody > tr:nth-child(2n+1),
   .dropdown-content li {
     background-color: #232323;
   }
@@ -108,7 +109,9 @@
   }
 
   .border-bottom,
-  .collapsible {
+  .collapsible,
+  .collapsible-body,
+  .collapsible-header {
     border-color: #222;
   }
 
