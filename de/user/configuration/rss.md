@@ -18,7 +18,7 @@ Du kannst auch definieren wie viele Artikel du in deinem RSS Feed
 (Standardwert: 50) haben willst.
 
 There is also a pagination available for these feeds. You can add
-`?page=2` to jump to the second page. The pagination follow [the
+`/2` to jump to the second page. The pagination follow [the
 RFC](https://tools.ietf.org/html/rfc5005#page-4) about that, which means
 you'll find the `next`, `previous` & `last` page link inside the
 &lt;channel&gt; tag of each RSS feed.
