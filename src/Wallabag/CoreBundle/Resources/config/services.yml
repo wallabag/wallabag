@@ -151,6 +151,7 @@ services:
             - "@translator"
             - '%domain_name%'
             - web/img/appicon/apple-touch-icon-152.png
+            - "@security.token_storage"
 
     wallabag.operator.array.matches:
         class: Wallabag\CoreBundle\Operator\PHP\Matches

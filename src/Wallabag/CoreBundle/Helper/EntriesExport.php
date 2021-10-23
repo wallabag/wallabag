@@ -8,8 +8,10 @@ use JMS\Serializer\SerializerBuilder;
 use PHPePub\Core\EPub;
 use PHPePub\Core\Structure\OPF\DublinCore;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\UserBundle\Entity\User;
 
 /**
  * This class doesn't have unit test BUT it's fully covered by a functional test with ExportControllerTest.
@@ -23,17 +25,26 @@ class EntriesExport
     private $entries = [];
     private $author = 'wallabag';
     private $language = '';
+    private $user;
 
     /**
-     * @param TranslatorInterface $translator  Translator service
-     * @param string              $wallabagUrl Wallabag instance url
-     * @param string              $logoPath    Path to the logo FROM THE BUNDLE SCOPE
+     * @param TranslatorInterface   $translator   Translator service
+     * @param string                $wallabagUrl  Wallabag instance url
+     * @param string                $logoPath     Path to the logo FROM THE BUNDLE SCOPE
+     * @param TokenStorageInterface $tokenStorage Needed to retrieve the current user
      */
-    public function __construct(TranslatorInterface $translator, $wallabagUrl, $logoPath)
+    public function __construct(TranslatorInterface $translator, $wallabagUrl, $logoPath, TokenStorageInterface $tokenStorage)
     {
         $this->translator = $translator;
         $this->wallabagUrl = $wallabagUrl;
         $this->logoPath = $logoPath;
+
+        /* @var User $user */
+        $this->user = $tokenStorage->getToken() ? $tokenStorage->getToken()->getUser() : null;
+
+        if (null === $this->user || !\is_object($this->user)) {
+            return;
+        }
     }
 
     /**
@@ -202,12 +213,14 @@ class EntriesExport
                 $publishedDate = $entry->getPublishedAt()->format('Y-m-d');
             }
 
+            $readingTime = $entry->getReadingTime() / $this->user->getConfig()->getReadingSpeed() * 200;
+
             $titlepage = $content_start .
                 '<h1>' . $entry->getTitle() . '</h1>' .
                 '<dl>' .
                 '<dt>' . $this->translator->trans('entry.view.published_by') . '</dt><dd>' . $authors . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.published_on') . '</dt><dd>' . $publishedDate . '</dd>' .
-                '<dt>' . $this->translator->trans('entry.metadata.reading_time') . '</dt><dd>' . $this->translator->trans('entry.metadata.reading_time_minutes_short', ['%readingTime%' => $entry->getReadingTime()]) . '</dd>' .
+                '<dt>' . $this->translator->trans('entry.metadata.reading_time') . '</dt><dd>' . $this->translator->trans('entry.metadata.reading_time_minutes_short', ['%readingTime%' => $readingTime]) . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.added_on') . '</dt><dd>' . $entry->getCreatedAt()->format('Y-m-d') . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.address') . '</dt><dd><a href="' . $entry->getUrl() . '">' . $entry->getUrl() . '</a></dd>' .
                 '</dl>' .
@@ -318,11 +331,13 @@ class EntriesExport
                 $authors = implode(',', $publishedBy);
             }
 
+            $readingTime = $entry->getReadingTime() / $this->user->getConfig()->getReadingSpeed() * 200;
+
             $pdf->addPage();
             $html = '<h1>' . $entry->getTitle() . '</h1>' .
                 '<dl>' .
                 '<dt>' . $this->translator->trans('entry.view.published_by') . '</dt><dd>' . $authors . '</dd>' .
-                '<dt>' . $this->translator->trans('entry.metadata.reading_time') . '</dt><dd>' . $this->translator->trans('entry.metadata.reading_time_minutes_short', ['%readingTime%' => $entry->getReadingTime()]) . '</dd>' .
+                '<dt>' . $this->translator->trans('entry.metadata.reading_time') . '</dt><dd>' . $this->translator->trans('entry.metadata.reading_time_minutes_short', ['%readingTime%' => $readingTime]) . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.added_on') . '</dt><dd>' . $entry->getCreatedAt()->format('Y-m-d') . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.address') . '</dt><dd><a href="' . $entry->getUrl() . '">' . $entry->getUrl() . '</a></dd>' .
                 '</dl>';
