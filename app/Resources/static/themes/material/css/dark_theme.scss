@@ -19,6 +19,7 @@
     background-color: #121212;
   }
 
+  table.striped > tbody > tr:nth-child(2n+1),
   .dropdown-content li {
     background-color: #232323;
   }
@@ -108,12 +109,19 @@
   }
 
   .border-bottom,
-  .collapsible {
+  .collapsible,
+  .collapsible-body,
+  .collapsible-header {
     border-color: #222;
   }
 
   .pagination li.active {
     background-color: #666;
+  }
+
+  .hljs {
+    color: #abb2bf;
+    background-color: #282c34;
   }
 
   @media only screen and (min-width: 992px) {
