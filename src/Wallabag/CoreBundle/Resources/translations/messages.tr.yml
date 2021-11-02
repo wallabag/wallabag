@@ -104,7 +104,7 @@ config:
             all: Tümü
         rss_limit: RSS içeriğinden talep edilecek makale limiti
     form_user:
-        two_factor_description: İki adımlı doğrulamayı aktifleştirdiğinizde, her yeni güvenilmeyen bağlantılarda size e-posta ile bir kod alacaksınız.
+        two_factor_description: İki adımlı kimlik doğrulamayı etkinleştirmek, her yeni güvenilmeyen bağlantıda bir kod içeren bir e-posta alacağınız anlamına gelir.
         name_label: İsim
         email_label: E-posta
         twoFactorAuthentication_label: İki adımlı doğrulama
@@ -520,8 +520,8 @@ import:
         description: Bu içe aktarıcı tüm Instapaper makalelerinizi içe aktaracak. Ayarlar sayfasında (https://www.instapaper.com/user) "Export" kısmından "Download .CSV file" bağlantısına tıklayıp indirebilirsiniz. Bir CSV dosyası cihazınıza inecek ("instapaper-export.csv" gibi bir dosya).
         how_to: Lütfen Instapaper dışa aktarım dosyanızı seçin ve aşağıdaki düğmeye tıklayarak içe aktarın.
     worker:
-        enabled: 'İçe aktarım işlemi asenkron olarak gerçekleşmektedir. İçeri aktarma işlemi başladığı anda, harici bir çalışan kod (worker) işleri tek tek yönetecek. Mevcut servis:'
-        download_images_warning: Makaleleriniz için resimleri indirme özelliğini aktif. Klasik içe aktarmayla birlikte bu işlem uzun zaman alabilir (veya hatalı sonuç verebilir). Biz olası bir hata olmaması adına asenkron içe aktarım özelliğini kullanmanızı <strong>şiddetle öneriyoruz</strong>.
+        enabled: 'İçe aktarma eşzamansız olarak yapılır. İçe aktarma görevi başlatıldığında, harici bir çalışan işleri birer birer ele alacaktır. Geçerli hizmet:'
+        download_images_warning: Makaleleriniz için resimleri indirme özelliğini etkinleştirdiniz. Klasik içe aktarmayla birlikte bu işlem uzun zaman alabilir (veya hatalı sonuç verebilir). Biz olası bir hata olmaması adına eşzamansız içe aktarım özelliğini kullanmanızı <strong>şiddetle tavsiye ediyoruz</strong>.
     pinboard:
         page_title: İçe Aktar > Pinboard
         description: Bu içe aktarıcı tüm Pinboard makalelerinizi içe aktarır. Yedekleme sayfasında (https://pinboard.in/settings/backup) "Bookmarks" kısmında "JSON" seçeneğine tıklayın. Cihazınıza bir JSON dosyası inecek ("pinboard_export" gibi bir dosya).
@@ -537,7 +537,7 @@ user:
         plain_password_label: ????
         email_label: E-posta
         name_label: İsim
-        enabled_label: Aktif
+        enabled_label: Etkin
         last_login_label: Son giriş
         twofactor_label: İki aşamalı doğrulama
         save: Kaydet
@@ -603,12 +603,12 @@ flashes:
     import:
         notice:
             failed: İçe aktarım başarısız, lütfen yeniden deneyin.
-            failed_on_file: İçe aktarım yapılırken bir hata ile karşılaşıldı. Lütfen içe aktarım dosyanızı kontrol edin.
+            failed_on_file: İçe aktarma işlenirken hata oluştu. Lütfen içe aktarma dosyanızı doğrulayın.
             summary: 'İçe aktarım özeti: %imported% makale içe aktarıldı, %skipped% makale hali hazırda kayıtlı.'
             summary_with_queue: 'İçe aktarım özeti: %queued% makale sırada.'
         error:
-            redis_enabled_not_installed: Asenkron içe aktarım işlemlerini yönetmek için Redis aktifleştirilmiş, ama <u>sistem buna erişim sağlayamıyor</u>. Lütfen Redis ayarlarınızı kontrol edin.
-            rabbit_enabled_not_installed: Asenkron içe aktarım işlemlerini yönetmek için RabbitMQ aktifleştirilmiş, ama <u>sistem buna erişim sağlayamıyor</u>. Lütfen RabbitMQ ayarlarınızı kontrol edin.
+            redis_enabled_not_installed: Eşzamansız içe aktarım işlemlerini yönetmek için Redis etkinleştirildi, ama <u>sistem buna erişim sağlayamıyor</u>. Lütfen Redis yapılandırmasını gözden geçirin.
+            rabbit_enabled_not_installed: Eşzamansız içe aktarım işlemlerini yönetmek için RabbitMQ etkinleştirildi, ama <u>sistem buna erişim sağlayamıyor</u>. Lütfen RabbitMQ yapılandırmasını gözden geçirin.
     developer:
         notice:
             client_created: Yeni istemci %name% oluşturuldu.
