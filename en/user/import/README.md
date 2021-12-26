@@ -24,7 +24,7 @@ If you have a CLI access on your web server, you can execute this
 command to import your wallabag v1 export:
 
 ```bash
-bin/console wallabag:import username ~/Downloads/wallabag-export-1-2016-04-05.json --env=prod
+php bin/console wallabag:import username ~/Downloads/wallabag-export-1-2016-04-05.json --env=prod
 ```
 
 Please replace values:
