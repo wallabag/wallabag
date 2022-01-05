@@ -76,31 +76,26 @@ module.exports = merge(commonConfig, {
       {
         test: /\.(jpg|png|gif|svg|ico)$/,
         include: /node_modules/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: 'img/[name].[ext]',
-          },
+        type: 'asset/resource',
+        generator: {
+          filename: 'img/[name][ext]'
         },
       },
       {
         test: /\.(jpg|png|gif|svg|ico)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            context: 'app/Resources/static',
-            name: '[path][name].[ext]',
-          },
-        },
+        type: 'asset/resource',
+        generator: {
+          filename: content => {
+            return content.filename.replace('app/Resources/static/', '')
+          }
+        }
       },
       {
         test: /\.(eot|ttf|woff|woff2)$/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: 'fonts/[name].[ext]',
-          },
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name][ext]'
         },
       },
     ],
