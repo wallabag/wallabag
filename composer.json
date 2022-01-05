@@ -111,7 +111,7 @@
         "phpstan/phpstan-phpunit": "^0.12",
         "phpstan/phpstan-symfony": "^0.12",
         "symfony/maker-bundle": "^1.18",
-        "symfony/phpunit-bridge": "~5.1"
+        "symfony/phpunit-bridge": "~6.0"
     },
     "suggest": {
         "ext-imagick": "To keep GIF animation when downloading image is enabled"
