@@ -14,7 +14,7 @@ env:
 jobs:
   phpunit:
     name: "PHP ${{ matrix.php }} using ${{ matrix.database }}"
-    runs-on: "ubuntu-18.04"
+    runs-on: "ubuntu-20.04"
     services:
       rabbitmq:
         image: rabbitmq:3-alpine
