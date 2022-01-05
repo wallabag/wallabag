@@ -23,7 +23,7 @@ module.exports = {
       'window.jQuery': 'jquery',
     }),
     new StyleLintPlugin({
-      configFile: '.stylelintrc',
+      configFile: 'stylelint.config.js',
       failOnError: false,
       quiet: false,
       context: 'app/Resources/static/themes',

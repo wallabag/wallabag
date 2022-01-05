@@ -4,13 +4,13 @@
 
 @font-face {
   font-family: icomoon;
-  src: url('~icomoon-free-npm/Font/IcoMoon-Free.ttf');
+  src: url("~icomoon-free-npm/Font/IcoMoon-Free.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 .material-icons {
-  font-family: 'Material Icons';
+  font-family: "Material Icons";
   font-weight: normal;
   font-style: normal;
   font-size: 1em;  /* Preferred icon size */
@@ -34,7 +34,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   /* Support for IE. */
-  font-feature-settings: 'liga';
+  font-feature-settings: "liga";
 
   .md-18 { font-size: 18px; }
   .md-24 { font-size: 24px; }
@@ -64,11 +64,6 @@
 
   /* Enable Ligatures ================ */
   letter-spacing: 0;
-  -webkit-font-feature-settings: "liga";
-  -moz-font-feature-settings: "liga=1";
-  -moz-font-feature-settings: "liga";
-  -ms-font-feature-settings: "liga" 1;
-  -o-font-feature-settings: "liga";
   font-feature-settings: "liga";
 
   /* Better Font Rendering =========== */

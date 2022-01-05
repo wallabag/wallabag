@@ -5,15 +5,12 @@
 */
 
 * {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 html {
   font-family: sans-serif; /* 1 */
-  -ms-text-size-adjust: 100%; /* 2 */
-  -webkit-text-size-adjust: 100%; /* 2 */
+  text-size-adjust: 100%; /* 2 */
 }
 
 body {
@@ -100,7 +97,7 @@ textarea {
 }
 
 input[type="search"] {
-  -webkit-appearance: textfield;
+  appearance: textfield;
 }
 
 /* ==========================================================================
@@ -218,9 +215,9 @@ video {
   display: inline-block;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
+@media screen {
   select {
-    -webkit-appearance: none;
+    appearance: none;
     border-radius: 0;
   }
 }
