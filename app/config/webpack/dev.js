@@ -1,7 +1,6 @@
 const { merge } = require('webpack-merge');
-const webpack = require('webpack');
-const commonConfig = require('./common.js');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const commonConfig = require('./common');
 
 module.exports = merge(commonConfig, {
   devtool: 'eval-source-map',
@@ -52,7 +51,7 @@ module.exports = merge(commonConfig, {
       },
       {
         test: /\.(jpg|png|gif|svg|ico|eot|ttf|woff|woff2)$/,
-        use: 'url-loader',
+        type: 'asset/inline',
       },
     ],
   },
