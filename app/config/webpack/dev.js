@@ -10,14 +10,12 @@ module.exports = merge(commonConfig, {
   },
   mode: 'development',
   devServer: {
-    hot: true,
-    // enable HMR on the server
-    contentBase: './web',
-    // match the output path
+    static: {
+      directory: './web',
+    },
   },
   plugins: [
     new ESLintPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
   ],
   module: {
     rules: [
