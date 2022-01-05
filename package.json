@@ -50,7 +50,7 @@
     "lato-font": "^3.0.0",
     "mini-css-extract-plugin": "^2.4.5",
     "node-sass": "^7.0.1",
-    "postcss": "^8.2.7",
+    "postcss": "^8.4.5",
     "postcss-loader": "^6.2.1",
     "sass": "^1.32.8",
     "sass-loader": "^12.4.0",
