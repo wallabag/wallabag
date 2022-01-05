@@ -30,7 +30,7 @@ body {
 .login form {
   background-color: #fff;
   padding: 1.5em;
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 1px 8px rgb(0 0 0 / 90%);
   width: 20em;
   position: absolute;
   top: 8em;
@@ -110,9 +110,9 @@ form input[type="email"] {
   color: #666;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
+@media screen and (min-device-pixel-ratio: 0) {
   select {
-    -webkit-appearance: none;
+    appearance: none;
     border-radius: 0;
     background: #fff url("../../_global/img/bg-select.png") no-repeat right center;
   }
@@ -157,10 +157,6 @@ input[type="submit"]:hover,
 input[type="submit"]:focus {
   background-color: #fff;
   color: #000;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 
@@ -196,7 +192,7 @@ h2::after {
   background-color: #333;
   padding-top: 9.5em;
   height: 100%;
-  box-shadow: inset -4px 0 20px rgba(0, 0, 0, 0.6);
+  box-shadow: inset -4px 0 20px rgb(0 0 0 / 60%);
   z-index: 15;
 }
 
@@ -217,10 +213,6 @@ h2::after {
   text-decoration: none;
   font-weight: normal;
   font-family: "PT Sans", sans-serif;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 
@@ -365,7 +357,7 @@ footer a {
 .card-entry-labels li {
   margin: 10px 10px 10px auto;
   padding: 5px 12px 5px 25px;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgb(0 0 0 / 60%);
   border-radius: 0 3px 3px 0;
   color: #fff;
   cursor: default;
@@ -387,7 +379,7 @@ footer a {
   display: inline-block;
   margin: 0 5px;
   padding: 5px 12px;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgb(0 0 0 / 60%);
   border-radius: 3px;
   max-height: 2em;
   overflow: hidden;
@@ -425,7 +417,7 @@ footer a {
 .entry {
   background-color: #fff;
   letter-spacing: normal;
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 7px rgb(0 0 0 / 30%);
   display: inline-block;
   width: 32%;
   margin-bottom: 1.5em;
@@ -448,10 +440,6 @@ footer a {
   bottom: 0.3em;
   z-index: 10;
   right: 1.5em;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 
@@ -463,15 +451,11 @@ footer a {
   bottom: 0;
   left: 0;
   background-color: #000;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 
 .entry:hover {
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 1);
+  box-shadow: 0 3px 10px rgb(0 0 0 / 100%);
 }
 
 .entry:hover::after {
@@ -501,10 +485,6 @@ footer a {
   text-decoration: none;
   color: #000;
   word-wrap: break-word;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 
@@ -537,10 +517,6 @@ img.preview {
   z-index: 10;
   padding-right: 0.5em;
   text-align: right;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 
@@ -626,7 +602,7 @@ div.pagination ul .current {
   ========================================================================== */
 
 .popup-form {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgb(0 0 0 / 50%);
   position: absolute;
   top: 0;
   left: 10em;
@@ -752,7 +728,7 @@ a.add-to-wallabag-link-after::after {
 }
 
 @font-face {
-  font-family: 'Material Icons';
+  font-family: "Material Icons";
   font-style: normal;
   font-weight: 400;
   src: url(../fonts/MaterialIcons-Regular.eot);
@@ -762,7 +738,7 @@ a.add-to-wallabag-link-after::after {
 }
 
 .material-icons {
-  font-family: 'Material Icons';
+  font-family: "Material Icons";
   font-weight: normal;
   font-style: normal;
   font-size: 1em;  /* Preferred icon size */
@@ -786,7 +762,7 @@ a.add-to-wallabag-link-after::after {
   -moz-osx-font-smoothing: grayscale;
 
   /* Support for IE. */
-  font-feature-settings: 'liga';
+  font-feature-settings: "liga";
 }
 
 .material-icons.md-18 { font-size: 18px; }
@@ -812,11 +788,6 @@ a.add-to-wallabag-link-after::after {
 
   /* Enable Ligatures ================ */
   letter-spacing: 0;
-  -webkit-font-feature-settings: "liga";
-  -moz-font-feature-settings: "liga=1";
-  -moz-font-feature-settings: "liga";
-  -ms-font-feature-settings: "liga" 1;
-  -o-font-feature-settings: "liga";
   font-feature-settings: "liga";
 
   /* Better Font Rendering =========== */

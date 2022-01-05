@@ -40,7 +40,7 @@ footer {
   display: inline-block;
   margin: 0 5px;
   padding: 5px 12px;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgb(0 0 0 / 60%);
   border-radius: 3px;
   max-height: 2em;
   overflow: hidden;
@@ -78,7 +78,7 @@ footer {
 .entry {
   background-color: #fff;
   letter-spacing: normal;
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 7px rgb(0 0 0 / 30%);
   display: inline-block;
   width: 32%;
   margin-bottom: 1.5em;
@@ -120,7 +120,7 @@ footer {
   }
 
   &:hover {
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 1);
+    box-shadow: 0 3px 10px rgb(0 0 0 / 100%);
 
     &::after {
       height: 40px;
@@ -219,7 +219,7 @@ footer {
     li {
       margin: 10px 10px 10px auto;
       padding: 5px 12px 5px 25px;
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgb(0 0 0 / 60%);
       border-radius: 0 3px 3px 0;
       color: #fff;
       cursor: default;
