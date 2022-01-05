@@ -1410,10 +1410,6 @@ class EntryControllerTest extends WallabagCoreTestCase
                 'https://politica.estadao.com.br/noticias/eleicoes,campanha-catatonica,70002491983',
                 'pt_BR',
             ],
-            'fucked_list_of_languages' => [
-                'http://geocatalog.webservice-energy.org/geonetwork/srv/eng/main.home',
-                null,
-            ],
             'es-ES' => [
                 'https://www.20minutos.es/noticia/3360685/0/gobierno-sanchez-primero-historia-mas-mujeres-que-hombres/',
                 'es_ES',
