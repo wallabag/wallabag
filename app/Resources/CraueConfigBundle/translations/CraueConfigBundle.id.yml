@@ -1,0 +1,9 @@
+export_txt: Aktifkan pengeksporan TXT
+export_json: Aktifkan pengeksporan JSON
+export_csv: Aktifkan pengeksporan CSV
+export_pdf: Aktifkan pengeksporan PDF
+export_mobi: Aktifkan pengeksporan .mobi
+export_epub: Aktifkan pengeksporan ePub
+diaspora_url: URL diaspora*, jika layanan diaktifkan
+carrot: Aktifkan bagikan ke Carrot
+settings_changed: Konfigurasi diperbarui

@@ -144,7 +144,7 @@ config:
         delete_rule_label: 'удалить'
         edit_rule_label: 'изменить'
         rule_label: 'Правило'
-        tags_label: 'теги'
+        tags_label: 'Теги'
         faq:
             title: 'FAQ'
             tagging_rules_definition_title: 'Что значит "правила тегирования"?'

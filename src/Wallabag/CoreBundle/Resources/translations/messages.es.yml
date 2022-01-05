@@ -189,6 +189,7 @@ config:
             cancel: Cancelar
             enable: Habilitar
             two_factor_code_description_2: 'Puedes escanear ese Código QR con tu applicación:'
+            qrcode_label: Código QR
         page_title: Autenticación de doble factor
     form_ignore_origin_rules:
         faq:
@@ -207,6 +208,8 @@ config:
             archive: Archivados
             starred: Favorito
             unread: No leídos
+        token_reset: Regenerar tu token
+        token_create: Crear tu token
 entry:
     default_title: 'Título del artículo'
     page_titles:
@@ -275,6 +278,9 @@ entry:
             problem:
                 label: '¿Algún problema?'
                 description: '¿Este artículo no se muestra bien?'
+            theme_toggle_auto: Automático
+            theme_toggle_dark: Oscuro
+            theme_toggle_light: Claro
         edit_title: 'Modificar el título'
         original_article: 'original'
         annotations_on_the_entry: '{0} Sin anotaciones|{1} Una anotación|]1,Inf[ %count% anotaciones'
