@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
-const commonConfig = require('./common.js');
+const commonConfig = require('./common');
 
 module.exports = merge(commonConfig, {
   output: {
@@ -78,7 +78,7 @@ module.exports = merge(commonConfig, {
         include: /node_modules/,
         type: 'asset/resource',
         generator: {
-          filename: 'img/[name][ext]'
+          filename: 'img/[name][ext]',
         },
       },
       {
@@ -86,16 +86,14 @@ module.exports = merge(commonConfig, {
         exclude: /node_modules/,
         type: 'asset/resource',
         generator: {
-          filename: content => {
-            return content.filename.replace('app/Resources/static/', '')
-          }
-        }
+          filename: (content) => content.filename.replace('app/Resources/static/', ''),
+        },
       },
       {
         test: /\.(eot|ttf|woff|woff2)$/,
         type: 'asset/resource',
         generator: {
-          filename: 'fonts/[name][ext]'
+          filename: 'fonts/[name][ext]',
         },
       },
     ],
