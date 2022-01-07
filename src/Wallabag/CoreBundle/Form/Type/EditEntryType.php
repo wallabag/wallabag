@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class EditEntryType extends AbstractType
 {
@@ -29,6 +30,11 @@ class EditEntryType extends AbstractType
                 'property_path' => 'originUrl',
                 'label' => 'entry.edit.origin_url_label',
                 'default_protocol' => null,
+            ])
+            ->add('content', TextareaType::class, [
+                'required' => true,
+                'label' => 'Content',
+                'attr' => [ 'style' => 'height: 20em; padding: 10px' ]
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'entry.edit.save_label',

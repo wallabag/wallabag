@@ -2,6 +2,20 @@
 
 {% block title %}{{ 'entry.edit.page_title'|trans }}{% endblock %}
 
+{% block scripts %}
+
+    {{parent()}}
+
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script type="text/javascript">
+        tinymce.init({
+            selector: '#entry_content'
+        });
+    </script>
+
+{% endblock %}
+
 {% block content %}
 
     <div class="row">
@@ -31,6 +45,12 @@
                         <div class="input-field s12">
                             {{ form_label(form.origin_url) }}
                             {{ form_widget(form.origin_url) }}
+                        </div>
+                        <br>
+
+                        <div class="input-field s12">
+                            {{ form_label(form.content) }}
+                            {{ form_widget(form.content) }}
                         </div>
                         <br>
 
