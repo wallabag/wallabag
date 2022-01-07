@@ -53,6 +53,8 @@ wget https://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 Du findest die [md5 Hashsumme des neuesten Pakets auf unserer
 Website](https://static.wallabag.org/releases/).
 
+Das statische Paket erfordert, dass jeder Befehl mit `--env=prod` angehängt wird, da das statische Paket nur als prod-Umgebung verwendet werden kann (Entwicklungsumgebung wird nicht unterstützt und funktioniert überhaupt nicht).
+
 Jetzt lies die Dokumentation, um einen Virtualhost zu erstellen, dann
 greife auf dein wallabag zu. Wenn du die Datenbankkonfiguration
 eingestellt hast, MySQL oder PostgreSQL zu nutzen, musst du einen Nutzer
