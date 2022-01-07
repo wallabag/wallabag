@@ -32,8 +32,9 @@ werfen.
 ### Auf einem geteilten Webhosting
 
 Wir stellen ein Paket inkl. aller Abhängigkeiten bereit. Die
-Standardkonfiguration nutzt SQLite für die Datenbank. Wenn du diese
+Standardkonfiguration nutzt MySQL für die Datenbank. Wenn du diese
 Einstellung ändern willst, ändere bitte `app/config/parameters.yml`.
+Achtung: die Passwörter müssen in einfache Anführungszeichen (') eingeschlossen werden.
 
 Wir haben bereits einen Nutzer erstellt: Login und Passwort sind
 `wallabag`.
@@ -51,6 +52,8 @@ wget https://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 
 Du findest die [md5 Hashsumme des neuesten Pakets auf unserer
 Website](https://static.wallabag.org/releases/).
+
+Das statische Paket erfordert, dass jeder Befehl mit `--env=prod` angehängt wird, da das statische Paket nur als prod-Umgebung verwendet werden kann (Entwicklungsumgebung wird nicht unterstützt und funktioniert überhaupt nicht).
 
 Jetzt lies die Dokumentation, um einen Virtualhost zu erstellen, dann
 greife auf dein wallabag zu. Wenn du die Datenbankkonfiguration
