@@ -51,6 +51,8 @@ wget https://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 Vous trouverez [le hash md5 du dernier package sur notre
 site](https://static.wallabag.org/releases/).
 
+Le package statique nécessite que chaque commande comprenne le paramètre `--env=prod` car le package statique n'est utilisable que comme environnement de production (le mode développement n'est pas pris en charge et ne fonctionnera pas du tout).
+
 Maintenant, lisez la documentation ci-dessous pour crééer un virtual
 host. 
 
