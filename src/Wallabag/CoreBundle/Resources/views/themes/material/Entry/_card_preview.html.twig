@@ -1,4 +1,4 @@
-<div class="card{% if currentRoute == 'tag_entries' and entry.isArchived %} archived{% endif %}">
+<div class="card{% if currentRoute in routes and entry.isArchived %} archived{% endif %}">
     <div class="card-body">
         <div class="card-image waves-effect waves-block waves-light">
             <ul class="card-entry-labels">
