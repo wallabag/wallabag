@@ -32,8 +32,9 @@ werfen.
 ### Auf einem geteilten Webhosting
 
 Wir stellen ein Paket inkl. aller Abhängigkeiten bereit. Die
-Standardkonfiguration nutzt SQLite für die Datenbank. Wenn du diese
+Standardkonfiguration nutzt MySQL für die Datenbank. Wenn du diese
 Einstellung ändern willst, ändere bitte `app/config/parameters.yml`.
+Achtung: die Passwörter müssen in einfache Anführungszeichen (') eingeschlossen werden.
 
 Wir haben bereits einen Nutzer erstellt: Login und Passwort sind
 `wallabag`.

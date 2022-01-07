@@ -32,7 +32,7 @@ Si vous utilisez wallabag derrière Squid comme reverse proxy, assurez-vous de m
 ## Sur un serveur mutualisé
 
 Nous mettons à votre disposition une archive avec toutes les dépendances
-à l'intérieur. La configuration par défaut utilise MySQL (SQLite n'est plus pris en charge à partir de la version 2.4) pour la base de données. Il est nécessaire de renseigner les informations de base de données dans le fichier `app/config/parameters.yml`. Attention : les mots de passes doivent être entourés de single quote ( ' )
+à l'intérieur. La configuration par défaut utilise MySQL pour la base de données. Il est nécessaire de renseigner les informations de base de données dans le fichier `app/config/parameters.yml`. Attention : les mots de passes doivent être entourés de single quote (').
 
 Nous avons déjà créé un utilisateur : le login et le mot de passe sont
 `wallabag`.
