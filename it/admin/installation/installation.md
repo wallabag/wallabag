@@ -29,10 +29,11 @@ Per definire parametri con variabili d'ambiente, dovete impostare queste variabi
 ### A proposito di hosting condiviso
 
 Offriamo un pacchetto con tutte le dipendenze incluse. La configurazione
-di default usa SQLite per il database. Se volete cambiare queste
+di default usa MySQL per il database. Se volete cambiare queste
 impostazioni, modificate app/config/parameters.yml.
+Attenzione: il le password devono essere racchiuse tra virgolette singole (').
 
-Abbiamo già creato un utente: il login e la password sono wallabag.
+Abbiamo già creato un utente: il login e la password sono `wallabag`.
 
 Con questo pacchetto, wallabag non controlla le estensioni obbligatorie usate nell'applicazione (questi controlli sono fatti durante `composer install`
 quando avere un web server dedicato, vedete sopra).

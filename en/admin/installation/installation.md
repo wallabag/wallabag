@@ -30,7 +30,9 @@ If you're installing Wallabag behind Squid as a reverse proxy, make sure to upda
 ## On shared hosting
 
 We provide a package with all dependencies inside. The default
-configuration uses MySQL (SQLite is no longer supported from version 2.4) for the database. To add the setting for your database, please edit `app/config/parameters.yml`. Beware that passwords must be surrounded by single quotes ( ' ).
+configuration uses MySQL for the database. To add the setting for your database, please edit `app/config/parameters.yml`. Beware that passwords must be surrounded by single quotes (').
+
+We have already created a user: the login and password are `wallabag`.
 
 With this package, wallabag doesn't check for mandatory extensions used
 in the application (theses checks are made during `composer install`
