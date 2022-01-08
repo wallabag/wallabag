@@ -367,6 +367,7 @@ entry:
         shared_by_wallabag: Αυτό το άρθρο κοινοποιήθηκε από %username% με <a href='%wallabag_instance%'>wallabag</a>
     edit:
         save_label: Αποθήκευση
+        content_label: Περιεχόμενο
         origin_url_label: URL προέλευσης (απ' όπου βρήκατε την καταχώριση)
         url_label: URL
         title_label: Τίτλος

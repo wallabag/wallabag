@@ -282,6 +282,7 @@ entry:
         title_label: Заголовок
         url_label: Адреса
         origin_url_label: Початкова адреса (там де ви знайшли статтю)
+        content_label: Вміст
         save_label: Зберегти
     public:
         shared_by_wallabag: ''

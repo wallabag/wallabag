@@ -304,6 +304,7 @@ entry:
         title_label: Titre
         url_label: Adresse
         origin_url_label: Adresse d'origine (d'où vous avez trouvé cet article)
+        content_label: Contenu
         save_label: Enregistrer
     public:
         shared_by_wallabag: Cet article a été partagé par %username% avec <a href="%wallabag_instance%">wallabag</a>

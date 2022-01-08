@@ -320,6 +320,7 @@ entry:
         title_label: 'Название'
         url_label: 'URL-адрес'
         is_public_label: 'Публичная'
+        content_label: 'Содержимое'
         save_label: 'Сохранить'
         origin_url_label: Исходный URL (откуда вы нашли эту запись)
     public:

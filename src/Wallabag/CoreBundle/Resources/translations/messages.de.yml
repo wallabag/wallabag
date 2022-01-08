@@ -319,6 +319,7 @@ entry:
         page_title: Eintrag bearbeiten
         title_label: Titel
         url_label: URL
+        content_label: Inhalt
         save_label: Speichern
         origin_url_label: Herkunfts-URL (von wo aus Sie diesen Eintrag gefunden haben)
     public:

@@ -642,6 +642,7 @@ entry:
         shared_by_wallabag: Dit artikel is gedeeld door %username% met <a href='%wallabag_instance%'>wallabag</a>
     edit:
         save_label: Opslaan
+        content_label: Inhoud
         origin_url_label: Oorspronkelijke url (waar je dit item gevonden hebt)
         url_label: Url
         title_label: Titel

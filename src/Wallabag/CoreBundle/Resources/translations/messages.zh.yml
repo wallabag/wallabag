@@ -320,6 +320,7 @@ entry:
         title_label: '标题'
         url_label: '链接'
         origin_url_label: '原始链接（你发现这篇文章的地方）'
+        content_label: '内容'
         save_label: '保存'
     public:
         shared_by_wallabag: "这篇文章由 %username% 于 <a href='%wallabag_instance%'>wallabag</a> 分享"

@@ -308,6 +308,7 @@ entry:
         page_title: Makaleyi düzenle
         title_label: Başlık
         url_label: Url
+        content_label: Oçeriği
         save_label: Kaydet
         origin_url_label: Orijinal URL (makaleyi nereden buldunuz)
     page_titles:

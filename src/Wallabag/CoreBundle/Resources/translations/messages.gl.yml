@@ -93,6 +93,7 @@ entry:
         shared_by_wallabag: Este artigo foi compartido por %username% con <a href='%wallabag_instance%'>wallabag</a>
     edit:
         save_label: Gardar
+        content_label: Contido
         origin_url_label: Url de orixe (o lugar onde atopaches a entrada)
         url_label: Url
         title_label: Título

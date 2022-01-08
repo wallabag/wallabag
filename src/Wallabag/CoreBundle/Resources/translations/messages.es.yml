@@ -299,6 +299,7 @@ entry:
         page_title: 'Editar un artículo'
         title_label: 'Título'
         url_label: 'URL'
+        content_label: 'Contenido'
         save_label: 'Guardar'
         origin_url_label: URL original (de donde encontraste el artículo)
     public:

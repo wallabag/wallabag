@@ -92,6 +92,7 @@ entry:
         shared_by_wallabag: Tento článek již sdílel %username% s <a href='%wallabag_instance%'>wallabagem</a>
     edit:
         save_label: Uložit
+        content_label: Obsah
         origin_url_label: Původní URL (kde jste danou položku našli)
         url_label: URL
         title_label: Název

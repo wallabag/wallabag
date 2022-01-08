@@ -207,6 +207,7 @@ entry:
         save_label: 저장
         url_label: Url
         title_label: 제목
+        content_label: 콘텐츠
     new:
         page_title: 새 문서 저장
         form_new:

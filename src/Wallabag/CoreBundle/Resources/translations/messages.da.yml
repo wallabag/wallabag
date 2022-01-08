@@ -118,6 +118,7 @@ entry:
             url_label: Url
     edit:
         url_label: 'Url'
+        content_label: 'Indhold'
         save_label: 'Gem'
 about:
     page_title: 'Om'

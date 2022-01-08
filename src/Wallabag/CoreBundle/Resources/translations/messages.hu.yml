@@ -243,6 +243,7 @@ entry:
         title_label: Cím
         url_label: Url
         origin_url_label: Eredeti url-je (ahol ezt a bejegyzést találta)
+        content_label: Tartalma
         save_label: Mentés
     public:
         shared_by_wallabag: Ezt a cikket %username% osztotta meg <a href='%wallabag_instance%'>wallabag</a> használatával

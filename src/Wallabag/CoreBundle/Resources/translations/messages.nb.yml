@@ -582,6 +582,7 @@ entry:
         delete: Er du sikker på at du vil fjerne artikkelen?
     edit:
         save_label: Lagre
+        content_label: Innhold
         origin_url_label: Opprinnelig nettadresse (der du fant oppføringen)
         url_label: Nettadresse
         title_label: Tittel

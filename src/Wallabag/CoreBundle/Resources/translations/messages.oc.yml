@@ -260,6 +260,7 @@ entry:
         title_label: Títol
         url_label: Url
         origin_url_label: Url d’origina (ont avètz trobat aqueste article)
+        content_label: Contengut
         save_label: Enregistrar
     public:
         shared_by_wallabag: Aqueste article es estat partejat per <a href='%wallabag_instance%'>wallabag</a>

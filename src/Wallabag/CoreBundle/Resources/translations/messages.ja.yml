@@ -317,6 +317,7 @@ entry:
         title_label: タイトル
         origin_url_label: オリジナルURL（この記事を見つけた場所）
         url_label: URL
+        content_label: コンテンツ
         save_label: 保存
     metadata:
         added_on: タイムスタンプ

@@ -260,6 +260,7 @@ entry:
         url_label: Url
         save_label: Salva
         origin_url_label: URL di origine (da dove hai trovato quella voce)
+        content_label: Contenuto
     public:
         shared_by_wallabag: Questo articolo è stato condiviso da %username% con <a href='%wallabag_instance%'>wallabag</a>
     confirm:

@@ -236,6 +236,7 @@ entry:
         page_title: 'แก้ไขรายการ'
         title_label: 'หัวข้อ'
         url_label: 'Url'
+        content_label: 'เนื้อหา'
         save_label: 'บันทึก'
     public:
         shared_by_wallabag: "บทความนี้จะมีการแชร์โดย %username% กับ <a href='%wallabag_instance%'>wallabag</a>"
