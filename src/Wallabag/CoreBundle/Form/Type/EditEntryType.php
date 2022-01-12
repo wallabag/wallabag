@@ -30,6 +30,12 @@ class EditEntryType extends AbstractType
                 'label' => 'entry.edit.origin_url_label',
                 'default_protocol' => null,
             ])
+            ->add('preview_picture', UrlType::class, [
+                'required' => false,
+                'property_path' => 'previewPicture',
+                'label' => 'entry.edit.preview_picture_label',
+                'default_protocol' => null,
+            ])
             ->add('save', SubmitType::class, [
                 'label' => 'entry.edit.save_label',
             ])
