@@ -105,7 +105,7 @@ config:
             all: '所有'
         feed_limit: '订阅源包含的最大项目数'
     form_user:
-        two_factor_description: "开启两步验证后，在每次进行新的未信任登录时，你都需要通过邮件或者 OTP（动态密码）应用（比如 Google Authenticator，Authy 或者 FreeOTP）来获取一次性登陆码。你不能同时选择两项。"
+        two_factor_description: "开启两步验证后，在每次进行新的未信任登录时，你都需要通过邮件或者 OTP（动态密码）应用（比如 Google Authenticator，Authy 或者 FreeOTP）来获取一次性登录码。你不能同时选择两项。"
         login_label: '用户名（无法更改）'
         name_label: '昵称'
         email_label: '邮箱'
