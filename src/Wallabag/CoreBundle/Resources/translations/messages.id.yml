@@ -1,1 +1,3 @@
-{}
+security:
+    login:
+        page_title: Selamat datang di wallabag!
