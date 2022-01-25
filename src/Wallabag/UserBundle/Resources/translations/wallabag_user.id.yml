@@ -6,3 +6,4 @@ auth_code:
             second_para: 'Ini kodenya:'
             hello: Hai %user%,
         subject: kode otentikasi wallabag
+    on: on
