@@ -7,3 +7,34 @@ export_epub: Aktifkan pengeksporan ePub
 diaspora_url: URL diaspora*, jika layanan diaktifkan
 carrot: Aktifkan bagikan ke Carrot
 settings_changed: Konfigurasi diperbarui
+share_unmark: Aktifkan berbagi ke Unmark.it
+shaarli_share_origin_url: Aktifkan berbagi URL asal ke Shaarli, jika layanan diaktifkan
+share_public: Izinkan URL publik untuk entri
+share_scuttle: Aktifkan berbagi ke Scuttle
+restricted_access: Aktifkan otentikasi untuk situs web berbayar
+share_twitter: Aktifkan berbagi ke Twitter
+demo_mode_enabled: Aktifkan mode demo? (Hanya digunakan untuk demo wallabag publik)
+download_images_enabled: Unduh gambar secara lokal
+store_article_headers: Aktifkan jika wallabag menyimpan header HTTP untuk setiap artikel
+api_user_registration: Aktifkan pendaftaran pengguna melalui API
+demo_mode_username: Pengguna demo
+scuttle_url: Scuttle URL, jika layanan diaktifkan
+download_pictures: Unduh gambar ke server Anda
+export_xml: Aktifkan ekspor XML
+import_with_rabbitmq: Aktifkan RabbitMQ untuk mengimpor data secara asinkron
+import_with_redis: Aktifkan Redis untuk mengimpor data secara asinkron
+shaarli_url: URL Shaarli, jika layanan diaktifkan
+unmark_url: Unmark URL, jika layanan diaktifkan
+share_diaspora: Aktifkan berbagi ke diaspora*
+share_mail: Aktifkan berbagi melalui email
+share_shaarli: Aktifkan berbagi ke Shaarli
+show_printlink: Tampilkan tautan untuk mencetak konten
+wallabag_support_url: URL dukungan untuk wallabag
+entry: artikel
+export: ekspor
+import: impor
+misc: lainnya
+modify_settings: terapkan
+matomo_host: Host situs web Anda di Matomo (tanpa http:// atau https://)
+matomo_site_id: ID situs web Anda di Matomo
+matomo_enabled: Aktifkan Matomo
