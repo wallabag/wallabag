@@ -32,6 +32,8 @@ jobs:
           - "7.2"
           - "7.3"
           - "7.4"
+          - "8.0"
+          - "8.1"
         database:
           - "sqlite"
           - "mysql"
@@ -48,7 +50,7 @@ jobs:
         with:
           php-version: "${{ matrix.php }}"
           coverage: none
-          tools: pecl, composer:v1
+          tools: pecl, composer:v2
           extensions: json, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
 
@@ -67,7 +69,7 @@ jobs:
           pg_isready -d wallabag_test -h localhost -p 5432 -U wallabag
 
       - name: "Install dependencies with Composer"
-        uses: "ramsey/composer-install@v1"
+        uses: "ramsey/composer-install@v2"
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 

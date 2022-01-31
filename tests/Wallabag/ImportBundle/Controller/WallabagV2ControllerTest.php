@@ -126,7 +126,7 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
         $this->assertEmpty($content->getPreviewPicture(), 'Preview picture for https://www.liberation.fr is empty');
         $this->assertEmpty($content->getLanguage(), 'Language for https://www.liberation.fr is empty');
 
-        $tags = $content->getTags();
+        $tags = $content->getTagsLabel();
         $this->assertContains('foot', $tags, 'It includes the "foot" tag');
         $this->assertCount(1, $tags);
 
@@ -143,7 +143,7 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.mediapart.fr is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.mediapart.fr is ok');
 
-        $tags = $content->getTags();
+        $tags = $content->getTagsLabel();
         $this->assertContains('foot', $tags, 'It includes the "foot" tag');
         $this->assertContains('mediapart', $tags, 'It includes the "mediapart" tag');
         $this->assertContains('blog', $tags, 'It includes the "blog" tag');

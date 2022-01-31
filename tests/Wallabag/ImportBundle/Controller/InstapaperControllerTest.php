@@ -123,7 +123,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://www.liberation.fr is ok');
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.liberation.fr is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.liberation.fr is ok');
-        $this->assertContains('foot', $content->getTags(), 'It includes the "foot" tag');
+        $this->assertContains('foot', $content->getTagsLabel(), 'It includes the "foot" tag');
         $this->assertCount(1, $content->getTags());
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
 
@@ -135,8 +135,8 @@ class InstapaperControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
-        $this->assertContains('foot', $content->getTags());
-        $this->assertContains('test_tag', $content->getTags());
+        $this->assertContains('foot', $content->getTagsLabel());
+        $this->assertContains('test_tag', $content->getTagsLabel());
 
         $this->assertCount(2, $content->getTags());
     }

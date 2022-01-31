@@ -342,7 +342,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $entry = $em
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneByUrl($url);
-        $tags = $entry->getTags();
+        $tags = $entry->getTagsLabel();
 
         $this->assertCount(2, $tags);
         $this->assertContains('wallabag', $tags);
@@ -372,7 +372,7 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneByUrl($url);
 
-        $tags = $entry->getTags();
+        $tags = $entry->getTagsLabel();
 
         $this->assertCount(2, $tags);
         $this->assertContains('wallabag', $tags);

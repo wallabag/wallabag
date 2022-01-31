@@ -65,7 +65,7 @@ class ManageControllerTest extends WallabagCoreTestCase
         $crawler = $client->followRedirect();
 
         // Check the user has been delete on the list
-        $this->assertNotRegExp('/Foo User/', $client->getResponse()->getContent());
+        $this->assertDoesNotMatchRegularExpression('/Foo User/', $client->getResponse()->getContent());
     }
 
     public function testDeleteDisabledForLoggedUser()

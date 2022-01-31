@@ -123,7 +123,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://ma.ttias.be is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for https://ma.ttias.be is ok');
 
-        $tags = $content->getTags();
+        $tags = $content->getTagsLabel();
         $this->assertContains('foot', $tags, 'It includes the "foot" tag');
         $this->assertContains('varnish', $tags, 'It includes the "varnish" tag');
         $this->assertContains('php', $tags, 'It includes the "php" tag');
