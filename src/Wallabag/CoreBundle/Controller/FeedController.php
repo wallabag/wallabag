@@ -111,7 +111,7 @@ class FeedController extends Controller
             $pagerAdapter,
             $user
         );
-        
+
         $perPage = $user->getConfig()->getFeedLimit() ?: $this->getParameter('wallabag_core.feed_limit');
         $entries->setMaxPerPage($perPage);
 
