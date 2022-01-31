@@ -30,6 +30,16 @@ abstract class WallabagMigration extends AbstractMigration implements ContainerA
         $this->container = $container;
     }
 
+    /**
+     * @todo remove when upgrading DoctrineMigration (only needed for PHP 8)
+     *
+     * @see https://github.com/doctrine/DoctrineMigrationsBundle/issues/393
+     */
+    public function isTransactional(): bool
+    {
+        return false;
+    }
+
     protected function getTable($tableName, $unEscaped = false)
     {
         $table = $this->container->getParameter('database_table_prefix') . $tableName;

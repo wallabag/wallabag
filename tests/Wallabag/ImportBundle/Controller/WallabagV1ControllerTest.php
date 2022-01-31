@@ -124,7 +124,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $this->assertSame($content->getPreviewPicture(), 'http://www.framablog.org/public/_img/framablog/wallaby_baby.jpg');
         $this->assertEmpty($content->getLanguage(), 'Language for http://www.framablog.org is empty');
 
-        $tags = $content->getTags();
+        $tags = $content->getTagsLabel();
         $this->assertContains('foot', $tags, 'It includes the "foot" tag');
         $this->assertContains('framabag', $tags, 'It includes the "framabag" tag');
         $this->assertCount(2, $tags);

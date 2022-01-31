@@ -123,7 +123,7 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.20minutes.fr is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.20minutes.fr is ok');
 
-        $tags = $content->getTags();
+        $tags = $content->getTagsLabel();
         $this->assertContains('foot', $tags, 'It includes the "foot" tag');
         $this->assertCount(1, $tags);
 
