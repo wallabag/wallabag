@@ -2126,23 +2126,27 @@
         },
         {
             "name": "fossar/htmlawed",
-            "version": "1.2.8",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fossar/HTMLawed.git",
-                "reference": "08cb7a12b667afb4fc7b24504b24b65647b6d502"
+                "reference": "cc42f2104e46d57485466f702af273f7d2658ae5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fossar/HTMLawed/zipball/08cb7a12b667afb4fc7b24504b24b65647b6d502",
-                "reference": "08cb7a12b667afb4fc7b24504b24b65647b6d502",
+                "url": "https://api.github.com/repos/fossar/HTMLawed/zipball/cc42f2104e46d57485466f702af273f7d2658ae5",
+                "reference": "cc42f2104e46d57485466f702af273f7d2658ae5",
                 "shasum": ""
             },
             "require": {
-                "php": ">4.4.0"
+                "php": ">=7.2"
             },
             "replace": {
                 "htmlawed/htmlawed": "*"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "~3.4.0",
+                "phpunit/phpunit": "^8.5"
             },
             "type": "library",
             "autoload": {
@@ -2173,9 +2177,9 @@
             ],
             "support": {
                 "issues": "https://github.com/fossar/HTMLawed/issues",
-                "source": "https://github.com/fossar/HTMLawed/tree/1.2.8"
+                "source": "https://github.com/fossar/HTMLawed/tree/1.3.0"
             },
-            "time": "2021-01-25T08:08:04+00:00"
+            "time": "2022-02-01T21:46:30+00:00"
         },
         {
             "name": "friendsofsymfony/jsrouting-bundle",
@@ -3054,12 +3058,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Psr7\\": "src/"
-                },
                 "files": [
                     "src/functions_include.php"
-                ]
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\Psr7\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -4358,16 +4362,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "2.3.5",
+            "version": "2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "474bbe19472ecd7758ec33306581fd78f9eedab4"
+                "reference": "897e44ce68d56948641cfa78410052685208b6de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/474bbe19472ecd7758ec33306581fd78f9eedab4",
-                "reference": "474bbe19472ecd7758ec33306581fd78f9eedab4",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/897e44ce68d56948641cfa78410052685208b6de",
+                "reference": "897e44ce68d56948641cfa78410052685208b6de",
                 "shasum": ""
             },
             "require": {
@@ -4431,7 +4435,7 @@
             "description": "Graby helps you extract article content from web pages",
             "support": {
                 "issues": "https://github.com/j0k3r/graby/issues",
-                "source": "https://github.com/j0k3r/graby/tree/2.3.5"
+                "source": "https://github.com/j0k3r/graby/tree/2.4.1"
             },
             "funding": [
                 {
@@ -4439,20 +4443,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-01-07T15:03:44+00:00"
+            "time": "2022-02-02T12:20:03+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.143",
+            "version": "1.0.145",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "3541eb43a4ad1a609175dee309e0431e35fe9934"
+                "reference": "d097b4e6f04e1278b8eb40b95c9857c27146a252"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/3541eb43a4ad1a609175dee309e0431e35fe9934",
-                "reference": "3541eb43a4ad1a609175dee309e0431e35fe9934",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/d097b4e6f04e1278b8eb40b95c9857c27146a252",
+                "reference": "d097b4e6f04e1278b8eb40b95c9857c27146a252",
                 "shasum": ""
             },
             "require": {
@@ -4481,9 +4485,9 @@
             "description": "Graby site config files",
             "support": {
                 "issues": "https://github.com/j0k3r/graby-site-config/issues",
-                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.143"
+                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.145"
             },
-            "time": "2022-01-07T15:05:39+00:00"
+            "time": "2022-02-02T12:23:56+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -9349,16 +9353,16 @@
         },
         {
             "name": "symfony/mime",
-            "version": "v5.4.2",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mime.git",
-                "reference": "1bfd938cf9562822c05c4d00e8f92134d3c8e42d"
+                "reference": "e1503cfb5c9a225350f549d3bb99296f4abfb80f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mime/zipball/1bfd938cf9562822c05c4d00e8f92134d3c8e42d",
-                "reference": "1bfd938cf9562822c05c4d00e8f92134d3c8e42d",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/e1503cfb5c9a225350f549d3bb99296f4abfb80f",
+                "reference": "e1503cfb5c9a225350f549d3bb99296f4abfb80f",
                 "shasum": ""
             },
             "require": {
@@ -9412,7 +9416,7 @@
                 "mime-type"
             ],
             "support": {
-                "source": "https://github.com/symfony/mime/tree/v5.4.2"
+                "source": "https://github.com/symfony/mime/tree/v5.4.3"
             },
             "funding": [
                 {
@@ -9428,7 +9432,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-28T17:15:56+00:00"
+            "time": "2022-01-02T09:53:40+00:00"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -10821,12 +10825,12 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Symfony\\Bridge\\Doctrine\\": "src/Symfony/Bridge/Doctrine/",
-                    "Symfony\\Bridge\\Monolog\\": "src/Symfony/Bridge/Monolog/",
-                    "Symfony\\Bridge\\ProxyManager\\": "src/Symfony/Bridge/ProxyManager/",
-                    "Symfony\\Bridge\\Twig\\": "src/Symfony/Bridge/Twig/",
                     "Symfony\\Bundle\\": "src/Symfony/Bundle/",
-                    "Symfony\\Component\\": "src/Symfony/Component/"
+                    "Symfony\\Component\\": "src/Symfony/Component/",
+                    "Symfony\\Bridge\\Twig\\": "src/Symfony/Bridge/Twig/",
+                    "Symfony\\Bridge\\Monolog\\": "src/Symfony/Bridge/Monolog/",
+                    "Symfony\\Bridge\\Doctrine\\": "src/Symfony/Bridge/Doctrine/",
+                    "Symfony\\Bridge\\ProxyManager\\": "src/Symfony/Bridge/ProxyManager/"
                 },
                 "classmap": [
                     "src/Symfony/Component/Intl/Resources/stubs"
