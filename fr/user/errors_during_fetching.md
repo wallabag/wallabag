@@ -36,7 +36,7 @@ Ces systèmes ne sont pas infaillibles et il faudra parfois mâcher le travail �
 
 ### Vérifier sur **f43.me** si le problème est également présent
 
-Une première vérification à faire est de tester l'URL sur ce site : [<http://f43.me/feed/test>](http://f43.me/feed/test). Celui-ci utilise globalement la même manière de fonctionner que wallabag pour récupérer les articles. Si ça fonctionne sur **f43.me** et pas sur wallabag, c'est qu'il y a un souci avec wallabag qui casse le parser (difficile à résoudre : merci d'ouvrir un [nouveau ticket à ce sujet sur GitHub](https://github.com/wallabag/wallabag/issues/new)).
+Une première vérification à faire est de tester l'URL sur ce site : [<http://f43.me/feed/test>](http://f43.me/feed/test). Celui-ci utilise globalement la même manière de fonctionner que wallabag pour récupérer les articles. Si ça fonctionne sur **f43.me** et pas sur wallabag, c'est qu'il y a un souci avec wallabag qui casse le parser (difficile à résoudre : merci d'ouvrir un [nouveau ticket à ce sujet sur GitHub](https://github.com/wallabag/wallabag/issues/new?assignees=&labels=Site+Config&template=1-fetching-content.md&title=Wrong+display+in+wallabag+%28HOST%29)).
 
 Si vous hébergez votre propre instance de wallabag, vous pouvez nous joindre des logs détaillés qui nous serons très utile pour déterminer plus justement l'origine du problème (voir ci-après).
 
