@@ -36,7 +36,7 @@ None of these two elements are flawless and we sometimes have to help wallabag a
 
 ### Check with **f43.me** if the issue is reproducible
 
-The very first thing is to check whether [the website **f43.me**](http://f43.me/feed/test) is able to parse the content or not. The underlying technology of this website is shared with wallabag, so they should have the same flaws. If it works on **f43.me** and not with wallabag, something is breaking wallabag's parser. It is difficult to solve and you should directly [create an issue ticket on Github](https://github.com/wallabag/wallabag/issues/new).
+The very first thing is to check whether [the website **f43.me**](http://f43.me/feed/test) is able to parse the content or not. The underlying technology of this website is shared with wallabag, so they should have the same flaws. If it works on **f43.me** and not with wallabag, something is breaking wallabag's parser. It is difficult to solve and you should directly [create an issue ticket on Github](https://github.com/wallabag/wallabag/issues/new?assignees=&labels=Site+Config&template=1-fetching-content.md&title=Wrong+display+in+wallabag+%28HOST%29).
 
 If you are self-hosting an instance of wallabag, you can join to the ticket detailed logs that will be useful to identify the origin of the issue (see below).
 
