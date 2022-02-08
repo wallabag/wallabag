@@ -259,7 +259,7 @@
             <h1><span{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>{{ entry.title|striptags|default('entry.default_title'|trans)|raw }}</span> <a href="{{ path('edit', { 'id': entry.id }) }}" title="{{ 'entry.view.edit_title'|trans }}"><i class="material-icons grey-text">create</i></a></h1>
         </header>
         <aside>
-            <div class="tools grey-text">
+            <div class="tools grey-text" dir="auto">
                 <ul class="stats">
                     <li>
                         {% include "@WallabagCore/themes/material/Entry/_reading_time.html.twig" with {'entry': entry} only %}
