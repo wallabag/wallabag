@@ -24,17 +24,23 @@ menu:
         internal_settings: 'Configurações Internas'
         import: 'Importar'
         howto: 'How to'
-        logout: 'Sair'
+        logout: 'Encerrar sessão'
         about: 'Sobre'
         search: 'Pesquisa'
         save_link: 'Salvar um link'
         back_to_unread: 'Voltar para os artigos não lidos'
         users_management: 'Gestão de Utilizadores'
+        theme_toggle_light: Tema claro
+        theme_toggle_dark: Tema escuro
+        theme_toggle_auto: Tema automático
+        developer: Gestão de clientes da API
     top:
         add_new_entry: 'Adicionar uma nova entrada'
         search: 'Pesquisa'
         filter_entries: 'Filtrar entradas'
         export: 'Exportar'
+        random_entry: Saltar para uma entrada aleatória dessa lista
+        account: Conta
     search_form:
         input_label: 'Digite aqui sua pesquisa'
 footer:
@@ -49,12 +55,15 @@ config:
     tab_menu:
         settings: 'Configurações'
         rss: 'RSS'
-        user_info: 'Informação do Utilizador'
+        user_info: 'Informação do utilizador'
         password: 'Palavra-passe'
         rules: 'Regras de tags'
         new_user: 'Adicionar um utilizador'
+        ignore_origin: Ignorar regras da origem
+        reset: Área de reinicialização
+        feed: Feeds
     form:
-        save: 'Salvar'
+        save: 'Guardar'
     form_settings:
         theme_label: 'Tema'
         items_per_page_label: 'Itens por página'
@@ -67,6 +76,8 @@ config:
             300_word: 'Posso ler ~300 palavras por minuto'
             400_word: 'Posso ler ~400 palavras por minuto'
         pocket_consumer_key_label: 'Chave do consumidor do Pocket para importar conteúdo'
+        help_theme: o wallabag é personalizável. Pode escolher o tema que pretender aqui.
+        help_pocket_consumer_key: Necessário para importar do Pocket. Pode criá-lo na sua conta do Pocket.
     form_rss:
         description: 'Feeds RSS providos pelo wallabag permitem que você leia seus artigos salvos em seu leitor de RSS favorito. Você precisa gerar um token primeiro.'
         token_label: 'Token RSS'
@@ -126,6 +137,10 @@ config:
                 or: 'Uma regra OU outra'
                 and: 'Uma regra E outra'
                 matches: 'Testa que um <i>assunto</i> corresponde a uma <i>pesquisa</i> (maiúscula ou minúscula).<br />Exemplo: <code>título corresponde a "futebol"</code>'
+    form_feed:
+        feed_link:
+            all: Todos
+        feed_limit: Número de itens no feed
 entry:
     default_title: 'Título da entrada'
     page_titles:
