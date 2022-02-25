@@ -204,6 +204,35 @@ The configuration file could eventually contain:
 strip: //p[contains(strong, 'Read') and a]
 ```
 
+##### Note on non-standard HTML elements
+
+When writing your own site configs or changing existing ones, please be aware that any element you want to strip from the code will need to be a **standard** HTML element. The reason for this is that non-standard HTML elements are filtered out **before** the site configuration is applied!
+For example, given the following HTML, using the site config below **will not strip out the custom HTML element**!
+
+```html
+<p>
+    important text
+    <custom-element-in-my-page>
+        <div class="im-an-ad blocky box">
+            SOME RIDICULOUS AD I WANT TO REMOVE
+        </div>
+    </custom-element-in-my-page>
+    more important text
+</p>
+```
+
+```
+#This does NOT work!
+strip: //custom-element-in-my-page
+```
+
+To fix the problem, you could instead use the following XPath to match the div within the custom element:
+
+```
+#This will work!
+strip: //div[contains(@class, 'im-an-ad')]
+```
+
 #### Useful links
 
 More information on _XPath_ is available in the text of the norm, particularly the [part on the abbreviated syntax](https://www.w3.org/TR/1999/REC-xpath-19991116/#path-abbrev) which summarize a good number of shortcuts. The website **devhints.io** also have a [very complete cheat-sheet on _XPath_](https://devhints.io/xpath).
