@@ -5394,10 +5394,10 @@ stylelint-webpack-plugin@^3.1.1:
     normalize-path "^3.0.0"
     schema-utils "^4.0.0"
 
-stylelint@^14.5.1:
-  version "14.5.1"
-  resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-14.5.1.tgz#2b2575ccaf14bb057209d48fc87c17d5b684f8db"
-  integrity sha512-8Hf4HtnhxlWlf7iXF9zFfhSc3X0teRnVzl6PqPs2JEFx+dy/mhMhghZfiTDW4QG0ihDw9+WP7GZw5Nzx7cQF5A==
+stylelint@^14.5.3:
+  version "14.5.3"
+  resolved "https://registry.yarnpkg.com/stylelint/-/stylelint-14.5.3.tgz#103b6670128ba3dea69fe3a1a07c4a5d3e0e3450"
+  integrity sha512-omHETL+kGHR+fCXFK1SkZD/A+emCP9esggAdWEl8GPjTNeyRYj+H6uetRDcU+7E451zwWiUYGVAX+lApsAZgsQ==
   dependencies:
     balanced-match "^2.0.0"
     colord "^2.9.2"
