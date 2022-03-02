@@ -202,9 +202,28 @@ class RuleBasedTaggerTest extends TestCase
             ->method('satisfies')
             ->willReturn(true);
 
-        $this->rulerz
-            ->method('filter')
+        $query = $this->getMockBuilder('Doctrine\ORM\AbstractQuery')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $query
+            ->expects($this->once())
+            ->method('getResult')
             ->willReturn([new Entry($user), new Entry($user)]);
+
+        $qb = $this->getMockBuilder('Doctrine\ORM\QueryBuilder')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $qb
+            ->expects($this->once())
+            ->method('getQuery')
+            ->willReturn($query);
+
+        $this->entryRepository
+            ->expects($this->once())
+            ->method('getBuilderForAllByUser')
+            ->willReturn($qb);
 
         $entries = $this->tagger->tagAllForUser($user);
 
@@ -222,6 +241,7 @@ class RuleBasedTaggerTest extends TestCase
     {
         $user = new User();
         $config = new Config($user);
+        $config->setReadingSpeed(200);
 
         $user->setConfig($config);
 
