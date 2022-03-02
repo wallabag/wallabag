@@ -45,7 +45,7 @@ class ConfigFixtures extends Fixture implements DependentFixtureInterface
         $emptyConfig = new Config($this->getReference('empty-user'));
         $emptyConfig->setTheme('material');
         $emptyConfig->setItemsPerPage(10);
-        $emptyConfig->setReadingSpeed(200);
+        $emptyConfig->setReadingSpeed(100);
         $emptyConfig->setLanguage('en');
         $emptyConfig->setPocketConsumerKey(null);
         $emptyConfig->setActionMarkAsRead(0);

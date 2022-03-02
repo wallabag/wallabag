@@ -178,6 +178,42 @@ class EntryControllerTest extends WallabagCoreTestCase
     /**
      * @group NetworkCalls
      */
+    public function testPostNewOkWithTaggingRules()
+    {
+        $this->logInAs('empty');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => $this->url,
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
+
+        $tags = $content->getTagsLabel();
+
+        /*
+         * Without the custom reading speed of `empty` user, it'll be inversed
+         */
+        $this->assertContains('longread', $tags);
+        $this->assertNotContains('shortread', $tags);
+    }
+
+    /**
+     * @group NetworkCalls
+     */
     public function testPostWithMultipleAuthors()
     {
         $url = 'https://www.liberation.fr/planete/2017/04/05/donald-trump-et-xi-jinping-tentative-de-flirt-en-floride_1560768';
