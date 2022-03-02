@@ -35,8 +35,10 @@ class RuleBasedTagger
     {
         $rules = $this->getRulesForUser($entry->getUser());
 
+        $clonedEntry = $this->fixEntry($entry);
+
         foreach ($rules as $rule) {
-            if (!$this->rulerz->satisfies($entry, $rule->getRule())) {
+            if (!$this->rulerz->satisfies($clonedEntry, $rule->getRule())) {
                 continue;
             }
 
@@ -61,14 +63,22 @@ class RuleBasedTagger
     public function tagAllForUser(User $user)
     {
         $rules = $this->getRulesForUser($user);
-        $entries = [];
+        $entriesToUpdate = [];
         $tagsCache = [];
 
-        foreach ($rules as $rule) {
-            $qb = $this->entryRepository->getBuilderForAllByUser($user->getId());
-            $entries = $this->rulerz->filter($qb, $rule->getRule());
+        $entries = $this->entryRepository
+            ->getBuilderForAllByUser($user->getId())
+            ->getQuery()
+            ->getResult();
 
-            foreach ($entries as $entry) {
+        foreach ($entries as $entry) {
+            $clonedEntry = $this->fixEntry($entry);
+
+            foreach ($rules as $rule) {
+                if (!$this->rulerz->satisfies($clonedEntry, $rule->getRule())) {
+                    continue;
+                }
+
                 foreach ($rule->getTags() as $label) {
                     // avoid new tag duplicate by manually caching them
                     if (!isset($tagsCache[$label])) {
@@ -78,11 +88,13 @@ class RuleBasedTagger
                     $tag = $tagsCache[$label];
 
                     $entry->addTag($tag);
+
+                    $entriesToUpdate[] = $entry;
                 }
             }
         }
 
-        return $entries;
+        return $entriesToUpdate;
     }
 
     /**
@@ -113,5 +125,16 @@ class RuleBasedTagger
     private function getRulesForUser(User $user)
     {
         return $user->getConfig()->getTaggingRules();
+    }
+
+    /**
+     * Update reading time on the fly to match the proper words per minute from the user.
+     */
+    private function fixEntry(Entry $entry)
+    {
+        $clonedEntry = clone $entry;
+        $clonedEntry->setReadingTime($entry->getReadingTime() / $entry->getUser()->getConfig()->getReadingSpeed() * 200);
+
+        return $clonedEntry;
     }
 }

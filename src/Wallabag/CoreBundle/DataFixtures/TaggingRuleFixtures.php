@@ -43,6 +43,20 @@ class TaggingRuleFixtures extends Fixture implements DependentFixtureInterface
 
         $manager->persist($tr4);
 
+        $tr5 = new TaggingRule();
+        $tr5->setRule('readingTime <= 5');
+        $tr5->setTags(['shortread']);
+        $tr5->setConfig($this->getReference('empty-config'));
+
+        $manager->persist($tr5);
+
+        $tr6 = new TaggingRule();
+        $tr6->setRule('readingTime > 5');
+        $tr6->setTags(['longread']);
+        $tr6->setConfig($this->getReference('empty-config'));
+
+        $manager->persist($tr6);
+
         $manager->flush();
     }
 

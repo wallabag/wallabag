@@ -41,7 +41,7 @@ class TagAllCommand extends ContainerAwareCommand
 
         $entries = $tagger->tagAllForUser($user);
 
-        $io->text('Persist entries... ');
+        $io->text('Persist ' . \count($entries) . ' entries... ');
 
         $em = $this->getDoctrine()->getManager();
         foreach ($entries as $entry) {
