@@ -70,6 +70,7 @@ class TagRepository extends EntityRepository
         return $this->getQueryBuilderByUser($userId)
             ->select('t.id, t.label, t.slug, count(e.id) as nbEntries')
             ->distinct(true)
+            ->orderBy('t.label')
             ->getQuery()
             ->getArrayResult();
     }

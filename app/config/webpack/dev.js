@@ -1,6 +1,6 @@
 const { merge } = require('webpack-merge');
-const webpack = require('webpack');
-const commonConfig = require('./common.js');
+const ESLintPlugin = require('eslint-webpack-plugin');
+const commonConfig = require('./common');
 
 module.exports = merge(commonConfig, {
   devtool: 'eval-source-map',
@@ -9,22 +9,15 @@ module.exports = merge(commonConfig, {
   },
   mode: 'development',
   devServer: {
-    hot: true,
-    // enable HMR on the server
-    contentBase: './web',
-    // match the output path
+    static: {
+      directory: './web',
+    },
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    new ESLintPlugin(),
   ],
   module: {
     rules: [
-      {
-        enforce: 'pre',
-        test: /\.js$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/,
-      },
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
@@ -58,7 +51,7 @@ module.exports = merge(commonConfig, {
       },
       {
         test: /\.(jpg|png|gif|svg|ico|eot|ttf|woff|woff2)$/,
-        use: 'url-loader',
+        type: 'asset/inline',
       },
     ],
   },

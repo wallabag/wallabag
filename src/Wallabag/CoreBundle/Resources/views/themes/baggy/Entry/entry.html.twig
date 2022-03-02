@@ -8,7 +8,7 @@
             <h1><span{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>{{ entry.title|e|default('entry.default_title'|trans)|raw }}</span> <a href="{{ path('edit', { 'id': entry.id }) }}" class="nostyle" title="{{ 'entry.view.edit_title'|trans }}">✎</a></h1>
         </header>
 
-        <div id="article_toolbar">
+        <div id="article_toolbar" dir="auto">
             <ul class="links">
                 <li class="topPosF"><a href="#top" title="{{ 'entry.view.left_menu.back_to_top'|trans }}" class="tool top icon icon-arrow-up-thick"><span>{{ 'entry.view.left_menu.set_as_read'|trans }}</span></a></li>
                 <li><a href="{{ entry.url|e }}" target="_blank" rel="noopener" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e }}" class="tool link icon icon-link original"><span>{{ entry.domainName|removeWww }}</span></a></li>

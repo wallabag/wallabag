@@ -1,0 +1,10 @@
+auth_code:
+    mailer:
+        body:
+            signature: Tim wallabag
+            support: 'Silakan hubungi kami jika Anda memiliki sebuah masalah:'
+            second_para: 'Ini kodenya:'
+            hello: Hai %user%,
+            first_para: Anda memerlukan autentikasi dua faktor untuk masuk ke akun wallabag, dan perangkat baru baru saja menggunakannya, kami mengirimkan kode untuk memvalidasi koneksinya.
+        subject: kode otentikasi wallabag
+    on: on

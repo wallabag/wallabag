@@ -1,8 +1,7 @@
-{
-  "extends": "stylelint-config-standard",
-  "plugins": [
-    "stylelint-scss"
-  ],
+module.exports = {
+  extends: ['stylelint-config-standard'],
+  customSyntax: require('postcss-scss'),
+  plugins: ['stylelint-scss'],
   rules: {
     'at-rule-no-unknown': null,
     'no-duplicate-selectors': null,
@@ -10,4 +9,4 @@
     'no-descending-specificity': null,
     'scss/at-rule-no-unknown': true,
   },
-}
+};

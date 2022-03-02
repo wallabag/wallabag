@@ -10,12 +10,12 @@ on:
 jobs:
   translations:
     name: "Translations"
-    runs-on: "ubuntu-18.04"
+    runs-on: "ubuntu-20.04"
 
     strategy:
       matrix:
         php:
-          - "7.3"
+          - "7.4"
 
     steps:
       - name: "Checkout"
@@ -26,14 +26,14 @@ jobs:
         with:
           coverage: "none"
           php-version: "${{ matrix.php }}"
-          tools: pecl, composer:v1
+          tools: pecl, composer:v2
           extensions: pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Install dependencies with Composer"
-        uses: "ramsey/composer-install@v1"
+        uses: "ramsey/composer-install@v2"
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 

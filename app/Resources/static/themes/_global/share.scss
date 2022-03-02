@@ -112,7 +112,7 @@ blockquote::before,
 blockquote::after,
 q::before,
 q::after {
-  content: '';
+  content: "";
   content: none;
 }
 
@@ -300,8 +300,6 @@ dl dt {
   overflow: hidden;
   clear: left;
   text-align: right;
-  -ms-text-overflow: ellipsis;
-  -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-weight: bold;
@@ -314,8 +312,6 @@ dl dd {
 }
 
 pre {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   margin: 4em 0;
   border: 0.0625em solid #efefef;
@@ -378,7 +374,7 @@ thead tr {
 }
 
 tbody tr:nth-child(2n+1) {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgb(0 0 0 / 10%);
 }
 
 tbody {

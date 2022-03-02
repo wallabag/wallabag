@@ -1,4 +1,4 @@
-<div class="card-stacked{% if currentRoute == 'tag_entries' and entry.isArchived %} archived{% endif %}">
+<div class="card-stacked{% if currentRoute in routes and entry.isArchived %} archived{% endif %}">
     {% include "@WallabagCore/themes/material/Entry/Card/_mass_checkbox.html.twig" with {'entry': entry} only %}
     <div class="card-preview">
         <a href="{{ path('view', { 'id': entry.id }) }}">

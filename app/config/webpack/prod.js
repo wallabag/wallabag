@@ -1,10 +1,11 @@
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
-const commonConfig = require('./common.js');
+const commonConfig = require('./common');
 
 module.exports = merge(commonConfig, {
   output: {
@@ -27,6 +28,7 @@ module.exports = merge(commonConfig, {
     ],
   },
   plugins: [
+    new ESLintPlugin(),
     new MiniCssExtractPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
@@ -40,12 +42,6 @@ module.exports = merge(commonConfig, {
   ],
   module: {
     rules: [
-      {
-        enforce: 'pre',
-        test: /\.js$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/,
-      },
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
@@ -80,31 +76,24 @@ module.exports = merge(commonConfig, {
       {
         test: /\.(jpg|png|gif|svg|ico)$/,
         include: /node_modules/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: 'img/[name].[ext]',
-          },
+        type: 'asset/resource',
+        generator: {
+          filename: 'img/[name][ext]',
         },
       },
       {
         test: /\.(jpg|png|gif|svg|ico)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            context: 'app/Resources/static',
-            name: '[path][name].[ext]',
-          },
+        type: 'asset/resource',
+        generator: {
+          filename: (content) => content.filename.replace('app/Resources/static/', ''),
         },
       },
       {
         test: /\.(eot|ttf|woff|woff2)$/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: 'fonts/[name].[ext]',
-          },
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name][ext]',
         },
       },
     ],

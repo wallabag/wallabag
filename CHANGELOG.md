@@ -1,5 +1,59 @@
 # Changelog
 
+## [2.4.3](https://github.com/wallabag/wallabag/tree/2.4.3)
+   [Full Changelog](https://github.com/wallabag/wallabag/compare/2.4.2...2.4.3)
+
+### Fixes
+* Tag view: order tags by label @Kdecherf in https://github.com/wallabag/wallabag/pull/5296
+* Pagination style updated by @Simounet in https://github.com/wallabag/wallabag/pull/5202
+* Improve performance of REST exists call by @Kdecherf in https://github.com/wallabag/wallabag/pull/5261
+* Make RSS feed entry links valid and accessible by @hennevogel in https://github.com/wallabag/wallabag/pull/5347
+* Fixed search on homepage by @nicosomb in https://github.com/wallabag/wallabag/pull/5379
+* Fixed timeout when assigning tags to entry by @nicosomb in https://github.com/wallabag/wallabag/pull/5156
+* Fixed reading time in epub/pdf exports by @nicosomb in https://github.com/wallabag/wallabag/pull/5405
+* Fix dark theme developper page by @Simounet in https://github.com/wallabag/wallabag/pull/5453
+* Fix dark mode background color for pre tags by @Kdecherf in https://github.com/wallabag/wallabag/pull/5465
+* Show when articles is read by @nicosomb in https://github.com/wallabag/wallabag/pull/5378
+* Added random button on article view by @nicosomb in https://github.com/wallabag/wallabag/pull/5380
+* Fixed wrong number of entries for tag feeds by @christianjunk in https://github.com/wallabag/wallabag/pull/5585
+* Add support for RTL content by @Monirzadeh in https://github.com/wallabag/wallabag/pull/5599
+* Avoid overlapping images when downloading them by @j0k3r in https://github.com/wallabag/wallabag/pull/5594
+
+### Meta
+* Fix/tests by @Simounet in https://github.com/wallabag/wallabag/pull/5217
+* dependabot: change schedule to check updates once a month by @Kdecherf in https://github.com/wallabag/wallabag/pull/5260
+* Update dependencies by @Kdecherf in https://github.com/wallabag/wallabag/pull/5326
+* Create SECURITY.md by @zidingz in https://github.com/wallabag/wallabag/pull/5406
+* Add build test on PHP 8.0 & 8.1 by @j0k3r in https://github.com/wallabag/wallabag/pull/5591
+* Fix Dependabot alerts for `tar` & `json-schema` by @j0k3r in https://github.com/wallabag/wallabag/pull/5541
+* Change the name of the static package's root directory by @oupala in https://github.com/wallabag/wallabag/pull/5542
+* Fixed unavailable russian website in test by @nicosomb in https://github.com/wallabag/wallabag/pull/5376
+* Update deps by @j0k3r in https://github.com/wallabag/wallabag/pull/5540
+
+### Translations
+* Translations update from Weblate by @weblate in https://github.com/wallabag/wallabag/pull/5187
+* Translations update from Weblate by @weblate in https://github.com/wallabag/wallabag/pull/5391
+* Add Czech language by @marapavelka in https://github.com/wallabag/wallabag/pull/5535
+* Translations update from Hosted Weblate by @weblate in https://github.com/wallabag/wallabag/pull/5580
+* Translations update from Hosted Weblate by @weblate in https://github.com/wallabag/wallabag/pull/5581
+
+## [2.4.2](https://github.com/wallabag/wallabag/tree/2.4.2)
+   [Full Changelog](https://github.com/wallabag/wallabag/compare/2.4.1...2.4.2)
+
+### Fixes
+- Fix nav lang filter [#4908](https://github.com/wallabag/wallabag/pull/4908)
+- Fix accessibility problem with the 2FA QR code [#4915](https://github.com/wallabag/wallabag/pull/4915)
+- Preselect currently active section in the filter menu [#4972](https://github.com/wallabag/wallabag/pull/4972)
+- Fix translation of date in the footer using IntlDateFormatter [#4971](https://github.com/wallabag/wallabag/pull/4971)
+- Update dark theme [#4921](https://github.com/wallabag/wallabag/pull/4921)
+- Dark theme updated [#4983](https://github.com/wallabag/wallabag/pull/4983)
+- Fix account dropdown width [#4969](https://github.com/wallabag/wallabag/pull/4969)
+- Fix auto prefered color scheme [#5071](https://github.com/wallabag/wallabag/pull/5071)
+- Convert tag label to lowercase in RuleBasedTagger [#5111](https://github.com/wallabag/wallabag/pull/5111)
+- Fix myreadspeed links [#5113](https://github.com/wallabag/wallabag/pull/5113)
+- Internal server error while exporting to epub [#5052](https://github.com/wallabag/wallabag/issues/5052)
+- Error parsing image URL (with scrset) [#4914](https://github.com/wallabag/wallabag/issues/4914)
+
 ## [2.4.1](https://github.com/wallabag/wallabag/tree/2.4.1)
    [Full Changelog](https://github.com/wallabag/wallabag/compare/2.4.0...2.4.1)
 

@@ -46,7 +46,7 @@ class TagControllerTest extends WallabagCoreTestCase
         // be sure to reload the entry
         $entry = $this->getEntityManager()->getRepository(Entry::class)->find($entry->getId());
         $this->assertCount(1, $entry->getTags());
-        $this->assertContains($this->tagName, $entry->getTags());
+        $this->assertContains($this->tagName, $entry->getTagsLabel());
 
         // tag already exists and already assigned
         $client->submit($form, $data);
@@ -127,7 +127,7 @@ class TagControllerTest extends WallabagCoreTestCase
 
         // re-retrieve the entry to be sure to get fresh data from database (mostly for tags)
         $entry = $this->getEntityManager()->getRepository(Entry::class)->find($entry->getId());
-        $this->assertNotContains($this->tagName, $entry->getTags());
+        $this->assertNotContains($this->tagName, $entry->getTagsLabel());
 
         $client->request('GET', '/remove-tag/' . $entry->getId() . '/' . $tag->getId());
 
@@ -195,7 +195,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $entry2 = new Entry($this->getLoggedInUser());
         $entry2->setUrl('http://0.0.0.0/bar');
         $entry2->addTag($tag);
-        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->persist($entry2);
 
         $this->getEntityManager()->flush();
         $this->getEntityManager()->clear();

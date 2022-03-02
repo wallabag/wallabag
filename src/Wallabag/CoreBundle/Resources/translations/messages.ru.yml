@@ -144,7 +144,7 @@ config:
         delete_rule_label: 'удалить'
         edit_rule_label: 'изменить'
         rule_label: 'Правило'
-        tags_label: 'теги'
+        tags_label: 'Теги'
         faq:
             title: 'FAQ'
             tagging_rules_definition_title: 'Что значит "правила тегирования"?'
@@ -194,6 +194,8 @@ config:
             two_factor_code_description_3: 'Также, сохраните эти резервные коды в безопасном месте, вы можете использовать их в случае потери доступа к вашему OTP-приложению:'
             two_factor_code_description_2: 'Вы можете отсканировать этот QR-код своим приложением:'
             two_factor_code_description_1: Вы только что включили двухфакторную аутентификацию OTP, откройте OTP-приложение и используйте этот код, чтобы получить одноразовый пароль. Он исчезнет после перезагрузки страницы.
+            qrcode_label: QR-код
+            two_factor_code_description_5: 'Если вы не видите QR-код или не можете его отсканировать, введите следующий секрет в приложении:'
         page_title: Двухфакторная аутентификация
     form_ignore_origin_rules:
         faq:

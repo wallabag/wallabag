@@ -212,6 +212,7 @@ config:
             two_factor_code_description_5: 'Si vous ne voyez pas le code QR ou ne pouvez pas le scanner, saisissez la clé suivante dans votre application :'
             cancel: Annuler
             enable: Activer
+            qrcode_label: Code QR
 entry:
     default_title: Titre de l’article
     page_titles:
@@ -401,7 +402,7 @@ quickstart:
     more: Et plus encore…
     intro:
         title: Bienvenue sur wallabag !
-        paragraph_1: Nous allons vous accompagner pour vous faire faire le tour de la maison et vous présenter quelques fonctionnalités qui pourraient vous intéresser pour vous approprier cet outil.
+        paragraph_1: Nous allons vous accompagner pour vous faire le tour de la maison et vous présenter quelques fonctionnalités qui pourraient vous intéresser pour vous approprier cet outil.
         paragraph_2: Suivez-nous !
     configure:
         title: Configurez l’application

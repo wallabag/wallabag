@@ -536,7 +536,7 @@ developer:
         page_title: Zarządzanie klientami API > Jak stworzyć moją pierwszą aplikację
         description:
             paragraph_1: Następujące komendy korzystają <a href="https://github.com/jkbrzt/httpie">Biblioteka HTTPie</a>. Upewnij się, czy zainstalowałeś ją w swoim systemie, zanim z niej skorzystasz.
-            paragraph_2: Potrzebujesz tokena w celu nawiązania komunikacji między swoją aplikacją a API wallabag.
+            paragraph_2: Potrzebujesz tokena w celu nawiązania komunikacji między API wallabag a aplikacją stron trzecich.
             paragraph_3: W celu stworzenia tokena musisz <a href="%link%">stwórz nowego klienta</a>.
             paragraph_4: 'Teraz, utwórz tokena (zmień client_id, client_secret, username i password z poprawnymi wartościami):'
             paragraph_5: 'API powinno zwrócić taką informację:'

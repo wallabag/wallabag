@@ -8,7 +8,7 @@
  *
  */
 .material-icons {
-  font-family: 'Material Icons';
+  font-family: "Material Icons";
   font-weight: normal;
   font-style: normal;
   font-size: 24px; /* Preferred icon size */
@@ -32,7 +32,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   /* Support for IE. */
-  font-feature-settings: 'liga';
+  font-feature-settings: "liga";
 
   .md-18 {
     font-size: 18px;
@@ -51,18 +51,18 @@
   }
 
   .md-dark {
-    color: rgba(0, 0, 0, 0.54);
+    color: rgb(0 0 0 / 54%);
 
     .md-inactive {
-      color: rgba(0, 0, 0, 0.26);
+      color: rgb(0 0 0 / 26%);
     }
   }
 
   .md-light {
-    color: rgba(255, 255, 255, 1);
+    color: rgb(255 255 255 / 100%);
 
     .md-inactive {
-      color: rgba(255, 255, 255, 0.3);
+      color: rgb(255 255 255 / 30%);
     }
   }
 }
@@ -185,5 +185,5 @@ footer [class*=" icon-"] {
 
 footer [class^="icon-"]:hover,
 footer [class*=" icon-"]:hover {
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 0 10px rgb(0 0 0 / 30%);
 }

@@ -1,5 +1,5 @@
 wallabag_core:
-    version: 2.4.1
+    version: 2.4.3
     paypal_url: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9UBA65LG3FX9Y&lc=gb"
     languages:
         en: 'English'
@@ -21,6 +21,7 @@ wallabag_core:
         zh: '简体中文'
         uk: 'Українська'
         hr: 'Hrvatski'
+        cs: 'Čeština'
     items_on_page: 12
     theme: material
     language: '%locale%'

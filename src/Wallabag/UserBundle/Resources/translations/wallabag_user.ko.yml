@@ -1,10 +1,10 @@
 auth_code:
     mailer:
         body:
-            signature: 왈라백 팀
+            signature: Wallabag 팀
             support: '당신의 문제를 말해주세요:'
             second_para: '코드보기:'
             first_para: wallabag 계정에 로그인하려면 2 팩터 인증이 필요하므로 인증 코드가 전송됩니다.
-            hello: 안녕하세요, %user%,
-        subject: 왈라백 인증 코드
+            hello: 안녕하세요, %user%
+        subject: Wallabag 인증 코드
     on: 사용

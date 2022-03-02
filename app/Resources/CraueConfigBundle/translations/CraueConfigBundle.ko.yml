@@ -1,1 +1,40 @@
-{}
+download_pictures: 서버로 이미지를 다운로드
+shaarli_share_origin_url: Shaarli에서 원래 URL 공유 활성화 (서비스가 활성화 된 경우)
+store_article_headers: Wallabag이 각 기사에 대한 HTTP 헤더를 저장하는 경우 활성화
+api_user_registration: API를 통해 사용자 등록 활성화
+restricted_access: 유료 웹 사이트에 대한 인증 활성화
+download_images_enabled: 이미지를 로컬로 다운로드
+share_public: 항목의 공개 URL 허용
+demo_mode_username: 데모 사용자
+demo_mode_enabled: 데모 모드를 사용 하시겠습니까? (공개 Wallabag 데모에만 사용됨)
+matomo_enabled: Matomo 활성화
+matomo_site_id: Matomo 웹 사이트 ID
+matomo_host: Matomo 웹 사이트의 호스트 (http:// 또는 https:// 없음)
+modify_settings: 적용
+misc: 기타
+import: 가져오기
+export: 내보내기
+entry: 기사
+wallabag_support_url: Wallabag 지원 URL
+show_printlink: 콘텐츠 인쇄 링크 표시
+share_unmark: Unmark.it 공유 활성화
+diaspora_url: Diaspora* URL (서비스가 활성화 된 경우)
+share_scuttle: Scuttle 공유 활성화
+share_shaarli: Shaarli 공유 활성화
+share_mail: 이메일 공유 활성화
+share_diaspora: Diaspora* 공유 활성화
+share_twitter: Twitter 공유 활성화
+unmark_url: Unmark URL (서비스가 활성화 된 경우)
+scuttle_url: Scuttle URL (서비스가 활성화 된 경우)
+shaarli_url: Shaarli URL (서비스가 활성화 된 경우)
+import_with_redis: Redis가 데이터를 비동기적으로 가져오도록 설정
+import_with_rabbitmq: RabbitMQ가 데이터를 비동기적으로 가져오도록 설정
+export_xml: XML 내보내기 활성화
+export_txt: TXT 내보내기 활성화
+export_json: JSON 내보내기 활성화
+export_csv: CSV 내보내기 활성화
+export_pdf: PDF 내보내기 활성화
+export_mobi: .mobi 내보내기 활성화
+export_epub: ePub 내보내기 활성화
+carrot: Carrot에 공유 활성화
+settings_changed: 설정을 업데이트했습니다

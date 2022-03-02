@@ -8,7 +8,7 @@
 >
 
     <testsuites>
-        <testsuite name="wallabag Test Suite">
+        <testsuite name="wallabag">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

@@ -207,8 +207,8 @@ class EntryControllerTest extends WallabagCoreTestCase
         $authors = $content->getPublishedBy();
         $this->assertSame('2017-04-05', $content->getPublishedAt()->format('Y-m-d'));
         $this->assertSame('fr', $content->getLanguage());
-        $this->assertContains('Balenieri', $authors[0]);
-        $this->assertContains('Autran', $authors[1]);
+        $this->assertStringContainsString('Balenieri', $authors[0]);
+        $this->assertStringContainsString('Autran', $authors[1]);
     }
 
     public function testPostNewOkUrlExist()
@@ -342,7 +342,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $entry = $em
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneByUrl($url);
-        $tags = $entry->getTags();
+        $tags = $entry->getTagsLabel();
 
         $this->assertCount(2, $tags);
         $this->assertContains('wallabag', $tags);
@@ -372,7 +372,7 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->getRepository('WallabagCoreBundle:Entry')
             ->findOneByUrl($url);
 
-        $tags = $entry->getTags();
+        $tags = $entry->getTagsLabel();
 
         $this->assertCount(2, $tags);
         $this->assertContains('wallabag', $tags);
@@ -1387,7 +1387,7 @@ class EntryControllerTest extends WallabagCoreTestCase
     {
         return [
             'ru' => [
-                'https://www.vtimes.io/2020/12/14/ubiistvo-kotorogo-ne-bilo-a1981',
+                'https://ru.wikipedia.org/wiki/Открытое_программное_обеспечение',
                 'ru',
             ],
             'fr' => [
@@ -1409,10 +1409,6 @@ class EntryControllerTest extends WallabagCoreTestCase
             'pt_BR' => [
                 'https://politica.estadao.com.br/noticias/eleicoes,campanha-catatonica,70002491983',
                 'pt_BR',
-            ],
-            'fucked_list_of_languages' => [
-                'http://geocatalog.webservice-energy.org/geonetwork/srv/eng/main.home',
-                null,
             ],
             'es-ES' => [
                 'https://www.20minutos.es/noticia/3360685/0/gobierno-sanchez-primero-historia-mas-mujeres-que-hombres/',

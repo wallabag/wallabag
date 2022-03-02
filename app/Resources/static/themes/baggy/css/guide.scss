@@ -1,4 +1,3 @@
-
 ::selection {
   color: #fff;
   background-color: #000;
@@ -60,9 +59,9 @@ form input[type="email"] {
   color: #666;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
+@media screen {
   select {
-    -webkit-appearance: none;
+    appearance: none;
     border-radius: 0;
     background: #fff url("../../_global/img/bg-select.png") no-repeat right center;
   }
@@ -109,10 +108,6 @@ input[type="submit"]:hover,
 input[type="submit"]:focus {
   background-color: #fff;
   color: #000;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 
@@ -148,7 +143,7 @@ h2::after {
   background-color: #333;
   padding-top: 9.5em;
   height: 100%;
-  box-shadow: inset -4px 0 20px rgba(0, 0, 0, 0.6);
+  box-shadow: inset -4px 0 20px rgb(0 0 0 / 60%);
   z-index: 15;
 
   > li > a {

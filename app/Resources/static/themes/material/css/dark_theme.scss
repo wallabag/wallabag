@@ -19,13 +19,17 @@
     background-color: #121212;
   }
 
+  table.striped > tbody > tr:nth-child(2n+1),
   .dropdown-content li {
     background-color: #232323;
   }
 
   .dropdown-content li:hover,
   .dropdown-content li.active,
-  .dropdown-content li.selected {
+  .dropdown-content li.selected,
+  .pagination li:not(.active) a:hover,
+  .pagination li:not(.active) a:active,
+  .pagination li:not(.active) a:focus {
     background-color: #2c2c2c;
   }
 
@@ -105,8 +109,20 @@
   }
 
   .border-bottom,
-  .collapsible {
+  .collapsible,
+  .collapsible-body,
+  .collapsible-header {
     border-color: #222;
+  }
+
+  .pagination li.active {
+    background-color: #666;
+  }
+
+  .hljs,
+  #article pre.hljs {
+    color: #abb2bf;
+    background-color: #282c34;
   }
 
   @media only screen and (min-width: 992px) {

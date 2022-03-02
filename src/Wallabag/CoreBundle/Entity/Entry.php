@@ -683,6 +683,19 @@ class Entry
     }
 
     /**
+     * Only used during tests.
+     */
+    public function getTagsLabel(): array
+    {
+        $tags = [];
+        foreach ($this->tags as $tag) {
+            $tags[] = $tag->getLabel();
+        }
+
+        return $tags;
+    }
+
+    /**
      * @VirtualProperty
      * @SerializedName("tags")
      * @Groups({"entries_for_user", "export_all"})
@@ -712,7 +725,6 @@ class Entry
         }
 
         $this->tags->add($tag);
-        $tag->addEntry($this);
     }
 
     /**

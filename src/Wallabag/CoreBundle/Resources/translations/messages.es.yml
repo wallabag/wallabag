@@ -122,6 +122,7 @@ config:
             button: Eliminar mi cuenta
         help_twoFactorAuthentication: Si habilita la autenticación de dos factores (2FA), cada vez que desee iniciar sesión en wallabag, recibirá un código por correo electrónico.
         twoFactorAuthentication_label: Autenticación de dos factores
+        login_label: Login (no puede ser cambiado)
     reset:
         title: Reiniciar mi cuenta (zona peligrosa)
         description: Pulsando los botones de abajo puedes eliminar alguna información de tu cuenta. Ten en cuenta que estas acciones son IRREVERSIBLES.
@@ -188,6 +189,7 @@ config:
             cancel: Cancelar
             enable: Habilitar
             two_factor_code_description_2: 'Puedes escanear ese Código QR con tu applicación:'
+            qrcode_label: Código QR
         page_title: Autenticación de doble factor
     form_ignore_origin_rules:
         faq:
@@ -206,6 +208,8 @@ config:
             archive: Archivados
             starred: Favorito
             unread: No leídos
+        token_reset: Regenerar tu token
+        token_create: Crear tu token
 entry:
     default_title: 'Título del artículo'
     page_titles:
@@ -274,6 +278,9 @@ entry:
             problem:
                 label: '¿Algún problema?'
                 description: '¿Este artículo no se muestra bien?'
+            theme_toggle_auto: Automático
+            theme_toggle_dark: Oscuro
+            theme_toggle_light: Claro
         edit_title: 'Modificar el título'
         original_article: 'original'
         annotations_on_the_entry: '{0} Sin anotaciones|{1} Una anotación|]1,Inf[ %count% anotaciones'

@@ -216,6 +216,13 @@
         </li>
         {% endif %}
 
+        <li class="bold border-top border-bottom">
+            <a class="waves-effect collapsible-header" title="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', { 'type': 'all' }) }}">
+                <i class="material-icons small">casino</i>
+                <span>{{ 'menu.top.random_entry'|trans }}</span>
+            </a>
+        </li>
+
         <li class="bold">
             <a class="waves-effect collapsible-header">
                 <i class="material-icons small">file_download</i>
@@ -252,7 +259,7 @@
             <h1><span{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>{{ entry.title|striptags|default('entry.default_title'|trans)|raw }}</span> <a href="{{ path('edit', { 'id': entry.id }) }}" title="{{ 'entry.view.edit_title'|trans }}"><i class="material-icons grey-text">create</i></a></h1>
         </header>
         <aside>
-            <div class="tools grey-text">
+            <div class="tools grey-text" dir="auto">
                 <ul class="stats">
                     <li>
                         {% include "@WallabagCore/themes/material/Entry/_reading_time.html.twig" with {'entry': entry} only %}
