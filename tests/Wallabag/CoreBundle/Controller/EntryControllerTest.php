@@ -1641,7 +1641,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/annotated/random');
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertContains('/view/', $client->getResponse()->getTargetUrl(), 'With annotations random');
+        $this->assertStringContainsString('/view/', $client->getResponse()->getTargetUrl(), 'With annotations random');
 
         $client->request('GET', '/all/random');
         $this->assertSame(302, $client->getResponse()->getStatusCode());

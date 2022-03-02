@@ -120,7 +120,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
 
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
 
-        $tags = $content->getTags();
+        $tags = $content->getTagsLabel();
         $this->assertContains('osx', $tags, 'It includes the "osx" tag');
         $this->assertGreaterThanOrEqual(4, \count($tags));
 
