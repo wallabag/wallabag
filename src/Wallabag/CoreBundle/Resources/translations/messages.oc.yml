@@ -19,7 +19,6 @@ menu:
         starred: Favorits
         archive: Legits
         all_articles: Totes los articles
-        # with_annotations: 'With annotations'
         config: Configuracion
         tags: Etiquetas
         internal_settings: Configuracion intèrna
@@ -181,7 +180,6 @@ entry:
         starred: Articles favorits
         archived: Articles legits
         filtered: Articles filtrats
-        # with_annotations: 'Entries with annotations'
         filtered_tags: 'Articles filtrats per etiquetas :'
         filtered_search: 'Articles filtrats per recèrca :'
         untagged: Articles sens etiqueta

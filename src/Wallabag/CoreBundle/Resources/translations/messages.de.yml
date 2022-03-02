@@ -19,7 +19,6 @@ menu:
         starred: Favoriten
         archive: Archiv
         all_articles: Alle Artikel
-        # with_annotations: 'With annotations'
         config: Konfiguration
         tags: Tags
         internal_settings: Interne Einstellungen
@@ -237,7 +236,6 @@ entry:
         starred: Favorisierte Einträge
         archived: Archivierte Einträge
         filtered: Gefilterte Einträge
-        # with_annotations: 'Entries with annotations'
         filtered_tags: 'Gefiltert nach Tags:'
         filtered_search: 'Gefiltert nach Suche:'
         untagged: Nicht markierte Einträge

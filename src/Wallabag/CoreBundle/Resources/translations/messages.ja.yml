@@ -19,7 +19,6 @@ menu:
         starred: スター
         archive: アーカイブ
         all_articles: すべての記事
-        # with_annotations: 'With annotations'
         config: 設定
         tags: タグ
         internal_settings: 内部設定
@@ -236,7 +235,6 @@ entry:
         starred: スター付きの記事
         archived: アーカイブ済の記事
         filtered: フィルターされた記事
-        # with_annotations: 'Entries with annotations'
         filtered_tags: 'タグによるフィルター:'
         untagged: タグがない記事
         all: すべての記事

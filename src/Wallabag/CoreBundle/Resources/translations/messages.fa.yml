@@ -19,7 +19,6 @@ menu:
         starred: برگزیده
         archive: بایگانی
         all_articles: همه
-        # with_annotations: 'With annotations'
         config: پیکربندی
         tags: برچسب‌ها
         internal_settings: تنظیمات درونی
@@ -112,11 +111,6 @@ entry:
         starred: مقاله‌های برگزیده
         archived: مقاله‌های بایگانی‌شده
         filtered: مقاله‌های فیلترشده
-        # with_annotations: 'Entries with annotations'
-        # filtered_tags: 'Filtered by tags:'
-        # filtered_search: 'Filtered by search:'
-        # untagged: 'Untagged entries'
-        # all: 'All entries'
     list:
         number_on_the_page: '{0} هیج مقاله‌ای نیست.|{1} یک مقاله هست.|]1,Inf[ %count% مقاله هست.'
         reading_time: زمان تخمینی برای خواندن
