@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7b402fa1eb644c821ddc5ed4097caafa",
+    "content-hash": "2a0e9af279e198c254d9a8e8b53044f0",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -11364,16 +11364,16 @@
         },
         {
             "name": "wallabag/phpepub",
-            "version": "4.0.9",
+            "version": "4.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wallabag/PHPePub.git",
-                "reference": "cf94d02dce43b470752ef9e6dd0a1c8484af1f8f"
+                "reference": "1f74a5c113ffbea199cfca34e6521a08e6f67445"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wallabag/PHPePub/zipball/cf94d02dce43b470752ef9e6dd0a1c8484af1f8f",
-                "reference": "cf94d02dce43b470752ef9e6dd0a1c8484af1f8f",
+                "url": "https://api.github.com/repos/wallabag/PHPePub/zipball/1f74a5c113ffbea199cfca34e6521a08e6f67445",
+                "reference": "1f74a5c113ffbea199cfca34e6521a08e6f67445",
                 "shasum": ""
             },
             "require": {
@@ -11428,9 +11428,9 @@
             ],
             "support": {
                 "issues": "https://github.com/wallabag/PHPePub/issues",
-                "source": "https://github.com/wallabag/PHPePub/tree/4.0.9"
+                "source": "https://github.com/wallabag/PHPePub/tree/4.0.10"
             },
-            "time": "2021-03-08T08:31:34+00:00"
+            "time": "2022-03-21T19:27:18+00:00"
         },
         {
             "name": "willdurand/hateoas",

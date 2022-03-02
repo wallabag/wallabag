@@ -161,8 +161,8 @@ class EntriesExport
          */
 
         $book->setTitle($this->title);
-        // Not needed, but included for the example, Language is mandatory, but EPub defaults to "en". Use RFC3066 Language codes, such as "en", "da", "fr" etc.
-        $book->setLanguage($this->language);
+        // EPub specification requires BCP47-compliant languages, thus we replace _ with -
+        $book->setLanguage(str_replace('_', '-', $this->language));
         $book->setDescription('Some articles saved on my wallabag');
 
         $book->setAuthor($this->author, $this->author);
