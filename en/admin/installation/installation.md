@@ -94,6 +94,14 @@ official repository.
 [![Install wallabag with
 YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=wallabag2)
 
+## Installation on alwaysdata
+
+alwaysdata's Marketplace allows to easily install wallabag (and many other
+applications) on a Public or Private Cloud.
+
+[Install wallabag to
+alwaysdata](https://www.alwaysdata.com/en/marketplace/wallabag/)
+
 ## Installation on Synology
 
 The SynoCommunity provides a package to install wallabag on your Synology NAS.
