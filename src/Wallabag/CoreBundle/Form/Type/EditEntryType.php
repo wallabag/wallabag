@@ -3,6 +3,7 @@
 namespace Wallabag\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -29,6 +30,9 @@ class EditEntryType extends AbstractType
                 'property_path' => 'originUrl',
                 'label' => 'entry.edit.origin_url_label',
                 'default_protocol' => null,
+            ])
+            ->add('content', TextareaType::class, [
+                'label' => 'entry.edit.content_label',
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'entry.edit.save_label',

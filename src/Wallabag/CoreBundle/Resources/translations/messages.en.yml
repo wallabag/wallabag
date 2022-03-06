@@ -270,6 +270,7 @@ entry:
             set_as_starred: Toggle starred
             view_original_article: Original article
             re_fetch_content: Re-fetch content
+            edit_content: Correct content
             delete: Delete
             add_a_tag: Add a tag
             share_content: Share
@@ -305,6 +306,7 @@ entry:
         url_label: Url
         origin_url_label: Origin url (from where you found that entry)
         save_label: Save
+        content_label: Body
     public:
         shared_by_wallabag: This article has been shared by %username% with <a href='%wallabag_instance%'>wallabag</a>
     confirm:

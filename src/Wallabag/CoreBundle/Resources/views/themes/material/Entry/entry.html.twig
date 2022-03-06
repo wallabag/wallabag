@@ -61,6 +61,14 @@
             <div class="collapsible-body"></div>
         </li>
 
+        <li class="bold">
+            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.edit_content'|trans }}" href="{{ path('edit', { 'id': entry.id }) }}" id="edit">
+                <i class="material-icons small">edit</i>
+                <span>{{ 'entry.view.left_menu.edit_content'|trans }}</span>
+            </a>
+            <div class="collapsible-body"></div>
+        </li>
+
         {% set markAsReadLabel = 'entry.view.left_menu.set_as_unread' %}
         {% if entry.isArchived == 0 %}
             {% set markAsReadLabel = 'entry.view.left_menu.set_as_read' %}
