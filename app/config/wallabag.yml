@@ -22,6 +22,7 @@ wallabag_core:
         uk: 'Українська'
         hr: 'Hrvatski'
         cs: 'Čeština'
+        el: 'Ελληνικά'
     items_on_page: 12
     theme: material
     language: '%locale%'
