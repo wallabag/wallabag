@@ -8,7 +8,9 @@ use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\Tag;
@@ -88,8 +90,19 @@ class FeedController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showTagsFeedAction(User $user, Tag $tag, $page)
+    public function showTagsFeedAction(Request $request, User $user, Tag $tag, $page)
     {
+        $sort = $request->query->get('sort', 'created');
+
+        $sorts = [
+            'created' => 'createdAt',
+            'updated' => 'updatedAt',
+        ];
+
+        if (!isset($sorts[$sort])) {
+            throw new BadRequestHttpException(sprintf('Sort "%s" is not available.', $sort));
+        }
+
         $url = $this->generateUrl(
             'tag_feed',
             [
@@ -102,7 +115,8 @@ class FeedController extends Controller
 
         $entriesByTag = $this->get('wallabag_core.entry_repository')->findAllByTagId(
             $user->getId(),
-            $tag->getId()
+            $tag->getId(),
+            $sorts[$sort]
         );
 
         $pagerAdapter = new ArrayAdapter($entriesByTag);
@@ -137,9 +151,26 @@ class FeedController extends Controller
                 'domainName' => $this->getParameter('domain_name'),
                 'version' => $this->getParameter('wallabag_core.version'),
                 'tag' => $tag->getSlug(),
+                'updated' => $this->prepareFeedUpdatedDate($entries, $sort),
             ],
             new Response('', 200, ['Content-Type' => 'application/atom+xml'])
         );
+    }
+
+    private function prepareFeedUpdatedDate(Pagerfanta $entries, $sort = 'created')
+    {
+        $currentPageResults = $entries->getCurrentPageResults();
+
+        if (isset($currentPageResults[0])) {
+            $firstEntry = $currentPageResults[0];
+            if ('created' === $sort) {
+                return $firstEntry->getCreatedAt();
+            }
+
+            return $firstEntry->getUpdatedAt();
+        }
+
+        return null;
     }
 
     /**
@@ -202,6 +233,7 @@ class FeedController extends Controller
             'user' => $user->getUsername(),
             'domainName' => $this->getParameter('domain_name'),
             'version' => $this->getParameter('wallabag_core.version'),
+            'updated' => $this->prepareFeedUpdatedDate($entries),
         ],
         new Response('', 200, ['Content-Type' => 'application/atom+xml'])
         );

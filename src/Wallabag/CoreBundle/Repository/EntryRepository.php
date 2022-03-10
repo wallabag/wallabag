@@ -343,9 +343,9 @@ class EntryRepository extends EntityRepository
      *
      * @return array
      */
-    public function findAllByTagId($userId, $tagId)
+    public function findAllByTagId($userId, $tagId, $sort = 'createdAt')
     {
-        return $this->getSortedQueryBuilderByUser($userId)
+        return $this->getSortedQueryBuilderByUser($userId, $sort)
             ->innerJoin('e.tags', 't')
             ->andWhere('t.id = :tagId')->setParameter('tagId', $tagId)
             ->getQuery()
