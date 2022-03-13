@@ -100,7 +100,7 @@ main {
   }
 
   .card-action {
-    padding: 10px 5px 10px 15px;
+    padding: 10px 10px 10px 15px;
 
     ul.links {
       margin: 0;
@@ -117,8 +117,9 @@ main {
       color: #fff;
     }
 
-    ul.tools li a.tool {
-      margin-right: 5px !important;
+    .tool {
+      display: flex;
+      margin-right: 0 !important;
     }
 
     @include mixin-reading-time;
@@ -326,4 +327,9 @@ a.original:not(.waves-effect) {
 .row {
   display: grid;
   gap: 20px;
+}
+
+.tools {
+  display: flex;
+  gap: 10px;
 }
