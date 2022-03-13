@@ -56,7 +56,7 @@
         </li>
 
         {% for entry in entries %}
-            <li id="entry-{{ entry.id|e }}" class="entry col {% if listMode == 0 %}l3 m6{% else %}collection-item{% endif %} s12">
+            <li id="entry-{{ entry.id|e }}" class="{% if listMode != 0 %}col collection-item{% endif %} s12" data-entry-id="{{ entry.id|e }}" data-test="entry">
                 {% if listMode == 1 %}
                     {% include "@WallabagCore/themes/material/Entry/_card_list.html.twig" with {'entry': entry, 'currentRoute': currentRoute, 'routes': entriesWithArchivedClassRoutes} only %}
                 {% elseif not entry.previewPicture is null and entry.mimetype starts with 'image/' %}

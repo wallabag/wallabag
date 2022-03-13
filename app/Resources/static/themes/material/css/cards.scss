@@ -13,11 +13,6 @@ main {
   }
 }
 
-.data .card .card-body {
-  height: 19em;
-  overflow: hidden;
-}
-
 @mixin mixin-reading-time {
   .reading-time {
     display: inline-flex;
@@ -37,6 +32,16 @@ main {
 }
 
 .card {
+  display: flex;
+  margin: 0;
+  height: 100%;
+  flex-direction: column;
+
+  .card-content {
+    padding-bottom: 12px;
+    flex-grow: 1;
+  }
+
   .card-content .card-title,
   .card-reveal .card-title {
     line-height: 22.8px;
@@ -132,6 +137,12 @@ main {
     margin-left: auto;
     margin-right: auto;
   }
+}
+
+.card-body {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
 }
 
 a.original:not(.waves-effect) {
@@ -310,4 +321,9 @@ a.original:not(.waves-effect) {
 
 .settings .div_tabs {
   padding-bottom: 15px;
+}
+
+.row {
+  display: grid;
+  gap: 20px;
 }
