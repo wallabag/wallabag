@@ -39,9 +39,8 @@
         {% endif %}
     </div>
 
-    <ul class="{% if listMode == 1 %}collection{% else %}row data{% endif %}">
-
-        <li class="mass-buttons">
+    {% if listMode == 1 %}
+        <div class="mass-buttons">
             {% if entries.count > 0 and listMode == 1 %}
                 <span>
                     <input id="selectAll" type="checkbox" data-toggle="[data-js='entry-checkbox']" data-js="checkboxes-toggle" />&nbsp;
@@ -53,7 +52,10 @@
                     <button class="btn cyan darken-1" type="submit" name="delete" onclick="return confirm('{{ 'entry.confirm.delete_entries'|trans|escape('js') }}')" title="{{ 'entry.list.delete'|trans }}"><i class="material-icons">delete</i></button>
                 </span>
             {% endif %}
-        </li>
+        </div>
+    {% endif %}
+
+    <ul class="{% if listMode == 1 %}collection{% else %}row data{% endif %}">
 
         {% for entry in entries %}
             <li id="entry-{{ entry.id|e }}" class="{% if listMode != 0 %}col collection-item{% endif %} s12" data-entry-id="{{ entry.id|e }}" data-test="entry">

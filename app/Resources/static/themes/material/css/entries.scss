@@ -3,7 +3,7 @@
  * ========================================================================== */
 
 .mass-buttons {
-  margin: 5px;
+  margin: 10px 5px 10px 20px;
 
   #selectAll {
     position: relative;
@@ -39,7 +39,8 @@
 }
 
 .collection {
-  margin: 15px 15px 0;
+  margin: 5px 15px 0;
+  padding: 0;
 
   .collection-item {
     padding: 7px;
