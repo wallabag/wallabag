@@ -55,7 +55,7 @@
         </div>
     {% endif %}
 
-    <ul class="{% if listMode == 1 %}collection{% else %}row data{% endif %}">
+    <ol class="entries {% if listMode == 1 %}collection{% else %}row data{% endif %}">
 
         {% for entry in entries %}
             <li id="entry-{{ entry.id|e }}" class="{% if listMode != 0 %}col collection-item{% endif %} s12" data-entry-id="{{ entry.id|e }}" data-test="entry">
@@ -68,7 +68,7 @@
                 {% endif %}
             </li>
         {% endfor %}
-    </ul>
+    </ol>
 </form>
 
     {% if entries.getNbPages > 1 %}
