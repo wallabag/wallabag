@@ -32,6 +32,7 @@ menu:
         site_credentials: اعتبارنامه‌های وب‌گاه
         users_management: مدیریت کاربران
         developer: مدیریت کارخواه‌های API
+        quickstart: "Quickstart"
     top:
         add_new_entry: افزودن مقالهٔ تازه
         search: جستجو

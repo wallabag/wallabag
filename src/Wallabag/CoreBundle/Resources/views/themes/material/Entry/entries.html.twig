@@ -131,6 +131,11 @@
                     {{ form_label(form.isUnread) }}
                 </div>
 
+                <div class="input-field col s12 with-checkbox">
+                    {{ form_widget(form.isAnnotated) }}
+                    {{ form_label(form.isAnnotated) }}
+                </div>
+
                 <div class="col s12">
                     <label>{{ 'entry.filters.preview_picture_help'|trans }}</label>
                 </div>
