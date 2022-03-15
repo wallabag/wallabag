@@ -24,7 +24,6 @@ class ConfigFixtures extends Fixture implements DependentFixtureInterface
         $adminConfig->setPocketConsumerKey('xxxxx');
         $adminConfig->setActionMarkAsRead(0);
         $adminConfig->setListMode(0);
-        $adminConfig->setListMode(0);
 
         $manager->persist($adminConfig);
 

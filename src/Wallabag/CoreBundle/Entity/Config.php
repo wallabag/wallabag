@@ -40,8 +40,6 @@ class Config
      *
      * @Assert\NotBlank()
      * @ORM\Column(name="theme", type="string", nullable=false)
-     *
-     * @Groups({"config_api"})
      */
     private $theme;
 
@@ -106,8 +104,6 @@ class Config
      * @var string
      *
      * @ORM\Column(name="pocket_consumer_key", type="string", nullable=true)
-     *
-     * @Groups({"config_api"})
      */
     private $pocketConsumerKey;
 

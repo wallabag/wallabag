@@ -14,17 +14,14 @@ class ConfigRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertArrayHasKey('id', $content);
-        $this->assertArrayHasKey('theme', $content);
         $this->assertArrayHasKey('items_per_page', $content);
         $this->assertArrayHasKey('language', $content);
         $this->assertArrayHasKey('reading_speed', $content);
-        $this->assertArrayHasKey('pocket_consumer_key', $content);
         $this->assertArrayHasKey('action_mark_as_read', $content);
         $this->assertArrayHasKey('list_mode', $content);
 
-        $this->assertSame('material', $content['theme']);
         $this->assertSame(200.0, $content['reading_speed']);
-        $this->assertSame('xxxxx', $content['pocket_consumer_key']);
+        $this->assertSame('en', $content['language']);
 
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
