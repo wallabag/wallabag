@@ -3,7 +3,7 @@
    ========================================================================== */
 
 @media only screen and (min-width: 450px) {
-  .row {
+  .entries-row {
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   }
 }

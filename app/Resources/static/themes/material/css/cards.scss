@@ -6,11 +6,6 @@ main {
   #content {
     padding: 0 0.5rem;
   }
-
-  .row {
-    margin: 0.4rem 0 0;
-    padding: 0 0.75rem;
-  }
 }
 
 @mixin mixin-reading-time {
@@ -32,11 +27,6 @@ main {
 }
 
 .card {
-  display: flex;
-  margin: 0;
-  height: 100%;
-  flex-direction: column;
-
   .card-content {
     padding-bottom: 12px;
     flex-grow: 1;
@@ -324,10 +314,20 @@ a.original:not(.waves-effect) {
   padding-bottom: 15px;
 }
 
-.row {
+.entries-row {
   display: grid;
+  margin: 0.4rem 0 0;
+  padding: 0 0.75rem;
   gap: 20px;
 }
+
+.entry-card {
+  display: flex;
+  margin: 0;
+  height: 100%;
+  flex-direction: column;
+}
+
 
 .tools {
   display: flex;
