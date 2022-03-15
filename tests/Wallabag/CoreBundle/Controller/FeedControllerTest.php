@@ -213,15 +213,62 @@ class FeedControllerTest extends WallabagCoreTestCase
         $config->setFeedToken('SUPERTOKEN');
         $config->setFeedLimit(null);
         $em->persist($config);
+
+        $entry1 = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->find(1)
+        ;
+
+        $entry4 = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->find(4)
+        ;
+
+        $now = new \DateTimeImmutable('now');
+
+        $day1 = $now->modify('-8 days');
+        $day2 = $now->modify('-6 days');
+        $day3 = $now->modify('-4 days');
+        $day4 = $now->modify('-2 days');
+
+        $entry1->setCreatedAt($day1);
+        $entry4->setCreatedAt($day2);
+
+        $property = (new \ReflectionObject($entry1))->getProperty('updatedAt');
+        $property->setAccessible(true);
+        $property->setValue($entry1, $day4);
+
+        $property = (new \ReflectionObject($entry4))->getProperty('updatedAt');
+        $property->setAccessible(true);
+        $property->setValue($entry4, $day3);
+
         $em->flush();
 
         $client = $this->getClient();
-        $client->request('GET', '/feed/admin/SUPERTOKEN/tags/foo');
 
+        // tag foo - without sort
+        $crawler = $client->request('GET', '/feed/admin/SUPERTOKEN/tags/foo');
         $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame('test title entry4', $crawler->filterXPath('//feed/entry[1]/title')->text());
+        $this->assertSame('test title entry1', $crawler->filterXPath('//feed/entry[2]/title')->text());
 
-        $this->validateDom($client->getResponse()->getContent(), 'tag', 2, 'foo');
+        // tag foo - with sort created
+        $crawler = $client->request('GET', '/feed/admin/SUPERTOKEN/tags/foo?sort=created');
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame('test title entry4', $crawler->filterXPath('//feed/entry[1]/title')->text());
+        $this->assertSame('test title entry1', $crawler->filterXPath('//feed/entry[2]/title')->text());
 
+        // tag foo - with sort updated
+        $crawler = $client->request('GET', '/feed/admin/SUPERTOKEN/tags/foo?sort=updated');
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame('test title entry1', $crawler->filterXPath('//feed/entry[1]/title')->text());
+        $this->assertSame('test title entry4', $crawler->filterXPath('//feed/entry[2]/title')->text());
+
+        // tag foo - with invalid sort
+        $client->request('GET', '/feed/admin/SUPERTOKEN/tags/foo?sort=invalid');
+        $this->assertSame(400, $client->getResponse()->getStatusCode());
+
+        // tag foo/3000
         $client->request('GET', '/feed/admin/SUPERTOKEN/tags/foo/3000');
         $this->assertSame(302, $client->getResponse()->getStatusCode());
     }
