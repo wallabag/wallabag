@@ -2,6 +2,7 @@
 
 namespace Wallabag\ApiBundle\Controller;
 
+use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -18,6 +19,14 @@ class ConfigRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        return $this->sendResponse($this->getUser()->getConfig());
+        $json = $this->get('jms_serializer')->serialize(
+            $this->getUser()->getConfig(),
+            'json',
+            SerializationContext::create()->setGroups(['config_api'])
+        );
+
+        return (new JsonResponse())
+            ->setJson($json)
+            ->setStatusCode(JsonResponse::HTTP_OK);
     }
 }

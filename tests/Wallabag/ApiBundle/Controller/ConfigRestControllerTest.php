@@ -17,8 +17,6 @@ class ConfigRestControllerTest extends WallabagApiTestCase
         $this->assertArrayHasKey('theme', $content);
         $this->assertArrayHasKey('items_per_page', $content);
         $this->assertArrayHasKey('language', $content);
-        $this->assertArrayHasKey('feed_token', $content);
-        $this->assertArrayHasKey('feed_limit', $content);
         $this->assertArrayHasKey('reading_speed', $content);
         $this->assertArrayHasKey('pocket_consumer_key', $content);
         $this->assertArrayHasKey('action_mark_as_read', $content);
