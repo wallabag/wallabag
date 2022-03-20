@@ -456,12 +456,6 @@ class SymfonyRequirements extends RequirementCollection
         }
 
         $this->addRequirement(
-            function_exists('iconv'),
-            'iconv() must be available',
-            'Install and enable the <strong>iconv</strong> extension.'
-        );
-
-        $this->addRequirement(
             function_exists('json_encode'),
             'json_encode() must be available',
             'Install and enable the <strong>JSON</strong> extension.'

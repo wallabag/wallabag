@@ -236,7 +236,9 @@ class ContentProxy
             return $rawText;
         }
 
-        return iconv('UTF-8', 'UTF-8//IGNORE', $rawText);
+        mb_substitute_character('none');
+
+        return mb_convert_encoding($rawText, 'UTF-8', 'UTF-8');
     }
 
     /**
