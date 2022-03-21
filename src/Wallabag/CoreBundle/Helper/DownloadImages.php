@@ -188,6 +188,10 @@ class DownloadImages
                 imagesavealpha($im, true);
                 imagepng($im, $localPath, ceil(self::REGENERATE_PICTURES_QUALITY / 100 * 9));
                 $this->logger->debug('DownloadImages: Re-creating png');
+                break;
+            case 'webp':
+                imagewebp($im, $localPath, self::REGENERATE_PICTURES_QUALITY);
+                $this->logger->debug('DownloadImages: Re-creating webp');
         }
 
         imagedestroy($im);
@@ -333,6 +337,7 @@ class DownloadImages
                 'jpeg' => "\xFF\xD8\xFF",
                 'gif' => 'GIF',
                 'png' => "\x89\x50\x4e\x47\x0d\x0a",
+                'webp' => "\x52\x49\x46\x46",
             ];
             $bytes = substr((string) $res->getBody(), 0, 8);
 
@@ -346,7 +351,7 @@ class DownloadImages
             $this->logger->debug('DownloadImages: Checking extension (alternative)', ['ext' => $ext]);
         }
 
-        if (!\in_array($ext, ['jpeg', 'jpg', 'gif', 'png'], true)) {
+        if (!\in_array($ext, ['jpeg', 'jpg', 'gif', 'png', 'webp'], true)) {
             $this->logger->error('DownloadImages: Processed image with not allowed extension. Skipping: ' . $imagePath);
 
             return false;
