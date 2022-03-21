@@ -39,7 +39,7 @@
     "@babel/core": "^7.17.8",
     "@babel/eslint-parser": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
-    "autoprefixer": "^10.4.2",
+    "autoprefixer": "^10.4.4",
     "babel-loader": "^8.2.3",
     "css-loader": "^6.7.1",
     "eslint": "^8.11.0",
