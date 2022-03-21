@@ -527,6 +527,8 @@ class EntriesExport
      */
     private function getSanitizedFilename()
     {
-        return preg_replace('/[^A-Za-z0-9\- \']/', '', iconv('utf-8', 'us-ascii//TRANSLIT', $this->title));
+        $transliterator = \Transliterator::createFromRules(':: Any-Latin; :: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: NFC;', \Transliterator::FORWARD);
+
+        return preg_replace('/[^A-Za-z0-9\- \']/', '', $transliterator->transliterate($this->title));
     }
 }
