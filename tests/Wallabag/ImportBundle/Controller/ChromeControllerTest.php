@@ -114,13 +114,13 @@ class ChromeControllerTest extends WallabagCoreTestCase
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
             ->findByUrlAndUserId(
-                'https://www.usinenouvelle.com/article/la-multiplication-des-chefs-de-projet-est-une-catastrophe-manageriale-majeure-affirme-le-sociologue-francois-dupuy.N307730',
+                'https://www.20minutes.fr/sport/3256363-20220321-tournoi-vi-nations-trophee-gagne-xv-france-fini-fond-seine',
                 $this->getLoggedInUserId()
             );
 
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
-        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://www.usinenouvelle.com is ok');
-        $this->assertNotEmpty($content->getLanguage(), 'Language for http://www.usinenouvelle.com is ok');
+        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.20minutes.fr is ok');
+        $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.20minutes.fr is ok');
         $this->assertCount(1, $content->getTags());
 
         $createdAt = $content->getCreatedAt();
