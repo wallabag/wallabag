@@ -351,7 +351,7 @@ class DownloadImages
             $this->logger->debug('DownloadImages: Checking extension (alternative)', ['ext' => $ext]);
         }
 
-        if (!\in_array($ext, ['jpeg', 'jpg', 'gif', 'png','webp'], true)) {
+        if (!\in_array($ext, ['jpeg', 'jpg', 'gif', 'png', 'webp'], true)) {
             $this->logger->error('DownloadImages: Processed image with not allowed extension. Skipping: ' . $imagePath);
 
             return false;
