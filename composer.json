@@ -96,7 +96,7 @@
         "tecnickcom/tcpdf": "^6.3.0",
         "twig/extensions": "^1.5",
         "wallabag/php-mobi": "~1.0",
-        "wallabag/phpepub": "^4.0.7.2",
+        "wallabag/phpepub": "^4.0.10",
         "willdurand/hateoas-bundle": "~2.1"
     },
     "require-dev": {
