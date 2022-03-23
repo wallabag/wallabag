@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2a0e9af279e198c254d9a8e8b53044f0",
+    "content-hash": "bc4de754a149aefb830b843e23cdbaff",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -11316,16 +11316,16 @@
         },
         {
             "name": "wallabag/php-mobi",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wallabag/php-mobi.git",
-                "reference": "bfe9c18d038e5ca24664cfdab107a645ac57c9b5"
+                "reference": "e725dd27e2d15830a54da27bab08ccef816890aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wallabag/php-mobi/zipball/bfe9c18d038e5ca24664cfdab107a645ac57c9b5",
-                "reference": "bfe9c18d038e5ca24664cfdab107a645ac57c9b5",
+                "url": "https://api.github.com/repos/wallabag/php-mobi/zipball/e725dd27e2d15830a54da27bab08ccef816890aa",
+                "reference": "e725dd27e2d15830a54da27bab08ccef816890aa",
                 "shasum": ""
             },
             "require": {
@@ -11358,9 +11358,9 @@
             "homepage": "https://github.com/wallabag/php-mobi",
             "support": {
                 "issues": "https://github.com/wallabag/php-mobi/issues",
-                "source": "https://github.com/wallabag/php-mobi/tree/1.1.0"
+                "source": "https://github.com/wallabag/php-mobi/tree/1.1.1"
             },
-            "time": "2019-08-08T12:26:23+00:00"
+            "time": "2022-03-22T10:25:12+00:00"
         },
         {
             "name": "wallabag/phpepub",
@@ -12930,6 +12930,7 @@
         "ext-gd": "*",
         "ext-hash": "*",
         "ext-iconv": "*",
+        "ext-intl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
         "ext-pcre": "*",
