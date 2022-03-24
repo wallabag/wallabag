@@ -10,6 +10,7 @@
 wallabag is a self-hostable PHP application allowing you to not miss any content anymore.
 Click, save and read it when you can. It extracts content so that you can read it when you have time.
 
+HIII
 More information on our website: [wallabag.org](https://wallabag.org).
 
 If you do not have your own server, consider [the wallabag.it hosting solution](https://wallabag.it).
