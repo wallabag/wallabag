@@ -34,6 +34,7 @@
     },
     "require": {
         "php": ">=7.2.5",
+        "composer": "< 2.3",
         "ext-ctype": "*",
         "ext-curl": "*",
         "ext-dom": "*",

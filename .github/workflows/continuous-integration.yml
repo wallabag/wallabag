@@ -50,7 +50,7 @@ jobs:
         with:
           php-version: "${{ matrix.php }}"
           coverage: none
-          tools: pecl, composer:v2
+          tools: pecl, composer:2.2
           extensions: json, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
 
