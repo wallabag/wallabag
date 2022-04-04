@@ -1,0 +1,2 @@
+XDEBUG_MODE=debug
+XDEBUG_TRIGGER=yes
