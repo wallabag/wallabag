@@ -88,7 +88,7 @@
         "scheb/two-factor-bundle": "^4.11.0",
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^5.2",
-        "sentry/sentry-symfony": "3.5.3",
+        "sentry/sentry-symfony": "4.2.8",
         "stof/doctrine-extensions-bundle": "^1.2",
         "symfony/dom-crawler": "^3.4",
         "symfony/monolog-bundle": "^3.1",
