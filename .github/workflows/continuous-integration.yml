@@ -41,7 +41,7 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v2"
+        uses: "actions/checkout@v3"
         with:
           fetch-depth: 2
 
@@ -54,11 +54,21 @@ jobs:
           extensions: json, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
 
+      - name: "Install MySQL (for PHP < 7.4)"
+        # there is an issue with PHP < 7.4 and MySQL 8 with `caching_sha2_password`
+        if: "${{ matrix.database == 'mysql' && (matrix.php == '7.2' || matrix.php == '7.3') }}"
+        uses: shogo82148/actions-setup-mysql@v1
+        with:
+          root-password: root
+          mysql-version: '5.7'
+
+      - name: "Install MySQL (for PHP >= 7.4)"
+        if: "${{ matrix.database == 'mysql' && matrix.php != '7.2' && matrix.php != '7.3' }}"
+        run: sudo systemctl start mysql.service
+
       - name: "Setup MySQL"
         if: "${{ matrix.database == 'mysql' }}"
-        run: |
-          sudo systemctl start mysql.service
-          sudo mysql -u root -proot -e "CREATE DATABASE wallabag_test"
+        run: sudo mysql -u root -proot -h 127.0.0.1 -e "CREATE DATABASE wallabag_test"
 
       - name: "Setup PostgreSQL"
         if: "${{ matrix.database == 'pgsql' }}"
