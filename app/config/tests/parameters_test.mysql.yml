@@ -1,6 +1,6 @@
 parameters:
     test_database_driver: pdo_mysql
-    test_database_host: localhost
+    test_database_host: 127.0.0.1
     test_database_port: 3306
     test_database_name: wallabag_test
     test_database_user: root
