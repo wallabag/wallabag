@@ -7,6 +7,9 @@ on:
       - master
       - 2.*
 
+permissions:
+  contents: read
+
 jobs:
   translations:
     name: "Translations"
