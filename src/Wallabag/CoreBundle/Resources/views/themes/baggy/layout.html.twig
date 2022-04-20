@@ -57,6 +57,11 @@
 {% endblock %}
 
 {% block messages %}
+    <div style="margin-top: 10px; color: #e01a15; border-left: 20px #e01a15 solid; padding-left: 10px; border-bottom: 6px #e01a15 solid; border-bottom-left-radius: 10px;">
+        <h3>⚠️ You are using the Baggy theme which is now deprecated.</h3>
+        <p>It will be removed in the next version. You can use the Material theme by <a href="{{ path('config') }}">updating the theme config</a>.</p>
+    </div>
+
     {% for flashMessage in app.session.flashbag.get('notice') %}
         <div class="messages success">
             <a href="#" class="closeMessage">×</a>
