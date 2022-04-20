@@ -11,17 +11,19 @@ class ConfigRestControllerTest extends WallabagApiTestCase
         $this->client->request('GET', '/api/config.json');
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
-        $content = json_decode($this->client->getResponse()->getContent(), true);
+        $config = json_decode($this->client->getResponse()->getContent(), true);
 
-        $this->assertArrayHasKey('id', $content);
-        $this->assertArrayHasKey('items_per_page', $content);
-        $this->assertArrayHasKey('language', $content);
-        $this->assertArrayHasKey('reading_speed', $content);
-        $this->assertArrayHasKey('action_mark_as_read', $content);
-        $this->assertArrayHasKey('list_mode', $content);
+        $this->assertArrayHasKey('id', $config);
+        $this->assertArrayHasKey('items_per_page', $config);
+        $this->assertArrayHasKey('language', $config);
+        $this->assertArrayHasKey('reading_speed', $config);
+        $this->assertArrayHasKey('action_mark_as_read', $config);
+        $this->assertArrayHasKey('list_mode', $config);
 
-        $this->assertSame(200.0, $content['reading_speed']);
-        $this->assertSame('en', $content['language']);
+        $this->assertSame(200.0, $config['reading_speed']);
+        $this->assertSame('en', $config['language']);
+
+        $this->assertCount(6, $config);
 
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
@@ -32,12 +34,12 @@ class ConfigRestControllerTest extends WallabagApiTestCase
         $client->request('GET', '/api/config.json');
         $this->assertSame(401, $client->getResponse()->getStatusCode());
 
-        $content = json_decode($client->getResponse()->getContent(), true);
+        $config = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertArrayHasKey('error', $content);
-        $this->assertArrayHasKey('error_description', $content);
+        $this->assertArrayHasKey('error', $config);
+        $this->assertArrayHasKey('error_description', $config);
 
-        $this->assertSame('access_denied', $content['error']);
+        $this->assertSame('access_denied', $config['error']);
 
         $this->assertSame('application/json', $client->getResponse()->headers->get('Content-Type'));
     }
