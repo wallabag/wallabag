@@ -193,7 +193,7 @@ class TagController extends Controller
     }
 
     /**
-     * Tag search results with the current search term
+     * Tag search results with the current search term.
      *
      * @Route("/tag/search/{filter}", name="tag_this_search")
      *
@@ -201,7 +201,7 @@ class TagController extends Controller
      */
     public function tagThisSearchAction($filter, Request $request)
     {
-        $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
+        $currentRoute = $request->query->has('currentRoute') ? $request->query->get('currentRoute') : '';
 
         /** @var QueryBuilder $qb */
         $qb = $this->get('wallabag_core.entry_repository')->getBuilderForSearchByUser($this->getUser()->getId(), $filter, $currentRoute);

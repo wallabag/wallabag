@@ -482,12 +482,6 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $entry = new Entry($this->getLoggedInUser());
-        $entry->setUrl('https://wallabag/');
-        $entry->setTitle('title');
-        $this->getEntityManager()->persist($entry);
-        $this->getEntityManager()->flush();
-
         // Search on unread list
         $crawler = $client->request('GET', '/unread/list');
 
@@ -498,17 +492,19 @@ class TagControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $crawler = $client->click($crawler->selectLink('entry.list.assign_search_tag')->link());
-        $crawler = $client->followRedirect();
+        $client->click($crawler->selectLink('entry.list.assign_search_tag')->link());
+        $client->followRedirect();
 
         $entries = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->getBuilderForSearchByUser($this->getLoggedInUserId(), 'title', 'unread');
+            ->getBuilderForSearchByUser($this->getLoggedInUserId(), 'title', 'unread')
+            ->getQuery()->getResult();
 
         foreach ($entries as $entry) {
-            $tags = $entry->getTags()->toArray();
-            $this->assertStringContainsString('title', $tags);
+            $tags = $entry->getTagsLabel();
+
+            $this->assertContains('title', $tags);
         }
     }
 }
