@@ -23,8 +23,8 @@ dovreste mettere « readingTime &lt;= 3 » nel campo **Regola** e *«
 lettura corta »* nel campo **Etichette**. Molte etichette possono essere
 aggiunte simultaneamente separandole con una virgola: *« lettura corta,
 da leggere »*. Si possono scrivere regole complesse usando gli operatori
-predefiniti: se *« readingTime &gt;= 5 AND domainName = "github.com" »*
-allora etichetta come *« lettura lunga, github »*.
+predefiniti: se *« readingTime &gt;= 5 AND domainName = "www.php.net" »*
+allora etichetta come *« lettura lunga, php »*.
 
 Quali variabili ed operatori posso usare per scrivere le regole?
 

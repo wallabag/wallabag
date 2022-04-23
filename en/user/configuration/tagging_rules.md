@@ -19,7 +19,7 @@ readingTime &lt;= 3 » in the **Rule** field and *« short reading »* in
 the **Tags** field. Several tags can added simultaneously by separating
 them by a comma: *« short reading, must read »*. Complex rules can be
 written by using predefined operators: if *« readingTime &gt;= 5 AND
-domainName = "github.com" »* then tag as *« long reading, github »*.
+domainName = "www.php.net" »* then tag as *« long reading, php »*.
 
 ## Which variables and operators can I use to write rules?
 

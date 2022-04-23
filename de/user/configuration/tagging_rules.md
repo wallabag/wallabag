@@ -25,7 +25,7 @@ gelesen* in das Tags-Feld. Mehrere Tags können gleichzeitig hinzugefügt
 werden, wenn man sie mit einem Komma trennt: *schnell gelesen,
 Pflichtlektüre*. Komplexe Regeln können mit vordefinierten Operatoren
 geschrieben werden: Wenn *readingTime &gt;= 5 AND domainName =
-"github.com"*, dann tagge als *lange zu lesen, github*.
+"www.php.net"*, dann tagge als *lange zu lesen, php*.
 
 ### Welche Variablen und Operatoren kann ich zum Regeln schreiben nutzen?
 
