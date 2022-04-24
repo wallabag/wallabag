@@ -165,7 +165,7 @@ config:
                 notmatches: <i>対象</i>が<i>検索</i>と一致しないことをテストする（大文字小文字の区別なし）。<br />例:<code>title notmatches "football"</code>
                 matches: <i>対象</i>が<i>検索</i>と一致するかテストする（大文字小文字の区別なし）。<br />例:<code>title matches "football"</code>
             tagging_rules_definition_description: wallabag ではルールを使用することで新しい記事へ自動的にタグ付けする事ができます。<br />新しい記事が追加されるたびに、あなたが設定したすべてのタグ付けルールを使用してタグが追加されるので、記事を手動で分類する手間が省けます。
-            how_to_use_them_description: 'あなたは読了時間が3分以下の時に新しい記事へ « <i>短い文章</i> » のタグ付けをしたいとします。<br />この場合、<i>ルール</i>に « readingTime &lt;= 3 »と<i>タグ</i>に « <i>短い文章</i> » を設定します。<br />コンマで区切ることにより複数のタグを追加することができます: « <i>短い文章, 必読</i> »<br />演算子を使用することにより複雑なルールを書くことができます: もし « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> »ならばタグ付け « <i>長い文章, GitHub </i> »'
+            how_to_use_them_description: 'あなたは読了時間が3分以下の時に新しい記事へ « <i>短い文章</i> » のタグ付けをしたいとします。<br />この場合、<i>ルール</i>に « readingTime &lt;= 3 »と<i>タグ</i>に « <i>短い文章</i> » を設定します。<br />コンマで区切ることにより複数のタグを追加することができます: « <i>短い文章, 必読</i> »<br />演算子を使用することにより複雑なルールを書くことができます: もし « <i>readingTime &gt;= 5 AND domainName = "www.php.net"</i> »ならばタグ付け « <i>長い文章, php</i> »'
         delete_rule_label: 削除
         export: エクスポート
         import_submit: インポート

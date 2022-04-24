@@ -160,7 +160,7 @@ config:
             tagging_rules_definition_title: '“标签规则”是什么意思？'
             tagging_rules_definition_description: '它们是 wallabag 用来给新项目自动打上标签的规则。<br />每当一个新项目被添加进来，所有标签规则都会作用于这个项目，为它打上你配置好的标签，免去你手动分类的麻烦。'
             how_to_use_them_title: '我该怎么使用它们？'
-            how_to_use_them_description: '假设你想要将一个阅读时间短于 3 分钟的新项目标记为“ <i>短阅读</i> ”。<br /> 你应该在 <i>规则</i> 区域输入“readingTime &lt;= 3”，并在 <i>标签</i> 区域输入“<i>短阅读</i>”。<br /> 可以同时添加数个标签，只需要用半角逗号来隔开它们，如：“<i>短阅读, 必读</i>”<br /> 可以使用预定义的操作符来编写复杂的规则，如：如果“ <i>readingTime &gt;= 5 AND domainName ="github.com"</i>”则标记为“<i>长阅读, github</i>”'
+            how_to_use_them_description: '假设你想要将一个阅读时间短于 3 分钟的新项目标记为“ <i>短阅读</i> ”。<br /> 你应该在 <i>规则</i> 区域输入“readingTime &lt;= 3”，并在 <i>标签</i> 区域输入“<i>短阅读</i>”。<br /> 可以同时添加数个标签，只需要用半角逗号来隔开它们，如：“<i>短阅读, 必读</i>”<br /> 可以使用预定义的操作符来编写复杂的规则，如：如果“ <i>readingTime &gt;= 5 AND domainName ="www.php.net"</i>”则标记为“<i>长阅读, php</i>”'
             variables_available_title: '我可以使用哪些变量和操作符来编写规则？'
             variables_available_description: '可以使用以下变量和操作符来编写标签规则：'
             meaning: '含义'

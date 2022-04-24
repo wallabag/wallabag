@@ -203,7 +203,7 @@ config:
             title: PMF
     form_rules:
         faq:
-            how_to_use_them_description: 'Demos por feito que queres etiquetar as novas entradas con « <i>lectura rápida</i> » cando o tempo de lectura non supera os 3 minutos.<br />Neste caso, tes que poñer « TempodeLectura &lt;= 3 » no campo da <i>Regra</i> e « <i>lectura rápida</i> » no campo da <i>Etiqueta</i> .<br />Podes engadir varias etiquetas ó mesmo tempo separándoas cunha vírgula: « <i>lectura rápida, teño que ler</i> »<br />Pódense establecer regras complexas usando os operadores predefinidos: se o « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » entón etiquetar como « <i>lectura longa, GitHub </i> »'
+            how_to_use_them_description: 'Demos por feito que queres etiquetar as novas entradas con « <i>lectura rápida</i> » cando o tempo de lectura non supera os 3 minutos.<br />Neste caso, tes que poñer « TempodeLectura &lt;= 3 » no campo da <i>Regra</i> e « <i>lectura rápida</i> » no campo da <i>Etiqueta</i> .<br />Podes engadir varias etiquetas ó mesmo tempo separándoas cunha vírgula: « <i>lectura rápida, teño que ler</i> »<br />Pódense establecer regras complexas usando os operadores predefinidos: se o « <i>readingTime &gt;= 5 AND domainName = "www.php.net"</i> » entón etiquetar como « <i>lectura longa, php</i> »'
             operator_description:
                 notmatches: 'Comproba que o <i>obxecto</i> non contén a <i>busca</i> (non dif. maiúsculas).<br />Exemplo: <code>título non contén "saúde"</code>'
                 matches: 'Comproba que un <i>obxecto</i> concorda coa <i>busca</i> (dif. maius.-minus.).<br />Exemplo: <code>título contén "saúde"</code>'
