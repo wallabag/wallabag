@@ -21,7 +21,7 @@ vous devez ajouter « readingTime &lt;= 3 » dans le champ **Règle** et
 ajoutés en même temps en les séparant par une virgule : *« lecture
 rapide, à lire »*. Des règles complexes peuvent être écrites en
 utilisant les opérateurs pré-définis : if *« readingTime &gt;= 5 AND
-domainName = "github.com" »* then tag as *« long reading, github »*.
+domainName = "www.php.net" »* then tag as *« long reading, php »*.
 
 ## Quels variables et opérateurs puis-je utiliser pour écrire mes règles ?
 
