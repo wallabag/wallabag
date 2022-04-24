@@ -119,6 +119,7 @@ services:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: firefox }
+
     wallabag_import.chrome.import:
         class: Wallabag\ImportBundle\Import\ChromeImport
         arguments:
