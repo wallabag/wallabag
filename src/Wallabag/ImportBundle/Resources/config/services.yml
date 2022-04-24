@@ -3,7 +3,7 @@ imports:
     - { resource: redis.yml }
 
 services:
-    wallabag_import.chain:
+    Wallabag\ImportBundle\Import\ImportChain:
         class: Wallabag\ImportBundle\Import\ImportChain
 
     wallabag_import.pocket.client:

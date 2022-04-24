@@ -4,6 +4,7 @@ namespace Wallabag\ImportBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
+use Wallabag\ImportBundle\Import\ImportChain;
 
 class ImportController extends Controller
 {
@@ -13,7 +14,7 @@ class ImportController extends Controller
     public function importAction()
     {
         return $this->render('WallabagImportBundle:Import:index.html.twig', [
-            'imports' => $this->get('wallabag_import.chain')->getAll(),
+            'imports' => $this->get(ImportChain::class)->getAll(),
         ]);
     }
 
