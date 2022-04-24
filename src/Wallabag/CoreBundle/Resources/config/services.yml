@@ -190,7 +190,7 @@ services:
             - "@security.token_storage"
             - "@router"
 
-    wallabag_core.redis.client:
+    Predis\Client:
         class: Predis\Client
         arguments:
             -

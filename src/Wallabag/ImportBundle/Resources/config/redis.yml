@@ -4,7 +4,7 @@ services:
     wallabag_import.queue.redis.readability:
         class: Simpleue\Queue\RedisQueue
         arguments:
-            - "@wallabag_core.redis.client"
+            - '@Predis\Client'
             - "wallabag.import.readability"
 
     wallabag_import.producer.redis.readability:
@@ -25,7 +25,7 @@ services:
     wallabag_import.queue.redis.instapaper:
         class: Simpleue\Queue\RedisQueue
         arguments:
-            - "@wallabag_core.redis.client"
+            - '@Predis\Client'
             - "wallabag.import.instapaper"
 
     wallabag_import.producer.redis.instapaper:
@@ -46,7 +46,7 @@ services:
     wallabag_import.queue.redis.pinboard:
         class: Simpleue\Queue\RedisQueue
         arguments:
-            - "@wallabag_core.redis.client"
+            - '@Predis\Client'
             - "wallabag.import.pinboard"
 
     wallabag_import.producer.redis.pinboard:
@@ -67,7 +67,7 @@ services:
     wallabag_import.queue.redis.delicious:
         class: Simpleue\Queue\RedisQueue
         arguments:
-            - "@wallabag_core.redis.client"
+            - '@Predis\Client'
             - "wallabag.import.delicious"
 
     wallabag_import.producer.redis.delicious:
@@ -88,7 +88,7 @@ services:
     wallabag_import.queue.redis.pocket:
         class: Simpleue\Queue\RedisQueue
         arguments:
-            - "@wallabag_core.redis.client"
+            - '@Predis\Client'
             - "wallabag.import.pocket"
 
     wallabag_import.producer.redis.pocket:
@@ -109,7 +109,7 @@ services:
     wallabag_import.queue.redis.wallabag_v1:
         class: Simpleue\Queue\RedisQueue
         arguments:
-            - "@wallabag_core.redis.client"
+            - '@Predis\Client'
             - "wallabag.import.wallabag_v1"
 
     wallabag_import.producer.redis.wallabag_v1:
@@ -130,7 +130,7 @@ services:
     wallabag_import.queue.redis.wallabag_v2:
         class: Simpleue\Queue\RedisQueue
         arguments:
-            - "@wallabag_core.redis.client"
+            - '@Predis\Client'
             - "wallabag.import.wallabag_v2"
 
     wallabag_import.producer.redis.wallabag_v2:
@@ -151,7 +151,7 @@ services:
     wallabag_import.queue.redis.elcurator:
         class: Simpleue\Queue\RedisQueue
         arguments:
-            - "@wallabag_core.redis.client"
+            - '@Predis\Client'
             - "wallabag.import.elcurator"
 
     wallabag_import.producer.redis.elcurator:
@@ -172,7 +172,7 @@ services:
     wallabag_import.queue.redis.firefox:
         class: Simpleue\Queue\RedisQueue
         arguments:
-            - "@wallabag_core.redis.client"
+            - '@Predis\Client'
             - "wallabag.import.firefox"
 
     wallabag_import.producer.redis.firefox:
@@ -193,7 +193,7 @@ services:
     wallabag_import.queue.redis.chrome:
         class: Simpleue\Queue\RedisQueue
         arguments:
-            - "@wallabag_core.redis.client"
+            - '@Predis\Client'
             - "wallabag.import.chrome"
 
     wallabag_import.producer.redis.chrome:

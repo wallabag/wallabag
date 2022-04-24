@@ -3,6 +3,7 @@
 namespace Tests\Wallabag\ImportBundle\Command;
 
 use M6Web\Component\RedisMock\RedisMockFactory;
+use Predis\Client;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
@@ -51,7 +52,7 @@ class RedisWorkerCommandTest extends WallabagCoreTestCase
         $factory = new RedisMockFactory();
         $redisMock = $factory->getAdapter('Predis\Client', true);
 
-        $application->getKernel()->getContainer()->set('wallabag_core.redis.client', $redisMock);
+        $application->getKernel()->getContainer()->set(Client::class, $redisMock);
 
         // put a fake message in the queue so the worker will stop after reading that message
         // instead of waiting for others
