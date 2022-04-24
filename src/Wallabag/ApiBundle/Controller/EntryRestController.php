@@ -18,6 +18,7 @@ use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Helper\EntriesExport;
 use Wallabag\CoreBundle\Helper\TagsAssigner;
 use Wallabag\CoreBundle\Helper\UrlHasher;
+use Wallabag\CoreBundle\Repository\EntryRepository;
 
 class EntryRestController extends WallabagRestController
 {
@@ -138,7 +139,7 @@ class EntryRestController extends WallabagRestController
 
         try {
             /** @var \Pagerfanta\Pagerfanta $pager */
-            $pager = $this->get('wallabag_core.entry_repository')->findEntries(
+            $pager = $this->get(EntryRepository::class)->findEntries(
                 $this->getUser()->getId(),
                 $isArchived,
                 $isStarred,
@@ -247,7 +248,7 @@ class EntryRestController extends WallabagRestController
 
         // handle multiple urls
         foreach ($urls as $key => $url) {
-            $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
+            $entry = $this->get(EntryRepository::class)->findByUrlAndUserId(
                 $url,
                 $this->getUser()->getId()
             );
@@ -301,7 +302,7 @@ class EntryRestController extends WallabagRestController
 
         // handle multiple urls
         foreach ($urls as $key => $url) {
-            $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
+            $entry = $this->get(EntryRepository::class)->findByUrlAndUserId(
                 $url,
                 $this->getUser()->getId()
             );
@@ -358,7 +359,7 @@ class EntryRestController extends WallabagRestController
 
         $url = $request->request->get('url');
 
-        $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
+        $entry = $this->get(EntryRepository::class)->findByUrlAndUserId(
             $url,
             $this->getUser()->getId()
         );
@@ -736,7 +737,7 @@ class EntryRestController extends WallabagRestController
         $results = [];
 
         foreach ($list as $key => $element) {
-            $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
+            $entry = $this->get(EntryRepository::class)->findByUrlAndUserId(
                 $element->url,
                 $this->getUser()->getId()
             );
@@ -794,7 +795,7 @@ class EntryRestController extends WallabagRestController
 
         // handle multiple urls
         foreach ($list as $key => $element) {
-            $entry = $this->get('wallabag_core.entry_repository')->findByUrlAndUserId(
+            $entry = $this->get(EntryRepository::class)->findByUrlAndUserId(
                 $element->url,
                 $this->getUser()->getId()
             );

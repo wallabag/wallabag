@@ -11,8 +11,8 @@ services:
         class: Wallabag\CoreBundle\Twig\WallabagExtension
         public: false
         arguments:
-            - "@wallabag_core.entry_repository"
-            - "@wallabag_core.tag_repository"
+            - '@Wallabag\CoreBundle\Repository\EntryRepository'
+            - '@Wallabag\CoreBundle\Repository\TagRepository'
             - "@security.token_storage"
             - "%wallabag_core.cache_lifetime%"
             - "@translator"

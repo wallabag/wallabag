@@ -8,6 +8,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Helper\EntriesExport;
+use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\CoreBundle\Repository\TagRepository;
 
 /**
  * The try/catch can be removed once all formats will be implemented.
@@ -57,11 +59,11 @@ class ExportController extends Controller
     {
         $method = ucfirst($category);
         $methodBuilder = 'getBuilderFor' . $method . 'ByUser';
-        $repository = $this->get('wallabag_core.entry_repository');
+        $repository = $this->get(EntryRepository::class);
         $title = $method;
 
         if ('tag_entries' === $category) {
-            $tag = $this->get('wallabag_core.tag_repository')->findOneBySlug($request->query->get('tag'));
+            $tag = $this->get(TagRepository::class)->findOneBySlug($request->query->get('tag'));
 
             $entries = $repository->findAllByTagId(
                 $this->getUser()->getId(),

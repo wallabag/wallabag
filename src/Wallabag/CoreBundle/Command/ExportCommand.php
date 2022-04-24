@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Wallabag\CoreBundle\Helper\EntriesExport;
+use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\UserBundle\Repository\UserRepository;
 
 class ExportCommand extends ContainerAwareCommand
@@ -44,7 +45,7 @@ class ExportCommand extends ContainerAwareCommand
             return 1;
         }
 
-        $entries = $this->getContainer()->get('wallabag_core.entry_repository')
+        $entries = $this->getContainer()->get(EntryRepository::class)
             ->getBuilderForAllByUser($user->getId())
             ->getQuery()
             ->getResult();

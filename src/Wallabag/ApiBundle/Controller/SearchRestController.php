@@ -9,6 +9,7 @@ use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Wallabag\CoreBundle\Repository\EntryRepository;
 
 class SearchRestController extends WallabagRestController
 {
@@ -33,7 +34,7 @@ class SearchRestController extends WallabagRestController
         $page = (int) $request->query->get('page', 1);
         $perPage = (int) $request->query->get('perPage', 30);
 
-        $qb = $this->get('wallabag_core.entry_repository')
+        $qb = $this->get(EntryRepository::class)
             ->getBuilderForSearchByUser(
                 $this->getUser()->getId(),
                 $term,

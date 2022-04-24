@@ -9,6 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
 use Wallabag\CoreBundle\Helper\DownloadImages;
+use Wallabag\CoreBundle\Repository\EntryRepository;
 
 class CleanDownloadedImagesCommand extends ContainerAwareCommand
 {
@@ -57,7 +58,7 @@ class CleanDownloadedImagesCommand extends ContainerAwareCommand
 
         $io->text('Retrieve valid folders attached to a user');
 
-        $entries = $this->getContainer()->get('wallabag_core.entry_repository')->findAllEntriesIdByUserId();
+        $entries = $this->getContainer()->get(EntryRepository::class)->findAllEntriesIdByUserId();
 
         // retrieve _valid_ folders from existing entries
         $validPaths = [];

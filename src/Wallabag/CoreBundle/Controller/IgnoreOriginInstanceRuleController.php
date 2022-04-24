@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule;
+use Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository;
 
 /**
  * IgnoreOriginInstanceRuleController controller.
@@ -21,7 +22,7 @@ class IgnoreOriginInstanceRuleController extends Controller
      */
     public function indexAction()
     {
-        $rules = $this->get('wallabag_core.ignore_origin_instance_rule_repository')->findAll();
+        $rules = $this->get(IgnoreOriginInstanceRuleRepository::class)->findAll();
 
         return $this->render('WallabagCoreBundle:IgnoreOriginInstanceRule:index.html.twig', [
             'rules' => $rules,

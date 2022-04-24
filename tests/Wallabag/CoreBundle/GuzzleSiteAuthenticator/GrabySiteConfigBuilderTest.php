@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder;
+use Wallabag\CoreBundle\Repository\SiteCredentialRepository;
 
 class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
 {
@@ -300,7 +301,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
         $builder = new GrabySiteConfigBuilder(
             $grabyConfigBuilderMock,
             $tokenStorage,
-            $this->getClient()->getContainer()->get('wallabag_core.site_credential_repository'),
+            $this->getClient()->getContainer()->get(SiteCredentialRepository::class),
             $logger
         );
 

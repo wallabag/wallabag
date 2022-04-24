@@ -17,7 +17,7 @@ services:
     Wallabag\CoreBundle\Form\Type\EntryFilterType:
         class: Wallabag\CoreBundle\Form\Type\EntryFilterType
         arguments:
-            - "@wallabag_core.entry_repository"
+            - '@Wallabag\CoreBundle\Repository\EntryRepository'
             - "@security.token_storage"
         tags:
             - { name: form.type }
@@ -63,7 +63,7 @@ services:
         arguments:
             - '@Graby\SiteConfig\ConfigBuilder'
             - "@security.token_storage"
-            - "@wallabag_core.site_credential_repository"
+            - '@Wallabag\CoreBundle\Repository\SiteCredentialRepository'
             - '@logger'
         tags:
             - { name: monolog.logger, channel: graby }
@@ -101,14 +101,14 @@ services:
     Wallabag\CoreBundle\Helper\TagsAssigner:
         class: Wallabag\CoreBundle\Helper\TagsAssigner
         arguments:
-            - "@wallabag_core.tag_repository"
+            - '@Wallabag\CoreBundle\Repository\TagRepository'
 
     Wallabag\CoreBundle\Helper\RuleBasedTagger:
         class: Wallabag\CoreBundle\Helper\RuleBasedTagger
         arguments:
             - "@rulerz"
-            - "@wallabag_core.tag_repository"
-            - "@wallabag_core.entry_repository"
+            - '@Wallabag\CoreBundle\Repository\TagRepository'
+            - '@Wallabag\CoreBundle\Repository\EntryRepository'
             - "@logger"
 
     Wallabag\CoreBundle\Helper\RuleBasedIgnoreOriginProcessor:
@@ -116,22 +116,22 @@ services:
         arguments:
             - "@rulerz"
             - "@logger"
-            - "@wallabag_core.ignore_origin_instance_rule_repository"
+            - '@Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository'
 
     # repository as a service
-    wallabag_core.entry_repository:
+    Wallabag\CoreBundle\Repository\EntryRepository:
         class: Wallabag\CoreBundle\Repository\EntryRepository
         factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
         arguments:
             - WallabagCoreBundle:Entry
 
-    wallabag_core.tag_repository:
+    Wallabag\CoreBundle\Repository\TagRepository:
         class: Wallabag\CoreBundle\Repository\TagRepository
         factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
         arguments:
             - WallabagCoreBundle:Tag
 
-    wallabag_core.site_credential_repository:
+    Wallabag\CoreBundle\Repository\SiteCredentialRepository:
         class: Wallabag\CoreBundle\Repository\SiteCredentialRepository
         factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
         arguments:
@@ -139,7 +139,7 @@ services:
         calls:
             - [ setCrypto, [ '@Wallabag\CoreBundle\Helper\CryptoProxy' ] ]
 
-    wallabag_core.ignore_origin_instance_rule_repository:
+    Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository:
         class: Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository
         factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
         arguments:

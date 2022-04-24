@@ -10,6 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
 use Wallabag\CoreBundle\Helper\ContentProxy;
+use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\UserBundle\Repository\UserRepository;
 
 class ReloadEntryCommand extends ContainerAwareCommand
@@ -42,7 +43,7 @@ class ReloadEntryCommand extends ContainerAwareCommand
             }
         }
 
-        $entryRepository = $this->getContainer()->get('wallabag_core.entry_repository');
+        $entryRepository = $this->getContainer()->get(EntryRepository::class);
         $entryIds = $entryRepository->findAllEntriesIdByUserId($userId);
 
         $nbEntries = \count($entryIds);

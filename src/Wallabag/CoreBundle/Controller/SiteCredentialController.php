@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\CoreBundle\Entity\SiteCredential;
 use Wallabag\CoreBundle\Helper\CryptoProxy;
+use Wallabag\CoreBundle\Repository\SiteCredentialRepository;
 use Wallabag\UserBundle\Entity\User;
 
 /**
@@ -25,7 +26,7 @@ class SiteCredentialController extends Controller
     {
         $this->isSiteCredentialsEnabled();
 
-        $credentials = $this->get('wallabag_core.site_credential_repository')->findByUser($this->getUser());
+        $credentials = $this->get(SiteCredentialRepository::class)->findByUser($this->getUser());
 
         return $this->render('WallabagCoreBundle:SiteCredential:index.html.twig', [
             'credentials' => $credentials,
