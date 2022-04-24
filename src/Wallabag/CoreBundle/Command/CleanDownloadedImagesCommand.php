@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
+use Wallabag\CoreBundle\Helper\DownloadImages;
 
 class CleanDownloadedImagesCommand extends ContainerAwareCommand
 {
@@ -34,7 +35,7 @@ class CleanDownloadedImagesCommand extends ContainerAwareCommand
             $io->text('Dry run mode <info>enabled</info> (no images will be removed)');
         }
 
-        $downloadImages = $this->getContainer()->get('wallabag_core.entry.download_images');
+        $downloadImages = $this->getContainer()->get(DownloadImages::class);
         $baseFolder = $downloadImages->getBaseFolder();
 
         $io->text('Retrieve existing images');

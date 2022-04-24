@@ -13,8 +13,8 @@ services:
         class: Wallabag\ImportBundle\Import\PocketImport
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@wallabag_core.content_proxy"
-            - "@wallabag_core.tags_assigner"
+            - '@Wallabag\CoreBundle\Helper\ContentProxy'
+            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
             - "@event_dispatcher"
         calls:
             - [ setClient, [ "@wallabag_import.pocket.client" ] ]
@@ -26,8 +26,8 @@ services:
         class: Wallabag\ImportBundle\Import\WallabagV1Import
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@wallabag_core.content_proxy"
-            - "@wallabag_core.tags_assigner"
+            - '@Wallabag\CoreBundle\Helper\ContentProxy'
+            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
             - "@event_dispatcher"
             - "%wallabag_core.fetching_error_message_title%"
             - "%wallabag_core.fetching_error_message%"
@@ -40,8 +40,8 @@ services:
         class: Wallabag\ImportBundle\Import\WallabagV2Import
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@wallabag_core.content_proxy"
-            - "@wallabag_core.tags_assigner"
+            - '@Wallabag\CoreBundle\Helper\ContentProxy'
+            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
@@ -52,8 +52,8 @@ services:
         class: Wallabag\ImportBundle\Import\ElcuratorImport
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@wallabag_core.content_proxy"
-            - "@wallabag_core.tags_assigner"
+            - '@Wallabag\CoreBundle\Helper\ContentProxy'
+            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
@@ -64,8 +64,8 @@ services:
         class: Wallabag\ImportBundle\Import\ReadabilityImport
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@wallabag_core.content_proxy"
-            - "@wallabag_core.tags_assigner"
+            - '@Wallabag\CoreBundle\Helper\ContentProxy'
+            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
@@ -76,8 +76,8 @@ services:
         class: Wallabag\ImportBundle\Import\InstapaperImport
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@wallabag_core.content_proxy"
-            - "@wallabag_core.tags_assigner"
+            - '@Wallabag\CoreBundle\Helper\ContentProxy'
+            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
@@ -88,8 +88,8 @@ services:
         class: Wallabag\ImportBundle\Import\PinboardImport
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@wallabag_core.content_proxy"
-            - "@wallabag_core.tags_assigner"
+            - '@Wallabag\CoreBundle\Helper\ContentProxy'
+            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
@@ -100,8 +100,8 @@ services:
         class: Wallabag\ImportBundle\Import\DeliciousImport
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@wallabag_core.content_proxy"
-            - "@wallabag_core.tags_assigner"
+            - '@Wallabag\CoreBundle\Helper\ContentProxy'
+            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
@@ -112,8 +112,8 @@ services:
         class: Wallabag\ImportBundle\Import\FirefoxImport
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@wallabag_core.content_proxy"
-            - "@wallabag_core.tags_assigner"
+            - '@Wallabag\CoreBundle\Helper\ContentProxy'
+            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
@@ -124,8 +124,8 @@ services:
         class: Wallabag\ImportBundle\Import\ChromeImport
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@wallabag_core.content_proxy"
-            - "@wallabag_core.tags_assigner"
+            - '@Wallabag\CoreBundle\Helper\ContentProxy'
+            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]

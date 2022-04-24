@@ -406,7 +406,7 @@ sensio_framework_extra:
 httplug:
     clients:
         wallabag_core:
-            factory: 'wallabag_core.http_client_factory'
+            factory: Wallabag\CoreBundle\Helper\HttpClientFactory
             config:
                 defaults:
                     timeout: 10

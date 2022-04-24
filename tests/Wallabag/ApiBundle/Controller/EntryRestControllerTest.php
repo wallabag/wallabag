@@ -564,7 +564,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $contentProxy->expects($this->any())
             ->method('updateEntry')
             ->willThrowException(new \Exception('Test Fetch content fails'));
-        $container->set('wallabag_core.content_proxy', $contentProxy);
+        $container->set(ContentProxy::class, $contentProxy);
 
         try {
             $this->client->request('POST', '/api/entries.json', [

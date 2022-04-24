@@ -18,6 +18,9 @@ use Wallabag\CoreBundle\Form\Type\EditEntryType;
 use Wallabag\CoreBundle\Form\Type\EntryFilterType;
 use Wallabag\CoreBundle\Form\Type\NewEntryType;
 use Wallabag\CoreBundle\Form\Type\SearchEntryType;
+use Wallabag\CoreBundle\Helper\ContentProxy;
+use Wallabag\CoreBundle\Helper\PreparePagerForEntries;
+use Wallabag\CoreBundle\Helper\Redirect;
 
 class EntryController extends Controller
 {
@@ -98,7 +101,7 @@ class EntryController extends Controller
             $em->flush();
         }
 
-        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'));
+        $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'));
 
         return $this->redirect($redirectUrl);
     }
@@ -431,7 +434,7 @@ class EntryController extends Controller
             $message
         );
 
-        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'));
+        $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'));
 
         return $this->redirect($redirectUrl);
     }
@@ -461,7 +464,7 @@ class EntryController extends Controller
             $message
         );
 
-        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'));
+        $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'));
 
         return $this->redirect($redirectUrl);
     }
@@ -501,7 +504,7 @@ class EntryController extends Controller
         $referer = $request->headers->get('referer');
         $to = (1 !== preg_match('#' . $url . '$#i', $referer) ? $referer : null);
 
-        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($to);
+        $redirectUrl = $this->get(Redirect::class)->to($to);
 
         return $this->redirect($redirectUrl);
     }
@@ -647,7 +650,7 @@ class EntryController extends Controller
 
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
 
-        $entries = $this->get('wallabag_core.helper.prepare_pager_for_entries')->prepare($pagerAdapter);
+        $entries = $this->get(PreparePagerForEntries::class)->prepare($pagerAdapter);
 
         try {
             $entries->setCurrentPage($page);
@@ -683,7 +686,7 @@ class EntryController extends Controller
         $message = 'flashes.entry.notice.' . $prefixMessage;
 
         try {
-            $this->get('wallabag_core.content_proxy')->updateEntry($entry, $entry->getUrl());
+            $this->get(ContentProxy::class)->updateEntry($entry, $entry->getUrl());
         } catch (\Exception $e) {
             $this->get('logger')->error('Error while saving an entry', [
                 'exception' => $e,
@@ -694,11 +697,11 @@ class EntryController extends Controller
         }
 
         if (empty($entry->getDomainName())) {
-            $this->get('wallabag_core.content_proxy')->setEntryDomainName($entry);
+            $this->get(ContentProxy::class)->setEntryDomainName($entry);
         }
 
         if (empty($entry->getTitle())) {
-            $this->get('wallabag_core.content_proxy')->setDefaultEntryTitle($entry);
+            $this->get(ContentProxy::class)->setDefaultEntryTitle($entry);
         }
 
         $this->get('session')->getFlashBag()->add('notice', $message);

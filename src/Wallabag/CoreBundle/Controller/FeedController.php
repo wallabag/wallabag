@@ -14,6 +14,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Helper\PreparePagerForEntries;
 use Wallabag\UserBundle\Entity\User;
 
 class FeedController extends Controller
@@ -121,7 +122,7 @@ class FeedController extends Controller
 
         $pagerAdapter = new ArrayAdapter($entriesByTag);
 
-        $entries = $this->get('wallabag_core.helper.prepare_pager_for_entries')->prepare(
+        $entries = $this->get(PreparePagerForEntries::class)->prepare(
             $pagerAdapter,
             $user
         );

@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Wallabag\CoreBundle\Helper\EntriesExport;
 use Wallabag\UserBundle\Repository\UserRepository;
 
 class ExportCommand extends ContainerAwareCommand
@@ -57,7 +58,7 @@ class ExportCommand extends ContainerAwareCommand
         }
 
         try {
-            $data = $this->getContainer()->get('wallabag_core.helper.entries_export')
+            $data = $this->getContainer()->get(EntriesExport::class)
                 ->setEntries($entries)
                 ->updateTitle('All')
                 ->updateAuthor('All')

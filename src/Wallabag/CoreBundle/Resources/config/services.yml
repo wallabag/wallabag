@@ -72,38 +72,38 @@ services:
     bd_guzzle_site_authenticator.site_config_builder:
         alias: wallabag_core.guzzle_authenticator.config_builder
 
-    wallabag_core.http_client_factory:
+    Wallabag\CoreBundle\Helper\HttpClientFactory:
         class: Wallabag\CoreBundle\Helper\HttpClientFactory
         arguments:
-            - "@wallabag_core.guzzle.cookie_jar"
+            - '@Wallabag\CoreBundle\Helper\FileCookieJar'
             - '@=service(''craue_config'').get(''restricted_access'')'
             - '@logger'
         calls:
             - ["addSubscriber", ["@bd_guzzle_site_authenticator.authenticator_subscriber"]]
 
-    wallabag_core.guzzle.cookie_jar:
+    Wallabag\CoreBundle\Helper\FileCookieJar:
         class: Wallabag\CoreBundle\Helper\FileCookieJar
         arguments:
             - "@logger"
             - "%kernel.cache_dir%/cookiejar.json"
 
-    wallabag_core.content_proxy:
+    Wallabag\CoreBundle\Helper\ContentProxy:
         class: Wallabag\CoreBundle\Helper\ContentProxy
         arguments:
             - '@Graby\Graby'
-            - "@wallabag_core.rule_based_tagger"
-            - "@wallabag_core.rule_based_ignore_origin_processor"
+            - '@Wallabag\CoreBundle\Helper\RuleBasedTagger'
+            - '@Wallabag\CoreBundle\Helper\RuleBasedIgnoreOriginProcessor'
             - "@validator"
             - "@logger"
             - '%wallabag_core.fetching_error_message%'
             - '@=service(''craue_config'').get(''store_article_headers'')'
 
-    wallabag_core.tags_assigner:
+    Wallabag\CoreBundle\Helper\TagsAssigner:
         class: Wallabag\CoreBundle\Helper\TagsAssigner
         arguments:
             - "@wallabag_core.tag_repository"
 
-    wallabag_core.rule_based_tagger:
+    Wallabag\CoreBundle\Helper\RuleBasedTagger:
         class: Wallabag\CoreBundle\Helper\RuleBasedTagger
         arguments:
             - "@rulerz"
@@ -111,7 +111,7 @@ services:
             - "@wallabag_core.entry_repository"
             - "@logger"
 
-    wallabag_core.rule_based_ignore_origin_processor:
+    Wallabag\CoreBundle\Helper\RuleBasedIgnoreOriginProcessor:
         class: Wallabag\CoreBundle\Helper\RuleBasedIgnoreOriginProcessor
         arguments:
             - "@rulerz"
@@ -137,7 +137,7 @@ services:
         arguments:
             - WallabagCoreBundle:SiteCredential
         calls:
-            - [ setCrypto, [ "@wallabag_core.helper.crypto_proxy" ] ]
+            - [ setCrypto, [ '@Wallabag\CoreBundle\Helper\CryptoProxy' ] ]
 
     wallabag_core.ignore_origin_instance_rule_repository:
         class: Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository
@@ -145,7 +145,7 @@ services:
         arguments:
             - WallabagCoreBundle:IgnoreOriginInstanceRule
 
-    wallabag_core.helper.entries_export:
+    Wallabag\CoreBundle\Helper\EntriesExport:
         class: Wallabag\CoreBundle\Helper\EntriesExport
         arguments:
             - "@translator"
@@ -178,13 +178,13 @@ services:
         tags:
             - { name: rulerz.operator, target: native, operator: "~" }
 
-    wallabag_core.helper.redirect:
+    Wallabag\CoreBundle\Helper\Redirect:
         class: Wallabag\CoreBundle\Helper\Redirect
         arguments:
             - "@router"
             - "@security.token_storage"
 
-    wallabag_core.helper.prepare_pager_for_entries:
+    Wallabag\CoreBundle\Helper\PreparePagerForEntries:
         class: Wallabag\CoreBundle\Helper\PreparePagerForEntries
         arguments:
             - "@security.token_storage"
@@ -218,13 +218,13 @@ services:
         class: Wallabag\CoreBundle\Event\Subscriber\DownloadImagesSubscriber
         arguments:
             - "@doctrine.orm.default_entity_manager"
-            - "@wallabag_core.entry.download_images"
+            - '@Wallabag\CoreBundle\Helper\DownloadImages'
             - '@=service(''craue_config'').get(''download_images_enabled'')'
             - "@logger"
         tags:
             - { name: kernel.event_subscriber }
 
-    wallabag_core.entry.download_images:
+    Wallabag\CoreBundle\Helper\DownloadImages:
         class: Wallabag\CoreBundle\Helper\DownloadImages
         arguments:
             - "@wallabag_core.entry.download_images.client"
@@ -235,7 +235,7 @@ services:
     wallabag_core.entry.download_images.client:
         alias: 'httplug.client.wallabag_core.entry.download_images'
 
-    wallabag_core.helper.crypto_proxy:
+    Wallabag\CoreBundle\Helper\CryptoProxy:
         class: Wallabag\CoreBundle\Helper\CryptoProxy
         arguments:
             - "%wallabag_core.site_credentials.encryption_key_path%"

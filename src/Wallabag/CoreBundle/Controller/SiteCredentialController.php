@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\CoreBundle\Entity\SiteCredential;
+use Wallabag\CoreBundle\Helper\CryptoProxy;
 use Wallabag\UserBundle\Entity\User;
 
 /**
@@ -48,8 +49,8 @@ class SiteCredentialController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $credential->setUsername($this->get('wallabag_core.helper.crypto_proxy')->crypt($credential->getUsername()));
-            $credential->setPassword($this->get('wallabag_core.helper.crypto_proxy')->crypt($credential->getPassword()));
+            $credential->setUsername($this->get(CryptoProxy::class)->crypt($credential->getUsername()));
+            $credential->setPassword($this->get(CryptoProxy::class)->crypt($credential->getPassword()));
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($credential);
@@ -87,8 +88,8 @@ class SiteCredentialController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $siteCredential->setUsername($this->get('wallabag_core.helper.crypto_proxy')->crypt($siteCredential->getUsername()));
-            $siteCredential->setPassword($this->get('wallabag_core.helper.crypto_proxy')->crypt($siteCredential->getPassword()));
+            $siteCredential->setUsername($this->get(CryptoProxy::class)->crypt($siteCredential->getUsername()));
+            $siteCredential->setPassword($this->get(CryptoProxy::class)->crypt($siteCredential->getPassword()));
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($siteCredential);

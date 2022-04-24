@@ -9,6 +9,7 @@ use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\SiteCredential;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Helper\ContentProxy;
+use Wallabag\CoreBundle\Helper\CryptoProxy;
 
 class EntryControllerTest extends WallabagCoreTestCase
 {
@@ -1553,8 +1554,8 @@ class EntryControllerTest extends WallabagCoreTestCase
         $user = $client->getContainer()->get('security.token_storage')->getToken()->getUser();
         $credential = new SiteCredential($user);
         $credential->setHost('monde-diplomatique.fr');
-        $credential->setUsername($client->getContainer()->get('wallabag_core.helper.crypto_proxy')->crypt('foo'));
-        $credential->setPassword($client->getContainer()->get('wallabag_core.helper.crypto_proxy')->crypt('bar'));
+        $credential->setUsername($client->getContainer()->get(CryptoProxy::class)->crypt('foo'));
+        $credential->setPassword($client->getContainer()->get(CryptoProxy::class)->crypt('bar'));
 
         $em->persist($credential);
         $em->flush();
@@ -1621,7 +1622,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $cookie = $client->getCookieJar()->all();
         $client = $this->getNewClient();
         $client->getCookieJar()->set($cookie[0]);
-        $client->getContainer()->set('wallabag_core.content_proxy', $contentProxy);
+        $client->getContainer()->set(ContentProxy::class, $contentProxy);
         $client->submit($form, $data);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());

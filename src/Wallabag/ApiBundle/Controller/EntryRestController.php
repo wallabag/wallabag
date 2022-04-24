@@ -14,6 +14,9 @@ use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Event\EntryDeletedEvent;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
+use Wallabag\CoreBundle\Helper\ContentProxy;
+use Wallabag\CoreBundle\Helper\EntriesExport;
+use Wallabag\CoreBundle\Helper\TagsAssigner;
 use Wallabag\CoreBundle\Helper\UrlHasher;
 
 class EntryRestController extends WallabagRestController
@@ -212,7 +215,7 @@ class EntryRestController extends WallabagRestController
         $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
 
-        return $this->get('wallabag_core.helper.entries_export')
+        return $this->get(EntriesExport::class)
             ->setEntries($entry)
             ->updateTitle('entry')
             ->updateAuthor('entry')
@@ -308,7 +311,7 @@ class EntryRestController extends WallabagRestController
             if (false === $entry) {
                 $entry = new Entry($this->getUser());
 
-                $this->get('wallabag_core.content_proxy')->updateEntry($entry, $url);
+                $this->get(ContentProxy::class)->updateEntry($entry, $url);
             }
 
             $em = $this->getDoctrine()->getManager();
@@ -368,7 +371,7 @@ class EntryRestController extends WallabagRestController
         $data = $this->retrieveValueFromRequest($request);
 
         try {
-            $this->get('wallabag_core.content_proxy')->updateEntry(
+            $this->get(ContentProxy::class)->updateEntry(
                 $entry,
                 $entry->getUrl(),
                 [
@@ -398,7 +401,7 @@ class EntryRestController extends WallabagRestController
         }
 
         if (!empty($data['tags'])) {
-            $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $data['tags']);
+            $this->get(TagsAssigner::class)->assignTagsToEntry($entry, $data['tags']);
         }
 
         if (!empty($data['origin_url'])) {
@@ -414,11 +417,11 @@ class EntryRestController extends WallabagRestController
         }
 
         if (empty($entry->getDomainName())) {
-            $this->get('wallabag_core.content_proxy')->setEntryDomainName($entry);
+            $this->get(ContentProxy::class)->setEntryDomainName($entry);
         }
 
         if (empty($entry->getTitle())) {
-            $this->get('wallabag_core.content_proxy')->setDefaultEntryTitle($entry);
+            $this->get(ContentProxy::class)->setDefaultEntryTitle($entry);
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -460,7 +463,7 @@ class EntryRestController extends WallabagRestController
         $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
 
-        $contentProxy = $this->get('wallabag_core.content_proxy');
+        $contentProxy = $this->get(ContentProxy::class);
 
         $data = $this->retrieveValueFromRequest($request);
 
@@ -515,7 +518,7 @@ class EntryRestController extends WallabagRestController
 
         if (!empty($data['tags'])) {
             $entry->removeAllTags();
-            $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $data['tags']);
+            $this->get(TagsAssigner::class)->assignTagsToEntry($entry, $data['tags']);
         }
 
         if (null !== $data['isPublic']) {
@@ -531,11 +534,11 @@ class EntryRestController extends WallabagRestController
         }
 
         if (empty($entry->getDomainName())) {
-            $this->get('wallabag_core.content_proxy')->setEntryDomainName($entry);
+            $this->get(ContentProxy::class)->setEntryDomainName($entry);
         }
 
         if (empty($entry->getTitle())) {
-            $this->get('wallabag_core.content_proxy')->setDefaultEntryTitle($entry);
+            $this->get(ContentProxy::class)->setDefaultEntryTitle($entry);
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -566,7 +569,7 @@ class EntryRestController extends WallabagRestController
         $this->validateUserAccess($entry->getUser()->getId());
 
         try {
-            $this->get('wallabag_core.content_proxy')->updateEntry($entry, $entry->getUrl());
+            $this->get(ContentProxy::class)->updateEntry($entry, $entry->getUrl());
         } catch (\Exception $e) {
             $this->get('logger')->error('Error while saving an entry', [
                 'exception' => $e,
@@ -673,7 +676,7 @@ class EntryRestController extends WallabagRestController
 
         $tags = $request->request->get('tags', '');
         if (!empty($tags)) {
-            $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $tags);
+            $this->get(TagsAssigner::class)->assignTagsToEntry($entry, $tags);
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -802,7 +805,7 @@ class EntryRestController extends WallabagRestController
             $tags = $element->tags;
 
             if (false !== $entry && !(empty($tags))) {
-                $this->get('wallabag_core.tags_assigner')->assignTagsToEntry($entry, $tags);
+                $this->get(TagsAssigner::class)->assignTagsToEntry($entry, $tags);
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($entry);

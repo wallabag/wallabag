@@ -13,6 +13,9 @@ use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Form\Type\NewTagType;
 use Wallabag\CoreBundle\Form\Type\RenameTagType;
+use Wallabag\CoreBundle\Helper\PreparePagerForEntries;
+use Wallabag\CoreBundle\Helper\Redirect;
+use Wallabag\CoreBundle\Helper\TagsAssigner;
 
 class TagController extends Controller
 {
@@ -27,7 +30,7 @@ class TagController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->get('wallabag_core.tags_assigner')->assignTagsToEntry(
+            $this->get(TagsAssigner::class)->assignTagsToEntry(
                 $entry,
                 $form->get('label')->getData()
             );
@@ -69,7 +72,7 @@ class TagController extends Controller
             $em->flush();
         }
 
-        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'), '', true);
+        $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'), '', true);
 
         return $this->redirect($redirectUrl);
     }
@@ -117,7 +120,7 @@ class TagController extends Controller
 
         $pagerAdapter = new ArrayAdapter($entriesByTag);
 
-        $entries = $this->get('wallabag_core.helper.prepare_pager_for_entries')->prepare($pagerAdapter);
+        $entries = $this->get(PreparePagerForEntries::class)->prepare($pagerAdapter);
 
         try {
             $entries->setCurrentPage($page);
@@ -152,7 +155,7 @@ class TagController extends Controller
         $form = $this->createForm(RenameTagType::class, new Tag());
         $form->handleRequest($request);
 
-        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'), '', true);
+        $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'), '', true);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $newTag = new Tag();
@@ -173,7 +176,7 @@ class TagController extends Controller
                 $tag->getId()
             );
             foreach ($entries as $entry) {
-                $this->get('wallabag_core.tags_assigner')->assignTagsToEntry(
+                $this->get(TagsAssigner::class)->assignTagsToEntry(
                     $entry,
                     $newTag->getLabel(),
                     [$newTag]
@@ -210,7 +213,7 @@ class TagController extends Controller
         $entries = $qb->getQuery()->getResult();
 
         foreach ($entries as $entry) {
-            $this->get('wallabag_core.tags_assigner')->assignTagsToEntry(
+            $this->get(TagsAssigner::class)->assignTagsToEntry(
                 $entry,
                 $filter
             );
@@ -220,7 +223,7 @@ class TagController extends Controller
 
         $em->flush();
 
-        return $this->redirect($this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'), '', true));
+        return $this->redirect($this->get(Redirect::class)->to($request->headers->get('referer'), '', true));
     }
 
     /**
@@ -244,7 +247,7 @@ class TagController extends Controller
             $em->flush();
         }
 
-        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'), '', true);
+        $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'), '', true);
 
         return $this->redirect($redirectUrl);
     }

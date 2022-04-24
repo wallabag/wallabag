@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
+use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\UserBundle\Repository\UserRepository;
 
 class ReloadEntryCommand extends ContainerAwareCommand
@@ -64,7 +65,7 @@ class ReloadEntryCommand extends ContainerAwareCommand
 
         $progressBar = $io->createProgressBar($nbEntries);
 
-        $contentProxy = $this->getContainer()->get('wallabag_core.content_proxy');
+        $contentProxy = $this->getContainer()->get(ContentProxy::class);
         $em = $this->getContainer()->get('doctrine')->getManager();
         $dispatcher = $this->getContainer()->get('event_dispatcher');
 

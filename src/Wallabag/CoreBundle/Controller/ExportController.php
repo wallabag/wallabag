@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Helper\EntriesExport;
 
 /**
  * The try/catch can be removed once all formats will be implemented.
@@ -29,7 +30,7 @@ class ExportController extends Controller
     public function downloadEntryAction(Entry $entry, $format)
     {
         try {
-            return $this->get('wallabag_core.helper.entries_export')
+            return $this->get(EntriesExport::class)
                 ->setEntries($entry)
                 ->updateTitle('entry')
                 ->updateAuthor('entry')
@@ -95,7 +96,7 @@ class ExportController extends Controller
         }
 
         try {
-            return $this->get('wallabag_core.helper.entries_export')
+            return $this->get(EntriesExport::class)
                 ->setEntries($entries)
                 ->updateTitle($title)
                 ->updateAuthor($method)
