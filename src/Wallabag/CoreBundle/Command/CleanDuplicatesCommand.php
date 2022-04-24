@@ -10,6 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
+use Wallabag\UserBundle\Repository\UserRepository;
 
 class CleanDuplicatesCommand extends ContainerAwareCommand
 {
@@ -49,7 +50,7 @@ class CleanDuplicatesCommand extends ContainerAwareCommand
 
             $this->io->success('Finished cleaning.');
         } else {
-            $users = $this->getContainer()->get('wallabag_user.user_repository')->findAll();
+            $users = $this->getContainer()->get(UserRepository::class)->findAll();
 
             $this->io->text(sprintf('Cleaning through <info>%d</info> user accounts', \count($users)));
 
@@ -109,6 +110,6 @@ class CleanDuplicatesCommand extends ContainerAwareCommand
      */
     private function getUser($username)
     {
-        return $this->getContainer()->get('wallabag_user.user_repository')->findOneByUserName($username);
+        return $this->getContainer()->get(UserRepository::class)->findOneByUserName($username);
     }
 }

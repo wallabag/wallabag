@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Wallabag\UserBundle\Repository\UserRepository;
 
 class ExportCommand extends ContainerAwareCommand
 {
@@ -35,7 +36,7 @@ class ExportCommand extends ContainerAwareCommand
         $io = new SymfonyStyle($input, $output);
 
         try {
-            $user = $this->getContainer()->get('wallabag_user.user_repository')->findOneByUserName($input->getArgument('username'));
+            $user = $this->getContainer()->get(UserRepository::class)->findOneByUserName($input->getArgument('username'));
         } catch (NoResultException $e) {
             $io->error(sprintf('User "%s" not found.', $input->getArgument('username')));
 

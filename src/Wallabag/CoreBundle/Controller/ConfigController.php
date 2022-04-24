@@ -25,6 +25,7 @@ use Wallabag\CoreBundle\Form\Type\TaggingRuleImportType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleType;
 use Wallabag\CoreBundle\Form\Type\UserInformationType;
 use Wallabag\CoreBundle\Tools\Utils;
+use Wallabag\UserBundle\Repository\UserRepository;
 
 class ConfigController extends Controller
 {
@@ -236,7 +237,7 @@ class ConfigController extends Controller
             ],
             'twofactor_auth' => $this->getParameter('twofactor_auth'),
             'wallabag_url' => $this->getParameter('domain_name'),
-            'enabled_users' => $this->get('wallabag_user.user_repository')->getSumEnabledUsers(),
+            'enabled_users' => $this->get(UserRepository::class)->getSumEnabledUsers(),
         ]);
     }
 
@@ -594,7 +595,7 @@ class ConfigController extends Controller
      */
     public function deleteAccountAction(Request $request)
     {
-        $enabledUsers = $this->get('wallabag_user.user_repository')
+        $enabledUsers = $this->get(UserRepository::class)
             ->getSumEnabledUsers();
 
         if ($enabledUsers <= 1) {

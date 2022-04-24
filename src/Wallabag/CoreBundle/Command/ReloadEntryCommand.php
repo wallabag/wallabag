@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
+use Wallabag\UserBundle\Repository\UserRepository;
 
 class ReloadEntryCommand extends ContainerAwareCommand
 {
@@ -30,7 +31,7 @@ class ReloadEntryCommand extends ContainerAwareCommand
         if ($username = $input->getArgument('username')) {
             try {
                 $userId = $this->getContainer()
-                    ->get('wallabag_user.user_repository')
+                    ->get(UserRepository::class)
                     ->findOneByUserName($username)
                     ->getId();
             } catch (NoResultException $e) {
