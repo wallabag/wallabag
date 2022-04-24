@@ -9,7 +9,7 @@ services:
     wallabag_import.pocket.client:
         alias: 'httplug.client.wallabag_import.pocket.client'
 
-    wallabag_import.pocket.import:
+    Wallabag\ImportBundle\Import\PocketImport:
         class: Wallabag\ImportBundle\Import\PocketImport
         arguments:
             - "@doctrine.orm.entity_manager"
@@ -22,7 +22,7 @@ services:
         tags:
             -  { name: wallabag_import.import, alias: pocket }
 
-    wallabag_import.wallabag_v1.import:
+    Wallabag\ImportBundle\Import\WallabagV1Import:
         class: Wallabag\ImportBundle\Import\WallabagV1Import
         arguments:
             - "@doctrine.orm.entity_manager"
@@ -36,7 +36,7 @@ services:
         tags:
             -  { name: wallabag_import.import, alias: wallabag_v1 }
 
-    wallabag_import.wallabag_v2.import:
+    Wallabag\ImportBundle\Import\WallabagV2Import:
         class: Wallabag\ImportBundle\Import\WallabagV2Import
         arguments:
             - "@doctrine.orm.entity_manager"
@@ -48,7 +48,7 @@ services:
         tags:
             -  { name: wallabag_import.import, alias: wallabag_v2 }
 
-    wallabag_import.elcurator.import:
+    Wallabag\ImportBundle\Import\ElcuratorImport:
         class: Wallabag\ImportBundle\Import\ElcuratorImport
         arguments:
             - "@doctrine.orm.entity_manager"
@@ -60,7 +60,7 @@ services:
         tags:
             -  { name: wallabag_import.import, alias: elcurator }
 
-    wallabag_import.readability.import:
+    Wallabag\ImportBundle\Import\ReadabilityImport:
         class: Wallabag\ImportBundle\Import\ReadabilityImport
         arguments:
             - "@doctrine.orm.entity_manager"
@@ -72,7 +72,7 @@ services:
         tags:
             -  { name: wallabag_import.import, alias: readability }
 
-    wallabag_import.instapaper.import:
+    Wallabag\ImportBundle\Import\InstapaperImport:
         class: Wallabag\ImportBundle\Import\InstapaperImport
         arguments:
             - "@doctrine.orm.entity_manager"
@@ -84,7 +84,7 @@ services:
         tags:
             -  { name: wallabag_import.import, alias: instapaper }
 
-    wallabag_import.pinboard.import:
+    Wallabag\ImportBundle\Import\PinboardImport:
         class: Wallabag\ImportBundle\Import\PinboardImport
         arguments:
             - "@doctrine.orm.entity_manager"
@@ -96,7 +96,7 @@ services:
         tags:
             -  { name: wallabag_import.import, alias: pinboard }
 
-    wallabag_import.delicious.import:
+    Wallabag\ImportBundle\Import\DeliciousImport:
         class: Wallabag\ImportBundle\Import\DeliciousImport
         arguments:
             - "@doctrine.orm.entity_manager"
@@ -108,7 +108,7 @@ services:
         tags:
             -  { name: wallabag_import.import, alias: delicious }
 
-    wallabag_import.firefox.import:
+    Wallabag\ImportBundle\Import\FirefoxImport:
         class: Wallabag\ImportBundle\Import\FirefoxImport
         arguments:
             - "@doctrine.orm.entity_manager"
@@ -120,7 +120,7 @@ services:
         tags:
             -  { name: wallabag_import.import, alias: firefox }
 
-    wallabag_import.chrome.import:
+    Wallabag\ImportBundle\Import\ChromeImport:
         class: Wallabag\ImportBundle\Import\ChromeImport
         arguments:
             - "@doctrine.orm.entity_manager"

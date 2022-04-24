@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
+use Wallabag\ImportBundle\Import\PinboardImport;
 
 class PinboardController extends Controller
 {
@@ -17,7 +18,7 @@ class PinboardController extends Controller
         $form = $this->createForm(UploadImportType::class);
         $form->handleRequest($request);
 
-        $pinboard = $this->get('wallabag_import.pinboard.import');
+        $pinboard = $this->get(PinboardImport::class);
         $pinboard->setUser($this->getUser());
 
         if ($this->get('craue_config')->get('import_with_rabbitmq')) {

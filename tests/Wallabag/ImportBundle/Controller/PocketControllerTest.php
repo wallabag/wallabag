@@ -3,6 +3,7 @@
 namespace Tests\Wallabag\ImportBundle\Controller;
 
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\ImportBundle\Import\PocketImport;
 
 class PocketControllerTest extends WallabagCoreTestCase
 {
@@ -72,7 +73,7 @@ class PocketControllerTest extends WallabagCoreTestCase
             ->method('getRequestToken')
             ->willReturn('token');
 
-        static::$kernel->getContainer()->set('wallabag_import.pocket.import', $pocketImport);
+        static::$kernel->getContainer()->set(PocketImport::class, $pocketImport);
 
         $client->request('GET', '/import/pocket/auth');
 
@@ -94,7 +95,7 @@ class PocketControllerTest extends WallabagCoreTestCase
             ->method('authorize')
             ->willReturn(false);
 
-        static::$kernel->getContainer()->set('wallabag_import.pocket.import', $pocketImport);
+        static::$kernel->getContainer()->set(PocketImport::class, $pocketImport);
 
         $client->request('GET', '/import/pocket/callback');
 
@@ -128,7 +129,7 @@ class PocketControllerTest extends WallabagCoreTestCase
             ->method('import')
             ->willReturn(true);
 
-        static::$kernel->getContainer()->set('wallabag_import.pocket.import', $pocketImport);
+        static::$kernel->getContainer()->set(PocketImport::class, $pocketImport);
 
         $client->request('GET', '/import/pocket/callback');
 

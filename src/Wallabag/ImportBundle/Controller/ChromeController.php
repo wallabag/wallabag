@@ -4,6 +4,7 @@ namespace Wallabag\ImportBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Wallabag\ImportBundle\Import\ChromeImport;
 
 class ChromeController extends BrowserController
 {
@@ -20,7 +21,7 @@ class ChromeController extends BrowserController
      */
     protected function getImportService()
     {
-        $service = $this->get('wallabag_import.chrome.import');
+        $service = $this->get(ChromeImport::class);
 
         if ($this->get('craue_config')->get('import_with_rabbitmq')) {
             $service->setProducer($this->get('old_sound_rabbit_mq.import_chrome_producer'));

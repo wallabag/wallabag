@@ -5,7 +5,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - '@Wallabag\UserBundle\Repository\UserRepository'
-            - "@wallabag_import.pocket.import"
+            - '@Wallabag\ImportBundle\Import\PocketImport'
             - "@event_dispatcher"
             - "@logger"
     wallabag_import.consumer.amqp.readability:
@@ -13,7 +13,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - '@Wallabag\UserBundle\Repository\UserRepository'
-            - "@wallabag_import.readability.import"
+            - '@Wallabag\ImportBundle\Import\ReadabilityImport'
             - "@event_dispatcher"
             - "@logger"
     wallabag_import.consumer.amqp.instapaper:
@@ -21,7 +21,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - '@Wallabag\UserBundle\Repository\UserRepository'
-            - "@wallabag_import.instapaper.import"
+            - '@Wallabag\ImportBundle\Import\InstapaperImport'
             - "@event_dispatcher"
             - "@logger"
     wallabag_import.consumer.amqp.pinboard:
@@ -29,7 +29,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - '@Wallabag\UserBundle\Repository\UserRepository'
-            - "@wallabag_import.pinboard.import"
+            - '@Wallabag\ImportBundle\Import\PinboardImport'
             - "@event_dispatcher"
             - "@logger"
     wallabag_import.consumer.amqp.delicious:
@@ -37,7 +37,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - '@Wallabag\UserBundle\Repository\UserRepository'
-            - "@wallabag_import.delicious.import"
+            - '@Wallabag\ImportBundle\Import\DeliciousImport'
             - "@event_dispatcher"
             - "@logger"
     wallabag_import.consumer.amqp.wallabag_v1:
@@ -45,7 +45,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - '@Wallabag\UserBundle\Repository\UserRepository'
-            - "@wallabag_import.wallabag_v1.import"
+            - '@Wallabag\ImportBundle\Import\WallabagV1Import'
             - "@event_dispatcher"
             - "@logger"
     wallabag_import.consumer.amqp.wallabag_v2:
@@ -53,7 +53,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - '@Wallabag\UserBundle\Repository\UserRepository'
-            - "@wallabag_import.wallabag_v2.import"
+            - '@Wallabag\ImportBundle\Import\WallabagV2Import'
             - "@event_dispatcher"
             - "@logger"
     wallabag_import.consumer.amqp.elcurator:
@@ -61,7 +61,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - '@Wallabag\UserBundle\Repository\UserRepository'
-            - "@wallabag_import.elcurator.import"
+            - '@Wallabag\ImportBundle\Import\ElcuratorImport'
             - "@event_dispatcher"
             - "@logger"
     wallabag_import.consumer.amqp.firefox:
@@ -69,7 +69,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - '@Wallabag\UserBundle\Repository\UserRepository'
-            - "@wallabag_import.firefox.import"
+            - '@Wallabag\ImportBundle\Import\FirefoxImport'
             - "@event_dispatcher"
             - "@logger"
     wallabag_import.consumer.amqp.chrome:
@@ -77,6 +77,6 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - '@Wallabag\UserBundle\Repository\UserRepository'
-            - "@wallabag_import.chrome.import"
+            - '@Wallabag\ImportBundle\Import\ChromeImport'
             - "@event_dispatcher"
             - "@logger"

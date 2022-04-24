@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
+use Wallabag\ImportBundle\Import\ReadabilityImport;
 
 class ReadabilityController extends Controller
 {
@@ -17,7 +18,7 @@ class ReadabilityController extends Controller
         $form = $this->createForm(UploadImportType::class);
         $form->handleRequest($request);
 
-        $readability = $this->get('wallabag_import.readability.import');
+        $readability = $this->get(ReadabilityImport::class);
         $readability->setUser($this->getUser());
 
         if ($this->get('craue_config')->get('import_with_rabbitmq')) {

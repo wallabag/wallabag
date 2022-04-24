@@ -9,6 +9,14 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Wallabag\ImportBundle\Import\ChromeImport;
+use Wallabag\ImportBundle\Import\DeliciousImport;
+use Wallabag\ImportBundle\Import\FirefoxImport;
+use Wallabag\ImportBundle\Import\InstapaperImport;
+use Wallabag\ImportBundle\Import\PinboardImport;
+use Wallabag\ImportBundle\Import\ReadabilityImport;
+use Wallabag\ImportBundle\Import\WallabagV1Import;
+use Wallabag\ImportBundle\Import\WallabagV2Import;
 
 class ImportCommand extends ContainerAwareCommand
 {
@@ -60,28 +68,28 @@ class ImportCommand extends ContainerAwareCommand
 
         switch ($input->getOption('importer')) {
             case 'v2':
-                $import = $this->getContainer()->get('wallabag_import.wallabag_v2.import');
+                $import = $this->getContainer()->get(WallabagV2Import::class);
                 break;
             case 'firefox':
-                $import = $this->getContainer()->get('wallabag_import.firefox.import');
+                $import = $this->getContainer()->get(FirefoxImport::class);
                 break;
             case 'chrome':
-                $import = $this->getContainer()->get('wallabag_import.chrome.import');
+                $import = $this->getContainer()->get(ChromeImport::class);
                 break;
             case 'readability':
-                $import = $this->getContainer()->get('wallabag_import.readability.import');
+                $import = $this->getContainer()->get(ReadabilityImport::class);
                 break;
             case 'instapaper':
-                $import = $this->getContainer()->get('wallabag_import.instapaper.import');
+                $import = $this->getContainer()->get(InstapaperImport::class);
                 break;
             case 'pinboard':
-                $import = $this->getContainer()->get('wallabag_import.pinboard.import');
+                $import = $this->getContainer()->get(PinboardImport::class);
                 break;
             case 'delicious':
-                $import = $this->getContainer()->get('wallabag_import.delicious.import');
+                $import = $this->getContainer()->get(DeliciousImport::class);
                 break;
             default:
-                $import = $this->getContainer()->get('wallabag_import.wallabag_v1.import');
+                $import = $this->getContainer()->get(WallabagV1Import::class);
         }
 
         $import->setMarkAsRead($input->getOption('markAsRead'));
