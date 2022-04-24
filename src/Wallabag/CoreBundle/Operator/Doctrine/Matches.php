@@ -10,7 +10,7 @@ namespace Wallabag\CoreBundle\Operator\Doctrine;
  *
  * This operator will be used to compile tagging rules in DQL, usable
  * by Doctrine ORM.
- * It's registered in RulerZ using a service (wallabag.operator.doctrine.matches);
+ * It's registered in RulerZ using a service;
  */
 class Matches
 {

@@ -153,27 +153,27 @@ services:
             - web/img/appicon/apple-touch-icon-152.png
             - "@security.token_storage"
 
-    wallabag.operator.array.matches:
+    Wallabag\CoreBundle\Operator\PHP\Matches:
         class: Wallabag\CoreBundle\Operator\PHP\Matches
         tags:
             - { name: rulerz.operator, target: native, operator: matches }
 
-    wallabag.operator.doctrine.matches:
+    Wallabag\CoreBundle\Operator\Doctrine\Matches:
         class: Wallabag\CoreBundle\Operator\Doctrine\Matches
         tags:
             - { name: rulerz.operator, target: doctrine, operator: matches, inline: true }
 
-    wallabag.operator.array.notmatches:
+    Wallabag\CoreBundle\Operator\PHP\NotMatches:
         class: Wallabag\CoreBundle\Operator\PHP\NotMatches
         tags:
             - { name: rulerz.operator, target: native, operator: notmatches }
 
-    wallabag.operator.doctrine.notmatches:
+    Wallabag\CoreBundle\Operator\Doctrine\NotMatches:
         class: Wallabag\CoreBundle\Operator\Doctrine\NotMatches
         tags:
             - { name: rulerz.operator, target: doctrine, operator: notmatches, inline: true }
 
-    wallabag.operator.array.pattern_matches:
+    Wallabag\CoreBundle\Operator\PHP\PatternMatches:
         class: Wallabag\CoreBundle\Operator\PHP\PatternMatches
         tags:
             - { name: rulerz.operator, target: native, operator: "~" }
