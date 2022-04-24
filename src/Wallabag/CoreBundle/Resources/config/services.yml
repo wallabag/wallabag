@@ -36,20 +36,20 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
 
-    wallabag_core.graby:
+    Graby\Graby:
         class: Graby\Graby
         arguments:
             -
                 error_message: '%wallabag_core.fetching_error_message%'
                 error_message_title: '%wallabag_core.fetching_error_message_title%'
             - "@wallabag_core.http_client"
-            - "@wallabag_core.graby.config_builder"
+            - '@Graby\SiteConfig\ConfigBuilder'
         calls:
             - [ setLogger, [ "@logger" ] ]
         tags:
             - { name: monolog.logger, channel: graby }
 
-    wallabag_core.graby.config_builder:
+    Graby\SiteConfig\ConfigBuilder:
         class: Graby\SiteConfig\ConfigBuilder
         arguments:
             - {}
@@ -61,7 +61,7 @@ services:
     wallabag_core.guzzle_authenticator.config_builder:
         class: Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder
         arguments:
-            - "@wallabag_core.graby.config_builder"
+            - '@Graby\SiteConfig\ConfigBuilder'
             - "@security.token_storage"
             - "@wallabag_core.site_credential_repository"
             - '@logger'
@@ -90,7 +90,7 @@ services:
     wallabag_core.content_proxy:
         class: Wallabag\CoreBundle\Helper\ContentProxy
         arguments:
-            - "@wallabag_core.graby"
+            - '@Graby\Graby'
             - "@wallabag_core.rule_based_tagger"
             - "@wallabag_core.rule_based_ignore_origin_processor"
             - "@validator"
