@@ -219,7 +219,7 @@ scheb_two_factor:
         sender_email: "%twofactor_sender%"
         digits: 6
         template: WallabagUserBundle:Authentication:form.html.twig
-        mailer: wallabag_user.auth_code_mailer
+        mailer: Wallabag\UserBundle\Mailer\AuthCodeMailer
 
 kphoen_rulerz:
     targets:
