@@ -3805,10 +3805,10 @@ map-obj@^4.0.0:
   resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-4.3.0.tgz#9304f906e93faae70880da102a9f1df0ea8bb05a"
   integrity sha512-hdN1wVrZbb29eBGiGjJbeP8JbKjq1urkHJ/LIP/NY48MZ1QVXUsQBV1G1zvYFHn1XE06cwjBsOI2K3Ulnj1YXQ==
 
-material-design-icons-iconfont@^6.6.0:
-  version "6.6.0"
-  resolved "https://registry.yarnpkg.com/material-design-icons-iconfont/-/material-design-icons-iconfont-6.6.0.tgz#6f7165ab5d02b97d008543f2ed46fb53a8b32e5e"
-  integrity sha512-ZK4hugbTsGob1o2HvYJgkT32YMgfIWQx9soWJaN2T7KMb9byr68IaM1W8lGI+0fPLApdMD00dIE6u1bO488tng==
+material-design-icons-iconfont@^6.7.0:
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/material-design-icons-iconfont/-/material-design-icons-iconfont-6.7.0.tgz#55cf0f3d7e4c76e032855b7e810b6e30535eff3c"
+  integrity sha512-lSj71DgVv20kO0kGbs42icDzbRot61gEDBLQACzkUuznRQBUYmbxzEkGU6dNBb5fRWHMaScYlAXX96HQ4/cJWA==
 
 materialize-css@^0.98.1:
   version "0.98.2"
