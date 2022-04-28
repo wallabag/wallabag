@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "048e7bf2bc2fd50d898371035c5055a2",
+    "content-hash": "90217dc4c89a9ab455cfa9faf9d597c9",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -12178,6 +12178,55 @@
                 }
             ],
             "time": "2021-11-15T17:17:55+00:00"
+        },
+        {
+            "name": "friendsoftwig/twigcs",
+            "version": "v4.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/friendsoftwig/twigcs.git",
+                "reference": "ad7e235fe3cc7842b5919f109afaacc56bb3ff49"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/friendsoftwig/twigcs/zipball/ad7e235fe3cc7842b5919f109afaacc56bb3ff49",
+                "reference": "ad7e235fe3cc7842b5919f109afaacc56bb3ff49",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0",
+                "symfony/console": "^3.4 || ^4.3 || ^5.0",
+                "symfony/filesystem": "^3.4 || ^4.3 || ^5.0",
+                "symfony/finder": "^3.4 || ^4.3 || ^5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.5 || ^7.2"
+            },
+            "bin": [
+                "bin/twigcs"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FriendsOfTwig\\Twigcs\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tristan Maindron",
+                    "email": "tmaindron@gmail.com"
+                }
+            ],
+            "description": "Checkstyle automation for Twig",
+            "support": {
+                "issues": "https://github.com/friendsoftwig/twigcs/issues",
+                "source": "https://github.com/friendsoftwig/twigcs/tree/v4.1.0"
+            },
+            "time": "2021-02-04T13:07:32+00:00"
         },
         {
             "name": "m6web/redis-mock",
