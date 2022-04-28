@@ -1,4 +1,4 @@
-{% extends "WallabagCoreBundle::layout.html.twig" %}
+{% extends "@WallabagCore/layout.html.twig" %}
 
 {% block title %}{{ entry.title|striptags|default('entry.default_title'|trans)|raw }} ({{ entry.domainName|removeWww }}){% endblock %}
 
