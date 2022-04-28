@@ -70,7 +70,7 @@ class ReadabilityController extends Controller
             );
         }
 
-        return $this->render('WallabagImportBundle:Readability:index.html.twig', [
+        return $this->render('@WallabagImport/Readability/index.html.twig', [
             'form' => $form->createView(),
             'import' => $readability,
         ]);

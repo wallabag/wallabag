@@ -37,6 +37,6 @@ class ChromeController extends BrowserController
      */
     protected function getImportTemplate()
     {
-        return 'WallabagImportBundle:Chrome:index.html.twig';
+        return '@WallabagImport/Chrome/index.html.twig';
     }
 }

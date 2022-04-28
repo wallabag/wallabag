@@ -37,6 +37,6 @@ class FirefoxController extends BrowserController
      */
     protected function getImportTemplate()
     {
-        return 'WallabagImportBundle:Firefox:index.html.twig';
+        return '@WallabagImport/Firefox/index.html.twig';
     }
 }

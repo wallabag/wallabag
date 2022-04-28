@@ -39,7 +39,7 @@ twig:
     debug: "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     form_themes:
-        - "LexikFormFilterBundle:Form:form_div_layout.html.twig"
+        - "@LexikFormFilter/Form/form_div_layout.html.twig"
     exception_controller: Wallabag\CoreBundle\Controller\ExceptionController:showAction
     globals:
         registration_enabled: '%fosuser_registration%'
@@ -212,13 +212,13 @@ scheb_two_factor:
     google:
         enabled: "%twofactor_auth%"
         issuer: "%server_name%"
-        template: WallabagUserBundle:Authentication:form.html.twig
+        template: "@WallabagUser/Authentication/form.html.twig"
 
     email:
         enabled: "%twofactor_auth%"
         sender_email: "%twofactor_sender%"
         digits: 6
-        template: WallabagUserBundle:Authentication:form.html.twig
+        template: "@WallabagUser/Authentication/form.html.twig"
         mailer: Wallabag\UserBundle\Mailer\AuthCodeMailer
 
 kphoen_rulerz:

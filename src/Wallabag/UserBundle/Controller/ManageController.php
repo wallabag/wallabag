@@ -49,7 +49,7 @@ class ManageController extends Controller
             return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
         }
 
-        return $this->render('WallabagUserBundle:Manage:new.html.twig', [
+        return $this->render('@WallabagUser/Manage/new.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
         ]);
@@ -94,7 +94,7 @@ class ManageController extends Controller
             return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
         }
 
-        return $this->render('WallabagUserBundle:Manage:edit.html.twig', [
+        return $this->render('@WallabagUser/Manage/edit.html.twig', [
             'user' => $user,
             'edit_form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -162,7 +162,7 @@ class ManageController extends Controller
             }
         }
 
-        return $this->render('WallabagUserBundle:Manage:index.html.twig', [
+        return $this->render('@WallabagUser/Manage/index.html.twig', [
             'searchForm' => $form->createView(),
             'users' => $pagerFanta,
         ]);

@@ -133,7 +133,7 @@ class EntryController extends Controller
             return $this->showEntries('search', $request, $page);
         }
 
-        return $this->render('WallabagCoreBundle:Entry:search_form.html.twig', [
+        return $this->render('@WallabagCore/Entry/search_form.html.twig', [
             'form' => $form->createView(),
             'currentRoute' => $currentRoute,
         ]);
@@ -176,7 +176,7 @@ class EntryController extends Controller
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        return $this->render('WallabagCoreBundle:Entry:new_form.html.twig', [
+        return $this->render('@WallabagCore/Entry/new_form.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -212,7 +212,7 @@ class EntryController extends Controller
      */
     public function addEntryAction()
     {
-        return $this->render('WallabagCoreBundle:Entry:new.html.twig');
+        return $this->render('@WallabagCore/Entry/new.html.twig');
     }
 
     /**
@@ -243,7 +243,7 @@ class EntryController extends Controller
             return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
         }
 
-        return $this->render('WallabagCoreBundle:Entry:edit.html.twig', [
+        return $this->render('@WallabagCore/Entry/edit.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -374,7 +374,7 @@ class EntryController extends Controller
         $this->checkUserAction($entry);
 
         return $this->render(
-            'WallabagCoreBundle:Entry:entry.html.twig',
+            '@WallabagCore/Entry/entry.html.twig',
             ['entry' => $entry]
         );
     }
@@ -666,7 +666,7 @@ class EntryController extends Controller
             ->countUntaggedEntriesByUser($this->getUser()->getId());
 
         return $this->render(
-            'WallabagCoreBundle:Entry:entries.html.twig', [
+            '@WallabagCore/Entry/entries.html.twig', [
                 'form' => $form->createView(),
                 'entries' => $entries,
                 'currentPage' => $page,

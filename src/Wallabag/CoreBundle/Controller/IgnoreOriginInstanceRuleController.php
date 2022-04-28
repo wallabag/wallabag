@@ -24,7 +24,7 @@ class IgnoreOriginInstanceRuleController extends Controller
     {
         $rules = $this->get(IgnoreOriginInstanceRuleRepository::class)->findAll();
 
-        return $this->render('WallabagCoreBundle:IgnoreOriginInstanceRule:index.html.twig', [
+        return $this->render('@WallabagCore/IgnoreOriginInstanceRule/index.html.twig', [
             'rules' => $rules,
         ]);
     }
@@ -56,7 +56,7 @@ class IgnoreOriginInstanceRuleController extends Controller
             return $this->redirectToRoute('ignore_origin_instance_rules_index');
         }
 
-        return $this->render('WallabagCoreBundle:IgnoreOriginInstanceRule:new.html.twig', [
+        return $this->render('@WallabagCore/IgnoreOriginInstanceRule/new.html.twig', [
             'rule' => $ignoreOriginInstanceRule,
             'form' => $form->createView(),
         ]);
@@ -88,7 +88,7 @@ class IgnoreOriginInstanceRuleController extends Controller
             return $this->redirectToRoute('ignore_origin_instance_rules_index');
         }
 
-        return $this->render('WallabagCoreBundle:IgnoreOriginInstanceRule:edit.html.twig', [
+        return $this->render('@WallabagCore/IgnoreOriginInstanceRule/edit.html.twig', [
             'rule' => $ignoreOriginInstanceRule,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

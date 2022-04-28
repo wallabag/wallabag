@@ -223,7 +223,7 @@ class ConfigController extends Controller
             return $this->redirect($this->generateUrl('config') . '#set6');
         }
 
-        return $this->render('WallabagCoreBundle:Config:index.html.twig', [
+        return $this->render('@WallabagCore/Config/index.html.twig', [
             'form' => [
                 'config' => $configForm->createView(),
                 'feed' => $feedForm->createView(),
@@ -354,7 +354,7 @@ class ConfigController extends Controller
             'flashes.config.notice.otp_enabled'
         );
 
-        return $this->render('WallabagCoreBundle:Config:otp_app.html.twig', [
+        return $this->render('@WallabagCore/Config/otp_app.html.twig', [
             'backupCodes' => $backupCodes,
             'qr_code' => $this->get('scheb_two_factor.security.google_authenticator')->getQRContent($user),
             'secret' => $secret,

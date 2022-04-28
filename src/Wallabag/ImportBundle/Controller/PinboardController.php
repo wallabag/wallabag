@@ -70,7 +70,7 @@ class PinboardController extends Controller
             );
         }
 
-        return $this->render('WallabagImportBundle:Pinboard:index.html.twig', [
+        return $this->render('@WallabagImport/Pinboard/index.html.twig', [
             'form' => $form->createView(),
             'import' => $pinboard,
         ]);
