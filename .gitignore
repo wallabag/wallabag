@@ -9,10 +9,8 @@
 !/var/sessions
 /var/sessions/*
 !var/sessions/.gitkeep
-!var/SymfonyRequirements.php
 /bin/*
 !/bin/console
-!/bin/symfony_requirements
 .php_cs.cache
 .phpunit.result.cache
 phpunit.xml
