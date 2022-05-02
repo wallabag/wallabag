@@ -42,7 +42,7 @@ docker/php/env
 /composer.phar
 
 # Data for wallabag
-data/db/wallabag*.sqlite
+data/wallabag*.sqlite
 
 # assets stuff
 node_modules/
