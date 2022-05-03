@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y \
         libxml2-dev \
         libpng-dev \
         libjpeg-dev \
+        libwebp-dev \
         libsqlite3-dev \
         imagemagick \
         libmagickwand-dev \
@@ -33,7 +34,7 @@ RUN apt-get update && apt-get install -y \
         git \
         build-essential \
         nodejs
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp
 RUN docker-php-ext-install -j "$(nproc)" \
         bcmath \
         gd \
