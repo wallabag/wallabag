@@ -87,6 +87,10 @@ URL de votre instance Unmark.it.
 
 ### Activer l'export .mobi
 
+{% hint style="warning" %}
+L'export au format MOBI est déprécié depuis la version 2.5.0 et sera supprimé dans la version 2.6.0.
+{% endhint %}
+
 `1` pour activer l'export .mobi, `0` pour le désactiver.
 
 ### Activer l'export PDF
