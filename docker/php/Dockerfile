@@ -74,6 +74,7 @@ RUN mkdir -p \
         /var/www/html/var/cache \
         /var/www/html/web/assets \
         /var/www/html/data \
+        /var/www/html/data/db \
         /var/www/.cache
 
 ENTRYPOINT ["/entrypoint.sh"]
