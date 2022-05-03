@@ -15,6 +15,7 @@
 !/bin/symfony_requirements
 .php_cs.cache
 .phpunit.result.cache
+phpunit.xml
 
 # Parameters
 /app/config/parameters.yml
