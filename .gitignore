@@ -43,6 +43,7 @@ docker/php/env
 
 # Data for wallabag
 data/wallabag*.sqlite
+data/wallabag*.sqlite-journal
 
 # assets stuff
 node_modules/
