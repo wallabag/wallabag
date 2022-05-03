@@ -64,7 +64,7 @@ RUN npm install -g yarn
 RUN curl -L -o /usr/local/bin/envsubst https://github.com/a8m/envsubst/releases/download/v1.1.0/envsubst-`uname -s`-`uname -m`; \
     chmod +x /usr/local/bin/envsubst
 
-COPY --from=composer:2.2.10 /usr/bin/composer /usr/local/bin/composer
+COPY --from=composer:2.2.12 /usr/bin/composer /usr/local/bin/composer
 
 COPY entrypoint.sh /entrypoint.sh
 COPY config/ /opt/wallabag/config/
