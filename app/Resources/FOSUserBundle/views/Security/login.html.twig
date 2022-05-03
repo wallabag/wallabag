@@ -8,8 +8,8 @@
             <script>Materialize.toast('{{ error.messageKey|trans(error.messageData, 'security') }}', 4000)</script>
         {% endif %}
 
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <script>Materialize.toast('{{ flashMessage }}')</script>
+        {% for flash_message in app.session.flashbag.get('notice') %}
+            <script>Materialize.toast('{{ flash_message }}')</script>
         {% endfor %}
 
         <div class="row">

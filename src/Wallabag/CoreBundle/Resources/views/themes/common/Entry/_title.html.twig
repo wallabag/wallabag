@@ -1,20 +1,20 @@
-{% set currentRoute = app.request.attributes.get('_route') %}
+{% set current_route = app.request.attributes.get('_route') %}
 
-{% if currentRoute == 'starred' %}
+{% if current_route == 'starred' %}
     {{ 'entry.page_titles.starred'|trans }}
-{% elseif currentRoute == 'archive' %}
+{% elseif current_route == 'archive' %}
     {{ 'entry.page_titles.archived'|trans }}
-{% elseif currentRoute == 'all' %}
+{% elseif current_route == 'all' %}
     {{ isFiltered ? 'entry.page_titles.filtered'|trans : 'entry.page_titles.all'|trans }}
-{% elseif currentRoute == 'search' %}
+{% elseif current_route == 'search' %}
     {{ 'entry.page_titles.filtered_search'|trans }} {{ filter }}
-{% elseif currentRoute == 'tag_entries' %}
+{% elseif current_route == 'tag_entries' %}
     {{ 'entry.page_titles.filtered_tags'|trans }} {{ filter }}
-{% elseif currentRoute == 'untagged' %}
+{% elseif current_route == 'untagged' %}
     {{ 'entry.page_titles.untagged'|trans }}
-{% elseif currentRoute == 'same_domain' %}
+{% elseif current_route == 'same_domain' %}
     {{ 'entry.page_titles.same_domain'|trans }}
-{% elseif currentRoute == 'annotated' %}
+{% elseif current_route == 'annotated' %}
     {{ 'entry.page_titles.with_annotations'|trans }}
 {% else %}
     {{ 'entry.page_titles.unread'|trans }}

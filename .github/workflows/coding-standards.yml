@@ -48,4 +48,4 @@ jobs:
         run: "php bin/phpstan analyse --no-progress --error-format=checkstyle | cs2pr"
 
       - name: "Run TwigCS"
-        run: "php bin/twigcs --severity=error --display=blocking --reporter checkstyle src/ | cs2pr"
+        run: "php bin/twigcs --severity=error --display=blocking --reporter checkstyle app/ src/ | cs2pr"
