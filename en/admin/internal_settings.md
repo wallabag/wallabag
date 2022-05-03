@@ -86,6 +86,10 @@ URL of your Unmark.it instance.
 
 ### Enable .mobi export
 
+{% hint style="warning" %}
+MOBI export has been deprecated in 2.5.0 and will be removed in 2.6.0.
+{% endhint %}
+
 `1` to activate .mobi export, `0` to deactivate.
 
 ### Enable PDF export

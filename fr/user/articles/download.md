@@ -5,6 +5,11 @@ Téléchargez vos articles
 Vous pouvez télécharger chaque article dans plusieurs formats : ePUB,
 MOBI, PDF, XML, JSON, CSV.
 
+{% hint style="warning" %}
+L'export au format MOBI est déprécié depuis la version 2.5.0 et sera supprimé
+dans la version 2.6.0.
+{% endhint %}
+
 Lorsque vous lisez un article, cliquez sur cette icône dans la barre
 latérale :
 
