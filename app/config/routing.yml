@@ -41,12 +41,6 @@ homepage:
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
-fos_user_security_login:
-    path: /login
-    defaults:
-        _controller: Wallabag\UserBundle\Controller\SecurityController::loginAction
-    methods: [GET, POST]
-
 fos_user_registration_register:
     path: /register
     defaults:

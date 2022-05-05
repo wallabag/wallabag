@@ -41,6 +41,8 @@ twig:
     form_themes:
         - "LexikFormFilterBundle:Form:form_div_layout.html.twig"
     exception_controller: wallabag_core.exception_controller:showAction
+    globals:
+        registration_enabled: '%fosuser_registration%'
 
 # Doctrine Configuration
 doctrine:
