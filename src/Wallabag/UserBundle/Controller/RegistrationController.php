@@ -9,7 +9,7 @@ class RegistrationController extends FOSRegistrationController
 {
     public function registerAction(Request $request)
     {
-        if ($this->container->getParameter('wallabag_user.registration_enabled')) {
+        if ($this->container->getParameter('fosuser_registration')) {
             return parent::registerAction($request);
         }
 

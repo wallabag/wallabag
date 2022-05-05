@@ -178,9 +178,6 @@ wallabag_core:
         -
             rule: _all ~ "https?://www\.lemonde\.fr/tiny.*"
 
-wallabag_user:
-    registration_enabled: "%fosuser_registration%"
-
 wallabag_import:
     allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain', 'text/csv']
     resource_dir: "%kernel.project_dir%/web/uploads/import"
