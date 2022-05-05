@@ -41,12 +41,6 @@ homepage:
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
-fos_user_registration_register:
-    path: /register
-    defaults:
-        _controller: Wallabag\UserBundle\Controller\RegistrationController::registerAction
-    methods: [GET, POST]
-
 fos_oauth_server_token:
     resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
 
