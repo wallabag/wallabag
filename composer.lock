@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "590ed41c623b7ee7204d486fc0412d99",
+    "content-hash": "e054b16ab0878815e7b6f087e6cbd299",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -9283,7 +9283,6 @@
             "time": "2022-03-13T20:07:29+00:00"
         },
         {
-
             "name": "symfony/monolog-bundle",
             "version": "v3.6.0",
             "source": {
@@ -12806,6 +12805,7 @@
         "ext-ctype": "*",
         "ext-curl": "*",
         "ext-dom": "*",
+        "ext-filter": "*",
         "ext-gd": "*",
         "ext-hash": "*",
         "ext-iconv": "*",
