@@ -462,7 +462,7 @@ class ContentProxyTest extends TestCase
         $this->assertContains('no-cache', $entry->getHeaders());
     }
 
-    public function testWithForcedContentAndDatetime()
+    public function testWithForcedContentAndDateTime()
     {
         $tagger = $this->getTaggerMock();
         $tagger->expects($this->once())
