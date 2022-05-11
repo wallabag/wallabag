@@ -1,11 +1,11 @@
 Articles
 ========
-Articles are the core feature of wallabag. wallabag's content parser, named Graby gets the content from articles, and only the content.
+Les articles sont un concept clé de wallabag. Graby, l'extracteur de contenus de wallabag, récupère le contenu des articles et uniquement le contenu.
 
-## Mark articles as read
+## Marquer les articles comme « lus »
 
-When you mark an article as read, it gets out of the category « Unread » and gets puts in the « Archive » category.
+Lorsque vous marquez un article comme lu, il est déplacé depuis la catégorie « Non lus » vers la catégorie « Lus »
 
-## Favorite articles
+## Articles favoris
 
-Marking an article as favorite puts it in the « Favorite » category, making it easier to find it.
+Si vous souhaitez retrouver un article plus facilement, vous pouvez le marquer comme « favori » et il apparaîtra dans la catégorie du même nom.
