@@ -32,3 +32,8 @@ user:
   type: rest
   resource: "WallabagApiBundle:UserRest"
   name_prefix:  api_
+
+config:
+    type: rest
+    resource: "WallabagApiBundle:ConfigRest"
+    name_prefix:  api_
