@@ -456,7 +456,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/annotated/list');
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(2, $crawler->filter('li.entry'));
+        $this->assertCount(2, $crawler->filter('ol.entries > li'));
     }
 
     public function testRangeException()
@@ -941,7 +941,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(2, $crawler->filter('li.entry'));
+        $this->assertCount(2, $crawler->filter('ol.entries > li'));
 
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl($this->url);
@@ -961,7 +961,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(3, $crawler->filter('li.entry'));
+        $this->assertCount(3, $crawler->filter('ol.entries > li'));
     }
 
     public function testPaginationWithFilter()
@@ -1768,6 +1768,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/domain/1');
-        $this->assertCount(4, $crawler->filter('li.entry'));
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertCount(4, $crawler->filter('ol.entries > li'));
     }
 }
