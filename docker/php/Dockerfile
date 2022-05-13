@@ -1,4 +1,4 @@
-FROM php:8.0-fpm AS rootless
+FROM php:7.4-fpm AS rootless
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG NODE_VERSION=14
@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y \
         libxml2-dev \
         libpng-dev \
         libjpeg-dev \
+        libwebp-dev \
         libsqlite3-dev \
         imagemagick \
         libmagickwand-dev \
@@ -33,7 +34,7 @@ RUN apt-get update && apt-get install -y \
         git \
         build-essential \
         nodejs
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp
 RUN docker-php-ext-install -j "$(nproc)" \
         bcmath \
         gd \
@@ -64,7 +65,7 @@ RUN npm install -g yarn
 RUN curl -L -o /usr/local/bin/envsubst https://github.com/a8m/envsubst/releases/download/v1.1.0/envsubst-`uname -s`-`uname -m`; \
     chmod +x /usr/local/bin/envsubst
 
-COPY --from=composer:2.2.10 /usr/bin/composer /usr/local/bin/composer
+COPY --from=composer:2.2.12 /usr/bin/composer /usr/local/bin/composer
 
 COPY entrypoint.sh /entrypoint.sh
 COPY config/ /opt/wallabag/config/
