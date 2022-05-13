@@ -237,6 +237,7 @@ entry:
         toogle_as_star: Toggle starred
         delete: Delete
         export_title: Export
+        assign_search_tag: Assign this search as a tag to each result
     filters:
         title: Filters
         status_label: Status
