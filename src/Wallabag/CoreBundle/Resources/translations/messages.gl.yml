@@ -203,7 +203,7 @@ config:
             title: PMF
     form_rules:
         faq:
-            how_to_use_them_description: 'Demos por feito que queres etiquetar as novas entradas con « <i>lectura rápida</i> » cando o tempo de lectura non supera os 3 minutos.<br />Neste caso, tes que poñer « TempodeLectura &lt;= 3 » no campo da <i>Regra</i> e « <i>lectura rápida</i> » no campo da <i>Etiqueta</i> .<br />Podes engadir varias etiquetas ó mesmo tempo separándoas cunha vírgula: « <i>lectura rápida, teño que ler</i> »<br />Pódense establecer regras complexas usando os operadores predefinidos: se o « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » entón etiquetar como « <i>lectura longa, GitHub </i> »'
+            how_to_use_them_description: 'Demos por feito que queres etiquetar as novas entradas con « <i>lectura rápida</i> » cando o tempo de lectura non supera os 3 minutos.<br />Neste caso, tes que poñer « TempodeLectura &lt;= 3 » no campo da <i>Regra</i> e « <i>lectura rápida</i> » no campo da <i>Etiqueta</i> .<br />Podes engadir varias etiquetas ó mesmo tempo separándoas cunha vírgula: « <i>lectura rápida, teño que ler</i> »<br />Pódense establecer regras complexas usando os operadores predefinidos: se o « <i>readingTime &gt;= 5 AND domainName = "www.php.net"</i> » entón etiquetar como « <i>lectura longa, php</i> »'
             operator_description:
                 notmatches: 'Comproba que o <i>obxecto</i> non contén a <i>busca</i> (non dif. maiúsculas).<br />Exemplo: <code>título non contén "saúde"</code>'
                 matches: 'Comproba que un <i>obxecto</i> concorda coa <i>busca</i> (dif. maius.-minus.).<br />Exemplo: <code>título contén "saúde"</code>'
@@ -312,7 +312,7 @@ config:
             table_method: Método
             googleTwoFactor_label: Usando app OTP (usa unha app como andOTP, FreeOTP, Authy ou Google Authenticator, para obter o código único)
             emailTwoFactor_label: Utilizando email (recibirás código por email)
-        login_label: Conexión (non se pode cambiar
+        login_label: Identificador (non se pode cambiar)
         email_label: Email
         name_label: Nome
         two_factor_description: Se activas o segundo factor de autenticación recibirás un email cun código en cada nova conexión que aínda non verificases.
@@ -391,11 +391,11 @@ security:
     login:
         cancel: Cancelar
         password: Contrasinal
-        username: Nome de usuaria
-        register: Abre unha conta
-        submit: Conectar
+        username: Identificador
+        register: Crea unha conta
+        submit: Acceder
         forgot_password: Esqueceches o contrasinal?
-        keep_logged_in: Manterme conectada
+        keep_logged_in: Manter a sesión
         page_title: Benvida a wallabag!
 import:
     wallabag_v2:
@@ -530,7 +530,7 @@ developer:
             paragraph_7: Esta chamada devolverá todas as entradas do teu usuario.
             paragraph_6: 'O access_token é útil para chamar ao punto de acceso da API. Por exemplo:'
             paragraph_5: 'A API responderá con algo semellante a:'
-            paragraph_4: 'Agora, crea o token (substitúe client_id, client_secret, username e password cos valores axeitados):'
+            paragraph_4: 'Agora, crea o token (substitúe client_id, client_secret, identificador e contrasinal cos valores axeitados):'
             paragraph_3: Para crear este token, tes que <a href="%link%">crear un novo cliente</a>.
             paragraph_2: Precisas un token para comunicarte entre a túa app de terceiros e a API de wallabag.
             paragraph_1: As seguintes ordes fan uso da <a href="https://github.com/jkbrzt/httpie">biblioteca HTTPie</a>. Comproba que está instalada no teu sistema antes de utilizala.
@@ -660,7 +660,7 @@ site_credential:
         save: Gardar
         password_label: Contrasinal
         host_label: Servidor (subdominio.exemplo.org, .exemplo.org, etc.)
-        username_label: Conectar
+        username_label: Identificador
     list:
         create_new_one: Crear unha nova credencial
         no: Non
@@ -673,7 +673,7 @@ site_credential:
     page_title: Xestión das credenciais do sitio
 user:
     search:
-        placeholder: Filtrar por nome de usuaria ou email
+        placeholder: Filtrar por identificador ou email
     form:
         back_to_list: Volver á lista
         delete_confirm: Tes a certeza?
@@ -681,14 +681,14 @@ user:
         save: Gardar
         twofactor_google_label: Segundo factor de autenticación por app OTP
         twofactor_email_label: Segundo factor de autenticación por email
-        last_login_label: Última conexión
+        last_login_label: Último acceso
         enabled_label: Activado
         email_label: Email
         plain_password_label: ????
         repeat_new_password_label: Repetir o novo contrasinal
         password_label: Contrasinal
         name_label: Nome
-        username_label: Nome de usuaria
+        username_label: Identificador
     list:
         create_new_one: Crear nova usuaria
         no: Non

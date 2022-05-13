@@ -1,0 +1,62 @@
+parameters:
+    database_driver: ${DATABASE_DRIVER:-pdo_sqlite}
+    database_driver_class: ${DATABASE_DRIVER_CLASS:-~}
+    database_host: ${DATABASE_HOST:-127.0.0.1}
+    database_port: ${DATABASE_PORT:-~}
+    database_name: ${DATABASE_NAME:-symfony}
+    database_user: ${DATABASE_USER:-root}
+    database_password: ${DATABASE_PASSWORD:-~}
+    database_path: ${DATABASE_PATH:-"%kernel.root_dir%/data/db/wallabag.sqlite"}
+    database_table_prefix: wallabag_
+    database_socket: null
+    database_charset: ${DATABASE_CHARSET:-utf8}
+
+    domain_name: ${DOMAIN_NAME:-https://www.example.com}
+    server_name: ${SERVER_NAME:-"Your wallabag instance"}
+
+    mailer_transport:  ${MAILER_TRANSPORT:-smtp}
+    mailer_user:       ${MAILER_USER:-~}
+    mailer_password:   ${MAILER_PASSWORD:-~}
+    mailer_host:       ${MAILER_HOST:-127.0.0.1}
+    mailer_port:       ${MAILER_PORT:-25}
+    mailer_encryption: ${MAILER_ENCRYPTION:-~}
+    mailer_auth_mode:  ${MAILER_AUTH_MODE:-~}
+
+    locale:            ${LOCALE:-en}
+
+    # A secret key that's used to generate certain security-related tokens
+    secret: ${SECRET:-~}
+
+    # two factor stuff
+    twofactor_auth: ${TWOFACTOR_AUTH:-true}
+    twofactor_sender: ${TWOFACTOR_SENDER:-no-reply@wallabag.org}
+
+    # fosuser stuff
+    fosuser_registration: ${FOSUSER_REGISTRATION:-true}
+    fosuser_confirmation: ${FOSUSER_CONFIRMATION:-true}
+
+    fos_oauth_server_access_token_lifetime: 3600
+    fos_oauth_server_refresh_token_lifetime: 1209600
+
+    from_email: ${FROM_EMAIL:-wallabag@example.com}
+
+    rss_limit: 50
+
+    # RabbitMQ processing
+    rabbitmq_host: localhost
+    rabbitmq_port: 5672
+    rabbitmq_user: guest
+    rabbitmq_password: guest
+    rabbitmq_prefetch_count: 10
+
+    # Redis processing
+    redis_scheme: ${REDIS_SCHEME:-tcp}
+    redis_host: ${REDIS_HOST:-redis}
+    redis_port: ${REDIS_PORT:-6379}
+    redis_path: ${REDIS_PATH:-~}
+    redis_password: ${REDIS_PASSWORD:-~}
+
+    # Sentry
+    sentry_dsn: ${SENTRY_DSN:-~}
+
+    session_handler: ${SESSION_HANDLER:-session.handler.native_file}

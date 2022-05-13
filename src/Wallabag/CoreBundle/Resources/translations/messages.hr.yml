@@ -176,7 +176,7 @@ config:
             title: ČPP
             meaning: Značenje
             variables_available_title: Koje varijable i operateri mogu koristiti za pisanje pravila?
-            how_to_use_them_description: 'Pretpostavimo da želiš označiti nove zapise kao <i>kratko čitanje</i> kad je vrijeme čitanja manje od 3 minute.<br />U tom slučaju, postavi „readingTime &lt;= 3” u polju <i>Pravilo</i> i <i>kratko čitanje</i> u polju <i>Oznake</i>.<br />Moguće je dodati više oznaka istovremeno, odvajajući ih zarezom: „<i>kratko čitanje, moram čitati</i>”<br />Složena pravila mogu se napisati pomoću unaprijed definiranih operatora: ako „<i>readingTime &gt;= 5 AND domainName = "github.com"</i>”, onda označi kao „<i>dugo čitanje, GitHub </i>”'
+            how_to_use_them_description: 'Pretpostavimo da želiš označiti nove zapise kao <i>kratko čitanje</i> kad je vrijeme čitanja manje od 3 minute.<br />U tom slučaju, postavi „readingTime &lt;= 3” u polju <i>Pravilo</i> i <i>kratko čitanje</i> u polju <i>Oznake</i>.<br />Moguće je dodati više oznaka istovremeno, odvajajući ih zarezom: „<i>kratko čitanje, moram čitati</i>”<br />Složena pravila mogu se napisati pomoću unaprijed definiranih operatora: ako „<i>readingTime &gt;= 5 AND domainName = "www.php.net"</i>”, onda označi kao „<i>dugo čitanje, php</i>”'
         delete_rule_label: ukloni
         edit_rule_label: uredi
         if_label: ako

@@ -161,8 +161,8 @@ class EntriesExport
          */
 
         $book->setTitle($this->title);
-        // Not needed, but included for the example, Language is mandatory, but EPub defaults to "en". Use RFC3066 Language codes, such as "en", "da", "fr" etc.
-        $book->setLanguage($this->language);
+        // EPub specification requires BCP47-compliant languages, thus we replace _ with -
+        $book->setLanguage(str_replace('_', '-', $this->language));
         $book->setDescription('Some articles saved on my wallabag');
 
         $book->setAuthor($this->author, $this->author);
@@ -527,6 +527,8 @@ class EntriesExport
      */
     private function getSanitizedFilename()
     {
-        return preg_replace('/[^A-Za-z0-9\- \']/', '', iconv('utf-8', 'us-ascii//TRANSLIT', $this->title));
+        $transliterator = \Transliterator::createFromRules(':: Any-Latin; :: Latin-ASCII; :: NFD; :: [:Nonspacing Mark:] Remove; :: NFC;', \Transliterator::FORWARD);
+
+        return preg_replace('/[^A-Za-z0-9\- \']/', '', $transliterator->transliterate($this->title));
     }
 }

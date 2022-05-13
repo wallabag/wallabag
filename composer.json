@@ -33,13 +33,15 @@
         "issues": "https://github.com/wallabag/wallabag/issues"
     },
     "require": {
-        "php": ">=7.2.5",
+        "php": ">=7.4",
+        "composer": "< 2.3",
         "ext-ctype": "*",
         "ext-curl": "*",
         "ext-dom": "*",
         "ext-gd": "*",
         "ext-hash": "*",
         "ext-iconv": "*",
+        "ext-intl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
         "ext-pcre": "*",
@@ -95,7 +97,7 @@
         "tecnickcom/tcpdf": "^6.3.0",
         "twig/extensions": "^1.5",
         "wallabag/php-mobi": "~1.0",
-        "wallabag/phpepub": "^4.0.7.2",
+        "wallabag/phpepub": "^4.0.10",
         "willdurand/hateoas-bundle": "~2.1"
     },
     "require-dev": {
@@ -162,7 +164,7 @@
     "config": {
         "bin-dir": "bin",
         "platform": {
-            "php": "7.2.5"
+            "php": "7.4.29"
         },
         "sort-packages": true,
         "allow-plugins": {

@@ -15,6 +15,7 @@
 !/bin/symfony_requirements
 .php_cs.cache
 .phpunit.result.cache
+phpunit.xml
 
 # Parameters
 /app/config/parameters.yml
@@ -35,15 +36,14 @@ web/uploads/
 /build
 /coverage
 
+# Development
+docker/php/env
+
 # Composer PHAR
 /composer.phar
 
 # Data for wallabag
 data/db/wallabag*.sqlite
-
-# Docker container logs and data
-docker/logs/
-docker/data/
 
 # assets stuff
 node_modules/

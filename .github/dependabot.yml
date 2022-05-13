@@ -34,3 +34,10 @@ updates:
   - dependency-name: nelmio/api-doc-bundle
     versions:
     - "> 2.13.4"
+- package-ecosystem: github-actions
+  directory: "/"
+  schedule:
+    interval: weekly
+    time: "04:00"
+    timezone: Europe/Paris
+  open-pull-requests-limit: 10

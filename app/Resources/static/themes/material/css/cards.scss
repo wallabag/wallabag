@@ -6,16 +6,6 @@ main {
   #content {
     padding: 0 0.5rem;
   }
-
-  ul.row {
-    margin: 0.4rem 0 0;
-    padding: 0 0.75rem;
-  }
-}
-
-.data .card .card-body {
-  height: 19em;
-  overflow: hidden;
 }
 
 @mixin mixin-reading-time {
@@ -37,6 +27,11 @@ main {
 }
 
 .card {
+  .card-content {
+    padding-bottom: 12px;
+    flex-grow: 1;
+  }
+
   .card-content .card-title,
   .card-reveal .card-title {
     line-height: 22.8px;
@@ -95,7 +90,7 @@ main {
   }
 
   .card-action {
-    padding: 10px 5px 10px 15px;
+    padding: 10px 10px 10px 15px;
 
     ul.links {
       margin: 0;
@@ -112,8 +107,9 @@ main {
       color: #fff;
     }
 
-    ul.tools li a.tool {
-      margin-right: 5px !important;
+    .tool {
+      display: flex;
+      margin-right: 0 !important;
     }
 
     @include mixin-reading-time;
@@ -132,6 +128,12 @@ main {
     margin-left: auto;
     margin-right: auto;
   }
+}
+
+.card-body {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
 }
 
 a.original:not(.waves-effect) {
@@ -310,4 +312,24 @@ a.original:not(.waves-effect) {
 
 .settings .div_tabs {
   padding-bottom: 15px;
+}
+
+.entries-row {
+  display: grid;
+  margin: 0.4rem 0 0;
+  padding: 0 0.75rem;
+  gap: 20px;
+}
+
+.entry-card {
+  display: flex;
+  margin: 0;
+  height: 100%;
+  flex-direction: column;
+}
+
+
+.tools {
+  display: flex;
+  gap: 10px;
 }

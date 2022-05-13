@@ -29,8 +29,6 @@ jobs:
       fail-fast: false
       matrix:
         php:
-          - "7.2"
-          - "7.3"
           - "7.4"
           - "8.0"
           - "8.1"
@@ -41,7 +39,7 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v2"
+        uses: "actions/checkout@v3"
         with:
           fetch-depth: 2
 
@@ -50,7 +48,7 @@ jobs:
         with:
           php-version: "${{ matrix.php }}"
           coverage: none
-          tools: pecl, composer:v2
+          tools: pecl, composer:2.2
           extensions: json, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
 
@@ -58,7 +56,7 @@ jobs:
         if: "${{ matrix.database == 'mysql' }}"
         run: |
           sudo systemctl start mysql.service
-          sudo mysql -u root -proot -e "CREATE DATABASE wallabag_test"
+          sudo mysql -u root -proot -h 127.0.0.1 -e "CREATE DATABASE wallabag_test"
 
       - name: "Setup PostgreSQL"
         if: "${{ matrix.database == 'pgsql' }}"

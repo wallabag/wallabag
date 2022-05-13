@@ -43,6 +43,16 @@ class ConfigController extends Controller
         $configForm->handleRequest($request);
 
         if ($configForm->isSubmitted() && $configForm->isValid()) {
+            // force theme to material to avoid using baggy
+            if ('baggy' === $config->getTheme()) {
+                $config->setTheme('material');
+
+                $this->addFlash(
+                    'notice',
+                    'Baggy is deprecated, forced to Material theme.'
+                );
+            }
+
             $em->persist($config);
             $em->flush();
 

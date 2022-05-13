@@ -2,6 +2,7 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
+use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -189,5 +190,36 @@ class TagController extends Controller
         }
 
         return $this->redirect($redirectUrl);
+    }
+
+    /**
+     * Tag search results with the current search term.
+     *
+     * @Route("/tag/search/{filter}", name="tag_this_search")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function tagThisSearchAction($filter, Request $request)
+    {
+        $currentRoute = $request->query->has('currentRoute') ? $request->query->get('currentRoute') : '';
+
+        /** @var QueryBuilder $qb */
+        $qb = $this->get('wallabag_core.entry_repository')->getBuilderForSearchByUser($this->getUser()->getId(), $filter, $currentRoute);
+        $em = $this->getDoctrine()->getManager();
+
+        $entries = $qb->getQuery()->getResult();
+
+        foreach ($entries as $entry) {
+            $this->get('wallabag_core.tags_assigner')->assignTagsToEntry(
+                $entry,
+                $filter
+            );
+
+            $em->persist($entry);
+        }
+
+        $em->flush();
+
+        return $this->redirect($this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'), '', true));
     }
 }

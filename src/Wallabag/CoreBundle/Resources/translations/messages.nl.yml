@@ -102,7 +102,7 @@ config:
             how_to_use_them_title: Hoe gebruik is ze?
             tagging_rules_definition_title: Wat betekend "label regels"?
             title: FAQ
-            how_to_use_them_description: 'Laten we aannemen dat u nieuwe vermeldingen wilt labelen als « <i>korte lezing</i> » wanneer de leestijd minder dan 3 minuten bedraagt.<br />In dat geval moet u « readingTime &lt;= 3 » in het <i>Regelveld</i> en « <i>korte lezing</i> » in het <i>Labels</i> veld.<br />Meerdere labels kunnen tegelijkertijd worden toegevoegd door ze te scheiden met een komma:« <i>korte lezing, belangrijk</i> »<br />Complexe regels kunnen worden geschreven met behulp van vooraf gedefinieerde operators: if « <i>readingTime &gt;= 5 AND domainName = "github.com"</i> » label dan als« <i>lange lezing, GitHub </i> »'
+            how_to_use_them_description: 'Laten we aannemen dat u nieuwe vermeldingen wilt labelen als « <i>korte lezing</i> » wanneer de leestijd minder dan 3 minuten bedraagt.<br />In dat geval moet u « readingTime &lt;= 3 » in het <i>Regelveld</i> en « <i>korte lezing</i> » in het <i>Labels</i> veld.<br />Meerdere labels kunnen tegelijkertijd worden toegevoegd door ze te scheiden met een komma:« <i>korte lezing, belangrijk</i> »<br />Complexe regels kunnen worden geschreven met behulp van vooraf gedefinieerde operators: if « <i>readingTime &gt;= 5 AND domainName = "www.php.net"</i> » label dan als« <i>lange lezing, php</i> »'
         tags_label: Labels
         rule_label: Regel
         edit_rule_label: wijzig

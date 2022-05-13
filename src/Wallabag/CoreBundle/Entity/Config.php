@@ -4,6 +4,7 @@ namespace Wallabag\CoreBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\UserBundle\Entity\User;
 
@@ -29,6 +30,8 @@ class Config
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Groups({"config_api"})
      */
     private $id;
 
@@ -50,6 +53,8 @@ class Config
      *      maxMessage = "validator.item_per_page_too_high"
      * )
      * @ORM\Column(name="items_per_page", type="integer", nullable=false)
+     *
+     * @Groups({"config_api"})
      */
     private $itemsPerPage;
 
@@ -58,6 +63,8 @@ class Config
      *
      * @Assert\NotBlank()
      * @ORM\Column(name="language", type="string", nullable=false)
+     *
+     * @Groups({"config_api"})
      */
     private $language;
 
@@ -65,6 +72,8 @@ class Config
      * @var string
      *
      * @ORM\Column(name="feed_token", type="string", nullable=true)
+     *
+     * @Groups({"config_api"})
      */
     private $feedToken;
 
@@ -77,6 +86,8 @@ class Config
      *      max = 100000,
      *      maxMessage = "validator.feed_limit_too_high"
      * )
+     *
+     * @Groups({"config_api"})
      */
     private $feedLimit;
 
@@ -84,6 +95,8 @@ class Config
      * @var float
      *
      * @ORM\Column(name="reading_speed", type="float", nullable=true)
+     *
+     * @Groups({"config_api"})
      */
     private $readingSpeed;
 
@@ -98,6 +111,8 @@ class Config
      * @var int
      *
      * @ORM\Column(name="action_mark_as_read", type="integer", nullable=true, options={"default" = 0})
+     *
+     * @Groups({"config_api"})
      */
     private $actionMarkAsRead;
 
@@ -105,6 +120,8 @@ class Config
      * @var int
      *
      * @ORM\Column(name="list_mode", type="integer", nullable=true)
+     *
+     * @Groups({"config_api"})
      */
     private $listMode;
 

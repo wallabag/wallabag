@@ -24,7 +24,13 @@ class ConfigType extends AbstractType
         $this->themes = array_combine(
             $themes,
             array_map(function ($s) {
-                return ucwords(strtolower(str_replace('-', ' ', $s)));
+                $cleanTheme = ucwords(strtolower(str_replace('-', ' ', $s)));
+
+                if ('Baggy' === $cleanTheme) {
+                    $cleanTheme = 'Baggy (DEPRECATED)';
+                }
+
+                return $cleanTheme;
             }, $themes)
         );
 

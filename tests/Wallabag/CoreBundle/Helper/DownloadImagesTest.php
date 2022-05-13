@@ -65,6 +65,7 @@ class DownloadImagesTest extends TestCase
             ['image/jpeg', 'jpeg'],
             ['image/png', 'png'],
             ['image/gif', 'gif'],
+            ['image/webp', 'webp'],
         ];
     }
 

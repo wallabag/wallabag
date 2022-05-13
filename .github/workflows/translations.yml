@@ -7,6 +7,9 @@ on:
       - master
       - 2.*
 
+permissions:
+  contents: read
+
 jobs:
   translations:
     name: "Translations"
@@ -19,14 +22,14 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v2"
+        uses: "actions/checkout@v3"
 
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
           coverage: "none"
           php-version: "${{ matrix.php }}"
-          tools: pecl, composer:v2
+          tools: pecl, composer:2.2
           extensions: pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
         env:
