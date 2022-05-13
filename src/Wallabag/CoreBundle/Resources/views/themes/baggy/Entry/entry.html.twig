@@ -36,7 +36,7 @@
                 {% if craue_setting('carrot') %}<li><a href="https://secure.carrot.org/GiveAndGetBack.do?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}" class="tool carrot icon-image icon-image--carrot" target="_blank" rel="noopener" title="carrot"><span>Carrot</span></a></li>{% endif %}
                 {% if craue_setting('show_printlink') %}<li><a title="{{ 'entry.view.left_menu.print'|trans }}" class="tool icon icon-print" href="javascript: window.print();"><span>{{ 'entry.view.left_menu.print'|trans }}</span></a></li>{% endif %}
                 {% if craue_setting('export_epub') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'epub' }) }}" title="Generate ePub file">EPUB</a></li>{% endif %}
-                {% if craue_setting('export_mobi') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'mobi' }) }}" title="Generate Mobi file">MOBI</a></li>{% endif %}
+                {% if craue_setting('export_mobi') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'mobi' }) }}" title="Generate Mobi file">MOBI (deprecated)</a></li>{% endif %}
                 {% if craue_setting('export_pdf') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'pdf' }) }}" title="Generate PDF file">PDF</a></li>{% endif %}
                 <li><a href="mailto:siteconfig@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{{ 'entry.view.left_menu.problem.label'|trans }}" class="tool bad-display icon icon-delete"><span>{{ 'entry.view.left_menu.problem.label'|trans }}</span></a></li>
             </ul>
