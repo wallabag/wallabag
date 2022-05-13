@@ -253,6 +253,7 @@ entry:
         toogle_as_star: '添加到收藏'
         delete: '删除'
         export_title: '导出'
+        assign_search_tag: 将此搜索作为标签分配给每个结果
     filters:
         title: '筛选器'
         status_label: '状态'
