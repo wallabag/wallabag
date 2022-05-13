@@ -38,7 +38,7 @@ be locally specified in `composer.lock`:
 ```json
     "config": {
         "platform": {
-            "php": "7.1.3",
+            "php": "7.4.29",
             "ext-something": "4.0"
         }
     }

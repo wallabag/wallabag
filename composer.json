@@ -33,7 +33,7 @@
         "issues": "https://github.com/wallabag/wallabag/issues"
     },
     "require": {
-        "php": ">=7.2.5",
+        "php": ">=7.4",
         "composer": "< 2.3",
         "ext-ctype": "*",
         "ext-curl": "*",
@@ -164,7 +164,7 @@
     "config": {
         "bin-dir": "bin",
         "platform": {
-            "php": "7.2.5"
+            "php": "7.4.29"
         },
         "sort-packages": true,
         "allow-plugins": {
