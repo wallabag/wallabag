@@ -3,7 +3,7 @@ download_pictures: Télécharger les images sur le serveur
 carrot: Activer le partage vers Carrot
 diaspora_url: URL de diaspora*, si le service est activé
 export_epub: Activer l'export ePub
-export_mobi: Activer l'export .mobi
+export_mobi: Activer l'export .mobi (déprécié, sera supprimé prochainement)
 export_pdf: Activer l'export PDF
 export_csv: Activer l'export CSV
 export_json: Activer l'export JSON
