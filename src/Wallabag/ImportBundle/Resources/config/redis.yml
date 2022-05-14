@@ -63,6 +63,27 @@ services:
             - "@event_dispatcher"
             - "@logger"
 
+    # delicious
+    wallabag_import.queue.redis.delicious:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            - "@wallabag_core.redis.client"
+            - "wallabag.import.delicious"
+
+    wallabag_import.producer.redis.delicious:
+        class: Wallabag\ImportBundle\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.delicious"
+
+    wallabag_import.consumer.redis.delicious:
+        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@wallabag_user.user_repository"
+            - "@wallabag_import.delicious.import"
+            - "@event_dispatcher"
+            - "@logger"
+
     # pocket
     wallabag_import.queue.redis.pocket:
         class: Simpleue\Queue\RedisQueue

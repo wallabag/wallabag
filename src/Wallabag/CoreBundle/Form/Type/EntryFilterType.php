@@ -93,7 +93,7 @@ class EntryFilterType extends AbstractType
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                     $value = $values['value'];
                     if (\strlen($value) <= 2 || empty($value)) {
-                        return;
+                        return false;
                     }
                     $expression = $filterQuery->getExpr()->like($field, $filterQuery->getExpr()->lower($filterQuery->getExpr()->literal('%' . $value . '%')));
 
@@ -105,7 +105,7 @@ class EntryFilterType extends AbstractType
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                     $value = $values['value'];
                     if (false === \array_key_exists($value, Response::$statusTexts)) {
-                        return;
+                        return false;
                     }
 
                     $paramName = sprintf('%s', str_replace('.', '_', $field));
@@ -129,7 +129,7 @@ class EntryFilterType extends AbstractType
                 'data' => $options['filter_unread'],
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                     if (false === $values['value']) {
-                        return;
+                        return false;
                     }
 
                     $expression = $filterQuery->getExpr()->eq('e.isArchived', 'false');
@@ -137,10 +137,22 @@ class EntryFilterType extends AbstractType
                     return $filterQuery->createCondition($expression);
                 },
             ])
+            ->add('isAnnotated', CheckboxFilterType::class, [
+                'label' => 'entry.filters.annotated_label',
+                'data' => $options['filter_annotated'],
+                'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
+                    if (false === $values['value']) {
+                        return false;
+                    }
+
+                    $qb = $filterQuery->getQueryBuilder();
+                    $qb->innerJoin('e.annotations', 'a');
+                },
+            ])
             ->add('previewPicture', CheckboxFilterType::class, [
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                     if (false === $values['value']) {
-                        return;
+                        return false;
                     }
 
                     $expression = $filterQuery->getExpr()->isNotNull($field);
@@ -152,7 +164,7 @@ class EntryFilterType extends AbstractType
             ->add('isPublic', CheckboxFilterType::class, [
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                     if (false === $values['value']) {
-                        return;
+                        return false;
                     }
 
                     // is_public isn't a real field
@@ -183,6 +195,7 @@ class EntryFilterType extends AbstractType
             'filter_archived' => false,
             'filter_starred' => false,
             'filter_unread' => false,
+            'filter_annotated' => false,
         ]);
     }
 }

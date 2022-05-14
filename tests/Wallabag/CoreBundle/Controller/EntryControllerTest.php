@@ -3,6 +3,7 @@
 namespace Tests\Wallabag\CoreBundle\Controller;
 
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\SiteCredential;
@@ -446,6 +447,16 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client->request('GET', '/starred/list');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function testWithAnnotations()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/annotated/list');
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertCount(2, $crawler->filter('ol.entries > li'));
     }
 
     public function testRangeException()
@@ -913,6 +924,44 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->submit($form, $data);
 
         $this->assertCount(0, $crawler->filter($this->entryDataTestAttribute));
+    }
+
+    public function testFilterOnAnnotatedStatus()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/all/list');
+
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+
+        $data = [
+            'entry_filter[isAnnotated]' => true,
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(2, $crawler->filter('ol.entries > li'));
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+
+        $em = $this->getClient()->getContainer()->get('doctrine.orm.entity_manager');
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUserName('admin');
+
+        $annotation = new Annotation($user);
+        $annotation->setEntry($entry);
+        $annotation->setText('This is my annotation /o/');
+        $annotation->setQuote('content');
+
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(3, $crawler->filter('ol.entries > li'));
     }
 
     public function testPaginationWithFilter()
@@ -1627,6 +1676,10 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertStringContainsString('/view/', $client->getResponse()->getTargetUrl(), 'Untagged random');
 
+        $client->request('GET', '/annotated/random');
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertStringContainsString('/view/', $client->getResponse()->getTargetUrl(), 'With annotations random');
+
         $client->request('GET', '/all/random');
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertStringContainsString('/view/', $client->getResponse()->getTargetUrl(), 'All random');
@@ -1707,5 +1760,15 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/delete/' . $entry2->getId());
         $this->assertSame(404, $client->getResponse()->getStatusCode());
+    }
+
+    public function testGetSameDomainEntries()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $crawler = $client->request('GET', '/domain/1');
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertCount(4, $crawler->filter('ol.entries > li'));
     }
 }

@@ -39,7 +39,34 @@ class EntryRepository extends EntityRepository
         return $this
             ->getSortedQueryBuilderByUser($userId)
             ->andWhere('e.isArchived = false')
-        ;
+            ;
+    }
+
+    /**
+     * Retrieves entries with the same domain.
+     *
+     * @param int $userId
+     * @param int $entryId
+     *
+     * @return QueryBuilder
+     */
+    public function getBuilderForSameDomainByUser($userId, $entryId)
+    {
+        $queryBuilder = $this->createQueryBuilder('e');
+
+        return $this
+            ->getSortedQueryBuilderByUser($userId)
+            ->andWhere('e.id <> :entryId')->setParameter('entryId', $entryId)
+            ->andWhere(
+                $queryBuilder->expr()->in(
+                    'e.domainName',
+                    $this
+                        ->createQueryBuilder('e2')
+                        ->select('e2.domainName')
+                        ->where('e2.id = :entryId')->setParameter('entryId', $entryId)
+                        ->getDQL()
+                )
+            );
     }
 
     /**
@@ -113,6 +140,21 @@ class EntryRepository extends EntityRepository
     public function getBuilderForUntaggedByUser($userId)
     {
         return $this->sortQueryBuilder($this->getRawBuilderForUntaggedByUser($userId));
+    }
+
+    /**
+     * Retrieve entries with annotations for a user.
+     *
+     * @param int $userId
+     *
+     * @return QueryBuilder
+     */
+    public function getBuilderForAnnotationsByUser($userId)
+    {
+        return $this
+            ->getSortedQueryBuilderByUser($userId)
+            ->innerJoin('e.annotations', 'a')
+            ;
     }
 
     /**
@@ -551,6 +593,10 @@ class EntryRepository extends EntityRepository
             case 'untagged':
                 $qb->leftJoin('e.tags', 't');
                 $qb->andWhere('t.id is null');
+                break;
+            case 'annotated':
+                $qb->leftJoin('e.annotations', 'a');
+                $qb->andWhere('a.id is not null');
                 break;
         }
 

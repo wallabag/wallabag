@@ -1,29 +1,29 @@
 {
-    "bookmarks": [
-        {
-            "article__excerpt": "When Twitter started it had so much promise to change the way we communicate. But now it has been ruined by the amount of garbage and hate we have to wade through. It&#x2019;s like that polluted&hellip;",
-            "favorite": false,
-            "date_archived": null,
-            "article__url": "https://venngage.com/blog/hashtags-are-worthless/",
-            "date_added": "2016-08-25T12:05:00",
-            "date_favorited": null,
-            "article__title": "We Looked At 167,943 Tweets & Found Out Hashtags Are Worthless",
-            "archive": false
-        },
-        {
-            "article__title": "No title found",
-            "article__url": "http://news.nationalgeographic.com/2016/02/160211-albatrosses-mothers-babies-animals-science/&sf20739758=1",
-            "archive": false,
-            "date_added": "2016-09-08T11:55:58+0200",
-            "favorite": true
-        },
-        {
-            "archive": 0,
-            "date_added": "2016-09-08T11:55:58+0200",
-            "favorite": 0,
-            "article__title": "Bordeaux: Poche, chocolatine… Une association traduit aux étudiants étrangers les mots du Sud-Ouest",
-            "article__url": "https://www.20minutes.fr/bordeaux/2120479-20170823-bordeaux-poche-chocolatine-association-traduit-etudiants-etrangers-mots-sud-ouest"
-        }
-   ],
-    "recommendations": []
+  "bookmarks": [
+    {
+      "article__excerpt": "When Twitter started it had so much promise to change the way we communicate. But now it has been ruined by the amount of garbage and hate we have to wade through. It&#x2019;s like that polluted&hellip;",
+      "favorite": false,
+      "date_archived": null,
+      "article__url": "https://venngage.com/blog/hashtags-are-worthless/",
+      "date_added": "2016-08-25T12:05:00",
+      "date_favorited": null,
+      "article__title": "We Looked At 167,943 Tweets & Found Out Hashtags Are Worthless",
+      "archive": false
+    },
+    {
+      "article__title": "No title found",
+      "article__url": "http://news.nationalgeographic.com/2016/02/160211-albatrosses-mothers-babies-animals-science/&sf20739758=1",
+      "archive": false,
+      "date_added": "2016-09-08T11:55:58+0200",
+      "favorite": true
+    },
+    {
+      "archive": 0,
+      "date_added": "2016-09-08T11:55:58+0200",
+      "favorite": 0,
+      "article__title": "Bordeaux: Poche, chocolatine… Une association traduit aux étudiants étrangers les mots du Sud-Ouest",
+      "article__url": "https://www.20minutes.fr/bordeaux/2120479-20170823-bordeaux-poche-chocolatine-association-traduit-etudiants-etrangers-mots-sud-ouest"
+    }
+  ],
+  "recommendations": []
 }

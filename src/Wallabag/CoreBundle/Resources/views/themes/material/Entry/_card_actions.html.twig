@@ -9,6 +9,9 @@
 
     <ul class="tools right">
         <li>
+            <a title="{{ 'entry.list.show_same_domain'|trans }}" class="tool grey-text" href="{{ path('same_domain', { 'id': entry.id }) }}" data-action="same_domain" data-entry-id="{{ entry.id }}"><i class="material-icons">language</i></a>
+        </li>
+        <li>
             <a title="{{ 'entry.list.toogle_as_read'|trans }}" class="tool grey-text" href="{{ path('archive_entry', { 'id': entry.id }) }}" data-action="archived" data-entry-id="{{ entry.id }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i></a>
         </li>
         <li>
