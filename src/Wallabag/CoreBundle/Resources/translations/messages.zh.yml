@@ -37,6 +37,7 @@ menu:
         theme_toggle_auto: 自动根据系统设置应用主题
         theme_toggle_dark: 深色主题
         theme_toggle_light: 浅色主题
+        with_annotations: 带注释
     top:
         add_new_entry: '添加新项目'
         search: '搜索'
@@ -240,6 +241,8 @@ entry:
         filtered_search: '根据搜索筛选：'
         untagged: '无标签项目'
         all: '所有项目'
+        with_annotations: 带注释的条目
+        same_domain: 同一域名
     list:
         number_on_the_page: '{0} 没有对应项目。|{1} 有 1 个项目。|]1,Inf[ 有 %count% 个项目。'
         reading_time: '预计阅读时间'
@@ -254,6 +257,7 @@ entry:
         delete: '删除'
         export_title: '导出'
         assign_search_tag: 将此搜索作为标签分配给每个结果
+        show_same_domain: 显示同一域名的文章
     filters:
         title: '筛选器'
         status_label: '状态'
@@ -278,6 +282,7 @@ entry:
         action:
             clear: '清除'
             filter: '筛选'
+        annotated_label: 已注释
     view:
         left_menu:
             back_to_top: '返回顶部'
@@ -535,6 +540,10 @@ import:
         page_title: "导入 > Pinboard"
         description: '这个导入器会导入你 Pinboard 账户中的所有内容。 在 backup 页面（https://pinboard.in/settings/backup），点击 "Bookmarks" 一栏下的 "JSON"。你将会下载得到一个 JSON 文件（比如"pinboard_export"）。'
         how_to: '请选择你的 Pinboard 导出文件并点击下方按钮来上传和导入它。'
+    delicious:
+        how_to: 请选择你的 Delicious 导出，点击下面的按钮上传并导入。
+        page_title: 导入 > del.icio.us
+        description: 此导入器将导入你所有的 Delicious 书签。 自 2021 年起，你可以使用导出页面 (https://del.icio.us/export) 再次从中导出数据。 选择“JSON”格式并下载（如“delicious_export.2021.02.06_21.10.json”）。
 developer:
     page_title: 'API 客户端管理'
     welcome_message: '欢迎来到 wallabag API'
