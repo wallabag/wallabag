@@ -1,3 +1,10 @@
 security:
     login:
         page_title: Selamat datang di wallabag!
+        keep_logged_in: Biarkan saya tetap masuk
+        forgot_password: Lupa password?
+        submit: Masuk
+        register: Daftar
+        username: Nama pengguna
+        password: Password
+        cancel: Batal
