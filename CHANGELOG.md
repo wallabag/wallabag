@@ -1,5 +1,54 @@
 # Changelog
 
+## [2.5.0](https://github.com/wallabag/wallabag/tree/2.5.0)
+   [Full Changelog](https://github.com/wallabag/wallabag/compare/2.4.3...2.5.0)
+
+### Features
+
+- Add Delicious import by @j0k3r in https://github.com/wallabag/wallabag/pull/5022
+- Add route to list entries with annotations by @nicosomb in https://github.com/wallabag/wallabag/pull/4341
+- Add an option to sort the feed entries by `updated_at` by @agallou in https://github.com/wallabag/wallabag/pull/5659
+- Add support to download webp image locally by @j0k3r in https://github.com/wallabag/wallabag/pull/5687
+- Update readme and docker development env by @Kdecherf in https://github.com/wallabag/wallabag/pull/5662
+- Deprecate Baggy theme by @j0k3r in https://github.com/wallabag/wallabag/pull/5742
+- Add action to assign a search as a tag to each result by @nicosomb in https://github.com/wallabag/wallabag/pull/5381
+- Drop PHP prior to 7.4 by @yguedidi in https://github.com/wallabag/wallabag/pull/5791
+- Deprecate mobi export by @Kdecherf in https://github.com/wallabag/wallabag/pull/5775
+
+### API
+
+- Add new endpoint for API: config by @nicosomb in https://github.com/wallabag/wallabag/pull/5673
+
+### Technical stuff
+
+- Fix test with `usinenouvelle.com` being flaky these times by @j0k3r in https://github.com/wallabag/wallabag/pull/5686
+- Replace `iconv()` calls with Transliterator by @Kdecherf in https://github.com/wallabag/wallabag/pull/5680
+- Composer 2.3 isn't compatible with wallabag by @j0k3r in https://github.com/wallabag/wallabag/pull/5708
+- CI workaround for PHP < 7.4 & MySQL 8 by @j0k3r in https://github.com/wallabag/wallabag/pull/5729
+- Set permissions for GitHub actions by @naveensrinivasan in https://github.com/wallabag/wallabag/pull/5732
+- Included githubactions in the dependabot config by @naveensrinivasan in https://github.com/wallabag/wallabag/pull/5737
+- Remove bundle inheritance by @yguedidi in https://github.com/wallabag/wallabag/pull/5746
+- Fix SQLite database location by @yguedidi in https://github.com/wallabag/wallabag/pull/5771
+- Disable XDebug in test make recipe by @yguedidi in https://github.com/wallabag/wallabag/pull/5770
+- Exclude local phpunit.xml by @yguedidi in https://github.com/wallabag/wallabag/pull/5757
+- Upgrade PHP dependencies by @yguedidi in https://github.com/wallabag/wallabag/pull/5778
+- Merge branch 2.5.0 in master by @j0k3r in https://github.com/wallabag/wallabag/pull/5794
+
+### Translations
+
+- Enabled greek translation by @nicosomb in https://github.com/wallabag/wallabag/pull/5656
+
+### Fixes
+
+- Fix tagging rule match when user has a custom reading speed by @j0k3r in https://github.com/wallabag/wallabag/pull/5646
+- Feat/home entries updated by @Simounet in https://github.com/wallabag/wallabag/pull/5664
+- Fix row and card style regressions by @Simounet in https://github.com/wallabag/wallabag/pull/5676
+- Fix epub language by @j0k3r in https://github.com/wallabag/wallabag/pull/5647
+- material: improve mass buttons style, mostly for smartphone screens by @Kdecherf in https://github.com/wallabag/wallabag/pull/5695
+- Fix composer version in docker dev configuration by @nicosomb in https://github.com/wallabag/wallabag/pull/5715
+- Use site with subdomain as tagging rule example by @jonas-hagen in https://github.com/wallabag/wallabag/pull/5744
+- Fix PHP Docker image by @yguedidi in https://github.com/wallabag/wallabag/pull/5772
+
 ## [2.4.3](https://github.com/wallabag/wallabag/tree/2.4.3)
    [Full Changelog](https://github.com/wallabag/wallabag/compare/2.4.2...2.4.3)
 
