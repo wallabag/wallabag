@@ -38,6 +38,7 @@
 ### Translations
 
 - Enabled greek translation by @nicosomb in https://github.com/wallabag/wallabag/pull/5656
+- Translations update from Hosted Weblate by @weblate see https://github.com/wallabag/wallabag/pulls?q=is%3Apr+author%3Aweblate+milestone%3A2.5.0+is%3Amerged
 
 ### Fixes
 
