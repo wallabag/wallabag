@@ -32,7 +32,7 @@ export_txt: Activar exportación TXT
 export_json: Activar exportación JSON
 export_csv: Activar exportación CSV
 export_pdf: Activar exportación PDF
-export_mobi: Activar exportación .mobi
+export_mobi: Activar exportación .mobi (xa non se usa, vai ser eliminada)
 export_epub: Activar exportación ePub
 diaspora_url: URL de diaspora*, se o servizo está activo
 carrot: Activar compartir en Carrot
