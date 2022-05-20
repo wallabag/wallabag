@@ -10,9 +10,11 @@
 - Add an option to sort the feed entries by `updated_at` by @agallou in https://github.com/wallabag/wallabag/pull/5659
 - Add support to download webp image locally by @j0k3r in https://github.com/wallabag/wallabag/pull/5687
 - Update readme and docker development env by @Kdecherf in https://github.com/wallabag/wallabag/pull/5662
-- Deprecate Baggy theme by @j0k3r in https://github.com/wallabag/wallabag/pull/5742
 - Add action to assign a search as a tag to each result by @nicosomb in https://github.com/wallabag/wallabag/pull/5381
 - Drop PHP prior to 7.4 by @yguedidi in https://github.com/wallabag/wallabag/pull/5791
+
+### Deprecated features
+- Deprecate Baggy theme by @j0k3r in https://github.com/wallabag/wallabag/pull/5742
 - Deprecate mobi export by @Kdecherf in https://github.com/wallabag/wallabag/pull/5775
 
 ### API
@@ -32,7 +34,6 @@
 - Disable XDebug in test make recipe by @yguedidi in https://github.com/wallabag/wallabag/pull/5770
 - Exclude local phpunit.xml by @yguedidi in https://github.com/wallabag/wallabag/pull/5757
 - Upgrade PHP dependencies by @yguedidi in https://github.com/wallabag/wallabag/pull/5778
-- Merge branch 2.5.0 in master by @j0k3r in https://github.com/wallabag/wallabag/pull/5794
 
 ### Translations
 
