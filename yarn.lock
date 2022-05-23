@@ -3836,10 +3836,10 @@ materialize-css@^0.98.1:
     jquery "^2.1.4"
     node-archiver "^0.3.0"
 
-mathjax@^3.1.2:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/mathjax/-/mathjax-3.2.0.tgz#ea7c317f8c81776ecfc83b294fc313046bf7f726"
-  integrity sha512-PL+rdYRK4Wxif+SQ94zP/L0sv6/oW/1WdQiIx0Jvn9FZaU5W9E6nlIv8liYAXBNPL2Fw/i+o/mZ1212eSzn0Cw==
+mathjax@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/mathjax/-/mathjax-3.2.1.tgz#b74b0cec928322dff6a3c74a757c534e69916d25"
+  integrity sha512-blUch14trKnfQHjDjy1kdg5bN8jK0bdHbkerQBKCrZ3Anpb81zZ7xnj5J55vsqQoG+Irz3BHBDzRssjeehkzxg==
 
 mathml-tag-names@^2.1.3:
   version "2.1.3"
