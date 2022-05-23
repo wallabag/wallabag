@@ -86,7 +86,6 @@
         "pragmarx/recovery": "^0.2.0",
         "predis/predis": "^1.1.3",
         "scheb/two-factor-bundle": "^4.11.0",
-        "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^5.2",
         "sentry/sentry-symfony": "3.5.3",
         "stof/doctrine-extensions-bundle": "^1.2",
@@ -121,10 +120,8 @@
     "scripts": {
         "post-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+            "bin/console cache:clear --no-warmup",
+            "bin/console assets:install web --symlink --relative"
         ],
         "post-install-cmd": [
             "@post-cmd"
@@ -134,12 +131,6 @@
         ]
     },
     "extra": {
-        "symfony-app-dir": "app",
-        "symfony-bin-dir": "bin",
-        "symfony-var-dir": "var",
-        "symfony-web-dir": "web",
-        "symfony-tests-dir": "tests",
-        "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         }
