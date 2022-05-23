@@ -1,13 +1,13 @@
 {
   "name": "wallabag",
-  "version": "2.3.3",
+  "version": "2.5.0",
   "description": "wallabag is a self hostable application for saving web pages",
   "private": true,
   "directories": {
     "doc": "docs"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=16"
   },
   "repository": {
     "type": "git",
