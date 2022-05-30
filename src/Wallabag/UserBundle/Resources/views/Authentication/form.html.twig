@@ -1,5 +1,5 @@
 {# Override `vendor/scheb/two-factor-bundle/Resources/views/Authentication/form.html.twig` #}
-{% extends "WallabagUserBundle::layout.html.twig" %}
+{% extends "FOSUserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}
 <form class="form" action="{{ path("2fa_login_check") }}" method="post">
