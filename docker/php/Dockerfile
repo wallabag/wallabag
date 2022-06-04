@@ -1,7 +1,7 @@
 FROM php:7.4-fpm AS rootless
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG NODE_VERSION=14
+ARG NODE_VERSION=16
 
 RUN apt-get update \
     && apt-get install -y \
