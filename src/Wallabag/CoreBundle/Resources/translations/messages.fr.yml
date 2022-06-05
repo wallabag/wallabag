@@ -226,6 +226,7 @@ entry:
         filtered_search: 'Articles filtrés par recherche :'
         untagged: Article sans étiquette
         all: Tous les articles
+        same_domain: Même site
     list:
         number_on_the_page: '{0} Il n’y a pas d’article.|{1} Il y a un article.|]1,Inf[ Il y a %count% articles.'
         reading_time: durée de lecture
@@ -239,6 +240,7 @@ entry:
         toogle_as_star: Marquer comme favori
         delete: Supprimer
         export_title: Exporter
+        show_same_domain: Afficher les articles du même site
     filters:
         title: Filtres
         status_label: Status
@@ -519,6 +521,9 @@ import:
     elcurator:
         description: Cet outil va importer tous vos articles depuis elCurator. Allez dans vos préférences sur elCurator et exportez vos contenus. Vous allez récupérer un fichier JSON.
         page_title: Importer > elCurator
+    delicious:
+        page_title: Importer > del.icio.us
+        how_to: Choisissez le fichier de votre export Delicious et cliquez sur le bouton ci-dessous pour l'importer.
 developer:
     page_title: Gestion des clients API
     welcome_message: Bienvenue sur l’API de wallabag
