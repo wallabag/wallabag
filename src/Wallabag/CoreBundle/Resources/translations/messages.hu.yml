@@ -393,6 +393,7 @@ tag:
     list:
         number_on_the_page: '{0} Nincsenek címkék.|{1} Egy címke.|]1,Inf[ %count% címke.'
         see_untagged_entries: Címkézetlen bejegyzések megtekintése
+        untagged: Címkézetlen bejegyzések
     new:
         add: Hozzáad
         placeholder: Több címkét is hozzáadhat, vesszővel elválasztva.
