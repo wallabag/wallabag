@@ -241,6 +241,7 @@ entry:
         delete: Supprimer
         export_title: Exporter
         show_same_domain: Afficher les articles du même site
+        assign_search_tag: Ajouter cette recherche comme un tag à chaque résultat
     filters:
         title: Filtres
         status_label: Status
@@ -524,6 +525,7 @@ import:
     delicious:
         page_title: Importer > del.icio.us
         how_to: Choisissez le fichier de votre export Delicious et cliquez sur le bouton ci-dessous pour l'importer.
+        description: Depuis 2021, vous pouvez à nouveau exporter vos données depuis Delicious (https://del.icio.us/export). Choisissez le format "JSON" et téléchargez le (un fichier du genre "delicious_export.2021.02.06_21.10.json").
 developer:
     page_title: Gestion des clients API
     welcome_message: Bienvenue sur l’API de wallabag
