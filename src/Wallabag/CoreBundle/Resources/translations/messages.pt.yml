@@ -329,6 +329,7 @@ tag:
     list:
         number_on_the_page: '{0} Não existem tags.|{1} Uma tag.|]1,Inf[ Existem %count% tags.'
         see_untagged_entries: 'Ver entradas sem tags'
+        untagged: Entradas sem tags
 import:
     page_title: 'Importar'
     page_description: 'Bem-vindo ao importador do wallabag. Por favo selecione o serviço do qual deseja migrar.'
