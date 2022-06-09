@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.5.1](https://github.com/wallabag/wallabag/tree/2.5.1)
+   [Full Changelog](https://github.com/wallabag/wallabag/compare/2.5.0...2.5.1)
+
+### Fixes
+- Jump to Node 16 to build assets by @j0k3r in https://github.com/wallabag/wallabag/pull/5822
+- Update some deps by @j0k3r in https://github.com/wallabag/wallabag/pull/5834
+- Fix error about template not found in 2fa form by @j0k3r in https://github.com/wallabag/wallabag/pull/5833
+- Translations update from Hosted Weblate by @weblate in https://github.com/wallabag/wallabag/pull/5846
+- material: fix "untagged entries" chip style by @Kdecherf in https://github.com/wallabag/wallabag/pull/5840
+
 ## [2.5.0](https://github.com/wallabag/wallabag/tree/2.5.0)
    [Full Changelog](https://github.com/wallabag/wallabag/compare/2.4.3...2.5.0)
 
