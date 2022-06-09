@@ -16,13 +16,7 @@ During this documentation, we assume the release is `$LAST_WALLABAG_RELEASE` (li
 
 #### Create a new release on GitHub
 
-- Run this command to create the package:
-
-```
-make release VERSION=$LAST_WALLABAG_RELEASE
-```
-
-- [Create the new release on GitHub](https://github.com/wallabag/wallabag/releases/new) by targetting the `master` branch or any appropriate branch (for instance backports). You have to upload the package (generated previously).
+- [Create the new release on GitHub](https://github.com/wallabag/wallabag/releases/new) by targetting the `master` branch or any appropriate branch (for instance backports).
 - Update nginx config to change the redirect rule for `https://wllbg.org/latest-v2-package` & `http://wllbg.org/latest-v2` (they both redirect to the asset of the GitHub release)
 - Update Dockerfile https://github.com/wallabag/docker (and create a new tag)
 - Update wallabag.org website (downloads, MD5 sum, releases and new blog post)
