@@ -141,6 +141,9 @@ config:
         feed_link:
             all: Todos
         feed_limit: Número de itens no feed
+    otp:
+        app:
+            cancel: Cancelar
 entry:
     default_title: 'Título da entrada'
     page_titles:

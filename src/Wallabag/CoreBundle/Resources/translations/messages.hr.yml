@@ -62,7 +62,7 @@ import:
         how_to: 'Odaberi datoteku sigurnosne kopije zabilježaka i pritisni donji gumb za uvoz datoteke. Napomena: uvoz može potrajati, jer se moraju dohvatiti svi članci.'
         description: 'Ovaj uvoznik uvozi sve tvoje zabilješke iz Chromea. Mjesto datoteke ovisi o tvom operacijskom sustavu: Na Linuxu sustavu idi u mapu <code>~/.config/chromium/Default/</code></li><li>Na Windows sustavu mapa bi se trebala nalziti u <code>%LOCALAPPDATA%\Google\Chrome\User Data\Default</code></li><li>Na OS X sustavu trebala bi biti u <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Kad stigneš tamo, kopiraj datoteku <code>Bookmarks</code> na neko mjesto gdje ćeš je pronaći.<em><br>Ako koristiš Chromium umjesto Chromea, morat ćeš u skladu s time ispraviti staze.</em></p>'
     readability:
-        how_to: Odaberi Readability izvoz i pritisni donji gumb za preuzimanje i uvoz datoteke.
+        how_to: Odaberi Readability izvoz i pritisni donji gumb za slanje i uvoz datoteke.
         page_title: Uvoz > Readability
         description: Ovaj uvoznik uvozi sve tvoje Readability članke. Na stranici alata (https://www.readability.com/tools/), pritisni „Izvezi svoje podatke” u odjeljku „Izvoz podataka”. Primit ćeš e-mail za preuzimanje json-a (što zapravo ne završava s .json).
     worker:
@@ -70,11 +70,11 @@ import:
         download_images_warning: Aktivirao(la) si preuzimanje slika za članke. U kombinaciji s klasičnim uvozom, postupak može potrajati godinama (ili možda ne uspije). <strong>Preporučujemo</strong> aktivirati asinkroniziran uvoz za izbjegavanje grešaka.
     pinboard:
         page_title: Uvoz > Pinboard
-        how_to: Odaberi Pinboard izvoz i pritisni donji gumb za preuzimanje i uvoz datoteke.
+        how_to: Odaberi Pinboard izvoz i pritisni donji gumb za slanje i uvoz datoteke.
         description: Ovaj uvoznik uvozi sve tvoje Pinboard članke. Na stranici sigurnosne kopije (https://pinboard.in/settings/backup), pritisni „JSON” u odjeljku „Zabilješke”. Preuzet će se JSON datoteka (poput „pinboard_export”).
     instapaper:
         page_title: Uvoz > Instapaper
-        how_to: Odaberi Instapaper izvoz i pritisni donji gumb za preuzimanje i uvoz datoteke.
+        how_to: Odaberi Instapaper izvoz i pritisni donji gumb za slanje i uvoz datoteke.
         description: Ovaj uvoznik uvozi sve tvoje Instapaper članke. Na stranici postavki (https://www.instapaper.com/user) pritisni „Preuzmi .CSV datoteku” u odjeljku „Izvoz”. Preuzet će se CSV datoteka (poput „instapaper-export.csv”).
     pocket:
         config_missing:
@@ -82,7 +82,7 @@ import:
             description: Uvoz iz Pocketa nije konfiguriran.
             user_message: Administrator tvog poslužitelja mora definirati ključ za sučelje za Pocket.
         description: Ovaj uvoznik uvozi sve tvoje Pocket podatke. Pocket nam ne dopušta dohvaćanje sadržaja iz njihove usluge, stoga će se čitljiv sadržaj svakog članka ponovno dohvatiti pomoću wallabaga.
-        authorize_message: Tvoje podatke možeš uvesti s tvog Pocket računa. Jednostavno pritisni donji gumb i autoriziraj program, da se poveže s getpocket.com.
+        authorize_message: Tvoje podatke možeš uvesti s tvog Pocket računa. Jednostavno pritisni donji gumb i autoriziraj program da se poveže na getpocket.com.
         connect_to_pocket: Spoji se na Pocket i uvezi podatke
         page_title: Uvoz > Pocket
     form:
@@ -92,7 +92,7 @@ import:
         save_label: Prenesi datoteku
     wallabag_v1:
         page_title: Uvoz > Wallabag v1
-        how_to: Odaberi wallabag izvoz i pritisni donji gumb za preuzimanje i uvoz datoteke.
+        how_to: Odaberi wallabag izvoz i pritisni donji gumb za slanje i uvoz datoteke.
         description: Ovaj uvoznik uvozi sve tvoje članke wallabaga verzije 1. Na tvojoj stranici konfiguracije, pritisni „JSON izvoz” u odjeljku „Izvezi svoje wallabag podatke”. Dobit ćeš datoteku „wallabag-export-1-xxxx-xx-xx.json”.
     page_description: Dobro došao/dobro došla u uvoznik wallabaga. Odaberi prethodnu uslugu s koje želiš premjestiti podatke.
     action:
@@ -100,6 +100,10 @@ import:
     elcurator:
         description: Ovaj će uvoznik uvesti sve tvoje elCurator članke. Prijeđi na postavke na tvom elCurator računu, a zatim izvezi sadržaj. Dobit ćete JSON datoteku.
         page_title: Uvezi > elCurator
+    delicious:
+        page_title: Uvoz > del.icio.us
+        description: Ovaj će uvoznik uvesti sve tvoje „Delicious” zabilješke. Od 2021. godine nadalje, iz njega možeš ponovo izvesti podatke pomoću stranice za izvoz (https://del.icio.us/export). Odaberi format „JSON” i preuzmi ga (npr. „delicious_export.2021.02.06_21.10.json”).
+        how_to: Odaberi Delicious izvoz i pritisni donji gumb za slanje i uvoz datoteke.
 about:
     helping:
         by_contributing: 'doprinošenjem projektu:'
@@ -478,6 +482,7 @@ entry:
         http_status_label: Stanje HTTP-a
         title: Filtri
         unread_label: Nepročitani
+        annotated_label: S napomenom
     list:
         delete: Izbriši
         reading_time_less_one_minute: 'procijenjeno vrijeme čitanja: &lt; 1 min'
@@ -491,6 +496,8 @@ entry:
         toogle_as_read: Uklj/Isklj oznaku kao pročitano
         number_of_tags: '{1}i još jedna druga oznaka|]1,Inf[i %count% druge oznake'
         reading_time_less_one_minute_short: '&lt; 1 min'
+        show_same_domain: Prikaži članke s istom domenom
+        assign_search_tag: Dodijeli ovo pretraživanje kao oznaku svakom rezultatu
     view:
         left_menu:
             set_as_starred: Uklj/Isklj omiljene
@@ -531,6 +538,8 @@ entry:
         untagged: Zapisi bez oznaka
         filtered_tags: 'Filtrirano po oznakama:'
         filtered_search: 'Filtrirano po pretrazi:'
+        with_annotations: Unosi s napomenama
+        same_domain: Ista domena
     metadata:
         reading_time_minutes_short: '%readingTime% min'
         added_on: Dodano
@@ -663,6 +672,7 @@ menu:
         theme_toggle_auto: Automatska tema
         theme_toggle_dark: Tamna tema
         theme_toggle_light: Svijetla tema
+        with_annotations: S napomenama
     top:
         add_new_entry: Dodaj novi zapis
         filter_entries: Filtriraj zapise
