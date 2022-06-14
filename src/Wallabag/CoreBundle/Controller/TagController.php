@@ -231,7 +231,8 @@ class TagController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function removeTagAction(Tag $tag, Request $request) {
+    public function removeTagAction(Tag $tag, Request $request)
+    {
         foreach ($tag->getEntriesByUserId($this->getUser()->getId()) as $entry) {
             $this->get('wallabag_core.entry_repository')->removeTag($this->getUser()->getId(), $tag);
         }
