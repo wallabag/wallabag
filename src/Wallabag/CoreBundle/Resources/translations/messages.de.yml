@@ -37,6 +37,7 @@ menu:
         theme_toggle_auto: Automatisches Design
         theme_toggle_dark: Dunkles Design
         theme_toggle_light: Helles Design
+        with_annotations: Mit Anmerkungen
     top:
         add_new_entry: Neuen Artikel hinzufügen
         search: Suche
@@ -240,6 +241,8 @@ entry:
         filtered_search: 'Gefiltert nach Suche:'
         untagged: Nicht markierte Einträge
         all: Alle Einträge
+        with_annotations: Einträge mit Anmerkungen
+        same_domain: Gleiche Domain
     list:
         number_on_the_page: '{0} Es gibt keine Einträge.|{1} Es gibt einen Eintrag.|]1,Inf[ Es gibt %count% Einträge.'
         reading_time: geschätzte Lesezeit
@@ -253,6 +256,8 @@ entry:
         toogle_as_star: Favoriten-Status ändern
         delete: Löschen
         export_title: Exportieren
+        assign_search_tag: Weise diese Suche als einen Tag zu jedem Ergebnis hinzu
+        show_same_domain: Zeigt Artikel mit der gleichen Domain
     filters:
         title: Filter
         status_label: Status
@@ -277,6 +282,7 @@ entry:
         action:
             clear: Zurücksetzen
             filter: Filtern
+        annotated_label: Angemerkt
     view:
         left_menu:
             back_to_top: Nach oben
@@ -532,6 +538,10 @@ import:
     elcurator:
         page_title: Importieren > elCurator
         description: Dieses Tool wird all deine ElCurator-Artikel importieren. Öffne die Einstellungen in deinem ElCurator-Konto und exportiere dort den Inhalt; du wirst eine JSON-Datei erhalten.
+    delicious:
+        page_title: Import > del.icio.us
+        how_to: Bitte wählen deinen Delicious-Export aus und klicke den u.s. Button zum Importieren.
+        description: Dieser Importer wird alle deine Delicious-Lesezeichen importieren. Seit 2021 kannst du deine Daten wieder von der Exportseite (https://del.icio.us/export) bekommen. Wähle das "JSON"-Format aus und lade es herunter (z.B. "delicious_export.2021.02.06_21.10.json").
 developer:
     page_title: API-Client-Verwaltung
     welcome_message: Willkomen zur wallabag API

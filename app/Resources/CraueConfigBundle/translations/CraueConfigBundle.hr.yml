@@ -18,7 +18,7 @@ export_pdf: Aktiviraj PDF izvoz
 matomo_enabled: Aktiviraj Matomo
 import_with_redis: Aktiviraj Redis za asinkroni uvoz podataka
 restricted_access: Aktiviraj autentifikaciju za naplatne web-stranice
-export_mobi: Aktiviraj .mobi izvoz
+export_mobi: Aktiviraj .mobi izvoz (zastarjelo, uskoro će se ukloniti)
 demo_mode_enabled: Aktivirati demo modus? (Koristi se samo za javnu wallabag demonstraciju)
 carrot: Aktiviraj dijeljenje na Carrot
 diaspora_url: diaspora* URL, ako je usluga aktivirana
