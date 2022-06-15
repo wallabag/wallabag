@@ -26,8 +26,8 @@
                         <i class="material-icons">mode_edit</i>
                     </a>
                     {% endif %}
-                    <a href="{{ path('tag_delete', {'slug': tag.slug})}}">
-                        <i class="material-icons">mode_delete</i>
+                    <a href="{{ path('tag_delete', {'slug': tag.slug})}}" class="card-tag-icon card-tag-delete" onclick="return confirm('{{ 'tag.confirm.delete'|trans({'%name%': tag.label})|escape('js') }}')">
+                        <i class="material-icons">delete</i>
                     </a>
                     {% if app.user.config.feedToken %}
                         <a rel="alternate" type="application/atom+xml" href="{{ path('tag_feed', {'username': app.user.username, 'token': app.user.config.feedToken, 'slug': tag.slug}) }}" class="card-tag-icon"><i class="material-icons">rss_feed</i></a>
