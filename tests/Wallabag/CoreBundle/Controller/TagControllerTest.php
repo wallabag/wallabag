@@ -6,6 +6,9 @@ use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 
+/**
+ * @group Tag
+ */
 class TagControllerTest extends WallabagCoreTestCase
 {
     public $tagName = 'opensource';
@@ -161,7 +164,9 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->flush();
         $this->getEntityManager()->clear();
 
-        $client->request('GET', '/tag/delete/' . $tag->getSlug());
+        $crawler = $client->request('GET', '/tag/list');
+        $link = $crawler->filter('a[id="delete-' . $tag->getSlug() . '"]')->link();
+        $client->click($link);
 
         $tag = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
