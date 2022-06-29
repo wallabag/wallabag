@@ -222,4 +222,30 @@ class TagController extends Controller
 
         return $this->redirect($this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'), '', true));
     }
+
+    /**
+     * Delete a given tag for the current user.
+     *
+     * @Route("/tag/delete/{slug}", name="tag_delete")
+     * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function removeTagAction(Tag $tag, Request $request)
+    {
+        foreach ($tag->getEntriesByUserId($this->getUser()->getId()) as $entry) {
+            $this->get('wallabag_core.entry_repository')->removeTag($this->getUser()->getId(), $tag);
+        }
+
+        // remove orphan tag in case no entries are associated to it
+        if (0 === \count($tag->getEntries())) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($tag);
+            $em->flush();
+        }
+
+        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'), '', true);
+
+        return $this->redirect($redirectUrl);
+    }
 }

@@ -458,6 +458,8 @@ quickstart:
         email: Par courriel
         gitter: Sur Gitter
 tag:
+    confirm:
+        delete: Supprimer le tag %name%
     page_title: Étiquettes
     list:
         number_on_the_page: '{0} Il n’y a pas d''étiquette.|{1} Il y a une étiquette.|]1,Inf[ Il y a %count% étiquettes.'

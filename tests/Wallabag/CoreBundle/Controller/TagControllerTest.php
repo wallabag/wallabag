@@ -6,6 +6,9 @@ use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 
+/**
+ * @group Tag
+ */
 class TagControllerTest extends WallabagCoreTestCase
 {
     public $tagName = 'opensource';
@@ -139,6 +142,55 @@ class TagControllerTest extends WallabagCoreTestCase
             ->findOneByLabel($this->tagName);
 
         $this->assertNull($tag, $this->tagName . ' was removed because it begun an orphan tag');
+    }
+
+    public function testRemoveTag()
+    {
+        $this->logInAs('admin');
+        $client = $this->getClient();
+
+        $tag = new Tag();
+        $tag->setLabel($this->tagName);
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl('http://0.0.0.0/foo');
+        $entry->addTag($tag);
+        $this->getEntityManager()->persist($entry);
+
+        $entry2 = new Entry($this->getLoggedInUser());
+        $entry2->setUrl('http://0.0.0.0/bar');
+        $entry2->addTag($tag);
+        $this->getEntityManager()->persist($entry2);
+        $this->getEntityManager()->flush();
+        $this->getEntityManager()->clear();
+
+        $crawler = $client->request('GET', '/tag/list');
+        $link = $crawler->filter('a[id="delete-' . $tag->getSlug() . '"]')->link();
+        $client->click($link);
+
+        $tag = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Tag')
+            ->findOneByLabel($this->tagName);
+
+        $this->assertNull($tag, $this->tagName . ' was removed because it begun an orphan tag');
+
+        $user = $this->getEntityManager()
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUserName('admin');
+
+        $entry = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId('http://0.0.0.0/foo', $user->getId());
+
+        $entry2 = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId('http://0.0.0.0/bar', $user->getId());
+
+        $this->assertEmpty($entry->getTagsLabel());
+        $this->assertEmpty($entry2->getTagsLabel());
     }
 
     public function testShowEntriesForTagAction()
