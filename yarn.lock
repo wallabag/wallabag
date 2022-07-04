@@ -4942,10 +4942,10 @@ sass-graph@4.0.0:
     scss-tokenizer "^0.3.0"
     yargs "^17.2.1"
 
-sass-loader@^13.0.1:
-  version "13.0.1"
-  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-13.0.1.tgz#bc372e2bac45e6c535e2c0c19263001194be3e2d"
-  integrity sha512-IeCdtvhwMY6GvgMtWJKLcehMeETvVZZjgZLJbQbwrLVHhL7zmj+7YsEPe5yhi04TaqzSZANz4CMu1QSh0/G9ew==
+sass-loader@^13.0.2:
+  version "13.0.2"
+  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-13.0.2.tgz#e81a909048e06520e9f2ff25113a801065adb3fe"
+  integrity sha512-BbiqbVmbfJaWVeOOAu2o7DhYWtcNmTfvroVgFXa6k2hHheMxNAeDHLNoDy/Q5aoaVlz0LH+MbMktKwm9vN/j8Q==
   dependencies:
     klona "^2.0.4"
     neo-async "^2.6.2"
