@@ -20,7 +20,7 @@ esaustiva:
 -   [Wrapper Golang per l'API di
     wallabag](https://github.com/Strubbl/wallabago) di Strubbl, per il
     suo progetto [wallabag-stats
-    graph](https://gitlab.com/Strubbl/wallabag-stats) e lo strumento a riga di comando
-    [wallabag-add-article](https://gitlab.com/Strubbl/wallabag-add-article).
+    graph](https://codeberg.org/strubbl/wallabag-stats) e lo strumento a riga di comando
+    [wallabag-add-article](https://codeberg.org/strubbl/wallabag-add-article).
 -   Strumento per scaricare automaticamente gli articoli di wallabag sul vostro computer locale o lettore ebook Kobo
     [wallabako](https://gitlab.com/anarcat/wallabako) di anarcat.
