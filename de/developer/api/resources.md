@@ -23,9 +23,9 @@ nicht abschließende Aufzählung von ihnen:
 -   [Golang wrapper for the wallabag
     API](https://github.com/Strubbl/wallabago) von Strubbl, für seine
     Projekte [wallabag-stats
-    Graph](https://gitlab.com/Strubbl/wallabag-stats) und das
+    Graph](https://codeberg.org/strubbl/wallabag-stats) und das
     Kommandozeilentool
-    [wallabag-add-article](https://gitlab.com/Strubbl/wallabag-add-article).
+    [wallabag-add-article](https://codeberg.org/strubbl/wallabag-add-article).
 -   Tool, um automatisiert wallabag Artikel auf den lokalen PC oder
     ebook reader zu laden
     [wallabako](https://gitlab.com/anarcat/wallabako) von anarcat.
