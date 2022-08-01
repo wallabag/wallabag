@@ -21,11 +21,6 @@ parameters:
 			path: src/Wallabag/CoreBundle/Command/InstallCommand.php
 
 		-
-			message: "#^Method Wallabag\\\\CoreBundle\\\\Command\\\\InstallCommand\\:\\:execute\\(\\) should return int\\|null but return statement is missing\\.$#"
-			count: 1
-			path: src/Wallabag/CoreBundle/Command/InstallCommand.php
-
-		-
 			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Entity\\\\RuleInterface\\:\\:getConfig\\(\\)\\.$#"
 			count: 1
 			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
@@ -59,16 +54,6 @@ parameters:
 			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectManager\\:\\:getConnection\\(\\)\\.$#"
 			count: 1
 			path: src/Wallabag/ImportBundle/Command/ImportCommand.php
-
-		-
-			message: "#^Method Wallabag\\\\ImportBundle\\\\Command\\\\ImportCommand\\:\\:execute\\(\\) should return int\\|null but return statement is missing\\.$#"
-			count: 1
-			path: src/Wallabag/ImportBundle/Command/ImportCommand.php
-
-		-
-			message: "#^Method Wallabag\\\\ImportBundle\\\\Command\\\\RedisWorkerCommand\\:\\:execute\\(\\) should return int\\|null but return statement is missing\\.$#"
-			count: 1
-			path: src/Wallabag/ImportBundle/Command/RedisWorkerCommand.php
 
 		-
 			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"

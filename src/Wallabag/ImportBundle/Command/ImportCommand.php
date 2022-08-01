@@ -102,5 +102,7 @@ class ImportCommand extends ContainerAwareCommand
         $em->clear();
 
         $output->writeln('End : ' . (new \DateTime())->format('d-m-Y G:i:s') . ' ---');
+
+        return 0;
     }
 }

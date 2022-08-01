@@ -67,6 +67,8 @@ class InstallCommand extends ContainerAwareCommand
 
         $this->io->success('wallabag has been successfully installed.');
         $this->io->success('You can now configure your web server, see https://doc.wallabag.org');
+
+        return 0;
     }
 
     protected function checkRequirements()
