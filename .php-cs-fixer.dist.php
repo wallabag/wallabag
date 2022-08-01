@@ -11,7 +11,7 @@ return PhpCsFixer\Config::create()
         'combine_consecutive_unsets' => true,
         'heredoc_to_nowdoc' => true,
         'no_extra_blank_lines' => [
-        'break',
+            'break',
             'continue',
             'extra',
             'return',
