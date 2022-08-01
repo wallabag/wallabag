@@ -19,6 +19,7 @@ abstract class WallabagAnnotationTestCase extends WebTestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
         $this->client = $this->createAuthorizedClient();
     }
 

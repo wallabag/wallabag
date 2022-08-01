@@ -716,11 +716,6 @@ parameters:
 			path: tests/Wallabag/AnnotationBundle/Controller/AnnotationControllerTest.php
 
 		-
-			message: "#^Missing call to parent\\:\\:setUp\\(\\) method\\.$#"
-			count: 1
-			path: tests/Wallabag/AnnotationBundle/WallabagAnnotationTestCase.php
-
-		-
 			message: "#^PHPDoc tag @var has invalid value \\(\\$loginManager \\\\FOS\\\\UserBundle\\\\Security\\\\LoginManager\\)\\: Unexpected token \"\\$loginManager\", expected type at offset 9$#"
 			count: 1
 			path: tests/Wallabag/AnnotationBundle/WallabagAnnotationTestCase.php
@@ -802,11 +797,6 @@ parameters:
 
 		-
 			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagUserBundle\\:User\\>\\:\\:findOneByUserName\\(\\)\\.$#"
-			count: 1
-			path: tests/Wallabag/ApiBundle/WallabagApiTestCase.php
-
-		-
-			message: "#^Missing call to parent\\:\\:setUp\\(\\) method\\.$#"
 			count: 1
 			path: tests/Wallabag/ApiBundle/WallabagApiTestCase.php
 
