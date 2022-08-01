@@ -1,24 +1,9 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagAnnotationBundle\\:Annotation\\>\\:\\:findAnnotationsByPageId\\(\\)\\.$#"
-			count: 1
-			path: src/Wallabag/AnnotationBundle/Controller/WallabagAnnotationController.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagApiBundle\\:Client\\>\\:\\:findByUser\\(\\)\\.$#"
+			message: "#^Call to an undefined method Wallabag\\\\ApiBundle\\\\Repository\\\\ClientRepository\\<Wallabag\\\\ApiBundle\\\\Entity\\\\Client\\>\\:\\:findByUser\\(\\)\\.$#"
 			count: 1
 			path: src/Wallabag/ApiBundle/Controller/DeveloperController.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagCoreBundle\\:Entry\\>\\:\\:findByUserIdAndBatchHashedUrls\\(\\)\\.$#"
-			count: 1
-			path: src/Wallabag/ApiBundle/Controller/EntryRestController.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagCoreBundle\\:Tag\\>\\:\\:findOneByLabel\\(\\)\\.$#"
-			count: 1
-			path: src/Wallabag/ApiBundle/Controller/EntryRestController.php
 
 		-
 			message: "#^Call to an undefined method Psr\\\\Container\\\\ContainerInterface\\:\\:getParameter\\(\\)\\.$#"
@@ -26,24 +11,9 @@ parameters:
 			path: src/Wallabag/ApiBundle/Controller/EntryRestController.php
 
 		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagCoreBundle\\:Entry\\>\\:\\:removeTag\\(\\)\\.$#"
-			count: 2
-			path: src/Wallabag/ApiBundle/Controller/TagRestController.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagCoreBundle\\:Entry\\>\\:\\:removeTags\\(\\)\\.$#"
+			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Repository\\\\TagRepository\\<Wallabag\\\\CoreBundle\\\\Entity\\\\Tag\\>\\:\\:findOneByLabel\\(\\)\\.$#"
 			count: 1
-			path: src/Wallabag/ApiBundle/Controller/TagRestController.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagCoreBundle\\:Tag\\>\\:\\:findAllTags\\(\\)\\.$#"
-			count: 1
-			path: src/Wallabag/ApiBundle/Controller/TagRestController.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagCoreBundle\\:Tag\\>\\:\\:findByLabelsAndUser\\(\\)\\.$#"
-			count: 3
-			path: src/Wallabag/ApiBundle/Controller/TagRestController.php
+			path: src/Wallabag/ApiBundle/Controller/EntryRestController.php
 
 		-
 			message: "#^Call to an undefined method FOS\\\\UserBundle\\\\Model\\\\UserInterface\\:\\:addClient\\(\\)\\.$#"
@@ -181,52 +151,12 @@ parameters:
 			path: src/Wallabag/CoreBundle/Command/TagAllCommand.php
 
 		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagAnnotationBundle\\:Annotation\\>\\:\\:findAllArchivedEntriesByUser\\(\\)\\.$#"
-			count: 1
-			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagAnnotationBundle\\:Annotation\\>\\:\\:removeAllByUserId\\(\\)\\.$#"
-			count: 2
-			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagCoreBundle\\:Config\\>\\:\\:findOneByUser\\(\\)\\.$#"
-			count: 1
-			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
-
-		-
 			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Entity\\\\RuleInterface\\:\\:getConfig\\(\\)\\.$#"
 			count: 1
 			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
 
 		-
-			message: "#^Call to method getConfig\\(\\) on an unknown class WallabagCoreBundle\\:IgnoreOriginUserRule\\.$#"
-			count: 1
-			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
-
-		-
-			message: "#^Call to method getConfig\\(\\) on an unknown class WallabagCoreBundle\\:TaggingRule\\.$#"
-			count: 1
-			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
-
-		-
-			message: "#^Call to method getId\\(\\) on an unknown class WallabagCoreBundle\\:IgnoreOriginUserRule\\.$#"
-			count: 1
-			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
-
-		-
-			message: "#^Call to method getId\\(\\) on an unknown class WallabagCoreBundle\\:TaggingRule\\.$#"
-			count: 1
-			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
-
-		-
-			message: "#^Call to method setConfig\\(\\) on an unknown class WallabagCoreBundle\\:IgnoreOriginUserRule\\.$#"
-			count: 1
-			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
-
-		-
-			message: "#^Call to method setConfig\\(\\) on an unknown class WallabagCoreBundle\\:TaggingRule\\.$#"
+			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Repository\\\\ConfigRepository\\<Wallabag\\\\CoreBundle\\\\Entity\\\\Config\\>\\:\\:findOneByUser\\(\\)\\.$#"
 			count: 1
 			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
 
@@ -461,17 +391,12 @@ parameters:
 			path: src/Wallabag/CoreBundle/Twig/WallabagExtension.php
 
 		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagUserBundle\\:User\\>\\:\\:findOneById\\(\\)\\.$#"
-			count: 1
-			path: src/Wallabag/ImportBundle/Command/ImportCommand.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagUserBundle\\:User\\>\\:\\:findOneByUsername\\(\\)\\.$#"
-			count: 1
-			path: src/Wallabag/ImportBundle/Command/ImportCommand.php
-
-		-
 			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectManager\\:\\:getConnection\\(\\)\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Command/ImportCommand.php
+
+		-
+			message: "#^Call to an undefined method Wallabag\\\\UserBundle\\\\Repository\\\\UserRepository\\<Wallabag\\\\UserBundle\\\\Entity\\\\User\\>\\:\\:findOneById\\(\\)\\.$#"
 			count: 1
 			path: src/Wallabag/ImportBundle/Command/ImportCommand.php
 
@@ -661,11 +586,6 @@ parameters:
 			path: src/Wallabag/ImportBundle/DependencyInjection/Configuration.php
 
 		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagUserBundle\\:User\\>\\:\\:getQueryBuilderForSearch\\(\\)\\.$#"
-			count: 1
-			path: src/Wallabag/UserBundle/Controller/ManageController.php
-
-		-
 			message: "#^Service \"fos_user\\.user_manager\" is private\\.$#"
 			count: 2
 			path: src/Wallabag/UserBundle/Controller/ManageController.php
@@ -691,28 +611,8 @@ parameters:
 			path: src/Wallabag/UserBundle/Mailer/AuthCodeMailer.php
 
 		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagAnnotationBundle\\:Annotation\\>\\:\\:findAnnotationById\\(\\)\\.$#"
-			count: 1
-			path: tests/Wallabag/AnnotationBundle/Controller/AnnotationControllerTest.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagAnnotationBundle\\:Annotation\\>\\:\\:findLastAnnotationByPageId\\(\\)\\.$#"
-			count: 1
-			path: tests/Wallabag/AnnotationBundle/Controller/AnnotationControllerTest.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagAnnotationBundle\\:Annotation\\>\\:\\:findOneById\\(\\)\\.$#"
+			message: "#^Call to an undefined method Wallabag\\\\AnnotationBundle\\\\Repository\\\\AnnotationRepository\\<Wallabag\\\\AnnotationBundle\\\\Entity\\\\Annotation\\>\\:\\:findOneById\\(\\)\\.$#"
 			count: 2
-			path: tests/Wallabag/AnnotationBundle/Controller/AnnotationControllerTest.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagCoreBundle\\:Entry\\>\\:\\:findOneByUsernameAndNotArchived\\(\\)\\.$#"
-			count: 7
-			path: tests/Wallabag/AnnotationBundle/Controller/AnnotationControllerTest.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagUserBundle\\:User\\>\\:\\:findOneByUserName\\(\\)\\.$#"
-			count: 3
 			path: tests/Wallabag/AnnotationBundle/Controller/AnnotationControllerTest.php
 
 		-
@@ -726,79 +626,14 @@ parameters:
 			path: tests/Wallabag/AnnotationBundle/WallabagAnnotationTestCase.php
 
 		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagCoreBundle\\:Entry\\>\\:\\:findByUrlAndUserId\\(\\)\\.$#"
-			count: 3
-			path: tests/Wallabag/ApiBundle/Controller/EntryRestControllerTest.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagCoreBundle\\:Entry\\>\\:\\:findOneByUser\\(\\)\\.$#"
+			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Repository\\\\EntryRepository\\<Wallabag\\\\CoreBundle\\\\Entity\\\\Entry\\>\\:\\:findOneByUser\\(\\)\\.$#"
 			count: 7
 			path: tests/Wallabag/ApiBundle/Controller/EntryRestControllerTest.php
 
 		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagCoreBundle\\:Entry\\>\\:\\:findOneWithTags\\(\\)\\.$#"
-			count: 2
-			path: tests/Wallabag/ApiBundle/Controller/EntryRestControllerTest.php
-
-		-
-			message: "#^Call to method getId\\(\\) on an unknown class WallabagCoreBundle\\:Entry\\.$#"
-			count: 10
-			path: tests/Wallabag/ApiBundle/Controller/EntryRestControllerTest.php
-
-		-
-			message: "#^Call to method getOriginUrl\\(\\) on an unknown class WallabagCoreBundle\\:Entry\\.$#"
-			count: 1
-			path: tests/Wallabag/ApiBundle/Controller/EntryRestControllerTest.php
-
-		-
-			message: "#^Call to method getTags\\(\\) on an unknown class WallabagCoreBundle\\:Entry\\.$#"
-			count: 3
-			path: tests/Wallabag/ApiBundle/Controller/EntryRestControllerTest.php
-
-		-
-			message: "#^Call to method getTitle\\(\\) on an unknown class WallabagCoreBundle\\:Entry\\.$#"
-			count: 4
-			path: tests/Wallabag/ApiBundle/Controller/EntryRestControllerTest.php
-
-		-
-			message: "#^Call to method getUrl\\(\\) on an unknown class WallabagCoreBundle\\:Entry\\.$#"
-			count: 3
-			path: tests/Wallabag/ApiBundle/Controller/EntryRestControllerTest.php
-
-		-
-			message: "#^Call to method getUserEmail\\(\\) on an unknown class WallabagCoreBundle\\:Entry\\.$#"
-			count: 1
-			path: tests/Wallabag/ApiBundle/Controller/EntryRestControllerTest.php
-
-		-
-			message: "#^Call to method getUserId\\(\\) on an unknown class WallabagCoreBundle\\:Entry\\.$#"
-			count: 1
-			path: tests/Wallabag/ApiBundle/Controller/EntryRestControllerTest.php
-
-		-
-			message: "#^Call to method getUserName\\(\\) on an unknown class WallabagCoreBundle\\:Entry\\.$#"
-			count: 1
-			path: tests/Wallabag/ApiBundle/Controller/EntryRestControllerTest.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagCoreBundle\\:Entry\\>\\:\\:findAllByTagId\\(\\)\\.$#"
-			count: 4
-			path: tests/Wallabag/ApiBundle/Controller/TagRestControllerTest.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagCoreBundle\\:Entry\\>\\:\\:findOneWithTags\\(\\)\\.$#"
-			count: 3
-			path: tests/Wallabag/ApiBundle/Controller/TagRestControllerTest.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagCoreBundle\\:Tag\\>\\:\\:findOneByLabel\\(\\)\\.$#"
+			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Repository\\\\TagRepository\\<Wallabag\\\\CoreBundle\\\\Entity\\\\Tag\\>\\:\\:findOneByLabel\\(\\)\\.$#"
 			count: 2
 			path: tests/Wallabag/ApiBundle/Controller/TagRestControllerTest.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\EntityRepository\\<WallabagUserBundle\\:User\\>\\:\\:findOneByUserName\\(\\)\\.$#"
-			count: 1
-			path: tests/Wallabag/ApiBundle/WallabagApiTestCase.php
 
 		-
 			message: "#^PHPDoc tag @var has invalid value \\(\\$loginManager \\\\FOS\\\\UserBundle\\\\Security\\\\LoginManager\\)\\: Unexpected token \"\\$loginManager\", expected type at offset 9$#"

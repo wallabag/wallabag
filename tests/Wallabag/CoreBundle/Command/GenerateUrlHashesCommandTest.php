@@ -7,6 +7,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Command\GenerateUrlHashesCommand;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\UserBundle\Entity\User;
 
 class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
 {
@@ -66,7 +67,7 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
 
         $this->logInAs('admin');
 
-        $user = $em->getRepository('WallabagUserBundle:User')->findOneById($this->getLoggedInUserId());
+        $user = $em->getRepository(User::class)->findOneById($this->getLoggedInUserId());
 
         $entry1 = new Entry($user);
         $entry1->setUrl($url);
@@ -87,7 +88,7 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
 
         $this->assertStringContainsString('Generated hashed urls for user: admin', $tester->getDisplay());
 
-        $entry = $em->getRepository('WallabagCoreBundle:Entry')->findOneByUrl($url);
+        $entry = $em->getRepository(Entry::class)->findOneByUrl($url);
 
         $this->assertSame($entry->getHashedUrl(), hash('sha1', $url));
 

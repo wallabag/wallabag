@@ -50,7 +50,7 @@ class ExportControllerTest extends WallabagCoreTestCase
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findOneByUsernameAndNotArchived('admin');
 
         $client->request('GET', '/export/' . $content->getId() . '.doc');
@@ -91,7 +91,7 @@ class ExportControllerTest extends WallabagCoreTestCase
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findOneByUsernameAndNotArchived('admin');
 
         ob_start();
@@ -159,7 +159,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         // to be sure results are the same
         $contentInDB = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->createQueryBuilder('e')
             ->select('e, t')
             ->leftJoin('e.user', 'u')
@@ -205,7 +205,7 @@ class ExportControllerTest extends WallabagCoreTestCase
 
         $contentInDB = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId('http://0.0.0.0/entry1', $this->getLoggedInUserId());
 
         ob_start();
@@ -279,7 +279,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         // to be sure results are the same
         $contentInDB = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->createQueryBuilder('e')
             ->leftJoin('e.user', 'u')
             ->where('u.username = :username')->setParameter('username', 'admin')

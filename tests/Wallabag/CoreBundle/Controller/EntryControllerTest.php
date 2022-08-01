@@ -9,6 +9,7 @@ use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\SiteCredential;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Helper\ContentProxy;
+use Wallabag\UserBundle\Entity\User;
 
 class EntryControllerTest extends WallabagCoreTestCase
 {
@@ -114,7 +115,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $em = $client->getContainer()
             ->get('doctrine.orm.entity_manager');
         $entry = $em
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
         $em->remove($entry);
         $em->flush();
@@ -164,7 +165,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
 
         $author = $content->getPublishedBy();
@@ -201,7 +202,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
 
         $tags = $content->getTagsLabel();
@@ -238,7 +239,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
@@ -378,7 +379,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $em = $client->getContainer()
             ->get('doctrine.orm.entity_manager');
         $entry = $em
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findOneByUrl($url);
         $tags = $entry->getTagsLabel();
 
@@ -407,7 +408,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('/', $client->getResponse()->getTargetUrl());
 
         $entry = $em
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findOneByUrl($url);
 
         $tags = $entry->getTagsLabel();
@@ -510,7 +511,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $entry = $this->getEntityManager()
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->find($entry->getId());
 
         $this->assertNotEmpty($entry->getContent());
@@ -534,7 +535,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         // otherwise, retrieve the same entity will retrieve change from the previous request :0
         $this->getEntityManager()->clear();
         $newContent = $this->getEntityManager()
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->find($entry->getId());
 
         $this->assertNotSame($client->getContainer()->getParameter('wallabag_core.fetching_error_message'), $newContent->getContent());
@@ -644,7 +645,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $res = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->find($entry->getId());
 
         $this->assertSame(1, $res->isArchived());
@@ -667,7 +668,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $res = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findOneById($entry->getId());
 
         $this->assertSame(1, $res->isStarred());
@@ -709,7 +710,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         // add a new content to be removed later
         $user = $em
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->findOneByUserName('admin');
 
         $content = new Entry($user);
@@ -742,7 +743,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findOneByUsernameAndNotArchived('bob');
 
         $client->request('GET', '/view/' . $content->getId());
@@ -948,7 +949,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $em = $this->getClient()->getContainer()->get('doctrine.orm.entity_manager');
         $user = $em
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->findOneByUserName('admin');
 
         $annotation = new Annotation($user);
@@ -1209,7 +1210,7 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->get('doctrine.orm.entity_manager');
 
         $entry = $em
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $entry);
@@ -1249,7 +1250,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
         $client->request('GET', '/delete/' . $content->getId());
@@ -1528,7 +1529,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
@@ -1579,7 +1580,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('flashes.entry.notice.entry_saved', $crawler->filter('body')->extract(['_text'])[0]);
 
         $content = $em
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
@@ -1628,7 +1629,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
         $authors = $content->getPublishedBy();
@@ -1642,7 +1643,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
-        $entry = $em->getRepository('WallabagCoreBundle:Entry')->findByUrlAndUserId('http://0.0.0.0/entry1', $this->getLoggedInUserId());
+        $entry = $em->getRepository(Entry::class)->findByUrlAndUserId('http://0.0.0.0/entry1', $this->getLoggedInUserId());
         $tag = $entry->getTags()[0];
 
         $crawler = $client->request('GET', '/view/' . $entry->getId());
@@ -1715,14 +1716,14 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $res = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->find($entry1->getId());
 
         $this->assertSame(1, $res->isArchived());
 
         $res = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->find($entry2->getId());
 
         $this->assertSame(1, $res->isArchived());
@@ -1737,14 +1738,14 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $res = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->find($entry1->getId());
 
         $this->assertSame(1, $res->isStarred());
 
         $res = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->find($entry2->getId());
 
         $this->assertSame(1, $res->isStarred());

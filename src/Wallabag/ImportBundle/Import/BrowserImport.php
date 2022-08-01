@@ -108,7 +108,7 @@ abstract class BrowserImport extends AbstractImport
         $url = \array_key_exists('uri', $importedEntry) ? $importedEntry['uri'] : $importedEntry['url'];
 
         $existingEntry = $this->em
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId($url, $this->user->getId());
 
         if (false !== $existingEntry) {

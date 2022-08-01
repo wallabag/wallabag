@@ -4,6 +4,7 @@ namespace Tests\Wallabag\ImportBundle\Controller;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Entity\Entry;
 
 class ChromeControllerTest extends WallabagCoreTestCase
 {
@@ -112,7 +113,7 @@ class ChromeControllerTest extends WallabagCoreTestCase
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://www.20minutes.fr/sport/3256363-20220321-tournoi-vi-nations-trophee-gagne-xv-france-fini-fond-seine',
                 $this->getLoggedInUserId()

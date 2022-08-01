@@ -98,7 +98,7 @@ class PinboardImport extends AbstractImport
     public function parseEntry(array $importedEntry)
     {
         $existingEntry = $this->em
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId($importedEntry['href'], $this->user->getId());
 
         if (false !== $existingEntry) {

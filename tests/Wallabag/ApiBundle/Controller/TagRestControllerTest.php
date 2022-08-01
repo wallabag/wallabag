@@ -3,6 +3,7 @@
 namespace Tests\Wallabag\ApiBundle\Controller;
 
 use Tests\Wallabag\ApiBundle\WallabagApiTestCase;
+use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 
 class TagRestControllerTest extends WallabagApiTestCase
@@ -35,7 +36,7 @@ class TagRestControllerTest extends WallabagApiTestCase
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findOneWithTags($this->user->getId());
 
         $entry = $entry[0];
@@ -61,12 +62,12 @@ class TagRestControllerTest extends WallabagApiTestCase
         $this->assertSame($tag->getLabel(), $content['label']);
         $this->assertSame($tag->getSlug(), $content['slug']);
 
-        $entries = $em->getRepository('WallabagCoreBundle:Entry')
+        $entries = $em->getRepository(Entry::class)
             ->findAllByTagId($this->user->getId(), $tag->getId());
 
         $this->assertCount(0, $entries);
 
-        $tag = $em->getRepository('WallabagCoreBundle:Tag')->findOneByLabel($tagLabel);
+        $tag = $em->getRepository(Tag::class)->findOneByLabel($tagLabel);
 
         $this->assertNull($tag, $tagLabel . ' was removed because it begun an orphan tag');
     }
@@ -74,7 +75,7 @@ class TagRestControllerTest extends WallabagApiTestCase
     public function testDeleteOtherUserTag()
     {
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
-        $tag = $em->getRepository('WallabagCoreBundle:Tag')->findOneByLabel($this->otherUserTagLabel);
+        $tag = $em->getRepository(Tag::class)->findOneByLabel($this->otherUserTagLabel);
 
         $this->client->request('DELETE', '/api/tags/' . $tag->getId() . '.json');
 
@@ -97,7 +98,7 @@ class TagRestControllerTest extends WallabagApiTestCase
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findOneWithTags($this->user->getId());
 
         $entry = $entry[0];
@@ -127,7 +128,7 @@ class TagRestControllerTest extends WallabagApiTestCase
 
         $entries = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findAllByTagId($this->user->getId(), $tag->getId());
 
         $this->assertCount(0, $entries);
@@ -155,7 +156,7 @@ class TagRestControllerTest extends WallabagApiTestCase
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
         $entry = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findOneWithTags($this->user->getId());
 
         $entry = $entry[0];
@@ -196,14 +197,14 @@ class TagRestControllerTest extends WallabagApiTestCase
 
         $entries = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findAllByTagId($this->user->getId(), $tag->getId());
 
         $this->assertCount(0, $entries);
 
         $entries = $this->client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findAllByTagId($this->user->getId(), $tag2->getId());
 
         $this->assertCount(0, $entries);

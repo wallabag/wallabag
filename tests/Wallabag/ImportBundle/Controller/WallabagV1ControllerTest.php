@@ -4,6 +4,7 @@ namespace Tests\Wallabag\ImportBundle\Controller;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Entity\Entry;
 
 class WallabagV1ControllerTest extends WallabagCoreTestCase
 {
@@ -110,7 +111,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'http://www.framablog.org/index.php/post/2014/02/05/Framabag-service-libre-gratuit-interview-developpeur',
                 $this->getLoggedInUserId()
@@ -155,7 +156,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $content1 = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'http://gilbert.pellegrom.me/recreating-the-square-slider',
                 $this->getLoggedInUserId()
@@ -166,7 +167,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $content2 = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://www.wallabag.org/features/',
                 $this->getLoggedInUserId()

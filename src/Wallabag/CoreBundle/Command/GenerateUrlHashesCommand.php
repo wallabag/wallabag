@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Helper\UrlHasher;
 use Wallabag\UserBundle\Entity\User;
 
@@ -40,7 +41,7 @@ class GenerateUrlHashesCommand extends ContainerAwareCommand
                 return 1;
             }
         } else {
-            $users = $this->getDoctrine()->getRepository('WallabagUserBundle:User')->findAll();
+            $users = $this->getDoctrine()->getRepository(User::class)->findAll();
 
             $output->writeln(sprintf('Generating hashed urls for "%d" users', \count($users)));
 
@@ -57,7 +58,7 @@ class GenerateUrlHashesCommand extends ContainerAwareCommand
     private function generateHashedUrls(User $user)
     {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $repo = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entry');
+        $repo = $this->getDoctrine()->getRepository(Entry::class);
 
         $entries = $repo->findByEmptyHashedUrlAndUserId($user->getId());
 
@@ -86,7 +87,7 @@ class GenerateUrlHashesCommand extends ContainerAwareCommand
      */
     private function getUser($username)
     {
-        return $this->getDoctrine()->getRepository('WallabagUserBundle:User')->findOneByUserName($username);
+        return $this->getDoctrine()->getRepository(User::class)->findOneByUserName($username);
     }
 
     private function getDoctrine()

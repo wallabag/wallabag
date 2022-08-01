@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Wallabag\UserBundle\Entity\User;
 
 class ImportCommand extends ContainerAwareCommand
 {
@@ -39,9 +40,9 @@ class ImportCommand extends ContainerAwareCommand
         $em->getConnection()->getConfiguration()->setSQLLogger(null);
 
         if ($input->getOption('useUserId')) {
-            $entityUser = $em->getRepository('WallabagUserBundle:User')->findOneById($input->getArgument('username'));
+            $entityUser = $em->getRepository(User::class)->findOneById($input->getArgument('username'));
         } else {
-            $entityUser = $em->getRepository('WallabagUserBundle:User')->findOneByUsername($input->getArgument('username'));
+            $entityUser = $em->getRepository(User::class)->findOneByUsername($input->getArgument('username'));
         }
 
         if (!\is_object($entityUser)) {

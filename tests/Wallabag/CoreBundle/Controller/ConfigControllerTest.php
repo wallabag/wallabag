@@ -7,7 +7,9 @@ use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\IgnoreOriginUserRule;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Entity\TaggingRule;
 use Wallabag\UserBundle\Entity\User;
 
 class ConfigControllerTest extends WallabagCoreTestCase
@@ -306,7 +308,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         // reset the token
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
         $user = $em
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->findOneByUsername('admin');
 
         if (!$user) {
@@ -570,7 +572,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         $rule = $client->getContainer()->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:TaggingRule')
+            ->getRepository(TaggingRule::class)
             ->findAll()[0];
 
         $crawler = $client->request('GET', '/tagging-rule/delete/' . $rule->getId());
@@ -586,7 +588,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         $rule = $client->getContainer()->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:TaggingRule')
+            ->getRepository(TaggingRule::class)
             ->findAll()[0];
 
         $crawler = $client->request('GET', '/tagging-rule/edit/' . $rule->getId());
@@ -707,7 +709,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         $rule = $client->getContainer()->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:IgnoreOriginUserRule')
+            ->getRepository(IgnoreOriginUserRule::class)
             ->findAll()[0];
 
         $crawler = $client->request('GET', '/ignore-origin-user-rule/edit/' . $rule->getId());
@@ -723,7 +725,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         $rule = $client->getContainer()->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:IgnoreOriginUserRule')
+            ->getRepository(IgnoreOriginUserRule::class)
             ->findAll()[0];
 
         $crawler = $client->request('GET', '/ignore-origin-user-rule/edit/' . $rule->getId());
@@ -776,13 +778,13 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
 
         $user = $em
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->findOneByUsername('empty');
         $user->setEnabled(false);
         $em->persist($user);
 
         $user = $em
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->findOneByUsername('bob');
         $user->setEnabled(false);
         $em->persist($user);
@@ -798,13 +800,13 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertSame(403, $client->getResponse()->getStatusCode());
 
         $user = $em
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->findOneByUsername('empty');
         $user->setEnabled(true);
         $em->persist($user);
 
         $user = $em
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->findOneByUsername('bob');
         $user->setEnabled(true);
         $em->persist($user);
@@ -867,7 +869,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
         $user = $em
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->createQueryBuilder('u')
             ->where('u.username = :username')->setParameter('username', 'wallace')
             ->getQuery()
@@ -878,7 +880,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $entries = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUser($loggedInUserId);
 
         $this->assertEmpty($entries);
@@ -931,7 +933,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('flashes.config.notice.annotations_reset', $client->getContainer()->get('session')->getFlashBag()->get('notice')[0]);
 
         $annotationsReset = $em
-            ->getRepository('WallabagAnnotationBundle:Annotation')
+            ->getRepository(Annotation::class)
             ->findAnnotationsByPageId($entry->getId(), $user->getId());
 
         $this->assertEmpty($annotationsReset, 'Annotations were reset');
@@ -947,7 +949,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('flashes.config.notice.tags_reset', $client->getContainer()->get('session')->getFlashBag()->get('notice')[0]);
 
         $tagReset = $em
-            ->getRepository('WallabagCoreBundle:Tag')
+            ->getRepository(Tag::class)
             ->countAllTags($user->getId());
 
         $this->assertSame(0, $tagReset, 'Tags were reset');
@@ -963,7 +965,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('flashes.config.notice.entries_reset', $client->getContainer()->get('session')->getFlashBag()->get('notice')[0]);
 
         $entryReset = $em
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->countAllEntriesByUser($user->getId());
 
         $this->assertSame(0, $entryReset, 'Entries were reset');
@@ -1027,19 +1029,19 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('flashes.config.notice.archived_reset', $client->getContainer()->get('session')->getFlashBag()->get('notice')[0]);
 
         $entryReset = $em
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->countAllEntriesByUser($user->getId());
 
         $this->assertSame(1, $entryReset, 'Entries were reset');
 
         $tagReset = $em
-            ->getRepository('WallabagCoreBundle:Tag')
+            ->getRepository(Tag::class)
             ->countAllTags($user->getId());
 
         $this->assertSame(1, $tagReset, 'Tags were reset');
 
         $annotationsReset = $em
-            ->getRepository('WallabagAnnotationBundle:Annotation')
+            ->getRepository(Annotation::class)
             ->findAnnotationsByPageId($annotationArchived->getId(), $user->getId());
 
         $this->assertEmpty($annotationsReset, 'Annotations were reset');
@@ -1084,19 +1086,19 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('flashes.config.notice.entries_reset', $client->getContainer()->get('session')->getFlashBag()->get('notice')[0]);
 
         $entryReset = $em
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->countAllEntriesByUser($user->getId());
 
         $this->assertSame(0, $entryReset, 'Entries were reset');
 
         $tagReset = $em
-            ->getRepository('WallabagCoreBundle:Tag')
+            ->getRepository(Tag::class)
             ->countAllTags($user->getId());
 
         $this->assertSame(0, $tagReset, 'Tags were reset');
 
         $annotationsReset = $em
-            ->getRepository('WallabagAnnotationBundle:Annotation')
+            ->getRepository(Annotation::class)
             ->findAnnotationsByPageId($entry->getId(), $user->getId());
 
         $this->assertEmpty($annotationsReset, 'Annotations were reset');
@@ -1174,7 +1176,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         // restore user
         $em = $this->getEntityManager();
         $user = $em
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->findOneByUsername('admin');
 
         $this->assertTrue($user->isEmailTwoFactor());
@@ -1201,7 +1203,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         // restore user
         $em = $this->getEntityManager();
         $user = $em
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->findOneByUsername('admin');
 
         $this->assertFalse($user->isEmailTwoFactor());
@@ -1219,7 +1221,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         // restore user
         $em = $this->getEntityManager();
         $user = $em
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->findOneByUsername('admin');
 
         $this->assertTrue($user->isGoogleTwoFactor());
@@ -1243,7 +1245,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         // restore user
         $em = $this->getEntityManager();
         $user = $em
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->findOneByUsername('admin');
 
         $this->assertTrue($user->isGoogleTwoFactor());
@@ -1254,7 +1256,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $user = $em
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->findOneByUsername('admin');
 
         $this->assertFalse($user->isGoogleTwoFactor());
@@ -1278,7 +1280,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         // restore user
         $em = $this->getEntityManager();
         $user = $em
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->findOneByUsername('admin');
 
         $this->assertEmpty($user->getGoogleAuthenticatorSecret());

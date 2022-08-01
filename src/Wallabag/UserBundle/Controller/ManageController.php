@@ -139,7 +139,7 @@ class ManageController extends Controller
     public function searchFormAction(Request $request, $page = 1)
     {
         $em = $this->getDoctrine()->getManager();
-        $qb = $em->getRepository('WallabagUserBundle:User')->createQueryBuilder('u');
+        $qb = $em->getRepository(User::class)->createQueryBuilder('u');
 
         $form = $this->createForm(SearchUserType::class);
         $form->handleRequest($request);
@@ -147,7 +147,7 @@ class ManageController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $searchTerm = (isset($request->get('search_user')['term']) ? $request->get('search_user')['term'] : '');
 
-            $qb = $em->getRepository('WallabagUserBundle:User')->getQueryBuilderForSearch($searchTerm);
+            $qb = $em->getRepository(User::class)->getQueryBuilderForSearch($searchTerm);
         }
 
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);

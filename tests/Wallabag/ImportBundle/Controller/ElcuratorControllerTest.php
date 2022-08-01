@@ -4,6 +4,7 @@ namespace Tests\Wallabag\ImportBundle\Controller;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Entity\Entry;
 
 class ElcuratorControllerTest extends WallabagCoreTestCase
 {
@@ -113,7 +114,7 @@ class ElcuratorControllerTest extends WallabagCoreTestCase
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://devblog.lexik.fr/git/qualite-de-code-integration-de-php-git-hooks-dans-symfony2-2842',
                 $this->getLoggedInUserId()

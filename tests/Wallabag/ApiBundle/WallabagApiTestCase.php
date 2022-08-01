@@ -4,6 +4,7 @@ namespace Tests\Wallabag\ApiBundle;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
+use Wallabag\UserBundle\Entity\User;
 
 abstract class WallabagApiTestCase extends WebTestCase
 {
@@ -64,7 +65,7 @@ abstract class WallabagApiTestCase extends WebTestCase
         return $this->client
             ->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->findOneByUserName($username)
             ->getId();
     }

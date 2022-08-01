@@ -40,7 +40,7 @@ class EntryRestController extends WallabagRestController
     public function getEntriesExistsAction(Request $request)
     {
         $this->validateAuthentication();
-        $repo = $this->getDoctrine()->getRepository('WallabagCoreBundle:Entry');
+        $repo = $this->getDoctrine()->getRepository(Entry::class);
 
         $returnId = (null === $request->query->get('return_id')) ? false : (bool) $request->query->get('return_id');
 
@@ -749,7 +749,7 @@ class EntryRestController extends WallabagRestController
                     $label = trim($label);
 
                     $tag = $this->getDoctrine()
-                        ->getRepository('WallabagCoreBundle:Tag')
+                        ->getRepository(Tag::class)
                         ->findOneByLabel($label);
 
                     if (false !== $tag) {

@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Locale as LocaleConstraint;
+use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\IgnoreOriginUserRule;
 use Wallabag\CoreBundle\Entity\RuleInterface;
@@ -129,7 +130,7 @@ class ConfigController extends Controller
 
         if ($request->query->has('tagging-rule')) {
             $taggingRule = $this->getDoctrine()
-                ->getRepository('WallabagCoreBundle:TaggingRule')
+                ->getRepository(TaggingRule::class)
                 ->find($request->query->get('tagging-rule'));
 
             if ($this->getUser()->getId() !== $taggingRule->getConfig()->getUser()->getId()) {
@@ -192,7 +193,7 @@ class ConfigController extends Controller
 
         if ($request->query->has('ignore-origin-user-rule')) {
             $ignoreOriginUserRule = $this->getDoctrine()
-                ->getRepository('WallabagCoreBundle:IgnoreOriginUserRule')
+                ->getRepository(IgnoreOriginUserRule::class)
                 ->find($request->query->get('ignore-origin-user-rule'));
 
             if ($this->getUser()->getId() !== $ignoreOriginUserRule->getConfig()->getUser()->getId()) {
@@ -545,7 +546,7 @@ class ConfigController extends Controller
         switch ($type) {
             case 'annotations':
                 $this->getDoctrine()
-                    ->getRepository('WallabagAnnotationBundle:Annotation')
+                    ->getRepository(Annotation::class)
                     ->removeAllByUserId($this->getUser()->getId());
                 break;
             case 'tags':
@@ -555,7 +556,7 @@ class ConfigController extends Controller
                 // SQLite doesn't care about cascading remove, so we need to manually remove associated stuff
                 // otherwise they won't be removed ...
                 if ($this->get('doctrine')->getConnection()->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\SqlitePlatform) {
-                    $this->getDoctrine()->getRepository('WallabagAnnotationBundle:Annotation')->removeAllByUserId($this->getUser()->getId());
+                    $this->getDoctrine()->getRepository(Annotation::class)->removeAllByUserId($this->getUser()->getId());
                 }
 
                 // manually remove tags to avoid orphan tag
@@ -732,7 +733,7 @@ class ConfigController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $archivedEntriesAnnotations = $this->getDoctrine()
-            ->getRepository('WallabagAnnotationBundle:Annotation')
+            ->getRepository(Annotation::class)
             ->findAllArchivedEntriesByUser($userId);
 
         foreach ($archivedEntriesAnnotations as $archivedEntriesAnnotation) {
@@ -761,7 +762,7 @@ class ConfigController extends Controller
     private function getConfig()
     {
         $config = $this->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Config')
+            ->getRepository(Config::class)
             ->findOneByUser($this->getUser());
 
         // should NEVER HAPPEN ...

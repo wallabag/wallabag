@@ -4,6 +4,7 @@ namespace Tests\Wallabag\ImportBundle\Controller;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Entity\Entry;
 
 class ReadabilityControllerTest extends WallabagCoreTestCase
 {
@@ -109,7 +110,7 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://www.20minutes.fr/bordeaux/2120479-20170823-bordeaux-poche-chocolatine-association-traduit-etudiants-etrangers-mots-sud-ouest',
                 $this->getLoggedInUserId()
@@ -154,7 +155,7 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
 
         $content1 = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://blog.travis-ci.com/2016-07-28-what-we-learned-from-analyzing-2-million-travis-builds/',
                 $this->getLoggedInUserId()
@@ -165,7 +166,7 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
 
         $content2 = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://facebook.github.io/graphql/October2016/',
                 $this->getLoggedInUserId()
