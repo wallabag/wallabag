@@ -11,6 +11,7 @@
 !var/sessions/.gitkeep
 /bin/*
 !/bin/console
+.php-cs-fixer.php
 .php_cs.cache
 .phpunit.result.cache
 phpunit.xml
