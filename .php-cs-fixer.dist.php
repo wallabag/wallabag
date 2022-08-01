@@ -10,7 +10,7 @@ return PhpCsFixer\Config::create()
         ],
         'combine_consecutive_unsets' => true,
         'heredoc_to_nowdoc' => true,
-        'no_extra_consecutive_blank_lines' => [
+        'no_extra_blank_lines' => [
         'break',
             'continue',
             'extra',
@@ -28,7 +28,7 @@ return PhpCsFixer\Config::create()
         'ordered_imports' => true,
         'php_unit_strict' => true,
         'phpdoc_order' => true,
-        // 'psr4' => true,
+        // 'psr_autoloading' => true,
         'strict_comparison' => true,
         'strict_param' => true,
         'concat_space' => [
