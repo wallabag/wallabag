@@ -21,11 +21,11 @@ class EntriesExport
     private $wallabagUrl;
     private $logoPath;
     private $translator;
+    private $tokenStorage;
     private $title = '';
     private $entries = [];
     private $author = 'wallabag';
     private $language = '';
-    private $user;
 
     /**
      * @param TranslatorInterface   $translator   Translator service
@@ -38,13 +38,7 @@ class EntriesExport
         $this->translator = $translator;
         $this->wallabagUrl = $wallabagUrl;
         $this->logoPath = $logoPath;
-
-        /* @var User $user */
-        $this->user = $tokenStorage->getToken() ? $tokenStorage->getToken()->getUser() : null;
-
-        if (null === $this->user || !\is_object($this->user)) {
-            return;
-        }
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -140,6 +134,10 @@ class EntriesExport
      */
     private function produceEpub()
     {
+        $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
+
+        \assert($user instanceof User);
+
         /*
          * Start and End of the book
          */
@@ -213,7 +211,7 @@ class EntriesExport
                 $publishedDate = $entry->getPublishedAt()->format('Y-m-d');
             }
 
-            $readingTime = $entry->getReadingTime() / $this->user->getConfig()->getReadingSpeed() * 200;
+            $readingTime = $entry->getReadingTime() / $user->getConfig()->getReadingSpeed() * 200;
 
             $titlepage = $content_start .
                 '<h1>' . $entry->getTitle() . '</h1>' .
@@ -306,6 +304,10 @@ class EntriesExport
      */
     private function producePdf()
     {
+        $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
+
+        \assert($user instanceof User);
+
         $pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
         /*
@@ -331,7 +333,7 @@ class EntriesExport
                 $authors = implode(',', $publishedBy);
             }
 
-            $readingTime = $entry->getReadingTime() / $this->user->getConfig()->getReadingSpeed() * 200;
+            $readingTime = $entry->getReadingTime() / $user->getConfig()->getReadingSpeed() * 200;
 
             $pdf->addPage();
             $html = '<h1>' . $entry->getTitle() . '</h1>' .

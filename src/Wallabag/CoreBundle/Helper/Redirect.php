@@ -5,6 +5,7 @@ namespace Wallabag\CoreBundle\Helper;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\CoreBundle\Entity\Config;
+use Wallabag\UserBundle\Entity\User;
 
 /**
  * Manage redirections to avoid redirecting to empty routes.
@@ -31,7 +32,7 @@ class Redirect
     {
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
 
-        if (null === $user || !\is_object($user)) {
+        if (!$user instanceof User) {
             return $url;
         }
 

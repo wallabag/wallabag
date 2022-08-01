@@ -17,6 +17,9 @@ class RedirectTest extends TestCase
     /** @var Redirect */
     private $redirect;
 
+    /** @var User */
+    private $user;
+
     /** @var UsernamePasswordToken */
     private $token;
 
@@ -31,15 +34,15 @@ class RedirectTest extends TestCase
             ->with('homepage')
             ->willReturn('homepage');
 
-        $user = new User();
-        $user->setName('youpi');
-        $user->setEmail('youpi@youpi.org');
-        $user->setUsername('youpi');
-        $user->setPlainPassword('youpi');
-        $user->setEnabled(true);
-        $user->addRole('ROLE_SUPER_ADMIN');
+        $this->user = new User();
+        $this->user->setName('youpi');
+        $this->user->setEmail('youpi@youpi.org');
+        $this->user->setUsername('youpi');
+        $this->user->setPlainPassword('youpi');
+        $this->user->setEnabled(true);
+        $this->user->addRole('ROLE_SUPER_ADMIN');
 
-        $config = new Config($user);
+        $config = new Config($this->user);
         $config->setTheme('material');
         $config->setItemsPerPage(30);
         $config->setReadingSpeed(200);
@@ -47,9 +50,9 @@ class RedirectTest extends TestCase
         $config->setPocketConsumerKey('xxxxx');
         $config->setActionMarkAsRead(Config::REDIRECT_TO_CURRENT_PAGE);
 
-        $user->setConfig($config);
+        $this->user->setConfig($config);
 
-        $this->token = new UsernamePasswordToken($user, 'password', 'key');
+        $this->token = new UsernamePasswordToken($this->user, 'password', 'key');
         $tokenStorage = new TokenStorage();
         $tokenStorage->setToken($this->token);
 
@@ -87,7 +90,7 @@ class RedirectTest extends TestCase
 
     public function testUserForRedirectToHomepage()
     {
-        $this->token->getUser()->getConfig()->setActionMarkAsRead(Config::REDIRECT_TO_HOMEPAGE);
+        $this->user->getConfig()->setActionMarkAsRead(Config::REDIRECT_TO_HOMEPAGE);
 
         $redirectUrl = $this->redirect->to('/unread/list');
 
@@ -96,7 +99,7 @@ class RedirectTest extends TestCase
 
     public function testUserForRedirectWithIgnoreActionMarkAsRead()
     {
-        $this->token->getUser()->getConfig()->setActionMarkAsRead(Config::REDIRECT_TO_HOMEPAGE);
+        $this->user->getConfig()->setActionMarkAsRead(Config::REDIRECT_TO_HOMEPAGE);
 
         $redirectUrl = $this->redirect->to('/unread/list', '', true);
 
@@ -105,7 +108,7 @@ class RedirectTest extends TestCase
 
     public function testUserForRedirectNullWithFallbackWithIgnoreActionMarkAsRead()
     {
-        $this->token->getUser()->getConfig()->setActionMarkAsRead(Config::REDIRECT_TO_HOMEPAGE);
+        $this->user->getConfig()->setActionMarkAsRead(Config::REDIRECT_TO_HOMEPAGE);
 
         $redirectUrl = $this->redirect->to(null, 'fallback', true);
 

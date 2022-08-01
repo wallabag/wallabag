@@ -895,6 +895,8 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $user = static::$kernel->getContainer()->get('security.token_storage')->getToken()->getUser();
 
+        \assert($user instanceof User);
+
         $tag = new Tag();
         $tag->setLabel('super');
         $em->persist($tag);
@@ -980,6 +982,8 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $user = static::$kernel->getContainer()->get('security.token_storage')->getToken()->getUser();
 
+        \assert($user instanceof User);
+
         $tag = new Tag();
         $tag->setLabel('super');
         $em->persist($tag);
@@ -1055,6 +1059,8 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
 
         $user = static::$kernel->getContainer()->get('security.token_storage')->getToken()->getUser();
+
+        \assert($user instanceof User);
 
         $tag = new Tag();
         $tag->setLabel('super');

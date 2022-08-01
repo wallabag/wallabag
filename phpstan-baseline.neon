@@ -6,11 +6,6 @@ parameters:
 			path: src/Wallabag/ApiBundle/Controller/EntryRestController.php
 
 		-
-			message: "#^Call to an undefined method FOS\\\\UserBundle\\\\Model\\\\UserInterface\\:\\:addClient\\(\\)\\.$#"
-			count: 1
-			path: src/Wallabag/ApiBundle/Controller/UserRestController.php
-
-		-
 			message: "#^Call to an undefined method Psr\\\\Container\\\\ContainerInterface\\:\\:getParameter\\(\\)\\.$#"
 			count: 1
 			path: src/Wallabag/ApiBundle/Controller/UserRestController.php
@@ -18,11 +13,6 @@ parameters:
 		-
 			message: "#^Call to an undefined method Psr\\\\Container\\\\ContainerInterface\\:\\:getParameter\\(\\)\\.$#"
 			count: 3
-			path: src/Wallabag/ApiBundle/Controller/WallabagRestController.php
-
-		-
-			message: "#^Cannot call method getId\\(\\) on string\\|Stringable\\|Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\.$#"
-			count: 2
 			path: src/Wallabag/ApiBundle/Controller/WallabagRestController.php
 
 		-
@@ -276,11 +266,6 @@ parameters:
 			path: src/Wallabag/CoreBundle/DependencyInjection/Configuration.php
 
 		-
-			message: "#^Cannot call method getConfig\\(\\) on string\\|Stringable\\|Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\.$#"
-			count: 2
-			path: src/Wallabag/CoreBundle/Event/Listener/UserLocaleListener.php
-
-		-
 			message: "#^Call to an undefined method Lexik\\\\Bundle\\\\FormFilterBundle\\\\Filter\\\\Query\\\\QueryInterface\\:\\:getExpressionBuilder\\(\\)\\.$#"
 			count: 1
 			path: src/Wallabag/CoreBundle/Event/Subscriber/CustomDoctrineORMSubscriber.php
@@ -291,49 +276,9 @@ parameters:
 			path: src/Wallabag/CoreBundle/Form/Type/EntryFilterType.php
 
 		-
-			message: "#^Cannot call method getConfig\\(\\) on string\\|Stringable\\|Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\.$#"
-			count: 2
-			path: src/Wallabag/CoreBundle/Form/Type/EntryFilterType.php
-
-		-
-			message: "#^Cannot call method getId\\(\\) on string\\|Stringable\\|Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\.$#"
-			count: 1
-			path: src/Wallabag/CoreBundle/Form/Type/EntryFilterType.php
-
-		-
-			message: "#^Cannot call method getConfig\\(\\) on string\\|Stringable\\|Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\.$#"
-			count: 2
-			path: src/Wallabag/CoreBundle/Helper/EntriesExport.php
-
-		-
 			message: "#^PHPDoc tag @var has invalid value \\(\\[\\\\GuzzleHttp\\\\Event\\\\SubscriberInterface\\]\\)\\: Unexpected token \"\\[\", expected type at offset 9$#"
 			count: 1
 			path: src/Wallabag/CoreBundle/Helper/HttpClientFactory.php
-
-		-
-			message: "#^Call to an undefined method Stringable\\|Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getConfig\\(\\)\\.$#"
-			count: 1
-			path: src/Wallabag/CoreBundle/Helper/PreparePagerForEntries.php
-
-		-
-			message: "#^Call to an undefined method Stringable\\|Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getConfig\\(\\)\\.$#"
-			count: 1
-			path: src/Wallabag/CoreBundle/Helper/Redirect.php
-
-		-
-			message: "#^Call to an undefined method Stringable\\|Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getConfig\\(\\)\\.$#"
-			count: 2
-			path: src/Wallabag/CoreBundle/Twig/WallabagExtension.php
-
-		-
-			message: "#^Call to an undefined method Stringable\\|Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getCreatedAt\\(\\)\\.$#"
-			count: 2
-			path: src/Wallabag/CoreBundle/Twig/WallabagExtension.php
-
-		-
-			message: "#^Call to an undefined method Stringable\\|Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getId\\(\\)\\.$#"
-			count: 7
-			path: src/Wallabag/CoreBundle/Twig/WallabagExtension.php
 
 		-
 			message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectManager\\:\\:getConnection\\(\\)\\.$#"
@@ -571,11 +516,6 @@ parameters:
 			path: tests/Wallabag/ApiBundle/WallabagApiTestCase.php
 
 		-
-			message: "#^Cannot call method getId\\(\\) on string\\|Stringable\\|Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\.$#"
-			count: 9
-			path: tests/Wallabag/CoreBundle/Controller/ConfigControllerTest.php
-
-		-
 			message: "#^Call to an undefined method DOMNode\\:\\:getAttribute\\(\\)\\.$#"
 			count: 1
 			path: tests/Wallabag/CoreBundle/Controller/FeedControllerTest.php
@@ -583,11 +523,6 @@ parameters:
 		-
 			message: "#^Call to method generate\\(\\) on an unknown class PHPUnit_Framework_MockObject_MockObject\\.$#"
 			count: 2
-			path: tests/Wallabag/CoreBundle/Helper/RedirectTest.php
-
-		-
-			message: "#^Cannot call method getConfig\\(\\) on string\\|Stringable\\|Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\.$#"
-			count: 3
 			path: tests/Wallabag/CoreBundle/Helper/RedirectTest.php
 
 		-

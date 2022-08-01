@@ -28,6 +28,7 @@ class ManageController extends Controller
         $userManager = $this->container->get('fos_user.user_manager');
 
         $user = $userManager->createUser();
+        \assert($user instanceof User);
         // enable created user by default
         $user->setEnabled(true);
 

@@ -55,6 +55,7 @@ class UserRestController extends WallabagRestController
 
         $userManager = $this->get('fos_user.user_manager');
         $user = $userManager->createUser();
+        \assert($user instanceof User);
         // user will be disabled BY DEFAULT to avoid spamming account to be enabled
         $user->setEnabled(false);
 

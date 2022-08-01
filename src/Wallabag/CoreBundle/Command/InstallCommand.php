@@ -14,6 +14,7 @@ use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule;
 use Wallabag\CoreBundle\Entity\InternalSetting;
+use Wallabag\UserBundle\Entity\User;
 
 class InstallCommand extends ContainerAwareCommand
 {
@@ -248,6 +249,7 @@ class InstallCommand extends ContainerAwareCommand
 
         $userManager = $this->getContainer()->get('fos_user.user_manager');
         $user = $userManager->createUser();
+        \assert($user instanceof User);
 
         $user->setUsername($this->io->ask('Username', 'wallabag'));
 
