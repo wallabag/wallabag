@@ -1,0 +1,361 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Service \"wallabag_core\\.entry\\.download_images\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Command/CleanDownloadedImagesCommand.php
+
+		-
+			message: "#^Service \"wallabag_core\\.entry_repository\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Command/CleanDownloadedImagesCommand.php
+
+		-
+			message: "#^Service \"wallabag_core\\.entry_repository\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Command/CleanDuplicatesCommand.php
+
+		-
+			message: "#^Service \"wallabag_user\\.user_repository\" is private\\.$#"
+			count: 2
+			path: src/Wallabag/CoreBundle/Command/CleanDuplicatesCommand.php
+
+		-
+			message: "#^Service \"wallabag_core\\.entry_repository\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Command/ExportCommand.php
+
+		-
+			message: "#^Service \"wallabag_core\\.helper\\.entries_export\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Command/ExportCommand.php
+
+		-
+			message: "#^Service \"wallabag_user\\.user_repository\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Command/ExportCommand.php
+
+		-
+			message: "#^Service \"fos_user\\.user_manager\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Command/InstallCommand.php
+
+		-
+			message: "#^Service \"wallabag_user\\.user_repository\" is private\\.$#"
+			count: 2
+			path: src/Wallabag/CoreBundle/Command/ListUserCommand.php
+
+		-
+			message: "#^Service \"wallabag_core\\.content_proxy\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Command/ReloadEntryCommand.php
+
+		-
+			message: "#^Service \"wallabag_core\\.entry_repository\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Command/ReloadEntryCommand.php
+
+		-
+			message: "#^Service \"wallabag_user\\.user_repository\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Command/ReloadEntryCommand.php
+
+		-
+			message: "#^Service \"wallabag_user\\.user_repository\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Command/ShowUserCommand.php
+
+		-
+			message: "#^Service \"wallabag_core\\.rule_based_tagger\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Command/TagAllCommand.php
+
+		-
+			message: "#^Service \"wallabag_user\\.user_repository\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Command/TagAllCommand.php
+
+		-
+			message: "#^Service \"fos_user\\.user_manager\" is private\\.$#"
+			count: 7
+			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
+
+		-
+			message: "#^Service \"liip_theme\\.active_theme\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
+
+		-
+			message: "#^Service \"wallabag_core\\.entry_repository\" is private\\.$#"
+			count: 3
+			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
+
+		-
+			message: "#^Service \"wallabag_core\\.tag_repository\" is private\\.$#"
+			count: 2
+			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
+
+		-
+			message: "#^Service \"wallabag_user\\.user_repository\" is private\\.$#"
+			count: 2
+			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
+
+		-
+			message: "#^Service \"logger\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Controller/EntryController.php
+
+		-
+			message: "#^Service \"wallabag_core\\.content_proxy\" is private\\.$#"
+			count: 3
+			path: src/Wallabag/CoreBundle/Controller/EntryController.php
+
+		-
+			message: "#^Service \"wallabag_core\\.entry_repository\" is private\\.$#"
+			count: 6
+			path: src/Wallabag/CoreBundle/Controller/EntryController.php
+
+		-
+			message: "#^Service \"wallabag_core\\.helper\\.prepare_pager_for_entries\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Controller/EntryController.php
+
+		-
+			message: "#^Service \"wallabag_core\\.helper\\.redirect\" is private\\.$#"
+			count: 4
+			path: src/Wallabag/CoreBundle/Controller/EntryController.php
+
+		-
+			message: "#^Service \"wallabag_core\\.entry_repository\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Controller/ExportController.php
+
+		-
+			message: "#^Service \"wallabag_core\\.helper\\.entries_export\" is private\\.$#"
+			count: 2
+			path: src/Wallabag/CoreBundle/Controller/ExportController.php
+
+		-
+			message: "#^Service \"wallabag_core\\.tag_repository\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Controller/ExportController.php
+
+		-
+			message: "#^Service \"wallabag_core\\.entry_repository\" is private\\.$#"
+			count: 2
+			path: src/Wallabag/CoreBundle/Controller/FeedController.php
+
+		-
+			message: "#^Service \"wallabag_core\\.helper\\.prepare_pager_for_entries\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Controller/FeedController.php
+
+		-
+			message: "#^Service \"wallabag_core\\.ignore_origin_instance_rule_repository\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Controller/IgnoreOriginInstanceRuleController.php
+
+		-
+			message: "#^Service \"wallabag_core\\.helper\\.crypto_proxy\" is private\\.$#"
+			count: 4
+			path: src/Wallabag/CoreBundle/Controller/SiteCredentialController.php
+
+		-
+			message: "#^Service \"wallabag_core\\.site_credential_repository\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Controller/SiteCredentialController.php
+
+		-
+			message: "#^Service \"wallabag_core\\.entry_repository\" is private\\.$#"
+			count: 5
+			path: src/Wallabag/CoreBundle/Controller/TagController.php
+
+		-
+			message: "#^Service \"wallabag_core\\.helper\\.prepare_pager_for_entries\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Controller/TagController.php
+
+		-
+			message: "#^Service \"wallabag_core\\.helper\\.redirect\" is private\\.$#"
+			count: 4
+			path: src/Wallabag/CoreBundle/Controller/TagController.php
+
+		-
+			message: "#^Service \"wallabag_core\\.tag_repository\" is private\\.$#"
+			count: 2
+			path: src/Wallabag/CoreBundle/Controller/TagController.php
+
+		-
+			message: "#^Service \"wallabag_core\\.tags_assigner\" is private\\.$#"
+			count: 3
+			path: src/Wallabag/CoreBundle/Controller/TagController.php
+
+		-
+			message: "#^Service \"wallabag_core\\.helper\\.crypto_proxy\" is private\\.$#"
+			count: 4
+			path: src/Wallabag/CoreBundle/DataFixtures/SiteCredentialFixtures.php
+
+		-
+			message: "#^Service \"wallabag_import\\.chrome\\.import\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Command/ImportCommand.php
+
+		-
+			message: "#^Service \"wallabag_import\\.delicious\\.import\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Command/ImportCommand.php
+
+		-
+			message: "#^Service \"wallabag_import\\.firefox\\.import\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Command/ImportCommand.php
+
+		-
+			message: "#^Service \"wallabag_import\\.instapaper\\.import\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Command/ImportCommand.php
+
+		-
+			message: "#^Service \"wallabag_import\\.pinboard\\.import\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Command/ImportCommand.php
+
+		-
+			message: "#^Service \"wallabag_import\\.readability\\.import\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Command/ImportCommand.php
+
+		-
+			message: "#^Service \"wallabag_import\\.wallabag_v1\\.import\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Command/ImportCommand.php
+
+		-
+			message: "#^Service \"wallabag_import\\.wallabag_v2\\.import\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Command/ImportCommand.php
+
+		-
+			message: "#^Service \"wallabag_import\\.chrome\\.import\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/ChromeController.php
+
+		-
+			message: "#^Service \"wallabag_import\\.producer\\.redis\\.chrome\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/ChromeController.php
+
+		-
+			message: "#^Service \"wallabag_import\\.delicious\\.import\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/DeliciousController.php
+
+		-
+			message: "#^Service \"wallabag_import\\.producer\\.redis\\.delicious\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/DeliciousController.php
+
+		-
+			message: "#^Service \"wallabag_import\\.elcurator\\.import\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/ElcuratorController.php
+
+		-
+			message: "#^Service \"wallabag_import\\.producer\\.redis\\.elcurator\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/ElcuratorController.php
+
+		-
+			message: "#^Service \"wallabag_import\\.firefox\\.import\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/FirefoxController.php
+
+		-
+			message: "#^Service \"wallabag_import\\.producer\\.redis\\.firefox\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/FirefoxController.php
+
+		-
+			message: "#^Service \"wallabag_core\\.redis\\.client\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/ImportController.php
+
+		-
+			message: "#^Service \"wallabag_import\\.chain\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/ImportController.php
+
+		-
+			message: "#^Service \"wallabag_import\\.instapaper\\.import\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/InstapaperController.php
+
+		-
+			message: "#^Service \"wallabag_import\\.producer\\.redis\\.instapaper\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/InstapaperController.php
+
+		-
+			message: "#^Service \"wallabag_import\\.pinboard\\.import\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/PinboardController.php
+
+		-
+			message: "#^Service \"wallabag_import\\.producer\\.redis\\.pinboard\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/PinboardController.php
+
+		-
+			message: "#^Service \"wallabag_import\\.pocket\\.import\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/PocketController.php
+
+		-
+			message: "#^Service \"wallabag_import\\.producer\\.redis\\.pocket\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/PocketController.php
+
+		-
+			message: "#^Service \"wallabag_import\\.producer\\.redis\\.readability\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/ReadabilityController.php
+
+		-
+			message: "#^Service \"wallabag_import\\.readability\\.import\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/ReadabilityController.php
+
+		-
+			message: "#^Service \"wallabag_import\\.producer\\.redis\\.wallabag_v1\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/WallabagV1Controller.php
+
+		-
+			message: "#^Service \"wallabag_import\\.wallabag_v1\\.import\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/WallabagV1Controller.php
+
+		-
+			message: "#^Service \"wallabag_import\\.producer\\.redis\\.wallabag_v2\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/WallabagV2Controller.php
+
+		-
+			message: "#^Service \"wallabag_import\\.wallabag_v2\\.import\" is private\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/WallabagV2Controller.php
+
+		-
+			message: "#^Service \"fos_user\\.user_manager\" is private\\.$#"
+			count: 2
+			path: src/Wallabag/UserBundle/Controller/ManageController.php
+
+		-
+			message: "#^Missing call to parent\\:\\:setUp\\(\\) method\\.$#"
+			count: 1
+			path: tests/Wallabag/AnnotationBundle/WallabagAnnotationTestCase.php
+
+		-
+			message: "#^Missing call to parent\\:\\:setUp\\(\\) method\\.$#"
+			count: 1
+			path: tests/Wallabag/ApiBundle/WallabagApiTestCase.php
