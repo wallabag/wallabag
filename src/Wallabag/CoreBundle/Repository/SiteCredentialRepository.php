@@ -2,10 +2,13 @@
 
 namespace Wallabag\CoreBundle\Repository;
 
+use Wallabag\CoreBundle\Entity\SiteCredential;
 use Wallabag\CoreBundle\Helper\CryptoProxy;
 
 /**
  * SiteCredentialRepository.
+ *
+ * @method SiteCredential[] findByUser(int $userId)
  */
 class SiteCredentialRepository extends \Doctrine\ORM\EntityRepository
 {

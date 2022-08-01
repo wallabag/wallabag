@@ -8,6 +8,8 @@ use Wallabag\AnnotationBundle\Entity\Annotation;
 
 /**
  * AnnotationRepository.
+ *
+ * @method Annotation|null findOneById(int $id)
  */
 class AnnotationRepository extends EntityRepository
 {

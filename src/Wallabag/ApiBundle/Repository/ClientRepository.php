@@ -3,7 +3,11 @@
 namespace Wallabag\ApiBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Wallabag\ApiBundle\Entity\Client;
 
+/**
+ * @method Client[] findByUser(int $userId)
+ */
 class ClientRepository extends EntityRepository
 {
     public function findOneBy(array $criteria, array $orderBy = null)

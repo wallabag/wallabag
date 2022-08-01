@@ -6,6 +6,10 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Wallabag\CoreBundle\Entity\Tag;
 
+/**
+ * @method Tag|null findOneByLabel(string $label)
+ * @method Tag|null findOneBySlug(string $slug)
+ */
 class TagRepository extends EntityRepository
 {
     /**
