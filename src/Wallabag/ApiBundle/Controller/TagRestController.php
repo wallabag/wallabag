@@ -21,7 +21,7 @@ class TagRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        $tags = $this->getDoctrine()
+        $tags = $this->get('doctrine')
             ->getRepository(Tag::class)
             ->findAllTags($this->getUser()->getId());
 
@@ -46,7 +46,7 @@ class TagRestController extends WallabagRestController
         $this->validateAuthentication();
         $label = $request->get('tag', '');
 
-        $tags = $this->getDoctrine()->getRepository(Tag::class)->findByLabelsAndUser([$label], $this->getUser()->getId());
+        $tags = $this->get('doctrine')->getRepository(Tag::class)->findByLabelsAndUser([$label], $this->getUser()->getId());
 
         if (empty($tags)) {
             throw $this->createNotFoundException('Tag not found');
@@ -54,7 +54,7 @@ class TagRestController extends WallabagRestController
 
         $tag = $tags[0];
 
-        $this->getDoctrine()
+        $this->get('doctrine')
             ->getRepository(Entry::class)
             ->removeTag($this->getUser()->getId(), $tag);
 
@@ -82,13 +82,13 @@ class TagRestController extends WallabagRestController
 
         $tagsLabels = $request->get('tags', '');
 
-        $tags = $this->getDoctrine()->getRepository(Tag::class)->findByLabelsAndUser(explode(',', $tagsLabels), $this->getUser()->getId());
+        $tags = $this->get('doctrine')->getRepository(Tag::class)->findByLabelsAndUser(explode(',', $tagsLabels), $this->getUser()->getId());
 
         if (empty($tags)) {
             throw $this->createNotFoundException('Tags not found');
         }
 
-        $this->getDoctrine()
+        $this->get('doctrine')
             ->getRepository(Entry::class)
             ->removeTags($this->getUser()->getId(), $tags);
 
@@ -114,13 +114,13 @@ class TagRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        $tagFromDb = $this->getDoctrine()->getRepository(Tag::class)->findByLabelsAndUser([$tag->getLabel()], $this->getUser()->getId());
+        $tagFromDb = $this->get('doctrine')->getRepository(Tag::class)->findByLabelsAndUser([$tag->getLabel()], $this->getUser()->getId());
 
         if (empty($tagFromDb)) {
             throw $this->createNotFoundException('Tag not found');
         }
 
-        $this->getDoctrine()
+        $this->get('doctrine')
             ->getRepository(Entry::class)
             ->removeTag($this->getUser()->getId(), $tag);
 
@@ -142,7 +142,7 @@ class TagRestController extends WallabagRestController
             $tags = [$tags];
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
 
         foreach ($tags as $tag) {
             if (0 === \count($tag->getEntries())) {

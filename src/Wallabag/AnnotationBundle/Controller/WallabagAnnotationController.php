@@ -23,7 +23,7 @@ class WallabagAnnotationController extends FOSRestController
     public function getAnnotationsAction(Entry $entry)
     {
         $annotationRows = $this
-            ->getDoctrine()
+            ->get('doctrine')
             ->getRepository(Annotation::class)
             ->findAnnotationsByPageId($entry->getId(), $this->getUser()->getId());
         $total = \count($annotationRows);
@@ -45,7 +45,7 @@ class WallabagAnnotationController extends FOSRestController
     {
         $data = json_decode($request->getContent(), true);
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $annotation = new Annotation($this->getUser());
         $annotation->setEntry($entry);
 
@@ -87,7 +87,7 @@ class WallabagAnnotationController extends FOSRestController
         $form->submit($data);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine')->getManager();
             $em->persist($annotation);
             $em->flush();
 
@@ -110,7 +110,7 @@ class WallabagAnnotationController extends FOSRestController
      */
     public function deleteAnnotationAction(Annotation $annotation)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $em->remove($annotation);
         $em->flush();
 

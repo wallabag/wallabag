@@ -51,7 +51,7 @@ class SiteCredentialController extends Controller
             $credential->setUsername($this->get('wallabag_core.helper.crypto_proxy')->crypt($credential->getUsername()));
             $credential->setPassword($this->get('wallabag_core.helper.crypto_proxy')->crypt($credential->getPassword()));
 
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine')->getManager();
             $em->persist($credential);
             $em->flush();
 
@@ -90,7 +90,7 @@ class SiteCredentialController extends Controller
             $siteCredential->setUsername($this->get('wallabag_core.helper.crypto_proxy')->crypt($siteCredential->getUsername()));
             $siteCredential->setPassword($this->get('wallabag_core.helper.crypto_proxy')->crypt($siteCredential->getPassword()));
 
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine')->getManager();
             $em->persist($siteCredential);
             $em->flush();
 
@@ -131,7 +131,7 @@ class SiteCredentialController extends Controller
                 $this->get('translator')->trans('flashes.site_credential.notice.deleted', ['%host%' => $siteCredential->getHost()])
             );
 
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine')->getManager();
             $em->remove($siteCredential);
             $em->flush();
         }

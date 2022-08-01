@@ -32,7 +32,7 @@ class TagController extends Controller
                 $form->get('label')->getData()
             );
 
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine')->getManager();
             $em->persist($entry);
             $em->flush();
 
@@ -60,7 +60,7 @@ class TagController extends Controller
     public function removeTagFromEntry(Request $request, Entry $entry, Tag $tag)
     {
         $entry->removeTag($tag);
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $em->flush();
 
         // remove orphan tag in case no entries are associated to it
@@ -181,7 +181,7 @@ class TagController extends Controller
                 $entry->removeTag($tag);
             }
 
-            $this->getDoctrine()->getManager()->flush();
+            $this->get('doctrine')->getManager()->flush();
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
@@ -205,7 +205,7 @@ class TagController extends Controller
 
         /** @var QueryBuilder $qb */
         $qb = $this->get('wallabag_core.entry_repository')->getBuilderForSearchByUser($this->getUser()->getId(), $filter, $currentRoute);
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
 
         $entries = $qb->getQuery()->getResult();
 
@@ -239,7 +239,7 @@ class TagController extends Controller
 
         // remove orphan tag in case no entries are associated to it
         if (0 === \count($tag->getEntries())) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine')->getManager();
             $em->remove($tag);
             $em->flush();
         }

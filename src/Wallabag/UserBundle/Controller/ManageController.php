@@ -118,7 +118,7 @@ class ManageController extends Controller
                 $this->get('translator')->trans('flashes.user.notice.deleted', ['%username%' => $user->getUsername()])
             );
 
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine')->getManager();
             $em->remove($user);
             $em->flush();
         }
@@ -138,7 +138,7 @@ class ManageController extends Controller
      */
     public function searchFormAction(Request $request, $page = 1)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $qb = $em->getRepository(User::class)->createQueryBuilder('u');
 
         $form = $this->createForm(SearchUserType::class);

@@ -103,7 +103,7 @@ class UserRestController extends WallabagRestController
         $client = new Client($user);
         $client->setName($request->request->get('client_name', 'Default client'));
 
-        $this->getDoctrine()->getManager()->persist($client);
+        $this->get('doctrine')->getManager()->persist($client);
 
         $user->addClient($client);
 
