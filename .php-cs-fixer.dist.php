@@ -45,4 +45,5 @@ return PhpCsFixer\Config::create()
             ])
             ->in(__DIR__)
     )
+    ->setCacheFile('.php-cs-fixer.cache')
 ;
