@@ -16,36 +16,6 @@ parameters:
 			path: src/Wallabag/ApiBundle/Controller/WallabagRestController.php
 
 		-
-			message: "#^Property Wallabag\\\\ApiBundle\\\\Entity\\\\AccessToken\\:\\:\\$client has unknown class FOS\\\\OAuthServerBundle\\\\Entity\\\\ClientInterface as its type\\.$#"
-			count: 1
-			path: src/Wallabag/ApiBundle/Entity/AccessToken.php
-
-		-
-			message: "#^Property Wallabag\\\\ApiBundle\\\\Entity\\\\AccessToken\\:\\:\\$user has unknown class FOS\\\\OAuthServerBundle\\\\Entity\\\\UserInterface as its type\\.$#"
-			count: 1
-			path: src/Wallabag/ApiBundle/Entity/AccessToken.php
-
-		-
-			message: "#^Property Wallabag\\\\ApiBundle\\\\Entity\\\\AuthCode\\:\\:\\$client has unknown class FOS\\\\OAuthServerBundle\\\\Entity\\\\ClientInterface as its type\\.$#"
-			count: 1
-			path: src/Wallabag/ApiBundle/Entity/AuthCode.php
-
-		-
-			message: "#^Property Wallabag\\\\ApiBundle\\\\Entity\\\\AuthCode\\:\\:\\$user has unknown class FOS\\\\OAuthServerBundle\\\\Entity\\\\UserInterface as its type\\.$#"
-			count: 1
-			path: src/Wallabag/ApiBundle/Entity/AuthCode.php
-
-		-
-			message: "#^Property Wallabag\\\\ApiBundle\\\\Entity\\\\RefreshToken\\:\\:\\$client has unknown class FOS\\\\OAuthServerBundle\\\\Entity\\\\ClientInterface as its type\\.$#"
-			count: 1
-			path: src/Wallabag/ApiBundle/Entity/RefreshToken.php
-
-		-
-			message: "#^Property Wallabag\\\\ApiBundle\\\\Entity\\\\RefreshToken\\:\\:\\$user has unknown class FOS\\\\OAuthServerBundle\\\\Entity\\\\UserInterface as its type\\.$#"
-			count: 1
-			path: src/Wallabag/ApiBundle/Entity/RefreshToken.php
-
-		-
 			message: "#^Service \"wallabag_core\\.entry\\.download_images\" is private\\.$#"
 			count: 1
 			path: src/Wallabag/CoreBundle/Command/CleanDownloadedImagesCommand.php
