@@ -2,6 +2,8 @@
 
 namespace Tests\Wallabag\ApiBundle;
 
+use FOS\UserBundle\Model\UserManager;
+use FOS\UserBundle\Security\LoginManager;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
 use Wallabag\UserBundle\Entity\User;
@@ -32,9 +34,9 @@ abstract class WallabagApiTestCase extends WebTestCase
         $client = static::createClient();
         $container = $client->getContainer();
 
-        /** @var $userManager \FOS\UserBundle\Doctrine\UserManager */
+        /** @var UserManager $userManager */
         $userManager = $container->get('fos_user.user_manager.test');
-        /** @var $loginManager \FOS\UserBundle\Security\LoginManager */
+        /** @var LoginManager $loginManager */
         $loginManager = $container->get('fos_user.security.login_manager.test');
         $firewallName = $container->getParameter('fos_user.firewall_name');
 
