@@ -1,7 +1,7 @@
 howto:
     shortcuts:
         list_title: Atallos dispoñibles nas páxinas con listaxes
-        go_logout: Desconectar
+        go_logout: Saír
         go_howto: Ir ós titoriais (esta páxina!)
         go_developers: Ir a desenvolvedoras
         go_import: Ir a importar
@@ -359,7 +359,7 @@ menu:
         input_label: Escribe aquí a túa busca
     top:
         account: A miña conta
-        random_entry: Ir a unha entrada ó chou desa listaxe
+        random_entry: Ir a unha entrada ao chou dos da lista
         export: Exportar
         filter_entries: Filtrar entradas
         search: Buscar
@@ -376,7 +376,7 @@ menu:
         save_link: Gardar ligazón
         search: Buscar
         about: Acerca de
-        logout: Desconectar
+        logout: Saír
         developer: Xestión dos clientes API
         howto: Titoriais
         import: Importar
