@@ -881,7 +881,7 @@ class Entry
     }
 
     /**
-     * @return \Datetime
+     * @return \DateTime
      */
     public function getPublishedAt()
     {
@@ -891,7 +891,7 @@ class Entry
     /**
      * @return Entry
      */
-    public function setPublishedAt(\Datetime $publishedAt)
+    public function setPublishedAt(\DateTime $publishedAt)
     {
         $this->publishedAt = $publishedAt;
 
