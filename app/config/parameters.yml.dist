@@ -11,7 +11,7 @@ parameters:
     # database_password: %env.database_password%
 
     database_driver: pdo_mysql
-    database_host: 127.0.0.1
+    database_host: localhost
     database_port: ~
     database_name: wallabag
     database_user: root
