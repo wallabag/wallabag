@@ -241,12 +241,20 @@ services:
             - "%wallabag_core.site_credentials.encryption_key_path%"
             - "@logger"
 
+    wallabag_core.command.clean_downloaded_images:
+        class: Wallabag\CoreBundle\Command\CleanDownloadedImagesCommand
+        tags: ['console.command']
+
     wallabag_core.command.clean_duplicates:
         class: Wallabag\CoreBundle\Command\CleanDuplicatesCommand
         tags: ['console.command']
 
     wallabag_core.command.export:
         class: Wallabag\CoreBundle\Command\ExportCommand
+        tags: ['console.command']
+
+    wallabag_core.command.generate_url_hashes:
+        class: Wallabag\CoreBundle\Command\GenerateUrlHashesCommand
         tags: ['console.command']
 
     wallabag_core.command.install:
