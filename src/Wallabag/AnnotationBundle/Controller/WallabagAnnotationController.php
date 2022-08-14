@@ -2,7 +2,7 @@
 
 namespace Wallabag\AnnotationBundle\Controller;
 
-use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,7 +11,7 @@ use Wallabag\AnnotationBundle\Form\EditAnnotationType;
 use Wallabag\AnnotationBundle\Form\NewAnnotationType;
 use Wallabag\CoreBundle\Entity\Entry;
 
-class WallabagAnnotationController extends FOSRestController
+class WallabagAnnotationController extends AbstractFOSRestController
 {
     /**
      * Retrieve annotations for an entry.
