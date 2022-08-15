@@ -9,6 +9,13 @@ services:
             - '@=service(''craue_config'').get(''wallabag_support_url'')'
             - '%domain_name%'
 
+    Wallabag\UserBundle\EventListener\RegistrationListener:
+        arguments:
+            - '%fosuser_registration%'
+            - '@router'
+        tags:
+            - { name: kernel.event_subscriber }
+
     wallabag_user.password_resetting:
         class: Wallabag\UserBundle\EventListener\PasswordResettingListener
         arguments:

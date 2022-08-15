@@ -39,7 +39,7 @@ class WallabagRestController extends AbstractFOSRestController
         $info = [
             'appname' => 'wallabag',
             'version' => $this->container->getParameter('wallabag_core.version'),
-            'allowed_registration' => $this->container->getParameter('wallabag_user.registration_enabled'),
+            'allowed_registration' => $this->container->getParameter('fosuser_registration'),
         ];
 
         return (new JsonResponse())->setJson($this->get('jms_serializer')->serialize($info, 'json'));
