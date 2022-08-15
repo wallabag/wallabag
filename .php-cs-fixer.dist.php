@@ -1,6 +1,7 @@
 <?php
 
-return PhpCsFixer\Config::create()
+$config = new PhpCsFixer\Config();
+return $config
     ->setRiskyAllowed(true)
     ->setRules([
         '@Symfony' => true,
@@ -10,16 +11,18 @@ return PhpCsFixer\Config::create()
         ],
         'combine_consecutive_unsets' => true,
         'heredoc_to_nowdoc' => true,
-        'no_extra_consecutive_blank_lines' => [
-        'break',
-            'continue',
-            'extra',
-            'return',
-            'throw',
-            'use',
-            'parenthesis_brace_block',
-            'square_brace_block',
-            'curly_brace_block'
+        'no_extra_blank_lines' => [
+            'tokens' => [
+                'break',
+                'continue',
+                'extra',
+                'return',
+                'throw',
+                'use',
+                'parenthesis_brace_block',
+                'square_brace_block',
+                'curly_brace_block'
+            ],
         ],
         'no_unreachable_default_argument_value' => true,
         'no_useless_else' => true,
@@ -28,7 +31,7 @@ return PhpCsFixer\Config::create()
         'ordered_imports' => true,
         'php_unit_strict' => true,
         'phpdoc_order' => true,
-        // 'psr4' => true,
+        // 'psr_autoloading' => true,
         'strict_comparison' => true,
         'strict_param' => true,
         'concat_space' => [
@@ -45,4 +48,5 @@ return PhpCsFixer\Config::create()
             ])
             ->in(__DIR__)
     )
+    ->setCacheFile('.php-cs-fixer.cache')
 ;
