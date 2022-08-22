@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Event\EntryDeletedEvent;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
 use Wallabag\CoreBundle\Form\Type\EditEntryType;
@@ -30,11 +31,44 @@ class EntryController extends Controller
         $em = $this->getDoctrine()->getManager();
         $values = $request->request->all();
 
+        $tagsToAdd = [];
+        $tagsToRemove = [];
+
         $action = 'toggle-read';
         if (isset($values['toggle-star'])) {
             $action = 'toggle-star';
         } elseif (isset($values['delete'])) {
             $action = 'delete';
+        } elseif (isset($values['tag'])) {
+            $action = 'tag';
+
+            if (isset($values['tags'])) {
+                $labels = array_filter(explode(',', $values['tags']),
+                    function ($v) {
+                        $v = trim($v);
+
+                        return '' !== $v;
+                    });
+                foreach ($labels as $label) {
+                    $remove = false;
+                    if (0 === strpos($label, '-')) {
+                        $label = substr($label, 1);
+                        $remove = true;
+                    }
+                    $tag = $this->get('wallabag_core.tag_repository')->findOneByLabel($label);
+                    if ($remove) {
+                        if (null !== $tag) {
+                            $tagsToRemove[] = $tag;
+                        }
+                    } else {
+                        if (null === $tag) {
+                            $tag = new Tag();
+                            $tag->setLabel($label);
+                        }
+                        $tagsToAdd[] = $tag;
+                    }
+                }
+            }
         }
 
         if (isset($values['entry-checkbox'])) {
@@ -48,6 +82,13 @@ class EntryController extends Controller
                     $entry->toggleArchive();
                 } elseif ('toggle-star' === $action) {
                     $entry->toggleStar();
+                } elseif ('tag' === $action) {
+                    foreach ($tagsToAdd as $tag) {
+                        $entry->addTag($tag);
+                    }
+                    foreach ($tagsToRemove as $tag) {
+                        $entry->removeTag($tag);
+                    }
                 } elseif ('delete' === $action) {
                     $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
                     $em->remove($entry);
