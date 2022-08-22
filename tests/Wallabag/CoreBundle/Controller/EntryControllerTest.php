@@ -1489,7 +1489,7 @@ class EntryControllerTest extends WallabagCoreTestCase
                 'it',
             ],
             'zh_CN' => [
-                'http://www.hao123.com/shequ?__noscript__-=1',
+                'http://tuijian.hao123.com/tuijian/?__noscript__-=1',
                 'zh_CN',
             ],
             'pt_BR' => [
