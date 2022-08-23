@@ -1,7 +1,7 @@
 auth_code:
     on: an
     mailer:
-        subject: wallabag-Authentifizierungcode
+        subject: wallabag-Authentifizierungscode
         body:
             hello: Hallo %user%,
             first_para: Da du die Zwei-Faktor-Authentifizierung in deinem wallabag-Konto aktiviert hast und du dich gerade von einem neuen Gerät (Computer, Handy, etc.) anmeldest, senden wir dir einen Code, um deinen Zugriff zu prüfen.

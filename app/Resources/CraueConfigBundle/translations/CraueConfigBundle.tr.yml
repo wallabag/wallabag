@@ -3,7 +3,7 @@ download_pictures: Resimleri sunucuya indir
 carrot: Carrot'a paylaşımı etkinleştir
 diaspora_url: hizmet etkinse diaspora* URL'si
 export_epub: ePub dışa aktarımını etkinleştir
-export_mobi: .mobi dışa aktarımını etkinleştir
+export_mobi: .mobi dışa aktarımını etkinleştir (kullanım dışı, yakında kaldırılacak)
 export_pdf: PDF dışa aktarımını etkinleştir
 export_csv: CSV dışa aktarımını etkinleştir
 export_json: JSON dışa aktarımını etkinleştir
