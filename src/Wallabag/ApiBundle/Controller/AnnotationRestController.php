@@ -63,7 +63,7 @@ class AnnotationRestController extends WallabagRestController
      *      }
      * )
      *
-     * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
+     * @ParamConverter("annotation", class="Wallabag\AnnotationBundle\Entity\Annotation")
      *
      * @return JsonResponse
      */
@@ -86,7 +86,7 @@ class AnnotationRestController extends WallabagRestController
      *      }
      * )
      *
-     * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
+     * @ParamConverter("annotation", class="Wallabag\AnnotationBundle\Entity\Annotation")
      *
      * @return JsonResponse
      */

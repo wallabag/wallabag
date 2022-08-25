@@ -25,7 +25,7 @@ class FeedController extends Controller
      *
      * @Route("/feed/{username}/{token}/unread/{page}", name="unread_feed", defaults={"page"=1, "_format"="xml"})
      *
-     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
+     * @ParamConverter("user", class="Wallabag\UserBundle\Entity\User", converter="username_feed_token_converter")
      *
      * @param $page
      *
@@ -41,7 +41,7 @@ class FeedController extends Controller
      *
      * @Route("/feed/{username}/{token}/archive/{page}", name="archive_feed", defaults={"page"=1, "_format"="xml"})
      *
-     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
+     * @ParamConverter("user", class="Wallabag\UserBundle\Entity\User", converter="username_feed_token_converter")
      *
      * @param $page
      *
@@ -57,7 +57,7 @@ class FeedController extends Controller
      *
      * @Route("/feed/{username}/{token}/starred/{page}", name="starred_feed", defaults={"page"=1, "_format"="xml"})
      *
-     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
+     * @ParamConverter("user", class="Wallabag\UserBundle\Entity\User", converter="username_feed_token_converter")
      *
      * @param $page
      *
@@ -73,7 +73,7 @@ class FeedController extends Controller
      *
      * @Route("/feed/{username}/{token}/all/{page}", name="all_feed", defaults={"page"=1, "_format"="xml"})
      *
-     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
+     * @ParamConverter("user", class="Wallabag\UserBundle\Entity\User", converter="username_feed_token_converter")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -87,7 +87,7 @@ class FeedController extends Controller
      *
      * @Route("/feed/{username}/{token}/tags/{slug}/{page}", name="tag_feed", defaults={"page"=1, "_format"="xml"})
      *
-     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
+     * @ParamConverter("user", class="Wallabag\UserBundle\Entity\User", converter="username_feed_token_converter")
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      *
      * @return \Symfony\Component\HttpFoundation\Response
