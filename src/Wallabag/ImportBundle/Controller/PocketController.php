@@ -7,6 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Wallabag\ImportBundle\Import\PocketImport;
 
 class PocketController extends Controller
 {
@@ -110,7 +111,7 @@ class PocketController extends Controller
      */
     private function getPocketImportService()
     {
-        $pocket = $this->get('wallabag_import.pocket.import');
+        $pocket = $this->get(PocketImport::class);
         $pocket->setUser($this->getUser());
 
         if ($this->get('craue_config')->get('import_with_rabbitmq')) {

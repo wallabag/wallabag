@@ -24,7 +24,10 @@ use Wallabag\CoreBundle\Form\Type\IgnoreOriginUserRuleType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleImportType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleType;
 use Wallabag\CoreBundle\Form\Type\UserInformationType;
+use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\CoreBundle\Repository\TagRepository;
 use Wallabag\CoreBundle\Tools\Utils;
+use Wallabag\UserBundle\Repository\UserRepository;
 
 class ConfigController extends Controller
 {
@@ -236,7 +239,7 @@ class ConfigController extends Controller
             ],
             'twofactor_auth' => $this->getParameter('twofactor_auth'),
             'wallabag_url' => $this->getParameter('domain_name'),
-            'enabled_users' => $this->get('wallabag_user.user_repository')->getSumEnabledUsers(),
+            'enabled_users' => $this->get(UserRepository::class)->getSumEnabledUsers(),
         ]);
     }
 
@@ -561,7 +564,7 @@ class ConfigController extends Controller
                 // manually remove tags to avoid orphan tag
                 $this->removeAllTagsByUserId($this->getUser()->getId());
 
-                $this->get('wallabag_core.entry_repository')->removeAllByUserId($this->getUser()->getId());
+                $this->get(EntryRepository::class)->removeAllByUserId($this->getUser()->getId());
                 break;
             case 'archived':
                 if ($this->get('doctrine')->getConnection()->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\SqlitePlatform) {
@@ -571,7 +574,7 @@ class ConfigController extends Controller
                 // manually remove tags to avoid orphan tag
                 $this->removeTagsForArchivedByUserId($this->getUser()->getId());
 
-                $this->get('wallabag_core.entry_repository')->removeArchivedByUserId($this->getUser()->getId());
+                $this->get(EntryRepository::class)->removeArchivedByUserId($this->getUser()->getId());
                 break;
         }
 
@@ -594,7 +597,7 @@ class ConfigController extends Controller
      */
     public function deleteAccountAction(Request $request)
     {
-        $enabledUsers = $this->get('wallabag_user.user_repository')
+        $enabledUsers = $this->get(UserRepository::class)
             ->getSumEnabledUsers();
 
         if ($enabledUsers <= 1) {
@@ -690,7 +693,7 @@ class ConfigController extends Controller
             return;
         }
 
-        $this->get('wallabag_core.entry_repository')
+        $this->get(EntryRepository::class)
             ->removeTags($userId, $tags);
 
         // cleanup orphan tags
@@ -712,7 +715,7 @@ class ConfigController extends Controller
      */
     private function removeAllTagsByUserId($userId)
     {
-        $tags = $this->get('wallabag_core.tag_repository')->findAllTags($userId);
+        $tags = $this->get(TagRepository::class)->findAllTags($userId);
         $this->removeAllTagsByStatusAndUserId($tags, $userId);
     }
 
@@ -723,7 +726,7 @@ class ConfigController extends Controller
      */
     private function removeTagsForArchivedByUserId($userId)
     {
-        $tags = $this->get('wallabag_core.tag_repository')->findForArchivedArticlesByUser($userId);
+        $tags = $this->get(TagRepository::class)->findForArchivedArticlesByUser($userId);
         $this->removeAllTagsByStatusAndUserId($tags, $userId);
     }
 

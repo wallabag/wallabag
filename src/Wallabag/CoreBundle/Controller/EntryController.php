@@ -18,6 +18,11 @@ use Wallabag\CoreBundle\Form\Type\EditEntryType;
 use Wallabag\CoreBundle\Form\Type\EntryFilterType;
 use Wallabag\CoreBundle\Form\Type\NewEntryType;
 use Wallabag\CoreBundle\Form\Type\SearchEntryType;
+use Wallabag\CoreBundle\Helper\ContentProxy;
+use Wallabag\CoreBundle\Helper\PreparePagerForEntries;
+use Wallabag\CoreBundle\Helper\Redirect;
+use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\CoreBundle\Repository\TagRepository;
 
 class EntryController extends Controller
 {
@@ -55,7 +60,7 @@ class EntryController extends Controller
                         $label = substr($label, 1);
                         $remove = true;
                     }
-                    $tag = $this->get('wallabag_core.tag_repository')->findOneByLabel($label);
+                    $tag = $this->get(TagRepository::class)->findOneByLabel($label);
                     if ($remove) {
                         if (null !== $tag) {
                             $tagsToRemove[] = $tag;
@@ -74,7 +79,7 @@ class EntryController extends Controller
         if (isset($values['entry-checkbox'])) {
             foreach ($values['entry-checkbox'] as $id) {
                 /** @var Entry * */
-                $entry = $this->get('wallabag_core.entry_repository')->findById((int) $id)[0];
+                $entry = $this->get(EntryRepository::class)->findById((int) $id)[0];
 
                 $this->checkUserAction($entry);
 
@@ -98,7 +103,7 @@ class EntryController extends Controller
             $em->flush();
         }
 
-        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'));
+        $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'));
 
         return $this->redirect($redirectUrl);
     }
@@ -269,7 +274,7 @@ class EntryController extends Controller
     public function showUnreadAction(Request $request, $page)
     {
         // load the quickstart if no entry in database
-        if (1 === (int) $page && 0 === $this->get('wallabag_core.entry_repository')->countAllEntriesByUser($this->getUser()->getId())) {
+        if (1 === (int) $page && 0 === $this->get(EntryRepository::class)->countAllEntriesByUser($this->getUser()->getId())) {
             return $this->redirect($this->generateUrl('quickstart'));
         }
 
@@ -344,7 +349,7 @@ class EntryController extends Controller
     public function redirectRandomEntryAction($type = 'all')
     {
         try {
-            $entry = $this->get('wallabag_core.entry_repository')
+            $entry = $this->get(EntryRepository::class)
                 ->getRandomEntry($this->getUser()->getId(), $type);
         } catch (NoResultException $e) {
             $bag = $this->get('session')->getFlashBag();
@@ -431,7 +436,7 @@ class EntryController extends Controller
             $message
         );
 
-        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'));
+        $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'));
 
         return $this->redirect($redirectUrl);
     }
@@ -461,7 +466,7 @@ class EntryController extends Controller
             $message
         );
 
-        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'));
+        $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'));
 
         return $this->redirect($redirectUrl);
     }
@@ -501,7 +506,7 @@ class EntryController extends Controller
         $referer = $request->headers->get('referer');
         $to = (1 !== preg_match('#' . $url . '$#i', $referer) ? $referer : null);
 
-        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($to);
+        $redirectUrl = $this->get(Redirect::class)->to($to);
 
         return $this->redirect($redirectUrl);
     }
@@ -597,7 +602,7 @@ class EntryController extends Controller
      */
     private function showEntries($type, Request $request, $page)
     {
-        $repository = $this->get('wallabag_core.entry_repository');
+        $repository = $this->get(EntryRepository::class);
         $searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
         $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
 
@@ -647,7 +652,7 @@ class EntryController extends Controller
 
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
 
-        $entries = $this->get('wallabag_core.helper.prepare_pager_for_entries')->prepare($pagerAdapter);
+        $entries = $this->get(PreparePagerForEntries::class)->prepare($pagerAdapter);
 
         try {
             $entries->setCurrentPage($page);
@@ -657,7 +662,7 @@ class EntryController extends Controller
             }
         }
 
-        $nbEntriesUntagged = $this->get('wallabag_core.entry_repository')
+        $nbEntriesUntagged = $this->get(EntryRepository::class)
             ->countUntaggedEntriesByUser($this->getUser()->getId());
 
         return $this->render(
@@ -683,7 +688,7 @@ class EntryController extends Controller
         $message = 'flashes.entry.notice.' . $prefixMessage;
 
         try {
-            $this->get('wallabag_core.content_proxy')->updateEntry($entry, $entry->getUrl());
+            $this->get(ContentProxy::class)->updateEntry($entry, $entry->getUrl());
         } catch (\Exception $e) {
             $this->get('logger')->error('Error while saving an entry', [
                 'exception' => $e,
@@ -694,11 +699,11 @@ class EntryController extends Controller
         }
 
         if (empty($entry->getDomainName())) {
-            $this->get('wallabag_core.content_proxy')->setEntryDomainName($entry);
+            $this->get(ContentProxy::class)->setEntryDomainName($entry);
         }
 
         if (empty($entry->getTitle())) {
-            $this->get('wallabag_core.content_proxy')->setDefaultEntryTitle($entry);
+            $this->get(ContentProxy::class)->setDefaultEntryTitle($entry);
         }
 
         $this->get('session')->getFlashBag()->add('notice', $message);
@@ -721,6 +726,6 @@ class EntryController extends Controller
      */
     private function checkIfEntryAlreadyExists(Entry $entry)
     {
-        return $this->get('wallabag_core.entry_repository')->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
+        return $this->get(EntryRepository::class)->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
     }
 }

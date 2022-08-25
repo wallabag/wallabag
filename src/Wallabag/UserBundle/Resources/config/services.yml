@@ -1,5 +1,5 @@
 services:
-    wallabag_user.auth_code_mailer:
+    Wallabag\UserBundle\Mailer\AuthCodeMailer:
         class: Wallabag\UserBundle\Mailer\AuthCodeMailer
         arguments:
             - "@mailer"
@@ -16,20 +16,20 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
-    wallabag_user.password_resetting:
+    Wallabag\UserBundle\EventListener\PasswordResettingListener:
         class: Wallabag\UserBundle\EventListener\PasswordResettingListener
         arguments:
             - "@router"
         tags:
             - { name: kernel.event_subscriber }
 
-    wallabag_user.user_repository:
+    Wallabag\UserBundle\Repository\UserRepository:
         class: Wallabag\UserBundle\Repository\UserRepository
         factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
         arguments:
             - WallabagUserBundle:User
 
-    wallabag_user.listener.create_config:
+    Wallabag\UserBundle\EventListener\CreateConfigListener:
         class: Wallabag\UserBundle\EventListener\CreateConfigListener
         arguments:
             - "@doctrine.orm.entity_manager"
@@ -44,7 +44,7 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
-    wallabag_user.listener.authentication_failure_event_listener:
+    Wallabag\UserBundle\EventListener\AuthenticationFailureListener:
         class: Wallabag\UserBundle\EventListener\AuthenticationFailureListener
         arguments:
             - "@request_stack"

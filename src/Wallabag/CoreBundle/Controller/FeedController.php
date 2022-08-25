@@ -14,6 +14,8 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Helper\PreparePagerForEntries;
+use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\UserBundle\Entity\User;
 
 class FeedController extends Controller
@@ -113,7 +115,7 @@ class FeedController extends Controller
             UrlGeneratorInterface::ABSOLUTE_URL
         );
 
-        $entriesByTag = $this->get('wallabag_core.entry_repository')->findAllByTagId(
+        $entriesByTag = $this->get(EntryRepository::class)->findAllByTagId(
             $user->getId(),
             $tag->getId(),
             $sorts[$sort]
@@ -121,7 +123,7 @@ class FeedController extends Controller
 
         $pagerAdapter = new ArrayAdapter($entriesByTag);
 
-        $entries = $this->get('wallabag_core.helper.prepare_pager_for_entries')->prepare(
+        $entries = $this->get(PreparePagerForEntries::class)->prepare(
             $pagerAdapter,
             $user
         );
@@ -184,7 +186,7 @@ class FeedController extends Controller
      */
     private function showEntries($type, User $user, $page = 1)
     {
-        $repository = $this->get('wallabag_core.entry_repository');
+        $repository = $this->get(EntryRepository::class);
 
         switch ($type) {
             case 'starred':

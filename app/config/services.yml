@@ -2,17 +2,17 @@ parameters:
     lexik_form_filter.get_filter.doctrine_orm.class: Wallabag\CoreBundle\Event\Subscriber\CustomDoctrineORMSubscriber
 
 services:
-    twig.extension.text:
+    Twig_Extensions_Extension_Text:
         class: Twig_Extensions_Extension_Text
         tags:
             - { name: twig.extension }
 
-    wallabag.twig_extension:
+    Wallabag\CoreBundle\Twig\WallabagExtension:
         class: Wallabag\CoreBundle\Twig\WallabagExtension
         public: false
         arguments:
-            - "@wallabag_core.entry_repository"
-            - "@wallabag_core.tag_repository"
+            - '@Wallabag\CoreBundle\Repository\EntryRepository'
+            - '@Wallabag\CoreBundle\Repository\TagRepository'
             - "@security.token_storage"
             - "%wallabag_core.cache_lifetime%"
             - "@translator"
@@ -20,19 +20,19 @@ services:
         tags:
             - { name: twig.extension }
 
-    wallabag.twig_matomo_extension:
+    MatomoTwigExtension\MatomoTwigExtension:
         class: MatomoTwigExtension\MatomoTwigExtension
         public: false
         tags:
             - { name: twig.extension }
 
-    wallabag.locale_listener:
+    Wallabag\CoreBundle\Event\Listener\LocaleListener:
         class: Wallabag\CoreBundle\Event\Listener\LocaleListener
         arguments: ["%kernel.default_locale%"]
         tags:
             - { name: kernel.event_subscriber }
 
-    wallabag.user_locale_listener:
+    Wallabag\CoreBundle\Event\Listener\UserLocaleListener:
         class: Wallabag\CoreBundle\Event\Listener\UserLocaleListener
         arguments: ["@session"]
         tags:

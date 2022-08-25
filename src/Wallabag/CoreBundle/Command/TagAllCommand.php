@@ -8,6 +8,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Wallabag\CoreBundle\Helper\RuleBasedTagger;
+use Wallabag\UserBundle\Repository\UserRepository;
 
 class TagAllCommand extends ContainerAwareCommand
 {
@@ -35,7 +37,7 @@ class TagAllCommand extends ContainerAwareCommand
 
             return 1;
         }
-        $tagger = $this->getContainer()->get('wallabag_core.rule_based_tagger');
+        $tagger = $this->getContainer()->get(RuleBasedTagger::class);
 
         $io->text(sprintf('Tagging entries for user <info>%s</info>...', $user->getUserName()));
 
@@ -63,7 +65,7 @@ class TagAllCommand extends ContainerAwareCommand
      */
     private function getUser($username)
     {
-        return $this->getContainer()->get('wallabag_user.user_repository')->findOneByUserName($username);
+        return $this->getContainer()->get(UserRepository::class)->findOneByUserName($username);
     }
 
     private function getDoctrine()

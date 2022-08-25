@@ -4,6 +4,7 @@ namespace Tests\Wallabag\ImportBundle\Import;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Wallabag\ImportBundle\Import\ImportChain;
 use Wallabag\ImportBundle\Import\ImportCompilerPass;
 
 class ImportCompilerPassTest extends TestCase
@@ -20,7 +21,7 @@ class ImportCompilerPassTest extends TestCase
     {
         $container = new ContainerBuilder();
         $container
-            ->register('wallabag_import.chain')
+            ->register(ImportChain::class)
             ->setPublic(false)
         ;
 
@@ -31,9 +32,9 @@ class ImportCompilerPassTest extends TestCase
 
         $this->process($container);
 
-        $this->assertTrue($container->hasDefinition('wallabag_import.chain'));
+        $this->assertTrue($container->hasDefinition(ImportChain::class));
 
-        $definition = $container->getDefinition('wallabag_import.chain');
+        $definition = $container->getDefinition(ImportChain::class);
         $this->assertTrue($definition->hasMethodCall('addImport'));
 
         $calls = $definition->getMethodCalls();

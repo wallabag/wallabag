@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
+use Wallabag\ImportBundle\Import\DeliciousImport;
 
 class DeliciousController extends Controller
 {
@@ -17,7 +18,7 @@ class DeliciousController extends Controller
         $form = $this->createForm(UploadImportType::class);
         $form->handleRequest($request);
 
-        $delicious = $this->get('wallabag_import.delicious.import');
+        $delicious = $this->get(DeliciousImport::class);
         $delicious->setUser($this->getUser());
 
         if ($this->get('craue_config')->get('import_with_rabbitmq')) {

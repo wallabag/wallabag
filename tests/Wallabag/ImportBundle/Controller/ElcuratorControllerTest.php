@@ -2,6 +2,7 @@
 
 namespace Tests\Wallabag\ImportBundle\Controller;
 
+use Predis\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 
@@ -83,7 +84,7 @@ class ElcuratorControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
-        $this->assertNotEmpty($client->getContainer()->get('wallabag_core.redis.client')->lpop('wallabag.import.elcurator'));
+        $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.elcurator'));
 
         $client->getContainer()->get('craue_config')->set('import_with_redis', 0);
     }

@@ -13,6 +13,11 @@ use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Form\Type\NewTagType;
 use Wallabag\CoreBundle\Form\Type\RenameTagType;
+use Wallabag\CoreBundle\Helper\PreparePagerForEntries;
+use Wallabag\CoreBundle\Helper\Redirect;
+use Wallabag\CoreBundle\Helper\TagsAssigner;
+use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\CoreBundle\Repository\TagRepository;
 
 class TagController extends Controller
 {
@@ -27,7 +32,7 @@ class TagController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->get('wallabag_core.tags_assigner')->assignTagsToEntry(
+            $this->get(TagsAssigner::class)->assignTagsToEntry(
                 $entry,
                 $form->get('label')->getData()
             );
@@ -69,7 +74,7 @@ class TagController extends Controller
             $em->flush();
         }
 
-        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'), '', true);
+        $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'), '', true);
 
         return $this->redirect($redirectUrl);
     }
@@ -83,9 +88,9 @@ class TagController extends Controller
      */
     public function showTagAction()
     {
-        $tags = $this->get('wallabag_core.tag_repository')
+        $tags = $this->get(TagRepository::class)
             ->findAllFlatTagsWithNbEntries($this->getUser()->getId());
-        $nbEntriesUntagged = $this->get('wallabag_core.entry_repository')
+        $nbEntriesUntagged = $this->get(EntryRepository::class)
             ->countUntaggedEntriesByUser($this->getUser()->getId());
 
         $renameForms = [];
@@ -110,14 +115,14 @@ class TagController extends Controller
      */
     public function showEntriesForTagAction(Tag $tag, $page, Request $request)
     {
-        $entriesByTag = $this->get('wallabag_core.entry_repository')->findAllByTagId(
+        $entriesByTag = $this->get(EntryRepository::class)->findAllByTagId(
             $this->getUser()->getId(),
             $tag->getId()
         );
 
         $pagerAdapter = new ArrayAdapter($entriesByTag);
 
-        $entries = $this->get('wallabag_core.helper.prepare_pager_for_entries')->prepare($pagerAdapter);
+        $entries = $this->get(PreparePagerForEntries::class)->prepare($pagerAdapter);
 
         try {
             $entries->setCurrentPage($page);
@@ -152,7 +157,7 @@ class TagController extends Controller
         $form = $this->createForm(RenameTagType::class, new Tag());
         $form->handleRequest($request);
 
-        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'), '', true);
+        $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'), '', true);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $newTag = new Tag();
@@ -162,18 +167,18 @@ class TagController extends Controller
                 return $this->redirect($redirectUrl);
             }
 
-            $tagFromRepo = $this->get('wallabag_core.tag_repository')->findOneByLabel($newTag->getLabel());
+            $tagFromRepo = $this->get(TagRepository::class)->findOneByLabel($newTag->getLabel());
 
             if (null !== $tagFromRepo) {
                 $newTag = $tagFromRepo;
             }
 
-            $entries = $this->get('wallabag_core.entry_repository')->findAllByTagId(
+            $entries = $this->get(EntryRepository::class)->findAllByTagId(
                 $this->getUser()->getId(),
                 $tag->getId()
             );
             foreach ($entries as $entry) {
-                $this->get('wallabag_core.tags_assigner')->assignTagsToEntry(
+                $this->get(TagsAssigner::class)->assignTagsToEntry(
                     $entry,
                     $newTag->getLabel(),
                     [$newTag]
@@ -204,13 +209,13 @@ class TagController extends Controller
         $currentRoute = $request->query->has('currentRoute') ? $request->query->get('currentRoute') : '';
 
         /** @var QueryBuilder $qb */
-        $qb = $this->get('wallabag_core.entry_repository')->getBuilderForSearchByUser($this->getUser()->getId(), $filter, $currentRoute);
+        $qb = $this->get(EntryRepository::class)->getBuilderForSearchByUser($this->getUser()->getId(), $filter, $currentRoute);
         $em = $this->getDoctrine()->getManager();
 
         $entries = $qb->getQuery()->getResult();
 
         foreach ($entries as $entry) {
-            $this->get('wallabag_core.tags_assigner')->assignTagsToEntry(
+            $this->get(TagsAssigner::class)->assignTagsToEntry(
                 $entry,
                 $filter
             );
@@ -220,7 +225,7 @@ class TagController extends Controller
 
         $em->flush();
 
-        return $this->redirect($this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'), '', true));
+        return $this->redirect($this->get(Redirect::class)->to($request->headers->get('referer'), '', true));
     }
 
     /**
@@ -234,7 +239,7 @@ class TagController extends Controller
     public function removeTagAction(Tag $tag, Request $request)
     {
         foreach ($tag->getEntriesByUserId($this->getUser()->getId()) as $entry) {
-            $this->get('wallabag_core.entry_repository')->removeTag($this->getUser()->getId(), $tag);
+            $this->get(EntryRepository::class)->removeTag($this->getUser()->getId(), $tag);
         }
 
         // remove orphan tag in case no entries are associated to it
@@ -244,7 +249,7 @@ class TagController extends Controller
             $em->flush();
         }
 
-        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'), '', true);
+        $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'), '', true);
 
         return $this->redirect($redirectUrl);
     }

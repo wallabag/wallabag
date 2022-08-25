@@ -164,7 +164,7 @@ abstract class WallabagCoreTestCase extends WebTestCase
     protected function checkRedis()
     {
         try {
-            $this->client->getContainer()->get('wallabag_core.redis.client')->connect();
+            $this->client->getContainer()->get(\Predis\Client::class)->connect();
         } catch (\Exception $e) {
             $this->markTestSkipped('Redis is not installed/activated');
         }

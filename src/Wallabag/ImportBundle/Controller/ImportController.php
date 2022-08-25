@@ -2,8 +2,10 @@
 
 namespace Wallabag\ImportBundle\Controller;
 
+use Predis\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
+use Wallabag\ImportBundle\Import\ImportChain;
 
 class ImportController extends Controller
 {
@@ -13,7 +15,7 @@ class ImportController extends Controller
     public function importAction()
     {
         return $this->render('WallabagImportBundle:Import:index.html.twig', [
-            'imports' => $this->get('wallabag_import.chain')->getAll(),
+            'imports' => $this->get(ImportChain::class)->getAll(),
         ]);
     }
 
@@ -50,7 +52,7 @@ class ImportController extends Controller
                 $rabbitNotInstalled = true;
             }
         } elseif ($this->get('craue_config')->get('import_with_redis')) {
-            $redis = $this->get('wallabag_core.redis.client');
+            $redis = $this->get(Client::class);
 
             try {
                 $nbRedisMessages = $redis->llen('wallabag.import.pocket')

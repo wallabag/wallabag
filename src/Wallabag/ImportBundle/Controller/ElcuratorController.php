@@ -4,6 +4,7 @@ namespace Wallabag\ImportBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Wallabag\ImportBundle\Import\ElcuratorImport;
 
 class ElcuratorController extends WallabagController
 {
@@ -20,7 +21,7 @@ class ElcuratorController extends WallabagController
      */
     protected function getImportService()
     {
-        $service = $this->get('wallabag_import.elcurator.import');
+        $service = $this->get(ElcuratorImport::class);
 
         if ($this->get('craue_config')->get('import_with_rabbitmq')) {
             $service->setProducer($this->get('old_sound_rabbit_mq.import_elcurator_producer'));

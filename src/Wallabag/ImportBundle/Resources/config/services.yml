@@ -3,18 +3,18 @@ imports:
     - { resource: redis.yml }
 
 services:
-    wallabag_import.chain:
+    Wallabag\ImportBundle\Import\ImportChain:
         class: Wallabag\ImportBundle\Import\ImportChain
 
     wallabag_import.pocket.client:
         alias: 'httplug.client.wallabag_import.pocket.client'
 
-    wallabag_import.pocket.import:
+    Wallabag\ImportBundle\Import\PocketImport:
         class: Wallabag\ImportBundle\Import\PocketImport
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@wallabag_core.content_proxy"
-            - "@wallabag_core.tags_assigner"
+            - '@Wallabag\CoreBundle\Helper\ContentProxy'
+            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
             - "@event_dispatcher"
         calls:
             - [ setClient, [ "@wallabag_import.pocket.client" ] ]
@@ -22,12 +22,12 @@ services:
         tags:
             -  { name: wallabag_import.import, alias: pocket }
 
-    wallabag_import.wallabag_v1.import:
+    Wallabag\ImportBundle\Import\WallabagV1Import:
         class: Wallabag\ImportBundle\Import\WallabagV1Import
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@wallabag_core.content_proxy"
-            - "@wallabag_core.tags_assigner"
+            - '@Wallabag\CoreBundle\Helper\ContentProxy'
+            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
             - "@event_dispatcher"
             - "%wallabag_core.fetching_error_message_title%"
             - "%wallabag_core.fetching_error_message%"
@@ -36,105 +36,102 @@ services:
         tags:
             -  { name: wallabag_import.import, alias: wallabag_v1 }
 
-    wallabag_import.wallabag_v2.import:
+    Wallabag\ImportBundle\Import\WallabagV2Import:
         class: Wallabag\ImportBundle\Import\WallabagV2Import
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@wallabag_core.content_proxy"
-            - "@wallabag_core.tags_assigner"
+            - '@Wallabag\CoreBundle\Helper\ContentProxy'
+            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: wallabag_v2 }
 
-    wallabag_import.elcurator.import:
+    Wallabag\ImportBundle\Import\ElcuratorImport:
         class: Wallabag\ImportBundle\Import\ElcuratorImport
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@wallabag_core.content_proxy"
-            - "@wallabag_core.tags_assigner"
+            - '@Wallabag\CoreBundle\Helper\ContentProxy'
+            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: elcurator }
 
-    wallabag_import.readability.import:
+    Wallabag\ImportBundle\Import\ReadabilityImport:
         class: Wallabag\ImportBundle\Import\ReadabilityImport
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@wallabag_core.content_proxy"
-            - "@wallabag_core.tags_assigner"
+            - '@Wallabag\CoreBundle\Helper\ContentProxy'
+            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: readability }
 
-    wallabag_import.instapaper.import:
+    Wallabag\ImportBundle\Import\InstapaperImport:
         class: Wallabag\ImportBundle\Import\InstapaperImport
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@wallabag_core.content_proxy"
-            - "@wallabag_core.tags_assigner"
+            - '@Wallabag\CoreBundle\Helper\ContentProxy'
+            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: instapaper }
 
-    wallabag_import.pinboard.import:
+    Wallabag\ImportBundle\Import\PinboardImport:
         class: Wallabag\ImportBundle\Import\PinboardImport
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@wallabag_core.content_proxy"
-            - "@wallabag_core.tags_assigner"
+            - '@Wallabag\CoreBundle\Helper\ContentProxy'
+            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: pinboard }
 
-    wallabag_import.delicious.import:
+    Wallabag\ImportBundle\Import\DeliciousImport:
         class: Wallabag\ImportBundle\Import\DeliciousImport
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@wallabag_core.content_proxy"
-            - "@wallabag_core.tags_assigner"
+            - '@Wallabag\CoreBundle\Helper\ContentProxy'
+            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: delicious }
 
-    wallabag_import.firefox.import:
+    Wallabag\ImportBundle\Import\FirefoxImport:
         class: Wallabag\ImportBundle\Import\FirefoxImport
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@wallabag_core.content_proxy"
-            - "@wallabag_core.tags_assigner"
+            - '@Wallabag\CoreBundle\Helper\ContentProxy'
+            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: firefox }
-    wallabag_import.chrome.import:
+
+    Wallabag\ImportBundle\Import\ChromeImport:
         class: Wallabag\ImportBundle\Import\ChromeImport
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@wallabag_core.content_proxy"
-            - "@wallabag_core.tags_assigner"
+            - '@Wallabag\CoreBundle\Helper\ContentProxy'
+            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
             - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: chrome }
 
-    wallabag_import.command.import:
-        class: Wallabag\ImportBundle\Command\ImportCommand
-        tags: ['console.command']
-
-    wallabag_import.command.redis_worker:
-        class: Wallabag\ImportBundle\Command\RedisWorkerCommand
-        tags: ['console.command']
+    Wallabag\ImportBundle\Command\:
+        resource: ../../Command/*
+        autoconfigure: true

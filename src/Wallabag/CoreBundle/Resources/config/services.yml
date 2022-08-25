@@ -1,12 +1,12 @@
 services:
-    wallabag_core.helper.detect_active_theme:
+    Wallabag\CoreBundle\Helper\DetectActiveTheme:
         class: Wallabag\CoreBundle\Helper\DetectActiveTheme
         arguments:
             - "@security.token_storage"
             - "%wallabag_core.theme%"
 
     # custom form type
-    wallabag_core.form.type.config:
+    Wallabag\CoreBundle\Form\Type\ConfigType:
         class: Wallabag\CoreBundle\Form\Type\ConfigType
         arguments:
             - "%liip_theme.themes%"
@@ -14,42 +14,42 @@ services:
         tags:
             - { name: form.type }
 
-    wallabag_core.filter.type.entry:
+    Wallabag\CoreBundle\Form\Type\EntryFilterType:
         class: Wallabag\CoreBundle\Form\Type\EntryFilterType
         arguments:
-            - "@wallabag_core.entry_repository"
+            - '@Wallabag\CoreBundle\Repository\EntryRepository'
             - "@security.token_storage"
         tags:
             - { name: form.type }
 
-    wallabag_core.param_converter.username_feed_token_converter:
+    Wallabag\CoreBundle\ParamConverter\UsernameFeedTokenConverter:
         class: Wallabag\CoreBundle\ParamConverter\UsernameFeedTokenConverter
         tags:
             - { name: request.param_converter, converter: username_feed_token_converter }
         arguments:
             - "@doctrine"
 
-    wallabag_core.subscriber.table_prefix:
+    Wallabag\CoreBundle\Event\Subscriber\TablePrefixSubscriber:
         class: Wallabag\CoreBundle\Event\Subscriber\TablePrefixSubscriber
         arguments:
             - "%database_table_prefix%"
         tags:
             - { name: doctrine.event_subscriber }
 
-    wallabag_core.graby:
+    Graby\Graby:
         class: Graby\Graby
         arguments:
             -
                 error_message: '%wallabag_core.fetching_error_message%'
                 error_message_title: '%wallabag_core.fetching_error_message_title%'
             - "@wallabag_core.http_client"
-            - "@wallabag_core.graby.config_builder"
+            - '@Graby\SiteConfig\ConfigBuilder'
         calls:
             - [ setLogger, [ "@logger" ] ]
         tags:
             - { name: monolog.logger, channel: graby }
 
-    wallabag_core.graby.config_builder:
+    Graby\SiteConfig\ConfigBuilder:
         class: Graby\SiteConfig\ConfigBuilder
         arguments:
             - {}
@@ -58,94 +58,94 @@ services:
     wallabag_core.http_client:
         alias: 'httplug.client.wallabag_core'
 
-    wallabag_core.guzzle_authenticator.config_builder:
+    Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder:
         class: Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder
         arguments:
-            - "@wallabag_core.graby.config_builder"
+            - '@Graby\SiteConfig\ConfigBuilder'
             - "@security.token_storage"
-            - "@wallabag_core.site_credential_repository"
+            - '@Wallabag\CoreBundle\Repository\SiteCredentialRepository'
             - '@logger'
         tags:
             - { name: monolog.logger, channel: graby }
 
     # service alias override
     bd_guzzle_site_authenticator.site_config_builder:
-        alias: wallabag_core.guzzle_authenticator.config_builder
+        alias: Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder
 
-    wallabag_core.http_client_factory:
+    Wallabag\CoreBundle\Helper\HttpClientFactory:
         class: Wallabag\CoreBundle\Helper\HttpClientFactory
         arguments:
-            - "@wallabag_core.guzzle.cookie_jar"
+            - '@Wallabag\CoreBundle\Helper\FileCookieJar'
             - '@=service(''craue_config'').get(''restricted_access'')'
             - '@logger'
         calls:
             - ["addSubscriber", ["@bd_guzzle_site_authenticator.authenticator_subscriber"]]
 
-    wallabag_core.guzzle.cookie_jar:
+    Wallabag\CoreBundle\Helper\FileCookieJar:
         class: Wallabag\CoreBundle\Helper\FileCookieJar
         arguments:
             - "@logger"
             - "%kernel.cache_dir%/cookiejar.json"
 
-    wallabag_core.content_proxy:
+    Wallabag\CoreBundle\Helper\ContentProxy:
         class: Wallabag\CoreBundle\Helper\ContentProxy
         arguments:
-            - "@wallabag_core.graby"
-            - "@wallabag_core.rule_based_tagger"
-            - "@wallabag_core.rule_based_ignore_origin_processor"
+            - '@Graby\Graby'
+            - '@Wallabag\CoreBundle\Helper\RuleBasedTagger'
+            - '@Wallabag\CoreBundle\Helper\RuleBasedIgnoreOriginProcessor'
             - "@validator"
             - "@logger"
             - '%wallabag_core.fetching_error_message%'
             - '@=service(''craue_config'').get(''store_article_headers'')'
 
-    wallabag_core.tags_assigner:
+    Wallabag\CoreBundle\Helper\TagsAssigner:
         class: Wallabag\CoreBundle\Helper\TagsAssigner
         arguments:
-            - "@wallabag_core.tag_repository"
+            - '@Wallabag\CoreBundle\Repository\TagRepository'
 
-    wallabag_core.rule_based_tagger:
+    Wallabag\CoreBundle\Helper\RuleBasedTagger:
         class: Wallabag\CoreBundle\Helper\RuleBasedTagger
         arguments:
             - "@rulerz"
-            - "@wallabag_core.tag_repository"
-            - "@wallabag_core.entry_repository"
+            - '@Wallabag\CoreBundle\Repository\TagRepository'
+            - '@Wallabag\CoreBundle\Repository\EntryRepository'
             - "@logger"
 
-    wallabag_core.rule_based_ignore_origin_processor:
+    Wallabag\CoreBundle\Helper\RuleBasedIgnoreOriginProcessor:
         class: Wallabag\CoreBundle\Helper\RuleBasedIgnoreOriginProcessor
         arguments:
             - "@rulerz"
             - "@logger"
-            - "@wallabag_core.ignore_origin_instance_rule_repository"
+            - '@Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository'
 
     # repository as a service
-    wallabag_core.entry_repository:
+    Wallabag\CoreBundle\Repository\EntryRepository:
         class: Wallabag\CoreBundle\Repository\EntryRepository
         factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
         arguments:
             - WallabagCoreBundle:Entry
 
-    wallabag_core.tag_repository:
+    Wallabag\CoreBundle\Repository\TagRepository:
         class: Wallabag\CoreBundle\Repository\TagRepository
         factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
         arguments:
             - WallabagCoreBundle:Tag
 
-    wallabag_core.site_credential_repository:
+    Wallabag\CoreBundle\Repository\SiteCredentialRepository:
         class: Wallabag\CoreBundle\Repository\SiteCredentialRepository
         factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
         arguments:
             - WallabagCoreBundle:SiteCredential
         calls:
-            - [ setCrypto, [ "@wallabag_core.helper.crypto_proxy" ] ]
+            - [ setCrypto, [ '@Wallabag\CoreBundle\Helper\CryptoProxy' ] ]
 
-    wallabag_core.ignore_origin_instance_rule_repository:
+    Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository:
         class: Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository
         factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
         arguments:
             - WallabagCoreBundle:IgnoreOriginInstanceRule
 
-    wallabag_core.helper.entries_export:
+    Wallabag\CoreBundle\Helper\EntriesExport:
         class: Wallabag\CoreBundle\Helper\EntriesExport
         arguments:
             - "@translator"
@@ -153,44 +153,44 @@ services:
             - web/img/appicon/apple-touch-icon-152.png
             - "@security.token_storage"
 
-    wallabag.operator.array.matches:
+    Wallabag\CoreBundle\Operator\PHP\Matches:
         class: Wallabag\CoreBundle\Operator\PHP\Matches
         tags:
             - { name: rulerz.operator, target: native, operator: matches }
 
-    wallabag.operator.doctrine.matches:
+    Wallabag\CoreBundle\Operator\Doctrine\Matches:
         class: Wallabag\CoreBundle\Operator\Doctrine\Matches
         tags:
             - { name: rulerz.operator, target: doctrine, operator: matches, inline: true }
 
-    wallabag.operator.array.notmatches:
+    Wallabag\CoreBundle\Operator\PHP\NotMatches:
         class: Wallabag\CoreBundle\Operator\PHP\NotMatches
         tags:
             - { name: rulerz.operator, target: native, operator: notmatches }
 
-    wallabag.operator.doctrine.notmatches:
+    Wallabag\CoreBundle\Operator\Doctrine\NotMatches:
         class: Wallabag\CoreBundle\Operator\Doctrine\NotMatches
         tags:
             - { name: rulerz.operator, target: doctrine, operator: notmatches, inline: true }
 
-    wallabag.operator.array.pattern_matches:
+    Wallabag\CoreBundle\Operator\PHP\PatternMatches:
         class: Wallabag\CoreBundle\Operator\PHP\PatternMatches
         tags:
             - { name: rulerz.operator, target: native, operator: "~" }
 
-    wallabag_core.helper.redirect:
+    Wallabag\CoreBundle\Helper\Redirect:
         class: Wallabag\CoreBundle\Helper\Redirect
         arguments:
             - "@router"
             - "@security.token_storage"
 
-    wallabag_core.helper.prepare_pager_for_entries:
+    Wallabag\CoreBundle\Helper\PreparePagerForEntries:
         class: Wallabag\CoreBundle\Helper\PreparePagerForEntries
         arguments:
             - "@security.token_storage"
             - "@router"
 
-    wallabag_core.redis.client:
+    Predis\Client:
         class: Predis\Client
         arguments:
             -
@@ -200,31 +200,31 @@ services:
                 path: '%redis_path%'
                 password: '%redis_password%'
 
-    wallabag_core.exception_controller:
+    Wallabag\CoreBundle\Controller\ExceptionController:
         class: Wallabag\CoreBundle\Controller\ExceptionController
         public: true
         arguments:
             - '@twig'
             - '%kernel.debug%'
 
-    wallabag_core.subscriber.sqlite_cascade_delete:
+    Wallabag\CoreBundle\Event\Subscriber\SQLiteCascadeDeleteSubscriber:
         class: Wallabag\CoreBundle\Event\Subscriber\SQLiteCascadeDeleteSubscriber
         arguments:
             - "@doctrine"
         tags:
             - { name: doctrine.event_subscriber }
 
-    wallabag_core.subscriber.download_images:
+    Wallabag\CoreBundle\Event\Subscriber\DownloadImagesSubscriber:
         class: Wallabag\CoreBundle\Event\Subscriber\DownloadImagesSubscriber
         arguments:
             - "@doctrine.orm.default_entity_manager"
-            - "@wallabag_core.entry.download_images"
+            - '@Wallabag\CoreBundle\Helper\DownloadImages'
             - '@=service(''craue_config'').get(''download_images_enabled'')'
             - "@logger"
         tags:
             - { name: kernel.event_subscriber }
 
-    wallabag_core.entry.download_images:
+    Wallabag\CoreBundle\Helper\DownloadImages:
         class: Wallabag\CoreBundle\Helper\DownloadImages
         arguments:
             - "@wallabag_core.entry.download_images.client"
@@ -235,44 +235,12 @@ services:
     wallabag_core.entry.download_images.client:
         alias: 'httplug.client.wallabag_core.entry.download_images'
 
-    wallabag_core.helper.crypto_proxy:
+    Wallabag\CoreBundle\Helper\CryptoProxy:
         class: Wallabag\CoreBundle\Helper\CryptoProxy
         arguments:
             - "%wallabag_core.site_credentials.encryption_key_path%"
             - "@logger"
 
-    wallabag_core.command.clean_downloaded_images:
-        class: Wallabag\CoreBundle\Command\CleanDownloadedImagesCommand
-        tags: ['console.command']
-
-    wallabag_core.command.clean_duplicates:
-        class: Wallabag\CoreBundle\Command\CleanDuplicatesCommand
-        tags: ['console.command']
-
-    wallabag_core.command.export:
-        class: Wallabag\CoreBundle\Command\ExportCommand
-        tags: ['console.command']
-
-    wallabag_core.command.generate_url_hashes:
-        class: Wallabag\CoreBundle\Command\GenerateUrlHashesCommand
-        tags: ['console.command']
-
-    wallabag_core.command.install:
-        class: Wallabag\CoreBundle\Command\InstallCommand
-        tags: ['console.command']
-
-    wallabag_core.command.list_user:
-        class: Wallabag\CoreBundle\Command\ListUserCommand
-        tags: ['console.command']
-
-    wallabag_core.command.reload_entry:
-        class: Wallabag\CoreBundle\Command\ReloadEntryCommand
-        tags: ['console.command']
-
-    wallabag_core.command.show_user:
-        class: Wallabag\CoreBundle\Command\ShowUserCommand
-        tags: ['console.command']
-
-    wallabag_core.command.tag_all:
-        class: Wallabag\CoreBundle\Command\TagAllCommand
-        tags: ['console.command']
+    Wallabag\CoreBundle\Command\:
+        resource: ../../Command/*
+        autoconfigure: true

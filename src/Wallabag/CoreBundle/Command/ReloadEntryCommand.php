@@ -9,6 +9,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
+use Wallabag\CoreBundle\Helper\ContentProxy;
+use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\UserBundle\Repository\UserRepository;
 
 class ReloadEntryCommand extends ContainerAwareCommand
 {
@@ -30,7 +33,7 @@ class ReloadEntryCommand extends ContainerAwareCommand
         if ($username = $input->getArgument('username')) {
             try {
                 $userId = $this->getContainer()
-                    ->get('wallabag_user.user_repository')
+                    ->get(UserRepository::class)
                     ->findOneByUserName($username)
                     ->getId();
             } catch (NoResultException $e) {
@@ -40,7 +43,7 @@ class ReloadEntryCommand extends ContainerAwareCommand
             }
         }
 
-        $entryRepository = $this->getContainer()->get('wallabag_core.entry_repository');
+        $entryRepository = $this->getContainer()->get(EntryRepository::class);
         $entryIds = $entryRepository->findAllEntriesIdByUserId($userId);
 
         $nbEntries = \count($entryIds);
@@ -63,7 +66,7 @@ class ReloadEntryCommand extends ContainerAwareCommand
 
         $progressBar = $io->createProgressBar($nbEntries);
 
-        $contentProxy = $this->getContainer()->get('wallabag_core.content_proxy');
+        $contentProxy = $this->getContainer()->get(ContentProxy::class);
         $em = $this->getContainer()->get('doctrine')->getManager();
         $dispatcher = $this->getContainer()->get('event_dispatcher');
 
