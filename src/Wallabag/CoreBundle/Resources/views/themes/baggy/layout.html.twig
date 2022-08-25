@@ -35,7 +35,7 @@
         <li class="menu new"><a href="{{ path('new') }}">{{ 'menu.left.save_link'|trans }}</a></li>
         <li style="position: relative;"><a href="javascript: void(null);" id="search">{{ 'menu.left.search'|trans }}</a>
             <div id="search-form" class="messages info popup-form">
-                {{ render(controller("WallabagCoreBundle:Entry:searchForm", {'currentRoute': app.request.attributes.get('_route')})) }}
+                {{ render(controller('Wallabag\\CoreBundle\\Controller\\EntryController::searchFormAction', {'currentRoute': app.request.attributes.get('_route')})) }}
             </div>
         </li>
         {% if craue_setting('restricted_access') %}

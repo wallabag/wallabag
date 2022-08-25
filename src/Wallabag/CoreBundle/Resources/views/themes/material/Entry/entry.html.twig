@@ -297,7 +297,7 @@
             </div>
 
             <div class="input-field nav-panel-add-tag" style="display: none">
-                {{ render(controller("WallabagCoreBundle:Tag:addTagForm", {'id': entry.id})) }}
+                {{ render(controller('Wallabag\\CoreBundle\\Controller\\TagController::addTagFormAction', {'id': entry.id})) }}
             </div>
 
         </aside>

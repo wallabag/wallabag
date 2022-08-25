@@ -3,5 +3,5 @@
 {% block title %}{{ 'entry.new.page_title'|trans }}{% endblock %}
 
 {% block content %}
-    {{ render(controller("WallabagCoreBundle:Entry:addEntryForm")) }}
+    {{ render(controller('Wallabag\\CoreBundle\\Controller\\EntryController::addEntryFormAction')) }}
 {% endblock %}
