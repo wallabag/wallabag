@@ -24,7 +24,7 @@ class WallabagAnnotationController extends AbstractFOSRestController
     {
         $annotationRows = $this
             ->getDoctrine()
-            ->getRepository('WallabagAnnotationBundle:Annotation')
+            ->getRepository(Annotation::class)
             ->findAnnotationsByPageId($entry->getId(), $this->getUser()->getId());
         $total = \count($annotationRows);
         $annotations = ['total' => $total, 'rows' => $annotationRows];

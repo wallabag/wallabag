@@ -70,7 +70,7 @@ class ShowUserCommandTest extends WallabagCoreTestCase
         $this->logInAs('admin');
 
         /** @var User $user */
-        $user = $em->getRepository('WallabagUserBundle:User')->findOneById($this->getLoggedInUserId());
+        $user = $em->getRepository(User::class)->findOneById($this->getLoggedInUserId());
 
         $user->setName('Bug boss');
         $em->persist($user);

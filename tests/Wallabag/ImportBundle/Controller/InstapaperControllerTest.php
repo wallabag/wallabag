@@ -5,6 +5,7 @@ namespace Tests\Wallabag\ImportBundle\Controller;
 use Predis\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Entity\Entry;
 
 class InstapaperControllerTest extends WallabagCoreTestCase
 {
@@ -113,7 +114,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://www.liberation.fr/societe/police-justice/cours-dassises-on-efface-le-peuple-dun-processus-judiciaire-dont-il-est-pourtant-le-coeur-battant-20210414_FYUNIZENHRGHZLAZEKSMKZYEPI/',
                 $this->getLoggedInUserId()
@@ -130,7 +131,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://www.20minutes.fr/high-tech/2077615-20170531-quoi-exactement-tweet-covfefe-donald-trump-persiste-signe',
                 $this->getLoggedInUserId()
@@ -165,7 +166,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
 
         $content1 = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://redditblog.com/2016/09/20/amp-and-reactredux/',
                 $this->getLoggedInUserId()
@@ -175,7 +176,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
 
         $content2 = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://medium.com/@the_minh/why-foursquare-swarm-is-still-my-favourite-social-network-e38228493e6c',
                 $this->getLoggedInUserId()

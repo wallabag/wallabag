@@ -5,6 +5,7 @@ namespace Tests\Wallabag\AnnotationBundle\Controller;
 use Tests\Wallabag\AnnotationBundle\WallabagAnnotationTestCase;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\UserBundle\Entity\User;
 
 class AnnotationControllerTest extends WallabagAnnotationTestCase
 {
@@ -31,10 +32,10 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
 
         $user = $em
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->findOneByUserName('admin');
         $entry = $em
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findOneByUsernameAndNotArchived('admin');
 
         $annotation = new Annotation($user);
@@ -57,7 +58,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
         $this->assertSame($annotation->getText(), $content['rows'][0]['text']);
 
         // we need to re-fetch the annotation becase after the flush, it has been "detached" from the entity manager
-        $annotation = $em->getRepository('WallabagAnnotationBundle:Annotation')->findAnnotationById($annotation->getId());
+        $annotation = $em->getRepository(Annotation::class)->findAnnotationById($annotation->getId());
         $em->remove($annotation);
         $em->flush();
     }
@@ -77,7 +78,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
 
         /** @var Entry $entry */
         $entry = $em
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findOneByUsernameAndNotArchived('admin');
 
         $headers = ['CONTENT_TYPE' => 'application/json'];
@@ -101,7 +102,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
 
         /** @var Annotation $annotation */
         $annotation = $em
-            ->getRepository('WallabagAnnotationBundle:Annotation')
+            ->getRepository(Annotation::class)
             ->findLastAnnotationByPageId($entry->getId(), 1);
 
         $this->assertSame('my annotation', $annotation->getText());
@@ -113,7 +114,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
 
         /** @var Entry $entry */
         $entry = $em
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findOneByUsernameAndNotArchived('admin');
 
         $headers = ['CONTENT_TYPE' => 'application/json'];
@@ -142,7 +143,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
 
         /** @var Entry $entry */
         $entry = $em
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findOneByUsernameAndNotArchived('admin');
 
         $headers = ['CONTENT_TYPE' => 'application/json'];
@@ -177,7 +178,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
 
         /** @var Entry $entry */
         $entry = $em
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findOneByUsernameAndNotArchived('admin');
 
         $longQuote = str_repeat('a', 10001);
@@ -204,10 +205,10 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
 
         $user = $em
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->findOneByUserName('admin');
         $entry = $em
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findOneByUsernameAndNotArchived('admin');
 
         $annotation = new Annotation($user);
@@ -234,7 +235,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
 
         /** @var Annotation $annotationUpdated */
         $annotationUpdated = $em
-            ->getRepository('WallabagAnnotationBundle:Annotation')
+            ->getRepository(Annotation::class)
             ->findOneById($annotation->getId());
         $this->assertSame('a modified annotation', $annotationUpdated->getText());
 
@@ -252,10 +253,10 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
 
         $user = $em
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->findOneByUserName('admin');
         $entry = $em
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findOneByUsernameAndNotArchived('admin');
 
         $annotation = new Annotation($user);
@@ -282,7 +283,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
         $this->assertSame('This is my annotation /o/', $content['text']);
 
         $annotationDeleted = $em
-            ->getRepository('WallabagAnnotationBundle:Annotation')
+            ->getRepository(Annotation::class)
             ->findOneById($annotation->getId());
 
         $this->assertNull($annotationDeleted);

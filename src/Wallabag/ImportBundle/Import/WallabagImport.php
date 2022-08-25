@@ -104,7 +104,7 @@ abstract class WallabagImport extends AbstractImport
     public function parseEntry(array $importedEntry)
     {
         $existingEntry = $this->em
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId($importedEntry['url'], $this->user->getId());
 
         if (false !== $existingEntry) {
