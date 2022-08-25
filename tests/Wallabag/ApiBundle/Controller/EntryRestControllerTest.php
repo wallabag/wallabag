@@ -581,7 +581,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             // Remove the created entry to avoid side effects on other tests
             if (isset($content['id'])) {
                 $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
-                $entry = $em->getReference('WallabagCoreBundle:Entry', $content['id']);
+                $entry = $em->getReference(Entry::class, $content['id']);
                 $em->remove($entry);
                 $em->flush();
             }

@@ -9,7 +9,7 @@ security:
     providers:
         administrators:
             entity:
-                class: WallabagUserBundle:User
+                class: 'Wallabag\UserBundle\Entity\User'
                 property: username
         fos_userbundle:
             id: fos_user.user_provider.username_email

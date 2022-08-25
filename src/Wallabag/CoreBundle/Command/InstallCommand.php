@@ -277,8 +277,8 @@ class InstallCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
         // cleanup before insert new stuff
-        $em->createQuery('DELETE FROM WallabagCoreBundle:InternalSetting')->execute();
-        $em->createQuery('DELETE FROM WallabagCoreBundle:IgnoreOriginInstanceRule')->execute();
+        $em->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\InternalSetting')->execute();
+        $em->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule')->execute();
 
         foreach ($this->getContainer()->getParameter('wallabag_core.default_internal_settings') as $setting) {
             $newSetting = new InternalSetting();

@@ -27,7 +27,7 @@ services:
         class: Wallabag\UserBundle\Repository\UserRepository
         factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
         arguments:
-            - WallabagUserBundle:User
+            - 'Wallabag\UserBundle\Entity\User'
 
     Wallabag\UserBundle\EventListener\CreateConfigListener:
         class: Wallabag\UserBundle\EventListener\CreateConfigListener
