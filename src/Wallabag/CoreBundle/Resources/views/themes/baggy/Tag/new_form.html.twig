@@ -1,4 +1,4 @@
-<form name="tag" method="post" action="{{ path('new_tag', { 'entry': entry.id })}}">
+<form name="tag" method="post" action="{{ path('new_tag', {'entry': entry.id}) }}">
     {% if form_errors(form) %}
         <span class="black-text">{{ form_errors(form) }}</span>
     {% endif %}
@@ -7,7 +7,7 @@
         <span class="black-text">{{ form_errors(form.label) }}</span>
     {% endif %}
 
-    {{ form_widget(form.label, { 'attr': {'autocomplete': 'off'} }) }}
+    {{ form_widget(form.label, {'attr': {'autocomplete': 'off'}}) }}
 
     {{ form_rest(form) }}
 </form>

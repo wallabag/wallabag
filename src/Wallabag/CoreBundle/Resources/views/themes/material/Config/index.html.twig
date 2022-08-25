@@ -109,8 +109,8 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <h5>{{ 'config.form_settings.android_configuration'|trans }}</h5>
-                                    <a href="wallabag://{{ app.user.username }}@{{ wallabag_url }}" class="waves-effect waves-light btn hide-on-large-only">{{ 'config.form_settings.android_instruction' | trans }}</a>
-                                    <img id="androidQrcode" class="hide-on-med-and-down" alt="{{ 'config.otp.app.qrcode_label' | trans }}" />
+                                    <a href="wallabag://{{ app.user.username }}@{{ wallabag_url }}" class="waves-effect waves-light btn hide-on-large-only">{{ 'config.form_settings.android_instruction'|trans }}</a>
+                                    <img id="androidQrcode" class="hide-on-med-and-down" alt="{{ 'config.otp.app.qrcode_label'|trans }}" />
                                 </div>
                                 <script>
                                     document.getElementById('androidQrcode').src = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');
@@ -359,7 +359,7 @@
                                                 </div>
                                             </div>
 
-                                            {{ form_widget(form.import_tagging_rule.import, { 'attr': {'class': 'btn waves-effect waves-light'} }) }}
+                                            {{ form_widget(form.import_tagging_rule.import, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
 
                                             {{ form_rest(form.import_tagging_rule) }}
                                         </form>
@@ -548,21 +548,21 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div id="set7" class="col s12">
                         <div class="row">
                             <h5>{{ 'config.reset.title'|trans }}</h5>
                             <p>{{ 'config.reset.description'|trans }}</p>
-                            <a href="{{ path('config_reset', { type: 'annotations'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                            <a href="{{ path('config_reset', {type: 'annotations'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
                                 {{ 'config.reset.annotations'|trans }}
                             </a>
-                            <a href="{{ path('config_reset', { type: 'tags'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                            <a href="{{ path('config_reset', {type: 'tags'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
                                 {{ 'config.reset.tags'|trans }}
                             </a>
-                            <a href="{{ path('config_reset', { type: 'archived'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                            <a href="{{ path('config_reset', {type: 'archived'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
                                 {{ 'config.reset.archived'|trans }}
                             </a>
-                            <a href="{{ path('config_reset', { type: 'entries'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
+                            <a href="{{ path('config_reset', {type: 'entries'}) }}" onclick="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red">
                                 {{ 'config.reset.entries'|trans }}
                             </a>
                         </div>

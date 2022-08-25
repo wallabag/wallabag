@@ -6,8 +6,8 @@
     <div class="card-content">
         <div class="row">
 
-            {% for flashMessage in app.session.flashbag.get("two_factor") %}
-            <p class="error">{{ flashMessage|trans }}</p>
+            {% for flash_message in app.session.flashbag.get("two_factor") %}
+            <p class="error">{{ flash_message|trans }}</p>
             {% endfor %}
 
             {# Authentication errors #}

@@ -62,10 +62,10 @@
         <p>It will be removed in the next version. You can use the Material theme by <a href="{{ path('config') }}">updating the theme config</a>.</p>
     </div>
 
-    {% for flashMessage in app.session.flashbag.get('notice') %}
+    {% for flash_message in app.session.flashbag.get('notice') %}
         <div class="messages success">
             <a href="#" class="closeMessage">×</a>
-            <p>{{ flashMessage|trans }}</p>
+            <p>{{ flash_message|trans }}</p>
         </div>
     {% endfor %}
 {% endblock %}

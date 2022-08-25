@@ -5,8 +5,8 @@
         <div class="row">
             {{ form_widget(form._token) }}
 
-            {% for flashMessage in app.session.flashbag.get('notice') %}
-                <span class="black-text"><p>{{ flashMessage }}</p></span>
+            {% for flash_message in app.session.flashbag.get('notice') %}
+                <span class="black-text"><p>{{ flash_message }}</p></span>
             {% endfor %}
 
             <div class="input-field col s12">

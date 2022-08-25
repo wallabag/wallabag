@@ -2,11 +2,11 @@
     <div class="card-body">
         <div class="card-fullimage">
             <ul class="card-entry-labels">
-            {% for tag in entry.tags | slice(0, 3) %}
+            {% for tag in entry.tags|slice(0, 3) %}
                 <li title="{{ tag.label }}"><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
             {% endfor %}
             </ul>
-            <a href="{{ path('view', { 'id': entry.id }) }}">
+            <a href="{{ path('view', {'id': entry.id}) }}">
                 <span class="preview" style="background-image: url({{ entry.previewPicture }})"></span>
             </a>
         </div>
