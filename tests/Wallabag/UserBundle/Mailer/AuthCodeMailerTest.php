@@ -29,7 +29,7 @@ class AuthCodeMailerTest extends TestCase
 {% block body_text %}text body {{ support_url }}{% endblock %}
 TWIG;
 
-        $this->twig = new Environment(new ArrayLoader(['WallabagUserBundle:TwoFactor:email_auth_code.html.twig' => $twigTemplate]));
+        $this->twig = new Environment(new ArrayLoader(['@WallabagUser/TwoFactor/email_auth_code.html.twig' => $twigTemplate]));
     }
 
     public function testSendEmail()

@@ -49,7 +49,7 @@ class TagController extends Controller
             return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
         }
 
-        return $this->render('WallabagCoreBundle:Tag:new_form.html.twig', [
+        return $this->render('@WallabagCore/Tag/new_form.html.twig', [
             'form' => $form->createView(),
             'entry' => $entry,
         ]);
@@ -98,7 +98,7 @@ class TagController extends Controller
             $renameForms[$tag['id']] = $this->createForm(RenameTagType::class, new Tag())->createView();
         }
 
-        return $this->render('WallabagCoreBundle:Tag:tags.html.twig', [
+        return $this->render('@WallabagCore/Tag/tags.html.twig', [
             'tags' => $tags,
             'renameForms' => $renameForms,
             'nbEntriesUntagged' => $nbEntriesUntagged,
@@ -135,7 +135,7 @@ class TagController extends Controller
             }
         }
 
-        return $this->render('WallabagCoreBundle:Entry:entries.html.twig', [
+        return $this->render('@WallabagCore/Entry/entries.html.twig', [
             'form' => null,
             'entries' => $entries,
             'currentPage' => $page,

@@ -70,7 +70,7 @@ class DeliciousController extends Controller
             );
         }
 
-        return $this->render('WallabagImportBundle:Delicious:index.html.twig', [
+        return $this->render('@WallabagImport/Delicious/index.html.twig', [
             'form' => $form->createView(),
             'import' => $delicious,
         ]);

@@ -70,7 +70,7 @@ class InstapaperController extends Controller
             );
         }
 
-        return $this->render('WallabagImportBundle:Instapaper:index.html.twig', [
+        return $this->render('@WallabagImport/Instapaper/index.html.twig', [
             'form' => $form->createView(),
             'import' => $instapaper,
         ]);
