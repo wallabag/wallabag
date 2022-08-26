@@ -123,19 +123,19 @@ services:
         class: Wallabag\CoreBundle\Repository\EntryRepository
         factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
         arguments:
-            - WallabagCoreBundle:Entry
+            - 'Wallabag\CoreBundle\Entity\Entry'
 
     Wallabag\CoreBundle\Repository\TagRepository:
         class: Wallabag\CoreBundle\Repository\TagRepository
         factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
         arguments:
-            - WallabagCoreBundle:Tag
+            - 'Wallabag\CoreBundle\Entity\Tag'
 
     Wallabag\CoreBundle\Repository\SiteCredentialRepository:
         class: Wallabag\CoreBundle\Repository\SiteCredentialRepository
         factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
         arguments:
-            - WallabagCoreBundle:SiteCredential
+            - 'Wallabag\CoreBundle\Entity\SiteCredential'
         calls:
             - [ setCrypto, [ '@Wallabag\CoreBundle\Helper\CryptoProxy' ] ]
 
@@ -143,7 +143,7 @@ services:
         class: Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository
         factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
         arguments:
-            - WallabagCoreBundle:IgnoreOriginInstanceRule
+            - 'Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule'
 
     Wallabag\CoreBundle\Helper\EntriesExport:
         class: Wallabag\CoreBundle\Helper\EntriesExport

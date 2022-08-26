@@ -7,6 +7,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Command\CleanDuplicatesCommand;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\UserBundle\Entity\User;
 
 class CleanDuplicatesCommandTest extends WallabagCoreTestCase
 {
@@ -66,10 +67,10 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
 
         $this->logInAs('admin');
 
-        $nbEntries = $em->getRepository('WallabagCoreBundle:Entry')->findAllByUrlAndUserId($url, $this->getLoggedInUserId());
+        $nbEntries = $em->getRepository(Entry::class)->findAllByUrlAndUserId($url, $this->getLoggedInUserId());
         $this->assertCount(0, $nbEntries);
 
-        $user = $em->getRepository('WallabagUserBundle:User')->findOneById($this->getLoggedInUserId());
+        $user = $em->getRepository(User::class)->findOneById($this->getLoggedInUserId());
 
         $entry1 = new Entry($user);
         $entry1->setUrl($url);
@@ -82,7 +83,7 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
 
         $em->flush();
 
-        $nbEntries = $em->getRepository('WallabagCoreBundle:Entry')->findAllByUrlAndUserId($url, $this->getLoggedInUserId());
+        $nbEntries = $em->getRepository(Entry::class)->findAllByUrlAndUserId($url, $this->getLoggedInUserId());
         $this->assertCount(2, $nbEntries);
 
         $application = new Application($this->getClient()->getKernel());
@@ -98,7 +99,7 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
 
         $this->assertStringContainsString('Cleaned 1 duplicates for user admin', $tester->getDisplay());
 
-        $nbEntries = $em->getRepository('WallabagCoreBundle:Entry')->findAllByUrlAndUserId($url, $this->getLoggedInUserId());
+        $nbEntries = $em->getRepository(Entry::class)->findAllByUrlAndUserId($url, $this->getLoggedInUserId());
         $this->assertCount(1, $nbEntries);
 
         $query = $em->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\Entry e WHERE e.url = :url');

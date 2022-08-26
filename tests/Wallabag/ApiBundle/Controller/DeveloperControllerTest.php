@@ -12,7 +12,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
-        $nbClients = $em->getRepository('WallabagApiBundle:Client')->findAll();
+        $nbClients = $em->getRepository(Client::class)->findAll();
 
         $crawler = $client->request('GET', '/developer/client/create');
         $this->assertSame(200, $client->getResponse()->getStatusCode());
@@ -27,7 +27,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $newNbClients = $em->getRepository('WallabagApiBundle:Client')->findAll();
+        $newNbClients = $em->getRepository(Client::class)->findAll();
         $this->assertGreaterThan(\count($nbClients), \count($newNbClients));
 
         $this->assertGreaterThan(1, $alert = $crawler->filter('.settings table strong')->extract(['_text']));
@@ -75,7 +75,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
-        $nbClients = $em->getRepository('WallabagApiBundle:Client')->findAll();
+        $nbClients = $em->getRepository(Client::class)->findAll();
 
         $crawler = $client->request('GET', '/developer');
         $this->assertSame(200, $client->getResponse()->getStatusCode());
@@ -120,7 +120,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $this->assertNull(
-            $em->getRepository('WallabagApiBundle:Client')->find($adminApiClient->getId()),
+            $em->getRepository(Client::class)->find($adminApiClient->getId()),
             'The client should have been removed'
         );
     }

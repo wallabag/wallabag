@@ -5,6 +5,7 @@ namespace Tests\Wallabag\ImportBundle\Controller;
 use Predis\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Entity\Entry;
 
 class PinboardControllerTest extends WallabagCoreTestCase
 {
@@ -110,7 +111,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://ma.ttias.be/varnish-explained/',
                 $this->getLoggedInUserId()
@@ -157,7 +158,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
 
         $content1 = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://ilia.ws/files/nginx_torontophpug.pdf',
                 $this->getLoggedInUserId()
@@ -168,7 +169,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
 
         $content2 = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://developers.google.com/web/updates/2016/07/infinite-scroller',
                 $this->getLoggedInUserId()

@@ -179,7 +179,7 @@ class PocketImport extends AbstractImport
         $url = isset($importedEntry['resolved_url']) && '' !== $importedEntry['resolved_url'] ? $importedEntry['resolved_url'] : $importedEntry['given_url'];
 
         $existingEntry = $this->em
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId($url, $this->user->getId());
 
         if (false !== $existingEntry) {

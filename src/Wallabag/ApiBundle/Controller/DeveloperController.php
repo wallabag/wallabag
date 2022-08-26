@@ -19,7 +19,7 @@ class DeveloperController extends Controller
      */
     public function indexAction()
     {
-        $clients = $this->getDoctrine()->getRepository('WallabagApiBundle:Client')->findByUser($this->getUser()->getId());
+        $clients = $this->getDoctrine()->getRepository(Client::class)->findByUser($this->getUser()->getId());
 
         return $this->render('@WallabagCore/themes/common/Developer/index.html.twig', [
             'clients' => $clients,

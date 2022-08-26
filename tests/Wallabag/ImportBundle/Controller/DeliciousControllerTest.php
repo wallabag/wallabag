@@ -5,6 +5,7 @@ namespace Tests\Wallabag\ImportBundle\Controller;
 use Predis\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Entity\Entry;
 
 class DeliciousControllerTest extends WallabagCoreTestCase
 {
@@ -110,7 +111,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
 
         $content = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://feross.org/spoofmac/',
                 $this->getLoggedInUserId()
@@ -152,7 +153,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
 
         $content1 = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://stackoverflow.com/review/',
                 $this->getLoggedInUserId()
@@ -162,7 +163,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
 
         $content2 = $client->getContainer()
             ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://addyosmani.com/basket.js/',
                 $this->getLoggedInUserId()
