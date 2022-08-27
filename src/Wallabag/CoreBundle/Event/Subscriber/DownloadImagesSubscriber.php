@@ -2,7 +2,7 @@
 
 namespace Wallabag\CoreBundle\Event\Subscriber;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -17,7 +17,7 @@ class DownloadImagesSubscriber implements EventSubscriberInterface
     private $enabled;
     private $logger;
 
-    public function __construct(EntityManager $em, DownloadImages $downloadImages, $enabled, LoggerInterface $logger)
+    public function __construct(EntityManagerInterface $em, DownloadImages $downloadImages, $enabled, LoggerInterface $logger)
     {
         $this->em = $em;
         $this->downloadImages = $downloadImages;

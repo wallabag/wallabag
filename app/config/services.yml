@@ -20,12 +20,8 @@ services:
     Wallabag\CoreBundle\Twig\WallabagExtension:
         public: false
         arguments:
-            - '@Wallabag\CoreBundle\Repository\EntryRepository'
-            - '@Wallabag\CoreBundle\Repository\TagRepository'
-            - "@security.token_storage"
-            - "%wallabag_core.cache_lifetime%"
-            - "@translator"
-            - "%kernel.root_dir%"
+            $lifeTime: "%wallabag_core.cache_lifetime%"
+            $rootDir: "%kernel.root_dir%"
         tags:
             - { name: twig.extension }
 
@@ -35,12 +31,12 @@ services:
             - { name: twig.extension }
 
     Wallabag\CoreBundle\Event\Listener\LocaleListener:
-        arguments: ["%kernel.default_locale%"]
+        arguments:
+            $defaultLocale: "%kernel.default_locale%"
         tags:
             - { name: kernel.event_subscriber }
 
     Wallabag\CoreBundle\Event\Listener\UserLocaleListener:
-        arguments: ["@session"]
         tags:
             - { name: kernel.event_listener, event: security.interactive_login, method: onInteractiveLogin }
 
@@ -48,49 +44,41 @@ services:
         class: Symfony\Component\Cache\Adapter\FilesystemAdapter
         public: false
         arguments:
-            - 'craue_config'
-            - 0
-            - '%kernel.cache_dir%'
+            $namespace: 'craue_config'
+            $defaultLifetime: 0
+            $directory: '%kernel.cache_dir%'
 
     Wallabag\CoreBundle\Helper\DetectActiveTheme:
         arguments:
-            - "@security.token_storage"
-            - "%wallabag_core.theme%"
+            $defaultTheme: "%wallabag_core.theme%"
 
     # custom form type
     Wallabag\CoreBundle\Form\Type\ConfigType:
         arguments:
-            - "%liip_theme.themes%"
-            - "%wallabag_core.languages%"
+            $themes: "%liip_theme.themes%"
+            $languages: "%wallabag_core.languages%"
         tags:
             - { name: form.type }
 
     Wallabag\CoreBundle\Form\Type\EntryFilterType:
-        arguments:
-            - '@Wallabag\CoreBundle\Repository\EntryRepository'
-            - "@security.token_storage"
         tags:
             - { name: form.type }
 
     Wallabag\CoreBundle\ParamConverter\UsernameFeedTokenConverter:
         tags:
             - { name: request.param_converter, converter: username_feed_token_converter }
-        arguments:
-            - "@doctrine"
 
     Wallabag\CoreBundle\Event\Subscriber\TablePrefixSubscriber:
         arguments:
-            - "%database_table_prefix%"
+            $prefix: "%database_table_prefix%"
         tags:
             - { name: doctrine.event_subscriber }
 
     Graby\Graby:
         arguments:
-            -
+            $config:
                 error_message: '%wallabag_core.fetching_error_message%'
                 error_message_title: '%wallabag_core.fetching_error_message_title%'
-            - "@wallabag_core.http_client"
-            - '@Graby\SiteConfig\ConfigBuilder'
         calls:
             - [ setLogger, [ "@logger" ] ]
         tags:
@@ -98,18 +86,12 @@ services:
 
     Graby\SiteConfig\ConfigBuilder:
         arguments:
-            - {}
-            - "@logger"
+            $config: {}
 
     wallabag_core.http_client:
         alias: 'httplug.client.wallabag_core'
 
     Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder:
-        arguments:
-            - '@Graby\SiteConfig\ConfigBuilder'
-            - "@security.token_storage"
-            - '@Wallabag\CoreBundle\Repository\SiteCredentialRepository'
-            - '@logger'
         tags:
             - { name: monolog.logger, channel: graby }
 
@@ -119,43 +101,24 @@ services:
 
     Wallabag\CoreBundle\Helper\HttpClientFactory:
         arguments:
-            - '@Wallabag\CoreBundle\Helper\FileCookieJar'
-            - '@=service(''craue_config'').get(''restricted_access'')'
-            - '@logger'
+            $restrictedAccess: '@=service(''craue_config'').get(''restricted_access'')'
         calls:
             - ["addSubscriber", ["@bd_guzzle_site_authenticator.authenticator_subscriber"]]
 
     Wallabag\CoreBundle\Helper\FileCookieJar:
         arguments:
-            - "@logger"
-            - "%kernel.cache_dir%/cookiejar.json"
+            $cookieFile: "%kernel.cache_dir%/cookiejar.json"
 
     Wallabag\CoreBundle\Helper\ContentProxy:
         arguments:
-            - '@Graby\Graby'
-            - '@Wallabag\CoreBundle\Helper\RuleBasedTagger'
-            - '@Wallabag\CoreBundle\Helper\RuleBasedIgnoreOriginProcessor'
-            - "@validator"
-            - "@logger"
-            - '%wallabag_core.fetching_error_message%'
-            - '@=service(''craue_config'').get(''store_article_headers'')'
+            $fetchingErrorMessage: '%wallabag_core.fetching_error_message%'
+            $storeArticleHeaders: '@=service(''craue_config'').get(''store_article_headers'')'
 
-    Wallabag\CoreBundle\Helper\TagsAssigner:
-        arguments:
-            - '@Wallabag\CoreBundle\Repository\TagRepository'
+    Wallabag\CoreBundle\Helper\TagsAssigner: ~
 
-    Wallabag\CoreBundle\Helper\RuleBasedTagger:
-        arguments:
-            - "@rulerz"
-            - '@Wallabag\CoreBundle\Repository\TagRepository'
-            - '@Wallabag\CoreBundle\Repository\EntryRepository'
-            - "@logger"
+    Wallabag\CoreBundle\Helper\RuleBasedTagger: ~
 
-    Wallabag\CoreBundle\Helper\RuleBasedIgnoreOriginProcessor:
-        arguments:
-            - "@rulerz"
-            - "@logger"
-            - '@Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository'
+    Wallabag\CoreBundle\Helper\RuleBasedIgnoreOriginProcessor: ~
 
     # repository as a service
     Wallabag\CoreBundle\Repository\EntryRepository:
@@ -182,10 +145,8 @@ services:
 
     Wallabag\CoreBundle\Helper\EntriesExport:
         arguments:
-            - "@translator"
-            - '%domain_name%'
-            - web/img/appicon/apple-touch-icon-152.png
-            - "@security.token_storage"
+            $wallabagUrl: '%domain_name%'
+            $logoPath: web/img/appicon/apple-touch-icon-152.png
 
     Wallabag\CoreBundle\Operator\PHP\Matches:
         tags:
@@ -207,19 +168,13 @@ services:
         tags:
             - { name: rulerz.operator, target: native, operator: "~" }
 
-    Wallabag\CoreBundle\Helper\Redirect:
-        arguments:
-            - "@router"
-            - "@security.token_storage"
+    Wallabag\CoreBundle\Helper\Redirect: ~
 
-    Wallabag\CoreBundle\Helper\PreparePagerForEntries:
-        arguments:
-            - "@security.token_storage"
-            - "@router"
+    Wallabag\CoreBundle\Helper\PreparePagerForEntries: ~
 
     Predis\Client:
         arguments:
-            -
+            $parameters:
                 scheme: '%redis_scheme%'
                 host: '%redis_host%'
                 port: '%redis_port%'
@@ -228,61 +183,47 @@ services:
 
     Wallabag\CoreBundle\Controller\ExceptionController:
         arguments:
-            - '@twig'
-            - '%kernel.debug%'
+            $debug: '%kernel.debug%'
 
     Wallabag\CoreBundle\Event\Subscriber\SQLiteCascadeDeleteSubscriber:
-        arguments:
-            - "@doctrine"
         tags:
             - { name: doctrine.event_subscriber }
 
     Wallabag\CoreBundle\Event\Subscriber\DownloadImagesSubscriber:
         arguments:
-            - "@doctrine.orm.default_entity_manager"
-            - '@Wallabag\CoreBundle\Helper\DownloadImages'
-            - '@=service(''craue_config'').get(''download_images_enabled'')'
-            - "@logger"
+            $enabled: '@=service(''craue_config'').get(''download_images_enabled'')'
         tags:
             - { name: kernel.event_subscriber }
 
     Wallabag\CoreBundle\Helper\DownloadImages:
         arguments:
-            - "@wallabag_core.entry.download_images.client"
-            - "%kernel.project_dir%/web/assets/images"
-            - '%domain_name%'
-            - "@logger"
+            $baseFolder: "%kernel.project_dir%/web/assets/images"
+            $wallabagUrl: '%domain_name%'
 
     wallabag_core.entry.download_images.client:
         alias: 'httplug.client.wallabag_core.entry.download_images'
 
     Wallabag\CoreBundle\Helper\CryptoProxy:
         arguments:
-            - "%wallabag_core.site_credentials.encryption_key_path%"
-            - "@logger"
+            $encryptionKeyPath: "%wallabag_core.site_credentials.encryption_key_path%"
 
     Wallabag\CoreBundle\Command\:
         resource: ../../src/Wallabag/CoreBundle/Command/*
 
     Wallabag\UserBundle\Mailer\AuthCodeMailer:
         arguments:
-            - "@mailer"
-            - "@twig"
-            - "%scheb_two_factor.email.sender_email%"
-            - "%scheb_two_factor.email.sender_name%"
-            - '@=service(''craue_config'').get(''wallabag_support_url'')'
-            - '%domain_name%'
+            $senderEmail: "%scheb_two_factor.email.sender_email%"
+            $senderName: "%scheb_two_factor.email.sender_name%"
+            $supportUrl: '@=service(''craue_config'').get(''wallabag_support_url'')'
+            $wallabagUrl: '%domain_name%'
 
     Wallabag\UserBundle\EventListener\RegistrationListener:
         arguments:
-            - '%fosuser_registration%'
-            - '@router'
+            $registrationEnabled: '%fosuser_registration%'
         tags:
             - { name: kernel.event_subscriber }
 
     Wallabag\UserBundle\EventListener\PasswordResettingListener:
-        arguments:
-            - "@router"
         tags:
             - { name: kernel.event_subscriber }
 
@@ -293,22 +234,17 @@ services:
 
     Wallabag\UserBundle\EventListener\CreateConfigListener:
         arguments:
-            - "@doctrine.orm.entity_manager"
-            - "%wallabag_core.theme%"
-            - "%wallabag_core.items_on_page%"
-            - "%wallabag_core.feed_limit%"
-            - "%wallabag_core.language%"
-            - "%wallabag_core.reading_speed%"
-            - "%wallabag_core.action_mark_as_read%"
-            - "%wallabag_core.list_mode%"
-            - "@session"
+            $theme: "%wallabag_core.theme%"
+            $itemsOnPage: "%wallabag_core.items_on_page%"
+            $feedLimit: "%wallabag_core.feed_limit%"
+            $language: "%wallabag_core.language%"
+            $readingSpeed: "%wallabag_core.reading_speed%"
+            $actionMarkAsRead: "%wallabag_core.action_mark_as_read%"
+            $listMode: "%wallabag_core.list_mode%"
         tags:
             - { name: kernel.event_subscriber }
 
     Wallabag\UserBundle\EventListener\AuthenticationFailureListener:
-        arguments:
-            - "@request_stack"
-            - "@logger"
         tags:
             - { name: kernel.event_listener, event: security.authentication.failure, method: onAuthenticationFailure }
 
@@ -318,11 +254,6 @@ services:
         alias: 'httplug.client.wallabag_import.pocket.client'
 
     Wallabag\ImportBundle\Import\PocketImport:
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - '@Wallabag\CoreBundle\Helper\ContentProxy'
-            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
-            - "@event_dispatcher"
         calls:
             - [ setClient, [ "@wallabag_import.pocket.client" ] ]
             - [ setLogger, [ "@logger" ]]
@@ -331,100 +262,56 @@ services:
 
     Wallabag\ImportBundle\Import\WallabagV1Import:
         arguments:
-            - "@doctrine.orm.entity_manager"
-            - '@Wallabag\CoreBundle\Helper\ContentProxy'
-            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
-            - "@event_dispatcher"
-            - "%wallabag_core.fetching_error_message_title%"
-            - "%wallabag_core.fetching_error_message%"
+            $fetchingErrorMessageTitle: "%wallabag_core.fetching_error_message_title%"
+            $fetchingErrorMessage: "%wallabag_core.fetching_error_message%"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: wallabag_v1 }
 
     Wallabag\ImportBundle\Import\WallabagV2Import:
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - '@Wallabag\CoreBundle\Helper\ContentProxy'
-            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
-            - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: wallabag_v2 }
 
     Wallabag\ImportBundle\Import\ElcuratorImport:
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - '@Wallabag\CoreBundle\Helper\ContentProxy'
-            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
-            - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: elcurator }
 
     Wallabag\ImportBundle\Import\ReadabilityImport:
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - '@Wallabag\CoreBundle\Helper\ContentProxy'
-            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
-            - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: readability }
 
     Wallabag\ImportBundle\Import\InstapaperImport:
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - '@Wallabag\CoreBundle\Helper\ContentProxy'
-            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
-            - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: instapaper }
 
     Wallabag\ImportBundle\Import\PinboardImport:
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - '@Wallabag\CoreBundle\Helper\ContentProxy'
-            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
-            - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: pinboard }
 
     Wallabag\ImportBundle\Import\DeliciousImport:
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - '@Wallabag\CoreBundle\Helper\ContentProxy'
-            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
-            - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: delicious }
 
     Wallabag\ImportBundle\Import\FirefoxImport:
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - '@Wallabag\CoreBundle\Helper\ContentProxy'
-            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
-            - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: firefox }
 
     Wallabag\ImportBundle\Import\ChromeImport:
-        arguments:
-            - "@doctrine.orm.entity_manager"
-            - '@Wallabag\CoreBundle\Helper\ContentProxy'
-            - '@Wallabag\CoreBundle\Helper\TagsAssigner'
-            - "@event_dispatcher"
         calls:
             - [ setLogger, [ "@logger" ]]
         tags:
