@@ -109,27 +109,23 @@ services:
     Wallabag\CoreBundle\Helper\RuleBasedIgnoreOriginProcessor: ~
 
     # repository as a service
-    Wallabag\CoreBundle\Repository\EntryRepository:
-        factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
-        arguments:
-            - 'Wallabag\CoreBundle\Entity\Entry'
+    Wallabag\AnnotationBundle\Repository\AnnotationRepository: ~
 
-    Wallabag\CoreBundle\Repository\TagRepository:
-        factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
-        arguments:
-            - 'Wallabag\CoreBundle\Entity\Tag'
+    Wallabag\ApiBundle\Repository\ClientRepository: ~
 
-    Wallabag\CoreBundle\Repository\SiteCredentialRepository:
-        factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
-        arguments:
-            - 'Wallabag\CoreBundle\Entity\SiteCredential'
-        calls:
-            - [ setCrypto, [ '@Wallabag\CoreBundle\Helper\CryptoProxy' ] ]
+    Wallabag\CoreBundle\Repository\ConfigRepository: ~
 
-    Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository:
-        factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
-        arguments:
-            - 'Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule'
+    Wallabag\CoreBundle\Repository\EntryRepository: ~
+
+    Wallabag\CoreBundle\Repository\TagRepository: ~
+
+    Wallabag\CoreBundle\Repository\TaggingRuleRepository: ~
+
+    Wallabag\CoreBundle\Repository\SiteCredentialRepository: ~
+
+    Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository: ~
+
+    Wallabag\CoreBundle\Repository\IgnoreOriginUserRuleRepository: ~
 
     Wallabag\CoreBundle\Helper\EntriesExport:
         arguments:
@@ -209,10 +205,7 @@ services:
 
     Wallabag\UserBundle\EventListener\PasswordResettingListener: ~
 
-    Wallabag\UserBundle\Repository\UserRepository:
-        factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
-        arguments:
-            - 'Wallabag\UserBundle\Entity\User'
+    Wallabag\UserBundle\Repository\UserRepository: ~
 
     Wallabag\UserBundle\EventListener\CreateConfigListener:
         arguments:
