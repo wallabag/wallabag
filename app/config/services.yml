@@ -14,27 +14,19 @@ services:
 
     Twig_Extensions_Extension_Text:
         class: Twig_Extensions_Extension_Text
-        tags:
-            - { name: twig.extension }
 
     Wallabag\CoreBundle\Twig\WallabagExtension:
         public: false
         arguments:
             $lifeTime: "%wallabag_core.cache_lifetime%"
             $rootDir: "%kernel.root_dir%"
-        tags:
-            - { name: twig.extension }
 
     MatomoTwigExtension\MatomoTwigExtension:
         public: false
-        tags:
-            - { name: twig.extension }
 
     Wallabag\CoreBundle\Event\Listener\LocaleListener:
         arguments:
             $defaultLocale: "%kernel.default_locale%"
-        tags:
-            - { name: kernel.event_subscriber }
 
     Wallabag\CoreBundle\Event\Listener\UserLocaleListener:
         tags:
@@ -57,12 +49,8 @@ services:
         arguments:
             $themes: "%liip_theme.themes%"
             $languages: "%wallabag_core.languages%"
-        tags:
-            - { name: form.type }
 
-    Wallabag\CoreBundle\Form\Type\EntryFilterType:
-        tags:
-            - { name: form.type }
+    Wallabag\CoreBundle\Form\Type\EntryFilterType: ~
 
     Wallabag\CoreBundle\ParamConverter\UsernameFeedTokenConverter:
         tags:
@@ -192,8 +180,6 @@ services:
     Wallabag\CoreBundle\Event\Subscriber\DownloadImagesSubscriber:
         arguments:
             $enabled: '@=service(''craue_config'').get(''download_images_enabled'')'
-        tags:
-            - { name: kernel.event_subscriber }
 
     Wallabag\CoreBundle\Helper\DownloadImages:
         arguments:
@@ -220,12 +206,8 @@ services:
     Wallabag\UserBundle\EventListener\RegistrationListener:
         arguments:
             $registrationEnabled: '%fosuser_registration%'
-        tags:
-            - { name: kernel.event_subscriber }
 
-    Wallabag\UserBundle\EventListener\PasswordResettingListener:
-        tags:
-            - { name: kernel.event_subscriber }
+    Wallabag\UserBundle\EventListener\PasswordResettingListener: ~
 
     Wallabag\UserBundle\Repository\UserRepository:
         factory: [ "@doctrine.orm.default_entity_manager", getRepository ]
@@ -241,8 +223,6 @@ services:
             $readingSpeed: "%wallabag_core.reading_speed%"
             $actionMarkAsRead: "%wallabag_core.action_mark_as_read%"
             $listMode: "%wallabag_core.list_mode%"
-        tags:
-            - { name: kernel.event_subscriber }
 
     Wallabag\UserBundle\EventListener\AuthenticationFailureListener:
         tags:
