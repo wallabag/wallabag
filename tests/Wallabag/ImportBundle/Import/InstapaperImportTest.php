@@ -247,11 +247,10 @@ class InstapaperImportTest extends TestCase
             ->expects($this->exactly($dispatched))
             ->method('dispatch');
 
-        $import = new InstapaperImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher);
-
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);
-        $import->setLogger($logger);
+
+        $import = new InstapaperImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher, $logger);
 
         if (false === $unsetUser) {
             $import->setUser($this->user);

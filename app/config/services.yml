@@ -236,7 +236,6 @@ services:
     Wallabag\ImportBundle\Import\PocketImport:
         calls:
             - [ setClient, [ "@wallabag_import.pocket.client" ] ]
-            - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: pocket }
 
@@ -244,56 +243,38 @@ services:
         arguments:
             $fetchingErrorMessageTitle: "%wallabag_core.fetching_error_message_title%"
             $fetchingErrorMessage: "%wallabag_core.fetching_error_message%"
-        calls:
-            - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: wallabag_v1 }
 
     Wallabag\ImportBundle\Import\WallabagV2Import:
-        calls:
-            - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: wallabag_v2 }
 
     Wallabag\ImportBundle\Import\ElcuratorImport:
-        calls:
-            - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: elcurator }
 
     Wallabag\ImportBundle\Import\ReadabilityImport:
-        calls:
-            - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: readability }
 
     Wallabag\ImportBundle\Import\InstapaperImport:
-        calls:
-            - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: instapaper }
 
     Wallabag\ImportBundle\Import\PinboardImport:
-        calls:
-            - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: pinboard }
 
     Wallabag\ImportBundle\Import\DeliciousImport:
-        calls:
-            - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: delicious }
 
     Wallabag\ImportBundle\Import\FirefoxImport:
-        calls:
-            - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: firefox }
 
     Wallabag\ImportBundle\Import\ChromeImport:
-        calls:
-            - [ setLogger, [ "@logger" ]]
         tags:
             -  { name: wallabag_import.import, alias: chrome }
 

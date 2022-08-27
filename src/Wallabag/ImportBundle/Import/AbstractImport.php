@@ -5,7 +5,6 @@ namespace Wallabag\ImportBundle\Import;
 use Doctrine\ORM\EntityManagerInterface;
 use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
@@ -29,10 +28,10 @@ abstract class AbstractImport implements ImportInterface
     protected $importedEntries = 0;
     protected $queuedEntries = 0;
 
-    public function __construct(EntityManagerInterface $em, ContentProxy $contentProxy, TagsAssigner $tagsAssigner, EventDispatcherInterface $eventDispatcher)
+    public function __construct(EntityManagerInterface $em, ContentProxy $contentProxy, TagsAssigner $tagsAssigner, EventDispatcherInterface $eventDispatcher, LoggerInterface $logger)
     {
         $this->em = $em;
-        $this->logger = new NullLogger();
+        $this->logger = $logger;
         $this->contentProxy = $contentProxy;
         $this->tagsAssigner = $tagsAssigner;
         $this->eventDispatcher = $eventDispatcher;

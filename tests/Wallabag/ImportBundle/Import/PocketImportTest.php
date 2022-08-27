@@ -589,12 +589,11 @@ JSON
             ->expects($this->exactly($dispatched))
             ->method('dispatch');
 
-        $pocket = new PocketImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher);
-        $pocket->setUser($this->user);
-
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);
-        $pocket->setLogger($logger);
+
+        $pocket = new PocketImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher, $logger);
+        $pocket->setUser($this->user);
 
         return $pocket;
     }

@@ -232,11 +232,10 @@ class ReadabilityImportTest extends TestCase
             ->expects($this->exactly($dispatched))
             ->method('dispatch');
 
-        $wallabag = new ReadabilityImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher);
-
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);
-        $wallabag->setLogger($logger);
+
+        $wallabag = new ReadabilityImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher, $logger);
 
         if (false === $unsetUser) {
             $wallabag->setUser($this->user);
