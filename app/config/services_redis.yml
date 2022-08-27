@@ -1,5 +1,10 @@
 # Redis stuff
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
     # readability
     wallabag_import.queue.redis.readability:
         class: Simpleue\Queue\RedisQueue

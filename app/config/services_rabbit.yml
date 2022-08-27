@@ -1,5 +1,10 @@
 # RabbitMQ stuff
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
     wallabag_import.consumer.amqp.pocket:
         class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
         arguments:
