@@ -11,22 +11,38 @@ services:
         autowire: true
         autoconfigure: true
         public: true
+        bind:
+            $rootDir: '%kernel.root_dir%'
+            $debug: '%kernel.debug%'
+            $defaultLocale: '%kernel.default_locale%'
+            $wallabagUrl: '%domain_name%'
+            $tablePrefix: "%database_table_prefix%"
+            $defaultTheme: '%wallabag_core.theme%'
+            $encryptionKeyPath: "%wallabag_core.site_credentials.encryption_key_path%"
+            $fetchingErrorMessageTitle: "%wallabag_core.fetching_error_message_title%"
+            $fetchingErrorMessage: '%wallabag_core.fetching_error_message%'
+            $languages: '%wallabag_core.languages%'
+            $lifeTime: '%wallabag_core.cache_lifetime%'
+            $cookieFile: "%kernel.cache_dir%/cookiejar.json"
+            $logoPath: 'web/img/appicon/apple-touch-icon-152.png'
+            $registrationEnabled: '%fosuser_registration%'
+            $restrictedAccess: '@=service(''craue_config'').get(''restricted_access'')'
+            $senderEmail: "%scheb_two_factor.email.sender_email%"
+            $senderName: "%scheb_two_factor.email.sender_name%"
+            $storeArticleHeaders: '@=service(''craue_config'').get(''store_article_headers'')'
+            $supportUrl: '@=service(''craue_config'').get(''wallabag_support_url'')'
+            $themes: '%liip_theme.themes%'
 
     Twig_Extensions_Extension_Text:
         class: Twig_Extensions_Extension_Text
 
     Wallabag\CoreBundle\Twig\WallabagExtension:
         public: false
-        arguments:
-            $lifeTime: "%wallabag_core.cache_lifetime%"
-            $rootDir: "%kernel.root_dir%"
 
     MatomoTwigExtension\MatomoTwigExtension:
         public: false
 
-    Wallabag\CoreBundle\Event\Listener\LocaleListener:
-        arguments:
-            $defaultLocale: "%kernel.default_locale%"
+    Wallabag\CoreBundle\Event\Listener\LocaleListener: ~
 
     Wallabag\CoreBundle\Event\Listener\UserLocaleListener:
         tags:
@@ -40,15 +56,10 @@ services:
             $defaultLifetime: 0
             $directory: '%kernel.cache_dir%'
 
-    Wallabag\CoreBundle\Helper\DetectActiveTheme:
-        arguments:
-            $defaultTheme: "%wallabag_core.theme%"
+    Wallabag\CoreBundle\Helper\DetectActiveTheme: ~
 
     # custom form type
-    Wallabag\CoreBundle\Form\Type\ConfigType:
-        arguments:
-            $themes: "%liip_theme.themes%"
-            $languages: "%wallabag_core.languages%"
+    Wallabag\CoreBundle\Form\Type\ConfigType: ~
 
     Wallabag\CoreBundle\Form\Type\EntryFilterType: ~
 
@@ -57,8 +68,6 @@ services:
             - { name: request.param_converter, converter: username_feed_token_converter }
 
     Wallabag\CoreBundle\Event\Subscriber\TablePrefixSubscriber:
-        arguments:
-            $prefix: "%database_table_prefix%"
         tags:
             - { name: doctrine.event_subscriber }
 
@@ -88,19 +97,12 @@ services:
         alias: Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder
 
     Wallabag\CoreBundle\Helper\HttpClientFactory:
-        arguments:
-            $restrictedAccess: '@=service(''craue_config'').get(''restricted_access'')'
         calls:
             - ["addSubscriber", ["@bd_guzzle_site_authenticator.authenticator_subscriber"]]
 
-    Wallabag\CoreBundle\Helper\FileCookieJar:
-        arguments:
-            $cookieFile: "%kernel.cache_dir%/cookiejar.json"
+    Wallabag\CoreBundle\Helper\FileCookieJar: ~
 
-    Wallabag\CoreBundle\Helper\ContentProxy:
-        arguments:
-            $fetchingErrorMessage: '%wallabag_core.fetching_error_message%'
-            $storeArticleHeaders: '@=service(''craue_config'').get(''store_article_headers'')'
+    Wallabag\CoreBundle\Helper\ContentProxy: ~
 
     Wallabag\CoreBundle\Helper\TagsAssigner: ~
 
@@ -127,10 +129,7 @@ services:
 
     Wallabag\CoreBundle\Repository\IgnoreOriginUserRuleRepository: ~
 
-    Wallabag\CoreBundle\Helper\EntriesExport:
-        arguments:
-            $wallabagUrl: '%domain_name%'
-            $logoPath: web/img/appicon/apple-touch-icon-152.png
+    Wallabag\CoreBundle\Helper\EntriesExport: ~
 
     Wallabag\CoreBundle\Operator\PHP\Matches:
         tags:
@@ -165,9 +164,7 @@ services:
                 path: '%redis_path%'
                 password: '%redis_password%'
 
-    Wallabag\CoreBundle\Controller\ExceptionController:
-        arguments:
-            $debug: '%kernel.debug%'
+    Wallabag\CoreBundle\Controller\ExceptionController: ~
 
     Wallabag\CoreBundle\Event\Subscriber\SQLiteCascadeDeleteSubscriber:
         tags:
@@ -180,28 +177,18 @@ services:
     Wallabag\CoreBundle\Helper\DownloadImages:
         arguments:
             $baseFolder: "%kernel.project_dir%/web/assets/images"
-            $wallabagUrl: '%domain_name%'
 
     wallabag_core.entry.download_images.client:
         alias: 'httplug.client.wallabag_core.entry.download_images'
 
-    Wallabag\CoreBundle\Helper\CryptoProxy:
-        arguments:
-            $encryptionKeyPath: "%wallabag_core.site_credentials.encryption_key_path%"
+    Wallabag\CoreBundle\Helper\CryptoProxy: ~
 
     Wallabag\CoreBundle\Command\:
         resource: ../../src/Wallabag/CoreBundle/Command/*
 
-    Wallabag\UserBundle\Mailer\AuthCodeMailer:
-        arguments:
-            $senderEmail: "%scheb_two_factor.email.sender_email%"
-            $senderName: "%scheb_two_factor.email.sender_name%"
-            $supportUrl: '@=service(''craue_config'').get(''wallabag_support_url'')'
-            $wallabagUrl: '%domain_name%'
+    Wallabag\UserBundle\Mailer\AuthCodeMailer: ~
 
-    Wallabag\UserBundle\EventListener\RegistrationListener:
-        arguments:
-            $registrationEnabled: '%fosuser_registration%'
+    Wallabag\UserBundle\EventListener\RegistrationListener: ~
 
     Wallabag\UserBundle\EventListener\PasswordResettingListener: ~
 
@@ -233,9 +220,6 @@ services:
             -  { name: wallabag_import.import, alias: pocket }
 
     Wallabag\ImportBundle\Import\WallabagV1Import:
-        arguments:
-            $fetchingErrorMessageTitle: "%wallabag_core.fetching_error_message_title%"
-            $fetchingErrorMessage: "%wallabag_core.fetching_error_message%"
         tags:
             -  { name: wallabag_import.import, alias: wallabag_v1 }
 

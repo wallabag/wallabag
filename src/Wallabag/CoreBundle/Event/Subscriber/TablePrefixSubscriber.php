@@ -18,11 +18,11 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo;
  */
 class TablePrefixSubscriber implements EventSubscriber
 {
-    protected $prefix = '';
+    protected $tablePrefix = '';
 
-    public function __construct($prefix)
+    public function __construct($tablePrefix)
     {
-        $this->prefix = (string) $prefix;
+        $this->tablePrefix = (string) $tablePrefix;
     }
 
     public function getSubscribedEvents()
@@ -39,12 +39,12 @@ class TablePrefixSubscriber implements EventSubscriber
             return;
         }
 
-        $classMetadata->setPrimaryTable(['name' => $this->prefix . $classMetadata->getTableName()]);
+        $classMetadata->setPrimaryTable(['name' => $this->tablePrefix . $classMetadata->getTableName()]);
 
         foreach ($classMetadata->getAssociationMappings() as $fieldName => $mapping) {
             if (ClassMetadataInfo::MANY_TO_MANY === $mapping['type'] && isset($classMetadata->associationMappings[$fieldName]['joinTable']['name'])) {
                 $mappedTableName = $classMetadata->associationMappings[$fieldName]['joinTable']['name'];
-                $classMetadata->associationMappings[$fieldName]['joinTable']['name'] = $this->prefix . $mappedTableName;
+                $classMetadata->associationMappings[$fieldName]['joinTable']['name'] = $this->tablePrefix . $mappedTableName;
             }
         }
     }
