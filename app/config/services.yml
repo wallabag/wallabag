@@ -33,16 +33,31 @@ services:
             $supportUrl: '@=service(''craue_config'').get(''wallabag_support_url'')'
             $themes: '%liip_theme.themes%'
 
+    Wallabag\AnnotationBundle\:
+        resource: '../../src/Wallabag/AnnotationBundle/*'
+        exclude: '../../src/Wallabag/AnnotationBundle/{Controller,Entity}'
+
+    Wallabag\ApiBundle\:
+        resource: '../../src/Wallabag/ApiBundle/*'
+        exclude: '../../src/Wallabag/ApiBundle/{Controller,Entity}'
+
+    Wallabag\CoreBundle\:
+        resource: '../../src/Wallabag/CoreBundle/*'
+        exclude: '../../src/Wallabag/CoreBundle/{Controller,Entity}'
+
+    Wallabag\ImportBundle\:
+        resource: '../../src/Wallabag/ImportBundle/*'
+        exclude: '../../src/Wallabag/ImportBundle/{Consumer,Controller,Redis}'
+
+    Wallabag\UserBundle\:
+        resource: '../../src/Wallabag/UserBundle/*'
+        exclude: '../../src/Wallabag/UserBundle/{Controller,Entity}'
+
     Twig_Extensions_Extension_Text:
         class: Twig_Extensions_Extension_Text
 
-    Wallabag\CoreBundle\Twig\WallabagExtension:
-        public: false
-
     MatomoTwigExtension\MatomoTwigExtension:
         public: false
-
-    Wallabag\CoreBundle\Event\Listener\LocaleListener: ~
 
     Wallabag\CoreBundle\Event\Listener\UserLocaleListener:
         tags:
@@ -55,13 +70,6 @@ services:
             $namespace: 'craue_config'
             $defaultLifetime: 0
             $directory: '%kernel.cache_dir%'
-
-    Wallabag\CoreBundle\Helper\DetectActiveTheme: ~
-
-    # custom form type
-    Wallabag\CoreBundle\Form\Type\ConfigType: ~
-
-    Wallabag\CoreBundle\Form\Type\EntryFilterType: ~
 
     Wallabag\CoreBundle\ParamConverter\UsernameFeedTokenConverter:
         tags:
@@ -100,37 +108,6 @@ services:
         calls:
             - ["addSubscriber", ["@bd_guzzle_site_authenticator.authenticator_subscriber"]]
 
-    Wallabag\CoreBundle\Helper\FileCookieJar: ~
-
-    Wallabag\CoreBundle\Helper\ContentProxy: ~
-
-    Wallabag\CoreBundle\Helper\TagsAssigner: ~
-
-    Wallabag\CoreBundle\Helper\RuleBasedTagger: ~
-
-    Wallabag\CoreBundle\Helper\RuleBasedIgnoreOriginProcessor: ~
-
-    # repository as a service
-    Wallabag\AnnotationBundle\Repository\AnnotationRepository: ~
-
-    Wallabag\ApiBundle\Repository\ClientRepository: ~
-
-    Wallabag\CoreBundle\Repository\ConfigRepository: ~
-
-    Wallabag\CoreBundle\Repository\EntryRepository: ~
-
-    Wallabag\CoreBundle\Repository\TagRepository: ~
-
-    Wallabag\CoreBundle\Repository\TaggingRuleRepository: ~
-
-    Wallabag\CoreBundle\Repository\SiteCredentialRepository: ~
-
-    Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository: ~
-
-    Wallabag\CoreBundle\Repository\IgnoreOriginUserRuleRepository: ~
-
-    Wallabag\CoreBundle\Helper\EntriesExport: ~
-
     Wallabag\CoreBundle\Operator\PHP\Matches:
         tags:
             - { name: rulerz.operator, target: native, operator: matches }
@@ -150,10 +127,6 @@ services:
     Wallabag\CoreBundle\Operator\PHP\PatternMatches:
         tags:
             - { name: rulerz.operator, target: native, operator: "~" }
-
-    Wallabag\CoreBundle\Helper\Redirect: ~
-
-    Wallabag\CoreBundle\Helper\PreparePagerForEntries: ~
 
     Predis\Client:
         arguments:
@@ -181,19 +154,6 @@ services:
     wallabag_core.entry.download_images.client:
         alias: 'httplug.client.wallabag_core.entry.download_images'
 
-    Wallabag\CoreBundle\Helper\CryptoProxy: ~
-
-    Wallabag\CoreBundle\Command\:
-        resource: ../../src/Wallabag/CoreBundle/Command/*
-
-    Wallabag\UserBundle\Mailer\AuthCodeMailer: ~
-
-    Wallabag\UserBundle\EventListener\RegistrationListener: ~
-
-    Wallabag\UserBundle\EventListener\PasswordResettingListener: ~
-
-    Wallabag\UserBundle\Repository\UserRepository: ~
-
     Wallabag\UserBundle\EventListener\CreateConfigListener:
         arguments:
             $theme: "%wallabag_core.theme%"
@@ -207,8 +167,6 @@ services:
     Wallabag\UserBundle\EventListener\AuthenticationFailureListener:
         tags:
             - { name: kernel.event_listener, event: security.authentication.failure, method: onAuthenticationFailure }
-
-    Wallabag\ImportBundle\Import\ImportChain: ~
 
     wallabag_import.pocket.client:
         alias: 'httplug.client.wallabag_import.pocket.client'
@@ -254,6 +212,3 @@ services:
     Wallabag\ImportBundle\Import\ChromeImport:
         tags:
             -  { name: wallabag_import.import, alias: chrome }
-
-    Wallabag\ImportBundle\Command\:
-        resource: ../../src/Wallabag/ImportBundle/Command/*
