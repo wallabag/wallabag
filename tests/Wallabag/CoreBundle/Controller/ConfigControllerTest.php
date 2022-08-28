@@ -5,7 +5,7 @@ namespace Tests\Wallabag\CoreBundle\Controller;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\AnnotationBundle\Entity\Annotation;
-use Wallabag\CoreBundle\Entity\Config;
+use Wallabag\CoreBundle\Entity\Config as ConfigEntity;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\IgnoreOriginUserRule;
 use Wallabag\CoreBundle\Entity\Tag;
@@ -832,7 +832,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $em->persist($user);
 
-        $config = new Config($user);
+        $config = new ConfigEntity($user);
 
         $config->setTheme('material');
         $config->setItemsPerPage(30);

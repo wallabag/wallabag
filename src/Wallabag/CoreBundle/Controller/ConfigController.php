@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Locale as LocaleConstraint;
 use Wallabag\AnnotationBundle\Entity\Annotation;
-use Wallabag\CoreBundle\Entity\Config;
+use Wallabag\CoreBundle\Entity\Config as ConfigEntity;
 use Wallabag\CoreBundle\Entity\IgnoreOriginUserRule;
 use Wallabag\CoreBundle\Entity\RuleInterface;
 use Wallabag\CoreBundle\Entity\TaggingRule;
@@ -760,17 +760,17 @@ class ConfigController extends Controller
      * Retrieve config for the current user.
      * If no config were found, create a new one.
      *
-     * @return Config
+     * @return ConfigEntity
      */
     private function getConfig()
     {
         $config = $this->getDoctrine()
-            ->getRepository(Config::class)
+            ->getRepository(ConfigEntity::class)
             ->findOneByUser($this->getUser());
 
         // should NEVER HAPPEN ...
         if (!$config) {
-            $config = new Config($this->getUser());
+            $config = new ConfigEntity($this->getUser());
         }
 
         return $config;

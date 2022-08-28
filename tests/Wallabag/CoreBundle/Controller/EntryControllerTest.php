@@ -4,7 +4,7 @@ namespace Tests\Wallabag\CoreBundle\Controller;
 
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\AnnotationBundle\Entity\Annotation;
-use Wallabag\CoreBundle\Entity\Config;
+use Wallabag\CoreBundle\Entity\Config as ConfigEntity;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\SiteCredential;
 use Wallabag\CoreBundle\Entity\Tag;
@@ -1268,7 +1268,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         // Redirect to homepage
         $config = $this->getLoggedInUser()->getConfig();
-        $config->setActionMarkAsRead(Config::REDIRECT_TO_HOMEPAGE);
+        $config->setActionMarkAsRead(ConfigEntity::REDIRECT_TO_HOMEPAGE);
         $this->getEntityManager()->persist($config);
 
         $entry = new Entry($this->getLoggedInUser());
@@ -1291,7 +1291,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         // Redirect to current page
         $config = $this->getLoggedInUser()->getConfig();
-        $config->setActionMarkAsRead(Config::REDIRECT_TO_CURRENT_PAGE);
+        $config->setActionMarkAsRead(ConfigEntity::REDIRECT_TO_CURRENT_PAGE);
         $this->getEntityManager()->persist($config);
 
         $entry = new Entry($this->getLoggedInUser());
