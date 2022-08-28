@@ -2,9 +2,12 @@
 
 namespace Wallabag\ImportBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
 use Wallabag\ImportBundle\Import\PinboardImport;
 
@@ -21,9 +24,9 @@ class PinboardController extends Controller
         $pinboard = $this->get(PinboardImport::class);
         $pinboard->setUser($this->getUser());
 
-        if ($this->get('craue_config')->get('import_with_rabbitmq')) {
+        if ($this->get(Config::class)->get('import_with_rabbitmq')) {
             $pinboard->setProducer($this->get('old_sound_rabbit_mq.import_pinboard_producer'));
-        } elseif ($this->get('craue_config')->get('import_with_redis')) {
+        } elseif ($this->get(Config::class)->get('import_with_redis')) {
             $pinboard->setProducer($this->get('wallabag_import.producer.redis.pinboard'));
         }
 
@@ -42,13 +45,13 @@ class PinboardController extends Controller
 
                 if (true === $res) {
                     $summary = $pinboard->getSummary();
-                    $message = $this->get('translator')->trans('flashes.import.notice.summary', [
+                    $message = $this->get(TranslatorInterface::class)->trans('flashes.import.notice.summary', [
                         '%imported%' => $summary['imported'],
                         '%skipped%' => $summary['skipped'],
                     ]);
 
                     if (0 < $summary['queued']) {
-                        $message = $this->get('translator')->trans('flashes.import.notice.summary_with_queue', [
+                        $message = $this->get(TranslatorInterface::class)->trans('flashes.import.notice.summary_with_queue', [
                             '%queued%' => $summary['queued'],
                         ]);
                     }
@@ -56,7 +59,7 @@ class PinboardController extends Controller
                     unlink($this->getParameter('wallabag_import.resource_dir') . '/' . $name);
                 }
 
-                $this->get('session')->getFlashBag()->add(
+                $this->get(SessionInterface::class)->getFlashBag()->add(
                     'notice',
                     $message
                 );
@@ -64,7 +67,7 @@ class PinboardController extends Controller
                 return $this->redirect($this->generateUrl('homepage'));
             }
 
-            $this->get('session')->getFlashBag()->add(
+            $this->get(SessionInterface::class)->getFlashBag()->add(
                 'notice',
                 'flashes.import.notice.failed_on_file'
             );

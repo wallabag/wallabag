@@ -2,6 +2,8 @@
 
 namespace Tests\Wallabag\ImportBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
+use Doctrine\ORM\EntityManagerInterface;
 use Predis\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
@@ -26,7 +28,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 1);
+        $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
         $crawler = $client->request('GET', '/import/firefox');
 
@@ -34,7 +36,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
 
-        $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 0);
+        $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
     public function testImportFirefoxBadFile()
@@ -59,7 +61,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
         $this->checkRedis();
         $this->logInAs('admin');
         $client = $this->getClient();
-        $client->getContainer()->get('craue_config')->set('import_with_redis', 1);
+        $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
         $crawler = $client->request('GET', '/import/firefox');
 
@@ -86,7 +88,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
 
         $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.firefox'));
 
-        $client->getContainer()->get('craue_config')->set('import_with_redis', 0);
+        $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
     public function testImportWallabagWithFirefoxFile()
@@ -113,7 +115,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
         $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://lexpansion.lexpress.fr/high-tech/orange-offre-un-meilleur-reseau-mobile-que-bouygues-et-sfr-free-derriere_1811554.html',
@@ -127,7 +129,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
         $this->assertCount(3, $content->getTags());
 
         $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://www.lemonde.fr/disparitions/article/2018/07/05/le-journaliste-et-cineaste-claude-lanzmann-est-mort_5326313_3382.html',

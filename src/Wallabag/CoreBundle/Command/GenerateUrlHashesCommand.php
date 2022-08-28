@@ -2,7 +2,9 @@
 
 namespace Wallabag\CoreBundle\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NoResultException;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -57,7 +59,7 @@ class GenerateUrlHashesCommand extends ContainerAwareCommand
 
     private function generateHashedUrls(User $user)
     {
-        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->getContainer()->get(EntityManagerInterface::class);
         $repo = $this->getDoctrine()->getRepository(Entry::class);
 
         $entries = $repo->findByEmptyHashedUrlAndUserId($user->getId());
@@ -92,6 +94,6 @@ class GenerateUrlHashesCommand extends ContainerAwareCommand
 
     private function getDoctrine()
     {
-        return $this->getContainer()->get('doctrine');
+        return $this->getContainer()->get(ManagerRegistry::class);
     }
 }

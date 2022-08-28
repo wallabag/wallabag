@@ -2,6 +2,7 @@
 
 namespace Tests\Wallabag\CoreBundle\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
@@ -63,7 +64,7 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
     {
         $url = 'http://www.lemonde.fr/sport/visuel/2017/05/05/rondelle-prison-blanchissage-comprendre-le-hockey-sur-glace_5122587_3242.html';
         $client = $this->getClient();
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
 
         $this->logInAs('admin');
 

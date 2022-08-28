@@ -8,6 +8,7 @@ use Doctrine\Bundle\DoctrineBundle\Command\DropDatabaseDoctrineCommand;
 use Doctrine\Bundle\MigrationsBundle\Command\MigrationsMigrateDoctrineCommand;
 use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
@@ -35,7 +36,7 @@ class InstallCommandTest extends WallabagCoreTestCase
         parent::setUp();
 
         /** @var \Doctrine\DBAL\Connection $connection */
-        $connection = $this->getClient()->getContainer()->get('doctrine')->getConnection();
+        $connection = $this->getClient()->getContainer()->get(ManagerRegistry::class)->getConnection();
         if ($connection->getDatabasePlatform() instanceof PostgreSqlPlatform) {
             /*
              * LOG:  statement: CREATE DATABASE "wallabag"
@@ -142,7 +143,7 @@ class InstallCommandTest extends WallabagCoreTestCase
     {
         // skipped SQLite check when database is removed because while testing for the connection,
         // the driver will create the file (so the database) before testing if database exist
-        if ($this->getClient()->getContainer()->get('doctrine')->getConnection()->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\SqlitePlatform) {
+        if ($this->getClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\SqlitePlatform) {
             $this->markTestSkipped('SQLite spotted: can\'t test with database removed.');
         }
 
@@ -224,7 +225,7 @@ class InstallCommandTest extends WallabagCoreTestCase
             '--force' => true,
         ]), new NullOutput());
 
-        $this->getClient()->getContainer()->get('doctrine')->getConnection()->close();
+        $this->getClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->close();
 
         $command = new CreateDatabaseDoctrineCommand();
         $command->setApplication($application);

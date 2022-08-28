@@ -8,6 +8,7 @@ use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
@@ -41,7 +42,7 @@ class TagController extends Controller
             $em->persist($entry);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add(
+            $this->get(SessionInterface::class)->getFlashBag()->add(
                 'notice',
                 'flashes.tag.notice.tag_added'
             );
@@ -188,7 +189,7 @@ class TagController extends Controller
 
             $this->getDoctrine()->getManager()->flush();
 
-            $this->get('session')->getFlashBag()->add(
+            $this->get(SessionInterface::class)->getFlashBag()->add(
                 'notice',
                 'flashes.tag.notice.tag_renamed'
             );

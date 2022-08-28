@@ -2,6 +2,9 @@
 
 namespace Tests\Wallabag\CoreBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Config as ConfigEntity;
@@ -28,7 +31,7 @@ class EntryControllerTest extends WallabagCoreTestCase
     {
         if ($this->downloadImagesEnabled) {
             $client = static::createClient();
-            $client->getContainer()->get('craue_config')->set('download_images_enabled', 0);
+            $client->getContainer()->get(Config::class)->set('download_images_enabled', 0);
 
             $this->downloadImagesEnabled = false;
         }
@@ -114,7 +117,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertCount(5, $crawler->filter($this->entryDataTestAttribute));
 
         $em = $client->getContainer()
-            ->get('doctrine.orm.entity_manager');
+            ->get(EntityManagerInterface::class);
         $entry = $em
             ->getRepository(Entry::class)
             ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
@@ -148,7 +151,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $client->getContainer()->get('craue_config')->set('store_article_headers', 1);
+        $client->getContainer()->get(Config::class)->set('store_article_headers', 1);
 
         $crawler = $client->request('GET', '/new');
 
@@ -165,7 +168,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
 
@@ -176,7 +179,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('la cryptomonnaie de Facebook', $content->getTitle());
         $this->assertSame('fr', $content->getLanguage());
         $this->assertArrayHasKey('x-frame-options', $content->getHeaders());
-        $client->getContainer()->get('craue_config')->set('store_article_headers', 0);
+        $client->getContainer()->get(Config::class)->set('store_article_headers', 0);
     }
 
     /**
@@ -202,7 +205,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId($this->url, $this->getLoggedInUserId());
 
@@ -239,7 +242,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
@@ -378,7 +381,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('/', $client->getResponse()->getTargetUrl());
 
         $em = $client->getContainer()
-            ->get('doctrine.orm.entity_manager');
+            ->get(EntityManagerInterface::class);
         $entry = $em
             ->getRepository(Entry::class)
             ->findOneByUrl($url);
@@ -645,7 +648,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $res = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry->getId());
 
@@ -668,7 +671,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $res = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findOneById($entry->getId());
 
@@ -707,7 +710,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         $em = $client->getContainer()
-            ->get('doctrine.orm.entity_manager');
+            ->get(EntityManagerInterface::class);
 
         // add a new content to be removed later
         $user = $em
@@ -743,7 +746,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findOneByUsernameAndNotArchived('bob');
 
@@ -948,7 +951,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl($this->url);
 
-        $em = $this->getClient()->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->getClient()->getContainer()->get(EntityManagerInterface::class);
         $user = $em
             ->getRepository(User::class)
             ->findOneByUserName('admin');
@@ -1134,7 +1137,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         // sharing is enabled
-        $client->getContainer()->get('craue_config')->set('share_public', 1);
+        $client->getContainer()->get(Config::class)->set('share_public', 1);
 
         $content = new Entry($this->getLoggedInUser());
         $content->setUrl($this->url);
@@ -1168,7 +1171,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('og:image', $client->getResponse()->getContent());
 
         // sharing is now disabled
-        $client->getContainer()->get('craue_config')->set('share_public', 0);
+        $client->getContainer()->get(Config::class)->set('share_public', 0);
         $client->request('GET', '/share/' . $content->getUid());
         $this->assertSame(404, $client->getResponse()->getStatusCode());
 
@@ -1191,7 +1194,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         $url = self::AN_URL_CONTAINING_AN_ARTICLE_WITH_IMAGE;
-        $client->getContainer()->get('craue_config')->set('download_images_enabled', 1);
+        $client->getContainer()->get(Config::class)->set('download_images_enabled', 1);
 
         $crawler = $client->request('GET', '/new');
 
@@ -1208,7 +1211,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $em = $client->getContainer()
-            ->get('doctrine.orm.entity_manager');
+            ->get(EntityManagerInterface::class);
 
         $entry = $em
             ->getRepository(Entry::class)
@@ -1220,7 +1223,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         // instead of checking for the filename (which might change) check that the image is now local
         $this->assertStringContainsString(rtrim($client->getContainer()->getParameter('domain_name'), '/') . '/assets/images/', $entry->getContent());
 
-        $client->getContainer()->get('craue_config')->set('download_images_enabled', 0);
+        $client->getContainer()->get(Config::class)->set('download_images_enabled', 0);
     }
 
     /**
@@ -1233,7 +1236,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         $url = self::AN_URL_CONTAINING_AN_ARTICLE_WITH_IMAGE;
-        $client->getContainer()->get('craue_config')->set('download_images_enabled', 1);
+        $client->getContainer()->get(Config::class)->set('download_images_enabled', 1);
 
         $crawler = $client->request('GET', '/new');
 
@@ -1250,7 +1253,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
@@ -1258,7 +1261,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
-        $client->getContainer()->get('craue_config')->set('download_images_enabled', 0);
+        $client->getContainer()->get(Config::class)->set('download_images_enabled', 0);
     }
 
     public function testRedirectToHomepage()
@@ -1529,7 +1532,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
@@ -1546,13 +1549,13 @@ class EntryControllerTest extends WallabagCoreTestCase
         $url = 'https://www.monde-diplomatique.fr/2017/05/BONNET/57476';
         $this->logInAs('admin');
         $client = $this->getClient();
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
 
         // enable restricted access
-        $client->getContainer()->get('craue_config')->set('restricted_access', 1);
+        $client->getContainer()->get(Config::class)->set('restricted_access', 1);
 
         // create a new site_credential
-        $user = $client->getContainer()->get('security.token_storage')->getToken()->getUser();
+        $user = $client->getContainer()->get(TokenStorageInterface::class)->getToken()->getUser();
         $credential = new SiteCredential($user);
         $credential->setHost('monde-diplomatique.fr');
         $credential->setUsername($client->getContainer()->get(CryptoProxy::class)->crypt('foo'));
@@ -1587,7 +1590,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
         $this->assertSame('Quand Manille manœuvre', $content->getTitle());
 
-        $client->getContainer()->get('craue_config')->set('restricted_access', 0);
+        $client->getContainer()->get(Config::class)->set('restricted_access', 0);
     }
 
     public function testPostEntryWhenFetchFails()
@@ -1629,7 +1632,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
@@ -1643,7 +1646,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
         $entry = $em->getRepository(Entry::class)->findByUrlAndUserId('http://0.0.0.0/entry1', $this->getLoggedInUserId());
         $tag = $entry->getTags()[0];
 
@@ -1720,14 +1723,14 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $res = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry1->getId());
 
         $this->assertSame(1, $res->isArchived());
 
         $res = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry2->getId());
 
@@ -1742,14 +1745,14 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $res = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry1->getId());
 
         $this->assertSame(1, $res->isStarred());
 
         $res = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry2->getId());
 
@@ -1765,21 +1768,21 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $res = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry1->getId());
 
         $this->assertContains('foo', $res->getTagsLabel());
 
         $res = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry2->getId());
 
         $this->assertContains('foo', $res->getTagsLabel());
 
         $res = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry3->getId());
 

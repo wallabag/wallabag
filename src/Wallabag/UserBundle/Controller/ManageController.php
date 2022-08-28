@@ -4,12 +4,17 @@ namespace Wallabag\UserBundle\Controller;
 
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Model\UserManagerInterface;
 use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
+use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\UserBundle\Form\SearchUserType;
 
@@ -25,7 +30,7 @@ class ManageController extends Controller
      */
     public function newAction(Request $request)
     {
-        $userManager = $this->container->get('fos_user.user_manager');
+        $userManager = $this->container->get(UserManagerInterface::class);
 
         $user = $userManager->createUser();
         // enable created user by default
@@ -39,11 +44,11 @@ class ManageController extends Controller
 
             // dispatch a created event so the associated config will be created
             $event = new UserEvent($user, $request);
-            $this->get('event_dispatcher')->dispatch(FOSUserEvents::USER_CREATED, $event);
+            $this->get(EventDispatcherInterface::class)->dispatch(FOSUserEvents::USER_CREATED, $event);
 
-            $this->get('session')->getFlashBag()->add(
+            $this->get(SessionInterface::class)->getFlashBag()->add(
                 'notice',
-                $this->get('translator')->trans('flashes.user.notice.added', ['%username%' => $user->getUsername()])
+                $this->get(TranslatorInterface::class)->trans('flashes.user.notice.added', ['%username%' => $user->getUsername()])
             );
 
             return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
@@ -62,7 +67,7 @@ class ManageController extends Controller
      */
     public function editAction(Request $request, User $user)
     {
-        $userManager = $this->container->get('fos_user.user_manager');
+        $userManager = $this->container->get(UserManagerInterface::class);
 
         $deleteForm = $this->createDeleteForm($user);
         $form = $this->createForm('Wallabag\UserBundle\Form\UserType', $user);
@@ -77,7 +82,7 @@ class ManageController extends Controller
             // handle creation / reset of the OTP secret if checkbox changed from the previous state
             if ($this->getParameter('twofactor_auth')) {
                 if (true === $form->get('googleTwoFactor')->getData() && false === $user->isGoogleAuthenticatorEnabled()) {
-                    $user->setGoogleAuthenticatorSecret($this->get('scheb_two_factor.security.google_authenticator')->generateSecret());
+                    $user->setGoogleAuthenticatorSecret($this->get(GoogleAuthenticatorInterface::class)->generateSecret());
                     $user->setEmailTwoFactor(false);
                 } elseif (false === $form->get('googleTwoFactor')->getData() && true === $user->isGoogleAuthenticatorEnabled()) {
                     $user->setGoogleAuthenticatorSecret(null);
@@ -86,9 +91,9 @@ class ManageController extends Controller
 
             $userManager->updateUser($user);
 
-            $this->get('session')->getFlashBag()->add(
+            $this->get(SessionInterface::class)->getFlashBag()->add(
                 'notice',
-                $this->get('translator')->trans('flashes.user.notice.updated', ['%username%' => $user->getUsername()])
+                $this->get(TranslatorInterface::class)->trans('flashes.user.notice.updated', ['%username%' => $user->getUsername()])
             );
 
             return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
@@ -113,9 +118,9 @@ class ManageController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->get('session')->getFlashBag()->add(
+            $this->get(SessionInterface::class)->getFlashBag()->add(
                 'notice',
-                $this->get('translator')->trans('flashes.user.notice.deleted', ['%username%' => $user->getUsername()])
+                $this->get(TranslatorInterface::class)->trans('flashes.user.notice.deleted', ['%username%' => $user->getUsername()])
             );
 
             $em = $this->getDoctrine()->getManager();

@@ -2,9 +2,12 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\SiteCredential;
 use Wallabag\CoreBundle\Helper\CryptoProxy;
 use Wallabag\CoreBundle\Repository\SiteCredentialRepository;
@@ -57,9 +60,9 @@ class SiteCredentialController extends Controller
             $em->persist($credential);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add(
+            $this->get(SessionInterface::class)->getFlashBag()->add(
                 'notice',
-                $this->get('translator')->trans('flashes.site_credential.notice.added', ['%host%' => $credential->getHost()])
+                $this->get(TranslatorInterface::class)->trans('flashes.site_credential.notice.added', ['%host%' => $credential->getHost()])
             );
 
             return $this->redirectToRoute('site_credentials_index');
@@ -96,9 +99,9 @@ class SiteCredentialController extends Controller
             $em->persist($siteCredential);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add(
+            $this->get(SessionInterface::class)->getFlashBag()->add(
                 'notice',
-                $this->get('translator')->trans('flashes.site_credential.notice.updated', ['%host%' => $siteCredential->getHost()])
+                $this->get(TranslatorInterface::class)->trans('flashes.site_credential.notice.updated', ['%host%' => $siteCredential->getHost()])
             );
 
             return $this->redirectToRoute('site_credentials_index');
@@ -128,9 +131,9 @@ class SiteCredentialController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->get('session')->getFlashBag()->add(
+            $this->get(SessionInterface::class)->getFlashBag()->add(
                 'notice',
-                $this->get('translator')->trans('flashes.site_credential.notice.deleted', ['%host%' => $siteCredential->getHost()])
+                $this->get(TranslatorInterface::class)->trans('flashes.site_credential.notice.deleted', ['%host%' => $siteCredential->getHost()])
             );
 
             $em = $this->getDoctrine()->getManager();
@@ -146,7 +149,7 @@ class SiteCredentialController extends Controller
      */
     private function isSiteCredentialsEnabled()
     {
-        if (!$this->get('craue_config')->get('restricted_access')) {
+        if (!$this->get(Config::class)->get('restricted_access')) {
             throw $this->createNotFoundException('Feature "restricted_access" is disabled, controllers too.');
         }
     }

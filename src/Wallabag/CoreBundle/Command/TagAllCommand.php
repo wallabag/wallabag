@@ -3,6 +3,7 @@
 namespace Wallabag\CoreBundle\Command;
 
 use Doctrine\ORM\NoResultException;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -70,6 +71,6 @@ class TagAllCommand extends ContainerAwareCommand
 
     private function getDoctrine()
     {
-        return $this->getContainer()->get('doctrine');
+        return $this->getContainer()->get(ManagerRegistry::class);
     }
 }

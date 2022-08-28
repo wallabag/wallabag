@@ -2,6 +2,8 @@
 
 namespace Tests\Wallabag\ImportBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
+use Doctrine\ORM\EntityManagerInterface;
 use Predis\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
@@ -26,7 +28,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 1);
+        $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
         $crawler = $client->request('GET', '/import/instapaper');
 
@@ -34,7 +36,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
 
-        $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 0);
+        $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
     public function testImportInstapaperBadFile()
@@ -59,7 +61,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
         $this->checkRedis();
         $this->logInAs('admin');
         $client = $this->getClient();
-        $client->getContainer()->get('craue_config')->set('import_with_redis', 1);
+        $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
         $crawler = $client->request('GET', '/import/instapaper');
 
@@ -86,7 +88,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
 
         $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.instapaper'));
 
-        $client->getContainer()->get('craue_config')->set('import_with_redis', 0);
+        $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
     public function testImportInstapaperWithFile()
@@ -113,7 +115,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
         $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://www.liberation.fr/societe/police-justice/cours-dassises-on-efface-le-peuple-dun-processus-judiciaire-dont-il-est-pourtant-le-coeur-battant-20210414_FYUNIZENHRGHZLAZEKSMKZYEPI/',
@@ -130,7 +132,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
 
         $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://www.20minutes.fr/high-tech/2077615-20170531-quoi-exactement-tweet-covfefe-donald-trump-persiste-signe',
@@ -165,7 +167,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
         $crawler = $client->followRedirect();
 
         $content1 = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://redditblog.com/2016/09/20/amp-and-reactredux/',
@@ -175,7 +177,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
         $this->assertTrue($content1->isArchived());
 
         $content2 = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://medium.com/@the_minh/why-foursquare-swarm-is-still-my-favourite-social-network-e38228493e6c',

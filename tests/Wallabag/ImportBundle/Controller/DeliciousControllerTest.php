@@ -2,6 +2,8 @@
 
 namespace Tests\Wallabag\ImportBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
+use Doctrine\ORM\EntityManagerInterface;
 use Predis\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
@@ -26,7 +28,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 1);
+        $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
         $crawler = $client->request('GET', '/import/delicious');
 
@@ -34,7 +36,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
 
-        $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 0);
+        $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
     public function testImportDeliciousBadFile()
@@ -59,7 +61,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
         $this->checkRedis();
         $this->logInAs('admin');
         $client = $this->getClient();
-        $client->getContainer()->get('craue_config')->set('import_with_redis', 1);
+        $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
         $crawler = $client->request('GET', '/import/delicious');
 
@@ -86,7 +88,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
 
         $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.delicious'));
 
-        $client->getContainer()->get('craue_config')->set('import_with_redis', 0);
+        $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
     public function testImportDeliciousWithFile()
@@ -110,7 +112,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
         $crawler = $client->followRedirect();
 
         $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://feross.org/spoofmac/',
@@ -152,7 +154,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
         $crawler = $client->followRedirect();
 
         $content1 = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://stackoverflow.com/review/',
@@ -162,7 +164,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
         $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content1);
 
         $content2 = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://addyosmani.com/basket.js/',

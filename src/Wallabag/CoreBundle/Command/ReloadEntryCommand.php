@@ -3,11 +3,13 @@
 namespace Wallabag\CoreBundle\Command;
 
 use Doctrine\ORM\NoResultException;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Repository\EntryRepository;
@@ -67,8 +69,8 @@ class ReloadEntryCommand extends ContainerAwareCommand
         $progressBar = $io->createProgressBar($nbEntries);
 
         $contentProxy = $this->getContainer()->get(ContentProxy::class);
-        $em = $this->getContainer()->get('doctrine')->getManager();
-        $dispatcher = $this->getContainer()->get('event_dispatcher');
+        $em = $this->getContainer()->get(ManagerRegistry::class)->getManager();
+        $dispatcher = $this->getContainer()->get(EventDispatcherInterface::class);
 
         $progressBar->start();
         foreach ($entryIds as $entryId) {

@@ -2,7 +2,11 @@
 
 namespace Tests\Wallabag\CoreBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Config as ConfigEntity;
@@ -306,7 +310,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         // reset the token
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
         $user = $em
             ->getRepository(User::class)
             ->findOneByUsername('admin');
@@ -571,7 +575,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->logInAs('bob');
         $client = $this->getClient();
 
-        $rule = $client->getContainer()->get('doctrine.orm.entity_manager')
+        $rule = $client->getContainer()->get(EntityManagerInterface::class)
             ->getRepository(TaggingRule::class)
             ->findAll()[0];
 
@@ -587,7 +591,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->logInAs('bob');
         $client = $this->getClient();
 
-        $rule = $client->getContainer()->get('doctrine.orm.entity_manager')
+        $rule = $client->getContainer()->get(EntityManagerInterface::class)
             ->getRepository(TaggingRule::class)
             ->findAll()[0];
 
@@ -708,7 +712,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->logInAs('bob');
         $client = $this->getClient();
 
-        $rule = $client->getContainer()->get('doctrine.orm.entity_manager')
+        $rule = $client->getContainer()->get(EntityManagerInterface::class)
             ->getRepository(IgnoreOriginUserRule::class)
             ->findAll()[0];
 
@@ -724,7 +728,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->logInAs('bob');
         $client = $this->getClient();
 
-        $rule = $client->getContainer()->get('doctrine.orm.entity_manager')
+        $rule = $client->getContainer()->get(EntityManagerInterface::class)
             ->getRepository(IgnoreOriginUserRule::class)
             ->findAll()[0];
 
@@ -740,7 +744,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $config = $client->getContainer()->get('craue_config');
+        $config = $client->getContainer()->get(Config::class);
         $config->set('demo_mode_enabled', 1);
         $config->set('demo_mode_username', 'admin');
 
@@ -759,7 +763,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $client->submit($form, $data);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('flashes.config.notice.password_not_updated_demo', $client->getContainer()->get('session')->getFlashBag()->get('notice')[0]);
+        $this->assertStringContainsString('flashes.config.notice.password_not_updated_demo', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
 
         $config->set('demo_mode_enabled', 0);
         $config->set('demo_mode_username', 'wallabag');
@@ -775,7 +779,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('config.form_user.delete.button', $body[0]);
 
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
 
         $user = $em
             ->getRepository(User::class)
@@ -820,7 +824,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testDeleteAccount()
     {
         $client = $this->getClient();
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
 
         $user = new User();
         $user->setName('Wallace');
@@ -867,7 +871,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $client->click($deleteLink);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
         $user = $em
             ->getRepository(User::class)
             ->createQueryBuilder('u')
@@ -879,7 +883,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertNull($user);
 
         $entries = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUser($loggedInUserId);
 
@@ -891,9 +895,9 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->logInAs('empty');
         $client = $this->getClient();
 
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
 
-        $user = static::$kernel->getContainer()->get('security.token_storage')->getToken()->getUser();
+        $user = static::$kernel->getContainer()->get(TokenStorageInterface::class)->getToken()->getUser();
 
         $tag = new Tag();
         $tag->setLabel('super');
@@ -930,7 +934,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $crawler = $client->click($crawler->selectLink('config.reset.annotations')->link());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('flashes.config.notice.annotations_reset', $client->getContainer()->get('session')->getFlashBag()->get('notice')[0]);
+        $this->assertStringContainsString('flashes.config.notice.annotations_reset', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
 
         $annotationsReset = $em
             ->getRepository(Annotation::class)
@@ -946,7 +950,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $crawler = $client->click($crawler->selectLink('config.reset.tags')->link());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('flashes.config.notice.tags_reset', $client->getContainer()->get('session')->getFlashBag()->get('notice')[0]);
+        $this->assertStringContainsString('flashes.config.notice.tags_reset', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
 
         $tagReset = $em
             ->getRepository(Tag::class)
@@ -962,7 +966,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $crawler = $client->click($crawler->selectLink('config.reset.entries')->link());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('flashes.config.notice.entries_reset', $client->getContainer()->get('session')->getFlashBag()->get('notice')[0]);
+        $this->assertStringContainsString('flashes.config.notice.entries_reset', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
 
         $entryReset = $em
             ->getRepository(Entry::class)
@@ -976,9 +980,9 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->logInAs('empty');
         $client = $this->getClient();
 
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
 
-        $user = static::$kernel->getContainer()->get('security.token_storage')->getToken()->getUser();
+        $user = static::$kernel->getContainer()->get(TokenStorageInterface::class)->getToken()->getUser();
 
         $tag = new Tag();
         $tag->setLabel('super');
@@ -1026,7 +1030,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $crawler = $client->click($crawler->selectLink('config.reset.archived')->link());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('flashes.config.notice.archived_reset', $client->getContainer()->get('session')->getFlashBag()->get('notice')[0]);
+        $this->assertStringContainsString('flashes.config.notice.archived_reset', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
 
         $entryReset = $em
             ->getRepository(Entry::class)
@@ -1052,9 +1056,9 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->logInAs('empty');
         $client = $this->getClient();
 
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
 
-        $user = static::$kernel->getContainer()->get('security.token_storage')->getToken()->getUser();
+        $user = static::$kernel->getContainer()->get(TokenStorageInterface::class)->getToken()->getUser();
 
         $tag = new Tag();
         $tag->setLabel('super');
@@ -1083,7 +1087,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $crawler = $client->click($crawler->selectLink('config.reset.entries')->link());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('flashes.config.notice.entries_reset', $client->getContainer()->get('session')->getFlashBag()->get('notice')[0]);
+        $this->assertStringContainsString('flashes.config.notice.entries_reset', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
 
         $entryReset = $em
             ->getRepository(Entry::class)
@@ -1132,7 +1136,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $client->followRedirect();
 
         $this->assertSame('de', $client->getRequest()->getLocale());
-        $this->assertSame('de', $client->getContainer()->get('session')->get('_locale'));
+        $this->assertSame('de', $client->getContainer()->get(SessionInterface::class)->get('_locale'));
     }
 
     public function testChangeLocaleWithReferer()
@@ -1144,7 +1148,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $client->followRedirect();
 
         $this->assertSame('de', $client->getRequest()->getLocale());
-        $this->assertSame('de', $client->getContainer()->get('session')->get('_locale'));
+        $this->assertSame('de', $client->getContainer()->get(SessionInterface::class)->get('_locale'));
     }
 
     public function testChangeLocaleToBadLocale()
@@ -1156,7 +1160,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $client->followRedirect();
 
         $this->assertNotSame('yuyuyuyu', $client->getRequest()->getLocale());
-        $this->assertNotSame('yuyuyuyu', $client->getContainer()->get('session')->get('_locale'));
+        $this->assertNotSame('yuyuyuyu', $client->getContainer()->get(SessionInterface::class)->get('_locale'));
     }
 
     public function testUserEnable2faEmail()

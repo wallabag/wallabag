@@ -2,6 +2,7 @@
 
 namespace Tests\Wallabag\AnnotationBundle\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Tests\Wallabag\AnnotationBundle\WallabagAnnotationTestCase;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -29,7 +30,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
      */
     public function testGetAnnotations($prefixUrl)
     {
-        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
 
         $user = $em
             ->getRepository(User::class)
@@ -70,7 +71,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
      */
     public function testSetAnnotation($prefixUrl)
     {
-        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
 
         if ('annotations' === $prefixUrl) {
             $this->logInAs('admin');
@@ -110,7 +111,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
 
     public function testAllowEmptyQuote()
     {
-        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
 
         /** @var Entry $entry */
         $entry = $em
@@ -139,7 +140,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
 
     public function testAllowOmmittedQuote()
     {
-        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
 
         /** @var Entry $entry */
         $entry = $em
@@ -170,7 +171,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
      */
     public function testSetAnnotationWithQuoteTooLong($prefixUrl)
     {
-        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
 
         if ('annotations' === $prefixUrl) {
             $this->logInAs('admin');
@@ -202,7 +203,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
      */
     public function testEditAnnotation($prefixUrl)
     {
-        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
 
         $user = $em
             ->getRepository(User::class)
@@ -250,7 +251,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
      */
     public function testDeleteAnnotation($prefixUrl)
     {
-        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
 
         $user = $em
             ->getRepository(User::class)

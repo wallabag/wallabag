@@ -2,6 +2,7 @@
 
 namespace Tests\Wallabag\CoreBundle\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
@@ -77,7 +78,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $client = $this->getClient();
 
         $entry = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId('http://0.0.0.0/entry2', $this->getLoggedInUserId());
 
@@ -93,7 +94,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $newEntry = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry->getId());
 
@@ -138,7 +139,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->assertSame(404, $client->getResponse()->getStatusCode());
 
         $tag = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Tag::class)
             ->findOneByLabel($this->tagName);
 
@@ -170,7 +171,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $client->click($link);
 
         $tag = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Tag::class)
             ->findOneByLabel($this->tagName);
 
@@ -181,12 +182,12 @@ class TagControllerTest extends WallabagCoreTestCase
             ->findOneByUserName('admin');
 
         $entry = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId('http://0.0.0.0/foo', $user->getId());
 
         $entry2 = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId('http://0.0.0.0/bar', $user->getId());
 
@@ -199,13 +200,13 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
         $em = $client->getContainer()
-            ->get('doctrine.orm.entity_manager');
+            ->get(EntityManagerInterface::class);
 
         $tag = new Tag();
         $tag->setLabel($this->tagName);
 
         $entry = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId('http://0.0.0.0/entry4', $this->getLoggedInUserId());
 
@@ -216,7 +217,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $em->flush();
 
         $tag = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Tag::class)
             ->findOneByEntryAndTagLabel($entry, $this->tagName);
 
@@ -269,12 +270,12 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('flashes.tag.notice.tag_renamed', $crawler->filter('body')->extract(['_text'])[0]);
 
         $freshEntry = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry->getId());
 
         $freshEntry2 = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry2->getId());
 
@@ -293,7 +294,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->assertFalse(array_search($tag->getLabel(), $tags, true), 'Previous tag is not attach to entries anymore.');
 
         $newTag = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Tag::class)
             ->findByLabel($newTagLabel);
 
@@ -333,7 +334,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->assertStringNotContainsString('flashes.tag.notice.tag_renamed', $crawler->filter('body')->extract(['_text'])[0]);
 
         $freshEntry = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry->getId());
 
@@ -347,7 +348,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->assertNotFalse(array_search($tag->getLabel(), $tags, true), 'Tag is still assigned to the entry.');
 
         $newTag = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Tag::class)
             ->findByLabel($tagLabel);
 
@@ -388,7 +389,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->assertStringNotContainsString('flashes.tag.notice.tag_renamed', $crawler->filter('body')->extract(['_text'])[0]);
 
         $freshEntry = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry->getId());
 
@@ -402,12 +403,12 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->assertFalse(array_search($newTagLabel, $tags, true));
 
         $tagFromRepo = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Tag::class)
             ->findByLabel($tagLabel);
 
         $newTagFromRepo = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Tag::class)
             ->findByLabel($newTagLabel);
 
@@ -458,22 +459,22 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->assertStringNotContainsString('flashes.tag.notice.tag_renamed', $crawler->filter('body')->extract(['_text'])[0]);
 
         $freshEntry1 = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry1->getId());
 
         $freshEntry2 = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry2->getId());
 
         $tagFromRepo = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Tag::class)
             ->findByLabel($tagLabel);
 
         $previousTagFromRepo = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Tag::class)
             ->findByLabel($previousTagLabel);
 
@@ -516,7 +517,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $client->submit($form, $data);
 
         $newEntry = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry->getId());
 
@@ -549,7 +550,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $client->followRedirect();
 
         $entries = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->getBuilderForSearchByUser($this->getLoggedInUserId(), 'title', 'unread')
             ->getQuery()->getResult();

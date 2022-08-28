@@ -2,6 +2,8 @@
 
 namespace Tests\Wallabag\ImportBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
+use Doctrine\ORM\EntityManagerInterface;
 use Predis\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
@@ -26,7 +28,7 @@ class ElcuratorControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 1);
+        $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
         $crawler = $client->request('GET', '/import/elcurator');
 
@@ -34,7 +36,7 @@ class ElcuratorControllerTest extends WallabagCoreTestCase
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
 
-        $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 0);
+        $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
     public function testImportElcuratorBadFile()
@@ -60,7 +62,7 @@ class ElcuratorControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $client->getContainer()->get('craue_config')->set('import_with_redis', 1);
+        $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
         $crawler = $client->request('GET', '/import/elcurator');
 
@@ -87,7 +89,7 @@ class ElcuratorControllerTest extends WallabagCoreTestCase
 
         $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.elcurator'));
 
-        $client->getContainer()->get('craue_config')->set('import_with_redis', 0);
+        $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
     public function testImportElcuratorWithFile()
@@ -114,7 +116,7 @@ class ElcuratorControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
         $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://devblog.lexik.fr/git/qualite-de-code-integration-de-php-git-hooks-dans-symfony2-2842',

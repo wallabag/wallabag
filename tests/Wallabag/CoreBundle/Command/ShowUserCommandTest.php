@@ -2,6 +2,7 @@
 
 namespace Tests\Wallabag\CoreBundle\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
@@ -65,7 +66,7 @@ class ShowUserCommandTest extends WallabagCoreTestCase
     public function testShowUser()
     {
         $client = $this->getClient();
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
 
         $this->logInAs('admin');
 
