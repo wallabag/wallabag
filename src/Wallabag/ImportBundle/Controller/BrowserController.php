@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
+use Wallabag\ImportBundle\Import\ImportInterface;
 
 abstract class BrowserController extends Controller
 {
@@ -76,7 +77,7 @@ abstract class BrowserController extends Controller
     /**
      * Return the service to handle the import.
      *
-     * @return \Wallabag\ImportBundle\Import\ImportInterface
+     * @return ImportInterface
      */
     abstract protected function getImportService();
 

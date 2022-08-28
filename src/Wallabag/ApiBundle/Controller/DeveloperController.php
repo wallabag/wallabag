@@ -3,7 +3,9 @@
 namespace Wallabag\ApiBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -17,7 +19,7 @@ class DeveloperController extends Controller
      *
      * @Route("/developer", name="developer")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function indexAction()
     {
@@ -33,7 +35,7 @@ class DeveloperController extends Controller
      *
      * @Route("/developer/client/create", name="developer_create_client")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function createClientAction(Request $request)
     {
@@ -69,7 +71,7 @@ class DeveloperController extends Controller
      *
      * @Route("/developer/client/delete/{id}", requirements={"id" = "\d+"}, name="developer_delete_client")
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteClientAction(Client $client)
     {
@@ -94,7 +96,7 @@ class DeveloperController extends Controller
      *
      * @Route("/developer/howto/first-app", name="developer_howto_firstapp")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function howtoFirstAppAction()
     {

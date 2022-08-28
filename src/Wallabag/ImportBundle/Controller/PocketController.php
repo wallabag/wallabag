@@ -110,7 +110,7 @@ class PocketController extends Controller
     /**
      * Return Pocket Import Service with or without RabbitMQ enabled.
      *
-     * @return \Wallabag\ImportBundle\Import\PocketImport
+     * @return PocketImport
      */
     private function getPocketImportService()
     {

@@ -10,7 +10,9 @@ use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -34,7 +36,7 @@ class EntryController extends Controller
     /**
      * @Route("/mass", name="mass_action")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function massAction(Request $request)
     {
@@ -121,7 +123,7 @@ class EntryController extends Controller
      * Default parameter for page is hardcoded (in duplication of the defaults from the Route)
      * because this controller is also called inside the layout template without any page as argument
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function searchFormAction(Request $request, $page = 1, $currentRoute = null)
     {
@@ -147,7 +149,7 @@ class EntryController extends Controller
     /**
      * @Route("/new-entry", name="new_entry")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function addEntryFormAction(Request $request)
     {
@@ -189,7 +191,7 @@ class EntryController extends Controller
     /**
      * @Route("/bookmarklet", name="bookmarklet")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function addEntryViaBookmarkletAction(Request $request)
     {
@@ -213,7 +215,7 @@ class EntryController extends Controller
     /**
      * @Route("/new", name="new")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function addEntryAction()
     {
@@ -225,7 +227,7 @@ class EntryController extends Controller
      *
      * @Route("/edit/{id}", requirements={"id" = "\d+"}, name="edit")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function editEntryAction(Request $request, Entry $entry)
     {
@@ -260,7 +262,7 @@ class EntryController extends Controller
      *
      * @Route("/all/list/{page}", name="all", defaults={"page" = "1"})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showAllAction(Request $request, $page)
     {
@@ -274,7 +276,7 @@ class EntryController extends Controller
      *
      * @Route("/unread/list/{page}", name="unread", defaults={"page" = "1"})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showUnreadAction(Request $request, $page)
     {
@@ -293,7 +295,7 @@ class EntryController extends Controller
      *
      * @Route("/archive/list/{page}", name="archive", defaults={"page" = "1"})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showArchiveAction(Request $request, $page)
     {
@@ -307,7 +309,7 @@ class EntryController extends Controller
      *
      * @Route("/starred/list/{page}", name="starred", defaults={"page" = "1"})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showStarredAction(Request $request, $page)
     {
@@ -321,7 +323,7 @@ class EntryController extends Controller
      *
      * @Route("/untagged/list/{page}", name="untagged", defaults={"page" = "1"})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showUntaggedEntriesAction(Request $request, $page)
     {
@@ -335,7 +337,7 @@ class EntryController extends Controller
      *
      * @Route("/annotated/list/{page}", name="annotated", defaults={"page" = "1"})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showWithAnnotationsEntriesAction(Request $request, $page)
     {
@@ -349,7 +351,7 @@ class EntryController extends Controller
      *
      * @Route("/{type}/random", name="random_entry", requirements={"type": "unread|starred|archive|untagged|annotated|all"})
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function redirectRandomEntryAction($type = 'all')
     {
@@ -372,7 +374,7 @@ class EntryController extends Controller
      *
      * @Route("/view/{id}", requirements={"id" = "\d+"}, name="view")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function viewAction(Entry $entry)
     {
@@ -390,7 +392,7 @@ class EntryController extends Controller
      *
      * @Route("/reload/{id}", requirements={"id" = "\d+"}, name="reload_entry")
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function reloadAction(Entry $entry)
     {
@@ -422,7 +424,7 @@ class EntryController extends Controller
      *
      * @Route("/archive/{id}", requirements={"id" = "\d+"}, name="archive_entry")
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function toggleArchiveAction(Request $request, Entry $entry)
     {
@@ -451,7 +453,7 @@ class EntryController extends Controller
      *
      * @Route("/star/{id}", requirements={"id" = "\d+"}, name="star_entry")
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function toggleStarAction(Request $request, Entry $entry)
     {
@@ -481,7 +483,7 @@ class EntryController extends Controller
      *
      * @Route("/delete/{id}", requirements={"id" = "\d+"}, name="delete_entry")
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteEntryAction(Request $request, Entry $entry)
     {
@@ -521,7 +523,7 @@ class EntryController extends Controller
      *
      * @Route("/share/{id}", requirements={"id" = "\d+"}, name="share")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function shareAction(Entry $entry)
     {
@@ -545,7 +547,7 @@ class EntryController extends Controller
      *
      * @Route("/share/delete/{id}", requirements={"id" = "\d+"}, name="delete_share")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function deleteShareAction(Entry $entry)
     {
@@ -568,7 +570,7 @@ class EntryController extends Controller
      * @Route("/share/{uid}", requirements={"uid" = ".+"}, name="share_entry")
      * @Cache(maxage="25200", smaxage="25200", public=true)
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function shareEntryAction(Entry $entry)
     {
@@ -589,7 +591,7 @@ class EntryController extends Controller
      *
      * @Route("/domain/{id}/{page}", requirements={"id" = ".+"}, defaults={"page" = 1}, name="same_domain")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function getSameDomainEntries(Request $request, $page = 1)
     {
@@ -603,7 +605,7 @@ class EntryController extends Controller
      * @param string $type Entries type: unread, starred or archive
      * @param int    $page
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     private function showEntries($type, Request $request, $page)
     {

@@ -3,7 +3,10 @@
 namespace Wallabag\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -36,7 +39,7 @@ class IgnoreOriginInstanceRuleController extends Controller
      *
      * @Route("/new", name="ignore_origin_instance_rules_new", methods={"GET", "POST"})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function newAction(Request $request)
     {
@@ -69,7 +72,7 @@ class IgnoreOriginInstanceRuleController extends Controller
      *
      * @Route("/{id}/edit", name="ignore_origin_instance_rules_edit", methods={"GET", "POST"})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function editAction(Request $request, IgnoreOriginInstanceRule $ignoreOriginInstanceRule)
     {
@@ -102,7 +105,7 @@ class IgnoreOriginInstanceRuleController extends Controller
      *
      * @Route("/{id}", name="ignore_origin_instance_rules_delete", methods={"DELETE"})
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(Request $request, IgnoreOriginInstanceRule $ignoreOriginInstanceRule)
     {
@@ -128,7 +131,7 @@ class IgnoreOriginInstanceRuleController extends Controller
      *
      * @param IgnoreOriginInstanceRule $ignoreOriginInstanceRule The ignore origin instance rule entity
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return Form The form
      */
     private function createDeleteForm(IgnoreOriginInstanceRule $ignoreOriginInstanceRule)
     {

@@ -3,6 +3,8 @@
 namespace Tests\Wallabag\ApiBundle;
 
 use Doctrine\ORM\EntityManagerInterface;
+use FOS\UserBundle\Model\UserInterface;
+use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -12,12 +14,12 @@ use Wallabag\UserBundle\Entity\User;
 abstract class WallabagApiTestCase extends WebTestCase
 {
     /**
-     * @var \Symfony\Bundle\FrameworkBundle\Client
+     * @var Client
      */
     protected $client = null;
 
     /**
-     * @var \FOS\UserBundle\Model\UserInterface
+     * @var UserInterface
      */
     protected $user;
 
@@ -27,7 +29,7 @@ abstract class WallabagApiTestCase extends WebTestCase
     }
 
     /**
-     * @return \Symfony\Bundle\FrameworkBundle\Client
+     * @return Client
      */
     protected function createAuthorizedClient()
     {

@@ -4,7 +4,10 @@ namespace Wallabag\CoreBundle\Controller;
 
 use Craue\ConfigBundle\Util\Config;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -41,7 +44,7 @@ class SiteCredentialController extends Controller
      *
      * @Route("/new", name="site_credentials_new", methods={"GET", "POST"})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function newAction(Request $request)
     {
@@ -79,7 +82,7 @@ class SiteCredentialController extends Controller
      *
      * @Route("/{id}/edit", name="site_credentials_edit", methods={"GET", "POST"})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function editAction(Request $request, SiteCredential $siteCredential)
     {
@@ -119,7 +122,7 @@ class SiteCredentialController extends Controller
      *
      * @Route("/{id}", name="site_credentials_delete", methods={"DELETE"})
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(Request $request, SiteCredential $siteCredential)
     {
@@ -159,7 +162,7 @@ class SiteCredentialController extends Controller
      *
      * @param SiteCredential $siteCredential The site credential entity
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return Form The form
      */
     private function createDeleteForm(SiteCredential $siteCredential)
     {

@@ -5,6 +5,7 @@ namespace Wallabag\ApiBundle\Controller;
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Pagerfanta\Pagerfanta;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -139,7 +140,7 @@ class EntryRestController extends WallabagRestController
         $detail = strtolower($request->query->get('detail', 'full'));
 
         try {
-            /** @var \Pagerfanta\Pagerfanta $pager */
+            /** @var Pagerfanta $pager */
             $pager = $this->get(EntryRepository::class)->findEntries(
                 $this->getUser()->getId(),
                 $isArchived,

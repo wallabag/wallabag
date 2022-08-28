@@ -5,6 +5,7 @@ namespace Tests\Wallabag\CoreBundle\ParamConverter;
 use PHPUnit\Framework\TestCase;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Wallabag\CoreBundle\ParamConverter\UsernameFeedTokenConverter;
 use Wallabag\UserBundle\Entity\User;
 
@@ -138,7 +139,7 @@ class UsernameFeedTokenConverterTest extends TestCase
 
     public function testApplyUserNotFound()
     {
-        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $this->expectException(NotFoundHttpException::class);
         $this->expectExceptionMessage('User not found');
 
         $repo = $this->getMockBuilder('Wallabag\UserBundle\Repository\UserRepository')
