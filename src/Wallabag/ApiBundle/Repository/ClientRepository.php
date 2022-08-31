@@ -2,10 +2,17 @@
 
 namespace Wallabag\ApiBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Wallabag\ApiBundle\Entity\Client;
 
-class ClientRepository extends EntityRepository
+class ClientRepository extends ServiceEntityRepository
 {
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Client::class);
+    }
+
     public function findOneBy(array $criteria, array $orderBy = null)
     {
         if (!empty($criteria['id'])) {

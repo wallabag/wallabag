@@ -2,17 +2,23 @@
 
 namespace Wallabag\ImportBundle\Import;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Wallabag\CoreBundle\Helper\ContentProxy;
+use Wallabag\CoreBundle\Helper\TagsAssigner;
+
 class WallabagV1Import extends WallabagImport
 {
     protected $fetchingErrorMessage;
     protected $fetchingErrorMessageTitle;
 
-    public function __construct($em, $contentProxy, $tagsAssigner, $eventDispatcher, $fetchingErrorMessageTitle, $fetchingErrorMessage)
+    public function __construct(EntityManagerInterface $em, ContentProxy $contentProxy, TagsAssigner $tagsAssigner, EventDispatcherInterface $eventDispatcher, LoggerInterface $logger, $fetchingErrorMessageTitle, $fetchingErrorMessage)
     {
         $this->fetchingErrorMessageTitle = $fetchingErrorMessageTitle;
         $this->fetchingErrorMessage = $fetchingErrorMessage;
 
-        parent::__construct($em, $contentProxy, $tagsAssigner, $eventDispatcher);
+        parent::__construct($em, $contentProxy, $tagsAssigner, $eventDispatcher, $logger);
     }
 
     /**
