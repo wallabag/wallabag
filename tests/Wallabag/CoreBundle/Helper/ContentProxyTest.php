@@ -28,7 +28,7 @@ class ContentProxyTest extends TestCase
 
         $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
 
-        $graby = $this->getMockBuilder('Graby\Graby')
+        $graby = $this->getMockBuilder(Graby::class)
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -67,7 +67,7 @@ class ContentProxyTest extends TestCase
 
         $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
 
-        $graby = $this->getMockBuilder('Graby\Graby')
+        $graby = $this->getMockBuilder(Graby::class)
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -106,7 +106,7 @@ class ContentProxyTest extends TestCase
 
         $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
 
-        $graby = $this->getMockBuilder('Graby\Graby')
+        $graby = $this->getMockBuilder(Graby::class)
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -150,7 +150,7 @@ class ContentProxyTest extends TestCase
         $ruleBasedIgnoreOriginProcessor->expects($this->once())
             ->method('process');
 
-        $graby = $this->getMockBuilder('Graby\Graby')
+        $graby = $this->getMockBuilder(Graby::class)
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -195,7 +195,7 @@ class ContentProxyTest extends TestCase
         $ruleBasedIgnoreOriginProcessor->expects($this->once())
             ->method('process');
 
-        $graby = $this->getMockBuilder('Graby\Graby')
+        $graby = $this->getMockBuilder(Graby::class)
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -240,7 +240,7 @@ class ContentProxyTest extends TestCase
         $ruleBasedIgnoreOriginProcessor->expects($this->once())
             ->method('process');
 
-        $graby = $this->getMockBuilder('Graby\Graby')
+        $graby = $this->getMockBuilder(Graby::class)
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -284,7 +284,7 @@ class ContentProxyTest extends TestCase
         $ruleBasedIgnoreOriginProcessor->expects($this->once())
             ->method('process');
 
-        $graby = $this->getMockBuilder('Graby\Graby')
+        $graby = $this->getMockBuilder(Graby::class)
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -333,7 +333,7 @@ class ContentProxyTest extends TestCase
             ->method('validate')
             ->willReturn(new ConstraintViolationList([new ConstraintViolation('oops', 'oops', [], 'oops', 'language', 'dontexist')]));
 
-        $graby = $this->getMockBuilder('Graby\Graby')
+        $graby = $this->getMockBuilder(Graby::class)
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -383,7 +383,7 @@ class ContentProxyTest extends TestCase
                 new ConstraintViolationList([new ConstraintViolation('oops', 'oops', [], 'oops', 'url', 'https://')])
             ));
 
-        $graby = $this->getMockBuilder('Graby\Graby')
+        $graby = $this->getMockBuilder(Graby::class)
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -635,7 +635,7 @@ class ContentProxyTest extends TestCase
 
         $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
 
-        $graby = $this->getMockBuilder('Graby\Graby')
+        $graby = $this->getMockBuilder(Graby::class)
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -678,7 +678,7 @@ class ContentProxyTest extends TestCase
 
         $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
 
-        $graby = $this->getMockBuilder('Graby\Graby')
+        $graby = $this->getMockBuilder(Graby::class)
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -717,7 +717,7 @@ class ContentProxyTest extends TestCase
 
         $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
 
-        $graby = $this->getMockBuilder('Graby\Graby')
+        $graby = $this->getMockBuilder(Graby::class)
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -755,7 +755,7 @@ class ContentProxyTest extends TestCase
 
         $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
 
-        $graby = $this->getMockBuilder('Graby\Graby')
+        $graby = $this->getMockBuilder(Graby::class)
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -793,7 +793,7 @@ class ContentProxyTest extends TestCase
 
         $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
 
-        $graby = $this->getMockBuilder('Graby\Graby')
+        $graby = $this->getMockBuilder(Graby::class)
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -831,7 +831,7 @@ class ContentProxyTest extends TestCase
 
         $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
 
-        $graby = $this->getMockBuilder('Graby\Graby')
+        $graby = $this->getMockBuilder(Graby::class)
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -870,7 +870,7 @@ class ContentProxyTest extends TestCase
 
         $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
 
-        $graby = $this->getMockBuilder('Graby\Graby')
+        $graby = $this->getMockBuilder(Graby::class)
             ->setMethods(['fetchContent'])
             ->disableOriginalConstructor()
             ->getMock();

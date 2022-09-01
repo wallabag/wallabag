@@ -7,6 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Wallabag\CoreBundle\Entity\TaggingRule;
 use Wallabag\CoreBundle\Form\DataTransformer\StringToListTransformer;
 
 class TaggingRuleType extends AbstractType
@@ -35,7 +36,7 @@ class TaggingRuleType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Wallabag\CoreBundle\Entity\TaggingRule',
+            'data_class' => TaggingRule::class,
         ]);
     }
 

@@ -3,6 +3,7 @@
 namespace Tests\Wallabag\CoreBundle\Helper;
 
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Wallabag\CoreBundle\Entity\Config;
@@ -22,7 +23,7 @@ class RedirectTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->routerMock = $this->getMockBuilder('Symfony\Component\Routing\Router')
+        $this->routerMock = $this->getMockBuilder(Router::class)
             ->disableOriginalConstructor()
             ->getMock();
 

@@ -8,8 +8,10 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\AuthenticationEvents;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Wallabag\UserBundle\EventListener\AuthenticationFailureListener;
 
 class AuthenticationFailureListenerTest extends TestCase
@@ -41,11 +43,11 @@ class AuthenticationFailureListenerTest extends TestCase
 
     public function testOnAuthenticationFailure()
     {
-        $token = $this->getMockBuilder('Symfony\Component\Security\Core\Authentication\Token\TokenInterface')
+        $token = $this->getMockBuilder(TokenInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $exception = $this->getMockBuilder('Symfony\Component\Security\Core\Exception\AuthenticationException')
+        $exception = $this->getMockBuilder(AuthenticationException::class)
             ->disableOriginalConstructor()
             ->getMock();
 

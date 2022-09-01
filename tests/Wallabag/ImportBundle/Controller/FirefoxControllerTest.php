@@ -122,7 +122,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
+        $this->assertInstanceOf(Entry::class, $content);
         $this->assertNotEmpty($content->getMimetype(), 'Mimetype for http://lexpansion.lexpress.fr is ok');
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://lexpansion.lexpress.fr is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for http://lexpansion.lexpress.fr is ok');
@@ -136,7 +136,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
+        $this->assertInstanceOf(Entry::class, $content);
         $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://www.lemonde.fr is ok');
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.lemonde.fr is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.lemonde.fr is ok');

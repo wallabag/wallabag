@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\SiteCredential;
+use Wallabag\CoreBundle\Form\Type\SiteCredentialType;
 use Wallabag\CoreBundle\Helper\CryptoProxy;
 use Wallabag\CoreBundle\Repository\SiteCredentialRepository;
 use Wallabag\UserBundle\Entity\User;
@@ -52,7 +53,7 @@ class SiteCredentialController extends Controller
 
         $credential = new SiteCredential($this->getUser());
 
-        $form = $this->createForm('Wallabag\CoreBundle\Form\Type\SiteCredentialType', $credential);
+        $form = $this->createForm(SiteCredentialType::class, $credential);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -91,7 +92,7 @@ class SiteCredentialController extends Controller
         $this->checkUserAction($siteCredential);
 
         $deleteForm = $this->createDeleteForm($siteCredential);
-        $editForm = $this->createForm('Wallabag\CoreBundle\Form\Type\SiteCredentialType', $siteCredential);
+        $editForm = $this->createForm(SiteCredentialType::class, $siteCredential);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

@@ -52,7 +52,7 @@ class RedisWorkerCommandTest extends WallabagCoreTestCase
         $application->add(new RedisWorkerCommand());
 
         $factory = new RedisMockFactory();
-        $redisMock = $factory->getAdapter('Predis\Client', true);
+        $redisMock = $factory->getAdapter(Client::class, true);
 
         $application->getKernel()->getContainer()->set(Client::class, $redisMock);
 

@@ -66,7 +66,7 @@ class PocketControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $pocketImport = $this->getMockBuilder('Wallabag\ImportBundle\Import\PocketImport')
+        $pocketImport = $this->getMockBuilder(PocketImport::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -88,7 +88,7 @@ class PocketControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $pocketImport = $this->getMockBuilder('Wallabag\ImportBundle\Import\PocketImport')
+        $pocketImport = $this->getMockBuilder(PocketImport::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -111,7 +111,7 @@ class PocketControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $pocketImport = $this->getMockBuilder('Wallabag\ImportBundle\Import\PocketImport')
+        $pocketImport = $this->getMockBuilder(PocketImport::class)
             ->disableOriginalConstructor()
             ->getMock();
 

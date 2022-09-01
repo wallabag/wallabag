@@ -123,7 +123,7 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
+        $this->assertInstanceOf(Entry::class, $content);
 
         // empty because it wasn't re-imported
         $this->assertEmpty($content->getMimetype(), 'Mimetype for https://www.liberation.fr is empty');
@@ -142,7 +142,7 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
+        $this->assertInstanceOf(Entry::class, $content);
         $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://www.mediapart.fr is ok');
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.mediapart.fr is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.mediapart.fr is ok');

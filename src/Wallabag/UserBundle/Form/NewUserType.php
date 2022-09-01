@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Wallabag\UserBundle\Entity\User;
 
 class NewUserType extends AbstractType
 {
@@ -48,7 +49,7 @@ class NewUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Wallabag\UserBundle\Entity\User',
+            'data_class' => User::class,
         ]);
     }
 

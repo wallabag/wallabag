@@ -122,7 +122,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
+        $this->assertInstanceOf(Entry::class, $content);
 
         $tags = $content->getTagsLabel();
         $this->assertContains('osx', $tags, 'It includes the "osx" tag');
@@ -161,7 +161,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content1);
+        $this->assertInstanceOf(Entry::class, $content1);
 
         $content2 = $client->getContainer()
             ->get(EntityManagerInterface::class)
@@ -171,7 +171,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content2);
+        $this->assertInstanceOf(Entry::class, $content2);
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);

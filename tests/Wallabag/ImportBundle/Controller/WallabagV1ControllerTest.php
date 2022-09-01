@@ -123,7 +123,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
+        $this->assertInstanceOf(Entry::class, $content);
         $this->assertEmpty($content->getMimetype(), 'Mimetype for http://www.framablog.org is empty');
         $this->assertSame($content->getPreviewPicture(), 'http://www.framablog.org/public/_img/framablog/wallaby_baby.jpg');
         $this->assertEmpty($content->getLanguage(), 'Language for http://www.framablog.org is empty');
@@ -165,7 +165,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content1);
+        $this->assertInstanceOf(Entry::class, $content1);
         $this->assertTrue($content1->isArchived());
 
         $content2 = $client->getContainer()
@@ -176,7 +176,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content2);
+        $this->assertInstanceOf(Entry::class, $content2);
         $this->assertTrue($content2->isArchived());
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));

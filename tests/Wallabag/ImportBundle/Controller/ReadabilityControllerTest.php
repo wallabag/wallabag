@@ -122,7 +122,7 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
+        $this->assertInstanceOf(Entry::class, $content);
         $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://www.20minutes.fr is ok');
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.20minutes.fr is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.20minutes.fr is ok');
@@ -164,7 +164,7 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content1);
+        $this->assertInstanceOf(Entry::class, $content1);
         $this->assertTrue($content1->isArchived());
 
         $content2 = $client->getContainer()
@@ -175,7 +175,7 @@ class ReadabilityControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content2);
+        $this->assertInstanceOf(Entry::class, $content2);
         $this->assertTrue($content2->isArchived());
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));

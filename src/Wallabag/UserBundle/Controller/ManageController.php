@@ -18,7 +18,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\UserBundle\Entity\User;
+use Wallabag\UserBundle\Form\NewUserType;
 use Wallabag\UserBundle\Form\SearchUserType;
+use Wallabag\UserBundle\Form\UserType;
 
 /**
  * User controller.
@@ -38,7 +40,7 @@ class ManageController extends Controller
         // enable created user by default
         $user->setEnabled(true);
 
-        $form = $this->createForm('Wallabag\UserBundle\Form\NewUserType', $user);
+        $form = $this->createForm(NewUserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -72,7 +74,7 @@ class ManageController extends Controller
         $userManager = $this->container->get(UserManagerInterface::class);
 
         $deleteForm = $this->createDeleteForm($user);
-        $form = $this->createForm('Wallabag\UserBundle\Form\UserType', $user);
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         // `googleTwoFactor` isn't a field within the User entity, we need to define it's value in a different way

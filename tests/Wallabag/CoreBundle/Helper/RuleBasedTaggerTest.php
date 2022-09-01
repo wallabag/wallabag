@@ -2,14 +2,19 @@
 
 namespace Tests\Wallabag\CoreBundle\Helper;
 
+use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\QueryBuilder;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
+use RulerZ\RulerZ;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Entity\TaggingRule;
 use Wallabag\CoreBundle\Helper\RuleBasedTagger;
+use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\CoreBundle\Repository\TagRepository;
 use Wallabag\UserBundle\Entity\User;
 
 class RuleBasedTaggerTest extends TestCase
@@ -202,7 +207,7 @@ class RuleBasedTaggerTest extends TestCase
             ->method('satisfies')
             ->willReturn(true);
 
-        $query = $this->getMockBuilder('Doctrine\ORM\AbstractQuery')
+        $query = $this->getMockBuilder(AbstractQuery::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -211,7 +216,7 @@ class RuleBasedTaggerTest extends TestCase
             ->method('getResult')
             ->willReturn([new Entry($user), new Entry($user)]);
 
-        $qb = $this->getMockBuilder('Doctrine\ORM\QueryBuilder')
+        $qb = $this->getMockBuilder(QueryBuilder::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -263,21 +268,21 @@ class RuleBasedTaggerTest extends TestCase
 
     private function getRulerZMock()
     {
-        return $this->getMockBuilder('RulerZ\RulerZ')
+        return $this->getMockBuilder(RulerZ::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
 
     private function getTagRepositoryMock()
     {
-        return $this->getMockBuilder('Wallabag\CoreBundle\Repository\TagRepository')
+        return $this->getMockBuilder(TagRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
 
     private function getEntryRepositoryMock()
     {
-        return $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+        return $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
     }

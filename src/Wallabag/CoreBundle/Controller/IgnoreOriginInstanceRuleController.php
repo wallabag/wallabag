@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule;
+use Wallabag\CoreBundle\Form\Type\IgnoreOriginInstanceRuleType;
 use Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository;
 
 /**
@@ -45,7 +46,7 @@ class IgnoreOriginInstanceRuleController extends Controller
     {
         $ignoreOriginInstanceRule = new IgnoreOriginInstanceRule();
 
-        $form = $this->createForm('Wallabag\CoreBundle\Form\Type\IgnoreOriginInstanceRuleType', $ignoreOriginInstanceRule);
+        $form = $this->createForm(IgnoreOriginInstanceRuleType::class, $ignoreOriginInstanceRule);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -77,7 +78,7 @@ class IgnoreOriginInstanceRuleController extends Controller
     public function editAction(Request $request, IgnoreOriginInstanceRule $ignoreOriginInstanceRule)
     {
         $deleteForm = $this->createDeleteForm($ignoreOriginInstanceRule);
-        $editForm = $this->createForm('Wallabag\CoreBundle\Form\Type\IgnoreOriginInstanceRuleType', $ignoreOriginInstanceRule);
+        $editForm = $this->createForm(IgnoreOriginInstanceRuleType::class, $ignoreOriginInstanceRule);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

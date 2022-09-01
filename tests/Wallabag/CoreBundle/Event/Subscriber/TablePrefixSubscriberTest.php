@@ -6,31 +6,33 @@ use Doctrine\Common\EventManager;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use PHPUnit\Framework\TestCase;
 use Wallabag\CoreBundle\Event\Subscriber\TablePrefixSubscriber;
+use Wallabag\UserBundle\Entity\User;
 
 class TablePrefixSubscriberTest extends TestCase
 {
     public function dataForPrefix()
     {
         return [
-            ['wallabag_', 'Wallabag\UserBundle\Entity\User', '`user`', 'user', 'wallabag_user', '"wallabag_user"', new PostgreSqlPlatform()],
-            ['wallabag_', 'Wallabag\UserBundle\Entity\User', '`user`', 'user', 'wallabag_user', '`wallabag_user`', new MySqlPlatform()],
-            ['wallabag_', 'Wallabag\UserBundle\Entity\User', '`user`', 'user', 'wallabag_user', '"wallabag_user"', new SqlitePlatform()],
+            ['wallabag_', User::class, '`user`', 'user', 'wallabag_user', '"wallabag_user"', new PostgreSqlPlatform()],
+            ['wallabag_', User::class, '`user`', 'user', 'wallabag_user', '`wallabag_user`', new MySqlPlatform()],
+            ['wallabag_', User::class, '`user`', 'user', 'wallabag_user', '"wallabag_user"', new SqlitePlatform()],
 
-            ['wallabag_', 'Wallabag\UserBundle\Entity\User', 'user', 'user', 'wallabag_user', 'wallabag_user', new PostgreSqlPlatform()],
-            ['wallabag_', 'Wallabag\UserBundle\Entity\User', 'user', 'user', 'wallabag_user', 'wallabag_user', new MySqlPlatform()],
-            ['wallabag_', 'Wallabag\UserBundle\Entity\User', 'user', 'user', 'wallabag_user', 'wallabag_user', new SqlitePlatform()],
+            ['wallabag_', User::class, 'user', 'user', 'wallabag_user', 'wallabag_user', new PostgreSqlPlatform()],
+            ['wallabag_', User::class, 'user', 'user', 'wallabag_user', 'wallabag_user', new MySqlPlatform()],
+            ['wallabag_', User::class, 'user', 'user', 'wallabag_user', 'wallabag_user', new SqlitePlatform()],
 
-            ['', 'Wallabag\UserBundle\Entity\User', '`user`', 'user', 'user', '"user"', new PostgreSqlPlatform()],
-            ['', 'Wallabag\UserBundle\Entity\User', '`user`', 'user', 'user', '`user`', new MySqlPlatform()],
-            ['', 'Wallabag\UserBundle\Entity\User', '`user`', 'user', 'user', '"user"', new SqlitePlatform()],
+            ['', User::class, '`user`', 'user', 'user', '"user"', new PostgreSqlPlatform()],
+            ['', User::class, '`user`', 'user', 'user', '`user`', new MySqlPlatform()],
+            ['', User::class, '`user`', 'user', 'user', '"user"', new SqlitePlatform()],
 
-            ['', 'Wallabag\UserBundle\Entity\User', 'user', 'user', 'user', 'user', new PostgreSqlPlatform()],
-            ['', 'Wallabag\UserBundle\Entity\User', 'user', 'user', 'user', 'user', new MySqlPlatform()],
-            ['', 'Wallabag\UserBundle\Entity\User', 'user', 'user', 'user', 'user', new SqlitePlatform()],
+            ['', User::class, 'user', 'user', 'user', 'user', new PostgreSqlPlatform()],
+            ['', User::class, 'user', 'user', 'user', 'user', new MySqlPlatform()],
+            ['', User::class, 'user', 'user', 'user', 'user', new SqlitePlatform()],
         ];
     }
 
@@ -39,7 +41,7 @@ class TablePrefixSubscriberTest extends TestCase
      */
     public function testPrefix($prefix, $entityName, $tableName, $tableNameExpected, $finalTableName, $finalTableNameQuoted, $platform)
     {
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        $em = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -63,7 +65,7 @@ class TablePrefixSubscriberTest extends TestCase
      */
     public function testSubscribedEvents($prefix, $entityName, $tableName, $tableNameExpected, $finalTableName, $finalTableNameQuoted, $platform)
     {
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        $em = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -85,7 +87,7 @@ class TablePrefixSubscriberTest extends TestCase
 
     public function testPrefixManyToMany()
     {
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        $em = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
             ->getMock();
 

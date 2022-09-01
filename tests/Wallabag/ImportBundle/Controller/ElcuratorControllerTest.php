@@ -123,7 +123,7 @@ class ElcuratorControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
+        $this->assertInstanceOf(Entry::class, $content);
 
         $this->assertStringContainsString('Qualité de code - Intégration de php-git-hooks dans Symfony2', $content->getTitle());
         $this->assertSame('2015-09-09', $content->getCreatedAt()->format('Y-m-d'));
