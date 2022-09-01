@@ -4,7 +4,9 @@ namespace Wallabag\ApiBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\ApiBundle\Entity\Client;
 use Wallabag\ApiBundle\Form\Type\ClientType;
 
@@ -45,9 +47,9 @@ class DeveloperController extends Controller
             $em->persist($client);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add(
+            $this->get(SessionInterface::class)->getFlashBag()->add(
                 'notice',
-                $this->get('translator')->trans('flashes.developer.notice.client_created', ['%name%' => $client->getName()])
+                $this->get(TranslatorInterface::class)->trans('flashes.developer.notice.client_created', ['%name%' => $client->getName()])
             );
 
             return $this->render('@WallabagCore/themes/common/Developer/client_parameters.html.twig', [
@@ -79,9 +81,9 @@ class DeveloperController extends Controller
         $em->remove($client);
         $em->flush();
 
-        $this->get('session')->getFlashBag()->add(
+        $this->get(SessionInterface::class)->getFlashBag()->add(
             'notice',
-            $this->get('translator')->trans('flashes.developer.notice.client_deleted', ['%name%' => $client->getName()])
+            $this->get(TranslatorInterface::class)->trans('flashes.developer.notice.client_deleted', ['%name%' => $client->getName()])
         );
 
         return $this->redirect($this->generateUrl('developer'));

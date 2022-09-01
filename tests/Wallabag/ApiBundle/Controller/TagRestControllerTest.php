@@ -2,6 +2,7 @@
 
 namespace Tests\Wallabag\ApiBundle\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Tests\Wallabag\ApiBundle\WallabagApiTestCase;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
@@ -33,9 +34,9 @@ class TagRestControllerTest extends WallabagApiTestCase
 
     public function testDeleteUserTag()
     {
-        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
         $entry = $this->client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findOneWithTags($this->user->getId());
 
@@ -74,7 +75,7 @@ class TagRestControllerTest extends WallabagApiTestCase
 
     public function testDeleteOtherUserTag()
     {
-        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
         $tag = $em->getRepository(Tag::class)->findOneByLabel($this->otherUserTagLabel);
 
         $this->client->request('DELETE', '/api/tags/' . $tag->getId() . '.json');
@@ -95,9 +96,9 @@ class TagRestControllerTest extends WallabagApiTestCase
      */
     public function testDeleteTagByLabel($useQueryString)
     {
-        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
         $entry = $this->client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findOneWithTags($this->user->getId());
 
@@ -127,7 +128,7 @@ class TagRestControllerTest extends WallabagApiTestCase
         $this->assertSame($tag->getSlug(), $content['slug']);
 
         $entries = $this->client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findAllByTagId($this->user->getId(), $tag->getId());
 
@@ -153,9 +154,9 @@ class TagRestControllerTest extends WallabagApiTestCase
      */
     public function testDeleteTagsByLabel($useQueryString)
     {
-        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->client->getContainer()->get(EntityManagerInterface::class);
         $entry = $this->client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findOneWithTags($this->user->getId());
 
@@ -196,14 +197,14 @@ class TagRestControllerTest extends WallabagApiTestCase
         $this->assertSame($tag2->getSlug(), $content[1]['slug']);
 
         $entries = $this->client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findAllByTagId($this->user->getId(), $tag->getId());
 
         $this->assertCount(0, $entries);
 
         $entries = $this->client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findAllByTagId($this->user->getId(), $tag2->getId());
 

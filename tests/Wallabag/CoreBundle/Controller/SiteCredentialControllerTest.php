@@ -2,6 +2,8 @@
 
 namespace Tests\Wallabag\CoreBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Entity\SiteCredential;
@@ -13,13 +15,13 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $client->getContainer()->get('craue_config')->set('restricted_access', 0);
+        $client->getContainer()->get(Config::class)->set('restricted_access', 0);
 
         $client->request('GET', '/site-credentials/');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
 
-        $client->getContainer()->get('craue_config')->set('restricted_access', 1);
+        $client->getContainer()->get(Config::class)->set('restricted_access', 1);
     }
 
     public function testListSiteCredential()
@@ -144,7 +146,7 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
         $credential->setUsername('sergei');
         $credential->setPassword('microsoft');
 
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
         $em->persist($credential);
         $em->flush();
 

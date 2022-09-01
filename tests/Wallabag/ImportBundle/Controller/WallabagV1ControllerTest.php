@@ -2,6 +2,8 @@
 
 namespace Tests\Wallabag\ImportBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
+use Doctrine\ORM\EntityManagerInterface;
 use Predis\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
@@ -26,7 +28,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 1);
+        $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
         $crawler = $client->request('GET', '/import/wallabag-v1');
 
@@ -34,7 +36,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
 
-        $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 0);
+        $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
     public function testImportWallabagBadFile()
@@ -60,7 +62,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $client->getContainer()->get('craue_config')->set('import_with_redis', 1);
+        $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
         $crawler = $client->request('GET', '/import/wallabag-v1');
 
@@ -87,7 +89,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.wallabag_v1'));
 
-        $client->getContainer()->get('craue_config')->set('import_with_redis', 0);
+        $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
     public function testImportWallabagWithFile()
@@ -111,7 +113,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $crawler = $client->followRedirect();
 
         $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'http://www.framablog.org/index.php/post/2014/02/05/Framabag-service-libre-gratuit-interview-developpeur',
@@ -156,7 +158,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $crawler = $client->followRedirect();
 
         $content1 = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'http://gilbert.pellegrom.me/recreating-the-square-slider',
@@ -167,7 +169,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $this->assertTrue($content1->isArchived());
 
         $content2 = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
+            ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://www.wallabag.org/features/',

@@ -2,12 +2,17 @@
 
 namespace Wallabag\ApiBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Model\UserManagerInterface;
 use JMS\Serializer\SerializationContext;
+use JMS\Serializer\SerializerInterface;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\ApiBundle\Entity\Client;
 use Wallabag\UserBundle\Entity\User;
 
@@ -45,15 +50,15 @@ class UserRestController extends WallabagRestController
      */
     public function putUserAction(Request $request)
     {
-        if (!$this->container->getParameter('fosuser_registration') || !$this->get('craue_config')->get('api_user_registration')) {
-            $json = $this->get('jms_serializer')->serialize(['error' => "Server doesn't allow registrations"], 'json');
+        if (!$this->container->getParameter('fosuser_registration') || !$this->get(Config::class)->get('api_user_registration')) {
+            $json = $this->get(SerializerInterface::class)->serialize(['error' => "Server doesn't allow registrations"], 'json');
 
             return (new JsonResponse())
                 ->setJson($json)
                 ->setStatusCode(JsonResponse::HTTP_FORBIDDEN);
         }
 
-        $userManager = $this->get('fos_user.user_manager');
+        $userManager = $this->get(UserManagerInterface::class);
         $user = $userManager->createUser();
         // user will be disabled BY DEFAULT to avoid spamming account to be enabled
         $user->setEnabled(false);
@@ -92,7 +97,7 @@ class UserRestController extends WallabagRestController
                 $errors['password'] = $this->translateErrors($data['plainPassword']['children']['first']['errors']);
             }
 
-            $json = $this->get('jms_serializer')->serialize(['error' => $errors], 'json');
+            $json = $this->get(SerializerInterface::class)->serialize(['error' => $errors], 'json');
 
             return (new JsonResponse())
                 ->setJson($json)
@@ -111,7 +116,7 @@ class UserRestController extends WallabagRestController
 
         // dispatch a created event so the associated config will be created
         $event = new UserEvent($user, $request);
-        $this->get('event_dispatcher')->dispatch(FOSUserEvents::USER_CREATED, $event);
+        $this->get(EventDispatcherInterface::class)->dispatch(FOSUserEvents::USER_CREATED, $event);
 
         return $this->sendUser($user, 'user_api_with_client', JsonResponse::HTTP_CREATED);
     }
@@ -126,7 +131,7 @@ class UserRestController extends WallabagRestController
      */
     private function sendUser(User $user, $group = 'user_api', $status = JsonResponse::HTTP_OK)
     {
-        $json = $this->get('jms_serializer')->serialize(
+        $json = $this->get(SerializerInterface::class)->serialize(
             $user,
             'json',
             SerializationContext::create()->setGroups([$group])
@@ -148,7 +153,7 @@ class UserRestController extends WallabagRestController
     {
         $translatedErrors = [];
         foreach ($errors as $error) {
-            $translatedErrors[] = $this->get('translator')->trans($error);
+            $translatedErrors[] = $this->get(TranslatorInterface::class)->trans($error);
         }
 
         return $translatedErrors;

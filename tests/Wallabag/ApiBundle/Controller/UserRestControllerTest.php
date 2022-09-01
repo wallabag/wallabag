@@ -2,6 +2,7 @@
 
 namespace Tests\Wallabag\ApiBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
 use Tests\Wallabag\ApiBundle\WallabagApiTestCase;
 
 class UserRestControllerTest extends WallabagApiTestCase
@@ -45,7 +46,7 @@ class UserRestControllerTest extends WallabagApiTestCase
 
     public function testCreateNewUser()
     {
-        $this->client->getContainer()->get('craue_config')->set('api_user_registration', 1);
+        $this->client->getContainer()->get(Config::class)->set('api_user_registration', 1);
         $this->client->request('PUT', '/api/user.json', [
             'username' => 'google',
             'password' => 'googlegoogle',
@@ -73,14 +74,14 @@ class UserRestControllerTest extends WallabagApiTestCase
 
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
 
-        $this->client->getContainer()->get('craue_config')->set('api_user_registration', 0);
+        $this->client->getContainer()->get(Config::class)->set('api_user_registration', 0);
     }
 
     public function testCreateNewUserWithoutAuthentication()
     {
         // create a new client instead of using $this->client to be sure client isn't authenticated
         $client = static::createClient();
-        $client->getContainer()->get('craue_config')->set('api_user_registration', 1);
+        $client->getContainer()->get(Config::class)->set('api_user_registration', 1);
         $client->request('PUT', '/api/user.json', [
             'username' => 'google',
             'password' => 'googlegoogle',
@@ -109,13 +110,13 @@ class UserRestControllerTest extends WallabagApiTestCase
 
         $this->assertSame('application/json', $client->getResponse()->headers->get('Content-Type'));
 
-        $client->getContainer()->get('craue_config')->set('api_user_registration', 0);
+        $client->getContainer()->get(Config::class)->set('api_user_registration', 0);
     }
 
     public function testCreateNewUserWithExistingEmail()
     {
         $client = static::createClient();
-        $client->getContainer()->get('craue_config')->set('api_user_registration', 1);
+        $client->getContainer()->get(Config::class)->set('api_user_registration', 1);
         $client->request('PUT', '/api/user.json', [
             'username' => 'admin',
             'password' => 'googlegoogle',
@@ -138,13 +139,13 @@ class UserRestControllerTest extends WallabagApiTestCase
 
         $this->assertSame('application/json', $client->getResponse()->headers->get('Content-Type'));
 
-        $client->getContainer()->get('craue_config')->set('api_user_registration', 0);
+        $client->getContainer()->get(Config::class)->set('api_user_registration', 0);
     }
 
     public function testCreateNewUserWithTooShortPassword()
     {
         $client = static::createClient();
-        $client->getContainer()->get('craue_config')->set('api_user_registration', 1);
+        $client->getContainer()->get(Config::class)->set('api_user_registration', 1);
         $client->request('PUT', '/api/user.json', [
             'username' => 'facebook',
             'password' => 'face',
@@ -162,7 +163,7 @@ class UserRestControllerTest extends WallabagApiTestCase
 
         $this->assertSame('application/json', $client->getResponse()->headers->get('Content-Type'));
 
-        $client->getContainer()->get('craue_config')->set('api_user_registration', 0);
+        $client->getContainer()->get(Config::class)->set('api_user_registration', 0);
     }
 
     public function testCreateNewUserWhenRegistrationIsDisabled()

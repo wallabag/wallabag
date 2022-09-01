@@ -4,7 +4,9 @@ namespace Wallabag\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule;
 use Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository;
 
@@ -48,9 +50,9 @@ class IgnoreOriginInstanceRuleController extends Controller
             $em->persist($ignoreOriginInstanceRule);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add(
+            $this->get(SessionInterface::class)->getFlashBag()->add(
                 'notice',
-                $this->get('translator')->trans('flashes.ignore_origin_instance_rule.notice.added')
+                $this->get(TranslatorInterface::class)->trans('flashes.ignore_origin_instance_rule.notice.added')
             );
 
             return $this->redirectToRoute('ignore_origin_instance_rules_index');
@@ -80,9 +82,9 @@ class IgnoreOriginInstanceRuleController extends Controller
             $em->persist($ignoreOriginInstanceRule);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add(
+            $this->get(SessionInterface::class)->getFlashBag()->add(
                 'notice',
-                $this->get('translator')->trans('flashes.ignore_origin_instance_rule.notice.updated')
+                $this->get(TranslatorInterface::class)->trans('flashes.ignore_origin_instance_rule.notice.updated')
             );
 
             return $this->redirectToRoute('ignore_origin_instance_rules_index');
@@ -108,9 +110,9 @@ class IgnoreOriginInstanceRuleController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->get('session')->getFlashBag()->add(
+            $this->get(SessionInterface::class)->getFlashBag()->add(
                 'notice',
-                $this->get('translator')->trans('flashes.ignore_origin_instance_rule.notice.deleted')
+                $this->get(TranslatorInterface::class)->trans('flashes.ignore_origin_instance_rule.notice.deleted')
             );
 
             $em = $this->getDoctrine()->getManager();

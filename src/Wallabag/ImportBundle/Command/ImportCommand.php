@@ -2,12 +2,14 @@
 
 namespace Wallabag\ImportBundle\Command;
 
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Wallabag\ImportBundle\Import\ChromeImport;
 use Wallabag\ImportBundle\Import\DeliciousImport;
@@ -43,7 +45,7 @@ class ImportCommand extends ContainerAwareCommand
             throw new Exception(sprintf('File "%s" not found', $input->getArgument('filepath')));
         }
 
-        $em = $this->getContainer()->get('doctrine')->getManager();
+        $em = $this->getContainer()->get(ManagerRegistry::class)->getManager();
         // Turning off doctrine default logs queries for saving memory
         $em->getConnection()->getConfiguration()->setSQLLogger(null);
 
@@ -64,8 +66,8 @@ class ImportCommand extends ContainerAwareCommand
             'main',
             $entityUser->getRoles());
 
-        $this->getContainer()->get('security.token_storage')->setToken($token);
-        $user = $this->getContainer()->get('security.token_storage')->getToken()->getUser();
+        $this->getContainer()->get(TokenStorageInterface::class)->setToken($token);
+        $user = $this->getContainer()->get(TokenStorageInterface::class)->getToken()->getUser();
 
         switch ($input->getOption('importer')) {
             case 'v2':

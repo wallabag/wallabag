@@ -2,6 +2,7 @@
 
 namespace Wallabag\ImportBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\ImportBundle\Import\FirefoxImport;
@@ -23,9 +24,9 @@ class FirefoxController extends BrowserController
     {
         $service = $this->get(FirefoxImport::class);
 
-        if ($this->get('craue_config')->get('import_with_rabbitmq')) {
+        if ($this->get(Config::class)->get('import_with_rabbitmq')) {
             $service->setProducer($this->get('old_sound_rabbit_mq.import_firefox_producer'));
-        } elseif ($this->get('craue_config')->get('import_with_redis')) {
+        } elseif ($this->get(Config::class)->get('import_with_redis')) {
             $service->setProducer($this->get('wallabag_import.producer.redis.firefox'));
         }
 

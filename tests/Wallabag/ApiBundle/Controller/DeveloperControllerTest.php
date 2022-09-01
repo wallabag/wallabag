@@ -2,6 +2,7 @@
 
 namespace Tests\Wallabag\ApiBundle\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\ApiBundle\Entity\Client;
 
@@ -11,7 +12,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
     {
         $this->logInAs('admin');
         $client = $this->getClient();
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
         $nbClients = $em->getRepository(Client::class)->findAll();
 
         $crawler = $client->request('GET', '/developer/client/create');
@@ -74,7 +75,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
     {
         $this->logInAs('admin');
         $client = $this->getClient();
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
         $nbClients = $em->getRepository(Client::class)->findAll();
 
         $crawler = $client->request('GET', '/developer');
@@ -95,7 +96,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
     {
         $client = $this->getClient();
         $adminApiClient = $this->createApiClientForUser('admin');
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
 
         // Try to remove an admin's client with a wrong user
         $this->logInAs('bob');
@@ -134,7 +135,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
     private function createApiClientForUser($username, $grantTypes = ['password'])
     {
         $client = $this->getClient();
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
         $userManager = $client->getContainer()->get('fos_user.user_manager.test');
         $user = $userManager->findUserBy(['username' => $username]);
         $apiClient = new Client($user);

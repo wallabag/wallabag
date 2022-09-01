@@ -2,9 +2,11 @@
 
 namespace Wallabag\ImportBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
 use Predis\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Wallabag\ImportBundle\Import\ImportChain;
 
 class ImportController extends Controller
@@ -30,11 +32,11 @@ class ImportController extends Controller
         $redisNotInstalled = false;
         $rabbitNotInstalled = false;
 
-        if (!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
+        if (!$this->get(AuthorizationCheckerInterface::class)->isGranted('ROLE_SUPER_ADMIN')) {
             return $this->render('@WallabagImport/Import/check_queue.html.twig');
         }
 
-        if ($this->get('craue_config')->get('import_with_rabbitmq')) {
+        if ($this->get(Config::class)->get('import_with_rabbitmq')) {
             // in case rabbit is activated but not installed
             try {
                 $nbRabbitMessages = $this->getTotalMessageInRabbitQueue('pocket')
@@ -51,7 +53,7 @@ class ImportController extends Controller
             } catch (\Exception $e) {
                 $rabbitNotInstalled = true;
             }
-        } elseif ($this->get('craue_config')->get('import_with_redis')) {
+        } elseif ($this->get(Config::class)->get('import_with_redis')) {
             $redis = $this->get(Client::class);
 
             try {

@@ -2,6 +2,7 @@
 
 namespace Wallabag\CoreBundle\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NoResultException;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -67,7 +68,7 @@ class CleanDuplicatesCommand extends ContainerAwareCommand
 
     private function cleanDuplicates(User $user)
     {
-        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->getContainer()->get(EntityManagerInterface::class);
         $repo = $this->getContainer()->get(EntryRepository::class);
 
         $entries = $repo->findAllEntriesIdAndUrlByUserId($user->getId());

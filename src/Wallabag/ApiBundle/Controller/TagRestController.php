@@ -2,6 +2,7 @@
 
 namespace Wallabag\ApiBundle\Controller;
 
+use JMS\Serializer\SerializerInterface;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +26,7 @@ class TagRestController extends WallabagRestController
             ->getRepository(Tag::class)
             ->findAllTags($this->getUser()->getId());
 
-        $json = $this->get('jms_serializer')->serialize($tags, 'json');
+        $json = $this->get(SerializerInterface::class)->serialize($tags, 'json');
 
         return (new JsonResponse())->setJson($json);
     }
@@ -60,7 +61,7 @@ class TagRestController extends WallabagRestController
 
         $this->cleanOrphanTag($tag);
 
-        $json = $this->get('jms_serializer')->serialize($tag, 'json');
+        $json = $this->get(SerializerInterface::class)->serialize($tag, 'json');
 
         return (new JsonResponse())->setJson($json);
     }
@@ -94,7 +95,7 @@ class TagRestController extends WallabagRestController
 
         $this->cleanOrphanTag($tags);
 
-        $json = $this->get('jms_serializer')->serialize($tags, 'json');
+        $json = $this->get(SerializerInterface::class)->serialize($tags, 'json');
 
         return (new JsonResponse())->setJson($json);
     }
@@ -126,7 +127,7 @@ class TagRestController extends WallabagRestController
 
         $this->cleanOrphanTag($tag);
 
-        $json = $this->get('jms_serializer')->serialize($tag, 'json');
+        $json = $this->get(SerializerInterface::class)->serialize($tag, 'json');
 
         return (new JsonResponse())->setJson($json);
     }

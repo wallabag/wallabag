@@ -2,14 +2,19 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\NoResultException;
+use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
 use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Event\EntryDeletedEvent;
@@ -95,7 +100,7 @@ class EntryController extends Controller
                         $entry->removeTag($tag);
                     }
                 } elseif ('delete' === $action) {
-                    $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
+                    $this->get(EventDispatcherInterface::class)->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
                     $em->remove($entry);
                 }
             }
@@ -156,9 +161,9 @@ class EntryController extends Controller
             $existingEntry = $this->checkIfEntryAlreadyExists($entry);
 
             if (false !== $existingEntry) {
-                $this->get('session')->getFlashBag()->add(
+                $this->get(SessionInterface::class)->getFlashBag()->add(
                     'notice',
-                    $this->get('translator')->trans('flashes.entry.notice.entry_already_saved', ['%date%' => $existingEntry->getCreatedAt()->format('d-m-Y')])
+                    $this->get(TranslatorInterface::class)->trans('flashes.entry.notice.entry_already_saved', ['%date%' => $existingEntry->getCreatedAt()->format('d-m-Y')])
                 );
 
                 return $this->redirect($this->generateUrl('view', ['id' => $existingEntry->getId()]));
@@ -171,7 +176,7 @@ class EntryController extends Controller
             $em->flush();
 
             // entry saved, dispatch event about it!
-            $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+            $this->get(EventDispatcherInterface::class)->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
 
             return $this->redirect($this->generateUrl('homepage'));
         }
@@ -199,7 +204,7 @@ class EntryController extends Controller
             $em->flush();
 
             // entry saved, dispatch event about it!
-            $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+            $this->get(EventDispatcherInterface::class)->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
         }
 
         return $this->redirect($this->generateUrl('homepage'));
@@ -235,7 +240,7 @@ class EntryController extends Controller
             $em->persist($entry);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add(
+            $this->get(SessionInterface::class)->getFlashBag()->add(
                 'notice',
                 'flashes.entry.notice.entry_updated'
             );
@@ -352,7 +357,7 @@ class EntryController extends Controller
             $entry = $this->get(EntryRepository::class)
                 ->getRandomEntry($this->getUser()->getId(), $type);
         } catch (NoResultException $e) {
-            $bag = $this->get('session')->getFlashBag();
+            $bag = $this->get(SessionInterface::class)->getFlashBag();
             $bag->clear();
             $bag->add('notice', 'flashes.entry.notice.no_random_entry');
 
@@ -395,7 +400,7 @@ class EntryController extends Controller
 
         // if refreshing entry failed, don't save it
         if ($this->getParameter('wallabag_core.fetching_error_message') === $entry->getContent()) {
-            $bag = $this->get('session')->getFlashBag();
+            $bag = $this->get(SessionInterface::class)->getFlashBag();
             $bag->clear();
             $bag->add('notice', 'flashes.entry.notice.entry_reloaded_failed');
 
@@ -407,7 +412,7 @@ class EntryController extends Controller
         $em->flush();
 
         // entry saved, dispatch event about it!
-        $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+        $this->get(EventDispatcherInterface::class)->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
 
         return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
     }
@@ -431,7 +436,7 @@ class EntryController extends Controller
             $message = 'flashes.entry.notice.entry_archived';
         }
 
-        $this->get('session')->getFlashBag()->add(
+        $this->get(SessionInterface::class)->getFlashBag()->add(
             'notice',
             $message
         );
@@ -461,7 +466,7 @@ class EntryController extends Controller
             $message = 'flashes.entry.notice.entry_starred';
         }
 
-        $this->get('session')->getFlashBag()->add(
+        $this->get(SessionInterface::class)->getFlashBag()->add(
             'notice',
             $message
         );
@@ -491,13 +496,13 @@ class EntryController extends Controller
         );
 
         // entry deleted, dispatch event about it!
-        $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
+        $this->get(EventDispatcherInterface::class)->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($entry);
         $em->flush();
 
-        $this->get('session')->getFlashBag()->add(
+        $this->get(SessionInterface::class)->getFlashBag()->add(
             'notice',
             'flashes.entry.notice.entry_deleted'
         );
@@ -567,7 +572,7 @@ class EntryController extends Controller
      */
     public function shareEntryAction(Entry $entry)
     {
-        if (!$this->get('craue_config')->get('share_public')) {
+        if (!$this->get(Config::class)->get('share_public')) {
             throw $this->createAccessDeniedException('Sharing an entry is disabled for this user.');
         }
 
@@ -647,7 +652,7 @@ class EntryController extends Controller
             $form->submit($request->query->get($form->getName()));
 
             // build the query from the given form object
-            $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $qb);
+            $this->get(FilterBuilderUpdaterInterface::class)->addFilterConditions($form, $qb);
         }
 
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
@@ -706,7 +711,7 @@ class EntryController extends Controller
             $this->get(ContentProxy::class)->setDefaultEntryTitle($entry);
         }
 
-        $this->get('session')->getFlashBag()->add('notice', $message);
+        $this->get(SessionInterface::class)->getFlashBag()->add('notice', $message);
     }
 
     /**

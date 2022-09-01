@@ -2,6 +2,7 @@
 
 namespace Tests\Wallabag\CoreBundle\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\UserBundle\Entity\User;
 
@@ -39,7 +40,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
 
         $client->followRedirects();
 
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
         $user = $em
             ->getRepository(User::class)
             ->findOneByUsername('admin');
@@ -72,7 +73,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
 
         $client->followRedirects();
 
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
         $user = $em
             ->getRepository(User::class)
             ->findOneByUsername('admin');

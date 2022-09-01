@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
 
 /**
@@ -41,13 +43,13 @@ abstract class WallabagController extends Controller
 
                 if (true === $res) {
                     $summary = $wallabag->getSummary();
-                    $message = $this->get('translator')->trans('flashes.import.notice.summary', [
+                    $message = $this->get(TranslatorInterface::class)->trans('flashes.import.notice.summary', [
                         '%imported%' => $summary['imported'],
                         '%skipped%' => $summary['skipped'],
                     ]);
 
                     if (0 < $summary['queued']) {
-                        $message = $this->get('translator')->trans('flashes.import.notice.summary_with_queue', [
+                        $message = $this->get(TranslatorInterface::class)->trans('flashes.import.notice.summary_with_queue', [
                             '%queued%' => $summary['queued'],
                         ]);
                     }
@@ -55,7 +57,7 @@ abstract class WallabagController extends Controller
                     unlink($this->getParameter('wallabag_import.resource_dir') . '/' . $name);
                 }
 
-                $this->get('session')->getFlashBag()->add(
+                $this->get(SessionInterface::class)->getFlashBag()->add(
                     'notice',
                     $message
                 );
@@ -63,7 +65,7 @@ abstract class WallabagController extends Controller
                 return $this->redirect($this->generateUrl('homepage'));
             }
 
-            $this->get('session')->getFlashBag()->add(
+            $this->get(SessionInterface::class)->getFlashBag()->add(
                 'notice',
                 'flashes.import.notice.failed_on_file'
             );

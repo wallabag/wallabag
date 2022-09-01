@@ -53,6 +53,54 @@ services:
         resource: '../../src/Wallabag/UserBundle/*'
         exclude: '../../src/Wallabag/UserBundle/{Controller,Entity}'
 
+    Doctrine\DBAL\Connection:
+        alias: doctrine.dbal.default_connection
+
+    Doctrine\ORM\EntityManagerInterface:
+        alias: doctrine.orm.entity_manager
+
+    Doctrine\Persistence\ManagerRegistry:
+        alias: doctrine
+
+    Craue\ConfigBundle\Util\Config:
+        alias: craue_config
+
+    JMS\Serializer\SerializerInterface:
+        alias: jms_serializer
+
+    Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface:
+        alias: lexik_form_filter.query_builder_updater
+
+    Liip\ThemeBundle\ActiveTheme:
+        alias: liip_theme.active_theme
+
+    Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface:
+        alias: scheb_two_factor.security.google_authenticator
+
+    Symfony\Component\HttpFoundation\Session\SessionInterface:
+        alias: session
+
+    Symfony\Component\EventDispatcher\EventDispatcherInterface:
+        alias: event_dispatcher
+
+    Symfony\Component\Form\FormFactoryInterface:
+        alias: form.factory
+
+    Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface:
+        alias: security.token_storage
+
+    Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface:
+        alias: security.authorization_checker
+
+    Symfony\Component\Translation\TranslatorInterface:
+        alias: translator
+
+    Symfony\Component\Validator\Validator\ValidatorInterface:
+        alias: validator
+
+    FOS\UserBundle\Model\UserManagerInterface:
+        alias: fos_user.user_manager
+
     Twig_Extensions_Extension_Text:
         class: Twig_Extensions_Extension_Text
 

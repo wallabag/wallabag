@@ -2,6 +2,7 @@
 
 namespace Tests\Wallabag\CoreBundle\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
@@ -91,7 +92,7 @@ class FeedControllerTest extends WallabagCoreTestCase
     public function testUnread()
     {
         $client = $this->getClient();
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
         $user = $em
             ->getRepository(User::class)
             ->findOneByUsername('admin');
@@ -112,7 +113,7 @@ class FeedControllerTest extends WallabagCoreTestCase
     public function testStarred()
     {
         $client = $this->getClient();
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
         $user = $em
             ->getRepository(User::class)
             ->findOneByUsername('admin');
@@ -134,7 +135,7 @@ class FeedControllerTest extends WallabagCoreTestCase
     public function testArchives()
     {
         $client = $this->getClient();
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
         $user = $em
             ->getRepository(User::class)
             ->findOneByUsername('admin');
@@ -156,7 +157,7 @@ class FeedControllerTest extends WallabagCoreTestCase
     public function testAll()
     {
         $client = $this->getClient();
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
         $user = $em
             ->getRepository(User::class)
             ->findOneByUsername('admin');
@@ -178,7 +179,7 @@ class FeedControllerTest extends WallabagCoreTestCase
     public function testPagination()
     {
         $client = $this->getClient();
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
         $user = $em
             ->getRepository(User::class)
             ->findOneByUsername('admin');
@@ -206,7 +207,7 @@ class FeedControllerTest extends WallabagCoreTestCase
     public function testTags()
     {
         $client = $this->getClient();
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
         $user = $em
             ->getRepository(User::class)
             ->findOneByUsername('admin');
