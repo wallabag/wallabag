@@ -41,6 +41,13 @@ class InstallCommand extends ContainerAwareCommand
         'curl_multi_init',
     ];
 
+    private bool $runOtherCommands = true;
+
+    public function disableRunOtherCommands(): void
+    {
+        $this->runOtherCommands = false;
+    }
+
     protected function configure()
     {
         $this
@@ -315,6 +322,10 @@ class InstallCommand extends ContainerAwareCommand
      */
     protected function runCommand($command, $parameters = [])
     {
+        if (!$this->runOtherCommands) {
+            return $this;
+        }
+
         $parameters = array_merge(
             ['command' => $command],
             $parameters,

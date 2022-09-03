@@ -14,7 +14,6 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\Wallabag\CoreBundle\Mock\InstallCommandMock;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Command\InstallCommand;
 
@@ -89,9 +88,11 @@ class InstallCommandTest extends WallabagCoreTestCase
     public function testRunInstallCommand()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new InstallCommandMock());
+        $application->add(new InstallCommand());
 
+        /** @var InstallCommand $command */
         $command = $application->find('wallabag:install');
+        $command->disableRunOtherCommands();
 
         $tester = new CommandTester($command);
         $tester->setInputs([
@@ -114,9 +115,11 @@ class InstallCommandTest extends WallabagCoreTestCase
     public function testRunInstallCommandWithReset()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new InstallCommandMock());
+        $application->add(new InstallCommand());
 
+        /** @var InstallCommand $command */
         $command = $application->find('wallabag:install');
+        $command->disableRunOtherCommands();
 
         $tester = new CommandTester($command);
         $tester->setInputs([
@@ -188,9 +191,11 @@ class InstallCommandTest extends WallabagCoreTestCase
     public function testRunInstallCommandChooseResetSchema()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new InstallCommandMock());
+        $application->add(new InstallCommand());
 
+        /** @var InstallCommand $command */
         $command = $application->find('wallabag:install');
+        $command->disableRunOtherCommands();
 
         $tester = new CommandTester($command);
         $tester->setInputs([
@@ -257,9 +262,11 @@ class InstallCommandTest extends WallabagCoreTestCase
     public function testRunInstallCommandNoInteraction()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new InstallCommandMock());
+        $application->add(new InstallCommand());
 
+        /** @var InstallCommand $command */
         $command = $application->find('wallabag:install');
+        $command->disableRunOtherCommands();
 
         $tester = new CommandTester($command);
         $tester->execute([
