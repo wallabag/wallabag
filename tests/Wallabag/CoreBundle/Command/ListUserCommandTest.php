@@ -5,14 +5,12 @@ namespace Tests\Wallabag\CoreBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\CoreBundle\Command\ListUserCommand;
 
 class ListUserCommandTest extends WallabagCoreTestCase
 {
     public function testRunListUserCommand()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ListUserCommand());
 
         $command = $application->find('wallabag:user:list');
 
@@ -27,7 +25,6 @@ class ListUserCommandTest extends WallabagCoreTestCase
     public function testRunListUserCommandWithLimit()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ListUserCommand());
 
         $command = $application->find('wallabag:user:list');
 
@@ -43,7 +40,6 @@ class ListUserCommandTest extends WallabagCoreTestCase
     public function testRunListUserCommandWithSearch()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ListUserCommand());
 
         $command = $application->find('wallabag:user:list');
 
@@ -59,7 +55,6 @@ class ListUserCommandTest extends WallabagCoreTestCase
     public function testRunListUserCommandWithSearchAndLimit()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ListUserCommand());
 
         $command = $application->find('wallabag:user:list');
 

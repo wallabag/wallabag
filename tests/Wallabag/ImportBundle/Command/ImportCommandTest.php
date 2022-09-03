@@ -8,7 +8,6 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\ImportBundle\Command\ImportCommand;
 
 class ImportCommandTest extends WallabagCoreTestCase
 {
@@ -18,7 +17,6 @@ class ImportCommandTest extends WallabagCoreTestCase
         $this->expectExceptionMessage('Not enough arguments');
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ImportCommand());
 
         $command = $application->find('wallabag:import');
 
@@ -34,7 +32,6 @@ class ImportCommandTest extends WallabagCoreTestCase
         $this->expectExceptionMessage('not found');
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ImportCommand());
 
         $command = $application->find('wallabag:import');
 
@@ -51,7 +48,6 @@ class ImportCommandTest extends WallabagCoreTestCase
         $this->expectException(NoResultException::class);
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ImportCommand());
 
         $command = $application->find('wallabag:import');
 
@@ -66,7 +62,6 @@ class ImportCommandTest extends WallabagCoreTestCase
     public function testRunImportCommand()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ImportCommand());
 
         $command = $application->find('wallabag:import');
 
@@ -87,7 +82,6 @@ class ImportCommandTest extends WallabagCoreTestCase
         $this->logInAs('admin');
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ImportCommand());
 
         $command = $application->find('wallabag:import');
 

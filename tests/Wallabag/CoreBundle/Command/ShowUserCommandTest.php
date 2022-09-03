@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\CoreBundle\Command\ShowUserCommand;
 use Wallabag\UserBundle\Entity\User;
 
 class ShowUserCommandTest extends WallabagCoreTestCase
@@ -18,7 +17,6 @@ class ShowUserCommandTest extends WallabagCoreTestCase
         $this->expectExceptionMessage('Not enough arguments');
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ShowUserCommand());
 
         $command = $application->find('wallabag:user:show');
 
@@ -31,7 +29,6 @@ class ShowUserCommandTest extends WallabagCoreTestCase
     public function testRunShowUserCommandWithBadUsername()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ShowUserCommand());
 
         $command = $application->find('wallabag:user:show');
 
@@ -47,7 +44,6 @@ class ShowUserCommandTest extends WallabagCoreTestCase
     public function testRunShowUserCommandForUser()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ShowUserCommand());
 
         $command = $application->find('wallabag:user:show');
 
@@ -80,7 +76,6 @@ class ShowUserCommandTest extends WallabagCoreTestCase
         $em->flush();
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ShowUserCommand());
 
         $command = $application->find('wallabag:user:show');
 
