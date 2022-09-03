@@ -19,9 +19,7 @@ class ExportCommandTest extends WallabagCoreTestCase
         $command = $application->find('wallabag:export');
 
         $tester = new CommandTester($command);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
     }
 
     public function testExportCommandWithBadUsername()
@@ -32,7 +30,6 @@ class ExportCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'unknown',
         ]);
 
@@ -47,7 +44,6 @@ class ExportCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'admin',
         ]);
 
@@ -64,7 +60,6 @@ class ExportCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'admin',
             'filepath' => 'specialexport.json',
         ]);

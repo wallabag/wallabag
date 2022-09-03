@@ -21,9 +21,7 @@ class ShowUserCommandTest extends WallabagCoreTestCase
         $command = $application->find('wallabag:user:show');
 
         $tester = new CommandTester($command);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
     }
 
     public function testRunShowUserCommandWithBadUsername()
@@ -34,7 +32,6 @@ class ShowUserCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'unknown',
         ]);
 
@@ -49,7 +46,6 @@ class ShowUserCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'admin',
         ]);
 
@@ -81,7 +77,6 @@ class ShowUserCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'admin',
         ]);
 

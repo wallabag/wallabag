@@ -19,9 +19,7 @@ class TagAllCommandTest extends WallabagCoreTestCase
         $command = $application->find('wallabag:tag:all');
 
         $tester = new CommandTester($command);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
     }
 
     public function testRunTagAllCommandWithBadUsername()
@@ -32,7 +30,6 @@ class TagAllCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'unknown',
         ]);
 
@@ -47,7 +44,6 @@ class TagAllCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'admin',
         ]);
 

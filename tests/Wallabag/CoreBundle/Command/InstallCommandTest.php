@@ -98,9 +98,7 @@ class InstallCommandTest extends WallabagCoreTestCase
             'password_' . uniqid('', true), // password
             'email_' . uniqid('', true) . '@wallabag.it', // email
         ]);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
 
         $this->assertStringContainsString('Checking system requirements.', $tester->getDisplay());
         $this->assertStringContainsString('Setting up database.', $tester->getDisplay());
@@ -124,7 +122,6 @@ class InstallCommandTest extends WallabagCoreTestCase
             'email_' . uniqid('', true) . '@wallabag.it', // email
         ]);
         $tester->execute([
-            'command' => $command->getName(),
             '--reset' => true,
         ]);
 
@@ -151,7 +148,6 @@ class InstallCommandTest extends WallabagCoreTestCase
         // drop database first, so the install command won't ask to reset things
         $command = $application->find('doctrine:database:drop');
         $command->run(new ArrayInput([
-            'command' => 'doctrine:database:drop',
             '--force' => true,
         ]), new NullOutput());
 
@@ -168,9 +164,7 @@ class InstallCommandTest extends WallabagCoreTestCase
             'password_' . uniqid('', true), // password
             'email_' . uniqid('', true) . '@wallabag.it', // email
         ]);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
 
         $this->assertStringContainsString('Checking system requirements.', $tester->getDisplay());
         $this->assertStringContainsString('Setting up database.', $tester->getDisplay());
@@ -195,9 +189,7 @@ class InstallCommandTest extends WallabagCoreTestCase
             'y', // do want to reset the schema
             'n', // don't want to create a new user
         ]);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
 
         $this->assertStringContainsString('Checking system requirements.', $tester->getDisplay());
         $this->assertStringContainsString('Setting up database.', $tester->getDisplay());
@@ -214,17 +206,13 @@ class InstallCommandTest extends WallabagCoreTestCase
         // drop database first, so the install command won't ask to reset things
         $command = $application->find('doctrine:database:drop');
         $command->run(new ArrayInput([
-            'command' => 'doctrine:database:drop',
             '--force' => true,
         ]), new NullOutput());
 
         $this->getClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->close();
 
         $command = $application->find('doctrine:database:create');
-        $command->run(new ArrayInput([
-            'command' => 'doctrine:database:create',
-            '--env' => 'test',
-        ]), new NullOutput());
+        $command->run(new ArrayInput([]), new NullOutput());
 
         $command = $application->find('wallabag:install');
 
@@ -233,9 +221,7 @@ class InstallCommandTest extends WallabagCoreTestCase
             'n', // don't want to reset the entire database
             'n', // don't want to create a new user
         ]);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
 
         $this->assertStringContainsString('Checking system requirements.', $tester->getDisplay());
         $this->assertStringContainsString('Setting up database.', $tester->getDisplay());
@@ -254,9 +240,7 @@ class InstallCommandTest extends WallabagCoreTestCase
         $command->disableRunOtherCommands();
 
         $tester = new CommandTester($command);
-        $tester->execute([
-            'command' => $command->getName(),
-        ], [
+        $tester->execute([], [
             'interactive' => false,
         ]);
 

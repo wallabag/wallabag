@@ -18,9 +18,7 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
         $command = $application->find('wallabag:clean-duplicates');
 
         $tester = new CommandTester($command);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
 
         $this->assertStringContainsString('Cleaning through 3 user accounts', $tester->getDisplay());
         $this->assertStringContainsString('Finished cleaning. 0 duplicates found in total', $tester->getDisplay());
@@ -34,7 +32,6 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'unknown',
         ]);
 
@@ -49,7 +46,6 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'admin',
         ]);
 
@@ -89,7 +85,6 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'admin',
         ]);
 

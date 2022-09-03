@@ -21,9 +21,7 @@ class ImportCommandTest extends WallabagCoreTestCase
         $command = $application->find('wallabag:import');
 
         $tester = new CommandTester($command);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
     }
 
     public function testRunImportCommandWithoutFilepath()
@@ -37,7 +35,6 @@ class ImportCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'admin',
             'filepath' => 1,
         ]);
@@ -53,7 +50,6 @@ class ImportCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'random',
             'filepath' => './',
         ]);
@@ -67,7 +63,6 @@ class ImportCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'admin',
             'filepath' => $application->getKernel()->getContainer()->getParameter('kernel.project_dir') . '/tests/Wallabag/ImportBundle/fixtures/wallabag-v2-read.json',
             '--importer' => 'v2',
@@ -87,7 +82,6 @@ class ImportCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => $this->getLoggedInUserId(),
             'filepath' => $application->getKernel()->getContainer()->getParameter('kernel.project_dir') . '/tests/Wallabag/ImportBundle/fixtures/wallabag-v2-read.json',
             '--useUserId' => true,

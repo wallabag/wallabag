@@ -22,9 +22,7 @@ class RedisWorkerCommandTest extends WallabagCoreTestCase
         $command = $application->find('wallabag:import:redis-worker');
 
         $tester = new CommandTester($command);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
     }
 
     public function testRunRedisWorkerCommandWithBadService()
@@ -38,7 +36,6 @@ class RedisWorkerCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'serviceName' => 'YOMONSERVICE',
         ]);
     }
@@ -60,7 +57,6 @@ class RedisWorkerCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'serviceName' => 'readability',
             '--maxIterations' => 1,
         ]);

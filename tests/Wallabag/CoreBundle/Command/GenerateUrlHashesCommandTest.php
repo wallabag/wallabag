@@ -18,9 +18,7 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
         $command = $application->find('wallabag:generate-hashed-urls');
 
         $tester = new CommandTester($command);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
 
         $this->assertStringContainsString('Generating hashed urls for "3" users', $tester->getDisplay());
         $this->assertStringContainsString('Finished generated hashed urls', $tester->getDisplay());
@@ -34,7 +32,6 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'unknown',
         ]);
 
@@ -49,7 +46,6 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'admin',
         ]);
 
@@ -78,7 +74,6 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'admin',
         ]);
 

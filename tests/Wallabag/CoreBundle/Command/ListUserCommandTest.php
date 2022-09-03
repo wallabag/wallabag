@@ -15,9 +15,7 @@ class ListUserCommandTest extends WallabagCoreTestCase
         $command = $application->find('wallabag:user:list');
 
         $tester = new CommandTester($command);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
 
         $this->assertStringContainsString('3/3 user(s) displayed.', $tester->getDisplay());
     }
@@ -30,7 +28,6 @@ class ListUserCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             '--limit' => 2,
         ]);
 
@@ -45,7 +42,6 @@ class ListUserCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'search' => 'boss',
         ]);
 
@@ -60,7 +56,6 @@ class ListUserCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'search' => 'bo',
             '--limit' => 1,
         ]);
