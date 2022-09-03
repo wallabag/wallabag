@@ -3,8 +3,6 @@
 namespace Tests\Wallabag\CoreBundle\Command;
 
 use DAMA\DoctrineTestBundle\Doctrine\DBAL\StaticDriver;
-use Doctrine\Bundle\DoctrineBundle\Command\CreateDatabaseDoctrineCommand;
-use Doctrine\Bundle\DoctrineBundle\Command\DropDatabaseDoctrineCommand;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
@@ -214,8 +212,7 @@ class InstallCommandTest extends WallabagCoreTestCase
         $application = new Application($this->getClient()->getKernel());
 
         // drop database first, so the install command won't ask to reset things
-        $command = new DropDatabaseDoctrineCommand();
-        $command->setApplication($application);
+        $command = $application->find('doctrine:database:drop');
         $command->run(new ArrayInput([
             'command' => 'doctrine:database:drop',
             '--force' => true,
@@ -223,8 +220,7 @@ class InstallCommandTest extends WallabagCoreTestCase
 
         $this->getClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->close();
 
-        $command = new CreateDatabaseDoctrineCommand();
-        $command->setApplication($application);
+        $command = $application->find('doctrine:database:create');
         $command->run(new ArrayInput([
             'command' => 'doctrine:database:create',
             '--env' => 'test',
