@@ -174,7 +174,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $author = $content->getPublishedBy();
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
+        $this->assertInstanceOf(Entry::class, $content);
         $this->assertSame($this->url, $content->getUrl());
         $this->assertStringContainsString('la cryptomonnaie de Facebook', $content->getTitle());
         $this->assertSame('fr', $content->getLanguage());
@@ -246,7 +246,7 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
+        $this->assertInstanceOf(Entry::class, $content);
         $authors = $content->getPublishedBy();
         $this->assertSame('2017-04-05', $content->getPublishedAt()->format('Y-m-d'));
         $this->assertSame('fr', $content->getLanguage());
@@ -1217,7 +1217,7 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $entry);
+        $this->assertInstanceOf(Entry::class, $entry);
         $this->assertSame($url, $entry->getUrl());
         $this->assertStringContainsString('Judo', $entry->getTitle());
         // instead of checking for the filename (which might change) check that the image is now local
@@ -1536,7 +1536,7 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
+        $this->assertInstanceOf(Entry::class, $content);
         $this->assertSame($url, $content->getUrl());
         $this->assertSame($expectedLanguage, $content->getLanguage());
     }
@@ -1587,7 +1587,7 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
+        $this->assertInstanceOf(Entry::class, $content);
         $this->assertSame('Quand Manille manœuvre', $content->getTitle());
 
         $client->getContainer()->get(Config::class)->set('restricted_access', 0);

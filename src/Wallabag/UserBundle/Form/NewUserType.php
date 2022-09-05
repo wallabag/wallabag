@@ -10,7 +10,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Wallabag\UserBundle\Entity\User;
 
 class NewUserType extends AbstractType
 {
@@ -27,11 +29,11 @@ class NewUserType extends AbstractType
                 'first_options' => ['label' => 'user.form.password_label'],
                 'second_options' => ['label' => 'user.form.repeat_new_password_label'],
                 'constraints' => [
-                    new Constraints\Length([
+                    new Length([
                         'min' => 8,
                         'minMessage' => 'validator.password_too_short',
                     ]),
-                    new Constraints\NotBlank(),
+                    new NotBlank(),
                 ],
                 'label' => 'user.form.plain_password_label',
             ])
@@ -47,7 +49,7 @@ class NewUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Wallabag\UserBundle\Entity\User',
+            'data_class' => User::class,
         ]);
     }
 

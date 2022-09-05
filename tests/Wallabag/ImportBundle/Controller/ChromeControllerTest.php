@@ -122,7 +122,7 @@ class ChromeControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
+        $this->assertInstanceOf(Entry::class, $content);
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.20minutes.fr is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.20minutes.fr is ok');
         $this->assertCount(1, $content->getTags());

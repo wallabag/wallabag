@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\ApiBundle\Entity\Client;
 use Wallabag\UserBundle\Entity\User;
+use Wallabag\UserBundle\Form\NewUserType;
 
 class UserRestController extends WallabagRestController
 {
@@ -63,7 +64,7 @@ class UserRestController extends WallabagRestController
         // user will be disabled BY DEFAULT to avoid spamming account to be enabled
         $user->setEnabled(false);
 
-        $form = $this->createForm('Wallabag\UserBundle\Form\NewUserType', $user, [
+        $form = $this->createForm(NewUserType::class, $user, [
             'csrf_protection' => false,
         ]);
 

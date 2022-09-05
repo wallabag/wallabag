@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
+use Wallabag\ImportBundle\Import\ImportInterface;
 
 /**
  * Define Wallabag import for v1 and v2, since there are very similar.
@@ -80,7 +81,7 @@ abstract class WallabagController extends Controller
     /**
      * Return the service to handle the import.
      *
-     * @return \Wallabag\ImportBundle\Import\ImportInterface
+     * @return ImportInterface
      */
     abstract protected function getImportService();
 

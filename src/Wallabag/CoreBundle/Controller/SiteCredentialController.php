@@ -4,11 +4,15 @@ namespace Wallabag\CoreBundle\Controller;
 
 use Craue\ConfigBundle\Util\Config;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\SiteCredential;
+use Wallabag\CoreBundle\Form\Type\SiteCredentialType;
 use Wallabag\CoreBundle\Helper\CryptoProxy;
 use Wallabag\CoreBundle\Repository\SiteCredentialRepository;
 use Wallabag\UserBundle\Entity\User;
@@ -41,7 +45,7 @@ class SiteCredentialController extends Controller
      *
      * @Route("/new", name="site_credentials_new", methods={"GET", "POST"})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function newAction(Request $request)
     {
@@ -49,7 +53,7 @@ class SiteCredentialController extends Controller
 
         $credential = new SiteCredential($this->getUser());
 
-        $form = $this->createForm('Wallabag\CoreBundle\Form\Type\SiteCredentialType', $credential);
+        $form = $this->createForm(SiteCredentialType::class, $credential);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -79,7 +83,7 @@ class SiteCredentialController extends Controller
      *
      * @Route("/{id}/edit", name="site_credentials_edit", methods={"GET", "POST"})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function editAction(Request $request, SiteCredential $siteCredential)
     {
@@ -88,7 +92,7 @@ class SiteCredentialController extends Controller
         $this->checkUserAction($siteCredential);
 
         $deleteForm = $this->createDeleteForm($siteCredential);
-        $editForm = $this->createForm('Wallabag\CoreBundle\Form\Type\SiteCredentialType', $siteCredential);
+        $editForm = $this->createForm(SiteCredentialType::class, $siteCredential);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -119,7 +123,7 @@ class SiteCredentialController extends Controller
      *
      * @Route("/{id}", name="site_credentials_delete", methods={"DELETE"})
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(Request $request, SiteCredential $siteCredential)
     {
@@ -159,7 +163,7 @@ class SiteCredentialController extends Controller
      *
      * @param SiteCredential $siteCredential The site credential entity
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return Form The form
      */
     private function createDeleteForm(SiteCredential $siteCredential)
     {

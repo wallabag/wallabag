@@ -6,6 +6,7 @@ use DAMA\DoctrineTestBundle\Doctrine\DBAL\StaticDriver;
 use Doctrine\Bundle\DoctrineBundle\Command\CreateDatabaseDoctrineCommand;
 use Doctrine\Bundle\DoctrineBundle\Command\DropDatabaseDoctrineCommand;
 use Doctrine\Bundle\MigrationsBundle\Command\MigrationsMigrateDoctrineCommand;
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\Persistence\ManagerRegistry;
@@ -35,7 +36,7 @@ class InstallCommandTest extends WallabagCoreTestCase
     {
         parent::setUp();
 
-        /** @var \Doctrine\DBAL\Connection $connection */
+        /** @var Connection $connection */
         $connection = $this->getClient()->getContainer()->get(ManagerRegistry::class)->getConnection();
         if ($connection->getDatabasePlatform() instanceof PostgreSqlPlatform) {
             /*
@@ -143,7 +144,7 @@ class InstallCommandTest extends WallabagCoreTestCase
     {
         // skipped SQLite check when database is removed because while testing for the connection,
         // the driver will create the file (so the database) before testing if database exist
-        if ($this->getClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\SqlitePlatform) {
+        if ($this->getClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof SqlitePlatform) {
             $this->markTestSkipped('SQLite spotted: can\'t test with database removed.');
         }
 

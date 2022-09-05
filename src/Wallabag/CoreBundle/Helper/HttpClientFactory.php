@@ -18,7 +18,7 @@ class HttpClientFactory implements ClientFactory
     /** @var [\GuzzleHttp\Event\SubscriberInterface] */
     private $subscribers = [];
 
-    /** @var \GuzzleHttp\Cookie\CookieJar */
+    /** @var CookieJar */
     private $cookieJar;
 
     private $restrictedAccess;

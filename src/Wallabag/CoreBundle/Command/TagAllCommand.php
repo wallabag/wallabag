@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Wallabag\CoreBundle\Helper\RuleBasedTagger;
+use Wallabag\UserBundle\Entity\User;
 use Wallabag\UserBundle\Repository\UserRepository;
 
 class TagAllCommand extends ContainerAwareCommand
@@ -62,7 +63,7 @@ class TagAllCommand extends ContainerAwareCommand
      *
      * @param string $username
      *
-     * @return \Wallabag\UserBundle\Entity\User
+     * @return User
      */
     private function getUser($username)
     {

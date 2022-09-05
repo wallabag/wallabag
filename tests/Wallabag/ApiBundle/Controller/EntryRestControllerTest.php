@@ -3,6 +3,7 @@
 namespace Tests\Wallabag\ApiBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\DependencyInjection\Container;
 use Tests\Wallabag\ApiBundle\WallabagApiTestCase;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
@@ -556,7 +557,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testPostEntryWhenFetchContentFails()
     {
-        /** @var \Symfony\Component\DependencyInjection\Container $container */
+        /** @var Container $container */
         $container = $this->client->getContainer();
         $contentProxy = $this->getMockBuilder(ContentProxy::class)
             ->disableOriginalConstructor()

@@ -11,12 +11,16 @@ use Pagerfanta\Pagerfanta;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\UserBundle\Entity\User;
+use Wallabag\UserBundle\Form\NewUserType;
 use Wallabag\UserBundle\Form\SearchUserType;
+use Wallabag\UserBundle\Form\UserType;
 
 /**
  * User controller.
@@ -36,7 +40,7 @@ class ManageController extends Controller
         // enable created user by default
         $user->setEnabled(true);
 
-        $form = $this->createForm('Wallabag\UserBundle\Form\NewUserType', $user);
+        $form = $this->createForm(NewUserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -70,7 +74,7 @@ class ManageController extends Controller
         $userManager = $this->container->get(UserManagerInterface::class);
 
         $deleteForm = $this->createDeleteForm($user);
-        $form = $this->createForm('Wallabag\UserBundle\Form\UserType', $user);
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         // `googleTwoFactor` isn't a field within the User entity, we need to define it's value in a different way
@@ -139,7 +143,7 @@ class ManageController extends Controller
      * Default parameter for page is hardcoded (in duplication of the defaults from the Route)
      * because this controller is also called inside the layout template without any page as argument
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function searchFormAction(Request $request, $page = 1)
     {
@@ -178,7 +182,7 @@ class ManageController extends Controller
      *
      * @param User $user The User entity
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return Form The form
      */
     private function createDeleteForm(User $user)
     {

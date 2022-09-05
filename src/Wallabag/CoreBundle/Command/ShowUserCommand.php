@@ -65,7 +65,7 @@ class ShowUserCommand extends ContainerAwareCommand
      *
      * @param string $username
      *
-     * @return \Wallabag\UserBundle\Entity\User
+     * @return User
      */
     private function getUser($username)
     {

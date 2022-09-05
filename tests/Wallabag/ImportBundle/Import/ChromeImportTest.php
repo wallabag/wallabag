@@ -2,12 +2,18 @@
 
 namespace Tests\Wallabag\ImportBundle\Import;
 
+use Doctrine\ORM\EntityManager;
 use M6Web\Component\RedisMock\RedisMockFactory;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
+use Predis\Client;
 use Simpleue\Queue\RedisQueue;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Helper\ContentProxy;
+use Wallabag\CoreBundle\Helper\TagsAssigner;
+use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\ImportBundle\Import\ChromeImport;
 use Wallabag\ImportBundle\Redis\Producer;
 use Wallabag\UserBundle\Entity\User;
@@ -34,7 +40,7 @@ class ChromeImportTest extends TestCase
         $chromeImport = $this->getChromeImport(false, 1);
         $chromeImport->setFilepath(__DIR__ . '/../fixtures/chrome-bookmarks');
 
-        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+        $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -47,7 +53,7 @@ class ChromeImportTest extends TestCase
             ->method('getRepository')
             ->willReturn($entryRepo);
 
-        $entry = $this->getMockBuilder('Wallabag\CoreBundle\Entity\Entry')
+        $entry = $this->getMockBuilder(Entry::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -67,7 +73,7 @@ class ChromeImportTest extends TestCase
         $chromeImport = $this->getChromeImport(false, 1);
         $chromeImport->setFilepath(__DIR__ . '/../fixtures/chrome-bookmarks');
 
-        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+        $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -105,7 +111,7 @@ class ChromeImportTest extends TestCase
         $chromeImport = $this->getChromeImport();
         $chromeImport->setFilepath(__DIR__ . '/../fixtures/chrome-bookmarks');
 
-        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+        $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -116,7 +122,7 @@ class ChromeImportTest extends TestCase
             ->expects($this->never())
             ->method('getRepository');
 
-        $entry = $this->getMockBuilder('Wallabag\CoreBundle\Entity\Entry')
+        $entry = $this->getMockBuilder(Entry::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -124,7 +130,7 @@ class ChromeImportTest extends TestCase
             ->expects($this->never())
             ->method('updateEntry');
 
-        $producer = $this->getMockBuilder('OldSound\RabbitMqBundle\RabbitMq\Producer')
+        $producer = $this->getMockBuilder(\OldSound\RabbitMqBundle\RabbitMq\Producer::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -145,7 +151,7 @@ class ChromeImportTest extends TestCase
         $chromeImport = $this->getChromeImport();
         $chromeImport->setFilepath(__DIR__ . '/../fixtures/chrome-bookmarks');
 
-        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+        $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -156,7 +162,7 @@ class ChromeImportTest extends TestCase
             ->expects($this->never())
             ->method('getRepository');
 
-        $entry = $this->getMockBuilder('Wallabag\CoreBundle\Entity\Entry')
+        $entry = $this->getMockBuilder(Entry::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -165,7 +171,7 @@ class ChromeImportTest extends TestCase
             ->method('updateEntry');
 
         $factory = new RedisMockFactory();
-        $redisMock = $factory->getAdapter('Predis\Client', true);
+        $redisMock = $factory->getAdapter(Client::class, true);
 
         $queue = new RedisQueue($redisMock, 'chrome');
         $producer = new Producer($queue);
@@ -212,19 +218,19 @@ class ChromeImportTest extends TestCase
     {
         $this->user = new User();
 
-        $this->em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        $this->em = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->contentProxy = $this->getMockBuilder('Wallabag\CoreBundle\Helper\ContentProxy')
+        $this->contentProxy = $this->getMockBuilder(ContentProxy::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->tagsAssigner = $this->getMockBuilder('Wallabag\CoreBundle\Helper\TagsAssigner')
+        $this->tagsAssigner = $this->getMockBuilder(TagsAssigner::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+        $dispatcher = $this->getMockBuilder(EventDispatcher::class)
             ->disableOriginalConstructor()
             ->getMock();
 

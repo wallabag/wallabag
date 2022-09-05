@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Wallabag\ApiBundle\Entity\Client;
 
 class ClientType extends AbstractType
 {
@@ -40,7 +41,7 @@ class ClientType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Wallabag\ApiBundle\Entity\Client',
+            'data_class' => Client::class,
         ]);
     }
 

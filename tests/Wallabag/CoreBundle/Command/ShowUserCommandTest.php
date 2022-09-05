@@ -4,6 +4,7 @@ namespace Tests\Wallabag\CoreBundle\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Command\ShowUserCommand;
@@ -13,7 +14,7 @@ class ShowUserCommandTest extends WallabagCoreTestCase
 {
     public function testRunShowUserCommandWithoutUsername()
     {
-        $this->expectException(\Symfony\Component\Console\Exception\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Not enough arguments');
 
         $application = new Application($this->getClient()->getKernel());

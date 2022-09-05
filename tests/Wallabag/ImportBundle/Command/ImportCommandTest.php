@@ -2,7 +2,10 @@
 
 namespace Tests\Wallabag\ImportBundle\Command;
 
+use Doctrine\ORM\NoResultException;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\ImportBundle\Command\ImportCommand;
@@ -11,7 +14,7 @@ class ImportCommandTest extends WallabagCoreTestCase
 {
     public function testRunImportCommandWithoutArguments()
     {
-        $this->expectException(\Symfony\Component\Console\Exception\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Not enough arguments');
 
         $application = new Application($this->getClient()->getKernel());
@@ -27,7 +30,7 @@ class ImportCommandTest extends WallabagCoreTestCase
 
     public function testRunImportCommandWithoutFilepath()
     {
-        $this->expectException(\Symfony\Component\Config\Definition\Exception\Exception::class);
+        $this->expectException(Exception::class);
         $this->expectExceptionMessage('not found');
 
         $application = new Application($this->getClient()->getKernel());
@@ -45,7 +48,7 @@ class ImportCommandTest extends WallabagCoreTestCase
 
     public function testRunImportCommandWithWrongUsername()
     {
-        $this->expectException(\Doctrine\ORM\NoResultException::class);
+        $this->expectException(NoResultException::class);
 
         $application = new Application($this->getClient()->getKernel());
         $application->add(new ImportCommand());

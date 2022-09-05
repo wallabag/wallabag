@@ -8,6 +8,7 @@ use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -25,7 +26,7 @@ class TagController extends Controller
     /**
      * @Route("/new-tag/{entry}", requirements={"entry" = "\d+"}, name="new_tag")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function addTagFormAction(Request $request, Entry $entry)
     {
@@ -61,7 +62,7 @@ class TagController extends Controller
      *
      * @Route("/remove-tag/{entry}/{tag}", requirements={"entry" = "\d+", "tag" = "\d+"}, name="remove_tag")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function removeTagFromEntry(Request $request, Entry $entry, Tag $tag)
     {
@@ -85,7 +86,7 @@ class TagController extends Controller
      *
      * @Route("/tag/list", name="tag")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showTagAction()
     {
@@ -112,7 +113,7 @@ class TagController extends Controller
      * @Route("/tag/list/{slug}/{page}", name="tag_entries", defaults={"page" = "1"})
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showEntriesForTagAction(Tag $tag, $page, Request $request)
     {
@@ -151,7 +152,7 @@ class TagController extends Controller
      * @Route("/tag/rename/{slug}", name="tag_rename")
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function renameTagAction(Tag $tag, Request $request)
     {
@@ -203,7 +204,7 @@ class TagController extends Controller
      *
      * @Route("/tag/search/{filter}", name="tag_this_search")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function tagThisSearchAction($filter, Request $request)
     {
@@ -235,7 +236,7 @@ class TagController extends Controller
      * @Route("/tag/delete/{slug}", name="tag_delete")
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function removeTagAction(Tag $tag, Request $request)
     {

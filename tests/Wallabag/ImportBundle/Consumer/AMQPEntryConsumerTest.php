@@ -2,17 +2,21 @@
 
 namespace Tests\Wallabag\ImportBundle\Consumer;
 
+use Doctrine\ORM\EntityManager;
 use PhpAmqpLib\Message\AMQPMessage;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\ImportBundle\Consumer\AMQPEntryConsumer;
+use Wallabag\ImportBundle\Import\AbstractImport;
 use Wallabag\UserBundle\Entity\User;
+use Wallabag\UserBundle\Repository\UserRepository;
 
 class AMQPEntryConsumerTest extends TestCase
 {
     public function testMessageOk()
     {
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        $em = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -87,7 +91,7 @@ JSON;
         $user = new User();
         $entry = new Entry($user);
 
-        $userRepository = $this->getMockBuilder('Wallabag\UserBundle\Repository\UserRepository')
+        $userRepository = $this->getMockBuilder(UserRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -98,7 +102,7 @@ JSON;
             ->with(1)
             ->willReturn($user);
 
-        $import = $this->getMockBuilder('Wallabag\ImportBundle\Import\AbstractImport')
+        $import = $this->getMockBuilder(AbstractImport::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -113,7 +117,7 @@ JSON;
             ->with(json_decode($body, true))
             ->willReturn($entry);
 
-        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+        $dispatcher = $this->getMockBuilder(EventDispatcher::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -135,7 +139,7 @@ JSON;
 
     public function testMessageWithBadUser()
     {
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        $em = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -152,7 +156,7 @@ JSON;
         $user = new User();
         $entry = new Entry($user);
 
-        $userRepository = $this->getMockBuilder('Wallabag\UserBundle\Repository\UserRepository')
+        $userRepository = $this->getMockBuilder(UserRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -163,11 +167,11 @@ JSON;
             ->with(123)
             ->willReturn(null);
 
-        $import = $this->getMockBuilder('Wallabag\ImportBundle\Import\AbstractImport')
+        $import = $this->getMockBuilder(AbstractImport::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+        $dispatcher = $this->getMockBuilder(EventDispatcher::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -191,7 +195,7 @@ JSON;
 
     public function testMessageWithEntryProcessed()
     {
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        $em = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -207,7 +211,7 @@ JSON;
 
         $user = new User();
 
-        $userRepository = $this->getMockBuilder('Wallabag\UserBundle\Repository\UserRepository')
+        $userRepository = $this->getMockBuilder(UserRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -218,7 +222,7 @@ JSON;
             ->with(123)
             ->willReturn($user);
 
-        $import = $this->getMockBuilder('Wallabag\ImportBundle\Import\AbstractImport')
+        $import = $this->getMockBuilder(AbstractImport::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -233,7 +237,7 @@ JSON;
             ->with(json_decode($body, true))
             ->willReturn(null);
 
-        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+        $dispatcher = $this->getMockBuilder(EventDispatcher::class)
             ->disableOriginalConstructor()
             ->getMock();
 

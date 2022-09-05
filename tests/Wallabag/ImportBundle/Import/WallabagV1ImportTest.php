@@ -2,12 +2,19 @@
 
 namespace Tests\Wallabag\ImportBundle\Import;
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\UnitOfWork;
 use M6Web\Component\RedisMock\RedisMockFactory;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
+use Predis\Client;
 use Simpleue\Queue\RedisQueue;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Helper\ContentProxy;
+use Wallabag\CoreBundle\Helper\TagsAssigner;
+use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\ImportBundle\Import\WallabagV1Import;
 use Wallabag\ImportBundle\Redis\Producer;
 use Wallabag\UserBundle\Entity\User;
@@ -37,7 +44,7 @@ class WallabagV1ImportTest extends TestCase
         $wallabagV1Import = $this->getWallabagV1Import(false, 1);
         $wallabagV1Import->setFilepath(__DIR__ . '/../fixtures/wallabag-v1.json');
 
-        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+        $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -50,7 +57,7 @@ class WallabagV1ImportTest extends TestCase
             ->method('getRepository')
             ->willReturn($entryRepo);
 
-        $entry = $this->getMockBuilder('Wallabag\CoreBundle\Entity\Entry')
+        $entry = $this->getMockBuilder(Entry::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -70,7 +77,7 @@ class WallabagV1ImportTest extends TestCase
         $wallabagV1Import = $this->getWallabagV1Import(false, 3);
         $wallabagV1Import->setFilepath(__DIR__ . '/../fixtures/wallabag-v1-read.json');
 
-        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+        $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -108,7 +115,7 @@ class WallabagV1ImportTest extends TestCase
         $wallabagV1Import = $this->getWallabagV1Import();
         $wallabagV1Import->setFilepath(__DIR__ . '/../fixtures/wallabag-v1.json');
 
-        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+        $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -119,7 +126,7 @@ class WallabagV1ImportTest extends TestCase
             ->expects($this->never())
             ->method('getRepository');
 
-        $entry = $this->getMockBuilder('Wallabag\CoreBundle\Entity\Entry')
+        $entry = $this->getMockBuilder(Entry::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -127,7 +134,7 @@ class WallabagV1ImportTest extends TestCase
             ->expects($this->never())
             ->method('updateEntry');
 
-        $producer = $this->getMockBuilder('OldSound\RabbitMqBundle\RabbitMq\Producer')
+        $producer = $this->getMockBuilder(\OldSound\RabbitMqBundle\RabbitMq\Producer::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -148,7 +155,7 @@ class WallabagV1ImportTest extends TestCase
         $wallabagV1Import = $this->getWallabagV1Import();
         $wallabagV1Import->setFilepath(__DIR__ . '/../fixtures/wallabag-v1.json');
 
-        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+        $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -159,7 +166,7 @@ class WallabagV1ImportTest extends TestCase
             ->expects($this->never())
             ->method('getRepository');
 
-        $entry = $this->getMockBuilder('Wallabag\CoreBundle\Entity\Entry')
+        $entry = $this->getMockBuilder(Entry::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -168,7 +175,7 @@ class WallabagV1ImportTest extends TestCase
             ->method('updateEntry');
 
         $factory = new RedisMockFactory();
-        $redisMock = $factory->getAdapter('Predis\Client', true);
+        $redisMock = $factory->getAdapter(Client::class, true);
 
         $queue = new RedisQueue($redisMock, 'wallabag_v1');
         $producer = new Producer($queue);
@@ -215,11 +222,11 @@ class WallabagV1ImportTest extends TestCase
     {
         $this->user = new User();
 
-        $this->em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        $this->em = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->uow = $this->getMockBuilder('Doctrine\ORM\UnitOfWork')
+        $this->uow = $this->getMockBuilder(UnitOfWork::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -233,15 +240,15 @@ class WallabagV1ImportTest extends TestCase
             ->method('getScheduledEntityInsertions')
             ->willReturn([]);
 
-        $this->contentProxy = $this->getMockBuilder('Wallabag\CoreBundle\Helper\ContentProxy')
+        $this->contentProxy = $this->getMockBuilder(ContentProxy::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->tagsAssigner = $this->getMockBuilder('Wallabag\CoreBundle\Helper\TagsAssigner')
+        $this->tagsAssigner = $this->getMockBuilder(TagsAssigner::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+        $dispatcher = $this->getMockBuilder(EventDispatcher::class)
             ->disableOriginalConstructor()
             ->getMock();
 

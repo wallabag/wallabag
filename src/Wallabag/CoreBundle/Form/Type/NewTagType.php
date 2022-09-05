@@ -7,6 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Wallabag\CoreBundle\Entity\Tag;
 
 class NewTagType extends AbstractType
 {
@@ -28,7 +29,7 @@ class NewTagType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Wallabag\CoreBundle\Entity\Tag',
+            'data_class' => Tag::class,
         ]);
     }
 

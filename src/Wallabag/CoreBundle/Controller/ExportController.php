@@ -4,6 +4,7 @@ namespace Wallabag\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -27,7 +28,7 @@ class ExportController extends Controller
      *     "id": "\d+"
      * })
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function downloadEntryAction(Entry $entry, $format)
     {
@@ -53,7 +54,7 @@ class ExportController extends Controller
      *     "category": "all|unread|starred|archive|tag_entries|untagged|search|annotated|same_domain"
      * })
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function downloadEntriesAction(Request $request, $format, $category)
     {

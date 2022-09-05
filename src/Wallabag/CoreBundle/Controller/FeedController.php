@@ -29,7 +29,7 @@ class FeedController extends Controller
      *
      * @param $page
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showUnreadFeedAction(User $user, $page)
     {
@@ -45,7 +45,7 @@ class FeedController extends Controller
      *
      * @param $page
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showArchiveFeedAction(User $user, $page)
     {
@@ -61,7 +61,7 @@ class FeedController extends Controller
      *
      * @param $page
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showStarredFeedAction(User $user, $page)
     {
@@ -75,7 +75,7 @@ class FeedController extends Controller
      *
      * @ParamConverter("user", class="Wallabag\UserBundle\Entity\User", converter="username_feed_token_converter")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showAllFeedAction(User $user, $page)
     {
@@ -90,7 +90,7 @@ class FeedController extends Controller
      * @ParamConverter("user", class="Wallabag\UserBundle\Entity\User", converter="username_feed_token_converter")
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showTagsFeedAction(Request $request, User $user, Tag $tag, $page)
     {
@@ -182,7 +182,7 @@ class FeedController extends Controller
      * @param string $type Entries type: unread, starred or archive
      * @param int    $page
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     private function showEntries($type, User $user, $page = 1)
     {

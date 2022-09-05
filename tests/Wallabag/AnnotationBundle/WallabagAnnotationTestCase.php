@@ -2,6 +2,8 @@
 
 namespace Tests\Wallabag\AnnotationBundle;
 
+use FOS\UserBundle\Model\UserInterface;
+use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -10,12 +12,12 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 abstract class WallabagAnnotationTestCase extends WebTestCase
 {
     /**
-     * @var \Symfony\Bundle\FrameworkBundle\Client
+     * @var Client
      */
     protected $client = null;
 
     /**
-     * @var \FOS\UserBundle\Model\UserInterface
+     * @var UserInterface
      */
     protected $user;
 
@@ -37,7 +39,7 @@ abstract class WallabagAnnotationTestCase extends WebTestCase
     }
 
     /**
-     * @return \Symfony\Bundle\FrameworkBundle\Client
+     * @return Client
      */
     protected function createAuthorizedClient()
     {

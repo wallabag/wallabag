@@ -122,7 +122,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
                 $this->getLoggedInUserId()
             );
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
+        $this->assertInstanceOf(Entry::class, $content);
 
         $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://www.liberation.fr is ok');
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.liberation.fr is ok');

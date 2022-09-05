@@ -3,6 +3,7 @@
 namespace Wallabag\CoreBundle\Controller;
 
 use Craue\ConfigBundle\Util\Config;
+use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\Persistence\ManagerRegistry;
 use FOS\UserBundle\Model\UserManagerInterface;
 use JMS\Serializer\SerializationContext;
@@ -565,7 +566,7 @@ class ConfigController extends Controller
             case 'entries':
                 // SQLite doesn't care about cascading remove, so we need to manually remove associated stuff
                 // otherwise they won't be removed ...
-                if ($this->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\SqlitePlatform) {
+                if ($this->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof SqlitePlatform) {
                     $this->getDoctrine()->getRepository(Annotation::class)->removeAllByUserId($this->getUser()->getId());
                 }
 
@@ -575,7 +576,7 @@ class ConfigController extends Controller
                 $this->get(EntryRepository::class)->removeAllByUserId($this->getUser()->getId());
                 break;
             case 'archived':
-                if ($this->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\SqlitePlatform) {
+                if ($this->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof SqlitePlatform) {
                     $this->removeAnnotationsForArchivedByUserId($this->getUser()->getId());
                 }
 
@@ -601,7 +602,7 @@ class ConfigController extends Controller
      *
      * @throws AccessDeniedHttpException
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAccountAction(Request $request)
     {
@@ -629,7 +630,7 @@ class ConfigController extends Controller
      *
      * @Route("/config/view-mode", name="switch_view_mode")
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function changeViewModeAction(Request $request)
     {
@@ -650,7 +651,7 @@ class ConfigController extends Controller
      *
      * @Route("/locale/{language}", name="changeLocale")
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function setLocaleAction(Request $request, $language = null)
     {

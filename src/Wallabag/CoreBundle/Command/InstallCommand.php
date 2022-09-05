@@ -3,6 +3,7 @@
 namespace Wallabag\CoreBundle\Command;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception\DriverException;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use FOS\UserBundle\Event\UserEvent;
@@ -384,7 +385,7 @@ class InstallCommand extends ContainerAwareCommand
 
         try {
             return \in_array($databaseName, $schemaManager->listDatabases(), true);
-        } catch (\Doctrine\DBAL\Exception\DriverException $e) {
+        } catch (DriverException $e) {
             // it means we weren't able to get database list, assume the database doesn't exist
 
             return false;

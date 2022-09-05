@@ -2,6 +2,7 @@
 
 namespace Tests\Wallabag\UserBundle\EventListener;
 
+use Doctrine\ORM\EntityManager;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
 use FOS\UserBundle\FOSUserEvents;
 use PHPUnit\Framework\TestCase;
@@ -25,7 +26,7 @@ class CreateConfigListenerTest extends TestCase
     protected function setUp(): void
     {
         $session = new Session(new MockArraySessionStorage());
-        $this->em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        $this->em = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
             ->getMock();
 

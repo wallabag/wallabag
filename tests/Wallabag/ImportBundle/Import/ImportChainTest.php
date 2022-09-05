@@ -4,12 +4,13 @@ namespace Tests\Wallabag\ImportBundle\Import;
 
 use PHPUnit\Framework\TestCase;
 use Wallabag\ImportBundle\Import\ImportChain;
+use Wallabag\ImportBundle\Import\ImportInterface;
 
 class ImportChainTest extends TestCase
 {
     public function testGetAll()
     {
-        $import = $this->getMockBuilder('Wallabag\ImportBundle\Import\ImportInterface')
+        $import = $this->getMockBuilder(ImportInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
