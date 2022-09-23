@@ -23,7 +23,7 @@ class TagRestController extends WallabagRestController
 
         $tags = $this->getDoctrine()
             ->getRepository('WallabagCoreBundle:Tag')
-            ->findAllTags($this->getUser()->getId());
+            ->findAllFlatTagsWithNbEntries($this->getUser()->getId());
 
         $json = $this->get('jms_serializer')->serialize($tags, 'json');
 
