@@ -202,7 +202,7 @@ class DownloadImagesTest extends TestCase
         $this->assertFalse($res);
     }
 
-    public function testEnsureOnlyFirstOccurenceIsReplaced()
+    public function testEnsureOnlyFirstOccurrenceIsReplaced()
     {
         $httpMockClient = new HttpMockClient();
         $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/png'], file_get_contents(__DIR__ . '/../fixtures/unnamed.png')));

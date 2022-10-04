@@ -33,7 +33,7 @@ class CryptoProxy
     /**
      * Ensure the given value will be crypted.
      *
-     * @param string $secretValue Secret valye to crypt
+     * @param string $secretValue Secret value to crypt
      *
      * @return string
      */
