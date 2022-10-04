@@ -10,7 +10,7 @@ use Wallabag\UserBundle\Entity\User;
  * This class intend to detect the active theme for the logged in user.
  * It will retrieve the configured theme of the user.
  *
- * If no user where logged in, it will returne the default theme
+ * If no user where logged in, it will return the default theme
  */
 class DetectActiveTheme implements DeviceDetectionInterface
 {

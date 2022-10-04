@@ -167,7 +167,7 @@ class EntriesExport
 
         $book->setAuthor($this->author, $this->author);
 
-        // I hope this is a non existant address :)
+        // I hope this is a non-existent address :)
         $book->setPublisher('wallabag', 'wallabag');
         // Strictly not needed as the book date defaults to time().
         $book->setDate(time());
