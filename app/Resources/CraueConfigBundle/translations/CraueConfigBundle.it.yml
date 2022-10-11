@@ -1,18 +1,18 @@
 download_pictures: Scarica le immagini sul tuo server
-carrot: Abilita la condivisione con Carrot
+carrot: Abilita condivisione con Carrot
 diaspora_url: URL di diaspora*, se il servizio è abilitato
 export_epub: Abilita esportazione ePub
-export_mobi: Abilita esportazione .mobi
+export_mobi: Abilita esportazione .mobi (deprecato, verrà rimosso presto)
 export_pdf: Abilita esportazione PDF
 export_csv: Abilita esportazione CSV
 export_json: Abilita esportazione JSON
 export_txt: Abilita esportazione TXT
 export_xml: Abilita esportazione XML
-shaarli_url: Shaarli URL, se il servizio è abilitato
-scuttle_url: Scuttle URL, se il servizio è abilitato
-unmark_url: Unmark URL, se il servizio è abilitato
+shaarli_url: URL Shaarli, se il servizio è abilitato
+scuttle_url: URL Scuttle, se il servizio è abilitato
+unmark_url: URL Unmark, se il servizio è abilitato
 share_diaspora: Abilita la condivisione con diaspora*
-share_mail: Abilita la condivisione per e-mail
+share_mail: Abilita la condivisione via e-mail
 share_shaarli: Abilita la condivisione con Shaarli
 share_scuttle: Abilita la condivisione con Scuttle
 share_twitter: Abilita la condivisione con Twitter
