@@ -113,6 +113,7 @@ class EntryRestController extends WallabagRestController
      *          {"name"="since", "dataType"="integer", "required"=false, "format"="default '0'", "description"="The timestamp since when you want entries updated."},
      *          {"name"="public", "dataType"="integer", "required"=false, "format"="1 or 0, all entries by default", "description"="filter by entries with a public link"},
      *          {"name"="detail", "dataType"="string", "required"=false, "format"="metadata or full, metadata by default", "description"="include content field if 'full'. 'full' by default for backward compatibility."},
+     *          {"name"="domain_name", "dataType"="string", "required"=false, "format"="example.com", "description"="filter entries with the given domain name"},
      *       }
      * )
      *
@@ -132,6 +133,7 @@ class EntryRestController extends WallabagRestController
         $tags = \is_array($request->query->get('tags')) ? '' : (string) $request->query->get('tags', '');
         $since = $request->query->get('since', 0);
         $detail = strtolower($request->query->get('detail', 'full'));
+        $domainName = (null === $request->query->get('domain_name')) ? '' : (string) $request->query->get('domain_name');
 
         try {
             /** @var \Pagerfanta\Pagerfanta $pager */
@@ -144,7 +146,8 @@ class EntryRestController extends WallabagRestController
                 $order,
                 $since,
                 $tags,
-                $detail
+                $detail,
+                $domainName
             );
         } catch (\Exception $e) {
             throw new BadRequestHttpException($e->getMessage());
