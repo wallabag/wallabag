@@ -3,7 +3,7 @@ download_pictures: サーバー上の画像をダウンロード
 carrot: Carrot への共有を有効にする
 diaspora_url: diaspora* URL、サービスが有効になっている場合
 export_epub: ePub のエクスポートを有効にする
-export_mobi: .mobi のエクスポートを有効にする
+export_mobi: .mobi のエクスポートを有効にする（非推奨、近日中に削除されます）
 export_pdf: PDF のエクスポートを有効にする
 export_csv: CSV のエクスポートを有効にする
 export_json: JSON のエクスポートを有効にする
