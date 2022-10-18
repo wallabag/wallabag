@@ -2,6 +2,7 @@
 
 namespace Wallabag\CoreBundle\Helper;
 
+use enshrined\svgSanitize\Sanitizer;
 use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\Psr7\UriResolver;
 use Http\Client\Common\HttpMethodsClient;
@@ -146,6 +147,32 @@ class DownloadImages
 
         $hashImage = hash('crc32', $absolutePath);
         $localPath = $folderPath . '/' . $hashImage . '.' . $ext;
+        $urlPath = $this->wallabagUrl . '/assets/images/' . $relativePath . '/' . $hashImage . '.' . $ext;
+
+        // custom case for SVG (because GD doesn't support SVG)
+        if ('svg' === $ext) {
+            try {
+                $sanitizer = new Sanitizer();
+                $sanitizer->minify(true);
+                $sanitizer->removeRemoteReferences(true);
+                $cleanSVG = $sanitizer->sanitize((string) $res->getBody());
+
+                // add an extra validation by checking about `<svg `
+                if (false === $cleanSVG || false === strpos($cleanSVG, '<svg ')) {
+                    $this->logger->error('DownloadImages: Bad SVG given', ['path' => $imagePath]);
+
+                    return false;
+                }
+
+                file_put_contents($localPath, $cleanSVG);
+
+                return $urlPath;
+            } catch (\Exception $e) {
+                $this->logger->error('DownloadImages: Error while sanitize SVG', ['path' => $imagePath, 'message' => $e->getMessage()]);
+
+                return false;
+            }
+        }
 
         try {
             $im = imagecreatefromstring((string) $res->getBody());
@@ -196,7 +223,7 @@ class DownloadImages
 
         imagedestroy($im);
 
-        return $this->wallabagUrl . '/assets/images/' . $relativePath . '/' . $hashImage . '.' . $ext;
+        return $urlPath;
     }
 
     /**
@@ -351,7 +378,7 @@ class DownloadImages
             $this->logger->debug('DownloadImages: Checking extension (alternative)', ['ext' => $ext]);
         }
 
-        if (!\in_array($ext, ['jpeg', 'jpg', 'gif', 'png', 'webp'], true)) {
+        if (!\in_array($ext, ['jpeg', 'jpg', 'gif', 'png', 'webp', 'svg'], true)) {
             $this->logger->error('DownloadImages: Processed image with not allowed extension. Skipping: ' . $imagePath);
 
             return false;

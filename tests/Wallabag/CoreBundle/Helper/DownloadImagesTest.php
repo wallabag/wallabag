@@ -220,4 +220,32 @@ class DownloadImagesTest extends TestCase
 
         $this->assertSame('<img src="http://wallabag.io/assets/images/9/b/9b0ead26/6bef06fe.png" srcset="http://wallabag.io/assets/images/9/b/9b0ead26/43cc0123.png 1290w" height="573" width="860" alt="" referrerpolicy="no-referrer">', $res);
     }
+
+    public function testProcessSingleImageWithSvg()
+    {
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/svg+xml'], file_get_contents(__DIR__ . '/../fixtures/modal-content.svg')));
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', [$logHandler]);
+
+        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $res = $download->processSingleImage(123, 'modal-content.svg', 'http://imgur.com/gallery/WxtWY');
+
+        $this->assertStringContainsString('/assets/images/9/b/9b0ead26/400e29f9.svg', $res);
+    }
+
+    public function testProcessSingleImageWithBadSvg()
+    {
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/svg+xml'], file_get_contents(__DIR__ . '/../fixtures/unnamed.png')));
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', [$logHandler]);
+
+        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $res = $download->processSingleImage(123, 'modal-content.svg', 'http://imgur.com/gallery/WxtWY');
+
+        $this->assertFalse($res);
+    }
 }
