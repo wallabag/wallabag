@@ -26,7 +26,7 @@ menu:
         howto: Come fare
         developer: Gestione client API
         logout: Esci
-        about: A proposito
+        about: Informazioni
         search: Cerca
         save_link: Salva collegamento
         back_to_unread: Torna ai contenuti non letti
@@ -37,6 +37,7 @@ menu:
         theme_toggle_auto: Tema automatico
         theme_toggle_dark: Tema scuro
         theme_toggle_light: Tema chiaro
+        with_annotations: Con annotazioni
     top:
         add_new_entry: Aggiungi un nuovo contenuto
         search: Cerca

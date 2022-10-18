@@ -204,12 +204,13 @@ class EntryRepository extends ServiceEntityRepository
      * @param int    $since
      * @param string $tags
      * @param string $detail     'metadata' or 'full'. Include content field if 'full'
+     * @param string $domainName
      *
      * @todo Breaking change: replace default detail=full by detail=metadata in a future version
      *
      * @return Pagerfanta
      */
-    public function findEntries($userId, $isArchived = null, $isStarred = null, $isPublic = null, $sort = 'created', $order = 'asc', $since = 0, $tags = '', $detail = 'full')
+    public function findEntries($userId, $isArchived = null, $isStarred = null, $isPublic = null, $sort = 'created', $order = 'asc', $since = 0, $tags = '', $detail = 'full', $domainName = '')
     {
         if (!\in_array(strtolower($detail), ['full', 'metadata'], true)) {
             throw new \Exception('Detail "' . $detail . '" parameter is wrong, allowed: full or metadata');
@@ -248,7 +249,7 @@ class EntryRepository extends ServiceEntityRepository
                 $entryAlias = 'e' . $i;
                 $tagAlias = 't' . $i;
 
-                // Complexe queries to ensure multiple tags are associated to an entry
+                // Complex queries to ensure multiple tags are associated to an entry
                 // https://stackoverflow.com/a/6638146/569101
                 $qb->andWhere($qb->expr()->in(
                     'e.id',
@@ -262,6 +263,10 @@ class EntryRepository extends ServiceEntityRepository
                 // bound parameter to the main query builder
                 $qb->setParameter('label' . $i, $tag);
             }
+        }
+
+        if (\is_string($domainName) && '' !== $domainName) {
+            $qb->andWhere('e.domainName = :domainName')->setParameter('domainName', $domainName);
         }
 
         if (!\in_array(strtolower($order), ['asc', 'desc'], true)) {

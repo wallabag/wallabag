@@ -16,14 +16,14 @@ security:
 menu:
     left:
         unread: Nieprzeczytane
-        starred: Oznaczone gwiazdką
+        starred: Wyróżnione
         archive: Archiwum
         all_articles: Wszystkie
         config: Konfiguracja
         tags: Tagi
         internal_settings: Wewnętrzne ustawienia
         import: Importuj
-        howto: How to
+        howto: Jak to zrobić
         developer: Zarządzanie klientami API
         logout: Wyloguj
         about: O nas
@@ -33,10 +33,11 @@ menu:
         users_management: Zarządzanie użytkownikami
         site_credentials: Poświadczenia strony
         quickstart: Szybki start
-        ignore_origin_instance_rules: Ignoruj globalne zasady pochodzenia
+        ignore_origin_instance_rules: Globalne zasady ignorowania pochodzenia
         theme_toggle_auto: Automatyczny motyw
         theme_toggle_dark: Ciemny motyw
         theme_toggle_light: Jasny motyw
+        with_annotations: Z adnotacjami
     top:
         add_new_entry: Dodaj nowy wpis
         search: Szukaj
@@ -63,13 +64,13 @@ config:
         rules: Zasady tagowania
         new_user: Dodaj użytkownika
         reset: Zresetuj obszar
-        ignore_origin: Ignoruj zasady pochodzenia
+        ignore_origin: Zasady ignorowania pochodzenia
         feed: Źródła
     form:
         save: Zapisz
     form_settings:
         theme_label: Temat
-        items_per_page_label: Ilość elementów na stronie
+        items_per_page_label: Liczba elementów na stronie
         language_label: Język
         reading_speed:
             label: Prędkość czytania
@@ -86,8 +87,8 @@ config:
         android_configuration: Skonfiguruj swoją androidową aplikację
         android_instruction: Dotknij tutaj, aby wstępnie uzupełnij androidową aplikację
         help_theme: Dopasuj wallabag do swoich potrzeb. Tutaj możesz wybrać preferowany przez ciebie motyw.
-        help_items_per_page: Możesz zmienić ilość artykułów wyświetlanych na każdej stronie.
-        help_reading_speed: wallabag oblicza czas czytania każdego artykułu. Dzięki tej liście możesz określić swoje tempo. Wallabag przeliczy ponownie czas potrzebny, na przeczytanie każdego z artykułów.
+        help_items_per_page: Możesz zmienić liczbę artykułów wyświetlanych na każdej stronie.
+        help_reading_speed: wallabag oblicza czas czytania każdego artykułu. Możesz tutaj określić, dzięki tej liście, czy jesteś szybkim czy powolnym czytelnikiem. wallabag przeliczy czas czytania każdego artykułu.
         help_language: Możesz zmienić język interfejsu wallabag.
         help_pocket_consumer_key: Wymagane dla importu z Pocket. Możesz go stworzyć na swoim koncie Pocket.
     form_rss:
@@ -106,32 +107,32 @@ config:
     form_user:
         two_factor_description: Włączenie autoryzacji dwuetapowej oznacza, że będziesz otrzymywał maile z kodem przy każdym nowym, niezaufanym połączeniu.
         name_label: Nazwa
-        email_label: Adres email
+        email_label: Adres e-mail
         twoFactorAuthentication_label: Autoryzacja dwuetapowa
         help_twoFactorAuthentication: Jeżeli włączysz autoryzację dwuetapową. Za każdym razem, kiedy będziesz chciał się zalogować, dostaniesz kod na swój e-mail.
         delete:
-            title: Usuń moje konto (niebezpieczna strefa !)
+            title: Usuń moje konto (niebezpieczna strefa!)
             description: Jeżeli usuniesz swoje konto, wszystkie twoje artykuły, tagi, adnotacje, oraz konto zostaną trwale usunięte (operacja jest NIEODWRACALNA). Następnie zostaniesz wylogowany.
             confirm: Jesteś pewien? (tej operacji NIE MOŻNA cofnąć)
             button: Usuń moje konto
         two_factor:
             action_app: Użyj aplikacji do jednorazowych kodów
-            action_email: Użyj e-mail’a
+            action_email: Użyj e-maila
             state_disabled: Wyłączone
             state_enabled: Włączone
             table_action: Akcja
             table_state: Stan
             table_method: Metoda
             googleTwoFactor_label: Używając aplikacji do jednorazowych kodów logowania (uruchom aplikacje w stylu Google Authenticator, Authy lub FreeOTP by uzyskać kod)
-            emailTwoFactor_label: Używając email’a (otrzymasz kod na podany adres)
+            emailTwoFactor_label: Używając e-maila (otrzymasz kod na podany adres)
         login_label: Login (nie może zostać później zmieniony)
     reset:
         title: Reset (niebezpieczna strefa)
         description: Poniższe przyciski pozwalają usunąć pewne informacje z twojego konta. Uważaj te operacje są NIEODWRACALNE.
         annotations: Usuń WSZYSTKIE adnotacje
         tags: Usuń WSZYSTKIE tagi
-        entries: usuń WSZYTSTKIE wpisy
-        archived: usuń WSZYSTKIE zarchiwizowane wpisy
+        entries: Usuń WSZYTSTKIE wpisy
+        archived: Usuń WSZYSTKIE zarchiwizowane wpisy
         confirm: Jesteś pewien? (tej operacji NIE MOŻNA cofnąć)
     form_password:
         description: Tutaj możesz zmienić swoje hasło. Twoje nowe hasło powinno mieć conajmniej 8 znaków.
@@ -143,7 +144,7 @@ config:
         then_tag_as_label: wtedy otaguj jako
         delete_rule_label: usuń
         edit_rule_label: edytuj
-        rule_label: Reguła
+        rule_label: Zasada
         tags_label: Tagi
         faq:
             title: FAQ
@@ -162,7 +163,7 @@ config:
                 isStarred: Czy wpis został oznaczony gwiazdką czy nie
                 content: Zawartość wpisu
                 language: Język wpisu
-                mimetype: Mime-type wpisu
+                mimetype: Typ mediów wpisu
                 readingTime: Szacunkowy czas czytania wpisu w minutach
                 domainName: Nazwa domeny wpisu
             operator_description:
@@ -179,7 +180,7 @@ config:
                 notmatches: 'Sprawdź czy <i>temat</i> nie zawiera <i>szukaj</i> (duże lub małe litery).<br />Przykład: <code>tytuł nie zawiera "piłka nożna"</code>'
         card:
             export_tagging_rules_detail: Pobierz plik JSON z ustawieniami tagowania.
-            import_tagging_rules_detail: Musisz zaznaczyć plik z rozszerzeniem JSON który wcześniej zapisałeś.
+            import_tagging_rules_detail: Musisz wybrać wcześniej wyeksportowany plik JSON.
             export_tagging_rules: Eksportuj/zapisz plik z zasadami tagowania
             import_tagging_rules: Importuj zasady tagowania
             new_tagging_rule: Utwórz zasadę oznaczania tagami
@@ -187,33 +188,61 @@ config:
         file_label: Plik JSON
         export: Eksportuj
     form_feed:
-        description: Lista artykułów Atom pozwala czytać zapisane artykuły w twoim ulubionym programie. Musisz najpierw wygenerować token Atom’a.
+        description: Kanały Atom dostarczane przez wallabag umożliwiają czytanie zapisanych artykułów za pomocą ulubionego czytnika Atom. Musisz najpierw wygenerować token.
         feed_limit: Liczba artykułów w aktualnościach
         feed_link:
             all: Wszystko
             archive: Zarchiwizowane
             starred: Wyróżnione
-            unread: Nieodczytane
+            unread: Nieprzeczytane
         feed_links: Linki do aktualności
         token_revoke: Anuluj token
         token_reset: Stwórz ponownie token
         token_create: Stwórz swój token
-        no_token: Brak token’a
+        no_token: Brak tokena
         token_label: Token listy
     form_ignore_origin_rules:
         faq:
             title: FAQ
+            meaning: Znaczenie
+            variable_description:
+                label: Zmienna
+                host: Host adresu
+                _all: Pełny adres, głównie do dopasowywania wzorów
+            ignore_origin_rules_definition_title: Co oznacza "Ignoruj zasady pochodzenia"?
+            how_to_use_them_description: Załóżmy, że chcesz zignorować pochodzenie wpisu pochodzącego z « <i>rss.example.com</i> » (<i>wiedząc, że po przekierowaniu faktyczny adres to example.com</i>).<br />W takim przypadku należy umieścić « host = "rss.example.com" » w polu <i>Reguła</i>.
+            variables_available_title: Jakich zmiennych i operatorów mogę użyć przy pisaniu reguł?
+            operator_description:
+                matches: 'Sprawdza, czy <i>temat</i> pasuje do <i>wyszukiwania</i> (wielkość liter nie ma znaczenia).<br />Przykład: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
+                label: Operator
+                equal_to: Równe…
+            ignore_origin_rules_definition_description: Są one używane przez wallabag do automatycznego ignorowania adresu źródłowego po przekierowaniu.<br />Jeśli przekierowanie nastąpi podczas pobierania nowego wpisu, wszystkie reguły ignorowania pochodzenia (<i>zdefiniowane przez użytkownika i zdefiniowane przez instancję</i>) zostaną użyte do zignorowania adresu pochodzenia.
+            how_to_use_them_title: Jak ich użyć?
+            variables_available_description: 'Następujące zmienne i operatory mogą być użyte do tworzenia reguł ignorowania pochodzenia:'
+    otp:
+        app:
+            enable: Włącz
+            two_factor_code_description_5: 'Jeśli nie widzisz kodu QR lub nie możesz go zeskanować, wprowadź następujący sekret w swojej aplikacji:'
+            two_factor_code_description_4: 'Przetestuj kod OTP ze skonfigurowanej aplikacji:'
+            cancel: Anuluj
+            qrcode_label: Kod QR
+            two_factor_code_description_1: Właśnie włączono uwierzytelnianie dwuskładnikowe OTP, otwórz aplikację OTP i użyj tego kodu, aby uzyskać jednorazowe hasło. Zniknie po przeładowaniu strony.
+            two_factor_code_description_2: 'Możesz zeskanować ten kod QR za pomocą swojej aplikacji:'
+            two_factor_code_description_3: 'Zapisz też te kody zapasowe w bezpiecznym miejscu, możesz ich użyć w przypadku utraty dostępu do aplikacji OTP:'
+        page_title: Uwierzytelnianie dwuskładnikowe
 entry:
     default_title: Tytuł wpisu
     page_titles:
         unread: Nieprzeczytane wpisy
-        starred: Wpisy oznaczone gwiazdką
+        starred: Wpisy wyróżnione
         archived: Zarchiwizowane wpisy
         filtered: Odfiltrowane wpisy
         filtered_tags: 'Filtrowane po tagach:'
         filtered_search: 'Filtrowanie po wyszukiwaniu:'
         untagged: Odtaguj wpisy
         all: Wszystkie przedmioty
+        with_annotations: Wpisy z adnotacjami
+        same_domain: Ta sama domena
     list:
         number_on_the_page: '{0} Nie ma wpisów.|{1} Jest jeden wpis.|]1,Inf[ Są %count% wpisy.'
         reading_time: szacunkowy czas czytania
@@ -224,14 +253,16 @@ entry:
         reading_time_less_one_minute_short: '&lt; 1 min'
         original_article: oryginał
         toogle_as_read: Oznacz jako przeczytane
-        toogle_as_star: Oznacz jako ulubione
+        toogle_as_star: Przełącz wyróżnienie
         delete: Usuń
-        export_title: Export
+        export_title: Eksportuj
+        show_same_domain: Pokaż artykuły z tej samej domeny
+        assign_search_tag: Przypisz to wyszukiwanie jako tag do każdego wyniku
     filters:
         title: Filtry
         status_label: Status
         archived_label: Zarchiwizowane
-        starred_label: Oznaczone gwiazdką
+        starred_label: Wyróżnione
         unread_label: Nieprzeczytane
         preview_picture_label: Posiada podgląd obrazu
         preview_picture_help: Podgląd obrazu
@@ -251,26 +282,31 @@ entry:
         action:
             clear: Wyczyść
             filter: Filtruj
+        annotated_label: Z adnotacjami
     view:
         left_menu:
             back_to_top: Wróć na górę
             back_to_homepage: Cofnij
             set_as_read: Oznacz jako przeczytane
             set_as_unread: Oznacz jako nieprzeczytane
-            set_as_starred: Ulubione
+            set_as_starred: Przełącz wyróżnienie
             view_original_article: Oryginalny artykuł
             re_fetch_content: Pobierz ponownie treść
             delete: Usuń
             add_a_tag: Dodaj tag
             share_content: Udostępnij
-            share_email_label: Adres email
+            share_email_label: Adres e-mail
             public_link: Publiczny link
             delete_public_link: Usuń publiczny link
-            export: Export
+            export: Eksportuj
             print: Drukuj
             problem:
                 label: Problemy?
                 description: Czy ten artykuł wygląda źle?
+            theme_toggle: Przełącznik motywu
+            theme_toggle_light: Jasny
+            theme_toggle_dark: Ciemny
+            theme_toggle_auto: Automatyczny
         edit_title: Edytuj tytuł
         original_article: oryginalny
         annotations_on_the_entry: '{0} Nie ma adnotacji |{1} Jedna adnotacja |]1,Inf[ %count% adnotacji'
@@ -282,25 +318,26 @@ entry:
         page_title: Zapisz nowy wpis
         placeholder: http://website.com
         form_new:
-            url_label: Url
+            url_label: Adres URL
     search:
         placeholder: Czego szukasz?
     edit:
         page_title: Edytuj wpis
         title_label: Tytuł
         url_label: Adres URL
-        origin_url_label: Oryginalny url (gdzie znalazłeś ten wpis)
+        origin_url_label: Oryginalny adres URL (gdzie znaleziono ten wpis)
         save_label: Zapisz
     public:
         shared_by_wallabag: Ten artykuł został udostępniony przez <a href='%wallabag_instance%'>wallabag</a>
     confirm:
         delete: Czy jesteś pewien, że chcesz usunąć ten artykuł?
-        delete_tag: Czy jesteś pewien, że chcesz usunąć ten tag, z tego artykułu?
+        delete_tag: Czy jesteś pewien, że chcesz usunąć ten tag z tego artykułu?
     metadata:
         reading_time: Szacowany czas czytania
         reading_time_minutes_short: '%readingTime% min'
         address: Adres
         added_on: Dodano
+        published_on: Opublikowano dnia
 about:
     page_title: O nas
     top_menu:
@@ -308,7 +345,7 @@ about:
         getting_help: Pomoc
         helping: Pomóż wallabagowi
         contributors: Osoby, które pomogły przy projekcie
-        third_party: Biblioteki Third-party
+        third_party: Biblioteki zewnętrzne
     who_behind_wallabag:
         developped_by: Stworzony przez
         website: strona internetowa
@@ -328,11 +365,11 @@ about:
     contributors:
         description: Podziękuj osobą, które przyczyniły się do projektu przez aplikację webową
     third_party:
-        description: 'Tutaj znajduje się lista Third-party bibliotek użytych w wallabag (z ich licencjami):'
+        description: 'Tutaj znajduje się lista bibliotek zewnętrznych użytych w wallabag (z ich licencjami):'
         package: Paczka
         license: Licencja
 howto:
-    page_title: How to
+    page_title: Jak to zrobić
     page_description: 'Sposoby zapisania artykułu:'
     tab_menu:
         add_link: Dodaj link
@@ -361,14 +398,14 @@ howto:
         action: Akcja
         all_pages_title: Skróty dostępne na wszystkich stronach
         go_unread: Idź do nieprzeczytanych
-        go_starred: Idź do oznaczonych gwiazdką
+        go_starred: Idź do wyróżnionych
         go_archive: Idź do archiwum
         go_all: Idź do wszystkich wpisów
         go_tags: Idź do tagów
         go_config: Idź do konfiguracji
         go_import: Idź do importu
         go_developers: Idź do deweloperów
-        go_howto: Idź do howto (tej strony!)
+        go_howto: Idź do jak to zrobić (tej strony!)
         go_logout: Wyloguj
         list_title: Skróty dostępne w spisie stron
         search: Pokaż formularz wyszukiwania
@@ -395,9 +432,10 @@ quickstart:
         language: Zmień język i wygląd
         rss: Włącz kanały RSS
         tagging_rules: Napisz reguły pozwalające na automatyczne otagowanie twoich artykułów
+        feed: Włącz kanały
     admin:
         title: Administracja
-        description: 'Jako administrator wallabag, możesz:'
+        description: 'Jako administrator masz uprawnienia w wallabag. Możesz:'
         new_user: Tworzyć nowego użytkownika
         analytics: Konfigurować analityki
         sharing: Włączyć pewne parametry dotyczące udostępniania artykułów
@@ -405,11 +443,11 @@ quickstart:
         import: Skonfigurować import
     first_steps:
         title: Pierwsze kroki
-        description: Teraz wallabag jest poprawnie skonfigurowany, więc czas zarchiwizować Internet. Kliknij w prawym górnym rogu na znak +, aby dodać link.
+        description: Teraz wallabag jest poprawnie skonfigurowany, więc czas zarchiwizować Internet. Kliknij w prawym górnym rogu znak +, aby dodać link.
         new_article: Zapisz swój pierwszy artukuł
         unread_articles: I sklasyfikuj go!
     migrate:
-        title: Migruj w istniejącej usługi
+        title: Migruj z istniejącej usługi
         description: Używasz innej usługi? Pomożemy ci pobrać twoje dane do wallabag.
         pocket: Migruj z Pocket
         wallabag_v1: Migruj z wallabag v1
@@ -422,8 +460,8 @@ quickstart:
         create_application: Stwórz swoją aplikację
         use_docker: Użyj Dockera aby zainstalować wallabag
     docs:
-        title: Pełna Dokumentacja
-        description: Wallabag powiada wiele funkcji. Nie wahaj się przeczytać instrukcji, aby je poznać i nauczyć się jak ich używać.
+        title: Pełna dokumentacja
+        description: wallabag ma wiele funkcji. Nie wahaj się przeczytać instrukcji, aby je poznać i nauczyć się z nich korzystać.
         annotate: Dadaj adnotację do swojego artykułu
         export: Konwertuj swoje artykuły do ePUB lub PDF
         search_filters: Zabacz jak możesz znaleźć artykuł dzięku użyciu silnika wyszukiwarki i filtrów
@@ -433,7 +471,7 @@ quickstart:
         title: Wsparcie
         description: Jeżeli potrzebujesz pomocy, jesteśmy tutaj dla ciebie.
         github: na GitHubie
-        email: przez email
+        email: przez e-mail
         gitter: na Gitterze
 tag:
     page_title: Tagi
@@ -441,6 +479,7 @@ tag:
         number_on_the_page: '{0} Nie ma tagów.|{1} Jest jeden tag.|]1,Inf[ Są %count% tagi.'
         see_untagged_entries: Zobacz nieotagowane wpisy
         untagged: Odtaguj wpisy
+        no_untagged_entries: Nie ma nieoznaczonych wpisów.
     new:
         add: Dodaj
         placeholder: Możesz dodać kilka tagów, oddzielając je przecinkami.
@@ -448,35 +487,35 @@ export:
     footer_template: <div style="text-align:center;"><p>Stworzone przez wallabag z %method%</p><p>Proszę zgłoś <a href="https://github.com/wallabag/wallabag/issues">sprawę</a>, jeżeli masz problem z wyświetleniem tego e-booka na swoim urządzeniu.</p></div>
     unknown: Nieznany
 import:
-    page_title: Import
-    page_description: Witaj w importerze Wallabag. Wybierz swoją poprzednią usługę, z której chcesz migrować.
+    page_title: Importuj
+    page_description: Witaj w importerze wallabag. Wybierz swoją poprzednią usługę, z której chcesz migrować.
     action:
         import_contents: Import zawartości
     form:
         mark_as_read_title: Oznaczyć wszystkie jako przeczytane?
         mark_as_read_label: Oznacz wszystkie zaimportowane wpisy jako przeczytane
         file_label: Plik
-        save_label: Właduj plik
+        save_label: Prześlij plik
     pocket:
         page_title: Importuj > Pocket
         description: Ten importer, zaimportuje dane z usługi Pocket. Pocket nie pozwala na nam na pobranie zawartości ze swojej usługi, więc kontent każdego artykułu zostanie ponownie pobrany przez wallabag.
         config_missing:
             description: Import z Pocket nie jest skonfigurowany.
             admin_message: Musisz zdefiniować %keyurls%a pocket_consumer_key%keyurle%.
-            user_message: Admin twojego servera musi zdefiniować API Key dla Pocket.
-        authorize_message: Możesz zaimportować dane ze swojego konta Pocket. Kliknij poniższy przycisk i autoryzuj aplikacje aby połączyć się z getpocket.com.
+            user_message: Administrator serwera musi zdefiniować klucz API dla Pocket.
+        authorize_message: Możesz zaimportować swoje dane z konta Pocket. Wystarczy, że klikniesz w poniższy przycisk i autoryzujesz aplikację do połączenia z getpocket.com.
         connect_to_pocket: Połącz z Pocket i importuj dane
     wallabag_v1:
         page_title: Importuj > Wallabag v1
         description: Ten importer, zaimportuje wszystkie twoje artykułu z wallabag v1. Na swojej stronie konfiguracyjnej kliknij "JSON eksport" w sekcji "Eksportuj swoje dane wallabag". Otrzymasz plik "wallabag-export-1-xxxx-xx-xx.json".
-        how_to: Wybierz swój plik eksportu z wallabag i kliknij poniższy przycisk, aby go załadować.
+        how_to: Wybierz swój plik eksportu z wallabag i kliknij przycisk poniżej, aby go przesłać i zaimportować.
     wallabag_v2:
         page_title: Importuj > Wallabag v2
         description: Ten importer, zaimportuje wszystkie twoje artykułu z wallabag v2. Idź do wszystkich artykułów, a następnie na panelu exportu kliknij na "JSON". Otrzymasz plik "All articles.json".
     readability:
         page_title: Importuj > Readability
         description: Ten importer, zaimportuje wszystkie twoje artykuły z Readability. Na stronie narzędzi (https://www.readability.com/tools/), kliknij na "Export your data" w sekcji "Data Export". Otrzymach email z plikiem JSON (plik nie będzie zawierał rozszerzenia .json).
-        how_to: Wybierz swój plik eksportu z Readability i kliknij poniższy przycisk, aby go załadować.
+        how_to: Wybierz swój plik eksportu z Readability i kliknij przycisk poniżej, aby go przesłać i zaimportować.
     worker:
         enabled: 'Import jest wykonywany asynchronicznie. Od momentu rozpoczęcia importu, zewnętrzna usługa może zajmować się na raz tylko jednym zadaniem. Bieżącą usługą jest:'
         download_images_warning: Włączyłeś pobieranie obrazów dla swoich artykułów. W połączeniu z klasycznym importem, może to zająć dużo czasu (lub zakończyć się niepowodzeniem).<strong>Zdecydowanie zalecamy</strong> włączenie asynchronicznego importu, w celu uniknięcia błędów.
@@ -491,11 +530,18 @@ import:
     instapaper:
         page_title: Importuj > Instapaper
         description: Ten importer, zaimportuje wszystkie twoje artykuły z Instapaper. W ustawieniach (https://www.instapaper.com/user), kliknij na "Download .CSV file" w sekcji "Export". Otrzymasz plik CSV.
-        how_to: Wybierz swój plik eksportu z Instapaper i kliknij poniższy przycisk, aby go załadować.
+        how_to: Wybierz swój plik eksportu z Instapaper i kliknij przycisk poniżej, aby go przesłać i zaimportować.
     pinboard:
         page_title: Importuj > Pinboard
         description: Ten importer, zaimportuje wszystkie twoje artykuły z Pinboard. W ustawieniach kopii zapasowej (https://pinboard.in/settings/backup), kliknij na "JSON" w sekcji "Bookmarks". Otrzymasz plik "pinboard_export".
-        how_to: Wybierz swój plik eksportu z Pinboard i kliknij poniższy przycisk, aby go załadować.
+        how_to: Wybierz swój plik eksportu z Pinboard i kliknij przycisk poniżej, aby go przesłać i zaimportować.
+    elcurator:
+        page_title: Importuj > elCurator
+        description: Ten importer zaimportuje wszystkie artykuły elCurator. Przejdź do swoich preferencji na koncie elCurator, a następnie wyeksportuj treści. Otrzymasz plik JSON.
+    delicious:
+        page_title: Importuj > del.icio.us
+        description: Ten importer zaimportuje wszystkie zakładki Delicious. Od 2021 r. możesz ponownie wyeksportować z niego swoje dane za pomocą strony eksportu (https://del.icio.us/export). Wybierz format "JSON" i pobierz go (np. "delicious_export.2021.02.06_21.10.json").
+        how_to: Wybierz plik eksportu Delicious i kliknij przycisk poniżej, aby go przesłać i zaimportować.
 developer:
     page_title: Zarządzanie klientami API
     welcome_message: Witaj w API wallabag
@@ -510,7 +556,7 @@ developer:
         title: Istniejący klienci
         field_id: ID klienta
         field_secret: Sekret klienta
-        field_uris: Przekieruj URIs
+        field_uris: Przekieruj identyfikatory URI
         field_grant_types: Przyznaj pozwolenie
         no_client: Nie ma jeszcze klienta.
     remove:
@@ -525,11 +571,12 @@ developer:
             redirect_uris_label: Przekieruj adresy URI
             save_label: Stwórz nowego klienta
         action_back: Cofnij
+        copy_to_clipboard: Kopiuj
     client_parameter:
         page_title: Zarządzanie klientami API > Parametry klienta
         page_description: Tutaj znajdują się parametry klienta.
         field_name: Nazwa klienta
-        field_id: Client ID
+        field_id: ID klienta
         field_secret: Sekret klienta
         back: Cofnij
         read_howto: Przeczytaj jak "Stworzyć moją pierwszą aplikację"
@@ -562,14 +609,16 @@ user:
         password_label: Hasło
         repeat_new_password_label: Powtórz nowe hasło
         plain_password_label: Jawne hasło
-        email_label: Adres email
+        email_label: Adres e-mail
         enabled_label: Włączony
         last_login_label: Ostatnie logowanie
         twofactor_label: Autoryzacja dwuetapowa
         save: Zapisz
         delete: Usuń
-        delete_confirm: Jesteś pewien?
+        delete_confirm: Czy na pewno?
         back_to_list: Powrót do listy
+        twofactor_google_label: Uwierzytelnianie dwuskładnikowe przez aplikację OTP
+        twofactor_email_label: Uwierzytelnianie dwuskładnikowe przez e-mail
     search:
         placeholder: Filtruj po nazwie użytkownika lub adresie e-mail
 site_credential:
@@ -589,7 +638,7 @@ site_credential:
         password_label: Hasło
         save: Zapisz
         delete: Usuń
-        delete_confirm: Jesteś pewien?
+        delete_confirm: Czy na pewno?
         back_to_list: Powrót do listy
 error:
     page_title: Wystąpił błąd
@@ -608,6 +657,15 @@ flashes:
             tags_reset: Zresetuj tagi
             entries_reset: Zresetuj wpisy
             archived_reset: Zarchiwizowane wpisy usunięte
+            feed_updated: Zaktualizowano informacje o kanale
+            feed_token_updated: Zaktualizowano token kanału
+            ignore_origin_rules_updated: Zaktualizowano zasadę ignorowania pochodzenia
+            otp_enabled: Włączono uwierzytelnianie dwuskładnikowe
+            tagging_rules_imported: Zaimportowano zasady tagowania
+            feed_token_revoked: Unieważniono token kanału
+            otp_disabled: Wyłączono uwierzytelnianie dwuskładnikowe
+            tagging_rules_not_imported: Błąd podczas importowania zasad tagowania
+            ignore_origin_rules_deleted: Usunięto zasadę ignorowania pochodzenia
     entry:
         notice:
             entry_already_saved: Wpis już został dodany %date%
@@ -618,12 +676,14 @@ flashes:
             entry_reloaded_failed: Wpis ponownie załadowany, ale wystąpił bład pobierania treści
             entry_archived: Wpis dodany do archiwum
             entry_unarchived: Wpis usunięty z archiwum
-            entry_starred: Wpis oznaczony gwiazdką
-            entry_unstarred: Wpis odznaczony gwiazdką
+            entry_starred: Wpis wyróżniony
+            entry_unstarred: Wpis bez wyróżnienia
             entry_deleted: Wpis usunięty
+            no_random_entry: Nie znaleziono artykułu spełniającego te kryteria
     tag:
         notice:
             tag_added: Tag dodany
+            tag_renamed: Zmieniono nazwę tagu
     import:
         notice:
             failed: Nieudany import, prosimy spróbować ponownie.
@@ -647,3 +707,25 @@ flashes:
             added: Poświadczenie dla "%host%" dodane
             updated: Poświadczenie dla "%host%" zaktualizowane
             deleted: Poświadczenie dla "%host%" usuniętę
+    ignore_origin_instance_rule:
+        notice:
+            added: Dodano globalną zasadę ignorowania pochodzenia
+            updated: Zaktualizowano globalną zasadę ignorowania pochodzenia
+            deleted: Usunięto globalną zasadę ignorowania pochodzenia
+ignore_origin_instance_rule:
+    page_title: Globalne zasady ignorowania pochodzenia
+    new_ignore_origin_instance_rule: Utwórz globalną zasadę ignorowania pochodzenia
+    edit_ignore_origin_instance_rule: Edytuj globalną zasadę ignorowania pochodzenia
+    form:
+        delete: Usuń
+        rule_label: Zasada
+        delete_confirm: Czy na pewno?
+        back_to_list: Powrót do listy
+        save: Zapisz
+    list:
+        create_new_one: Utwórz nową globalną zasadę ignorowania pochodzenia
+        yes: Tak
+        no: Nie
+        actions: Akcje
+        edit_action: Edytuj
+    description: Tutaj możesz zarządzać globalnymi zasadami ignorowania pochodzenia, używanymi do ignorowania niektórych wzorców oryginalnych adresów URL.

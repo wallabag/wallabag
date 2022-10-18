@@ -346,7 +346,7 @@ class ContentProxy
          * parse_url arrays.
          *
          * As array_diff_assoc only computes changes to go from the left array
-         * to the right one, we make two differents arrays to have both
+         * to the right one, we make two different arrays to have both
          * directions. We merge these two arrays and sort keys before passing
          * the result to the switch.
          *

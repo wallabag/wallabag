@@ -24,7 +24,7 @@ class TagRestController extends WallabagRestController
 
         $tags = $this->getDoctrine()
             ->getRepository(Tag::class)
-            ->findAllTags($this->getUser()->getId());
+            ->findAllFlatTagsWithNbEntries($this->getUser()->getId());
 
         $json = $this->get(SerializerInterface::class)->serialize($tags, 'json');
 

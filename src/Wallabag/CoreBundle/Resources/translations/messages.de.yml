@@ -508,14 +508,14 @@ import:
     wallabag_v1:
         page_title: Aus wallabag v1 importieren
         description: Dieser Import wird all deine Artikel aus wallabag v1 importieren. Klicke in der Konfigurationsseite auf "JSON-Export" im "wallabag-Daten exportieren"-Abschnitt. Du erhältst eine "wallabag-export-1-xxxx-xx-xx.json"-Datei.
-        how_to: Wähle die exportierte Datei aus und klicke den nachfolgenden Button, um diese hochzuladen und zu importieren.
+        how_to: Wähle die exportierte Datei aus und klicke auf den nachfolgenden Button, um diese hochzuladen und zu importieren.
     wallabag_v2:
         page_title: Aus wallabag v2 importieren
         description: Dieser Import wird all deine Artikel aus wallabag v2 importieren. Gehe auf "Alle Artikel" und dann, in der Exportieren-Seitenleiste auf "JSON". Dabei erhältst du eine "All articles.json"-Datei.
     readability:
         page_title: Aus Readability importieren
         description: Dieser Importer wird all deine Artikel aus Readability importieren. Auf der Werkzeugseite (https://www.readability.com/tools/) klickst du auf „Exportiere deine Daten“ in dem Abschnitt „Datenexport“. Du wirst eine E-Mail mit einem Herunterladenlink zu einer json Datei, die aber nicht auf .json endet, erhalten.
-        how_to: Bitte wähle deinen Readability Export aus und klicke den unteren Button für das Hochladen und Importieren dessen.
+        how_to: Bitte wähl deinen Readability-Export aus und klick den unteren Button für das Hochladen und Importieren dessen an.
     worker:
         enabled: 'Der Import erfolgt asynchron. Sobald der Import gestartet ist, wird diese Aufgabe extern abgearbeitet. Der aktuelle Service dafür ist:'
         download_images_warning: Du hast das Herunterladen von Bildern für deine Artikel aktiviert. Verbunden mit dem klassischen Import kann es ewig dauern fortzufahren (oder sogar fehlschlagen). Wir <strong>empfehlen</strong> den asynchronen Import zu aktivieren, um Fehler zu vermeiden.
@@ -530,11 +530,11 @@ import:
     instapaper:
         page_title: Aus Instapaper importieren
         description: Dieser Import wird all deine Instapaper Artikel importieren. Auf der Einstellungsseite (https://www.instapaper.com/user) klickst du auf "Download .CSV Datei" in dem Abschnitt "Export". Eine CSV Datei wird heruntergeladen (z.B. "instapaper-export.csv").
-        how_to: Bitte wähle deine Instapaper Sicherungsdatei aus und klicke den nachfolgenden Button zum Importieren.
+        how_to: Bitte wähle deine Instapaper-Sicherungsdatei aus und klicke auf den nachfolgenden Button zum Importieren.
     pinboard:
         page_title: Aus Pinboard importieren
         description: Dieser Import wird all deine Pinboard Artikel importieren. Auf der Seite Backup (https://pinboard.in/settings/backup) klickst du auf "JSON" in dem Abschnitt "Lesezeichen". Eine JSON Datei wird dann heruntergeladen (z.B. "pinboard_export").
-        how_to: Bitte wähle deinen Pinboard Export aus und klicke den nachfolgenden Button zum Importieren.
+        how_to: Bitte wähle deinen Pinboard-Export aus und klicke auf den nachfolgenden Button zum Importieren.
     elcurator:
         page_title: Importieren > elCurator
         description: Dieses Tool wird all deine ElCurator-Artikel importieren. Öffne die Einstellungen in deinem ElCurator-Konto und exportiere dort den Inhalt; du wirst eine JSON-Datei erhalten.

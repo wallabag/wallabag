@@ -1502,8 +1502,8 @@ class EntryControllerTest extends WallabagCoreTestCase
                 'pt_BR',
             ],
             'es-ES' => [
-                'https://www.20minutos.es/noticia/3360685/0/gobierno-sanchez-primero-historia-mas-mujeres-que-hombres/',
-                'es_ES',
+                'https://elpais.com/internacional/2022-10-09/ultima-hora-de-la-guerra-en-ucrania-hoy-en-directo.html',
+                'es',
             ],
         ];
     }

@@ -3,7 +3,7 @@ download_pictures: Pobierz obrazy na swój serwer
 carrot: Włącz udostępnianie dla Carrot
 diaspora_url: Adres URL Diaspora, jeżeli usługa jest włączona
 export_epub: Włącz eksport do ePub
-export_mobi: Włącz eksport do .mobi
+export_mobi: Włącz eksport do plików .mobi (przestarzałe, zostanie wkrótce usunięte)
 export_pdf: Włącz eksport do PDF
 export_csv: Włącz eksport do CSV
 export_json: Włącz eksport do JSON
@@ -29,13 +29,12 @@ modify_settings: zatwierdź
 matomo_host: Host twojej strony Matomo (bez http:// lub https://)
 matomo_site_id: ID twojej strony Matomo
 matomo_enabled: Włacz Matomo
-demo_mode_enabled: Włącz tryb demo? (używany wyłącznie dla publicznej demonstracji
-  Wallabag)
-demo_mode_username: Użytkownik Demonstracyjny
-share_public: Zezwalaj na publiczne adresy url dla wpisów
+demo_mode_enabled: Włączyć tryb demonstracyjny? (Używany wyłącznie do publicznej demonstracji wallabag)
+demo_mode_username: Użytkownik demonstracyjny
+share_public: Zezwalaj na publiczne adresy URL dla wpisów
 download_images_enabled: Pobierz obrazy lokalnie
 restricted_access: Włącz autoryzację dla stron za paywallem
 api_user_registration: Włącz rejestrację użytkownika przy użyciu API
 unmark_url: Odznacz URL, jeżeli usługa jest włączona
-store_article_headers: Włącz, jeżeli Wallabag zapisuje nagłówki HTTP dla każdego artykułu
-shaarli_share_origin_url: Włącz udostępnianie URL Shaarli, jeżeli usługa jest włączona
+store_article_headers: Włącz, jeżeli wallabag zapisuje nagłówki HTTP dla każdego artykułu
+shaarli_share_origin_url: Włącz udostępnianie oryginalnego adresu URL do Shaarli, jeśli usługa jest włączona

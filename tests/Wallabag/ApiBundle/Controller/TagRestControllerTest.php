@@ -22,14 +22,13 @@ class TagRestControllerTest extends WallabagApiTestCase
         $this->assertGreaterThan(0, $content);
         $this->assertArrayHasKey('id', $content[0]);
         $this->assertArrayHasKey('label', $content[0]);
+        $this->assertArrayHasKey('nbEntries', $content[0]);
 
         $tagLabels = array_map(function ($i) {
             return $i['label'];
         }, $content);
 
         $this->assertNotContains($this->otherUserTagLabel, $tagLabels, 'There is a possible tag leak');
-
-        return end($content);
     }
 
     public function testDeleteUserTag()

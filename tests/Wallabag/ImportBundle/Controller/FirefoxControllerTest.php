@@ -118,7 +118,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
-                'https://lexpansion.lexpress.fr/high-tech/orange-offre-un-meilleur-reseau-mobile-que-bouygues-et-sfr-free-derriere_1811554.html',
+                'https://www.20minutes.fr/sport/4002755-20220928-tarn-lapins-ravagent-terrain-match-rugby-doit-etre-annule',
                 $this->getLoggedInUserId()
             );
 
