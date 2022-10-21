@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.5.2](https://github.com/wallabag/wallabag/tree/2.5.2)
+   [Full Changelog](https://github.com/wallabag/wallabag/compare/2.5.1...2.5.2)
+
+### Fixes
+* Add `nbEntries` to the API tags list response by @j0k3r in https://github.com/wallabag/wallabag/pull/5984
+* Typofixes by @nexxai in https://github.com/wallabag/wallabag/pull/6004
+* Add `domain_name` to entries api endpoint by @yotamN in https://github.com/wallabag/wallabag/pull/6019
+* Add support to download SVG locally by @j0k3r in https://github.com/wallabag/wallabag/pull/5992
+
+### Meta
+* Automatically create the package after a release by @j0k3r in https://github.com/wallabag/wallabag/pull/5851
+* Add .gitattributes, exclude tests from archive by @iamvar in https://github.com/wallabag/wallabag/pull/5910
+* Allow auto merging of Dependabot JS minor or patch by @j0k3r in https://github.com/wallabag/wallabag/pull/6003
+* Fix random failing tests by @j0k3r in https://github.com/wallabag/wallabag/pull/6013
+
 ## [2.5.1](https://github.com/wallabag/wallabag/tree/2.5.1)
    [Full Changelog](https://github.com/wallabag/wallabag/compare/2.5.0...2.5.1)
 
