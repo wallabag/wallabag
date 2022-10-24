@@ -42,7 +42,7 @@
     "autoprefixer": "^10.4.12",
     "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
-    "eslint": "^8.25.0",
+    "eslint": "^8.26.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-webpack-plugin": "^3.2.0",
