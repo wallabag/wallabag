@@ -40,7 +40,7 @@
     "@babel/eslint-parser": "^7.19.1",
     "@babel/preset-env": "^7.19.4",
     "autoprefixer": "^10.4.13",
-    "babel-loader": "^8.2.5",
+    "babel-loader": "^9.0.0",
     "css-loader": "^6.7.1",
     "eslint": "^8.26.0",
     "eslint-config-airbnb-base": "^15.0.0",
