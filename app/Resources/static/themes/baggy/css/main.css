@@ -906,11 +906,6 @@ a.add-to-wallabag-link-after::after {
   padding-left: 1em !important;
 }
 
-/* Carrot (http://carrot.org) */
-.icon-image--carrot {
-  background-image: url("../../_global/img/icons/carrot-icon--white.png");
-}
-
 /* Diaspora */
 .icon-image--diaspora {
   background-image: url("../../_global/img/icons/diaspora-icon--black.png");

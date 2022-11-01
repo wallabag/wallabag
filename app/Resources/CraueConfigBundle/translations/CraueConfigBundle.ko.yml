@@ -19,13 +19,11 @@ wallabag_support_url: Wallabag 지원 URL
 show_printlink: 콘텐츠 인쇄 링크 표시
 share_unmark: Unmark.it 공유 활성화
 diaspora_url: Diaspora* URL (서비스가 활성화 된 경우)
-share_scuttle: Scuttle 공유 활성화
 share_shaarli: Shaarli 공유 활성화
 share_mail: 이메일 공유 활성화
 share_diaspora: Diaspora* 공유 활성화
 share_twitter: Twitter 공유 활성화
 unmark_url: Unmark URL (서비스가 활성화 된 경우)
-scuttle_url: Scuttle URL (서비스가 활성화 된 경우)
 shaarli_url: Shaarli URL (서비스가 활성화 된 경우)
 import_with_redis: Redis가 데이터를 비동기적으로 가져오도록 설정
 import_with_rabbitmq: RabbitMQ가 데이터를 비동기적으로 가져오도록 설정
@@ -36,5 +34,4 @@ export_csv: CSV 내보내기 활성화
 export_pdf: PDF 내보내기 활성화
 export_mobi: .mobi 내보내기 활성화
 export_epub: ePub 내보내기 활성화
-carrot: Carrot에 공유 활성화
 settings_changed: 설정을 업데이트했습니다

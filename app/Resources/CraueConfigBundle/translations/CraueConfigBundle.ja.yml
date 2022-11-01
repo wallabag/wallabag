@@ -1,6 +1,5 @@
 settings_changed: 設定を更新しました
 download_pictures: サーバー上の画像をダウンロード
-carrot: Carrot への共有を有効にする
 diaspora_url: diaspora* URL、サービスが有効になっている場合
 export_epub: ePub のエクスポートを有効にする
 export_mobi: .mobi のエクスポートを有効にする
@@ -12,12 +11,10 @@ export_xml: XML のエクスポートを有効にする
 import_with_rabbitmq: RabbitMQ を有効にして、データを非同期的にインポートする
 import_with_redis: Redis を有効にして、データを非同期的にインポートする
 shaarli_url: サービスが有効になっている場合、Shaarli URL
-scuttle_url: Scuttle URL、サービスが有効になっている場合
 unmark_url: Unmark URL、サービスが有効な場合
 share_diaspora: diaspora* に共有を有効にする
 share_mail: メールで共有を有効にする
 share_shaarli: Shaarli に共有を有効にする
-share_scuttle: Scuttle に共有を有効にする
 share_twitter: Twitter に共有を有効にする
 share_unmark: Unmark.it に共有を有効にする
 show_printlink: 印刷するコンテンツへのリンクを表示

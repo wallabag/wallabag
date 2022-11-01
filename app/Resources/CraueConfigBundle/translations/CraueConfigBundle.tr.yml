@@ -1,6 +1,5 @@
 settings_changed: Ayarlar güncellendi
 download_pictures: Resimleri sunucuya indir
-carrot: Carrot'a paylaşımı etkinleştir
 diaspora_url: hizmet etkinse diaspora* URL'si
 export_epub: ePub dışa aktarımını etkinleştir
 export_mobi: .mobi dışa aktarımını etkinleştir (kullanım dışı, yakında kaldırılacak)
@@ -12,12 +11,10 @@ export_xml: XML dışa aktarımını etkinleştir
 import_with_rabbitmq: Verileri eşzamansız olarak içe aktarmak için RabbitMQ'yu etkinleştir
 import_with_redis: Verileri eşzamansız olarak içe aktarmak için Redis'i etkinleştir
 shaarli_url: Hizmet etkinse Shaarli URL'si
-scuttle_url: Hizmet etkinse Scuttle URL'si
 unmark_url: Hizmet etkinse Unmark URL'si
 share_diaspora: diaspora*'ya paylaşımı etkinleştir
 share_mail: E-posta ile paylaşımı etkinleştir
 share_shaarli: Shaarli'ye paylaşımı etkinleştir
-share_scuttle: Scuttle'a paylaşımı etkinleştir
 share_twitter: Twitter'a paylaşımı etkinleştir
 share_unmark: Unmark.it'e paylaşımı etkinleştir
 show_printlink: İçeriği yazdırabilmek için bir bağlantı görüntüle

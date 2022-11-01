@@ -1,5 +1,4 @@
 download_pictures: Descarregar imagens ao seu servidor
-carrot: Habilitar compartilhamento para o Carrot
 diaspora_url: URL de diaspora* caso o serviço esteja ativado
 export_epub: Habilita exportação para ePub
 export_mobi: Habilita exportação para .mobi
@@ -9,13 +8,11 @@ export_json: Habilita exportação para JSON
 export_txt: Habilita exportação para TXT
 export_xml: Habilita exportação para XML
 shaarli_url: URL de Shaarli caso o serviço esteja ativado
-scuttle_url: URL de Scuttle caso o serviço esteja ativado
 unmark_url: URL de Unmark caso o serviço esteja ativado
 pocket_consumer_key: Chave de consumidor do Pocket para importar conteúdo (https://getpocket.com/developer/docs/authentication)
 share_diaspora: Habilitar compartilhamento para o diaspora*
 share_mail: Habilitar compartilhamento por e-mail
 share_shaarli: Habilitar compartilhamento para o Shaarli
-share_scuttle: Habilitar compartilhamento para o Scuttle
 share_twitter: Habilitar compartilhamento para o Twitter
 share_unmark: Habilitar compartilhamento para o Unmark.it
 show_printlink: Mostrar um link para imprimir o conteúdo

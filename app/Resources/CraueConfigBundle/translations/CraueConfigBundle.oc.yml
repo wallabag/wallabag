@@ -1,6 +1,5 @@
 settings_changed: Configuracion mesa a jorn
 download_pictures: Telecargar los imatges sul servidor
-carrot: Activar lo partatge cap a Carrot
 diaspora_url: URL de diaspora*, se lo servici diaspora* es activat
 export_epub: Activar l'expòrt ePub
 export_mobi: Activar l'expòrt .mobi
@@ -12,7 +11,6 @@ export_xml: Activar l'expòrt XML
 import_with_rabbitmq: Activar RabbitMQ per importar de donadas de manièra asincròna
 import_with_redis: Activar Redis per importar de donadas de manièra asincròna
 shaarli_url: URL de Shaarli, se lo servici Shaarli es activat
-scuttle_url: URL de Scuttle, se lo servici Scuttle es activat
 unmark_url: URL de Unmark, se lo servici Scuttle es activat
 share_diaspora: Activar lo partatge cap a Diaspora*
 share_mail: Activar lo partatge per corrièl
