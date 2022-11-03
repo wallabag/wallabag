@@ -16,7 +16,6 @@ Nun kannst du den Artikel teilen:
     Artikels zurückgegeben)
 -   über einen Tweet
 -   in deine Shaarli
--   in deine Scuttle
 -   mit einem Beitrag auf Diaspora\*
--   an Carrot
 -   mit einer E-Mail
+-   an Unmark.it

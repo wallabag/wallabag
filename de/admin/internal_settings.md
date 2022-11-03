@@ -26,10 +26,6 @@ Zum Beispiel:
 
 ## Artikel
 
-### Aktiviere das Teilen via Carrot
-
-`1`, um den Teilenbutton für [Carrot.org](https://secure.carrot.org/) anzuzeigen, `0` zum Deaktivieren.
-
 ### Diaspora URL, wenn der Service aktiviert ist
 
 URL deiner Diaspora\* Instanz.
