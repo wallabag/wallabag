@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Wallabag\CoreBundle\Entity\SiteCredential;
 
 class SiteCredentialType extends AbstractType
 {
@@ -33,7 +34,7 @@ class SiteCredentialType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Wallabag\CoreBundle\Entity\SiteCredential',
+            'data_class' => SiteCredential::class,
         ]);
     }
 

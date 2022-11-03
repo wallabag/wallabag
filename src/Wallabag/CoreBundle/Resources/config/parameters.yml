@@ -1,9 +1,0 @@
-parameters:
-    addons_url:
-        firefox: https://addons.mozilla.org/firefox/addon/wallabagger/
-        chrome: https://chrome.google.com/webstore/detail/wallabagger/gbmgphmejlcoihgedabhgjdkcahacjlj
-        opera: https://addons.opera.com/en/extensions/details/wallabagger/?display=en
-        f_droid: https://f-droid.org/app/fr.gaulupeau.apps.InThePoche
-        google_play: https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche
-        ios: https://itunes.apple.com/app/wallabag-2/id1170800946?mt=8
-        windows: https://www.microsoft.com/store/apps/wallabag/9nblggh11646

@@ -2,7 +2,9 @@
 
 namespace Tests\Wallabag\CoreBundle\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\UserBundle\Entity\User;
 
 class SecurityControllerTest extends WallabagCoreTestCase
 {
@@ -38,9 +40,9 @@ class SecurityControllerTest extends WallabagCoreTestCase
 
         $client->followRedirects();
 
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
         $user = $em
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->findOneByUsername('admin');
         $user->setEmailTwoFactor(true);
         $em->persist($user);
@@ -52,7 +54,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
 
         // restore user
         $user = $em
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->findOneByUsername('admin');
         $user->setEmailTwoFactor(false);
         $em->persist($user);
@@ -71,9 +73,9 @@ class SecurityControllerTest extends WallabagCoreTestCase
 
         $client->followRedirects();
 
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
         $user = $em
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->findOneByUsername('admin');
         $user->setGoogleAuthenticatorSecret('26LDIHYGHNELOQEM');
         $em->persist($user);
@@ -85,7 +87,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
 
         // restore user
         $user = $em
-            ->getRepository('WallabagUserBundle:User')
+            ->getRepository(User::class)
             ->findOneByUsername('admin');
         $user->setGoogleAuthenticatorSecret(null);
         $em->persist($user);

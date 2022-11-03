@@ -2,18 +2,24 @@
 
 namespace Tests\Wallabag\ApiBundle;
 
+use Doctrine\ORM\EntityManagerInterface;
+use FOS\UserBundle\Model\UserInterface;
+use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Wallabag\UserBundle\Entity\User;
 
 abstract class WallabagApiTestCase extends WebTestCase
 {
     /**
-     * @var \Symfony\Bundle\FrameworkBundle\Client
+     * @var Client
      */
     protected $client = null;
 
     /**
-     * @var \FOS\UserBundle\Model\UserInterface
+     * @var UserInterface
      */
     protected $user;
 
@@ -23,7 +29,7 @@ abstract class WallabagApiTestCase extends WebTestCase
     }
 
     /**
-     * @return \Symfony\Bundle\FrameworkBundle\Client
+     * @return Client
      */
     protected function createAuthorizedClient()
     {
@@ -40,10 +46,10 @@ abstract class WallabagApiTestCase extends WebTestCase
         $loginManager->logInUser($firewallName, $this->user);
 
         // save the login token into the session and put it in a cookie
-        $container->get('session')->set('_security_' . $firewallName, serialize($container->get('security.token_storage')->getToken()));
-        $container->get('session')->save();
+        $container->get(SessionInterface::class)->set('_security_' . $firewallName, serialize($container->get(TokenStorageInterface::class)->getToken()));
+        $container->get(SessionInterface::class)->save();
 
-        $session = $container->get('session');
+        $session = $container->get(SessionInterface::class);
         $client->getCookieJar()->set(new Cookie($session->getName(), $session->getId()));
 
         return $client;
@@ -62,8 +68,8 @@ abstract class WallabagApiTestCase extends WebTestCase
     {
         return $this->client
             ->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagUserBundle:User')
+            ->get(EntityManagerInterface::class)
+            ->getRepository(User::class)
             ->findOneByUserName($username)
             ->getId();
     }

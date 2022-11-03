@@ -2,45 +2,91 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\NoResultException;
+use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
 use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Event\EntryDeletedEvent;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
 use Wallabag\CoreBundle\Form\Type\EditEntryType;
 use Wallabag\CoreBundle\Form\Type\EntryFilterType;
 use Wallabag\CoreBundle\Form\Type\NewEntryType;
 use Wallabag\CoreBundle\Form\Type\SearchEntryType;
+use Wallabag\CoreBundle\Helper\ContentProxy;
+use Wallabag\CoreBundle\Helper\PreparePagerForEntries;
+use Wallabag\CoreBundle\Helper\Redirect;
+use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\CoreBundle\Repository\TagRepository;
 
 class EntryController extends Controller
 {
     /**
      * @Route("/mass", name="mass_action")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function massAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $values = $request->request->all();
 
+        $tagsToAdd = [];
+        $tagsToRemove = [];
+
         $action = 'toggle-read';
         if (isset($values['toggle-star'])) {
             $action = 'toggle-star';
         } elseif (isset($values['delete'])) {
             $action = 'delete';
+        } elseif (isset($values['tag'])) {
+            $action = 'tag';
+
+            if (isset($values['tags'])) {
+                $labels = array_filter(explode(',', $values['tags']),
+                    function ($v) {
+                        $v = trim($v);
+
+                        return '' !== $v;
+                    });
+                foreach ($labels as $label) {
+                    $remove = false;
+                    if (0 === strpos($label, '-')) {
+                        $label = substr($label, 1);
+                        $remove = true;
+                    }
+                    $tag = $this->get(TagRepository::class)->findOneByLabel($label);
+                    if ($remove) {
+                        if (null !== $tag) {
+                            $tagsToRemove[] = $tag;
+                        }
+                    } else {
+                        if (null === $tag) {
+                            $tag = new Tag();
+                            $tag->setLabel($label);
+                        }
+                        $tagsToAdd[] = $tag;
+                    }
+                }
+            }
         }
 
         if (isset($values['entry-checkbox'])) {
             foreach ($values['entry-checkbox'] as $id) {
                 /** @var Entry * */
-                $entry = $this->get('wallabag_core.entry_repository')->findById((int) $id)[0];
+                $entry = $this->get(EntryRepository::class)->findById((int) $id)[0];
 
                 $this->checkUserAction($entry);
 
@@ -48,8 +94,15 @@ class EntryController extends Controller
                     $entry->toggleArchive();
                 } elseif ('toggle-star' === $action) {
                     $entry->toggleStar();
+                } elseif ('tag' === $action) {
+                    foreach ($tagsToAdd as $tag) {
+                        $entry->addTag($tag);
+                    }
+                    foreach ($tagsToRemove as $tag) {
+                        $entry->removeTag($tag);
+                    }
                 } elseif ('delete' === $action) {
-                    $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
+                    $this->get(EventDispatcherInterface::class)->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
                     $em->remove($entry);
                 }
             }
@@ -57,7 +110,7 @@ class EntryController extends Controller
             $em->flush();
         }
 
-        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'));
+        $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'));
 
         return $this->redirect($redirectUrl);
     }
@@ -70,7 +123,7 @@ class EntryController extends Controller
      * Default parameter for page is hardcoded (in duplication of the defaults from the Route)
      * because this controller is also called inside the layout template without any page as argument
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function searchFormAction(Request $request, $page = 1, $currentRoute = null)
     {
@@ -87,7 +140,7 @@ class EntryController extends Controller
             return $this->showEntries('search', $request, $page);
         }
 
-        return $this->render('WallabagCoreBundle:Entry:search_form.html.twig', [
+        return $this->render('@WallabagCore/Entry/search_form.html.twig', [
             'form' => $form->createView(),
             'currentRoute' => $currentRoute,
         ]);
@@ -96,7 +149,7 @@ class EntryController extends Controller
     /**
      * @Route("/new-entry", name="new_entry")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function addEntryFormAction(Request $request)
     {
@@ -110,9 +163,9 @@ class EntryController extends Controller
             $existingEntry = $this->checkIfEntryAlreadyExists($entry);
 
             if (false !== $existingEntry) {
-                $this->get('session')->getFlashBag()->add(
+                $this->get(SessionInterface::class)->getFlashBag()->add(
                     'notice',
-                    $this->get('translator')->trans('flashes.entry.notice.entry_already_saved', ['%date%' => $existingEntry->getCreatedAt()->format('d-m-Y')])
+                    $this->get(TranslatorInterface::class)->trans('flashes.entry.notice.entry_already_saved', ['%date%' => $existingEntry->getCreatedAt()->format('d-m-Y')])
                 );
 
                 return $this->redirect($this->generateUrl('view', ['id' => $existingEntry->getId()]));
@@ -125,12 +178,12 @@ class EntryController extends Controller
             $em->flush();
 
             // entry saved, dispatch event about it!
-            $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+            $this->get(EventDispatcherInterface::class)->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
 
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        return $this->render('WallabagCoreBundle:Entry:new_form.html.twig', [
+        return $this->render('@WallabagCore/Entry/new_form.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -138,7 +191,7 @@ class EntryController extends Controller
     /**
      * @Route("/bookmarklet", name="bookmarklet")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function addEntryViaBookmarkletAction(Request $request)
     {
@@ -153,7 +206,7 @@ class EntryController extends Controller
             $em->flush();
 
             // entry saved, dispatch event about it!
-            $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+            $this->get(EventDispatcherInterface::class)->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
         }
 
         return $this->redirect($this->generateUrl('homepage'));
@@ -162,11 +215,11 @@ class EntryController extends Controller
     /**
      * @Route("/new", name="new")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function addEntryAction()
     {
-        return $this->render('WallabagCoreBundle:Entry:new.html.twig');
+        return $this->render('@WallabagCore/Entry/new.html.twig');
     }
 
     /**
@@ -174,7 +227,7 @@ class EntryController extends Controller
      *
      * @Route("/edit/{id}", requirements={"id" = "\d+"}, name="edit")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function editEntryAction(Request $request, Entry $entry)
     {
@@ -189,7 +242,7 @@ class EntryController extends Controller
             $em->persist($entry);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add(
+            $this->get(SessionInterface::class)->getFlashBag()->add(
                 'notice',
                 'flashes.entry.notice.entry_updated'
             );
@@ -197,7 +250,7 @@ class EntryController extends Controller
             return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
         }
 
-        return $this->render('WallabagCoreBundle:Entry:edit.html.twig', [
+        return $this->render('@WallabagCore/Entry/edit.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -209,7 +262,7 @@ class EntryController extends Controller
      *
      * @Route("/all/list/{page}", name="all", defaults={"page" = "1"})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showAllAction(Request $request, $page)
     {
@@ -223,12 +276,12 @@ class EntryController extends Controller
      *
      * @Route("/unread/list/{page}", name="unread", defaults={"page" = "1"})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showUnreadAction(Request $request, $page)
     {
         // load the quickstart if no entry in database
-        if (1 === (int) $page && 0 === $this->get('wallabag_core.entry_repository')->countAllEntriesByUser($this->getUser()->getId())) {
+        if (1 === (int) $page && 0 === $this->get(EntryRepository::class)->countAllEntriesByUser($this->getUser()->getId())) {
             return $this->redirect($this->generateUrl('quickstart'));
         }
 
@@ -242,7 +295,7 @@ class EntryController extends Controller
      *
      * @Route("/archive/list/{page}", name="archive", defaults={"page" = "1"})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showArchiveAction(Request $request, $page)
     {
@@ -256,7 +309,7 @@ class EntryController extends Controller
      *
      * @Route("/starred/list/{page}", name="starred", defaults={"page" = "1"})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showStarredAction(Request $request, $page)
     {
@@ -270,7 +323,7 @@ class EntryController extends Controller
      *
      * @Route("/untagged/list/{page}", name="untagged", defaults={"page" = "1"})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showUntaggedEntriesAction(Request $request, $page)
     {
@@ -284,7 +337,7 @@ class EntryController extends Controller
      *
      * @Route("/annotated/list/{page}", name="annotated", defaults={"page" = "1"})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showWithAnnotationsEntriesAction(Request $request, $page)
     {
@@ -298,15 +351,15 @@ class EntryController extends Controller
      *
      * @Route("/{type}/random", name="random_entry", requirements={"type": "unread|starred|archive|untagged|annotated|all"})
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function redirectRandomEntryAction($type = 'all')
     {
         try {
-            $entry = $this->get('wallabag_core.entry_repository')
+            $entry = $this->get(EntryRepository::class)
                 ->getRandomEntry($this->getUser()->getId(), $type);
         } catch (NoResultException $e) {
-            $bag = $this->get('session')->getFlashBag();
+            $bag = $this->get(SessionInterface::class)->getFlashBag();
             $bag->clear();
             $bag->add('notice', 'flashes.entry.notice.no_random_entry');
 
@@ -321,14 +374,14 @@ class EntryController extends Controller
      *
      * @Route("/view/{id}", requirements={"id" = "\d+"}, name="view")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function viewAction(Entry $entry)
     {
         $this->checkUserAction($entry);
 
         return $this->render(
-            'WallabagCoreBundle:Entry:entry.html.twig',
+            '@WallabagCore/Entry/entry.html.twig',
             ['entry' => $entry]
         );
     }
@@ -339,7 +392,7 @@ class EntryController extends Controller
      *
      * @Route("/reload/{id}", requirements={"id" = "\d+"}, name="reload_entry")
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function reloadAction(Entry $entry)
     {
@@ -349,7 +402,7 @@ class EntryController extends Controller
 
         // if refreshing entry failed, don't save it
         if ($this->getParameter('wallabag_core.fetching_error_message') === $entry->getContent()) {
-            $bag = $this->get('session')->getFlashBag();
+            $bag = $this->get(SessionInterface::class)->getFlashBag();
             $bag->clear();
             $bag->add('notice', 'flashes.entry.notice.entry_reloaded_failed');
 
@@ -361,7 +414,7 @@ class EntryController extends Controller
         $em->flush();
 
         // entry saved, dispatch event about it!
-        $this->get('event_dispatcher')->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+        $this->get(EventDispatcherInterface::class)->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
 
         return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
     }
@@ -371,7 +424,7 @@ class EntryController extends Controller
      *
      * @Route("/archive/{id}", requirements={"id" = "\d+"}, name="archive_entry")
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function toggleArchiveAction(Request $request, Entry $entry)
     {
@@ -385,12 +438,12 @@ class EntryController extends Controller
             $message = 'flashes.entry.notice.entry_archived';
         }
 
-        $this->get('session')->getFlashBag()->add(
+        $this->get(SessionInterface::class)->getFlashBag()->add(
             'notice',
             $message
         );
 
-        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'));
+        $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'));
 
         return $this->redirect($redirectUrl);
     }
@@ -400,7 +453,7 @@ class EntryController extends Controller
      *
      * @Route("/star/{id}", requirements={"id" = "\d+"}, name="star_entry")
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function toggleStarAction(Request $request, Entry $entry)
     {
@@ -415,12 +468,12 @@ class EntryController extends Controller
             $message = 'flashes.entry.notice.entry_starred';
         }
 
-        $this->get('session')->getFlashBag()->add(
+        $this->get(SessionInterface::class)->getFlashBag()->add(
             'notice',
             $message
         );
 
-        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'));
+        $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'));
 
         return $this->redirect($redirectUrl);
     }
@@ -430,7 +483,7 @@ class EntryController extends Controller
      *
      * @Route("/delete/{id}", requirements={"id" = "\d+"}, name="delete_entry")
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteEntryAction(Request $request, Entry $entry)
     {
@@ -445,13 +498,13 @@ class EntryController extends Controller
         );
 
         // entry deleted, dispatch event about it!
-        $this->get('event_dispatcher')->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
+        $this->get(EventDispatcherInterface::class)->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($entry);
         $em->flush();
 
-        $this->get('session')->getFlashBag()->add(
+        $this->get(SessionInterface::class)->getFlashBag()->add(
             'notice',
             'flashes.entry.notice.entry_deleted'
         );
@@ -460,7 +513,7 @@ class EntryController extends Controller
         $referer = $request->headers->get('referer');
         $to = (1 !== preg_match('#' . $url . '$#i', $referer) ? $referer : null);
 
-        $redirectUrl = $this->get('wallabag_core.helper.redirect')->to($to);
+        $redirectUrl = $this->get(Redirect::class)->to($to);
 
         return $this->redirect($redirectUrl);
     }
@@ -470,7 +523,7 @@ class EntryController extends Controller
      *
      * @Route("/share/{id}", requirements={"id" = "\d+"}, name="share")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function shareAction(Entry $entry)
     {
@@ -494,7 +547,7 @@ class EntryController extends Controller
      *
      * @Route("/share/delete/{id}", requirements={"id" = "\d+"}, name="delete_share")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function deleteShareAction(Entry $entry)
     {
@@ -517,11 +570,11 @@ class EntryController extends Controller
      * @Route("/share/{uid}", requirements={"uid" = ".+"}, name="share_entry")
      * @Cache(maxage="25200", smaxage="25200", public=true)
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function shareEntryAction(Entry $entry)
     {
-        if (!$this->get('craue_config')->get('share_public')) {
+        if (!$this->get(Config::class)->get('share_public')) {
             throw $this->createAccessDeniedException('Sharing an entry is disabled for this user.');
         }
 
@@ -538,7 +591,7 @@ class EntryController extends Controller
      *
      * @Route("/domain/{id}/{page}", requirements={"id" = ".+"}, defaults={"page" = 1}, name="same_domain")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function getSameDomainEntries(Request $request, $page = 1)
     {
@@ -552,11 +605,11 @@ class EntryController extends Controller
      * @param string $type Entries type: unread, starred or archive
      * @param int    $page
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     private function showEntries($type, Request $request, $page)
     {
-        $repository = $this->get('wallabag_core.entry_repository');
+        $repository = $this->get(EntryRepository::class);
         $searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
         $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
 
@@ -601,12 +654,12 @@ class EntryController extends Controller
             $form->submit($request->query->get($form->getName()));
 
             // build the query from the given form object
-            $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $qb);
+            $this->get(FilterBuilderUpdaterInterface::class)->addFilterConditions($form, $qb);
         }
 
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
 
-        $entries = $this->get('wallabag_core.helper.prepare_pager_for_entries')->prepare($pagerAdapter);
+        $entries = $this->get(PreparePagerForEntries::class)->prepare($pagerAdapter);
 
         try {
             $entries->setCurrentPage($page);
@@ -616,11 +669,11 @@ class EntryController extends Controller
             }
         }
 
-        $nbEntriesUntagged = $this->get('wallabag_core.entry_repository')
+        $nbEntriesUntagged = $this->get(EntryRepository::class)
             ->countUntaggedEntriesByUser($this->getUser()->getId());
 
         return $this->render(
-            'WallabagCoreBundle:Entry:entries.html.twig', [
+            '@WallabagCore/Entry/entries.html.twig', [
                 'form' => $form->createView(),
                 'entries' => $entries,
                 'currentPage' => $page,
@@ -642,7 +695,7 @@ class EntryController extends Controller
         $message = 'flashes.entry.notice.' . $prefixMessage;
 
         try {
-            $this->get('wallabag_core.content_proxy')->updateEntry($entry, $entry->getUrl());
+            $this->get(ContentProxy::class)->updateEntry($entry, $entry->getUrl());
         } catch (\Exception $e) {
             $this->get('logger')->error('Error while saving an entry', [
                 'exception' => $e,
@@ -653,14 +706,14 @@ class EntryController extends Controller
         }
 
         if (empty($entry->getDomainName())) {
-            $this->get('wallabag_core.content_proxy')->setEntryDomainName($entry);
+            $this->get(ContentProxy::class)->setEntryDomainName($entry);
         }
 
         if (empty($entry->getTitle())) {
-            $this->get('wallabag_core.content_proxy')->setDefaultEntryTitle($entry);
+            $this->get(ContentProxy::class)->setDefaultEntryTitle($entry);
         }
 
-        $this->get('session')->getFlashBag()->add('notice', $message);
+        $this->get(SessionInterface::class)->getFlashBag()->add('notice', $message);
     }
 
     /**
@@ -680,6 +733,6 @@ class EntryController extends Controller
      */
     private function checkIfEntryAlreadyExists(Entry $entry)
     {
-        return $this->get('wallabag_core.entry_repository')->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
+        return $this->get(EntryRepository::class)->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
     }
 }

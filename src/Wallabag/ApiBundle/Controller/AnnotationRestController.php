@@ -26,7 +26,7 @@ class AnnotationRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        return $this->forward('WallabagAnnotationBundle:WallabagAnnotation:getAnnotations', [
+        return $this->forward('Wallabag\AnnotationBundle\Controller\WallabagAnnotationController::getAnnotationsAction', [
             'entry' => $entry,
         ]);
     }
@@ -48,7 +48,7 @@ class AnnotationRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        return $this->forward('WallabagAnnotationBundle:WallabagAnnotation:postAnnotation', [
+        return $this->forward('Wallabag\AnnotationBundle\Controller\WallabagAnnotationController::postAnnotationAction', [
             'request' => $request,
             'entry' => $entry,
         ]);
@@ -63,7 +63,7 @@ class AnnotationRestController extends WallabagRestController
      *      }
      * )
      *
-     * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
+     * @ParamConverter("annotation", class="Wallabag\AnnotationBundle\Entity\Annotation")
      *
      * @return JsonResponse
      */
@@ -71,7 +71,7 @@ class AnnotationRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        return $this->forward('WallabagAnnotationBundle:WallabagAnnotation:putAnnotation', [
+        return $this->forward('Wallabag\AnnotationBundle\Controller\WallabagAnnotationController::putAnnotationAction', [
             'annotation' => $annotation,
             'request' => $request,
         ]);
@@ -86,7 +86,7 @@ class AnnotationRestController extends WallabagRestController
      *      }
      * )
      *
-     * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
+     * @ParamConverter("annotation", class="Wallabag\AnnotationBundle\Entity\Annotation")
      *
      * @return JsonResponse
      */
@@ -94,7 +94,7 @@ class AnnotationRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        return $this->forward('WallabagAnnotationBundle:WallabagAnnotation:deleteAnnotation', [
+        return $this->forward('Wallabag\AnnotationBundle\Controller\WallabagAnnotationController::deleteAnnotationAction', [
             'annotation' => $annotation,
         ]);
     }

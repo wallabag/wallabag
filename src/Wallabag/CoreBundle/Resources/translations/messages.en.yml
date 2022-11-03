@@ -457,6 +457,8 @@ quickstart:
         email: By email
         gitter: On Gitter
 tag:
+    confirm:
+        delete: Delete the %name% tag
     page_title: Tags
     list:
         number_on_the_page: '{0} There are no tags.|{1} There is one tag.|]1,Inf[ There are %count% tags.'

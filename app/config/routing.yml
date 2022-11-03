@@ -33,7 +33,7 @@ rest :
 homepage:
     path: "/{page}"
     defaults:
-        _controller: WallabagCoreBundle:Entry:showUnread
+        _controller: 'Wallabag\CoreBundle\Controller\EntryController::showUnreadAction'
         page : 1
     requirements:
         page: \d+
@@ -41,25 +41,13 @@ homepage:
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
-fos_user_security_login:
-    path: /login
-    defaults:
-        _controller: Wallabag\UserBundle\Controller\SecurityController::loginAction
-    methods: [GET, POST]
-
-fos_user_registration_register:
-    path: /register
-    defaults:
-        _controller: Wallabag\UserBundle\Controller\RegistrationController::registerAction
-    methods: [GET, POST]
-
 fos_oauth_server_token:
     resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
 
 craue_config_settings_modify:
     path: /settings
     defaults:
-        _controller: CraueConfigBundle:Settings:modify
+        _controller: 'Craue\ConfigBundle\Controller\SettingsController::modifyAction'
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
@@ -76,34 +64,34 @@ fos_js_routing:
 rss_to_atom_unread:
     path: /{username}/{token}/unread.xml
     defaults:
-        _controller: FrameworkBundle:Redirect:redirect
+        _controller: 'Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction'
         route: unread_feed
         permanent: true
 
 rss_to_atom_archive:
     path: /{username}/{token}/archive.xml
     defaults:
-        _controller: FrameworkBundle:Redirect:redirect
+        _controller: 'Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction'
         route: archive_feed
         permanent: true
 
 rss_to_atom_starred:
     path: /{username}/{token}/starred.xml
     defaults:
-        _controller: FrameworkBundle:Redirect:redirect
+        _controller: 'Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction'
         route: starred_feed
         permanent: true
 
 rss_to_atom_all:
     path: /{username}/{token}/all.xml
     defaults:
-        _controller: FrameworkBundle:Redirect:redirect
+        _controller: 'Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction'
         route: all_feed
         permanent: true
 
 rss_to_atom_tags:
     path: /{username}/{token}/tags/{slug}.xml
     defaults:
-        _controller: FrameworkBundle:Redirect:redirect
+        _controller: 'Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction'
         route: tag_feed
         permanent: true

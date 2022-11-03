@@ -2,8 +2,10 @@
 
 namespace Wallabag\AnnotationBundle\Controller;
 
-use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
+use JMS\Serializer\SerializerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\AnnotationBundle\Entity\Annotation;
@@ -11,7 +13,7 @@ use Wallabag\AnnotationBundle\Form\EditAnnotationType;
 use Wallabag\AnnotationBundle\Form\NewAnnotationType;
 use Wallabag\CoreBundle\Entity\Entry;
 
-class WallabagAnnotationController extends FOSRestController
+class WallabagAnnotationController extends AbstractFOSRestController
 {
     /**
      * Retrieve annotations for an entry.
@@ -24,12 +26,12 @@ class WallabagAnnotationController extends FOSRestController
     {
         $annotationRows = $this
             ->getDoctrine()
-            ->getRepository('WallabagAnnotationBundle:Annotation')
+            ->getRepository(Annotation::class)
             ->findAnnotationsByPageId($entry->getId(), $this->getUser()->getId());
         $total = \count($annotationRows);
         $annotations = ['total' => $total, 'rows' => $annotationRows];
 
-        $json = $this->get('jms_serializer')->serialize($annotations, 'json');
+        $json = $this->get(SerializerInterface::class)->serialize($annotations, 'json');
 
         return (new JsonResponse())->setJson($json);
     }
@@ -49,7 +51,7 @@ class WallabagAnnotationController extends FOSRestController
         $annotation = new Annotation($this->getUser());
         $annotation->setEntry($entry);
 
-        $form = $this->get('form.factory')->createNamed('', NewAnnotationType::class, $annotation, [
+        $form = $this->get(FormFactoryInterface::class)->createNamed('', NewAnnotationType::class, $annotation, [
             'csrf_protection' => false,
             'allow_extra_fields' => true,
         ]);
@@ -59,7 +61,7 @@ class WallabagAnnotationController extends FOSRestController
             $em->persist($annotation);
             $em->flush();
 
-            $json = $this->get('jms_serializer')->serialize($annotation, 'json');
+            $json = $this->get(SerializerInterface::class)->serialize($annotation, 'json');
 
             return JsonResponse::fromJsonString($json);
         }
@@ -72,7 +74,7 @@ class WallabagAnnotationController extends FOSRestController
      *
      * @see Wallabag\ApiBundle\Controller\WallabagRestController
      *
-     * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
+     * @ParamConverter("annotation", class="Wallabag\AnnotationBundle\Entity\Annotation")
      *
      * @return JsonResponse
      */
@@ -80,7 +82,7 @@ class WallabagAnnotationController extends FOSRestController
     {
         $data = json_decode($request->getContent(), true);
 
-        $form = $this->get('form.factory')->createNamed('', EditAnnotationType::class, $annotation, [
+        $form = $this->get(FormFactoryInterface::class)->createNamed('', EditAnnotationType::class, $annotation, [
             'csrf_protection' => false,
             'allow_extra_fields' => true,
         ]);
@@ -91,7 +93,7 @@ class WallabagAnnotationController extends FOSRestController
             $em->persist($annotation);
             $em->flush();
 
-            $json = $this->get('jms_serializer')->serialize($annotation, 'json');
+            $json = $this->get(SerializerInterface::class)->serialize($annotation, 'json');
 
             return JsonResponse::fromJsonString($json);
         }
@@ -104,7 +106,7 @@ class WallabagAnnotationController extends FOSRestController
      *
      * @see Wallabag\ApiBundle\Controller\WallabagRestController
      *
-     * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
+     * @ParamConverter("annotation", class="Wallabag\AnnotationBundle\Entity\Annotation")
      *
      * @return JsonResponse
      */
@@ -114,7 +116,7 @@ class WallabagAnnotationController extends FOSRestController
         $em->remove($annotation);
         $em->flush();
 
-        $json = $this->get('jms_serializer')->serialize($annotation, 'json');
+        $json = $this->get(SerializerInterface::class)->serialize($annotation, 'json');
 
         return (new JsonResponse())->setJson($json);
     }

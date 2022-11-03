@@ -1,4 +1,4 @@
-{% extends "WallabagCoreBundle::layout.html.twig" %}
+{% extends "@WallabagCore/layout.html.twig" %}
 
 {% block title %}{{ 'user.page_title'|trans }}{% endblock %}
 
@@ -16,7 +16,7 @@
                     </div>
                     <div class="col s6">
                         <div class="input-field">
-                            <form name="search_users" method="GET" action="{{ path('user_index')}}">
+                            <form name="search_users" method="GET" action="{{ path('user_index') }}">
                                 {% if form_errors(searchForm) %}
                                     <span class="black-text">{{ form_errors(searchForm) }}</span>
                                 {% endif %}
@@ -25,7 +25,7 @@
                                     <span class="black-text">{{ form_errors(searchForm.term) }}</span>
                                 {% endif %}
 
-                                {{ form_widget(searchForm.term, { 'attr': {'autocomplete': 'off', 'placeholder': 'user.search.placeholder'} }) }}
+                                {{ form_widget(searchForm.term, {'attr': {'autocomplete': 'off', 'placeholder': 'user.search.placeholder'}}) }}
 
                                 {{ form_rest(searchForm) }}
                             </form>
@@ -48,7 +48,7 @@
                                 <td>{{ user.email }}</td>
                                 <td>{% if user.lastLogin %}{{ user.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
                                 <td>
-                                    <a href="{{ path('user_edit', { 'id': user.id }) }}">{{ 'user.list.edit_action'|trans }}</a>
+                                    <a href="{{ path('user_edit', {'id': user.id}) }}">{{ 'user.list.edit_action'|trans }}</a>
                                 </td>
                             </tr>
                         {% endfor %}

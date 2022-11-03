@@ -42,10 +42,6 @@ wallabag_core:
             value: 1
             section: entry
         -
-            name: carrot
-            value: 1
-            section: entry
-        -
             name: share_diaspora
             value: 1
             section: entry
@@ -66,16 +62,8 @@ wallabag_core:
             value: 1
             section: entry
         -
-            name: share_scuttle
-            value: 1
-            section: entry
-        -
             name: shaarli_url
             value: https://myshaarli.com
-            section: entry
-        -
-            name: scuttle_url
-            value: https://scuttle.org
             section: entry
         -
             name: share_mail
@@ -177,9 +165,6 @@ wallabag_core:
             rule: host = "feeds.reuters.com"
         -
             rule: _all ~ "https?://www\.lemonde\.fr/tiny.*"
-
-wallabag_user:
-    registration_enabled: "%fosuser_registration%"
 
 wallabag_import:
     allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain', 'text/csv']

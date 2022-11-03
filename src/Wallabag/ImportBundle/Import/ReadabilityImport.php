@@ -98,7 +98,7 @@ class ReadabilityImport extends AbstractImport
     public function parseEntry(array $importedEntry)
     {
         $existingEntry = $this->em
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId($importedEntry['article__url'], $this->user->getId());
 
         if (false !== $existingEntry) {

@@ -1,13 +1,13 @@
 {# Override `vendor/scheb/two-factor-bundle/Resources/views/Authentication/form.html.twig` #}
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends "@FOSUser/layout.html.twig" %}
 
 {% block fos_user_content %}
 <form class="form" action="{{ path("2fa_login_check") }}" method="post">
     <div class="card-content">
         <div class="row">
 
-            {% for flashMessage in app.session.flashbag.get("two_factor") %}
-            <p class="error">{{ flashMessage|trans }}</p>
+            {% for flash_message in app.session.flashbag.get("two_factor") %}
+            <p class="error">{{ flash_message|trans }}</p>
             {% endfor %}
 
             {# Authentication errors #}

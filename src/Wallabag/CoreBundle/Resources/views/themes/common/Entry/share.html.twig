@@ -7,13 +7,13 @@
         <meta property="og:title" content="{{ entry.title|e|raw }}" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content="{{ app.request.uri }}" />
-        {% set picturePath = app.request.schemeAndHttpHost ~ asset('img/logo-wallabag.svg') %}
+        {% set picture_path = app.request.schemeAndHttpHost ~ asset('img/logo-wallabag.svg') %}
         {% if entry.previewPicture is not null %}
-            {% set picturePath = entry.previewPicture %}
+            {% set picture_path = entry.previewPicture %}
         {% endif %}
-        <meta property="og:image" content="{{ picturePath }}" />
+        <meta property="og:image" content="{{ picture_path }}" />
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:image" content="{{ picturePath }}" />
+        <meta name="twitter:image" content="{{ picture_path }}" />
         <meta name="twitter:site" content="@wallabagapp" />
         <meta name="twitter:title" content="{{ entry.title|e|raw }}" />
         <meta name="twitter:description" content="{{ entry.content|striptags|slice(0, 300)|raw }}&hellip;" />
@@ -31,7 +31,7 @@
             <p class="shared-by">{{ "entry.public.shared_by_wallabag"|trans({'%wallabag_instance%': url('homepage'), '%username%': entry.user.username})|raw }}.</p>
         </header>
         <article class="block">
-            {{ entry.content | raw }}
+            {{ entry.content|raw }}
         </article>
     </body>
 </html>

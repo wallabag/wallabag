@@ -2,6 +2,7 @@
 
 namespace Tests\Wallabag\CoreBundle\GuzzleSiteAuthenticator;
 
+use Graby\SiteConfig\ConfigBuilder;
 use Graby\SiteConfig\SiteConfig as GrabySiteConfig;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
@@ -9,6 +10,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder;
+use Wallabag\CoreBundle\Repository\SiteCredentialRepository;
+use Wallabag\UserBundle\Entity\User;
 
 class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
 {
@@ -16,7 +19,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
 
     public function testBuildConfigExists()
     {
-        $grabyConfigBuilderMock = $this->getMockBuilder('Graby\SiteConfig\ConfigBuilder')
+        $grabyConfigBuilderMock = $this->getMockBuilder(ConfigBuilder::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -37,7 +40,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
         $handler = new TestHandler();
         $logger->pushHandler($handler);
 
-        $siteCrentialRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\SiteCredentialRepository')
+        $siteCrentialRepo = $this->getMockBuilder(SiteCredentialRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
         $siteCrentialRepo->expects($this->once())
@@ -45,7 +48,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
             ->with(['api.example.com', '.example.com'], 1)
             ->willReturn(['username' => 'foo', 'password' => 'bar']);
 
-        $user = $this->getMockBuilder('Wallabag\UserBundle\Entity\User')
+        $user = $this->getMockBuilder(User::class)
             ->disableOriginalConstructor()
             ->getMock();
         $user->expects($this->once())
@@ -83,7 +86,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
 
     public function testBuildConfigDoesntExist()
     {
-        $grabyConfigBuilderMock = $this->getMockBuilder('\Graby\SiteConfig\ConfigBuilder')
+        $grabyConfigBuilderMock = $this->getMockBuilder(ConfigBuilder::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -96,7 +99,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
         $handler = new TestHandler();
         $logger->pushHandler($handler);
 
-        $siteCrentialRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\SiteCredentialRepository')
+        $siteCrentialRepo = $this->getMockBuilder(SiteCredentialRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
         $siteCrentialRepo->expects($this->once())
@@ -104,7 +107,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
             ->with(['unknown.com', '.com'], 1)
             ->willReturn(null);
 
-        $user = $this->getMockBuilder('Wallabag\UserBundle\Entity\User')
+        $user = $this->getMockBuilder(User::class)
             ->disableOriginalConstructor()
             ->getMock();
         $user->expects($this->once())
@@ -134,7 +137,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
 
     public function testBuildConfigWithBadExtraFields()
     {
-        $grabyConfigBuilderMock = $this->getMockBuilder('Graby\SiteConfig\ConfigBuilder')
+        $grabyConfigBuilderMock = $this->getMockBuilder(ConfigBuilder::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -155,7 +158,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
         $handler = new TestHandler();
         $logger->pushHandler($handler);
 
-        $siteCrentialRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\SiteCredentialRepository')
+        $siteCrentialRepo = $this->getMockBuilder(SiteCredentialRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
         $siteCrentialRepo->expects($this->once())
@@ -163,7 +166,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
             ->with(['example.com', '.com'], 1)
             ->willReturn(['username' => 'foo', 'password' => 'bar']);
 
-        $user = $this->getMockBuilder('Wallabag\UserBundle\Entity\User')
+        $user = $this->getMockBuilder(User::class)
             ->disableOriginalConstructor()
             ->getMock();
         $user->expects($this->once())
@@ -201,7 +204,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
 
     public function testBuildConfigUserNotDefined()
     {
-        $grabyConfigBuilderMock = $this->getMockBuilder('\Graby\SiteConfig\ConfigBuilder')
+        $grabyConfigBuilderMock = $this->getMockBuilder(ConfigBuilder::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -214,7 +217,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
         $handler = new TestHandler();
         $logger->pushHandler($handler);
 
-        $siteCrentialRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\SiteCredentialRepository')
+        $siteCrentialRepo = $this->getMockBuilder(SiteCredentialRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -264,7 +267,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
      */
     public function testBuildConfigWithDbAccess($host, $expectedUsername = null, $expectedPassword = null)
     {
-        $grabyConfigBuilderMock = $this->getMockBuilder('Graby\SiteConfig\ConfigBuilder')
+        $grabyConfigBuilderMock = $this->getMockBuilder(ConfigBuilder::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -281,7 +284,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
             ->with($host)
             ->willReturn($grabySiteConfig);
 
-        $user = $this->getMockBuilder('Wallabag\UserBundle\Entity\User')
+        $user = $this->getMockBuilder(User::class)
             ->disableOriginalConstructor()
             ->getMock();
         $user->expects($this->once())
@@ -300,7 +303,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
         $builder = new GrabySiteConfigBuilder(
             $grabyConfigBuilderMock,
             $tokenStorage,
-            $this->getClient()->getContainer()->get('wallabag_core.site_credential_repository'),
+            $this->getClient()->getContainer()->get(SiteCredentialRepository::class),
             $logger
         );
 

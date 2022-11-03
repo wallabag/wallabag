@@ -1,4 +1,4 @@
-{% extends "WallabagCoreBundle::layout.html.twig" %}
+{% extends "@WallabagCore/layout.html.twig" %}
 
 {% block title %}{{ 'import.pocket.page_title'|trans }}{% endblock %}
 
@@ -6,13 +6,13 @@
 <div class="row">
     <div class="col s12">
         <div class="card-panel settings">
-            {% include 'WallabagImportBundle:Import:_information.html.twig' %}
+            {% include '@WallabagImport/Import/_information.html.twig' %}
 
             {% if not has_consumer_key %}
                 <div class="card-panel red white-text">
                     {{ 'import.pocket.config_missing.description'|trans }}
 
-                    {{ 'import.pocket.config_missing.admin_message'|trans({'%keyurls%': '<a href="' ~ path('config') ~ '" class="white-text"><strong>', '%keyurle%':'</strong></a>'})|raw }}
+                    {{ 'import.pocket.config_missing.admin_message'|trans({'%keyurls%': '<a href="' ~ path('config') ~ '" class="white-text"><strong>', '%keyurle%': '</strong></a>'})|raw }}
                 </div>
             {% endif %}
 

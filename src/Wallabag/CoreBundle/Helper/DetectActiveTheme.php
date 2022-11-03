@@ -16,15 +16,18 @@ class DetectActiveTheme implements DeviceDetectionInterface
 {
     protected $tokenStorage;
     protected $defaultTheme;
+    protected $themes;
 
     /**
      * @param TokenStorageInterface $tokenStorage Needed to retrieve the current user
      * @param string                $defaultTheme Default theme when user isn't logged in
+     * @param array                 $themes       Themes come from the LiipThemeBundle (liip_theme.themes)
      */
-    public function __construct(TokenStorageInterface $tokenStorage, $defaultTheme)
+    public function __construct(TokenStorageInterface $tokenStorage, $defaultTheme, $themes)
     {
         $this->tokenStorage = $tokenStorage;
         $this->defaultTheme = $defaultTheme;
+        $this->themes = $themes;
     }
 
     public function setUserAgent($userAgent)
@@ -57,6 +60,10 @@ class DetectActiveTheme implements DeviceDetectionInterface
         $config = $user->getConfig();
 
         if (!$config) {
+            return $this->defaultTheme;
+        }
+
+        if (!\in_array($config->getTheme(), $this->themes, true)) {
             return $this->defaultTheme;
         }
 

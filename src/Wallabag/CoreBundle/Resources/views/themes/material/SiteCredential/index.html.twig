@@ -1,4 +1,4 @@
-{% extends "WallabagCoreBundle::layout.html.twig" %}
+{% extends "@WallabagCore/layout.html.twig" %}
 
 {% block title %}{{ 'site_credential.page_title'|trans }}{% endblock %}
 
@@ -23,7 +23,7 @@
                                 <tr>
                                     <td>{{ credential.host }}</td>
                                     <td>
-                                        <a href="{{ path('site_credentials_edit', { 'id': credential.id }) }}">{{ 'site_credential.list.edit_action'|trans }}</a>
+                                        <a href="{{ path('site_credentials_edit', {'id': credential.id}) }}">{{ 'site_credential.list.edit_action'|trans }}</a>
                                     </td>
                                 </tr>
                             {% endfor %}

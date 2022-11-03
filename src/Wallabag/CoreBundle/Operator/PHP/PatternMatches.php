@@ -10,7 +10,7 @@ namespace Wallabag\CoreBundle\Operator\PHP;
  *
  * This operator will be used to compile ignore origin rules in PHP, usable
  * directly on Entry objects for instance.
- * It's registered in RulerZ using a service (wallabag.operator.array.pattern_matches);
+ * It's registered in RulerZ using a service;
  */
 class PatternMatches
 {

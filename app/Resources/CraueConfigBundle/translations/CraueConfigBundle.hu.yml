@@ -1,6 +1,5 @@
 settings_changed: Beállítások frissítve
 download_pictures: Képek letöltése a kiszolgálóra
-carrot: Megosztás engedélyezése a Carrot-ra
 diaspora_url: diaspora* URL, ha a szolgáltatás engedélyezett
 export_epub: ePub-ba exportálás engedélyezése
 export_mobi: .mobi-ba exportálás engedélyezése
@@ -12,12 +11,10 @@ export_xml: XML-be exportálás engedélyezése
 import_with_rabbitmq: A RabbitMQ aszinkron adatimportálásának engedélyezése
 import_with_redis: A Redis aszinkron adatimportálásának engedélyezése
 shaarli_url: Shaarli URL, ha a szolgáltatás engedélyezett
-scuttle_url: Scuttle URL, ha a szolgáltatás engedélyezett
 unmark_url: Unmark URL, ha a szolgáltatás engedélyezett
 share_diaspora: Megosztás engedélyezése a diaspora*-ra
 share_mail: Megosztás engedélyezése e-mail-ben
 share_shaarli: Megosztás engedélyezése a Shaarli-ra
-share_scuttle: Megosztás engedélyezése a Scuttle-ra
 share_twitter: Megosztás engedélyezése a Twitter-re
 share_unmark: Megosztás engedélyezése az Unmark.it-ra
 show_printlink: Hivatkozás mutatása a tartalom nyomtatására

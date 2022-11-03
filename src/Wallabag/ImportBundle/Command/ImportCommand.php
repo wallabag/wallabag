@@ -2,13 +2,24 @@
 
 namespace Wallabag\ImportBundle\Command;
 
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Wallabag\ImportBundle\Import\ChromeImport;
+use Wallabag\ImportBundle\Import\DeliciousImport;
+use Wallabag\ImportBundle\Import\FirefoxImport;
+use Wallabag\ImportBundle\Import\InstapaperImport;
+use Wallabag\ImportBundle\Import\PinboardImport;
+use Wallabag\ImportBundle\Import\ReadabilityImport;
+use Wallabag\ImportBundle\Import\WallabagV1Import;
+use Wallabag\ImportBundle\Import\WallabagV2Import;
+use Wallabag\UserBundle\Entity\User;
 
 class ImportCommand extends ContainerAwareCommand
 {
@@ -34,14 +45,14 @@ class ImportCommand extends ContainerAwareCommand
             throw new Exception(sprintf('File "%s" not found', $input->getArgument('filepath')));
         }
 
-        $em = $this->getContainer()->get('doctrine')->getManager();
+        $em = $this->getContainer()->get(ManagerRegistry::class)->getManager();
         // Turning off doctrine default logs queries for saving memory
         $em->getConnection()->getConfiguration()->setSQLLogger(null);
 
         if ($input->getOption('useUserId')) {
-            $entityUser = $em->getRepository('WallabagUserBundle:User')->findOneById($input->getArgument('username'));
+            $entityUser = $em->getRepository(User::class)->findOneById($input->getArgument('username'));
         } else {
-            $entityUser = $em->getRepository('WallabagUserBundle:User')->findOneByUsername($input->getArgument('username'));
+            $entityUser = $em->getRepository(User::class)->findOneByUsername($input->getArgument('username'));
         }
 
         if (!\is_object($entityUser)) {
@@ -55,33 +66,33 @@ class ImportCommand extends ContainerAwareCommand
             'main',
             $entityUser->getRoles());
 
-        $this->getContainer()->get('security.token_storage')->setToken($token);
-        $user = $this->getContainer()->get('security.token_storage')->getToken()->getUser();
+        $this->getContainer()->get(TokenStorageInterface::class)->setToken($token);
+        $user = $this->getContainer()->get(TokenStorageInterface::class)->getToken()->getUser();
 
         switch ($input->getOption('importer')) {
             case 'v2':
-                $import = $this->getContainer()->get('wallabag_import.wallabag_v2.import');
+                $import = $this->getContainer()->get(WallabagV2Import::class);
                 break;
             case 'firefox':
-                $import = $this->getContainer()->get('wallabag_import.firefox.import');
+                $import = $this->getContainer()->get(FirefoxImport::class);
                 break;
             case 'chrome':
-                $import = $this->getContainer()->get('wallabag_import.chrome.import');
+                $import = $this->getContainer()->get(ChromeImport::class);
                 break;
             case 'readability':
-                $import = $this->getContainer()->get('wallabag_import.readability.import');
+                $import = $this->getContainer()->get(ReadabilityImport::class);
                 break;
             case 'instapaper':
-                $import = $this->getContainer()->get('wallabag_import.instapaper.import');
+                $import = $this->getContainer()->get(InstapaperImport::class);
                 break;
             case 'pinboard':
-                $import = $this->getContainer()->get('wallabag_import.pinboard.import');
+                $import = $this->getContainer()->get(PinboardImport::class);
                 break;
             case 'delicious':
-                $import = $this->getContainer()->get('wallabag_import.delicious.import');
+                $import = $this->getContainer()->get(DeliciousImport::class);
                 break;
             default:
-                $import = $this->getContainer()->get('wallabag_import.wallabag_v1.import');
+                $import = $this->getContainer()->get(WallabagV1Import::class);
         }
 
         $import->setMarkAsRead($input->getOption('markAsRead'));

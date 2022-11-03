@@ -1,4 +1,4 @@
-{% extends "WallabagCoreBundle::layout.html.twig" %}
+{% extends "@WallabagCore/layout.html.twig" %}
 
 {% block title %}{{ 'config.page_title'|trans }} > {{ 'config.otp.page_title'|trans }}{% endblock %}
 
@@ -33,9 +33,9 @@
                         <li>
                             <p>{{ 'config.otp.app.two_factor_code_description_4'|trans }}</p>
 
-                            {% for flashMessage in app.session.flashbag.get("two_factor") %}
+                            {% for flash_message in app.session.flashbag.get("two_factor") %}
                             <div class="card-panel red darken-1 black-text">
-                                {{ flashMessage|trans }}
+                                {{ flash_message|trans }}
                             </div>
                             {% endfor %}
 

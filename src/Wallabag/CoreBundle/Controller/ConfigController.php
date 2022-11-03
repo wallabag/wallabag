@@ -2,9 +2,15 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
+use Doctrine\DBAL\Platforms\SqlitePlatform;
+use Doctrine\Persistence\ManagerRegistry;
+use FOS\UserBundle\Model\UserManagerInterface;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
+use Liip\ThemeBundle\ActiveTheme;
 use PragmaRX\Recovery\Recovery as BackupCodes;
+use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -12,8 +18,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraints\Locale as LocaleConstraint;
-use Wallabag\CoreBundle\Entity\Config;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Wallabag\AnnotationBundle\Entity\Annotation;
+use Wallabag\CoreBundle\Entity\Config as ConfigEntity;
 use Wallabag\CoreBundle\Entity\IgnoreOriginUserRule;
 use Wallabag\CoreBundle\Entity\RuleInterface;
 use Wallabag\CoreBundle\Entity\TaggingRule;
@@ -24,7 +33,10 @@ use Wallabag\CoreBundle\Form\Type\IgnoreOriginUserRuleType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleImportType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleType;
 use Wallabag\CoreBundle\Form\Type\UserInformationType;
+use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\CoreBundle\Repository\TagRepository;
 use Wallabag\CoreBundle\Tools\Utils;
+use Wallabag\UserBundle\Repository\UserRepository;
 
 class ConfigController extends Controller
 {
@@ -35,7 +47,7 @@ class ConfigController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $config = $this->getConfig();
-        $userManager = $this->container->get('fos_user.user_manager');
+        $userManager = $this->container->get(UserManagerInterface::class);
         $user = $this->getUser();
 
         // handle basic config detail (this form is defined as a service)
@@ -49,7 +61,7 @@ class ConfigController extends Controller
 
                 $this->addFlash(
                     'notice',
-                    'Baggy is deprecated, forced to Material theme.'
+                    'Baggy is gone, forced to Material theme.'
                 );
             }
 
@@ -59,7 +71,7 @@ class ConfigController extends Controller
             $request->getSession()->set('_locale', $config->getLanguage());
 
             // switch active theme
-            $activeTheme = $this->get('liip_theme.active_theme');
+            $activeTheme = $this->get(ActiveTheme::class);
             $activeTheme->setName($config->getTheme());
 
             $this->addFlash(
@@ -75,7 +87,7 @@ class ConfigController extends Controller
         $pwdForm->handleRequest($request);
 
         if ($pwdForm->isSubmitted() && $pwdForm->isValid()) {
-            if ($this->get('craue_config')->get('demo_mode_enabled') && $this->get('craue_config')->get('demo_mode_username') === $user->getUsername()) {
+            if ($this->get(Config::class)->get('demo_mode_enabled') && $this->get(Config::class)->get('demo_mode_username') === $user->getUsername()) {
                 $message = 'flashes.config.notice.password_not_updated_demo';
             } else {
                 $message = 'flashes.config.notice.password_updated';
@@ -129,7 +141,7 @@ class ConfigController extends Controller
 
         if ($request->query->has('tagging-rule')) {
             $taggingRule = $this->getDoctrine()
-                ->getRepository('WallabagCoreBundle:TaggingRule')
+                ->getRepository(TaggingRule::class)
                 ->find($request->query->get('tagging-rule'));
 
             if ($this->getUser()->getId() !== $taggingRule->getConfig()->getUser()->getId()) {
@@ -192,7 +204,7 @@ class ConfigController extends Controller
 
         if ($request->query->has('ignore-origin-user-rule')) {
             $ignoreOriginUserRule = $this->getDoctrine()
-                ->getRepository('WallabagCoreBundle:IgnoreOriginUserRule')
+                ->getRepository(IgnoreOriginUserRule::class)
                 ->find($request->query->get('ignore-origin-user-rule'));
 
             if ($this->getUser()->getId() !== $ignoreOriginUserRule->getConfig()->getUser()->getId()) {
@@ -220,7 +232,7 @@ class ConfigController extends Controller
             return $this->redirect($this->generateUrl('config') . '#set6');
         }
 
-        return $this->render('WallabagCoreBundle:Config:index.html.twig', [
+        return $this->render('@WallabagCore/Config/index.html.twig', [
             'form' => [
                 'config' => $configForm->createView(),
                 'feed' => $feedForm->createView(),
@@ -236,7 +248,7 @@ class ConfigController extends Controller
             ],
             'twofactor_auth' => $this->getParameter('twofactor_auth'),
             'wallabag_url' => $this->getParameter('domain_name'),
-            'enabled_users' => $this->get('wallabag_user.user_repository')->getSumEnabledUsers(),
+            'enabled_users' => $this->get(UserRepository::class)->getSumEnabledUsers(),
         ]);
     }
 
@@ -254,7 +266,7 @@ class ConfigController extends Controller
         $user = $this->getUser();
         $user->setEmailTwoFactor(false);
 
-        $this->container->get('fos_user.user_manager')->updateUser($user, true);
+        $this->container->get(UserManagerInterface::class)->updateUser($user, true);
 
         $this->addFlash(
             'notice',
@@ -281,7 +293,7 @@ class ConfigController extends Controller
         $user->setBackupCodes(null);
         $user->setEmailTwoFactor(true);
 
-        $this->container->get('fos_user.user_manager')->updateUser($user, true);
+        $this->container->get(UserManagerInterface::class)->updateUser($user, true);
 
         $this->addFlash(
             'notice',
@@ -307,7 +319,7 @@ class ConfigController extends Controller
         $user->setGoogleAuthenticatorSecret('');
         $user->setBackupCodes(null);
 
-        $this->container->get('fos_user.user_manager')->updateUser($user, true);
+        $this->container->get(UserManagerInterface::class)->updateUser($user, true);
 
         $this->addFlash(
             'notice',
@@ -329,7 +341,7 @@ class ConfigController extends Controller
         }
 
         $user = $this->getUser();
-        $secret = $this->get('scheb_two_factor.security.google_authenticator')->generateSecret();
+        $secret = $this->get(GoogleAuthenticatorInterface::class)->generateSecret();
 
         $user->setGoogleAuthenticatorSecret($secret);
         $user->setEmailTwoFactor(false);
@@ -344,16 +356,16 @@ class ConfigController extends Controller
 
         $user->setBackupCodes($backupCodesHashed);
 
-        $this->container->get('fos_user.user_manager')->updateUser($user, true);
+        $this->container->get(UserManagerInterface::class)->updateUser($user, true);
 
         $this->addFlash(
             'notice',
             'flashes.config.notice.otp_enabled'
         );
 
-        return $this->render('WallabagCoreBundle:Config:otp_app.html.twig', [
+        return $this->render('@WallabagCore/Config/otp_app.html.twig', [
             'backupCodes' => $backupCodes,
-            'qr_code' => $this->get('scheb_two_factor.security.google_authenticator')->getQRContent($user),
+            'qr_code' => $this->get(GoogleAuthenticatorInterface::class)->getQRContent($user),
             'secret' => $secret,
         ]);
     }
@@ -373,7 +385,7 @@ class ConfigController extends Controller
         $user->setGoogleAuthenticatorSecret(null);
         $user->setBackupCodes(null);
 
-        $this->container->get('fos_user.user_manager')->updateUser($user, true);
+        $this->container->get(UserManagerInterface::class)->updateUser($user, true);
 
         return $this->redirect($this->generateUrl('config') . '#set3');
     }
@@ -385,7 +397,7 @@ class ConfigController extends Controller
      */
     public function otpAppCheckAction(Request $request)
     {
-        $isValid = $this->get('scheb_two_factor.security.google_authenticator')->checkCode(
+        $isValid = $this->get(GoogleAuthenticatorInterface::class)->checkCode(
             $this->getUser(),
             $request->get('_auth_code')
         );
@@ -545,7 +557,7 @@ class ConfigController extends Controller
         switch ($type) {
             case 'annotations':
                 $this->getDoctrine()
-                    ->getRepository('WallabagAnnotationBundle:Annotation')
+                    ->getRepository(Annotation::class)
                     ->removeAllByUserId($this->getUser()->getId());
                 break;
             case 'tags':
@@ -554,24 +566,24 @@ class ConfigController extends Controller
             case 'entries':
                 // SQLite doesn't care about cascading remove, so we need to manually remove associated stuff
                 // otherwise they won't be removed ...
-                if ($this->get('doctrine')->getConnection()->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\SqlitePlatform) {
-                    $this->getDoctrine()->getRepository('WallabagAnnotationBundle:Annotation')->removeAllByUserId($this->getUser()->getId());
+                if ($this->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof SqlitePlatform) {
+                    $this->getDoctrine()->getRepository(Annotation::class)->removeAllByUserId($this->getUser()->getId());
                 }
 
                 // manually remove tags to avoid orphan tag
                 $this->removeAllTagsByUserId($this->getUser()->getId());
 
-                $this->get('wallabag_core.entry_repository')->removeAllByUserId($this->getUser()->getId());
+                $this->get(EntryRepository::class)->removeAllByUserId($this->getUser()->getId());
                 break;
             case 'archived':
-                if ($this->get('doctrine')->getConnection()->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\SqlitePlatform) {
+                if ($this->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof SqlitePlatform) {
                     $this->removeAnnotationsForArchivedByUserId($this->getUser()->getId());
                 }
 
                 // manually remove tags to avoid orphan tag
                 $this->removeTagsForArchivedByUserId($this->getUser()->getId());
 
-                $this->get('wallabag_core.entry_repository')->removeArchivedByUserId($this->getUser()->getId());
+                $this->get(EntryRepository::class)->removeArchivedByUserId($this->getUser()->getId());
                 break;
         }
 
@@ -590,11 +602,11 @@ class ConfigController extends Controller
      *
      * @throws AccessDeniedHttpException
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAccountAction(Request $request)
     {
-        $enabledUsers = $this->get('wallabag_user.user_repository')
+        $enabledUsers = $this->get(UserRepository::class)
             ->getSumEnabledUsers();
 
         if ($enabledUsers <= 1) {
@@ -604,10 +616,10 @@ class ConfigController extends Controller
         $user = $this->getUser();
 
         // logout current user
-        $this->get('security.token_storage')->setToken(null);
+        $this->get(TokenStorageInterface::class)->setToken(null);
         $request->getSession()->invalidate();
 
-        $em = $this->get('fos_user.user_manager');
+        $em = $this->get(UserManagerInterface::class);
         $em->deleteUser($user);
 
         return $this->redirect($this->generateUrl('fos_user_security_login'));
@@ -618,7 +630,7 @@ class ConfigController extends Controller
      *
      * @Route("/config/view-mode", name="switch_view_mode")
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function changeViewModeAction(Request $request)
     {
@@ -639,11 +651,11 @@ class ConfigController extends Controller
      *
      * @Route("/locale/{language}", name="changeLocale")
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function setLocaleAction(Request $request, $language = null)
     {
-        $errors = $this->get('validator')->validate($language, (new LocaleConstraint()));
+        $errors = $this->get(ValidatorInterface::class)->validate($language, (new LocaleConstraint()));
 
         if (0 === \count($errors)) {
             $request->getSession()->set('_locale', $language);
@@ -690,7 +702,7 @@ class ConfigController extends Controller
             return;
         }
 
-        $this->get('wallabag_core.entry_repository')
+        $this->get(EntryRepository::class)
             ->removeTags($userId, $tags);
 
         // cleanup orphan tags
@@ -712,7 +724,7 @@ class ConfigController extends Controller
      */
     private function removeAllTagsByUserId($userId)
     {
-        $tags = $this->get('wallabag_core.tag_repository')->findAllTags($userId);
+        $tags = $this->get(TagRepository::class)->findAllTags($userId);
         $this->removeAllTagsByStatusAndUserId($tags, $userId);
     }
 
@@ -723,7 +735,7 @@ class ConfigController extends Controller
      */
     private function removeTagsForArchivedByUserId($userId)
     {
-        $tags = $this->get('wallabag_core.tag_repository')->findForArchivedArticlesByUser($userId);
+        $tags = $this->get(TagRepository::class)->findForArchivedArticlesByUser($userId);
         $this->removeAllTagsByStatusAndUserId($tags, $userId);
     }
 
@@ -732,7 +744,7 @@ class ConfigController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $archivedEntriesAnnotations = $this->getDoctrine()
-            ->getRepository('WallabagAnnotationBundle:Annotation')
+            ->getRepository(Annotation::class)
             ->findAllArchivedEntriesByUser($userId);
 
         foreach ($archivedEntriesAnnotations as $archivedEntriesAnnotation) {
@@ -756,17 +768,17 @@ class ConfigController extends Controller
      * Retrieve config for the current user.
      * If no config were found, create a new one.
      *
-     * @return Config
+     * @return ConfigEntity
      */
     private function getConfig()
     {
         $config = $this->getDoctrine()
-            ->getRepository('WallabagCoreBundle:Config')
+            ->getRepository(ConfigEntity::class)
             ->findOneByUser($this->getUser());
 
         // should NEVER HAPPEN ...
         if (!$config) {
-            $config = new Config($this->getUser());
+            $config = new ConfigEntity($this->getUser());
         }
 
         return $config;

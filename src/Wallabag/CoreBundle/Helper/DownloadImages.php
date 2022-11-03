@@ -189,7 +189,7 @@ class DownloadImages
         switch ($ext) {
             case 'gif':
                 // use Imagick if available to keep GIF animation
-                if (class_exists('\\Imagick')) {
+                if (class_exists(\Imagick::class)) {
                     try {
                         $imagick = new \Imagick();
                         $imagick->readImageBlob($res->getBody());

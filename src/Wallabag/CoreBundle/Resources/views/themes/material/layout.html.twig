@@ -1,4 +1,4 @@
-{% extends "WallabagCoreBundle::base.html.twig" %}
+{% extends "@WallabagCore/base.html.twig" %}
 
 {% block css %}
     {{ parent() }}
@@ -16,9 +16,9 @@
 {% endblock %}
 
 {% block messages %}
-    {% for flashMessage in app.session.flashbag.get('notice') %}
+    {% for flash_message in app.session.flashbag.get('notice') %}
         <script>
-            Materialize.toast('{{ flashMessage|trans }}', 4000);
+            Materialize.toast('{{ flash_message|trans }}', 4000);
         </script>
     {% endfor %}
 {% endblock %}
@@ -34,40 +34,40 @@
                 </li>
             {% endblock %}
 
-            {% set currentRoute = app.request.attributes.get('_route') %}
-            {% set currentRouteFromQueryParams = app.request.query.get('currentRoute') %}
+            {% set current_route = app.request.attributes.get('_route') %}
+            {% set current_route_from_query_params = app.request.query.get('currentRoute') %}
 
-            {% set activeRoute = null %}
-            {% if currentRoute == 'all' or currentRouteFromQueryParams == 'all' %}
-               {% set activeRoute = 'all' %}
-            {% elseif currentRoute == 'annotated' or currentRouteFromQueryParams == 'annotated' %}
-               {% set activeRoute = 'annotated' %}
-            {% elseif currentRoute == 'archive' or currentRouteFromQueryParams == 'archive' %}
-               {% set activeRoute = 'archive' %}
-            {% elseif currentRoute == 'starred' or currentRouteFromQueryParams == 'starred' %}
-               {% set activeRoute = 'starred' %}
-            {% elseif currentRoute == 'unread' or currentRoute == 'homepage' or currentRouteFromQueryParams == 'unread' %}
-               {% set activeRoute = 'unread' %}
-            {% elseif currentRoute == 'untagged' %}
-               {% set activeRoute = 'untagged' %}
+            {% set active_route = null %}
+            {% if current_route == 'all' or current_route_from_query_params == 'all' %}
+               {% set active_route = 'all' %}
+            {% elseif current_route == 'annotated' or current_route_from_query_params == 'annotated' %}
+               {% set active_route = 'annotated' %}
+            {% elseif current_route == 'archive' or current_route_from_query_params == 'archive' %}
+               {% set active_route = 'archive' %}
+            {% elseif current_route == 'starred' or current_route_from_query_params == 'starred' %}
+               {% set active_route = 'starred' %}
+            {% elseif current_route == 'unread' or current_route == 'homepage' or current_route_from_query_params == 'unread' %}
+               {% set active_route = 'unread' %}
+            {% elseif current_route == 'untagged' %}
+               {% set active_route = 'untagged' %}
             {% endif %}
 
-            <li class="bold {% if activeRoute == 'unread' %}active{% endif %}">
+            <li class="bold {% if active_route == 'unread' %}active{% endif %}">
                 <a class="waves-effect" href="{{ path('unread') }}">{{ 'menu.left.unread'|trans }} <span class="numberItems grey-text">{{ count_entries('unread') }}</span></a>
             </li>
-            <li class="bold {% if activeRoute == 'starred' %}active{% endif %}">
+            <li class="bold {% if active_route == 'starred' %}active{% endif %}">
                 <a class="waves-effect" href="{{ path('starred') }}">{{ 'menu.left.starred'|trans }} <span class="numberItems grey-text">{{ count_entries('starred') }}</span></a>
             </li>
-            <li class="bold {% if activeRoute == 'archive' %}active{% endif %}">
+            <li class="bold {% if active_route == 'archive' %}active{% endif %}">
                 <a class="waves-effect" href="{{ path('archive') }}">{{ 'menu.left.archive'|trans }} <span class="numberItems grey-text">{{ count_entries('archive') }}</span></a>
             </li>
-            <li class="bold {% if activeRoute == 'annotated' %}active{% endif %}">
+            <li class="bold {% if active_route == 'annotated' %}active{% endif %}">
                 <a class="waves-effect" href="{{ path('annotated') }}">{{ 'menu.left.with_annotations'|trans }} <span class="numberItems grey-text">{{ count_entries('annotated') }}</span></a>
             </li>
-            <li class="bold {% if activeRoute == 'all' %}active{% endif %}">
+            <li class="bold {% if active_route == 'all' %}active{% endif %}">
                 <a class="waves-effect" href="{{ path('all') }}">{{ 'menu.left.all_articles'|trans }} <span class="numberItems grey-text">{{ count_entries('all') }}</span></a>
             </li>
-            <li class="bold {% if currentRoute == 'tags' %}active{% endif %}">
+            <li class="bold {% if current_route == 'tags' %}active{% endif %}">
                 <a class="waves-effect" href="{{ path('tag') }}">{{ 'menu.left.tags'|trans }} <span class="numberItems grey-text">{{ count_tags() }}</span></a>
             </li>
         </ul>
@@ -91,9 +91,9 @@
                             <i class="material-icons">search</i>
                         </a>
                     </li>
-                    {% if activeRoute %}
+                    {% if active_route %}
                     <li id="button_random">
-                        <a class="waves-effect tooltipped js-random-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', { 'type': activeRoute }) }}">
+                        <a class="waves-effect tooltipped js-random-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', {'type': active_route}) }}">
                             <i class="material-icons">casino</i>
                         </a>
                     </li>
@@ -154,8 +154,8 @@
                 </ul>
 
             </div>
-            {{ render(controller("WallabagCoreBundle:Entry:searchForm", {'currentRoute': currentRoute})) }}
-            {{ render(controller("WallabagCoreBundle:Entry:addEntryForm")) }}
+            {{ render(controller('Wallabag\\CoreBundle\\Controller\\EntryController::searchFormAction', {'currentRoute': current_route})) }}
+            {{ render(controller('Wallabag\\CoreBundle\\Controller\\EntryController::addEntryFormAction')) }}
         </div>
     </nav>
 {% endblock %}
@@ -166,7 +166,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col m12 l8">
-                        <p class="footer-text" title="{{ display_stats() | raw | striptags }}">
+                        <p class="footer-text" title="{{ display_stats()|raw|striptags }}">
                             {{ display_stats() }}
                         </p>
                     </div>

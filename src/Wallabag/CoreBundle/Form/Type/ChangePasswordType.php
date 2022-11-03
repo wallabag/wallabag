@@ -8,7 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
-use Symfony\Component\Validator\Constraints;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ChangePasswordType extends AbstractType
 {
@@ -26,11 +27,11 @@ class ChangePasswordType extends AbstractType
                 'first_options' => ['label' => 'config.form_password.new_password_label'],
                 'second_options' => ['label' => 'config.form_password.repeat_new_password_label'],
                 'constraints' => [
-                    new Constraints\Length([
+                    new Length([
                         'min' => 8,
                         'minMessage' => 'validator.password_too_short',
                     ]),
-                    new Constraints\NotBlank(),
+                    new NotBlank(),
                 ],
                 'label' => 'config.form_password.new_password_label',
             ])

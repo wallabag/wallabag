@@ -211,6 +211,10 @@ a.original:not(.waves-effect) {
   display: flex;
 }
 
+.card-tag-delete {
+  margin-left: 10px;
+}
+
 .card-tag-labels {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));

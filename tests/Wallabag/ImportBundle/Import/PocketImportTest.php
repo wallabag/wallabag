@@ -2,15 +2,22 @@
 
 namespace Tests\Wallabag\ImportBundle\Import;
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\UnitOfWork;
 use GuzzleHttp\Psr7\Response;
 use Http\Mock\Client as HttpMockClient;
 use M6Web\Component\RedisMock\RedisMockFactory;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
+use Predis\Client;
 use Simpleue\Queue\RedisQueue;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Helper\ContentProxy;
+use Wallabag\CoreBundle\Helper\TagsAssigner;
+use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\ImportBundle\Import\PocketImport;
 use Wallabag\ImportBundle\Redis\Producer;
 use Wallabag\UserBundle\Entity\User;
@@ -187,7 +194,7 @@ JSON
 
         $pocketImport = $this->getPocketImport('ConsumerKey', 1);
 
-        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+        $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -277,7 +284,7 @@ JSON
 
         $pocketImport = $this->getPocketImport('ConsumerKey', 2);
 
-        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+        $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -357,7 +364,7 @@ JSON
 
         $pocketImport = $this->getPocketImport();
 
-        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+        $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -374,7 +381,7 @@ JSON
             ->expects($this->never())
             ->method('updateEntry');
 
-        $producer = $this->getMockBuilder('OldSound\RabbitMqBundle\RabbitMq\Producer')
+        $producer = $this->getMockBuilder(\OldSound\RabbitMqBundle\RabbitMq\Producer::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -440,7 +447,7 @@ JSON
 
         $pocketImport = $this->getPocketImport();
 
-        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+        $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -458,7 +465,7 @@ JSON
             ->method('updateEntry');
 
         $factory = new RedisMockFactory();
-        $redisMock = $factory->getAdapter('Predis\Client', true);
+        $redisMock = $factory->getAdapter(Client::class, true);
 
         $queue = new RedisQueue($redisMock, 'pocket');
         $producer = new Producer($queue);
@@ -517,7 +524,7 @@ JSON
 
         $pocketImport = $this->getPocketImport('ConsumerKey', 1);
 
-        $entryRepo = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+        $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -555,19 +562,19 @@ JSON
 
         $this->user->setConfig($config);
 
-        $this->contentProxy = $this->getMockBuilder('Wallabag\CoreBundle\Helper\ContentProxy')
+        $this->contentProxy = $this->getMockBuilder(ContentProxy::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->tagsAssigner = $this->getMockBuilder('Wallabag\CoreBundle\Helper\TagsAssigner')
+        $this->tagsAssigner = $this->getMockBuilder(TagsAssigner::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        $this->em = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->uow = $this->getMockBuilder('Doctrine\ORM\UnitOfWork')
+        $this->uow = $this->getMockBuilder(UnitOfWork::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -581,7 +588,7 @@ JSON
             ->method('getScheduledEntityInsertions')
             ->willReturn([]);
 
-        $dispatcher = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
+        $dispatcher = $this->getMockBuilder(EventDispatcher::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -589,12 +596,11 @@ JSON
             ->expects($this->exactly($dispatched))
             ->method('dispatch');
 
-        $pocket = new PocketImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher);
-        $pocket->setUser($this->user);
-
         $this->logHandler = new TestHandler();
         $logger = new Logger('test', [$this->logHandler]);
-        $pocket->setLogger($logger);
+
+        $pocket = new PocketImport($this->em, $this->contentProxy, $this->tagsAssigner, $dispatcher, $logger);
+        $pocket->setUser($this->user);
 
         return $pocket;
     }

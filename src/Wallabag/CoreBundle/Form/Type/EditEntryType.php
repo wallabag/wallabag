@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Wallabag\CoreBundle\Entity\Entry;
 
 class EditEntryType extends AbstractType
 {
@@ -39,7 +40,7 @@ class EditEntryType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Wallabag\CoreBundle\Entity\Entry',
+            'data_class' => Entry::class,
         ]);
     }
 

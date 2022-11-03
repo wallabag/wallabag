@@ -4,8 +4,11 @@ namespace Wallabag\ApiBundle\Controller;
 
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use JMS\Serializer\SerializationContext;
+use JMS\Serializer\SerializerInterface;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class WallabagRestController extends AbstractFOSRestController
@@ -22,7 +25,7 @@ class WallabagRestController extends AbstractFOSRestController
     public function getVersionAction()
     {
         $version = $this->container->getParameter('wallabag_core.version');
-        $json = $this->get('jms_serializer')->serialize($version, 'json');
+        $json = $this->get(SerializerInterface::class)->serialize($version, 'json');
 
         return (new JsonResponse())->setJson($json);
     }
@@ -39,15 +42,15 @@ class WallabagRestController extends AbstractFOSRestController
         $info = [
             'appname' => 'wallabag',
             'version' => $this->container->getParameter('wallabag_core.version'),
-            'allowed_registration' => $this->container->getParameter('wallabag_user.registration_enabled'),
+            'allowed_registration' => $this->container->getParameter('fosuser_registration'),
         ];
 
-        return (new JsonResponse())->setJson($this->get('jms_serializer')->serialize($info, 'json'));
+        return (new JsonResponse())->setJson($this->get(SerializerInterface::class)->serialize($info, 'json'));
     }
 
     protected function validateAuthentication()
     {
-        if (false === $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if (false === $this->get(AuthorizationCheckerInterface::class)->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw new AccessDeniedException();
         }
     }
@@ -60,7 +63,7 @@ class WallabagRestController extends AbstractFOSRestController
      */
     protected function validateUserAccess($requestUserId)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this->get(TokenStorageInterface::class)->getToken()->getUser();
         if ($requestUserId !== $user->getId()) {
             throw $this->createAccessDeniedException('Access forbidden. Entry user id: ' . $requestUserId . ', logged user id: ' . $user->getId());
         }
@@ -79,7 +82,7 @@ class WallabagRestController extends AbstractFOSRestController
         $context = new SerializationContext();
         $context->setSerializeNull(true);
 
-        $json = $this->get('jms_serializer')->serialize($data, 'json', $context);
+        $json = $this->get(SerializerInterface::class)->serialize($data, 'json', $context);
 
         return (new JsonResponse())->setJson($json);
     }

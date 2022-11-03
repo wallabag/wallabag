@@ -2,7 +2,6 @@
 
 namespace Wallabag\CoreBundle\Form\Type;
 
-use Doctrine\ORM\EntityRepository;
 use Lexik\Bundle\FormFilterBundle\Filter\FilterOperands;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\CheckboxFilterType;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\ChoiceFilterType;
@@ -15,6 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Wallabag\CoreBundle\Repository\EntryRepository;
 
 class EntryFilterType extends AbstractType
 {
@@ -24,7 +24,7 @@ class EntryFilterType extends AbstractType
     /**
      * Repository & user are used to get a list of language entries for this user.
      */
-    public function __construct(EntityRepository $entryRepository, TokenStorageInterface $tokenStorage)
+    public function __construct(EntryRepository $entryRepository, TokenStorageInterface $tokenStorage)
     {
         $this->repository = $entryRepository;
 

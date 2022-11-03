@@ -4,6 +4,7 @@ namespace Wallabag\CoreBundle\Event\Subscriber;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\Common\EventSubscriber;
+use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Wallabag\CoreBundle\Entity\Entry;
 
@@ -40,7 +41,7 @@ class SQLiteCascadeDeleteSubscriber implements EventSubscriber
     public function preRemove(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-        if (!$this->doctrine->getConnection()->getDatabasePlatform() instanceof \Doctrine\DBAL\Platforms\SqlitePlatform
+        if (!$this->doctrine->getConnection()->getDatabasePlatform() instanceof SqlitePlatform
             || !$entity instanceof Entry) {
             return;
         }

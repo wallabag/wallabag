@@ -9,11 +9,11 @@ services:
         public: true
 
     wallabag_core.entry_repository.test:
-        alias: wallabag_core.entry_repository
+        alias: Wallabag\CoreBundle\Repository\EntryRepository
         public: true
 
     wallabag_user.user_repository.test:
-        alias: wallabag_user.user_repository
+        alias: Wallabag\UserBundle\Repository\UserRepository
         public: true
 
     filesystem_cache:

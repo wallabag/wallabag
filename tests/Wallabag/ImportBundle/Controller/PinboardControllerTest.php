@@ -2,8 +2,12 @@
 
 namespace Tests\Wallabag\ImportBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
+use Doctrine\ORM\EntityManagerInterface;
+use Predis\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Entity\Entry;
 
 class PinboardControllerTest extends WallabagCoreTestCase
 {
@@ -24,7 +28,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 1);
+        $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
         $crawler = $client->request('GET', '/import/pinboard');
 
@@ -32,7 +36,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
 
-        $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 0);
+        $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
     public function testImportPinboardBadFile()
@@ -57,7 +61,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
         $this->checkRedis();
         $this->logInAs('admin');
         $client = $this->getClient();
-        $client->getContainer()->get('craue_config')->set('import_with_redis', 1);
+        $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
         $crawler = $client->request('GET', '/import/pinboard');
 
@@ -82,9 +86,9 @@ class PinboardControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
-        $this->assertNotEmpty($client->getContainer()->get('wallabag_core.redis.client')->lpop('wallabag.import.pinboard'));
+        $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.pinboard'));
 
-        $client->getContainer()->get('craue_config')->set('import_with_redis', 0);
+        $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
     public function testImportPinboardWithFile()
@@ -108,8 +112,8 @@ class PinboardControllerTest extends WallabagCoreTestCase
         $crawler = $client->followRedirect();
 
         $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://ma.ttias.be/varnish-explained/',
                 $this->getLoggedInUserId()
@@ -118,7 +122,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
+        $this->assertInstanceOf(Entry::class, $content);
         $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://ma.ttias.be is ok');
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://ma.ttias.be is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for https://ma.ttias.be is ok');
@@ -155,25 +159,25 @@ class PinboardControllerTest extends WallabagCoreTestCase
         $crawler = $client->followRedirect();
 
         $content1 = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://ilia.ws/files/nginx_torontophpug.pdf',
                 $this->getLoggedInUserId()
             );
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content1);
+        $this->assertInstanceOf(Entry::class, $content1);
         $this->assertTrue($content1->isArchived());
 
         $content2 = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://developers.google.com/web/updates/2016/07/infinite-scroller',
                 $this->getLoggedInUserId()
             );
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content2);
+        $this->assertInstanceOf(Entry::class, $content2);
         $this->assertTrue($content2->isArchived());
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));

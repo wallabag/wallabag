@@ -2,25 +2,23 @@
 
 namespace Tests\Wallabag\CoreBundle\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\CoreBundle\Command\CleanDuplicatesCommand;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\UserBundle\Entity\User;
 
 class CleanDuplicatesCommandTest extends WallabagCoreTestCase
 {
     public function testRunCleanDuplicates()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new CleanDuplicatesCommand());
 
         $command = $application->find('wallabag:clean-duplicates');
 
         $tester = new CommandTester($command);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
 
         $this->assertStringContainsString('Cleaning through 3 user accounts', $tester->getDisplay());
         $this->assertStringContainsString('Finished cleaning. 0 duplicates found in total', $tester->getDisplay());
@@ -29,13 +27,11 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
     public function testRunCleanDuplicatesCommandWithBadUsername()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new CleanDuplicatesCommand());
 
         $command = $application->find('wallabag:clean-duplicates');
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'unknown',
         ]);
 
@@ -45,13 +41,11 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
     public function testRunCleanDuplicatesCommandForUser()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new CleanDuplicatesCommand());
 
         $command = $application->find('wallabag:clean-duplicates');
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'admin',
         ]);
 
@@ -62,14 +56,14 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
     {
         $url = 'https://www.lemonde.fr/sport/visuel/2017/05/05/rondelle-prison-blanchissage-comprendre-le-hockey-sur-glace_5122587_3242.html';
         $client = $this->getClient();
-        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
 
         $this->logInAs('admin');
 
-        $nbEntries = $em->getRepository('WallabagCoreBundle:Entry')->findAllByUrlAndUserId($url, $this->getLoggedInUserId());
+        $nbEntries = $em->getRepository(Entry::class)->findAllByUrlAndUserId($url, $this->getLoggedInUserId());
         $this->assertCount(0, $nbEntries);
 
-        $user = $em->getRepository('WallabagUserBundle:User')->findOneById($this->getLoggedInUserId());
+        $user = $em->getRepository(User::class)->findOneById($this->getLoggedInUserId());
 
         $entry1 = new Entry($user);
         $entry1->setUrl($url);
@@ -82,23 +76,21 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
 
         $em->flush();
 
-        $nbEntries = $em->getRepository('WallabagCoreBundle:Entry')->findAllByUrlAndUserId($url, $this->getLoggedInUserId());
+        $nbEntries = $em->getRepository(Entry::class)->findAllByUrlAndUserId($url, $this->getLoggedInUserId());
         $this->assertCount(2, $nbEntries);
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new CleanDuplicatesCommand());
 
         $command = $application->find('wallabag:clean-duplicates');
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'admin',
         ]);
 
         $this->assertStringContainsString('Cleaned 1 duplicates for user admin', $tester->getDisplay());
 
-        $nbEntries = $em->getRepository('WallabagCoreBundle:Entry')->findAllByUrlAndUserId($url, $this->getLoggedInUserId());
+        $nbEntries = $em->getRepository(Entry::class)->findAllByUrlAndUserId($url, $this->getLoggedInUserId());
         $this->assertCount(1, $nbEntries);
 
         $query = $em->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\Entry e WHERE e.url = :url');

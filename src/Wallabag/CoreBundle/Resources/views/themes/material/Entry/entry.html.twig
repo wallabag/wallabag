@@ -1,4 +1,4 @@
-{% extends "WallabagCoreBundle::layout.html.twig" %}
+{% extends "@WallabagCore/layout.html.twig" %}
 
 {% block title %}{{ entry.title|striptags|default('entry.default_title'|trans)|raw }} ({{ entry.domainName|removeWww }}){% endblock %}
 
@@ -24,12 +24,12 @@
             </ul>
             <ul class="right">
                 <li>
-                    <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_read'|trans }}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
+                    <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_read'|trans }}" href="{{ path('archive_entry', {'id': entry.id}) }}" id="markAsRead">
                         <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
                     </a>
                 </li>
                 <li>
-                    <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
+                    <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', {'id': entry.id}) }}" id="setFav">
                         <i class="material-icons small">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
                     </a>
                 </li>
@@ -54,35 +54,35 @@
         </li>
 
         <li class="bold">
-            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.re_fetch_content'|trans }}" href="{{ path('reload_entry', { 'id': entry.id }) }}" id="reload">
+            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.re_fetch_content'|trans }}" href="{{ path('reload_entry', {'id': entry.id}) }}" id="reload">
                 <i class="material-icons small">refresh</i>
                 <span>{{ 'entry.view.left_menu.re_fetch_content'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
 
-        {% set markAsReadLabel = 'entry.view.left_menu.set_as_unread' %}
+        {% set mark_as_read_label = 'entry.view.left_menu.set_as_unread' %}
         {% if entry.isArchived == 0 %}
-            {% set markAsReadLabel = 'entry.view.left_menu.set_as_read' %}
+            {% set mark_as_read_label = 'entry.view.left_menu.set_as_read' %}
         {% endif %}
 
         <li class="bold hide-on-med-and-down">
-            <a class="waves-effect collapsible-header markasread" title="{{ markAsReadLabel|trans }}" href="{{ path('archive_entry', { 'id': entry.id }) }}" id="markAsRead">
+            <a class="waves-effect collapsible-header markasread" title="{{ mark_as_read_label|trans }}" href="{{ path('archive_entry', {'id': entry.id}) }}" id="markAsRead">
                 <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
-                <span>{{ markAsReadLabel|trans }}</span>
+                <span>{{ mark_as_read_label|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
 
         <li class="bold hide-on-med-and-down">
-            <a class="waves-effect collapsible-header favorite" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', { 'id': entry.id }) }}" id="setFav">
+            <a class="waves-effect collapsible-header favorite" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', {'id': entry.id}) }}" id="setFav">
                 <i class="material-icons spall">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
                 <span>{{ 'entry.view.left_menu.set_as_starred'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
         <li class="bold border-bottom">
-            <a class="waves-effect collapsible-header delete" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', { 'id': entry.id }) }}">
+            <a class="waves-effect collapsible-header delete" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', {'id': entry.id}) }}">
                 <i class="material-icons small">delete</i>
                 <span>{{ 'entry.view.left_menu.delete'|trans }}</span>
             </a>
@@ -123,15 +123,7 @@
                 </li>
             </ul>
         </li>
-        {% if craue_setting('share_public')
-           or craue_setting('share_twitter')
-           or craue_setting('share_shaarli')
-           or craue_setting('share_scuttle')
-           or craue_setting('share_diaspora')
-           or craue_setting('share_unmark')
-           or craue_setting('carrot')
-           or craue_setting('share_mail')
-        %}
+        {% if craue_setting('share_public') or craue_setting('share_twitter') or craue_setting('share_shaarli') or craue_setting('share_diaspora') or craue_setting('share_unmark') or craue_setting('share_mail') %}
         <li class="bold">
             <a class="waves-effect collapsible-header">
                 <i class="material-icons small">share</i>
@@ -141,19 +133,19 @@
                 <ul>
                     {% if craue_setting('share_public') %}
                         <li>
-                            <a href="{{ path('share', {'id': entry.id }) }}" target="_blank" title="{{ 'entry.view.left_menu.public_link'|trans }}" class="tool icon-eye">
+                            <a href="{{ path('share', {'id': entry.id}) }}" target="_blank" title="{{ 'entry.view.left_menu.public_link'|trans }}" class="tool icon-eye">
                                 <span>{{ 'entry.view.left_menu.public_link'|trans }}</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ path('delete_share', {'id': entry.id }) }}" title="{{ 'entry.view.left_menu.delete_public_link'|trans }}" class="tool icon-no-eye">
+                            <a href="{{ path('delete_share', {'id': entry.id}) }}" title="{{ 'entry.view.left_menu.delete_public_link'|trans }}" class="tool icon-no-eye">
                                 <span>{{ 'entry.view.left_menu.delete_public_link'|trans }}</span>
                             </a>
                         </li>
                     {% endif %}
                     {% if craue_setting('share_twitter') %}
                         <li>
-                            <a href="https://twitter.com/share?text={{entry.title|striptags|url_encode}}%20{{ entry.url|url_encode }}%20via%20@wallabagapp" target="_blank" rel="noopener" class="tool icon-twitter" title="twitter">
+                            <a href="https://twitter.com/share?text={{ entry.title|striptags|url_encode }}%20{{ entry.url|url_encode }}%20via%20@wallabagapp" target="_blank" rel="noopener" class="tool icon-twitter" title="twitter">
                                 <span>twitter</span>
                             </a>
                         </li>
@@ -162,13 +154,6 @@
                         <li>
                         <a href="{{ craue_setting('shaarli_url') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|striptags|url_encode }}&amp;tags={{ entry.tags|join(',')|striptags|url_encode }}{% if craue_setting('shaarli_share_origin_url') %}&amp;original_url={{ entry.originUrl|url_encode }}{% endif %}" target="_blank" rel="noopener" title="shaarli" class="tool icon-image shaarli">
                                 <span>shaarli</span>
-                            </a>
-                        </li>
-                    {% endif %}
-                    {% if craue_setting('share_scuttle') %}
-                        <li>
-                        <a href="{{ craue_setting('scuttle_url') }}/bookmarks.php?action=add&amp;address={{ entry.url|url_encode }}&amp;title={{ entry.title|striptags|url_encode }}&amp;tags={{ entry.tags|join(',')|striptags|url_encode }}" target="_blank" rel="noopener" title="scuttle" class="tool icon-image scuttle">
-                                <span>scuttle</span>
                             </a>
                         </li>
                     {% endif %}
@@ -181,15 +166,8 @@
                     {% endif %}
                     {% if craue_setting('share_unmark') %}
                         <li>
-                            <a href="{{ craue_setting('unmark_url') }}/mark/add?url={{ entry.url|url_encode }}&amp;title={{entry.title|striptags|url_encode}}&amp;v=6" target="_blank" rel="noopener" class="tool icon-image unmark" title="unmark">
+                            <a href="{{ craue_setting('unmark_url') }}/mark/add?url={{ entry.url|url_encode }}&amp;title={{ entry.title|striptags|url_encode }}&amp;v=6" target="_blank" rel="noopener" class="tool icon-image unmark" title="unmark">
                                 <span>unmark.it</span>
-                            </a>
-                        </li>
-                    {% endif %}
-                    {% if craue_setting('carrot') %}
-                        <li>
-                            <a href="https://secure.carrot.org/GiveAndGetBack.do?url={{ entry.url|url_encode }}&amp;title={{ entry.title|striptags|url_encode }}" target="_blank" rel="noopener" title="carrot" class="tool icon-image carrot">
-                                <span>Carrot</span>
                             </a>
                         </li>
                     {% endif %}
@@ -217,7 +195,7 @@
         {% endif %}
 
         <li class="bold border-top border-bottom">
-            <a class="waves-effect collapsible-header" title="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', { 'type': 'all' }) }}">
+            <a class="waves-effect collapsible-header" title="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', {'type': 'all'}) }}">
                 <i class="material-icons small">casino</i>
                 <span>{{ 'menu.top.random_entry'|trans }}</span>
             </a>
@@ -230,13 +208,13 @@
             </a>
             <div class="collapsible-body">
                 <ul>
-                    {% if craue_setting('export_epub') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'epub' }) }}" title="Generate ePub file">EPUB</a></li>{% endif %}
-                    {% if craue_setting('export_mobi') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'mobi' }) }}" title="Generate Mobi file">MOBI (deprecated)</a></li>{% endif %}
-                    {% if craue_setting('export_pdf') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'pdf' }) }}" title="Generate PDF file">PDF</a></li>{% endif %}
-                    {% if craue_setting('export_csv') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'csv' }) }}" title="Generate CSV file">CSV</a></li>{% endif %}
-                    {% if craue_setting('export_json') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'json' }) }}" title="Generate JSON file">JSON</a></li>{% endif %}
-                    {% if craue_setting('export_txt') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'txt' }) }}" title="Generate TXT file">TXT</a></li>{% endif %}
-                    {% if craue_setting('export_xml') %}<li><a href="{{ path('export_entry', { 'id': entry.id, 'format': 'xml' }) }}" title="Generate XML file">XML</a></li>{% endif %}
+                    {% if craue_setting('export_epub') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'epub'}) }}" title="Generate ePub file">EPUB</a></li>{% endif %}
+                    {% if craue_setting('export_mobi') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'mobi'}) }}" title="Generate Mobi file">MOBI (deprecated)</a></li>{% endif %}
+                    {% if craue_setting('export_pdf') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'pdf'}) }}" title="Generate PDF file">PDF</a></li>{% endif %}
+                    {% if craue_setting('export_csv') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'csv'}) }}" title="Generate CSV file">CSV</a></li>{% endif %}
+                    {% if craue_setting('export_json') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'json'}) }}" title="Generate JSON file">JSON</a></li>{% endif %}
+                    {% if craue_setting('export_txt') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'txt'}) }}" title="Generate TXT file">TXT</a></li>{% endif %}
+                    {% if craue_setting('export_xml') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'xml'}) }}" title="Generate XML file">XML</a></li>{% endif %}
                 </ul>
             </div>
         </li>
@@ -256,7 +234,7 @@
 {% block content %}
     <div id="article">
         <header class="mbm">
-            <h1><span{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>{{ entry.title|striptags|default('entry.default_title'|trans)|raw }}</span> <a href="{{ path('edit', { 'id': entry.id }) }}" title="{{ 'entry.view.edit_title'|trans }}"><i class="material-icons grey-text">create</i></a></h1>
+            <h1><span{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>{{ entry.title|striptags|default('entry.default_title'|trans)|raw }}</span> <a href="{{ path('edit', {'id': entry.id}) }}" title="{{ 'entry.view.edit_title'|trans }}"><i class="material-icons grey-text">create</i></a></h1>
         </header>
         <aside>
             <div class="tools grey-text" dir="auto">
@@ -290,7 +268,7 @@
                     </li>
                     <li>
                         <i class="material-icons grey-text">comment</i>
-                        {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations | length) }}
+                        {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations|length) }}
                     </li>
                     {% if entry.originUrl is not empty %}
                         <li>
@@ -305,12 +283,12 @@
             </div>
 
             <div class="input-field nav-panel-add-tag" style="display: none">
-                {{ render(controller( "WallabagCoreBundle:Tag:addTagForm", { 'id': entry.id } )) }}
+                {{ render(controller('Wallabag\\CoreBundle\\Controller\\TagController::addTagFormAction', {'id': entry.id})) }}
             </div>
 
         </aside>
         <article{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>
-            {{ entry.content | raw }}
+            {{ entry.content|raw }}
         </article>
 
         <div class="fixed-action-btn js-fixed-action-btn horizontal click-to-toggle hide-on-large-only">
@@ -318,9 +296,9 @@
               <i class="material-icons">menu</i>
             </a>
             <ul>
-              <li><a class="btn-floating" href="{{ path('archive_entry', { 'id': entry.id }) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i></a></li>
-              <li><a class="btn-floating" href="{{ path('star_entry', { 'id': entry.id }) }}"><i class="material-icons">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i></a></li>
-              <li><a class="btn-floating" href="{{ path('delete_entry', { 'id': entry.id }) }}" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')"><i class="material-icons">delete</i></a></li>
+              <li><a class="btn-floating" href="{{ path('archive_entry', {'id': entry.id}) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i></a></li>
+              <li><a class="btn-floating" href="{{ path('star_entry', {'id': entry.id}) }}"><i class="material-icons">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i></a></li>
+              <li><a class="btn-floating" href="{{ path('delete_entry', {'id': entry.id}) }}" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')"><i class="material-icons">delete</i></a></li>
             </ul>
         </div>
     </div>
@@ -329,10 +307,10 @@
 {
     "prefix": "",
     "urls": {
-        "create": "{{ path('annotations_post_annotation', { 'entry': entry.id }) }}",
-        "update": "{{ path('annotations_put_annotation', { 'annotation': 'idAnnotation' }) }}",
-        "destroy": "{{ path('annotations_delete_annotation', { 'annotation': 'idAnnotation' }) }}",
-        "search": "{{ path('annotations_get_annotations', { 'entry': entry.id }) }}"
+        "create": "{{ path('annotations_post_annotation', {'entry': entry.id}) }}",
+        "update": "{{ path('annotations_put_annotation', {'annotation': 'idAnnotation'}) }}",
+        "destroy": "{{ path('annotations_delete_annotation', {'annotation': 'idAnnotation'}) }}",
+        "search": "{{ path('annotations_get_annotations', {'entry': entry.id}) }}"
     },
     "entryId": "{{ entry.id }}"
 }</script>

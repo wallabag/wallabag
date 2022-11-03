@@ -3,42 +3,39 @@
 namespace Tests\Wallabag\ImportBundle\Command;
 
 use M6Web\Component\RedisMock\RedisMockFactory;
+use Predis\Client;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\ImportBundle\Command\RedisWorkerCommand;
 
 class RedisWorkerCommandTest extends WallabagCoreTestCase
 {
     public function testRunRedisWorkerCommandWithoutArguments()
     {
-        $this->expectException(\Symfony\Component\Console\Exception\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Not enough arguments (missing: "serviceName")');
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new RedisWorkerCommand());
 
         $command = $application->find('wallabag:import:redis-worker');
 
         $tester = new CommandTester($command);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
     }
 
     public function testRunRedisWorkerCommandWithBadService()
     {
-        $this->expectException(\Symfony\Component\Config\Definition\Exception\Exception::class);
+        $this->expectException(Exception::class);
         $this->expectExceptionMessage('No queue or consumer found for service name');
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new RedisWorkerCommand());
 
         $command = $application->find('wallabag:import:redis-worker');
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'serviceName' => 'YOMONSERVICE',
         ]);
     }
@@ -46,12 +43,11 @@ class RedisWorkerCommandTest extends WallabagCoreTestCase
     public function testRunRedisWorkerCommand()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new RedisWorkerCommand());
 
         $factory = new RedisMockFactory();
-        $redisMock = $factory->getAdapter('Predis\Client', true);
+        $redisMock = $factory->getAdapter(Client::class, true);
 
-        $application->getKernel()->getContainer()->set('wallabag_core.redis.client', $redisMock);
+        $application->getKernel()->getContainer()->set(Client::class, $redisMock);
 
         // put a fake message in the queue so the worker will stop after reading that message
         // instead of waiting for others
@@ -61,7 +57,6 @@ class RedisWorkerCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'serviceName' => 'readability',
             '--maxIterations' => 1,
         ]);

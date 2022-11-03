@@ -1,6 +1,5 @@
 settings_changed: Konfiguration aktualisiert
 download_pictures: Bilder auf den Server herunterladen
-carrot: Teilen zu Carrot aktivieren
 diaspora_url: diaspora*-URL, sofern der Service aktiviert ist
 export_epub: ePUB-Export aktivieren
 export_mobi: mobi-Export aktivieren
@@ -12,7 +11,6 @@ export_xml: XML-Export aktivieren
 import_with_rabbitmq: Aktiviere RabbitMQ, um Artikel asynchron zu importieren
 import_with_redis: Aktiviere Redis, um Artikel asynchron zu importieren
 shaarli_url: Shaarli-URL, sofern der Service aktiviert ist
-scuttle_url: Scuttle-URL, sofern der Service aktiviert ist
 unmark_url: Unmark-URL, sofern der Service aktiviert ist
 share_diaspora: Freigabe für diaspora* aktivieren
 share_mail: Freigabe per E-Mail aktivieren
@@ -40,4 +38,3 @@ api_user_registration: Registrierung eines Benutzers über die API ermöglichen
 store_article_headers: Speichern von HTTP-Headern für jeden Artikel aktivieren
 shaarli_share_origin_url: Original-URL mit Shaarli teilen, wenn der Service aktiviert
   ist
-share_scuttle: Freigabe für Scuttle aktivieren

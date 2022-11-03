@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   coding-standards:
-    name: "CS Fixer & PHPStan"
+    name: "CS Fixer, PHPStan & TwigCS"
     runs-on: "ubuntu-20.04"
 
     steps:
@@ -24,7 +24,7 @@ jobs:
         with:
           coverage: "none"
           php-version: "7.4"
-          tools: cs2pr, pecl, composer:2.2
+          tools: cs2pr, pecl
           extensions: pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
         env:
@@ -46,3 +46,6 @@ jobs:
 
       - name: "Run PHPStan"
         run: "php bin/phpstan analyse --no-progress --error-format=checkstyle | cs2pr"
+
+      - name: "Run TwigCS"
+        run: "php bin/twigcs --severity=error --display=blocking --reporter checkstyle app/ src/ | cs2pr"

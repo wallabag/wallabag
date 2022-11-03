@@ -2,8 +2,10 @@
 
 namespace Wallabag\ImportBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Wallabag\ImportBundle\Import\WallabagV2Import;
 
 class WallabagV2Controller extends WallabagController
 {
@@ -20,11 +22,11 @@ class WallabagV2Controller extends WallabagController
      */
     protected function getImportService()
     {
-        $service = $this->get('wallabag_import.wallabag_v2.import');
+        $service = $this->get(WallabagV2Import::class);
 
-        if ($this->get('craue_config')->get('import_with_rabbitmq')) {
+        if ($this->get(Config::class)->get('import_with_rabbitmq')) {
             $service->setProducer($this->get('old_sound_rabbit_mq.import_wallabag_v2_producer'));
-        } elseif ($this->get('craue_config')->get('import_with_redis')) {
+        } elseif ($this->get(Config::class)->get('import_with_redis')) {
             $service->setProducer($this->get('wallabag_import.producer.redis.wallabag_v2'));
         }
 
@@ -36,6 +38,6 @@ class WallabagV2Controller extends WallabagController
      */
     protected function getImportTemplate()
     {
-        return 'WallabagImportBundle:WallabagV2:index.html.twig';
+        return '@WallabagImport/WallabagV2/index.html.twig';
     }
 }

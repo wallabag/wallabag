@@ -1,9 +1,9 @@
-{% extends "WallabagCoreBundle::layout.html.twig" %}
+{% extends "@WallabagCore/layout.html.twig" %}
 
 {% block title %}{{ 'import.page_title'|trans }}{% endblock %}
 
 {% block messages %}
-    {{ render(controller("WallabagImportBundle:Import:checkQueue")) }}
+    {{ render(controller('Wallabag\\ImportBundle\\Controller\\ImportController::checkQueueAction')) }}
 
     {{ parent() }}
 {% endblock %}
@@ -12,7 +12,7 @@
 <div class="row">
     <div class="col s12">
         <div class="card-panel settings">
-            {% include 'WallabagImportBundle:Import:_information.html.twig' %}
+            {% include '@WallabagImport/Import/_information.html.twig' %}
 
             {{ 'import.page_description'|trans }}
             <ul>

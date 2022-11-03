@@ -2,11 +2,16 @@
 
 namespace Tests\Wallabag\CoreBundle\ParamConverter;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Common\Persistence\Mapping\ClassMetadata;
+use Doctrine\Common\Persistence\ObjectManager;
 use PHPUnit\Framework\TestCase;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Wallabag\CoreBundle\ParamConverter\UsernameFeedTokenConverter;
 use Wallabag\UserBundle\Entity\User;
+use Wallabag\UserBundle\Repository\UserRepository;
 
 class UsernameFeedTokenConverterTest extends TestCase
 {
@@ -20,7 +25,7 @@ class UsernameFeedTokenConverterTest extends TestCase
 
     public function testSupportsWithNoRegistryManagers()
     {
-        $registry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
+        $registry = $this->getMockBuilder(ManagerRegistry::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -36,7 +41,7 @@ class UsernameFeedTokenConverterTest extends TestCase
 
     public function testSupportsWithNoConfigurationClass()
     {
-        $registry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
+        $registry = $this->getMockBuilder(ManagerRegistry::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -52,7 +57,7 @@ class UsernameFeedTokenConverterTest extends TestCase
 
     public function testSupportsWithNotTheGoodClass()
     {
-        $meta = $this->getMockBuilder('Doctrine\Common\Persistence\Mapping\ClassMetadata')
+        $meta = $this->getMockBuilder(ClassMetadata::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -60,7 +65,7 @@ class UsernameFeedTokenConverterTest extends TestCase
             ->method('getName')
             ->willReturn('nothingrelated');
 
-        $em = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')
+        $em = $this->getMockBuilder(ObjectManager::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -69,7 +74,7 @@ class UsernameFeedTokenConverterTest extends TestCase
             ->with('superclass')
             ->willReturn($meta);
 
-        $registry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
+        $registry = $this->getMockBuilder(ManagerRegistry::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -90,24 +95,24 @@ class UsernameFeedTokenConverterTest extends TestCase
 
     public function testSupportsWithGoodClass()
     {
-        $meta = $this->getMockBuilder('Doctrine\Common\Persistence\Mapping\ClassMetadata')
+        $meta = $this->getMockBuilder(ClassMetadata::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $meta->expects($this->once())
             ->method('getName')
-            ->willReturn('Wallabag\UserBundle\Entity\User');
+            ->willReturn(User::class);
 
-        $em = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')
+        $em = $this->getMockBuilder(ObjectManager::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $em->expects($this->once())
             ->method('getClassMetadata')
-            ->with('WallabagUserBundle:User')
+            ->with(User::class)
             ->willReturn($meta);
 
-        $registry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
+        $registry = $this->getMockBuilder(ManagerRegistry::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -117,10 +122,10 @@ class UsernameFeedTokenConverterTest extends TestCase
 
         $registry->expects($this->once())
             ->method('getManagerForClass')
-            ->with('WallabagUserBundle:User')
+            ->with(User::class)
             ->willReturn($em);
 
-        $params = new ParamConverter(['class' => 'WallabagUserBundle:User']);
+        $params = new ParamConverter(['class' => User::class]);
         $converter = new UsernameFeedTokenConverter($registry);
 
         $this->assertTrue($converter->supports($params));
@@ -138,10 +143,10 @@ class UsernameFeedTokenConverterTest extends TestCase
 
     public function testApplyUserNotFound()
     {
-        $this->expectException(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $this->expectException(NotFoundHttpException::class);
         $this->expectExceptionMessage('User not found');
 
-        $repo = $this->getMockBuilder('Wallabag\UserBundle\Repository\UserRepository')
+        $repo = $this->getMockBuilder(UserRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -150,25 +155,25 @@ class UsernameFeedTokenConverterTest extends TestCase
             ->with('test', 'test')
             ->willReturn(null);
 
-        $em = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')
+        $em = $this->getMockBuilder(ObjectManager::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $em->expects($this->once())
             ->method('getRepository')
-            ->with('WallabagUserBundle:User')
+            ->with(User::class)
             ->willReturn($repo);
 
-        $registry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
+        $registry = $this->getMockBuilder(ManagerRegistry::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $registry->expects($this->once())
             ->method('getManagerForClass')
-            ->with('WallabagUserBundle:User')
+            ->with(User::class)
             ->willReturn($em);
 
-        $params = new ParamConverter(['class' => 'WallabagUserBundle:User']);
+        $params = new ParamConverter(['class' => User::class]);
         $converter = new UsernameFeedTokenConverter($registry);
         $request = new Request([], [], ['username' => 'test', 'token' => 'test']);
 
@@ -179,7 +184,7 @@ class UsernameFeedTokenConverterTest extends TestCase
     {
         $user = new User();
 
-        $repo = $this->getMockBuilder('Wallabag\UserBundle\Repository\UserRepository')
+        $repo = $this->getMockBuilder(UserRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -188,25 +193,25 @@ class UsernameFeedTokenConverterTest extends TestCase
             ->with('test', 'test')
             ->willReturn($user);
 
-        $em = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')
+        $em = $this->getMockBuilder(ObjectManager::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $em->expects($this->once())
             ->method('getRepository')
-            ->with('WallabagUserBundle:User')
+            ->with(User::class)
             ->willReturn($repo);
 
-        $registry = $this->getMockBuilder('Doctrine\Common\Persistence\ManagerRegistry')
+        $registry = $this->getMockBuilder(ManagerRegistry::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $registry->expects($this->once())
             ->method('getManagerForClass')
-            ->with('WallabagUserBundle:User')
+            ->with(User::class)
             ->willReturn($em);
 
-        $params = new ParamConverter(['class' => 'WallabagUserBundle:User', 'name' => 'user']);
+        $params = new ParamConverter(['class' => User::class, 'name' => 'user']);
         $converter = new UsernameFeedTokenConverter($registry);
         $request = new Request([], [], ['username' => 'test', 'token' => 'test']);
 

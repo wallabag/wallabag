@@ -77,7 +77,7 @@ class ConfigType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Wallabag\CoreBundle\Entity\Config',
+            'data_class' => Config::class,
         ]);
     }
 

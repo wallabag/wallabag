@@ -14,6 +14,8 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Helper\PreparePagerForEntries;
+use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\UserBundle\Entity\User;
 
 class FeedController extends Controller
@@ -23,11 +25,11 @@ class FeedController extends Controller
      *
      * @Route("/feed/{username}/{token}/unread/{page}", name="unread_feed", defaults={"page"=1, "_format"="xml"})
      *
-     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
+     * @ParamConverter("user", class="Wallabag\UserBundle\Entity\User", converter="username_feed_token_converter")
      *
      * @param $page
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showUnreadFeedAction(User $user, $page)
     {
@@ -39,11 +41,11 @@ class FeedController extends Controller
      *
      * @Route("/feed/{username}/{token}/archive/{page}", name="archive_feed", defaults={"page"=1, "_format"="xml"})
      *
-     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
+     * @ParamConverter("user", class="Wallabag\UserBundle\Entity\User", converter="username_feed_token_converter")
      *
      * @param $page
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showArchiveFeedAction(User $user, $page)
     {
@@ -55,11 +57,11 @@ class FeedController extends Controller
      *
      * @Route("/feed/{username}/{token}/starred/{page}", name="starred_feed", defaults={"page"=1, "_format"="xml"})
      *
-     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
+     * @ParamConverter("user", class="Wallabag\UserBundle\Entity\User", converter="username_feed_token_converter")
      *
      * @param $page
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showStarredFeedAction(User $user, $page)
     {
@@ -71,9 +73,9 @@ class FeedController extends Controller
      *
      * @Route("/feed/{username}/{token}/all/{page}", name="all_feed", defaults={"page"=1, "_format"="xml"})
      *
-     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
+     * @ParamConverter("user", class="Wallabag\UserBundle\Entity\User", converter="username_feed_token_converter")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showAllFeedAction(User $user, $page)
     {
@@ -85,10 +87,10 @@ class FeedController extends Controller
      *
      * @Route("/feed/{username}/{token}/tags/{slug}/{page}", name="tag_feed", defaults={"page"=1, "_format"="xml"})
      *
-     * @ParamConverter("user", class="WallabagUserBundle:User", converter="username_feed_token_converter")
+     * @ParamConverter("user", class="Wallabag\UserBundle\Entity\User", converter="username_feed_token_converter")
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showTagsFeedAction(Request $request, User $user, Tag $tag, $page)
     {
@@ -113,7 +115,7 @@ class FeedController extends Controller
             UrlGeneratorInterface::ABSOLUTE_URL
         );
 
-        $entriesByTag = $this->get('wallabag_core.entry_repository')->findAllByTagId(
+        $entriesByTag = $this->get(EntryRepository::class)->findAllByTagId(
             $user->getId(),
             $tag->getId(),
             $sorts[$sort]
@@ -121,7 +123,7 @@ class FeedController extends Controller
 
         $pagerAdapter = new ArrayAdapter($entriesByTag);
 
-        $entries = $this->get('wallabag_core.helper.prepare_pager_for_entries')->prepare(
+        $entries = $this->get(PreparePagerForEntries::class)->prepare(
             $pagerAdapter,
             $user
         );
@@ -180,11 +182,11 @@ class FeedController extends Controller
      * @param string $type Entries type: unread, starred or archive
      * @param int    $page
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     private function showEntries($type, User $user, $page = 1)
     {
-        $repository = $this->get('wallabag_core.entry_repository');
+        $repository = $this->get(EntryRepository::class);
 
         switch ($type) {
             case 'starred':

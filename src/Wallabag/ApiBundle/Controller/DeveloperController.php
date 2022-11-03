@@ -3,8 +3,12 @@
 namespace Wallabag\ApiBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\ApiBundle\Entity\Client;
 use Wallabag\ApiBundle\Form\Type\ClientType;
 
@@ -15,11 +19,11 @@ class DeveloperController extends Controller
      *
      * @Route("/developer", name="developer")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function indexAction()
     {
-        $clients = $this->getDoctrine()->getRepository('WallabagApiBundle:Client')->findByUser($this->getUser()->getId());
+        $clients = $this->getDoctrine()->getRepository(Client::class)->findByUser($this->getUser()->getId());
 
         return $this->render('@WallabagCore/themes/common/Developer/index.html.twig', [
             'clients' => $clients,
@@ -31,7 +35,7 @@ class DeveloperController extends Controller
      *
      * @Route("/developer/client/create", name="developer_create_client")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function createClientAction(Request $request)
     {
@@ -45,9 +49,9 @@ class DeveloperController extends Controller
             $em->persist($client);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add(
+            $this->get(SessionInterface::class)->getFlashBag()->add(
                 'notice',
-                $this->get('translator')->trans('flashes.developer.notice.client_created', ['%name%' => $client->getName()])
+                $this->get(TranslatorInterface::class)->trans('flashes.developer.notice.client_created', ['%name%' => $client->getName()])
             );
 
             return $this->render('@WallabagCore/themes/common/Developer/client_parameters.html.twig', [
@@ -67,7 +71,7 @@ class DeveloperController extends Controller
      *
      * @Route("/developer/client/delete/{id}", requirements={"id" = "\d+"}, name="developer_delete_client")
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteClientAction(Client $client)
     {
@@ -79,9 +83,9 @@ class DeveloperController extends Controller
         $em->remove($client);
         $em->flush();
 
-        $this->get('session')->getFlashBag()->add(
+        $this->get(SessionInterface::class)->getFlashBag()->add(
             'notice',
-            $this->get('translator')->trans('flashes.developer.notice.client_deleted', ['%name%' => $client->getName()])
+            $this->get(TranslatorInterface::class)->trans('flashes.developer.notice.client_deleted', ['%name%' => $client->getName()])
         );
 
         return $this->redirect($this->generateUrl('developer'));
@@ -92,7 +96,7 @@ class DeveloperController extends Controller
      *
      * @Route("/developer/howto/first-app", name="developer_howto_firstapp")
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function howtoFirstAppAction()
     {

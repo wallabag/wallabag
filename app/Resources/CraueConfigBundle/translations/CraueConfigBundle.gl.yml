@@ -18,12 +18,10 @@ wallabag_support_url: URL de axuda de wallabag
 show_printlink: Mostrar unha ligazón para imprimir o contido
 share_unmark: Activar a compartición en Unmark.it
 share_twitter: Activar a compartición en Twitter
-share_scuttle: Activar a compartición en Scuttle
 share_shaarli: Activar a compartición en Shaarli
 share_mail: Activar a compartición por email
 share_diaspora: Activar a compartición en diaspora*
 unmark_url: URL Unmark, se o servizo está activo
-scuttle_url: URL Scuttle, se o servizo está activo
 shaarli_url: URL Shaarli, se o servizo está activo
 import_with_redis: Activar a importación asíncrona con Redis
 import_with_rabbitmq: Activar a importación asíncrona con RabbitMQ
@@ -35,6 +33,5 @@ export_pdf: Activar exportación PDF
 export_mobi: Activar exportación .mobi (xa non se usa, vai ser eliminada)
 export_epub: Activar exportación ePub
 diaspora_url: URL de diaspora*, se o servizo está activo
-carrot: Activar compartir en Carrot
 download_pictures: Descargar imaxes no teu servidor
 settings_changed: Configuración actualizada

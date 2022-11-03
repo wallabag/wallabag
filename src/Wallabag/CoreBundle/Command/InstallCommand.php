@@ -2,8 +2,13 @@
 
 namespace Wallabag\CoreBundle\Command;
 
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception\DriverException;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,6 +17,7 @@ use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule;
 use Wallabag\CoreBundle\Entity\InternalSetting;
 
@@ -20,20 +26,27 @@ class InstallCommand extends ContainerAwareCommand
     /**
      * @var InputInterface
      */
-    protected $defaultInput;
+    private $defaultInput;
 
     /**
      * @var SymfonyStyle
      */
-    protected $io;
+    private $io;
 
     /**
      * @var array
      */
-    protected $functionExists = [
+    private $functionExists = [
         'curl_exec',
         'curl_multi_init',
     ];
+
+    private bool $runOtherCommands = true;
+
+    public function disableRunOtherCommands(): void
+    {
+        $this->runOtherCommands = false;
+    }
 
     protected function configure()
     {
@@ -68,11 +81,11 @@ class InstallCommand extends ContainerAwareCommand
         $this->io->success('You can now configure your web server, see https://doc.wallabag.org');
     }
 
-    protected function checkRequirements()
+    private function checkRequirements()
     {
         $this->io->section('Step 1 of 4: Checking system requirements.');
 
-        $doctrineManager = $this->getContainer()->get('doctrine')->getManager();
+        $doctrineManager = $this->getContainer()->get(ManagerRegistry::class)->getManager();
 
         $rows = [];
 
@@ -95,7 +108,7 @@ class InstallCommand extends ContainerAwareCommand
         $status = '<info>OK!</info>';
         $help = '';
 
-        $conn = $this->getContainer()->get('doctrine')->getManager()->getConnection();
+        $conn = $this->getContainer()->get(ManagerRegistry::class)->getManager()->getConnection();
 
         try {
             $conn->connect();
@@ -168,7 +181,7 @@ class InstallCommand extends ContainerAwareCommand
         return $this;
     }
 
-    protected function setupDatabase()
+    private function setupDatabase()
     {
         $this->io->section('Step 2 of 4: Setting up database.');
 
@@ -236,7 +249,7 @@ class InstallCommand extends ContainerAwareCommand
         return $this;
     }
 
-    protected function setupAdmin()
+    private function setupAdmin()
     {
         $this->io->section('Step 3 of 4: Administration setup.');
 
@@ -244,9 +257,9 @@ class InstallCommand extends ContainerAwareCommand
             return $this;
         }
 
-        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->getContainer()->get(EntityManagerInterface::class);
 
-        $userManager = $this->getContainer()->get('fos_user.user_manager');
+        $userManager = $this->getContainer()->get(UserManagerInterface::class);
         $user = $userManager->createUser();
 
         $user->setUsername($this->io->ask('Username', 'wallabag'));
@@ -264,21 +277,21 @@ class InstallCommand extends ContainerAwareCommand
 
         // dispatch a created event so the associated config will be created
         $event = new UserEvent($user);
-        $this->getContainer()->get('event_dispatcher')->dispatch(FOSUserEvents::USER_CREATED, $event);
+        $this->getContainer()->get(EventDispatcherInterface::class)->dispatch(FOSUserEvents::USER_CREATED, $event);
 
         $this->io->text('<info>Administration successfully setup.</info>');
 
         return $this;
     }
 
-    protected function setupConfig()
+    private function setupConfig()
     {
         $this->io->section('Step 4 of 4: Config setup.');
-        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->getContainer()->get(EntityManagerInterface::class);
 
         // cleanup before insert new stuff
-        $em->createQuery('DELETE FROM WallabagCoreBundle:InternalSetting')->execute();
-        $em->createQuery('DELETE FROM WallabagCoreBundle:IgnoreOriginInstanceRule')->execute();
+        $em->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\InternalSetting')->execute();
+        $em->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule')->execute();
 
         foreach ($this->getContainer()->getParameter('wallabag_core.default_internal_settings') as $setting) {
             $newSetting = new InternalSetting();
@@ -307,8 +320,12 @@ class InstallCommand extends ContainerAwareCommand
      * @param string $command
      * @param array  $parameters Parameters to this command (usually 'force' => true)
      */
-    protected function runCommand($command, $parameters = [])
+    private function runCommand($command, $parameters = [])
     {
+        if (!$this->runOtherCommands) {
+            return $this;
+        }
+
         $parameters = array_merge(
             ['command' => $command],
             $parameters,
@@ -329,7 +346,7 @@ class InstallCommand extends ContainerAwareCommand
 
         // PDO does not always close the connection after Doctrine commands.
         // See https://github.com/symfony/symfony/issues/11750.
-        $this->getContainer()->get('doctrine')->getManager()->getConnection()->close();
+        $this->getContainer()->get(ManagerRegistry::class)->getManager()->getConnection()->close();
 
         if (0 !== $exitCode) {
             $this->getApplication()->setAutoExit(true);
@@ -347,7 +364,7 @@ class InstallCommand extends ContainerAwareCommand
      */
     private function isDatabasePresent()
     {
-        $connection = $this->getContainer()->get('doctrine')->getManager()->getConnection();
+        $connection = $this->getContainer()->get(ManagerRegistry::class)->getManager()->getConnection();
         $databaseName = $connection->getDatabase();
 
         try {
@@ -368,7 +385,7 @@ class InstallCommand extends ContainerAwareCommand
 
         // custom verification for sqlite, since `getListDatabasesSQL` doesn't work for sqlite
         if ('sqlite' === $schemaManager->getDatabasePlatform()->getName()) {
-            $params = $this->getContainer()->get('doctrine.dbal.default_connection')->getParams();
+            $params = $this->getContainer()->get(Connection::class)->getParams();
 
             if (isset($params['path']) && file_exists($params['path'])) {
                 return true;
@@ -379,7 +396,7 @@ class InstallCommand extends ContainerAwareCommand
 
         try {
             return \in_array($databaseName, $schemaManager->listDatabases(), true);
-        } catch (\Doctrine\DBAL\Exception\DriverException $e) {
+        } catch (DriverException $e) {
             // it means we weren't able to get database list, assume the database doesn't exist
 
             return false;
@@ -394,7 +411,7 @@ class InstallCommand extends ContainerAwareCommand
      */
     private function isSchemaPresent()
     {
-        $schemaManager = $this->getContainer()->get('doctrine')->getManager()->getConnection()->getSchemaManager();
+        $schemaManager = $this->getContainer()->get(ManagerRegistry::class)->getManager()->getConnection()->getSchemaManager();
 
         return \count($schemaManager->listTableNames()) > 0 ? true : false;
     }

@@ -2,15 +2,21 @@
 
 namespace Wallabag\AnnotationBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 
 /**
  * AnnotationRepository.
  */
-class AnnotationRepository extends EntityRepository
+class AnnotationRepository extends ServiceEntityRepository
 {
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Annotation::class);
+    }
+
     /**
      * Retrieves all annotations for a user.
      *

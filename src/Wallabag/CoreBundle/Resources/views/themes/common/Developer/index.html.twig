@@ -1,4 +1,4 @@
-{% extends "WallabagCoreBundle::layout.html.twig" %}
+{% extends "@WallabagCore/layout.html.twig" %}
 
 {% block title %}{{ 'developer.page_title'|trans }}{% endblock %}
 
@@ -55,10 +55,10 @@
                                         </tr>
                                     </table>
 
-                                    <p>{{ 'developer.remove.warn_message_1'|trans({'%name%': client.name }) }}</p>
-                                    <p>{{ 'developer.remove.warn_message_2'|trans({'%name%': client.name }) }}</p>
+                                    <p>{{ 'developer.remove.warn_message_1'|trans({'%name%': client.name}) }}</p>
+                                    <p>{{ 'developer.remove.warn_message_2'|trans({'%name%': client.name}) }}</p>
                                     <p>
-                                        <a class="waves-effect waves-light red btn" href="{{ path('developer_delete_client', {'id': client.id}) }}">{{ 'developer.remove.action'|trans({'%name%': client.name }) }}</a>
+                                        <a class="waves-effect waves-light red btn" href="{{ path('developer_delete_client', {'id': client.id}) }}">{{ 'developer.remove.action'|trans({'%name%': client.name}) }}</a>
                                     </p>
                                 </div>
                             </li>

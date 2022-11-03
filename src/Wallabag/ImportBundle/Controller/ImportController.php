@@ -2,8 +2,12 @@
 
 namespace Wallabag\ImportBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
+use Predis\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Wallabag\ImportBundle\Import\ImportChain;
 
 class ImportController extends Controller
 {
@@ -12,8 +16,8 @@ class ImportController extends Controller
      */
     public function importAction()
     {
-        return $this->render('WallabagImportBundle:Import:index.html.twig', [
-            'imports' => $this->get('wallabag_import.chain')->getAll(),
+        return $this->render('@WallabagImport/Import/index.html.twig', [
+            'imports' => $this->get(ImportChain::class)->getAll(),
         ]);
     }
 
@@ -28,11 +32,11 @@ class ImportController extends Controller
         $redisNotInstalled = false;
         $rabbitNotInstalled = false;
 
-        if (!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
-            return $this->render('WallabagImportBundle:Import:check_queue.html.twig');
+        if (!$this->get(AuthorizationCheckerInterface::class)->isGranted('ROLE_SUPER_ADMIN')) {
+            return $this->render('@WallabagImport/Import/check_queue.html.twig');
         }
 
-        if ($this->get('craue_config')->get('import_with_rabbitmq')) {
+        if ($this->get(Config::class)->get('import_with_rabbitmq')) {
             // in case rabbit is activated but not installed
             try {
                 $nbRabbitMessages = $this->getTotalMessageInRabbitQueue('pocket')
@@ -49,8 +53,8 @@ class ImportController extends Controller
             } catch (\Exception $e) {
                 $rabbitNotInstalled = true;
             }
-        } elseif ($this->get('craue_config')->get('import_with_redis')) {
-            $redis = $this->get('wallabag_core.redis.client');
+        } elseif ($this->get(Config::class)->get('import_with_redis')) {
+            $redis = $this->get(Client::class);
 
             try {
                 $nbRedisMessages = $redis->llen('wallabag.import.pocket')
@@ -69,7 +73,7 @@ class ImportController extends Controller
             }
         }
 
-        return $this->render('WallabagImportBundle:Import:check_queue.html.twig', [
+        return $this->render('@WallabagImport/Import/check_queue.html.twig', [
             'nbRedisMessages' => $nbRedisMessages,
             'nbRabbitMessages' => $nbRabbitMessages,
             'redisNotInstalled' => $redisNotInstalled,

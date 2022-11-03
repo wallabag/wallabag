@@ -1,4 +1,4 @@
-{% extends "WallabagCoreBundle::layout.html.twig" %}
+{% extends "@WallabagCore/layout.html.twig" %}
 
 {% block title %}{{ 'ignore_origin_instance_rule.page_title'|trans }}{% endblock %}
 
@@ -23,7 +23,7 @@
                                 <tr>
                                     <td>{{ rule.rule }}</td>
                                     <td>
-                                        <a href="{{ path('ignore_origin_instance_rules_edit', { 'id': rule.id }) }}">{{ 'ignore_origin_instance_rule.list.edit_action'|trans }}</a>
+                                        <a href="{{ path('ignore_origin_instance_rules_edit', {'id': rule.id}) }}">{{ 'ignore_origin_instance_rule.list.edit_action'|trans }}</a>
                                     </td>
                                 </tr>
                             {% endfor %}

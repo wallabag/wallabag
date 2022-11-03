@@ -2,12 +2,18 @@
 
 namespace Wallabag\CoreBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 use Wallabag\CoreBundle\Entity\Tag;
 
-class TagRepository extends EntityRepository
+class TagRepository extends ServiceEntityRepository
 {
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Tag::class);
+    }
+
     /**
      * Count all tags per user.
      *

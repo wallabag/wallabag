@@ -3,25 +3,29 @@
 namespace Tests\Wallabag\CoreBundle\Twig;
 
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Translation\TranslatorInterface;
+use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\CoreBundle\Repository\TagRepository;
 use Wallabag\CoreBundle\Twig\WallabagExtension;
 
 class WallabagExtensionTest extends TestCase
 {
     public function testRemoveWww()
     {
-        $entryRepository = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+        $entryRepository = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $tagRepository = $this->getMockBuilder('Wallabag\CoreBundle\Repository\TagRepository')
+        $tagRepository = $this->getMockBuilder(TagRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $tokenStorage = $this->getMockBuilder('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface')
+        $tokenStorage = $this->getMockBuilder(TokenStorageInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $translator = $this->getMockBuilder('Symfony\Component\Translation\TranslatorInterface')
+        $translator = $this->getMockBuilder(TranslatorInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -34,19 +38,19 @@ class WallabagExtensionTest extends TestCase
 
     public function testRemoveScheme()
     {
-        $entryRepository = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+        $entryRepository = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $tagRepository = $this->getMockBuilder('Wallabag\CoreBundle\Repository\TagRepository')
+        $tagRepository = $this->getMockBuilder(TagRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $tokenStorage = $this->getMockBuilder('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface')
+        $tokenStorage = $this->getMockBuilder(TokenStorageInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $translator = $this->getMockBuilder('Symfony\Component\Translation\TranslatorInterface')
+        $translator = $this->getMockBuilder(TranslatorInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -59,19 +63,19 @@ class WallabagExtensionTest extends TestCase
 
     public function testRemoveSchemeAndWww()
     {
-        $entryRepository = $this->getMockBuilder('Wallabag\CoreBundle\Repository\EntryRepository')
+        $entryRepository = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $tagRepository = $this->getMockBuilder('Wallabag\CoreBundle\Repository\TagRepository')
+        $tagRepository = $this->getMockBuilder(TagRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $tokenStorage = $this->getMockBuilder('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface')
+        $tokenStorage = $this->getMockBuilder(TokenStorageInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $translator = $this->getMockBuilder('Symfony\Component\Translation\TranslatorInterface')
+        $translator = $this->getMockBuilder(TranslatorInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 

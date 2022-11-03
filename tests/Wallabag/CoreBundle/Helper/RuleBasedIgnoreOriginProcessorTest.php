@@ -5,11 +5,13 @@ namespace Tests\Wallabag\CoreBundle\Helper;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
+use RulerZ\RulerZ;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule;
 use Wallabag\CoreBundle\Entity\IgnoreOriginUserRule;
 use Wallabag\CoreBundle\Helper\RuleBasedIgnoreOriginProcessor;
+use Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository;
 use Wallabag\UserBundle\Entity\User;
 
 class RuleBasedIgnoreOriginProcessorTest extends TestCase
@@ -193,14 +195,14 @@ class RuleBasedIgnoreOriginProcessorTest extends TestCase
 
     private function getRulerZMock()
     {
-        return $this->getMockBuilder('RulerZ\RulerZ')
+        return $this->getMockBuilder(RulerZ::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
 
     private function getIgnoreOriginInstanceRuleRepositoryMock()
     {
-        return $this->getMockBuilder('Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository')
+        return $this->getMockBuilder(IgnoreOriginInstanceRuleRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
     }

@@ -5,7 +5,6 @@ namespace Tests\Wallabag\CoreBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\CoreBundle\Command\ReloadEntryCommand;
 use Wallabag\CoreBundle\Entity\Entry;
 
 class ReloadEntryCommandTest extends WallabagCoreTestCase
@@ -51,13 +50,10 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
     public function testRunReloadEntryCommand()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ReloadEntryCommand());
 
         $command = $application->find('wallabag:entry:reload');
         $tester = new CommandTester($command);
-        $tester->execute([
-            'command' => $command->getName(),
-        ], [
+        $tester->execute([], [
             'interactive' => false,
         ]);
 
@@ -79,12 +75,10 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
     public function testRunReloadEntryWithUsernameCommand()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ReloadEntryCommand());
 
         $command = $application->find('wallabag:entry:reload');
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'admin',
         ], [
             'interactive' => false,
@@ -104,12 +98,10 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
     public function testRunReloadEntryWithoutEntryCommand()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new ReloadEntryCommand());
 
         $command = $application->find('wallabag:entry:reload');
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'empty',
         ], [
             'interactive' => false,

@@ -2,8 +2,12 @@
 
 namespace Tests\Wallabag\ImportBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
+use Doctrine\ORM\EntityManagerInterface;
+use Predis\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Entity\Entry;
 
 class DeliciousControllerTest extends WallabagCoreTestCase
 {
@@ -24,7 +28,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 1);
+        $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
         $crawler = $client->request('GET', '/import/delicious');
 
@@ -32,7 +36,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
 
-        $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 0);
+        $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
     public function testImportDeliciousBadFile()
@@ -57,7 +61,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
         $this->checkRedis();
         $this->logInAs('admin');
         $client = $this->getClient();
-        $client->getContainer()->get('craue_config')->set('import_with_redis', 1);
+        $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
         $crawler = $client->request('GET', '/import/delicious');
 
@@ -82,9 +86,9 @@ class DeliciousControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
-        $this->assertNotEmpty($client->getContainer()->get('wallabag_core.redis.client')->lpop('wallabag.import.delicious'));
+        $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.delicious'));
 
-        $client->getContainer()->get('craue_config')->set('import_with_redis', 0);
+        $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
     public function testImportDeliciousWithFile()
@@ -108,8 +112,8 @@ class DeliciousControllerTest extends WallabagCoreTestCase
         $crawler = $client->followRedirect();
 
         $content = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://feross.org/spoofmac/',
                 $this->getLoggedInUserId()
@@ -118,7 +122,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content);
+        $this->assertInstanceOf(Entry::class, $content);
 
         $tags = $content->getTagsLabel();
         $this->assertContains('osx', $tags, 'It includes the "osx" tag');
@@ -150,24 +154,24 @@ class DeliciousControllerTest extends WallabagCoreTestCase
         $crawler = $client->followRedirect();
 
         $content1 = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://stackoverflow.com/review/',
                 $this->getLoggedInUserId()
             );
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content1);
+        $this->assertInstanceOf(Entry::class, $content1);
 
         $content2 = $client->getContainer()
-            ->get('doctrine.orm.entity_manager')
-            ->getRepository('WallabagCoreBundle:Entry')
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
             ->findByUrlAndUserId(
                 'https://addyosmani.com/basket.js/',
                 $this->getLoggedInUserId()
             );
 
-        $this->assertInstanceOf('Wallabag\CoreBundle\Entity\Entry', $content2);
+        $this->assertInstanceOf(Entry::class, $content2);
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);

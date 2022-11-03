@@ -12,14 +12,6 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('wallabag_user');
 
-        $rootNode
-            ->children()
-                ->booleanNode('registration_enabled')
-                    ->defaultValue(true)
-                ->end()
-            ->end()
-        ;
-
         return $treeBuilder;
     }
 }

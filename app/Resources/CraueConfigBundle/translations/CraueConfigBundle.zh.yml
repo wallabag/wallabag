@@ -1,6 +1,5 @@
 settings_changed: 配置已更新
 download_pictures: 在你的服务器上缓存图片
-carrot: 启用分享到 Carrot
 diaspora_url: diaspora* 链接，如果该服务已被启用
 export_epub: 启用 ePub 导出
 export_mobi: 启用 .mobi 导出（已废弃，不久后将移除）
@@ -12,12 +11,10 @@ export_xml: 启用 XML 导出
 import_with_rabbitmq: 启用 RabbitMQ 来异步导入数据
 import_with_redis: 启用 Redis 来异步导入数据
 shaarli_url: Shaarli 链接，如果该服务已被启用
-scuttle_url: Scuttle 链接，如果该服务已被启用
 unmark_url: Unmark 链接，如果该服务已被启用
 share_diaspora: 启用分享到 diaspora*
 share_mail: 启用邮件分享
 share_shaarli: 启用分享到 Shaarli
-share_scuttle: 启用分享到 Scuttle
 share_twitter: 启用分享到 Twitter
 share_unmark: 启用分享到 Unmark.it
 show_printlink: 展示一个用于打印内容的链接

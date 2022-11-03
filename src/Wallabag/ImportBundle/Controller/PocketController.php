@@ -2,11 +2,15 @@
 
 namespace Wallabag\ImportBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Translation\TranslatorInterface;
+use Wallabag\ImportBundle\Import\PocketImport;
 
 class PocketController extends Controller
 {
@@ -23,7 +27,7 @@ class PocketController extends Controller
             ])
             ->getForm();
 
-        return $this->render('WallabagImportBundle:Pocket:index.html.twig', [
+        return $this->render('@WallabagImport/Pocket/index.html.twig', [
             'import' => $this->getPocketImportService(),
             'has_consumer_key' => '' === trim($this->getUser()->getConfig()->getPocketConsumerKey()) ? false : true,
             'form' => $form->createView(),
@@ -39,7 +43,7 @@ class PocketController extends Controller
             ->getRequestToken($this->generateUrl('import', [], UrlGeneratorInterface::ABSOLUTE_URL));
 
         if (false === $requestToken) {
-            $this->get('session')->getFlashBag()->add(
+            $this->get(SessionInterface::class)->getFlashBag()->add(
                 'notice',
                 'flashes.import.notice.failed'
             );
@@ -49,9 +53,9 @@ class PocketController extends Controller
 
         $form = $request->request->get('form');
 
-        $this->get('session')->set('import.pocket.code', $requestToken);
+        $this->get(SessionInterface::class)->set('import.pocket.code', $requestToken);
         if (null !== $form && \array_key_exists('mark_as_read', $form)) {
-            $this->get('session')->set('mark_as_read', $form['mark_as_read']);
+            $this->get(SessionInterface::class)->set('mark_as_read', $form['mark_as_read']);
         }
 
         return $this->redirect(
@@ -68,12 +72,12 @@ class PocketController extends Controller
         $message = 'flashes.import.notice.failed';
         $pocket = $this->getPocketImportService();
 
-        $markAsRead = $this->get('session')->get('mark_as_read');
-        $this->get('session')->remove('mark_as_read');
+        $markAsRead = $this->get(SessionInterface::class)->get('mark_as_read');
+        $this->get(SessionInterface::class)->remove('mark_as_read');
 
         // something bad happend on pocket side
-        if (false === $pocket->authorize($this->get('session')->get('import.pocket.code'))) {
-            $this->get('session')->getFlashBag()->add(
+        if (false === $pocket->authorize($this->get(SessionInterface::class)->get('import.pocket.code'))) {
+            $this->get(SessionInterface::class)->getFlashBag()->add(
                 'notice',
                 $message
             );
@@ -83,19 +87,19 @@ class PocketController extends Controller
 
         if (true === $pocket->setMarkAsRead($markAsRead)->import()) {
             $summary = $pocket->getSummary();
-            $message = $this->get('translator')->trans('flashes.import.notice.summary', [
+            $message = $this->get(TranslatorInterface::class)->trans('flashes.import.notice.summary', [
                 '%imported%' => null !== $summary && \array_key_exists('imported', $summary) ? $summary['imported'] : 0,
                 '%skipped%' => null !== $summary && \array_key_exists('skipped', $summary) ? $summary['skipped'] : 0,
             ]);
 
             if (null !== $summary && \array_key_exists('queued', $summary) && 0 < $summary['queued']) {
-                $message = $this->get('translator')->trans('flashes.import.notice.summary_with_queue', [
+                $message = $this->get(TranslatorInterface::class)->trans('flashes.import.notice.summary_with_queue', [
                     '%queued%' => $summary['queued'],
                 ]);
             }
         }
 
-        $this->get('session')->getFlashBag()->add(
+        $this->get(SessionInterface::class)->getFlashBag()->add(
             'notice',
             $message
         );
@@ -106,16 +110,16 @@ class PocketController extends Controller
     /**
      * Return Pocket Import Service with or without RabbitMQ enabled.
      *
-     * @return \Wallabag\ImportBundle\Import\PocketImport
+     * @return PocketImport
      */
     private function getPocketImportService()
     {
-        $pocket = $this->get('wallabag_import.pocket.import');
+        $pocket = $this->get(PocketImport::class);
         $pocket->setUser($this->getUser());
 
-        if ($this->get('craue_config')->get('import_with_rabbitmq')) {
+        if ($this->get(Config::class)->get('import_with_rabbitmq')) {
             $pocket->setProducer($this->get('old_sound_rabbit_mq.import_pocket_producer'));
-        } elseif ($this->get('craue_config')->get('import_with_redis')) {
+        } elseif ($this->get(Config::class)->get('import_with_redis')) {
             $pocket->setProducer($this->get('wallabag_import.producer.redis.pocket'));
         }
 

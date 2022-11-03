@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Wallabag\UserBundle\Repository\UserRepository;
 
 class ListUserCommand extends ContainerAwareCommand
 {
@@ -26,13 +27,13 @@ class ListUserCommand extends ContainerAwareCommand
     {
         $io = new SymfonyStyle($input, $output);
 
-        $users = $this->getContainer()->get('wallabag_user.user_repository')
+        $users = $this->getContainer()->get(UserRepository::class)
             ->getQueryBuilderForSearch($input->getArgument('search'))
             ->setMaxResults($input->getOption('limit'))
             ->getQuery()
             ->getResult();
 
-        $nbUsers = $this->getContainer()->get('wallabag_user.user_repository')
+        $nbUsers = $this->getContainer()->get(UserRepository::class)
             ->getSumUsers();
 
         $rows = [];

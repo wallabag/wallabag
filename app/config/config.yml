@@ -39,8 +39,10 @@ twig:
     debug: "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     form_themes:
-        - "LexikFormFilterBundle:Form:form_div_layout.html.twig"
-    exception_controller: wallabag_core.exception_controller:showAction
+        - "@LexikFormFilter/Form/form_div_layout.html.twig"
+    exception_controller: Wallabag\CoreBundle\Controller\ExceptionController:showAction
+    globals:
+        registration_enabled: '%fosuser_registration%'
 
 # Doctrine Configuration
 doctrine:
@@ -167,9 +169,8 @@ nelmio_cors:
 liip_theme:
     load_controllers: false
     themes:
-        - baggy
         - material
-    autodetect_theme: wallabag_core.helper.detect_active_theme
+    autodetect_theme: Wallabag\CoreBundle\Helper\DetectActiveTheme
 
     path_patterns:
         bundle_resource:
@@ -210,14 +211,14 @@ scheb_two_factor:
     google:
         enabled: "%twofactor_auth%"
         issuer: "%server_name%"
-        template: WallabagUserBundle:Authentication:form.html.twig
+        template: "@WallabagUser/Authentication/form.html.twig"
 
     email:
         enabled: "%twofactor_auth%"
         sender_email: "%twofactor_sender%"
         digits: 6
-        template: WallabagUserBundle:Authentication:form.html.twig
-        mailer: wallabag_user.auth_code_mailer
+        template: "@WallabagUser/Authentication/form.html.twig"
+        mailer: Wallabag\UserBundle\Mailer\AuthCodeMailer
 
 kphoen_rulerz:
     targets:
@@ -404,7 +405,7 @@ sensio_framework_extra:
 httplug:
     clients:
         wallabag_core:
-            factory: 'wallabag_core.http_client_factory'
+            factory: Wallabag\CoreBundle\Helper\HttpClientFactory
             config:
                 defaults:
                     timeout: 10

@@ -1,4 +1,4 @@
-{% extends "WallabagCoreBundle::layout.html.twig" %}
+{% extends "@WallabagCore/layout.html.twig" %}
 
 {% block title %}{{ 'menu.left.internal_settings'|trans }}{% endblock %}
 
@@ -12,17 +12,17 @@
                     <div class="row">
                         <div class="div_tabs col s12">
                             <ul class="tabs">
-                                {% for section in sections | craue_sortSections %}
-                                    <li class="tab col s12 m6 l3"><a href="#set-{{ section }}">{{ section | trans({}, 'CraueConfigBundle') }}</a></li>
+                                {% for section in sections|craue_sortSections %}
+                                    <li class="tab col s12 m6 l3"><a href="#set-{{ section }}">{{ section|trans({}, 'CraueConfigBundle') }}</a></li>
                                 {% endfor %}
                             </ul>
                         </div>
 
-                        {% for section in sections | craue_sortSections %}
+                        {% for section in sections|craue_sortSections %}
                             <div id="set-{{ section }}" class="col s12">
                                 {% for setting in form.settings if setting.vars.value.section == section %}
                                     {{ form_row(setting.value, {
-                                        'label': setting.vars.value.name | trans({}, 'CraueConfigBundle'),
+                                        'label': setting.vars.value.name|trans({}, 'CraueConfigBundle'),
                                     }) }}
                                 {% endfor %}
                             </div>
@@ -30,7 +30,7 @@
                 </div>
 
                 <button class="btn waves-effect waves-light" type="submit" name="action">
-                    {{ 'modify_settings' | trans({}, 'CraueConfigBundle') }}
+                    {{ 'modify_settings'|trans({}, 'CraueConfigBundle') }}
                 </button>
 
                 {{ form_widget(form._token) }}

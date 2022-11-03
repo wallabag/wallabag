@@ -2,7 +2,10 @@
 
 namespace Tests\Wallabag\ImportBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\ImportBundle\Import\PocketImport;
 
 class PocketControllerTest extends WallabagCoreTestCase
 {
@@ -22,14 +25,14 @@ class PocketControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 1);
+        $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
         $crawler = $client->request('GET', '/import/pocket');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('button[name=action]')->count());
 
-        $client->getContainer()->get('craue_config')->set('import_with_rabbitmq', 0);
+        $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
     public function testImportPocketWithRedisEnabled()
@@ -38,14 +41,14 @@ class PocketControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $client->getContainer()->get('craue_config')->set('import_with_redis', 1);
+        $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
         $crawler = $client->request('GET', '/import/pocket');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('button[name=action]')->count());
 
-        $client->getContainer()->get('craue_config')->set('import_with_redis', 0);
+        $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
     public function testImportPocketAuthBadToken()
@@ -63,7 +66,7 @@ class PocketControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $pocketImport = $this->getMockBuilder('Wallabag\ImportBundle\Import\PocketImport')
+        $pocketImport = $this->getMockBuilder(PocketImport::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -72,7 +75,7 @@ class PocketControllerTest extends WallabagCoreTestCase
             ->method('getRequestToken')
             ->willReturn('token');
 
-        static::$kernel->getContainer()->set('wallabag_import.pocket.import', $pocketImport);
+        static::$kernel->getContainer()->set(PocketImport::class, $pocketImport);
 
         $client->request('GET', '/import/pocket/auth');
 
@@ -85,7 +88,7 @@ class PocketControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $pocketImport = $this->getMockBuilder('Wallabag\ImportBundle\Import\PocketImport')
+        $pocketImport = $this->getMockBuilder(PocketImport::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -94,13 +97,13 @@ class PocketControllerTest extends WallabagCoreTestCase
             ->method('authorize')
             ->willReturn(false);
 
-        static::$kernel->getContainer()->set('wallabag_import.pocket.import', $pocketImport);
+        static::$kernel->getContainer()->set(PocketImport::class, $pocketImport);
 
         $client->request('GET', '/import/pocket/callback');
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertStringContainsString('/', $client->getResponse()->headers->get('location'), 'Import is ok, redirect to homepage');
-        $this->assertSame('flashes.import.notice.failed', $client->getContainer()->get('session')->getFlashBag()->peek('notice')[0]);
+        $this->assertSame('flashes.import.notice.failed', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->peek('notice')[0]);
     }
 
     public function testImportPocketCallback()
@@ -108,7 +111,7 @@ class PocketControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        $pocketImport = $this->getMockBuilder('Wallabag\ImportBundle\Import\PocketImport')
+        $pocketImport = $this->getMockBuilder(PocketImport::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -128,12 +131,12 @@ class PocketControllerTest extends WallabagCoreTestCase
             ->method('import')
             ->willReturn(true);
 
-        static::$kernel->getContainer()->set('wallabag_import.pocket.import', $pocketImport);
+        static::$kernel->getContainer()->set(PocketImport::class, $pocketImport);
 
         $client->request('GET', '/import/pocket/callback');
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertStringContainsString('/', $client->getResponse()->headers->get('location'), 'Import is ok, redirect to homepage');
-        $this->assertSame('flashes.import.notice.summary', $client->getContainer()->get('session')->getFlashBag()->peek('notice')[0]);
+        $this->assertSame('flashes.import.notice.summary', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->peek('notice')[0]);
     }
 }

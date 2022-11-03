@@ -1,6 +1,5 @@
 settings_changed: ปรับปรุงองค์ประกอบ
 download_pictures: ดาวน์โหลดรูปภาพผ่านเซิฟเวอร์ของคุณ
-carrot: เปิดการแชร์ Carrot
 diaspora_url: Diaspora-URL, ถ้าเซิฟเวอร์ถูกเปิดใช้งาน
 export_epub: เปิดใช้งานการนำเข้าข้อมูลแบบ ePub
 export_mobi: เปิดใช้งานการนำเข้าข้อมูลแบบ .mobi
@@ -15,7 +14,6 @@ shaarli_url: Shaarli-URL, ถ้าเซิฟเวอร์ถูกเปิ
 share_diaspora: เปิดการแชร์ Diaspora
 share_mail: เปิดการแชร์ผ่าน email
 share_shaarli: เปิดการแชร์ Shaarli
-share_scuttle: เปิดการแชร์ Scuttle
 share_twitter: เปิดการแชร์ Twitter
 share_unmark: เปิดการแชร์ Unmark.it
 show_printlink: แสดงลิงค์เพื่อปรินท์เนื้อหา
