@@ -485,6 +485,8 @@ tag:
         placeholder: '你可以添加数个标签，彼此之间用逗号分隔。'
     rename:
         placeholder: '你可以更新标签名称。'
+    confirm:
+        delete: 删除 %name% 标签
 export:
     footer_template: '<div style="text-align:center;"><p> 由 wallabag 通过 %method% 生成</p><p>如果该电子书在你的设备上显示有问题，请在 Github 上 <a href="https://github.com/wallabag/wallabag/issues">汇报</a>。</p></div>'
     unknown: '未知'
