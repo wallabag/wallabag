@@ -51,7 +51,6 @@
         "ext-tidy": "*",
         "ext-tokenizer": "*",
         "ext-xml": "*",
-        "composer": "< 2.3",
         "babdev/pagerfanta-bundle": "^2.5",
         "bdunogier/guzzle-site-authenticator": "^1.0.0",
         "craue/config-bundle": "^2.3.0",
