@@ -5,7 +5,7 @@ Requisiti
 Questa documentazione tradotta potrebbe non essere aggiornata. Per funzionalità o requisiti più recenti, consultare la [documentazione inglese](https://doc.wallabag.org/en/).
 {% endhint %}
 
-wallabag è compatibile con PHP &gt;= 5.6, incluso PHP 7.
+wallabag è compatibile con **PHP >= 7.4**.
 
 {% hint style="info" %}
 Per installare wallabag facilmente, noi offriamo un `Makefile`, quindi dovrete avere lo strumento `make`.
