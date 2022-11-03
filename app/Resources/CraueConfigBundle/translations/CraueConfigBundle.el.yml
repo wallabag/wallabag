@@ -18,12 +18,10 @@ wallabag_support_url: Υποστήριξη URL για wallabag
 show_printlink: Προβολή συνδέσμου για εκτύπωση περιεχομένου
 share_unmark: Ενεργοποίηση κοινοποίησης στο Unmark.it
 share_twitter: Ενεργοποίηση κοινοποίησης στο Twitter
-share_scuttle: Ενεργοποίηση κοινοποίησης στο Scuttle
 share_shaarli: Ενεργοποίηση κοινοποίησης στο Shaarli
 share_mail: Ενεργοποίηση κοινοποίησης με ηλεκτρονικό ταχυδρομείο
 share_diaspora: Ενεργοποίηση κοινοποίησης στο diaspora*
 unmark_url: URL του Unmark, αν είναι ενεργοποιημένη η υπηρεσία
-scuttle_url: URL του Scuttle, αν είναι ενεργοποιημένη η υπηρεσία
 shaarli_url: URL του Shaarli, αν είναι ενεργοποιημένη η υπηρεσία
 import_with_redis: Ενεργοποίηση Redis για την ασύγχρονη εισαγωγή δεδομένων
 import_with_rabbitmq: Ενεργοποίηση RabbitMQ για την ασύγχρονη εισαγωγή δεδομένων
@@ -35,6 +33,5 @@ export_pdf: Ενεργοποίηση εξαγωγής PDF
 export_mobi: Ενεργοποίηση εξαγωγής .mobi
 export_epub: Ενεργοποίηση εξαγωγής ePub
 diaspora_url: URL του diaspora*, αν είναι ενεργοποιημένη η υπηρεσία
-carrot: Ενεργοποίηση κοινοποίησης στο Carrot
 download_pictures: Λήψη των εικόνων στον διακομιστή σας
 settings_changed: Η ρύθμιση παραμέτρων ενημερώθηκε

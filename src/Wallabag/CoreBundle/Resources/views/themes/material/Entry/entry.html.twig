@@ -123,7 +123,7 @@
                 </li>
             </ul>
         </li>
-        {% if craue_setting('share_public') or craue_setting('share_twitter') or craue_setting('share_shaarli') or craue_setting('share_scuttle') or craue_setting('share_diaspora') or craue_setting('share_unmark') or craue_setting('carrot') or craue_setting('share_mail') %}
+        {% if craue_setting('share_public') or craue_setting('share_twitter') or craue_setting('share_shaarli') or craue_setting('share_diaspora') or craue_setting('share_unmark') or craue_setting('share_mail') %}
         <li class="bold">
             <a class="waves-effect collapsible-header">
                 <i class="material-icons small">share</i>
@@ -157,13 +157,6 @@
                             </a>
                         </li>
                     {% endif %}
-                    {% if craue_setting('share_scuttle') %}
-                        <li>
-                        <a href="{{ craue_setting('scuttle_url') }}/bookmarks.php?action=add&amp;address={{ entry.url|url_encode }}&amp;title={{ entry.title|striptags|url_encode }}&amp;tags={{ entry.tags|join(',')|striptags|url_encode }}" target="_blank" rel="noopener" title="scuttle" class="tool icon-image scuttle">
-                                <span>scuttle</span>
-                            </a>
-                        </li>
-                    {% endif %}
                     {% if craue_setting('share_diaspora') %}
                         <li>
                             <a href="{{ craue_setting('diaspora_url') }}/bookmarklet?url={{ entry.url|url_encode }}&amp;title={{ entry.title|striptags|url_encode }}&amp;notes=&amp;v=1&amp;noui=1&amp;jump=doclose" target="_blank" rel="noopener" class="tool icon-image diaspora" title="diaspora">
@@ -175,13 +168,6 @@
                         <li>
                             <a href="{{ craue_setting('unmark_url') }}/mark/add?url={{ entry.url|url_encode }}&amp;title={{ entry.title|striptags|url_encode }}&amp;v=6" target="_blank" rel="noopener" class="tool icon-image unmark" title="unmark">
                                 <span>unmark.it</span>
-                            </a>
-                        </li>
-                    {% endif %}
-                    {% if craue_setting('carrot') %}
-                        <li>
-                            <a href="https://secure.carrot.org/GiveAndGetBack.do?url={{ entry.url|url_encode }}&amp;title={{ entry.title|striptags|url_encode }}" target="_blank" rel="noopener" title="carrot" class="tool icon-image carrot">
-                                <span>Carrot</span>
                             </a>
                         </li>
                     {% endif %}

@@ -1,6 +1,5 @@
 settings_changed: Configuration mise à jour
 download_pictures: Télécharger les images sur le serveur
-carrot: Activer le partage vers Carrot
 diaspora_url: URL de diaspora*, si le service est activé
 export_epub: Activer l'export ePub
 export_mobi: Activer l'export .mobi (déprécié, sera supprimé prochainement)
@@ -12,12 +11,10 @@ export_xml: Activer l'export XML
 import_with_rabbitmq: Activer RabbitMQ pour gérer les imports de façon asynchrone
 import_with_redis: Activer Redis pour gérer les imports de façon asynchrone
 shaarli_url: URL de Shaarli, si le service Shaarli est activé
-scuttle_url: URL de Scuttle, si le service Scuttle est activé
 unmark_url: URL de Unmark, si le service Unmark est activé
 share_diaspora: Activer le partage vers diaspora*
 share_mail: Activer le partage par courriel
 share_shaarli: Activer le partage vers Shaarli
-share_scuttle: Activer le partage vers Scuttle
 share_twitter: Activer le partage vers Twitter
 share_unmark: Activer le partage vers Unmark.it
 show_printlink: Afficher un lien pour imprimer

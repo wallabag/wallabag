@@ -17,7 +17,6 @@ wallabag_support_url: Hulp URL voor wallabag
 show_printlink: Toon een link naar de print inhoud
 share_unmark: Schakel delen met Unmark.it in
 share_twitter: Schakel delen met Twitter in
-share_scuttle: Schakel delen met Scuttle in
 share_shaarli: Schakel delen met Shaarli in
 share_mail: Schakel delen naar e-mail in
 share_diaspora: Schakel deel naar diaspora* in
@@ -33,7 +32,6 @@ export_csv: Schakel CSV-export in
 export_pdf: Schakel PDF-export in
 export_mobi: Schakel .mobi-export in
 export_epub: Schakel ePub-export in
-carrot: Schakel delen naar Carrot in
 download_pictures: Download foto's naar jouw server
 settings_changed: Instellingen bijgewerkt
 diaspora_url: diaspora* URL, als de dienst is aangezet

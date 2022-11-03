@@ -1,6 +1,5 @@
 settings_changed: Konfiguracja zaktualizowana
 download_pictures: Pobierz obrazy na swój serwer
-carrot: Włącz udostępnianie dla Carrot
 diaspora_url: Adres URL Diaspora, jeżeli usługa jest włączona
 export_epub: Włącz eksport do ePub
 export_mobi: Włącz eksport do plików .mobi (przestarzałe, zostanie wkrótce usunięte)
@@ -12,11 +11,9 @@ export_xml: Włącz eksport do XML
 import_with_rabbitmq: Włącz RabbitMQ dla asynchronicznego importu danych
 import_with_redis: Włącz Redis dla asynchronicznego importu danych
 shaarli_url: Adress URL Shaarli, jeżeli usługa jest włączona
-scuttle_url: Adress URL Scuttle, jeżeli usługa jest włączona
 share_diaspora: Włącz udostępnianie dla Diaspora
 share_mail: Włącz udostępnianie przez e-mail
 share_shaarli: Włącz udostępnianie dla Shaarli
-share_scuttle: Włącz udostępnianie dla Scuttle
 share_twitter: Włącz udostępnianie dla Twitter
 share_unmark: Włącz udostępnianie dla Unmark.it
 show_printlink: Pokaż link do wydrukowania zawartości

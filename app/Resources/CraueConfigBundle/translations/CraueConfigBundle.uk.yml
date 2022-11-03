@@ -1,6 +1,5 @@
 settings_changed: Конфігурацію оновлено
 download_pictures: Завантажити картинки на ваш сервер
-carrot: Дозволити ділитися в Carrot
 diaspora_url: diaspora* адреса, якщо сервіс увімкнено
 export_epub: Увімкнути експорт в ePub
 export_mobi: Увімкнути експорт в .mobi
@@ -12,12 +11,10 @@ export_xml: Увімкнути експорт в XML
 import_with_rabbitmq: Увімкнути можливість асинхронного імпорту через RabbitMQ
 import_with_redis: Увімкнути можливість асинхронного імпорту через Redis
 shaarli_url: Shaarli URL, якщо сервіс увімкнено
-scuttle_url: Scuttle URL, якщо сервіс увімкнено
 unmark_url: Unmark URL, якщо сервіс увімкнено
 share_diaspora: Дозволити ділитися в diaspora*
 share_mail: Дозволити ділитись електронною поштою
 share_shaarli: Дозволити ділитися в Shaarli
-share_scuttle: Дозволити ділитися в Scuttle
 share_twitter: Дозволити ділитися в Twitter
 share_unmark: Дозволити ділитися в Unmark.it
 show_printlink: Показувати лінк для друку
