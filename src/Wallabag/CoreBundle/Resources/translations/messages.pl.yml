@@ -483,6 +483,8 @@ tag:
     new:
         add: Dodaj
         placeholder: Możesz dodać kilka tagów, oddzielając je przecinkami.
+    confirm:
+        delete: Usuń tag %name%
 export:
     footer_template: <div style="text-align:center;"><p>Stworzone przez wallabag z %method%</p><p>Proszę zgłoś <a href="https://github.com/wallabag/wallabag/issues">sprawę</a>, jeżeli masz problem z wyświetleniem tego e-booka na swoim urządzeniu.</p></div>
     unknown: Nieznany
