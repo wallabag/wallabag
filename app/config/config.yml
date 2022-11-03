@@ -169,7 +169,6 @@ nelmio_cors:
 liip_theme:
     load_controllers: false
     themes:
-        - baggy
         - material
     autodetect_theme: Wallabag\CoreBundle\Helper\DetectActiveTheme
 

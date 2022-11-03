@@ -32,7 +32,7 @@ class CreateConfigListenerTest extends TestCase
 
         $this->listener = new CreateConfigListener(
             $this->em,
-            'baggy',
+            'material',
             20,
             50,
             'fr',
@@ -61,7 +61,7 @@ class CreateConfigListenerTest extends TestCase
         );
 
         $config = new Config($user);
-        $config->setTheme('baggy');
+        $config->setTheme('material');
         $config->setItemsPerPage(20);
         $config->setFeedLimit(50);
         $config->setLanguage('fr');
