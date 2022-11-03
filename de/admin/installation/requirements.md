@@ -4,7 +4,7 @@
 Diese übersetzte Dokumentation ist möglicherweise veraltet. Neuere Funktionen oder Anforderungen finden Sie in der [englischen Dokumentation](https://doc.wallabag.org/en/).
 {% endhint %}
 
-wallabag ist kompatibel mit **PHP &gt;= 7.2**.
+wallabag ist kompatibel mit **PHP >= 7.4**.
 
 {% hint style="info" %}
 To install wallabag easily, we create a `Makefile`, so you need to have the `make` tool.
