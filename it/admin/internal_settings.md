@@ -26,10 +26,6 @@ Per esempio:
 
 ## Articolo
 
-### Abilitare condivisione con Carrot
-
-`1` per mostrare il bottone di condivisione per [Carrot.org](https://secure.carrot.org/), `0` per disattivare.
-
 ### URL di Diaspora, se il servizio è abilitato
 
 URL della vostra istanza di Diaspora\*.
