@@ -1,1 +1,10 @@
-{}
+security:
+    login:
+        register: Registra't
+        password: Contrasenya
+        page_title: Benvingut a wallabag!
+        keep_logged_in: Manten-me connectat
+        submit: Iniciar Sessió
+        forgot_password: Has oblidat la teva contrasenya?
+        username: Nom d'usuari
+        cancel: Cancel·lar
