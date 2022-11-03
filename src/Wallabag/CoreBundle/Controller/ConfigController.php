@@ -61,7 +61,7 @@ class ConfigController extends Controller
 
                 $this->addFlash(
                     'notice',
-                    'Baggy is deprecated, forced to Material theme.'
+                    'Baggy is gone, forced to Material theme.'
                 );
             }
 
