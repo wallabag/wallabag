@@ -1,0 +1,10 @@
+auth_code:
+    on: activat
+    mailer:
+        subject: codi d'autenticació wallabag
+        body:
+            hello: Hola %user%,
+            second_para: 'Aquí tens el codi:'
+            support: 'No dubtis a posar-te en contacte amb nosaltres si tens algun problema:'
+            first_para: Com que necessites una autenticació de dos factors per iniciar la sessió al teu compte de wallabag i un dispositiu nou l'acaba d'utilitzar, t'enviem un codi per validar la teva connexió.
+            signature: L'equip de wallabag

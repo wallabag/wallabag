@@ -37,6 +37,7 @@ menu:
         theme_toggle_auto: テーマを自動切換
         theme_toggle_dark: ダークテーマ
         theme_toggle_light: ライトテーマ
+        with_annotations: 注釈付きのアイテム
     top:
         add_new_entry: 新しい記事を追加
         search: 検索
