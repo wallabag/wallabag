@@ -60,6 +60,7 @@
   "public.css.map": "public.css.map",
   "public.js": "public.js",
   "themes/_global/img/icons/diaspora-icon--black.png": "themes/_global/img/icons/diaspora-icon--black.png",
+  "themes/_global/img/icons/scuttle.png": "themes/_global/img/icons/scuttle.png",
   "themes/_global/img/icons/shaarli.png": "themes/_global/img/icons/shaarli.png",
   "themes/_global/img/icons/unmark-icon--black.png": "themes/_global/img/icons/unmark-icon--black.png"
 }
