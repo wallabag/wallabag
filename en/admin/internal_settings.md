@@ -22,10 +22,6 @@ For instance:
 
 ## Article
 
-### Enable share to Carrot
-
-`1` to show the share button for [Carrot.org](https://secure.carrot.org/), `0` to deactivate.
-
 ### Diaspora URL, if the service is enabled
 
 URL of your Diaspora\* instance.

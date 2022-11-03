@@ -23,10 +23,6 @@ Par exemple :
 
 ## Article
 
-### Activer le partage vers Carrot
-
-`1` pour activer le partage vers [Carrot.org](https://secure.carrot.org/), `0` pour désactiver.
-
 ### URL de Diaspora, si le service Diaspora est activé
 
 URL de votre instance Diaspora\*.
