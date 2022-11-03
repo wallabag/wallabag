@@ -483,6 +483,8 @@ tag:
     new:
         add: Ekle
         placeholder: Virgülle ayırarak birden fazla etiket ekleyebilirsiniz.
+    confirm:
+        delete: '%name% etiketini sil'
 import:
     page_title: İçe Aktar
     page_description: wallabag içe aktarma aracına hoşgeldiniz. Lütfen içe aktarmak istediğiiz önceki servisinizi seçin.
