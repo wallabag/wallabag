@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\CoreBundle\Command\CleanDuplicatesCommand;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
 
@@ -15,14 +14,11 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
     public function testRunCleanDuplicates()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new CleanDuplicatesCommand());
 
         $command = $application->find('wallabag:clean-duplicates');
 
         $tester = new CommandTester($command);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
 
         $this->assertStringContainsString('Cleaning through 3 user accounts', $tester->getDisplay());
         $this->assertStringContainsString('Finished cleaning. 0 duplicates found in total', $tester->getDisplay());
@@ -31,13 +27,11 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
     public function testRunCleanDuplicatesCommandWithBadUsername()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new CleanDuplicatesCommand());
 
         $command = $application->find('wallabag:clean-duplicates');
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'unknown',
         ]);
 
@@ -47,13 +41,11 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
     public function testRunCleanDuplicatesCommandForUser()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new CleanDuplicatesCommand());
 
         $command = $application->find('wallabag:clean-duplicates');
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'admin',
         ]);
 
@@ -88,13 +80,11 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
         $this->assertCount(2, $nbEntries);
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new CleanDuplicatesCommand());
 
         $command = $application->find('wallabag:clean-duplicates');
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'admin',
         ]);
 

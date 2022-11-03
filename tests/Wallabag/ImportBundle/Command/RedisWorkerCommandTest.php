@@ -9,7 +9,6 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\ImportBundle\Command\RedisWorkerCommand;
 
 class RedisWorkerCommandTest extends WallabagCoreTestCase
 {
@@ -19,14 +18,11 @@ class RedisWorkerCommandTest extends WallabagCoreTestCase
         $this->expectExceptionMessage('Not enough arguments (missing: "serviceName")');
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new RedisWorkerCommand());
 
         $command = $application->find('wallabag:import:redis-worker');
 
         $tester = new CommandTester($command);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
     }
 
     public function testRunRedisWorkerCommandWithBadService()
@@ -35,13 +31,11 @@ class RedisWorkerCommandTest extends WallabagCoreTestCase
         $this->expectExceptionMessage('No queue or consumer found for service name');
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new RedisWorkerCommand());
 
         $command = $application->find('wallabag:import:redis-worker');
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'serviceName' => 'YOMONSERVICE',
         ]);
     }
@@ -49,7 +43,6 @@ class RedisWorkerCommandTest extends WallabagCoreTestCase
     public function testRunRedisWorkerCommand()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new RedisWorkerCommand());
 
         $factory = new RedisMockFactory();
         $redisMock = $factory->getAdapter(Client::class, true);
@@ -64,7 +57,6 @@ class RedisWorkerCommandTest extends WallabagCoreTestCase
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'serviceName' => 'readability',
             '--maxIterations' => 1,
         ]);

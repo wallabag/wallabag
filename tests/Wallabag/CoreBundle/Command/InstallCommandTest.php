@@ -3,9 +3,6 @@
 namespace Tests\Wallabag\CoreBundle\Command;
 
 use DAMA\DoctrineTestBundle\Doctrine\DBAL\StaticDriver;
-use Doctrine\Bundle\DoctrineBundle\Command\CreateDatabaseDoctrineCommand;
-use Doctrine\Bundle\DoctrineBundle\Command\DropDatabaseDoctrineCommand;
-use Doctrine\Bundle\MigrationsBundle\Command\MigrationsMigrateDoctrineCommand;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
@@ -14,7 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\Wallabag\CoreBundle\Mock\InstallCommandMock;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Command\InstallCommand;
 
@@ -89,9 +85,10 @@ class InstallCommandTest extends WallabagCoreTestCase
     public function testRunInstallCommand()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new InstallCommandMock());
 
+        /** @var InstallCommand $command */
         $command = $application->find('wallabag:install');
+        $command->disableRunOtherCommands();
 
         $tester = new CommandTester($command);
         $tester->setInputs([
@@ -101,9 +98,7 @@ class InstallCommandTest extends WallabagCoreTestCase
             'password_' . uniqid('', true), // password
             'email_' . uniqid('', true) . '@wallabag.it', // email
         ]);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
 
         $this->assertStringContainsString('Checking system requirements.', $tester->getDisplay());
         $this->assertStringContainsString('Setting up database.', $tester->getDisplay());
@@ -114,9 +109,10 @@ class InstallCommandTest extends WallabagCoreTestCase
     public function testRunInstallCommandWithReset()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new InstallCommandMock());
 
+        /** @var InstallCommand $command */
         $command = $application->find('wallabag:install');
+        $command->disableRunOtherCommands();
 
         $tester = new CommandTester($command);
         $tester->setInputs([
@@ -126,7 +122,6 @@ class InstallCommandTest extends WallabagCoreTestCase
             'email_' . uniqid('', true) . '@wallabag.it', // email
         ]);
         $tester->execute([
-            'command' => $command->getName(),
             '--reset' => true,
         ]);
 
@@ -149,19 +144,16 @@ class InstallCommandTest extends WallabagCoreTestCase
         }
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new DropDatabaseDoctrineCommand());
 
         // drop database first, so the install command won't ask to reset things
         $command = $application->find('doctrine:database:drop');
         $command->run(new ArrayInput([
-            'command' => 'doctrine:database:drop',
             '--force' => true,
         ]), new NullOutput());
 
         // start a new application to avoid lagging connexion to pgsql
         $client = static::createClient();
         $application = new Application($client->getKernel());
-        $application->add(new InstallCommand());
 
         $command = $application->find('wallabag:install');
 
@@ -172,9 +164,7 @@ class InstallCommandTest extends WallabagCoreTestCase
             'password_' . uniqid('', true), // password
             'email_' . uniqid('', true) . '@wallabag.it', // email
         ]);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
 
         $this->assertStringContainsString('Checking system requirements.', $tester->getDisplay());
         $this->assertStringContainsString('Setting up database.', $tester->getDisplay());
@@ -188,9 +178,10 @@ class InstallCommandTest extends WallabagCoreTestCase
     public function testRunInstallCommandChooseResetSchema()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new InstallCommandMock());
 
+        /** @var InstallCommand $command */
         $command = $application->find('wallabag:install');
+        $command->disableRunOtherCommands();
 
         $tester = new CommandTester($command);
         $tester->setInputs([
@@ -198,9 +189,7 @@ class InstallCommandTest extends WallabagCoreTestCase
             'y', // do want to reset the schema
             'n', // don't want to create a new user
         ]);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
 
         $this->assertStringContainsString('Checking system requirements.', $tester->getDisplay());
         $this->assertStringContainsString('Setting up database.', $tester->getDisplay());
@@ -213,27 +202,17 @@ class InstallCommandTest extends WallabagCoreTestCase
     public function testRunInstallCommandChooseNothing()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new InstallCommand());
-        $application->add(new DropDatabaseDoctrineCommand());
-        $application->add(new CreateDatabaseDoctrineCommand());
-        $application->add(new MigrationsMigrateDoctrineCommand());
 
         // drop database first, so the install command won't ask to reset things
-        $command = new DropDatabaseDoctrineCommand();
-        $command->setApplication($application);
+        $command = $application->find('doctrine:database:drop');
         $command->run(new ArrayInput([
-            'command' => 'doctrine:database:drop',
             '--force' => true,
         ]), new NullOutput());
 
         $this->getClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->close();
 
-        $command = new CreateDatabaseDoctrineCommand();
-        $command->setApplication($application);
-        $command->run(new ArrayInput([
-            'command' => 'doctrine:database:create',
-            '--env' => 'test',
-        ]), new NullOutput());
+        $command = $application->find('doctrine:database:create');
+        $command->run(new ArrayInput([]), new NullOutput());
 
         $command = $application->find('wallabag:install');
 
@@ -242,9 +221,7 @@ class InstallCommandTest extends WallabagCoreTestCase
             'n', // don't want to reset the entire database
             'n', // don't want to create a new user
         ]);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
 
         $this->assertStringContainsString('Checking system requirements.', $tester->getDisplay());
         $this->assertStringContainsString('Setting up database.', $tester->getDisplay());
@@ -257,14 +234,13 @@ class InstallCommandTest extends WallabagCoreTestCase
     public function testRunInstallCommandNoInteraction()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new InstallCommandMock());
 
+        /** @var InstallCommand $command */
         $command = $application->find('wallabag:install');
+        $command->disableRunOtherCommands();
 
         $tester = new CommandTester($command);
-        $tester->execute([
-            'command' => $command->getName(),
-        ], [
+        $tester->execute([], [
             'interactive' => false,
         ]);
 

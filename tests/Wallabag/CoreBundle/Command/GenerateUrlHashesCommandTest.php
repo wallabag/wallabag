@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\CoreBundle\Command\GenerateUrlHashesCommand;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
 
@@ -15,14 +14,11 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
     public function testRunGenerateUrlHashesCommand()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new GenerateUrlHashesCommand());
 
         $command = $application->find('wallabag:generate-hashed-urls');
 
         $tester = new CommandTester($command);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
 
         $this->assertStringContainsString('Generating hashed urls for "3" users', $tester->getDisplay());
         $this->assertStringContainsString('Finished generated hashed urls', $tester->getDisplay());
@@ -31,13 +27,11 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
     public function testRunGenerateUrlHashesCommandWithBadUsername()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new GenerateUrlHashesCommand());
 
         $command = $application->find('wallabag:generate-hashed-urls');
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'unknown',
         ]);
 
@@ -47,13 +41,11 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
     public function testRunGenerateUrlHashesCommandForUser()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new GenerateUrlHashesCommand());
 
         $command = $application->find('wallabag:generate-hashed-urls');
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'admin',
         ]);
 
@@ -77,13 +69,11 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
         $em->flush();
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new GenerateUrlHashesCommand());
 
         $command = $application->find('wallabag:generate-hashed-urls');
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'admin',
         ]);
 

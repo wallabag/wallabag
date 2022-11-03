@@ -26,20 +26,27 @@ class InstallCommand extends ContainerAwareCommand
     /**
      * @var InputInterface
      */
-    protected $defaultInput;
+    private $defaultInput;
 
     /**
      * @var SymfonyStyle
      */
-    protected $io;
+    private $io;
 
     /**
      * @var array
      */
-    protected $functionExists = [
+    private $functionExists = [
         'curl_exec',
         'curl_multi_init',
     ];
+
+    private bool $runOtherCommands = true;
+
+    public function disableRunOtherCommands(): void
+    {
+        $this->runOtherCommands = false;
+    }
 
     protected function configure()
     {
@@ -74,7 +81,7 @@ class InstallCommand extends ContainerAwareCommand
         $this->io->success('You can now configure your web server, see https://doc.wallabag.org');
     }
 
-    protected function checkRequirements()
+    private function checkRequirements()
     {
         $this->io->section('Step 1 of 4: Checking system requirements.');
 
@@ -174,7 +181,7 @@ class InstallCommand extends ContainerAwareCommand
         return $this;
     }
 
-    protected function setupDatabase()
+    private function setupDatabase()
     {
         $this->io->section('Step 2 of 4: Setting up database.');
 
@@ -242,7 +249,7 @@ class InstallCommand extends ContainerAwareCommand
         return $this;
     }
 
-    protected function setupAdmin()
+    private function setupAdmin()
     {
         $this->io->section('Step 3 of 4: Administration setup.');
 
@@ -277,7 +284,7 @@ class InstallCommand extends ContainerAwareCommand
         return $this;
     }
 
-    protected function setupConfig()
+    private function setupConfig()
     {
         $this->io->section('Step 4 of 4: Config setup.');
         $em = $this->getContainer()->get(EntityManagerInterface::class);
@@ -313,8 +320,12 @@ class InstallCommand extends ContainerAwareCommand
      * @param string $command
      * @param array  $parameters Parameters to this command (usually 'force' => true)
      */
-    protected function runCommand($command, $parameters = [])
+    private function runCommand($command, $parameters = [])
     {
+        if (!$this->runOtherCommands) {
+            return $this;
+        }
+
         $parameters = array_merge(
             ['command' => $command],
             $parameters,

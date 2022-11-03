@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\CoreBundle\Command\TagAllCommand;
 
 class TagAllCommandTest extends WallabagCoreTestCase
 {
@@ -16,26 +15,21 @@ class TagAllCommandTest extends WallabagCoreTestCase
         $this->expectExceptionMessage('Not enough arguments (missing: "username")');
 
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new TagAllCommand());
 
         $command = $application->find('wallabag:tag:all');
 
         $tester = new CommandTester($command);
-        $tester->execute([
-            'command' => $command->getName(),
-        ]);
+        $tester->execute([]);
     }
 
     public function testRunTagAllCommandWithBadUsername()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new TagAllCommand());
 
         $command = $application->find('wallabag:tag:all');
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'unknown',
         ]);
 
@@ -45,13 +39,11 @@ class TagAllCommandTest extends WallabagCoreTestCase
     public function testRunTagAllCommand()
     {
         $application = new Application($this->getClient()->getKernel());
-        $application->add(new TagAllCommand());
 
         $command = $application->find('wallabag:tag:all');
 
         $tester = new CommandTester($command);
         $tester->execute([
-            'command' => $command->getName(),
             'username' => 'admin',
         ]);
 
