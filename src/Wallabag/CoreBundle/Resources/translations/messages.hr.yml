@@ -692,6 +692,8 @@ tag:
     new:
         add: Dodaj
         placeholder: Dodaj više oznaka odjednom, odvojene zarezom.
+    confirm:
+        delete: Izbriši oznaku %name%
 security:
     register:
         page_title: Stvori račun
