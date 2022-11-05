@@ -8,3 +8,17 @@ security:
         forgot_password: Has oblidat la teva contrasenya?
         username: Nom d'usuari
         cancel: Cancel·lar
+    resetting:
+        description: Introdueix la teva adreça de correu electrònic a continuació i t'enviarem instruccions per restablir la contrasenya.
+    register:
+        page_title: Crear un compte
+        go_to_account: Ves al teu compte
+menu:
+    left:
+        unread: Sense llegir
+        archive: Arxiu
+        all_articles: Tots els articles
+        with_annotations: Amb anotacions
+        config: Configuració
+        tags: Etiquetes
+        import: Importar
