@@ -131,11 +131,22 @@ fos_rest:
             - { path: '^/', priorities: ['text/html', '*/*'], fallback_format: html, prefer_extension: false }
 
 nelmio_api_doc:
-    sandbox:
-        enabled: false
-    cache:
-        enabled: true
-    name: wallabag API documentation
+    areas:
+        default:
+            disable_default_routes: true
+    documentation:
+        info:
+            title: wallabag API documentation
+            description: This is the API documentation of wallabag
+            version: 2.x
+        securityDefinitions:
+            Bearer:
+                type: apiKey
+                description: 'Value: Bearer {jwt}'
+                name: Authorization
+                in: header
+        security:
+            - Bearer: []
 
 nelmio_cors:
     defaults:

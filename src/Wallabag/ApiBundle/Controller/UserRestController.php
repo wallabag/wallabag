@@ -8,7 +8,8 @@ use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Model\UserManagerInterface;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Nelmio\ApiDocBundle\Annotation\Operation;
+use Swagger\Annotations as SWG;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +23,14 @@ class UserRestController extends WallabagRestController
     /**
      * Retrieve current logged in user informations.
      *
-     * @ApiDoc()
+     * @Operation(
+     *     tags={"User"},
+     *     summary="Retrieve current logged in user informations.",
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
+     * )
      *
      * @return JsonResponse
      */
@@ -36,13 +44,41 @@ class UserRestController extends WallabagRestController
     /**
      * Register an user and create a client.
      *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="username", "dataType"="string", "required"=true, "description"="The user's username"},
-     *          {"name"="password", "dataType"="string", "required"=true, "description"="The user's password"},
-     *          {"name"="email", "dataType"="string", "required"=true, "description"="The user's email"},
-     *          {"name"="client_name", "dataType"="string", "required"=true, "description"="The client name (to be used by your app)"}
-     *      }
+     * @Operation(
+     *     tags={"User"},
+     *     summary="Register an user and create a client.",
+     *     @SWG\Parameter(
+     *         name="username",
+     *         in="body",
+     *         description="The user's username",
+     *         required=true,
+     *         @SWG\Schema(type="string")
+     *     ),
+     *     @SWG\Parameter(
+     *         name="password",
+     *         in="body",
+     *         description="The user's password",
+     *         required=true,
+     *         @SWG\Schema(type="string")
+     *     ),
+     *     @SWG\Parameter(
+     *         name="email",
+     *         in="body",
+     *         description="The user's email",
+     *         required=true,
+     *         @SWG\Schema(type="string")
+     *     ),
+     *     @SWG\Parameter(
+     *         name="client_name",
+     *         in="body",
+     *         description="The client name (to be used by your app)",
+     *         required=true,
+     *         @SWG\Schema(type="string")
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
      *
      * @todo Make this method (or the whole API) accessible only through https

@@ -4,8 +4,9 @@ namespace Wallabag\ApiBundle\Controller;
 
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Nelmio\ApiDocBundle\Annotation\Operation;
 use Pagerfanta\Pagerfanta;
+use Swagger\Annotations as SWG;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,14 +32,52 @@ class EntryRestController extends WallabagRestController
      *
      * @todo Remove that `return_id` in the next major release
      *
-     * @ApiDoc(
-     *       parameters={
-     *          {"name"="return_id", "dataType"="string", "required"=false, "format"="1 or 0", "description"="Set 1 if you want to retrieve ID in case entry(ies) exists, 0 by default"},
-     *          {"name"="url", "dataType"="string", "required"=true, "format"="An url", "description"="DEPRECATED, use hashed_url instead"},
-     *          {"name"="urls", "dataType"="string", "required"=false, "format"="An array of urls (?urls[]=http...&urls[]=http...)", "description"="DEPRECATED, use hashed_urls instead"},
-     *          {"name"="hashed_url", "dataType"="string", "required"=false, "format"="A hashed url", "description"="Hashed url using SHA1 to check if it exists"},
-     *          {"name"="hashed_urls", "dataType"="string", "required"=false, "format"="An array of hashed urls (?hashed_urls[]=xxx...&hashed_urls[]=xxx...)", "description"="An array of hashed urls using SHA1 to check if they exist"}
-     *       }
+     * @Operation(
+     *     tags={"Entries"},
+     *     summary="Check if an entry exist by url.",
+     *     @SWG\Parameter(
+     *         name="return_id",
+     *         in="body",
+     *         description="Set 1 if you want to retrieve ID in case entry(ies) exists, 0 by default",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="string",
+     *             enum={"1", "0"},
+     *             default="0"
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="url",
+     *         in="body",
+     *         description="DEPRECATED, use hashed_url instead. An url",
+     *         required=true,
+     *         @SWG\Schema(type="string")
+     *     ),
+     *     @SWG\Parameter(
+     *         name="urls",
+     *         in="body",
+     *         description="DEPRECATED, use hashed_urls instead. An array of urls (?urls[]=http...&urls[]=http...)",
+     *         required=false,
+     *         @SWG\Schema(type="string")
+     *     ),
+     *     @SWG\Parameter(
+     *         name="hashed_url",
+     *         in="body",
+     *         description="Hashed url using SHA1 to check if it exists. A hashed url",
+     *         required=false,
+     *         @SWG\Schema(type="string")
+     *     ),
+     *     @SWG\Parameter(
+     *         name="hashed_urls",
+     *         in="body",
+     *         description="An array of hashed urls using SHA1 to check if they exist. An array of hashed urls (?hashed_urls[]=xxx...&hashed_urls[]=xxx...)",
+     *         required=false,
+     *         @SWG\Schema(type="string")
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
      *
      * @return JsonResponse
@@ -107,20 +146,130 @@ class EntryRestController extends WallabagRestController
     /**
      * Retrieve all entries. It could be filtered by many options.
      *
-     * @ApiDoc(
-     *       parameters={
-     *          {"name"="archive", "dataType"="integer", "required"=false, "format"="1 or 0, all entries by default", "description"="filter by archived status."},
-     *          {"name"="starred", "dataType"="integer", "required"=false, "format"="1 or 0, all entries by default", "description"="filter by starred status."},
-     *          {"name"="sort", "dataType"="string", "required"=false, "format"="'created' or 'updated' or 'archived', default 'created'", "description"="sort entries by date."},
-     *          {"name"="order", "dataType"="string", "required"=false, "format"="'asc' or 'desc', default 'desc'", "description"="order of sort."},
-     *          {"name"="page", "dataType"="integer", "required"=false, "format"="default '1'", "description"="what page you want."},
-     *          {"name"="perPage", "dataType"="integer", "required"=false, "format"="default'30'", "description"="results per page."},
-     *          {"name"="tags", "dataType"="string", "required"=false, "format"="api,rest", "description"="a list of tags url encoded. Will returns entries that matches ALL tags."},
-     *          {"name"="since", "dataType"="integer", "required"=false, "format"="default '0'", "description"="The timestamp since when you want entries updated."},
-     *          {"name"="public", "dataType"="integer", "required"=false, "format"="1 or 0, all entries by default", "description"="filter by entries with a public link"},
-     *          {"name"="detail", "dataType"="string", "required"=false, "format"="metadata or full, metadata by default", "description"="include content field if 'full'. 'full' by default for backward compatibility."},
-     *          {"name"="domain_name", "dataType"="string", "required"=false, "format"="example.com", "description"="filter entries with the given domain name"},
-     *       }
+     * @Operation(
+     *     tags={"Entries"},
+     *     summary="Retrieve all entries. It could be filtered by many options.",
+     *     @SWG\Parameter(
+     *         name="archive",
+     *         in="body",
+     *         description="filter by archived status. all entries by default.",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="integer",
+     *             enum={"1", "0"},
+     *             default="0"
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="starred",
+     *         in="body",
+     *         description="filter by starred status. all entries by default",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="integer",
+     *             enum={"1", "0"},
+     *             default="0"
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="sort",
+     *         in="body",
+     *         description="sort entries by date.",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="string",
+     *             enum={"created", "updated", "archived"},
+     *             default="created"
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="order",
+     *         in="body",
+     *         description="order of sort.",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="string",
+     *             enum={"asc", "desc"},
+     *             default="desc"
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="page",
+     *         in="body",
+     *         description="what page you want.",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="integer",
+     *             default=1
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="perPage",
+     *         in="body",
+     *         description="results per page.",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="integer",
+     *             default=30
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="tags",
+     *         in="body",
+     *         description="a list of tags url encoded. Will returns entries that matches ALL tags.",
+     *         required=false,
+     *         format="comma-seperated",
+     *         @SWG\Schema(
+     *             type="string",
+     *             example="api,rest"
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="since",
+     *         in="body",
+     *         description="The timestamp since when you want entries updated.",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="integer",
+     *             default=0
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="public",
+     *         in="body",
+     *         description="filter by entries with a public link. all entries by default",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="integer",
+     *             enum={"1", "0"},
+     *             default="0"
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="detail",
+     *         in="body",
+     *         description="include content field if 'full'. 'full' by default for backward compatibility.",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="string",
+     *             enum={"metadata", "full"},
+     *             default="full"
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="domain_name",
+     *         in="body",
+     *         description="filter entries with the given domain name",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="string",
+     *             example="example.com",
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
      *
      * @return JsonResponse
@@ -189,10 +338,21 @@ class EntryRestController extends WallabagRestController
     /**
      * Retrieve a single entry.
      *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
-     *      }
+     * @Operation(
+     *     tags={"Entries"},
+     *     summary="Retrieve a single entry.",
+     *     @SWG\Parameter(
+     *         name="entry",
+     *         in="path",
+     *         description="The entry ID",
+     *         required=true,
+     *         pattern="\w+",
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
      *
      * @return JsonResponse
@@ -208,10 +368,29 @@ class EntryRestController extends WallabagRestController
     /**
      * Retrieve a single entry as a predefined format.
      *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
-     *      }
+     * @Operation(
+     *     tags={"Entries"},
+     *     summary="Retrieve a single entry as a predefined format.",
+     *     @SWG\Parameter(
+     *         name="entry",
+     *         in="path",
+     *         description="The entry ID",
+     *         required=true,
+     *         pattern="\w+",
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="_format",
+     *         in="path",
+     *         description="",
+     *         required=true,
+     *         type="string",
+     *         enum={"xml", "json", "txt", "csv", "pdf", "epub", "mobi"},
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
      *
      * @return Response
@@ -231,10 +410,20 @@ class EntryRestController extends WallabagRestController
     /**
      * Handles an entries list and delete URL.
      *
-     * @ApiDoc(
-     *       parameters={
-     *          {"name"="urls", "dataType"="string", "required"=true, "format"="A JSON array of urls [{'url': 'http://...'}, {'url': 'http://...'}]", "description"="Urls (as an array) to delete."}
-     *       }
+     * @Operation(
+     *     tags={"Entries"},
+     *     summary="Handles an entries list and delete URL.",
+     *     @SWG\Parameter(
+     *         name="urls",
+     *         in="body",
+     *         description="Urls (as an array) to delete. A JSON array of urls [{'url': 'http://...'}, {'url': 'http://...'}]",
+     *         required=true,
+     *         @SWG\Schema(type="string")
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
      *
      * @return JsonResponse
@@ -278,10 +467,20 @@ class EntryRestController extends WallabagRestController
     /**
      * Handles an entries list and create URL.
      *
-     * @ApiDoc(
-     *       parameters={
-     *          {"name"="urls", "dataType"="string", "required"=true, "format"="A JSON array of urls [{'url': 'http://...'}, {'url': 'http://...'}]", "description"="Urls (as an array) to create."}
-     *       }
+     * @Operation(
+     *     tags={"Entries"},
+     *     summary="Handles an entries list and create URL.",
+     *     @SWG\Parameter(
+     *         name="urls",
+     *         in="formData",
+     *         description="Urls (as an array) to create. A JSON array of urls [{'url': 'http://...'}, {'url': 'http://...'}]",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
      *
      * @throws HttpException When limit is reached
@@ -339,21 +538,132 @@ class EntryRestController extends WallabagRestController
      * If you want to provide the HTML content (which means wallabag won't fetch it from the url), you must provide `content`, `title` & `url` fields **non-empty**.
      * Otherwise, content will be fetched as normal from the url and values will be overwritten.
      *
-     * @ApiDoc(
-     *       parameters={
-     *          {"name"="url", "dataType"="string", "required"=true, "format"="http://www.test.com/article.html", "description"="Url for the entry."},
-     *          {"name"="title", "dataType"="string", "required"=false, "description"="Optional, we'll get the title from the page."},
-     *          {"name"="tags", "dataType"="string", "required"=false, "format"="tag1,tag2,tag3", "description"="a comma-separated list of tags."},
-     *          {"name"="archive", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="entry already archived"},
-     *          {"name"="starred", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="entry already starred"},
-     *          {"name"="content", "dataType"="string", "required"=false, "description"="Content of the entry"},
-     *          {"name"="language", "dataType"="string", "required"=false, "description"="Language of the entry"},
-     *          {"name"="preview_picture", "dataType"="string", "required"=false, "description"="Preview picture of the entry"},
-     *          {"name"="published_at", "dataType"="datetime|integer", "format"="YYYY-MM-DDTHH:II:SS+TZ or a timestamp", "required"=false, "description"="Published date of the entry"},
-     *          {"name"="authors", "dataType"="string", "format"="Name Firstname,author2,author3", "required"=false, "description"="Authors of the entry"},
-     *          {"name"="public", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="will generate a public link for the entry"},
-     *          {"name"="origin_url", "dataType"="string", "required"=false, "format"="http://www.test.com/article.html", "description"="Origin url for the entry (from where you found it)."},
-     *       }
+     * @Operation(
+     *     tags={"Entries"},
+     *     summary="Create an entry.",
+     *     @SWG\Parameter(
+     *         name="url",
+     *         in="body",
+     *         description="Url for the entry.",
+     *         required=true,
+     *         @SWG\Schema(
+     *             type="string",
+     *             example="http://www.test.com/article.html"
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="title",
+     *         in="body",
+     *         description="Optional, we'll get the title from the page.",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="string",
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="tags",
+     *         in="body",
+     *         description="a comma-separated list of tags.",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="string",
+     *             example="tag1,tag2,tag3"
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="archive",
+     *         in="body",
+     *         description="entry already archived",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="integer",
+     *             enum={"1", "0"},
+     *             default="0"
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="starred",
+     *         in="body",
+     *         description="entry already starred",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="integer",
+     *             enum={"1", "0"},
+     *             default="0"
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="content",
+     *         in="body",
+     *         description="Content of the entry",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="language",
+     *         in="body",
+     *         description="Language of the entry",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="preview_picture",
+     *         in="body",
+     *         description="Preview picture of the entry",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="published_at",
+     *         in="body",
+     *         description="Published date of the entry",
+     *         required=false,
+     *         format="YYYY-MM-DDTHH:II:SS+TZ or a timestamp (integer)",
+     *         @SWG\Schema(
+     *             type="string",
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="authors",
+     *         in="body",
+     *         description="Authors of the entry",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="string",
+     *             example="Name Firstname,author2,author3"
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="public",
+     *         in="body",
+     *         description="will generate a public link for the entry",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="integer",
+     *             enum={"1", "0"},
+     *             default="0"
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="origin_url",
+     *         in="body",
+     *         description="Origin url for the entry (from where you found it).",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="string",
+     *             example="http://www.test.com/article.html"
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
      *
      * @return JsonResponse
@@ -443,23 +753,120 @@ class EntryRestController extends WallabagRestController
     /**
      * Change several properties of an entry.
      *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
-     *      },
-     *      parameters={
-     *          {"name"="title", "dataType"="string", "required"=false},
-     *          {"name"="tags", "dataType"="string", "required"=false, "format"="tag1,tag2,tag3", "description"="a comma-separated list of tags."},
-     *          {"name"="archive", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="archived the entry."},
-     *          {"name"="starred", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="starred the entry."},
-     *          {"name"="content", "dataType"="string", "required"=false, "description"="Content of the entry"},
-     *          {"name"="language", "dataType"="string", "required"=false, "description"="Language of the entry"},
-     *          {"name"="preview_picture", "dataType"="string", "required"=false, "description"="Preview picture of the entry"},
-     *          {"name"="published_at", "dataType"="datetime|integer", "format"="YYYY-MM-DDTHH:II:SS+TZ or a timestamp", "required"=false, "description"="Published date of the entry"},
-     *          {"name"="authors", "dataType"="string", "format"="Name Firstname,author2,author3", "required"=false, "description"="Authors of the entry"},
-     *          {"name"="public", "dataType"="integer", "required"=false, "format"="1 or 0", "description"="will generate a public link for the entry"},
-     *          {"name"="origin_url", "dataType"="string", "required"=false, "format"="http://www.test.com/article.html", "description"="Origin url for the entry (from where you found it)."},
-     *      }
+     * @Operation(
+     *     tags={"Entries"},
+     *     summary="Change several properties of an entry.",
+     *     @SWG\Parameter(
+     *         name="entry",
+     *         in="path",
+     *         description="The entry ID",
+     *         required=true,
+     *         pattern="\w+",
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="title",
+     *         in="body",
+     *         description="",
+     *         required=false,
+     *         @SWG\Schema(type="string")
+     *     ),
+     *     @SWG\Parameter(
+     *         name="tags",
+     *         in="body",
+     *         description="a comma-separated list of tags.",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="string",
+     *             example="tag1,tag2,tag3",
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="archive",
+     *         in="body",
+     *         description="archived the entry.",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="integer",
+     *             enum={"1", "0"},
+     *             default="0"
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="starred",
+     *         in="body",
+     *         description="starred the entry.",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="integer",
+     *             enum={"1", "0"},
+     *             default="0"
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="content",
+     *         in="body",
+     *         description="Content of the entry",
+     *         required=false,
+     *         @SWG\Schema(type="string")
+     *     ),
+     *     @SWG\Parameter(
+     *         name="language",
+     *         in="body",
+     *         description="Language of the entry",
+     *         required=false,
+     *         @SWG\Schema(type="string")
+     *     ),
+     *     @SWG\Parameter(
+     *         name="preview_picture",
+     *         in="body",
+     *         description="Preview picture of the entry",
+     *         required=false,
+     *         @SWG\Schema(type="string")
+     *     ),
+     *     @SWG\Parameter(
+     *         name="published_at",
+     *         in="body",
+     *         description="Published date of the entry",
+     *         required=false,
+     *         format="YYYY-MM-DDTHH:II:SS+TZ or a timestamp",
+     *         @SWG\Schema(type="datetime|integer")
+     *     ),
+     *     @SWG\Parameter(
+     *         name="authors",
+     *         in="body",
+     *         description="Authors of the entry",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="string",
+     *             example="Name Firstname,author2,author3",
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="public",
+     *         in="body",
+     *         description="will generate a public link for the entry",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="integer",
+     *             enum={"1", "0"},
+     *             default="0"
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="origin_url",
+     *         in="body",
+     *         description="Origin url for the entry (from where you found it).",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="string",
+     *             example="http://www.test.com/article.html",
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
      *
      * @return JsonResponse
@@ -561,10 +968,21 @@ class EntryRestController extends WallabagRestController
      * Reload an entry.
      * An empty response with HTTP Status 304 will be send if we weren't able to update the content (because it hasn't changed or we got an error).
      *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
-     *      }
+     * @Operation(
+     *     tags={"Entries"},
+     *     summary="Reload an entry.",
+     *     @SWG\Parameter(
+     *         name="entry",
+     *         in="path",
+     *         description="The entry ID",
+     *         required=true,
+     *         pattern="\w+",
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
      *
      * @return JsonResponse
@@ -603,13 +1021,24 @@ class EntryRestController extends WallabagRestController
     /**
      * Delete **permanently** an entry.
      *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
-     *      },
-     *      parameters={
-     *          {"name"="expect", "dataType"="string", "required"=false, "format"="id or entry", "description"="Only returns the id instead of the deleted entry's full entity if 'id' is specified. Default to entry"},
-     *      }
+     * @Operation(
+     *     tags={"Entries"},
+     *     summary="Delete permanently an entry.",
+     *     @SWG\Parameter(
+     *         name="expect",
+     *         in="body",
+     *         description="Only returns the id instead of the deleted entry's full entity if 'id' is specified.",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="string",
+     *             enum={"id", "entry"},
+     *             default="entry"
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
      *
      * @return JsonResponse
@@ -645,10 +1074,21 @@ class EntryRestController extends WallabagRestController
     /**
      * Retrieve all tags for an entry.
      *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
-     *      }
+     * @Operation(
+     *     tags={"Entries"},
+     *     summary="Retrieve all tags for an entry.",
+     *     @SWG\Parameter(
+     *         name="entry",
+     *         in="path",
+     *         description="The entry ID",
+     *         required=true,
+     *         pattern="\w+",
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
      *
      * @return JsonResponse
@@ -664,13 +1104,31 @@ class EntryRestController extends WallabagRestController
     /**
      * Add one or more tags to an entry.
      *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
-     *      },
-     *      parameters={
-     *          {"name"="tags", "dataType"="string", "required"=false, "format"="tag1,tag2,tag3", "description"="a comma-separated list of tags."},
-     *       }
+     * @Operation(
+     *     tags={"Entries"},
+     *     summary="Add one or more tags to an entry.",
+     *     @SWG\Parameter(
+     *         name="entry",
+     *         in="path",
+     *         description="The entry ID",
+     *         required=true,
+     *         pattern="\w+",
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="tags",
+     *         in="body",
+     *         description="a comma-separated list of tags.",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="string",
+     *             example="tag1,tag2,tag3",
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
      *
      * @return JsonResponse
@@ -695,11 +1153,29 @@ class EntryRestController extends WallabagRestController
     /**
      * Permanently remove one tag for an entry.
      *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="tag", "dataType"="integer", "requirement"="\w+", "description"="The tag ID"},
-     *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
-     *      }
+     * @Operation(
+     *     tags={"Entries"},
+     *     summary="Permanently remove one tag for an entry.",
+     *     @SWG\Parameter(
+     *         name="entry",
+     *         in="path",
+     *         description="The entry ID",
+     *         required=true,
+     *         pattern="\w+",
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="tag",
+     *         in="path",
+     *         description="The tag ID",
+     *         required=true,
+     *         pattern="\w+",
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
      *
      * @return JsonResponse
@@ -720,10 +1196,20 @@ class EntryRestController extends WallabagRestController
     /**
      * Handles an entries list delete tags from them.
      *
-     * @ApiDoc(
-     *       parameters={
-     *          {"name"="list", "dataType"="string", "required"=true, "format"="A JSON array of urls [{'url': 'http://...','tags': 'tag1, tag2'}, {'url': 'http://...','tags': 'tag1, tag2'}]", "description"="Urls (as an array) to handle."}
-     *       }
+     * @Operation(
+     *     tags={"Entries"},
+     *     summary="Handles an entries list delete tags from them.",
+     *     @SWG\Parameter(
+     *         name="list",
+     *         in="body",
+     *         description="Urls (as an array) to handle. A JSON array of urls [{'url': 'http://...','tags': 'tag1, tag2'}, {'url': 'http://...','tags': 'tag1, tag2'}]",
+     *         required=true,
+     *         @SWG\Schema(type="string")
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
      *
      * @return JsonResponse
@@ -778,10 +1264,20 @@ class EntryRestController extends WallabagRestController
     /**
      * Handles an entries list and add tags to them.
      *
-     * @ApiDoc(
-     *       parameters={
-     *          {"name"="list", "dataType"="string", "required"=true, "format"="A JSON array of urls [{'url': 'http://...','tags': 'tag1, tag2'}, {'url': 'http://...','tags': 'tag1, tag2'}]", "description"="Urls (as an array) to handle."}
-     *       }
+     * @Operation(
+     *     tags={"Entries"},
+     *     summary="Handles an entries list and add tags to them.",
+     *     @SWG\Parameter(
+     *         name="list",
+     *         in="formData",
+     *         description="Urls (as an array) to handle. A JSON array of urls [{'url': 'http://...','tags': 'tag1, tag2'}, {'url': 'http://...','tags': 'tag1, tag2'}]",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
      *
      * @return JsonResponse

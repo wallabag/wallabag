@@ -4,7 +4,8 @@ namespace Wallabag\ApiBundle\Controller;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Nelmio\ApiDocBundle\Annotation\Operation;
+use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ConfigRestController extends WallabagRestController
@@ -12,7 +13,14 @@ class ConfigRestController extends WallabagRestController
     /**
      * Retrieve configuration for current user.
      *
-     * @ApiDoc()
+     * @Operation(
+     *     tags={"Config"},
+     *     summary="Retrieve configuration for current user.",
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
+     * )
      *
      * @return JsonResponse
      */
