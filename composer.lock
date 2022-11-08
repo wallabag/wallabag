@@ -4406,23 +4406,23 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "2.4.1",
+            "version": "2.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "897e44ce68d56948641cfa78410052685208b6de"
+                "reference": "f033c3b6787efdbabf04a3d7feb5c6a9205c8e1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/897e44ce68d56948641cfa78410052685208b6de",
-                "reference": "897e44ce68d56948641cfa78410052685208b6de",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/f033c3b6787efdbabf04a3d7feb5c6a9205c8e1d",
+                "reference": "f033c3b6787efdbabf04a3d7feb5c6a9205c8e1d",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "ext-tidy": "*",
                 "fossar/htmlawed": "^1.2.7",
-                "guzzlehttp/psr7": "^1.5.0",
+                "guzzlehttp/psr7": "^1.5.0|^2.0",
                 "http-interop/http-factory-guzzle": "^1.0",
                 "j0k3r/graby-site-config": "^1.0.110",
                 "j0k3r/httplug-ssrf-plugin": "^2.0",
@@ -4435,7 +4435,7 @@
                 "php-http/message": "^1.9",
                 "simplepie/simplepie": "^1.5",
                 "smalot/pdfparser": "^1.0",
-                "symfony/options-resolver": "^3.4|^4.4|^5.3",
+                "symfony/options-resolver": "^3.4|^4.4|^5.3|^6.0",
                 "true/punycode": "^2.1"
             },
             "require-dev": {
@@ -4479,7 +4479,7 @@
             "description": "Graby helps you extract article content from web pages",
             "support": {
                 "issues": "https://github.com/j0k3r/graby/issues",
-                "source": "https://github.com/j0k3r/graby/tree/2.4.1"
+                "source": "https://github.com/j0k3r/graby/tree/2.4.2"
             },
             "funding": [
                 {
@@ -4487,7 +4487,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-02-02T12:20:03+00:00"
+            "time": "2022-11-04T05:45:17+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
