@@ -472,6 +472,8 @@ tag:
         see_untagged_entries: Ver artigos non etiquetados
         number_on_the_page: '{0} Non hai etiquetas.|{1} Hai unha etiqueta.|]1,Inf[ Hai %count% etiquetas.'
     page_title: Etiquetas
+    confirm:
+        delete: Eliminar a etiqueta %name%
 quickstart:
     support:
         gitter: En Gitter
