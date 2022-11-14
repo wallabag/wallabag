@@ -53,7 +53,7 @@
     "postcss": "^8.4.19",
     "postcss-loader": "^7.0.1",
     "postcss-scss": "^4.0.5",
-    "sass": "^1.56.0",
+    "sass": "^1.56.1",
     "sass-loader": "^13.2.0",
     "style-loader": "^3.3.1",
     "stylelint": "^14.15.0",
