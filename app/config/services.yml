@@ -152,6 +152,9 @@ services:
     bd_guzzle_site_authenticator.site_config_builder:
         alias: Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder
 
+    GuzzleHttp\Cookie\CookieJar:
+        alias: 'Wallabag\CoreBundle\Helper\FileCookieJar'
+
     Wallabag\CoreBundle\Helper\HttpClientFactory:
         calls:
             - ["addSubscriber", ["@bd_guzzle_site_authenticator.authenticator_subscriber"]]
