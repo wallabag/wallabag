@@ -2,8 +2,9 @@
 
 namespace Wallabag\ApiBundle\Controller;
 
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Nelmio\ApiDocBundle\Annotation\Operation;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\AnnotationBundle\Entity\Annotation;
@@ -14,10 +15,21 @@ class AnnotationRestController extends WallabagRestController
     /**
      * Retrieve annotations for an entry.
      *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="entry", "dataType"="integer", "requirement"="\w+", "description"="The entry ID"}
-     *      }
+     * @Operation(
+     *     tags={"Annotations"},
+     *     summary="Retrieve annotations for an entry.",
+     *     @SWG\Parameter(
+     *         name="entry",
+     *         in="path",
+     *         description="The entry ID",
+     *         required=true,
+     *         pattern="\w+",
+     *         type="integer"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
      *
      * @return JsonResponse
@@ -34,12 +46,46 @@ class AnnotationRestController extends WallabagRestController
     /**
      * Creates a new annotation.
      *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="ranges", "dataType"="array", "requirement"="\w+", "description"="The range array for the annotation"},
-     *          {"name"="quote", "dataType"="string", "description"="The annotated text"},
-     *          {"name"="text", "dataType"="string", "required"=true, "description"="Content of annotation"},
-     *      }
+     * @Operation(
+     *     tags={"Annotations"},
+     *     summary="Creates a new annotation.",
+     *     @SWG\Parameter(
+     *         name="entry",
+     *         in="path",
+     *         description="The entry ID",
+     *         required=true,
+     *         pattern="\w+",
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="ranges",
+     *         in="body",
+     *         description="The range array for the annotation",
+     *         required=false,
+     *         pattern="\w+",
+     *         @SWG\Schema(
+     *             type="array",
+     *             @SWG\Items(type="string")
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="quote",
+     *         in="body",
+     *         description="The annotated text",
+     *         required=false,
+     *         @SWG\Schema(type="string")
+     *     ),
+     *     @SWG\Parameter(
+     *         name="text",
+     *         in="body",
+     *         description="Content of annotation",
+     *         required=true,
+     *         @SWG\Schema(type="string")
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
      *
      * @return JsonResponse
@@ -57,10 +103,21 @@ class AnnotationRestController extends WallabagRestController
     /**
      * Updates an annotation.
      *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="annotation", "dataType"="string", "requirement"="\w+", "description"="The annotation ID"}
-     *      }
+     * @Operation(
+     *     tags={"Annotations"},
+     *     summary="Updates an annotation.",
+     *     @SWG\Parameter(
+     *         name="annotation",
+     *         in="path",
+     *         description="The annotation ID",
+     *         required=true,
+     *         pattern="\w+",
+     *         type="string"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
      *
      * @ParamConverter("annotation", class="Wallabag\AnnotationBundle\Entity\Annotation")
@@ -80,10 +137,21 @@ class AnnotationRestController extends WallabagRestController
     /**
      * Removes an annotation.
      *
-     * @ApiDoc(
-     *      requirements={
-     *          {"name"="annotation", "dataType"="string", "requirement"="\w+", "description"="The annotation ID"}
-     *      }
+     * @Operation(
+     *     tags={"Annotations"},
+     *     summary="Removes an annotation.",
+     *     @SWG\Parameter(
+     *         name="annotation",
+     *         in="path",
+     *         description="The annotation ID",
+     *         required=true,
+     *         pattern="\w+",
+     *         type="string"
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
      *
      * @ParamConverter("annotation", class="Wallabag\AnnotationBundle\Entity\Annotation")

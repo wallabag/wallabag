@@ -4,9 +4,10 @@ namespace Wallabag\ApiBundle\Controller;
 
 use Hateoas\Configuration\Route;
 use Hateoas\Representation\Factory\PagerfantaFactory;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Nelmio\ApiDocBundle\Annotation\Operation;
 use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
+use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\CoreBundle\Repository\EntryRepository;
@@ -16,12 +17,40 @@ class SearchRestController extends WallabagRestController
     /**
      * Search all entries by term.
      *
-     * @ApiDoc(
-     *       parameters={
-     *          {"name"="term", "dataType"="string", "required"=false, "format"="any", "description"="Any query term"},
-     *          {"name"="page", "dataType"="integer", "required"=false, "format"="default '1'", "description"="what page you want."},
-     *          {"name"="perPage", "dataType"="integer", "required"=false, "format"="default'30'", "description"="results per page."}
-     *       }
+     * @Operation(
+     *     tags={"Search"},
+     *     summary="Search all entries by term.",
+     *     @SWG\Parameter(
+     *         name="term",
+     *         in="body",
+     *         description="Any query term",
+     *         required=false,
+     *         @SWG\Schema(type="string")
+     *     ),
+     *     @SWG\Parameter(
+     *         name="page",
+     *         in="body",
+     *         description="what page you want.",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="integer",
+     *             default=1
+     *         )
+     *     ),
+     *     @SWG\Parameter(
+     *         name="perPage",
+     *         in="body",
+     *         description="results per page.",
+     *         required=false,
+     *         @SWG\Schema(
+     *             type="integer",
+     *             default=30
+     *         )
+     *     ),
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
      * )
      *
      * @return JsonResponse

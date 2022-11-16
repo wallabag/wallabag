@@ -22,7 +22,7 @@ app:
     type: annotation
 
 doc-api:
-    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    resource: "@NelmioApiDocBundle/Resources/config/routing/swaggerui.xml"
     prefix: /api/doc
 
 rest :

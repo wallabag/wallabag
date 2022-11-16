@@ -5,7 +5,8 @@ namespace Wallabag\ApiBundle\Controller;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Nelmio\ApiDocBundle\Annotation\Operation;
+use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -16,7 +17,14 @@ class WallabagRestController extends AbstractFOSRestController
     /**
      * Retrieve version number.
      *
-     * @ApiDoc()
+     * @Operation(
+     *     tags={"Informations"},
+     *     summary="Retrieve version number.",
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
+     * )
      *
      * @deprecated Should use info endpoint instead
      *
@@ -33,7 +41,14 @@ class WallabagRestController extends AbstractFOSRestController
     /**
      * Retrieve information about the wallabag instance.
      *
-     * @ApiDoc()
+     * @Operation(
+     *     tags={"Informations"},
+     *     summary="Retrieve information about the wallabag instance.",
+     *     @SWG\Response(
+     *         response="200",
+     *         description="Returned when successful"
+     *     )
+     * )
      *
      * @return JsonResponse
      */
