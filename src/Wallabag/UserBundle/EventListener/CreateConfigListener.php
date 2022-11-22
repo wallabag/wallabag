@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Wallabag\CoreBundle\Entity\Config;
 
 /**
@@ -25,7 +25,7 @@ class CreateConfigListener implements EventSubscriberInterface
     private $listMode;
     private $session;
 
-    public function __construct(EntityManagerInterface $em, $theme, $itemsOnPage, $feedLimit, $language, $readingSpeed, $actionMarkAsRead, $listMode, Session $session)
+    public function __construct(EntityManagerInterface $em, $theme, $itemsOnPage, $feedLimit, $language, $readingSpeed, $actionMarkAsRead, $listMode, SessionInterface $session)
     {
         $this->em = $em;
         $this->theme = $theme;
