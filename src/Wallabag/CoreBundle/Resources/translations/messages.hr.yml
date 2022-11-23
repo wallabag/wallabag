@@ -197,9 +197,7 @@ config:
         import_submit: Uvezi
         file_label: JSON datoteka
     form_settings:
-        theme_label: Tema
         help_items_per_page: Možeš promijeniti broj prikazanih članaka na svakoj stranici.
-        help_theme: wallabag je prilagodljiv. Ovdje možeš odabrati željenu temu.
         action_mark_as_read:
             label: Što učiniti nakon što se članak ukloni, označi kao omiljeni ili kao pročitani?
             redirect_current_page: Ostani na trenutačnoj stranici
@@ -341,7 +339,6 @@ howto:
         action: Akcija
         toggle_favorite: Uklj/isklj stanje favorita za zapis
         go_all: Idi na sve zapise
-        material_title: Dostupni prečaci samo za Material temu
         add_link: Dodaj novu poveznicu
         toggle_archive: Uklj/Isklj stanje čitanja za zapis
         list_title: Dostupni prečaci na stranicama popisa

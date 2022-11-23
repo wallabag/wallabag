@@ -21,7 +21,6 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
-            new Liip\ThemeBundle\LiipThemeBundle(),
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
             new FOS\OAuthServerBundle\FOSOAuthServerBundle(),

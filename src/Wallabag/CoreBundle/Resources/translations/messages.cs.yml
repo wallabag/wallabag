@@ -221,11 +221,9 @@ config:
         language_label: Jazyk
         help_pocket_consumer_key: Vyžadováno pro import z Pocketu. Můžete ho vytvořit ve svém účtu Pocket.
         help_items_per_page: Můžete změnit počet článků zobrazených na každé stránce.
-        help_theme: wallabag je přizpůsobitelný. Zde si můžete vybrat upřednostňovaný motiv.
         android_instruction: Klepnutím sem předvyplníte svou aplikaci pro Android
         android_configuration: Nakonfigurujte svou aplikaci pro Android
         pocket_consumer_key_label: Zákaznický klíč pro Pocket k importu obsahu
-        theme_label: Motiv
     form_password:
         new_password_label: Nové heslo
         old_password_label: Aktuální heslo
@@ -643,7 +641,6 @@ howto:
         arrows_navigation: Procházet články
         hide_form: Skrýt aktuální formulář (hledat nebo nový odkaz)
         add_link: Přidat nový odkaz
-        material_title: Klávesové zkratky dostupné pouze s motivem Material
         delete: Odstranit položku
         toggle_favorite: Přepnout stav označení hvězdičkou pro položku
         toggle_archive: Přepnout stav přečtení pro položku

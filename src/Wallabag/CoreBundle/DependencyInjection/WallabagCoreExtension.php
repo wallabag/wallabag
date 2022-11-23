@@ -14,7 +14,6 @@ class WallabagCoreExtension extends Extension
 
         $container->setParameter('wallabag_core.languages', $config['languages']);
         $container->setParameter('wallabag_core.items_on_page', $config['items_on_page']);
-        $container->setParameter('wallabag_core.theme', $config['theme']);
         $container->setParameter('wallabag_core.language', $config['language']);
         $container->setParameter('wallabag_core.feed_limit', $config['rss_limit']);
         $container->setParameter('wallabag_core.reading_speed', $config['reading_speed']);

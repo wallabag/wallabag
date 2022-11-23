@@ -55,7 +55,6 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $form = $crawler->filter('button[id=config_save]')->form();
 
         $data = [
-            'config[theme]' => 'material',
             'config[items_per_page]' => '30',
             'config[reading_speed]' => '100',
             'config[action_mark_as_read]' => '0',
@@ -120,7 +119,6 @@ class ConfigControllerTest extends WallabagCoreTestCase
     {
         return [
             [[
-                'config[theme]' => 'material',
                 'config[items_per_page]' => '',
                 'config[language]' => 'en',
             ]],
@@ -837,7 +835,6 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $config = new ConfigEntity($user);
 
-        $config->setTheme('material');
         $config->setItemsPerPage(30);
         $config->setReadingSpeed(200);
         $config->setLanguage('en');

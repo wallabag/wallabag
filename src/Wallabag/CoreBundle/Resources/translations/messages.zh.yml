@@ -69,7 +69,6 @@ config:
     form:
         save: '保存'
     form_settings:
-        theme_label: '主题'
         items_per_page_label: '每页项目数'
         language_label: '语言'
         reading_speed:
@@ -86,7 +85,6 @@ config:
         pocket_consumer_key_label: '用于从 Pocket 导入内容的 Consumer key'
         android_configuration: '配置你的 Android 应用程序'
         android_instruction: "点按此处以预填充你的 Android 应用"
-        help_theme: "wallabag 是可定制的，你可以在这里选择你喜欢的主题。"
         help_items_per_page: "你可以选择每页显示的文章数目。"
         help_reading_speed: "wallabag 会为每篇文章计算阅读时间，你可以通过这个列表选择自己是个速读者或是慢读者。wallabag 会根据你的选择重新计算每篇文章的阅读时间。"
         help_language: "你可以在此处更改 wallabag 的界面语言。"
@@ -414,7 +412,6 @@ howto:
         toggle_favorite: 改变项目的收藏状态
         toggle_archive: 改变项目的已读状态
         delete: 删除项目
-        material_title: 仅可用于 Material 主题的快捷键
         add_link: 保存新链接
         hide_form: 隐藏当前表单（搜索或添加新链接时)
         arrows_navigation: 在项目间导航

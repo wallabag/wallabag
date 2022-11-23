@@ -36,14 +36,6 @@ class Config
     private $id;
 
     /**
-     * @var string
-     *
-     * @Assert\NotBlank()
-     * @ORM\Column(name="theme", type="string", nullable=false)
-     */
-    private $theme;
-
-    /**
      * @var int
      *
      * @Assert\NotBlank()
@@ -160,30 +152,6 @@ class Config
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set theme.
-     *
-     * @param string $theme
-     *
-     * @return Config
-     */
-    public function setTheme($theme)
-    {
-        $this->theme = $theme;
-
-        return $this;
-    }
-
-    /**
-     * Get theme.
-     *
-     * @return string
-     */
-    public function getTheme()
-    {
-        return $this->theme;
     }
 
     /**

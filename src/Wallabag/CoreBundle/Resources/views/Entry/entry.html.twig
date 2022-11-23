@@ -240,7 +240,7 @@
             <div class="tools grey-text" dir="auto">
                 <ul class="stats">
                     <li>
-                        {% include "@WallabagCore/themes/material/Entry/_reading_time.html.twig" with {'entry': entry} only %}
+                        {% include "@WallabagCore/Entry/_reading_time.html.twig" with {'entry': entry} only %}
                     </li>
                     <li>
                         <i class="material-icons grey-text" title="{{ 'entry.view.created_at'|trans }}">today</i>
@@ -279,7 +279,7 @@
                         </li>
                     {% endif %}
                 </ul>
-                {% include "@WallabagCore/themes/material/Entry/_tags.html.twig" with {'tags': entry.tags, 'entryId': entry.id, 'withRemove': true} only %}
+                {% include "@WallabagCore/Entry/_tags.html.twig" with {'tags': entry.tags, 'entryId': entry.id, 'withRemove': true} only %}
             </div>
 
             <div class="input-field nav-panel-add-tag" style="display: none">

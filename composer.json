@@ -83,7 +83,6 @@
         "laminas/laminas-code": "^3.4",
         "laminas/laminas-diactoros": "^2.3",
         "lexik/form-filter-bundle": "^5.0.4",
-        "liip/theme-bundle": "^1.4.6",
         "mgargano/simplehtmldom": "~1.5",
         "mnapoli/piwik-twig-extension": "^3.0",
         "nelmio/api-doc-bundle": "^3.0",

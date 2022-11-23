@@ -65,7 +65,6 @@ config:
     form:
         save: Enregistrar
     form_settings:
-        theme_label: Tèma
         items_per_page_label: Nombre d'articles per pagina
         language_label: Lenga
         reading_speed:
@@ -82,7 +81,6 @@ config:
         pocket_consumer_key_label: Clau d’autentificacion Pocket per importar las donadas
         android_configuration: Configuratz vòstra aplicacion Android
         android_instruction: Tocatz aquí per garnir las informacions de l'aplicacion Android
-        help_theme: wallabag es personalizable. Podètz causir vòstre tèma preferit aquí.
         help_items_per_page: Podètz cambiar lo nombre d'articles afichats per pagina.
         help_reading_speed: wallabag calcula lo temps de lectura per cada article. Podètz lo definir aquí, gràcias a aquesta lista, se sètz un legeire rapid o lent. wallabag tornarà calcular lo temps de lectura per cada article.
         help_language: Podètz cambiar la lenga de l'interfàcia de wallabag.
@@ -342,7 +340,6 @@ howto:
         toggle_favorite: Cambiar l'estatut Favorit per l'article
         toggle_archive: Cambiar l'estatut Legit per l'article
         delete: Suprimir l'article
-        material_title: Acorchis solament disponibles amb lo tèma Material
         add_link: Apondre un acorchi
         hide_form: Rescondre lo formulari actual (recèrca o nòu ligam)
         arrows_navigation: Navigar dins los articles

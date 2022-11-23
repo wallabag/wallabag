@@ -65,7 +65,6 @@ config:
     form:
         save: 'Guardar'
     form_settings:
-        theme_label: 'Tema'
         items_per_page_label: 'Itens por página'
         language_label: 'Idioma'
         reading_speed:
@@ -76,7 +75,6 @@ config:
             300_word: 'Posso ler ~300 palavras por minuto'
             400_word: 'Posso ler ~400 palavras por minuto'
         pocket_consumer_key_label: 'Chave do consumidor do Pocket para importar conteúdo'
-        help_theme: o wallabag é personalizável. Pode escolher o tema que pretender aqui.
         help_pocket_consumer_key: Necessário para importar do Pocket. Pode criá-lo na sua conta do Pocket.
     form_rss:
         description: 'Feeds RSS providos pelo wallabag permitem que você leia seus artigos salvos em seu leitor de RSS favorito. Você precisa gerar um token primeiro.'

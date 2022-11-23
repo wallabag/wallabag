@@ -69,7 +69,6 @@ config:
     form:
         save: 保存
     form_settings:
-        theme_label: テーマ
         items_per_page_label: ページあたりのアイテム
         language_label: 言語
         reading_speed:
@@ -89,7 +88,6 @@ config:
             redirect_current_page: 現在のページに留まる
             label: 記事に既読やスターをつけた後、どこに移動しますか？
         android_configuration: Androidアプリの設定をする
-        help_theme: wallabagはカスタマイズ可能です。お気に入りのテーマを選べます。
         android_instruction: ここをタッチするとあなたのAndroid アプリに自動入力します
     form_rss:
         description: wallabag が提供する RSS フィードは、お好みの RSS リーダーで保存した記事を読むできます。最初にトークンを生成する必要があります。
@@ -382,7 +380,6 @@ howto:
         arrows_navigation: 記事を移動する
         hide_form: 現在の入力フォームを隠す（検索 または リンク）
         add_link: 新しいリンクを追加する
-        material_title: マテリアルテーマのみで使用可能なショートカット
         delete: 記事を削除する
         toggle_archive: 既読状態を切り替える
         toggle_favorite: スターの状態を切り替える

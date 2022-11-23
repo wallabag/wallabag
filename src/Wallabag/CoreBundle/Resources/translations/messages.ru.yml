@@ -68,7 +68,6 @@ config:
     form:
         save: 'Сохранить'
     form_settings:
-        theme_label: 'Тема'
         items_per_page_label: 'Записей на странице'
         language_label: 'Язык'
         reading_speed:
@@ -84,7 +83,6 @@ config:
             redirect_current_page: 'На текущую страницу'
         pocket_consumer_key_label: "Ключ от Pocket для импорта контента"
         android_configuration: "Настройте Ваше Android приложение"
-        help_theme: "wallabag настраиваемый, здесь Вы можете выбрать тему."
         help_items_per_page: "Вы можете выбрать количество отображаемых записей на странице."
         help_reading_speed: "wallabag посчитает сколько времени занимает чтение каждой записи. Вы можете определить здесь, как быстро вы читаете. wallabag пересчитает время чтения для каждой записи."
         help_language: "Вы можете изменить язык интерфейса wallabag."
@@ -409,7 +407,6 @@ howto:
         toggle_favorite: "Переключить пометку звездочкой для записи"
         toggle_archive: "Переключить пометку о прочтении для записи"
         delete: "Удалить запись"
-        material_title: "Горячие клавиши доступные только в Material теме"
         add_link: "Добавить новую запись"
         hide_form: "Скрыть текущую форму (поисковую или новой ссылки)"
         arrows_navigation: "Навигация по статьям"

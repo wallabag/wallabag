@@ -66,7 +66,6 @@ config:
     form:
         save: 'Guardar'
     form_settings:
-        theme_label: 'Tema'
         items_per_page_label: 'Número de artículos por página'
         language_label: 'Idioma'
         reading_speed:
@@ -82,7 +81,6 @@ config:
             redirect_current_page: 'Permanecer en la página actual'
         pocket_consumer_key_label: Clave de consumidor para importar contenidos de Pocket
         android_configuration: Configura tu aplicación Android
-        help_theme: "wallabag es personalizable. Puedes elegir tu tema preferido aquí."
         help_items_per_page: "Puedes cambiar el número de artículos mostrados en cada página."
         help_reading_speed: "wallabag calcula un tiempo de lectura para cada artículo. Aquí puedes definir, gracias a esta lista, si eres un lector rápido o lento. wallabag recalculará el tiempo de lectura para cada artículo."
         help_language: "Puedes cambiar el idioma de la interfaz de wallabag."
@@ -388,7 +386,6 @@ howto:
         toggle_favorite: Marcar como favorito / no favorito el artículo
         toggle_archive: Marcar como leído / no leído el artículo
         delete: Borrar el artículo
-        material_title: Atajos de teclado disponibles solo en el tema Material
         add_link: Añadir un nuevo artículo
         hide_form: Ocultar el formulario actual (búsqueda o nuevo artículo)
         arrows_navigation: Navegar por los artículos

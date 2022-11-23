@@ -60,7 +60,6 @@ config:
     form:
         save: 'บันทึก'
     form_settings:
-        theme_label: 'ธีม'
         items_per_page_label: 'ไอเทมต่อหน้า'
         language_label: 'ภาษา'
         reading_speed:
@@ -73,7 +72,6 @@ config:
         pocket_consumer_key_label: คีย์ของลูกค้าที่ไว้เก็บเพื่อนำข้อมูลเนื่อหาเข้า
         android_configuration: การกำหนดค่าของแอนดรอยแอพพลิเคชั่น
         android_instruction: "แตะตับที่นี้เพื่อเพิ่มเติมแอนดรอยแอพพลิเคชั่นของคุณ"
-        help_theme: "wallabag เป็นการปรับแต่งที่คุณสามารถเลือกธีมที่คุณต้องการได้ที่นี้"
         help_items_per_page: "คุณสามารถเปลี่ยนจำนวนรายการที่แสดงผลในแต่ละหน้า"
         help_reading_speed: "wallabag จะคำนวณเวลาการอ่านในแต่ละรายการซึ่งคุณสามารถกำหนดได้ที่นี้,ต้องขอบคุณรายการนี้,หากคุณเป็นนักอ่านที่เร็วหรือช้า wallabag จะทำการคำนวณเวลาที่อ่านใหม่ในแต่ละรายการ"
         help_language: "คุณสามารถเปลี่ยภาษาของ wallabag interface ได้"
@@ -318,7 +316,6 @@ howto:
         toggle_favorite: เครื่องหมายของสถานะดาวสำหรับรายการ
         toggle_archive: เครื่องหมายสถานะการอ่านสำหรับรายการ
         delete: ลบรายการ
-        material_title: ใช้ Shortcut กับ เนื้อหาของธีมเฉพาะ
         add_link: เพิ่มลิงค์ใหม่
         hide_form: ซ่อนในปัจุบันจาก (ค้นหา หรือ ลิงค์ใหม่)
         arrows_navigation: นำไปที่บทความ

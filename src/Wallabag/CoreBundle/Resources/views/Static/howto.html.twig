@@ -46,7 +46,7 @@
                             <div class="col s12">
                                 <h5>{{ 'howto.top_menu.bookmarklet'|trans }}</h5>
                                 {{ 'howto.bookmarklet.description'|trans }}
-                                {% include '@WallabagCore/themes/common/Static/_bookmarklet.html.twig' %}
+                                {% include '@WallabagCore/Static/_bookmarklet.html.twig' %}
                             </div>
 
                         </div>
@@ -106,6 +106,22 @@
                                     <td><code>g l</code></td>
                                     <td>{{ 'howto.shortcuts.go_logout'|trans }}</td>
                                 </tr>
+                                <tr>
+                                    <td><code>g n</code></td>
+                                    <td>{{ 'howto.shortcuts.add_link'|trans }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>esc</code></td>
+                                    <td>{{ 'howto.shortcuts.hide_form'|trans }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>← →</code></td>
+                                    <td>{{ 'howto.shortcuts.arrows_navigation'|trans }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>enter</code></td>
+                                    <td>{{ 'howto.shortcuts.open_article'|trans }}</td>
+                                </tr>
                             </tbody>
                         </table>
 
@@ -153,36 +169,6 @@
                             <tr>
                                 <td><code>del</code></td>
                                 <td>{{ 'howto.shortcuts.delete'|trans }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                        <h5>{{ 'howto.shortcuts.material_title'|trans }}</h5>
-
-                        <table class="bordered">
-                            <thead>
-                            <tr>
-                                <th>{{ 'howto.shortcuts.shortcut'|trans }}</th>
-                                <th>{{ 'howto.shortcuts.action'|trans }}</th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            <tr>
-                                <td><code>g n</code></td>
-                                <td>{{ 'howto.shortcuts.add_link'|trans }}</td>
-                            </tr>
-                            <tr>
-                                <td><code>esc</code></td>
-                                <td>{{ 'howto.shortcuts.hide_form'|trans }}</td>
-                            </tr>
-                            <tr>
-                                <td><code>← →</code></td>
-                                <td>{{ 'howto.shortcuts.arrows_navigation'|trans }}</td>
-                            </tr>
-                            <tr>
-                                <td><code>enter</code></td>
-                                <td>{{ 'howto.shortcuts.open_article'|trans }}</td>
                             </tr>
                             </tbody>
                         </table>

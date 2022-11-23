@@ -41,7 +41,6 @@ class RedirectTest extends TestCase
         $user->addRole('ROLE_SUPER_ADMIN');
 
         $config = new Config($user);
-        $config->setTheme('material');
         $config->setItemsPerPage(30);
         $config->setReadingSpeed(200);
         $config->setLanguage('en');

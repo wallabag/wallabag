@@ -16,7 +16,6 @@ use Wallabag\CoreBundle\Entity\Config;
 class CreateConfigListener implements EventSubscriberInterface
 {
     private $em;
-    private $theme;
     private $itemsOnPage;
     private $feedLimit;
     private $language;
@@ -25,10 +24,9 @@ class CreateConfigListener implements EventSubscriberInterface
     private $listMode;
     private $session;
 
-    public function __construct(EntityManagerInterface $em, $theme, $itemsOnPage, $feedLimit, $language, $readingSpeed, $actionMarkAsRead, $listMode, SessionInterface $session)
+    public function __construct(EntityManagerInterface $em, $itemsOnPage, $feedLimit, $language, $readingSpeed, $actionMarkAsRead, $listMode, SessionInterface $session)
     {
         $this->em = $em;
-        $this->theme = $theme;
         $this->itemsOnPage = $itemsOnPage;
         $this->feedLimit = $feedLimit;
         $this->language = $language;
@@ -52,7 +50,6 @@ class CreateConfigListener implements EventSubscriberInterface
     public function createConfig(UserEvent $event)
     {
         $config = new Config($event->getUser());
-        $config->setTheme($this->theme);
         $config->setItemsPerPage($this->itemsOnPage);
         $config->setFeedLimit($this->feedLimit);
         $config->setLanguage($this->session->get('_locale', $this->language));

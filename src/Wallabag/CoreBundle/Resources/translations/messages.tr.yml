@@ -69,7 +69,6 @@ config:
     form:
         save: Kaydet
     form_settings:
-        theme_label: Tema
         items_per_page_label: Sayfa başına makale sayısı
         language_label: Dil
         reading_speed:
@@ -86,7 +85,6 @@ config:
         pocket_consumer_key_label: Pocket'tan içerikleri aktarmak için Consumer anahtarı
         android_configuration: Android uygulamanızı ayarlayın
         android_instruction: Android uygulamanızın bilgilerini doldurmak için buraya tıklayın
-        help_theme: wallabag istediğiniz şekilde özelleştirilebilir. Buradan tercih ettiğiniz temayı seçebilirsiniz.
         help_items_per_page: Sayfa başına görüntülenecek makale sayısını değiştirebilirsiniz.
         help_reading_speed: wallabag her bir makale için ortalama okuma sürenizi hesaplar. Buradan, bunun sayesinde hızlı veya yavaş okuyan birisi olduğunuzu tanımlayabilirsiniz. Wallabag her bir makale okunması ardından bunu yeniden hesaplayacaktır.
         help_language: Wallabag arayüzünü kullanacağınız dili değiştirebilirsiniz.
@@ -414,7 +412,6 @@ howto:
         toggle_favorite: Makalenin favorileme durumunu değiştir
         toggle_archive: Makalenin okundu durumunu değiştir
         delete: Makaleyi sil
-        material_title: Sadece material temasında kullanılabilen kısayollar
         add_link: Yeni bir bağlantı ekle
         hide_form: Mevcut formu gizle (arama veya yeni bağlantı)
         arrows_navigation: Makaleler arasında geçiş yap
