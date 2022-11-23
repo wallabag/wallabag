@@ -13,7 +13,7 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
 {
     public function testRunCleanDuplicates()
     {
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:clean-duplicates');
 
@@ -26,7 +26,7 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
 
     public function testRunCleanDuplicatesCommandWithBadUsername()
     {
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:clean-duplicates');
 
@@ -40,7 +40,7 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
 
     public function testRunCleanDuplicatesCommandForUser()
     {
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:clean-duplicates');
 
@@ -55,7 +55,7 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
     public function testDuplicate()
     {
         $url = 'https://www.lemonde.fr/sport/visuel/2017/05/05/rondelle-prison-blanchissage-comprendre-le-hockey-sur-glace_5122587_3242.html';
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
 
         $this->logInAs('admin');
@@ -79,7 +79,7 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
         $nbEntries = $em->getRepository(Entry::class)->findAllByUrlAndUserId($url, $this->getLoggedInUserId());
         $this->assertCount(2, $nbEntries);
 
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:clean-duplicates');
 

@@ -13,7 +13,7 @@ class ExportControllerTest extends WallabagCoreTestCase
 
     public function testLogin()
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->request('GET', '/export/unread.csv');
 
@@ -24,7 +24,7 @@ class ExportControllerTest extends WallabagCoreTestCase
     public function testUnknownCategoryExport()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->request('GET', '/export/awesomeness.epub');
 
@@ -34,7 +34,7 @@ class ExportControllerTest extends WallabagCoreTestCase
     public function testUnknownFormatExport()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->request('GET', '/export/unread.xslx');
 
@@ -44,7 +44,7 @@ class ExportControllerTest extends WallabagCoreTestCase
     public function testUnsupportedFormatExport()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->request('GET', '/export/unread.doc');
         $this->assertSame(404, $client->getResponse()->getStatusCode());
@@ -61,7 +61,7 @@ class ExportControllerTest extends WallabagCoreTestCase
     public function testBadEntryId()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->request('GET', '/export/0.mobi');
 
@@ -71,7 +71,7 @@ class ExportControllerTest extends WallabagCoreTestCase
     public function testEpubExport()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         ob_start();
         $crawler = $client->request('GET', '/export/archive.epub');
@@ -88,7 +88,7 @@ class ExportControllerTest extends WallabagCoreTestCase
     public function testMobiExport()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $content = $client->getContainer()
             ->get(EntityManagerInterface::class)
@@ -110,7 +110,7 @@ class ExportControllerTest extends WallabagCoreTestCase
     public function testPdfExport()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         ob_start();
         $crawler = $client->request('GET', '/export/all.pdf');
@@ -138,7 +138,7 @@ class ExportControllerTest extends WallabagCoreTestCase
     public function testTxtExport()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         ob_start();
         $crawler = $client->request('GET', '/export/all.txt');
@@ -155,7 +155,7 @@ class ExportControllerTest extends WallabagCoreTestCase
     public function testCsvExport()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         // to be sure results are the same
         $contentInDB = $client->getContainer()
@@ -202,7 +202,7 @@ class ExportControllerTest extends WallabagCoreTestCase
     public function testJsonExport()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $contentInDB = $client->getContainer()
             ->get(EntityManagerInterface::class)
@@ -253,7 +253,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->setUpForJsonExportFromSearch();
 
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         ob_start();
         $crawler = $client->request('GET', '/export/search.json?search_entry[term]=entry+search&currentRoute=homepage');
@@ -275,7 +275,7 @@ class ExportControllerTest extends WallabagCoreTestCase
     public function testXmlExport()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         // to be sure results are the same
         $contentInDB = $client->getContainer()
@@ -313,7 +313,7 @@ class ExportControllerTest extends WallabagCoreTestCase
 
     private function setUpForJsonExportFromSearch()
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $em = $this->getEntityManager();
 
         $userRepository = $client->getContainer()

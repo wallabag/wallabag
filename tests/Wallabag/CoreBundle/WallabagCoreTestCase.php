@@ -32,7 +32,7 @@ abstract class WallabagCoreTestCase extends WebTestCase
         return $this->client = static::createClient();
     }
 
-    public function getClient()
+    public function getTestClient()
     {
         return $this->client;
     }

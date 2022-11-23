@@ -14,7 +14,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
     public function testImportInstapaper()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/instapaper');
 
@@ -26,7 +26,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
     public function testImportInstapaperWithRabbitEnabled()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
@@ -42,7 +42,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
     public function testImportInstapaperBadFile()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/instapaper');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
@@ -60,7 +60,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
     {
         $this->checkRedis();
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
         $crawler = $client->request('GET', '/import/instapaper');
@@ -94,7 +94,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
     public function testImportInstapaperWithFile()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/instapaper');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
@@ -148,7 +148,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
     public function testImportInstapaperWithFileAndMarkAllAsRead()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/instapaper');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
@@ -193,7 +193,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
     public function testImportInstapaperWithEmptyFile()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/instapaper');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();

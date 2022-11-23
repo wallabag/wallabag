@@ -303,7 +303,7 @@ class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
         $builder = new GrabySiteConfigBuilder(
             $grabyConfigBuilderMock,
             $tokenStorage,
-            $this->getClient()->getContainer()->get(SiteCredentialRepository::class),
+            $this->getTestClient()->getContainer()->get(SiteCredentialRepository::class),
             $logger
         );
 

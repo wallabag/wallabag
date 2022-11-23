@@ -19,7 +19,7 @@ class TagControllerTest extends WallabagCoreTestCase
     public function testList()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->request('GET', '/tag/list');
 
@@ -29,7 +29,7 @@ class TagControllerTest extends WallabagCoreTestCase
     public function testAddTagToEntry()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl('http://0.0.0.0/foo');
@@ -75,7 +75,7 @@ class TagControllerTest extends WallabagCoreTestCase
     public function testAddMultipleTagToEntry()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $entry = $client->getContainer()
             ->get(EntityManagerInterface::class)
@@ -111,7 +111,7 @@ class TagControllerTest extends WallabagCoreTestCase
     public function testRemoveTagFromEntry()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $tag = new Tag();
         $tag->setLabel($this->tagName);
@@ -149,7 +149,7 @@ class TagControllerTest extends WallabagCoreTestCase
     public function testRemoveTag()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $tag = new Tag();
         $tag->setLabel($this->tagName);
@@ -198,7 +198,7 @@ class TagControllerTest extends WallabagCoreTestCase
     public function testShowEntriesForTagAction()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $em = $client->getContainer()
             ->get(EntityManagerInterface::class);
 
@@ -236,7 +236,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $newTagLabel = 'rename label';
 
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $tag = new Tag();
         $tag->setLabel($this->tagName);
@@ -308,7 +308,7 @@ class TagControllerTest extends WallabagCoreTestCase
     {
         $tagLabel = 'same label';
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $tag = new Tag();
         $tag->setLabel($tagLabel);
@@ -363,7 +363,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $tagLabel = 'same label';
         $newTagLabel = 'saMe labEl';
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $tag = new Tag();
         $tag->setLabel($tagLabel);
@@ -425,7 +425,7 @@ class TagControllerTest extends WallabagCoreTestCase
         $tagLabel = 'existing label';
         $previousTagLabel = 'previous label';
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $tag = new Tag();
         $tag->setLabel($tagLabel);
@@ -488,7 +488,7 @@ class TagControllerTest extends WallabagCoreTestCase
     public function testAddUnicodeTagLabel()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl('http://0.0.0.0/tag-caché');
@@ -534,7 +534,7 @@ class TagControllerTest extends WallabagCoreTestCase
     public function testAssignTagsOnSearchResults()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         // Search on unread list
         $crawler = $client->request('GET', '/unread/list');

@@ -8,7 +8,7 @@ class ManageControllerTest extends WallabagCoreTestCase
 {
     public function testLogin()
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->request('GET', '/users/list');
 
@@ -19,7 +19,7 @@ class ManageControllerTest extends WallabagCoreTestCase
     public function testCompleteScenario()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         // Create a new user in the database
         $crawler = $client->request('GET', '/users/list');
@@ -71,7 +71,7 @@ class ManageControllerTest extends WallabagCoreTestCase
     public function testDeleteDisabledForLoggedUser()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/users/' . $this->getLoggedInUserId() . '/edit');
         $disabled = $crawler->selectButton('user.form.delete')->extract('disabled');
@@ -82,7 +82,7 @@ class ManageControllerTest extends WallabagCoreTestCase
     public function testUserSearch()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         // Search on unread list
         $crawler = $client->request('GET', '/users/list');

@@ -41,7 +41,7 @@ services:
 
     Wallabag\CoreBundle\:
         resource: '../../src/Wallabag/CoreBundle/*'
-        exclude: '../../src/Wallabag/CoreBundle/{Controller,Entity}'
+        exclude: ['../../src/Wallabag/CoreBundle/{Controller,Entity}', '../../src/Wallabag/CoreBundle/Event/*Event.php']
 
     Wallabag\ImportBundle\:
         resource: '../../src/Wallabag/ImportBundle/*'

@@ -14,7 +14,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
     public function testImportWallabag()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/wallabag-v1');
 
@@ -26,7 +26,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
     public function testImportWallabagWithRabbitEnabled()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
@@ -42,7 +42,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
     public function testImportWallabagBadFile()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/wallabag-v1');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
@@ -60,7 +60,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
     {
         $this->checkRedis();
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
@@ -95,7 +95,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
     public function testImportWallabagWithFile()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/wallabag-v1');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
@@ -139,7 +139,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
     public function testImportWallabagWithFileAndMarkAllAsRead()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/wallabag-v1');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
@@ -186,7 +186,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
     public function testImportWallabagWithEmptyFile()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/wallabag-v1');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();

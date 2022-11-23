@@ -697,10 +697,10 @@ class EntryController extends Controller
         try {
             $this->get(ContentProxy::class)->updateEntry($entry, $entry->getUrl());
         } catch (\Exception $e) {
-            $this->get('logger')->error('Error while saving an entry', [
-                'exception' => $e,
-                'entry' => $entry,
-            ]);
+            // $this->logger->error('Error while saving an entry', [
+            //     'exception' => $e,
+            //     'entry' => $entry,
+            // ]);
 
             $message = 'flashes.entry.notice.' . $prefixMessage . '_failed';
         }

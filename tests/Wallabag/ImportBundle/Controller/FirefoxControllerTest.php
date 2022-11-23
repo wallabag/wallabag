@@ -14,7 +14,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
     public function testImportFirefox()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/firefox');
 
@@ -26,7 +26,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
     public function testImportFirefoxWithRabbitEnabled()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
@@ -42,7 +42,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
     public function testImportFirefoxBadFile()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/firefox');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
@@ -60,7 +60,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
     {
         $this->checkRedis();
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
         $crawler = $client->request('GET', '/import/firefox');
@@ -94,7 +94,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
     public function testImportWallabagWithFirefoxFile()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/firefox');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
@@ -149,7 +149,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
     public function testImportWallabagWithEmptyFile()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/firefox');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();

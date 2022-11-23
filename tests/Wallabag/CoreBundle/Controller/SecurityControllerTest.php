@@ -11,7 +11,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
     public function testLoginWithEmail()
     {
         $this->logInAsUsingHttp('bigboss@wallabag.org');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $client->followRedirects();
 
         $crawler = $client->request('GET', '/config');
@@ -21,7 +21,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
     public function testLoginWithout2Factor()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $client->followRedirects();
 
         $crawler = $client->request('GET', '/config');
@@ -30,7 +30,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
 
     public function testLoginWith2FactorEmail()
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         if (!$client->getContainer()->getParameter('twofactor_auth')) {
             $this->markTestSkipped('twofactor_auth is not enabled.');
@@ -63,7 +63,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
 
     public function testLoginWith2FactorGoogle()
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         if (!$client->getContainer()->getParameter('twofactor_auth')) {
             $this->markTestSkipped('twofactor_auth is not enabled.');
@@ -96,7 +96,7 @@ class SecurityControllerTest extends WallabagCoreTestCase
 
     public function testEnabledRegistration()
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         if (!$client->getContainer()->getParameter('fosuser_registration')) {
             $this->markTestSkipped('fosuser_registration is not enabled.');

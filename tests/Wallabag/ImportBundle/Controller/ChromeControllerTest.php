@@ -14,7 +14,7 @@ class ChromeControllerTest extends WallabagCoreTestCase
     public function testImportChrome()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/chrome');
 
@@ -26,7 +26,7 @@ class ChromeControllerTest extends WallabagCoreTestCase
     public function testImportChromeWithRabbitEnabled()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
@@ -42,7 +42,7 @@ class ChromeControllerTest extends WallabagCoreTestCase
     public function testImportChromeBadFile()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/chrome');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
@@ -60,7 +60,7 @@ class ChromeControllerTest extends WallabagCoreTestCase
     {
         $this->checkRedis();
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
         $crawler = $client->request('GET', '/import/chrome');
@@ -94,7 +94,7 @@ class ChromeControllerTest extends WallabagCoreTestCase
     public function testImportWallabagWithChromeFile()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/chrome');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
@@ -135,7 +135,7 @@ class ChromeControllerTest extends WallabagCoreTestCase
     public function testImportWallabagWithEmptyFile()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/chrome');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();

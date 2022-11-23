@@ -33,7 +33,7 @@ class InstallCommandTest extends WallabagCoreTestCase
         parent::setUp();
 
         /** @var Connection $connection */
-        $connection = $this->getClient()->getContainer()->get(ManagerRegistry::class)->getConnection();
+        $connection = $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection();
         if ($connection->getDatabasePlatform() instanceof PostgreSqlPlatform) {
             /*
              * LOG:  statement: CREATE DATABASE "wallabag"
@@ -61,7 +61,7 @@ class InstallCommandTest extends WallabagCoreTestCase
             parent::setUp();
         }
 
-        $this->resetDatabase($this->getClient());
+        $this->resetDatabase($this->getTestClient());
     }
 
     protected function tearDown(): void
@@ -84,7 +84,7 @@ class InstallCommandTest extends WallabagCoreTestCase
 
     public function testRunInstallCommand()
     {
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         /** @var InstallCommand $command */
         $command = $application->find('wallabag:install');
@@ -108,7 +108,7 @@ class InstallCommandTest extends WallabagCoreTestCase
 
     public function testRunInstallCommandWithReset()
     {
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         /** @var InstallCommand $command */
         $command = $application->find('wallabag:install');
@@ -139,11 +139,11 @@ class InstallCommandTest extends WallabagCoreTestCase
     {
         // skipped SQLite check when database is removed because while testing for the connection,
         // the driver will create the file (so the database) before testing if database exist
-        if ($this->getClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof SqlitePlatform) {
+        if ($this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof SqlitePlatform) {
             $this->markTestSkipped('SQLite spotted: can\'t test with database removed.');
         }
 
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         // drop database first, so the install command won't ask to reset things
         $command = $application->find('doctrine:database:drop');
@@ -177,7 +177,7 @@ class InstallCommandTest extends WallabagCoreTestCase
 
     public function testRunInstallCommandChooseResetSchema()
     {
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         /** @var InstallCommand $command */
         $command = $application->find('wallabag:install');
@@ -201,7 +201,7 @@ class InstallCommandTest extends WallabagCoreTestCase
 
     public function testRunInstallCommandChooseNothing()
     {
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         // drop database first, so the install command won't ask to reset things
         $command = $application->find('doctrine:database:drop');
@@ -209,7 +209,7 @@ class InstallCommandTest extends WallabagCoreTestCase
             '--force' => true,
         ]), new NullOutput());
 
-        $this->getClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->close();
+        $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->close();
 
         $command = $application->find('doctrine:database:create');
         $command->run(new ArrayInput([]), new NullOutput());
@@ -233,7 +233,7 @@ class InstallCommandTest extends WallabagCoreTestCase
 
     public function testRunInstallCommandNoInteraction()
     {
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         /** @var InstallCommand $command */
         $command = $application->find('wallabag:install');

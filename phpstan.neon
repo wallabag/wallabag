@@ -8,12 +8,9 @@ parameters:
         - tests
 
     symfony:
-        container_xml_path: %rootDir%/../../../var/cache/test/appTestDebugProjectContainer.xml
+        container_xml_path: %rootDir%/../../../var/cache/test/appAppKernelTestDebugContainer.xml
 
     bootstrapFiles:
         - vendor/bin/.phpunit/phpunit-8.5-0/vendor/autoload.php
 
     inferPrivatePropertyTypeFromConstructor: true
-
-    ignoreErrors:
-        - '#^Service ".+" is private\.?#'

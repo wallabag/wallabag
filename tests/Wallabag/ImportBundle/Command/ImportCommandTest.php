@@ -16,7 +16,7 @@ class ImportCommandTest extends WallabagCoreTestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Not enough arguments');
 
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:import');
 
@@ -29,7 +29,7 @@ class ImportCommandTest extends WallabagCoreTestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('not found');
 
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:import');
 
@@ -44,7 +44,7 @@ class ImportCommandTest extends WallabagCoreTestCase
     {
         $this->expectException(NoResultException::class);
 
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:import');
 
@@ -57,7 +57,7 @@ class ImportCommandTest extends WallabagCoreTestCase
 
     public function testRunImportCommand()
     {
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:import');
 
@@ -76,7 +76,7 @@ class ImportCommandTest extends WallabagCoreTestCase
     {
         $this->logInAs('admin');
 
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:import');
 

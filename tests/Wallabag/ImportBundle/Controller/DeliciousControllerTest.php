@@ -14,7 +14,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
     public function testImportDelicious()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/delicious');
 
@@ -26,7 +26,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
     public function testImportDeliciousWithRabbitEnabled()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
@@ -42,7 +42,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
     public function testImportDeliciousBadFile()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/delicious');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
@@ -60,7 +60,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
     {
         $this->checkRedis();
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
         $crawler = $client->request('GET', '/import/delicious');
@@ -94,7 +94,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
     public function testImportDeliciousWithFile()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/delicious');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
@@ -135,7 +135,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
     public function testImportDeliciousWithFileAndMarkAllAsRead()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/delicious');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
@@ -180,7 +180,7 @@ class DeliciousControllerTest extends WallabagCoreTestCase
     public function testImportDeliciousWithEmptyFile()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/delicious');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
