@@ -104,7 +104,7 @@
         "psr/log": "^1.1",
         "scheb/two-factor-bundle": "^4.11.0",
         "sensio/framework-extra-bundle": "^5.2",
-        "sentry/sentry-symfony": "3.5.3",
+        "sentry/sentry-symfony": "4.4.0",
         "stof/doctrine-extensions-bundle": "^1.2",
         "swiftmailer/swiftmailer": "^6.3",
         "symfony/dom-crawler": "^3.4",
