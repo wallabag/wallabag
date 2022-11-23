@@ -17,7 +17,6 @@ class ConfigFixtures extends Fixture implements DependentFixtureInterface
     {
         $adminConfig = new Config($this->getReference('admin-user'));
 
-        $adminConfig->setTheme('material');
         $adminConfig->setItemsPerPage(30);
         $adminConfig->setReadingSpeed(200);
         $adminConfig->setLanguage('en');
@@ -30,7 +29,6 @@ class ConfigFixtures extends Fixture implements DependentFixtureInterface
         $this->addReference('admin-config', $adminConfig);
 
         $bobConfig = new Config($this->getReference('bob-user'));
-        $bobConfig->setTheme('default');
         $bobConfig->setItemsPerPage(10);
         $bobConfig->setReadingSpeed(200);
         $bobConfig->setLanguage('fr');
@@ -43,7 +41,6 @@ class ConfigFixtures extends Fixture implements DependentFixtureInterface
         $this->addReference('bob-config', $bobConfig);
 
         $emptyConfig = new Config($this->getReference('empty-user'));
-        $emptyConfig->setTheme('material');
         $emptyConfig->setItemsPerPage(10);
         $emptyConfig->setReadingSpeed(100);
         $emptyConfig->setLanguage('en');

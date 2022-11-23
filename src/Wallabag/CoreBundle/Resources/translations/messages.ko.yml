@@ -261,7 +261,6 @@ howto:
         arrows_navigation: 문서 탐색
         hide_form: 현재 양식 숨기기 (검색 또는 새 링크)
         add_link: 새 링크 추가
-        material_title: 머티리얼 테마에서만 사용할 수있는 단축키
         toggle_archive: 문서 읽음 상태 전환
         delete: 문서 삭제
         toggle_favorite: 문서의 즐겨찾기 상태 전환
@@ -486,7 +485,6 @@ config:
         items_per_page_label: 페이지 당 항목
         help_pocket_consumer_key: Pocket 가져오기에 필요합니다. Pocket 계정에서 만들 수 있습니다.
         help_language: wallabag 인터페이스 언어를 변경할 수 있습니다.
-        help_theme: wallabag은 사용자 정의할 수 있습니다. 여기에서 원하는 테마를 선택할 수 있습니다.
         android_instruction: Android 앱 정보를 입력하려면 여기를 클릭하세요
         android_configuration: Android 앱 구성
         pocket_consumer_key_label: 콘텐츠를 가져 오기 위한 Pocket의 Consumer key
@@ -498,7 +496,6 @@ config:
             help_message: '온라인 도구를 사용하여 읽기 속도를 측정 할 수 있습니다:'
             label: 읽기 속도
         language_label: 언어
-        theme_label: 테마
     otp:
         app:
             qrcode_label: QR 코드

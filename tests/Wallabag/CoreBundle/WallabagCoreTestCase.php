@@ -11,7 +11,6 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\UserBundle\Entity\User;
 
 abstract class WallabagCoreTestCase extends WebTestCase
@@ -150,14 +149,6 @@ abstract class WallabagCoreTestCase extends WebTestCase
     public function getLoggedInUserId()
     {
         return $this->getLoggedInUser()->getId();
-    }
-
-    public function useTheme($theme)
-    {
-        $config = $this->getEntityManager()->getRepository(Config::class)->findOneByUser($this->getLoggedInUser());
-        $config->setTheme($theme);
-        $this->getEntityManager()->persist($config);
-        $this->getEntityManager()->flush();
     }
 
     /**

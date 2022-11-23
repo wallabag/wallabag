@@ -24,7 +24,6 @@ wallabag_core:
         cs: 'Čeština'
         el: 'Ελληνικά'
     items_on_page: 12
-    theme: material
     language: '%locale%'
     rss_limit: 50
     reading_speed: 200

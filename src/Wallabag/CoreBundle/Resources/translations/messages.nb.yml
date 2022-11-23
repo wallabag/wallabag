@@ -64,7 +64,6 @@ config:
     form:
         save: Lagre
     form_settings:
-        theme_label: Drakt
         items_per_page_label: Elementer per side
         language_label: Språk
         reading_speed:
@@ -83,7 +82,6 @@ config:
         help_pocket_consumer_key: Kreves for Pocket-import. Kan opprettes i din Pocket-konto.
         help_language: Du kan endre språk for wallabag-grensesnittet.
         help_items_per_page: Du kan endre antallet artikler som vises på hver side.
-        help_theme: wallabag kan tilpasset. Du kan velge foretrukket drakt her.
         android_instruction: Trykk her for å forhåndsutfylle ditt Android-program
         android_configuration: Sett opp ditt Android-program
     form_rss:
@@ -433,7 +431,6 @@ howto:
         arrows_navigation: Naviger gjennom artikler
         hide_form: Skjul nåværende skjema (søk eller ny lenke)
         add_link: Legg til ny lenke
-        material_title: Snarveier kun tilgjengelige i materiell drakt
         toggle_archive: Veksle lesestatus for oppføringer
         toggle_favorite: Veksle stjernemerkingsstatus for oppføringen
         open_original: Åpne opprinnelig nettadresse for oppføringen

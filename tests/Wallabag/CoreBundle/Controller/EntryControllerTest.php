@@ -86,7 +86,6 @@ class EntryControllerTest extends WallabagCoreTestCase
     public function testGetNew()
     {
         $this->logInAs('admin');
-        $this->useTheme('material');
         $client = $this->getClient();
 
         $crawler = $client->request('GET', '/new');

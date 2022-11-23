@@ -32,7 +32,6 @@ class CreateConfigListenerTest extends TestCase
 
         $this->listener = new CreateConfigListener(
             $this->em,
-            'material',
             20,
             50,
             'fr',
@@ -61,7 +60,6 @@ class CreateConfigListenerTest extends TestCase
         );
 
         $config = new Config($user);
-        $config->setTheme('material');
         $config->setItemsPerPage(20);
         $config->setFeedLimit(50);
         $config->setLanguage('fr');

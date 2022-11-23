@@ -579,7 +579,7 @@ class EntryController extends Controller
         }
 
         return $this->render(
-            '@WallabagCore/themes/common/Entry/share.html.twig',
+            '@WallabagCore/Entry/share.html.twig',
             ['entry' => $entry]
         );
     }

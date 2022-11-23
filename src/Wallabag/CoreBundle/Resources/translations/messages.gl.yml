@@ -19,7 +19,6 @@ howto:
         arrows_navigation: Navegar polos artigos
         hide_form: Agochar o formulario actual (busca ou nova ligazón)
         add_link: Engadir nova ligazón
-        material_title: Atallos dispoñibles só para o decorado Material
         delete: Eliminar o artigo
         toggle_archive: Marcar como lido o artigo
         toggle_favorite: Marcar con estrela o artigo
@@ -271,7 +270,6 @@ config:
         help_language: Podes cambiar o idioma da interface de wallabag.
         help_reading_speed: wallabag calcula o tempo de lectura de cada artigo. Podes definir aquí, grazas a esta lista, se es lectora rápida ou lenta. wallabag volverá a calcular a velocidade de lectura para cada artigo.
         help_items_per_page: Podes cambiar o número de artigos mostrados en cada páxina.
-        help_theme: wallabag é personalizable. Podes escoller o teu decorado preferido.
         android_configuration: Configurar a app Android
         pocket_consumer_key_label: Consumer Key para importar contidos de Pocket
         action_mark_as_read:
@@ -287,7 +285,6 @@ config:
             label: Velocidade de lectura
         language_label: Idioma
         items_per_page_label: Elementos por páxina
-        theme_label: Decorado
     form_password:
         repeat_new_password_label: Repite o novo contrasinal
         new_password_label: Novo contrasinal

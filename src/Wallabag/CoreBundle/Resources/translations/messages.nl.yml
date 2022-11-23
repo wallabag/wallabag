@@ -13,12 +13,10 @@ config:
             label: Leessnelheid
         language_label: Taal
         items_per_page_label: Items per pagina
-        theme_label: Thema
         help_pocket_consumer_key: Verplicht voor het importeren uit Pocket. U kan dit aanmaken in uw Pocket account.
         help_language: U kan de taal van wallabag aanpassen.
         help_reading_speed: wallabag berekend een leestijd voor ieder artikel. U kan hier aangeven of u een snelle of langzame lezer bent waardoor wallabag een accurate tijd kan berekenen per artikel.
         help_items_per_page: U kan de hoeveelheid getoonde artikelen per pagina aanpassen.
-        help_theme: wallabag is aanpasbaar. U can uw gewenste thema hier selecteren.
         android_instruction: Tik hier om uw Android-appvooraf in te vullen
         android_configuration: Configureer uw Android applicatie
         pocket_consumer_key_label: Consumer key voor Pocket om inhoud te importeren
@@ -523,7 +521,6 @@ howto:
         arrows_navigation: Navigeer door artikelen
         hide_form: Verberg het huidige formulier (zoeken of nieuwe link)
         add_link: Voeg nieuwe link toe
-        material_title: Snelkoppelingen alleen beschikbaar met Material thema
         delete: Verwijder het item
         toggle_archive: Verander lees status van het item
         toggle_favorite: Verander gemarkeerd status van het item

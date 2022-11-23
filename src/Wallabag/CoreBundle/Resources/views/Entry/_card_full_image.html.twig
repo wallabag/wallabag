@@ -10,8 +10,8 @@
                 <span class="preview" style="background-image: url({{ entry.previewPicture }})"></span>
             </a>
         </div>
-        {% include "@WallabagCore/themes/material/Entry/Card/_content.html.twig" with {'entry': entry} only %}
+        {% include "@WallabagCore/Entry/Card/_content.html.twig" with {'entry': entry} only %}
     </div>
 
-    {% include "@WallabagCore/themes/material/Entry/_card_actions.html.twig" with {'entry': entry} only %}
+    {% include "@WallabagCore/Entry/_card_actions.html.twig" with {'entry': entry} only %}
 </div>

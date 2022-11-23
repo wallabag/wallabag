@@ -1,6 +1,6 @@
 <div class="card-action">
     <div class="reading-time grey-text">
-        <div class="card-reading-time">{% include "@WallabagCore/themes/material/Entry/_reading_time.html.twig" with {'entry': entry} only %}</div>
+        <div class="card-reading-time">{% include "@WallabagCore/Entry/_reading_time.html.twig" with {'entry': entry} only %}</div>
         <div class="card-created-at">
             <i class="material-icons" title="{{ 'entry.view.created_at'|trans }}">today</i>
             <span>&nbsp;{{ entry.createdAt|date('Y-m-d') }}</span>

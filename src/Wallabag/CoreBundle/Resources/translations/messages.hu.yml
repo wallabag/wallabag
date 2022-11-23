@@ -58,7 +58,6 @@ config:
     form:
         save: Mentés
     form_settings:
-        theme_label: Kinézet
         items_per_page_label: Oldalankénti elemek száma
         language_label: Nyelv
         reading_speed:
@@ -75,7 +74,6 @@ config:
         pocket_consumer_key_label: A tartalom importálásához szükséges Pocket „Consumer key”
         android_configuration: Az Android alkalmazásának beállítása
         android_instruction: Érintsen ide az Android alkalmazásának előtöltéséhez
-        help_theme: A wallabag testre szabható. Itt kiválaszthatja a preferált kinézetét.
         help_items_per_page: Megváltoztathatja az oldalanként megjelenített cikkek számát.
         help_reading_speed: A wallabag kiszámítja az elolvasási időt minden egyes cikkre. Itt meghatározhatja, ennek a listának köszönhetően, hogy mennyire gyors vagy lassú olvasó. A wallabag újra ki fogja számítani az elolvasási időt minden egyes cikkre.
         help_language: Megváltoztathatja a wallabag felületének a nyelvét.
@@ -330,7 +328,6 @@ howto:
         toggle_favorite: A bejegyzés csillagozott állapotának átváltása
         toggle_archive: A bejegyzés olvasott állapotának átváltása
         delete: A bejegyzés törlése
-        material_title: Kizárólag a „Material” kinézet esetén elérhető gyorsbillentyűk
         add_link: Új hivatkozás hozzáadása
         hide_form: A jelenlegi mező elrejtése (keresés vagy új hivatkozás)
         arrows_navigation: Navigálás a cikkek között

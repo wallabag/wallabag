@@ -8,7 +8,6 @@ use Doctrine\Persistence\ManagerRegistry;
 use FOS\UserBundle\Model\UserManagerInterface;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
-use Liip\ThemeBundle\ActiveTheme;
 use PragmaRX\Recovery\Recovery as BackupCodes;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -55,24 +54,10 @@ class ConfigController extends Controller
         $configForm->handleRequest($request);
 
         if ($configForm->isSubmitted() && $configForm->isValid()) {
-            // force theme to material to avoid using baggy
-            if ('baggy' === $config->getTheme()) {
-                $config->setTheme('material');
-
-                $this->addFlash(
-                    'notice',
-                    'Baggy is gone, forced to Material theme.'
-                );
-            }
-
             $em->persist($config);
             $em->flush();
 
             $request->getSession()->set('_locale', $config->getLanguage());
-
-            // switch active theme
-            $activeTheme = $this->get(ActiveTheme::class);
-            $activeTheme->setName($config->getTheme());
 
             $this->addFlash(
                 'notice',

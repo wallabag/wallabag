@@ -171,16 +171,6 @@ nelmio_cors:
             max_age: 3600
             hosts: ['^api\.']
 
-liip_theme:
-    load_controllers: false
-    themes:
-        - material
-    autodetect_theme: Wallabag\CoreBundle\Helper\DetectActiveTheme
-
-    path_patterns:
-        bundle_resource:
-            - "%%bundle_path%%/Resources/views/themes/%%current_theme%%/%%template%%"
-
 fos_user:
     db_driver: orm
     firewall_name: secured_area

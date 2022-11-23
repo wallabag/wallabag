@@ -1,12 +1,12 @@
 <div class="card-stacked{% if currentRoute in routes and entry.isArchived %} archived{% endif %}">
-    {% include "@WallabagCore/themes/material/Entry/Card/_mass_checkbox.html.twig" with {'entry': entry} only %}
+    {% include "@WallabagCore/Entry/Card/_mass_checkbox.html.twig" with {'entry': entry} only %}
     <div class="card-preview">
         <a href="{{ path('view', {'id': entry.id}) }}">
             {% set preview_class_modifier = entry.previewPicture ? '' : ' preview--default' %}
             <span class="preview{{ preview_class_modifier }}" style="background-image: url({{ entry.previewPicture|default(asset('img/logo-square.svg')) }})"></span>
         </a>
     </div>
-    {% include "@WallabagCore/themes/material/Entry/Card/_content.html.twig" with {'entry': entry, 'withMetadata': true, 'subClass': 'metadata'} only %}
+    {% include "@WallabagCore/Entry/Card/_content.html.twig" with {'entry': entry, 'withMetadata': true, 'subClass': 'metadata'} only %}
     <ul class="tools-list hide-on-small-only">
         <li>
             <a title="{{ 'entry.list.show_same_domain'|trans }}" class="tool grey-text" href="{{ path('same_domain', {'id': entry.id}) }}"><i class="material-icons">language</i></a>

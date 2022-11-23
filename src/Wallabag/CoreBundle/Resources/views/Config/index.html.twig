@@ -27,19 +27,6 @@
 
                             <div class="row">
                                 <div class="input-field col s11">
-                                    {{ form_errors(form.config.theme) }}
-                                    {{ form_widget(form.config.theme) }}
-                                    {{ form_label(form.config.theme) }}
-                                </div>
-                                <div class="input-field col s1">
-                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_theme'|trans }}">
-                                        <i class="material-icons">live_help</i>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="input-field col s11">
                                     {{ form_errors(form.config.items_per_page) }}
                                     {{ form_widget(form.config.items_per_page) }}
                                     {{ form_label(form.config.items_per_page) }}

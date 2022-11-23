@@ -67,7 +67,6 @@ config:
     form:
         save: Зберегти
     form_settings:
-        theme_label: Тема
         items_per_page_label: Статей на сторінку
         language_label: Мова
         reading_speed:
@@ -84,7 +83,6 @@ config:
         pocket_consumer_key_label: Consumer key із Pocket для імпорту контенту
         android_configuration: Налаштувати Android-застосунок
         android_instruction: ''
-        help_theme: ''
         help_items_per_page: ''
         help_reading_speed: ''
         help_language: ''
@@ -369,7 +367,6 @@ howto:
         toggle_favorite: ''
         toggle_archive: ''
         delete: Видалити запис
-        material_title: Гарячі клавіші доступні тільки у темі Material
         add_link: Додати нове посилання
         hide_form: ''
         arrows_navigation: Навігація по статтях
