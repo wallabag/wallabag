@@ -9,6 +9,8 @@ use Wallabag\CoreBundle\Helper\CryptoProxy;
 
 /**
  * SiteCredentialRepository.
+ *
+ * @method SiteCredential[] findByUser(int $userId)
  */
 class SiteCredentialRepository extends ServiceEntityRepository
 {

@@ -4,6 +4,7 @@ namespace Wallabag\CoreBundle\Event\Listener;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Wallabag\UserBundle\Entity\User;
 
 /**
  * Stores the locale of the user in the session after the login.
@@ -25,6 +26,7 @@ class UserLocaleListener
     public function onInteractiveLogin(InteractiveLoginEvent $event)
     {
         $user = $event->getAuthenticationToken()->getUser();
+        \assert($user instanceof User);
 
         if (null !== $user->getConfig()->getLanguage() && null === $this->session->get('_locale')) {
             $this->session->set('_locale', $user->getConfig()->getLanguage());

@@ -60,7 +60,7 @@ class SiteCredentialController extends Controller
             $credential->setUsername($this->get(CryptoProxy::class)->crypt($credential->getUsername()));
             $credential->setPassword($this->get(CryptoProxy::class)->crypt($credential->getPassword()));
 
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine')->getManager();
             $em->persist($credential);
             $em->flush();
 
@@ -99,7 +99,7 @@ class SiteCredentialController extends Controller
             $siteCredential->setUsername($this->get(CryptoProxy::class)->crypt($siteCredential->getUsername()));
             $siteCredential->setPassword($this->get(CryptoProxy::class)->crypt($siteCredential->getPassword()));
 
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine')->getManager();
             $em->persist($siteCredential);
             $em->flush();
 
@@ -140,7 +140,7 @@ class SiteCredentialController extends Controller
                 $this->get(TranslatorInterface::class)->trans('flashes.site_credential.notice.deleted', ['%host%' => $siteCredential->getHost()])
             );
 
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine')->getManager();
             $em->remove($siteCredential);
             $em->flush();
         }

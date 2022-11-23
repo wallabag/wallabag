@@ -7,6 +7,10 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Wallabag\CoreBundle\Entity\Tag;
 
+/**
+ * @method Tag|null findOneByLabel(string $label)
+ * @method Tag|null findOneBySlug(string $slug)
+ */
 class TagRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)

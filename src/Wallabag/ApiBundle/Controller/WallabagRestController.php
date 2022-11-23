@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Wallabag\UserBundle\Entity\User;
 
 class WallabagRestController extends AbstractFOSRestController
 {
@@ -84,6 +85,7 @@ class WallabagRestController extends AbstractFOSRestController
     protected function validateUserAccess($requestUserId)
     {
         $user = $this->get(TokenStorageInterface::class)->getToken()->getUser();
+        \assert($user instanceof User);
         if ($requestUserId !== $user->getId()) {
             throw $this->createAccessDeniedException('Access forbidden. Entry user id: ' . $requestUserId . ', logged user id: ' . $user->getId());
         }

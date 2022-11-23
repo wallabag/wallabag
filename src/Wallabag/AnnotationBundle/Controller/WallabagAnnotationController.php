@@ -52,7 +52,7 @@ class WallabagAnnotationController extends AbstractFOSRestController
     {
         $data = json_decode($request->getContent(), true);
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $annotation = new Annotation($this->getUser());
         $annotation->setEntry($entry);
 
@@ -95,7 +95,7 @@ class WallabagAnnotationController extends AbstractFOSRestController
         $form->submit($data);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine')->getManager();
             $em->persist($annotation);
             $em->flush();
 
@@ -119,7 +119,7 @@ class WallabagAnnotationController extends AbstractFOSRestController
      */
     public function deleteAnnotationAction(Annotation $annotation)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $em->remove($annotation);
         $em->flush();
 

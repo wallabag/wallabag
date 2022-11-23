@@ -12,6 +12,10 @@ use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Helper\UrlHasher;
 
+/**
+ * @method Entry[]    findById(int $id)
+ * @method Entry|null findOneByUser(int $userId)
+ */
 class EntryRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)

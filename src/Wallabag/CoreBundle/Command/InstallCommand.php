@@ -20,6 +20,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule;
 use Wallabag\CoreBundle\Entity\InternalSetting;
+use Wallabag\UserBundle\Entity\User;
 
 class InstallCommand extends ContainerAwareCommand
 {
@@ -79,6 +80,8 @@ class InstallCommand extends ContainerAwareCommand
 
         $this->io->success('wallabag has been successfully installed.');
         $this->io->success('You can now configure your web server, see https://doc.wallabag.org');
+
+        return 0;
     }
 
     private function checkRequirements()
@@ -261,6 +264,7 @@ class InstallCommand extends ContainerAwareCommand
 
         $userManager = $this->getContainer()->get(UserManagerInterface::class);
         $user = $userManager->createUser();
+        \assert($user instanceof User);
 
         $user->setUsername($this->io->ask('Username', 'wallabag'));
 

@@ -50,7 +50,7 @@ class IgnoreOriginInstanceRuleController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine')->getManager();
             $em->persist($ignoreOriginInstanceRule);
             $em->flush();
 
@@ -82,7 +82,7 @@ class IgnoreOriginInstanceRuleController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine')->getManager();
             $em->persist($ignoreOriginInstanceRule);
             $em->flush();
 
@@ -119,7 +119,7 @@ class IgnoreOriginInstanceRuleController extends Controller
                 $this->get(TranslatorInterface::class)->trans('flashes.ignore_origin_instance_rule.notice.deleted')
             );
 
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine')->getManager();
             $em->remove($ignoreOriginInstanceRule);
             $em->flush();
         }

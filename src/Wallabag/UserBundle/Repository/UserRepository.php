@@ -7,6 +7,9 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Wallabag\UserBundle\Entity\User;
 
+/**
+ * @method User|null findOneById(int $id)
+ */
 class UserRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)

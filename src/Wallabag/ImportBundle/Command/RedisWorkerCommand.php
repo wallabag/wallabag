@@ -40,5 +40,7 @@ class RedisWorkerCommand extends ContainerAwareCommand
         );
 
         $worker->start();
+
+        return 0;
     }
 }

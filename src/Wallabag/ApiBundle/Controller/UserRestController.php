@@ -102,6 +102,7 @@ class UserRestController extends WallabagRestController
 
         $userManager = $this->get(UserManagerInterface::class);
         $user = $userManager->createUser();
+        \assert($user instanceof User);
         // user will be disabled BY DEFAULT to avoid spamming account to be enabled
         $user->setEnabled(false);
 
@@ -150,7 +151,7 @@ class UserRestController extends WallabagRestController
         $client = new Client($user);
         $client->setName($request->request->get('client_name', 'Default client'));
 
-        $this->getDoctrine()->getManager()->persist($client);
+        $this->get('doctrine')->getManager()->persist($client);
 
         $user->addClient($client);
 
