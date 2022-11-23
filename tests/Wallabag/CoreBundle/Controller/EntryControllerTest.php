@@ -1498,7 +1498,7 @@ class EntryControllerTest extends WallabagCoreTestCase
                 'zh_CN',
             ],
             'pt_BR' => [
-                'https://politica.estadao.com.br/noticias/eleicoes,campanha-catatonica,70002491983',
+                'https://esportes.r7.com/lance/futebol/victor-hugo-e-matheus-franca-devem-desfalcar-flamengo-no-carioca-22112022',
                 'pt_BR',
             ],
             'es-ES' => [
