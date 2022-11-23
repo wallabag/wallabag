@@ -159,6 +159,9 @@ services:
         calls:
             - ["addSubscriber", ["@bd_guzzle_site_authenticator.authenticator_subscriber"]]
 
+    RulerZ\RulerZ:
+        alias: rulerz
+
     Wallabag\CoreBundle\Operator\PHP\Matches:
         tags:
             - { name: rulerz.operator, target: native, operator: matches }

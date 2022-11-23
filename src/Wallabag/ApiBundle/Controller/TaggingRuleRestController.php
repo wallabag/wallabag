@@ -7,6 +7,7 @@ use JMS\Serializer\SerializerBuilder;
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class TaggingRuleRestController extends WallabagRestController
 {
@@ -21,6 +22,8 @@ class TaggingRuleRestController extends WallabagRestController
      *         description="Returned when successful"
      *     )
      * )
+     *
+     * @Route("/api/taggingrule/export.{_format}", methods={"GET"}, name="api_get_taggingrule_export", defaults={"_format": "json"})
      *
      * @return Response
      */

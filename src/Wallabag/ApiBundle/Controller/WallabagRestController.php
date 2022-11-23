@@ -8,6 +8,7 @@ use JMS\Serializer\SerializerInterface;
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -27,6 +28,8 @@ class WallabagRestController extends AbstractFOSRestController
      * )
      *
      * @deprecated Should use info endpoint instead
+     *
+     * @Route("/api/version.{_format}", methods={"GET"}, name="api_get_version", defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -49,6 +52,8 @@ class WallabagRestController extends AbstractFOSRestController
      *         description="Returned when successful"
      *     )
      * )
+     *
+     * @Route("/api/info.{_format}", methods={"GET"}, name="api_get_info", defaults={"_format": "json"})
      *
      * @return JsonResponse
      */

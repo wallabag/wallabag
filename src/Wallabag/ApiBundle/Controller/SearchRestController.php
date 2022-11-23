@@ -2,7 +2,7 @@
 
 namespace Wallabag\ApiBundle\Controller;
 
-use Hateoas\Configuration\Route;
+use Hateoas\Configuration\Route as HateoasRoute;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
@@ -10,6 +10,7 @@ use Pagerfanta\Pagerfanta;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\CoreBundle\Repository\EntryRepository;
 
 class SearchRestController extends WallabagRestController
@@ -53,6 +54,8 @@ class SearchRestController extends WallabagRestController
      *     )
      * )
      *
+     * @Route("/api/search.{_format}", methods={"GET"}, name="api_get_search", defaults={"_format": "json"})
+     *
      * @return JsonResponse
      */
     public function getSearchAction(Request $request)
@@ -79,7 +82,7 @@ class SearchRestController extends WallabagRestController
         $pagerfantaFactory = new PagerfantaFactory('page', 'perPage');
         $paginatedCollection = $pagerfantaFactory->createRepresentation(
             $pager,
-            new Route(
+            new HateoasRoute(
                 'api_get_search',
                 [
                     'term' => $term,

@@ -1,3 +1,0 @@
-Rest_Wallabag:
-    type : rest
-    resource: "@WallabagApiBundle/Resources/config/routing_rest.yml"

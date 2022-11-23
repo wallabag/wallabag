@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\AnnotationBundle\Form\EditAnnotationType;
 use Wallabag\AnnotationBundle\Form\NewAnnotationType;
@@ -19,6 +20,8 @@ class WallabagAnnotationController extends AbstractFOSRestController
      * Retrieve annotations for an entry.
      *
      * @see Wallabag\ApiBundle\Controller\WallabagRestController
+     *
+     * @Route("/annotations/{entry}.{_format}", methods={"GET"}, name="annotations_get_annotations", defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -39,9 +42,11 @@ class WallabagAnnotationController extends AbstractFOSRestController
     /**
      * Creates a new annotation.
      *
-     * @return JsonResponse
-     *
      * @see Wallabag\ApiBundle\Controller\WallabagRestController
+     *
+     * @Route("/annotations/{entry}.{_format}", methods={"POST"}, name="annotations_post_annotation", defaults={"_format": "json"})
+     *
+     * @return JsonResponse
      */
     public function postAnnotationAction(Request $request, Entry $entry)
     {
@@ -74,6 +79,7 @@ class WallabagAnnotationController extends AbstractFOSRestController
      *
      * @see Wallabag\ApiBundle\Controller\WallabagRestController
      *
+     * @Route("/annotations/{annotation}.{_format}", methods={"PUT"}, name="annotations_put_annotation", defaults={"_format": "json"})
      * @ParamConverter("annotation", class="Wallabag\AnnotationBundle\Entity\Annotation")
      *
      * @return JsonResponse
@@ -106,6 +112,7 @@ class WallabagAnnotationController extends AbstractFOSRestController
      *
      * @see Wallabag\ApiBundle\Controller\WallabagRestController
      *
+     * @Route("/annotations/{annotation}.{_format}", methods={"DELETE"}, name="annotations_delete_annotation", defaults={"_format": "json"})
      * @ParamConverter("annotation", class="Wallabag\AnnotationBundle\Entity\Annotation")
      *
      * @return JsonResponse
