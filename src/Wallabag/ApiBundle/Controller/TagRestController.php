@@ -7,6 +7,7 @@ use Nelmio\ApiDocBundle\Annotation\Operation;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 
@@ -23,6 +24,8 @@ class TagRestController extends WallabagRestController
      *         description="Returned when successful"
      *     )
      * )
+     *
+     * @Route("/api/tags.{_format}", methods={"GET"}, name="api_get_tags", defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -58,6 +61,8 @@ class TagRestController extends WallabagRestController
      *         description="Returned when successful"
      *     )
      * )
+     *
+     * @Route("/api/tag/label.{_format}", methods={"DELETE"}, name="api_delete_tag_label", defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -107,6 +112,8 @@ class TagRestController extends WallabagRestController
      *     )
      * )
      *
+     * @Route("/api/tags/label.{_format}", methods={"DELETE"}, name="api_delete_tags_label", defaults={"_format": "json"})
+     *
      * @return JsonResponse
      */
     public function deleteTagsLabelAction(Request $request)
@@ -151,6 +158,8 @@ class TagRestController extends WallabagRestController
      *         description="Returned when successful"
      *     )
      * )
+     *
+     * @Route("/api/tags/{tag}.{_format}", methods={"DELETE"}, name="api_delete_tag", defaults={"_format": "json"})
      *
      * @return JsonResponse
      */

@@ -2,7 +2,7 @@
 
 namespace Wallabag\ApiBundle\Controller;
 
-use Hateoas\Configuration\Route;
+use Hateoas\Configuration\Route as HateoasRoute;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use Pagerfanta\Pagerfanta;
@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Event\EntryDeletedEvent;
@@ -79,6 +80,8 @@ class EntryRestController extends WallabagRestController
      *         description="Returned when successful"
      *     )
      * )
+     *
+     * @Route("/api/entries/exists.{_format}", methods={"GET"}, name="api_get_entries_exists", defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -272,6 +275,8 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
+     * @Route("/api/entries.{_format}", methods={"GET"}, name="api_get_entries", defaults={"_format": "json"})
+     *
      * @return JsonResponse
      */
     public function getEntriesAction(Request $request)
@@ -314,7 +319,7 @@ class EntryRestController extends WallabagRestController
         $pagerfantaFactory = new PagerfantaFactory('page', 'perPage');
         $paginatedCollection = $pagerfantaFactory->createRepresentation(
             $pager,
-            new Route(
+            new HateoasRoute(
                 'api_get_entries',
                 [
                     'archive' => $isArchived,
@@ -355,6 +360,8 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
+     * @Route("/api/entries/{entry}.{_format}", methods={"GET"}, name="api_get_entry", defaults={"_format": "json"})
+     *
      * @return JsonResponse
      */
     public function getEntryAction(Entry $entry)
@@ -393,6 +400,8 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
+     * @Route("/api/entries/{entry}/export.{_format}", methods={"GET"}, name="api_get_entry_export", defaults={"_format": "json"})
+     *
      * @return Response
      */
     public function getEntryExportAction(Entry $entry, Request $request)
@@ -425,6 +434,8 @@ class EntryRestController extends WallabagRestController
      *         description="Returned when successful"
      *     )
      * )
+     *
+     * @Route("/api/entries/list.{_format}", methods={"DELETE"}, name="api_delete_entries_list", defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -482,6 +493,8 @@ class EntryRestController extends WallabagRestController
      *         description="Returned when successful"
      *     )
      * )
+     *
+     * @Route("/api/entries/lists.{_format}", methods={"POST"}, name="api_post_entries_list", defaults={"_format": "json"})
      *
      * @throws HttpException When limit is reached
      *
@@ -665,6 +678,8 @@ class EntryRestController extends WallabagRestController
      *         description="Returned when successful"
      *     )
      * )
+     *
+     * @Route("/api/entries.{_format}", methods={"POST"}, name="api_post_entries", defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -869,6 +884,8 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
+     * @Route("/api/entries/{entry}.{_format}", methods={"PATCH"}, name="api_patch_entries", defaults={"_format": "json"})
+     *
      * @return JsonResponse
      */
     public function patchEntriesAction(Entry $entry, Request $request)
@@ -985,6 +1002,8 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
+     * @Route("/api/entries/{entry}/reload.{_format}", methods={"PATCH"}, name="api_patch_entries_reload", defaults={"_format": "json"})
+     *
      * @return JsonResponse
      */
     public function patchEntriesReloadAction(Entry $entry)
@@ -1041,6 +1060,8 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
+     * @Route("/api/entries/{entry}.{_format}", methods={"DELETE"}, name="api_delete_entries", defaults={"_format": "json"})
+     *
      * @return JsonResponse
      */
     public function deleteEntriesAction(Entry $entry, Request $request)
@@ -1091,6 +1112,8 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
+     * @Route("/api/entries/{entry}/tags.{_format}", methods={"GET"}, name="api_get_entries_tags", defaults={"_format": "json"})
+     *
      * @return JsonResponse
      */
     public function getEntriesTagsAction(Entry $entry)
@@ -1130,6 +1153,8 @@ class EntryRestController extends WallabagRestController
      *         description="Returned when successful"
      *     )
      * )
+     *
+     * @Route("/api/entries/{entry}/tags.{_format}", methods={"POST"}, name="api_post_entries_tags", defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -1178,6 +1203,8 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
+     * @Route("/api/entries/{entry}/tags/{tag}.{_format}", methods={"DELETE"}, name="api_delete_entries_tags", defaults={"_format": "json"})
+     *
      * @return JsonResponse
      */
     public function deleteEntriesTagsAction(Entry $entry, Tag $tag)
@@ -1211,6 +1238,8 @@ class EntryRestController extends WallabagRestController
      *         description="Returned when successful"
      *     )
      * )
+     *
+     * @Route("/api/entries/tags/list.{_format}", methods={"DELETE"}, name="api_delete_entries_tags_list", defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -1279,6 +1308,8 @@ class EntryRestController extends WallabagRestController
      *         description="Returned when successful"
      *     )
      * )
+     *
+     * @Route("/api/entries/tags/lists.{_format}", methods={"POST"}, name="api_post_entries_tags_list", defaults={"_format": "json"})
      *
      * @return JsonResponse
      */

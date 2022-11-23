@@ -7,6 +7,7 @@ use JMS\Serializer\SerializerInterface;
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ConfigRestController extends WallabagRestController
 {
@@ -21,6 +22,8 @@ class ConfigRestController extends WallabagRestController
      *         description="Returned when successful"
      *     )
      * )
+     *
+     * @Route("/api/config.{_format}", methods={"GET"}, name="api_get_config", defaults={"_format": "json"})
      *
      * @return JsonResponse
      */

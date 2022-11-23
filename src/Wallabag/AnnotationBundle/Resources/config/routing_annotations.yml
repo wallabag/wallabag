@@ -1,4 +1,0 @@
-annotations:
-  type: rest
-  resource: 'Wallabag\AnnotationBundle\Controller\WallabagAnnotationController'
-  name_prefix: annotations_

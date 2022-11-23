@@ -13,6 +13,7 @@ use Swagger\Annotations as SWG;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\ApiBundle\Entity\Client;
 use Wallabag\UserBundle\Entity\User;
@@ -31,6 +32,8 @@ class UserRestController extends WallabagRestController
      *         description="Returned when successful"
      *     )
      * )
+     *
+     * @Route("/api/user.{_format}", methods={"GET"}, name="api_get_user", defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -82,6 +85,8 @@ class UserRestController extends WallabagRestController
      * )
      *
      * @todo Make this method (or the whole API) accessible only through https
+     *
+     * @Route("/api/user.{_format}", methods={"PUT"}, name="api_put_user", defaults={"_format": "json"})
      *
      * @return JsonResponse
      */

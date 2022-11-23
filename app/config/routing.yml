@@ -1,6 +1,7 @@
 wallabag_annotation:
-  type : rest
-  resource: "@WallabagAnnotationBundle/Resources/config/routing_annotations.yml"
+    resource: "@WallabagAnnotationBundle/Controller/"
+    type: annotation
+    prefix: /
 
 wallabag_import:
     resource: "@WallabagImportBundle/Controller/"
@@ -24,11 +25,6 @@ app:
 doc-api:
     resource: "@NelmioApiDocBundle/Resources/config/routing/swaggerui.xml"
     prefix: /api/doc
-
-rest :
-    type : rest
-    resource : "routing_rest.yml"
-    prefix : /api
 
 homepage:
     path: "/{page}"

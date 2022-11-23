@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Entry;
 
@@ -31,6 +32,8 @@ class AnnotationRestController extends WallabagRestController
      *         description="Returned when successful"
      *     )
      * )
+     *
+     * @Route("/api/annotations/{entry}.{_format}", methods={"GET"}, name="api_get_annotations", defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -88,6 +91,8 @@ class AnnotationRestController extends WallabagRestController
      *     )
      * )
      *
+     * @Route("/api/annotations/{entry}.{_format}", methods={"POST"}, name="api_post_annotation", defaults={"_format": "json"})
+     *
      * @return JsonResponse
      */
     public function postAnnotationAction(Request $request, Entry $entry)
@@ -120,6 +125,7 @@ class AnnotationRestController extends WallabagRestController
      *     )
      * )
      *
+     * @Route("/api/annotations/{annotation}.{_format}", methods={"PUT"}, name="api_put_annotation", defaults={"_format": "json"})
      * @ParamConverter("annotation", class="Wallabag\AnnotationBundle\Entity\Annotation")
      *
      * @return JsonResponse
@@ -154,6 +160,7 @@ class AnnotationRestController extends WallabagRestController
      *     )
      * )
      *
+     * @Route("/api/annotations/{annotation}.{_format}", methods={"DELETE"}, name="api_delete_annotation", defaults={"_format": "json"})
      * @ParamConverter("annotation", class="Wallabag\AnnotationBundle\Entity\Annotation")
      *
      * @return JsonResponse
