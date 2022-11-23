@@ -31,9 +31,6 @@ updates:
   - dependency-name: friendsofsymfony/user-bundle
     versions:
     - "> 2.0.2"
-  - dependency-name: nelmio/api-doc-bundle
-    versions:
-    - "> 2.13.4"
 - package-ecosystem: github-actions
   directory: "/"
   schedule:

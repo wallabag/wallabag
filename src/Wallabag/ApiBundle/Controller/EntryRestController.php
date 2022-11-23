@@ -88,7 +88,7 @@ class EntryRestController extends WallabagRestController
     public function getEntriesExistsAction(Request $request)
     {
         $this->validateAuthentication();
-        $repo = $this->getDoctrine()->getRepository(Entry::class);
+        $repo = $this->get('doctrine')->getRepository(Entry::class);
 
         $returnId = (null === $request->query->get('return_id')) ? false : (bool) $request->query->get('return_id');
 
@@ -464,7 +464,7 @@ class EntryRestController extends WallabagRestController
                 // entry deleted, dispatch event about it!
                 $this->get(EventDispatcherInterface::class)->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
 
-                $em = $this->getDoctrine()->getManager();
+                $em = $this->get('doctrine')->getManager();
                 $em->remove($entry);
                 $em->flush();
             }
@@ -532,7 +532,7 @@ class EntryRestController extends WallabagRestController
                 $this->get(ContentProxy::class)->updateEntry($entry, $url);
             }
 
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine')->getManager();
             $em->persist($entry);
             $em->flush();
 
@@ -755,7 +755,7 @@ class EntryRestController extends WallabagRestController
             $this->get(ContentProxy::class)->setDefaultEntryTitle($entry);
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $em->persist($entry);
         $em->flush();
 
@@ -971,7 +971,7 @@ class EntryRestController extends WallabagRestController
             $this->get(ContentProxy::class)->setDefaultEntryTitle($entry);
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $em->persist($entry);
         $em->flush();
 
@@ -1027,7 +1027,7 @@ class EntryRestController extends WallabagRestController
             return new JsonResponse([], 304);
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $em->persist($entry);
         $em->flush();
 
@@ -1085,7 +1085,7 @@ class EntryRestController extends WallabagRestController
         // entry deleted, dispatch event about it!
         $this->get(EventDispatcherInterface::class)->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $em->remove($entry);
         $em->flush();
 
@@ -1168,7 +1168,7 @@ class EntryRestController extends WallabagRestController
             $this->get(TagsAssigner::class)->assignTagsToEntry($entry, $tags);
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $em->persist($entry);
         $em->flush();
 
@@ -1213,7 +1213,7 @@ class EntryRestController extends WallabagRestController
         $this->validateUserAccess($entry->getUser()->getId());
 
         $entry->removeTag($tag);
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $em->persist($entry);
         $em->flush();
 
@@ -1272,7 +1272,7 @@ class EntryRestController extends WallabagRestController
                 foreach ($tags as $label) {
                     $label = trim($label);
 
-                    $tag = $this->getDoctrine()
+                    $tag = $this->get('doctrine')
                         ->getRepository(Tag::class)
                         ->findOneByLabel($label);
 
@@ -1281,7 +1281,7 @@ class EntryRestController extends WallabagRestController
                     }
                 }
 
-                $em = $this->getDoctrine()->getManager();
+                $em = $this->get('doctrine')->getManager();
                 $em->persist($entry);
                 $em->flush();
             }
@@ -1340,7 +1340,7 @@ class EntryRestController extends WallabagRestController
             if (false !== $entry && !(empty($tags))) {
                 $this->get(TagsAssigner::class)->assignTagsToEntry($entry, $tags);
 
-                $em = $this->getDoctrine()->getManager();
+                $em = $this->get('doctrine')->getManager();
                 $em->persist($entry);
                 $em->flush();
             }

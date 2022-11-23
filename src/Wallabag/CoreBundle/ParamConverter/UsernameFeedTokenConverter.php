@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInte
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Wallabag\UserBundle\Entity\User;
+use Wallabag\UserBundle\Repository\UserRepository;
 
 /**
  * ParamConverter used in the Feed controller to retrieve the right user according to
@@ -76,6 +77,7 @@ class UsernameFeedTokenConverter implements ParamConverterInterface
         // Get actual entity manager for class
         $em = $this->registry->getManagerForClass($configuration->getClass());
 
+        /** @var UserRepository $userRepository */
         $userRepository = $em->getRepository($configuration->getClass());
 
         // Try to find user by its username and config feed_token

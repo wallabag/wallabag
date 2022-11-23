@@ -40,7 +40,7 @@ class EntryController extends Controller
      */
     public function massAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $values = $request->request->all();
 
         $tagsToAdd = [];
@@ -173,7 +173,7 @@ class EntryController extends Controller
 
             $this->updateEntry($entry);
 
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine')->getManager();
             $em->persist($entry);
             $em->flush();
 
@@ -201,7 +201,7 @@ class EntryController extends Controller
         if (false === $this->checkIfEntryAlreadyExists($entry)) {
             $this->updateEntry($entry);
 
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine')->getManager();
             $em->persist($entry);
             $em->flush();
 
@@ -238,7 +238,7 @@ class EntryController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine')->getManager();
             $em->persist($entry);
             $em->flush();
 
@@ -409,7 +409,7 @@ class EntryController extends Controller
             return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $em->persist($entry);
         $em->flush();
 
@@ -431,7 +431,7 @@ class EntryController extends Controller
         $this->checkUserAction($entry);
 
         $entry->toggleArchive();
-        $this->getDoctrine()->getManager()->flush();
+        $this->get('doctrine')->getManager()->flush();
 
         $message = 'flashes.entry.notice.entry_unarchived';
         if ($entry->isArchived()) {
@@ -461,7 +461,7 @@ class EntryController extends Controller
 
         $entry->toggleStar();
         $entry->updateStar($entry->isStarred());
-        $this->getDoctrine()->getManager()->flush();
+        $this->get('doctrine')->getManager()->flush();
 
         $message = 'flashes.entry.notice.entry_unstarred';
         if ($entry->isStarred()) {
@@ -500,7 +500,7 @@ class EntryController extends Controller
         // entry deleted, dispatch event about it!
         $this->get(EventDispatcherInterface::class)->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $em->remove($entry);
         $em->flush();
 
@@ -532,7 +532,7 @@ class EntryController extends Controller
         if (null === $entry->getUid()) {
             $entry->generateUid();
 
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine')->getManager();
             $em->persist($entry);
             $em->flush();
         }
@@ -555,7 +555,7 @@ class EntryController extends Controller
 
         $entry->cleanUid();
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $em->persist($entry);
         $em->flush();
 

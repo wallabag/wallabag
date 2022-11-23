@@ -44,7 +44,7 @@ class ConfigController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $config = $this->getConfig();
         $userManager = $this->container->get(UserManagerInterface::class);
         $user = $this->getUser();
@@ -125,7 +125,7 @@ class ConfigController extends Controller
         $action = $this->generateUrl('config') . '#set5';
 
         if ($request->query->has('tagging-rule')) {
-            $taggingRule = $this->getDoctrine()
+            $taggingRule = $this->get('doctrine')
                 ->getRepository(TaggingRule::class)
                 ->find($request->query->get('tagging-rule'));
 
@@ -188,7 +188,7 @@ class ConfigController extends Controller
         $action = $this->generateUrl('config') . '#set6';
 
         if ($request->query->has('ignore-origin-user-rule')) {
-            $ignoreOriginUserRule = $this->getDoctrine()
+            $ignoreOriginUserRule = $this->get('doctrine')
                 ->getRepository(IgnoreOriginUserRule::class)
                 ->find($request->query->get('ignore-origin-user-rule'));
 
@@ -414,7 +414,7 @@ class ConfigController extends Controller
         $config = $this->getConfig();
         $config->setFeedToken(Utils::generateToken());
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $em->persist($config);
         $em->flush();
 
@@ -440,7 +440,7 @@ class ConfigController extends Controller
         $config = $this->getConfig();
         $config->setFeedToken(null);
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $em->persist($config);
         $em->flush();
 
@@ -467,7 +467,7 @@ class ConfigController extends Controller
     {
         $this->validateRuleAction($rule);
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $em->remove($rule);
         $em->flush();
 
@@ -504,7 +504,7 @@ class ConfigController extends Controller
     {
         $this->validateRuleAction($rule);
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $em->remove($rule);
         $em->flush();
 
@@ -541,7 +541,7 @@ class ConfigController extends Controller
     {
         switch ($type) {
             case 'annotations':
-                $this->getDoctrine()
+                $this->get('doctrine')
                     ->getRepository(Annotation::class)
                     ->removeAllByUserId($this->getUser()->getId());
                 break;
@@ -552,7 +552,7 @@ class ConfigController extends Controller
                 // SQLite doesn't care about cascading remove, so we need to manually remove associated stuff
                 // otherwise they won't be removed ...
                 if ($this->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof SqlitePlatform) {
-                    $this->getDoctrine()->getRepository(Annotation::class)->removeAllByUserId($this->getUser()->getId());
+                    $this->get('doctrine')->getRepository(Annotation::class)->removeAllByUserId($this->getUser()->getId());
                 }
 
                 // manually remove tags to avoid orphan tag
@@ -622,7 +622,7 @@ class ConfigController extends Controller
         $user = $this->getUser();
         $user->getConfig()->setListMode(!$user->getConfig()->getListMode());
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $em->persist($user);
         $em->flush();
 
@@ -691,7 +691,7 @@ class ConfigController extends Controller
             ->removeTags($userId, $tags);
 
         // cleanup orphan tags
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
 
         foreach ($tags as $tag) {
             if (0 === \count($tag->getEntries())) {
@@ -726,9 +726,9 @@ class ConfigController extends Controller
 
     private function removeAnnotationsForArchivedByUserId($userId)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
 
-        $archivedEntriesAnnotations = $this->getDoctrine()
+        $archivedEntriesAnnotations = $this->get('doctrine')
             ->getRepository(Annotation::class)
             ->findAllArchivedEntriesByUser($userId);
 
@@ -757,7 +757,7 @@ class ConfigController extends Controller
      */
     private function getConfig()
     {
-        $config = $this->getDoctrine()
+        $config = $this->get('doctrine')
             ->getRepository(ConfigEntity::class)
             ->findOneByUser($this->getUser());
 

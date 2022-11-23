@@ -23,7 +23,7 @@ class DeveloperController extends Controller
      */
     public function indexAction()
     {
-        $clients = $this->getDoctrine()->getRepository(Client::class)->findByUser($this->getUser()->getId());
+        $clients = $this->get('doctrine')->getRepository(Client::class)->findByUser($this->getUser()->getId());
 
         return $this->render('@WallabagCore/Developer/index.html.twig', [
             'clients' => $clients,
@@ -39,7 +39,7 @@ class DeveloperController extends Controller
      */
     public function createClientAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $client = new Client($this->getUser());
         $clientForm = $this->createForm(ClientType::class, $client);
         $clientForm->handleRequest($request);
@@ -79,7 +79,7 @@ class DeveloperController extends Controller
             throw $this->createAccessDeniedException('You can not access this client.');
         }
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine')->getManager();
         $em->remove($client);
         $em->flush();
 

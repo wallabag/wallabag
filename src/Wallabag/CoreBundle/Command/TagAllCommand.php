@@ -47,7 +47,7 @@ class TagAllCommand extends ContainerAwareCommand
 
         $io->text('Persist ' . \count($entries) . ' entries... ');
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getContainer()->get('doctrine')->getManager();
         foreach ($entries as $entry) {
             $em->persist($entry);
         }
