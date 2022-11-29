@@ -13028,16 +13028,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v6.1.6",
+            "version": "v6.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "07cf788ac9ae83b59d46599bb5098c3add88c68b"
+                "reference": "c8163ef70aaa7011bff1a0ca60138d88249a54f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/07cf788ac9ae83b59d46599bb5098c3add88c68b",
-                "reference": "07cf788ac9ae83b59d46599bb5098c3add88c68b",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/c8163ef70aaa7011bff1a0ca60138d88249a54f3",
+                "reference": "c8163ef70aaa7011bff1a0ca60138d88249a54f3",
                 "shasum": ""
             },
             "require": {
@@ -13091,7 +13091,7 @@
             "description": "Provides utilities for PHPUnit, especially user deprecation notices management",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/phpunit-bridge/tree/v6.1.6"
+                "source": "https://github.com/symfony/phpunit-bridge/tree/v6.1.8"
             },
             "funding": [
                 {
@@ -13107,7 +13107,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-10-07T08:04:03+00:00"
+            "time": "2022-11-14T10:13:26+00:00"
         }
     ],
     "aliases": [],
@@ -13139,5 +13139,5 @@
     "platform-overrides": {
         "php": "7.4.29"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
