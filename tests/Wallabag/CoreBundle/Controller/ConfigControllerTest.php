@@ -20,7 +20,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 {
     public function testLogin()
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->request('GET', '/new');
 
@@ -31,7 +31,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testIndex()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config');
 
@@ -46,7 +46,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testUpdate()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config');
 
@@ -73,7 +73,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testChangeReadingSpeed()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl('http://0.0.0.0/test-entry1')
@@ -131,7 +131,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testUpdateFailed($data)
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config');
 
@@ -191,7 +191,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testChangePasswordFailed($data, $expectedMessage)
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config');
 
@@ -210,7 +210,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testChangePassword()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config');
 
@@ -259,7 +259,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testUserFailed($data, $expectedMessage)
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config');
 
@@ -278,7 +278,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testUserUpdate()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config');
 
@@ -304,7 +304,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testFeedUpdateResetToken()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         // reset the token
         $em = $client->getContainer()->get(EntityManagerInterface::class);
@@ -340,7 +340,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testGenerateTokenAjax()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->request(
             'GET',
@@ -358,7 +358,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testRevokeTokenAjax()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->request(
             'GET',
@@ -374,7 +374,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testFeedUpdate()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config');
 
@@ -402,7 +402,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
                 [
                     'feed_config[feed_limit]' => 0,
                 ],
-                'This value should be 1 or more.',
+                'This value should be between 1 and 100000.',
             ],
             [
                 [
@@ -419,7 +419,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testFeedFailed($data, $expectedMessage)
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config');
 
@@ -438,7 +438,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testTaggingRuleCreation()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config');
 
@@ -525,7 +525,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testTaggingRuleCreationFail($data, $messages)
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config');
 
@@ -547,7 +547,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testTaggingRuleTooLong()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config');
 
@@ -570,7 +570,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testDeletingTaggingRuleFromAnOtherUser()
     {
         $this->logInAs('bob');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $rule = $client->getContainer()->get(EntityManagerInterface::class)
             ->getRepository(TaggingRule::class)
@@ -586,7 +586,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testEditingTaggingRuleFromAnOtherUser()
     {
         $this->logInAs('bob');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $rule = $client->getContainer()->get(EntityManagerInterface::class)
             ->getRepository(TaggingRule::class)
@@ -602,7 +602,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testIgnoreOriginRuleCreation()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config');
 
@@ -685,7 +685,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testIgnoreOriginRuleCreationFail($data, $messages)
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config');
 
@@ -707,7 +707,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testDeletingIgnoreOriginRuleFromAnOtherUser()
     {
         $this->logInAs('bob');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $rule = $client->getContainer()->get(EntityManagerInterface::class)
             ->getRepository(IgnoreOriginUserRule::class)
@@ -723,7 +723,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testEditingIgnoreOriginRuleFromAnOtherUser()
     {
         $this->logInAs('bob');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $rule = $client->getContainer()->get(EntityManagerInterface::class)
             ->getRepository(IgnoreOriginUserRule::class)
@@ -739,7 +739,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testDemoMode()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $config = $client->getContainer()->get(Config::class);
         $config->set('demo_mode_enabled', 1);
@@ -769,7 +769,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testDeleteUserButtonVisibility()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config');
 
@@ -820,7 +820,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
      */
     public function testDeleteAccount()
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
 
         $user = new User();
@@ -889,7 +889,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testReset()
     {
         $this->logInAs('empty');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $em = $client->getContainer()->get(EntityManagerInterface::class);
 
@@ -976,7 +976,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testResetArchivedEntries()
     {
         $this->logInAs('empty');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $em = $client->getContainer()->get(EntityManagerInterface::class);
 
@@ -1054,7 +1054,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testResetEntriesCascade()
     {
         $this->logInAs('empty');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $em = $client->getContainer()->get(EntityManagerInterface::class);
 
@@ -1113,7 +1113,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testSwitchViewMode()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->request('GET', '/unread/list');
 
@@ -1131,7 +1131,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
     public function testChangeLocaleWithoutReferer()
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->request('GET', '/locale/de');
         $client->followRedirect();
@@ -1142,7 +1142,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
     public function testChangeLocaleWithReferer()
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->request('GET', '/login');
         $client->request('GET', '/locale/de');
@@ -1154,7 +1154,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
     public function testChangeLocaleToBadLocale()
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->request('GET', '/login');
         $client->request('GET', '/locale/yuyuyuyu');
@@ -1167,7 +1167,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testUserEnable2faEmail()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config/otp/email');
 
@@ -1194,7 +1194,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testUserDisable2faEmail()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config/otp/email/disable');
 
@@ -1217,7 +1217,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testUserEnable2faGoogle()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config/otp/app');
 
@@ -1241,7 +1241,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testUserEnable2faGoogleCancel()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config/otp/app');
 
@@ -1271,7 +1271,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testUserDisable2faGoogle()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config/otp/app/disable');
 
@@ -1295,7 +1295,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testExportTaggingRule()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         ob_start();
         $crawler = $client->request('GET', '/tagging-rule/export');
@@ -1318,7 +1318,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testImportTagginfRuleBadFile()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config');
         $form = $crawler->filter('form[name=upload_tagging_rule_file] > button[type=submit]')->form();
@@ -1335,7 +1335,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
     public function testImportTagginfRuleFile()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/config');
         $form = $crawler->filter('form[name=upload_tagging_rule_file] > button[type=submit]')->form();

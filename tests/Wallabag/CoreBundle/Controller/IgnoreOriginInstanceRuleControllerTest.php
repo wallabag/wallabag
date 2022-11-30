@@ -9,7 +9,7 @@ class IgnoreOriginInstanceRuleControllerTest extends WallabagCoreTestCase
     public function testListIgnoreOriginInstanceRule()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/ignore-origin-instance-rules/');
 
@@ -24,7 +24,7 @@ class IgnoreOriginInstanceRuleControllerTest extends WallabagCoreTestCase
     public function testIgnoreOriginInstanceRuleCreationEditionDeletion()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         // Creation
         $crawler = $client->request('GET', '/ignore-origin-instance-rules/new');
@@ -127,7 +127,7 @@ class IgnoreOriginInstanceRuleControllerTest extends WallabagCoreTestCase
     public function testIgnoreOriginInstanceRuleCreationFail($data, $messages)
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/ignore-origin-instance-rules/new');
 

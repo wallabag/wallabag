@@ -13,7 +13,7 @@ class SettingsControllerTest extends WallabagCoreTestCase
     public function testSettingsWithAdmin()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/settings');
 
@@ -23,7 +23,7 @@ class SettingsControllerTest extends WallabagCoreTestCase
     public function testSettingsWithNormalUser()
     {
         $this->logInAs('bob');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/settings');
 

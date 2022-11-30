@@ -17,7 +17,7 @@ class RedisWorkerCommandTest extends WallabagCoreTestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Not enough arguments (missing: "serviceName")');
 
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:import:redis-worker');
 
@@ -30,7 +30,7 @@ class RedisWorkerCommandTest extends WallabagCoreTestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('No queue or consumer found for service name');
 
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:import:redis-worker');
 
@@ -42,7 +42,7 @@ class RedisWorkerCommandTest extends WallabagCoreTestCase
 
     public function testRunRedisWorkerCommand()
     {
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $factory = new RedisMockFactory();
         $redisMock = $factory->getAdapter(Client::class, true);

@@ -82,7 +82,7 @@ class FeedControllerTest extends WallabagCoreTestCase
      */
     public function testBadUrl($url)
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->request('GET', $url);
 
@@ -91,7 +91,7 @@ class FeedControllerTest extends WallabagCoreTestCase
 
     public function testUnread()
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
         $user = $em
             ->getRepository(User::class)
@@ -112,7 +112,7 @@ class FeedControllerTest extends WallabagCoreTestCase
 
     public function testStarred()
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
         $user = $em
             ->getRepository(User::class)
@@ -124,7 +124,7 @@ class FeedControllerTest extends WallabagCoreTestCase
         $em->persist($config);
         $em->flush();
 
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $client->request('GET', '/feed/admin/SUPERTOKEN/starred');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode(), 1);
@@ -134,7 +134,7 @@ class FeedControllerTest extends WallabagCoreTestCase
 
     public function testArchives()
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
         $user = $em
             ->getRepository(User::class)
@@ -146,7 +146,7 @@ class FeedControllerTest extends WallabagCoreTestCase
         $em->persist($config);
         $em->flush();
 
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $client->request('GET', '/feed/admin/SUPERTOKEN/archive');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
@@ -156,7 +156,7 @@ class FeedControllerTest extends WallabagCoreTestCase
 
     public function testAll()
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
         $user = $em
             ->getRepository(User::class)
@@ -168,7 +168,7 @@ class FeedControllerTest extends WallabagCoreTestCase
         $em->persist($config);
         $em->flush();
 
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $client->request('GET', '/feed/admin/SUPERTOKEN/all');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
@@ -178,7 +178,7 @@ class FeedControllerTest extends WallabagCoreTestCase
 
     public function testPagination()
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
         $user = $em
             ->getRepository(User::class)
@@ -190,7 +190,7 @@ class FeedControllerTest extends WallabagCoreTestCase
         $em->persist($config);
         $em->flush();
 
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->request('GET', '/feed/admin/SUPERTOKEN/unread');
         $this->assertSame(200, $client->getResponse()->getStatusCode());
@@ -206,7 +206,7 @@ class FeedControllerTest extends WallabagCoreTestCase
 
     public function testTags()
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
         $user = $em
             ->getRepository(User::class)
@@ -247,7 +247,7 @@ class FeedControllerTest extends WallabagCoreTestCase
 
         $em->flush();
 
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         // tag foo - without sort
         $crawler = $client->request('GET', '/feed/admin/SUPERTOKEN/tags/foo');
@@ -302,7 +302,7 @@ class FeedControllerTest extends WallabagCoreTestCase
      */
     public function testRedirectFromRssToAtom($url)
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->request('GET', $url);
 

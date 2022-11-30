@@ -64,6 +64,6 @@ class AuthenticationFailureListenerTest extends TestCase
         $records = $this->logHandler->getRecords();
 
         $this->assertCount(1, $records);
-        $this->assertSame('Authentication failure for user "admin", from IP "127.0.0.1", with UA: "Symfony/3.X".', $records[0]['message']);
+        $this->assertSame('Authentication failure for user "admin", from IP "127.0.0.1", with UA: "Symfony".', $records[0]['message']);
     }
 }

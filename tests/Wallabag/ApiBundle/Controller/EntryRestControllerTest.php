@@ -372,7 +372,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         foreach (['self', 'first', 'last'] as $link) {
             $this->assertArrayHasKey('href', $content['_links'][$link]);
-            $this->assertStringContainsString('tags=' . urlencode('foo,bar'), $content['_links'][$link]['href']);
+            $this->assertStringContainsString('tags=foo,bar', $content['_links'][$link]['href']);
         }
 
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));

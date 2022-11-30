@@ -16,7 +16,7 @@ class ShowUserCommandTest extends WallabagCoreTestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Not enough arguments');
 
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:user:show');
 
@@ -26,7 +26,7 @@ class ShowUserCommandTest extends WallabagCoreTestCase
 
     public function testRunShowUserCommandWithBadUsername()
     {
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:user:show');
 
@@ -40,7 +40,7 @@ class ShowUserCommandTest extends WallabagCoreTestCase
 
     public function testRunShowUserCommandForUser()
     {
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:user:show');
 
@@ -58,7 +58,7 @@ class ShowUserCommandTest extends WallabagCoreTestCase
 
     public function testShowUser()
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
 
         $this->logInAs('admin');
@@ -71,7 +71,7 @@ class ShowUserCommandTest extends WallabagCoreTestCase
 
         $em->flush();
 
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:user:show');
 

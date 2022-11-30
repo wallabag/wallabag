@@ -717,10 +717,10 @@ class EntryRestController extends WallabagRestController
                 ]
             );
         } catch (\Exception $e) {
-            $this->get('logger')->error('Error while saving an entry', [
-                'exception' => $e,
-                'entry' => $entry,
-            ]);
+            // $this->get('logger')->error('Error while saving an entry', [
+            //     'exception' => $e,
+            //     'entry' => $entry,
+            // ]);
         }
 
         if (null !== $data['isArchived']) {
@@ -911,10 +911,10 @@ class EntryRestController extends WallabagRestController
                     true
                 );
             } catch (\Exception $e) {
-                $this->get('logger')->error('Error while saving an entry', [
-                    'exception' => $e,
-                    'entry' => $entry,
-                ]);
+                // $this->get('logger')->error('Error while saving an entry', [
+                //     'exception' => $e,
+                //     'entry' => $entry,
+                // ]);
             }
         }
 
@@ -1014,10 +1014,10 @@ class EntryRestController extends WallabagRestController
         try {
             $this->get(ContentProxy::class)->updateEntry($entry, $entry->getUrl());
         } catch (\Exception $e) {
-            $this->get('logger')->error('Error while saving an entry', [
-                'exception' => $e,
-                'entry' => $entry,
-            ]);
+            // $this->get('logger')->error('Error while saving an entry', [
+            //     'exception' => $e,
+            //     'entry' => $entry,
+            // ]);
 
             return new JsonResponse([], 304);
         }

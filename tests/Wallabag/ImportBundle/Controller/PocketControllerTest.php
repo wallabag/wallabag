@@ -12,7 +12,7 @@ class PocketControllerTest extends WallabagCoreTestCase
     public function testImportPocket()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/pocket');
 
@@ -23,7 +23,7 @@ class PocketControllerTest extends WallabagCoreTestCase
     public function testImportPocketWithRabbitEnabled()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
@@ -39,7 +39,7 @@ class PocketControllerTest extends WallabagCoreTestCase
     {
         $this->checkRedis();
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
@@ -54,7 +54,7 @@ class PocketControllerTest extends WallabagCoreTestCase
     public function testImportPocketAuthBadToken()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->request('GET', '/import/pocket/auth');
 
@@ -64,7 +64,7 @@ class PocketControllerTest extends WallabagCoreTestCase
     public function testImportPocketAuth()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $pocketImport = $this->getMockBuilder(PocketImport::class)
             ->disableOriginalConstructor()
@@ -86,7 +86,7 @@ class PocketControllerTest extends WallabagCoreTestCase
     public function testImportPocketCallbackWithBadToken()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $pocketImport = $this->getMockBuilder(PocketImport::class)
             ->disableOriginalConstructor()
@@ -109,7 +109,7 @@ class PocketControllerTest extends WallabagCoreTestCase
     public function testImportPocketCallback()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $pocketImport = $this->getMockBuilder(PocketImport::class)
             ->disableOriginalConstructor()

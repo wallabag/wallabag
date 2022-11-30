@@ -10,7 +10,7 @@ class ListUserCommandTest extends WallabagCoreTestCase
 {
     public function testRunListUserCommand()
     {
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:user:list');
 
@@ -22,7 +22,7 @@ class ListUserCommandTest extends WallabagCoreTestCase
 
     public function testRunListUserCommandWithLimit()
     {
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:user:list');
 
@@ -36,7 +36,7 @@ class ListUserCommandTest extends WallabagCoreTestCase
 
     public function testRunListUserCommandWithSearch()
     {
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:user:list');
 
@@ -50,7 +50,7 @@ class ListUserCommandTest extends WallabagCoreTestCase
 
     public function testRunListUserCommandWithSearchAndLimit()
     {
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:user:list');
 

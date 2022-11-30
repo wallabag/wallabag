@@ -13,7 +13,7 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
 {
     public function testRunGenerateUrlHashesCommand()
     {
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:generate-hashed-urls');
 
@@ -26,7 +26,7 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
 
     public function testRunGenerateUrlHashesCommandWithBadUsername()
     {
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:generate-hashed-urls');
 
@@ -40,7 +40,7 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
 
     public function testRunGenerateUrlHashesCommandForUser()
     {
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:generate-hashed-urls');
 
@@ -55,7 +55,7 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
     public function testGenerateUrls()
     {
         $url = 'http://www.lemonde.fr/sport/visuel/2017/05/05/rondelle-prison-blanchissage-comprendre-le-hockey-sur-glace_5122587_3242.html';
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
 
         $this->logInAs('admin');
@@ -68,7 +68,7 @@ class GenerateUrlHashesCommandTest extends WallabagCoreTestCase
         $em->persist($entry1);
         $em->flush();
 
-        $application = new Application($this->getClient()->getKernel());
+        $application = new Application($this->getTestClient()->getKernel());
 
         $command = $application->find('wallabag:generate-hashed-urls');
 

@@ -11,7 +11,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
     public function testCreateClient()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
         $nbClients = $em->getRepository(Client::class)->findAll();
 
@@ -37,7 +37,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
 
     public function testCreateToken()
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $apiClient = $this->createApiClientForUser('admin');
 
         $client->request('POST', '/oauth/v2/token', [
@@ -59,7 +59,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
 
     public function testCreateTokenWithBadClientId()
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $client->request('POST', '/oauth/v2/token', [
             'grant_type' => 'password',
             'client_id' => '$WALLABAG_CLIENT_ID',
@@ -74,7 +74,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
     public function testListingClient()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
         $nbClients = $em->getRepository(Client::class)->findAll();
 
@@ -86,7 +86,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
     public function testDeveloperHowto()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/developer/howto/first-app');
         $this->assertSame(200, $client->getResponse()->getStatusCode());
@@ -94,7 +94,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
 
     public function testRemoveClient()
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $adminApiClient = $this->createApiClientForUser('admin');
         $em = $client->getContainer()->get(EntityManagerInterface::class);
 
@@ -134,7 +134,7 @@ class DeveloperControllerTest extends WallabagCoreTestCase
      */
     private function createApiClientForUser($username, $grantTypes = ['password'])
     {
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
         $userManager = $client->getContainer()->get('fos_user.user_manager.test');
         $user = $userManager->findUserBy(['username' => $username]);

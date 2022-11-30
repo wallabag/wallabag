@@ -9,7 +9,7 @@ class StaticControllerTest extends WallabagCoreTestCase
     public function testAbout()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->request('GET', '/about');
 
@@ -19,7 +19,7 @@ class StaticControllerTest extends WallabagCoreTestCase
     public function testHowto()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->request('GET', '/howto');
 

@@ -13,7 +13,7 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
     public function testAccessDeniedBecauseFeatureDisabled()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->getContainer()->get(Config::class)->set('restricted_access', 0);
 
@@ -27,7 +27,7 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
     public function testListSiteCredential()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/site-credentials/');
 
@@ -42,7 +42,7 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
     public function testNewSiteCredential()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/site-credentials/new');
 
@@ -73,7 +73,7 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
     public function testEditSiteCredential()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $credential = $this->createSiteCredential($client);
 
@@ -106,7 +106,7 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
     public function testEditFromADifferentUserSiteCredential()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $credential = $this->createSiteCredential($client);
 
@@ -120,7 +120,7 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
     public function testDeleteSiteCredential()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $credential = $this->createSiteCredential($client);
 

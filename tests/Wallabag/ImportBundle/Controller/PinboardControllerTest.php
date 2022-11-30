@@ -14,7 +14,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
     public function testImportPinboard()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/pinboard');
 
@@ -26,7 +26,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
     public function testImportPinboardWithRabbitEnabled()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
@@ -42,7 +42,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
     public function testImportPinboardBadFile()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/pinboard');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
@@ -60,7 +60,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
     {
         $this->checkRedis();
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
         $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
         $crawler = $client->request('GET', '/import/pinboard');
@@ -94,7 +94,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
     public function testImportPinboardWithFile()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/pinboard');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
@@ -140,7 +140,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
     public function testImportPinboardWithFileAndMarkAllAsRead()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/pinboard');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
@@ -187,7 +187,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
     public function testImportPinboardWithEmptyFile()
     {
         $this->logInAs('admin');
-        $client = $this->getClient();
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/import/pinboard');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
