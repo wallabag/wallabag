@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0c27197b6356c817ab1a33b83745f820",
+    "content-hash": "7b841fce4fa9254c6b7aeaf23ce1c63a",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -12028,23 +12028,23 @@
         },
         {
             "name": "friendsoftwig/twigcs",
-            "version": "v5.1.0",
+            "version": "v6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/friendsoftwig/twigcs.git",
-                "reference": "c82b078e9c199bc57375e557fb888b04f53420b2"
+                "reference": "035af79b0fabbab1fc6b8e5698ead1f80e25c4ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/friendsoftwig/twigcs/zipball/c82b078e9c199bc57375e557fb888b04f53420b2",
-                "reference": "c82b078e9c199bc57375e557fb888b04f53420b2",
+                "url": "https://api.github.com/repos/friendsoftwig/twigcs/zipball/035af79b0fabbab1fc6b8e5698ead1f80e25c4ec",
+                "reference": "035af79b0fabbab1fc6b8e5698ead1f80e25c4ec",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2 || ^8.0",
-                "symfony/console": "^3.4 || ^4.3 || ^5.0",
-                "symfony/filesystem": "^3.4 || ^4.3 || ^5.0",
-                "symfony/finder": "^3.4 || ^4.3 || ^5.0"
+                "php": "^7.4 || ^8.0",
+                "symfony/console": "^4.4 || ^5.3 || ^6.0",
+                "symfony/filesystem": "^4.4 || ^5.3 || ^6.0",
+                "symfony/finder": "^4.4 || ^5.3 || ^6.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^8.0 || ^9.0"
@@ -12071,9 +12071,9 @@
             "description": "Checkstyle automation for Twig",
             "support": {
                 "issues": "https://github.com/friendsoftwig/twigcs/issues",
-                "source": "https://github.com/friendsoftwig/twigcs/tree/v5.1.0"
+                "source": "https://github.com/friendsoftwig/twigcs/tree/v6.0.0"
             },
-            "time": "2021-09-21T21:04:19+00:00"
+            "time": "2021-12-15T11:20:27+00:00"
         },
         {
             "name": "m6web/redis-mock",
@@ -12868,5 +12868,5 @@
     "platform-overrides": {
         "php": "7.4.29"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }

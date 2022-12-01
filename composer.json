@@ -123,7 +123,7 @@
         "dama/doctrine-test-bundle": "^6.0",
         "doctrine/doctrine-fixtures-bundle": "~3.0",
         "friendsofphp/php-cs-fixer": "~2.13",
-        "friendsoftwig/twigcs": "^5.1",
+        "friendsoftwig/twigcs": "^6.0",
         "m6web/redis-mock": "^5.0",
         "php-http/mock-client": "^1.0",
         "phpstan/extension-installer": "^1.0",
