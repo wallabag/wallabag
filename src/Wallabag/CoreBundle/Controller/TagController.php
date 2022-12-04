@@ -76,7 +76,7 @@ class TagController extends Controller
             $em->flush();
         }
 
-        $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'), '', true);
+        $redirectUrl = $this->get(Redirect::class)->to($request->getSession()->get('prevUrl'), '', true);
 
         return $this->redirect($redirectUrl);
     }
@@ -159,7 +159,7 @@ class TagController extends Controller
         $form = $this->createForm(RenameTagType::class, new Tag());
         $form->handleRequest($request);
 
-        $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'), '', true);
+        $redirectUrl = $this->get(Redirect::class)->to($request->getSession()->get('prevUrl'), '', true);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $newTag = new Tag();
@@ -227,7 +227,7 @@ class TagController extends Controller
 
         $em->flush();
 
-        return $this->redirect($this->get(Redirect::class)->to($request->headers->get('referer'), '', true));
+        return $this->redirect($this->get(Redirect::class)->to($request->getSession()->get('prevUrl'), '', true));
     }
 
     /**
@@ -253,6 +253,6 @@ class TagController extends Controller
 
         $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'), '', true);
 
-        return $this->redirect($redirectUrl);
+        return $this->redirect($this->get(Redirect::class)->to($request->getSession()->get('prevUrl'), '', true));
     }
 }

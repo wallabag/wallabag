@@ -626,7 +626,7 @@ class ConfigController extends Controller
         $em->persist($user);
         $em->flush();
 
-        return $this->redirect($request->headers->get('referer'));
+        return $this->redirect($request->getSession()->get('prevUrl'));
     }
 
     /**

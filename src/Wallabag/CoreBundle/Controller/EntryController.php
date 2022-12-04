@@ -110,9 +110,7 @@ class EntryController extends Controller
             $em->flush();
         }
 
-        $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'));
-
-        return $this->redirect($redirectUrl);
+        return $this->redirect($this->get(Redirect::class)->to($request->getSession()->get('prevUrl')));
     }
 
     /**
@@ -379,6 +377,7 @@ class EntryController extends Controller
     public function viewAction(Entry $entry)
     {
         $this->checkUserAction($entry);
+        $this->get('session')->set('prevUrl', $this->generateUrl('view', ['id' => $entry->getId()]));
 
         return $this->render(
             '@WallabagCore/Entry/entry.html.twig',
@@ -443,9 +442,7 @@ class EntryController extends Controller
             $message
         );
 
-        $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'));
-
-        return $this->redirect($redirectUrl);
+        return $this->redirect($this->get(Redirect::class)->to($request->getSession()->get('prevUrl')));
     }
 
     /**
@@ -473,9 +470,7 @@ class EntryController extends Controller
             $message
         );
 
-        $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'));
-
-        return $this->redirect($redirectUrl);
+        return $this->redirect($this->get(Redirect::class)->to($request->getSession()->get('prevUrl')));
     }
 
     /**
@@ -509,10 +504,9 @@ class EntryController extends Controller
             'flashes.entry.notice.entry_deleted'
         );
 
-        // don't redirect user to the deleted entry (check that the referer doesn't end with the same url)
-        $referer = $request->headers->get('referer');
-        $to = (1 !== preg_match('#' . $url . '$#i', $referer) ? $referer : null);
-
+        // don't redirect user to the deleted entry
+        $prev = $request->getSession()->get('prevUrl');
+        $to = (1 !== preg_match('#' . $url . '$#i', $prev) ? $prev : null);
         $redirectUrl = $this->get(Redirect::class)->to($to);
 
         return $this->redirect($redirectUrl);
@@ -612,6 +606,7 @@ class EntryController extends Controller
         $repository = $this->get(EntryRepository::class);
         $searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
         $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
+        $request->getSession()->set('prevUrl', $request->getRequestUri());
 
         $formOptions = [];
 
