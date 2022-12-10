@@ -124,7 +124,7 @@ class TagControllerTest extends WallabagCoreTestCase
 
         // We make a first request to set an history and test redirection after tag deletion
         $client->request('GET', '/view/' . $entry->getId());
-        $entryUri = $client->getRequest()->getUri();
+        $entryUri = $client->getRequest()->getRequestUri();
         $client->request('GET', '/remove-tag/' . $entry->getId() . '/' . $tag->getId());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
