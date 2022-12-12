@@ -36,6 +36,8 @@ menu:
         theme_toggle_auto: Tema automático
         theme_toggle_dark: Tema oscuro
         theme_toggle_light: Tema claro
+        ignore_origin_instance_rules: Ignorar las reglas de origen de forma global
+        with_annotations: Con anotaciones
     top:
         add_new_entry: 'Añadir un nuevo artículo'
         search: 'Buscar'
@@ -63,6 +65,7 @@ config:
         new_user: 'Añadir un usuario'
         reset: 'Reiniciar mi cuenta'
         rss: RSS
+        ignore_origin: Ignorar reglas de origen
     form:
         save: 'Guardar'
     form_settings:
@@ -188,18 +191,29 @@ config:
             enable: Habilitar
             two_factor_code_description_2: 'Puedes escanear ese Código QR con tu applicación:'
             qrcode_label: Código QR
+            two_factor_code_description_5: 'Si no puede ver el código QR o no puede escanearlo, ingrese el siguiente secreto en su aplicación:'
+            two_factor_code_description_1: Acaba de habilitar la autenticación de dos factores OTP, abra su aplicación OTP y use ese código para obtener una contraseña de un solo uso. Desaparecerá después de recargar la página.
+            two_factor_code_description_4: 'Pruebe un código OTP desde su aplicación configurada:'
+            two_factor_code_description_3: 'Además, guarde estos códigos de respaldo en un lugar seguro, puede usarlos en caso de que pierda el acceso a su aplicación OTP:'
         page_title: Autenticación de doble factor
     form_ignore_origin_rules:
         faq:
             operator_description:
                 equal_to: Igual a…
                 label: Operador
+                matches: 'Comprueba que un <i>asunto</i> coincide con una <i>búsqueda</i> (no distingue entre mayúsculas y minúsculas).<br />Ejemplo: <code>_all ~ "https?://rss.example.com/ foobar/.*"</code>'
             variable_description:
                 label: Variable
+                host: Host de las dirección
+                _all: Dirección completa, principalmente para coincidencia de patrones
             meaning: Significado
             variables_available_title: ¿Qué variables y operadores se pueden utilizar para escribir las reglas?
             how_to_use_them_title: ¿Cómo se utilizan?
             title: Preguntas frecuentes (FAQ)
+            ignore_origin_rules_definition_title: ¿Qué significa "ignorar reglas de origen"?
+            how_to_use_them_description: Supongamos que desea ignorar el origen de un artículo procedente de « <i>rss.example.com</i> » (<i>sabiendo que después de la redirección, la dirección real es example.com</i>) .<br />En ese caso, debe poner « host = "rss.example.com" » en el campo <i>Regla</i>.
+            variables_available_description: 'Las siguientes variables y operadores se pueden usar para crear reglas de origen ignoradas:'
+            ignore_origin_rules_definition_description: Wallabag las utiliza para ignorar automáticamente una dirección de origen después de una redirección.<br />Si se produce una redirección mientras se obtiene un nuevo artículo, todas las reglas de origen ignoradas (<i>definidas por el usuario y por la instancia</i>) serán utilizadas para ignorar la dirección de origen.
     form_feed:
         feed_link:
             all: Todos
@@ -208,6 +222,12 @@ config:
             unread: No leídos
         token_reset: Regenerar tu token
         token_create: Crear tu token
+        no_token: Sin token
+        feed_links: Enlaces del feed
+        token_label: Token del feed
+        token_revoke: Revocar el token
+        feed_limit: Número de artículos en el feed
+        description: Los feeds Atom proporcionados por wallabag le permiten leer sus artículos guardados con su lector Atom favorito. Primero debes generar un token.
 entry:
     default_title: 'Título del artículo'
     page_titles:
@@ -219,6 +239,8 @@ entry:
         filtered_search: 'Filtrado por búsqueda:'
         untagged: 'Artículos sin etiquetas'
         all: "Todos los artículos"
+        with_annotations: Artículos con anotaciones
+        same_domain: Mismo dominio
     list:
         number_on_the_page: '{0} No hay artículos.|{1} Hay un artículo.|]1,Inf[ Hay %count% artículos.'
         reading_time: 'tiempo estimado de lectura'
@@ -232,6 +254,8 @@ entry:
         toogle_as_star: 'Marcar como favorito / no favorito'
         delete: 'Eliminar'
         export_title: 'Exportar'
+        assign_search_tag: Asigne esta búsqueda como una etiqueta a cada resultado
+        show_same_domain: Mostrar artículos con el mismo dominio
     filters:
         title: 'Filtros'
         status_label: 'Estado'
@@ -256,6 +280,7 @@ entry:
             filter: 'Filtrar'
         is_public_help: Enlace público
         is_public_label: Tiene un enlace público
+        annotated_label: Anotado
     view:
         left_menu:
             back_to_top: 'Volver al principio'
@@ -279,6 +304,7 @@ entry:
             theme_toggle_auto: Automático
             theme_toggle_dark: Oscuro
             theme_toggle_light: Claro
+            theme_toggle: Alternar tema
         edit_title: 'Modificar el título'
         original_article: 'original'
         annotations_on_the_entry: '{0} Sin anotaciones|{1} Una anotación|]1,Inf[ %count% anotaciones'
@@ -454,6 +480,8 @@ tag:
     new:
         add: 'Añadir'
         placeholder: 'Puedes añadir varias etiquetas, separadas por comas.'
+    confirm:
+        delete: Eliminar la etiqueta %name%
 import:
     page_title: 'Importar'
     page_description: 'Bienvenido a la herramienta de importación de wallabag. Seleccione el servicio desde el que desea migrar.'
@@ -503,6 +531,13 @@ import:
         page_title: "Importar > Pinboard"
         description: 'Importa todos tus artículos de Pinboard. En la página de backup (https://pinboard.in/settings/backup), haz clic en "JSON" en la sección "Marcadores". Obtendrás un archivo JSON llamado "pinboard_export".'
         how_to: 'Seleccione el archivo exportado de Pinboard y haga clic en el botón para importarlo.'
+    elcurator:
+        description: Importa todos tus artículos de elCurator. Ve a la página de preferencias en tu cuenta de elCurator y exporta tu contenido. Obtendrás un fichero JSON.
+        page_title: Importar > elCurator
+    delicious:
+        page_title: Importar > del.icio.us
+        description: Importa todos tus artículos de Delicious. Desde 2021 puedes exportar tus datos de nuevo utilizando la página de exportación (https://del.icio.us/export). Elige el formato "JSON" y descárgalo (por ejemplo "delicious_export.2021.02.06_21.10.json").
+        how_to: Seleccione el archivo exportado de Delicious y haga clic en el botón para importarlo.
 developer:
     page_title: 'Gestión de clientes API'
     welcome_message: 'Bienvenido al API de wallabag'
@@ -623,6 +658,10 @@ flashes:
             rss_updated: Información RSS actualizada
             otp_disabled: Autenticación de doble factor deshabilitada
             otp_enabled: Autenticación de doble factor habilitada
+            tagging_rules_imported: Reglas de etiquetado importadas
+            tagging_rules_not_imported: Error durante la importación de las reglas de etiquetado
+            ignore_origin_rules_deleted: Regla de origen ignorado eliminada
+            ignore_origin_rules_updated: Regla de origen ignorado actualizada
     entry:
         notice:
             entry_already_saved: 'Artículo ya guardado el %fecha%'
@@ -664,6 +703,11 @@ flashes:
             deleted: Eliminada credencial del sitio para "%host%"
             updated: Actualizada credencial del sitio para "%host%"
             added: Añadida credencial del sitio para "%host%"
+    ignore_origin_instance_rule:
+        notice:
+            added: Regla de origen ignorado global añadida
+            updated: Regla de origen ignorado global actualizada
+            deleted: Regla de origen ignorado global eliminada
 export:
     unknown: Desconocido
     footer_template: <div style="text-align:center;"><p>Producido por wallabag con %method%</p><p>Por favor, abre <a href="https://github.com/wallabag/wallabag/issues">un issue</a> si tiene problemas con la visualización de este libro electrónico en su dispositivo.</p></div>
@@ -679,3 +723,8 @@ ignore_origin_instance_rule:
         yes: Sí
         edit_action: Editar
         actions: Acciones
+        create_new_one: Crear una nueva regla de origen ignorada global
+    edit_ignore_origin_instance_rule: Editar una regla de origen ignorada global
+    page_title: Reglas de origen ignoradas globales
+    new_ignore_origin_instance_rule: Crear una regla de origen ignorada global
+    description: Aquí puede administrar las reglas de origen ignoradas globales utilizadas para ignorar algunos patrones de la URL de origen.
