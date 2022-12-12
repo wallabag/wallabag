@@ -48,7 +48,7 @@
     "eslint-webpack-plugin": "^3.2.0",
     "file-loader": "^6.2.0",
     "lato-font": "^3.0.0",
-    "mini-css-extract-plugin": "^2.7.1",
+    "mini-css-extract-plugin": "^2.7.2",
     "node-sass": "^8.0.0",
     "postcss": "^8.4.20",
     "postcss-loader": "^7.0.2",
