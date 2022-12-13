@@ -17,9 +17,6 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('wallabag_api');
-
-        return $treeBuilder;
+        return new TreeBuilder('wallabag_api');
     }
 }

@@ -9,8 +9,8 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('wallabag_import');
+        $treeBuilder = new TreeBuilder('wallabag_import');
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()

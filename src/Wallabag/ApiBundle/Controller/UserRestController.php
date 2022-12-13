@@ -11,6 +11,7 @@ use JMS\Serializer\SerializerInterface;
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use Swagger\Annotations as SWG;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -159,7 +160,7 @@ class UserRestController extends WallabagRestController
 
         // dispatch a created event so the associated config will be created
         $event = new UserEvent($user, $request);
-        $this->get(EventDispatcherInterface::class)->dispatch(FOSUserEvents::USER_CREATED, $event);
+        LegacyEventDispatcherProxy::decorate($this->get(EventDispatcherInterface::class))->dispatch($event, FOSUserEvents::USER_CREATED);
 
         return $this->sendUser($user, 'user_api_with_client', JsonResponse::HTTP_CREATED);
     }
