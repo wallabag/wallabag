@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc0c126bf501094a4b8c98a716144025",
+    "content-hash": "1f8a79370f002fa3000a7b9274c57861",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -5627,27 +5627,29 @@
         },
         {
             "name": "lexik/form-filter-bundle",
-            "version": "v5.0.10",
+            "version": "v6.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lexik/LexikFormFilterBundle.git",
-                "reference": "92df0638173979dc906bda7a33a10b98429d2057"
+                "reference": "e54df9706b9a4e7b16a775b920572a1008d3d60f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lexik/LexikFormFilterBundle/zipball/92df0638173979dc906bda7a33a10b98429d2057",
-                "reference": "92df0638173979dc906bda7a33a10b98429d2057",
+                "url": "https://api.github.com/repos/lexik/LexikFormFilterBundle/zipball/e54df9706b9a4e7b16a775b920572a1008d3d60f",
+                "reference": "e54df9706b9a4e7b16a775b920572a1008d3d60f",
                 "shasum": ""
             },
             "require": {
-                "doctrine/orm": "^2.4.8",
-                "php": ">=5.5.9",
-                "symfony/form": "~2.8|~3.0|^4.0",
-                "symfony/framework-bundle": "~2.8|~3.0|^4.0"
+                "doctrine/orm": "^2.7",
+                "php": ">=7.1",
+                "symfony/form": "^4.4|^5.1",
+                "symfony/framework-bundle": "^4.4|^5.1"
             },
             "require-dev": {
-                "doctrine/mongodb-odm-bundle": "^3.0",
-                "phpunit/phpunit": "~5.0|^7.5"
+                "doctrine/doctrine-bundle": "^1.8 || ^2.0",
+                "doctrine/mongodb-odm-bundle": "^4.1",
+                "symfony/phpunit-bridge": "^4.4|^5.1",
+                "symfony/var-dumper": "^4.4|^5.1"
             },
             "suggest": {
                 "alcaeus/mongo-php-adapter": "Install this package if using the PHP 7 MongoDB Driver"
@@ -5669,12 +5671,12 @@
             ],
             "authors": [
                 {
-                    "name": "Dev Lexik",
-                    "email": "dev@lexik.fr"
-                },
-                {
                     "name": "Cedric Girard",
                     "email": "c.girard@lexik.fr"
+                },
+                {
+                    "name": "Dev Lexik",
+                    "email": "dev@lexik.fr"
                 }
             ],
             "description": "This bundle aim to provide classes to build some form filters and then build a doctrine query from this form filter.",
@@ -5688,9 +5690,9 @@
             ],
             "support": {
                 "issues": "https://github.com/lexik/LexikFormFilterBundle/issues",
-                "source": "https://github.com/lexik/LexikFormFilterBundle/tree/master"
+                "source": "https://github.com/lexik/LexikFormFilterBundle/tree/v6.1.1"
             },
-            "time": "2019-04-17T17:58:44+00:00"
+            "time": "2021-08-20T09:12:03+00:00"
         },
         {
             "name": "masterminds/html5",
