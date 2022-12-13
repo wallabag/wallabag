@@ -90,7 +90,7 @@
         "ocramius/proxy-manager": "^2.1.1",
         "pagerfanta/pagerfanta": "^2.4",
         "php-amqplib/php-amqplib": "^2.12",
-        "php-amqplib/rabbitmq-bundle": "^1.14",
+        "php-amqplib/rabbitmq-bundle": "^2.11",
         "php-http/client-common": "^2.4",
         "php-http/discovery": "^1.14",
         "php-http/guzzle5-adapter": "^2.0",
