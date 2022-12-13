@@ -68,7 +68,7 @@
         "enshrined/svg-sanitize": "^0.15.4",
         "friendsofsymfony/jsrouting-bundle": "^2.2",
         "friendsofsymfony/oauth-server-bundle": "^1.5",
-        "friendsofsymfony/rest-bundle": "~2.1",
+        "friendsofsymfony/rest-bundle": "~3.1",
         "friendsofsymfony/user-bundle": "2.1.*",
         "guzzlehttp/guzzle": "^5.3.1",
         "guzzlehttp/psr7": "^1.8",
