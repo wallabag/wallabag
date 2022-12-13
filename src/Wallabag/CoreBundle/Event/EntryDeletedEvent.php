@@ -10,7 +10,7 @@ use Wallabag\CoreBundle\Entity\Entry;
  */
 class EntryDeletedEvent extends Event
 {
-    const NAME = 'entry.deleted';
+    public const NAME = 'entry.deleted';
 
     protected $entry;
 

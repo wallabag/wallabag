@@ -47,7 +47,7 @@ class TagsAssigner
             $label = trim(mb_convert_case($label, \MB_CASE_LOWER));
 
             // avoid empty tag
-            if (0 === \strlen($label)) {
+            if ('' === $label) {
                 continue;
             }
 

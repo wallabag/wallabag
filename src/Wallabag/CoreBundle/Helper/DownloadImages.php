@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeExtensionGuesser;
 
 class DownloadImages
 {
-    const REGENERATE_PICTURES_QUALITY = 80;
+    public const REGENERATE_PICTURES_QUALITY = 80;
 
     private $client;
     private $baseFolder;
