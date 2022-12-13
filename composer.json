@@ -103,7 +103,7 @@
         "psr/http-message": "^1.0",
         "psr/log": "^1.1",
         "scheb/two-factor-bundle": "^4.11.0",
-        "sensio/framework-extra-bundle": "^5.2",
+        "sensio/framework-extra-bundle": "^6.2",
         "sentry/sentry-symfony": "3.5.3",
         "stof/doctrine-extensions-bundle": "^1.2",
         "swiftmailer/swiftmailer": "^6.3",
