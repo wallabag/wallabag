@@ -80,7 +80,7 @@
         "jms/serializer-bundle": "~3.6",
         "kphoen/rulerz": "^0.21",
         "kphoen/rulerz-bundle": "~0.13",
-        "laminas/laminas-code": "^3.4",
+        "laminas/laminas-code": "^4.7",
         "laminas/laminas-diactoros": "^2.3",
         "lexik/form-filter-bundle": "^5.0.4",
         "mgargano/simplehtmldom": "~1.5",
