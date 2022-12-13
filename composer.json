@@ -122,7 +122,7 @@
     "require-dev": {
         "dama/doctrine-test-bundle": "^6.0",
         "doctrine/doctrine-fixtures-bundle": "~3.0",
-        "friendsofphp/php-cs-fixer": "~2.13",
+        "friendsofphp/php-cs-fixer": "~3.4",
         "friendsoftwig/twigcs": "^6.0",
         "m6web/redis-mock": "^5.0",
         "php-http/mock-client": "^1.0",

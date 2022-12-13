@@ -10,7 +10,7 @@ use Wallabag\CoreBundle\Entity\Entry;
  */
 class EntrySavedEvent extends Event
 {
-    const NAME = 'entry.saved';
+    public const NAME = 'entry.saved';
 
     protected $entry;
 

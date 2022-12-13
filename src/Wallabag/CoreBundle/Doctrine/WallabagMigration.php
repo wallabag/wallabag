@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 abstract class WallabagMigration extends AbstractMigration implements ContainerAwareInterface
 {
-    const UN_ESCAPED_TABLE = true;
+    public const UN_ESCAPED_TABLE = true;
 
     /**
      * @var ContainerInterface
