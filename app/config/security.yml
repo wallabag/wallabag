@@ -34,12 +34,10 @@ security:
             provider: fos_userbundle
 
         login_firewall:
-            logout_on_user_change: true
             pattern: ^/login$
             anonymous:  ~
 
         secured_area:
-            logout_on_user_change: true
             pattern: ^/
             form_login:
                 provider: fos_userbundle

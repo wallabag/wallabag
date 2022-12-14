@@ -179,8 +179,10 @@ fos_user:
         confirmation:
             enabled: "%fosuser_confirmation%"
     from_email:
-        address:        "%from_email%"
-        sender_name:    wallabag
+        address: "%from_email%"
+        sender_name: wallabag
+    service:
+        mailer: fos_user.mailer.twig_swift
 
 fos_oauth_server:
     db_driver:           orm

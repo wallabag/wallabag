@@ -4,7 +4,7 @@ namespace Wallabag\CoreBundle\Helper;
 
 use Graby\Graby;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeExtensionGuesser;
+use Symfony\Component\Mime\MimeTypes;
 use Symfony\Component\Validator\Constraints\Locale as LocaleConstraint;
 use Symfony\Component\Validator\Constraints\Url as UrlConstraint;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -22,7 +22,7 @@ class ContentProxy
     protected $ignoreOriginProcessor;
     protected $validator;
     protected $logger;
-    protected $mimeGuesser;
+    protected $mimeTypes;
     protected $fetchingErrorMessage;
     protected $eventDispatcher;
     protected $storeArticleHeaders;
@@ -34,7 +34,7 @@ class ContentProxy
         $this->ignoreOriginProcessor = $ignoreOriginProcessor;
         $this->validator = $validator;
         $this->logger = $logger;
-        $this->mimeGuesser = new MimeTypeExtensionGuesser();
+        $this->mimeTypes = new MimeTypes();
         $this->fetchingErrorMessage = $fetchingErrorMessage;
         $this->storeArticleHeaders = $storeArticleHeaders;
     }
@@ -296,7 +296,7 @@ class ContentProxy
         }
 
         // if content is an image, define it as a preview too
-        if (!empty($content['headers']['content-type']) && \in_array($this->mimeGuesser->guess($content['headers']['content-type']), ['jpeg', 'jpg', 'gif', 'png'], true)) {
+        if (!empty($content['headers']['content-type']) && \in_array(current($this->mimeTypes->getExtensions($content['headers']['content-type'])), ['jpeg', 'jpg', 'gif', 'png'], true)) {
             $previewPictureUrl = $content['url'];
         } elseif (empty($previewPictureUrl)) {
             $this->logger->debug('Extracting images from content to provide a default preview picture');

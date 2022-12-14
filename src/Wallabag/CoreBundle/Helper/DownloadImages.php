@@ -15,7 +15,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeExtensionGuesser;
+use Symfony\Component\Mime\MimeTypes;
 
 class DownloadImages
 {
@@ -24,7 +24,7 @@ class DownloadImages
     private $client;
     private $baseFolder;
     private $logger;
-    private $mimeGuesser;
+    private $mimeTypes;
     private $wallabagUrl;
 
     public function __construct(HttpClient $client, $baseFolder, $wallabagUrl, LoggerInterface $logger, MessageFactory $messageFactory = null)
@@ -33,7 +33,7 @@ class DownloadImages
         $this->baseFolder = $baseFolder;
         $this->wallabagUrl = rtrim($wallabagUrl, '/');
         $this->logger = $logger;
-        $this->mimeGuesser = new MimeTypeExtensionGuesser();
+        $this->mimeTypes = new MimeTypes();
 
         $this->setFolder();
     }
@@ -355,7 +355,7 @@ class DownloadImages
      */
     private function getExtensionFromResponse(ResponseInterface $res, $imagePath)
     {
-        $ext = $this->mimeGuesser->guess(current($res->getHeader('content-type')));
+        $ext = current($this->mimeTypes->getExtensions(current($res->getHeader('content-type'))));
         $this->logger->debug('DownloadImages: Checking extension', ['ext' => $ext, 'header' => $res->getHeader('content-type')]);
 
         // ok header doesn't have the extension, try a different way
