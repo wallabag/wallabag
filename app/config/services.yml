@@ -278,3 +278,13 @@ services:
     Wallabag\ImportBundle\Import\ChromeImport:
         tags:
             -  { name: wallabag_import.import, alias: chrome }
+
+    # to factorize the proximity and bypass translation for prev & next
+    pagerfanta.view.default_wallabag:
+        class: Pagerfanta\View\OptionableView
+        arguments:
+            - '@pagerfanta.view.twitter_bootstrap'
+            - { proximity: 1, prev_message: "<", next_message: ">" }
+        public: false
+        tags:
+            - { name: pagerfanta.view, alias: default_wallabag }
