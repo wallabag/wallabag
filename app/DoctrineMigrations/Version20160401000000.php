@@ -10,7 +10,7 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  */
 class Version20160401000000 extends WallabagMigration
 {
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
         $this->skipIf($schema->hasTable($this->getTable('entry')), 'Database already initialized');
 
@@ -70,7 +70,7 @@ CREATE TABLE {$this->getTable('oauth2_clients')} (id INT AUTO_INCREMENT NOT NULL
 CREATE TABLE {$this->getTable('oauth2_access_tokens')} (id INT AUTO_INCREMENT NOT NULL, client_id INT NOT NULL, user_id INT DEFAULT NULL, token VARCHAR(255) NOT NULL, expires_at INT DEFAULT NULL, scope VARCHAR(255) DEFAULT NULL, UNIQUE INDEX UNIQ_368A42095F37A13B (token), INDEX IDX_368A420919EB6921 (client_id), INDEX IDX_368A4209A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
 CREATE TABLE {$this->getTable('oauth2_refresh_tokens')} (id INT AUTO_INCREMENT NOT NULL, client_id INT NOT NULL, user_id INT DEFAULT NULL, token VARCHAR(255) NOT NULL, expires_at INT DEFAULT NULL, scope VARCHAR(255) DEFAULT NULL, UNIQUE INDEX UNIQ_20C9FB245F37A13B (token), INDEX IDX_20C9FB2419EB6921 (client_id), INDEX IDX_20C9FB24A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
 CREATE TABLE {$this->getTable('oauth2_auth_codes')} (id INT AUTO_INCREMENT NOT NULL, client_id INT NOT NULL, user_id INT DEFAULT NULL, token VARCHAR(255) NOT NULL, redirect_uri LONGTEXT NOT NULL, expires_at INT DEFAULT NULL, scope VARCHAR(255) DEFAULT NULL, UNIQUE INDEX UNIQ_EE52E3FA5F37A13B (token), INDEX IDX_EE52E3FA19EB6921 (client_id), INDEX IDX_EE52E3FAA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
-CREATE TABLE {$this->getTable('user')} (id INT AUTO_INCREMENT NOT NULL, username VARCHAR(180) NOT NULL, username_canonical VARCHAR(180) NOT NULL, email VARCHAR(180) NOT NULL, email_canonical VARCHAR(180) NOT NULL, enabled TINYINT(1) NOT NULL, salt VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, last_login DATETIME DEFAULT NULL, locked TINYINT(1) NOT NULL, expired TINYINT(1) NOT NULL, expires_at DATETIME DEFAULT NULL, confirmation_token VARCHAR(255) DEFAULT NULL, password_requested_at DATETIME DEFAULT NULL, roles LONGTEXT NOT NULL COMMENT '(DC2Type:array)', credentials_expired TINYINT(1) NOT NULL, credentials_expire_at DATETIME DEFAULT NULL, name LONGTEXT DEFAULT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, authCode INT DEFAULT NULL, twoFactorAuthentication TINYINT(1) NOT NULL, trusted LONGTEXT DEFAULT NULL COMMENT '(DC2Type:json_array)', UNIQUE INDEX UNIQ_1D63E7E592FC23A8 (username_canonical), UNIQUE INDEX UNIQ_1D63E7E5A0D96FBF (email_canonical), UNIQUE INDEX UNIQ_1D63E7E5C05FB297 (confirmation_token), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
+CREATE TABLE {$this->getTable('user')} (id INT AUTO_INCREMENT NOT NULL, username VARCHAR(180) NOT NULL, username_canonical VARCHAR(180) NOT NULL, email VARCHAR(180) NOT NULL, email_canonical VARCHAR(180) NOT NULL, enabled TINYINT(1) NOT NULL, salt VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, last_login DATETIME DEFAULT NULL, locked TINYINT(1) NOT NULL, expired TINYINT(1) NOT NULL, expires_at DATETIME DEFAULT NULL, confirmation_token VARCHAR(255) DEFAULT NULL, password_requested_at DATETIME DEFAULT NULL, roles LONGTEXT NOT NULL COMMENT '(DC2Type:array)', credentials_expired TINYINT(1) NOT NULL, credentials_expire_at DATETIME DEFAULT NULL, name LONGTEXT DEFAULT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, authCode INT DEFAULT NULL, twoFactorAuthentication TINYINT(1) NOT NULL, trusted LONGTEXT DEFAULT NULL COMMENT '(DC2Type:json)', UNIQUE INDEX UNIQ_1D63E7E592FC23A8 (username_canonical), UNIQUE INDEX UNIQ_1D63E7E5A0D96FBF (email_canonical), UNIQUE INDEX UNIQ_1D63E7E5C05FB297 (confirmation_token), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
 CREATE TABLE {$this->getTable('annotation')} (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, entry_id INT DEFAULT NULL, text LONGTEXT NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, quote VARCHAR(255) NOT NULL, ranges LONGTEXT NOT NULL COMMENT '(DC2Type:array)', INDEX IDX_A7AED006A76ED395 (user_id), INDEX IDX_A7AED006BA364942 (entry_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
 ALTER TABLE {$this->getTable('entry')} ADD CONSTRAINT FK_F4D18282A76ED395 FOREIGN KEY (user_id) REFERENCES {$this->getTable('user')} (id);
 ALTER TABLE {$this->getTable('entry_tag')} ADD CONSTRAINT FK_C9F0DD7CBA364942 FOREIGN KEY (entry_id) REFERENCES {$this->getTable('entry')} (id);
@@ -127,7 +127,7 @@ CREATE UNIQUE INDEX UNIQ_1D63E7E592FC23A8 ON {$this->getTable('user')} (username
 CREATE UNIQUE INDEX UNIQ_1D63E7E5A0D96FBF ON {$this->getTable('user')} (email_canonical);
 CREATE UNIQUE INDEX UNIQ_1D63E7E5C05FB297 ON {$this->getTable('user')} (confirmation_token);
 COMMENT ON COLUMN {$this->getTable('user')}.roles IS '(DC2Type:array)';
-COMMENT ON COLUMN {$this->getTable('user')}.trusted IS '(DC2Type:json_array)';
+COMMENT ON COLUMN {$this->getTable('user')}.trusted IS '(DC2Type:json)';
 CREATE TABLE {$this->getTable('annotation')} (id INT NOT NULL, user_id INT DEFAULT NULL, entry_id INT DEFAULT NULL, text TEXT NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, quote VARCHAR(255) NOT NULL, ranges TEXT NOT NULL, PRIMARY KEY(id));
 CREATE INDEX IDX_A7AED006A76ED395 ON {$this->getTable('annotation')} (user_id);
 CREATE INDEX IDX_A7AED006BA364942 ON {$this->getTable('annotation')} (entry_id);
@@ -164,7 +164,7 @@ SQL
         }
     }
 
-    public function down(Schema $schema)
+    public function down(Schema $schema): void
     {
         $this->addSql("DROP TABLE {$this->getTable('craue_config_setting')}");
         $this->addSql("DROP TABLE {$this->getTable('tagging_rule')}");

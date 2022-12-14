@@ -10,7 +10,7 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  */
 class Version20160812120952 extends WallabagMigration
 {
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
         $clientsTable = $schema->getTable($this->getTable('oauth2_clients'));
         $this->skipIf($clientsTable->hasColumn('name'), 'It seems that you already played this migration.');
@@ -31,7 +31,7 @@ class Version20160812120952 extends WallabagMigration
         }
     }
 
-    public function down(Schema $schema)
+    public function down(Schema $schema): void
     {
         $clientsTable = $schema->getTable($this->getTable('oauth2_clients'));
 

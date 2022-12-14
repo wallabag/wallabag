@@ -17,7 +17,7 @@ class Version20170510082609 extends WallabagMigration
         'email_canonical',
     ];
 
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
         $this->skipIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'This migration only apply to MySQL');
 
@@ -26,7 +26,7 @@ class Version20170510082609 extends WallabagMigration
         }
     }
 
-    public function down(Schema $schema)
+    public function down(Schema $schema): void
     {
         $this->skipIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'This migration only apply to MySQL');
 

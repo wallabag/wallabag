@@ -11,7 +11,7 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  */
 class Version20170511211659 extends WallabagMigration
 {
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
         switch ($this->connection->getDatabasePlatform()->getName()) {
             case 'sqlite':
@@ -62,7 +62,7 @@ EOD
         }
     }
 
-    public function down(Schema $schema)
+    public function down(Schema $schema): void
     {
         $tableName = $this->getTable('annotation');
 

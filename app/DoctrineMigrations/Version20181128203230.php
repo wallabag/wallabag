@@ -10,7 +10,7 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  */
 class Version20181128203230 extends WallabagMigration
 {
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
         $this->skipIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'This migration can only be applied on \'mysql\'.');
 
@@ -25,7 +25,7 @@ class Version20181128203230 extends WallabagMigration
         $this->addSql('ALTER TABLE ' . $this->getTable('craue_config_setting') . ' CHANGE `value` `value` varchar(191)');
     }
 
-    public function down(Schema $schema)
+    public function down(Schema $schema): void
     {
         $this->skipIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'This migration can only be applied on \'mysql\'.');
 

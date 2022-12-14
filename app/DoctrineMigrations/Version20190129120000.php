@@ -118,13 +118,13 @@ final class Version20190129120000 extends WallabagMigration
         ],
     ];
 
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
         foreach ($this->settings as $setting) {
             $settingEnabled = $this->container
                 ->get('doctrine.orm.default_entity_manager')
                 ->getConnection()
-                ->fetchArray('SELECT * FROM ' . $this->getTable('craue_config_setting') . " WHERE name = '" . $setting['name'] . "'");
+                ->fetchOne('SELECT * FROM ' . $this->getTable('craue_config_setting') . " WHERE name = '" . $setting['name'] . "'");
 
             if (false !== $settingEnabled) {
                 continue;
@@ -134,7 +134,7 @@ final class Version20190129120000 extends WallabagMigration
         }
     }
 
-    public function down(Schema $schema)
+    public function down(Schema $schema): void
     {
         $this->skipIf(true, 'These settings are required and should not be removed.');
     }

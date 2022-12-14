@@ -3,8 +3,8 @@
 namespace Tests\Wallabag\CoreBundle\Event\Subscriber;
 
 use Doctrine\Common\EventManager;
-use Doctrine\DBAL\Platforms\MySqlPlatform;
-use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
+use Doctrine\DBAL\Platforms\MySQLPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
@@ -18,20 +18,20 @@ class TablePrefixSubscriberTest extends TestCase
     public function dataForPrefix()
     {
         return [
-            ['wallabag_', User::class, '`user`', 'user', 'wallabag_user', '"wallabag_user"', new PostgreSqlPlatform()],
-            ['wallabag_', User::class, '`user`', 'user', 'wallabag_user', '`wallabag_user`', new MySqlPlatform()],
+            ['wallabag_', User::class, '`user`', 'user', 'wallabag_user', '"wallabag_user"', new PostgreSQLPlatform()],
+            ['wallabag_', User::class, '`user`', 'user', 'wallabag_user', '`wallabag_user`', new MySQLPlatform()],
             ['wallabag_', User::class, '`user`', 'user', 'wallabag_user', '"wallabag_user"', new SqlitePlatform()],
 
-            ['wallabag_', User::class, 'user', 'user', 'wallabag_user', 'wallabag_user', new PostgreSqlPlatform()],
-            ['wallabag_', User::class, 'user', 'user', 'wallabag_user', 'wallabag_user', new MySqlPlatform()],
+            ['wallabag_', User::class, 'user', 'user', 'wallabag_user', 'wallabag_user', new PostgreSQLPlatform()],
+            ['wallabag_', User::class, 'user', 'user', 'wallabag_user', 'wallabag_user', new MySQLPlatform()],
             ['wallabag_', User::class, 'user', 'user', 'wallabag_user', 'wallabag_user', new SqlitePlatform()],
 
-            ['', User::class, '`user`', 'user', 'user', '"user"', new PostgreSqlPlatform()],
-            ['', User::class, '`user`', 'user', 'user', '`user`', new MySqlPlatform()],
+            ['', User::class, '`user`', 'user', 'user', '"user"', new PostgreSQLPlatform()],
+            ['', User::class, '`user`', 'user', 'user', '`user`', new MySQLPlatform()],
             ['', User::class, '`user`', 'user', 'user', '"user"', new SqlitePlatform()],
 
-            ['', User::class, 'user', 'user', 'user', 'user', new PostgreSqlPlatform()],
-            ['', User::class, 'user', 'user', 'user', 'user', new MySqlPlatform()],
+            ['', User::class, 'user', 'user', 'user', 'user', new PostgreSQLPlatform()],
+            ['', User::class, 'user', 'user', 'user', 'user', new MySQLPlatform()],
             ['', User::class, 'user', 'user', 'user', 'user', new SqlitePlatform()],
         ];
     }
@@ -115,6 +115,6 @@ class TablePrefixSubscriberTest extends TestCase
 
         $this->assertSame('yo_entry', $metaDataEvent->getClassMetadata()->getTableName());
         $this->assertSame('yo_entry_tag', $metaDataEvent->getClassMetadata()->associationMappings['tags']['joinTable']['name']);
-        $this->assertSame('yo_entry', $metaDataEvent->getClassMetadata()->getQuotedTableName(new MySqlPlatform()));
+        $this->assertSame('yo_entry', $metaDataEvent->getClassMetadata()->getQuotedTableName(new MySQLPlatform()));
     }
 }
