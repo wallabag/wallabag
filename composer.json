@@ -89,7 +89,7 @@
         "nelmio/cors-bundle": "~2.2",
         "ocramius/proxy-manager": "^2.1.1",
         "pagerfanta/pagerfanta": "^2.4",
-        "php-amqplib/php-amqplib": "^2.12",
+        "php-amqplib/php-amqplib": "^3.4",
         "php-amqplib/rabbitmq-bundle": "^2.11",
         "php-http/client-common": "^2.4",
         "php-http/discovery": "^1.14",
