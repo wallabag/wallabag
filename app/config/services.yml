@@ -96,9 +96,6 @@ services:
     FOS\UserBundle\Model\UserManagerInterface:
         alias: fos_user.user_manager
 
-    Twig_Extensions_Extension_Text:
-        class: Twig_Extensions_Extension_Text
-
     MatomoTwigExtension\MatomoTwigExtension:
         public: false
 
