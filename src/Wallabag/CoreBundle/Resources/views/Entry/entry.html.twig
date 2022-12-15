@@ -274,7 +274,7 @@
                         <li>
                             <i class="material-icons grey-text" title="{{ 'entry.view.provided_by'|trans }}">launch</i>
                             <a href="{{ entry.originUrl|e }}" target="_blank" rel="noopener" class="tool grey-text">
-                                {{ entry.originUrl|striptags|removeSchemeAndWww|truncate(32) }}
+                                {{ entry.originUrl|striptags|removeSchemeAndWww|u.truncate(32) }}
                             </a>
                         </li>
                     {% endif %}

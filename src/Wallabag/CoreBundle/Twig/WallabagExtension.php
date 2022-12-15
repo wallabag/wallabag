@@ -31,7 +31,7 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
         $this->rootDir = $rootDir;
     }
 
-    public function getGlobals()
+    public function getGlobals(): array
     {
         return [];
     }

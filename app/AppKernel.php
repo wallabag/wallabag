@@ -35,6 +35,7 @@ class AppKernel extends Kernel
             new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
             new Http\HttplugBundle\HttplugBundle(),
             new Sentry\SentryBundle\SentryBundle(),
+            new Twig\Extra\TwigExtraBundle\TwigExtraBundle(),
 
             // wallabag bundles
             new Wallabag\CoreBundle\WallabagCoreBundle(),
