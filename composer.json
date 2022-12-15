@@ -77,7 +77,7 @@
         "j0k3r/graby": "^2.0",
         "javibravo/simpleue": "^2.0",
         "jms/serializer": "^3.17",
-        "jms/serializer-bundle": "~3.6",
+        "jms/serializer-bundle": "~5.0",
         "kphoen/rulerz": "^0.21",
         "kphoen/rulerz-bundle": "~0.13",
         "laminas/laminas-code": "^4.7",
