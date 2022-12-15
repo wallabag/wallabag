@@ -40,11 +40,5 @@ jobs:
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 
-      - name: "Validate Core translations"
-        run: "php bin/console lint:yaml src/Wallabag/CoreBundle/Resources/translations -v"
-
-      - name: "Validate CraueConfig translations"
-        run: "php bin/console lint:yaml app/Resources/CraueConfigBundle/translations -v"
-
-      - name: "Validate User translations"
-        run: "php bin/console lint:yaml src/Wallabag/UserBundle/Resources/translations -v"
+      - name: "Validate translations"
+        run: "php bin/console lint:yaml translations -v"
