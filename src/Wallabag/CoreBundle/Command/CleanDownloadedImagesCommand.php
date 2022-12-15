@@ -2,7 +2,7 @@
 
 namespace Wallabag\CoreBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -11,8 +11,19 @@ use Symfony\Component\Finder\Finder;
 use Wallabag\CoreBundle\Helper\DownloadImages;
 use Wallabag\CoreBundle\Repository\EntryRepository;
 
-class CleanDownloadedImagesCommand extends ContainerAwareCommand
+class CleanDownloadedImagesCommand extends Command
 {
+    private EntryRepository $entryRepository;
+    private DownloadImages $downloadImages;
+
+    public function __construct(EntryRepository $entryRepository, DownloadImages $downloadImages)
+    {
+        $this->entryRepository = $entryRepository;
+        $this->downloadImages = $downloadImages;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -36,8 +47,7 @@ class CleanDownloadedImagesCommand extends ContainerAwareCommand
             $io->text('Dry run mode <info>enabled</info> (no images will be removed)');
         }
 
-        $downloadImages = $this->getContainer()->get(DownloadImages::class);
-        $baseFolder = $downloadImages->getBaseFolder();
+        $baseFolder = $this->downloadImages->getBaseFolder();
 
         $io->text('Retrieve existing images');
 
@@ -58,12 +68,12 @@ class CleanDownloadedImagesCommand extends ContainerAwareCommand
 
         $io->text('Retrieve valid folders attached to a user');
 
-        $entries = $this->getContainer()->get(EntryRepository::class)->findAllEntriesIdByUserId();
+        $entries = $this->entryRepository->findAllEntriesIdByUserId();
 
         // retrieve _valid_ folders from existing entries
         $validPaths = [];
         foreach ($entries as $entry) {
-            $path = $downloadImages->getRelativePath($entry['id']);
+            $path = $this->downloadImages->getRelativePath($entry['id']);
 
             if (!file_exists($baseFolder . '/' . $path)) {
                 continue;
