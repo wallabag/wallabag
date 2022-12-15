@@ -11,7 +11,6 @@ use Pagerfanta\Pagerfanta;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,7 +49,7 @@ class ManageController extends Controller
 
             // dispatch a created event so the associated config will be created
             $event = new UserEvent($user, $request);
-            LegacyEventDispatcherProxy::decorate($this->get(EventDispatcherInterface::class))->dispatch($event, FOSUserEvents::USER_CREATED);
+            $this->get(EventDispatcherInterface::class)->dispatch($event, FOSUserEvents::USER_CREATED);
 
             $this->get(SessionInterface::class)->getFlashBag()->add(
                 'notice',

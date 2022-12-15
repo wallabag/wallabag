@@ -462,7 +462,7 @@ class EntryRestController extends WallabagRestController
 
             if (false !== $entry) {
                 // entry deleted, dispatch event about it!
-                $this->get(EventDispatcherInterface::class)->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
+                $this->get(EventDispatcherInterface::class)->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
 
                 $em = $this->get('doctrine')->getManager();
                 $em->remove($entry);
@@ -539,7 +539,7 @@ class EntryRestController extends WallabagRestController
             $results[$key]['entry'] = $entry instanceof Entry ? $entry->getId() : false;
 
             // entry saved, dispatch event about it!
-            $this->get(EventDispatcherInterface::class)->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+            $this->get(EventDispatcherInterface::class)->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
         }
 
         return $this->sendResponse($results);
@@ -760,7 +760,7 @@ class EntryRestController extends WallabagRestController
         $em->flush();
 
         // entry saved, dispatch event about it!
-        $this->get(EventDispatcherInterface::class)->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+        $this->get(EventDispatcherInterface::class)->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
 
         return $this->sendResponse($entry);
     }
@@ -976,7 +976,7 @@ class EntryRestController extends WallabagRestController
         $em->flush();
 
         // entry saved, dispatch event about it!
-        $this->get(EventDispatcherInterface::class)->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+        $this->get(EventDispatcherInterface::class)->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
 
         return $this->sendResponse($entry);
     }
@@ -1032,7 +1032,7 @@ class EntryRestController extends WallabagRestController
         $em->flush();
 
         // entry saved, dispatch event about it!
-        $this->get(EventDispatcherInterface::class)->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+        $this->get(EventDispatcherInterface::class)->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
 
         return $this->sendResponse($entry);
     }
@@ -1083,7 +1083,7 @@ class EntryRestController extends WallabagRestController
         }
 
         // entry deleted, dispatch event about it!
-        $this->get(EventDispatcherInterface::class)->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
+        $this->get(EventDispatcherInterface::class)->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
 
         $em = $this->get('doctrine')->getManager();
         $em->remove($entry);
