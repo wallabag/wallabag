@@ -197,6 +197,17 @@ services:
         arguments:
             $baseFolder: "%kernel.project_dir%/web/assets/images"
 
+    Wallabag\CoreBundle\Command\ExportCommand:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+
+    Wallabag\CoreBundle\Command\InstallCommand:
+        arguments:
+            $databaseDriver: '%database_driver%'
+            $databaseName: '%database_name%'
+            $defaultSettings: '%wallabag_core.default_internal_settings%'
+            $defaultIgnoreOriginInstanceRules: '%wallabag_core.default_ignore_origin_instance_rules%'
+
     wallabag_core.entry.download_images.client:
         alias: 'httplug.client.wallabag_core.entry.download_images'
 

@@ -3,7 +3,7 @@
 namespace Wallabag\CoreBundle\Command;
 
 use Doctrine\ORM\NoResultException;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -12,8 +12,23 @@ use Wallabag\CoreBundle\Helper\EntriesExport;
 use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\UserBundle\Repository\UserRepository;
 
-class ExportCommand extends ContainerAwareCommand
+class ExportCommand extends Command
 {
+    private EntryRepository $entryRepository;
+    private UserRepository $userRepository;
+    private EntriesExport $entriesExport;
+    private string $projectDir;
+
+    public function __construct(EntryRepository $entryRepository, UserRepository $userRepository, EntriesExport $entriesExport, string $projectDir)
+    {
+        $this->entryRepository = $entryRepository;
+        $this->userRepository = $userRepository;
+        $this->entriesExport = $entriesExport;
+        $this->projectDir = $projectDir;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -38,14 +53,14 @@ class ExportCommand extends ContainerAwareCommand
         $io = new SymfonyStyle($input, $output);
 
         try {
-            $user = $this->getContainer()->get(UserRepository::class)->findOneByUserName($input->getArgument('username'));
+            $user = $this->userRepository->findOneByUserName($input->getArgument('username'));
         } catch (NoResultException $e) {
             $io->error(sprintf('User "%s" not found.', $input->getArgument('username')));
 
             return 1;
         }
 
-        $entries = $this->getContainer()->get(EntryRepository::class)
+        $entries = $this->entryRepository
             ->getBuilderForAllByUser($user->getId())
             ->getQuery()
             ->getResult();
@@ -55,11 +70,11 @@ class ExportCommand extends ContainerAwareCommand
         $filePath = $input->getArgument('filepath');
 
         if (!$filePath) {
-            $filePath = $this->getContainer()->getParameter('kernel.project_dir') . '/' . sprintf('%s-export.json', $user->getUsername());
+            $filePath = $this->projectDir . '/' . sprintf('%s-export.json', $user->getUsername());
         }
 
         try {
-            $data = $this->getContainer()->get(EntriesExport::class)
+            $data = $this->entriesExport
                 ->setEntries($entries)
                 ->updateTitle('All')
                 ->updateAuthor('All')
