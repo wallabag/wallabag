@@ -22,6 +22,10 @@ updates:
   - j0k3r
   - tcitworld
   - Kdecherf
+  ignore:
+  - dependency-name: lcobucci/jwt
+    versions:
+    - ">= 4.2.0"
 - package-ecosystem: github-actions
   directory: "/"
   schedule:
