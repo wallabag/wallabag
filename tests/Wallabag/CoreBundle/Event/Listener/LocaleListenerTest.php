@@ -69,8 +69,8 @@ class LocaleListenerTest extends TestCase
         $dispatcher->addSubscriber($listener);
 
         $dispatcher->dispatch(
-            KernelEvents::REQUEST,
-            $event
+            $event,
+            KernelEvents::REQUEST
         );
 
         $this->assertSame('fr', $request->getLocale());

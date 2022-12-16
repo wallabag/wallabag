@@ -102,7 +102,7 @@ class EntryController extends Controller
                         $entry->removeTag($tag);
                     }
                 } elseif ('delete' === $action) {
-                    $this->get(EventDispatcherInterface::class)->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
+                    $this->get(EventDispatcherInterface::class)->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
                     $em->remove($entry);
                 }
             }
@@ -178,7 +178,7 @@ class EntryController extends Controller
             $em->flush();
 
             // entry saved, dispatch event about it!
-            $this->get(EventDispatcherInterface::class)->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+            $this->get(EventDispatcherInterface::class)->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
 
             return $this->redirect($this->generateUrl('homepage'));
         }
@@ -206,7 +206,7 @@ class EntryController extends Controller
             $em->flush();
 
             // entry saved, dispatch event about it!
-            $this->get(EventDispatcherInterface::class)->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+            $this->get(EventDispatcherInterface::class)->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
         }
 
         return $this->redirect($this->generateUrl('homepage'));
@@ -414,7 +414,7 @@ class EntryController extends Controller
         $em->flush();
 
         // entry saved, dispatch event about it!
-        $this->get(EventDispatcherInterface::class)->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+        $this->get(EventDispatcherInterface::class)->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
 
         return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
     }
@@ -498,7 +498,7 @@ class EntryController extends Controller
         );
 
         // entry deleted, dispatch event about it!
-        $this->get(EventDispatcherInterface::class)->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
+        $this->get(EventDispatcherInterface::class)->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
 
         $em = $this->get('doctrine')->getManager();
         $em->remove($entry);

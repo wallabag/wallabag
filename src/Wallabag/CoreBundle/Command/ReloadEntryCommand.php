@@ -80,7 +80,7 @@ class ReloadEntryCommand extends ContainerAwareCommand
             $em->persist($entry);
             $em->flush();
 
-            $dispatcher->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+            $dispatcher->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
             $progressBar->advance();
 
             $em->detach($entry);

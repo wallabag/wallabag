@@ -57,8 +57,8 @@ class AuthenticationFailureListenerTest extends TestCase
         );
 
         $this->dispatcher->dispatch(
-            AuthenticationEvents::AUTHENTICATION_FAILURE,
-            $event
+            $event,
+            AuthenticationEvents::AUTHENTICATION_FAILURE
         );
 
         $records = $this->logHandler->getRecords();

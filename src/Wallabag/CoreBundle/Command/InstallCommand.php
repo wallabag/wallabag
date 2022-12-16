@@ -18,7 +18,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\LegacyEventDispatcherProxy;
 use Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule;
 use Wallabag\CoreBundle\Entity\InternalSetting;
 use Wallabag\UserBundle\Entity\User;
@@ -282,7 +281,7 @@ class InstallCommand extends ContainerAwareCommand
 
         // dispatch a created event so the associated config will be created
         $event = new UserEvent($user);
-        LegacyEventDispatcherProxy::decorate($this->getContainer()->get(EventDispatcherInterface::class))->dispatch($event, FOSUserEvents::USER_CREATED);
+        $this->getContainer()->get(EventDispatcherInterface::class)->dispatch($event, FOSUserEvents::USER_CREATED);
 
         $this->io->text('<info>Administration successfully setup.</info>');
 

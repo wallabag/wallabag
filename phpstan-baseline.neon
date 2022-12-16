@@ -84,18 +84,3 @@ parameters:
             message: "#^Property Tests\\\\Wallabag\\\\CoreBundle\\\\Helper\\\\RedirectTest\\:\\:\\$routerMock has unknown class PHPUnit_Framework_MockObject_MockObject as its type\\.$#"
             count: 1
             path: tests/Wallabag/CoreBundle/Helper/RedirectTest.php
-
-        -
-            message: "#^Method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch()#"
-            count: 1
-            path: src/Wallabag/ApiBundle/Controller/UserRestController.php
-
-        -
-            message: "#^Method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch()#"
-            count: 1
-            path: src/Wallabag/CoreBundle/Command/InstallCommand.php
-
-        -
-            message: "#^Method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch()#"
-            count: 1
-            path: src/Wallabag/UserBundle/Controller/ManageController.php
