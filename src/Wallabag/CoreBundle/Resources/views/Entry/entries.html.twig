@@ -36,7 +36,7 @@
         </div>
         {% if current_route == 'search' %}<div><a href="{{ path('tag_this_search', {'filter': searchTerm, 'currentRoute': app.request.get('currentRoute')}) }}" title="{{ 'entry.list.assign_search_tag'|trans }}">{{ 'entry.list.assign_search_tag'|trans }}</a></div>{% endif %}
         {% if entries.getNbPages > 1 %}
-            {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+            {{ pagerfanta(entries, 'default_wallabag') }}
         {% endif %}
     </div>
 
@@ -79,7 +79,7 @@
 
     {% if entries.getNbPages > 1 %}
         <div class="results">
-            {{ pagerfanta(entries, 'twitter_bootstrap_translated', {'proximity': 1}) }}
+            {{ pagerfanta(entries, 'default_wallabag') }}
         </div>
     {% endif %}
 
