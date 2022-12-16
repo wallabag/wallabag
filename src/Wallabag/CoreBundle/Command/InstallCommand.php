@@ -139,7 +139,7 @@ class InstallCommand extends Command
 
         // now check if MySQL isn't too old to handle utf8mb4
         if ($conn->isConnected() && 'mysql' === $conn->getDatabasePlatform()->getName()) {
-            $version = $conn->query('select version()')->fetchColumn();
+            $version = $conn->query('select version()')->fetchOne();
             $minimalVersion = '5.5.4';
 
             if (false === version_compare($version, $minimalVersion, '>')) {
@@ -152,7 +152,7 @@ class InstallCommand extends Command
         // testing if PostgreSQL > 9.1
         if ($conn->isConnected() && 'postgresql' === $conn->getDatabasePlatform()->getName()) {
             // return version should be like "PostgreSQL 9.5.4 on x86_64-apple-darwin15.6.0, compiled by Apple LLVM version 8.0.0 (clang-800.0.38), 64-bit"
-            $version = $conn->query('SELECT version();')->fetchColumn();
+            $version = $conn->query('SELECT version();')->fetchOne();
 
             preg_match('/PostgreSQL ([0-9\.]+)/i', $version, $matches);
 

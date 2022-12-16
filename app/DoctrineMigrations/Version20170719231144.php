@@ -10,7 +10,7 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  */
 class Version20170719231144 extends WallabagMigration
 {
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
         $this->skipIf('sqlite' === $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
 
@@ -21,13 +21,12 @@ class Version20170719231144 extends WallabagMigration
             GROUP BY LOWER(label)
             HAVING COUNT(*) > 1'
         );
-        $dupTags->execute();
 
-        foreach ($dupTags->fetchAll() as $duplicates) {
+        foreach ($dupTags->fetchAllAssociative() as $duplicates) {
             $label = $duplicates['lower_label'];
 
             // Retrieve all duplicate tags for a given tag
-            $tags = $this->connection->executeQuery('
+            $tags = $this->connection->query('
                 SELECT id
                 FROM   ' . $this->getTable('tag') . '
                 WHERE  LOWER(label) = :label
@@ -41,7 +40,7 @@ class Version20170719231144 extends WallabagMigration
             $newId = null;
             $ids = [];
 
-            foreach ($tags->fetchAll() as $tag) {
+            foreach ($tags->fetchAllAssociative() as $tag) {
                 // Ignore the first tag as we use it as the new reference tag
                 if ($first) {
                     $first = false;
@@ -86,7 +85,7 @@ class Version20170719231144 extends WallabagMigration
         );
     }
 
-    public function down(Schema $schema)
+    public function down(Schema $schema): void
     {
         throw new SkipMigrationException('Too complex ...');
     }

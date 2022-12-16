@@ -75,10 +75,14 @@ stof_doctrine_extensions:
             sluggable: true
 
 doctrine_migrations:
-    dir_name: "%kernel.project_dir%/app/DoctrineMigrations"
-    namespace: Application\Migrations
-    table_name: migration_versions
-    name: Application Migrations
+    migrations_paths:
+        'Application\Migrations': "%kernel.project_dir%/app/DoctrineMigrations"
+    storage:
+        table_storage:
+            table_name: 'migration_versions'
+            version_column_name: 'version'
+            version_column_length: 192
+            executed_at_column_name: 'executed_at'
 
 fos_rest:
     param_fetcher_listener: true

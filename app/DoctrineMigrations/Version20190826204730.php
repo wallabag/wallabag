@@ -48,7 +48,7 @@ final class Version20190826204730 extends WallabagMigration
             $previous_rule = $this->container
                 ->get('doctrine.orm.default_entity_manager')
                 ->getConnection()
-                ->fetchArray('SELECT * FROM ' . $this->getTable('ignore_origin_instance_rule') . " WHERE rule = '" . $entity['rule'] . "'");
+                ->fetchOne('SELECT * FROM ' . $this->getTable('ignore_origin_instance_rule') . " WHERE rule = '" . $entity['rule'] . "'");
 
             if (false === $previous_rule) {
                 $this->addSql('INSERT INTO ' . $this->getTable('ignore_origin_instance_rule') . " (rule) VALUES ('" . $entity['rule'] . "');");
