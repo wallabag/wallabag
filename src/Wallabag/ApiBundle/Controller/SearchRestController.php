@@ -58,7 +58,7 @@ class SearchRestController extends WallabagRestController
      *
      * @return JsonResponse
      */
-    public function getSearchAction(Request $request)
+    public function getSearchAction(Request $request, EntryRepository $entryRepository)
     {
         $this->validateAuthentication();
 
@@ -66,12 +66,11 @@ class SearchRestController extends WallabagRestController
         $page = (int) $request->query->get('page', 1);
         $perPage = (int) $request->query->get('perPage', 30);
 
-        $qb = $this->get(EntryRepository::class)
-            ->getBuilderForSearchByUser(
-                $this->getUser()->getId(),
-                $term,
-                null
-            );
+        $qb = $entryRepository->getBuilderForSearchByUser(
+            $this->getUser()->getId(),
+            $term,
+            null
+        );
 
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
         $pager = new Pagerfanta($pagerAdapter);

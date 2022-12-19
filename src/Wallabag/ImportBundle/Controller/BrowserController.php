@@ -2,23 +2,22 @@
 
 namespace Wallabag\ImportBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
 use Wallabag\ImportBundle\Import\ImportInterface;
 
-abstract class BrowserController extends Controller
+abstract class BrowserController extends AbstractController
 {
     /**
      * @Route("/browser", name="import_browser")
      *
      * @return Response
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, TranslatorInterface $translator)
     {
         $form = $this->createForm(UploadImportType::class);
         $form->handleRequest($request);
@@ -41,13 +40,13 @@ abstract class BrowserController extends Controller
 
                 if (true === $res) {
                     $summary = $wallabag->getSummary();
-                    $message = $this->get(TranslatorInterface::class)->trans('flashes.import.notice.summary', [
+                    $message = $translator->trans('flashes.import.notice.summary', [
                         '%imported%' => $summary['imported'],
                         '%skipped%' => $summary['skipped'],
                     ]);
 
                     if (0 < $summary['queued']) {
-                        $message = $this->get(TranslatorInterface::class)->trans('flashes.import.notice.summary_with_queue', [
+                        $message = $translator->trans('flashes.import.notice.summary_with_queue', [
                             '%queued%' => $summary['queued'],
                         ]);
                     }
@@ -55,17 +54,11 @@ abstract class BrowserController extends Controller
                     unlink($this->getParameter('wallabag_import.resource_dir') . '/' . $name);
                 }
 
-                $this->get(SessionInterface::class)->getFlashBag()->add(
-                    'notice',
-                    $message
-                );
+                $this->addFlash('notice', $message);
 
                 return $this->redirect($this->generateUrl('homepage'));
             }
-            $this->get(SessionInterface::class)->getFlashBag()->add(
-                    'notice',
-                    'flashes.import.notice.failed_on_file'
-                );
+            $this->addFlash('notice', 'flashes.import.notice.failed_on_file');
         }
 
         return $this->render($this->getImportTemplate(), [

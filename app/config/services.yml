@@ -43,6 +43,79 @@ services:
         resource: '../../src/Wallabag/CoreBundle/*'
         exclude: ['../../src/Wallabag/CoreBundle/{Controller,Entity}', '../../src/Wallabag/CoreBundle/Event/*Event.php']
 
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    Wallabag\AnnotationBundle\Controller\:
+        resource: '../../src/Wallabag/AnnotationBundle/Controller/'
+        tags: ['controller.service_arguments']
+
+    Wallabag\ApiBundle\Controller\:
+        resource: '../../src/Wallabag/ApiBundle/Controller/'
+        tags: ['controller.service_arguments']
+
+    Wallabag\CoreBundle\Controller\:
+        resource: '../../src/Wallabag/CoreBundle/Controller/'
+        tags: ['controller.service_arguments']
+
+    Wallabag\ImportBundle\Controller\:
+        resource: '../../src/Wallabag/ImportBundle/Controller/'
+        tags: ['controller.service_arguments']
+
+    Wallabag\UserBundle\Controller\:
+        resource: '../../src/Wallabag/UserBundle/Controller/'
+        tags: ['controller.service_arguments']
+
+    # inject alias service into controllers
+    Wallabag\ImportBundle\Controller\ChromeController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_chrome_producer'
+            $redisProducer: '@wallabag_import.producer.redis.chrome'
+
+    Wallabag\ImportBundle\Controller\DeliciousController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_delicious_producer'
+            $redisProducer: '@wallabag_import.producer.redis.delicious'
+
+    Wallabag\ImportBundle\Controller\ElcuratorController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_elcurator_producer'
+            $redisProducer: '@wallabag_import.producer.redis.elcurator'
+
+    Wallabag\ImportBundle\Controller\FirefoxController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_firefox_producer'
+            $redisProducer: '@wallabag_import.producer.redis.firefox'
+
+    Wallabag\ImportBundle\Controller\InstapaperController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_instapaper_producer'
+            $redisProducer: '@wallabag_import.producer.redis.instapaper'
+
+    Wallabag\ImportBundle\Controller\PinboardController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_pinboard_producer'
+            $redisProducer: '@wallabag_import.producer.redis.pinboard'
+
+    Wallabag\ImportBundle\Controller\PocketController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_pocket_producer'
+            $redisProducer: '@wallabag_import.producer.redis.pocket'
+
+    Wallabag\ImportBundle\Controller\ReadabilityController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_readability_producer'
+            $redisProducer: '@wallabag_import.producer.redis.readability'
+
+    Wallabag\ImportBundle\Controller\WallabagV1Controller:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_wallabag_v1_producer'
+            $redisProducer: '@wallabag_import.producer.redis.wallabag_v1'
+
+    Wallabag\ImportBundle\Controller\WallabagV2Controller:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_wallabag_v2_producer'
+            $redisProducer: '@wallabag_import.producer.redis.wallabag_v2'
+
     Wallabag\ImportBundle\:
         resource: '../../src/Wallabag/ImportBundle/*'
         exclude: '../../src/Wallabag/ImportBundle/{Consumer,Controller,Redis}'
@@ -182,8 +255,6 @@ services:
                 port: '%redis_port%'
                 path: '%redis_path%'
                 password: '%redis_password%'
-
-    Wallabag\CoreBundle\Controller\ExceptionController: ~
 
     Wallabag\CoreBundle\Event\Subscriber\SQLiteCascadeDeleteSubscriber:
         tags:

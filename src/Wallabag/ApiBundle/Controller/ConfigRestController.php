@@ -27,11 +27,11 @@ class ConfigRestController extends WallabagRestController
      *
      * @return JsonResponse
      */
-    public function getConfigAction()
+    public function getConfigAction(SerializerInterface $serializer)
     {
         $this->validateAuthentication();
 
-        $json = $this->get(SerializerInterface::class)->serialize(
+        $json = $serializer->serialize(
             $this->getUser()->getConfig(),
             'json',
             SerializationContext::create()->setGroups(['config_api'])
