@@ -77,6 +77,10 @@ class UsernameFeedTokenConverter implements ParamConverterInterface
         // Get actual entity manager for class
         $em = $this->registry->getManagerForClass($configuration->getClass());
 
+        if (null === $em) {
+            return false;
+        }
+
         /** @var UserRepository $userRepository */
         $userRepository = $em->getRepository($configuration->getClass());
 

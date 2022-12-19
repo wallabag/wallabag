@@ -3,18 +3,17 @@
 namespace Wallabag\ApiBundle\Controller;
 
 use Craue\ConfigBundle\Util\Config;
+use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Model\UserManagerInterface;
 use JMS\Serializer\SerializationContext;
-use JMS\Serializer\SerializerInterface;
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use Swagger\Annotations as SWG;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Translation\TranslatorInterface;
 use Wallabag\ApiBundle\Entity\Client;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\UserBundle\Form\NewUserType;
@@ -90,17 +89,16 @@ class UserRestController extends WallabagRestController
      *
      * @return JsonResponse
      */
-    public function putUserAction(Request $request)
+    public function putUserAction(Request $request, Config $craueConfig, UserManagerInterface $userManager, EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher)
     {
-        if (!$this->container->getParameter('fosuser_registration') || !$this->get(Config::class)->get('api_user_registration')) {
-            $json = $this->get(SerializerInterface::class)->serialize(['error' => "Server doesn't allow registrations"], 'json');
+        if (!$this->getParameter('fosuser_registration') || !$craueConfig->get('api_user_registration')) {
+            $json = $this->serializer->serialize(['error' => "Server doesn't allow registrations"], 'json');
 
             return (new JsonResponse())
                 ->setJson($json)
                 ->setStatusCode(JsonResponse::HTTP_FORBIDDEN);
         }
 
-        $userManager = $this->get(UserManagerInterface::class);
         $user = $userManager->createUser();
         \assert($user instanceof User);
         // user will be disabled BY DEFAULT to avoid spamming account to be enabled
@@ -140,7 +138,7 @@ class UserRestController extends WallabagRestController
                 $errors['password'] = $this->translateErrors($data['plainPassword']['children']['first']['errors']);
             }
 
-            $json = $this->get(SerializerInterface::class)->serialize(['error' => $errors], 'json');
+            $json = $this->serializer->serialize(['error' => $errors], 'json');
 
             return (new JsonResponse())
                 ->setJson($json)
@@ -151,15 +149,14 @@ class UserRestController extends WallabagRestController
         $client = new Client($user);
         $client->setName($request->request->get('client_name', 'Default client'));
 
-        $this->get('doctrine')->getManager()->persist($client);
+        $entityManager->persist($client);
 
         $user->addClient($client);
 
         $userManager->updateUser($user);
 
         // dispatch a created event so the associated config will be created
-        $event = new UserEvent($user, $request);
-        $this->get(EventDispatcherInterface::class)->dispatch($event, FOSUserEvents::USER_CREATED);
+        $eventDispatcher->dispatch(new UserEvent($user, $request), FOSUserEvents::USER_CREATED);
 
         return $this->sendUser($user, 'user_api_with_client', JsonResponse::HTTP_CREATED);
     }
@@ -174,7 +171,7 @@ class UserRestController extends WallabagRestController
      */
     private function sendUser(User $user, $group = 'user_api', $status = JsonResponse::HTTP_OK)
     {
-        $json = $this->get(SerializerInterface::class)->serialize(
+        $json = $this->serializer->serialize(
             $user,
             'json',
             SerializationContext::create()->setGroups([$group])
@@ -196,7 +193,7 @@ class UserRestController extends WallabagRestController
     {
         $translatedErrors = [];
         foreach ($errors as $error) {
-            $translatedErrors[] = $this->get(TranslatorInterface::class)->trans($error);
+            $translatedErrors[] = $this->translator->trans($error);
         }
 
         return $translatedErrors;

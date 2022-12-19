@@ -2,6 +2,7 @@
 
 namespace Wallabag\AnnotationBundle\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use JMS\Serializer\SerializerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -12,10 +13,22 @@ use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\AnnotationBundle\Form\EditAnnotationType;
 use Wallabag\AnnotationBundle\Form\NewAnnotationType;
+use Wallabag\AnnotationBundle\Repository\AnnotationRepository;
 use Wallabag\CoreBundle\Entity\Entry;
 
 class WallabagAnnotationController extends AbstractFOSRestController
 {
+    protected EntityManagerInterface $entityManager;
+    protected SerializerInterface $serializer;
+    protected FormFactoryInterface $formFactory;
+
+    public function __construct(EntityManagerInterface $entityManager, SerializerInterface $serializer, FormFactoryInterface $formFactory)
+    {
+        $this->entityManager = $entityManager;
+        $this->serializer = $serializer;
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * Retrieve annotations for an entry.
      *
@@ -25,16 +38,14 @@ class WallabagAnnotationController extends AbstractFOSRestController
      *
      * @return JsonResponse
      */
-    public function getAnnotationsAction(Entry $entry)
+    public function getAnnotationsAction(Entry $entry, AnnotationRepository $annotationRepository)
     {
-        $annotationRows = $this
-            ->getDoctrine()
-            ->getRepository(Annotation::class)
-            ->findAnnotationsByPageId($entry->getId(), $this->getUser()->getId());
+        $annotationRows = $annotationRepository->findAnnotationsByPageId($entry->getId(), $this->getUser()->getId());
+
         $total = \count($annotationRows);
         $annotations = ['total' => $total, 'rows' => $annotationRows];
 
-        $json = $this->get(SerializerInterface::class)->serialize($annotations, 'json');
+        $json = $this->serializer->serialize($annotations, 'json');
 
         return (new JsonResponse())->setJson($json);
     }
@@ -52,21 +63,20 @@ class WallabagAnnotationController extends AbstractFOSRestController
     {
         $data = json_decode($request->getContent(), true);
 
-        $em = $this->get('doctrine')->getManager();
         $annotation = new Annotation($this->getUser());
         $annotation->setEntry($entry);
 
-        $form = $this->get(FormFactoryInterface::class)->createNamed('', NewAnnotationType::class, $annotation, [
+        $form = $this->formFactory->createNamed('', NewAnnotationType::class, $annotation, [
             'csrf_protection' => false,
             'allow_extra_fields' => true,
         ]);
         $form->submit($data);
 
         if ($form->isValid()) {
-            $em->persist($annotation);
-            $em->flush();
+            $this->entityManager->persist($annotation);
+            $this->entityManager->flush();
 
-            $json = $this->get(SerializerInterface::class)->serialize($annotation, 'json');
+            $json = $this->serializer->serialize($annotation, 'json');
 
             return JsonResponse::fromJsonString($json);
         }
@@ -88,18 +98,17 @@ class WallabagAnnotationController extends AbstractFOSRestController
     {
         $data = json_decode($request->getContent(), true);
 
-        $form = $this->get(FormFactoryInterface::class)->createNamed('', EditAnnotationType::class, $annotation, [
+        $form = $this->formFactory->createNamed('', EditAnnotationType::class, $annotation, [
             'csrf_protection' => false,
             'allow_extra_fields' => true,
         ]);
         $form->submit($data);
 
         if ($form->isValid()) {
-            $em = $this->get('doctrine')->getManager();
-            $em->persist($annotation);
-            $em->flush();
+            $this->entityManager->persist($annotation);
+            $this->entityManager->flush();
 
-            $json = $this->get(SerializerInterface::class)->serialize($annotation, 'json');
+            $json = $this->serializer->serialize($annotation, 'json');
 
             return JsonResponse::fromJsonString($json);
         }
@@ -119,11 +128,10 @@ class WallabagAnnotationController extends AbstractFOSRestController
      */
     public function deleteAnnotationAction(Annotation $annotation)
     {
-        $em = $this->get('doctrine')->getManager();
-        $em->remove($annotation);
-        $em->flush();
+        $this->entityManager->remove($annotation);
+        $this->entityManager->flush();
 
-        $json = $this->get(SerializerInterface::class)->serialize($annotation, 'json');
+        $json = $this->serializer->serialize($annotation, 'json');
 
         return (new JsonResponse())->setJson($json);
     }

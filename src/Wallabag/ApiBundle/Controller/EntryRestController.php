@@ -6,6 +6,7 @@ use Hateoas\Configuration\Route as HateoasRoute;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use Pagerfanta\Pagerfanta;
+use Psr\Log\LoggerInterface;
 use Swagger\Annotations as SWG;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,6 +24,7 @@ use Wallabag\CoreBundle\Helper\EntriesExport;
 use Wallabag\CoreBundle\Helper\TagsAssigner;
 use Wallabag\CoreBundle\Helper\UrlHasher;
 use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\CoreBundle\Repository\TagRepository;
 
 class EntryRestController extends WallabagRestController
 {
@@ -85,10 +87,9 @@ class EntryRestController extends WallabagRestController
      *
      * @return JsonResponse
      */
-    public function getEntriesExistsAction(Request $request)
+    public function getEntriesExistsAction(Request $request, EntryRepository $entryRepository)
     {
         $this->validateAuthentication();
-        $repo = $this->get('doctrine')->getRepository(Entry::class);
 
         $returnId = (null === $request->query->get('return_id')) ? false : (bool) $request->query->get('return_id');
 
@@ -116,7 +117,7 @@ class EntryRestController extends WallabagRestController
         }
 
         $results = array_fill_keys($hashedUrls, null);
-        $res = $repo->findByUserIdAndBatchHashedUrls($this->getUser()->getId(), $hashedUrls);
+        $res = $entryRepository->findByUserIdAndBatchHashedUrls($this->getUser()->getId(), $hashedUrls);
         foreach ($res as $e) {
             $_hashedUrl = array_keys($hashedUrls, 'blah', true);
             if ([] !== array_keys($hashedUrls, $e['hashedUrl'], true)) {
@@ -279,7 +280,7 @@ class EntryRestController extends WallabagRestController
      *
      * @return JsonResponse
      */
-    public function getEntriesAction(Request $request)
+    public function getEntriesAction(Request $request, EntryRepository $entryRepository)
     {
         $this->validateAuthentication();
 
@@ -297,7 +298,7 @@ class EntryRestController extends WallabagRestController
 
         try {
             /** @var Pagerfanta $pager */
-            $pager = $this->get(EntryRepository::class)->findEntries(
+            $pager = $entryRepository->findEntries(
                 $this->getUser()->getId(),
                 $isArchived,
                 $isStarred,
@@ -404,12 +405,12 @@ class EntryRestController extends WallabagRestController
      *
      * @return Response
      */
-    public function getEntryExportAction(Entry $entry, Request $request)
+    public function getEntryExportAction(Entry $entry, Request $request, EntriesExport $entriesExport)
     {
         $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
 
-        return $this->get(EntriesExport::class)
+        return $entriesExport
             ->setEntries($entry)
             ->updateTitle('entry')
             ->updateAuthor('entry')
@@ -439,7 +440,7 @@ class EntryRestController extends WallabagRestController
      *
      * @return JsonResponse
      */
-    public function deleteEntriesListAction(Request $request)
+    public function deleteEntriesListAction(Request $request, EntryRepository $entryRepository, EventDispatcherInterface $eventDispatcher)
     {
         $this->validateAuthentication();
 
@@ -453,7 +454,7 @@ class EntryRestController extends WallabagRestController
 
         // handle multiple urls
         foreach ($urls as $key => $url) {
-            $entry = $this->get(EntryRepository::class)->findByUrlAndUserId(
+            $entry = $entryRepository->findByUrlAndUserId(
                 $url,
                 $this->getUser()->getId()
             );
@@ -462,11 +463,10 @@ class EntryRestController extends WallabagRestController
 
             if (false !== $entry) {
                 // entry deleted, dispatch event about it!
-                $this->get(EventDispatcherInterface::class)->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
+                $eventDispatcher->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
 
-                $em = $this->get('doctrine')->getManager();
-                $em->remove($entry);
-                $em->flush();
+                $this->entityManager->remove($entry);
+                $this->entityManager->flush();
             }
 
             $results[$key]['entry'] = $entry instanceof Entry ? true : false;
@@ -500,13 +500,13 @@ class EntryRestController extends WallabagRestController
      *
      * @return JsonResponse
      */
-    public function postEntriesListAction(Request $request)
+    public function postEntriesListAction(Request $request, EntryRepository $entryRepository, EventDispatcherInterface $eventDispatcher, ContentProxy $contentProxy)
     {
         $this->validateAuthentication();
 
         $urls = json_decode($request->query->get('urls', []));
 
-        $limit = $this->container->getParameter('wallabag_core.api_limit_mass_actions');
+        $limit = $this->getParameter('wallabag_core.api_limit_mass_actions');
 
         if (\count($urls) > $limit) {
             throw new HttpException(400, 'API limit reached');
@@ -519,7 +519,7 @@ class EntryRestController extends WallabagRestController
 
         // handle multiple urls
         foreach ($urls as $key => $url) {
-            $entry = $this->get(EntryRepository::class)->findByUrlAndUserId(
+            $entry = $entryRepository->findByUrlAndUserId(
                 $url,
                 $this->getUser()->getId()
             );
@@ -529,17 +529,16 @@ class EntryRestController extends WallabagRestController
             if (false === $entry) {
                 $entry = new Entry($this->getUser());
 
-                $this->get(ContentProxy::class)->updateEntry($entry, $url);
+                $contentProxy->updateEntry($entry, $url);
             }
 
-            $em = $this->get('doctrine')->getManager();
-            $em->persist($entry);
-            $em->flush();
+            $this->entityManager->persist($entry);
+            $this->entityManager->flush();
 
             $results[$key]['entry'] = $entry instanceof Entry ? $entry->getId() : false;
 
             // entry saved, dispatch event about it!
-            $this->get(EventDispatcherInterface::class)->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
+            $eventDispatcher->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
         }
 
         return $this->sendResponse($results);
@@ -683,13 +682,13 @@ class EntryRestController extends WallabagRestController
      *
      * @return JsonResponse
      */
-    public function postEntriesAction(Request $request)
+    public function postEntriesAction(Request $request, EntryRepository $entryRepository, ContentProxy $contentProxy, LoggerInterface $logger, TagsAssigner $tagsAssigner, EventDispatcherInterface $eventDispatcher)
     {
         $this->validateAuthentication();
 
         $url = $request->request->get('url');
 
-        $entry = $this->get(EntryRepository::class)->findByUrlAndUserId(
+        $entry = $entryRepository->findByUrlAndUserId(
             $url,
             $this->getUser()->getId()
         );
@@ -702,7 +701,7 @@ class EntryRestController extends WallabagRestController
         $data = $this->retrieveValueFromRequest($request);
 
         try {
-            $this->get(ContentProxy::class)->updateEntry(
+            $contentProxy->updateEntry(
                 $entry,
                 $entry->getUrl(),
                 [
@@ -717,10 +716,10 @@ class EntryRestController extends WallabagRestController
                 ]
             );
         } catch (\Exception $e) {
-            // $this->get('logger')->error('Error while saving an entry', [
-            //     'exception' => $e,
-            //     'entry' => $entry,
-            // ]);
+            $logger->error('Error while saving an entry', [
+                'exception' => $e,
+                'entry' => $entry,
+            ]);
         }
 
         if (null !== $data['isArchived']) {
@@ -732,7 +731,7 @@ class EntryRestController extends WallabagRestController
         }
 
         if (!empty($data['tags'])) {
-            $this->get(TagsAssigner::class)->assignTagsToEntry($entry, $data['tags']);
+            $tagsAssigner->assignTagsToEntry($entry, $data['tags']);
         }
 
         if (!empty($data['origin_url'])) {
@@ -748,19 +747,18 @@ class EntryRestController extends WallabagRestController
         }
 
         if (empty($entry->getDomainName())) {
-            $this->get(ContentProxy::class)->setEntryDomainName($entry);
+            $contentProxy->setEntryDomainName($entry);
         }
 
         if (empty($entry->getTitle())) {
-            $this->get(ContentProxy::class)->setDefaultEntryTitle($entry);
+            $contentProxy->setDefaultEntryTitle($entry);
         }
 
-        $em = $this->get('doctrine')->getManager();
-        $em->persist($entry);
-        $em->flush();
+        $this->entityManager->persist($entry);
+        $this->entityManager->flush();
 
         // entry saved, dispatch event about it!
-        $this->get(EventDispatcherInterface::class)->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
+        $eventDispatcher->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
 
         return $this->sendResponse($entry);
     }
@@ -888,12 +886,10 @@ class EntryRestController extends WallabagRestController
      *
      * @return JsonResponse
      */
-    public function patchEntriesAction(Entry $entry, Request $request)
+    public function patchEntriesAction(Entry $entry, Request $request, ContentProxy $contentProxy, LoggerInterface $logger, TagsAssigner $tagsAssigner, EventDispatcherInterface $eventDispatcher)
     {
         $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
-
-        $contentProxy = $this->get(ContentProxy::class);
 
         $data = $this->retrieveValueFromRequest($request);
 
@@ -911,10 +907,10 @@ class EntryRestController extends WallabagRestController
                     true
                 );
             } catch (\Exception $e) {
-                // $this->get('logger')->error('Error while saving an entry', [
-                //     'exception' => $e,
-                //     'entry' => $entry,
-                // ]);
+                $logger->error('Error while saving an entry', [
+                    'exception' => $e,
+                    'entry' => $entry,
+                ]);
             }
         }
 
@@ -948,7 +944,7 @@ class EntryRestController extends WallabagRestController
 
         if (!empty($data['tags'])) {
             $entry->removeAllTags();
-            $this->get(TagsAssigner::class)->assignTagsToEntry($entry, $data['tags']);
+            $tagsAssigner->assignTagsToEntry($entry, $data['tags']);
         }
 
         if (null !== $data['isPublic']) {
@@ -964,19 +960,18 @@ class EntryRestController extends WallabagRestController
         }
 
         if (empty($entry->getDomainName())) {
-            $this->get(ContentProxy::class)->setEntryDomainName($entry);
+            $contentProxy->setEntryDomainName($entry);
         }
 
         if (empty($entry->getTitle())) {
-            $this->get(ContentProxy::class)->setDefaultEntryTitle($entry);
+            $contentProxy->setDefaultEntryTitle($entry);
         }
 
-        $em = $this->get('doctrine')->getManager();
-        $em->persist($entry);
-        $em->flush();
+        $this->entityManager->persist($entry);
+        $this->entityManager->flush();
 
         // entry saved, dispatch event about it!
-        $this->get(EventDispatcherInterface::class)->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
+        $eventDispatcher->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
 
         return $this->sendResponse($entry);
     }
@@ -1006,33 +1001,32 @@ class EntryRestController extends WallabagRestController
      *
      * @return JsonResponse
      */
-    public function patchEntriesReloadAction(Entry $entry)
+    public function patchEntriesReloadAction(Entry $entry, ContentProxy $contentProxy, LoggerInterface $logger, EventDispatcherInterface $eventDispatcher)
     {
         $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
 
         try {
-            $this->get(ContentProxy::class)->updateEntry($entry, $entry->getUrl());
+            $contentProxy->updateEntry($entry, $entry->getUrl());
         } catch (\Exception $e) {
-            // $this->get('logger')->error('Error while saving an entry', [
-            //     'exception' => $e,
-            //     'entry' => $entry,
-            // ]);
+            $logger->error('Error while saving an entry', [
+                'exception' => $e,
+                'entry' => $entry,
+            ]);
 
             return new JsonResponse([], 304);
         }
 
         // if refreshing entry failed, don't save it
-        if ($this->container->getParameter('wallabag_core.fetching_error_message') === $entry->getContent()) {
+        if ($this->getParameter('wallabag_core.fetching_error_message') === $entry->getContent()) {
             return new JsonResponse([], 304);
         }
 
-        $em = $this->get('doctrine')->getManager();
-        $em->persist($entry);
-        $em->flush();
+        $this->entityManager->persist($entry);
+        $this->entityManager->flush();
 
         // entry saved, dispatch event about it!
-        $this->get(EventDispatcherInterface::class)->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
+        $eventDispatcher->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
 
         return $this->sendResponse($entry);
     }
@@ -1064,7 +1058,7 @@ class EntryRestController extends WallabagRestController
      *
      * @return JsonResponse
      */
-    public function deleteEntriesAction(Entry $entry, Request $request)
+    public function deleteEntriesAction(Entry $entry, Request $request, EventDispatcherInterface $eventDispatcher)
     {
         $expect = $request->query->get('expect', 'entry');
         if (!\in_array($expect, ['id', 'entry'], true)) {
@@ -1083,11 +1077,10 @@ class EntryRestController extends WallabagRestController
         }
 
         // entry deleted, dispatch event about it!
-        $this->get(EventDispatcherInterface::class)->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
+        $eventDispatcher->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
 
-        $em = $this->get('doctrine')->getManager();
-        $em->remove($entry);
-        $em->flush();
+        $this->entityManager->remove($entry);
+        $this->entityManager->flush();
 
         return $response;
     }
@@ -1158,19 +1151,18 @@ class EntryRestController extends WallabagRestController
      *
      * @return JsonResponse
      */
-    public function postEntriesTagsAction(Request $request, Entry $entry)
+    public function postEntriesTagsAction(Request $request, Entry $entry, TagsAssigner $tagsAssigner)
     {
         $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());
 
         $tags = $request->request->get('tags', '');
         if (!empty($tags)) {
-            $this->get(TagsAssigner::class)->assignTagsToEntry($entry, $tags);
+            $tagsAssigner->assignTagsToEntry($entry, $tags);
         }
 
-        $em = $this->get('doctrine')->getManager();
-        $em->persist($entry);
-        $em->flush();
+        $this->entityManager->persist($entry);
+        $this->entityManager->flush();
 
         return $this->sendResponse($entry);
     }
@@ -1213,9 +1205,9 @@ class EntryRestController extends WallabagRestController
         $this->validateUserAccess($entry->getUser()->getId());
 
         $entry->removeTag($tag);
-        $em = $this->get('doctrine')->getManager();
-        $em->persist($entry);
-        $em->flush();
+
+        $this->entityManager->persist($entry);
+        $this->entityManager->flush();
 
         return $this->sendResponse($entry);
     }
@@ -1243,7 +1235,7 @@ class EntryRestController extends WallabagRestController
      *
      * @return JsonResponse
      */
-    public function deleteEntriesTagsListAction(Request $request)
+    public function deleteEntriesTagsListAction(Request $request, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
         $this->validateAuthentication();
 
@@ -1257,7 +1249,7 @@ class EntryRestController extends WallabagRestController
         $results = [];
 
         foreach ($list as $key => $element) {
-            $entry = $this->get(EntryRepository::class)->findByUrlAndUserId(
+            $entry = $entryRepository->findByUrlAndUserId(
                 $element->url,
                 $this->getUser()->getId()
             );
@@ -1272,18 +1264,15 @@ class EntryRestController extends WallabagRestController
                 foreach ($tags as $label) {
                     $label = trim($label);
 
-                    $tag = $this->get('doctrine')
-                        ->getRepository(Tag::class)
-                        ->findOneByLabel($label);
+                    $tag = $tagRepository->findOneByLabel($label);
 
                     if (false !== $tag) {
                         $entry->removeTag($tag);
                     }
                 }
 
-                $em = $this->get('doctrine')->getManager();
-                $em->persist($entry);
-                $em->flush();
+                $this->entityManager->persist($entry);
+                $this->entityManager->flush();
             }
         }
 
@@ -1313,7 +1302,7 @@ class EntryRestController extends WallabagRestController
      *
      * @return JsonResponse
      */
-    public function postEntriesTagsListAction(Request $request)
+    public function postEntriesTagsListAction(Request $request, EntryRepository $entryRepository, TagsAssigner $tagsAssigner)
     {
         $this->validateAuthentication();
 
@@ -1327,7 +1316,7 @@ class EntryRestController extends WallabagRestController
 
         // handle multiple urls
         foreach ($list as $key => $element) {
-            $entry = $this->get(EntryRepository::class)->findByUrlAndUserId(
+            $entry = $entryRepository->findByUrlAndUserId(
                 $element->url,
                 $this->getUser()->getId()
             );
@@ -1338,11 +1327,10 @@ class EntryRestController extends WallabagRestController
             $tags = $element->tags;
 
             if (false !== $entry && !(empty($tags))) {
-                $this->get(TagsAssigner::class)->assignTagsToEntry($entry, $tags);
+                $tagsAssigner->assignTagsToEntry($entry, $tags);
 
-                $em = $this->get('doctrine')->getManager();
-                $em->persist($entry);
-                $em->flush();
+                $this->entityManager->persist($entry);
+                $this->entityManager->flush();
             }
         }
 
