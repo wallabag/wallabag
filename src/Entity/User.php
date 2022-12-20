@@ -172,7 +172,7 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      *
      * @ORM\Column(type="json", nullable=true)
      */
-    private $backupCodes;
+    private array $backupCodes;
 
     /**
      * @var bool
