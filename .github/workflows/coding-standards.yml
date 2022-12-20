@@ -48,7 +48,7 @@ jobs:
         run: "php bin/phpstan analyse --no-progress --error-format=checkstyle | cs2pr"
 
       - name: "Run TwigCS"
-        run: "php bin/twigcs --severity=error --display=blocking --reporter checkstyle app/ src/ | cs2pr"
+        run: "php bin/twigcs --severity=error --display=blocking --reporter checkstyle templates/ | cs2pr"
 
       - name: "Run ergebnis/composer-normalize"
         run: "composer normalize --dry-run --no-check-lock"

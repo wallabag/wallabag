@@ -1,0 +1,9 @@
+jms_serializer:
+    handlers:
+        # to be removed if we switch to (default) ISO8601 datetime instead of ATOM
+        # see: https://github.com/schmittjoh/JMSSerializerBundle/pull/494
+        datetime:
+            default_format: "Y-m-d\\TH:i:sO" # ATOMjms_serializer:
+    visitors:
+        xml_serialization:
+            format_output: '%kernel.debug%'

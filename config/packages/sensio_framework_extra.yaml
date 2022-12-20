@@ -1,0 +1,4 @@
+# see https://github.com/symfony/symfony-standard/pull/1133
+sensio_framework_extra:
+   router:
+        annotations: false

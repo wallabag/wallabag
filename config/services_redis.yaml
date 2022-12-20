@@ -1,0 +1,166 @@
+# Redis stuff
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    # readability
+    wallabag_import.queue.redis.readability:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            $queueName: "wallabag.import.readability"
+
+    wallabag_import.producer.redis.readability:
+        class: App\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.readability"
+
+    wallabag_import.consumer.redis.readability:
+        class: App\Consumer\RedisEntryConsumer
+        arguments:
+            $import: '@App\Import\ReadabilityImport'
+
+    # instapaper
+    wallabag_import.queue.redis.instapaper:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            $queueName: "wallabag.import.instapaper"
+
+    wallabag_import.producer.redis.instapaper:
+        class: App\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.instapaper"
+
+    wallabag_import.consumer.redis.instapaper:
+        class: App\Consumer\RedisEntryConsumer
+        arguments:
+            $import: '@App\Import\InstapaperImport'
+
+    # pinboard
+    wallabag_import.queue.redis.pinboard:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            $queueName: "wallabag.import.pinboard"
+
+    wallabag_import.producer.redis.pinboard:
+        class: App\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.pinboard"
+
+    wallabag_import.consumer.redis.pinboard:
+        class: App\Consumer\RedisEntryConsumer
+        arguments:
+            $import: '@App\Import\PinboardImport'
+
+    # delicious
+    wallabag_import.queue.redis.delicious:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            $queueName: "wallabag.import.delicious"
+
+    wallabag_import.producer.redis.delicious:
+        class: App\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.delicious"
+
+    wallabag_import.consumer.redis.delicious:
+        class: App\Consumer\RedisEntryConsumer
+        arguments:
+            $import: '@App\Import\DeliciousImport'
+
+    # pocket
+    wallabag_import.queue.redis.pocket:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            $queueName: "wallabag.import.pocket"
+
+    wallabag_import.producer.redis.pocket:
+        class: App\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.pocket"
+
+    wallabag_import.consumer.redis.pocket:
+        class: App\Consumer\RedisEntryConsumer
+        arguments:
+            $import: '@App\Import\PocketImport'
+
+    # wallabag v1
+    wallabag_import.queue.redis.wallabag_v1:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            $queueName: "wallabag.import.wallabag_v1"
+
+    wallabag_import.producer.redis.wallabag_v1:
+        class: App\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.wallabag_v1"
+
+    wallabag_import.consumer.redis.wallabag_v1:
+        class: App\Consumer\RedisEntryConsumer
+        arguments:
+            $import: '@App\Import\WallabagV1Import'
+
+    # wallabag v2
+    wallabag_import.queue.redis.wallabag_v2:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            $queueName: "wallabag.import.wallabag_v2"
+
+    wallabag_import.producer.redis.wallabag_v2:
+        class: App\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.wallabag_v2"
+
+    wallabag_import.consumer.redis.wallabag_v2:
+        class: App\Consumer\RedisEntryConsumer
+        arguments:
+            $import: '@App\Import\WallabagV2Import'
+
+    # elcurator
+    wallabag_import.queue.redis.elcurator:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            $queueName: "wallabag.import.elcurator"
+
+    wallabag_import.producer.redis.elcurator:
+        class: App\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.elcurator"
+
+    wallabag_import.consumer.redis.elcurator:
+        class: App\Consumer\RedisEntryConsumer
+        arguments:
+            $import: '@App\Import\ElcuratorImport'
+
+    # firefox
+    wallabag_import.queue.redis.firefox:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            $queueName: "wallabag.import.firefox"
+
+    wallabag_import.producer.redis.firefox:
+        class: App\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.firefox"
+
+    wallabag_import.consumer.redis.firefox:
+        class: App\Consumer\RedisEntryConsumer
+        arguments:
+            $import: '@App\Import\FirefoxImport'
+
+    # chrome
+    wallabag_import.queue.redis.chrome:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            $queueName: "wallabag.import.chrome"
+
+    wallabag_import.producer.redis.chrome:
+        class: App\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.chrome"
+
+    wallabag_import.consumer.redis.chrome:
+        class: App\Consumer\RedisEntryConsumer
+        arguments:
+            $import: '@App\Import\ChromeImport'

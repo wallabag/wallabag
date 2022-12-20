@@ -1,0 +1,30 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ 'error.page_title'|trans }}{% endblock %}
+
+{% block body_class %}login{% endblock %}
+
+{% block menu %}{% endblock %}
+{% block messages %}{% endblock %}
+
+{% block content %}
+<main class="valign-wrapper">
+    <div class="valign row">
+        <div class="card sw">
+            <div class="center"><img src="{{ asset('img/logo-wallabag.svg') }}" alt="wallabag logo" class="typo-logo" /></div>
+            <div class="card-content">
+                <div class="row">
+                    <h5>{{ status_code }}: {{ status_text }}</h5>
+                    <p>{{ exception.message }}</p>
+                    {# {% for trace in exception.trace %}
+                        <p>{{ trace.class }} - {{ trace.type }} - {{ trace.file }} - {{ trace.line }}</p>
+                    {% endfor %} #}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

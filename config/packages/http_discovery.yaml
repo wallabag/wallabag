@@ -1,0 +1,10 @@
+services:
+    Psr\Http\Message\RequestFactoryInterface: '@http_discovery.psr17_factory'
+    Psr\Http\Message\ResponseFactoryInterface: '@http_discovery.psr17_factory'
+    Psr\Http\Message\ServerRequestFactoryInterface: '@http_discovery.psr17_factory'
+    Psr\Http\Message\StreamFactoryInterface: '@http_discovery.psr17_factory'
+    Psr\Http\Message\UploadedFileFactoryInterface: '@http_discovery.psr17_factory'
+    Psr\Http\Message\UriFactoryInterface: '@http_discovery.psr17_factory'
+
+    http_discovery.psr17_factory:
+        class: Http\Discovery\Psr17Factory

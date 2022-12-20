@@ -1,34 +1,27 @@
-# Cache, logs & sessions
+# Cache, log & sessions
 /var/*
 !/var/cache
 /var/cache/*
 !var/cache/.gitkeep
-!/var/logs
-/var/logs/*
-!var/logs/.gitkeep
+!/var/log
+/var/log/*
+!var/log/.gitkeep
 !/var/sessions
 /var/sessions/*
 !var/sessions/.gitkeep
 /bin/*
 !/bin/console
-.php-cs-fixer.php
-.php-cs-fixer.cache
-.phpunit.result.cache
-phpunit.xml
 
 # Parameters
 /app/config/parameters.yml
 
-# Managed by Composer
-/vendor/
-
 # Assets and user uploads
-web/uploads/
-/web/bundles/*
-!/web/bundles/.gitkeep
-/web/assets/images/*
-!web/assets/images/.gitkeep
-/web/wallassets/*.dev.js
+public/uploads/
+/public/bundles/*
+!/public/bundles/.gitkeep
+/public/assets/images/*
+!public/assets/images/.gitkeep
+/public/wallassets/*.dev.js
 
 # Build
 /app/build
@@ -47,9 +40,6 @@ data/db/wallabag*.sqlite
 # assets stuff
 node_modules/
 bin
-app/Resources/build/
-!/src/Wallabag/CoreBundle/Resources/public
-/src/Wallabag/CoreBundle/Resources/public/*
 
 # Test-generated files
 admin-export.json
@@ -57,4 +47,24 @@ specialexport.json
 /data/site-credentials-secret-key.txt
 
 # Custom CSS file
-web/custom.css
+public/custom.css
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
+
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###

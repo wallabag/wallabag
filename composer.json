@@ -78,7 +78,6 @@
         "guzzlehttp/guzzle": "^5.3.1",
         "guzzlehttp/psr7": "^2.5",
         "html2text/html2text": "^4.1",
-        "incenteev/composer-parameter-handler": "^2.1",
         "j0k3r/graby": "^2.0",
         "javibravo/simpleue": "^2.0",
         "jms/serializer": "^3.17",
@@ -118,11 +117,19 @@
         "sensio/framework-extra-bundle": "^6.2",
         "sentry/sentry-symfony": "4.9.2",
         "stof/doctrine-extensions-bundle": "^1.2",
-        "symfony/dom-crawler": "^4.0",
-        "symfony/mailer": "^4.0",
-        "symfony/monolog-bundle": "^3.1",
+        "symfony/asset": "4.4.*",
+        "symfony/config": "4.4.*",
+        "symfony/dom-crawler": "4.4.*",
+        "symfony/flex": "^1.19",
+        "symfony/form": "4.4.*",
+        "symfony/mailer": "4.4.*",
+        "symfony/monolog-bundle": "^3.8",
         "symfony/proxy-manager-bridge": "^4.4",
-        "symfony/symfony": "^4.0",
+        "symfony/security-bundle": "4.4.*",
+        "symfony/templating": "4.4.*",
+        "symfony/translation": "4.4.*",
+        "symfony/twig-bundle": "4.4.*",
+        "symfony/validator": "4.4.*",
         "tecnickcom/tcpdf": "^6.3.0",
         "twig/extra-bundle": "^3.4",
         "twig/string-extra": "^3.4",
@@ -134,7 +141,7 @@
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^7.1",
-        "doctrine/doctrine-fixtures-bundle": "~3.0",
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "ergebnis/composer-normalize": "^2.28",
         "friendsofphp/php-cs-fixer": "~3.4",
         "friendsoftwig/twigcs": "^6.0",
@@ -145,8 +152,16 @@
         "phpstan/phpstan-doctrine": "^1.3",
         "phpstan/phpstan-phpunit": "^1.1",
         "phpstan/phpstan-symfony": "^1.2",
+        "symfony/browser-kit": "4.4.*",
+        "symfony/css-selector": "4.4.*",
+        "symfony/dotenv": "4.4.*",
         "symfony/maker-bundle": "^1.18",
-        "symfony/phpunit-bridge": "~6.0"
+        "symfony/phpunit-bridge": "~6.0",
+        "symfony/stopwatch": "4.4.*",
+        "symfony/web-profiler-bundle": "4.4.*"
+    },
+    "conflict": {
+        "symfony/symfony": "*"
     },
     "suggest": {
         "ext-imagick": "To keep GIF animation when downloading image is enabled"
@@ -155,24 +170,18 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Wallabag\\": "src/Wallabag/"
-        },
-        "classmap": [
-            "app/AppKernel.php",
-            "app/AppCache.php"
-        ]
+            "App\\": "src/"
+        }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
-        },
-        "files": [
-            "vendor/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php"
-        ]
+            "App\\Tests\\": "tests/"
+        }
     },
     "config": {
         "allow-plugins": {
             "phpstan/extension-installer": true,
+            "symfony/flex": true,
             "php-http/discovery": true,
             "ergebnis/composer-normalize": true
         },
@@ -183,22 +192,22 @@
         "sort-packages": true
     },
     "extra": {
-        "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
-        },
-        "public-dir": "web"
+        "symfony": {
+            "allow-contrib": true,
+            "docker": false,
+            "require": "4.4.*"
+        }
     },
     "scripts": {
         "post-install-cmd": [
-            "@post-cmd"
+            "@auto-scripts"
         ],
         "post-update-cmd": [
-            "@post-cmd"
+            "@auto-scripts"
         ],
-        "post-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "bin/console cache:clear --no-warmup",
-            "bin/console assets:install web --symlink --relative"
-        ]
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        }
     }
 }

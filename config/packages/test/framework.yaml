@@ -1,0 +1,10 @@
+framework:
+    test: ~
+    session:
+        storage_id: session.storage.mock_file
+    profiler:
+        collect: false
+    translator:
+        enabled: false
+    mailer:
+        dsn: 'null://null'

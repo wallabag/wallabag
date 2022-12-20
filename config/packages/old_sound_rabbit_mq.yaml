@@ -1,0 +1,148 @@
+old_sound_rabbit_mq:
+    connections:
+        default:
+            url: '%env(RABBITMQ_URL)%'
+            vhost: /
+            lazy: true
+    producers:
+        import_pocket:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.pocket'
+                type: topic
+        import_readability:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.readability'
+                type: topic
+        import_pinboard:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.pinboard'
+                type: topic
+        import_delicious:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.delicious'
+                type: topic
+        import_instapaper:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.instapaper'
+                type: topic
+        import_wallabag_v1:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.wallabag_v1'
+                type: topic
+        import_wallabag_v2:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.wallabag_v2'
+                type: topic
+        import_elcurator:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.elcurator'
+                type: topic
+        import_firefox:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.firefox'
+                type: topic
+        import_chrome:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.chrome'
+                type: topic
+    consumers:
+        import_pocket:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.pocket'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.pocket'
+            callback: wallabag_import.consumer.amqp.pocket
+            qos_options: {prefetch_count: 10}
+        import_readability:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.readability'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.readability'
+            callback: wallabag_import.consumer.amqp.readability
+            qos_options: {prefetch_count: 10}
+        import_instapaper:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.instapaper'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.instapaper'
+            callback: wallabag_import.consumer.amqp.instapaper
+            qos_options: {prefetch_count: 10}
+        import_pinboard:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.pinboard'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.pinboard'
+            callback: wallabag_import.consumer.amqp.pinboard
+            qos_options: {prefetch_count: 10}
+        import_delicious:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.delicious'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.delicious'
+            callback: wallabag_import.consumer.amqp.delicious
+            qos_options: {prefetch_count: 10}
+        import_wallabag_v1:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.wallabag_v1'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.wallabag_v1'
+            callback: wallabag_import.consumer.amqp.wallabag_v1
+            qos_options: {prefetch_count: 10}
+        import_wallabag_v2:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.wallabag_v2'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.wallabag_v2'
+            callback: wallabag_import.consumer.amqp.wallabag_v2
+            qos_options: {prefetch_count: 10}
+        import_elcurator:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.elcurator'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.elcurator'
+            callback: wallabag_import.consumer.amqp.elcurator
+            qos_options: {prefetch_count: 10}
+        import_firefox:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.firefox'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.firefox'
+            callback: wallabag_import.consumer.amqp.firefox
+            qos_options: {prefetch_count: 10}
+        import_chrome:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.chrome'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.chrome'
+            callback: wallabag_import.consumer.amqp.chrome
+            qos_options: {prefetch_count: 10}

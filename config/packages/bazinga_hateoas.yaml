@@ -1,0 +1,4 @@
+# For full configuration see https://github.com/willdurand/BazingaHateoasBundle/blob/master/Resources/doc/index.md#reference-configuration
+bazinga_hateoas:
+    twig_extension:
+        enabled: true

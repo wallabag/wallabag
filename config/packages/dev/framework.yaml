@@ -1,0 +1,9 @@
+framework:
+    router:
+        strict_requirements: true
+    profiler:
+        only_exceptions: false
+
+    mailer:
+        # see https://mailcatcher.me/
+        dsn: smtp://127.0.0.1:1025

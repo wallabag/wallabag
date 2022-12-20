@@ -1,0 +1,28 @@
+# See the configuration reference at https://symfony.com/bundles/SchebTwoFactorBundle/5.x/configuration.html
+scheb_two_factor:
+    # security_tokens:
+        # - Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken
+        # If you're using guard-based authentication, you have to use this one:
+        # - Symfony\Component\Security\Guard\Token\PostAuthenticationGuardToken
+        # If you're using authenticator-based security (introduced in Symfony 5.1), you have to use this one:
+        # - Symfony\Component\Security\Http\Authenticator\Token\PostAuthenticationToken
+
+    trusted_device:
+        enabled: true
+        cookie_name: wllbg_trusted_computer
+        lifetime: 2592000
+
+    backup_codes:
+        enabled: "%env(TWOFACTOR_AUTH)%"
+
+    google:
+        enabled: "%env(TWOFACTOR_AUTH)%"
+        issuer: "%env(SERVER_NAME)%"
+        template: "Authentication/form.html.twig"
+
+    email:
+        enabled: "%env(TWOFACTOR_AUTH)%"
+        sender_email: "%env(TWOFACTOR_SENDER)%"
+        digits: 6
+        template: "Authentication/form.html.twig"
+        mailer: App\Mailer\AuthCodeMailer

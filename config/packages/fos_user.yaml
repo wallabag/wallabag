@@ -1,0 +1,12 @@
+fos_user:
+    db_driver: orm
+    firewall_name: secured_area
+    user_class: App\Entity\User
+    registration:
+        confirmation:
+            enabled: '%env(bool:FOSUSER_CONFIRMATION)%'
+    from_email:
+        address: '%env(FROM_EMAIL)%'
+        sender_name: wallabag
+    service:
+        mailer: App\Mailer\UserMailer

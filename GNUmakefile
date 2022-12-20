@@ -36,7 +36,7 @@ build: ## Run webpack
 
 prepare: clean ## Prepare database for testsuite
 ifdef DB
-	cp app/config/tests/parameters_test.$(DB).yml app/config/parameters_test.yml
+	cp .env.test.$(DB) .env.test
 endif
 	-php bin/console doctrine:database:drop --force --env=test
 	php bin/console doctrine:database:create --env=test

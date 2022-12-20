@@ -1,0 +1,21 @@
+httplug:
+    clients:
+        wallabag_core:
+            factory: App\Helper\HttpClientFactory
+            config:
+                defaults:
+                    timeout: 10
+            plugins: ['httplug.plugin.logger']
+        wallabag_core.entry.download_images:
+            factory: 'httplug.factory.auto'
+            plugins: ['httplug.plugin.logger']
+        wallabag_import.pocket.client:
+            factory: 'httplug.factory.auto'
+            plugins:
+                - 'httplug.plugin.logger'
+                - header_defaults:
+                      headers:
+                          'content-type': 'application/json'
+                          'X-Accept': 'application/json'
+    discovery:
+        client: false

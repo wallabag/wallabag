@@ -1,0 +1,32 @@
+parameters:
+    test_database_path: "%env(TEST_DATABASE_PATH)%"
+    env(TEST_DATABASE_PATH): "%kernel.project_dir%/data/db/wallabag_test.sqlite"
+
+services:
+    # see https://github.com/symfony/symfony/issues/24543
+    fos_user.user_manager.test:
+        alias: fos_user.user_manager
+        public: true
+
+    fos_user.security.login_manager.test:
+        alias: fos_user.security.login_manager
+        public: true
+
+    wallabag_core.entry_repository.test:
+        alias: App\Repository\EntryRepository
+        public: true
+
+    wallabag_user.user_repository.test:
+        alias: App\Repository\UserRepository
+        public: true
+
+    filesystem_cache:
+        class: Doctrine\Common\Cache\FilesystemCache
+        arguments:
+            - "%kernel.cache_dir%/doctrine/metadata"
+
+    # fixtures
+    App\DataFixtures\:
+        resource: '../src/DataFixtures/*'
+        tags: ['doctrine.fixture.orm']
+        autowire: true

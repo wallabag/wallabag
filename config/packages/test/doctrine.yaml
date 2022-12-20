@@ -1,0 +1,8 @@
+doctrine:
+    orm:
+        metadata_cache_driver:
+            type: service
+            id: filesystem_cache
+        query_cache_driver:
+            type: service
+            id: filesystem_cache

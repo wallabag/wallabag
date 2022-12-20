@@ -1,0 +1,171 @@
+wallabag_core:
+    version: 2.6.2
+    paypal_url: "https://liberapay.com/wallabag/donate"
+    languages:
+        en: 'English'
+        fr: 'Français'
+        de: 'Deutsch'
+        nl: 'Dutch'
+        th: 'ไทย'
+        tr: 'Türkçe'
+        fa: 'فارسی'
+        ro: 'Română'
+        pl: 'Polish'
+        da: 'Dansk'
+        es: 'Español'
+        oc: 'Occitan'
+        it: 'Italiano'
+        pt: 'Português'
+        ru: 'Русский'
+        ja: '日本語'
+        zh: '简体中文'
+        uk: 'Українська'
+        hr: 'Hrvatski'
+        cs: 'Čeština'
+        el: 'Ελληνικά'
+    items_on_page: 12
+    language: '%env(LOCALE)%'
+    rss_limit: 50
+    reading_speed: 200
+    cache_lifetime: 10
+    action_mark_as_read: 1
+    list_mode: 0
+    display_thumbnails: 1
+    fetching_error_message_title: 'No title found'
+    fetching_error_message: |
+        wallabag can't retrieve contents for this article. Please <a href="https://doc.wallabag.org/en/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.
+    api_limit_mass_actions: 10
+    encryption_key_path: "%kernel.project_dir%/data/site-credentials-secret-key.txt"
+    default_internal_settings:
+        -
+            name: share_public
+            value: 1
+            section: entry
+        -
+            name: share_diaspora
+            value: 1
+            section: entry
+        -
+            name: diaspora_url
+            value: https://diasporapod.com
+            section: entry
+        -
+            name: share_unmark
+            value: 1
+            section: entry
+        -
+            name: unmark_url
+            value: https://unmark.it
+            section: entry
+        -
+            name: share_shaarli
+            value: 1
+            section: entry
+        -
+            name: shaarli_url
+            value: https://myshaarli.com
+            section: entry
+        -
+            name: share_mail
+            value: 1
+            section: entry
+        -
+            name: share_twitter
+            value: 1
+            section: entry
+        -
+            name: show_printlink
+            value: 1
+            section: entry
+        -
+            name: restricted_access
+            value: 0
+            section: entry
+        -
+            name: export_epub
+            value: 1
+            section: export
+        -
+            name: export_mobi
+            value: 0
+            section: export
+        -
+            name: export_pdf
+            value: 1
+            section: export
+        -
+            name: export_csv
+            value: 1
+            section: export
+        -
+            name: export_json
+            value: 1
+            section: export
+        -
+            name: export_txt
+            value: 1
+            section: export
+        -
+            name: export_xml
+            value: 1
+            section: export
+        -
+            name: import_with_redis
+            value: 0
+            section: import
+        -
+            name: import_with_rabbitmq
+            value: 0
+            section: import
+        -
+            name: matomo_enabled
+            value: 0
+            section: analytics
+        -
+            name: matomo_host
+            value: matomo.wallabag.org
+            section: analytics
+        -
+            name: matomo_site_id
+            value: 1
+            section: analytics
+        -
+            name: demo_mode_enabled
+            value: 0
+            section: misc
+        -
+            name: demo_mode_username
+            value: wallabag
+            section: misc
+        -
+            name: download_images_enabled
+            value: 0
+            section: misc
+        -
+            name: wallabag_support_url
+            value: https://www.wallabag.org/pages/support.html
+            section: misc
+        -
+            name: api_user_registration
+            value: 0
+            section: api
+        -
+            name: store_article_headers
+            value: 0
+            section: entry
+        -
+            name: shaarli_share_origin_url
+            value: 0
+            section: entry
+
+    default_ignore_origin_instance_rules:
+        -
+            rule: host = "feedproxy.google.com"
+        -
+            rule: host = "feeds.reuters.com"
+        -
+            rule: _all ~ "https?://www\.lemonde\.fr/tiny.*"
+
+    import:
+        allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain', 'text/csv']
+        resource_dir: "%kernel.project_dir%/web/uploads/import"

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.8/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="bin/.phpunit/phpunit.xsd"
          backupGlobals="false"
          colors="true"
-         bootstrap="vendor/autoload.php"
+         bootstrap="config/bootstrap.php"
 >
 
     <testsuites>
@@ -15,8 +15,29 @@
 
     <php>
         <ini name="error_reporting" value="-1" />
-        <server name="KERNEL_CLASS" value="AppKernel" />
+        <server name="APP_ENV" value="test" force="true" />
         <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
+
+        <!-- ###+ doctrine/doctrine-bundle ### -->
+        <!-- Format described at https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html#connecting-using-a-url -->
+        <!-- IMPORTANT: You MUST configure your server version, either here or in config/packages/doctrine.yaml -->
+        <!--  -->
+        <!-- DATABASE_URL="sqlite:///%kernel.project_dir%/var/data.db" -->
+        <!-- DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=8&charset=utf8mb4" -->
+        <!-- <env name="DATABASE_URL" value="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=14&amp;charset=utf8"/> -->
+        <!-- ###- doctrine/doctrine-bundle ### -->
+
+        <!-- ###+ nelmio/cors-bundle ### -->
+        <env name="CORS_ALLOW_ORIGIN" value="'^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$'"/>
+        <!-- ###- nelmio/cors-bundle ### -->
+
+        <!-- ###+ php-amqplib/rabbitmq-bundle ### -->
+        <!-- <env name="RABBITMQ_URL" value="amqp://guest:guest@localhost:5672"/> -->
+        <!-- ###- php-amqplib/rabbitmq-bundle ### -->
+
+        <!-- ###+ sentry/sentry-symfony ### -->
+        <env name="SENTRY_DSN" value=""/>
+        <!-- ###- sentry/sentry-symfony ### -->
     </php>
 
     <filter>
@@ -24,9 +45,7 @@
             <directory>src</directory>
             <exclude>
                 <directory>vendor</directory>
-                <directory>src/Wallabag/*Bundle/Resources</directory>
-                <directory>src/Wallabag/*Bundle/Tests</directory>
-                <directory>src/Wallabag/*Bundle/DataFixtures</directory>
+                <directory>src/DataFixtures</directory>
             </exclude>
         </whitelist>
     </filter>
@@ -34,4 +53,7 @@
     <extensions>
         <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension" />
     </extensions>
+    <listeners>
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
+    </listeners>
 </phpunit>

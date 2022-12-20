@@ -1,0 +1,14 @@
+# twig:
+#     default_path: '%kernel.project_dir%/templates'
+#     debug: '%kernel.debug%'
+#     strict_variables: '%kernel.debug%'
+#     exception_controller: null
+
+twig:
+    debug: "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    form_themes:
+        - "@LexikFormFilter/Form/form_div_layout.html.twig"
+    exception_controller: App\Controller\ExceptionController:showAction
+    globals:
+        registration_enabled: '%env(bool:FOSUSER_REGISTRATION)%'

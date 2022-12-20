@@ -1,0 +1,70 @@
+# RabbitMQ stuff
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    App\Consumer\RabbitMQConsumerTotalProxy:
+        lazy: true
+        arguments:
+            $pocketConsumer: '@old_sound_rabbit_mq.import_pocket_consumer'
+            $readabilityConsumer: '@old_sound_rabbit_mq.import_readability_consumer'
+            $wallabagV1Consumer: '@old_sound_rabbit_mq.import_wallabag_v1_consumer'
+            $wallabagV2Consumer: '@old_sound_rabbit_mq.import_wallabag_v2_consumer'
+            $firefoxConsumer: '@old_sound_rabbit_mq.import_firefox_consumer'
+            $chromeConsumer: '@old_sound_rabbit_mq.import_chrome_consumer'
+            $instapaperConsumer: '@old_sound_rabbit_mq.import_instapaper_consumer'
+            $pinboardConsumer: '@old_sound_rabbit_mq.import_pinboard_consumer'
+            $deliciousConsumer: '@old_sound_rabbit_mq.import_delicious_consumer'
+            $elcuratorConsumer: '@old_sound_rabbit_mq.import_elcurator_consumer'
+
+    wallabag_import.consumer.amqp.pocket:
+        class: App\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: '@App\Import\PocketImport'
+
+    wallabag_import.consumer.amqp.readability:
+        class: App\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: '@App\Import\ReadabilityImport'
+
+    wallabag_import.consumer.amqp.instapaper:
+        class: App\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: '@App\Import\InstapaperImport'
+
+    wallabag_import.consumer.amqp.pinboard:
+        class: App\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: '@App\Import\PinboardImport'
+
+    wallabag_import.consumer.amqp.delicious:
+        class: App\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: '@App\Import\DeliciousImport'
+
+    wallabag_import.consumer.amqp.wallabag_v1:
+        class: App\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: '@App\Import\WallabagV1Import'
+
+    wallabag_import.consumer.amqp.wallabag_v2:
+        class: App\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: '@App\Import\WallabagV2Import'
+
+    wallabag_import.consumer.amqp.elcurator:
+        class: App\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: '@App\Import\ElcuratorImport'
+
+    wallabag_import.consumer.amqp.firefox:
+        class: App\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: '@App\Import\FirefoxImport'
+
+    wallabag_import.consumer.amqp.chrome:
+        class: App\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: '@App\Import\ChromeImport'
