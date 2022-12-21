@@ -25,7 +25,7 @@ abstract class WallabagMigration extends AbstractMigration implements ContainerA
     {
     }
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(ContainerInterface $container = null): void
     {
         $this->container = $container;
     }
@@ -40,7 +40,7 @@ abstract class WallabagMigration extends AbstractMigration implements ContainerA
         return false;
     }
 
-    protected function getTable($tableName, $unEscaped = false)
+    protected function getTable(string $tableName, bool $unEscaped = false): string
     {
         $table = $this->container->getParameter('database_table_prefix') . $tableName;
 

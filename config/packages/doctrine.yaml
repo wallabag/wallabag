@@ -1,6 +1,8 @@
 doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
+        types:
+            json_array: App\Doctrine\JsonArrayType
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
