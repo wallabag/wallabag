@@ -59,6 +59,8 @@ doctrine:
         charset: "%database_charset%"
         path: "%database_path%"
         unix_socket: "%database_socket%"
+        types:
+            json_array: Wallabag\CoreBundle\Doctrine\JsonArrayType
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
