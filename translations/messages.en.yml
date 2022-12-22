@@ -708,3 +708,4 @@ flashes:
             added: 'Global ignore origin rule added'
             updated: 'Global ignore origin rule updated'
             deleted: 'Global ignore origin rule deleted'
+entry.confirm.delete_entries: Do you really want to remove these entries?
