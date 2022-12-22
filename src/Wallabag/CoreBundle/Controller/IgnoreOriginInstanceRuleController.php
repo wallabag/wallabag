@@ -3,7 +3,7 @@
 namespace Wallabag\CoreBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +19,7 @@ use Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository;
  *
  * @Route("/ignore-origin-instance-rules")
  */
-class IgnoreOriginInstanceRuleController extends Controller
+class IgnoreOriginInstanceRuleController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
     private TranslatorInterface $translator;

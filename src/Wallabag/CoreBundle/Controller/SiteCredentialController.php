@@ -4,7 +4,7 @@ namespace Wallabag\CoreBundle\Controller;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +22,7 @@ use Wallabag\UserBundle\Entity\User;
  *
  * @Route("/site-credentials")
  */
-class SiteCredentialController extends Controller
+class SiteCredentialController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
     private TranslatorInterface $translator;
