@@ -20,7 +20,7 @@ final class Version20181202073750 extends WallabagMigration
                 $this->addSql('CREATE TEMPORARY TABLE __temp__' . $this->getTable('user', true) . ' AS SELECT id, username, username_canonical, email, email_canonical, enabled, salt, password, last_login, confirmation_token, password_requested_at, roles, name, created_at, updated_at, authCode, twoFactorAuthentication FROM ' . $this->getTable('user', true) . '');
                 $this->addSql('DROP TABLE ' . $this->getTable('user', true) . '');
                 $this->addSql('CREATE TABLE ' . $this->getTable('user', true) . ' (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, username VARCHAR(180) NOT NULL COLLATE BINARY, username_canonical VARCHAR(180) NOT NULL COLLATE BINARY, email VARCHAR(180) NOT NULL COLLATE BINARY, email_canonical VARCHAR(180) NOT NULL COLLATE BINARY, enabled BOOLEAN NOT NULL, password VARCHAR(255) NOT NULL COLLATE BINARY, last_login DATETIME DEFAULT NULL, password_requested_at DATETIME DEFAULT NULL, name CLOB DEFAULT NULL COLLATE BINARY, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, authCode INTEGER DEFAULT NULL, emailTwoFactor BOOLEAN NOT NULL, salt VARCHAR(255) DEFAULT NULL, confirmation_token VARCHAR(180) DEFAULT NULL, roles CLOB NOT NULL --(DC2Type:array)
-                , googleAuthenticatorSecret VARCHAR(255) DEFAULT NULL, backupCodes CLOB DEFAULT NULL --(DC2Type:json)
+                , googleAuthenticatorSecret VARCHAR(255) DEFAULT NULL, backupCodes CLOB DEFAULT NULL --(DC2Type:json_array)
                 )');
                 $this->addSql('INSERT INTO ' . $this->getTable('user', true) . ' (id, username, username_canonical, email, email_canonical, enabled, salt, password, last_login, confirmation_token, password_requested_at, roles, name, created_at, updated_at, authCode, emailTwoFactor) SELECT id, username, username_canonical, email, email_canonical, enabled, salt, password, last_login, confirmation_token, password_requested_at, roles, name, created_at, updated_at, authCode, twoFactorAuthentication FROM __temp__' . $this->getTable('user', true) . '');
                 $this->addSql('DROP TABLE __temp__' . $this->getTable('user', true) . '');
@@ -32,7 +32,7 @@ final class Version20181202073750 extends WallabagMigration
                 $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' ADD googleAuthenticatorSecret VARCHAR(191) DEFAULT NULL');
                 $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' CHANGE twoFactorAuthentication emailTwoFactor BOOLEAN NOT NULL');
                 $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' DROP trusted');
-                $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' ADD backupCodes LONGTEXT DEFAULT NULL COMMENT \'(DC2Type:json)\'');
+                $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' ADD backupCodes LONGTEXT DEFAULT NULL COMMENT \'(DC2Type:json_array)\'');
                 break;
             case 'postgresql':
                 $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' ADD googleAuthenticatorSecret VARCHAR(191) DEFAULT NULL');
