@@ -709,3 +709,4 @@ ignore_origin_instance_rule:
         delete: Supprimer
         save: Sauvegarder
         rule_label: Règle
+entry.confirm.delete_entries: Voulez-vous vraiment supprimer ces articles ?
