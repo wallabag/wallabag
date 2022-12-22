@@ -330,6 +330,7 @@ entry:
     confirm:
         delete: Czy jesteś pewien, że chcesz usunąć ten artykuł?
         delete_tag: Czy jesteś pewien, że chcesz usunąć ten tag z tego artykułu?
+        delete_entries: Czy na pewno chcesz usunąć te artykuły?
     metadata:
         reading_time: Szacowany czas czytania
         reading_time_minutes_short: '%readingTime% min'

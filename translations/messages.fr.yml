@@ -314,6 +314,7 @@ entry:
     confirm:
         delete: Voulez-vous vraiment supprimer cet article ?
         delete_tag: Voulez-vous vraiment supprimer cette étiquette de cet article ?
+        delete_entries: Voulez-vous vraiment supprimer ces articles ?
     metadata:
         reading_time: Durée de lecture estimée
         reading_time_minutes_short: '%readingTime% min'
