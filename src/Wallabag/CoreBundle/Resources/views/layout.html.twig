@@ -93,7 +93,7 @@
                     </li>
                     {% if active_route %}
                     <li id="button_random">
-                        <a class="waves-effect tooltipped js-random-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', {'type': active_route}) }}">
+                        <a class="waves-effect tooltipped js-random-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', app.request.query.all, {'type': active_route}) }}">
                             <i class="material-icons">casino</i>
                         </a>
                     </li>

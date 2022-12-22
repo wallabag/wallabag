@@ -364,20 +364,11 @@ class EntryController extends AbstractController
      *
      * @Route("/{type}/random", name="random_entry", requirements={"type": "unread|starred|archive|untagged|annotated|all"})
      *
-     * @return RedirectResponse
+     * @return Response
      */
-    public function redirectRandomEntryAction(string $type = 'all')
+    public function redirectRandomEntryAction(Request $request, string $type = 'all')
     {
-        try {
-            $entry = $this->entryRepository
-                ->getRandomEntry($this->getUser()->getId(), $type);
-        } catch (NoResultException $e) {
-            $this->addFlash('notice', 'flashes.entry.notice.no_random_entry');
-
-            return $this->redirect($this->generateUrl($type));
-        }
-
-        return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
+        return $this->showEntries($type, $request, 0, true);
     }
 
     /**
@@ -609,10 +600,11 @@ class EntryController extends AbstractController
      *
      * @param string $type Entries type: unread, starred or archive
      * @param int    $page
+     * @param bool   $random
      *
      * @return Response
      */
-    private function showEntries($type, Request $request, $page)
+    private function showEntries($type, Request $request, $page, $random = false)
     {
         $searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
         $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
@@ -665,12 +657,34 @@ class EntryController extends AbstractController
 
         $entries = $this->preparePagerForEntriesHelper->prepare($pagerAdapter);
 
-        try {
-            $entries->setCurrentPage($page);
-        } catch (OutOfRangeCurrentPageException $e) {
-            if ($page > 1) {
-                return $this->redirect($this->generateUrl($type, ['page' => $entries->getNbPages()]), 302);
+        if ($page !== 0) {
+            try {
+                $entries->setCurrentPage($page);
+            } catch (OutOfRangeCurrentPageException $e) {
+                if ($page > 1) {
+                    return $this->redirect($this->generateUrl($type, ['page' => $entries->getNbPages()]), 302);
+                }
             }
+        }
+
+        if (true === $random) {
+            try {
+                $ids = $qb->getQuery()->getArrayResult();
+
+                if (empty($ids)) {
+                    throw new NoResultException();
+                }
+
+                // random select one in the list
+                $randomId = $ids[mt_rand(0, \count($ids) - 1)]['id'];
+                $randomEntry = $this->entryRepository->find($randomId);
+            } catch (NoResultException $e) {
+                $this->addFlash('notice', 'flashes.entry.notice.no_random_entry');
+
+                return $this->redirect($this->generateUrl($type));
+            }
+
+            return $this->redirect($this->generateUrl('view', ['id' => $randomEntry->getId()]));
         }
 
         $nbEntriesUntagged = $this->entryRepository

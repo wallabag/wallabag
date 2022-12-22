@@ -581,53 +581,6 @@ class EntryRepository extends ServiceEntityRepository
     }
 
     /**
-     * Returns a random entry, filtering by status.
-     *
-     * @param int    $userId
-     * @param string $type   Can be unread, archive, starred, etc
-     *
-     * @throws NoResultException
-     *
-     * @return Entry
-     */
-    public function getRandomEntry($userId, $type = '')
-    {
-        $qb = $this->getQueryBuilderByUser($userId)
-            ->select('e.id');
-
-        switch ($type) {
-            case 'unread':
-                $qb->andWhere('e.isArchived = false');
-                break;
-            case 'archive':
-                $qb->andWhere('e.isArchived = true');
-                break;
-            case 'starred':
-                $qb->andWhere('e.isStarred = true');
-                break;
-            case 'untagged':
-                $qb->leftJoin('e.tags', 't');
-                $qb->andWhere('t.id is null');
-                break;
-            case 'annotated':
-                $qb->leftJoin('e.annotations', 'a');
-                $qb->andWhere('a.id is not null');
-                break;
-        }
-
-        $ids = $qb->getQuery()->getArrayResult();
-
-        if (empty($ids)) {
-            throw new NoResultException();
-        }
-
-        // random select one in the list
-        $randomId = $ids[mt_rand(0, \count($ids) - 1)]['id'];
-
-        return $this->find($randomId);
-    }
-
-    /**
      * Return a query builder to be used by other getBuilderFor* method.
      *
      * @param int $userId
