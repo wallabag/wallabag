@@ -314,6 +314,7 @@ entry:
     confirm:
         delete: Are you sure you want to remove that article?
         delete_tag: Are you sure you want to remove that tag from that article?
+        delete_entries: Are you sure you want to remove these articles?
     metadata:
         reading_time: Estimated reading time
         reading_time_minutes_short: '%readingTime% min'
@@ -708,4 +709,3 @@ flashes:
             added: 'Global ignore origin rule added'
             updated: 'Global ignore origin rule updated'
             deleted: 'Global ignore origin rule deleted'
-entry.confirm.delete_entries: Do you really want to remove these entries?
