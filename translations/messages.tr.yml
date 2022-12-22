@@ -330,6 +330,7 @@ entry:
     confirm:
         delete: Makaleyi kaldırmak istediğinizen emin misiniz?
         delete_tag: Makaleden etiketi kaldırmak istediğinizden emin misiniz?
+        delete_entries: Bu makaleleri kaldırmak istediğinizden emin misiniz?
     metadata:
         reading_time: Tahmini okuma süresi
         reading_time_minutes_short: '%readingTime% dakika'
