@@ -128,12 +128,13 @@ nelmio_api_doc:
             title: wallabag API documentation
             description: This is the API documentation of wallabag
             version: 2.x
-        securityDefinitions:
-            Bearer:
-                type: apiKey
-                description: 'Value: Bearer {jwt}'
-                name: Authorization
-                in: header
+        components:
+            securitySchemes:
+                Bearer:
+                    type: apiKey
+                    description: 'Value: Bearer {jwt}'
+                    name: Authorization
+                    in: header
         security:
             - Bearer: []
 

@@ -3,7 +3,7 @@
 namespace Wallabag\ApiBundle\Controller;
 
 use Nelmio\ApiDocBundle\Annotation\Operation;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,7 +20,7 @@ class TagRestController extends WallabagRestController
      * @Operation(
      *     tags={"Tags"},
      *     summary="Retrieve all tags.",
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -47,15 +47,17 @@ class TagRestController extends WallabagRestController
      * @Operation(
      *     tags={"Tags"},
      *     summary="Permanently remove one tag from every entry by passing the Tag label.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="tag",
-     *         in="body",
+     *         in="query",
      *         description="Tag as a string",
      *         required=true,
-     *         pattern="\w+",
-     *         @SWG\Schema(type="string")
+     *         @OA\Schema(
+     *             type="string",
+     *             pattern="\w+",
+     *         )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -93,17 +95,17 @@ class TagRestController extends WallabagRestController
      * @Operation(
      *     tags={"Tags"},
      *     summary="Permanently remove some tags from every entry.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="tags",
-     *         in="body",
+     *         in="query",
      *         description="Tags as strings (comma splitted)",
      *         required=true,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="string",
      *             example="tag1,tag2",
      *         )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -140,15 +142,17 @@ class TagRestController extends WallabagRestController
      * @Operation(
      *     tags={"Tags"},
      *     summary="Permanently remove one tag from every entry by passing the Tag ID.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="tag",
-     *         in="body",
+     *         in="path",
      *         description="The tag",
      *         required=true,
-     *         pattern="\w+",
-     *         @SWG\Schema(type="integer")
+     *         @OA\Schema(
+     *             type="integer",
+     *             pattern="\w+",
+     *         )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
