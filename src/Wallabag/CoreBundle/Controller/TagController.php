@@ -251,8 +251,6 @@ class TagController extends Controller
             $em->flush();
         }
 
-        $redirectUrl = $this->get(Redirect::class)->to($request->headers->get('referer'), '', true);
-
         return $this->redirect($this->get(Redirect::class)->to($request->getSession()->get('prevUrl'), '', true));
     }
 }
