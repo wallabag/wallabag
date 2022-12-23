@@ -598,7 +598,7 @@ class EntryController extends AbstractController
      * Global method to retrieve entries depending on the given type
      * It returns the response to be send.
      *
-     * @param string $type Entries type: unread, starred or archive
+     * @param string $type   Entries type: unread, starred or archive
      * @param int    $page
      * @param bool   $random
      *
@@ -657,7 +657,7 @@ class EntryController extends AbstractController
 
         $entries = $this->preparePagerForEntriesHelper->prepare($pagerAdapter);
 
-        if ($page !== 0) {
+        if (0 !== $page) {
             try {
                 $entries->setCurrentPage($page);
             } catch (OutOfRangeCurrentPageException $e) {
