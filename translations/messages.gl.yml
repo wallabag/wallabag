@@ -88,6 +88,7 @@ entry:
     confirm:
         delete_tag: Tes a certeza de querer eliminar esa etiqueta do artigo?
         delete: Tes a certeza de querer eliminar ese artigo?
+        delete_entries: Estás seguro de que queres eliminar estes artigos?
     public:
         shared_by_wallabag: Este artigo foi compartido por %username% con <a href='%wallabag_instance%'>wallabag</a>
     edit:
