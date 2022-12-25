@@ -330,6 +330,7 @@ entry:
     confirm:
         delete_tag: ¿Estás seguro de que deseas eliminar la etiqueta de este artículo?
         delete: ¿Seguro que quieres eliminar este artículo?
+        delete_entries: ¿Está seguro de que desea eliminar estos artículos?
     metadata:
         added_on: Añadido el
         address: Dirección

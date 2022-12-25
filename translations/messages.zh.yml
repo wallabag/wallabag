@@ -330,6 +330,7 @@ entry:
     confirm:
         delete: "你确定要删除这篇文章吗？"
         delete_tag: "你确定要从这篇文章删除该标签吗？"
+        delete_entries: 你确定要删除这些文章吗？
     metadata:
         reading_time: "预计阅读时间"
         reading_time_minutes_short: "%readingTime% 分钟"
