@@ -36,6 +36,7 @@ menu:
         theme_toggle_dark: Tèma escur
         theme_toggle_light: Tèma clar
         quickstart: Primièrs passes
+        with_annotations: Amb anotacions
     top:
         add_new_entry: Enregistrar un novèl article
         search: Cercar
@@ -109,6 +110,14 @@ config:
             description: Se confirmatz la supression de vòstre compte, TOTES vòstres articles, TOTAS vòstras etiquetas, TOTAS vòstras anotacions e vòstre compte seràn suprimits per totjorn. E aquò es IRREVERSIBLE. Puèi seretz desconnectat.
             confirm: Sètz vertadièrament segur ? (AQUÒ ES IRREVERSIBLE)
             button: Suprimir mon compte
+        two_factor:
+            table_method: Metòde
+            action_app: Utilizar una aplicacion OTP
+            state_disabled: Desactivat
+            table_action: Accion
+            action_email: Utilizar lo corrièl
+            state_enabled: Activat
+            table_state: Estat
     reset:
         title: Zòna de reïnicializacion (Mèfi zòna perilhosa)
         description: En clicant sul boton çai-jos auretz la possibilitat de levar qualques informacions de vòstre compte. Mèfi que totas aquelas accions son IRREVERSIBLAS.
@@ -169,8 +178,20 @@ config:
             meaning: Significacion
             how_to_use_them_title: Cossí las utilizar ?
             title: FAQ
+            variable_description:
+                label: Variabla
     form_feed:
         token_label: Geton flux
+        feed_link:
+            archive: Archivats
+            unread: Pas legits
+            starred: Favorits
+            all: Totes
+    otp:
+        app:
+            enable: Activar
+            cancel: Anullar
+            qrcode_label: Còdi QR
 entry:
     default_title: Títol de l'article
     page_titles:
@@ -182,6 +203,7 @@ entry:
         filtered_search: 'Articles filtrats per recèrca :'
         untagged: Articles sens etiqueta
         all: Totes los articles
+        with_annotations: Articles amb anotacions
     list:
         number_on_the_page: "{0} I a pas cap d'article.|{1} I a un article.|]1,Inf[ I a %count% articles."
         reading_time: durada de lectura
@@ -219,6 +241,7 @@ entry:
         action:
             clear: Escafar
             filter: Filtrar
+        annotated_label: Anotat
     view:
         left_menu:
             back_to_top: Tornar en naut
@@ -239,6 +262,10 @@ entry:
             problem:
                 label: Un problèma ?
                 description: Marca mal la presentacion d'aqueste article ?
+            theme_toggle_dark: Escur
+            theme_toggle: Bascular tèma
+            theme_toggle_light: Clar
+            theme_toggle_auto: Automatic
         edit_title: Modificar lo títol
         original_article: original
         annotations_on_the_entry: "{0} Pas cap d'anotacion|{1} Una anotacion|]1,Inf[ %count% anotacions"
@@ -264,6 +291,11 @@ entry:
     confirm:
         delete: Sètz segur de voler suprimir aqueste article ?
         delete_tag: Sètz segur de voler levar aquesta etiqueta de l'article ?
+    metadata:
+        reading_time_minutes_short: '%readingTime% min'
+        address: Adreça
+        added_on: Apondut lo
+        published_on: Publicat lo
 about:
     page_title: A prepaus
     top_menu:
@@ -357,6 +389,7 @@ quickstart:
         language: Cambiatz la lenga e l'estil de l'aplicacion
         rss: Activatz los fluxes RSS
         tagging_rules: Escrivètz de règlas per classar automaticament vòstres articles
+        feed: Activar los flux RSS
     admin:
         title: Administracion
         description: "En qualitat d'adminitrastor sus wallabag, avètz de privilègis que vos permeton de :"
@@ -408,6 +441,7 @@ tag:
         placeholder: Podètz ajustar mai qu'una etiqueta, separadas per de virgula.
 export:
     footer_template: <div style="text-align:center;"><p>Produch per wallabag amb %method%</p><p>Mercés de dobrir <a href="https://github.com/wallabag/wallabag/issues">una sollicitacion</a> s’avètz de problèmas amb l’afichatge d’aqueste E-Book sus vòstre periferic.</p></div>
+    unknown: Desconegut
 import:
     page_title: Importar
     page_description: Benvenguda sus l'aisina de migracion de wallabag. Causissètz çai-jos lo servici dempuèi lo qual volètz migrar.
