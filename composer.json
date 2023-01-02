@@ -86,7 +86,7 @@
         "lexik/form-filter-bundle": "^7.0",
         "mgargano/simplehtmldom": "~1.5",
         "mnapoli/piwik-twig-extension": "^3.0",
-        "nelmio/api-doc-bundle": "^3.0",
+        "nelmio/api-doc-bundle": "^4.10",
         "nelmio/cors-bundle": "~2.2",
         "ocramius/proxy-manager": "^2.1.1",
         "pagerfanta/doctrine-orm-adapter": "^3.7",

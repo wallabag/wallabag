@@ -7,7 +7,7 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
 use Nelmio\ApiDocBundle\Annotation\Operation;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -39,7 +39,7 @@ class WallabagRestController extends AbstractFOSRestController
      * @Operation(
      *     tags={"Informations"},
      *     summary="Retrieve version number.",
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -65,7 +65,7 @@ class WallabagRestController extends AbstractFOSRestController
      * @Operation(
      *     tags={"Informations"},
      *     summary="Retrieve information about the wallabag instance.",
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )

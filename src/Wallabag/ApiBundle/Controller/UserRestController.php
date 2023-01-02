@@ -9,7 +9,7 @@ use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Model\UserManagerInterface;
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\Operation;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +26,7 @@ class UserRestController extends WallabagRestController
      * @Operation(
      *     tags={"User"},
      *     summary="Retrieve current logged in user informations.",
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -49,35 +49,33 @@ class UserRestController extends WallabagRestController
      * @Operation(
      *     tags={"User"},
      *     summary="Register an user and create a client.",
-     *     @SWG\Parameter(
-     *         name="username",
-     *         in="body",
-     *         description="The user's username",
-     *         required=true,
-     *         @SWG\Schema(type="string")
+     *     @OA\RequestBody(
+     *          @OA\JsonContent(
+     *              type="object",
+     *              required={"username", "password", "email", "client_name"},
+     *              @OA\Property(
+     *                  property="username",
+     *                  description="The user's username",
+     *                  @OA\Schema(type="string")
+     *              ),
+     *              @OA\Property(
+     *                  property="password",
+     *                  description="The user's password",
+     *                  @OA\Schema(type="string")
+     *              ),
+     *              @OA\Property(
+     *                  property="email",
+     *                  description="The user's email",
+     *                  @OA\Schema(type="string")
+     *              ),
+     *              @OA\Property(
+     *                  property="client_name",
+     *                  description="The client name (to be used by your app)",
+     *                  @OA\Schema(type="string")
+     *              ),
+     *          )
      *     ),
-     *     @SWG\Parameter(
-     *         name="password",
-     *         in="body",
-     *         description="The user's password",
-     *         required=true,
-     *         @SWG\Schema(type="string")
-     *     ),
-     *     @SWG\Parameter(
-     *         name="email",
-     *         in="body",
-     *         description="The user's email",
-     *         required=true,
-     *         @SWG\Schema(type="string")
-     *     ),
-     *     @SWG\Parameter(
-     *         name="client_name",
-     *         in="body",
-     *         description="The client name (to be used by your app)",
-     *         required=true,
-     *         @SWG\Schema(type="string")
-     *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )

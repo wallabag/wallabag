@@ -5,9 +5,9 @@ namespace Wallabag\ApiBundle\Controller;
 use Hateoas\Configuration\Route as HateoasRoute;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Nelmio\ApiDocBundle\Annotation\Operation;
+use OpenApi\Annotations as OA;
 use Pagerfanta\Pagerfanta;
 use Psr\Log\LoggerInterface;
-use Swagger\Annotations as SWG;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,46 +38,46 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Check if an entry exist by url.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="return_id",
-     *         in="body",
+     *         in="query",
      *         description="Set 1 if you want to retrieve ID in case entry(ies) exists, 0 by default",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="string",
      *             enum={"1", "0"},
      *             default="0"
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="url",
-     *         in="body",
+     *         in="query",
      *         description="DEPRECATED, use hashed_url instead. An url",
      *         required=true,
-     *         @SWG\Schema(type="string")
+     *         @OA\Schema(type="string")
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="urls",
-     *         in="body",
+     *         in="query",
      *         description="DEPRECATED, use hashed_urls instead. An array of urls (?urls[]=http...&urls[]=http...)",
      *         required=false,
-     *         @SWG\Schema(type="string")
+     *         @OA\Schema(type="string")
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="hashed_url",
-     *         in="body",
+     *         in="query",
      *         description="Hashed url using SHA1 to check if it exists. A hashed url",
      *         required=false,
-     *         @SWG\Schema(type="string")
+     *         @OA\Schema(type="string")
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="hashed_urls",
-     *         in="body",
+     *         in="query",
      *         description="An array of hashed urls using SHA1 to check if they exist. An array of hashed urls (?hashed_urls[]=xxx...&hashed_urls[]=xxx...)",
      *         required=false,
-     *         @SWG\Schema(type="string")
+     *         @OA\Schema(type="string")
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -153,124 +153,123 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Retrieve all entries. It could be filtered by many options.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="archive",
-     *         in="body",
+     *         in="query",
      *         description="filter by archived status. all entries by default.",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="integer",
      *             enum={"1", "0"},
      *             default="0"
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="starred",
-     *         in="body",
+     *         in="query",
      *         description="filter by starred status. all entries by default",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="integer",
      *             enum={"1", "0"},
      *             default="0"
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="sort",
-     *         in="body",
+     *         in="query",
      *         description="sort entries by date.",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="string",
      *             enum={"created", "updated", "archived"},
      *             default="created"
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="order",
-     *         in="body",
+     *         in="query",
      *         description="order of sort.",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="string",
      *             enum={"asc", "desc"},
      *             default="desc"
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="page",
-     *         in="body",
+     *         in="query",
      *         description="what page you want.",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="integer",
      *             default=1
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="perPage",
-     *         in="body",
+     *         in="query",
      *         description="results per page.",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="integer",
      *             default=30
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="tags",
-     *         in="body",
-     *         description="a list of tags url encoded. Will returns entries that matches ALL tags.",
+     *         in="query",
+     *         description="a comma-seperated list of tags url encoded. Will returns entries that matches ALL tags.",
      *         required=false,
-     *         format="comma-seperated",
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="string",
      *             example="api,rest"
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="since",
-     *         in="body",
+     *         in="query",
      *         description="The timestamp since when you want entries updated.",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="integer",
      *             default=0
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="public",
-     *         in="body",
+     *         in="query",
      *         description="filter by entries with a public link. all entries by default",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="integer",
      *             enum={"1", "0"},
      *             default="0"
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="detail",
-     *         in="body",
+     *         in="query",
      *         description="include content field if 'full'. 'full' by default for backward compatibility.",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="string",
      *             enum={"metadata", "full"},
      *             default="full"
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="domain_name",
-     *         in="body",
+     *         in="query",
      *         description="filter entries with the given domain name",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="string",
      *             example="example.com",
      *         )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -347,15 +346,17 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Retrieve a single entry.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="entry",
      *         in="path",
      *         description="The entry ID",
      *         required=true,
-     *         pattern="\w+",
-     *         type="integer"
+     *         @OA\Schema(
+     *             type="integer",
+     *             pattern="\w+",
+     *         )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -379,23 +380,27 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Retrieve a single entry as a predefined format.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="entry",
      *         in="path",
      *         description="The entry ID",
      *         required=true,
-     *         pattern="\w+",
-     *         type="integer"
+     *         @OA\Schema(
+     *             type="integer",
+     *             pattern="\w+",
+     *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="_format",
      *         in="path",
      *         description="",
      *         required=true,
-     *         type="string",
-     *         enum={"xml", "json", "txt", "csv", "pdf", "epub", "mobi"},
+     *         @OA\Schema(
+     *             type="string",
+     *             enum={"xml", "json", "txt", "csv", "pdf", "epub", "mobi"},
+     *         )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -423,14 +428,14 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Handles an entries list and delete URL.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="urls",
-     *         in="body",
+     *         in="query",
      *         description="Urls (as an array) to delete. A JSON array of urls [{'url': 'http://...'}, {'url': 'http://...'}]",
      *         required=true,
-     *         @SWG\Schema(type="string")
+     *         @OA\Schema(type="string")
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -481,14 +486,14 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Handles an entries list and create URL.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="urls",
-     *         in="formData",
+     *         in="query",
      *         description="Urls (as an array) to create. A JSON array of urls [{'url': 'http://...'}, {'url': 'http://...'}]",
      *         required=true,
-     *         type="string"
+     *         @OA\Schema(type="string")
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -553,126 +558,127 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Create an entry.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="url",
-     *         in="body",
+     *         in="query",
      *         description="Url for the entry.",
      *         required=true,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="string",
      *             example="http://www.test.com/article.html"
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="title",
-     *         in="body",
+     *         in="query",
      *         description="Optional, we'll get the title from the page.",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="string",
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="tags",
-     *         in="body",
+     *         in="query",
      *         description="a comma-separated list of tags.",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="string",
      *             example="tag1,tag2,tag3"
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="archive",
-     *         in="body",
+     *         in="query",
      *         description="entry already archived",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="integer",
      *             enum={"1", "0"},
      *             default="0"
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="starred",
-     *         in="body",
+     *         in="query",
      *         description="entry already starred",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="integer",
      *             enum={"1", "0"},
      *             default="0"
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="content",
-     *         in="body",
+     *         in="query",
      *         description="Content of the entry",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="string"
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="language",
-     *         in="body",
+     *         in="query",
      *         description="Language of the entry",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="string"
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="preview_picture",
-     *         in="body",
+     *         in="query",
      *         description="Preview picture of the entry",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="string"
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="published_at",
-     *         in="body",
+     *         in="query",
      *         description="Published date of the entry",
      *         required=false,
-     *         format="YYYY-MM-DDTHH:II:SS+TZ or a timestamp (integer)",
-     *         @SWG\Schema(
+     *
+     *         @OA\Schema(
      *             type="string",
+     *             format="YYYY-MM-DDTHH:II:SS+TZ or a timestamp (integer)",
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="authors",
-     *         in="body",
+     *         in="query",
      *         description="Authors of the entry",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="string",
      *             example="Name Firstname,author2,author3"
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="public",
-     *         in="body",
+     *         in="query",
      *         description="will generate a public link for the entry",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="integer",
      *             enum={"1", "0"},
      *             default="0"
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="origin_url",
-     *         in="body",
+     *         in="query",
      *         description="Origin url for the entry (from where you found it).",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="string",
      *             example="http://www.test.com/article.html"
      *         )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -769,114 +775,118 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Change several properties of an entry.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="entry",
      *         in="path",
      *         description="The entry ID",
      *         required=true,
-     *         pattern="\w+",
-     *         type="integer"
+     *         @OA\Schema(
+     *             type="integer",
+     *             pattern="\w+",
+     *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="title",
-     *         in="body",
+     *         in="query",
      *         description="",
      *         required=false,
-     *         @SWG\Schema(type="string")
+     *         @OA\Schema(type="string")
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="tags",
-     *         in="body",
+     *         in="query",
      *         description="a comma-separated list of tags.",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="string",
      *             example="tag1,tag2,tag3",
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="archive",
-     *         in="body",
+     *         in="query",
      *         description="archived the entry.",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="integer",
      *             enum={"1", "0"},
      *             default="0"
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="starred",
-     *         in="body",
+     *         in="query",
      *         description="starred the entry.",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="integer",
      *             enum={"1", "0"},
      *             default="0"
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="content",
-     *         in="body",
+     *         in="query",
      *         description="Content of the entry",
      *         required=false,
-     *         @SWG\Schema(type="string")
+     *         @OA\Schema(type="string")
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="language",
-     *         in="body",
+     *         in="query",
      *         description="Language of the entry",
      *         required=false,
-     *         @SWG\Schema(type="string")
+     *         @OA\Schema(type="string")
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="preview_picture",
-     *         in="body",
+     *         in="query",
      *         description="Preview picture of the entry",
      *         required=false,
-     *         @SWG\Schema(type="string")
+     *         @OA\Schema(type="string")
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="published_at",
-     *         in="body",
+     *         in="query",
      *         description="Published date of the entry",
      *         required=false,
-     *         format="YYYY-MM-DDTHH:II:SS+TZ or a timestamp",
-     *         @SWG\Schema(type="datetime|integer")
+     *         @OA\Schema(
+     *             type="datetime|integer",
+     *             format="YYYY-MM-DDTHH:II:SS+TZ or a timestamp",
+     *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="authors",
-     *         in="body",
+     *         in="query",
      *         description="Authors of the entry",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="string",
      *             example="Name Firstname,author2,author3",
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="public",
-     *         in="body",
+     *         in="query",
      *         description="will generate a public link for the entry",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="integer",
      *             enum={"1", "0"},
      *             default="0"
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="origin_url",
-     *         in="body",
+     *         in="query",
      *         description="Origin url for the entry (from where you found it).",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="string",
      *             example="http://www.test.com/article.html",
      *         )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -983,15 +993,17 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Reload an entry.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="entry",
      *         in="path",
      *         description="The entry ID",
      *         required=true,
-     *         pattern="\w+",
-     *         type="integer"
+     *         @OA\Schema(
+     *             type="integer",
+     *             pattern="\w+",
+     *         )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -1037,18 +1049,18 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Delete permanently an entry.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="expect",
-     *         in="body",
+     *         in="query",
      *         description="Only returns the id instead of the deleted entry's full entity if 'id' is specified.",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="string",
      *             enum={"id", "entry"},
      *             default="entry"
      *         )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -1091,15 +1103,17 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Retrieve all tags for an entry.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="entry",
      *         in="path",
      *         description="The entry ID",
      *         required=true,
-     *         pattern="\w+",
-     *         type="integer"
+     *         @OA\Schema(
+     *             type="integer",
+     *             pattern="\w+",
+     *         )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -1123,25 +1137,27 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Add one or more tags to an entry.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="entry",
      *         in="path",
      *         description="The entry ID",
      *         required=true,
-     *         pattern="\w+",
-     *         type="integer"
+     *         @OA\Schema(
+     *             type="integer",
+     *             pattern="\w+",
+     *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="tags",
-     *         in="body",
+     *         in="query",
      *         description="a comma-separated list of tags.",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="string",
      *             example="tag1,tag2,tag3",
      *         )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -1173,23 +1189,27 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Permanently remove one tag for an entry.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="entry",
      *         in="path",
      *         description="The entry ID",
      *         required=true,
-     *         pattern="\w+",
-     *         type="integer"
+     *         @OA\Schema(
+     *             type="integer",
+     *             pattern="\w+",
+     *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="tag",
      *         in="path",
      *         description="The tag ID",
      *         required=true,
-     *         pattern="\w+",
-     *         type="integer"
+     *         @OA\Schema(
+     *             type="integer",
+     *             pattern="\w+",
+     *         )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -1218,14 +1238,14 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Handles an entries list delete tags from them.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="list",
-     *         in="body",
+     *         in="query",
      *         description="Urls (as an array) to handle. A JSON array of urls [{'url': 'http://...','tags': 'tag1, tag2'}, {'url': 'http://...','tags': 'tag1, tag2'}]",
      *         required=true,
-     *         @SWG\Schema(type="string")
+     *         @OA\Schema(type="string")
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -1285,14 +1305,14 @@ class EntryRestController extends WallabagRestController
      * @Operation(
      *     tags={"Entries"},
      *     summary="Handles an entries list and add tags to them.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="list",
-     *         in="formData",
+     *         in="query",
      *         description="Urls (as an array) to handle. A JSON array of urls [{'url': 'http://...','tags': 'tag1, tag2'}, {'url': 'http://...','tags': 'tag1, tag2'}]",
      *         required=true,
-     *         type="string"
+     *         @OA\Schema(type="string")
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
