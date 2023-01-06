@@ -161,7 +161,8 @@
     "extra": {
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
-        }
+        },
+        "public-dir": "web"
     },
     "autoload": {
         "psr-4": {
