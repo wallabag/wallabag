@@ -124,7 +124,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertSame('binary', $headers->get('content-transfer-encoding'));
 
         ob_start();
-        $crawler = $client->request('GET', '/export/tag_entries.pdf?tag=foo-bar');
+        $crawler = $client->request('GET', '/export/tag_entries.pdf?tag=t:foo-bar');
         ob_end_clean();
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());

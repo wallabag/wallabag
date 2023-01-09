@@ -45,7 +45,7 @@ class Tag
 
     /**
      * @Expose
-     * @Gedmo\Slug(fields={"label"})
+     * @Gedmo\Slug(fields={"label"}, prefix="t:")
      * @ORM\Column(length=128, unique=true)
      */
     private $slug;
