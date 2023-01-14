@@ -346,7 +346,7 @@ config:
         settings: Axustes
     page_title: Configuración
 footer:
-    stats: Desde %user_creation% leches %nb_archives% artigos. Que ven sendo %per_day% ó día!
+    stats: Desde %user_creation% liches %nb_archives% artigos. Que ven sendo %per_day% ao día!
     wallabag:
         about: Acerca de
         powered_by: grazas a
