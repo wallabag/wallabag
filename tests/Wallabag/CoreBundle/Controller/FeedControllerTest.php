@@ -250,29 +250,29 @@ class FeedControllerTest extends WallabagCoreTestCase
         $client = $this->getTestClient();
 
         // tag foo - without sort
-        $crawler = $client->request('GET', '/feed/admin/SUPERTOKEN/tags/foo');
+        $crawler = $client->request('GET', '/feed/admin/SUPERTOKEN/tags/t:foo');
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame('test title entry4', $crawler->filterXPath('//feed/entry[1]/title')->text());
         $this->assertSame('test title entry1', $crawler->filterXPath('//feed/entry[2]/title')->text());
 
         // tag foo - with sort created
-        $crawler = $client->request('GET', '/feed/admin/SUPERTOKEN/tags/foo?sort=created');
+        $crawler = $client->request('GET', '/feed/admin/SUPERTOKEN/tags/t:foo?sort=created');
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame('test title entry4', $crawler->filterXPath('//feed/entry[1]/title')->text());
         $this->assertSame('test title entry1', $crawler->filterXPath('//feed/entry[2]/title')->text());
 
         // tag foo - with sort updated
-        $crawler = $client->request('GET', '/feed/admin/SUPERTOKEN/tags/foo?sort=updated');
+        $crawler = $client->request('GET', '/feed/admin/SUPERTOKEN/tags/t:foo?sort=updated');
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame('test title entry1', $crawler->filterXPath('//feed/entry[1]/title')->text());
         $this->assertSame('test title entry4', $crawler->filterXPath('//feed/entry[2]/title')->text());
 
         // tag foo - with invalid sort
-        $client->request('GET', '/feed/admin/SUPERTOKEN/tags/foo?sort=invalid');
+        $client->request('GET', '/feed/admin/SUPERTOKEN/tags/t:foo?sort=invalid');
         $this->assertSame(400, $client->getResponse()->getStatusCode());
 
         // tag foo/3000
-        $client->request('GET', '/feed/admin/SUPERTOKEN/tags/foo/3000');
+        $client->request('GET', '/feed/admin/SUPERTOKEN/tags/t:foo/3000');
         $this->assertSame(302, $client->getResponse()->getStatusCode());
     }
 
