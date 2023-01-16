@@ -1493,11 +1493,11 @@ class EntryControllerTest extends WallabagCoreTestCase
                 'zh_CN',
             ],
             'pt_BR' => [
-                'https://politica.estadao.com.br/noticias/eleicoes,campanha-catatonica,70002491983',
+                'https://esportes.r7.com/lance/futebol/victor-hugo-e-matheus-franca-devem-desfalcar-flamengo-no-carioca-22112022',
                 'pt_BR',
             ],
             'es-ES' => [
-                'https://elpais.com/internacional/2022-10-09/ultima-hora-de-la-guerra-en-ucrania-hoy-en-directo.html',
+                'https://elpais.com/internacional/2022-11-03/ultima-hora-de-la-guerra-entre-rusia-y-ucrania-hoy-en-directo.html',
                 'es',
             ],
         ];
