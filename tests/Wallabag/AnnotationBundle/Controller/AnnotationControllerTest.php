@@ -22,8 +22,6 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
     }
 
     /**
-     * Test fetching annotations for an entry.
-     *
      * @dataProvider dataForEachAnnotations
      */
     public function testGetAnnotations($prefixUrl)
@@ -35,15 +33,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
             ->findOneByUserName('admin');
         $entry = $em
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findOneByUsernameAndNotArchived('admin');
-
-        $annotation = new Annotation($user);
-        $annotation->setEntry($entry);
-        $annotation->setText('This is my annotation /o/');
-        $annotation->setQuote('content');
-
-        $em->persist($annotation);
-        $em->flush();
+            ->findByUrlAndUserId('http://0.0.0.0/entry1', $user->getId());
 
         if ('annotations' === $prefixUrl) {
             $this->logInAs('admin');
@@ -54,22 +44,43 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
         $this->assertGreaterThanOrEqual(1, $content['total']);
-        $this->assertSame($annotation->getText(), $content['rows'][0]['text']);
-
-        // we need to re-fetch the annotation becase after the flush, it has been "detached" from the entity manager
-        $annotation = $em->getRepository('WallabagAnnotationBundle:Annotation')->findAnnotationById($annotation->getId());
-        $em->remove($annotation);
-        $em->flush();
     }
 
     /**
-     * Test creating an annotation for an entry.
-     *
+     * @dataProvider dataForEachAnnotations
+     */
+    public function testGetAnnotationsFromAnOtherUser($prefixUrl)
+    {
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+
+        $otherUser = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUserName('bob');
+        $entry = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId('http://0.0.0.0/entry3', $otherUser->getId());
+
+        if ('annotations' === $prefixUrl) {
+            $this->logInAs('admin');
+        }
+
+        $this->client->request('GET', $prefixUrl . '/' . $entry->getId() . '.json');
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+        $this->assertGreaterThanOrEqual(0, $content['total']);
+    }
+
+    /**
      * @dataProvider dataForEachAnnotations
      */
     public function testSetAnnotation($prefixUrl)
     {
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUserName('admin');
 
         if ('annotations' === $prefixUrl) {
             $this->logInAs('admin');
@@ -102,7 +113,7 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
         /** @var Annotation $annotation */
         $annotation = $em
             ->getRepository('WallabagAnnotationBundle:Annotation')
-            ->findLastAnnotationByPageId($entry->getId(), 1);
+            ->findLastAnnotationByUserId($entry->getId(), $user->getId());
 
         $this->assertSame('my annotation', $annotation->getText());
     }
@@ -195,8 +206,6 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
     }
 
     /**
-     * Test editing an existing annotation.
-     *
      * @dataProvider dataForEachAnnotations
      */
     public function testEditAnnotation($prefixUrl)
@@ -243,8 +252,31 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
     }
 
     /**
-     * Test deleting an annotation.
-     *
+     * @dataProvider dataForEachAnnotations
+     */
+    public function testEditAnnotationFromAnOtherUser($prefixUrl)
+    {
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+
+        $otherUser = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUserName('bob');
+        $entry = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId('http://0.0.0.0/entry3', $otherUser->getId());
+        $annotation = $em
+            ->getRepository('WallabagAnnotationBundle:Annotation')
+            ->findLastAnnotationByUserId($entry->getId(), $otherUser->getId());
+
+        $headers = ['CONTENT_TYPE' => 'application/json'];
+        $content = json_encode([
+            'text' => 'a modified annotation',
+        ]);
+        $this->client->request('PUT', $prefixUrl . '/' . $annotation->getId() . '.json', [], [], $headers, $content);
+        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
      * @dataProvider dataForEachAnnotations
      */
     public function testDeleteAnnotation($prefixUrl)
@@ -286,5 +318,41 @@ class AnnotationControllerTest extends WallabagAnnotationTestCase
             ->findOneById($annotation->getId());
 
         $this->assertNull($annotationDeleted);
+    }
+
+    /**
+     * @dataProvider dataForEachAnnotations
+     */
+    public function testDeleteAnnotationFromAnOtherUser($prefixUrl)
+    {
+        $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+
+        $otherUser = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUserName('bob');
+        $entry = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findByUrlAndUserId('http://0.0.0.0/entry3', $otherUser->getId());
+        $annotation = $em
+            ->getRepository('WallabagAnnotationBundle:Annotation')
+            ->findLastAnnotationByUserId($entry->getId(), $otherUser->getId());
+
+        $user = $em
+            ->getRepository('WallabagUserBundle:User')
+            ->findOneByUserName('admin');
+        $entry = $em
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUsernameAndNotArchived('admin');
+
+        if ('annotations' === $prefixUrl) {
+            $this->logInAs('admin');
+        }
+
+        $headers = ['CONTENT_TYPE' => 'application/json'];
+        $content = json_encode([
+            'text' => 'a modified annotation',
+        ]);
+        $this->client->request('DELETE', $prefixUrl . '/' . $annotation->getId() . '.json', [], [], $headers, $content);
+        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
     }
 }
