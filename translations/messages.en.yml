@@ -243,6 +243,8 @@ entry:
         by:
             creation_date: Creation date
             title: Title
+            url: URL
+            reading_time: Reading time
         ascending: Ascending
         descending: Descending
     list:

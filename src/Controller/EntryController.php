@@ -633,7 +633,7 @@ class EntryController extends AbstractController
         if (null !== $request->get('entry_filter') && null !== $request->get('entry_filter')['sortType'] && '' !== $request->get('entry_filter')['sortType']) {
             $direction = (null !== $request->get('entry_filter')['sortOrder'] && \in_array($request->get('entry_filter')['sortOrder'], ['asc', 'desc'], true)) ? $request->get('entry_filter')['sortOrder'] : 'desc';
 
-            if (\in_array($request->get('entry_filter')['sortType'], ['id','title','createdAt'], true)) {
+            if (\in_array($request->get('entry_filter')['sortType'], ['id','title','createdAt', 'url', 'readingTime'], true)) {
                 $sortBy = $request->get('entry_filter')['sortType'];
             }
         }

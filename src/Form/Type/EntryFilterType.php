@@ -218,6 +218,8 @@ class EntryFilterType extends AbstractType
                 'choices' => [
                     'entry.sort.by.creation_date' => 'createdAt',
                     'entry.sort.by.title' => 'title',
+                    'entry.sort.by.url' => 'url',
+                    'entry.sort.by.reading_time' => 'readingTime',
                 ],
                 'label' => 'entry.sort.status_label',
             ])
