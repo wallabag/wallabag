@@ -37,6 +37,7 @@ menu:
         theme_toggle_light: Tèma clar
         quickstart: Primièrs passes
         with_annotations: Amb anotacions
+        ignore_origin_instance_rules: Règlas globalas d’omission d’origina
     top:
         add_new_entry: Enregistrar un novèl article
         search: Cercar
@@ -63,6 +64,8 @@ config:
         rules: Règlas d'etiquetas automaticas
         new_user: Crear un compte
         feed: Flux
+        ignore_origin: Règlas d’omission d’origina
+        reset: Reïnicializar
     form:
         save: Enregistrar
     form_settings:
@@ -118,6 +121,8 @@ config:
             action_email: Utilizar lo corrièl
             state_enabled: Activat
             table_state: Estat
+            emailTwoFactor_label: En utilizant lo corrièl (recebètz un còdi per corrièl)
+        login_label: Identificant
     reset:
         title: Zòna de reïnicializacion (Mèfi zòna perilhosa)
         description: En clicant sul boton çai-jos auretz la possibilitat de levar qualques informacions de vòstre compte. Mèfi que totas aquelas accions son IRREVERSIBLAS.
@@ -173,6 +178,10 @@ config:
         export: Exportar
         import_submit: Importar
         file_label: Fichièr JSON
+        card:
+            new_tagging_rule: Crear una règla d’etiquetatge
+            import_tagging_rules: Importar de règlas
+            export_tagging_rules: Exportar las règlas
     form_ignore_origin_rules:
         faq:
             meaning: Significacion
@@ -180,6 +189,10 @@ config:
             title: FAQ
             variable_description:
                 label: Variabla
+                host: Òste
+            operator_description:
+                label: Operator
+                equal_to: Val…
     form_feed:
         token_label: Geton flux
         feed_link:
@@ -187,11 +200,18 @@ config:
             unread: Pas legits
             starred: Favorits
             all: Totes
+        feed_limit: Nombre d’articles dins lo flux
+        no_token: Cap de geton
+        token_create: Crear vòstre geton
+        token_reset: Reïnicializar vòstre geton
+        token_revoke: Suprimir lo geton
+        feed_links: Adreças dels flux
     otp:
         app:
             enable: Activar
             cancel: Anullar
             qrcode_label: Còdi QR
+        page_title: Autentificacion a dos factors
 entry:
     default_title: Títol de l'article
     page_titles:
@@ -204,6 +224,7 @@ entry:
         untagged: Articles sens etiqueta
         all: Totes los articles
         with_annotations: Articles amb anotacions
+        same_domain: Meteis site
     list:
         number_on_the_page: "{0} I a pas cap d'article.|{1} I a un article.|]1,Inf[ I a %count% articles."
         reading_time: durada de lectura
@@ -296,6 +317,7 @@ entry:
         address: Adreça
         added_on: Apondut lo
         published_on: Publicat lo
+        reading_time: Durada de lectura estimada
 about:
     page_title: A prepaus
     top_menu:
@@ -384,9 +406,9 @@ quickstart:
         paragraph_1: Anem vos guidar per far lo torn de la proprietat e vos presentar unas foncionalitats que vos poirián interessar per vos apropriar aquesta aisina.
         paragraph_2: Seguètz-nos !
     configure:
-        title: Configuratz l'aplicacion
+        title: Configurar l'aplicacion
         description: Per fin d'aver una aplicacion que vos va ben, anatz veire la configuracion de wallabag.
-        language: Cambiatz la lenga e l'estil de l'aplicacion
+        language: Cambiar la lenga e l'estil de l'aplicacion
         rss: Activatz los fluxes RSS
         tagging_rules: Escrivètz de règlas per classar automaticament vòstres articles
         feed: Activar los flux RSS
@@ -439,6 +461,8 @@ tag:
     new:
         add: Ajustar
         placeholder: Podètz ajustar mai qu'una etiqueta, separadas per de virgula.
+    confirm:
+        delete: Suprimir l’etiqueta %name%
 export:
     footer_template: <div style="text-align:center;"><p>Produch per wallabag amb %method%</p><p>Mercés de dobrir <a href="https://github.com/wallabag/wallabag/issues">una sollicitacion</a> s’avètz de problèmas amb l’afichatge d’aqueste E-Book sus vòstre periferic.</p></div>
     unknown: Desconegut
@@ -496,7 +520,7 @@ developer:
     welcome_message: Vos desirem la benvenguda sus l'API de wallabag
     documentation: Documentacion
     how_to_first_app: Cossí crear vòstra primièra aplicacion
-    full_documentation: Veire la documentacion completa de l'API
+    full_documentation: Veire la documentacion complèta de l'API
     list_methods: Lista dels metòdes de l'API
     clients:
         title: Clients
@@ -604,6 +628,7 @@ flashes:
             tags_reset: Etiquetas levadas
             entries_reset: Articles levats
             archived_reset: Articles archivat suprimits
+            feed_updated: Configuracion RSS actualizada
     entry:
         notice:
             entry_already_saved: Article ja salvagardat lo %date%
@@ -620,6 +645,7 @@ flashes:
     tag:
         notice:
             tag_added: Etiqueta ajustada
+            tag_renamed: Etiqueta renomenada
     import:
         notice:
             failed: L'importacion a fracassat, mercés de tornar ensajar.
