@@ -25,17 +25,17 @@ class ExportController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function downloadEntryAction(Request $request, $format)
+    public function downloadEntryAction(Request $request, $format, $id)
     {
-         try {
+        try {
             $entry = $this->get('wallabag_core.entry_repository')
-                ->find((int) $request->query->get('id'));
+                ->find((int) $id);
 
-            /**
+            /*
              * We duplicate EntryController::checkUserAction here as a quick fix for an improper authorization vulnerability
              *
              * This should be eventually rewritten
-            */
+             */
             if (null === $entry || null === $this->getUser() || $this->getUser()->getId() !== $entry->getUser()->getId()) {
                 throw new NotFoundHttpException();
             }

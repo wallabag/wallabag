@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.5.3](https://github.com/wallabag/wallabag/tree/2.5.3)
+   [Full Changelog](https://github.com/wallabag/wallabag/compare/2.5.2...2.5.3)
+
+### Security fixes
+* Fix GHSA-qwx8-mxxx-mg96 https://github.com/wallabag/wallabag/commit/0f7460dbab9e29f4f7d2944aca20210f828b6abb by @Kdecherf, thanks to @bAuh0lz
+* Fix GHSA-mrqx-mjc4-vfh3 https://github.com/wallabag/wallabag/commit/5ac6b6bff9e2e3a87fd88c2904ff3c6aac40722e by @Kdecherf, thanks to @bAuh0lz
+
+### Meta
+* Update deps before 2.5.3 by @j0k3r in https://github.com/wallabag/wallabag/pull/6241
+
 ## [2.5.2](https://github.com/wallabag/wallabag/tree/2.5.2)
    [Full Changelog](https://github.com/wallabag/wallabag/compare/2.5.1...2.5.2)
 
