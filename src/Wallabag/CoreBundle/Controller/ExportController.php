@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Wallabag\CoreBundle\Entity\Entry;
 
 /**
  * The try/catch can be removed once all formats will be implemented.
@@ -26,9 +25,21 @@ class ExportController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function downloadEntryAction(Entry $entry, $format)
+    public function downloadEntryAction(Request $request, $format)
     {
-        try {
+         try {
+            $entry = $this->get('wallabag_core.entry_repository')
+                ->find((int) $request->query->get('id'));
+
+            /**
+             * We duplicate EntryController::checkUserAction here as a quick fix for an improper authorization vulnerability
+             *
+             * This should be eventually rewritten
+            */
+            if (null === $entry || null === $this->getUser() || $this->getUser()->getId() !== $entry->getUser()->getId()) {
+                throw new NotFoundHttpException();
+            }
+
             return $this->get('wallabag_core.helper.entries_export')
                 ->setEntries($entry)
                 ->updateTitle('entry')
