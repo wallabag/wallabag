@@ -3,7 +3,6 @@
 namespace Wallabag\ApiBundle\Controller;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Wallabag\AnnotationBundle\Entity\Annotation;
@@ -63,11 +62,9 @@ class AnnotationRestController extends WallabagRestController
      *      }
      * )
      *
-     * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
-     *
      * @return JsonResponse
      */
-    public function putAnnotationAction(Annotation $annotation, Request $request)
+    public function putAnnotationAction(int $annotation, Request $request)
     {
         $this->validateAuthentication();
 
@@ -86,11 +83,9 @@ class AnnotationRestController extends WallabagRestController
      *      }
      * )
      *
-     * @ParamConverter("annotation", class="WallabagAnnotationBundle:Annotation")
-     *
      * @return JsonResponse
      */
-    public function deleteAnnotationAction(Annotation $annotation)
+    public function deleteAnnotationAction(int $annotation)
     {
         $this->validateAuthentication();
 

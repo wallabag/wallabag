@@ -932,7 +932,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $annotationsReset = $em
             ->getRepository('WallabagAnnotationBundle:Annotation')
-            ->findAnnotationsByPageId($entry->getId(), $user->getId());
+            ->findByEntryIdAndUserId($entry->getId(), $user->getId());
 
         $this->assertEmpty($annotationsReset, 'Annotations were reset');
 
@@ -1040,7 +1040,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $annotationsReset = $em
             ->getRepository('WallabagAnnotationBundle:Annotation')
-            ->findAnnotationsByPageId($annotationArchived->getId(), $user->getId());
+            ->findByEntryIdAndUserId($annotationArchived->getId(), $user->getId());
 
         $this->assertEmpty($annotationsReset, 'Annotations were reset');
     }
@@ -1097,7 +1097,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $annotationsReset = $em
             ->getRepository('WallabagAnnotationBundle:Annotation')
-            ->findAnnotationsByPageId($entry->getId(), $user->getId());
+            ->findByEntryIdAndUserId($entry->getId(), $user->getId());
 
         $this->assertEmpty($annotationsReset, 'Annotations were reset');
     }
