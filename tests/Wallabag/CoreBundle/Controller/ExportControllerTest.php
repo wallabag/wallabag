@@ -72,9 +72,12 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getClient();
 
-        // Entry with id 3 is owned by the user bob
-        // See EntryFixtures
-        $client->request('GET', '/export/3.mobi');
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository('WallabagCoreBundle:Entry')
+            ->findOneByUsernameAndNotArchived('bob');
+
+        $client->request('GET', '/export/' . $content->getId() . '.mobi');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
