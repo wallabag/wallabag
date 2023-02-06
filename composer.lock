@@ -647,16 +647,16 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "1.14.2",
+            "version": "1.14.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "ad785217c1e9555a7d6c6c8c9f406395a5e2882b"
+                "reference": "fb0d71a7393298a7b232cbf4c8b1f73f3ec3d5af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/ad785217c1e9555a7d6c6c8c9f406395a5e2882b",
-                "reference": "ad785217c1e9555a7d6c6c8c9f406395a5e2882b",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/fb0d71a7393298a7b232cbf4c8b1f73f3ec3d5af",
+                "reference": "fb0d71a7393298a7b232cbf4c8b1f73f3ec3d5af",
                 "shasum": ""
             },
             "require": {
@@ -717,9 +717,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/annotations/issues",
-                "source": "https://github.com/doctrine/annotations/tree/1.14.2"
+                "source": "https://github.com/doctrine/annotations/tree/1.14.3"
             },
-            "time": "2022-12-15T06:48:22+00:00"
+            "time": "2023-02-01T09:20:38+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -1864,16 +1864,16 @@
         },
         {
             "name": "doctrine/persistence",
-            "version": "3.1.3",
+            "version": "3.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/persistence.git",
-                "reference": "920da294b4bb0bb527f2a91ed60c18213435880f"
+                "reference": "8bf8ab15960787f1a49d405f6eb8c787b4841119"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/persistence/zipball/920da294b4bb0bb527f2a91ed60c18213435880f",
-                "reference": "920da294b4bb0bb527f2a91ed60c18213435880f",
+                "url": "https://api.github.com/repos/doctrine/persistence/zipball/8bf8ab15960787f1a49d405f6eb8c787b4841119",
+                "reference": "8bf8ab15960787f1a49d405f6eb8c787b4841119",
                 "shasum": ""
             },
             "require": {
@@ -1942,7 +1942,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/persistence/issues",
-                "source": "https://github.com/doctrine/persistence/tree/3.1.3"
+                "source": "https://github.com/doctrine/persistence/tree/3.1.4"
             },
             "funding": [
                 {
@@ -1958,7 +1958,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-19T13:39:42+00:00"
+            "time": "2023-02-03T11:13:07+00:00"
         },
         {
             "name": "doctrine/sql-formatter",
@@ -5011,16 +5011,16 @@
         },
         {
             "name": "jms/serializer",
-            "version": "3.21.0",
+            "version": "3.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "cc49ca6cd97baa173166c1f4fc54521964cf28bd"
+                "reference": "576d226178697534e214531dbf80058637a10ebc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/cc49ca6cd97baa173166c1f4fc54521964cf28bd",
-                "reference": "cc49ca6cd97baa173166c1f4fc54521964cf28bd",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/576d226178697534e214531dbf80058637a10ebc",
+                "reference": "576d226178697534e214531dbf80058637a10ebc",
                 "shasum": ""
             },
             "require": {
@@ -5095,7 +5095,7 @@
             ],
             "support": {
                 "issues": "https://github.com/schmittjoh/serializer/issues",
-                "source": "https://github.com/schmittjoh/serializer/tree/3.21.0"
+                "source": "https://github.com/schmittjoh/serializer/tree/3.22.0"
             },
             "funding": [
                 {
@@ -5103,20 +5103,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-10T13:08:17+00:00"
+            "time": "2023-02-03T04:58:11+00:00"
         },
         {
             "name": "jms/serializer-bundle",
-            "version": "5.2.0",
+            "version": "5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/JMSSerializerBundle.git",
-                "reference": "cdc876a8bc4611279a7ec970f3da2052cda55078"
+                "reference": "c772704a0b3cb772fa391ff5ac7d36fd6cecebf4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSSerializerBundle/zipball/cdc876a8bc4611279a7ec970f3da2052cda55078",
-                "reference": "cdc876a8bc4611279a7ec970f3da2052cda55078",
+                "url": "https://api.github.com/repos/schmittjoh/JMSSerializerBundle/zipball/c772704a0b3cb772fa391ff5ac7d36fd6cecebf4",
+                "reference": "c772704a0b3cb772fa391ff5ac7d36fd6cecebf4",
                 "shasum": ""
             },
             "require": {
@@ -5182,7 +5182,7 @@
             ],
             "support": {
                 "issues": "https://github.com/schmittjoh/JMSSerializerBundle/issues",
-                "source": "https://github.com/schmittjoh/JMSSerializerBundle/tree/5.2.0"
+                "source": "https://github.com/schmittjoh/JMSSerializerBundle/tree/5.2.1"
             },
             "funding": [
                 {
@@ -5190,7 +5190,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-09T16:25:13+00:00"
+            "time": "2023-02-05T11:03:45+00:00"
         },
         {
             "name": "khanamiryan/qrcode-detector-decoder",
