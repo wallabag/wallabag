@@ -541,16 +541,16 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "1.14.2",
+            "version": "1.14.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "ad785217c1e9555a7d6c6c8c9f406395a5e2882b"
+                "reference": "fb0d71a7393298a7b232cbf4c8b1f73f3ec3d5af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/ad785217c1e9555a7d6c6c8c9f406395a5e2882b",
-                "reference": "ad785217c1e9555a7d6c6c8c9f406395a5e2882b",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/fb0d71a7393298a7b232cbf4c8b1f73f3ec3d5af",
+                "reference": "fb0d71a7393298a7b232cbf4c8b1f73f3ec3d5af",
                 "shasum": ""
             },
             "require": {
@@ -611,9 +611,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/annotations/issues",
-                "source": "https://github.com/doctrine/annotations/tree/1.14.2"
+                "source": "https://github.com/doctrine/annotations/tree/1.14.3"
             },
-            "time": "2022-12-15T06:48:22+00:00"
+            "time": "2023-02-01T09:20:38+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -4926,16 +4926,16 @@
         },
         {
             "name": "jms/serializer",
-            "version": "3.21.0",
+            "version": "3.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "cc49ca6cd97baa173166c1f4fc54521964cf28bd"
+                "reference": "576d226178697534e214531dbf80058637a10ebc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/cc49ca6cd97baa173166c1f4fc54521964cf28bd",
-                "reference": "cc49ca6cd97baa173166c1f4fc54521964cf28bd",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/576d226178697534e214531dbf80058637a10ebc",
+                "reference": "576d226178697534e214531dbf80058637a10ebc",
                 "shasum": ""
             },
             "require": {
@@ -5010,7 +5010,7 @@
             ],
             "support": {
                 "issues": "https://github.com/schmittjoh/serializer/issues",
-                "source": "https://github.com/schmittjoh/serializer/tree/3.21.0"
+                "source": "https://github.com/schmittjoh/serializer/tree/3.22.0"
             },
             "funding": [
                 {
@@ -5018,7 +5018,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-10T13:08:17+00:00"
+            "time": "2023-02-03T04:58:11+00:00"
         },
         {
             "name": "jms/serializer-bundle",
@@ -7510,16 +7510,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.16.0",
+            "version": "1.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "57090cfccbfaa639e703c007486d605a6e80f56d"
+                "reference": "e27e92d939e2e3636f0a1f0afaba59692c0bf571"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/57090cfccbfaa639e703c007486d605a6e80f56d",
-                "reference": "57090cfccbfaa639e703c007486d605a6e80f56d",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/e27e92d939e2e3636f0a1f0afaba59692c0bf571",
+                "reference": "e27e92d939e2e3636f0a1f0afaba59692c0bf571",
                 "shasum": ""
             },
             "require": {
@@ -7549,9 +7549,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.16.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.16.1"
             },
-            "time": "2023-01-29T14:41:23+00:00"
+            "time": "2023-02-07T18:11:17+00:00"
         },
         {
             "name": "phpzip/phpzip",
