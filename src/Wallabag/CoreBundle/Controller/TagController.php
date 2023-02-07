@@ -17,7 +17,7 @@ use Wallabag\CoreBundle\Form\Type\RenameTagType;
 class TagController extends Controller
 {
     /**
-     * @Route("/new-tag/{entry}", requirements={"entry" = "\d+"}, name="new_tag")
+     * @Route("/new-tag/{entry}", requirements={"entry" = "\d+"}, name="new_tag", methods={"POST"})
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -26,7 +26,17 @@ class TagController extends Controller
         $form = $this->createForm(NewTagType::class, new Tag());
         $form->handleRequest($request);
 
+        $tags = $form->get('label')->getData();
+        $tagsExploded = explode(',', $tags);
+
+        // avoid too much tag to be added
+        if (\count($tagsExploded) >= 5 || \strlen($tags) >= NewTagType::MAX_LENGTH) {
+            return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->checkUserAction($entry);
+
             $this->get('wallabag_core.tags_assigner')->assignTagsToEntry(
                 $entry,
                 $form->get('label')->getData()
@@ -59,6 +69,8 @@ class TagController extends Controller
      */
     public function removeTagFromEntry(Request $request, Entry $entry, Tag $tag)
     {
+        $this->checkUserAction($entry);
+
         $entry->removeTag($tag);
         $em = $this->getDoctrine()->getManager();
         $em->flush();
@@ -221,5 +233,15 @@ class TagController extends Controller
         $em->flush();
 
         return $this->redirect($this->get('wallabag_core.helper.redirect')->to($request->headers->get('referer'), '', true));
+    }
+
+    /**
+     * Check if the logged user can manage the given entry.
+     */
+    private function checkUserAction(Entry $entry)
+    {
+        if (null === $this->getUser() || $this->getUser()->getId() !== $entry->getUser()->getId()) {
+            throw $this->createAccessDeniedException('You can not access this entry.');
+        }
     }
 }
