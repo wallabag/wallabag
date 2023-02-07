@@ -548,7 +548,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div id="set7" class="col s12">
                         <div class="row">
                             <h5>{{ 'config.reset.title'|trans }}</h5>
@@ -573,9 +573,11 @@
                             <div class="row">
                                 <h5>{{ 'config.form_user.delete.title'|trans }}</h5>
                                 <p>{{ 'config.form_user.delete.description'|trans }}</p>
-                                <a href="{{ path('delete_account') }}" onclick="return confirm('{{ 'config.form_user.delete.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red delete-account">
-                                    {{ 'config.form_user.delete.button'|trans }}
-                                </a>
+                                <form action="{{ path('delete_account') }}" method="post" onsubmit="return confirm('{{ 'config.form_user.delete.confirm'|trans|escape('js') }}')" name="delete-account">
+                                    <input type="hidden" name="token" value="{{ csrf_token('delete-account') }}" />
+
+                                    <button class="waves-effect waves-light btn red" type="submit">{{ 'config.form_user.delete.button'|trans }}</button>
+                                </form>
                             </div>
                         {% endif %}
                     </div>

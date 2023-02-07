@@ -794,7 +794,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringNotContainsString('config.form_user.delete.button', $body[0]);
 
-        $client->request('GET', '/account/delete');
+        $client->request('POST', '/account/delete');
         $this->assertSame(403, $client->getResponse()->getStatusCode());
 
         $user = $em
@@ -860,9 +860,9 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/config');
 
-        $deleteLink = $crawler->filter('.delete-account')->last()->link();
+        $deleteForm = $crawler->filter('form[name=delete-account]')->form();
 
-        $client->click($deleteLink);
+        $client->submit($deleteForm);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');

@@ -586,7 +586,7 @@ class ConfigController extends Controller
     /**
      * Delete account for current user.
      *
-     * @Route("/account/delete", name="delete_account")
+     * @Route("/account/delete", name="delete_account", methods={"POST"})
      *
      * @throws AccessDeniedHttpException
      *
@@ -594,6 +594,10 @@ class ConfigController extends Controller
      */
     public function deleteAccountAction(Request $request)
     {
+        if (!$this->isCsrfTokenValid('delete-account', $request->request->get('token'))) {
+            throw $this->createAccessDeniedException('Bad CSRF token.');
+        }
+
         $enabledUsers = $this->get('wallabag_user.user_repository')
             ->getSumEnabledUsers();
 
