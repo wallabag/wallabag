@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.5.4](https://github.com/wallabag/wallabag/tree/2.5.4)
+   [Full Changelog](https://github.com/wallabag/wallabag/compare/2.5.3...2.5.4)
+
+### Security fixes
+* Fix adding tag to entries from other people by @j0k3r in https://github.com/wallabag/wallabag/pull/6290
+* Fix XSS on username on share page by @j0k3r in https://github.com/wallabag/wallabag/pull/6288
+* Fix CSRF on user deletion by @j0k3r in https://github.com/wallabag/wallabag/pull/6289
+
+### Meta
+* Fix release script by @j0k3r in https://github.com/wallabag/wallabag/pull/6275
+
 ## [2.5.3](https://github.com/wallabag/wallabag/tree/2.5.3)
    [Full Changelog](https://github.com/wallabag/wallabag/compare/2.5.2...2.5.3)
 
