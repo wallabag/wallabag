@@ -2,6 +2,7 @@
 
 namespace Wallabag\ApiBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use JMS\Serializer\SerializationContext;
@@ -75,12 +76,12 @@ class WallabagRestController extends AbstractFOSRestController
      *
      * @return JsonResponse
      */
-    public function getInfoAction()
+    public function getInfoAction(Config $craueConfig)
     {
         $info = [
             'appname' => 'wallabag',
             'version' => $this->getParameter('wallabag_core.version'),
-            'allowed_registration' => $this->getParameter('fosuser_registration'),
+            'allowed_registration' => $this->getParameter('fosuser_registration') && $craueConfig->get('api_user_registration'),
         ];
 
         return (new JsonResponse())->setJson($this->serializer->serialize($info, 'json'));
