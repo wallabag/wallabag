@@ -32,7 +32,7 @@ In internal settings, as a wallabag administrator, in the **Article** section, e
 
 ## Manage your site credentials
 
-Once enable, you'll see a new item in the left menu: **Site Credentials**.
+Once enable, you'll see a new item in the top-right menu: **Site Credentials**.
 
 Click on it to go to the management of your site credentials. You'll be able to add many login / password.
 
