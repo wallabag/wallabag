@@ -65,7 +65,7 @@
         "doctrine/orm": "^2.6",
         "doctrine/persistence": "^3.0",
         "egulias/email-validator": "^3.2",
-        "enshrined/svg-sanitize": "^0.15.4",
+        "enshrined/svg-sanitize": "^0.16.0",
         "friendsofsymfony/jsrouting-bundle": "^2.2",
         "friendsofsymfony/oauth-server-bundle": "dev-master#dc8ff343363cf794d30eb1a123610d186a43f162",
         "friendsofsymfony/rest-bundle": "~3.4",
