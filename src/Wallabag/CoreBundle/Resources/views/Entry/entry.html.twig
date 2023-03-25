@@ -38,7 +38,8 @@
     </nav>
     <ul id="slide-out" class="collapsible side-nav fixed reader-mode" data-collapsible="accordion">
         <li class="bold border-bottom hide-on-med-and-down">
-            <a class="waves-effect collapsible-header" href="{{ path('homepage') }}">
+            {% set referer = app.request.headers.get('referer')|default('/') %}
+            <a class="waves-effect collapsible-header" href="{{ referer }}">
                 <i class="material-icons small">arrow_back</i>
                 <span>{{ 'entry.view.left_menu.back_to_homepage'|trans }}</span>
             </a>
