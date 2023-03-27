@@ -4948,16 +4948,16 @@
         },
         {
             "name": "jms/metadata",
-            "version": "2.7.0",
+            "version": "2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/metadata.git",
-                "reference": "283c714831d272d78ddd6e52e08ac16d76be30fd"
+                "reference": "7ca240dcac0c655eb15933ee55736ccd2ea0d7a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/metadata/zipball/283c714831d272d78ddd6e52e08ac16d76be30fd",
-                "reference": "283c714831d272d78ddd6e52e08ac16d76be30fd",
+                "url": "https://api.github.com/repos/schmittjoh/metadata/zipball/7ca240dcac0c655eb15933ee55736ccd2ea0d7a6",
+                "reference": "7ca240dcac0c655eb15933ee55736ccd2ea0d7a6",
                 "shasum": ""
             },
             "require": {
@@ -4968,7 +4968,7 @@
                 "doctrine/coding-standard": "^8.0",
                 "mikey179/vfsstream": "^1.6.7",
                 "phpunit/phpunit": "^8.5|^9.0",
-                "psr/container": "^1.0",
+                "psr/container": "^1.0|^2.0",
                 "symfony/cache": "^3.1|^4.0|^5.0",
                 "symfony/dependency-injection": "^3.1|^4.0|^5.0"
             },
@@ -5006,22 +5006,22 @@
             ],
             "support": {
                 "issues": "https://github.com/schmittjoh/metadata/issues",
-                "source": "https://github.com/schmittjoh/metadata/tree/2.7.0"
+                "source": "https://github.com/schmittjoh/metadata/tree/2.8.0"
             },
-            "time": "2022-09-13T19:18:27+00:00"
+            "time": "2023-02-15T13:44:18+00:00"
         },
         {
             "name": "jms/serializer",
-            "version": "3.22.0",
+            "version": "3.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "576d226178697534e214531dbf80058637a10ebc"
+                "reference": "ac0b16ee5317d1aacc41deb91c6c325eae97c176"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/576d226178697534e214531dbf80058637a10ebc",
-                "reference": "576d226178697534e214531dbf80058637a10ebc",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/ac0b16ee5317d1aacc41deb91c6c325eae97c176",
+                "reference": "ac0b16ee5317d1aacc41deb91c6c325eae97c176",
                 "shasum": ""
             },
             "require": {
@@ -5043,7 +5043,7 @@
                 "phpbench/phpbench": "^1.0",
                 "phpstan/phpstan": "^1.0.2",
                 "phpunit/phpunit": "^8.5.21||^9.0",
-                "psr/container": "^1.0",
+                "psr/container": "^1.0|^2.0",
                 "symfony/dependency-injection": "^3.0|^4.0|^5.0|^6.0",
                 "symfony/expression-language": "^3.2|^4.0|^5.0|^6.0",
                 "symfony/filesystem": "^3.0|^4.0|^5.0|^6.0",
@@ -5096,7 +5096,7 @@
             ],
             "support": {
                 "issues": "https://github.com/schmittjoh/serializer/issues",
-                "source": "https://github.com/schmittjoh/serializer/tree/3.22.0"
+                "source": "https://github.com/schmittjoh/serializer/tree/3.23.0"
             },
             "funding": [
                 {
@@ -5104,7 +5104,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-03T04:58:11+00:00"
+            "time": "2023-02-17T17:40:48+00:00"
         },
         {
             "name": "jms/serializer-bundle",
@@ -11541,30 +11541,31 @@
         },
         {
             "name": "willdurand/hateoas",
-            "version": "3.8.0",
+            "version": "3.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/Hateoas.git",
-                "reference": "2f37b8823328a9ee170f2af7880ce02f9fabe019"
+                "reference": "39bae0385895b2615d6f7bea5cae0657349582fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/Hateoas/zipball/2f37b8823328a9ee170f2af7880ce02f9fabe019",
-                "reference": "2f37b8823328a9ee170f2af7880ce02f9fabe019",
+                "url": "https://api.github.com/repos/willdurand/Hateoas/zipball/39bae0385895b2615d6f7bea5cae0657349582fc",
+                "reference": "39bae0385895b2615d6f7bea5cae0657349582fc",
                 "shasum": ""
             },
             "require": {
-                "doctrine/annotations": "^1.13.2",
+                "doctrine/annotations": "^1.13.2 || ^2.0",
                 "jms/metadata": "^2.0",
-                "jms/serializer": "^3.2",
+                "jms/serializer": "^3.18.2",
                 "php": "^7.2 | ^8.0",
                 "symfony/expression-language": "~3.0 || ~4.0 || ~5.0 || ~6.0"
             },
             "require-dev": {
                 "doctrine/coding-standard": "^5.0 | ^8.0",
-                "doctrine/persistence": "^1.3.4",
+                "doctrine/persistence": "^1.3.4 | ^2.0 | ^3.0",
                 "pagerfanta/core": "^2.4 || ^3.0",
                 "phpdocumentor/type-resolver": "^1.5.1",
+                "phpspec/prophecy": "^1.16",
                 "phpspec/prophecy-phpunit": "^2.0.1",
                 "phpunit/phpunit": "^7 | ^9.5.10",
                 "symfony/routing": "~3.0 || ~4.0 || ~5.0 || ~6.0",
@@ -11608,9 +11609,9 @@
             "description": "A PHP library to support implementing representations for HATEOAS REST web services",
             "support": {
                 "issues": "https://github.com/willdurand/Hateoas/issues",
-                "source": "https://github.com/willdurand/Hateoas/tree/3.8.0"
+                "source": "https://github.com/willdurand/Hateoas/tree/3.9.0"
             },
-            "time": "2021-12-18T21:29:42+00:00"
+            "time": "2023-01-31T13:54:41+00:00"
         },
         {
             "name": "willdurand/hateoas-bundle",
