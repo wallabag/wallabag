@@ -37,6 +37,7 @@ menu:
         theme_toggle_auto: Выбирать тему автоматически
         theme_toggle_dark: Темная тема
         theme_toggle_light: Светлая тема
+        with_annotations: С аннотациями
     top:
         add_new_entry: 'Добавить новую запись'
         search: 'Поиск'
@@ -238,6 +239,8 @@ entry:
         filtered_search: 'Отфильтрованные по поиску:'
         untagged: 'Записи без тегов'
         all: Все записи
+        same_domain: Тот же домен
+        with_annotations: Записи с аннотациями
     list:
         number_on_the_page: '{0} Записей не обнаружено.|{1} Одна запись.|]1,Inf[ Найдено %count% записей.'
         reading_time: 'расчетное время чтения'
@@ -251,6 +254,8 @@ entry:
         toogle_as_star: 'Пометить звездочкой'
         delete: 'Удалить'
         export_title: 'Экспорт'
+        show_same_domain: Показать статьи с тем же доменом
+        assign_search_tag: Назначьте этот поиск тегом для каждого результата
     filters:
         title: 'Фильтры'
         status_label: 'Статус'
@@ -275,6 +280,7 @@ entry:
             filter: 'Выбрать'
         is_public_help: Публичная ссылка
         is_public_label: Имеет публичную ссылку
+        annotated_label: Аннотированный
     view:
         left_menu:
             back_to_top: 'Наверх'
@@ -331,6 +337,7 @@ entry:
     confirm:
         delete_tag: Вы уверены, что хотите удалить этот тег из статьи?
         delete: Вы уверены, что хотите удалить эту статью?
+        delete_entries: Вы уверены, что хотите удалить эти статьи?
 about:
     page_title: 'О'
     top_menu:
@@ -475,6 +482,8 @@ tag:
     new:
         add: 'Добавить'
         placeholder: 'Вы можете добавить несколько тегов, разделенных запятой.'
+    confirm:
+        delete: Удалить %name% тег
 import:
     page_title: 'Импорт'
     page_description: 'Добро пожаловать в импортер wallabag. Выберите сервис, из которого вы хотите перенести данные.'
@@ -527,6 +536,8 @@ import:
     elcurator:
         description: Этот импортер импортирует все ваши статьи из elCurator. Зайдите в настройки в учётной записи elCurator и экспортируйте свой контент. У вас будет JSON-файл.
         page_title: Импорт > elCurator
+    delicious:
+        how_to: Пожалуйста, выберите свой экспорт Delicious и нажмите кнопку ниже, чтобы загрузить и импортировать его.
 developer:
     page_title: 'Управление клиентским API'
     welcome_message: 'Добро пожаловать в API wallabag'
