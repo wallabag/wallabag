@@ -6551,16 +6551,16 @@
         },
         {
             "name": "php-amqplib/php-amqplib",
-            "version": "v3.5.1",
+            "version": "v3.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-amqplib/php-amqplib.git",
-                "reference": "2c565476269889544e020d76da0cdf3471675b52"
+                "reference": "703eef998946f4972e630c3e3d827f7cf020fe68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/2c565476269889544e020d76da0cdf3471675b52",
-                "reference": "2c565476269889544e020d76da0cdf3471675b52",
+                "url": "https://api.github.com/repos/php-amqplib/php-amqplib/zipball/703eef998946f4972e630c3e3d827f7cf020fe68",
+                "reference": "703eef998946f4972e630c3e3d827f7cf020fe68",
                 "shasum": ""
             },
             "require": {
@@ -6626,9 +6626,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-amqplib/php-amqplib/issues",
-                "source": "https://github.com/php-amqplib/php-amqplib/tree/v3.5.1"
+                "source": "https://github.com/php-amqplib/php-amqplib/tree/v3.5.2"
             },
-            "time": "2023-01-20T01:02:33+00:00"
+            "time": "2023-03-01T18:03:56+00:00"
         },
         {
             "name": "php-amqplib/rabbitmq-bundle",
