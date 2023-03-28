@@ -111,7 +111,7 @@
         "scheb/2fa-qr-code": "^5.13",
         "scheb/2fa-trusted-device": "^5.13",
         "sensio/framework-extra-bundle": "^6.2",
-        "sentry/sentry-symfony": "3.5.3",
+        "sentry/sentry-symfony": "4.7.0",
         "stof/doctrine-extensions-bundle": "^1.2",
         "symfony/dom-crawler": "^4.0",
         "symfony/mailer": "^4.0",
