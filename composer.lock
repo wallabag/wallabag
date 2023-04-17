@@ -12870,16 +12870,16 @@
         },
         {
             "name": "phpstan/phpstan-symfony",
-            "version": "1.2.25",
+            "version": "1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-symfony.git",
-                "reference": "1da7bf450c6b351fec08ca0aa97298473d4f6ab3"
+                "reference": "7e78605a699d183f5a6936cf91904f4c16ca79b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/1da7bf450c6b351fec08ca0aa97298473d4f6ab3",
-                "reference": "1da7bf450c6b351fec08ca0aa97298473d4f6ab3",
+                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/7e78605a699d183f5a6936cf91904f4c16ca79b2",
+                "reference": "7e78605a699d183f5a6936cf91904f4c16ca79b2",
                 "shasum": ""
             },
             "require": {
@@ -12935,9 +12935,9 @@
             "description": "Symfony Framework extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-symfony/issues",
-                "source": "https://github.com/phpstan/phpstan-symfony/tree/1.2.25"
+                "source": "https://github.com/phpstan/phpstan-symfony/tree/1.3.1"
             },
-            "time": "2023-04-05T12:16:20+00:00"
+            "time": "2023-04-14T16:59:18+00:00"
         },
         {
             "name": "symfony/maker-bundle",
