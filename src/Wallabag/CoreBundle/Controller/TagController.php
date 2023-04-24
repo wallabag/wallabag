@@ -35,7 +35,7 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("/new-tag/{entry}", requirements={"entry" = "\d+"}, name="new_tag")
+     * @Route("/new-tag/{entry}", requirements={"entry" = "\d+"}, name="new_tag", methods={"POST"})
      *
      * @return Response
      */
@@ -44,7 +44,17 @@ class TagController extends AbstractController
         $form = $this->createForm(NewTagType::class, new Tag());
         $form->handleRequest($request);
 
+        $tags = $form->get('label')->getData();
+        $tagsExploded = explode(',', $tags);
+
+        // avoid too much tag to be added
+        if (\count($tagsExploded) >= 5 || \strlen($tags) >= NewTagType::MAX_LENGTH) {
+            return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->checkUserAction($entry);
+
             $this->tagsAssigner->assignTagsToEntry(
                 $entry,
                 $form->get('label')->getData()
@@ -76,6 +86,8 @@ class TagController extends AbstractController
      */
     public function removeTagFromEntry(Request $request, Entry $entry, Tag $tag)
     {
+        $this->checkUserAction($entry);
+
         $entry->removeTag($tag);
         $this->entityManager->flush();
 
@@ -259,5 +271,15 @@ class TagController extends AbstractController
         $redirectUrl = $this->redirectHelper->to($request->headers->get('referer'), '', true);
 
         return $this->redirect($redirectUrl);
+    }
+
+    /**
+     * Check if the logged user can manage the given entry.
+     */
+    private function checkUserAction(Entry $entry)
+    {
+        if (null === $this->getUser() || $this->getUser()->getId() !== $entry->getUser()->getId()) {
+            throw $this->createAccessDeniedException('You can not access this entry.');
+        }
     }
 }

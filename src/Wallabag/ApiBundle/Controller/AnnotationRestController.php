@@ -4,7 +4,6 @@ namespace Wallabag\ApiBundle\Controller;
 
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use OpenApi\Annotations as OA;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -138,11 +137,10 @@ class AnnotationRestController extends WallabagRestController
      * )
      *
      * @Route("/api/annotations/{annotation}.{_format}", methods={"PUT"}, name="api_put_annotation", defaults={"_format": "json"})
-     * @ParamConverter("annotation", class="Wallabag\AnnotationBundle\Entity\Annotation")
      *
      * @return JsonResponse
      */
-    public function putAnnotationAction(Annotation $annotation, Request $request)
+    public function putAnnotationAction(int $annotation, Request $request)
     {
         $this->validateAuthentication();
 
@@ -175,11 +173,10 @@ class AnnotationRestController extends WallabagRestController
      * )
      *
      * @Route("/api/annotations/{annotation}.{_format}", methods={"DELETE"}, name="api_delete_annotation", defaults={"_format": "json"})
-     * @ParamConverter("annotation", class="Wallabag\AnnotationBundle\Entity\Annotation")
      *
      * @return JsonResponse
      */
-    public function deleteAnnotationAction(Annotation $annotation)
+    public function deleteAnnotationAction(int $annotation)
     {
         $this->validateAuthentication();
 

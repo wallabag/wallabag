@@ -11,6 +11,8 @@ use Wallabag\CoreBundle\Entity\Tag;
 
 class NewTagType extends AbstractType
 {
+    public const MAX_LENGTH = 40;
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -18,6 +20,7 @@ class NewTagType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => 'tag.new.placeholder',
+                    'max_length' => self::MAX_LENGTH,
                 ],
             ])
             ->add('add', SubmitType::class, [

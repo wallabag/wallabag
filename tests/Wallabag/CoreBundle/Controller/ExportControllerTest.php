@@ -58,12 +58,27 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
-    public function testBadEntryId()
+    public function testNonExistingEntryId()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
         $client->request('GET', '/export/0.mobi');
+
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
+    }
+
+    public function testForbiddenEntryId()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository(Entry::class)
+            ->findOneByUsernameAndNotArchived('bob');
+
+        $client->request('GET', '/export/' . $content->getId() . '.mobi');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
     }

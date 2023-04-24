@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Helper\EntriesExport;
 use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\CoreBundle\Repository\TagRepository;
@@ -28,9 +27,20 @@ class ExportController extends AbstractController
      *
      * @return Response
      */
-    public function downloadEntryAction(Entry $entry, EntriesExport $entriesExport, string $format)
+    public function downloadEntryAction(Request $request, EntryRepository $entryRepository, EntriesExport $entriesExport, string $format, int $id)
     {
         try {
+            $entry = $entryRepository->find($id);
+
+            /*
+             * We duplicate EntryController::checkUserAction here as a quick fix for an improper authorization vulnerability
+             *
+             * This should be eventually rewritten
+             */
+            if (null === $entry || null === $this->getUser() || $this->getUser()->getId() !== $entry->getUser()->getId()) {
+                throw new NotFoundHttpException();
+            }
+
             return $entriesExport
                 ->setEntries($entry)
                 ->updateTitle('entry')

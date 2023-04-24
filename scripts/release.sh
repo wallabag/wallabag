@@ -9,7 +9,7 @@ ENV=$4
 
 rm -rf "${TMP_FOLDER:?}"/"$RELEASE_FOLDER"
 mkdir "$TMP_FOLDER"/"$RELEASE_FOLDER"
-git clone https://github.com/wallabag/wallabag.git "$TMP_FOLDER"/"$RELEASE_FOLDER"/"$VERSION"
+git clone https://github.com/wallabag/wallabag.git --single-branch --depth 1 --branch $1 "$TMP_FOLDER"/"$RELEASE_FOLDER"/"$VERSION"
 cd "$TMP_FOLDER"/"$RELEASE_FOLDER"/"$VERSION" && SYMFONY_ENV="$ENV" COMPOSER_MEMORY_LIMIT=-1 composer install -n --no-dev
 cd "$TMP_FOLDER"/"$RELEASE_FOLDER"/"$VERSION" && php bin/console wallabag:install --env="$ENV" -n
 cd "$TMP_FOLDER"/"$RELEASE_FOLDER"/"$VERSION" && php bin/console assets:install --env="$ENV" --symlink --relative

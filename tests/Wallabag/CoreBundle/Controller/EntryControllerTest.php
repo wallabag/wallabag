@@ -1502,7 +1502,7 @@ class EntryControllerTest extends WallabagCoreTestCase
                 'pt_BR',
             ],
             'es-ES' => [
-                'https://elpais.com/internacional/2022-10-09/ultima-hora-de-la-guerra-en-ucrania-hoy-en-directo.html',
+                'https://elpais.com/internacional/2022-11-03/ultima-hora-de-la-guerra-entre-rusia-y-ucrania-hoy-en-directo.html',
                 'es',
             ],
         ];

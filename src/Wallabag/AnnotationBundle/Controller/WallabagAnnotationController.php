@@ -5,10 +5,10 @@ namespace Wallabag\AnnotationBundle\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use JMS\Serializer\SerializerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\AnnotationBundle\Form\EditAnnotationType;
@@ -40,7 +40,7 @@ class WallabagAnnotationController extends AbstractFOSRestController
      */
     public function getAnnotationsAction(Entry $entry, AnnotationRepository $annotationRepository)
     {
-        $annotationRows = $annotationRepository->findAnnotationsByPageId($entry->getId(), $this->getUser()->getId());
+        $annotationRows = $annotationRepository->findByEntryIdAndUserId($entry->getId(), $this->getUser()->getId());
 
         $total = \count($annotationRows);
         $annotations = ['total' => $total, 'rows' => $annotationRows];
@@ -90,30 +90,35 @@ class WallabagAnnotationController extends AbstractFOSRestController
      * @see Wallabag\ApiBundle\Controller\WallabagRestController
      *
      * @Route("/annotations/{annotation}.{_format}", methods={"PUT"}, name="annotations_put_annotation", defaults={"_format": "json"})
-     * @ParamConverter("annotation", class="Wallabag\AnnotationBundle\Entity\Annotation")
      *
      * @return JsonResponse
      */
-    public function putAnnotationAction(Annotation $annotation, Request $request)
+    public function putAnnotationAction(Request $request, AnnotationRepository $annotationRepository, int $annotation)
     {
-        $data = json_decode($request->getContent(), true);
+        try {
+            $annotation = $this->validateAnnotation($annotationRepository, $annotation, $this->getUser()->getId());
 
-        $form = $this->formFactory->createNamed('', EditAnnotationType::class, $annotation, [
-            'csrf_protection' => false,
-            'allow_extra_fields' => true,
-        ]);
-        $form->submit($data);
+            $data = json_decode($request->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
-        if ($form->isValid()) {
-            $this->entityManager->persist($annotation);
-            $this->entityManager->flush();
+            $form = $this->formFactory->createNamed('', EditAnnotationType::class, $annotation, [
+                'csrf_protection' => false,
+                'allow_extra_fields' => true,
+            ]);
+            $form->submit($data);
 
-            $json = $this->serializer->serialize($annotation, 'json');
+            if ($form->isValid()) {
+                $this->entityManager->persist($annotation);
+                $this->entityManager->flush();
 
-            return JsonResponse::fromJsonString($json);
+                $json = $this->serializer->serialize($annotation, 'json');
+
+                return JsonResponse::fromJsonString($json);
+            }
+
+            return $form;
+        } catch (\InvalidArgumentException $e) {
+            throw new NotFoundHttpException($e);
         }
-
-        return $form;
     }
 
     /**
@@ -122,17 +127,33 @@ class WallabagAnnotationController extends AbstractFOSRestController
      * @see Wallabag\ApiBundle\Controller\WallabagRestController
      *
      * @Route("/annotations/{annotation}.{_format}", methods={"DELETE"}, name="annotations_delete_annotation", defaults={"_format": "json"})
-     * @ParamConverter("annotation", class="Wallabag\AnnotationBundle\Entity\Annotation")
      *
      * @return JsonResponse
      */
-    public function deleteAnnotationAction(Annotation $annotation)
+    public function deleteAnnotationAction(AnnotationRepository $annotationRepository, int $annotation)
     {
-        $this->entityManager->remove($annotation);
-        $this->entityManager->flush();
+        try {
+            $annotation = $this->validateAnnotation($annotationRepository, $annotation, $this->getUser()->getId());
 
-        $json = $this->serializer->serialize($annotation, 'json');
+            $this->entityManager->remove($annotation);
+            $this->entityManager->flush();
 
-        return (new JsonResponse())->setJson($json);
+            $json = $this->serializer->serialize($annotation, 'json');
+
+            return (new JsonResponse())->setJson($json);
+        } catch (\InvalidArgumentException $e) {
+            throw new NotFoundHttpException($e);
+        }
+    }
+
+    private function validateAnnotation(AnnotationRepository $annotationRepository, int $annotationId, int $userId)
+    {
+        $annotation = $annotationRepository->findOneByIdAndUserId($annotationId, $userId);
+
+        if (null === $annotation) {
+            throw new NotFoundHttpException();
+        }
+
+        return $annotation;
     }
 }
