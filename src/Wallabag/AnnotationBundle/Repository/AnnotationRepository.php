@@ -60,11 +60,11 @@ class AnnotationRepository extends ServiceEntityRepository
     public function findOneByIdAndUserId($annotationId, $userId)
     {
         return $this->createQueryBuilder('a')
-                    ->where('a.id = :annotationId')->setParameter('annotationId', $annotationId)
-                    ->andWhere('a.user = :userId')->setParameter('userId', $userId)
-                    ->setMaxResults(1)
-                    ->getQuery()
-                    ->getOneOrNullResult();
+            ->where('a.id = :annotationId')->setParameter('annotationId', $annotationId)
+            ->andWhere('a.user = :userId')->setParameter('userId', $userId)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     /**
@@ -90,7 +90,7 @@ class AnnotationRepository extends ServiceEntityRepository
      *
      * @param int $entryId
      *
-     * @return array
+     * @return Annotation|null
      */
     public function findLastAnnotationByUserId($entryId, $userId)
     {
