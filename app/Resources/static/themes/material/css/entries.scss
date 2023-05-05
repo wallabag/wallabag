@@ -2,6 +2,17 @@
  * Entries
  * ========================================================================== */
 
+.mass-action-toggle {
+  display: inline-flex;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  &:focus {
+    background-color: transparent;
+  }
+}
+
 .mass-buttons {
   margin: 10px 5px 10px 20px;
 
@@ -39,6 +50,11 @@
   }
 }
 
+.mass-action-inputs-displayed:not(:checked) ~ .mass-buttons,
+.mass-action-inputs-displayed:not(:checked) ~ .entries .entry-checkbox {
+  display: none;
+}
+
 .entries {
   list-style: none;
 }
@@ -62,10 +78,10 @@
   .nb-results {
     display: inline-flex;
   }
+}
 
-  a {
-    color: #444;
-  }
+.results-item {
+  color: #444;
 }
 
 .pagination {

@@ -29,9 +29,12 @@
     <div class="results">
         <div class="nb-results">
             {{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}
-            <a href="{{ path('switch_view_mode') }}"><i class="material-icons">{% if list_mode == 0 %}view_list{% else %}view_module{% endif %}</i></a>
+            <a class="results-item" href="{{ path('switch_view_mode') }}"><i class="material-icons">{% if list_mode == 0 %}view_list{% else %}view_module{% endif %}</i></a>
             {% if app.user.config.feedToken %}
                 {% include "@WallabagCore/Entry/_feed_link.html.twig" %}
+            {% endif %}
+            {% if list_mode == 1 %}
+                <label for="mass-action-inputs-displayed" class="mass-action-toggle results-item tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'entry.list.toggle_mass_action'|trans }}"><i class="material-icons">library_add_check</i></label>
             {% endif %}
         </div>
         {% if current_route == 'search' %}<div><a href="{{ path('tag_this_search', {'filter': searchTerm, 'currentRoute': app.request.get('currentRoute')}) }}" title="{{ 'entry.list.assign_search_tag'|trans }}">{{ 'entry.list.assign_search_tag'|trans }}</a></div>{% endif %}
@@ -41,6 +44,7 @@
     </div>
 
     {% if list_mode == 1 %}
+        <input id="mass-action-inputs-displayed" class="mass-action-inputs-displayed" type="checkbox" />
         <div class="mass-buttons">
             {% if entries.count > 0 and list_mode == 1 %}
                 <span>
