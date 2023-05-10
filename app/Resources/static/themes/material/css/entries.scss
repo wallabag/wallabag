@@ -16,12 +16,6 @@
 .mass-buttons {
   margin: 10px 5px 10px 20px;
 
-  #selectAll {
-    position: relative;
-    opacity: initial;
-    left: 0;
-  }
-
   span {
     padding: 3px;
   }
@@ -38,20 +32,30 @@
   }
 }
 
-.card-stacked {
-  input[type="checkbox"] {
-    position: relative;
-    opacity: initial;
-    left: 0;
-  }
+.entry-checkbox {
+  margin: 10px 15px 10px 5px;
 
-  .entry-checkbox {
-    margin-right: 10px;
+  .card & {
+    float: right;
+    margin-right: 0;
+    padding: 10px;
   }
 }
 
+.entries .entry-checkbox-input,
+.mass-buttons .entry-checkbox-input {
+  position: relative;
+  left: 0;
+  width: 20px;
+  min-height: 25px;
+  height: 100%;
+  vertical-align: middle;
+  opacity: initial;
+}
+
 .mass-action-inputs-displayed:not(:checked) ~ .mass-buttons,
-.mass-action-inputs-displayed:not(:checked) ~ .entries .entry-checkbox {
+.mass-action-inputs-displayed:not(:checked) ~ .entries .entry-checkbox,
+.mass-action-inputs-displayed:checked ~ .entries .card-preview {
   display: none;
 }
 

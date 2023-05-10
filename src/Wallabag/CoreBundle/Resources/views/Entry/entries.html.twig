@@ -33,9 +33,7 @@
             {% if app.user.config.feedToken %}
                 {% include "@WallabagCore/Entry/_feed_link.html.twig" %}
             {% endif %}
-            {% if list_mode == 1 %}
-                <label for="mass-action-inputs-displayed" class="mass-action-toggle results-item tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'entry.list.toggle_mass_action'|trans }}"><i class="material-icons">library_add_check</i></label>
-            {% endif %}
+            <label for="mass-action-inputs-displayed" class="mass-action-toggle results-item tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'entry.list.toggle_mass_action'|trans }}"><i class="material-icons">library_add_check</i></label>
         </div>
         {% if current_route == 'search' %}<div><a href="{{ path('tag_this_search', {'filter': searchTerm, 'currentRoute': app.request.get('currentRoute')}) }}" title="{{ 'entry.list.assign_search_tag'|trans }}">{{ 'entry.list.assign_search_tag'|trans }}</a></div>{% endif %}
         {% if entries.getNbPages > 1 %}
@@ -43,25 +41,23 @@
         {% endif %}
     </div>
 
-    {% if list_mode == 1 %}
+    {% if entries.count > 0 %}
         <input id="mass-action-inputs-displayed" class="mass-action-inputs-displayed" type="checkbox" />
         <div class="mass-buttons">
-            {% if entries.count > 0 and list_mode == 1 %}
-                <span>
-                    <input id="selectAll" type="checkbox" data-toggle="[data-js='entry-checkbox']" data-js="checkboxes-toggle" />&nbsp;
-                </span>
+            <span>
+                <input type="checkbox" class="entry-checkbox-input" data-toggle="[data-js='entry-checkbox']" data-js="checkboxes-toggle" />
+            </span>
 
-                <span>
-                    <button class="btn cyan darken-1" type="submit" name="toggle-read" title="{{ 'entry.list.toogle_as_read'|trans }}"><i class="material-icons">done</i></button>
-                    <button class="btn cyan darken-1" type="submit" name="toggle-star" title="{{ 'entry.list.toogle_as_star'|trans }}" ><i class="material-icons">star</i></button>
-                    <button class="btn cyan darken-1" type="submit" name="delete" onclick="return confirm('{{ 'entry.confirm.delete_entries'|trans|escape('js') }}')" title="{{ 'entry.list.delete'|trans }}"><i class="material-icons">delete</i></button>
-                    <button class="btn cyan darken-1" type="submit" name="tag"><i class="material-icons">label</i></button>
-                </span>
+            <span>
+                <button class="btn cyan darken-1" type="submit" name="toggle-read" title="{{ 'entry.list.toogle_as_read'|trans }}"><i class="material-icons">done</i></button>
+                <button class="btn cyan darken-1" type="submit" name="toggle-star" title="{{ 'entry.list.toogle_as_star'|trans }}" ><i class="material-icons">star</i></button>
+                <button class="btn cyan darken-1" type="submit" name="delete" onclick="return confirm('{{ 'entry.confirm.delete_entries'|trans|escape('js') }}')" title="{{ 'entry.list.delete'|trans }}"><i class="material-icons">delete</i></button>
+                <button class="btn cyan darken-1" type="submit" name="tag"><i class="material-icons">label</i></button>
+            </span>
 
-                <span class="input-field inline">
-                    <input type="text" name="tags" />
-                </span>
-            {% endif %}
+            <span class="input-field inline">
+                <input type="text" name="tags" />
+            </span>
         </div>
     {% endif %}
 
