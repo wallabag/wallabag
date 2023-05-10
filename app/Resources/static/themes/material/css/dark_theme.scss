@@ -59,6 +59,7 @@
   #article article h5,
   #article article h6,
   .dropdown-content li > a,
+  .nav-panels .input-field input:focus,
   .results a,
   .side-nav li > a,
   .side-nav li > a > i.material-icons {
@@ -71,7 +72,10 @@
     background-color: #1d1d1d !important;
   }
 
-  .grey-text.text-darken-4 {
+  .grey-text.text-darken-4,
+  .nav-panel-item .add,
+  .nav-panel-item .search,
+  .nav-panels .close {
     color: #dfdfdf !important;
   }
 
@@ -123,6 +127,10 @@
   #article pre {
     color: #abb2bf;
     background-color: #282c34;
+  }
+
+  nav input {
+    color: #abb2bf;
   }
 
   @media only screen and (min-width: 992px) {
