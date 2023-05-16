@@ -6921,16 +6921,16 @@
         },
         {
             "name": "php-http/httplug-bundle",
-            "version": "1.27.1",
+            "version": "1.28.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/HttplugBundle.git",
-                "reference": "1b2356133cfda31805f83fb20806b92bc1f80fb8"
+                "reference": "5c65b53758f08f66f559f90c3752e82a4f8dc122"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/1b2356133cfda31805f83fb20806b92bc1f80fb8",
-                "reference": "1b2356133cfda31805f83fb20806b92bc1f80fb8",
+                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/5c65b53758f08f66f559f90c3752e82a4f8dc122",
+                "reference": "5c65b53758f08f66f559f90c3752e82a4f8dc122",
                 "shasum": ""
             },
             "require": {
@@ -6943,7 +6943,7 @@
                 "php-http/message": "^1.4",
                 "php-http/message-factory": "^1.0.2",
                 "php-http/stopwatch-plugin": "^1.2",
-                "psr/http-message": "^1.0",
+                "psr/http-message": "^1.0 || ^2.0",
                 "symfony/config": "^4.4 || ^5.0 || ^6.0",
                 "symfony/dependency-injection": "^4.4 || ^5.0 || ^6.0",
                 "symfony/event-dispatcher": "^4.4 || ^5.0 || ^6.0",
@@ -6956,7 +6956,7 @@
                 "php-http/socket-client": "<2.0"
             },
             "require-dev": {
-                "guzzlehttp/psr7": "^1.7",
+                "guzzlehttp/psr7": "^1.7 || ^2.0",
                 "matthiasnoback/symfony-dependency-injection-test": "^4.0",
                 "nyholm/nsa": "^1.1",
                 "nyholm/psr7": "^1.2.1",
@@ -7016,9 +7016,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/HttplugBundle/issues",
-                "source": "https://github.com/php-http/HttplugBundle/tree/1.27.1"
+                "source": "https://github.com/php-http/HttplugBundle/tree/1.28.0"
             },
-            "time": "2023-03-03T09:02:26+00:00"
+            "time": "2023-05-12T09:35:15+00:00"
         },
         {
             "name": "php-http/logger-plugin",
@@ -7200,6 +7200,7 @@
                 "issues": "https://github.com/php-http/message-factory/issues",
                 "source": "https://github.com/php-http/message-factory/tree/1.1.0"
             },
+            "abandoned": "psr/http-factory",
             "time": "2023-04-14T14:16:17+00:00"
         },
         {
