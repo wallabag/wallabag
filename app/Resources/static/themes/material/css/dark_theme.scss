@@ -135,6 +135,11 @@
     color: #abb2bf;
   }
 
+  .input-field.nav-panel-add.disabled,
+  .input-field.nav-panel-add.disabled input {
+    background-color: transparent;
+  }
+
   @media only screen and (min-width: 992px) {
     #article {
       background-color: #101010;
