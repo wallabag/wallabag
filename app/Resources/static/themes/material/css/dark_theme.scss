@@ -16,7 +16,7 @@
   .side-nav .collapsible-body,
   .side-nav.fixed .collapsible-body,
   .tabs {
-    background-color: #121212;
+    background-color: #131716;
   }
 
   table.striped > tbody > tr:nth-child(2n+1),
@@ -133,6 +133,11 @@
 
   nav input {
     color: #abb2bf;
+  }
+
+  .input-field.nav-panel-add.disabled,
+  .input-field.nav-panel-add.disabled input {
+    background-color: transparent;
   }
 
   @media only screen and (min-width: 992px) {
