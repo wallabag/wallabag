@@ -7081,22 +7081,21 @@
         },
         {
             "name": "php-http/message",
-            "version": "1.15.0",
+            "version": "1.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/message.git",
-                "reference": "2a1fbaa00cf5ffc82f379adf47388663bce8190d"
+                "reference": "47a14338bf4ebd67d317bf1144253d7db4ab55fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/message/zipball/2a1fbaa00cf5ffc82f379adf47388663bce8190d",
-                "reference": "2a1fbaa00cf5ffc82f379adf47388663bce8190d",
+                "url": "https://api.github.com/repos/php-http/message/zipball/47a14338bf4ebd67d317bf1144253d7db4ab55fd",
+                "reference": "47a14338bf4ebd67d317bf1144253d7db4ab55fd",
                 "shasum": ""
             },
             "require": {
                 "clue/stream-filter": "^1.5",
                 "php": "^7.2 || ^8.0",
-                "php-http/message-factory": "^1.0.2",
                 "psr/http-message": "^1.1 || ^2.0"
             },
             "provide": {
@@ -7107,6 +7106,7 @@
                 "ext-zlib": "*",
                 "guzzlehttp/psr7": "^1.0 || ^2.0",
                 "laminas/laminas-diactoros": "^2.0 || ^3.0",
+                "php-http/message-factory": "^1.0.2",
                 "phpspec/phpspec": "^5.1 || ^6.3 || ^7.1",
                 "slim/slim": "^3.0"
             },
@@ -7144,9 +7144,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/message/issues",
-                "source": "https://github.com/php-http/message/tree/1.15.0"
+                "source": "https://github.com/php-http/message/tree/1.16.0"
             },
-            "time": "2023-05-10T08:19:58+00:00"
+            "time": "2023-05-17T06:43:38+00:00"
         },
         {
             "name": "php-http/message-factory",
