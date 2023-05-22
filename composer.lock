@@ -6920,16 +6920,16 @@
         },
         {
             "name": "php-http/httplug-bundle",
-            "version": "1.28.0",
+            "version": "1.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/HttplugBundle.git",
-                "reference": "5c65b53758f08f66f559f90c3752e82a4f8dc122"
+                "reference": "cace4703fb6d7c54072bd35bd808b268e8fe5812"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/5c65b53758f08f66f559f90c3752e82a4f8dc122",
-                "reference": "5c65b53758f08f66f559f90c3752e82a4f8dc122",
+                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/cace4703fb6d7c54072bd35bd808b268e8fe5812",
+                "reference": "cace4703fb6d7c54072bd35bd808b268e8fe5812",
                 "shasum": ""
             },
             "require": {
@@ -6937,7 +6937,7 @@
                 "php-http/client-common": "^1.9 || ^2.0",
                 "php-http/client-implementation": "^1.0",
                 "php-http/discovery": "^1.14",
-                "php-http/httplug": "^1.0 || ^2.0",
+                "php-http/httplug": "^2.0",
                 "php-http/logger-plugin": "^1.1",
                 "php-http/message": "^1.4",
                 "php-http/message-factory": "^1.0.2",
@@ -7015,9 +7015,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/HttplugBundle/issues",
-                "source": "https://github.com/php-http/HttplugBundle/tree/1.28.0"
+                "source": "https://github.com/php-http/HttplugBundle/tree/1.29.0"
             },
-            "time": "2023-05-12T09:35:15+00:00"
+            "time": "2023-05-17T09:11:27+00:00"
         },
         {
             "name": "php-http/logger-plugin",
