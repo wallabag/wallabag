@@ -13,22 +13,23 @@
   }
 }
 
-.mass-buttons {
+.mass-action {
   margin: 10px 5px 10px 20px;
+}
 
-  span {
-    padding: 3px;
-  }
+.mass-action-group {
+  display: flex;
+  padding: 3px;
+  gap: 10px;
+}
 
-  button {
-    i {
-      font-size: 15px;
-    }
+.mass-action-button {
+  height: 24px;
+  line-height: 24px;
+  padding: 0 0.5rem;
 
-    height: 24px;
-    line-height: 24px;
-    padding: 0 0.5rem;
-    margin-right: 0.75rem;
+  i {
+    font-size: 1rem;
   }
 }
 
@@ -43,7 +44,7 @@
 }
 
 .entries .entry-checkbox-input,
-.mass-buttons .entry-checkbox-input {
+.mass-action .entry-checkbox-input {
   position: relative;
   left: 0;
   width: 20px;
@@ -53,10 +54,21 @@
   opacity: initial;
 }
 
-.mass-action-inputs-displayed:not(:checked) ~ .mass-buttons,
-.mass-action-inputs-displayed:not(:checked) ~ .entries .entry-checkbox,
-.mass-action-inputs-displayed:checked ~ .entries .card-preview {
+.toggle-checkbox:not(:checked) + .mass-action,
+.toggle-checkbox:not(:checked) + .mass-action-tags,
+.toggle-checkbox:not(:checked) ~ .entries .entry-checkbox,
+.toggle-checkbox:checked ~ .entries .card-preview {
   display: none;
+}
+
+.mass-action-tags {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .mass-action-tags-input {
+    margin: 0;
+  }
 }
 
 .entries {
@@ -156,5 +168,13 @@ footer {
 
   .row {
     margin-bottom: 10px;
+  }
+}
+
+@media screen and (min-width: 993px) {
+  .mass-action {
+    display: flex;
+    align-items: center;
+    gap: 30px;
   }
 }
