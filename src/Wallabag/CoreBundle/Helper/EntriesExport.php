@@ -210,7 +210,7 @@ class EntriesExport
                 $publishedDate = $entry->getPublishedAt()->format('Y-m-d');
             }
 
-            $readingTime = $entry->getReadingTime() / $user->getConfig()->getReadingSpeed() * 200;
+            $readingTime = round($entry->getReadingTime() / $user->getConfig()->getReadingSpeed() * 200);
 
             $titlepage = $content_start .
                 '<h1>' . $entry->getTitle() . '</h1>' .
