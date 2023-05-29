@@ -86,12 +86,14 @@ class DownloadImages
                 continue;
             }
 
-            // if image contains "&" and we can't find it in the html it might be because it's encoded as &amp;
-            if (false !== stripos($image, '&') && false === stripos($html, $image)) {
-                $image = str_replace('&', '&amp;', $image);
-            }
-
             $html = str_replace($image, $newImage, $html);
+            // if image contains "&" and we can't find it in the html it might be because it's encoded as &amp; or unicode
+            if (false !== stripos($image, '&') && false === stripos($html, $image)) {
+                $imageAmp = str_replace('&', '&amp;', $image);
+                $html = str_replace($imageAmp, $newImage, $html);
+                $imageUnicode = str_replace('&', '&#038;', $image);
+                $html = str_replace($imageUnicode, $newImage, $html);
+            }
         }
 
         return $html;
