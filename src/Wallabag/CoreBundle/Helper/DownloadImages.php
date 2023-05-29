@@ -7,6 +7,7 @@ use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\Psr7\UriResolver;
 use Http\Client\Common\HttpMethodsClient;
 use Http\Client\Common\Plugin\ErrorPlugin;
+use Http\Client\Common\Plugin\RedirectPlugin;
 use Http\Client\Common\PluginClient;
 use Http\Client\HttpClient;
 use Http\Discovery\MessageFactoryDiscovery;
@@ -29,7 +30,7 @@ class DownloadImages
 
     public function __construct(HttpClient $client, $baseFolder, $wallabagUrl, LoggerInterface $logger, MessageFactory $messageFactory = null)
     {
-        $this->client = new HttpMethodsClient(new PluginClient($client, [new ErrorPlugin()]), $messageFactory ?: MessageFactoryDiscovery::find());
+        $this->client = new HttpMethodsClient(new PluginClient($client, [new ErrorPlugin(), new RedirectPlugin()]), $messageFactory ?: MessageFactoryDiscovery::find());
         $this->baseFolder = $baseFolder;
         $this->wallabagUrl = rtrim($wallabagUrl, '/');
         $this->logger = $logger;
