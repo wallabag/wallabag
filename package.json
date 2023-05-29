@@ -66,7 +66,7 @@
     "webpack-cli": "^5.1.1",
     "webpack-dev-server": "^4.15.0",
     "webpack-manifest-plugin": "^5.0.0",
-    "webpack-merge": "^5.7.3"
+    "webpack-merge": "^5.9.0"
   },
   "dependencies": {
     "annotator": "wallabag/annotator#master",
