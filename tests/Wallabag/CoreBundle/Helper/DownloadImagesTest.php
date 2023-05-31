@@ -265,4 +265,19 @@ class DownloadImagesTest extends TestCase
 
         $this->assertFalse($res);
     }
+
+    public function testFollowRedirection()
+    {
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(301, ['content-type' => 'image/png', 'location' => '/final-path.png']));
+        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/png'], file_get_contents(__DIR__ . '/../fixtures/unnamed.png')));
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', [$logHandler]);
+
+        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $res = $download->processSingleImage(123, '', 'https://example.com/unnamed.png');
+
+        $this->assertStringContainsString('/assets/images/9/b/9b0ead26/66953334.png', $res, "Fetch client didn't follow the HTTP redirection");
+    }
 }
