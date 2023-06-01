@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
-            "version": "v3.7.0",
+            "version": "v3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BabDev/PagerfantaBundle.git",
-                "reference": "d2760ebc3d22db10f219544323bea432dedc9eb0"
+                "reference": "39df12df63177fee40c17c6efff8d4110bea3c94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BabDev/PagerfantaBundle/zipball/d2760ebc3d22db10f219544323bea432dedc9eb0",
-                "reference": "d2760ebc3d22db10f219544323bea432dedc9eb0",
+                "url": "https://api.github.com/repos/BabDev/PagerfantaBundle/zipball/39df12df63177fee40c17c6efff8d4110bea3c94",
+                "reference": "39df12df63177fee40c17c6efff8d4110bea3c94",
                 "shasum": ""
             },
             "require": {
@@ -43,11 +43,11 @@
                 "jms/serializer-bundle": "^3.0 || ^4.0",
                 "matthiasnoback/symfony-dependency-injection-test": "^4.3",
                 "pagerfanta/twig": "^3.1",
-                "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan": "1.7.2",
-                "phpstan/phpstan-phpunit": "1.1.1",
-                "phpstan/phpstan-symfony": "1.2.0",
-                "phpunit/phpunit": "^9.5",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "1.10.15",
+                "phpstan/phpstan-phpunit": "1.3.13",
+                "phpstan/phpstan-symfony": "1.2.19",
+                "phpunit/phpunit": "9.6.8",
                 "symfony/phpunit-bridge": "^5.4 || ^6.0",
                 "symfony/serializer": "^4.4 || ^5.4 || ^6.0",
                 "symfony/translation": "^4.4 || ^5.4 || ^6.0",
@@ -79,7 +79,7 @@
             ],
             "support": {
                 "issues": "https://github.com/BabDev/PagerfantaBundle/issues",
-                "source": "https://github.com/BabDev/PagerfantaBundle/tree/v3.7.0"
+                "source": "https://github.com/BabDev/PagerfantaBundle/tree/v3.8.0"
             },
             "funding": [
                 {
@@ -87,7 +87,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-05-27T20:58:26+00:00"
+            "time": "2023-06-01T01:04:54+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",
