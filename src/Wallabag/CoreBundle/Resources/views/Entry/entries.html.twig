@@ -29,7 +29,12 @@
     <div class="results">
         <div class="nb-results">
             {{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}
-            <a href="{{ path('switch_view_mode') }}"><i class="material-icons">{% if list_mode == 0 %}view_list{% else %}view_module{% endif %}</i></a>
+            {% if entries.count > 0 %}
+                <a class="results-item" href="{{ path('switch_view_mode') }}"><i class="material-icons">{% if list_mode == 0 %}view_list{% else %}view_module{% endif %}</i></a>
+            {% endif %}
+            {% if entries.count > 0 %}
+                <label for="mass-action-inputs-displayed" class="mass-action-toggle results-item tooltipped" data-position="right" data-delay="50" data-tooltip="{{ 'entry.list.toggle_mass_action'|trans }}"><i class="material-icons">library_add_check</i></label>
+            {% endif %}
             {% if app.user.config.feedToken %}
                 {% include "@WallabagCore/Entry/_feed_link.html.twig" %}
             {% endif %}
@@ -40,41 +45,39 @@
         {% endif %}
     </div>
 
-    {% if list_mode == 1 %}
-        <div class="mass-buttons">
-            {% if entries.count > 0 and list_mode == 1 %}
-                <span>
-                    <input id="selectAll" type="checkbox" data-toggle="[data-js='entry-checkbox']" data-js="checkboxes-toggle" />&nbsp;
-                </span>
+    {% if entries.count > 0 %}
+        <input id="mass-action-inputs-displayed" class="toggle-checkbox" type="checkbox" />
+        <div class="mass-action">
+            <div class="mass-action-group">
+                <input type="checkbox" class="entry-checkbox-input" data-toggle="[data-js='entry-checkbox']" data-js="checkboxes-toggle" />
+                <button class="mass-action-button btn cyan darken-1" type="submit" name="toggle-read" title="{{ 'entry.list.toogle_as_read'|trans }}"><i class="material-icons">done</i></button>
+                <button class="mass-action-button btn cyan darken-1" type="submit" name="toggle-star" title="{{ 'entry.list.toogle_as_star'|trans }}" ><i class="material-icons">star</i></button>
+                <button class="mass-action-button btn cyan darken-1" type="submit" name="delete" onclick="return confirm('{{ 'entry.confirm.delete_entries'|trans|escape('js') }}')" title="{{ 'entry.list.delete'|trans }}"><i class="material-icons">delete</i></button>
+                <label for="mass-action-tags-displayed" class="mass-action-button btn cyan darken-1" type="button" title="{{ 'entry.list.add_tag'|trans }}"><i class="material-icons">label</i></label>
+            </div>
 
-                <span>
-                    <button class="btn cyan darken-1" type="submit" name="toggle-read" title="{{ 'entry.list.toogle_as_read'|trans }}"><i class="material-icons">done</i></button>
-                    <button class="btn cyan darken-1" type="submit" name="toggle-star" title="{{ 'entry.list.toogle_as_star'|trans }}" ><i class="material-icons">star</i></button>
-                    <button class="btn cyan darken-1" type="submit" name="delete" onclick="return confirm('{{ 'entry.confirm.delete_entries'|trans|escape('js') }}')" title="{{ 'entry.list.delete'|trans }}"><i class="material-icons">delete</i></button>
-                    <button class="btn cyan darken-1" type="submit" name="tag"><i class="material-icons">label</i></button>
-                </span>
-
-                <span class="input-field inline">
-                    <input type="text" name="tags" />
-                </span>
-            {% endif %}
+            <input id="mass-action-tags-displayed" class="toggle-checkbox" type="checkbox" />
+            <div class="mass-action-tags">
+                <input type="text" class="mass-action-tags-input" name="tags" placeholder="{{ 'entry.list.mass_action_tags_input_placeholder'|trans }}" required />
+                <button class="btn cyan darken-1" type="submit" name="tag">Ajouter</button>
+            </div>
         </div>
+
+        <ol class="entries {% if list_mode == 1 %}collection{% else %}row entries-row data{% endif %}">
+
+            {% for entry in entries %}
+                <li id="entry-{{ entry.id|e }}" class="{% if list_mode != 0 %}col collection-item{% endif %} s12" data-entry-id="{{ entry.id|e }}" data-test="entry">
+                    {% if list_mode == 1 %}
+                        {% include "@WallabagCore/Entry/_card_list.html.twig" with {'entry': entry, 'currentRoute': current_route, 'routes': entries_with_archived_class_routes} only %}
+                    {% elseif not entry.previewPicture is null and entry.mimetype starts with 'image/' %}
+                        {% include "@WallabagCore/Entry/_card_full_image.html.twig" with {'entry': entry, 'currentRoute': current_route, 'routes': entries_with_archived_class_routes} only %}
+                    {% else %}
+                        {% include "@WallabagCore/Entry/_card_preview.html.twig" with {'entry': entry, 'currentRoute': current_route, 'routes': entries_with_archived_class_routes} only %}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ol>
     {% endif %}
-
-    <ol class="entries {% if list_mode == 1 %}collection{% else %}row entries-row data{% endif %}">
-
-        {% for entry in entries %}
-            <li id="entry-{{ entry.id|e }}" class="{% if list_mode != 0 %}col collection-item{% endif %} s12" data-entry-id="{{ entry.id|e }}" data-test="entry">
-                {% if list_mode == 1 %}
-                    {% include "@WallabagCore/Entry/_card_list.html.twig" with {'entry': entry, 'currentRoute': current_route, 'routes': entries_with_archived_class_routes} only %}
-                {% elseif not entry.previewPicture is null and entry.mimetype starts with 'image/' %}
-                    {% include "@WallabagCore/Entry/_card_full_image.html.twig" with {'entry': entry, 'currentRoute': current_route, 'routes': entries_with_archived_class_routes} only %}
-                {% else %}
-                    {% include "@WallabagCore/Entry/_card_preview.html.twig" with {'entry': entry, 'currentRoute': current_route, 'routes': entries_with_archived_class_routes} only %}
-                {% endif %}
-            </li>
-        {% endfor %}
-    </ol>
 </form>
 
     {% if entries.getNbPages > 1 %}

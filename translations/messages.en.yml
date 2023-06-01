@@ -240,6 +240,8 @@ entry:
         export_title: Export
         show_same_domain: Show articles with the same domain
         assign_search_tag: Assign this search as a tag to each result
+        toggle_mass_action: Toggle mass action
+        mass_action_tags_input_placeholder: tag1, tag2, tag3
     filters:
         title: Filters
         status_label: Status
