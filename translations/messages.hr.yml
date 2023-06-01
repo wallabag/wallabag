@@ -495,6 +495,8 @@ entry:
         reading_time_less_one_minute_short: '&lt; 1 min'
         show_same_domain: Prikaži članke s istom domenom
         assign_search_tag: Dodijeli ovo pretraživanje kao oznaku svakom rezultatu
+        mass_action_tags_input_placeholder: oznaka1, oznaka2, oznaka3
+        toggle_mass_action: Uklj./Isklj. grupne radnje
     view:
         left_menu:
             set_as_starred: Uklj/Isklj omiljene
