@@ -6920,16 +6920,16 @@
         },
         {
             "name": "php-http/httplug-bundle",
-            "version": "1.29.0",
+            "version": "1.29.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/HttplugBundle.git",
-                "reference": "cace4703fb6d7c54072bd35bd808b268e8fe5812"
+                "reference": "7c638710c3d4d4fe14de9e28e9a98c073a289cea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/cace4703fb6d7c54072bd35bd808b268e8fe5812",
-                "reference": "cace4703fb6d7c54072bd35bd808b268e8fe5812",
+                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/7c638710c3d4d4fe14de9e28e9a98c073a289cea",
+                "reference": "7c638710c3d4d4fe14de9e28e9a98c073a289cea",
                 "shasum": ""
             },
             "require": {
@@ -7015,9 +7015,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/HttplugBundle/issues",
-                "source": "https://github.com/php-http/HttplugBundle/tree/1.29.0"
+                "source": "https://github.com/php-http/HttplugBundle/tree/1.29.1"
             },
-            "time": "2023-05-17T09:11:27+00:00"
+            "time": "2023-06-01T08:55:47+00:00"
         },
         {
             "name": "php-http/logger-plugin",
@@ -7597,22 +7597,23 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.21.3",
+            "version": "1.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "b0c366dd2cea79407d635839d25423ba07c55dd6"
+                "reference": "ec58baf7b3c7f1c81b3b00617c953249fb8cf30c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/b0c366dd2cea79407d635839d25423ba07c55dd6",
-                "reference": "b0c366dd2cea79407d635839d25423ba07c55dd6",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/ec58baf7b3c7f1c81b3b00617c953249fb8cf30c",
+                "reference": "ec58baf7b3c7f1c81b3b00617c953249fb8cf30c",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2 || ^8.0"
             },
             "require-dev": {
+                "doctrine/annotations": "^2.0",
                 "nikic/php-parser": "^4.15",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
                 "phpstan/extension-installer": "^1.0",
@@ -7637,9 +7638,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.21.3"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.22.0"
             },
-            "time": "2023-05-29T19:31:28+00:00"
+            "time": "2023-06-01T12:35:21+00:00"
         },
         {
             "name": "phpzip/phpzip",
