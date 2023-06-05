@@ -256,6 +256,8 @@ entry:
         export_title: Eksportuj
         show_same_domain: Pokaż artykuły z tej samej domeny
         assign_search_tag: Przypisz to wyszukiwanie jako tag do każdego wyniku
+        toggle_mass_action: Przełącz akcję masową
+        mass_action_tags_input_placeholder: tag1, tag2, tag3
     filters:
         title: Filtry
         status_label: Status

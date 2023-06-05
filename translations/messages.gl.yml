@@ -175,6 +175,8 @@ entry:
         number_on_the_page: '{0} Non hai entradas.|{1} Só hai unha entrada.|]1,Inf[ Hai %count% entradas.'
         show_same_domain: Mostrar artigos do mesmo dominio
         assign_search_tag: Asignar esta busca como etiqueta a cada resultado
+        toggle_mass_action: Realizar acción conxunta
+        mass_action_tags_input_placeholder: etiqueta1, etiqueta2, etiqueta3
     page_titles:
         all: Todas as entradas
         untagged: Entradas sen etiqueta
