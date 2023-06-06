@@ -8,6 +8,7 @@ module.exports = {
     'font-family-no-missing-generic-family-keyword': null,
     'no-descending-specificity': null,
     'scss/at-rule-no-unknown': true,
+    'media-feature-range-notation': null,
     'selector-class-pattern': [
       '^[a-z]([-]?[a-z0-9]+)*(__[a-z0-9]([-]?[a-z0-9]+)*)?(--[a-z0-9]([-]?[a-z0-9]+)*)?$',
       {
