@@ -25,7 +25,7 @@
 
 {% block menu %}
     <nav class="cyan darken-1">
-        <ul id="slide-out" class="side-nav fixed">
+        <ul id="slide-out" class="left-bar side-nav fixed">
             {% block logo %}
                 <li class="logo border-bottom">
                     <a title="{{ 'menu.left.back_to_unread'|trans }}" href="{{ path('unread') }}">
@@ -53,22 +53,22 @@
             {% endif %}
 
             <li class="bold {% if active_route == 'unread' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('unread') }}">{{ 'menu.left.unread'|trans }} <span class="numberItems grey-text">{{ count_entries('unread') }}</span></a>
+                <a class="waves-effect" href="{{ path('unread') }}">{{ 'menu.left.unread'|trans }} <span class="items-number grey-text">{{ count_entries('unread') }}</span></a>
             </li>
             <li class="bold {% if active_route == 'starred' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('starred') }}">{{ 'menu.left.starred'|trans }} <span class="numberItems grey-text">{{ count_entries('starred') }}</span></a>
+                <a class="waves-effect" href="{{ path('starred') }}">{{ 'menu.left.starred'|trans }} <span class="items-number grey-text">{{ count_entries('starred') }}</span></a>
             </li>
             <li class="bold {% if active_route == 'archive' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('archive') }}">{{ 'menu.left.archive'|trans }} <span class="numberItems grey-text">{{ count_entries('archive') }}</span></a>
+                <a class="waves-effect" href="{{ path('archive') }}">{{ 'menu.left.archive'|trans }} <span class="items-number grey-text">{{ count_entries('archive') }}</span></a>
             </li>
             <li class="bold {% if active_route == 'annotated' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('annotated') }}">{{ 'menu.left.with_annotations'|trans }} <span class="numberItems grey-text">{{ count_entries('annotated') }}</span></a>
+                <a class="waves-effect" href="{{ path('annotated') }}">{{ 'menu.left.with_annotations'|trans }} <span class="items-number grey-text">{{ count_entries('annotated') }}</span></a>
             </li>
             <li class="bold {% if active_route == 'all' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('all') }}">{{ 'menu.left.all_articles'|trans }} <span class="numberItems grey-text">{{ count_entries('all') }}</span></a>
+                <a class="waves-effect" href="{{ path('all') }}">{{ 'menu.left.all_articles'|trans }} <span class="items-number grey-text">{{ count_entries('all') }}</span></a>
             </li>
             <li class="bold {% if current_route == 'tags' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('tag') }}">{{ 'menu.left.tags'|trans }} <span class="numberItems grey-text">{{ count_tags() }}</span></a>
+                <a class="waves-effect" href="{{ path('tag') }}">{{ 'menu.left.tags'|trans }} <span class="items-number grey-text">{{ count_tags() }}</span></a>
             </li>
         </ul>
         <div class="nav-panels">
@@ -98,12 +98,12 @@
                         </a>
                     </li>
                     {% endif %}
-                    <li id="button_filters">
+                    <li id="button_filters" class="button-filters">
                         <a class="nav-panel-menu button-collapse-right tooltipped js-filters-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-activates="filters">
                             <i class="material-icons">filter_list</i>
                         </a>
                     </li>
-                    <li id="button_export">
+                    <li id="button_export" class="button-export">
                         <a class="nav-panel-menu button-collapse-right tooltipped js-export-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.export'|trans }}" href="#" data-activates="export">
                             <i class="material-icons">file_download</i>
                         </a>
