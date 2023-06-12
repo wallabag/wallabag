@@ -54,7 +54,7 @@
     }
 
     a {
-      border-bottom: 1px dotted $blueAccentColor;
+      border-bottom: 1px dotted $blue-accent-color;
       text-decoration: none;
     }
 
@@ -105,7 +105,7 @@
     margin: 2.1rem 0 0.68rem;
   }
 
-  aside {
+  .entry-info {
     .tools {
       display: flex;
       flex-flow: row wrap;
