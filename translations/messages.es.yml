@@ -256,6 +256,8 @@ entry:
         export_title: 'Exportar'
         assign_search_tag: Asigne esta búsqueda como una etiqueta a cada resultado
         show_same_domain: Mostrar artículos con el mismo dominio
+        toggle_mass_action: Acción colectiva
+        mass_action_tags_input_placeholder: etiqueta1, etiqueta2, etiqueta3
     filters:
         title: 'Filtros'
         status_label: 'Estado'
