@@ -9,4 +9,6 @@
     {% set feed_route = feed_route ~ '_feed' %}
     {% set slug = null %}
 {% endif %}
-<a rel="alternate" type="application/atom+xml" href="{{ path(feed_route, {'username': app.user.username, 'token': app.user.config.feedToken, 'slug': slug}) }}" class="results-item"><i class="material-icons">rss_feed</i></a>
+{% if feed_route %}
+    <a rel="alternate" type="application/atom+xml" href="{{ path(feed_route, {'username': app.user.username, 'token': app.user.config.feedToken, 'slug': slug}) }}" class="results-item"><i class="material-icons">rss_feed</i></a>
+{% endif %}
