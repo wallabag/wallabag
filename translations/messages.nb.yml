@@ -371,9 +371,9 @@ import:
     readability:
         page_title: Importer > Readability
     wallabag_v2:
-        page_title: Importer > Wallabag v2
+        page_title: Importer > wallabag v2
     wallabag_v1:
-        page_title: Importer > Wallabag v1
+        page_title: Importer > wallabag v1
 tag:
     new:
         placeholder: Du kan legge til flere (kommainndelte) etiketter.
