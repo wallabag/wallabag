@@ -380,8 +380,6 @@ class Config
     }
 
     /**
-     * @param bool $displayThumbnails
-     *
      * @return Config
      */
     public function setDisplayThumbnails(bool $displayThumbnails)

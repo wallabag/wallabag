@@ -6,7 +6,7 @@ use Doctrine\DBAL\Schema\Schema;
 use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
 /**
- * Added a new setting to display or not thumbnails
+ * Added a new setting to display or not thumbnails.
  */
 final class Version20230613121354 extends WallabagMigration
 {
