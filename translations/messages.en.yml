@@ -683,6 +683,7 @@ flashes:
         notice:
             tag_added: Tag added
             tag_renamed: 'Tag renamed'
+            too_much_tags: To avoid performance issues, you can't add more than %tags% tags at once or tags having more than %characters% characters.
     import:
         notice:
             failed: Import failed, please try again.
