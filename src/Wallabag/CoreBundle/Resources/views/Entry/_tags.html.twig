@@ -2,9 +2,9 @@
     <ul class="tags{{ listClass|default("") }}">
         {% for tag in tags %}
             <li class="chip" title="{{ tag.label }}">
-                <a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a>
+                <a class="chip-label" href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a>
                 {% if withRemove is defined and withRemove == true %}
-                    <a href="{{ path('remove_tag', {'entry': entryId, 'tag': tag.id}) }}" onclick="return confirm('{{ 'entry.confirm.delete_tag'|trans|escape('js') }}')">
+                    <a class="chip-action" href="{{ path('remove_tag', {'entry': entryId, 'tag': tag.id}) }}" onclick="return confirm('{{ 'entry.confirm.delete_tag'|trans|escape('js') }}')">
                         <i class="material-icons vertical-align-middle">delete</i>
                     </a>
                 {% endif %}

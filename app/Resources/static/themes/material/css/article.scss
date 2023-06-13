@@ -133,18 +133,20 @@
       }
 
       .tags {
-        float: right;
-        margin: 5px 15px 10px;
+        display: flex;
+        margin: 0;
+        align-items: center;
+        gap: 5px;
       }
     }
 
     .chip {
-      background-color: #9e9e9e;
-      padding: 0 15px 0 10px;
-      margin: auto 2px;
-      border-radius: 6px;
+      display: flex;
+      margin: 0;
+      padding: 0;
       height: 18px;
       line-height: 18px;
+      background-color: transparent;
 
       a,
       i {
@@ -152,11 +154,22 @@
       }
 
       i.material-icons {
-        float: right;
         font-size: 16px;
         line-height: 18px;
-        padding-left: 8px;
       }
+    }
+
+    .chip-label {
+        padding-left: 10px;
+        padding-right: 5px;
+        background-color: #9e9e9e;
+        border-radius: 6px 0 0 6px;
+    }
+
+    .chip-action {
+      padding: 0 5px;
+      background-color: #868686;
+      border-radius: 0 6px 6px 0;
     }
   }
 }
