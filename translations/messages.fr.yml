@@ -240,6 +240,8 @@ entry:
         export_title: Exporter
         show_same_domain: Afficher les articles du même site
         assign_search_tag: Ajouter cette recherche comme un tag à chaque résultat
+        toggle_mass_action: Actions en masse
+        mass_action_tags_input_placeholder: étiquette1, étiquette2, étiquette3
     filters:
         title: Filtres
         status_label: Status
