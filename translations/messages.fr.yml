@@ -667,6 +667,7 @@ flashes:
         notice:
             tag_added: Étiquette ajoutée
             tag_renamed: "Étiquette renommée"
+            too_much_tags: Afin d'éviter des soucis de performance, il n'est pas possible d'ajouter plus de %tags% étiquettes ou d'avoir des étiquettes qui font plus de %characters% lettres.
     import:
         notice:
             failed: L’import a échoué, veuillez réessayer.
