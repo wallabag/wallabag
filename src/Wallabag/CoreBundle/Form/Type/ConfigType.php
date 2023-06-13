@@ -3,6 +3,7 @@
 namespace Wallabag\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -28,6 +29,11 @@ class ConfigType extends AbstractType
             ->add('items_per_page', IntegerType::class, [
                 'label' => 'config.form_settings.items_per_page_label',
                 'property_path' => 'itemsPerPage',
+            ])
+            ->add('display_thumbnails', CheckboxType::class, [
+                'label' => 'config.form_settings.display_thumbnails_label',
+                'property_path' => 'displayThumbnails',
+                'required' => false,
             ])
             ->add('reading_speed', IntegerType::class, [
                 'label' => 'config.form_settings.reading_speed.label',

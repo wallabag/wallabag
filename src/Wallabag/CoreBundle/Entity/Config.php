@@ -118,6 +118,15 @@ class Config
     private $listMode;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="display_thumbnails", type="integer", nullable=true)
+     *
+     * @Groups({"config_api"})
+     */
+    private $displayThumbnails;
+
+    /**
      * @ORM\OneToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="config")
      */
     private $user;
@@ -358,6 +367,26 @@ class Config
     public function setListMode($listMode)
     {
         $this->listMode = $listMode;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getDisplayThumbnails(): ?bool
+    {
+        return $this->displayThumbnails;
+    }
+
+    /**
+     * @param bool $displayThumbnails
+     *
+     * @return Config
+     */
+    public function setDisplayThumbnails(bool $displayThumbnails)
+    {
+        $this->displayThumbnails = $displayThumbnails;
 
         return $this;
     }

@@ -6,9 +6,11 @@
                 <li title="{{ tag.label }}"><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
             {% endfor %}
             </ul>
+            {% if app.user.config.displayThumbnails %}
             <a href="{{ path('view', {'id': entry.id}) }}">
                 <span class="preview" style="background-image: url({{ entry.previewPicture }})"></span>
             </a>
+            {% endif %}
         </div>
         {% include "@WallabagCore/Entry/Card/_content.html.twig" with {'entry': entry} only %}
     </div>
