@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Form\Type\NewTagType;
@@ -39,7 +40,7 @@ class TagController extends AbstractController
      *
      * @return Response
      */
-    public function addTagFormAction(Request $request, Entry $entry)
+    public function addTagFormAction(Request $request, Entry $entry, TranslatorInterface $translator)
     {
         $form = $this->createForm(NewTagType::class, new Tag());
         $form->handleRequest($request);
@@ -48,7 +49,13 @@ class TagController extends AbstractController
         $tagsExploded = explode(',', $tags);
 
         // avoid too much tag to be added
-        if (\count($tagsExploded) >= 5 || \strlen($tags) >= NewTagType::MAX_LENGTH) {
+        if (\count($tagsExploded) >= NewTagType::MAX_TAGS || \strlen($tags) >= NewTagType::MAX_LENGTH) {
+            $message = $translator->trans('flashes.tag.notice.too_much_tags', [
+                '%tags%' => NewTagType::MAX_TAGS,
+                '%characters%' => NewTagType::MAX_LENGTH,
+            ]);
+            $this->addFlash('notice', $message);
+
             return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
         }
 
