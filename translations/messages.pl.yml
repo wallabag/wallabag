@@ -686,6 +686,7 @@ flashes:
         notice:
             tag_added: Tag dodany
             tag_renamed: Zmieniono nazwę tagu
+            too_much_tags: Aby uniknąć problemów z wydajnością, nie możesz dodać jednocześnie więcej tagów niż %tags% ani tagów zawierających więcej niż %characters% znaki(-ów).
     import:
         notice:
             failed: Nieudany import, prosimy spróbować ponownie.
