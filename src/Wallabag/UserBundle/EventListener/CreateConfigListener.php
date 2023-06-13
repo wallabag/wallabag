@@ -25,7 +25,7 @@ class CreateConfigListener implements EventSubscriberInterface
     private $session;
     private $displayThumbnails;
 
-    public function __construct(EntityManagerInterface $em, $itemsOnPage, $feedLimit, $language, $readingSpeed, $actionMarkAsRead, $listMode, SessionInterface $session, $displayThumbnails)
+    public function __construct(EntityManagerInterface $em, $itemsOnPage, $feedLimit, $language, $readingSpeed, $actionMarkAsRead, $listMode, $displayThumbnails, SessionInterface $session)
     {
         $this->em = $em;
         $this->itemsOnPage = $itemsOnPage;
