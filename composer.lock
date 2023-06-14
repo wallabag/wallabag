@@ -5055,16 +5055,16 @@
         },
         {
             "name": "jms/serializer-bundle",
-            "version": "5.2.1",
+            "version": "5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/JMSSerializerBundle.git",
-                "reference": "c772704a0b3cb772fa391ff5ac7d36fd6cecebf4"
+                "reference": "3279738a958454793ca1e318a7dab6cfcff60124"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSSerializerBundle/zipball/c772704a0b3cb772fa391ff5ac7d36fd6cecebf4",
-                "reference": "c772704a0b3cb772fa391ff5ac7d36fd6cecebf4",
+                "url": "https://api.github.com/repos/schmittjoh/JMSSerializerBundle/zipball/3279738a958454793ca1e318a7dab6cfcff60124",
+                "reference": "3279738a958454793ca1e318a7dab6cfcff60124",
                 "shasum": ""
             },
             "require": {
@@ -5130,7 +5130,7 @@
             ],
             "support": {
                 "issues": "https://github.com/schmittjoh/JMSSerializerBundle/issues",
-                "source": "https://github.com/schmittjoh/JMSSerializerBundle/tree/5.2.1"
+                "source": "https://github.com/schmittjoh/JMSSerializerBundle/tree/5.3.1"
             },
             "funding": [
                 {
@@ -5138,7 +5138,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-05T11:03:45+00:00"
+            "time": "2023-06-13T14:47:57+00:00"
         },
         {
             "name": "khanamiryan/qrcode-detector-decoder",
