@@ -120,7 +120,7 @@ class Config
     /**
      * @var int
      *
-     * @ORM\Column(name="display_thumbnails", type="integer", nullable=true)
+     * @ORM\Column(name="display_thumbnails", type="integer", nullable=true, options={"default" = 1})
      *
      * @Groups({"config_api"})
      */
