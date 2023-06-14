@@ -179,6 +179,15 @@
       min-width: 30px;
       text-align: center;
     }
+
+    .chip-label:hover,
+    .chip-label:active,
+    .chip-label:focus,
+    .chip-action:hover,
+    .chip-action:active,
+    .chip-action:focus {
+      background-color: #5e5e5e;
+    }
   }
 }
 
