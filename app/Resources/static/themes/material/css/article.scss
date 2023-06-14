@@ -108,11 +108,12 @@
   .entry-info {
     .tools {
       display: flex;
-      flex-flow: row wrap;
+      margin: 8px 5px 5px;
+      flex-wrap: wrap;
 
       .stats {
+        margin: 0;
         font-size: 0.7em;
-        margin: 8px 5px 5px;
 
         li {
           display: inline-flex;
@@ -144,8 +145,9 @@
       display: flex;
       margin: 0;
       padding: 0;
-      height: 18px;
-      line-height: 18px;
+      height: 25px;
+      line-height: 25px;
+      align-items: center;
       background-color: transparent;
 
       a,
@@ -155,7 +157,7 @@
 
       i.material-icons {
         font-size: 16px;
-        line-height: 18px;
+        vertical-align: sub;
       }
     }
 
@@ -171,7 +173,17 @@
       background-color: #868686;
       border-radius: 0 6px 6px 0;
     }
+
+    .chip-label,
+    .chip-action {
+      min-width: 30px;
+      text-align: center;
+    }
   }
+}
+
+.entry-info {
+  margin-bottom: 40px;
 }
 
 .reader-mode {
@@ -212,4 +224,29 @@
   height: 3px;
   margin: 0;
   z-index: 9999;
+}
+
+@media only screen and (max-width: 640px) {
+  .entry-info {
+    margin-bottom: 20px;
+  }
+
+  #article .entry-info .tools {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  #article .entry-info .tools .tags {
+    gap: 10px;
+  }
+
+  #article .entry-info .chip {
+    height: 32px;
+    line-height: 32px;
+  }
+
+  #article .entry-info .chip-label,
+  #article .entry-info .chip-action {
+    min-width: 40px;
+  }
 }
