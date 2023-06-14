@@ -610,6 +610,7 @@ flashes:
         notice:
             tag_renamed: Etiqueta renomeada
             tag_added: Etiqueta engadida
+            too_much_tags: Para evitar problemas de rendemento, non podes engadir máis de %tags% etiquetas á vez ou etiquetas con máis de %characters% caracteres.
     entry:
         notice:
             no_random_entry: Non se atopan artigos con este criterio
