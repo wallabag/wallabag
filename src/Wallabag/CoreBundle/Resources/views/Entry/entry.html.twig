@@ -266,10 +266,12 @@
                             {{ entry.domainName|removeWww }}
                         </a>
                     </li>
-                    <li>
-                        <i class="material-icons grey-text">comment</i>
-                        {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations|length) }}
-                    </li>
+                    {% if entry.annotations|length %}
+                        <li>
+                            <i class="material-icons grey-text">comment</i>
+                            {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations|length) }}
+                        </li>
+                    {% endif %}
                     {% if entry.originUrl is not empty %}
                         <li>
                             <i class="material-icons grey-text" title="{{ 'entry.view.provided_by'|trans }}">launch</i>
