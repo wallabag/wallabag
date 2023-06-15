@@ -161,6 +161,16 @@ nav {
 }
 
 @media (min-width: 993px) {
+  .toggle-add-url-container {
+    flex-grow: 1;
+  }
+
+  .toggle-add-url {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+  }
+
   .button-collapse {
     display: none;
   }
