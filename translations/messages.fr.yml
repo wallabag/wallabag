@@ -242,6 +242,7 @@ entry:
         assign_search_tag: Ajouter cette recherche comme un tag à chaque résultat
         toggle_mass_action: Actions en masse
         mass_action_tags_input_placeholder: étiquette1, étiquette2, étiquette3
+        add_tags: Ajouter des étiquettes
     filters:
         title: Filtres
         status_label: Status
