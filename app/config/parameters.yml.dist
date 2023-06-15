@@ -23,7 +23,7 @@ parameters:
     # with PostgreSQL and SQLite, you must set "utf8"
     database_charset: utf8mb4
 
-    domain_name: https://your-wallabag-url-instance.com
+    domain_name: https://your-wallabag-instance.wallabag.org
     server_name: "Your wallabag instance"
 
     mailer_dsn: smtp://127.0.0.1
