@@ -242,6 +242,7 @@ entry:
         assign_search_tag: Assign this search as a tag to each result
         toggle_mass_action: Toggle mass action
         mass_action_tags_input_placeholder: tag1, tag2, tag3
+        add_tags: Add tags
     filters:
         title: Filters
         status_label: Status
