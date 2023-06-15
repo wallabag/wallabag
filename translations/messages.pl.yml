@@ -258,6 +258,7 @@ entry:
         assign_search_tag: Przypisz to wyszukiwanie jako tag do każdego wyniku
         toggle_mass_action: Przełącz akcję masową
         mass_action_tags_input_placeholder: tag1, tag2, tag3
+        add_tags: Dodaj tagi
     filters:
         title: Filtry
         status_label: Status
