@@ -139,9 +139,7 @@ about:
         support: '<a href="https://github.com/wallabag/wallabag/issues">pe GitHub</a>'
     helping:
         description: 'wallabag este gratis și Open-Source. Cum ne poți ajuta:'
-        by_contributing: 'contribuind la proiect:'
-        by_contributing_2: 'o problemă ne listează toate nevoile'
-        by_paypal: 'prin Paypal'
+        by_paypal: 'prin Liberapay'
     third_party:
         license: 'Licență'
 

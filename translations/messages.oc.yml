@@ -339,9 +339,7 @@ about:
         support: <a href="https://github.com/wallabag/wallabag/issues">sur GitHub</a>
     helping:
         description: 'wallabag es a gratuit e opensource. Nos podètz ajudar :'
-        by_contributing: 'en participant lo projècte :'
-        by_contributing_2: un bilhet recensa totes nòstres besonhs
-        by_paypal: via Paypal
+        by_paypal: via Liberapay
     contributors:
         description: Mercés als contributors de l'aplicacion web de wallabag
     third_party:

@@ -351,9 +351,7 @@ about:
         documentation: ドキュメント
     helping:
         description: 'wallabag はフリーでオープン ソースです。私たちを支援することができます:'
-        by_contributing: 'プロジェクトへの貢献:'
-        by_contributing_2: 問題のリスト、すべてのニーズ
-        by_paypal: Paypal 経由で
+        by_paypal: Liberapay 経由で
     contributors:
         description: Wallabag web アプリケーションの貢献者に感謝します
     third_party:

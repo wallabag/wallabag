@@ -358,9 +358,7 @@ about:
         support: '<a href="https://github.com/wallabag/wallabag/issues">前往 GitHub</a>'
     helping:
         description: 'wallabag 是自由且开源的，你可以帮助我们：'
-        by_contributing: '为项目做出贡献：'
-        by_contributing_2: '这里列出了我们的需求'
-        by_paypal: '通过 Paypal'
+        by_paypal: '通过 Liberapay'
     contributors:
         description: '感谢为 wallabag 网页程序做出贡献的人们'
     third_party:

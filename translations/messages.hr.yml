@@ -106,10 +106,8 @@ import:
         how_to: Odaberi Delicious izvoz i pritisni donji gumb za slanje i uvoz datoteke.
 about:
     helping:
-        by_contributing: 'doprinošenjem projektu:'
         description: 'wallabag je slobodan softver otvorenog koda. Možeš nam pomoći:'
         by_paypal: putem PayPal-a
-        by_contributing_2: problem nabraja sve naše potrebe
     who_behind_wallabag:
         license: Licenca
         website: web-stranica
