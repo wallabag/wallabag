@@ -49,7 +49,7 @@ parameters:
     redis_port: 6379
     redis_path: null
     redis_password: null
-    domain_name: https://your-wallabag-url-instance.com
+    domain_name: https://your-wallabag-instance.wallabag.org
 ```
 
 ## Bedeutung von jedem Parameter
