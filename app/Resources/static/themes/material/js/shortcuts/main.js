@@ -80,6 +80,13 @@ $(document).ready(() => {
   });
 
   Mousetrap.bind('enter', () => {
-    window.location.href = window.location.origin + $(card).find('span.card-title a').attr('href');
+    if (typeof card !== 'object') {
+      return;
+    }
+
+    const url = $(card).find('.card-title a').attr('href');
+    if (typeof url === 'string' && url.length > 0) {
+      window.location.href = window.location.origin + url;
+    }
   });
 });
