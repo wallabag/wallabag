@@ -24,7 +24,7 @@ parameters:
     database_table_prefix: wallabag_
     database_socket: ~
     database_charset: utf8mb4
-    domain_name: https://your-wallabag-url-instance.com
+    domain_name: https://your-wallabag-instance.wallabag.org
     mailer_transport: smtp
     mailer_user: ~
     mailer_password: ~
@@ -99,7 +99,7 @@ parameters:
 | fos_oauth_server_refresh_token_lifetime | durée du token de rafraichissement du token pour l'API | 1209600 |
 | from_email | Email de l'expéditeur pour chaque email envoyé | no-reply@wallabag.org |
 | rss_limit | Limite pour les flux RSS | 50 |
-| domain_name | URL complète de votre instance wallabag (sans le / de fin) | https://your-wallabag-url-instance.com |
+| domain_name | URL complète de votre instance wallabag (sans le / de fin) | https://your-wallabag-instance.wallabag.org |
 | sentry_dsn (**depuis la 2.4.0**) | DSN de [Sentry](https://sentry.io/welcome/) qui permet de récolter les erreurs | null |
 | server_name (**depuis la 2.4.1**) | Nom de votre instance wallabag pour l'emetteur 2FA | "Your wallabag instance" |
 
