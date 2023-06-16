@@ -50,9 +50,7 @@ developer:
         page_title: Διαχείριση πελατών API > Πώς να δημιουργήσω την πρώτη μου εφαρμογή
 about:
     helping:
-        by_contributing_2: μία αναφορά σφάλματος αναγράφει όλα όσα χρειαζόμαστε
-        by_paypal: μέσω Paypal
-        by_contributing: 'συνεισφέροντας στο εγχείρημα:'
+        by_paypal: μέσω Liberapay
         description: 'Το wallabag είναι δωρεάν και ανοιχτού κώδικα. Μπορείτε να μας βοηθήσετε:'
     getting_help:
         documentation: Τεκμηρίωση

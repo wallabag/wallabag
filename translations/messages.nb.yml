@@ -481,9 +481,8 @@ about:
     contributors:
         description: Takk til bidragsyterne for wallabag-nettprogrammet
     helping:
-        by_contributing: 'ved å bidra til prosjektet:'
         description: 'wallabag er fri programvare. Du kan hjelpe oss:'
-        by_paypal: via PayPal
+        by_paypal: via Liberapay
     top_menu:
         helping: Hjelp wallabag
         getting_help: Få hjelp

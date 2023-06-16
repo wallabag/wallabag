@@ -129,9 +129,7 @@ about:
         helping: Wallabag 돕기
         getting_help: 도움 받기
     helping:
-        by_contributing_2: 이 Github 이슈는 우리의 요구 사항을 나열합니다
-        by_paypal: Paypal을 통해
-        by_contributing: '프로젝트에 기여하여:'
+        by_paypal: Liberapay을 통해
         description: 'Wallabag 은 무료이며 오픈 소스입니다. 도움을 주세요:'
     getting_help:
         support: <a href="https://github.com/wallabag/wallabag/issues">GitHub</a>

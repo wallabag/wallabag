@@ -358,9 +358,7 @@ about:
         support: <a href="https://github.com/wallabag/wallabag/issues">GitHub üzerinde</a>
     helping:
         description: 'wallabag özgür ve açık kaynaklıdır. Bize yardımcı olabilirsiniz:'
-        by_contributing: 'projemize katkıda bulunun :'
-        by_contributing_2: ihtiyacımız olanların listelendiği yapılacaklar listesi
-        by_paypal: PayPal ile
+        by_paypal: Liberapay ile
     third_party:
         license: Lisans
         description: 'Aşağıda wallabag uygulamasında kullanılan üçüncü parti uygulamaları (ve lisanslarını) bulabilirsiniz:'

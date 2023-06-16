@@ -273,9 +273,7 @@ about:
         support: <a href="https://github.com/wallabag/wallabag/issues">a GitHub-on</a>
     helping:
         description: 'A wallabag szabad és nyílt forráskódú. Segíthetsz minket:'
-        by_contributing: 'hozzájárulással a projekthez:'
-        by_contributing_2: Ebben a Github jegyben vannak felsorolva az igényeink
-        by_paypal: Paypal-on keresztül
+        by_paypal: Liberapay-on keresztül
     contributors:
         description: Köszönet a wallabag webes alkalmazás közreműködőinek
     third_party:

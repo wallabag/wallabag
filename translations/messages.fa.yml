@@ -197,9 +197,7 @@ about:
         support: <a href="https://github.com/wallabag/wallabag/issues">روی GitHub</a>
     helping:
         description: 'wallabag رایگان، آزاد، و متن‌باز است. شما می‌توانید به ما کمک کنید:'
-        by_contributing: 'با مشارکت در پروژه:'
-        by_contributing_2: 'فهرست نیازمندی‌های ما در این صفحه است'
-        by_paypal: از راه Paypal
+        by_paypal: از راه Liberapay
     contributors:
         description: از مشارکت شما در برنامهٔ وب wallabag ممنونیم
     third_party:

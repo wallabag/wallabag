@@ -261,9 +261,7 @@ about:
         support: '<a href="https://github.com/wallabag/wallabag/issues">บน GitHub</a>'
     helping:
         description: 'wallabag จะฟรีและเปิดต้นฉบับแล้วคุณสามารถช่วยพวกเรา:'
-        by_contributing: 'โดยผู้มีส่วนร่วมโปรเจค:'
-        by_contributing_2: 'ฉบับของรายการทั้งหมดที่พวกเราต้องการ'
-        by_paypal: 'ผ่านทาง Paypal'
+        by_paypal: 'ผ่านทาง Liberapay'
     contributors:
         description: 'ขอขอบคุณผู้มีส่วนร่วมบนเว็บแอพพลิเคชั่น wallabag'
     third_party:

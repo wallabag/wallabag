@@ -345,9 +345,7 @@ about:
         support: <a href="https://github.com/wallabag/wallabag/issues">on GitHub</a>
     helping:
         description: 'wallabag is free and open source. You can help us:'
-        by_contributing: 'by contributing to the project:'
-        by_contributing_2: an issue lists all our needs
-        by_paypal: via Paypal
+        by_paypal: via Liberapay
     contributors:
         description: Thank you to contributors on wallabag web application
     third_party:

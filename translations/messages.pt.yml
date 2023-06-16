@@ -242,8 +242,6 @@ about:
         support: '<a href="https://github.com/wallabag/wallabag/issues">no GitHub</a>'
     helping:
         description: 'wallabag é livre e software livre. Você pode nos ajudar:'
-        by_contributing: 'contribuindo com o projeto:'
-        by_contributing_2: 'uma lista de todas as nossas necessidades'
         by_paypal: ''
     contributors:
         description: 'Obrigado por contribuir com a aplicação web wallabag'

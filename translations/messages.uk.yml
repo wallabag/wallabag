@@ -312,9 +312,7 @@ about:
         support: <a href="https://github.com/wallabag/wallabag/issues">на GitHub</a>
     helping:
         description: 'wallabag — вільне програмне забезпечення з відкритим кодом. Ви можете допомогти нам:'
-        by_contributing: 'покращуючи проєкт:'
-        by_contributing_2: список проблем, які нам потрібно вирішити
-        by_paypal: через Paypal
+        by_paypal: через Liberapay
     contributors:
         description: Дякуємо усім, хто долучився до розробки веб-застосунку wallabag
     third_party:

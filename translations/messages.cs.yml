@@ -617,9 +617,7 @@ about:
     contributors:
         description: Děkujeme přispěvatelům webové aplikace wallabag
     helping:
-        by_paypal: prostřednictvím Paypal
-        by_contributing_2: vydání obsahuje seznam všech našich potřeb
-        by_contributing: 'přispěním k projektu:'
+        by_paypal: prostřednictvím Liberapay
         description: 'wallabag je zdarma a má otevřený zdrojový kód. Můžete nám pomoci:'
     top_menu:
         third_party: Knihovny třetích stran

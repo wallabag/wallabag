@@ -566,9 +566,7 @@ howto:
     page_title: Handleiding
 about:
     helping:
-        by_contributing_2: een lijst met alles wat we nodig hebben
-        by_paypal: met Paypal
-        by_contributing: 'door bij te dragen aan het project:'
+        by_paypal: met Liberapay
         description: 'wallabag is gratis en open source. U kan ons helpen:'
     third_party:
         license: Licentie

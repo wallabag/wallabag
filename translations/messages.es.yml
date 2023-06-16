@@ -360,9 +360,7 @@ about:
         support: '<a href="https://github.com/wallabag/wallabag/issues">en GitHub</a>'
     helping:
         description: 'wallabag es software libre y gratuito. Usted puede ayudarnos:'
-        by_contributing: 'contribuyendo al proyecto:'
-        by_contributing_2: 'un informe lista todas nuestras necesidades'
-        by_paypal: 'vía Paypal'
+        by_paypal: 'vía Liberapay'
     contributors:
         description: 'Gracias a los colaboradores de la aplicación web de wallabag'
     third_party:
