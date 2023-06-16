@@ -211,6 +211,8 @@ config:
             enable: Activar
             cancel: Anullar
             qrcode_label: Còdi QR
+            two_factor_code_description_2: 'Podètz numerizar aqueste còdi QR amb vòstra aplicacion :'
+            two_factor_code_description_4: 'Ensajatz lo còdi generat per vòstra aplicacion A2F :'
         page_title: Autentificacion a dos factors
 entry:
     default_title: Títol de l'article
@@ -238,6 +240,11 @@ entry:
         toogle_as_star: Marcar coma favorit
         delete: Suprimir
         export_title: Exportar
+        show_same_domain: Mostrar totes los articles del meteis domeni
+        assign_search_tag: Apondre aquesta recèrca coma etiqueta a cada resultat
+        toggle_mass_action: Accions collectiva
+        mass_action_tags_input_placeholder: etiqueta1, etiqueta2, etiqueta3
+        add_tags: Apondre etiquetas
     filters:
         title: Filtres
         status_label: Estatus
@@ -456,6 +463,7 @@ tag:
         number_on_the_page: "{0} I a pas cap d'etiquetas.|{1} I a una etiqueta.|]1,Inf[ I a %count% etiquetas."
         see_untagged_entries: Afichar las entradas sens etiquetas
         untagged: Articles sens etiqueta
+        no_untagged_entries: Cap d’article sens etiqueta
     new:
         add: Ajustar
         placeholder: Podètz ajustar mai qu'una etiqueta, separadas per de virgula.
@@ -513,6 +521,10 @@ import:
         page_title: Importar > Pinboard
         description: Aquesta aisina importarà totas vòstres articles de Pinboard. Sus la pagina de salvagarda (https://pinboard.in/settings/backup) , clicatz sus "JSON" dins la seccion "Bookmarks". Se poirà telecargar un fichièr JSON (coma "pinboard_export").
         how_to: Mercés de causir vòstre fichièr Pinboard e de clicar sul boton dejós per lo telecargar e l'importar.
+    delicious:
+        page_title: Importar > del.icio.us
+    elcurator:
+        page_title: Importar > elCurator
 developer:
     page_title: Gestion dels clients API
     welcome_message: Vos desirem la benvenguda sus l'API de wallabag
@@ -627,6 +639,8 @@ flashes:
             entries_reset: Articles levats
             archived_reset: Articles archivat suprimits
             feed_updated: Configuracion RSS actualizada
+            feed_token_updated: Geton dels flux actualizat
+            feed_token_revoked: Geton dels flux suprimit
     entry:
         notice:
             entry_already_saved: Article ja salvagardat lo %date%
