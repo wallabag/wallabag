@@ -38,6 +38,7 @@ class CreateConfigListenerTest extends TestCase
             1,
             1,
             1,
+            1,
             $session
         );
 

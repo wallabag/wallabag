@@ -1,11 +1,13 @@
 <div class="card-stacked{% if currentRoute in routes and entry.isArchived %} archived{% endif %}">
     {% include "@WallabagCore/Entry/Card/_mass_checkbox.html.twig" with {'entry': entry} only %}
+    {% if app.user.config.displayThumbnails %}
     <div class="card-preview">
         <a href="{{ path('view', {'id': entry.id}) }}">
             {% set preview_class_modifier = entry.previewPicture ? '' : ' preview--default' %}
             <span class="preview{{ preview_class_modifier }}" style="background-image: url({{ entry.previewPicture|default(asset('img/logo-square.svg')) }})"></span>
         </a>
     </div>
+    {% endif %}
     {% include "@WallabagCore/Entry/Card/_content.html.twig" with {'entry': entry, 'withMetadata': true, 'subClass': 'metadata'} only %}
     <ul class="tools-list hide-on-small-only">
         <li>

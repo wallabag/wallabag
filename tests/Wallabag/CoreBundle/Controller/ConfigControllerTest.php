@@ -1354,4 +1354,40 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertCount(5, $taggingRules);
         $this->assertSame('title matches "football"', $taggingRules[4]->getRule());
     }
+
+    public function testSwitchDisplayThumbnails()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        // Change configuration to show thumbnails
+        $crawler = $client->request('GET', '/config');
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $form = $crawler->filter('button[id=config_save]')->form();
+        $data = [
+            'config[display_thumbnails]' => true,
+        ];
+        $client->submit($form, $data);
+        $client->followRedirect();
+
+        $client->request('GET', '/unread/list');
+
+        $this->assertStringContainsString('class="preview"', $client->getResponse()->getContent());
+
+        // Change configuration to hide thumbnails
+        $crawler = $client->request('GET', '/config');
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $form = $crawler->filter('button[id=config_save]')->form();
+        $data = [
+            'config[display_thumbnails]' => false,
+        ];
+        $client->submit($form, $data);
+        $client->followRedirect();
+
+        $client->request('GET', '/unread/list');
+
+        $this->assertStringNotContainsString('class="preview"', $client->getResponse()->getContent());
+
+        $client->request('GET', '/config/view-mode');
+    }
 }

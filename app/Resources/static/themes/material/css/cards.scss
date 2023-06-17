@@ -315,6 +315,15 @@ a.original:not(.waves-effect) {
   padding-bottom: 15px;
 }
 
+.settings .settings-checkbox-col {
+  padding: 0;
+}
+
+.settings .settings-checkbox-label {
+  margin-bottom: 20px;
+  height: 3rem;
+}
+
 .entries-row {
   display: grid;
   margin: 0.4rem 0 0;

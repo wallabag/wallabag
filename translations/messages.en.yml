@@ -88,6 +88,8 @@ config:
         help_reading_speed: wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article.
         help_language: You can change the language of wallabag interface.
         help_pocket_consumer_key: Required for Pocket import. You can create it in your Pocket account.
+        help_display_thumbnails: You can decide if you want to display or not articles thumbnails. Useful for slow connections.
+        display_thumbnails_label: Display articles thumbnails (useful for slow connections).
     form_feed:
         description: 'Atom feeds provided by wallabag allow you to read your saved articles with your favourite Atom reader. You need to generate a token first.'
         token_label: 'Feed token'

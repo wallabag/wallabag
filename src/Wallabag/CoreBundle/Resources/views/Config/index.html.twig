@@ -38,6 +38,19 @@
                                 </div>
                             </div>
 
+                        <div class="row">
+                            <div class="input-field col s11 settings-checkbox-col">
+                                {{ form_errors(form.config.display_thumbnails) }}
+                                {{ form_widget(form.config.display_thumbnails) }}
+                                {{ form_label(form.config.display_thumbnails, null, {'label_attr': {'class': 'settings-checkbox-label'}}) }}
+                            </div>
+                            <div class="input-field col s1">
+                                <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_display_thumbnails'|trans }}">
+                                    <i class="material-icons">live_help</i>
+                                </a>
+                            </div>
+                        </div>
+
                             <div class="row">
                                 <div class="input-field col s11">
                                     {{ form_errors(form.config.reading_speed) }}
@@ -56,7 +69,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="input-field col s12">
+                                <div class="input-field col s11">
                                     {{ form_errors(form.config.action_mark_as_read) }}
                                     {{ form_widget(form.config.action_mark_as_read) }}
                                     {{ form_label(form.config.action_mark_as_read) }}

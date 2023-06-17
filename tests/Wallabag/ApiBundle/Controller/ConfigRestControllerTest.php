@@ -19,11 +19,12 @@ class ConfigRestControllerTest extends WallabagApiTestCase
         $this->assertArrayHasKey('reading_speed', $config);
         $this->assertArrayHasKey('action_mark_as_read', $config);
         $this->assertArrayHasKey('list_mode', $config);
+        $this->assertArrayHasKey('display_thumbnails', $config);
 
         $this->assertSame(200.0, $config['reading_speed']);
         $this->assertSame('en', $config['language']);
 
-        $this->assertCount(6, $config);
+        $this->assertCount(7, $config);
 
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }

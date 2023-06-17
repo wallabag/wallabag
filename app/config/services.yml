@@ -300,6 +300,7 @@ services:
             $readingSpeed: "%wallabag_core.reading_speed%"
             $actionMarkAsRead: "%wallabag_core.action_mark_as_read%"
             $listMode: "%wallabag_core.list_mode%"
+            $displayThumbnails: "%wallabag_core.display_thumbnails%"
 
     Wallabag\UserBundle\EventListener\AuthenticationFailureListener:
         tags:
