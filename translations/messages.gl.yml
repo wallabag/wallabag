@@ -175,6 +175,7 @@ entry:
         assign_search_tag: Asignar esta busca como etiqueta a cada resultado
         toggle_mass_action: Realizar acción conxunta
         mass_action_tags_input_placeholder: etiqueta1, etiqueta2, etiqueta3
+        add_tags: Etiquetar
     page_titles:
         all: Todas as entradas
         untagged: Entradas sen etiqueta
