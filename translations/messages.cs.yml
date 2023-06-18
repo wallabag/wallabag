@@ -23,6 +23,7 @@ entry:
         preview_picture_help: Náhledový obrázek
         preview_picture_label: Má náhledový obrázek
         starred_label: S hvězdičkou
+        annotated_label: S anotací
     search:
         placeholder: Co hledáte?
     view:
@@ -65,6 +66,8 @@ entry:
         archived: Archivované položky
         starred: Položky s hvězdičkou
         unread: Nepřečtené položky
+        same_domain: Stejná doména
+        with_annotations: Položky s anotacemi
     default_title: Název položky
     list:
         export_title: Export
@@ -79,6 +82,11 @@ entry:
         reading_time_minutes: 'odhadovaný čas čtení: %readingTime% min'
         reading_time: odhadovaný čas čtení
         number_on_the_page: '{0} Nemáte žádné položky.|{1} Máte jednu položku.|]1,4[ Máte %count% položky.|]4,Inf[ Máte %count% položek.'
+        show_same_domain: Zobrazit články se stejnou doménou
+        assign_search_tag: Přiřadit toto hledání jako štítek ke každému výsledku
+        toggle_mass_action: Přepnout hromadnou akci
+        mass_action_tags_input_placeholder: štítek1, štítek2, štítek3
+        add_tags: Přidat štítky
     metadata:
         published_on: Zveřejněno
         added_on: Přidáno
@@ -88,6 +96,7 @@ entry:
     confirm:
         delete_tag: Opravdu chcete odebrat tento štítek z tohoto článku?
         delete: Opravdu chcete tento článek odebrat?
+        delete_entries: Opravdu chcete odebrat tyto články?
     public:
         shared_by_wallabag: Tento článek již sdílel %username% s <a href='%wallabag_instance%'>wallabagem</a>
     edit:
@@ -132,6 +141,7 @@ menu:
         internal_settings: Vnitřní nastavení
         config: Konfigurace
         starred: S hvězdičkou
+        with_annotations: S anotacemi
     search_form:
         input_label: Zadejte sem své hledání
 config:
@@ -163,7 +173,7 @@ config:
             meaning: Význam
             variables_available_description: 'Pro vytvoření pravidel štítkování mohou být použity následující proměnné a operátory:'
             variables_available_title: Které proměnné a operátory mohu pro psaní pravidel použít?
-            how_to_use_them_description: 'Předpokládejme, že chcete označit nové položky štítkem jako je « <i>krátké čtení</i> », pokud je doba čtení kratší než 3 minuty.<br />V takovém případě byste měli do pole <i>Pravidlo</i> zadat « readingTime &lt;= 3 » a do pole <i>Štítky</i> zadat « <i>krátké čtení</i> ».<br />Několik štítků současně lze přidat jejich oddělením čárkou: « <i>krátké čtení, musím přečíst</i> »<br />Složitá pravidla lze zapsat pomocí předdefinovaných operátorů: if « <i>readingTime &gt;= 5 AND domainName = "www.php.net"</i> » pak označit štítkem jako « <i>dlouhé čtení, php</i> »'
+            how_to_use_them_description: 'Předpokládejme, že chcete označit nové položky štítkem jako je « <i>krátké čtení</i> », pokud je doba čtení kratší než 3 minuty.<br />V takovém případě byste měli do pole <i>Pravidlo</i> zadat « readingTime &lt;= 3 » a do pole <i>Štítky</i> zadat « <i>krátké čtení</i> ».<br />Několik štítků současně lze přidat jejich oddělením čárkou: « <i>krátké čtení, musím přečíst</i> »<br />Složitá pravidla lze zapsat pomocí předdefinovaných operátorů: if « <i>readingTime &gt;= 5 AND domainName = "www.php.net"</i> » then tag as « <i>dlouhé čtení, php</i> »'
             how_to_use_them_title: Jak je použiji?
             tagging_rules_definition_description: Jsou to pravidla používaná programem wallabag k automatickému označování nových položek štítkem. <br />Pokaždé, když je přidána nová položky, všechna pravidla štítkování budou použita k přidání štítků, které jste nakonfigurovali, čímž vám ušetří potíže s ručním označováním vašich položek.
             tagging_rules_definition_title: Co znamenají „pravidla štítkování“?
@@ -224,6 +234,8 @@ config:
         android_instruction: Klepnutím sem předvyplníte svou aplikaci pro Android
         android_configuration: Nakonfigurujte svou aplikaci pro Android
         pocket_consumer_key_label: Zákaznický klíč pro Pocket k importu obsahu
+        display_thumbnails_label: Zobrazit náhledy článků (užitečné pro pomalá připojení).
+        help_display_thumbnails: Můžete se rozhodnout, zda chcete zobrazit náhledy článků, nebo ne. Užitečné pro pomalá připojení.
     form_password:
         new_password_label: Nové heslo
         old_password_label: Aktuální heslo
@@ -326,6 +338,8 @@ tag:
         no_untagged_entries: Nejsou žádné položky bez štítků.
         see_untagged_entries: Zobrazit položky bez štítků
         number_on_the_page: '{0}Nejsou žádné štítky.|{1} Je jeden štítek.|]1,4[ Jsou %count% štítky.|]4,Inf[ Je %count% štítků.'
+    confirm:
+        delete: Odstranit štítek %name%
 quickstart:
     support:
         title: Podpora
@@ -413,7 +427,7 @@ developer:
         field_id: ID klienta
         field_name: Název klienta
         page_title: Správa klientů API > Parametry klienta
-        read_howto: Přečtěte si návod "Vytvoření mé první aplikace"
+        read_howto: Přečtěte si návod „Vytvoření mé první aplikace“
         field_secret: Tajný kód klienta
         page_description: Zde jsou parametry vašeho klienta.
     page_title: Správa klientů API
@@ -492,7 +506,7 @@ import:
         description: Tento nástroj pro import importuje všechna vaše data z Pocket. Pocket nám neumožňuje načítat obsah z jejich služby, takže čitelný obsah každého článku bude znovu načten pomocí aplikace wallabag.
         page_title: Import > Pocket
     wallabag_v1:
-        description: Tento nástroj pro import importuje všechny vaše články z wallabagu v1. Na stránce konfigurace klikněte na "JSON export" v části "Exportovat vaše data wallabagu". Získáte soubor "wallabag-export-1-xxxx-xx-xx.json".
+        description: Tento nástroj pro import importuje všechny vaše články z wallabagu v1. Na stránce konfigurace klikněte na „JSON export“ v části „Exportovat vaše data wallabagu“. Získáte soubor „wallabag-export-1-xxxx-xx-xx.json“.
         page_title: Import > Wallabag v1
         how_to: Vyberte svůj export z wallabagu a kliknutím na níže uvedené tlačítko jej nahrajte a importujte.
     action:
@@ -501,11 +515,11 @@ import:
     page_title: Import
     pinboard:
         how_to: Vyberte svůj export z Pinboardu a kliknutím na níže uvedené tlačítko jej nahrajte a importujte.
-        description: Tento importér naimportuje všechny vaše články z Pinboardu. Na stránce zálohování (https://pinboard.in/settings/backup) klikněte v sekci "Bookmarks" na "JSON". Stáhne se soubor JSON (jako "pinboard_export").
+        description: Tento importér naimportuje všechny vaše články z Pinboardu. Na stránce zálohování (https://pinboard.in/settings/backup) klikněte v sekci „Bookmarks“ na „JSON“. Stáhne se soubor JSON (jako „pinboard_export“).
         page_title: Import > Pinboard
     instapaper:
         how_to: Vyberte svůj export z Instapaperu a kliknutím na níže uvedené tlačítko jej nahrajte a importujte.
-        description: Tento importér importuje všechny vaše články z Instapaperu. Na stránce nastavení (https://www.instapaper.com/user) klikněte v části "Export" na "Download .CSV file". Stáhne se soubor CSV (jako "instapaper-export.csv").
+        description: Tento importér importuje všechny vaše články z Instapaperu. Na stránce nastavení (https://www.instapaper.com/user) klikněte v části „Export“ na „Download .CSV file“. Stáhne se soubor CSV (jako „instapaper-export.csv“).
         page_title: Import > Instapaper
     chrome:
         how_to: Vyberte soubor zálohy záložek a kliknutím na tlačítko níže jej importujte. Upozorňujeme, že proces může trvat dlouho, protože je třeba načíst všechny články.
@@ -513,21 +527,25 @@ import:
         page_title: Import > Chrome
     firefox:
         how_to: Vyberte soubor zálohy záložek a kliknutím na níže uvedené tlačítko jej importujte. Pamatujte, že proces může trvat dlouho, protože je třeba načíst všechny články.
-        description: Tento importér importuje všechny vaše záložky z Firefoxu. Stačí přejít na záložky (Ctrl+Shift+O), pak v nabídce "Import a záloha" zvolit "Zálohovat...". Získáte soubor JSON.
+        description: Tento importér importuje všechny vaše záložky z Firefoxu. Stačí přejít na záložky (Ctrl+Shift+O), pak v nabídce „Import a záloha“ zvolit „Zálohovat…“. Získáte soubor JSON.
         page_title: Import > Firefox
     worker:
         download_images_warning: Povolili jste stahování obrázků pro své články. V kombinaci s klasickým importem to může trvat celou věčnost (nebo se to možná nepodaří). <strong>Důrazně doporučujeme</strong> povolit asynchronní import, abyste se vyhnuli chybám.
         enabled: 'Import se provádí asynchronně. Po spuštění úlohy importu bude externí pracovní proces zpracovávat úlohy jednu po druhé. Aktuální služba je:'
     readability:
         how_to: Vyberte svůj export z Readability a kliknutím na níže uvedené tlačítko jej nahrajte a importujte.
-        description: Tento importér importuje všechny vaše články Readability. Na stránce s nástroji (https://www.readability.com/tools/) klikněte v části "Export dat" na "Exportovat data". Obdržíte e-mail pro stažení souboru json (který ve skutečnosti nekončí příponou .json).
+        description: Tento importér importuje všechny vaše články Readability. Na stránce s nástroji (https://www.readability.com/tools/) klikněte v části „Export dat“ na „Exportovat data“. Obdržíte e-mail pro stažení souboru json (který ve skutečnosti nekončí příponou .json).
         page_title: Import > Readability
     elcurator:
         description: Tento importér naimportuje všechny vaše články z elCurator. Přejděte do svých předvoleb v účtu elCurator a poté exportujte svůj obsah. Získáte soubor JSON.
         page_title: Import > elCurator
     wallabag_v2:
-        description: Tento importér naimportuje všechny vaše články z wallabagu v2. Přejděte na Všechny články a pak na postranním panelu pro export klikněte na "JSON". Získáte soubor "All articles.json".
+        description: Tento importér naimportuje všechny vaše články z wallabagu v2. Přejděte na Všechny články a pak na postranním panelu pro export klikněte na „JSON“. Získáte soubor „All articles.json“.
         page_title: Import > Wallabag v2
+    delicious:
+        page_title: Import > del.icio.us
+        how_to: Vyberte svůj export Delicious a kliknutím na níže uvedené tlačítko jej nahrajte a importujte.
+        description: Tento importér naimportuje všechny vaše záložky z Delicious. Od roku 2021 z něj můžete opět exportovat data pomocí stránky pro export (https://del.icio.us/export). Zvolte formát „JSON“ a stáhněte jej (například „delicious_export.2021.02.06_21.10.json“).
 flashes:
     config:
         notice:
@@ -557,14 +575,14 @@ flashes:
             added: Globální pravidlo ignorování bylo přidáno
     site_credential:
         notice:
-            deleted: Přihlašovací údaje webu pro %host% byly odstraněny
-            updated: Přihlašovací údaje webu pro %host% byly aktualizovány
-            added: Přihlašovací údaje webu pro %host% byly přidány
+            deleted: Přihlašovací údaje webu pro „%host%“ byly odstraněny
+            updated: Přihlašovací údaje webu pro „%host%“ byly aktualizovány
+            added: Přihlašovací údaje webu pro „%host%“ byly přidány
     user:
         notice:
-            deleted: Uživatel "%username%" byl odstraněn
-            updated: Uživatel "%username%" byl aktualizován
-            added: Uživatel "%username%" byl přidán
+            deleted: Uživatel „%username%“ byl odstraněn
+            updated: Uživatel „%username%“ byl aktualizován
+            added: Uživatel „%username%“ byl přidán
     developer:
         notice:
             client_deleted: Klient %name% byl odstraněn
@@ -582,6 +600,7 @@ flashes:
         notice:
             tag_renamed: Štítek byl přejmenován
             tag_added: Štítek byl přidán
+            too_much_tags: Abyste předešli problémům s výkonem, nemůžete najednou přidat více než %tags% štítků nebo štítky, které mají více než %characters% znaků.
     entry:
         notice:
             no_random_entry: Nebyl nalezen žádný článek s těmito kritérii
