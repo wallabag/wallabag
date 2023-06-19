@@ -287,6 +287,8 @@ config:
             label: Velocidade de lectura
         language_label: Idioma
         items_per_page_label: Elementos por páxina
+        help_display_thumbnails: Podes decidir se queres mostrar ou non miniaturas dos artigos. Útil para conexións lentas.
+        display_thumbnails_label: Mostrar miniaturas dos artigos (útil para conexións lentas).
     form_password:
         repeat_new_password_label: Repite o novo contrasinal
         new_password_label: Novo contrasinal

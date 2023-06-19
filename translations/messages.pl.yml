@@ -89,6 +89,8 @@ config:
         help_reading_speed: wallabag oblicza czas czytania każdego artykułu. Możesz tutaj określić, dzięki tej liście, czy jesteś szybkim czy powolnym czytelnikiem. wallabag przeliczy czas czytania każdego artykułu.
         help_language: Możesz zmienić język interfejsu wallabag.
         help_pocket_consumer_key: Wymagane dla importu z Pocket. Możesz go stworzyć na swoim koncie Pocket.
+        display_thumbnails_label: Wyświetlaj miniaturki artykułów (przydatne w przypadku powolnych połączeń).
+        help_display_thumbnails: Możesz zdecydować, czy chcesz wyświetlać miniaturki artykułów, czy nie. Przydatne w przypadku powolnych połączeń.
     form_rss:
         description: Kanały RSS prowadzone przez wallabag pozwalają Ci na czytanie twoich zapisanych artykułów w twoim ulubionym czytniku RSS. Musisz najpierw wygenerować tokena.‌
         token_label: Token RSS
