@@ -1,5 +1,83 @@
 # Changelog
 
+## [2.6.0](https://github.com/wallabag/wallabag/tree/2.6.0)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.5.4...2.6.0)
+
+### Features
+* Add tag deletion from tags list by @nicosomb https://github.com/wallabag/wallabag/pull/5861
+* Add support of mass action to tag entries by @kdecherf https://github.com/wallabag/wallabag/pull/5838
+* Mass action interface by @Simounet https://github.com/wallabag/wallabag/pull/6547
+* Empty space on the top bar used for more add url toggle clickable target by @Simounet https://github.com/wallabag/wallabag/pull/6612
+* Add new setting to show / hide articles thumbnails by @nicosomb https://github.com/wallabag/wallabag/pull/6609
+
+### Fixes
+* Add prefix for tag slugs by @kdecherf https://github.com/wallabag/wallabag/pull/6226
+* Fix open all external links in new tab in Config by @wyntonfranklin https://github.com/wallabag/wallabag/pull/6256
+* Fix dark theme for pre HTML tags by @Simounet https://github.com/wallabag/wallabag/pull/6495
+* Fix dark mode top bar contrast by @Simounet https://github.com/wallabag/wallabag/pull/6510
+* Dark mode contrast improved by @Simounet https://github.com/wallabag/wallabag/pull/6512
+* Fix dark mode URL add input color by @Simounet https://github.com/wallabag/wallabag/pull/6525
+* Fix round reading time in export by @mart-e https://github.com/wallabag/wallabag/pull/6545
+* Fix images downloading with numeric HTML entity by @Simounet https://github.com/wallabag/wallabag/pull/6563
+* Fix DownloadImages not following redirections by @Simounet https://github.com/wallabag/wallabag/pull/6562
+* Fix auto dark theme detection flickering by @Simounet https://github.com/wallabag/wallabag/pull/6584
+* Fix RSS feed_route not set by @Simounet https://github.com/wallabag/wallabag/pull/6606
+* Add flash message when we try to add too much tags by @nicosomb https://github.com/wallabag/wallabag/pull/6607
+* Changed default value for domain_name parameter by @nicosomb https://github.com/wallabag/wallabag/pull/6616
+* Improved tags display by @Simounet https://github.com/wallabag/wallabag/pull/6613
+* Fix mousetrap enter issue by @Simounet https://github.com/wallabag/wallabag/pull/6624
+* Fix duplicate tags creation when assigning search results to tag by @nicosomb https://github.com/wallabag/wallabag/pull/6629
+
+### Meta
+* Removed Carrot & Scuttle share by @nicosomb https://github.com/wallabag/wallabag/pull/6047
+* Remove old, not so maintained and buggy baggy theme by @nicosomb https://github.com/wallabag/wallabag/pull/4332
+* Remove Scrutinizer badge by @j0k3r https://github.com/wallabag/wallabag/pull/6179
+* Add mention to unofficial linux client by @imhemish https://github.com/wallabag/wallabag/pull/6203
+
+### Technical stuff
+* Remove SensioDistributionBundle by @yguedidi https://github.com/wallabag/wallabag/pull/5761
+* Back to latest composer version by @yguedidi https://github.com/wallabag/wallabag/pull/5810
+* Clean composer.lock after SensioDistributionBundle removal by @yguedidi https://github.com/wallabag/wallabag/pull/5839
+* Remove transitive dependencies by @yguedidi https://github.com/wallabag/wallabag/pull/5784
+* Register missed commands by @yguedidi https://github.com/wallabag/wallabag/pull/5928
+* Extend right FOSRestBundle controller class by @yguedidi https://github.com/wallabag/wallabag/pull/5929
+* Remove PHP-CS-Fixer deprecations by @yguedidi https://github.com/wallabag/wallabag/pull/5914
+* Upgrade FOSUserBundle to 2.1 by @yguedidi https://github.com/wallabag/wallabag/pull/5782
+* Add TwigCS by @yguedidi https://github.com/wallabag/wallabag/pull/5759
+* Use FQCN as service name by @yguedidi https://github.com/wallabag/wallabag/pull/5748
+* Migrate to new template reference notation by @yguedidi https://github.com/wallabag/wallabag/pull/5758
+* Migrate from old colon notation to FQCN by @yguedidi https://github.com/wallabag/wallabag/pull/5943
+* Use autowiring by @yguedidi https://github.com/wallabag/wallabag/pull/5946
+* Use FQCN to fetch services by @yguedidi https://github.com/wallabag/wallabag/pull/5951
+* Run tests without memory limit by @yguedidi https://github.com/wallabag/wallabag/pull/5953
+* Import used classes by @yguedidi https://github.com/wallabag/wallabag/pull/5952
+* Rework command tests by @yguedidi https://github.com/wallabag/wallabag/pull/5954
+* Switch to Swagger for api documentation by @caspermeijn https://github.com/wallabag/wallabag/pull/6062
+* Remove some deprecation by @j0k3r https://github.com/wallabag/wallabag/pull/6085
+* Remove deprecated options from FOSRest by @j0k3r https://github.com/wallabag/wallabag/pull/6095
+* Remove LiipThemeBundle by @j0k3r https://github.com/wallabag/wallabag/pull/6097
+* Upgrade PHPStan and move to level 2 with baseline by @j0k3r https://github.com/wallabag/wallabag/pull/6098
+* Upgrade to Symfony 4.4 by @j0k3r https://github.com/wallabag/wallabag/pull/6099
+* Update to FOSUserBundle 3.1 by @j0k3r https://github.com/wallabag/wallabag/pull/6136
+* Update to scheb/2fa-bundle by @j0k3r https://github.com/wallabag/wallabag/pull/6144
+* Upgrade to Twig 3 by @j0k3r https://github.com/wallabag/wallabag/pull/6151
+* Move translations files to /translations by @j0k3r https://github.com/wallabag/wallabag/pull/6153
+* Fix EventDispatcher & events by @j0k3r https://github.com/wallabag/wallabag/pull/6154
+* Replace SwiftMailer by Symfony Mailer by @j0k3r https://github.com/wallabag/wallabag/pull/6150
+* Remove ContainerAwareCommand from commands by @j0k3r https://github.com/wallabag/wallabag/pull/6152
+* Update all Doctrine deps by @j0k3r https://github.com/wallabag/wallabag/pull/6143
+* Update PagerFanta by @j0k3r https://github.com/wallabag/wallabag/pull/6145
+* Move to controller as a service by @j0k3r https://github.com/wallabag/wallabag/pull/6159
+* Add RabbitMQConsumerTotalProxy to lazy RabbitMQ services for messages by @j0k3r https://github.com/wallabag/wallabag/pull/6166
+* Properly handle json_array type removal by @j0k3r https://github.com/wallabag/wallabag/pull/6171
+* Fix database_path in Docker env by @j0k3r https://github.com/wallabag/wallabag/pull/6174
+* Docker: database_table_prefix may be configured from environment by @fcatt https://github.com/wallabag/wallabag/pull/6196
+* Update annotations to OpenApi 3 by @caspermeijn https://github.com/wallabag/wallabag/pull/6182
+* Fix public folder for Symfony 4+ by @kdecherf https://github.com/wallabag/wallabag/pull/6217
+* Fix API allowed_registration by @caspermeijn https://github.com/wallabag/wallabag/pull/6315
+* Enable PHP 8.2 in CI by @j0k3r https://github.com/wallabag/wallabag/pull/6469
+* Fix/build stylelint error by @Simounet https://github.com/wallabag/wallabag/pull/6586
+
 ## [2.5.4](https://github.com/wallabag/wallabag/tree/2.5.4)
    [Full Changelog](https://github.com/wallabag/wallabag/compare/2.5.3...2.5.4)
 
