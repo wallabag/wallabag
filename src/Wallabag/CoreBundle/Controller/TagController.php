@@ -247,10 +247,15 @@ class TagController extends AbstractController
                 $filter
             );
 
-            $this->entityManager->persist($entry);
+            // check to avoid duplicate tags creation
+            foreach ($this->entityManager->getUnitOfWork()->getScheduledEntityInsertions() as $entity) {
+                if ($entity instanceof Tag && strtolower($entity->getLabel()) === strtolower($filter)) {
+                    continue 2;
+                }
+                $this->entityManager->persist($entry);
+            }
+            $this->entityManager->flush();
         }
-
-        $this->entityManager->flush();
 
         return $this->redirect($this->redirectHelper->to($request->headers->get('referer'), '', true));
     }
