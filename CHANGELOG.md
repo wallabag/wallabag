@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.1](https://github.com/wallabag/wallabag/tree/2.6.1)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.0...2.6.1)
+
+### Fixes
+* Do not autoload fixtures by @j0k3r https://github.com/wallabag/wallabag/pull/6648
+* Add confirmation alert when deleting articles from list view by @nicosomb https://github.com/wallabag/wallabag/pull/6644
+
 ## [2.6.0](https://github.com/wallabag/wallabag/tree/2.6.0)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.5.4...2.6.0)
 
