@@ -33,7 +33,7 @@ services:
 
     Wallabag\AnnotationBundle\:
         resource: '../../src/Wallabag/AnnotationBundle/*'
-        exclude: '../../src/Wallabag/AnnotationBundle/{Controller,Entity}'
+        exclude: '../../src/Wallabag/AnnotationBundle/{Controller,Entity,DataFixtures}'
 
     Wallabag\ApiBundle\:
         resource: '../../src/Wallabag/ApiBundle/*'
@@ -41,7 +41,7 @@ services:
 
     Wallabag\CoreBundle\:
         resource: '../../src/Wallabag/CoreBundle/*'
-        exclude: ['../../src/Wallabag/CoreBundle/{Controller,Entity}', '../../src/Wallabag/CoreBundle/Event/*Event.php']
+        exclude: ['../../src/Wallabag/CoreBundle/{Controller,Entity,DataFixtures}', '../../src/Wallabag/CoreBundle/Event/*Event.php']
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -122,7 +122,7 @@ services:
 
     Wallabag\UserBundle\:
         resource: '../../src/Wallabag/UserBundle/*'
-        exclude: '../../src/Wallabag/UserBundle/{Controller,Entity}'
+        exclude: '../../src/Wallabag/UserBundle/{Controller,Entity,DataFixtures}'
 
     Doctrine\DBAL\Connection:
         alias: doctrine.dbal.default_connection
