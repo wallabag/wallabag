@@ -430,7 +430,7 @@ quickstart:
     configure:
         title: Konfiguruj aplikację
         description: W celu dopasowania aplikacji do swoich upodobań zobacz konfigurację aplikacji.
-        language: Zmień język i wygląd
+        language: Zmień język i interfejs
         rss: Włącz kanały RSS
         tagging_rules: Napisz reguły pozwalające na automatyczne otagowanie twoich artykułów
         feed: Włącz kanały
@@ -517,7 +517,7 @@ import:
         description: Ten importer, zaimportuje wszystkie twoje artykułu z wallabag v2. Idź do wszystkich artykułów, a następnie na panelu exportu kliknij na "JSON". Otrzymasz plik "All articles.json".
     readability:
         page_title: Importuj > Readability
-        description: Ten importer, zaimportuje wszystkie twoje artykuły z Readability. Na stronie narzędzi (https://www.readability.com/tools/), kliknij na "Export your data" w sekcji "Data Export". Otrzymach email z plikiem JSON (plik nie będzie zawierał rozszerzenia .json).
+        description: Ten importer zaimportuje wszystkie twoje artykuły z Readability.
         how_to: Wybierz swój plik eksportu z Readability i kliknij przycisk poniżej, aby go przesłać i zaimportować.
     worker:
         enabled: 'Import jest wykonywany asynchronicznie. Od momentu rozpoczęcia importu, zewnętrzna usługa może zajmować się na raz tylko jednym zadaniem. Bieżącą usługą jest:'
@@ -540,7 +540,7 @@ import:
         how_to: Wybierz swój plik eksportu z Pinboard i kliknij przycisk poniżej, aby go przesłać i zaimportować.
     elcurator:
         page_title: Importuj > elCurator
-        description: Ten importer zaimportuje wszystkie artykuły elCurator. Przejdź do swoich preferencji na koncie elCurator, a następnie wyeksportuj treści. Otrzymasz plik JSON.
+        description: Ten importer zaimportuje wszystkie twoje artykuły z elCurator.
     delicious:
         page_title: Importuj > del.icio.us
         description: Ten importer zaimportuje wszystkie zakładki Delicious. Od 2021 r. możesz ponownie wyeksportować z niego swoje dane za pomocą strony eksportu (https://del.icio.us/export). Wybierz format "JSON" i pobierz go (np. "delicious_export.2021.02.06_21.10.json").
