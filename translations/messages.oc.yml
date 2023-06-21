@@ -430,7 +430,7 @@ quickstart:
     configure:
         title: Configurar l'aplicacion
         description: Per fin d'aver una aplicacion que vos va ben, anatz veire la configuracion de wallabag.
-        language: Cambiar la lenga e l'estil de l'aplicacion
+        language: Cambiar la lenga e l'intterfàcia
         rss: Activatz los fluxes RSS
         tagging_rules: Escrivètz de règlas per classar automaticament vòstres articles
         feed: Activar los flux RSS
@@ -517,7 +517,7 @@ import:
         description: Aquesta aisina importarà totas vòstras donadas d'una instància mai de wallabag v2. Anatz dins totes vòstres articles, puèi, sus la barra laterala, clicatz sus "JSON". Traparetz un fichièr "All articles.json".
     readability:
         page_title: Importar > Readability
-        description: Aquesta aisina importarà totas vòstres articles de Readability. Sus la pagina de l'aisina (https://www.readability.com/tools/), clicatz sus "Export your data" dins la seccion "Data Export". Recebretz un corrièl per telecargar un json (qu'acaba pas amb un .json de fach).
+        description: Aquesta aisina importarà totas vòstres articles de Readability.
         how_to: Mercés de seleccionar vòstre Readability fichièr e de clicar sul boton dejós per lo telecargar e l'importar.
     worker:
         enabled: "L'importacion se fa de manièra asincròna. Un còp l'importacion lançada, una aisina extèrna s'ocuparà dels articles un per un. Lo servici actual es :"
@@ -544,7 +544,7 @@ import:
         how_to: Causissètz lo fichièr de vòstra exportacion Delicious e clicatz lo boton çai jos per l’importar.
     elcurator:
         page_title: Importar > elCurator
-        description: Aquesta aisina importarà totes vòstres articles a partir de elCurator. Anatz a las preferéncias de elCurator e exportatz vòstres contenguts. Recuperaretz un fichièr JSON.
+        description: Aquesta aisina importarà totes vòstres articles a partir de elCurator.
 developer:
     page_title: Gestion dels clients API
     welcome_message: Vos desirem la benvenguda sus l'API de wallabag
