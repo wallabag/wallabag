@@ -451,10 +451,10 @@ import:
         enabled: 'A importación faise de xeito asíncrono. Unha vez se inicia a tarefa de importación, un servizo externo ocuparase delas dunha en unha. O servizo actual é:'
     readability:
         how_to: Escolle o teu ficheiro de Readability e preme no botón inferior para subilo e importalo.
-        description: Este importador vai traer todos os teus artigos Readability. Nas ferramentas (https://www.readability.com/tools/), preme en "Exporta os teus datos" na sección "Exportar Datos". Obterás un email para descargar un json (que en realidade non remata en .json).
+        description: Este importador traerá todos os teus artigos en Readability.
         page_title: Importar > Readability
     elcurator:
-        description: Este importador traerá todos os teus ficheiros de elCurator. Vai ós axustes na túa conta elCurator e após exporta o teu contido. Obterás un ficheiro JSON.
+        description: Este importador traerá todos os teus artigos de elCurator.
         page_title: Importar > elCurator
     delicious:
         page_title: Importar > del.icio.us
@@ -519,7 +519,7 @@ quickstart:
     configure:
         tagging_rules: Establece regras para etiquetar automáticamente os artigos
         feed: Activar fontes
-        language: Cambiar o idioma e deseño
+        language: Cambiar o idioma e interface
         description: Para poder adaptar a aplicación ás túas preferencias, entra nos axustes de wallabag.
         title: Configurar a aplicación
     intro:
