@@ -52,6 +52,7 @@
   height: 100%;
   vertical-align: middle;
   opacity: initial;
+  z-index: 10;
 }
 
 .toggle-checkbox:not(:checked) + .mass-action,
