@@ -64,7 +64,7 @@ import:
     readability:
         how_to: Odaberi Readability izvoz i pritisni donji gumb za slanje i uvoz datoteke.
         page_title: Uvoz > Readability
-        description: Ovaj uvoznik uvozi sve tvoje Readability članke. Na stranici alata (https://www.readability.com/tools/), pritisni „Izvezi svoje podatke” u odjeljku „Izvoz podataka”. Primit ćeš e-mail za preuzimanje json-a (što zapravo ne završava s .json).
+        description: Ovaj će uvoznik uvesti sve tvoje Readability članke.
     worker:
         enabled: 'Uvoz se vrši asinkrono. Nakon što se uvoz zadatak pokrene, jedna vanjska usluga obradit će poslove jedan po jedan. Trenutačna usluga je:'
         download_images_warning: Aktivirao(la) si preuzimanje slika za članke. U kombinaciji s klasičnim uvozom, postupak može potrajati godinama (ili možda ne uspije). <strong>Preporučujemo</strong> aktivirati asinkroniziran uvoz za izbjegavanje grešaka.
@@ -98,7 +98,7 @@ import:
     action:
         import_contents: Sadržaj uvoza
     elcurator:
-        description: Ovaj će uvoznik uvesti sve tvoje elCurator članke. Prijeđi na postavke na tvom elCurator računu, a zatim izvezi sadržaj. Dobit ćete JSON datoteku.
+        description: Ovaj će uvoznik uvesti sve tvoje elCurator članke.
         page_title: Uvezi > elCurator
     delicious:
         page_title: Uvoz > del.icio.us
@@ -107,7 +107,7 @@ import:
 about:
     helping:
         description: 'wallabag je slobodan softver otvorenog koda. Možeš nam pomoći:'
-        by_paypal: putem PayPal-a
+        by_paypal: putem Liberapay
     who_behind_wallabag:
         license: Licenca
         website: web-stranica
@@ -215,6 +215,8 @@ config:
         items_per_page_label: Broj stavki po stranici
         help_reading_speed: wallabag izračunava vrijeme čitanja za svaki članak. Ovdje možeš definirati, zahvaljujući ovom popisu, jesi li brz ili spor čitač. wallabag će izračunati vrijeme čitanja za svaki članak.
         language_label: Jezik
+        help_display_thumbnails: Možeš odlučiti želiš li prikazivati minijature članaka. Korisno za spore veze.
+        display_thumbnails_label: Prikaži minijatue članaka (korisno za spore veze).
     form_user:
         delete:
             confirm: Sigurno? (OVO JE NEPOVRATNA RADNJA)
@@ -428,6 +430,7 @@ flashes:
         notice:
             tag_added: Oznaka dodana
             tag_renamed: Oznaka preimenovana
+            too_much_tags: Za izbjegavanje problem s performansama, ne možeš dodati više od %tags% oznaka odjednom ili oznake koje imaju više od %characters% znakova.
     ignore_origin_instance_rule:
         notice:
             deleted: Globalno pravilo za zanemarivanje izvora izbrisano
@@ -495,6 +498,7 @@ entry:
         assign_search_tag: Dodijeli ovo pretraživanje kao oznaku svakom rezultatu
         mass_action_tags_input_placeholder: oznaka1, oznaka2, oznaka3
         toggle_mass_action: Uklj./Isklj. grupne radnje
+        add_tags: Dodaj oznake
     view:
         left_menu:
             set_as_starred: Uklj/Isklj omiljene
@@ -614,7 +618,7 @@ quickstart:
         description: Za dobivanje programa koji tebi najviše odgovara, pogledaj konfiguraciju wallabaga.
         tagging_rules: Odredi pravila za automatsko označivanje članaka
         title: Konfiguriraj program
-        language: Promijeni jezik i dizajn
+        language: Promijeni jezik i sučelje
         feed: Aktiviraj feedove
     developer:
         description: 'Mislili smo i na pregramere: Docker, sučelje (API), prijevodi itd.'
