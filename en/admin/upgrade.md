@@ -33,7 +33,7 @@ Same steps as for [upgrading from 2.2.x to 2.3.x](#upgrading-from-22x-to-23x).
 
    And we added `mailer_dns` as a replacement. Here is [an example of DSN](https://symfony.com/doc/4.4/mailer.html#using-built-in-transports): `smtp://user:pass@smtp.example.com:port`
 
-[You can find all the queries here](./query-upgrade-25-26.html).
+[You can find all the queries here](./query-upgrade-25-26.md).
 
 ## Upgrading from 2.3.x to 2.4.x
 
