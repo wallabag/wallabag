@@ -2,6 +2,7 @@
 
 You will find here different ways to upgrade your wallabag:
 
+-   [from 2.5.x to 2.6.x](#upgrading-from-25x-to-26x)
 -   [from 2.3.x to 2.4.x](#upgrading-from-23x-to-24x)
 -   [from 2.3.x to 2.3.y](#upgrading-from-23x-to-23y)
 -   [from 2.2.x to 2.3.x](#upgrading-from-22x-to-23x)
@@ -11,6 +12,28 @@ You will find here different ways to upgrade your wallabag:
 {% hint style="info" %}
 But **first**, ensure you have `composer` installed on your server (or at least the `composer.phar` binary in the root directory of wallabag). If not, [please install it](https://getcomposer.org/download/).
 {% endhint %}
+
+## Upgrading from 2.5.x to 2.6.x
+
+Same steps as for [upgrading from 2.2.x to 2.3.x](#upgrading-from-22x-to-23x).
+
+⚠️ **There are two points to focus for that update**:
+
+1. We added new fields in the database, don't forget to run migration (by running `make update`) otherwise your wallabag won't work.
+2. We've updated the mailer config which needs to be replicated otherwise the image might not work.
+
+   We removed in `app/config/parameters.yml`:
+   - `mailer_transport`
+   - `mailer_user`
+   - `mailer_password`
+   - `mailer_host`
+   - `mailer_port`
+   - `mailer_encryption`
+   - `mailer_auth_mode`
+
+   And we added `mailer_dns` as a replacement. Here is [an example of DSN](https://symfony.com/doc/4.4/mailer.html#using-built-in-transports): `smtp://user:pass@smtp.example.com:port`
+
+[You can find all the queries here](./query-upgrade-25-26.html).
 
 ## Upgrading from 2.3.x to 2.4.x
 
@@ -60,7 +83,7 @@ make update
 
 1. Extract the archive in your wallabag folder and replace `app/config/parameters.yml` with yours.
 1. Please check that your `app/config/parameters.yml` contains all the parameters as they are **all mandatory**. You can find [here a documentation about parameters](./parameters.md).
-1. I you have modified the `app/config/parameters.yml` file, run `bin/console cache:clear --env=prod` afterwards in the wallabag directory. A warning will appear if a parameter was forgotten.
+1. If you have modified the `app/config/parameters.yml` file, run `bin/console cache:clear --env=prod` afterwards in the wallabag directory. A warning will appear if a parameter was forgotten.
 1. If you use SQLite, you must also copy your `data/` folder inside the new installation.
 1. Empty `var/cache` folder.
 1. You must run some SQL queries to upgrade your database. We assume that the table prefix is `wallabag_`. Don't forget to backup your database before migrating.
