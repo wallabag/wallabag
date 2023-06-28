@@ -13,6 +13,8 @@ class Version20170606155640 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
+        $this->skipIf(!$schema->hasTable($this->getTable('craue_config_setting')), 'Table already renamed');
+
         $apiUserRegistration = $this->container
             ->get('doctrine.orm.default_entity_manager')
             ->getConnection()
