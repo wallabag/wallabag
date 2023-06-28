@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
+use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,6 +16,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Wallabag\ApiBundle\Entity\ApplicationInfo;
 use Wallabag\UserBundle\Entity\User;
 
 class WallabagRestController extends AbstractFOSRestController
@@ -38,11 +40,16 @@ class WallabagRestController extends AbstractFOSRestController
      * Retrieve version number.
      *
      * @Operation(
-     *     tags={"Informations"},
+     *     tags={"Information"},
      *     summary="Retrieve version number.",
      *     @OA\Response(
      *         response="200",
-     *         description="Returned when successful"
+     *         description="Returned when successful",
+     *         @OA\JsonContent(
+     *             description="Version number of the application.",
+     *             type="string",
+     *             example="2.5.2",
+     *         )
      *     )
      * )
      *
@@ -61,14 +68,13 @@ class WallabagRestController extends AbstractFOSRestController
     }
 
     /**
-     * Retrieve information about the wallabag instance.
-     *
      * @Operation(
-     *     tags={"Informations"},
-     *     summary="Retrieve information about the wallabag instance.",
+     *     tags={"Information"},
+     *     summary="Retrieve information about the running wallabag application.",
      *     @OA\Response(
      *         response="200",
-     *         description="Returned when successful"
+     *         description="Returned when successful",
+     *         @Model(type=ApplicationInfo::class),
      *     )
      * )
      *
@@ -78,11 +84,10 @@ class WallabagRestController extends AbstractFOSRestController
      */
     public function getInfoAction(Config $craueConfig)
     {
-        $info = [
-            'appname' => 'wallabag',
-            'version' => $this->getParameter('wallabag_core.version'),
-            'allowed_registration' => $this->getParameter('fosuser_registration') && $craueConfig->get('api_user_registration'),
-        ];
+        $info = new ApplicationInfo(
+            $this->getParameter('wallabag_core.version'),
+            $this->getParameter('fosuser_registration') && $craueConfig->get('api_user_registration'),
+        );
 
         return (new JsonResponse())->setJson($this->serializer->serialize($info, 'json'));
     }
