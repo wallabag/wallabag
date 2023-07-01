@@ -30,7 +30,7 @@ CREATE TEMPORARY TABLE __temp__wallabag_user AS SELECT id, username, username_ca
 DROP TABLE wallabag_user;
 CREATE TABLE wallabag_user (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, username VARCHAR(180) NOT NULL, username_canonical VARCHAR(180) NOT NULL, email VARCHAR(180) NOT NULL, email_canonical VARCHAR(180) NOT NULL, enabled BOOLEAN NOT NULL, salt VARCHAR(255) DEFAULT NULL, password VARCHAR(255) NOT NULL, last_login DATETIME DEFAULT NULL, confirmation_token VARCHAR(180) DEFAULT NULL, password_requested_at DATETIME DEFAULT NULL, roles CLOB NOT NULL --(DC2Type:array)
                 , name CLOB DEFAULT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, authCode INTEGER DEFAULT NULL, googleAuthenticatorSecret VARCHAR(255) DEFAULT NULL, backupCodes CLOB DEFAULT NULL --(DC2Type:json)
-                , emailTwoFactor BOOLEAN NOT NULL)
+                , emailTwoFactor BOOLEAN NOT NULL);
 INSERT INTO wallabag_user (id, username, username_canonical, email, email_canonical, enabled, password, last_login, password_requested_at, name, created_at, updated_at, authCode, emailTwoFactor, salt, confirmation_token, roles, googleAuthenticatorSecret, backupCodes) SELECT id, username, username_canonical, email, email_canonical, enabled, password, last_login, password_requested_at, name, created_at, updated_at, authCode, emailTwoFactor, salt, confirmation_token, roles, googleAuthenticatorSecret, backupCodes FROM __temp__wallabag_user;
 DROP TABLE __temp__wallabag_user;
 CREATE UNIQUE INDEX UNIQ_1D63E7E592FC23A8 ON wallabag_user (username_canonical);
