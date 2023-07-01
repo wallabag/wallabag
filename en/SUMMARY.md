@@ -52,6 +52,7 @@
     * [Upgrade from 2.1 to 2.2](admin/query-upgrade-21-22.md)
     * [Upgrade from 2.2 to 2.3](admin/query-upgrade-22-23.md)
     * [Upgrade from 2.3 to 2.4](admin/query-upgrade-23-24.md)
+    * [Upgrade from 2.5 to 2.6](admin/query-upgrade-25-26.md)
 
 ## Developer
 
