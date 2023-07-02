@@ -45,3 +45,17 @@ Note : If you have large portions of text, use [Github's Gist service](https://g
 
 ## You want to fix a bug or to add a feature
 Please fork wallabag and work with **the master branch**.
+
+## Run Tests and PHP formatter
+
+All pull requests need to pass the tests and the code needs match the style guide.
+
+To run the tests locally run:
+
+- when testing using Docker: `docker-compose run --rm php make test`
+- otherwise: `make test`
+
+To run the PHP formatter:
+
+- when testing using Docker: `docker-compose run --rm php bin/php-cs-fixer fix`
+- otherwise: `php bin/php-cs-fixer fix`
