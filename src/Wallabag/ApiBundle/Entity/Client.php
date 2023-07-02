@@ -7,6 +7,7 @@ use FOS\OAuthServerBundle\Entity\Client as BaseClient;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
+use OpenApi\Annotations as OA;
 use Wallabag\UserBundle\Entity\User;
 
 /**
@@ -27,6 +28,12 @@ class Client extends BaseClient
      *
      * @ORM\Column(name="name", type="text", nullable=false)
      *
+     * @OA\Property(
+     *      description="Name of the API client",
+     *      type="string",
+     *      example="Default Client",
+     * )
+     *
      * @Groups({"user_api_with_client"})
      */
     protected $name;
@@ -43,6 +50,12 @@ class Client extends BaseClient
 
     /**
      * @var string
+     *
+     * @OA\Property(
+     *      description="Client secret used for authorization",
+     *      type="string",
+     *      example="2lmubx2m9vy80ss8c4wwcsg8ok44s88ocwcc8wo0w884oc8440",
+     * )
      *
      * @SerializedName("client_secret")
      * @Groups({"user_api_with_client"})
@@ -94,6 +107,13 @@ class Client extends BaseClient
 
     /**
      * @VirtualProperty
+     *
+     * @OA\Property(
+     *      description="Client secret used for authorization",
+     *      type="string",
+     *      example="3_1lpybsn0od40css4w4ko8gsc8cwwskggs8kgg448ko0owo4c84",
+     * )
+     *
      * @SerializedName("client_id")
      * @Groups({"user_api_with_client"})
      */
