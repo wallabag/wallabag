@@ -96,16 +96,17 @@
     {% if searchTerm is defined %}
         {% set export_search_term = searchTerm %}
     {% endif %}
+    {% set entry = app.request.attributes.get('id') %}
     {% set previous_route = app.request.attributes.get('currentRoute') %}
         <h4 class="center">{{ 'entry.list.export_title'|trans }}</h4>
         <ul>
-            {% if craue_setting('export_epub') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'epub', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route}) }}">EPUB</a></li>{% endif %}
-            {% if craue_setting('export_mobi') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'mobi', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route}) }}">MOBI (deprecated)</a></li>{% endif %}
-            {% if craue_setting('export_pdf') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'pdf', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route}) }}">PDF</a></li>{% endif %}
-            {% if craue_setting('export_json') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'json', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route}) }}">JSON</a></li>{% endif %}
-            {% if craue_setting('export_csv') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'csv', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route}) }}">CSV</a></li>{% endif %}
-            {% if craue_setting('export_txt') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'txt', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route}) }}">TXT</a></li>{% endif %}
-            {% if craue_setting('export_xml') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'xml', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route}) }}">XML</a></li>{% endif %}
+            {% if craue_setting('export_epub') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'epub', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">EPUB</a></li>{% endif %}
+            {% if craue_setting('export_mobi') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'mobi', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">MOBI (deprecated)</a></li>{% endif %}
+            {% if craue_setting('export_pdf') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'pdf', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">PDF</a></li>{% endif %}
+            {% if craue_setting('export_json') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'json', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">JSON</a></li>{% endif %}
+            {% if craue_setting('export_csv') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'csv', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">CSV</a></li>{% endif %}
+            {% if craue_setting('export_txt') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'txt', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">TXT</a></li>{% endif %}
+            {% if craue_setting('export_xml') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'xml', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">XML</a></li>{% endif %}
         </ul>
     </div>
 

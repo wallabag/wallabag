@@ -61,13 +61,21 @@ class ExportController extends AbstractController
      *
      * @return Response
      */
-    public function downloadEntriesAction(Request $request, EntryRepository $entryRepository, TagRepository $tagRepository, EntriesExport $entriesExport, string $format, string $category)
+    public function downloadEntriesAction(Request $request, EntryRepository $entryRepository, TagRepository $tagRepository, EntriesExport $entriesExport, string $format, string $category, int $entry = 0)
     {
         $method = ucfirst($category);
         $methodBuilder = 'getBuilderFor' . $method . 'ByUser';
         $title = $method;
 
-        if ('tag_entries' === $category) {
+        if ('same_domain' === $category) {
+            $entries = $entryRepository->getBuilderForSameDomainByUser(
+                $this->getUser()->getId(),
+                $request->get('entry')
+            )->getQuery()
+             ->getResult();
+
+            $title = 'Same domain';
+        } elseif ('tag_entries' === $category) {
             $tag = $tagRepository->findOneBySlug($request->query->get('tag'));
 
             $entries = $entryRepository->findAllByTagId(
