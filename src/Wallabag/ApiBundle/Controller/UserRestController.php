@@ -8,6 +8,7 @@ use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Model\UserManagerInterface;
 use JMS\Serializer\SerializationContext;
+use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use OpenApi\Annotations as OA;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -28,7 +29,8 @@ class UserRestController extends WallabagRestController
      *     summary="Retrieve current logged in user informations.",
      *     @OA\Response(
      *         response="200",
-     *         description="Returned when successful"
+     *         description="Returned when successful",
+     *         @Model(type=User::class, groups={"user_api"}))
      *     )
      * )
      *
@@ -52,32 +54,45 @@ class UserRestController extends WallabagRestController
      *     @OA\RequestBody(
      *          @OA\JsonContent(
      *              type="object",
-     *              required={"username", "password", "email", "client_name"},
+     *              required={"username", "password", "email"},
      *              @OA\Property(
      *                  property="username",
      *                  description="The user's username",
-     *                  @OA\Schema(type="string")
+     *                  type="string",
+     *                  example="wallabag",
      *              ),
      *              @OA\Property(
      *                  property="password",
      *                  description="The user's password",
-     *                  @OA\Schema(type="string")
+     *                  type="string",
+     *                  example="hidden_value",
      *              ),
      *              @OA\Property(
      *                  property="email",
      *                  description="The user's email",
-     *                  @OA\Schema(type="string")
+     *                  type="string",
+     *                  example="wallabag@wallabag.io",
      *              ),
      *              @OA\Property(
      *                  property="client_name",
      *                  description="The client name (to be used by your app)",
-     *                  @OA\Schema(type="string")
+     *                  type="string",
+     *                  example="Fancy App",
      *              ),
      *          )
      *     ),
      *     @OA\Response(
-     *         response="200",
-     *         description="Returned when successful"
+     *         response="201",
+     *         description="Returned when successful",
+     *         @Model(type=User::class, groups={"user_api_with_client"})),
+     *     ),
+     *     @OA\Response(
+     *         response="403",
+     *         description="Server doesn't allow registrations"
+     *     ),
+     *     @OA\Response(
+     *         response="400",
+     *         description="Request is incorrectly formatted"
      *     )
      * )
      *
