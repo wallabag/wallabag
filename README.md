@@ -18,6 +18,7 @@ You can install it on your own server, or you can create an account on [wallabag
 * iOS app: [wallabag/ios-app](https://github.com/wallabag/ios-app)
 * Browser extension: [wallabag/wallabagger](https://github.com/wallabag/wallabagger)
 * GNOME (Linux) app: [read-it-later](https://gitlab.gnome.org/World/read-it-later) (not maintained by this project)
+* All resources about wallabag ecosystem are listed here: https://github.com/wallabag/wallabag/wiki/wallabag-ecosystem
 
 ## Documentation
 
