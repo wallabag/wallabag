@@ -2598,16 +2598,16 @@
         },
         {
             "name": "friendsofsymfony/user-bundle",
-            "version": "v3.1.0",
+            "version": "v3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "89c18b6944adb12541f5b3b1ab39287b5336b375"
+                "reference": "8ccde38910033bf4a32782c91becb5efb453133e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/89c18b6944adb12541f5b3b1ab39287b5336b375",
-                "reference": "89c18b6944adb12541f5b3b1ab39287b5336b375",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/8ccde38910033bf4a32782c91becb5efb453133e",
+                "reference": "8ccde38910033bf4a32782c91becb5efb453133e",
                 "shasum": ""
             },
             "require": {
@@ -2683,9 +2683,9 @@
             "support": {
                 "docs": "https://symfony.com/doc/master/bundles/FOSUserBundle/index.html",
                 "issues": "https://github.com/FriendsOfSymfony/FOSUserBundle/issues",
-                "source": "https://github.com/FriendsOfSymfony/FOSUserBundle/tree/v3.1.0"
+                "source": "https://github.com/FriendsOfSymfony/FOSUserBundle/tree/v3.2.1"
             },
-            "time": "2022-10-26T09:10:52+00:00"
+            "time": "2023-07-06T10:38:55+00:00"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -7602,16 +7602,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.22.0",
+            "version": "1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "ec58baf7b3c7f1c81b3b00617c953249fb8cf30c"
+                "reference": "65c39594fbd8c67abfc68bb323f86447bab79cc0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/ec58baf7b3c7f1c81b3b00617c953249fb8cf30c",
-                "reference": "ec58baf7b3c7f1c81b3b00617c953249fb8cf30c",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/65c39594fbd8c67abfc68bb323f86447bab79cc0",
+                "reference": "65c39594fbd8c67abfc68bb323f86447bab79cc0",
                 "shasum": ""
             },
             "require": {
@@ -7643,9 +7643,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.22.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.22.1"
             },
-            "time": "2023-06-01T12:35:21+00:00"
+            "time": "2023-06-29T20:46:06+00:00"
         },
         {
             "name": "phpzip/phpzip",
