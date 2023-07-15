@@ -246,7 +246,6 @@ class ConfigController extends AbstractController
                 'username' => $user->getUsername(),
                 'token' => $config->getFeedToken(),
             ],
-            'twofactor_auth' => $this->getParameter('twofactor_auth'),
             'wallabag_url' => $this->getParameter('domain_name'),
             'enabled_users' => $userRepository->getSumEnabledUsers(),
         ]);
@@ -259,10 +258,6 @@ class ConfigController extends AbstractController
      */
     public function disableOtpEmailAction()
     {
-        if (!$this->getParameter('twofactor_auth')) {
-            return $this->createNotFoundException('two_factor not enabled');
-        }
-
         $user = $this->getUser();
         $user->setEmailTwoFactor(false);
 
@@ -283,10 +278,6 @@ class ConfigController extends AbstractController
      */
     public function otpEmailAction()
     {
-        if (!$this->getParameter('twofactor_auth')) {
-            return $this->createNotFoundException('two_factor not enabled');
-        }
-
         $user = $this->getUser();
 
         $user->setGoogleAuthenticatorSecret(null);
@@ -310,10 +301,6 @@ class ConfigController extends AbstractController
      */
     public function disableOtpAppAction()
     {
-        if (!$this->getParameter('twofactor_auth')) {
-            return $this->createNotFoundException('two_factor not enabled');
-        }
-
         $user = $this->getUser();
 
         $user->setGoogleAuthenticatorSecret('');
@@ -336,10 +323,6 @@ class ConfigController extends AbstractController
      */
     public function otpAppAction(GoogleAuthenticatorInterface $googleAuthenticator)
     {
-        if (!$this->getParameter('twofactor_auth')) {
-            return $this->createNotFoundException('two_factor not enabled');
-        }
-
         $user = $this->getUser();
         $secret = $googleAuthenticator->generateSecret();
 
@@ -377,10 +360,6 @@ class ConfigController extends AbstractController
      */
     public function otpAppCancelAction()
     {
-        if (!$this->getParameter('twofactor_auth')) {
-            return $this->createNotFoundException('two_factor not enabled');
-        }
-
         $user = $this->getUser();
         $user->setGoogleAuthenticatorSecret(null);
         $user->setBackupCodes(null);

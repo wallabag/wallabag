@@ -32,12 +32,6 @@ class SecurityControllerTest extends WallabagCoreTestCase
     {
         $client = $this->getTestClient();
 
-        if (!$client->getContainer()->getParameter('twofactor_auth')) {
-            $this->markTestSkipped('twofactor_auth is not enabled.');
-
-            return;
-        }
-
         $client->followRedirects();
 
         $em = $client->getContainer()->get(EntityManagerInterface::class);
@@ -64,12 +58,6 @@ class SecurityControllerTest extends WallabagCoreTestCase
     public function testLoginWith2FactorGoogle()
     {
         $client = $this->getTestClient();
-
-        if (!$client->getContainer()->getParameter('twofactor_auth')) {
-            $this->markTestSkipped('twofactor_auth is not enabled.');
-
-            return;
-        }
 
         $client->followRedirects();
 
