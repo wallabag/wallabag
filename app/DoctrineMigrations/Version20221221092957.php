@@ -12,7 +12,7 @@ final class Version20221221092957 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        $userTable = $this->getTable('user', true);
+        $userTable = $this->getTable('user');
         switch ($this->connection->getDatabasePlatform()->getName()) {
             case 'sqlite':
                 $this->addSql('CREATE TEMPORARY TABLE __temp__wallabag_user AS SELECT id, username, username_canonical, email, email_canonical, enabled, password, last_login, password_requested_at, name, created_at, updated_at, authCode, emailTwoFactor, salt, confirmation_token, roles, googleAuthenticatorSecret, backupCodes FROM ' . $userTable);
@@ -37,7 +37,7 @@ final class Version20221221092957 extends WallabagMigration
 
     public function down(Schema $schema): void
     {
-        $userTable = $this->getTable('user', true);
+        $userTable = $this->getTable('user');
         switch ($this->connection->getDatabasePlatform()->getName()) {
             case 'sqlite':
                 $this->addSql('CREATE TEMPORARY TABLE __temp__wallabag_user AS SELECT id, username, username_canonical, email, email_canonical, enabled, salt, password, last_login, confirmation_token, password_requested_at, roles, name, created_at, updated_at, authCode, googleAuthenticatorSecret, backupCodes, emailTwoFactor FROM ' . $userTable);
