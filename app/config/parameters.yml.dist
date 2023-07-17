@@ -34,7 +34,6 @@ parameters:
     secret: CHANGE_ME_TO_SOMETHING_SECRET_AND_RANDOM
 
     # two factor stuff
-    twofactor_auth: true
     twofactor_sender: no-reply@wallabag.org
 
     # fosuser stuff

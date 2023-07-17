@@ -201,15 +201,15 @@ scheb_two_factor:
         lifetime: 2592000
 
     backup_codes:
-        enabled: "%twofactor_auth%"
+        enabled: true
 
     google:
-        enabled: "%twofactor_auth%"
+        enabled: true
         issuer: "%server_name%"
         template: "@WallabagUser/Authentication/form.html.twig"
 
     email:
-        enabled: "%twofactor_auth%"
+        enabled: true
         sender_email: "%twofactor_sender%"
         digits: 6
         template: "@WallabagUser/Authentication/form.html.twig"

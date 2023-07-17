@@ -85,19 +85,17 @@ class ManageController extends AbstractController
         $form->handleRequest($request);
 
         // `googleTwoFactor` isn't a field within the User entity, we need to define it's value in a different way
-        if ($this->getParameter('twofactor_auth') && true === $user->isGoogleAuthenticatorEnabled() && false === $form->isSubmitted()) {
+        if (true === $user->isGoogleAuthenticatorEnabled() && false === $form->isSubmitted()) {
             $form->get('googleTwoFactor')->setData(true);
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
             // handle creation / reset of the OTP secret if checkbox changed from the previous state
-            if ($this->getParameter('twofactor_auth')) {
-                if (true === $form->get('googleTwoFactor')->getData() && false === $user->isGoogleAuthenticatorEnabled()) {
-                    $user->setGoogleAuthenticatorSecret($googleAuthenticator->generateSecret());
-                    $user->setEmailTwoFactor(false);
-                } elseif (false === $form->get('googleTwoFactor')->getData() && true === $user->isGoogleAuthenticatorEnabled()) {
-                    $user->setGoogleAuthenticatorSecret(null);
-                }
+            if (true === $form->get('googleTwoFactor')->getData() && false === $user->isGoogleAuthenticatorEnabled()) {
+                $user->setGoogleAuthenticatorSecret($googleAuthenticator->generateSecret());
+                $user->setEmailTwoFactor(false);
+            } elseif (false === $form->get('googleTwoFactor')->getData() && true === $user->isGoogleAuthenticatorEnabled()) {
+                $user->setGoogleAuthenticatorSecret(null);
             }
 
             $userManager->updateUser($user);
@@ -114,7 +112,6 @@ class ManageController extends AbstractController
             'user' => $user,
             'edit_form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
-            'twofactor_auth' => $this->getParameter('twofactor_auth'),
         ]);
     }
 

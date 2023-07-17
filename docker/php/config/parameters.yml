@@ -22,7 +22,6 @@ parameters:
     secret: ${SECRET:-~}
 
     # two factor stuff
-    twofactor_auth: ${TWOFACTOR_AUTH:-true}
     twofactor_sender: ${TWOFACTOR_SENDER:-no-reply@wallabag.org}
 
     # fosuser stuff
