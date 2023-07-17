@@ -40,7 +40,7 @@ ifdef DB
 endif
 	-php bin/console doctrine:database:drop --force --env=test
 	php bin/console doctrine:database:create --env=test
-	php bin/console doctrine:migrations:migrate --no-interaction --env=test
+	php bin/console doctrine:migrations:migrate --no-interaction --env=test -vv
 
 fixtures: ## Load fixtures into database
 	php bin/console doctrine:fixtures:load --no-interaction --env=test
