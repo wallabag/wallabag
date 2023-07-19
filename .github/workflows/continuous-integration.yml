@@ -151,3 +151,57 @@ jobs:
 
       - name: "Run PHPUnit"
         run: "php bin/simple-phpunit -v"
+
+  phpunit_no_database:
+    name: "PHP ${{ matrix.php }} using ${{ matrix.database }} who don't exist"
+    runs-on: "ubuntu-20.04"
+    services:
+      rabbitmq:
+        image: rabbitmq:3-alpine
+        ports:
+          - 5672:5672
+      redis:
+        image: redis:6-alpine
+        ports:
+          - 6379:6379
+
+    strategy:
+      fail-fast: true
+      matrix:
+        php:
+          - "8.2"
+        database:
+          - "mysql"
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v3"
+        with:
+          fetch-depth: 2
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "${{ matrix.php }}"
+          coverage: none
+          tools: pecl
+          extensions: json, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
+          ini-values: "date.timezone=Europe/Paris"
+
+      - name: "Setup MySQL"
+        if: "${{ matrix.database == 'mysql' }}"
+        run: |
+          sudo systemctl start mysql.service
+      - name: "Install dependencies with Composer"
+        uses: "ramsey/composer-install@v2"
+        with:
+          composer-options: "--optimize-autoloader --prefer-dist"
+
+      - name: "Install wallabag"
+        run: "make install ENV=test"
+
+      - name: "Prepare fixtures"
+        run: "make fixtures"
+
+      - name: "Run PHPUnit"
+        run: "php bin/simple-phpunit -v"
