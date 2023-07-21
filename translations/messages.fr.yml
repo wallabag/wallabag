@@ -88,6 +88,8 @@ config:
         help_reading_speed: wallabag calcule une durée de lecture pour chaque article. Vous pouvez définir ici, grâce à cette liste déroulante, si vous lisez plus ou moins vite. wallabag recalculera la durée de lecture de chaque article.
         help_language: Vous pouvez définir la langue de l’interface de wallabag.
         help_pocket_consumer_key: Nécessaire pour l’import depuis Pocket. Vous pouvez le créer depuis votre compte Pocket.
+        help_display_thumbnails: Vous pouvez décidez d'afficher ou non les miniatures des articles. Utile pour les connexions lentes.
+        display_thumbnails_label: Afficher les miniatures des articles (utile pour les connexions lentes).
     form_feed:
         description: "Les flux Atom fournis par wallabag vous permettent de lire vos articles sauvegardés dans votre lecteur de flux préféré. Pour pouvoir les utiliser, vous devez d’abord créer un jeton."
         token_label: "Jeton de flux"
@@ -145,7 +147,7 @@ config:
         card:
             new_tagging_rule: Créer une règle d'étiquetage
             import_tagging_rules: Importer des règles
-            import_tagging_rules_detail: Vous devez sélectionné un fichier JSON que vous avez précédemment exporté.
+            import_tagging_rules_detail: Vous devez sélectionner un fichier JSON que vous avez précédemment exporté.
             export_tagging_rules: Exporter les règles
             export_tagging_rules_detail: Un fichier JSON sera téléchargé et vous pourrez l'utiliser pour ré-importer les règles ou comme sauvegarde.
         file_label: Fichier JSON
@@ -412,7 +414,7 @@ quickstart:
     configure:
         title: Configurez l’application
         description: Pour voir une application qui vous correspond, allez voir du côté de la configuration de wallabag.
-        language: Changez la langue et le design de l’application
+        language: Changez la langue et l'interface
         rss: Activez les flux RSS
         tagging_rules: Écrivez des règles pour classer automatiquement vos articles
         feed: Activer les flux RSS
@@ -499,7 +501,7 @@ import:
         description: Cet outil va importer tous vos articles d’une autre instance de wallabag v2. Allez dans tous vos articles, puis, sur la barre latérale, cliquez sur « JSON ». Vous allez récupérer un fichier « All articles.json ».
     readability:
         page_title: Importer > Readability
-        description: Cet outil va importer toutes vos données de Readability. Sur la page des outils (https://www.readability.com/tools/), cliquez sur « Export your data » dans la section « Data Export ». Vous allez recevoir un courriel avec un lien pour télécharger le json (qui ne se finit pas par .json).
+        description: Cet outil va importer toutes vos données de Readability.
         how_to: Choisissez le fichier de votre export Readability et cliquez sur le bouton ci-dessous pour l’importer.
     worker:
         enabled: 'Les imports sont asynchrones. Une fois l’import commencé un worker externe traitera les messages un par un. Le service activé est :'
@@ -521,7 +523,7 @@ import:
         description: Sur la page « Backup » (https://pinboard.in/settings/backup), cliquez sur « JSON » dans la section « Bookmarks ». Un fichier json (sans extension) sera téléchargé (« pinboard_export »).
         how_to: Choisissez le fichier de votre export Pinboard et cliquez sur le bouton ci-dessous pour l’importer.
     elcurator:
-        description: Cet outil va importer tous vos articles depuis elCurator. Allez dans vos préférences sur elCurator et exportez vos contenus. Vous allez récupérer un fichier JSON.
+        description: Cet outil va importer tous vos articles depuis elCurator.
         page_title: Importer > elCurator
     delicious:
         page_title: Importer > del.icio.us
