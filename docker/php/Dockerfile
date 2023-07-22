@@ -1,4 +1,4 @@
-FROM php:7.4-fpm AS rootless
+FROM php:8.1-fpm AS rootless
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG NODE_VERSION=16
@@ -33,7 +33,8 @@ RUN apt-get update && apt-get install -y \
         zlib1g-dev \
         git \
         build-essential \
-        nodejs
+        nodejs \
+        npm
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp
 RUN docker-php-ext-install -j "$(nproc)" \
         bcmath \
