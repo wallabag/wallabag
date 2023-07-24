@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.6.2](https://github.com/wallabag/wallabag/tree/2.6.2)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.1...2.6.2)
+
+### Fixes
+* Fix mass action input on dark theme by @simounet https://github.com/wallabag/wallabag/pull/6673
+* Fix undefined variable by @nicosomb https://github.com/wallabag/wallabag/pull/6672
+* Fix table name in migration by @nicosomb https://github.com/wallabag/wallabag/pull/6653
+
+### Technical stuff
+* Add a new build to test when no database table prefix are defined by @j0k3r https://github.com/wallabag/wallabag/pull/6731
+* Keep escaped table name while migrating by @Glandos https://github.com/wallabag/wallabag/pull/6710
+* Remove twofactor_auth parameter by @nicosomb https://github.com/wallabag/wallabag/pull/6723
+* ApiDoc: Add response description to UserRestController by @caspermeijn https://github.com/wallabag/wallabag/pull/6684
+* ApiDoc: Add response description to WallabagRestController by @caspermeijn https://github.com/wallabag/wallabag/pull/6102
+* Skip migration if the table was already renamed by @gramakri https://github.com/wallabag/wallabag/pull/6678
+
+### Meta
+* Document how to run tests and formatter for new contributors by @caspermeijn https://github.com/wallabag/wallabag/pull/6685
+* Add link to wallabag ecosystem resources by @nicosomb https://github.com/wallabag/wallabag/pull/6700
+
 ## [2.6.1](https://github.com/wallabag/wallabag/tree/2.6.1)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.0...2.6.1)
 
