@@ -17,9 +17,8 @@ During this documentation, we assume the release is `$LAST_WALLABAG_RELEASE` (li
 #### Create a new release on GitHub
 
 - [Create the new release on GitHub](https://github.com/wallabag/wallabag/releases/new) by targetting the `master` branch or any appropriate branch (for instance backports).
-- Update [website](https://github.com/wallabag/website) to change the redirect rule for `/latest-v2-package` & `/latest-v2`. They both should redirect to the asset of the GitHub release.
+- Update [website](https://github.com/wallabag/website) to change MD5 sum and create the release blog post (based on the changelog).
 - Update Dockerfile https://github.com/wallabag/docker (and create a new tag)
-- Update [website](https://github.com/wallabag/website) website (downloads, MD5 sum, releases and new blog post)
 - Put the next patch version suffixed with `-dev` in `app/config/wallabag.yml` (`wallabag_core.version`)
 - Drink a :beer:!
 
