@@ -278,6 +278,16 @@ old_sound_rabbit_mq:
             exchange_options:
                 name: 'wallabag.import.chrome'
                 type: topic
+        import_shaarli:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.shaarli'
+                type: topic
+        import_pocket_html:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.pocket_html'
+                type: topic
     consumers:
         import_pocket:
             connection: default
@@ -368,6 +378,24 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.chrome'
             callback: wallabag_import.consumer.amqp.chrome
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+        import_shaarli:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.shaarli'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.shaarli'
+            callback: wallabag_import.consumer.amqp.shaarli
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+        import_pocket_html:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.pocket_html'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.pocket_html'
+            callback: wallabag_import.consumer.amqp.pocket_html
             qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
 
 fos_js_routing:
