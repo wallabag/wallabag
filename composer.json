@@ -1,33 +1,38 @@
 {
     "name": "wallabag/wallabag",
-    "type": "project",
     "description": "open source self hostable read-it-later web application",
+    "license": "MIT",
+    "type": "project",
     "keywords": [
         "poche",
         "wallabag",
         "read-it-later",
         "read it later"
     ],
-    "homepage": "https://github.com/wallabag/wallabag",
-    "license": "MIT",
     "authors": [
         {
             "name": "Nicolas Lœuillet",
             "email": "nicolas@loeuillet.org",
-            "homepage": "http://www.cdetc.fr",
+            "homepage": "https://nicolas.loeuillet.org",
             "role": "Developer"
         },
         {
             "name": "Thomas Citharel",
-            "homepage": "http://tcit.fr",
+            "homepage": "https://tcit.fr",
             "role": "Developer"
         },
         {
             "name": "Jérémy Benoist",
             "homepage": "https://www.j0k3r.net",
             "role": "Developer"
+        },
+        {
+            "name": "Kevin Decherf",
+            "homepage": "https://kdecherf.com/",
+            "role": "Developer"
         }
     ],
+    "homepage": "https://github.com/wallabag/wallabag",
     "support": {
         "email": "hello@wallabag.org",
         "issues": "https://github.com/wallabag/wallabag/issues"
@@ -130,6 +135,7 @@
     "require-dev": {
         "dama/doctrine-test-bundle": "^7.1",
         "doctrine/doctrine-fixtures-bundle": "~3.0",
+        "ergebnis/composer-normalize": "^2.28",
         "friendsofphp/php-cs-fixer": "~3.4",
         "friendsoftwig/twigcs": "^6.0",
         "m6web/redis-mock": "^5.0",
@@ -145,25 +151,8 @@
     "suggest": {
         "ext-imagick": "To keep GIF animation when downloading image is enabled"
     },
-    "scripts": {
-        "post-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "bin/console cache:clear --no-warmup",
-            "bin/console assets:install web --symlink --relative"
-        ],
-        "post-install-cmd": [
-            "@post-cmd"
-        ],
-        "post-update-cmd": [
-            "@post-cmd"
-        ]
-    },
-    "extra": {
-        "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
-        },
-        "public-dir": "web"
-    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Wallabag\\": "src/Wallabag/"
@@ -182,16 +171,34 @@
         ]
     },
     "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true,
+            "php-http/discovery": true,
+            "ergebnis/composer-normalize": true
+        },
         "bin-dir": "bin",
         "platform": {
             "php": "7.4.29"
         },
-        "sort-packages": true,
-        "allow-plugins": {
-            "phpstan/extension-installer": true,
-            "php-http/discovery": true
-        }
+        "sort-packages": true
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    "extra": {
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml"
+        },
+        "public-dir": "web"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@post-cmd"
+        ],
+        "post-update-cmd": [
+            "@post-cmd"
+        ],
+        "post-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "bin/console cache:clear --no-warmup",
+            "bin/console assets:install web --symlink --relative"
+        ]
+    }
 }
