@@ -237,13 +237,17 @@ class FeedControllerTest extends WallabagCoreTestCase
         $entry1->setCreatedAt($day1);
         $entry4->setCreatedAt($day2);
 
-        $property = (new \ReflectionObject($entry1))->getProperty('updatedAt');
-        $property->setAccessible(true);
-        $property->setValue($entry1, $day4);
-
         $property = (new \ReflectionObject($entry4))->getProperty('updatedAt');
         $property->setAccessible(true);
         $property->setValue($entry4, $day3);
+
+        // We have to flush and sleep here to be sure that $entry1 and $entry4 have different updatedAt values
+        $em->flush();
+        sleep(2);
+
+        $property = (new \ReflectionObject($entry1))->getProperty('updatedAt');
+        $property->setAccessible(true);
+        $property->setValue($entry1, $day4);
 
         $em->flush();
 
