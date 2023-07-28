@@ -2,7 +2,6 @@ settings_changed: Configuración actualizada
 download_pictures: Descargar imágenes en el servidor
 diaspora_url: URL de diaspora*, si el servicio está activado
 export_epub: Activar exportación a ePub
-export_mobi: Activar exportación a .mobi (deprecado, se eliminará pronto)
 export_pdf: Activar exportación a PDF
 export_csv: Activar exportación a CSV
 export_json: Activar exportación a JSON

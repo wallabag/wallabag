@@ -2,7 +2,6 @@ settings_changed: 配置已更新
 download_pictures: 在你的服务器上缓存图片
 diaspora_url: diaspora* 链接，如果该服务已被启用
 export_epub: 启用 ePub 导出
-export_mobi: 启用 .mobi 导出（已废弃，不久后将移除）
 export_pdf: 启用 PDF 导出
 export_csv: 启用 CSV 导出
 export_json: 启用 JSON 导出

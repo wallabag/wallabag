@@ -2,7 +2,6 @@ settings_changed: Beállítások frissítve
 download_pictures: Képek letöltése a kiszolgálóra
 diaspora_url: diaspora* URL, ha a szolgáltatás engedélyezett
 export_epub: ePub-ba exportálás engedélyezése
-export_mobi: .mobi-ba exportálás engedélyezése
 export_pdf: PDF-be exportálás engedélyezése
 export_csv: CSV-be exportálás engedélyezése
 export_json: JSON-ba exportálás engedélyezése

@@ -12,7 +12,6 @@ export_epub: Povolit export do ePub
 export_json: Povolit export do JSON
 export_csv: Povolit export do CSV
 export_pdf: Povolit export do PDF
-export_mobi: Povolit export do .mobi
 diaspora_url: Adresa URL diaspora*, pokud je služba povolena
 download_pictures: Stáhnout obrázky na váš server
 settings_changed: Konfigurace byla aktualizována

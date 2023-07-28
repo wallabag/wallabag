@@ -86,10 +86,6 @@ wallabag_core:
             value: 1
             section: export
         -
-            name: export_mobi
-            value: 0
-            section: export
-        -
             name: export_pdf
             value: 1
             section: export

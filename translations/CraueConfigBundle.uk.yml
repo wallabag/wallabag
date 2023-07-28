@@ -2,7 +2,6 @@ settings_changed: Конфігурацію оновлено
 download_pictures: Завантажити картинки на ваш сервер
 diaspora_url: diaspora* адреса, якщо сервіс увімкнено
 export_epub: Увімкнути експорт в ePub
-export_mobi: Увімкнути експорт в .mobi
 export_pdf: Увімкнути експорт в PDF
 export_csv: Увімкнути експорт в CSV
 export_json: Увімкнути експорт в JSON

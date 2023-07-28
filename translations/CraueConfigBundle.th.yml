@@ -2,7 +2,6 @@ settings_changed: ปรับปรุงองค์ประกอบ
 download_pictures: ดาวน์โหลดรูปภาพผ่านเซิฟเวอร์ของคุณ
 diaspora_url: Diaspora-URL, ถ้าเซิฟเวอร์ถูกเปิดใช้งาน
 export_epub: เปิดใช้งานการนำเข้าข้อมูลแบบ ePub
-export_mobi: เปิดใช้งานการนำเข้าข้อมูลแบบ .mobi
 export_pdf: เปิดใช้งานการนำเข้าข้อมูลแบบ PDF
 export_csv: เปิดใช้งานการนำเข้าข้อมูลแบบ CSV
 export_json: เปิดใช้งานการนำเข้าข้อมูลแบบ JSON
