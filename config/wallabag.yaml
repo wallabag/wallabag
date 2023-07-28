@@ -1,4 +1,4 @@
-wallabag_core:
+wallabag:
     version: 2.6.2
     paypal_url: "https://liberapay.com/wallabag/donate"
     languages:

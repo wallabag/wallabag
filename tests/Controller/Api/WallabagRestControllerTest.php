@@ -2,8 +2,8 @@
 
 namespace App\Tests\Controller\Api;
 
-use Craue\ConfigBundle\Util\Config;
 use App\Tests\WallabagApiTestCase;
+use Craue\ConfigBundle\Util\Config;
 
 class WallabagRestControllerTest extends WallabagApiTestCase
 {

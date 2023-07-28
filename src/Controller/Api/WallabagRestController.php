@@ -2,8 +2,9 @@
 
 namespace App\Controller\Api;
 
-use Craue\ConfigBundle\Util\Config;
+use App\Entity\ApplicationInfo;
 use App\Entity\User;
+use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use JMS\Serializer\SerializationContext;
@@ -17,7 +18,6 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use App\Entity\ApplicationInfo;
 
 class WallabagRestController extends AbstractFOSRestController
 {
