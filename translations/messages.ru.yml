@@ -622,7 +622,6 @@ flashes:
         notice:
             config_saved: 'Настройки сохранены.'
             password_updated: 'Пароль обновлен'
-            password_not_updated_demo: "В режиме демонстрации нельзя изменять пароль для этого пользователя."
             user_updated: 'Информация обновлена'
             rss_updated: 'RSS информация обновлена'
             tagging_rules_updated: 'Правила тегировния обновлены'

@@ -644,7 +644,6 @@ flashes:
             tagging_rules_deleted: Regra de etiquetado eliminada
             tagging_rules_updated: Regras de etiquetado actualizadas
             user_updated: Información actualizada
-            password_not_updated_demo: No modo demostración non podes cambiar o contrasinal da usuaria.
             password_updated: Contrasinal actualizado
             config_saved: Gardouse o axuste.
 error:

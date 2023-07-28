@@ -90,14 +90,10 @@ class ConfigController extends AbstractController
         $pwdForm->handleRequest($request);
 
         if ($pwdForm->isSubmitted() && $pwdForm->isValid()) {
-            if ($craueConfig->get('demo_mode_enabled') && $craueConfig->get('demo_mode_username') === $user->getUsername()) {
-                $message = 'flashes.config.notice.password_not_updated_demo';
-            } else {
-                $message = 'flashes.config.notice.password_updated';
+            $message = 'flashes.config.notice.password_updated';
 
-                $user->setPlainPassword($pwdForm->get('new_password')->getData());
-                $this->userManager->updateUser($user, true);
-            }
+            $user->setPlainPassword($pwdForm->get('new_password')->getData());
+            $this->userManager->updateUser($user, true);
 
             $this->addFlash('notice', $message);
 

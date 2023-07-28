@@ -270,7 +270,6 @@ flashes:
             tagging_rules_deleted: Labeling regel verwijderd
             tagging_rules_updated: Labeling regels geüpdatet
             rss_updated: RSS informatie geüpdatet
-            password_not_updated_demo: In demonstratiemodus kan u geen wachtwoord wijzigen voor deze gebruiker.
             entries_reset: Items gereset
             tags_reset: Labels gereset
             annotations_reset: Annotaties gereset

@@ -650,7 +650,6 @@ flashes:
         notice:
             config_saved: Config saved.
             password_updated: Password updated
-            password_not_updated_demo: In demonstration mode, you can't change password for this user.
             user_updated: Information updated
             tagging_rules_updated: Tagging rules updated
             tagging_rules_deleted: Tagging rule deleted

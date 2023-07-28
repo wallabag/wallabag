@@ -542,7 +542,6 @@ flashes:
         notice:
             config_saved: Configurazione salvata.
             password_updated: Password aggiornata
-            password_not_updated_demo: In modalità demo, non puoi cambiare la password dell'utente.
             user_updated: Informazioni aggiornate
             rss_updated: Informazioni RSS aggiornate
             tagging_rules_updated: Regole di etichettatura aggiornate

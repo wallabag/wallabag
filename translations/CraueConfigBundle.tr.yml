@@ -27,8 +27,6 @@ modify_settings: uygula
 matomo_host: Matomo'teki web sitenizin host adresi (başında http:// veya https:// olmadan)
 matomo_site_id: Matomo'teki web sitenizin ID'si
 matomo_enabled: Matomo'yu etkinleştir
-demo_mode_enabled: Demo mod etkinleştirilsin mi (Yalnızca herkese açık wallabag demoları için kullanılır)
-demo_mode_username: Demo kullanıcısı
 share_public: Makaleler için herkese açık URL'lere izin ver
 download_images_enabled: Resimleri lokale indir
 restricted_access: Ödeme ile erişim sağlanabilen siteler için kimlik doğrulamayı etkinleştir

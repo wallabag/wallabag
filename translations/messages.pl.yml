@@ -651,7 +651,6 @@ flashes:
         notice:
             config_saved: Konfiguracja zapisana.
             password_updated: Hasło zaktualizowane
-            password_not_updated_demo: W trybie demonstracyjnym nie możesz zmienić hasła dla tego użytkownika.
             user_updated: Informacje zaktualizowane
             rss_updated: Informacje RSS zaktualizowane
             tagging_rules_updated: Reguły tagowania zaktualizowane

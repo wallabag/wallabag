@@ -27,8 +27,6 @@ modify_settings: 適用
 matomo_host: Matomo のウェブサイトのホスト (http:// および https:// なし)
 matomo_site_id: Matomo でのあなたのウェブサイトの ID
 matomo_enabled: Matomo を有効にする
-demo_mode_enabled: デモモードを有効にしますか? (公開 wallabag デモでのみ使用)
-demo_mode_username: デモユーザー
 share_public: エントリの公開 URL を許可する
 download_images_enabled: 画像をローカルにダウンロード
 restricted_access: ペイウォールのあるウェブサイトへの認証を有効にする

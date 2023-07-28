@@ -400,7 +400,6 @@ flashes:
             summary_with_queue: 'Sažetak uvoza: %queued% u redu čekanja.'
     config:
         notice:
-            password_not_updated_demo: U demonstracijskom modusu ne možeš promijeniti lozinku za ovog korisnika.
             tags_reset: Oznake resetirane
             password_updated: Lozinka aktualizirana
             config_saved: Konfiguracija spremljena.

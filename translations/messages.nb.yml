@@ -226,7 +226,6 @@ flashes:
             tagging_rules_deleted: Etikettmerkingsregel slettet
             tagging_rules_updated: Etikettmerkingsregler oppdatert
             user_updated: Informasjon oppdatert
-            password_not_updated_demo: I demonstrasjonsmodus kan du ikke endre passordet for denne brukeren.
             password_updated: Passord oppdatert
             config_saved: Oppsett lagret.
             annotations_reset: Anføringer tilbakestilt

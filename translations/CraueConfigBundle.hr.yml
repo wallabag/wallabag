@@ -19,7 +19,6 @@ matomo_enabled: Aktiviraj Matomo
 import_with_redis: Aktiviraj Redis za asinkroni uvoz podataka
 restricted_access: Aktiviraj autentifikaciju za naplatne web-stranice
 export_mobi: Aktiviraj .mobi izvoz (zastarjelo, uskoro će se ukloniti)
-demo_mode_enabled: Aktivirati demo modus? (Koristi se samo za javnu wallabag demonstraciju)
 diaspora_url: diaspora* URL, ako je usluga aktivirana
 import_with_rabbitmq: Aktiviraj RabbitMQ za asinkroni uvoz podataka
 api_user_registration: Aktiviraj korisničku registraciju putem sučelja
@@ -34,6 +33,5 @@ misc: razno
 wallabag_support_url: URL podrške za wallabag
 export_xml: Aktiviraj XML izvoz
 show_printlink: Za ispis sadržaja, prikaži poveznicu
-demo_mode_username: Demo korisnik
 import: uvezi
 share_public: Dozvoli javne URL-ove za zapise
