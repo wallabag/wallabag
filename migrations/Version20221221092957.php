@@ -1,9 +1,9 @@
 <?php
 
-namespace Application\Migrations;
+namespace DoctrineMigrations;
 
+use App\Doctrine\WallabagMigration;
 use Doctrine\DBAL\Schema\Schema;
-use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
 /**
  * Remove the deprecated (and removed in DBAL v3) `json_array` type.

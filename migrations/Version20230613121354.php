@@ -1,9 +1,9 @@
 <?php
 
-namespace Application\Migrations;
+namespace DoctrineMigrations;
 
+use App\Doctrine\WallabagMigration;
 use Doctrine\DBAL\Schema\Schema;
-use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
 /**
  * Added a new setting to display or not thumbnails.
