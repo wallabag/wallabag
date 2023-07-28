@@ -7,6 +7,7 @@ use Doctrine\ORM\NoResultException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -41,13 +42,19 @@ class ReloadEntryCommand extends Command
             ->setDescription('Reload entries')
             ->setHelp('This command reload entries')
             ->addArgument('username', InputArgument::OPTIONAL, 'Reload entries only for the given user')
-        ;
+            ->addOption(
+                'only-not-parsed',
+                null,
+                InputOption::VALUE_NONE,
+                'Only reload entries which have `is_not_parsed` set to `true`'
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
 
+        $onlyNotParsed = (bool) $input->getOption('only-not-parsed');
         $userId = null;
         if ($username = $input->getArgument('username')) {
             try {
@@ -61,7 +68,8 @@ class ReloadEntryCommand extends Command
             }
         }
 
-        $entryIds = $this->entryRepository->findAllEntriesIdByUserId($userId);
+        $methodName = $onlyNotParsed ? 'findAllEntriesIdByUserIdAndNotParsed' : 'findAllEntriesIdByUserId';
+        $entryIds = $this->entryRepository->$methodName($userId);
 
         $nbEntries = \count($entryIds);
         if (!$nbEntries) {

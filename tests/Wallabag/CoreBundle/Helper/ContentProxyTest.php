@@ -57,6 +57,7 @@ class ContentProxyTest extends TestCase
         $this->assertEmpty($entry->getLanguage());
         $this->assertSame(0.0, $entry->getReadingTime());
         $this->assertNull($entry->getDomainName());
+        $this->assertTrue($entry->isNotParsed());
     }
 
     public function testWithEmptyContent()
@@ -96,6 +97,7 @@ class ContentProxyTest extends TestCase
         $this->assertEmpty($entry->getLanguage());
         $this->assertSame(0.0, $entry->getReadingTime());
         $this->assertSame('0.0.0.0', $entry->getDomainName());
+        $this->assertTrue($entry->isNotParsed());
     }
 
     public function testWithEmptyContentButOG()
@@ -138,6 +140,7 @@ class ContentProxyTest extends TestCase
         $this->assertEmpty($entry->getMimetype());
         $this->assertSame(0.0, $entry->getReadingTime());
         $this->assertSame('domain.io', $entry->getDomainName());
+        $this->assertTrue($entry->isNotParsed());
     }
 
     public function testWithContent()
@@ -183,6 +186,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('200', $entry->getHttpStatus());
         $this->assertSame(4.0, $entry->getReadingTime());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
+        $this->assertFalse($entry->isNotParsed());
     }
 
     public function testWithContentAndNoOgImage()
@@ -228,6 +232,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('200', $entry->getHttpStatus());
         $this->assertSame(4.0, $entry->getReadingTime());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
+        $this->assertFalse($entry->isNotParsed());
     }
 
     public function testWithContentAndContentImage()
@@ -272,6 +277,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('200', $entry->getHttpStatus());
         $this->assertSame(0.0, $entry->getReadingTime());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
+        $this->assertFalse($entry->isNotParsed());
     }
 
     public function testWithContentImageAndOgImage()
@@ -316,6 +322,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('200', $entry->getHttpStatus());
         $this->assertSame(0.0, $entry->getReadingTime());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
+        $this->assertFalse($entry->isNotParsed());
     }
 
     public function testWithContentAndBadLanguage()
@@ -363,6 +370,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('200', $entry->getHttpStatus());
         $this->assertSame(4.0, $entry->getReadingTime());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
+        $this->assertFalse($entry->isNotParsed());
     }
 
     public function testWithContentAndBadOgImage()
@@ -416,6 +424,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('200', $entry->getHttpStatus());
         $this->assertSame(4.0, $entry->getReadingTime());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
+        $this->assertFalse($entry->isNotParsed());
     }
 
     public function testWithForcedContent()
@@ -460,6 +469,7 @@ class ContentProxyTest extends TestCase
         $this->assertContains('Thomas', $entry->getPublishedBy());
         $this->assertNotNull($entry->getHeaders(), 'Headers are stored, so value is not null');
         $this->assertContains('no-cache', $entry->getHeaders());
+        $this->assertFalse($entry->isNotParsed());
     }
 
     public function testWithForcedContentAndDateTime()
@@ -498,6 +508,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame(4.0, $entry->getReadingTime());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
         $this->assertSame('08/09/2016', $entry->getPublishedAt()->format('d/m/Y'));
+        $this->assertFalse($entry->isNotParsed());
     }
 
     public function testWithForcedContentAndBadDate()
@@ -537,6 +548,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame(4.0, $entry->getReadingTime());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
         $this->assertNull($entry->getPublishedAt());
+        $this->assertFalse($entry->isNotParsed());
 
         $records = $handler->getRecords();
 
@@ -625,6 +637,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('fr', $entry->getLanguage());
         $this->assertSame('200', $entry->getHttpStatus());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
+        $this->assertFalse($entry->isNotParsed());
     }
 
     public function testWithImageAsContent()
@@ -663,6 +676,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('image/jpeg', $entry->getMimetype());
         $this->assertSame('200', $entry->getHttpStatus());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
+        $this->assertFalse($entry->isNotParsed());
     }
 
     public function testWebsiteWithValidUTF8TitleDoNothing()

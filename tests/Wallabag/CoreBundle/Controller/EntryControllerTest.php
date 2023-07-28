@@ -967,6 +967,34 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertCount(3, $crawler->filter('ol.entries > li'));
     }
 
+    public function testFilterOnNotCorrectlyParsedStatus()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $crawler = $client->request('GET', '/all/list');
+
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+
+        $data = [
+            'entry_filter[isNotParsed]' => true,
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(1, $crawler->filter($this->entryDataTestAttribute));
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+        $entry->setNotParsed(true);
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(2, $crawler->filter($this->entryDataTestAttribute));
+    }
+
     public function testPaginationWithFilter()
     {
         $this->logInAs('admin');
