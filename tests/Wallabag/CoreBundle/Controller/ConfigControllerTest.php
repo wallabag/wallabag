@@ -929,7 +929,8 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $crawler = $client->click($crawler->selectLink('config.reset.annotations')->link());
+        $form = $crawler->filter('form[name=reset-annotations]')->form();
+        $client->submit($form);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertStringContainsString('flashes.config.notice.annotations_reset', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
@@ -945,7 +946,8 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $crawler = $client->click($crawler->selectLink('config.reset.tags')->link());
+        $form = $crawler->filter('form[name=reset-tags]')->form();
+        $client->submit($form);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertStringContainsString('flashes.config.notice.tags_reset', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
@@ -961,7 +963,8 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $crawler = $client->click($crawler->selectLink('config.reset.entries')->link());
+        $form = $crawler->filter('form[name=reset-entries]')->form();
+        $client->submit($form);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertStringContainsString('flashes.config.notice.entries_reset', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
@@ -1027,7 +1030,8 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $crawler = $client->click($crawler->selectLink('config.reset.archived')->link());
+        $form = $crawler->filter('form[name=reset-archived]')->form();
+        $client->submit($form);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertStringContainsString('flashes.config.notice.archived_reset', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
@@ -1086,7 +1090,8 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $crawler = $client->click($crawler->selectLink('config.reset.entries')->link());
+        $form = $crawler->filter('form[name=reset-entries]')->form();
+        $client->submit($form);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertStringContainsString('flashes.config.notice.entries_reset', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
