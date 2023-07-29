@@ -57,9 +57,11 @@
 
                                     <p>{{ 'developer.remove.warn_message_1'|trans({'%name%': client.name}) }}</p>
                                     <p>{{ 'developer.remove.warn_message_2'|trans({'%name%': client.name}) }}</p>
-                                    <p>
-                                        <a class="waves-effect waves-light red btn" href="{{ path('developer_delete_client', {'id': client.id}) }}">{{ 'developer.remove.action'|trans({'%name%': client.name}) }}</a>
-                                    </p>
+                                    <form action="{{ path('developer_delete_client', { id: client.id }) }}" method="post" name="delete-client">
+                                        <input type="hidden" name="token" value="{{ csrf_token('delete-client') }}" />
+
+                                        <button class="waves-effect waves-light btn red" type="submit">{{ 'developer.remove.action'|trans({'%name%': client.name}) }}</button>
+                                    </form>
                                 </div>
                             </li>
                         {% endfor %}

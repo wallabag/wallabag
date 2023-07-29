@@ -104,20 +104,16 @@ class DeveloperControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('no_client', $client->getResponse()->getContent());
 
         $this->logInAs('bob');
-        $client->request('GET', '/developer/client/delete/' . $adminApiClient->getId());
+        $client->request('POST', '/developer/client/delete/' . $adminApiClient->getId());
         $this->assertSame(403, $client->getResponse()->getStatusCode());
 
         // Try to remove the admin's client with the good user
         $this->logInAs('admin');
         $crawler = $client->request('GET', '/developer');
 
-        $link = $crawler
-            ->filter('div[class=collapsible-body] p a')
-            ->eq(0)
-            ->link()
-        ;
+        $form = $crawler->filter('form[name=delete-client]')->form();
 
-        $client->click($link);
+        $client->submit($form);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $this->assertNull(
