@@ -29,6 +29,7 @@ class WallabagCoreExtension extends Extension
         $container->setParameter('wallabag_core.default_internal_settings', $config['default_internal_settings']);
         $container->setParameter('wallabag_core.site_credentials.encryption_key_path', $config['encryption_key_path']);
         $container->setParameter('wallabag_core.default_ignore_origin_instance_rules', $config['default_ignore_origin_instance_rules']);
+        $container->setParameter('wallabag_core.fonts', $config['fonts']);
     }
 
     public function getAlias()

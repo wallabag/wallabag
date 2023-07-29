@@ -1364,4 +1364,40 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $client->request('GET', '/config/view-mode');
     }
+
+    public function testGeneratedCSS()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        // We check the current display
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
+        $entry = $em->getRepository(Entry::class)->findByUrlAndUserId('http://0.0.0.0/entry1', $this->getLoggedInUserId());
+        $client->request('GET', '/view/' . $entry->getId());
+
+        $this->assertStringNotContainsString('font-family: "OpenDyslexicRegular"', $client->getResponse()->getContent());
+        $this->assertStringNotContainsString('max-width: 60em', $client->getResponse()->getContent());
+        $this->assertStringNotContainsString('line-height: 2em', $client->getResponse()->getContent());
+        $this->assertStringNotContainsString('font-size: 2em', $client->getResponse()->getContent());
+
+        // Change display configuration
+        $crawler = $client->request('GET', '/config');
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $form = $crawler->filter('button[id=config_save]')->form();
+        $data = [
+            'config[font]' => 'OpenDyslexicRegular',
+            'config[fontsize]' => 2.0,
+            'config[lineHeight]' => 2.0,
+            'config[maxWidth]' => 60,
+        ];
+        $client->submit($form, $data);
+        $client->followRedirect();
+
+        $client->request('GET', '/view/' . $entry->getId());
+
+        $this->assertStringContainsString('font-family: "OpenDyslexicRegular"', $client->getResponse()->getContent());
+        $this->assertStringContainsString('max-width: 60em', $client->getResponse()->getContent());
+        $this->assertStringContainsString('line-height: 2em', $client->getResponse()->getContent());
+        $this->assertStringContainsString('font-size: 2em', $client->getResponse()->getContent());
+    }
 }

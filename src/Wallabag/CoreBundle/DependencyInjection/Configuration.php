@@ -72,6 +72,9 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('fonts')
+                    ->prototype('scalar')->end()
+                ->end()
             ->end()
         ;
 
