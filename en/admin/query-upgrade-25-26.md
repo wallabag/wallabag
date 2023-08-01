@@ -19,7 +19,7 @@ ALTER TABLE wallabag_config ADD display_thumbnails INT(11) NOT NULL DEFAULT 1;
 ```sql
 ALTER TABLE wallabag_config DROP theme;
 ALTER TABLE wallabag_user ALTER backupcodes TYPE JSON USING backupcodes::json
-ALTER TABLE wallabag_config ADD display_thumbnails INT(11) NOT NULL DEFAULT 1;
+ALTER TABLE wallabag_config ADD display_thumbnails INT NOT NULL DEFAULT 1;
 ```
 
 ## SQLite
