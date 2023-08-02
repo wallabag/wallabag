@@ -99,6 +99,9 @@ class DeveloperController extends AbstractController
      */
     public function howtoFirstAppAction()
     {
-        return $this->render('@WallabagCore/Developer/howto_app.html.twig');
+        return $this->render('@WallabagCore/Developer/howto_app.html.twig',
+        [
+            'wallabag_url' => $this->getParameter('domain_name'),
+        ]);
     }
 }
