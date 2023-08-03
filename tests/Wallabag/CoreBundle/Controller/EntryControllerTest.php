@@ -1390,6 +1390,18 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertCount(4, $crawler->filter($this->entryDataTestAttribute));
 
+        // Add a check with useless spaces before and after the search term
+        $crawler = $client->request('GET', '/unread/list');
+
+        $form = $crawler->filter('form[name=search]')->form();
+        $data = [
+            'search_entry[term]' => '  title ',
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(4, $crawler->filter($this->entryDataTestAttribute));
+
         // Search on starred list
         $crawler = $client->request('GET', '/starred/list');
 
