@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="results clearfix">
-        {{ 'tag.list.number_on_the_page'|transchoice(tags|length) }}
+        {{ 'tag.list.number_on_the_page'|trans({'%count%': tags|length}) }}
     </div>
 
     <div class="row">

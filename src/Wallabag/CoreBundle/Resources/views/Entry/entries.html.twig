@@ -28,7 +28,7 @@
     <form name="form_mass_action" action="{{ path('mass_action') }}" method="post">
     <div class="results">
         <div class="nb-results">
-            {{ 'entry.list.number_on_the_page'|transchoice(entries.count) }}
+            {{ 'entry.list.number_on_the_page'|trans({'%count%': entries.count}) }}
             {% if entries.count > 0 %}
                 <a class="results-item" href="{{ path('switch_view_mode') }}"><i class="material-icons">{% if list_mode == 0 %}view_list{% else %}view_module{% endif %}</i></a>
             {% endif %}
