@@ -3,6 +3,9 @@
 namespace Application\Migrations;
 
 use Doctrine\DBAL\Migrations\SkipMigrationException;
+use Doctrine\DBAL\Platforms\MySQLPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
+use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
@@ -13,11 +16,13 @@ class Version20161001072726 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        $this->skipIf('sqlite' === $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
+        $platform = $this->connection->getDatabasePlatform();
+
+        $this->skipIf($platform instanceof SqlitePlatform, 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
 
         // remove all FK from entry_tag
-        switch ($this->connection->getDatabasePlatform()->getName()) {
-            case 'mysql':
+        switch (true) {
+            case $platform instanceof MySQLPlatform:
                 $query = $this->connection->query("
                     SELECT CONSTRAINT_NAME
                     FROM information_schema.key_column_usage
@@ -29,7 +34,7 @@ class Version20161001072726 extends WallabagMigration
                     $this->addSql('ALTER TABLE ' . $this->getTable('entry_tag') . ' DROP FOREIGN KEY ' . $fk['CONSTRAINT_NAME']);
                 }
                 break;
-            case 'postgresql':
+            case $platform instanceof PostgreSQLPlatform:
                 // http://dba.stackexchange.com/questions/36979/retrieving-all-pk-and-fk
                 $query = $this->connection->query("
                     SELECT conrelid::regclass AS table_from
@@ -53,8 +58,8 @@ class Version20161001072726 extends WallabagMigration
 
         // remove entry FK from annotation
 
-        switch ($this->connection->getDatabasePlatform()->getName()) {
-            case 'mysql':
+        switch (true) {
+            case $platform instanceof MySQLPlatform:
                 $query = $this->connection->query("
                     SELECT CONSTRAINT_NAME
                     FROM information_schema.key_column_usage
@@ -68,7 +73,7 @@ class Version20161001072726 extends WallabagMigration
                     $this->addSql('ALTER TABLE ' . $this->getTable('annotation') . ' DROP FOREIGN KEY ' . $fk['CONSTRAINT_NAME']);
                 }
                 break;
-            case 'postgresql':
+            case $platform instanceof PostgreSQLPlatform:
                 // http://dba.stackexchange.com/questions/36979/retrieving-all-pk-and-fk
                 $query = $this->connection->query("
                     SELECT conrelid::regclass AS table_from

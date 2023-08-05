@@ -4,6 +4,9 @@ namespace Wallabag\CoreBundle\Command;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception\DriverException;
+use Doctrine\DBAL\Platforms\MySQLPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
+use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
@@ -138,7 +141,7 @@ class InstallCommand extends Command
         $help = '';
 
         // now check if MySQL isn't too old to handle utf8mb4
-        if ($conn->isConnected() && 'mysql' === $conn->getDatabasePlatform()->getName()) {
+        if ($conn->isConnected() && $conn->getDatabasePlatform() instanceof MySQLPlatform) {
             $version = $conn->query('select version()')->fetchOne();
             $minimalVersion = '5.5.4';
 
@@ -150,7 +153,7 @@ class InstallCommand extends Command
         }
 
         // testing if PostgreSQL > 9.1
-        if ($conn->isConnected() && 'postgresql' === $conn->getDatabasePlatform()->getName()) {
+        if ($conn->isConnected() && $conn->getDatabasePlatform() instanceof PostgreSQLPlatform) {
             // return version should be like "PostgreSQL 9.5.4 on x86_64-apple-darwin15.6.0, compiled by Apple LLVM version 8.0.0 (clang-800.0.38), 64-bit"
             $version = $conn->query('SELECT version();')->fetchOne();
 
@@ -391,7 +394,7 @@ class InstallCommand extends Command
         }
 
         // custom verification for sqlite, since `getListDatabasesSQL` doesn't work for sqlite
-        if ('sqlite' === $schemaManager->getDatabasePlatform()->getName()) {
+        if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {
             $params = $connection->getParams();
 
             if (isset($params['path']) && file_exists($params['path'])) {

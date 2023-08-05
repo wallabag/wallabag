@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Migrations;
 
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
@@ -23,7 +24,7 @@ final class Version20190826204730 extends WallabagMigration
             $userTable->setPrimaryKey(['id']);
             $userTable->addForeignKeyConstraint($this->getTable('config'), ['config_id'], ['id'], [], 'fk_config');
 
-            if ('postgresql' === $this->connection->getDatabasePlatform()->getName()) {
+            if ($this->connection->getDatabasePlatform() instanceof PostgreSQLPlatform) {
                 $schema->dropSequence('ignore_origin_user_rule_id_seq');
                 $schema->createSequence('ignore_origin_user_rule_id_seq');
             }
@@ -35,7 +36,7 @@ final class Version20190826204730 extends WallabagMigration
             $instanceTable->addColumn('rule', 'string', ['length' => 255]);
             $instanceTable->setPrimaryKey(['id']);
 
-            if ('postgresql' === $this->connection->getDatabasePlatform()->getName()) {
+            if ($this->connection->getDatabasePlatform() instanceof PostgreSQLPlatform) {
                 $schema->dropSequence('ignore_origin_instance_rule_id_seq');
                 $schema->createSequence('ignore_origin_instance_rule_id_seq');
             }
