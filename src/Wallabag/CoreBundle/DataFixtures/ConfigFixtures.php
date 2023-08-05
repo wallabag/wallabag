@@ -7,6 +7,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\UserBundle\DataFixtures\UserFixtures;
+use Wallabag\UserBundle\Entity\User;
 
 class ConfigFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -15,7 +16,7 @@ class ConfigFixtures extends Fixture implements DependentFixtureInterface
      */
     public function load(ObjectManager $manager): void
     {
-        $adminConfig = new Config($this->getReference('admin-user'));
+        $adminConfig = new Config($this->getReference('admin-user', User::class));
 
         $adminConfig->setItemsPerPage(30);
         $adminConfig->setReadingSpeed(200);
@@ -29,7 +30,7 @@ class ConfigFixtures extends Fixture implements DependentFixtureInterface
 
         $this->addReference('admin-config', $adminConfig);
 
-        $bobConfig = new Config($this->getReference('bob-user'));
+        $bobConfig = new Config($this->getReference('bob-user', User::class));
         $bobConfig->setItemsPerPage(10);
         $bobConfig->setReadingSpeed(200);
         $bobConfig->setLanguage('fr');
@@ -42,7 +43,7 @@ class ConfigFixtures extends Fixture implements DependentFixtureInterface
 
         $this->addReference('bob-config', $bobConfig);
 
-        $emptyConfig = new Config($this->getReference('empty-user'));
+        $emptyConfig = new Config($this->getReference('empty-user', User::class));
         $emptyConfig->setItemsPerPage(10);
         $emptyConfig->setReadingSpeed(100);
         $emptyConfig->setLanguage('en');

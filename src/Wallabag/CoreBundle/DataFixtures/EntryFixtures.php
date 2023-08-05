@@ -6,7 +6,9 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\UserBundle\DataFixtures\UserFixtures;
+use Wallabag\UserBundle\Entity\User;
 
 class EntryFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -87,7 +89,7 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
         ];
 
         foreach ($entries as $reference => $item) {
-            $entry = new Entry($this->getReference($item['user']));
+            $entry = new Entry($this->getReference($item['user'], User::class));
             $entry->setUrl($item['url']);
             $entry->setReadingTime($item['reading_time']);
             $entry->setDomainName($item['domain']);
@@ -98,7 +100,7 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
 
             if (isset($item['tags'])) {
                 foreach ($item['tags'] as $tag) {
-                    $entry->addTag($this->getReference($tag));
+                    $entry->addTag($this->getReference($tag, Tag::class));
                 }
             }
 

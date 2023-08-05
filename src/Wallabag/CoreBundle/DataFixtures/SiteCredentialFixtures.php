@@ -10,6 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Wallabag\CoreBundle\Entity\SiteCredential;
 use Wallabag\CoreBundle\Helper\CryptoProxy;
 use Wallabag\UserBundle\DataFixtures\UserFixtures;
+use Wallabag\UserBundle\Entity\User;
 
 class SiteCredentialFixtures extends Fixture implements DependentFixtureInterface, ContainerAwareInterface
 {
@@ -28,14 +29,14 @@ class SiteCredentialFixtures extends Fixture implements DependentFixtureInterfac
      */
     public function load(ObjectManager $manager): void
     {
-        $credential = new SiteCredential($this->getReference('admin-user'));
+        $credential = new SiteCredential($this->getReference('admin-user', User::class));
         $credential->setHost('.super.com');
         $credential->setUsername($this->container->get(CryptoProxy::class)->crypt('.super'));
         $credential->setPassword($this->container->get(CryptoProxy::class)->crypt('bar'));
 
         $manager->persist($credential);
 
-        $credential = new SiteCredential($this->getReference('admin-user'));
+        $credential = new SiteCredential($this->getReference('admin-user', User::class));
         $credential->setHost('paywall.example.com');
         $credential->setUsername($this->container->get(CryptoProxy::class)->crypt('paywall.example'));
         $credential->setPassword($this->container->get(CryptoProxy::class)->crypt('bar'));
