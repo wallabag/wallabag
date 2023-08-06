@@ -452,7 +452,6 @@ class EntryController extends AbstractController
             $message
         );
 
-
         $redirectUrl = $this->redirectHelper->to($request->getSession()->get('prevUrl'));
 
         return $this->redirect($redirectUrl);
@@ -517,7 +516,6 @@ class EntryController extends AbstractController
             'notice',
             'flashes.entry.notice.entry_deleted'
         );
-
 
         // don't redirect user to the deleted entry (check that the referer doesn't end with the same url)
         $prev = $request->getSession()->get('prevUrl');
