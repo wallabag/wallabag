@@ -1,7 +1,0 @@
-validator:
-    quote_length_too_high: A cita é demasiado longa. Debería ter {{ limit }} caracteres ou menos.
-    rss_limit_too_high: Esto certarmente estragará a app
-    item_per_page_too_high: Esto certamente estragará a app
-    password_wrong_value: O contrasinal escrito non é o actual.
-    password_too_short: O contrasinal debe ter 8 caracteres como mínimo.
-    password_must_match: Os contrasinais deben concordar.

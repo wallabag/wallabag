@@ -3,18 +3,34 @@
 namespace Wallabag\ImportBundle\Controller;
 
 use Craue\ConfigBundle\Util\Config;
+use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\ImportBundle\Import\ChromeImport;
+use Wallabag\ImportBundle\Redis\Producer as RedisProducer;
 
 class ChromeController extends BrowserController
 {
+    private ChromeImport $chromeImport;
+    private Config $craueConfig;
+    private RabbitMqProducer $rabbitMqProducer;
+    private RedisProducer $redisProducer;
+
+    public function __construct(ChromeImport $chromeImport, Config $craueConfig, RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
+    {
+        $this->chromeImport = $chromeImport;
+        $this->craueConfig = $craueConfig;
+        $this->rabbitMqProducer = $rabbitMqProducer;
+        $this->redisProducer = $redisProducer;
+    }
+
     /**
      * @Route("/chrome", name="import_chrome")
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, TranslatorInterface $translator)
     {
-        return parent::indexAction($request);
+        return parent::indexAction($request, $translator);
     }
 
     /**
@@ -22,15 +38,13 @@ class ChromeController extends BrowserController
      */
     protected function getImportService()
     {
-        $service = $this->get(ChromeImport::class);
-
-        if ($this->get(Config::class)->get('import_with_rabbitmq')) {
-            $service->setProducer($this->get('old_sound_rabbit_mq.import_chrome_producer'));
-        } elseif ($this->get(Config::class)->get('import_with_redis')) {
-            $service->setProducer($this->get('wallabag_import.producer.redis.chrome'));
+        if ($this->craueConfig->get('import_with_rabbitmq')) {
+            $this->chromeImport->setProducer($this->rabbitMqProducer);
+        } elseif ($this->craueConfig->get('import_with_redis')) {
+            $this->chromeImport->setProducer($this->redisProducer);
         }
 
-        return $service;
+        return $this->chromeImport;
     }
 
     /**

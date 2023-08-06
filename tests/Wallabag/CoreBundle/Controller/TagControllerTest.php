@@ -560,5 +560,12 @@ class TagControllerTest extends WallabagCoreTestCase
 
             $this->assertContains('title', $tags);
         }
+
+        $tag = $client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Tag::class)
+            ->findByLabelsAndUser(['title'], $this->getLoggedInUserId());
+
+        $this->assertCount(1, $tag);
     }
 }

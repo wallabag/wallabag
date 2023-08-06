@@ -184,6 +184,23 @@ class DownloadImagesTest extends TestCase
         $this->assertStringNotContainsString('f_auto,q_auto', $res, 'Image srcset attribute were not replaced');
     }
 
+    public function testProcessImageWithNumericHtmlEntitySeparator()
+    {
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/jpeg'], file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')));
+        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/jpeg'], file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')));
+        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/jpeg'], file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')));
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', [$logHandler]);
+
+        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        // wordpress.com sites using &#038; as an &amp; alternative
+        $res = $download->processHtml(123, '<img srcset="https://example.com/20191204_133626-scaled.jpg?strip=info&#038;w=600&#038;ssl=1 600w,https://example.com/20191204_133626-scaled.jpg?strip=info&#038;w=900&#038;ssl=1 900w" src="https://example.com/20191204_133626-scaled.jpg?ssl=1"/>', 'https://example.com/about/');
+
+        $this->assertStringNotContainsString('https://example.com', $res, 'Image srcset attribute were not replaced');
+    }
+
     public function testProcessImageWithNullPath()
     {
         $httpMockClient = new HttpMockClient();
@@ -247,5 +264,20 @@ class DownloadImagesTest extends TestCase
         $res = $download->processSingleImage(123, 'modal-content.svg', 'http://imgur.com/gallery/WxtWY');
 
         $this->assertFalse($res);
+    }
+
+    public function testFollowRedirection()
+    {
+        $httpMockClient = new HttpMockClient();
+        $httpMockClient->addResponse(new Response(301, ['content-type' => 'image/png', 'location' => '/final-path.png']));
+        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/png'], file_get_contents(__DIR__ . '/../fixtures/unnamed.png')));
+
+        $logHandler = new TestHandler();
+        $logger = new Logger('test', [$logHandler]);
+
+        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $res = $download->processSingleImage(123, '', 'https://example.com/unnamed.png');
+
+        $this->assertStringContainsString('/assets/images/9/b/9b0ead26/66953334.png', $res, "Fetch client didn't follow the HTTP redirection");
     }
 }

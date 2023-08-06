@@ -10,6 +10,8 @@ class ExportControllerTest extends WallabagCoreTestCase
 {
     private $adminEntry;
     private $bobEntry;
+    private $sameDomainEntry;
+    private $sameDomainEntry2;
 
     public function testLogin()
     {
@@ -58,12 +60,27 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
-    public function testBadEntryId()
+    public function testNonExistingEntryId()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
         $client->request('GET', '/export/0.mobi');
+
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
+    }
+
+    public function testForbiddenEntryId()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $content = $client->getContainer()
+            ->get('doctrine.orm.entity_manager')
+            ->getRepository(Entry::class)
+            ->findOneByUsernameAndNotArchived('bob');
+
+        $client->request('GET', '/export/' . $content->getId() . '.mobi');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
@@ -124,7 +141,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertSame('binary', $headers->get('content-transfer-encoding'));
 
         ob_start();
-        $crawler = $client->request('GET', '/export/tag_entries.pdf?tag=foo-bar');
+        $crawler = $client->request('GET', '/export/tag_entries.pdf?tag=t:foo-bar');
         ob_end_clean();
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
@@ -309,6 +326,26 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty('domain_name', (string) $content->entry[0]->domain_name);
         $this->assertNotEmpty('created_at', (string) $content->entry[0]->created_at);
         $this->assertNotEmpty('updated_at', (string) $content->entry[0]->updated_at);
+    }
+
+    public function testJsonExportFromSameDomain()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        ob_start();
+        $crawler = $client->request('GET', '/export/same_domain.json?entry=1');
+        ob_end_clean();
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $headers = $client->getResponse()->headers;
+        $this->assertSame('application/json', $headers->get('content-type'));
+        $this->assertSame('attachment; filename="Same domain articles.json"', $headers->get('content-disposition'));
+        $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
+
+        $content = json_decode($client->getResponse()->getContent(), true);
+        $this->assertCount(4, $content);
     }
 
     private function setUpForJsonExportFromSearch()

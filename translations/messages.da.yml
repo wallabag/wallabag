@@ -1,0 +1,185 @@
+security:
+    login:
+        keep_logged_in: 'Forbliv logget ind'
+        forgot_password: 'Glemt adgangskoden?'
+        submit: 'Log ind'
+        username: 'Brugernavn'
+        password: 'Adgangskode'
+    resetting:
+        description: "Indtast din emailadresse nedenfor, så vil du modtage instrukser om at nulstille adgangskoden."
+menu:
+    left:
+        unread: 'Ulæst'
+        starred: 'Favoritter'
+        archive: 'Arkiv'
+        all_articles: 'Alle artikler'
+        config: 'Opsætning'
+        tags: 'Tags'
+        howto: 'KUow-to'
+        logout: 'Log ud'
+        about: 'Om'
+        search: 'Søg'
+        back_to_unread: 'Tilbage til de ulæste artikler'
+    top:
+        add_new_entry: 'Tilføj ny artikel'
+        search: 'Søg'
+        filter_entries: 'Filtrer artikler'
+    search_form:
+        input_label: 'Indtast søgning'
+
+footer:
+    wallabag:
+        about: 'Om'
+
+config:
+    page_title: 'Opsætning'
+    tab_menu:
+        settings: 'Indstillinger'
+        feed: 'RSS'
+        user_info: 'Brugeroplysninger'
+        password: 'Adgangskode'
+        new_user: 'Tilføj bruger'
+    form:
+        save: 'Gem'
+    form_settings:
+        theme_label: 'Tema'
+        items_per_page_label: 'Poster pr. side'
+        language_label: 'Sprog'
+        pocket_consumer_key_label: Brugers nøgle til Pocket for at importere materialer
+    form_feed:
+        description: 'RSS-feeds fra wallabag gør det muligt at læse de artikler, der gemmes i wallabag, med din RSS-læser. Det kræver, at du genererer et token først.'
+        token_label: 'RSS-Token'
+        no_token: 'Intet token'
+        token_create: 'Opret token'
+        token_reset: 'Nulstil token'
+        feed_links: 'RSS-Links'
+        feed_link:
+            unread: 'Ulæst'
+            starred: 'Favoritter'
+            archive: 'Arkiv'
+    form_user:
+        name_label: 'Navn'
+        email_label: 'Emailadresse'
+    form_password:
+        old_password_label: 'Gammel adgangskode'
+        new_password_label: 'Ny adgangskode'
+        repeat_new_password_label: 'Gentag adgangskode'
+entry:
+    list:
+        reading_time: 'estimeret læsetid'
+        reading_time_minutes: 'estimeret læsetid: %readingTime% min'
+        reading_time_less_one_minute: 'estimeret læsetid: &lt; 1 min'
+        reading_time_minutes_short: '%readingTime% min'
+        reading_time_less_one_minute_short: '&lt; 1 min'
+        original_article: 'original'
+        toogle_as_read: 'Marker som læst'
+        toogle_as_star: 'Skift favoritstatus'
+        delete: 'Slet'
+    filters:
+        title: 'Filtre'
+        status_label: 'Status'
+        archived_label: 'Arkiveret'
+        starred_label: 'Favorit'
+        unread_label: 'Ulæst'
+        preview_picture_label: 'Har et vist billede'
+        preview_picture_help: 'Forhåndsvis billede'
+        language_label: 'Sprog'
+        reading_time:
+            label: 'Læsetid i minutter'
+            from: 'fra'
+            to: 'til'
+        domain_label: 'Domænenavn'
+        created_at:
+            label: 'Oprettelsesdato'
+            from: 'fra'
+            to: 'til'
+        action:
+            clear: 'Ryd'
+            filter: 'Filter'
+    view:
+        left_menu:
+            back_to_homepage: 'Tilbage'
+            set_as_read: 'Marker som læst'
+            set_as_starred: 'Marker som favorit'
+            view_original_article: 'Originalartikel'
+            delete: 'Slet'
+            add_a_tag: 'Tliføj et tag'
+            share_content: 'Deling'
+            problem:
+                label: 'Problemer?'
+                description: 'Vises artiklen forkert?'
+        edit_title: 'Rediger titel'
+        original_article: 'original'
+        created_at: 'Oprettelsesdato'
+    new:
+        page_title: 'Gem ny artikel'
+        placeholder: 'https://website.dk'
+        form_new:
+            url_label: Url
+    edit:
+        url_label: 'Url'
+        save_label: 'Gem'
+about:
+    page_title: 'Om'
+    top_menu:
+        who_behind_wallabag: 'Hvem står bag wallabag'
+        getting_help: 'Find hjælp'
+        helping: 'Hjælp wallabag'
+        contributors: 'Bidragsydere'
+    who_behind_wallabag:
+        developped_by: 'Udviklet af'
+        website: 'Hjemmeside'
+        many_contributors: 'Og mange andre bidragsydere ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">på Github</a>'
+        project_website: 'Projektets hjemmeside'
+        license: 'Licens'
+        version: 'Version'
+    getting_help:
+        documentation: 'Dokumentation'
+        bug_reports: 'Bugs'
+        support: '<a href="https://github.com/wallabag/wallabag/issues">på GitHub</a>'
+    helping:
+        description: 'wallabag er gratis og Open source. Du kan hjælpe os:'
+        by_paypal: 'via Liberapay'
+    third_party:
+        license: 'Licens'
+howto:
+    page_title: 'KUow-to'
+    top_menu:
+        browser_addons: 'Browserudvidelser'
+        mobile_apps: 'Apps'
+        bookmarklet: 'Bookmarklet'
+    form:
+        description: 'Tak gennem denne formular'
+    browser_addons:
+        firefox: 'Standardudvidelse til Firefox'
+        chrome: 'Chrome-udvidelse'
+        opera: 'Opera-udvidelse'
+    mobile_apps:
+        android:
+            via_f_droid: 'via F-Droid'
+            via_google_play: 'via Google Play'
+    bookmarklet:
+        description: 'Træk dette link til din bogmærkeliste:'
+tag:
+    page_title: 'Tags'
+user:
+    form:
+        username_label: 'Brugernavn'
+        password_label: 'Adgangskode'
+        repeat_new_password_label: 'Gentag adgangskode'
+        plain_password_label: '????'
+        email_label: 'Emailadresse'
+flashes:
+    config:
+        notice:
+            config_saved: 'Opsætning gemt.'
+            password_updated: 'Adgangskode opdateret'
+            user_updated: 'Oplysninger opdateret'
+            feed_updated: 'RSS-oplysninger opdateret'
+    entry:
+        notice:
+            entry_archived: 'Artikel arkiveret'
+            entry_unarchived: 'Artikel ikke længere arkiveret'
+            entry_starred: 'Artikel markeret som favorit'
+            entry_unstarred: 'Artikel ikke længere markeret som favorit'
+            entry_deleted: 'Artikel slettet'

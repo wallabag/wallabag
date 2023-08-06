@@ -5,9 +5,9 @@ namespace Wallabag\ApiBundle\Controller;
 use Hateoas\Configuration\Route as HateoasRoute;
 use Hateoas\Representation\Factory\PagerfantaFactory;
 use Nelmio\ApiDocBundle\Annotation\Operation;
+use OpenApi\Annotations as OA;
 use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
-use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,34 +21,34 @@ class SearchRestController extends WallabagRestController
      * @Operation(
      *     tags={"Search"},
      *     summary="Search all entries by term.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="term",
-     *         in="body",
+     *         in="query",
      *         description="Any query term",
      *         required=false,
-     *         @SWG\Schema(type="string")
+     *         @OA\Schema(type="string")
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="page",
-     *         in="body",
+     *         in="query",
      *         description="what page you want.",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="integer",
      *             default=1
      *         )
      *     ),
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="perPage",
-     *         in="body",
+     *         in="query",
      *         description="results per page.",
      *         required=false,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="integer",
      *             default=30
      *         )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -58,7 +58,7 @@ class SearchRestController extends WallabagRestController
      *
      * @return JsonResponse
      */
-    public function getSearchAction(Request $request)
+    public function getSearchAction(Request $request, EntryRepository $entryRepository)
     {
         $this->validateAuthentication();
 
@@ -66,12 +66,11 @@ class SearchRestController extends WallabagRestController
         $page = (int) $request->query->get('page', 1);
         $perPage = (int) $request->query->get('perPage', 30);
 
-        $qb = $this->get(EntryRepository::class)
-            ->getBuilderForSearchByUser(
-                $this->getUser()->getId(),
-                $term,
-                null
-            );
+        $qb = $entryRepository->getBuilderForSearchByUser(
+            $this->getUser()->getId(),
+            $term,
+            null
+        );
 
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
         $pager = new Pagerfanta($pagerAdapter);

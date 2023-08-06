@@ -10,17 +10,17 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  */
 class Version20170420134133 extends WallabagMigration
 {
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
         $this->addSql('DELETE FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'download_pictures';");
     }
 
-    public function down(Schema $schema)
+    public function down(Schema $schema): void
     {
         $downloadPictures = $this->container
             ->get('doctrine.orm.default_entity_manager')
             ->getConnection()
-            ->fetchArray('SELECT * FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'download_pictures'");
+            ->fetchOne('SELECT * FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'download_pictures'");
 
         $this->skipIf(false !== $downloadPictures, 'It seems that you already played this migration.');
 

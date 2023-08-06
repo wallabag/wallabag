@@ -72,7 +72,7 @@ abstract class AbstractConsumer
             $this->em->flush();
 
             // entry saved, dispatch event about it!
-            $this->eventDispatcher->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+            $this->eventDispatcher->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
 
             // clear only affected entities
             $this->em->clear(Entry::class);

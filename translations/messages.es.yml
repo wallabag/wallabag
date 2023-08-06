@@ -1,0 +1,731 @@
+security:
+    login:
+        page_title: '¡Bienvenido a wallabag!'
+        keep_logged_in: 'Permanecer conectado'
+        forgot_password: '¿Ha olvidado su contraseña?'
+        submit: 'Conectarse'
+        register: 'Registrarse'
+        username: 'Nombre de usuario'
+        password: 'Contraseña'
+        cancel: 'Cancelar'
+    resetting:
+        description: "Introduzca su dirección de correo electrónico y le enviaremos las instrucciones para reiniciar la contraseña."
+    register:
+        page_title: 'Crear una cuenta'
+        go_to_account: 'Acceder su cuenta'
+menu:
+    left:
+        unread: 'Sin leer'
+        starred: 'Favoritos'
+        archive: 'Archivados'
+        all_articles: 'Todos los artículos'
+        config: 'Configuración'
+        tags: 'Etiquetas'
+        internal_settings: 'Configuración interna'
+        import: 'Importar'
+        howto: 'Ayuda'
+        developer: 'Configuración de clientes API'
+        logout: 'Desconectarse'
+        about: 'Acerca de'
+        search: 'Buscar'
+        save_link: 'Guardar un artículo'
+        back_to_unread: 'Volver a los artículos sin leer'
+        users_management: 'Configuración de usuarios'
+        site_credentials: Credenciales del sitio
+        quickstart: Inicio rápido
+        theme_toggle_auto: Tema automático
+        theme_toggle_dark: Tema oscuro
+        theme_toggle_light: Tema claro
+        ignore_origin_instance_rules: Ignorar las reglas de origen de forma global
+        with_annotations: Con anotaciones
+    top:
+        add_new_entry: 'Añadir un nuevo artículo'
+        search: 'Buscar'
+        filter_entries: 'Filtrar los artículos'
+        random_entry: 'Ir a un artículo aleatório de esta lista'
+        export: 'Exportar'
+        account: Mi cuenta
+    search_form:
+        input_label: 'Introduzca su búsqueda aquí'
+footer:
+    wallabag:
+        elsewhere: 'Lleva wallabag contigo'
+        social: 'Social'
+        powered_by: 'impulsado por'
+        about: 'Acerca de'
+    stats: Desde el %user_creation% has leído %nb_archives% artículos. ¡Eso son unos %per_day% por día!
+config:
+    page_title: 'Configuración'
+    tab_menu:
+        settings: 'Configuración'
+        feed: 'RSS'
+        user_info: 'Información de usuario'
+        password: 'Contraseña'
+        rules: 'Reglas de etiquetado'
+        new_user: 'Añadir un usuario'
+        reset: 'Reiniciar mi cuenta'
+        rss: RSS
+        ignore_origin: Ignorar reglas de origen
+    form:
+        save: 'Guardar'
+    form_settings:
+        items_per_page_label: 'Número de artículos por página'
+        language_label: 'Idioma'
+        reading_speed:
+            label: 'Velocidad de lectura (palabras por minuto)'
+            help_message: 'Puede utilizar herramientas en línea para calcular su velocidad de lectura:'
+            400_word: Leo ~400 palabras por minuto
+            300_word: Leo ~300 palabras por minuto
+            200_word: Leo ~200 palabras por minuto
+            100_word: Leo ~100 palabras por minuto
+        action_mark_as_read:
+            label: '¿Qué hacer después de eliminar, marcar como favorito o marcar un artículo como leído?'
+            redirect_homepage: 'Ir a la página de inicio'
+            redirect_current_page: 'Permanecer en la página actual'
+        pocket_consumer_key_label: Clave de consumidor para importar contenidos de Pocket
+        android_configuration: Configura tu aplicación Android
+        help_items_per_page: "Puedes cambiar el número de artículos mostrados en cada página."
+        help_reading_speed: "wallabag calcula un tiempo de lectura para cada artículo. Aquí puedes definir, gracias a esta lista, si eres un lector rápido o lento. wallabag recalculará el tiempo de lectura para cada artículo."
+        help_language: "Puedes cambiar el idioma de la interfaz de wallabag."
+        help_pocket_consumer_key: "Requerido para la importación desde Pocket. Puedes crearla en tu cuenta de Pocket."
+        android_instruction: Pulse aquí para completar tu aplicación Android
+    form_rss:
+        description: 'Los feeds RSS proporcionados por wallabag permiten leer los artículos guardados con su lector RSS favorito. Primero necesitas generar un token.'
+        token_label: 'Token RSS'
+        no_token: 'Sin token'
+        token_create: 'Crear un token'
+        token_reset: 'Reiniciar el token'
+        rss_links: 'URLs de feeds RSS'
+        rss_link:
+            unread: 'Sin leer'
+            starred: 'Favoritos'
+            archive: 'Archivados'
+            all: Todos
+        rss_limit: 'Número de artículos en el feed RSS'
+    form_user:
+        two_factor_description: "Activar la autenticación en dos pasos significa que recibirás un código por correo electrónico en cada nueva conexión que no sea de confianza."
+        name_label: 'Nombre'
+        email_label: 'Correo electrónico'
+        two_factor:
+            emailTwoFactor_label: 'Usando el correo electrónico (recibe un código por correo electrónico)'
+            googleTwoFactor_label: 'Usando una aplicación OTP (abre la aplicación, por ejemplo Google Authenticator, Authy o FreeOTP, para conseguir un código de utilización única)'
+            table_method: 'Método'
+            table_state: 'Estado'
+            table_action: 'Acción'
+            state_enabled: 'Activado'
+            state_disabled: 'Desactivado'
+            action_email: 'Usar correo electrónico'
+            action_app: 'Usar aplicación OTP'
+        delete:
+            title: Eliminar mi cuenta (zona peligrosa)
+            description: Si eliminas tu cuenta, TODOS tus artículos, TODAS tus etiquetas, TODAS tus anotaciones y tu cuenta serán eliminadas de forma PERMANENTE (no se puede DESHACER). Después serás desconectado.
+            confirm: ¿Estás completamente seguro? (NO SE PUEDE DESHACER)
+            button: Eliminar mi cuenta
+        help_twoFactorAuthentication: Si habilita la autenticación de dos factores (2FA), cada vez que desee iniciar sesión en wallabag, recibirá un código por correo electrónico.
+        twoFactorAuthentication_label: Autenticación de dos factores
+        login_label: Login (no puede ser cambiado)
+    reset:
+        title: Reiniciar mi cuenta (zona peligrosa)
+        description: Pulsando los botones de abajo puedes eliminar alguna información de tu cuenta. Ten en cuenta que estas acciones son IRREVERSIBLES.
+        annotations: Eliminar TODAS las anotaciones
+        tags: Eliminar TODAS las etiquetas
+        entries: Eliminar TODOS los artículos
+        archived: Eliminar TODOS los artículos archivados
+        confirm: ¿Estás completamente seguro? (NO SE PUEDE DESHACER)
+    form_password:
+        description: "Puedes cambiar la contraseña aquí. Tu nueva contraseña debe tener al menos 8 caracteres."
+        old_password_label: 'Contraseña actual'
+        new_password_label: 'Nueva contraseña'
+        repeat_new_password_label: 'Confirmar nueva contraseña'
+    form_rules:
+        if_label: 'si'
+        then_tag_as_label: 'etiquetar como'
+        delete_rule_label: 'borrar'
+        edit_rule_label: 'editar'
+        rule_label: 'Regla'
+        tags_label: 'Etiquetas'
+        card:
+            new_tagging_rule: Crear una regla de etiquetado
+            import_tagging_rules: Importar reglas de etiquetado
+            import_tagging_rules_detail: Debes seleccionar un archivo JSON exportado previamente.
+            export_tagging_rules: Exportar reglas de etiquetado
+            export_tagging_rules_detail: Un archivo JSON será descargado y este podrá ser utilizado para volver a importar las reglas de etiquetado o como copia de seguridad.
+        file_label: Archivo JSON
+        import_submit: Importar
+        export: Exportar
+        faq:
+            title: 'Preguntas frecuentes (FAQ)'
+            tagging_rules_definition_title: '¿Qué significa «reglas de etiquetado»?'
+            tagging_rules_definition_description: 'Son las reglas usadas por wallabag para etiquetar automáticamente los nuevos artículos.<br />Cada vez que un artículo es añadido, todas las reglas de etiquetado automático serán usadas para etiquetarlo, ayudándote a clasificar automáticamente tus artículos.'
+            how_to_use_them_title: '¿Cómo se utilizan?'
+            how_to_use_them_description: 'Supongamos que quiere etiquetar los artículos nuevos como « <i>lectura corta</i> » cuando el tiempo de lectura sea menos de 3 minutos.<br /> En este caso, debe poner « readingTime &lt;= 3 » en el campo <i>Regla</i> y « <i>lectura corta</i> » en el campo <i>Etiquetas</i>.<br />Se pueden añadir varias etiquetas al mismo tiempo separadas por comas: « <i>lectura corta, lectura obligada</i> »<br />Se pueden escribir reglas complejas utilizando los operadores predefinidos: si « <i>readingTime &gt;= 5 AND domainName = "www.php.net"</i> » entonces etiqueta como « <i>lectura larga, php</i> »'
+            variables_available_title: '¿Qué variables y operadores se pueden utilizar para escribir las reglas?'
+            variables_available_description: 'Las siguientes variables y operadores se pueden utilizar para crear reglas de etiquetado:'
+            meaning: 'Significado'
+            variable_description:
+                label: 'Variable'
+                title: 'Título del artículo'
+                url: 'URL del artículo'
+                isArchived: 'Si el artículo está archivado o no'
+                isStarred: 'Si el artículo está en favoritos o no'
+                content: "El contenido del artículo"
+                language: "El idioma del artículo"
+                mimetype: "El tipo MIME del artículo"
+                readingTime: "El tiempo estimado de lectura del artículo, en minutos"
+                domainName: 'El nombre de dominio del artículo'
+            operator_description:
+                label: 'Operador'
+                less_than: 'Menor que…'
+                strictly_less_than: 'Estrictamente menor que…'
+                greater_than: 'Mayor que…'
+                strictly_greater_than: 'Estrictamente mayor que…'
+                equal_to: 'Igual a…'
+                not_equal_to: 'Diferente de…'
+                or: 'Una regla U otra'
+                and: 'Una regla Y la otra'
+                matches: 'Prueba si un <i>sujeto</i> corresponde a una <i>búsqueda</i> (insensible a mayúsculas).<br />Ejemplo : <code>title matches "fútbol"</code>'
+                notmatches: 'Prueba si un <i>sujeto</i> no corresponde a una <i>búsqueda</i> (insensible a mayúsculas).<br />Ejemplo : <code>title notmatches "fútbol"</code>'
+    otp:
+        app:
+            cancel: Cancelar
+            enable: Habilitar
+            two_factor_code_description_2: 'Puedes escanear ese Código QR con tu applicación:'
+            qrcode_label: Código QR
+            two_factor_code_description_5: 'Si no puede ver el código QR o no puede escanearlo, ingrese el siguiente secreto en su aplicación:'
+            two_factor_code_description_1: Acaba de habilitar la autenticación de dos factores OTP, abra su aplicación OTP y use ese código para obtener una contraseña de un solo uso. Desaparecerá después de recargar la página.
+            two_factor_code_description_4: 'Pruebe un código OTP desde su aplicación configurada:'
+            two_factor_code_description_3: 'Además, guarde estos códigos de respaldo en un lugar seguro, puede usarlos en caso de que pierda el acceso a su aplicación OTP:'
+        page_title: Autenticación de doble factor
+    form_ignore_origin_rules:
+        faq:
+            operator_description:
+                equal_to: Igual a…
+                label: Operador
+                matches: 'Comprueba que un <i>asunto</i> coincide con una <i>búsqueda</i> (no distingue entre mayúsculas y minúsculas).<br />Ejemplo: <code>_all ~ "https?://rss.example.com/ foobar/.*"</code>'
+            variable_description:
+                label: Variable
+                host: Host de las dirección
+                _all: Dirección completa, principalmente para coincidencia de patrones
+            meaning: Significado
+            variables_available_title: ¿Qué variables y operadores se pueden utilizar para escribir las reglas?
+            how_to_use_them_title: ¿Cómo se utilizan?
+            title: Preguntas frecuentes (FAQ)
+            ignore_origin_rules_definition_title: ¿Qué significa "ignorar reglas de origen"?
+            how_to_use_them_description: Supongamos que desea ignorar el origen de un artículo procedente de « <i>rss.example.com</i> » (<i>sabiendo que después de la redirección, la dirección real es example.com</i>) .<br />En ese caso, debe poner « host = "rss.example.com" » en el campo <i>Regla</i>.
+            variables_available_description: 'Las siguientes variables y operadores se pueden usar para crear reglas de origen ignoradas:'
+            ignore_origin_rules_definition_description: Wallabag las utiliza para ignorar automáticamente una dirección de origen después de una redirección.<br />Si se produce una redirección mientras se obtiene un nuevo artículo, todas las reglas de origen ignoradas (<i>definidas por el usuario y por la instancia</i>) serán utilizadas para ignorar la dirección de origen.
+    form_feed:
+        feed_link:
+            all: Todos
+            archive: Archivados
+            starred: Favorito
+            unread: No leídos
+        token_reset: Regenerar tu token
+        token_create: Crear tu token
+        no_token: Sin token
+        feed_links: Enlaces del feed
+        token_label: Token del feed
+        token_revoke: Revocar el token
+        feed_limit: Número de artículos en el feed
+        description: Los feeds Atom proporcionados por wallabag le permiten leer sus artículos guardados con su lector Atom favorito. Primero debes generar un token.
+entry:
+    default_title: 'Título del artículo'
+    page_titles:
+        unread: 'Artículos no leídos'
+        starred: 'Artículos favoritos'
+        archived: 'Artículos archivados'
+        filtered: 'Artículos filtrados'
+        filtered_tags: 'Filtrado por etiquetas:'
+        filtered_search: 'Filtrado por búsqueda:'
+        untagged: 'Artículos sin etiquetas'
+        all: "Todos los artículos"
+        with_annotations: Artículos con anotaciones
+        same_domain: Mismo dominio
+    list:
+        number_on_the_page: '{0} No hay artículos.|{1} Hay un artículo.|]1,Inf[ Hay %count% artículos.'
+        reading_time: 'tiempo estimado de lectura'
+        reading_time_minutes: 'tiempo estimado de lectura: %readingTime% min'
+        reading_time_less_one_minute: 'tiempo estimado de lectura: &lt; 1 min'
+        number_of_tags: '{1}y una etiqueta más|]1,Inf[y %count% etiquetas más'
+        reading_time_minutes_short: '%readingTime% min'
+        reading_time_less_one_minute_short: '&lt; 1 min'
+        original_article: 'original'
+        toogle_as_read: 'Marcar como leído / no leído'
+        toogle_as_star: 'Marcar como favorito / no favorito'
+        delete: 'Eliminar'
+        export_title: 'Exportar'
+        assign_search_tag: Asigne esta búsqueda como una etiqueta a cada resultado
+        show_same_domain: Mostrar artículos con el mismo dominio
+        toggle_mass_action: Acción colectiva
+        mass_action_tags_input_placeholder: etiqueta1, etiqueta2, etiqueta3
+    filters:
+        title: 'Filtros'
+        status_label: 'Estado'
+        archived_label: 'Archivado'
+        starred_label: 'Favorito'
+        unread_label: 'Sin leer'
+        preview_picture_label: 'Tiene imagen de previsualización'
+        preview_picture_help: 'Imagen de previsualización'
+        language_label: 'Idioma'
+        http_status_label: 'Código de estado HTTP'
+        reading_time:
+            label: 'Tiempo de lectura en minutos'
+            from: 'de'
+            to: 'a'
+        domain_label: 'Nombre de dominio'
+        created_at:
+            label: 'Fecha de creación'
+            from: 'de'
+            to: 'a'
+        action:
+            clear: 'Limpiar'
+            filter: 'Filtrar'
+        is_public_help: Enlace público
+        is_public_label: Tiene un enlace público
+        annotated_label: Anotado
+    view:
+        left_menu:
+            back_to_top: 'Volver al principio'
+            back_to_homepage: 'Volver'
+            set_as_read: 'Marcar como leído'
+            set_as_unread: 'Marcar como no leído'
+            set_as_starred: 'Marcar como favorito'
+            view_original_article: 'Artículo original'
+            re_fetch_content: 'Redescargar el contenido'
+            delete: 'Eliminar'
+            add_a_tag: 'Añadir una etiqueta'
+            share_content: 'Compartir'
+            share_email_label: 'Correo electrónico'
+            public_link: 'enlace público'
+            delete_public_link: 'eliminar enlace público'
+            export: 'Exportar'
+            print: 'Imprimir'
+            problem:
+                label: '¿Algún problema?'
+                description: '¿Este artículo no se muestra bien?'
+            theme_toggle_auto: Automático
+            theme_toggle_dark: Oscuro
+            theme_toggle_light: Claro
+            theme_toggle: Alternar tema
+        edit_title: 'Modificar el título'
+        original_article: 'original'
+        annotations_on_the_entry: '{0} Sin anotaciones|{1} Una anotación|]1,Inf[ %count% anotaciones'
+        created_at: 'Fecha de creación'
+        provided_by: Proporcionado por
+        published_by: Publicado por
+        published_at: Fecha de publicación
+    new:
+        page_title: 'Guardar un nuevo artículo'
+        placeholder: 'https://sitioweb.es'
+        form_new:
+            url_label: URL
+    search:
+        placeholder: '¿Qué estás buscando?'
+    edit:
+        page_title: 'Editar un artículo'
+        title_label: 'Título'
+        url_label: 'URL'
+        save_label: 'Guardar'
+        origin_url_label: URL original (de donde encontraste el artículo)
+    public:
+        shared_by_wallabag: "Este artículo ha sido compartido por %username% con <a href='%wallabag_instance%'>wallabag</a>"
+    confirm:
+        delete_tag: ¿Estás seguro de que deseas eliminar la etiqueta de este artículo?
+        delete: ¿Seguro que quieres eliminar este artículo?
+        delete_entries: ¿Está seguro de que desea eliminar estos artículos?
+    metadata:
+        added_on: Añadido el
+        address: Dirección
+        reading_time_minutes_short: '%readingTime% min'
+        reading_time: Tiempo estimado de lectura
+        published_on: Publicado en
+about:
+    page_title: 'Acerca de'
+    top_menu:
+        who_behind_wallabag: 'Quién está detrás de wallabag'
+        getting_help: 'Solicitar ayuda'
+        helping: 'Ayudar a wallabag'
+        contributors: 'Colaboradores'
+        third_party: 'Bibliotecas de terceros'
+    who_behind_wallabag:
+        developped_by: 'Desarrollado por'
+        website: 'sitio web'
+        many_contributors: 'Y otros muchos colaboradores ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">en Github</a>'
+        project_website: 'Sitio web del proyecto'
+        license: 'Licencia'
+        version: 'Versión'
+    getting_help:
+        documentation: 'Documentación'
+        bug_reports: 'Informes de error'
+        support: '<a href="https://github.com/wallabag/wallabag/issues">en GitHub</a>'
+    helping:
+        description: 'wallabag es software libre y gratuito. Usted puede ayudarnos:'
+        by_paypal: 'vía Liberapay'
+    contributors:
+        description: 'Gracias a los colaboradores de la aplicación web de wallabag'
+    third_party:
+        description: 'Aquí está la lista de bibliotecas de terceros utilizadas por wallabag (con sus licencias):'
+        package: 'Paquete'
+        license: 'Licencia'
+howto:
+    page_title: 'Ayuda'
+    tab_menu:
+        add_link: "Añadir un enlace"
+        shortcuts: "Utilizar atajos de teclado"
+    page_description: 'Hay muchas maneras de guardar un artículo:'
+    top_menu:
+        browser_addons: 'Extensiones de navegador'
+        mobile_apps: 'Aplicaciones para smartphone'
+        bookmarklet: 'Bookmarklet'
+    form:
+        description: 'Gracias a este formulario'
+    browser_addons:
+        firefox: 'Extensión para Firefox'
+        chrome: 'Extensión para Chrome'
+        opera: 'Extensión para Opera'
+    mobile_apps:
+        android:
+            via_f_droid: 'en F-Droid'
+            via_google_play: 'en Google Play'
+        ios: 'en la tienda de iTunes'
+        windows: 'en la tienda de Microsoft'
+    bookmarklet:
+        description: 'Arrastra y suelta este enlace en la barra de marcadores:'
+    shortcuts:
+        page_description: Estos son los atajos de teclado disponibles en wallabag.
+        shortcut: Atajo de teclado
+        action: Acción
+        all_pages_title: Atajos de teclado disponibles en todas las páginas
+        go_unread: Ir a sin leer
+        go_starred: Ir a favoritos
+        go_archive: Ir a archivados
+        go_all: Ir a todos los artículos
+        go_tags: Ir a etiquetas
+        go_config: Ir a configuración
+        go_import: Ir a importar
+        go_developers: Ir a desarrolladores
+        go_howto: Ir a ayuda (esta página)
+        go_logout: Desconectar
+        list_title: Atajos de teclado disponibles en las páginas de listados
+        search: Mostrar el formulario de búsqueda
+        article_title: Atajos de teclado disponibles en el artículo
+        open_original: Abrir la URL original de un artículo
+        toggle_favorite: Marcar como favorito / no favorito el artículo
+        toggle_archive: Marcar como leído / no leído el artículo
+        delete: Borrar el artículo
+        add_link: Añadir un nuevo artículo
+        hide_form: Ocultar el formulario actual (búsqueda o nuevo artículo)
+        arrows_navigation: Navegar por los artículos
+        open_article: Mostrar el artículo seleccionado
+quickstart:
+    page_title: 'Inicio rápido'
+    more: 'Más…'
+    intro:
+        title: '¡Bienvenido a wallabag!'
+        paragraph_1: "Le acompañaremos en su visita a wallabag y le mostraremos algunas características que le pueden interesar."
+        paragraph_2: '¡Síguenos!'
+    configure:
+        title: 'Configure la aplicación'
+        description: 'Para que la aplicación se ajuste a tus necesidades, echa un vistazo a la configuración de wallabag.'
+        language: 'Cambie el idioma y el diseño'
+        feed: 'Activar los feeds RSS'
+        tagging_rules: 'Escribe reglas para etiquetar automáticamente tus artículos'
+        rss: Habilitar canales RSS
+    admin:
+        title: 'Administración'
+        description: 'Como administrador, tienes algunos privilegios en wallabag. Puedes:'
+        new_user: 'Crear un nuevo usuario'
+        analytics: 'Configurar analíticas'
+        sharing: 'Activar algunos parámetros para compartir artículos'
+        export: 'Configurar la exportación'
+        import: 'Configurar la importación'
+    first_steps:
+        title: 'Primeros pasos'
+        description: "Ahora que wallabag está bien configurado, es el momento de archivar la web. Puedes hacer clic en el signo + de la parte superior derecha para añadir un artículo."
+        new_article: 'Guarda tu primer artículo'
+        unread_articles: '¡Y clasifícalo!'
+    migrate:
+        title: 'Migrar desde un servicio existente'
+        description: "¿Estás usando otro servicio? Le ayudaremos a migrar sus datos a wallabag."
+        pocket: 'Migrar desde Pocket'
+        wallabag_v1: 'Migrar desde wallabag v1'
+        wallabag_v2: 'Migrar desde wallabag v2'
+        readability: 'Migrar desde Readability'
+        instapaper: 'Migrar desde Instapaper'
+    developer:
+        title: 'Desarrolladores'
+        description: 'Nosotros también pensamos en los desarrolladores: Docker, API, traducciones, etc.'
+        create_application: 'Crear tu aplicación de terceros'
+        use_docker: 'Utilice Docker para instalar wallabag'
+    docs:
+        title: 'Documentación completa'
+        description: "Hay muchas funcionalidades en wallabag. No dudes en leer el manual para conocerlas y aprender a utilizarlas."
+        annotate: 'Anotar en un artículo'
+        export: 'Convertir tus artículos a ePUB o PDF'
+        search_filters: 'Aprender a utilizar el buscador y los filtros para encontrar artículos'
+        fetching_errors: '¿Qué puedo hacer si se encuentran errores mientras se descarga un artículo?'
+        all_docs: '¡Y muchos más artículos!'
+    support:
+        title: 'Soporte'
+        description: 'Si necesitas ayuda, estamos a tu disposición.'
+        github: 'En GitHub'
+        email: 'Por correo electrónico'
+        gitter: 'En Gitter'
+tag:
+    page_title: 'Etiquetas'
+    list:
+        number_on_the_page: '{0} No hay ninguna etiqueta.|{1} Hay una etiqueta.|]1,Inf[ Hay %count% etiquetas.'
+        see_untagged_entries: 'Ver artículos sin etiquetas'
+        no_untagged_entries: 'No hay artículos sin etiquetas.'
+        untagged: 'Artículos sin etiquetas'
+    new:
+        add: 'Añadir'
+        placeholder: 'Puedes añadir varias etiquetas, separadas por comas.'
+    confirm:
+        delete: Eliminar la etiqueta %name%
+import:
+    page_title: 'Importar'
+    page_description: 'Bienvenido a la herramienta de importación de wallabag. Seleccione el servicio desde el que desea migrar.'
+    action:
+        import_contents: 'Importar los contenidos'
+    form:
+        mark_as_read_title: '¿Marcar todos como leídos?'
+        mark_as_read_label: 'Marcar todos los artículos importados como leídos'
+        file_label: 'Archivo'
+        save_label: 'Subir el archivo'
+    pocket:
+        page_title: 'Importar > Pocket'
+        description: "Importa todos tus datos de Pocket. Pocket no nos permite descargar el contenido desde su servicio, de manera que el contenido de cada artículo será redescargado por wallabag."
+        config_missing:
+            description: "La importación de Pocket no está configurada."
+            admin_message: 'Debe definir %keyurls%una clave de consumidor en Pocket%keyurle%.'
+            user_message: 'El administrador de su servidor debe definir una clave del API Pocket.'
+        authorize_message: 'Puede importar sus datos desde su cuenta de Pocket. Sólo tiene que hacer clic el botón para autorizar que wallabag se conecte a getpocket.com.'
+        connect_to_pocket: 'Conectarse a Pocket e importar los datos'
+    wallabag_v1:
+        page_title: 'Importar > Wallabag v1'
+        description: 'Importa todos tus artículos de wallabag v1. En la configuración de wallabag v1, haga clic en "Exportar JSON" dentro de la sección "Exportar datos de wallabag". Obtendrás un archivo llamado "wallabag-export-1-xxxx-xx-xx.json".'
+        how_to: 'Seleccione el archivo exportado de wallabag v1 y haga clic en el botón para subirlo e importarlo.'
+    wallabag_v2:
+        page_title: 'Importar > Wallabag v2'
+        description: 'Importa todos tus artículos de wallabag v2. En la sección Todos los artículos, en la barra lateral, haga clic en "JSON". Obtendrás un archivo llamado "All articles.json".'
+    readability:
+        page_title: 'Importar > Readability'
+        description: 'Importa todos tus artículos de Readability. En la página de herramientas (https://www.readability.com/tools/), haga clic en «Exportar tus datos» en la sección «Exportar datos». Recibirás un correo electrónico para descargar un JSON (aunque no tiene extensión .json).'
+        how_to: 'Seleccione el archivo exportado de Readability y haga clic en el botón para subirlo e importarlo.'
+    worker:
+        enabled: "La importación se realiza de forma asíncrona. Una vez que la tarea de importación ha comenzado, un trabajador externo se encargará de procesar los artículos uno a uno. El servicio actual es:"
+        download_images_warning: "Tienes activado la descarga de imágenes de los artículos. Esto junto con la importación clásica de artículos puede tardar mucho tiempo en ser procesado (o incluso fallar). <strong>Recomendamos encarecidamente</strong> habilitar la importación asíncrona para evitar errores."
+    firefox:
+        page_title: 'Importar > Firefox'
+        description: "Importa todos tus marcadores de Firefox. En la ventana de marcadores (Ctrl+Mayus+O), en \"Importar y respaldar\", elige \"Copiar…\". Obtendrás un archivo JSON."
+        how_to: "Seleccione el archivo exportado de Firefox y haga clic en el botón para importarlo. Tenga en cuenta que este proceso puede tardar ya que se tienen que descargar todos los artículos."
+    chrome:
+        page_title: 'Importar > Chrome'
+        description: "Importa todos tus marcadores de Chrome. La ubicación del archivo depende de tu sistema operativo : <ul><li>En Linux, <code>~/.config/chromium/Default/</code></li><li>En Windows, <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>En OS X, <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Una vez estés en ese directorio, copia el archivo <code>Bookmarks</code> (favoritos) en algún sitio fácil de encontrar.<em><br>Ten en cuenta que si utilizas Chromium en vez de Chrome, la ubicación del archivo es distinta.</em></p>"
+        how_to: "Seleccione el archivo exportado de Chrome y haga clic en el botón para importarlo. Tenga en cuenta que este proceso puede tardar ya que se tienen que descargar todos los artículos."
+    instapaper:
+        page_title: 'Importar > Instapaper'
+        description: 'Importa todos tus artículos de Instapaper. En la página de preferencias (https://www.instapaper.com/user), haz clic en "Descargar archivo .CSV" en la sección "Exportar". Obtendrás un archivo CSV llamado "instapaper-export.csv".'
+        how_to: 'Seleccione el archivo exportado de Instapaper y haga clic en el botón para importarlo.'
+    pinboard:
+        page_title: "Importar > Pinboard"
+        description: 'Importa todos tus artículos de Pinboard. En la página de backup (https://pinboard.in/settings/backup), haz clic en "JSON" en la sección "Marcadores". Obtendrás un archivo JSON llamado "pinboard_export".'
+        how_to: 'Seleccione el archivo exportado de Pinboard y haga clic en el botón para importarlo.'
+    elcurator:
+        description: Importa todos tus artículos de elCurator. Ve a la página de preferencias en tu cuenta de elCurator y exporta tu contenido. Obtendrás un fichero JSON.
+        page_title: Importar > elCurator
+    delicious:
+        page_title: Importar > del.icio.us
+        description: Importa todos tus artículos de Delicious. Desde 2021 puedes exportar tus datos de nuevo utilizando la página de exportación (https://del.icio.us/export). Elige el formato "JSON" y descárgalo (por ejemplo "delicious_export.2021.02.06_21.10.json").
+        how_to: Seleccione el archivo exportado de Delicious y haga clic en el botón para importarlo.
+developer:
+    page_title: 'Gestión de clientes API'
+    welcome_message: 'Bienvenido al API de wallabag'
+    documentation: 'Documentación'
+    how_to_first_app: 'Cómo crear mi primera aplicación'
+    full_documentation: 'Ver documentación completa del API'
+    list_methods: 'Lista con los métodos del API'
+    clients:
+        title: 'Clientes'
+        create_new: 'Crear un nuevo cliente'
+    existing_clients:
+        title: 'Clientes existentes'
+        field_id: 'Identificador del cliente'
+        field_secret: 'Secreto del cliente'
+        field_uris: 'URIs de redirección'
+        field_grant_types: 'Permisos concedidos'
+        no_client: 'Todavía no hay clientes.'
+    remove:
+        warn_message_1: 'Tienes permiso para eliminar el cliente %name%. ¡Está acción es IRREVERSIBLE!'
+        warn_message_2: "Si lo eliminas, cada aplicación configurada con ese cliente no podrá autenticarse en wallabag."
+        action: 'Eliminar el cliente %name%'
+    client:
+        page_title: 'Gestión de clientes API > Nuevo cliente'
+        page_description: 'Está a punto de crear un nuevo cliente. Por favor, rellene el campo de abajo con la URI de redirección de su aplicación.'
+        form:
+            name_label: 'Nombre del cliente'
+            redirect_uris_label: 'URIs de redirección (opcional)'
+            save_label: 'Crear un nuevo cliente'
+        action_back: 'Volver'
+        copy_to_clipboard: 'Copiar'
+    client_parameter:
+        page_title: 'Gestión de clientes API > Parámetros del cliente'
+        page_description: 'Aquí están los parámetros del cliente.'
+        field_name: 'Nombre del cliente'
+        field_id: 'Identificador del cliente'
+        field_secret: 'Secreto del cliente'
+        back: 'Volver'
+        read_howto: 'Lea la guía "Crear mi primera aplicación"'
+    howto:
+        page_title: 'Gestión de clientes API > Cómo crear mi primera aplicación'
+        description:
+            paragraph_1: 'Los siguientes comandos hacen uso de la <a href="https://github.com/jkbrzt/httpie">biblioteca HTTPie</a>. Comprueba que está instalada en tu sistema antes de usarla.'
+            paragraph_2: 'Necesitas un token para establecer la comunicación entre una aplicación de terceros y la API de wallabag.'
+            paragraph_3: 'Para crear este token, necesitas <a href="%link%">crear un nuevo cliente</a>.'
+            paragraph_4: 'Ahora crea tu token (reemplace client_id, client_secret, username y password con los valores generados):'
+            paragraph_5: 'El API devolverá una respuesta como esta:'
+            paragraph_6: 'El access_token es útil para llamar a los métodos del API. Por ejemplo:'
+            paragraph_7: 'Esta llamada devolverá todos los artículos de tu usuario.'
+            paragraph_8: 'Si quieres ver todos los métodos del API, puedes verlos en <a href="%link%">nuestra documentación del API</a>.'
+        back: 'Volver'
+user:
+    page_title: Gestión de usuarios
+    new_user: Crear un nuevo usuario
+    edit_user: Editar un usuario existente
+    description: "Aquí puedes gestionar todos los usuarios (crear, editar y eliminar)"
+    list:
+        actions: Acciones
+        edit_action: Editar
+        yes: Sí
+        no: No
+        create_new_one: Crear un nuevo usuario
+    form:
+        username_label: 'Nombre de usuario'
+        name_label: 'Nombre'
+        password_label: 'Contraseña'
+        repeat_new_password_label: 'Confirmar la contraseña'
+        plain_password_label: '????'
+        email_label: 'Correo electrónico'
+        enabled_label: 'Activado'
+        last_login_label: 'Último inicio de sesión'
+        twofactor_email_label: 'Autenticación de dos pasos por correo electrónico'
+        twofactor_google_label: 'Autenticación de dos pasos por aplicación OTP'
+        save: Guardar
+        delete: Eliminar
+        delete_confirm: ¿Estás seguro?
+        back_to_list: Volver a la lista
+        twofactor_label: Autenticación de dos factores
+    search:
+        placeholder: Filtrar por nombre de usuario o correo electrónico
+site_credential:
+    form:
+        back_to_list: Volver
+        delete_confirm: ¿Estás seguro?
+        delete: Eliminar
+        save: Guardar
+        password_label: Contraseña
+        host_label: Host
+        username_label: Nombre de usuario
+    list:
+        create_new_one: Crea una nueva credencial
+        no: No
+        yes: Sí
+        edit_action: Editar
+        actions: Acciones
+    description: Aquí puede administrar todas las credenciales de los sitios que la requieran (crear, editar y eliminar), como un muro de pago, una autenticación, etc.
+    edit_site_credential: Editar una credencial existente
+    new_site_credential: Crea una credencial
+    page_title: Gestión de credenciales del sitio
+error:
+    page_title: Ha ocurrido un error
+flashes:
+    config:
+        notice:
+            config_saved: 'Configuración guardada.'
+            password_updated: 'Contraseña actualizada'
+            password_not_updated_demo: "En el modo demo, no puedes cambiar la contraseña del usuario."
+            user_updated: 'Información actualizada'
+            feed_updated: 'Configuración RSS actualizada'
+            tagging_rules_updated: 'Regla de etiquetado actualizada'
+            tagging_rules_deleted: 'Regla de etiquetado eliminada'
+            feed_token_updated: 'Token RSS actualizado'
+            feed_token_revoked: 'Token RSS revocado'
+            annotations_reset: Anotaciones reiniciadas
+            tags_reset: Etiquetas reiniciadas
+            entries_reset: Artículos reiniciados
+            archived_reset: Artículos archivados eliminados
+            rss_token_updated: Token RSS actualizado
+            rss_updated: Información RSS actualizada
+            otp_disabled: Autenticación de doble factor deshabilitada
+            otp_enabled: Autenticación de doble factor habilitada
+            tagging_rules_imported: Reglas de etiquetado importadas
+            tagging_rules_not_imported: Error durante la importación de las reglas de etiquetado
+            ignore_origin_rules_deleted: Regla de origen ignorado eliminada
+            ignore_origin_rules_updated: Regla de origen ignorado actualizada
+    entry:
+        notice:
+            entry_already_saved: 'Artículo ya guardado el %fecha%'
+            entry_saved: 'Artículo guardado'
+            entry_saved_failed: 'Artículo guardado pero falló la descarga del contenido'
+            entry_updated: 'Artículo actualizado'
+            entry_reloaded: 'Artículo redescargado'
+            entry_reloaded_failed: 'Artículo redescargado pero falló la descarga del contenido'
+            entry_archived: 'Artículo archivado'
+            entry_unarchived: 'Artículo desarchivado'
+            entry_starred: 'Artículo marcado como favorito'
+            entry_unstarred: 'Artículo desmarcado como favorito'
+            entry_deleted: 'Artículo eliminado'
+            no_random_entry: 'Ningún artículo con esos criterios fue encontrado'
+    tag:
+        notice:
+            tag_added: 'Etiqueta añadida'
+            tag_renamed: 'Etiqueta renombrada'
+    import:
+        notice:
+            failed: 'Importación fallida, por favor, inténtelo de nuevo.'
+            failed_on_file: 'Ocurrió un error al procesar la importación. Por favor, verifique el archivo importado.'
+            summary: 'Resumen de la importación: %imported% importados, %skipped% ya guardados.'
+            summary_with_queue: 'Resumen de la importación: %queued% encolados.'
+        error:
+            redis_enabled_not_installed: Redis está activado para gestionar la importación asíncrona pero parece que <u>no se puede conectar</u>. Por favor, comprueba la configuración de Redis.
+            rabbit_enabled_not_installed: RabbitMQ está activado para gestionar la importación asíncrona pero parece que <u>no se puede conectar</u>. Por favor, comprueba la configuración de RabbitMQ.
+    developer:
+        notice:
+            client_created: 'El cliente %name% ha sido creado.'
+            client_deleted: 'El cliente %name% ha sido eliminado'
+    user:
+        notice:
+            added: 'El usuario "%username%" ha sido añadido'
+            updated: 'El usuario "%username%" ha sido actualizado'
+            deleted: 'El usuario "%username%" ha sido eliminado'
+    site_credential:
+        notice:
+            deleted: Eliminada credencial del sitio para "%host%"
+            updated: Actualizada credencial del sitio para "%host%"
+            added: Añadida credencial del sitio para "%host%"
+    ignore_origin_instance_rule:
+        notice:
+            added: Regla de origen ignorado global añadida
+            updated: Regla de origen ignorado global actualizada
+            deleted: Regla de origen ignorado global eliminada
+export:
+    unknown: Desconocido
+    footer_template: <div style="text-align:center;"><p>Producido por wallabag con %method%</p><p>Por favor, abre <a href="https://github.com/wallabag/wallabag/issues">un issue</a> si tiene problemas con la visualización de este libro electrónico en su dispositivo.</p></div>
+ignore_origin_instance_rule:
+    form:
+        back_to_list: Volver a la lista
+        delete_confirm: ¿Estás seguro?
+        delete: Eliminar
+        save: Guardar
+        rule_label: Regla
+    list:
+        no: No
+        yes: Sí
+        edit_action: Editar
+        actions: Acciones
+        create_new_one: Crear una nueva regla de origen ignorada global
+    edit_ignore_origin_instance_rule: Editar una regla de origen ignorada global
+    page_title: Reglas de origen ignoradas globales
+    new_ignore_origin_instance_rule: Crear una regla de origen ignorada global
+    description: Aquí puede administrar las reglas de origen ignoradas globales utilizadas para ignorar algunos patrones de la URL de origen.

@@ -8,6 +8,10 @@ framework:
     profiler:
         only_exceptions: false
 
+    mailer:
+        # see https://mailcatcher.me/
+        dsn: smtp://127.0.0.1:1025
+
 web_profiler:
     toolbar: true
     intercept_redirects: false
@@ -34,12 +38,6 @@ monolog:
                 VERBOSITY_VERY_VERBOSE: NOTICE
                 VERBOSITY_DEBUG: DEBUG
             channels: [doctrine]
-
-swiftmailer:
-    # see https://mailcatcher.me/
-    transport: smtp
-    host: 'localhost'
-    port: 1025
 
 # If you want to use cache for queries used in WallabagExtension
 # Uncomment the following lines

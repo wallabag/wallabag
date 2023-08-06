@@ -1,0 +1,731 @@
+security:
+    login:
+        page_title: '欢迎来到 wallabag！'
+        keep_logged_in: '保持登入状态'
+        forgot_password: '不记得密码？'
+        submit: '登录'
+        register: '注册'
+        username: '用户名'
+        password: '密码'
+        cancel: '取消'
+    resetting:
+        description: "请在下方输入你的邮箱地址，我们会向你发送关于重设密码的指示。"
+    register:
+        page_title: '创建一个新账户'
+        go_to_account: '前往你的账户'
+menu:
+    left:
+        unread: '未读'
+        starred: '收藏'
+        archive: '存档'
+        all_articles: '所有项目'
+        config: '配置'
+        tags: '标签'
+        internal_settings: '内部设置'
+        import: '导入'
+        howto: '教程'
+        developer: 'API 客户端管理'
+        logout: '登出'
+        about: '关于'
+        search: '搜索'
+        save_link: '保存链接'
+        back_to_unread: '回到未读项目'
+        users_management: '用户管理'
+        site_credentials: '网站凭证'
+        quickstart: "快速开始"
+        ignore_origin_instance_rules: 全局性忽略来源规则
+        theme_toggle_auto: 自动根据系统设置应用主题
+        theme_toggle_dark: 深色主题
+        theme_toggle_light: 浅色主题
+        with_annotations: 带注释
+    top:
+        add_new_entry: '添加新项目'
+        search: '搜索'
+        filter_entries: '筛选项目'
+        random_entry: '随机跳到该列表中的一个项目'
+        export: '导出'
+        account: 我的帐户
+    search_form:
+        input_label: '输入搜索关键词'
+footer:
+    wallabag:
+        elsewhere: '将 wallabag 随身携带'
+        social: '社交'
+        powered_by: '运行于'
+        about: '关于'
+    stats: '自从 %user_creation% 以来你已经读了 %nb_archives% 篇文章。 这相当于每天 %per_day% 篇！'
+config:
+    page_title: '配置'
+    tab_menu:
+        settings: '设置'
+        feed: '订阅源'
+        user_info: '用户信息'
+        password: '密码'
+        rules: '标签规则'
+        new_user: '添加用户'
+        reset: '重置区域'
+        rss: RSS
+        ignore_origin: 忽略来源规则
+    form:
+        save: '保存'
+    form_settings:
+        items_per_page_label: '每页项目数'
+        language_label: '语言'
+        reading_speed:
+            label: '阅读速度（词 / 每分钟）'
+            help_message: '你可以使用在线工具来估计自己的阅读速度：'
+            400_word: 我每分钟能读大概 400 个单词
+            300_word: 我每分钟能读大概 300 个单词
+            200_word: 我每分钟能读大概 200 个单词
+            100_word: 我每分钟能读大概 100 个单词
+        action_mark_as_read:
+            label: '将一个项目删除、收藏或是标记为已读后该做什么？'
+            redirect_homepage: '返回主页'
+            redirect_current_page: '停留在当前页面'
+        pocket_consumer_key_label: '用于从 Pocket 导入内容的 Consumer key'
+        android_configuration: '配置你的 Android 应用程序'
+        android_instruction: "点按此处以预填充你的 Android 应用"
+        help_items_per_page: "你可以选择每页显示的文章数目。"
+        help_reading_speed: "wallabag 会为每篇文章计算阅读时间，你可以通过这个列表选择自己是个速读者或是慢读者。wallabag 会根据你的选择重新计算每篇文章的阅读时间。"
+        help_language: "你可以在此处更改 wallabag 的界面语言。"
+        help_pocket_consumer_key: "导入 Pocket 项目时需要用到。你可以在自己的 Pocket 账户中创建。"
+    form_feed:
+        description: 'wallabag 提供的 Atom 订阅源能方便你在最喜欢的 RSS 阅读器上阅读自己保存的文章，为此你需要先生成一个令牌。'
+        token_label: '订阅源令牌'
+        no_token: '无令牌'
+        token_create: '创建令牌'
+        token_reset: '重新生成令牌'
+        token_revoke: '撤销令牌'
+        feed_links: '订阅源链接'
+        feed_link:
+            unread: '未读'
+            starred: '收藏'
+            archive: '存档'
+            all: '所有'
+        feed_limit: '订阅源包含的最大项目数'
+    form_user:
+        two_factor_description: "开启两步验证后，在每次进行新的未信任登录时，你都需要通过邮件或者 OTP（动态密码）应用（比如 Google Authenticator，Authy 或者 FreeOTP）来获取一次性登录码。你不能同时选择两项。"
+        login_label: '用户名（无法更改）'
+        name_label: '昵称'
+        email_label: '邮箱'
+        two_factor:
+            emailTwoFactor_label: '使用邮箱（通过邮箱收取登录代码）'
+            googleTwoFactor_label: '使用 OTP（动态密码）应用（通过打开像 Google Authenticator，Authy 或者 FreeOTP 等应用，来获取一次性动态密码)'
+            table_method: '方式'
+            table_state: '状态'
+            table_action: '操作'
+            state_enabled: '启用'
+            state_disabled: '停用'
+            action_email: '使用邮件'
+            action_app: '使用 OTP 应用'
+        delete:
+            title: '删除我的账号（危险区域)'
+            description: '如果你删除你的账号，你的所有文章、标签以及账号本身都会被永久性删除（且无法撤销），然后你将会被登出。'
+            confirm: '你真的确定的吗？（这不能被撤销）'
+            button: '删除我的账号'
+        help_twoFactorAuthentication: 如果你启用双因素认证，每次你想登录到wallabag，你会通过电子邮件收到一个代码。
+        twoFactorAuthentication_label: 双因素认证
+    reset:
+        title: '重置区（危险区域）'
+        description: '一旦你点击这个按钮，你就可以移除你账号中的某些信息。请注意这些操作是不可撤销的。'
+        annotations: "删除所有标注"
+        tags: "删除所有标签"
+        entries: "删除所有项目"
+        archived: "删除所有已存档项目"
+        confirm: '你真的确定的吗？（这不能被撤销）'
+    form_password:
+        description: "你可以在此更改你的密码，你的新密码至少应包含 8 个字符."
+        old_password_label: '现有密码'
+        new_password_label: '新密码'
+        repeat_new_password_label: '重新输入新密码'
+    form_rules:
+        if_label: '如果'
+        then_tag_as_label: '那么打上标签'
+        delete_rule_label: '删除'
+        edit_rule_label: '编辑'
+        rule_label: '规则'
+        tags_label: '标签'
+        card:
+            new_tagging_rule: "创建新的标签规则"
+            import_tagging_rules: "导入标签规则"
+            import_tagging_rules_detail: "你需要选择你之前导出的 JSON 文件。"
+            export_tagging_rules: "导出标签规则"
+            export_tagging_rules_detail: "提供一个 JSON 文件供你下载，可以在别处导入或是用做备份。"
+        file_label: "JSON 文件"
+        import_submit: "导入"
+        export: "导出"
+        faq:
+            title: '常见问题'
+            tagging_rules_definition_title: '“标签规则”是什么意思？'
+            tagging_rules_definition_description: '它们是 wallabag 用来给新项目自动打上标签的规则。<br />每当一个新项目被添加进来，所有标签规则都会作用于这个项目，为它打上你配置好的标签，免去你手动分类的麻烦。'
+            how_to_use_them_title: '我该怎么使用它们？'
+            how_to_use_them_description: '假设你想要将一个阅读时间短于 3 分钟的新项目标记为“ <i>短阅读</i> ”。<br /> 你应该在 <i>规则</i> 区域输入“readingTime &lt;= 3”，并在 <i>标签</i> 区域输入“<i>短阅读</i>”。<br /> 可以同时添加数个标签，只需要用半角逗号来隔开它们，如：“<i>短阅读, 必读</i>”<br /> 可以使用预定义的操作符来编写复杂的规则，如：如果“ <i>readingTime &gt;= 5 AND domainName ="www.php.net"</i>”则标记为“<i>长阅读, php</i>”'
+            variables_available_title: '我可以使用哪些变量和操作符来编写规则？'
+            variables_available_description: '可以使用以下变量和操作符来编写标签规则：'
+            meaning: '含义'
+            variable_description:
+                label: '变量'
+                title: '项目的标题'
+                url: '项目的链接'
+                isArchived: '项目是否已存档'
+                isStarred: '项目是否已收藏'
+                content: "项目的内容"
+                language: "项目所用语言"
+                mimetype: "项目的互联网媒体类型（mime-type）"
+                readingTime: "项目的预计阅读时间，以分钟为单位"
+                domainName: '项目链接的域名'
+            operator_description:
+                label: '操作符'
+                less_than: '小于等于…'
+                strictly_less_than: '小于…'
+                greater_than: '大于等于…'
+                strictly_greater_than: '大于…'
+                equal_to: '等于…'
+                not_equal_to: '不等于…'
+                or: '“或”操作符'
+                and: '“与”操作符'
+                matches: '当一个<i>域</i>匹配一个<i>搜索模式</i>时为真（不区分大小写）。<br />举例：<code>title matches "football"</code>'
+                notmatches: '当一个<i> 域</i>不匹配一个<i>搜索模式</i>时为真（不区分大小写）。<br />举例: <code>title notmatches "football"</code>'
+    otp:
+        page_title: "两步验证"
+        app:
+            two_factor_code_description_1: '你刚刚启用了 OTP（动态密码）两步验证，打开你的 OTP 应用，使用该代码来获取一次性密码。页面刷新后该代码便会消失.'
+            two_factor_code_description_2: '你可以用你的 OTP 应用来扫描这个二维码：'
+            two_factor_code_description_3: '另外，将这些备用码保存在一个安全的地方，以防万一你需要用它们来恢复对 OTP 应用的访问权：'
+            two_factor_code_description_4: '从你配置好的应用中测试 OTP 码：'
+            cancel: "取消"
+            enable: "启用"
+            two_factor_code_description_5: 如果你看不到二维码或无法扫描它，请在你的应用程序中输入下列认证代码：
+            qrcode_label: 二维码
+    form_rss:
+        rss_limit: RSS源中的条目数
+        rss_link:
+            all: 全部
+            archive: 已存档
+            starred: 已标星
+            unread: 未读
+        rss_links: RSS链接
+        token_reset: 重新生成你的令牌
+        token_create: 创建你的令牌
+        no_token: 没有令牌
+        token_label: RSS令牌
+        description: wallabag提供的RSS源可以让你用你喜欢的RSS阅读器阅读你保存的文章。首先需要生成一个令牌。
+    form_ignore_origin_rules:
+        faq:
+            operator_description:
+                equal_to: 等于…
+                label: 操作符
+                matches: '测试一个<i>对象</i>匹配一个<i>搜索</i>（区分大小写）。<br />例如： <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
+            variable_description:
+                label: 变量
+                _all: 完整地址，主要用于模式匹配
+                host: 域名
+            meaning: 含义
+            variables_available_title: 我可以使用哪些变量和操作符来编写规则？
+            how_to_use_them_title: 我该怎么使用它们？
+            title: 常见问题
+            ignore_origin_rules_definition_title: “忽略来源规则”是什么意思？
+            ignore_origin_rules_definition_description: wallabag用它们在重定向后自动忽略源地址。<br />如果在获取新条目时发生重定向，则所有忽略来源规则(<i>用户定义和实例定义</i>)都将被用于忽略源地址。
+            variables_available_description: '下列变量和操作符可以用来创建忽略来源规则:'
+            how_to_use_them_description: 让我们假设你想忽略一个源自“<i>rss.example.com</i>”的条目的来源 (<i>知道重定向后，实际地址是 example.com</i>)。<br />在那种情况下，你应当把“host = "rss.example.com"”放在<i>规则</i>字段中。
+entry:
+    default_title: '项目标题'
+    page_titles:
+        unread: '未读项目'
+        starred: '收藏项目'
+        archived: '存档项目'
+        filtered: '筛选后项目'
+        filtered_tags: '根据标签筛选：'
+        filtered_search: '根据搜索筛选：'
+        untagged: '无标签项目'
+        all: '所有项目'
+        with_annotations: 带注释的条目
+        same_domain: 同一域名
+    list:
+        number_on_the_page: '{0} 没有对应项目。|{1} 有 1 个项目。|]1,Inf[ 有 %count% 个项目。'
+        reading_time: '预计阅读时间'
+        reading_time_minutes: '预计阅读时间：%readingTime% 分钟'
+        reading_time_less_one_minute: '预计阅读时间：&lt; 1 分钟'
+        number_of_tags: '{1}以及 1 个其它标签 |]1,Inf[以及 %count% 个其它标签'
+        reading_time_minutes_short: '%readingTime% 分钟'
+        reading_time_less_one_minute_short: '&lt; 1 分钟'
+        original_article: '原始文章'
+        toogle_as_read: '标记为已读'
+        toogle_as_star: '添加到收藏'
+        delete: '删除'
+        export_title: '导出'
+        assign_search_tag: 将此搜索作为标签分配给每个结果
+        show_same_domain: 显示同一域名的文章
+    filters:
+        title: '筛选器'
+        status_label: '状态'
+        archived_label: '已存档'
+        starred_label: '已收藏'
+        unread_label: '未读'
+        preview_picture_label: '有预览图片'
+        preview_picture_help: '预览图片'
+        is_public_label: '有公开链接'
+        is_public_help: '公开链接'
+        language_label: '语言'
+        http_status_label: 'HTTP 状态'
+        reading_time:
+            label: '阅读时间（按分钟计）'
+            from: '从'
+            to: '到'
+        domain_label: '域名'
+        created_at:
+            label: '创建日期'
+            from: '从'
+            to: '到'
+        action:
+            clear: '清除'
+            filter: '筛选'
+        annotated_label: 已注释
+    view:
+        left_menu:
+            back_to_top: '返回顶部'
+            back_to_homepage: '返回主页'
+            set_as_read: '标为已读'
+            set_as_unread: '标为未读'
+            set_as_starred: '添加到收藏'
+            view_original_article: '原始文章'
+            re_fetch_content: '重新抓取'
+            delete: '删除'
+            add_a_tag: '添加标签'
+            share_content: '分享'
+            share_email_label: '邮件分享'
+            public_link: '公开链接'
+            delete_public_link: '删除公开链接'
+            export: '导出'
+            print: '打印'
+            problem:
+                label: '遇到问题？'
+                description: '这篇文章显示不正常？'
+            theme_toggle_auto: 自动
+            theme_toggle_dark: 深色
+            theme_toggle_light: 浅色
+            theme_toggle: 主题切换
+        edit_title: '编辑标题'
+        original_article: '原始文章'
+        annotations_on_the_entry: '{0} 没有标注|{1} 1 个标注 |]1,Inf[ %count% 个标注'
+        created_at: '创建日期'
+        published_at: '发布日期'
+        published_by: '作者'
+        provided_by: '提供于'
+    new:
+        page_title: '添加新项目'
+        placeholder: 'https://website.com'
+        form_new:
+            url_label: URL
+    search:
+        placeholder: '你要找什么？'
+    edit:
+        page_title: '编辑项目'
+        title_label: '标题'
+        url_label: '链接'
+        origin_url_label: '原始链接（你发现这篇文章的地方）'
+        save_label: '保存'
+    public:
+        shared_by_wallabag: "这篇文章由 %username% 于 <a href='%wallabag_instance%'>wallabag</a> 分享"
+    confirm:
+        delete: "你确定要删除这篇文章吗？"
+        delete_tag: "你确定要从这篇文章删除该标签吗？"
+        delete_entries: 你确定要删除这些文章吗？
+    metadata:
+        reading_time: "预计阅读时间"
+        reading_time_minutes_short: "%readingTime% 分钟"
+        address: "地址"
+        added_on: "添加于"
+        published_on: 发布于
+about:
+    page_title: '关于'
+    top_menu:
+        who_behind_wallabag: 'wallabag 背后有哪些人'
+        getting_help: '获取帮助'
+        helping: '助力 wallabag 的发展'
+        contributors: '贡献者'
+        third_party: '第三方库'
+    who_behind_wallabag:
+        developped_by: '开发者'
+        website: '网站'
+        many_contributors: '以及 <a href="https://github.com/wallabag/wallabag/graphs/contributors">GitHub 上</a> 的许多其它贡献者 ♥'
+        project_website: '项目官网'
+        license: '许可证'
+        version: '版本'
+    getting_help:
+        documentation: '文档'
+        bug_reports: 'Bug 报告'
+        support: '<a href="https://github.com/wallabag/wallabag/issues">前往 GitHub</a>'
+    helping:
+        description: 'wallabag 是自由且开源的，你可以帮助我们：'
+        by_paypal: '通过 Liberapay'
+    contributors:
+        description: '感谢为 wallabag 网页程序做出贡献的人们'
+    third_party:
+        description: '这里是 wallabag 使用的第三方库列表（以及它们的许可证）：'
+        package: '包'
+        license: '许可证'
+howto:
+    page_title: '教程'
+    tab_menu:
+        add_link: "保存一个链接"
+        shortcuts: "使用快捷键"
+    page_description: '有多种方法可以保存一篇文章：'
+    top_menu:
+        browser_addons: '浏览器扩展'
+        mobile_apps: '移动应用程序'
+        bookmarklet: '浏览器小书签'
+    form:
+        description: '多亏了这个表单'
+    browser_addons:
+        firefox: 'Firefox 扩展'
+        chrome: 'Chrome 扩展'
+        opera: 'Opera 扩展'
+    mobile_apps:
+        android:
+            via_f_droid: '通过 F-Droid'
+            via_google_play: '通过 Google Play'
+        ios: '位于 App Store'
+        windows: '位于 Microsoft Store'
+    bookmarklet:
+        description: '拖放这个链接到你的书签栏上：'
+    shortcuts:
+        page_description: 以下是 wallabag 中可用的快捷键.
+        shortcut: 快捷键
+        action: 操作
+        all_pages_title: 所有页面中均可用的快捷键
+        go_unread: 前往未读页面
+        go_starred: 前往收藏页面
+        go_archive: 前往存档页面
+        go_all: 前往所有页面
+        go_tags: 前往标签页面
+        go_config: 前往配置页面
+        go_import: 前往导入页面
+        go_developers: 前往开发者页面
+        go_howto: 前往教程（就是这里！)
+        go_logout: 登出
+        list_title: 在文章列表页面可用的快捷键
+        search: 显示搜索表单
+        article_title: 在文章页面可用的快捷键
+        open_original: 打开项目的原始链接
+        toggle_favorite: 改变项目的收藏状态
+        toggle_archive: 改变项目的已读状态
+        delete: 删除项目
+        add_link: 保存新链接
+        hide_form: 隐藏当前表单（搜索或添加新链接时)
+        arrows_navigation: 在项目间导航
+        open_article: 打开选中项目
+quickstart:
+    page_title: '快速开始'
+    more: '更多…'
+    intro:
+        title: '欢迎来到 wallabag！'
+        paragraph_1: "我们会在你访问 wallabag 的旅途中陪伴你，同时向你展示一些可能会让你感兴趣的功能。"
+        paragraph_2: '跟我们来！'
+    configure:
+        title: '配置应用程序'
+        description: '为了得到一个适合你的应用程序，请看一眼 wallabag 的配置页面。'
+        language: '变更语言和设计'
+        feed: '启用订阅源'
+        tagging_rules: '编写规则来给你的文章自动加上标签'
+        rss: 启用RSS源
+    admin:
+        title: '管理员'
+        description: '作为一名管理员，你在 wallabag 上享有特权。你可以：'
+        new_user: '创建新用户'
+        analytics: '配置数据分析'
+        sharing: '启用关于文章分享的一些参数'
+        export: '配置导出选项'
+        import: '配置导入选项'
+    first_steps:
+        title: '第一步'
+        description: "既然现在已经配置好 wallabag，是时候归档一些网页了。你可以点击右上角的 + 号来保存一个链接。"
+        new_article: '保存你的第一篇文章'
+        unread_articles: '然后给它分类！'
+    migrate:
+        title: '从已有服务中转移'
+        description: "你正在使用其它服务吗？我们会帮助你将数据转移到 wallabag。"
+        pocket: '从 Pocket 转移'
+        wallabag_v1: '从 wallabag v1 转移'
+        wallabag_v2: '从 wallabag v2 转移'
+        readability: '从 Readability 转移'
+        instapaper: '从 Instapaper 转移'
+    developer:
+        title: '开发者'
+        description: '我们当然也考虑到了开发者们：Docker、API、翻译，等等。'
+        create_application: '创建你的第三方应用程序'
+        use_docker: '使用 Docker 来安装 wallabag'
+    docs:
+        title: '完整文档'
+        description: "wallabag 中有如此多的功能。不要犹豫，阅读使用手册，了解它们并学习如何使用它们。"
+        annotate: '标注你的文章'
+        export: '将你的文章转换成 ePUB 或者 PDF'
+        search_filters: '看看你能如何运用搜索和筛选功能来找到一篇文章'
+        fetching_errors: '当一篇文章抓取出错时，我该怎么办？'
+        all_docs: '还有另外的许多文档！'
+    support:
+        title: '支持'
+        description: '如果你需要帮助，我们在这里。'
+        github: 'GitHub 上'
+        email: '通过 Email'
+        gitter: 'Gitter 上'
+tag:
+    page_title: '标签'
+    list:
+        number_on_the_page: '{0} 暂时没有标签。|{1} 目前有 1 个标签。|]1,Inf[ 目前有 %count% 个标签。'
+        see_untagged_entries: '查看未分配标签的项目'
+        no_untagged_entries: '目前没有未分配标签的项目。'
+        untagged: 无标签项目
+    new:
+        add: '添加'
+        placeholder: '你可以添加数个标签，彼此之间用逗号分隔。'
+    rename:
+        placeholder: '你可以更新标签名称。'
+    confirm:
+        delete: 删除 %name% 标签
+export:
+    footer_template: '<div style="text-align:center;"><p> 由 wallabag 通过 %method% 生成</p><p>如果该电子书在你的设备上显示有问题，请在 Github 上 <a href="https://github.com/wallabag/wallabag/issues">汇报</a>。</p></div>'
+    unknown: '未知'
+import:
+    page_title: '导入'
+    page_description: '欢迎来到 wallabag 导入器，请选择你想要从哪个服务导入已有内容。'
+    action:
+        import_contents: '导入内容'
+    form:
+        mark_as_read_title: '是否全部标记为已读?'
+        mark_as_read_label: '将全部项目标记为已读'
+        file_label: '文件'
+        save_label: '上传文件'
+    pocket:
+        page_title: '导入 > Pocket'
+        description: "这个导入器会导入你 Pocket 账户中的所有内容。Pocket 不允许我们从它的服务器获取文章全文，所以导入的文章将由 wallabag 来重新抓取可读内容。"
+        config_missing:
+            description: "尚未配置好从 Pocket 中导入的功能。"
+            admin_message: '你需要定义 %keyurls%a pocket_consumer_key%keyurle%.'
+            user_message: '你的服务器管理员需要先为 Pocket 配置一个 API Key。'
+        authorize_message: '你可以从你的 Pocket 账号中汇入数据。只需要点击下方按钮并授权该应用程序连接 getpocket.com。'
+        connect_to_pocket: '连接到 Pocket 并导入数据'
+    wallabag_v1:
+        page_title: 'Import > Wallabag v1'
+        description: '这个导入器会导入你 wallabag v1 账户中的所有文章。在你的配置页面中的“到处你的 wallabag 数据”一栏，点击“JSON 导出”。你就会得到一个名为 "wallabag-export-1-xxxx-xx-xx.json" 的文件。'
+        how_to: '请选择你的 wallabag 导出文件并点击下方按钮来上传和导入它。'
+    wallabag_v2:
+        page_title: '导入 > Wallabag v2'
+        description: '这个导入器会导入你 wallabag v2 账户中的所有文章。前往 “所有项目”，然后在“导出” 侧边栏上，点击 "JSON"。 你会得到一个名为 "All articles.json" 的文件。'
+    elcurator:
+        page_title: '导入 > elCurator'
+        description: '这个导入器会导入你 elCurator 账户中的所有内容。前往你 elCurator 账户的偏好设置页面，然后导出你的内容。你将得到一个 JSON 文件。'
+    readability:
+        page_title: '导入 > Readability'
+        description: '这个导入器会导入你 Readability 账户中的所有内容。在 tools（https://www.readability.com/tools/）页面，点击 "Data Export" 一栏下的 "Export your data"，你将会收到一封邮件，根据邮件指示下载得到一个 JSON 文件(尽管它并不以. json 结尾)。'
+        how_to: '请选择你的 Readability 导出文件并点击下方按钮来上传和导入它。'
+    worker:
+        enabled: "导入是异步进行的。一旦导入任务开始，一个外部 worker 就会一次处理一个 job。目前的服务是："
+        download_images_warning: "你选择了为你导入的文章下载图片。这和导入流程一起进行时，可能需要非常久才能完成（甚至可能失败）。我们<strong>强烈建议</strong>启用异步导入来避免可能的错误。"
+    firefox:
+        page_title: '导入 > Firefox'
+        description: "这个导入器会导入你 Firefox 中的所有书签。只需要前往你的书签页面（Ctrl+Shift+O），然后进入“导入和备份”，选择“备份...”你将得到一个 JSON 文件。"
+        how_to: "请选择书签备份文件然后点击下方的按钮来导入它。请注意这一过程可能会持续一段时间，因为需要获取所有的文章。"
+    chrome:
+        page_title: '导入> Chrome'
+        description: "这个导入器会导入你 Chrome 中的所有书签。文件的位置取决于你的操作系统: <ul><li>在 Linux 上，前往 <code>~/.config/chromium/Default/</code> 目录</li><li> 在 Windows 上，它应该位于 <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>在 OS X 上，它应该在 <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>到达对应目录后， 把 <code>Bookmarks</code> 文件复制到一个你能找到的地方。<em><br>请注意如果你使用 Chromium 而不是 Chrome，你需要对应地纠正目录。</em></p>"
+        how_to: "请选择书签备份文件然后点击下方的按钮来导入它。请注意这一过程可能会持续一段时间，因为需要获取所有的文章。"
+    instapaper:
+        page_title: '导入> Instapaper'
+        description: '这个导入器会导入你 Instapaper 账户中的所有内容。在设置页面（https://www.instapaper.com/user），点击 "Export" 一栏下的 "Download .CSV file"。你将会下载得到一个 CSV 文件（比如"instapaper-export.csv"）。'
+        how_to: '请选择你的 Instapaper 导出文件并点击下方按钮来上传和导入它。'
+    pinboard:
+        page_title: "导入 > Pinboard"
+        description: '这个导入器会导入你 Pinboard 账户中的所有内容。 在 backup 页面（https://pinboard.in/settings/backup），点击 "Bookmarks" 一栏下的 "JSON"。你将会下载得到一个 JSON 文件（比如"pinboard_export"）。'
+        how_to: '请选择你的 Pinboard 导出文件并点击下方按钮来上传和导入它。'
+    delicious:
+        how_to: 请选择你的 Delicious 导出，点击下面的按钮上传并导入。
+        page_title: 导入 > del.icio.us
+        description: 此导入器将导入你所有的 Delicious 书签。 自 2021 年起，你可以使用导出页面 (https://del.icio.us/export) 再次从中导出数据。 选择“JSON”格式并下载（如“delicious_export.2021.02.06_21.10.json”）。
+developer:
+    page_title: 'API 客户端管理'
+    welcome_message: '欢迎来到 wallabag API'
+    documentation: '文档'
+    how_to_first_app: '如何创建我的第一个应用程序'
+    full_documentation: '查看完整的 API 文档'
+    list_methods: '列出 API 方法'
+    clients:
+        title: '客户端'
+        create_new: '创建一个新的客户端'
+    existing_clients:
+        title: '现有客户端'
+        field_id: '客户端 ID'
+        field_secret: '客户端密钥'
+        field_uris: '重定向链接'
+        field_grant_types: '允许的授权形式'
+        no_client: '目前还没有客户端。'
+    remove:
+        warn_message_1: '你可以删除客户端 %name%。 请注意这一操作不可撤销！'
+        warn_message_2: "如果你删除了它，所有通过它配置的应用程序都将不再得到你的 wallabag 的授权。"
+        action: '移除客户端 %name%'
+    client:
+        page_title: 'API 客户端管理 > 新客户端'
+        page_description: '你将要创建一个新的客户端。请在以下区域中填写你应用程序的重定向链接。'
+        form:
+            name_label: '客户端名称'
+            redirect_uris_label: '重定向链接（可选)'
+            save_label: '创建新客户端'
+        action_back: '返回'
+        copy_to_clipboard: 拷贝
+    client_parameter:
+        page_title: 'API 客户端管理 > 客户端参数'
+        page_description: '以下是你客户端的参数。'
+        field_name: '客户端名称'
+        field_id: '客户端 ID'
+        field_secret: '客户端密钥'
+        back: '返回'
+        read_howto: '阅读教程“如何创建我的第一个应用程序”'
+    howto:
+        page_title: 'API 客户端管理 > 如何创建我的第一个应用程序'
+        description:
+            paragraph_1: '以下命令使用了 <a href="https://github.com/jkbrzt/httpie">HTTPie 库</a>。 使用前请确保你已经在系统中安装了它。'
+            paragraph_2: '你需要一个 token 在你的第三方应用程序和 wallabag API 之间通讯。'
+            paragraph_3: '为了创建这个 token，你需要 <a href="%link%">创建一个新的客户端</a>。'
+            paragraph_4: '现在，创建你的 token（将以下 client_id，client_secret，username and password 替换为有效值)：'
+            paragraph_5: 'API 将会返回一个类似下面这样的 response：'
+            paragraph_6: 'access_token 可以用于发起一个向 API 端点的请求。例如：'
+            paragraph_7: '这个请求可以返回你的用户的所有项目。'
+            paragraph_8: '如果你想要查看所有 API 端点，你可以看看<a href="%link%">我们的 API 文档</a>。'
+        back: '返回'
+user:
+    page_title: 用户管理
+    new_user: 创建一个新用户
+    edit_user: 编辑现有用户
+    description: "在这里你可以管理所有的用户（创建，编辑和删除）"
+    list:
+        actions: 操作
+        edit_action: 编辑
+        yes: 是
+        no: 否
+        create_new_one: 创建新用户
+    form:
+        username_label: '用户名 / 邮箱'
+        name_label: '用户名'
+        password_label: '密码'
+        repeat_new_password_label: '重新输入新密码'
+        plain_password_label: '????'
+        email_label: '邮箱'
+        enabled_label: '启用'
+        last_login_label: '上次登录'
+        twofactor_email_label: 两步验证（通过邮箱）
+        twofactor_google_label: 两步验证（通过 OTP 应用）
+        save: 保存
+        delete: 删除
+        delete_confirm: 确定要这么做吗？
+        back_to_list: 返回列表
+        twofactor_label: 双因素认证
+    search:
+        placeholder: 通过用户名或者邮箱筛选
+site_credential:
+    page_title: 网站登录凭证管理
+    new_site_credential: 创建一个凭证
+    edit_site_credential: 编辑一个现有凭证
+    description: "在这里你可以管理所有的登录凭证（创建，编辑和删除），有的网站可能会用它们来实施付费墙和认证功能等。"
+    list:
+        actions: 操作
+        edit_action: 编辑
+        yes: 是
+        no: 否
+        create_new_one: 创建新的凭证
+    form:
+        username_label: '登录'
+        host_label: '主机（subdomain.example.org，.example.org，等等）'
+        password_label: '密码'
+        save: 保存
+        delete: 删除
+        delete_confirm: 确定这么做吗？
+        back_to_list: 返回列表
+error:
+    page_title: 发生了一个错误
+flashes:
+    config:
+        notice:
+            config_saved: '配置已保存。'
+            password_updated: '密码已更新'
+            password_not_updated_demo: "在演示模式下，你不能更改此用户的密码。"
+            user_updated: '信息已更新'
+            feed_updated: '订阅源信息已更新'
+            tagging_rules_updated: '标签规则已更新'
+            tagging_rules_deleted: '标签规则已删除'
+            feed_token_updated: '订阅源令牌已更新'
+            feed_token_revoked: '订阅源令牌已作废'
+            annotations_reset: 标注已重置
+            tags_reset: 标签已重置
+            entries_reset: 项目列表已重置
+            archived_reset: 所有存档项目已删除
+            otp_enabled: 两步验证已启用
+            tagging_rules_imported: 标签规则已导入
+            tagging_rules_not_imported: 导入标签规则时发生了错误
+            rss_token_updated: RSS令牌已更新
+            rss_updated: RSS信息已更新
+            ignore_origin_rules_updated: 已更新忽略来源规则
+            ignore_origin_rules_deleted: 已删除忽略来源规则
+            otp_disabled: 双因素身份验证已禁用
+    entry:
+        notice:
+            entry_already_saved: '该项目已于 %date% 保存'
+            entry_saved: '项目已保存'
+            entry_saved_failed: '项目已保存，但抓取内容时出现错误'
+            entry_updated: '项目已更新'
+            entry_reloaded: '项目重新抓取成功'
+            entry_reloaded_failed: '已尝试重新抓取，但抓取内容时出现错误'
+            entry_archived: '项目已存档'
+            entry_unarchived: '已将项目放回未读列表'
+            entry_starred: '项目已添加到收藏'
+            entry_unstarred: '已将项目移除收藏'
+            entry_deleted: '项目已删除'
+            no_random_entry: '当前筛选条件下无符合项目'
+    tag:
+        notice:
+            tag_added: '标签添加成功'
+            tag_renamed: '标签重命名成功'
+    import:
+        notice:
+            failed: '导入失败，请重试。'
+            failed_on_file: '处理导入任务是出现错误，请检查你的导入文件。'
+            summary: '导入情况摘要: %imported% 个项目成功导入，%skipped% 个项目之前已保存。'
+            summary_with_queue: '导入情况摘要: %queued% 个项目正在等待导入。'
+        error:
+            redis_enabled_not_installed: 已启用 Redis 来处理异步导入任务，但我们似乎<u>无法连接到它</u>。请检查 Redis 的配置。
+            rabbit_enabled_not_installed: 已启用 RabbitMQ 来处理异步导入任务，但我们似乎<u>无法连接到它</u>。请检查 RabbitMQ 的配置。
+    developer:
+        notice:
+            client_created: '新客户端 %name% 创建成功。'
+            client_deleted: '客户端 %name% 已删除'
+    user:
+        notice:
+            added: '新用户 "%username%" 创建成功'
+            updated: '用户 "%username%" 已更新'
+            deleted: '用户 "%username%" 已删除'
+    site_credential:
+        notice:
+            added: '"%host%" 的登录凭证已添加'
+            updated: '"%host%" 的登录凭证已更新'
+            deleted: '"%host%" 的登录凭证已删除'
+    ignore_origin_instance_rule:
+        notice:
+            deleted: 已删除全局性忽略来源规则
+            updated: 已更新全局性忽略来源规则
+            added: 已添加全局性忽略来源规则
+ignore_origin_instance_rule:
+    form:
+        back_to_list: 返回列表
+        delete_confirm: 确定这么做吗？
+        delete: 删除
+        save: 保存
+        rule_label: 规则
+    list:
+        no: 否
+        yes: 是
+        edit_action: 编辑
+        actions: 操作
+        create_new_one: 创建一条新的全局性忽略来源规则
+    description: 你可以在这里管理用来无视原始链接的一些模式的全局性忽略来源规则。
+    edit_ignore_origin_instance_rule: 编辑一条现有的忽略来源规则
+    new_ignore_origin_instance_rule: 新建一条全局性忽略来源规则
+    page_title: 全局性忽略来源规则

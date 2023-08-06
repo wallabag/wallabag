@@ -10,7 +10,7 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  */
 class Version20170407200919 extends WallabagMigration
 {
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
         $this->skipIf(!$entryTable->hasColumn('is_public'), 'It seems that you already played this migration.');
@@ -18,7 +18,7 @@ class Version20170407200919 extends WallabagMigration
         $entryTable->dropColumn('is_public');
     }
 
-    public function down(Schema $schema)
+    public function down(Schema $schema): void
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
         $this->skipIf($entryTable->hasColumn('is_public'), 'It seems that you already played this migration.');

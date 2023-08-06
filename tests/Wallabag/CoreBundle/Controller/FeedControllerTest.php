@@ -237,42 +237,46 @@ class FeedControllerTest extends WallabagCoreTestCase
         $entry1->setCreatedAt($day1);
         $entry4->setCreatedAt($day2);
 
-        $property = (new \ReflectionObject($entry1))->getProperty('updatedAt');
-        $property->setAccessible(true);
-        $property->setValue($entry1, $day4);
-
         $property = (new \ReflectionObject($entry4))->getProperty('updatedAt');
         $property->setAccessible(true);
         $property->setValue($entry4, $day3);
+
+        // We have to flush and sleep here to be sure that $entry1 and $entry4 have different updatedAt values
+        $em->flush();
+        sleep(2);
+
+        $property = (new \ReflectionObject($entry1))->getProperty('updatedAt');
+        $property->setAccessible(true);
+        $property->setValue($entry1, $day4);
 
         $em->flush();
 
         $client = $this->getTestClient();
 
         // tag foo - without sort
-        $crawler = $client->request('GET', '/feed/admin/SUPERTOKEN/tags/foo');
+        $crawler = $client->request('GET', '/feed/admin/SUPERTOKEN/tags/t:foo');
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame('test title entry4', $crawler->filterXPath('//feed/entry[1]/title')->text());
         $this->assertSame('test title entry1', $crawler->filterXPath('//feed/entry[2]/title')->text());
 
         // tag foo - with sort created
-        $crawler = $client->request('GET', '/feed/admin/SUPERTOKEN/tags/foo?sort=created');
+        $crawler = $client->request('GET', '/feed/admin/SUPERTOKEN/tags/t:foo?sort=created');
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame('test title entry4', $crawler->filterXPath('//feed/entry[1]/title')->text());
         $this->assertSame('test title entry1', $crawler->filterXPath('//feed/entry[2]/title')->text());
 
         // tag foo - with sort updated
-        $crawler = $client->request('GET', '/feed/admin/SUPERTOKEN/tags/foo?sort=updated');
+        $crawler = $client->request('GET', '/feed/admin/SUPERTOKEN/tags/t:foo?sort=updated');
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame('test title entry1', $crawler->filterXPath('//feed/entry[1]/title')->text());
         $this->assertSame('test title entry4', $crawler->filterXPath('//feed/entry[2]/title')->text());
 
         // tag foo - with invalid sort
-        $client->request('GET', '/feed/admin/SUPERTOKEN/tags/foo?sort=invalid');
+        $client->request('GET', '/feed/admin/SUPERTOKEN/tags/t:foo?sort=invalid');
         $this->assertSame(400, $client->getResponse()->getStatusCode());
 
         // tag foo/3000
-        $client->request('GET', '/feed/admin/SUPERTOKEN/tags/foo/3000');
+        $client->request('GET', '/feed/admin/SUPERTOKEN/tags/t:foo/3000');
         $this->assertSame(302, $client->getResponse()->getStatusCode());
     }
 

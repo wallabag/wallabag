@@ -3,31 +3,40 @@
 namespace Wallabag\ImportBundle\Controller;
 
 use Craue\ConfigBundle\Util\Config;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
 use Wallabag\ImportBundle\Import\DeliciousImport;
+use Wallabag\ImportBundle\Redis\Producer as RedisProducer;
 
-class DeliciousController extends Controller
+class DeliciousController extends AbstractController
 {
+    private RabbitMqProducer $rabbitMqProducer;
+    private RedisProducer $redisProducer;
+
+    public function __construct(RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
+    {
+        $this->rabbitMqProducer = $rabbitMqProducer;
+        $this->redisProducer = $redisProducer;
+    }
+
     /**
      * @Route("/delicious", name="import_delicious")
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, DeliciousImport $delicious, Config $craueConfig, TranslatorInterface $translator)
     {
         $form = $this->createForm(UploadImportType::class);
         $form->handleRequest($request);
 
-        $delicious = $this->get(DeliciousImport::class);
         $delicious->setUser($this->getUser());
 
-        if ($this->get(Config::class)->get('import_with_rabbitmq')) {
-            $delicious->setProducer($this->get('old_sound_rabbit_mq.import_delicious_producer'));
-        } elseif ($this->get(Config::class)->get('import_with_redis')) {
-            $delicious->setProducer($this->get('wallabag_import.producer.redis.delicious'));
+        if ($craueConfig->get('import_with_rabbitmq')) {
+            $delicious->setProducer($this->rabbitMqProducer);
+        } elseif ($craueConfig->get('import_with_redis')) {
+            $delicious->setProducer($this->redisProducer);
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -45,13 +54,13 @@ class DeliciousController extends Controller
 
                 if (true === $res) {
                     $summary = $delicious->getSummary();
-                    $message = $this->get(TranslatorInterface::class)->trans('flashes.import.notice.summary', [
+                    $message = $translator->trans('flashes.import.notice.summary', [
                         '%imported%' => $summary['imported'],
                         '%skipped%' => $summary['skipped'],
                     ]);
 
                     if (0 < $summary['queued']) {
-                        $message = $this->get(TranslatorInterface::class)->trans('flashes.import.notice.summary_with_queue', [
+                        $message = $translator->trans('flashes.import.notice.summary_with_queue', [
                             '%queued%' => $summary['queued'],
                         ]);
                     }
@@ -59,18 +68,12 @@ class DeliciousController extends Controller
                     unlink($this->getParameter('wallabag_import.resource_dir') . '/' . $name);
                 }
 
-                $this->get(SessionInterface::class)->getFlashBag()->add(
-                    'notice',
-                    $message
-                );
+                $this->addFlash('notice', $message);
 
                 return $this->redirect($this->generateUrl('homepage'));
             }
 
-            $this->get(SessionInterface::class)->getFlashBag()->add(
-                'notice',
-                'flashes.import.notice.failed_on_file'
-            );
+            $this->addFlash('notice', 'flashes.import.notice.failed_on_file');
         }
 
         return $this->render('@WallabagImport/Delicious/index.html.twig', [

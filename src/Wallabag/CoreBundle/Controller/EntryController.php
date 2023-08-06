@@ -3,20 +3,20 @@
 namespace Wallabag\CoreBundle\Controller;
 
 use Craue\ConfigBundle\Util\Config;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NoResultException;
 use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
 use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Event\EntryDeletedEvent;
@@ -31,16 +31,34 @@ use Wallabag\CoreBundle\Helper\Redirect;
 use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\CoreBundle\Repository\TagRepository;
 
-class EntryController extends Controller
+class EntryController extends AbstractController
 {
+    private EntityManagerInterface $entityManager;
+    private EventDispatcherInterface $eventDispatcher;
+    private EntryRepository $entryRepository;
+    private Redirect $redirectHelper;
+    private PreparePagerForEntries $preparePagerForEntriesHelper;
+    private FilterBuilderUpdaterInterface $filterBuilderUpdater;
+    private ContentProxy $contentProxy;
+
+    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher, EntryRepository $entryRepository, Redirect $redirectHelper, PreparePagerForEntries $preparePagerForEntriesHelper, FilterBuilderUpdaterInterface $filterBuilderUpdater, ContentProxy $contentProxy)
+    {
+        $this->entityManager = $entityManager;
+        $this->eventDispatcher = $eventDispatcher;
+        $this->entryRepository = $entryRepository;
+        $this->redirectHelper = $redirectHelper;
+        $this->preparePagerForEntriesHelper = $preparePagerForEntriesHelper;
+        $this->filterBuilderUpdater = $filterBuilderUpdater;
+        $this->contentProxy = $contentProxy;
+    }
+
     /**
      * @Route("/mass", name="mass_action")
      *
      * @return Response
      */
-    public function massAction(Request $request)
+    public function massAction(Request $request, TagRepository $tagRepository)
     {
-        $em = $this->get('doctrine')->getManager();
         $values = $request->request->all();
 
         $tagsToAdd = [];
@@ -67,7 +85,7 @@ class EntryController extends Controller
                         $label = substr($label, 1);
                         $remove = true;
                     }
-                    $tag = $this->get(TagRepository::class)->findOneByLabel($label);
+                    $tag = $tagRepository->findOneByLabel($label);
                     if ($remove) {
                         if (null !== $tag) {
                             $tagsToRemove[] = $tag;
@@ -86,7 +104,7 @@ class EntryController extends Controller
         if (isset($values['entry-checkbox'])) {
             foreach ($values['entry-checkbox'] as $id) {
                 /** @var Entry * */
-                $entry = $this->get(EntryRepository::class)->findById((int) $id)[0];
+                $entry = $this->entryRepository->findById((int) $id)[0];
 
                 $this->checkUserAction($entry);
 
@@ -102,15 +120,17 @@ class EntryController extends Controller
                         $entry->removeTag($tag);
                     }
                 } elseif ('delete' === $action) {
-                    $this->get(EventDispatcherInterface::class)->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
-                    $em->remove($entry);
+                    $this->eventDispatcher->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
+                    $this->entityManager->remove($entry);
                 }
             }
 
-            $em->flush();
+            $this->entityManager->flush();
         }
 
-        return $this->redirect($this->get(Redirect::class)->to($request->getSession()->get('prevUrl')));
+        $redirectUrl = $this->redirectHelper->to($request->headers->get('prevUrl'));
+
+        return $this->redirect($redirectUrl);
     }
 
     /**
@@ -149,7 +169,7 @@ class EntryController extends Controller
      *
      * @return Response
      */
-    public function addEntryFormAction(Request $request)
+    public function addEntryFormAction(Request $request, TranslatorInterface $translator)
     {
         $entry = new Entry($this->getUser());
 
@@ -161,9 +181,9 @@ class EntryController extends Controller
             $existingEntry = $this->checkIfEntryAlreadyExists($entry);
 
             if (false !== $existingEntry) {
-                $this->get(SessionInterface::class)->getFlashBag()->add(
+                $this->addFlash(
                     'notice',
-                    $this->get(TranslatorInterface::class)->trans('flashes.entry.notice.entry_already_saved', ['%date%' => $existingEntry->getCreatedAt()->format('d-m-Y')])
+                    $translator->trans('flashes.entry.notice.entry_already_saved', ['%date%' => $existingEntry->getCreatedAt()->format('d-m-Y')])
                 );
 
                 return $this->redirect($this->generateUrl('view', ['id' => $existingEntry->getId()]));
@@ -171,12 +191,11 @@ class EntryController extends Controller
 
             $this->updateEntry($entry);
 
-            $em = $this->get('doctrine')->getManager();
-            $em->persist($entry);
-            $em->flush();
+            $this->entityManager->persist($entry);
+            $this->entityManager->flush();
 
             // entry saved, dispatch event about it!
-            $this->get(EventDispatcherInterface::class)->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+            $this->eventDispatcher->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
 
             return $this->redirect($this->generateUrl('homepage'));
         }
@@ -199,12 +218,11 @@ class EntryController extends Controller
         if (false === $this->checkIfEntryAlreadyExists($entry)) {
             $this->updateEntry($entry);
 
-            $em = $this->get('doctrine')->getManager();
-            $em->persist($entry);
-            $em->flush();
+            $this->entityManager->persist($entry);
+            $this->entityManager->flush();
 
             // entry saved, dispatch event about it!
-            $this->get(EventDispatcherInterface::class)->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+            $this->eventDispatcher->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
         }
 
         return $this->redirect($this->generateUrl('homepage'));
@@ -236,11 +254,10 @@ class EntryController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->get('doctrine')->getManager();
-            $em->persist($entry);
-            $em->flush();
+            $this->entityManager->persist($entry);
+            $this->entityManager->flush();
 
-            $this->get(SessionInterface::class)->getFlashBag()->add(
+            $this->addFlash(
                 'notice',
                 'flashes.entry.notice.entry_updated'
             );
@@ -279,7 +296,7 @@ class EntryController extends Controller
     public function showUnreadAction(Request $request, $page)
     {
         // load the quickstart if no entry in database
-        if (1 === (int) $page && 0 === $this->get(EntryRepository::class)->countAllEntriesByUser($this->getUser()->getId())) {
+        if (1 === (int) $page && 0 === $this->entryRepository->countAllEntriesByUser($this->getUser()->getId())) {
             return $this->redirect($this->generateUrl('quickstart'));
         }
 
@@ -345,21 +362,17 @@ class EntryController extends Controller
     /**
      * Shows random entry depending on the given type.
      *
-     * @param string $type
-     *
      * @Route("/{type}/random", name="random_entry", requirements={"type": "unread|starred|archive|untagged|annotated|all"})
      *
      * @return RedirectResponse
      */
-    public function redirectRandomEntryAction($type = 'all')
+    public function redirectRandomEntryAction(string $type = 'all')
     {
         try {
-            $entry = $this->get(EntryRepository::class)
+            $entry = $this->entryRepository
                 ->getRandomEntry($this->getUser()->getId(), $type);
         } catch (NoResultException $e) {
-            $bag = $this->get(SessionInterface::class)->getFlashBag();
-            $bag->clear();
-            $bag->add('notice', 'flashes.entry.notice.no_random_entry');
+            $this->addFlash('notice', 'flashes.entry.notice.no_random_entry');
 
             return $this->redirect($this->generateUrl($type));
         }
@@ -401,19 +414,16 @@ class EntryController extends Controller
 
         // if refreshing entry failed, don't save it
         if ($this->getParameter('wallabag_core.fetching_error_message') === $entry->getContent()) {
-            $bag = $this->get(SessionInterface::class)->getFlashBag();
-            $bag->clear();
-            $bag->add('notice', 'flashes.entry.notice.entry_reloaded_failed');
+            $this->addFlash('notice', 'flashes.entry.notice.entry_reloaded_failed');
 
             return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
         }
 
-        $em = $this->get('doctrine')->getManager();
-        $em->persist($entry);
-        $em->flush();
+        $this->entityManager->persist($entry);
+        $this->entityManager->flush();
 
         // entry saved, dispatch event about it!
-        $this->get(EventDispatcherInterface::class)->dispatch(EntrySavedEvent::NAME, new EntrySavedEvent($entry));
+        $this->eventDispatcher->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
 
         return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
     }
@@ -430,19 +440,22 @@ class EntryController extends Controller
         $this->checkUserAction($entry);
 
         $entry->toggleArchive();
-        $this->get('doctrine')->getManager()->flush();
+        $this->entityManager->flush();
 
         $message = 'flashes.entry.notice.entry_unarchived';
         if ($entry->isArchived()) {
             $message = 'flashes.entry.notice.entry_archived';
         }
 
-        $this->get(SessionInterface::class)->getFlashBag()->add(
+        $this->addFlash(
             'notice',
             $message
         );
 
-        return $this->redirect($this->get(Redirect::class)->to($request->getSession()->get('prevUrl')));
+
+        $redirectUrl = $this->redirectHelper->to($request->headers->get('prevUrl'));
+
+        return $this->redirect($redirectUrl);
     }
 
     /**
@@ -458,19 +471,21 @@ class EntryController extends Controller
 
         $entry->toggleStar();
         $entry->updateStar($entry->isStarred());
-        $this->get('doctrine')->getManager()->flush();
+        $this->entityManager->flush();
 
         $message = 'flashes.entry.notice.entry_unstarred';
         if ($entry->isStarred()) {
             $message = 'flashes.entry.notice.entry_starred';
         }
 
-        $this->get(SessionInterface::class)->getFlashBag()->add(
+        $this->addFlash(
             'notice',
             $message
         );
 
-        return $this->redirect($this->get(Redirect::class)->to($request->getSession()->get('prevUrl')));
+        $redirectUrl = $this->redirectHelper->to($request->headers->get('prevUrl'));
+
+        return $this->redirect($redirectUrl);
     }
 
     /**
@@ -493,21 +508,22 @@ class EntryController extends Controller
         );
 
         // entry deleted, dispatch event about it!
-        $this->get(EventDispatcherInterface::class)->dispatch(EntryDeletedEvent::NAME, new EntryDeletedEvent($entry));
+        $this->eventDispatcher->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
 
-        $em = $this->get('doctrine')->getManager();
-        $em->remove($entry);
-        $em->flush();
+        $this->entityManager->remove($entry);
+        $this->entityManager->flush();
 
-        $this->get(SessionInterface::class)->getFlashBag()->add(
+        $this->addFlash(
             'notice',
             'flashes.entry.notice.entry_deleted'
         );
 
-        // don't redirect user to the deleted entry
-        $prev = $request->getSession()->get('prevUrl');
+
+        // don't redirect user to the deleted entry (check that the referer doesn't end with the same url)
+        $prev = $request->headers->get('prevUrl');
         $to = (1 !== preg_match('#' . $url . '$#i', $prev) ? $prev : null);
-        $redirectUrl = $this->get(Redirect::class)->to($to);
+
+        $redirectUrl = $this->redirectHelper->to($to);
 
         return $this->redirect($redirectUrl);
     }
@@ -526,9 +542,8 @@ class EntryController extends Controller
         if (null === $entry->getUid()) {
             $entry->generateUid();
 
-            $em = $this->get('doctrine')->getManager();
-            $em->persist($entry);
-            $em->flush();
+            $this->entityManager->persist($entry);
+            $this->entityManager->flush();
         }
 
         return $this->redirect($this->generateUrl('share_entry', [
@@ -549,9 +564,8 @@ class EntryController extends Controller
 
         $entry->cleanUid();
 
-        $em = $this->get('doctrine')->getManager();
-        $em->persist($entry);
-        $em->flush();
+        $this->entityManager->persist($entry);
+        $this->entityManager->flush();
 
         return $this->redirect($this->generateUrl('view', [
             'id' => $entry->getId(),
@@ -566,9 +580,9 @@ class EntryController extends Controller
      *
      * @return Response
      */
-    public function shareEntryAction(Entry $entry)
+    public function shareEntryAction(Entry $entry, Config $craueConfig)
     {
-        if (!$this->get(Config::class)->get('share_public')) {
+        if (!$craueConfig->get('share_public')) {
             throw $this->createAccessDeniedException('Sharing an entry is disabled for this user.');
         }
 
@@ -603,7 +617,6 @@ class EntryController extends Controller
      */
     private function showEntries($type, Request $request, $page)
     {
-        $repository = $this->get(EntryRepository::class);
         $searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
         $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
         $request->getSession()->set('prevUrl', $request->getRequestUri());
@@ -612,31 +625,31 @@ class EntryController extends Controller
 
         switch ($type) {
             case 'search':
-                $qb = $repository->getBuilderForSearchByUser($this->getUser()->getId(), $searchTerm, $currentRoute);
+                $qb = $this->entryRepository->getBuilderForSearchByUser($this->getUser()->getId(), $searchTerm, $currentRoute);
                 break;
             case 'untagged':
-                $qb = $repository->getBuilderForUntaggedByUser($this->getUser()->getId());
+                $qb = $this->entryRepository->getBuilderForUntaggedByUser($this->getUser()->getId());
                 break;
             case 'starred':
-                $qb = $repository->getBuilderForStarredByUser($this->getUser()->getId());
+                $qb = $this->entryRepository->getBuilderForStarredByUser($this->getUser()->getId());
                 $formOptions['filter_starred'] = true;
                 break;
             case 'archive':
-                $qb = $repository->getBuilderForArchiveByUser($this->getUser()->getId());
+                $qb = $this->entryRepository->getBuilderForArchiveByUser($this->getUser()->getId());
                 $formOptions['filter_archived'] = true;
                 break;
             case 'annotated':
-                $qb = $repository->getBuilderForAnnotationsByUser($this->getUser()->getId());
+                $qb = $this->entryRepository->getBuilderForAnnotationsByUser($this->getUser()->getId());
                 break;
             case 'unread':
-                $qb = $repository->getBuilderForUnreadByUser($this->getUser()->getId());
+                $qb = $this->entryRepository->getBuilderForUnreadByUser($this->getUser()->getId());
                 $formOptions['filter_unread'] = true;
                 break;
             case 'same-domain':
-                $qb = $repository->getBuilderForSameDomainByUser($this->getUser()->getId(), $request->get('id'));
+                $qb = $this->entryRepository->getBuilderForSameDomainByUser($this->getUser()->getId(), $request->get('id'));
                 break;
             case 'all':
-                $qb = $repository->getBuilderForAllByUser($this->getUser()->getId());
+                $qb = $this->entryRepository->getBuilderForAllByUser($this->getUser()->getId());
                 break;
             default:
                 throw new \InvalidArgumentException(sprintf('Type "%s" is not implemented.', $type));
@@ -649,12 +662,12 @@ class EntryController extends Controller
             $form->submit($request->query->get($form->getName()));
 
             // build the query from the given form object
-            $this->get(FilterBuilderUpdaterInterface::class)->addFilterConditions($form, $qb);
+            $this->filterBuilderUpdater->addFilterConditions($form, $qb);
         }
 
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
 
-        $entries = $this->get(PreparePagerForEntries::class)->prepare($pagerAdapter);
+        $entries = $this->preparePagerForEntriesHelper->prepare($pagerAdapter);
 
         try {
             $entries->setCurrentPage($page);
@@ -664,7 +677,7 @@ class EntryController extends Controller
             }
         }
 
-        $nbEntriesUntagged = $this->get(EntryRepository::class)
+        $nbEntriesUntagged = $this->entryRepository
             ->countUntaggedEntriesByUser($this->getUser()->getId());
 
         return $this->render(
@@ -690,7 +703,7 @@ class EntryController extends Controller
         $message = 'flashes.entry.notice.' . $prefixMessage;
 
         try {
-            $this->get(ContentProxy::class)->updateEntry($entry, $entry->getUrl());
+            $this->contentProxy->updateEntry($entry, $entry->getUrl());
         } catch (\Exception $e) {
             // $this->logger->error('Error while saving an entry', [
             //     'exception' => $e,
@@ -701,14 +714,14 @@ class EntryController extends Controller
         }
 
         if (empty($entry->getDomainName())) {
-            $this->get(ContentProxy::class)->setEntryDomainName($entry);
+            $this->contentProxy->setEntryDomainName($entry);
         }
 
         if (empty($entry->getTitle())) {
-            $this->get(ContentProxy::class)->setDefaultEntryTitle($entry);
+            $this->contentProxy->setDefaultEntryTitle($entry);
         }
 
-        $this->get(SessionInterface::class)->getFlashBag()->add('notice', $message);
+        $this->addFlash('notice', $message);
     }
 
     /**
@@ -728,6 +741,6 @@ class EntryController extends Controller
      */
     private function checkIfEntryAlreadyExists(Entry $entry)
     {
-        return $this->get(EntryRepository::class)->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
+        return $this->entryRepository->findByUrlAndUserId($entry->getUrl(), $this->getUser()->getId());
     }
 }

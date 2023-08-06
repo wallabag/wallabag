@@ -3,14 +3,14 @@
 namespace Wallabag\CoreBundle\Controller;
 
 use Craue\ConfigBundle\Util\Config;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\SiteCredential;
 use Wallabag\CoreBundle\Form\Type\SiteCredentialType;
 use Wallabag\CoreBundle\Helper\CryptoProxy;
@@ -22,18 +22,31 @@ use Wallabag\UserBundle\Entity\User;
  *
  * @Route("/site-credentials")
  */
-class SiteCredentialController extends Controller
+class SiteCredentialController extends AbstractController
 {
+    private EntityManagerInterface $entityManager;
+    private TranslatorInterface $translator;
+    private CryptoProxy $cryptoProxy;
+    private Config $craueConfig;
+
+    public function __construct(EntityManagerInterface $entityManager, TranslatorInterface $translator, CryptoProxy $cryptoProxy, Config $craueConfig)
+    {
+        $this->entityManager = $entityManager;
+        $this->translator = $translator;
+        $this->cryptoProxy = $cryptoProxy;
+        $this->craueConfig = $craueConfig;
+    }
+
     /**
      * Lists all User entities.
      *
      * @Route("/", name="site_credentials_index", methods={"GET"})
      */
-    public function indexAction()
+    public function indexAction(SiteCredentialRepository $repository)
     {
         $this->isSiteCredentialsEnabled();
 
-        $credentials = $this->get(SiteCredentialRepository::class)->findByUser($this->getUser());
+        $credentials = $repository->findByUser($this->getUser());
 
         return $this->render('@WallabagCore/SiteCredential/index.html.twig', [
             'credentials' => $credentials,
@@ -57,16 +70,15 @@ class SiteCredentialController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $credential->setUsername($this->get(CryptoProxy::class)->crypt($credential->getUsername()));
-            $credential->setPassword($this->get(CryptoProxy::class)->crypt($credential->getPassword()));
+            $credential->setUsername($this->cryptoProxy->crypt($credential->getUsername()));
+            $credential->setPassword($this->cryptoProxy->crypt($credential->getPassword()));
 
-            $em = $this->get('doctrine')->getManager();
-            $em->persist($credential);
-            $em->flush();
+            $this->entityManager->persist($credential);
+            $this->entityManager->flush();
 
-            $this->get(SessionInterface::class)->getFlashBag()->add(
+            $this->addFlash(
                 'notice',
-                $this->get(TranslatorInterface::class)->trans('flashes.site_credential.notice.added', ['%host%' => $credential->getHost()])
+                $this->translator->trans('flashes.site_credential.notice.added', ['%host%' => $credential->getHost()])
             );
 
             return $this->redirectToRoute('site_credentials_index');
@@ -96,16 +108,15 @@ class SiteCredentialController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $siteCredential->setUsername($this->get(CryptoProxy::class)->crypt($siteCredential->getUsername()));
-            $siteCredential->setPassword($this->get(CryptoProxy::class)->crypt($siteCredential->getPassword()));
+            $siteCredential->setUsername($this->cryptoProxy->crypt($siteCredential->getUsername()));
+            $siteCredential->setPassword($this->cryptoProxy->crypt($siteCredential->getPassword()));
 
-            $em = $this->get('doctrine')->getManager();
-            $em->persist($siteCredential);
-            $em->flush();
+            $this->entityManager->persist($siteCredential);
+            $this->entityManager->flush();
 
-            $this->get(SessionInterface::class)->getFlashBag()->add(
+            $this->addFlash(
                 'notice',
-                $this->get(TranslatorInterface::class)->trans('flashes.site_credential.notice.updated', ['%host%' => $siteCredential->getHost()])
+                $this->translator->trans('flashes.site_credential.notice.updated', ['%host%' => $siteCredential->getHost()])
             );
 
             return $this->redirectToRoute('site_credentials_index');
@@ -135,14 +146,13 @@ class SiteCredentialController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->get(SessionInterface::class)->getFlashBag()->add(
+            $this->addFlash(
                 'notice',
-                $this->get(TranslatorInterface::class)->trans('flashes.site_credential.notice.deleted', ['%host%' => $siteCredential->getHost()])
+                $this->translator->trans('flashes.site_credential.notice.deleted', ['%host%' => $siteCredential->getHost()])
             );
 
-            $em = $this->get('doctrine')->getManager();
-            $em->remove($siteCredential);
-            $em->flush();
+            $this->entityManager->remove($siteCredential);
+            $this->entityManager->flush();
         }
 
         return $this->redirectToRoute('site_credentials_index');
@@ -153,7 +163,7 @@ class SiteCredentialController extends Controller
      */
     private function isSiteCredentialsEnabled()
     {
-        if (!$this->get(Config::class)->get('restricted_access')) {
+        if (!$this->craueConfig->get('restricted_access')) {
             throw $this->createNotFoundException('Feature "restricted_access" is disabled, controllers too.');
         }
     }

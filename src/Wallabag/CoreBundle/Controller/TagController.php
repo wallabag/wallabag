@@ -2,15 +2,16 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Form\Type\NewTagType;
@@ -21,29 +22,55 @@ use Wallabag\CoreBundle\Helper\TagsAssigner;
 use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\CoreBundle\Repository\TagRepository;
 
-class TagController extends Controller
+class TagController extends AbstractController
 {
+    private EntityManagerInterface $entityManager;
+    private TagsAssigner $tagsAssigner;
+    private Redirect $redirectHelper;
+
+    public function __construct(EntityManagerInterface $entityManager, TagsAssigner $tagsAssigner, Redirect $redirectHelper)
+    {
+        $this->entityManager = $entityManager;
+        $this->tagsAssigner = $tagsAssigner;
+        $this->redirectHelper = $redirectHelper;
+    }
+
     /**
-     * @Route("/new-tag/{entry}", requirements={"entry" = "\d+"}, name="new_tag")
+     * @Route("/new-tag/{entry}", requirements={"entry" = "\d+"}, name="new_tag", methods={"POST"})
      *
      * @return Response
      */
-    public function addTagFormAction(Request $request, Entry $entry)
+    public function addTagFormAction(Request $request, Entry $entry, TranslatorInterface $translator)
     {
         $form = $this->createForm(NewTagType::class, new Tag());
         $form->handleRequest($request);
 
+        $tags = $form->get('label')->getData();
+        $tagsExploded = explode(',', $tags);
+
+        // avoid too much tag to be added
+        if (\count($tagsExploded) >= NewTagType::MAX_TAGS || \strlen($tags) >= NewTagType::MAX_LENGTH) {
+            $message = $translator->trans('flashes.tag.notice.too_much_tags', [
+                '%tags%' => NewTagType::MAX_TAGS,
+                '%characters%' => NewTagType::MAX_LENGTH,
+            ]);
+            $this->addFlash('notice', $message);
+
+            return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->get(TagsAssigner::class)->assignTagsToEntry(
+            $this->checkUserAction($entry);
+
+            $this->tagsAssigner->assignTagsToEntry(
                 $entry,
                 $form->get('label')->getData()
             );
 
-            $em = $this->get('doctrine')->getManager();
-            $em->persist($entry);
-            $em->flush();
+            $this->entityManager->persist($entry);
+            $this->entityManager->flush();
 
-            $this->get(SessionInterface::class)->getFlashBag()->add(
+            $this->addFlash(
                 'notice',
                 'flashes.tag.notice.tag_added'
             );
@@ -66,17 +93,18 @@ class TagController extends Controller
      */
     public function removeTagFromEntry(Request $request, Entry $entry, Tag $tag)
     {
+        $this->checkUserAction($entry);
+
         $entry->removeTag($tag);
-        $em = $this->get('doctrine')->getManager();
-        $em->flush();
+        $this->entityManager->flush();
 
         // remove orphan tag in case no entries are associated to it
         if (0 === \count($tag->getEntries())) {
-            $em->remove($tag);
-            $em->flush();
+            $this->entityManager->remove($tag);
+            $this->entityManager->flush();
         }
 
-        $redirectUrl = $this->get(Redirect::class)->to($request->getSession()->get('prevUrl'), '', true);
+        $redirectUrl = $this->redirectHelper->to($request->headers->get('prevUrl'), '', true);
 
         return $this->redirect($redirectUrl);
     }
@@ -88,12 +116,10 @@ class TagController extends Controller
      *
      * @return Response
      */
-    public function showTagAction()
+    public function showTagAction(TagRepository $tagRepository, EntryRepository $entryRepository)
     {
-        $tags = $this->get(TagRepository::class)
-            ->findAllFlatTagsWithNbEntries($this->getUser()->getId());
-        $nbEntriesUntagged = $this->get(EntryRepository::class)
-            ->countUntaggedEntriesByUser($this->getUser()->getId());
+        $tags = $tagRepository->findAllFlatTagsWithNbEntries($this->getUser()->getId());
+        $nbEntriesUntagged = $entryRepository->countUntaggedEntriesByUser($this->getUser()->getId());
 
         $renameForms = [];
         foreach ($tags as $tag) {
@@ -115,16 +141,16 @@ class TagController extends Controller
      *
      * @return Response
      */
-    public function showEntriesForTagAction(Tag $tag, $page, Request $request)
+    public function showEntriesForTagAction(Tag $tag, EntryRepository $entryRepository, PreparePagerForEntries $preparePagerForEntries, $page, Request $request)
     {
-        $entriesByTag = $this->get(EntryRepository::class)->findAllByTagId(
+        $entriesByTag = $entryRepository->findAllByTagId(
             $this->getUser()->getId(),
             $tag->getId()
         );
 
         $pagerAdapter = new ArrayAdapter($entriesByTag);
 
-        $entries = $this->get(PreparePagerForEntries::class)->prepare($pagerAdapter);
+        $entries = $preparePagerForEntries->prepare($pagerAdapter);
 
         try {
             $entries->setCurrentPage($page);
@@ -154,12 +180,12 @@ class TagController extends Controller
      *
      * @return Response
      */
-    public function renameTagAction(Tag $tag, Request $request)
+    public function renameTagAction(Tag $tag, Request $request, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
         $form = $this->createForm(RenameTagType::class, new Tag());
         $form->handleRequest($request);
 
-        $redirectUrl = $this->get(Redirect::class)->to($request->getSession()->get('prevUrl'), '', true);
+        $redirectUrl = $this->redirectHelper->to($request->headers->get('prevUrl'), '', true);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $newTag = new Tag();
@@ -169,18 +195,18 @@ class TagController extends Controller
                 return $this->redirect($redirectUrl);
             }
 
-            $tagFromRepo = $this->get(TagRepository::class)->findOneByLabel($newTag->getLabel());
+            $tagFromRepo = $tagRepository->findOneByLabel($newTag->getLabel());
 
             if (null !== $tagFromRepo) {
                 $newTag = $tagFromRepo;
             }
 
-            $entries = $this->get(EntryRepository::class)->findAllByTagId(
+            $entries = $entryRepository->findAllByTagId(
                 $this->getUser()->getId(),
                 $tag->getId()
             );
             foreach ($entries as $entry) {
-                $this->get(TagsAssigner::class)->assignTagsToEntry(
+                $this->tagsAssigner->assignTagsToEntry(
                     $entry,
                     $newTag->getLabel(),
                     [$newTag]
@@ -188,9 +214,9 @@ class TagController extends Controller
                 $entry->removeTag($tag);
             }
 
-            $this->get('doctrine')->getManager()->flush();
+            $this->entityManager->flush();
 
-            $this->get(SessionInterface::class)->getFlashBag()->add(
+            $this->addFlash(
                 'notice',
                 'flashes.tag.notice.tag_renamed'
             );
@@ -206,28 +232,32 @@ class TagController extends Controller
      *
      * @return Response
      */
-    public function tagThisSearchAction($filter, Request $request)
+    public function tagThisSearchAction($filter, Request $request, EntryRepository $entryRepository)
     {
         $currentRoute = $request->query->has('currentRoute') ? $request->query->get('currentRoute') : '';
 
         /** @var QueryBuilder $qb */
-        $qb = $this->get(EntryRepository::class)->getBuilderForSearchByUser($this->getUser()->getId(), $filter, $currentRoute);
-        $em = $this->get('doctrine')->getManager();
+        $qb = $entryRepository->getBuilderForSearchByUser($this->getUser()->getId(), $filter, $currentRoute);
 
         $entries = $qb->getQuery()->getResult();
 
         foreach ($entries as $entry) {
-            $this->get(TagsAssigner::class)->assignTagsToEntry(
+            $this->tagsAssigner->assignTagsToEntry(
                 $entry,
                 $filter
             );
 
-            $em->persist($entry);
+            // check to avoid duplicate tags creation
+            foreach ($this->entityManager->getUnitOfWork()->getScheduledEntityInsertions() as $entity) {
+                if ($entity instanceof Tag && strtolower($entity->getLabel()) === strtolower($filter)) {
+                    continue 2;
+                }
+                $this->entityManager->persist($entry);
+            }
+            $this->entityManager->flush();
         }
 
-        $em->flush();
-
-        return $this->redirect($this->get(Redirect::class)->to($request->getSession()->get('prevUrl'), '', true));
+        return $this->redirect($this->redirectHelper->to($request->headers->get('prevUrl'), '', true));
     }
 
     /**
@@ -238,19 +268,29 @@ class TagController extends Controller
      *
      * @return Response
      */
-    public function removeTagAction(Tag $tag, Request $request)
+    public function removeTagAction(Tag $tag, Request $request, EntryRepository $entryRepository)
     {
         foreach ($tag->getEntriesByUserId($this->getUser()->getId()) as $entry) {
-            $this->get(EntryRepository::class)->removeTag($this->getUser()->getId(), $tag);
+            $entryRepository->removeTag($this->getUser()->getId(), $tag);
         }
 
         // remove orphan tag in case no entries are associated to it
         if (0 === \count($tag->getEntries())) {
-            $em = $this->get('doctrine')->getManager();
-            $em->remove($tag);
-            $em->flush();
+            $this->entityManager->remove($tag);
+            $this->entityManager->flush();
         }
+        $redirectUrl = $this->redirectHelper->to($request->headers->get('prevUrl'), '', true);
 
-        return $this->redirect($this->get(Redirect::class)->to($request->getSession()->get('prevUrl'), '', true));
+        return $this->redirect($redirectUrl);
+    }
+
+    /**
+     * Check if the logged user can manage the given entry.
+     */
+    private function checkUserAction(Entry $entry)
+    {
+        if (null === $this->getUser() || $this->getUser()->getId() !== $entry->getUser()->getId()) {
+            throw $this->createAccessDeniedException('You can not access this entry.');
+        }
     }
 }

@@ -7,7 +7,7 @@ use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -18,8 +18,15 @@ use Wallabag\CoreBundle\Helper\PreparePagerForEntries;
 use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\UserBundle\Entity\User;
 
-class FeedController extends Controller
+class FeedController extends AbstractController
 {
+    private EntryRepository $entryRepository;
+
+    public function __construct(EntryRepository $entryRepository)
+    {
+        $this->entryRepository = $entryRepository;
+    }
+
     /**
      * Shows unread entries for current user.
      *
@@ -92,7 +99,7 @@ class FeedController extends Controller
      *
      * @return Response
      */
-    public function showTagsFeedAction(Request $request, User $user, Tag $tag, $page)
+    public function showTagsFeedAction(Request $request, User $user, Tag $tag, PreparePagerForEntries $preparePagerForEntries, $page)
     {
         $sort = $request->query->get('sort', 'created');
 
@@ -115,7 +122,7 @@ class FeedController extends Controller
             UrlGeneratorInterface::ABSOLUTE_URL
         );
 
-        $entriesByTag = $this->get(EntryRepository::class)->findAllByTagId(
+        $entriesByTag = $this->entryRepository->findAllByTagId(
             $user->getId(),
             $tag->getId(),
             $sorts[$sort]
@@ -123,7 +130,7 @@ class FeedController extends Controller
 
         $pagerAdapter = new ArrayAdapter($entriesByTag);
 
-        $entries = $this->get(PreparePagerForEntries::class)->prepare(
+        $entries = $preparePagerForEntries->prepare(
             $pagerAdapter,
             $user
         );
@@ -184,22 +191,20 @@ class FeedController extends Controller
      *
      * @return Response
      */
-    private function showEntries($type, User $user, $page = 1)
+    private function showEntries(string $type, User $user, $page = 1)
     {
-        $repository = $this->get(EntryRepository::class);
-
         switch ($type) {
             case 'starred':
-                $qb = $repository->getBuilderForStarredByUser($user->getId());
+                $qb = $this->entryRepository->getBuilderForStarredByUser($user->getId());
                 break;
             case 'archive':
-                $qb = $repository->getBuilderForArchiveByUser($user->getId());
+                $qb = $this->entryRepository->getBuilderForArchiveByUser($user->getId());
                 break;
             case 'unread':
-                $qb = $repository->getBuilderForUnreadByUser($user->getId());
+                $qb = $this->entryRepository->getBuilderForUnreadByUser($user->getId());
                 break;
             case 'all':
-                $qb = $repository->getBuilderForAllByUser($user->getId());
+                $qb = $this->entryRepository->getBuilderForAllByUser($user->getId());
                 break;
             default:
                 throw new \InvalidArgumentException(sprintf('Type "%s" is not implemented.', $type));

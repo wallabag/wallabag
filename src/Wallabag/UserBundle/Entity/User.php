@@ -8,11 +8,12 @@ use FOS\UserBundle\Model\User as BaseUser;
 use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\XmlRoot;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use OpenApi\Annotations as OA;
 use Scheb\TwoFactorBundle\Model\BackupCodeInterface;
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface as EmailTwoFactorInterface;
 use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface as GoogleTwoFactorInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Wallabag\ApiBundle\Entity\Client;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -41,6 +42,12 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      *
+     * @OA\Property(
+     *      description="The unique numeric id of the user",
+     *      type="int",
+     *      example=12,
+     * )
+     *
      * @Groups({"user_api", "user_api_with_client"})
      */
     protected $id;
@@ -50,6 +57,12 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      *
      * @ORM\Column(name="name", type="text", nullable=true)
      *
+     * @OA\Property(
+     *      description="The personal Name of the user",
+     *      type="string",
+     *      example="Walla Baggger",
+     * )
+     *
      * @Groups({"user_api", "user_api_with_client"})
      */
     protected $name;
@@ -57,12 +70,24 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     /**
      * @var string
      *
+     * @OA\Property(
+     *      description="The unique username of the user",
+     *      type="string",
+     *      example="wallabag",
+     * )
+     *
      * @Groups({"user_api", "user_api_with_client"})
      */
     protected $username;
 
     /**
      * @var string
+     *
+     * @OA\Property(
+     *      description="E-mail address of the user",
+     *      type="string",
+     *      example="wallabag@wallabag.io",
+     * )
      *
      * @Groups({"user_api", "user_api_with_client"})
      */
@@ -73,6 +98,12 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      *
      * @ORM\Column(name="created_at", type="datetime")
      *
+     * @OA\Property(
+     *      description="Creation date of the user account. (In ISO 8601 format)",
+     *      type="string",
+     *      example="2023-06-27T19:25:44+0000",
+     * )
+     *
      * @Groups({"user_api", "user_api_with_client"})
      */
     protected $createdAt;
@@ -81,6 +112,12 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
+     *
+     * @OA\Property(
+     *      description="Update date of the user account. (In ISO 8601 format)",
+     *      type="string",
+     *      example="2023-06-27T19:37:30+0000",
+     * )
      *
      * @Groups({"user_api", "user_api_with_client"})
      */
@@ -113,6 +150,11 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     /**
      * @see getFirstClient() below
      *
+     * @OA\Property(
+     *      description="Default client created during user registration. Used for further authorization",
+     *      ref=@Model(type=Client::class, groups={"user_api_with_client"})
+     * )
+     *
      * @Groups({"user_api_with_client"})
      * @Accessor(getter="getFirstClient")
      */
@@ -129,7 +171,9 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     private $googleAuthenticatorSecret;
 
     /**
-     * @ORM\Column(type="json_array", nullable=true)
+     * @var array
+     *
+     * @ORM\Column(type="json", nullable=true)
      */
     private $backupCodes;
 
@@ -203,11 +247,6 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     public function getEntries()
     {
         return $this->entries;
-    }
-
-    public function isEqualTo(UserInterface $user)
-    {
-        return $this->username === $user->getUsername();
     }
 
     /**

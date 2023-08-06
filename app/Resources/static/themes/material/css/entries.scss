@@ -2,40 +2,73 @@
  * Entries
  * ========================================================================== */
 
-.mass-buttons {
-  margin: 10px 5px 10px 20px;
+.mass-action-toggle {
+  display: inline-flex;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 
-  #selectAll {
-    position: relative;
-    opacity: initial;
-    left: 0;
-  }
-
-  span {
-    padding: 3px;
-  }
-
-  button {
-    i {
-      font-size: 15px;
-    }
-
-    height: 24px;
-    line-height: 24px;
-    padding: 0 0.5rem;
-    margin-right: 0.75rem;
+  &:focus {
+    background-color: transparent;
   }
 }
 
-.card-stacked {
-  input[type="checkbox"] {
-    position: relative;
-    opacity: initial;
-    left: 0;
-  }
+.mass-action {
+  margin: 10px 5px 10px 20px;
+}
 
-  .entry-checkbox {
-    margin-right: 10px;
+.mass-action-group {
+  display: flex;
+  padding: 3px;
+  gap: 10px;
+}
+
+.mass-action-button {
+  height: 24px;
+  line-height: 24px;
+  padding: 0 0.5rem;
+
+  i {
+    font-size: 1rem;
+  }
+}
+
+.entry-checkbox {
+  margin: 10px 15px 10px 5px;
+
+  .card & {
+    float: right;
+    margin-right: 0;
+    padding: 10px;
+  }
+}
+
+.entries .entry-checkbox-input,
+.mass-action .entry-checkbox-input {
+  position: relative;
+  left: 0;
+  width: 20px;
+  min-height: 25px;
+  height: 100%;
+  vertical-align: middle;
+  opacity: initial;
+  z-index: 10;
+}
+
+.toggle-checkbox:not(:checked) + .mass-action,
+.toggle-checkbox:not(:checked) + .mass-action-tags,
+.toggle-checkbox:not(:checked) ~ .entries .entry-checkbox,
+.toggle-checkbox:checked ~ .entries .card-preview {
+  display: none;
+}
+
+.mass-action-tags {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .mass-action-tags-input {
+    margin: 0;
   }
 }
 
@@ -62,10 +95,10 @@
   .nb-results {
     display: inline-flex;
   }
+}
 
-  a {
-    color: #444;
-  }
+.results-item {
+  color: #444;
 }
 
 .pagination {
@@ -136,5 +169,13 @@ footer {
 
   .row {
     margin-bottom: 10px;
+  }
+}
+
+@media screen and (min-width: 993px) {
+  .mass-action {
+    display: flex;
+    align-items: center;
+    gap: 30px;
   }
 }

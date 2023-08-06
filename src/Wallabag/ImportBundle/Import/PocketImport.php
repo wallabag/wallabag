@@ -14,7 +14,7 @@ use Wallabag\CoreBundle\Entity\Entry;
 
 class PocketImport extends AbstractImport
 {
-    const NB_ELEMENTS = 5000;
+    public const NB_ELEMENTS = 5000;
     /**
      * @var HttpMethodsClient
      */

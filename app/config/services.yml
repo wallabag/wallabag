@@ -33,7 +33,7 @@ services:
 
     Wallabag\AnnotationBundle\:
         resource: '../../src/Wallabag/AnnotationBundle/*'
-        exclude: '../../src/Wallabag/AnnotationBundle/{Controller,Entity}'
+        exclude: '../../src/Wallabag/AnnotationBundle/{Controller,Entity,DataFixtures}'
 
     Wallabag\ApiBundle\:
         resource: '../../src/Wallabag/ApiBundle/*'
@@ -41,7 +41,80 @@ services:
 
     Wallabag\CoreBundle\:
         resource: '../../src/Wallabag/CoreBundle/*'
-        exclude: ['../../src/Wallabag/CoreBundle/{Controller,Entity}', '../../src/Wallabag/CoreBundle/Event/*Event.php']
+        exclude: ['../../src/Wallabag/CoreBundle/{Controller,Entity,DataFixtures}', '../../src/Wallabag/CoreBundle/Event/*Event.php']
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    Wallabag\AnnotationBundle\Controller\:
+        resource: '../../src/Wallabag/AnnotationBundle/Controller/'
+        tags: ['controller.service_arguments']
+
+    Wallabag\ApiBundle\Controller\:
+        resource: '../../src/Wallabag/ApiBundle/Controller/'
+        tags: ['controller.service_arguments']
+
+    Wallabag\CoreBundle\Controller\:
+        resource: '../../src/Wallabag/CoreBundle/Controller/'
+        tags: ['controller.service_arguments']
+
+    Wallabag\ImportBundle\Controller\:
+        resource: '../../src/Wallabag/ImportBundle/Controller/'
+        tags: ['controller.service_arguments']
+
+    Wallabag\UserBundle\Controller\:
+        resource: '../../src/Wallabag/UserBundle/Controller/'
+        tags: ['controller.service_arguments']
+
+    # inject alias service into controllers
+    Wallabag\ImportBundle\Controller\ChromeController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_chrome_producer'
+            $redisProducer: '@wallabag_import.producer.redis.chrome'
+
+    Wallabag\ImportBundle\Controller\DeliciousController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_delicious_producer'
+            $redisProducer: '@wallabag_import.producer.redis.delicious'
+
+    Wallabag\ImportBundle\Controller\ElcuratorController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_elcurator_producer'
+            $redisProducer: '@wallabag_import.producer.redis.elcurator'
+
+    Wallabag\ImportBundle\Controller\FirefoxController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_firefox_producer'
+            $redisProducer: '@wallabag_import.producer.redis.firefox'
+
+    Wallabag\ImportBundle\Controller\InstapaperController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_instapaper_producer'
+            $redisProducer: '@wallabag_import.producer.redis.instapaper'
+
+    Wallabag\ImportBundle\Controller\PinboardController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_pinboard_producer'
+            $redisProducer: '@wallabag_import.producer.redis.pinboard'
+
+    Wallabag\ImportBundle\Controller\PocketController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_pocket_producer'
+            $redisProducer: '@wallabag_import.producer.redis.pocket'
+
+    Wallabag\ImportBundle\Controller\ReadabilityController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_readability_producer'
+            $redisProducer: '@wallabag_import.producer.redis.readability'
+
+    Wallabag\ImportBundle\Controller\WallabagV1Controller:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_wallabag_v1_producer'
+            $redisProducer: '@wallabag_import.producer.redis.wallabag_v1'
+
+    Wallabag\ImportBundle\Controller\WallabagV2Controller:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_wallabag_v2_producer'
+            $redisProducer: '@wallabag_import.producer.redis.wallabag_v2'
 
     Wallabag\ImportBundle\:
         resource: '../../src/Wallabag/ImportBundle/*'
@@ -49,7 +122,7 @@ services:
 
     Wallabag\UserBundle\:
         resource: '../../src/Wallabag/UserBundle/*'
-        exclude: '../../src/Wallabag/UserBundle/{Controller,Entity}'
+        exclude: '../../src/Wallabag/UserBundle/{Controller,Entity,DataFixtures}'
 
     Doctrine\DBAL\Connection:
         alias: doctrine.dbal.default_connection
@@ -95,9 +168,6 @@ services:
 
     FOS\UserBundle\Model\UserManagerInterface:
         alias: fos_user.user_manager
-
-    Twig_Extensions_Extension_Text:
-        class: Twig_Extensions_Extension_Text
 
     MatomoTwigExtension\MatomoTwigExtension:
         public: false
@@ -186,8 +256,6 @@ services:
                 path: '%redis_path%'
                 password: '%redis_password%'
 
-    Wallabag\CoreBundle\Controller\ExceptionController: ~
-
     Wallabag\CoreBundle\Event\Subscriber\SQLiteCascadeDeleteSubscriber:
         tags:
             - { name: doctrine.event_subscriber }
@@ -200,8 +268,29 @@ services:
         arguments:
             $baseFolder: "%kernel.project_dir%/web/assets/images"
 
+    Wallabag\CoreBundle\Command\ExportCommand:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+
+    Wallabag\CoreBundle\Command\InstallCommand:
+        arguments:
+            $databaseDriver: '%database_driver%'
+            $databaseName: '%database_name%'
+            $defaultSettings: '%wallabag_core.default_internal_settings%'
+            $defaultIgnoreOriginInstanceRules: '%wallabag_core.default_ignore_origin_instance_rules%'
+
     wallabag_core.entry.download_images.client:
         alias: 'httplug.client.wallabag_core.entry.download_images'
+
+    Wallabag\UserBundle\Mailer\UserMailer:
+        arguments:
+            $parameters:
+                template:
+                    confirmation: '%fos_user.registration.confirmation.template%'
+                    resetting: '%fos_user.resetting.email.template%'
+                from_email:
+                    confirmation: '%fos_user.registration.confirmation.from_email%'
+                    resetting: '%fos_user.resetting.email.from_email%'
 
     Wallabag\UserBundle\EventListener\CreateConfigListener:
         arguments:
@@ -211,6 +300,7 @@ services:
             $readingSpeed: "%wallabag_core.reading_speed%"
             $actionMarkAsRead: "%wallabag_core.action_mark_as_read%"
             $listMode: "%wallabag_core.list_mode%"
+            $displayThumbnails: "%wallabag_core.display_thumbnails%"
 
     Wallabag\UserBundle\EventListener\AuthenticationFailureListener:
         tags:
@@ -260,3 +350,13 @@ services:
     Wallabag\ImportBundle\Import\ChromeImport:
         tags:
             -  { name: wallabag_import.import, alias: chrome }
+
+    # to factorize the proximity and bypass translation for prev & next
+    pagerfanta.view.default_wallabag:
+        class: Pagerfanta\View\OptionableView
+        arguments:
+            - '@pagerfanta.view.twitter_bootstrap'
+            - { proximity: 1, prev_message: "<", next_message: ">" }
+        public: false
+        tags:
+            - { name: pagerfanta.view, alias: default_wallabag }

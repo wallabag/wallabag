@@ -19,7 +19,7 @@ import './css/index.scss';
 
 const mobileMaxWidth = 993;
 
-function darkTheme() {
+(function darkTheme() {
   const rootEl = document.querySelector('html');
   const themeDom = {
     darkClass: 'dark-theme',
@@ -87,35 +87,42 @@ function darkTheme() {
       return true;
     },
   };
+
+  const addDarkThemeListeners = () => {
+    $(document).ready(() => {
+      const lightThemeButtons = document.querySelectorAll('.js-theme-toggle[data-theme="light"]');
+      [...lightThemeButtons].map((lightThemeButton) => {
+        lightThemeButton.addEventListener('click', (e) => {
+          e.preventDefault();
+          themeDom.removeClass(rootEl);
+          themeCookie.setCookie(false);
+        });
+        return true;
+      });
+      const darkThemeButtons = document.querySelectorAll('.js-theme-toggle[data-theme="dark"]');
+      [...darkThemeButtons].map((darkThemeButton) => {
+        darkThemeButton.addEventListener('click', (e) => {
+          e.preventDefault();
+          themeDom.addClass(rootEl);
+          themeCookie.setCookie(true);
+        });
+        return true;
+      });
+      const autoThemeButtons = document.querySelectorAll('.js-theme-toggle[data-theme="auto"]');
+      [...autoThemeButtons].map((autoThemeButton) => {
+        autoThemeButton.addEventListener('click', (e) => {
+          e.preventDefault();
+          themeCookie.removeCookie();
+          preferedColorScheme.choose();
+        });
+        return true;
+      });
+    });
+  };
+
   preferedColorScheme.init();
-  const lightThemeButtons = document.querySelectorAll('.js-theme-toggle[data-theme="light"]');
-  [...lightThemeButtons].map((lightThemeButton) => {
-    lightThemeButton.addEventListener('click', (e) => {
-      e.preventDefault();
-      themeDom.removeClass(rootEl);
-      themeCookie.setCookie(false);
-    });
-    return true;
-  });
-  const darkThemeButtons = document.querySelectorAll('.js-theme-toggle[data-theme="dark"]');
-  [...darkThemeButtons].map((darkThemeButton) => {
-    darkThemeButton.addEventListener('click', (e) => {
-      e.preventDefault();
-      themeDom.addClass(rootEl);
-      themeCookie.setCookie(true);
-    });
-    return true;
-  });
-  const autoThemeButtons = document.querySelectorAll('.js-theme-toggle[data-theme="auto"]');
-  [...autoThemeButtons].map((autoThemeButton) => {
-    autoThemeButton.addEventListener('click', (e) => {
-      e.preventDefault();
-      themeCookie.removeCookie();
-      preferedColorScheme.choose();
-    });
-    return true;
-  });
-}
+  addDarkThemeListeners();
+}());
 
 const stickyNav = () => {
   const nav = $('.js-entry-nav-top');
@@ -150,7 +157,6 @@ const articleScroll = () => {
 $(document).ready(() => {
   // sideNav
   $('.button-collapse').sideNav();
-  darkTheme();
   $('select').material_select();
   $('.collapsible').collapsible({
     accordion: false,

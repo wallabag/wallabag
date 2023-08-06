@@ -4,6 +4,9 @@ namespace Wallabag\UserBundle\Mailer;
 
 use Scheb\TwoFactorBundle\Mailer\AuthCodeMailerInterface;
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 use Twig\Environment;
 
 /**
@@ -13,9 +16,9 @@ use Twig\Environment;
 class AuthCodeMailer implements AuthCodeMailerInterface
 {
     /**
-     * SwiftMailer.
+     * Mailer.
      *
-     * @var \Swift_Mailer
+     * @var MailerInterface
      */
     private $mailer;
 
@@ -55,14 +58,12 @@ class AuthCodeMailer implements AuthCodeMailerInterface
     private $wallabagUrl;
 
     /**
-     * Initialize the auth code mailer with the SwiftMailer object.
-     *
      * @param string $senderEmail
      * @param string $senderName
      * @param string $supportUrl  wallabag support url
      * @param string $wallabagUrl wallabag instance url
      */
-    public function __construct(\Swift_Mailer $mailer, Environment $twig, $senderEmail, $senderName, $supportUrl, $wallabagUrl)
+    public function __construct(MailerInterface $mailer, Environment $twig, $senderEmail, $senderName, $supportUrl, $wallabagUrl)
     {
         $this->mailer = $mailer;
         $this->twig = $twig;
@@ -77,7 +78,7 @@ class AuthCodeMailer implements AuthCodeMailerInterface
      */
     public function sendAuthCode(TwoFactorInterface $user): void
     {
-        $template = $this->twig->loadTemplate('@WallabagUser/TwoFactor/email_auth_code.html.twig');
+        $template = $this->twig->load('@WallabagUser/TwoFactor/email_auth_code.html.twig');
 
         $subject = $template->renderBlock('subject', []);
         $bodyHtml = $template->renderBlock('body_html', [
@@ -92,15 +93,13 @@ class AuthCodeMailer implements AuthCodeMailerInterface
             'support_url' => $this->supportUrl,
         ]);
 
-        $message = new \Swift_Message();
-        $message
-            ->setTo($user->getEmailAuthRecipient())
-            ->setFrom($this->senderEmail, $this->senderName)
-            ->setSubject($subject)
-            ->setBody($bodyText, 'text/plain')
-            ->addPart($bodyHtml, 'text/html')
-        ;
+        $email = (new Email())
+            ->from(new Address($this->senderEmail, $this->senderName ?? $this->senderEmail))
+            ->to($user->getEmailAuthRecipient())
+            ->subject($subject)
+            ->text($bodyText)
+            ->html($bodyHtml);
 
-        $this->mailer->send($message);
+        $this->mailer->send($email);
     }
 }

@@ -17,7 +17,7 @@ use Wallabag\UserBundle\Entity\User;
 
 class EntryControllerTest extends WallabagCoreTestCase
 {
-    const AN_URL_CONTAINING_AN_ARTICLE_WITH_IMAGE = 'https://www.lemonde.fr/judo/article/2017/11/11/judo-la-decima-de-teddy-riner_5213605_1556020.html';
+    public const AN_URL_CONTAINING_AN_ARTICLE_WITH_IMAGE = 'https://www.lemonde.fr/judo/article/2017/11/11/judo-la-decima-de-teddy-riner_5213605_1556020.html';
     public $downloadImagesEnabled = false;
     public $url = 'https://www.lemonde.fr/pixels/article/2019/06/18/ce-qu-il-faut-savoir-sur-le-libra-la-cryptomonnaie-de-facebook_5477887_4408996.html';
     private $entryDataTestAttribute = '[data-test="entry"]';
@@ -591,8 +591,8 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertGreaterThan(1, $title = $crawler->filter('div[id=article] h1')->extract(['_text']));
         $this->assertStringContainsString('My updated title hehe :)', $title[0]);
-        $this->assertGreaterThan(1, $stats = $crawler->filter('div[class="tools grey-text"] ul[class=stats] li a[class="tool grey-text"]')->extract(['_text']));
-        $this->assertStringContainsString('example.io', trim($stats[1]));
+        $originUrl = $crawler->filter('[data-tests="entry-origin-url"]')->text();
+        $this->assertStringContainsString('example.io', $originUrl);
     }
 
     public function testEditRemoveOriginUrl()
@@ -626,9 +626,8 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $title);
         $this->assertStringContainsString('My updated title hehe :)', $title[0]);
 
-        $stats = $crawler->filter('div[class="tools grey-text"] ul[class=stats] li a[class="tool grey-text"]')->extract(['_text']);
-        $this->assertCount(1, $stats);
-        $this->assertStringNotContainsString('example.io', trim($stats[0]));
+        $originUrl = $crawler->filter('[data-tests="entry-origin-url"]')->extract(['_text']);
+        $this->assertCount(0, $originUrl);
     }
 
     public function testToggleArchive()
@@ -1502,7 +1501,7 @@ class EntryControllerTest extends WallabagCoreTestCase
                 'pt_BR',
             ],
             'es-ES' => [
-                'https://elpais.com/internacional/2022-10-09/ultima-hora-de-la-guerra-en-ucrania-hoy-en-directo.html',
+                'https://elpais.com/internacional/2022-11-03/ultima-hora-de-la-guerra-entre-rusia-y-ucrania-hoy-en-directo.html',
                 'es',
             ],
         ];

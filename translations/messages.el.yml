@@ -1,0 +1,696 @@
+developer:
+    existing_clients:
+        field_grant_types: Τύπος προνομίου επιτρέπεται
+        no_client: Κανένας πελάτης προς το παρόν.
+        field_uris: URI ανακατεύθυνσης
+        field_secret: Μυστικό κλειδί πελάτη
+        field_id: ID πελάτη
+        title: Υπάρχοντες πελάτες
+    client_parameter:
+        field_secret: Μυστικό κλειδί πελάτη
+        field_id: ID πελάτη
+        field_name: Όνομα πελάτη
+        page_description: Ορίστε οι παράμετροι του πελάτη σας.
+        page_title: Διαχείριση πελατών API > Παράμετροι πελάτη
+        read_howto: Διαβάστε το «Πώς να δημιουργήσω την πρώτη μου εφαρμογή»
+        back: Επιστροφή
+    client:
+        copy_to_clipboard: Αντιγραφή
+        action_back: Επιστροφή
+        form:
+            save_label: Δημιουργία νέου πελάτη
+            redirect_uris_label: URI ανακατεύθυνσης (προαιρετικό)
+            name_label: Όνομα του πελάτη
+        page_description: Πρόκειται να δημιουργήσετε έναν νέο πελάτη. Παρακαλούμε συμπληρώστε το παρακάτω πεδίο για το URI ανακατεύθυνσης της εφαρμογής σας.
+        page_title: Διαχείριση πελατών API > Νέος πελάτης
+    remove:
+        action: Αφαίρεση του πελάτη %name%
+        warn_message_2: Αν το αφαιρέσετε, κάθε εφαρμογή ρυθμισμένη με αυτόν τον πελάτη δεν θα μπορέσει να επαληθεύσει με το δικό σας wallabag.
+        warn_message_1: Έχετε τη δυνατότητα να αφαιρέσετε τον πελάτη %name%. Αυτή η δράση είναι ΜΗ ΑΝΑΣΤΡΕΨΙΜΗ!
+    clients:
+        create_new: Δημιουργία νέου πελάτη
+        title: Πελάτες
+    list_methods: Προβολή σε λίστα των μεθόδων API
+    full_documentation: Προβολή πλήρους τεκμηρίωσης του API
+    how_to_first_app: Πώς να δημιουργήσω την πρώτη μου εφαρμογή
+    documentation: Τεκμηρίωση
+    welcome_message: Καλώς ήρθατε στο API του wallabag
+    page_title: Διαχείριση πελατών API
+    howto:
+        back: Επιστροφή
+        description:
+            paragraph_8: Αν θέλετε να δείτε όλα τα ακροσημεία του API, μπορείτε να ρίξετε μια ματιά <a href="%link%">στην τεκμηρίωση του API</a>.
+            paragraph_7: Αυτή η κλήση θα επιστρέψει όλες τις καταχωρίσεις για τον χρήστη σας.
+            paragraph_6: 'Το access_token είναι χρήσιμο για να γίνει κλήση προς το ακροσημείο του API: Για παράδειγμα:'
+            paragraph_5: 'Το API θα επιστρέψει μια απάντηση όπως αυτή:'
+            paragraph_4: 'Τώρα, δημιουργήστε το σύμβολό σας (αντικαταστήστε τα client_id, client_secret, username και password με τις σωστές αξίες):'
+            paragraph_3: Για να δημιουργήσετε αυτό το σύμβολο, πρέπει να <a href="%link%">δημιουργήσετε έναν καινούριο πελάτη</a>.
+            paragraph_2: Πρέπει να χρησιμοποιήσετε ένα σύμβολο για να γίνει επικοινωνία μεταξύ της τρίτης εφαρμογής και του API του wallabag.
+            paragraph_1: Οι ακόλουθες εντολές χρησιμοποιούν τη <a href="https://github.com/jkbrzt/httpie">βιβλιοθήκη HTTPie</a>. Σιγουρευτείτε ότι είναι εγκατεστημένη στο σύστημά σας πριν τη χρησιμοποιήσετε.
+        page_title: Διαχείριση πελατών API > Πώς να δημιουργήσω την πρώτη μου εφαρμογή
+about:
+    helping:
+        by_paypal: μέσω Liberapay
+        description: 'Το wallabag είναι δωρεάν και ανοιχτού κώδικα. Μπορείτε να μας βοηθήσετε:'
+    getting_help:
+        documentation: Τεκμηρίωση
+        support: <a href="https://github.com/wallabag/wallabag/issues">στο GitHub</a>
+        bug_reports: Αναφορές σφάλματος
+    third_party:
+        license: Άδεια
+        package: Πακέτο
+        description: 'Ορίστε η λίστα με όλες τις βιβλιοθήκες από τρίτους που χρησιμοποιούνται στο wallabag (με τις άδειές τους):'
+    contributors:
+        description: Ευχαριστούμε όσους συνεισέφεραν στην εφαρμογή web του wallabag
+    who_behind_wallabag:
+        version: Έκδοση
+        license: Άδεια
+        project_website: Ιστοσελίδα του εγχειρήματος
+        many_contributors: Και πολλούς άλλους συμμετέχοντες ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">στο GitHub</a>
+        website: ιστοσελίδα
+        developped_by: Προγραμματισμένο από
+    top_menu:
+        third_party: Βιβλιοθήκες από τρίτους
+        contributors: Συμμετέχοντες
+        helping: Υποστήριξη του wallabag
+        getting_help: Βοήθεια
+        who_behind_wallabag: Η ομάδα πίσω από το wallabag
+    page_title: Σχετιά
+flashes:
+    ignore_origin_instance_rule:
+        notice:
+            deleted: Ο γενικός κανόνας αγνόησε-προέλευση διαγράφηκε
+            updated: Ο γενικός κανόνας αγνόησε-προέλευση ενημερώθηκε
+            added: Ο γενικός κανόνας αγνόησε-προέλευση προστέθηκε
+    site_credential:
+        notice:
+            deleted: Το πιστοποιητικό ιστοσελίδας για «%host%» διαγράφηκε
+            updated: Το πιστοποιητικό ιστοσελίδας για «%host%» ενημερώθηκε
+            added: Το πιστοποιητικό ιστοσελίδας για «%host%» προστέθηκε
+    user:
+        notice:
+            deleted: Ο χρήστης «%username%» διαγράφηκε
+            updated: Ο χρήστης «%username%» ενημερώθηκε
+            added: Ο χρήστης «%username%» προστέθηκε
+    developer:
+        notice:
+            client_deleted: Ο πελάτης %name% διαγράφηκε
+            client_created: Ο νέος πελάτης %name% δημιουργήθηκε.
+    import:
+        error:
+            rabbit_enabled_not_installed: Το RabbitMQ είναι ενεργοποιημένο για τη διαχείριση ασύγχρονης εισαγωγής αλλά φαίνεται ότι <u>δεν μπορούμε να συνδεθούμε σε αυτό</u>. Παρακαλούμε ελέγξτε τις ρυθμίσεις του RabbitMQ.
+            redis_enabled_not_installed: Το Redis είναι ενεργοποιημένο για τη διαχείριση ασύγχρονης εισαγωγής αλλά φαίνεται ότι <u>δεν μπορούμε να συνδεθούμε σε αυτό</u>. Παρακαλούμε ελέγξτε τις ρυθμίσεις του Redis.
+        notice:
+            summary_with_queue: 'Σύνοψη εισαγωγής: %queued% βρίσκονται σε αναμονή.'
+            summary: 'Σύνοψη εισαγωγής: %imported% εισάχθηκαν, %skipped% έχουν ήδη αποθηκευτεί.'
+            failed_on_file: Σφάλμα κατά τη διαδικασία εισαγωγής. Παρακαλούμε ελέγξτε το αρχείο εισαγωγής σας.
+            failed: Η εισαγωγή απέτυχε, παρακαλούμε προσπαθήστε ξανά.
+    tag:
+        notice:
+            tag_renamed: Η ετικέτα μετονομάστηκε
+            tag_added: Η ετικέτα προστέθηκε
+    entry:
+        notice:
+            no_random_entry: Κανένα άρθρο δεν βρέθηκε με αυτά τα κριτήρια
+            entry_deleted: Η καταχώριση διαγράφηκε
+            entry_unstarred: Η καταχώριση σημάνθηκε ως μη αγαπημένη
+            entry_starred: Η καταχώριση σημάνθηκε ως αγαπημένη
+            entry_unarchived: Η καταχώριση βγήκε από το αρχείο
+            entry_archived: Η καταχώριση αρχειοθετήθηκε
+            entry_reloaded_failed: Η καταχώριση ανανεώθηκε αλλά το πιάσιμο περιεχομένου απέτυχε
+            entry_reloaded: Η καταχώριση ανανεώθηκε
+            entry_updated: Η καταχώριση ενημερώθηκε
+            entry_saved_failed: Η καταχώριση αποθηκεύτηκε αλλά το πιάσιμο περιεχομένου απέτυχε
+            entry_saved: Η καταχώριση αποθηκεύτηκε
+            entry_already_saved: Η καταχώριση έχει ήδη αποθηκευτεί στις %date%
+    config:
+        notice:
+            ignore_origin_rules_updated: Ο κανόνας αγνόησε-προέλευση ενημερώθηκε
+            ignore_origin_rules_deleted: Ο κανόνας αγνόησε-προέλευση διαγράφηκε
+            tagging_rules_not_imported: Σφάλμα κατά την εισαγωγή κανόνων σήμανσης ετικετών
+            tagging_rules_imported: Οι κανόνες σήμανσης ετικετών εισάχθηκαν
+            otp_disabled: Η επαλήθευση διπλού παράγοντα απενεργοποιήθηκε
+            otp_enabled: Η επαλήθευση διπλού παράγοντα ενεργοποιήθηκε
+            archived_reset: Οι αρχειοθετημένες καταχωρίσεις διαγράφηκαν
+            entries_reset: Έγινε επαναφορά των καταχωρίσεων
+            tags_reset: Έγινε επαναφορά των ετικετών
+            annotations_reset: Έγινε επαναφορά των σχολιασμών
+            feed_token_revoked: Το σύμβολο τροφοδότησης διαγράφηκε
+            feed_token_updated: Το σύμβολο τροφοδότησης ενημερώθηκε
+            feed_updated: Οι πληροφορίες τροφοδότησης ενημερώθηκαν
+            tagging_rules_deleted: Ο κανόνας σήμανσης ετικετών διαγράφηκε
+            tagging_rules_updated: Οι κανόνες σήμανσης ετικετών ενημερώθηκαν
+            user_updated: Οι πληροφορίες ενημερώθηκαν
+            password_not_updated_demo: Στη λειτουργία demo, δεν μπορείτε να αλλάξετε τον κωδικό για αυτόν τον χρήστη.
+            password_updated: Ο κωδικός ενημερώθηκε
+            config_saved: Οι ρυθμίσεις αποθηκεύτηκαν.
+error:
+    page_title: Προέκυψε ένα σφάλμα
+ignore_origin_instance_rule:
+    form:
+        back_to_list: Επιστροφή στη λίστα
+        delete_confirm: Είστε σίγουρος;
+        delete: Διαγραφή
+        save: Αποθήκευση
+        rule_label: Κανόνας
+    list:
+        create_new_one: Δημιουργία νέου γενικού κανόνα αγνόησε-προέλευση
+        no: Όχι
+        yes: Ναι
+        edit_action: Επεξεργασία
+        actions: Δράσεις
+    description: Εδώ μπορείτε να διαχειριστείτε τους γενικούς κανόνες αγνόησε-προέλευση που χρησιμοποιούνται για να αγνοηθούν κάποια μοτίβα του URL προέλευσης.
+    edit_ignore_origin_instance_rule: Επεξεργασία υπάρχοντος κανόνα αγνόησε-προέλευση
+    new_ignore_origin_instance_rule: Δημιουργία γενικού κανόνα αγνόησε-προέλευση
+    page_title: Γενικοί κανόνες αγνόησε-προέλευση
+site_credential:
+    form:
+        back_to_list: Επιστροφή στη λίστα
+        delete_confirm: Είστε σίγουρος;
+        delete: Διαγραφή
+        save: Αποθήκευση
+        password_label: Κωδικός
+        host_label: Ξενιστής (subdomain.example.org, .example.org, κλπ.)
+        username_label: Σύνδεση
+    list:
+        create_new_one: Δημιουργία νέου πιστοποιητικού
+        no: Όχι
+        yes: Ναι
+        edit_action: Επεξεργασία
+        actions: Δράσεις
+    description: Εδώ μπορείτε να διαχειριστείτε όλα τα πιστοποιητικά για τις ιστοσελίδες που τα απαιτούν (δημιουργία, επεξεργασία και διαγραφή), όπως ένα paywall, μια επαλήθευση, κλπ.
+    edit_site_credential: Επεξεργασίας υπάρχοντος πιστοποιητικού
+    new_site_credential: Δημιουργία ενός πιστοποιητικού
+    page_title: Διαχείριση πιστοποιητικών ιστοσελίδων
+import:
+    pinboard:
+        how_to: Παρακαλούμε επιλέξτε το εξαγόμενο από το Pinboard και πατήστε στο παρακάτω κουμπί για να το ανεβάσετε και να το εισαγάγετε.
+        description: Αυτός ο εισαγωγέας θα εισαγάγει όλα τα άρθρα σας από το Pinboard. Στη σελίδα «Backup» (https://pinboard.in/settings/backup), πατήστε στο «JSON» στο τμήμα «Bookmarks». Θα γίνει λήψη ενός αρχείου JSON, χωρίς κατάληξη .json («pinboard_export»).
+        page_title: Εισαγωγή > Pinboard
+    instapaper:
+        how_to: Παρακαλούμε επιλέξτε το εξαγόμενο από το Instapaper και πατήστε στο παρακάτω κουμπί για να το ανεβάσετε και να το εισαγάγετε.
+        description: Αυτός ο εισαγωγέας θα εισαγάγει όλα τα άρθρα σας από το Instapaper. Στη σελίδα ρυθμίσεων (https://www.instapaper.com/user), πατήστε «Download .CSV file» στο τμήμα «Export». Θα γίνει λήψη ενός φακέλου CSV («instapaper-export.csv»).
+        page_title: Εισαγωγή > Instapaper
+    firefox:
+        how_to: Παρακαλούμε επιλέξτε το αρχείο σελιδοδεικτών και πατήστε στο παρακάτω κουμπί για να το εισαγάγετε. Έχετε υπόψη σας ότι η διαδικασία μπορεί να πάρει αρκετό χρόνο επειδή όλα τα άρθρα πρέπει να πιαστούν.
+        description: Αυτός ο εισαγωγέας θα εισαγάγει όλους τους σελιδοδείκτες σας από το Firefox. Μεταβείτε απλώς στους σελιδοδείκτες σας (Ctrl+Shift+O), μετά στο «Εισαγωγή και αποθήκευση», επιλέξτε «Αποήκευση… ». Θα έχετε ένα αρχείο JSON.
+        page_title: Εισαγωγή > Firefox
+    chrome:
+        how_to: Παρακαλούμε επιλέξτε το αρχείο σελιδοδεικτών σας και πατήστε στο παρακάτω κουμπί για να το εισαγάγετε. Έχετε υπόψη σας ότι η διαδικασία μπορεί να πάρει αρκετό χρόνο επειδή όλα τα άρθρα πρέπει να ξαναπιαστούν.
+        description: 'Αυτός ο εισαγωγέας θα εισαγάγει όλους τους σελιδοδείκτες σας από το Chrome. Η τοποθεσία του αρχείου εξαρτάται από το λειτουργικό σας σύστημα: <ul><li>Στα Linux, μεταβείτε στον κατάλογο <code>~/.config/chromium/Default/</code></li><li>Στα Windows, πρέπει να βρίσκεται στο <code>%LOCALAPPDATA%\Google\Chrome\User Data\Default</code></li><li>Στα OS X, πρέπει να βρίσκεται στο <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Μόλις είστε εκεί, αντιγράψτε το αρχείο σελιδοδεικτών σας σε κάποιο μέρος που μπορείτε να το βρείτε.<em><br>Έχετε υπόψη σας ότι αν έχετε Chromium αντί για Chrome, θα πρέπει να διορθώσετε τα μονοπάτια καταλλήλως.</em></p>'
+        page_title: Εισαγωγή > Chrome
+    worker:
+        download_images_warning: Ενεργοποιήσατε τη λήψη εικόνων για τα άρθρα σας. Σε συνδυασμό με την κλασική εισαγωγή, ενδέχεται να πάρει υπερβολικά πολύ χρόνο (ή να αποτύχει). Σας συνιστούμε <strong>ιδιαίτερα έντονα</strong> να ενεργοποιήσετε ασύγχρονη εισαγωγή για να αποφύγετε σφάλματα.
+        enabled: 'Η εισαγωγή γίνεται ασύγχρονα. Μόλις ξεκινήσει η διεργασία εισαγωγής, ένα εξωτερικό πρόγραμμα θα χειριστεί τις διεργασίες μία μία τη φορά. Η τρέχουσα υπηρεσία είναι:'
+    wallabag_v1:
+        description: Αυτός ο εισαγωγέας θα εισαγάγει όλα τα άρθρα σας από το wallabag v1. Στη σελίδα ρυθμίσεών σας, πατήστε «JSON export» στο τμήμα «Export your wallabag data». Θα έχετε ένα αρχείο «wallabag-export-1-xxxx-xx-xx.json».
+        how_to: Παρακαλούμε επιλέξτε το εξαγόμενο από το wallabag v1 και πατήστε το παρακάτω κουμπί για να το ανεβάσετε και να το εισαγάγετε.
+        page_title: Εισαγωγή > Wallabag v1
+    pocket:
+        config_missing:
+            user_message: Ο διαχειριστής του διακομιστή σας πρέπει να ορίσει ένα κλειδί API για το Pocket.
+            admin_message: Πρέπει να ορίσετε %keyurls%ένα pocket_consumer_key%keyurle%.
+            description: Η εισαγωγή από το Pocket δεν έχει ρυθμιστεί.
+        authorize_message: Μπορείτε να εισαγάγετε τα δεδομένα σας από τον λογαριασμό σας στο Pocket. Πρέπει απλώς να πατήσετε το παρακάτω κουμπί και να επαληθεύσετε την εφαρμογή για να γίνει σύνδεση με το getpocket.com.
+        connect_to_pocket: Σύνδεση στο Pocket και εισαγωγή δεδομένων
+        description: Αυτός ο εισαγωγέας θα εισαγάγει όλα τα δεδομένα σας από το Pocket. Το Pocket δεν μας επιτρέπει να ανακτήσουμε περιεχόμενο από την υπηρεσία τους, οπότε το wallabag θα πρέπει να ξαναπιάσει κάθε άρθρο για να ανακτήσει το περιεχόμενό του.
+        page_title: Εισαγωγή > Pocket
+    readability:
+        how_to: Παρακαλούμε επιλέξτε το εξαγόμενο από το Readability και πατήστε στο παρακάτω κουμπί για να το ανεβάσετε και να το εισαγάγετε.
+        description: Αυτός ο εισαγωγέας θα εισαγάγει όλα τα άρθρα σας από το Readability. Στη σελίδα εργαλείων σας (https://www.readability.com/tools/), πατήστε «Export your data» στο τμήμα «Data Export». Θα λάβετε ένα email για να κατεβάσετε ένα json (το οποίο αρχείο δεν καταλήγει με .json).
+        page_title: Εισαγωγή > Readability
+    elcurator:
+        description: Αυτός ο εισαγωγέας θα εισαγάγει όλα τα άρθρα σας από το elCurator. Μεταβείτε στις ρυθμίσεις στον λογαριασμό σας στο elCurator και μετά, κάνετε εξαγωγή του περιεχομένου σας. Θα έχετε ένα αρχείο JSON.
+        page_title: Εισαγωγή > elCurator
+    wallabag_v2:
+        description: Αυτός ο εισαγωγέας θα εισαγάγει όλα τα άρθρα σας από το wallabag v2. Μεταβείτε στο «Όλα τα άρθρα σας», μετά, στην πλευρική μπάρα εξαγωγής, πατήστε στο «JSON». Θα έχετε ένα αρχείο « All articles.json».
+        page_title: Εισαγωγή > Wallabag v2
+    form:
+        save_label: Μεταφόρτωση αρχείου
+        file_label: Αρχείο
+        mark_as_read_label: Σήμανση όλων των εισαγμένων καταχωρίσεων ως αναγνωσμένων
+        mark_as_read_title: Σήμανση όλων ως αναγνωσμένων;
+    action:
+        import_contents: Εισαγωγή περιεχομένων
+    page_description: Καλώς ήρθατε στον εισαγωγέα του wallabag. Παρακαλούμε επιλέξτε την υπηρεσία από την οποία θέλετε να μετακινηθείτε.
+    page_title: Εισαγωγή
+export:
+    unknown: Άγνωστο
+    footer_template: <div style="text-align:center;"><p>Παράχθηκε από το wallabag με %method%</p><p>Παρακαλούμε καταχωρίστε <a href="https://github.com/wallabag/wallabag/issues">ένα σφάλμα</a> αν έχετε πρόβλημα κατά την προβολή αυτού του E-Book στη συσκευή σας.</p></div>
+tag:
+    new:
+        placeholder: Μπορείτε να προσθέσετε περισσότερες ετικέτες, χωρισμένες με ένα κόμμα.
+        add: Προσθήκη
+    list:
+        untagged: Καταχωρίσεις χωρίς ετικέτες
+        no_untagged_entries: Δεν υπάρχουν καταχωρίσεις χωρίς ετικέτες.
+        see_untagged_entries: Δείτε τις καταχωρίσεις χωρίς ετικέτες
+        number_on_the_page: '{0} Δεν υπάρχουν ετικέτες.|{1} Υπάρχει μία ετικέτα.|]1,Inf[ Υπάρχουν %count% ετικέτες.'
+    page_title: Ετικέτες
+quickstart:
+    support:
+        gitter: Στο Gitter
+        email: Με email
+        github: Στο GitHub
+        description: Αν χρειάζεστε βοήθεια, είμαστε εδώ για εσάς.
+        title: Υποστήριξη
+    docs:
+        all_docs: Και τόσα άλλα άρθρα!
+        fetching_errors: Τι μπορώ να κάνω αν ένα άρθρο αντιμετωπίζει σφάλματα κατά το πιάσιμο του περιεχομένου του;
+        search_filters: Μάθετε πώς μπορείτε να αναζητήσετε ένα άρθρο χρησιμοποιώντας τη μηχανή αναζήτησης και τα φίλτρα
+        export: Μετατρέψτε τα άρθρα σας σε ePUB ή PDF
+        annotate: Σχολιάστε το άρθρο σας
+        description: Υπάρχουν πάρα πολλές λειτουργίες στο wallabag. Μη διστάσετε να διαβάσετε το εγχειρίδιο για να τις γνωρίσετε και να μάθετε πώς να τις χρησιμοποιείτε.
+        title: Πλήρης τεκμηρίωση
+    developer:
+        use_docker: Χρησιμοποιήστε Docker για να εγκαταστήσετε το wallabag
+        create_application: Δημιουργήστε τη δική σας εφαρμογή ως τρίτος
+        description: 'Λάβαμε επίσης υπόψη τους προγραμματιστές: Docker, API, μεταφράσεις, κλπ.'
+        title: Προγραμματιστές
+    migrate:
+        instapaper: Μετακίνηση από το Instapaper
+        readability: Μετακίνηση από το Readability
+        wallabag_v2: Μετακίνηση από το wallabag v2
+        wallabag_v1: Μετακίνηση από το wallabag v1
+        pocket: Μετακίνηση από το Pocket
+        description: Χρησιμοποιείτε άλλη υπηρεσία; Θα σας βοηθήσουμε να ανακτήσετε τα δεδομένα σας στο wallabag.
+        title: Κάντε μετακίνηση από μια υπάρχουσα υπηρεσία
+    first_steps:
+        unread_articles: Και ταξινομήστε το!
+        new_article: Αποθηκεύστε το πρώτο σας άρθρο
+        description: Τώρα που το wallabag είναι σωστά ρυθμισμένο, είναι ώρα να αρχειοθετήσετε το διαδίκτυο. Μπορείτε να κάνετε κλικ στο σήμα + πάνω δεξιά για να προσθέσετε έναν σύνδεσμο.
+        title: Πρώτα βήματα
+    admin:
+        import: Ρύθμιση εισαγωγών
+        export: Ρύθμιση εξαγωγών
+        sharing: Ενεργοποίηση κάποιων παραμέτρων σχετικά με την κοινοποίηση άρθρων
+        analytics: Ρύθμιση στατιστικών αναλύσεων
+        new_user: Δημιουργία ενός νέου χρήστη
+        description: 'Ως διαχειριστής, έχετε προνόμια στο wallabag. Μπορείτε να κάνετε τα εξής:'
+        title: Διαχείριση
+    configure:
+        tagging_rules: Γράψτε κανόνες για να σημάνετε αυτόματα με ετικέτες τα άρθρα σας
+        feed: Ενεργοποίηση τροφοδοτήσεων
+        language: Αλλαγή γλώσσας και σχεδιασμού
+        description: Προκειμένου να έχετε μια εφαρμογή που σας ταιριάζει, ρίξτε μια ματιά στις ρυθμίσεις του wallabag.
+        title: Ρυθμίστε την εφαρμογή
+    intro:
+        paragraph_2: Ακολουθήστε μας!
+        paragraph_1: Θα σας συνοδεύσουμε στην επίσκεψή σας στο wallabag και θα σας δείξουμε κάποιες λειτουργίες που μπορεί να σας ενδιαφέρουν.
+        title: Καλώς ήρθατε στο wallabag!
+    more: Περισσότερα…
+    page_title: Γρήγορη εκκίνηση
+howto:
+    shortcuts:
+        open_article: Προβολή της επιλεγμένης καταχώρισης
+        arrows_navigation: Πλοήγηση στα άρθρα
+        hide_form: Απόκρυψη της τρέχουσας φόρμας (αναζήτηση ή νέος σύνδεσμος)
+        add_link: Προσθήκη νέου συνδέσμου
+        delete: Διαγραφή της καταχώρισης
+        toggle_archive: Εναλλαγή κατάστασης αναγνωσμένου για την καταχώριση
+        toggle_favorite: Εναλλαγή κατάστασης αγαπημένου για την καταχώριση
+        open_original: Άνοιγμα πρωτότυπου URL της καταχώρισης
+        article_title: Διαθέσιμες συντομεύσεις στην προβολή καταχώρισης
+        search: Προβολή της φόρμας αναζήτησης
+        list_title: Διαθέσιμες συντομεύσεις στις σελίδες της λίστας
+        go_logout: Αποσύνδεση
+        go_howto: Μετάβαση στη βοήθεια (αυτή η σελίδα!)
+        go_developers: Μετάβαση στους προγραμματιστές
+        go_import: Μετάβαση στην εισαγωγή
+        go_config: Μετάβαση στις ρυθμίσεις
+        go_tags: Μετάβαση στις ετικέτες
+        go_all: Μετάβαση σε όλες τις καταχωρίσεις
+        go_archive: Μετάβαση στο αρχείο
+        go_starred: Μετάβαση στα αγαπημένα
+        go_unread: Μετάβαση στα μη αναγνωσμένα
+        all_pages_title: Οι συντομεύσεις είναι διαθέσιμες σε όλες τις σελίδες
+        action: Δράση
+        shortcut: Συντόμευση
+        page_description: Ορίστε οι διαθέσιμες συντομεύσεις στο wallabag.
+    bookmarklet:
+        description: 'Σύρετε και ρίξτε αυτόν τον σύνδεσμο στην μπάρα σελιδοδεικτών σας:'
+    mobile_apps:
+        windows: στο Microsoft Store
+        ios: στο iTunes Store
+        android:
+            via_google_play: μέσω Google Play
+            via_f_droid: μέσω F-Droid
+    browser_addons:
+        opera: Πρόσθετο Opera
+        chrome: Πρόσθετο Chrome
+        firefox: Πρόσθετο Firefox
+    form:
+        description: Χάρη σε αυτήν τη φόρμα
+    top_menu:
+        bookmarklet: Bookmarklet
+        mobile_apps: Εφαρμογές κινητών
+        browser_addons: Πρόσθετα περιηγητή
+    page_description: 'Υπάρχουν διάφοροι τρόποι αποθήκευσης ενός άρθρου:'
+    tab_menu:
+        shortcuts: Χρήση συντομεύσεων
+        add_link: Προσθήκη συνδέσμου
+    page_title: Βοήθεια
+entry:
+    metadata:
+        published_on: Δημοσιεύτηκε την
+        added_on: Προστέθηκε την
+        address: Διεύθυνση
+        reading_time_minutes_short: '%readingTime% λεπτά'
+        reading_time: Εκτιμώμενος χρόνος ανάγνωσης
+    confirm:
+        delete_tag: Είστε σίγουροι ότι θέλετε να αφαιρέσετε αυτήν την ετικέτα από αυτό το άρθρο;
+        delete: Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το άρθρο;
+    public:
+        shared_by_wallabag: Αυτό το άρθρο κοινοποιήθηκε από %username% με <a href='%wallabag_instance%'>wallabag</a>
+    edit:
+        save_label: Αποθήκευση
+        origin_url_label: URL προέλευσης (απ' όπου βρήκατε την καταχώριση)
+        url_label: URL
+        title_label: Τίτλος
+        page_title: Επεξεργασία μιας καταχώρισης
+    search:
+        placeholder: Τι ψάχνετε;
+    new:
+        form_new:
+            url_label: URL
+        placeholder: http://website.com
+        page_title: Αποθήκευση νέας καταχώρισης
+    view:
+        provided_by: Παρεχόμενο από
+        published_by: Δημοσιευμένο από
+        published_at: Ημερομηνία δημοσίευσης
+        created_at: Ημερομηνία δημιουργίας
+        annotations_on_the_entry: '{0} Καθόλου σχολιασμοί|{1} Ένας σχολιασμός|]1,Inf[ %count% σχολιασμοί'
+        original_article: πρωτότυπο
+        edit_title: Επεξεργασία τίτλου
+        left_menu:
+            problem:
+                description: Εμφανίζεται λάθος αυτό το άρθρο;
+                label: Υπάρχει πρόβλημα;
+            theme_toggle_auto: Αυτόματο
+            theme_toggle_dark: Σκοτεινό
+            theme_toggle_light: Ανοιχτό
+            theme_toggle: Εναλλαγή θέματος
+            print: Εκτύπωση
+            export: Εξαγωγή
+            delete_public_link: διαγραφή δημόσιου συνδέσμου
+            public_link: δημόσιος σύνδεσμος
+            share_email_label: Email
+            share_content: Κοινοποίηση
+            add_a_tag: Προσθήκη μιας ετικέτας
+            delete: Διαγραφή
+            re_fetch_content: Πιάσιμο περιεχομένου ξανά
+            view_original_article: Πρωτότυπο άρθρο
+            set_as_starred: Εναλλαγή σήμανσης ως αγαπημένου
+            set_as_unread: Σήμανση ως μη αναγνωσμένου
+            set_as_read: Σήμανση ως αναγνωσμένου
+            back_to_homepage: Επιστροφή
+            back_to_top: Επιστροφή προς τα πάνω
+    filters:
+        action:
+            filter: Φιλτράρισμα
+            clear: Καθάρισμα
+        created_at:
+            to: σε
+            from: από
+            label: Ημερομηνία δημιουργίας
+        domain_label: Όνομα ιστοσελίδας
+        reading_time:
+            to: σε
+            from: από
+            label: Χρόνος ανάγνωσης σε λεπτά
+        http_status_label: Κατάσταση HTTP
+        language_label: Γλώσσα
+        is_public_help: Δημόσιος σύνδεσμος
+        is_public_label: Έχει έναν δημόσιο σύνδεσμο
+        preview_picture_help: Προεπισκόπηση εικόνας
+        preview_picture_label: Έχει μια εικόνα προεπισκόπησης
+        unread_label: Μη αναγνωσμένα
+        starred_label: Αγαπημένα
+        archived_label: Αρχειοθετημένα
+        status_label: Κατάσταση
+        title: Φίλτρα
+    list:
+        export_title: Εξαγωγή
+        delete: Διαγραφή
+        toogle_as_star: Εναλλαγή σήμανσης ως αγαπημένου
+        toogle_as_read: Εναλλαγή σήμανσης ως αναγνωσμένου
+        original_article: πρωτότυπο
+        reading_time_less_one_minute_short: '&lt; 1 λεπτό'
+        reading_time_minutes_short: '%readingTime% λεπτά'
+        number_of_tags: '{1}και μία άλλη ετικέτα|]1,Inf[και %count% άλλες ετικέτες'
+        reading_time_less_one_minute: 'εκτιμώμενος χρόνος ανάγνωσης: &lt; 1 λεπτό'
+        reading_time_minutes: 'εκτιμώμενος χρόνος ανάγνωσης: %readingTime% λεπτά'
+        reading_time: εκτιμώμενος χρόνος ανάγνωσης
+        number_on_the_page: '{0} Δεν υπάρχουν καταχωρίσεις.|{1} Υπάρχει μία καταχώριση.|]1,Inf[ Υπάρχουν %count% καταχωρίσεις.'
+    page_titles:
+        all: Όλες οι καταχωρίσεις
+        untagged: Καταχωρίσεις χωρίς ετικέτες
+        filtered_search: 'Φιλτράρισμα με αναζήτηση:'
+        filtered_tags: 'Φιλτράρισμα με ετικέτες:'
+        filtered: Φιλτραρισμένες καταχωρίσεις
+        archived: Αρχειοθετημένες καταχωρίσεις
+        starred: Αγαπημένες καταχωρίσες
+        unread: Μη αναγνωσμένες καταχωρίσεις
+    default_title: Τίτλος της καταχώρισης
+config:
+    otp:
+        app:
+            qrcode_label: Κωδικός QR
+            enable: Ενεργοποίηση
+            cancel: Ακύρωση
+            two_factor_code_description_5: 'Αν δεν μπορείτε να δείτε τον κωδικό QR ή δεν μπορείτε να τον σκανάρετε, χρησιμοποιήστε το ακόλουθο κλειδί στην εφαρμογή σας:'
+            two_factor_code_description_4: 'Δοκιμάστε έναν κωδικό OTP από την εφαρμογή σας:'
+            two_factor_code_description_3: 'Επίσης, αποθηκεύστε αυτούς τους κωδικούς ανάγκης σε ένα ασφαλές μέρος, μπορείτε να τους χρησιμοποιήσετε σε περίπτωση που δεν έχετε πρόσβαση στην εφαρμογή OTP:'
+            two_factor_code_description_2: 'Μπορείτε να σκανάρετε αυτόν τον κωδικό QR με την εφαρμογή σας:'
+            two_factor_code_description_1: Μόλις ενεργοποιήσατε την επαλήθευση διπλού παράγοντα OTP, ανοίξτε την εφαρμογή OTP και χρησιμοποιήστε τον κωδικό για να αποκτήσετε έναν κωδικό μοναδικής χρήσης. Θα εξαφανιστεί μετά από ανανέωση της σελίδας.
+        page_title: Επαλήθευση διπλού παράγοντα
+    form_ignore_origin_rules:
+        faq:
+            operator_description:
+                matches: 'Ελέγχει αν το <i>υποκείμενο</i> αντιστοιχεί σε μια <i>αναζήτηση</i> (δεν επηρεάζεται από κεφαλαία ή πεζά γράμματα).<br />Παράδειγμα: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
+                equal_to: Ίσο με…
+                label: Τελεστής
+            variable_description:
+                _all: Πλήρης διεύθυνση, κυρίως για την αντιπαραβολή προτύπων
+                host: Ξενιστής
+                label: Μεταβλητή
+            meaning: Σημασία
+            variables_available_description: 'Οι εξής μεταβλητές και τελεστές μπορούν να χρησιμοποιηθούν για τη δημιουργία κανόνων αγνόησε-προέλευση:'
+            variables_available_title: Τι μεταβλητές και τελεστές μπορώ να χρησιμοποιήσω για να γράψω κανόνες;
+            how_to_use_them_description: Ας υποθέσουμε ότι θέλετε να αγνοήσετε την προέλευση μιας καταχώρισης που προέρχεται από το «<i>rss.example.com</i>» (<i>γνωρίζοντας ότι, μετά την ανακατεύθυνση, η πραγματική διεύθυνση είναι example.com</i>).<br />Σε αυτήν την περίπτωση, θα πρέπει να βάλετε «host = "rss.example.com"» στο πεδίο <i>Κανόνας</i>.
+            how_to_use_them_title: Πώς τους χρησιμοποιώ;
+            ignore_origin_rules_definition_description: Χρησιμοποιούνται από το wallabag για να αγνοήσει αυτόματα μια διεύθυνση προέλευσης μετά την ανακατεύθυνση.<br />Αν προκύψει ανακατεύθυνση κατά το πιάσιμο μιας νέας καταχώρισης, όλοι οι κανόνες αγνόησε-προέλευση (<i>καθορισμένοι από τον χρήστη και τον διακομιστή</i>) θα χρησιμοποιηθούν για να αγνοηθεί η διεύθυνση προέλευσης.
+            ignore_origin_rules_definition_title: Τι σημαίνουν οι κανόνες αγνόησε-προέλευση;
+            title: Συχνές ερωτήσεις
+    tab_menu:
+        ignore_origin: Κανόνες αγνόησε-προέλευση
+        reset: Επαναφορά περιοχής
+        new_user: Προσθήκη χρήστη
+        rules: Κανόνες ετικετών
+        password: Κωδικός
+        user_info: Πληροφορίες χρήστη
+        feed: Τροφοδοτήσεις
+        settings: Ρυθμίσεις
+    form_rules:
+        faq:
+            operator_description:
+                notmatches: 'Ελέγχει αν το <i>υποκείμενο</i> δεν αντιστοιχεί σε μια <i>αναζήτηση</i> (δεν επηρεάζεται από κεφαλαία ή πεζά γράμματα).<br />Παράδειγμα: <code>title notmatches "ποδόσφαιρο"</code>'
+                matches: 'Ελέγχει αν το <i>υποκείμενο</i> αντιστοιχεί σε μια <i>αναζήτηση</i> (δεν επηρεάζεται από κεφαλαία ή πεζά γράμματα).<br />Παράδειγμα: <code>title matches "ποδόσφαιρο"</code>'
+                and: Ένας κανόνας ΚΑΙ άλλος
+                or: Ένας κανόνας Ή άλλος
+                not_equal_to: Όχι ίσο με…
+                equal_to: Ίσο με…
+                strictly_greater_than: Αυστηρά μεγαλύτερο από…
+                greater_than: Μεγαλύτερο από…
+                strictly_less_than: Αυστηρά λιγότερο από…
+                less_than: Λιγότερο από…
+                label: Τελεστής
+            variable_description:
+                domainName: Το όνομα ιστοσελίδας της καταχώρισης
+                readingTime: Ο εκτιμώμενος χρόνος ανάγνωσης της καταχώρισης, σε λεπτά
+                mimetype: Ο τύπος πολυμέσου της καταχώρισης
+                language: Η γλώσσα της καταχώρισης
+                content: Το περιεχόμενο της καταχώρισης
+                isStarred: Αν η καταχώριση έχει σημανθεί ως αγαπημένη ή όχι
+                isArchived: Αν η καταχώριση είναι αρχειοθετημένη ή όχι
+                url: URL της καταχώρισης
+                title: Τίτλος της καταχώρισης
+                label: Μεταβλητή
+            meaning: Σημασία
+            variables_available_title: Τι μεταβλητές και τελεστές μπορώ να χρησιμοποιήσω για να γράφω κανόνες;
+            variables_available_description: 'Οι εξής μεταβλητές και τελεστές μπορούν να χρησιμοποιηθούν για τη δημιουργία κανόνων σήμανσης ετικετών:'
+            how_to_use_them_description: 'Ας υποθέσουμε ότι θέλετε να σημάνετε νέες καταχωρίσεις ως «<i>γρήγορη ανάγνωση</i>» όταν ο χρόνος ανάγνωσης είναι κάτω από 3 λεπτά.<br />Σε αυτήν την περίπτωση, θα πρέπει να γράψετε «readingTime &lt;= 3» στο πεδίο <i>Κανόνας</i> και «<i>γρήγορη ανάγνωση</i>» στο πεδίο <i>Ετικέτες</i>.<br />Πολλαπλές ετικέτες μπορούν να προστεθούν ταυτόχρονα χωρίζοντάς τες με ένα κόμμα: «<i>γρήγορη ανάγνωση, να το διαβάσω</i>»<br />Πολύπλοκοι κανόνες μπορούν να γραφούν χρησιμοποιώντας προκαθορισμένους τελεστές: αν «<i>readingTime &gt;= 5 AND domainName = "github.com"</i>» τότε σήμανση ετικέτας ως «<i>αργή ανάγνωση, GitHub </i>»'
+            how_to_use_them_title: Πώς τους χρησιμοποιώ;
+            tagging_rules_definition_description: Είναι κανόνες που χρησιμοποιούνται από το wallabag για την αυτόματη σήμανση νέων καταχωρίσεων με ετικέτες.<br />Κάθε φορά που προστίθεται μια νέα καταχώριση, όλοι οι κανόνες σήμανσης ετικετών θα χρησιμοποιηθούν για την προσθήκη των ετικετών που έχετε ορίσει, γλυτώνοντάς σας από τον κόπο να ταξινομείτε τις καταχωρίσεις σας χειροκίνητα.
+            tagging_rules_definition_title: Τι είναι οι κανόνες σήμανσης ετικετών;
+            title: Συχνές ερωτήσεις
+        card:
+            new_tagging_rule: Δημιουργία κανόνα σήμανσης ετικετών
+            export_tagging_rules_detail: Αυτό θα κάνει λήψη ενός αρχείου JSON που θα μπορείτε να χρησιμοποιήσετε για την εισαγωγή κανόνων σήμανσης ετικετών αλλού ή την αποθήκευσή τους ως αντιγράφου ασφαλείας.
+            export_tagging_rules: Εξαγωγή κανόνων σήμανσης ετικετών
+            import_tagging_rules_detail: Πρέπει να επιλέξετε το αρχείο JSON που εξαγάγατε προηγουμένως.
+            import_tagging_rules: Εισαγωγή κανόνων σήμανσης ετικετών
+        export: Εξαγωγή
+        import_submit: Εισαγωγή
+        file_label: Αρχέιο JSON
+        tags_label: Ετικέτες
+        rule_label: Κανόνας
+        edit_rule_label: επεξεργασία
+        delete_rule_label: διαγραφή
+        then_tag_as_label: τότε σήμανση ετικέτας ως
+        if_label: αν
+    form_password:
+        repeat_new_password_label: Επαναλάβετε τον νέο κωδικό
+        new_password_label: Νέος κωδικός
+        old_password_label: Τρέχων κωδικός
+        description: Μπορείτε να αλλάξετε τον κωδικό σας εδώ. Ο καινούριος κωδικός σας πρέπει να έχει τουλάχιστον 8 χαρακτήρες.
+    reset:
+        confirm: Είστε πραγματικά σίγουρος; (ΕΙΝΑΙ ΜΗ ΑΝΑΣΤΡΕΨΙΜΟ)
+        archived: Διαγραφή ΟΛΩΝ των αρχειοθετημένων καταχωρίσεων
+        entries: Διαγραφή ΟΛΩΝ των καταχωρίσεων
+        tags: Διαγραφή ΟΛΩΝ των ετικετών
+        annotations: Διαγραφή ΟΛΩΝ των σχολιασμών
+        description: Πατώντας τα παρακάτω κουμπιά θα έχετε τη δυνατότητα να διαγράψετε κάποιες πληροφορίες από τον λογαριασμό σας. Έχετε υπόψη σας ότι αυτές οι δράσεις είναι ΜΗ ΑΝΑΣΤΡΕΨΙΜΕΣ.
+        title: Επαναφορά περιοχής (προσοχή!)
+    form_user:
+        delete:
+            button: Διαγραφή του λογαριασμού μου
+            confirm: Είστε πραγματικά σίγουρος; (ΕΙΝΑΙ ΜΗ ΑΝΑΣΤΡΕΨΙΜΟ)
+            description: Αν διαγράψετε τον λογαριασμό σας, ΟΛΑ τα άρθρα σας, ΟΛΕΣ οι ετικέτες σας, ΟΛΟΙ οι σχολιασμοί και ο λογαριασμός σας θα διαγραφούν ΜΟΝΙΜΑ (είναι ΜΗ ΑΝΑΣΤΡΕΨΙΜΟ). Θα αποσυνδεθείτε.
+            title: Διαγραφή του λογαριασμού μου (προσοχή!)
+        two_factor:
+            action_app: Χρήση εφαρμογής OTP
+            action_email: Χρήση email
+            state_disabled: Απενεργοποιημένο
+            state_enabled: Ενεργοποιημένο
+            table_action: Δράση
+            table_state: Κατάσταση
+            table_method: Μέθοδος
+            googleTwoFactor_label: Με χρήση μιας εφαρμογής OTP (ανοίξτε την εφαρμογή, όπως το Google Authenticator, το Authy ή το FreeOTP, για να αποκτήσετε έναν κωδικό μοναδικής χρήσης)
+            emailTwoFactor_label: Με χρήση email (λήψη κωδικού με email)
+        email_label: Email
+        name_label: Όνομα
+        login_label: Σύνδεση (δεν μπορεί να αλλάξει)
+        two_factor_description: Με την ενεργοποίηση της επαλήθευσης διπλού παράγοντα θα μπορείτε να λαμβάνετε ένα email με έναν κωδικό σε κάθε μη έμπιστη σύνδεση.
+    form_feed:
+        feed_limit: Αριθμός αντικείμενων στην τροφοδότηση
+        feed_link:
+            all: Όλα
+            archive: Αρχειοθετημένα
+            starred: Αγαπημένα
+            unread: Μη αναγνωσμένα
+        feed_links: Σύνδεσμοι τροφοδότησης
+        token_revoke: Διαγραφή του συμβόλου
+        token_reset: Επαναδημιουργήστε το σύμβολό σας
+        token_create: Δημιουργήστε το σύμβολό σας
+        no_token: Δεν δημιουργήθηκε κανένα σύμβολο
+        token_label: Σύμβολο τροφοδότησης
+        description: Οι τροφοδοτήσεις Atom που παρέχονται από το wallabag σάς επιτρέπουν να διαβάσετε τα αποθηκευμένα άρθρα σας με τον αγαπημένο σας αναγνώστη Atom. Για να το χρησιμοποιήσετε, πρέπει να δημιουργήσετε πρώτα ένα σύμβολο.
+    form_settings:
+        help_pocket_consumer_key: Απαιτείται για την εισαγωγή από το Pocket. Μπορείτε να το δημιουργήσετε στον λογαριασμό σας στο Pocket.
+        help_language: Μπορείτε να αλλάξετε τη γλώσσα της διεπαφής του wallabag.
+        help_reading_speed: Το wallabag υπολογίζει τον χρόνο ανάγνωσής σας για κάθε άρθρο. Μπορείτε να ορίσετε εδώ, χάρη σε αυτή τη λίστα, αν είστε γρήγορος ή αργός αναγνώστης. Το wallabag θα επανυπολογίσει τον χρόνο ανάγνωσης για κάθε άρθρο.
+        help_items_per_page: Μπορείτε να αλλάξετε τον αριθμό των άρθρων που προβάλλονται σε κάθε σελίδα.
+        android_instruction: Πατήστε εδώ για να γεμίσετε από πριν την εφαρμογή Android
+        android_configuration: Ρύθμιση της εφαρμογής Android
+        pocket_consumer_key_label: Κλειδί επαλήθευσης Pocket για την εισαγωγή περιεχομένου
+        action_mark_as_read:
+            redirect_current_page: Διατήρηση της τρέχουσας σελίδας
+            redirect_homepage: Μετάβαση στην αρχική
+            label: Τι να γίνει αφού αφαιρεθεί ή σημανθεί ως αγαπημένο ή αναγνωσμένο ένα άρθρο;
+        reading_speed:
+            400_word: Διαβάζω περίπου 400 λέξεις ανά λεπτό
+            300_word: Διαβάζω περίπου 300 λέξεις ανά λεπτό
+            200_word: Διαβάζω περίπου 200 λέξεις ανά λεπτό
+            100_word: Διαβάζω περίπου 100 λέξεις ανά λεπτό
+            help_message: 'Μπορείτε να χρησιμοποιήσετε εργαλεία στο διαδίκτυο για να υπολογίσετε την ταχύτητα ανάγνωσής σας:'
+            label: Ταχύτητα ανάγνωσης
+        language_label: Γλώσσα
+        items_per_page_label: Αντικείμενα ανά σελίδα
+    form:
+        save: Αποθήκευση
+    page_title: Ρυθμίσεις
+menu:
+    left:
+        ignore_origin_instance_rules: Γενικοί κανόνες αγνόησε-προέλευση
+        theme_toggle_auto: Αυτόματο θέμα
+        theme_toggle_dark: Σκοτεινό θέμα
+        theme_toggle_light: Ανοιχτό θέμα
+        quickstart: Γρήγορη εκκίνηση
+        site_credentials: Πιστοποιητικά ιστοσελίδων
+        users_management: Διαχείριση χρηστών
+        back_to_unread: Επιστροφή στα μη αναγνωσμένα άρθρα
+        save_link: Αποθήκευση συνδέσμου
+        search: Αναζήτηση
+        about: Σχετικά
+        logout: Αποσύνδεση
+        developer: Διαχείριση πελατών API
+        howto: Βοήθεια
+        import: Εισαγωγή
+        internal_settings: Εσωτερικές ρυθμίσεις
+        tags: Ετικέτες
+        config: Ρυθμίσεις
+        all_articles: Όλες οι καταχωρίσεις
+        archive: Αρχειοθετημένα
+        starred: Αγαπημένα
+        unread: Μη αναγνωσμένα
+    search_form:
+        input_label: Εισαγωγή της αναζήτησής σας εδώ
+    top:
+        account: Ο λογαριασμός μου
+        random_entry: Μετάβαση σε τυχαία καταχώριση από αυτή τη λίστα
+        export: Εξαγωγή
+        filter_entries: Φιλτράρισμα καταχωρίσεων
+        search: Αναζήτηση
+        add_new_entry: Προσθήκη νέας καταχώρισης
+user:
+    search:
+        placeholder: Φιλτράρισμα ανά όνομα χρήστη ή email
+    form:
+        back_to_list: Επιστροφή στη λίστα
+        delete_confirm: Είστε σίγουρος;
+        delete: Διαγραφή
+        save: Αποθήκευση
+        twofactor_google_label: Επαλήθευση διπλού παράγοντα με εφαρμογή OTP
+        twofactor_email_label: Επαλήθευση διπλού παράγοντα με email
+        last_login_label: Τελευταία σύνδεση
+        enabled_label: Ενεργοποιημένο
+        email_label: Email
+        plain_password_label: ????
+        repeat_new_password_label: Επανάληψη νέου κωδικού
+        password_label: Κωδικός
+        name_label: Όνομα
+        username_label: Όνομα χρήστη
+    list:
+        create_new_one: Δημιουργία νέου χρήστη
+        no: Όχι
+        yes: Ναι
+        edit_action: Επεξεργασία
+        actions: Δράσεις
+    description: Εδώ μπορείτε να διαχειριστείτε όλους τους χρήστες (δημιουργία, επεξεργασία και διαγραφή)
+    edit_user: Επεξεργασία υπάρχοντος χρήστη
+    new_user: Δημιουργία νέου χρήστη
+    page_title: Διαχείριση χρηστών
+security:
+    resetting:
+        description: Εισάγετε τη διεύθυνση email σας παρακάτω και θα σας στείλουμε οδηγίες επαναφοράς του κωδικού.
+    register:
+        go_to_account: Μεταβείτε στον λογαριασμό σας
+        page_title: Δημιουργία λογαριασμού
+    login:
+        cancel: Ακύρωση
+        password: Κωδικός
+        username: Όνομα χρήστη
+        register: Εγγραφή
+        submit: Σύνδεση
+        forgot_password: Ξεχάσατε τον κωδικό σας;
+        keep_logged_in: Διατήρηση σύνδεσης
+        page_title: Καλώς ήρθατε στο wallabag!
+footer:
+    stats: Από την %user_creation% διαβάσατε %nb_archives% άρθρα. Αυτό είναι περίπου %per_day% την ημέρα!
+    wallabag:
+        about: Σχετικά
+        powered_by: λειτουργεί με
+        social: Κοινωνικά δίκτυα
+        elsewhere: Πάρτε το wallabag μαζί σας

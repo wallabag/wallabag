@@ -1,0 +1,615 @@
+security:
+    login:
+        page_title: Benvenuto in wallabag!
+        keep_logged_in: Resta connesso
+        forgot_password: Hai dimenticato la password?
+        submit: Accedi
+        register: Registrati
+        username: Nome utente
+        password: Password
+        cancel: Cancella
+    resetting:
+        description: Inserisci il tuo indirizzo di posta elettronica di seguito e ti invieremo le istruzioni per reimpostare la password.
+    register:
+        page_title: Crea un account
+        go_to_account: Vai al tuo account
+menu:
+    left:
+        unread: Non letti
+        starred: Preferiti
+        archive: Archivio
+        all_articles: Tutti
+        config: Configurazione
+        tags: Etichette
+        internal_settings: Strumenti
+        import: Importa
+        howto: Come fare
+        developer: Gestione client API
+        logout: Esci
+        about: Informazioni
+        search: Cerca
+        save_link: Salva collegamento
+        back_to_unread: Torna ai contenuti non letti
+        users_management: Gestione utenti
+        site_credentials: Credenziali sito
+        quickstart: Introduzione
+        ignore_origin_instance_rules: Regole globali per ignorare l'origine
+        theme_toggle_auto: Tema automatico
+        theme_toggle_dark: Tema scuro
+        theme_toggle_light: Tema chiaro
+        with_annotations: Con annotazioni
+    top:
+        add_new_entry: Aggiungi un nuovo contenuto
+        search: Cerca
+        filter_entries: Filtra contenuti
+        export: Esporta
+        account: Il mio account
+        random_entry: Passa a una voce casuale da quella lista
+    search_form:
+        input_label: Inserisci qui la tua ricerca
+footer:
+    wallabag:
+        elsewhere: Porta wallabag con te
+        social: Sociale
+        powered_by: Offerto da
+        about: A proposito
+    stats: Dal %user_creation% hai letto %nb_archives% articoli. Circa %per_day% al giorno!
+config:
+    page_title: Configurazione
+    tab_menu:
+        settings: Impostazioni
+        rss: RSS
+        user_info: Informazioni utente
+        password: Password
+        rules: Regole di etichettatura
+        new_user: Aggiungi utente
+        feed: Flussi
+    form:
+        save: Salva
+    form_settings:
+        items_per_page_label: Elementi per pagina
+        language_label: Lingua
+        reading_speed:
+            label: Velocità di lettura
+            help_message: 'Puoi utilizzare degli strumenti online per valutare la tua velocità di lettura:'
+            100_word: Leggo ~100 parole al minuto
+            200_word: Leggo ~200 parole al minuto
+            300_word: Leggo ~300 parole al minuto
+            400_word: Leggo ~400 parole al minuto
+        action_mark_as_read:
+            label: Dove vuoi essere reindirizzato dopo aver segnato l'articolo come già letto?
+            redirect_homepage: Alla homepage
+            redirect_current_page: Alla pagina corrente
+        pocket_consumer_key_label: Consumer key per Pocket usata per per importare i contenuti
+        android_configuration: Configura la tua applicazione Android
+        android_instruction: Tocca qui per preriempire la tua applicazione Android
+        help_items_per_page: Puoi cambiare il numero di articoli mostrati su ogni pagina.
+        help_reading_speed: wallabag calcola un tempo di lettura per ogni articolo. Puoi definire qui, grazie a questa lista, se sei un lettore lento o veloce. wallabag ricalcolerà la velocità di lettura per ogni articolo.
+        help_language: Puoi cambiare la lingua dell'interfaccia di wallabag.
+        help_pocket_consumer_key: Richiesta per importare da Pocket. La puoi creare nel tuo account Pocket.
+    form_rss:
+        description: I feed RSS generati da wallabag ti permettono di leggere i tuoi contenuti salvati con il tuo lettore di RSS preferito. Prima, devi generare un token.
+        token_label: Token RSS
+        no_token: Nessun token
+        token_create: Crea il tuo token
+        token_reset: Rigenera il tuo token
+        rss_links: Collegamenti RSS
+        rss_link:
+            unread: Non letti
+            starred: Preferiti
+            archive: Archiviati
+            all: Tutti
+        rss_limit: Numero di elementi nel feed
+    form_user:
+        two_factor_description: Abilitando l'autenticazione a due fattori riceverai un'e-mail con un codice per ogni nuova connesione non verificata.
+        name_label: Nome
+        email_label: E-mail
+        twoFactorAuthentication_label: Autenticazione a due fattori
+        help_twoFactorAuthentication: Se abiliti l'autenticazione a due fattori, ogni volta che vorrai connetterti a wallabag, riceverai un codice via e-mail.
+        delete:
+            title: Cancella il mio account (zona pericolosa)
+            description: Rimuovendo il tuo account, TUTTI i tuoi articoli, TUTTE le tue etichette, TUTTE le tue annotazioni ed il tuo account verranno rimossi PERMANENTEMENTE (impossibile da ANNULLARE). Verrai poi disconnesso.
+            confirm: Sei veramente sicuro? (NON PUOI TORNARE INDIETRO)
+            button: Cancella il mio account
+        two_factor:
+            action_email: Usa l'e-mail
+            emailTwoFactor_label: Utilizzando la posta elettronica (ricevere un codice tramite posta elettronica)
+    reset:
+        title: Area di reset (zona pericolosa)
+        description: Premendo i tasti sottostanti potrai rimuovere delle informazioni dal tuo account. Ricorda che queste azioni sono IRREVERSIBILI.
+        annotations: Rimuovi TUTTE le annotazioni
+        tags: Rimuovi TUTTE le etichette
+        entries: Rimuovi TUTTI gli articoli
+        confirm: Sei veramente sicuro? (NON PUOI TORNARE INDIETRO)
+        archived: Rimuovi TUTTE le voci archiviate
+    form_password:
+        description: Qui puoi cambiare la tua password. La tua nuova password dovrebbe essere composta da almeno 8 caratteri.
+        old_password_label: Password corrente
+        new_password_label: Nuova password
+        repeat_new_password_label: Ripeti la nuova password
+    form_rules:
+        if_label: se
+        then_tag_as_label: allora etichetta come
+        delete_rule_label: elimina
+        edit_rule_label: modifica
+        rule_label: Regola
+        tags_label: Etichette
+        faq:
+            title: FAQ
+            tagging_rules_definition_title: Cosa significa «regole di etichettatura»?
+            tagging_rules_definition_description: Sono regole utilizzate da wallabag per etichettare automaticamente i contenuti.<br />Ogni volta che viene aggiunto un contenuto, tutte le regole di etichettatura vengono utilizzate per aggiungere le etichette configurate, risparmiandoti il lavoro di classificare i contenuti manualmente.
+            how_to_use_them_title: Come si usano?
+            how_to_use_them_description: 'Diciamo che vuoi etichettare un contenuto come « <i>lettura veloce</i> » quando il tempo di lettura è inferiore ai 3 minuti.<br />In questo case, devi mettere « readingTime &lt;= 3 » nel campo <i>Regola</i> e « <i>lettura veloce</i> » nel campo <i>Etichette</i>.<br />Molte etichette si possono aggiungere contemporanemente separandole con una virgola: « <i>lettura veloce, da leggere</i> »<br />Regole complesse possono essere scritte utilizzando gli operatori predefiniti: se « <i>readingTime &gt;= 5 AND domainName = "www.php.net"</i> » allora etichetta « <i>lettura lunga, php</i> »'
+            variables_available_title: Quali operatori e variabili posso utilizzare per scrivere delle regole?
+            variables_available_description: 'I seguenti operatori e variabili posso essere utilizzati per scrivere regole di etichettatura:'
+            meaning: Significato
+            variable_description:
+                label: Variabile
+                title: Titolo del contenuto
+                url: URL del contenuto
+                isArchived: Specifica se il contenuto è archiviato o no
+                isStarred: Specifica se il contenuto è preferito o no
+                content: La pagina del contenuto
+                language: La lingua del contenuto
+                mimetype: Il tipo di media della voce
+                readingTime: Il tempo di lettura stimato del contenuto, in minuti
+                domainName: Il nome di dominio del contenuto
+            operator_description:
+                label: Operatore
+                less_than: Minore/uguale di…
+                strictly_less_than: Minore di…
+                greater_than: Maggiore/uguale di…
+                strictly_greater_than: Maggiore di…
+                equal_to: Uguale a…
+                not_equal_to: Non uguale a…
+                or: Una regola O un'altra
+                and: Una regola E un'altra
+                matches: 'Verifica che un <i>oggetto</i> risulti in una <i>ricerca</i> (case-insensitive).<br />Esempio: <code>titolo contiene "football"</code>'
+                notmatches: 'Verifica che un <i>oggetto</i> non corrisponda a una <i>ricerca</i> (senza distinzione tra maiuscole e minuscole).<br/>Esempio: <code>titolo non corrisponda a notmatches «calcio»</code>'
+        card:
+            export_tagging_rules: Esporta le regole di etichettatura
+            import_tagging_rules_detail: Devi selezionare il file JSON che hai precedentemente esportato.
+            import_tagging_rules: Importa le regole di etichettatura
+            new_tagging_rule: Crea una regola di etichettatura
+entry:
+    default_title: Titolo del contenuto
+    page_titles:
+        unread: Contenuti non letti
+        starred: Contenuti preferiti
+        archived: Contenuti archiviati
+        filtered: Contenuti filtrati
+        filtered_tags: 'Filtrati per etichetta:'
+        filtered_search: 'Filtrati per ricerca:'
+        untagged: Articoli non etichettati
+        all: Tutti gli articoli
+    list:
+        number_on_the_page: "{0} Non ci sono contenuti.|{1} C'è un contenuto.|]1,Inf[ Ci sono %count% contenuti."
+        reading_time: tempo di lettura stimato
+        reading_time_minutes: 'tempo di lettura stimato: %readingTime% min'
+        reading_time_less_one_minute: 'tempo di lettura stimato: &lt; 1 min'
+        number_of_tags: "{1}ed un'altra etichetta|]1,Inf[e %count% altre etichette"
+        reading_time_minutes_short: '%readingTime% min'
+        reading_time_less_one_minute_short: '&lt; 1 min'
+        original_article: Originale
+        toogle_as_read: Segna come da leggere
+        toogle_as_star: Segna come non preferito
+        delete: Elimina
+        export_title: Esporta
+    filters:
+        title: Filtri
+        status_label: Stato
+        archived_label: Archiviati
+        starred_label: Preferiti
+        unread_label: Non letti
+        preview_picture_label: Ha un'immagine di anteprima
+        preview_picture_help: Immagine di anteprima
+        language_label: Lingua
+        http_status_label: Stato HTTP
+        reading_time:
+            label: Tempo di lettura in minuti
+            from: da
+            to: a
+        domain_label: Nome di dominio
+        created_at:
+            label: Data di creazione
+            from: da
+            to: a
+        action:
+            clear: Pulisci
+            filter: Filtra
+        is_public_label: Ha un collegamento pubblico
+        is_public_help: Collegamento pubblico
+    view:
+        left_menu:
+            back_to_top: Torna all'inizio
+            back_to_homepage: Indietro
+            set_as_read: Segna come già letto
+            set_as_unread: Segna come da leggere
+            set_as_starred: Segna come preferito
+            view_original_article: Contenuto originale
+            re_fetch_content: Ri-ottieni pagina
+            delete: Elimina
+            add_a_tag: Aggiungi un'etichetta
+            share_content: Condividi
+            share_email_label: E-mail
+            public_link: Link pubblico
+            delete_public_link: Elimina link pubblico
+            export: Esporta
+            print: Stampa
+            problem:
+                label: Problemi?
+                description: Questo contenuto viene visualizzato male?
+        edit_title: Modifica titolo
+        original_article: Originale
+        annotations_on_the_entry: '{0} Nessuna annotazione|{1} Una annotazione|]1,Inf[ %count% annotazioni'
+        created_at: Data di creazione
+        published_at: Data di pubblicazione
+        published_by: Pubblicato da
+        provided_by: Fornito da
+    new:
+        page_title: Salva un nuovo contenuto
+        placeholder: http://website.com
+        form_new:
+            url_label: Url
+    search:
+        placeholder: Cosa stai cercando?
+    edit:
+        page_title: Modifica voce
+        title_label: Titolo
+        url_label: Url
+        save_label: Salva
+        origin_url_label: URL di origine (da dove hai trovato quella voce)
+    public:
+        shared_by_wallabag: Questo articolo è stato condiviso da %username% con <a href='%wallabag_instance%'>wallabag</a>
+    confirm:
+        delete: Vuoi veramente rimuovere quell'articolo?
+        delete_tag: Vuoi veramente rimuovere quell'etichetta da quell'articolo?
+    metadata:
+        reading_time: Tempo di lettura stimato
+        reading_time_minutes_short: '%readingTime% min'
+        address: Indirizzo
+        added_on: Aggiunto il
+about:
+    page_title: A proposito
+    top_menu:
+        who_behind_wallabag: Chi c'è dietro a wallabag
+        getting_help: Ottieni aiuto
+        helping: Aiuta wallabag
+        contributors: Collaboratori
+        third_party: Librerie di terze parti
+    who_behind_wallabag:
+        developped_by: Sviluppato da
+        website: sito web
+        many_contributors: E molti altri collaboratori ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">su Github</a>
+        project_website: Sito web del progetto
+        license: Licenza
+        version: Versione
+    getting_help:
+        documentation: Documentazione
+        bug_reports: Segnalazioni di bug
+        support: <a href="https://github.com/wallabag/wallabag/issues">su GitHub</a>
+    helping:
+        description: 'wallabag è gratuito ed OpenSource. Puoi aiutarci:'
+        by_paypal: via Liberapay
+    contributors:
+        description: Un grazie ai collaboratori di wallabag web application
+    third_party:
+        description: 'Ecco un elenco delle librerie di terze parti utilizzate in wallabag (con le rispettive licenze):'
+        package: Pacchetto
+        license: Licenza
+howto:
+    page_title: Come fare
+    page_description: 'Ci sono diversi modi per salvare un contenuto:'
+    tab_menu:
+        add_link: Aggiungi un link
+        shortcuts: Usa le scorciatoie
+    top_menu:
+        browser_addons: tramite addons del Browser
+        mobile_apps: tramite app Mobile
+        bookmarklet: tramite Bookmarklet
+    form:
+        description: Tramite questo modulo
+    browser_addons:
+        firefox: Add-On di Firefox
+        chrome: Estensione di Chrome
+        opera: Estensione di Opera
+    mobile_apps:
+        android:
+            via_f_droid: via F-Droid
+            via_google_play: via Google Play
+        ios: sullo store di iTunes
+        windows: sullo store di Microsoft
+    bookmarklet:
+        description: 'Trascinando e rilasciando questo collegamento sulla barra dei preferiti del tuo browser:'
+    shortcuts:
+        page_description: Ecco le scorciatoie disponibili su wallabag.
+        shortcut: Scorciatoia
+        action: Azione
+        all_pages_title: Scorciatoie disponibili in tutte le pagine
+        go_unread: Vai ai non letti
+        go_starred: Vai ai preferiti
+        go_archive: Vai in archivio
+        go_all: Vai a tutti gli articoli
+        go_tags: Vai alle etichette
+        go_config: Vai su configurazione
+        go_import: Vai su importazione
+        go_developers: Vai su sviluppatori
+        go_howto: Vai su Come fare (questa pagina!)
+        go_logout: Disconnetti
+        list_title: Scorciatoie disponibili quando si elencano le pagine
+        search: Mostra il modulo di ricerca
+        article_title: Scorciatoie disponibili in vista articoli
+        open_original: Apri URL originale dell'articolo
+        toggle_favorite: Cambia stato Preferito dell'articolo
+        toggle_archive: Cambia stato Letto dell'articolo in letto
+        delete: Cancella l'articolo
+        add_link: Aggiungi un nuovo link
+        hide_form: Nascondi il modulo corrente (ricerca o nuovo link)
+        arrows_navigation: Naviga tra gli articoli
+        open_article: Mostra l'articolo selezionato
+quickstart:
+    page_title: Introduzione
+    more: Più…
+    intro:
+        title: Benvenuto su wallabag!
+        paragraph_1: Ti accompagneremo alla scoperta di wallabag e ti mostreremo delle funzionalità che potrebbero interessarti.
+        paragraph_2: Seguici!
+    configure:
+        title: Configura l'applicazione
+        description: Per avere un'applicazione che ti soddisfi, dai un'occhiata alla configurazione di wallabag.
+        language: Cambia lingua e design
+        rss: Abilita i feed RSS
+        tagging_rules: Scrivi delle regole per etichettare automaticamente i contenuti
+    admin:
+        title: Amministrazione
+        description: 'Come amministratore, hai la possibilità di svolgere le seguenti operazioni in wallabag:'
+        new_user: Crea un nuovo account
+        analytics: Configura analytics
+        sharing: Abilita alcuni parametri riguardo il salvataggio dei contenuti
+        export: Configura l'esportazione
+        import: Configura l'importazione
+    first_steps:
+        title: Primi passi
+        description: Ora wallabag è ben configurata, è ora di archiviare il web. Puoi cliccare sul segno + in alto per aggiungere un link.
+        new_article: Salva il tuo primo contenuto
+        unread_articles: E classificalo!
+    migrate:
+        title: Trasferimento da un servizio esistente
+        description: Stai utilizzando un altro servizio? Ti aiutiamo a traferire i tuoi dati su wallabag.
+        pocket: Trasferisci da Pocket
+        wallabag_v1: Trasferisci da wallabag v1
+        wallabag_v2: Trasferisci da wallabag v2
+        readability: Trasferisci da Readability
+        instapaper: Trasferisci da Instapaper
+    developer:
+        title: Sviluppatori
+        description: 'Abbiamo pensato anche agli sviluppatori: Docker, API, traduzioni, etc.'
+        create_application: Crea la tua applicazione
+        use_docker: Usa Docker per installare wallabag
+    docs:
+        title: Documentazione completa
+        description: wallabag ha tantissime funzionalità. Non esitare a leggere il manuale per conoscerle ed imparare ad usarle.
+        annotate: Annota il tuo contenuto
+        export: Converti i tuoi contenuti in EPUB o PDF
+        search_filters: Impara come puoi recuperare un contenuto tramite la ricerca e i filtri
+        fetching_errors: Cosa posso fare se riscontro problemi nel recupero di un contenuto?
+        all_docs: E molta altra documentazione!
+    support:
+        title: Supporto
+        description: Se hai bisogno di aiuto, siamo qui per te.
+        github: Su GitHub
+        email: Per e-mail
+        gitter: Su Gitter
+tag:
+    page_title: Etichette
+    list:
+        number_on_the_page: "{0} Non ci sono etichette.|{1} C'è un'etichetta.|]1,Inf[ ci sono %count% etichette."
+        see_untagged_entries: Vedi articoli non etichettati
+        untagged: Articoli non etichettati
+    new:
+        add: Aggiungi
+        placeholder: Puoi aggiungere varie etichette, separate da una virgola.
+import:
+    page_title: Importa
+    page_description: Benvenuto nell'importatore di wallabag. Seleziona il servizio da cui vuoi trasferire i contenuti.
+    action:
+        import_contents: Importa contenuti
+    form:
+        mark_as_read_title: Segna tutto come già letto?
+        mark_as_read_label: Segna tutti i contenuti importati come letti
+        file_label: File
+        save_label: Carica file
+    pocket:
+        page_title: Importa da > Pocket
+        description: Questo importatore copierà tutti i tuoi dati da Pocket. Pocket non ci consente di ottenere contenuti dal loro servizio, così il contenuto leggibile di ogni articolo verrà ri-ottenuto da wallabag.
+        config_missing:
+            description: Importazione da Pocket non configurata.
+            admin_message: Devi definire %keyurls% una pocket_consumer_key %keyurle%.
+            user_message: Il tuo amministratore del server deve definire una API Key per Pocket.
+        authorize_message: Puoi importare dati dal tuo account Pocket. Devi solo cliccare sul pulsante sottostante e autorizzare la connessione a getpocket.com.
+        connect_to_pocket: Connetti a Pocket and importa i dati
+    wallabag_v1:
+        page_title: Importa da > Wallabag v1
+        description: Questo importatore copierà tutti i tuoi dati da un wallabag v1. Nella tua pagina di configurazione, clicca su "JSON export" nella sezione "Esporta i tuoi dati di wallabag". Otterrai un file "wallabag-export-1-xxxx-xx-xx.json".
+        how_to: Seleziona la tua esportazione di wallabag e clicca sul pulsante sottostante caricare il file e importare i dati.
+    wallabag_v2:
+        page_title: Importa da > Wallabag v2
+        description: Questo importatore copierà tutti i tuoi dati da un wallabag v2. Vai in «Tutti i contenuti», e, nella barra laterale di esportazione, clicca su «JSON». Otterrai un file «Tutti i contenuti.json».
+    readability:
+        page_title: Importa da > Readability
+        description: Questo importatore copierà tutti i tuoi articoli da Readability. Nella pagina strumenti (https://www.readability.com/tools/), clicca su «Export your data» nella sezione «Data Export». Riceverai un'e-mail per scaricare un file json (che tuttavia non termina con .json).
+        how_to: Seleziona la tua esportazione da Readability e clicca sul bottone sottostante per caricarla ed importarla.
+    worker:
+        enabled: "L'importazione è asincrona. Una volta iniziata l'importazione, un worker esterno gestirà i compiti uno alla volta. Il servizio corrente è:"
+        download_images_warning: Hai abilitato il download delle immagini per i tuoi articoli. Insieme all'importazione classica potrebbe volerci molto tempo per procedere (oppure potrebbe fallire). <strong>Raccomandiamo fortemente</strong> di abilitare l'importazione asincrona per evitare errori.
+    firefox:
+        page_title: Importa da > Firefox
+        description: Questo importatore copierà tutti i tuoi preferiti di Firefox. Vai sui tuoi preferiti (Ctrl+Maj+O), poi su "Import and backup", scegli "Backup…". Otterrai un file JSON.
+        how_to: Scegli il file di backup dei preferiti e clicca sul bottone sottostante per importarlo. Tieni presente che questo processo potrebbe richiedere molto tempo poiché tutti gli articoli devono essere recuperati.
+    chrome:
+        page_title: Importa da > Chrome
+        description: "Questo importatore copierà tutti i tuoi preferiti di Chrome. L'ubicazione del file dipende dal sistema operativo: <ul><li>Su Linux, vai nella cartella <code>~/.config/chromium/Default/</code></li><li>Su Windows, dovrebbe essere in <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>Su OS X, dovrebbe essere su <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Una volta arrivato lì, copia il file dei preferiti dove puoi trovarlo.<em><br>Se hai Chromium invece che Chrome, dovrai di conseguenza modificare i percorsi.</em></p>"
+        how_to: Scegli il file di backup dei preferiti e clicca sul bottone sottostante per importarlo. Tieni presente che questo processo potrebbe richiedere molto tempo poiché tutti gli articoli devono essere recuperati.
+    instapaper:
+        page_title: Importa da > Instapaper
+        description: Questo importatore copierà tutti i tuoi articoli da Instapaper. Nella pagina delle impostazioni (https://www.instapaper.com/user), clicca su "Download .CSV file" nella sezione "Export". Sarà scaricato un file CSV (come "instapaper-export.csv").
+        how_to: Scegli la tua esportazione da Instapaper e clicca sul bottone sottostante per caricarla ed importarla.
+    pinboard:
+        page_title: Importa da > Pinboard
+        description: Questo importatore copierà tutti i tuoi articoli da Pinboard. Sulla pagina di backup (https://pinboard.in/settings/backup), clicca su "JSON" nella sezione "Bookmarks". Sarà scaricato un file JSON (come "pinboard_export").
+        how_to: Scegli la tua esportazione da Pinboard e clicca sul bottone sottostante per caricarla ed importarla.
+developer:
+    page_title: Gestione client API
+    welcome_message: Benvenuto nelle API di wallabag
+    documentation: Documentazione
+    how_to_first_app: Come creare la mia prima applicazione
+    full_documentation: Consulta la documentazione API completa
+    list_methods: Elenco dei metodi API
+    clients:
+        title: Client
+        create_new: Crea un nuovo client
+    existing_clients:
+        title: Client esistenti
+        field_id: ID Client
+        field_secret: Chiave segreta
+        field_uris: URI di reindirizzamento
+        field_grant_types: Tipi di permessi concessi
+        no_client: Ancora nessun client.
+    remove:
+        warn_message_1: Hai la possibilità di rimuovere questo client.L'operazione è IRREVERSIBILE!
+        warn_message_2: Se lo rimuovi, ogni app configurata con questo client non sarà più in grado di autenticarsi.
+        action: Rimuovi questo client
+    client:
+        page_title: Gestione client API > Nuovo client
+        page_description: Stai per creare un nuovo client. Compila i campi sottostanti per il redirect URI della tua applicazione.
+        form:
+            name_label: Nome del client
+            redirect_uris_label: Redirect URI
+            save_label: Crea un nuovo client
+        action_back: Indietro
+    client_parameter:
+        page_title: Gestione client API > Parametri Client
+        page_description: Questi sono i tuoi parametri del client.
+        field_name: Nome del Client
+        field_id: ID Client
+        field_secret: Chiave segreta
+        back: Indietro
+        read_howto: Leggi Come fare «Come creare la mia prima applicazione»
+    howto:
+        page_title: Gestione client API > Come creare la mia prima applicazione
+        description:
+            paragraph_1: I seguenti comandi fanno uso della <a href="https://github.com/jkbrzt/httpie">libreria HTTPie</a>. Verifica che sia installata sul tuo sistema prima di utilizzarli.
+            paragraph_2: Hai bisogno di un token per far comunicare la tua applicazione di terze parti e le API di wallabag.
+            paragraph_3: Per creare questo token, hai bisogno di <a href="%link%">creare un nuovo client</a>.
+            paragraph_4: 'Ora, crea il tuo token (sostituisci client_id, client_secret, username e password con valori reali):'
+            paragraph_5: 'Le API ritorneranno una risposta di questo tipo:'
+            paragraph_6: "L'access_token è utile per chiamare un API endpoint. Per esempio:"
+            paragraph_7: Questa chiamata ritornerà tutti i contenuti per il tuo utente.
+            paragraph_8: Se vuoi visualizzare tutti gli API endpoints, dai una occhiata alla <a href="%link%">documentazione delle API</a>.
+        back: Indietro
+user:
+    page_title: Gestione utenti
+    new_user: Crea un nuovo utente
+    edit_user: Modifica un utente esistente
+    description: Qui puoi gestire tutti gli utenti (crea, modifica ed elimina)
+    list:
+        actions: Azioni
+        edit_action: Modifica
+        yes: Sì
+        no: No
+        create_new_one: Crea un nuovo utente
+    form:
+        username_label: Nome utente
+        name_label: Nome
+        password_label: Password
+        repeat_new_password_label: Ripeti password
+        plain_password_label: ????
+        email_label: E-mail
+        enabled_label: Abilitato
+        last_login_label: Ultima connessione
+        twofactor_label: Autenticazione a due fattori
+        save: Salva
+        delete: Cancella
+        delete_confirm: Sei sicuro?
+        back_to_list: Torna alla lista
+        twofactor_email_label: Autenticazione a due fattori tramite e-mail
+    search:
+        placeholder: Filtra per nome utente o e-mail
+error:
+    page_title: Si è verificato un errore
+flashes:
+    config:
+        notice:
+            config_saved: Configurazione salvata.
+            password_updated: Password aggiornata
+            password_not_updated_demo: In modalità demo, non puoi cambiare la password dell'utente.
+            user_updated: Informazioni aggiornate
+            rss_updated: Informazioni RSS aggiornate
+            tagging_rules_updated: Regole di etichettatura aggiornate
+            tagging_rules_deleted: Regola di etichettatura eliminate
+            rss_token_updated: RSS token aggiornato
+            annotations_reset: Reset annotazioni
+            tags_reset: Reset etichette
+            entries_reset: Reset articoli
+            archived_reset: Voci archiviate eliminate
+    entry:
+        notice:
+            entry_already_saved: Contenuto già salvato in data %date%
+            entry_saved: Contenuto salvato
+            entry_saved_failed: Articolo salvato ma il recupero del contenuto è fallito
+            entry_updated: Contenuto aggiornato
+            entry_reloaded: Contenuto ricaricato
+            entry_reloaded_failed: Articolo ricaricato ma il recupero del contenuto è fallito
+            entry_archived: Contenuto archiviato
+            entry_unarchived: Contenuto dis-archiviato
+            entry_starred: Contenuto segnato come preferito
+            entry_unstarred: Contenuto rimosso dai preferiti
+            entry_deleted: Contenuto eliminato
+    tag:
+        notice:
+            tag_added: Etichetta aggiunta
+    import:
+        notice:
+            failed: Importazione fallita, riprova.
+            failed_on_file: Errore durante la processazione dei dati da importare. Verifica il tuo file di import.
+            summary: 'Sommario di importazione: %imported% importati, %skipped% già salvati.'
+            summary_with_queue: "Riassunto dell'importazione: %queued% messo in coda."
+        error:
+            redis_enabled_not_installed: Redis è abilitato per gestire l'importazione asincrona, ma sembra che <u>non possiamo connetterci ad esso</u>. Controlla la tua configurazione di Redis.
+            rabbit_enabled_not_installed: RabbitMQ è abilitato per gestire l'importazione asincrona, ma sembra che <u>non possiamo connetterci ad esso</u>. Controlla la tua configurazione di RabbitMQ.
+    developer:
+        notice:
+            client_created: Nuovo client creato.
+            client_deleted: Client eliminato
+    user:
+        notice:
+            added: Utente «%username%» aggiunto
+            updated: Utente «%username» aggiornato
+            deleted: Utente «%username%» eliminato
+    site_credential:
+        notice:
+            added: Credenziale del sito per «%host%» aggiunta
+            updated: Credenziale del sito per «%host%» aggiornata
+            deleted: Credenziale del sito per «% host%» eliminata
+export:
+    footer_template: <div style="text-align:center;"><p>Prodotto da wallabag con %method%</p><p>Apri <a href="https://github.com/wallabag/wallabag/issues">un problema</a> se hai problemi con la visualizzazione di questo libro elettronico sul tuo dispositivo.</p></div>
+    unknown: Sconosciuto
+site_credential:
+    page_title: Gestione delle credenziali del sito
+    new_site_credential: Crea una credenziale
+    edit_site_credential: Modifica una credenziale esistente
+    description: Qui è possibile gestire tutte le credenziali per i siti che li hanno richiesti (creare, modificare ed eliminare), come un barriera di pedaggio digitale, un'autenticazione, ecc.
+    list:
+        actions: Azioni
+        edit_action: Modifica
+        yes: Sì
+        no: No
+        create_new_one: Crea una nuova credenziale
+    form:
+        username_label: Nome utente
+        host_label: Host
+        password_label: Mot de passe
+        save: Salva
+        delete: Elimina
+        delete_confirm: Sei sicuro/a?
+        back_to_list: Torna alla lista

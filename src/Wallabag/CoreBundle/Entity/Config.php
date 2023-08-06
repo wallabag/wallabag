@@ -21,8 +21,8 @@ use Wallabag\UserBundle\Entity\User;
  */
 class Config
 {
-    const REDIRECT_TO_HOMEPAGE = 0;
-    const REDIRECT_TO_CURRENT_PAGE = 1;
+    public const REDIRECT_TO_HOMEPAGE = 0;
+    public const REDIRECT_TO_CURRENT_PAGE = 1;
 
     /**
      * @var int
@@ -116,6 +116,15 @@ class Config
      * @Groups({"config_api"})
      */
     private $listMode;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="display_thumbnails", type="integer", nullable=true, options={"default" = 1})
+     *
+     * @Groups({"config_api"})
+     */
+    private $displayThumbnails;
 
     /**
      * @ORM\OneToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="config")
@@ -358,6 +367,24 @@ class Config
     public function setListMode($listMode)
     {
         $this->listMode = $listMode;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getDisplayThumbnails(): ?bool
+    {
+        return $this->displayThumbnails;
+    }
+
+    /**
+     * @return Config
+     */
+    public function setDisplayThumbnails(bool $displayThumbnails)
+    {
+        $this->displayThumbnails = $displayThumbnails;
 
         return $this;
     }

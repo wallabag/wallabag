@@ -2,7 +2,7 @@
 
 namespace Wallabag\CoreBundle\Event;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use Wallabag\CoreBundle\Entity\Entry;
 
 /**
@@ -10,7 +10,7 @@ use Wallabag\CoreBundle\Entity\Entry;
  */
 class EntryDeletedEvent extends Event
 {
-    const NAME = 'entry.deleted';
+    public const NAME = 'entry.deleted';
 
     protected $entry;
 
@@ -19,7 +19,7 @@ class EntryDeletedEvent extends Event
         $this->entry = $entry;
     }
 
-    public function getEntry()
+    public function getEntry(): Entry
     {
         return $this->entry;
     }

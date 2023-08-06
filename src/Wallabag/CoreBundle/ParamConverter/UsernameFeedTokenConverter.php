@@ -2,7 +2,7 @@
 
 namespace Wallabag\CoreBundle\ParamConverter;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -76,6 +76,10 @@ class UsernameFeedTokenConverter implements ParamConverterInterface
 
         // Get actual entity manager for class
         $em = $this->registry->getManagerForClass($configuration->getClass());
+
+        if (null === $em) {
+            return false;
+        }
 
         /** @var UserRepository $userRepository */
         $userRepository = $em->getRepository($configuration->getClass());

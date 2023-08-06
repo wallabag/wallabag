@@ -2,14 +2,15 @@
 
 namespace Wallabag\ApiBundle\Controller;
 
-use JMS\Serializer\SerializerInterface;
 use Nelmio\ApiDocBundle\Annotation\Operation;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\CoreBundle\Repository\TagRepository;
 
 class TagRestController extends WallabagRestController
 {
@@ -19,7 +20,7 @@ class TagRestController extends WallabagRestController
      * @Operation(
      *     tags={"Tags"},
      *     summary="Retrieve all tags.",
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -29,15 +30,13 @@ class TagRestController extends WallabagRestController
      *
      * @return JsonResponse
      */
-    public function getTagsAction()
+    public function getTagsAction(TagRepository $tagRepository)
     {
         $this->validateAuthentication();
 
-        $tags = $this->get('doctrine')
-            ->getRepository(Tag::class)
-            ->findAllFlatTagsWithNbEntries($this->getUser()->getId());
+        $tags = $tagRepository->findAllFlatTagsWithNbEntries($this->getUser()->getId());
 
-        $json = $this->get(SerializerInterface::class)->serialize($tags, 'json');
+        $json = $this->serializer->serialize($tags, 'json');
 
         return (new JsonResponse())->setJson($json);
     }
@@ -48,15 +47,17 @@ class TagRestController extends WallabagRestController
      * @Operation(
      *     tags={"Tags"},
      *     summary="Permanently remove one tag from every entry by passing the Tag label.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="tag",
-     *         in="body",
+     *         in="query",
      *         description="Tag as a string",
      *         required=true,
-     *         pattern="\w+",
-     *         @SWG\Schema(type="string")
+     *         @OA\Schema(
+     *             type="string",
+     *             pattern="\w+",
+     *         )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -66,12 +67,12 @@ class TagRestController extends WallabagRestController
      *
      * @return JsonResponse
      */
-    public function deleteTagLabelAction(Request $request)
+    public function deleteTagLabelAction(Request $request, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
         $this->validateAuthentication();
         $label = $request->get('tag', '');
 
-        $tags = $this->get('doctrine')->getRepository(Tag::class)->findByLabelsAndUser([$label], $this->getUser()->getId());
+        $tags = $tagRepository->findByLabelsAndUser([$label], $this->getUser()->getId());
 
         if (empty($tags)) {
             throw $this->createNotFoundException('Tag not found');
@@ -79,13 +80,11 @@ class TagRestController extends WallabagRestController
 
         $tag = $tags[0];
 
-        $this->get('doctrine')
-            ->getRepository(Entry::class)
-            ->removeTag($this->getUser()->getId(), $tag);
+        $entryRepository->removeTag($this->getUser()->getId(), $tag);
 
         $this->cleanOrphanTag($tag);
 
-        $json = $this->get(SerializerInterface::class)->serialize($tag, 'json');
+        $json = $this->serializer->serialize($tag, 'json');
 
         return (new JsonResponse())->setJson($json);
     }
@@ -96,17 +95,17 @@ class TagRestController extends WallabagRestController
      * @Operation(
      *     tags={"Tags"},
      *     summary="Permanently remove some tags from every entry.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="tags",
-     *         in="body",
+     *         in="query",
      *         description="Tags as strings (comma splitted)",
      *         required=true,
-     *         @SWG\Schema(
+     *         @OA\Schema(
      *             type="string",
      *             example="tag1,tag2",
      *         )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -116,25 +115,23 @@ class TagRestController extends WallabagRestController
      *
      * @return JsonResponse
      */
-    public function deleteTagsLabelAction(Request $request)
+    public function deleteTagsLabelAction(Request $request, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
         $this->validateAuthentication();
 
         $tagsLabels = $request->get('tags', '');
 
-        $tags = $this->get('doctrine')->getRepository(Tag::class)->findByLabelsAndUser(explode(',', $tagsLabels), $this->getUser()->getId());
+        $tags = $tagRepository->findByLabelsAndUser(explode(',', $tagsLabels), $this->getUser()->getId());
 
         if (empty($tags)) {
             throw $this->createNotFoundException('Tags not found');
         }
 
-        $this->get('doctrine')
-            ->getRepository(Entry::class)
-            ->removeTags($this->getUser()->getId(), $tags);
+        $entryRepository->removeTags($this->getUser()->getId(), $tags);
 
         $this->cleanOrphanTag($tags);
 
-        $json = $this->get(SerializerInterface::class)->serialize($tags, 'json');
+        $json = $this->serializer->serialize($tags, 'json');
 
         return (new JsonResponse())->setJson($json);
     }
@@ -145,15 +142,17 @@ class TagRestController extends WallabagRestController
      * @Operation(
      *     tags={"Tags"},
      *     summary="Permanently remove one tag from every entry by passing the Tag ID.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="tag",
-     *         in="body",
+     *         in="path",
      *         description="The tag",
      *         required=true,
-     *         pattern="\w+",
-     *         @SWG\Schema(type="integer")
+     *         @OA\Schema(
+     *             type="integer",
+     *             pattern="\w+",
+     *         )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -163,23 +162,21 @@ class TagRestController extends WallabagRestController
      *
      * @return JsonResponse
      */
-    public function deleteTagAction(Tag $tag)
+    public function deleteTagAction(Tag $tag, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
         $this->validateAuthentication();
 
-        $tagFromDb = $this->get('doctrine')->getRepository(Tag::class)->findByLabelsAndUser([$tag->getLabel()], $this->getUser()->getId());
+        $tagFromDb = $tagRepository->findByLabelsAndUser([$tag->getLabel()], $this->getUser()->getId());
 
         if (empty($tagFromDb)) {
             throw $this->createNotFoundException('Tag not found');
         }
 
-        $this->get('doctrine')
-            ->getRepository(Entry::class)
-            ->removeTag($this->getUser()->getId(), $tag);
+        $entryRepository->removeTag($this->getUser()->getId(), $tag);
 
         $this->cleanOrphanTag($tag);
 
-        $json = $this->get(SerializerInterface::class)->serialize($tag, 'json');
+        $json = $this->serializer->serialize($tag, 'json');
 
         return (new JsonResponse())->setJson($json);
     }
@@ -195,14 +192,12 @@ class TagRestController extends WallabagRestController
             $tags = [$tags];
         }
 
-        $em = $this->get('doctrine')->getManager();
-
         foreach ($tags as $tag) {
             if (0 === \count($tag->getEntries())) {
-                $em->remove($tag);
+                $this->entityManager->remove($tag);
             }
         }
 
-        $em->flush();
+        $this->entityManager->flush();
     }
 }

@@ -1,0 +1,37 @@
+settings_changed: Configuración actualizada
+download_pictures: Descargar imágenes en el servidor
+diaspora_url: URL de diaspora*, si el servicio está activado
+export_epub: Activar exportación a ePub
+export_mobi: Activar exportación a .mobi (deprecado, se eliminará pronto)
+export_pdf: Activar exportación a PDF
+export_csv: Activar exportación a CSV
+export_json: Activar exportación a JSON
+export_txt: Activar exportación a TXT
+export_xml: Activar exportación a XML
+import_with_rabbitmq: Activar RabbitMQ para importar datos de forma asíncrona
+import_with_redis: Activar Redis para importar datos de forma asíncrona
+shaarli_url: URL de Shaarli, si el servicio está activado
+unmark_url: URL de Unmark, si el servicio está activado
+share_diaspora: Activar compartir en diaspora*
+share_mail: Activar compartir por correo electrónico
+share_shaarli: Activar compartir en Shaarli
+share_twitter: Activar compartir en Twitter
+share_unmark: Activar compartir en Unmark.it
+show_printlink: Mostrar un enlace para imprimir el contenido
+wallabag_support_url: URL de soporte de wallabag
+entry: "artículo"
+export: "exportar"
+import: "importar"
+misc: "misc"
+modify_settings: "guardar"
+matomo_host: Host de tu website en Matomo (sin http:// o https://)
+matomo_site_id: ID de tu website en Matomo
+matomo_enabled: Activar Matomo
+demo_mode_enabled: "Activar modo demo (sólo usado en la demo pública de wallabag)"
+demo_mode_username: "Nombre de usuario demo"
+share_public: Permitir URLs públicas para los artículos
+download_images_enabled: Descargar imágenes localmente
+restricted_access: Activar autenticación para websites con paywall
+api_user_registration: Permitir el registro de usuarios utilizando el API
+shaarli_share_origin_url: Activar compartir en Shaarli, si el servicio está habilitado
+store_article_headers: Activar si wallabag almacena encabezados HTTP para cada artículo

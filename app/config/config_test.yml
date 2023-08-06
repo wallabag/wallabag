@@ -11,15 +11,12 @@ framework:
         collect: false
     translator:
         enabled: false
+    mailer:
+        dsn: 'null://null'
 
 web_profiler:
     toolbar: false
     intercept_redirects: false
-
-swiftmailer:
-    # to be able to read emails sent
-    spool:
-        type: file
 
 doctrine:
     dbal:

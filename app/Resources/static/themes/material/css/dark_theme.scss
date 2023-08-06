@@ -1,6 +1,8 @@
 .dark-theme {
-  body,
-  main #content,
+  body {
+    background-color: #101010;
+  }
+
   #article,
   .card,
   .card-panel,
@@ -10,13 +12,11 @@
   .collapsible-header,
   .collection,
   .dropdown-content,
-  .nav-panel-add,
-  .nav-panel-search,
   .side-nav,
   .side-nav .collapsible-body,
   .side-nav.fixed .collapsible-body,
   .tabs {
-    background-color: #121212;
+    background-color: #131716;
   }
 
   table.striped > tbody > tr:nth-child(2n+1),
@@ -50,7 +50,7 @@
     background-color: #272727;
   }
 
-  main #content,
+  #content,
   #article article,
   #article article h1,
   #article article h2,
@@ -59,7 +59,8 @@
   #article article h5,
   #article article h6,
   .dropdown-content li > a,
-  .results a,
+  .nav-panels .input-field input:focus,
+  .results-item,
   .side-nav li > a,
   .side-nav li > a > i.material-icons {
     color: #dfdfdf;
@@ -67,16 +68,17 @@
 
   .cyan,
   .cyan.darken-1,
-  .cyan.darken-2 {
+  .cyan.darken-2,
+  .nav-panel-add,
+  .nav-panel-search {
     background-color: #1d1d1d !important;
   }
 
-  .grey-text.text-darken-4 {
+  .grey-text.text-darken-4,
+  .nav-panel-item .add,
+  .nav-panel-item .search,
+  .nav-panels .close {
     color: #dfdfdf !important;
-  }
-
-  #article .chip {
-    background-color: #373737;
   }
 
   .side-nav li.active {
@@ -120,9 +122,18 @@
   }
 
   .hljs,
-  #article pre.hljs {
+  #article pre {
     color: #abb2bf;
     background-color: #282c34;
+  }
+
+  nav input {
+    color: #abb2bf;
+  }
+
+  .input-field.nav-panel-add.disabled,
+  .input-field.nav-panel-add.disabled input {
+    background-color: transparent;
   }
 
   @media only screen and (min-width: 992px) {

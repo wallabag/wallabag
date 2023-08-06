@@ -1,7 +1,0 @@
-validator:
-    password_must_match: Hasło w polach musi być takie same.
-    password_too_short: Twoje hasło musi mieć minimum 8 znaków długości.
-    password_wrong_value: Twoje obecne hasło jest błędne.
-    item_per_page_too_high: To może spowodować problemy z aplikacją
-    rss_limit_too_high: To może spowodować problemy z aplikacją
-    quote_length_too_high: Cytat jest zbyt długi. powinien mieć {{ limit }} znaków lub mniej.

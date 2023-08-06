@@ -797,7 +797,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringNotContainsString('config.form_user.delete.button', $body[0]);
 
-        $client->request('GET', '/account/delete');
+        $client->request('POST', '/account/delete');
         $this->assertSame(403, $client->getResponse()->getStatusCode());
 
         $user = $em
@@ -862,9 +862,9 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/config');
 
-        $deleteLink = $crawler->filter('.delete-account')->last()->link();
+        $deleteForm = $crawler->filter('form[name=delete-account]')->form();
 
-        $client->click($deleteLink);
+        $client->submit($deleteForm);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $em = $client->getContainer()->get(EntityManagerInterface::class);
@@ -936,7 +936,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $annotationsReset = $em
             ->getRepository(Annotation::class)
-            ->findAnnotationsByPageId($entry->getId(), $user->getId());
+            ->findByEntryIdAndUserId($entry->getId(), $user->getId());
 
         $this->assertEmpty($annotationsReset, 'Annotations were reset');
 
@@ -1046,7 +1046,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $annotationsReset = $em
             ->getRepository(Annotation::class)
-            ->findAnnotationsByPageId($annotationArchived->getId(), $user->getId());
+            ->findByEntryIdAndUserId($annotationArchived->getId(), $user->getId());
 
         $this->assertEmpty($annotationsReset, 'Annotations were reset');
     }
@@ -1105,7 +1105,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $annotationsReset = $em
             ->getRepository(Annotation::class)
-            ->findAnnotationsByPageId($entry->getId(), $user->getId());
+            ->findByEntryIdAndUserId($entry->getId(), $user->getId());
 
         $this->assertEmpty($annotationsReset, 'Annotations were reset');
     }
@@ -1353,5 +1353,41 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $taggingRules = $user->getConfig()->getTaggingRules()->toArray();
         $this->assertCount(5, $taggingRules);
         $this->assertSame('title matches "football"', $taggingRules[4]->getRule());
+    }
+
+    public function testSwitchDisplayThumbnails()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        // Change configuration to show thumbnails
+        $crawler = $client->request('GET', '/config');
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $form = $crawler->filter('button[id=config_save]')->form();
+        $data = [
+            'config[display_thumbnails]' => true,
+        ];
+        $client->submit($form, $data);
+        $client->followRedirect();
+
+        $client->request('GET', '/unread/list');
+
+        $this->assertStringContainsString('class="preview"', $client->getResponse()->getContent());
+
+        // Change configuration to hide thumbnails
+        $crawler = $client->request('GET', '/config');
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $form = $crawler->filter('button[id=config_save]')->form();
+        $data = [
+            'config[display_thumbnails]' => false,
+        ];
+        $client->submit($form, $data);
+        $client->followRedirect();
+
+        $client->request('GET', '/unread/list');
+
+        $this->assertStringNotContainsString('class="preview"', $client->getResponse()->getContent());
+
+        $client->request('GET', '/config/view-mode');
     }
 }

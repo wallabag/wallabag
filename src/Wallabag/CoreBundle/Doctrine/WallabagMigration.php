@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 abstract class WallabagMigration extends AbstractMigration implements ContainerAwareInterface
 {
-    const UN_ESCAPED_TABLE = true;
+    public const UN_ESCAPED_TABLE = true;
 
     /**
      * @var ContainerInterface
@@ -17,11 +17,11 @@ abstract class WallabagMigration extends AbstractMigration implements ContainerA
     protected $container;
 
     // because there are declared as abstract in `AbstractMigration` we need to delarer here too
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
     }
 
-    public function down(Schema $schema)
+    public function down(Schema $schema): void
     {
     }
 

@@ -36,7 +36,7 @@
             </ul>
         </div>
     </nav>
-    <ul id="slide-out" class="collapsible side-nav fixed reader-mode" data-collapsible="accordion">
+    <ul id="slide-out" class="left-bar collapsible side-nav fixed reader-mode" data-collapsible="accordion">
         <li class="bold border-bottom hide-on-med-and-down">
             <a class="waves-effect collapsible-header" href="{{ path('homepage') }}">
                 <i class="material-icons small">arrow_back</i>
@@ -232,12 +232,12 @@
 {% endblock %}
 
 {% block content %}
-    <div id="article">
+    <div id="article" class="article">
         <header class="mbm">
-            <h1><span{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>{{ entry.title|striptags|default('entry.default_title'|trans)|raw }}</span> <a href="{{ path('edit', {'id': entry.id}) }}" title="{{ 'entry.view.edit_title'|trans }}"><i class="material-icons grey-text">create</i></a></h1>
+            <h1><span{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>{{ entry.title|striptags|default('entry.default_title'|trans)|raw }}</span> <a class="title-edit" href="{{ path('edit', {'id': entry.id}) }}" title="{{ 'entry.view.edit_title'|trans }}"><i class="material-icons grey-text">create</i></a></h1>
         </header>
-        <aside>
-            <div class="tools grey-text" dir="auto">
+        <aside class="entry-info">
+            <div class="tools entry-tools grey-text" dir="auto">
                 <ul class="stats">
                     <li>
                         {% include "@WallabagCore/Entry/_reading_time.html.twig" with {'entry': entry} only %}
@@ -266,15 +266,17 @@
                             {{ entry.domainName|removeWww }}
                         </a>
                     </li>
-                    <li>
-                        <i class="material-icons grey-text">comment</i>
-                        {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations|length) }}
-                    </li>
+                    {% if entry.annotations|length %}
+                        <li>
+                            <i class="material-icons grey-text">comment</i>
+                            {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations|length) }}
+                        </li>
+                    {% endif %}
                     {% if entry.originUrl is not empty %}
                         <li>
                             <i class="material-icons grey-text" title="{{ 'entry.view.provided_by'|trans }}">launch</i>
-                            <a href="{{ entry.originUrl|e }}" target="_blank" rel="noopener" class="tool grey-text">
-                                {{ entry.originUrl|striptags|removeSchemeAndWww|truncate(32) }}
+                            <a href="{{ entry.originUrl|e }}" target="_blank" rel="noopener" class="tool grey-text" data-tests="entry-origin-url">
+                                {{ entry.originUrl|striptags|removeSchemeAndWww|u.truncate(32) }}
                             </a>
                         </li>
                     {% endif %}

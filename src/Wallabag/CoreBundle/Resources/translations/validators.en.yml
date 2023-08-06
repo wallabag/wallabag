@@ -1,7 +1,0 @@
-validator:
-    password_must_match: The passwords must match.
-    password_too_short: Your password must by at least 8 characters.
-    password_wrong_value: Wrong current password supplied.
-    item_per_page_too_high: This will certainly kill the app
-    rss_limit_too_high: This will certainly kill the app
-    quote_length_too_high: The quote is too long. It should have {{ limit }} characters or less.

@@ -3,6 +3,8 @@
 namespace Tests\Wallabag\UserBundle\Mailer;
 
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 use Wallabag\UserBundle\Entity\User;
@@ -10,19 +12,10 @@ use Wallabag\UserBundle\Mailer\AuthCodeMailer;
 
 class AuthCodeMailerTest extends TestCase
 {
-    protected $mailer;
-    protected $spool;
     protected $twig;
 
     protected function setUp(): void
     {
-        $this->spool = new CountableMemorySpool();
-        $transport = new \Swift_Transport_SpoolTransport(
-            new \Swift_Events_SimpleEventDispatcher(),
-            $this->spool
-        );
-        $this->mailer = new \Swift_Mailer($transport);
-
         $twigTemplate = <<<'TWIG'
 {% block subject %}subject{% endblock %}
 {% block body_html %}html body {{ code }}{% endblock %}
@@ -34,6 +27,31 @@ TWIG;
 
     public function testSendEmail()
     {
+        $mailer = $this->createMock(MailerInterface::class);
+        $mailer->expects($this->once())
+            ->method('send')
+            ->with($this->callback(function ($email) {
+                $this->assertSame('subject', $email->getSubject());
+                $this->assertSame('text body http://0.0.0.0/support', $email->getTextBody());
+                $this->assertSame('html body 666666', $email->getHtmlBody());
+
+                $this->assertCount(1, $email->getTo());
+                /** @var Address[] $addresses */
+                $addresses = $email->getTo();
+                $this->assertInstanceOf(Address::class, $addresses[0]);
+                $this->assertSame('', $addresses[0]->getName());
+                $this->assertSame('test@wallabag.io', $addresses[0]->getAddress());
+
+                $this->assertCount(1, $email->getFrom());
+                /** @var Address[] $addresses */
+                $addresses = $email->getFrom();
+                $this->assertInstanceOf(Address::class, $addresses[0]);
+                $this->assertSame('wallabag test', $addresses[0]->getName());
+                $this->assertSame('nobody@test.io', $addresses[0]->getAddress());
+
+                return true;
+            }));
+
         $user = new User();
         $user->setEmailTwoFactor(true);
         $user->setEmailAuthCode(666666);
@@ -41,7 +59,7 @@ TWIG;
         $user->setName('Bob');
 
         $authCodeMailer = new AuthCodeMailer(
-            $this->mailer,
+            $mailer,
             $this->twig,
             'nobody@test.io',
             'wallabag test',
@@ -50,14 +68,5 @@ TWIG;
         );
 
         $authCodeMailer->sendAuthCode($user);
-
-        $this->assertCount(1, $this->spool);
-
-        $msg = $this->spool->getMessages()[0];
-        $this->assertArrayHasKey('test@wallabag.io', $msg->getTo());
-        $this->assertSame(['nobody@test.io' => 'wallabag test'], $msg->getFrom());
-        $this->assertSame('subject', $msg->getSubject());
-        $this->assertStringContainsString('text body http://0.0.0.0/support', $msg->toString());
-        $this->assertStringContainsString('html body 666666', $msg->toString());
     }
 }

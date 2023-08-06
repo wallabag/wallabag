@@ -23,8 +23,9 @@ class CreateConfigListener implements EventSubscriberInterface
     private $actionMarkAsRead;
     private $listMode;
     private $session;
+    private $displayThumbnails;
 
-    public function __construct(EntityManagerInterface $em, $itemsOnPage, $feedLimit, $language, $readingSpeed, $actionMarkAsRead, $listMode, SessionInterface $session)
+    public function __construct(EntityManagerInterface $em, $itemsOnPage, $feedLimit, $language, $readingSpeed, $actionMarkAsRead, $listMode, $displayThumbnails, SessionInterface $session)
     {
         $this->em = $em;
         $this->itemsOnPage = $itemsOnPage;
@@ -34,6 +35,7 @@ class CreateConfigListener implements EventSubscriberInterface
         $this->actionMarkAsRead = $actionMarkAsRead;
         $this->listMode = $listMode;
         $this->session = $session;
+        $this->displayThumbnails = $displayThumbnails;
     }
 
     public static function getSubscribedEvents()
@@ -56,6 +58,7 @@ class CreateConfigListener implements EventSubscriberInterface
         $config->setReadingSpeed($this->readingSpeed);
         $config->setActionMarkAsRead($this->actionMarkAsRead);
         $config->setListMode($this->listMode);
+        $config->setDisplayThumbnails($this->displayThumbnails);
 
         $this->em->persist($config);
         $this->em->flush();

@@ -2,14 +2,14 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule;
 use Wallabag\CoreBundle\Form\Type\IgnoreOriginInstanceRuleType;
 use Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository;
@@ -19,16 +19,25 @@ use Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository;
  *
  * @Route("/ignore-origin-instance-rules")
  */
-class IgnoreOriginInstanceRuleController extends Controller
+class IgnoreOriginInstanceRuleController extends AbstractController
 {
+    private EntityManagerInterface $entityManager;
+    private TranslatorInterface $translator;
+
+    public function __construct(EntityManagerInterface $entityManager, TranslatorInterface $translator)
+    {
+        $this->entityManager = $entityManager;
+        $this->translator = $translator;
+    }
+
     /**
      * Lists all IgnoreOriginInstanceRule entities.
      *
      * @Route("/", name="ignore_origin_instance_rules_index", methods={"GET"})
      */
-    public function indexAction()
+    public function indexAction(IgnoreOriginInstanceRuleRepository $repository)
     {
-        $rules = $this->get(IgnoreOriginInstanceRuleRepository::class)->findAll();
+        $rules = $repository->findAll();
 
         return $this->render('@WallabagCore/IgnoreOriginInstanceRule/index.html.twig', [
             'rules' => $rules,
@@ -50,13 +59,12 @@ class IgnoreOriginInstanceRuleController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->get('doctrine')->getManager();
-            $em->persist($ignoreOriginInstanceRule);
-            $em->flush();
+            $this->entityManager->persist($ignoreOriginInstanceRule);
+            $this->entityManager->flush();
 
-            $this->get(SessionInterface::class)->getFlashBag()->add(
+            $this->addFlash(
                 'notice',
-                $this->get(TranslatorInterface::class)->trans('flashes.ignore_origin_instance_rule.notice.added')
+                $this->translator->trans('flashes.ignore_origin_instance_rule.notice.added')
             );
 
             return $this->redirectToRoute('ignore_origin_instance_rules_index');
@@ -82,13 +90,12 @@ class IgnoreOriginInstanceRuleController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->get('doctrine')->getManager();
-            $em->persist($ignoreOriginInstanceRule);
-            $em->flush();
+            $this->entityManager->persist($ignoreOriginInstanceRule);
+            $this->entityManager->flush();
 
-            $this->get(SessionInterface::class)->getFlashBag()->add(
+            $this->addFlash(
                 'notice',
-                $this->get(TranslatorInterface::class)->trans('flashes.ignore_origin_instance_rule.notice.updated')
+                $this->translator->trans('flashes.ignore_origin_instance_rule.notice.updated')
             );
 
             return $this->redirectToRoute('ignore_origin_instance_rules_index');
@@ -114,14 +121,13 @@ class IgnoreOriginInstanceRuleController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->get(SessionInterface::class)->getFlashBag()->add(
+            $this->addFlash(
                 'notice',
-                $this->get(TranslatorInterface::class)->trans('flashes.ignore_origin_instance_rule.notice.deleted')
+                $this->translator->trans('flashes.ignore_origin_instance_rule.notice.deleted')
             );
 
-            $em = $this->get('doctrine')->getManager();
-            $em->remove($ignoreOriginInstanceRule);
-            $em->flush();
+            $this->entityManager->remove($ignoreOriginInstanceRule);
+            $this->entityManager->flush();
         }
 
         return $this->redirectToRoute('ignore_origin_instance_rules_index');

@@ -1,0 +1,715 @@
+security:
+    login:
+        page_title: Welcome to wallabag!
+        keep_logged_in: Keep me logged in
+        forgot_password: Forgot your password?
+        submit: Log in
+        register: Register
+        username: Username
+        password: Password
+        cancel: Cancel
+    resetting:
+        description: Enter your email address below and we'll send you password reset instructions.
+    register:
+        page_title: Create an account
+        go_to_account: Go to your account
+menu:
+    left:
+        unread: Unread
+        starred: Starred
+        archive: Archive
+        all_articles: All entries
+        with_annotations: With annotations
+        config: Config
+        tags: Tags
+        internal_settings: Internal Settings
+        import: Import
+        howto: Howto
+        developer: API clients management
+        logout: Logout
+        about: About
+        search: Search
+        save_link: Save a link
+        back_to_unread: Back to unread articles
+        users_management: Users management
+        site_credentials: Site credentials
+        ignore_origin_instance_rules: 'Global ignore origin rules'
+        quickstart: "Quickstart"
+        theme_toggle_light: "Light theme"
+        theme_toggle_dark: "Dark theme"
+        theme_toggle_auto: "Automatic theme"
+    top:
+        add_new_entry: Add a new entry
+        search: Search
+        filter_entries: Filter entries
+        export: Export
+        random_entry: Jump to a random entry from that list
+        account: 'My account'
+    search_form:
+        input_label: Enter your search here
+footer:
+    wallabag:
+        elsewhere: Take wallabag with you
+        social: Social
+        powered_by: powered by
+        about: About
+    stats: Since %user_creation% you read %nb_archives% articles. That is about %per_day% a day!
+config:
+    page_title: Config
+    tab_menu:
+        settings: Settings
+        feed: 'Feeds'
+        user_info: User information
+        password: Password
+        rules: Tagging rules
+        new_user: Add a user
+        ignore_origin: 'Ignore origin rules'
+        reset: 'Reset area'
+    form:
+        save: Save
+    form_settings:
+        items_per_page_label: Items per page
+        language_label: Language
+        reading_speed:
+            label: Reading speed
+            help_message: 'You can use online tools to estimate your reading speed:'
+            100_word: I read ~100 words per minute
+            200_word: I read ~200 words per minute
+            300_word: I read ~300 words per minute
+            400_word: I read ~400 words per minute
+        action_mark_as_read:
+            label: What to do after removing, starring or marking as read an article?
+            redirect_homepage: Go to the homepage
+            redirect_current_page: Stay on the current page
+        pocket_consumer_key_label: Consumer key for Pocket to import contents
+        android_configuration: Configure your Android app
+        android_instruction: Touch here to prefill your Android app
+        help_items_per_page: You can change the number of articles displayed on each page.
+        help_reading_speed: wallabag calculates a reading time for each article. You can define here, thanks to this list, if you are a fast or a slow reader. wallabag will recalculate the reading time for each article.
+        help_language: You can change the language of wallabag interface.
+        help_pocket_consumer_key: Required for Pocket import. You can create it in your Pocket account.
+        help_display_thumbnails: You can decide if you want to display or not articles thumbnails. Useful for slow connections.
+        display_thumbnails_label: Display articles thumbnails (useful for slow connections).
+    form_feed:
+        description: 'Atom feeds provided by wallabag allow you to read your saved articles with your favourite Atom reader. You need to generate a token first.'
+        token_label: 'Feed token'
+        no_token: 'No token'
+        token_create: 'Create your token'
+        token_reset: 'Regenerate your token'
+        token_revoke: 'Revoke the token'
+        feed_links: 'Feed links'
+        feed_link:
+            unread: 'Unread'
+            starred: 'Starred'
+            archive: 'Archived'
+            all: 'All'
+        feed_limit: 'Number of items in the feed'
+    form_user:
+        two_factor_description: Enabling two factor authentication means you'll receive an email with a code on every new untrusted connection.
+        login_label: 'Login (can not be changed)'
+        name_label: 'Name'
+        email_label: 'Email'
+        two_factor:
+            emailTwoFactor_label: 'Using email (receive a code by email)'
+            googleTwoFactor_label: 'Using an OTP app (open the app, like Google Authenticator, Authy or FreeOTP, to get a one time code)'
+            table_method: Method
+            table_state: State
+            table_action: Action
+            state_enabled: Enabled
+            state_disabled: Disabled
+            action_email: Use email
+            action_app: Use OTP App
+        delete:
+            title: Delete my account (a.k.a danger zone)
+            description: If you remove your account, ALL your articles, ALL your tags, ALL your annotations and your account will be PERMANENTLY removed (it can't be UNDONE). You'll then be logged out.
+            confirm: Are you really sure? (THIS CAN'T BE UNDONE)
+            button: Delete my account
+    reset:
+        title: Reset area (a.k.a danger zone)
+        description: By hitting buttons below you'll have ability to remove some information from your account. Be aware that these actions are IRREVERSIBLE.
+        annotations: Remove ALL annotations
+        tags: Remove ALL tags
+        entries: Remove ALL entries
+        archived: Remove ALL archived entries
+        confirm: Are you really sure? (THIS CAN'T BE UNDONE)
+    form_password:
+        description: You can change your password here. Your new password should be at least 8 characters long.
+        old_password_label: Current password
+        new_password_label: New password
+        repeat_new_password_label: Repeat new password
+    form_rules:
+        if_label: if
+        then_tag_as_label: then tag as
+        delete_rule_label: delete
+        edit_rule_label: edit
+        rule_label: Rule
+        tags_label: Tags
+        card:
+            new_tagging_rule: Create a tagging rule
+            import_tagging_rules: Import tagging rules
+            import_tagging_rules_detail: You have to select the JSON file you previously exported.
+            export_tagging_rules: Export tagging rules
+            export_tagging_rules_detail: This will download a JSON file that you can use to import tagging rules elsewhere or to backup them.
+        file_label: JSON file
+        import_submit: Import
+        export: Export
+        faq:
+            title: FAQ
+            tagging_rules_definition_title: What does “tagging rules” mean?
+            tagging_rules_definition_description: They are rules used by wallabag to automatically tag new entries.<br />Each time a new entry is added, all the tagging rules will be used to add the tags you configured, thus saving you the trouble of manually classifying your entries.
+            how_to_use_them_title: How do I use them?
+            how_to_use_them_description: 'Let us assume you want to tag new entries as « <i>short reading</i> » when the reading time is under 3 minutes.<br />In that case, you should put « readingTime &lt;= 3 » in the <i>Rule</i> field and « <i>short reading</i> » in the <i>Tags</i> field.<br />Several tags can added simultaneously by separating them with a comma: « <i>short reading, must read</i> »<br />Complex rules can be written by using predefined operators: if « <i>readingTime &gt;= 5 AND domainName = "www.php.net"</i> » then tag as « <i>long reading, php</i> »'
+            variables_available_title: Which variables and operators can I use to write rules?
+            variables_available_description: 'The following variables and operators can be used to create tagging rules:'
+            meaning: Meaning
+            variable_description:
+                label: Variable
+                title: Title of the entry
+                url: URL of the entry
+                isArchived: Whether the entry is archived or not
+                isStarred: Whether the entry is starred or not
+                content: The entry's content
+                language: The entry's language
+                mimetype: The entry's media type
+                readingTime: The estimated entry's reading time, in minutes
+                domainName: The domain name of the entry
+            operator_description:
+                label: Operator
+                less_than: Less than…
+                strictly_less_than: Strictly less than…
+                greater_than: Greater than…
+                strictly_greater_than: Strictly greater than…
+                equal_to: Equal to…
+                not_equal_to: Not equal to…
+                or: One rule OR another
+                and: One rule AND another
+                matches: 'Tests that a <i>subject</i> matches a <i>search</i> (case-insensitive).<br />Example: <code>title matches "football"</code>'
+                notmatches: "Tests that a <i>subject</i> doesn't match match a <i>search</i> (case-insensitive).<br />Example: <code>title notmatches \"football\"</code>"
+    form_ignore_origin_rules:
+        faq:
+            title: 'FAQ'
+            ignore_origin_rules_definition_title: 'What does “ignore origin rules” mean?'
+            ignore_origin_rules_definition_description: 'They are used by wallabag to automatically ignore an origin address after a redirect.<br />If a redirect occurs while fetching a new entry, all the ignore origin rules (<i>user defined and instance defined</i>) will be used to ignore the origin address.'
+            how_to_use_them_title: 'How do I use them?'
+            how_to_use_them_description: 'Let us assume you want to ignore the origin of an entry coming from « <i>rss.example.com</i> » (<i>knowing that after a redirect, the actual address is example.com</i>).<br />In that case, you should put « host = "rss.example.com" » in the <i>Rule</i> field.'
+            variables_available_title: 'Which variables and operators can I use to write rules?'
+            variables_available_description: 'The following variables and operators can be used to create ignore origin rules:'
+            meaning: 'Meaning'
+            variable_description:
+                label: 'Variable'
+                host: 'Host of the address'
+                _all: 'Full address, mainly for pattern matching'
+            operator_description:
+                label: 'Operator'
+                equal_to: 'Equal to…'
+                matches: 'Tests that a <i>subject</i> matches a <i>search</i> (case-insensitive).<br />Example: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
+    otp:
+        page_title: Two-factor authentication
+        app:
+            two_factor_code_description_1: You just enabled the OTP two factor authentication, open your OTP app and use that code to get a one time password. It'll disappear after a page reload.
+            two_factor_code_description_2: 'You can scan that QR Code with your app:'
+            two_factor_code_description_3: 'Also, save these backup codes in a safe place, you can use them in case you lose access to your OTP app:'
+            two_factor_code_description_4: 'Test an OTP code from your configured app:'
+            two_factor_code_description_5: "If you can't see the QR Code or can't scan it, enter the following secret in your app:"
+            cancel: Cancel
+            enable: Enable
+            qrcode_label: QR code
+entry:
+    default_title: Title of the entry
+    page_titles:
+        unread: Unread entries
+        starred: Starred entries
+        archived: Archived entries
+        filtered: Filtered entries
+        with_annotations: Entries with annotations
+        filtered_tags: 'Filtered by tags:'
+        filtered_search: 'Filtered by search:'
+        untagged: Untagged entries
+        all: All entries
+        same_domain: Same domain
+    list:
+        number_on_the_page: '{0} There are no entries.|{1} There is one entry.|]1,Inf[ There are %count% entries.'
+        reading_time: estimated reading time
+        reading_time_minutes: 'estimated reading time: %readingTime% min'
+        reading_time_less_one_minute: 'estimated reading time: &lt; 1 min'
+        number_of_tags: '{1}and one other tag|]1,Inf[and %count% other tags'
+        reading_time_minutes_short: '%readingTime% min'
+        reading_time_less_one_minute_short: '&lt; 1 min'
+        original_article: original
+        toogle_as_read: Toggle mark as read
+        toogle_as_star: Toggle starred
+        delete: Delete
+        export_title: Export
+        show_same_domain: Show articles with the same domain
+        assign_search_tag: Assign this search as a tag to each result
+        toggle_mass_action: Toggle mass action
+        mass_action_tags_input_placeholder: tag1, tag2, tag3
+        add_tags: Add tags
+    filters:
+        title: Filters
+        status_label: Status
+        archived_label: Archived
+        starred_label: Starred
+        unread_label: Unread
+        annotated_label: Annotated
+        preview_picture_label: Has a preview picture
+        preview_picture_help: Preview picture
+        is_public_label: Has a public link
+        is_public_help: Public link
+        language_label: Language
+        http_status_label: HTTP status
+        reading_time:
+            label: Reading time in minutes
+            from: from
+            to: to
+        domain_label: Domain name
+        created_at:
+            label: Creation date
+            from: from
+            to: to
+        action:
+            clear: Clear
+            filter: Filter
+    view:
+        left_menu:
+            back_to_top: Back to top
+            back_to_homepage: Back
+            set_as_read: Mark as read
+            set_as_unread: Mark as unread
+            set_as_starred: Toggle starred
+            view_original_article: Original article
+            re_fetch_content: Re-fetch content
+            delete: Delete
+            add_a_tag: Add a tag
+            share_content: Share
+            share_email_label: Email
+            public_link: public link
+            delete_public_link: delete public link
+            export: Export
+            print: Print
+            theme_toggle: Theme toggle
+            theme_toggle_light: Light
+            theme_toggle_dark: Dark
+            theme_toggle_auto: Automatic
+            problem:
+                label: Problems?
+                description: Does this article appear wrong?
+        edit_title: Edit title
+        original_article: original
+        annotations_on_the_entry: '{0} No annotations|{1} One annotation|]1,Inf[ %count% annotations'
+        created_at: Creation date
+        published_at: Publication date
+        published_by: Published by
+        provided_by: Provided by
+    new:
+        page_title: Save new entry
+        placeholder: http://website.com
+        form_new:
+            url_label: Url
+    search:
+        placeholder: What are you looking for?
+    edit:
+        page_title: Edit an entry
+        title_label: Title
+        url_label: Url
+        origin_url_label: Origin url (from where you found that entry)
+        save_label: Save
+    public:
+        shared_by_wallabag: This article has been shared by %username% with <a href='%wallabag_instance%'>wallabag</a>
+    confirm:
+        delete: Are you sure you want to remove that article?
+        delete_tag: Are you sure you want to remove that tag from that article?
+        delete_entries: Are you sure you want to remove these articles?
+    metadata:
+        reading_time: Estimated reading time
+        reading_time_minutes_short: '%readingTime% min'
+        address: Address
+        added_on: Added on
+        published_on: "Published on"
+about:
+    page_title: About
+    top_menu:
+        who_behind_wallabag: Who is behind wallabag
+        getting_help: Getting help
+        helping: Helping wallabag
+        contributors: Contributors
+        third_party: Third-party libraries
+    who_behind_wallabag:
+        developped_by: Developed by
+        website: website
+        many_contributors: And many others contributors ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">on GitHub</a>
+        project_website: Project website
+        license: License
+        version: Version
+    getting_help:
+        documentation: Documentation
+        bug_reports: Bug reports
+        support: <a href="https://github.com/wallabag/wallabag/issues">on GitHub</a>
+    helping:
+        description: 'wallabag is free and open source. You can help us:'
+        by_paypal: via Liberapay
+    contributors:
+        description: Thank you to contributors on wallabag web application
+    third_party:
+        description: 'Here is the list of third-party libraries used in wallabag (with their licenses):'
+        package: Package
+        license: License
+howto:
+    page_title: Howto
+    tab_menu:
+        add_link: Add a link
+        shortcuts: Use shortcuts
+    page_description: 'There are several ways to save an article:'
+    top_menu:
+        browser_addons: Browser addons
+        mobile_apps: Mobile apps
+        bookmarklet: Bookmarklet
+    form:
+        description: Thanks to this form
+    browser_addons:
+        firefox: Firefox addon
+        chrome: Chrome addon
+        opera: Opera addon
+    mobile_apps:
+        android:
+            via_f_droid: via F-Droid
+            via_google_play: via Google Play
+        ios: on the iTunes Store
+        windows: on the Microsoft Store
+    bookmarklet:
+        description: 'Drag and drop this link to your bookmarks bar:'
+    shortcuts:
+        page_description: Here are the shortcuts available in wallabag.
+        shortcut: Shortcut
+        action: Action
+        all_pages_title: Shortcuts available in all pages
+        go_unread: Go to unread
+        go_starred: Go to starred
+        go_archive: Go to archive
+        go_all: Go to all entries
+        go_tags: Go to tags
+        go_config: Go to config
+        go_import: Go to import
+        go_developers: Go to developers
+        go_howto: Go to howto (this page!)
+        go_logout: Log out
+        list_title: Shortcuts available in listing pages
+        search: Display the search form
+        article_title: Shortcuts available in entry view
+        open_original: Open original URL of the entry
+        toggle_favorite: Toggle star status for the entry
+        toggle_archive: Toggle read status for the entry
+        delete: Delete the entry
+        add_link: Add a new link
+        hide_form: Hide the current form (search or new link)
+        arrows_navigation: Navigate through articles
+        open_article: Display the selected entry
+quickstart:
+    page_title: Quickstart
+    more: More…
+    intro:
+        title: Welcome to wallabag!
+        paragraph_1: We'll accompany you on your visit to wallabag and show you some features that might interest you.
+        paragraph_2: Follow us!
+    configure:
+        title: Configure the application
+        description: In order to have an application which suits you, have a look into the configuration of wallabag.
+        language: Change language and interface
+        feed: 'Enable feeds'
+        tagging_rules: Write rules to automatically tag your articles
+    admin:
+        title: Administration
+        description: 'As an administrator, you have privileges on wallabag. You can:'
+        new_user: Create a new user
+        analytics: Configure analytics
+        sharing: Enable some parameters about article sharing
+        export: Configure export
+        import: Configure import
+    first_steps:
+        title: First steps
+        description: Now wallabag is well configured, it's time to archive the web. You can click on the top right sign + to add a link.
+        new_article: Save your first article
+        unread_articles: And classify it!
+    migrate:
+        title: Migrate from an existing service
+        description: Are you using another service? We'll help you to retrieve your data on wallabag.
+        pocket: Migrate from Pocket
+        wallabag_v1: Migrate from wallabag v1
+        wallabag_v2: Migrate from wallabag v2
+        readability: Migrate from Readability
+        instapaper: Migrate from Instapaper
+    developer:
+        title: Developers
+        description: 'We also thought of the developers: Docker, API, translations, etc.'
+        create_application: Create your third-party application
+        use_docker: Use Docker to install wallabag
+    docs:
+        title: Full documentation
+        description: There are so many features in wallabag. Don't hesitate to read the manual to know them and to learn how to use them.
+        annotate: Annotate your article
+        export: Convert your articles into ePUB or PDF
+        search_filters: See how you can look for an article by using the search engine and filters
+        fetching_errors: What can I do if an article encounters errors during fetching?
+        all_docs: And so many other articles!
+    support:
+        title: Support
+        description: If you need some help, we are here for you.
+        github: On GitHub
+        email: By email
+        gitter: On Gitter
+tag:
+    confirm:
+        delete: Delete the %name% tag
+    page_title: Tags
+    list:
+        number_on_the_page: '{0} There are no tags.|{1} There is one tag.|]1,Inf[ There are %count% tags.'
+        see_untagged_entries: See untagged entries
+        no_untagged_entries: 'There are no untagged entries.'
+        untagged: 'Untagged entries'
+    new:
+        add: Add
+        placeholder: You can add several tags, separated by a comma.
+export:
+    footer_template: <div style="text-align:center;"><p>Produced by wallabag with %method%</p><p>Please open <a href="https://github.com/wallabag/wallabag/issues">an issue</a> if you have trouble with the display of this E-Book on your device.</p></div>
+    unknown: Unknown
+import:
+    page_title: Import
+    page_description: Welcome to wallabag importer. Please select your previous service from which you want to migrate.
+    action:
+        import_contents: Import contents
+    form:
+        mark_as_read_title: Mark all as read?
+        mark_as_read_label: Mark all imported entries as read
+        file_label: File
+        save_label: Upload file
+    pocket:
+        page_title: Import > Pocket
+        description: This importer will import all of your Pocket data. Pocket doesn't allow us to retrieve content from their service, so the readable content of each article will be re-fetched by wallabag.
+        config_missing:
+            description: Pocket import isn't configured.
+            admin_message: You need to define %keyurls%a pocket_consumer_key%keyurle%.
+            user_message: Your server admin needs to define an API Key for Pocket.
+        authorize_message: You can import your data from your Pocket account. You just have to click on the button below and authorize the application to connect to getpocket.com.
+        connect_to_pocket: Connect to Pocket and import data
+    wallabag_v1:
+        page_title: Import > Wallabag v1
+        description: This importer will import all your wallabag v1 articles. On your config page, click on "JSON export" in the "Export your wallabag data" section. You will have a "wallabag-export-1-xxxx-xx-xx.json" file.
+        how_to: Please select your wallabag export and click on the button below to upload and import it.
+    wallabag_v2:
+        page_title: Import > Wallabag v2
+        description: This importer will import all your wallabag v2 articles. Go to All articles, then, on the export sidebar, click on "JSON". You will have a "All articles.json" file.
+    elcurator:
+        page_title: 'Import > elCurator'
+        description: 'This importer will import all your elCurator articles.'
+    readability:
+        page_title: Import > Readability
+        description: This importer will import all your Readability articles.
+        how_to: Please select your Readability export and click on the button below to upload and import it.
+    worker:
+        enabled: 'Import is made asynchronously. Once the import task is started, an external worker will handle jobs one at a time. The current service is:'
+        download_images_warning: You enabled downloading images for your articles. Combined with classic import it can take ages to proceed (or maybe failed). We <strong>strongly recommend</strong> to enable asynchronous import to avoid errors.
+    firefox:
+        page_title: Import > Firefox
+        description: This importer will import all your Firefox bookmarks. Just go to your bookmarks (Ctrl+Shift+O), then into "Import and backup", choose "Backup…". You will obtain a JSON file.
+        how_to: Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched.
+    chrome:
+        page_title: Import > Chrome
+        description: "This importer will import all your Chrome bookmarks. The location of the file depends on your operating system : <ul><li>On Linux, go into the <code>~/.config/chromium/Default/</code> directory</li><li>On Windows, it should be at <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>On OS X, it should be at <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Once you got there, copy the <code>Bookmarks</code> file someplace you'll find.<em><br>Note that if you have Chromium instead of Chrome, you'll have to correct paths accordingly.</em></p>"
+        how_to: Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched.
+    instapaper:
+        page_title: Import > Instapaper
+        description: This importer will import all your Instapaper articles. On the settings (https://www.instapaper.com/user) page, click on "Download .CSV file" in the "Export" section. A CSV file will be downloaded (like "instapaper-export.csv").
+        how_to: Please select your Instapaper export and click on the button below to upload and import it.
+    pinboard:
+        page_title: Import > Pinboard
+        description: This importer will import all your Pinboard articles. On the backup (https://pinboard.in/settings/backup) page, click on "JSON" in the "Bookmarks" section. A JSON file will be downloaded (like "pinboard_export").
+        how_to: Please select your Pinboard export and click on the button below to upload and import it.
+    delicious:
+        page_title: Import > del.icio.us
+        description: This importer will import all your Delicious bookmarks. Since 2021, you can export again your data from it using the export page (https://del.icio.us/export). Choose the "JSON" format and download it (like "delicious_export.2021.02.06_21.10.json").
+        how_to: Please select your Delicious export and click on the button below to upload and import it.
+developer:
+    page_title: API clients management
+    welcome_message: Welcome to the wallabag API
+    documentation: Documentation
+    how_to_first_app: How to create my first application
+    full_documentation: View full API documentation
+    list_methods: List API methods
+    clients:
+        title: Clients
+        create_new: Create a new client
+    existing_clients:
+        title: Existing clients
+        field_id: Client ID
+        field_secret: Client secret
+        field_uris: Redirect URIs
+        field_grant_types: Grant type allowed
+        no_client: No client yet.
+    remove:
+        warn_message_1: You have the ability to remove the client %name%. This action is IRREVERSIBLE !
+        warn_message_2: If you remove it, every app configured with that client won't be able to auth on your wallabag.
+        action: Remove the client %name%
+    client:
+        page_title: API clients management > New client
+        page_description: You are about to create a new client. Please fill the field below for the redirect URI of your application.
+        form:
+            name_label: Name of the client
+            redirect_uris_label: Redirect URIs (optional)
+            save_label: Create a new client
+        action_back: Back
+        copy_to_clipboard: Copy
+    client_parameter:
+        page_title: API clients management > Client parameters
+        page_description: Here are your client parameters.
+        field_name: Client name
+        field_id: Client ID
+        field_secret: Client secret
+        back: Back
+        read_howto: Read the howto "Create my first application"
+    howto:
+        page_title: API clients management > How to create my first application
+        description:
+            paragraph_1: The following commands make use of the <a href="https://github.com/jkbrzt/httpie">HTTPie library</a>. Make sure it is installed on your system before using it.
+            paragraph_2: You need a token to communicate between your third-party application and wallabag API.
+            paragraph_3: To create this token, you need <a href="%link%">to create a new client</a>.
+            paragraph_4: 'Now, create your token (replace client_id, client_secret, username and password with the good values):'
+            paragraph_5: 'The API will return a response like this:'
+            paragraph_6: 'The access_token is useful to do a call to the API endpoint. For example:'
+            paragraph_7: This call will return all the entries for your user.
+            paragraph_8: If you want to see all the API endpoints, you can have a look <a href="%link%">to our API documentation</a>.
+        back: Back
+user:
+    page_title: Users management
+    new_user: Create a new user
+    edit_user: Edit an existing user
+    description: Here you can manage all users (create, edit and delete)
+    list:
+        actions: Actions
+        edit_action: Edit
+        yes: Yes
+        no: No
+        create_new_one: Create a new user
+    form:
+        username_label: Username
+        name_label: Name
+        password_label: Password
+        repeat_new_password_label: Repeat new password
+        plain_password_label: ????
+        email_label: Email
+        enabled_label: Enabled
+        last_login_label: Last login
+        twofactor_email_label: Two factor authentication by email
+        twofactor_google_label: Two factor authentication by OTP app
+        save: Save
+        delete: Delete
+        delete_confirm: Are you sure?
+        back_to_list: Back to list
+    search:
+        placeholder: Filter by username or email
+site_credential:
+    page_title: Site credentials management
+    new_site_credential: Create a credential
+    edit_site_credential: Edit an existing credential
+    description: Here you can manage all credentials for sites which required them (create, edit and delete), like a paywall, an authentication, etc.
+    list:
+        actions: Actions
+        edit_action: Edit
+        yes: Yes
+        no: No
+        create_new_one: Create a new credential
+    form:
+        username_label: 'Login'
+        host_label: 'Host (subdomain.example.org, .example.org, etc.)'
+        password_label: 'Password'
+        save: Save
+        delete: Delete
+        delete_confirm: Are you sure?
+        back_to_list: Back to list
+ignore_origin_instance_rule:
+    page_title: Global ignore origin rules
+    new_ignore_origin_instance_rule: Create a global ignore origin rule
+    edit_ignore_origin_instance_rule: Edit an existing ignore origin rule
+    description: "Here you can manage the global ignore origin rules used to ignore some patterns of origin url."
+    list:
+        actions: Actions
+        edit_action: Edit
+        yes: Yes
+        no: No
+        create_new_one: Create a new global ignore origin rule
+    form:
+        rule_label: Rule
+        save: Save
+        delete: Delete
+        delete_confirm: Are you sure?
+        back_to_list: Back to list
+error:
+    page_title: An error occurred
+flashes:
+    config:
+        notice:
+            config_saved: Config saved.
+            password_updated: Password updated
+            password_not_updated_demo: In demonstration mode, you can't change password for this user.
+            user_updated: Information updated
+            tagging_rules_updated: Tagging rules updated
+            tagging_rules_deleted: Tagging rule deleted
+            feed_updated: 'Feed information updated'
+            feed_token_updated: 'Feed token updated'
+            feed_token_revoked: 'Feed token revoked'
+            annotations_reset: Annotations reset
+            tags_reset: Tags reset
+            entries_reset: Entries reset
+            archived_reset: Archived entries deleted
+            otp_enabled: Two-factor authentication enabled
+            otp_disabled: Two-factor authentication disabled
+            tagging_rules_imported: Tagging rules imported
+            tagging_rules_not_imported: Error while importing tagging rules
+            ignore_origin_rules_deleted: 'Ignore origin rule deleted'
+            ignore_origin_rules_updated: 'Ignore origin rule updated'
+    entry:
+        notice:
+            entry_already_saved: Entry already saved on %date%
+            entry_saved: Entry saved
+            entry_saved_failed: Entry saved but fetching content failed
+            entry_updated: Entry updated
+            entry_reloaded: Entry reloaded
+            entry_reloaded_failed: Entry reloaded but fetching content failed
+            entry_archived: Entry archived
+            entry_unarchived: Entry unarchived
+            entry_starred: Entry starred
+            entry_unstarred: Entry unstarred
+            entry_deleted: Entry deleted
+            no_random_entry: 'No article with these criterias was found'
+    tag:
+        notice:
+            tag_added: Tag added
+            tag_renamed: 'Tag renamed'
+            too_much_tags: To avoid performance issues, you can't add more than %tags% tags at once or tags having more than %characters% characters.
+    import:
+        notice:
+            failed: Import failed, please try again.
+            failed_on_file: Error while processing import. Please verify your import file.
+            summary: 'Import summary: %imported% imported, %skipped% already saved.'
+            summary_with_queue: 'Import summary: %queued% queued.'
+        error:
+            redis_enabled_not_installed: Redis is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check Redis configuration.
+            rabbit_enabled_not_installed: RabbitMQ is enabled for handle asynchronous import but it looks like <u>we can't connect to it</u>. Please check RabbitMQ configuration.
+    developer:
+        notice:
+            client_created: New client %name% created.
+            client_deleted: Client %name% deleted
+    user:
+        notice:
+            added: User "%username%" added
+            updated: User "%username%" updated
+            deleted: User "%username%" deleted
+    site_credential:
+        notice:
+            added: Site credential for "%host%" added
+            updated: Site credential for "%host%" updated
+            deleted: Site credential for "%host%" deleted
+    ignore_origin_instance_rule:
+        notice:
+            added: 'Global ignore origin rule added'
+            updated: 'Global ignore origin rule updated'
+            deleted: 'Global ignore origin rule deleted'

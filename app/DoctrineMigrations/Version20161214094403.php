@@ -12,7 +12,7 @@ class Version20161214094403 extends WallabagMigration
 {
     private $indexName = 'IDX_entry_uid';
 
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
         $this->skipIf($entryTable->hasIndex($this->indexName), 'It seems that you already played this migration.');
@@ -20,7 +20,7 @@ class Version20161214094403 extends WallabagMigration
         $entryTable->addIndex(['uid'], $this->indexName);
     }
 
-    public function down(Schema $schema)
+    public function down(Schema $schema): void
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
         $this->skipIf(false === $entryTable->hasIndex($this->indexName), 'It seems that you already played this migration.');

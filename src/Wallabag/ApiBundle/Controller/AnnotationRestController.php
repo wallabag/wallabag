@@ -3,8 +3,7 @@
 namespace Wallabag\ApiBundle\Controller;
 
 use Nelmio\ApiDocBundle\Annotation\Operation;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,15 +18,17 @@ class AnnotationRestController extends WallabagRestController
      * @Operation(
      *     tags={"Annotations"},
      *     summary="Retrieve annotations for an entry.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="entry",
      *         in="path",
      *         description="The entry ID",
      *         required=true,
-     *         pattern="\w+",
-     *         type="integer"
+     *         @OA\Schema(
+     *             type="integer",
+     *             pattern="\w+",
+     *         )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -52,40 +53,48 @@ class AnnotationRestController extends WallabagRestController
      * @Operation(
      *     tags={"Annotations"},
      *     summary="Creates a new annotation.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="entry",
      *         in="path",
      *         description="The entry ID",
      *         required=true,
-     *         pattern="\w+",
-     *         type="integer"
-     *     ),
-     *     @SWG\Parameter(
-     *         name="ranges",
-     *         in="body",
-     *         description="The range array for the annotation",
-     *         required=false,
-     *         pattern="\w+",
-     *         @SWG\Schema(
-     *             type="array",
-     *             @SWG\Items(type="string")
+     *         @OA\Schema(
+     *             type="integer",
+     *             pattern="\w+",
      *         )
      *     ),
-     *     @SWG\Parameter(
-     *         name="quote",
-     *         in="body",
-     *         description="The annotated text",
-     *         required=false,
-     *         @SWG\Schema(type="string")
+     *     @OA\RequestBody(
+     *          @OA\JsonContent(
+     *              type="object",
+     *              required={"text"},
+     *              @OA\Property(
+     *                  property="ranges",
+     *                  type="array",
+     *                  description="The range array for the annotation",
+     *                  @OA\Items(
+     *                      type="string",
+     *                      pattern="\w+",
+     *                  )
+     *              ),
+     *              @OA\Property(
+     *                  property="quote",
+     *                  type="array",
+     *                  description="The annotated text",
+     *                  @OA\Items(
+     *                      type="string",
+     *                  )
+     *              ),
+     *              @OA\Property(
+     *                  property="text",
+     *                  type="array",
+     *                  description="Content of annotation",
+     *                  @OA\Items(
+     *                      type="string",
+     *                  )
+     *              ),
+     *          )
      *     ),
-     *     @SWG\Parameter(
-     *         name="text",
-     *         in="body",
-     *         description="Content of annotation",
-     *         required=true,
-     *         @SWG\Schema(type="string")
-     *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -111,26 +120,27 @@ class AnnotationRestController extends WallabagRestController
      * @Operation(
      *     tags={"Annotations"},
      *     summary="Updates an annotation.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="annotation",
      *         in="path",
      *         description="The annotation ID",
      *         required=true,
-     *         pattern="\w+",
-     *         type="string"
+     *         @OA\Schema(
+     *             type="string",
+     *             pattern="\w+",
+     *         )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
      * )
      *
      * @Route("/api/annotations/{annotation}.{_format}", methods={"PUT"}, name="api_put_annotation", defaults={"_format": "json"})
-     * @ParamConverter("annotation", class="Wallabag\AnnotationBundle\Entity\Annotation")
      *
      * @return JsonResponse
      */
-    public function putAnnotationAction(Annotation $annotation, Request $request)
+    public function putAnnotationAction(int $annotation, Request $request)
     {
         $this->validateAuthentication();
 
@@ -146,26 +156,27 @@ class AnnotationRestController extends WallabagRestController
      * @Operation(
      *     tags={"Annotations"},
      *     summary="Removes an annotation.",
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="annotation",
      *         in="path",
      *         description="The annotation ID",
      *         required=true,
-     *         pattern="\w+",
-     *         type="string"
+     *         @OA\Schema(
+     *             type="string",
+     *             pattern="\w+",
+     *         )
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
      * )
      *
      * @Route("/api/annotations/{annotation}.{_format}", methods={"DELETE"}, name="api_delete_annotation", defaults={"_format": "json"})
-     * @ParamConverter("annotation", class="Wallabag\AnnotationBundle\Entity\Annotation")
      *
      * @return JsonResponse
      */
-    public function deleteAnnotationAction(Annotation $annotation)
+    public function deleteAnnotationAction(int $annotation)
     {
         $this->validateAuthentication();
 

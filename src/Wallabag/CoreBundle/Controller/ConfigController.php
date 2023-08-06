@@ -4,13 +4,13 @@ namespace Wallabag\CoreBundle\Controller;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use PragmaRX\Recovery\Recovery as BackupCodes;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraints\Locale as LocaleConstraint;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Wallabag\AnnotationBundle\Entity\Annotation;
+use Wallabag\AnnotationBundle\Repository\AnnotationRepository;
 use Wallabag\CoreBundle\Entity\Config as ConfigEntity;
 use Wallabag\CoreBundle\Entity\IgnoreOriginUserRule;
 use Wallabag\CoreBundle\Entity\RuleInterface;
@@ -32,21 +32,39 @@ use Wallabag\CoreBundle\Form\Type\IgnoreOriginUserRuleType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleImportType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleType;
 use Wallabag\CoreBundle\Form\Type\UserInformationType;
+use Wallabag\CoreBundle\Repository\ConfigRepository;
 use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\CoreBundle\Repository\IgnoreOriginUserRuleRepository;
+use Wallabag\CoreBundle\Repository\TaggingRuleRepository;
 use Wallabag\CoreBundle\Repository\TagRepository;
 use Wallabag\CoreBundle\Tools\Utils;
 use Wallabag\UserBundle\Repository\UserRepository;
 
-class ConfigController extends Controller
+class ConfigController extends AbstractController
 {
+    private EntityManagerInterface $entityManager;
+    private UserManagerInterface $userManager;
+    private EntryRepository $entryRepository;
+    private TagRepository $tagRepository;
+    private AnnotationRepository $annotationRepository;
+    private ConfigRepository $configRepository;
+
+    public function __construct(EntityManagerInterface $entityManager, UserManagerInterface $userManager, EntryRepository $entryRepository, TagRepository $tagRepository, AnnotationRepository $annotationRepository, ConfigRepository $configRepository)
+    {
+        $this->entityManager = $entityManager;
+        $this->userManager = $userManager;
+        $this->entryRepository = $entryRepository;
+        $this->tagRepository = $tagRepository;
+        $this->annotationRepository = $annotationRepository;
+        $this->configRepository = $configRepository;
+    }
+
     /**
      * @Route("/config", name="config")
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, Config $craueConfig, TaggingRuleRepository $taggingRuleRepository, IgnoreOriginUserRuleRepository $ignoreOriginUserRuleRepository, UserRepository $userRepository)
     {
-        $em = $this->get('doctrine')->getManager();
         $config = $this->getConfig();
-        $userManager = $this->container->get(UserManagerInterface::class);
         $user = $this->getUser();
 
         // handle basic config detail (this form is defined as a service)
@@ -54,8 +72,8 @@ class ConfigController extends Controller
         $configForm->handleRequest($request);
 
         if ($configForm->isSubmitted() && $configForm->isValid()) {
-            $em->persist($config);
-            $em->flush();
+            $this->entityManager->persist($config);
+            $this->entityManager->flush();
 
             $request->getSession()->set('_locale', $config->getLanguage());
 
@@ -72,13 +90,13 @@ class ConfigController extends Controller
         $pwdForm->handleRequest($request);
 
         if ($pwdForm->isSubmitted() && $pwdForm->isValid()) {
-            if ($this->get(Config::class)->get('demo_mode_enabled') && $this->get(Config::class)->get('demo_mode_username') === $user->getUsername()) {
+            if ($craueConfig->get('demo_mode_enabled') && $craueConfig->get('demo_mode_username') === $user->getUsername()) {
                 $message = 'flashes.config.notice.password_not_updated_demo';
             } else {
                 $message = 'flashes.config.notice.password_updated';
 
                 $user->setPlainPassword($pwdForm->get('new_password')->getData());
-                $userManager->updateUser($user, true);
+                $this->userManager->updateUser($user, true);
             }
 
             $this->addFlash('notice', $message);
@@ -94,7 +112,7 @@ class ConfigController extends Controller
         $userForm->handleRequest($request);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
-            $userManager->updateUser($user, true);
+            $this->userManager->updateUser($user, true);
 
             $this->addFlash(
                 'notice',
@@ -109,8 +127,8 @@ class ConfigController extends Controller
         $feedForm->handleRequest($request);
 
         if ($feedForm->isSubmitted() && $feedForm->isValid()) {
-            $em->persist($config);
-            $em->flush();
+            $this->entityManager->persist($config);
+            $this->entityManager->flush();
 
             $this->addFlash(
                 'notice',
@@ -125,9 +143,7 @@ class ConfigController extends Controller
         $action = $this->generateUrl('config') . '#set5';
 
         if ($request->query->has('tagging-rule')) {
-            $taggingRule = $this->get('doctrine')
-                ->getRepository(TaggingRule::class)
-                ->find($request->query->get('tagging-rule'));
+            $taggingRule = $taggingRuleRepository->find($request->query->get('tagging-rule'));
 
             if ($this->getUser()->getId() !== $taggingRule->getConfig()->getUser()->getId()) {
                 return $this->redirect($action);
@@ -141,8 +157,8 @@ class ConfigController extends Controller
 
         if ($newTaggingRule->isSubmitted() && $newTaggingRule->isValid()) {
             $taggingRule->setConfig($config);
-            $em->persist($taggingRule);
-            $em->flush();
+            $this->entityManager->persist($taggingRule);
+            $this->entityManager->flush();
 
             $this->addFlash(
                 'notice',
@@ -169,10 +185,10 @@ class ConfigController extends Controller
                         $taggingRule->setRule($rule['rule']);
                         $taggingRule->setTags($rule['tags']);
                         $taggingRule->setConfig($config);
-                        $em->persist($taggingRule);
+                        $this->entityManager->persist($taggingRule);
                     }
 
-                    $em->flush();
+                    $this->entityManager->flush();
 
                     $message = 'flashes.config.notice.tagging_rules_imported';
                 }
@@ -188,8 +204,7 @@ class ConfigController extends Controller
         $action = $this->generateUrl('config') . '#set6';
 
         if ($request->query->has('ignore-origin-user-rule')) {
-            $ignoreOriginUserRule = $this->get('doctrine')
-                ->getRepository(IgnoreOriginUserRule::class)
+            $ignoreOriginUserRule = $ignoreOriginUserRuleRepository
                 ->find($request->query->get('ignore-origin-user-rule'));
 
             if ($this->getUser()->getId() !== $ignoreOriginUserRule->getConfig()->getUser()->getId()) {
@@ -206,8 +221,8 @@ class ConfigController extends Controller
 
         if ($newIgnoreOriginUserRule->isSubmitted() && $newIgnoreOriginUserRule->isValid()) {
             $ignoreOriginUserRule->setConfig($config);
-            $em->persist($ignoreOriginUserRule);
-            $em->flush();
+            $this->entityManager->persist($ignoreOriginUserRule);
+            $this->entityManager->flush();
 
             $this->addFlash(
                 'notice',
@@ -231,9 +246,8 @@ class ConfigController extends Controller
                 'username' => $user->getUsername(),
                 'token' => $config->getFeedToken(),
             ],
-            'twofactor_auth' => $this->getParameter('twofactor_auth'),
             'wallabag_url' => $this->getParameter('domain_name'),
-            'enabled_users' => $this->get(UserRepository::class)->getSumEnabledUsers(),
+            'enabled_users' => $userRepository->getSumEnabledUsers(),
         ]);
     }
 
@@ -244,14 +258,10 @@ class ConfigController extends Controller
      */
     public function disableOtpEmailAction()
     {
-        if (!$this->getParameter('twofactor_auth')) {
-            return $this->createNotFoundException('two_factor not enabled');
-        }
-
         $user = $this->getUser();
         $user->setEmailTwoFactor(false);
 
-        $this->container->get(UserManagerInterface::class)->updateUser($user, true);
+        $this->userManager->updateUser($user, true);
 
         $this->addFlash(
             'notice',
@@ -268,17 +278,13 @@ class ConfigController extends Controller
      */
     public function otpEmailAction()
     {
-        if (!$this->getParameter('twofactor_auth')) {
-            return $this->createNotFoundException('two_factor not enabled');
-        }
-
         $user = $this->getUser();
 
         $user->setGoogleAuthenticatorSecret(null);
         $user->setBackupCodes(null);
         $user->setEmailTwoFactor(true);
 
-        $this->container->get(UserManagerInterface::class)->updateUser($user, true);
+        $this->userManager->updateUser($user, true);
 
         $this->addFlash(
             'notice',
@@ -295,16 +301,12 @@ class ConfigController extends Controller
      */
     public function disableOtpAppAction()
     {
-        if (!$this->getParameter('twofactor_auth')) {
-            return $this->createNotFoundException('two_factor not enabled');
-        }
-
         $user = $this->getUser();
 
         $user->setGoogleAuthenticatorSecret('');
         $user->setBackupCodes(null);
 
-        $this->container->get(UserManagerInterface::class)->updateUser($user, true);
+        $this->userManager->updateUser($user, true);
 
         $this->addFlash(
             'notice',
@@ -319,14 +321,10 @@ class ConfigController extends Controller
      *
      * @Route("/config/otp/app", name="config_otp_app")
      */
-    public function otpAppAction()
+    public function otpAppAction(GoogleAuthenticatorInterface $googleAuthenticator)
     {
-        if (!$this->getParameter('twofactor_auth')) {
-            return $this->createNotFoundException('two_factor not enabled');
-        }
-
         $user = $this->getUser();
-        $secret = $this->get(GoogleAuthenticatorInterface::class)->generateSecret();
+        $secret = $googleAuthenticator->generateSecret();
 
         $user->setGoogleAuthenticatorSecret($secret);
         $user->setEmailTwoFactor(false);
@@ -341,7 +339,7 @@ class ConfigController extends Controller
 
         $user->setBackupCodes($backupCodesHashed);
 
-        $this->container->get(UserManagerInterface::class)->updateUser($user, true);
+        $this->userManager->updateUser($user, true);
 
         $this->addFlash(
             'notice',
@@ -350,7 +348,7 @@ class ConfigController extends Controller
 
         return $this->render('@WallabagCore/Config/otp_app.html.twig', [
             'backupCodes' => $backupCodes,
-            'qr_code' => $this->get(GoogleAuthenticatorInterface::class)->getQRContent($user),
+            'qr_code' => $googleAuthenticator->getQRContent($user),
             'secret' => $secret,
         ]);
     }
@@ -362,15 +360,11 @@ class ConfigController extends Controller
      */
     public function otpAppCancelAction()
     {
-        if (!$this->getParameter('twofactor_auth')) {
-            return $this->createNotFoundException('two_factor not enabled');
-        }
-
         $user = $this->getUser();
         $user->setGoogleAuthenticatorSecret(null);
         $user->setBackupCodes(null);
 
-        $this->container->get(UserManagerInterface::class)->updateUser($user, true);
+        $this->userManager->updateUser($user, true);
 
         return $this->redirect($this->generateUrl('config') . '#set3');
     }
@@ -380,9 +374,9 @@ class ConfigController extends Controller
      *
      * @Route("/config/otp/app/check", name="config_otp_app_check")
      */
-    public function otpAppCheckAction(Request $request)
+    public function otpAppCheckAction(Request $request, GoogleAuthenticatorInterface $googleAuthenticator)
     {
-        $isValid = $this->get(GoogleAuthenticatorInterface::class)->checkCode(
+        $isValid = $googleAuthenticator->checkCode(
             $this->getUser(),
             $request->get('_auth_code')
         );
@@ -414,9 +408,8 @@ class ConfigController extends Controller
         $config = $this->getConfig();
         $config->setFeedToken(Utils::generateToken());
 
-        $em = $this->get('doctrine')->getManager();
-        $em->persist($config);
-        $em->flush();
+        $this->entityManager->persist($config);
+        $this->entityManager->flush();
 
         if ($request->isXmlHttpRequest()) {
             return new JsonResponse(['token' => $config->getFeedToken()]);
@@ -440,9 +433,8 @@ class ConfigController extends Controller
         $config = $this->getConfig();
         $config->setFeedToken(null);
 
-        $em = $this->get('doctrine')->getManager();
-        $em->persist($config);
-        $em->flush();
+        $this->entityManager->persist($config);
+        $this->entityManager->flush();
 
         if ($request->isXmlHttpRequest()) {
             return new JsonResponse();
@@ -467,9 +459,8 @@ class ConfigController extends Controller
     {
         $this->validateRuleAction($rule);
 
-        $em = $this->get('doctrine')->getManager();
-        $em->remove($rule);
-        $em->flush();
+        $this->entityManager->remove($rule);
+        $this->entityManager->flush();
 
         $this->addFlash(
             'notice',
@@ -504,9 +495,8 @@ class ConfigController extends Controller
     {
         $this->validateRuleAction($rule);
 
-        $em = $this->get('doctrine')->getManager();
-        $em->remove($rule);
-        $em->flush();
+        $this->entityManager->remove($rule);
+        $this->entityManager->flush();
 
         $this->addFlash(
             'notice',
@@ -537,13 +527,11 @@ class ConfigController extends Controller
      *
      * @return RedirectResponse
      */
-    public function resetAction($type)
+    public function resetAction(string $type, AnnotationRepository $annotationRepository, EntryRepository $entryRepository)
     {
         switch ($type) {
             case 'annotations':
-                $this->get('doctrine')
-                    ->getRepository(Annotation::class)
-                    ->removeAllByUserId($this->getUser()->getId());
+                $annotationRepository->removeAllByUserId($this->getUser()->getId());
                 break;
             case 'tags':
                 $this->removeAllTagsByUserId($this->getUser()->getId());
@@ -551,24 +539,24 @@ class ConfigController extends Controller
             case 'entries':
                 // SQLite doesn't care about cascading remove, so we need to manually remove associated stuff
                 // otherwise they won't be removed ...
-                if ($this->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof SqlitePlatform) {
-                    $this->get('doctrine')->getRepository(Annotation::class)->removeAllByUserId($this->getUser()->getId());
+                if ($this->entityManager->getConnection()->getDatabasePlatform() instanceof SqlitePlatform) {
+                    $annotationRepository->removeAllByUserId($this->getUser()->getId());
                 }
 
                 // manually remove tags to avoid orphan tag
                 $this->removeAllTagsByUserId($this->getUser()->getId());
 
-                $this->get(EntryRepository::class)->removeAllByUserId($this->getUser()->getId());
+                $entryRepository->removeAllByUserId($this->getUser()->getId());
                 break;
             case 'archived':
-                if ($this->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof SqlitePlatform) {
+                if ($this->entityManager->getConnection()->getDatabasePlatform() instanceof SqlitePlatform) {
                     $this->removeAnnotationsForArchivedByUserId($this->getUser()->getId());
                 }
 
                 // manually remove tags to avoid orphan tag
                 $this->removeTagsForArchivedByUserId($this->getUser()->getId());
 
-                $this->get(EntryRepository::class)->removeArchivedByUserId($this->getUser()->getId());
+                $entryRepository->removeArchivedByUserId($this->getUser()->getId());
                 break;
         }
 
@@ -583,16 +571,19 @@ class ConfigController extends Controller
     /**
      * Delete account for current user.
      *
-     * @Route("/account/delete", name="delete_account")
+     * @Route("/account/delete", name="delete_account", methods={"POST"})
      *
      * @throws AccessDeniedHttpException
      *
      * @return RedirectResponse
      */
-    public function deleteAccountAction(Request $request)
+    public function deleteAccountAction(Request $request, UserRepository $userRepository, TokenStorageInterface $tokenStorage)
     {
-        $enabledUsers = $this->get(UserRepository::class)
-            ->getSumEnabledUsers();
+        if (!$this->isCsrfTokenValid('delete-account', $request->request->get('token'))) {
+            throw $this->createAccessDeniedException('Bad CSRF token.');
+        }
+
+        $enabledUsers = $userRepository->getSumEnabledUsers();
 
         if ($enabledUsers <= 1) {
             throw new AccessDeniedHttpException();
@@ -601,11 +592,10 @@ class ConfigController extends Controller
         $user = $this->getUser();
 
         // logout current user
-        $this->get(TokenStorageInterface::class)->setToken(null);
+        $tokenStorage->setToken(null);
         $request->getSession()->invalidate();
 
-        $em = $this->get(UserManagerInterface::class);
-        $em->deleteUser($user);
+        $this->userManager->deleteUser($user);
 
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
@@ -622,9 +612,8 @@ class ConfigController extends Controller
         $user = $this->getUser();
         $user->getConfig()->setListMode(!$user->getConfig()->getListMode());
 
-        $em = $this->get('doctrine')->getManager();
-        $em->persist($user);
-        $em->flush();
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
 
         return $this->redirect($request->getSession()->get('prevUrl'));
     }
@@ -638,9 +627,9 @@ class ConfigController extends Controller
      *
      * @return RedirectResponse
      */
-    public function setLocaleAction(Request $request, $language = null)
+    public function setLocaleAction(Request $request, ValidatorInterface $validator, $language = null)
     {
-        $errors = $this->get(ValidatorInterface::class)->validate($language, (new LocaleConstraint()));
+        $errors = $validator->validate($language, (new LocaleConstraint()));
 
         if (0 === \count($errors)) {
             $request->getSession()->set('_locale', $language);
@@ -687,19 +676,16 @@ class ConfigController extends Controller
             return;
         }
 
-        $this->get(EntryRepository::class)
-            ->removeTags($userId, $tags);
+        $this->entryRepository->removeTags($userId, $tags);
 
         // cleanup orphan tags
-        $em = $this->get('doctrine')->getManager();
-
         foreach ($tags as $tag) {
             if (0 === \count($tag->getEntries())) {
-                $em->remove($tag);
+                $this->entityManager->remove($tag);
             }
         }
 
-        $em->flush();
+        $this->entityManager->flush();
     }
 
     /**
@@ -709,7 +695,7 @@ class ConfigController extends Controller
      */
     private function removeAllTagsByUserId($userId)
     {
-        $tags = $this->get(TagRepository::class)->findAllTags($userId);
+        $tags = $this->tagRepository->findAllTags($userId);
         $this->removeAllTagsByStatusAndUserId($tags, $userId);
     }
 
@@ -720,23 +706,20 @@ class ConfigController extends Controller
      */
     private function removeTagsForArchivedByUserId($userId)
     {
-        $tags = $this->get(TagRepository::class)->findForArchivedArticlesByUser($userId);
+        $tags = $this->tagRepository->findForArchivedArticlesByUser($userId);
         $this->removeAllTagsByStatusAndUserId($tags, $userId);
     }
 
     private function removeAnnotationsForArchivedByUserId($userId)
     {
-        $em = $this->get('doctrine')->getManager();
-
-        $archivedEntriesAnnotations = $this->get('doctrine')
-            ->getRepository(Annotation::class)
+        $archivedEntriesAnnotations = $this->annotationRepository
             ->findAllArchivedEntriesByUser($userId);
 
         foreach ($archivedEntriesAnnotations as $archivedEntriesAnnotation) {
-            $em->remove($archivedEntriesAnnotation);
+            $this->entityManager->remove($archivedEntriesAnnotation);
         }
 
-        $em->flush();
+        $this->entityManager->flush();
     }
 
     /**
@@ -757,9 +740,7 @@ class ConfigController extends Controller
      */
     private function getConfig()
     {
-        $config = $this->get('doctrine')
-            ->getRepository(ConfigEntity::class)
-            ->findOneByUser($this->getUser());
+        $config = $this->configRepository->findOneByUser($this->getUser());
 
         // should NEVER HAPPEN ...
         if (!$config) {

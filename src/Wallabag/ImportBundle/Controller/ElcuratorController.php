@@ -3,18 +3,34 @@
 namespace Wallabag\ImportBundle\Controller;
 
 use Craue\ConfigBundle\Util\Config;
+use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\ImportBundle\Import\ElcuratorImport;
+use Wallabag\ImportBundle\Redis\Producer as RedisProducer;
 
 class ElcuratorController extends WallabagController
 {
+    private ElcuratorImport $elcuratorImport;
+    private Config $craueConfig;
+    private RabbitMqProducer $rabbitMqProducer;
+    private RedisProducer $redisProducer;
+
+    public function __construct(ElcuratorImport $elcuratorImport, Config $craueConfig, RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
+    {
+        $this->elcuratorImport = $elcuratorImport;
+        $this->craueConfig = $craueConfig;
+        $this->rabbitMqProducer = $rabbitMqProducer;
+        $this->redisProducer = $redisProducer;
+    }
+
     /**
      * @Route("/elcurator", name="import_elcurator")
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, TranslatorInterface $translator)
     {
-        return parent::indexAction($request);
+        return parent::indexAction($request, $translator);
     }
 
     /**
@@ -22,15 +38,13 @@ class ElcuratorController extends WallabagController
      */
     protected function getImportService()
     {
-        $service = $this->get(ElcuratorImport::class);
-
-        if ($this->get(Config::class)->get('import_with_rabbitmq')) {
-            $service->setProducer($this->get('old_sound_rabbit_mq.import_elcurator_producer'));
-        } elseif ($this->get(Config::class)->get('import_with_redis')) {
-            $service->setProducer($this->get('wallabag_import.producer.redis.elcurator'));
+        if ($this->craueConfig->get('import_with_rabbitmq')) {
+            $this->elcuratorImport->setProducer($this->rabbitMqProducer);
+        } elseif ($this->craueConfig->get('import_with_redis')) {
+            $this->elcuratorImport->setProducer($this->redisProducer);
         }
 
-        return $service;
+        return $this->elcuratorImport;
     }
 
     /**

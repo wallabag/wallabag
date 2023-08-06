@@ -23,6 +23,7 @@ class ConfigFixtures extends Fixture implements DependentFixtureInterface
         $adminConfig->setPocketConsumerKey('xxxxx');
         $adminConfig->setActionMarkAsRead(0);
         $adminConfig->setListMode(0);
+        $adminConfig->setDisplayThumbnails(0);
 
         $manager->persist($adminConfig);
 
@@ -35,6 +36,7 @@ class ConfigFixtures extends Fixture implements DependentFixtureInterface
         $bobConfig->setPocketConsumerKey(null);
         $bobConfig->setActionMarkAsRead(1);
         $bobConfig->setListMode(1);
+        $bobConfig->setDisplayThumbnails(1);
 
         $manager->persist($bobConfig);
 
@@ -47,6 +49,7 @@ class ConfigFixtures extends Fixture implements DependentFixtureInterface
         $emptyConfig->setPocketConsumerKey(null);
         $emptyConfig->setActionMarkAsRead(0);
         $emptyConfig->setListMode(0);
+        $emptyConfig->setDisplayThumbnails(0);
 
         $manager->persist($emptyConfig);
 

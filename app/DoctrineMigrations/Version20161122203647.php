@@ -18,7 +18,7 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  */
 class Version20161122203647 extends WallabagMigration
 {
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
         $userTable = $schema->getTable($this->getTable('user'));
 
@@ -28,7 +28,7 @@ class Version20161122203647 extends WallabagMigration
         $userTable->dropColumn('credentials_expired');
     }
 
-    public function down(Schema $schema)
+    public function down(Schema $schema): void
     {
         $userTable = $schema->getTable($this->getTable('user'));
 

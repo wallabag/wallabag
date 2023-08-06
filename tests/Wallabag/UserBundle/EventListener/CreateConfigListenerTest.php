@@ -38,6 +38,7 @@ class CreateConfigListenerTest extends TestCase
             1,
             1,
             1,
+            1,
             $session
         );
 
@@ -72,8 +73,8 @@ class CreateConfigListenerTest extends TestCase
             ->method('flush');
 
         $this->dispatcher->dispatch(
-            FOSUserEvents::REGISTRATION_COMPLETED,
-            $event
+            $event,
+            FOSUserEvents::REGISTRATION_COMPLETED
         );
     }
 }

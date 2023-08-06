@@ -2,9 +2,9 @@
 
 namespace Wallabag\CoreBundle\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NoResultException;
-use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -13,8 +13,21 @@ use Wallabag\CoreBundle\Helper\RuleBasedTagger;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\UserBundle\Repository\UserRepository;
 
-class TagAllCommand extends ContainerAwareCommand
+class TagAllCommand extends Command
 {
+    private EntityManagerInterface $entityManager;
+    private RuleBasedTagger $ruleBasedTagger;
+    private UserRepository $userRepository;
+
+    public function __construct(EntityManagerInterface $entityManager, RuleBasedTagger $ruleBasedTagger, UserRepository $userRepository)
+    {
+        $this->entityManager = $entityManager;
+        $this->ruleBasedTagger = $ruleBasedTagger;
+        $this->userRepository = $userRepository;
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -39,19 +52,17 @@ class TagAllCommand extends ContainerAwareCommand
 
             return 1;
         }
-        $tagger = $this->getContainer()->get(RuleBasedTagger::class);
 
         $io->text(sprintf('Tagging entries for user <info>%s</info>...', $user->getUserName()));
 
-        $entries = $tagger->tagAllForUser($user);
+        $entries = $this->ruleBasedTagger->tagAllForUser($user);
 
         $io->text('Persist ' . \count($entries) . ' entries... ');
 
-        $em = $this->getContainer()->get('doctrine')->getManager();
         foreach ($entries as $entry) {
-            $em->persist($entry);
+            $this->entityManager->persist($entry);
         }
-        $em->flush();
+        $this->entityManager->flush();
 
         $io->success('Done.');
 
@@ -67,11 +78,6 @@ class TagAllCommand extends ContainerAwareCommand
      */
     private function getUser($username)
     {
-        return $this->getContainer()->get(UserRepository::class)->findOneByUserName($username);
-    }
-
-    private function getDoctrine()
-    {
-        return $this->getContainer()->get(ManagerRegistry::class);
+        return $this->userRepository->findOneByUserName($username);
     }
 }

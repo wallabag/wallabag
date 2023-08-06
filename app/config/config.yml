@@ -14,6 +14,7 @@ framework:
     translator:
         enabled: true
         fallback: "%locale%"
+        default_path: '%kernel.project_dir%/translations'
     secret: "%secret%"
     router:
         resource: "%kernel.project_dir%/app/config/routing.yml"
@@ -33,6 +34,8 @@ framework:
     fragments: ~
     http_method_override: true
     assets: ~
+    mailer:
+        dsn: "%mailer_dsn%"
 
 # Twig Configuration
 twig:
@@ -56,6 +59,8 @@ doctrine:
         charset: "%database_charset%"
         path: "%database_path%"
         unix_socket: "%database_socket%"
+        types:
+            json_array: Wallabag\CoreBundle\Doctrine\JsonArrayType
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
@@ -72,22 +77,14 @@ stof_doctrine_extensions:
             sluggable: true
 
 doctrine_migrations:
-    dir_name: "%kernel.project_dir%/app/DoctrineMigrations"
-    namespace: Application\Migrations
-    table_name: migration_versions
-    name: Application Migrations
-
-# Swiftmailer Configuration
-swiftmailer:
-    transport:   "%mailer_transport%"
-    username:    "%mailer_user%"
-    password:    "%mailer_password%"
-    host:        "%mailer_host%"
-    port:        "%mailer_port%"
-    encryption:  "%mailer_encryption%"
-    auth_mode:   "%mailer_auth_mode%"
-    spool:
-        type: memory
+    migrations_paths:
+        'Application\Migrations': "%kernel.project_dir%/app/DoctrineMigrations"
+    storage:
+        table_storage:
+            table_name: 'migration_versions'
+            version_column_name: 'version'
+            version_column_length: 192
+            executed_at_column_name: 'executed_at'
 
 fos_rest:
     param_fetcher_listener: true
@@ -133,12 +130,13 @@ nelmio_api_doc:
             title: wallabag API documentation
             description: This is the API documentation of wallabag
             version: 2.x
-        securityDefinitions:
-            Bearer:
-                type: apiKey
-                description: 'Value: Bearer {jwt}'
-                name: Authorization
-                in: header
+        components:
+            securitySchemes:
+                Bearer:
+                    type: apiKey
+                    description: 'Value: Bearer {jwt}'
+                    name: Authorization
+                    in: header
         security:
             - Bearer: []
 
@@ -179,8 +177,10 @@ fos_user:
         confirmation:
             enabled: "%fosuser_confirmation%"
     from_email:
-        address:        "%from_email%"
-        sender_name:    wallabag
+        address: "%from_email%"
+        sender_name: wallabag
+    service:
+        mailer: Wallabag\UserBundle\Mailer\UserMailer
 
 fos_oauth_server:
     db_driver:           orm
@@ -201,15 +201,15 @@ scheb_two_factor:
         lifetime: 2592000
 
     backup_codes:
-        enabled: "%twofactor_auth%"
+        enabled: true
 
     google:
-        enabled: "%twofactor_auth%"
+        enabled: true
         issuer: "%server_name%"
         template: "@WallabagUser/Authentication/form.html.twig"
 
     email:
-        enabled: "%twofactor_auth%"
+        enabled: true
         sender_email: "%twofactor_sender%"
         digits: 6
         template: "@WallabagUser/Authentication/form.html.twig"

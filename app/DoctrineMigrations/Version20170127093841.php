@@ -13,7 +13,7 @@ class Version20170127093841 extends WallabagMigration
     private $indexStarredName = 'IDX_entry_starred';
     private $indexArchivedName = 'IDX_entry_archived';
 
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
         $this->skipIf($entryTable->hasIndex($this->indexStarredName) && $entryTable->hasIndex($this->indexArchivedName), 'It seems that you already played this migration.');
@@ -22,7 +22,7 @@ class Version20170127093841 extends WallabagMigration
         $entryTable->addIndex(['is_archived'], $this->indexArchivedName);
     }
 
-    public function down(Schema $schema)
+    public function down(Schema $schema): void
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
         $this->skipIf(false === $entryTable->hasIndex($this->indexStarredName) && false === $entryTable->hasIndex($this->indexArchivedName), 'It seems that you already played this migration.');

@@ -23,16 +23,10 @@ parameters:
     # with PostgreSQL and SQLite, you must set "utf8"
     database_charset: utf8mb4
 
-    domain_name: https://your-wallabag-url-instance.com
+    domain_name: https://your-wallabag-instance.wallabag.org
     server_name: "Your wallabag instance"
 
-    mailer_transport:  smtp
-    mailer_user:       ~
-    mailer_password:   ~
-    mailer_host:       127.0.0.1
-    mailer_port:       false
-    mailer_encryption: ~
-    mailer_auth_mode:  ~
+    mailer_dsn: smtp://127.0.0.1
 
     locale: en
 
@@ -40,7 +34,6 @@ parameters:
     secret: CHANGE_ME_TO_SOMETHING_SECRET_AND_RANDOM
 
     # two factor stuff
-    twofactor_auth: true
     twofactor_sender: no-reply@wallabag.org
 
     # fosuser stuff

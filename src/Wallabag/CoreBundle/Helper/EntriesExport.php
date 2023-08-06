@@ -9,7 +9,7 @@ use PHPePub\Core\EPub;
 use PHPePub\Core\Structure\OPF\DublinCore;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
 
@@ -210,7 +210,7 @@ class EntriesExport
                 $publishedDate = $entry->getPublishedAt()->format('Y-m-d');
             }
 
-            $readingTime = $entry->getReadingTime() / $user->getConfig()->getReadingSpeed() * 200;
+            $readingTime = round($entry->getReadingTime() / $user->getConfig()->getReadingSpeed() * 200);
 
             $titlepage = $content_start .
                 '<h1>' . $entry->getTitle() . '</h1>' .

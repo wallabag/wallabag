@@ -4,19 +4,30 @@ namespace Wallabag\CoreBundle\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NoResultException;
-use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Helper\UrlHasher;
+use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\UserBundle\Entity\User;
+use Wallabag\UserBundle\Repository\UserRepository;
 
-class GenerateUrlHashesCommand extends ContainerAwareCommand
+class GenerateUrlHashesCommand extends Command
 {
-    /** @var OutputInterface */
-    protected $output;
+    protected OutputInterface $output;
+    private EntityManagerInterface $entityManager;
+    private EntryRepository $entryRepository;
+    private UserRepository $userRepository;
+
+    public function __construct(EntityManagerInterface $entityManager, EntryRepository $entryRepository, UserRepository $userRepository)
+    {
+        $this->entityManager = $entityManager;
+        $this->entryRepository = $entryRepository;
+        $this->userRepository = $userRepository;
+
+        parent::__construct();
+    }
 
     protected function configure()
     {
@@ -43,7 +54,7 @@ class GenerateUrlHashesCommand extends ContainerAwareCommand
                 return 1;
             }
         } else {
-            $users = $this->getContainer()->get('doctrine')->getRepository(User::class)->findAll();
+            $users = $this->userRepository->findAll();
 
             $output->writeln(sprintf('Generating hashed urls for "%d" users', \count($users)));
 
@@ -59,23 +70,20 @@ class GenerateUrlHashesCommand extends ContainerAwareCommand
 
     private function generateHashedUrls(User $user)
     {
-        $em = $this->getContainer()->get(EntityManagerInterface::class);
-        $repo = $this->getContainer()->get('doctrine')->getRepository(Entry::class);
-
-        $entries = $repo->findByEmptyHashedUrlAndUserId($user->getId());
+        $entries = $this->entryRepository->findByEmptyHashedUrlAndUserId($user->getId());
 
         $i = 1;
         foreach ($entries as $entry) {
             $entry->setHashedUrl(UrlHasher::hashUrl($entry->getUrl()));
-            $em->persist($entry);
+            $this->entityManager->persist($entry);
 
             if (0 === ($i % 20)) {
-                $em->flush();
+                $this->entityManager->flush();
             }
             ++$i;
         }
 
-        $em->flush();
+        $this->entityManager->flush();
 
         $this->output->writeln(sprintf('Generated hashed urls for user: %s', $user->getUserName()));
     }
@@ -89,11 +97,6 @@ class GenerateUrlHashesCommand extends ContainerAwareCommand
      */
     private function getUser($username)
     {
-        return $this->getContainer()->get('doctrine')->getRepository(User::class)->findOneByUserName($username);
-    }
-
-    private function getDoctrine()
-    {
-        return $this->getContainer()->get(ManagerRegistry::class);
+        return $this->userRepository->findOneByUserName($username);
     }
 }

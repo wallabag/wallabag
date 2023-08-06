@@ -18,7 +18,7 @@
             <a title="{{ 'entry.list.toogle_as_star'|trans }}" class="tool grey-text" href="{{ path('star_entry', {'id': entry.id}) }}" data-action="star" data-entry-id="{{ entry.id }}"><i class="material-icons">{% if entry.isStarred == 0 %}star_border{% else %}star{% endif %}</i></a>
         </li>
         <li>
-            <a title="{{ 'entry.list.delete'|trans }}" data-action-confirm="{{ 'entry.confirm.delete'|trans }}" class="tool grey-text delete" href="{{ path('delete_entry', {'id': entry.id}) }}" data-action="delete" data-entry-id="{{ entry.id }}"><i class="material-icons">delete</i></a>
+            <a title="{{ 'entry.list.delete'|trans }}" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" data-action-confirm="{{ 'entry.confirm.delete'|trans }}" class="tool grey-text delete" href="{{ path('delete_entry', {'id': entry.id}) }}" data-action="delete" data-entry-id="{{ entry.id }}"><i class="material-icons">delete</i></a>
         </li>
     </ul>
 </div>

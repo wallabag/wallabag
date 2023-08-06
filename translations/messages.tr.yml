@@ -1,0 +1,729 @@
+security:
+    login:
+        page_title: Wallabag'e hoş geldiniz!
+        keep_logged_in: Oturumumu açık tut
+        forgot_password: Şifrenizi mi unuttunuz?
+        submit: Giriş Yap
+        register: Kayıt Ol
+        username: Kullanıcı adı
+        password: Şifre
+        cancel: İptal et
+    resetting:
+        description: Aşağıdaki alana e-posta adresinizi girdiğinizde size parola sıfırlama aşamalarını göndereceğiz.
+    register:
+        page_title: Hesap oluştur
+        go_to_account: Hesabına git
+menu:
+    left:
+        unread: Okunmayan
+        starred: Favoriler
+        archive: Arşiv
+        all_articles: Hepsi
+        config: Yapılandırma
+        tags: Etiketler
+        import: İçe Aktar
+        howto: Yardım
+        logout: Çıkış Yap
+        about: Hakkımızda
+        search: Ara
+        back_to_unread: Okunmayan makalelere geri dön
+        internal_settings: Dahili Ayarlar
+        developer: API istemcileri yönetimi
+        save_link: Bağlantıyı kaydet
+        users_management: Kullanıcı yönetimi
+        site_credentials: Site bilgileri
+        quickstart: Hızlı başlangıç
+        ignore_origin_instance_rules: Genel orijinal kaynağı yok say kuralları
+        theme_toggle_auto: Otomatik tema
+        theme_toggle_dark: Koyu renk tema
+        theme_toggle_light: Açık renk tema
+        with_annotations: Açıklama metinleriyle
+    top:
+        add_new_entry: Yeni bir makale ekle
+        search: Ara
+        filter_entries: Filtrele
+        export: Dışa Aktar
+        account: Hesabım
+        random_entry: Bu listeden rastgele bir makaleye atla
+    search_form:
+        input_label: Aramak istediğiniz herhangi bir şey yazın
+footer:
+    wallabag:
+        elsewhere: wallabag her an seninle
+        social: Sosyal
+        powered_by: Powered By
+        about: Hakkımızda
+    stats: '%user_creation% tarihinden bu yana %nb_archives% makale okudunuz. Bu da günde ortalama %per_day% makaleye tekabül ediyor!'
+config:
+    page_title: Yapılandırma
+    tab_menu:
+        settings: Ayarlar
+        rss: RSS
+        user_info: Kullanıcı bilgileri
+        password: Şifre
+        rules: Etiketleme kuralları
+        new_user: Bir kullanıcı ekle
+        feed: Akışlar
+        ignore_origin: Orijinal kaynağı yok say kuralları
+        reset: Sıfırlama alanı
+    form:
+        save: Kaydet
+    form_settings:
+        items_per_page_label: Sayfa başına makale sayısı
+        language_label: Dil
+        reading_speed:
+            label: Okuma hızı
+            help_message: 'Okuma hızınızı çevrimiçi araçlarla ölçebilirsiniz:'
+            100_word: Dakikada ortalama 100 kelime okuyorum
+            200_word: Dakikada ortalama 200 kelime okuyorum
+            300_word: Dakikada ortalama 300 kelime okuyorum
+            400_word: Dakikada ortalama 400 kelime okuyorum
+        action_mark_as_read:
+            label: Makaleyi okundu olarak işaretleme, yıldızlama veya kaldırma ardından ne yapılsın?
+            redirect_homepage: Ana sayfaya git
+            redirect_current_page: Mevcut sayfada kal
+        pocket_consumer_key_label: Pocket'tan içerikleri aktarmak için Consumer anahtarı
+        android_configuration: Android uygulamanızı ayarlayın
+        android_instruction: Android uygulamanızın bilgilerini doldurmak için buraya tıklayın
+        help_items_per_page: Sayfa başına görüntülenecek makale sayısını değiştirebilirsiniz.
+        help_reading_speed: wallabag her bir makale için ortalama okuma sürenizi hesaplar. Buradan, bunun sayesinde hızlı veya yavaş okuyan birisi olduğunuzu tanımlayabilirsiniz. Wallabag her bir makale okunması ardından bunu yeniden hesaplayacaktır.
+        help_language: Wallabag arayüzünü kullanacağınız dili değiştirebilirsiniz.
+        help_pocket_consumer_key: Pocket'tan içeri aktarım için gerekli. Pocket hesabınızdan oluşturabilirsiniz.
+    form_rss:
+        description: wallabag RSS akışı kaydetmiş olduğunuz makalelerini favori RSS okuyucunuzda görüntülemenizi sağlar. Bunu yapabilmek için öncelikle belirteç (token) oluşturmalısınız.
+        token_label: RSS belirteci (token)
+        no_token: Belirteç (token) yok
+        token_create: Yeni belirteç (token) oluştur
+        token_reset: Belirteci (token) sıfırla
+        rss_links: RSS akış bağlantıları
+        rss_link:
+            unread: Okunmayan
+            starred: Favoriler
+            archive: Arşiv
+            all: Tümü
+        rss_limit: RSS içeriğinden talep edilecek makale limiti
+    form_user:
+        two_factor_description: İki adımlı kimlik doğrulamayı etkinleştirmek, her yeni güvenilmeyen bağlantıda bir kod içeren bir e-posta alacağınız anlamına gelir.
+        name_label: İsim
+        email_label: E-posta
+        twoFactorAuthentication_label: İki adımlı doğrulama
+        help_twoFactorAuthentication: Eğer 2 aşamalı doğrulamayı aktif ederseniz, her wallabag giriş denemenizde e-posta adresinize bir doğrulama kodu yollanacak.
+        delete:
+            title: Hesabımı sil (tehlikeli işlem)
+            description: Eğer hesabınızı kaldırırsanız, TÜM makaleleriniz, TÜM etiketleriniz, TÜM açıklama metinleriniz ve hesabınız KALICI OLARAK kaldırılacak (bu işlem GERİ ALINAMAZ).
+            confirm: Emin misiniz? (BU İŞLEM GERİ ALINAMAZ)
+            button: Hesabımı sil
+        two_factor:
+            table_action: İşlem
+            googleTwoFactor_label: Tek seferlik parola (OTP) uygulaması kullanarak (tek seferlik bir kod almak için Google Authenticator, Authy veya FreeOTP gibi bir uygulamayı açın)
+            action_app: OTP uygulaması kullan
+            action_email: E-posta kullan
+            state_disabled: Devre dışı
+            state_enabled: Etkin
+            table_state: Durum
+            table_method: Yöntem
+            emailTwoFactor_label: E-posta kullanarak (e-posta ile bir kod alın)
+        login_label: Giriş (değiştirilemez)
+    form_password:
+        old_password_label: Eski şifre
+        new_password_label: Yeni şifre
+        repeat_new_password_label: Yeni şifrenin tekrarı
+        description: Parolanızı bu alandan güncelleyebilirsiniz. Yeni parolanız en az 8 karakter uzunluğunda olmalıdır.
+    form_rules:
+        rule_label: Kural
+        tags_label: Etiketler
+        faq:
+            title: S.S.S.
+            tagging_rules_definition_title: « etiketleme kuralları » ne anlama geliyor?
+            how_to_use_them_title: Bunu nasıl kullanırım?
+            variables_available_title: Kurallar içerisinde hangi değişken ve operatörleri kullanabilirim?
+            variables_available_description: 'Etiketleme kuralları oluşturmak için aşağıdaki değişken ve operatörler kullanılabilir:'
+            meaning: Anlamı
+            variable_description:
+                label: Değişken
+                title: Makalenin başlığı
+                url: Makalenin bağlantısı
+                isArchived: Makale arşivlendi mi, arşivlenmedi mi
+                isStarred: Makale favorilere eklendi mi, eklenmedi mi
+                content: Makalenin içeriği
+                language: Makalenin dili
+                mimetype: Makalenin ortam türü
+                readingTime: Makalenin dakika cinsinden tahmini okuma süresi
+                domainName: Makalenin bulunduğu internet sitesinin alan adı
+            operator_description:
+                label: Operatör
+                less_than: Küçüktür ve eşittir…
+                strictly_less_than: Küçüktür…
+                greater_than: Büyüktür ve eşittir…
+                strictly_greater_than: Büyüktür…
+                equal_to: Eşittir…
+                not_equal_to: Eşit değildir…
+                or: Bir kural veya birbaşkası
+                and: Bir kural ve diğeri
+                matches: '<i>konu</i>nun <i>arama</i> kriterine (büyük küçük harf duyarsız) eşleştiğini test eder.<br />Örnek: <code>title matches "futbol"</code>'
+                notmatches: '<i>konu</i>nun <i>arama</i> kriterine (büyük küçük harf duyarsız) eşleşmediğini test eder.<br />Örnek: <code>title nonmatches "futbol"</code>'
+            tagging_rules_definition_description: Bunlar wallabag'in yeni makaleleri otomatik olarak etiketleyebilmesi için tanımlanmış kurallardır.<br />Her yeni makale eklendiğinde, ayarladığınız tüm etiket kuralları kullanılarak makaleniz etiketlenecektir. Bu sayede her bir makaleyi tek tek etiketlemekle uğraşmanız gerekmeyecek.
+            how_to_use_them_description: 'Örneğin, 3 dakikadan kısa okuma süresi olan yeni makaleleri « <i>kısa okumalar</i>» etiketi ile etiketlemek istiyorsunuz diyelim.<br />Bu durumda, <i>Kural</i> alanına « readingTime &lt; = 3 » değeri, ve de <i>Etiketler</i> alanına da <i>kısa okumalar</i> değerini girmelisiniz.<br /> Eğer birden fazla etiket tanımlamak istiyorsanız arasına virgül koyabilirsiniz: « <i>kısa okumalar, mutlaka oku</i> »<br />Daha kompleks kurallar önden tanımlanmış operatörlerle girilebilir: Eğer « <i> readingTime &gt; = AND domainName = "www.php.net"</i> » ise, o zaman « <i>uzun okumalar, php</i> » gibi girebilirsiniz'
+        if_label: eğer
+        then_tag_as_label: ise, şu şekilde etiketle
+        delete_rule_label: sil
+        edit_rule_label: düzenle
+        export: Dışa Aktar
+        import_submit: İçe Aktar
+        file_label: JSON dosyası
+        card:
+            export_tagging_rules_detail: Bu, etiketleme kurallarını başka bir yere aktarmak veya yedeklemek için kullanabileceğiniz bir JSON dosyası indirecektir.
+            export_tagging_rules: Etiketleme kurallarını dışa aktar
+            import_tagging_rules_detail: Daha önce dışa aktardığınız JSON dosyasını seçmelisiniz.
+            import_tagging_rules: Etiketleme kurallarını içe aktar
+            new_tagging_rule: Etiketleme kuralı oluştur
+    reset:
+        title: Sıfırlama alanı (tehlikeli alan)
+        description: Aşağıdaki düğmelere basarak hesabınızdan bazı bilgileri kaldırabilirsiniz. Bu işlemlerin GERİ DÖNDÜRÜLEMEZ olduğunu unutmayın.
+        annotations: TÜM açıklama metinlerini sil
+        tags: TÜM etiketleri sil
+        entries: TÜM girdileri sil
+        archived: TÜM arşivlenmiş girdileri sil
+        confirm: Emin misiniz? (BU İŞLEM GERİ ALINAMAZ)
+    otp:
+        app:
+            two_factor_code_description_1: OTP iki aşamalı kimlik doğrulamasını etkinleştirdiniz, OTP uygulamanızı açın ve tek seferlik bir parola almak için bu kodu kullanın. Sayfa yeniden yüklendikten sonra kaybolacaktır.
+            enable: Etkinleştir
+            cancel: İptal
+            two_factor_code_description_4: 'Yapılandırılmış uygulamanızdan bir OTP kodunu test edin:'
+            two_factor_code_description_3: 'Ayrıca, bu yedek kodları güvenli bir yere kaydedin, OTP uygulamanıza erişiminizi kaybetmeniz durumunda kullanabilirsiniz:'
+            two_factor_code_description_2: 'Bu QR Kodunu uygulamanızla tarayabilirsiniz:'
+            two_factor_code_description_5: 'Eğer QR Kodu göremiyor veya tarayamıyorsanız, bu kodu uygulamanıza girin:'
+            qrcode_label: Kare kod
+        page_title: İki aşamalı kimlik doğrulama
+    form_ignore_origin_rules:
+        faq:
+            operator_description:
+                equal_to: Eşittir…
+                label: Operatör
+                matches: '<i>Hedefin</i> bir <i>aramayla</i> (büyük/küçük harf farketmeden) eşleştiğini test eder.<br />Örnek: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
+            variable_description:
+                label: Değişken
+                _all: Tam adres, genellikle kalıp eşleştirme için kullanılır
+                host: Host adresi
+            meaning: Anlamı
+            variables_available_title: Kurallar içerisinde hangi değişken ve operatörleri kullanabilirim?
+            how_to_use_them_title: Bunu nasıl kullanırım?
+            title: S.S.S.
+            variables_available_description: 'Orijinal kaynağı yok say kuralları oluşturmak için aşağıdaki değişken ve operatörler kullanılabilir:'
+            ignore_origin_rules_definition_description: Wallabag tarafından bir yeniden yönlendirmeden sonra bir orijinal kaynak adresini otomatik olarak yok saymak için kullanılırlar.<br />Yeni bir makale çekilirken bir yönlendirme meydana gelirse, tüm orijinal kaynağı yok say kuralları (<i>kullanıcı tanımlı ve örnek tanımlı</i>) orijinal kaynak adresini yok saymak için kullanılacaktır.
+            ignore_origin_rules_definition_title: « Orijinal kaynağı yok say kuralları » ne demektir?
+            how_to_use_them_description: « <i>rss.example.com</i> » adresinden gelen bir makalenin (<i>bir yönlendirmeden sonra gerçek adresin example.com olduğunu bilerek</i>) orijinal kaynağını yok saymak istediğinizi varsayalım.<br />Bu durumda, <i>Kural</i> alanına « host = "rss.example.com" » değerini koymalısınız.
+    form_feed:
+        feed_limit: Akıştaki makale sayısı
+        feed_link:
+            all: Tümü
+            archive: Arşiv
+            starred: Favoriler
+            unread: Okunmamış
+        feed_links: Akış bağlantıları
+        token_revoke: Belirteci iptal edin
+        token_reset: Belirtecinizi yeniden oluşturun
+        token_create: Belirtecinizi oluşturun
+        no_token: Belirteç yok
+        token_label: Akış belirteci
+        description: wallabag tarafından sağlanan Atom akışları, kaydettiğiniz makaleleri favori Atom okuyucunuzla okumanızı sağlar. Önce bir belirteç (token) oluşturmanız gerekir.
+entry:
+    default_title: Makalenin başlığı
+    list:
+        number_on_the_page: '{0} Herhangi bir makale yok.|{1} Burada bir adet makale var.|]1,Inf[ Burada %count% adet makale var.'
+        reading_time: tahmini okuma süresi
+        reading_time_minutes: 'tahmini okuma süresi: %readingTime% min'
+        reading_time_less_one_minute: 'tahmini okuma süresi: &lt; 1 min'
+        reading_time_minutes_short: '%readingTime% dk'
+        reading_time_less_one_minute_short: '&lt; 1 min'
+        original_article: orijinal
+        toogle_as_read: Okundu/okunmadı olarak işaretle
+        toogle_as_star: Favorilere ekle/çıkar
+        delete: Sil
+        export_title: Dışa Aktar
+        number_of_tags: '{1}ve başka etiket|]1,Inf[ve %count% başka etiket'
+        show_same_domain: Aynı etki alanına sahip makaleleri göster
+        assign_search_tag: Bu aramayı her sonuca bir etiket olarak ata
+    filters:
+        title: Filtreler
+        status_label: Durum
+        archived_label: Arşiv
+        starred_label: Favori
+        unread_label: Okunmayan
+        preview_picture_label: Resim önizlemesi varsa
+        preview_picture_help: Resim önizlemesi
+        language_label: Dil
+        reading_time:
+            label: Dakika cinsinden okuma süresi
+            from: başlangıç
+            to: bitiş
+        domain_label: Alan adı
+        created_at:
+            label: Oluşturulma tarihi
+            from: başlangıç
+            to: bitiş
+        action:
+            clear: Temizle
+            filter: Filtrele
+        is_public_label: Herkese açık bağlantısı var
+        is_public_help: Herkese açık bağlantı
+        http_status_label: HTTP durumu
+        annotated_label: Açıklamalı
+    view:
+        left_menu:
+            back_to_homepage: Geri
+            set_as_read: Okundu olarak işaretle
+            set_as_unread: Okunmadı olarak işaretle
+            set_as_starred: Favorilere ekle/çıkar
+            view_original_article: Orijinal makale
+            re_fetch_content: İçeriği yenile
+            delete: Sil
+            add_a_tag: Bir etiket ekle
+            share_content: Paylaş
+            share_email_label: E-posta
+            export: Dışa Aktar
+            problem:
+                label: Bir sorun mu var?
+                description: Bu makalede herhangi bir yanlışlık mı var?
+            back_to_top: En başa dön
+            public_link: herkese açık bağlantı
+            delete_public_link: herkese açık bağlantıyı sil
+            print: Yazdır
+            theme_toggle_auto: Otomatik
+            theme_toggle_dark: Koyu renk
+            theme_toggle_light: Açık renk
+            theme_toggle: Tema değiştir
+        edit_title: Başlığı düzenle
+        original_article: orijinal
+        created_at: Oluşturulma tarihi
+        annotations_on_the_entry: '{0} İçerik bilgisi yok|{1} Bir içerik bilgisi var|]1,Inf[ %count% içerik bilgisi var'
+        published_at: Yayımlanma tarihi
+        published_by: Yayımlayan
+        provided_by: Sağlayıcı
+    new:
+        page_title: Yeni makaleyi kaydet
+        placeholder: http://website.com
+        form_new:
+            url_label: Url
+    edit:
+        page_title: Makaleyi düzenle
+        title_label: Başlık
+        url_label: Url
+        save_label: Kaydet
+        origin_url_label: Orijinal URL (makaleyi nereden buldunuz)
+    page_titles:
+        unread: Okunmamış makaleler
+        starred: Favorilenmiş makaleler
+        archived: Arşivlenmiş makaleler
+        filtered: Fitrelenmiş makaleler
+        filtered_tags: 'Etiket ile filtrele:'
+        filtered_search: 'Arama kriteri ile filtrele:'
+        untagged: Etiketlenmemiş makaleler
+        all: Tüm makaleler
+        with_annotations: Açıklama metinleri olan makaleler
+        same_domain: Aynı etki alanı
+    search:
+        placeholder: Neye bakıyordunuz?
+    public:
+        shared_by_wallabag: Bu makale %username% tarafından <a href='%wallabag_instance%'>wallabag</a> üzerinden favorilere eklendi
+    confirm:
+        delete: Makaleyi kaldırmak istediğinizen emin misiniz?
+        delete_tag: Makaleden etiketi kaldırmak istediğinizden emin misiniz?
+        delete_entries: Bu makaleleri kaldırmak istediğinizden emin misiniz?
+    metadata:
+        reading_time: Tahmini okuma süresi
+        reading_time_minutes_short: '%readingTime% dakika'
+        address: Adres
+        added_on: Eklenme tarihi
+        published_on: Yayımlanma tarihi
+about:
+    page_title: Hakkımızda
+    top_menu:
+        who_behind_wallabag: wallabag'in arkasındakiler
+        getting_help: Yardım
+        helping: wallabag destek olun
+        contributors: Katkıda bulunanlar
+        third_party: Üçüncü parti kütüphaneler
+    who_behind_wallabag:
+        developped_by: Geliştiriciler
+        website: i̇nternet sitesi
+        many_contributors: Ve katkıda bulunanlar ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">GitHub üzerinde</a>
+        project_website: Proje internet sitesi
+        license: Lisans
+        version: Sürüm
+    getting_help:
+        documentation: Dokümantasyon
+        bug_reports: Sorun bildir
+        support: <a href="https://github.com/wallabag/wallabag/issues">GitHub üzerinde</a>
+    helping:
+        description: 'wallabag özgür ve açık kaynaklıdır. Bize yardımcı olabilirsiniz:'
+        by_paypal: Liberapay ile
+    third_party:
+        license: Lisans
+        description: 'Aşağıda wallabag uygulamasında kullanılan üçüncü parti uygulamaları (ve lisanslarını) bulabilirsiniz:'
+        package: Paket
+    contributors:
+        description: Wallabag web uygulamasına katkıda bulunan herkese teşekkürler
+howto:
+    page_title: Yardım
+    top_menu:
+        browser_addons: Tarayıcı eklentileri
+        mobile_apps: Mobil uygulamalar
+        bookmarklet: Bookmarklet imi
+    form:
+        description: Yeni makale kaydet
+    browser_addons:
+        firefox: Firefox Eklentisi
+        chrome: Chrome Eklentisi
+        opera: Opera Eklentisi
+    bookmarklet:
+        description: "Bu bağlantı ile yer imlerinizi sürükleyip bırakarak wallabag'e ekleyebilirsiniz:"
+    tab_menu:
+        add_link: Bağlantı ekle
+        shortcuts: Kısayolları kullan
+    page_description: 'Bir makaleyi kaydetmek için pek çok yol bulunmakta:'
+    mobile_apps:
+        android:
+            via_f_droid: F-Droid üzerinden
+            via_google_play: Google Play üzerinden
+        ios: iTunes Store üzerinden
+        windows: Microsoft Store üzerinden
+    shortcuts:
+        page_description: Aşağıda wallabag üzerinde kullanabileceğiniz kısayolları bulabilirsiniz.
+        shortcut: Kısayol
+        action: İşlem
+        all_pages_title: Tüm sayfalarda kullanılabilecek kısayollar
+        go_unread: Okunmamışlara git
+        go_starred: Favorilenmişlere git
+        go_archive: Arşivlenmişlere git
+        go_all: Tüm makalelere git
+        go_tags: Etiketlere git
+        go_config: Ayarlara git
+        go_import: İçe aktarıma git
+        go_developers: Geliştirici kısmına git
+        go_howto: Nasıl yapılır sayfasına git (bu sayfa!)
+        go_logout: Çıkış yap
+        list_title: Listeleme sayfasında kullanılabilen kısayollar
+        search: Arama formunu görüntüle
+        article_title: Makale görünümünde kısayollar mevcut
+        open_original: Makalenin orijinal URL'sini aç
+        toggle_favorite: Makalenin favorileme durumunu değiştir
+        toggle_archive: Makalenin okundu durumunu değiştir
+        delete: Makaleyi sil
+        add_link: Yeni bir bağlantı ekle
+        hide_form: Mevcut formu gizle (arama veya yeni bağlantı)
+        arrows_navigation: Makaleler arasında geçiş yap
+        open_article: Seçili makaleyi görüntüle
+quickstart:
+    page_title: Hızlı başlangıç
+    intro:
+        title: Wallabag'e hoş geldiniz!
+        paragraph_1: wallabag kurduğunuz için teşekkür ederiz. Bu sayfada biz size eşlik edecek ve ilginizi çekecek birkaç özellik göstereceğim.
+        paragraph_2: Bizi takip edin!
+    configure:
+        title: Uygulamayı Yapılandırma
+        language: Dili ve tasarımı değiştirme
+        rss: RSS akışını aktifleştirme
+        description: Tam olarak ihtiyaçlarınızı karşılar bir uygulama deneyimi yaşamak wallabag için ayarlar sayfasını inceleyebilirsiniz.
+        tagging_rules: Makaleleri otomatik olarak etiketleme kuralları
+        feed: Akışları etkinleştir
+    first_steps:
+        title: İlk adım
+        new_article: İlk makalenizi kaydedin
+        unread_articles: Ve bunu sınıflandırın!
+        description: Wallabag şimdi istediğiniz biçimde ayarlandı, artık internetteki sayfaları arşivlemeye hazırsınız! Sağ üstteki + düğmesi ile bağlantı ekleyebilirsiniz.
+    migrate:
+        title: Varolan servislerden veri aktarma
+        description: Kullanmakta olduğunuz farklı bir hizmet mi var? Biz size yardımcı olacak ve verilerinizi wallabag'e aktarmanıza yardımcı olacağız.
+        pocket: Pocket üzerindeki verilerinizi wallabag'e aktarın
+        wallabag_v1: wallabag v1 üzerindeki verilerinizi wallabag'in yeni sürümüne aktarın
+        wallabag_v2: wallabag v2 üzerindeki verilerinizi wallabag'in yeni sürümüne aktarın
+        readability: Readability üzerindeki verilerinizi wallabag'e aktarın'
+        instapaper: Instapaper üzerindeki verilerinizi wallabag'e aktarın'
+    docs:
+        title: Dokümantasyon
+        export: Makalelerinizi ePUB ya da PDF formatına çevirme
+        search_filters: Makaleleri görüntülemek için arama motorlarını ve filteri kullanma
+        all_docs: Ve daha fazlası!
+        description: Wallabag üzerinde pek çok özellik var. Bu özellikleri öğrenmek ve kullanmak için dökümantasyonu incelemeyi es geçmeyin.
+        annotate: Makale içerik bilgisi ekle
+        fetching_errors: Eğer makale çekimi sırasında hata yaşanırsa ne yapabilirim?
+    support:
+        title: Destek
+        description: Eğer yardıma ihtiyacınız varsa, biz her daim senin için burada olacağız.
+        github: GitHub
+        email: E-posta
+        gitter: Gitter
+    more: Daha fazlası…
+    admin:
+        title: Yönetim
+        description: 'Yönetici olarak wallabag üzerinde özel yetkileriniz var. Bunlar:'
+        new_user: Yeni üye oluşturma
+        analytics: Analitik kısmını ayarlama
+        sharing: Makale paylaşımı hakkında parametreler belirleme
+        export: Dışarı aktarma özelliğini ayarlama
+        import: İçeri aktarma özelliğini ayarlama
+    developer:
+        title: Geliştiriciler
+        description: 'Ayrıca şu geliştiricileri de düşünüyoruz: Docker, API, tercümanlar vs.'
+        create_application: Üçüncü parti uygulamanızı oluşturun
+        use_docker: Wallabag uygulamasını kurmak için Docker kullanın
+tag:
+    page_title: Etiketler
+    list:
+        number_on_the_page: '{0} Herhangi bir etiket yok.|{1} Burada bir adet etiket var.|]1,Inf[ Burada %count% adet etiket var.'
+        see_untagged_entries: Etiketlenmemiş makaleleri görüntüle
+        untagged: Etiketlenmemiş makaleler
+        no_untagged_entries: Etiketlenmemiş makale yok.
+    new:
+        add: Ekle
+        placeholder: Virgülle ayırarak birden fazla etiket ekleyebilirsiniz.
+    confirm:
+        delete: '%name% etiketini sil'
+import:
+    page_title: İçe Aktar
+    page_description: wallabag içe aktarma aracına hoşgeldiniz. Lütfen içe aktarmak istediğiiz önceki servisinizi seçin.
+    action:
+        import_contents: İçe Aktar contents
+    form:
+        file_label: Dosya
+        save_label: Dosyayı yükle
+        mark_as_read_title: Tümünü okundu olarak işaretlensin mi?
+        mark_as_read_label: Tüm içe aktarılmış makaleleri okundu olarak işaretle
+    pocket:
+        page_title: İçe Aktar > Pocket
+        description: Bu araç tüm Pocket verinizi içe aktarır. Pocket içeriklerin getirilmesine izin vermez, okunabilen içerikler wallabag tarafından yeniden getirilir.
+        authorize_message: Pocket hesabınızda verilerinizi içe aktarabilmemiz için öncelikle aşağıdaki düğmeye tıklayın. Daha sonra, getpocket.com üzerindeki uygulamamıza gereken izinleri verin.
+        connect_to_pocket: Pocket'a bağlanın ve verilerinizi içe aktarın
+        config_missing:
+            description: Pocket üzerinden içe aktarım ayarlanmamış.
+            admin_message: '%keyurls%bir pocket_consumer_key%keyurle% tanımlamalısınız.'
+            user_message: Sunucu yöneticiniz Pocket için bir API anahtarı tanımlamalıdır.
+    wallabag_v1:
+        page_title: İçe Aktar > Wallabag v1
+        description: Bu araç wallabag v1 üzerindeki tüm makalelerinizi içe aktarır. Yapılandırma sayfasında, "Export your wallabag data" sekmesinden "JSON export" adımını izleyin. Bu adım size "wallabag-export-1-xxxx-xx-xx.json" isimli bir dosya verecektir.
+        how_to: Aşağıdaki düğmeye tıklayarak wallabag v1 tarafından dışa aktarılmış dosyanızı yükleyin.
+    wallabag_v2:
+        page_title: İçe Aktar > Wallabag v2
+        description: Bu içe aktarıcı tüm wallabag v2 makalelerinizi içe aktarır. Makaleler kısmına gidip, export sidebaru üzeridnen "JSON" seçeneğine tıklayın. Bunun ardından "All articles.json" dosyanız oluşacak.
+    readability:
+        page_title: İçe Aktar > Readability
+        description: Bu içe aktarıcı tüm Readability makalelerinizi içe aktaracak. Readability araçlar sayfasında (https://www.readability.com/tools/), "Data Export" kısmından "Export your data" düğmesine tıklayın. E-posta adresinize json dosyası gönderilecek (dosya json olsa da dosya adı .json ile bitmeyebilir).
+        how_to: Lütfen Readability dışarı aktarılmış dosyanızı seçin ve aşağıdaki düğmeye basarak içe aktarın.
+    firefox:
+        page_title: İçe Aktar > Firefox
+        description: Bu içe aktarıcı tüm Firefox yer imlerinizi içe aktaracak. Yer imleri sayfanıza gidin (Ctrl+Shift+O), ve ardından "İçe aktar ve yedekle" menüsünden "Yedekle…" seçeneğini seçin. Bir JSON dosyası alacaksınız.
+        how_to: Yer imleri yedek dosyanızı seçip aşağıdaki düğmeye tıklayarak içe aktarabilirsiniz. Bu işlem, tüm bağlantılar işlenip kaydedileceği için uzun zaman alabilir.
+    chrome:
+        page_title: İçe Aktar > Chrome
+        description: "Bu içe aktarıcı tüm Chrome yer imlerinizi içe aktaracak. Bu işlem işletim sisteminize göre değişebilir: <ul><li>Linux'ta, <code>~/.config/chromium/Default/</code> klasörüne gidin</li><li>Windows'ta, <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code> klasörüne gidin</li><li>macOS'ta <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code> klasörüne gidin</li></ul>Klasöre gittiğinizde <code>Bookmarks</code> dosyasını bir yere kopyalayın. <br><em>Eğer Chromium yerine Chrome kullanıyorsanız yolları ona göre düzeltmeniz gerekebilir.</em></p>"
+        how_to: Yer imleri yedek dosyanızı seçip aşağıdaki düğmeye tıklayarak içeri aktarabilirsiniz. Bu işlem, tüm bağlantılar işlenip kaydedileceği için uzun zaman alabilir.
+    instapaper:
+        page_title: İçe Aktar > Instapaper
+        description: Bu içe aktarıcı tüm Instapaper makalelerinizi içe aktaracak. Ayarlar sayfasında (https://www.instapaper.com/user) "Export" kısmından "Download .CSV file" bağlantısına tıklayıp indirebilirsiniz. Bir CSV dosyası cihazınıza inecek ("instapaper-export.csv" gibi bir dosya).
+        how_to: Lütfen Instapaper dışa aktarım dosyanızı seçin ve aşağıdaki düğmeye tıklayarak içe aktarın.
+    worker:
+        enabled: 'İçe aktarma eşzamansız olarak yapılır. İçe aktarma görevi başlatıldığında, harici bir çalışan işleri birer birer ele alacaktır. Geçerli hizmet:'
+        download_images_warning: Makaleleriniz için resimleri indirme özelliğini etkinleştirdiniz. Klasik içe aktarmayla birlikte bu işlem uzun zaman alabilir (veya hatalı sonuç verebilir). Biz olası bir hata olmaması adına eşzamansız içe aktarım özelliğini kullanmanızı <strong>şiddetle tavsiye ediyoruz</strong>.
+    pinboard:
+        page_title: İçe Aktar > Pinboard
+        description: Bu içe aktarıcı tüm Pinboard makalelerinizi içe aktarır. Yedekleme sayfasında (https://pinboard.in/settings/backup) "Bookmarks" kısmında "JSON" seçeneğine tıklayın. Cihazınıza bir JSON dosyası inecek ("pinboard_export" gibi bir dosya).
+        how_to: Pinboard dışa aktarım dosyanızı seçip aşağıdaki düğmeye tıklayarak içe aktarabilirsiniz.
+    elcurator:
+        description: Bu içe aktarıcı tüm elCurator makalelerinizi içe aktaracak. elCurator hesabınızda tercihlerinize gidin ve ardından içeriğinizi dışa aktarın. Bir JSON dosyanız olacak.
+        page_title: İçe Aktar > elCurator
+    delicious:
+        page_title: İçe aktar > del.icio.us
+        description: Bu içe aktarıcı tüm Delicious yer imlerinizi içe aktaracaktır. 2021'den beri, dışa aktarma sayfasını kullanarak verilerinizi tekrar dışa aktarabilirsiniz (https://del.icio.us/export). "JSON" biçimini seçin ve indirin ("delicious_export.2021.02.06_21.10.json" gibi).
+        how_to: Lütfen Delicious dışa aktarım dosyanızı seçin ve aşağıdaki düğmeye tıklayarak içe aktarın.
+user:
+    form:
+        username_label: Kullanıcı adı
+        password_label: Şifre
+        repeat_new_password_label: Yeni parolanın tekrarı
+        plain_password_label: ????
+        email_label: E-posta
+        name_label: İsim
+        enabled_label: Etkin
+        last_login_label: Son giriş
+        twofactor_label: İki aşamalı doğrulama
+        save: Kaydet
+        delete: Sil
+        delete_confirm: Emin misiniz?
+        back_to_list: Listeye geri dön
+        twofactor_google_label: OTP uygulamasıyla iki aşamalı kimlik doğrulama
+        twofactor_email_label: E-posta ile iki aşamalı kimlik doğrulama
+    page_title: Kullanıcı Yönetimi
+    new_user: Yeni bir kullanıcı oluştur
+    edit_user: Mevcut kullanıcıyı düzenle
+    description: Buradan tüm kullanıcıları yönetebilirsiniz (oluşturma, düzenleme ve silme)
+    list:
+        actions: İşlem
+        edit_action: Düzenle
+        yes: Evet
+        no: Hayır
+        create_new_one: Yeni bir kullanıcı oluştur
+    search:
+        placeholder: Kullanıcı adı veya e-posta ile filtrele
+flashes:
+    config:
+        notice:
+            config_saved: Yapılandırma ayarları kaydedildi.
+            password_updated: Şifre güncellendi
+            password_not_updated_demo: Tanıtım demo modunda bu kullanıcı için parolanızı değiştiremezsiniz.
+            user_updated: Bilgiler güncellendi
+            rss_updated: RSS bilgiler güncellendi
+            tagging_rules_updated: Etiketleme kuralları güncellendi
+            tagging_rules_deleted: Etiketleme kuralı eklendi
+            rss_token_updated: RSS token anahtarı güncellendi
+            annotations_reset: İçerik bilgileri sıfırlandı
+            tags_reset: Etiketler sıfırlandı
+            entries_reset: Makaleler sıfırlandı
+            archived_reset: Arşivlenmiş makaleler silindi
+            tagging_rules_not_imported: Etiketleme kuralları içe aktarılırken hata oluştu
+            tagging_rules_imported: Etiketleme kuralları içe aktarıldı
+            otp_disabled: İki aşamalı kimlik doğrulama devre dışı bırakıldı
+            otp_enabled: İki aşamalı kimlik doğrulama etkinleştirildi
+            feed_token_revoked: Akış belirteci iptal edildi
+            feed_token_updated: Akış belirteci güncellendi
+            feed_updated: Akış bilgileri güncellendi
+            ignore_origin_rules_updated: Orijinal kaynağı yok say kuralı güncellendi
+            ignore_origin_rules_deleted: Orijinal kaynağı yok say kuralı silindi
+    entry:
+        notice:
+            entry_already_saved: Makale zaten %date% tarihinde kaydedilmiş
+            entry_saved: Makale kaydedildi
+            entry_reloaded: Makale içeriği yenilendi
+            entry_archived: Makale arşivlendi
+            entry_unarchived: Makale arşivden çıkartıldı
+            entry_starred: Makale favorilere eklendi
+            entry_unstarred: Makale favorilerden çıkartıldı
+            entry_deleted: Makale silindi
+            entry_saved_failed: Makale kaydedildi, ama içeriği çekilemedi
+            entry_updated: Makale güncellendi
+            entry_reloaded_failed: Makale yeniden yüklendi, ama içeriği çekilemedi
+            no_random_entry: Bu koşullara sahip makale bulunamadı
+    tag:
+        notice:
+            tag_added: Etiket eklendi
+            tag_renamed: Etiket yeniden adlandırıldı
+    import:
+        notice:
+            failed: İçe aktarım başarısız, lütfen yeniden deneyin.
+            failed_on_file: İçe aktarma işlenirken hata oluştu. Lütfen içe aktarma dosyanızı doğrulayın.
+            summary: 'İçe aktarım özeti: %imported% makale içe aktarıldı, %skipped% makale hali hazırda kayıtlı.'
+            summary_with_queue: 'İçe aktarım özeti: %queued% makale sırada.'
+        error:
+            redis_enabled_not_installed: Eşzamansız içe aktarım işlemlerini yönetmek için Redis etkinleştirildi, ama <u>sistem buna erişim sağlayamıyor</u>. Lütfen Redis yapılandırmasını gözden geçirin.
+            rabbit_enabled_not_installed: Eşzamansız içe aktarım işlemlerini yönetmek için RabbitMQ etkinleştirildi, ama <u>sistem buna erişim sağlayamıyor</u>. Lütfen RabbitMQ yapılandırmasını gözden geçirin.
+    developer:
+        notice:
+            client_created: Yeni istemci %name% oluşturuldu.
+            client_deleted: İstemci %name% silindi
+    user:
+        notice:
+            added: Kullanıcı "%username%" oluşturuldu
+            updated: Kullanıcı "%username%" güncellendi
+            deleted: Kullanıcı "%username%" silindi
+    site_credential:
+        notice:
+            added: '"%host%" için site erişim bilgileri oluşturuldu'
+            updated: '"%host%" için site erişim bilgileri güncellendi'
+            deleted: '"%host%" için site erişim bilgileri silindi'
+    ignore_origin_instance_rule:
+        notice:
+            deleted: Genel orijinal kaynağı yok say kuralı silindi
+            updated: Genel orijinal kaynağı yok say kuralı güncellendi
+            added: Genel orijinal kaynağı yok say kuralı eklendi
+export:
+    footer_template: <div style="text-align:center;"><p>Wallabag ile, %method% metodu ile üretilmiştir.</p><p>Eğer bu e-kitabı cihazınızda okumada sorun yaşıyorsanız <a href="https://github.com/wallabag/wallabag/issues">bu adresten</a> yaşadığınız sorunu paylaşmaktan çekinmeyin.</p></div>
+    unknown: Bilinmeyen
+developer:
+    page_title: API istemcileri yönetimi
+    welcome_message: Wallabag API bölümüne hoş geldiniz
+    documentation: Dökümantasyon
+    how_to_first_app: İlk uygulamamı nasıl oluştururum
+    full_documentation: API dökümantasyonunu görüntüle
+    list_methods: API yöntemlerini listele
+    clients:
+        title: İstemciler
+        create_new: Yeni bir istemci oluştur
+    existing_clients:
+        title: Mevcut istemciler
+        field_id: İstemci ID
+        field_secret: İstemci gizli kodu
+        field_uris: Yönlendirilecek URI
+        field_grant_types: İzin verilen tipler
+        no_client: İstemci bulunamadı.
+    remove:
+        warn_message_1: '%name% isimli istemciyi kaldırma yetkiniz var. Bu işlem GERİ ALINAMAZ!'
+        warn_message_2: Eğer kaldırırsanız, bu istemciye göre ayarlanmış büyün uygulamalar çalışmaz duruma düşecek ve wallabag ile iletişim kuramayacak.
+        action: '%name% isimli istemciyi kaldır'
+    client:
+        page_title: API istemci yönetimi > Yeni istemci
+        page_description: Yeni bir istemci oluşturmak üzeresiniz. Lütfen uygulamanız için aşağıdaki alanları ve URI yönlendirme yolunu doldurun.
+        form:
+            name_label: İstemci ismi
+            redirect_uris_label: Yönlendirme URI (opsiyonel)
+            save_label: Yeni bir istemci oluştur
+        action_back: Geri
+        copy_to_clipboard: Kopyala
+    client_parameter:
+        page_title: API istemci yönetimi > İstemci parametreleri
+        page_description: İstemci parametrelerinizi aşağıda bulabilirsiniz.
+        field_name: İstemci ismi
+        field_id: İstemci ID
+        field_secret: İstemci gizli kodu
+        back: Geri
+        read_howto: '"İlk uygulamamı nasıl oluştururum?" makalesini oku'
+    howto:
+        page_title: API istemci yönetimi > İlk uygulamamı nasıl oluştururum
+        description:
+            paragraph_1: Aşağıdaki komutlar <a href="https://github.com/jkbrzt/httpie">HTTPie</a> kütüphanesini kullanmaktadır. Lütfen çalıştırmadan önce sisteminizde yüklü olduğundan emin olun.
+            paragraph_2: Üçüncü parti uygulamanız ve wallabag API arasında iletişim kurmak için token anahtarına ihtiyacınız var.
+            paragraph_3: Bu token anahtarını oluşturmak için <a href="%link%">yeni bir istemci oluşturmalısınız</a>.
+            paragraph_4: 'Şimdi, yeni bir token anahtarı oluşturun (istemci id, istemci gizli anahtarı, kullanıcı adı ve parola için sağlam değerler girmelisiniz):'
+            paragraph_5: 'API aşağıdaki gibi bir cevap dönecek:'
+            paragraph_6: 'access_token erişim anahtarı API ucuna istek yapmak için oldukça kullanışlıdır. Örneğin:'
+            paragraph_7: Bu istek kullanıcınız için olan tüm makaleleri döndürecektir.
+            paragraph_8: Eğer tüm API uçlarını görmek isterseniz, <a href="%link%">API dökümantasyonumuzu</a> inceleyebilirsiniz.
+        back: Geri
+site_credential:
+    page_title: Site erişim bilgileri yönetimi
+    new_site_credential: Site erişim bilgisi oluştur
+    edit_site_credential: Mevcut site erişim bilgilerini düzenle
+    description: Buradan tüm site erişim bilgilerinizi yönetebilirsiniz. Paywall, bir doğrulama sistemi gibi sistemler bu bilgilere ihtiyaç duyabilir.
+    list:
+        actions: İşlem
+        edit_action: Düzenle
+        yes: Evet
+        no: Hayır
+        create_new_one: Yeni bir site erişim bilgisi oluştur
+    form:
+        username_label: Kullanıcı adı
+        host_label: Host
+        password_label: Parola
+        save: Kaydet
+        delete: Sil
+        delete_confirm: Emin misiniz?
+        back_to_list: Listeye geri dön
+error:
+    page_title: Bir hata oluştu
+ignore_origin_instance_rule:
+    form:
+        back_to_list: Listeye geri dön
+        delete_confirm: Emin misiniz?
+        delete: Sil
+        save: Kaydet
+        rule_label: Kural
+    list:
+        no: Hayır
+        yes: Evet
+        edit_action: Düzenle
+        actions: İşlem
+        create_new_one: Yeni bir genel orijinal kaynağı yok say kuralı oluştur
+    description: Burada, bazı orijinal kaynak URL kalıplarını yok saymak için kullanılan genel orijinal kaynağı yok say kurallarını yönetebilirsiniz.
+    edit_ignore_origin_instance_rule: Mevcut bir orijinal kaynağı yok say kuralını düzenle
+    new_ignore_origin_instance_rule: Genel orijinal kaynağı yok say kuralı oluştur
+    page_title: Genel orijinal kaynağı yok say kuralları

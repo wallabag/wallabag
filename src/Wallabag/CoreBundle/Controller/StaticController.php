@@ -2,17 +2,17 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class StaticController extends Controller
+class StaticController extends AbstractController
 {
     /**
      * @Route("/howto", name="howto")
      */
     public function howtoAction()
     {
-        $addonsUrl = $this->container->getParameter('addons_url');
+        $addonsUrl = $this->getParameter('addons_url');
 
         return $this->render(
             '@WallabagCore/Static/howto.html.twig',

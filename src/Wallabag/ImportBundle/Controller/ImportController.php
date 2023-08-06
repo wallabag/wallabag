@@ -7,17 +7,25 @@ use Predis\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Wallabag\ImportBundle\Consumer\RabbitMQConsumerTotalProxy;
 use Wallabag\ImportBundle\Import\ImportChain;
 
 class ImportController extends Controller
 {
+    private RabbitMQConsumerTotalProxy $rabbitMQConsumerTotalProxy;
+
+    public function __construct(RabbitMQConsumerTotalProxy $rabbitMQConsumerTotalProxy)
+    {
+        $this->rabbitMQConsumerTotalProxy = $rabbitMQConsumerTotalProxy;
+    }
+
     /**
      * @Route("/", name="import")
      */
-    public function importAction()
+    public function importAction(ImportChain $importChain)
     {
         return $this->render('@WallabagImport/Import/index.html.twig', [
-            'imports' => $this->get(ImportChain::class)->getAll(),
+            'imports' => $importChain->getAll(),
         ]);
     }
 
@@ -25,35 +33,35 @@ class ImportController extends Controller
      * Display how many messages are queue (both in Redis and RabbitMQ).
      * Only for admins.
      */
-    public function checkQueueAction()
+    public function checkQueueAction(AuthorizationCheckerInterface $authorizationChecker, Config $craueConfig)
     {
         $nbRedisMessages = null;
         $nbRabbitMessages = null;
         $redisNotInstalled = false;
         $rabbitNotInstalled = false;
 
-        if (!$this->get(AuthorizationCheckerInterface::class)->isGranted('ROLE_SUPER_ADMIN')) {
+        if (!$authorizationChecker->isGranted('ROLE_SUPER_ADMIN')) {
             return $this->render('@WallabagImport/Import/check_queue.html.twig');
         }
 
-        if ($this->get(Config::class)->get('import_with_rabbitmq')) {
+        if ($craueConfig->get('import_with_rabbitmq')) {
             // in case rabbit is activated but not installed
             try {
-                $nbRabbitMessages = $this->getTotalMessageInRabbitQueue('pocket')
-                    + $this->getTotalMessageInRabbitQueue('readability')
-                    + $this->getTotalMessageInRabbitQueue('wallabag_v1')
-                    + $this->getTotalMessageInRabbitQueue('wallabag_v2')
-                    + $this->getTotalMessageInRabbitQueue('firefox')
-                    + $this->getTotalMessageInRabbitQueue('chrome')
-                    + $this->getTotalMessageInRabbitQueue('instapaper')
-                    + $this->getTotalMessageInRabbitQueue('pinboard')
-                    + $this->getTotalMessageInRabbitQueue('delicious')
-                    + $this->getTotalMessageInRabbitQueue('elcurator')
+                $nbRabbitMessages = $this->rabbitMQConsumerTotalProxy->getTotalMessage('pocket')
+                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('readability')
+                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('wallabag_v1')
+                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('wallabag_v2')
+                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('firefox')
+                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('chrome')
+                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('instapaper')
+                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('pinboard')
+                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('delicious')
+                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('elcurator')
                 ;
             } catch (\Exception $e) {
                 $rabbitNotInstalled = true;
             }
-        } elseif ($this->get(Config::class)->get('import_with_redis')) {
+        } elseif ($craueConfig->get('import_with_redis')) {
             $redis = $this->get(Client::class);
 
             try {
@@ -79,29 +87,5 @@ class ImportController extends Controller
             'redisNotInstalled' => $redisNotInstalled,
             'rabbitNotInstalled' => $rabbitNotInstalled,
         ]);
-    }
-
-    /**
-     * Count message in RabbitMQ queue.
-     * It get one message without acking it (so it'll stay in the queue)
-     * which will include the total of *other* messages in the queue.
-     * Adding one to that messages will result in the full total message.
-     *
-     * @param string $importService The import service related: pocket, readability, wallabag_v1 or wallabag_v2
-     *
-     * @return int
-     */
-    private function getTotalMessageInRabbitQueue($importService)
-    {
-        $message = $this
-            ->get('old_sound_rabbit_mq.import_' . $importService . '_consumer')
-            ->getChannel()
-            ->basic_get('wallabag.import.' . $importService);
-
-        if (null === $message) {
-            return 0;
-        }
-
-        return $message->delivery_info['message_count'] + 1;
     }
 }

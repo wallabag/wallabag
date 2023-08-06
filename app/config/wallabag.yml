@@ -1,6 +1,6 @@
 wallabag_core:
-    version: 2.5.2
-    paypal_url: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9UBA65LG3FX9Y&lc=gb"
+    version: 2.6.2
+    paypal_url: "https://liberapay.com/wallabag/donate"
     languages:
         en: 'English'
         fr: 'Français'
@@ -30,6 +30,7 @@ wallabag_core:
     cache_lifetime: 10
     action_mark_as_read: 1
     list_mode: 0
+    display_thumbnails: 1
     fetching_error_message_title: 'No title found'
     fetching_error_message: |
         wallabag can't retrieve contents for this article. Please <a href="https://doc.wallabag.org/en/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.

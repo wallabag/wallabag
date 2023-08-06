@@ -18,20 +18,16 @@
 
   /* Hide useless blocks */
   body > header,
-  #article_toolbar,
-  #links,
-  #sort,
   body > footer,
-  .top_link,
-  div.tools,
+  .entry-tools,
   header div,
   .messages,
   .entry + .results,
-  #slide-out,
+  .left-bar,
   .progress,
   .hide-on-large-only,
-  #article > aside,
-  #article .mbm a {
+  .entry-info,
+  .title-edit {
     display: none !important;
   }
 
@@ -39,7 +35,7 @@
     padding-left: 0 !important;
   }
 
-  #article {
+  .article {
     margin: inherit !important;
   }
 

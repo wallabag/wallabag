@@ -1,0 +1,598 @@
+security:
+    login:
+        register: Registrer
+        username: Brukernavn
+        password: Passord
+        cancel: Avbryt
+        submit: Logg inn
+        forgot_password: Glemt passordet ditt?
+        keep_logged_in: Hold meg innlogget
+        page_title: Velkomen til wallabag!
+    register:
+        page_title: Opprett en konto
+        go_to_account: Gå til din konto
+    resetting:
+        description: Skriv inn din e-postadresse nedenfor og du vil få instruks for passordtilbakestilling tilsendt.
+menu:
+    left:
+        unread: Ulest
+        starred: Stjernemerket
+        archive: Arkiv
+        all_articles: Alle oppføringer
+        config: Oppsett
+        tags: Etiketter
+        internal_settings: Interne innstillinger
+        import: Importere
+        howto: Hvordan
+        logout: Logg ut
+        about: Om
+        search: Søk
+        save_link: Lagre en lenke
+        back_to_unread: Tilbake til uleste artikler
+        theme_toggle_auto: Automatisk drakt
+        theme_toggle_light: Lys drakt
+        theme_toggle_dark: Mørk drakt
+        quickstart: Hurtigstart
+        users_management: Håndtering av brukere
+        developer: Håndtering av API-klienter
+    top:
+        add_new_entry: Legg til en ny oppføring
+        search: Søk
+        filter_entries: Filtrer oppføringer
+        export: Eksporter
+        random_entry: Hopp til tilfeldig oppføring fra listen
+        account: Min konto
+    search_form:
+        input_label: Skriv inn ditt søk her
+footer:
+    wallabag:
+        elsewhere: Ta wallabag med deg
+        social: Sosialt
+        powered_by: drevet av
+        about: Om
+config:
+    page_title: Oppsett
+    tab_menu:
+        settings: Innstillinger
+        rss: RSS
+        user_info: Brukerinfo
+        password: Passord
+        rules: Etikettregler
+        new_user: Legg til en bruker
+        feed: Informasjonskanaler
+        reset: Tilbakestill område
+    form:
+        save: Lagre
+    form_settings:
+        items_per_page_label: Elementer per side
+        language_label: Språk
+        reading_speed:
+            label: Lesehastighet
+            help_message: 'Du kan bruke nettbaserte verktøy til å anslå din lesehastighet:'
+            100_word: Jeg leser ~100 ord i minuttet
+            200_word: Jeg leser ~200 ord i minuttet
+            300_word: Jeg leser ~300 ord i minuttet
+            400_word: Jeg leser ~400 ord i minuttet
+        action_mark_as_read:
+            redirect_homepage: Til hjemmesiden
+            redirect_current_page: Til nåværende side
+            label: Foretagende etter fjerning, stjernemerking eller markering av artikkel som lest?
+        help_reading_speed: wallabag beregner lesetid for hver artikkel. Du kan definere om du er en rask eller treg leser her. wallabag regner ut igjen lesetid for hver artikkel.
+        pocket_consumer_key_label: Brukernøkkel for Pocket brukt til import av innhold
+        help_pocket_consumer_key: Kreves for Pocket-import. Kan opprettes i din Pocket-konto.
+        help_language: Du kan endre språk for wallabag-grensesnittet.
+        help_items_per_page: Du kan endre antallet artikler som vises på hver side.
+        android_instruction: Trykk her for å forhåndsutfylle ditt Android-program
+        android_configuration: Sett opp ditt Android-program
+    form_rss:
+        token_label: RSS-symbol
+        no_token: Inget symbol
+        token_create: Opprett ditt symbol
+        token_reset: Regenerer ditt symbol
+        rss_links: RSS-lenker
+        rss_link:
+            unread: ulest
+            starred: stjernemerket
+            archive: arkivert
+    form_user:
+        name_label: Navn
+        email_label: E-post
+        delete:
+            confirm: Er du virkelig sikker? (DETTE KAN IKKE ANGRES)
+            button: Slett kontoen min
+            description: Hvis du fjerner kontoen din vil ALLE dine artikler, ALLE dine etiketter, ALLE dine anføringer og din konto PERMANENT fjernet (det kan IKKE ANGRES). Du vil så bli utlogget.
+            title: Slett min konto (faresone)
+        two_factor:
+            googleTwoFactor_label: Bruk av OTP-program (åpning av programmet, som Google Authenticatior, Authy eller FreeOTP, for å skaffe en engangskode)
+            action_app: Bruk OTP-program
+            action_email: Bruk e-post
+            state_disabled: Avskrudd
+            state_enabled: Påskrudd
+            table_action: Handling
+            table_state: Tilstand
+            table_method: Metode
+            emailTwoFactor_label: Per e-post (motta en kode på e-post)
+        two_factor_description: Å skru på to-faktoridentitetsbekreftelse betyr at du vil motta en e-post med en kode for hver ubetrodde tilkobling.
+        login_label: Innlogging (kan ikke endres)
+    form_password:
+        old_password_label: Nåværende passord
+        new_password_label: Nytt passord
+        repeat_new_password_label: Gjenta nytt passord
+        description: Du kan endre passordet ditt her. Ditt nye må være minst 8 tegn.
+    form_rules:
+        if_label: hvis
+        then_tag_as_label: merk som
+        delete_rule_label: slett
+        edit_rule_label: rediger
+        rule_label: Regel
+        tags_label: Etiketter
+        faq:
+            title: O-S-S
+            variables_available_description: 'Følgende variabler og operatorer kan brukes for å opprette etikettmerkingsregler:'
+            variables_available_title: Hvilke variabler og operatorer kan jeg bruke til å skrive regler?
+            variable_description:
+                domainName: Domenenavn for oppføringen
+                readingTime: Anslått lesetid, i minutter
+                mimetype: Oppføringens mediatype
+                language: Oppføringens språk
+                content: Oppføringens innhold
+                isStarred: Hvorvidt oppføringen er stjernemerket eller ei
+                isArchived: Hvorvidt oppføringer er i arkivet eller ei
+                url: Nettadresse for oppføringen
+                title: Tittel for oppføringen
+                label: Variabel
+            meaning: Betydning
+            tagging_rules_definition_description: De er regler brukt av wallabag for å automatisk merke nye oppføringer.<br />Hver gang en ny oppføring legges til, vil alle etikettmeringsreglene bli brukt for å legge til etikettene du har satt opp, noe som sparer deg for bryet med å klassifisere dine oppføringer.
+            tagging_rules_definition_title: Hva betyr «etikettmerkingsregler»?
+            how_to_use_them_title: Hvordan brukes de?
+            operator_description:
+                strictly_less_than: Må være mindre enn …
+                strictly_greater_than: Må være større enn …
+                and: Én regel OG en annen
+                or: Én regel ELLER en annen
+                not_equal_to: Ikke lik …
+                equal_to: Lik …
+                greater_than: Større enn …
+                less_than: Mindre enn …
+        card:
+            export_tagging_rules_detail: Dette vil laste ned en JSON-fil som du så kan bruke for å importere etikettmerkingsregler annensteds hen, eller for å sikkerhetskopiere dem.
+            export_tagging_rules: Eksporter etikettmerkingsregler
+            import_tagging_rules_detail: Du må velge JSON-filen du tidligere eksporterte.
+            import_tagging_rules: Importer etikettmerkingsregler
+            new_tagging_rule: Opprett etikettmerkingsregel
+        export: Eksport
+        import_submit: Import
+        file_label: JSON-fil
+    otp:
+        page_title: To-faktoridentitetsbekreftelse
+        app:
+            enable: Skru på
+            cancel: Avbryt
+            two_factor_code_description_4: 'Test en OTP-kode fra ditt oppsatte program:'
+            two_factor_code_description_2: 'Du kan skanne den QR-koden med programmet ditt:'
+    reset:
+        description: Ved å trykke på knappen nedenfor har du muligheten til å fjerne noe info fra din konto. Husk at disse handlingene er IRREVERSIBLE.
+        confirm: Er du virkelig sikker? (DETTE KAN IKKE ANGRES)
+        archived: Fjern ALLE arkiverte oppføringer
+        entries: Fjern ALLE oppføringer
+        tags: Fjern ALLE etiketter
+        annotations: Fjern ALLE anføringer
+        title: Tilbakestill område (faresone)
+    form_feed:
+        no_token: Inget symbol
+        token_label: Informasjonskanal-symbol
+        description: Atom-informasjonskanaler tilbudt av wallabag lar deg lese lagrede artikler med din favoritt-Atomleser. Du må generere et symbol først.
+        feed_limit: Antall elementer i informasjonskanalen
+        feed_link:
+            all: Alle
+            archive: Arkivert
+            starred: Stjernemerket
+            unread: Ulest
+        feed_links: Informasjonskanalslenker
+        token_revoke: Tilbakekall symbolet
+        token_reset: Regenerer ditt symbol
+        token_create: Opprett ditt symbol
+    form_ignore_origin_rules:
+        faq:
+            operator_description:
+                equal_to: Lik …
+            variable_description:
+                label: Variabel
+            meaning: Betydning
+            title: O-S-S
+            how_to_use_them_title: Hvordan brukes de?
+flashes:
+    entry:
+        notice:
+            entry_deleted: Oppføring slettet
+            entry_unstarred: Stjernemerking av oppføring fjernet
+            entry_starred: Oppføring stjernemerket
+            entry_unarchived: Oppføring fjernet fra arkiv
+            entry_archived: Oppføring arkivert
+            entry_saved: Oppføring lagret
+            entry_already_saved: Oppføring allerede lagret %date%
+    config:
+        notice:
+            tagging_rules_not_imported: Kunne ikke importere etikettmerkingsregler
+            tagging_rules_imported: Etikettmerkingsregler importert
+            otp_disabled: To-faktoridentitetsbekreftelse avskrudd
+            otp_enabled: To-faktoridentitetsbekreftelse påskrudd
+            archived_reset: Arkiverte oppføringer slettet
+            entries_reset: Oppføringer tilbakestilt
+            tags_reset: Etikett-tilbakestilling
+            feed_token_revoked: Informasjonskanalsymbol tilbakekalt
+            feed_token_updated: Informasjonskanalsymbol oppdatert
+            feed_updated: Informasjonskanal oppdatert
+            tagging_rules_deleted: Etikettmerkingsregel slettet
+            tagging_rules_updated: Etikettmerkingsregler oppdatert
+            user_updated: Informasjon oppdatert
+            password_not_updated_demo: I demonstrasjonsmodus kan du ikke endre passordet for denne brukeren.
+            password_updated: Passord oppdatert
+            config_saved: Oppsett lagret.
+            annotations_reset: Anføringer tilbakestilt
+    user:
+        notice:
+            updated: Bruker «%username%» er oppdatert
+            deleted: Brukeren «%username%» ble slettet
+            added: Brukernavn «%username%» lagt til
+    developer:
+        notice:
+            client_created: Ny klient ved navn %name% opprettet.
+            client_deleted: Klient ved navn %name% slettet
+    import:
+        notice:
+            failed: Kunne ikke importere, prøv igjen.
+    tag:
+        notice:
+            tag_renamed: Navn på etikett endret
+            tag_added: Etikett lagt til
+error:
+    page_title: En feil inntraff
+ignore_origin_instance_rule:
+    form:
+        back_to_list: Tilbake til listen
+        delete_confirm: Er du sikker?
+        delete: Slett
+        save: Lagre
+        rule_label: Regel
+    list:
+        no: Nei
+        yes: Ja
+        edit_action: Rediger
+        actions: Handlinger
+site_credential:
+    form:
+        back_to_list: Tilbake til listen
+        delete_confirm: Er du sikker?
+        host_label: Vert (underdomene.eksempel.no, .eksempel.no, osv)
+        delete: Slett
+        save: Lagre
+        password_label: Passord
+        username_label: Logg inn
+    list:
+        create_new_one: Opprett ny identitetsdetalj
+        no: Nei
+        yes: Ja
+        edit_action: Rediger
+        actions: Handlinger
+    edit_site_credential: Rediger en eksisterende identitetsdetalj
+    new_site_credential: Opprett en identitetsdetalj
+user:
+    search:
+        placeholder: Filtrer etter brukernavn eller e-postadresse
+    form:
+        back_to_list: Tilbake til liste
+        delete_confirm: Er du sikker?
+        delete: Slett
+        save: Lagre
+        twofactor_google_label: To-faktoridentitetsbekreftelse med OTP-program
+        twofactor_email_label: To-faktoridentitetsbekreftelse per e-post
+        last_login_label: Siste innlogging
+        enabled_label: Påskrudd
+        email_label: E-postadresse
+        plain_password_label: ????
+        repeat_new_password_label: Gjente nytt passord
+        password_label: Passord
+        name_label: Navn
+        username_label: Brukernavn
+    list:
+        create_new_one: Opprett ny bruker
+        no: Nei
+        yes: Ja
+        edit_action: Rediger
+        actions: Handlinger
+    description: Her kan du håndtere alle brukere (opprett, rediger og slett)
+    edit_user: Rediger en eksisterende bruker
+    new_user: Opprett en ny bruker
+    page_title: Brukerhåndtering
+developer:
+    howto:
+        back: Tilbake
+        description:
+            paragraph_2: Du trenger et symbol for å kommunisere mellom dine tredjepartsprogrammmer og wallabag-API-et.
+            paragraph_3: For å opprette dette symbolet, trenger du å <a href="%link%">opprette en ny klient</a>.
+        page_title: Håndtering av API-klienter > Hvordan opprette mitt første program
+    client_parameter:
+        read_howto: Les kunnskapsbasens «Opprett mitt første program»
+        back: Tilbake
+        field_secret: Klienthemmelighet
+        field_id: Klient-ID
+        field_name: Klientnavn
+        page_description: Her har du dine klientparametre.
+        page_title: Håndtering av API-klienter > Klient-parametre
+    client:
+        copy_to_clipboard: Kopier
+        action_back: Tilbake
+        form:
+            save_label: Opprett en ny klient
+            redirect_uris_label: Videresendings-URI-er (valgfritt)
+            name_label: Navnet på klienten
+        page_title: API-klienthåndtering > Ny klient
+    remove:
+        action: Fjern klienten %name%
+    existing_clients:
+        no_client: Ingen klient enda.
+        field_uris: Videresendelses-URI-er
+        field_secret: Klienthemmelighet
+        field_id: Klient-ID
+        title: Eksisterende klienter
+    clients:
+        create_new: Opprett en ny klient
+        title: Klienter
+    list_methods: Liste over API-metoder
+    full_documentation: Vis full API-dokumentasjon
+    how_to_first_app: Hvordan opprette mitt første program
+    documentation: Dokumentasjon
+    welcome_message: Velkommen til wallabag-API-et
+    page_title: Håndtering av API-klienter
+import:
+    pocket:
+        connect_to_pocket: Koble til Pocket og importer data
+        config_missing:
+            user_message: Din tjener-administrator må definere en API-nøkkel for Pocket.
+            admin_message: Du må definere %keyurls%a pocket_consumer_key%keyurle%.
+            description: Pocket-import er ikke oppsatt.
+        page_title: Importer > Pocket
+    form:
+        save_label: Last opp fil
+        file_label: Fil
+        mark_as_read_title: Marker alle som lest?
+    action:
+        import_contents: Importer innhold
+    page_title: Importer
+    pinboard:
+        page_title: Importer > Pinboard
+    instapaper:
+        page_title: Importer > Instapaper
+    chrome:
+        page_title: Importer > Chrome
+    firefox:
+        page_title: Importer > Firefox
+    readability:
+        page_title: Importer > Readability
+    wallabag_v2:
+        page_title: Importer > wallabag v2
+    wallabag_v1:
+        page_title: Importer > wallabag v1
+tag:
+    new:
+        placeholder: Du kan legge til flere (kommainndelte) etiketter.
+        add: Legg til
+    list:
+        untagged: Oppføringer uten etikett
+        no_untagged_entries: Det finnes ingen oppføringer uten etikett.
+        see_untagged_entries: Vis oppføringer uten etikett
+    page_title: Etiketter
+quickstart:
+    docs:
+        all_docs: I tillegg til så mange andre artikler!
+        export: Konverter dine artikler til ePUB eller PDF
+        title: Full dokumentasjon
+    migrate:
+        instapaper: Flytt over fra Instapaper
+        readability: Flytt over fra Readability
+        wallabag_v1: Flytt over fra wallabag v1
+        pocket: Flytt over fra Pocket
+        wallabag_v2: Flytt over wallabag v2
+        description: Bruker du en annen tjeneste? Du vil få hjelp til overføring av data på wallabag.
+        title: Overflytting fra eksisterende enhet
+    admin:
+        import: Sette opp import
+        export: Sette opp eksport
+        sharing: Skru på noen parameter for artikkeldeling
+        analytics: Sette opp analyse
+        description: 'Som administrator har du gitte privilegier på wallabag. Du kan:'
+        new_user: Opprett ny bruker
+        title: Administrasjon
+    configure:
+        tagging_rules: Skriv regler for å etikettmerke artiklene dine automatisk
+        feed: Skru på informasjonskanaler
+        language: Endre språk og utseende
+        title: Sett opp programmet
+    support:
+        gitter: På Gitter
+        email: Per e-post
+        github: på GitHub
+        title: Støtte
+    developer:
+        use_docker: Bruk Docker for å installere wallabag
+        create_application: Opprett ditt tredjepartsprogram
+        title: Utviklere
+    first_steps:
+        new_article: Lagre din første artikkel
+    intro:
+        paragraph_2: Følg oss!
+        title: Velkommen til wallabag!
+    more: Mer …
+    page_title: Hurtigstart
+howto:
+    shortcuts:
+        open_article: Vis valgt oppføring
+        arrows_navigation: Naviger gjennom artikler
+        hide_form: Skjul nåværende skjema (søk eller ny lenke)
+        add_link: Legg til ny lenke
+        toggle_archive: Veksle lesestatus for oppføringer
+        toggle_favorite: Veksle stjernemerkingsstatus for oppføringen
+        open_original: Åpne opprinnelig nettadresse for oppføringen
+        article_title: Snarveier tilgjengelige i oppføringsvisning
+        search: Vis søket
+        go_howto: Gå til kunnskapsbase (denne siden)
+        delete: Slett oppføringen
+        go_logout: Logg ut
+        go_developers: Gå til utviklere
+        go_import: Gå til import
+        go_config: Gå til oppsett
+        go_tags: Gå til etiketter
+        go_all: Gå til alle oppføringer
+        go_archive: Gå til arkiv
+        go_starred: Gå til stjernemerket
+        go_unread: Gå til ulest
+        all_pages_title: Snarvei tilgjengelig på alle sider
+        action: Handling
+        shortcut: Snarvei
+        page_description: Her er snarveiene som finnes i wallabag.
+    bookmarklet:
+        description: 'Dra og slipp denne lenken i ditt bokmerkefelt:'
+    browser_addons:
+        opera: Opera-tillegg
+        chrome: Chrome-tillegg
+        firefox: Firefox-tillegg
+    top_menu:
+        browser_addons: Nettleserutvidelser
+        mobile_apps: Mobilprogrammer
+    page_description: 'Det er flere måter å lagre en artikkel på:'
+    page_title: Kunnskapsbase
+    mobile_apps:
+        windows: i Microsoft-butikken
+        ios: i iTunes-butikken
+        android:
+            via_google_play: via Google Play
+            via_f_droid: via F-Droid
+    tab_menu:
+        shortcuts: Bruk snarveier
+        add_link: Legg til en lenke
+    form:
+        description: Takket være dette skjemaet
+about:
+    third_party:
+        description: 'Tredjepartsbibliotek brukt i wallabag (og lisensene deres):'
+        license: Lisens
+        package: Pakke
+    contributors:
+        description: Takk til bidragsyterne for wallabag-nettprogrammet
+    helping:
+        description: 'wallabag er fri programvare. Du kan hjelpe oss:'
+        by_paypal: via Liberapay
+    top_menu:
+        helping: Hjelp wallabag
+        getting_help: Få hjelp
+        who_behind_wallabag: Hvem står bak wallabag
+        third_party: Tredjepartsbibliotek
+        contributors: Bidragsytere
+    getting_help:
+        support: <a href="https://github.com/wallabag/wallabag/issues">på GitHub</a>
+        bug_reports: Feilrapporter
+        documentation: Dokumentasjon
+    who_behind_wallabag:
+        version: Versjon
+        license: Lisens
+        many_contributors: Og mange andre bidragsytere ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">på GitHub</a>
+        project_website: Prosjektnettside
+        website: nettside
+        developped_by: Utviklet av
+    page_title: Om
+entry:
+    new:
+        placeholder: http://eksempel.no
+        form_new:
+            url_label: Nettadresse
+        page_title: Lagre ny oppføring
+    view:
+        left_menu:
+            problem:
+                description: Vises artikkelen feil?
+                label: Problemer?
+            theme_toggle: Draktveksling
+            re_fetch_content: Hent innhold igjen
+            view_original_article: Opprinnelig artikkel
+            set_as_starred: Veksle stjernemerking
+            theme_toggle_auto: Automatisk
+            theme_toggle_dark: Mørk
+            theme_toggle_light: Lys
+            print: Skriv ut
+            export: Eksporter
+            delete_public_link: slett offentlig lenke
+            public_link: offentlig lenke
+            share_email_label: E-post
+            share_content: Del
+            add_a_tag: Legg til en etikett
+            delete: Slett
+            set_as_unread: Marker som ulest
+            set_as_read: Marker som lest
+            back_to_homepage: Tilbake
+            back_to_top: Tilbake til toppen
+        annotations_on_the_entry: '{0} Ingen anføringer |{1} Én anføring|]1,Inf[ %count% anføringer'
+        provided_by: Tilbudt av
+        published_by: Publisert av
+        published_at: Publiseringsdato
+        created_at: Opprinnelsesdato
+        edit_title: Rediger tittel
+    filters:
+        action:
+            filter: Filtrer
+            clear: Tøm
+        is_public_help: Offentlig lenke
+        is_public_label: Har en offentlig lenke
+        preview_picture_help: Forhåndsvis bilde
+        created_at:
+            to: til
+            from: fra
+            label: Opprettelsesdato
+        domain_label: Domenenavn
+        reading_time:
+            to: til
+            from: fra
+            label: Lesetid i minutter
+        http_status_label: HTTP-status
+        language_label: Språk
+        preview_picture_label: Har forhåndsvisningsbilde
+        unread_label: Ulest
+        starred_label: Stjernemerket
+        archived_label: Arkivert
+        status_label: Status
+        title: Filtre
+    list:
+        reading_time_minutes_short: '%readingTime% min'
+        export_title: Eksporter
+        delete: Slett
+        reading_time_less_one_minute: 'anslått lesetid: &lt; 1 min'
+        reading_time_minutes: 'anslått lesetid: %readingTime% min'
+        reading_time: anslått lesetid
+    metadata:
+        published_on: Publisert
+        added_on: Lagt til
+        address: Adresse
+        reading_time_minutes_short: '%readingTime% min'
+        reading_time: Anslått lesetid
+    confirm:
+        delete: Er du sikker på at du vil fjerne artikkelen?
+    edit:
+        save_label: Lagre
+        origin_url_label: Opprinnelig nettadresse (der du fant oppføringen)
+        url_label: Nettadresse
+        title_label: Tittel
+        page_title: Rediger en oppføring
+    search:
+        placeholder: Hva ser du etter?
+    page_titles:
+        all: Alle oppføringer
+        untagged: Oppføringer uten etikett
+        filtered_search: 'Filtrert med søk:'
+        filtered_tags: 'Filtrert etter etiketter:'
+        filtered: Filtrerte oppføringer
+        archived: Arkiverte oppføringer
+        starred: Stjernemerkede oppføringer
+        unread: Uleste oppføringer
+    default_title: Tittel for oppføringen
+export:
+    unknown: Ukjent

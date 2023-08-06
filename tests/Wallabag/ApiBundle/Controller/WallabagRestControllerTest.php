@@ -2,6 +2,7 @@
 
 namespace Tests\Wallabag\ApiBundle\Controller;
 
+use Craue\ConfigBundle\Util\Config;
 use Tests\Wallabag\ApiBundle\WallabagApiTestCase;
 
 class WallabagRestControllerTest extends WallabagApiTestCase
@@ -34,5 +35,33 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         $this->assertArrayHasKey('allowed_registration', $content);
 
         $this->assertSame('wallabag', $content['appname']);
+    }
+
+    public function testAllowedRegistration()
+    {
+        // create a new client instead of using $this->client to be sure client isn't authenticated
+        $client = static::createClient();
+
+        if (!$client->getContainer()->getParameter('fosuser_registration')) {
+            $this->markTestSkipped('fosuser_registration is not enabled.');
+
+            return;
+        }
+
+        $client->getContainer()->get(Config::class)->set('api_user_registration', 1);
+
+        $client->request('GET', '/api/info');
+
+        $content = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertTrue($content['allowed_registration']);
+
+        $client->getContainer()->get(Config::class)->set('api_user_registration', 0);
+
+        $client->request('GET', '/api/info');
+
+        $content = json_decode($client->getResponse()->getContent(), true);
+
+        $this->assertFalse($content['allowed_registration']);
     }
 }

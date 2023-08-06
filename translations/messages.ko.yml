@@ -1,0 +1,696 @@
+security:
+    register:
+        page_title: 계정 생성
+        go_to_account: 내 계정으로 이동
+    resetting:
+        description: 이메일 주소를 입력하시면 비밀번호 재설정 지침을 보내드립니다.
+    login:
+        cancel: 취소
+        password: 패스워드
+        username: 사용자 이름
+        register: 등록
+        submit: 로그인
+        forgot_password: 비밀번호를 잊었나요?
+        keep_logged_in: 로그인 유지
+        page_title: wallabag에 어서오세요!
+developer:
+    client_parameter:
+        read_howto: '"내 첫 번째 애플리케이션 만들기" 방법 읽기'
+        back: 뒤로
+        field_secret: 클라이언트 secret
+        field_id: 클라이언트 ID
+        field_name: 클라이언트 이름
+        page_description: 다음은 클라이언트 매개 변수입니다.
+        page_title: API 클라이언트 관리 > 클라이언트 매개 변수
+    howto:
+        back: 뒤로
+        description:
+            paragraph_8: 모든 API 엔드포인트를 보려면 <a href="%link%">API 문서</a>를 살펴볼 수 있습니다.
+            paragraph_7: 이 호출은 사용자의 모든 문서를 반환합니다.
+            paragraph_6: 'access_token은 API 엔드포인트를 호출하는 데 유용합니다. 예를 들면:'
+            paragraph_5: 'API는 다음과 같은 응답을 반환합니다:'
+            paragraph_4: '이제 토큰을 만듭니다 (client_id, client_secret, 사용자 이름 및 비밀번호를 적절한 값으로 대체):'
+            paragraph_3: 이 토큰을 생성하려면 <a href="%link%">새 클라이언트 생성</a>이 필요합니다.
+            paragraph_2: 타사 애플리케이션과 wallabag API간에 통신하려면 토큰이 필요합니다.
+            paragraph_1: 다음 명령은 <a href="https://github.com/jkbrzt/httpie">HTTPie 라이브러리</a>를 사용합니다. 사용하기 전에 시스템에 설치되어 있는지 확인하십시오.
+        page_title: API 클라이언트 관리 > 첫 번째 애플리케이션을 만드는 방법
+    existing_clients:
+        field_secret: 클라이언트 secret
+        no_client: 아직 클라이언트가 없습니다.
+        field_grant_types: 허용되는 부여 유형
+        field_uris: URI 리다이렉션
+        field_id: 클라이언트 ID
+        title: 기존 클라이언트
+    client:
+        copy_to_clipboard: 복사
+        action_back: 뒤로
+        form:
+            save_label: 새 클라이언트 생성
+            redirect_uris_label: 리다이렉션 URI (선택 사항)
+            name_label: 클라이언트 이름
+        page_description: 새 클라이언트를 만들려고합니다. 애플리케이션의 리다이렉션 URI에 대해 아래 필드를 채우십시오.
+        page_title: API 클라이언트 관리 > 새 클라이언트
+    remove:
+        action: 클라이언트 %name% 제거
+        warn_message_2: 제거하면 해당 클라이언트로 구성된 모든 앱이 wallabag에서 인증 할 수 없습니다.
+        warn_message_1: '%name% 클라이언트를 제거 할 수 있습니다. 이 작업은 되돌릴 수 없습니다!'
+    clients:
+        create_new: 새 클라이언트 생성
+        title: 클라이언트
+    list_methods: API 메서드 목록
+    full_documentation: 전체 API 문서보기
+    how_to_first_app: 첫 번째 응용 프로그램을 만드는 방법
+    documentation: 참고 자료
+    welcome_message: wallabag API에 오신 것을 환영합니다
+    page_title: API 클라이언트 관리
+import:
+    pinboard:
+        description: '이 가져오기 도구는 모든 Pinboard 문서를 가져옵니다. 백업 (https://pinboard.in/settings/backup) 페이지의 "북마크" 섹션에서 "JSON"을 클릭합니다. JSON 파일이 다운로드됩니다(예: "pinboard_export").'
+        how_to: Pinboard 내보내기를 선택하고 아래 버튼을 클릭하여 업로드하고 가져 오십시오.
+        page_title: 가져오기> Pinboard
+    instapaper:
+        description: '이 가져오기 도구는 모든 Instapaper 문서를 가져옵니다. 설정 (https://www.instapaper.com/user) 페이지에서 "내보내기" 섹션의 ".CSV 파일 다운로드"를 클릭합니다. CSV 파일이 다운로드됩니다(예: "instapaper-export.csv").'
+        page_title: 가져오기 > Instapaper
+        how_to: Instapaper 내보내기를 선택하고 아래 버튼을 클릭하여 업로드하고 가져오십시오.
+    worker:
+        download_images_warning: 문서의 이미지 다운로드를 활성화했습니다. 클래식 가져오기와 결합하여 진행하는 데 오랜 시간이 걸릴 수 있습니다 (또는 실패 할 수 있음). 오류를 방지하기 위해 비동기 가져오기를 활성화하는 것을 <strong>적극 권장합니다</strong>.
+        enabled: '가져오기는 비동기로 이루어집니다. 가져오기 작업이 시작되면 외부 작업 프로세스가 한 번에 하나씩 작업을 처리합니다. 현재 서비스는 다음과 같습니다:'
+    elcurator:
+        description: 이 가져오기 도구는 모든 elCurator 문서를 가져옵니다. elCurator 계정의 기본 설정으로 이동 한 다음 콘텐츠를 내 보냅니다. JSON 파일이 저장될 것입니다.
+        page_title: 가져오기 > elCurator
+    wallabag_v2:
+        description: 이 가져오기 도구는 모든 wallabag v2 문서를 가져옵니다. 모든 문서로 이동 한 다음 내보내기 사이드 바에서 "JSON"을 클릭합니다. "All articles.json" 파일이 생성됩니다.
+        page_title: 가져오기 > Wallabag v2
+    pocket:
+        authorize_message: Pocket 계정에서 데이터를 가져올 수 있습니다. 아래 버튼을 클릭하고 애플리케이션이 getpocket.com 에 연결하도록 승인하면 됩니다.
+        description: 이 가져오기 도구는 모든 Pocket 데이터를 가져옵니다. Pocket은 서비스에서 콘텐츠를 검색하는 것을 허용하지 않으므로, wallabag에서 각 문서의 읽을 수있는 콘텐츠를 다시 가져옵니다.
+        connect_to_pocket: Pocket에 연결하고 데이터 가져오기
+        config_missing:
+            user_message: 서버 관리자가 Pocket용 API 키를 정의해야 합니다.
+            admin_message: '%keyurls%pocket_consumer_key%keyurle%를 정의해야합니다.'
+            description: Pocker 가져오기가 구성되지 않았습니다.
+        page_title: 가져오기 > Pocket
+    form:
+        mark_as_read_label: 가져온 모든 문서를 읽은 상태로 표시
+        file_label: 파일
+        save_label: 파일 업로드
+        mark_as_read_title: 모두 읽은 상태로 표시하시겠습니까?
+    chrome:
+        how_to: 북마크 백업 파일을 선택하고 아래 버튼을 클릭하여 가져 오십시오. 모든 문서를 가져와야하므로 처리 시간이 오래 걸릴 수 있습니다.
+        description: 이 가져오기 도구는 모든 크롬 북마크를 가져옵니다. 파일 위치는 운영체제에 따라 다릅니다. <ul><li>Linux의 경우 <code>~/.config/chromium/Default/</code> 디렉토리</li><li>Windows의 경우<code>%LOCALAPPDATA%\Google\Chrome\User Data\Default</code></li><li>OS X의 경우<code>~/Library/Application Support/Google/Chrome/Default/ Bookmarks</code>에 있어야 합니다</li></ul>여기로 이동하면<code>Bookmarks</code>파일을 찾을 수있는 위치에 복사합니다.<em><br>Chrome 대신 Chromium을 사용하면 그에 따라 경로를 수정해야합니다.</em></p>
+        page_title: 가져오기> 크롬
+    firefox:
+        page_title: 가져오기> 파이어폭스
+        description: 이 가져오기 도구는 모든 파이어폭스 북마크를 가져옵니다. 북마크 (Ctrl+Shift+O)로 이동 한 다음 "가져오기 및 백업"으로 이동하여 "백업…"을 선택하십시오. JSON 파일을 얻게됩니다.
+        how_to: 북마크 백업 파일을 선택하고 아래 버튼을 클릭하여 가져 오십시오. 모든 문서를 가져와야하므로 처리 시간이 오래 걸릴 수 있습니다.
+    readability:
+        how_to: Readibility 내보내기를 선택하고 아래 버튼을 클릭하여 업로드하고 가져 오십시오.
+        description: 이 가져오기 도구는 모든 Readibility 문서를 가져옵니다. 도구 (https://www.readability.com/tools/) 페이지의 "데이터 내보내기" 섹션에서 "데이터 내보내기" 를 클릭합니다. json (실제로는 .json으로 끝나지 않음)을 다운로드 하라는 이메일을 받게됩니다.
+        page_title: 가져오기 > Readability
+    wallabag_v1:
+        how_to: wallabag 내보내기를 선택하고 아래 버튼을 클릭하여 업로드하고 가져 오십시오.
+        description: 이 가져오기 도구는 모든 wallabag v1 기사를 가져옵니다. 구성 페이지의 "wallabag 데이터 내보내기" 섹션에서 "JSON 내보내기"를 클릭하십시오. "wallabag-export-1-xxxx-xx-xx.json"파일이 생성됩니다.
+        page_title: 가져오기> Wallabag v1
+    page_description: wallabag 가져오기 도구에 오신 것을 환영합니다. 마이그레이션 할 이전 서비스를 선택하십시오.
+    action:
+        import_contents: 콘텐츠 가져오기
+    page_title: 가져오기
+about:
+    third_party:
+        description: '다음은 wallabag에 사용되는 타사 라이브러리 목록입니다 (저작권 포함):'
+        license: 저작권
+        package: 패키지
+    contributors:
+        description: Wallabag 웹 애플리케이션에 기여해주신 분들께 감사드립니다
+    top_menu:
+        who_behind_wallabag: wallabag 뒤에있는 사람은 누구입니까
+        third_party: 타사 라이브러리
+        contributors: 기여자
+        helping: Wallabag 돕기
+        getting_help: 도움 받기
+    helping:
+        by_paypal: Liberapay을 통해
+        description: 'Wallabag 은 무료이며 오픈 소스입니다. 도움을 주세요:'
+    getting_help:
+        support: <a href="https://github.com/wallabag/wallabag/issues">GitHub</a>
+        bug_reports: 버그 신고
+        documentation: 참고 자료
+    who_behind_wallabag:
+        version: 버전
+        license: 저작권
+        project_website: 프로젝트 웹 사이트
+        many_contributors: 그 외 많은 기여자 ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">on GitHub </a>
+        website: 웹사이트
+        developped_by: 개발사
+    page_title: 정보
+entry:
+    view:
+        published_by: 게시
+        provided_by: 제공
+        left_menu:
+            problem:
+                description: 이 문서가 잘 안보이나요?
+                label: 문제가 있습니까?
+            view_original_article: 원본 문서
+            theme_toggle_auto: 자동
+            theme_toggle_dark: 어두움
+            theme_toggle_light: 밝음
+            theme_toggle: 테마 전환
+            print: 인쇄
+            export: 내보내기
+            delete_public_link: 공개 링크 삭제
+            public_link: 공개 링크
+            share_email_label: 이메일
+            share_content: 공유
+            add_a_tag: 태그 추가
+            delete: 삭제
+            re_fetch_content: 콘텐츠 다시 가져오기
+            set_as_starred: 즐겨찾기 전환
+            set_as_unread: 읽지않음으로 표시
+            set_as_read: 읽음으로 표시
+            back_to_homepage: 뒤로
+            back_to_top: 맨 위로
+        published_at: 발행일
+        created_at: 생성 일자
+        annotations_on_the_entry: '{0} 주석 없음|{1} 주석 1 개|]1,Inf[ %count% 주석'
+        original_article: 원본
+        edit_title: 제목 수정
+    filters:
+        action:
+            clear: 지우기
+            filter: 필터
+        archived_label: 보관됨
+        created_at:
+            to: 로
+            from: 에서
+            label: 생성 일자
+        domain_label: 도메인 이름
+        reading_time:
+            to: 로
+            from: 에서
+            label: 읽기 시간 (분)
+        http_status_label: HTTP 상태
+        language_label: 언어
+        is_public_help: 공개 링크
+        is_public_label: 공개 링크 있음
+        preview_picture_help: 미리보기 이미지
+        preview_picture_label: 미리보기 이미지 있음
+        unread_label: 읽지않음
+        starred_label: 즐겨찾기
+        status_label: 상태
+        title: 필터
+    edit:
+        origin_url_label: 원본 URL (원본 문서의 위치)
+        page_title: 문서 수정
+        save_label: 저장
+        url_label: Url
+        title_label: 제목
+    new:
+        page_title: 새 문서 저장
+        form_new:
+            url_label: Url
+        placeholder: http://website.com
+    page_titles:
+        archived: 보관한 문서
+        all: 모든 기사
+        untagged: 태그가 지정되지 않은 기사
+        starred: 즐겨찾기한 기사
+        filtered_search: '검색으로 필터링:'
+        filtered_tags: '태그로 필터링:'
+        filtered: 필터링한 기사
+        unread: 읽지않은 기사
+    confirm:
+        delete_tag: 문서에서 해당 태그를 제거 하시겠습니까?
+        delete: 해당 문서를 제거 하시겠습니까?
+    public:
+        shared_by_wallabag: 이 문서는 %username% 님이 <a href='%wallabag_instance%'>wallabag</a>와 공유했습니다
+    metadata:
+        published_on: 게시일
+        added_on: 추가
+        address: 주소
+        reading_time_minutes_short: '%readingTime% 분'
+        reading_time: 예상 읽기 시간
+    search:
+        placeholder: 무엇을 찾고 있습니까?
+    list:
+        export_title: 내보내기
+        delete: 삭제
+        toogle_as_read: 읽음으로 전환
+        toogle_as_star: 즐겨찾기 전환
+        original_article: 원본
+        reading_time_less_one_minute_short: '&lt; 1 분'
+        reading_time_minutes_short: '%readingTime% 분'
+        number_of_tags: '{1} 및 1 개의 다른 태그|]1,Inf[및 %count% 다른 태그'
+        reading_time_less_one_minute: '예상 읽기 시간: &lt; 1 분'
+        reading_time_minutes: '예상 읽기 시간: %readingTime% 분'
+        reading_time: 예상 읽기 시간
+        number_on_the_page: '{0} 기사가 없습니다.|{1} 기사가 하나 있습니다.|]1,Inf[ %count % 기사가 있습니다.'
+    default_title: 기사의 제목
+howto:
+    bookmarklet:
+        description: '이 링크를 북마크 표시줄로 드래그 앤 드롭하세요:'
+    form:
+        description: 이 양식 덕분에
+    shortcuts:
+        go_archive: 보관함으로 이동
+        go_all: 모든 문서로 이동
+        go_unread: 읽지않은 문서로 이동
+        open_article: 선택한 문서 표시
+        arrows_navigation: 문서 탐색
+        hide_form: 현재 양식 숨기기 (검색 또는 새 링크)
+        add_link: 새 링크 추가
+        toggle_archive: 문서 읽음 상태 전환
+        delete: 문서 삭제
+        toggle_favorite: 문서의 즐겨찾기 상태 전환
+        open_original: 문서의 원래 URL 열기
+        article_title: 문서 보기에서 사용 가능한 바로 가기
+        search: 검색 양식 표시
+        list_title: 목록 페이지에서 사용 가능한 단축키
+        go_logout: 로그아웃
+        go_howto: 사용법으로 이동 (현재 페이지!)
+        go_developers: 개발자로 이동
+        go_import: 가져오기로 이동
+        go_config: 구성으로 이동
+        go_tags: 태그로 이동
+        go_starred: 즐겨찾기로 이동
+        all_pages_title: 모든 페이지에서 사용 가능한 단축키
+        action: 동작
+        shortcut: 단축키
+        page_description: 다음은 wallabag에서 사용할 수있는 단축키입니다.
+    page_description: '문서를 저장하는 방법에는 여러 가지가 있습니다:'
+    mobile_apps:
+        android:
+            via_google_play: 구글 플레이를 통해
+            via_f_droid: F-Droid를 통해
+        windows: 마이크로소프트 스토어에서
+        ios: 아이튠즈 스토어에서
+    browser_addons:
+        opera: 오페라 애드온
+        chrome: 크롬 애드온
+        firefox: 파이어 폭스 애드온
+    top_menu:
+        bookmarklet: 북마크릿
+        mobile_apps: 모바일 앱
+        browser_addons: 브라우저 애드온
+    tab_menu:
+        shortcuts: 단축키 사용
+        add_link: 링크 추가
+    page_title: 사용법
+flashes:
+    entry:
+        notice:
+            entry_archived: 문서가 보관되었습니다
+            entry_reloaded_failed: 문서가 다시 로드되었지만 콘텐츠를 가져 오지 못했습니다
+            entry_reloaded: 문서가 다시 로드되었습니다
+            entry_updated: 문서가 업데이트되었습니다
+            entry_saved_failed: 문서가 저장되었지만 콘텐츠를 가져 오지 못했습니다
+            entry_saved: 문서가 저장되었습니다
+            entry_already_saved: '%date%에 문서가 이미 저장되었습니다'
+            no_random_entry: 이런 기준을 가진 문서가 없습니다
+            entry_deleted: 문서가 삭제되었습니다
+            entry_unstarred: 문서 즐겨찾기가 해제되었습니다
+            entry_starred: 문서를 즐겨찾기했습니다
+            entry_unarchived: 문서 보관이 해제되었습니다
+    config:
+        notice:
+            archived_reset: 보관된 문서가 삭제되었습니다
+            config_saved: 구성이 저장되었습니다.
+            tagging_rules_imported: 태그 지정 규칙을 가져왔습니다
+            ignore_origin_rules_updated: 원본 무시 규칙이 업데이트되었습니다
+            ignore_origin_rules_deleted: 원본 무시 규칙이 삭제되었습니다
+            tagging_rules_not_imported: 태그 지정 규칙을 가져 오는 동안 오류가 발생했습니다
+            otp_disabled: 2 단계 인증 비활성화 됨
+            otp_enabled: 2 단계 인증 활성화 됨
+            entries_reset: 문서 재설정
+            tags_reset: 태그 재설정
+            annotations_reset: 주석 재설정
+            feed_token_revoked: 피드 토큰이 해지되었습니다
+            feed_token_updated: 피드 토큰이 업데이트되었습니다
+            user_updated: 정보 업데이트되었습니다
+            feed_updated: 피드 정보가 업데이트되었습니다
+            tagging_rules_deleted: 태그 지정 규칙이 삭제되었습니다
+            tagging_rules_updated: 태그 지정 규칙이 업데이트되었습니다
+            password_not_updated_demo: 데모 모드에서는이 사용자의 암호를 변경할 수 없습니다.
+            password_updated: 비밀번호가 업데이트 되었습니다
+    ignore_origin_instance_rule:
+        notice:
+            deleted: 전역 원본 무시 규칙이 삭제되었습니다
+            updated: 전역 원본 무시 규칙이 업데이트되었습니다
+            added: 전역 원본 무시 규칙이 추가되었습니다
+    site_credential:
+        notice:
+            deleted: '"%host%" 에 대한 사이트 자격 증명이 삭제되었습니다'
+            updated: '"%host%" 에 대한 사이트 자격 증명이 업데이트되었습니다'
+            added: '"%host%"에 대한 사이트 자격 증명이 추가되었습니다'
+    user:
+        notice:
+            deleted: 사용자 "%username%" 이 삭제되었습니다
+            updated: 사용자 "%username%" 업데이트 되었습니다
+            added: 사용자 "%username%" 추가되었습니다
+    developer:
+        notice:
+            client_deleted: 클라이언트 %name%이 삭제되었습니다
+            client_created: 새 클라이언트 %name% 이 생성되었습니다.
+    import:
+        error:
+            rabbit_enabled_not_installed: RabbitMQ가 비동기 가져오기 처리를 위해 활성화되었지만 <u>연결할 수 없는 것 같습니다</u>. RabbitMQ 구성을 확인하십시오.
+            redis_enabled_not_installed: Redis가 비동기 가져오기를 처리하도록 활성화되었지만 <u>연결할 수없는 것 같습니다</u>. Redis 구성을 확인하십시오.
+        notice:
+            summary_with_queue: '가져오기 요약: %queued% 대기 중.'
+            summary: '가져오기 요약: %imported% 가져오기 성공, %skipped% 이미 저장됨.'
+            failed_on_file: 가져오기를 처리하는 동안 오류가 발생했습니다. 파일을 확인하십시오.
+            failed: 가져오기에 실패했습니다. 다시 시도하십시오.
+    tag:
+        notice:
+            tag_renamed: 태그 이름이 변경되었습니다
+            tag_added: 태그가 추가되었습니다
+config:
+    form_ignore_origin_rules:
+        faq:
+            ignore_origin_rules_definition_description: 리다이렉션 후 wallabag 에서 원본 주소를 자동으로 무시하는 데 사용됩니다. <br /> 새 문서를 로드 할 때, 리다이렉션이 발생하면 모든 원본 무시 규칙(<i> 사용자 정의 및 인스턴스 정의 </i>)이 적용됩니다. 원본 주소를 무시하는 데 사용됩니다.
+            operator_description:
+                matches: '<i>주제</i>가 <i> 검색</i> (대소 문자 구분 안함)과 일치하는지 테스트합니다. <br />예: <code>_all ~ "https?://rss.example.com/ foobar/.*"</code>'
+                equal_to: 같다면…
+                label: 연산자
+            variable_description:
+                _all: 전체 주소 (주로 패턴 일치를 위함)
+                host: URL 호스트
+                label: 변수
+            meaning: 의미
+            variables_available_description: '다음 변수 및 연산자를 사용하여 원본 무시 규칙을 만들 수 있습니다:'
+            variables_available_title: 규칙을 작성하는 데 사용할 수있는 변수와 연산자는 무엇입니까?
+            how_to_use_them_description: « <i>rss.example.com</i> » 에서 오는 기사의 출처를 무시한다고 가정 해 보겠습니다 (<i>리다이렉션 후 실제 주소가 example.com </i>임을 알고 있음).<br />이 경우 <i> 규칙</i> 입력 란에 « host = "rss.example.com" » 을 입력해야 합니다.
+            how_to_use_them_title: 사용하는 방법은?
+            ignore_origin_rules_definition_title: '"원본 무시 규칙"이란?'
+            title: 자주 묻는 질문
+    form_rules:
+        faq:
+            variable_description:
+                domainName: 문서의 도메인 이름
+                readingTime: 문서의 예상 읽기 시간 (분)
+                mimetype: 문서의 미디어 형식
+                language: 문서의 언어
+                content: 문서의 내용
+                isStarred: 문서가 즐겨찾기됐는지 여부
+                isArchived: 문서가 보관되었는지 여부
+                url: 문서 URL
+                title: 문서 제목
+                label: 변수
+            tagging_rules_definition_description: wallabag 에서 자동으로 새 문서에 태그를 지정하는 데 사용하는 규칙입니다. <br /> 태그 지정 규칙이 새 문서가 추가 될 때마다 태그를 구성하는 데 사용되므로, 수동으로 분류하는 수고를 덜 수 있습니다.
+            how_to_use_them_description: '읽기 시간이 3 분 미만인 경우 «<i> 짧은 읽기 </i>» 와 같은 새 기사에 태그를 지정한다고 가정합니다. <br />이 경우 <i> 규칙</i> 을 입력해야합니다. <i>태그</i> 필드에 « readingTime &lt;= 3 » 을 입력하고 « <i>짧은 읽기</i>» 를 입력하십시오. <br /> 여러 태그를 쉼표로구분하여 한 번에 추가 할 수 있습니다: « <i> 짧은 읽기, 반드시 읽기</i> » <br /> 사전 정의 된 연산자를 사용하여 복잡한 규칙을 작성할 수 있습니다: 만약 « <i>readingTime &gt;= 5 AND domainName = "www.php.net"</i> » 다음으로 태그 «<i> 긴 읽기, php</i>»'
+            operator_description:
+                and: 하나의 규칙 그리고 다른 규칙
+                or: 하나의 규칙 또는 다른 규칙
+                strictly_less_than: 엄격히 작다면…
+                strictly_greater_than: 엄격히 크다면…
+                matches: '<i>제목</i>이 <i>검색어</i>와 일치하는지 테스트합니다 (대소문자 구분안함).<br />예: <code> title matches "football"</code>'
+                notmatches: '<i>주제</i>가 <i>검색어</i>와 일치하지 않는지 테스트합니다 (대소문자 구분안함). <br />예: <code>title notmatches "football"</code>'
+                greater_than: 크다면…
+                less_than: 작다면…
+                not_equal_to: 같지 않다면…
+                equal_to: 같다면…
+                label: 연산자
+            meaning: 의미
+            variables_available_description: '태그 규칙을 만들려면 다음 변수와 연산자를 사용할 수 있습니다:'
+            variables_available_title: 규칙을 작성하기 위해 어떤 변수와 연산자를 사용할 수 있습니까?
+            how_to_use_them_title: 사용하는 방법은?
+            tagging_rules_definition_title: '"태그 지정 규칙"이란?'
+            title: 자주 묻는 질문
+        export: 내보내기
+        import_submit: 가져오기
+        file_label: JSON 파일
+        card:
+            export_tagging_rules_detail: 이렇게 하면 태그 지정 규칙을 다른 곳으로 가져 오거나 백업하는 데 사용할 수 있는 JSON 파일이 다운로드됩니다.
+            export_tagging_rules: 태그 지정 규칙 내보내기
+            import_tagging_rules_detail: 이전에 내보낸 JSON 파일을 선택해야 합니다.
+            import_tagging_rules: 태그 지정 규칙 가져오기
+            new_tagging_rule: 태그 지정 규칙 생성
+        edit_rule_label: 편집
+        delete_rule_label: 삭제
+        then_tag_as_label: 다음으로 태그
+        if_label: 만약
+        tags_label: 태그
+        rule_label: 규칙
+    reset:
+        archived: 모든 보관 문서 제거
+        entries: 모든 기사 제거
+        description: 아래의 버튼을 누르면 계정에서 일부 정보를 제거합니다. 이 작업은 되돌릴 수 없습니다.
+        title: 초기화 영역 (위험 영역)
+        annotations: 모든 주석 제거
+        confirm: 정말 하시겠습니까? (되돌릴 수 없습니다)
+        tags: 모든 태그 제거
+    form_feed:
+        feed_link:
+            archive: 보관
+            all: 모두
+            starred: 즐겨찾기
+            unread: 읽지않음
+        description: wallabag에서 제공하는 Atom 피드를 사용하면, 좋아하는 Atom 리더를 사용하여 저장된 문서를 읽을 수 있습니다. 먼저 토큰을 생성해야합니다.
+        feed_limit: 피드의 항목 수
+        feed_links: 피드 링크
+        token_revoke: 토큰 취소
+        token_reset: 토큰 다시 생성
+        token_create: 토큰 생성
+        no_token: 토큰 없음
+        token_label: 피드 토큰
+    form_user:
+        delete:
+            description: 계정을 삭제하면 모든 문서, 태그, 주석 및 계정이 영구적으로 제거됩니다(되돌릴 수 없음). 그리고 로그아웃됩니다.
+            button: 내 계정 삭제
+            confirm: 정말 하시겠습니까? (되돌릴 수 없습니다)
+            title: 내 계정 삭제 (위험한 작업)
+        two_factor:
+            action_app: OTP 앱 사용
+            action_email: 이메일 사용
+            state_disabled: 비활성화 됨
+            state_enabled: 활성화 됨
+            table_action: 동작
+            table_state: 상태
+            table_method: 방법
+            googleTwoFactor_label: OTP 앱 사용 (Google Authenticator, Authy 또는 FreeOTP와 같은 앱을 열고 일회성 코드 받기)
+            emailTwoFactor_label: 이메일 사용 (이메일로 코드 받기)
+        email_label: 이메일
+        name_label: 이름
+        login_label: 로그인 (변경불가)
+        two_factor_description: 2 단계 인증을 활성화하면, 신뢰할 수없는 연결을 새로 만들때마다 코드가 포함 된 이메일을 받게됩니다.
+    form_settings:
+        help_reading_speed: wallabag은 각 글의 읽기 시간을 계산합니다. 이 목록을 사용하여, 읽기가 빠르거나 느린지 여기에서 정할 수 있습니다. wallabag은 각 문서의 읽기 시간을 다시 계산할 것입니다.
+        help_items_per_page: 각 페이지에 표시되는 문서의 갯수를 변경할 수 있습니다.
+        action_mark_as_read:
+            label: 문서를 삭제, 즐겨찾기 또는 읽은 상태로 표시한 후에는 어떻게 해야 합니까?
+            redirect_current_page: 현재 페이지 유지
+            redirect_homepage: 홈페이지로 이동
+        items_per_page_label: 페이지 당 항목
+        help_pocket_consumer_key: Pocket 가져오기에 필요합니다. Pocket 계정에서 만들 수 있습니다.
+        help_language: wallabag 인터페이스 언어를 변경할 수 있습니다.
+        android_instruction: Android 앱 정보를 입력하려면 여기를 클릭하세요
+        android_configuration: Android 앱 구성
+        pocket_consumer_key_label: 콘텐츠를 가져 오기 위한 Pocket의 Consumer key
+        reading_speed:
+            200_word: 나는 분당 ~200 단어를 읽습니다
+            100_word: 나는 분당 ~100 단어를 읽습니다
+            400_word: 나는 분당 ~400 단어를 읽습니다
+            300_word: 나는 분당 ~300 단어를 읽습니다
+            help_message: '온라인 도구를 사용하여 읽기 속도를 측정 할 수 있습니다:'
+            label: 읽기 속도
+        language_label: 언어
+    otp:
+        app:
+            qrcode_label: QR 코드
+            enable: 활성화
+            cancel: 취소
+            two_factor_code_description_5: 'QR 코드가 보이지 않거나 스캔 할 수없는 경우, 앱에 다음 비밀번호를 입력하세요:'
+            two_factor_code_description_4: '구성된 앱에서 OTP 코드를 테스트합니다:'
+            two_factor_code_description_3: '또, 이런 백업 코드를 안전한 장소에 저장하세요. OTP 앱에 대한 액세스 권한을 잃어버린 경우 사용할 수 있습니다:'
+            two_factor_code_description_2: '앱으로 QR 코드를 스캔 할 수 있습니다:'
+            two_factor_code_description_1: 2단계 OTP 인증을 활성화하고 OTP 앱을 열어, 코드를 사용하여 일회성 암호를 얻습니다. 페이지가 갱신되면 사라집니다.
+        page_title: 2단계 인증
+    tab_menu:
+        reset: 초기화 영역
+        ignore_origin: 원본 무시 규칙
+        new_user: 사용자 추가
+        rules: 태그 규칙
+        password: 비밀번호
+        user_info: 사용자 정보
+        feed: 피드
+        settings: 설정
+    form:
+        save: 저장
+    page_title: 설정
+    form_password:
+        repeat_new_password_label: 새 비밀번호 다시 입력
+        new_password_label: 새로운 비밀번호
+        old_password_label: 현재 비밀번호
+        description: 여기서 비밀번호를 변경할 수 있습니다. 새 비밀번호는 8자 이상이어야 합니다.
+menu:
+    top:
+        random_entry: 해당 목록에서 임의의 문서로 이동
+        add_new_entry: 새 문서 추가
+        filter_entries: 기사 필터
+        account: 나의 계정
+        export: 내보내기
+        search: 검색
+    left:
+        archive: 보관함
+        back_to_unread: 읽지 않은 문서로 돌아가기
+        all_articles: 모든 문서
+        ignore_origin_instance_rules: 전역 원본 무시 규칙
+        about: 애플리케이션 정보
+        developer: API 클라이언트 관리
+        howto: 사용법
+        site_credentials: 사이트 자격 증명
+        theme_toggle_auto: 자동 테마
+        theme_toggle_dark: 어두운 테마
+        theme_toggle_light: 밝은 테마
+        quickstart: 빠른시작
+        search: 검색
+        users_management: 사용자 관리
+        save_link: 링크 저장
+        logout: 로그아웃
+        internal_settings: 내부 설정
+        unread: 읽지않음
+        import: 가져오기
+        tags: 태그
+        config: 설정
+        starred: 즐겨찾기
+    search_form:
+        input_label: 여기에 검색어 입력
+error:
+    page_title: 오류가 발생했습니다
+ignore_origin_instance_rule:
+    form:
+        back_to_list: 목록으로 돌아가기
+        delete_confirm: 확실한가요?
+        delete: 삭제
+        save: 저장
+        rule_label: 규칙
+    list:
+        create_new_one: 새 전역 원본 무시 규칙 만들기
+        no: 아니오
+        yes: 네
+        edit_action: 수정
+        actions: 작업
+    description: 여기에서 원본 URL의 일부 패턴을 무시하는 데 사용되는 전역 원본 무시 규칙을 관리 할 수 있습니다.
+    edit_ignore_origin_instance_rule: 기존 원본 무시 규칙 편집
+    new_ignore_origin_instance_rule: 전역 원본 무시 규칙 만들기
+    page_title: 전역 원본 무시 규칙
+site_credential:
+    form:
+        back_to_list: 목록으로 돌아가기
+        delete_confirm: 확실한가요?
+        delete: 삭제
+        save: 저장
+        password_label: 비밀번호
+        host_label: 호스트 (subdomain.example.org, .example.org 등)
+        username_label: 로그인
+    list:
+        create_new_one: 새 자격 증명 만들기
+        no: 아니오
+        yes: 네
+        edit_action: 수정
+        actions: 작업
+    description: 여기에서 페이월, 인증 등과 같이 사이트의 필요한 모든 자격 증명 (생성, 편집 및 삭제)을 관리 할 수 있습니다.
+    edit_site_credential: 기존 자격 증명 편집
+    new_site_credential: 자격 증명 만들기
+    page_title: 사이트 자격 증명 관리
+user:
+    search:
+        placeholder: 사용자 이름 또는 이메일로 필터링
+    form:
+        back_to_list: 목록으로 돌아가기
+        delete_confirm: 확실한가요?
+        delete: 삭제
+        save: 저장
+        twofactor_google_label: OTP 앱에 의한 2 단계 인증
+        twofactor_email_label: 이메일을 통한 2 단계 인증
+        last_login_label: 마지막 로그인
+        enabled_label: 활성화 됨
+        email_label: 이메일
+        plain_password_label: ????
+        repeat_new_password_label: 새 비밀번호 다시 입력
+        password_label: 비밀번호
+        name_label: 이름
+        username_label: 사용자 이름
+    list:
+        create_new_one: 새 사용자 만들기
+        no: 아니오
+        yes: 예
+        edit_action: 수정
+        actions: 작업
+    description: 여기에서 모든 사용자를 관리 할 수 있습니다 (생성, 수정 및 삭제)
+    edit_user: 기존 사용자 편집
+    new_user: 새 사용자 만들기
+    page_title: 사용자 관리
+quickstart:
+    intro:
+        paragraph_1: wallabag 앱을 살펴보고 관심을 가질만한 몇 가지 기능을 보여 드리겠습니다.
+        paragraph_2: 팔로우하세요!
+        title: wallabag에 오신 것을 환영합니다!
+    admin:
+        sharing: 문서 공유에 대한 일부 매개 변수 활성화
+        description: '관리자는 wallabag에 대한 권한이 있습니다. 다음을 수행 할 수 있습니다:'
+        title: 관리
+        import: 가져오기 구성
+        export: 내보내기 구성
+        analytics: 분석 구성
+        new_user: 새 사용자 만들기
+    configure:
+        tagging_rules: 문서를 자동으로 태그하는 규칙 작성
+        feed: 피드 활성화
+        language: 언어 및 디자인 변경
+        description: 자신에게 맞는 앱을 얻으려면, wallabag의 구성을 살펴보십시오.
+        title: 응용 프로그램 구성
+    more: 더보기…
+    page_title: 빠른시작
+    support:
+        gitter: Gitter 에서
+        email: 이메일로
+        github: GitHub에서
+        description: 도움이 필요하시면 저희가 도와 드리겠습니다.
+        title: 지원
+    docs:
+        all_docs: 그리고 너무 많은 다른 문서!
+        fetching_errors: 문서를 가져 오는 동안 오류가 발생하면 어떻게 해야합니까?
+        search_filters: 검색 엔진 및 필터를 사용하여 문서를 찾는 방법 보기
+        description: wallabag에는 매우 많은 기능이 있습니다. 매뉴얼을 읽고, 사용법 배우기를 주저하지 마십시오.
+        export: 문서를 ePUB 또는 PDF로 변환
+        annotate: 문석에 주석 달기
+        title: 전체 문서
+    developer:
+        use_docker: Docker를 사용하여 wallabag 설치
+        create_application: 타사 응용 프로그램 만들기
+        description: '우리는 또한 개발자를 생각했습니다: Docker, API, 번역, 기타 등등.'
+        title: 개발자
+    migrate:
+        instapaper: Instapaper에서 마이그레이션
+        readability: Readability에서 마이그레이션
+        wallabag_v2: wallabag v2에서 마이그레이션
+        wallabag_v1: wallabag v1에서 마이그레이션
+        pocket: Pocket에서 마이그레이션
+        description: 다른 서비스를 사용하고 있습니까? wallabag에서 데이터를 검색 할 수 있도록 도와 드리겠습니다.
+        title: 기존 서비스에서 마이그레이션
+    first_steps:
+        unread_articles: 그리고 분류하세요!
+        new_article: 첫 번째 문서 저장
+        description: 이제 wallabag이 잘 구성되었으므로, 웹을 보관할 차례입니다. 오른쪽 상단 기호 +를 클릭하여 링크를 추가 할 수 있습니다.
+        title: 첫 번째 단계
+footer:
+    stats: '%user_creation% 이후 %nb_archives% 문서를 읽었습니다. 하루에 %per_day% 정도입니다!'
+    wallabag:
+        elsewhere: Wallabag을 당신과 함께
+        about: 정보
+        powered_by: powered by
+        social: 소셜
+export:
+    unknown: 알수없음
+    footer_template: <div style="text-align:center;"><p>%method%로 wallabag이 만듬</p><p>기기에서 이 전자책을 표시하는 데 문제가 있는 경우<a href="https://github.com/wallabag/wallabag/issues">이슈</a>를 열어주세요.</p></div>
+tag:
+    new:
+        placeholder: 쉼표로 구분 된 여러 태그를 추가 할 수 있습니다.
+        add: 추가
+    list:
+        untagged: 태그가 없는 문서
+        no_untagged_entries: 태그가 지정되지 않은 문서가 없습니다.
+        see_untagged_entries: 태그가 없는 문서보기
+        number_on_the_page: '{0} 태그가 없습니다.|{1} 태그가 1 개 있습니다.|]1,Inf[태그가 %count% 개 있습니다.'
+    page_title: 태그

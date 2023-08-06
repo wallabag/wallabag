@@ -1,39 +1,9 @@
 parameters:
     ignoreErrors:
         -
-            message: "#^Call to an undefined method Psr\\\\Container\\\\ContainerInterface\\:\\:getParameter\\(\\)\\.$#"
-            count: 2
-            path: src/Wallabag/ApiBundle/Controller/EntryRestController.php
-
-        -
-            message: "#^Call to an undefined method Psr\\\\Container\\\\ContainerInterface\\:\\:getParameter\\(\\)\\.$#"
-            count: 1
-            path: src/Wallabag/ApiBundle/Controller/UserRestController.php
-
-        -
-            message: "#^Call to an undefined method Psr\\\\Container\\\\ContainerInterface\\:\\:getParameter\\(\\)\\.$#"
-            count: 3
-            path: src/Wallabag/ApiBundle/Controller/WallabagRestController.php
-
-        -
-            message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectManager\\:\\:getConnection\\(\\)\\.$#"
-            count: 5
-            path: src/Wallabag/CoreBundle/Command/InstallCommand.php
-
-        -
             message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Entity\\\\RuleInterface\\:\\:getConfig\\(\\)\\.$#"
             count: 1
             path: src/Wallabag/CoreBundle/Controller/ConfigController.php
-
-        -
-            message: "#^Call to an undefined method Psr\\\\Container\\\\ContainerInterface\\:\\:getParameter\\(\\)\\.$#"
-            count: 1
-            path: src/Wallabag/CoreBundle/Controller/StaticController.php
-
-        -
-            message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition\\:\\:children\\(\\)\\.$#"
-            count: 1
-            path: src/Wallabag/CoreBundle/DependencyInjection/Configuration.php
 
         -
             message: "#^Call to an undefined method Lexik\\\\Bundle\\\\FormFilterBundle\\\\Filter\\\\Query\\\\QueryInterface\\:\\:getExpressionBuilder\\(\\)\\.$#"
@@ -46,11 +16,6 @@ parameters:
             path: src/Wallabag/CoreBundle/Form/Type/EntryFilterType.php
 
         -
-            message: "#^Call to an undefined method Doctrine\\\\Persistence\\\\ObjectManager\\:\\:getConnection\\(\\)\\.$#"
-            count: 1
-            path: src/Wallabag/ImportBundle/Command/ImportCommand.php
-
-        -
             message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
             count: 1
             path: src/Wallabag/ImportBundle/Controller/BrowserController.php
@@ -69,11 +34,6 @@ parameters:
             message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
             count: 1
             path: src/Wallabag/ImportBundle/Controller/WallabagController.php
-
-        -
-            message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition\\:\\:children\\(\\)\\.$#"
-            count: 1
-            path: src/Wallabag/ImportBundle/DependencyInjection/Configuration.php
 
         -
             message: "#^Call to an undefined method Scheb\\\\TwoFactorBundle\\\\Model\\\\Email\\\\TwoFactorInterface\\:\\:getName\\(\\)\\.$#"
@@ -94,3 +54,13 @@ parameters:
             message: "#^Property Tests\\\\Wallabag\\\\CoreBundle\\\\Helper\\\\RedirectTest\\:\\:\\$routerMock has unknown class PHPUnit_Framework_MockObject_MockObject as its type\\.$#"
             count: 1
             path: tests/Wallabag/CoreBundle/Helper/RedirectTest.php
+
+        -
+            message: "#^Method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch()#"
+            count: 15
+            path: src/*
+
+        -
+            message: "#^Method FOS\\\\UserBundle\\\\Model\\\\UserManagerInterface\\:\\:updateUser()#"
+            count: 7
+            path: src/Wallabag/CoreBundle/Controller/ConfigController.php

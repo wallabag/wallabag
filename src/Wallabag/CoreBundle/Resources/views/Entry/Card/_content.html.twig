@@ -3,7 +3,7 @@
         <i class="grey-text text-darken-4 activator material-icons right">more_vert</i>
     {% endif %}
     <a href="{{ path('view', {'id': entry.id}) }}" title="{{ entry.title|striptags|e('html_attr') }}" class="card-title dot-ellipsis dot-resize-update">
-        {{ entry.title|striptags|truncate(80, true, '…')|default('entry.default_title'|trans)|raw }}
+        {{ entry.title|striptags|u.truncate(80, '…', false)|default('entry.default_title'|trans)|raw }}
     </a>
 
     <div class="{{ subClass|default('original grey-text') }}">

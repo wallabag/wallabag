@@ -1,0 +1,728 @@
+security:
+    login:
+        page_title: 'Приветствую в wallabag!'
+        keep_logged_in: 'Запомнить меня'
+        forgot_password: 'Забыли пароль?'
+        submit: 'Войти'
+        register: 'Регистрация'
+        username: 'Логин'
+        password: 'Пароль'
+        cancel: 'Отменить'
+    resetting:
+        description: "Введите Ваш email ниже и мы отправим Вам инструкцию для сброса пароля."
+    register:
+        page_title: 'Создать новый аккаунт'
+        go_to_account: 'Перейти в аккаунт'
+menu:
+    left:
+        unread: 'Непрочитанные'
+        starred: 'Помеченные'
+        archive: 'Архивные'
+        all_articles: 'Все записи'
+        config: 'Настройки'
+        tags: 'Теги'
+        internal_settings: 'Внутренние настройки'
+        import: 'Импорт'
+        howto: 'Справка'
+        developer: 'Настройки клиентского API'
+        logout: 'Выход'
+        about: 'о wallabag'
+        search: 'Поиск'
+        save_link: 'Сохранить ссылку'
+        back_to_unread: 'Назад к непрочитанным записям'
+        users_management: 'Управление пользователями'
+        site_credentials: Реквизиты сайта
+        ignore_origin_instance_rules: Глобальные правила игнорирования источника
+        quickstart: Быстрый старт
+        theme_toggle_auto: Выбирать тему автоматически
+        theme_toggle_dark: Темная тема
+        theme_toggle_light: Светлая тема
+        with_annotations: С аннотациями
+    top:
+        add_new_entry: 'Добавить новую запись'
+        search: 'Поиск'
+        filter_entries: 'Фильтр записей'
+        export: 'Экспорт'
+        account: Моя учётная запись
+        random_entry: Перейти к случайной записи из этого списка
+    search_form:
+        input_label: 'Введите текст для поиска'
+footer:
+    wallabag:
+        elsewhere: 'Возьмите wallabag с собой'
+        social: 'Соц. сети'
+        powered_by: 'создано с помощью'
+        about: 'О wallabag'
+    stats: "Поскольку %user_creation% вы читаете %nb_archives% записей, это около %per_day% в день!"
+config:
+    page_title: 'Настройки'
+    tab_menu:
+        settings: 'Настройки'
+        rss: 'RSS'
+        user_info: 'Информация о пользователе'
+        password: 'Пароль'
+        rules: 'Правила настройки простановки тегов'
+        new_user: 'Добавить пользователя'
+        reset: Сброс
+        ignore_origin: Правила игнорирования источника
+        feed: Ленты
+    form:
+        save: 'Сохранить'
+    form_settings:
+        items_per_page_label: 'Записей на странице'
+        language_label: 'Язык'
+        reading_speed:
+            label: 'Скорость чтения'
+            help_message: 'Вы можете использовать онлайн-инструменты для оценки скорости чтения:'
+            100_word: 'Я читаю ~100 слов в минуту'
+            200_word: 'Я читаю ~200 слов в минуту'
+            300_word: 'Я читаю ~300 слов в минуту'
+            400_word: 'Я читаю ~400 слов в минуту'
+        action_mark_as_read:
+            label: 'Куда Вы хотите быть перенаправлены, после пометки записи, как прочитанная?'
+            redirect_homepage: 'На домашнюю страницу'
+            redirect_current_page: 'На текущую страницу'
+        pocket_consumer_key_label: "Ключ от Pocket для импорта контента"
+        android_configuration: "Настройте Ваше Android приложение"
+        help_items_per_page: "Вы можете выбрать количество отображаемых записей на странице."
+        help_reading_speed: "wallabag посчитает сколько времени занимает чтение каждой записи. Вы можете определить здесь, как быстро вы читаете. wallabag пересчитает время чтения для каждой записи."
+        help_language: "Вы можете изменить язык интерфейса wallabag."
+        help_pocket_consumer_key: "Обязательно для импорта из Pocket. Вы можете создать это в Вашем аккаунте на Pocket."
+        android_instruction: Нажмите здесь, чтобы предустановить ваше приложение для Android
+    form_rss:
+        description: 'RSS фид созданный с помощью wallabag позволяет читать Ваши записи через Ваш любимый RSS агрегатор. Для начала Вам потребуется создать ключ.'
+        token_label: 'RSS ключ'
+        no_token: 'Ключ не задан'
+        token_create: 'Создать ключ'
+        token_reset: 'Пересоздать ключ'
+        rss_links: 'ссылка на RSS'
+        rss_link:
+            unread: 'непрочитанные'
+            starred: 'помеченные'
+            archive: 'архивные'
+            all: Все
+        rss_limit: 'Количество записей в фиде'
+    form_user:
+        two_factor_description: "Включить двухфакторную аутентификацию, Вы получите сообщение на указанный email с кодом, при каждом новом непроверенном подключении."
+        name_label: 'Имя'
+        email_label: 'Email'
+        twoFactorAuthentication_label: 'Двухфакторная аутентификация'
+        help_twoFactorAuthentication: "Если Вы включите двухфакторную аутентификацию, то Вы будете получать код на указанный ранее email, каждый раз при входе в wallabag."
+        delete:
+            title: "Удалить мой аккаунт (или опасная зона)"
+            description: "Если Вы удалите ваш аккаунт, ВСЕ ваши записи, теги и другие данные, будут БЕЗВОЗВРАТНО удалены (операция не может быть отменена после). Затем Вы выйдете из системы."
+            confirm: "Вы точно уверены? (Данные будут БЕЗВОЗВРАТНО удалены, эти действия необратимы)"
+            button: "Удалить мой аккаунт"
+        two_factor:
+            action_app: Использовать OTP-приложение
+            action_email: Использовать е-мейл
+            state_disabled: Выключено
+            state_enabled: Включено
+            table_action: Действие
+            table_state: Состояние
+            table_method: Метод
+            googleTwoFactor_label: Используя OTP-приложение (откройте приложение, например, Google Authenticator, Authy или FreeOTP, чтобы получить одноразовый код)
+            emailTwoFactor_label: Используя электронную почту (получить код по электронной почте)
+        login_label: Логин (не может быть изменён)
+    reset:
+        title: "Сброс данных (или опасная зона)"
+        description: "По нажатию на кнопки ниже, Вы сможете удалить часть данных из Вашего аккаунта. Будьте осторожны, эти действия необратимы."
+        annotations: "Удалить все аннотации"
+        tags: "Удалить все теги"
+        entries: "Удалить все записи"
+        confirm: "Вы уверены? (Данные будут БЕЗВОЗВРАТНО удалены, эти действия необратимы)"
+        archived: Удалить ВСЕ архивные записи
+    form_password:
+        description: "Здесь Вы можете поменять своя пароль. Ваш пароль должен быть длиннее 8 символов."
+        old_password_label: 'Текущий пароль'
+        new_password_label: 'Новый пароль'
+        repeat_new_password_label: 'Повторите новый пароль'
+    form_rules:
+        if_label: 'Если'
+        then_tag_as_label: 'тогда тег'
+        delete_rule_label: 'удалить'
+        edit_rule_label: 'изменить'
+        rule_label: 'Правило'
+        tags_label: 'Теги'
+        faq:
+            title: 'FAQ'
+            tagging_rules_definition_title: 'Что значит "правила тегирования"?'
+            tagging_rules_definition_description: 'Правила, по которым wallabag автоматически добавит теги для новых записей.<br />Каждый раз, при добавлении новых записей, будут проставляться теги к записям, согласно настроенным правилам тегирования, это избавит Вас от необходимости проставлять теги для каждой записи вручную.'
+            how_to_use_them_title: 'Как мне их использовать?'
+            how_to_use_them_description: 'Предположим, вы хотите пометить новые записи как "<i>короткая</i>", когда на чтение уйдет меньше 3 минут.<br />В этом случае, установите " readingTime &lt;= 3 " в поле <i>Правила</i> и "<i>короткая</i>" в поле <i>Теги</i>.<br />Несколько тегов могут добавляться одновременно, разделяя их запятой: "<i>короткая, прочитать обязательно</i>" <br />Сложные правила могут быть записаны с использованием предопределенных операторов: если "<i>readingTime &gt;= 5 AND domainName = \"www.php.net\"</i> " тогда тег будет "<i>долго читать, php</i>"'
+            variables_available_title: 'Какие переменные и операторы я могу использовать для написания правил?'
+            variables_available_description: 'Следующие переменные и операторы могут использоваться для создания правил тегов:'
+            meaning: 'Смысл'
+            variable_description:
+                label: 'Переменные'
+                title: 'Название записи'
+                url: 'Ссылка на запись'
+                isArchived: 'Независимо от того, архивная запись или нет'
+                isStarred: 'Независимо от того, помечена запись или нет'
+                content: "Содержимое записи"
+                language: "Язык записи"
+                mimetype: "Тип медиа записи"
+                readingTime: "Оценочное время чтения записи в минутах"
+                domainName: 'Домен, с которого была скачана запись'
+            operator_description:
+                label: 'Оператор'
+                less_than: 'Меньше чем…'
+                strictly_less_than: 'Строго меньше чем…'
+                greater_than: 'Больше чем…'
+                strictly_greater_than: 'Строго больше чем…'
+                equal_to: 'Равно…'
+                not_equal_to: 'Не равно…'
+                or: 'Одно правило ИЛИ другое'
+                and: 'Одно правило И другое'
+                matches: 'Тесты, в которых <i> тема </i> соответствует <i> поиску </i> (без учета регистра). <br />Пример: <code> title matches "футбол" </code>'
+                notmatches: 'Тесты, в которых <i> объект </i> не соответствует <i> поиску </i> (без учета регистра). <br/>Пример: <code> название совпадает "футбол" </code>'
+        export: Экспортировать
+        card:
+            export_tagging_rules: Экспорт правил тегирования
+            export_tagging_rules_detail: Это загрузит JSON-файл, который вы можете использовать для импорта правил тегирования в другом месте или для их резервного копирования.
+            import_tagging_rules_detail: Вы должны выбрать JSON-файл, который вы ранее экспортировали.
+            import_tagging_rules: Импортировать правила тегирования
+            new_tagging_rule: Создать правило тегирования
+        import_submit: Импортировать
+        file_label: JSON-файл
+    otp:
+        app:
+            cancel: Отменить
+            enable: Включить
+            two_factor_code_description_4: 'Проверьте OTP-код из настроенного приложения:'
+            two_factor_code_description_3: 'Также, сохраните эти резервные коды в безопасном месте, вы можете использовать их в случае потери доступа к вашему OTP-приложению:'
+            two_factor_code_description_2: 'Вы можете отсканировать этот QR-код своим приложением:'
+            two_factor_code_description_1: Вы только что включили двухфакторную аутентификацию OTP, откройте OTP-приложение и используйте этот код, чтобы получить одноразовый пароль. Он исчезнет после перезагрузки страницы.
+            qrcode_label: QR-код
+            two_factor_code_description_5: 'Если вы не видите QR-код или не можете его отсканировать, введите следующий секрет в приложении:'
+        page_title: Двухфакторная аутентификация
+    form_ignore_origin_rules:
+        faq:
+            operator_description:
+                matches: 'Проверяет, что <i>объект</i> соответствует <i>поиску</i> (без учёта регистра).<br />Пример: <code>_all ~ "https?://rss.example.com/foobar/.*"</code>'
+                equal_to: Равно…
+                label: Оператор
+            variable_description:
+                _all: Полный адрес, в основном для сопоставления с шаблоном
+                host: Хост адреса
+                label: Переменная
+            meaning: Значение
+            variables_available_description: 'Следующие переменные и операторы могут быть использованы для создания правил игнорирования источника:'
+            variables_available_title: Какие переменные и операторы я могу использовать для написания правил?
+            how_to_use_them_description: Допустим, вы хотите игнорировать источник записи, поступающей с «<i>rss.example.com</i>» (<i>зная, что после перенаправления фактическим адресом является example.com</i>).<br />В этом случае вам следует указать «host = "rss.example.com"» в поле <i>Правило</i>.
+            how_to_use_them_title: Как их использовать?
+            ignore_origin_rules_definition_description: Они используются wallabag для автоматического игнорирования исходного адреса после перенаправления.<br />Если перенаправление происходит во время получения новой записи, все правила игнорирования источника (<i>определённые пользователем и глобальные</i>) будут использоваться для игнорирования исходного адреса.
+            ignore_origin_rules_definition_title: Что означает «правила игнорирования источника»?
+            title: Часто задаваемые вопросы
+    form_feed:
+        feed_limit: Количество элементов в ленте
+        feed_link:
+            all: Все
+            archive: Архивные
+            starred: Помеченные
+            unread: Непрочитанные
+        feed_links: Ссылки на ленты
+        token_revoke: Аннулировать токен
+        token_reset: Пересоздать токен
+        token_create: Создать токен
+        no_token: Нет токена
+        token_label: Токен ленты
+        description: Новостные ленты Atom, предоставляемые wallabag, позволяют читать сохранённые статьи при помощи предпочитаемой вами Atom-читалки. Сначала вам нужно сгенерировать токен.
+entry:
+    default_title: 'Название записи'
+    page_titles:
+        unread: 'Непрочитанные записи'
+        starred: 'Помеченные записи'
+        archived: 'Архивные записи'
+        filtered: 'Отфильтрованные записи'
+        filtered_tags: 'Отфильтрованные по тегу:'
+        filtered_search: 'Отфильтрованные по поиску:'
+        untagged: 'Записи без тегов'
+        all: Все записи
+        same_domain: Тот же домен
+        with_annotations: Записи с аннотациями
+    list:
+        number_on_the_page: '{0} Записей не обнаружено.|{1} Одна запись.|]1,Inf[ Найдено %count% записей.'
+        reading_time: 'расчетное время чтения'
+        reading_time_minutes: 'расчетное время чтения: %readingTime% мин'
+        reading_time_less_one_minute: 'расчетное время чтения: &lt; 1 мин'
+        number_of_tags: '{1}и один другой тег|]1,Inf[и %count% другие теги'
+        reading_time_minutes_short: '%readingTime% мин'
+        reading_time_less_one_minute_short: '&lt; 1 мин'
+        original_article: 'оригинал'
+        toogle_as_read: 'Пометить, как прочитанное'
+        toogle_as_star: 'Пометить звездочкой'
+        delete: 'Удалить'
+        export_title: 'Экспорт'
+        show_same_domain: Показать статьи с тем же доменом
+        assign_search_tag: Назначьте этот поиск тегом для каждого результата
+    filters:
+        title: 'Фильтры'
+        status_label: 'Статус'
+        archived_label: 'Архивная'
+        starred_label: 'Помеченная звездочкой'
+        unread_label: 'Непрочитанная'
+        preview_picture_label: 'Есть картинка предварительного просмотра'
+        preview_picture_help: 'Картинка предварительного просмотра'
+        language_label: 'Язык'
+        http_status_label: 'статус HTTP'
+        reading_time:
+            label: 'Время чтения в минутах'
+            from: 'с'
+            to: 'по'
+        domain_label: 'Доменное имя'
+        created_at:
+            label: 'Дата создания'
+            from: 'с'
+            to: 'по'
+        action:
+            clear: 'Очистить'
+            filter: 'Выбрать'
+        is_public_help: Публичная ссылка
+        is_public_label: Имеет публичную ссылку
+        annotated_label: Аннотированный
+    view:
+        left_menu:
+            back_to_top: 'Наверх'
+            back_to_homepage: 'Назад'
+            set_as_read: 'Пометить, как прочитанное'
+            set_as_unread: 'Пометить, как не прочитанное'
+            set_as_starred: 'Пометить звездочкой'
+            view_original_article: 'Оригинальная статья'
+            re_fetch_content: 'Перезагрузить содержимое'
+            delete: 'Удалить'
+            add_a_tag: 'Добавить тег'
+            share_content: 'Поделиться'
+            share_email_label: 'Email'
+            public_link: 'публичная ссылка'
+            delete_public_link: 'удалить публичную ссылку'
+            export: 'Экспорт'
+            print: 'Печатать'
+            problem:
+                label: 'Проблемы?'
+                description: 'Что-то не так с записью?'
+            theme_toggle_auto: Авто
+            theme_toggle_dark: Темная
+            theme_toggle_light: Светлая
+            theme_toggle: Выбор темы
+        edit_title: 'Изменить название'
+        original_article: 'оригинал'
+        annotations_on_the_entry: '{0} Нет аннотации|{1} Одна аннотация|]1,Inf[ %count% аннотаций'
+        created_at: 'Дата создания'
+        provided_by: Предоставлено
+        published_by: Опубликовано
+        published_at: Дата публикации
+    new:
+        page_title: 'Сохранить новую запись'
+        placeholder: 'http://website.com'
+        form_new:
+            url_label: URL-адрес
+    search:
+        placeholder: 'Что Вы ищете?'
+    edit:
+        page_title: 'Изменить запись'
+        title_label: 'Название'
+        url_label: 'URL-адрес'
+        is_public_label: 'Публичная'
+        save_label: 'Сохранить'
+        origin_url_label: Исходный URL (откуда вы нашли эту запись)
+    public:
+        shared_by_wallabag: "Запись была опубликована <a href='%wallabag_instance%'>wallabag</a>"
+    metadata:
+        added_on: Добавлено
+        address: Адрес
+        reading_time_minutes_short: '%readingTime% мин'
+        reading_time: Приблизительное время чтения
+        published_on: Опубликовано
+    confirm:
+        delete_tag: Вы уверены, что хотите удалить этот тег из статьи?
+        delete: Вы уверены, что хотите удалить эту статью?
+        delete_entries: Вы уверены, что хотите удалить эти статьи?
+about:
+    page_title: 'О'
+    top_menu:
+        who_behind_wallabag: 'Кто стоит за wallabag'
+        getting_help: 'Помощь'
+        helping: 'Помочь wallabag'
+        contributors: 'Авторы'
+        third_party: 'Сторонние библиотеки'
+    who_behind_wallabag:
+        developped_by: 'Разработано'
+        website: 'веб-сайт'
+        many_contributors: 'и другие разработчики ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">на Github</a>'
+        project_website: 'Веб-сайт проекта'
+        license: 'Лицензия'
+        version: 'Версия'
+    getting_help:
+        documentation: 'Документация'
+        bug_reports: 'Отчеты об ошибках'
+        support: '<a href="https://github.com/wallabag/wallabag/issues">на GitHub</a>'
+    helping:
+        description: 'wallabag является бесплатным и открытым исходным кодом. Вы можете помочь нам:'
+        by_paypal: 'с помощью Liberapay'
+    contributors:
+        description: 'Спасибо вам за вклад в веб-приложение wallabag'
+    third_party:
+        description: 'Ниже приведен список сторонних библиотек, используемых в wallabag (с их лицензиями):'
+        package: 'Пакет'
+        license: 'Лицензия'
+howto:
+    page_title: 'Как'
+    tab_menu:
+        add_link: "Добавить ссылку"
+        shortcuts: "Использовать горячии клавиши"
+    page_description: 'Несколько способов сохранить запись:'
+    top_menu:
+        browser_addons: 'Посмотреть дополнения'
+        mobile_apps: 'Мобильные приложения'
+        bookmarklet: 'Закладка'
+    form:
+        description: 'Спасибо за эту форму'
+    browser_addons:
+        firefox: 'Аддоны для Firefox'
+        chrome: 'Аддоны для Chrome'
+        opera: 'Аддоны для Opera'
+    mobile_apps:
+        android:
+            via_f_droid: 'в F-Droid'
+            via_google_play: 'в Google Play'
+        ios: 'в iTunes Store'
+        windows: 'в Microsoft Store'
+    bookmarklet:
+        description: 'Перетащите эту ссылку в ваши закладки:'
+    shortcuts:
+        page_description: "Здесь доступны горячие клавиши wallabag."
+        shortcut: "Горячие клавиши"
+        action: "Действия"
+        all_pages_title: "Горячие клавиши на всех страницах"
+        go_unread: "Перейти в непрочитанные"
+        go_starred: "Перейти в помеченные звездочкой"
+        go_archive: "Перейти в архивные"
+        go_all: "Перейти ко всем записям"
+        go_tags: "Перейти в теги"
+        go_config: "Перейти в настройки"
+        go_import: "Перейти в импорт"
+        go_developers: "Перейти к разработчикам"
+        go_howto: "Перейти в howto (эта страница!)"
+        go_logout: "Выйти"
+        list_title: "Горячие клавиши, доступные на страницу списков"
+        search: "Отобразить форму поиска"
+        article_title: "Горячие клавиши доступные во время просмотра записи"
+        open_original: "Открыть ссылку на оригинал"
+        toggle_favorite: "Переключить пометку звездочкой для записи"
+        toggle_archive: "Переключить пометку о прочтении для записи"
+        delete: "Удалить запись"
+        add_link: "Добавить новую запись"
+        hide_form: "Скрыть текущую форму (поисковую или новой ссылки)"
+        arrows_navigation: "Навигация по статьям"
+        open_article: "Отобразить выбранную запись"
+quickstart:
+    page_title: 'Быстрый старт'
+    more: 'Еще…'
+    intro:
+        title: 'Приветствую в wallabag!'
+        paragraph_1: "Мы будем сопровождать вас при посещении wallabag и покажем вам некоторые функции, которые могут вас заинтересовать."
+        paragraph_2: 'Следите за нами!'
+    configure:
+        title: 'Настроить приложение'
+        description: 'Чтобы иметь приложение, которое вам подходит, ознакомьтесь с конфигурацией wallabag.'
+        language: 'Выбрать язык и дизайн'
+        rss: 'Включить RSS фид'
+        tagging_rules: 'Создать правило для автоматической установки тегов'
+        feed: Включить ленты
+    admin:
+        title: 'Администрирование'
+        description: 'Как администратор, у Вас есть привилегии на wallabag. Вы можете:'
+        new_user: 'Создать нового пользователя'
+        analytics: 'Настроить аналитику'
+        sharing: 'Включить сервисы для публикации записей'
+        export: 'Настроить экспорт'
+        import: 'Настроить импорт'
+    first_steps:
+        title: 'Первый шаг'
+        description: "Теперь wallabag хорошо настроен, пришло время архивировать Интернет. Вы можете нажать на верхний правый знак +, чтобы добавить ссылку."
+        new_article: 'Сохраните свою первую запись'
+        unread_articles: 'И добавьте к ней тег!'
+    migrate:
+        title: 'Перейти с существующего сервиса'
+        description: "Вы используете другой сервис? Мы поможем перенести данные на wallabag."
+        pocket: 'Перейти с Pocket'
+        wallabag_v1: 'Перейти с wallabag 1 версии'
+        wallabag_v2: 'Перейти с wallabag 2 версии'
+        readability: 'Перейти с Readability'
+        instapaper: 'Перейти с Instapaper'
+    developer:
+        title: 'Для разработчиков'
+        description: 'Мы также подумали о разработчиках: Docker, API, переводы, и т.д.'
+        create_application: 'Создать ваше стороннее приложение'
+        use_docker: 'Использовать Docker для установки wallabag'
+    docs:
+        title: 'Полная документация'
+        description: "У Wallabag так много функций. Не стесняйтесь читать руководство, чтобы узнать их и научиться их использовать."
+        annotate: 'Комментирование своей статьи'
+        export: 'Конвертировать ваши статьи в ePUB или PDF'
+        search_filters: 'Посмотрите, как Вы можете искать записи с помощью поисковой системы и фильтров'
+        fetching_errors: 'Что я могу сделать, если во время извлечения записей произошла ошибка?'
+        all_docs: 'И много других записей!'
+    support:
+        title: 'Поддержка'
+        description: 'Если Вам нужна помощь, мы здесь чтобы помочь Вам.'
+        github: 'На GitHub'
+        email: 'По email'
+        gitter: 'На Gitter'
+tag:
+    page_title: 'Теги'
+    list:
+        number_on_the_page: '{0} Теги не найдены.|{1} Найден один тег.|]1,Inf[ Найдено %count% тегов.'
+        see_untagged_entries: 'Просмотреть записи без тегов'
+        untagged: Записи без тегов
+        no_untagged_entries: Нет записей без тегов.
+    new:
+        add: 'Добавить'
+        placeholder: 'Вы можете добавить несколько тегов, разделенных запятой.'
+    confirm:
+        delete: Удалить %name% тег
+import:
+    page_title: 'Импорт'
+    page_description: 'Добро пожаловать в импортер wallabag. Выберите сервис, из которого вы хотите перенести данные.'
+    action:
+        import_contents: 'Импортировать данные'
+    form:
+        mark_as_read_title: 'Отметить все, как прочитанное?'
+        mark_as_read_label: 'Пометить все импортированные записи, как прочитанные'
+        file_label: 'Файл'
+        save_label: 'Загрузить файл'
+    pocket:
+        page_title: 'Импорт в Pocket'
+        description: "Функция импрота добавит все ваши данные в формате Pocket. Pocket не позволяет нам извлекать контент из своего сервиса, поэтому содержимое записей будет повторно перезакачана."
+        config_missing:
+            description: "Импорт из Pocket не настроен."
+            admin_message: 'Вам нужно добавить %keyurls% pocket_consumer_key%keyurle%.'
+            user_message: 'Администратор сервера должен добавить ключ для API Pocket.'
+        authorize_message: 'Вы можете импортировать свои данные из своего аккаунта на Pocket. Вам просто нужно нажать на кнопку ниже и разрешить приложению подключение к getpocket.com.'
+        connect_to_pocket: 'Подключиться к Pocket и импортировать данные'
+    wallabag_v1:
+        page_title: 'Импорт > Wallabag v1'
+        description: 'Функция импорта добавит все ваши записи из wallabag v1. На странице конфигурации нажмите "Экспорт JSON" в разделе "Экспорт данных wallabag". У вас появится файл "wallabag-export-1-xxxx-xx-xx.json".'
+        how_to: 'Выберите свой файл с настройками экспорта wallabag и нажмите кнопку ниже, чтобы загрузить файл и начать импорт.'
+    wallabag_v2:
+        page_title: 'Импорт > Wallabag v2'
+        description: 'Функция импорта добавит все ваши записи wallabag v2. Перейдите ко всем статьям, затем на боковой панели экспорта нажмите "JSON". У вас появится файл со всеми записями "All articles.json".'
+    readability:
+        page_title: 'Импорт > Readability'
+        description: 'Функция импорта добавит все ваши записи для чтения. На странице инструментов (https://www.readability.com/tools/) нажмите "Экспорт ваших данных" в разделе "Экспорт данных". Вы получите электронное письмо для загрузки json (что не заканчивается только .json файлом).'
+        how_to: 'Выберите экспорт Readability и нажмите кнопку ниже, чтобы загрузить файл и начать импорт.'
+    worker:
+        enabled: "Импорт производится асинхронно. После запуска задачи импорта внешний процесс будет обрабатывать задания по одному за раз. Текущая процедура:"
+        download_images_warning: "Вы включили загрузку изображений для своих записей. В сочетании с обычным импортом может потребоваться много времени, что может привести к ошибке. Мы <strong>настоятельно рекомендуем</strong> включить асинхронный импорт, чтобы избежать ошибок."
+    firefox:
+        page_title: 'Импорт > Firefox'
+        description: "Этот импортер импортирует все ваши закладки из Firefox. Просто зайдите в закладки (Ctrl+Shift+O), затем в \"Импорт и резервное копирование\", выберите \"Резервное копирование…\". Вы получите JSON-файл."
+        how_to: "Выберите файл резервной копии закладок и нажмите кнопку ниже, чтобы импортировать его. Обратите внимание, что процесс может занять много времени, поскольку все статьи должны быть загружены."
+    chrome:
+        page_title: 'Импорт > Chrome'
+        description: "Функция импорта добавит все ваши закладки из Chrome. Расположение фйла зависит от операционной системы: <ul><li>На Linux, перейдите в папку <code>~/.config/chromium/Default/</code></li><li>На Windows, должно находиться в <code>%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default</code></li><li>На OS X, должно находиться в <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>После того, как перейдете в папку, скопируйте файл <code>Bookmarks</code>. <em><br>Примечание, если у вас есть Chromium вместо Chrome, вам потребуется скорректировать пути соответственно.</em></p>"
+        how_to: "Выберите файл резервной копии закладок и нажмите кнопку ниже, чтобы импортировать его. Обратите внимание, что процесс может занять много времени, поскольку все статьи должны быть загружены."
+    instapaper:
+        page_title: 'Импорт > Instapaper'
+        description: 'Функция импорта добавит все ваши закладки из Instapaper. На странице настроек (https://www.instapaper.com/user), нажмите на "Скачать .CSV файл" в разделе "Экспорт". CSV файл будет загружен (наподобии "instapaper-export.csv").'
+        how_to: 'Выберите файл Instapaper и нажмите кнопку ниже, чтобы импортировать его.'
+    pinboard:
+        page_title: "Импорт > Pinboard"
+        description: 'Функция импорта добавит все ваши закладки из Pinboard. На странице резервирования (https://pinboard.in/settings/backup), нажмите на "JSON" в разделе "Закладки". JSON файл будет загружен (наподобии "pinboard_export").'
+        how_to: 'Выберите файл Pinboard и нажмите кнопку ниже, чтобы импортировать его.'
+    elcurator:
+        description: Этот импортер импортирует все ваши статьи из elCurator. Зайдите в настройки в учётной записи elCurator и экспортируйте свой контент. У вас будет JSON-файл.
+        page_title: Импорт > elCurator
+    delicious:
+        how_to: Пожалуйста, выберите свой экспорт Delicious и нажмите кнопку ниже, чтобы загрузить и импортировать его.
+developer:
+    page_title: 'Управление клиентским API'
+    welcome_message: 'Добро пожаловать в API wallabag'
+    documentation: 'Документация'
+    how_to_first_app: 'Как создать мое первое приложение'
+    full_documentation: 'Посмотреть полную документацию по API'
+    list_methods: 'Список методов API'
+    clients:
+        title: 'Клиенты'
+        create_new: 'Создать нового клиента'
+    existing_clients:
+        title: 'Текущие клиенты'
+        field_id: 'ID клиента'
+        field_secret: 'secret-код клиента'
+        field_uris: 'Ссылки перенаправлений'
+        field_grant_types: 'Разрешенные типы доступа'
+        no_client: 'Нет клиентов.'
+    remove:
+        warn_message_1: 'Вы имеете возможность удалить клиента %name%. Данные клиента будут удалены БЕЗВОЗВРАТНО!'
+        warn_message_2: "Если вы удалите его, каждое приложение настроенное через этого клиента не сможет авторизоваться в вашем wallabag."
+        action: 'Удалить клиента %name%'
+    client:
+        page_title: 'Управление клиентским API > Новый клиент'
+        page_description: 'Вы находитесь в разделе создания нового клиента. Пожалуйста заполните поля ниже для перенаправления к вашему приложению.'
+        form:
+            name_label: 'Название клиента'
+            redirect_uris_label: 'Ссылка перенаправления (опционально)'
+            save_label: 'Создать нового клиента'
+        action_back: 'Назад'
+        copy_to_clipboard: Копировать
+    client_parameter:
+        page_title: 'Управление клиентским API > Параметры клиента'
+        page_description: 'Здесь ваши параметры клиента.'
+        field_name: 'Название клиента'
+        field_id: 'ID клиента'
+        field_secret: 'Secret-код клиента'
+        back: 'Назад'
+        read_howto: 'Прочитать "как создать мое первое приложение"'
+    howto:
+        page_title: 'Управление клиентским API > Как создать мое первое приложение'
+        description:
+            paragraph_1: 'Следующие комманды используют библиотеку <a href="https://github.com/jkbrzt/httpie">HTTPie</a>. Убедитесь, что она у вас установлена, прежде чем использовать ее.'
+            paragraph_2: 'Вам нужен ключ для того, чтобы ваше стороннее приложение и wallabag API могли обмениваться данными.'
+            paragraph_3: 'Для создания ключа, вам необходимо <a href="%link%">создать нового клиента</a>.'
+            paragraph_4: 'Теперь создать ключ (замените client_id, client_secret, username and password на ваши значения):'
+            paragraph_5: 'API вернет рабочую ссылку, наподобии:'
+            paragraph_6: 'Ключ доступа access_token используется для вызова конечной точки API. Пример:'
+            paragraph_7: 'Этот вызов вернет все записи для вашего пользователя.'
+            paragraph_8: 'Если Вы хотите увидеть все конечные точки API, то смотрите <a href="%link%">в нашу документацию по API</a>.'
+        back: 'Назад'
+user:
+    page_title: "Управление пользователями"
+    new_user: "Создать нового пользователя"
+    edit_user: "Изменить существующего пользователя"
+    description: "Здесь Вы можете управлять всеми пользователями (создание, изменение и удаление)"
+    list:
+        actions: "Действия"
+        edit_action: "Изменить"
+        yes: "Да"
+        no: "Нет"
+        create_new_one: "Создать нового пользователя"
+    form:
+        username_label: 'Логин'
+        name_label: 'Имя'
+        password_label: 'Пароль'
+        repeat_new_password_label: 'Повторите новый пароль'
+        plain_password_label: '????'
+        email_label: 'Email'
+        enabled_label: 'Включить'
+        last_login_label: 'Последний вход'
+        twofactor_label: "Двухфакторная аутентификация"
+        save: "Сохранить"
+        delete: "Удалить"
+        delete_confirm: "Вы уверены?"
+        back_to_list: "Назад к списку"
+        twofactor_google_label: Двухфакторная аутентификация с помощью OTP-приложения
+        twofactor_email_label: Двухфакторная аутентификация по электронной почте
+    search:
+        placeholder: Фильтр по имени пользователя или электронной почте
+error:
+    page_title: "Произошла ошибка"
+flashes:
+    config:
+        notice:
+            config_saved: 'Настройки сохранены.'
+            password_updated: 'Пароль обновлен'
+            password_not_updated_demo: "В режиме демонстрации нельзя изменять пароль для этого пользователя."
+            user_updated: 'Информация обновлена'
+            rss_updated: 'RSS информация обновлена'
+            tagging_rules_updated: 'Правила тегировния обновлены'
+            tagging_rules_deleted: 'Правила тегировния удалены'
+            rss_token_updated: 'RSS ключ обновлен'
+            annotations_reset: "Аннотации сброшены"
+            tags_reset: "Теги сброшены"
+            entries_reset: "Записи сброшены"
+            archived_reset: Архивные записи удалены
+            ignore_origin_rules_updated: Правило игнорирования источника обновлено
+            ignore_origin_rules_deleted: Правило игнорирования источника удалено
+            tagging_rules_not_imported: Ошибка при импорте правил тегирования
+            tagging_rules_imported: Правила тегирования импортированы
+            otp_disabled: Двухфакторная аутентификация отключена
+            otp_enabled: Двухфакторная аутентификация включена
+            feed_token_revoked: Токен ленты аннулирован
+            feed_token_updated: Токен ленты обновлён
+            feed_updated: Информация о ленте обновлена
+    entry:
+        notice:
+            entry_already_saved: 'Запись была сохранена ранее %date%'
+            entry_saved: 'Запись сохранена'
+            entry_saved_failed: 'Запись сохранена, но содержимое не удалось получить'
+            entry_updated: 'Запись обновлена'
+            entry_reloaded: 'Запись перезагружена'
+            entry_reloaded_failed: 'Запись перезагружена, но содержимое не удалось получить'
+            entry_archived: 'Запись перемещена в архив'
+            entry_unarchived: 'Запись перемещена из архива'
+            entry_starred: 'Запись помечена звездочкой'
+            entry_unstarred: 'Пометка звездочкой у записи убрана'
+            entry_deleted: 'Запись удалена'
+            no_random_entry: Статьи с этими критериями не найдены
+    tag:
+        notice:
+            tag_added: 'Тег добавлен'
+            tag_renamed: Тег переименован
+    import:
+        notice:
+            failed: 'Во время импорта произошла ошибка, повторите попытку.'
+            failed_on_file: 'Ошибка при обработке данных для импорта. Пожалуйста проверьте свой файл импорта.'
+            summary: 'Статистика импорта: %imported% импортировано, %skipped% уже сохранено.'
+            summary_with_queue: 'Статистика импорта: %queued% в очереди.'
+        error:
+            redis_enabled_not_installed: "Redis включен, для приема асинхронного импорта, но похоже, что <u>мы не можем к нему подключиться</u>. Пожалуйста проверьте настройки Redis."
+            rabbit_enabled_not_installed: "RabbitMQ включен, для приема асинхронного импорта, но похоже, что <u>мы не можем к нему подключиться</u>. Пожалуйста проверьте настройки RabbitMQ."
+    developer:
+        notice:
+            client_created: 'Новый клиент %name% добавлен.'
+            client_deleted: 'Клиент %name% удален'
+    user:
+        notice:
+            added: 'Пользователь "%username%" добавлен'
+            updated: 'Пользователь "%username%" обновлен'
+            deleted: 'Пользователь "%username%" удален'
+    site_credential:
+        notice:
+            deleted: Реквизиты для "%host%" удалены
+            updated: Реквизиты для "%host%" обновлены
+            added: Добавлены реквизиты для "%host%"
+    ignore_origin_instance_rule:
+        notice:
+            deleted: Глобальное правило игнорирования источника удалено
+            updated: Глобальное правило игнорирования источника обновлено
+            added: Глобальное правило игнорирования источника добавлено
+site_credential:
+    form:
+        back_to_list: Назад к списку
+        delete_confirm: Вы уверены?
+        delete: Удалить
+        save: Сохранить
+        password_label: Пароль
+        host_label: Хост (subdomain.example.org, .example.org и т.п.)
+        username_label: Логин
+    list:
+        create_new_one: Создать реквизиты
+        no: Нет
+        yes: Да
+        edit_action: Изменить
+        actions: Действия
+    description: Здесь вы можете управлять всеми реквизитами для сайтов, которым они требуются (создавать, редактировать и удалять), например, платный доступ, аутентификация и т.д.
+    edit_site_credential: Редактировать существующие реквизиты
+    new_site_credential: Создать реквизиты
+    page_title: Управление реквизитами сайта
+export:
+    unknown: Неизвестный
+    footer_template: <div style="text-align:center;"><p>Создано wallabag с помощью %method%</p><p> Пожалуйста, откройте <a href="https://github.com/wallabag/wallabag/issues">проблемы</a>, если у вас возникли проблемы с отображением этой электронной книги на вашем устройстве.</p></div>
+ignore_origin_instance_rule:
+    form:
+        back_to_list: Вернуться к списку
+        delete_confirm: Вы уверены?
+        delete: Удалить
+        save: Сохранить
+        rule_label: Правило
+    list:
+        create_new_one: Создать новое глобальное правило игнорирования источника
+        no: Нет
+        yes: Да
+        edit_action: Редактировать
+        actions: Действия
+    description: Здесь вы можете управлять глобальными правилами игнорирования источника, используемыми для игнорирования некоторых шаблонов исходного URL.
+    edit_ignore_origin_instance_rule: Редактировать существующее правило игнорирования источника
+    new_ignore_origin_instance_rule: Создать глобальное правило игнорирования источника
+    page_title: Глобальные правила игнорирования источника

@@ -10,7 +10,7 @@ use Wallabag\CoreBundle\Doctrine\WallabagMigration;
  */
 class Version20180405182455 extends WallabagMigration
 {
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
 
@@ -21,7 +21,7 @@ class Version20180405182455 extends WallabagMigration
         ]);
     }
 
-    public function postUp(Schema $schema)
+    public function postUp(Schema $schema): void
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
         $this->skipIf(!$entryTable->hasColumn('archived_at'), 'Unable to add archived_at colum');
@@ -34,7 +34,7 @@ class Version20180405182455 extends WallabagMigration
         );
     }
 
-    public function down(Schema $schema)
+    public function down(Schema $schema): void
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
 

@@ -9,7 +9,7 @@
             <div class="card-panel settings">
 
                 <div class="row">
-                    <div class="div_tabs col s12">
+                    <div class="tabs-container col s12">
                         <ul class="tabs">
                             <li class="tab col s12 m6 l3"><a class="active" href="#set1">{{ 'config.tab_menu.settings'|trans }}</a></li>
                             <li class="tab col s12 m6 l3"><a href="#set2">{{ 'config.tab_menu.feed'|trans }}</a></li>
@@ -38,6 +38,19 @@
                                 </div>
                             </div>
 
+                        <div class="row">
+                            <div class="input-field col s11 settings-checkbox-col">
+                                {{ form_errors(form.config.display_thumbnails) }}
+                                {{ form_widget(form.config.display_thumbnails) }}
+                                {{ form_label(form.config.display_thumbnails, null, {'label_attr': {'class': 'settings-checkbox-label'}}) }}
+                            </div>
+                            <div class="input-field col s1">
+                                <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_display_thumbnails'|trans }}">
+                                    <i class="material-icons">live_help</i>
+                                </a>
+                            </div>
+                        </div>
+
                             <div class="row">
                                 <div class="input-field col s11">
                                     {{ form_errors(form.config.reading_speed) }}
@@ -45,7 +58,7 @@
                                     {{ form_label(form.config.reading_speed) }}
                                     <p>
                                         {{ 'config.form_settings.reading_speed.help_message'|trans }}
-                                        <a href="https://wallabag.github.io/myreadspeed/">myreadspeed</a>
+                                        <a target="_blank" href="https://wallabag.github.io/myreadspeed/">myreadspeed</a>
                                     </p>
                                 </div>
                                 <div class="input-field col s1">
@@ -56,7 +69,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="input-field col s12">
+                                <div class="input-field col s11">
                                     {{ form_errors(form.config.action_mark_as_read) }}
                                     {{ form_widget(form.config.action_mark_as_read) }}
                                     {{ form_label(form.config.action_mark_as_read) }}
@@ -83,7 +96,7 @@
                                     {{ form_label(form.config.pocket_consumer_key) }}
                                     <p>
                                         &raquo;
-                                        <a href="https://getpocket.com/developer/docs/authentication">https://getpocket.com/developer/docs/authentication</a>
+                                        <a target="_blank" href="https://getpocket.com/developer/docs/authentication">https://getpocket.com/developer/docs/authentication</a>
                                     </p>
                                 </div>
                                 <div class="input-field col s1">
@@ -196,38 +209,36 @@
 
                             {{ form_widget(form.user.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
 
-                            {% if twofactor_auth %}
-                                <br/>
-                                <br/>
-                                <div class="row">
-                                    <h5>{{ 'config.otp.page_title'|trans }}</h5>
+                            <br/>
+                            <br/>
+                            <div class="row">
+                                <h5>{{ 'config.otp.page_title'|trans }}</h5>
 
-                                    <p>{{ 'config.form_user.two_factor_description'|trans }}</p>
+                                <p>{{ 'config.form_user.two_factor_description'|trans }}</p>
 
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>{{ 'config.form_user.two_factor.table_method'|trans }}</th>
-                                                <th>{{ 'config.form_user.two_factor.table_state'|trans }}</th>
-                                                <th>{{ 'config.form_user.two_factor.table_action'|trans }}</th>
-                                            </tr>
-                                        </thead>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>{{ 'config.form_user.two_factor.table_method'|trans }}</th>
+                                            <th>{{ 'config.form_user.two_factor.table_state'|trans }}</th>
+                                            <th>{{ 'config.form_user.two_factor.table_action'|trans }}</th>
+                                        </tr>
+                                    </thead>
 
-                                        <tbody>
-                                            <tr>
-                                                <td>{{ 'config.form_user.two_factor.emailTwoFactor_label'|trans }}</td>
-                                                <td>{% if app.user.isEmailTwoFactor %}<b>{{ 'config.form_user.two_factor.state_enabled'|trans }}</b>{% else %}{{ 'config.form_user.two_factor.state_disabled'|trans }}{% endif %}</td>
-                                                <td><a href="{{ path('config_otp_email') }}" class="waves-effect waves-light btn{% if app.user.isEmailTwoFactor %} disabled{% endif %}">{{ 'config.form_user.two_factor.action_email'|trans }}</a> {% if app.user.isEmailTwoFactor %}<a href="{{ path('disable_otp_email') }}" class="waves-effect waves-light btn red">Disable</a>{% endif %}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>{{ 'config.form_user.two_factor.googleTwoFactor_label'|trans }}</td>
-                                                <td>{% if app.user.isGoogleTwoFactor %}<b>{{ 'config.form_user.two_factor.state_enabled'|trans }}</b>{% else %}{{ 'config.form_user.two_factor.state_disabled'|trans }}{% endif %}</td>
-                                                <td><a href="{{ path('config_otp_app') }}" class="waves-effect waves-light btn{% if app.user.isGoogleTwoFactor %} disabled{% endif %}">{{ 'config.form_user.two_factor.action_app'|trans }}</a> {% if app.user.isGoogleTwoFactor %}<a href="{{ path('disable_otp_app') }}" class="waves-effect waves-light btn red">Disable</a>{% endif %}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            {% endif %}
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ 'config.form_user.two_factor.emailTwoFactor_label'|trans }}</td>
+                                            <td>{% if app.user.isEmailTwoFactor %}<b>{{ 'config.form_user.two_factor.state_enabled'|trans }}</b>{% else %}{{ 'config.form_user.two_factor.state_disabled'|trans }}{% endif %}</td>
+                                            <td><a href="{{ path('config_otp_email') }}" class="waves-effect waves-light btn{% if app.user.isEmailTwoFactor %} disabled{% endif %}">{{ 'config.form_user.two_factor.action_email'|trans }}</a> {% if app.user.isEmailTwoFactor %}<a href="{{ path('disable_otp_email') }}" class="waves-effect waves-light btn red">Disable</a>{% endif %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ 'config.form_user.two_factor.googleTwoFactor_label'|trans }}</td>
+                                            <td>{% if app.user.isGoogleTwoFactor %}<b>{{ 'config.form_user.two_factor.state_enabled'|trans }}</b>{% else %}{{ 'config.form_user.two_factor.state_disabled'|trans }}{% endif %}</td>
+                                            <td><a href="{{ path('config_otp_app') }}" class="waves-effect waves-light btn{% if app.user.isGoogleTwoFactor %} disabled{% endif %}">{{ 'config.form_user.two_factor.action_app'|trans }}</a> {% if app.user.isGoogleTwoFactor %}<a href="{{ path('disable_otp_app') }}" class="waves-effect waves-light btn red">Disable</a>{% endif %}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                             {{ form_widget(form.user._token) }}
                         </form>
                     </div>
@@ -561,9 +572,11 @@
                             <div class="row">
                                 <h5>{{ 'config.form_user.delete.title'|trans }}</h5>
                                 <p>{{ 'config.form_user.delete.description'|trans }}</p>
-                                <a href="{{ path('delete_account') }}" onclick="return confirm('{{ 'config.form_user.delete.confirm'|trans|escape('js') }}')" class="waves-effect waves-light btn red delete-account">
-                                    {{ 'config.form_user.delete.button'|trans }}
-                                </a>
+                                <form action="{{ path('delete_account') }}" method="post" onsubmit="return confirm('{{ 'config.form_user.delete.confirm'|trans|escape('js') }}')" name="delete-account">
+                                    <input type="hidden" name="token" value="{{ csrf_token('delete-account') }}" />
+
+                                    <button class="waves-effect waves-light btn red" type="submit">{{ 'config.form_user.delete.button'|trans }}</button>
+                                </form>
                             </div>
                         {% endif %}
                     </div>

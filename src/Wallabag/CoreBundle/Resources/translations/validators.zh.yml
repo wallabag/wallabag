@@ -1,8 +1,0 @@
-validator:
-    password_must_match: '两次输入的密码必须匹配。'
-    password_too_short: '密码最少需要包含 8 个字符.'
-    password_wrong_value: '当前密码输入错误.'
-    item_per_page_too_high: '这会让应用十分卡顿'
-    feed_limit_too_high: '这会让应用十分卡顿'
-    quote_length_too_high: '引用内容过长，最多不能超过 {{ limit }} 个字符。'
-    rss_limit_too_high: 这肯定会杀死应用程序

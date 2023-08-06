@@ -1,33 +1,38 @@
 {
     "name": "wallabag/wallabag",
-    "type": "project",
     "description": "open source self hostable read-it-later web application",
+    "license": "MIT",
+    "type": "project",
     "keywords": [
         "poche",
         "wallabag",
         "read-it-later",
         "read it later"
     ],
-    "homepage": "https://github.com/wallabag/wallabag",
-    "license": "MIT",
     "authors": [
         {
             "name": "Nicolas Lœuillet",
             "email": "nicolas@loeuillet.org",
-            "homepage": "http://www.cdetc.fr",
+            "homepage": "https://nicolas.loeuillet.org",
             "role": "Developer"
         },
         {
             "name": "Thomas Citharel",
-            "homepage": "http://tcit.fr",
+            "homepage": "https://tcit.fr",
             "role": "Developer"
         },
         {
             "name": "Jérémy Benoist",
             "homepage": "https://www.j0k3r.net",
             "role": "Developer"
+        },
+        {
+            "name": "Kevin Decherf",
+            "homepage": "https://kdecherf.com/",
+            "role": "Developer"
         }
     ],
+    "homepage": "https://github.com/wallabag/wallabag",
     "support": {
         "email": "hello@wallabag.org",
         "issues": "https://github.com/wallabag/wallabag/issues"
@@ -51,46 +56,47 @@
         "ext-tidy": "*",
         "ext-tokenizer": "*",
         "ext-xml": "*",
-        "babdev/pagerfanta-bundle": "^2.5",
+        "babdev/pagerfanta-bundle": "^3.7",
         "bdunogier/guzzle-site-authenticator": "^1.0.0",
         "craue/config-bundle": "^2.3.0",
         "defuse/php-encryption": "^2.1",
         "doctrine/collections": "^1.6",
-        "doctrine/common": "^2.13",
-        "doctrine/dbal": "^2.13",
-        "doctrine/doctrine-bundle": "^1.9",
-        "doctrine/doctrine-cache-bundle": "^1.3",
-        "doctrine/doctrine-migrations-bundle": "^1.3",
+        "doctrine/common": "^3.0",
+        "doctrine/dbal": "^3.3",
+        "doctrine/doctrine-bundle": "^2.0",
+        "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/event-manager": "^1.1",
-        "doctrine/migrations": "^1.8",
+        "doctrine/migrations": "^3.2",
         "doctrine/orm": "^2.6",
-        "doctrine/persistence": "^1.3",
+        "doctrine/persistence": "^3.0",
+        "egulias/email-validator": "^3.2",
         "enshrined/svg-sanitize": "^0.15.4",
         "friendsofsymfony/jsrouting-bundle": "^2.2",
-        "friendsofsymfony/oauth-server-bundle": "^1.5",
-        "friendsofsymfony/rest-bundle": "~2.1",
-        "friendsofsymfony/user-bundle": "2.1.*",
+        "friendsofsymfony/oauth-server-bundle": "dev-master#dc8ff343363cf794d30eb1a123610d186a43f162",
+        "friendsofsymfony/rest-bundle": "~3.4",
+        "friendsofsymfony/user-bundle": "^3.1",
         "guzzlehttp/guzzle": "^5.3.1",
-        "guzzlehttp/psr7": "^1.8",
+        "guzzlehttp/psr7": "^2.5",
         "html2text/html2text": "^4.1",
         "incenteev/composer-parameter-handler": "^2.1",
         "j0k3r/graby": "^2.0",
         "javibravo/simpleue": "^2.0",
         "jms/serializer": "^3.17",
-        "jms/serializer-bundle": "~3.6",
+        "jms/serializer-bundle": "~5.0",
         "kphoen/rulerz": "^0.21",
         "kphoen/rulerz-bundle": "~0.13",
-        "laminas/laminas-code": "^3.4",
-        "laminas/laminas-diactoros": "^2.3",
-        "lexik/form-filter-bundle": "^5.0.4",
+        "laminas/laminas-code": "^4.7",
+        "lcobucci/jwt": "~4.1.5",
+        "lexik/form-filter-bundle": "^7.0",
         "mgargano/simplehtmldom": "~1.5",
         "mnapoli/piwik-twig-extension": "^3.0",
-        "nelmio/api-doc-bundle": "^3.0",
-        "nelmio/cors-bundle": "~1.5",
+        "nelmio/api-doc-bundle": "^4.10",
+        "nelmio/cors-bundle": "~2.2",
         "ocramius/proxy-manager": "^2.1.1",
-        "pagerfanta/pagerfanta": "^2.4",
-        "php-amqplib/php-amqplib": "^2.12",
-        "php-amqplib/rabbitmq-bundle": "^1.14",
+        "pagerfanta/doctrine-orm-adapter": "^3.7",
+        "pagerfanta/twig": "^3.7",
+        "php-amqplib/php-amqplib": "^3.4",
+        "php-amqplib/rabbitmq-bundle": "^2.11",
         "php-http/client-common": "^2.4",
         "php-http/discovery": "^1.14",
         "php-http/guzzle5-adapter": "^2.0",
@@ -102,27 +108,34 @@
         "predis/predis": "^2.0.3",
         "psr/http-message": "^1.0",
         "psr/log": "^1.1",
-        "scheb/two-factor-bundle": "^4.11.0",
-        "sensio/framework-extra-bundle": "^5.2",
-        "sentry/sentry-symfony": "3.5.3",
+        "scheb/2fa-backup-code": "^5.13",
+        "scheb/2fa-bundle": "^5.13",
+        "scheb/2fa-email": "^5.13",
+        "scheb/2fa-google-authenticator": "^5.13",
+        "scheb/2fa-qr-code": "^5.13",
+        "scheb/2fa-trusted-device": "^5.13",
+        "sensio/framework-extra-bundle": "^6.2",
+        "sentry/sentry-symfony": "4.10.0",
         "stof/doctrine-extensions-bundle": "^1.2",
-        "swiftmailer/swiftmailer": "^6.3",
         "symfony/dom-crawler": "^4.0",
+        "symfony/mailer": "^4.0",
         "symfony/monolog-bundle": "^3.1",
-        "symfony/swiftmailer-bundle": "^3.2",
+        "symfony/proxy-manager-bridge": "^4.4",
         "symfony/symfony": "^4.0",
         "tecnickcom/tcpdf": "^6.3.0",
-        "twig/extensions": "^1.5",
-        "twig/twig": "^2.15",
+        "twig/extra-bundle": "^3.4",
+        "twig/string-extra": "^3.4",
+        "twig/twig": "^3.4.3",
         "wallabag/php-mobi": "~1.0",
         "wallabag/phpepub": "^4.0.10",
         "willdurand/hateoas": "^3.8",
         "willdurand/hateoas-bundle": "~2.1"
     },
     "require-dev": {
-        "dama/doctrine-test-bundle": "^6.0",
+        "dama/doctrine-test-bundle": "^7.1",
         "doctrine/doctrine-fixtures-bundle": "~3.0",
-        "friendsofphp/php-cs-fixer": "~2.13",
+        "ergebnis/composer-normalize": "^2.28",
+        "friendsofphp/php-cs-fixer": "~3.4",
         "friendsoftwig/twigcs": "^6.0",
         "m6web/redis-mock": "^5.0",
         "php-http/mock-client": "^1.0",
@@ -137,24 +150,8 @@
     "suggest": {
         "ext-imagick": "To keep GIF animation when downloading image is enabled"
     },
-    "scripts": {
-        "post-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "bin/console cache:clear --no-warmup",
-            "bin/console assets:install web --symlink --relative"
-        ],
-        "post-install-cmd": [
-            "@post-cmd"
-        ],
-        "post-update-cmd": [
-            "@post-cmd"
-        ]
-    },
-    "extra": {
-        "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
-        }
-    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Wallabag\\": "src/Wallabag/"
@@ -173,15 +170,34 @@
         ]
     },
     "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true,
+            "php-http/discovery": true,
+            "ergebnis/composer-normalize": true
+        },
         "bin-dir": "bin",
         "platform": {
             "php": "7.4.29"
         },
-        "sort-packages": true,
-        "allow-plugins": {
-            "phpstan/extension-installer": true
-        }
+        "sort-packages": true
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    "extra": {
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml"
+        },
+        "public-dir": "web"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@post-cmd"
+        ],
+        "post-update-cmd": [
+            "@post-cmd"
+        ],
+        "post-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "bin/console cache:clear --no-warmup",
+            "bin/console assets:install web --symlink --relative"
+        ]
+    }
 }

@@ -1,0 +1,414 @@
+security:
+    login:
+        page_title: Üdvözöljük a wallabag-ban!
+        keep_logged_in: Maradjon bejelentkezve
+        forgot_password: Elfelejtette a jelszavát?
+        submit: Bejelentkezés
+        register: Regisztráció
+        username: Felhasználónév
+        password: Jelszó
+        cancel: Mégse
+    resetting:
+        description: Adja meg e-mail címét, és elküldjük a jelszó helyreállítási utasításokat.
+    register:
+        page_title: Fiók létrehozása
+        go_to_account: Ugrás a fiókjába
+menu:
+    left:
+        unread: Olvasatlan
+        starred: Csillagozott
+        archive: Archivál
+        all_articles: Minden bejegyzés
+        config: Beállítás
+        tags: Címkék
+        internal_settings: Belső beállítások
+        import: Importálás
+        howto: Hogyan…
+        developer: API-kliensek kezelése
+        logout: Kijelentkezés
+        about: Névjegy
+        search: Keresés
+        save_link: Hivatkozás mentése
+        back_to_unread: Vissza az olvasatlan cikkekhez
+        users_management: Felhasználók kezelése
+        site_credentials: A hely hitelesítő adatai
+    top:
+        add_new_entry: Új bejegyzés hozzáadása
+        search: Keresés
+        filter_entries: Szűrő bejegyzések
+        export: Exportálás
+    search_form:
+        input_label: Adja meg a keresési feltételt itt
+footer:
+    wallabag:
+        elsewhere: Vegye magával a wallabag-ot
+        social: Közösségi
+        powered_by: 'üzemelteti'
+        about: Névjegy
+    stats: A fiókjának létrehozása óta (%user_creation%) %nb_archives% cikkeket olvasott. Ez körülbelül %per_day% naponta!
+config:
+    page_title: Beállítás
+    tab_menu:
+        settings: Beállítások
+        rss: RSS
+        user_info: Felhasználói információk
+        password: Jelszó
+        rules: Címkézési szabályok
+        new_user: Felhasználó hozzáadása
+    form:
+        save: Mentés
+    form_settings:
+        items_per_page_label: Oldalankénti elemek száma
+        language_label: Nyelv
+        reading_speed:
+            label: Olvasási sebesség
+            help_message: 'Online eszközök használatával megbecsülheti az olvasási sebességét:'
+            100_word: ~100 szó percenkénti sebességgel olvasok
+            200_word: ~200 szó percenkénti sebességgel olvasok
+            300_word: ~300 szó percenkénti sebességgel olvasok
+            400_word: ~400 szó percenkénti sebességgel olvasok
+        action_mark_as_read:
+            label: Mit tehetek miután eltávolítottam, megcsillagoztam vagy olvasottnak jelöltem egy cikket?
+            redirect_homepage: Vissza a kezdőoldalra
+            redirect_current_page: Maradj a jelenlegi oldalon
+        pocket_consumer_key_label: A tartalom importálásához szükséges Pocket „Consumer key”
+        android_configuration: Az Android alkalmazásának beállítása
+        android_instruction: Érintsen ide az Android alkalmazásának előtöltéséhez
+        help_items_per_page: Megváltoztathatja az oldalanként megjelenített cikkek számát.
+        help_reading_speed: A wallabag kiszámítja az elolvasási időt minden egyes cikkre. Itt meghatározhatja, ennek a listának köszönhetően, hogy mennyire gyors vagy lassú olvasó. A wallabag újra ki fogja számítani az elolvasási időt minden egyes cikkre.
+        help_language: Megváltoztathatja a wallabag felületének a nyelvét.
+        help_pocket_consumer_key: A Pocket importálásához szükséges. Ezt a Pocket fiókodban hozhatod létre.
+    form_rss:
+        description: A wallabag által biztosított RSS-hírfolyam lehetővé teszi hogy az elmentett cikkeit a kedvenc RSS hírolvasójában olvashassa el. Ehhez először viszont létre kell hoznia egy hozzáférési kulcsot.
+        token_label: RSS hozzáférési kulcs
+        no_token: Nincs hozzáférési kulcs
+        token_create: Hozzáférési kulcsának létrehozása
+        token_reset: Új hozzáférési kulcs létrehozása
+        rss_links: RSS linkek
+        rss_link:
+            unread: Olvasatlan
+            starred: Csillagozott
+            archive: Archivált
+            all: Összes
+        rss_limit: Tételek száma a hírcsatornában
+    form_user:
+        two_factor_description: A kétfaktoros hitelesítés engedélyezésével egy biztonsági kódot tartalmazó e-mailt fog kapni minden új, nem azonosítható eszközről történő bejelentkezés esetén.
+        name_label: Név
+        email_label: E-mail
+        twoFactorAuthentication_label: Két faktoros hitelesítés
+        help_twoFactorAuthentication: Ha engedélyezi a kéttényezős hitelesítést, miden egyes alkalommal kapni fog egy belépési kódot tartalmazó e-mail-t amikor be akar jelentkezni a wallabag-ba.
+        delete:
+            title: Fiók törlése (veszélyes terület!)
+            description: Ha eltávolítja a fiókját, az összes cikke, címkéje, jegyzete és a fiókja VÉGLEGESEN el lesz távolítva (VISSZAVONHATATLANUL). Ezután ki lesz jelentkeztetve.
+            confirm: Egészen biztos benne? (NEM VONHATÓ VISSZA)
+            button: Fiók törlése
+    reset:
+        title: Visszaállítási terület (veszélyes terület!)
+        description: Az alábbi gombok megnyomásával képes eltávolítani bizonyos adatokat a fiókból. Vegye figyelembe, hogy ezek a műveletek VISSZAFORDÍTHATATLANOK.
+        annotations: Összes jegyzet eltávolítása
+        tags: Összes címke eltávolítása
+        entries: Összes bejegyzés eltávolítása
+        archived: Összes archivált bejegyzés eltávolítása
+        confirm: Egészen biztos benne? (NEM VONHATÓ VISSZA)
+    form_password:
+        description: Itt megváltoztathatja a jelenlegi jelszavát. Az új jelszónak legalább 8 karakter hosszúságúnak kell lennie.
+        old_password_label: Jelenlegi jelszó
+        new_password_label: Új jelszó
+        repeat_new_password_label: Ismételten az új jelszó
+    form_rules:
+        if_label: ha
+        then_tag_as_label: akkor címkézd meg mint
+        delete_rule_label: törlés
+        edit_rule_label: szerkeszt
+        rule_label: Szabály
+        tags_label: Címkék
+        faq:
+            title: GYIK
+            tagging_rules_definition_title: A „címkézési szabályok” mit jelent?
+            tagging_rules_definition_description: Ezek olyan szabályok amiket a Wallabag használ arra, hogy automatikusan felcímkézze az új bejegyzéseket.<br />Minden egyes alkalommal, amikor egy újabb bejegyzés hozzáadásra kerül, minden címkézési szabály fel lesz használva a beállított címkék hozzáadására, így mentve meg attól a problémától, hogy kézzel osztályozza a bejegyzéseit.
+            how_to_use_them_title: Hogyan használhatom ezeket?
+            how_to_use_them_description: 'Tételezzük fel, hogy szeretné az új bejegyzéseket úgy címkézni mint « <i>rövid olvasnivaló</i> », ha az elolvasási idejük 3 perc alatt van.<br />Ebben az esetben ezt írja be a <i>Szabály</i> mezőbe: « readingTime &lt;= 3 », a <i>Címkék</i> mezőbe pedig: « <i>rövid olvasnivaló</i> ».<br />Több címke is hozzáadható egyszerre, ha vesszővel elválasztja őket: « <i>rövid olvasnivaló, el kell olvasni</i> »<br />Összetett szabályok írhatók előre definiált operátorok használatával: ha « <i>readingTime &gt;= 5 AND domainName = "www.php.net"</i> » akkor címkézd meg mint « <i>hosszú olvasnivaló, php</i> »'
+            variables_available_title: Milyen változókat és operátorokat használhatok a szabályok írásához?
+            variables_available_description: 'A következő változók és operátorok használhatók címkézési szabályok létrehozásához:'
+            meaning: Jelentés
+            variable_description:
+                label: Változó
+                title: A bejegyzés címe
+                url: A bejegyzés URL-je
+                isArchived: A bejegyzés archivált-e vagy sem
+                isStarred: A bejegyzés csillagozott-e vagy sem
+                content: A bejegyzés tartalma
+                language: A bejegyzés nyelve
+                mimetype: A bejegyzés médiatípusa
+                readingTime: A bejegyzés becsült elolvasási ideje, percben
+                domainName: A bejegyzés doménneve
+            operator_description:
+                label: Operátor
+                less_than: Kevesebb, vagy egyenlő mint…
+                strictly_less_than: Kevesebb, mint…
+                greater_than: Nagyobb, vagy egyenlő mint…
+                strictly_greater_than: Nagyobb, mint…
+                equal_to: Egyenlő…
+                not_equal_to: Nem egyenlő…
+                or: Egyik szabály VAGY a másik
+                and: Egyik szabály ÉS a másik
+                matches: 'Megvizsgálja, hogy a <i>tárgy</i> megegyezik-e a <i>keresendő</i>-vel (kis- és nagybetű érzéketlen).<br />Példa: <code>title matches "labdarúgás"</code>'
+                notmatches: 'Megvizsgálja, hogy a <i>tárgy</i> nem egyezik-e a <i>keresendő</i>-vel (kis- és nagybetű érzéketlen).<br />Példa: <code>title notmatches "labdarúgás"</code>'
+entry:
+    default_title: A bejegyzés címe
+    page_titles:
+        unread: Olvasatlan bejegyzések
+        starred: Csillagozott bejegyzések
+        archived: Archivált bejegyzések
+        filtered: Szűrt bejegyzések
+        filtered_tags: 'Címkékre szűrve:'
+        filtered_search: 'Keresésre szűrve:'
+        untagged: Címkézetlen bejegyzések
+        all: Minden bejegyzés
+    list:
+        number_on_the_page: '{0} Nincsenek bejegyzések.|{1} Egy bejegyzés.|]1,Inf[ %count% bejegyzés.'
+        reading_time: becsült elolvasási idő
+        reading_time_minutes: 'becsült elolvasási idő: %readingTime% perc'
+        reading_time_less_one_minute: 'becsült elolvasási idő: &lt; 1 perc'
+        number_of_tags: '{1}és egy egyéb címke|]1,Inf[és további %count% egyéb címke'
+        reading_time_minutes_short: '%readingTime% perc'
+        reading_time_less_one_minute_short: '&lt; 1 perc'
+        original_article: eredeti
+        toogle_as_read: Jelölje olvasottnak
+        toogle_as_star: Csillagozza meg
+        delete: Törlés
+        export_title: Exportálás
+    filters:
+        title: Szűrők
+        status_label: Állapot
+        archived_label: Archivált
+        starred_label: Csillagozott
+        unread_label: Olvasatlan
+        preview_picture_label: Van előnézeti képe
+        preview_picture_help: Előnézeti kép
+        is_public_label: Van nyilvános hivatkozása
+        is_public_help: Nyilvános hivatkozás
+        language_label: Nyelv
+        http_status_label: HTTP állapot
+        reading_time:
+            label: Elolvasási idő percekben
+            from: tól
+            to: ig
+        domain_label: Domain név
+        created_at:
+            label: Létrehozás dátuma
+            from: tól
+            to: ig
+        action:
+            clear: Kitöröl
+            filter: Szűr
+    view:
+        left_menu:
+            back_to_top: Vissza a tetejére
+            back_to_homepage: Vissza
+            set_as_read: Jelölje olvasottnak
+            set_as_unread: Jelölje olvasatlannak
+            set_as_starred: Csillagozza meg
+            view_original_article: Eredeti cikk
+            re_fetch_content: Tartalom letöltése újra
+            delete: Törlés
+            add_a_tag: Címke hozzáadása
+            share_content: Megosztás
+            share_email_label: E-mail
+            public_link: nyilvános hivatkozás
+            delete_public_link: nyilvános hivatkozás törlése
+            export: Exportálás
+            print: Nyomtatás
+            problem:
+                label: Problémák?
+                description: Rosszul jelenik meg ez a cikk?
+        edit_title: Cím szerkesztése
+        original_article: eredeti
+        annotations_on_the_entry: '{0} Nincsenek jegyzetek|{1} Egy jegyzet|]1,Inf[ %count% jegyzet'
+        created_at: Létrehozás dátuma
+        published_at: Közzététel dátuma
+        published_by: Közzétette
+        provided_by: Biztosította
+    new:
+        page_title: Új bejegyzés mentése
+        placeholder: http://weboldal.com
+        form_new:
+            url_label: Url
+    search:
+        placeholder: Mit keres?
+    edit:
+        page_title: Bejegyzés szerkesztése
+        title_label: Cím
+        url_label: Url
+        origin_url_label: Eredeti url-je (ahol ezt a bejegyzést találta)
+        save_label: Mentés
+    public:
+        shared_by_wallabag: Ezt a cikket %username% osztotta meg <a href='%wallabag_instance%'>wallabag</a> használatával
+    confirm:
+        delete: Biztosan el szeretné távolítani ezt a cikket?
+        delete_tag: Biztosan el szeretné távolítani azt a címkét a cikkről?
+    metadata:
+        reading_time: Becsült elolvasási idő
+        reading_time_minutes_short: '%readingTime% perc'
+        address: Cím
+        added_on: Hozzáadva
+about:
+    page_title: Névjegy
+    top_menu:
+        who_behind_wallabag: Ki áll a wallabag mögött
+        getting_help: Segítség kérése
+        helping: wallabag segítése
+        contributors: Hozzájárulók
+        third_party: Harmadik féltől származó könyvtárak
+    who_behind_wallabag:
+        developped_by: Fejlesztette
+        website: webhely
+        many_contributors: És rengeteg további közreműködők ♥ a <a href="https://github.com/wallabag/wallabag/graphs/contributors">GitHub-on</a>
+        project_website: Projekt weboldala
+        license: Licenc
+        version: Verzió
+    getting_help:
+        documentation: Dokumentáció
+        bug_reports: Hibajelentések
+        support: <a href="https://github.com/wallabag/wallabag/issues">a GitHub-on</a>
+    helping:
+        description: 'A wallabag szabad és nyílt forráskódú. Segíthetsz minket:'
+        by_paypal: Liberapay-on keresztül
+    contributors:
+        description: Köszönet a wallabag webes alkalmazás közreműködőinek
+    third_party:
+        description: 'A wallabag-ban használt harmadik féltől származó könyvtárak listája (azok licencével):'
+        package: Csomag
+        license: Licenc
+howto:
+    page_title: Hogyan
+    tab_menu:
+        add_link: …adjon hozzá hivatkozást
+        shortcuts: …használja a gyorsbillentyűket
+    page_description: 'Többféle módon is elmenthet egy cikket:'
+    top_menu:
+        browser_addons: Böngésző beépülőkkel
+        mobile_apps: Mobil alkalmazásokkal
+        bookmarklet: Bookmarklet-tel
+    form:
+        description: Ezen az űrlapon
+    browser_addons:
+        firefox: Firefox beépülő
+        chrome: Chrome beépülő
+        opera: Opera beépülő
+    mobile_apps:
+        android:
+            via_f_droid: F-Droid-on
+            via_google_play: Google Play-en
+        ios: iTunes Store-ban
+        windows: Microsoft Store-ban
+    bookmarklet:
+        description: 'Húzza ezt a hivatkozást a könyvjelzősávba:'
+    shortcuts:
+        page_description: Itt találhatók a wallabag-ban elérhető gyorsbillentyűk.
+        shortcut: Gyorsbillentyű
+        action: Művelet
+        all_pages_title: A gyorsbillentyűk minden oldalon elérhetők
+        go_unread: Ugrás az olvasatlanok oldalára
+        go_starred: Ugrás a csillagozottak oldalára
+        go_archive: Ugrás az archiváltak oldalára
+        go_all: Ugrás az összes bejegyzés oldalára
+        go_tags: Ugrás a címkék oldalára
+        go_config: Ugrás a beállítás oldalra
+        go_import: Ugrás az importálás oldalra
+        go_developers: Ugrás az „API-kliensek kezelése” oldalra
+        go_howto: Ugrás a „Hogyan…” oldalra (ez az oldal!)
+        go_logout: Kijelentkezés
+        list_title: A lista oldalakon elérhető gyorsbillentyűk
+        search: A keresőmező megjelenítése
+        article_title: Bejegyzés nézetben elérhető gyorsbillentyűk
+        open_original: A bejegyzés eredeti URL-jének megnyitása
+        toggle_favorite: A bejegyzés csillagozott állapotának átváltása
+        toggle_archive: A bejegyzés olvasott állapotának átváltása
+        delete: A bejegyzés törlése
+        add_link: Új hivatkozás hozzáadása
+        hide_form: A jelenlegi mező elrejtése (keresés vagy új hivatkozás)
+        arrows_navigation: Navigálás a cikkek között
+        open_article: A kiválasztott bejegyzés megjelenítése
+quickstart:
+    page_title: Bevezetés a wallabag-ba
+    more: Továbbiak…
+    intro:
+        title: Üdvözöljük a wallabag-ban!
+        paragraph_1: Végigvezetjük a wallabag-ban tett látogatása során és bemutatunk néhány olyan funkciót ami Önt is érdekelheti.
+        paragraph_2: Kövessen minket!
+    configure:
+        title: Az alkalmazás konfigurálása
+        description: Tekintse át a wallabag beállításait ahhoz, hogy egy Önnek megfelelő alkalmazása lehessen.
+        language: A nyelv és a kinézet megváltoztatása
+        rss: RSS hírcsatornák engedélyezése
+        tagging_rules: Írjon szabályokat a cikkek automatikus címkézéséhez
+    admin:
+        title: Adminisztráció
+        description: 'Adminisztrátorként jogosultságokkal rendelkezik a wallabag-ban. Ezeket teheti:'
+        new_user: Új felhasználó létrehozása
+        analytics: Analitika konfigurálása
+        sharing: A cikkmegosztással kapcsolatos paraméterek engedélyezése
+        export: Exportálás konfigurálása
+        import: Importálás konfigurálása
+    first_steps:
+        title: Kezdő lépések
+        description: A wallabag most már jól be lett állítva, itt az ideje a web archiválásának. Hivatkozás hozzáadásához kattintson a jobb felső sarokban lévő + jelre.
+        new_article: Az első cikkének elmentése
+        unread_articles: És osztályozása!
+    migrate:
+        title: Áttérés meglévő szolgáltatásról
+        description: Más szolgáltatást is használ? Segítünk, hogy megszerezze adatait a wallabag-ra.
+        pocket: Áttérés Pocket-ről
+        wallabag_v1: Áttérés wallabag v1-ről
+        wallabag_v2: Áttérés wallabag v2-ről
+        readability: Áttérés Readability-ről
+        instapaper: Áttérés az Instapaper-ről
+    developer:
+        title: Fejlesztők
+        description: 'A fejlesztőkre is gondoltunk: Docker, API, fordítások, stb.'
+        create_application: Hozza létre a saját harmadik féltől származó alkalmazását
+        use_docker: Használjon Docker-t a wallabag telepítéséhez
+    docs:
+        title: Teljes dokumentáció
+        description: A wallabag rengeteg funkcióval rendelkezik. Ne habozzon, olvassa el a kézikönyvet hogy megismerje és hogy megtanulja hogyan használhatja azokat.
+        annotate: Adjon jegyzetet a cikkéhez
+        export: Konvertálja a cikkeit ePUB vagy PDF formátumba
+        search_filters: Tekintse meg hogyan találhat meg egy cikket a keresőmotor és szűrők használatával
+        fetching_errors: Mit tehetek ha egy cikk letöltése hibákba ütközik?
+        all_docs: És még sok más cikk!
+    support:
+        title: Támogatás
+        description: Ha segítségre van szüksége, itt vagyunk az Ön számára.
+        github: A GitHub-on
+        email: E-mailben
+        gitter: A Gitter-en
+tag:
+    page_title: Címkék
+    list:
+        number_on_the_page: '{0} Nincsenek címkék.|{1} Egy címke.|]1,Inf[ %count% címke.'
+        see_untagged_entries: Címkézetlen bejegyzések megtekintése
+        untagged: Címkézetlen bejegyzések
+    new:
+        add: Hozzáad
+        placeholder: Több címkét is hozzáadhat, vesszővel elválasztva.
+export:
+    footer_template: '<div style="text-align:center;"><p>A wallabag készítette ezzel: %method%</p><p>Kérjük, jelentse a <a href="https://github.com/wallabag/wallabag/issues">problémát</a> ha ez az E-Book nem megfelelően jelenik meg az eszközén.</p></div>'
+    unknown: Ismeretlen
+import:
+    page_title: Importálás
+    page_description: Üdvözöljük a wallabag importálóban. Válassza ki a korábbi szolgáltatást, amelyből át kíván térni.
+    action:
+        import_contents: Tartalom importálása
+    form:
+        mark_as_read_title: Összes megjelölése olvasottként?
+        mark_as_read_label: Az összes importált bejegyzés megjelölése olvasottként
+        file_label: Fájl
+        save_label: Fájl feltöltése
+    pocket:
+        page_title: Importálás > Pocket
+        description: Ez az importáló az összes Pocket adatát be fogja importálni. Mivel a Pocket nem engedélyezi nekünk hogy tartalmakat szerezzünk a szolgáltatásukból, így az egyes cikkek olvasható tartalmát a wallabag újra le fogja tölteni.
+        config_missing:
+            description: A Pocket import nincs konfigurálva.
+    wallabag_v1:
+        page_title: Importálás > Wallabag v1

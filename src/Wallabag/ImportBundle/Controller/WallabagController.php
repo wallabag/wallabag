@@ -2,26 +2,25 @@
 
 namespace Wallabag\ImportBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
 use Wallabag\ImportBundle\Import\ImportInterface;
 
 /**
  * Define Wallabag import for v1 and v2, since there are very similar.
  */
-abstract class WallabagController extends Controller
+abstract class WallabagController extends AbstractController
 {
     /**
      * Handle import request.
      *
      * @return Response|RedirectResponse
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, TranslatorInterface $translator)
     {
         $form = $this->createForm(UploadImportType::class);
         $form->handleRequest($request);
@@ -44,13 +43,13 @@ abstract class WallabagController extends Controller
 
                 if (true === $res) {
                     $summary = $wallabag->getSummary();
-                    $message = $this->get(TranslatorInterface::class)->trans('flashes.import.notice.summary', [
+                    $message = $translator->trans('flashes.import.notice.summary', [
                         '%imported%' => $summary['imported'],
                         '%skipped%' => $summary['skipped'],
                     ]);
 
                     if (0 < $summary['queued']) {
-                        $message = $this->get(TranslatorInterface::class)->trans('flashes.import.notice.summary_with_queue', [
+                        $message = $translator->trans('flashes.import.notice.summary_with_queue', [
                             '%queued%' => $summary['queued'],
                         ]);
                     }
@@ -58,18 +57,12 @@ abstract class WallabagController extends Controller
                     unlink($this->getParameter('wallabag_import.resource_dir') . '/' . $name);
                 }
 
-                $this->get(SessionInterface::class)->getFlashBag()->add(
-                    'notice',
-                    $message
-                );
+                $this->addFlash('notice', $message);
 
                 return $this->redirect($this->generateUrl('homepage'));
             }
 
-            $this->get(SessionInterface::class)->getFlashBag()->add(
-                'notice',
-                'flashes.import.notice.failed_on_file'
-            );
+            $this->addFlash('notice', 'flashes.import.notice.failed_on_file');
         }
 
         return $this->render($this->getImportTemplate(), [

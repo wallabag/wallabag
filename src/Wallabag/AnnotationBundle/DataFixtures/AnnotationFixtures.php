@@ -34,6 +34,15 @@ class AnnotationFixtures extends Fixture implements DependentFixtureInterface
 
         $this->addReference('annotation2', $annotation2);
 
+        $annotation3 = new Annotation($this->getReference('bob-user'));
+        $annotation3->setEntry($this->getReference('entry3'));
+        $annotation3->setText('This is my first annotation !');
+        $annotation3->setQuote('content');
+
+        $manager->persist($annotation3);
+
+        $this->addReference('annotation3', $annotation3);
+
         $manager->flush();
     }
 

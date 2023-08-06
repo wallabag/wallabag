@@ -383,7 +383,7 @@ class EntryRepository extends ServiceEntityRepository
      * Remove tags from all user entries.
      *
      * @param int        $userId
-     * @param Array<Tag> $tags
+     * @param array<Tag> $tags
      */
     public function removeTags($userId, $tags)
     {

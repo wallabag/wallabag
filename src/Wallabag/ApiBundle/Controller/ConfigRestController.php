@@ -5,7 +5,7 @@ namespace Wallabag\ApiBundle\Controller;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
 use Nelmio\ApiDocBundle\Annotation\Operation;
-use Swagger\Annotations as SWG;
+use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -17,7 +17,7 @@ class ConfigRestController extends WallabagRestController
      * @Operation(
      *     tags={"Config"},
      *     summary="Retrieve configuration for current user.",
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
@@ -27,11 +27,11 @@ class ConfigRestController extends WallabagRestController
      *
      * @return JsonResponse
      */
-    public function getConfigAction()
+    public function getConfigAction(SerializerInterface $serializer)
     {
         $this->validateAuthentication();
 
-        $json = $this->get(SerializerInterface::class)->serialize(
+        $json = $serializer->serialize(
             $this->getUser()->getConfig(),
             'json',
             SerializationContext::create()->setGroups(['config_api'])

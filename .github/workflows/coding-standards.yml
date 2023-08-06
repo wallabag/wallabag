@@ -49,3 +49,6 @@ jobs:
 
       - name: "Run TwigCS"
         run: "php bin/twigcs --severity=error --display=blocking --reporter checkstyle app/ src/ | cs2pr"
+
+      - name: "Run ergebnis/composer-normalize"
+        run: "composer normalize --dry-run --no-check-lock"

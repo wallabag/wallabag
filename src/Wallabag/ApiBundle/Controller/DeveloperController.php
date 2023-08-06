@@ -2,17 +2,18 @@
 
 namespace Wallabag\ApiBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\ApiBundle\Entity\Client;
 use Wallabag\ApiBundle\Form\Type\ClientType;
+use Wallabag\ApiBundle\Repository\ClientRepository;
 
-class DeveloperController extends Controller
+class DeveloperController extends AbstractController
 {
     /**
      * List all clients and link to create a new one.
@@ -21,9 +22,9 @@ class DeveloperController extends Controller
      *
      * @return Response
      */
-    public function indexAction()
+    public function indexAction(ClientRepository $repo)
     {
-        $clients = $this->get('doctrine')->getRepository(Client::class)->findByUser($this->getUser()->getId());
+        $clients = $repo->findByUser($this->getUser()->getId());
 
         return $this->render('@WallabagCore/Developer/index.html.twig', [
             'clients' => $clients,
@@ -37,21 +38,20 @@ class DeveloperController extends Controller
      *
      * @return Response
      */
-    public function createClientAction(Request $request)
+    public function createClientAction(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator)
     {
-        $em = $this->get('doctrine')->getManager();
         $client = new Client($this->getUser());
         $clientForm = $this->createForm(ClientType::class, $client);
         $clientForm->handleRequest($request);
 
         if ($clientForm->isSubmitted() && $clientForm->isValid()) {
             $client->setAllowedGrantTypes(['token', 'authorization_code', 'password', 'refresh_token']);
-            $em->persist($client);
-            $em->flush();
+            $entityManager->persist($client);
+            $entityManager->flush();
 
-            $this->get(SessionInterface::class)->getFlashBag()->add(
+            $this->addFlash(
                 'notice',
-                $this->get(TranslatorInterface::class)->trans('flashes.developer.notice.client_created', ['%name%' => $client->getName()])
+                $translator->trans('flashes.developer.notice.client_created', ['%name%' => $client->getName()])
             );
 
             return $this->render('@WallabagCore/Developer/client_parameters.html.twig', [
@@ -73,19 +73,18 @@ class DeveloperController extends Controller
      *
      * @return RedirectResponse
      */
-    public function deleteClientAction(Client $client)
+    public function deleteClientAction(Client $client, EntityManagerInterface $entityManager, TranslatorInterface $translator)
     {
         if (null === $this->getUser() || $client->getUser()->getId() !== $this->getUser()->getId()) {
             throw $this->createAccessDeniedException('You can not access this client.');
         }
 
-        $em = $this->get('doctrine')->getManager();
-        $em->remove($client);
-        $em->flush();
+        $entityManager->remove($client);
+        $entityManager->flush();
 
-        $this->get(SessionInterface::class)->getFlashBag()->add(
+        $this->addFlash(
             'notice',
-            $this->get(TranslatorInterface::class)->trans('flashes.developer.notice.client_deleted', ['%name%' => $client->getName()])
+            $translator->trans('flashes.developer.notice.client_deleted', ['%name%' => $client->getName()])
         );
 
         return $this->redirect($this->generateUrl('developer'));
@@ -100,6 +99,9 @@ class DeveloperController extends Controller
      */
     public function howtoFirstAppAction()
     {
-        return $this->render('@WallabagCore/Developer/howto_app.html.twig');
+        return $this->render('@WallabagCore/Developer/howto_app.html.twig',
+        [
+            'wallabag_url' => $this->getParameter('domain_name'),
+        ]);
     }
 }

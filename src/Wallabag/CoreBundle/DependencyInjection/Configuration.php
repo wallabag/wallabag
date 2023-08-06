@@ -9,8 +9,8 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('wallabag_core');
+        $treeBuilder = new TreeBuilder('wallabag_core');
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()
@@ -44,6 +44,9 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue(1)
                 ->end()
                 ->scalarNode('list_mode')
+                    ->defaultValue(1)
+                ->end()
+                ->scalarNode('display_thumbnails')
                     ->defaultValue(1)
                 ->end()
                 ->scalarNode('api_limit_mass_actions')

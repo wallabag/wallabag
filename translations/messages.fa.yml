@@ -1,0 +1,348 @@
+security:
+    login:
+        page_title: به wallabag خوش آمدید!
+        keep_logged_in: مرا به خاطر بسپار
+        forgot_password: رمزتان را گم کرده‌اید؟
+        submit: ورود
+        register: نام‌نویسی
+        username: نام کاربری
+        password: رمز
+        cancel: لغو
+    resetting:
+        description: نشانی ایمیل خود را بنویسید تا راهنمای تغییر رمز را برایتان بفرستیم.
+    register:
+        page_title: حساب بسازید
+        go_to_account: حساب خود را ببینید
+menu:
+    left:
+        unread: خوانده‌نشده
+        starred: برگزیده
+        archive: بایگانی
+        all_articles: همه
+        config: پیکربندی
+        tags: برچسب‌ها
+        internal_settings: تنظیمات درونی
+        import: درون‌ریزی
+        howto: خودآموز
+        logout: خروج
+        about: درباره
+        search: جستجو
+        save_link: ذخیرهٔ یک پیوند
+        back_to_unread: بازگشت به خوانده‌نشده‌ها
+        site_credentials: اعتبارنامه‌های وب‌گاه
+        users_management: مدیریت کاربران
+        developer: مدیریت کارخواه‌های API
+        quickstart: "Quickstart"
+    top:
+        add_new_entry: افزودن مقالهٔ تازه
+        search: جستجو
+        filter_entries: فیلترکردن مقاله‌ها
+        export: برون‌بری
+    search_form:
+        input_label: 'جستجوی خود را این‌جا بنویسید'
+footer:
+    wallabag:
+        elsewhere: wallabag همراه شما
+        social: شبکه‌های اجتماعی
+        powered_by: توانمند با
+        about: درباره
+    stats: از %user_creation% تا کنون %nb_archives% مقاله خوانده‌اید. می‌شود تقریبا %per_day% مقاله در روز!
+config:
+    page_title: پیکربندی
+    tab_menu:
+        settings: تنظیمات
+        rss: آر-اس-اس
+        user_info: اطلاعات کاربر
+        password: رمز
+        rules: برچسب‌گذاری خودکار
+        new_user: افزودن کاربر
+    form:
+        save: ذخیره
+    form_settings:
+        theme_label: پوسته
+        items_per_page_label: تعداد مقاله در هر صفحه
+        language_label: زبان
+        reading_speed:
+            label: سرعت خواندن
+            help_message: 'سرعت خواندن‌تان را با ابزارهای آنلاین تخمین بزنید:'
+            100_word: من تقریباً ۱۰۰ واژه را در دقیقه می‌خوانم
+            200_word: من تقریباً ۲۰۰ واژه را در دقیقه می‌خوانم
+            300_word: من تقریباً ۳۰۰ واژه را در دقیقه می‌خوانم
+            400_word: من تقریباً ۴۰۰ واژه را در دقیقه می‌خوانم
+        pocket_consumer_key_label: کلید کاربری Pocket برای درون‌ریزی مطالب
+        android_configuration: پیکربندی برنامه اندرویدتان
+        action_mark_as_read:
+            redirect_homepage: رفتن به صفحه اصلی
+            redirect_current_page: ماندن در صفحه جاری
+            label: پس از حذف یا ستاره زدن یک مقاله یا علامت زدن به عنوان خوانده شده چه اتفاقی رخ دهد؟
+    form_rss:
+        description: با خوراک آر-اس-اس که wallabag در اختیارتان می‌گذارد، می‌توانید مقاله‌های ذخیره‌شده را در نرم‌افزار آر-اس-اس دلخواه خود بخوانید. برای این کار نخست باید یک کد بسازید.
+        token_label: کد آر-اس-اس
+        no_token: بدون کد
+        token_create: کد خود را بسازید
+        token_reset: بازنشانی کد
+        rss_links: پیوند آر-اس-اس
+        rss_link:
+            unread: خوانده‌نشده
+            starred: برگزیده
+            archive: بایگانی
+        rss_limit: محدودیت آر-اس-اس
+    form_user:
+        two_factor_description: با فعال‌کردن تأیید ۲مرحله‌ای هر بار که اتصال تأییدنشده‌ای برقرار شد، به شما یک کد از راه ایمیل فرستاده می‌شود.
+        name_label: نام
+        email_label: نشانی ایمیل
+        twoFactorAuthentication_label: تأیید ۲مرحله‌ای
+    form_password:
+        old_password_label: رمز قدیمی
+        new_password_label: رمز تازه
+        repeat_new_password_label: رمز تازه را دوباره بنویسید
+    form_rules:
+        if_label: اگر
+        then_tag_as_label: این برچسب را بزن
+        delete_rule_label: پاک کن
+        rule_label: قانون
+        tags_label: برچسب‌ها
+        faq:
+            title: پرسش‌های متداول
+            tagging_rules_definition_title: برچسب‌گذاری خودکار یعنی چه؟
+entry:
+    page_titles:
+        unread: مقاله‌های خوانده‌نشده
+        starred: مقاله‌های برگزیده
+        archived: مقاله‌های بایگانی‌شده
+        filtered: مقاله‌های فیلترشده
+    list:
+        number_on_the_page: '{0} هیج مقاله‌ای نیست.|{1} یک مقاله هست.|]1,Inf[ %count% مقاله هست.'
+        reading_time: زمان تخمینی برای خواندن
+        reading_time_minutes: 'زمان تخمینی برای خواندن: %readingTime% min'
+        reading_time_less_one_minute: 'زمان تخمینی برای خواندن: &lt; 1 min'
+        reading_time_minutes_short: '%readingTime% min'
+        reading_time_less_one_minute_short: '&lt; 1 min'
+        original_article: original
+        toogle_as_read: خوانده‌شده/خوانده‌نشده
+        toogle_as_star: برگزیده/نابرگزیده
+        delete: پاک کردن
+        export_title: برون‌بری
+    filters:
+        title: فیلتر
+        status_label: وضعیت
+        archived_label: بایگانی‌شده
+        starred_label: برگزیده
+        unread_label: خوانده‌نشده
+        preview_picture_label: دارای عکس پیش‌نمایش
+        preview_picture_help: پیش‌نمایش عکس
+        language_label: زبان
+        reading_time:
+            label: زمان خواندن به دقیقه
+            from: از
+            to: تا
+        domain_label: نام دامنه
+        created_at:
+            label: زمان ساخت
+            from: از
+            to: تا
+        action:
+            clear: از نو
+            filter: فیلتر
+    view:
+        left_menu:
+            back_to_top: بازگشت به بالای صفحه
+            back_to_homepage: بازگشت
+            set_as_read: خوانده‌شده
+            set_as_unread: به عنوان خوانده‌نشده علامت بزن
+            set_as_starred: برگزیده
+            view_original_article: مقالهٔ اصلی
+            re_fetch_content: مقاله‌ها را دوباره دریافت کن
+            delete: پاک کردن
+            add_a_tag: افزودن برچسب
+            share_content: هم‌رسانی
+            share_email_label: نشانی ایمیل
+            export: بارگیری
+            print: چاپ
+            problem:
+                label: مشکلات؟
+                description: آیا مقاله نادرست نشان داده شده؟
+        edit_title: ویرایش عنوان
+        original_article: اصلی
+        annotations_on_the_entry: '{0} بدون حاشیه|{1} یک حاشیه|]1,Inf[ %nbحاشیه% annotations'
+        created_at: زمان ساخت
+    new:
+        page_title: ذخیرهٔ مقالهٔ تازه
+        placeholder: http://website.com
+        form_new:
+            url_label: نشانی
+    edit:
+        page_title: ویرایش مقاله
+        title_label: عنوان
+        url_label: نشانی
+        save_label: ذخیره
+about:
+    page_title: درباره
+    top_menu:
+        who_behind_wallabag: سازندگان wallabag
+        getting_help: گرفتن کمک
+        helping: کمک‌کردن به wallabag
+        contributors: مشارکت‌کنندگان
+        third_party: کتابخانه‌های نرم‌افزاری
+    who_behind_wallabag:
+        developped_by: ساختهٔ
+        website: وب‌گاه
+        many_contributors: و بسیاری دیگر از مشارکت‌کنندگان ♥ <a href="https://github.com/wallabag/wallabag/graphs/contributors">روی Github</a>
+        project_website: وب‌گاه پروژه
+        license: پروانه
+        version: نسخه
+    getting_help:
+        documentation: راهنما
+        bug_reports: گزارش اشکال‌ها
+        support: <a href="https://github.com/wallabag/wallabag/issues">روی GitHub</a>
+    helping:
+        description: 'wallabag رایگان، آزاد، و متن‌باز است. شما می‌توانید به ما کمک کنید:'
+        by_paypal: از راه Liberapay
+    contributors:
+        description: از مشارکت شما در برنامهٔ وب wallabag ممنونیم
+    third_party:
+        description: 'فهرست کتابخانه‌های نرم‌افزاری که در wallabag به کار رفته‌اند (به همراه پروانهٔ آن‌ها) :'
+        package: بسته
+        license: پروانه
+howto:
+    page_title: خودآموز
+    page_description: 'راه‌های زیادی برای ذخیرهٔ مقاله‌ها هست:'
+    top_menu:
+        browser_addons: افزونه برای مرورگرها
+        mobile_apps: برنامه‌های موبایل
+        bookmarklet: ابزار علامت‌گذاری صفحه‌ها
+    form:
+        description: به کمک این فرم
+    browser_addons:
+        firefox: افزونهٔ فایرفاکس
+        chrome: افزونهٔ کروم
+    mobile_apps:
+        android:
+            via_f_droid: از راه F-Droid
+            via_google_play: از راه Google Play
+        ios: از راه iTunes Store
+        windows: از راه Microsoft Store
+    bookmarklet:
+        description: 'این پیوند را به نوار بوک‌مارک مرورگرتان بکشید:'
+quickstart:
+    page_title: ''
+    intro:
+        title: به wallabag خوش آمدید!!
+        paragraph_1: به شما کمک خواهیم کرد تا wallabag را بشناسید و با برخی از ویژگی‌های جالبش آشنا شوید.
+        paragraph_2: ادامه دهید!
+    configure:
+        title: برنامه را تنظیم کنید
+        language: زبان و نمای برنامه را تغییر دهید
+        rss: خوراک آر-اس-اس را فعال کنید
+        tagging_rules: قانون‌های برچسب‌گذاری خودکار مقاله‌هایتان را تعریف کنید
+    admin:
+        title: مدیریت
+        description: 'به عنوان مدیر، شما دسترسی‌های بیشتری به wallabag دارید. شما می‌توانید:'
+        new_user: کاربر تازه‌ای بسازید
+        analytics: تحلیل‌های آماری را تنظیم کنید
+        sharing: گزینه‌های مربوط به هم‌رسانی مقاله‌ها را فعال کنید
+        export: برون‌سپاری را تنظیم کنید
+        import: درون‌ریزی را تنظیم کنید
+    first_steps:
+        title: گام نخست
+        new_article: نخستین مقالهٔ خود را ذخیره کنید
+        unread_articles: و آن را طبقه‌بندی کنید!
+    migrate:
+        title: از سرویس قبلی خود به این‌جا مهاجرت کنید
+        description: آیا سرویس دیگری را به‌کار می‌برید؟ داده‌هایتان را به wallabag بیاورید..
+        pocket: مهاجرت از Pocket
+        wallabag_v1: مهاجرت از نسخهٔ یکم wallabag
+        wallabag_v2: مهاجرت از نسخهٔ دوم wallabag
+        readability: مهاجرت از نسخهٔ دوم Readability
+        instapaper: مهاجرت از نسخهٔ دوم Instapaper
+    developer:
+        title: برنامه‌نویسان
+        create_application: برنامهٔ wallabag خود را بسازید
+    docs:
+        title: راهنمای کامل
+        annotate: روی مقاله‌هایتان یادداشت بگذارید
+        export: مقاله‌هایتان را به قالب ePUB یا PDF دربیاورید
+        search_filters: به کمک موتور جستجو و فیلترها به دنبال مقاله‌هایتان بگردید
+        fetching_errors: اگر مقاله‌ای هنگام ذخیره‌ شدن به مشکل برخورد چه کار کنید؟
+        all_docs: و بسیاری از موضوعات دیگر!
+    support:
+        title: پشتیبانی
+        description: به کمک نیاز دارید؟ ما پشتیبان شما هستیم.
+        github: روی گیت‌هاب
+        email: با ایمیل
+        gitter: روی گیتر
+tag:
+    page_title: برچسب‌ها
+    list:
+        number_on_the_page: '{0} هیچ برچسبی نیست.|{1} یک برچسب هست.|]1,Inf[ %count% برچسب هست.'
+import:
+    page_title: درون‌ریزی
+    page_description: به درون‌ریز wallabag خوش آمدید. لطفاً سرویس قبلی خود را که می‌خواهید از آن مهاجرت کنید انتخاب کنید.
+    action:
+        import_contents: درون‌ریزی مقاله‌ها
+    form:
+        mark_as_read_title: علامت‌زدن همه به عنوان خوانده‌شده؟
+        mark_as_read_label: همهٔ مقاله‌های درون‌ریزی شده را به عنوان خوانده‌شده علامت بزن
+        file_label: پرونده
+        save_label: بارگذاری پرونده
+    pocket:
+        page_title: درون‌ریزی > Pocket
+        description: این برنامه همهٔ داده‌های Pocket شما را درون‌ریزی می‌کند. سرویس Pocket اجازه نمی‌دهد که متن مقاله‌ها را درون‌ریزی کنیم، بنابراین wallabag متن مقاله‌ها را دوباره از اینترنت دریافت می‌کند.
+        config_missing:
+            description: درون‌ریزی از Pocket تنظیم نشده است.
+            admin_message: شما باید %keyurls%یک pocket_consumer_key%keyurle% تعریف کنید.
+            user_message: مدیر سرور شما باید یک API Key برای Pocket تعریف کند.
+        authorize_message: شما می‌توانید داده‌هایتان را از حساب Pocket خود درون‌ریزی کنید. روی دکمهٔ زیر کلیک کنید و به برنامه اجازه دهید تا به getpocket.com وصل شود.
+        connect_to_pocket: به Pocket وصل شو و داده‌ها را دریافت کن
+    wallabag_v1:
+        page_title: درون‌ریزی > Wallabag v1
+        description: این برنامه همهٔ داده‌های شما را در نسخهٔ ۱ wallabag درون‌ریزی می‌کند. در صفحهٔ تنظیمات، روی "JSON export" در بخش "Export your wallabag data" کلیک کنید. با این کار شما پرونده‌ای به شکل "wallabag-export-1-xxxx-xx-xx.json" دریافت خواهید کرد.
+        how_to: لطفاً پرونده را انتخاب کنید و روی دکمهٔ زیر کلیک کنید تا بارگذاری و درون‌ریزی شود.
+    wallabag_v2:
+        page_title: درون‌ریزی > Wallabag v2
+        description: این برنامه همهٔ داده‌های شما را در نسخهٔ ۲ wallabag درون‌ریزی می‌کند. به بخش «همهٔ مقاله‌ها» بروید و در بخش «برون‌ریزی» روی "JSON" کلیک کنید. با این کار شما پرونده‌ای به شکل "All articles.json" دریافت خواهید کرد.
+    readability:
+        page_title: درون‌ریزی > Readability
+    firefox:
+        page_title: درون‌ریزی > Firefox
+    chrome:
+        page_title: درون‌ریزی > Chrome
+    instapaper:
+        page_title: درون‌ریزی > Instapaper
+user:
+    form:
+        username_label: نام کاربری
+        password_label: رمز
+        repeat_new_password_label: رمز تازه را دوباره بنویسید
+        plain_password_label: ????
+        email_label: نشانی ایمیل
+flashes:
+    config:
+        notice:
+            config_saved: پیکربندی ذخیره شد.
+            password_updated: رمز به‌روز شد
+            password_not_updated_demo: در حالت نمایشی نمی‌توانید رمز کاربر را عوض کنید.
+            user_updated: اطلاعات به‌روز شد
+            rss_updated: اطلاعات آر-اس-اس به‌روز شد
+            tagging_rules_updated: برچسب‌گذاری خودکار به‌روز شد
+            tagging_rules_deleted: قانون برچسب‌گذاری پاک شد
+            rss_token_updated: کد آر-اس-اس به‌روز شد
+    entry:
+        notice:
+            entry_already_saved: این مقاله در تاریخ %date% ذخیره شده بود
+            entry_saved: مقاله ذخیره شد
+            entry_updated: مقاله به‌روز شد
+            entry_reloaded: مقاله به‌روز شد
+            entry_archived: مقاله بایگانی شد
+            entry_unarchived: مقاله از بایگانی درآمد
+            entry_starred: مقاله برگزیده شد
+            entry_unstarred: مقاله نابرگزیده شد
+            entry_deleted: مقاله پاک شد
+    tag:
+        notice:
+            tag_added: برچسب افزوده شد
+    import:
+        notice:
+            failed: درون‌ریزی شکست خورد. لطفاً دوباره تلاش کنید.
+            failed_on_file: خطا هنگام پردازش پروندهٔ ورودی. آیا پروندهٔ درون‌ریزی شده سالم است.
+            summary: 'گزارش درون‌ریزی: %imported% وارد شد, %skipped% از قبل ذخیره شده بود.'

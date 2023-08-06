@@ -5,6 +5,20 @@ services:
         autoconfigure: true
         public: true
 
+    Wallabag\ImportBundle\Consumer\RabbitMQConsumerTotalProxy:
+        lazy: true
+        arguments:
+            $pocketConsumer: '@old_sound_rabbit_mq.import_pocket_consumer'
+            $readabilityConsumer: '@old_sound_rabbit_mq.import_readability_consumer'
+            $wallabagV1Consumer: '@old_sound_rabbit_mq.import_wallabag_v1_consumer'
+            $wallabagV2Consumer: '@old_sound_rabbit_mq.import_wallabag_v2_consumer'
+            $firefoxConsumer: '@old_sound_rabbit_mq.import_firefox_consumer'
+            $chromeConsumer: '@old_sound_rabbit_mq.import_chrome_consumer'
+            $instapaperConsumer: '@old_sound_rabbit_mq.import_instapaper_consumer'
+            $pinboardConsumer: '@old_sound_rabbit_mq.import_pinboard_consumer'
+            $deliciousConsumer: '@old_sound_rabbit_mq.import_delicious_consumer'
+            $elcuratorConsumer: '@old_sound_rabbit_mq.import_elcurator_consumer'
+
     wallabag_import.consumer.amqp.pocket:
         class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
         arguments:

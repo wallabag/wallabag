@@ -2,10 +2,10 @@
 
 namespace Wallabag\CoreBundle\Event\Subscriber;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\Persistence\ManagerRegistry;
 use Wallabag\CoreBundle\Entity\Entry;
 
 /**
@@ -19,7 +19,7 @@ class SQLiteCascadeDeleteSubscriber implements EventSubscriber
 {
     private $doctrine;
 
-    public function __construct(Registry $doctrine)
+    public function __construct(ManagerRegistry $doctrine)
     {
         $this->doctrine = $doctrine;
     }
