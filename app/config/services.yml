@@ -12,7 +12,7 @@ services:
         autoconfigure: true
         public: true
         bind:
-            $rootDir: '%kernel.root_dir%'
+            $projectDir: '%kernel.project_dir%'
             $debug: '%kernel.debug%'
             $defaultLocale: '%kernel.default_locale%'
             $wallabagUrl: '%domain_name%'
