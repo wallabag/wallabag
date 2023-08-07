@@ -7,7 +7,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Wallabag\CoreBundle\Event\Listener\LocaleListener;
@@ -82,6 +82,6 @@ class LocaleListenerTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        return new GetResponseEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST);
+        return new RequestEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST);
     }
 }
