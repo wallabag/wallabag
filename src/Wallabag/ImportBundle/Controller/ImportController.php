@@ -4,13 +4,13 @@ namespace Wallabag\ImportBundle\Controller;
 
 use Craue\ConfigBundle\Util\Config;
 use Predis\Client;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Wallabag\ImportBundle\Consumer\RabbitMQConsumerTotalProxy;
 use Wallabag\ImportBundle\Import\ImportChain;
 
-class ImportController extends Controller
+class ImportController extends AbstractController
 {
     private RabbitMQConsumerTotalProxy $rabbitMQConsumerTotalProxy;
 
