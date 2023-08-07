@@ -74,7 +74,7 @@ class ManageControllerTest extends WallabagCoreTestCase
         $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/users/' . $this->getLoggedInUserId() . '/edit');
-        $disabled = $crawler->selectButton('user.form.delete')->extract('disabled');
+        $disabled = $crawler->selectButton('user.form.delete')->extract(['disabled']);
 
         $this->assertSame('disabled', $disabled[0]);
     }
