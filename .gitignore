@@ -15,6 +15,7 @@
 .php-cs-fixer.cache
 .phpunit.result.cache
 phpunit.xml
+docker-compose.override.yml
 
 # Parameters
 /app/config/parameters.yml
