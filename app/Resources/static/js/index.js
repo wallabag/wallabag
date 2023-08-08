@@ -10,16 +10,16 @@ import 'mathjax/es5/tex-svg';
 /* Fonts */
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import 'lato-font/css/lato-font.css';
-import '../../scss/_material_icons.scss';
+import '../scss/_material_icons.scss';
 
 /* Shortcuts */
-import './js/shortcuts/entry';
-import './js/shortcuts/main';
+import './shortcuts/entry';
+import './shortcuts/main';
 
 /* Hightlight */
-import './js/highlight';
+import './highlight';
 
-import { savePercent, retrievePercent } from './js/tools';
+import { savePercent, retrievePercent } from './tools';
 
 /* ==========================================================================
  Annotations & Remember position
