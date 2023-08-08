@@ -22,6 +22,8 @@ abstract class WallabagCoreTestCase extends WebTestCase
 
     protected function setUp(): void
     {
+        static::ensureKernelShutdown();
+
         parent::setUp();
 
         $this->client = static::createClient();
@@ -29,6 +31,8 @@ abstract class WallabagCoreTestCase extends WebTestCase
 
     public function getNewClient()
     {
+        static::ensureKernelShutdown();
+
         return $this->client = static::createClient();
     }
 
