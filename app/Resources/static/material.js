@@ -5,17 +5,17 @@ import 'materialize-css/dist/css/materialize.css';
 import 'materialize-css/dist/js/materialize';
 
 /* Global imports */
-import '../../js';
+import './js';
 
 /* Tools */
-import { initExport, initFilters, initRandom } from './js/tools';
+import { initExport, initFilters, initRandom } from './themes/material/js/tools';
 
 /* Import shortcuts */
-import './js/shortcuts/main';
-import './js/shortcuts/entry';
+import './themes/material/js/shortcuts/main';
+import './themes/material/js/shortcuts/entry';
 
 /* Theme style */
-import '../../scss/index.scss';
+import './scss/index.scss';
 
 const mobileMaxWidth = 993;
 

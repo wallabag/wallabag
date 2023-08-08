@@ -6,7 +6,7 @@ const rootDir = path.resolve(__dirname, '../../../');
 
 module.exports = {
   entry: {
-    material: path.join(rootDir, './app/Resources/static/themes/material/index.js'),
+    material: path.join(rootDir, './app/Resources/static/material.js'),
     public: path.join(rootDir, './app/Resources/static/public.js'),
   },
   output: {
