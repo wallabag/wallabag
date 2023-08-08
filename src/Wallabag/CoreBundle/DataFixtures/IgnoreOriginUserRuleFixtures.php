@@ -7,6 +7,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Wallabag\CoreBundle\Entity\IgnoreOriginUserRule;
 use Wallabag\UserBundle\DataFixtures\UserFixtures;
+use Wallabag\UserBundle\Entity\User;
 
 class IgnoreOriginUserRuleFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -17,7 +18,7 @@ class IgnoreOriginUserRuleFixtures extends Fixture implements DependentFixtureIn
     {
         $rule = new IgnoreOriginUserRule();
         $rule->setRule('host = "example.fr"');
-        $rule->setConfig($this->getReference('admin-user')->getConfig());
+        $rule->setConfig($this->getReference('admin-user', User::class)->getConfig());
 
         $manager->persist($rule);
 
