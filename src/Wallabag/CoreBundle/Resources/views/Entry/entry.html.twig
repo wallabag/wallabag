@@ -269,7 +269,7 @@
                     {% if entry.annotations|length %}
                         <li>
                             <i class="material-icons grey-text">comment</i>
-                            {{ 'entry.view.annotations_on_the_entry'|transchoice(entry.annotations|length) }}
+                            {{ 'entry.view.annotations_on_the_entry'|trans({'%count%': entry.annotations|length}) }}
                         </li>
                     {% endif %}
                     {% if entry.originUrl is not empty %}
