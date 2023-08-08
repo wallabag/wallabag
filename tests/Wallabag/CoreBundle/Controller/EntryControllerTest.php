@@ -673,7 +673,7 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->getRepository(Entry::class)
             ->findOneById($entry->getId());
 
-        $this->assertSame(1, $res->isStarred());
+        $this->assertTrue($res->isStarred());
     }
 
     public function testDelete()
@@ -1748,14 +1748,14 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->getRepository(Entry::class)
             ->find($entry1->getId());
 
-        $this->assertSame(1, $res->isStarred());
+        $this->assertTrue($res->isStarred());
 
         $res = $client->getContainer()
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry2->getId());
 
-        $this->assertSame(1, $res->isStarred());
+        $this->assertTrue($res->isStarred());
 
         // Mass actions : tag
         $client->request('POST', '/mass', [

@@ -3,6 +3,7 @@
 namespace Wallabag\CoreBundle\Helper;
 
 use Pagerfanta\Adapter\AdapterInterface;
+use Pagerfanta\Adapter\NullAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\UserBundle\Entity\User;
@@ -19,7 +20,7 @@ class PreparePagerForEntries
     /**
      * @param User $user If user isn't logged in, we can force it (like for feed)
      *
-     * @return Pagerfanta|null
+     * @return Pagerfanta
      */
     public function prepare(AdapterInterface $adapter, User $user = null)
     {
@@ -28,7 +29,7 @@ class PreparePagerForEntries
         }
 
         if (!$user instanceof User) {
-            return;
+            return new Pagerfanta(new NullAdapter());
         }
 
         $entries = new Pagerfanta($adapter);

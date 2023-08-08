@@ -132,12 +132,16 @@ class Config
     private $user;
 
     /**
+     * @var ArrayCollection<TaggingRule>
+     *
      * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\TaggingRule", mappedBy="config", cascade={"remove"})
      * @ORM\OrderBy({"id" = "ASC"})
      */
     private $taggingRules;
 
     /**
+    @var ArrayCollection<IgnoreOriginUserRule>
+
      * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\IgnoreOriginUserRule", mappedBy="config", cascade={"remove"})
      * @ORM\OrderBy({"id" = "ASC"})
      */
@@ -371,12 +375,9 @@ class Config
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function getDisplayThumbnails(): ?bool
+    public function getDisplayThumbnails(): bool
     {
-        return $this->displayThumbnails;
+        return (bool) $this->displayThumbnails;
     }
 
     /**
@@ -384,7 +385,7 @@ class Config
      */
     public function setDisplayThumbnails(bool $displayThumbnails)
     {
-        $this->displayThumbnails = $displayThumbnails;
+        $this->displayThumbnails = $displayThumbnails ? 1 : 0;
 
         return $this;
     }

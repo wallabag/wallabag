@@ -81,28 +81,28 @@ abstract class BrowserImport extends AbstractImport
             if ($this->producer) {
                 $this->parseEntriesForProducer($importedEntry);
 
-                return;
+                return null;
             }
 
             $this->parseEntries($importedEntry);
 
-            return;
+            return null;
         }
 
         if (\array_key_exists('children', $importedEntry)) {
             if ($this->producer) {
                 $this->parseEntriesForProducer($importedEntry['children']);
 
-                return;
+                return null;
             }
 
             $this->parseEntries($importedEntry['children']);
 
-            return;
+            return null;
         }
 
         if (!\array_key_exists('uri', $importedEntry) && !\array_key_exists('url', $importedEntry)) {
-            return;
+            return null;
         }
 
         $url = \array_key_exists('uri', $importedEntry) ? $importedEntry['uri'] : $importedEntry['url'];
@@ -114,7 +114,7 @@ abstract class BrowserImport extends AbstractImport
         if (false !== $existingEntry) {
             ++$this->skippedEntries;
 
-            return;
+            return null;
         }
 
         $data = $this->prepareEntry($importedEntry);
