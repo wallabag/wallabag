@@ -2,6 +2,7 @@
 
 namespace Wallabag\CoreBundle\Doctrine;
 
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -49,7 +50,7 @@ abstract class WallabagMigration extends AbstractMigration implements ContainerA
         }
 
         // escape table name is handled using " on postgresql
-        if ('postgresql' === $this->connection->getDatabasePlatform()->getName()) {
+        if ($this->connection->getDatabasePlatform() instanceof PostgreSQLPlatform) {
             return '"' . $table . '"';
         }
 

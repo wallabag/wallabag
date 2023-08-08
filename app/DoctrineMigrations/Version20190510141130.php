@@ -3,6 +3,9 @@
 namespace Application\Migrations;
 
 use Doctrine\DBAL\Migrations\SkipMigrationException;
+use Doctrine\DBAL\Platforms\MySQLPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
+use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
@@ -17,8 +20,10 @@ final class Version20190510141130 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        switch ($this->connection->getDatabasePlatform()->getName()) {
-            case 'sqlite':
+        $platform = $this->connection->getDatabasePlatform();
+
+        switch (true) {
+            case $platform instanceof SqlitePlatform:
                 $this->addSql('DROP INDEX IDX_368A4209A76ED395');
                 $this->addSql('DROP INDEX IDX_368A420919EB6921');
                 $this->addSql('DROP INDEX UNIQ_368A42095F37A13B');
@@ -60,7 +65,7 @@ final class Version20190510141130 extends WallabagMigration
                 $this->addSql('CREATE INDEX IDX_EE52E3FAA76ED395 ON ' . $this->getTable('oauth2_auth_codes', true) . ' (user_id)');
                 $this->addSql('CREATE INDEX IDX_EE52E3FA19EB6921 ON ' . $this->getTable('oauth2_auth_codes', true) . ' (client_id)');
                 break;
-            case 'mysql':
+            case $platform instanceof MySQLPlatform:
                 $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_access_tokens') . ' DROP FOREIGN KEY FK_368A4209A76ED395');
                 $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_access_tokens') . ' ADD CONSTRAINT FK_368A4209A76ED395 FOREIGN KEY (user_id) REFERENCES ' . $this->getTable('user') . ' (id) ON DELETE CASCADE');
 
@@ -75,7 +80,7 @@ final class Version20190510141130 extends WallabagMigration
                 $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_auth_codes') . ' DROP FOREIGN KEY FK_EE52E3FAA76ED395');
                 $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_auth_codes') . ' ADD CONSTRAINT FK_EE52E3FAA76ED395 FOREIGN KEY (user_id) REFERENCES ' . $this->getTable('user') . ' (id) ON DELETE CASCADE');
                 break;
-            case 'postgresql':
+            case $platform instanceof PostgreSQLPlatform:
                 $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_access_tokens') . ' DROP CONSTRAINT FK_368A4209A76ED395');
                 $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_access_tokens') . ' ADD CONSTRAINT FK_368A4209A76ED395 FOREIGN KEY (user_id) REFERENCES ' . $this->getTable('user') . ' (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
 

@@ -2,6 +2,9 @@
 
 namespace Application\Migrations;
 
+use Doctrine\DBAL\Platforms\MySQLPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
+use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
@@ -12,8 +15,10 @@ final class Version20190425115043 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        switch ($this->connection->getDatabasePlatform()->getName()) {
-            case 'sqlite':
+        $platform = $this->connection->getDatabasePlatform();
+
+        switch (true) {
+            case $platform instanceof SqlitePlatform:
                 $this->addSql('DROP INDEX UNIQ_87E64C53A76ED395');
                 $this->addSql('CREATE TEMPORARY TABLE __temp__' . $this->getTable('config', true) . ' AS SELECT id, user_id, theme, items_per_page, language, rss_token, rss_limit, reading_speed, pocket_consumer_key, action_mark_as_read, list_mode FROM ' . $this->getTable('config', true));
                 $this->addSql('DROP TABLE ' . $this->getTable('config', true));
@@ -22,11 +27,11 @@ final class Version20190425115043 extends WallabagMigration
                 $this->addSql('DROP TABLE __temp__' . $this->getTable('config', true));
                 $this->addSql('CREATE UNIQUE INDEX UNIQ_87E64C53A76ED395 ON ' . $this->getTable('config', true) . ' (user_id)');
                 break;
-            case 'mysql':
+            case $platform instanceof MySQLPlatform:
                 $this->addSql('ALTER TABLE ' . $this->getTable('config') . ' CHANGE rss_token feed_token VARCHAR(255) DEFAULT NULL');
                 $this->addSql('ALTER TABLE ' . $this->getTable('config') . ' CHANGE rss_limit feed_limit INT DEFAULT NULL');
                 break;
-            case 'postgresql':
+            case $platform instanceof PostgreSQLPlatform:
                 $this->addSql('ALTER TABLE ' . $this->getTable('config') . ' RENAME COLUMN rss_token TO feed_token');
                 $this->addSql('ALTER TABLE ' . $this->getTable('config') . ' RENAME COLUMN rss_limit TO feed_limit');
                 break;
@@ -35,8 +40,10 @@ final class Version20190425115043 extends WallabagMigration
 
     public function down(Schema $schema): void
     {
-        switch ($this->connection->getDatabasePlatform()->getName()) {
-            case 'sqlite':
+        $platform = $this->connection->getDatabasePlatform();
+
+        switch (true) {
+            case $platform instanceof SqlitePlatform:
                 $this->addSql('DROP INDEX UNIQ_87E64C53A76ED395');
                 $this->addSql('CREATE TEMPORARY TABLE __temp__' . $this->getTable('config', true) . ' AS SELECT id, user_id, theme, items_per_page, language, feed_token, feed_limit, reading_speed, pocket_consumer_key, action_mark_as_read, list_mode FROM "' . $this->getTable('config', true) . '"');
                 $this->addSql('DROP TABLE "' . $this->getTable('config', true) . '"');
@@ -45,11 +52,11 @@ final class Version20190425115043 extends WallabagMigration
                 $this->addSql('DROP TABLE __temp__' . $this->getTable('config', true));
                 $this->addSql('CREATE UNIQUE INDEX UNIQ_87E64C53A76ED395 ON "' . $this->getTable('config', true) . '" (user_id)');
                 break;
-            case 'mysql':
+            case $platform instanceof MySQLPlatform:
                 $this->addSql('ALTER TABLE ' . $this->getTable('config') . ' CHANGE feed_token rss_token');
                 $this->addSql('ALTER TABLE ' . $this->getTable('config') . ' CHANGE feed_limit rss_limit');
                 break;
-            case 'postgresql':
+            case $platform instanceof PostgreSQLPlatform:
                 $this->addSql('ALTER TABLE ' . $this->getTable('config') . ' RENAME COLUMN feed_token TO rss_token');
                 $this->addSql('ALTER TABLE ' . $this->getTable('config') . ' RENAME COLUMN feed_limit TO rss_limit');
                 break;

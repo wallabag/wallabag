@@ -2,6 +2,7 @@
 
 namespace Application\Migrations;
 
+use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
@@ -12,7 +13,7 @@ class Version20161022134138 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        $this->skipIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'This migration only apply to MySQL');
+        $this->skipIf(!$this->connection->getDatabasePlatform() instanceof MySQLPlatform, 'This migration only apply to MySQL');
 
         $this->addSql('ALTER DATABASE `' . $this->connection->getParams()['dbname'] . '` CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;');
 
@@ -40,7 +41,7 @@ class Version20161022134138 extends WallabagMigration
 
     public function down(Schema $schema): void
     {
-        $this->skipIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'This migration only apply to MySQL');
+        $this->skipIf(!$this->connection->getDatabasePlatform() instanceof MySQLPlatform, 'This migration only apply to MySQL');
 
         $this->addSql('ALTER DATABASE `' . $this->connection->getParams()['dbname'] . '` CHARACTER SET = utf8 COLLATE = utf8_unicode_ci;');
 

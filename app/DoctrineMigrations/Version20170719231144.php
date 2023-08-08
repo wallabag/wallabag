@@ -2,6 +2,7 @@
 
 namespace Application\Migrations;
 
+use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
@@ -12,7 +13,7 @@ class Version20170719231144 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        $this->skipIf('sqlite' === $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
+        $this->skipIf($this->connection->getDatabasePlatform() instanceof SqlitePlatform, 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
 
         // Find tags which need to be merged
         $dupTags = $this->connection->query('

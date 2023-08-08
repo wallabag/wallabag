@@ -2,6 +2,9 @@
 
 namespace Application\Migrations;
 
+use Doctrine\DBAL\Platforms\MySQLPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
+use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
@@ -18,8 +21,10 @@ final class Version20190806130304 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        switch ($this->connection->getDatabasePlatform()->getName()) {
-            case 'sqlite':
+        $platform = $this->connection->getDatabasePlatform();
+
+        switch (true) {
+            case $platform instanceof SqlitePlatform:
                 $this->addSql('DROP INDEX uid');
                 $this->addSql('DROP INDEX created_at');
                 $this->addSql('DROP INDEX hashed_url_user_id');
@@ -44,7 +49,7 @@ final class Version20190806130304 extends WallabagMigration
                 $this->addSql('CREATE INDEX tag_label ON ' . $this->getTable('tag', true) . ' (label)');
                 $this->addSql('CREATE INDEX config_feed_token ON ' . $this->getTable('config', true) . ' (feed_token)');
                 break;
-            case 'mysql':
+            case $platform instanceof MySQLPlatform:
                 $this->addSql('ALTER TABLE ' . $this->getTable('entry') . ' MODIFY language VARCHAR(20) DEFAULT NULL');
                 $this->addSql('CREATE INDEX user_language ON ' . $this->getTable('entry') . ' (language, user_id)');
                 $this->addSql('CREATE INDEX user_archived ON ' . $this->getTable('entry') . ' (user_id, is_archived, archived_at)');
@@ -53,7 +58,7 @@ final class Version20190806130304 extends WallabagMigration
                 $this->addSql('CREATE INDEX tag_label ON ' . $this->getTable('tag') . ' (label (255))');
                 $this->addSql('CREATE INDEX config_feed_token ON ' . $this->getTable('config') . ' (feed_token (255))');
                 break;
-            case 'postgresql':
+            case $platform instanceof PostgreSQLPlatform:
                 $this->addSql('ALTER TABLE ' . $this->getTable('entry') . ' ALTER language TYPE VARCHAR(20)');
                 $this->addSql('CREATE INDEX user_language ON ' . $this->getTable('entry') . ' (language, user_id)');
                 $this->addSql('CREATE INDEX user_archived ON ' . $this->getTable('entry') . ' (user_id, is_archived, archived_at)');
@@ -67,8 +72,10 @@ final class Version20190806130304 extends WallabagMigration
 
     public function down(Schema $schema): void
     {
-        switch ($this->connection->getDatabasePlatform()->getName()) {
-            case 'sqlite':
+        $platform = $this->connection->getDatabasePlatform();
+
+        switch (true) {
+            case $platform instanceof SqlitePlatform:
                 $this->addSql('DROP INDEX IDX_F4D18282A76ED395');
                 $this->addSql('DROP INDEX created_at');
                 $this->addSql('DROP INDEX uid');
@@ -93,7 +100,7 @@ final class Version20190806130304 extends WallabagMigration
                 $this->addSql('CREATE INDEX hashed_url_user_id ON ' . $this->getTable('entry', true) . ' (user_id, hashed_url)');
                 $this->addSql('CREATE INDEX hashed_given_url_user_id ON ' . $this->getTable('entry', true) . ' (user_id, hashed_given_url)');
                 break;
-            case 'mysql':
+            case $platform instanceof MySQLPlatform:
                 $this->addSql('ALTER TABLE ' . $this->getTable('entry') . ' MODIFY language LONGTEXT DEFAULT NULL');
                 $this->addSql('DROP INDEX user_language ON ' . $this->getTable('entry'));
                 $this->addSql('DROP INDEX user_archived ON ' . $this->getTable('entry'));
@@ -102,7 +109,7 @@ final class Version20190806130304 extends WallabagMigration
                 $this->addSql('DROP INDEX tag_label ON ' . $this->getTable('tag'));
                 $this->addSql('DROP INDEX config_feed_token ON ' . $this->getTable('config'));
                 break;
-            case 'postgresql':
+            case $platform instanceof PostgreSQLPlatform:
                 $this->addSql('ALTER TABLE ' . $this->getTable('entry') . ' ALTER language TYPE TEXT');
                 $this->addSql('DROP INDEX user_language ON ' . $this->getTable('entry'));
                 $this->addSql('DROP INDEX user_archived ON ' . $this->getTable('entry'));

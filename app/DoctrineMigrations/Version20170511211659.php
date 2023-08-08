@@ -3,6 +3,9 @@
 namespace Application\Migrations;
 
 use Doctrine\DBAL\Migrations\SkipMigrationException;
+use Doctrine\DBAL\Platforms\MySQLPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
+use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
@@ -13,8 +16,10 @@ class Version20170511211659 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        switch ($this->connection->getDatabasePlatform()->getName()) {
-            case 'sqlite':
+        $platform = $this->connection->getDatabasePlatform();
+
+        switch (true) {
+            case $platform instanceof SqlitePlatform:
                 $annotationTableName = $this->getTable('annotation', true);
                 $userTableName = $this->getTable('user', true);
                 $entryTableName = $this->getTable('entry', true);
@@ -53,10 +58,10 @@ EOD
                 );
                 $this->addSql('DROP TABLE __temp__wallabag_annotation');
                 break;
-            case 'mysql':
+            case $platform instanceof MySQLPlatform:
                 $this->addSql('ALTER TABLE ' . $this->getTable('annotation') . ' MODIFY quote TEXT NOT NULL');
                 break;
-            case 'postgresql':
+            case $platform instanceof PostgreSQLPlatform:
                 $this->addSql('ALTER TABLE ' . $this->getTable('annotation') . ' ALTER COLUMN quote TYPE TEXT');
                 break;
         }
@@ -66,14 +71,16 @@ EOD
     {
         $tableName = $this->getTable('annotation');
 
-        switch ($this->connection->getDatabasePlatform()->getName()) {
-            case 'sqlite':
+        $platform = $this->connection->getDatabasePlatform();
+
+        switch (true) {
+            case $platform instanceof SqlitePlatform:
                 throw new SkipMigrationException('Too complex ...');
                 break;
-            case 'mysql':
+            case $platform instanceof MySQLPlatform:
                 $this->addSql('ALTER TABLE ' . $tableName . ' MODIFY quote VARCHAR(255) NOT NULL');
                 break;
-            case 'postgresql':
+            case $platform instanceof PostgreSQLPlatform:
                 $this->addSql('ALTER TABLE ' . $tableName . ' ALTER COLUMN quote TYPE VARCHAR(255)');
                 break;
         }

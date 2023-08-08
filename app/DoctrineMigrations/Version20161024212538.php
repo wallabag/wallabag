@@ -2,6 +2,7 @@
 
 namespace Application\Migrations;
 
+use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
@@ -37,7 +38,7 @@ class Version20161024212538 extends WallabagMigration
 
         $clientsTable->dropColumn('user_id', 'integer');
 
-        if ('sqlite' !== $this->connection->getDatabasePlatform()->getName()) {
+        if (!$this->connection->getDatabasePlatform() instanceof SqlitePlatform) {
             $clientsTable->removeForeignKey($this->constraintName);
         }
     }

@@ -2,6 +2,7 @@
 
 namespace Application\Migrations;
 
+use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
@@ -14,7 +15,7 @@ final class Version20190619093534 extends WallabagMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->skipIf('sqlite' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'sqlite\'.');
+        $this->skipIf(!$this->connection->getDatabasePlatform() instanceof SqlitePlatform, 'Migration can only be executed safely on \'sqlite\'.');
 
         $this->addSql('UPDATE ' . $this->getTable('entry', true) . ' SET reading_time = 0 WHERE reading_time IS NULL;');
 
@@ -42,7 +43,7 @@ final class Version20190619093534 extends WallabagMigration
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->skipIf('sqlite' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'sqlite\'.');
+        $this->skipIf(!$this->connection->getDatabasePlatform() instanceof SqlitePlatform, 'Migration can only be executed safely on \'sqlite\'.');
 
         $this->addSql('DROP INDEX IDX_F4D18282A76ED395');
         $this->addSql('DROP INDEX created_at');

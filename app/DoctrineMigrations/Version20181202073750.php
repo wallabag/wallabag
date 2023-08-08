@@ -2,6 +2,9 @@
 
 namespace Application\Migrations;
 
+use Doctrine\DBAL\Platforms\MySQLPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
+use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Wallabag\CoreBundle\Doctrine\WallabagMigration;
 
@@ -12,8 +15,10 @@ final class Version20181202073750 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        switch ($this->connection->getDatabasePlatform()->getName()) {
-            case 'sqlite':
+        $platform = $this->connection->getDatabasePlatform();
+
+        switch (true) {
+            case $platform instanceof SqlitePlatform:
                 $this->addSql('DROP INDEX UNIQ_1D63E7E5C05FB297');
                 $this->addSql('DROP INDEX UNIQ_1D63E7E5A0D96FBF');
                 $this->addSql('DROP INDEX UNIQ_1D63E7E592FC23A8');
@@ -28,13 +33,13 @@ final class Version20181202073750 extends WallabagMigration
                 $this->addSql('CREATE UNIQUE INDEX UNIQ_1D63E7E5A0D96FBF ON ' . $this->getTable('user', true) . ' (email_canonical)');
                 $this->addSql('CREATE UNIQUE INDEX UNIQ_1D63E7E592FC23A8 ON ' . $this->getTable('user', true) . ' (username_canonical)');
                 break;
-            case 'mysql':
+            case $platform instanceof MySQLPlatform:
                 $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' ADD googleAuthenticatorSecret VARCHAR(191) DEFAULT NULL');
                 $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' CHANGE twoFactorAuthentication emailTwoFactor BOOLEAN NOT NULL');
                 $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' DROP trusted');
                 $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' ADD backupCodes LONGTEXT DEFAULT NULL COMMENT \'(DC2Type:json_array)\'');
                 break;
-            case 'postgresql':
+            case $platform instanceof PostgreSQLPlatform:
                 $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' ADD googleAuthenticatorSecret VARCHAR(191) DEFAULT NULL');
                 $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' RENAME COLUMN twofactorauthentication TO emailTwoFactor');
                 $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' DROP trusted');
@@ -45,8 +50,10 @@ final class Version20181202073750 extends WallabagMigration
 
     public function down(Schema $schema): void
     {
-        switch ($this->connection->getDatabasePlatform()->getName()) {
-            case 'sqlite':
+        $platform = $this->connection->getDatabasePlatform();
+
+        switch (true) {
+            case $platform instanceof SqlitePlatform:
                 $this->addSql('DROP INDEX UNIQ_1D63E7E592FC23A8');
                 $this->addSql('DROP INDEX UNIQ_1D63E7E5A0D96FBF');
                 $this->addSql('DROP INDEX UNIQ_1D63E7E5C05FB297');
@@ -59,13 +66,13 @@ final class Version20181202073750 extends WallabagMigration
                 $this->addSql('CREATE UNIQUE INDEX UNIQ_1D63E7E5A0D96FBF ON "' . $this->getTable('user', true) . '" (email_canonical)');
                 $this->addSql('CREATE UNIQUE INDEX UNIQ_1D63E7E5C05FB297 ON "' . $this->getTable('user', true) . '" (confirmation_token)');
                 break;
-            case 'mysql':
+            case $platform instanceof MySQLPlatform:
                 $this->addSql('ALTER TABLE `' . $this->getTable('user') . '` DROP googleAuthenticatorSecret');
                 $this->addSql('ALTER TABLE `' . $this->getTable('user') . '` CHANGE emailtwofactor twoFactorAuthentication BOOLEAN NOT NULL');
                 $this->addSql('ALTER TABLE `' . $this->getTable('user') . '` ADD trusted TEXT DEFAULT NULL');
                 $this->addSql('ALTER TABLE `' . $this->getTable('user') . '` DROP backupCodes');
                 break;
-            case 'postgresql':
+            case $platform instanceof PostgreSQLPlatform:
                 $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' DROP googleAuthenticatorSecret');
                 $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' RENAME COLUMN emailTwoFactor TO twofactorauthentication');
                 $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' ADD trusted TEXT DEFAULT NULL');
