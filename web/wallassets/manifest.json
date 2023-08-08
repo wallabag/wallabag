@@ -52,15 +52,15 @@
   "fonts/Roboto-Thin.woff2": "fonts/Roboto-Thin.woff2",
   "img/annotator-glyph-sprite.png?embed": "img/annotator-glyph-sprite.png",
   "img/annotator-icon-sprite.png?embed": "img/annotator-icon-sprite.png",
+  "img/diaspora-icon--black.png": "img/diaspora-icon--black.png",
+  "img/scuttle.png": "img/scuttle.png",
+  "img/shaarli.png": "img/shaarli.png",
+  "img/unmark-icon--black.png": "img/unmark-icon--black.png",
   "material.css": "material.css",
   "material.css.map": "material.css.map",
   "material.js": "material.js",
   "material.js.map": "material.js.map",
   "public.css": "public.css",
   "public.css.map": "public.css.map",
-  "public.js": "public.js",
-  "themes/_global/img/icons/diaspora-icon--black.png": "themes/_global/img/icons/diaspora-icon--black.png",
-  "themes/_global/img/icons/scuttle.png": "themes/_global/img/icons/scuttle.png",
-  "themes/_global/img/icons/shaarli.png": "themes/_global/img/icons/shaarli.png",
-  "themes/_global/img/icons/unmark-icon--black.png": "themes/_global/img/icons/unmark-icon--black.png"
+  "public.js": "public.js"
 }
