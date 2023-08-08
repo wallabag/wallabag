@@ -9,10 +9,11 @@ use Http\Client\Common\HttpMethodsClient;
 use Http\Client\Common\Plugin\ErrorPlugin;
 use Http\Client\Common\Plugin\RedirectPlugin;
 use Http\Client\Common\PluginClient;
-use Http\Client\HttpClient;
-use Http\Discovery\MessageFactoryDiscovery;
-use Http\Message\MessageFactory;
+use Http\Discovery\Psr17FactoryDiscovery;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Finder\Finder;
@@ -28,9 +29,9 @@ class DownloadImages
     private $mimeTypes;
     private $wallabagUrl;
 
-    public function __construct(HttpClient $client, $baseFolder, $wallabagUrl, LoggerInterface $logger, MessageFactory $messageFactory = null)
+    public function __construct(ClientInterface $client, $baseFolder, $wallabagUrl, LoggerInterface $logger, RequestFactoryInterface $requestFactory = null, StreamFactoryInterface $streamFactory = null)
     {
-        $this->client = new HttpMethodsClient(new PluginClient($client, [new ErrorPlugin(), new RedirectPlugin()]), $messageFactory ?: MessageFactoryDiscovery::find());
+        $this->client = new HttpMethodsClient(new PluginClient($client, [new ErrorPlugin(), new RedirectPlugin()]), $requestFactory ?: Psr17FactoryDiscovery::findRequestFactory(), $streamFactory ?: Psr17FactoryDiscovery::findStreamFactory());
         $this->baseFolder = $baseFolder;
         $this->wallabagUrl = rtrim($wallabagUrl, '/');
         $this->logger = $logger;
