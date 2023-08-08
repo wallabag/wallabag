@@ -8,11 +8,7 @@ import 'materialize-css/dist/js/materialize';
 import './js';
 
 /* Tools */
-import { initExport, initFilters, initRandom } from './themes/material/js/tools';
-
-/* Import shortcuts */
-import './themes/material/js/shortcuts/main';
-import './themes/material/js/shortcuts/entry';
+import { initExport, initFilters, initRandom } from './js/tools';
 
 /* Theme style */
 import './scss/index.scss';
