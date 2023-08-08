@@ -4,7 +4,7 @@ namespace Tests\Wallabag\CoreBundle\Controller;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Client;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Entity\SiteCredential;
 
@@ -139,7 +139,7 @@ class SiteCredentialControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('flashes.site_credential.notice.deleted', $crawler->filter('body')->extract(['_text'])[0]);
     }
 
-    private function createSiteCredential(Client $client)
+    private function createSiteCredential(KernelBrowser $client)
     {
         $credential = new SiteCredential($this->getLoggedInUser());
         $credential->setHost('google.io');

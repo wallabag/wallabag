@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManager;
 use FOS\UserBundle\Security\LoginManager;
-use Symfony\Bundle\FrameworkBundle\Client;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -16,7 +16,7 @@ use Wallabag\UserBundle\Entity\User;
 abstract class WallabagApiTestCase extends WebTestCase
 {
     /**
-     * @var Client
+     * @var KernelBrowser
      */
     protected $client = null;
 
@@ -32,7 +32,7 @@ abstract class WallabagApiTestCase extends WebTestCase
     }
 
     /**
-     * @return Client
+     * @return KernelBrowser
      */
     protected function createAuthorizedClient()
     {

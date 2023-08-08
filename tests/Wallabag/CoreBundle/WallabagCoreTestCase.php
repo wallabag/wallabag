@@ -3,8 +3,8 @@
 namespace Tests\Wallabag\CoreBundle;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -16,7 +16,7 @@ use Wallabag\UserBundle\Entity\User;
 abstract class WallabagCoreTestCase extends WebTestCase
 {
     /**
-     * @var Client|null
+     * @var KernelBrowser|null
      */
     private $client = null;
 
@@ -41,7 +41,7 @@ abstract class WallabagCoreTestCase extends WebTestCase
         return $this->client;
     }
 
-    public function resetDatabase(Client $client)
+    public function resetDatabase(KernelBrowser $client)
     {
         $application = new Application($client->getKernel());
         $application->setAutoExit(false);
