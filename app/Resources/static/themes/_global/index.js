@@ -10,7 +10,7 @@ import 'mathjax/es5/tex-svg';
 /* Fonts */
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import 'lato-font/css/lato-font.css';
-import './global.scss';
+import './_material_icons.scss';
 
 /* Shortcuts */
 import './js/shortcuts/entry';
