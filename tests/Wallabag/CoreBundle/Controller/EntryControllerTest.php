@@ -1654,7 +1654,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         // As long as the deletion link of a tag is following
         // a link to the tag view, we take the second one to retrieve
         // the deletion link of the first tag
-        $link = $crawler->filter('body div#article div.tools ul.tags li.chip a')->extract('href')[1];
+        $link = $crawler->filter('body div#article div.tools ul.tags li.chip a')->extract(['href'])[1];
 
         $this->assertSame(sprintf('/remove-tag/%s/%s', $entry->getId(), $tag->getId()), $link);
     }
