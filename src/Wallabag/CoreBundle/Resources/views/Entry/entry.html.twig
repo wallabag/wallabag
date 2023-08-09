@@ -54,7 +54,7 @@
         </li>
 
         <li class="bold">
-            <a class="waves-effect collapsible-header" title="{{ 'entry.view.left_menu.re_fetch_content'|trans }}" href="{{ path('reload_entry', {'id': entry.id}) }}" id="reload">
+            <a class="waves-effect collapsible-header" onclick="return confirm('{{ 'entry.confirm.reload'|trans|escape('js') }}')" title="{{ 'entry.view.left_menu.re_fetch_content'|trans }}" href="{{ path('reload_entry', {'id': entry.id}) }}" id="reload">
                 <i class="material-icons small">refresh</i>
                 <span>{{ 'entry.view.left_menu.re_fetch_content'|trans }}</span>
             </a>

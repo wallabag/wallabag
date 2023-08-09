@@ -320,6 +320,7 @@ entry:
         delete: Are you sure you want to remove that article?
         delete_tag: Are you sure you want to remove that tag from that article?
         delete_entries: Are you sure you want to remove these articles?
+        reload: Are you sure you want to reload that article?
     metadata:
         reading_time: Estimated reading time
         reading_time_minutes_short: '%readingTime% min'
