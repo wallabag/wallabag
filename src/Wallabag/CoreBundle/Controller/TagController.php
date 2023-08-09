@@ -45,7 +45,7 @@ class TagController extends AbstractController
         $form = $this->createForm(NewTagType::class, new Tag());
         $form->handleRequest($request);
 
-        $tags = $form->get('label')->getData();
+        $tags = $form->get('label')->getData() ?? '';
         $tagsExploded = explode(',', $tags);
 
         // avoid too much tag to be added

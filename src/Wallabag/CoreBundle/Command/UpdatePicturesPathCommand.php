@@ -46,11 +46,15 @@ class UpdatePicturesPathCommand extends Command
         $io->text('Retrieve existing entries');
         $i = 1;
         foreach ($query->toIterable() as $entry) {
-            $content = str_replace($oldUrl, $this->wallabagUrl, $entry->getContent());
-            $entry->setContent($content);
+            $content = $entry->getContent();
+            if (null !== $content) {
+                $entry->setContent(str_replace($oldUrl, $this->wallabagUrl, $content));
+            }
 
-            $previewPicture = str_replace($oldUrl, $this->wallabagUrl, $entry->getPreviewPicture());
-            $entry->setPreviewPicture($previewPicture);
+            $previewPicture = $entry->getPreviewPicture();
+            if (null !== $previewPicture) {
+                $entry->setPreviewPicture(str_replace($oldUrl, $this->wallabagUrl, $previewPicture));
+            }
 
             if (0 === ($i % 20)) {
                 $this->entityManager->flush();
