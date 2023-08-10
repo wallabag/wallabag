@@ -33,7 +33,8 @@ framework:
         cookie_secure: auto
     fragments: ~
     http_method_override: true
-    assets: ~
+    assets:
+        json_manifest_path: '%kernel.project_dir%/web/build/manifest.json'
     mailer:
         dsn: "%mailer_dsn%"
     http_client:
@@ -469,3 +470,8 @@ craue_config:
 when@dev:
     maker:
         root_namespace: 'Wallabag'
+
+webpack_encore:
+    output_path: '%kernel.project_dir%/web/build'
+    script_attributes:
+        defer: true

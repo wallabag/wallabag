@@ -35,6 +35,7 @@ class AppKernel extends Kernel
             new Http\HttplugBundle\HttplugBundle(),
             new Sentry\SentryBundle\SentryBundle(),
             new Twig\Extra\TwigExtraBundle\TwigExtraBundle(),
+            new Symfony\WebpackEncoreBundle\WebpackEncoreBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -155,6 +155,7 @@
         "symfony/translation-contracts": "^2.5.2",
         "symfony/twig-bundle": "^5.4.35",
         "symfony/validator": "^5.4.35",
+        "symfony/webpack-encore-bundle": "^1.17",
         "tecnickcom/tcpdf": "^6.6.5",
         "twig/extra-bundle": "^3.8",
         "twig/string-extra": "^3.8",

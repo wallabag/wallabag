@@ -57,6 +57,12 @@ jobs:
           extensions: json, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
 
+      - name: "Install Node"
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: 'yarn'
+
       - name: "Setup MySQL"
         if: "${{ matrix.database == 'mysql' }}"
         run: |
@@ -75,6 +81,12 @@ jobs:
         uses: "ramsey/composer-install@v3"
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
+
+      - name: "Install dependencies with Yarn"
+        run: yarn install
+
+      - name: "Build assets with Yarn"
+        run: yarn build:dev
 
       - name: "Prepare database configuration"
         run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
@@ -120,6 +132,12 @@ jobs:
           extensions: json, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
 
+      - name: "Install Node"
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: 'yarn'
+
       - name: "Remove database prefix"
         run: |
           pip install --user yq
@@ -143,6 +161,12 @@ jobs:
         uses: "ramsey/composer-install@v3"
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
+
+      - name: "Install dependencies with Yarn"
+        run: yarn install
+
+      - name: "Build assets with Yarn"
+        run: yarn build:dev
 
       - name: "Prepare database configuration"
         run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
@@ -179,6 +203,12 @@ jobs:
           extensions: json, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
 
+      - name: "Install Node"
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: 'yarn'
+
       - name: "Setup MySQL"
         if: "${{ matrix.database == 'mysql' }}"
         run: |
@@ -197,6 +227,12 @@ jobs:
         uses: "ramsey/composer-install@v3"
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
+
+      - name: "Install dependencies with Yarn"
+        run: yarn install
+
+      - name: "Build assets with Yarn"
+        run: yarn build:dev
 
       - name: "Prepare database configuration"
         run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml

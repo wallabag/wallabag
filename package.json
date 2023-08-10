@@ -44,8 +44,10 @@
     "@babel/core": "^7.26.7",
     "@babel/eslint-parser": "^7.26.5",
     "@babel/preset-env": "^7.26.7",
+    "@symfony/webpack-encore": "^4.7.0",
     "autoprefixer": "^10.4.20",
     "babel-loader": "^9.2.1",
+    "core-js": "^3.23.0",
     "css-loader": "^7.1.2",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -57,6 +59,7 @@
     "postcss": "^8.5.1",
     "postcss-loader": "^8.1.1",
     "postcss-scss": "^4.0.9",
+    "regenerator-runtime": "^0.13.9",
     "sass-embedded": "^1.83.4",
     "sass-loader": "^16.0.4",
     "style-loader": "^4.0.0",
@@ -71,7 +74,8 @@
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.2.0",
     "webpack-manifest-plugin": "^5.0.0",
-    "webpack-merge": "^6.0.1"
+    "webpack-merge": "^6.0.1",
+    "webpack-notifier": "^1.15.0"
   },
   "dependencies": {
     "@fontsource/atkinson-hyperlegible": "^5.1.1",
@@ -95,8 +99,9 @@
     "waypoints": "^4.0.1"
   },
   "scripts": {
-    "watch": "webpack-dev-server --env=dev",
-    "build:dev": "webpack --env=dev",
-    "build:prod": "webpack --env=prod"
+    "dev-server": "encore dev-server",
+    "build:dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build:prod": "encore production --progress"
   }
 }
