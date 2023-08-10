@@ -31,7 +31,12 @@ framework:
         save_path: "%kernel.project_dir%/var/sessions/%kernel.environment%"
     fragments: ~
     http_method_override: true
-    assets: ~
+    assets:
+        packages:
+            prod:
+                json_manifest_path: '%kernel.project_dir%/web/wallassets/manifest.json'
+            dev:
+                json_manifest_path: '%kernel.project_dir%/web/wallassets_dev/manifest.json'
     mailer:
         dsn: "%mailer_dsn%"
 
@@ -421,3 +426,9 @@ httplug:
 # define custom entity so we can override length attribute to fix utf8mb4 issue
 craue_config:
     entity_name: Wallabag\CoreBundle\Entity\InternalSetting
+
+webpack_encore:
+    output_path: '%kernel.project_dir%/web/wallassets'
+    builds:
+        prod: '%kernel.project_dir%/web/wallassets'
+        dev: '%kernel.project_dir%/web/wallassets_dev'

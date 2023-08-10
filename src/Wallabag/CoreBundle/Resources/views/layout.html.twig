@@ -2,14 +2,14 @@
 
 {% block css %}
     {{ parent() }}
-    {% if not app.debug %}
-        <link rel="stylesheet" href="{{ asset('wallassets/material.css') }}">
-    {% endif %}
+
+    {{ encore_entry_link_tags('material', null, app.environment == 'dev' ? 'dev' : 'prod') }}
 {% endblock %}
 
 {% block scripts %}
     {{ parent() }}
-    <script src="{{ asset('wallassets/material' ~ (app.debug ? '.dev' : '') ~ '.js') }}"></script>
+
+    {{ encore_entry_script_tags('material', null, app.environment == 'dev' ? 'dev' : 'prod') }}
 {% endblock %}
 
 {% block header %}
