@@ -551,6 +551,7 @@ entry:
         delete: Stvarno želiš ukloniti taj članak?
         delete_tag: Stvarno želiš ukloniti tu oznaku za taj članak?
         delete_entries: Stvarno želiš ukloniti ove članke?
+        reload: Stvarno želiš ponovo učitati taj članak?
     edit:
         title_label: Naslov
         url_label: Url
