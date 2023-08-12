@@ -30,8 +30,8 @@ const configureCommonConfig = (enc) => {
 configureCommonConfig(Encore);
 
 Encore
-  .setOutputPath('web/wallassets/')
-  .setPublicPath('/wallassets');
+  .setOutputPath('web/build/')
+  .setPublicPath('/build');
 
 const prodConfig = Encore.getWebpackConfig();
 prodConfig.name = 'prod';
@@ -41,8 +41,8 @@ Encore.reset();
 configureCommonConfig(Encore);
 
 Encore
-  .setOutputPath('web/wallassets_dev/')
-  .setPublicPath('/wallassets_dev')
+  .setOutputPath('web/build_dev/')
+  .setPublicPath('/build_dev')
   .configureImageRule({
     type: 'asset',
     maxSize: 500 * 1024, // see https://github.com/symfony/webpack-encore/issues/1132
