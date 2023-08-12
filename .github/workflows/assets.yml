@@ -28,10 +28,10 @@ jobs:
         run: "yarn install"
 
       - name: "Build dev assets"
-        run: "yarn run build:dev"
+        run: "yarn dev"
 
       - name: "Build prod assets"
-        run: "yarn run build:prod"
+        run: "yarn build"
 
       - name: "Validate no change were created"
         run: |

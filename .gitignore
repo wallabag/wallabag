@@ -29,7 +29,7 @@ web/uploads/
 !/web/bundles/.gitkeep
 /web/assets/images/*
 !web/assets/images/.gitkeep
-/web/wallassets/*.dev.js
+/web/build_dev/
 
 # Build
 /app/build
@@ -59,3 +59,5 @@ specialexport.json
 
 # Custom CSS file
 web/custom.css
+
+yarn-error.log

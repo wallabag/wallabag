@@ -143,6 +143,7 @@
         "symfony/templating": "^4.4",
         "symfony/twig-bundle": "^4.4",
         "symfony/validator": "^4.4",
+        "symfony/webpack-encore-bundle": "^1.17",
         "tecnickcom/tcpdf": "^6.3.0",
         "twig/extra-bundle": "^3.4",
         "twig/string-extra": "^3.4",

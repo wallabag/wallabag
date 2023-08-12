@@ -1,0 +1,24 @@
+{
+  "entrypoints": {
+    "material": {
+      "js": [
+        "/build/runtime.aeb6817b.js",
+        "/build/118.cbf88ecc.js",
+        "/build/material.82b1d15f.js"
+      ],
+      "css": [
+        "/build/118.809c3054.css",
+        "/build/material.cc3e0b21.css"
+      ]
+    },
+    "public": {
+      "js": [
+        "/build/runtime.aeb6817b.js",
+        "/build/public.89a1c5c0.js"
+      ],
+      "css": [
+        "/build/public.b1c92aff.css"
+      ]
+    }
+  }
+}

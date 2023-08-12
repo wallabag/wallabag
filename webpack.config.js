@@ -1,8 +1,58 @@
-const path = require('path');
+const Encore = require('@symfony/webpack-encore');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
-function buildConfig(options) {
-  const env = options.prod ? 'prod' : 'dev';
-  return require(path.resolve(__dirname, `app/config/webpack/${env}.js`));
-}
+const configureCommonConfig = (enc) => {
+  if (!enc.isRuntimeEnvironmentConfigured()) {
+    enc.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
+  }
 
-module.exports = buildConfig;
+  enc
+    .addEntry('material', './assets/material.js')
+    .addEntry('public', './assets/public.js')
+    .splitEntryChunks()
+    .enableSingleRuntimeChunk()
+    .enableBuildNotifications()
+    .enableSourceMaps(!enc.isProduction())
+    .enableVersioning(enc.isProduction())
+    .enableSassLoader()
+    .enablePostCssLoader()
+    .autoProvidejQuery()
+    .enableEslintPlugin()
+    .addPlugin(new StyleLintPlugin({
+      configFile: 'stylelint.config.js',
+      failOnError: false,
+      quiet: false,
+      context: 'assets',
+      files: '**/*.scss',
+    }));
+};
+
+configureCommonConfig(Encore);
+
+Encore
+  .setOutputPath('web/build/')
+  .setPublicPath('/build');
+
+const prodConfig = Encore.getWebpackConfig();
+prodConfig.name = 'prod';
+
+Encore.reset();
+
+configureCommonConfig(Encore);
+
+Encore
+  .setOutputPath('web/build_dev/')
+  .setPublicPath('/build_dev')
+  .configureImageRule({
+    type: 'asset',
+    maxSize: 500 * 1024, // see https://github.com/symfony/webpack-encore/issues/1132
+  })
+  .configureFontRule({
+    type: 'asset',
+    maxSize: 500 * 1024, // see https://github.com/symfony/webpack-encore/issues/1132
+  });
+
+const devConfig = Encore.getWebpackConfig();
+devConfig.name = 'dev';
+
+module.exports = [prodConfig, devConfig];
