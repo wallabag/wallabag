@@ -6,7 +6,7 @@ parameters:
     database_name: ${DATABASE_NAME:-symfony}
     database_user: ${DATABASE_USER:-root}
     database_password: ${DATABASE_PASSWORD:-~}
-    database_path: '${DATABASE_PATH:-"%kernel.root_dir%/data/db/wallabag.sqlite"}'
+    database_path: '${DATABASE_PATH:-"%kernel.project_dir%/data/db/wallabag.sqlite"}'
     database_table_prefix: ${DATABASE_TABLE_PREFIX:-wallabag_}
     database_socket: null
     database_charset: ${DATABASE_CHARSET:-utf8}

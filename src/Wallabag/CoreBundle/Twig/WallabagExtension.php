@@ -19,16 +19,16 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
     private $tagRepository;
     private $lifeTime;
     private $translator;
-    private $rootDir;
+    private $projectDir;
 
-    public function __construct(EntryRepository $entryRepository, TagRepository $tagRepository, TokenStorageInterface $tokenStorage, $lifeTime, TranslatorInterface $translator, string $rootDir)
+    public function __construct(EntryRepository $entryRepository, TagRepository $tagRepository, TokenStorageInterface $tokenStorage, $lifeTime, TranslatorInterface $translator, string $projectDir)
     {
         $this->entryRepository = $entryRepository;
         $this->tagRepository = $tagRepository;
         $this->tokenStorage = $tokenStorage;
         $this->lifeTime = $lifeTime;
         $this->translator = $translator;
-        $this->rootDir = $rootDir;
+        $this->projectDir = $projectDir;
     }
 
     public function getGlobals(): array
@@ -174,7 +174,7 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
 
     public function assetFileExists($name)
     {
-        return file_exists(realpath($this->rootDir . '/../web/' . $name));
+        return file_exists(realpath($this->projectDir . '/web/' . $name));
     }
 
     public function themeClass()
