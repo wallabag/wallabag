@@ -30,9 +30,6 @@ parameters:
 
     locale: en
 
-    # A secret key that's used to generate certain security-related tokens
-    secret: CHANGE_ME_TO_SOMETHING_SECRET_AND_RANDOM
-
     # two factor stuff
     twofactor_sender: no-reply@wallabag.org
 

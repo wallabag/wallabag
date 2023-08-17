@@ -125,6 +125,7 @@
         "symfony/dependency-injection": "^4.4",
         "symfony/doctrine-bridge": "^4.4",
         "symfony/dom-crawler": "^4.4",
+        "symfony/dotenv": "^4.4",
         "symfony/error-handler": "^4.4",
         "symfony/event-dispatcher": "^4.4",
         "symfony/finder": "^4.4",
@@ -171,8 +172,7 @@
         "symfony/maker-bundle": "^1.18",
         "symfony/phpunit-bridge": "~6.0",
         "symfony/var-dumper": "^4.4",
-        "symfony/web-profiler-bundle": "^4.4",
-        "symfony/web-server-bundle": "^4.4"
+        "symfony/web-profiler-bundle": "^4.4"
     },
     "suggest": {
         "ext-imagick": "To keep GIF animation when downloading image is enabled"

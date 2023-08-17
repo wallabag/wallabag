@@ -18,9 +18,6 @@ parameters:
 
     locale: ${LOCALE:-en}
 
-    # A secret key that's used to generate certain security-related tokens
-    secret: ${SECRET:-~}
-
     # two factor stuff
     twofactor_sender: ${TWOFACTOR_SENDER:-no-reply@wallabag.org}
 

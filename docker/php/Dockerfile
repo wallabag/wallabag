@@ -1,4 +1,4 @@
-FROM php:8.1-fpm AS rootless
+FROM php:8.1 AS rootless
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG NODE_VERSION=16
@@ -14,6 +14,8 @@ RUN apt-get update \
 
 RUN curl 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key' | apt-key add - \
     && echo "deb https://deb.nodesource.com/node_${NODE_VERSION}.x $(lsb_release -cs) main" > /etc/apt/sources.list.d/nodesource.list
+
+RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash
 
 RUN apt-get update && apt-get install -y \
         libmcrypt-dev \
@@ -34,7 +36,8 @@ RUN apt-get update && apt-get install -y \
         git \
         build-essential \
         nodejs \
-        npm
+        npm \
+        symfony-cli
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp
 RUN docker-php-ext-install -j "$(nproc)" \
         bcmath \
@@ -77,10 +80,13 @@ RUN mkdir -p \
         /var/www/html/web/assets \
         /var/www/html/data \
         /var/www/html/data/db \
-        /var/www/.cache
+        /var/www/.cache \
+        /var/www/.symfony5
+
+WORKDIR /var/www/html
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["php", "bin/console", "--env=dev", "server:run", "0.0.0.0:8000"]
+CMD ["symfony", "serve"]
 
 FROM rootless AS default
 
@@ -94,6 +100,7 @@ RUN groupmod -g 1000 www-data ; \
     chown -R www-data: /var/www/html \
         /usr/local/etc/php/conf.d/wallabag-php.ini \
         /var/www/.cache \
-        /var/www/.yarnrc
+        /var/www/.yarnrc \
+        /var/www/.symfony5
 
 USER www-data
