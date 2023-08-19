@@ -7,3 +7,9 @@ if [ ! -f composer.phar ]; then
 else
     COMPOSER_COMMAND='./composer.phar'
 fi
+
+# Check for git
+command -v git >/dev/null 2>&1 ||
+{ echo >&2 "git is not installed. We can't install wallabag";
+  exit 1
+}
