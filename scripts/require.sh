@@ -10,6 +10,6 @@ fi
 
 # Check for git
 command -v git >/dev/null 2>&1 ||
-{ echo >&2 "git is not installed. We can' install wallabag";
+{ echo >&2 "git is not installed. We can't install wallabag";
   exit 1
 }
