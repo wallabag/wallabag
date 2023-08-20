@@ -24,13 +24,7 @@ parameters:
     database_socket: ~
     database_charset: utf8mb4
     domain_name: https://your-wallabag-instance.wallabag.org
-    mailer_transport: smtp
-    mailer_user: ~
-    mailer_password: ~
-    mailer_host: 127.0.0.1
-    mailer_port: false
-    mailer_encryption: ~
-    mailer_auth_mode: ~
+    mailer_dsn: smtp://127.0.0.1
     locale: en
     secret: ovmpmAWXRCabNlMgzlzFXDYmCFfzGv
     twofactor_auth: true
@@ -73,6 +67,12 @@ parameters:
 | database_charset | For PostgreSQL & SQLite you should use utf8, for MySQL use utf8mb4 to handle emoji and other special characters | utf8mb4 |
 
 ## Mailer parameters
+
+| Name | Description | Default |
+| -----|-------------|-------- |
+| mailer_dsn | One liner with all the mailer parameters `smtp://user:pass@host:465`. Any characters considered special need to be urlencoded in `user`, `pass` and `host`. | smtp://127.0.0.1 |
+
+### Parameters removed in 2.6.1
 
 | Name | Description | Default |
 | -----|-------------|-------- |
