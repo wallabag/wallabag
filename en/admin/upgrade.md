@@ -31,7 +31,7 @@ Same steps as for [upgrading from 2.2.x to 2.3.x](#upgrading-from-22x-to-23x).
    - `mailer_encryption`
    - `mailer_auth_mode`
 
-   And we added `mailer_dns` as a replacement. Here is [an example of DSN](https://symfony.com/doc/4.4/mailer.html#using-built-in-transports): `smtp://user:pass@smtp.example.com:port`
+   And we added `mailer_dsn` as a replacement. Here is [an example of DSN](https://symfony.com/doc/4.4/mailer.html#using-built-in-transports): `smtp://user:pass@smtp.example.com:port`
 
 [You can find all the queries here](./query-upgrade-25-26.md).
 
