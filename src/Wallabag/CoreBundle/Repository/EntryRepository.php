@@ -133,8 +133,10 @@ class EntryRepository extends ServiceEntityRepository
 
         // We lower() all parts here because PostgreSQL 'LIKE' verb is case-sensitive
         $qb
-            ->andWhere('lower(e.content) LIKE lower(:term) OR lower(e.title) LIKE lower(:term) OR lower(e.url) LIKE lower(:term)')->setParameter('term', '%' . $term . '%')
+            ->andWhere('lower(e.content) LIKE lower(:term) OR lower(e.title) LIKE lower(:term) OR lower(e.url) LIKE lower(:term) OR lower(a.text) LIKE lower(:term)')
+            ->setParameter('term', '%' . $term . '%')
             ->leftJoin('e.tags', 't')
+            ->leftJoin('e.annotations', 'a')
             ->groupBy('e.id');
 
         return $qb;

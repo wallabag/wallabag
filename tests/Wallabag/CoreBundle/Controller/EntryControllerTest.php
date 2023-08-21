@@ -1499,6 +1499,17 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->submit($form, $data);
 
         $this->assertCount(1, $crawler->filter($this->entryDataTestAttribute));
+
+        $crawler = $client->request('GET', '/unread/list');
+
+        $form = $crawler->filter('form[name=search]')->form();
+        $data = [
+            'search_entry[term]' => 'annotation',
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(2, $crawler->filter($this->entryDataTestAttribute));
     }
 
     public function dataForLanguage()
