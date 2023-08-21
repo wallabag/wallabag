@@ -57,7 +57,7 @@
     "node-sass": "^9.0.0",
     "postcss": "^8.4.28",
     "postcss-loader": "^7.3.3",
-    "postcss-scss": "^4.0.6",
+    "postcss-scss": "^4.0.7",
     "sass": "^1.65.1",
     "sass-loader": "^13.3.2",
     "style-loader": "^3.3.3",
