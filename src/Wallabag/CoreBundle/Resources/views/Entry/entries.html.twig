@@ -138,7 +138,7 @@
                     {{ form_label(form.isStarred) }}
                 </div>
 
-                <div class="input-field col s6 with-checkbox">
+                <div class="input-field col s12 with-checkbox">
                     {{ form_widget(form.isUnread) }}
                     {{ form_label(form.isUnread) }}
                 </div>
@@ -146,6 +146,11 @@
                 <div class="input-field col s12 with-checkbox">
                     {{ form_widget(form.isAnnotated) }}
                     {{ form_label(form.isAnnotated) }}
+                </div>
+
+                <div class="input-field col s12 with-checkbox">
+                    {{ form_widget(form.isNotParsed) }}
+                    {{ form_label(form.isNotParsed) }}
                 </div>
 
                 <div class="col s12">

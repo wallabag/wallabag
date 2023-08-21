@@ -277,6 +277,17 @@ class Entry
     private $headers;
 
     /**
+     * @var bool
+     *
+     * @Exclude
+     *
+     * @ORM\Column(name="is_not_parsed", type="boolean")
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $isNotParsed = false;
+
+    /**
      * @Exclude
      *
      * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="entries")
@@ -1005,5 +1016,29 @@ class Entry
         $this->hashedUrl = $hashedUrl;
 
         return $this;
+    }
+
+    /**
+     * Set isNotParsed.
+     *
+     * @param bool $isNotParsed
+     *
+     * @return Entry
+     */
+    public function setNotParsed($isNotParsed)
+    {
+        $this->isNotParsed = $isNotParsed;
+
+        return $this;
+    }
+
+    /**
+     * Get isNotParsed.
+     *
+     * @return bool
+     */
+    public function isNotParsed()
+    {
+        return $this->isNotParsed;
     }
 }

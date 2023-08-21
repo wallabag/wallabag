@@ -190,6 +190,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             'tags' => 'foo',
             'since' => 1443274283,
             'public' => 0,
+            'notParsed' => 0,
         ]);
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
@@ -343,6 +344,60 @@ class EntryRestControllerTest extends WallabagApiTestCase
         foreach (['self', 'first', 'last'] as $link) {
             $this->assertArrayHasKey('href', $content['_links'][$link]);
             $this->assertStringContainsString('archive=1', $content['_links'][$link]['href']);
+        }
+
+        $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
+    }
+
+    public function testGetNotParsedEntries()
+    {
+        $this->client->request('GET', '/api/entries', ['notParsed' => 1]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThanOrEqual(1, \count($content));
+        $this->assertNotEmpty($content['_embedded']['items']);
+        $this->assertGreaterThanOrEqual(1, $content['total']);
+        $this->assertSame(1, $content['page']);
+        $this->assertGreaterThanOrEqual(1, $content['pages']);
+
+        $this->assertArrayHasKey('_links', $content);
+        $this->assertArrayHasKey('self', $content['_links']);
+        $this->assertArrayHasKey('first', $content['_links']);
+        $this->assertArrayHasKey('last', $content['_links']);
+
+        foreach (['self', 'first', 'last'] as $link) {
+            $this->assertArrayHasKey('href', $content['_links'][$link]);
+            $this->assertStringContainsString('notParsed=1', $content['_links'][$link]['href']);
+        }
+
+        $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
+    }
+
+    public function testGetParsedEntries()
+    {
+        $this->client->request('GET', '/api/entries', ['notParsed' => 0]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThanOrEqual(1, \count($content));
+        $this->assertNotEmpty($content['_embedded']['items']);
+        $this->assertGreaterThanOrEqual(1, $content['total']);
+        $this->assertSame(1, $content['page']);
+        $this->assertGreaterThanOrEqual(1, $content['pages']);
+
+        $this->assertArrayHasKey('_links', $content);
+        $this->assertArrayHasKey('self', $content['_links']);
+        $this->assertArrayHasKey('first', $content['_links']);
+        $this->assertArrayHasKey('last', $content['_links']);
+
+        foreach (['self', 'first', 'last'] as $link) {
+            $this->assertArrayHasKey('href', $content['_links'][$link]);
+            $this->assertStringContainsString('notParsed=0', $content['_links'][$link]['href']);
         }
 
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));

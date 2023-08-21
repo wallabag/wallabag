@@ -85,6 +85,7 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
                 'language' => 'de',
                 'archived' => true,
                 'tags' => ['bar-tag'],
+                'is_not_parsed' => true,
             ],
         ];
 
@@ -118,6 +119,10 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
 
             if (isset($item['preview'])) {
                 $entry->setPreviewPicture($item['preview']);
+            }
+
+            if (isset($item['is_not_parsed'])) {
+                $entry->setNotParsed($item['is_not_parsed']);
             }
 
             $manager->persist($entry);
