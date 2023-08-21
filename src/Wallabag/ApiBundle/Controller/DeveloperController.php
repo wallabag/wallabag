@@ -69,12 +69,17 @@ class DeveloperController extends AbstractController
     /**
      * Remove a client.
      *
-     * @Route("/developer/client/delete/{id}", requirements={"id" = "\d+"}, name="developer_delete_client")
+     * @Route("/developer/client/delete/{id}", requirements={"id" = "\d+"}, name="developer_delete_client", methods={"POST"})
      *
      * @return RedirectResponse
      */
-    public function deleteClientAction(Client $client, EntityManagerInterface $entityManager, TranslatorInterface $translator)
+    public function deleteClientAction(Request $request, Client $client, EntityManagerInterface $entityManager, TranslatorInterface $translator)
     {
+
+        if (!$this->isCsrfTokenValid('delete-client', $request->request->get('token'))) {
+            throw $this->createAccessDeniedException('Bad CSRF token.');
+        }
+
         if (null === $this->getUser() || $client->getUser()->getId() !== $this->getUser()->getId()) {
             throw $this->createAccessDeniedException('You can not access this client.');
         }
