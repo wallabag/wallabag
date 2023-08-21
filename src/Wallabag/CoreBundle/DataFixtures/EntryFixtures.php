@@ -72,6 +72,7 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
                 'content' => 'This is my content /o/',
                 'language' => 'fr',
                 'starred' => true,
+                'starred_at' => new \DateTime(),
                 'preview' => 'http://0.0.0.0/image.jpg',
             ],
             'entry6' => [
@@ -111,6 +112,10 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
 
             if (isset($item['starred'])) {
                 $entry->setStarred($item['starred']);
+            }
+
+            if (isset($item['starred_at'])) {
+                $entry->setStarredAt($item['starred_at']);
             }
 
             if (isset($item['archived'])) {

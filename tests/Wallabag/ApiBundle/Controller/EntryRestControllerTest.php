@@ -1065,7 +1065,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertSame(1, $content['is_starred']);
-        $this->assertGreaterThanOrEqual($now->getTimestamp(), (new \DateTime($content['starred_at']))->getTimestamp());
+        $this->assertGreaterThanOrEqual((new \DateTime($content['starred_at']))->getTimestamp(), $now->getTimestamp());
     }
 
     public function dataForEntriesExistWithUrl()
