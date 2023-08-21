@@ -128,7 +128,7 @@ class EntryController extends AbstractController
             $this->entityManager->flush();
         }
 
-        $redirectUrl = $this->redirectHelper->to($request->headers->get('referer'));
+        $redirectUrl = $this->redirectHelper->to($request->getSession()->get('prevUrl'));
 
         return $this->redirect($redirectUrl);
     }
@@ -390,6 +390,7 @@ class EntryController extends AbstractController
     public function viewAction(Entry $entry)
     {
         $this->checkUserAction($entry);
+        $this->get('session')->set('prevUrl', $this->generateUrl('view', ['id' => $entry->getId()]));
 
         return $this->render(
             '@WallabagCore/Entry/entry.html.twig',
@@ -451,7 +452,7 @@ class EntryController extends AbstractController
             $message
         );
 
-        $redirectUrl = $this->redirectHelper->to($request->headers->get('referer'));
+        $redirectUrl = $this->redirectHelper->to($request->getSession()->get('prevUrl'));
 
         return $this->redirect($redirectUrl);
     }
@@ -481,7 +482,7 @@ class EntryController extends AbstractController
             $message
         );
 
-        $redirectUrl = $this->redirectHelper->to($request->headers->get('referer'));
+        $redirectUrl = $this->redirectHelper->to($request->getSession()->get('prevUrl'));
 
         return $this->redirect($redirectUrl);
     }
@@ -517,8 +518,8 @@ class EntryController extends AbstractController
         );
 
         // don't redirect user to the deleted entry (check that the referer doesn't end with the same url)
-        $referer = $request->headers->get('referer');
-        $to = (1 !== preg_match('#' . $url . '$#i', $referer) ? $referer : null);
+        $prev = $request->getSession()->get('prevUrl');
+        $to = (1 !== preg_match('#' . $url . '$#i', $prev) ? $prev : null);
 
         $redirectUrl = $this->redirectHelper->to($to);
 
@@ -616,6 +617,7 @@ class EntryController extends AbstractController
     {
         $searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
         $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
+        $request->getSession()->set('prevUrl', $request->getRequestUri());
 
         $formOptions = [];
 

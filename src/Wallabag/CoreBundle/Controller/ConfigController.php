@@ -615,7 +615,7 @@ class ConfigController extends AbstractController
         $this->entityManager->persist($user);
         $this->entityManager->flush();
 
-        return $this->redirect($request->headers->get('referer'));
+        return $this->redirect($request->getSession()->get('prevUrl'));
     }
 
     /**
