@@ -75,7 +75,6 @@ class DeveloperController extends AbstractController
      */
     public function deleteClientAction(Request $request, Client $client, EntityManagerInterface $entityManager, TranslatorInterface $translator)
     {
-
         if (!$this->isCsrfTokenValid('delete-client', $request->request->get('token'))) {
             throw $this->createAccessDeniedException('Bad CSRF token.');
         }
