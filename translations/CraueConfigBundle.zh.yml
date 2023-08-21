@@ -27,8 +27,6 @@ modify_settings: "应用"
 matomo_host: 你的网站在 Matomo 的主机名（不包括 http:// or https://）
 matomo_site_id: 你的网站在 Matomo 的 ID
 matomo_enabled: 启用 Matomo
-demo_mode_enabled: "启用演示模式？(仅用于 wallabag 公开演示)"
-demo_mode_username: "Demo 用户名"
 share_public: 允许为项目启用公开链接
 download_images_enabled: 在本地缓存图片
 restricted_access: 启用针对带有付费墙网站的认证

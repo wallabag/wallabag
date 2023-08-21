@@ -642,7 +642,6 @@ flashes:
         notice:
             config_saved: Konfiguration gespeichert.
             password_updated: Kennwort aktualisiert
-            password_not_updated_demo: Im Testmodus kannst du das Kennwort nicht ändern.
             user_updated: Information aktualisiert
             rss_updated: RSS-Informationen aktualisiert
             tagging_rules_updated: Tagging-Regeln aktualisiert

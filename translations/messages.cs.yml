@@ -566,7 +566,6 @@ flashes:
             tagging_rules_deleted: Pravidlo štítkování bylo odstraněno
             tagging_rules_updated: Pravidla štítkování byla aktualizována
             user_updated: Informace byla aktualizována
-            password_not_updated_demo: V ukázkovém režimu nelze pro tohoto uživatele změnit heslo.
             config_saved: Konfigurace byla uložena.
     ignore_origin_instance_rule:
         notice:

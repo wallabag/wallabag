@@ -2,7 +2,6 @@
 
 namespace Tests\Wallabag\CoreBundle\Controller;
 
-use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -734,36 +733,6 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertSame(403, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('You can not access this rule', $body[0]);
-    }
-
-    public function testDemoMode()
-    {
-        $this->logInAs('admin');
-        $client = $this->getTestClient();
-
-        $config = $client->getContainer()->get(Config::class);
-        $config->set('demo_mode_enabled', 1);
-        $config->set('demo_mode_username', 'admin');
-
-        $crawler = $client->request('GET', '/config');
-
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
-
-        $form = $crawler->filter('button[id=change_passwd_save]')->form();
-
-        $data = [
-            'change_passwd[old_password]' => 'mypassword',
-            'change_passwd[new_password][first]' => 'mypassword',
-            'change_passwd[new_password][second]' => 'mypassword',
-        ];
-
-        $client->submit($form, $data);
-
-        $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('flashes.config.notice.password_not_updated_demo', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
-
-        $config->set('demo_mode_enabled', 0);
-        $config->set('demo_mode_username', 'wallabag');
     }
 
     public function testDeleteUserButtonVisibility()

@@ -650,7 +650,6 @@ flashes:
         notice:
             config_saved: Los paramètres son ben estats meses a jorn.
             password_updated: Vòstre senhal es ben estat mes a jorn
-            password_not_updated_demo: En demostracion, podètz pas cambiar lo senhal d'aqueste utilizaire.
             user_updated: Vòstres informacions personnelas son ben estadas mesas a jorn
             rss_updated: La configuracion dels fluxes RSS es ben estada mesa a jorn
             tagging_rules_updated: Règlas misa a jorn

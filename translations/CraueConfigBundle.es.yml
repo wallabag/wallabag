@@ -27,8 +27,6 @@ modify_settings: "guardar"
 matomo_host: Host de tu website en Matomo (sin http:// o https://)
 matomo_site_id: ID de tu website en Matomo
 matomo_enabled: Activar Matomo
-demo_mode_enabled: "Activar modo demo (sólo usado en la demo pública de wallabag)"
-demo_mode_username: "Nombre de usuario demo"
 share_public: Permitir URLs públicas para los artículos
 download_images_enabled: Descargar imágenes localmente
 restricted_access: Activar autenticación para websites con paywall

@@ -321,7 +321,6 @@ flashes:
         notice:
             config_saved: پیکربندی ذخیره شد.
             password_updated: رمز به‌روز شد
-            password_not_updated_demo: در حالت نمایشی نمی‌توانید رمز کاربر را عوض کنید.
             user_updated: اطلاعات به‌روز شد
             rss_updated: اطلاعات آر-اس-اس به‌روز شد
             tagging_rules_updated: برچسب‌گذاری خودکار به‌روز شد

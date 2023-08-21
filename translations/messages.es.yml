@@ -644,7 +644,6 @@ flashes:
         notice:
             config_saved: 'Configuración guardada.'
             password_updated: 'Contraseña actualizada'
-            password_not_updated_demo: "En el modo demo, no puedes cambiar la contraseña del usuario."
             user_updated: 'Información actualizada'
             feed_updated: 'Configuración RSS actualizada'
             tagging_rules_updated: 'Regla de etiquetado actualizada'

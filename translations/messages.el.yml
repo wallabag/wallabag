@@ -141,7 +141,6 @@ flashes:
             tagging_rules_deleted: Ο κανόνας σήμανσης ετικετών διαγράφηκε
             tagging_rules_updated: Οι κανόνες σήμανσης ετικετών ενημερώθηκαν
             user_updated: Οι πληροφορίες ενημερώθηκαν
-            password_not_updated_demo: Στη λειτουργία demo, δεν μπορείτε να αλλάξετε τον κωδικό για αυτόν τον χρήστη.
             password_updated: Ο κωδικός ενημερώθηκε
             config_saved: Οι ρυθμίσεις αποθηκεύτηκαν.
 error:

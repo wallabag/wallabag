@@ -459,7 +459,6 @@ flashes:
         notice:
             config_saved: 'Configiração salva.'
             password_updated: 'Palavra-passe atualizada'
-            password_not_updated_demo: 'Em modo de demonstração, não pode alterar a palavra-passe deste utilizador.'
             rss_updated: 'Informação de RSS atualizada'
             tagging_rules_updated: 'Regras de tags atualizadas'
             tagging_rules_deleted: 'Regra de tag apagada'

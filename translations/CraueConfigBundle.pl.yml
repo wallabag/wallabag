@@ -26,8 +26,6 @@ modify_settings: zatwierdź
 matomo_host: Host twojej strony Matomo (bez http:// lub https://)
 matomo_site_id: ID twojej strony Matomo
 matomo_enabled: Włacz Matomo
-demo_mode_enabled: Włączyć tryb demonstracyjny? (Używany wyłącznie do publicznej demonstracji wallabag)
-demo_mode_username: Użytkownik demonstracyjny
 share_public: Zezwalaj na publiczne adresy URL dla wpisów
 download_images_enabled: Pobierz obrazy lokalnie
 restricted_access: Włącz autoryzację dla stron za paywallem

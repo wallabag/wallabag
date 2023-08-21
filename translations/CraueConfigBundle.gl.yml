@@ -4,8 +4,6 @@ api_user_registration: Activar rexistro de usuarias a través da API
 restricted_access: Activar autenticación para sitios web con acceso de pagamento
 download_images_enabled: Descargar imaxes localmente
 share_public: Permitir URLs públicos para entradas
-demo_mode_username: Usuaria Demo
-demo_mode_enabled: Activar modo demostración? (Só se usa na demo pública de wallabag)
 matomo_enabled: Activar Matomo
 matomo_site_id: ID do teu sitio web en Matomo
 matomo_host: Servidor do teu sitio web en Matomo (sen http:// ou https://)

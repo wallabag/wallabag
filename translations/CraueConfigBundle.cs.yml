@@ -22,8 +22,6 @@ api_user_registration: Zapnout registraci uživatelů prostřednictvím API
 restricted_access: Povolit ověřování pro placené webové stránky
 download_images_enabled: Stahovat obrázky místně
 share_public: Povolit veřejné adresy URL pro položky
-demo_mode_username: Ukázkový uživatel
-demo_mode_enabled: Povolit ukázkový režim (Používá se pouze pro veřejnou ukázku Wallabag)
 matomo_site_id: ID vaší webové stránky na Matomo
 matomo_host: Hostitel vaší webové stránky na Matomo (bez http:// nebo https://)
 modify_settings: použít

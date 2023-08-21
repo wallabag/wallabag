@@ -611,7 +611,6 @@ flashes:
         notice:
             config_saved: 設定を保存しました。
             password_updated: パスワードを更新しました
-            password_not_updated_demo: デモ モードでは、このユーザーのパスワードを変更できません。
             user_updated: 情報を更新しました
             rss_updated: RSS 情報を更新しました
             tagging_rules_updated: タグ付けルールを更新しました

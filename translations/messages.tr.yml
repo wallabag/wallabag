@@ -571,7 +571,6 @@ flashes:
         notice:
             config_saved: Yapılandırma ayarları kaydedildi.
             password_updated: Şifre güncellendi
-            password_not_updated_demo: Tanıtım demo modunda bu kullanıcı için parolanızı değiştiremezsiniz.
             user_updated: Bilgiler güncellendi
             rss_updated: RSS bilgiler güncellendi
             tagging_rules_updated: Etiketleme kuralları güncellendi

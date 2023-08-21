@@ -647,7 +647,6 @@ flashes:
         notice:
             config_saved: '配置已保存。'
             password_updated: '密码已更新'
-            password_not_updated_demo: "在演示模式下，你不能更改此用户的密码。"
             user_updated: '信息已更新'
             feed_updated: '订阅源信息已更新'
             tagging_rules_updated: '标签规则已更新'

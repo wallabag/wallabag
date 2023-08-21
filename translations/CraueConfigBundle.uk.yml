@@ -27,8 +27,6 @@ modify_settings: застосувати
 matomo_host: Host вашого сайту в Matomo (без http:// чи https://)
 matomo_site_id: ID вашого сайту в Matomo
 matomo_enabled: Увімкнути Matomo
-demo_mode_enabled: Увімкнути демо-режим? (Використовується тільки для публічних демонстрацій wallabag)
-demo_mode_username: Демо-користувач
 share_public: Дозволити публічні посилання на статті
 download_images_enabled: Завантажувати картинки локально
 restricted_access: Увімкнути аутентифікацію для сайтів з платним контентом

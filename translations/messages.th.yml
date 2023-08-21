@@ -532,7 +532,6 @@ flashes:
         notice:
             config_saved: 'กำหนดการบันทึก'
             password_updated: 'อัปเดตรหัสผ่าน'
-            password_not_updated_demo: ""
             user_updated: 'อัปเดตข้อมูล'
             feed_updated: 'อัปเดตข้อมูล RSS'
             tagging_rules_updated: 'อัปเดตการแท็กข้อบังคับ'

@@ -27,9 +27,6 @@ modify_settings: alkalmaz
 piwik_host: Weboldalának hosztja a Piwik-en (http:// vagy https:// nélkül)
 piwik_site_id: Weboldalának azonosítója (ID-je) a Piwik-en
 piwik_enabled: Piwik engedélyezése
-demo_mode_enabled: Engedélyezi a bemutató (demó) módot? (Csak a nyilvános wallabag
-  demóhoz használva)
-demo_mode_username: Demó felhasználó
 share_public: Nyilvános URL-ek engedélyezése a bejegyzésekhez
 download_images_enabled: Képek letöltése helyileg
 restricted_access: Hitelesítés engedélyezése paywalled weboldalakhoz
