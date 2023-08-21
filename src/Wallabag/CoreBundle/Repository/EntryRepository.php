@@ -429,7 +429,7 @@ class EntryRepository extends ServiceEntityRepository
     /**
      * Find all entries which have an empty value for hash.
      *
-     * @return Entry|false
+     * @return Entry[]
      */
     public function findByEmptyHashedUrlAndUserId(int $userId)
     {

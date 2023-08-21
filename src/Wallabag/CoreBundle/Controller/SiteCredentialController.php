@@ -6,6 +6,7 @@ use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -173,7 +174,7 @@ class SiteCredentialController extends AbstractController
      *
      * @param SiteCredential $siteCredential The site credential entity
      *
-     * @return Form The form
+     * @return FormInterface The form
      */
     private function createDeleteForm(SiteCredential $siteCredential)
     {

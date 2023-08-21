@@ -110,7 +110,7 @@ abstract class WallabagImport extends AbstractImport
         if (false !== $existingEntry) {
             ++$this->skippedEntries;
 
-            return;
+            return null;
         }
 
         $data = $this->prepareEntry($importedEntry);

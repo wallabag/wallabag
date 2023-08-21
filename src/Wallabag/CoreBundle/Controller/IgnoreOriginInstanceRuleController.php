@@ -5,6 +5,7 @@ namespace Wallabag\CoreBundle\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -138,7 +139,7 @@ class IgnoreOriginInstanceRuleController extends AbstractController
      *
      * @param IgnoreOriginInstanceRule $ignoreOriginInstanceRule The ignore origin instance rule entity
      *
-     * @return Form The form
+     * @return FormInterface The form
      */
     private function createDeleteForm(IgnoreOriginInstanceRule $ignoreOriginInstanceRule)
     {

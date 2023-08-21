@@ -104,7 +104,7 @@ class DeliciousImport extends AbstractImport
         if (false !== $existingEntry) {
             ++$this->skippedEntries;
 
-            return;
+            return null;
         }
 
         $data = [

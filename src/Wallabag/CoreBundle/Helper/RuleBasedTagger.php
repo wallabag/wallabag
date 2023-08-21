@@ -2,6 +2,7 @@
 
 namespace Wallabag\CoreBundle\Helper;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Psr\Log\LoggerInterface;
 use RulerZ\RulerZ;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -120,7 +121,7 @@ class RuleBasedTagger
     /**
      * Retrieves the tagging rules for a given user.
      *
-     * @return array<TaggingRule>
+     * @return ArrayCollection<TaggingRule>
      */
     private function getRulesForUser(User $user)
     {

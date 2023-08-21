@@ -107,7 +107,7 @@ abstract class AbstractImport implements ImportInterface
     /**
      * Parse one entry.
      *
-     * @return Entry
+     * @return Entry|null
      */
     abstract public function parseEntry(array $importedEntry);
 

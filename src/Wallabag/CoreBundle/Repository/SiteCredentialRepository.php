@@ -42,7 +42,7 @@ class SiteCredentialRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
 
         if (null === $res) {
-            return;
+            return null;
         }
 
         // decrypt user & password before returning them
