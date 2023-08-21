@@ -380,49 +380,54 @@
         },
         {
             "name": "craue/config-bundle",
-            "version": "2.6.0",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/craue/CraueConfigBundle.git",
-                "reference": "3c6e8d7cfe28376522ce92b6da5548f1a4d4baf1"
+                "reference": "5bf3673fc116cab92b9943c88dc514e9ca8ad4ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craue/CraueConfigBundle/zipball/3c6e8d7cfe28376522ce92b6da5548f1a4d4baf1",
-                "reference": "3c6e8d7cfe28376522ce92b6da5548f1a4d4baf1",
+                "url": "https://api.github.com/repos/craue/CraueConfigBundle/zipball/5bf3673fc116cab92b9943c88dc514e9ca8ad4ad",
+                "reference": "5bf3673fc116cab92b9943c88dc514e9ca8ad4ad",
                 "shasum": ""
             },
             "require": {
                 "doctrine/doctrine-bundle": "^1.6.12|^2",
                 "php": "^7.3|^8",
                 "psr/simple-cache": "^1|^2|^3",
-                "symfony/cache": "~4.4|~5.3|^6",
-                "symfony/config": "~4.4|~5.3|^6",
-                "symfony/dependency-injection": "~4.4|~5.3|^6",
-                "symfony/form": "~4.4|~5.3|^6",
-                "symfony/framework-bundle": "~4.4|~5.3|^6",
-                "symfony/http-foundation": "~4.4|~5.3|^6",
-                "symfony/http-kernel": "~4.4|~5.3|^6",
-                "symfony/options-resolver": "~4.4|~5.3|^6",
-                "symfony/validator": "~4.4|~5.3|^6"
+                "symfony/cache": "~4.4|~5.4|^6.3",
+                "symfony/config": "~4.4|~5.4|^6.3",
+                "symfony/dependency-injection": "~4.4|~5.4|^6.3",
+                "symfony/form": "~4.4|~5.4|^6.3",
+                "symfony/framework-bundle": "~4.4|~5.4|^6.3",
+                "symfony/http-foundation": "~4.4|~5.4|^6.3",
+                "symfony/http-kernel": "~4.4|~5.4|^6.3",
+                "symfony/options-resolver": "~4.4|~5.4|^6.3",
+                "symfony/validator": "~4.4|~5.4|^6.3"
             },
             "require-dev": {
                 "craue/translations-tests": "^1.0",
                 "doctrine/orm": "^2.5.14",
-                "phpunit/phpunit": "^9.5",
-                "symfony/asset": "~4.4|~5.3|^6",
-                "symfony/browser-kit": "~4.4|~5.3|^6",
-                "symfony/phpunit-bridge": "^6",
-                "symfony/twig-bundle": "~4.4|~5.3|^6",
-                "symfony/web-profiler-bundle": "~4.4|~5.3|^6"
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan": "^1.4",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-strict-rules": "^1.1",
+                "phpstan/phpstan-symfony": "^1.1",
+                "phpunit/phpunit": "^9.6",
+                "symfony/asset": "~4.4|~5.4|^6.3",
+                "symfony/browser-kit": "~4.4|~5.4|^6.3",
+                "symfony/phpunit-bridge": "^6.3",
+                "symfony/twig-bundle": "~4.4|~5.4|^6.3",
+                "symfony/web-profiler-bundle": "~4.4|~5.4|^6.3"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6.x-dev"
+                    "dev-master": "2.7.x-dev"
                 },
                 "symfony": {
-                    "require": "~4.4|~5.3|^6"
+                    "require": "~4.4|~5.4|^6.3"
                 }
             },
             "autoload": {
@@ -455,9 +460,9 @@
             ],
             "support": {
                 "issues": "https://github.com/craue/CraueConfigBundle/issues",
-                "source": "https://github.com/craue/CraueConfigBundle/tree/2.6.0"
+                "source": "https://github.com/craue/CraueConfigBundle/tree/2.7.0"
             },
-            "time": "2022-01-24T15:04:40+00:00"
+            "time": "2023-08-06T22:32:54+00:00"
         },
         {
             "name": "dasprid/enum",
