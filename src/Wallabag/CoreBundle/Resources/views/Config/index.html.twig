@@ -553,28 +553,28 @@
                             <h5>{{ 'config.reset.title'|trans }}</h5>
                             <p>{{ 'config.reset.description'|trans }}</p>
                             <p>
-                                <form action="{{ path('config_reset', { type: 'annotations' }) }}" method="post" onsubmit="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" name="reset-annotations">
+                                <form action="{{ path('config_reset', {type: 'annotations'}) }}" method="post" onsubmit="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" name="reset-annotations">
                                     <input type="hidden" name="token" value="{{ csrf_token('reset-area') }}" />
 
                                     <button class="waves-effect waves-light btn red" type="submit">{{ 'config.reset.annotations'|trans }}</button>
                                 </form>
                             </p>
                             <p>
-                                <form action="{{ path('config_reset', { type: 'tags' }) }}" method="post" onsubmit="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" name="reset-tags">
+                                <form action="{{ path('config_reset', {type: 'tags'}) }}" method="post" onsubmit="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" name="reset-tags">
                                     <input type="hidden" name="token" value="{{ csrf_token('reset-area') }}" />
 
                                     <button class="waves-effect waves-light btn red" type="submit">{{ 'config.reset.tags'|trans }}</button>
                                 </form>
                             </p>
                             <p>
-                                <form action="{{ path('config_reset', { type: 'archived' }) }}" method="post" onsubmit="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" name="reset-archived">
+                                <form action="{{ path('config_reset', {type: 'archived'}) }}" method="post" onsubmit="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" name="reset-archived">
                                     <input type="hidden" name="token" value="{{ csrf_token('reset-area') }}" />
 
                                     <button class="waves-effect waves-light btn red" type="submit">{{ 'config.reset.archived'|trans }}</button>
                                 </form>
                             </p>
                             <p>
-                                <form action="{{ path('config_reset', { type: 'entries' }) }}" method="post" onsubmit="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" name="reset-entries">
+                                <form action="{{ path('config_reset', {type: 'entries'}) }}" method="post" onsubmit="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" name="reset-entries">
                                     <input type="hidden" name="token" value="{{ csrf_token('reset-area') }}" />
 
                                     <button class="waves-effect waves-light btn red" type="submit">{{ 'config.reset.entries'|trans }}</button>

@@ -1,5 +1,39 @@
 # Changelog
 
+## [2.6.3](https://github.com/wallabag/wallabag/tree/2.6.3)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.2...2.6.3)
+
+### Security fixes
+* Replace GET way to POST way to reset data user by @nicosomb https://github.com/wallabag/wallabag/commit/78b0b55c40511e1f22d5bbb4897aa10fca68441c
+* Replace GET way to POST way to delete API client by @nicosomb https://github.com/wallabag/wallabag/commit/ffcc5c9062fcc8cd922d7d6d65edbe5efae96806
+
+### Improvement
+* Add confirmation before reload entry by @nicosomb https://github.com/wallabag/wallabag/pull/6778
+* Remove external dependencies on howto page by @viktoriussuwandi https://github.com/wallabag/wallabag/pull/6775
+
+### Fixes
+* Use Session instead of Referrer for Redirection by @Spoons https://github.com/wallabag/wallabag/pull/6119
+* Reduce risk of collision for #content by @kdecherf https://github.com/wallabag/wallabag/pull/6829
+* Update dependencies to fix vulnerabilities by @nicosomb https://github.com/wallabag/wallabag/pull/6783
+* Fix failing randomly test by @nicosomb https://github.com/wallabag/wallabag/pull/6763
+
+### Technical stuff
+* Add check if git is installed by @nicosomb https://github.com/wallabag/wallabag/pull/6788
+* Replace kernel.root_dir by kernel.project_dir by @yguedidi https://github.com/wallabag/wallabag/pull/6809
+* Split symfony/symfony by @yguedidi https://github.com/wallabag/wallabag/pull/6817
+* Make Crawler::extract get an array by @yguedidi https://github.com/wallabag/wallabag/pull/6812
+* Use PSR-17 and PSR-18 by @yguedidi https://github.com/wallabag/wallabag/pull/6816
+* Replace Client by KernelBrowser by @yguedidi https://github.com/wallabag/wallabag/pull/6813
+* Replace Debug component by ErrorHandler component by @yguedidi https://github.com/wallabag/wallabag/pull/6810
+* Make ImportController extends AbstractController by @yguedidi https://github.com/wallabag/wallabag/pull/6808
+* Use Twig instead of templating by @yguedidi https://github.com/wallabag/wallabag/pull/6797
+* Identify platforms by their class by @yguedidi https://github.com/wallabag/wallabag/pull/6799
+* Move from transchoice to trans by @yguedidi https://github.com/wallabag/wallabag/pull/6800
+* Replace GetResponseEvent by RequestEvent by @yguedidi https://github.com/wallabag/wallabag/pull/6811
+* Ensure the kernel is shut down before calling createClient by @yguedidi https://github.com/wallabag/wallabag/pull/6803
+* Ignore docker-compose.override.yml by @yguedidi https://github.com/wallabag/wallabag/pull/6814
+* Add composer normalizer by @nicosomb https://github.com/wallabag/wallabag/pull/6762
+
 ## [2.6.2](https://github.com/wallabag/wallabag/tree/2.6.2)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.1...2.6.2)
 
