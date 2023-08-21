@@ -523,12 +523,16 @@ class ConfigController extends AbstractController
     /**
      * Remove all annotations OR tags OR entries for the current user.
      *
-     * @Route("/reset/{type}", requirements={"id" = "annotations|tags|entries"}, name="config_reset")
+     * @Route("/reset/{type}", requirements={"id" = "annotations|tags|entries"}, name="config_reset", methods={"POST"})
      *
      * @return RedirectResponse
      */
-    public function resetAction(string $type, AnnotationRepository $annotationRepository, EntryRepository $entryRepository)
+    public function resetAction(Request $request, string $type, AnnotationRepository $annotationRepository, EntryRepository $entryRepository)
     {
+        if (!$this->isCsrfTokenValid('reset-area', $request->request->get('token'))) {
+            throw $this->createAccessDeniedException('Bad CSRF token.');
+        }
+
         switch ($type) {
             case 'annotations':
                 $annotationRepository->removeAllByUserId($this->getUser()->getId());
