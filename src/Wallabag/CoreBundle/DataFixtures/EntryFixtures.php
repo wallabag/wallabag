@@ -17,6 +17,8 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
      */
     public function load(ObjectManager $manager): void
     {
+        $now = new \DateTime();
+
         $entries = [
             'entry1' => [
                 'user' => 'admin-user',
@@ -72,7 +74,7 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
                 'content' => 'This is my content /o/',
                 'language' => 'fr',
                 'starred' => true,
-                'starred_at' => new \DateTime(),
+                'starred_at' => $now,
                 'preview' => 'http://0.0.0.0/image.jpg',
             ],
             'entry6' => [
@@ -85,6 +87,7 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
                 'content' => 'This is my content /o/',
                 'language' => 'de',
                 'archived' => true,
+                'archived_at' => $now,
                 'tags' => ['bar-tag'],
                 'is_not_parsed' => true,
             ],
@@ -120,6 +123,10 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
 
             if (isset($item['archived'])) {
                 $entry->setArchived($item['archived']);
+            }
+
+            if (isset($item['archived_at'])) {
+                $entry->setArchivedAt($item['archived_at']);
             }
 
             if (isset($item['preview'])) {
