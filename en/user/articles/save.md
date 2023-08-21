@@ -6,8 +6,10 @@ to do it. If you think that the article is wrongly displayed,
 
 ## By using a bookmarklet
 
-On the `Howto` page, you have a `Bookmarklet` tab. Drag and drop the
-`bag it!` link to your bookmarks bar of your browser.
+There is the `How-to` page. You can find this page as entry in the top
+right menu named `Your Account`. There you have got a `Add Link` tab.
+Almost at the bottom you can find the `bag it!` link. Drag and drop this
+link to your bookmarks bar of your browser.
 
 Now, each time you're reading an article on the web and you want to save
 it, click on the `bag it!` link in your bookmarks bar. The article is
