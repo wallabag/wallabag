@@ -65,6 +65,7 @@ config:
         new_user: Add a user
         ignore_origin: 'Ignore origin rules'
         reset: 'Reset area'
+        article_display: 'Article display'
     form:
         save: Save
     form_settings:
@@ -89,7 +90,15 @@ config:
         help_language: You can change the language of wallabag interface.
         help_pocket_consumer_key: Required for Pocket import. You can create it in your Pocket account.
         help_display_thumbnails: You can decide if you want to display or not articles thumbnails. Useful for slow connections.
+        help_font: You can choose the font family you want to use.
+        help_fontsize: You can choose the font size you want to use.
+        help_lineheight: You can choose the line height you want to use.
+        help_maxwidth: You can choose the maximal width you want to use.
         display_thumbnails_label: Display articles thumbnails (useful for slow connections).
+        font_label: Font family
+        fontsize_label: Font size
+        lineheight_label: Line height
+        maxwidth_label: Maximal width
     form_feed:
         description: 'Atom feeds provided by wallabag allow you to read your saved articles with your favourite Atom reader. You need to generate a token first.'
         token_label: 'Feed token'

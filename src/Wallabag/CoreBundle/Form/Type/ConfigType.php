@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,18 +15,53 @@ use Wallabag\CoreBundle\Entity\Config;
 class ConfigType extends AbstractType
 {
     private $languages = [];
+    private $fonts = [];
 
     /**
      * @param array $languages Languages come from configuration, array just code language as key and label as value
+     * @param array $fonts     Fonts come from configuration, array just font name as key / value
      */
-    public function __construct($languages)
+    public function __construct($languages, $fonts)
     {
         $this->languages = $languages;
+        $this->fonts = $fonts;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('font', ChoiceType::class, [
+                'choices' => $this->initFonts(),
+                'label' => 'config.form_settings.font_label',
+                'property_path' => 'font',
+            ])
+            ->add('fontsize', RangeType::class, [
+                'attr' => [
+                    'min' => 0.6,
+                    'max' => 2,
+                    'step' => 0.1,
+                ],
+                'label' => 'config.form_settings.fontsize_label',
+                'property_path' => 'fontsize',
+            ])
+            ->add('lineHeight', RangeType::class, [
+                'attr' => [
+                    'min' => 0.6,
+                    'max' => 2,
+                    'step' => 0.1,
+                ],
+                'label' => 'config.form_settings.lineheight_label',
+                'property_path' => 'lineHeight',
+            ])
+            ->add('maxWidth', RangeType::class, [
+                'attr' => [
+                    'min' => 20,
+                    'max' => 60,
+                    'step' => 5,
+                ],
+                'label' => 'config.form_settings.maxwidth_label',
+                'property_path' => 'maxWidth',
+            ])
             ->add('items_per_page', IntegerType::class, [
                 'label' => 'config.form_settings.items_per_page_label',
                 'property_path' => 'itemsPerPage',
@@ -71,5 +107,21 @@ class ConfigType extends AbstractType
     public function getBlockPrefix()
     {
         return 'config';
+    }
+
+    /**
+     * Creates an array with font name as key / value.
+     *
+     * @return array
+     */
+    private function initFonts()
+    {
+        $fonts = [];
+
+        foreach ($this->fonts as $font) {
+            $fonts[$font] = $font;
+        }
+
+        return $fonts;
     }
 }

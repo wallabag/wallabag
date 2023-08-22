@@ -319,4 +319,9 @@
 {% endblock %}
 
 {% block footer %}
+
+        <style>
+            {{ app.user.config.customCSS|raw }}
+        </style>
+
 {% endblock %}

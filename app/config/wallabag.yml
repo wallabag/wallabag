@@ -153,6 +153,15 @@ wallabag_core:
             rule: host = "feeds.reuters.com"
         -
             rule: _all ~ "https?://www\.lemonde\.fr/tiny.*"
+    fonts:
+        - 'Sans-serif'
+        - 'Serif'
+        - 'Atkinson Hyperlegible'
+        - 'EB Garamond'
+        - 'Lato'
+        - 'Montserrat'
+        - 'OpenDyslexicRegular'
+        - 'Oswald'
 
 wallabag_import:
     allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain', 'text/csv', 'text/html']

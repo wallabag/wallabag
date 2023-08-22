@@ -25,18 +25,18 @@
                         {{ form_start(form.config) }}
                             {{ form_errors(form.config) }}
 
-                            <div class="row">
-                                <div class="input-field col s11">
-                                    {{ form_errors(form.config.items_per_page) }}
-                                    {{ form_widget(form.config.items_per_page) }}
-                                    {{ form_label(form.config.items_per_page) }}
-                                </div>
-                                <div class="input-field col s1">
-                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_items_per_page'|trans }}">
-                                        <i class="material-icons">live_help</i>
-                                    </a>
-                                </div>
+                        <div class="row">
+                            <div class="input-field col s11">
+                                {{ form_errors(form.config.items_per_page) }}
+                                {{ form_widget(form.config.items_per_page) }}
+                                {{ form_label(form.config.items_per_page) }}
                             </div>
+                            <div class="input-field col s1">
+                                <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_items_per_page'|trans }}">
+                                    <i class="material-icons">live_help</i>
+                                </a>
+                            </div>
+                        </div>
 
                         <div class="row">
                             <div class="input-field col s11 settings-checkbox-col">
@@ -115,6 +115,66 @@
                                 <script>
                                     document.getElementById('androidQrcode').src = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');
                                 </script>
+                            </div>
+
+                            <h5>{{ 'config.tab_menu.article_display'|trans }}</h5>
+
+                            <div class="row">
+                                <div class="input-field col s5">
+                                    {{ form_errors(form.config.font) }}
+                                    {{ form_widget(form.config.font) }}
+                                    {{ form_label(form.config.font) }}
+                                </div>
+                                <div class="input-field col s1">
+                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_font'|trans }}">
+                                        <i class="material-icons">live_help</i>
+                                    </a>
+                                </div>
+
+                                <div class="input-field col s5">
+                                    {{ form_errors(form.config.lineHeight) }}
+                                    {{ form_widget(form.config.lineHeight) }}
+                                    {{ form_label(form.config.lineHeight, null, {'label_attr': {'class': 'settings-range-label'}}) }}
+                                </div>
+                                <div class="input-field col s1">
+                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_lineheight'|trans }}">
+                                        <i class="material-icons">live_help</i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s5">
+                                    {{ form_errors(form.config.fontsize) }}
+                                    {{ form_widget(form.config.fontsize) }}
+                                    {{ form_label(form.config.fontsize, null, {'label_attr': {'class': 'settings-range-label'}}) }}
+                                </div>
+                                <div class="input-field col s1">
+                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_fontsize'|trans }}">
+                                        <i class="material-icons">live_help</i>
+                                    </a>
+                                </div>
+
+                                <div class="input-field col s5">
+                                    {{ form_errors(form.config.maxWidth) }}
+                                    {{ form_widget(form.config.maxWidth) }}
+                                    {{ form_label(form.config.maxWidth, null, {'label_attr': {'class': 'settings-range-label'}}) }}
+                                </div>
+                                <div class="input-field col s1">
+                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_maxwidth'|trans }}">
+                                        <i class="material-icons">live_help</i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <div id="preview-article">
+                                        <article id="preview-content">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                        </article>
+                                    </div>
+                                </div>
                             </div>
 
                             {{ form_widget(form.config.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}

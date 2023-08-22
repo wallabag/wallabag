@@ -324,6 +324,12 @@ a.original:not(.waves-effect) {
   height: 3rem;
 }
 
+.settings .settings-range-label {
+  position: absolute;
+  top: -14px;
+  font-size: 0.8rem;
+}
+
 .entries-row {
   display: grid;
   margin: 0.4rem 0 0;
