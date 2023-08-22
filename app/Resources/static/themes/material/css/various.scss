@@ -15,8 +15,10 @@ div.settings div.file-field {
   }
 }
 
-.input-field label {
-    pointer-events: auto !important;
+/* override materializecss pointer-event disabled on checkboxes */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  pointer-events: initial;
 }
 
 .input-field label.active {
