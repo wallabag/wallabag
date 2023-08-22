@@ -66,6 +66,7 @@ config:
         reset: Zresetuj obszar
         ignore_origin: Zasady ignorowania pochodzenia
         feed: Źródła
+        article_display: Wyświetlanie artykułów
     form:
         save: Zapisz
     form_settings:
@@ -91,6 +92,14 @@ config:
         help_pocket_consumer_key: Wymagane dla importu z Pocket. Możesz go stworzyć na swoim koncie Pocket.
         display_thumbnails_label: Wyświetlaj miniaturki artykułów (przydatne w przypadku powolnych połączeń).
         help_display_thumbnails: Możesz zdecydować, czy chcesz wyświetlać miniaturki artykułów, czy nie. Przydatne w przypadku powolnych połączeń.
+        help_font: Możesz wybrać rodzinę czcionek do użycia.
+        help_lineheight: Możesz wybrać wysokość linii do użycia.
+        help_maxwidth: Możesz wybrać maksymalną szerokość do użycia.
+        font_label: Rodzina czcionek
+        fontsize_label: Rozmiar czcionek
+        lineheight_label: Wysokość linii
+        maxwidth_label: Maksymalna szerokość
+        help_fontsize: Możesz wybrać rozmiar czcionek do użycia.
     form_rss:
         description: Kanały RSS prowadzone przez wallabag pozwalają Ci na czytanie twoich zapisanych artykułów w twoim ulubionym czytniku RSS. Musisz najpierw wygenerować tokena.‌
         token_label: Token RSS
