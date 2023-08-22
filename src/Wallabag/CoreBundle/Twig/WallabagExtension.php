@@ -58,11 +58,19 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
 
     public function removeWww($url)
     {
+        if (!\is_string($url)) {
+            return $url;
+        }
+
         return preg_replace('/^www\./i', '', $url);
     }
 
     public function removeScheme($url)
     {
+        if (!\is_string($url)) {
+            return $url;
+        }
+
         return preg_replace('#^https?://#i', '', $url);
     }
 

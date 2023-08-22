@@ -518,7 +518,7 @@ class EntryController extends AbstractController
         );
 
         // don't redirect user to the deleted entry (check that the referer doesn't end with the same url)
-        $prev = $request->getSession()->get('prevUrl');
+        $prev = $request->getSession()->get('prevUrl', '');
         $to = (1 !== preg_match('#' . $url . '$#i', $prev) ? $prev : null);
 
         $redirectUrl = $this->redirectHelper->to($to);

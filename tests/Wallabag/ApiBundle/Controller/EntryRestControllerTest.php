@@ -1022,6 +1022,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testSaveIsArchivedAfterPatch()
     {
+        $now = new \DateTime();
         $entry = $this->client->getContainer()
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
@@ -1043,6 +1044,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertSame(1, $content['is_archived']);
         $this->assertSame($previousTitle . '++', $content['title']);
+        $this->assertGreaterThanOrEqual((new \DateTime($content['archived_at']))->getTimestamp(), $now->getTimestamp());
     }
 
     public function testSaveIsStarredAfterPatch()
@@ -1056,6 +1058,9 @@ class EntryRestControllerTest extends WallabagApiTestCase
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
         }
+
+        $previousTitle = $entry->getTitle();
+
         $this->client->request('PATCH', '/api/entries/' . $entry->getId() . '.json', [
             'title' => $entry->getTitle() . '++',
         ]);
@@ -1065,7 +1070,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertSame(1, $content['is_starred']);
-        $this->assertGreaterThanOrEqual($now->getTimestamp(), (new \DateTime($content['starred_at']))->getTimestamp());
+        $this->assertSame($previousTitle . '++', $content['title']);
+        $this->assertGreaterThanOrEqual((new \DateTime($content['starred_at']))->getTimestamp(), $now->getTimestamp());
     }
 
     public function dataForEntriesExistWithUrl()
