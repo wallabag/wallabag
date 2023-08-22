@@ -18,6 +18,8 @@ services:
             $pinboardConsumer: '@old_sound_rabbit_mq.import_pinboard_consumer'
             $deliciousConsumer: '@old_sound_rabbit_mq.import_delicious_consumer'
             $elcuratorConsumer: '@old_sound_rabbit_mq.import_elcurator_consumer'
+            $shaarliConsumer: '@old_sound_rabbit_mq.import_shaarli_consumer'
+            $pocketHtmlConsumer: '@old_sound_rabbit_mq.import_pocket_html_consumer'
 
     wallabag_import.consumer.amqp.pocket:
         class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
@@ -68,3 +70,13 @@ services:
         class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\ChromeImport'
+
+    wallabag_import.consumer.amqp.shaarli:
+        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: '@Wallabag\ImportBundle\Import\ShaarliImport'
+
+    wallabag_import.consumer.amqp.pocket_html:
+        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: '@Wallabag\ImportBundle\Import\PocketHtmlImport'

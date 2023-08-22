@@ -9,28 +9,28 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Entity\Entry;
 
-class FirefoxControllerTest extends WallabagCoreTestCase
+class PocketHtmlControllerTest extends WallabagCoreTestCase
 {
-    public function testImportFirefox()
+    public function testImportPocketHtml()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/firefox');
+        $crawler = $client->request('GET', '/import/pocket_html');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
-    public function testImportFirefoxWithRabbitEnabled()
+    public function testImportPocketHtmlWithRabbitEnabled()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
-        $crawler = $client->request('GET', '/import/firefox');
+        $crawler = $client->request('GET', '/import/pocket_html');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
@@ -39,12 +39,12 @@ class FirefoxControllerTest extends WallabagCoreTestCase
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
-    public function testImportFirefoxBadFile()
+    public function testImportPocketHtmlBadFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/firefox');
+        $crawler = $client->request('GET', '/import/pocket_html');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
         $data = [
@@ -56,14 +56,14 @@ class FirefoxControllerTest extends WallabagCoreTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testImportFirefoxWithRedisEnabled()
+    public function testImportPocketHtmlWithRedisEnabled()
     {
         $this->checkRedis();
         $this->logInAs('admin');
         $client = $this->getTestClient();
         $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
-        $crawler = $client->request('GET', '/import/firefox');
+        $crawler = $client->request('GET', '/import/pocket_html');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
@@ -71,7 +71,7 @@ class FirefoxControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/firefox-bookmarks.json', 'Bookmarks');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/ril_export.html', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -86,20 +86,20 @@ class FirefoxControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
-        $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.firefox'));
+        $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.pocket_html'));
 
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportWallabagWithFirefoxFile()
+    public function testImportWallabagWithPocketHtmlFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/firefox');
+        $crawler = $client->request('GET', '/import/pocket_html');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/firefox-bookmarks.json', 'Bookmarks');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/ril_export.html', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -140,10 +140,6 @@ class FirefoxControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://www.lemonde.fr is ok');
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.lemonde.fr is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.lemonde.fr is ok');
-
-        $createdAt = $content->getCreatedAt();
-        $this->assertSame('2013', $createdAt->format('Y'));
-        $this->assertSame('12', $createdAt->format('m'));
     }
 
     public function testImportWallabagWithEmptyFile()
@@ -151,10 +147,10 @@ class FirefoxControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/firefox');
+        $crawler = $client->request('GET', '/import/pocket_html');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/test.txt', 'test.txt');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/test.html', 'test.html');
 
         $data = [
             'upload_import_file[file]' => $file,

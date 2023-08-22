@@ -64,3 +64,13 @@ parameters:
             message: "#^Call to an undefined method DOMNode\\:\\:getAttribute\\(\\)\\.$#"
             count: 1
             path: tests/Wallabag/CoreBundle/Controller/FeedControllerTest.php
+
+        -
+            message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
+            count: 1
+            path: src/Wallabag/ImportBundle/Controller/HtmlController.php
+
+        -
+            message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
+            count: 1
+            path: src/Wallabag/ImportBundle/Controller/HtmlController.php
