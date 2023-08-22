@@ -28,7 +28,6 @@ export_txt: Schakel TXT-export in
 export_json: Schakel JSON-export in
 export_csv: Schakel CSV-export in
 export_pdf: Schakel PDF-export in
-export_mobi: Schakel .mobi-export in
 export_epub: Schakel ePub-export in
 download_pictures: Download foto's naar jouw server
 settings_changed: Instellingen bijgewerkt

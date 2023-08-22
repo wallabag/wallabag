@@ -2,7 +2,6 @@ settings_changed: Oppsett oppdatert
 download_pictures: Last ned bilder til tjeneren din
 diaspora_url: diaspora*-nettadresse, hvis tjenesten er avskrudd
 export_epub: Skru på ePub-eksport
-export_mobi: Skru på .mobi-eksport
 export_pdf: Skru på PDF-eksport
 export_csv: Skru på CSV-eksport
 export_json: Skru på JSON-eksport

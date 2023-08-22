@@ -2,7 +2,6 @@ settings_changed: Konfiguracja zaktualizowana
 download_pictures: Pobierz obrazy na swój serwer
 diaspora_url: Adres URL Diaspora, jeżeli usługa jest włączona
 export_epub: Włącz eksport do ePub
-export_mobi: Włącz eksport do plików .mobi (przestarzałe, zostanie wkrótce usunięte)
 export_pdf: Włącz eksport do PDF
 export_csv: Włącz eksport do CSV
 export_json: Włącz eksport do JSON

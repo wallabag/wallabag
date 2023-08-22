@@ -1,7 +1,6 @@
 download_pictures: Scarica le immagini sul tuo server
 diaspora_url: URL di diaspora*, se il servizio è abilitato
 export_epub: Abilita esportazione ePub
-export_mobi: Abilita esportazione .mobi (deprecato, verrà rimosso presto)
 export_pdf: Abilita esportazione PDF
 export_csv: Abilita esportazione CSV
 export_json: Abilita esportazione JSON

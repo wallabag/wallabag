@@ -100,8 +100,6 @@ fos_rest:
                 - 'application/pdf'
             epub:
                 - 'application/epub+zip'
-            mobi:
-                - 'application/x-mobipocket-ebook'
         view_response_listener: 'force'
         formats:
             xml: true
@@ -110,13 +108,12 @@ fos_rest:
             csv: true
             pdf: true
             epub: true
-            mobi: true
         failed_validation: HTTP_BAD_REQUEST
     routing_loader: false
     format_listener:
         enabled: true
         rules:
-            - { path: "^/api/entries/([0-9]+)/export.(.*)", priorities: ['epub', 'mobi', 'pdf', 'txt', 'csv'], fallback_format: json, prefer_extension: false }
+            - { path: "^/api/entries/([0-9]+)/export.(.*)", priorities: ['epub', 'pdf', 'txt', 'csv'], fallback_format: json, prefer_extension: false }
             - { path: "^/api", priorities: ['json', 'xml'], fallback_format: json, prefer_extension: false }
             - { path: "^/annotations", priorities: ['json', 'xml'], fallback_format: json, prefer_extension: false }
 

@@ -1,7 +1,6 @@
 download_pictures: Descarcă poze pe server
 diaspora_url: diaspora* URL, dacă serviciul este permis
 export_epub: Permite exportare ePub
-export_mobi: Permite exportare .mobi
 export_pdf: Permite exportare PDF
 export_csv: Permite exportare CSV
 export_json: Permite exportare JSON

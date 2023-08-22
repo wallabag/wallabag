@@ -30,6 +30,5 @@ export_txt: TXT 내보내기 활성화
 export_json: JSON 내보내기 활성화
 export_csv: CSV 내보내기 활성화
 export_pdf: PDF 내보내기 활성화
-export_mobi: .mobi 내보내기 활성화
 export_epub: ePub 내보내기 활성화
 settings_changed: 설정을 업데이트했습니다
