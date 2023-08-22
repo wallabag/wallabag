@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.4](https://github.com/wallabag/wallabag/tree/2.6.4)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.3...2.6.4)
+
+### Fixes
+* Fix API token generation by @nicosomb https://github.com/wallabag/wallabag/pull/6869
+* Fix checkboxes which were broken by @nicosomb https://github.com/wallabag/wallabag/pull/6864
+
 ## [2.6.3](https://github.com/wallabag/wallabag/tree/2.6.3)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.2...2.6.3)
 
