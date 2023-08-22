@@ -84,13 +84,8 @@ doctrine_migrations:
             executed_at_column_name: 'executed_at'
 
 fos_rest:
-    zone:
-        - { path: ^/api }
-        - { path: ^/annotations }
     param_fetcher_listener: true
     body_listener: true
-    exception:
-        serializer_error_renderer: true
     view:
         mime_types:
             csv:
@@ -119,6 +114,9 @@ fos_rest:
             - { path: "^/api/entries/([0-9]+)/export.(.*)", priorities: ['epub', 'mobi', 'pdf', 'txt', 'csv'], fallback_format: json, prefer_extension: false }
             - { path: "^/api", priorities: ['json', 'xml'], fallback_format: json, prefer_extension: false }
             - { path: "^/annotations", priorities: ['json', 'xml'], fallback_format: json, prefer_extension: false }
+            # for an unknown reason, EACH REQUEST goes to FOS\RestBundle\EventListener\FormatListener
+            # so we need to add custom rule for custom api export but also for all other routes of the application...
+            - { path: '^/', priorities: ['text/html', '*/*'], fallback_format: html, prefer_extension: false }
 
 nelmio_api_doc:
     areas:
