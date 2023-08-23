@@ -87,6 +87,7 @@ entry:
         delete_tag: Tes a certeza de querer eliminar esa etiqueta do artigo?
         delete: Tes a certeza de querer eliminar ese artigo?
         delete_entries: Tes a certeza de querer eliminar estes artigos?
+        reload: Tes a certeza de querer recargar este artigo?
     public:
         shared_by_wallabag: Este artigo foi compartido por %username% con <a href='%wallabag_instance%'>wallabag</a>
     edit:
@@ -158,6 +159,7 @@ entry:
         status_label: Estado
         title: Filtros
         annotated_label: Anotado
+        parsed_label: Non se obtivo correctamente
     list:
         export_title: Exportar
         delete: Eliminar
@@ -289,6 +291,14 @@ config:
         items_per_page_label: Elementos por páxina
         help_display_thumbnails: Podes decidir se queres mostrar ou non miniaturas dos artigos. Útil para conexións lentas.
         display_thumbnails_label: Mostrar miniaturas dos artigos (útil para conexións lentas).
+        font_label: Tipo de letra
+        help_font: Podes elexir o tipo de letra que queres usar.
+        help_lineheight: Podes elexir o espazo entre liñas que queres usar.
+        fontsize_label: Tamaño da letra
+        maxwidth_label: Ancho máximo
+        help_fontsize: Podes elexir o tamaño da letra que queres usar.
+        help_maxwidth: Podes elexir o ancho máximo que queres usar.
+        lineheight_label: Altura da liña
     form_password:
         repeat_new_password_label: Repite o novo contrasinal
         new_password_label: Novo contrasinal
@@ -347,6 +357,7 @@ config:
         user_info: Información da usuaria
         feed: Fontes
         settings: Axustes
+        article_display: Visualización do artigo
     page_title: Configuración
 footer:
     stats: Desde %user_creation% liches %nb_archives% artigos. Que ven sendo %per_day% ao día!
@@ -460,6 +471,14 @@ import:
         page_title: Importar > del.icio.us
         how_to: Elixe a exportación de Delicious e preme no botón inferior para subilo e importalo.
         description: Este importador traerá tódolos teus marcadores Delicious. Desde 2021, podes exportar outra vez os teus datos usando a páxina de exportación (https://del.icio.us/export). Elixe o formato "JSON" e descárgao (de tipo "delicious_export.2021.02.06_21.10.json").
+    pocket_html:
+        page_title: Importar > Pocket HTML
+        description: Este importador traerá todos os teus marcadores en Pocket (vía exportación HTML). Vai a https://getpocket.com/export, e exporta o ficheiro HTML. Descargarás un ficheiro HTML (tipo "ril_export.html").
+        how_to: Elixe o ficheiro da copia de apoio cos marcadores e preme no botón para importalo. Ten en conta que o proceso podería demorarse porque hai que importar todos os artigos.
+    shaarli:
+        page_title: Importar > Shaarli
+        description: Este importador traerá todos os teus marcadores de Shaarli. Vai á sección Ferramentas, e despois en "Exportar base de datos", elixe os teus marcadores e expórtaos. Terás un ficheiro HTML.
+        how_to: Elixe o ficheiro de copia de apoio cos marcadores para importalos. Ten en conta que o proceso podería demorarse porque hai que descargar todos os artigos.
 export:
     unknown: Descoñecido
     footer_template: <div style="text-align:center;"><p>Producido por wallabag con %method%</p><p>Abre <a href="https://github.com/wallabag/wallabag/issues">un issue</a> se tes problemas para visualizar este E-Book no teu dispositivo.</p></div>
