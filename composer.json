@@ -171,7 +171,7 @@
         "symfony/maker-bundle": "^1.18",
         "symfony/phpunit-bridge": "~6.0",
         "symfony/var-dumper": "^4.4",
-        "symfony/web-profiler-bundle": "^4.4",
+        "symfony/web-profiler-bundle": "^5.0",
         "symfony/web-server-bundle": "^4.4"
     },
     "suggest": {
