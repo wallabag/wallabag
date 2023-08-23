@@ -141,7 +141,7 @@
         "symfony/security-bundle": "^4.4",
         "symfony/security-core": "^4.4",
         "symfony/security-http": "^4.4",
-        "symfony/templating": "^4.4",
+        "symfony/templating": "^5.4",
         "symfony/twig-bundle": "^4.4",
         "symfony/validator": "^4.4",
         "tecnickcom/tcpdf": "^6.3.0",
