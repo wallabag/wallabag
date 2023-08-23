@@ -166,7 +166,7 @@
         "phpstan/phpstan-phpunit": "^1.1",
         "phpstan/phpstan-symfony": "^1.2",
         "symfony/browser-kit": "^4.4",
-        "symfony/css-selector": "^4.4",
+        "symfony/css-selector": "^5.4",
         "symfony/debug-bundle": "^4.4",
         "symfony/maker-bundle": "^1.18",
         "symfony/phpunit-bridge": "~6.0",
