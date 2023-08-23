@@ -411,7 +411,7 @@ class EntryRestController extends WallabagRestController
      *         required=true,
      *         @OA\Schema(
      *             type="string",
-     *             enum={"xml", "json", "txt", "csv", "pdf", "epub", "mobi"},
+     *             enum={"xml", "json", "txt", "csv", "pdf", "epub"},
      *         )
      *     ),
      *     @OA\Response(

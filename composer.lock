@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8d38521d8cb653942ec9ede35d85882a",
+    "content-hash": "cb15e9db979aaff7612963cd8b68479d",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -14855,54 +14855,6 @@
                 }
             ],
             "time": "2023-07-26T07:16:09+00:00"
-        },
-        {
-            "name": "wallabag/php-mobi",
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/wallabag/php-mobi.git",
-                "reference": "e725dd27e2d15830a54da27bab08ccef816890aa"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/wallabag/php-mobi/zipball/e725dd27e2d15830a54da27bab08ccef816890aa",
-                "reference": "e725dd27e2d15830a54da27bab08ccef816890aa",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0",
-                "symfony/polyfill-mbstring": "^1.12"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "MOBIClass/MOBI.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Sander Kromwijk",
-                    "email": "s.kromwijk@gmail.co",
-                    "role": "Original developer"
-                },
-                {
-                    "name": "Nicolas Lœuillet",
-                    "email": "nicolas@loeuillet.org",
-                    "homepage": "http://www.cdetc.fr"
-                }
-            ],
-            "description": "A Mobipocket file (.mobi) creator in PHP.",
-            "homepage": "https://github.com/wallabag/php-mobi",
-            "support": {
-                "issues": "https://github.com/wallabag/php-mobi/issues",
-                "source": "https://github.com/wallabag/php-mobi/tree/1.1.1"
-            },
-            "time": "2022-03-22T10:25:12+00:00"
         },
         {
             "name": "wallabag/phpepub",

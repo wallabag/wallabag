@@ -65,7 +65,7 @@ class ExportControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $client->request('GET', '/export/0.mobi');
+        $client->request('GET', '/export/0.pdf');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
@@ -80,7 +80,7 @@ class ExportControllerTest extends WallabagCoreTestCase
             ->getRepository(Entry::class)
             ->findOneByUsernameAndNotArchived('bob');
 
-        $client->request('GET', '/export/' . $content->getId() . '.mobi');
+        $client->request('GET', '/export/' . $content->getId() . '.pdf');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
@@ -99,28 +99,6 @@ class ExportControllerTest extends WallabagCoreTestCase
         $headers = $client->getResponse()->headers;
         $this->assertSame('application/epub+zip', $headers->get('content-type'));
         $this->assertSame('attachment; filename="Archive articles.epub"', $headers->get('content-disposition'));
-        $this->assertSame('binary', $headers->get('content-transfer-encoding'));
-    }
-
-    public function testMobiExport()
-    {
-        $this->logInAs('admin');
-        $client = $this->getTestClient();
-
-        $content = $client->getContainer()
-            ->get(EntityManagerInterface::class)
-            ->getRepository(Entry::class)
-            ->findOneByUsernameAndNotArchived('admin');
-
-        ob_start();
-        $crawler = $client->request('GET', '/export/' . $content->getId() . '.mobi');
-        ob_end_clean();
-
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
-
-        $headers = $client->getResponse()->headers;
-        $this->assertSame('application/x-mobipocket-ebook', $headers->get('content-type'));
-        $this->assertSame('attachment; filename="' . $this->getSanitizedFilename($content->getTitle()) . '.mobi"', $headers->get('content-disposition'));
         $this->assertSame('binary', $headers->get('content-transfer-encoding'));
     }
 
