@@ -75,13 +75,6 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertStringContainsString('application/epub', $this->client->getResponse()->getContent());
         $this->assertSame('application/epub+zip', $this->client->getResponse()->headers->get('Content-Type'));
 
-        // re-auth client for mobi
-        $client = $this->createAuthorizedClient();
-        $client->request('GET', '/api/entries/' . $entry->getId() . '/export.mobi');
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
-
-        $this->assertSame('application/x-mobipocket-ebook', $client->getResponse()->headers->get('Content-Type'));
-
         // re-auth client for pdf
         $client = $this->createAuthorizedClient();
         $client->request('GET', '/api/entries/' . $entry->getId() . '/export.pdf');

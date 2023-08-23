@@ -248,55 +248,6 @@ class EntriesExport
     }
 
     /**
-     * Use PHPMobi to dump a .mobi file.
-     *
-     * @return Response
-     */
-    private function produceMobi()
-    {
-        $mobi = new \MOBI();
-        $content = new \MOBIFile();
-
-        /*
-         * Book metadata
-         */
-        $content->set('title', $this->title);
-        $content->set('author', $this->author);
-        $content->set('subject', $this->title);
-
-        /*
-         * Front page
-         */
-        $content->appendParagraph($this->getExportInformation('PHPMobi'));
-        if (file_exists($this->logoPath)) {
-            $content->appendImage(imagecreatefrompng($this->logoPath));
-        }
-        $content->appendPageBreak();
-
-        /*
-         * Adding actual entries
-         */
-        foreach ($this->entries as $entry) {
-            $content->appendChapterTitle($entry->getTitle());
-            $content->appendParagraph($entry->getContent());
-            $content->appendPageBreak();
-        }
-        $mobi->setContentProvider($content);
-
-        return Response::create(
-            $mobi->toString(),
-            200,
-            [
-                'Accept-Ranges' => 'bytes',
-                'Content-Description' => 'File Transfer',
-                'Content-type' => 'application/x-mobipocket-ebook',
-                'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.mobi"',
-                'Content-Transfer-Encoding' => 'binary',
-            ]
-        );
-    }
-
-    /**
      * Use TCPDF to dump a .pdf file.
      *
      * @return Response
