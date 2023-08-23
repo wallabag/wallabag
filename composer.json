@@ -135,7 +135,7 @@
         "symfony/mailer": "^4.4",
         "symfony/mime": "^4.4",
         "symfony/monolog-bundle": "^3.1",
-        "symfony/options-resolver": "^4.4",
+        "symfony/options-resolver": "^5.4",
         "symfony/proxy-manager-bridge": "^4.4",
         "symfony/routing": "^4.4",
         "symfony/security-bundle": "^4.4",
