@@ -145,26 +145,30 @@
         },
         {
             "name": "bdunogier/guzzle-site-authenticator",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wallabag/guzzle-site-authenticator.git",
-                "reference": "b0d32d72bdf84d1695ed2131e644f900ea570136"
+                "reference": "16a73a973000cde431f45deb6a45b4315fc4d391"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wallabag/guzzle-site-authenticator/zipball/b0d32d72bdf84d1695ed2131e644f900ea570136",
-                "reference": "b0d32d72bdf84d1695ed2131e644f900ea570136",
+                "url": "https://api.github.com/repos/wallabag/guzzle-site-authenticator/zipball/16a73a973000cde431f45deb6a45b4315fc4d391",
+                "reference": "16a73a973000cde431f45deb6a45b4315fc4d391",
                 "shasum": ""
             },
             "require": {
-                "guzzlehttp/guzzle": "^5.2.0",
+                "guzzlehttp/guzzle": "^5.3.1",
                 "psr/log": "^1.0.0",
-                "symfony/expression-language": "^3.2|^4.4|^5.4"
+                "symfony/config": "^4.4|^5.4|^6.0",
+                "symfony/dependency-injection": "^4.4|^5.4|^6.0",
+                "symfony/expression-language": "^4.4|^5.4|^6.0",
+                "symfony/http-kernel": "^4.4|^5.4|^6.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.4.0",
                 "monolog/monolog": "^2.3",
+                "nyholm/symfony-bundle-test": "^2.0",
                 "symfony/phpunit-bridge": "^6.0"
             },
             "type": "library",
@@ -192,9 +196,9 @@
             "description": "A guzzle plugin that adds, if necessary, authentication data to requests. Uses credentials and cookies, with login requests to the sites.",
             "support": {
                 "issues": "https://github.com/wallabag/guzzle-site-authenticator/issues",
-                "source": "https://github.com/wallabag/guzzle-site-authenticator/tree/1.0.1"
+                "source": "https://github.com/wallabag/guzzle-site-authenticator/tree/1.1.0"
             },
-            "time": "2022-03-13T18:08:08+00:00"
+            "time": "2023-08-21T14:33:48+00:00"
         },
         {
             "name": "beberlei/assert",
