@@ -153,7 +153,7 @@ jobs:
         run: "php bin/simple-phpunit -v"
 
   phpunit_no_database:
-    name: "PHP ${{ matrix.php }} using ${{ matrix.database }} who don't exist"
+    name: "PHP ${{ matrix.php }} using ${{ matrix.database }} without DB created"
     runs-on: "ubuntu-20.04"
     services:
       rabbitmq:
@@ -192,13 +192,14 @@ jobs:
         if: "${{ matrix.database == 'mysql' }}"
         run: |
           sudo systemctl start mysql.service
+
       - name: "Install dependencies with Composer"
         uses: "ramsey/composer-install@v2"
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 
       - name: "Install wallabag"
-        run: "make install ENV=test"
+        run: "php bin/console wallabag:install --env=test"
 
       - name: "Prepare fixtures"
         run: "make fixtures"
