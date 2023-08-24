@@ -65,6 +65,7 @@ config:
         feed: "Flux"
         ignore_origin: "Règles d'omission d'origine"
         reset: "Réinitialisation"
+        article_display: Affichage de l'article
     form:
         save: Enregistrer
     form_settings:
@@ -90,6 +91,14 @@ config:
         help_pocket_consumer_key: Nécessaire pour l’import depuis Pocket. Vous pouvez le créer depuis votre compte Pocket.
         help_display_thumbnails: Vous pouvez décidez d'afficher ou non les miniatures des articles. Utile pour les connexions lentes.
         display_thumbnails_label: Afficher les miniatures des articles (utile pour les connexions lentes).
+        help_font: Vous pouvez choisir la famille de police que vous voulez utiliser.
+        font_label: Famille de police
+        fontsize_label: Taille de police
+        help_fontsize: Vous pouvez choisir la taille de police que vous voulez utiliser.
+        lineheight_label: Hauteur de la ligne
+        maxwidth_label: Largeur maximale
+        help_lineheight: Vous pouvez choisir la hauteur de ligne que vous voulez utiliser.
+        help_maxwidth: Vous pouvez choisir la largeur maximale que vous voulez utiliser.
     form_feed:
         description: "Les flux Atom fournis par wallabag vous permettent de lire vos articles sauvegardés dans votre lecteur de flux préféré. Pour pouvoir les utiliser, vous devez d’abord créer un jeton."
         token_label: "Jeton de flux"
@@ -270,6 +279,7 @@ entry:
         action:
             clear: Effacer
             filter: Filtrer
+        parsed_label: Pas récupéré correctement
     view:
         left_menu:
             back_to_top: Revenir en haut
@@ -320,6 +330,7 @@ entry:
         delete: Voulez-vous vraiment supprimer cet article ?
         delete_tag: Voulez-vous vraiment supprimer cette étiquette de cet article ?
         delete_entries: Voulez-vous vraiment supprimer ces articles ?
+        reload: Êtes-vous sûr·e de vouloir recharger cet article ?
     metadata:
         reading_time: Durée de lecture estimée
         reading_time_minutes_short: '%readingTime% min'
@@ -529,6 +540,12 @@ import:
         page_title: Importer > del.icio.us
         how_to: Choisissez le fichier de votre export Delicious et cliquez sur le bouton ci-dessous pour l'importer.
         description: Depuis 2021, vous pouvez à nouveau exporter vos données depuis Delicious (https://del.icio.us/export). Choisissez le format "JSON" et téléchargez le (un fichier du genre "delicious_export.2021.02.06_21.10.json").
+    shaarli:
+        page_title: Importer > Shaarli
+        description: Cet importateur importera toutes vos signets Shaarli. Il suffit d'aller à la section Outils, puis dans « Base de données d'exportation », choisissez vos signets et exportez-les. Vous obtiendrez un fichier HTML.
+        how_to: Veuillez sélectionner le fichier de sauvegarde de signet et cliquez sur le bouton ci-dessous pour l'importer. Notez que le processus peut prendre beaucoup de temps puisque tous les articles doivent être récupérés.
+    pocket_html:
+        page_title: Importer > Pocket HTML
 developer:
     page_title: Gestion des clients API
     welcome_message: Bienvenue sur l’API de wallabag
