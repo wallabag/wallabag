@@ -19,7 +19,7 @@ menu:
         starred: 'Favoritos'
         archive: 'Archivados'
         all_articles: 'Todos los artículos'
-        config: 'Configuración'
+        config: 'Config.'
         tags: 'Etiquetas'
         internal_settings: 'Configuración interna'
         import: 'Importar'
@@ -55,9 +55,9 @@ footer:
         about: 'Acerca de'
     stats: Desde el %user_creation% has leído %nb_archives% artículos. ¡Eso son unos %per_day% por día!
 config:
-    page_title: 'Configuración'
+    page_title: 'Config.'
     tab_menu:
-        settings: 'Configuración'
+        settings: 'Ajustes'
         feed: 'RSS'
         user_info: 'Información de usuario'
         password: 'Contraseña'
@@ -66,6 +66,7 @@ config:
         reset: 'Reiniciar mi cuenta'
         rss: RSS
         ignore_origin: Ignorar reglas de origen
+        article_display: Visualización del artículo
     form:
         save: 'Guardar'
     form_settings:
@@ -89,6 +90,16 @@ config:
         help_language: "Puedes cambiar el idioma de la interfaz de wallabag."
         help_pocket_consumer_key: "Requerido para la importación desde Pocket. Puedes crearla en tu cuenta de Pocket."
         android_instruction: Pulse aquí para completar tu aplicación Android
+        help_font: Puedes elegir la familia de las fuentes que deseas utilizar.
+        help_fontsize: Puedes elegir el tamaño de letra que deseas utilizar.
+        help_lineheight: Puedes elegir la interlineación para la línea que deseas utilizar.
+        help_maxwidth: Puedes elegir la anchura máxima que deseas utilizar.
+        font_label: Familias de tipos de letra
+        fontsize_label: Tamaño de las letras
+        lineheight_label: Interlineación
+        maxwidth_label: Anchura máxima
+        help_display_thumbnails: Puedes decidir si deseas mostrar o no las miniaturas de los artículos. Útil para conexiones lentas.
+        display_thumbnails_label: Mostrar las miniaturas de los artículos (útil para conexiones lentas).
     form_rss:
         description: 'Los feeds RSS proporcionados por wallabag permiten leer los artículos guardados con su lector RSS favorito. Primero necesitas generar un token.'
         token_label: 'Token RSS'
@@ -110,7 +121,7 @@ config:
             emailTwoFactor_label: 'Usando el correo electrónico (recibe un código por correo electrónico)'
             googleTwoFactor_label: 'Usando una aplicación OTP (abre la aplicación, por ejemplo Google Authenticator, Authy o FreeOTP, para conseguir un código de utilización única)'
             table_method: 'Método'
-            table_state: 'Estado'
+            table_state: 'Situación'
             table_action: 'Acción'
             state_enabled: 'Activado'
             state_disabled: 'Desactivado'
@@ -258,9 +269,10 @@ entry:
         show_same_domain: Mostrar artículos con el mismo dominio
         toggle_mass_action: Acción colectiva
         mass_action_tags_input_placeholder: etiqueta1, etiqueta2, etiqueta3
+        add_tags: Añadir etiquetas
     filters:
         title: 'Filtros'
-        status_label: 'Estado'
+        status_label: 'Situación'
         archived_label: 'Archivado'
         starred_label: 'Favorito'
         unread_label: 'Sin leer'
@@ -283,10 +295,11 @@ entry:
         is_public_help: Enlace público
         is_public_label: Tiene un enlace público
         annotated_label: Anotado
+        parsed_label: No se ha recuperado correctamente
     view:
         left_menu:
             back_to_top: 'Volver al principio'
-            back_to_homepage: 'Volver'
+            back_to_homepage: 'Atrás'
             set_as_read: 'Marcar como leído'
             set_as_unread: 'Marcar como no leído'
             set_as_starred: 'Marcar como favorito'
@@ -333,6 +346,7 @@ entry:
         delete_tag: ¿Estás seguro de que deseas eliminar la etiqueta de este artículo?
         delete: ¿Seguro que quieres eliminar este artículo?
         delete_entries: ¿Está seguro de que desea eliminar estos artículos?
+        reload: ¿Seguro que quieres recargar ese artículo?
     metadata:
         added_on: Añadido el
         address: Dirección
@@ -427,7 +441,7 @@ quickstart:
     configure:
         title: 'Configure la aplicación'
         description: 'Para que la aplicación se ajuste a tus necesidades, echa un vistazo a la configuración de wallabag.'
-        language: 'Cambie el idioma y el diseño'
+        language: 'Cambie el idioma y la interfaz'
         feed: 'Activar los feeds RSS'
         tagging_rules: 'Escribe reglas para etiquetar automáticamente tus artículos'
         rss: Habilitar canales RSS
@@ -511,7 +525,7 @@ import:
         description: 'Importa todos tus artículos de wallabag v2. En la sección Todos los artículos, en la barra lateral, haga clic en "JSON". Obtendrás un archivo llamado "All articles.json".'
     readability:
         page_title: 'Importar > Readability'
-        description: 'Importa todos tus artículos de Readability. En la página de herramientas (https://www.readability.com/tools/), haga clic en «Exportar tus datos» en la sección «Exportar datos». Recibirás un correo electrónico para descargar un JSON (aunque no tiene extensión .json).'
+        description: 'Esta herramienta importará todos tus artículos de legibilidad.'
         how_to: 'Seleccione el archivo exportado de Readability y haga clic en el botón para subirlo e importarlo.'
     worker:
         enabled: "La importación se realiza de forma asíncrona. Una vez que la tarea de importación ha comenzado, un trabajador externo se encargará de procesar los artículos uno a uno. El servicio actual es:"
@@ -533,12 +547,20 @@ import:
         description: 'Importa todos tus artículos de Pinboard. En la página de backup (https://pinboard.in/settings/backup), haz clic en "JSON" en la sección "Marcadores". Obtendrás un archivo JSON llamado "pinboard_export".'
         how_to: 'Seleccione el archivo exportado de Pinboard y haga clic en el botón para importarlo.'
     elcurator:
-        description: Importa todos tus artículos de elCurator. Ve a la página de preferencias en tu cuenta de elCurator y exporta tu contenido. Obtendrás un fichero JSON.
+        description: Esta herramienta importará todos tus artículos desde elCurator.
         page_title: Importar > elCurator
     delicious:
         page_title: Importar > del.icio.us
         description: Importa todos tus artículos de Delicious. Desde 2021 puedes exportar tus datos de nuevo utilizando la página de exportación (https://del.icio.us/export). Elige el formato "JSON" y descárgalo (por ejemplo "delicious_export.2021.02.06_21.10.json").
         how_to: Seleccione el archivo exportado de Delicious y haga clic en el botón para importarlo.
+    shaarli:
+        description: Esta herramienta importará todos tus marcadores de Shaarli. Sólo tienes que ir a la sección Herramientas, luego a "Exportar base de datos", elegir tus marcadores y exportarlos. Obtendrás un archivo HTML.
+        how_to: Por favor, elige archivo de la copia de seguridad del marcador y haz clic en el botón inferior para importarlo. Ten en cuenta que el proceso puede llevar mucho tiempo, ya que hay que recuperar todos los artículos.
+        page_title: Importar > Shaarli
+    pocket_html:
+        description: Esta herramienta importará todos tus marcadores de Pocket (vía HTML). Sólo tienes que ir a https://getpocket.com/export, y luego exportar el archivo HTML. Se descargará un archivo HTML (como "ril_export.html").
+        page_title: Importar > Pocket HTML
+        how_to: Por favor, elige el archivo de la copia de seguridad del marcador y haz clic en el botón inferior para importarlo. Ten en cuenta que el proceso puede llevar mucho tiempo, ya que hay que recuperar todos los artículos.
 developer:
     page_title: 'Gestión de clientes API'
     welcome_message: 'Bienvenido al API de wallabag'
@@ -620,7 +642,7 @@ user:
         placeholder: Filtrar por nombre de usuario o correo electrónico
 site_credential:
     form:
-        back_to_list: Volver
+        back_to_list: Regresar a la lista
         delete_confirm: ¿Estás seguro?
         delete: Eliminar
         save: Guardar
@@ -680,6 +702,7 @@ flashes:
         notice:
             tag_added: 'Etiqueta añadida'
             tag_renamed: 'Etiqueta renombrada'
+            too_much_tags: Para evitar problemas de rendimiento, no puedes añadir más de %tags% etiquetas a la vez o etiquetas que tengan más de %characters% caracteres.
     import:
         notice:
             failed: 'Importación fallida, por favor, inténtelo de nuevo.'
