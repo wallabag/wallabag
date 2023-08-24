@@ -6,6 +6,7 @@ use Lexik\Bundle\FormFilterBundle\Filter\FilterOperands;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\CheckboxFilterType;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\ChoiceFilterType;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\DateRangeFilterType;
+use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\NumberFilterType;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\NumberRangeFilterType;
 use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\TextFilterType;
 use Lexik\Bundle\FormFilterBundle\Filter\Query\QueryInterface;
@@ -103,9 +104,9 @@ class EntryFilterType extends AbstractType
                 },
                 'label' => 'entry.filters.domain_label',
             ])
-            ->add('httpStatus', TextFilterType::class, [
+            ->add('httpStatus', NumberFilterType::class, [
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
-                    $value = $values['value'];
+                    $value = (int) $values['value'];
                     if (false === \array_key_exists($value, Response::$statusTexts)) {
                         return false;
                     }
@@ -117,6 +118,11 @@ class EntryFilterType extends AbstractType
                     return $filterQuery->createCondition($expression, $parameters);
                 },
                 'label' => 'entry.filters.http_status_label',
+                'html5' => true,
+                'attr' => [
+                    'min' => 100,
+                    'max' => 527,
+                ],
             ])
             ->add('isArchived', CheckboxFilterType::class, [
                 'label' => 'entry.filters.archived_label',
