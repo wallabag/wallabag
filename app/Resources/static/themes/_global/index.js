@@ -10,6 +10,11 @@ import 'mathjax/es5/tex-svg';
 /* Fonts */
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import 'lato-font/css/lato-font.css';
+import 'open-dyslexic/open-dyslexic-regular.css';
+import '@fontsource/atkinson-hyperlegible';
+import '@fontsource/eb-garamond';
+import '@fontsource/montserrat';
+import '@fontsource/oswald';
 import './global.scss';
 
 /* Shortcuts */
@@ -26,7 +31,7 @@ import { savePercent, retrievePercent } from './js/tools';
  ========================================================================== */
 
 $(document).ready(() => {
-  if ($('article').length) {
+  if ($('#article').length) {
     const app = new annotator.App();
 
     app.include(annotator.ui.main, {

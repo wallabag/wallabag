@@ -114,6 +114,7 @@
         "scheb/2fa-google-authenticator": "^5.13",
         "scheb/2fa-qr-code": "^5.13",
         "scheb/2fa-trusted-device": "^5.13",
+        "scssphp/scssphp": "^1.11",
         "sensio/framework-extra-bundle": "^6.2",
         "sentry/sentry-symfony": "4.10.0",
         "stof/doctrine-extensions-bundle": "^1.2",
@@ -147,7 +148,6 @@
         "twig/extra-bundle": "^3.4",
         "twig/string-extra": "^3.4",
         "twig/twig": "^3.4.3",
-        "wallabag/php-mobi": "~1.0",
         "wallabag/phpepub": "^4.0.10",
         "willdurand/hateoas": "^3.8",
         "willdurand/hateoas-bundle": "~2.1"

@@ -133,8 +133,10 @@ class EntryRepository extends ServiceEntityRepository
 
         // We lower() all parts here because PostgreSQL 'LIKE' verb is case-sensitive
         $qb
-            ->andWhere('lower(e.content) LIKE lower(:term) OR lower(e.title) LIKE lower(:term) OR lower(e.url) LIKE lower(:term)')->setParameter('term', '%' . $term . '%')
+            ->andWhere('lower(e.content) LIKE lower(:term) OR lower(e.title) LIKE lower(:term) OR lower(e.url) LIKE lower(:term) OR lower(a.text) LIKE lower(:term)')
+            ->setParameter('term', '%' . $term . '%')
             ->leftJoin('e.tags', 't')
+            ->leftJoin('e.annotations', 'a')
             ->groupBy('e.id');
 
         return $qb;
@@ -207,14 +209,15 @@ class EntryRepository extends ServiceEntityRepository
      * @param string $order
      * @param int    $since
      * @param string $tags
-     * @param string $detail     'metadata' or 'full'. Include content field if 'full'
+     * @param string $detail      'metadata' or 'full'. Include content field if 'full'
      * @param string $domainName
+     * @param bool   $isNotParsed
      *
      * @todo Breaking change: replace default detail=full by detail=metadata in a future version
      *
      * @return Pagerfanta
      */
-    public function findEntries($userId, $isArchived = null, $isStarred = null, $isPublic = null, $sort = 'created', $order = 'asc', $since = 0, $tags = '', $detail = 'full', $domainName = '')
+    public function findEntries($userId, $isArchived = null, $isStarred = null, $isPublic = null, $sort = 'created', $order = 'asc', $since = 0, $tags = '', $detail = 'full', $domainName = '', $isNotParsed = null)
     {
         if (!\in_array(strtolower($detail), ['full', 'metadata'], true)) {
             throw new \Exception('Detail "' . $detail . '" parameter is wrong, allowed: full or metadata');
@@ -242,6 +245,10 @@ class EntryRepository extends ServiceEntityRepository
 
         if (null !== $isPublic) {
             $qb->andWhere('e.uid IS ' . (true === $isPublic ? 'NOT' : '') . ' NULL');
+        }
+
+        if (null !== $isNotParsed) {
+            $qb->andWhere('e.isNotParsed = :isNotParsed')->setParameter('isNotParsed', (bool) $isNotParsed);
         }
 
         if ($since > 0) {
@@ -429,7 +436,7 @@ class EntryRepository extends ServiceEntityRepository
     /**
      * Find all entries which have an empty value for hash.
      *
-     * @return Entry|false
+     * @return Entry[]
      */
     public function findByEmptyHashedUrlAndUserId(int $userId)
     {
@@ -555,6 +562,24 @@ class EntryRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('e')
             ->select('e.id');
+
+        if (null !== $userId) {
+            $qb->where('e.user = :userid')->setParameter(':userid', $userId);
+        }
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    /**
+     * @param int $userId
+     *
+     * @return array
+     */
+    public function findAllEntriesIdByUserIdAndNotParsed($userId = null)
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->select('e.id')
+            ->where('e.isNotParsed = true');
 
         if (null !== $userId) {
             $qb->where('e.user = :userid')->setParameter(':userid', $userId);

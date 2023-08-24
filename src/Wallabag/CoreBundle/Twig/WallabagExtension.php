@@ -58,11 +58,19 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
 
     public function removeWww($url)
     {
+        if (!\is_string($url)) {
+            return $url;
+        }
+
         return preg_replace('/^www\./i', '', $url);
     }
 
     public function removeScheme($url)
     {
+        if (!\is_string($url)) {
+            return $url;
+        }
+
         return preg_replace('#^https?://#i', '', $url);
     }
 
@@ -145,7 +153,7 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
 
         if (!$user instanceof User) {
-            return 0;
+            return '';
         }
 
         $query = $this->entryRepository->getBuilderForArchiveByUser($user->getId())

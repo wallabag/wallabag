@@ -518,7 +518,7 @@ class EntryController extends AbstractController
         );
 
         // don't redirect user to the deleted entry (check that the referer doesn't end with the same url)
-        $prev = $request->getSession()->get('prevUrl');
+        $prev = $request->getSession()->get('prevUrl', '');
         $to = (1 !== preg_match('#' . $url . '$#i', $prev) ? $prev : null);
 
         $redirectUrl = $this->redirectHelper->to($to);
@@ -615,7 +615,7 @@ class EntryController extends AbstractController
      */
     private function showEntries($type, Request $request, $page)
     {
-        $searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
+        $searchTerm = (isset($request->get('search_entry')['term']) ? trim($request->get('search_entry')['term']) : '');
         $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
         $request->getSession()->set('prevUrl', $request->getRequestUri());
 

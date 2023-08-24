@@ -86,10 +86,6 @@ wallabag_core:
             value: 1
             section: export
         -
-            name: export_mobi
-            value: 0
-            section: export
-        -
             name: export_pdf
             value: 1
             section: export
@@ -130,14 +126,6 @@ wallabag_core:
             value: 1
             section: analytics
         -
-            name: demo_mode_enabled
-            value: 0
-            section: misc
-        -
-            name: demo_mode_username
-            value: wallabag
-            section: misc
-        -
             name: download_images_enabled
             value: 0
             section: misc
@@ -165,7 +153,16 @@ wallabag_core:
             rule: host = "feeds.reuters.com"
         -
             rule: _all ~ "https?://www\.lemonde\.fr/tiny.*"
+    fonts:
+        - 'Sans-serif'
+        - 'Serif'
+        - 'Atkinson Hyperlegible'
+        - 'EB Garamond'
+        - 'Lato'
+        - 'Montserrat'
+        - 'OpenDyslexicRegular'
+        - 'Oswald'
 
 wallabag_import:
-    allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain', 'text/csv']
+    allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain', 'text/csv', 'text/html']
     resource_dir: "%kernel.project_dir%/web/uploads/import"

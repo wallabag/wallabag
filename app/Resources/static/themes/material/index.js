@@ -8,7 +8,9 @@ import 'materialize-css/dist/js/materialize';
 import '../_global/index';
 
 /* Tools */
-import { initExport, initFilters, initRandom } from './js/tools';
+import {
+  initExport, initFilters, initRandom, initPreviewText,
+} from './js/tools';
 
 /* Import shortcuts */
 import './js/shortcuts/main';
@@ -177,6 +179,7 @@ $(document).ready(() => {
   initRandom();
   stickyNav();
   articleScroll();
+  initPreviewText();
 
   const toggleNav = (toShow, toFocus) => {
     $('.nav-panel-actions').hide(100);
@@ -197,6 +200,29 @@ $(document).ready(() => {
   $('#nav-btn-add').on('click', () => {
     toggleNav('.nav-panel-add', '#entry_url');
     return false;
+  });
+
+  $('#config_fontsize').on('input', () => {
+    const value = $('#config_fontsize').val();
+    const css = `${value}em`;
+    $('#preview-content').css('font-size', css);
+  });
+
+  $('#config_font').on('change', () => {
+    const value = $('#config_font').val();
+    $('#preview-content').css('font-family', value);
+  });
+
+  $('#config_lineHeight').on('input', () => {
+    const value = $('#config_lineHeight').val();
+    const css = `${value}em`;
+    $('#preview-content').css('line-height', css);
+  });
+
+  $('#config_maxWidth').on('input', () => {
+    const value = $('#config_maxWidth').val();
+    const css = `${value}em`;
+    $('#preview-article').css('max-width', css);
   });
 
   const materialAddForm = $('.nav-panel-add');

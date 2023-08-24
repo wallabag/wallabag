@@ -12,7 +12,6 @@ export_epub: Povolit export do ePub
 export_json: Povolit export do JSON
 export_csv: Povolit export do CSV
 export_pdf: Povolit export do PDF
-export_mobi: Povolit export do .mobi
 diaspora_url: Adresa URL diaspora*, pokud je služba povolena
 download_pictures: Stáhnout obrázky na váš server
 settings_changed: Konfigurace byla aktualizována
@@ -22,8 +21,6 @@ api_user_registration: Zapnout registraci uživatelů prostřednictvím API
 restricted_access: Povolit ověřování pro placené webové stránky
 download_images_enabled: Stahovat obrázky místně
 share_public: Povolit veřejné adresy URL pro položky
-demo_mode_username: Ukázkový uživatel
-demo_mode_enabled: Povolit ukázkový režim (Používá se pouze pro veřejnou ukázku Wallabag)
 matomo_site_id: ID vaší webové stránky na Matomo
 matomo_host: Hostitel vaší webové stránky na Matomo (bez http:// nebo https://)
 modify_settings: použít

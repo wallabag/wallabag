@@ -65,6 +65,7 @@ class WallabagV1Import extends WallabagImport
         if (\in_array($entry['title'], $this->untitled, true)) {
             $data['title'] = $this->fetchingErrorMessageTitle;
             $data['html'] = $this->fetchingErrorMessage;
+            $entry['is_not_parsed'] = 1;
         }
 
         if (\array_key_exists('tags', $entry) && '' !== $entry['tags']) {

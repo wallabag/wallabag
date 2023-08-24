@@ -260,6 +260,7 @@ class ContentProxy
 
         if (empty($content['html'])) {
             $content['html'] = $this->fetchingErrorMessage;
+            $entry->setNotParsed(true);
 
             if (!empty($content['description'])) {
                 $content['html'] .= '<p><i>But we found a short description: </i></p>';

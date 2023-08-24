@@ -55,7 +55,7 @@ class Entry
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="uid", type="string", length=23, nullable=true)
      *
@@ -132,7 +132,7 @@ class Entry
     private $isArchived = false;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      *
      * @ORM\Column(name="archived_at", type="datetime", nullable=true)
      *
@@ -161,7 +161,7 @@ class Entry
     private $content;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      *
      * @ORM\Column(name="created_at", type="datetime")
      *
@@ -170,7 +170,7 @@ class Entry
     private $createdAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      *
      * @ORM\Column(name="updated_at", type="datetime")
      *
@@ -179,7 +179,7 @@ class Entry
     private $updatedAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      *
      * @ORM\Column(name="published_at", type="datetime", nullable=true)
      *
@@ -197,7 +197,7 @@ class Entry
     private $publishedBy;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      *
      * @ORM\Column(name="starred_at", type="datetime", nullable=true)
      *
@@ -275,6 +275,17 @@ class Entry
      * @Groups({"entries_for_user", "export_all"})
      */
     private $headers;
+
+    /**
+     * @var bool
+     *
+     * @Exclude
+     *
+     * @ORM\Column(name="is_not_parsed", type="boolean")
+     *
+     * @Groups({"entries_for_user", "export_all"})
+     */
+    private $isNotParsed = false;
 
     /**
      * @Exclude
@@ -400,7 +411,7 @@ class Entry
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeInterface|null
      */
     public function getArchivedAt()
     {
@@ -408,7 +419,7 @@ class Entry
     }
 
     /**
-     * @param \DateTime|null $archivedAt
+     * @param \DateTimeInterface|null $archivedAt
      *
      * @return Entry
      */
@@ -482,7 +493,7 @@ class Entry
 
     public function toggleStar()
     {
-        $this->isStarred = $this->isStarred() ^ 1;
+        $this->isStarred = !$this->isStarred();
 
         return $this;
     }
@@ -560,7 +571,7 @@ class Entry
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getCreatedAt()
     {
@@ -568,7 +579,7 @@ class Entry
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getUpdatedAt()
     {
@@ -576,7 +587,7 @@ class Entry
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeInterface|null
      */
     public function getStarredAt()
     {
@@ -584,7 +595,7 @@ class Entry
     }
 
     /**
-     * @param \DateTime|null $starredAt
+     * @param \DateTimeInterface|null $starredAt
      *
      * @return Entry
      */
@@ -881,7 +892,7 @@ class Entry
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
     public function getPublishedAt()
     {
@@ -891,7 +902,7 @@ class Entry
     /**
      * @return Entry
      */
-    public function setPublishedAt(\DateTime $publishedAt)
+    public function setPublishedAt(\DateTimeInterface $publishedAt)
     {
         $this->publishedAt = $publishedAt;
 
@@ -1005,5 +1016,29 @@ class Entry
         $this->hashedUrl = $hashedUrl;
 
         return $this;
+    }
+
+    /**
+     * Set isNotParsed.
+     *
+     * @param bool $isNotParsed
+     *
+     * @return Entry
+     */
+    public function setNotParsed($isNotParsed)
+    {
+        $this->isNotParsed = $isNotParsed;
+
+        return $this;
+    }
+
+    /**
+     * Get isNotParsed.
+     *
+     * @return bool
+     */
+    public function isNotParsed()
+    {
+        return $this->isNotParsed;
     }
 }

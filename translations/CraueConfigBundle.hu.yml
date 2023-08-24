@@ -2,7 +2,6 @@ settings_changed: Beállítások frissítve
 download_pictures: Képek letöltése a kiszolgálóra
 diaspora_url: diaspora* URL, ha a szolgáltatás engedélyezett
 export_epub: ePub-ba exportálás engedélyezése
-export_mobi: .mobi-ba exportálás engedélyezése
 export_pdf: PDF-be exportálás engedélyezése
 export_csv: CSV-be exportálás engedélyezése
 export_json: JSON-ba exportálás engedélyezése
@@ -27,9 +26,6 @@ modify_settings: alkalmaz
 piwik_host: Weboldalának hosztja a Piwik-en (http:// vagy https:// nélkül)
 piwik_site_id: Weboldalának azonosítója (ID-je) a Piwik-en
 piwik_enabled: Piwik engedélyezése
-demo_mode_enabled: Engedélyezi a bemutató (demó) módot? (Csak a nyilvános wallabag
-  demóhoz használva)
-demo_mode_username: Demó felhasználó
 share_public: Nyilvános URL-ek engedélyezése a bejegyzésekhez
 download_images_enabled: Képek letöltése helyileg
 restricted_access: Hitelesítés engedélyezése paywalled weboldalakhoz

@@ -11,6 +11,7 @@ use JMS\Serializer\SerializerBuilder;
 use PragmaRX\Recovery\Recovery as BackupCodes;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +26,7 @@ use Wallabag\CoreBundle\Entity\Config as ConfigEntity;
 use Wallabag\CoreBundle\Entity\IgnoreOriginUserRule;
 use Wallabag\CoreBundle\Entity\RuleInterface;
 use Wallabag\CoreBundle\Entity\TaggingRule;
+use Wallabag\CoreBundle\Event\ConfigUpdatedEvent;
 use Wallabag\CoreBundle\Form\Type\ChangePasswordType;
 use Wallabag\CoreBundle\Form\Type\ConfigType;
 use Wallabag\CoreBundle\Form\Type\FeedType;
@@ -48,15 +50,24 @@ class ConfigController extends AbstractController
     private TagRepository $tagRepository;
     private AnnotationRepository $annotationRepository;
     private ConfigRepository $configRepository;
+    private EventDispatcherInterface $eventDispatcher;
 
-    public function __construct(EntityManagerInterface $entityManager, UserManagerInterface $userManager, EntryRepository $entryRepository, TagRepository $tagRepository, AnnotationRepository $annotationRepository, ConfigRepository $configRepository)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        UserManagerInterface $userManager,
+        EntryRepository $entryRepository,
+        TagRepository $tagRepository,
+        AnnotationRepository $annotationRepository,
+        ConfigRepository $configRepository,
+        EventDispatcherInterface $eventDispatcher
+    ) {
         $this->entityManager = $entityManager;
         $this->userManager = $userManager;
         $this->entryRepository = $entryRepository;
         $this->tagRepository = $tagRepository;
         $this->annotationRepository = $annotationRepository;
         $this->configRepository = $configRepository;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -72,6 +83,7 @@ class ConfigController extends AbstractController
         $configForm->handleRequest($request);
 
         if ($configForm->isSubmitted() && $configForm->isValid()) {
+            $this->eventDispatcher->dispatch(new ConfigUpdatedEvent($config), ConfigUpdatedEvent::NAME);
             $this->entityManager->persist($config);
             $this->entityManager->flush();
 
@@ -90,14 +102,10 @@ class ConfigController extends AbstractController
         $pwdForm->handleRequest($request);
 
         if ($pwdForm->isSubmitted() && $pwdForm->isValid()) {
-            if ($craueConfig->get('demo_mode_enabled') && $craueConfig->get('demo_mode_username') === $user->getUsername()) {
-                $message = 'flashes.config.notice.password_not_updated_demo';
-            } else {
-                $message = 'flashes.config.notice.password_updated';
+            $message = 'flashes.config.notice.password_updated';
 
-                $user->setPlainPassword($pwdForm->get('new_password')->getData());
-                $this->userManager->updateUser($user, true);
-            }
+            $user->setPlainPassword($pwdForm->get('new_password')->getData());
+            $this->userManager->updateUser($user, true);
 
             $this->addFlash('notice', $message);
 

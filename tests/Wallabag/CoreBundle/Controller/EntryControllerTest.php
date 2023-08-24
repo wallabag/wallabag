@@ -673,7 +673,7 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->getRepository(Entry::class)
             ->findOneById($entry->getId());
 
-        $this->assertSame(1, $res->isStarred());
+        $this->assertTrue($res->isStarred());
     }
 
     public function testDelete()
@@ -965,6 +965,34 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->submit($form, $data);
 
         $this->assertCount(3, $crawler->filter('ol.entries > li'));
+    }
+
+    public function testFilterOnNotCorrectlyParsedStatus()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $crawler = $client->request('GET', '/all/list');
+
+        $form = $crawler->filter('button[id=submit-filter]')->form();
+
+        $data = [
+            'entry_filter[isNotParsed]' => true,
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(1, $crawler->filter($this->entryDataTestAttribute));
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+        $entry->setNotParsed(true);
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(2, $crawler->filter($this->entryDataTestAttribute));
     }
 
     public function testPaginationWithFilter()
@@ -1390,6 +1418,18 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertCount(4, $crawler->filter($this->entryDataTestAttribute));
 
+        // Add a check with useless spaces before and after the search term
+        $crawler = $client->request('GET', '/unread/list');
+
+        $form = $crawler->filter('form[name=search]')->form();
+        $data = [
+            'search_entry[term]' => '  title ',
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(4, $crawler->filter($this->entryDataTestAttribute));
+
         // Search on starred list
         $crawler = $client->request('GET', '/starred/list');
 
@@ -1471,6 +1511,17 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->submit($form, $data);
 
         $this->assertCount(1, $crawler->filter($this->entryDataTestAttribute));
+
+        $crawler = $client->request('GET', '/unread/list');
+
+        $form = $crawler->filter('form[name=search]')->form();
+        $data = [
+            'search_entry[term]' => 'annotation',
+        ];
+
+        $crawler = $client->submit($form, $data);
+
+        $this->assertCount(2, $crawler->filter($this->entryDataTestAttribute));
     }
 
     public function dataForLanguage()
@@ -1748,14 +1799,14 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->getRepository(Entry::class)
             ->find($entry1->getId());
 
-        $this->assertSame(1, $res->isStarred());
+        $this->assertTrue($res->isStarred());
 
         $res = $client->getContainer()
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry2->getId());
 
-        $this->assertSame(1, $res->isStarred());
+        $this->assertTrue($res->isStarred());
 
         // Mass actions : tag
         $client->request('POST', '/mass', [

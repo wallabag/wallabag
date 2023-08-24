@@ -177,7 +177,6 @@ flashes:
         notice:
             config_saved: 'Configurație salvată.'
             password_updated: 'Parolă actualizată'
-            password_not_updated_demo: ""
             user_updated: 'Informație actualizată'
             feed_updated: 'Informație RSS actualizată'
     entry:

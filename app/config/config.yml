@@ -95,8 +95,6 @@ fos_rest:
                 - 'application/pdf'
             epub:
                 - 'application/epub+zip'
-            mobi:
-                - 'application/x-mobipocket-ebook'
         view_response_listener: 'force'
         formats:
             xml: true
@@ -105,13 +103,12 @@ fos_rest:
             csv: true
             pdf: true
             epub: true
-            mobi: true
         failed_validation: HTTP_BAD_REQUEST
     routing_loader: false
     format_listener:
         enabled: true
         rules:
-            - { path: "^/api/entries/([0-9]+)/export.(.*)", priorities: ['epub', 'mobi', 'pdf', 'txt', 'csv'], fallback_format: json, prefer_extension: false }
+            - { path: "^/api/entries/([0-9]+)/export.(.*)", priorities: ['epub', 'pdf', 'txt', 'csv'], fallback_format: json, prefer_extension: false }
             - { path: "^/api", priorities: ['json', 'xml'], fallback_format: json, prefer_extension: false }
             - { path: "^/annotations", priorities: ['json', 'xml'], fallback_format: json, prefer_extension: false }
             # for an unknown reason, EACH REQUEST goes to FOS\RestBundle\EventListener\FormatListener
@@ -276,6 +273,16 @@ old_sound_rabbit_mq:
             exchange_options:
                 name: 'wallabag.import.chrome'
                 type: topic
+        import_shaarli:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.shaarli'
+                type: topic
+        import_pocket_html:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.pocket_html'
+                type: topic
     consumers:
         import_pocket:
             connection: default
@@ -366,6 +373,24 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.chrome'
             callback: wallabag_import.consumer.amqp.chrome
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+        import_shaarli:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.shaarli'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.shaarli'
+            callback: wallabag_import.consumer.amqp.shaarli
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+        import_pocket_html:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.pocket_html'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.pocket_html'
+            callback: wallabag_import.consumer.amqp.pocket_html
             qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
 
 fos_js_routing:

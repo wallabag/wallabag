@@ -2,7 +2,6 @@ export_txt: Aktifkan pengeksporan TXT
 export_json: Aktifkan pengeksporan JSON
 export_csv: Aktifkan pengeksporan CSV
 export_pdf: Aktifkan pengeksporan PDF
-export_mobi: Aktifkan pengeksporan .mobi
 export_epub: Aktifkan pengeksporan ePub
 diaspora_url: URL diaspora*, jika layanan diaktifkan
 settings_changed: Konfigurasi diperbarui
@@ -11,11 +10,9 @@ shaarli_share_origin_url: Aktifkan berbagi URL asal ke Shaarli, jika layanan dia
 share_public: Izinkan URL publik untuk entri
 restricted_access: Aktifkan otentikasi untuk situs web berbayar
 share_twitter: Aktifkan berbagi ke Twitter
-demo_mode_enabled: Aktifkan mode demo? (Hanya digunakan untuk demo wallabag publik)
 download_images_enabled: Unduh gambar secara lokal
 store_article_headers: Aktifkan jika wallabag menyimpan header HTTP untuk setiap artikel
 api_user_registration: Aktifkan pendaftaran pengguna melalui API
-demo_mode_username: Pengguna demo
 download_pictures: Unduh gambar ke server Anda
 export_xml: Aktifkan ekspor XML
 import_with_rabbitmq: Aktifkan RabbitMQ untuk mengimpor data secara asinkron

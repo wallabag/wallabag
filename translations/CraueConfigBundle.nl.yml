@@ -3,8 +3,6 @@ store_article_headers: Schakel het opslaan van HTTP headers voor ieder artikel i
 api_user_registration: Schakel gebruikersregistratie via API in
 restricted_access: Schakel authenticatie voor betaalde websites in
 download_images_enabled: Download afbeelding lokaal
-demo_mode_username: Demo gebruiker
-demo_mode_enabled: Schakel demo modus in? (Gebruik dit alleen voor de publieke wallabag demo)
 matomo_enabled: Schakel Matomo in
 matomo_site_id: ID van uw Matomo website
 matomo_host: Adres van uw Matomo website (zonder http:// of https://)
@@ -30,7 +28,6 @@ export_txt: Schakel TXT-export in
 export_json: Schakel JSON-export in
 export_csv: Schakel CSV-export in
 export_pdf: Schakel PDF-export in
-export_mobi: Schakel .mobi-export in
 export_epub: Schakel ePub-export in
 download_pictures: Download foto's naar jouw server
 settings_changed: Instellingen bijgewerkt

@@ -330,7 +330,6 @@ flashes:
             feed_updated: 피드 정보가 업데이트되었습니다
             tagging_rules_deleted: 태그 지정 규칙이 삭제되었습니다
             tagging_rules_updated: 태그 지정 규칙이 업데이트되었습니다
-            password_not_updated_demo: 데모 모드에서는이 사용자의 암호를 변경할 수 없습니다.
             password_updated: 비밀번호가 업데이트 되었습니다
     ignore_origin_instance_rule:
         notice:

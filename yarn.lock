@@ -1005,6 +1005,26 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.47.0.tgz#5478fdf443ff8158f9de171c704ae45308696c7d"
   integrity sha512-P6omY1zv5MItm93kLM8s2vr1HICJH8v0dvddDhysbIuZ+vcjOHg5Zbkf1mTkcmi2JA9oBG2anOkRnW8WJTS8Og==
 
+"@fontsource/atkinson-hyperlegible@^5.0.5":
+  version "5.0.9"
+  resolved "https://registry.yarnpkg.com/@fontsource/atkinson-hyperlegible/-/atkinson-hyperlegible-5.0.9.tgz#688bf97cfd0f49a6b4932ca9ad7a1919bf0f590f"
+  integrity sha512-kFdxJvUEJC521EBvnL2Qhp1qQYnWiGhQAwzS1YvCF4FoyqCy1Rqx1Ok9d9n24VfAW1XZXE3AlXxUMHrYj6tmsA==
+
+"@fontsource/eb-garamond@^5.0.5":
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/@fontsource/eb-garamond/-/eb-garamond-5.0.8.tgz#f8de289058da9a85d807243b2c575e71fbbc524c"
+  integrity sha512-NhGQ6xESthNl08oeYxPJeptdm5xryQDgOIJ8AyrZtIr8r23i31p1KtWXGMfe/Deebr/zAWZ1H7sT1PWsuMXolQ==
+
+"@fontsource/montserrat@^5.0.5":
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/@fontsource/montserrat/-/montserrat-5.0.8.tgz#04d162d8929d2911c126e6dafbd218e67c8bb63d"
+  integrity sha512-bNj6wfiWXXbsxb2ffatjpX+GBv30cWZ1lwNXW9qTeX2FnzPomsGRV4HdPrf3TqyTiVqX6fLo80zrQcMi7r8+fA==
+
+"@fontsource/oswald@^5.0.5":
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/@fontsource/oswald/-/oswald-5.0.8.tgz#2303b25ddc25bdb6fb82b51ae847a03e41f45bce"
+  integrity sha512-gwT34mKZn0KoerVyRlfwWNWbZiS1HBa3ldV8u7IHrArgF8j5Aasbkx1omHBJQLxSiS52cnU63awk9XrnjFSdrA==
+
 "@gar/promisify@^1.0.1", "@gar/promisify@^1.1.3":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
@@ -4512,6 +4532,11 @@ onetime@^5.1.2:
   integrity sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==
   dependencies:
     mimic-fn "^2.1.0"
+
+open-dyslexic@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/open-dyslexic/-/open-dyslexic-1.0.3.tgz#9618822394b983a1d8a4c8c46d31d18e978554df"
+  integrity sha512-pZ6LuLvnwT/T/HiDc6hGj2bTs+HimGrYHGQEaexQcou4E9euHhSmgJ6GvUOZQRSU+mYSvdu2M8RgiUcqqAAaCQ==
 
 open@^8.0.9:
   version "8.4.2"

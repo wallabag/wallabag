@@ -209,7 +209,6 @@
             <div class="collapsible-body">
                 <ul>
                     {% if craue_setting('export_epub') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'epub'}) }}" title="Generate ePub file">EPUB</a></li>{% endif %}
-                    {% if craue_setting('export_mobi') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'mobi'}) }}" title="Generate Mobi file">MOBI (deprecated)</a></li>{% endif %}
                     {% if craue_setting('export_pdf') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'pdf'}) }}" title="Generate PDF file">PDF</a></li>{% endif %}
                     {% if craue_setting('export_csv') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'csv'}) }}" title="Generate CSV file">CSV</a></li>{% endif %}
                     {% if craue_setting('export_json') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'json'}) }}" title="Generate JSON file">JSON</a></li>{% endif %}
@@ -320,4 +319,9 @@
 {% endblock %}
 
 {% block footer %}
+
+        <style>
+            {{ app.user.config.customCSS|raw }}
+        </style>
+
 {% endblock %}

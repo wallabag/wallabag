@@ -2,7 +2,6 @@ settings_changed: ปรับปรุงองค์ประกอบ
 download_pictures: ดาวน์โหลดรูปภาพผ่านเซิฟเวอร์ของคุณ
 diaspora_url: Diaspora-URL, ถ้าเซิฟเวอร์ถูกเปิดใช้งาน
 export_epub: เปิดใช้งานการนำเข้าข้อมูลแบบ ePub
-export_mobi: เปิดใช้งานการนำเข้าข้อมูลแบบ .mobi
 export_pdf: เปิดใช้งานการนำเข้าข้อมูลแบบ PDF
 export_csv: เปิดใช้งานการนำเข้าข้อมูลแบบ CSV
 export_json: เปิดใช้งานการนำเข้าข้อมูลแบบ JSON
@@ -26,8 +25,6 @@ modify_settings: "ปรับใช้"
 matomo_host: โฮสบนเว็บไซต์ของคุณใน Matomo (ยกเว้น http:// หรือ https://)
 matomo_site_id: ไอดีบนเว็บไซต์ของคุณใน Matomo
 matomo_enabled: เปิดการใช้ Matomo
-demo_mode_enabled: "เปิดการใช้งานโหมดเดโม ? (เฉพาะการใช้สำหรับเดโมสาธารณะของ wallabag)"
-demo_mode_username: "ผู้ใช้ส่วนเดโม"
 share_public: ยอมรับ URL สาธารณะจากการเข้าถึงข้อมูล
 download_images_enabled: ดาวน์โหลดรูปภาพเฉพาะ
 restricted_access: เปิดใช้งานการรองรับบนเว็บไซต์กับ paywall

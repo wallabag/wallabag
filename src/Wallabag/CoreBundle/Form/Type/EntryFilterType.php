@@ -94,7 +94,7 @@ class EntryFilterType extends AbstractType
             ->add('domainName', TextFilterType::class, [
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                     $value = $values['value'];
-                    if (\strlen($value) <= 2 || empty($value)) {
+                    if (empty($value) || \strlen($value) <= 2) {
                         return false;
                     }
                     $expression = $filterQuery->getExpr()->like($field, $filterQuery->getExpr()->lower($filterQuery->getExpr()->literal('%' . $value . '%')));
@@ -151,6 +151,10 @@ class EntryFilterType extends AbstractType
                     $qb->innerJoin('e.annotations', 'a');
                 },
             ])
+            ->add('isNotParsed', CheckboxFilterType::class, [
+                'label' => 'entry.filters.parsed_label',
+                'data' => $options['filter_parsed'],
+            ])
             ->add('previewPicture', CheckboxFilterType::class, [
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
                     if (false === $values['value']) {
@@ -198,6 +202,7 @@ class EntryFilterType extends AbstractType
             'filter_starred' => false,
             'filter_unread' => false,
             'filter_annotated' => false,
+            'filter_parsed' => false,
         ]);
     }
 }

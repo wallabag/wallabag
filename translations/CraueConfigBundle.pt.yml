@@ -1,7 +1,6 @@
 download_pictures: Descarregar imagens ao seu servidor
 diaspora_url: URL de diaspora* caso o serviço esteja ativado
 export_epub: Habilita exportação para ePub
-export_mobi: Habilita exportação para .mobi
 export_pdf: Habilita exportação para PDF
 export_csv: Habilita exportação para CSV
 export_json: Habilita exportação para JSON
@@ -25,8 +24,6 @@ modify_settings: "aplicar"
 matomo_host: Host de seu website Matomo
 matomo_site_id: ID de seu website Matomo
 matomo_enabled: Habilitar Matomo
-demo_mode_enabled: "Habilitar modo demo? (somente usado para o demo público do wallabag)"
-demo_mode_username: "Utilizador demo"
 restricted_access: Habilitar autenticação para sites com paywall
 download_images_enabled: Baixar imagens localmente
 import_with_redis: Habilitar Redis para importar dados assincronamente

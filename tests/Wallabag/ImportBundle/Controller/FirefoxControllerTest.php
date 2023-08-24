@@ -123,9 +123,9 @@ class FirefoxControllerTest extends WallabagCoreTestCase
             );
 
         $this->assertInstanceOf(Entry::class, $content);
-        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for http://lexpansion.lexpress.fr is ok');
-        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://lexpansion.lexpress.fr is ok');
-        $this->assertNotEmpty($content->getLanguage(), 'Language for http://lexpansion.lexpress.fr is ok');
+        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for 20minutes.fr is ok');
+        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for 20minutes.fr is ok');
+        $this->assertNotEmpty($content->getLanguage(), 'Language for 20minutes.fr is ok');
         $this->assertCount(3, $content->getTags());
 
         $content = $client->getContainer()

@@ -2,7 +2,6 @@
 
 namespace Tests\Wallabag\CoreBundle\Controller;
 
-use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -736,36 +735,6 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertStringContainsString('You can not access this rule', $body[0]);
     }
 
-    public function testDemoMode()
-    {
-        $this->logInAs('admin');
-        $client = $this->getTestClient();
-
-        $config = $client->getContainer()->get(Config::class);
-        $config->set('demo_mode_enabled', 1);
-        $config->set('demo_mode_username', 'admin');
-
-        $crawler = $client->request('GET', '/config');
-
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
-
-        $form = $crawler->filter('button[id=change_passwd_save]')->form();
-
-        $data = [
-            'change_passwd[old_password]' => 'mypassword',
-            'change_passwd[new_password][first]' => 'mypassword',
-            'change_passwd[new_password][second]' => 'mypassword',
-        ];
-
-        $client->submit($form, $data);
-
-        $this->assertSame(302, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('flashes.config.notice.password_not_updated_demo', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
-
-        $config->set('demo_mode_enabled', 0);
-        $config->set('demo_mode_username', 'wallabag');
-    }
-
     public function testDeleteUserButtonVisibility()
     {
         $this->logInAs('admin');
@@ -1394,5 +1363,41 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertStringNotContainsString('class="preview"', $client->getResponse()->getContent());
 
         $client->request('GET', '/config/view-mode');
+    }
+
+    public function testGeneratedCSS()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        // We check the current display
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
+        $entry = $em->getRepository(Entry::class)->findByUrlAndUserId('http://0.0.0.0/entry1', $this->getLoggedInUserId());
+        $client->request('GET', '/view/' . $entry->getId());
+
+        $this->assertStringNotContainsString('font-family: "OpenDyslexicRegular"', $client->getResponse()->getContent());
+        $this->assertStringNotContainsString('max-width: 60em', $client->getResponse()->getContent());
+        $this->assertStringNotContainsString('line-height: 2em', $client->getResponse()->getContent());
+        $this->assertStringNotContainsString('font-size: 2em', $client->getResponse()->getContent());
+
+        // Change display configuration
+        $crawler = $client->request('GET', '/config');
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $form = $crawler->filter('button[id=config_save]')->form();
+        $data = [
+            'config[font]' => 'OpenDyslexicRegular',
+            'config[fontsize]' => 2.0,
+            'config[lineHeight]' => 2.0,
+            'config[maxWidth]' => 60,
+        ];
+        $client->submit($form, $data);
+        $client->followRedirect();
+
+        $client->request('GET', '/view/' . $entry->getId());
+
+        $this->assertStringContainsString('font-family: "OpenDyslexicRegular"', $client->getResponse()->getContent());
+        $this->assertStringContainsString('max-width: 60em', $client->getResponse()->getContent());
+        $this->assertStringContainsString('line-height: 2em', $client->getResponse()->getContent());
+        $this->assertStringContainsString('font-size: 2em', $client->getResponse()->getContent());
     }
 }

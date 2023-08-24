@@ -13,6 +13,7 @@ use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticator
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -184,7 +185,7 @@ class ManageController extends AbstractController
      *
      * @param User $user The User entity
      *
-     * @return Form The form
+     * @return FormInterface The form
      */
     private function createDeleteForm(User $user)
     {

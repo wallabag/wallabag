@@ -2,7 +2,6 @@ settings_changed: Configuracion mesa a jorn
 download_pictures: Telecargar los imatges sul servidor
 diaspora_url: URL de diaspora*, se lo servici diaspora* es activat
 export_epub: Activar l'expòrt ePub
-export_mobi: Activar l'expòrt .mobi
 export_pdf: Activar l'expòrt PDF
 export_csv: Activar l'expòrt CSV
 export_json: Activar l'expòrt JSON
@@ -28,8 +27,6 @@ modify_settings: "aplicar"
 matomo_host: URL de vòstre site dins Matomo (sense http:// o https://)
 matomo_site_id: ID de vòstre site dins Matomo
 matomo_enabled: Activar Matomo
-demo_mode_enabled: "Activar lo mode demostracion ? (utilizar solament per la demostracion publica de wallabag)"
-demo_mode_username: "Utilizaire de la demostracion"
 share_public: Autorizar una URL publica pels articles
 download_images_enabled: Telecargar los imatges en local
 restricted_access: Activar l'autenticacion pels sites amb peatge

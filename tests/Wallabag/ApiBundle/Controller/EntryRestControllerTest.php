@@ -75,13 +75,6 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertStringContainsString('application/epub', $this->client->getResponse()->getContent());
         $this->assertSame('application/epub+zip', $this->client->getResponse()->headers->get('Content-Type'));
 
-        // re-auth client for mobi
-        $client = $this->createAuthorizedClient();
-        $client->request('GET', '/api/entries/' . $entry->getId() . '/export.mobi');
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
-
-        $this->assertSame('application/x-mobipocket-ebook', $client->getResponse()->headers->get('Content-Type'));
-
         // re-auth client for pdf
         $client = $this->createAuthorizedClient();
         $client->request('GET', '/api/entries/' . $entry->getId() . '/export.pdf');
@@ -190,6 +183,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             'tags' => 'foo',
             'since' => 1443274283,
             'public' => 0,
+            'notParsed' => 0,
         ]);
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
@@ -343,6 +337,60 @@ class EntryRestControllerTest extends WallabagApiTestCase
         foreach (['self', 'first', 'last'] as $link) {
             $this->assertArrayHasKey('href', $content['_links'][$link]);
             $this->assertStringContainsString('archive=1', $content['_links'][$link]['href']);
+        }
+
+        $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
+    }
+
+    public function testGetNotParsedEntries()
+    {
+        $this->client->request('GET', '/api/entries', ['notParsed' => 1]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThanOrEqual(1, \count($content));
+        $this->assertNotEmpty($content['_embedded']['items']);
+        $this->assertGreaterThanOrEqual(1, $content['total']);
+        $this->assertSame(1, $content['page']);
+        $this->assertGreaterThanOrEqual(1, $content['pages']);
+
+        $this->assertArrayHasKey('_links', $content);
+        $this->assertArrayHasKey('self', $content['_links']);
+        $this->assertArrayHasKey('first', $content['_links']);
+        $this->assertArrayHasKey('last', $content['_links']);
+
+        foreach (['self', 'first', 'last'] as $link) {
+            $this->assertArrayHasKey('href', $content['_links'][$link]);
+            $this->assertStringContainsString('notParsed=1', $content['_links'][$link]['href']);
+        }
+
+        $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
+    }
+
+    public function testGetParsedEntries()
+    {
+        $this->client->request('GET', '/api/entries', ['notParsed' => 0]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThanOrEqual(1, \count($content));
+        $this->assertNotEmpty($content['_embedded']['items']);
+        $this->assertGreaterThanOrEqual(1, $content['total']);
+        $this->assertSame(1, $content['page']);
+        $this->assertGreaterThanOrEqual(1, $content['pages']);
+
+        $this->assertArrayHasKey('_links', $content);
+        $this->assertArrayHasKey('self', $content['_links']);
+        $this->assertArrayHasKey('first', $content['_links']);
+        $this->assertArrayHasKey('last', $content['_links']);
+
+        foreach (['self', 'first', 'last'] as $link) {
+            $this->assertArrayHasKey('href', $content['_links'][$link]);
+            $this->assertStringContainsString('notParsed=0', $content['_links'][$link]['href']);
         }
 
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
@@ -967,6 +1015,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testSaveIsArchivedAfterPatch()
     {
+        $now = new \DateTime();
         $entry = $this->client->getContainer()
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
@@ -988,6 +1037,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertSame(1, $content['is_archived']);
         $this->assertSame($previousTitle . '++', $content['title']);
+        $this->assertGreaterThanOrEqual((new \DateTime($content['archived_at']))->getTimestamp(), $now->getTimestamp());
     }
 
     public function testSaveIsStarredAfterPatch()
@@ -1001,6 +1051,9 @@ class EntryRestControllerTest extends WallabagApiTestCase
         if (!$entry) {
             $this->markTestSkipped('No content found in db.');
         }
+
+        $previousTitle = $entry->getTitle();
+
         $this->client->request('PATCH', '/api/entries/' . $entry->getId() . '.json', [
             'title' => $entry->getTitle() . '++',
         ]);
@@ -1010,7 +1063,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertSame(1, $content['is_starred']);
-        $this->assertGreaterThanOrEqual($now->getTimestamp(), (new \DateTime($content['starred_at']))->getTimestamp());
+        $this->assertSame($previousTitle . '++', $content['title']);
+        $this->assertGreaterThanOrEqual((new \DateTime($content['starred_at']))->getTimestamp(), $now->getTimestamp());
     }
 
     public function dataForEntriesExistWithUrl()

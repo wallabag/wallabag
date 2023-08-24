@@ -286,6 +286,7 @@ entry:
             clear: Wyczyść
             filter: Filtruj
         annotated_label: Z adnotacjami
+        parsed_label: Pobrano nieprawidłowo
     view:
         left_menu:
             back_to_top: Wróć na górę
@@ -546,6 +547,14 @@ import:
         page_title: Importuj > del.icio.us
         description: Ten importer zaimportuje wszystkie zakładki Delicious. Od 2021 r. możesz ponownie wyeksportować z niego swoje dane za pomocą strony eksportu (https://del.icio.us/export). Wybierz format "JSON" i pobierz go (np. "delicious_export.2021.02.06_21.10.json").
         how_to: Wybierz plik eksportu Delicious i kliknij przycisk poniżej, aby go przesłać i zaimportować.
+    shaarli:
+        page_title: Importuj > Shaarli
+        description: Ten importer zaimportuje wszystkie Twoje zakładki Shaarli. Po prostu przejdź do sekcji Narzędzia, a następnie do „Eksportuj bazę danych”, wybierz zakładki i wyeksportuj je. Otrzymasz plik HTML.
+        how_to: Wybierz swój plik z zakładkami i naciśnij poniższy przycisk, aby je zaimportować. Może to zająć dłuższą chwilę, zanim wszystkie artykuły zostaną przeniesione.
+    pocket_html:
+        page_title: Importuj > Pocket HTML
+        description: Ten importer zaimportuje wszystkie zakładki Pocket (za pośrednictwem eksportu HTML). Po prostu przejdź do https://getpocket.com/export, a następnie wyeksportuj plik HTML. Plik HTML zostanie pobrany (np. „ril_export.html”).
+        how_to: Wybierz swój plik z zakładkami i naciśnij poniższy przycisk, aby je zaimportować. Może to zająć dłuższą chwilę, zanim wszystkie artykuły zostaną przeniesione.
 developer:
     page_title: Zarządzanie klientami API
     welcome_message: Witaj w API wallabag
@@ -651,7 +660,6 @@ flashes:
         notice:
             config_saved: Konfiguracja zapisana.
             password_updated: Hasło zaktualizowane
-            password_not_updated_demo: W trybie demonstracyjnym nie możesz zmienić hasła dla tego użytkownika.
             user_updated: Informacje zaktualizowane
             rss_updated: Informacje RSS zaktualizowane
             tagging_rules_updated: Reguły tagowania zaktualizowane

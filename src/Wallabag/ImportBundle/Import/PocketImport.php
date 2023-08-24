@@ -186,7 +186,7 @@ class PocketImport extends AbstractImport
         if (false !== $existingEntry) {
             ++$this->skippedEntries;
 
-            return;
+            return null;
         }
 
         $entry = new Entry($this->user);

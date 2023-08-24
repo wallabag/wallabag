@@ -1,7 +1,6 @@
 download_pictures: Download billeder på din server
 diaspora_url: diaspora* URL, hvis tjenesten er aktiv
 export_epub: Aktiver eksport til ePub
-export_mobi: Aktiver eksport til .mobi
 export_pdf: Aktiver eksport til PDF
 export_csv: Aktiver eksport til CSV
 export_json: Aktiver eksport til JSON
@@ -24,5 +23,3 @@ modify_settings: "Gem ændring"
 matomo_host: Hosting af din side hos Matomo (uden http:// eller https://)
 matomo_site_id: ID for din side hos Matomo
 matomo_enabled: Aktiver Matomo
-demo_mode_enabled: "Aktiver demo-indstilling? (anvendes kun til wallabags offentlige demo)"
-demo_mode_username: "Demobruger"

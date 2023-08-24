@@ -586,7 +586,6 @@ flashes:
         notice:
             config_saved: Конфігурацію збережено.
             password_updated: Пароль оновлено
-            password_not_updated_demo: У режимі демонстрації ви не можете змінити пароль цього користувача.
             user_updated: Інформацію оновлено
             feed_updated: Інформацію про RSS оновлено
             tagging_rules_updated: Правила тегування оновлено

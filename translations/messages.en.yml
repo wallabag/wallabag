@@ -65,6 +65,7 @@ config:
         new_user: Add a user
         ignore_origin: 'Ignore origin rules'
         reset: 'Reset area'
+        article_display: 'Article display'
     form:
         save: Save
     form_settings:
@@ -89,7 +90,15 @@ config:
         help_language: You can change the language of wallabag interface.
         help_pocket_consumer_key: Required for Pocket import. You can create it in your Pocket account.
         help_display_thumbnails: You can decide if you want to display or not articles thumbnails. Useful for slow connections.
+        help_font: You can choose the font family you want to use.
+        help_fontsize: You can choose the font size you want to use.
+        help_lineheight: You can choose the line height you want to use.
+        help_maxwidth: You can choose the maximal width you want to use.
         display_thumbnails_label: Display articles thumbnails (useful for slow connections).
+        font_label: Font family
+        fontsize_label: Font size
+        lineheight_label: Line height
+        maxwidth_label: Maximal width
     form_feed:
         description: 'Atom feeds provided by wallabag allow you to read your saved articles with your favourite Atom reader. You need to generate a token first.'
         token_label: 'Feed token'
@@ -252,6 +261,7 @@ entry:
         starred_label: Starred
         unread_label: Unread
         annotated_label: Annotated
+        parsed_label: Not correctly fetched
         preview_picture_label: Has a preview picture
         preview_picture_help: Preview picture
         is_public_label: Has a public link
@@ -529,6 +539,14 @@ import:
         page_title: Import > del.icio.us
         description: This importer will import all your Delicious bookmarks. Since 2021, you can export again your data from it using the export page (https://del.icio.us/export). Choose the "JSON" format and download it (like "delicious_export.2021.02.06_21.10.json").
         how_to: Please select your Delicious export and click on the button below to upload and import it.
+    shaarli:
+        page_title: Import > Shaarli
+        description: This importer will import all your Shaarli bookmarks. Just go to the Tools section, then into "Export database", choose your bookmarks and export them. You will obtain a HTML file.
+        how_to: Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched.
+    pocket_html:
+        page_title: Import > Pocket HTML
+        description: This importer will import all your Pocket bookmarks (via HTML export). Just go to https://getpocket.com/export, then export the HTML file. An HTML file will be downloaded (like "ril_export.html").
+        how_to: Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched.
 developer:
     page_title: API clients management
     welcome_message: Welcome to the wallabag API
@@ -650,7 +668,6 @@ flashes:
         notice:
             config_saved: Config saved.
             password_updated: Password updated
-            password_not_updated_demo: In demonstration mode, you can't change password for this user.
             user_updated: Information updated
             tagging_rules_updated: Tagging rules updated
             tagging_rules_deleted: Tagging rule deleted

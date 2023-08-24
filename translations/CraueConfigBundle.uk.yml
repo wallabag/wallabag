@@ -2,7 +2,6 @@ settings_changed: Конфігурацію оновлено
 download_pictures: Завантажити картинки на ваш сервер
 diaspora_url: diaspora* адреса, якщо сервіс увімкнено
 export_epub: Увімкнути експорт в ePub
-export_mobi: Увімкнути експорт в .mobi
 export_pdf: Увімкнути експорт в PDF
 export_csv: Увімкнути експорт в CSV
 export_json: Увімкнути експорт в JSON
@@ -27,8 +26,6 @@ modify_settings: застосувати
 matomo_host: Host вашого сайту в Matomo (без http:// чи https://)
 matomo_site_id: ID вашого сайту в Matomo
 matomo_enabled: Увімкнути Matomo
-demo_mode_enabled: Увімкнути демо-режим? (Використовується тільки для публічних демонстрацій wallabag)
-demo_mode_username: Демо-користувач
 share_public: Дозволити публічні посилання на статті
 download_images_enabled: Завантажувати картинки локально
 restricted_access: Увімкнути аутентифікацію для сайтів з платним контентом

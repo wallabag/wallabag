@@ -127,17 +127,64 @@ class Config
     private $displayThumbnails;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="font", type="text", nullable=true)
+     *
+     * @Groups({"config_api"})
+     */
+    private $font;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="fontsize", type="float", nullable=true)
+     *
+     * @Groups({"config_api"})
+     */
+    private $fontsize;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="line_height", type="float", nullable=true)
+     *
+     * @Groups({"config_api"})
+     */
+    private $lineHeight;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="max_width", type="float", nullable=true)
+     *
+     * @Groups({"config_api"})
+     */
+    private $maxWidth;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="custom_css", type="text", nullable=true)
+     */
+    private $customCSS;
+
+    /**
      * @ORM\OneToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="config")
      */
     private $user;
 
     /**
+     * @var ArrayCollection<TaggingRule>
+     *
      * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\TaggingRule", mappedBy="config", cascade={"remove"})
      * @ORM\OrderBy({"id" = "ASC"})
      */
     private $taggingRules;
 
     /**
+    @var ArrayCollection<IgnoreOriginUserRule>
+
      * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\IgnoreOriginUserRule", mappedBy="config", cascade={"remove"})
      * @ORM\OrderBy({"id" = "ASC"})
      */
@@ -371,12 +418,9 @@ class Config
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function getDisplayThumbnails(): ?bool
+    public function getDisplayThumbnails(): bool
     {
-        return $this->displayThumbnails;
+        return (bool) $this->displayThumbnails;
     }
 
     /**
@@ -384,7 +428,94 @@ class Config
      */
     public function setDisplayThumbnails(bool $displayThumbnails)
     {
-        $this->displayThumbnails = $displayThumbnails;
+        $this->displayThumbnails = $displayThumbnails ? 1 : 0;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFont(): ?string
+    {
+        return $this->font;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setFont(string $font): self
+    {
+        $this->font = $font;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getFontsize(): ?float
+    {
+        return $this->fontsize;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setFontsize(float $fontsize): self
+    {
+        $this->fontsize = $fontsize;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLineHeight(): ?float
+    {
+        return $this->lineHeight;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setLineHeight(float $lineHeight): self
+    {
+        $this->lineHeight = $lineHeight;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getMaxWidth(): ?float
+    {
+        return $this->maxWidth;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setMaxWidth(float $maxWidth): self
+    {
+        $this->maxWidth = $maxWidth;
+
+        return $this;
+    }
+
+    public function getCustomCSS(): ?string
+    {
+        return $this->customCSS;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setCustomCSS(?string $customCSS): self
+    {
+        $this->customCSS = $customCSS;
 
         return $this;
     }

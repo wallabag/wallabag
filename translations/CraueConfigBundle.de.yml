@@ -2,7 +2,6 @@ settings_changed: Konfiguration aktualisiert
 download_pictures: Bilder auf den Server herunterladen
 diaspora_url: diaspora*-URL, sofern der Service aktiviert ist
 export_epub: ePUB-Export aktivieren
-export_mobi: mobi-Export aktivieren
 export_pdf: PDF-Export aktivieren
 export_csv: CSV-Export aktivieren
 export_json: JSON-Export aktivieren
@@ -28,9 +27,6 @@ modify_settings: Übernehmen
 matomo_host: Host deiner Webseite in Matomo (ohne http:// oder https://)
 matomo_site_id: ID deiner Webseite in Matomo
 matomo_enabled: Matomo aktivieren
-demo_mode_enabled: Demo-Modus aktivieren? (Wird nur für die öffentliche Wallabag-Demo
-  verwendet)
-demo_mode_username: Test-Benutzer
 share_public: Öffentliche URLs für Einträge zulassen
 download_images_enabled: Bilder lokal herunterladen
 restricted_access: Authentifizierung für Webseiten mit Paywall aktivieren

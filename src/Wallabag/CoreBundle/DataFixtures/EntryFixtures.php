@@ -17,6 +17,8 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
      */
     public function load(ObjectManager $manager): void
     {
+        $now = new \DateTime();
+
         $entries = [
             'entry1' => [
                 'user' => 'admin-user',
@@ -72,6 +74,7 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
                 'content' => 'This is my content /o/',
                 'language' => 'fr',
                 'starred' => true,
+                'starred_at' => $now,
                 'preview' => 'http://0.0.0.0/image.jpg',
             ],
             'entry6' => [
@@ -84,7 +87,9 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
                 'content' => 'This is my content /o/',
                 'language' => 'de',
                 'archived' => true,
+                'archived_at' => $now,
                 'tags' => ['bar-tag'],
+                'is_not_parsed' => true,
             ],
         ];
 
@@ -112,12 +117,24 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
                 $entry->setStarred($item['starred']);
             }
 
+            if (isset($item['starred_at'])) {
+                $entry->setStarredAt($item['starred_at']);
+            }
+
             if (isset($item['archived'])) {
                 $entry->setArchived($item['archived']);
             }
 
+            if (isset($item['archived_at'])) {
+                $entry->setArchivedAt($item['archived_at']);
+            }
+
             if (isset($item['preview'])) {
                 $entry->setPreviewPicture($item['preview']);
+            }
+
+            if (isset($item['is_not_parsed'])) {
+                $entry->setNotParsed($item['is_not_parsed']);
             }
 
             $manager->persist($entry);

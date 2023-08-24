@@ -176,6 +176,17 @@ class EntryRestController extends WallabagRestController
      *         )
      *     ),
      *     @OA\Parameter(
+     *         name="notParsed",
+     *         in="query",
+     *         description="filter by notParsed status. all entries by default",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="integer",
+     *             enum={"1", "0"},
+     *             default="0"
+     *         )
+     *     ),
+     *     @OA\Parameter(
      *         name="sort",
      *         in="query",
      *         description="sort entries by date.",
@@ -286,6 +297,7 @@ class EntryRestController extends WallabagRestController
         $isArchived = (null === $request->query->get('archive')) ? null : (bool) $request->query->get('archive');
         $isStarred = (null === $request->query->get('starred')) ? null : (bool) $request->query->get('starred');
         $isPublic = (null === $request->query->get('public')) ? null : (bool) $request->query->get('public');
+        $isNotParsed = (null === $request->query->get('notParsed')) ? null : (bool) $request->query->get('notParsed');
         $sort = strtolower($request->query->get('sort', 'created'));
         $order = strtolower($request->query->get('order', 'desc'));
         $page = (int) $request->query->get('page', 1);
@@ -307,7 +319,8 @@ class EntryRestController extends WallabagRestController
                 $since,
                 $tags,
                 $detail,
-                $domainName
+                $domainName,
+                $isNotParsed
             );
         } catch (\Exception $e) {
             throw new BadRequestHttpException($e->getMessage());
@@ -325,6 +338,7 @@ class EntryRestController extends WallabagRestController
                     'archive' => $isArchived,
                     'starred' => $isStarred,
                     'public' => $isPublic,
+                    'notParsed' => $isNotParsed,
                     'sort' => $sort,
                     'order' => $order,
                     'page' => $page,
@@ -397,7 +411,7 @@ class EntryRestController extends WallabagRestController
      *         required=true,
      *         @OA\Schema(
      *             type="string",
-     *             enum={"xml", "json", "txt", "csv", "pdf", "epub", "mobi"},
+     *             enum={"xml", "json", "txt", "csv", "pdf", "epub"},
      *         )
      *     ),
      *     @OA\Response(

@@ -2,7 +2,6 @@ settings_changed: Configuration updated
 download_pictures: Download pictures onto your server
 diaspora_url: diaspora* URL, if the service is enabled
 export_epub: Enable ePub export
-export_mobi: Enable .mobi export (deprecated, will be removed soon)
 export_pdf: Enable PDF export
 export_csv: Enable CSV export
 export_json: Enable JSON export
@@ -27,8 +26,6 @@ modify_settings: apply
 matomo_host: Host of your website in Matomo (without http:// or https://)
 matomo_site_id: ID of your website in Matomo
 matomo_enabled: Enable Matomo
-demo_mode_enabled: Enable demo mode? (Only used for the public wallabag demo)
-demo_mode_username: Demo user
 share_public: Allow public URLs for entries
 download_images_enabled: Download images locally
 restricted_access: Enable authentication for paywalled websites

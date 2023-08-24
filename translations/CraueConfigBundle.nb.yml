@@ -2,7 +2,6 @@ settings_changed: Oppsett oppdatert
 download_pictures: Last ned bilder til tjeneren din
 diaspora_url: diaspora*-nettadresse, hvis tjenesten er avskrudd
 export_epub: Skru på ePub-eksport
-export_mobi: Skru på .mobi-eksport
 export_pdf: Skru på PDF-eksport
 export_csv: Skru på CSV-eksport
 export_json: Skru på JSON-eksport
@@ -26,8 +25,6 @@ modify_settings: bruk
 piwik_host: Vertskap for din nettside hos Piwik (uten http:// eller https://)
 piwik_site_id: ID for din nettside hos Piwik
 piwik_enabled: Skru på Piwik
-demo_mode_enabled: Skru på demo-modus? (Kun brukt for offentlig wallabag-demo)
-demo_mode_username: Demo-bruker
 share_public: Tillat offentlige nettadresser for oppføringer
 download_images_enabled: Last ned bilder lokalt
 restricted_access: Skru på identitetsbekreftelse for nettsider med betalingsmur

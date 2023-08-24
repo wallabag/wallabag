@@ -5,8 +5,6 @@ api_user_registration: API를 통해 사용자 등록 활성화
 restricted_access: 유료 웹 사이트에 대한 인증 활성화
 download_images_enabled: 이미지를 로컬로 다운로드
 share_public: 항목의 공개 URL 허용
-demo_mode_username: 데모 사용자
-demo_mode_enabled: 데모 모드를 사용 하시겠습니까? (공개 Wallabag 데모에만 사용됨)
 matomo_enabled: Matomo 활성화
 matomo_site_id: Matomo 웹 사이트 ID
 matomo_host: Matomo 웹 사이트의 호스트 (http:// 또는 https:// 없음)
@@ -32,6 +30,5 @@ export_txt: TXT 내보내기 활성화
 export_json: JSON 내보내기 활성화
 export_csv: CSV 내보내기 활성화
 export_pdf: PDF 내보내기 활성화
-export_mobi: .mobi 내보내기 활성화
 export_epub: ePub 내보내기 활성화
 settings_changed: 설정을 업데이트했습니다

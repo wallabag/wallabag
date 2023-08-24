@@ -59,6 +59,7 @@ class WallabagExtensionTest extends TestCase
         $this->assertSame('lemonde.fr', $extension->removeScheme('lemonde.fr'));
         $this->assertSame('gist.github.com', $extension->removeScheme('gist.github.com'));
         $this->assertSame('gist.github.com', $extension->removeScheme('https://gist.github.com'));
+        $this->assertSame('gist.github.com', $extension->removeScheme('http://gist.github.com'));
     }
 
     public function testRemoveSchemeAndWww()
@@ -82,8 +83,10 @@ class WallabagExtensionTest extends TestCase
         $extension = new WallabagExtension($entryRepository, $tagRepository, $tokenStorage, 0, $translator, '');
 
         $this->assertSame('lemonde.fr', $extension->removeSchemeAndWww('www.lemonde.fr'));
+        $this->assertSame('lemonde.fr', $extension->removeSchemeAndWww('http://www.lemonde.fr'));
         $this->assertSame('lemonde.fr', $extension->removeSchemeAndWww('http://lemonde.fr'));
         $this->assertSame('lemonde.fr', $extension->removeSchemeAndWww('https://www.lemonde.fr'));
+        $this->assertSame('lemonde.fr', $extension->removeSchemeAndWww('https://lemonde.fr'));
         $this->assertSame('gist.github.com', $extension->removeSchemeAndWww('https://gist.github.com'));
         $this->assertSame('ftp://gist.github.com', $extension->removeSchemeAndWww('ftp://gist.github.com'));
     }

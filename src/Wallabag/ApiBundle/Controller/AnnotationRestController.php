@@ -4,8 +4,8 @@ namespace Wallabag\ApiBundle\Controller;
 
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use OpenApi\Annotations as OA;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -36,7 +36,7 @@ class AnnotationRestController extends WallabagRestController
      *
      * @Route("/api/annotations/{entry}.{_format}", methods={"GET"}, name="api_get_annotations", defaults={"_format": "json"})
      *
-     * @return JsonResponse
+     * @return Response
      */
     public function getAnnotationsAction(Entry $entry)
     {
@@ -102,7 +102,7 @@ class AnnotationRestController extends WallabagRestController
      *
      * @Route("/api/annotations/{entry}.{_format}", methods={"POST"}, name="api_post_annotation", defaults={"_format": "json"})
      *
-     * @return JsonResponse
+     * @return Response
      */
     public function postAnnotationAction(Request $request, Entry $entry)
     {
@@ -138,7 +138,7 @@ class AnnotationRestController extends WallabagRestController
      *
      * @Route("/api/annotations/{annotation}.{_format}", methods={"PUT"}, name="api_put_annotation", defaults={"_format": "json"})
      *
-     * @return JsonResponse
+     * @return Response
      */
     public function putAnnotationAction(int $annotation, Request $request)
     {
@@ -174,7 +174,7 @@ class AnnotationRestController extends WallabagRestController
      *
      * @Route("/api/annotations/{annotation}.{_format}", methods={"DELETE"}, name="api_delete_annotation", defaults={"_format": "json"})
      *
-     * @return JsonResponse
+     * @return Response
      */
     public function deleteAnnotationAction(int $annotation)
     {

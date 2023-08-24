@@ -138,6 +138,8 @@ abstract class WallabagCoreTestCase extends WebTestCase
         $token = static::$kernel->getContainer()->get(TokenStorageInterface::class)->getToken();
 
         if (null !== $token) {
+            \assert($token->getUser() instanceof User);
+
             return $token->getUser();
         }
 

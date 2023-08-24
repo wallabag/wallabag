@@ -4,8 +4,6 @@ api_user_registration: Ενεργοποίηση εγγραφής χρήστη μ
 restricted_access: Ενεργοποίηση επαλήθευσης για ιστοσελίδες με paywall
 download_images_enabled: Λήψη εικόνων τοπικά
 share_public: Να επιτρέπονται URL για τα άρθρα
-demo_mode_username: Χρήστης demo
-demo_mode_enabled: Ενεργοποίηση λειτουργίας demo; (Χρησιμοποιείται μόνο για το δημόσιο demo του wallabag)
 matomo_enabled: Ενεργοποίηση Matomo
 matomo_site_id: ID της ιστοσελίδας σας στο Matomo
 matomo_host: Διεύθυνση της ιστοσελίδας σας στο Matomo (χωρίς http:// ή https://)
@@ -30,7 +28,6 @@ export_txt: Ενεργοποίηση εξαγωγής TXT
 export_json: Ενεργοποίηση εξαγωγής JSON
 export_csv: Ενεργοποίηση εξαγωγής CSV
 export_pdf: Ενεργοποίηση εξαγωγής PDF
-export_mobi: Ενεργοποίηση εξαγωγής .mobi
 export_epub: Ενεργοποίηση εξαγωγής ePub
 diaspora_url: URL του diaspora*, αν είναι ενεργοποιημένη η υπηρεσία
 download_pictures: Λήψη των εικόνων στον διακομιστή σας

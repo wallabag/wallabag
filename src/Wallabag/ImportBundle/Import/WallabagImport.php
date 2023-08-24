@@ -110,7 +110,7 @@ abstract class WallabagImport extends AbstractImport
         if (false !== $existingEntry) {
             ++$this->skippedEntries;
 
-            return;
+            return null;
         }
 
         $data = $this->prepareEntry($importedEntry);
@@ -118,6 +118,10 @@ abstract class WallabagImport extends AbstractImport
         $entry = new Entry($this->user);
         $entry->setUrl($data['url']);
         $entry->setTitle($data['title']);
+
+        if (\array_key_exists('is_parsed', $data)) {
+            $entry->setNotParsed(true);
+        }
 
         // update entry with content (in case fetching failed, the given entry will be return)
         $this->fetchContent($entry, $data['url'], $data);

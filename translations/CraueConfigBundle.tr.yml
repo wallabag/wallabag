@@ -2,7 +2,6 @@ settings_changed: Ayarlar güncellendi
 download_pictures: Resimleri sunucuya indir
 diaspora_url: hizmet etkinse diaspora* URL'si
 export_epub: ePub dışa aktarımını etkinleştir
-export_mobi: .mobi dışa aktarımını etkinleştir (kullanım dışı, yakında kaldırılacak)
 export_pdf: PDF dışa aktarımını etkinleştir
 export_csv: CSV dışa aktarımını etkinleştir
 export_json: JSON dışa aktarımını etkinleştir
@@ -27,8 +26,6 @@ modify_settings: uygula
 matomo_host: Matomo'teki web sitenizin host adresi (başında http:// veya https:// olmadan)
 matomo_site_id: Matomo'teki web sitenizin ID'si
 matomo_enabled: Matomo'yu etkinleştir
-demo_mode_enabled: Demo mod etkinleştirilsin mi (Yalnızca herkese açık wallabag demoları için kullanılır)
-demo_mode_username: Demo kullanıcısı
 share_public: Makaleler için herkese açık URL'lere izin ver
 download_images_enabled: Resimleri lokale indir
 restricted_access: Ödeme ile erişim sağlanabilen siteler için kimlik doğrulamayı etkinleştir
