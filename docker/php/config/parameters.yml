@@ -25,7 +25,7 @@ parameters:
     twofactor_sender: ${TWOFACTOR_SENDER:-no-reply@wallabag.org}
 
     # fosuser stuff
-    fosuser_registration: ${FOSUSER_REGISTRATION:-true}
+    fosuser_registration: ${FOSUSER_REGISTRATION:-false}
     fosuser_confirmation: ${FOSUSER_CONFIRMATION:-true}
 
     fos_oauth_server_access_token_lifetime: 3600

@@ -37,7 +37,7 @@ parameters:
     twofactor_sender: no-reply@wallabag.org
 
     # fosuser stuff
-    fosuser_registration: true
+    fosuser_registration: false
     fosuser_confirmation: true
 
     # how long the access token should live in seconds for the API
