@@ -103,6 +103,9 @@ class EntryFilterType extends AbstractType
                     return $filterQuery->createCondition($expression);
                 },
                 'label' => 'entry.filters.domain_label',
+                'attr' => [
+                    'autocapitalize' => 'off',
+                ],
             ])
             ->add('httpStatus', NumberFilterType::class, [
                 'apply_filter' => function (QueryInterface $filterQuery, $field, $values) {
