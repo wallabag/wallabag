@@ -66,6 +66,7 @@ config:
         feed: Akışlar
         ignore_origin: Orijinal kaynağı yok say kuralları
         reset: Sıfırlama alanı
+        article_display: Makale görüntüleme
     form:
         save: Kaydet
     form_settings:
@@ -89,6 +90,16 @@ config:
         help_reading_speed: wallabag her bir makale için ortalama okuma sürenizi hesaplar. Buradan, bunun sayesinde hızlı veya yavaş okuyan birisi olduğunuzu tanımlayabilirsiniz. Wallabag her bir makale okunması ardından bunu yeniden hesaplayacaktır.
         help_language: Wallabag arayüzünü kullanacağınız dili değiştirebilirsiniz.
         help_pocket_consumer_key: Pocket'tan içeri aktarım için gerekli. Pocket hesabınızdan oluşturabilirsiniz.
+        display_thumbnails_label: Makale küçük resimlerini göster (yavaş bağlantılar için yararlıdır).
+        help_display_thumbnails: Makale küçük resimlerini görüntülemek isteyip istemediğinize karar verebilirsiniz. Yavaş bağlantılar için yararlıdır.
+        maxwidth_label: Azami genişlik
+        help_lineheight: Kullanmak istediğiniz satır yüksekliğini seçebilirsiniz.
+        help_maxwidth: Kullanmak istediğiniz azami genişliği seçebilirsiniz.
+        help_font: Kullanmak istediğiniz yazı tipi ailesini seçebilirsiniz.
+        font_label: Yazı tipi ailesi
+        fontsize_label: Yazı tipi boyutu
+        lineheight_label: Satır yüksekliği
+        help_fontsize: Kullanmak istediğiniz yazı tipi boyutunu seçebilirsiniz.
     form_rss:
         description: wallabag RSS akışı kaydetmiş olduğunuz makalelerini favori RSS okuyucunuzda görüntülemenizi sağlar. Bunu yapabilmek için öncelikle belirteç (token) oluşturmalısınız.
         token_label: RSS belirteci (token)
@@ -245,6 +256,9 @@ entry:
         number_of_tags: '{1}ve başka etiket|]1,Inf[ve %count% başka etiket'
         show_same_domain: Aynı etki alanına sahip makaleleri göster
         assign_search_tag: Bu aramayı her sonuca bir etiket olarak ata
+        mass_action_tags_input_placeholder: etiket1, etiket2, etiket3
+        toggle_mass_action: Kitle eylemini değiştir
+        add_tags: Etiket ekle
     filters:
         title: Filtreler
         status_label: Durum
@@ -270,6 +284,7 @@ entry:
         is_public_help: Herkese açık bağlantı
         http_status_label: HTTP durumu
         annotated_label: Açıklamalı
+        parsed_label: Doğru bir şekilde alınamadı
     view:
         left_menu:
             back_to_homepage: Geri
@@ -331,6 +346,7 @@ entry:
         delete: Makaleyi kaldırmak istediğinizen emin misiniz?
         delete_tag: Makaleden etiketi kaldırmak istediğinizden emin misiniz?
         delete_entries: Bu makaleleri kaldırmak istediğinizden emin misiniz?
+        reload: Bu makaleyi tekrar yüklemek istediğinize emin misiniz?
     metadata:
         reading_time: Tahmini okuma süresi
         reading_time_minutes_short: '%readingTime% dakika'
@@ -423,7 +439,7 @@ quickstart:
         paragraph_2: Bizi takip edin!
     configure:
         title: Uygulamayı Yapılandırma
-        language: Dili ve tasarımı değiştirme
+        language: Dili ve arayüzü değiştir
         rss: RSS akışını aktifleştirme
         description: Tam olarak ihtiyaçlarınızı karşılar bir uygulama deneyimi yaşamak wallabag için ayarlar sayfasını inceleyebilirsiniz.
         tagging_rules: Makaleleri otomatik olarak etiketleme kuralları
@@ -509,7 +525,7 @@ import:
         description: Bu içe aktarıcı tüm wallabag v2 makalelerinizi içe aktarır. Makaleler kısmına gidip, export sidebaru üzeridnen "JSON" seçeneğine tıklayın. Bunun ardından "All articles.json" dosyanız oluşacak.
     readability:
         page_title: İçe Aktar > Readability
-        description: Bu içe aktarıcı tüm Readability makalelerinizi içe aktaracak. Readability araçlar sayfasında (https://www.readability.com/tools/), "Data Export" kısmından "Export your data" düğmesine tıklayın. E-posta adresinize json dosyası gönderilecek (dosya json olsa da dosya adı .json ile bitmeyebilir).
+        description: Bu içe aktarıcı tüm Readability makalelerinizi içe aktaracak.
         how_to: Lütfen Readability dışarı aktarılmış dosyanızı seçin ve aşağıdaki düğmeye basarak içe aktarın.
     firefox:
         page_title: İçe Aktar > Firefox
@@ -531,12 +547,20 @@ import:
         description: Bu içe aktarıcı tüm Pinboard makalelerinizi içe aktarır. Yedekleme sayfasında (https://pinboard.in/settings/backup) "Bookmarks" kısmında "JSON" seçeneğine tıklayın. Cihazınıza bir JSON dosyası inecek ("pinboard_export" gibi bir dosya).
         how_to: Pinboard dışa aktarım dosyanızı seçip aşağıdaki düğmeye tıklayarak içe aktarabilirsiniz.
     elcurator:
-        description: Bu içe aktarıcı tüm elCurator makalelerinizi içe aktaracak. elCurator hesabınızda tercihlerinize gidin ve ardından içeriğinizi dışa aktarın. Bir JSON dosyanız olacak.
+        description: Bu içe aktarıcı tüm elCurator makalelerinizi içe aktaracak.
         page_title: İçe Aktar > elCurator
     delicious:
         page_title: İçe aktar > del.icio.us
         description: Bu içe aktarıcı tüm Delicious yer imlerinizi içe aktaracaktır. 2021'den beri, dışa aktarma sayfasını kullanarak verilerinizi tekrar dışa aktarabilirsiniz (https://del.icio.us/export). "JSON" biçimini seçin ve indirin ("delicious_export.2021.02.06_21.10.json" gibi).
         how_to: Lütfen Delicious dışa aktarım dosyanızı seçin ve aşağıdaki düğmeye tıklayarak içe aktarın.
+    shaarli:
+        how_to: Lütfen yer imi yedek dosyasını seçin ve onu içe aktarmak aşağıdaki düğmeye tıklayın. Tüm makaleler sitelerinden çekileceği için sürecin uzun sürebileceğini unutmayın.
+        description: Bu içe aktarıcı tüm Shaarli yer imlerinizi içe aktaracaktır. Araçlar bölümüne gidin, sonra "Veritabanını Dışa Aktar" kısmına, yer imlerinizi seçin ve dışa aktarın. Bir HTML dosyası oluşacaktır.
+        page_title: İçe Aktar > Shaarli
+    pocket_html:
+        page_title: İçe Aktar > Pocket HTML
+        description: Bu içe aktarıcı tüm Pocket yer imlerinizi (HTML dışa aktarmayla) içe aktaracaktır. https://getpocket.com adresine gidin, sonra HTML dosyasını dışa aktarın. Bir HTML dosyası ("ril_export.html" gibi) indirilecektir.
+        how_to: Lütfen yer imi yedek dosyasını seçin ve onu içe aktarmak aşağıdaki düğmeye tıklayın. Tüm makaleler sitelerinden çekileceği için sürecin uzun sürebileceğini unutmayın.
 user:
     form:
         username_label: Kullanıcı adı
@@ -607,6 +631,7 @@ flashes:
         notice:
             tag_added: Etiket eklendi
             tag_renamed: Etiket yeniden adlandırıldı
+            too_much_tags: Performans sorunları yaşanmaması için %tags% etiketten fazla etiket veya %characters% karakterden uzun etiket ekleyemezsiniz.
     import:
         notice:
             failed: İçe aktarım başarısız, lütfen yeniden deneyin.
