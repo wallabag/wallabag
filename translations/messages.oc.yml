@@ -62,10 +62,11 @@ config:
         user_info: Mon compte
         password: Senhal
         rules: Règlas d'etiquetas automaticas
-        new_user: Crear un compte
+        new_user: Apondre un utilizaire
         feed: Flux
         ignore_origin: Règlas d’omission d’origina
         reset: Reïnicializar
+        article_display: Afichatge de l’article
     form:
         save: Enregistrar
     form_settings:
@@ -91,6 +92,14 @@ config:
         help_pocket_consumer_key: Requesida per l'importacion de Pocket. Podètz la crear dins vòstre compte Pocket.
         display_thumbnails_label: Afichar las miniaturas dels articles (util per las connexions lentas).
         help_display_thumbnails: Podètz decidir se volètz afichar o non las miniaturas. Util per las connexions lentas.
+        help_lineheight: Podètz causir la nautor de linha que volètz utilizar.
+        help_font: Podètz causir la familha de polissa que volètz utilizar.
+        help_fontsize: Podètz causir la talha de polissa que volètz utilizar.
+        font_label: Familha de polissa
+        help_maxwidth: Podètz causir la largor maximala que volètz utilizar.
+        fontsize_label: Talha de polissa
+        lineheight_label: Nautor de linha
+        maxwidth_label: Largor maximala
     form_rss:
         description: Los fluxes RSS fornits per wallabag vos permeton de legir vòstres articles salvagardats dins vòstre lector de fluxes preferit. Per los poder emplegar, vos cal, d'en primièr crear un geton.
         token_label: Geton RSS
@@ -286,6 +295,7 @@ entry:
             clear: Escafar
             filter: Filtrar
         annotated_label: Anotat
+        parsed_label: Non recuperat corrèctament
     view:
         left_menu:
             back_to_top: Tornar en naut
@@ -318,7 +328,7 @@ entry:
         published_by: Publicat per
         provided_by: Provesit per
     new:
-        page_title: Enregistrar un novèl article
+        page_title: Enregistrar una entrada novèla
         placeholder: http://website.com
         form_new:
             url_label: Url
@@ -336,6 +346,7 @@ entry:
         delete: Sètz segur de voler suprimir aqueste article ?
         delete_tag: Sètz segur de voler levar aquesta etiqueta de l'article ?
         delete_entries: Volètz vertadièrament suprimir aquestes articles ?
+        reload: Volètz vertadièrament recargar aqueste article ?
     metadata:
         reading_time_minutes_short: '%readingTime% min'
         address: Adreça
@@ -480,7 +491,7 @@ tag:
         number_on_the_page: "{0} I a pas cap d'etiquetas.|{1} I a una etiqueta.|]1,Inf[ I a %count% etiquetas."
         see_untagged_entries: Afichar las entradas sens etiquetas
         untagged: Articles sens etiqueta
-        no_untagged_entries: Cap d’article sens etiqueta
+        no_untagged_entries: Cap d’article sens etiqueta.
     new:
         add: Ajustar
         placeholder: Podètz ajustar mai qu'una etiqueta, separadas per de virgula.
@@ -540,11 +551,19 @@ import:
         how_to: Mercés de causir vòstre fichièr Pinboard e de clicar sul boton dejós per lo telecargar e l'importar.
     delicious:
         page_title: Importar > del.icio.us
-        description: Dempuèi 2021, podètz tornamai exportar vòstras donadas de Delicious  (https://del.icio.us/export). Causissètz lo format « JSON » e telecargatz-lo (un fichièr de l’estil « delicious_export.2021.02.06_21.10.json »).
+        description: Dempuèi 2021, podètz tornamai exportar vòstras donadas de Delicious (https://del.icio.us/export). Causissètz lo format « JSON » e telecargatz-lo (un fichièr de l’estil « delicious_export.2021.02.06_21.10.json »).
         how_to: Causissètz lo fichièr de vòstra exportacion Delicious e clicatz lo boton çai jos per l’importar.
     elcurator:
         page_title: Importar > elCurator
         description: Aquesta aisina importarà totes vòstres articles a partir de elCurator.
+    shaarli:
+        page_title: Importar > Shaarli
+        description: Aquesta aisina d’importacion importarà totes vòstres marcapagina Shaarli. Anatz simplament a la seccion Aisinas puèi « Banca de donadas », causissètz vòstres marcapaginas e exportatz-los. Obtendretz un fichièr HTML.
+        how_to: Mercés de seleccionar lo fichièr de salvagarda de marcapaginas e de clicar lo boton çai-jos per l’importar. Remarcatz qu’aquò pòt trigar, lo temps que totes los articles sián recuperats.
+    pocket_html:
+        page_title: Importar > Pocket HTML
+        description: Aquesta aisina d’importacion importarà totes vòstres marcadors Pocket (via un expòrt HTML). Anatz simplament a https://getpocket.com/export puèi exportar lo fichièr HTML. Se telecargarà un fichièr HTML (coma « ril_export.html »).
+        how_to: Mercés de seleccionar lo fichièr de salvagarda de marcadors e de clicar lo boton çai-jos per l’importar. Remarcatz qu’aquò pòt trigar, lo temps que totes los articles sián recuperats.
 developer:
     page_title: Gestion dels clients API
     welcome_message: Vos desirem la benvenguda sus l'API de wallabag
@@ -571,7 +590,7 @@ developer:
         page_description: Anatz crear un novèl client. Mercés de garnir l'url de redireccion cap a vòstra aplicacion.
         form:
             name_label: Nom del client
-            redirect_uris_label: URLs de redireccion
+            redirect_uris_label: URLs de redireccion (opcional)
             save_label: Crear un novèl client
         action_back: Retorn
         copy_to_clipboard: Copiar
