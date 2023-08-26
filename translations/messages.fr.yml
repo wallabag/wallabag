@@ -546,6 +546,8 @@ import:
         how_to: Veuillez sélectionner le fichier de sauvegarde de signet et cliquez sur le bouton ci-dessous pour l'importer. Notez que le processus peut prendre beaucoup de temps puisque tous les articles doivent être récupérés.
     pocket_html:
         page_title: Importer > Pocket HTML
+        description: Cet importateur importera toutes vos signets Pocket (via exportation HTML). Il suffit d'aller à https://getpocket.com/export, puis d'exporter le fichier HTML. Un fichier HTML sera téléchargé (comme « ril_export.html »).
+        how_to: Veuillez choisir le fichier de sauvegarde de signets et cliquez sur le bouton ci-dessous pour l'importer. Pensez au fait que le processus peut prendre longtemps puisque tous les articles doivent être récupérés.
 developer:
     page_title: Gestion des clients API
     welcome_message: Bienvenue sur l’API de wallabag

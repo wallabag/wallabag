@@ -104,6 +104,14 @@ import:
         page_title: Uvoz > del.icio.us
         description: Ovaj će uvoznik uvesti sve tvoje „Delicious” zabilješke. Od 2021. godine nadalje, iz njega možeš ponovo izvesti podatke pomoću stranice za izvoz (https://del.icio.us/export). Odaberi format „JSON” i preuzmi ga (npr. „delicious_export.2021.02.06_21.10.json”).
         how_to: Odaberi Delicious izvoz i pritisni donji gumb za slanje i uvoz datoteke.
+    shaarli:
+        page_title: Uvoz > Shaarli
+        description: Ovaj će uvoznik uvesti sve tvoje Shaarli zabilješke. Idi na odjeljak „Alati”, zatim u „Izvezi bazu podataka”, odaberi tvoje zabilješke i izvezi ih. Dobit ćete HTML datoteku.
+        how_to: Odaberi datoteku sigurnosne kopije zabilježaka i pritisni donji gumb za uvoz datoteke. Postupak može trajati dugo jer se moraju dohvatiti svi članci.
+    pocket_html:
+        page_title: Uvoz > Pocket HTML
+        how_to: Odaberi datoteku sigurnosne kopije zabilježaka i pritisni donji gumb za uvoz. Postupak može trajati dugo jer se moraju dohvatiti svi članci.
+        description: Ovaj će uvoznik uvesti sve tvoje Pocket zabilješke (putem HTML izvoza). Idi na https://getpocket.com/export, zatim izvezi HTML datoteku. Preuzet će se HTML datoteka (poput „ril_export.html”).
 about:
     helping:
         description: 'wallabag je slobodan softver otvorenog koda. Možeš nam pomoći:'
@@ -217,6 +225,14 @@ config:
         language_label: Jezik
         help_display_thumbnails: Možeš odlučiti želiš li prikazivati minijature članaka. Korisno za spore veze.
         display_thumbnails_label: Prikaži minijatue članaka (korisno za spore veze).
+        help_font: Možeš odabrati obitelj fontova koju želiš koristiti.
+        help_fontsize: Možeš odabrati veličinu fonta koju želiš koristiti.
+        help_lineheight: Možeš odabrati prored koji želiš koristiti.
+        help_maxwidth: Možeš odabrati maksimalnu širinu koju želiš koristiti.
+        font_label: Obitelj fontova
+        fontsize_label: Veličina fonta
+        lineheight_label: Prored
+        maxwidth_label: Maksimalna širina
     form_user:
         delete:
             confirm: Sigurno? (OVO JE NEPOVRATNA RADNJA)
@@ -265,6 +281,7 @@ config:
         reset: Ponovo postavi područje
         ignore_origin: Pravila za zanemarivanje izvora
         feed: Feedovi
+        article_display: Prikaz članka
     otp:
         app:
             two_factor_code_description_3: 'Također, spremi ove sigurnosne kodove na sigurno mjesto. Možeš ih koristiti u slučaju da izgubiš pristup OTP programu:'
@@ -480,6 +497,7 @@ entry:
         title: Filtri
         unread_label: Nepročitani
         annotated_label: S napomenom
+        parsed_label: Nije ispravno dohvaćeno
     list:
         delete: Izbriši
         reading_time_less_one_minute: 'procijenjeno vrijeme čitanja: &lt; 1 min'

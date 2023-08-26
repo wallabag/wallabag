@@ -232,8 +232,8 @@ entry:
             add_a_tag: Aggiungi un'etichetta
             share_content: Condividi
             share_email_label: E-mail
-            public_link: Link pubblico
-            delete_public_link: Elimina link pubblico
+            public_link: collegamento pubblico
+            delete_public_link: elimina il collegamento pubblico
             export: Esporta
             print: Stampa
             problem:
