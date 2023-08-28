@@ -44,12 +44,11 @@ Execute this command to download and extract the latest package:
 wget https://wllbg.org/latest-v2-package && tar xvf latest-v2-package
 ```
 
-You will find the [md5 hash of the latest package on our
-website](https://wallabag.org/en#download).
+You will find the [md5 hash of the latest package on our website](https://wallabag.org/en#download).
 
 The static package requires each command to be appended by `--env=prod` as the static package is only usable as a prod environment (dev environment is not supported and won't work at all).
 
-Now, read the next step to create your virtual host. 
+Now, read the next step to create your virtual host.
 
 You must create your first user by using the command `php bin/console wallabag:install --env=prod`
 If an error occurs at this step due to bad settings, you must clear the cache with `php bin/console cache:clear --env=prod` before you try again the previous command.
@@ -65,8 +64,7 @@ This service always ships the latest release of wallabag. [You can create your a
 ## Installation with Docker
 
 We provide you a Docker image to install wallabag easily. Have a look at
-our repository on [Docker
-Hub](https://hub.docker.com/r/wallabag/wallabag/) for more information.
+our repository on [Docker Hub](https://hub.docker.com/r/wallabag/wallabag/) for more information.
 
 ### Command to launch container
 
@@ -81,8 +79,7 @@ focus on sysadmin automation and keeping apps updated. wallabag is
 packaged as a Cloudron app and available to install directly from the
 store.
 
-[Install wallabag on your
-Cloudron](https://cloudron.io/store/org.wallabag.cloudronapp2.html)
+[Install wallabag on your Cloudron](https://cloudron.io/store/org.wallabag.cloudronapp2.html)
 
 ## Installation on YunoHost
 
@@ -91,16 +88,14 @@ focus on sysadmin automation and keeping apps updated. wallabag is
 packaged as an official YunoHost app and is available to install directly from the
 official repository.
 
-[![Install wallabag with
-YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=wallabag2)
+[![Install wallabag with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=wallabag2)
 
 ## Installation on alwaysdata
 
 alwaysdata's Marketplace allows to easily install wallabag (and many other
 applications) on a Public or Private Cloud.
 
-[Install wallabag on
-alwaysdata](https://www.alwaysdata.com/en/marketplace/wallabag/)
+[Install wallabag on alwaysdata](https://www.alwaysdata.com/en/marketplace/wallabag/)
 
 ## Installation on Synology
 
