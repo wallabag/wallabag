@@ -68,6 +68,8 @@ parameters:
 
 ## Mailer parameters
 
+You can check about how to properly [configure email in the dedicated section](./mailer.md).
+
 | Name | Description | Default |
 | -----|-------------|-------- |
 | mailer_dsn | One liner with all the mailer parameters `smtp://user:pass@host:465`. Any characters considered special need to be urlencoded in `user`, `pass` and `host`. | smtp://127.0.0.1 |
