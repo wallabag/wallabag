@@ -129,6 +129,7 @@
         "symfony/finder": "^4.4",
         "symfony/form": "^4.4",
         "symfony/framework-bundle": "^4.4",
+        "symfony/google-mailer": "^4.4",
         "symfony/http-foundation": "^4.4",
         "symfony/http-kernel": "^4.4",
         "symfony/mailer": "^4.4",
@@ -209,7 +210,11 @@
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         },
-        "public-dir": "web"
+        "public-dir": "web",
+        "symfony": {
+            "allow-contrib": true,
+            "require": "4.4.*"
+        }
     },
     "scripts": {
         "post-install-cmd": [
