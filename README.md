@@ -16,6 +16,7 @@ This is the wallabag documentation's website.
 You need [yarn](https://www.yarnpkg.com/en/docs/install).
 
 ```
+nvm install
 yarn install
 yarn gitbook install
 yarn gitbook serve
