@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.6.5](https://github.com/wallabag/wallabag/tree/2.6.5)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.4...2.6.5)
+
+### Fixes
+* "Fix checkboxes pointer-events disabled" by @Simounet https://github.com/wallabag/wallabag/pull/6874
+* "Fix nav input styles" by @Simounet https://github.com/wallabag/wallabag/pull/6877
+* "Change domain status filters html types" by @Simounet https://github.com/wallabag/wallabag/pull/6888
+
 ## [2.6.4](https://github.com/wallabag/wallabag/tree/2.6.4)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.3...2.6.4)
 
