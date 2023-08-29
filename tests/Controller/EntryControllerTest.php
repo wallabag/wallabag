@@ -20,6 +20,7 @@ class EntryControllerTest extends WallabagTestCase
     public const AN_URL_CONTAINING_AN_ARTICLE_WITH_IMAGE = 'https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment';
     public $downloadImagesEnabled = false;
     public $url = 'https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment';
+    public $wrongUrl = 'wallabagIsAwesome';
     private $entryDataTestAttribute = '[data-test="entry"]';
 
     /**
@@ -137,9 +138,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $crawler = $client->submit($form);
 
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(1, $alert = $crawler->filter('form ul li')->extract(['_text']));
-        $this->assertSame('This value should not be blank.', $alert[0]);
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -421,6 +420,38 @@ class EntryControllerTest extends WallabagTestCase
 
         $em->remove($entry);
         $em->flush();
+    }
+
+    /**
+     * @group NetworkCalls
+     */
+    public function testBadFormatURL()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $client->getContainer()->get(Config::class)->set('store_article_headers', 1);
+
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => $this->wrongUrl,
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $content = $client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
+            ->findByUrlAndUserId($this->wrongUrl, $this->getLoggedInUserId());
+
+        $this->assertFalse($content);
     }
 
     public function testArchive()
