@@ -205,6 +205,8 @@ class EntryController extends AbstractController
             $this->eventDispatcher->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
 
             return $this->redirect($this->generateUrl('homepage'));
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
+            return $this->redirect($this->generateUrl('homepage'));
         }
 
         return $this->render('Entry/new_form.html.twig', [
