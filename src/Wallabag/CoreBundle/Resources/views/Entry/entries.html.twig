@@ -118,9 +118,9 @@
             <h4 class="center">{{ 'entry.filters.title'|trans }}</h4>
 
             <div class="row">
-                {% if current_route != 'untagged' and nbEntriesUntagged != 0 %}
+                {% if current_route != 'untagged' %}
                     <div class="col s12 center-align">
-                        <a href="{{ path('untagged') }}">{{ 'tag.list.see_untagged_entries'|trans }} ({{ nbEntriesUntagged }})</a>
+                        <a href="{{ path('untagged') }}">{{ 'tag.list.see_untagged_entries'|trans }}</a>
                     </div>
                 {% endif %}
 
