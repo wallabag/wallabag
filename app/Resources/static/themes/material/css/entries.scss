@@ -14,7 +14,7 @@
 }
 
 .mass-action {
-  margin: 10px 5px 10px 20px;
+  margin: 20px 5px 10px 20px;
 }
 
 .mass-action-group {
@@ -97,13 +97,16 @@
 
 .results {
   display: flex;
+  margin-bottom: 10px;
   padding: 1rem 1rem 0;
   flex-wrap: wrap;
   justify-content: space-between;
+}
 
-  .nb-results {
-    display: inline-flex;
-  }
+.nb-results {
+  display: inline-flex;
+  margin-bottom: 20px;
+  gap: 30px;
 }
 
 .results-item {
@@ -182,6 +185,15 @@ footer {
 }
 
 @media screen and (min-width: 993px) {
+  .results {
+    margin-bottom: 0;
+  }
+
+  .nb-results {
+    margin-bottom: 0;
+    gap: 0;
+  }
+
   .mass-action-button {
     height: 24px;
     line-height: 24px;
@@ -199,6 +211,7 @@ footer {
 
   .mass-action {
     display: flex;
+    margin-top: 10px;
     align-items: center;
     gap: 30px;
 
