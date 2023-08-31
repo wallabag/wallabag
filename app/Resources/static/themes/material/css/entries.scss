@@ -20,13 +20,14 @@
 .mass-action-group {
   display: flex;
   padding: 3px;
-  gap: 10px;
+  align-items: center;
+  gap: 30px;
 }
 
 .mass-action-button {
-  height: 24px;
-  line-height: 24px;
-  padding: 0 0.5rem;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 0.7rem;
 
   i {
     font-size: 1rem;
@@ -64,11 +65,19 @@
 
 .mass-action-tags {
   display: flex;
+  margin-top: 10px;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
 
-  .mass-action-tags-input {
+  .mass-action-tags-input.mass-action-tags-input {
     margin: 0;
+    min-width: 230px;
+  }
+
+  .mass-action-tags-button {
+    white-space: nowrap;
   }
 }
 
@@ -173,9 +182,33 @@ footer {
 }
 
 @media screen and (min-width: 993px) {
+  .mass-action-button {
+    height: 24px;
+    line-height: 24px;
+    padding: 0 0.5rem;
+  }
+
+  .mass-action-group {
+    gap: 10px;
+  }
+
+  .mass-action-tags {
+    margin-top: 0;
+    flex-wrap: initial;
+  }
+
   .mass-action {
     display: flex;
     align-items: center;
     gap: 30px;
+
+    .mass-action-tags-button {
+      line-height: 2;
+    }
+
+    .mass-action-tags-input.mass-action-tags-input,
+    .mass-action-tags-button {
+      height: 2rem;
+    }
   }
 }
