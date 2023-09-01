@@ -15,7 +15,7 @@ framework:
         enabled: true
         fallback: "%locale%"
         default_path: '%kernel.project_dir%/translations'
-    secret: "%secret%"
+    secret: "%env(APP_SECRET)%"
     router:
         resource: "%kernel.project_dir%/app/config/routing.yml"
         strict_requirements: ~
