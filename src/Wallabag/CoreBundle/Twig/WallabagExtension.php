@@ -88,35 +88,32 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
 
         switch ($type) {
             case 'starred':
-                $qb = $this->entryRepository->getBuilderForStarredByUser($user->getId());
+                $qb = $this->entryRepository->getCountBuilderForStarredByUser($user->getId());
                 break;
             case 'archive':
-                $qb = $this->entryRepository->getBuilderForArchiveByUser($user->getId());
+                $qb = $this->entryRepository->getCountBuilderForArchiveByUser($user->getId());
                 break;
             case 'unread':
-                $qb = $this->entryRepository->getBuilderForUnreadByUser($user->getId());
+                $qb = $this->entryRepository->getCountBuilderForUnreadByUser($user->getId());
                 break;
             case 'annotated':
-                $qb = $this->entryRepository->getBuilderForAnnotationsByUser($user->getId());
+                $qb = $this->entryRepository->getCountBuilderForAnnotationsByUser($user->getId());
                 break;
             case 'all':
-                $qb = $this->entryRepository->getBuilderForAllByUser($user->getId());
+                $qb = $this->entryRepository->getCountBuilderForAllByUser($user->getId());
                 break;
             default:
                 throw new \InvalidArgumentException(sprintf('Type "%s" is not implemented.', $type));
         }
 
-        // THANKS to PostgreSQL we CAN'T make a DEAD SIMPLE count(e.id)
-        // ERROR: column "e0_.id" must appear in the GROUP BY clause or be used in an aggregate function
         $query = $qb
-            ->select('e.id')
-            ->groupBy('e.id')
+            ->select('COUNT(e.id)')
             ->getQuery();
 
         $query->useQueryCache(true);
         $query->enableResultCache($this->lifeTime);
 
-        return \count($query->getArrayResult());
+        return $query->getSingleScalarResult();
     }
 
     /**
@@ -148,15 +145,14 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
             return 0;
         }
 
-        $query = $this->entryRepository->getBuilderForArchiveByUser($user->getId())
-            ->select('e.id')
-            ->groupBy('e.id')
+        $query = $this->entryRepository->getCountBuilderForArchiveByUser($user->getId())
+            ->select('COUNT(e.id)')
             ->getQuery();
 
         $query->useQueryCache(true);
         $query->enableResultCache($this->lifeTime);
 
-        $nbArchives = \count($query->getArrayResult());
+        $nbArchives = $query->getSingleScalarResult();
 
         $interval = $user->getCreatedAt()->diff(new \DateTime('now'));
         $nbDays = (int) $interval->format('%a') ?: 1;

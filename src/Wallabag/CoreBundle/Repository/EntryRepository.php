@@ -38,6 +38,20 @@ class EntryRepository extends ServiceEntityRepository
     }
 
     /**
+     * Retrieves all entries count for a user.
+     *
+     * @param int $userId
+     *
+     * @return QueryBuilder
+     */
+    public function getCountBuilderForAllByUser($userId)
+    {
+        return $this
+            ->getQueryBuilderByUser($userId)
+        ;
+    }
+
+    /**
      * Retrieves unread entries for a user.
      *
      * @param int $userId
@@ -48,6 +62,21 @@ class EntryRepository extends ServiceEntityRepository
     {
         return $this
             ->getSortedQueryBuilderByUser($userId)
+            ->andWhere('e.isArchived = false')
+            ;
+    }
+
+    /**
+     * Retrieves unread entries count for a user.
+     *
+     * @param int $userId
+     *
+     * @return QueryBuilder
+     */
+    public function getCountBuilderForUnreadByUser($userId)
+    {
+        return $this
+            ->getQueryBuilderByUser($userId)
             ->andWhere('e.isArchived = false')
             ;
     }
@@ -95,6 +124,21 @@ class EntryRepository extends ServiceEntityRepository
     }
 
     /**
+     * Retrieves read entries count for a user.
+     *
+     * @param int $userId
+     *
+     * @return QueryBuilder
+     */
+    public function getCountBuilderForArchiveByUser($userId)
+    {
+        return $this
+            ->getQueryBuilderByUser($userId)
+            ->andWhere('e.isArchived = true')
+        ;
+    }
+
+    /**
      * Retrieves starred entries for a user.
      *
      * @param int $userId
@@ -105,6 +149,21 @@ class EntryRepository extends ServiceEntityRepository
     {
         return $this
             ->getSortedQueryBuilderByUser($userId, 'starredAt', 'desc')
+            ->andWhere('e.isStarred = true')
+        ;
+    }
+
+    /**
+     * Retrieves starred entries count for a user.
+     *
+     * @param int $userId
+     *
+     * @return QueryBuilder
+     */
+    public function getCountBuilderForStarredByUser($userId)
+    {
+        return $this
+            ->getQueryBuilderByUser($userId)
             ->andWhere('e.isStarred = true')
         ;
     }
@@ -163,6 +222,21 @@ class EntryRepository extends ServiceEntityRepository
     {
         return $this
             ->getSortedQueryBuilderByUser($userId)
+            ->innerJoin('e.annotations', 'a')
+            ;
+    }
+
+    /**
+     * Retrieve entries with annotations count for a user.
+     *
+     * @param int $userId
+     *
+     * @return QueryBuilder
+     */
+    public function getCountBuilderForAnnotationsByUser($userId)
+    {
+        return $this
+            ->getQueryBuilderByUser($userId)
             ->innerJoin('e.annotations', 'a')
             ;
     }
@@ -558,6 +632,23 @@ class EntryRepository extends ServiceEntityRepository
 
         if (null !== $userId) {
             $qb->where('e.user = :userid')->setParameter(':userid', $userId);
+        }
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    /**
+     * @param int $userId
+     *
+     * @return array
+     */
+    public function findEmptyEntriesIdByUserId($userId = null)
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->select('e.id');
+
+        if (null !== $userId) {
+            $qb->where('e.user = :userid AND e.content IS NULL')->setParameter(':userid', $userId);
         }
 
         return $qb->getQuery()->getArrayResult();
