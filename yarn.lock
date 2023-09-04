@@ -1020,10 +1020,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.48.0.tgz#642633964e217905436033a2bd08bf322849b7fb"
   integrity sha512-ZSjtmelB7IJfWD2Fvb7+Z+ChTIKWq6kjda95fLcQKNS5aheVHn4IkfgRQE3sIIzTcSLwLcLZUD9UBt+V7+h+Pw==
 
-"@fontsource/atkinson-hyperlegible@^5.0.5":
-  version "5.0.9"
-  resolved "https://registry.yarnpkg.com/@fontsource/atkinson-hyperlegible/-/atkinson-hyperlegible-5.0.9.tgz#688bf97cfd0f49a6b4932ca9ad7a1919bf0f590f"
-  integrity sha512-kFdxJvUEJC521EBvnL2Qhp1qQYnWiGhQAwzS1YvCF4FoyqCy1Rqx1Ok9d9n24VfAW1XZXE3AlXxUMHrYj6tmsA==
+"@fontsource/atkinson-hyperlegible@^5.0.11":
+  version "5.0.11"
+  resolved "https://registry.yarnpkg.com/@fontsource/atkinson-hyperlegible/-/atkinson-hyperlegible-5.0.11.tgz#603225ed9b21f0bcda34a8f0226b50109d48b95f"
+  integrity sha512-wHzGH0ykPXJa2fxliI6ZBplgQ09miYlHDml39g7ILy2h1+Dr/pMdmy4pimuWsRarCVk631atnrxZdJkxTyn20g==
 
 "@fontsource/eb-garamond@^5.0.5":
   version "5.0.8"
