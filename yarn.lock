@@ -1035,10 +1035,10 @@
   resolved "https://registry.yarnpkg.com/@fontsource/montserrat/-/montserrat-5.0.8.tgz#04d162d8929d2911c126e6dafbd218e67c8bb63d"
   integrity sha512-bNj6wfiWXXbsxb2ffatjpX+GBv30cWZ1lwNXW9qTeX2FnzPomsGRV4HdPrf3TqyTiVqX6fLo80zrQcMi7r8+fA==
 
-"@fontsource/oswald@^5.0.5":
-  version "5.0.8"
-  resolved "https://registry.yarnpkg.com/@fontsource/oswald/-/oswald-5.0.8.tgz#2303b25ddc25bdb6fb82b51ae847a03e41f45bce"
-  integrity sha512-gwT34mKZn0KoerVyRlfwWNWbZiS1HBa3ldV8u7IHrArgF8j5Aasbkx1omHBJQLxSiS52cnU63awk9XrnjFSdrA==
+"@fontsource/oswald@^5.0.11":
+  version "5.0.11"
+  resolved "https://registry.yarnpkg.com/@fontsource/oswald/-/oswald-5.0.11.tgz#e9bf07c3b37be524dc53a889b47e98256cd57318"
+  integrity sha512-jyNh8+HGhB4nV1W/tyRU8jHFB9f0SPIh6ViV92RP2mt/sYv8vJ64F2ujLNgOEQIXWsKX7tX1AphDdi48IRygCw==
 
 "@gar/promisify@^1.0.1", "@gar/promisify@^1.1.3":
   version "1.1.3"
