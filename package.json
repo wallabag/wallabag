@@ -75,7 +75,7 @@
     "webpack-merge": "^5.9.0"
   },
   "dependencies": {
-    "@fontsource/atkinson-hyperlegible": "^5.0.5",
+    "@fontsource/atkinson-hyperlegible": "^5.0.11",
     "@fontsource/eb-garamond": "^5.0.5",
     "@fontsource/montserrat": "^5.0.5",
     "@fontsource/oswald": "^5.0.5",
