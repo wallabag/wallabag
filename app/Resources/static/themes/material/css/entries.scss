@@ -14,23 +14,28 @@
 }
 
 .mass-action {
-  margin: 10px 5px 10px 20px;
+  margin: 20px 5px 10px 20px;
 }
 
 .mass-action-group {
   display: flex;
   padding: 3px;
-  gap: 10px;
+  align-items: center;
+  gap: 30px;
 }
 
 .mass-action-button {
-  height: 24px;
-  line-height: 24px;
-  padding: 0 0.5rem;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 0.7rem;
 
   i {
     font-size: 1rem;
   }
+}
+
+.mass-action-button--tags {
+  border-radius: 2px 0 0 2px;
 }
 
 .entry-checkbox {
@@ -64,11 +69,19 @@
 
 .mass-action-tags {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  margin-top: 10px;
 
-  .mass-action-tags-input {
+  .mass-action-tags-input.mass-action-tags-input {
     margin: 0;
+    padding: 0 5px;
+    height: 34px;
+    background: white;
+    border-bottom: 3px solid #c5ebef;
+  }
+
+  .mass-action-tags-input.mass-action-tags-input.mass-action-tags-input:focus {
+    border-bottom: 3px solid $blue-accent-color;
+    box-shadow: none;
   }
 }
 
@@ -88,13 +101,16 @@
 
 .results {
   display: flex;
+  margin-bottom: 10px;
   padding: 1rem 1rem 0;
   flex-wrap: wrap;
   justify-content: space-between;
+}
 
-  .nb-results {
-    display: inline-flex;
-  }
+.nb-results {
+  display: inline-flex;
+  margin-bottom: 20px;
+  gap: 30px;
 }
 
 .results-item {
@@ -173,9 +189,38 @@ footer {
 }
 
 @media screen and (min-width: 993px) {
+  .results {
+    margin-bottom: 0;
+  }
+
+  .nb-results {
+    margin-bottom: 0;
+    gap: 0;
+  }
+
+  .mass-action-button {
+    height: 24px;
+    line-height: 24px;
+    padding: 0 0.5rem;
+  }
+
+  .mass-action-group {
+    gap: 10px;
+  }
+
+  .mass-action-tags {
+    margin-top: 0;
+    margin-left: 7px;
+    flex-wrap: initial;
+  }
+
   .mass-action {
     display: flex;
+    margin-top: 10px;
     align-items: center;
-    gap: 30px;
+
+    .mass-action-tags-input.mass-action-tags-input {
+      height: 21px;
+    }
   }
 }
