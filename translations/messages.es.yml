@@ -19,7 +19,7 @@ menu:
         starred: 'Favoritos'
         archive: 'Archivados'
         all_articles: 'Todos los artículos'
-        config: 'Config.'
+        config: 'Config'
         tags: 'Etiquetas'
         internal_settings: 'Configuración interna'
         import: 'Importar'
@@ -55,7 +55,7 @@ footer:
         about: 'Acerca de'
     stats: Desde el %user_creation% has leído %nb_archives% artículos. ¡Eso son unos %per_day% por día!
 config:
-    page_title: 'Config.'
+    page_title: 'Config'
     tab_menu:
         settings: 'Ajustes'
         feed: 'RSS'
@@ -121,7 +121,7 @@ config:
             emailTwoFactor_label: 'Usando el correo electrónico (recibe un código por correo electrónico)'
             googleTwoFactor_label: 'Usando una aplicación OTP (abre la aplicación, por ejemplo Google Authenticator, Authy o FreeOTP, para conseguir un código de utilización única)'
             table_method: 'Método'
-            table_state: 'Situación'
+            table_state: 'Estado'
             table_action: 'Acción'
             state_enabled: 'Activado'
             state_disabled: 'Desactivado'
