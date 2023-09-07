@@ -3,7 +3,7 @@ Run wallabag in docker-compose
 
 This document describes the usage of docker for wallabag development
 purposes. In order to run wallabag in production, please use the
-[official docker-composer configuration
+[official docker-compose configuration
 provided](https://github.com/wallabag/docker).
 
 In order to run your own development instance of wallabag, you may want
