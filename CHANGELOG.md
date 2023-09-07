@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.6.6](https://github.com/wallabag/wallabag/tree/2.6.6)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.5...2.6.6)
+
+### Security fix
+* Force secure cookie on HTTPS connection by @j0k3r in https://github.com/wallabag/wallabag/pull/6924
+
+### Fixes
+* Fix checkboxes pointer events issue by @Simounet in https://github.com/wallabag/wallabag/pull/6897
+* Add Google mailer by @j0k3r in https://github.com/wallabag/wallabag/pull/6899
+* Improve performance on homepage by @Simounet in https://github.com/wallabag/wallabag/pull/6909
+* Mass action layout improved by @Simounet in https://github.com/wallabag/wallabag/pull/6912
+
 ## [2.6.5](https://github.com/wallabag/wallabag/tree/2.6.5)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.4...2.6.5)
 
