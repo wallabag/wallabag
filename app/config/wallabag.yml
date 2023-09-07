@@ -163,6 +163,20 @@ wallabag_core:
         - 'OpenDyslexicRegular'
         - 'Oswald'
 
+    client_side_rendered_sites:
+        proxy_url: https://single-file-proxy.your-domain.tld
+        proxy_all: true
+        sites_to_proxy:
+            # - https://www.blast-info.fr
+            # - https://www.arretssurimage.net
+
 wallabag_import:
-    allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain', 'text/csv', 'text/html']
-    resource_dir: "%kernel.project_dir%/web/uploads/import"
+    allow_mimetypes:
+        [
+            'application/octet-stream',
+            'application/json',
+            'text/plain',
+            'text/csv',
+            'text/html',
+        ]
+    resource_dir: '%kernel.project_dir%/web/uploads/import'

@@ -4,6 +4,7 @@ namespace Wallabag\CoreBundle\Helper;
 
 use Graby\Graby;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Mime\MimeTypes;
 use Symfony\Component\Validator\Constraints\Locale as LocaleConstraint;
 use Symfony\Component\Validator\Constraints\Url as UrlConstraint;
@@ -22,21 +23,32 @@ class ContentProxy
     protected $ignoreOriginProcessor;
     protected $validator;
     protected $logger;
+    protected $container;
     protected $mimeTypes;
     protected $fetchingErrorMessage;
     protected $eventDispatcher;
     protected $storeArticleHeaders;
 
-    public function __construct(Graby $graby, RuleBasedTagger $tagger, RuleBasedIgnoreOriginProcessor $ignoreOriginProcessor, ValidatorInterface $validator, LoggerInterface $logger, $fetchingErrorMessage, $storeArticleHeaders = false)
+    private $clientSideRenderedSitesProxyUrl;
+    private $clientSideRenderedSitesProxyAll;
+    private $clientSideRenderedSitesToProxy;
+
+    public function __construct(Graby $graby, RuleBasedTagger $tagger, RuleBasedIgnoreOriginProcessor $ignoreOriginProcessor, ValidatorInterface $validator, LoggerInterface $logger, ContainerInterface $container, $fetchingErrorMessage, $storeArticleHeaders = false)
     {
         $this->graby = $graby;
         $this->tagger = $tagger;
         $this->ignoreOriginProcessor = $ignoreOriginProcessor;
         $this->validator = $validator;
         $this->logger = $logger;
+        $this->container = $container;
         $this->mimeTypes = new MimeTypes();
         $this->fetchingErrorMessage = $fetchingErrorMessage;
         $this->storeArticleHeaders = $storeArticleHeaders;
+
+        $this->clientSideRenderedSitesProxyUrl = preg_replace('~/*$~', '', $this->container->getParameter('wallabag_core.client_side_rendered_sites')['proxy_url']);
+        $this->clientSideRenderedSitesProxyAll = $this->container->getParameter('wallabag_core.client_side_rendered_sites')['proxy_all'];
+        $this->clientSideRenderedSitesToProxy =
+        array_map(fn($url) => preg_replace('~/*$~', '', $url), $this->container->getParameter('wallabag_core.client_side_rendered_sites')['sites_to_proxy']);
     }
 
     /**
@@ -55,12 +67,23 @@ class ContentProxy
         }
 
         if ((empty($content) || false === $this->validateContent($content)) && false === $disableContentUpdate) {
-            $fetchedContent = $this->graby->fetchContent($url);
+            // Check if URL has to be proxied through single-file
+            preg_match( '~^[^/]+://[^/]+~', $url, $matches);
+            $proxy = $this->clientSideRenderedSitesProxyAll || in_array($matches[0], $this->clientSideRenderedSitesToProxy);
+
+            $fetchedContent = $this->graby->fetchContent(($proxy ? $this->clientSideRenderedSitesProxyUrl . '/' : '') . $url);
+
+            // Set original URL in case it was proxied
+            $fetchedContent['url'] = $url;
 
             $fetchedContent['title'] = $this->sanitizeContentTitle(
                 $fetchedContent['title'],
                 isset($fetchedContent['headers']['content-type']) ? $fetchedContent['headers']['content-type'] : ''
             );
+
+            if ($proxy) {
+                $fetchedContent['html'] = $this->fixClientSideRenderedProxyResponse($fetchedContent['html']);
+            }
 
             // when content is imported, we have information in $content
             // in case fetching content goes bad, we'll keep the imported information instead of overriding them
@@ -201,6 +224,19 @@ class ContentProxy
         }
 
         return $this->sanitizeUTF8Text($title);
+    }
+
+    /**
+     * Try to fix the content retreived through the client-side rendering proxy
+     *
+     * @param string $content
+     *
+     * @return string
+     */
+    private function fixClientSideRenderedProxyResponse($content)
+    {
+        $content = preg_replace('/&lt;img ([^&]+)&gt;/', '<img \1 >', $content);
+        return $content;
     }
 
     /**
