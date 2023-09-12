@@ -7,6 +7,13 @@ updates:
     time: "04:00"
     timezone: Europe/Paris
   open-pull-requests-limit: 10
+  groups:
+    babel-dependencies:
+      patterns:
+        - "*babel*"
+    fontsource-dependencies:
+      patterns:
+        - "*fontsource*"
   ignore:
   - dependency-name: materialize-css
     versions:
@@ -18,17 +25,14 @@ updates:
     time: "04:00"
     timezone: Europe/Paris
   open-pull-requests-limit: 10
+  groups:
+    symfony-dependencies:
+      patterns:
+        - "*symfony*"
   reviewers:
   - j0k3r
   - tcitworld
   - Kdecherf
-  groups:
-    babel-dependencies:
-      patterns:
-        - "*babel*"
-    fontsource-dependencies:
-      patterns:
-        - "*fontsource*"
   ignore:
   - dependency-name: lcobucci/jwt
     versions:
