@@ -115,7 +115,7 @@ class InstallCommand extends Command
 
         $rows[] = [sprintf($label, $this->databaseDriver), $status, $help];
 
-        // testing if connection to the database can be etablished
+        // testing if connection to the database can be established
         $label = '<comment>Database connection</comment>';
         $status = '<info>OK!</info>';
         $help = '';
@@ -415,7 +415,7 @@ class InstallCommand extends Command
 
     /**
      * Check if the schema is already created.
-     * If we found at least oen table, it means the schema exists.
+     * If we found at least one table, it means the schema exists.
      *
      * @return bool
      */

@@ -520,7 +520,7 @@ class EntryRepository extends ServiceEntityRepository
 
     /**
      * Remove all entries for a user id.
-     * Used when a user want to reset all informations.
+     * Used when a user wants to reset all information.
      *
      * @param int $userId
      */

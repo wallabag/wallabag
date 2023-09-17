@@ -218,7 +218,7 @@ abstract class AbstractImport implements ImportInterface
 
     /**
      * Set current imported entry to archived / read.
-     * Implementation is different accross all imports.
+     * Implementation is different across all imports.
      *
      * @return array
      */

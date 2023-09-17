@@ -123,7 +123,7 @@ class AnnotationRepository extends ServiceEntityRepository
 
     /**
      * Remove all annotations for a user id.
-     * Used when a user want to reset all informations.
+     * Used when a user wants to reset all information.
      *
      * @param int $userId
      */
