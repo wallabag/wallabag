@@ -4839,11 +4839,6 @@ proxy-addr@~2.0.7:
     forwarded "0.2.0"
     ipaddr.js "1.9.1"
 
-ptsans-npm-webfont@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/ptsans-npm-webfont/-/ptsans-npm-webfont-0.0.4.tgz#c0232128200c130d188bb490301fdeb00a041138"
-  integrity sha512-dQ61YG6o8wvwD+6uqxYop+wzwym0Qi27NLCcHI3LZWx3DO1R1eYz/ovFjKflL/oEoCg4po2eWE58XLMFu4ognw==
-
 punycode@^2.1.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.3.0.tgz#f67fa67c94da8f4d0cfff981aee4118064199b8f"
