@@ -91,7 +91,6 @@
     "mathjax": "^3.2.2",
     "mousetrap": "^1.6.0",
     "open-dyslexic": "^1.0.3",
-    "ptsans-npm-webfont": "^0.0.4",
     "roboto-fontface": "^0.10.0",
     "waypoints": "^4.0.1"
   },
