@@ -53,13 +53,11 @@
                 <button class="mass-action-button btn cyan darken-1" type="submit" name="toggle-read" title="{{ 'entry.list.toogle_as_read'|trans }}"><i class="material-icons">done</i></button>
                 <button class="mass-action-button btn cyan darken-1" type="submit" name="toggle-star" title="{{ 'entry.list.toogle_as_star'|trans }}" ><i class="material-icons">star</i></button>
                 <button class="mass-action-button btn cyan darken-1" type="submit" name="delete" onclick="return confirm('{{ 'entry.confirm.delete_entries'|trans|escape('js') }}')" title="{{ 'entry.list.delete'|trans }}"><i class="material-icons">delete</i></button>
-                <label for="mass-action-tags-displayed" class="mass-action-button btn cyan darken-1" type="button" title="{{ 'entry.list.add_tags'|trans }}"><i class="material-icons">label</i></label>
             </div>
 
-            <input id="mass-action-tags-displayed" class="toggle-checkbox" type="checkbox" />
             <div class="mass-action-tags">
+                <button class="btn cyan darken-1 mass-action-button mass-action-button--tags" type="submit" name="tag" title="{{ 'entry.list.add_tags'|trans }}"><i class="material-icons">label</i></button>
                 <input type="text" class="mass-action-tags-input" name="tags" placeholder="{{ 'entry.list.mass_action_tags_input_placeholder'|trans }}" />
-                <button class="btn cyan darken-1" type="submit" name="tag">{{ 'entry.list.add_tags'|trans }}</button>
             </div>
         </div>
 
@@ -117,9 +115,9 @@
             <h4 class="center">{{ 'entry.filters.title'|trans }}</h4>
 
             <div class="row">
-                {% if current_route != 'untagged' and nbEntriesUntagged != 0 %}
+                {% if current_route != 'untagged' %}
                     <div class="col s12 center-align">
-                        <a href="{{ path('untagged') }}">{{ 'tag.list.see_untagged_entries'|trans }} ({{ nbEntriesUntagged }})</a>
+                        <a href="{{ path('untagged') }}">{{ 'tag.list.see_untagged_entries'|trans }}</a>
                     </div>
                 {% endif %}
 

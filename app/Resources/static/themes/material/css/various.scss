@@ -15,6 +15,13 @@ div.settings div.file-field {
   }
 }
 
+/* override materializecss pointer-event disabled on checkboxes */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked,
+.input-field label {
+  pointer-events: initial;
+}
+
 .input-field label.active {
   font-size: 1rem;
 }

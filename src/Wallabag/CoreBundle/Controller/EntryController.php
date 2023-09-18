@@ -675,9 +675,6 @@ class EntryController extends AbstractController
             }
         }
 
-        $nbEntriesUntagged = $this->entryRepository
-            ->countUntaggedEntriesByUser($this->getUser()->getId());
-
         return $this->render(
             '@WallabagCore/Entry/entries.html.twig', [
                 'form' => $form->createView(),
@@ -685,7 +682,6 @@ class EntryController extends AbstractController
                 'currentPage' => $page,
                 'searchTerm' => $searchTerm,
                 'isFiltered' => $form->isSubmitted(),
-                'nbEntriesUntagged' => $nbEntriesUntagged,
             ]
         );
     }
