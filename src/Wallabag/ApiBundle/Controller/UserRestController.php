@@ -22,11 +22,11 @@ use Wallabag\UserBundle\Form\NewUserType;
 class UserRestController extends WallabagRestController
 {
     /**
-     * Retrieve current logged in user informations.
+     * Retrieve current logged in user information.
      *
      * @Operation(
      *     tags={"User"},
-     *     summary="Retrieve current logged in user informations.",
+     *     summary="Retrieve current logged in user information.",
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful",

@@ -21,7 +21,7 @@ import './global.scss';
 import './js/shortcuts/entry';
 import './js/shortcuts/main';
 
-/* Hightlight */
+/* Highlight */
 import './js/highlight';
 
 import { savePercent, retrievePercent } from './js/tools';

@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo;
 /**
  * Puts a prefix to each table.
  * This way were used instead of using the built-in strategy from Doctrine, using `naming_strategy`
- * Because it conflicts with the DefaultQuoteStrategy (that espace table name, like user for Postgres)
+ * Because it conflicts with the DefaultQuoteStrategy (that escape table name, like user for Postgres)
  * see #1498 for more detail.
  *
  * Solution from :
