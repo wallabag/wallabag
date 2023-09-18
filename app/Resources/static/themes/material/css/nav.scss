@@ -70,6 +70,7 @@ nav {
 
   .input-field input {
     display: block;
+    font-size: 1.2rem;
     line-height: inherit;
     height: 3rem;
   }
@@ -78,6 +79,17 @@ nav {
     border: 0;
     box-shadow: none;
     color: #444;
+  }
+
+  /* materializecss override */
+  .input-field.input-field input {
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+
+  .input-field.input-field input:focus {
+    border-bottom: none;
+    box-shadow: initial;
   }
 }
 
