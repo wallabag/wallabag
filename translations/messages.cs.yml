@@ -24,6 +24,7 @@ entry:
         preview_picture_label: Má náhledový obrázek
         starred_label: S hvězdičkou
         annotated_label: S anotací
+        parsed_label: Nesprávně načtené
     search:
         placeholder: Co hledáte?
     view:
@@ -97,6 +98,7 @@ entry:
         delete_tag: Opravdu chcete odebrat tento štítek z tohoto článku?
         delete: Opravdu chcete tento článek odebrat?
         delete_entries: Opravdu chcete odebrat tyto články?
+        reload: Opravdu chcete znovu načíst tento článek?
     public:
         shared_by_wallabag: Tento článek již sdílel %username% s <a href='%wallabag_instance%'>wallabagem</a>
     edit:
@@ -236,6 +238,14 @@ config:
         pocket_consumer_key_label: Zákaznický klíč pro Pocket k importu obsahu
         display_thumbnails_label: Zobrazit náhledy článků (užitečné pro pomalá připojení).
         help_display_thumbnails: Můžete se rozhodnout, zda chcete zobrazit náhledy článků, nebo ne. Užitečné pro pomalá připojení.
+        maxwidth_label: Maximální šířka
+        lineheight_label: Výška řádku
+        fontsize_label: Velikost písma
+        help_font: Můžete zvolit rodinu písem, kterou chcete použít.
+        help_maxwidth: Můžete zvolit maximální šířku, kterou chcete použít.
+        help_lineheight: Můžete zvolit výšku řádku, kterou chcete použít.
+        font_label: Rodina písem
+        help_fontsize: Můžete zvolit velikost písma, kterou chcete použít.
     form_password:
         new_password_label: Nové heslo
         old_password_label: Aktuální heslo
@@ -259,6 +269,7 @@ config:
         rules: Pravidla štítkování
         user_info: Informace o uživateli
         feed: Kanály
+        article_display: Zobrazení článku
     form:
         save: Uložit
     otp:
@@ -386,7 +397,7 @@ quickstart:
     configure:
         tagging_rules: Napište pravidla pro automatické štítkování článků
         feed: Povolte kanály
-        language: Změňte jazyk a vzhled
+        language: Změňte jazyk a rozhraní
         description: Abyste měli aplikaci, která vám vyhovuje, podívejte se na konfiguraci wallabagu.
         title: Nakonfigurujte aplikaci
     intro:
@@ -534,10 +545,10 @@ import:
         enabled: 'Import se provádí asynchronně. Po spuštění úlohy importu bude externí pracovní proces zpracovávat úlohy jednu po druhé. Aktuální služba je:'
     readability:
         how_to: Vyberte svůj export z Readability a kliknutím na níže uvedené tlačítko jej nahrajte a importujte.
-        description: Tento importér importuje všechny vaše články Readability. Na stránce s nástroji (https://www.readability.com/tools/) klikněte v části „Export dat“ na „Exportovat data“. Obdržíte e-mail pro stažení souboru json (který ve skutečnosti nekončí příponou .json).
+        description: Tento importér importuje všechny vaše články z Readability.
         page_title: Import > Readability
     elcurator:
-        description: Tento importér naimportuje všechny vaše články z elCurator. Přejděte do svých předvoleb v účtu elCurator a poté exportujte svůj obsah. Získáte soubor JSON.
+        description: Tento importér naimportuje všechny vaše články z elCurator.
         page_title: Import > elCurator
     wallabag_v2:
         description: Tento importér naimportuje všechny vaše články z wallabagu v2. Přejděte na Všechny články a pak na postranním panelu pro export klikněte na „JSON“. Získáte soubor „All articles.json“.
@@ -546,6 +557,14 @@ import:
         page_title: Import > del.icio.us
         how_to: Vyberte svůj export Delicious a kliknutím na níže uvedené tlačítko jej nahrajte a importujte.
         description: Tento importér naimportuje všechny vaše záložky z Delicious. Od roku 2021 z něj můžete opět exportovat data pomocí stránky pro export (https://del.icio.us/export). Zvolte formát „JSON“ a stáhněte jej (například „delicious_export.2021.02.06_21.10.json“).
+    shaarli:
+        page_title: Import > Shaarli
+        how_to: Zvolte soubor zálohy záložek a kliknutím na níže uvedené tlačítko jej naimportujte. Pamatujte na to, že tento proces může trvat dlouho, protože je třeba načíst všechny články.
+        description: Tento importér naimportuje všechny vaše záložky ze Shaarli. Stačí přejít do sekce Nástroje, pak do „Exportovat databázi“, zvolit záložky a exportovat je. Získáte soubor HTML.
+    pocket_html:
+        how_to: Zvolte soubor zálohy záložek a kliknutím na níže uvedené tlačítko jej naimportujte. Pamatujte na to, že tento proces může trvat dlouho, protože je třeba načíst všechny články.
+        page_title: Import > Pocket HTML
+        description: Tento importér naimportuje všechny vaše záložky z Pocket. Stačí přejít na https://getpocket.com/export) a exportovat soubor HTML, který bude stažen (například „ril_export.html“).
 flashes:
     config:
         notice:
