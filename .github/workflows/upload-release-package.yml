@@ -29,6 +29,12 @@ jobs:
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: "Install Node"
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: ".nvmrc"
+          cache: "yarn"
+
       - name: Create the package
         run: make release VERSION=${{ github.event.release.tag_name }}
 
