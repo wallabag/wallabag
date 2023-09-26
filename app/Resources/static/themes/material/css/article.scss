@@ -235,6 +235,12 @@
   z-index: 9999;
 }
 
+.tags-add-form {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 @media only screen and (max-width: 640px) {
   .entry-info {
     margin-bottom: 20px;
@@ -257,5 +263,13 @@
   #article .entry-info .chip-label,
   #article .entry-info .chip-action {
     min-width: 40px;
+  }
+
+  .tags-add-form {
+    display: block;
+  }
+
+  .tags-add-form-submit {
+    margin-top: 10px;
   }
 }
