@@ -1,7 +1,7 @@
 <div class="card entry-card{% if currentRoute in routes and entry.isArchived %} archived{% endif %}">
+    {% include "@WallabagCore/Entry/Card/_mass_checkbox.html.twig" with {'entry': entry} only %}
     <div class="card-body">
         <div class="{% if app.user.config.displayThumbnails %}card-image{% endif %} waves-effect waves-block waves-light">
-            {% include "@WallabagCore/Entry/Card/_mass_checkbox.html.twig" with {'entry': entry} only %}
             <ul class="card-entry-labels">
             {% for tag in entry.tags|slice(0, 3) %}
                 <li title="{{ tag.label }}"><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
