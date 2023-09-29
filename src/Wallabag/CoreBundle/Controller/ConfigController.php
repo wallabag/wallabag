@@ -373,8 +373,10 @@ class ConfigController extends AbstractController
      * Cancelling 2FA using OTP app.
      *
      * @Route("/config/otp/app/cancel", name="config_otp_app_cancel")
+     * 
+     * XXX: commented until we rewrite 2fa with a real two-steps activation
      */
-    public function otpAppCancelAction()
+    /*public function otpAppCancelAction()
     {
         $user = $this->getUser();
         $user->setGoogleAuthenticatorSecret(null);
@@ -383,7 +385,7 @@ class ConfigController extends AbstractController
         $this->userManager->updateUser($user, true);
 
         return $this->redirect($this->generateUrl('config') . '#set3');
-    }
+    }*/
 
     /**
      * Validate OTP code.
@@ -415,7 +417,12 @@ class ConfigController extends AbstractController
             'scheb_two_factor.code_invalid'
         );
 
-        return $this->redirect($this->generateUrl('config_otp_app'));
+        $this->addFlash(
+            'notice',
+            'scheb_two_factor.code_invalid'
+        );
+
+        return $this->redirect($this->generateUrl('config') . '#set3');
     }
 
     /**

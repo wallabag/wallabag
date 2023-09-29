@@ -1254,36 +1254,6 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $em->flush();
     }
 
-    public function testUserEnable2faGoogleCancel()
-    {
-        $this->logInAs('admin');
-        $client = $this->getTestClient();
-
-        $crawler = $client->request('GET', '/config/otp/app');
-
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
-
-        // restore user
-        $em = $this->getEntityManager();
-        $user = $em
-            ->getRepository(User::class)
-            ->findOneByUsername('admin');
-
-        $this->assertTrue($user->isGoogleTwoFactor());
-        $this->assertGreaterThan(0, $user->getBackupCodes());
-
-        $crawler = $client->request('GET', '/config/otp/app/cancel');
-
-        $this->assertSame(302, $client->getResponse()->getStatusCode());
-
-        $user = $em
-            ->getRepository(User::class)
-            ->findOneByUsername('admin');
-
-        $this->assertFalse($user->isGoogleTwoFactor());
-        $this->assertEmpty($user->getBackupCodes());
-    }
-
     public function testUserDisable2faGoogle()
     {
         $this->logInAs('admin');
