@@ -373,7 +373,7 @@ class ConfigController extends AbstractController
      * Cancelling 2FA using OTP app.
      *
      * @Route("/config/otp/app/cancel", name="config_otp_app_cancel")
-     * 
+     *
      * XXX: commented until we rewrite 2fa with a real two-steps activation
      */
     /*public function otpAppCancelAction()
