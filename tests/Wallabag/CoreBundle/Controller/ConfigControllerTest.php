@@ -1215,7 +1215,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $client->submit($form);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        
+
         $this->assertStringContainsString('flashes.config.notice.otp_disabled', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
 
         // restore user
@@ -1264,7 +1264,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
             ->getRepository(User::class)
             ->findOneByUsername('admin');
 
-        $user->setGoogleAuthenticatorSecret("Google2FA");
+        $user->setGoogleAuthenticatorSecret('Google2FA');
         $em->persist($user);
         $em->flush();
 
@@ -1274,7 +1274,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $client->submit($form);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-        
+
         $this->assertStringContainsString('flashes.config.notice.otp_disabled', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
 
         // restore user
