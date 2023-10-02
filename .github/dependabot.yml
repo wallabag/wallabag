@@ -28,7 +28,7 @@ updates:
   groups:
     symfony-dependencies:
       patterns:
-        - "*symfony*"
+        - "symfony/*"
   reviewers:
   - j0k3r
   - tcitworld
