@@ -1174,14 +1174,13 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/config/otp/email');
+        $crawler = $client->request('GET', '/config');
+
+        $form = $crawler->filter('form[name=config_otp_email]')->form();
+        $client->submit($form);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-
-        $crawler = $client->followRedirect();
-
-        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(['_text']));
-        $this->assertStringContainsString('flashes.config.notice.otp_enabled', $alert[0]);
+        $this->assertStringContainsString('flashes.config.notice.otp_enabled', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
 
         // restore user
         $em = $this->getEntityManager();
@@ -1201,14 +1200,23 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/config/otp/email/disable');
+        $em = $this->getEntityManager();
+        $user = $em
+            ->getRepository(User::class)
+            ->findOneByUsername('admin');
+
+        $user->setEmailTwoFactor(true);
+        $em->persist($user);
+        $em->flush();
+
+        $crawler = $client->request('GET', '/config');
+
+        $form = $crawler->filter('form[name=disable_otp_email]')->form();
+        $client->submit($form);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-
-        $crawler = $client->followRedirect();
-
-        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(['_text']));
-        $this->assertStringContainsString('flashes.config.notice.otp_disabled', $alert[0]);
+        
+        $this->assertStringContainsString('flashes.config.notice.otp_disabled', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
 
         // restore user
         $em = $this->getEntityManager();
@@ -1224,7 +1232,10 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/config/otp/app');
+        $crawler = $client->request('GET', '/config');
+
+        $form = $crawler->filter('form[name=config_otp_app]')->form();
+        $client->submit($form);
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
@@ -1243,49 +1254,28 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $em->flush();
     }
 
-    public function testUserEnable2faGoogleCancel()
-    {
-        $this->logInAs('admin');
-        $client = $this->getTestClient();
-
-        $crawler = $client->request('GET', '/config/otp/app');
-
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
-
-        // restore user
-        $em = $this->getEntityManager();
-        $user = $em
-            ->getRepository(User::class)
-            ->findOneByUsername('admin');
-
-        $this->assertTrue($user->isGoogleTwoFactor());
-        $this->assertGreaterThan(0, $user->getBackupCodes());
-
-        $crawler = $client->request('GET', '/config/otp/app/cancel');
-
-        $this->assertSame(302, $client->getResponse()->getStatusCode());
-
-        $user = $em
-            ->getRepository(User::class)
-            ->findOneByUsername('admin');
-
-        $this->assertFalse($user->isGoogleTwoFactor());
-        $this->assertEmpty($user->getBackupCodes());
-    }
-
     public function testUserDisable2faGoogle()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/config/otp/app/disable');
+        $em = $this->getEntityManager();
+        $user = $em
+            ->getRepository(User::class)
+            ->findOneByUsername('admin');
+
+        $user->setGoogleAuthenticatorSecret("Google2FA");
+        $em->persist($user);
+        $em->flush();
+
+        $crawler = $client->request('GET', '/config');
+
+        $form = $crawler->filter('form[name=disable_otp_app]')->form();
+        $client->submit($form);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
-
-        $crawler = $client->followRedirect();
-
-        $this->assertGreaterThan(1, $alert = $crawler->filter('body')->extract(['_text']));
-        $this->assertStringContainsString('flashes.config.notice.otp_disabled', $alert[0]);
+        
+        $this->assertStringContainsString('flashes.config.notice.otp_disabled', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
 
         // restore user
         $em = $this->getEntityManager();

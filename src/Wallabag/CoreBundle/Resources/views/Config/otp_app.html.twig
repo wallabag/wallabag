@@ -40,6 +40,7 @@
                             {% endfor %}
 
                             <form class="form" action="{{ path("config_otp_app_check") }}" method="post">
+                                <input type="hidden" name="token" value="{{ csrf_token('otp') }}" />
                                 <div class="card-content">
                                     <div class="row">
                                         <div class="input-field col s12">
@@ -49,9 +50,6 @@
                                     </div>
                                 </div>
                                 <div class="card-action">
-                                    <a href="{{ path('config_otp_app_cancel') }}" class="waves-effect waves-light grey btn">
-                                        {{ 'config.otp.app.cancel'|trans }}
-                                    </a>
                                     <button class="btn waves-effect waves-light" type="submit" name="send">
                                         {{ 'config.otp.app.enable'|trans }}
                                         <i class="material-icons right">send</i>

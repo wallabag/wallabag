@@ -254,10 +254,14 @@ class ConfigController extends AbstractController
     /**
      * Disable 2FA using email.
      *
-     * @Route("/config/otp/email/disable", name="disable_otp_email")
+     * @Route("/config/otp/email/disable", name="disable_otp_email", methods={"POST"})
      */
-    public function disableOtpEmailAction()
+    public function disableOtpEmailAction(Request $request)
     {
+        if (!$this->isCsrfTokenValid('otp', $request->request->get('token'))) {
+            throw $this->createAccessDeniedException('Bad CSRF token.');
+        }
+
         $user = $this->getUser();
         $user->setEmailTwoFactor(false);
 
@@ -274,10 +278,14 @@ class ConfigController extends AbstractController
     /**
      * Enable 2FA using email.
      *
-     * @Route("/config/otp/email", name="config_otp_email")
+     * @Route("/config/otp/email", name="config_otp_email", methods={"POST"})
      */
-    public function otpEmailAction()
+    public function otpEmailAction(Request $request)
     {
+        if (!$this->isCsrfTokenValid('otp', $request->request->get('token'))) {
+            throw $this->createAccessDeniedException('Bad CSRF token.');
+        }
+
         $user = $this->getUser();
 
         $user->setGoogleAuthenticatorSecret(null);
@@ -297,10 +305,14 @@ class ConfigController extends AbstractController
     /**
      * Disable 2FA using OTP app.
      *
-     * @Route("/config/otp/app/disable", name="disable_otp_app")
+     * @Route("/config/otp/app/disable", name="disable_otp_app", methods={"POST"})
      */
-    public function disableOtpAppAction()
+    public function disableOtpAppAction(Request $request)
     {
+        if (!$this->isCsrfTokenValid('otp', $request->request->get('token'))) {
+            throw $this->createAccessDeniedException('Bad CSRF token.');
+        }
+
         $user = $this->getUser();
 
         $user->setGoogleAuthenticatorSecret('');
@@ -319,10 +331,14 @@ class ConfigController extends AbstractController
     /**
      * Enable 2FA using OTP app, user will need to confirm the generated code from the app.
      *
-     * @Route("/config/otp/app", name="config_otp_app")
+     * @Route("/config/otp/app", name="config_otp_app", methods={"POST"})
      */
-    public function otpAppAction(GoogleAuthenticatorInterface $googleAuthenticator)
+    public function otpAppAction(Request $request, GoogleAuthenticatorInterface $googleAuthenticator)
     {
+        if (!$this->isCsrfTokenValid('otp', $request->request->get('token'))) {
+            throw $this->createAccessDeniedException('Bad CSRF token.');
+        }
+
         $user = $this->getUser();
         $secret = $googleAuthenticator->generateSecret();
 
@@ -357,8 +373,10 @@ class ConfigController extends AbstractController
      * Cancelling 2FA using OTP app.
      *
      * @Route("/config/otp/app/cancel", name="config_otp_app_cancel")
+     * 
+     * XXX: commented until we rewrite 2fa with a real two-steps activation
      */
-    public function otpAppCancelAction()
+    /*public function otpAppCancelAction()
     {
         $user = $this->getUser();
         $user->setGoogleAuthenticatorSecret(null);
@@ -367,15 +385,19 @@ class ConfigController extends AbstractController
         $this->userManager->updateUser($user, true);
 
         return $this->redirect($this->generateUrl('config') . '#set3');
-    }
+    }*/
 
     /**
      * Validate OTP code.
      *
-     * @Route("/config/otp/app/check", name="config_otp_app_check")
+     * @Route("/config/otp/app/check", name="config_otp_app_check", methods={"POST"})
      */
     public function otpAppCheckAction(Request $request, GoogleAuthenticatorInterface $googleAuthenticator)
     {
+        if (!$this->isCsrfTokenValid('otp', $request->request->get('token'))) {
+            throw $this->createAccessDeniedException('Bad CSRF token.');
+        }
+
         $isValid = $googleAuthenticator->checkCode(
             $this->getUser(),
             $request->get('_auth_code')
@@ -395,7 +417,12 @@ class ConfigController extends AbstractController
             'scheb_two_factor.code_invalid'
         );
 
-        return $this->redirect($this->generateUrl('config_otp_app'));
+        $this->addFlash(
+            'notice',
+            'scheb_two_factor.code_invalid'
+        );
+
+        return $this->redirect($this->generateUrl('config') . '#set3');
     }
 
     /**
