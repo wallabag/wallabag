@@ -371,7 +371,7 @@ howto:
         android:
             via_f_droid: F-Droid 経由で
             via_google_play: Google Play 経由で
-        ios: iTunes ストアで
+        ios: App Store ストアで
         windows: Microsoft Store で
     shortcuts:
         open_article: 選択した記事を表示する

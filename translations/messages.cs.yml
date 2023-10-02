@@ -701,7 +701,7 @@ howto:
         description: 'Přetáhněte tento odkaz na svůj panel záložek:'
     mobile_apps:
         windows: na Microsoft Store
-        ios: na iTunes Store
+        ios: na App Store
         android:
             via_google_play: prostřednictvím Google Play
             via_f_droid: prostřednictvím F-Droid

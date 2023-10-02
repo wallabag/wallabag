@@ -220,7 +220,7 @@ howto:
         android:
             via_f_droid: از راه F-Droid
             via_google_play: از راه Google Play
-        ios: از راه iTunes Store
+        ios: از راه App Store
         windows: از راه Microsoft Store
     bookmarklet:
         description: 'این پیوند را به نوار بوک‌مارک مرورگرتان بکشید:'

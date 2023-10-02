@@ -549,7 +549,7 @@ howto:
     bookmarklet:
         description: 'Sleep deze link naar uw bladwijzerbalk:'
     mobile_apps:
-        ios: met de iTunes Store
+        ios: met de App Store
         windows: met de Microsoft Store
         android:
             via_google_play: met Google Play

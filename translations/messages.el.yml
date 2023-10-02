@@ -330,7 +330,7 @@ howto:
         description: 'Σύρετε και ρίξτε αυτόν τον σύνδεσμο στην μπάρα σελιδοδεικτών σας:'
     mobile_apps:
         windows: στο Microsoft Store
-        ios: στο iTunes Store
+        ios: στο App Store
         android:
             via_google_play: μέσω Google Play
             via_f_droid: μέσω F-Droid

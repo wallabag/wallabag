@@ -339,7 +339,7 @@ howto:
         android:
             via_f_droid: у F-Droid
             via_google_play: у Google Play
-        ios: в iTunes Store
+        ios: в App Store
         windows: у Microsoft Store
     bookmarklet:
         description: 'Перетягніть посилання на панель закладок:'

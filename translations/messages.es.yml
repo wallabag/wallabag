@@ -401,7 +401,7 @@ howto:
         android:
             via_f_droid: 'en F-Droid'
             via_google_play: 'en Google Play'
-        ios: 'en la tienda de iTunes'
+        ios: 'en la tienda de App Store'
         windows: 'en la tienda de Microsoft'
     bookmarklet:
         description: 'Arrastra y suelta este enlace en la barra de marcadores:'

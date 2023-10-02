@@ -463,7 +463,7 @@ howto:
     page_title: Kunnskapsbase
     mobile_apps:
         windows: i Microsoft-butikken
-        ios: i iTunes-butikken
+        ios: i App-Store-butikken
         android:
             via_google_play: via Google Play
             via_f_droid: via F-Droid

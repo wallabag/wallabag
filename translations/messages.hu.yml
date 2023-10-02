@@ -300,7 +300,7 @@ howto:
         android:
             via_f_droid: F-Droid-on
             via_google_play: Google Play-en
-        ios: iTunes Store-ban
+        ios: App Store-ban
         windows: Microsoft Store-ban
     bookmarklet:
         description: 'Húzza ezt a hivatkozást a könyvjelzősávba:'

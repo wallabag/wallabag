@@ -403,7 +403,7 @@ howto:
         android:
             via_f_droid: F-Droid üzerinden
             via_google_play: Google Play üzerinden
-        ios: iTunes Store üzerinden
+        ios: App Store üzerinden
         windows: Microsoft Store üzerinden
     shortcuts:
         page_description: Aşağıda wallabag üzerinde kullanabileceğiniz kısayolları bulabilirsiniz.

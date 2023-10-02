@@ -288,7 +288,7 @@ howto:
         android:
             via_f_droid: 'ผ่านทาง F-Droid'
             via_google_play: 'ผ่านทาง Google Play'
-        ios: 'บน iTunes Store'
+        ios: 'บน App Store'
         windows: 'บน Microsoft Store'
     bookmarklet:
         description: 'Drag & drop สื่งนี้บน bookmarks bar ของคุณ:'
