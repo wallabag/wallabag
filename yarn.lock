@@ -1037,10 +1037,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.50.0.tgz#9e93b850f0f3fa35f5fa59adfd03adae8488e484"
   integrity sha512-NCC3zz2+nvYd+Ckfh87rA47zfu2QsQpvc6k1yzTk+b9KzRj0wkGa8LSoGOXN6Zv4lRf/EIoZ80biDh9HOI+RNQ==
 
-"@fontsource/atkinson-hyperlegible@^5.0.12":
-  version "5.0.12"
-  resolved "https://registry.yarnpkg.com/@fontsource/atkinson-hyperlegible/-/atkinson-hyperlegible-5.0.12.tgz#76e9f761a853202180e31036f04aa319c5fffc05"
-  integrity sha512-chlxS4rZcGbC4iObID+AmsXOIBvbxl65PUMQdSl+aQU5b1EvfYaKe97rLwcc6vGXp1OkkLl3MpBhv32wkZjkrg==
+"@fontsource/atkinson-hyperlegible@^5.0.13":
+  version "5.0.13"
+  resolved "https://registry.yarnpkg.com/@fontsource/atkinson-hyperlegible/-/atkinson-hyperlegible-5.0.13.tgz#e11eda9362cb34965f5d41856a63578088729f5f"
+  integrity sha512-owO/K8kniFl5ZdiDV682ibMV7WgawSM6pnsFQUYTxtbPQloJdB9NtWUuE4Sm5LZrxLH5mk+GWjR7jTt3fdUu0Q==
 
 "@fontsource/eb-garamond@^5.0.5":
   version "5.0.8"
@@ -1052,10 +1052,10 @@
   resolved "https://registry.yarnpkg.com/@fontsource/montserrat/-/montserrat-5.0.8.tgz#04d162d8929d2911c126e6dafbd218e67c8bb63d"
   integrity sha512-bNj6wfiWXXbsxb2ffatjpX+GBv30cWZ1lwNXW9qTeX2FnzPomsGRV4HdPrf3TqyTiVqX6fLo80zrQcMi7r8+fA==
 
-"@fontsource/oswald@^5.0.12":
-  version "5.0.12"
-  resolved "https://registry.yarnpkg.com/@fontsource/oswald/-/oswald-5.0.12.tgz#db299945cee2474217bd8fc71e1a370f2307f447"
-  integrity sha512-O07Ymf20BKvLK/IzluUKM5kEcuNP0k6E86xgoymISc9+jOoHmwmQEvUJb6GHAAzKi6YLiL65UwrlIlpbI36TsQ==
+"@fontsource/oswald@^5.0.13":
+  version "5.0.13"
+  resolved "https://registry.yarnpkg.com/@fontsource/oswald/-/oswald-5.0.13.tgz#961541fb7df0a6cc1df98b6d1f06c39ab7512337"
+  integrity sha512-X5AOvehN4xzaOgTngmhXNHk7vpgmMNweiV39FRT1DFHqZ1hVMsgoaHHNilJxweyWIsAex0sFyVAK8+nhQJfeFQ==
 
 "@humanwhocodes/config-array@^0.11.11":
   version "0.11.11"
