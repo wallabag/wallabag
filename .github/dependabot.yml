@@ -37,6 +37,10 @@ updates:
   - dependency-name: lcobucci/jwt
     versions:
     - ">= 4.2.0"
+  # until we add support for Symfony 5+
+  - dependency-name: symfony/*
+    versions:
+    - ">= 5.0.0"
 - package-ecosystem: github-actions
   directory: "/"
   schedule:
