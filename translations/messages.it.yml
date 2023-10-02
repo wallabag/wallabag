@@ -317,7 +317,7 @@ howto:
         android:
             via_f_droid: via F-Droid
             via_google_play: via Google Play
-        ios: sullo store di iTunes
+        ios: sullo store di App Store
         windows: sullo store di Microsoft
     bookmarklet:
         description: 'Trascinando e rilasciando questo collegamento sulla barra dei preferiti del tuo browser:'

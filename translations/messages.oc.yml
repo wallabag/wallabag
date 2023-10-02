@@ -401,7 +401,7 @@ howto:
         android:
             via_f_droid: via F-Droid
             via_google_play: via Google Play
-        ios: sus iTunes Store
+        ios: sus App Store
         windows: sus Microsoft Store
     bookmarklet:
         description: 'Lisatz-depausatz aqueste ligam dins vòstra barra de favorits :'

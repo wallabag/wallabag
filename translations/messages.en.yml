@@ -385,7 +385,7 @@ howto:
         android:
             via_f_droid: via F-Droid
             via_google_play: via Google Play
-        ios: on the iTunes Store
+        ios: on the App Store
         windows: on the Microsoft Store
     bookmarklet:
         description: 'Drag and drop this link to your bookmarks bar:'

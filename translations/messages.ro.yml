@@ -159,7 +159,7 @@ howto:
         android:
             via_f_droid: 'prin F-Droid'
             via_google_play: 'prin Google Play'
-        ios: 'prin iTunes Store'
+        ios: 'prin App Store'
         windows: 'prin Microsoft Store'
     bookmarklet:
         description: 'Drag &amp; drop acest link în bara de bookmark-uri:'

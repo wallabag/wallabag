@@ -401,7 +401,7 @@ howto:
         android:
             via_f_droid: w F-Droid
             via_google_play: w Google Play
-        ios: w iTunes Store
+        ios: w App Store
         windows: w Microsoft Store
     bookmarklet:
         description: 'Przeciągnij i upuść ten link na swój pasek zakładek:'

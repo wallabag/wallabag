@@ -386,7 +386,7 @@ howto:
         android:
             via_f_droid: 'в F-Droid'
             via_google_play: 'в Google Play'
-        ios: 'в iTunes Store'
+        ios: 'в App Store'
         windows: 'в Microsoft Store'
     bookmarklet:
         description: 'Перетащите эту ссылку в ваши закладки:'

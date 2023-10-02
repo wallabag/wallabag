@@ -384,7 +384,7 @@ howto:
         android:
             via_f_droid: über F-Droid
             via_google_play: über Google Play
-        ios: im iTunes-Store
+        ios: im App-Store
         windows: im Microsoft-Store
     bookmarklet:
         description: 'Ziehe diesen Link in deine Lesezeichenleiste:'

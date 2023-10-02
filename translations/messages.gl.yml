@@ -29,7 +29,7 @@ howto:
         description: 'Arrastra e solta esta ligazón na túa barra de marcadores:'
     mobile_apps:
         windows: na Microsoft Store
-        ios: na iTunes Store
+        ios: na App Store
         android:
             via_f_droid: vía F-Droid
             via_google_play: vía Google Play
