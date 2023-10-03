@@ -25,3 +25,7 @@ Wenn wallabag beim Laden eines Artikels fehlschlägt, kannst du auf den
 erneut laden Button klicken (der dritte in dem unteren Bild).
 
 ![Inhalt neu laden](../../img/user/refetch.png)
+
+## Ersatzweise Browser-Extension Wallabagger nutzen
+
+Manchmal kann wallabag den Seiteninhalt nicht abrufen, weil die Site zum Seitenaufbau JavaScript erfordert oder Daten nachlädt oder generell versucht zu verhindern, dass Drittprogramme Daten abgreifen. Für Firefox, Chrome und Opera gibt es die Erweiterung "Wallabagger", hier kann man in den Einstellungen festlegen, dass der bereits interpretierte Seiteninhalt an wallabag geschickt wird und nicht nur der Link. In vielen Fällen kann man damit sehr gut arbeiten. Manchmal braucht man aber auch hier eine siteconfig, wie oben beschrieben.
