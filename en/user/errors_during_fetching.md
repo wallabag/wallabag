@@ -238,3 +238,9 @@ strip: //div[contains(@class, 'im-an-ad')]
 More information on _XPath_ is available in the text of the norm, particularly the [part on the abbreviated syntax](https://www.w3.org/TR/1999/REC-xpath-19991116/#path-abbrev) which summarize a good number of shortcuts. The website **devhints.io** also have a [very complete cheat-sheet on _XPath_](https://devhints.io/xpath).
 
 Finally, if you would like to dynamically test an _XPath_ on an existing code, you can use [this sandbox](http://www.whitebeam.org/library/guide/TechNotes/xpathtestbed.rhtm), where you can upload an XML/HTML code.
+
+### Using Wallabagger browser extension
+
+Sometimes wallabag cannot retrieve the page content because the site requires JavaScript to load the page, or is reloading data, or is generally trying to prevent third-party programs from grabbing data. Here you can try the browser extension 'Wallabagger', available for Firefox, Chrome and Opera. Here you can specify in the settings, that the already interpreted page content is sent to wallabag and not only the link. In many cases you can work very well with it. But sometimes you also need the site configuration, as described above.
+
+Please also read [this extra](https://kdecherf.com/blog/2023/08/02/fetch-content-from-browser-on-demand-with-wallabagger/) tip from Kdecherf
