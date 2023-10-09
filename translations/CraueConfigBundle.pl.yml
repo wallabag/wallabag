@@ -1,14 +1,14 @@
-settings_changed: Konfiguracja zaktualizowana
+settings_changed: Ustawienia zostały zaktualizowana
 download_pictures: Pobierz obrazy na swój serwer
-diaspora_url: Adres URL Diaspora, jeżeli usługa jest włączona
+diaspora_url: Adres URL Diaspora, jeżeli ta usługa jest włączona
 export_epub: Włącz eksport do ePub
 export_pdf: Włącz eksport do PDF
 export_csv: Włącz eksport do CSV
 export_json: Włącz eksport do JSON
 export_txt: Włącz eksport do TXT
 export_xml: Włącz eksport do XML
-import_with_rabbitmq: Włącz RabbitMQ dla asynchronicznego importu danych
-import_with_redis: Włącz Redis dla asynchronicznego importu danych
+import_with_rabbitmq: Włącz RabbitMQ, aby asynchronicznie zaimportować dane
+import_with_redis: Włącz Redis, aby asynchronicznie zaimportować dane
 shaarli_url: Adress URL Shaarli, jeżeli usługa jest włączona
 share_diaspora: Włącz udostępnianie dla Diaspora
 share_mail: Włącz udostępnianie przez e-mail
@@ -16,19 +16,19 @@ share_shaarli: Włącz udostępnianie dla Shaarli
 share_twitter: Włącz udostępnianie dla Twitter
 share_unmark: Włącz udostępnianie dla Unmark.it
 show_printlink: Pokaż link do wydrukowania zawartości
-wallabag_support_url: Adres URL wsparcia dla wallabag
+wallabag_support_url: Adres URL pomocy wallabag
 entry: artykuł
 export: eksport
 import: import
 misc: różne
-modify_settings: zatwierdź
+modify_settings: Zatwierdź ustawienia
 matomo_host: Host twojej strony Matomo (bez http:// lub https://)
-matomo_site_id: ID twojej strony Matomo
+matomo_site_id: ID twojej strony w Matomo
 matomo_enabled: Włacz Matomo
 share_public: Zezwalaj na publiczne adresy URL dla wpisów
-download_images_enabled: Pobierz obrazy lokalnie
+download_images_enabled: Pobierz obrazy
 restricted_access: Włącz autoryzację dla stron za paywallem
-api_user_registration: Włącz rejestrację użytkownika przy użyciu API
+api_user_registration: Włącz rejestrację użytkownika przez API
 unmark_url: Odznacz URL, jeżeli usługa jest włączona
-store_article_headers: Włącz, jeżeli wallabag zapisuje nagłówki HTTP dla każdego artykułu
+store_article_headers: Włącz, jeżeli wallabag ma zapisywać nagłówki HTTP dla każdego artykułu
 shaarli_share_origin_url: Włącz udostępnianie oryginalnego adresu URL do Shaarli, jeśli usługa jest włączona
