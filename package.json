@@ -71,7 +71,7 @@
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1",
     "webpack-manifest-plugin": "^5.0.0",
-    "webpack-merge": "^5.9.0"
+    "webpack-merge": "^5.10.0"
   },
   "dependencies": {
     "@fontsource/atkinson-hyperlegible": "^5.0.17",
