@@ -38,25 +38,29 @@
   border-radius: 2px 0 0 2px;
 }
 
-.entry-checkbox {
+.card-stacked .entry-checkbox {
   margin: 10px 15px 10px 5px;
+}
 
-  .card & {
-    float: right;
-    margin-right: 0;
-    padding: 10px;
-  }
+.card .entry-checkbox {
+  position: absolute;
+  display: flex;
+  padding: 10px;
+  inset: 0;
+  justify-content: flex-end;
+  align-items: start;
+  background-color: rgb(0 172 193 / 20%);
+  cursor: pointer;
+  z-index: 10;
 }
 
 .entries .entry-checkbox-input,
 .mass-action .entry-checkbox-input {
   position: relative;
-  left: 0;
   width: 20px;
   min-height: 25px;
-  height: 100%;
-  vertical-align: middle;
   opacity: initial;
+  cursor: pointer;
   z-index: 10;
 }
 

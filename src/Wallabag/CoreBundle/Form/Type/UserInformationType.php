@@ -4,7 +4,6 @@ namespace Wallabag\CoreBundle\Form\Type;
 
 use FOS\UserBundle\Form\Type\RegistrationFormType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -22,15 +21,6 @@ class UserInformationType extends AbstractType
             ])
             ->add('email', EmailType::class, [
                 'label' => 'config.form_user.email_label',
-            ])
-            ->add('emailTwoFactor', CheckboxType::class, [
-                'required' => false,
-                'label' => 'config.form_user.emailTwoFactor_label',
-            ])
-            ->add('googleTwoFactor', CheckboxType::class, [
-                'required' => false,
-                'label' => 'config.form_user.googleTwoFactor_label',
-                'mapped' => false,
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'config.form.save',

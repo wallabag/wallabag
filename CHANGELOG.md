@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.6.7](https://github.com/wallabag/wallabag/tree/2.6.7)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.6...2.6.7)
+
+### Security fix
+* A user can disable her 2FA unintentionally by @kdecherf in https://github.com/wallabag/wallabag/commit/0cfdddc2eb0aee5ffb69bf499d377d75655ba157
+
+### Fixes
+* Fix deprecated null tag parameter by @Simounet in https://github.com/wallabag/wallabag/pull/6985
+* Full clickable card on mass action by @Simounet in https://github.com/wallabag/wallabag/pull/6991
+* Add tag form submit button always displayed by @Simounet in https://github.com/wallabag/wallabag/pull/6986
+
 ## [2.6.6](https://github.com/wallabag/wallabag/tree/2.6.6)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.5...2.6.6)
 
