@@ -269,38 +269,66 @@
 
                             {{ form_widget(form.user.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
 
-                            <br/>
-                            <br/>
-                            <div class="row">
-                                <h5>{{ 'config.otp.page_title'|trans }}</h5>
-
-                                <p>{{ 'config.form_user.two_factor_description'|trans }}</p>
-
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>{{ 'config.form_user.two_factor.table_method'|trans }}</th>
-                                            <th>{{ 'config.form_user.two_factor.table_state'|trans }}</th>
-                                            <th>{{ 'config.form_user.two_factor.table_action'|trans }}</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        <tr>
-                                            <td>{{ 'config.form_user.two_factor.emailTwoFactor_label'|trans }}</td>
-                                            <td>{% if app.user.isEmailTwoFactor %}<b>{{ 'config.form_user.two_factor.state_enabled'|trans }}</b>{% else %}{{ 'config.form_user.two_factor.state_disabled'|trans }}{% endif %}</td>
-                                            <td><a href="{{ path('config_otp_email') }}" class="waves-effect waves-light btn{% if app.user.isEmailTwoFactor %} disabled{% endif %}">{{ 'config.form_user.two_factor.action_email'|trans }}</a> {% if app.user.isEmailTwoFactor %}<a href="{{ path('disable_otp_email') }}" class="waves-effect waves-light btn red">Disable</a>{% endif %}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>{{ 'config.form_user.two_factor.googleTwoFactor_label'|trans }}</td>
-                                            <td>{% if app.user.isGoogleTwoFactor %}<b>{{ 'config.form_user.two_factor.state_enabled'|trans }}</b>{% else %}{{ 'config.form_user.two_factor.state_disabled'|trans }}{% endif %}</td>
-                                            <td><a href="{{ path('config_otp_app') }}" class="waves-effect waves-light btn{% if app.user.isGoogleTwoFactor %} disabled{% endif %}">{{ 'config.form_user.two_factor.action_app'|trans }}</a> {% if app.user.isGoogleTwoFactor %}<a href="{{ path('disable_otp_app') }}" class="waves-effect waves-light btn red">Disable</a>{% endif %}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
                             {{ form_widget(form.user._token) }}
-                        </form>
+
+                        {{ form_end(form.user) }}
+
+                        <br/>
+                        <br/>
+                        <div class="row">
+                            <h5>{{ 'config.otp.page_title'|trans }}</h5>
+
+                            <p>{{ 'config.form_user.two_factor_description'|trans }}</p>
+
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>{{ 'config.form_user.two_factor.table_method'|trans }}</th>
+                                        <th>{{ 'config.form_user.two_factor.table_state'|trans }}</th>
+                                        <th>{{ 'config.form_user.two_factor.table_action'|trans }}</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td>{{ 'config.form_user.two_factor.emailTwoFactor_label'|trans }}</td>
+                                        <td>{% if app.user.isEmailTwoFactor %}<b>{{ 'config.form_user.two_factor.state_enabled'|trans }}</b>{% else %}{{ 'config.form_user.two_factor.state_disabled'|trans }}{% endif %}</td>
+                                        <td>
+                                            <form action="{{ path('config_otp_email') }}" method="post" name="config_otp_email">
+                                                <input type="hidden" name="token" value="{{ csrf_token('otp') }}" />
+
+                                                <button class="waves-effect waves-light btn{% if app.user.isEmailTwoFactor %} disabled{% endif %}" type="submit">{{ 'config.form_user.two_factor.action_email'|trans }}</button>
+                                            </form>
+                                            {% if app.user.isEmailTwoFactor %}
+                                            <form action="{{ path('disable_otp_email') }}" method="post" name="disable_otp_email">
+                                                <input type="hidden" name="token" value="{{ csrf_token('otp') }}" />
+
+                                                <button class="waves-effect waves-light btn red" type="submit">Disable</button>
+                                            </form>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ 'config.form_user.two_factor.googleTwoFactor_label'|trans }}</td>
+                                        <td>{% if app.user.isGoogleTwoFactor %}<b>{{ 'config.form_user.two_factor.state_enabled'|trans }}</b>{% else %}{{ 'config.form_user.two_factor.state_disabled'|trans }}{% endif %}</td>
+                                        <td>
+                                            <form action="{{ path('config_otp_app') }}" method="post" name="config_otp_app">
+                                                <input type="hidden" name="token" value="{{ csrf_token('otp') }}" />
+
+                                                <button class="waves-effect waves-light btn{% if app.user.isGoogleTwoFactor %} disabled{% endif %}" type="submit">{{ 'config.form_user.two_factor.action_app'|trans }}</button>
+                                            </form>
+                                            {% if app.user.isGoogleTwoFactor %}
+                                            <form action="{{ path('disable_otp_app') }}" method="post" name="disable_otp_app">
+                                                <input type="hidden" name="token" value="{{ csrf_token('otp') }}" />
+
+                                                <button class="waves-effect waves-light btn red" type="submit">Disable</button>
+                                            </form>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                     <div id="set4" class="col s12">

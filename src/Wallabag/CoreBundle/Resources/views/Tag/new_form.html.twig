@@ -1,4 +1,4 @@
-<form name="tag" method="post" action="{{ path('new_tag', {'entry': entry.id}) }}">
+<form class="tags-add-form" name="tag" method="post" action="{{ path('new_tag', {'entry': entry.id}) }}">
     {% if form_errors(form) %}
         <span class="black-text">{{ form_errors(form) }}</span>
     {% endif %}
@@ -9,6 +9,6 @@
 
     {{ form_widget(form.label, {'attr': {'autocomplete': 'off'}}) }}
 
-    {{ form_widget(form.add, {'attr': {'class': 'btn waves-effect waves-light hide-on-large-only'}}) }}
+    {{ form_widget(form.add, {'attr': {'class': 'btn waves-effect waves-light tags-add-form-submit'}}) }}
     {{ form_widget(form._token) }}
 </form>

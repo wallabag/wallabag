@@ -14,6 +14,3 @@ parameters:
         - vendor/bin/.phpunit/phpunit-8.5-0/vendor/autoload.php
 
     inferPrivatePropertyTypeFromConstructor: true
-
-    ignoreErrors:
-        - "#^Method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) invoked with 2 parameters, 1 required\\.$#"
