@@ -6521,16 +6521,16 @@
         },
         {
             "name": "php-amqplib/rabbitmq-bundle",
-            "version": "2.11.0",
+            "version": "2.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-amqplib/RabbitMqBundle.git",
-                "reference": "b2265a87aa35907beb3593c182d340a220b60461"
+                "reference": "e1051123081e9dc41f9310096e4a3e64e5c7a3ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-amqplib/RabbitMqBundle/zipball/b2265a87aa35907beb3593c182d340a220b60461",
-                "reference": "b2265a87aa35907beb3593c182d340a220b60461",
+                "url": "https://api.github.com/repos/php-amqplib/RabbitMqBundle/zipball/e1051123081e9dc41f9310096e4a3e64e5c7a3ef",
+                "reference": "e1051123081e9dc41f9310096e4a3e64e5c7a3ef",
                 "shasum": ""
             },
             "require": {
@@ -6594,9 +6594,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-amqplib/RabbitMqBundle/issues",
-                "source": "https://github.com/php-amqplib/RabbitMqBundle/tree/2.11.0"
+                "source": "https://github.com/php-amqplib/RabbitMqBundle/tree/2.12.0"
             },
-            "time": "2021-12-21T13:13:45+00:00"
+            "time": "2023-10-31T12:50:26+00:00"
         },
         {
             "name": "php-http/client-common",
@@ -9410,16 +9410,16 @@
         },
         {
             "name": "symfony/cache",
-            "version": "v5.4.25",
+            "version": "v5.4.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "e2013521c0f07473ae69a01fce0af78fc3ec0f23"
+                "reference": "2742d1b595927210546bb7a0887094cf1494de21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/e2013521c0f07473ae69a01fce0af78fc3ec0f23",
-                "reference": "e2013521c0f07473ae69a01fce0af78fc3ec0f23",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/2742d1b595927210546bb7a0887094cf1494de21",
+                "reference": "2742d1b595927210546bb7a0887094cf1494de21",
                 "shasum": ""
             },
             "require": {
@@ -9447,7 +9447,7 @@
             "require-dev": {
                 "cache/integration-tests": "dev-master",
                 "doctrine/cache": "^1.6|^2.0",
-                "doctrine/dbal": "^2.13.1|^3.0",
+                "doctrine/dbal": "^2.13.1|^3|^4",
                 "predis/predis": "^1.1",
                 "psr/simple-cache": "^1.0|^2.0",
                 "symfony/config": "^4.4|^5.0|^6.0",
@@ -9487,7 +9487,7 @@
                 "psr6"
             ],
             "support": {
-                "source": "https://github.com/symfony/cache/tree/v5.4.25"
+                "source": "https://github.com/symfony/cache/tree/v5.4.30"
             },
             "funding": [
                 {
@@ -9503,7 +9503,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-06-22T08:06:06+00:00"
+            "time": "2023-10-17T14:17:25+00:00"
         },
         {
             "name": "symfony/cache-contracts",
