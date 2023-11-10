@@ -48,7 +48,7 @@ class ContentProxy
         $this->clientSideRenderedSitesProxyUrl = preg_replace('~/*$~', '', $this->container->getParameter('wallabag_core.client_side_rendered_sites')['proxy_url']);
         $this->clientSideRenderedSitesProxyAll = $this->container->getParameter('wallabag_core.client_side_rendered_sites')['proxy_all'];
         $this->clientSideRenderedSitesToProxy =
-        array_map(fn($url) => preg_replace('~/*$~', '', $url), $this->container->getParameter('wallabag_core.client_side_rendered_sites')['sites_to_proxy']);
+        array_map(fn ($url) => preg_replace('~/*$~', '', $url), $this->container->getParameter('wallabag_core.client_side_rendered_sites')['sites_to_proxy']);
     }
 
     /**
@@ -68,8 +68,8 @@ class ContentProxy
 
         if ((empty($content) || false === $this->validateContent($content)) && false === $disableContentUpdate) {
             // Check if URL has to be proxied through single-file
-            preg_match( '~^[^/]+://[^/]+~', $url, $matches);
-            $proxy = $this->clientSideRenderedSitesProxyAll || in_array($matches[0], $this->clientSideRenderedSitesToProxy);
+            preg_match('~^[^/]+://[^/]+~', $url, $matches);
+            $proxy = $this->clientSideRenderedSitesProxyAll || \in_array($matches[0], $this->clientSideRenderedSitesToProxy, true);
 
             $fetchedContent = $this->graby->fetchContent(($proxy ? $this->clientSideRenderedSitesProxyUrl . '/' : '') . $url);
 
@@ -227,7 +227,7 @@ class ContentProxy
     }
 
     /**
-     * Try to fix the content retreived through the client-side rendering proxy
+     * Try to fix the content retreived through the client-side rendering proxy.
      *
      * @param string $content
      *
@@ -236,6 +236,7 @@ class ContentProxy
     private function fixClientSideRenderedProxyResponse($content)
     {
         $content = preg_replace('/&lt;img ([^&]+)&gt;/', '<img \1 >', $content);
+
         return $content;
     }
 
