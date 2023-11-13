@@ -26,7 +26,6 @@ class WallabagCoreExtension extends Extension
         $container->setParameter('wallabag_core.fetching_error_message', $config['fetching_error_message']);
         $container->setParameter('wallabag_core.fetching_error_message_title', $config['fetching_error_message_title']);
         $container->setParameter('wallabag_core.api_limit_mass_actions', $config['api_limit_mass_actions']);
-        $container->setParameter('wallabag_core.client_side_rendered_sites', $config['client_side_rendered_sites']);
         $container->setParameter('wallabag_core.default_internal_settings', $config['default_internal_settings']);
         $container->setParameter('wallabag_core.site_credentials.encryption_key_path', $config['encryption_key_path']);
         $container->setParameter('wallabag_core.default_ignore_origin_instance_rules', $config['default_ignore_origin_instance_rules']);

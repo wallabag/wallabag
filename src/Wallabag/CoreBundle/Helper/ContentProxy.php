@@ -29,11 +29,11 @@ class ContentProxy
     protected $eventDispatcher;
     protected $storeArticleHeaders;
 
-    private $clientSideRenderedSitesProxyUrl;
-    private $clientSideRenderedSitesProxyAll;
-    private $clientSideRenderedSitesToProxy;
+    private $singleFileProxyUrl;
+    private $singleFileProxyAll;
+    private $singleFileProxySitesToProxy;
 
-    public function __construct(Graby $graby, RuleBasedTagger $tagger, RuleBasedIgnoreOriginProcessor $ignoreOriginProcessor, ValidatorInterface $validator, LoggerInterface $logger, $fetchingErrorMessage, $clientSideRenderedSitesProxyUrl, $clientSideRenderedSitesProxyAll, $clientSideRenderedSitesToProxy, $storeArticleHeaders = false)
+    public function __construct(Graby $graby, RuleBasedTagger $tagger, RuleBasedIgnoreOriginProcessor $ignoreOriginProcessor, ValidatorInterface $validator, LoggerInterface $logger, $fetchingErrorMessage, $singleFileProxyUrl, $singleFileProxyAll, $singleFileProxySitesToProxy, $storeArticleHeaders = false)
     {
         $this->graby = $graby;
         $this->tagger = $tagger;
@@ -44,9 +44,9 @@ class ContentProxy
         $this->fetchingErrorMessage = $fetchingErrorMessage;
         $this->storeArticleHeaders = $storeArticleHeaders;
 
-        $this->clientSideRenderedSitesProxyUrl = preg_replace('~/*$~', '', $clientSideRenderedSitesProxyUrl);
-        $this->clientSideRenderedSitesProxyAll = $clientSideRenderedSitesProxyAll;
-        $this->clientSideRenderedSitesToProxy = array_map(fn ($url) => preg_replace('~/*$~', '', $url), $clientSideRenderedSitesToProxy);
+        $this->singleFileProxyUrl = preg_replace('~/*$~', '', $singleFileProxyUrl);
+        $this->singleFileProxyAll = $singleFileProxyAll;
+        $this->singleFileProxySitesToProxy = array_map(fn ($url) => preg_replace('~/*$~', '', $url), $singleFileProxySitesToProxy);
     }
 
     /**
@@ -67,9 +67,9 @@ class ContentProxy
         if ((empty($content) || false === $this->validateContent($content)) && false === $disableContentUpdate) {
             // Check if URL has to be proxied through single-file
             preg_match('~^[^/]+://[^/]+~', $url, $matches);
-            $proxy = $this->clientSideRenderedSitesProxyAll || \in_array($matches[0], $this->clientSideRenderedSitesToProxy, true);
+            $proxy = $this->singleFileProxyAll || \in_array($matches[0], $this->singleFileProxySitesToProxy, true);
 
-            $fetchedContent = $this->graby->fetchContent(($proxy ? $this->clientSideRenderedSitesProxyUrl . '/' : '') . $url);
+            $fetchedContent = $this->graby->fetchContent(($proxy ? $this->singleFileProxyUrl . '/' : '') . $url);
 
             // Set original URL in case it was proxied
             $fetchedContent['url'] = $url;
