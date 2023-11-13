@@ -33,22 +33,20 @@ class ContentProxy
     private $clientSideRenderedSitesProxyAll;
     private $clientSideRenderedSitesToProxy;
 
-    public function __construct(Graby $graby, RuleBasedTagger $tagger, RuleBasedIgnoreOriginProcessor $ignoreOriginProcessor, ValidatorInterface $validator, LoggerInterface $logger, ContainerInterface $container, $fetchingErrorMessage, $storeArticleHeaders = false)
+    public function __construct(Graby $graby, RuleBasedTagger $tagger, RuleBasedIgnoreOriginProcessor $ignoreOriginProcessor, ValidatorInterface $validator, LoggerInterface $logger, $fetchingErrorMessage, $clientSideRenderedSitesProxyUrl, $clientSideRenderedSitesProxyAll, $clientSideRenderedSitesToProxy, $storeArticleHeaders = false)
     {
         $this->graby = $graby;
         $this->tagger = $tagger;
         $this->ignoreOriginProcessor = $ignoreOriginProcessor;
         $this->validator = $validator;
         $this->logger = $logger;
-        $this->container = $container;
         $this->mimeTypes = new MimeTypes();
         $this->fetchingErrorMessage = $fetchingErrorMessage;
         $this->storeArticleHeaders = $storeArticleHeaders;
 
-        $this->clientSideRenderedSitesProxyUrl = preg_replace('~/*$~', '', $this->container->getParameter('wallabag_core.client_side_rendered_sites')['proxy_url']);
-        $this->clientSideRenderedSitesProxyAll = $this->container->getParameter('wallabag_core.client_side_rendered_sites')['proxy_all'];
-        $this->clientSideRenderedSitesToProxy =
-        array_map(fn ($url) => preg_replace('~/*$~', '', $url), $this->container->getParameter('wallabag_core.client_side_rendered_sites')['sites_to_proxy']);
+        $this->clientSideRenderedSitesProxyUrl = preg_replace('~/*$~', '', $clientSideRenderedSitesProxyUrl);
+        $this->clientSideRenderedSitesProxyAll = $clientSideRenderedSitesProxyAll;
+        $this->clientSideRenderedSitesToProxy = array_map(fn ($url) => preg_replace('~/*$~', '', $url), $clientSideRenderedSitesToProxy);
     }
 
     /**
