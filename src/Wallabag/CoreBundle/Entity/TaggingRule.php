@@ -44,7 +44,7 @@ class TaggingRule implements RuleInterface
     private $rule;
 
     /**
-     * @var array
+     * @var array<string>
      *
      * @Assert\NotBlank()
      * @ORM\Column(name="tags", type="simple_array", nullable=false)

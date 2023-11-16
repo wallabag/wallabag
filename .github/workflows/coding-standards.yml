@@ -30,6 +30,12 @@ jobs:
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: "Setup MySQL"
+        run: |
+          sudo systemctl start mysql.service
+          sudo mysql -u root -proot -h 127.0.0.1 -e "CREATE DATABASE wallabag_test"
+          cp app/config/tests/parameters_test.mysql.yml app/config/parameters_test.yml
+
       - name: "Install dependencies with Composer"
         uses: "ramsey/composer-install@v2"
         with:

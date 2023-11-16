@@ -53,7 +53,7 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     protected $id;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="name", type="text", nullable=true)
      *
@@ -134,14 +134,14 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     protected $config;
 
     /**
-     * @var ArrayCollection
+     * @var ArrayCollection&iterable<\Wallabag\CoreBundle\Entity\SiteCredential>
      *
      * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\SiteCredential", mappedBy="user", cascade={"remove"})
      */
     protected $siteCredentials;
 
     /**
-     * @var ArrayCollection
+     * @var ArrayCollection&iterable<\Wallabag\ApiBundle\Entity\Client>
      *
      * @ORM\OneToMany(targetEntity="Wallabag\ApiBundle\Entity\Client", mappedBy="user", cascade={"remove"})
      */
@@ -402,7 +402,7 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     }
 
     /**
-     * @return ArrayCollection<Entry>
+     * @return ArrayCollection<Client>
      */
     public function getClients()
     {
