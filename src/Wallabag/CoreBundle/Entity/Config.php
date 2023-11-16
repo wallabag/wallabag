@@ -61,7 +61,7 @@ class Config
     private $language;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="feed_token", type="string", nullable=true)
      *
@@ -70,7 +70,7 @@ class Config
     private $feedToken;
 
     /**
-     * @var int
+     * @var int|null
      *
      * @ORM\Column(name="feed_limit", type="integer", nullable=true)
      * @Assert\Range(
@@ -84,7 +84,7 @@ class Config
     private $feedLimit;
 
     /**
-     * @var float
+     * @var float|null
      *
      * @ORM\Column(name="reading_speed", type="float", nullable=true)
      *
@@ -93,14 +93,14 @@ class Config
     private $readingSpeed;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="pocket_consumer_key", type="string", nullable=true)
      */
     private $pocketConsumerKey;
 
     /**
-     * @var int
+     * @var int|null
      *
      * @ORM\Column(name="action_mark_as_read", type="integer", nullable=true, options={"default" = 0})
      *
@@ -109,7 +109,7 @@ class Config
     private $actionMarkAsRead;
 
     /**
-     * @var int
+     * @var int|null
      *
      * @ORM\Column(name="list_mode", type="integer", nullable=true)
      *
@@ -118,7 +118,7 @@ class Config
     private $listMode;
 
     /**
-     * @var int
+     * @var int|null
      *
      * @ORM\Column(name="display_thumbnails", type="integer", nullable=true, options={"default" = 1})
      *
@@ -127,7 +127,7 @@ class Config
     private $displayThumbnails;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="font", type="text", nullable=true)
      *
@@ -136,7 +136,7 @@ class Config
     private $font;
 
     /**
-     * @var float
+     * @var float|null
      *
      * @ORM\Column(name="fontsize", type="float", nullable=true)
      *
@@ -145,7 +145,7 @@ class Config
     private $fontsize;
 
     /**
-     * @var float
+     * @var float|null
      *
      * @ORM\Column(name="line_height", type="float", nullable=true)
      *
@@ -154,7 +154,7 @@ class Config
     private $lineHeight;
 
     /**
-     * @var float
+     * @var float|null
      *
      * @ORM\Column(name="max_width", type="float", nullable=true)
      *
@@ -163,7 +163,7 @@ class Config
     private $maxWidth;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="custom_css", type="text", nullable=true)
      */

@@ -64,7 +64,7 @@ class Entry
     private $uid;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="title", type="text", nullable=true)
      *
@@ -75,7 +75,7 @@ class Entry
     /**
      * Define the url fetched by wallabag (the final url after potential redirections).
      *
-     * @var string
+     * @var string|null
      *
      * @Assert\NotBlank()
      * @ORM\Column(name="url", type="text", nullable=true)
@@ -85,7 +85,7 @@ class Entry
     private $url;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="hashed_url", type="string", length=40, nullable=true)
      */
@@ -94,7 +94,7 @@ class Entry
     /**
      * From where user retrieved/found the url (an other article, a twitter, or the given_url if non are provided).
      *
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="origin_url", type="text", nullable=true)
      *
@@ -105,7 +105,7 @@ class Entry
     /**
      * Define the url entered by the user (without redirections).
      *
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="given_url", type="text", nullable=true)
      *
@@ -114,7 +114,7 @@ class Entry
     private $givenUrl;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="hashed_given_url", type="string", length=40, nullable=true)
      */
@@ -132,7 +132,7 @@ class Entry
     private $isArchived = false;
 
     /**
-     * @var \DateTimeInterface
+     * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="archived_at", type="datetime", nullable=true)
      *
@@ -152,7 +152,7 @@ class Entry
     private $isStarred = false;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="content", type="text", nullable=true)
      *
@@ -179,7 +179,7 @@ class Entry
     private $updatedAt;
 
     /**
-     * @var \DateTimeInterface
+     * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="published_at", type="datetime", nullable=true)
      *
@@ -188,7 +188,7 @@ class Entry
     private $publishedAt;
 
     /**
-     * @var array
+     * @var array|null
      *
      * @ORM\Column(name="published_by", type="array", nullable=true)
      *
@@ -197,7 +197,7 @@ class Entry
     private $publishedBy;
 
     /**
-     * @var \DateTimeInterface
+     * @var \DateTimeInterface|null
      *
      * @ORM\Column(name="starred_at", type="datetime", nullable=true)
      *
@@ -214,7 +214,7 @@ class Entry
     private $annotations;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="mimetype", type="text", nullable=true)
      *
@@ -223,7 +223,7 @@ class Entry
     private $mimetype;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="language", type="string", length=20, nullable=true)
      *
@@ -241,7 +241,7 @@ class Entry
     private $readingTime = 0;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="domain_name", type="text", nullable=true)
      *
@@ -250,7 +250,7 @@ class Entry
     private $domainName;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="preview_picture", type="text", nullable=true)
      *
@@ -259,7 +259,7 @@ class Entry
     private $previewPicture;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(name="http_status", type="string", length=3, nullable=true)
      *
@@ -268,7 +268,7 @@ class Entry
     private $httpStatus;
 
     /**
-     * @var array
+     * @var array|null
      *
      * @ORM\Column(name="headers", type="array", nullable=true)
      *
