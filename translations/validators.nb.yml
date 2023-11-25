@@ -4,4 +4,4 @@ validator:
     password_wrong_value: Feil nåværende passord angitt.
     item_per_page_too_high: Dette vil drepe programmet
     rss_limit_too_high: Dette vil drepe programmet
-    quote_length_too_high: Sitatet er for langt. De bør minst være {{ limit }} tegn eller mindre.
+    quote_length_too_high: Sitatet er for langt. De kan være {{ limit }} tegn eller mindre.
