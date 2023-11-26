@@ -33,11 +33,11 @@ menu:
         theme_toggle_light: Lys drakt
         theme_toggle_dark: Mørk drakt
         quickstart: Hurtigstart
-        users_management: Håndtering av brukere
-        developer: API-klienthåndtering
+        users_management: Brukerstyring
+        developer: API-klientstyring
         ignore_origin_instance_rules: Globale regler for å ignorerer opprinnelse
         with_annotations: Med merknader
-        site_credentials: Sideakkreditiver
+        site_credentials: Akkreditiver
     top:
         add_new_entry: Legg til en ny oppføring
         search: Søk
@@ -66,6 +66,7 @@ config:
         feed: Strømmer
         reset: Tilbakestill
         ignore_origin: Ignorer opprinnelse regler
+        article_display: Artikkelvisning
     form:
         save: Lagre
     form_settings:
@@ -220,15 +221,19 @@ config:
             operator_description:
                 equal_to: Lik …
                 label: Operator
+                matches: 'Tester at et <i>emne</i> samsvarer med et <i>søk</i> (uavhengig av store og små bokstaver).<br />Eksempel: <code>_all ~ "https?://rss.example.com/ foobar/.*"</code>'
             variable_description:
                 label: Variabel
+                host: Adressens vert
+                _all: Full adresse, hovedsaklig for mønstergjennkjenning
             meaning: Betydning
             title: O-S-S
             how_to_use_them_title: Hvordan brukes de?
             ignore_origin_rules_definition_title: Hva betyr «Ignorer opprinnelse regler»?
-            how_to_use_them_description: La oss anta at du vil ignorere opprinnelsen til en oppføring som kommer fra « <i>rss.example.com</i> » (<i>der du hvet at etter en omdirigering er den faktiske adressen example.com</i>) .<br />I så fall bør du sette « host = "rss.example.com" » i <i>Regel</i>-feltet.
+            how_to_use_them_description: La oss anta at du vil ignorere opprinnelsen til en oppføring som kommer fra « <i>rss.example.com</i> » (<i>der du vet at etter en omdirigering er den faktiske adressen example.com</i>) .<br />I så fall må du sette « host = "rss.example.com" » i <i>Regel</i>-feltet.
             ignore_origin_rules_definition_description: De brukes av wallabag til automatisk å ignorere en opprinnelsesadresse etter en omdirigering.<br />Hvis en omdirigering skjer mens du henter en ny oppføring, vil alle reglene for ignorering av opprinnelse (<i>brukerdefinert og forekomstdefinert</i>) bli brukt til å ignorere opprinnelsesadressen.
             variables_available_title: Hvilke variabler og operatorer kan jeg bruke for å skrive regler?
+            variables_available_description: 'Følgende variabler og operatorer kan brukes til å lage ignorer opprinnelse regler:'
 flashes:
     entry:
         notice:
@@ -239,24 +244,31 @@ flashes:
             entry_archived: Oppføring arkivert
             entry_saved: Oppføring lagret
             entry_already_saved: Oppføring allerede lagret %date%
+            entry_reloaded_failed: Oppføring hentet, men hent innhold feilet
+            entry_reloaded: Oppføring hentet på nytt
+            entry_updated: Oppføring oppdatert
+            no_random_entry: Ingen oppføringer med disse kriterier ble funnet
+            entry_saved_failed: Oppføring lagret, men hent innhold feilet
     config:
         notice:
-            tagging_rules_not_imported: Kunne ikke importere etikettmerkingsregler
-            tagging_rules_imported: Etikettmerkingsregler importert
-            otp_disabled: To-faktoridentitetsbekreftelse avskrudd
-            otp_enabled: To-faktoridentitetsbekreftelse påskrudd
+            tagging_rules_not_imported: Kunne ikke importere stikkordsregler
+            tagging_rules_imported: Stikkordsregler importert
+            otp_disabled: To-faktor identitetsbekreftelse avskrudd
+            otp_enabled: To-faktor identitetsbekreftelse påskrudd
             archived_reset: Arkiverte oppføringer slettet
             entries_reset: Oppføringer tilbakestilt
-            tags_reset: Etikett-tilbakestilling
-            feed_token_revoked: Strøm-symbol tilbakekalt
-            feed_token_updated: Strøm-symbol oppdatert
-            feed_updated: Informasjonskanal oppdatert
-            tagging_rules_deleted: Etikettmerkingsregel slettet
-            tagging_rules_updated: Etikettmerkingsregler oppdatert
+            tags_reset: Tilbakestilt stikkord
+            feed_token_revoked: Strøm-token tilbakekalt
+            feed_token_updated: Strøm-token oppdatert
+            feed_updated: Opplysninger om strøm oppdatert
+            tagging_rules_deleted: Stikkordsregel slettet
+            tagging_rules_updated: Stikkordsregel oppdatert
             user_updated: Informasjon oppdatert
             password_updated: Passord oppdatert
             config_saved: Oppsett lagret.
             annotations_reset: Anføringer tilbakestilt
+            ignore_origin_rules_updated: Regel for å ignorere opprinnelse ble oppdatert
+            ignore_origin_rules_deleted: Regel for å ignorere opprinnelse ble slettet
     user:
         notice:
             updated: Bruker «%username%» er oppdatert
@@ -264,15 +276,32 @@ flashes:
             added: Brukernavn «%username%» lagt til
     developer:
         notice:
-            client_created: Ny klient ved navn %name% opprettet.
-            client_deleted: Klient ved navn %name% slettet
+            client_created: Ny klient med navn %name% opprettet.
+            client_deleted: Klient med navn %name% slettet
     import:
         notice:
             failed: Kunne ikke importere, prøv igjen.
+            failed_on_file: Feil under behandling av import. Vennligst sjekk importfilen.
+            summary_with_queue: 'Importsammendrag:: %queued% køet.'
+            summary: 'Importsammendrag:: %imported% importert, %skipped% allerede lagret.'
+        error:
+            rabbit_enabled_not_installed: RabbitMQ er aktivert for å håndtere asynkron import, men det ser ut til at <u>vi ikke får koble oss til</u>. Vennligst sjekk RabbitMQ-konfigurasjonen.
+            redis_enabled_not_installed: Redis er aktivert for å håndtere asynkron import, men det ser ut til at <u>vi ikke får koblet oss til</u>. Vennligst sjekk Redis-konfigurasjonen.
     tag:
         notice:
-            tag_renamed: Navn på etikett endret
-            tag_added: Etikett lagt til
+            tag_renamed: Stikkord endret
+            tag_added: Stikkord lagt til
+            too_much_tags: For å unngå ytelsesproblemer kan du ikke legge til mer enn %tags%-stikkord på en gang, heller ikke stikkord med mer enn %characters%-tegn.
+    ignore_origin_instance_rule:
+        notice:
+            deleted: Global regel for å ignorere opprinnelse ble slettet
+            added: Global regel for å ignorere opprinnelse ble lagt til
+            updated: Global regel for å ignorere opprinnelse ble oppdatert
+    site_credential:
+        notice:
+            added: Akkreditiv for «%host%» lagt til
+            deleted: Akkreditiv for «%host%» slettet
+            updated: Akkreditiv for «%host%» oppdatert
 error:
     page_title: En feil inntraff
 ignore_origin_instance_rule:
@@ -287,6 +316,11 @@ ignore_origin_instance_rule:
         yes: Ja
         edit_action: Rediger
         actions: Handlinger
+        create_new_one: Lag ny global regel for å ignorere opprinnelse
+    new_ignore_origin_instance_rule: Lag global regel for å ignorerer opprinnelse
+    description: Her kan du administrere globale regler for ignorerer opprinnelse brukt til å ignorere enkelte møsnstre for opprinnelses-URL.
+    page_title: Global regel for å ignorere opprinnelse
+    edit_ignore_origin_instance_rule: Endre en global regel for å ignorerer opprinnelse
 site_credential:
     form:
         back_to_list: Tilbake til listen
@@ -297,13 +331,15 @@ site_credential:
         password_label: Passord
         username_label: Logg inn
     list:
-        create_new_one: Opprett ny identitetsdetalj
+        create_new_one: Opprett ny akkreditiv
         no: Nei
         yes: Ja
         edit_action: Rediger
         actions: Handlinger
-    edit_site_credential: Rediger en eksisterende identitetsdetalj
-    new_site_credential: Opprett en identitetsdetalj
+    edit_site_credential: Rediger en eksisterende akkreditiv
+    new_site_credential: Opprett akkreditiv
+    page_title: Håndter akkreditiv
+    description: Her kan du opprett, rediger og slett akkreditiv for nettsteder som krevde dette, eksempelvis betalingsmurer, autentiseringer, etc.
 user:
     search:
         placeholder: Filtrer etter brukernavn eller e-postadresse
@@ -312,8 +348,8 @@ user:
         delete_confirm: Er du sikker?
         delete: Slett
         save: Lagre
-        twofactor_google_label: To-faktoridentitetsbekreftelse med OTP-program
-        twofactor_email_label: To-faktoridentitetsbekreftelse per e-post
+        twofactor_google_label: To-faktor identitetsbekreftelse med OTP-program
+        twofactor_email_label: To-faktor identitetsbekreftelse per e-post
         last_login_label: Siste innlogging
         enabled_label: Påskrudd
         email_label: E-postadresse
@@ -331,16 +367,20 @@ user:
     description: Her kan du håndtere alle brukere (opprett, rediger og slett)
     edit_user: Rediger en eksisterende bruker
     new_user: Opprett en ny bruker
-    page_title: Brukerhåndtering
+    page_title: Brukerstyring
 developer:
     howto:
         back: Tilbake
         description:
-            paragraph_2: Du trenger et symbol for å kommunisere mellom dine tredjepartsprogrammmer og wallabag-API-et.
-            paragraph_3: For å opprette dette symbolet, trenger du å <a href="%link%">opprette en ny klient</a>.
-            paragraph_4: 'Nå kan du laget et symbol (erstatt client_id, client_secret, brukernavn og passord med verdiene):'
+            paragraph_2: Du trenger et token for å kommunisere mellom dine tredjepartsprogrammmer og wallabag-API-et.
+            paragraph_3: For å opprette dette token, trenger du å <a href="%link%">opprette en ny klient</a>.
+            paragraph_4: 'Nå kan du laget et token (erstatt client_id, client_secret, brukernavn og passord med passende verdier):'
             paragraph_6: 'Access_token er nyttig ved kall mot API-endepunkte. For eksempel:'
-        page_title: Håndtering av API-klienter > Hvordan opprette mitt første program
+            paragraph_8: Hvis du vil se alle API-endepunktene, kan du ta en titt <a href="%link%">på API-dokumentasjonen</a>.
+            paragraph_7: Dette kallet vil returnere alle oppføringene for brukeren din.
+            paragraph_5: 'API-en vil returnere et svar som dette:'
+            paragraph_1: Følgende kommandoer bruker <a href="https://github.com/jkbrzt/httpie">HTTPie-biblioteket</a>. Sørg for at det er installert på systemet ditt før du bruker det.
+        page_title: API-klientstyring > Hvordan opprette mitt første program
     client_parameter:
         read_howto: Les kunnskapsbasens «Opprett mitt første program»
         back: Tilbake
@@ -348,23 +388,27 @@ developer:
         field_id: Klient-ID
         field_name: Klientnavn
         page_description: Her har du dine klientparametre.
-        page_title: Håndtering av API-klienter > Klient-parametre
+        page_title: API-klientstyring > Klientparametre
     client:
         copy_to_clipboard: Kopier
         action_back: Tilbake
         form:
             save_label: Opprett en ny klient
-            redirect_uris_label: Videresendings-URI-er (valgfritt)
+            redirect_uris_label: Omdirigerings-URI-er (valgfritt)
             name_label: Navnet på klienten
-        page_title: API-klienthåndtering > Ny klient
+        page_title: API-klientstyring > Ny klient
+        page_description: Du er i ferd med å opprette en ny klient. Fyll ut feltet nedenfor for omdirigerings-URI for applikasjonen din.
     remove:
         action: Fjern klienten %name%
+        warn_message_2: Hvis du fjerner den, vil ingen apper som er konfigurert med nevnte klient kunne godkjennes av wallabagen din.
+        warn_message_1: Du har muligheten til å fjerne klienten %name%. Denne handlingen er IRREVERSIBIL!
     existing_clients:
         no_client: Ingen klient enda.
-        field_uris: Videresendelses-URI-er
+        field_uris: Omdirigerings-URI-er
         field_secret: Klienthemmelighet
         field_id: Klient-ID
         title: Eksisterende klienter
+        field_grant_types: Tillatte tilgangstyper
     clients:
         create_new: Opprett en ny klient
         title: Klienter
@@ -373,7 +417,7 @@ developer:
     how_to_first_app: Hvordan opprette mitt første program
     documentation: Dokumentasjon
     welcome_message: Velkommen til wallabag-API-et
-    page_title: Håndtering av API-klienter
+    page_title: API-klientstyring
 import:
     pocket:
         connect_to_pocket: Koble til Pocket og importer data
@@ -395,7 +439,7 @@ import:
     pinboard:
         page_title: Importer > Pinboard
         how_to: Velg din Pinboard-eksport og klikk på knappen nedenfor for å laste opp og importere den.
-        description: Denne importøren vil importere alle Pinboard-artiklene dine. På sikkerhetskopisiden (https://pinboard.in/settings/backup) klikker du på «JSON» i delen «Bokmerker». En JSON-fil vil bli lastet ned (som «pinboard_export»).
+        description: Denne modulen vil importere alle Pinboard-artiklene dine. På sikkerhetskopisiden (https://pinboard.in/settings/backup) klikker du på «JSON» i delen «Bokmerker». En JSON-fil vil bli lastet ned (som «pinboard_export»).
     instapaper:
         page_title: Importer > Instapaper
         description: Denne modulen vil importere alle Instapaper-artiklene dine. På innstillingssiden (https://www.instapaper.com/user), klikk på «Last ned .CSV-fil» i delen «Eksporter». En CSV-fil vil bli lastet ned (som «instapaper-export.csv»).
@@ -425,9 +469,19 @@ import:
     page_description: Velkommen til wallabag sin import. Velg tjenesten du vil migrere data fra.
     delicious:
         page_title: Importer > del.icio.us
+        how_to: Velg din Delicious-eksport og klikk på knappen nedenfor for å laste opp og importere den.
+        description: Denne modulen vil importere alle Delicious-bokmerkene dine. Siden 2021 kan du eksportere dataene dine ved å bruke eksportsiden (https://del.icio.us/export). Velg «JSON»-formatet og last det ned (som «delicious_export.2021.02.06_21.10.json»).
     elcurator:
         page_title: Importer > elCurator
         description: Denne modulen vil importere alle dine elCurator artikler.
+    shaarli:
+        page_title: Importer > Shaarli
+        how_to: Velg sikkerhetskopifilen for bokmerke og klikk på knappen nedenfor for å importere den. Merk at prosessen kan ta lang tid siden alle artiklene må hentes.
+        description: Denne modulen vil importere alle dine Shaarli-bokmerker. Bare gå til Verktøy-delen, deretter til «Eksporter database», velg bokmerkene dine og eksporter dem. Du vil daa få en HTML-fil.
+    pocket_html:
+        how_to: Velg sikkerhetskopifilen for bokmerke og klikk på knappen nedenfor for å importere den. Merk at prosessen kan ta lang tid siden alle artiklene må hentes.
+        page_title: Importer > Pocket HTML
+        description: Denne modulen vil importere alle Pocket-bokmerkene dine (via HTML-eksport). Gå til https://getpocket.com/export, og eksporter HTML-filen derfra. En HTML-fil vil bli lastet ned (som «ril_export.html»).
 tag:
     new:
         placeholder: Du kan legge til flere stikkord, delt med komma.
