@@ -226,12 +226,15 @@ class ContentProxy
 
     /**
      * Try to fix the content retreived through the client-side rendering proxy.
+     * Some HTML tags will be escaped (ie: "&lt;img") in original content and
+     * their code will appear in the page body.
+     * This function processes the content to repair such escaped tags.
      *
      * @param string $content
      *
      * @return string
      */
-    private function fixClientSideRenderedProxyResponse($content)
+    private function fixClientSideRenderedProxyResponse($content): string
     {
         $content = preg_replace('/&lt;img ([^&]+)&gt;/', '<img \1 >', $content);
 
