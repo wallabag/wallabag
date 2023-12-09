@@ -481,7 +481,7 @@ import:
         how_to: Elixe o ficheiro de copia de apoio cos marcadores para importalos. Ten en conta que o proceso podería demorarse porque hai que descargar todos os artigos.
 export:
     unknown: Descoñecido
-    footer_template: <div style="text-align:center;"><p>Producido por wallabag con %method%</p><p>Abre <a href="https://github.com/wallabag/wallabag/issues">un issue</a> se tes problemas para visualizar este E-Book no teu dispositivo.</p></div>
+    footer_template: <div style="text-align:center;"><p>Creado por wallabag con %method%</p><p>Abre <a href="https://github.com/wallabag/wallabag/issues">unha incidencia</a> se tes problemas para visualizar este E-Book no teu dispositivo.</p></div>
 tag:
     new:
         placeholder: Podes engadir varias etiquetas, separadas por vírgulas.
