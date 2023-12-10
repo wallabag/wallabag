@@ -3,6 +3,7 @@ imports:
     - { resource: security.yaml }
     - { resource: services.yaml }
     - { resource: ../../config/packages/routing.yaml }
+    - { resource: ../../config/packages/translation.yaml }
     - { resource: ../../config/packages/wallabag.yaml }
 
 parameters:
@@ -13,15 +14,10 @@ parameters:
 
 framework:
     #esi:             ~
-    translator:
-        enabled: true
-        fallback: "%locale%"
-        default_path: '%kernel.project_dir%/translations'
     secret: "%secret%"
     csrf_protection: ~
     validation:
         enable_annotations: true
-    default_locale: "%locale%"
     session:
         # handler_id set to null will use default session handler from php.ini
         handler_id: session.handler.native_file
