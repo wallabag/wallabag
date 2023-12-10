@@ -1,5 +1,5 @@
 app:
-    resource: ../../src/Controller/
+    resource: ../src/Controller/
     type: annotation
 
 doc-api:
