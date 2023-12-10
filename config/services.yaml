@@ -33,37 +33,37 @@ services:
             $fonts: '%wallabag_core.fonts%'
 
     Wallabag\AnnotationBundle\:
-        resource: '../../src/Wallabag/AnnotationBundle/*'
-        exclude: '../../src/Wallabag/AnnotationBundle/{Controller,Entity,DataFixtures}'
+        resource: '../src/Wallabag/AnnotationBundle/*'
+        exclude: '../src/Wallabag/AnnotationBundle/{Controller,Entity,DataFixtures}'
 
     Wallabag\ApiBundle\:
-        resource: '../../src/Wallabag/ApiBundle/*'
-        exclude: '../../src/Wallabag/ApiBundle/{Controller,Entity}'
+        resource: '../src/Wallabag/ApiBundle/*'
+        exclude: '../src/Wallabag/ApiBundle/{Controller,Entity}'
 
     Wallabag\CoreBundle\:
-        resource: '../../src/Wallabag/CoreBundle/*'
-        exclude: ['../../src/Wallabag/CoreBundle/{Controller,Entity,DataFixtures}', '../../src/Wallabag/CoreBundle/Event/*Event.php']
+        resource: '../src/Wallabag/CoreBundle/*'
+        exclude: ['../src/Wallabag/CoreBundle/{Controller,Entity,DataFixtures}', '../src/Wallabag/CoreBundle/Event/*Event.php']
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     Wallabag\AnnotationBundle\Controller\:
-        resource: '../../src/Wallabag/AnnotationBundle/Controller/'
+        resource: '../src/Wallabag/AnnotationBundle/Controller/'
         tags: ['controller.service_arguments']
 
     Wallabag\ApiBundle\Controller\:
-        resource: '../../src/Wallabag/ApiBundle/Controller/'
+        resource: '../src/Wallabag/ApiBundle/Controller/'
         tags: ['controller.service_arguments']
 
     Wallabag\CoreBundle\Controller\:
-        resource: '../../src/Wallabag/CoreBundle/Controller/'
+        resource: '../src/Wallabag/CoreBundle/Controller/'
         tags: ['controller.service_arguments']
 
     Wallabag\ImportBundle\Controller\:
-        resource: '../../src/Wallabag/ImportBundle/Controller/'
+        resource: '../src/Wallabag/ImportBundle/Controller/'
         tags: ['controller.service_arguments']
 
     Wallabag\UserBundle\Controller\:
-        resource: '../../src/Wallabag/UserBundle/Controller/'
+        resource: '../src/Wallabag/UserBundle/Controller/'
         tags: ['controller.service_arguments']
 
     # inject alias service into controllers
@@ -128,12 +128,12 @@ services:
             $redisProducer: '@wallabag_import.producer.redis.pocket_html'
 
     Wallabag\ImportBundle\:
-        resource: '../../src/Wallabag/ImportBundle/*'
-        exclude: '../../src/Wallabag/ImportBundle/{Consumer,Controller,Redis}'
+        resource: '../src/Wallabag/ImportBundle/*'
+        exclude: '../src/Wallabag/ImportBundle/{Consumer,Controller,Redis}'
 
     Wallabag\UserBundle\:
-        resource: '../../src/Wallabag/UserBundle/*'
-        exclude: '../../src/Wallabag/UserBundle/{Controller,Entity,DataFixtures}'
+        resource: '../src/Wallabag/UserBundle/*'
+        exclude: '../src/Wallabag/UserBundle/{Controller,Entity,DataFixtures}'
 
     Doctrine\DBAL\Connection:
         alias: doctrine.dbal.default_connection
