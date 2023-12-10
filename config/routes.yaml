@@ -18,8 +18,8 @@ homepage:
     requirements:
         page: \d+
 
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+FOSUserBundle:
+    resource: routes/fos_user.yaml
 
 fos_oauth_server_token:
     resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
