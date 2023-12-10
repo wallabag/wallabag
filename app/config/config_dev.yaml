@@ -1,14 +1,6 @@
 imports:
     - { resource: config.yaml }
 
-framework:
-    profiler:
-        only_exceptions: false
-
-web_profiler:
-    toolbar: true
-    intercept_redirects: false
-
 monolog:
     handlers:
         main:
