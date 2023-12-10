@@ -1,0 +1,14 @@
+framework:
+    mailer:
+        dsn: "%mailer_dsn%"
+
+when@dev:
+    framework:
+        mailer:
+            # see https://mailcatcher.me/
+            dsn: smtp://127.0.0.1:1025
+
+when@test:
+    framework:
+        mailer:
+            dsn: 'null://null'

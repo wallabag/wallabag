@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yaml }
     - { resource: services.yaml }
+    - { resource: ../../config/packages/mailer.yaml }
     - { resource: ../../config/packages/routing.yaml }
     - { resource: ../../config/packages/translation.yaml }
     - { resource: ../../config/packages/wallabag.yaml }
@@ -25,8 +26,6 @@ framework:
         cookie_secure: auto
     fragments: ~
     http_method_override: true
-    mailer:
-        dsn: "%mailer_dsn%"
     http_client:
         scoped_clients:
             download_images.client:
