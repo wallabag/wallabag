@@ -1,13 +1,7 @@
+# see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
-    #esi:             ~
-    secret: "%env(APP_SECRET)%"
-    csrf_protection: ~
-    session:
-        # handler_id set to null will use default session handler from php.ini
-        handler_id: session.handler.native_file
-        save_path: "%kernel.project_dir%/var/sessions/%kernel.environment%"
-        cookie_secure: auto
-    fragments: ~
+    secret: '%env(APP_SECRET)%'
+    csrf_protection: true
     http_method_override: true
     http_client:
         scoped_clients:
@@ -19,8 +13,21 @@ framework:
                     Content-Type: 'application/json'
                     X-Accept: 'application/json'
 
+    # Enables session support. Note that the session will ONLY be started if you read or write from it.
+    # Remove or comment this section to explicitly disable session support.
+    session:
+        handler_id: null
+        cookie_secure: auto
+        cookie_samesite: lax
+        storage_factory_id: session.storage.factory.native
+
+    #esi: true
+    fragments: true
+    php_errors:
+        log: true
+
 when@test:
     framework:
-        test: ~
+        test: true
         session:
-            storage_id: session.storage.mock_file
+            storage_factory_id: session.storage.factory.mock_file
