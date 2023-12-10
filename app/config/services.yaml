@@ -1,7 +1,7 @@
 imports:
-    - { resource: services_rabbit.yml }
-    - { resource: services_redis.yml }
-    - { resource: parameters_addons.yml }
+    - { resource: services_rabbit.yaml }
+    - { resource: services_redis.yaml }
+    - { resource: parameters_addons.yaml }
 
 parameters:
     spiriit_form_filter.get_filter.doctrine_orm.class: Wallabag\Event\Subscriber\CustomDoctrineORMSubscriber
