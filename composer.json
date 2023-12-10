@@ -203,6 +203,7 @@
         },
         "classmap": [
             "app/AppKernel.php",
+            "src/Kernel.php",
             "app/AppCache.php"
         ]
     },
