@@ -24,10 +24,8 @@ FOSUserBundle:
 FOSOAuthServerBundle:
     resource: routes/fos_oauth_server.yaml
 
-craue_config_settings_modify:
-    path: /settings
-    defaults:
-        _controller: 'Craue\ConfigBundle\Controller\SettingsController::modifyAction'
+CraueConfigBundle:
+    resource: routes/craue_config.yaml
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
