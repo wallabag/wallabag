@@ -8,6 +8,7 @@ imports:
     - { resource: ../../config/packages/framework.yaml }
     - { resource: ../../config/packages/mailer.yaml }
     - { resource: ../../config/packages/monolog.yaml }
+    - { resource: ../../config/packages/nelmio_api_doc.yaml }
     - { resource: ../../config/packages/routing.yaml }
     - { resource: ../../config/packages/sentry.yaml }
     - { resource: ../../config/packages/stof_doctrine_extensions.yaml }
@@ -22,25 +23,6 @@ parameters:
     use_webpack_dev_server: false
     craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\SymfonyCacheComponentAdapter
     env(DATABASE_URL): '%database_scheme%://%database_user%:%database_password%@%database_host%:%database_port%/%database_name%?unix_socket=%database_socket%&charset=%database_charset%'
-
-nelmio_api_doc:
-    areas:
-        default:
-            disable_default_routes: true
-    documentation:
-        info:
-            title: wallabag API documentation
-            description: This is the API documentation of wallabag
-            version: 2.x
-        components:
-            securitySchemes:
-                Bearer:
-                    type: apiKey
-                    description: 'Value: Bearer {jwt}'
-                    name: Authorization
-                    in: header
-        security:
-            - Bearer: []
 
 nelmio_cors:
     defaults:

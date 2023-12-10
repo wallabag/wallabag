@@ -1,0 +1,18 @@
+nelmio_api_doc:
+    areas:
+        default:
+            disable_default_routes: true
+    documentation:
+        info:
+            title: wallabag API documentation
+            description: This is the API documentation of wallabag
+            version: 2.x
+        components:
+            securitySchemes:
+                Bearer:
+                    type: apiKey
+                    description: 'Value: Bearer {jwt}'
+                    name: Authorization
+                    in: header
+        security:
+            -   Bearer: [ ]
