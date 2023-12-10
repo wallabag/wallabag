@@ -13,6 +13,7 @@ imports:
     - { resource: ../../config/packages/nelmio_api_doc.yaml }
     - { resource: ../../config/packages/nelmio_cors.yaml }
     - { resource: ../../config/packages/routing.yaml }
+    - { resource: ../../config/packages/scheb_two_factor.yaml }
     - { resource: ../../config/packages/sentry.yaml }
     - { resource: ../../config/packages/stof_doctrine_extensions.yaml }
     - { resource: ../../config/packages/translation.yaml }
@@ -26,27 +27,6 @@ parameters:
     use_webpack_dev_server: false
     craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\SymfonyCacheComponentAdapter
     env(DATABASE_URL): '%database_scheme%://%database_user%:%database_password%@%database_host%:%database_port%/%database_name%?unix_socket=%database_socket%&charset=%database_charset%'
-
-scheb_two_factor:
-    trusted_device:
-        enabled: true
-        cookie_name: wllbg_trusted_computer
-        lifetime: 2592000
-
-    backup_codes:
-        enabled: true
-
-    google:
-        enabled: true
-        issuer: "%server_name%"
-        template: "Authentication/form.html.twig"
-
-    email:
-        enabled: true
-        sender_email: "%twofactor_sender%"
-        digits: 6
-        template: "Authentication/form.html.twig"
-        mailer: Wallabag\Mailer\AuthCodeMailer
 
 rulerz:
     targets:
