@@ -1,7 +1,7 @@
 imports:
     - { resource: config_dev.yaml }
     - { resource: parameters_test.yaml }
-    - { resource: services_test.yaml }
+    - { resource: ../../config/services_test.yaml }
 
 parameters:
     fosuser_registration: true
