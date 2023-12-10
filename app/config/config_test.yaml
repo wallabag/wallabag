@@ -1,4 +1,0 @@
-imports:
-    - { resource: config_dev.yaml }
-    - { resource: ../../config/parameters_test.yaml }
-    - { resource: ../../config/services_test.yaml }

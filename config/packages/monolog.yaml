@@ -12,7 +12,7 @@ when@prod:
             console:
                 type: console
 
-when@dev:
+when@dev: &monolog_dev
     monolog:
         handlers:
             main:
@@ -35,3 +35,5 @@ when@dev:
                     VERBOSITY_VERY_VERBOSE: NOTICE
                     VERBOSITY_DEBUG: DEBUG
                 channels: [ doctrine ]
+
+when@test: *monolog_dev

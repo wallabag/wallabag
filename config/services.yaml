@@ -1,4 +1,5 @@
 imports:
+    - { resource: ../app/config/parameters.yml }
     - { resource: services_rabbit.yaml }
     - { resource: services_redis.yaml }
     - { resource: parameters_addons.yaml }
