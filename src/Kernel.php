@@ -40,17 +40,17 @@ class Kernel extends BaseKernel
         ];
 
         if (\in_array($this->getEnvironment(), ['dev', 'test'], true)) {
-            $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
-            $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
+            $bundles[] = new \Symfony\Bundle\DebugBundle\DebugBundle();
+            $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
+            $bundles[] = new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
 
             if ('test' === $this->getEnvironment()) {
-                $bundles[] = new DAMA\DoctrineTestBundle\DAMADoctrineTestBundle();
+                $bundles[] = new \DAMA\DoctrineTestBundle\DAMADoctrineTestBundle();
             }
 
             if ('dev' === $this->getEnvironment()) {
-                $bundles[] = new Symfony\Bundle\MakerBundle\MakerBundle();
-                $bundles[] = new Symfony\Bundle\WebServerBundle\WebServerBundle();
+                $bundles[] = new \Symfony\Bundle\MakerBundle\MakerBundle();
+                $bundles[] = new \Symfony\Bundle\WebServerBundle\WebServerBundle();
             }
         }
 
