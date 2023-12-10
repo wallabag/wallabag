@@ -1,0 +1,28 @@
+nelmio_cors:
+    defaults:
+        allow_credentials: false
+        allow_origin: [ ]
+        allow_headers: [ ]
+        allow_methods: [ ]
+        expose_headers: [ ]
+        max_age: 0
+        hosts: [ ]
+        #origin_regex: false
+    paths:
+        '^/api/':
+            allow_origin: [ '*' ]
+            allow_headers: [ 'Authorization','content-type' ]
+            allow_methods: [ 'POST', 'PUT', 'PATCH','GET', 'DELETE' ]
+            max_age: 3600
+        '^/oauth/':
+            allow_origin: [ '*' ]
+            allow_headers: [ 'Authorization','content-type' ]
+            allow_methods: [ 'POST', 'PUT', 'GET', 'DELETE' ]
+            max_age: 3600
+        '^/':
+            #origin_regex: true
+            allow_origin: [ '*' ]
+            allow_headers: [ 'Authorization','content-type' ]
+            allow_methods: [ 'POST', 'PUT', 'GET', 'DELETE' ]
+            max_age: 3600
+            hosts: [ '^api\.' ]

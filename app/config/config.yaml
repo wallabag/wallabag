@@ -9,6 +9,7 @@ imports:
     - { resource: ../../config/packages/mailer.yaml }
     - { resource: ../../config/packages/monolog.yaml }
     - { resource: ../../config/packages/nelmio_api_doc.yaml }
+    - { resource: ../../config/packages/nelmio_cors.yaml }
     - { resource: ../../config/packages/routing.yaml }
     - { resource: ../../config/packages/sentry.yaml }
     - { resource: ../../config/packages/stof_doctrine_extensions.yaml }
@@ -23,35 +24,6 @@ parameters:
     use_webpack_dev_server: false
     craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\SymfonyCacheComponentAdapter
     env(DATABASE_URL): '%database_scheme%://%database_user%:%database_password%@%database_host%:%database_port%/%database_name%?unix_socket=%database_socket%&charset=%database_charset%'
-
-nelmio_cors:
-    defaults:
-        allow_credentials: false
-        allow_origin: []
-        allow_headers: []
-        allow_methods: []
-        expose_headers: []
-        max_age: 0
-        hosts: []
-        #origin_regex: false
-    paths:
-        '^/api/':
-            allow_origin: ['*']
-            allow_headers: ['Authorization','content-type']
-            allow_methods: ['POST', 'PUT', 'PATCH','GET', 'DELETE']
-            max_age: 3600
-        '^/oauth/':
-            allow_origin: ['*']
-            allow_headers: ['Authorization','content-type']
-            allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
-            max_age: 3600
-        '^/':
-            #origin_regex: true
-            allow_origin: ['*']
-            allow_headers: ['Authorization','content-type']
-            allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
-            max_age: 3600
-            hosts: ['^api\.']
 
 fos_user:
     db_driver: orm
