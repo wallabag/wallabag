@@ -4,6 +4,7 @@ imports:
     - { resource: services.yaml }
     - { resource: ../../config/packages/doctrine.yaml }
     - { resource: ../../config/packages/doctrine_migrations.yaml }
+    - { resource: ../../config/packages/fos_rest.yaml }
     - { resource: ../../config/packages/framework.yaml }
     - { resource: ../../config/packages/mailer.yaml }
     - { resource: ../../config/packages/monolog.yaml }
@@ -21,41 +22,6 @@ parameters:
     use_webpack_dev_server: false
     craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\SymfonyCacheComponentAdapter
     env(DATABASE_URL): '%database_scheme%://%database_user%:%database_password%@%database_host%:%database_port%/%database_name%?unix_socket=%database_socket%&charset=%database_charset%'
-
-fos_rest:
-    param_fetcher_listener: true
-    body_listener: true
-    view:
-        mime_types:
-            csv:
-                - 'text/csv'
-                - 'text/plain'
-            pdf:
-                - 'application/pdf'
-            epub:
-                - 'application/epub+zip'
-        view_response_listener: 'force'
-        formats:
-            xml: true
-            json: true
-            txt: true
-            csv: true
-            pdf: true
-            epub: true
-        failed_validation: HTTP_BAD_REQUEST
-    routing_loader: false
-    format_listener:
-        enabled: true
-        rules:
-            - { path: "^/api/entries/([0-9]+)/export.(.*)", priorities: ['epub', 'pdf', 'txt', 'csv'], fallback_format: json, prefer_extension: false }
-            - { path: "^/api", priorities: ['json', 'xml'], fallback_format: json, prefer_extension: false }
-            - { path: "^/annotations", priorities: ['json', 'xml'], fallback_format: json, prefer_extension: false }
-            # for an unknown reason, EACH REQUEST goes to FOS\RestBundle\EventListener\FormatListener
-            # so we need to add custom rule for custom api export but also for all other routes of the application...
-            - { path: '^/', priorities: ['text/html', '*/*'], fallback_format: html, prefer_extension: false }
-    exception:
-        messages:
-            Symfony\Component\HttpKernel\Exception\BadRequestHttpException: true
 
 nelmio_api_doc:
     areas:
