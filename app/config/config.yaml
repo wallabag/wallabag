@@ -3,6 +3,7 @@ imports:
     - { resource: security.yaml }
     - { resource: services.yaml }
     - { resource: ../../config/packages/doctrine.yaml }
+    - { resource: ../../config/packages/doctrine_migrations.yaml }
     - { resource: ../../config/packages/framework.yaml }
     - { resource: ../../config/packages/mailer.yaml }
     - { resource: ../../config/packages/monolog.yaml }
@@ -27,16 +28,6 @@ stof_doctrine_extensions:
         default:
             tree: true
             sluggable: true
-
-doctrine_migrations:
-    migrations_paths:
-        'Application\Migrations': '%kernel.project_dir%/migrations'
-    storage:
-        table_storage:
-            table_name: 'migration_versions'
-            version_column_name: 'version'
-            version_column_length: 192
-            executed_at_column_name: 'executed_at'
 
 fos_rest:
     param_fetcher_listener: true
