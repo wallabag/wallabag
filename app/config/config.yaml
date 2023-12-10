@@ -2,7 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yaml }
     - { resource: services.yaml }
-    - { resource: wallabag.yaml }
+    - { resource: ../../config/packages/wallabag.yaml }
 
 parameters:
     # Allows to use the live reload feature for changes in assets
