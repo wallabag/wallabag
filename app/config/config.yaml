@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yaml }
     - { resource: services.yaml }
+    - { resource: ../../config/packages/routing.yaml }
     - { resource: ../../config/packages/wallabag.yaml }
 
 parameters:
@@ -17,9 +18,6 @@ framework:
         fallback: "%locale%"
         default_path: '%kernel.project_dir%/translations'
     secret: "%secret%"
-    router:
-        resource: "%kernel.project_dir%/app/config/routing.yaml"
-        strict_requirements: ~
     csrf_protection: ~
     validation:
         enable_annotations: true

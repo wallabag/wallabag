@@ -2,9 +2,6 @@ imports:
     - { resource: config.yaml }
 
 framework:
-    router:
-        resource: "%kernel.project_dir%/app/config/routing_dev.yaml"
-        strict_requirements: true
     profiler:
         only_exceptions: false
 
