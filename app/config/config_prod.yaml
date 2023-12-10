@@ -1,5 +1,2 @@
 imports:
     - { resource: config.yaml }
-
-sentry:
-    dsn: "%sentry_dsn%"
