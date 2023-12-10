@@ -1,6 +1,5 @@
 imports:
     - { resource: parameters.yml }
-    - { resource: security.yaml }
     - { resource: ../../config/services.yaml }
     - { resource: ../../config/packages/craue_config.yaml }
     - { resource: ../../config/packages/dama_doctrine_test_bundle.yaml }
@@ -22,6 +21,7 @@ imports:
     - { resource: ../../config/packages/old_sound_rabbit_mq.yaml }
     - { resource: ../../config/packages/routing.yaml }
     - { resource: ../../config/packages/scheb_two_factor.yaml }
+    - { resource: ../../config/packages/security.yaml }
     - { resource: ../../config/packages/sensio_framework_extra.yaml }
     - { resource: ../../config/packages/sentry.yaml }
     - { resource: ../../config/packages/stof_doctrine_extensions.yaml }
