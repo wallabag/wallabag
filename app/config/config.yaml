@@ -9,6 +9,7 @@ imports:
     - { resource: ../../config/packages/routing.yaml }
     - { resource: ../../config/packages/sentry.yaml }
     - { resource: ../../config/packages/translation.yaml }
+    - { resource: ../../config/packages/twig.yaml }
     - { resource: ../../config/packages/validator.yaml }
     - { resource: ../../config/packages/wallabag.yaml }
     - { resource: ../../config/packages/web_profiler.yaml }
@@ -18,16 +19,6 @@ parameters:
     use_webpack_dev_server: false
     craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\SymfonyCacheComponentAdapter
     env(DATABASE_URL): '%database_scheme%://%database_user%:%database_password%@%database_host%:%database_port%/%database_name%?unix_socket=%database_socket%&charset=%database_charset%'
-
-# Twig Configuration
-twig:
-    default_path: '%kernel.project_dir%/templates'
-    debug: "%kernel.debug%"
-    strict_variables: "%kernel.debug%"
-    form_themes:
-        - "@SpiriitFormFilter/Form/form_div_layout.html.twig"
-    globals:
-        registration_enabled: '%fosuser_registration%'
 
 stof_doctrine_extensions:
     default_locale: "%locale%"
