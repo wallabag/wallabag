@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yaml }
     - { resource: services.yaml }
+    - { resource: ../../config/packages/doctrine.yaml }
     - { resource: ../../config/packages/framework.yaml }
     - { resource: ../../config/packages/mailer.yaml }
     - { resource: ../../config/packages/routing.yaml }
@@ -25,26 +26,6 @@ twig:
         - "@SpiriitFormFilter/Form/form_div_layout.html.twig"
     globals:
         registration_enabled: '%fosuser_registration%'
-
-# Doctrine Configuration
-doctrine:
-    dbal:
-        url: '%env(resolve:DATABASE_URL)%'
-        types:
-            json_array: Wallabag\Doctrine\JsonArrayType
-
-    orm:
-        auto_generate_proxy_classes: "%kernel.debug%"
-        entity_managers:
-            default:
-                auto_mapping: true
-                mappings:
-                    Wallabag:
-                        type: annotation
-                        is_bundle: false
-                        dir: '%kernel.project_dir%/src/Entity'
-                        prefix: 'Wallabag\Entity'
-                        alias: Wallabag
 
 stof_doctrine_extensions:
     default_locale: "%locale%"

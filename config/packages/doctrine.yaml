@@ -1,0 +1,49 @@
+doctrine:
+    dbal:
+        url: '%env(resolve:DATABASE_URL)%'
+        types:
+            json_array: Wallabag\Doctrine\JsonArrayType
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        entity_managers:
+            default:
+                auto_mapping: true
+                mappings:
+                    Wallabag:
+                        type: annotation
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/Entity'
+                        prefix: 'Wallabag\Entity'
+                        alias: Wallabag
+
+
+when@prod:
+    #doctrine:
+    #    orm:
+    #        metadata_cache_driver: apc
+    #        result_cache_driver: apc
+    #        query_cache_driver: apc
+
+when@dev:
+    # If you want to use cache for queries used in WallabagExtension
+    # Uncomment the following lines
+    #doctrine:
+    #    orm:
+    #        metadata_cache_driver: apcu
+    #        result_cache_driver: apcu
+    #        query_cache_driver: apcu
+
+when@test:
+    doctrine:
+        dbal:
+            dbname_suffix: '%wallabag_dbname_suffix%' # for MySQL and PostgreSQL
+            use_savepoints: true
+
+        orm:
+            metadata_cache_driver:
+                type: service
+                id: filesystem_cache
+            query_cache_driver:
+                type: service
+                id: filesystem_cache
