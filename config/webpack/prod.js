@@ -86,7 +86,7 @@ module.exports = merge(commonConfig, {
         exclude: /node_modules/,
         type: 'asset/resource',
         generator: {
-          filename: (content) => content.filename.replace('app/Resources/static/', ''),
+          filename: (content) => content.filename.replace('assets/', ''),
         },
       },
       {
