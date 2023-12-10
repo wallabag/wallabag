@@ -1,8 +1,4 @@
 imports:
     - { resource: config_dev.yaml }
-    - { resource: parameters_test.yaml }
+    - { resource: ../../config/parameters_test.yaml }
     - { resource: ../../config/services_test.yaml }
-
-parameters:
-    fosuser_registration: true
-    wallabag_dbname_suffix: '_test'

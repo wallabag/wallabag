@@ -1,3 +1,7 @@
+parameters:
+    fosuser_registration: true
+    wallabag_dbname_suffix: '_test'
+
 services:
     filesystem_cache:
         class: Doctrine\Common\Cache\FilesystemCache
