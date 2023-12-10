@@ -5,15 +5,3 @@ imports:
 
 parameters:
     fosuser_registration: true
-
-doctrine:
-    dbal:
-        dbname_suffix: '_test' # for MySQL and PostgreSQL
-
-    orm:
-        metadata_cache_driver:
-            type: service
-            id: filesystem_cache
-        query_cache_driver:
-            type: service
-            id: filesystem_cache
