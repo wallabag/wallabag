@@ -22,9 +22,8 @@ app:
     resource: "@WallabagCoreBundle/Controller/"
     type: annotation
 
-doc-api:
-    resource: "@NelmioApiDocBundle/Resources/config/routing/swaggerui.xml"
-    prefix: /api/doc
+NelmioApiDocBundle:
+    resource: routes/nelmio_api_doc.yaml
 
 homepage:
     path: "/{page}"
