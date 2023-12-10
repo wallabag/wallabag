@@ -204,7 +204,8 @@
         "classmap": [
             "app/AppKernel.php",
             "src/Kernel.php",
-            "app/AppCache.php"
+            "app/AppCache.php",
+            "src/CacheKernel.php"
         ]
     },
     "autoload-dev": {
