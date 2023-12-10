@@ -1,9 +1,8 @@
 WebProfilerBundle:
     resource: web_profiler.yaml
 
-_errors:
-    resource: '@FrameworkBundle/Resources/config/routing/errors.xml'
-    prefix: /_error
+FrameworkBundle:
+    resource: framework.yaml
 
 _main:
     resource: ../../routes.yaml
