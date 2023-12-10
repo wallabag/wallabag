@@ -1,6 +1,5 @@
 imports:
     - { resource: parameters.yml }
-    - { resource: ../../config/services.yaml }
     - { resource: ../../config/packages/craue_config.yaml }
     - { resource: ../../config/packages/doctrine.yaml }
     - { resource: ../../config/packages/doctrine_migrations.yaml }
@@ -28,3 +27,4 @@ imports:
     - { resource: ../../config/packages/validator.yaml }
     - { resource: ../../config/packages/wallabag.yaml }
     - { resource: ../../config/packages/web_profiler.yaml }
+    - { resource: ../../config/services.yaml }
