@@ -1,22 +1,5 @@
-app:
-    resource: ../src/Controller/
-    type: annotation
-
 NelmioApiDocBundle:
     resource: routes/nelmio_api_doc.yaml
-
-doc-api-json:
-    path: /api/doc.json
-    methods: GET
-    defaults: { _controller: nelmio_api_doc.controller.swagger }
-
-homepage:
-    path: "/{page}"
-    defaults:
-        _controller: 'Wallabag\Controller\EntryController::showUnreadAction'
-        page : 1
-    requirements:
-        page: \d+
 
 FOSUserBundle:
     resource: routes/fos_user.yaml
@@ -32,6 +15,23 @@ FOSJsRoutingBundle:
 
 SchebTwoFactorBundle:
     resource: routes/scheb_two_factor.yaml
+
+app:
+    resource: ../src/Controller/
+    type: annotation
+
+doc-api-json:
+    path: /api/doc.json
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger }
+
+homepage:
+    path: "/{page}"
+    defaults:
+        _controller: 'Wallabag\Controller\EntryController::showUnreadAction'
+        page : 1
+    requirements:
+        page: \d+
 
 # redirect RSS feed to Atom
 rss_to_atom_unread:
