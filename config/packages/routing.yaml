@@ -1,10 +1,10 @@
 framework:
     router:
-        resource: "%kernel.project_dir%/app/config/routing.yaml"
+        resource: "%kernel.project_dir%/config/routes.yaml"
         strict_requirements: ~
 
 when@dev:
     framework:
         router:
-            resource: "%kernel.project_dir%/app/config/routing_dev.yaml"
+            resource: "%kernel.project_dir%/config/routes/dev/routes.yaml"
             strict_requirements: true

@@ -11,4 +11,4 @@ _errors:
     prefix: /_error
 
 _main:
-    resource: routing.yaml
+    resource: ../../routes.yaml
