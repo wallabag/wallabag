@@ -4,6 +4,7 @@ imports:
     - { resource: services.yaml }
     - { resource: ../../config/packages/doctrine.yaml }
     - { resource: ../../config/packages/doctrine_migrations.yaml }
+    - { resource: ../../config/packages/fos_oauth_server.yaml }
     - { resource: ../../config/packages/fos_rest.yaml }
     - { resource: ../../config/packages/fos_user.yaml }
     - { resource: ../../config/packages/framework.yaml }
@@ -25,18 +26,6 @@ parameters:
     use_webpack_dev_server: false
     craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\SymfonyCacheComponentAdapter
     env(DATABASE_URL): '%database_scheme%://%database_user%:%database_password%@%database_host%:%database_port%/%database_name%?unix_socket=%database_socket%&charset=%database_charset%'
-
-fos_oauth_server:
-    db_driver:           orm
-    client_class:        Wallabag\Entity\Api\Client
-    access_token_class:  Wallabag\Entity\Api\AccessToken
-    refresh_token_class: Wallabag\Entity\Api\RefreshToken
-    auth_code_class:     Wallabag\Entity\Api\AuthCode
-    service:
-        user_provider: fos_user.user_provider.username_email
-        options:
-            refresh_token_lifetime: "%fos_oauth_server_refresh_token_lifetime%"
-            access_token_lifetime: "%fos_oauth_server_access_token_lifetime%"
 
 scheb_two_factor:
     trusted_device:

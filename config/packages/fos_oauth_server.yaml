@@ -1,0 +1,11 @@
+fos_oauth_server:
+    db_driver: orm
+    client_class: Wallabag\Entity\Api\Client
+    access_token_class: Wallabag\Entity\Api\AccessToken
+    refresh_token_class: Wallabag\Entity\Api\RefreshToken
+    auth_code_class: Wallabag\Entity\Api\AuthCode
+    service:
+        user_provider: fos_user.user_provider.username_email
+        options:
+            refresh_token_lifetime: "%fos_oauth_server_refresh_token_lifetime%"
+            access_token_lifetime: "%fos_oauth_server_access_token_lifetime%"
