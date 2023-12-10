@@ -1,6 +1,6 @@
 framework:
     #esi:             ~
-    secret: "%secret%"
+    secret: "%env(APP_SECRET)%"
     csrf_protection: ~
     session:
         # handler_id set to null will use default session handler from php.ini
