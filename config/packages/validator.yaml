@@ -1,0 +1,3 @@
+framework:
+    validation:
+        enable_annotations: true
