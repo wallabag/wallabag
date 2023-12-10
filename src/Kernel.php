@@ -11,53 +11,53 @@ class Kernel extends BaseKernel
     public function registerBundles()
     {
         $bundles = [
-            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new Symfony\Bundle\SecurityBundle\SecurityBundle(),
-            new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new Symfony\Bundle\MonologBundle\MonologBundle(),
-            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new FOS\RestBundle\FOSRestBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle(),
-            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
-            new Nelmio\CorsBundle\NelmioCorsBundle(),
-            new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
-            new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
-            new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new Scheb\TwoFactorBundle\SchebTwoFactorBundle(),
-            new KPhoen\RulerZBundle\KPhoenRulerZBundle(),
-            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
-            new Craue\ConfigBundle\CraueConfigBundle(),
-            new BabDev\PagerfantaBundle\BabDevPagerfantaBundle(),
-            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new BD\GuzzleSiteAuthenticatorBundle\BDGuzzleSiteAuthenticatorBundle(),
-            new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
-            new Http\HttplugBundle\HttplugBundle(),
-            new Sentry\SentryBundle\SentryBundle(),
-            new Twig\Extra\TwigExtraBundle\TwigExtraBundle(),
+            new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+            new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
+            new \Symfony\Bundle\TwigBundle\TwigBundle(),
+            new \Symfony\Bundle\MonologBundle\MonologBundle(),
+            new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+            new \Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            new \FOS\RestBundle\FOSRestBundle(),
+            new \FOS\UserBundle\FOSUserBundle(),
+            new \JMS\SerializerBundle\JMSSerializerBundle(),
+            new \Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+            new \Nelmio\CorsBundle\NelmioCorsBundle(),
+            new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
+            new \Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
+            new \FOS\OAuthServerBundle\FOSOAuthServerBundle(),
+            new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new \Scheb\TwoFactorBundle\SchebTwoFactorBundle(),
+            new \KPhoen\RulerZBundle\KPhoenRulerZBundle(),
+            new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new \Craue\ConfigBundle\CraueConfigBundle(),
+            new \BabDev\PagerfantaBundle\BabDevPagerfantaBundle(),
+            new \FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new \BD\GuzzleSiteAuthenticatorBundle\BDGuzzleSiteAuthenticatorBundle(),
+            new \OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
+            new \Http\HttplugBundle\HttplugBundle(),
+            new \Sentry\SentryBundle\SentryBundle(),
+            new \Twig\Extra\TwigExtraBundle\TwigExtraBundle(),
 
             // wallabag bundles
-            new Wallabag\CoreBundle\WallabagCoreBundle(),
-            new Wallabag\ApiBundle\WallabagApiBundle(),
-            new Wallabag\UserBundle\WallabagUserBundle(),
-            new Wallabag\ImportBundle\WallabagImportBundle(),
-            new Wallabag\AnnotationBundle\WallabagAnnotationBundle(),
+            new \Wallabag\CoreBundle\WallabagCoreBundle(),
+            new \Wallabag\ApiBundle\WallabagApiBundle(),
+            new \Wallabag\UserBundle\WallabagUserBundle(),
+            new \Wallabag\ImportBundle\WallabagImportBundle(),
+            new \Wallabag\AnnotationBundle\WallabagAnnotationBundle(),
         ];
 
         if (\in_array($this->getEnvironment(), ['dev', 'test'], true)) {
-            $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
-            $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
+            $bundles[] = new \Symfony\Bundle\DebugBundle\DebugBundle();
+            $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
+            $bundles[] = new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
 
             if ('test' === $this->getEnvironment()) {
-                $bundles[] = new DAMA\DoctrineTestBundle\DAMADoctrineTestBundle();
+                $bundles[] = new \DAMA\DoctrineTestBundle\DAMADoctrineTestBundle();
             }
 
             if ('dev' === $this->getEnvironment()) {
-                $bundles[] = new Symfony\Bundle\MakerBundle\MakerBundle();
-                $bundles[] = new Symfony\Bundle\WebServerBundle\WebServerBundle();
+                $bundles[] = new \Symfony\Bundle\MakerBundle\MakerBundle();
+                $bundles[] = new \Symfony\Bundle\WebServerBundle\WebServerBundle();
             }
         }
 
