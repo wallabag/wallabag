@@ -1,5 +1,5 @@
 imports:
-    - { resource: config.yml }
+    - { resource: config.yaml }
 
 framework:
     assets:

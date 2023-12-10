@@ -1,8 +1,8 @@
 imports:
     - { resource: parameters.yml }
-    - { resource: security.yml }
-    - { resource: services.yml }
-    - { resource: wallabag.yml }
+    - { resource: security.yaml }
+    - { resource: services.yaml }
+    - { resource: wallabag.yaml }
 
 parameters:
     # Allows to use the live reload feature for changes in assets
@@ -18,7 +18,7 @@ framework:
         default_path: '%kernel.project_dir%/translations'
     secret: "%secret%"
     router:
-        resource: "%kernel.project_dir%/app/config/routing.yml"
+        resource: "%kernel.project_dir%/app/config/routing.yaml"
         strict_requirements: ~
     form: ~
     csrf_protection: ~
