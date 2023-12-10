@@ -8,6 +8,7 @@ imports:
     - { resource: ../../config/packages/fos_rest.yaml }
     - { resource: ../../config/packages/fos_user.yaml }
     - { resource: ../../config/packages/framework.yaml }
+    - { resource: ../../config/packages/kphoen_rulerz.yaml }
     - { resource: ../../config/packages/mailer.yaml }
     - { resource: ../../config/packages/monolog.yaml }
     - { resource: ../../config/packages/nelmio_api_doc.yaml }
@@ -27,10 +28,6 @@ parameters:
     use_webpack_dev_server: false
     craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\SymfonyCacheComponentAdapter
     env(DATABASE_URL): '%database_scheme%://%database_user%:%database_password%@%database_host%:%database_port%/%database_name%?unix_socket=%database_socket%&charset=%database_charset%'
-
-rulerz:
-    targets:
-        doctrine: true
 
 old_sound_rabbit_mq:
     connections:
