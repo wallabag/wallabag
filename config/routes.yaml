@@ -1,21 +1,3 @@
-NelmioApiDocBundle:
-    resource: routes/nelmio_api_doc.yaml
-
-FOSUserBundle:
-    resource: routes/fos_user.yaml
-
-FOSOAuthServerBundle:
-    resource: routes/fos_oauth_server.yaml
-
-CraueConfigBundle:
-    resource: routes/craue_config.yaml
-
-FOSJsRoutingBundle:
-    resource: routes/fos_js_routing.yaml
-
-SchebTwoFactorBundle:
-    resource: routes/scheb_two_factor.yaml
-
 app:
     resource: ../src/Controller/
     type: annotation

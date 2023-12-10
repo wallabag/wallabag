@@ -1,8 +1,0 @@
-WebProfilerBundle:
-    resource: web_profiler.yaml
-
-FrameworkBundle:
-    resource: framework.yaml
-
-_main:
-    resource: ../../routes.yaml

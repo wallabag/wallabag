@@ -1,3 +1,6 @@
+imports:
+    - { resource: parameters_test.yaml }
+
 parameters:
     fosuser_registration: true
     wallabag_dbname_suffix: '_test'
