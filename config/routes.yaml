@@ -21,8 +21,8 @@ homepage:
 FOSUserBundle:
     resource: routes/fos_user.yaml
 
-fos_oauth_server_token:
-    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
+FOSOAuthServerBundle:
+    resource: routes/fos_oauth_server.yaml
 
 craue_config_settings_modify:
     path: /settings
