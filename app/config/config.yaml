@@ -5,6 +5,7 @@ imports:
     - { resource: ../../config/packages/doctrine.yaml }
     - { resource: ../../config/packages/framework.yaml }
     - { resource: ../../config/packages/mailer.yaml }
+    - { resource: ../../config/packages/monolog.yaml }
     - { resource: ../../config/packages/routing.yaml }
     - { resource: ../../config/packages/translation.yaml }
     - { resource: ../../config/packages/validator.yaml }
