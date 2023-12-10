@@ -1,3 +1,6 @@
+parameters:
+    fosuser_registration: true
+
 services:
     # see https://github.com/symfony/symfony/issues/24543
     fos_user.user_manager.test:
