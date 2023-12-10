@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yaml }
     - { resource: services.yaml }
+    - { resource: ../../config/packages/framework.yaml }
     - { resource: ../../config/packages/mailer.yaml }
     - { resource: ../../config/packages/routing.yaml }
     - { resource: ../../config/packages/translation.yaml }
@@ -14,27 +15,6 @@ parameters:
     use_webpack_dev_server: false
     craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\SymfonyCacheComponentAdapter
     env(DATABASE_URL): '%database_scheme%://%database_user%:%database_password%@%database_host%:%database_port%/%database_name%?unix_socket=%database_socket%&charset=%database_charset%'
-
-framework:
-    #esi:             ~
-    secret: "%secret%"
-    csrf_protection: ~
-    session:
-        # handler_id set to null will use default session handler from php.ini
-        handler_id: session.handler.native_file
-        save_path: "%kernel.project_dir%/var/sessions/%kernel.environment%"
-        cookie_secure: auto
-    fragments: ~
-    http_method_override: true
-    http_client:
-        scoped_clients:
-            download_images.client:
-                scope: '.*'
-            pocket.client:
-                scope: '.*'
-                headers:
-                    Content-Type: 'application/json'
-                    X-Accept: 'application/json'
 
 # Twig Configuration
 twig:

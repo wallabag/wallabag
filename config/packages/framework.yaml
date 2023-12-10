@@ -1,0 +1,26 @@
+framework:
+    #esi:             ~
+    secret: "%secret%"
+    csrf_protection: ~
+    session:
+        # handler_id set to null will use default session handler from php.ini
+        handler_id: session.handler.native_file
+        save_path: "%kernel.project_dir%/var/sessions/%kernel.environment%"
+        cookie_secure: auto
+    fragments: ~
+    http_method_override: true
+    http_client:
+        scoped_clients:
+            download_images.client:
+                scope: '.*'
+            pocket.client:
+                scope: '.*'
+                headers:
+                    Content-Type: 'application/json'
+                    X-Accept: 'application/json'
+
+when@test:
+    framework:
+        test: ~
+        session:
+            storage_id: session.storage.mock_file
