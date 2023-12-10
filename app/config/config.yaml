@@ -9,6 +9,7 @@ imports:
     - { resource: ../../config/packages/fos_rest.yaml }
     - { resource: ../../config/packages/fos_user.yaml }
     - { resource: ../../config/packages/framework.yaml }
+    - { resource: ../../config/packages/httplug.yaml }
     - { resource: ../../config/packages/jms_serializer.yaml }
     - { resource: ../../config/packages/kphoen_rulerz.yaml }
     - { resource: ../../config/packages/mailer.yaml }
@@ -32,17 +33,6 @@ parameters:
     use_webpack_dev_server: false
     craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\SymfonyCacheComponentAdapter
     env(DATABASE_URL): '%database_scheme%://%database_user%:%database_password%@%database_host%:%database_port%/%database_name%?unix_socket=%database_socket%&charset=%database_charset%'
-
-httplug:
-    clients:
-        wallabag:
-            factory: Wallabag\Helper\HttpClientFactory
-            config:
-                defaults:
-                    timeout: 10
-            plugins: ['httplug.plugin.logger']
-    discovery:
-        client: false
 
 # define custom entity so we can override length attribute to fix utf8mb4 issue
 craue_config:
