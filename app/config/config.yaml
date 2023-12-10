@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yaml }
     - { resource: services.yaml }
+    - { resource: ../../config/packages/craue_config.yaml }
     - { resource: ../../config/packages/doctrine.yaml }
     - { resource: ../../config/packages/doctrine_migrations.yaml }
     - { resource: ../../config/packages/fos_js_routing.yaml }
@@ -34,10 +35,6 @@ parameters:
     craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\SymfonyCacheComponentAdapter
     env(DATABASE_URL): '%database_scheme%://%database_user%:%database_password%@%database_host%:%database_port%/%database_name%?unix_socket=%database_socket%&charset=%database_charset%'
 
-# define custom entity so we can override length attribute to fix utf8mb4 issue
-craue_config:
-    entity_name: Wallabag\Entity\InternalSetting
-
 when@dev:
-    maker:
-        root_namespace: 'Wallabag'
+  maker:
+    root_namespace: 'Wallabag'
