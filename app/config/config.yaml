@@ -18,6 +18,7 @@ imports:
     - { resource: ../../config/packages/old_sound_rabbit_mq.yaml }
     - { resource: ../../config/packages/routing.yaml }
     - { resource: ../../config/packages/scheb_two_factor.yaml }
+    - { resource: ../../config/packages/sensio_framework_extra.yaml }
     - { resource: ../../config/packages/sentry.yaml }
     - { resource: ../../config/packages/stof_doctrine_extensions.yaml }
     - { resource: ../../config/packages/translation.yaml }
@@ -31,11 +32,6 @@ parameters:
     use_webpack_dev_server: false
     craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\SymfonyCacheComponentAdapter
     env(DATABASE_URL): '%database_scheme%://%database_user%:%database_password%@%database_host%:%database_port%/%database_name%?unix_socket=%database_socket%&charset=%database_charset%'
-
-# see https://github.com/symfony/symfony-standard/pull/1133
-sensio_framework_extra:
-   router:
-        annotations: false
 
 httplug:
     clients:
