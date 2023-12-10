@@ -27,8 +27,8 @@ FOSOAuthServerBundle:
 CraueConfigBundle:
     resource: routes/craue_config.yaml
 
-fos_js_routing:
-    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+FOSJsRoutingBundle:
+    resource: routes/fos_js_routing.yaml
 
 2fa_login:
     path: /2fa
