@@ -128,6 +128,7 @@
         "symfony/dependency-injection": "^5.4.34",
         "symfony/doctrine-bridge": "^5.4.34",
         "symfony/dom-crawler": "^5.4.32",
+        "symfony/dotenv": "^5.4.34",
         "symfony/error-handler": "^5.4.29",
         "symfony/event-dispatcher": "^5.4.34",
         "symfony/event-dispatcher-contracts": "^2.5.2",
