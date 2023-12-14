@@ -15119,31 +15119,34 @@
         },
         {
             "name": "willdurand/hateoas-bundle",
-            "version": "2.5.0",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/BazingaHateoasBundle.git",
-                "reference": "f9f09f02c464469ff4deb5dfe6619c4c1409ef44"
+                "reference": "ccbdde8356ef02cbc72ac7ec40c7f1db3382b4ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/BazingaHateoasBundle/zipball/f9f09f02c464469ff4deb5dfe6619c4c1409ef44",
-                "reference": "f9f09f02c464469ff4deb5dfe6619c4c1409ef44",
+                "url": "https://api.github.com/repos/willdurand/BazingaHateoasBundle/zipball/ccbdde8356ef02cbc72ac7ec40c7f1db3382b4ef",
+                "reference": "ccbdde8356ef02cbc72ac7ec40c7f1db3382b4ef",
                 "shasum": ""
             },
             "require": {
-                "jms/serializer-bundle": "^3.1 || ^4.0 || ^5.0@beta",
+                "jms/serializer-bundle": "^3.1 || ^4.2 || ^5.0",
                 "php": "^7.2 || ^8.0",
-                "symfony/expression-language": "~3.0 || ~4.0 || ~5.0 || ~6.0",
-                "symfony/framework-bundle": "~3.0 || ~4.0 || ~5.0 || ~6.0",
+                "symfony/expression-language": "~3.0 || ~4.0 || ~5.0 || ~6.0 || ~7.0",
+                "symfony/framework-bundle": "~3.0 || ~4.0 || ~5.0 || ~6.0 || ~7.0",
                 "willdurand/hateoas": "^3.5"
             },
+            "conflict": {
+                "jms/serializer": "<3.18"
+            },
             "require-dev": {
-                "doctrine/annotations": "^1.13.2",
+                "doctrine/annotations": "^1.13.2 || ^2.0",
                 "doctrine/coding-standard": "^8.0",
-                "phpunit/phpunit": "^8.5 || ^9.5",
-                "symfony/stopwatch": "~3.0 || ~4.0 || ~5.0 || ~6.0",
-                "twig/twig": "~1.12|~2.0"
+                "phpunit/phpunit": "^8.5.32 || ^9.5.10",
+                "symfony/stopwatch": "~3.0 || ~4.0 || ~5.0 || ~6.0 || ~7.0",
+                "twig/twig": "~1.12|~2.0|~3.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -15173,9 +15176,9 @@
             ],
             "support": {
                 "issues": "https://github.com/willdurand/BazingaHateoasBundle/issues",
-                "source": "https://github.com/willdurand/BazingaHateoasBundle/tree/2.5.0"
+                "source": "https://github.com/willdurand/BazingaHateoasBundle/tree/2.6.0"
             },
-            "time": "2022-09-14T09:43:38+00:00"
+            "time": "2023-12-13T11:29:05+00:00"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
