@@ -29,7 +29,7 @@ web/uploads/
 !/web/bundles/.gitkeep
 /web/assets/images/*
 !web/assets/images/.gitkeep
-/web/wallassets/*.dev.js
+/web/wallassets/*
 
 # Build
 /app/build
