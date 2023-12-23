@@ -375,23 +375,24 @@ class InstallCommand extends Command
     private function isDatabasePresent()
     {
         $connection = $this->entityManager->getConnection();
-        $databaseName = $connection->getDatabase();
 
         try {
-            $schemaManager = $connection->getSchemaManager();
+            $databaseName = $connection->getDatabase();
         } catch (\Exception $exception) {
             // mysql & sqlite
-            if (false !== strpos($exception->getMessage(), sprintf("Unknown database '%s'", $databaseName))) {
+            if (false !== strpos($exception->getMessage(), 'Unknown database')) {
                 return false;
             }
 
             // pgsql
-            if (false !== strpos($exception->getMessage(), sprintf('database "%s" does not exist', $databaseName))) {
+            if (false !== strpos($exception->getMessage(), 'does not exist')) {
                 return false;
             }
 
             throw $exception;
         }
+
+        $schemaManager = $connection->getSchemaManager();
 
         // custom verification for sqlite, since `getListDatabasesSQL` doesn't work for sqlite
         if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {
