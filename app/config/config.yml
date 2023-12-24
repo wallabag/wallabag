@@ -210,7 +210,7 @@ scheb_two_factor:
         template: "@WallabagUser/Authentication/form.html.twig"
         mailer: Wallabag\UserBundle\Mailer\AuthCodeMailer
 
-kphoen_rulerz:
+rulerz:
     targets:
         doctrine: true
 
