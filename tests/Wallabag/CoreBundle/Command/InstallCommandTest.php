@@ -76,7 +76,7 @@ class InstallCommandTest extends WallabagCoreTestCase
         } else {
             // Create a new client to avoid the error:
             // Transaction commit failed because the transaction has been marked for rollback only.
-            $client = static::createClient();
+            $client = $this->getNewClient();
             $this->resetDatabase($client);
         }
 

@@ -10,7 +10,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
     public function testGetVersion()
     {
         // create a new client instead of using $this->client to be sure client isn't authenticated
-        $client = static::createClient();
+        $client = $this->createUnauthorizedClient();
         $client->request('GET', '/api/version');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
@@ -23,7 +23,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
     public function testGetInfo()
     {
         // create a new client instead of using $this->client to be sure client isn't authenticated
-        $client = static::createClient();
+        $client = $this->createUnauthorizedClient();
         $client->request('GET', '/api/info');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
@@ -40,7 +40,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
     public function testAllowedRegistration()
     {
         // create a new client instead of using $this->client to be sure client isn't authenticated
-        $client = static::createClient();
+        $client = $this->createUnauthorizedClient();
 
         if (!$client->getContainer()->getParameter('fosuser_registration')) {
             $this->markTestSkipped('fosuser_registration is not enabled.');

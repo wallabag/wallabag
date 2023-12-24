@@ -71,7 +71,7 @@ abstract class WallabagCoreTestCase extends WebTestCase
          * [Doctrine\DBAL\ConnectionException]
          * Transaction commit failed because the transaction has been marked for rollback only.
          */
-        $this->client = static::createClient();
+        $this->client = $this->getNewClient();
     }
 
     public function getEntityManager()
