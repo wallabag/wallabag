@@ -668,7 +668,7 @@ class ConfigController extends AbstractController
      */
     public function setLocaleAction(Request $request, ValidatorInterface $validator, $language = null)
     {
-        $errors = $validator->validate($language, (new LocaleConstraint()));
+        $errors = $validator->validate($language, (new LocaleConstraint(['canonicalize' => true])));
 
         if (0 === \count($errors)) {
             $request->getSession()->set('_locale', $language);

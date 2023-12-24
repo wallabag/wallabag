@@ -98,7 +98,7 @@ class ContentProxy
 
         $errors = $this->validator->validate(
             $value,
-            (new LocaleConstraint())
+            (new LocaleConstraint(['canonicalize' => true]))
         );
 
         if (0 === \count($errors)) {
