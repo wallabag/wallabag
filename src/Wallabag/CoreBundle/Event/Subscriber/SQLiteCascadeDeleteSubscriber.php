@@ -40,7 +40,7 @@ class SQLiteCascadeDeleteSubscriber implements EventSubscriber
      */
     public function preRemove(LifecycleEventArgs $args)
     {
-        $entity = $args->getEntity();
+        $entity = $args->getObject();
         if (!$this->doctrine->getConnection()->getDatabasePlatform() instanceof SqlitePlatform
             || !$entity instanceof Entry) {
             return;
