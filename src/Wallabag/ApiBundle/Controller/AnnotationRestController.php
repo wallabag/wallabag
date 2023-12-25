@@ -42,7 +42,7 @@ class AnnotationRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        return $this->forward('Wallabag\AnnotationBundle\Controller\WallabagAnnotationController::getAnnotationsAction', [
+        return $this->forward('Wallabag\CoreBundle\Controller\AnnotationController::getAnnotationsAction', [
             'entry' => $entry,
         ]);
     }
@@ -108,7 +108,7 @@ class AnnotationRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        return $this->forward('Wallabag\AnnotationBundle\Controller\WallabagAnnotationController::postAnnotationAction', [
+        return $this->forward('Wallabag\CoreBundle\Controller\AnnotationController::postAnnotationAction', [
             'request' => $request,
             'entry' => $entry,
         ]);
@@ -144,7 +144,7 @@ class AnnotationRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        return $this->forward('Wallabag\AnnotationBundle\Controller\WallabagAnnotationController::putAnnotationAction', [
+        return $this->forward('Wallabag\CoreBundle\Controller\AnnotationController::putAnnotationAction', [
             'annotation' => $annotation,
             'request' => $request,
         ]);
@@ -180,7 +180,7 @@ class AnnotationRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        return $this->forward('Wallabag\AnnotationBundle\Controller\WallabagAnnotationController::deleteAnnotationAction', [
+        return $this->forward('Wallabag\CoreBundle\Controller\AnnotationController::deleteAnnotationAction', [
             'annotation' => $annotation,
         ]);
     }

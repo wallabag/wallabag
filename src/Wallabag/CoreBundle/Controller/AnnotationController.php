@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\AnnotationBundle\Controller;
+namespace Wallabag\CoreBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
@@ -17,7 +17,7 @@ use Wallabag\AnnotationBundle\Repository\AnnotationRepository;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
 
-class WallabagAnnotationController extends AbstractFOSRestController
+class AnnotationController extends AbstractFOSRestController
 {
     protected EntityManagerInterface $entityManager;
     protected SerializerInterface $serializer;

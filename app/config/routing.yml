@@ -1,8 +1,3 @@
-wallabag_annotation:
-    resource: "@WallabagAnnotationBundle/Controller/"
-    type: annotation
-    prefix: /
-
 wallabag_import:
     resource: "@WallabagImportBundle/Controller/"
     type: annotation

@@ -1,14 +1,14 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Method Wallabag\\\\AnnotationBundle\\\\Controller\\\\WallabagAnnotationController\\:\\:postAnnotationAction\\(\\) should return Symfony\\\\Component\\\\HttpFoundation\\\\JsonResponse but returns Symfony\\\\Component\\\\Form\\\\FormInterface\\<mixed\\>\\.$#"
+			message: "#^Method Wallabag\\\\CoreBundle\\\\Controller\\\\AnnotationController\\:\\:postAnnotationAction\\(\\) should return Symfony\\\\Component\\\\HttpFoundation\\\\JsonResponse but returns Symfony\\\\Component\\\\Form\\\\FormInterface\\<mixed\\>\\.$#"
 			count: 1
-			path: src/Wallabag/AnnotationBundle/Controller/WallabagAnnotationController.php
+			path: src/Wallabag/CoreBundle/Controller/AnnotationController.php
 
 		-
-			message: "#^Method Wallabag\\\\AnnotationBundle\\\\Controller\\\\WallabagAnnotationController\\:\\:putAnnotationAction\\(\\) should return Symfony\\\\Component\\\\HttpFoundation\\\\JsonResponse but returns Symfony\\\\Component\\\\Form\\\\FormInterface\\<null\\>\\.$#"
+			message: "#^Method Wallabag\\\\CoreBundle\\\\Controller\\\\AnnotationController\\:\\:putAnnotationAction\\(\\) should return Symfony\\\\Component\\\\HttpFoundation\\\\JsonResponse but returns Symfony\\\\Component\\\\Form\\\\FormInterface\\<null\\>\\.$#"
 			count: 1
-			path: src/Wallabag/AnnotationBundle/Controller/WallabagAnnotationController.php
+			path: src/Wallabag/CoreBundle/Controller/AnnotationController.php
 
 		-
 			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Entity\\\\RuleInterface\\:\\:getConfig\\(\\)\\.$#"

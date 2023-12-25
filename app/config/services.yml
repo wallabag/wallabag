@@ -46,10 +46,6 @@ services:
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    Wallabag\AnnotationBundle\Controller\:
-        resource: '../../src/Wallabag/AnnotationBundle/Controller/'
-        tags: ['controller.service_arguments']
-
     Wallabag\ApiBundle\Controller\:
         resource: '../../src/Wallabag/ApiBundle/Controller/'
         tags: ['controller.service_arguments']

@@ -1,15 +1,30 @@
 <?php
 
-namespace Tests\Wallabag\AnnotationBundle\Controller;
+namespace Tests\Wallabag\CoreBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Tests\Wallabag\AnnotationBundle\WallabagAnnotationTestCase;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
+use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
 
-class AnnotationControllerTest extends WallabagAnnotationTestCase
+class AnnotationControllerTest extends WallabagCoreTestCase
 {
+    /**
+     * @var KernelBrowser
+     */
+    private $client;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->logInAs('admin');
+
+        $this->client = $this->getTestClient();
+    }
+
     /**
      * This data provider allow to tests annotation from the :
      *     - API POV (when user use the api to manage annotations)
