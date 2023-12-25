@@ -10,10 +10,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Wallabag\AnnotationBundle\Form\EditAnnotationType;
-use Wallabag\AnnotationBundle\Form\NewAnnotationType;
 use Wallabag\CoreBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Form\Type\EditAnnotationType;
+use Wallabag\CoreBundle\Form\Type\NewAnnotationType;
 use Wallabag\CoreBundle\Repository\AnnotationRepository;
 use Wallabag\UserBundle\Entity\User;
 
