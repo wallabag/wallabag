@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\AnnotationBundle\Entity\Annotation;
+use Wallabag\CoreBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Config as ConfigEntity;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\IgnoreOriginUserRule;

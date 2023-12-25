@@ -5,7 +5,7 @@ namespace Tests\Wallabag\CoreBundle\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\AnnotationBundle\Entity\Annotation;
+use Wallabag\CoreBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\Entity\User;
 

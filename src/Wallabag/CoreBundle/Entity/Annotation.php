@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\AnnotationBundle\Entity;
+namespace Wallabag\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Exclude;
@@ -9,7 +9,6 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Component\Validator\Constraints as Assert;
-use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
 use Wallabag\UserBundle\Entity\User;
 

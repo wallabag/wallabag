@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Wallabag\AnnotationBundle\Entity\Annotation;
+use Wallabag\CoreBundle\Entity\Annotation;
 
 class NewAnnotationType extends AbstractType
 {

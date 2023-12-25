@@ -11,7 +11,6 @@ use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
 use JMS\Serializer\Annotation\XmlRoot;
 use Symfony\Component\Validator\Constraints as Assert;
-use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
 use Wallabag\CoreBundle\Helper\UrlHasher;
 use Wallabag\UserBundle\Entity\User;
@@ -206,7 +205,7 @@ class Entry
     private $starredAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Wallabag\AnnotationBundle\Entity\Annotation", mappedBy="entry", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\Annotation", mappedBy="entry", cascade={"persist", "remove"})
      * @ORM\JoinTable
      *
      * @Groups({"entries_for_user", "export_all"})
