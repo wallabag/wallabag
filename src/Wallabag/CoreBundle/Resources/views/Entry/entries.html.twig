@@ -19,18 +19,19 @@
 {% endblock %}
 
 {% block content %}
+    {% set current_path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
     {% set list_mode = app.user.config.listMode %}
     {% set entries_with_archived_class_routes = ['tag_entries', 'search', 'all'] %}
     {% set current_route = app.request.attributes.get('_route') %}
     {% if current_route == 'homepage' %}
         {% set current_route = 'unread' %}
     {% endif %}
-    <form name="form_mass_action" action="{{ path('mass_action') }}" method="post">
+    <form name="form_mass_action" action="{{ path('mass_action', {redirect: current_path}) }}" method="post">
     <div class="results">
         <div class="nb-results">
             {{ 'entry.list.number_on_the_page'|trans({'%count%': entries.count}) }}
             {% if entries.count > 0 %}
-                <a class="results-item" href="{{ path('switch_view_mode') }}"><i class="material-icons">{% if list_mode == 0 %}view_list{% else %}view_module{% endif %}</i></a>
+                <a class="results-item" href="{{ path('switch_view_mode', {redirect: current_path}) }}"><i class="material-icons">{% if list_mode == 0 %}view_list{% else %}view_module{% endif %}</i></a>
             {% endif %}
             {% if entries.count > 0 %}
                 <label for="mass-action-inputs-displayed" class="mass-action-toggle results-item tooltipped" data-position="right" data-delay="50" data-tooltip="{{ 'entry.list.toggle_mass_action'|trans }}"><i class="material-icons">library_add_check</i></label>
@@ -39,7 +40,7 @@
                 {% include "@WallabagCore/Entry/_feed_link.html.twig" %}
             {% endif %}
         </div>
-        {% if current_route == 'search' %}<div><a href="{{ path('tag_this_search', {'filter': searchTerm, 'currentRoute': app.request.get('currentRoute')}) }}" title="{{ 'entry.list.assign_search_tag'|trans }}">{{ 'entry.list.assign_search_tag'|trans }}</a></div>{% endif %}
+        {% if current_route == 'search' %}<div><a href="{{ path('tag_this_search', {'filter': searchTerm, 'currentRoute': app.request.get('currentRoute'), redirect: current_path}) }}" title="{{ 'entry.list.assign_search_tag'|trans }}">{{ 'entry.list.assign_search_tag'|trans }}</a></div>{% endif %}
         {% if entries.getNbPages > 1 %}
             {{ pagerfanta(entries, 'default_wallabag') }}
         {% endif %}

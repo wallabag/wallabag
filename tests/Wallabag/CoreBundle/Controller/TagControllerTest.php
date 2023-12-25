@@ -123,9 +123,11 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->clear();
 
         // We make a first request to set an history and test redirection after tag deletion
-        $client->request('GET', '/view/' . $entry->getId());
+        $crawler = $client->request('GET', '/view/' . $entry->getId());
         $entryUri = $client->getRequest()->getRequestUri();
-        $client->request('GET', '/remove-tag/' . $entry->getId() . '/' . $tag->getId());
+
+        $link = $crawler->filter('a[href^="/remove-tag/' . $entry->getId() . '/' . $tag->getId() . '"]')->link();
+        $client->click($link);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertSame($entryUri, $client->getResponse()->getTargetUrl());

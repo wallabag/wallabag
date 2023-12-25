@@ -3,6 +3,8 @@
 {% block title %}{{ 'tag.page_title'|trans }}{% endblock %}
 
 {% block content %}
+    {% set current_path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+
     <div class="results clearfix">
         {{ 'tag.list.number_on_the_page'|trans({'%count%': tags|length}) }}
     </div>
@@ -18,7 +20,7 @@
                         {{ tag.label }}&nbsp;({{ tag.nbEntries }})
                     </a>
                     {% if renameForms is defined and renameForms[tag.id] is defined %}
-                    <form class="card-tag-form hidden" data-handle="tag-rename-form" action="{{ path('tag_rename', {'slug': tag.slug}) }}" method="POST">
+                    <form class="card-tag-form hidden" data-handle="tag-rename-form" action="{{ path('tag_rename', {'slug': tag.slug, redirect: current_path}) }}" method="POST">
                         {{ form_widget(renameForms[tag.id].label, {'attr': {'value': tag.label}}) }}
                         {{ form_rest(renameForms[tag.id]) }}
                     </form>
@@ -26,7 +28,7 @@
                         <i class="material-icons">mode_edit</i>
                     </a>
                     {% endif %}
-                    <a id="delete-{{ tag.slug }}" href="{{ path('tag_delete', {'slug': tag.slug}) }}" class="card-tag-icon card-tag-delete" onclick="return confirm('{{ 'tag.confirm.delete'|trans({'%name%': tag.label})|escape('js') }}')">
+                    <a id="delete-{{ tag.slug }}" href="{{ path('tag_delete', {'slug': tag.slug, redirect: current_path}) }}" class="card-tag-icon card-tag-delete" onclick="return confirm('{{ 'tag.confirm.delete'|trans({'%name%': tag.label})|escape('js') }}')">
                         <i class="material-icons">delete</i>
                     </a>
                     {% if app.user.config.feedToken %}

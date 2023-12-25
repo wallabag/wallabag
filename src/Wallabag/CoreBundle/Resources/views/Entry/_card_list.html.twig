@@ -9,12 +9,15 @@
     </div>
     {% endif %}
     {% include "@WallabagCore/Entry/Card/_content.html.twig" with {'entry': entry, 'withMetadata': true, 'subClass': 'metadata'} only %}
+
+    {% set current_path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+
     <ul class="tools-list hide-on-small-only">
         <li>
-            <a title="{{ 'entry.list.show_same_domain'|trans }}" class="tool grey-text" href="{{ path('same_domain', {'id': entry.id}) }}"><i class="material-icons">language</i></a>
-            <a title="{{ 'entry.list.toogle_as_read'|trans }}" class="tool grey-text" href="{{ path('archive_entry', {'id': entry.id}) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i></a>
-            <a title="{{ 'entry.list.toogle_as_star'|trans }}" class="tool grey-text" href="{{ path('star_entry', {'id': entry.id}) }}"><i class="material-icons">{% if entry.isStarred == 0 %}star_border{% else %}star{% endif %}</i></a>
-            <a title="{{ 'entry.list.delete'|trans }}" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" class="tool grey-text delete" href="{{ path('delete_entry', {'id': entry.id}) }}"><i class="material-icons">delete</i></a>
+            <a title="{{ 'entry.list.show_same_domain'|trans }}" class="tool grey-text" href="{{ path('same_domain', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">language</i></a>
+            <a title="{{ 'entry.list.toogle_as_read'|trans }}" class="tool grey-text" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i></a>
+            <a title="{{ 'entry.list.toogle_as_star'|trans }}" class="tool grey-text" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">{% if entry.isStarred == 0 %}star_border{% else %}star{% endif %}</i></a>
+            <a title="{{ 'entry.list.delete'|trans }}" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" class="tool grey-text delete" href="{{ path('delete_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">delete</i></a>
         </li>
     </ul>
 </div>
