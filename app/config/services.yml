@@ -32,10 +32,6 @@ services:
             $supportUrl: '@=service(''craue_config'').get(''wallabag_support_url'')'
             $fonts: '%wallabag_core.fonts%'
 
-    Wallabag\AnnotationBundle\:
-        resource: '../../src/Wallabag/AnnotationBundle/*'
-        exclude: '../../src/Wallabag/AnnotationBundle/{Controller,Entity,DataFixtures}'
-
     Wallabag\ApiBundle\:
         resource: '../../src/Wallabag/ApiBundle/*'
         exclude: '../../src/Wallabag/ApiBundle/{Controller,Entity}'
