@@ -68,7 +68,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
         }
 
-        return $this->render('@WallabagUser/Manage/new.html.twig', [
+        return $this->render('@WallabagUser/User/new.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
         ]);
@@ -109,7 +109,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
         }
 
-        return $this->render('@WallabagUser/Manage/edit.html.twig', [
+        return $this->render('@WallabagUser/User/edit.html.twig', [
             'user' => $user,
             'edit_form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -174,7 +174,7 @@ class UserController extends AbstractController
             }
         }
 
-        return $this->render('@WallabagUser/Manage/index.html.twig', [
+        return $this->render('@WallabagUser/User/index.html.twig', [
             'searchForm' => $form->createView(),
             'users' => $pagerFanta,
         ]);
