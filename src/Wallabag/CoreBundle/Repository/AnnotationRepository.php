@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\AnnotationBundle\Repository;
+namespace Wallabag\CoreBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;

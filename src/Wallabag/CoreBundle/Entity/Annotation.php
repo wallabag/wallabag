@@ -16,7 +16,7 @@ use Wallabag\UserBundle\Entity\User;
  * Annotation.
  *
  * @ORM\Table(name="annotation")
- * @ORM\Entity(repositoryClass="Wallabag\AnnotationBundle\Repository\AnnotationRepository")
+ * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\AnnotationRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ExclusionPolicy("none")
  */
