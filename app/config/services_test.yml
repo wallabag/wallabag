@@ -31,8 +31,3 @@ services:
         resource: '../../src/Wallabag/CoreBundle/DataFixtures/*'
         tags: ['doctrine.fixture.orm']
         autowire: true
-
-    Wallabag\AnnotationBundle\DataFixtures\:
-        resource: '../../src/Wallabag/AnnotationBundle/DataFixtures/*'
-        tags: ['doctrine.fixture.orm']
-        autowire: true

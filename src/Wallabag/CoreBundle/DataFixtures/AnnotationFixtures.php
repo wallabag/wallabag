@@ -1,12 +1,11 @@
 <?php
 
-namespace Wallabag\AnnotationBundle\DataFixtures;
+namespace Wallabag\CoreBundle\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Wallabag\AnnotationBundle\Entity\Annotation;
-use Wallabag\CoreBundle\DataFixtures\EntryFixtures;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\UserBundle\DataFixtures\UserFixtures;
 use Wallabag\UserBundle\Entity\User;
