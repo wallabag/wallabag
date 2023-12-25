@@ -27,7 +27,7 @@ use Wallabag\UserBundle\Repository\UserRepository;
 /**
  * User controller.
  */
-class ManageController extends AbstractController
+class UserController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
     private TranslatorInterface $translator;

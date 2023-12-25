@@ -4,7 +4,7 @@ namespace Tests\Wallabag\UserBundle\Controller;
 
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 
-class ManageControllerTest extends WallabagCoreTestCase
+class UserControllerTest extends WallabagCoreTestCase
 {
     public function testLogin()
     {
