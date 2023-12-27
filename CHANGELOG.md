@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.6.8](https://github.com/wallabag/wallabag/tree/2.6.8)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.7...2.6.8)
+
+### Fixes
+* Update deps & Node 20 by @j0k3r in https://github.com/wallabag/wallabag/pull/7134
+* Fix dark mode disabled url 2.6 by @Simounet in https://github.com/wallabag/wallabag/pull/7133
+* Make database dependent commands lazy by @yguedidi in https://github.com/wallabag/wallabag/pull/7142
+* Fix docker setup by @yguedidi in https://github.com/wallabag/wallabag/pull/7141
+* Remove session-based redirection by @yguedidi in https://github.com/wallabag/wallabag/pull/7140
+
 ## [2.6.7](https://github.com/wallabag/wallabag/tree/2.6.7)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.6...2.6.7)
 
