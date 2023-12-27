@@ -2,6 +2,8 @@
 
 namespace Wallabag\ImportBundle\Command;
 
+use Doctrine\DBAL\Driver\Middleware;
+use Doctrine\DBAL\Logging\Middleware as LoggingMiddleware;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Command\Command;
@@ -99,7 +101,11 @@ class ImportCommand extends Command
         }
 
         // Turning off doctrine default logs queries for saving memory
-        $this->entityManager->getConnection()->getConfiguration()->setSQLLogger(null);
+        $middlewares = $this->entityManager->getConnection()->getConfiguration()->getMiddlewares();
+        $middlewaresWithoutLogging = array_filter($middlewares, function (Middleware $middleware) {
+            return !$middleware instanceof LoggingMiddleware;
+        });
+        $this->entityManager->getConnection()->getConfiguration()->setMiddlewares($middlewaresWithoutLogging);
 
         if ($input->getOption('useUserId')) {
             $entityUser = $this->userRepository->findOneById($input->getArgument('username'));

@@ -378,7 +378,7 @@ class InstallCommand extends Command
         $databaseName = $connection->getDatabase();
 
         try {
-            $schemaManager = $connection->getSchemaManager();
+            $schemaManager = $connection->createSchemaManager();
         } catch (\Exception $exception) {
             // mysql & sqlite
             if (false !== strpos($exception->getMessage(), sprintf("Unknown database '%s'", $databaseName))) {
@@ -421,7 +421,7 @@ class InstallCommand extends Command
      */
     private function isSchemaPresent()
     {
-        $schemaManager = $this->entityManager->getConnection()->getSchemaManager();
+        $schemaManager = $this->entityManager->getConnection()->createSchemaManager();
 
         return \count($schemaManager->listTableNames()) > 0 ? true : false;
     }
