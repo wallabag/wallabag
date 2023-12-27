@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4092995cf75b9dcb235c60401175f247",
+    "content-hash": "524da595f0f3fb75bb55ee2b1b0718ed",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -5225,202 +5225,6 @@
             "time": "2022-06-29T09:25:13+00:00"
         },
         {
-            "name": "kphoen/rulerz",
-            "version": "0.21.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/K-Phoen/rulerz.git",
-                "reference": "d28a1bd59b4e66cc9fcdeee965f13f685eb9ce41"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/K-Phoen/rulerz/zipball/d28a1bd59b4e66cc9fcdeee965f13f685eb9ce41",
-                "reference": "d28a1bd59b4e66cc9fcdeee965f13f685eb9ce41",
-                "shasum": ""
-            },
-            "require": {
-                "hoa/ruler": "~2.0",
-                "php": ">=7.1",
-                "symfony/property-access": "~3.0|~4.0"
-            },
-            "require-dev": {
-                "behat/behat": "~3.0",
-                "coduo/phpspec-data-provider-extension": "~1.0,!=1.0.2",
-                "doctrine/orm": "~2.4",
-                "elasticsearch/elasticsearch": "~1.0",
-                "illuminate/database": "~5.0",
-                "kphoen/rusty": "dev-master",
-                "liip/rmt": "^1.2",
-                "mikey179/vfsstream": "~1.4",
-                "phpspec/phpspec": "~2.0,>=2.4-dev",
-                "pomm-project/cli": "~2.0@dev",
-                "pomm-project/foundation": "~2.0@dev",
-                "pomm-project/model-manager": "~2.0.@dev",
-                "ruflin/elastica": "~1.0",
-                "solarium/solarium": "~3.0",
-                "vlucas/phpdotenv": "~2.1"
-            },
-            "suggest": {
-                "doctrine/orm": "To execute rules as Doctrine queries",
-                "elasticsearch/elasticsearch": "To execute rules as Elasticsearch queries",
-                "kphoen/rulerz-spec-builder": "If you want a specification builder",
-                "pomm-project/model-manager": "To execute rules as Pomm queries",
-                "solarium/solarium": "To execute rules as Solr queries"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "RulerZ\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kévin Gomez",
-                    "email": "contact@kevingomez.fr"
-                }
-            ],
-            "description": "Powerful implementation of the Specification pattern",
-            "homepage": "https://github.com/K-Phoen/RulerZ",
-            "keywords": [
-                "doctrine",
-                "specification"
-            ],
-            "support": {
-                "issues": "https://github.com/K-Phoen/rulerz/issues",
-                "source": "https://github.com/K-Phoen/rulerz/tree/0.21.1"
-            },
-            "time": "2018-09-18T15:15:42+00:00"
-        },
-        {
-            "name": "kphoen/rulerz-bridge",
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/K-Phoen/rulerz-bridge.git",
-                "reference": "fdad5856b669d59b5e4bda47c4e927a0485bf7a0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/K-Phoen/rulerz-bridge/zipball/fdad5856b669d59b5e4bda47c4e927a0485bf7a0",
-                "reference": "fdad5856b669d59b5e4bda47c4e927a0485bf7a0",
-                "shasum": ""
-            },
-            "require": {
-                "kphoen/rulerz": "~0.19,>=0.19.3|^1.0",
-                "php": ">=7.1",
-                "symfony/form": "^3.0|^4.0",
-                "symfony/validator": "^3.0|^4.0"
-            },
-            "require-dev": {
-                "liip/rmt": "^1.2",
-                "phpunit/phpunit": "~7.1",
-                "symfony/phpunit-bridge": "^3.0|^4.0"
-            },
-            "type": "symfony-bridge",
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Bridge\\RulerZ\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kévin Gomez",
-                    "email": "contact@kevingomez.fr"
-                }
-            ],
-            "description": "Symfony RulerZ Bridge",
-            "homepage": "https://github.com/K-Phoen/rulerz-bridge",
-            "keywords": [
-                "Bridge",
-                "doctrine",
-                "ruler",
-                "rulerz",
-                "specification",
-                "symfony"
-            ],
-            "support": {
-                "issues": "https://github.com/K-Phoen/rulerz-bridge/issues",
-                "source": "https://github.com/K-Phoen/rulerz-bridge/tree/1.1.1"
-            },
-            "time": "2018-10-01T14:17:27+00:00"
-        },
-        {
-            "name": "kphoen/rulerz-bundle",
-            "version": "0.15.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/K-Phoen/RulerZBundle.git",
-                "reference": "f25f2eddfd311047f0f0ece2684b1f6463cc41ad"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/K-Phoen/RulerZBundle/zipball/f25f2eddfd311047f0f0ece2684b1f6463cc41ad",
-                "reference": "f25f2eddfd311047f0f0ece2684b1f6463cc41ad",
-                "shasum": ""
-            },
-            "require": {
-                "kphoen/rulerz": "~0.17,>=0.19.3",
-                "kphoen/rulerz-bridge": "^1.0",
-                "php": ">=7.1",
-                "symfony/framework-bundle": "^3.0|^4.0"
-            },
-            "require-dev": {
-                "liip/rmt": "^1.2",
-                "matthiasnoback/symfony-dependency-injection-test": "^3.0",
-                "mikey179/vfsstream": "^1.6",
-                "phpunit/phpunit": "^7.1",
-                "symfony/phpunit-bridge": "^3.0|^4.0"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "KPhoen\\RulerZBundle\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kévin Gomez",
-                    "email": "contact@kevingomez.fr"
-                }
-            ],
-            "description": "Symfony2 Bundle for RulerZ",
-            "homepage": "https://github.com/K-Phoen/RulerZBundle",
-            "keywords": [
-                "doctrine",
-                "ruler",
-                "rulerz",
-                "specification"
-            ],
-            "support": {
-                "issues": "https://github.com/K-Phoen/RulerZBundle/issues",
-                "source": "https://github.com/K-Phoen/RulerZBundle/tree/master"
-            },
-            "time": "2018-09-17T09:02:32+00:00"
-        },
-        {
             "name": "laminas/laminas-code",
             "version": "4.7.1",
             "source": {
@@ -8322,6 +8126,64 @@
                 }
             ],
             "time": "2023-05-02T15:15:43+00:00"
+        },
+        {
+            "name": "rulerz-php/doctrine-orm",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rulerz-php/doctrine-orm.git",
+                "reference": "3ff5c8507e23942fa4af14818ab92f0e91bfaebe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rulerz-php/doctrine-orm/zipball/3ff5c8507e23942fa4af14818ab92f0e91bfaebe",
+                "reference": "3ff5c8507e23942fa4af14818ab92f0e91bfaebe",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "^2.4",
+                "kphoen/rulerz": "dev-master as 1.0.0",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "behat/behat": "~3.0",
+                "kphoen/rusty": "dev-master",
+                "liip/rmt": "^1.2",
+                "phpunit/phpunit": "^7.1"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "RulerZ\\DoctrineORM\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kévin Gomez",
+                    "email": "contact@kevingomez.fr",
+                    "homepage": "http://www.kevingomez.fr/"
+                }
+            ],
+            "description": "Doctrine ORM compilation target for RulerZ",
+            "keywords": [
+                "doctrine",
+                "engine",
+                "orm",
+                "rule",
+                "rulerz",
+                "specification"
+            ],
+            "support": {
+                "issues": "https://github.com/rulerz-php/doctrine-orm/issues",
+                "source": "https://github.com/rulerz-php/doctrine-orm/tree/master"
+            },
+            "time": "2020-01-03T14:08:51+00:00"
         },
         {
             "name": "scheb/2fa-backup-code",
@@ -14986,6 +14848,210 @@
             "time": "2022-03-21T19:27:18+00:00"
         },
         {
+            "name": "wallabag/rulerz",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wallabag/rulerz.git",
+                "reference": "452e3229254c0ffd93b51c692a2cdee702f1cc5a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wallabag/rulerz/zipball/452e3229254c0ffd93b51c692a2cdee702f1cc5a",
+                "reference": "452e3229254c0ffd93b51c692a2cdee702f1cc5a",
+                "shasum": ""
+            },
+            "require": {
+                "hoa/consistency": "^1.17.05",
+                "hoa/ruler": "~2.0",
+                "php": ">=7.4",
+                "symfony/property-access": "^4.4|^5.4|^6.4"
+            },
+            "replace": {
+                "kphoen/rulerz": "*"
+            },
+            "require-dev": {
+                "behat/behat": "~3.0",
+                "ext-json": "*",
+                "liip/rmt": "^1.2",
+                "mikey179/vfsstream": "^1.6.7",
+                "phpspec/phpspec": "^7.0"
+            },
+            "suggest": {
+                "kphoen/rulerz-spec-builder": "If you want a specification builder",
+                "rulerz-php/doctrine-dbal": "To execute rules against Doctrine DBAL targets",
+                "rulerz-php/doctrine-orm": "To execute rules against Doctrine ORM targets",
+                "rulerz-php/elasticsearch": "To execute rules against Elasticsearch targets",
+                "rulerz-php/eloquent": "To execute rules against Eloquent targets",
+                "rulerz-php/pomm": "To execute rules against Pomm targets",
+                "rulerz-php/solarium": "To execute rules against Solarium targets"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RulerZ\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kévin Gomez",
+                    "email": "contact@kevingomez.fr"
+                }
+            ],
+            "description": "Powerful implementation of the Specification pattern",
+            "homepage": "https://github.com/wallabag/rulerz",
+            "keywords": [
+                "doctrine",
+                "specification"
+            ],
+            "support": {
+                "source": "https://github.com/wallabag/rulerz/tree/master"
+            },
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/kevin_gomez",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2023-12-24T00:53:44+00:00"
+        },
+        {
+            "name": "wallabag/rulerz-bridge",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wallabag/rulerz-bridge.git",
+                "reference": "92d42299606c87eaa44e10cb774ba3838614d8b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wallabag/rulerz-bridge/zipball/92d42299606c87eaa44e10cb774ba3838614d8b4",
+                "reference": "92d42299606c87eaa44e10cb774ba3838614d8b4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4",
+                "symfony/form": "^4.4|^5.4|^6.4",
+                "symfony/validator": "^4.4|^5.4|^6.4",
+                "wallabag/rulerz": "dev-master"
+            },
+            "replace": {
+                "kphoen/rulerz-bridge": "*"
+            },
+            "require-dev": {
+                "liip/rmt": "^1.2",
+                "phpunit/phpunit": "^8.5.16",
+                "symfony/phpunit-bridge": "^4.4|^5.4|^6.4"
+            },
+            "default-branch": true,
+            "type": "symfony-bridge",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Bridge\\RulerZ\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kévin Gomez",
+                    "email": "contact@kevingomez.fr"
+                }
+            ],
+            "description": "Symfony RulerZ Bridge",
+            "homepage": "https://github.com/wallabag/rulerz-bridge",
+            "keywords": [
+                "Bridge",
+                "doctrine",
+                "ruler",
+                "rulerz",
+                "specification",
+                "symfony"
+            ],
+            "support": {
+                "source": "https://github.com/wallabag/rulerz-bridge/tree/master"
+            },
+            "time": "2023-12-24T01:18:26+00:00"
+        },
+        {
+            "name": "wallabag/rulerz-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wallabag/RulerZBundle.git",
+                "reference": "08dcddd56f7ea2b1b039bcaa89724664839366d1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wallabag/RulerZBundle/zipball/08dcddd56f7ea2b1b039bcaa89724664839366d1",
+                "reference": "08dcddd56f7ea2b1b039bcaa89724664839366d1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4",
+                "symfony/framework-bundle": "^4.4|^5.4|^6.4",
+                "wallabag/rulerz": "dev-master",
+                "wallabag/rulerz-bridge": "dev-master"
+            },
+            "replace": {
+                "kphoen/rulerz-bundle": "*"
+            },
+            "require-dev": {
+                "liip/rmt": "^1.2",
+                "matthiasnoback/symfony-dependency-injection-test": "^4.0",
+                "mikey179/vfsstream": "^1.6.11",
+                "phpunit/phpunit": "^8.5.16",
+                "symfony/phpunit-bridge": "^4.4|^5.4|^6.4"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "KPhoen\\RulerZBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kévin Gomez",
+                    "email": "contact@kevingomez.fr"
+                }
+            ],
+            "description": "Symfony2 Bundle for RulerZ",
+            "homepage": "https://github.com/wallabag/RulerZBundle",
+            "keywords": [
+                "doctrine",
+                "ruler",
+                "rulerz",
+                "specification"
+            ],
+            "support": {
+                "source": "https://github.com/wallabag/RulerZBundle/tree/master"
+            },
+            "time": "2023-12-24T22:23:50+00:00"
+        },
+        {
             "name": "webmozart/assert",
             "version": "1.11.0",
             "source": {
@@ -17476,7 +17542,10 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "friendsofsymfony/oauth-server-bundle": 20
+        "friendsofsymfony/oauth-server-bundle": 20,
+        "rulerz-php/doctrine-orm": 20,
+        "wallabag/rulerz": 20,
+        "wallabag/rulerz-bundle": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
