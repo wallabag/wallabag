@@ -34,9 +34,19 @@ abstract class WallabagApiTestCase extends WebTestCase
     /**
      * @return KernelBrowser
      */
+    protected function createUnauthorizedClient()
+    {
+        static::ensureKernelShutdown();
+
+        return static::createClient();
+    }
+
+    /**
+     * @return KernelBrowser
+     */
     protected function createAuthorizedClient()
     {
-        $client = static::createClient();
+        $client = $this->createUnauthorizedClient();
         $container = $client->getContainer();
 
         /** @var UserManager $userManager */

@@ -30,7 +30,7 @@ class UserRestControllerTest extends WallabagApiTestCase
 
     public function testGetUserWithoutAuthentication()
     {
-        $client = static::createClient();
+        $client = $this->createUnauthorizedClient();
         $client->request('GET', '/api/user.json');
         $this->assertSame(401, $client->getResponse()->getStatusCode());
 
@@ -80,7 +80,7 @@ class UserRestControllerTest extends WallabagApiTestCase
     public function testCreateNewUserWithoutAuthentication()
     {
         // create a new client instead of using $this->client to be sure client isn't authenticated
-        $client = static::createClient();
+        $client = $this->createUnauthorizedClient();
         $client->getContainer()->get(Config::class)->set('api_user_registration', 1);
         $client->request('PUT', '/api/user.json', [
             'username' => 'google',
@@ -115,7 +115,7 @@ class UserRestControllerTest extends WallabagApiTestCase
 
     public function testCreateNewUserWithExistingEmail()
     {
-        $client = static::createClient();
+        $client = $this->createUnauthorizedClient();
         $client->getContainer()->get(Config::class)->set('api_user_registration', 1);
         $client->request('PUT', '/api/user.json', [
             'username' => 'admin',
@@ -144,7 +144,7 @@ class UserRestControllerTest extends WallabagApiTestCase
 
     public function testCreateNewUserWithTooShortPassword()
     {
-        $client = static::createClient();
+        $client = $this->createUnauthorizedClient();
         $client->getContainer()->get(Config::class)->set('api_user_registration', 1);
         $client->request('PUT', '/api/user.json', [
             'username' => 'facebook',
@@ -168,7 +168,7 @@ class UserRestControllerTest extends WallabagApiTestCase
 
     public function testCreateNewUserWhenRegistrationIsDisabled()
     {
-        $client = static::createClient();
+        $client = $this->createUnauthorizedClient();
         $client->request('PUT', '/api/user.json', [
             'username' => 'facebook',
             'password' => 'face',

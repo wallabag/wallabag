@@ -31,7 +31,7 @@ class ConfigRestControllerTest extends WallabagApiTestCase
 
     public function testGetConfigWithoutAuthentication()
     {
-        $client = static::createClient();
+        $client = $this->createUnauthorizedClient();
         $client->request('GET', '/api/config.json');
         $this->assertSame(401, $client->getResponse()->getStatusCode());
 
