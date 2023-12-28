@@ -32,6 +32,7 @@ use Wallabag\CoreBundle\Form\Type\IgnoreOriginUserRuleType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleImportType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleType;
 use Wallabag\CoreBundle\Form\Type\UserInformationType;
+use Wallabag\CoreBundle\Helper\Redirect;
 use Wallabag\CoreBundle\Repository\ConfigRepository;
 use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\CoreBundle\Repository\IgnoreOriginUserRuleRepository;
@@ -48,8 +49,9 @@ class ConfigController extends AbstractController
     private TagRepository $tagRepository;
     private AnnotationRepository $annotationRepository;
     private ConfigRepository $configRepository;
+    private Redirect $redirectHelper;
 
-    public function __construct(EntityManagerInterface $entityManager, UserManagerInterface $userManager, EntryRepository $entryRepository, TagRepository $tagRepository, AnnotationRepository $annotationRepository, ConfigRepository $configRepository)
+    public function __construct(EntityManagerInterface $entityManager, UserManagerInterface $userManager, EntryRepository $entryRepository, TagRepository $tagRepository, AnnotationRepository $annotationRepository, ConfigRepository $configRepository, Redirect $redirectHelper)
     {
         $this->entityManager = $entityManager;
         $this->userManager = $userManager;
@@ -57,6 +59,7 @@ class ConfigController extends AbstractController
         $this->tagRepository = $tagRepository;
         $this->annotationRepository = $annotationRepository;
         $this->configRepository = $configRepository;
+        $this->redirectHelper = $redirectHelper;
     }
 
     /**
@@ -646,7 +649,9 @@ class ConfigController extends AbstractController
         $this->entityManager->persist($user);
         $this->entityManager->flush();
 
-        return $this->redirect($request->getSession()->get('prevUrl'));
+        $redirectUrl = $this->redirectHelper->to($request->getSession()->get('prevUrl'));
+
+        return $this->redirect($redirectUrl);
     }
 
     /**
