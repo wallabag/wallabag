@@ -2,6 +2,7 @@
 
 namespace Wallabag\CoreBundle\Helper;
 
+use GuzzleHttp\Psr7\Uri;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\CoreBundle\Entity\Config;
@@ -32,6 +33,14 @@ class Redirect
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
 
         if (!$user instanceof User) {
+            if (null === $url) {
+                return $this->router->generate('homepage');
+            }
+
+            if (!Uri::isAbsolutePathReference(new Uri($url))) {
+                return $this->router->generate('homepage');
+            }
+
             return $url;
         }
 
@@ -40,10 +49,14 @@ class Redirect
             return $this->router->generate('homepage');
         }
 
-        if (null !== $url) {
-            return $url;
+        if (null === $url) {
+            return $this->router->generate('homepage');
         }
 
-        return $this->router->generate('homepage');
+        if (!Uri::isAbsolutePathReference(new Uri($url))) {
+            return $this->router->generate('homepage');
+        }
+
+        return $url;
     }
 }

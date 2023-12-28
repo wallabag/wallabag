@@ -73,6 +73,13 @@ class RedirectTest extends TestCase
         $this->assertSame('/unread/list', $redirectUrl);
     }
 
+    public function testRedirectToAbsoluteUrl()
+    {
+        $redirectUrl = $this->redirect->to('https://www.google.com/');
+
+        $this->assertSame('/', $redirectUrl);
+    }
+
     public function testWithNotLoggedUser()
     {
         $redirect = new Redirect($this->routerMock, new TokenStorage());
