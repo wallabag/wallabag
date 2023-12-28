@@ -23,12 +23,11 @@ class Redirect
 
     /**
      * @param string $url                    URL to redirect
-     * @param string $fallback               Fallback URL if $url is null
      * @param bool   $ignoreActionMarkAsRead Ignore configured action when mark as read
      *
      * @return string
      */
-    public function to($url, $fallback = '', $ignoreActionMarkAsRead = false)
+    public function to($url, $ignoreActionMarkAsRead = false)
     {
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
 
@@ -45,10 +44,6 @@ class Redirect
             return $url;
         }
 
-        if ('' === $fallback) {
-            return $this->router->generate('homepage');
-        }
-
-        return $fallback;
+        return $this->router->generate('homepage');
     }
 }

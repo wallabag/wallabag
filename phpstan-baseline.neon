@@ -46,11 +46,6 @@ parameters:
             path: tests/Wallabag/CoreBundle/Controller/FeedControllerTest.php
 
         -
-            message: "#^Call to method generate\\(\\) on an unknown class PHPUnit_Framework_MockObject_MockObject\\.$#"
-            count: 2
-            path: tests/Wallabag/CoreBundle/Helper/RedirectTest.php
-
-        -
             message: "#^Property Tests\\\\Wallabag\\\\CoreBundle\\\\Helper\\\\RedirectTest\\:\\:\\$routerMock has unknown class PHPUnit_Framework_MockObject_MockObject as its type\\.$#"
             count: 1
             path: tests/Wallabag/CoreBundle/Helper/RedirectTest.php
