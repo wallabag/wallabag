@@ -282,9 +282,23 @@ services:
         arguments:
             $baseFolder: "%kernel.project_dir%/web/assets/images"
 
+    Wallabag\CoreBundle\Command\CleanDownloadedImagesCommand:
+        tags:
+            - { name: console.command, command: 'wallabag:clean-downloaded-images' }
+
+    Wallabag\CoreBundle\Command\CleanDuplicatesCommand:
+        tags:
+            - { name: console.command, command: 'wallabag:clean-duplicates' }
+
     Wallabag\CoreBundle\Command\ExportCommand:
         arguments:
             $projectDir: '%kernel.project_dir%'
+        tags:
+            - { name: console.command, command: 'wallabag:export' }
+
+    Wallabag\CoreBundle\Command\GenerateUrlHashesCommand:
+        tags:
+            - { name: console.command, command: 'wallabag:generate-hashed-urls' }
 
     Wallabag\CoreBundle\Command\InstallCommand:
         arguments:
@@ -292,6 +306,26 @@ services:
             $databaseName: '%database_name%'
             $defaultSettings: '%wallabag_core.default_internal_settings%'
             $defaultIgnoreOriginInstanceRules: '%wallabag_core.default_ignore_origin_instance_rules%'
+
+    Wallabag\CoreBundle\Command\ListUserCommand:
+        tags:
+            - { name: console.command, command: 'wallabag:user:list' }
+
+    Wallabag\CoreBundle\Command\ReloadEntryCommand:
+        tags:
+            - { name: console.command, command: 'wallabag:entry:reload' }
+
+    Wallabag\CoreBundle\Command\ShowUserCommand:
+        tags:
+            - { name: console.command, command: 'wallabag:user:show' }
+
+    Wallabag\CoreBundle\Command\TagAllCommand:
+        tags:
+            - { name: console.command, command: 'wallabag:tag:all' }
+
+    Wallabag\ImportBundle\Command\ImportCommand:
+        tags:
+            - { name: console.command, command: 'wallabag:import' }
 
     wallabag_core.entry.download_images.client:
         alias: 'httplug.client.wallabag_core.entry.download_images'
