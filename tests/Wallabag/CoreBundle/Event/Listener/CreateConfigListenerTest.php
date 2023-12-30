@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\UserBundle\EventListener;
+namespace Tests\Wallabag\CoreBundle\Event\Listener;
 
 use Doctrine\ORM\EntityManager;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\User;
-use Wallabag\UserBundle\EventListener\CreateConfigListener;
+use Wallabag\CoreBundle\Event\Listener\CreateConfigListener;
 
 class CreateConfigListenerTest extends TestCase
 {

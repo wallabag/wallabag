@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\UserBundle\EventListener;
+namespace Wallabag\CoreBundle\Event\Listener;
 
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\FOSUserEvents;

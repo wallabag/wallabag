@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\UserBundle\EventListener;
+namespace Wallabag\CoreBundle\Event\Listener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Event\UserEvent;

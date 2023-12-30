@@ -328,7 +328,7 @@ services:
                     confirmation: '%fos_user.registration.confirmation.from_email%'
                     resetting: '%fos_user.resetting.email.from_email%'
 
-    Wallabag\UserBundle\EventListener\CreateConfigListener:
+    Wallabag\CoreBundle\Event\Listener\CreateConfigListener:
         arguments:
             $itemsOnPage: "%wallabag_core.items_on_page%"
             $feedLimit: "%wallabag_core.feed_limit%"
@@ -338,7 +338,7 @@ services:
             $listMode: "%wallabag_core.list_mode%"
             $displayThumbnails: "%wallabag_core.display_thumbnails%"
 
-    Wallabag\UserBundle\EventListener\AuthenticationFailureListener:
+    Wallabag\CoreBundle\Event\Listener\AuthenticationFailureListener:
         tags:
             - { name: kernel.event_listener, event: security.authentication.failure, method: onAuthenticationFailure }
 
