@@ -6,7 +6,6 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Wallabag\CoreBundle\Entity\IgnoreOriginUserRule;
-use Wallabag\UserBundle\DataFixtures\UserFixtures;
 use Wallabag\UserBundle\Entity\User;
 
 class IgnoreOriginUserRuleFixtures extends Fixture implements DependentFixtureInterface

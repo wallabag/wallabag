@@ -7,7 +7,6 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\UserBundle\DataFixtures\UserFixtures;
 use Wallabag\UserBundle\Entity\User;
 
 class EntryFixtures extends Fixture implements DependentFixtureInterface
