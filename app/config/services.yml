@@ -119,10 +119,6 @@ services:
         resource: '../../src/Wallabag/ImportBundle/*'
         exclude: '../../src/Wallabag/ImportBundle/{Consumer,Controller,Redis}'
 
-    Wallabag\UserBundle\:
-        resource: '../../src/Wallabag/UserBundle/*'
-        exclude: '../../src/Wallabag/UserBundle/{Controller,Entity,DataFixtures}'
-
     Doctrine\DBAL\Connection:
         alias: doctrine.dbal.default_connection
 

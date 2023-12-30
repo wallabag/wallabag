@@ -39,7 +39,6 @@ class AppKernel extends Kernel
             // wallabag bundles
             new Wallabag\CoreBundle\WallabagCoreBundle(),
             new Wallabag\ApiBundle\WallabagApiBundle(),
-            new Wallabag\UserBundle\WallabagUserBundle(),
             new Wallabag\ImportBundle\WallabagImportBundle(),
         ];
 
