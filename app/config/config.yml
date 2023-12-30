@@ -194,13 +194,13 @@ scheb_two_factor:
     google:
         enabled: true
         issuer: "%server_name%"
-        template: "@WallabagUser/Authentication/form.html.twig"
+        template: "@WallabagCore/Authentication/form.html.twig"
 
     email:
         enabled: true
         sender_email: "%twofactor_sender%"
         digits: 6
-        template: "@WallabagUser/Authentication/form.html.twig"
+        template: "@WallabagCore/Authentication/form.html.twig"
         mailer: Wallabag\CoreBundle\Mailer\AuthCodeMailer
 
 rulerz:
