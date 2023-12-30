@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\UserBundle\Form;
+namespace Wallabag\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

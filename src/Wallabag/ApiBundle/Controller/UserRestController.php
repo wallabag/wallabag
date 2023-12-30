@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\ApiBundle\Entity\Client;
 use Wallabag\CoreBundle\Entity\User;
-use Wallabag\UserBundle\Form\NewUserType;
+use Wallabag\CoreBundle\Form\Type\NewUserType;
 
 class UserRestController extends WallabagRestController
 {
