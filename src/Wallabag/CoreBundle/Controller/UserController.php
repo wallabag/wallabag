@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\UserBundle\Controller;
+namespace Wallabag\CoreBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Event\UserEvent;
@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\CoreBundle\Controller\AbstractController;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\UserBundle\Form\NewUserType;
 use Wallabag\UserBundle\Form\SearchUserType;
@@ -41,7 +40,7 @@ class UserController extends AbstractController
     /**
      * Creates a new User entity.
      *
-     * @Route("/new", name="user_new", methods={"GET", "POST"})
+     * @Route("/users/new", name="user_new", methods={"GET", "POST"})
      */
     public function newAction(Request $request, UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher)
     {
@@ -77,7 +76,7 @@ class UserController extends AbstractController
     /**
      * Displays a form to edit an existing User entity.
      *
-     * @Route("/{id}/edit", name="user_edit", methods={"GET", "POST"})
+     * @Route("/users/{id}/edit", name="user_edit", methods={"GET", "POST"})
      */
     public function editAction(Request $request, User $user, UserManagerInterface $userManager, GoogleAuthenticatorInterface $googleAuthenticator)
     {
@@ -119,7 +118,7 @@ class UserController extends AbstractController
     /**
      * Deletes a User entity.
      *
-     * @Route("/{id}", name="user_delete", methods={"DELETE"})
+     * @Route("/users/{id}", name="user_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, User $user)
     {
@@ -142,7 +141,7 @@ class UserController extends AbstractController
     /**
      * @param int $page
      *
-     * @Route("/list/{page}", name="user_index", defaults={"page" = 1})
+     * @Route("/users/list/{page}", name="user_index", defaults={"page" = 1})
      *
      * Default parameter for page is hardcoded (in duplication of the defaults from the Route)
      * because this controller is also called inside the layout template without any page as argument

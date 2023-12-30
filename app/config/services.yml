@@ -54,10 +54,6 @@ services:
         resource: '../../src/Wallabag/ImportBundle/Controller/'
         tags: ['controller.service_arguments']
 
-    Wallabag\UserBundle\Controller\:
-        resource: '../../src/Wallabag/UserBundle/Controller/'
-        tags: ['controller.service_arguments']
-
     # inject alias service into controllers
     Wallabag\ImportBundle\Controller\ChromeController:
         arguments:
