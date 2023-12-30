@@ -39,8 +39,8 @@ use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\CoreBundle\Repository\IgnoreOriginUserRuleRepository;
 use Wallabag\CoreBundle\Repository\TaggingRuleRepository;
 use Wallabag\CoreBundle\Repository\TagRepository;
+use Wallabag\CoreBundle\Repository\UserRepository;
 use Wallabag\CoreBundle\Tools\Utils;
-use Wallabag\UserBundle\Repository\UserRepository;
 
 class ConfigController extends AbstractController
 {

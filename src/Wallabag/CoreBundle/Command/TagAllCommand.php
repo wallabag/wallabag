@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\RuleBasedTagger;
-use Wallabag\UserBundle\Repository\UserRepository;
+use Wallabag\CoreBundle\Repository\UserRepository;
 
 class TagAllCommand extends Command
 {

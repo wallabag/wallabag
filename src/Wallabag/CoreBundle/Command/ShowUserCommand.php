@@ -9,7 +9,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Wallabag\CoreBundle\Entity\User;
-use Wallabag\UserBundle\Repository\UserRepository;
+use Wallabag\CoreBundle\Repository\UserRepository;
 
 class ShowUserCommand extends Command
 {

@@ -13,7 +13,7 @@ services:
         public: true
 
     wallabag_user.user_repository.test:
-        alias: Wallabag\UserBundle\Repository\UserRepository
+        alias: Wallabag\CoreBundle\Repository\UserRepository
         public: true
 
     filesystem_cache:

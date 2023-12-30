@@ -14,6 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Wallabag\CoreBundle\Entity\User;
+use Wallabag\CoreBundle\Repository\UserRepository;
 use Wallabag\ImportBundle\Import\ChromeImport;
 use Wallabag\ImportBundle\Import\DeliciousImport;
 use Wallabag\ImportBundle\Import\ElcuratorImport;
@@ -25,7 +26,6 @@ use Wallabag\ImportBundle\Import\ReadabilityImport;
 use Wallabag\ImportBundle\Import\ShaarliImport;
 use Wallabag\ImportBundle\Import\WallabagV1Import;
 use Wallabag\ImportBundle\Import\WallabagV2Import;
-use Wallabag\UserBundle\Repository\UserRepository;
 
 class ImportCommand extends Command
 {

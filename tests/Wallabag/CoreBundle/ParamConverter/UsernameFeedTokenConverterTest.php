@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\ParamConverter\UsernameFeedTokenConverter;
-use Wallabag\UserBundle\Repository\UserRepository;
+use Wallabag\CoreBundle\Repository\UserRepository;
 
 class UsernameFeedTokenConverterTest extends TestCase
 {

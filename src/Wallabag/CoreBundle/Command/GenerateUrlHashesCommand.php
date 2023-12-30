@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\UrlHasher;
 use Wallabag\CoreBundle\Repository\EntryRepository;
-use Wallabag\UserBundle\Repository\UserRepository;
+use Wallabag\CoreBundle\Repository\UserRepository;
 
 class GenerateUrlHashesCommand extends Command
 {

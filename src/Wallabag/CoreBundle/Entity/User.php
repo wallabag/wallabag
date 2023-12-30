@@ -21,7 +21,7 @@ use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
  * User.
  *
  * @XmlRoot("user")
- * @ORM\Entity(repositoryClass="Wallabag\UserBundle\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\UserRepository")
  * @ORM\Table(name="`user`")
  * @ORM\HasLifecycleCallbacks()
  *

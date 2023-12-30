@@ -18,10 +18,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\User;
+use Wallabag\CoreBundle\Repository\UserRepository;
 use Wallabag\UserBundle\Form\NewUserType;
 use Wallabag\UserBundle\Form\SearchUserType;
 use Wallabag\UserBundle\Form\UserType;
-use Wallabag\UserBundle\Repository\UserRepository;
 
 /**
  * User controller.
