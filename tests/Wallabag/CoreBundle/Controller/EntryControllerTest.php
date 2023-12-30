@@ -11,9 +11,9 @@ use Wallabag\CoreBundle\Entity\Config as ConfigEntity;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\SiteCredential;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Helper\CryptoProxy;
-use Wallabag\UserBundle\Entity\User;
 
 class EntryControllerTest extends WallabagCoreTestCase
 {

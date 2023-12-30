@@ -11,10 +11,10 @@ use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\RecursiveValidator;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Helper\RuleBasedIgnoreOriginProcessor;
 use Wallabag\CoreBundle\Helper\RuleBasedTagger;
-use Wallabag\UserBundle\Entity\User;
 
 class ContentProxyTest extends TestCase
 {

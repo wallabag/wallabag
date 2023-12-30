@@ -13,7 +13,6 @@ use JMS\Serializer\Annotation\XmlRoot;
 use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
 use Wallabag\CoreBundle\Helper\UrlHasher;
-use Wallabag\UserBundle\Entity\User;
 
 /**
  * Entry.
@@ -289,7 +288,7 @@ class Entry
     /**
      * @Exclude
      *
-     * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="entries")
+     * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\User", inversedBy="entries")
      *
      * @Groups({"export_all"})
      */

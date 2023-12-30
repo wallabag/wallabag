@@ -7,7 +7,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;
-use Wallabag\UserBundle\Entity\User;
+use Wallabag\CoreBundle\Entity\User;
 use Wallabag\UserBundle\Mailer\AuthCodeMailer;
 
 class AuthCodeMailerTest extends TestCase

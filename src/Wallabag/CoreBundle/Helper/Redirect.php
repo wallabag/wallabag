@@ -6,7 +6,7 @@ use GuzzleHttp\Psr7\Uri;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\CoreBundle\Entity\Config;
-use Wallabag\UserBundle\Entity\User;
+use Wallabag\CoreBundle\Entity\User;
 
 /**
  * Manage redirections to avoid redirecting to empty routes.

@@ -15,8 +15,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Repository\EntryRepository;
-use Wallabag\UserBundle\Entity\User;
 
 class EntryFilterType extends AbstractType
 {

@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
 use OpenApi\Annotations as OA;
-use Wallabag\UserBundle\Entity\User;
+use Wallabag\CoreBundle\Entity\User;
 
 /**
  * @ORM\Table("oauth2_clients")
@@ -63,7 +63,7 @@ class Client extends BaseClient
     protected $secret;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="clients")
+     * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\User", inversedBy="clients")
      */
     private $user;
 

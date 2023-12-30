@@ -160,7 +160,7 @@ nelmio_cors:
 fos_user:
     db_driver: orm
     firewall_name: secured_area
-    user_class: Wallabag\UserBundle\Entity\User
+    user_class: Wallabag\CoreBundle\Entity\User
     registration:
         confirmation:
             enabled: "%fosuser_confirmation%"

@@ -4,7 +4,7 @@ namespace Wallabag\CoreBundle\Event\Listener;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
-use Wallabag\UserBundle\Entity\User;
+use Wallabag\CoreBundle\Entity\User;
 
 /**
  * Stores the locale of the user in the session after the login.

@@ -8,9 +8,9 @@ use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
+use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\CoreBundle\Repository\TagRepository;
-use Wallabag\UserBundle\Entity\User;
 
 class WallabagExtension extends AbstractExtension implements GlobalsInterface
 {

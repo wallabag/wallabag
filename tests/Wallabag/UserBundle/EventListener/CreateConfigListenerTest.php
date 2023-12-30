@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Wallabag\CoreBundle\Entity\Config;
-use Wallabag\UserBundle\Entity\User;
+use Wallabag\CoreBundle\Entity\User;
 use Wallabag\UserBundle\EventListener\CreateConfigListener;
 
 class CreateConfigListenerTest extends TestCase

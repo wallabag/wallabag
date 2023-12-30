@@ -41,7 +41,7 @@ class AccessToken extends BaseAccessToken
     protected $client;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $user;

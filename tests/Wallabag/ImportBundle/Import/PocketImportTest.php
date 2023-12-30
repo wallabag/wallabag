@@ -15,12 +15,12 @@ use Simpleue\Queue\RedisQueue;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Helper\TagsAssigner;
 use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\ImportBundle\Import\PocketImport;
 use Wallabag\ImportBundle\Redis\Producer;
-use Wallabag\UserBundle\Entity\User;
 
 class PocketImportTest extends TestCase
 {

@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Wallabag\UserBundle\Entity\User;
+use Wallabag\CoreBundle\Entity\User;
 use Wallabag\UserBundle\Repository\UserRepository;
 
 /**
@@ -50,7 +50,7 @@ class UsernameFeedTokenConverter implements ParamConverterInterface
         $em = $this->registry->getManagerForClass($configuration->getClass());
 
         // Check, if class name is what we need
-        if (null !== $em && 'Wallabag\UserBundle\Entity\User' !== $em->getClassMetadata($configuration->getClass())->getName()) {
+        if (null !== $em && 'Wallabag\CoreBundle\Entity\User' !== $em->getClassMetadata($configuration->getClass())->getName()) {
             return false;
         }
 

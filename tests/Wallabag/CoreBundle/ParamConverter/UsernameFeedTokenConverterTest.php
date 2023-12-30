@@ -9,8 +9,8 @@ use PHPUnit\Framework\TestCase;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\ParamConverter\UsernameFeedTokenConverter;
-use Wallabag\UserBundle\Entity\User;
 use Wallabag\UserBundle\Repository\UserRepository;
 
 class UsernameFeedTokenConverterTest extends TestCase

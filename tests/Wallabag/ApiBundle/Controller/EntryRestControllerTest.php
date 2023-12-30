@@ -7,8 +7,8 @@ use Symfony\Component\DependencyInjection\Container;
 use Tests\Wallabag\ApiBundle\WallabagApiTestCase;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\ContentProxy;
-use Wallabag\UserBundle\Entity\User;
 
 class EntryRestControllerTest extends WallabagApiTestCase
 {

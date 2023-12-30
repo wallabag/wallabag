@@ -12,10 +12,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\CoreBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Form\Type\EditAnnotationType;
 use Wallabag\CoreBundle\Form\Type\NewAnnotationType;
 use Wallabag\CoreBundle\Repository\AnnotationRepository;
-use Wallabag\UserBundle\Entity\User;
 
 class AnnotationController extends AbstractFOSRestController
 {

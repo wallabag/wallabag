@@ -6,7 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
-use Wallabag\UserBundle\Entity\User;
 
 /**
  * Config.
@@ -170,7 +169,7 @@ class Config
     private $customCSS;
 
     /**
-     * @ORM\OneToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="config")
+     * @ORM\OneToOne(targetEntity="Wallabag\CoreBundle\Entity\User", inversedBy="config")
      */
     private $user;
 

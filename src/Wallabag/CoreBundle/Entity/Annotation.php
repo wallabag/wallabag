@@ -10,7 +10,6 @@ use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
-use Wallabag\UserBundle\Entity\User;
 
 /**
  * Annotation.
@@ -81,7 +80,7 @@ class Annotation
     /**
      * @Exclude
      *
-     * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\User")
      */
     private $user;
 

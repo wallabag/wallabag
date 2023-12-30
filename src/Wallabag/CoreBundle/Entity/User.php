@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\UserBundle\Entity;
+namespace Wallabag\CoreBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,8 +15,6 @@ use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface as EmailTwoFactorInterf
 use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface as GoogleTwoFactorInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Wallabag\ApiBundle\Entity\Client;
-use Wallabag\CoreBundle\Entity\Config;
-use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
 
 /**
