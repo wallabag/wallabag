@@ -168,7 +168,7 @@ fos_user:
         address: "%from_email%"
         sender_name: wallabag
     service:
-        mailer: Wallabag\UserBundle\Mailer\UserMailer
+        mailer: Wallabag\CoreBundle\Mailer\UserMailer
 
 fos_oauth_server:
     db_driver:           orm
@@ -201,7 +201,7 @@ scheb_two_factor:
         sender_email: "%twofactor_sender%"
         digits: 6
         template: "@WallabagUser/Authentication/form.html.twig"
-        mailer: Wallabag\UserBundle\Mailer\AuthCodeMailer
+        mailer: Wallabag\CoreBundle\Mailer\AuthCodeMailer
 
 rulerz:
     targets:

@@ -318,7 +318,7 @@ services:
     wallabag_core.entry.download_images.client:
         alias: 'httplug.client.wallabag_core.entry.download_images'
 
-    Wallabag\UserBundle\Mailer\UserMailer:
+    Wallabag\CoreBundle\Mailer\UserMailer:
         arguments:
             $parameters:
                 template:

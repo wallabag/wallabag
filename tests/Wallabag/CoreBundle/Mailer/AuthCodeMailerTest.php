@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\UserBundle\Mailer;
+namespace Tests\Wallabag\CoreBundle\Mailer;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Mailer\MailerInterface;
@@ -8,7 +8,7 @@ use Symfony\Component\Mime\Address;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 use Wallabag\CoreBundle\Entity\User;
-use Wallabag\UserBundle\Mailer\AuthCodeMailer;
+use Wallabag\CoreBundle\Mailer\AuthCodeMailer;
 
 class AuthCodeMailerTest extends TestCase
 {
