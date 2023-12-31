@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Controller\AbstractController;
+use Wallabag\CoreBundle\Form\Type\UploadImportType;
 use Wallabag\CoreBundle\Import\PinboardImport;
-use Wallabag\ImportBundle\Form\Type\UploadImportType;
 use Wallabag\ImportBundle\Redis\Producer as RedisProducer;
 
 class PinboardController extends AbstractController
