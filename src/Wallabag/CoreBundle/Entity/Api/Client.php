@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\ApiBundle\Entity;
+namespace Wallabag\CoreBundle\Entity\Api;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\OAuthServerBundle\Entity\Client as BaseClient;
@@ -39,12 +39,12 @@ class Client extends BaseClient
     protected $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="RefreshToken", mappedBy="client", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\Api\RefreshToken", mappedBy="client", cascade={"remove"})
      */
     protected $refreshTokens;
 
     /**
-     * @ORM\OneToMany(targetEntity="AccessToken", mappedBy="client", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\Api\AccessToken", mappedBy="client", cascade={"remove"})
      */
     protected $accessTokens;
 

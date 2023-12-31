@@ -14,7 +14,7 @@ use Scheb\TwoFactorBundle\Model\BackupCodeInterface;
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface as EmailTwoFactorInterface;
 use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface as GoogleTwoFactorInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Wallabag\ApiBundle\Entity\Client;
+use Wallabag\CoreBundle\Entity\Api\Client;
 use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
 
 /**
@@ -139,9 +139,9 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     protected $siteCredentials;
 
     /**
-     * @var ArrayCollection&iterable<\Wallabag\ApiBundle\Entity\Client>
+     * @var ArrayCollection&iterable<\Wallabag\CoreBundle\Entity\Api\Client>
      *
-     * @ORM\OneToMany(targetEntity="Wallabag\ApiBundle\Entity\Client", mappedBy="user", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\Api\Client", mappedBy="user", cascade={"remove"})
      */
     protected $clients;
 

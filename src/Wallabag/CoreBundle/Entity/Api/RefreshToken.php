@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\ApiBundle\Entity;
+namespace Wallabag\CoreBundle\Entity\Api;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\OAuthServerBundle\Entity\RefreshToken as BaseRefreshToken;
@@ -35,7 +35,7 @@ class RefreshToken extends BaseRefreshToken
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Client", inversedBy="refreshTokens")
+     * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\Api\Client", inversedBy="refreshTokens")
      * @ORM\JoinColumn(nullable=false)
      */
     protected $client;

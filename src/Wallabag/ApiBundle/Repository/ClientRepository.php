@@ -4,7 +4,7 @@ namespace Wallabag\ApiBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Wallabag\ApiBundle\Entity\Client;
+use Wallabag\CoreBundle\Entity\Api\Client;
 
 /**
  * @method Client[] findByUser(int $userId)

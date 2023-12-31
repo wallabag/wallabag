@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Wallabag\ApiBundle\Entity\Client;
+use Wallabag\CoreBundle\Entity\Api\Client;
 
 class ClientType extends AbstractType
 {

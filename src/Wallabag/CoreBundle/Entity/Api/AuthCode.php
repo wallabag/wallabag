@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\ApiBundle\Entity;
+namespace Wallabag\CoreBundle\Entity\Api;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\OAuthServerBundle\Entity\AuthCode as BaseAuthCode;
@@ -35,7 +35,7 @@ class AuthCode extends BaseAuthCode
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Client")
+     * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\Api\Client")
      * @ORM\JoinColumn(nullable=false)
      */
     protected $client;

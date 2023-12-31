@@ -15,7 +15,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Wallabag\ApiBundle\Entity\Client;
+use Wallabag\CoreBundle\Entity\Api\Client;
 use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Form\Type\NewUserType;
 

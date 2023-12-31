@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\ApiBundle\Entity;
+namespace Wallabag\CoreBundle\Entity\Api;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\OAuthServerBundle\Entity\AccessToken as BaseAccessToken;
@@ -35,7 +35,7 @@ class AccessToken extends BaseAccessToken
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Client", inversedBy="accessTokens")
+     * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\Api\Client", inversedBy="accessTokens")
      * @ORM\JoinColumn(nullable=false)
      */
     protected $client;

@@ -172,10 +172,10 @@ fos_user:
 
 fos_oauth_server:
     db_driver:           orm
-    client_class:        Wallabag\ApiBundle\Entity\Client
-    access_token_class:  Wallabag\ApiBundle\Entity\AccessToken
-    refresh_token_class: Wallabag\ApiBundle\Entity\RefreshToken
-    auth_code_class:     Wallabag\ApiBundle\Entity\AuthCode
+    client_class:        Wallabag\CoreBundle\Entity\Api\Client
+    access_token_class:  Wallabag\CoreBundle\Entity\Api\AccessToken
+    refresh_token_class: Wallabag\CoreBundle\Entity\Api\RefreshToken
+    auth_code_class:     Wallabag\CoreBundle\Entity\Api\AuthCode
     service:
         user_provider: fos_user.user_provider.username_email
         options:

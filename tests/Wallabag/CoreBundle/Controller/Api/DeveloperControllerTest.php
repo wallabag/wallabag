@@ -4,7 +4,7 @@ namespace Tests\Wallabag\CoreBundle\Controller\Api;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\ApiBundle\Entity\Client;
+use Wallabag\CoreBundle\Entity\Api\Client;
 
 class DeveloperControllerTest extends WallabagCoreTestCase
 {

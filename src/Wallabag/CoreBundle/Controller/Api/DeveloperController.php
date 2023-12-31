@@ -8,10 +8,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\ApiBundle\Entity\Client;
 use Wallabag\ApiBundle\Form\Type\ClientType;
 use Wallabag\ApiBundle\Repository\ClientRepository;
 use Wallabag\CoreBundle\Controller\AbstractController;
+use Wallabag\CoreBundle\Entity\Api\Client;
 
 class DeveloperController extends AbstractController
 {

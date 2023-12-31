@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\ApiBundle\Entity;
+namespace Wallabag\CoreBundle\Entity\Api;
 
 use OpenApi\Annotations as OA;
 
