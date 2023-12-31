@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Import\WallabagV1Import;
-use Wallabag\ImportBundle\Redis\Producer as RedisProducer;
+use Wallabag\CoreBundle\Redis\Producer as RedisProducer;
 
 class WallabagV1Controller extends WallabagController
 {

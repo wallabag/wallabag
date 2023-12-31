@@ -34,7 +34,7 @@ services:
 
     Wallabag\CoreBundle\:
         resource: '../../src/Wallabag/CoreBundle/*'
-        exclude: ['../../src/Wallabag/CoreBundle/{Consumer,Controller,Entity,DataFixtures}', '../../src/Wallabag/CoreBundle/Event/*Event.php']
+        exclude: ['../../src/Wallabag/CoreBundle/{Consumer,Controller,Entity,DataFixtures,Redis}', '../../src/Wallabag/CoreBundle/Event/*Event.php']
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -102,10 +102,6 @@ services:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_pocket_html_producer'
             $redisProducer: '@wallabag_import.producer.redis.pocket_html'
-
-    Wallabag\ImportBundle\:
-        resource: '../../src/Wallabag/ImportBundle/*'
-        exclude: '../../src/Wallabag/ImportBundle/{Consumer,Controller,Redis}'
 
     Doctrine\DBAL\Connection:
         alias: doctrine.dbal.default_connection

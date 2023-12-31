@@ -10,7 +10,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Controller\AbstractController;
 use Wallabag\CoreBundle\Form\Type\UploadImportType;
 use Wallabag\CoreBundle\Import\ReadabilityImport;
-use Wallabag\ImportBundle\Redis\Producer as RedisProducer;
+use Wallabag\CoreBundle\Redis\Producer as RedisProducer;
 
 class ReadabilityController extends AbstractController
 {

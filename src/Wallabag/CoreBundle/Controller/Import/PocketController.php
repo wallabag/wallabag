@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Controller\AbstractController;
 use Wallabag\CoreBundle\Import\PocketImport;
-use Wallabag\ImportBundle\Redis\Producer as RedisProducer;
+use Wallabag\CoreBundle\Redis\Producer as RedisProducer;
 
 class PocketController extends AbstractController
 {

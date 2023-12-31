@@ -16,8 +16,8 @@ use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Helper\TagsAssigner;
 use Wallabag\CoreBundle\Import\WallabagV2Import;
+use Wallabag\CoreBundle\Redis\Producer;
 use Wallabag\CoreBundle\Repository\EntryRepository;
-use Wallabag\ImportBundle\Redis\Producer;
 
 class WallabagV2ImportTest extends TestCase
 {

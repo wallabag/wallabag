@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\ImportBundle\Redis;
+namespace Wallabag\CoreBundle\Redis;
 
 use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use Simpleue\Queue\RedisQueue;

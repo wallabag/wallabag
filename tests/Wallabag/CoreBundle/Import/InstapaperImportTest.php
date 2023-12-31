@@ -16,8 +16,8 @@ use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Helper\TagsAssigner;
 use Wallabag\CoreBundle\Import\InstapaperImport;
+use Wallabag\CoreBundle\Redis\Producer;
 use Wallabag\CoreBundle\Repository\EntryRepository;
-use Wallabag\ImportBundle\Redis\Producer;
 
 class InstapaperImportTest extends TestCase
 {

@@ -12,7 +12,7 @@ services:
             $queueName: "wallabag.import.readability"
 
     wallabag_import.producer.redis.readability:
-        class: Wallabag\ImportBundle\Redis\Producer
+        class: Wallabag\CoreBundle\Redis\Producer
         arguments:
             - "@wallabag_import.queue.redis.readability"
 
@@ -28,7 +28,7 @@ services:
             $queueName: "wallabag.import.instapaper"
 
     wallabag_import.producer.redis.instapaper:
-        class: Wallabag\ImportBundle\Redis\Producer
+        class: Wallabag\CoreBundle\Redis\Producer
         arguments:
             - "@wallabag_import.queue.redis.instapaper"
 
@@ -44,7 +44,7 @@ services:
             $queueName: "wallabag.import.pinboard"
 
     wallabag_import.producer.redis.pinboard:
-        class: Wallabag\ImportBundle\Redis\Producer
+        class: Wallabag\CoreBundle\Redis\Producer
         arguments:
             - "@wallabag_import.queue.redis.pinboard"
 
@@ -60,7 +60,7 @@ services:
             $queueName: "wallabag.import.delicious"
 
     wallabag_import.producer.redis.delicious:
-        class: Wallabag\ImportBundle\Redis\Producer
+        class: Wallabag\CoreBundle\Redis\Producer
         arguments:
             - "@wallabag_import.queue.redis.delicious"
 
@@ -76,7 +76,7 @@ services:
             $queueName: "wallabag.import.pocket"
 
     wallabag_import.producer.redis.pocket:
-        class: Wallabag\ImportBundle\Redis\Producer
+        class: Wallabag\CoreBundle\Redis\Producer
         arguments:
             - "@wallabag_import.queue.redis.pocket"
 
@@ -92,7 +92,7 @@ services:
             $queueName: "wallabag.import.wallabag_v1"
 
     wallabag_import.producer.redis.wallabag_v1:
-        class: Wallabag\ImportBundle\Redis\Producer
+        class: Wallabag\CoreBundle\Redis\Producer
         arguments:
             - "@wallabag_import.queue.redis.wallabag_v1"
 
@@ -108,7 +108,7 @@ services:
             $queueName: "wallabag.import.wallabag_v2"
 
     wallabag_import.producer.redis.wallabag_v2:
-        class: Wallabag\ImportBundle\Redis\Producer
+        class: Wallabag\CoreBundle\Redis\Producer
         arguments:
             - "@wallabag_import.queue.redis.wallabag_v2"
 
@@ -124,7 +124,7 @@ services:
             $queueName: "wallabag.import.elcurator"
 
     wallabag_import.producer.redis.elcurator:
-        class: Wallabag\ImportBundle\Redis\Producer
+        class: Wallabag\CoreBundle\Redis\Producer
         arguments:
             - "@wallabag_import.queue.redis.elcurator"
 
@@ -140,7 +140,7 @@ services:
             $queueName: "wallabag.import.firefox"
 
     wallabag_import.producer.redis.firefox:
-        class: Wallabag\ImportBundle\Redis\Producer
+        class: Wallabag\CoreBundle\Redis\Producer
         arguments:
             - "@wallabag_import.queue.redis.firefox"
 
@@ -156,7 +156,7 @@ services:
             $queueName: "wallabag.import.chrome"
 
     wallabag_import.producer.redis.chrome:
-        class: Wallabag\ImportBundle\Redis\Producer
+        class: Wallabag\CoreBundle\Redis\Producer
         arguments:
             - "@wallabag_import.queue.redis.chrome"
 
@@ -172,7 +172,7 @@ services:
             $queueName: "wallabag.import.shaarli"
 
     wallabag_import.producer.redis.shaarli:
-        class: Wallabag\ImportBundle\Redis\Producer
+        class: Wallabag\CoreBundle\Redis\Producer
         arguments:
             - "@wallabag_import.queue.redis.shaarli"
 
@@ -188,7 +188,7 @@ services:
             $queueName: "wallabag.import.pocket_html"
 
     wallabag_import.producer.redis.pocket_html:
-        class: Wallabag\ImportBundle\Redis\Producer
+        class: Wallabag\CoreBundle\Redis\Producer
         arguments:
             - "@wallabag_import.queue.redis.pocket_html"
 

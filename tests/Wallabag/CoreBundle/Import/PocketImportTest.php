@@ -19,8 +19,8 @@ use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Helper\TagsAssigner;
 use Wallabag\CoreBundle\Import\PocketImport;
+use Wallabag\CoreBundle\Redis\Producer;
 use Wallabag\CoreBundle\Repository\EntryRepository;
-use Wallabag\ImportBundle\Redis\Producer;
 
 class PocketImportTest extends TestCase
 {
