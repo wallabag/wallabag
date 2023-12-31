@@ -38,7 +38,7 @@ class ShaarliImportTest extends TestCase
     public function testImport()
     {
         $shaarliImport = $this->getShaarliImport(false, 2);
-        $shaarliImport->setFilepath(__DIR__ . '/../fixtures/shaarli-bookmarks.html');
+        $shaarliImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/shaarli-bookmarks.html');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -71,7 +71,7 @@ class ShaarliImportTest extends TestCase
     public function testImportAndMarkAllAsRead()
     {
         $shaarliImport = $this->getShaarliImport(false, 1);
-        $shaarliImport->setFilepath(__DIR__ . '/../fixtures/shaarli-bookmarks.html');
+        $shaarliImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/shaarli-bookmarks.html');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -111,7 +111,7 @@ class ShaarliImportTest extends TestCase
     public function testImportWithRabbit()
     {
         $shaarliImport = $this->getShaarliImport();
-        $shaarliImport->setFilepath(__DIR__ . '/../fixtures/shaarli-bookmarks.html');
+        $shaarliImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/shaarli-bookmarks.html');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -151,7 +151,7 @@ class ShaarliImportTest extends TestCase
     public function testImportWithRedis()
     {
         $shaarliImport = $this->getShaarliImport();
-        $shaarliImport->setFilepath(__DIR__ . '/../fixtures/shaarli-bookmarks.html');
+        $shaarliImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/shaarli-bookmarks.html');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -191,7 +191,7 @@ class ShaarliImportTest extends TestCase
     public function testImportBadFile()
     {
         $shaarliImport = $this->getShaarliImport();
-        $shaarliImport->setFilepath(__DIR__ . '/../fixtures/wallabag-v1.jsonx');
+        $shaarliImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/wallabag-v1.jsonx');
 
         $res = $shaarliImport->import();
 
@@ -205,7 +205,7 @@ class ShaarliImportTest extends TestCase
     public function testImportUserNotDefined()
     {
         $shaarliImport = $this->getShaarliImport(true);
-        $shaarliImport->setFilepath(__DIR__ . '/../fixtures/shaarli-bookmarks.html');
+        $shaarliImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/shaarli-bookmarks.html');
 
         $res = $shaarliImport->import();
 

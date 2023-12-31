@@ -38,7 +38,7 @@ class PocketHtmlImportTest extends TestCase
     public function testImport()
     {
         $pocketHtmlImport = $this->getPocketHtmlImport(false, 2);
-        $pocketHtmlImport->setFilepath(__DIR__ . '/../fixtures/ril_export.html');
+        $pocketHtmlImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/ril_export.html');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -71,7 +71,7 @@ class PocketHtmlImportTest extends TestCase
     public function testImportAndMarkAllAsRead()
     {
         $pocketHtmlImport = $this->getPocketHtmlImport(false, 1);
-        $pocketHtmlImport->setFilepath(__DIR__ . '/../fixtures/ril_export.html');
+        $pocketHtmlImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/ril_export.html');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -111,7 +111,7 @@ class PocketHtmlImportTest extends TestCase
     public function testImportWithRabbit()
     {
         $pocketHtmlImport = $this->getPocketHtmlImport();
-        $pocketHtmlImport->setFilepath(__DIR__ . '/../fixtures/ril_export.html');
+        $pocketHtmlImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/ril_export.html');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -151,7 +151,7 @@ class PocketHtmlImportTest extends TestCase
     public function testImportWithRedis()
     {
         $pocketHtmlImport = $this->getPocketHtmlImport();
-        $pocketHtmlImport->setFilepath(__DIR__ . '/../fixtures/ril_export.html');
+        $pocketHtmlImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/ril_export.html');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -191,7 +191,7 @@ class PocketHtmlImportTest extends TestCase
     public function testImportBadFile()
     {
         $pocketHtmlImport = $this->getPocketHtmlImport();
-        $pocketHtmlImport->setFilepath(__DIR__ . '/../fixtures/wallabag-v1.jsonx');
+        $pocketHtmlImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/wallabag-v1.jsonx');
 
         $res = $pocketHtmlImport->import();
 
@@ -205,7 +205,7 @@ class PocketHtmlImportTest extends TestCase
     public function testImportUserNotDefined()
     {
         $pocketHtmlImport = $this->getPocketHtmlImport(true);
-        $pocketHtmlImport->setFilepath(__DIR__ . '/../fixtures/ril_export.html');
+        $pocketHtmlImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/ril_export.html');
 
         $res = $pocketHtmlImport->import();
 

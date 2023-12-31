@@ -1,32 +1,32 @@
 <?php
 
-namespace Wallabag\ImportBundle\Controller;
+namespace Wallabag\CoreBundle\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\ImportBundle\Import\PocketHtmlImport;
+use Wallabag\ImportBundle\Import\FirefoxImport;
 use Wallabag\ImportBundle\Redis\Producer as RedisProducer;
 
-class PocketHtmlController extends HtmlController
+class FirefoxController extends BrowserController
 {
-    private PocketHtmlImport $pocketHtmlImport;
+    private FirefoxImport $firefoxImport;
     private Config $craueConfig;
     private RabbitMqProducer $rabbitMqProducer;
     private RedisProducer $redisProducer;
 
-    public function __construct(PocketHtmlImport $pocketHtmlImport, Config $craueConfig, RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
+    public function __construct(FirefoxImport $firefoxImport, Config $craueConfig, RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
     {
-        $this->pocketHtmlImport = $pocketHtmlImport;
+        $this->firefoxImport = $firefoxImport;
         $this->craueConfig = $craueConfig;
         $this->rabbitMqProducer = $rabbitMqProducer;
         $this->redisProducer = $redisProducer;
     }
 
     /**
-     * @Route("/pocket_html", name="import_pocket_html")
+     * @Route("/import/firefox", name="import_firefox")
      */
     public function indexAction(Request $request, TranslatorInterface $translator)
     {
@@ -36,16 +36,16 @@ class PocketHtmlController extends HtmlController
     protected function getImportService()
     {
         if ($this->craueConfig->get('import_with_rabbitmq')) {
-            $this->pocketHtmlImport->setProducer($this->rabbitMqProducer);
+            $this->firefoxImport->setProducer($this->rabbitMqProducer);
         } elseif ($this->craueConfig->get('import_with_redis')) {
-            $this->pocketHtmlImport->setProducer($this->redisProducer);
+            $this->firefoxImport->setProducer($this->redisProducer);
         }
 
-        return $this->pocketHtmlImport;
+        return $this->firefoxImport;
     }
 
     protected function getImportTemplate()
     {
-        return '@WallabagImport/PocketHtml/index.html.twig';
+        return '@WallabagImport/Firefox/index.html.twig';
     }
 }

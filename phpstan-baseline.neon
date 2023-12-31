@@ -21,6 +21,36 @@ parameters:
 			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
 
 		-
+			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Controller/Import/BrowserController.php
+
+		-
+			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Controller/Import/BrowserController.php
+
+		-
+			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Controller/Import/HtmlController.php
+
+		-
+			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Controller/Import/HtmlController.php
+
+		-
+			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Controller/Import/WallabagController.php
+
+		-
+			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Controller/Import/WallabagController.php
+
+		-
 			message: "#^Call to an undefined method Spiriit\\\\Bundle\\\\FormFilterBundle\\\\Filter\\\\Query\\\\QueryInterface\\:\\:getExpressionBuilder\\(\\)\\.$#"
 			count: 1
 			path: src/Wallabag/CoreBundle/Event/Subscriber/CustomDoctrineORMSubscriber.php
@@ -39,36 +69,6 @@ parameters:
 			message: "#^PHPDoc type Symfony\\\\Component\\\\Mailer\\\\MailerInterface of property Wallabag\\\\CoreBundle\\\\Mailer\\\\UserMailer\\:\\:\\$mailer is not covariant with PHPDoc type Swift_Mailer of overridden property FOS\\\\UserBundle\\\\Mailer\\\\TwigSwiftMailer\\:\\:\\$mailer\\.$#"
 			count: 1
 			path: src/Wallabag/CoreBundle/Mailer/UserMailer.php
-
-		-
-			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
-			count: 1
-			path: src/Wallabag/ImportBundle/Controller/BrowserController.php
-
-		-
-			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
-			count: 1
-			path: src/Wallabag/ImportBundle/Controller/BrowserController.php
-
-		-
-			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
-			count: 1
-			path: src/Wallabag/ImportBundle/Controller/HtmlController.php
-
-		-
-			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
-			count: 1
-			path: src/Wallabag/ImportBundle/Controller/HtmlController.php
-
-		-
-			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
-			count: 1
-			path: src/Wallabag/ImportBundle/Controller/WallabagController.php
-
-		-
-			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
-			count: 1
-			path: src/Wallabag/ImportBundle/Controller/WallabagController.php
 
 		-
 			message: "#^Call to an undefined method DOMNode\\:\\:getAttribute\\(\\)\\.$#"

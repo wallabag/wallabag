@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\ImportBundle\Controller;
+namespace Tests\Wallabag\CoreBundle\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
@@ -72,7 +72,7 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/wallabag-v2.json', 'wallabag-v2.json');
+        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/wallabag-v2.json', 'wallabag-v2.json');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -100,7 +100,7 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/wallabag-v2');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/wallabag-v2.json', 'wallabag-v2.json');
+        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/wallabag-v2.json', 'wallabag-v2.json');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -166,7 +166,7 @@ class WallabagV2ControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/wallabag-v2');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/test.txt', 'test.txt');
+        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/test.txt', 'test.txt');
 
         $data = [
             'upload_import_file[file]' => $file,

@@ -40,7 +40,7 @@ class InstapaperImportTest extends TestCase
     public function testImport()
     {
         $instapaperImport = $this->getInstapaperImport(false, 4);
-        $instapaperImport->setFilepath(__DIR__ . '/../fixtures/instapaper-export.csv');
+        $instapaperImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/instapaper-export.csv');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -73,7 +73,7 @@ class InstapaperImportTest extends TestCase
     public function testImportAndMarkAllAsRead()
     {
         $instapaperImport = $this->getInstapaperImport(false, 1);
-        $instapaperImport->setFilepath(__DIR__ . '/../fixtures/instapaper-export.csv');
+        $instapaperImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/instapaper-export.csv');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -111,7 +111,7 @@ class InstapaperImportTest extends TestCase
     public function testImportWithRabbit()
     {
         $instapaperImport = $this->getInstapaperImport();
-        $instapaperImport->setFilepath(__DIR__ . '/../fixtures/instapaper-export.csv');
+        $instapaperImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/instapaper-export.csv');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -151,7 +151,7 @@ class InstapaperImportTest extends TestCase
     public function testImportWithRedis()
     {
         $instapaperImport = $this->getInstapaperImport();
-        $instapaperImport->setFilepath(__DIR__ . '/../fixtures/instapaper-export.csv');
+        $instapaperImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/instapaper-export.csv');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -191,7 +191,7 @@ class InstapaperImportTest extends TestCase
     public function testImportBadFile()
     {
         $instapaperImport = $this->getInstapaperImport();
-        $instapaperImport->setFilepath(__DIR__ . '/../fixtures/wallabag-v1.jsonx');
+        $instapaperImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/wallabag-v1.jsonx');
 
         $res = $instapaperImport->import();
 
@@ -205,7 +205,7 @@ class InstapaperImportTest extends TestCase
     public function testImportUserNotDefined()
     {
         $instapaperImport = $this->getInstapaperImport(true);
-        $instapaperImport->setFilepath(__DIR__ . '/../fixtures/instapaper-export.csv');
+        $instapaperImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/instapaper-export.csv');
 
         $res = $instapaperImport->import();
 

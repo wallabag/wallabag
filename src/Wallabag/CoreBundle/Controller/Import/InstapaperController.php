@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\ImportBundle\Controller;
+namespace Wallabag\CoreBundle\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
@@ -9,10 +9,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Controller\AbstractController;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
-use Wallabag\ImportBundle\Import\ReadabilityImport;
+use Wallabag\ImportBundle\Import\InstapaperImport;
 use Wallabag\ImportBundle\Redis\Producer as RedisProducer;
 
-class ReadabilityController extends AbstractController
+class InstapaperController extends AbstractController
 {
     private RabbitMqProducer $rabbitMqProducer;
     private RedisProducer $redisProducer;
@@ -24,28 +24,28 @@ class ReadabilityController extends AbstractController
     }
 
     /**
-     * @Route("/readability", name="import_readability")
+     * @Route("/import/instapaper", name="import_instapaper")
      */
-    public function indexAction(Request $request, ReadabilityImport $readability, Config $craueConfig, TranslatorInterface $translator)
+    public function indexAction(Request $request, InstapaperImport $instapaper, Config $craueConfig, TranslatorInterface $translator)
     {
         $form = $this->createForm(UploadImportType::class);
         $form->handleRequest($request);
 
-        $readability->setUser($this->getUser());
+        $instapaper->setUser($this->getUser());
 
         if ($craueConfig->get('import_with_rabbitmq')) {
-            $readability->setProducer($this->rabbitMqProducer);
+            $instapaper->setProducer($this->rabbitMqProducer);
         } elseif ($craueConfig->get('import_with_redis')) {
-            $readability->setProducer($this->redisProducer);
+            $instapaper->setProducer($this->redisProducer);
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('file')->getData();
             $markAsRead = $form->get('mark_as_read')->getData();
-            $name = 'readability_' . $this->getUser()->getId() . '.json';
+            $name = 'instapaper_' . $this->getUser()->getId() . '.csv';
 
             if (null !== $file && \in_array($file->getClientMimeType(), $this->getParameter('wallabag_import.allow_mimetypes'), true) && $file->move($this->getParameter('wallabag_import.resource_dir'), $name)) {
-                $res = $readability
+                $res = $instapaper
                     ->setFilepath($this->getParameter('wallabag_import.resource_dir') . '/' . $name)
                     ->setMarkAsRead($markAsRead)
                     ->import();
@@ -53,7 +53,7 @@ class ReadabilityController extends AbstractController
                 $message = 'flashes.import.notice.failed';
 
                 if (true === $res) {
-                    $summary = $readability->getSummary();
+                    $summary = $instapaper->getSummary();
                     $message = $translator->trans('flashes.import.notice.summary', [
                         '%imported%' => $summary['imported'],
                         '%skipped%' => $summary['skipped'],
@@ -76,9 +76,9 @@ class ReadabilityController extends AbstractController
             $this->addFlash('notice', 'flashes.import.notice.failed_on_file');
         }
 
-        return $this->render('@WallabagImport/Readability/index.html.twig', [
+        return $this->render('@WallabagImport/Instapaper/index.html.twig', [
             'form' => $form->createView(),
-            'import' => $readability,
+            'import' => $instapaper,
         ]);
     }
 }

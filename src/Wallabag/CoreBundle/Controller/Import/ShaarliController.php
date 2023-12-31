@@ -1,32 +1,32 @@
 <?php
 
-namespace Wallabag\ImportBundle\Controller;
+namespace Wallabag\CoreBundle\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\ImportBundle\Import\WallabagV1Import;
+use Wallabag\ImportBundle\Import\ShaarliImport;
 use Wallabag\ImportBundle\Redis\Producer as RedisProducer;
 
-class WallabagV1Controller extends WallabagController
+class ShaarliController extends HtmlController
 {
-    private WallabagV1Import $wallabagImport;
+    private ShaarliImport $shaarliImport;
     private Config $craueConfig;
     private RabbitMqProducer $rabbitMqProducer;
     private RedisProducer $redisProducer;
 
-    public function __construct(WallabagV1Import $wallabagImport, Config $craueConfig, RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
+    public function __construct(ShaarliImport $shaarliImport, Config $craueConfig, RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
     {
-        $this->wallabagImport = $wallabagImport;
+        $this->shaarliImport = $shaarliImport;
         $this->craueConfig = $craueConfig;
         $this->rabbitMqProducer = $rabbitMqProducer;
         $this->redisProducer = $redisProducer;
     }
 
     /**
-     * @Route("/wallabag-v1", name="import_wallabag_v1")
+     * @Route("/import/shaarli", name="import_shaarli")
      */
     public function indexAction(Request $request, TranslatorInterface $translator)
     {
@@ -36,16 +36,16 @@ class WallabagV1Controller extends WallabagController
     protected function getImportService()
     {
         if ($this->craueConfig->get('import_with_rabbitmq')) {
-            $this->wallabagImport->setProducer($this->rabbitMqProducer);
+            $this->shaarliImport->setProducer($this->rabbitMqProducer);
         } elseif ($this->craueConfig->get('import_with_redis')) {
-            $this->wallabagImport->setProducer($this->redisProducer);
+            $this->shaarliImport->setProducer($this->redisProducer);
         }
 
-        return $this->wallabagImport;
+        return $this->shaarliImport;
     }
 
     protected function getImportTemplate()
     {
-        return '@WallabagImport/WallabagV1/index.html.twig';
+        return '@WallabagImport/Shaarli/index.html.twig';
     }
 }

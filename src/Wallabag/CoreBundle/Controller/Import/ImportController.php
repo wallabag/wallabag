@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\ImportBundle\Controller;
+namespace Wallabag\CoreBundle\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use Predis\Client;
@@ -20,7 +20,7 @@ class ImportController extends AbstractController
     }
 
     /**
-     * @Route("/", name="import")
+     * @Route("/import/", name="import")
      */
     public function importAction(ImportChain $importChain)
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\ImportBundle\Controller;
+namespace Tests\Wallabag\CoreBundle\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
@@ -72,7 +72,7 @@ class ElcuratorControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/elcurator.json', 'elcurator.json');
+        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/elcurator.json', 'elcurator.json');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -100,7 +100,7 @@ class ElcuratorControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/elcurator');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/elcurator.json', 'elcurator.json');
+        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/elcurator.json', 'elcurator.json');
 
         $data = [
             'upload_import_file[file]' => $file,

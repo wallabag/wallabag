@@ -1,32 +1,32 @@
 <?php
 
-namespace Wallabag\ImportBundle\Controller;
+namespace Wallabag\CoreBundle\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\ImportBundle\Import\ChromeImport;
+use Wallabag\ImportBundle\Import\ElcuratorImport;
 use Wallabag\ImportBundle\Redis\Producer as RedisProducer;
 
-class ChromeController extends BrowserController
+class ElcuratorController extends WallabagController
 {
-    private ChromeImport $chromeImport;
+    private ElcuratorImport $elcuratorImport;
     private Config $craueConfig;
     private RabbitMqProducer $rabbitMqProducer;
     private RedisProducer $redisProducer;
 
-    public function __construct(ChromeImport $chromeImport, Config $craueConfig, RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
+    public function __construct(ElcuratorImport $elcuratorImport, Config $craueConfig, RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
     {
-        $this->chromeImport = $chromeImport;
+        $this->elcuratorImport = $elcuratorImport;
         $this->craueConfig = $craueConfig;
         $this->rabbitMqProducer = $rabbitMqProducer;
         $this->redisProducer = $redisProducer;
     }
 
     /**
-     * @Route("/chrome", name="import_chrome")
+     * @Route("/import/elcurator", name="import_elcurator")
      */
     public function indexAction(Request $request, TranslatorInterface $translator)
     {
@@ -36,16 +36,16 @@ class ChromeController extends BrowserController
     protected function getImportService()
     {
         if ($this->craueConfig->get('import_with_rabbitmq')) {
-            $this->chromeImport->setProducer($this->rabbitMqProducer);
+            $this->elcuratorImport->setProducer($this->rabbitMqProducer);
         } elseif ($this->craueConfig->get('import_with_redis')) {
-            $this->chromeImport->setProducer($this->redisProducer);
+            $this->elcuratorImport->setProducer($this->redisProducer);
         }
 
-        return $this->chromeImport;
+        return $this->elcuratorImport;
     }
 
     protected function getImportTemplate()
     {
-        return '@WallabagImport/Chrome/index.html.twig';
+        return '@WallabagImport/Elcurator/index.html.twig';
     }
 }

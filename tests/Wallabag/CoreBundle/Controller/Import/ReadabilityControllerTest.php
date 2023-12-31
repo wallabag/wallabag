@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\ImportBundle\Controller;
+namespace Tests\Wallabag\CoreBundle\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
@@ -9,28 +9,28 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Entity\Entry;
 
-class InstapaperControllerTest extends WallabagCoreTestCase
+class ReadabilityControllerTest extends WallabagCoreTestCase
 {
-    public function testImportInstapaper()
+    public function testImportReadability()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/instapaper');
+        $crawler = $client->request('GET', '/import/readability');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
-    public function testImportInstapaperWithRabbitEnabled()
+    public function testImportReadabilityWithRabbitEnabled()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
-        $crawler = $client->request('GET', '/import/instapaper');
+        $crawler = $client->request('GET', '/import/readability');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
@@ -39,12 +39,12 @@ class InstapaperControllerTest extends WallabagCoreTestCase
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
-    public function testImportInstapaperBadFile()
+    public function testImportReadabilityBadFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/instapaper');
+        $crawler = $client->request('GET', '/import/readability');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
         $data = [
@@ -56,14 +56,14 @@ class InstapaperControllerTest extends WallabagCoreTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testImportInstapaperWithRedisEnabled()
+    public function testImportReadabilityWithRedisEnabled()
     {
         $this->checkRedis();
         $this->logInAs('admin');
         $client = $this->getTestClient();
         $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
-        $crawler = $client->request('GET', '/import/instapaper');
+        $crawler = $client->request('GET', '/import/readability');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
@@ -71,7 +71,7 @@ class InstapaperControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/instapaper-export.csv', 'instapaper.csv');
+        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/readability.json', 'readability.json');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -86,20 +86,20 @@ class InstapaperControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
-        $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.instapaper'));
+        $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.readability'));
 
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportInstapaperWithFile()
+    public function testImportReadabilityWithFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/instapaper');
+        $crawler = $client->request('GET', '/import/readability');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/instapaper-export.csv', 'instapaper.csv');
+        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/readability.json', 'readability.json');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -111,49 +111,39 @@ class InstapaperControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->followRedirect();
 
+        $content = $client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
+            ->findByUrlAndUserId(
+                'https://www.20minutes.fr/bordeaux/2120479-20170823-bordeaux-poche-chocolatine-association-traduit-etudiants-etrangers-mots-sud-ouest',
+                $this->getLoggedInUserId()
+            );
+
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
-        $content = $client->getContainer()
-            ->get(EntityManagerInterface::class)
-            ->getRepository(Entry::class)
-            ->findByUrlAndUserId(
-                'https://www.liberation.fr/societe/police-justice/cours-dassises-on-efface-le-peuple-dun-processus-judiciaire-dont-il-est-pourtant-le-coeur-battant-20210414_FYUNIZENHRGHZLAZEKSMKZYEPI/',
-                $this->getLoggedInUserId()
-            );
-
         $this->assertInstanceOf(Entry::class, $content);
+        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://www.20minutes.fr is ok');
+        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.20minutes.fr is ok');
+        $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.20minutes.fr is ok');
 
-        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://www.liberation.fr is ok');
-        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.liberation.fr is ok');
-        $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.liberation.fr is ok');
-        $this->assertContains('foot', $content->getTagsLabel(), 'It includes the "foot" tag');
-        $this->assertCount(1, $content->getTags());
+        $tags = $content->getTagsLabel();
+        $this->assertContains('foot', $tags, 'It includes the "foot" tag');
+        $this->assertCount(1, $tags);
+
         $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
-
-        $content = $client->getContainer()
-            ->get(EntityManagerInterface::class)
-            ->getRepository(Entry::class)
-            ->findByUrlAndUserId(
-                'https://www.20minutes.fr/high-tech/2077615-20170531-quoi-exactement-tweet-covfefe-donald-trump-persiste-signe',
-                $this->getLoggedInUserId()
-            );
-
-        $this->assertContains('foot', $content->getTagsLabel());
-        $this->assertContains('test_tag', $content->getTagsLabel());
-
-        $this->assertCount(2, $content->getTags());
+        $this->assertSame('2016-09-08', $content->getCreatedAt()->format('Y-m-d'));
     }
 
-    public function testImportInstapaperWithFileAndMarkAllAsRead()
+    public function testImportReadabilityWithFileAndMarkAllAsRead()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/instapaper');
+        $crawler = $client->request('GET', '/import/readability');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/instapaper-export.csv', 'instapaper-read.csv');
+        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/readability-read.json', 'readability-read.json');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -170,35 +160,37 @@ class InstapaperControllerTest extends WallabagCoreTestCase
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
-                'https://redditblog.com/2016/09/20/amp-and-reactredux/',
+                'https://blog.travis-ci.com/2016-07-28-what-we-learned-from-analyzing-2-million-travis-builds/',
                 $this->getLoggedInUserId()
             );
 
+        $this->assertInstanceOf(Entry::class, $content1);
         $this->assertTrue($content1->isArchived());
 
         $content2 = $client->getContainer()
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
-                'https://medium.com/@the_minh/why-foursquare-swarm-is-still-my-favourite-social-network-e38228493e6c',
+                'https://facebook.github.io/graphql/October2016/',
                 $this->getLoggedInUserId()
             );
 
+        $this->assertInstanceOf(Entry::class, $content2);
         $this->assertTrue($content2->isArchived());
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
     }
 
-    public function testImportInstapaperWithEmptyFile()
+    public function testImportReadabilityWithEmptyFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/instapaper');
+        $crawler = $client->request('GET', '/import/readability');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/test.txt', 'test.txt');
+        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/test.txt', 'test.txt');
 
         $data = [
             'upload_import_file[file]' => $file,

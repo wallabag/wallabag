@@ -1,32 +1,32 @@
 <?php
 
-namespace Wallabag\ImportBundle\Controller;
+namespace Wallabag\CoreBundle\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\ImportBundle\Import\ElcuratorImport;
+use Wallabag\ImportBundle\Import\PocketHtmlImport;
 use Wallabag\ImportBundle\Redis\Producer as RedisProducer;
 
-class ElcuratorController extends WallabagController
+class PocketHtmlController extends HtmlController
 {
-    private ElcuratorImport $elcuratorImport;
+    private PocketHtmlImport $pocketHtmlImport;
     private Config $craueConfig;
     private RabbitMqProducer $rabbitMqProducer;
     private RedisProducer $redisProducer;
 
-    public function __construct(ElcuratorImport $elcuratorImport, Config $craueConfig, RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
+    public function __construct(PocketHtmlImport $pocketHtmlImport, Config $craueConfig, RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
     {
-        $this->elcuratorImport = $elcuratorImport;
+        $this->pocketHtmlImport = $pocketHtmlImport;
         $this->craueConfig = $craueConfig;
         $this->rabbitMqProducer = $rabbitMqProducer;
         $this->redisProducer = $redisProducer;
     }
 
     /**
-     * @Route("/elcurator", name="import_elcurator")
+     * @Route("/import/pocket_html", name="import_pocket_html")
      */
     public function indexAction(Request $request, TranslatorInterface $translator)
     {
@@ -36,16 +36,16 @@ class ElcuratorController extends WallabagController
     protected function getImportService()
     {
         if ($this->craueConfig->get('import_with_rabbitmq')) {
-            $this->elcuratorImport->setProducer($this->rabbitMqProducer);
+            $this->pocketHtmlImport->setProducer($this->rabbitMqProducer);
         } elseif ($this->craueConfig->get('import_with_redis')) {
-            $this->elcuratorImport->setProducer($this->redisProducer);
+            $this->pocketHtmlImport->setProducer($this->redisProducer);
         }
 
-        return $this->elcuratorImport;
+        return $this->pocketHtmlImport;
     }
 
     protected function getImportTemplate()
     {
-        return '@WallabagImport/Elcurator/index.html.twig';
+        return '@WallabagImport/PocketHtml/index.html.twig';
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\ImportBundle\Controller;
+namespace Wallabag\CoreBundle\Controller\Import;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,10 +10,10 @@ use Wallabag\CoreBundle\Controller\AbstractController;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
 use Wallabag\ImportBundle\Import\ImportInterface;
 
-abstract class HtmlController extends AbstractController
+abstract class BrowserController extends AbstractController
 {
     /**
-     * @Route("/html", name="import_html")
+     * @Route("/import/browser", name="import_browser")
      *
      * @return Response
      */
@@ -28,7 +28,7 @@ abstract class HtmlController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('file')->getData();
             $markAsRead = $form->get('mark_as_read')->getData();
-            $name = $this->getUser()->getId() . '.html';
+            $name = $this->getUser()->getId() . '.json';
 
             if (null !== $file && \in_array($file->getClientMimeType(), $this->getParameter('wallabag_import.allow_mimetypes'), true) && $file->move($this->getParameter('wallabag_import.resource_dir'), $name)) {
                 $res = $wallabag

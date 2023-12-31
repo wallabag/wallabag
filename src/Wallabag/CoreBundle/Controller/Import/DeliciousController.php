@@ -1,40 +1,51 @@
 <?php
 
-namespace Wallabag\ImportBundle\Controller;
+namespace Wallabag\CoreBundle\Controller\Import;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Craue\ConfigBundle\Util\Config;
+use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Controller\AbstractController;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
-use Wallabag\ImportBundle\Import\ImportInterface;
+use Wallabag\ImportBundle\Import\DeliciousImport;
+use Wallabag\ImportBundle\Redis\Producer as RedisProducer;
 
-/**
- * Define Wallabag import for v1 and v2, since there are very similar.
- */
-abstract class WallabagController extends AbstractController
+class DeliciousController extends AbstractController
 {
+    private RabbitMqProducer $rabbitMqProducer;
+    private RedisProducer $redisProducer;
+
+    public function __construct(RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
+    {
+        $this->rabbitMqProducer = $rabbitMqProducer;
+        $this->redisProducer = $redisProducer;
+    }
+
     /**
-     * Handle import request.
-     *
-     * @return Response|RedirectResponse
+     * @Route("/import/delicious", name="import_delicious")
      */
-    public function indexAction(Request $request, TranslatorInterface $translator)
+    public function indexAction(Request $request, DeliciousImport $delicious, Config $craueConfig, TranslatorInterface $translator)
     {
         $form = $this->createForm(UploadImportType::class);
         $form->handleRequest($request);
 
-        $wallabag = $this->getImportService();
-        $wallabag->setUser($this->getUser());
+        $delicious->setUser($this->getUser());
+
+        if ($craueConfig->get('import_with_rabbitmq')) {
+            $delicious->setProducer($this->rabbitMqProducer);
+        } elseif ($craueConfig->get('import_with_redis')) {
+            $delicious->setProducer($this->redisProducer);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('file')->getData();
             $markAsRead = $form->get('mark_as_read')->getData();
-            $name = $this->getUser()->getId() . '.json';
+            $name = 'delicious_' . $this->getUser()->getId() . '.json';
 
             if (null !== $file && \in_array($file->getClientMimeType(), $this->getParameter('wallabag_import.allow_mimetypes'), true) && $file->move($this->getParameter('wallabag_import.resource_dir'), $name)) {
-                $res = $wallabag
+                $res = $delicious
                     ->setFilepath($this->getParameter('wallabag_import.resource_dir') . '/' . $name)
                     ->setMarkAsRead($markAsRead)
                     ->import();
@@ -42,7 +53,7 @@ abstract class WallabagController extends AbstractController
                 $message = 'flashes.import.notice.failed';
 
                 if (true === $res) {
-                    $summary = $wallabag->getSummary();
+                    $summary = $delicious->getSummary();
                     $message = $translator->trans('flashes.import.notice.summary', [
                         '%imported%' => $summary['imported'],
                         '%skipped%' => $summary['skipped'],
@@ -65,23 +76,9 @@ abstract class WallabagController extends AbstractController
             $this->addFlash('notice', 'flashes.import.notice.failed_on_file');
         }
 
-        return $this->render($this->getImportTemplate(), [
+        return $this->render('@WallabagImport/Delicious/index.html.twig', [
             'form' => $form->createView(),
-            'import' => $wallabag,
+            'import' => $delicious,
         ]);
     }
-
-    /**
-     * Return the service to handle the import.
-     *
-     * @return ImportInterface
-     */
-    abstract protected function getImportService();
-
-    /**
-     * Return the template used for the form.
-     *
-     * @return string
-     */
-    abstract protected function getImportTemplate();
 }

@@ -42,7 +42,7 @@ class WallabagV1ImportTest extends TestCase
     public function testImport()
     {
         $wallabagV1Import = $this->getWallabagV1Import(false, 1);
-        $wallabagV1Import->setFilepath(__DIR__ . '/../fixtures/wallabag-v1.json');
+        $wallabagV1Import->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/wallabag-v1.json');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -75,7 +75,7 @@ class WallabagV1ImportTest extends TestCase
     public function testImportAndMarkAllAsRead()
     {
         $wallabagV1Import = $this->getWallabagV1Import(false, 3);
-        $wallabagV1Import->setFilepath(__DIR__ . '/../fixtures/wallabag-v1-read.json');
+        $wallabagV1Import->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/wallabag-v1-read.json');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -113,7 +113,7 @@ class WallabagV1ImportTest extends TestCase
     public function testImportWithRabbit()
     {
         $wallabagV1Import = $this->getWallabagV1Import();
-        $wallabagV1Import->setFilepath(__DIR__ . '/../fixtures/wallabag-v1.json');
+        $wallabagV1Import->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/wallabag-v1.json');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -153,7 +153,7 @@ class WallabagV1ImportTest extends TestCase
     public function testImportWithRedis()
     {
         $wallabagV1Import = $this->getWallabagV1Import();
-        $wallabagV1Import->setFilepath(__DIR__ . '/../fixtures/wallabag-v1.json');
+        $wallabagV1Import->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/wallabag-v1.json');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -193,7 +193,7 @@ class WallabagV1ImportTest extends TestCase
     public function testImportBadFile()
     {
         $wallabagV1Import = $this->getWallabagV1Import();
-        $wallabagV1Import->setFilepath(__DIR__ . '/../fixtures/wallabag-v1.jsonx');
+        $wallabagV1Import->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/wallabag-v1.jsonx');
 
         $res = $wallabagV1Import->import();
 
@@ -207,7 +207,7 @@ class WallabagV1ImportTest extends TestCase
     public function testImportUserNotDefined()
     {
         $wallabagV1Import = $this->getWallabagV1Import(true);
-        $wallabagV1Import->setFilepath(__DIR__ . '/../fixtures/wallabag-v1.json');
+        $wallabagV1Import->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/wallabag-v1.json');
 
         $res = $wallabagV1Import->import();
 

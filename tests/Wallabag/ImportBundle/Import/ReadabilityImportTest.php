@@ -38,7 +38,7 @@ class ReadabilityImportTest extends TestCase
     public function testImport()
     {
         $readabilityImport = $this->getReadabilityImport(false, 3);
-        $readabilityImport->setFilepath(__DIR__ . '/../fixtures/readability.json');
+        $readabilityImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/readability.json');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -71,7 +71,7 @@ class ReadabilityImportTest extends TestCase
     public function testImportAndMarkAllAsRead()
     {
         $readabilityImport = $this->getReadabilityImport(false, 1);
-        $readabilityImport->setFilepath(__DIR__ . '/../fixtures/readability-read.json');
+        $readabilityImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/readability-read.json');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -109,7 +109,7 @@ class ReadabilityImportTest extends TestCase
     public function testImportWithRabbit()
     {
         $readabilityImport = $this->getReadabilityImport();
-        $readabilityImport->setFilepath(__DIR__ . '/../fixtures/readability.json');
+        $readabilityImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/readability.json');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -149,7 +149,7 @@ class ReadabilityImportTest extends TestCase
     public function testImportWithRedis()
     {
         $readabilityImport = $this->getReadabilityImport();
-        $readabilityImport->setFilepath(__DIR__ . '/../fixtures/readability.json');
+        $readabilityImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/readability.json');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -189,7 +189,7 @@ class ReadabilityImportTest extends TestCase
     public function testImportBadFile()
     {
         $readabilityImport = $this->getReadabilityImport();
-        $readabilityImport->setFilepath(__DIR__ . '/../fixtures/wallabag-v1.jsonx');
+        $readabilityImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/wallabag-v1.jsonx');
 
         $res = $readabilityImport->import();
 
@@ -203,7 +203,7 @@ class ReadabilityImportTest extends TestCase
     public function testImportUserNotDefined()
     {
         $readabilityImport = $this->getReadabilityImport(true);
-        $readabilityImport->setFilepath(__DIR__ . '/../fixtures/readability.json');
+        $readabilityImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/readability.json');
 
         $res = $readabilityImport->import();
 

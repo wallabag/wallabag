@@ -1,32 +1,32 @@
 <?php
 
-namespace Wallabag\ImportBundle\Controller;
+namespace Wallabag\CoreBundle\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\ImportBundle\Import\FirefoxImport;
+use Wallabag\ImportBundle\Import\ChromeImport;
 use Wallabag\ImportBundle\Redis\Producer as RedisProducer;
 
-class FirefoxController extends BrowserController
+class ChromeController extends BrowserController
 {
-    private FirefoxImport $firefoxImport;
+    private ChromeImport $chromeImport;
     private Config $craueConfig;
     private RabbitMqProducer $rabbitMqProducer;
     private RedisProducer $redisProducer;
 
-    public function __construct(FirefoxImport $firefoxImport, Config $craueConfig, RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
+    public function __construct(ChromeImport $chromeImport, Config $craueConfig, RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
     {
-        $this->firefoxImport = $firefoxImport;
+        $this->chromeImport = $chromeImport;
         $this->craueConfig = $craueConfig;
         $this->rabbitMqProducer = $rabbitMqProducer;
         $this->redisProducer = $redisProducer;
     }
 
     /**
-     * @Route("/firefox", name="import_firefox")
+     * @Route("/import/chrome", name="import_chrome")
      */
     public function indexAction(Request $request, TranslatorInterface $translator)
     {
@@ -36,16 +36,16 @@ class FirefoxController extends BrowserController
     protected function getImportService()
     {
         if ($this->craueConfig->get('import_with_rabbitmq')) {
-            $this->firefoxImport->setProducer($this->rabbitMqProducer);
+            $this->chromeImport->setProducer($this->rabbitMqProducer);
         } elseif ($this->craueConfig->get('import_with_redis')) {
-            $this->firefoxImport->setProducer($this->redisProducer);
+            $this->chromeImport->setProducer($this->redisProducer);
         }
 
-        return $this->firefoxImport;
+        return $this->chromeImport;
     }
 
     protected function getImportTemplate()
     {
-        return '@WallabagImport/Firefox/index.html.twig';
+        return '@WallabagImport/Chrome/index.html.twig';
     }
 }

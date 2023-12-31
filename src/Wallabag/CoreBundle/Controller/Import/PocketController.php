@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\ImportBundle\Controller;
+namespace Wallabag\CoreBundle\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
@@ -30,7 +30,7 @@ class PocketController extends AbstractController
     }
 
     /**
-     * @Route("/pocket", name="import_pocket")
+     * @Route("/import/pocket", name="import_pocket")
      */
     public function indexAction(PocketImport $pocketImport)
     {
@@ -51,7 +51,7 @@ class PocketController extends AbstractController
     }
 
     /**
-     * @Route("/pocket/auth", name="import_pocket_auth")
+     * @Route("/import/pocket/auth", name="import_pocket_auth")
      */
     public function authAction(Request $request, PocketImport $pocketImport)
     {
@@ -81,7 +81,7 @@ class PocketController extends AbstractController
     }
 
     /**
-     * @Route("/pocket/callback", name="import_pocket_callback")
+     * @Route("/import/pocket/callback", name="import_pocket_callback")
      */
     public function callbackAction(PocketImport $pocketImport, TranslatorInterface $translator)
     {

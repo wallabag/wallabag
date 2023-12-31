@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\ImportBundle\Controller;
+namespace Wallabag\CoreBundle\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
@@ -9,10 +9,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Controller\AbstractController;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
-use Wallabag\ImportBundle\Import\PinboardImport;
+use Wallabag\ImportBundle\Import\ReadabilityImport;
 use Wallabag\ImportBundle\Redis\Producer as RedisProducer;
 
-class PinboardController extends AbstractController
+class ReadabilityController extends AbstractController
 {
     private RabbitMqProducer $rabbitMqProducer;
     private RedisProducer $redisProducer;
@@ -24,28 +24,28 @@ class PinboardController extends AbstractController
     }
 
     /**
-     * @Route("/pinboard", name="import_pinboard")
+     * @Route("/import/readability", name="import_readability")
      */
-    public function indexAction(Request $request, PinboardImport $pinboard, Config $craueConfig, TranslatorInterface $translator)
+    public function indexAction(Request $request, ReadabilityImport $readability, Config $craueConfig, TranslatorInterface $translator)
     {
         $form = $this->createForm(UploadImportType::class);
         $form->handleRequest($request);
 
-        $pinboard->setUser($this->getUser());
+        $readability->setUser($this->getUser());
 
         if ($craueConfig->get('import_with_rabbitmq')) {
-            $pinboard->setProducer($this->rabbitMqProducer);
+            $readability->setProducer($this->rabbitMqProducer);
         } elseif ($craueConfig->get('import_with_redis')) {
-            $pinboard->setProducer($this->redisProducer);
+            $readability->setProducer($this->redisProducer);
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('file')->getData();
             $markAsRead = $form->get('mark_as_read')->getData();
-            $name = 'pinboard_' . $this->getUser()->getId() . '.json';
+            $name = 'readability_' . $this->getUser()->getId() . '.json';
 
             if (null !== $file && \in_array($file->getClientMimeType(), $this->getParameter('wallabag_import.allow_mimetypes'), true) && $file->move($this->getParameter('wallabag_import.resource_dir'), $name)) {
-                $res = $pinboard
+                $res = $readability
                     ->setFilepath($this->getParameter('wallabag_import.resource_dir') . '/' . $name)
                     ->setMarkAsRead($markAsRead)
                     ->import();
@@ -53,7 +53,7 @@ class PinboardController extends AbstractController
                 $message = 'flashes.import.notice.failed';
 
                 if (true === $res) {
-                    $summary = $pinboard->getSummary();
+                    $summary = $readability->getSummary();
                     $message = $translator->trans('flashes.import.notice.summary', [
                         '%imported%' => $summary['imported'],
                         '%skipped%' => $summary['skipped'],
@@ -76,9 +76,9 @@ class PinboardController extends AbstractController
             $this->addFlash('notice', 'flashes.import.notice.failed_on_file');
         }
 
-        return $this->render('@WallabagImport/Pinboard/index.html.twig', [
+        return $this->render('@WallabagImport/Readability/index.html.twig', [
             'form' => $form->createView(),
-            'import' => $pinboard,
+            'import' => $readability,
         ]);
     }
 }

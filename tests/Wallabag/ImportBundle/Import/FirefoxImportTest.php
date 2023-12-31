@@ -38,7 +38,7 @@ class FirefoxImportTest extends TestCase
     public function testImport()
     {
         $firefoxImport = $this->getFirefoxImport(false, 2);
-        $firefoxImport->setFilepath(__DIR__ . '/../fixtures/firefox-bookmarks.json');
+        $firefoxImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/firefox-bookmarks.json');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -71,7 +71,7 @@ class FirefoxImportTest extends TestCase
     public function testImportAndMarkAllAsRead()
     {
         $firefoxImport = $this->getFirefoxImport(false, 1);
-        $firefoxImport->setFilepath(__DIR__ . '/../fixtures/firefox-bookmarks.json');
+        $firefoxImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/firefox-bookmarks.json');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -109,7 +109,7 @@ class FirefoxImportTest extends TestCase
     public function testImportWithRabbit()
     {
         $firefoxImport = $this->getFirefoxImport();
-        $firefoxImport->setFilepath(__DIR__ . '/../fixtures/firefox-bookmarks.json');
+        $firefoxImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/firefox-bookmarks.json');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -149,7 +149,7 @@ class FirefoxImportTest extends TestCase
     public function testImportWithRedis()
     {
         $firefoxImport = $this->getFirefoxImport();
-        $firefoxImport->setFilepath(__DIR__ . '/../fixtures/firefox-bookmarks.json');
+        $firefoxImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/firefox-bookmarks.json');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -189,7 +189,7 @@ class FirefoxImportTest extends TestCase
     public function testImportBadFile()
     {
         $firefoxImport = $this->getFirefoxImport();
-        $firefoxImport->setFilepath(__DIR__ . '/../fixtures/wallabag-v1.jsonx');
+        $firefoxImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/wallabag-v1.jsonx');
 
         $res = $firefoxImport->import();
 
@@ -203,7 +203,7 @@ class FirefoxImportTest extends TestCase
     public function testImportUserNotDefined()
     {
         $firefoxImport = $this->getFirefoxImport(true);
-        $firefoxImport->setFilepath(__DIR__ . '/../fixtures/firefox-bookmarks.json');
+        $firefoxImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/firefox-bookmarks.json');
 
         $res = $firefoxImport->import();
 

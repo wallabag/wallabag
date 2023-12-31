@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\ImportBundle\Controller;
+namespace Tests\Wallabag\CoreBundle\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
@@ -71,7 +71,7 @@ class PocketHtmlControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/ril_export.html', 'Bookmarks');
+        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/ril_export.html', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -99,7 +99,7 @@ class PocketHtmlControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/pocket_html');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/ril_export.html', 'Bookmarks');
+        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/ril_export.html', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -150,7 +150,7 @@ class PocketHtmlControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/import/pocket_html');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/test.html', 'test.html');
+        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/test.html', 'test.html');
 
         $data = [
             'upload_import_file[file]' => $file,

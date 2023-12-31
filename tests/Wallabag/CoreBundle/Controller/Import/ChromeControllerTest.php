@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\ImportBundle\Controller;
+namespace Tests\Wallabag\CoreBundle\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
@@ -9,28 +9,28 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Entity\Entry;
 
-class WallabagV1ControllerTest extends WallabagCoreTestCase
+class ChromeControllerTest extends WallabagCoreTestCase
 {
-    public function testImportWallabag()
+    public function testImportChrome()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/wallabag-v1');
+        $crawler = $client->request('GET', '/import/chrome');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
-    public function testImportWallabagWithRabbitEnabled()
+    public function testImportChromeWithRabbitEnabled()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
-        $crawler = $client->request('GET', '/import/wallabag-v1');
+        $crawler = $client->request('GET', '/import/chrome');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
@@ -39,12 +39,12 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
-    public function testImportWallabagBadFile()
+    public function testImportChromeBadFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/wallabag-v1');
+        $crawler = $client->request('GET', '/import/chrome');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
         $data = [
@@ -56,15 +56,14 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testImportWallabagWithRedisEnabled()
+    public function testImportChromeWithRedisEnabled()
     {
         $this->checkRedis();
         $this->logInAs('admin');
         $client = $this->getTestClient();
-
         $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
-        $crawler = $client->request('GET', '/import/wallabag-v1');
+        $crawler = $client->request('GET', '/import/chrome');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
@@ -72,7 +71,7 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/wallabag-v1.json', 'wallabag-v1.json');
+        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/chrome-bookmarks', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -87,20 +86,20 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
-        $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.wallabag_v1'));
+        $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.chrome'));
 
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportWallabagWithFile()
+    public function testImportWallabagWithChromeFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/wallabag-v1');
+        $crawler = $client->request('GET', '/import/chrome');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/wallabag-v1.json', 'wallabag-v1.json');
+        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/chrome-bookmarks', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -111,76 +110,26 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
+
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+        $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
         $content = $client->getContainer()
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
-                'http://www.framablog.org/index.php/post/2014/02/05/Framabag-service-libre-gratuit-interview-developpeur',
+                'https://www.20minutes.fr/sport/3256363-20220321-tournoi-vi-nations-trophee-gagne-xv-france-fini-fond-seine',
                 $this->getLoggedInUserId()
             );
-
-        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
         $this->assertInstanceOf(Entry::class, $content);
-        $this->assertEmpty($content->getMimetype(), 'Mimetype for http://www.framablog.org is empty');
-        $this->assertSame($content->getPreviewPicture(), 'http://www.framablog.org/public/_img/framablog/wallaby_baby.jpg');
-        $this->assertEmpty($content->getLanguage(), 'Language for http://www.framablog.org is empty');
+        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.20minutes.fr is ok');
+        $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.20minutes.fr is ok');
+        $this->assertCount(1, $content->getTags());
 
-        $tags = $content->getTagsLabel();
-        $this->assertContains('foot', $tags, 'It includes the "foot" tag');
-        $this->assertContains('framabag', $tags, 'It includes the "framabag" tag');
-        $this->assertCount(2, $tags);
-
-        $this->assertInstanceOf(\DateTime::class, $content->getCreatedAt());
-    }
-
-    public function testImportWallabagWithFileAndMarkAllAsRead()
-    {
-        $this->logInAs('admin');
-        $client = $this->getTestClient();
-
-        $crawler = $client->request('GET', '/import/wallabag-v1');
-        $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
-
-        $file = new UploadedFile(__DIR__ . '/../fixtures/wallabag-v1-read.json', 'wallabag-v1-read.json');
-
-        $data = [
-            'upload_import_file[file]' => $file,
-            'upload_import_file[mark_as_read]' => 1,
-        ];
-
-        $client->submit($form, $data);
-
-        $this->assertSame(302, $client->getResponse()->getStatusCode());
-
-        $crawler = $client->followRedirect();
-
-        $content1 = $client->getContainer()
-            ->get(EntityManagerInterface::class)
-            ->getRepository(Entry::class)
-            ->findByUrlAndUserId(
-                'http://gilbert.pellegrom.me/recreating-the-square-slider',
-                $this->getLoggedInUserId()
-            );
-
-        $this->assertInstanceOf(Entry::class, $content1);
-        $this->assertTrue($content1->isArchived());
-
-        $content2 = $client->getContainer()
-            ->get(EntityManagerInterface::class)
-            ->getRepository(Entry::class)
-            ->findByUrlAndUserId(
-                'https://www.wallabag.org/features/',
-                $this->getLoggedInUserId()
-            );
-
-        $this->assertInstanceOf(Entry::class, $content2);
-        $this->assertTrue($content2->isArchived());
-
-        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
+        $createdAt = $content->getCreatedAt();
+        $this->assertSame('2011', $createdAt->format('Y'));
+        $this->assertSame('07', $createdAt->format('m'));
     }
 
     public function testImportWallabagWithEmptyFile()
@@ -188,10 +137,10 @@ class WallabagV1ControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/wallabag-v1');
+        $crawler = $client->request('GET', '/import/chrome');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/test.txt', 'test.txt');
+        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/test.txt', 'test.txt');
 
         $data = [
             'upload_import_file[file]' => $file,

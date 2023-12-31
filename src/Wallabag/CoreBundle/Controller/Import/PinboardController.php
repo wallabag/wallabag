@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\ImportBundle\Controller;
+namespace Wallabag\CoreBundle\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
@@ -9,10 +9,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Controller\AbstractController;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
-use Wallabag\ImportBundle\Import\InstapaperImport;
+use Wallabag\ImportBundle\Import\PinboardImport;
 use Wallabag\ImportBundle\Redis\Producer as RedisProducer;
 
-class InstapaperController extends AbstractController
+class PinboardController extends AbstractController
 {
     private RabbitMqProducer $rabbitMqProducer;
     private RedisProducer $redisProducer;
@@ -24,28 +24,28 @@ class InstapaperController extends AbstractController
     }
 
     /**
-     * @Route("/instapaper", name="import_instapaper")
+     * @Route("/import/pinboard", name="import_pinboard")
      */
-    public function indexAction(Request $request, InstapaperImport $instapaper, Config $craueConfig, TranslatorInterface $translator)
+    public function indexAction(Request $request, PinboardImport $pinboard, Config $craueConfig, TranslatorInterface $translator)
     {
         $form = $this->createForm(UploadImportType::class);
         $form->handleRequest($request);
 
-        $instapaper->setUser($this->getUser());
+        $pinboard->setUser($this->getUser());
 
         if ($craueConfig->get('import_with_rabbitmq')) {
-            $instapaper->setProducer($this->rabbitMqProducer);
+            $pinboard->setProducer($this->rabbitMqProducer);
         } elseif ($craueConfig->get('import_with_redis')) {
-            $instapaper->setProducer($this->redisProducer);
+            $pinboard->setProducer($this->redisProducer);
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('file')->getData();
             $markAsRead = $form->get('mark_as_read')->getData();
-            $name = 'instapaper_' . $this->getUser()->getId() . '.csv';
+            $name = 'pinboard_' . $this->getUser()->getId() . '.json';
 
             if (null !== $file && \in_array($file->getClientMimeType(), $this->getParameter('wallabag_import.allow_mimetypes'), true) && $file->move($this->getParameter('wallabag_import.resource_dir'), $name)) {
-                $res = $instapaper
+                $res = $pinboard
                     ->setFilepath($this->getParameter('wallabag_import.resource_dir') . '/' . $name)
                     ->setMarkAsRead($markAsRead)
                     ->import();
@@ -53,7 +53,7 @@ class InstapaperController extends AbstractController
                 $message = 'flashes.import.notice.failed';
 
                 if (true === $res) {
-                    $summary = $instapaper->getSummary();
+                    $summary = $pinboard->getSummary();
                     $message = $translator->trans('flashes.import.notice.summary', [
                         '%imported%' => $summary['imported'],
                         '%skipped%' => $summary['skipped'],
@@ -76,9 +76,9 @@ class InstapaperController extends AbstractController
             $this->addFlash('notice', 'flashes.import.notice.failed_on_file');
         }
 
-        return $this->render('@WallabagImport/Instapaper/index.html.twig', [
+        return $this->render('@WallabagImport/Pinboard/index.html.twig', [
             'form' => $form->createView(),
-            'import' => $instapaper,
+            'import' => $pinboard,
         ]);
     }
 }

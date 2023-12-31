@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\ImportBundle\Controller;
+namespace Tests\Wallabag\CoreBundle\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
@@ -9,28 +9,28 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
 use Wallabag\CoreBundle\Entity\Entry;
 
-class ChromeControllerTest extends WallabagCoreTestCase
+class ShaarliControllerTest extends WallabagCoreTestCase
 {
-    public function testImportChrome()
+    public function testImportShaarli()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/chrome');
+        $crawler = $client->request('GET', '/import/shaarli');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
         $this->assertSame(1, $crawler->filter('input[type=file]')->count());
     }
 
-    public function testImportChromeWithRabbitEnabled()
+    public function testImportShaarliWithRabbitEnabled()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 1);
 
-        $crawler = $client->request('GET', '/import/chrome');
+        $crawler = $client->request('GET', '/import/shaarli');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
@@ -39,12 +39,12 @@ class ChromeControllerTest extends WallabagCoreTestCase
         $client->getContainer()->get(Config::class)->set('import_with_rabbitmq', 0);
     }
 
-    public function testImportChromeBadFile()
+    public function testImportShaarliBadFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/chrome');
+        $crawler = $client->request('GET', '/import/shaarli');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
         $data = [
@@ -56,14 +56,14 @@ class ChromeControllerTest extends WallabagCoreTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testImportChromeWithRedisEnabled()
+    public function testImportShaarliWithRedisEnabled()
     {
         $this->checkRedis();
         $this->logInAs('admin');
         $client = $this->getTestClient();
         $client->getContainer()->get(Config::class)->set('import_with_redis', 1);
 
-        $crawler = $client->request('GET', '/import/chrome');
+        $crawler = $client->request('GET', '/import/shaarli');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
         $this->assertSame(1, $crawler->filter('form[name=upload_import_file] > button[type=submit]')->count());
@@ -71,7 +71,7 @@ class ChromeControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/chrome-bookmarks', 'Bookmarks');
+        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/shaarli-bookmarks.html', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -86,20 +86,20 @@ class ChromeControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
-        $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.chrome'));
+        $this->assertNotEmpty($client->getContainer()->get(Client::class)->lpop('wallabag.import.shaarli'));
 
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportWallabagWithChromeFile()
+    public function testImportWallabagWithShaarliFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/chrome');
+        $crawler = $client->request('GET', '/import/shaarli');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/chrome-bookmarks', 'Bookmarks');
+        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/shaarli-bookmarks.html', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -118,18 +118,28 @@ class ChromeControllerTest extends WallabagCoreTestCase
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
-                'https://www.20minutes.fr/sport/3256363-20220321-tournoi-vi-nations-trophee-gagne-xv-france-fini-fond-seine',
+                'https://www.20minutes.fr/sport/4002755-20220928-tarn-lapins-ravagent-terrain-match-rugby-doit-etre-annule',
                 $this->getLoggedInUserId()
             );
 
         $this->assertInstanceOf(Entry::class, $content);
-        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.20minutes.fr is ok');
-        $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.20minutes.fr is ok');
-        $this->assertCount(1, $content->getTags());
+        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for 20minutes.fr is ok');
+        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for 20minutes.fr is ok');
+        $this->assertNotEmpty($content->getLanguage(), 'Language for 20minutes.fr is ok');
+        $this->assertCount(2, $content->getTags());
 
-        $createdAt = $content->getCreatedAt();
-        $this->assertSame('2011', $createdAt->format('Y'));
-        $this->assertSame('07', $createdAt->format('m'));
+        $content = $client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
+            ->findByUrlAndUserId(
+                'https://www.lemonde.fr/disparitions/article/2018/07/05/le-journaliste-et-cineaste-claude-lanzmann-est-mort_5326313_3382.html',
+                $this->getLoggedInUserId()
+            );
+
+        $this->assertInstanceOf(Entry::class, $content);
+        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://www.lemonde.fr is ok');
+        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.lemonde.fr is ok');
+        $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.lemonde.fr is ok');
     }
 
     public function testImportWallabagWithEmptyFile()
@@ -137,10 +147,10 @@ class ChromeControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/import/chrome');
+        $crawler = $client->request('GET', '/import/shaarli');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/test.txt', 'test.txt');
+        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/test.html', 'test.html');
 
         $data = [
             'upload_import_file[file]' => $file,

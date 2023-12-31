@@ -42,67 +42,63 @@ services:
         resource: '../../src/Wallabag/CoreBundle/Controller/'
         tags: ['controller.service_arguments']
 
-    Wallabag\ImportBundle\Controller\:
-        resource: '../../src/Wallabag/ImportBundle/Controller/'
-        tags: ['controller.service_arguments']
-
     # inject alias service into controllers
-    Wallabag\ImportBundle\Controller\ChromeController:
+    Wallabag\CoreBundle\Controller\Import\ChromeController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_chrome_producer'
             $redisProducer: '@wallabag_import.producer.redis.chrome'
 
-    Wallabag\ImportBundle\Controller\DeliciousController:
+    Wallabag\CoreBundle\Controller\Import\DeliciousController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_delicious_producer'
             $redisProducer: '@wallabag_import.producer.redis.delicious'
 
-    Wallabag\ImportBundle\Controller\ElcuratorController:
+    Wallabag\CoreBundle\Controller\Import\ElcuratorController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_elcurator_producer'
             $redisProducer: '@wallabag_import.producer.redis.elcurator'
 
-    Wallabag\ImportBundle\Controller\FirefoxController:
+    Wallabag\CoreBundle\Controller\Import\FirefoxController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_firefox_producer'
             $redisProducer: '@wallabag_import.producer.redis.firefox'
 
-    Wallabag\ImportBundle\Controller\InstapaperController:
+    Wallabag\CoreBundle\Controller\Import\InstapaperController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_instapaper_producer'
             $redisProducer: '@wallabag_import.producer.redis.instapaper'
 
-    Wallabag\ImportBundle\Controller\PinboardController:
+    Wallabag\CoreBundle\Controller\Import\PinboardController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_pinboard_producer'
             $redisProducer: '@wallabag_import.producer.redis.pinboard'
 
-    Wallabag\ImportBundle\Controller\PocketController:
+    Wallabag\CoreBundle\Controller\Import\PocketController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_pocket_producer'
             $redisProducer: '@wallabag_import.producer.redis.pocket'
 
-    Wallabag\ImportBundle\Controller\ReadabilityController:
+    Wallabag\CoreBundle\Controller\Import\ReadabilityController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_readability_producer'
             $redisProducer: '@wallabag_import.producer.redis.readability'
 
-    Wallabag\ImportBundle\Controller\WallabagV1Controller:
+    Wallabag\CoreBundle\Controller\Import\WallabagV1Controller:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_wallabag_v1_producer'
             $redisProducer: '@wallabag_import.producer.redis.wallabag_v1'
 
-    Wallabag\ImportBundle\Controller\WallabagV2Controller:
+    Wallabag\CoreBundle\Controller\Import\WallabagV2Controller:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_wallabag_v2_producer'
             $redisProducer: '@wallabag_import.producer.redis.wallabag_v2'
 
-    Wallabag\ImportBundle\Controller\ShaarliController:
+    Wallabag\CoreBundle\Controller\Import\ShaarliController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_shaarli_producer'
             $redisProducer: '@wallabag_import.producer.redis.shaarli'
 
-    Wallabag\ImportBundle\Controller\PocketHtmlController:
+    Wallabag\CoreBundle\Controller\Import\PocketHtmlController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_pocket_html_producer'
             $redisProducer: '@wallabag_import.producer.redis.pocket_html'

@@ -38,7 +38,7 @@ class ChromeImportTest extends TestCase
     public function testImport()
     {
         $chromeImport = $this->getChromeImport(false, 1);
-        $chromeImport->setFilepath(__DIR__ . '/../fixtures/chrome-bookmarks');
+        $chromeImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/chrome-bookmarks');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -71,7 +71,7 @@ class ChromeImportTest extends TestCase
     public function testImportAndMarkAllAsRead()
     {
         $chromeImport = $this->getChromeImport(false, 1);
-        $chromeImport->setFilepath(__DIR__ . '/../fixtures/chrome-bookmarks');
+        $chromeImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/chrome-bookmarks');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -109,7 +109,7 @@ class ChromeImportTest extends TestCase
     public function testImportWithRabbit()
     {
         $chromeImport = $this->getChromeImport();
-        $chromeImport->setFilepath(__DIR__ . '/../fixtures/chrome-bookmarks');
+        $chromeImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/chrome-bookmarks');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -149,7 +149,7 @@ class ChromeImportTest extends TestCase
     public function testImportWithRedis()
     {
         $chromeImport = $this->getChromeImport();
-        $chromeImport->setFilepath(__DIR__ . '/../fixtures/chrome-bookmarks');
+        $chromeImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/chrome-bookmarks');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -189,7 +189,7 @@ class ChromeImportTest extends TestCase
     public function testImportBadFile()
     {
         $chromeImport = $this->getChromeImport();
-        $chromeImport->setFilepath(__DIR__ . '/../fixtures/wallabag-v1.jsonx');
+        $chromeImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/wallabag-v1.jsonx');
 
         $res = $chromeImport->import();
 
@@ -203,7 +203,7 @@ class ChromeImportTest extends TestCase
     public function testImportUserNotDefined()
     {
         $chromeImport = $this->getChromeImport(true);
-        $chromeImport->setFilepath(__DIR__ . '/../fixtures/chrome-bookmarks');
+        $chromeImport->setFilepath(__DIR__ . '/../../CoreBundle/fixtures/Import/chrome-bookmarks');
 
         $res = $chromeImport->import();
 
