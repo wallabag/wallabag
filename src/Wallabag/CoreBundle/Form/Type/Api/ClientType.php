@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\ApiBundle\Form\Type;
+namespace Wallabag\CoreBundle\Form\Type\Api;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
