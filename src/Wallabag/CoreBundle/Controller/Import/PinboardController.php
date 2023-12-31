@@ -76,7 +76,7 @@ class PinboardController extends AbstractController
             $this->addFlash('notice', 'flashes.import.notice.failed_on_file');
         }
 
-        return $this->render('@WallabagImport/Pinboard/index.html.twig', [
+        return $this->render('@WallabagCore/Import/Pinboard/index.html.twig', [
             'form' => $form->createView(),
             'import' => $pinboard,
         ]);

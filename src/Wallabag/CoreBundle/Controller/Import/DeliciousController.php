@@ -76,7 +76,7 @@ class DeliciousController extends AbstractController
             $this->addFlash('notice', 'flashes.import.notice.failed_on_file');
         }
 
-        return $this->render('@WallabagImport/Delicious/index.html.twig', [
+        return $this->render('@WallabagCore/Import/Delicious/index.html.twig', [
             'form' => $form->createView(),
             'import' => $delicious,
         ]);

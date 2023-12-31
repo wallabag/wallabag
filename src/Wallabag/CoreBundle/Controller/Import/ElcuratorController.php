@@ -46,6 +46,6 @@ class ElcuratorController extends WallabagController
 
     protected function getImportTemplate()
     {
-        return '@WallabagImport/Elcurator/index.html.twig';
+        return '@WallabagCore/Import/Elcurator/index.html.twig';
     }
 }

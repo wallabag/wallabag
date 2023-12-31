@@ -43,7 +43,7 @@ class PocketController extends AbstractController
             ])
             ->getForm();
 
-        return $this->render('@WallabagImport/Pocket/index.html.twig', [
+        return $this->render('@WallabagCore/Import/Pocket/index.html.twig', [
             'import' => $pocket,
             'has_consumer_key' => '' === trim($this->getUser()->getConfig()->getPocketConsumerKey()) ? false : true,
             'form' => $form->createView(),
