@@ -7,7 +7,7 @@ use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\ImportBundle\Import\FirefoxImport;
+use Wallabag\CoreBundle\Import\FirefoxImport;
 use Wallabag\ImportBundle\Redis\Producer as RedisProducer;
 
 class FirefoxController extends BrowserController

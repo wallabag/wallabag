@@ -4,7 +4,7 @@ namespace Wallabag\ImportBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Wallabag\ImportBundle\Import\ImportCompilerPass;
+use Wallabag\CoreBundle\Import\ImportCompilerPass;
 
 class WallabagImportBundle extends Bundle
 {

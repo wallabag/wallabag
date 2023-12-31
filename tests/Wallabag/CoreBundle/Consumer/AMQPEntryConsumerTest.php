@@ -9,8 +9,8 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 use Wallabag\CoreBundle\Consumer\AMQPEntryConsumer;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\User;
+use Wallabag\CoreBundle\Import\AbstractImport;
 use Wallabag\CoreBundle\Repository\UserRepository;
-use Wallabag\ImportBundle\Import\AbstractImport;
 
 class AMQPEntryConsumerTest extends TestCase
 {

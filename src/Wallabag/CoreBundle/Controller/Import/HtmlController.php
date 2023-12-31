@@ -7,8 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Controller\AbstractController;
+use Wallabag\CoreBundle\Import\ImportInterface;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
-use Wallabag\ImportBundle\Import\ImportInterface;
 
 abstract class HtmlController extends AbstractController
 {

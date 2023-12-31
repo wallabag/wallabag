@@ -7,7 +7,7 @@ use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\ImportBundle\Import\WallabagV1Import;
+use Wallabag\CoreBundle\Import\WallabagV1Import;
 use Wallabag\ImportBundle\Redis\Producer as RedisProducer;
 
 class WallabagV1Controller extends WallabagController

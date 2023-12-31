@@ -21,32 +21,32 @@ parameters:
 			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
 
 		-
-			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
+			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
 			count: 1
 			path: src/Wallabag/CoreBundle/Controller/Import/BrowserController.php
 
 		-
-			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
+			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
 			count: 1
 			path: src/Wallabag/CoreBundle/Controller/Import/BrowserController.php
 
 		-
-			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
+			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
 			count: 1
 			path: src/Wallabag/CoreBundle/Controller/Import/HtmlController.php
 
 		-
-			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
+			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
 			count: 1
 			path: src/Wallabag/CoreBundle/Controller/Import/HtmlController.php
 
 		-
-			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
+			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
 			count: 1
 			path: src/Wallabag/CoreBundle/Controller/Import/WallabagController.php
 
 		-
-			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
+			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
 			count: 1
 			path: src/Wallabag/CoreBundle/Controller/Import/WallabagController.php
 

@@ -329,53 +329,53 @@ services:
     wallabag_import.pocket.client:
         alias: 'httplug.client.wallabag_import.pocket.client'
 
-    Wallabag\ImportBundle\Import\PocketImport:
+    Wallabag\CoreBundle\Import\PocketImport:
         calls:
             - [ setClient, [ "@wallabag_import.pocket.client" ] ]
         tags:
             -  { name: wallabag_import.import, alias: pocket }
 
-    Wallabag\ImportBundle\Import\WallabagV1Import:
+    Wallabag\CoreBundle\Import\WallabagV1Import:
         tags:
             -  { name: wallabag_import.import, alias: wallabag_v1 }
 
-    Wallabag\ImportBundle\Import\WallabagV2Import:
+    Wallabag\CoreBundle\Import\WallabagV2Import:
         tags:
             -  { name: wallabag_import.import, alias: wallabag_v2 }
 
-    Wallabag\ImportBundle\Import\ElcuratorImport:
+    Wallabag\CoreBundle\Import\ElcuratorImport:
         tags:
             -  { name: wallabag_import.import, alias: elcurator }
 
-    Wallabag\ImportBundle\Import\ReadabilityImport:
+    Wallabag\CoreBundle\Import\ReadabilityImport:
         tags:
             -  { name: wallabag_import.import, alias: readability }
 
-    Wallabag\ImportBundle\Import\InstapaperImport:
+    Wallabag\CoreBundle\Import\InstapaperImport:
         tags:
             -  { name: wallabag_import.import, alias: instapaper }
 
-    Wallabag\ImportBundle\Import\PinboardImport:
+    Wallabag\CoreBundle\Import\PinboardImport:
         tags:
             -  { name: wallabag_import.import, alias: pinboard }
 
-    Wallabag\ImportBundle\Import\DeliciousImport:
+    Wallabag\CoreBundle\Import\DeliciousImport:
         tags:
             -  { name: wallabag_import.import, alias: delicious }
 
-    Wallabag\ImportBundle\Import\FirefoxImport:
+    Wallabag\CoreBundle\Import\FirefoxImport:
         tags:
             -  { name: wallabag_import.import, alias: firefox }
 
-    Wallabag\ImportBundle\Import\ChromeImport:
+    Wallabag\CoreBundle\Import\ChromeImport:
         tags:
             -  { name: wallabag_import.import, alias: chrome }
 
-    Wallabag\ImportBundle\Import\ShaarliImport:
+    Wallabag\CoreBundle\Import\ShaarliImport:
         tags:
             -  { name: wallabag_import.import, alias: shaarli }
 
-    Wallabag\ImportBundle\Import\PocketHtmlImport:
+    Wallabag\CoreBundle\Import\PocketHtmlImport:
         tags:
             -  { name: wallabag_import.import, alias: pocket_html }
 

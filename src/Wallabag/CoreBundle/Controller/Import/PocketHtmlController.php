@@ -7,7 +7,7 @@ use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\ImportBundle\Import\PocketHtmlImport;
+use Wallabag\CoreBundle\Import\PocketHtmlImport;
 use Wallabag\ImportBundle\Redis\Producer as RedisProducer;
 
 class PocketHtmlController extends HtmlController

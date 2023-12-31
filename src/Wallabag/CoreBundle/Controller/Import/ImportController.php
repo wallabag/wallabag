@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Wallabag\CoreBundle\Consumer\RabbitMQConsumerTotalProxy;
 use Wallabag\CoreBundle\Controller\AbstractController;
-use Wallabag\ImportBundle\Import\ImportChain;
+use Wallabag\CoreBundle\Import\ImportChain;
 
 class ImportController extends AbstractController
 {

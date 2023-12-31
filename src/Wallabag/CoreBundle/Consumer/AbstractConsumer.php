@@ -9,8 +9,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Event\EntrySavedEvent;
+use Wallabag\CoreBundle\Import\AbstractImport;
 use Wallabag\CoreBundle\Repository\UserRepository;
-use Wallabag\ImportBundle\Import\AbstractImport;
 
 abstract class AbstractConsumer
 {

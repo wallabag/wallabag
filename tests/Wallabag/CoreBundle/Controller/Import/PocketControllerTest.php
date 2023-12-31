@@ -5,7 +5,7 @@ namespace Tests\Wallabag\CoreBundle\Controller\Import;
 use Craue\ConfigBundle\Util\Config;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\ImportBundle\Import\PocketImport;
+use Wallabag\CoreBundle\Import\PocketImport;
 
 class PocketControllerTest extends WallabagCoreTestCase
 {

@@ -14,18 +14,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Wallabag\CoreBundle\Entity\User;
+use Wallabag\CoreBundle\Import\ChromeImport;
+use Wallabag\CoreBundle\Import\DeliciousImport;
+use Wallabag\CoreBundle\Import\ElcuratorImport;
+use Wallabag\CoreBundle\Import\FirefoxImport;
+use Wallabag\CoreBundle\Import\InstapaperImport;
+use Wallabag\CoreBundle\Import\PinboardImport;
+use Wallabag\CoreBundle\Import\PocketHtmlImport;
+use Wallabag\CoreBundle\Import\ReadabilityImport;
+use Wallabag\CoreBundle\Import\ShaarliImport;
+use Wallabag\CoreBundle\Import\WallabagV1Import;
+use Wallabag\CoreBundle\Import\WallabagV2Import;
 use Wallabag\CoreBundle\Repository\UserRepository;
-use Wallabag\ImportBundle\Import\ChromeImport;
-use Wallabag\ImportBundle\Import\DeliciousImport;
-use Wallabag\ImportBundle\Import\ElcuratorImport;
-use Wallabag\ImportBundle\Import\FirefoxImport;
-use Wallabag\ImportBundle\Import\InstapaperImport;
-use Wallabag\ImportBundle\Import\PinboardImport;
-use Wallabag\ImportBundle\Import\PocketHtmlImport;
-use Wallabag\ImportBundle\Import\ReadabilityImport;
-use Wallabag\ImportBundle\Import\ShaarliImport;
-use Wallabag\ImportBundle\Import\WallabagV1Import;
-use Wallabag\ImportBundle\Import\WallabagV2Import;
 
 class ImportCommand extends Command
 {
