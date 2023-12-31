@@ -33,7 +33,7 @@ class AnnotationController extends AbstractFOSRestController
     /**
      * Retrieve annotations for an entry.
      *
-     * @see Wallabag\ApiBundle\Controller\WallabagRestController
+     * @see Api\WallabagRestController
      *
      * @Route("/annotations/{entry}.{_format}", methods={"GET"}, name="annotations_get_annotations", defaults={"_format": "json"})
      *
@@ -54,7 +54,7 @@ class AnnotationController extends AbstractFOSRestController
     /**
      * Creates a new annotation.
      *
-     * @see Wallabag\ApiBundle\Controller\WallabagRestController
+     * @see Api\WallabagRestController
      *
      * @Route("/annotations/{entry}.{_format}", methods={"POST"}, name="annotations_post_annotation", defaults={"_format": "json"})
      *
@@ -88,7 +88,7 @@ class AnnotationController extends AbstractFOSRestController
     /**
      * Updates an annotation.
      *
-     * @see Wallabag\ApiBundle\Controller\WallabagRestController
+     * @see Api\WallabagRestController
      *
      * @Route("/annotations/{annotation}.{_format}", methods={"PUT"}, name="annotations_put_annotation", defaults={"_format": "json"})
      *
@@ -125,7 +125,7 @@ class AnnotationController extends AbstractFOSRestController
     /**
      * Removes an annotation.
      *
-     * @see Wallabag\ApiBundle\Controller\WallabagRestController
+     * @see Api\WallabagRestController
      *
      * @Route("/annotations/{annotation}.{_format}", methods={"DELETE"}, name="annotations_delete_annotation", defaults={"_format": "json"})
      *

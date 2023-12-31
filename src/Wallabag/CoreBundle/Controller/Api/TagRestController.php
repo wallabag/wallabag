@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\ApiBundle\Controller;
+namespace Wallabag\CoreBundle\Controller\Api;
 
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use OpenApi\Annotations as OA;

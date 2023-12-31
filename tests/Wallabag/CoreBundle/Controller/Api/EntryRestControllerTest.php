@@ -1,10 +1,9 @@
 <?php
 
-namespace Tests\Wallabag\ApiBundle\Controller;
+namespace Tests\Wallabag\CoreBundle\Controller\Api;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\Container;
-use Tests\Wallabag\ApiBundle\WallabagApiTestCase;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Entity\User;

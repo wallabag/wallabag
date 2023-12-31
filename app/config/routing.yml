@@ -3,11 +3,6 @@ wallabag_import:
     type: annotation
     prefix: /import
 
-wallabag_api:
-    resource: "@WallabagApiBundle/Controller/"
-    type: annotation
-    prefix: /
-
 app:
     resource: "@WallabagCoreBundle/Controller/"
     type: annotation

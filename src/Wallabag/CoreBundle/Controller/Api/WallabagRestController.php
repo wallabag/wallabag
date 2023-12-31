@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\ApiBundle\Controller;
+namespace Wallabag\CoreBundle\Controller\Api;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;

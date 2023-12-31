@@ -1,8 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\ApiBundle\Controller;
-
-use Tests\Wallabag\ApiBundle\WallabagApiTestCase;
+namespace Tests\Wallabag\CoreBundle\Controller\Api;
 
 class TaggingRuleRestControllerTest extends WallabagApiTestCase
 {

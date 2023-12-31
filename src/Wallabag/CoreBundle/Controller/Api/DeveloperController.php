@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\ApiBundle\Controller;
+namespace Wallabag\CoreBundle\Controller\Api;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;

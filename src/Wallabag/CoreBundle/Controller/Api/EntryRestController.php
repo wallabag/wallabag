@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\ApiBundle\Controller;
+namespace Wallabag\CoreBundle\Controller\Api;
 
 use Hateoas\Configuration\Route as HateoasRoute;
 use Hateoas\Representation\Factory\PagerfantaFactory;

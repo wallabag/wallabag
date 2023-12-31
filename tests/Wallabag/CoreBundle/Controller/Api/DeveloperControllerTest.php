@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\ApiBundle\Controller;
+namespace Tests\Wallabag\CoreBundle\Controller\Api;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;

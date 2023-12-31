@@ -1,9 +1,8 @@
 <?php
 
-namespace Tests\Wallabag\ApiBundle\Controller;
+namespace Tests\Wallabag\CoreBundle\Controller\Api;
 
 use Craue\ConfigBundle\Util\Config;
-use Tests\Wallabag\ApiBundle\WallabagApiTestCase;
 
 class WallabagRestControllerTest extends WallabagApiTestCase
 {
