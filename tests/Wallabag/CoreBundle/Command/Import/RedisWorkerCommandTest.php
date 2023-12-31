@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\ImportBundle\Command;
+namespace Tests\Wallabag\CoreBundle\Command\Import;
 
 use M6Web\Component\RedisMock\RedisMockFactory;
 use Predis\Client;

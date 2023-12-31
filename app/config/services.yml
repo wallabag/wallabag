@@ -299,7 +299,7 @@ services:
         tags:
             - { name: console.command, command: 'wallabag:tag:all' }
 
-    Wallabag\ImportBundle\Command\ImportCommand:
+    Wallabag\CoreBundle\Command\Import\ImportCommand:
         tags:
             - { name: console.command, command: 'wallabag:import' }
 

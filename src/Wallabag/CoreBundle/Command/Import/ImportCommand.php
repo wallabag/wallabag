@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\ImportBundle\Command;
+namespace Wallabag\CoreBundle\Command\Import;
 
 use Doctrine\DBAL\Driver\Middleware;
 use Doctrine\DBAL\Logging\Middleware as LoggingMiddleware;

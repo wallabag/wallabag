@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\ImportBundle\Command;
+namespace Wallabag\CoreBundle\Command\Import;
 
 use Simpleue\Worker\QueueWorker;
 use Symfony\Component\Config\Definition\Exception\Exception;

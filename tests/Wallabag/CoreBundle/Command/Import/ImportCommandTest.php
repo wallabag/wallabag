@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\ImportBundle\Command;
+namespace Tests\Wallabag\CoreBundle\Command\Import;
 
 use Doctrine\ORM\NoResultException;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
