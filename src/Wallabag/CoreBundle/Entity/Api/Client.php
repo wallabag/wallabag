@@ -12,7 +12,7 @@ use Wallabag\CoreBundle\Entity\User;
 
 /**
  * @ORM\Table("oauth2_clients")
- * @ORM\Entity(repositoryClass="Wallabag\ApiBundle\Repository\ClientRepository")
+ * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\Api\ClientRepository")
  */
 class Client extends BaseClient
 {

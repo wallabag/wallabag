@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\ApiBundle\Repository;
+namespace Wallabag\CoreBundle\Repository\Api;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
