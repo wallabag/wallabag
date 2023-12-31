@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Wallabag\ImportBundle\Consumer;
+namespace Tests\Wallabag\CoreBundle\Consumer;
 
 use Doctrine\ORM\EntityManager;
 use PhpAmqpLib\Message\AMQPMessage;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Wallabag\CoreBundle\Consumer\AMQPEntryConsumer;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Repository\UserRepository;
-use Wallabag\ImportBundle\Consumer\AMQPEntryConsumer;
 use Wallabag\ImportBundle\Import\AbstractImport;
 
 class AMQPEntryConsumerTest extends TestCase

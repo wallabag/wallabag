@@ -17,7 +17,7 @@ services:
             - "@wallabag_import.queue.redis.readability"
 
     wallabag_import.consumer.redis.readability:
-        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\RedisEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\ReadabilityImport'
 
@@ -33,7 +33,7 @@ services:
             - "@wallabag_import.queue.redis.instapaper"
 
     wallabag_import.consumer.redis.instapaper:
-        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\RedisEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\InstapaperImport'
 
@@ -49,7 +49,7 @@ services:
             - "@wallabag_import.queue.redis.pinboard"
 
     wallabag_import.consumer.redis.pinboard:
-        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\RedisEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\PinboardImport'
 
@@ -65,7 +65,7 @@ services:
             - "@wallabag_import.queue.redis.delicious"
 
     wallabag_import.consumer.redis.delicious:
-        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\RedisEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\DeliciousImport'
 
@@ -81,7 +81,7 @@ services:
             - "@wallabag_import.queue.redis.pocket"
 
     wallabag_import.consumer.redis.pocket:
-        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\RedisEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\PocketImport'
 
@@ -97,7 +97,7 @@ services:
             - "@wallabag_import.queue.redis.wallabag_v1"
 
     wallabag_import.consumer.redis.wallabag_v1:
-        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\RedisEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\WallabagV1Import'
 
@@ -113,7 +113,7 @@ services:
             - "@wallabag_import.queue.redis.wallabag_v2"
 
     wallabag_import.consumer.redis.wallabag_v2:
-        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\RedisEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\WallabagV2Import'
 
@@ -129,7 +129,7 @@ services:
             - "@wallabag_import.queue.redis.elcurator"
 
     wallabag_import.consumer.redis.elcurator:
-        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\RedisEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\ElcuratorImport'
 
@@ -145,7 +145,7 @@ services:
             - "@wallabag_import.queue.redis.firefox"
 
     wallabag_import.consumer.redis.firefox:
-        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\RedisEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\FirefoxImport'
 
@@ -161,7 +161,7 @@ services:
             - "@wallabag_import.queue.redis.chrome"
 
     wallabag_import.consumer.redis.chrome:
-        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\RedisEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\ChromeImport'
 
@@ -177,7 +177,7 @@ services:
             - "@wallabag_import.queue.redis.shaarli"
 
     wallabag_import.consumer.redis.shaarli:
-        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\RedisEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\ShaarliImport'
 
@@ -193,6 +193,6 @@ services:
             - "@wallabag_import.queue.redis.pocket_html"
 
     wallabag_import.consumer.redis.pocket_html:
-        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\RedisEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\PocketHtmlImport'

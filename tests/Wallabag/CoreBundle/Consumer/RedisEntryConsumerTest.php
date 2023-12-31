@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Wallabag\ImportBundle\Consumer;
+namespace Tests\Wallabag\CoreBundle\Consumer;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Wallabag\CoreBundle\Consumer\RedisEntryConsumer;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Repository\UserRepository;
-use Wallabag\ImportBundle\Consumer\RedisEntryConsumer;
 use Wallabag\ImportBundle\Import\AbstractImport;
 
 class RedisEntryConsumerTest extends TestCase

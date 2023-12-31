@@ -5,7 +5,7 @@ services:
         autoconfigure: true
         public: true
 
-    Wallabag\ImportBundle\Consumer\RabbitMQConsumerTotalProxy:
+    Wallabag\CoreBundle\Consumer\RabbitMQConsumerTotalProxy:
         arguments:
             $pocketConsumer: '@old_sound_rabbit_mq.import_pocket_consumer'
             $readabilityConsumer: '@old_sound_rabbit_mq.import_readability_consumer'
@@ -21,61 +21,61 @@ services:
             $pocketHtmlConsumer: '@old_sound_rabbit_mq.import_pocket_html_consumer'
 
     wallabag_import.consumer.amqp.pocket:
-        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\AMQPEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\PocketImport'
 
     wallabag_import.consumer.amqp.readability:
-        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\AMQPEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\ReadabilityImport'
 
     wallabag_import.consumer.amqp.instapaper:
-        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\AMQPEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\InstapaperImport'
 
     wallabag_import.consumer.amqp.pinboard:
-        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\AMQPEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\PinboardImport'
 
     wallabag_import.consumer.amqp.delicious:
-        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\AMQPEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\DeliciousImport'
 
     wallabag_import.consumer.amqp.wallabag_v1:
-        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\AMQPEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\WallabagV1Import'
 
     wallabag_import.consumer.amqp.wallabag_v2:
-        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\AMQPEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\WallabagV2Import'
 
     wallabag_import.consumer.amqp.elcurator:
-        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\AMQPEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\ElcuratorImport'
 
     wallabag_import.consumer.amqp.firefox:
-        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\AMQPEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\FirefoxImport'
 
     wallabag_import.consumer.amqp.chrome:
-        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\AMQPEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\ChromeImport'
 
     wallabag_import.consumer.amqp.shaarli:
-        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\AMQPEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\ShaarliImport'
 
     wallabag_import.consumer.amqp.pocket_html:
-        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        class: Wallabag\CoreBundle\Consumer\AMQPEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\PocketHtmlImport'

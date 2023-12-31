@@ -6,8 +6,8 @@ use Craue\ConfigBundle\Util\Config;
 use Predis\Client;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Wallabag\CoreBundle\Consumer\RabbitMQConsumerTotalProxy;
 use Wallabag\CoreBundle\Controller\AbstractController;
-use Wallabag\ImportBundle\Consumer\RabbitMQConsumerTotalProxy;
 use Wallabag\ImportBundle\Import\ImportChain;
 
 class ImportController extends AbstractController

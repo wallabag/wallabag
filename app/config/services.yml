@@ -34,7 +34,7 @@ services:
 
     Wallabag\CoreBundle\:
         resource: '../../src/Wallabag/CoreBundle/*'
-        exclude: ['../../src/Wallabag/CoreBundle/{Controller,Entity,DataFixtures}', '../../src/Wallabag/CoreBundle/Event/*Event.php']
+        exclude: ['../../src/Wallabag/CoreBundle/{Consumer,Controller,Entity,DataFixtures}', '../../src/Wallabag/CoreBundle/Event/*Event.php']
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
