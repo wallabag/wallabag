@@ -63,7 +63,7 @@ class EntryRepository extends ServiceEntityRepository
         return $this
             ->getSortedQueryBuilderByUser($userId)
             ->andWhere('e.isArchived = false')
-            ;
+        ;
     }
 
     /**
@@ -78,7 +78,7 @@ class EntryRepository extends ServiceEntityRepository
         return $this
             ->getQueryBuilderByUser($userId)
             ->andWhere('e.isArchived = false')
-            ;
+        ;
     }
 
     /**
@@ -225,7 +225,7 @@ class EntryRepository extends ServiceEntityRepository
         return $this
             ->getSortedQueryBuilderByUser($userId)
             ->innerJoin('e.annotations', 'a')
-            ;
+        ;
     }
 
     /**
@@ -240,7 +240,7 @@ class EntryRepository extends ServiceEntityRepository
         return $this
             ->getQueryBuilderByUser($userId)
             ->innerJoin('e.annotations', 'a')
-            ;
+        ;
     }
 
     /**

@@ -18,9 +18,6 @@ class AuthenticationFailureListener implements EventSubscriberInterface
         $this->logger = $logger;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents()
     {
         return [

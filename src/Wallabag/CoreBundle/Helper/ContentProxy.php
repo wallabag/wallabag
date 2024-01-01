@@ -98,7 +98,7 @@ class ContentProxy
 
         $errors = $this->validator->validate(
             $value,
-            (new LocaleConstraint(['canonicalize' => true]))
+            new LocaleConstraint(['canonicalize' => true])
         );
 
         if (0 === \count($errors)) {
@@ -119,7 +119,7 @@ class ContentProxy
     {
         $errors = $this->validator->validate(
             $value,
-            (new UrlConstraint())
+            new UrlConstraint()
         );
 
         if (0 === \count($errors)) {
@@ -206,8 +206,6 @@ class ContentProxy
     /**
      * If the title from the fetched content comes from a PDF, then its very possible that the character encoding is not
      * UTF-8. This methods tries to identify the character encoding and translate the title to UTF-8.
-     *
-     * @param $title
      *
      * @return string (maybe contains invalid UTF-8 character)
      */

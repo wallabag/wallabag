@@ -34,8 +34,6 @@ class FeedController extends AbstractController
      *
      * @ParamConverter("user", class="Wallabag\UserBundle\Entity\User", converter="username_feed_token_converter")
      *
-     * @param $page
-     *
      * @return Response
      */
     public function showUnreadFeedAction(User $user, $page)
@@ -50,8 +48,6 @@ class FeedController extends AbstractController
      *
      * @ParamConverter("user", class="Wallabag\UserBundle\Entity\User", converter="username_feed_token_converter")
      *
-     * @param $page
-     *
      * @return Response
      */
     public function showArchiveFeedAction(User $user, $page)
@@ -65,8 +61,6 @@ class FeedController extends AbstractController
      * @Route("/feed/{username}/{token}/starred/{page}", name="starred_feed", defaults={"page"=1, "_format"="xml"})
      *
      * @ParamConverter("user", class="Wallabag\UserBundle\Entity\User", converter="username_feed_token_converter")
-     *
-     * @param $page
      *
      * @return Response
      */
@@ -241,8 +235,6 @@ class FeedController extends AbstractController
             'domainName' => $this->getParameter('domain_name'),
             'version' => $this->getParameter('wallabag_core.version'),
             'updated' => $this->prepareFeedUpdatedDate($entries),
-        ],
-        new Response('', 200, ['Content-Type' => 'application/atom+xml'])
-        );
+        ], new Response('', 200, ['Content-Type' => 'application/atom+xml']));
     }
 }

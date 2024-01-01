@@ -24,9 +24,6 @@ class SiteCredentialFixtures extends Fixture implements DependentFixtureInterfac
         $this->container = $container;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(ObjectManager $manager): void
     {
         $credential = new SiteCredential($this->getReference('admin-user', User::class));
@@ -46,9 +43,6 @@ class SiteCredentialFixtures extends Fixture implements DependentFixtureInterfac
         $manager->flush();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDependencies()
     {
         return [

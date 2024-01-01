@@ -9,24 +9,12 @@ abstract class HtmlImport extends AbstractImport
 {
     protected $filepath;
 
-    /**
-     * {@inheritdoc}
-     */
     abstract public function getName();
 
-    /**
-     * {@inheritdoc}
-     */
     abstract public function getUrl();
 
-    /**
-     * {@inheritdoc}
-     */
     abstract public function getDescription();
 
-    /**
-     * {@inheritdoc}
-     */
     public function import()
     {
         if (!$this->user) {
@@ -86,9 +74,6 @@ abstract class HtmlImport extends AbstractImport
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function parseEntry(array $importedEntry)
     {
         $url = $importedEntry['url'];
@@ -196,9 +181,6 @@ abstract class HtmlImport extends AbstractImport
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setEntryAsRead(array $importedEntry)
     {
         $importedEntry['is_archived'] = 1;

@@ -437,7 +437,7 @@ class ContentProxyTest extends TestCase
         $ruleBasedIgnoreOriginProcessor->expects($this->once())
             ->method('process');
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, true);
+        $proxy = new ContentProxy(new Graby(), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, true);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -483,7 +483,7 @@ class ContentProxyTest extends TestCase
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $logger, $this->fetchingErrorMessage);
+        $proxy = new ContentProxy(new Graby(), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $logger, $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -523,7 +523,7 @@ class ContentProxyTest extends TestCase
         $handler = new TestHandler();
         $logger->pushHandler($handler);
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $logger, $this->fetchingErrorMessage);
+        $proxy = new ContentProxy(new Graby(), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $logger, $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -565,7 +565,7 @@ class ContentProxyTest extends TestCase
 
         $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy(new Graby(), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -609,7 +609,7 @@ class ContentProxyTest extends TestCase
 
         $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        $proxy = new ContentProxy(new Graby(), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
         $entry = new Entry(new User());
         $proxy->updateEntry(
             $entry,
@@ -620,7 +620,7 @@ class ContentProxyTest extends TestCase
                 'url' => 'http://1.1.1.1',
                 'language' => 'fr',
                 'status' => '200',
-                //'og_title' => 'my OG title',
+                // 'og_title' => 'my OG title',
                 'description' => 'OG desc',
                 'image' => 'http://3.3.3.3/cover.jpg',
                 'headers' => [
@@ -1043,7 +1043,7 @@ class ContentProxyTest extends TestCase
             ->method('process')
             ->willReturn($processor_result);
 
-        $proxy = new ContentProxy((new Graby()), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, true);
+        $proxy = new ContentProxy(new Graby(), $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage, true);
         $entry = new Entry(new User());
         $entry->setOriginUrl($origin_url);
         $proxy->updateEntry(
@@ -1069,8 +1069,6 @@ class ContentProxyTest extends TestCase
     /**
      * https://stackoverflow.com/a/18506801.
      *
-     * @param $string
-     *
      * @return string
      */
     private function strToHex($string)
@@ -1089,8 +1087,6 @@ class ContentProxyTest extends TestCase
      * Convert hex to string.
      *
      * @see https://stackoverflow.com/a/18506801
-     *
-     * @param $hex
      *
      * @return string
      */

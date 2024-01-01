@@ -33,9 +33,6 @@ class WallabagV2Controller extends WallabagController
         return parent::indexAction($request, $translator);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getImportService()
     {
         if ($this->craueConfig->get('import_with_rabbitmq')) {
@@ -47,9 +44,6 @@ class WallabagV2Controller extends WallabagController
         return $this->wallabagImport;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getImportTemplate()
     {
         return '@WallabagImport/WallabagV2/index.html.twig';

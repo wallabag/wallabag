@@ -8,13 +8,10 @@ use Wallabag\CoreBundle\Entity\Tag;
 
 class TagFixtures extends Fixture
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(ObjectManager $manager): void
     {
         $tags = [
-            'foo-bar-tag' => 'foo bar', //tag used for EntryControllerTest
+            'foo-bar-tag' => 'foo bar', // tag used for EntryControllerTest
             'bar-tag' => 'bar',
             'baz-tag' => 'baz', // tag used for ExportControllerTest
             'foo-tag' => 'foo',

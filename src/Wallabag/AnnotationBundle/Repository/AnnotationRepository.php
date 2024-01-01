@@ -137,10 +137,6 @@ class AnnotationRepository extends ServiceEntityRepository
 
     /**
      * Find all annotations related to archived entries.
-     *
-     * @param $userId
-     *
-     * @return mixed
      */
     public function findAllArchivedEntriesByUser($userId)
     {

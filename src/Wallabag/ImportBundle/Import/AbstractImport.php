@@ -92,9 +92,6 @@ abstract class AbstractImport implements ImportInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSummary()
     {
         return [

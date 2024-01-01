@@ -138,7 +138,7 @@ class Entry
      *
      * @Groups({"entries_for_user", "export_all"})
      */
-    private $archivedAt = null;
+    private $archivedAt;
 
     /**
      * @var bool
@@ -203,7 +203,7 @@ class Entry
      *
      * @Groups({"entries_for_user", "export_all"})
      */
-    private $starredAt = null;
+    private $starredAt;
 
     /**
      * @ORM\OneToMany(targetEntity="Wallabag\AnnotationBundle\Entity\Annotation", mappedBy="entry", cascade={"persist", "remove"})
@@ -1007,8 +1007,6 @@ class Entry
     }
 
     /**
-     * @param mixed $hashedUrl
-     *
      * @return Entry
      */
     public function setHashedUrl($hashedUrl)

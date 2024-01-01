@@ -80,7 +80,7 @@ class EntryController extends AbstractController
                     });
                 foreach ($labels as $label) {
                     $remove = false;
-                    if (0 === strpos($label, '-')) {
+                    if (str_starts_with($label, '-')) {
                         $label = substr($label, 1);
                         $remove = true;
                     }
