@@ -6,10 +6,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\UserBundle\Entity\User;
 
@@ -88,10 +86,8 @@ abstract class WallabagCoreTestCase extends WebTestCase
     public function logInAs($username)
     {
         $container = $this->client->getContainer();
-        $session = $container->get(SessionInterface::class);
 
         $userManager = $container->get('fos_user.user_manager.test');
-        $loginManager = $container->get('fos_user.security.login_manager.test');
         $firewallName = $container->getParameter('fos_user.firewall_name');
 
         $user = $userManager->findUserBy(['username' => $username]);
@@ -100,13 +96,7 @@ abstract class WallabagCoreTestCase extends WebTestCase
             throw new \Exception('Unable to find user "' . $username . '". Does fixtures were loaded?');
         }
 
-        $loginManager->logInUser($firewallName, $user);
-
-        $session->set('_security_' . $firewallName, serialize($container->get(TokenStorageInterface::class)->getToken()));
-        $session->save();
-
-        $cookie = new Cookie($session->getName(), $session->getId());
-        $this->client->getCookieJar()->set($cookie);
+        $this->client->loginUser($user, $firewallName);
     }
 
     /**

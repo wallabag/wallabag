@@ -287,7 +287,10 @@ class DownloadImages
         $iterator = $imagesCrawler->getIterator();
 
         while ($iterator->valid()) {
-            $srcsetAttribute = $iterator->current()->getAttribute('srcset');
+            $node = $iterator->current();
+            \assert($node instanceof \DOMElement);
+
+            $srcsetAttribute = $node->getAttribute('srcset');
 
             if ('' !== $srcsetAttribute) {
                 // Couldn't start with " OR ' OR a white space

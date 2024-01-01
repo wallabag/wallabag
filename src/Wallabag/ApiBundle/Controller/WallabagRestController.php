@@ -130,4 +130,15 @@ class WallabagRestController extends AbstractFOSRestController
 
         return (new JsonResponse())->setJson($json);
     }
+
+    /**
+     * @return User|null
+     */
+    protected function getUser()
+    {
+        $user = parent::getUser();
+        \assert(null === $user || $user instanceof User);
+
+        return $user;
+    }
 }

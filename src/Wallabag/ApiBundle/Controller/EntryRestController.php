@@ -93,13 +93,13 @@ class EntryRestController extends WallabagRestController
 
         $returnId = (null === $request->query->get('return_id')) ? false : (bool) $request->query->get('return_id');
 
-        $hashedUrls = $request->query->get('hashed_urls', []);
+        $hashedUrls = $request->query->all('hashed_urls');
         $hashedUrl = $request->query->get('hashed_url', '');
         if (!empty($hashedUrl)) {
             $hashedUrls[] = $hashedUrl;
         }
 
-        $urls = $request->query->get('urls', []);
+        $urls = $request->query->all('urls');
         $url = $request->query->get('url', '');
         if (!empty($url)) {
             $urls[] = $url;

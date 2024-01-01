@@ -4,10 +4,10 @@ namespace Wallabag\ImportBundle\Controller;
 
 use Craue\ConfigBundle\Util\Config;
 use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Wallabag\CoreBundle\Controller\AbstractController;
 use Wallabag\ImportBundle\Form\Type\UploadImportType;
 use Wallabag\ImportBundle\Import\PinboardImport;
 use Wallabag\ImportBundle\Redis\Producer as RedisProducer;
