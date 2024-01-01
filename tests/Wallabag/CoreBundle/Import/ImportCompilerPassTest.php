@@ -27,7 +27,7 @@ class ImportCompilerPassTest extends TestCase
 
         $container
             ->register('foo')
-            ->addTag('wallabag_import.import', ['alias' => 'pocket'])
+            ->addTag('wallabag_core.import', ['alias' => 'pocket'])
         ;
 
         $this->process($container);

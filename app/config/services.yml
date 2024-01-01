@@ -46,62 +46,62 @@ services:
     Wallabag\CoreBundle\Controller\Import\ChromeController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_chrome_producer'
-            $redisProducer: '@wallabag_import.producer.redis.chrome'
+            $redisProducer: '@wallabag_core.producer.redis.chrome'
 
     Wallabag\CoreBundle\Controller\Import\DeliciousController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_delicious_producer'
-            $redisProducer: '@wallabag_import.producer.redis.delicious'
+            $redisProducer: '@wallabag_core.producer.redis.delicious'
 
     Wallabag\CoreBundle\Controller\Import\ElcuratorController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_elcurator_producer'
-            $redisProducer: '@wallabag_import.producer.redis.elcurator'
+            $redisProducer: '@wallabag_core.producer.redis.elcurator'
 
     Wallabag\CoreBundle\Controller\Import\FirefoxController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_firefox_producer'
-            $redisProducer: '@wallabag_import.producer.redis.firefox'
+            $redisProducer: '@wallabag_core.producer.redis.firefox'
 
     Wallabag\CoreBundle\Controller\Import\InstapaperController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_instapaper_producer'
-            $redisProducer: '@wallabag_import.producer.redis.instapaper'
+            $redisProducer: '@wallabag_core.producer.redis.instapaper'
 
     Wallabag\CoreBundle\Controller\Import\PinboardController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_pinboard_producer'
-            $redisProducer: '@wallabag_import.producer.redis.pinboard'
+            $redisProducer: '@wallabag_core.producer.redis.pinboard'
 
     Wallabag\CoreBundle\Controller\Import\PocketController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_pocket_producer'
-            $redisProducer: '@wallabag_import.producer.redis.pocket'
+            $redisProducer: '@wallabag_core.producer.redis.pocket'
 
     Wallabag\CoreBundle\Controller\Import\ReadabilityController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_readability_producer'
-            $redisProducer: '@wallabag_import.producer.redis.readability'
+            $redisProducer: '@wallabag_core.producer.redis.readability'
 
     Wallabag\CoreBundle\Controller\Import\WallabagV1Controller:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_wallabag_v1_producer'
-            $redisProducer: '@wallabag_import.producer.redis.wallabag_v1'
+            $redisProducer: '@wallabag_core.producer.redis.wallabag_v1'
 
     Wallabag\CoreBundle\Controller\Import\WallabagV2Controller:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_wallabag_v2_producer'
-            $redisProducer: '@wallabag_import.producer.redis.wallabag_v2'
+            $redisProducer: '@wallabag_core.producer.redis.wallabag_v2'
 
     Wallabag\CoreBundle\Controller\Import\ShaarliController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_shaarli_producer'
-            $redisProducer: '@wallabag_import.producer.redis.shaarli'
+            $redisProducer: '@wallabag_core.producer.redis.shaarli'
 
     Wallabag\CoreBundle\Controller\Import\PocketHtmlController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_pocket_html_producer'
-            $redisProducer: '@wallabag_import.producer.redis.pocket_html'
+            $redisProducer: '@wallabag_core.producer.redis.pocket_html'
 
     Doctrine\DBAL\Connection:
         alias: doctrine.dbal.default_connection
@@ -322,58 +322,58 @@ services:
         tags:
             - { name: kernel.event_listener, event: security.authentication.failure, method: onAuthenticationFailure }
 
-    wallabag_import.pocket.client:
-        alias: 'httplug.client.wallabag_import.pocket.client'
+    wallabag_core.pocket.client:
+        alias: 'httplug.client.wallabag_core.pocket.client'
 
     Wallabag\CoreBundle\Import\PocketImport:
         calls:
-            - [ setClient, [ "@wallabag_import.pocket.client" ] ]
+            - [ setClient, [ "@wallabag_core.pocket.client" ] ]
         tags:
-            -  { name: wallabag_import.import, alias: pocket }
+            -  { name: wallabag_core.import, alias: pocket }
 
     Wallabag\CoreBundle\Import\WallabagV1Import:
         tags:
-            -  { name: wallabag_import.import, alias: wallabag_v1 }
+            -  { name: wallabag_core.import, alias: wallabag_v1 }
 
     Wallabag\CoreBundle\Import\WallabagV2Import:
         tags:
-            -  { name: wallabag_import.import, alias: wallabag_v2 }
+            -  { name: wallabag_core.import, alias: wallabag_v2 }
 
     Wallabag\CoreBundle\Import\ElcuratorImport:
         tags:
-            -  { name: wallabag_import.import, alias: elcurator }
+            -  { name: wallabag_core.import, alias: elcurator }
 
     Wallabag\CoreBundle\Import\ReadabilityImport:
         tags:
-            -  { name: wallabag_import.import, alias: readability }
+            -  { name: wallabag_core.import, alias: readability }
 
     Wallabag\CoreBundle\Import\InstapaperImport:
         tags:
-            -  { name: wallabag_import.import, alias: instapaper }
+            -  { name: wallabag_core.import, alias: instapaper }
 
     Wallabag\CoreBundle\Import\PinboardImport:
         tags:
-            -  { name: wallabag_import.import, alias: pinboard }
+            -  { name: wallabag_core.import, alias: pinboard }
 
     Wallabag\CoreBundle\Import\DeliciousImport:
         tags:
-            -  { name: wallabag_import.import, alias: delicious }
+            -  { name: wallabag_core.import, alias: delicious }
 
     Wallabag\CoreBundle\Import\FirefoxImport:
         tags:
-            -  { name: wallabag_import.import, alias: firefox }
+            -  { name: wallabag_core.import, alias: firefox }
 
     Wallabag\CoreBundle\Import\ChromeImport:
         tags:
-            -  { name: wallabag_import.import, alias: chrome }
+            -  { name: wallabag_core.import, alias: chrome }
 
     Wallabag\CoreBundle\Import\ShaarliImport:
         tags:
-            -  { name: wallabag_import.import, alias: shaarli }
+            -  { name: wallabag_core.import, alias: shaarli }
 
     Wallabag\CoreBundle\Import\PocketHtmlImport:
         tags:
-            -  { name: wallabag_import.import, alias: pocket_html }
+            -  { name: wallabag_core.import, alias: pocket_html }
 
     # to factorize the proximity and bypass translation for prev & next
     pagerfanta.view.default_wallabag:

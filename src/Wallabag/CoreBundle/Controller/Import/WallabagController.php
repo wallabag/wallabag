@@ -33,9 +33,9 @@ abstract class WallabagController extends AbstractController
             $markAsRead = $form->get('mark_as_read')->getData();
             $name = $this->getUser()->getId() . '.json';
 
-            if (null !== $file && \in_array($file->getClientMimeType(), $this->getParameter('wallabag_import.allow_mimetypes'), true) && $file->move($this->getParameter('wallabag_import.resource_dir'), $name)) {
+            if (null !== $file && \in_array($file->getClientMimeType(), $this->getParameter('wallabag_core.allow_mimetypes'), true) && $file->move($this->getParameter('wallabag_core.resource_dir'), $name)) {
                 $res = $wallabag
-                    ->setFilepath($this->getParameter('wallabag_import.resource_dir') . '/' . $name)
+                    ->setFilepath($this->getParameter('wallabag_core.resource_dir') . '/' . $name)
                     ->setMarkAsRead($markAsRead)
                     ->import();
 
@@ -54,7 +54,7 @@ abstract class WallabagController extends AbstractController
                         ]);
                     }
 
-                    unlink($this->getParameter('wallabag_import.resource_dir') . '/' . $name);
+                    unlink($this->getParameter('wallabag_core.resource_dir') . '/' . $name);
                 }
 
                 $this->addFlash('notice', $message);

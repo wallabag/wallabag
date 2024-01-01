@@ -19,7 +19,7 @@ class ImportCompilerPass implements CompilerPassInterface
         );
 
         $taggedServices = $container->findTaggedServiceIds(
-            'wallabag_import.import'
+            'wallabag_core.import'
         );
         foreach ($taggedServices as $id => $tagAttributes) {
             foreach ($tagAttributes as $attributes) {

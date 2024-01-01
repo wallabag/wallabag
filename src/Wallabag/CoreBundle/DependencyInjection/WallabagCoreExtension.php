@@ -30,8 +30,8 @@ class WallabagCoreExtension extends Extension
         $container->setParameter('wallabag_core.site_credentials.encryption_key_path', $config['encryption_key_path']);
         $container->setParameter('wallabag_core.default_ignore_origin_instance_rules', $config['default_ignore_origin_instance_rules']);
         $container->setParameter('wallabag_core.fonts', $config['fonts']);
-        $container->setParameter('wallabag_import.allow_mimetypes', $config['allow_mimetypes']);
-        $container->setParameter('wallabag_import.resource_dir', $config['resource_dir']);
+        $container->setParameter('wallabag_core.allow_mimetypes', $config['allow_mimetypes']);
+        $container->setParameter('wallabag_core.resource_dir', $config['resource_dir']);
     }
 
     public function getAlias()

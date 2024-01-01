@@ -39,13 +39,13 @@ class RedisWorkerCommand extends Command
 
         $serviceName = $input->getArgument('serviceName');
 
-        if (!$this->container->has('wallabag_import.queue.redis.' . $serviceName) || !$this->container->has('wallabag_import.consumer.redis.' . $serviceName)) {
+        if (!$this->container->has('wallabag_core.queue.redis.' . $serviceName) || !$this->container->has('wallabag_core.consumer.redis.' . $serviceName)) {
             throw new Exception(sprintf('No queue or consumer found for service name: "%s"', $input->getArgument('serviceName')));
         }
 
         $worker = new QueueWorker(
-            $this->container->get('wallabag_import.queue.redis.' . $serviceName),
-            $this->container->get('wallabag_import.consumer.redis.' . $serviceName),
+            $this->container->get('wallabag_core.queue.redis.' . $serviceName),
+            $this->container->get('wallabag_core.consumer.redis.' . $serviceName),
             (int) $input->getOption('maxIterations')
         );
 
