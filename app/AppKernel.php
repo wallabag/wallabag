@@ -38,7 +38,6 @@ class AppKernel extends Kernel
 
             // wallabag bundles
             new Wallabag\CoreBundle\WallabagCoreBundle(),
-            new Wallabag\ImportBundle\WallabagImportBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
