@@ -42,9 +42,6 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
         $this->token = $token;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForHost($host)
     {
         $user = $this->getUser();
@@ -119,7 +116,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
 
         $extraFields = [];
         foreach ($extraFieldsStrings as $extraField) {
-            if (false === strpos($extraField, '=')) {
+            if (!str_contains($extraField, '=')) {
                 continue;
             }
 

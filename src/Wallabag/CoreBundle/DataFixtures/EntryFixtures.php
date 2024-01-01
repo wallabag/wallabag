@@ -12,9 +12,6 @@ use Wallabag\UserBundle\Entity\User;
 
 class EntryFixtures extends Fixture implements DependentFixtureInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(ObjectManager $manager): void
     {
         $now = new \DateTime();
@@ -144,9 +141,6 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDependencies()
     {
         return [

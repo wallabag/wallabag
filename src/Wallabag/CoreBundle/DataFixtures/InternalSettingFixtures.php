@@ -20,9 +20,6 @@ class InternalSettingFixtures extends Fixture implements ContainerAwareInterface
         $this->container = $container;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(ObjectManager $manager): void
     {
         foreach ($this->container->getParameter('wallabag_core.default_internal_settings') as $setting) {

@@ -18,7 +18,7 @@ abstract class WallabagCoreTestCase extends WebTestCase
     /**
      * @var KernelBrowser|null
      */
-    private $client = null;
+    private $client;
 
     protected function setUp(): void
     {

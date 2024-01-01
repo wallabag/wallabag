@@ -11,9 +11,6 @@ use Wallabag\UserBundle\Entity\User;
 
 class ConfigFixtures extends Fixture implements DependentFixtureInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(ObjectManager $manager): void
     {
         $adminConfig = new Config($this->getReference('admin-user', User::class));
@@ -59,9 +56,6 @@ class ConfigFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDependencies()
     {
         return [

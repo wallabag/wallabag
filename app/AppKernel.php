@@ -116,7 +116,7 @@ class AppKernel extends Kernel
                 $scheme = 'sqlite';
                 break;
             default:
-                throw new \RuntimeException('Unsupported database driver: ' . $container->getParameter('database_driver'));
+                throw new RuntimeException('Unsupported database driver: ' . $container->getParameter('database_driver'));
         }
 
         $container->setParameter('database_scheme', $scheme);

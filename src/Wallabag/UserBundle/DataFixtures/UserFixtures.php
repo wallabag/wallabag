@@ -8,9 +8,6 @@ use Wallabag\UserBundle\Entity\User;
 
 class UserFixtures extends Fixture
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(ObjectManager $manager)
     {
         $userAdmin = new User();

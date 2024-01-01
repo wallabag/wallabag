@@ -118,8 +118,6 @@ class WallabagRestController extends AbstractFOSRestController
     /**
      * Shortcut to send data serialized in json.
      *
-     * @param mixed $data
-     *
      * @return JsonResponse
      */
     protected function sendResponse($data)

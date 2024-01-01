@@ -16,7 +16,7 @@ abstract class WallabagAnnotationTestCase extends WebTestCase
     /**
      * @var KernelBrowser
      */
-    protected $client = null;
+    protected $client;
 
     /**
      * @var UserInterface

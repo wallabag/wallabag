@@ -89,9 +89,9 @@ class ExportController extends AbstractController
             $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
 
             $entries = $entryRepository->getBuilderForSearchByUser(
-                    $this->getUser()->getId(),
-                    $searchTerm,
-                    $currentRoute
+                $this->getUser()->getId(),
+                $searchTerm,
+                $currentRoute
             )->getQuery()
              ->getResult();
 

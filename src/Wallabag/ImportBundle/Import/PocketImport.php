@@ -32,25 +32,16 @@ class PocketImport extends AbstractImport
         return $this->accessToken;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'Pocket';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUrl()
     {
         return 'import_pocket';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription()
     {
         return 'import.pocket.description';
@@ -105,9 +96,6 @@ class PocketImport extends AbstractImport
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function import($offset = 0)
     {
         static $run = 0;
@@ -158,9 +146,6 @@ class PocketImport extends AbstractImport
         $this->client = new HttpMethodsClient(new PluginClient($client, [new ErrorPlugin()]), $requestFactory ?: Psr17FactoryDiscovery::findRequestFactory(), $streamFactory ?: Psr17FactoryDiscovery::findStreamFactory());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateEntry(array $importedEntry)
     {
         if (empty($importedEntry['resolved_url']) && empty($importedEntry['given_url'])) {
@@ -171,8 +156,6 @@ class PocketImport extends AbstractImport
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @see https://getpocket.com/developer/docs/v3/retrieve
      */
     public function parseEntry(array $importedEntry)
@@ -233,9 +216,6 @@ class PocketImport extends AbstractImport
         return $entry;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setEntryAsRead(array $importedEntry)
     {
         $importedEntry['status'] = '1';
