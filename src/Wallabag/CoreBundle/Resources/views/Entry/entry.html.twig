@@ -4,6 +4,8 @@
 
 {% block body_class %}entry{% endblock %}
 
+{% set current_path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+
 {% block menu %}
     <div class="progress">
         <div class="determinate"></div>
@@ -24,12 +26,12 @@
             </ul>
             <ul class="right">
                 <li>
-                    <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_read'|trans }}" href="{{ path('archive_entry', {'id': entry.id}) }}" id="markAsRead">
+                    <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_read'|trans }}" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" id="markAsRead">
                         <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
                     </a>
                 </li>
                 <li>
-                    <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', {'id': entry.id}) }}" id="setFav">
+                    <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" id="setFav">
                         <i class="material-icons small">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
                     </a>
                 </li>
@@ -67,7 +69,7 @@
         {% endif %}
 
         <li class="bold hide-on-med-and-down">
-            <a class="waves-effect collapsible-header markasread" title="{{ mark_as_read_label|trans }}" href="{{ path('archive_entry', {'id': entry.id}) }}" id="markAsRead">
+            <a class="waves-effect collapsible-header markasread" title="{{ mark_as_read_label|trans }}" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" id="markAsRead">
                 <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
                 <span>{{ mark_as_read_label|trans }}</span>
             </a>
@@ -75,14 +77,14 @@
         </li>
 
         <li class="bold hide-on-med-and-down">
-            <a class="waves-effect collapsible-header favorite" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', {'id': entry.id}) }}" id="setFav">
+            <a class="waves-effect collapsible-header favorite" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" id="setFav">
                 <i class="material-icons spall">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
                 <span>{{ 'entry.view.left_menu.set_as_starred'|trans }}</span>
             </a>
             <div class="collapsible-body"></div>
         </li>
         <li class="bold border-bottom">
-            <a class="waves-effect collapsible-header delete" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', {'id': entry.id}) }}">
+            <a class="waves-effect collapsible-header delete" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', {'id': entry.id, redirect: current_path}) }}">
                 <i class="material-icons small">delete</i>
                 <span>{{ 'entry.view.left_menu.delete'|trans }}</span>
             </a>
@@ -298,9 +300,9 @@
               <i class="material-icons">menu</i>
             </a>
             <ul>
-              <li><a class="btn-floating" href="{{ path('archive_entry', {'id': entry.id}) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i></a></li>
-              <li><a class="btn-floating" href="{{ path('star_entry', {'id': entry.id}) }}"><i class="material-icons">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i></a></li>
-              <li><a class="btn-floating" href="{{ path('delete_entry', {'id': entry.id}) }}" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')"><i class="material-icons">delete</i></a></li>
+              <li><a class="btn-floating" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i></a></li>
+              <li><a class="btn-floating" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i></a></li>
+              <li><a class="btn-floating" href="{{ path('delete_entry', {'id': entry.id, redirect: current_path}) }}" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')"><i class="material-icons">delete</i></a></li>
             </ul>
         </div>
     </div>

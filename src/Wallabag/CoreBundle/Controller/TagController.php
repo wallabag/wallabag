@@ -104,7 +104,7 @@ class TagController extends AbstractController
             $this->entityManager->flush();
         }
 
-        $redirectUrl = $this->redirectHelper->to($request->getSession()->get('prevUrl'), '', true);
+        $redirectUrl = $this->redirectHelper->to($request->query->get('redirect'), true);
 
         return $this->redirect($redirectUrl);
     }
@@ -185,7 +185,7 @@ class TagController extends AbstractController
         $form = $this->createForm(RenameTagType::class, new Tag());
         $form->handleRequest($request);
 
-        $redirectUrl = $this->redirectHelper->to($request->getSession()->get('prevUrl'), '', true);
+        $redirectUrl = $this->redirectHelper->to($request->query->get('redirect'), true);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $newTag = new Tag();
@@ -257,7 +257,7 @@ class TagController extends AbstractController
             $this->entityManager->flush();
         }
 
-        return $this->redirect($this->redirectHelper->to($request->getSession()->get('prevUrl'), '', true));
+        return $this->redirect($this->redirectHelper->to($request->query->get('redirect'), true));
     }
 
     /**
@@ -279,7 +279,7 @@ class TagController extends AbstractController
             $this->entityManager->remove($tag);
             $this->entityManager->flush();
         }
-        $redirectUrl = $this->redirectHelper->to($request->getSession()->get('prevUrl'), '', true);
+        $redirectUrl = $this->redirectHelper->to($request->query->get('redirect'), true);
 
         return $this->redirect($redirectUrl);
     }

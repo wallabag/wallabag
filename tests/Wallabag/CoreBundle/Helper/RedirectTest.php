@@ -33,7 +33,7 @@ class RedirectTest extends TestCase
         $this->routerMock->expects($this->any())
             ->method('generate')
             ->with('homepage')
-            ->willReturn('homepage');
+            ->willReturn('/');
 
         $this->user = new User();
         $this->user->setName('youpi');
@@ -59,18 +59,11 @@ class RedirectTest extends TestCase
         $this->redirect = new Redirect($this->routerMock, $tokenStorage);
     }
 
-    public function testRedirectToNullWithFallback()
-    {
-        $redirectUrl = $this->redirect->to(null, 'fallback');
-
-        $this->assertSame('fallback', $redirectUrl);
-    }
-
-    public function testRedirectToNullWithoutFallback()
+    public function testRedirectToNull()
     {
         $redirectUrl = $this->redirect->to(null);
 
-        $this->assertSame($this->routerMock->generate('homepage'), $redirectUrl);
+        $this->assertSame('/', $redirectUrl);
     }
 
     public function testRedirectToValidUrl()
@@ -78,6 +71,13 @@ class RedirectTest extends TestCase
         $redirectUrl = $this->redirect->to('/unread/list');
 
         $this->assertSame('/unread/list', $redirectUrl);
+    }
+
+    public function testRedirectToAbsoluteUrl()
+    {
+        $redirectUrl = $this->redirect->to('https://www.google.com/');
+
+        $this->assertSame('/', $redirectUrl);
     }
 
     public function testWithNotLoggedUser()
@@ -94,24 +94,24 @@ class RedirectTest extends TestCase
 
         $redirectUrl = $this->redirect->to('/unread/list');
 
-        $this->assertSame($this->routerMock->generate('homepage'), $redirectUrl);
+        $this->assertSame('/', $redirectUrl);
     }
 
     public function testUserForRedirectWithIgnoreActionMarkAsRead()
     {
         $this->user->getConfig()->setActionMarkAsRead(Config::REDIRECT_TO_HOMEPAGE);
 
-        $redirectUrl = $this->redirect->to('/unread/list', '', true);
+        $redirectUrl = $this->redirect->to('/unread/list', true);
 
         $this->assertSame('/unread/list', $redirectUrl);
     }
 
-    public function testUserForRedirectNullWithFallbackWithIgnoreActionMarkAsRead()
+    public function testUserForRedirectNullWithIgnoreActionMarkAsRead()
     {
         $this->user->getConfig()->setActionMarkAsRead(Config::REDIRECT_TO_HOMEPAGE);
 
-        $redirectUrl = $this->redirect->to(null, 'fallback', true);
+        $redirectUrl = $this->redirect->to(null, true);
 
-        $this->assertSame('fallback', $redirectUrl);
+        $this->assertSame('/', $redirectUrl);
     }
 }
