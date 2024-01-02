@@ -202,7 +202,7 @@ class InstallCommand extends Command
             $this->io->text('Dropping database, creating database and schema, clearing the cache');
 
             $this
-                ->runCommand('doctrine:database:drop', ['--force' => true])
+                ->runCommand('doctrine:database:drop', ['--force' => true, '--if-exists' => true])
                 ->runCommand('doctrine:database:create')
                 ->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true])
                 ->runCommand('cache:clear')
@@ -231,7 +231,7 @@ class InstallCommand extends Command
             $this->io->text('Dropping database, creating database and schema...');
 
             $this
-                ->runCommand('doctrine:database:drop', ['--force' => true])
+                ->runCommand('doctrine:database:drop', ['--force' => true, '--if-exists' => true])
                 ->runCommand('doctrine:database:create')
                 ->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true])
             ;

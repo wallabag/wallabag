@@ -162,6 +162,7 @@ class InstallCommandTest extends WallabagCoreTestCase
         $command = $application->find('doctrine:database:drop');
         $command->run(new ArrayInput([
             '--force' => true,
+            '--if-exists' => true,
         ]), new NullOutput());
 
         // start a new application to avoid lagging connexion to pgsql
@@ -234,6 +235,7 @@ class InstallCommandTest extends WallabagCoreTestCase
         $command = $application->find('doctrine:database:drop');
         $command->run(new ArrayInput([
             '--force' => true,
+            '--if-exists' => true,
         ]), new NullOutput());
 
         $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->close();
