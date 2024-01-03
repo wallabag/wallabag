@@ -1330,8 +1330,10 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->getEntityManager()->flush();
 
-        $client->request('GET', '/view/' . $entry->getId());
-        $client->request('GET', '/archive/' . $entry->getId());
+        $crawler = $client->request('GET', '/view/' . $entry->getId());
+
+        $link = $crawler->filter('a[id="markAsRead"]')->link();
+        $client->click($link);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertStringContainsString('/view/' . $entry->getId(), $client->getResponse()->headers->get('location'));
@@ -1707,7 +1709,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         // the deletion link of the first tag
         $link = $crawler->filter('body div#article div.tools ul.tags li.chip a')->extract(['href'])[1];
 
-        $this->assertSame(sprintf('/remove-tag/%s/%s', $entry->getId(), $tag->getId()), $link);
+        $this->assertStringStartsWith(sprintf('/remove-tag/%s/%s', $entry->getId(), $tag->getId()), $link);
     }
 
     public function testRandom()
