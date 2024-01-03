@@ -80,7 +80,7 @@ jobs:
         run: "make fixtures"
 
       - name: "Run PHPUnit"
-        run: "php bin/simple-phpunit -v"
+        run: "php bin/phpunit -v"
 
   phpunit_no_prefix:
     name: "PHP ${{ matrix.php }} using ${{ matrix.database }} without prefix"
@@ -151,4 +151,4 @@ jobs:
         run: "make fixtures"
 
       - name: "Run PHPUnit"
-        run: "php bin/simple-phpunit -v"
+        run: "php bin/phpunit -v"
