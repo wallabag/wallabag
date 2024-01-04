@@ -7,4 +7,5 @@ parameters:
     test_database_password: wallabagrocks
     test_database_path: ~
     env(TEST_DATABASE_PATH): ~
+    test_database_socket: null
     test_database_charset: utf8

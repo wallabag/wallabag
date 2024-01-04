@@ -31,6 +31,7 @@ doctrine:
         password: "%test_database_password%"
         charset: "%test_database_charset%"
         path: "%env(TEST_DATABASE_PATH)%"
+        unix_socket: "%test_database_socket%"
 
     orm:
         metadata_cache_driver:
