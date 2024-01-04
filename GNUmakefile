@@ -46,7 +46,7 @@ fixtures: ## Load fixtures into database
 	php bin/console doctrine:fixtures:load --no-interaction --env=test
 
 test: prepare fixtures ## Launch wallabag testsuite
-	XDEBUG_MODE=off php -dmemory_limit=-1 bin/simple-phpunit -v
+	XDEBUG_MODE=off php -dmemory_limit=-1 bin/phpunit -v
 
 release: ## Create a package. Need a VERSION parameter (eg: `make release VERSION=master`).
 ifndef VERSION
