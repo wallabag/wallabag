@@ -97,5 +97,47 @@ class AppKernel extends Kernel
             // $container->setParameter('container.dumper.inline_class_loader', true);
             $container->addObjectResource($this);
         });
+
+        $loader->load(function (ContainerBuilder $container) {
+            $this->processDatabaseParameters($container);
+
+            if ('test' === $container->getParameter('kernel.environment')) {
+                $this->processDatabaseParameters($container, true);
+            }
+        });
+    }
+
+    private function processDatabaseParameters(ContainerBuilder $container, bool $isTest = false)
+    {
+        $prefix = '';
+
+        if ($isTest) {
+            $prefix = 'test_';
+        }
+
+        switch ($container->getParameter($prefix . 'database_driver')) {
+            case 'pdo_mysql':
+                $scheme = 'mysql';
+                break;
+            case 'pdo_pgsql':
+                $scheme = 'pgsql';
+                break;
+            case 'pdo_sqlite':
+                $scheme = 'sqlite';
+                break;
+            default:
+                throw new \RuntimeException('Unsupported database driver: ' . $container->getParameter($prefix . 'database_driver'));
+        }
+
+        $container->setParameter($prefix . 'database_scheme', $scheme);
+
+        if ('sqlite' === $scheme) {
+            $container->setParameter($prefix . 'database_name', $container->getParameter($prefix . 'database_path'));
+        }
+
+        $container->setParameter($prefix . 'database_user', (string) $container->getParameter($prefix . 'database_user'));
+        $container->setParameter($prefix . 'database_password', (string) $container->getParameter($prefix . 'database_password'));
+        $container->setParameter($prefix . 'database_port', (string) $container->getParameter($prefix . 'database_port'));
+        $container->setParameter($prefix . 'database_socket', (string) $container->getParameter($prefix . 'database_socket'));
     }
 }

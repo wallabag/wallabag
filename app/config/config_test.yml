@@ -4,6 +4,7 @@ imports:
     - { resource: services_test.yml }
 
 parameters:
+    env(TEST_DATABASE_URL): '%test_database_scheme%://%test_database_user%:%test_database_password%@%test_database_host%:%test_database_port%/%test_database_name%?unix_socket=%test_database_socket%&charset=%test_database_charset%'
     fosuser_registration: true
 
 framework:
@@ -23,15 +24,7 @@ web_profiler:
 
 doctrine:
     dbal:
-        driver: "%test_database_driver%"
-        host: "%test_database_host%"
-        port: "%test_database_port%"
-        dbname: "%test_database_name%"
-        user: "%test_database_user%"
-        password: "%test_database_password%"
-        charset: "%test_database_charset%"
-        path: "%env(TEST_DATABASE_PATH)%"
-        unix_socket: "%test_database_socket%"
+        url: '%env(resolve:TEST_DATABASE_URL)%'
 
     orm:
         metadata_cache_driver:
