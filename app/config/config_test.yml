@@ -4,7 +4,6 @@ imports:
     - { resource: services_test.yml }
 
 parameters:
-    env(TEST_DATABASE_URL): '%test_database_scheme%://%test_database_user%:%test_database_password%@%test_database_host%:%test_database_port%/%test_database_name%?unix_socket=%test_database_socket%&charset=%test_database_charset%'
     fosuser_registration: true
 
 framework:
@@ -24,7 +23,7 @@ web_profiler:
 
 doctrine:
     dbal:
-        url: '%env(resolve:TEST_DATABASE_URL)%'
+        dbname_suffix: '_test' # for MySQL and PostgreSQL
 
     orm:
         metadata_cache_driver:

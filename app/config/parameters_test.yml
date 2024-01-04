@@ -1,11 +1,5 @@
 parameters:
-    test_database_driver: pdo_sqlite
-    test_database_host: 127.0.0.1
-    test_database_port: null
-    test_database_name: null
-    test_database_user: null
-    test_database_password: null
-    test_database_path: "%env(TEST_DATABASE_PATH)%"
+    # Using an environment variable in order to avoid the error "attempt to write a readonly database"
+    # when the schema is dropped then recreate
+    database_path: "%env(TEST_DATABASE_PATH)%"
     env(TEST_DATABASE_PATH): "%kernel.project_dir%/data/db/wallabag_test.sqlite"
-    test_database_socket: null
-    test_database_charset: utf8

@@ -1,11 +1,2 @@
 parameters:
-    test_database_driver: pdo_mysql
-    test_database_host: 127.0.0.1
-    test_database_port: 3306
-    test_database_name: wallabag_test
-    test_database_user: root
-    test_database_password: root
-    test_database_path: ~
-    env(TEST_DATABASE_PATH): ~
-    test_database_socket: null
-    test_database_charset: utf8mb4
+    env(DATABASE_URL): mysql://root:root@127.0.0.1:3306/wallabag?charset=utf8mb4
