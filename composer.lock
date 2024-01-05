@@ -4519,16 +4519,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "2.4.4",
+            "version": "2.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "a8524b4c2847cf7c46c3e4153a57a5014b09f02e"
+                "reference": "3519a1e8fddec59b61d05461dcb16818a6fd2650"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/a8524b4c2847cf7c46c3e4153a57a5014b09f02e",
-                "reference": "a8524b4c2847cf7c46c3e4153a57a5014b09f02e",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/3519a1e8fddec59b61d05461dcb16818a6fd2650",
+                "reference": "3519a1e8fddec59b61d05461dcb16818a6fd2650",
                 "shasum": ""
             },
             "require": {
@@ -4536,19 +4536,19 @@
                 "ext-tidy": "*",
                 "fossar/htmlawed": "^1.2.7",
                 "guzzlehttp/psr7": "^1.5.0|^2.0",
-                "http-interop/http-factory-guzzle": "^1.0",
-                "j0k3r/graby-site-config": "^1.0.110",
+                "http-interop/http-factory-guzzle": "^1.1",
+                "j0k3r/graby-site-config": "^1.0.181",
                 "j0k3r/httplug-ssrf-plugin": "^2.0",
-                "j0k3r/php-readability": "^1.2.3",
+                "j0k3r/php-readability": "^1.2.10",
                 "monolog/monolog": "^1.18.0|^2.0",
                 "php": ">=7.1.3",
-                "php-http/client-common": "^2.3",
-                "php-http/discovery": "^1.12",
-                "php-http/httplug": "^2.2",
-                "php-http/message": "^1.9",
-                "simplepie/simplepie": "^1.5",
-                "smalot/pdfparser": "^1.0",
-                "symfony/options-resolver": "^3.4|^4.4|^5.3|^6.0",
+                "php-http/client-common": "^2.7",
+                "php-http/discovery": "^1.19",
+                "php-http/httplug": "^2.4",
+                "php-http/message": "^1.14",
+                "simplepie/simplepie": "^1.7",
+                "smalot/pdfparser": "^1.1",
+                "symfony/options-resolver": "^3.4|^4.4|^5.3|^6.0|^7.0",
                 "true/punycode": "^2.1"
             },
             "require-dev": {
@@ -4560,7 +4560,7 @@
                 "phpstan/phpstan": "^0.12",
                 "phpstan/phpstan-deprecation-rules": "^0.12",
                 "phpstan/phpstan-phpunit": "^0.12",
-                "symfony/phpunit-bridge": "^5.3"
+                "symfony/phpunit-bridge": "^6.4.1"
             },
             "type": "library",
             "extra": {
@@ -4592,7 +4592,7 @@
             "description": "Graby helps you extract article content from web pages",
             "support": {
                 "issues": "https://github.com/j0k3r/graby/issues",
-                "source": "https://github.com/j0k3r/graby/tree/2.4.4"
+                "source": "https://github.com/j0k3r/graby/tree/2.4.5"
             },
             "funding": [
                 {
@@ -4600,20 +4600,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-07T14:02:51+00:00"
+            "time": "2024-01-04T08:46:05+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.180",
+            "version": "1.0.181",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "4580b0617981210335a79711f14f3415e5ed4ef6"
+                "reference": "c8014aa7aba4142b68c368050b7f785b8ec5cef1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/4580b0617981210335a79711f14f3415e5ed4ef6",
-                "reference": "4580b0617981210335a79711f14f3415e5ed4ef6",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/c8014aa7aba4142b68c368050b7f785b8ec5cef1",
+                "reference": "c8014aa7aba4142b68c368050b7f785b8ec5cef1",
                 "shasum": ""
             },
             "require": {
@@ -4642,9 +4642,9 @@
             "description": "Graby site config files",
             "support": {
                 "issues": "https://github.com/j0k3r/graby-site-config/issues",
-                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.180"
+                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.181"
             },
-            "time": "2023-12-27T21:28:25+00:00"
+            "time": "2024-01-01T02:14:13+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
@@ -6959,16 +6959,16 @@
         },
         {
             "name": "php-http/promise",
-            "version": "1.2.1",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/promise.git",
-                "reference": "44a67cb59f708f826f3bec35f22030b3edb90119"
+                "reference": "2916a606d3b390f4e9e8e2b8dd68581508be0f07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/promise/zipball/44a67cb59f708f826f3bec35f22030b3edb90119",
-                "reference": "44a67cb59f708f826f3bec35f22030b3edb90119",
+                "url": "https://api.github.com/repos/php-http/promise/zipball/2916a606d3b390f4e9e8e2b8dd68581508be0f07",
+                "reference": "2916a606d3b390f4e9e8e2b8dd68581508be0f07",
                 "shasum": ""
             },
             "require": {
@@ -7005,9 +7005,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/promise/issues",
-                "source": "https://github.com/php-http/promise/tree/1.2.1"
+                "source": "https://github.com/php-http/promise/tree/1.3.0"
             },
-            "time": "2023-11-08T12:57:08+00:00"
+            "time": "2024-01-04T18:49:48+00:00"
         },
         {
             "name": "php-http/stopwatch-plugin",
