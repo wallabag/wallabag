@@ -32,9 +32,6 @@ build: ## Run webpack
 	@yarn build:$(ENV)
 
 prepare: ## Prepare database for testsuite
-ifdef DB
-	cp app/config/tests/parameters_test.$(DB).yml app/config/parameters_test.yml
-endif
 	-php bin/console doctrine:database:drop --force --env=test
 	php bin/console doctrine:database:create --env=test
 	php bin/console doctrine:migrations:migrate --no-interaction --env=test -vv
