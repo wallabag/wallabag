@@ -13,14 +13,18 @@ require __DIR__ . '/../vendor/autoload.php';
     'doctrine:database:drop',
     '--force',
     '--env=test',
-]))->run();
+]))->run(function ($type, $buffer) {
+    echo $buffer;
+});
 
 (new Process([
     'php',
     __DIR__ . '/../bin/console',
     'doctrine:database:create',
     '--env=test',
-]))->mustRun();
+]))->mustRun(function ($type, $buffer) {
+    echo $buffer;
+});
 
 (new Process([
     'php',
@@ -29,7 +33,9 @@ require __DIR__ . '/../vendor/autoload.php';
     '--no-interaction',
     '--env=test',
     '-vv',
-]))->mustRun();
+]))->mustRun(function ($type, $buffer) {
+    echo $buffer;
+});
 
 (new Process([
     'php',
@@ -37,4 +43,6 @@ require __DIR__ . '/../vendor/autoload.php';
     'doctrine:fixtures:load',
     '--no-interaction',
     '--env=test',
-]))->mustRun();
+]))->mustRun(function ($type, $buffer) {
+    echo $buffer;
+});
