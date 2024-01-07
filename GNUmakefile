@@ -31,15 +31,10 @@ build: ## Run webpack
 	@yarn install
 	@yarn build:$(ENV)
 
-prepare: ## Prepare database for testsuite
-	-php bin/console doctrine:database:drop --force --env=test
-	php bin/console doctrine:database:create --env=test
-	php bin/console doctrine:migrations:migrate --no-interaction --env=test -vv
-
 fixtures: ## Load fixtures into database
 	php bin/console doctrine:fixtures:load --no-interaction --env=test
 
-test: prepare fixtures ## Launch wallabag testsuite
+test: fixtures ## Launch wallabag testsuite
 	XDEBUG_MODE=off php -dmemory_limit=-1 bin/phpunit -v
 
 release: ## Create a package. Need a VERSION parameter (eg: `make release VERSION=master`).
@@ -51,6 +46,6 @@ endif
 deploy: ## Deploy wallabag
 	@bundle exec cap staging deploy
 
-.PHONY: help prepare install fixtures update build test release deploy run dev
+.PHONY: help install fixtures update build test release deploy run dev
 
 .DEFAULT_GOAL := install

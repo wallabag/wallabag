@@ -73,12 +73,8 @@ jobs:
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 
-      - name: "Prepare database"
-        run: |
-          cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
-          php bin/console doctrine:database:drop --force --env=test
-          php bin/console doctrine:database:create --env=test
-          php bin/console doctrine:migrations:migrate --no-interaction --env=test -vv
+      - name: "Prepare database configuration"
+        run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
 
       - name: "Prepare fixtures"
         run: "make fixtures"
@@ -148,12 +144,8 @@ jobs:
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 
-      - name: "Prepare database"
-        run: |
-          cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
-          php bin/console doctrine:database:drop --force --env=test
-          php bin/console doctrine:database:create --env=test
-          php bin/console doctrine:migrations:migrate --no-interaction --env=test -vv
+      - name: "Prepare database configuration"
+        run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
 
       - name: "Prepare fixtures"
         run: "make fixtures"
