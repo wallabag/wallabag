@@ -30,3 +30,11 @@ require __DIR__ . '/../vendor/autoload.php';
     '--env=test',
     '-vv',
 ]))->mustRun();
+
+(new Process([
+    'php',
+    __DIR__ . '/../bin/console',
+    'doctrine:fixtures:load',
+    '--no-interaction',
+    '--env=test',
+]))->mustRun();

@@ -76,9 +76,6 @@ jobs:
       - name: "Prepare database configuration"
         run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
 
-      - name: "Prepare fixtures"
-        run: "make fixtures"
-
       - name: "Run PHPUnit"
         run: "php bin/phpunit -v"
 
@@ -146,9 +143,6 @@ jobs:
 
       - name: "Prepare database configuration"
         run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
-
-      - name: "Prepare fixtures"
-        run: "make fixtures"
 
       - name: "Run PHPUnit"
         run: "php bin/phpunit -v"
