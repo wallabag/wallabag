@@ -1,6 +1,11 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getId\\(\\)\\.$#"
+			count: 3
+			path: src/Wallabag/AnnotationBundle/Controller/WallabagAnnotationController.php
+
+		-
 			message: "#^Method Wallabag\\\\AnnotationBundle\\\\Controller\\\\WallabagAnnotationController\\:\\:postAnnotationAction\\(\\) should return Symfony\\\\Component\\\\HttpFoundation\\\\JsonResponse but returns Symfony\\\\Component\\\\Form\\\\FormInterface\\<mixed\\>\\.$#"
 			count: 1
 			path: src/Wallabag/AnnotationBundle/Controller/WallabagAnnotationController.php
@@ -11,24 +16,69 @@ parameters:
 			path: src/Wallabag/AnnotationBundle/Controller/WallabagAnnotationController.php
 
 		-
-			message: "#^Method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) invoked with 2 parameters, 1 required\\.$#"
-			count: 6
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getConfig\\(\\)\\.$#"
+			count: 1
+			path: src/Wallabag/ApiBundle/Controller/ConfigRestController.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getId\\(\\)\\.$#"
+			count: 2
+			path: src/Wallabag/ApiBundle/Controller/DeveloperController.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getId\\(\\)\\.$#"
+			count: 8
 			path: src/Wallabag/ApiBundle/Controller/EntryRestController.php
 
 		-
-			message: "#^Method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) invoked with 2 parameters, 1 required\\.$#"
-			count: 1
-			path: src/Wallabag/ApiBundle/Controller/UserRestController.php
+			message: "#^Cannot assign new offset to string\\.$#"
+			count: 2
+			path: src/Wallabag/ApiBundle/Controller/EntryRestController.php
 
 		-
-			message: "#^Method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) invoked with 2 parameters, 1 required\\.$#"
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getId\\(\\)\\.$#"
 			count: 1
-			path: src/Wallabag/CoreBundle/Command/InstallCommand.php
+			path: src/Wallabag/ApiBundle/Controller/SearchRestController.php
 
 		-
-			message: "#^Method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) invoked with 2 parameters, 1 required\\.$#"
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getId\\(\\)\\.$#"
+			count: 7
+			path: src/Wallabag/ApiBundle/Controller/TagRestController.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getConfig\\(\\)\\.$#"
 			count: 1
-			path: src/Wallabag/CoreBundle/Command/ReloadEntryCommand.php
+			path: src/Wallabag/ApiBundle/Controller/TaggingRuleRestController.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getConfig\\(\\)\\.$#"
+			count: 3
+			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getId\\(\\)\\.$#"
+			count: 11
+			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:setBackupCodes\\(\\)\\.$#"
+			count: 3
+			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:setEmailTwoFactor\\(\\)\\.$#"
+			count: 3
+			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:setGoogleAuthenticatorSecret\\(\\)\\.$#"
+			count: 3
+			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:setPlainPassword\\(\\)\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
 
 		-
 			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Entity\\\\RuleInterface\\:\\:getConfig\\(\\)\\.$#"
@@ -41,14 +91,24 @@ parameters:
 			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
 
 		-
-			message: "#^Method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) invoked with 2 parameters, 1 required\\.$#"
-			count: 1
-			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getId\\(\\)\\.$#"
+			count: 12
+			path: src/Wallabag/CoreBundle/Controller/EntryController.php
 
 		-
-			message: "#^Method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) invoked with 2 parameters, 1 required\\.$#"
-			count: 5
-			path: src/Wallabag/CoreBundle/Controller/EntryController.php
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getId\\(\\)\\.$#"
+			count: 6
+			path: src/Wallabag/CoreBundle/Controller/ExportController.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getId\\(\\)\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Controller/SiteCredentialController.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getId\\(\\)\\.$#"
+			count: 8
+			path: src/Wallabag/CoreBundle/Controller/TagController.php
 
 		-
 			message: "#^Call to an undefined method Lexik\\\\Bundle\\\\FormFilterBundle\\\\Filter\\\\Query\\\\QueryInterface\\:\\:getExpressionBuilder\\(\\)\\.$#"
@@ -61,6 +121,16 @@ parameters:
 			path: src/Wallabag/CoreBundle/Form/Type/EntryFilterType.php
 
 		-
+			message: "#^Call to an undefined method DOMNode\\:\\:getAttribute\\(\\)\\.$#"
+			count: 1
+			path: src/Wallabag/CoreBundle/Helper/DownloadImages.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getId\\(\\)\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/BrowserController.php
+
+		-
 			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
 			count: 1
 			path: src/Wallabag/ImportBundle/Controller/BrowserController.php
@@ -69,6 +139,16 @@ parameters:
 			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
 			count: 1
 			path: src/Wallabag/ImportBundle/Controller/BrowserController.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getId\\(\\)\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/DeliciousController.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getId\\(\\)\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/HtmlController.php
 
 		-
 			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
@@ -81,6 +161,31 @@ parameters:
 			path: src/Wallabag/ImportBundle/Controller/HtmlController.php
 
 		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getId\\(\\)\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/InstapaperController.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getId\\(\\)\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/PinboardController.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getConfig\\(\\)\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/PocketController.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getId\\(\\)\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/ReadabilityController.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getId\\(\\)\\.$#"
+			count: 1
+			path: src/Wallabag/ImportBundle/Controller/WallabagController.php
+
+		-
 			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
 			count: 1
 			path: src/Wallabag/ImportBundle/Controller/WallabagController.php
@@ -89,11 +194,6 @@ parameters:
 			message: "#^Call to an undefined method Wallabag\\\\ImportBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
 			count: 1
 			path: src/Wallabag/ImportBundle/Controller/WallabagController.php
-
-		-
-			message: "#^Method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) invoked with 2 parameters, 1 required\\.$#"
-			count: 1
-			path: src/Wallabag/UserBundle/Controller/ManageController.php
 
 		-
 			message: "#^Call to an undefined method Scheb\\\\TwoFactorBundle\\\\Model\\\\Email\\\\TwoFactorInterface\\:\\:getName\\(\\)\\.$#"
