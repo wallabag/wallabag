@@ -8,6 +8,7 @@ parameters:
     # Allows to use the live reload feature for changes in assets
     use_webpack_dev_server: false
     craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\SymfonyCacheComponentAdapter
+    env(DATABASE_URL): '%database_scheme%://%database_user%:%database_password%@%database_host%:%database_port%/%database_name%?unix_socket=%database_socket%&charset=%database_charset%'
 
 framework:
     #esi:             ~
@@ -48,15 +49,7 @@ twig:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver: "%database_driver%"
-        host: "%database_host%"
-        port: "%database_port%"
-        dbname: "%database_name%"
-        user: "%database_user%"
-        password: "%database_password%"
-        charset: "%database_charset%"
-        path: "%database_path%"
-        unix_socket: "%database_socket%"
+        url: '%env(resolve:DATABASE_URL)%'
         types:
             json_array: Wallabag\CoreBundle\Doctrine\JsonArrayType
 
