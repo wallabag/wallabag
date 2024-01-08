@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
@@ -128,7 +127,7 @@ class EntryController extends AbstractController
             $this->entityManager->flush();
         }
 
-        $redirectUrl = $this->redirectHelper->to($request->getSession()->get('prevUrl'));
+        $redirectUrl = $this->redirectHelper->to($request->query->get('redirect'));
 
         return $this->redirect($redirectUrl);
     }
@@ -390,7 +389,6 @@ class EntryController extends AbstractController
     public function viewAction(Entry $entry)
     {
         $this->checkUserAction($entry);
-        $this->get('session')->set('prevUrl', $this->generateUrl('view', ['id' => $entry->getId()]));
 
         return $this->render(
             '@WallabagCore/Entry/entry.html.twig',
@@ -452,7 +450,7 @@ class EntryController extends AbstractController
             $message
         );
 
-        $redirectUrl = $this->redirectHelper->to($request->getSession()->get('prevUrl'));
+        $redirectUrl = $this->redirectHelper->to($request->query->get('redirect'));
 
         return $this->redirect($redirectUrl);
     }
@@ -482,7 +480,7 @@ class EntryController extends AbstractController
             $message
         );
 
-        $redirectUrl = $this->redirectHelper->to($request->getSession()->get('prevUrl'));
+        $redirectUrl = $this->redirectHelper->to($request->query->get('redirect'));
 
         return $this->redirect($redirectUrl);
     }
@@ -502,8 +500,7 @@ class EntryController extends AbstractController
         // to avoid redirecting to the deleted entry. Ugh.
         $url = $this->generateUrl(
             'view',
-            ['id' => $entry->getId()],
-            UrlGeneratorInterface::ABSOLUTE_PATH
+            ['id' => $entry->getId()]
         );
 
         // entry deleted, dispatch event about it!
@@ -518,7 +515,7 @@ class EntryController extends AbstractController
         );
 
         // don't redirect user to the deleted entry (check that the referer doesn't end with the same url)
-        $prev = $request->getSession()->get('prevUrl', '');
+        $prev = $request->query->get('redirect', '');
         $to = (1 !== preg_match('#' . $url . '$#i', $prev) ? $prev : null);
 
         $redirectUrl = $this->redirectHelper->to($to);
@@ -617,7 +614,6 @@ class EntryController extends AbstractController
     {
         $searchTerm = (isset($request->get('search_entry')['term']) ? trim($request->get('search_entry')['term']) : '');
         $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
-        $request->getSession()->set('prevUrl', $request->getRequestUri());
 
         $formOptions = [];
 
