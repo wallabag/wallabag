@@ -37,7 +37,7 @@ abstract class AbstractImport implements ImportInterface
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function setLogger(LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
     }
