@@ -36,7 +36,7 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
         return [];
     }
 
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('removeWww', [$this, 'removeWww']),
@@ -45,7 +45,7 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
         ];
     }
 
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('count_entries', [$this, 'countEntries']),

@@ -27,7 +27,7 @@ class UploadImportType extends AbstractType
         ;
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'upload_import_file';
     }

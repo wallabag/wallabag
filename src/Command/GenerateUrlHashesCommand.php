@@ -39,7 +39,7 @@ class GenerateUrlHashesCommand extends Command
             ->addArgument('username', InputArgument::OPTIONAL, 'User to process entries');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->output = $output;
 
