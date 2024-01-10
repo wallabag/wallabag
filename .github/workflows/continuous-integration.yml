@@ -8,6 +8,8 @@ on:
       - "2.**"
 
 env:
+  # Force disabling the reporting of Doctrine deprecation notices for now
+  DOCTRINE_DEPRECATIONS: none
   PGPASSWORD: wallabagrocks
   COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
