@@ -37,7 +37,7 @@ class TaggingRuleRestController extends WallabagRestController
             SerializationContext::create()->setGroups(['export_tagging_rule'])
         );
 
-        return Response::create(
+        return new Response(
             $data,
             200,
             [

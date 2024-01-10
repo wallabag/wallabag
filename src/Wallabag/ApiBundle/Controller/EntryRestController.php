@@ -302,7 +302,7 @@ class EntryRestController extends WallabagRestController
         $order = strtolower($request->query->get('order', 'desc'));
         $page = (int) $request->query->get('page', 1);
         $perPage = (int) $request->query->get('perPage', 30);
-        $tags = \is_array($request->query->get('tags')) ? '' : (string) $request->query->get('tags', '');
+        $tags = (string) $request->query->get('tags', '');
         $since = $request->query->get('since', 0);
         $detail = strtolower($request->query->get('detail', 'full'));
         $domainName = (null === $request->query->get('domain_name')) ? '' : (string) $request->query->get('domain_name');
@@ -463,7 +463,7 @@ class EntryRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        $urls = json_decode($request->query->get('urls', []));
+        $urls = json_decode($request->query->get('urls', '[]'));
 
         if (empty($urls)) {
             return $this->sendResponse([]);
@@ -523,7 +523,7 @@ class EntryRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        $urls = json_decode($request->query->get('urls', []));
+        $urls = json_decode($request->query->get('urls'), '[]');
 
         $limit = $this->getParameter('wallabag_core.api_limit_mass_actions');
 
@@ -1273,7 +1273,7 @@ class EntryRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        $list = json_decode($request->query->get('list', []));
+        $list = json_decode($request->query->get('list', '[]'));
 
         if (empty($list)) {
             return $this->sendResponse([]);
@@ -1340,7 +1340,7 @@ class EntryRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        $list = json_decode($request->query->get('list', []));
+        $list = json_decode($request->query->get('list', '[]'));
 
         if (empty($list)) {
             return $this->sendResponse([]);
@@ -1399,7 +1399,7 @@ class EntryRestController extends WallabagRestController
     {
         return [
             'title' => $request->request->get('title'),
-            'tags' => $request->request->get('tags', []),
+            'tags' => $request->request->get('tags', ''),
             'isArchived' => $request->request->get('archive'),
             'isStarred' => $request->request->get('starred'),
             'isPublic' => $request->request->get('public'),

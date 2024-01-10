@@ -30,7 +30,7 @@ class AuthenticationFailureListener implements EventSubscriberInterface
      */
     public function onAuthenticationFailure()
     {
-        $request = $this->requestStack->getMasterRequest();
+        $request = $this->requestStack->getMainRequest();
 
         $this->logger->error('Authentication failure for user "' . $request->request->get('_username') . '", from IP "' . $request->getClientIp() . '", with UA: "' . $request->server->get('HTTP_USER_AGENT') . '".');
     }

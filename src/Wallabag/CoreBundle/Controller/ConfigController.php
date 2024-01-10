@@ -697,7 +697,7 @@ class ConfigController extends AbstractController
             SerializationContext::create()->setGroups(['export_tagging_rule'])
         );
 
-        return Response::create(
+        return new Response(
             $data,
             200,
             [
