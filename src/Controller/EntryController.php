@@ -623,7 +623,7 @@ class EntryController extends AbstractController
      */
     private function showEntries($type, Request $request, $page)
     {
-        $searchTerm = (isset($request->get('search_entry')['term']) ? trim($request->get('search_entry')['term']) : '');
+        $searchTerm = (isset($request->query->all('search_entry')['term']) ? trim($request->query->all('search_entry')['term']) : '');
         $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
 
         $formOptions = [];
@@ -664,7 +664,7 @@ class EntryController extends AbstractController
 
         if ($request->query->has($form->getName())) {
             // manually bind values from the request
-            $form->submit($request->query->get($form->getName()));
+            $form->submit($request->query->all($form->getName()));
 
             // build the query from the given form object
             $this->filterBuilderUpdater->addFilterConditions($form, $qb);
