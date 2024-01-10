@@ -14,9 +14,6 @@ endif
 help: ## Display this help menu
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-clean: ## Clear the application cache
-	rm -rf var/cache/*
-
 install: ## Install wallabag with the latest version
 	@./scripts/install.sh $(ENV)
 
@@ -34,18 +31,7 @@ build: ## Run webpack
 	@yarn install
 	@yarn build:$(ENV)
 
-prepare: clean ## Prepare database for testsuite
-ifdef DB
-	cp app/config/tests/parameters_test.$(DB).yml app/config/parameters_test.yml
-endif
-	-php bin/console doctrine:database:drop --force --env=test
-	php bin/console doctrine:database:create --env=test
-	php bin/console doctrine:migrations:migrate --no-interaction --env=test -vv
-
-fixtures: ## Load fixtures into database
-	php bin/console doctrine:fixtures:load --no-interaction --env=test
-
-test: prepare fixtures ## Launch wallabag testsuite
+test: ## Launch wallabag testsuite
 	XDEBUG_MODE=off php -dmemory_limit=-1 bin/phpunit -v
 
 release: ## Create a package. Need a VERSION parameter (eg: `make release VERSION=master`).
@@ -57,6 +43,6 @@ endif
 deploy: ## Deploy wallabag
 	@bundle exec cap staging deploy
 
-.PHONY: help clean prepare install fixtures update build test release deploy run dev
+.PHONY: help install update build test release deploy run dev
 
 .DEFAULT_GOAL := install

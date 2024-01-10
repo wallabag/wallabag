@@ -75,11 +75,8 @@ jobs:
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 
-      - name: "Prepare database"
-        run: "make prepare DB=${{ matrix.database }}"
-
-      - name: "Prepare fixtures"
-        run: "make fixtures"
+      - name: "Prepare database configuration"
+        run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
 
       - name: "Run PHPUnit"
         run: "php bin/phpunit -v"
@@ -146,11 +143,8 @@ jobs:
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 
-      - name: "Prepare database"
-        run: "make prepare DB=${{ matrix.database }}"
-
-      - name: "Prepare fixtures"
-        run: "make fixtures"
+      - name: "Prepare database configuration"
+        run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
 
       - name: "Run PHPUnit"
         run: "php bin/phpunit -v"
