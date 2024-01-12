@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         php:
-          - "7.4"
+          - "8.1"
 
     steps:
       - name: "Checkout"
