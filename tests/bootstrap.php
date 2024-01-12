@@ -7,35 +7,37 @@ require __DIR__ . '/../vendor/autoload.php';
 
 (new Filesystem())->remove(__DIR__ . '/../var/cache/test');
 
-(new Process([
-    'php',
-    __DIR__ . '/../bin/console',
-    'doctrine:database:drop',
-    '--force',
-    '--env=test',
-]))->run(function ($type, $buffer) {
-    echo $buffer;
-});
+if (!isPartialRun()) {
+    (new Process([
+        'php',
+        __DIR__ . '/../bin/console',
+        'doctrine:database:drop',
+        '--force',
+        '--env=test',
+    ]))->run(function ($type, $buffer) {
+        echo $buffer;
+    });
 
-(new Process([
-    'php',
-    __DIR__ . '/../bin/console',
-    'doctrine:database:create',
-    '--env=test',
-]))->mustRun(function ($type, $buffer) {
-    echo $buffer;
-});
+    (new Process([
+        'php',
+        __DIR__ . '/../bin/console',
+        'doctrine:database:create',
+        '--env=test',
+    ]))->mustRun(function ($type, $buffer) {
+        echo $buffer;
+    });
 
-(new Process([
-    'php',
-    __DIR__ . '/../bin/console',
-    'doctrine:migrations:migrate',
-    '--no-interaction',
-    '--env=test',
-    '-vv',
-]))->mustRun(function ($type, $buffer) {
-    echo $buffer;
-});
+    (new Process([
+        'php',
+        __DIR__ . '/../bin/console',
+        'doctrine:migrations:migrate',
+        '--no-interaction',
+        '--env=test',
+        '-vv',
+    ]))->mustRun(function ($type, $buffer) {
+        echo $buffer;
+    });
+}
 
 (new Process([
     'php',

@@ -200,7 +200,10 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        }
+        },
+        "files": [
+            "tests/functions.php"
+        ]
     },
     "config": {
         "allow-plugins": {
