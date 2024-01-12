@@ -38,7 +38,7 @@
         "issues": "https://github.com/wallabag/wallabag/issues"
     },
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.2",
         "ext-ctype": "*",
         "ext-curl": "*",
         "ext-dom": "*",
@@ -83,7 +83,7 @@
         "javibravo/simpleue": "^2.1",
         "jms/serializer": "^3.29.1",
         "jms/serializer-bundle": "^5.4",
-        "laminas/laminas-code": "^4.7.1",
+        "laminas/laminas-code": "^4.16",
         "lcobucci/jwt": "^4.3",
         "league/html-to-markdown": "^5.1",
         "mgargano/simplehtmldom": "^1.5",
@@ -217,7 +217,7 @@
         },
         "bin-dir": "bin",
         "platform": {
-            "php": "7.4.29"
+            "php": "8.2.27"
         },
         "sort-packages": true
     },
