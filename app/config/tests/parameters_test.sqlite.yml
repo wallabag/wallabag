@@ -1,5 +1,2 @@
 parameters:
-    env(DATABASE_URL): sqlite://:@localhost/%env(TEST_DATABASE_PATH)%?charset=utf8
-    # Using an environment variable in order to avoid the error "attempt to write a readonly database"
-    # when the schema is dropped then recreate
-    env(TEST_DATABASE_PATH): "%kernel.project_dir%/data/db/wallabag_test.sqlite"
+    env(DATABASE_URL): sqlite:///%kernel.project_dir%/data/db/wallabag_test.sqlite?charset=utf8

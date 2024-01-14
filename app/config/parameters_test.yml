@@ -1,5 +1,2 @@
 parameters:
-    # Using an environment variable in order to avoid the error "attempt to write a readonly database"
-    # when the schema is dropped then recreate
-    database_path: "%env(TEST_DATABASE_PATH)%"
-    env(TEST_DATABASE_PATH): "%kernel.project_dir%/data/db/wallabag_test.sqlite"
+    database_path: "%kernel.project_dir%/data/db/wallabag_test.sqlite"
