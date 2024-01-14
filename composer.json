@@ -150,6 +150,7 @@
         "symfony/polyfill-php81": "^1.29",
         "symfony/proxy-manager-bridge": "^5.4.21",
         "symfony/routing": "^5.4.35",
+        "symfony/runtime": "^5.4.35",
         "symfony/security-bundle": "^5.4.35",
         "symfony/security-core": "^5.4.35",
         "symfony/security-http": "^5.4.35",
@@ -222,7 +223,8 @@
         "allow-plugins": {
             "ergebnis/composer-normalize": true,
             "php-http/discovery": true,
-            "phpstan/extension-installer": true
+            "phpstan/extension-installer": true,
+            "symfony/runtime": true
         },
         "bin-dir": "bin",
         "platform": {
