@@ -56,7 +56,7 @@ class InstallCommandTest extends WallabagCoreTestCase
             // check the manual that corresponds to your MariaDB server version for the right syntax to use
             // near '/tmp/wallabag_testTYj1kp' at line 1
             $databasePath = tempnam(sys_get_temp_dir(), 'wallabag_test');
-            putenv("TEST_DATABASE_PATH=$databasePath");
+            putenv("DATABASE_URL=sqlite:///$databasePath?charset=utf8");
 
             // The environnement has been changed, recreate the client in order to update connection
             parent::setUp();
@@ -67,9 +67,10 @@ class InstallCommandTest extends WallabagCoreTestCase
 
     protected function tearDown(): void
     {
-        $databasePath = getenv('TEST_DATABASE_PATH');
-        // Remove variable environnement
-        putenv('TEST_DATABASE_PATH');
+        $databaseUrl = getenv('DATABASE_URL');
+        $databasePath = parse_url($databaseUrl, \PHP_URL_PATH);
+        // Remove the real environnement variable
+        putenv('DATABASE_URL');
 
         if ($databasePath && file_exists($databasePath)) {
             unlink($databasePath);
