@@ -19,7 +19,6 @@ if ($_SERVER['APP_DEBUG']) {
     __DIR__ . '/../bin/console',
     'doctrine:database:drop',
     '--force',
-    '--env=test',
 ]))->run(function ($type, $buffer) {
     echo $buffer;
 });
@@ -28,7 +27,6 @@ if ($_SERVER['APP_DEBUG']) {
     'php',
     __DIR__ . '/../bin/console',
     'doctrine:database:create',
-    '--env=test',
 ]))->mustRun(function ($type, $buffer) {
     echo $buffer;
 });
@@ -38,7 +36,6 @@ if ($_SERVER['APP_DEBUG']) {
     __DIR__ . '/../bin/console',
     'doctrine:migrations:migrate',
     '--no-interaction',
-    '--env=test',
     '-vv',
 ]))->mustRun(function ($type, $buffer) {
     echo $buffer;
@@ -49,7 +46,6 @@ if ($_SERVER['APP_DEBUG']) {
     __DIR__ . '/../bin/console',
     'doctrine:fixtures:load',
     '--no-interaction',
-    '--env=test',
 ]))->mustRun(function ($type, $buffer) {
     echo $buffer;
 });
