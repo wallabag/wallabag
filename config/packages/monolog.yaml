@@ -1,0 +1,39 @@
+when@prod:
+    monolog:
+        handlers:
+            main:
+                type: fingers_crossed
+                action_level: error
+                handler: nested
+            nested:
+                type: stream
+                path: "%kernel.logs_dir%/%kernel.environment%.log"
+                level: debug
+            console:
+                type: console
+
+when@dev: &monolog_dev
+    monolog:
+        handlers:
+            main:
+                type: stream
+                path: "%kernel.logs_dir%/%kernel.environment%.log"
+                level: debug
+                channels: [ '!event' ]
+            console:
+                type: console
+                bubble: false
+                verbosity_levels:
+                    VERBOSITY_VERBOSE: INFO
+                    VERBOSITY_VERY_VERBOSE: DEBUG
+                channels: [ '!event', '!doctrine' ]
+            console_very_verbose:
+                type: console
+                bubble: false
+                verbosity_levels:
+                    VERBOSITY_VERBOSE: NOTICE
+                    VERBOSITY_VERY_VERBOSE: NOTICE
+                    VERBOSITY_DEBUG: DEBUG
+                channels: [ doctrine ]
+
+when@test: *monolog_dev

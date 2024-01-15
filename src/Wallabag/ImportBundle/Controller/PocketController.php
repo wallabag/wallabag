@@ -4,13 +4,13 @@ namespace Wallabag\ImportBundle\Controller;
 
 use Craue\ConfigBundle\Util\Config;
 use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Wallabag\CoreBundle\Controller\AbstractController;
 use Wallabag\ImportBundle\Import\PocketImport;
 use Wallabag\ImportBundle\Redis\Producer as RedisProducer;
 

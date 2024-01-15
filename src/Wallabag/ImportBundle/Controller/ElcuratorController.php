@@ -33,9 +33,6 @@ class ElcuratorController extends WallabagController
         return parent::indexAction($request, $translator);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getImportService()
     {
         if ($this->craueConfig->get('import_with_rabbitmq')) {
@@ -47,9 +44,6 @@ class ElcuratorController extends WallabagController
         return $this->elcuratorImport;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getImportTemplate()
     {
         return '@WallabagImport/Elcurator/index.html.twig';

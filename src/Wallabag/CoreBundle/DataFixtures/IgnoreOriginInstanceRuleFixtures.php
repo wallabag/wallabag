@@ -20,9 +20,6 @@ class IgnoreOriginInstanceRuleFixtures extends Fixture implements ContainerAware
         $this->container = $container;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(ObjectManager $manager): void
     {
         foreach ($this->container->getParameter('wallabag_core.default_ignore_origin_instance_rules') as $ignore_origin_instance_rule) {

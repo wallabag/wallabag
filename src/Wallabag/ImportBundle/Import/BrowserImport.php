@@ -9,24 +9,12 @@ abstract class BrowserImport extends AbstractImport
 {
     protected $filepath;
 
-    /**
-     * {@inheritdoc}
-     */
     abstract public function getName();
 
-    /**
-     * {@inheritdoc}
-     */
     abstract public function getUrl();
 
-    /**
-     * {@inheritdoc}
-     */
     abstract public function getDescription();
 
-    /**
-     * {@inheritdoc}
-     */
     public function import()
     {
         if (!$this->user) {
@@ -72,9 +60,6 @@ abstract class BrowserImport extends AbstractImport
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function parseEntry(array $importedEntry)
     {
         if ((!\array_key_exists('guid', $importedEntry) || (!\array_key_exists('id', $importedEntry))) && \is_array(reset($importedEntry))) {
@@ -218,9 +203,6 @@ abstract class BrowserImport extends AbstractImport
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setEntryAsRead(array $importedEntry)
     {
         $importedEntry['is_archived'] = 1;

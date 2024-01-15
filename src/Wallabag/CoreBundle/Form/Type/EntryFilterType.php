@@ -197,7 +197,7 @@ class EntryFilterType extends AbstractType
         ;
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'entry_filter';
     }

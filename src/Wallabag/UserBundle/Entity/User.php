@@ -252,8 +252,6 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     /**
      * Set config.
      *
-     * @param Config $config
-     *
      * @return User
      */
     public function setConfig(Config $config = null)
@@ -297,65 +295,41 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
         return $this->isGoogleAuthenticatorEnabled();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isEmailAuthEnabled(): bool
     {
         return $this->emailTwoFactor;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEmailAuthCode(): string
     {
         return $this->authCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setEmailAuthCode(string $authCode): void
     {
         $this->authCode = $authCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEmailAuthRecipient(): string
     {
         return $this->email;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isGoogleAuthenticatorEnabled(): bool
     {
         return $this->googleAuthenticatorSecret ? true : false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getGoogleAuthenticatorUsername(): string
     {
         return $this->username;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getGoogleAuthenticatorSecret(): string
     {
         return $this->googleAuthenticatorSecret;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setGoogleAuthenticatorSecret(?string $googleAuthenticatorSecret): void
     {
         $this->googleAuthenticatorSecret = $googleAuthenticatorSecret;
@@ -371,17 +345,11 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
         return $this->backupCodes;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isBackupCode(string $code): bool
     {
         return false === $this->findBackupCode($code) ? false : true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function invalidateBackupCode(string $code): void
     {
         $key = $this->findBackupCode($code);

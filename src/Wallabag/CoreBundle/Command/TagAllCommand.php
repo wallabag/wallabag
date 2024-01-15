@@ -34,14 +34,14 @@ class TagAllCommand extends Command
             ->setName('wallabag:tag:all')
             ->setDescription('Tag all entries using the tagging rules.')
             ->addArgument(
-               'username',
-               InputArgument::REQUIRED,
-               'User to tag entries for.'
+                'username',
+                InputArgument::REQUIRED,
+                'User to tag entries for.'
             )
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 

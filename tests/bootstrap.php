@@ -1,9 +1,16 @@
 <?php
 
+use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 
-require __DIR__ . '/../vendor/autoload.php';
+require dirname(__DIR__) . '/vendor/autoload.php';
+
+(new Dotenv())->bootEnv(dirname(__DIR__) . '/.env');
+
+if ($_SERVER['APP_DEBUG']) {
+    umask(0000);
+}
 
 (new Filesystem())->remove(__DIR__ . '/../var/cache/test');
 
@@ -12,7 +19,6 @@ require __DIR__ . '/../vendor/autoload.php';
     __DIR__ . '/../bin/console',
     'doctrine:database:drop',
     '--force',
-    '--env=test',
 ]))->run(function ($type, $buffer) {
     echo $buffer;
 });
@@ -21,7 +27,6 @@ require __DIR__ . '/../vendor/autoload.php';
     'php',
     __DIR__ . '/../bin/console',
     'doctrine:database:create',
-    '--env=test',
 ]))->mustRun(function ($type, $buffer) {
     echo $buffer;
 });
@@ -31,7 +36,6 @@ require __DIR__ . '/../vendor/autoload.php';
     __DIR__ . '/../bin/console',
     'doctrine:migrations:migrate',
     '--no-interaction',
-    '--env=test',
     '-vv',
 ]))->mustRun(function ($type, $buffer) {
     echo $buffer;
@@ -42,7 +46,6 @@ require __DIR__ . '/../vendor/autoload.php';
     __DIR__ . '/../bin/console',
     'doctrine:fixtures:load',
     '--no-interaction',
-    '--env=test',
 ]))->mustRun(function ($type, $buffer) {
     echo $buffer;
 });

@@ -162,7 +162,7 @@ class DownloadImages
                 $cleanSVG = $sanitizer->sanitize((string) $res->getBody());
 
                 // add an extra validation by checking about `<svg `
-                if (false === $cleanSVG || false === strpos($cleanSVG, '<svg ')) {
+                if (false === $cleanSVG || !str_contains($cleanSVG, '<svg ')) {
                     $this->logger->error('DownloadImages: Bad SVG given', ['path' => $imagePath]);
 
                     return false;
@@ -287,7 +287,10 @@ class DownloadImages
         $iterator = $imagesCrawler->getIterator();
 
         while ($iterator->valid()) {
-            $srcsetAttribute = $iterator->current()->getAttribute('srcset');
+            $node = $iterator->current();
+            \assert($node instanceof \DOMElement);
+
+            $srcsetAttribute = $node->getAttribute('srcset');
 
             if ('' !== $srcsetAttribute) {
                 // Couldn't start with " OR ' OR a white space
@@ -373,7 +376,7 @@ class DownloadImages
             $bytes = substr((string) $res->getBody(), 0, 8);
 
             foreach ($types as $type => $header) {
-                if (0 === strpos($bytes, $header)) {
+                if (str_starts_with($bytes, $header)) {
                     $ext = $type;
                     break;
                 }

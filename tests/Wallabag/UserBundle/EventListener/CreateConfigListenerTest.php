@@ -46,7 +46,7 @@ class CreateConfigListenerTest extends TestCase
         $this->dispatcher->addSubscriber($this->listener);
 
         $this->request = Request::create('/');
-        $this->response = Response::create();
+        $this->response = new Response();
     }
 
     public function testWithValidUser()

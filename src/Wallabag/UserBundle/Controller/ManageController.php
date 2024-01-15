@@ -10,7 +10,6 @@ use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormInterface;
@@ -18,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Wallabag\CoreBundle\Controller\AbstractController;
 use Wallabag\UserBundle\Entity\User;
 use Wallabag\UserBundle\Form\NewUserType;
 use Wallabag\UserBundle\Form\SearchUserType;
@@ -157,7 +157,7 @@ class ManageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $searchTerm = (isset($request->get('search_user')['term']) ? $request->get('search_user')['term'] : '');
+            $searchTerm = (isset($request->query->all('search_user')['term']) ? $request->query->all('search_user')['term'] : '');
 
             $qb = $userRepository->getQueryBuilderForSearch($searchTerm);
         }

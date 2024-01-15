@@ -1,7 +1,7 @@
 <?php
 
-use Symfony\Bundle\FrameworkBundle\HttpCache\HttpCache;
+use Wallabag\CacheKernel;
 
-class AppCache extends HttpCache
+class AppCache extends CacheKernel
 {
 }

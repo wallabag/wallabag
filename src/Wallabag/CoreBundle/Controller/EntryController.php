@@ -9,7 +9,6 @@ use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
 use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -80,7 +79,7 @@ class EntryController extends AbstractController
                     });
                 foreach ($labels as $label) {
                     $remove = false;
-                    if (0 === strpos($label, '-')) {
+                    if (str_starts_with($label, '-')) {
                         $label = substr($label, 1);
                         $remove = true;
                     }
@@ -612,7 +611,7 @@ class EntryController extends AbstractController
      */
     private function showEntries($type, Request $request, $page)
     {
-        $searchTerm = (isset($request->get('search_entry')['term']) ? trim($request->get('search_entry')['term']) : '');
+        $searchTerm = (isset($request->query->all('search_entry')['term']) ? trim($request->query->all('search_entry')['term']) : '');
         $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
 
         $formOptions = [];
@@ -653,7 +652,7 @@ class EntryController extends AbstractController
 
         if ($request->query->has($form->getName())) {
             // manually bind values from the request
-            $form->submit($request->query->get($form->getName()));
+            $form->submit($request->query->all($form->getName()));
 
             // build the query from the given form object
             $this->filterBuilderUpdater->addFilterConditions($form, $qb);

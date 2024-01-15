@@ -33,9 +33,6 @@ class PocketHtmlController extends HtmlController
         return parent::indexAction($request, $translator);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getImportService()
     {
         if ($this->craueConfig->get('import_with_rabbitmq')) {
@@ -47,9 +44,6 @@ class PocketHtmlController extends HtmlController
         return $this->pocketHtmlImport;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getImportTemplate()
     {
         return '@WallabagImport/PocketHtml/index.html.twig';

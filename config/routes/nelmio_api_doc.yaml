@@ -1,0 +1,3 @@
+doc-api:
+    resource: "@NelmioApiDocBundle/Resources/config/routing/swaggerui.xml"
+    prefix: /api/doc

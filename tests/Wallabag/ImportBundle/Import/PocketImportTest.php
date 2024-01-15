@@ -190,7 +190,7 @@ class PocketImportTest extends TestCase
                 }
             }
 JSON
-));
+        ));
 
         $pocketImport = $this->getPocketImport('ConsumerKey', 1);
 
@@ -280,7 +280,7 @@ JSON
                 }
             }
 JSON
-));
+        ));
 
         $pocketImport = $this->getPocketImport('ConsumerKey', 2);
 

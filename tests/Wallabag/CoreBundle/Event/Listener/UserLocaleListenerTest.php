@@ -27,7 +27,7 @@ class UserLocaleListenerTest extends TestCase
 
         $user->setConfig($config);
 
-        $userToken = new UsernamePasswordToken($user, '', 'test');
+        $userToken = new UsernamePasswordToken($user, 'test');
         $request = Request::create('/');
         $event = new InteractiveLoginEvent($request, $userToken);
 
@@ -48,7 +48,7 @@ class UserLocaleListenerTest extends TestCase
 
         $user->setConfig($config);
 
-        $userToken = new UsernamePasswordToken($user, '', 'test');
+        $userToken = new UsernamePasswordToken($user, 'test');
         $request = Request::create('/');
         $event = new InteractiveLoginEvent($request, $userToken);
 
@@ -71,7 +71,7 @@ class UserLocaleListenerTest extends TestCase
 
         $user->setConfig($config);
 
-        $userToken = new UsernamePasswordToken($user, '', 'test');
+        $userToken = new UsernamePasswordToken($user, 'test');
         $request = Request::create('/');
         $event = new InteractiveLoginEvent($request, $userToken);
 

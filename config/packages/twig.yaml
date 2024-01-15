@@ -1,0 +1,7 @@
+twig:
+    debug: "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    form_themes:
+        - "@LexikFormFilter/Form/form_div_layout.html.twig"
+    globals:
+        registration_enabled: '%fosuser_registration%'

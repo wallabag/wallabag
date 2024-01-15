@@ -6,33 +6,21 @@ class PocketHtmlImport extends HtmlImport
 {
     protected $filepath;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'Pocket HTML';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUrl()
     {
         return 'import_pocket_html';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription()
     {
         return 'import.pocket_html.description';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateEntry(array $importedEntry)
     {
         if (empty($importedEntry['url'])) {
@@ -89,9 +77,6 @@ class PocketHtmlImport extends HtmlImport
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function prepareEntry(array $entry = [])
     {
         $data = [

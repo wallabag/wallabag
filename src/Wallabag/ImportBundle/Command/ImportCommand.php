@@ -92,7 +92,7 @@ class ImportCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('Start : ' . (new \DateTime())->format('d-m-Y G:i:s') . ' ---');
 
@@ -120,7 +120,6 @@ class ImportCommand extends Command
         // Authenticate user for paywalled websites
         $token = new UsernamePasswordToken(
             $entityUser,
-            null,
             'main',
             $entityUser->getRoles());
 

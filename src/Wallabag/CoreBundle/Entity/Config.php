@@ -183,8 +183,8 @@ class Config
     private $taggingRules;
 
     /**
-    @var ArrayCollection<IgnoreOriginUserRule>
-
+     * @var ArrayCollection<IgnoreOriginUserRule>
+     *
      * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\IgnoreOriginUserRule", mappedBy="config", cascade={"remove"})
      * @ORM\OrderBy({"id" = "ASC"})
      */
@@ -260,8 +260,6 @@ class Config
 
     /**
      * Set user.
-     *
-     * @param User $user
      *
      * @return Config
      */
@@ -433,9 +431,6 @@ class Config
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getFont(): ?string
     {
         return $this->font;
@@ -451,9 +446,6 @@ class Config
         return $this;
     }
 
-    /**
-     * @return float
-     */
     public function getFontsize(): ?float
     {
         return $this->fontsize;
@@ -469,9 +461,6 @@ class Config
         return $this;
     }
 
-    /**
-     * @return float
-     */
     public function getLineHeight(): ?float
     {
         return $this->lineHeight;
@@ -487,9 +476,6 @@ class Config
         return $this;
     }
 
-    /**
-     * @return float
-     */
     public function getMaxWidth(): ?float
     {
         return $this->maxWidth;

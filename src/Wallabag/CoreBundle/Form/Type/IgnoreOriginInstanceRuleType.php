@@ -31,7 +31,7 @@ class IgnoreOriginInstanceRuleType extends AbstractType
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ignore_origin_instance_rule';
     }

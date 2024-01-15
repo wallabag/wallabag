@@ -6,33 +6,21 @@ class FirefoxImport extends BrowserImport
 {
     protected $filepath;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'Firefox';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getUrl()
     {
         return 'import_firefox';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription()
     {
         return 'import.firefox.description';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validateEntry(array $importedEntry)
     {
         if (empty($importedEntry['uri'])) {
@@ -42,9 +30,6 @@ class FirefoxImport extends BrowserImport
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function prepareEntry(array $entry = [])
     {
         $data = [

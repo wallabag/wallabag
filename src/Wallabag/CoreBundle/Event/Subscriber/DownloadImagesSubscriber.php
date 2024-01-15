@@ -25,7 +25,7 @@ class DownloadImagesSubscriber implements EventSubscriberInterface
         $this->logger = $logger;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             EntrySavedEvent::NAME => 'onEntrySaved',
