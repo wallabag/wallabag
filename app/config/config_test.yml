@@ -24,6 +24,7 @@ web_profiler:
 doctrine:
     dbal:
         dbname_suffix: '_test' # for MySQL and PostgreSQL
+        use_savepoints: true
 
     orm:
         metadata_cache_driver:
@@ -32,3 +33,8 @@ doctrine:
         query_cache_driver:
             type: service
             id: filesystem_cache
+
+dama_doctrine_test:
+    enable_static_connection: true
+    enable_static_meta_data_cache: true
+    enable_static_query_cache: true

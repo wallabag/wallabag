@@ -161,7 +161,7 @@
         "willdurand/hateoas-bundle": "~2.1"
     },
     "require-dev": {
-        "dama/doctrine-test-bundle": "^7.1",
+        "dama/doctrine-test-bundle": "^8.0",
         "doctrine/doctrine-fixtures-bundle": "~3.0",
         "ergebnis/composer-normalize": "^2.28",
         "friendsofphp/php-cs-fixer": "~3.4",
