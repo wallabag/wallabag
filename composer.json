@@ -85,7 +85,7 @@
         "jms/serializer": "^3.17",
         "jms/serializer-bundle": "~5.0",
         "laminas/laminas-code": "^4.7",
-        "lcobucci/jwt": "~4.1.5",
+        "lcobucci/jwt": "^4.3",
         "lexik/form-filter-bundle": "^7.0",
         "mgargano/simplehtmldom": "~1.5",
         "mnapoli/piwik-twig-extension": "^3.0",
