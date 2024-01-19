@@ -111,12 +111,12 @@ parameters:
 			path: src/Wallabag/CoreBundle/Controller/TagController.php
 
 		-
-			message: "#^Call to an undefined method Lexik\\\\Bundle\\\\FormFilterBundle\\\\Filter\\\\Query\\\\QueryInterface\\:\\:getExpressionBuilder\\(\\)\\.$#"
+			message: "#^Call to an undefined method Spiriit\\\\Bundle\\\\FormFilterBundle\\\\Filter\\\\Query\\\\QueryInterface\\:\\:getExpressionBuilder\\(\\)\\.$#"
 			count: 1
 			path: src/Wallabag/CoreBundle/Event/Subscriber/CustomDoctrineORMSubscriber.php
 
 		-
-			message: "#^Call to an undefined method Lexik\\\\Bundle\\\\FormFilterBundle\\\\Filter\\\\Query\\\\QueryInterface\\:\\:getExpr\\(\\)\\.$#"
+			message: "#^Call to an undefined method Spiriit\\\\Bundle\\\\FormFilterBundle\\\\Filter\\\\Query\\\\QueryInterface\\:\\:getExpr\\(\\)\\.$#"
 			count: 10
 			path: src/Wallabag/CoreBundle/Form/Type/EntryFilterType.php
 

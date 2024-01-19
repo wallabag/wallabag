@@ -2,12 +2,12 @@
 
 namespace Wallabag\CoreBundle\Event\Subscriber;
 
-use Lexik\Bundle\FormFilterBundle\Event\GetFilterConditionEvent;
-use Lexik\Bundle\FormFilterBundle\Event\Subscriber\DoctrineORMSubscriber;
+use Spiriit\Bundle\FormFilterBundle\Event\GetFilterConditionEvent;
+use Spiriit\Bundle\FormFilterBundle\Event\Subscriber\DoctrineORMSubscriber;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * This custom class override the default behavior of LexikFilterBundle on `filter_date_range`
+ * This custom class override the default behavior of SpiriitFormFilterBundle on `filter_date_range`
  * It converts a date_range to date_time_range to add hour to be able to grab a whole day (from 00:00:00 to 23:59:59).
  */
 class CustomDoctrineORMSubscriber extends DoctrineORMSubscriber implements EventSubscriberInterface

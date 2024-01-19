@@ -21,7 +21,7 @@ class AppKernel extends Kernel
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
-            new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
+            new Spiriit\Bundle\FormFilterBundle\SpiriitFormFilterBundle(),
             new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Scheb\TwoFactorBundle\SchebTwoFactorBundle(),

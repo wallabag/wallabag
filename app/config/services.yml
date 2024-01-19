@@ -4,7 +4,7 @@ imports:
     - { resource: parameters_addons.yml }
 
 parameters:
-    lexik_form_filter.get_filter.doctrine_orm.class: Wallabag\CoreBundle\Event\Subscriber\CustomDoctrineORMSubscriber
+    spiriit_form_filter.get_filter.doctrine_orm.class: Wallabag\CoreBundle\Event\Subscriber\CustomDoctrineORMSubscriber
 
 services:
     _defaults:
@@ -150,8 +150,8 @@ services:
     JMS\Serializer\SerializerInterface:
         alias: jms_serializer
 
-    Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface:
-        alias: lexik_form_filter.query_builder_updater
+    Spiriit\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface:
+        alias: spiriit_form_filter.query_builder_updater
 
     Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface:
         alias: scheb_two_factor.security.google_authenticator
