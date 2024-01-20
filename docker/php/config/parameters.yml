@@ -50,5 +50,3 @@ parameters:
 
     # Sentry
     sentry_dsn: ${SENTRY_DSN:-~}
-
-    session_handler: ${SESSION_HANDLER:-session.handler.native_file}
