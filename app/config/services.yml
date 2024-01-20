@@ -31,6 +31,9 @@ services:
             $storeArticleHeaders: '@=service(''craue_config'').get(''store_article_headers'')'
             $supportUrl: '@=service(''craue_config'').get(''wallabag_support_url'')'
             $fonts: '%wallabag_core.fonts%'
+            $singleFileProxyUrl: '%single_file_proxy_url%'
+            $singleFileProxyAll: '%single_file_proxy_all%'
+            $singleFileProxySitesToProxy: '%single_file_proxy_sites_to_proxy%'
 
     Wallabag\AnnotationBundle\:
         resource: '../../src/Wallabag/AnnotationBundle/*'

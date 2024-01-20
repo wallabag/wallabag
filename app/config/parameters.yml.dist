@@ -65,3 +65,9 @@ parameters:
 
     # sentry logging
     sentry_dsn: ~
+
+    single_file_proxy_url: https://single-file-proxy.your-domain.tld
+    single_file_proxy_all: true
+    single_file_proxy_sites_to_proxy:
+        - https://www.blast-info.fr
+        - https://www.arretssurimage.net

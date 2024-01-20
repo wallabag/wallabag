@@ -419,7 +419,7 @@ httplug:
             factory: Wallabag\CoreBundle\Helper\HttpClientFactory
             config:
                 defaults:
-                    timeout: 10
+                    timeout: 100
             plugins: ['httplug.plugin.logger']
         wallabag_core.entry.download_images:
             factory: 'httplug.factory.auto'

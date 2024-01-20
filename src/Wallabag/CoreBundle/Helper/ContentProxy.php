@@ -4,6 +4,7 @@ namespace Wallabag\CoreBundle\Helper;
 
 use Graby\Graby;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Mime\MimeTypes;
 use Symfony\Component\Validator\Constraints\Locale as LocaleConstraint;
 use Symfony\Component\Validator\Constraints\Url as UrlConstraint;
@@ -22,12 +23,17 @@ class ContentProxy
     protected $ignoreOriginProcessor;
     protected $validator;
     protected $logger;
+    protected $container;
     protected $mimeTypes;
     protected $fetchingErrorMessage;
     protected $eventDispatcher;
     protected $storeArticleHeaders;
 
-    public function __construct(Graby $graby, RuleBasedTagger $tagger, RuleBasedIgnoreOriginProcessor $ignoreOriginProcessor, ValidatorInterface $validator, LoggerInterface $logger, $fetchingErrorMessage, $storeArticleHeaders = false)
+    private $singleFileProxyUrl;
+    private $singleFileProxyAll;
+    private $singleFileProxySitesToProxy;
+
+    public function __construct(Graby $graby, RuleBasedTagger $tagger, RuleBasedIgnoreOriginProcessor $ignoreOriginProcessor, ValidatorInterface $validator, LoggerInterface $logger, $fetchingErrorMessage, $singleFileProxyUrl, $singleFileProxyAll, $singleFileProxySitesToProxy, $storeArticleHeaders = false)
     {
         $this->graby = $graby;
         $this->tagger = $tagger;
@@ -37,6 +43,10 @@ class ContentProxy
         $this->mimeTypes = new MimeTypes();
         $this->fetchingErrorMessage = $fetchingErrorMessage;
         $this->storeArticleHeaders = $storeArticleHeaders;
+
+        $this->singleFileProxyUrl = preg_replace('~/*$~', '', $singleFileProxyUrl);
+        $this->singleFileProxyAll = $singleFileProxyAll;
+        $this->singleFileProxySitesToProxy = array_map(fn ($url) => preg_replace('~/*$~', '', $url), $singleFileProxySitesToProxy);
     }
 
     /**
@@ -55,12 +65,23 @@ class ContentProxy
         }
 
         if ((empty($content) || false === $this->validateContent($content)) && false === $disableContentUpdate) {
-            $fetchedContent = $this->graby->fetchContent($url);
+            // Check if URL has to be proxied through single-file
+            preg_match('~^[^/]+://[^/]+~', $url, $matches);
+            $proxy = $this->singleFileProxyAll || \in_array($matches[0], $this->singleFileProxySitesToProxy, true);
+
+            $fetchedContent = $this->graby->fetchContent(($proxy ? $this->singleFileProxyUrl . '/' : '') . $url);
+
+            // Set original URL in case it was proxied
+            $fetchedContent['url'] = $url;
 
             $fetchedContent['title'] = $this->sanitizeContentTitle(
                 $fetchedContent['title'],
                 isset($fetchedContent['headers']['content-type']) ? $fetchedContent['headers']['content-type'] : ''
             );
+
+            if ($proxy) {
+                $fetchedContent['html'] = $this->fixClientSideRenderedProxyResponse($fetchedContent['html']);
+            }
 
             // when content is imported, we have information in $content
             // in case fetching content goes bad, we'll keep the imported information instead of overriding them
@@ -201,6 +222,23 @@ class ContentProxy
         }
 
         return $this->sanitizeUTF8Text($title);
+    }
+
+    /**
+     * Try to fix the content retreived through the client-side rendering proxy.
+     * Some HTML tags will be escaped (ie: "&lt;img") in original content and
+     * their code will appear in the page body.
+     * This function processes the content to repair such escaped tags.
+     *
+     * @param string $content
+     *
+     * @return string
+     */
+    private function fixClientSideRenderedProxyResponse($content): string
+    {
+        $content = preg_replace('/&lt;img ([^&]+)&gt;/', '<img \1 >', $content);
+
+        return $content;
     }
 
     /**

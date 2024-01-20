@@ -53,3 +53,9 @@ parameters:
     sentry_dsn: ${SENTRY_DSN:-~}
 
     session_handler: ${SESSION_HANDLER:-session.handler.native_file}
+
+    single_file_proxy_url: ${SINGLE_FILE_PROXY_URL:null}
+    single_file_proxy_all: ${SINGLE_FILE_PROXY_ALL:false}
+    single_file_proxy_sites_to_proxy:
+        - https://www.blast-info.fr
+        - https://www.arretssurimage.net,
