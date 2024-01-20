@@ -1,6 +1,5 @@
 parameters:
     database_driver: ${DATABASE_DRIVER:-pdo_sqlite}
-    database_driver_class: ${DATABASE_DRIVER_CLASS:-~}
     database_host: ${DATABASE_HOST:-127.0.0.1}
     database_port: ${DATABASE_PORT:-~}
     database_name: ${DATABASE_NAME:-symfony}
