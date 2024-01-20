@@ -295,7 +295,7 @@ class Entry
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="entries", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Wallabag\CoreBundle\Entity\Tag", inversedBy="entries", cascade={"persist"})
      * @ORM\JoinTable(
      *  name="entry_tag",
      *  joinColumns={
