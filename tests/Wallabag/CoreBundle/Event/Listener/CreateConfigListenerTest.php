@@ -8,9 +8,8 @@ use FOS\UserBundle\FOSUserEvents;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Event\Listener\CreateConfigListener;
@@ -22,11 +21,14 @@ class CreateConfigListenerTest extends TestCase
     private $dispatcher;
     private $request;
     private $response;
+    private $requestStack;
 
     protected function setUp(): void
     {
-        $session = new Session(new MockArraySessionStorage());
         $this->em = $this->getMockBuilder(EntityManager::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->requestStack = $this->getMockBuilder(RequestStack::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -39,7 +41,7 @@ class CreateConfigListenerTest extends TestCase
             1,
             1,
             1,
-            $session
+            $this->requestStack
         );
 
         $this->dispatcher = new EventDispatcher();
