@@ -51,7 +51,7 @@ class InstallCommandTest extends WallabagTestCase
             $this->getNewClient();
         }
 
-        $this->resetDatabase($this->getTestClient());
+        $this->resetDatabase();
     }
 
     protected function tearDown(): void
@@ -67,7 +67,7 @@ class InstallCommandTest extends WallabagTestCase
             // Create a new client to avoid the error:
             // Transaction commit failed because the transaction has been marked for rollback only.
             $client = $this->getNewClient();
-            $this->resetDatabase($client);
+            $this->resetDatabase();
         }
 
         parent::tearDown();
@@ -275,5 +275,39 @@ class InstallCommandTest extends WallabagTestCase
         \assert($command instanceof InstallCommand);
 
         return $command;
+    }
+
+    private function resetDatabase()
+    {
+        $application = new Application($this->getTestClient()->getKernel());
+        $application->setAutoExit(false);
+
+        $application->run(new ArrayInput([
+            'command' => 'doctrine:schema:drop',
+            '--no-interaction' => true,
+            '--force' => true,
+            '--full-database' => true,
+            '--env' => 'test',
+        ]), new NullOutput());
+
+        $application->run(new ArrayInput([
+            'command' => 'doctrine:migrations:migrate',
+            '--no-interaction' => true,
+            '--env' => 'test',
+        ]), new NullOutput());
+
+        $application->run(new ArrayInput([
+            'command' => 'doctrine:fixtures:load',
+            '--no-interaction' => true,
+            '--env' => 'test',
+        ]), new NullOutput());
+
+        /*
+         * Recreate client to avoid error:
+         *
+         * [Doctrine\DBAL\ConnectionException]
+         * Transaction commit failed because the transaction has been marked for rollback only.
+         */
+        $this->getNewClient();
     }
 }
