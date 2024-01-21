@@ -41,17 +41,15 @@ class InstallCommand extends Command
     private EventDispatcherInterface $dispatcher;
     private UserManagerInterface $userManager;
     private string $databaseDriver;
-    private string $databaseName;
     private array $defaultSettings;
     private array $defaultIgnoreOriginInstanceRules;
 
-    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $dispatcher, UserManagerInterface $userManager, string $databaseDriver, string $databaseName, array $defaultSettings, array $defaultIgnoreOriginInstanceRules)
+    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $dispatcher, UserManagerInterface $userManager, string $databaseDriver, array $defaultSettings, array $defaultIgnoreOriginInstanceRules)
     {
         $this->entityManager = $entityManager;
         $this->dispatcher = $dispatcher;
         $this->userManager = $userManager;
         $this->databaseDriver = $databaseDriver;
-        $this->databaseName = $databaseName;
         $this->defaultSettings = $defaultSettings;
         $this->defaultIgnoreOriginInstanceRules = $defaultIgnoreOriginInstanceRules;
 
@@ -127,7 +125,7 @@ class InstallCommand extends Command
             $conn->connect();
         } catch (\Exception $e) {
             if (!str_contains($e->getMessage(), 'Unknown database')
-                && !str_contains($e->getMessage(), 'database "' . $this->databaseName . '" does not exist')) {
+                && !str_contains($e->getMessage(), 'database "' . $conn->getDatabase() . '" does not exist')) {
                 $fulfilled = false;
                 $status = '<error>ERROR!</error>';
                 $help = 'Can\'t connect to the database: ' . $e->getMessage();
@@ -387,7 +385,7 @@ class InstallCommand extends Command
     private function isDatabasePresent()
     {
         $connection = $this->entityManager->getConnection();
-        $databaseName = $connection->getDatabase();
+        $databaseName = $connection->getParams()['dbname'];
 
         try {
             $schemaManager = $connection->createSchemaManager();
