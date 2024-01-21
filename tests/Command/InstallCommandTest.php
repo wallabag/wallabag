@@ -100,10 +100,6 @@ class InstallCommandTest extends WallabagTestCase
 
     public function testRunInstallCommandWithReset()
     {
-        if ($this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof MySQLPlatform) {
-            $this->markTestSkipped('Rollback are not properly handled for MySQL, skipping.');
-        }
-
         $command = $this->getCommand();
         $command->disableRunOtherCommands();
 
@@ -132,10 +128,6 @@ class InstallCommandTest extends WallabagTestCase
     {
         if ($this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof PostgreSQLPlatform) {
             $this->markTestSkipped('PostgreSQL spotted: can\'t find a good way to drop current database, skipping.');
-        }
-
-        if ($this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof MySQLPlatform) {
-            $this->markTestSkipped('Rollback are not properly handled for MySQL, skipping.');
         }
 
         // skipped SQLite check when database is removed because while testing for the connection,
@@ -177,10 +169,6 @@ class InstallCommandTest extends WallabagTestCase
 
     public function testRunInstallCommandChooseResetSchema()
     {
-        if ($this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof MySQLPlatform) {
-            $this->markTestSkipped('Rollback are not properly handled for MySQL, skipping.');
-        }
-
         $command = $this->getCommand();
         $command->disableRunOtherCommands();
 
@@ -202,16 +190,6 @@ class InstallCommandTest extends WallabagTestCase
 
     public function testRunInstallCommandChooseNothing()
     {
-        /*
-         *  [PHPUnit\Framework\Error\Warning (2)]
-         *  filemtime(): stat failed for /home/runner/work/wallabag/wallabag/var/cache/tes_/ContainerNVNxA24/appAppKernelTestDebugContainer.php
-         *
-         * I don't know from where the "/tes_/" come from, it should be "/test/" instead ...
-         */
-        if ($this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof MySQLPlatform) {
-            $this->markTestSkipped('That test is failing when using MySQL when clearing the cache (see code comment)');
-        }
-
         $application = new Application($this->getTestClient()->getKernel());
 
         // drop database first, so the install command won't ask to reset things
@@ -244,10 +222,6 @@ class InstallCommandTest extends WallabagTestCase
 
     public function testRunInstallCommandNoInteraction()
     {
-        if ($this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof MySQLPlatform) {
-            $this->markTestSkipped('Rollback are not properly handled for MySQL, skipping.');
-        }
-
         $command = $this->getCommand();
         $command->disableRunOtherCommands();
 
