@@ -198,13 +198,21 @@ class InstallCommand extends Command
     {
         $this->io->section('Step 2 of 4: Setting up database.');
 
+        $conn = $this->entityManager->getConnection();
+        $databasePlatform = $conn->isConnected() ? $conn->getDatabasePlatform() : null;
+
         // user want to reset everything? Don't care about what is already here
         if (true === $this->defaultInput->getOption('reset')) {
             $this->io->text('Dropping database, creating database and schema, clearing the cache');
 
+            $this->runCommand('doctrine:schema:drop', ['--force' => true, '--full-database' => true]);
+
+            if (!$databasePlatform instanceof PostgreSQLPlatform) {
+                $this->runCommand('doctrine:database:drop', ['--force' => true]);
+                $this->runCommand('doctrine:database:create');
+            }
+
             $this
-                ->runCommand('doctrine:database:drop', ['--force' => true])
-                ->runCommand('doctrine:database:create')
                 ->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true])
                 ->runCommand('cache:clear')
             ;
@@ -231,11 +239,14 @@ class InstallCommand extends Command
         if ($this->io->confirm('It appears that your database already exists. Would you like to reset it?', false)) {
             $this->io->text('Dropping database, creating database and schema...');
 
-            $this
-                ->runCommand('doctrine:database:drop', ['--force' => true])
-                ->runCommand('doctrine:database:create')
-                ->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true])
-            ;
+            $this->runCommand('doctrine:schema:drop', ['--force' => true, '--full-database' => true]);
+
+            if (!$databasePlatform instanceof PostgreSQLPlatform) {
+                $this->runCommand('doctrine:database:drop', ['--force' => true]);
+                $this->runCommand('doctrine:database:create');
+            }
+
+            $this->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true]);
         } elseif ($this->isSchemaPresent()) {
             if ($this->io->confirm('Seems like your database contains schema. Do you want to reset it?', false)) {
                 $this->io->text('Dropping schema and creating schema...');
