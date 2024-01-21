@@ -48,7 +48,7 @@ class InstallCommandTest extends WallabagTestCase
             putenv("DATABASE_URL=sqlite:///$databasePath?charset=utf8");
 
             // The environnement has been changed, recreate the client in order to update connection
-            parent::setUp();
+            $this->getNewClient();
         }
 
         $this->resetDatabase($this->getTestClient());
