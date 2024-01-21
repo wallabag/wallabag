@@ -260,7 +260,6 @@ services:
     Wallabag\Command\InstallCommand:
         arguments:
             $databaseDriver: '%database_driver%'
-            $databaseName: '%database_name%'
             $defaultSettings: '%wallabag.default_internal_settings%'
             $defaultIgnoreOriginInstanceRules: '%wallabag.default_ignore_origin_instance_rules%'
 
