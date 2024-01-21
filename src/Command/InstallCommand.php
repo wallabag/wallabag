@@ -246,10 +246,8 @@ class InstallCommand extends Command
             if ($this->io->confirm('Seems like your database contains schema. Do you want to reset it?', false)) {
                 $this->io->text('Dropping schema and creating schema...');
 
-                $this
-                    ->runCommand('doctrine:schema:drop', ['--force' => true])
-                    ->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true])
-                ;
+                $this->dropWallabagSchemaOnly();
+                $this->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true]);
             }
         } else {
             $this->io->text('Creating schema...');
@@ -378,7 +376,13 @@ class InstallCommand extends Command
     private function isDatabasePresent()
     {
         $connection = $this->entityManager->getConnection();
-        $databaseName = $connection->getParams()['dbname'];
+        $params = $connection->getParams();
+
+        if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {
+            $databaseName = $params['path'];
+        } else {
+            $databaseName = $params['dbname'];
+        }
 
         try {
             $schemaManager = $connection->createSchemaManager();
@@ -398,8 +402,6 @@ class InstallCommand extends Command
 
         // custom verification for sqlite, since `getListDatabasesSQL` doesn't work for sqlite
         if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {
-            $params = $connection->getParams();
-
             if (isset($params['path']) && file_exists($params['path'])) {
                 return true;
             }
@@ -425,5 +427,14 @@ class InstallCommand extends Command
         $schemaManager = $this->entityManager->getConnection()->createSchemaManager();
 
         return $schemaManager->tablesExist([$this->tableMetadataStorageConfiguration->getTableName()]);
+    }
+
+    private function dropWallabagSchemaOnly(): void
+    {
+        $this->runCommand('doctrine:schema:drop', ['--force' => true]);
+
+        $connection = $this->entityManager->getConnection();
+        $databasePlatform = $connection->getDatabasePlatform();
+        $connection->executeQuery('DROP TABLE ' . $databasePlatform->quoteIdentifier($this->tableMetadataStorageConfiguration->getTableName()) . ';');
     }
 }

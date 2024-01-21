@@ -4,9 +4,11 @@ namespace Tests\Wallabag\Command;
 
 use DAMA\DoctrineTestBundle\Doctrine\DBAL\StaticDriver;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\Persistence\ManagerRegistry;
+use GuzzleHttp\Psr7\Uri;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Command\LazyCommand;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -36,37 +38,56 @@ class InstallCommandTest extends WallabagTestCase
         /** @var Connection $connection */
         $connection = $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection();
 
-        if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {
-            // Environnement variable useful only for sqlite to avoid the error "attempt to write a readonly database"
-            // We can't define always this environnement variable because pdo_mysql seems to use it
-            // and we have the error:
-            // SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax;
-            // check the manual that corresponds to your MariaDB server version for the right syntax to use
-            // near '/tmp/wallabag_testTYj1kp' at line 1
-            $databasePath = tempnam(sys_get_temp_dir(), 'wallabag_test');
-            putenv("DATABASE_URL=sqlite:///$databasePath?charset=utf8");
+        $originalDatabaseUrl = $this->getTestClient()->getContainer()->getParameter('env(DATABASE_URL)');
+        $dbnameSuffix = $this->getTestClient()->getContainer()->getParameter('wallabag_dbname_suffix');
+        $tmpDatabaseName = 'wallabag_' . bin2hex(random_bytes(5));
 
-            // The environnement has been changed, recreate the client in order to update connection
-            $this->getNewClient();
+        if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {
+            $tmpDatabaseUrl = str_replace('wallabag' . $dbnameSuffix . '.sqlite', $tmpDatabaseName . $dbnameSuffix . '.sqlite', $originalDatabaseUrl);
+        } else {
+            $tmpDatabaseUrl = (string) (new Uri($originalDatabaseUrl))->withPath($tmpDatabaseName);
         }
 
-        $this->resetDatabase();
+        putenv("DATABASE_URL=$tmpDatabaseUrl");
+
+        if ($connection->getDatabasePlatform() instanceof PostgreSQLPlatform) {
+            // PostgreSQL requires that the database exists before connecting to it
+            $tmpTestDatabaseName = $tmpDatabaseName . $dbnameSuffix;
+            $connection->executeQuery('CREATE DATABASE ' . $tmpTestDatabaseName);
+        }
+
+        // The environnement has been changed, recreate the client in order to update connection
+        $this->getNewClient();
     }
 
     protected function tearDown(): void
     {
         $databaseUrl = getenv('DATABASE_URL');
-        $databasePath = parse_url($databaseUrl, \PHP_URL_PATH);
-        // Remove the real environnement variable
-        putenv('DATABASE_URL');
 
-        if ($databasePath && file_exists($databasePath)) {
-            unlink($databasePath);
+        /** @var Connection $connection */
+        $connection = $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection();
+
+        if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {
+            // Remove the real environnement variable
+            putenv('DATABASE_URL');
+
+            $databasePath = parse_url($databaseUrl, \PHP_URL_PATH);
+
+            if (file_exists($databasePath)) {
+                unlink($databasePath);
+            }
         } else {
+            $testDatabaseName = $connection->getDatabase();
+            $connection->close();
+
+            // Remove the real environnement variable
+            putenv('DATABASE_URL');
+
             // Create a new client to avoid the error:
             // Transaction commit failed because the transaction has been marked for rollback only.
-            $client = $this->getNewClient();
-            $this->resetDatabase();
+            $this->getNewClient();
+
+            $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->executeQuery('DROP DATABASE ' . $testDatabaseName);
         }
 
         parent::tearDown();
@@ -74,6 +95,8 @@ class InstallCommandTest extends WallabagTestCase
 
     public function testRunInstallCommand()
     {
+        $this->setupDatabase();
+
         $command = $this->getCommand();
 
         $tester = new CommandTester($command);
@@ -94,6 +117,8 @@ class InstallCommandTest extends WallabagTestCase
 
     public function testRunInstallCommandWithReset()
     {
+        $this->setupDatabase();
+
         $command = $this->getCommand();
 
         $tester = new CommandTester($command);
@@ -120,7 +145,7 @@ class InstallCommandTest extends WallabagTestCase
     public function testRunInstallCommandWithNonExistingDatabase()
     {
         if ($this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof PostgreSQLPlatform) {
-            $this->markTestSkipped('PostgreSQL spotted: can\'t find a good way to drop current database, skipping.');
+            $this->markTestSkipped('PostgreSQL spotted: PostgreSQL requires that the database exists before connecting to it, skipping.');
         }
 
         // skipped SQLite check when database is removed because while testing for the connection,
@@ -130,15 +155,6 @@ class InstallCommandTest extends WallabagTestCase
         }
 
         $application = new Application($this->getTestClient()->getKernel());
-
-        // drop database first, so the install command won't ask to reset things
-        $command = $application->find('doctrine:database:drop');
-        $command->run(new ArrayInput([
-            '--force' => true,
-        ]), new NullOutput());
-
-        // start a new application to avoid lagging connexion to pgsql
-        $this->getNewClient();
 
         $command = $this->getCommand();
 
@@ -162,6 +178,8 @@ class InstallCommandTest extends WallabagTestCase
 
     public function testRunInstallCommandChooseResetSchema()
     {
+        $this->setupDatabase();
+
         $command = $this->getCommand();
 
         $tester = new CommandTester($command);
@@ -184,17 +202,6 @@ class InstallCommandTest extends WallabagTestCase
     {
         $application = new Application($this->getTestClient()->getKernel());
 
-        // drop database first, so the install command won't ask to reset things
-        $command = $application->find('doctrine:database:drop');
-        $command->run(new ArrayInput([
-            '--force' => true,
-        ]), new NullOutput());
-
-        $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->close();
-
-        $command = $application->find('doctrine:database:create');
-        $command->run(new ArrayInput([]), new NullOutput());
-
         $command = $this->getCommand();
 
         $tester = new CommandTester($command);
@@ -209,11 +216,23 @@ class InstallCommandTest extends WallabagTestCase
         $this->assertStringContainsString('Administration setup.', $tester->getDisplay());
         $this->assertStringContainsString('Config setup.', $tester->getDisplay());
 
-        $this->assertStringContainsString('Creating schema', $tester->getDisplay());
+        $databasePlatform = $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform();
+
+        if ($databasePlatform instanceof SqlitePlatform || $databasePlatform instanceof PostgreSQLPlatform) {
+            // SQLite and PostgreSQL always have the database created, so we create the schema only
+            $this->assertStringContainsString('Creating schema', $tester->getDisplay());
+        }
+
+        if ($databasePlatform instanceof MySQLPlatform) {
+            // MySQL can start with a non-existing database, so we create both the database and the schema
+            $this->assertStringContainsString('Creating database and schema', $tester->getDisplay());
+        }
     }
 
     public function testRunInstallCommandNoInteraction()
     {
+        $this->setupDatabase();
+
         $command = $this->getCommand();
 
         $tester = new CommandTester($command);
@@ -242,16 +261,14 @@ class InstallCommandTest extends WallabagTestCase
         return $command;
     }
 
-    private function resetDatabase()
+    private function setupDatabase()
     {
         $application = new Application($this->getTestClient()->getKernel());
         $application->setAutoExit(false);
 
         $application->run(new ArrayInput([
-            'command' => 'doctrine:schema:drop',
+            'command' => 'doctrine:database:create',
             '--no-interaction' => true,
-            '--force' => true,
-            '--full-database' => true,
             '--env' => 'test',
         ]), new NullOutput());
 
