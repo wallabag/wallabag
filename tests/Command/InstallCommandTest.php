@@ -128,7 +128,7 @@ class InstallCommandTest extends WallabagTestCase
         $this->assertStringContainsString('Dropping database, creating database and schema, clearing the cache', $tester->getDisplay());
     }
 
-    public function testRunInstallCommandWithDatabaseRemoved()
+    public function testRunInstallCommandWithNonExistingDatabase()
     {
         if ($this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof PostgreSQLPlatform) {
             $this->markTestSkipped('PostgreSQL spotted: can\'t find a good way to drop current database, skipping.');
