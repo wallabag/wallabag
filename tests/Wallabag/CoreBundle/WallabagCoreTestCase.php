@@ -48,6 +48,7 @@ abstract class WallabagCoreTestCase extends WebTestCase
             'command' => 'doctrine:schema:drop',
             '--no-interaction' => true,
             '--force' => true,
+            '--full-database' => true,
             '--env' => 'test',
         ]), new NullOutput());
 
