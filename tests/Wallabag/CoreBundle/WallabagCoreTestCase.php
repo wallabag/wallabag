@@ -52,7 +52,7 @@ abstract class WallabagCoreTestCase extends WebTestCase
         ]), new NullOutput());
 
         $application->run(new ArrayInput([
-            'command' => 'doctrine:schema:create',
+            'command' => 'doctrine:migrations:migrate',
             '--no-interaction' => true,
             '--env' => 'test',
         ]), new NullOutput());
