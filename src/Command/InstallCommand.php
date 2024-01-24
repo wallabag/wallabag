@@ -35,7 +35,6 @@ class InstallCommand extends Command
         'curl_exec',
         'curl_multi_init',
     ];
-    private bool $runOtherCommands = true;
 
     private EntityManagerInterface $entityManager;
     private EventDispatcherInterface $dispatcher;
@@ -54,11 +53,6 @@ class InstallCommand extends Command
         $this->defaultIgnoreOriginInstanceRules = $defaultIgnoreOriginInstanceRules;
 
         parent::__construct();
-    }
-
-    public function disableRunOtherCommands(): void
-    {
-        $this->runOtherCommands = false;
     }
 
     protected function configure()
@@ -342,10 +336,6 @@ class InstallCommand extends Command
      */
     private function runCommand($command, $parameters = [])
     {
-        if (!$this->runOtherCommands) {
-            return $this;
-        }
-
         $parameters = array_merge(
             ['command' => $command],
             $parameters,
