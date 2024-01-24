@@ -55,6 +55,10 @@ To learn more about developing wallabag, please refer to the [contribution guide
 
 Content extraction relies on [Graby](https://github.com/j0k3r/graby), [php-readability](https://github.com/j0k3r/php-readability) and [ftr-site-config](https://github.com/fivefilters/ftr-site-config).
 
+## Sponsors
+
+<img src="https://api.blackfire.io/blackfire-logo.png" alt="Blackfire" width="200" />
+
 ## License
 Copyright © 2013-current Nicolas Lœuillet <nicolas@loeuillet.org>
 
