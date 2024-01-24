@@ -4,7 +4,6 @@ namespace Tests\Wallabag\Command;
 
 use DAMA\DoctrineTestBundle\Doctrine\DBAL\StaticDriver;
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\Persistence\ManagerRegistry;
@@ -77,11 +76,6 @@ class InstallCommandTest extends WallabagTestCase
     {
         $command = $this->getCommand();
 
-        // enable calling other commands for MySQL only because rollback isn't supported
-        if (!$this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof MySQLPlatform) {
-            $command->disableRunOtherCommands();
-        }
-
         $tester = new CommandTester($command);
         $tester->setInputs([
             'y', // dropping database
@@ -101,7 +95,6 @@ class InstallCommandTest extends WallabagTestCase
     public function testRunInstallCommandWithReset()
     {
         $command = $this->getCommand();
-        $command->disableRunOtherCommands();
 
         $tester = new CommandTester($command);
         $tester->setInputs([
@@ -170,7 +163,6 @@ class InstallCommandTest extends WallabagTestCase
     public function testRunInstallCommandChooseResetSchema()
     {
         $command = $this->getCommand();
-        $command->disableRunOtherCommands();
 
         $tester = new CommandTester($command);
         $tester->setInputs([
@@ -223,7 +215,6 @@ class InstallCommandTest extends WallabagTestCase
     public function testRunInstallCommandNoInteraction()
     {
         $command = $this->getCommand();
-        $command->disableRunOtherCommands();
 
         $tester = new CommandTester($command);
         $tester->execute([], [
