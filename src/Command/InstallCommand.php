@@ -7,6 +7,7 @@ use Doctrine\DBAL\Exception\DriverException;
 use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
+use Doctrine\Migrations\Metadata\Storage\TableMetadataStorageConfiguration;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
@@ -39,15 +40,17 @@ class InstallCommand extends Command
     private EntityManagerInterface $entityManager;
     private EventDispatcherInterface $dispatcher;
     private UserManagerInterface $userManager;
+    private TableMetadataStorageConfiguration $tableMetadataStorageConfiguration;
     private string $databaseDriver;
     private array $defaultSettings;
     private array $defaultIgnoreOriginInstanceRules;
 
-    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $dispatcher, UserManagerInterface $userManager, string $databaseDriver, array $defaultSettings, array $defaultIgnoreOriginInstanceRules)
+    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $dispatcher, UserManagerInterface $userManager, TableMetadataStorageConfiguration $tableMetadataStorageConfiguration, string $databaseDriver, array $defaultSettings, array $defaultIgnoreOriginInstanceRules)
     {
         $this->entityManager = $entityManager;
         $this->dispatcher = $dispatcher;
         $this->userManager = $userManager;
+        $this->tableMetadataStorageConfiguration = $tableMetadataStorageConfiguration;
         $this->databaseDriver = $databaseDriver;
         $this->defaultSettings = $defaultSettings;
         $this->defaultIgnoreOriginInstanceRules = $defaultIgnoreOriginInstanceRules;
@@ -415,14 +418,12 @@ class InstallCommand extends Command
 
     /**
      * Check if the schema is already created.
-     * If we found at least one table, it means the schema exists.
-     *
-     * @return bool
+     * We use the Doctrine Migrations table for the check.
      */
-    private function isSchemaPresent()
+    private function isSchemaPresent(): bool
     {
         $schemaManager = $this->entityManager->getConnection()->createSchemaManager();
 
-        return \count($schemaManager->listTableNames()) > 0 ? true : false;
+        return $schemaManager->tablesExist([$this->tableMetadataStorageConfiguration->getTableName()]);
     }
 }
