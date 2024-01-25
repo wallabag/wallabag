@@ -15,6 +15,7 @@ use Wallabag\AnnotationBundle\Form\EditAnnotationType;
 use Wallabag\AnnotationBundle\Form\NewAnnotationType;
 use Wallabag\AnnotationBundle\Repository\AnnotationRepository;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\UserBundle\Entity\User;
 
 class WallabagAnnotationController extends AbstractFOSRestController
 {
@@ -144,6 +145,17 @@ class WallabagAnnotationController extends AbstractFOSRestController
         } catch (\InvalidArgumentException $e) {
             throw new NotFoundHttpException($e);
         }
+    }
+
+    /**
+     * @return User|null
+     */
+    protected function getUser()
+    {
+        $user = parent::getUser();
+        \assert(null === $user || $user instanceof User);
+
+        return $user;
     }
 
     private function validateAnnotation(AnnotationRepository $annotationRepository, int $annotationId, int $userId)

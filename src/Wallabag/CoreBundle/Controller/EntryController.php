@@ -5,11 +5,10 @@ namespace Wallabag\CoreBundle\Controller;
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NoResultException;
-use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
 use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Spiriit\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -80,7 +79,7 @@ class EntryController extends AbstractController
                     });
                 foreach ($labels as $label) {
                     $remove = false;
-                    if (0 === strpos($label, '-')) {
+                    if (str_starts_with($label, '-')) {
                         $label = substr($label, 1);
                         $remove = true;
                     }

@@ -10,7 +10,6 @@ use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use PragmaRX\Recovery\Recovery as BackupCodes;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -674,7 +673,7 @@ class ConfigController extends AbstractController
      */
     public function setLocaleAction(Request $request, ValidatorInterface $validator, $language = null)
     {
-        $errors = $validator->validate($language, (new LocaleConstraint(['canonicalize' => true])));
+        $errors = $validator->validate($language, new LocaleConstraint(['canonicalize' => true]));
 
         if (0 === \count($errors)) {
             $request->getSession()->set('_locale', $language);

@@ -61,8 +61,8 @@ class DownloadImagesTest extends TestCase
     public function singleImage()
     {
         return [
-            ['image/pjpeg', 'jpeg'],
-            ['image/jpeg', 'jpeg'],
+            ['image/pjpeg', 'jpg'],
+            ['image/jpeg', 'jpg'],
             ['image/png', 'png'],
             ['image/gif', 'gif'],
             ['image/webp', 'webp'],

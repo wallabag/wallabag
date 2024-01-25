@@ -33,9 +33,6 @@ class ChromeController extends BrowserController
         return parent::indexAction($request, $translator);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getImportService()
     {
         if ($this->craueConfig->get('import_with_rabbitmq')) {
@@ -47,9 +44,6 @@ class ChromeController extends BrowserController
         return $this->chromeImport;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getImportTemplate()
     {
         return '@WallabagImport/Chrome/index.html.twig';

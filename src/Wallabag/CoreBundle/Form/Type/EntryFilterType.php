@@ -2,14 +2,14 @@
 
 namespace Wallabag\CoreBundle\Form\Type;
 
-use Lexik\Bundle\FormFilterBundle\Filter\FilterOperands;
-use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\CheckboxFilterType;
-use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\ChoiceFilterType;
-use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\DateRangeFilterType;
-use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\NumberFilterType;
-use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\NumberRangeFilterType;
-use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\TextFilterType;
-use Lexik\Bundle\FormFilterBundle\Filter\Query\QueryInterface;
+use Spiriit\Bundle\FormFilterBundle\Filter\FilterOperands;
+use Spiriit\Bundle\FormFilterBundle\Filter\Form\Type\CheckboxFilterType;
+use Spiriit\Bundle\FormFilterBundle\Filter\Form\Type\ChoiceFilterType;
+use Spiriit\Bundle\FormFilterBundle\Filter\Form\Type\DateRangeFilterType;
+use Spiriit\Bundle\FormFilterBundle\Filter\Form\Type\NumberFilterType;
+use Spiriit\Bundle\FormFilterBundle\Filter\Form\Type\NumberRangeFilterType;
+use Spiriit\Bundle\FormFilterBundle\Filter\Form\Type\TextFilterType;
+use Spiriit\Bundle\FormFilterBundle\Filter\Query\QueryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Response;

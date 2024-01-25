@@ -4,19 +4,15 @@ namespace Tests\Wallabag\AnnotationBundle;
 
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManager;
-use FOS\UserBundle\Security\LoginManager;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 abstract class WallabagAnnotationTestCase extends WebTestCase
 {
     /**
      * @var KernelBrowser
      */
-    protected $client = null;
+    protected $client;
 
     /**
      * @var UserInterface
@@ -51,19 +47,11 @@ abstract class WallabagAnnotationTestCase extends WebTestCase
 
         /** @var UserManager $userManager */
         $userManager = $container->get('fos_user.user_manager.test');
-        /** @var LoginManager $loginManager */
-        $loginManager = $container->get('fos_user.security.login_manager.test');
         $firewallName = $container->getParameter('fos_user.firewall_name');
 
         $this->user = $userManager->findUserBy(['username' => 'admin']);
-        $loginManager->logInUser($firewallName, $this->user);
 
-        // save the login token into the session and put it in a cookie
-        $container->get(SessionInterface::class)->set('_security_' . $firewallName, serialize($container->get(TokenStorageInterface::class)->getToken()));
-        $container->get(SessionInterface::class)->save();
-
-        $session = $container->get(SessionInterface::class);
-        $client->getCookieJar()->set(new Cookie($session->getName(), $session->getId()));
+        $client->loginUser($this->user, $firewallName);
 
         return $client;
     }

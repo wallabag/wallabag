@@ -30,10 +30,10 @@ class CleanDownloadedImagesCommand extends Command
             ->setName('wallabag:clean-downloaded-images')
             ->setDescription('Cleans downloaded images which are no more associated to an entry')
             ->addOption(
-               'dry-run',
-               null,
-               InputOption::VALUE_NONE,
-               'Do not remove images, just dump counters'
+                'dry-run',
+                null,
+                InputOption::VALUE_NONE,
+                'Do not remove images, just dump counters'
             );
     }
 

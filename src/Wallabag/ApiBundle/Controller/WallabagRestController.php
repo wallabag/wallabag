@@ -118,8 +118,6 @@ class WallabagRestController extends AbstractFOSRestController
     /**
      * Shortcut to send data serialized in json.
      *
-     * @param mixed $data
-     *
      * @return JsonResponse
      */
     protected function sendResponse($data)
@@ -131,5 +129,16 @@ class WallabagRestController extends AbstractFOSRestController
         $json = $this->serializer->serialize($data, 'json', $context);
 
         return (new JsonResponse())->setJson($json);
+    }
+
+    /**
+     * @return User|null
+     */
+    protected function getUser()
+    {
+        $user = parent::getUser();
+        \assert(null === $user || $user instanceof User);
+
+        return $user;
     }
 }

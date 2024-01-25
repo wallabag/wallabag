@@ -2,7 +2,6 @@
 
 namespace Wallabag\CoreBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -89,9 +88,9 @@ class ExportController extends AbstractController
             $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
 
             $entries = $entryRepository->getBuilderForSearchByUser(
-                    $this->getUser()->getId(),
-                    $searchTerm,
-                    $currentRoute
+                $this->getUser()->getId(),
+                $searchTerm,
+                $currentRoute
             )->getQuery()
              ->getResult();
 

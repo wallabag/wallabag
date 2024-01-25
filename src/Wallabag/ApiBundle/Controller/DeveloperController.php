@@ -3,7 +3,6 @@
 namespace Wallabag\ApiBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +11,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\ApiBundle\Entity\Client;
 use Wallabag\ApiBundle\Form\Type\ClientType;
 use Wallabag\ApiBundle\Repository\ClientRepository;
+use Wallabag\CoreBundle\Controller\AbstractController;
 
 class DeveloperController extends AbstractController
 {
@@ -103,8 +103,7 @@ class DeveloperController extends AbstractController
      */
     public function howtoFirstAppAction()
     {
-        return $this->render('@WallabagCore/Developer/howto_app.html.twig',
-        [
+        return $this->render('@WallabagCore/Developer/howto_app.html.twig', [
             'wallabag_url' => $this->getParameter('domain_name'),
         ]);
     }

@@ -22,9 +22,6 @@ class PasswordResettingListener implements EventSubscriberInterface
         $this->router = $router;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents()
     {
         return [

@@ -66,10 +66,10 @@ class InstallCommand extends Command
             ->setName('wallabag:install')
             ->setDescription('wallabag installer.')
             ->addOption(
-               'reset',
-               null,
-               InputOption::VALUE_NONE,
-               'Reset current database'
+                'reset',
+                null,
+                InputOption::VALUE_NONE,
+                'Reset current database'
             )
         ;
     }
@@ -125,8 +125,8 @@ class InstallCommand extends Command
         try {
             $conn->connect();
         } catch (\Exception $e) {
-            if (false === strpos($e->getMessage(), 'Unknown database')
-                && false === strpos($e->getMessage(), 'database "' . $this->databaseName . '" does not exist')) {
+            if (!str_contains($e->getMessage(), 'Unknown database')
+                && !str_contains($e->getMessage(), 'database "' . $this->databaseName . '" does not exist')) {
                 $fulfilled = false;
                 $status = '<error>ERROR!</error>';
                 $help = 'Can\'t connect to the database: ' . $e->getMessage();
@@ -381,12 +381,12 @@ class InstallCommand extends Command
             $schemaManager = $connection->createSchemaManager();
         } catch (\Exception $exception) {
             // mysql & sqlite
-            if (false !== strpos($exception->getMessage(), sprintf("Unknown database '%s'", $databaseName))) {
+            if (str_contains($exception->getMessage(), sprintf("Unknown database '%s'", $databaseName))) {
                 return false;
             }
 
             // pgsql
-            if (false !== strpos($exception->getMessage(), sprintf('database "%s" does not exist', $databaseName))) {
+            if (str_contains($exception->getMessage(), sprintf('database "%s" does not exist', $databaseName))) {
                 return false;
             }
 
