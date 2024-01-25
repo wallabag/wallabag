@@ -13,7 +13,6 @@ use OpenApi\Annotations as OA;
 use Scheb\TwoFactorBundle\Model\BackupCodeInterface;
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface as EmailTwoFactorInterface;
 use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface as GoogleTwoFactorInterface;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Wallabag\ApiBundle\Entity\Client;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -26,9 +25,6 @@ use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
  * @ORM\Entity(repositoryClass="Wallabag\UserBundle\Repository\UserRepository")
  * @ORM\Table(name="`user`")
  * @ORM\HasLifecycleCallbacks()
- *
- * @UniqueEntity("email")
- * @UniqueEntity("username")
  */
 class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorInterface, BackupCodeInterface
 {
