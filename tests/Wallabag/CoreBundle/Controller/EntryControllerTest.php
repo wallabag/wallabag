@@ -6,14 +6,14 @@ use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\AnnotationBundle\Entity\Annotation;
+use Wallabag\CoreBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Entity\Config as ConfigEntity;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\SiteCredential;
 use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\ContentProxy;
 use Wallabag\CoreBundle\Helper\CryptoProxy;
-use Wallabag\UserBundle\Entity\User;
 
 class EntryControllerTest extends WallabagCoreTestCase
 {

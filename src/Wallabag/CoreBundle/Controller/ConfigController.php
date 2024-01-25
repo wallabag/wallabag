@@ -20,7 +20,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraints\Locale as LocaleConstraint;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Wallabag\AnnotationBundle\Repository\AnnotationRepository;
 use Wallabag\CoreBundle\Entity\Config as ConfigEntity;
 use Wallabag\CoreBundle\Entity\IgnoreOriginUserRule;
 use Wallabag\CoreBundle\Entity\RuleInterface;
@@ -34,13 +33,14 @@ use Wallabag\CoreBundle\Form\Type\TaggingRuleImportType;
 use Wallabag\CoreBundle\Form\Type\TaggingRuleType;
 use Wallabag\CoreBundle\Form\Type\UserInformationType;
 use Wallabag\CoreBundle\Helper\Redirect;
+use Wallabag\CoreBundle\Repository\AnnotationRepository;
 use Wallabag\CoreBundle\Repository\ConfigRepository;
 use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\CoreBundle\Repository\IgnoreOriginUserRuleRepository;
 use Wallabag\CoreBundle\Repository\TaggingRuleRepository;
 use Wallabag\CoreBundle\Repository\TagRepository;
+use Wallabag\CoreBundle\Repository\UserRepository;
 use Wallabag\CoreBundle\Tools\Utils;
-use Wallabag\UserBundle\Repository\UserRepository;
 
 class ConfigController extends AbstractController
 {

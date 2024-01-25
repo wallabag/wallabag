@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Wallabag\CoreBundle\Helper\EntriesExport;
 use Wallabag\CoreBundle\Repository\EntryRepository;
-use Wallabag\UserBundle\Repository\UserRepository;
+use Wallabag\CoreBundle\Repository\UserRepository;
 
 class ExportCommand extends Command
 {

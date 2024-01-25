@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\UserBundle\Entity\User;
+use Wallabag\CoreBundle\Entity\User;
 
 class ShowUserCommandTest extends WallabagCoreTestCase
 {

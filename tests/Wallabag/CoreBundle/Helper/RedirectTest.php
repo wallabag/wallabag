@@ -8,8 +8,8 @@ use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Wallabag\CoreBundle\Entity\Config;
+use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\Redirect;
-use Wallabag\UserBundle\Entity\User;
 
 class RedirectTest extends TestCase
 {

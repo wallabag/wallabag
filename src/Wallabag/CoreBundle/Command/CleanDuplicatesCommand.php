@@ -10,9 +10,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Repository\EntryRepository;
-use Wallabag\UserBundle\Entity\User;
-use Wallabag\UserBundle\Repository\UserRepository;
+use Wallabag\CoreBundle\Repository\UserRepository;
 
 class CleanDuplicatesCommand extends Command
 {

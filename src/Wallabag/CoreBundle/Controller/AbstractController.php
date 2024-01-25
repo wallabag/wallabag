@@ -3,7 +3,7 @@
 namespace Wallabag\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as BaseAbstractController;
-use Wallabag\UserBundle\Entity\User;
+use Wallabag\CoreBundle\Entity\User;
 
 abstract class AbstractController extends BaseAbstractController
 {

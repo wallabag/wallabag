@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\UserBundle\Entity\User;
+use Wallabag\CoreBundle\Entity\User;
 
 /**
  * This class doesn't have unit test BUT it's fully covered by a functional test with ExportControllerTest.

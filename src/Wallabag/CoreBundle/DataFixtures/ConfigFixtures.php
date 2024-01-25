@@ -6,8 +6,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Wallabag\CoreBundle\Entity\Config;
-use Wallabag\UserBundle\DataFixtures\UserFixtures;
-use Wallabag\UserBundle\Entity\User;
+use Wallabag\CoreBundle\Entity\User;
 
 class ConfigFixtures extends Fixture implements DependentFixtureInterface
 {

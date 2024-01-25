@@ -8,9 +8,8 @@ use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Wallabag\CoreBundle\Entity\SiteCredential;
+use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\CryptoProxy;
-use Wallabag\UserBundle\DataFixtures\UserFixtures;
-use Wallabag\UserBundle\Entity\User;
 
 class SiteCredentialFixtures extends Fixture implements DependentFixtureInterface, ContainerAwareInterface
 {

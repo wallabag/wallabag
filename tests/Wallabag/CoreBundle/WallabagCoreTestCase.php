@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Wallabag\UserBundle\Entity\User;
+use Wallabag\CoreBundle\Entity\User;
 
 abstract class WallabagCoreTestCase extends WebTestCase
 {
@@ -48,11 +48,12 @@ abstract class WallabagCoreTestCase extends WebTestCase
             'command' => 'doctrine:schema:drop',
             '--no-interaction' => true,
             '--force' => true,
+            '--full-database' => true,
             '--env' => 'test',
         ]), new NullOutput());
 
         $application->run(new ArrayInput([
-            'command' => 'doctrine:schema:create',
+            'command' => 'doctrine:migrations:migrate',
             '--no-interaction' => true,
             '--env' => 'test',
         ]), new NullOutput());

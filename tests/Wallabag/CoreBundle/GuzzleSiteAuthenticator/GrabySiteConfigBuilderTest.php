@@ -9,9 +9,9 @@ use Monolog\Logger;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder;
 use Wallabag\CoreBundle\Repository\SiteCredentialRepository;
-use Wallabag\UserBundle\Entity\User;
 
 class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
 {

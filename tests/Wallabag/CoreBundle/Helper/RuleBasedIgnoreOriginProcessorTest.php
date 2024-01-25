@@ -10,9 +10,9 @@ use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule;
 use Wallabag\CoreBundle\Entity\IgnoreOriginUserRule;
+use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\RuleBasedIgnoreOriginProcessor;
 use Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository;
-use Wallabag\UserBundle\Entity\User;
 
 class RuleBasedIgnoreOriginProcessorTest extends TestCase
 {

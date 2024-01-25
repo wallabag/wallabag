@@ -11,10 +11,8 @@ use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
 use JMS\Serializer\Annotation\XmlRoot;
 use Symfony\Component\Validator\Constraints as Assert;
-use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
 use Wallabag\CoreBundle\Helper\UrlHasher;
-use Wallabag\UserBundle\Entity\User;
 
 /**
  * Entry.
@@ -206,7 +204,7 @@ class Entry
     private $starredAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Wallabag\AnnotationBundle\Entity\Annotation", mappedBy="entry", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\Annotation", mappedBy="entry", cascade={"persist", "remove"})
      * @ORM\JoinTable
      *
      * @Groups({"entries_for_user", "export_all"})
@@ -290,14 +288,14 @@ class Entry
     /**
      * @Exclude
      *
-     * @ORM\ManyToOne(targetEntity="Wallabag\UserBundle\Entity\User", inversedBy="entries")
+     * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\User", inversedBy="entries")
      *
      * @Groups({"export_all"})
      */
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="entries", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Wallabag\CoreBundle\Entity\Tag", inversedBy="entries", cascade={"persist"})
      * @ORM\JoinTable(
      *  name="entry_tag",
      *  joinColumns={

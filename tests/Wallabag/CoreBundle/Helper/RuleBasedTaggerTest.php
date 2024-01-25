@@ -12,10 +12,10 @@ use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Entity\TaggingRule;
+use Wallabag\CoreBundle\Entity\User;
 use Wallabag\CoreBundle\Helper\RuleBasedTagger;
 use Wallabag\CoreBundle\Repository\EntryRepository;
 use Wallabag\CoreBundle\Repository\TagRepository;
-use Wallabag\UserBundle\Entity\User;
 
 class RuleBasedTaggerTest extends TestCase
 {

@@ -4,7 +4,7 @@ namespace Tests\Wallabag\CoreBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\UserBundle\Entity\User;
+use Wallabag\CoreBundle\Entity\User;
 
 class SecurityControllerTest extends WallabagCoreTestCase
 {

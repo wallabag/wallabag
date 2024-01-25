@@ -13,7 +13,7 @@ services:
         public: true
 
     wallabag_user.user_repository.test:
-        alias: Wallabag\UserBundle\Repository\UserRepository
+        alias: Wallabag\CoreBundle\Repository\UserRepository
         public: true
 
     filesystem_cache:
@@ -22,17 +22,7 @@ services:
             - "%kernel.cache_dir%/doctrine/metadata"
 
     # fixtures
-    Wallabag\UserBundle\DataFixtures\:
-        resource: '../../src/Wallabag/UserBundle/DataFixtures/*'
-        tags: ['doctrine.fixture.orm']
-        autowire: true
-
     Wallabag\CoreBundle\DataFixtures\:
         resource: '../../src/Wallabag/CoreBundle/DataFixtures/*'
-        tags: ['doctrine.fixture.orm']
-        autowire: true
-
-    Wallabag\AnnotationBundle\DataFixtures\:
-        resource: '../../src/Wallabag/AnnotationBundle/DataFixtures/*'
         tags: ['doctrine.fixture.orm']
         autowire: true
