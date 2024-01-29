@@ -5823,16 +5823,16 @@
         },
         {
             "name": "nelmio/api-doc-bundle",
-            "version": "v4.18.2",
+            "version": "v4.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/NelmioApiDocBundle.git",
-                "reference": "3cce6fea6560ef1feaa49d00964862dcb652c0c2"
+                "reference": "b96c2630dda123d41ca96f154a6be33b8e0cf835"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/3cce6fea6560ef1feaa49d00964862dcb652c0c2",
-                "reference": "3cce6fea6560ef1feaa49d00964862dcb652c0c2",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/b96c2630dda123d41ca96f154a6be33b8e0cf835",
+                "reference": "b96c2630dda123d41ca96f154a6be33b8e0cf835",
                 "shasum": ""
             },
             "require": {
@@ -5871,6 +5871,7 @@
                 "symfony/form": "^5.4|^6.0|^7.0",
                 "symfony/phpunit-bridge": "^6.4",
                 "symfony/property-access": "^5.4|^6.0|^7.0",
+                "symfony/security-csrf": "^5.4|^6.0|^7.0",
                 "symfony/serializer": "^5.4|^6.0|^7.0",
                 "symfony/stopwatch": "^5.4|^6.0|^7.0",
                 "symfony/templating": "^5.4|^6.0|^7.0",
@@ -5887,6 +5888,7 @@
                 "symfony/cache": "For using a PSR-6 compatible cache implementation with the API doc generator.",
                 "symfony/form": "For describing your form type models.",
                 "symfony/monolog-bundle": "For using a PSR-3 compatible logger implementation with the API PHP describer.",
+                "symfony/security-csrf": "For using csrf protection tokens in forms.",
                 "symfony/serializer": "For describing your models.",
                 "symfony/twig-bundle": "For using the Swagger UI.",
                 "symfony/validator": "For describing the validation constraints in your models.",
@@ -5929,9 +5931,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nelmio/NelmioApiDocBundle/issues",
-                "source": "https://github.com/nelmio/NelmioApiDocBundle/tree/v4.18.2"
+                "source": "https://github.com/nelmio/NelmioApiDocBundle/tree/v4.19.0"
             },
-            "time": "2024-01-20T17:44:50+00:00"
+            "time": "2024-01-26T12:06:15+00:00"
         },
         {
             "name": "nelmio/cors-bundle",
