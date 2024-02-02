@@ -30,7 +30,6 @@ class AppKernel extends Kernel
             new Craue\ConfigBundle\CraueConfigBundle(),
             new BabDev\PagerfantaBundle\BabDevPagerfantaBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new BD\GuzzleSiteAuthenticatorBundle\BDGuzzleSiteAuthenticatorBundle(),
             new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
             new Http\HttplugBundle\HttplugBundle(),
             new Sentry\SentryBundle\SentryBundle(),
