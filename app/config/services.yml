@@ -191,13 +191,13 @@ services:
     wallabag_core.http_client:
         alias: 'httplug.client.wallabag_core'
 
-    Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder:
+    Wallabag\CoreBundle\SiteConfig\GrabySiteConfigBuilder:
         tags:
             - { name: monolog.logger, channel: graby }
 
     # service alias override
     bd_guzzle_site_authenticator.site_config_builder:
-        alias: Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder
+        alias: Wallabag\CoreBundle\SiteConfig\GrabySiteConfigBuilder
 
     GuzzleHttp\Cookie\CookieJar:
         alias: 'Wallabag\CoreBundle\Helper\FileCookieJar'

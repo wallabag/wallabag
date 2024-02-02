@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\GuzzleSiteAuthenticator;
+namespace Wallabag\CoreBundle\SiteConfig;
 
 use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfig;
 use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfigBuilder;
