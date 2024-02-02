@@ -13,6 +13,9 @@ use Wallabag\CoreBundle\Repository\EntryRepository;
 
 class CleanDownloadedImagesCommand extends Command
 {
+    protected static $defaultName = 'wallabag:clean-downloaded-images';
+    protected static $defaultDescription = 'Cleans downloaded images which are no more associated to an entry';
+
     private EntryRepository $entryRepository;
     private DownloadImages $downloadImages;
 
@@ -27,8 +30,6 @@ class CleanDownloadedImagesCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('wallabag:clean-downloaded-images')
-            ->setDescription('Cleans downloaded images which are no more associated to an entry')
             ->addOption(
                 'dry-run',
                 null,

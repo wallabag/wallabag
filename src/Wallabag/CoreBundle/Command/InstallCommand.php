@@ -26,6 +26,9 @@ use Wallabag\CoreBundle\Entity\User;
 
 class InstallCommand extends Command
 {
+    protected static $defaultName = 'wallabag:install';
+    protected static $defaultDescription = 'wallabag installer.';
+
     private InputInterface $defaultInput;
     private SymfonyStyle $io;
     private array $functionExists = [
@@ -63,8 +66,6 @@ class InstallCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('wallabag:install')
-            ->setDescription('wallabag installer.')
             ->addOption(
                 'reset',
                 null,

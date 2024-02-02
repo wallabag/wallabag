@@ -15,6 +15,9 @@ use Wallabag\CoreBundle\Repository\UserRepository;
 
 class GenerateUrlHashesCommand extends Command
 {
+    protected static $defaultName = 'wallabag:generate-hashed-urls';
+    protected static $defaultDescription = 'Generates hashed urls for each entry';
+
     protected OutputInterface $output;
     private EntityManagerInterface $entityManager;
     private EntryRepository $entryRepository;
@@ -32,8 +35,6 @@ class GenerateUrlHashesCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('wallabag:generate-hashed-urls')
-            ->setDescription('Generates hashed urls for each entry')
             ->setHelp('This command helps you to generates hashes of the url of each entry, to check through API if an URL is already saved')
             ->addArgument('username', InputArgument::OPTIONAL, 'User to process entries');
     }

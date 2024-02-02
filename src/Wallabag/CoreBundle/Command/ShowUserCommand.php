@@ -13,6 +13,9 @@ use Wallabag\CoreBundle\Repository\UserRepository;
 
 class ShowUserCommand extends Command
 {
+    protected static $defaultName = 'wallabag:user:show';
+    protected static $defaultDescription = 'Show user details';
+
     protected SymfonyStyle $io;
     private UserRepository $userRepository;
 
@@ -26,8 +29,6 @@ class ShowUserCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('wallabag:user:show')
-            ->setDescription('Show user details')
             ->setHelp('This command shows the details for an user')
             ->addArgument(
                 'username',

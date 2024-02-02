@@ -9,6 +9,7 @@ use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Command\LazyCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -86,10 +87,7 @@ class InstallCommandTest extends WallabagCoreTestCase
 
     public function testRunInstallCommand()
     {
-        $application = new Application($this->getTestClient()->getKernel());
-
-        /** @var InstallCommand $command */
-        $command = $application->find('wallabag:install');
+        $command = $this->getCommand();
 
         // enable calling other commands for MySQL only because rollback isn't supported
         if (!$this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof MySQLPlatform) {
@@ -118,10 +116,7 @@ class InstallCommandTest extends WallabagCoreTestCase
             $this->markTestSkipped('Rollback are not properly handled for MySQL, skipping.');
         }
 
-        $application = new Application($this->getTestClient()->getKernel());
-
-        /** @var InstallCommand $command */
-        $command = $application->find('wallabag:install');
+        $command = $this->getCommand();
         $command->disableRunOtherCommands();
 
         $tester = new CommandTester($command);
@@ -166,10 +161,9 @@ class InstallCommandTest extends WallabagCoreTestCase
         ]), new NullOutput());
 
         // start a new application to avoid lagging connexion to pgsql
-        $client = static::createClient();
-        $application = new Application($client->getKernel());
+        $this->getNewClient();
 
-        $command = $application->find('wallabag:install');
+        $command = $this->getCommand();
 
         $tester = new CommandTester($command);
         $tester->setInputs([
@@ -195,10 +189,7 @@ class InstallCommandTest extends WallabagCoreTestCase
             $this->markTestSkipped('Rollback are not properly handled for MySQL, skipping.');
         }
 
-        $application = new Application($this->getTestClient()->getKernel());
-
-        /** @var InstallCommand $command */
-        $command = $application->find('wallabag:install');
+        $command = $this->getCommand();
         $command->disableRunOtherCommands();
 
         $tester = new CommandTester($command);
@@ -242,7 +233,7 @@ class InstallCommandTest extends WallabagCoreTestCase
         $command = $application->find('doctrine:database:create');
         $command->run(new ArrayInput([]), new NullOutput());
 
-        $command = $application->find('wallabag:install');
+        $command = $this->getCommand();
 
         $tester = new CommandTester($command);
         $tester->setInputs([
@@ -265,10 +256,7 @@ class InstallCommandTest extends WallabagCoreTestCase
             $this->markTestSkipped('Rollback are not properly handled for MySQL, skipping.');
         }
 
-        $application = new Application($this->getTestClient()->getKernel());
-
-        /** @var InstallCommand $command */
-        $command = $application->find('wallabag:install');
+        $command = $this->getCommand();
         $command->disableRunOtherCommands();
 
         $tester = new CommandTester($command);
@@ -280,5 +268,20 @@ class InstallCommandTest extends WallabagCoreTestCase
         $this->assertStringContainsString('Setting up database.', $tester->getDisplay());
         $this->assertStringContainsString('Administration setup.', $tester->getDisplay());
         $this->assertStringContainsString('Config setup.', $tester->getDisplay());
+    }
+
+    private function getCommand(): InstallCommand
+    {
+        $application = new Application($this->getTestClient()->getKernel());
+
+        $command = $application->find('wallabag:install');
+
+        if ($command instanceof LazyCommand) {
+            $command = $command->getCommand();
+        }
+
+        \assert($command instanceof InstallCommand);
+
+        return $command;
     }
 }

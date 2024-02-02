@@ -12,6 +12,9 @@ use Wallabag\CoreBundle\Repository\EntryRepository;
 
 class UpdatePicturesPathCommand extends Command
 {
+    protected static $defaultName = 'wallabag:update-pictures-path';
+    protected static $defaultDescription = 'Update the path of the pictures for each entry when you changed your wallabag instance URL.';
+
     private EntityManagerInterface $entityManager;
     private EntryRepository $entryRepository;
     private string $wallabagUrl;
@@ -27,8 +30,6 @@ class UpdatePicturesPathCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('wallabag:update-pictures-path')
-            ->setDescription('Update the path of the pictures for each entry when you changed your wallabag instance URL.')
             ->addArgument(
                 'old-url',
                 InputArgument::REQUIRED,

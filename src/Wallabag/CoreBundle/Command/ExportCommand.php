@@ -14,6 +14,9 @@ use Wallabag\CoreBundle\Repository\UserRepository;
 
 class ExportCommand extends Command
 {
+    protected static $defaultName = 'wallabag:export';
+    protected static $defaultDescription = 'Export all entries for an user';
+
     private EntryRepository $entryRepository;
     private UserRepository $userRepository;
     private EntriesExport $entriesExport;
@@ -32,8 +35,6 @@ class ExportCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('wallabag:export')
-            ->setDescription('Export all entries for an user')
             ->setHelp('This command helps you to export all entries for an user')
             ->addArgument(
                 'username',
