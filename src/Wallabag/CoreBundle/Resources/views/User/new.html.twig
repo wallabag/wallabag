@@ -50,7 +50,9 @@
                                 {{ form_widget(form.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
                                 {{ form_rest(form) }}
                             </form>
-                            <p><a class="waves-effect waves-light btn blue-grey" href="{{ path('user_index') }}">{{ 'user.form.back_to_list'|trans }}</a></p>
+                            {% if is_granted('LIST_USERS') %}
+                                <p><a class="waves-effect waves-light btn blue-grey" href="{{ path('user_index') }}">{{ 'user.form.back_to_list'|trans }}</a></p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

@@ -10,6 +10,7 @@ use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormInterface;
@@ -41,6 +42,7 @@ class UserController extends AbstractController
      * Creates a new User entity.
      *
      * @Route("/users/new", name="user_new", methods={"GET", "POST"})
+     * @IsGranted("CREATE_USER")
      */
     public function newAction(Request $request, UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher)
     {
@@ -77,6 +79,7 @@ class UserController extends AbstractController
      * Displays a form to edit an existing User entity.
      *
      * @Route("/users/{id}/edit", name="user_edit", methods={"GET", "POST"})
+     * @IsGranted("EDIT", subject="user")
      */
     public function editAction(Request $request, User $user, UserManagerInterface $userManager, GoogleAuthenticatorInterface $googleAuthenticator)
     {
@@ -119,6 +122,7 @@ class UserController extends AbstractController
      * Deletes a User entity.
      *
      * @Route("/users/{id}", name="user_delete", methods={"DELETE"})
+     * @IsGranted("DELETE", subject="user")
      */
     public function deleteAction(Request $request, User $user)
     {
@@ -142,6 +146,7 @@ class UserController extends AbstractController
      * @param int $page
      *
      * @Route("/users/list/{page}", name="user_index", defaults={"page" = 1})
+     * @IsGranted("LIST_USERS")
      *
      * Default parameter for page is hardcoded (in duplication of the defaults from the Route)
      * because this controller is also called inside the layout template without any page as argument
