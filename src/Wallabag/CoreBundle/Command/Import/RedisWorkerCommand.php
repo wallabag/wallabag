@@ -13,6 +13,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class RedisWorkerCommand extends Command
 {
+    protected static $defaultName = 'wallabag:import:redis-worker';
+    protected static $defaultDescription = 'Launch Redis worker';
+
     private $container;
 
     public function __construct(ContainerInterface $container)
@@ -25,8 +28,6 @@ class RedisWorkerCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('wallabag:import:redis-worker')
-            ->setDescription('Launch Redis worker')
             ->addArgument('serviceName', InputArgument::REQUIRED, 'Service to use: wallabag_v1, wallabag_v2, pocket, readability, pinboard, delicious, firefox, chrome or instapaper')
             ->addOption('maxIterations', '', InputOption::VALUE_OPTIONAL, 'Number of iterations before stopping', false)
         ;

@@ -29,6 +29,9 @@ use Wallabag\CoreBundle\Repository\UserRepository;
 
 class ImportCommand extends Command
 {
+    protected static $defaultName = 'wallabag:import';
+    protected static $defaultDescription = 'Import entries from a JSON export';
+
     private EntityManagerInterface $entityManager;
     private TokenStorageInterface $tokenStorage;
     private UserRepository $userRepository;
@@ -81,8 +84,6 @@ class ImportCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('wallabag:import')
-            ->setDescription('Import entries from a JSON export')
             ->addArgument('username', InputArgument::REQUIRED, 'User to populate')
             ->addArgument('filepath', InputArgument::REQUIRED, 'Path to the JSON file')
             ->addOption('importer', null, InputOption::VALUE_OPTIONAL, 'The importer to use: v1, v2, instapaper, pinboard, delicious, readability, firefox, chrome, elcurator, shaarli or pocket', 'v1')

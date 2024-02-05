@@ -16,6 +16,9 @@ use Wallabag\CoreBundle\Repository\UserRepository;
 
 class CleanDuplicatesCommand extends Command
 {
+    protected static $defaultName = 'wallabag:clean-duplicates';
+    protected static $defaultDescription = 'Cleans the database for duplicates';
+
     protected SymfonyStyle $io;
     protected int $duplicates = 0;
     private EntityManagerInterface $entityManager;
@@ -34,8 +37,6 @@ class CleanDuplicatesCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('wallabag:clean-duplicates')
-            ->setDescription('Cleans the database for duplicates')
             ->setHelp('This command helps you to clean your articles list in case of duplicates')
             ->addArgument(
                 'username',

@@ -18,6 +18,9 @@ use Wallabag\CoreBundle\Repository\UserRepository;
 
 class ReloadEntryCommand extends Command
 {
+    protected static $defaultName = 'wallabag:entry:reload';
+    protected static $defaultDescription = 'Reload entries';
+
     private EntryRepository $entryRepository;
     private UserRepository $userRepository;
     private EntityManagerInterface $entityManager;
@@ -38,8 +41,6 @@ class ReloadEntryCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('wallabag:entry:reload')
-            ->setDescription('Reload entries')
             ->setHelp('This command reload entries')
             ->addArgument('username', InputArgument::OPTIONAL, 'Reload entries only for the given user')
             ->addOption(

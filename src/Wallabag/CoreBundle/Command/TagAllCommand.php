@@ -15,6 +15,9 @@ use Wallabag\CoreBundle\Repository\UserRepository;
 
 class TagAllCommand extends Command
 {
+    protected static $defaultName = 'wallabag:tag:all';
+    protected static $defaultDescription = 'Tag all entries using the tagging rules.';
+
     private EntityManagerInterface $entityManager;
     private RuleBasedTagger $ruleBasedTagger;
     private UserRepository $userRepository;
@@ -31,8 +34,6 @@ class TagAllCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('wallabag:tag:all')
-            ->setDescription('Tag all entries using the tagging rules.')
             ->addArgument(
                 'username',
                 InputArgument::REQUIRED,

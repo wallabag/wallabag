@@ -12,6 +12,9 @@ use Wallabag\CoreBundle\Repository\UserRepository;
 
 class ListUserCommand extends Command
 {
+    protected static $defaultName = 'wallabag:user:list';
+    protected static $defaultDescription = 'List all users';
+
     private UserRepository $userRepository;
 
     public function __construct(UserRepository $userRepository)
@@ -24,8 +27,6 @@ class ListUserCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('wallabag:user:list')
-            ->setDescription('List all users')
             ->setHelp('This command list all existing users')
             ->addArgument('search', InputArgument::OPTIONAL, 'Filter list by given search term')
             ->addOption('limit', 'l', InputOption::VALUE_REQUIRED, 'Max number of displayed users', 100)
