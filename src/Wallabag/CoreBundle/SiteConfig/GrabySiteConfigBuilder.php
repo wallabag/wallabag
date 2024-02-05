@@ -1,9 +1,7 @@
 <?php
 
-namespace Wallabag\CoreBundle\GuzzleSiteAuthenticator;
+namespace Wallabag\CoreBundle\SiteConfig;
 
-use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfig;
-use BD\GuzzleSiteAuthenticator\SiteConfig\SiteConfigBuilder;
 use Graby\SiteConfig\ConfigBuilder;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;

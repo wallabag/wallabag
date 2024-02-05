@@ -34,7 +34,7 @@ services:
 
     Wallabag\CoreBundle\:
         resource: '../../src/Wallabag/CoreBundle/*'
-        exclude: ['../../src/Wallabag/CoreBundle/{Consumer,Controller,Entity,DataFixtures,Redis}', '../../src/Wallabag/CoreBundle/Event/*Event.php']
+        exclude: ['../../src/Wallabag/CoreBundle/{Consumer,Controller,Entity,ExpressionLanguage,DataFixtures,Redis}', '../../src/Wallabag/CoreBundle/Event/*Event.php']
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -191,20 +191,21 @@ services:
     wallabag_core.http_client:
         alias: 'httplug.client.wallabag_core'
 
-    Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder:
+    Wallabag\CoreBundle\SiteConfig\GrabySiteConfigBuilder:
         tags:
             - { name: monolog.logger, channel: graby }
 
     # service alias override
-    bd_guzzle_site_authenticator.site_config_builder:
-        alias: Wallabag\CoreBundle\GuzzleSiteAuthenticator\GrabySiteConfigBuilder
+    Wallabag\CoreBundle\SiteConfig\SiteConfigBuilder:
+        alias: Wallabag\CoreBundle\SiteConfig\GrabySiteConfigBuilder
 
     GuzzleHttp\Cookie\CookieJar:
         alias: 'Wallabag\CoreBundle\Helper\FileCookieJar'
 
     Wallabag\CoreBundle\Helper\HttpClientFactory:
         calls:
-            - ["addSubscriber", ["@bd_guzzle_site_authenticator.authenticator_subscriber"]]
+            - ['addSubscriber', ['@Wallabag\CoreBundle\Guzzle\AuthenticatorSubscriber']]
+            - ['addSubscriber', ['@Wallabag\CoreBundle\Guzzle\FixupMondeDiplomatiqueUriSubscriber']]
 
     RulerZ\RulerZ:
         alias: rulerz
