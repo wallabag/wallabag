@@ -1483,16 +1483,16 @@
         },
         {
             "name": "doctrine/lexer",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/lexer.git",
-                "reference": "39ab8fcf5a51ce4b85ca97c7a7d033eb12831124"
+                "reference": "861c870e8b75f7c8f69c146c7f89cc1c0f1b49b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/lexer/zipball/39ab8fcf5a51ce4b85ca97c7a7d033eb12831124",
-                "reference": "39ab8fcf5a51ce4b85ca97c7a7d033eb12831124",
+                "url": "https://api.github.com/repos/doctrine/lexer/zipball/861c870e8b75f7c8f69c146c7f89cc1c0f1b49b6",
+                "reference": "861c870e8b75f7c8f69c146c7f89cc1c0f1b49b6",
                 "shasum": ""
             },
             "require": {
@@ -1500,11 +1500,11 @@
                 "php": "^7.1 || ^8.0"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^9 || ^10",
+                "doctrine/coding-standard": "^9 || ^12",
                 "phpstan/phpstan": "^1.3",
-                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5",
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.6",
                 "psalm/plugin-phpunit": "^0.18.3",
-                "vimeo/psalm": "^4.11 || ^5.0"
+                "vimeo/psalm": "^4.11 || ^5.21"
             },
             "type": "library",
             "autoload": {
@@ -1541,7 +1541,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/lexer/issues",
-                "source": "https://github.com/doctrine/lexer/tree/2.1.0"
+                "source": "https://github.com/doctrine/lexer/tree/2.1.1"
             },
             "funding": [
                 {
@@ -1557,7 +1557,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-14T08:49:07+00:00"
+            "time": "2024-02-05T11:35:39+00:00"
         },
         {
             "name": "doctrine/migrations",
@@ -5766,16 +5766,16 @@
         },
         {
             "name": "nelmio/api-doc-bundle",
-            "version": "v4.19.2",
+            "version": "v4.19.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/NelmioApiDocBundle.git",
-                "reference": "5a5049dd00ce69b7b04c1485f3f41ec58ff7ec3b"
+                "reference": "daadb0b567c637d737f58fd25da0b4db2321560d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/5a5049dd00ce69b7b04c1485f3f41ec58ff7ec3b",
-                "reference": "5a5049dd00ce69b7b04c1485f3f41ec58ff7ec3b",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/daadb0b567c637d737f58fd25da0b4db2321560d",
+                "reference": "daadb0b567c637d737f58fd25da0b4db2321560d",
                 "shasum": ""
             },
             "require": {
@@ -5870,9 +5870,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nelmio/NelmioApiDocBundle/issues",
-                "source": "https://github.com/nelmio/NelmioApiDocBundle/tree/v4.19.2"
+                "source": "https://github.com/nelmio/NelmioApiDocBundle/tree/v4.19.3"
             },
-            "time": "2024-01-30T09:05:50+00:00"
+            "time": "2024-02-07T13:21:48+00:00"
         },
         {
             "name": "nelmio/cors-bundle",
@@ -15513,16 +15513,16 @@
         },
         {
             "name": "zircote/swagger-php",
-            "version": "4.8.3",
+            "version": "4.8.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zircote/swagger-php.git",
-                "reference": "598958d8a83cfbd44ba36388b2f9ed69e8b86ed4"
+                "reference": "bdee7f5a9216ce103ba2c953c1c43c4a3e139e4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zircote/swagger-php/zipball/598958d8a83cfbd44ba36388b2f9ed69e8b86ed4",
-                "reference": "598958d8a83cfbd44ba36388b2f9ed69e8b86ed4",
+                "url": "https://api.github.com/repos/zircote/swagger-php/zipball/bdee7f5a9216ce103ba2c953c1c43c4a3e139e4c",
+                "reference": "bdee7f5a9216ce103ba2c953c1c43c4a3e139e4c",
                 "shasum": ""
             },
             "require": {
@@ -15536,7 +15536,7 @@
             "require-dev": {
                 "composer/package-versions-deprecated": "^1.11",
                 "doctrine/annotations": "^1.7 || ^2.0",
-                "friendsofphp/php-cs-fixer": "^2.17 || ^3.0",
+                "friendsofphp/php-cs-fixer": "^2.17 || ^3.47.1",
                 "phpstan/phpstan": "^1.6",
                 "phpunit/phpunit": ">=8",
                 "vimeo/psalm": "^4.23"
@@ -15588,9 +15588,9 @@
             ],
             "support": {
                 "issues": "https://github.com/zircote/swagger-php/issues",
-                "source": "https://github.com/zircote/swagger-php/tree/4.8.3"
+                "source": "https://github.com/zircote/swagger-php/tree/4.8.4"
             },
-            "time": "2024-01-07T22:33:09+00:00"
+            "time": "2024-02-04T21:16:47+00:00"
         }
     ],
     "packages-dev": [
