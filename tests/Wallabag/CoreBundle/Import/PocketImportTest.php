@@ -4,8 +4,6 @@ namespace Tests\Wallabag\CoreBundle\Import;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\UnitOfWork;
-use GuzzleHttp\Psr7\Response;
-use Http\Mock\Client as HttpMockClient;
 use M6Web\Component\RedisMock\RedisMockFactory;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
@@ -13,6 +11,8 @@ use PHPUnit\Framework\TestCase;
 use Predis\Client;
 use Simpleue\Queue\RedisQueue;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\HttpClient\MockHttpClient;
+use Symfony\Component\HttpClient\Response\MockResponse;
 use Wallabag\CoreBundle\Entity\Config;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\User;
@@ -43,11 +43,10 @@ class PocketImportTest extends TestCase
 
     public function testOAuthRequest()
     {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], json_encode(['code' => 'wunderbar_code'])));
+        $mockHttpClient = new MockHttpClient([new MockResponse(json_encode(['code' => 'wunderbar_code']), ['response_headers' => ['Content-Type: application/json']])]);
 
         $pocketImport = $this->getPocketImport();
-        $pocketImport->setClient($httpMockClient);
+        $pocketImport->setClient($mockHttpClient);
 
         $code = $pocketImport->getRequestToken('http://0.0.0.0/redirect');
 
@@ -56,11 +55,10 @@ class PocketImportTest extends TestCase
 
     public function testOAuthRequestBadResponse()
     {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(403));
+        $mockHttpClient = new MockHttpClient([new MockResponse('', ['http_code' => 403])]);
 
         $pocketImport = $this->getPocketImport();
-        $pocketImport->setClient($httpMockClient);
+        $pocketImport->setClient($mockHttpClient);
 
         $code = $pocketImport->getRequestToken('http://0.0.0.0/redirect');
 
@@ -73,11 +71,10 @@ class PocketImportTest extends TestCase
 
     public function testOAuthAuthorize()
     {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], json_encode(['access_token' => 'wunderbar_token'])));
+        $mockHttpClient = new MockHttpClient([new MockResponse(json_encode(['access_token' => 'wunderbar_token']), ['response_headers' => ['Content-Type: application/json']])]);
 
         $pocketImport = $this->getPocketImport();
-        $pocketImport->setClient($httpMockClient);
+        $pocketImport->setClient($mockHttpClient);
 
         $res = $pocketImport->authorize('wunderbar_code');
 
@@ -87,11 +84,10 @@ class PocketImportTest extends TestCase
 
     public function testOAuthAuthorizeBadResponse()
     {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(403));
+        $mockHttpClient = new MockHttpClient([new MockResponse('', ['http_code' => 403])]);
 
         $pocketImport = $this->getPocketImport();
-        $pocketImport->setClient($httpMockClient);
+        $pocketImport->setClient($mockHttpClient);
 
         $res = $pocketImport->authorize('wunderbar_code');
 
@@ -107,9 +103,9 @@ class PocketImportTest extends TestCase
      */
     public function testImport()
     {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], json_encode(['access_token' => 'wunderbar_token'])));
-        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], <<<'JSON'
+        $mockHttpClient = new MockHttpClient([
+            new MockResponse(json_encode(['access_token' => 'wunderbar_token']), ['response_headers' => ['Content-Type: application/json']]),
+            new MockResponse(<<<'JSON'
             {
                 "status": 1,
                 "list": {
@@ -190,7 +186,8 @@ class PocketImportTest extends TestCase
                 }
             }
 JSON
-        ));
+                , ['response_headers' => ['Content-Type: application/json']]),
+        ]);
 
         $pocketImport = $this->getPocketImport('ConsumerKey', 1);
 
@@ -221,7 +218,7 @@ JSON
             ->method('updateEntry')
             ->willReturn($entry);
 
-        $pocketImport->setClient($httpMockClient);
+        $pocketImport->setClient($mockHttpClient);
         $pocketImport->authorize('wunderbar_code');
 
         $res = $pocketImport->import();
@@ -235,9 +232,9 @@ JSON
      */
     public function testImportAndMarkAllAsRead()
     {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], json_encode(['access_token' => 'wunderbar_token'])));
-        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], <<<'JSON'
+        $mockHttpClient = new MockHttpClient([
+            new MockResponse(json_encode(['access_token' => 'wunderbar_token']), ['response_headers' => ['Content-Type: application/json']]),
+            new MockResponse(<<<'JSON'
             {
                 "status": 1,
                 "list": {
@@ -280,7 +277,8 @@ JSON
                 }
             }
 JSON
-        ));
+                , ['response_headers' => ['Content-Type: application/json']]),
+        ]);
 
         $pocketImport = $this->getPocketImport('ConsumerKey', 2);
 
@@ -312,7 +310,7 @@ JSON
             ->method('updateEntry')
             ->willReturn($entry);
 
-        $pocketImport->setClient($httpMockClient);
+        $pocketImport->setClient($mockHttpClient);
         $pocketImport->authorize('wunderbar_code');
 
         $res = $pocketImport->setMarkAsRead(true)->import();
@@ -326,8 +324,6 @@ JSON
      */
     public function testImportWithRabbit()
     {
-        $httpMockClient = new HttpMockClient();
-
         $body = <<<'JSON'
 {
     "item_id": "229279689",
@@ -351,8 +347,9 @@ JSON
 }
 JSON;
 
-        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], json_encode(['access_token' => 'wunderbar_token'])));
-        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], <<<JSON
+        $mockHttpClient = new MockHttpClient([
+            new MockResponse(json_encode(['access_token' => 'wunderbar_token']), ['response_headers' => ['Content-Type: application/json']]),
+            new MockResponse(<<<JSON
             {
                 "status": 1,
                 "list": {
@@ -360,7 +357,8 @@ JSON;
                 }
             }
 JSON
-        ));
+                , ['response_headers' => ['Content-Type: application/json']]),
+        ]);
 
         $pocketImport = $this->getPocketImport();
 
@@ -394,7 +392,7 @@ JSON
             ->method('publish')
             ->with(json_encode($bodyAsArray));
 
-        $pocketImport->setClient($httpMockClient);
+        $pocketImport->setClient($mockHttpClient);
         $pocketImport->setProducer($producer);
         $pocketImport->authorize('wunderbar_code');
 
@@ -409,8 +407,6 @@ JSON
      */
     public function testImportWithRedis()
     {
-        $httpMockClient = new HttpMockClient();
-
         $body = <<<'JSON'
 {
     "item_id": "229279689",
@@ -434,8 +430,9 @@ JSON
 }
 JSON;
 
-        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], json_encode(['access_token' => 'wunderbar_token'])));
-        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], <<<JSON
+        $mockHttpClient = new MockHttpClient([
+            new MockResponse(json_encode(['access_token' => 'wunderbar_token']), ['response_headers' => ['Content-Type: application/json']]),
+            new MockResponse(<<<JSON
             {
                 "status": 1,
                 "list": {
@@ -443,7 +440,8 @@ JSON;
                 }
             }
 JSON
-        ));
+                , ['response_headers' => ['Content-Type: application/json']]),
+        ]);
 
         $pocketImport = $this->getPocketImport();
 
@@ -470,7 +468,7 @@ JSON
         $queue = new RedisQueue($redisMock, 'pocket');
         $producer = new Producer($queue);
 
-        $pocketImport->setClient($httpMockClient);
+        $pocketImport->setClient($mockHttpClient);
         $pocketImport->setProducer($producer);
         $pocketImport->authorize('wunderbar_code');
 
@@ -484,13 +482,13 @@ JSON
 
     public function testImportBadResponse()
     {
-        $httpMockClient = new HttpMockClient();
-
-        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], json_encode(['access_token' => 'wunderbar_token'])));
-        $httpMockClient->addResponse(new Response(403));
+        $mockHttpClient = new MockHttpClient([
+            new MockResponse(json_encode(['access_token' => 'wunderbar_token']), ['response_headers' => ['Content-Type: application/json']]),
+            new MockResponse('', ['http_code' => 403]),
+        ]);
 
         $pocketImport = $this->getPocketImport();
-        $pocketImport->setClient($httpMockClient);
+        $pocketImport->setClient($mockHttpClient);
         $pocketImport->authorize('wunderbar_code');
 
         $res = $pocketImport->import();
@@ -504,10 +502,9 @@ JSON
 
     public function testImportWithExceptionFromGraby()
     {
-        $httpMockClient = new HttpMockClient();
-
-        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], json_encode(['access_token' => 'wunderbar_token'])));
-        $httpMockClient->addResponse(new Response(200, ['Content-Type' => 'application/json'], <<<'JSON'
+        $mockHttpClient = new MockHttpClient([
+            new MockResponse(json_encode(['access_token' => 'wunderbar_token']), ['response_headers' => ['Content-Type: application/json']]),
+            new MockResponse(<<<'JSON'
             {
                 "status": 1,
                 "list": {
@@ -520,7 +517,8 @@ JSON
             }
 
 JSON
-        ));
+                , ['response_headers' => ['Content-Type: application/json']]),
+        ]);
 
         $pocketImport = $this->getPocketImport('ConsumerKey', 1);
 
@@ -544,7 +542,7 @@ JSON
             ->method('updateEntry')
             ->will($this->throwException(new \Exception()));
 
-        $pocketImport->setClient($httpMockClient);
+        $pocketImport->setClient($mockHttpClient);
         $pocketImport->authorize('wunderbar_code');
 
         $res = $pocketImport->import();

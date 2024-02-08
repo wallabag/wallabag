@@ -2,22 +2,16 @@
 
 namespace Wallabag\CoreBundle\Import;
 
-use Http\Client\Common\HttpMethodsClient;
-use Http\Client\Common\Plugin\ErrorPlugin;
-use Http\Client\Common\PluginClient;
-use Http\Client\Exception\RequestException;
-use Http\Discovery\Psr17FactoryDiscovery;
-use Psr\Http\Client\ClientInterface;
-use Psr\Http\Message\RequestFactoryInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\StreamFactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 
 class PocketImport extends AbstractImport
 {
     public const NB_ELEMENTS = 5000;
     /**
-     * @var HttpMethodsClient
+     * @var HttpClientInterface
      */
     private $client;
     private $accessToken;
@@ -57,17 +51,19 @@ class PocketImport extends AbstractImport
     public function getRequestToken($redirectUri)
     {
         try {
-            $response = $this->client->post('https://getpocket.com/v3/oauth/request', [], json_encode([
-                'consumer_key' => $this->user->getConfig()->getPocketConsumerKey(),
-                'redirect_uri' => $redirectUri,
-            ]));
-        } catch (RequestException $e) {
+            $response = $this->client->request(Request::METHOD_POST, 'https://getpocket.com/v3/oauth/request', [
+                'json' => [
+                    'consumer_key' => $this->user->getConfig()->getPocketConsumerKey(),
+                    'redirect_uri' => $redirectUri,
+                ],
+            ]);
+
+            return $response->toArray()['code'];
+        } catch (ExceptionInterface $e) {
             $this->logger->error(sprintf('PocketImport: Failed to request token: %s', $e->getMessage()), ['exception' => $e]);
 
             return false;
         }
-
-        return $this->jsonDecode($response)['code'];
     }
 
     /**
@@ -81,19 +77,21 @@ class PocketImport extends AbstractImport
     public function authorize($code)
     {
         try {
-            $response = $this->client->post('https://getpocket.com/v3/oauth/authorize', [], json_encode([
-                'consumer_key' => $this->user->getConfig()->getPocketConsumerKey(),
-                'code' => $code,
-            ]));
-        } catch (RequestException $e) {
+            $response = $this->client->request(Request::METHOD_POST, 'https://getpocket.com/v3/oauth/authorize', [
+                'json' => [
+                    'consumer_key' => $this->user->getConfig()->getPocketConsumerKey(),
+                    'code' => $code,
+                ],
+            ]);
+
+            $this->accessToken = $response->toArray()['access_token'];
+
+            return true;
+        } catch (ExceptionInterface $e) {
             $this->logger->error(sprintf('PocketImport: Failed to authorize client: %s', $e->getMessage()), ['exception' => $e]);
 
             return false;
         }
-
-        $this->accessToken = $this->jsonDecode($response)['access_token'];
-
-        return true;
     }
 
     public function import($offset = 0)
@@ -101,49 +99,51 @@ class PocketImport extends AbstractImport
         static $run = 0;
 
         try {
-            $response = $this->client->post('https://getpocket.com/v3/get', [], json_encode([
-                'consumer_key' => $this->user->getConfig()->getPocketConsumerKey(),
-                'access_token' => $this->accessToken,
-                'detailType' => 'complete',
-                'state' => 'all',
-                'sort' => 'newest',
-                'count' => self::NB_ELEMENTS,
-                'offset' => $offset,
-            ]));
-        } catch (RequestException $e) {
+            $response = $this->client->request(Request::METHOD_POST, 'https://getpocket.com/v3/get', [
+                'json' => [
+                    'consumer_key' => $this->user->getConfig()->getPocketConsumerKey(),
+                    'access_token' => $this->accessToken,
+                    'detailType' => 'complete',
+                    'state' => 'all',
+                    'sort' => 'newest',
+                    'count' => self::NB_ELEMENTS,
+                    'offset' => $offset,
+                ],
+            ]);
+
+            $entries = $response->toArray();
+
+            if ($this->producer) {
+                $this->parseEntriesForProducer($entries['list']);
+            } else {
+                $this->parseEntries($entries['list']);
+            }
+
+            // if we retrieve exactly the amount of items requested it means we can get more
+            // re-call import and offset item by the amount previous received:
+            //  - first call get 5k offset 0
+            //  - second call get 5k offset 5k
+            //  - and so on
+            if (self::NB_ELEMENTS === \count($entries['list'])) {
+                ++$run;
+
+                return $this->import(self::NB_ELEMENTS * $run);
+            }
+
+            return true;
+        } catch (ExceptionInterface $e) {
             $this->logger->error(sprintf('PocketImport: Failed to import: %s', $e->getMessage()), ['exception' => $e]);
 
             return false;
         }
-
-        $entries = $this->jsonDecode($response);
-
-        if ($this->producer) {
-            $this->parseEntriesForProducer($entries['list']);
-        } else {
-            $this->parseEntries($entries['list']);
-        }
-
-        // if we retrieve exactly the amount of items requested it means we can get more
-        // re-call import and offset item by the amount previous received:
-        //  - first call get 5k offset 0
-        //  - second call get 5k offset 5k
-        //  - and so on
-        if (self::NB_ELEMENTS === \count($entries['list'])) {
-            ++$run;
-
-            return $this->import(self::NB_ELEMENTS * $run);
-        }
-
-        return true;
     }
 
     /**
      * Set the Http client.
      */
-    public function setClient(ClientInterface $client, ?RequestFactoryInterface $requestFactory = null, ?StreamFactoryInterface $streamFactory = null)
+    public function setClient(HttpClientInterface $pocketClient)
     {
-        $this->client = new HttpMethodsClient(new PluginClient($client, [new ErrorPlugin()]), $requestFactory ?: Psr17FactoryDiscovery::findRequestFactory(), $streamFactory ?: Psr17FactoryDiscovery::findStreamFactory());
+        $this->client = $pocketClient;
     }
 
     public function validateEntry(array $importedEntry)
@@ -221,16 +221,5 @@ class PocketImport extends AbstractImport
         $importedEntry['status'] = '1';
 
         return $importedEntry;
-    }
-
-    protected function jsonDecode(ResponseInterface $response)
-    {
-        $data = json_decode((string) $response->getBody(), true);
-
-        if (\JSON_ERROR_NONE !== json_last_error()) {
-            throw new \InvalidArgumentException('Unable to parse JSON data: ' . json_last_error_msg());
-        }
-
-        return $data;
     }
 }
