@@ -36,6 +36,10 @@ framework:
     assets: ~
     mailer:
         dsn: "%mailer_dsn%"
+    http_client:
+        scoped_clients:
+            download_images.client:
+                scope: '.*'
 
 # Twig Configuration
 twig:
@@ -420,9 +424,6 @@ httplug:
             config:
                 defaults:
                     timeout: 10
-            plugins: ['httplug.plugin.logger']
-        wallabag_core.entry.download_images:
-            factory: 'httplug.factory.auto'
             plugins: ['httplug.plugin.logger']
         wallabag_core.pocket.client:
             factory: 'httplug.factory.auto'

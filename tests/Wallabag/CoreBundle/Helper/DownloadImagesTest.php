@@ -2,11 +2,11 @@
 
 namespace Tests\Wallabag\CoreBundle\Helper;
 
-use GuzzleHttp\Psr7\Response;
-use Http\Mock\Client as HttpMockClient;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpClient\MockHttpClient;
+use Symfony\Component\HttpClient\Response\MockResponse;
 use Wallabag\CoreBundle\Helper\DownloadImages;
 
 class DownloadImagesTest extends TestCase
@@ -30,13 +30,12 @@ class DownloadImagesTest extends TestCase
      */
     public function testProcessHtml($html, $url)
     {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/png'], file_get_contents(__DIR__ . '/../fixtures/unnamed.png')));
+        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: image/png']])]);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $download = new DownloadImages($mockHttpClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
 
         $res = $download->processHtml(123, $html, $url);
 
@@ -46,13 +45,12 @@ class DownloadImagesTest extends TestCase
 
     public function testProcessHtmlWithBadImage()
     {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(200, ['content-type' => 'application/json'], ''));
+        $mockHttpClient = new MockHttpClient([new MockResponse('', ['response_headers' => ['Content-Type: application/json']])]);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $download = new DownloadImages($mockHttpClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
         $res = $download->processHtml(123, '<div><img src="http://i.imgur.com/T9qgcHc.jpg" /></div>', 'http://imgur.com/gallery/WxtWY');
 
         $this->assertStringContainsString('http://i.imgur.com/T9qgcHc.jpg', $res, 'Image were not replace because of content-type');
@@ -74,13 +72,12 @@ class DownloadImagesTest extends TestCase
      */
     public function testProcessSingleImage($header, $extension)
     {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(200, ['content-type' => $header], file_get_contents(__DIR__ . '/../fixtures/unnamed.png')));
+        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: ' . $header]])]);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $download = new DownloadImages($mockHttpClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
         $res = $download->processSingleImage(123, 'T9qgcHc.jpg', 'http://imgur.com/gallery/WxtWY');
 
         $this->assertStringContainsString('/assets/images/9/b/9b0ead26/ebe60399.' . $extension, $res);
@@ -88,13 +85,12 @@ class DownloadImagesTest extends TestCase
 
     public function testProcessSingleImageWithBadUrl()
     {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(404, []));
+        $mockHttpClient = new MockHttpClient([new MockResponse('', ['http_code' => 404])]);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $download = new DownloadImages($mockHttpClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
         $res = $download->processSingleImage(123, 'T9qgcHc.jpg', 'http://imgur.com/gallery/WxtWY');
 
         $this->assertFalse($res, 'Image can not be found, so it will not be replaced');
@@ -102,13 +98,12 @@ class DownloadImagesTest extends TestCase
 
     public function testProcessSingleImageWithBadImage()
     {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/png'], ''));
+        $mockHttpClient = new MockHttpClient([new MockResponse('', ['response_headers' => ['Content-Type: image/png']])]);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $download = new DownloadImages($mockHttpClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
         $res = $download->processSingleImage(123, 'http://i.imgur.com/T9qgcHc.jpg', 'http://imgur.com/gallery/WxtWY');
 
         $this->assertFalse($res, 'Image can not be loaded, so it will not be replaced');
@@ -116,13 +111,12 @@ class DownloadImagesTest extends TestCase
 
     public function testProcessSingleImageFailAbsolute()
     {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/png'], file_get_contents(__DIR__ . '/../fixtures/unnamed.png')));
+        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: image/png']])]);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $download = new DownloadImages($mockHttpClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
         $res = $download->processSingleImage(123, '/i.imgur.com/T9qgcHc.jpg', 'imgur.com/gallery/WxtWY');
 
         $this->assertFalse($res, 'Absolute image can not be determined, so it will not be replaced');
@@ -130,13 +124,12 @@ class DownloadImagesTest extends TestCase
 
     public function testProcessRealImage()
     {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(200, ['content-type' => null], file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')));
+        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg'))]);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $download = new DownloadImages($mockHttpClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
 
         $res = $download->processSingleImage(
             123,
@@ -150,15 +143,16 @@ class DownloadImagesTest extends TestCase
 
     public function testProcessImageWithSrcset()
     {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(200, ['content-type' => null], file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')));
-        $httpMockClient->addResponse(new Response(200, ['content-type' => null], file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')));
-        $httpMockClient->addResponse(new Response(200, ['content-type' => null], file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')));
+        $mockHttpClient = new MockHttpClient([
+            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')),
+            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')),
+            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')),
+        ]);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $download = new DownloadImages($mockHttpClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
         $res = $download->processHtml(123, '<p><img class="alignnone wp-image-1153" src="http://piketty.blog.lemonde.fr/files/2017/10/F1FR-530x375.jpg" alt="" width="628" height="444" srcset="http://piketty.blog.lemonde.fr/files/2017/10/F1FR-530x375.jpg 530w, http://piketty.blog.lemonde.fr/files/2017/10/F1FR-768x543.jpg 768w, http://piketty.blog.lemonde.fr/files/2017/10/F1FR-900x636.jpg 900w" sizes="(max-width: 628px) 100vw, 628px" /></p>', 'http://piketty.blog.lemonde.fr/2017/10/12/budget-2018-la-jeunesse-sacrifiee/');
 
         $this->assertStringNotContainsString('http://piketty.blog.lemonde.fr/', $res, 'Image srcset attribute were not replaced');
@@ -166,15 +160,16 @@ class DownloadImagesTest extends TestCase
 
     public function testProcessImageWithTrickySrcset()
     {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(200, ['content-type' => null], file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')));
-        $httpMockClient->addResponse(new Response(200, ['content-type' => null], file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')));
-        $httpMockClient->addResponse(new Response(200, ['content-type' => null], file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')));
+        $mockHttpClient = new MockHttpClient([
+            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')),
+            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')),
+            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')),
+        ]);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $download = new DownloadImages($mockHttpClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
         $res = $download->processHtml(123, '<figure id="post-257260" class="align-none media-257260"><img src="https://cdn.css-tricks.com/wp-content/uploads/2017/08/the-critical-request.png" srcset="https://res.cloudinary.com/css-tricks/image/upload/c_scale,w_1000,f_auto,q_auto/v1501594717/the-critical-request_bqdfaa.png 1000w, https://res.cloudinary.com/css-tricks/image/upload/c_scale,w_200,f_auto,q_auto/v1501594717/the-critical-request_bqdfaa.png 200w" sizes="(min-width: 1850px) calc( (100vw - 555px) / 3 )
        (min-width: 1251px) calc( (100vw - 530px) / 2 )
        (min-width: 1086px) calc(100vw - 480px)
@@ -186,15 +181,16 @@ class DownloadImagesTest extends TestCase
 
     public function testProcessImageWithNumericHtmlEntitySeparator()
     {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/jpeg'], file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')));
-        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/jpeg'], file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')));
-        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/jpeg'], file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')));
+        $mockHttpClient = new MockHttpClient([
+            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg'), ['response_headers' => ['Content-Type: image/jpeg']]),
+            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg'), ['response_headers' => ['Content-Type: image/jpeg']]),
+            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg'), ['response_headers' => ['Content-Type: image/jpeg']]),
+        ]);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $download = new DownloadImages($mockHttpClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
         // wordpress.com sites using &#038; as an &amp; alternative
         $res = $download->processHtml(123, '<img srcset="https://example.com/20191204_133626-scaled.jpg?strip=info&#038;w=600&#038;ssl=1 600w,https://example.com/20191204_133626-scaled.jpg?strip=info&#038;w=900&#038;ssl=1 900w" src="https://example.com/20191204_133626-scaled.jpg?ssl=1"/>', 'https://example.com/about/');
 
@@ -203,13 +199,12 @@ class DownloadImagesTest extends TestCase
 
     public function testProcessImageWithNullPath()
     {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(200, ['content-type' => null], file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg')));
+        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../fixtures/image-no-content-type.jpg'))]);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $download = new DownloadImages($mockHttpClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
 
         $res = $download->processSingleImage(
             123,
@@ -221,14 +216,15 @@ class DownloadImagesTest extends TestCase
 
     public function testEnsureOnlyFirstOccurrenceIsReplaced()
     {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/png'], file_get_contents(__DIR__ . '/../fixtures/unnamed.png')));
-        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/png'], file_get_contents(__DIR__ . '/../fixtures/unnamed.png')));
+        $mockHttpClient = new MockHttpClient([
+            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: image/png']]),
+            new MockResponse(file_get_contents(__DIR__ . '/../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: image/png']]),
+        ]);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $download = new DownloadImages($mockHttpClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
 
         $html = '<img src="https://images.wsj.net/im-410981?width=860&height=573" srcset="https://images.wsj.net/im-410981?width=860&height=573&pixel_ratio=1.5 1290w" height="573" width="860" alt="" referrerpolicy="no-referrer">';
         $url = 'https://www.wsj.com/articles/5-interior-design-tips-to-max-out-your-basement-space-11633435201';
@@ -240,13 +236,12 @@ class DownloadImagesTest extends TestCase
 
     public function testProcessSingleImageWithSvg()
     {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/svg+xml'], file_get_contents(__DIR__ . '/../fixtures/modal-content.svg')));
+        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../fixtures/modal-content.svg'), ['response_headers' => ['Content-Type: image/svg+xml']])]);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $download = new DownloadImages($mockHttpClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
         $res = $download->processSingleImage(123, 'modal-content.svg', 'http://imgur.com/gallery/WxtWY');
 
         $this->assertStringContainsString('/assets/images/9/b/9b0ead26/400e29f9.svg', $res);
@@ -254,30 +249,14 @@ class DownloadImagesTest extends TestCase
 
     public function testProcessSingleImageWithBadSvg()
     {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/svg+xml'], file_get_contents(__DIR__ . '/../fixtures/unnamed.png')));
+        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../fixtures/unnamed.png'), ['response_headers' => ['Content-Type: image/svg+xml']])]);
 
         $logHandler = new TestHandler();
         $logger = new Logger('test', [$logHandler]);
 
-        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
+        $download = new DownloadImages($mockHttpClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
         $res = $download->processSingleImage(123, 'modal-content.svg', 'http://imgur.com/gallery/WxtWY');
 
         $this->assertFalse($res);
-    }
-
-    public function testFollowRedirection()
-    {
-        $httpMockClient = new HttpMockClient();
-        $httpMockClient->addResponse(new Response(301, ['content-type' => 'image/png', 'location' => '/final-path.png']));
-        $httpMockClient->addResponse(new Response(200, ['content-type' => 'image/png'], file_get_contents(__DIR__ . '/../fixtures/unnamed.png')));
-
-        $logHandler = new TestHandler();
-        $logger = new Logger('test', [$logHandler]);
-
-        $download = new DownloadImages($httpMockClient, sys_get_temp_dir() . '/wallabag_test', 'http://wallabag.io/', $logger);
-        $res = $download->processSingleImage(123, '', 'https://example.com/unnamed.png');
-
-        $this->assertStringContainsString('/assets/images/9/b/9b0ead26/66953334.png', $res, "Fetch client didn't follow the HTTP redirection");
     }
 }

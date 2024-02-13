@@ -5,19 +5,13 @@ namespace Wallabag\CoreBundle\Helper;
 use enshrined\svgSanitize\Sanitizer;
 use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\Psr7\UriResolver;
-use Http\Client\Common\HttpMethodsClient;
-use Http\Client\Common\Plugin\ErrorPlugin;
-use Http\Client\Common\Plugin\RedirectPlugin;
-use Http\Client\Common\PluginClient;
-use Http\Discovery\Psr17FactoryDiscovery;
-use Psr\Http\Client\ClientInterface;
-use Psr\Http\Message\RequestFactoryInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mime\MimeTypes;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class DownloadImages
 {
@@ -29,9 +23,9 @@ class DownloadImages
     private $mimeTypes;
     private $wallabagUrl;
 
-    public function __construct(ClientInterface $client, $baseFolder, $wallabagUrl, LoggerInterface $logger, RequestFactoryInterface $requestFactory = null, StreamFactoryInterface $streamFactory = null)
+    public function __construct(HttpClientInterface $downloadImagesClient, $baseFolder, $wallabagUrl, LoggerInterface $logger)
     {
-        $this->client = new HttpMethodsClient(new PluginClient($client, [new ErrorPlugin(), new RedirectPlugin()]), $requestFactory ?: Psr17FactoryDiscovery::findRequestFactory(), $streamFactory ?: Psr17FactoryDiscovery::findStreamFactory());
+        $this->client = $downloadImagesClient;
         $this->baseFolder = $baseFolder;
         $this->wallabagUrl = rtrim($wallabagUrl, '/');
         $this->logger = $logger;
@@ -137,7 +131,7 @@ class DownloadImages
         }
 
         try {
-            $res = $this->client->get($absolutePath);
+            $res = $this->client->request(Request::METHOD_GET, $absolutePath);
         } catch (\Exception $e) {
             $this->logger->error('DownloadImages: Can not retrieve image, skipping.', ['exception' => $e]);
 
@@ -159,7 +153,7 @@ class DownloadImages
                 $sanitizer = new Sanitizer();
                 $sanitizer->minify(true);
                 $sanitizer->removeRemoteReferences(true);
-                $cleanSVG = $sanitizer->sanitize((string) $res->getBody());
+                $cleanSVG = $sanitizer->sanitize($res->getContent());
 
                 // add an extra validation by checking about `<svg `
                 if (false === $cleanSVG || !str_contains($cleanSVG, '<svg ')) {
@@ -179,7 +173,7 @@ class DownloadImages
         }
 
         try {
-            $im = imagecreatefromstring((string) $res->getBody());
+            $im = imagecreatefromstring($res->getContent());
         } catch (\Exception $e) {
             $im = false;
         }
@@ -196,7 +190,7 @@ class DownloadImages
                 if (class_exists(\Imagick::class)) {
                     try {
                         $imagick = new \Imagick();
-                        $imagick->readImageBlob($res->getBody());
+                        $imagick->readImageBlob($res->getContent());
                         $imagick->setImageFormat('gif');
                         $imagick->writeImages($localPath, true);
                     } catch (\Exception $e) {
@@ -362,8 +356,12 @@ class DownloadImages
      */
     private function getExtensionFromResponse(ResponseInterface $res, $imagePath)
     {
-        $ext = current($this->mimeTypes->getExtensions(current($res->getHeader('content-type'))));
-        $this->logger->debug('DownloadImages: Checking extension', ['ext' => $ext, 'header' => $res->getHeader('content-type')]);
+        if (200 !== $res->getStatusCode()) {
+            return false;
+        }
+
+        $ext = current($this->mimeTypes->getExtensions(current($res->getHeaders()['content-type'] ?? [])));
+        $this->logger->debug('DownloadImages: Checking extension', ['ext' => $ext, 'header' => $res->getHeaders()['content-type'] ?? []]);
 
         // ok header doesn't have the extension, try a different way
         if (empty($ext)) {
@@ -373,7 +371,7 @@ class DownloadImages
                 'png' => "\x89\x50\x4e\x47\x0d\x0a",
                 'webp' => "\x52\x49\x46\x46",
             ];
-            $bytes = substr((string) $res->getBody(), 0, 8);
+            $bytes = substr($res->getContent(), 0, 8);
 
             foreach ($types as $type => $header) {
                 if (str_starts_with($bytes, $header)) {

@@ -258,9 +258,6 @@ services:
             $defaultSettings: '%wallabag_core.default_internal_settings%'
             $defaultIgnoreOriginInstanceRules: '%wallabag_core.default_ignore_origin_instance_rules%'
 
-    wallabag_core.entry.download_images.client:
-        alias: 'httplug.client.wallabag_core.entry.download_images'
-
     Wallabag\CoreBundle\Mailer\UserMailer:
         arguments:
             $parameters:
