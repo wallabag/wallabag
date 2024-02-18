@@ -1,0 +1,177 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ 'about.page_title'|trans }}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel settings">
+
+                <div class="row">
+                    <div class="tabs-container col s12">
+                        <ul class="tabs">
+                        <li class="tab col s12 m6 l3"><a class="active" href="#set1">{{ 'about.top_menu.who_behind_wallabag'|trans }}</a></li>
+                        <li class="tab col s12 m6 l3"><a href="#set2">{{ 'about.top_menu.getting_help'|trans }}</a></li>
+                        <li class="tab col s12 m6 l3"><a href="#set3">{{ 'about.top_menu.helping'|trans }}</a></li>
+                        <li class="tab col s12 m6 l3"><a href="#set4">{{ 'about.top_menu.third_party'|trans }}</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="set1" class="col s12">
+                        <dt>{{ 'about.who_behind_wallabag.developped_by'|trans }}</dt>
+                        <dd><a href="mailto:nicolas@loeuillet.org">Nicolas Lœuillet</a> — <a href="https://nicolas.loeuillet.org">{{ 'about.who_behind_wallabag.website'|trans }}</a></dd>
+                        <dd>Thomas Citharel — <a href="https://tcit.fr">{{ 'about.who_behind_wallabag.website'|trans }}</a></dd>
+                        <dd>Jérémy Benoist — <a href="https://www.j0k3r.net">{{ 'about.who_behind_wallabag.website'|trans }}</a></dd>
+                        <dd>Kevin Decherf — <a href="https://kdecherf.com/">{{ 'about.who_behind_wallabag.website'|trans }}</a></dd>
+                        <dt>{{ 'about.who_behind_wallabag.many_contributors'|trans|raw }}</dt>
+                        <dt>{{ 'about.who_behind_wallabag.project_website'|trans }}</dt>
+                        <dd><a href="https://www.wallabag.org">https://www.wallabag.org</a></dd>
+                        <dt>{{ 'about.who_behind_wallabag.license'|trans }}: <a href="https://en.wikipedia.org/wiki/MIT_License">MIT</a></dt>
+                        <dt>{{ 'about.who_behind_wallabag.version'|trans }}: {{ version }}</dt>
+                    </div>
+
+                    <div id="set2" class="col s12">
+                        <dl>
+                            <dt>{{ 'about.getting_help.documentation'|trans }}</dt>
+                            <dd><a href="https://doc.wallabag.org/en/">english</a></dd>
+                            <dd><a href="https://doc.wallabag.org/fr/">français</a></dd>
+                            <dd><a href="https://doc.wallabag.org/de/">deutsch</a></dd>
+                            <dd><a href="https://doc.wallabag.org/it/">italiano</a></dd>
+
+                            <dt>{{ 'about.getting_help.bug_reports'|trans }}</dt>
+                            <dd>{{ 'about.getting_help.support'|trans|raw }}</dd>
+                        </dl>
+                    </div>
+
+                    <div id="set3" class="col s12">
+                        <dl>
+                            <dt>{{ 'about.helping.description'|trans }} <a href="{{ paypal_url }}">{{ 'about.helping.by_paypal'|trans }}</a></dt>
+                        </dl>
+                    </div>
+
+                    <div id="set4" class="col s12">
+                        <p>{{ 'about.third_party.description'|trans }}</p>
+                        <table class="striped">
+                            <tr>
+                                <th>{{ 'about.third_party.package'|trans }}</th>
+                                <th>{{ 'about.third_party.license'|trans }}</th>
+                            </tr>
+                            <tr><td>behat/transliterator</td><td>Artistic 1.0</td></tr>
+                            <tr><td>CraueConfigBundle</td><td>MIT</td></tr>
+                            <tr><td>doctrine/annotations</td><td>MIT</td></tr>
+                            <tr><td>doctrine/cache</td><td>MIT</td></tr>
+                            <tr><td>doctrine/collections</td><td>MIT</td></tr>
+                            <tr><td>doctrine/common</td><td>MIT</td></tr>
+                            <tr><td>doctrine/dbal</td><td>MIT</td></tr>
+                            <tr><td>doctrine/doctrine-bundle</td><td>MIT</td></tr>
+                            <tr><td>doctrine/doctrine-cache-bundle</td><td>MIT</td></tr>
+                            <tr><td>doctrine/doctrine-migrations-bundle</td><td>MIT</td></tr>
+                            <tr><td>doctrine/inflector</td><td>MIT</td></tr>
+                            <tr><td>doctrine/instantiator</td><td>MIT</td></tr>
+                            <tr><td>doctrine/lexer</td><td>MIT</td></tr>
+                            <tr><td>doctrine/migrations</td><td>LGPL-2.1</td></tr>
+                            <tr><td>doctrine/orm</td><td>MIT</td></tr>
+                            <tr><td>friendsofsymfony/oauth-server-bundle</td><td>MIT</td></tr>
+                            <tr><td>friendsofsymfony/oauth2-php</td><td>MIT</td></tr>
+                            <tr><td>friendsofsymfony/rest-bundle</td><td>MIT</td></tr>
+                            <tr><td>friendsofsymfony/user-bundle</td><td>MIT</td></tr>
+                            <tr><td>gedmo/doctrine-extensions</td><td>MIT</td></tr>
+                            <tr><td>grandt/binstring</td><td>LGPL-2.1</td></tr>
+                            <tr><td>grandt/phpepub</td><td>LGPL-2.1</td></tr>
+                            <tr><td>grandt/phpresizegif</td><td>LGPL-2.1</td></tr>
+                            <tr><td>grandt/phpzipmerge</td><td>LGPL-2.1</td></tr>
+                            <tr><td>grandt/relativepath</td><td>LGPL-2.1</td></tr>
+                            <tr><td>guzzlehttp/guzzle</td><td>MIT</td></tr>
+                            <tr><td>guzzlehttp/ringphp</td><td>MIT</td></tr>
+                            <tr><td>guzzlehttp/streams</td><td>MIT</td></tr>
+                            <tr><td>hoa/compiler</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>hoa/consistency</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>hoa/event</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>hoa/exception</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>hoa/file</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>hoa/iterator</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>hoa/math</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>hoa/protocol</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>hoa/regex</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>hoa/ruler</td><td>BSD-3-Clausev
+                            <tr><td>hoa/stream</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>hoa/ustring</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>hoa/visitor</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>hoa/zformat</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>htmlawed/htmlawed</td><td>GPL-2.0+ or LGPL-3.0</td></tr>
+                            <tr><td>incenteev/composer-parameter-handler</td><td>MIT</td></tr>
+                            <tr><td>j0k3r/graby</td><td>MIT</td></tr>
+                            <tr><td>j0k3r/graby-site-config</td><td>Public domain</td></tr>
+                            <tr><td>j0k3r/php-readability</td><td>Apache-2.0</td></tr>
+                            <tr><td>j0k3r/safecurl</td><td>MIT</td></tr>
+                            <tr><td>jdorn/sql-formatter</td><td>MIT</td></tr>
+                            <tr><td>jms/metadata</td><td>Apache</td></tr>
+                            <tr><td>jms/parser-lib</td><td>Apache2</td></tr>
+                            <tr><td>jms/serializer</td><td>Apache2</td></tr>
+                            <tr><td>jms/serializer-bundle</td><td>Apache2</td></tr>
+                            <tr><td>kphoen/rulerz</td><td>MIT</td></tr>
+                            <tr><td>kphoen/rulerz-bundle</td><td>MIT</td></tr>
+                            <tr><td>kriswallsmith/assetic</td><td>MIT</td></tr>
+                            <tr><td>mgargano/simplehtmldom</td><td>MIT</td></tr>
+                            <tr><td>michelf/php-markdown</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>monolog/monolog</td><td>MIT</td></tr>
+                            <tr><td>neitanod/forceutf8</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>nelmio/api-doc-bundle</td><td>MIT</td></tr>
+                            <tr><td>nelmio/cors-bundle</td><td>MIT</td></tr>
+                            <tr><td>ocramius/proxy-manager</td><td>MIT</td></tr>
+                            <tr><td>pagerfanta/pagerfanta</td><td>MIT</td></tr>
+                            <tr><td>paragonie/random_compat</td><td>MIT</td></tr>
+                            <tr><td>phpcollection/phpcollection</td><td>Apache2</td></tr>
+                            <tr><td>phpoption/phpoption</td><td>Apache2</td></tr>
+                            <tr><td>phpzip/phpzip</td><td>LGPL-2.1</td></tr>
+                            <tr><td>psr/log</td><td>MIT</td></tr>
+                            <tr><td>react/promise</td><td>MIT</td></tr>
+                            <tr><td>scheb/two-factor-bundle</td><td>MIT</td></tr>
+                            <tr><td>sensio/framework-extra-bundle</td><td>MIT</td></tr>
+                            <tr><td>simplepie/simplepie</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>smalot/pdfparser</td><td>GPL-3.0</td></tr>
+                            <tr><td>spiriitlabs/form-filter-bundle</td><td>MIT</td></tr>
+                            <tr><td>sonata-project/google-authenticator</td><td>MIT</td></tr>
+                            <tr><td>stof/doctrine-extensions-bundle</td><td>MIT</td></tr>
+                            <tr><td>symfony/assetic-bundle</td><td>MIT</td></tr>
+                            <tr><td>symfony/monolog-bundle</td><td>MIT</td></tr>
+                            <tr><td>All of Symfony</td><td>MIT-licenced</td></tr>
+                            <tr><td>tecnickcom/tcpdf</td><td>LGPLv3</td></tr>
+                            <tr><td>twig/extensions</td><td>MIT</td></tr>
+                            <tr><td>twig/twig</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>willdurand/hateoas</td><td>MIT</td></tr>
+                            <tr><td>willdurand/hateoas-bundle</td><td>MIT</td></tr>
+                            <tr><td>willdurand/jsonp-callback-validator</td><td>MIT</td></tr>
+                            <tr><td>willdurand/negotiation</td><td>MIT</td></tr>
+                            <tr><td>zendframework/zend-code</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>zendframework/zend-eventmanager</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>doctrine/data-fixtures</td><td>MIT</td></tr>
+                            <tr><td>doctrine/doctrine-fixtures-bundle</td><td>MIT</td></tr>
+                            <tr><td>phpdocumentor/reflection-docblock</td><td>MIT</td></tr>
+                            <tr><td>phpspec/prophecy</td><td>MIT</td></tr>
+                            <tr><td>phpunit/php-code-coverage</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>phpunit/php-file-iterator</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>phpunit/php-text-template</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>phpunit/php-timer</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>phpunit/php-token-stream</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>phpunit/phpunit</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>phpunit/phpunit-mock-objects</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>sebastian/comparator</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>sebastian/diff</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>sebastian/environment</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>sebastian/exporter</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>sebastian/global-state</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>sebastian/recursion-context</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>sebastian/version</td><td>BSD-3-Clause</td></tr>
+                            <tr><td>sensio/generator-bundle</td><td>MIT</td></tr>
+                            <tr><td>symfony/phpunit-bridge</td><td>MIT</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

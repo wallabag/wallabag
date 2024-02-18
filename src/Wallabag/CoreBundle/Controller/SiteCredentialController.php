@@ -48,7 +48,7 @@ class SiteCredentialController extends AbstractController
 
         $credentials = $repository->findByUser($this->getUser());
 
-        return $this->render('@WallabagCore/SiteCredential/index.html.twig', [
+        return $this->render('SiteCredential/index.html.twig', [
             'credentials' => $credentials,
         ]);
     }
@@ -84,7 +84,7 @@ class SiteCredentialController extends AbstractController
             return $this->redirectToRoute('site_credentials_index');
         }
 
-        return $this->render('@WallabagCore/SiteCredential/new.html.twig', [
+        return $this->render('SiteCredential/new.html.twig', [
             'credential' => $credential,
             'form' => $form->createView(),
         ]);
@@ -122,7 +122,7 @@ class SiteCredentialController extends AbstractController
             return $this->redirectToRoute('site_credentials_index');
         }
 
-        return $this->render('@WallabagCore/SiteCredential/edit.html.twig', [
+        return $this->render('SiteCredential/edit.html.twig', [
             'credential' => $siteCredential,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

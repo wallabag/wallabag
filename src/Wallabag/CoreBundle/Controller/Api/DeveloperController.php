@@ -26,7 +26,7 @@ class DeveloperController extends AbstractController
     {
         $clients = $repo->findByUser($this->getUser()->getId());
 
-        return $this->render('@WallabagCore/Developer/index.html.twig', [
+        return $this->render('Developer/index.html.twig', [
             'clients' => $clients,
         ]);
     }
@@ -54,14 +54,14 @@ class DeveloperController extends AbstractController
                 $translator->trans('flashes.developer.notice.client_created', ['%name%' => $client->getName()])
             );
 
-            return $this->render('@WallabagCore/Developer/client_parameters.html.twig', [
+            return $this->render('Developer/client_parameters.html.twig', [
                 'client_id' => $client->getPublicId(),
                 'client_secret' => $client->getSecret(),
                 'client_name' => $client->getName(),
             ]);
         }
 
-        return $this->render('@WallabagCore/Developer/client.html.twig', [
+        return $this->render('Developer/client.html.twig', [
             'form' => $clientForm->createView(),
         ]);
     }
@@ -103,7 +103,7 @@ class DeveloperController extends AbstractController
      */
     public function howtoFirstAppAction()
     {
-        return $this->render('@WallabagCore/Developer/howto_app.html.twig', [
+        return $this->render('Developer/howto_app.html.twig', [
             'wallabag_url' => $this->getParameter('domain_name'),
         ]);
     }

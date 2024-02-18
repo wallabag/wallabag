@@ -76,7 +76,7 @@ class InstapaperController extends AbstractController
             $this->addFlash('notice', 'flashes.import.notice.failed_on_file');
         }
 
-        return $this->render('@WallabagCore/Import/Instapaper/index.html.twig', [
+        return $this->render('Import/Instapaper/index.html.twig', [
             'form' => $form->createView(),
             'import' => $instapaper,
         ]);

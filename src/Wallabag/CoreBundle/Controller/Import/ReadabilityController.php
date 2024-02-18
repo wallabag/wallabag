@@ -76,7 +76,7 @@ class ReadabilityController extends AbstractController
             $this->addFlash('notice', 'flashes.import.notice.failed_on_file');
         }
 
-        return $this->render('@WallabagCore/Import/Readability/index.html.twig', [
+        return $this->render('Import/Readability/index.html.twig', [
             'form' => $form->createView(),
             'import' => $readability,
         ]);

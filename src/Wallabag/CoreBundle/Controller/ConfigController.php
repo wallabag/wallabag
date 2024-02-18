@@ -243,7 +243,7 @@ class ConfigController extends AbstractController
             return $this->redirect($this->generateUrl('config') . '#set6');
         }
 
-        return $this->render('@WallabagCore/Config/index.html.twig', [
+        return $this->render('Config/index.html.twig', [
             'form' => [
                 'config' => $configForm->createView(),
                 'feed' => $feedForm->createView(),
@@ -373,7 +373,7 @@ class ConfigController extends AbstractController
             'flashes.config.notice.otp_enabled'
         );
 
-        return $this->render('@WallabagCore/Config/otp_app.html.twig', [
+        return $this->render('Config/otp_app.html.twig', [
             'backupCodes' => $backupCodes,
             'qr_code' => $googleAuthenticator->getQRContent($user),
             'secret' => $secret,

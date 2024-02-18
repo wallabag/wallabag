@@ -46,6 +46,6 @@ class ChromeController extends BrowserController
 
     protected function getImportTemplate()
     {
-        return '@WallabagCore/Import/Chrome/index.html.twig';
+        return 'Import/Chrome/index.html.twig';
     }
 }

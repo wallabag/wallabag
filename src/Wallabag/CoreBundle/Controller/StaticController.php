@@ -14,7 +14,7 @@ class StaticController extends AbstractController
         $addonsUrl = $this->getParameter('addons_url');
 
         return $this->render(
-            '@WallabagCore/Static/howto.html.twig',
+            'Static/howto.html.twig',
             [
                 'addonsUrl' => $addonsUrl,
             ]
@@ -27,7 +27,7 @@ class StaticController extends AbstractController
     public function aboutAction()
     {
         return $this->render(
-            '@WallabagCore/Static/about.html.twig',
+            'Static/about.html.twig',
             [
                 'version' => $this->getParameter('wallabag_core.version'),
                 'paypal_url' => $this->getParameter('wallabag_core.paypal_url'),
@@ -41,7 +41,7 @@ class StaticController extends AbstractController
     public function quickstartAction()
     {
         return $this->render(
-            '@WallabagCore/Static/quickstart.html.twig'
+            'Static/quickstart.html.twig'
         );
     }
 }

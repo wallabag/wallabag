@@ -1,0 +1,46 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ 'entry.edit.page_title'|trans }}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel">
+
+                <form name="entry" method="post" action="">
+                    <div class="card-content">
+                        {% if form_errors(form) %}
+                            <span class="black-text">{{ form_errors(form) }}</span>
+                        {% endif %}
+
+                        {% if form_errors(form.title) %}
+                            <span class="black-text">{{ form_errors(form.title) }}</span>
+                        {% endif %}
+
+                        <div class="input-field s12">
+                            {{ form_label(form.title) }}
+                            {{ form_widget(form.title) }}
+                        </div>
+
+                        <div class="input-field s12">
+                            {{ form_label(form.url) }}
+                            {{ form_widget(form.url) }}
+                        </div>
+
+                        <div class="input-field s12">
+                            {{ form_label(form.origin_url) }}
+                            {{ form_widget(form.origin_url) }}
+                        </div>
+                        <br>
+
+                        {{ form_widget(form.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+                    </div>
+                    {{ form_rest(form) }}
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
