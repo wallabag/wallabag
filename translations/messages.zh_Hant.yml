@@ -27,11 +27,26 @@ config:
         language_label: 語言
     form_feed:
         description: 你可以使用你喜愛的 Atom 閱讀器來閱讀由 wallabag 提供的 Atom 訂閱源。為此你需要先產生一組 token。
+        feed_link:
+            unread: 未讀
+            archive: 已歸檔
+            starred: 收藏
     form_user:
         delete:
             description: 如果你移除了你自己的帳號，你所有的項目、標籤、註釋包含你的帳號本身都會被 "用久" 的移除（無法復原）。然後你將會被自動登出。
+        name_label: 名稱
     form:
         save: 儲存
+    form_rules:
+        tags_label: 標籤
+        export: 匯出
+        faq:
+            variable_description:
+                url: 條目網址
+        delete_rule_label: 刪除
+    otp:
+        app:
+            cancel: 取消
 menu:
     left:
         quickstart: 快速開始
@@ -91,6 +106,31 @@ footer:
 entry:
     list:
         show_same_domain: 顯示同一域名的項目
+        export_title: 匯出
+        delete: 刪除
+        add_tags: 添加標簽
+    edit:
+        url_label: 網址
+        title_label: 標題
+        save_label: 儲存
+        origin_url_label: 來源網址（該條目內所列）
+    new:
+        form_new:
+            url_label: 網址
+    view:
+        left_menu:
+            theme_toggle_dark: 灰暗
+            delete: 刪除
+            theme_toggle_light: 淺色
+            set_as_unread: 標記為未讀
+            export: 匯出
+    filters:
+        unread_label: 未讀
+        archived_label: 已歸檔
+        starred_label: 收藏
+    page_titles:
+        untagged: 未標簽條目
+        all: 所有項目
 howto:
     shortcuts:
         arrows_navigation: 在項目間導覽
@@ -102,6 +142,39 @@ quickstart:
         export: 將你的項目轉換為 ePUB 或 PDF 版本
     configure:
         tagging_rules: 撰寫規則來自動化標籤你的項目
+    intro:
+        title: 歡迎使用 wallabag!
 import:
     wallabag_v1:
         description: 這個匯入器將會匯入 wallabag v1 中你所有的項目。在設定頁面的 "匯出 wallabag 資料" 頁簽中，點選 "匯出 JSON 檔"，你將會得到檔名為 "wallabag-export-1-xxxx-xx-xx.json" 檔案。
+about:
+    who_behind_wallabag:
+        version: 版本
+    page_title: 關於
+    top_menu:
+        who_behind_wallabag: wallabag 的背後
+tag:
+    page_title: 標籤
+    new:
+        add: 添加
+    list:
+        untagged: 未標簽條目
+        no_untagged_entries: 沒有未標簽條目。
+        see_untagged_entries: 檢視未標簽條目
+user:
+    form:
+        username_label: 使用者名稱
+        name_label: 名稱
+        delete_confirm: 你確定？
+        delete: 刪除
+        save: 儲存
+ignore_origin_instance_rule:
+    form:
+        delete: 刪除
+        save: 儲存
+        delete_confirm: 你確定？
+site_credential:
+    form:
+        delete_confirm: 你確定？
+        save: 儲存
+        delete: 刪除
