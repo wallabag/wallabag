@@ -3,6 +3,7 @@
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
+use Wallabag\CoreBundle\Import\ImportCompilerPass;
 
 class AppKernel extends Kernel
 {
@@ -96,6 +97,11 @@ class AppKernel extends Kernel
         $loader->load(function (ContainerBuilder $container) {
             $this->processDatabaseParameters($container);
         });
+    }
+
+    protected function build(ContainerBuilder $container)
+    {
+        $container->addCompilerPass(new ImportCompilerPass());
     }
 
     private function processDatabaseParameters(ContainerBuilder $container)
