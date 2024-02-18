@@ -47,6 +47,7 @@ config:
     otp:
         app:
             cancel: 取消
+            qrcode_label: QR碼
 menu:
     left:
         quickstart: 快速開始
@@ -144,6 +145,7 @@ quickstart:
         tagging_rules: 撰寫規則來自動化標籤你的項目
     intro:
         title: 歡迎使用 wallabag!
+    page_title: 快速開始
 import:
     wallabag_v1:
         description: 這個匯入器將會匯入 wallabag v1 中你所有的項目。在設定頁面的 "匯出 wallabag 資料" 頁簽中，點選 "匯出 JSON 檔"，你將會得到檔名為 "wallabag-export-1-xxxx-xx-xx.json" 檔案。
