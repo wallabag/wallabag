@@ -17,7 +17,11 @@ class Version20171008195606 extends WallabagMigration
     {
         $platform = $this->connection->getDatabasePlatform();
 
-        $this->skipIf($platform instanceof SqlitePlatform, 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
+        if ($platform instanceof SqlitePlatform) {
+            $this->write('Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
+
+            return;
+        }
 
         switch (true) {
             case $platform instanceof MySQLPlatform:
@@ -35,7 +39,11 @@ class Version20171008195606 extends WallabagMigration
     {
         $platform = $this->connection->getDatabasePlatform();
 
-        $this->skipIf($platform instanceof SqlitePlatform, 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
+        if ($platform instanceof SqlitePlatform) {
+            $this->write('Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
+
+            return;
+        }
 
         switch (true) {
             case $platform instanceof MySQLPlatform:

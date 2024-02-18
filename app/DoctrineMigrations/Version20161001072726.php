@@ -18,7 +18,11 @@ class Version20161001072726 extends WallabagMigration
     {
         $platform = $this->connection->getDatabasePlatform();
 
-        $this->skipIf($platform instanceof SqlitePlatform, 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
+        if ($platform instanceof SqlitePlatform) {
+            $this->write('Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
+
+            return;
+        }
 
         // remove all FK from entry_tag
         switch (true) {

@@ -13,7 +13,11 @@ class Version20181128203230 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        $this->skipIf(!$this->connection->getDatabasePlatform() instanceof MySQLPlatform, 'This migration can only be applied on \'mysql\'.');
+        if (!$this->connection->getDatabasePlatform() instanceof MySQLPlatform) {
+            $this->write('This migration can only be applied on \'mysql\'.');
+
+            return;
+        }
 
         $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_access_tokens') . ' CHANGE `token` `token` varchar(191) NOT NULL');
         $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_access_tokens') . ' CHANGE `scope` `scope` varchar(191)');
@@ -28,7 +32,11 @@ class Version20181128203230 extends WallabagMigration
 
     public function down(Schema $schema): void
     {
-        $this->skipIf(!$this->connection->getDatabasePlatform() instanceof MySQLPlatform, 'This migration can only be applied on \'mysql\'.');
+        if (!$this->connection->getDatabasePlatform() instanceof MySQLPlatform) {
+            $this->write('This migration can only be applied on \'mysql\'.');
+
+            return;
+        }
 
         $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_access_tokens') . ' CHANGE `token` `token` varchar(255) NOT NULL');
         $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_access_tokens') . ' CHANGE `scope` `scope` varchar(255)');

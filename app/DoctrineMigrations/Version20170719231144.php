@@ -13,7 +13,11 @@ class Version20170719231144 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        $this->skipIf($this->connection->getDatabasePlatform() instanceof SqlitePlatform, 'Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
+        if ($this->connection->getDatabasePlatform() instanceof SqlitePlatform) {
+            $this->write('Migration can only be executed safely on \'mysql\' or \'postgresql\'.');
+
+            return;
+        }
 
         // Find tags which need to be merged
         $dupTags = $this->connection->query('
