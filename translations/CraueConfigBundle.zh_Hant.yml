@@ -2,3 +2,8 @@ download_pictures: 下載圖片至你的服務器上
 diaspora_url: diaspora* URL(如果該服務已啟用)
 settings_changed: 已更新設定
 export_epub: 啟用 ePub 輸出
+export_pdf: 啟用 PDF 輸出
+export_csv: 啟用 CSV 輸出
+export_json: 啟用 JSON 輸出
+export_txt: 啟用 TXT 輸出
+export_xml: 啟用 XML 輸出
