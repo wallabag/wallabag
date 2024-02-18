@@ -64,7 +64,7 @@ class ImportCommandTest extends WallabagCoreTestCase
         $tester = new CommandTester($command);
         $tester->execute([
             'username' => 'admin',
-            'filepath' => $application->getKernel()->getContainer()->getParameter('kernel.project_dir') . '/tests/Wallabag/CoreBundle/fixtures/Import/wallabag-v2-read.json',
+            'filepath' => $application->getKernel()->getContainer()->getParameter('kernel.project_dir') . '/tests/fixtures/Import/wallabag-v2-read.json',
             '--importer' => 'v2',
         ]);
 
@@ -83,7 +83,7 @@ class ImportCommandTest extends WallabagCoreTestCase
         $tester = new CommandTester($command);
         $tester->execute([
             'username' => $this->getLoggedInUserId(),
-            'filepath' => $application->getKernel()->getContainer()->getParameter('kernel.project_dir') . '/tests/Wallabag/CoreBundle/fixtures/Import/wallabag-v2-read.json',
+            'filepath' => $application->getKernel()->getContainer()->getParameter('kernel.project_dir') . '/tests/fixtures/Import/wallabag-v2-read.json',
             '--useUserId' => true,
             '--importer' => 'v2',
         ]);

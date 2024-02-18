@@ -73,4 +73,4 @@ parameters:
 		-
 			message: "#^Call to an undefined method DOMNode\\:\\:getAttribute\\(\\)\\.$#"
 			count: 1
-			path: tests/Wallabag/CoreBundle/Controller/FeedControllerTest.php
+			path: tests/Controller/FeedControllerTest.php

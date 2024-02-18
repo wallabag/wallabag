@@ -200,7 +200,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\Wallabag\\CoreBundle\\": "tests/"
         },
         "files": [
             "tests/functions.php"
