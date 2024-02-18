@@ -1,7 +1,7 @@
-wallabag_core:
-    version: 2.6.8
-    paypal_url: "https://liberapay.com/wallabag/donate"
-    languages:
+parameters:
+    wallabag_core.version: 2.6.8
+    wallabag_core.paypal_url: "https://liberapay.com/wallabag/donate"
+    wallabag_core.languages:
         en: 'English'
         fr: 'Français'
         de: 'Deutsch'
@@ -23,20 +23,20 @@ wallabag_core:
         hr: 'Hrvatski'
         cs: 'Čeština'
         el: 'Ελληνικά'
-    items_on_page: 12
-    language: '%locale%'
-    rss_limit: 50
-    reading_speed: 200
-    cache_lifetime: 10
-    action_mark_as_read: 1
-    list_mode: 0
-    display_thumbnails: 1
-    fetching_error_message_title: 'No title found'
-    fetching_error_message: |
+    wallabag_core.items_on_page: 12
+    wallabag_core.language: '%locale%'
+    wallabag_core.feed_limit: 50
+    wallabag_core.reading_speed: 200
+    wallabag_core.cache_lifetime: 10
+    wallabag_core.action_mark_as_read: 1
+    wallabag_core.list_mode: 0
+    wallabag_core.display_thumbnails: 1
+    wallabag_core.fetching_error_message_title: 'No title found'
+    wallabag_core.fetching_error_message: |
         wallabag can't retrieve contents for this article. Please <a href="https://doc.wallabag.org/en/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.
-    api_limit_mass_actions: 10
-    encryption_key_path: "%kernel.project_dir%/data/site-credentials-secret-key.txt"
-    default_internal_settings:
+    wallabag_core.api_limit_mass_actions: 10
+    wallabag_core.site_credentials.encryption_key_path: "%kernel.project_dir%/data/site-credentials-secret-key.txt"
+    wallabag_core.default_internal_settings:
         -
             name: share_public
             value: 1
@@ -146,14 +146,14 @@ wallabag_core:
             value: 0
             section: entry
 
-    default_ignore_origin_instance_rules:
+    wallabag_core.default_ignore_origin_instance_rules:
         -
             rule: host = "feedproxy.google.com"
         -
             rule: host = "feeds.reuters.com"
         -
             rule: _all ~ "https?://www\.lemonde\.fr/tiny.*"
-    fonts:
+    wallabag_core.fonts:
         - 'Sans-serif'
         - 'Serif'
         - 'Atkinson Hyperlegible'
@@ -162,5 +162,5 @@ wallabag_core:
         - 'Montserrat'
         - 'OpenDyslexicRegular'
         - 'Oswald'
-    allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain', 'text/csv', 'text/html']
-    resource_dir: "%kernel.project_dir%/web/uploads/import"
+    wallabag_core.allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain', 'text/csv', 'text/html']
+    wallabag_core.resource_dir: "%kernel.project_dir%/web/uploads/import"
