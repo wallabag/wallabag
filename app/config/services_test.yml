@@ -23,6 +23,6 @@ services:
 
     # fixtures
     Wallabag\CoreBundle\DataFixtures\:
-        resource: '../../src/Wallabag/CoreBundle/DataFixtures/*'
+        resource: '../../src/DataFixtures/*'
         tags: ['doctrine.fixture.orm']
         autowire: true

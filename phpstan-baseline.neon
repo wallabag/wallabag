@@ -3,72 +3,72 @@ parameters:
 		-
 			message: "#^Method Wallabag\\\\CoreBundle\\\\Controller\\\\AnnotationController\\:\\:postAnnotationAction\\(\\) should return Symfony\\\\Component\\\\HttpFoundation\\\\JsonResponse but returns Symfony\\\\Component\\\\Form\\\\FormInterface\\<mixed\\>\\.$#"
 			count: 1
-			path: src/Wallabag/CoreBundle/Controller/AnnotationController.php
+			path: src/Controller/AnnotationController.php
 
 		-
 			message: "#^Method Wallabag\\\\CoreBundle\\\\Controller\\\\AnnotationController\\:\\:putAnnotationAction\\(\\) should return Symfony\\\\Component\\\\HttpFoundation\\\\JsonResponse but returns Symfony\\\\Component\\\\Form\\\\FormInterface\\<null\\>\\.$#"
 			count: 1
-			path: src/Wallabag/CoreBundle/Controller/AnnotationController.php
+			path: src/Controller/AnnotationController.php
 
 		-
 			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Entity\\\\RuleInterface\\:\\:getConfig\\(\\)\\.$#"
 			count: 1
-			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
+			path: src/Controller/ConfigController.php
 
 		-
 			message: "#^Method FOS\\\\UserBundle\\\\Model\\\\UserManagerInterface\\:\\:updateUser\\(\\) invoked with 2 parameters, 1 required\\.$#"
 			count: 6
-			path: src/Wallabag/CoreBundle/Controller/ConfigController.php
+			path: src/Controller/ConfigController.php
 
 		-
 			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
 			count: 1
-			path: src/Wallabag/CoreBundle/Controller/Import/BrowserController.php
+			path: src/Controller/Import/BrowserController.php
 
 		-
 			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
 			count: 1
-			path: src/Wallabag/CoreBundle/Controller/Import/BrowserController.php
+			path: src/Controller/Import/BrowserController.php
 
 		-
 			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
 			count: 1
-			path: src/Wallabag/CoreBundle/Controller/Import/HtmlController.php
+			path: src/Controller/Import/HtmlController.php
 
 		-
 			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
 			count: 1
-			path: src/Wallabag/CoreBundle/Controller/Import/HtmlController.php
+			path: src/Controller/Import/HtmlController.php
 
 		-
 			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
 			count: 1
-			path: src/Wallabag/CoreBundle/Controller/Import/WallabagController.php
+			path: src/Controller/Import/WallabagController.php
 
 		-
 			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
 			count: 1
-			path: src/Wallabag/CoreBundle/Controller/Import/WallabagController.php
+			path: src/Controller/Import/WallabagController.php
 
 		-
 			message: "#^Call to an undefined method Spiriit\\\\Bundle\\\\FormFilterBundle\\\\Filter\\\\Query\\\\QueryInterface\\:\\:getExpressionBuilder\\(\\)\\.$#"
 			count: 1
-			path: src/Wallabag/CoreBundle/Event/Subscriber/CustomDoctrineORMSubscriber.php
+			path: src/Event/Subscriber/CustomDoctrineORMSubscriber.php
 
 		-
 			message: "#^Call to an undefined method Spiriit\\\\Bundle\\\\FormFilterBundle\\\\Filter\\\\Query\\\\QueryInterface\\:\\:getExpr\\(\\)\\.$#"
 			count: 10
-			path: src/Wallabag/CoreBundle/Form/Type/EntryFilterType.php
+			path: src/Form/Type/EntryFilterType.php
 
 		-
 			message: "#^Call to an undefined method Scheb\\\\TwoFactorBundle\\\\Model\\\\Email\\\\TwoFactorInterface\\:\\:getName\\(\\)\\.$#"
 			count: 2
-			path: src/Wallabag/CoreBundle/Mailer/AuthCodeMailer.php
+			path: src/Mailer/AuthCodeMailer.php
 
 		-
 			message: "#^PHPDoc type Symfony\\\\Component\\\\Mailer\\\\MailerInterface of property Wallabag\\\\CoreBundle\\\\Mailer\\\\UserMailer\\:\\:\\$mailer is not covariant with PHPDoc type Swift_Mailer of overridden property FOS\\\\UserBundle\\\\Mailer\\\\TwigSwiftMailer\\:\\:\\$mailer\\.$#"
 			count: 1
-			path: src/Wallabag/CoreBundle/Mailer/UserMailer.php
+			path: src/Mailer/UserMailer.php
 
 		-
 			message: "#^Call to an undefined method DOMNode\\:\\:getAttribute\\(\\)\\.$#"

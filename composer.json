@@ -191,7 +191,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Wallabag\\": "src/Wallabag/"
+            "Wallabag\\CoreBundle\\": "src/"
         },
         "classmap": [
             "app/AppKernel.php",

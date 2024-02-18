@@ -49,8 +49,6 @@ data/db/wallabag*.sqlite
 node_modules/
 bin
 app/Resources/build/
-!/src/Wallabag/CoreBundle/Resources/public
-/src/Wallabag/CoreBundle/Resources/public/*
 package-lock.json
 
 # Test-generated files
