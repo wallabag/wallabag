@@ -26,7 +26,7 @@ abstract class WallabagMigration extends AbstractMigration implements ContainerA
     {
     }
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null)
     {
         $this->container = $container;
     }

@@ -22,7 +22,7 @@ class PreparePagerForEntries
      *
      * @return Pagerfanta
      */
-    public function prepare(AdapterInterface $adapter, User $user = null)
+    public function prepare(AdapterInterface $adapter, ?User $user = null)
     {
         if (null === $user) {
             $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
