@@ -141,7 +141,7 @@ class PocketImport extends AbstractImport
     /**
      * Set the Http client.
      */
-    public function setClient(ClientInterface $client, RequestFactoryInterface $requestFactory = null, StreamFactoryInterface $streamFactory = null)
+    public function setClient(ClientInterface $client, ?RequestFactoryInterface $requestFactory = null, ?StreamFactoryInterface $streamFactory = null)
     {
         $this->client = new HttpMethodsClient(new PluginClient($client, [new ErrorPlugin()]), $requestFactory ?: Psr17FactoryDiscovery::findRequestFactory(), $streamFactory ?: Psr17FactoryDiscovery::findStreamFactory());
     }

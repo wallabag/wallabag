@@ -252,7 +252,7 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      *
      * @return User
      */
-    public function setConfig(Config $config = null)
+    public function setConfig(?Config $config = null)
     {
         $this->config = $config;
 
@@ -333,7 +333,7 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
         $this->googleAuthenticatorSecret = $googleAuthenticatorSecret;
     }
 
-    public function setBackupCodes(array $codes = null)
+    public function setBackupCodes(?array $codes = null)
     {
         $this->backupCodes = $codes;
     }
