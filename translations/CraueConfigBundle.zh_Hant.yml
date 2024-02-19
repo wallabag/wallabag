@@ -7,3 +7,4 @@ export_csv: 啟用 CSV 輸出
 export_json: 啟用 JSON 輸出
 export_txt: 啟用 TXT 輸出
 export_xml: 啟用 XML 輸出
+export: 匯出
