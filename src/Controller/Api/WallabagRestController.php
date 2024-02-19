@@ -61,7 +61,7 @@ class WallabagRestController extends AbstractFOSRestController
      */
     public function getVersionAction()
     {
-        $version = $this->getParameter('wallabag_core.version');
+        $version = $this->getParameter('wallabag.version');
         $json = $this->serializer->serialize($version, 'json');
 
         return (new JsonResponse())->setJson($json);
@@ -85,7 +85,7 @@ class WallabagRestController extends AbstractFOSRestController
     public function getInfoAction(Config $craueConfig)
     {
         $info = new ApplicationInfo(
-            $this->getParameter('wallabag_core.version'),
+            $this->getParameter('wallabag.version'),
             $this->getParameter('fosuser_registration') && $craueConfig->get('api_user_registration'),
         );
 

@@ -302,7 +302,7 @@ old_sound_rabbit_mq:
                 type: topic
             queue_options:
                 name: 'wallabag.import.pocket'
-            callback: wallabag_core.consumer.amqp.pocket
+            callback: wallabag.consumer.amqp.pocket
             qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_readability:
             connection: default
@@ -311,7 +311,7 @@ old_sound_rabbit_mq:
                 type: topic
             queue_options:
                 name: 'wallabag.import.readability'
-            callback: wallabag_core.consumer.amqp.readability
+            callback: wallabag.consumer.amqp.readability
             qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_instapaper:
             connection: default
@@ -320,7 +320,7 @@ old_sound_rabbit_mq:
                 type: topic
             queue_options:
                 name: 'wallabag.import.instapaper'
-            callback: wallabag_core.consumer.amqp.instapaper
+            callback: wallabag.consumer.amqp.instapaper
             qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_pinboard:
             connection: default
@@ -329,7 +329,7 @@ old_sound_rabbit_mq:
                 type: topic
             queue_options:
                 name: 'wallabag.import.pinboard'
-            callback: wallabag_core.consumer.amqp.pinboard
+            callback: wallabag.consumer.amqp.pinboard
             qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_delicious:
             connection: default
@@ -338,7 +338,7 @@ old_sound_rabbit_mq:
                 type: topic
             queue_options:
                 name: 'wallabag.import.delicious'
-            callback: wallabag_core.consumer.amqp.delicious
+            callback: wallabag.consumer.amqp.delicious
             qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_wallabag_v1:
             connection: default
@@ -347,7 +347,7 @@ old_sound_rabbit_mq:
                 type: topic
             queue_options:
                 name: 'wallabag.import.wallabag_v1'
-            callback: wallabag_core.consumer.amqp.wallabag_v1
+            callback: wallabag.consumer.amqp.wallabag_v1
             qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_wallabag_v2:
             connection: default
@@ -356,7 +356,7 @@ old_sound_rabbit_mq:
                 type: topic
             queue_options:
                 name: 'wallabag.import.wallabag_v2'
-            callback: wallabag_core.consumer.amqp.wallabag_v2
+            callback: wallabag.consumer.amqp.wallabag_v2
             qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_elcurator:
             connection: default
@@ -365,7 +365,7 @@ old_sound_rabbit_mq:
                 type: topic
             queue_options:
                 name: 'wallabag.import.elcurator'
-            callback: wallabag_core.consumer.amqp.elcurator
+            callback: wallabag.consumer.amqp.elcurator
             qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_firefox:
             connection: default
@@ -374,7 +374,7 @@ old_sound_rabbit_mq:
                 type: topic
             queue_options:
                 name: 'wallabag.import.firefox'
-            callback: wallabag_core.consumer.amqp.firefox
+            callback: wallabag.consumer.amqp.firefox
             qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_chrome:
             connection: default
@@ -383,7 +383,7 @@ old_sound_rabbit_mq:
                 type: topic
             queue_options:
                 name: 'wallabag.import.chrome'
-            callback: wallabag_core.consumer.amqp.chrome
+            callback: wallabag.consumer.amqp.chrome
             qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_shaarli:
             connection: default
@@ -392,7 +392,7 @@ old_sound_rabbit_mq:
                 type: topic
             queue_options:
                 name: 'wallabag.import.shaarli'
-            callback: wallabag_core.consumer.amqp.shaarli
+            callback: wallabag.consumer.amqp.shaarli
             qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_pocket_html:
             connection: default
@@ -401,7 +401,7 @@ old_sound_rabbit_mq:
                 type: topic
             queue_options:
                 name: 'wallabag.import.pocket_html'
-            callback: wallabag_core.consumer.amqp.pocket_html
+            callback: wallabag.consumer.amqp.pocket_html
             qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
 
 fos_js_routing:
@@ -432,7 +432,7 @@ sensio_framework_extra:
 
 httplug:
     clients:
-        wallabag_core:
+        wallabag:
             factory: Wallabag\Helper\HttpClientFactory
             config:
                 defaults:

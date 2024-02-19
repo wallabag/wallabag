@@ -82,7 +82,7 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
 
         $reloadedEntries = $this->getTestClient()
             ->getContainer()
-            ->get('wallabag_core.entry_repository.test')
+            ->get('wallabag.entry_repository.test')
             ->findById([$this->adminEntry->getId(), $this->bobEntry->getId()]);
 
         foreach ($reloadedEntries as $reloadedEntry) {
@@ -107,7 +107,7 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
             'interactive' => false,
         ]);
 
-        $entryRepository = $this->getTestClient()->getContainer()->get('wallabag_core.entry_repository.test');
+        $entryRepository = $this->getTestClient()->getContainer()->get('wallabag.entry_repository.test');
 
         $reloadedAdminEntry = $entryRepository->find($this->adminEntry->getId());
         $this->assertNotEmpty($reloadedAdminEntry->getContent());
@@ -128,7 +128,7 @@ class ReloadEntryCommandTest extends WallabagCoreTestCase
             '--only-not-parsed' => true,
         ]);
 
-        $entryRepository = $this->getTestClient()->getContainer()->get('wallabag_core.entry_repository.test');
+        $entryRepository = $this->getTestClient()->getContainer()->get('wallabag.entry_repository.test');
 
         $reloadedBobParsedEntry = $entryRepository->find($this->bobParsedEntry->getId());
         $this->assertEmpty($reloadedBobParsedEntry->getContent());

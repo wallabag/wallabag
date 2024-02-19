@@ -541,7 +541,7 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->getRepository(Entry::class)
             ->find($entry->getId());
 
-        $this->assertNotSame($client->getContainer()->getParameter('wallabag_core.fetching_error_message'), $newContent->getContent());
+        $this->assertNotSame($client->getContainer()->getParameter('wallabag.fetching_error_message'), $newContent->getContent());
     }
 
     public function testEdit()

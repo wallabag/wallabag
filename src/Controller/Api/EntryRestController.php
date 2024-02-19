@@ -525,7 +525,7 @@ class EntryRestController extends WallabagRestController
 
         $urls = json_decode($request->query->get('urls', []));
 
-        $limit = $this->getParameter('wallabag_core.api_limit_mass_actions');
+        $limit = $this->getParameter('wallabag.api_limit_mass_actions');
 
         if (\count($urls) > $limit) {
             throw new HttpException(400, 'API limit reached');
@@ -1044,7 +1044,7 @@ class EntryRestController extends WallabagRestController
         }
 
         // if refreshing entry failed, don't save it
-        if ($this->getParameter('wallabag_core.fetching_error_message') === $entry->getContent()) {
+        if ($this->getParameter('wallabag.fetching_error_message') === $entry->getContent()) {
             return new JsonResponse([], 304);
         }
 

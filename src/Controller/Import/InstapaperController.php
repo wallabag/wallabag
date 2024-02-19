@@ -44,9 +44,9 @@ class InstapaperController extends AbstractController
             $markAsRead = $form->get('mark_as_read')->getData();
             $name = 'instapaper_' . $this->getUser()->getId() . '.csv';
 
-            if (null !== $file && \in_array($file->getClientMimeType(), $this->getParameter('wallabag_core.allow_mimetypes'), true) && $file->move($this->getParameter('wallabag_core.resource_dir'), $name)) {
+            if (null !== $file && \in_array($file->getClientMimeType(), $this->getParameter('wallabag.allow_mimetypes'), true) && $file->move($this->getParameter('wallabag.resource_dir'), $name)) {
                 $res = $instapaper
-                    ->setFilepath($this->getParameter('wallabag_core.resource_dir') . '/' . $name)
+                    ->setFilepath($this->getParameter('wallabag.resource_dir') . '/' . $name)
                     ->setMarkAsRead($markAsRead)
                     ->import();
 
@@ -65,7 +65,7 @@ class InstapaperController extends AbstractController
                         ]);
                     }
 
-                    unlink($this->getParameter('wallabag_core.resource_dir') . '/' . $name);
+                    unlink($this->getParameter('wallabag.resource_dir') . '/' . $name);
                 }
 
                 $this->addFlash('notice', $message);

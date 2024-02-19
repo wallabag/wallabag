@@ -16,7 +16,7 @@ class WallabagRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertSame($client->getContainer()->getParameter('wallabag_core.version'), $content);
+        $this->assertSame($client->getContainer()->getParameter('wallabag.version'), $content);
     }
 
     public function testGetInfo()

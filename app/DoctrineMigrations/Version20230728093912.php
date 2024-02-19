@@ -37,7 +37,7 @@ final class Version20230728093912 extends WallabagMigration
             'UPDATE ' . $this->getTable('entry') . ' SET is_not_parsed = :isNotParsed WHERE content LIKE :content',
             [
                 'isNotParsed' => true,
-                'content' => str_replace("\n", '', addslashes($this->container->getParameter('wallabag_core.fetching_error_message'))) . '%',
+                'content' => str_replace("\n", '', addslashes($this->container->getParameter('wallabag.fetching_error_message'))) . '%',
             ]
         );
     }

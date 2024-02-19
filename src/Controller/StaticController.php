@@ -29,8 +29,8 @@ class StaticController extends AbstractController
         return $this->render(
             'Static/about.html.twig',
             [
-                'version' => $this->getParameter('wallabag_core.version'),
-                'paypal_url' => $this->getParameter('wallabag_core.paypal_url'),
+                'version' => $this->getParameter('wallabag.version'),
+                'paypal_url' => $this->getParameter('wallabag.paypal_url'),
             ]
         );
     }

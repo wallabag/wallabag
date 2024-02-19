@@ -8,7 +8,7 @@ services:
         alias: fos_user.security.login_manager
         public: true
 
-    wallabag_core.entry_repository.test:
+    wallabag.entry_repository.test:
         alias: Wallabag\Repository\EntryRepository
         public: true
 
