@@ -39,7 +39,7 @@ class IgnoreOriginInstanceRuleController extends AbstractController
     {
         $rules = $repository->findAll();
 
-        return $this->render('@WallabagCore/IgnoreOriginInstanceRule/index.html.twig', [
+        return $this->render('IgnoreOriginInstanceRule/index.html.twig', [
             'rules' => $rules,
         ]);
     }
@@ -70,7 +70,7 @@ class IgnoreOriginInstanceRuleController extends AbstractController
             return $this->redirectToRoute('ignore_origin_instance_rules_index');
         }
 
-        return $this->render('@WallabagCore/IgnoreOriginInstanceRule/new.html.twig', [
+        return $this->render('IgnoreOriginInstanceRule/new.html.twig', [
             'rule' => $ignoreOriginInstanceRule,
             'form' => $form->createView(),
         ]);
@@ -101,7 +101,7 @@ class IgnoreOriginInstanceRuleController extends AbstractController
             return $this->redirectToRoute('ignore_origin_instance_rules_index');
         }
 
-        return $this->render('@WallabagCore/IgnoreOriginInstanceRule/edit.html.twig', [
+        return $this->render('IgnoreOriginInstanceRule/edit.html.twig', [
             'rule' => $ignoreOriginInstanceRule,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

@@ -46,6 +46,6 @@ class PocketHtmlController extends HtmlController
 
     protected function getImportTemplate()
     {
-        return '@WallabagCore/Import/PocketHtml/index.html.twig';
+        return 'Import/PocketHtml/index.html.twig';
     }
 }

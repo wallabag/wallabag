@@ -46,6 +46,6 @@ class WallabagV1Controller extends WallabagController
 
     protected function getImportTemplate()
     {
-        return '@WallabagCore/Import/WallabagV1/index.html.twig';
+        return 'Import/WallabagV1/index.html.twig';
     }
 }

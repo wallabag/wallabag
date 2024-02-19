@@ -144,7 +144,7 @@ class FeedController extends AbstractController
         }
 
         return $this->render(
-            '@WallabagCore/Entry/entries.xml.twig',
+            'Entry/entries.xml.twig',
             [
                 'type' => 'tag',
                 'url' => $url,
@@ -226,7 +226,7 @@ class FeedController extends AbstractController
             }
         }
 
-        return $this->render('@WallabagCore/Entry/entries.xml.twig', [
+        return $this->render('Entry/entries.xml.twig', [
             'type' => $type,
             'url' => $url,
             'entries' => $entries,

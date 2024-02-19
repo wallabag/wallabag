@@ -46,6 +46,6 @@ class ShaarliController extends HtmlController
 
     protected function getImportTemplate()
     {
-        return '@WallabagCore/Import/Shaarli/index.html.twig';
+        return 'Import/Shaarli/index.html.twig';
     }
 }

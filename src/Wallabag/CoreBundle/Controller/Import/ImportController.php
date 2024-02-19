@@ -24,7 +24,7 @@ class ImportController extends AbstractController
      */
     public function importAction(ImportChain $importChain)
     {
-        return $this->render('@WallabagCore/Import/index.html.twig', [
+        return $this->render('Import/index.html.twig', [
             'imports' => $importChain->getAll(),
         ]);
     }
@@ -41,7 +41,7 @@ class ImportController extends AbstractController
         $rabbitNotInstalled = false;
 
         if (!$authorizationChecker->isGranted('ROLE_SUPER_ADMIN')) {
-            return $this->render('@WallabagCore/Import/check_queue.html.twig');
+            return $this->render('Import/check_queue.html.twig');
         }
 
         if ($craueConfig->get('import_with_rabbitmq')) {
@@ -85,7 +85,7 @@ class ImportController extends AbstractController
             }
         }
 
-        return $this->render('@WallabagCore/Import/check_queue.html.twig', [
+        return $this->render('Import/check_queue.html.twig', [
             'nbRedisMessages' => $nbRedisMessages,
             'nbRabbitMessages' => $nbRabbitMessages,
             'redisNotInstalled' => $redisNotInstalled,

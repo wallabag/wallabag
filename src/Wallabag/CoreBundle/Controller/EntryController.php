@@ -156,7 +156,7 @@ class EntryController extends AbstractController
             return $this->showEntries('search', $request, $page);
         }
 
-        return $this->render('@WallabagCore/Entry/search_form.html.twig', [
+        return $this->render('Entry/search_form.html.twig', [
             'form' => $form->createView(),
             'currentRoute' => $currentRoute,
         ]);
@@ -198,7 +198,7 @@ class EntryController extends AbstractController
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        return $this->render('@WallabagCore/Entry/new_form.html.twig', [
+        return $this->render('Entry/new_form.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -233,7 +233,7 @@ class EntryController extends AbstractController
      */
     public function addEntryAction()
     {
-        return $this->render('@WallabagCore/Entry/new.html.twig');
+        return $this->render('Entry/new.html.twig');
     }
 
     /**
@@ -263,7 +263,7 @@ class EntryController extends AbstractController
             return $this->redirect($this->generateUrl('view', ['id' => $entry->getId()]));
         }
 
-        return $this->render('@WallabagCore/Entry/edit.html.twig', [
+        return $this->render('Entry/edit.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -390,7 +390,7 @@ class EntryController extends AbstractController
         $this->checkUserAction($entry);
 
         return $this->render(
-            '@WallabagCore/Entry/entry.html.twig',
+            'Entry/entry.html.twig',
             ['entry' => $entry]
         );
     }
@@ -581,7 +581,7 @@ class EntryController extends AbstractController
         }
 
         return $this->render(
-            '@WallabagCore/Entry/share.html.twig',
+            'Entry/share.html.twig',
             ['entry' => $entry]
         );
     }
@@ -671,7 +671,7 @@ class EntryController extends AbstractController
         }
 
         return $this->render(
-            '@WallabagCore/Entry/entries.html.twig', [
+            'Entry/entries.html.twig', [
                 'form' => $form->createView(),
                 'entries' => $entries,
                 'currentPage' => $page,

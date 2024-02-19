@@ -43,6 +43,7 @@ framework:
 
 # Twig Configuration
 twig:
+    default_path: '%kernel.project_dir%/templates'
     debug: "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     form_themes:
@@ -198,13 +199,13 @@ scheb_two_factor:
     google:
         enabled: true
         issuer: "%server_name%"
-        template: "@WallabagCore/Authentication/form.html.twig"
+        template: "Authentication/form.html.twig"
 
     email:
         enabled: true
         sender_email: "%twofactor_sender%"
         digits: 6
-        template: "@WallabagCore/Authentication/form.html.twig"
+        template: "Authentication/form.html.twig"
         mailer: Wallabag\CoreBundle\Mailer\AuthCodeMailer
 
 rulerz:
