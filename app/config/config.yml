@@ -40,6 +40,11 @@ framework:
         scoped_clients:
             download_images.client:
                 scope: '.*'
+            pocket.client:
+                scope: '.*'
+                headers:
+                    Content-Type: 'application/json'
+                    X-Accept: 'application/json'
 
 # Twig Configuration
 twig:
@@ -426,14 +431,6 @@ httplug:
                 defaults:
                     timeout: 10
             plugins: ['httplug.plugin.logger']
-        wallabag_core.pocket.client:
-            factory: 'httplug.factory.auto'
-            plugins:
-                - 'httplug.plugin.logger'
-                - header_defaults:
-                      headers:
-                          'content-type': 'application/json'
-                          'X-Accept': 'application/json'
     discovery:
         client: false
 

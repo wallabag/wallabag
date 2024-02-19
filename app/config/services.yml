@@ -282,12 +282,9 @@ services:
         tags:
             - { name: kernel.event_listener, event: security.authentication.failure, method: onAuthenticationFailure }
 
-    wallabag_core.pocket.client:
-        alias: 'httplug.client.wallabag_core.pocket.client'
-
     Wallabag\CoreBundle\Import\PocketImport:
         calls:
-            - [ setClient, [ "@wallabag_core.pocket.client" ] ]
+            - [ setClient, [ '@Symfony\Contracts\HttpClient\HttpClientInterface $pocketClient' ] ]
         tags:
             -  { name: wallabag_core.import, alias: pocket }
 
