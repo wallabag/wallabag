@@ -20,7 +20,11 @@ class Version20170510082609 extends WallabagMigration
 
     public function up(Schema $schema): void
     {
-        $this->skipIf(!$this->connection->getDatabasePlatform() instanceof MySQLPlatform, 'This migration only apply to MySQL');
+        if (!$this->connection->getDatabasePlatform() instanceof MySQLPlatform) {
+            $this->write('This migration only apply to MySQL');
+
+            return;
+        }
 
         foreach ($this->fields as $field) {
             $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' CHANGE ' . $field . ' ' . $field . ' VARCHAR(180) NOT NULL;');
@@ -29,7 +33,11 @@ class Version20170510082609 extends WallabagMigration
 
     public function down(Schema $schema): void
     {
-        $this->skipIf(!$this->connection->getDatabasePlatform() instanceof MySQLPlatform, 'This migration only apply to MySQL');
+        if (!$this->connection->getDatabasePlatform() instanceof MySQLPlatform) {
+            $this->write('This migration only apply to MySQL');
+
+            return;
+        }
 
         foreach ($this->fields as $field) {
             $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' CHANGE ' . $field . ' ' . $field . ' VARCHAR(255) NOT NULL;');

@@ -15,7 +15,11 @@ final class Version20190619093534 extends WallabagMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->skipIf(!$this->connection->getDatabasePlatform() instanceof SqlitePlatform, 'Migration can only be executed safely on \'sqlite\'.');
+        if (!$this->connection->getDatabasePlatform() instanceof SqlitePlatform) {
+            $this->write('Migration can only be executed safely on \'sqlite\'.');
+
+            return;
+        }
 
         $this->addSql('UPDATE ' . $this->getTable('entry', true) . ' SET reading_time = 0 WHERE reading_time IS NULL;');
 
@@ -43,7 +47,11 @@ final class Version20190619093534 extends WallabagMigration
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->skipIf(!$this->connection->getDatabasePlatform() instanceof SqlitePlatform, 'Migration can only be executed safely on \'sqlite\'.');
+        if (!$this->connection->getDatabasePlatform() instanceof SqlitePlatform) {
+            $this->write('Migration can only be executed safely on \'sqlite\'.');
+
+            return;
+        }
 
         $this->addSql('DROP INDEX IDX_F4D18282A76ED395');
         $this->addSql('DROP INDEX created_at');

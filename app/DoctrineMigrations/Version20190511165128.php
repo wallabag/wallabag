@@ -15,7 +15,11 @@ final class Version20190511165128 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        $this->skipIf(!$this->connection->getDatabasePlatform() instanceof MySQLPlatform, 'This migration only apply to MySQL');
+        if (!$this->connection->getDatabasePlatform() instanceof MySQLPlatform) {
+            $this->write('This migration only apply to MySQL');
+
+            return;
+        }
 
         $this->addSql('ALTER TABLE ' . $this->getTable('tag') . ' CHANGE `label` `label` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;');
         $this->addSql('ALTER TABLE ' . $this->getTable('tag') . ' CHANGE `slug` `slug` VARCHAR(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;');
@@ -23,7 +27,11 @@ final class Version20190511165128 extends WallabagMigration
 
     public function down(Schema $schema): void
     {
-        $this->skipIf(!$this->connection->getDatabasePlatform() instanceof MySQLPlatform, 'This migration only apply to MySQL');
+        if (!$this->connection->getDatabasePlatform() instanceof MySQLPlatform) {
+            $this->write('This migration only apply to MySQL');
+
+            return;
+        }
 
         $this->addSql('ALTER TABLE ' . $this->getTable('tag') . ' CHANGE `slug` `slug` VARCHAR(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;');
         $this->addSql('ALTER TABLE ' . $this->getTable('tag') . ' CHANGE `label` `label` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;');
