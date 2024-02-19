@@ -18,7 +18,7 @@ class AuthenticatorSubscriber implements SubscriberInterface, LoggerAwareInterfa
     // avoid loop when login failed which can just be a bad login/password
     // after 2 attempts, we skip the login
     public const MAX_RETRIES = 2;
-    private static $retries = 0;
+    private int $retries = 0;
 
     /** @var SiteConfigBuilder */
     private $configBuilder;
@@ -97,9 +97,9 @@ class AuthenticatorSubscriber implements SubscriberInterface, LoggerAwareInterfa
         $authenticator = $this->authenticatorFactory->buildFromSiteConfig($config);
         $isLoginRequired = $authenticator->isLoginRequired($body);
 
-        $this->logger->debug('loginIfRequested> retry #' . self::$retries . ' with login ' . ($isLoginRequired ? '' : 'not ') . 'required');
+        $this->logger->debug('loginIfRequested> retry #' . $this->retries . ' with login ' . ($isLoginRequired ? '' : 'not ') . 'required');
 
-        if ($isLoginRequired && self::$retries < self::MAX_RETRIES) {
+        if ($isLoginRequired && $this->retries < self::MAX_RETRIES) {
             $client = $event->getClient();
 
             $emitter = $client->getEmitter();
@@ -109,7 +109,7 @@ class AuthenticatorSubscriber implements SubscriberInterface, LoggerAwareInterfa
 
             $event->retry();
 
-            ++self::$retries;
+            ++$this->retries;
         }
     }
 
