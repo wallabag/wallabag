@@ -1,16 +1,16 @@
 <?php
 
-namespace Wallabag\CoreBundle\Helper;
+namespace Wallabag\Helper;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Psr\Log\LoggerInterface;
 use RulerZ\RulerZ;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Entity\TaggingRule;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Repository\EntryRepository;
-use Wallabag\CoreBundle\Repository\TagRepository;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\Tag;
+use Wallabag\Entity\TaggingRule;
+use Wallabag\Entity\User;
+use Wallabag\Repository\EntryRepository;
+use Wallabag\Repository\TagRepository;
 
 class RuleBasedTagger
 {

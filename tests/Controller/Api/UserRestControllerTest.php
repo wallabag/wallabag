@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Controller\Api;
+namespace Tests\Wallabag\Controller\Api;
 
 use Craue\ConfigBundle\Util\Config;
 

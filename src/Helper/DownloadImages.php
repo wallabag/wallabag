@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Helper;
+namespace Wallabag\Helper;
 
 use enshrined\svgSanitize\Sanitizer;
 use GuzzleHttp\Psr7\Uri;

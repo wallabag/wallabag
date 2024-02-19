@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Command;
+namespace Tests\Wallabag\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\CoreBundle\Entity\User;
+use Tests\Wallabag\WallabagCoreTestCase;
+use Wallabag\Entity\User;
 
 class ShowUserCommandTest extends WallabagCoreTestCase
 {

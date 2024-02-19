@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Operator\Doctrine;
+namespace Wallabag\Operator\Doctrine;
 
 /**
  * Provides a "matches" operator used for tagging rules.

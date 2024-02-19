@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Helper;
+namespace Tests\Wallabag\Helper;
 
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\QueryBuilder;
@@ -8,14 +8,14 @@ use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
 use RulerZ\RulerZ;
-use Wallabag\CoreBundle\Entity\Config;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Entity\TaggingRule;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Helper\RuleBasedTagger;
-use Wallabag\CoreBundle\Repository\EntryRepository;
-use Wallabag\CoreBundle\Repository\TagRepository;
+use Wallabag\Entity\Config;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\Tag;
+use Wallabag\Entity\TaggingRule;
+use Wallabag\Entity\User;
+use Wallabag\Helper\RuleBasedTagger;
+use Wallabag\Repository\EntryRepository;
+use Wallabag\Repository\TagRepository;
 
 class RuleBasedTaggerTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller;
+namespace Wallabag\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Event\UserEvent;
@@ -17,11 +17,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Form\Type\NewUserType;
-use Wallabag\CoreBundle\Form\Type\SearchUserType;
-use Wallabag\CoreBundle\Form\Type\UserType;
-use Wallabag\CoreBundle\Repository\UserRepository;
+use Wallabag\Entity\User;
+use Wallabag\Form\Type\NewUserType;
+use Wallabag\Form\Type\SearchUserType;
+use Wallabag\Form\Type\UserType;
+use Wallabag\Repository\UserRepository;
 
 /**
  * User controller.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Entity;
+namespace Wallabag\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Config.
  *
- * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\ConfigRepository")
+ * @ORM\Entity(repositoryClass="Wallabag\Repository\ConfigRepository")
  * @ORM\Table(
  *     name="`config`",
  *     indexes={
@@ -169,14 +169,14 @@ class Config
     private $customCSS;
 
     /**
-     * @ORM\OneToOne(targetEntity="Wallabag\CoreBundle\Entity\User", inversedBy="config")
+     * @ORM\OneToOne(targetEntity="Wallabag\Entity\User", inversedBy="config")
      */
     private $user;
 
     /**
      * @var ArrayCollection<TaggingRule>
      *
-     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\TaggingRule", mappedBy="config", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Wallabag\Entity\TaggingRule", mappedBy="config", cascade={"remove"})
      * @ORM\OrderBy({"id" = "ASC"})
      */
     private $taggingRules;
@@ -184,7 +184,7 @@ class Config
     /**
      * @var ArrayCollection<IgnoreOriginUserRule>
      *
-     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\IgnoreOriginUserRule", mappedBy="config", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Wallabag\Entity\IgnoreOriginUserRule", mappedBy="config", cascade={"remove"})
      * @ORM\OrderBy({"id" = "ASC"})
      */
     private $ignoreOriginRules;

@@ -1,12 +1,12 @@
 <?php
 
-namespace Wallabag\CoreBundle\Event\Subscriber;
+namespace Wallabag\Event\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\Persistence\ManagerRegistry;
-use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\Entity\Entry;
 
 /**
  * SQLite doesn't care about cascading remove, so we need to manually remove associated stuf for an Entry.

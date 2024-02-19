@@ -1,13 +1,13 @@
 <?php
 
-namespace Wallabag\CoreBundle\DataFixtures;
+namespace Wallabag\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Entity\User;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\Tag;
+use Wallabag\Entity\User;
 
 class EntryFixtures extends Fixture implements DependentFixtureInterface
 {

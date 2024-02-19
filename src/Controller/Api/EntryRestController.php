@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller\Api;
+namespace Wallabag\Controller\Api;
 
 use Hateoas\Configuration\Route as HateoasRoute;
 use Hateoas\Representation\Factory\PagerfantaFactory;
@@ -15,16 +15,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Event\EntryDeletedEvent;
-use Wallabag\CoreBundle\Event\EntrySavedEvent;
-use Wallabag\CoreBundle\Helper\ContentProxy;
-use Wallabag\CoreBundle\Helper\EntriesExport;
-use Wallabag\CoreBundle\Helper\TagsAssigner;
-use Wallabag\CoreBundle\Helper\UrlHasher;
-use Wallabag\CoreBundle\Repository\EntryRepository;
-use Wallabag\CoreBundle\Repository\TagRepository;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\Tag;
+use Wallabag\Event\EntryDeletedEvent;
+use Wallabag\Event\EntrySavedEvent;
+use Wallabag\Helper\ContentProxy;
+use Wallabag\Helper\EntriesExport;
+use Wallabag\Helper\TagsAssigner;
+use Wallabag\Helper\UrlHasher;
+use Wallabag\Repository\EntryRepository;
+use Wallabag\Repository\TagRepository;
 
 class EntryRestController extends WallabagRestController
 {

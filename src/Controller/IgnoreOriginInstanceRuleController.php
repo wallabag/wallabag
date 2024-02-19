@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller;
+namespace Wallabag\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\Form;
@@ -10,9 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule;
-use Wallabag\CoreBundle\Form\Type\IgnoreOriginInstanceRuleType;
-use Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository;
+use Wallabag\Entity\IgnoreOriginInstanceRule;
+use Wallabag\Form\Type\IgnoreOriginInstanceRuleType;
+use Wallabag\Repository\IgnoreOriginInstanceRuleRepository;
 
 /**
  * IgnoreOriginInstanceRuleController controller.

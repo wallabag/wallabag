@@ -1,12 +1,12 @@
 <?php
 
-namespace Wallabag\CoreBundle\DataFixtures;
+namespace Wallabag\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use Wallabag\CoreBundle\Entity\IgnoreOriginUserRule;
-use Wallabag\CoreBundle\Entity\User;
+use Wallabag\Entity\IgnoreOriginUserRule;
+use Wallabag\Entity\User;
 
 class IgnoreOriginUserRuleFixtures extends Fixture implements DependentFixtureInterface
 {

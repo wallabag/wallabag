@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\SiteConfig;
+namespace Tests\Wallabag\SiteConfig;
 
 use Graby\SiteConfig\ConfigBuilder;
 use Graby\SiteConfig\SiteConfig as GrabySiteConfig;
@@ -8,10 +8,10 @@ use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Repository\SiteCredentialRepository;
-use Wallabag\CoreBundle\SiteConfig\GrabySiteConfigBuilder;
+use Tests\Wallabag\WallabagCoreTestCase;
+use Wallabag\Entity\User;
+use Wallabag\Repository\SiteCredentialRepository;
+use Wallabag\SiteConfig\GrabySiteConfigBuilder;
 
 class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
 {

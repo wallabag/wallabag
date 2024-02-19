@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Form\DataTransformer;
+namespace Tests\Wallabag\Form\DataTransformer;
 
 use PHPUnit\Framework\TestCase;
-use Wallabag\CoreBundle\Form\DataTransformer\StringToListTransformer;
+use Wallabag\Form\DataTransformer\StringToListTransformer;
 
 class StringToListTransformerTest extends TestCase
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Wallabag\CoreBundle\DataFixtures;
+namespace Wallabag\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use Wallabag\CoreBundle\Entity\Config;
-use Wallabag\CoreBundle\Entity\TaggingRule;
+use Wallabag\Entity\Config;
+use Wallabag\Entity\TaggingRule;
 
 class TaggingRuleFixtures extends Fixture implements DependentFixtureInterface
 {

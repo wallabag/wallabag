@@ -1,12 +1,12 @@
 <?php
 
-namespace Wallabag\CoreBundle\Helper;
+namespace Wallabag\Helper;
 
 use Pagerfanta\Adapter\AdapterInterface;
 use Pagerfanta\Adapter\NullAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Wallabag\CoreBundle\Entity\User;
+use Wallabag\Entity\User;
 
 class PreparePagerForEntries
 {

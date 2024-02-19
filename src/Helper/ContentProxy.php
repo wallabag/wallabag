@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Helper;
+namespace Wallabag\Helper;
 
 use Graby\Graby;
 use Psr\Log\LoggerInterface;
@@ -8,8 +8,8 @@ use Symfony\Component\Mime\MimeTypes;
 use Symfony\Component\Validator\Constraints\Locale as LocaleConstraint;
 use Symfony\Component\Validator\Constraints\Url as UrlConstraint;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Tools\Utils;
+use Wallabag\Entity\Entry;
+use Wallabag\Tools\Utils;
 
 /**
  * This kind of proxy class takes care of getting the content from an url

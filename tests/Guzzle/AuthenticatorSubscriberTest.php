@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Guzzle;
+namespace Tests\Wallabag\Guzzle;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Event\BeforeEvent;
@@ -12,10 +12,10 @@ use GuzzleHttp\Subscriber\Mock;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
-use Wallabag\CoreBundle\Guzzle\AuthenticatorSubscriber;
-use Wallabag\CoreBundle\SiteConfig\ArraySiteConfigBuilder;
-use Wallabag\CoreBundle\SiteConfig\Authenticator\Authenticator;
-use Wallabag\CoreBundle\SiteConfig\Authenticator\Factory;
+use Wallabag\Guzzle\AuthenticatorSubscriber;
+use Wallabag\SiteConfig\ArraySiteConfigBuilder;
+use Wallabag\SiteConfig\Authenticator\Authenticator;
+use Wallabag\SiteConfig\Authenticator\Factory;
 
 class AuthenticatorSubscriberTest extends TestCase
 {

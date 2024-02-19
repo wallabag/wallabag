@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Command;
+namespace Tests\Wallabag\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\CoreBundle\Entity\Entry;
+use Tests\Wallabag\WallabagCoreTestCase;
+use Wallabag\Entity\Entry;
 
 class UpdatePicturesPathCommandTest extends WallabagCoreTestCase
 {
@@ -51,7 +51,7 @@ class UpdatePicturesPathCommandTest extends WallabagCoreTestCase
         $entry = $em->getRepository(Entry::class)->findOneByUrl($url);
         $this->assertSame($entry->getPreviewPicture(), $client->getContainer()->getParameter('domain_name') . '/mypicture.jpg');
 
-        $query = $em->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\Entry e WHERE e.url = :url');
+        $query = $em->createQuery('DELETE FROM Wallabag\Entity\Entry e WHERE e.url = :url');
         $query->setParameter('url', $url);
         $query->execute();
     }

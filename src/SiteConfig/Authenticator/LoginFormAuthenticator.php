@@ -1,12 +1,12 @@
 <?php
 
-namespace Wallabag\CoreBundle\SiteConfig\Authenticator;
+namespace Wallabag\SiteConfig\Authenticator;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Cookie\CookieJar;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
-use Wallabag\CoreBundle\ExpressionLanguage\AuthenticatorProvider;
-use Wallabag\CoreBundle\SiteConfig\SiteConfig;
+use Wallabag\ExpressionLanguage\AuthenticatorProvider;
+use Wallabag\SiteConfig\SiteConfig;
 
 class LoginFormAuthenticator implements Authenticator
 {

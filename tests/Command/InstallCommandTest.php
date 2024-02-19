@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Command;
+namespace Tests\Wallabag\Command;
 
 use DAMA\DoctrineTestBundle\Doctrine\DBAL\StaticDriver;
 use Doctrine\DBAL\Connection;
@@ -13,8 +13,8 @@ use Symfony\Component\Console\Command\LazyCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\CoreBundle\Command\InstallCommand;
+use Tests\Wallabag\WallabagCoreTestCase;
+use Wallabag\Command\InstallCommand;
 
 class InstallCommandTest extends WallabagCoreTestCase
 {

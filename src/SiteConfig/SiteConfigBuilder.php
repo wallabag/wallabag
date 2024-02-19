@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\SiteConfig;
+namespace Wallabag\SiteConfig;
 
 interface SiteConfigBuilder
 {

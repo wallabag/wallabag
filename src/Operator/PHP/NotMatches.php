@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Operator\PHP;
+namespace Wallabag\Operator\PHP;
 
 /**
  * Provides a "notmatches" operator used for tagging rules.

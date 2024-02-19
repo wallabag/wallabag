@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Application\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Wallabag\CoreBundle\Doctrine\WallabagMigration;
+use Wallabag\Doctrine\WallabagMigration;
 
 /**
  * Add custom_css column to config table.

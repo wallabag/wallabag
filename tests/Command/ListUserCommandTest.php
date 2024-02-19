@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Command;
+namespace Tests\Wallabag\Command;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagCoreTestCase;
 
 class ListUserCommandTest extends WallabagCoreTestCase
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Wallabag\CoreBundle\Repository\Api;
+namespace Wallabag\Repository\Api;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Wallabag\CoreBundle\Entity\Api\Client;
+use Wallabag\Entity\Api\Client;
 
 /**
  * @method Client[] findByUser(int $userId)

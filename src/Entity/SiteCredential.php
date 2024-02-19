@@ -1,15 +1,15 @@
 <?php
 
-namespace Wallabag\CoreBundle\Entity;
+namespace Wallabag\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
+use Wallabag\Helper\EntityTimestampsTrait;
 
 /**
  * SiteCredential.
  *
- * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\SiteCredentialRepository")
+ * @ORM\Entity(repositoryClass="Wallabag\Repository\SiteCredentialRepository")
  * @ORM\Table(name="`site_credential`")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -66,7 +66,7 @@ class SiteCredential
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\User", inversedBy="siteCredentials")
+     * @ORM\ManyToOne(targetEntity="Wallabag\Entity\User", inversedBy="siteCredentials")
      */
     private $user;
 

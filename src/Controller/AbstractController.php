@@ -1,9 +1,9 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller;
+namespace Wallabag\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as BaseAbstractController;
-use Wallabag\CoreBundle\Entity\User;
+use Wallabag\Entity\User;
 
 abstract class AbstractController extends BaseAbstractController
 {

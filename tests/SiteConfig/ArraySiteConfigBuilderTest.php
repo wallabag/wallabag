@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\SiteConfig;
+namespace Tests\Wallabag\SiteConfig;
 
 use PHPUnit\Framework\TestCase;
-use Wallabag\CoreBundle\SiteConfig\ArraySiteConfigBuilder;
-use Wallabag\CoreBundle\SiteConfig\SiteConfig;
+use Wallabag\SiteConfig\ArraySiteConfigBuilder;
+use Wallabag\SiteConfig\SiteConfig;
 
 class ArraySiteConfigBuilderTest extends TestCase
 {

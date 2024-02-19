@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Form\Type\Api;
+namespace Wallabag\Form\Type\Api;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Wallabag\CoreBundle\Entity\Api\Client;
+use Wallabag\Entity\Api\Client;
 
 class ClientType extends AbstractType
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Wallabag\CoreBundle\Helper;
+namespace Wallabag\Helper;
 
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Repository\TagRepository;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\Tag;
+use Wallabag\Repository\TagRepository;
 
 class TagsAssigner
 {

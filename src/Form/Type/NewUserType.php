@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Form\Type;
+namespace Wallabag\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Wallabag\CoreBundle\Entity\User;
+use Wallabag\Entity\User;
 
 class NewUserType extends AbstractType
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Entity;
+namespace Tests\Wallabag\Entity;
 
-use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\CoreBundle\Entity\Entry;
+use Tests\Wallabag\WallabagCoreTestCase;
+use Wallabag\Entity\Entry;
 
 class EntryTest extends WallabagCoreTestCase
 {

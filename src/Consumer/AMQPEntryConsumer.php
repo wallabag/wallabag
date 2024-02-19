@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Consumer;
+namespace Wallabag\Consumer;
 
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;

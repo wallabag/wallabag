@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\SiteConfig;
+namespace Tests\Wallabag\SiteConfig;
 
 use PHPUnit\Framework\TestCase;
-use Wallabag\CoreBundle\SiteConfig\SiteConfig;
+use Wallabag\SiteConfig\SiteConfig;
 
 class SiteConfigTest extends TestCase
 {

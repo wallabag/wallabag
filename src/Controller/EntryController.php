@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller;
+namespace Wallabag\Controller;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,19 +15,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Event\EntryDeletedEvent;
-use Wallabag\CoreBundle\Event\EntrySavedEvent;
-use Wallabag\CoreBundle\Form\Type\EditEntryType;
-use Wallabag\CoreBundle\Form\Type\EntryFilterType;
-use Wallabag\CoreBundle\Form\Type\NewEntryType;
-use Wallabag\CoreBundle\Form\Type\SearchEntryType;
-use Wallabag\CoreBundle\Helper\ContentProxy;
-use Wallabag\CoreBundle\Helper\PreparePagerForEntries;
-use Wallabag\CoreBundle\Helper\Redirect;
-use Wallabag\CoreBundle\Repository\EntryRepository;
-use Wallabag\CoreBundle\Repository\TagRepository;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\Tag;
+use Wallabag\Event\EntryDeletedEvent;
+use Wallabag\Event\EntrySavedEvent;
+use Wallabag\Form\Type\EditEntryType;
+use Wallabag\Form\Type\EntryFilterType;
+use Wallabag\Form\Type\NewEntryType;
+use Wallabag\Form\Type\SearchEntryType;
+use Wallabag\Helper\ContentProxy;
+use Wallabag\Helper\PreparePagerForEntries;
+use Wallabag\Helper\Redirect;
+use Wallabag\Repository\EntryRepository;
+use Wallabag\Repository\TagRepository;
 
 class EntryController extends AbstractController
 {

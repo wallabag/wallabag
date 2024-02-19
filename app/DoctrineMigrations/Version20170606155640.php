@@ -3,7 +3,7 @@
 namespace Application\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Wallabag\CoreBundle\Doctrine\WallabagMigration;
+use Wallabag\Doctrine\WallabagMigration;
 
 /**
  * Remove wallabag_url from craue_config_setting.

@@ -1,15 +1,15 @@
 <?php
 
-namespace Wallabag\CoreBundle\DataFixtures;
+namespace Wallabag\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Wallabag\CoreBundle\Entity\SiteCredential;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Helper\CryptoProxy;
+use Wallabag\Entity\SiteCredential;
+use Wallabag\Entity\User;
+use Wallabag\Helper\CryptoProxy;
 
 class SiteCredentialFixtures extends Fixture implements DependentFixtureInterface, ContainerAwareInterface
 {

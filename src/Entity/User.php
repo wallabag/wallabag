@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Entity;
+namespace Wallabag\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,14 +14,14 @@ use Scheb\TwoFactorBundle\Model\BackupCodeInterface;
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface as EmailTwoFactorInterface;
 use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface as GoogleTwoFactorInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Wallabag\CoreBundle\Entity\Api\Client;
-use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
+use Wallabag\Entity\Api\Client;
+use Wallabag\Helper\EntityTimestampsTrait;
 
 /**
  * User.
  *
  * @XmlRoot("user")
- * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="Wallabag\Repository\UserRepository")
  * @ORM\Table(name="`user`")
  * @ORM\HasLifecycleCallbacks()
  *
@@ -122,26 +122,26 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     protected $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\Entry", mappedBy="user", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Wallabag\Entity\Entry", mappedBy="user", cascade={"remove"})
      */
     protected $entries;
 
     /**
-     * @ORM\OneToOne(targetEntity="Wallabag\CoreBundle\Entity\Config", mappedBy="user", cascade={"remove"})
+     * @ORM\OneToOne(targetEntity="Wallabag\Entity\Config", mappedBy="user", cascade={"remove"})
      */
     protected $config;
 
     /**
-     * @var ArrayCollection&iterable<\Wallabag\CoreBundle\Entity\SiteCredential>
+     * @var ArrayCollection&iterable<\Wallabag\Entity\SiteCredential>
      *
-     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\SiteCredential", mappedBy="user", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Wallabag\Entity\SiteCredential", mappedBy="user", cascade={"remove"})
      */
     protected $siteCredentials;
 
     /**
-     * @var ArrayCollection&iterable<\Wallabag\CoreBundle\Entity\Api\Client>
+     * @var ArrayCollection&iterable<\Wallabag\Entity\Api\Client>
      *
-     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\Api\Client", mappedBy="user", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Wallabag\Entity\Api\Client", mappedBy="user", cascade={"remove"})
      */
     protected $clients;
 

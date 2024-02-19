@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Command\Import;
+namespace Tests\Wallabag\Command\Import;
 
 use M6Web\Component\RedisMock\RedisMockFactory;
 use Predis\Client;
@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagCoreTestCase;
 
 class RedisWorkerCommandTest extends WallabagCoreTestCase
 {

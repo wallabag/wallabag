@@ -6,7 +6,7 @@ use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Schema;
-use Wallabag\CoreBundle\Doctrine\WallabagMigration;
+use Wallabag\Doctrine\WallabagMigration;
 
 /**
  * Remove the deprecated (and removed in DBAL v3) `json_array` type.

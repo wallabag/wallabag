@@ -1,11 +1,11 @@
 <?php
 
-namespace Wallabag\CoreBundle\Helper;
+namespace Wallabag\Helper;
 
 use Psr\Log\LoggerInterface;
 use RulerZ\RulerZ;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository;
+use Wallabag\Entity\Entry;
+use Wallabag\Repository\IgnoreOriginInstanceRuleRepository;
 
 class RuleBasedIgnoreOriginProcessor
 {

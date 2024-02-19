@@ -1,13 +1,13 @@
 <?php
 
-namespace Wallabag\CoreBundle\Event\Listener;
+namespace Wallabag\Event\Listener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Wallabag\CoreBundle\Entity\Config;
+use Wallabag\Entity\Config;
 
 /**
  * This listener will create the associated configuration when a user register.

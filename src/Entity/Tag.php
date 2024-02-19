@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Entity;
+namespace Wallabag\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -20,7 +20,7 @@ use JMS\Serializer\Annotation\XmlRoot;
  *         @ORM\Index(name="tag_label", columns={"label"}, options={"lengths"={255}}),
  *     }
  * )
- * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\TagRepository")
+ * @ORM\Entity(repositoryClass="Wallabag\Repository\TagRepository")
  * @ExclusionPolicy("all")
  */
 class Tag

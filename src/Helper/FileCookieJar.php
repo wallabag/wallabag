@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Helper;
+namespace Wallabag\Helper;
 
 use GuzzleHttp\Cookie\FileCookieJar as BaseFileCookieJar;
 use GuzzleHttp\Cookie\SetCookie;

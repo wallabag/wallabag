@@ -1,16 +1,16 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller\Api;
+namespace Wallabag\Controller\Api;
 
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Repository\EntryRepository;
-use Wallabag\CoreBundle\Repository\TagRepository;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\Tag;
+use Wallabag\Repository\EntryRepository;
+use Wallabag\Repository\TagRepository;
 
 class TagRestController extends WallabagRestController
 {

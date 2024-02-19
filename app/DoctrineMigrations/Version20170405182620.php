@@ -3,7 +3,7 @@
 namespace Application\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Wallabag\CoreBundle\Doctrine\WallabagMigration;
+use Wallabag\Doctrine\WallabagMigration;
 
 /**
  * Add published_at and published_by in `entry` table.

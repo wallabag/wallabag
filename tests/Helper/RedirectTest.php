@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Helper;
+namespace Tests\Wallabag\Helper;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Wallabag\CoreBundle\Entity\Config;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Helper\Redirect;
+use Wallabag\Entity\Config;
+use Wallabag\Entity\User;
+use Wallabag\Helper\Redirect;
 
 class RedirectTest extends TestCase
 {

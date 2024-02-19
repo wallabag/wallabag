@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Tools;
+namespace Tests\Wallabag\Tools;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Finder\Finder;
-use Wallabag\CoreBundle\Tools\Utils;
+use Wallabag\Tools\Utils;
 
 class UtilsTest extends TestCase
 {

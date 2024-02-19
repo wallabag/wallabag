@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller\Api;
+namespace Wallabag\Controller\Api;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,9 +15,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Wallabag\CoreBundle\Entity\Api\Client;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Form\Type\NewUserType;
+use Wallabag\Entity\Api\Client;
+use Wallabag\Entity\User;
+use Wallabag\Form\Type\NewUserType;
 
 class UserRestController extends WallabagRestController
 {

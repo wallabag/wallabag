@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Event\Listener;
+namespace Wallabag\Event\Listener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;

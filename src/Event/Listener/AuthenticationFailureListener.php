@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Event\Listener;
+namespace Wallabag\Event\Listener;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

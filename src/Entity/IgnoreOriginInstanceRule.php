@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Entity;
+namespace Wallabag\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\RulerZ\Validator\Constraints as RulerZAssert;
@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Ignore Origin rule.
  *
- * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository")
+ * @ORM\Entity(repositoryClass="Wallabag\Repository\IgnoreOriginInstanceRuleRepository")
  * @ORM\Table(name="`ignore_origin_instance_rule`")
  */
 class IgnoreOriginInstanceRule implements IgnoreOriginRuleInterface, RuleInterface

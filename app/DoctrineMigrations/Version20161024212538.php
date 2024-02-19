@@ -4,7 +4,7 @@ namespace Application\Migrations;
 
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Schema;
-use Wallabag\CoreBundle\Doctrine\WallabagMigration;
+use Wallabag\Doctrine\WallabagMigration;
 
 /**
  * Added user_id column on oauth2_clients to prevent users to delete API clients from other users.

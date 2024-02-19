@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Controller;
+namespace Tests\Wallabag\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Entity\User;
+use Tests\Wallabag\WallabagCoreTestCase;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\Tag;
+use Wallabag\Entity\User;
 
 /**
  * @group Tag

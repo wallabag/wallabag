@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Doctrine;
+namespace Wallabag\Doctrine;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\JsonType;

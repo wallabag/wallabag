@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Entity;
+namespace Wallabag\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Exclude;
@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Tagging rule.
  *
  * @XmlRoot("tagging_rule")
- * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\TaggingRuleRepository")
+ * @ORM\Entity(repositoryClass="Wallabag\Repository\TaggingRuleRepository")
  * @ORM\Table(name="`tagging_rule`")
  * @ORM\Entity
  */
@@ -56,7 +56,7 @@ class TaggingRule implements RuleInterface
     /**
      * @Exclude
      *
-     * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\Config", inversedBy="taggingRules")
+     * @ORM\ManyToOne(targetEntity="Wallabag\Entity\Config", inversedBy="taggingRules")
      */
     private $config;
 

@@ -1,17 +1,17 @@
 <?php
 
-namespace Wallabag\CoreBundle\Import;
+namespace Wallabag\Import;
 
 use Doctrine\ORM\EntityManagerInterface;
 use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Event\EntrySavedEvent;
-use Wallabag\CoreBundle\Helper\ContentProxy;
-use Wallabag\CoreBundle\Helper\TagsAssigner;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\Tag;
+use Wallabag\Entity\User;
+use Wallabag\Event\EntrySavedEvent;
+use Wallabag\Helper\ContentProxy;
+use Wallabag\Helper\TagsAssigner;
 
 abstract class AbstractImport implements ImportInterface
 {

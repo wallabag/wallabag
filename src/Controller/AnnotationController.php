@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller;
+namespace Wallabag\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
@@ -10,12 +10,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Wallabag\CoreBundle\Entity\Annotation;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Form\Type\EditAnnotationType;
-use Wallabag\CoreBundle\Form\Type\NewAnnotationType;
-use Wallabag\CoreBundle\Repository\AnnotationRepository;
+use Wallabag\Entity\Annotation;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\User;
+use Wallabag\Form\Type\EditAnnotationType;
+use Wallabag\Form\Type\NewAnnotationType;
+use Wallabag\Repository\AnnotationRepository;
 
 class AnnotationController extends AbstractFOSRestController
 {

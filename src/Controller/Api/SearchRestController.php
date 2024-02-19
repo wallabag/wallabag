@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller\Api;
+namespace Wallabag\Controller\Api;
 
 use Hateoas\Configuration\Route as HateoasRoute;
 use Hateoas\Representation\Factory\PagerfantaFactory;
@@ -11,7 +11,7 @@ use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\Repository\EntryRepository;
 
 class SearchRestController extends WallabagRestController
 {

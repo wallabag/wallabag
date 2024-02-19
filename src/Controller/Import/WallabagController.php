@@ -1,14 +1,14 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller\Import;
+namespace Wallabag\Controller\Import;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\CoreBundle\Controller\AbstractController;
-use Wallabag\CoreBundle\Form\Type\UploadImportType;
-use Wallabag\CoreBundle\Import\ImportInterface;
+use Wallabag\Controller\AbstractController;
+use Wallabag\Form\Type\UploadImportType;
+use Wallabag\Import\ImportInterface;
 
 /**
  * Define Wallabag import for v1 and v2, since there are very similar.

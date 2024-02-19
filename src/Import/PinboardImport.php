@@ -1,8 +1,8 @@
 <?php
 
-namespace Wallabag\CoreBundle\Import;
+namespace Wallabag\Import;
 
-use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\Entity\Entry;
 
 class PinboardImport extends AbstractImport
 {

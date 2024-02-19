@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Entity;
+namespace Wallabag\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Exclude;
@@ -9,13 +9,13 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Component\Validator\Constraints as Assert;
-use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
+use Wallabag\Helper\EntityTimestampsTrait;
 
 /**
  * Annotation.
  *
  * @ORM\Table(name="annotation")
- * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\AnnotationRepository")
+ * @ORM\Entity(repositoryClass="Wallabag\Repository\AnnotationRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ExclusionPolicy("none")
  */
@@ -80,14 +80,14 @@ class Annotation
     /**
      * @Exclude
      *
-     * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Wallabag\Entity\User")
      */
     private $user;
 
     /**
      * @Exclude
      *
-     * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\Entry", inversedBy="annotations")
+     * @ORM\ManyToOne(targetEntity="Wallabag\Entity\Entry", inversedBy="annotations")
      * @ORM\JoinColumn(name="entry_id", referencedColumnName="id", onDelete="cascade")
      */
     private $entry;

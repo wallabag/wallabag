@@ -1,10 +1,10 @@
 <?php
 
-namespace Wallabag\CoreBundle\DataFixtures;
+namespace Wallabag\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Wallabag\CoreBundle\Entity\User;
+use Wallabag\Entity\User;
 
 class UserFixtures extends Fixture
 {

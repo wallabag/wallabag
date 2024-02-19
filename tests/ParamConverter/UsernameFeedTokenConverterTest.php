@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\ParamConverter;
+namespace Tests\Wallabag\ParamConverter;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\Mapping\ClassMetadata;
@@ -9,9 +9,9 @@ use PHPUnit\Framework\TestCase;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\ParamConverter\UsernameFeedTokenConverter;
-use Wallabag\CoreBundle\Repository\UserRepository;
+use Wallabag\Entity\User;
+use Wallabag\ParamConverter\UsernameFeedTokenConverter;
+use Wallabag\Repository\UserRepository;
 
 class UsernameFeedTokenConverterTest extends TestCase
 {

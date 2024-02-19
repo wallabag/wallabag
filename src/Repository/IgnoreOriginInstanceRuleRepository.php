@@ -1,10 +1,10 @@
 <?php
 
-namespace Wallabag\CoreBundle\Repository;
+namespace Wallabag\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule;
+use Wallabag\Entity\IgnoreOriginInstanceRule;
 
 class IgnoreOriginInstanceRuleRepository extends ServiceEntityRepository
 {

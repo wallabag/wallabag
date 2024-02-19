@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Form\DataTransformer;
+namespace Wallabag\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 

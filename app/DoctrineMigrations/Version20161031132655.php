@@ -3,7 +3,7 @@
 namespace Application\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Wallabag\CoreBundle\Doctrine\WallabagMigration;
+use Wallabag\Doctrine\WallabagMigration;
 
 /**
  * Added the internal setting to enable/disable downloading pictures.

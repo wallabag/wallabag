@@ -1,11 +1,11 @@
 <?php
 
-namespace Wallabag\CoreBundle\Repository;
+namespace Wallabag\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Wallabag\CoreBundle\Entity\SiteCredential;
-use Wallabag\CoreBundle\Helper\CryptoProxy;
+use Wallabag\Entity\SiteCredential;
+use Wallabag\Helper\CryptoProxy;
 
 /**
  * SiteCredentialRepository.

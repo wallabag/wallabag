@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Command;
+namespace Wallabag\Command;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception\DriverException;
@@ -20,9 +20,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule;
-use Wallabag\CoreBundle\Entity\InternalSetting;
-use Wallabag\CoreBundle\Entity\User;
+use Wallabag\Entity\IgnoreOriginInstanceRule;
+use Wallabag\Entity\InternalSetting;
+use Wallabag\Entity\User;
 
 class InstallCommand extends Command
 {
@@ -299,8 +299,8 @@ class InstallCommand extends Command
         $this->io->section('Step 4 of 4: Config setup.');
 
         // cleanup before insert new stuff
-        $this->entityManager->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\InternalSetting')->execute();
-        $this->entityManager->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule')->execute();
+        $this->entityManager->createQuery('DELETE FROM Wallabag\Entity\InternalSetting')->execute();
+        $this->entityManager->createQuery('DELETE FROM Wallabag\Entity\IgnoreOriginInstanceRule')->execute();
 
         foreach ($this->defaultSettings as $setting) {
             $newSetting = new InternalSetting();

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Application\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Wallabag\CoreBundle\Doctrine\WallabagMigration;
+use Wallabag\Doctrine\WallabagMigration;
 
 /**
  * Add is_not_parsed field to entry table.

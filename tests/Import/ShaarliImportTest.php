@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Import;
+namespace Tests\Wallabag\Import;
 
 use Doctrine\ORM\EntityManager;
 use M6Web\Component\RedisMock\RedisMockFactory;
@@ -10,13 +10,13 @@ use PHPUnit\Framework\TestCase;
 use Predis\Client;
 use Simpleue\Queue\RedisQueue;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Helper\ContentProxy;
-use Wallabag\CoreBundle\Helper\TagsAssigner;
-use Wallabag\CoreBundle\Import\ShaarliImport;
-use Wallabag\CoreBundle\Redis\Producer;
-use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\User;
+use Wallabag\Helper\ContentProxy;
+use Wallabag\Helper\TagsAssigner;
+use Wallabag\Import\ShaarliImport;
+use Wallabag\Redis\Producer;
+use Wallabag\Repository\EntryRepository;
 
 class ShaarliImportTest extends TestCase
 {

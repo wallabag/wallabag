@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Mailer;
+namespace Wallabag\Mailer;
 
 use FOS\UserBundle\Mailer\TwigSwiftMailer;
 use Symfony\Component\Mailer\MailerInterface;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Entity;
+namespace Wallabag\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,14 +11,14 @@ use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
 use JMS\Serializer\Annotation\XmlRoot;
 use Symfony\Component\Validator\Constraints as Assert;
-use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
-use Wallabag\CoreBundle\Helper\UrlHasher;
+use Wallabag\Helper\EntityTimestampsTrait;
+use Wallabag\Helper\UrlHasher;
 
 /**
  * Entry.
  *
  * @XmlRoot("entry")
- * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\EntryRepository")
+ * @ORM\Entity(repositoryClass="Wallabag\Repository\EntryRepository")
  * @ORM\Table(
  *     name="`entry`",
  *     options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"},
@@ -204,7 +204,7 @@ class Entry
     private $starredAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\Annotation", mappedBy="entry", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Wallabag\Entity\Annotation", mappedBy="entry", cascade={"persist", "remove"})
      * @ORM\JoinTable
      *
      * @Groups({"entries_for_user", "export_all"})
@@ -288,14 +288,14 @@ class Entry
     /**
      * @Exclude
      *
-     * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\User", inversedBy="entries")
+     * @ORM\ManyToOne(targetEntity="Wallabag\Entity\User", inversedBy="entries")
      *
      * @Groups({"export_all"})
      */
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Wallabag\CoreBundle\Entity\Tag", inversedBy="entries", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Wallabag\Entity\Tag", inversedBy="entries", cascade={"persist"})
      * @ORM\JoinTable(
      *  name="entry_tag",
      *  joinColumns={

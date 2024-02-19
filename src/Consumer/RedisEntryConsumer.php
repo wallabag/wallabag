@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Consumer;
+namespace Wallabag\Consumer;
 
 use Simpleue\Job\Job;
 

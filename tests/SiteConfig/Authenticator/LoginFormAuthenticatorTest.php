@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\SiteConfig\Authenticator;
+namespace Tests\Wallabag\SiteConfig\Authenticator;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\Mock;
 use PHPUnit\Framework\TestCase;
-use Wallabag\CoreBundle\SiteConfig\Authenticator\LoginFormAuthenticator;
-use Wallabag\CoreBundle\SiteConfig\SiteConfig;
+use Wallabag\SiteConfig\Authenticator\LoginFormAuthenticator;
+use Wallabag\SiteConfig\SiteConfig;
 
 class LoginFormAuthenticatorTest extends TestCase
 {

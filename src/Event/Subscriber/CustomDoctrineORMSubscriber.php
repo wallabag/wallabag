@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Event\Subscriber;
+namespace Wallabag\Event\Subscriber;
 
 use Spiriit\Bundle\FormFilterBundle\Event\GetFilterConditionEvent;
 use Spiriit\Bundle\FormFilterBundle\Event\Subscriber\DoctrineORMSubscriber;

@@ -1,14 +1,14 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller\Import;
+namespace Wallabag\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\CoreBundle\Import\FirefoxImport;
-use Wallabag\CoreBundle\Redis\Producer as RedisProducer;
+use Wallabag\Import\FirefoxImport;
+use Wallabag\Redis\Producer as RedisProducer;
 
 class FirefoxController extends BrowserController
 {

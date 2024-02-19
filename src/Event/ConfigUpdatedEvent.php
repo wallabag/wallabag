@@ -1,9 +1,9 @@
 <?php
 
-namespace Wallabag\CoreBundle\Event;
+namespace Wallabag\Event;
 
 use Symfony\Contracts\EventDispatcher\Event;
-use Wallabag\CoreBundle\Entity\Config;
+use Wallabag\Entity\Config;
 
 /**
  * This event is fired as soon as user configuration is updated.

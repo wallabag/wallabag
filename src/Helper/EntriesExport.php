@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Helper;
+namespace Wallabag\Helper;
 
 use Html2Text\Html2Text;
 use JMS\Serializer\SerializationContext;
@@ -10,8 +10,8 @@ use PHPePub\Core\Structure\OPF\DublinCore;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\User;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\User;
 
 /**
  * This class doesn't have unit test BUT it's fully covered by a functional test with ExportControllerTest.

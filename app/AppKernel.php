@@ -3,7 +3,7 @@
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
-use Wallabag\CoreBundle\Import\ImportCompilerPass;
+use Wallabag\Import\ImportCompilerPass;
 
 class AppKernel extends Kernel
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle;
+namespace Tests\Wallabag;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Wallabag\CoreBundle\Entity\User;
+use Wallabag\Entity\User;
 
 abstract class WallabagCoreTestCase extends WebTestCase
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Wallabag\CoreBundle\Event\Subscriber;
+namespace Wallabag\Event\Subscriber;
 
 use Doctrine\ORM\EntityManagerInterface;
 use ScssPhp\ScssPhp\Compiler;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Wallabag\CoreBundle\Event\ConfigUpdatedEvent;
+use Wallabag\Event\ConfigUpdatedEvent;
 
 class GenerateCustomCSSSubscriber implements EventSubscriberInterface
 {

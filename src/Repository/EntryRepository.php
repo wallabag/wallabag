@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Repository;
+namespace Wallabag\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NoResultException;
@@ -8,9 +8,9 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Helper\UrlHasher;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\Tag;
+use Wallabag\Helper\UrlHasher;
 
 /**
  * @method Entry[]    findById(int $id)
@@ -601,7 +601,7 @@ class EntryRepository extends ServiceEntityRepository
     public function removeAllByUserId($userId)
     {
         $this->getEntityManager()
-            ->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\Entry e WHERE e.user = :userId')
+            ->createQuery('DELETE FROM Wallabag\Entity\Entry e WHERE e.user = :userId')
             ->setParameter('userId', $userId)
             ->execute();
     }
@@ -609,7 +609,7 @@ class EntryRepository extends ServiceEntityRepository
     public function removeArchivedByUserId($userId)
     {
         $this->getEntityManager()
-            ->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\Entry e WHERE e.user = :userId AND e.isArchived = TRUE')
+            ->createQuery('DELETE FROM Wallabag\Entity\Entry e WHERE e.user = :userId AND e.isArchived = TRUE')
             ->setParameter('userId', $userId)
             ->execute();
     }

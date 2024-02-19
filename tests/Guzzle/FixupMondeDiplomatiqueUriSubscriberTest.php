@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Guzzle;
+namespace Tests\Wallabag\Guzzle;
 
 use GuzzleHttp\Event\CompleteEvent;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
 use PHPUnit\Framework\TestCase;
-use Wallabag\CoreBundle\Guzzle\FixupMondeDiplomatiqueUriSubscriber;
+use Wallabag\Guzzle\FixupMondeDiplomatiqueUriSubscriber;
 
 class FixupMondeDiplomatiqueUriSubscriberTest extends TestCase
 {

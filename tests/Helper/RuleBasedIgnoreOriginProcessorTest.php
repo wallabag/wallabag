@@ -1,18 +1,18 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Helper;
+namespace Tests\Wallabag\Helper;
 
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
 use RulerZ\RulerZ;
-use Wallabag\CoreBundle\Entity\Config;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule;
-use Wallabag\CoreBundle\Entity\IgnoreOriginUserRule;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Helper\RuleBasedIgnoreOriginProcessor;
-use Wallabag\CoreBundle\Repository\IgnoreOriginInstanceRuleRepository;
+use Wallabag\Entity\Config;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\IgnoreOriginInstanceRule;
+use Wallabag\Entity\IgnoreOriginUserRule;
+use Wallabag\Entity\User;
+use Wallabag\Helper\RuleBasedIgnoreOriginProcessor;
+use Wallabag\Repository\IgnoreOriginInstanceRuleRepository;
 
 class RuleBasedIgnoreOriginProcessorTest extends TestCase
 {

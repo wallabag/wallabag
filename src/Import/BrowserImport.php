@@ -1,9 +1,9 @@
 <?php
 
-namespace Wallabag\CoreBundle\Import;
+namespace Wallabag\Import;
 
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Event\EntrySavedEvent;
+use Wallabag\Entity\Entry;
+use Wallabag\Event\EntrySavedEvent;
 
 abstract class BrowserImport extends AbstractImport
 {

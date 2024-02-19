@@ -1,11 +1,11 @@
 <?php
 
-namespace Wallabag\CoreBundle\Repository;
+namespace Wallabag\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use Wallabag\CoreBundle\Entity\Annotation;
+use Wallabag\Entity\Annotation;
 
 /**
  * AnnotationRepository.
@@ -130,7 +130,7 @@ class AnnotationRepository extends ServiceEntityRepository
     public function removeAllByUserId($userId)
     {
         $this->getEntityManager()
-            ->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\Annotation a WHERE a.user = :userId')
+            ->createQuery('DELETE FROM Wallabag\Entity\Annotation a WHERE a.user = :userId')
             ->setParameter('userId', $userId)
             ->execute();
     }

@@ -1,11 +1,11 @@
 <?php
 
-namespace Wallabag\CoreBundle\Repository;
+namespace Wallabag\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\Entity\Tag;
 
 /**
  * @method Tag|null findOneByLabel(string $label)

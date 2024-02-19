@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Import;
+namespace Tests\Wallabag\Import;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Wallabag\CoreBundle\Import\ImportChain;
-use Wallabag\CoreBundle\Import\ImportCompilerPass;
+use Wallabag\Import\ImportChain;
+use Wallabag\Import\ImportCompilerPass;
 
 class ImportCompilerPassTest extends TestCase
 {

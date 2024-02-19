@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Twig;
+namespace Wallabag\Twig;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -8,9 +8,9 @@ use Twig\Extension\AbstractExtension;
 use Twig\Extension\GlobalsInterface;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Repository\EntryRepository;
-use Wallabag\CoreBundle\Repository\TagRepository;
+use Wallabag\Entity\User;
+use Wallabag\Repository\EntryRepository;
+use Wallabag\Repository\TagRepository;
 
 class WallabagExtension extends AbstractExtension implements GlobalsInterface
 {

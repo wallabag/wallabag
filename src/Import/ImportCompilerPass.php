@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Import;
+namespace Wallabag\Import;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

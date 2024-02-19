@@ -1,12 +1,12 @@
 <?php
 
-namespace Wallabag\CoreBundle\Import;
+namespace Wallabag\Import;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Wallabag\CoreBundle\Helper\ContentProxy;
-use Wallabag\CoreBundle\Helper\TagsAssigner;
+use Wallabag\Helper\ContentProxy;
+use Wallabag\Helper\TagsAssigner;
 
 class WallabagV1Import extends WallabagImport
 {

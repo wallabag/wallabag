@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Guzzle;
+namespace Wallabag\Guzzle;
 
 use GuzzleHttp\Event\BeforeEvent;
 use GuzzleHttp\Event\CompleteEvent;
@@ -9,9 +9,9 @@ use GuzzleHttp\Message\RequestInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Wallabag\CoreBundle\SiteConfig\Authenticator\Factory;
-use Wallabag\CoreBundle\SiteConfig\SiteConfig;
-use Wallabag\CoreBundle\SiteConfig\SiteConfigBuilder;
+use Wallabag\SiteConfig\Authenticator\Factory;
+use Wallabag\SiteConfig\SiteConfig;
+use Wallabag\SiteConfig\SiteConfigBuilder;
 
 class AuthenticatorSubscriber implements SubscriberInterface, LoggerAwareInterface
 {

@@ -1,19 +1,19 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Controller;
+namespace Tests\Wallabag\Controller;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\CoreBundle\Entity\Annotation;
-use Wallabag\CoreBundle\Entity\Config as ConfigEntity;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\SiteCredential;
-use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Helper\ContentProxy;
-use Wallabag\CoreBundle\Helper\CryptoProxy;
+use Tests\Wallabag\WallabagCoreTestCase;
+use Wallabag\Entity\Annotation;
+use Wallabag\Entity\Config as ConfigEntity;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\SiteCredential;
+use Wallabag\Entity\Tag;
+use Wallabag\Entity\User;
+use Wallabag\Helper\ContentProxy;
+use Wallabag\Helper\CryptoProxy;
 
 class EntryControllerTest extends WallabagCoreTestCase
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Controller\Api;
+namespace Tests\Wallabag\Controller\Api;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\Tag;
 
 class TagRestControllerTest extends WallabagApiTestCase
 {

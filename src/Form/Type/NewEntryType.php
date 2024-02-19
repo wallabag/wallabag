@@ -1,12 +1,12 @@
 <?php
 
-namespace Wallabag\CoreBundle\Form\Type;
+namespace Wallabag\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\Entity\Entry;
 
 class NewEntryType extends AbstractType
 {

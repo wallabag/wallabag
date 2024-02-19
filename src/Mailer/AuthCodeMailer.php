@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Mailer;
+namespace Wallabag\Mailer;
 
 use Scheb\TwoFactorBundle\Mailer\AuthCodeMailerInterface;
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;

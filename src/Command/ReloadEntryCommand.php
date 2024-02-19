@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Command;
+namespace Wallabag\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NoResultException;
@@ -11,10 +11,10 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Wallabag\CoreBundle\Event\EntrySavedEvent;
-use Wallabag\CoreBundle\Helper\ContentProxy;
-use Wallabag\CoreBundle\Repository\EntryRepository;
-use Wallabag\CoreBundle\Repository\UserRepository;
+use Wallabag\Event\EntrySavedEvent;
+use Wallabag\Helper\ContentProxy;
+use Wallabag\Repository\EntryRepository;
+use Wallabag\Repository\UserRepository;
 
 class ReloadEntryCommand extends Command
 {

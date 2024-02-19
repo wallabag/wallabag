@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller;
+namespace Wallabag\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
@@ -11,15 +11,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Form\Type\NewTagType;
-use Wallabag\CoreBundle\Form\Type\RenameTagType;
-use Wallabag\CoreBundle\Helper\PreparePagerForEntries;
-use Wallabag\CoreBundle\Helper\Redirect;
-use Wallabag\CoreBundle\Helper\TagsAssigner;
-use Wallabag\CoreBundle\Repository\EntryRepository;
-use Wallabag\CoreBundle\Repository\TagRepository;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\Tag;
+use Wallabag\Form\Type\NewTagType;
+use Wallabag\Form\Type\RenameTagType;
+use Wallabag\Helper\PreparePagerForEntries;
+use Wallabag\Helper\Redirect;
+use Wallabag\Helper\TagsAssigner;
+use Wallabag\Repository\EntryRepository;
+use Wallabag\Repository\TagRepository;
 
 class TagController extends AbstractController
 {

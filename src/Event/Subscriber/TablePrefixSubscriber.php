@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Event\Subscriber;
+namespace Wallabag\Event\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;

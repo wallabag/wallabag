@@ -1,12 +1,12 @@
 <?php
 
-namespace Wallabag\CoreBundle\DataFixtures;
+namespace Wallabag\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Wallabag\CoreBundle\Entity\IgnoreOriginInstanceRule;
+use Wallabag\Entity\IgnoreOriginInstanceRule;
 
 class IgnoreOriginInstanceRuleFixtures extends Fixture implements ContainerAwareInterface
 {

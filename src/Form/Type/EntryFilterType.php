@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Form\Type;
+namespace Wallabag\Form\Type;
 
 use Spiriit\Bundle\FormFilterBundle\Filter\FilterOperands;
 use Spiriit\Bundle\FormFilterBundle\Filter\Form\Type\CheckboxFilterType;
@@ -15,8 +15,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\Entity\User;
+use Wallabag\Repository\EntryRepository;
 
 class EntryFilterType extends AbstractType
 {

@@ -4,7 +4,7 @@ imports:
     - { resource: parameters_addons.yml }
 
 parameters:
-    spiriit_form_filter.get_filter.doctrine_orm.class: Wallabag\CoreBundle\Event\Subscriber\CustomDoctrineORMSubscriber
+    spiriit_form_filter.get_filter.doctrine_orm.class: Wallabag\Event\Subscriber\CustomDoctrineORMSubscriber
 
 services:
     _defaults:
@@ -32,73 +32,73 @@ services:
             $supportUrl: '@=service(''craue_config'').get(''wallabag_support_url'')'
             $fonts: '%wallabag_core.fonts%'
 
-    Wallabag\CoreBundle\:
+    Wallabag\:
         resource: '../../src/*'
         exclude: ['../../src/{Consumer,Controller,Entity,ExpressionLanguage,DataFixtures,Redis}', '../../src/Event/*Event.php']
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    Wallabag\CoreBundle\Controller\:
+    Wallabag\Controller\:
         resource: '../../src/Controller/'
         tags: ['controller.service_arguments']
 
     # inject alias service into controllers
-    Wallabag\CoreBundle\Controller\Import\ChromeController:
+    Wallabag\Controller\Import\ChromeController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_chrome_producer'
             $redisProducer: '@wallabag_core.producer.redis.chrome'
 
-    Wallabag\CoreBundle\Controller\Import\DeliciousController:
+    Wallabag\Controller\Import\DeliciousController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_delicious_producer'
             $redisProducer: '@wallabag_core.producer.redis.delicious'
 
-    Wallabag\CoreBundle\Controller\Import\ElcuratorController:
+    Wallabag\Controller\Import\ElcuratorController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_elcurator_producer'
             $redisProducer: '@wallabag_core.producer.redis.elcurator'
 
-    Wallabag\CoreBundle\Controller\Import\FirefoxController:
+    Wallabag\Controller\Import\FirefoxController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_firefox_producer'
             $redisProducer: '@wallabag_core.producer.redis.firefox'
 
-    Wallabag\CoreBundle\Controller\Import\InstapaperController:
+    Wallabag\Controller\Import\InstapaperController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_instapaper_producer'
             $redisProducer: '@wallabag_core.producer.redis.instapaper'
 
-    Wallabag\CoreBundle\Controller\Import\PinboardController:
+    Wallabag\Controller\Import\PinboardController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_pinboard_producer'
             $redisProducer: '@wallabag_core.producer.redis.pinboard'
 
-    Wallabag\CoreBundle\Controller\Import\PocketController:
+    Wallabag\Controller\Import\PocketController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_pocket_producer'
             $redisProducer: '@wallabag_core.producer.redis.pocket'
 
-    Wallabag\CoreBundle\Controller\Import\ReadabilityController:
+    Wallabag\Controller\Import\ReadabilityController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_readability_producer'
             $redisProducer: '@wallabag_core.producer.redis.readability'
 
-    Wallabag\CoreBundle\Controller\Import\WallabagV1Controller:
+    Wallabag\Controller\Import\WallabagV1Controller:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_wallabag_v1_producer'
             $redisProducer: '@wallabag_core.producer.redis.wallabag_v1'
 
-    Wallabag\CoreBundle\Controller\Import\WallabagV2Controller:
+    Wallabag\Controller\Import\WallabagV2Controller:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_wallabag_v2_producer'
             $redisProducer: '@wallabag_core.producer.redis.wallabag_v2'
 
-    Wallabag\CoreBundle\Controller\Import\ShaarliController:
+    Wallabag\Controller\Import\ShaarliController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_shaarli_producer'
             $redisProducer: '@wallabag_core.producer.redis.shaarli'
 
-    Wallabag\CoreBundle\Controller\Import\PocketHtmlController:
+    Wallabag\Controller\Import\PocketHtmlController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_pocket_html_producer'
             $redisProducer: '@wallabag_core.producer.redis.pocket_html'
@@ -154,7 +154,7 @@ services:
     ScssPhp\ScssPhp\Compiler:
         public: false
 
-    Wallabag\CoreBundle\Event\Listener\UserLocaleListener:
+    Wallabag\Event\Listener\UserLocaleListener:
         tags:
             - { name: kernel.event_listener, event: security.interactive_login, method: onInteractiveLogin }
 
@@ -166,11 +166,11 @@ services:
             $defaultLifetime: 0
             $directory: '%kernel.cache_dir%'
 
-    Wallabag\CoreBundle\ParamConverter\UsernameFeedTokenConverter:
+    Wallabag\ParamConverter\UsernameFeedTokenConverter:
         tags:
             - { name: request.param_converter, converter: username_feed_token_converter }
 
-    Wallabag\CoreBundle\Event\Subscriber\TablePrefixSubscriber:
+    Wallabag\Event\Subscriber\TablePrefixSubscriber:
         tags:
             - { name: doctrine.event_subscriber }
 
@@ -191,42 +191,42 @@ services:
     wallabag_core.http_client:
         alias: 'httplug.client.wallabag_core'
 
-    Wallabag\CoreBundle\SiteConfig\GrabySiteConfigBuilder:
+    Wallabag\SiteConfig\GrabySiteConfigBuilder:
         tags:
             - { name: monolog.logger, channel: graby }
 
     # service alias override
-    Wallabag\CoreBundle\SiteConfig\SiteConfigBuilder:
-        alias: Wallabag\CoreBundle\SiteConfig\GrabySiteConfigBuilder
+    Wallabag\SiteConfig\SiteConfigBuilder:
+        alias: Wallabag\SiteConfig\GrabySiteConfigBuilder
 
     GuzzleHttp\Cookie\CookieJar:
-        alias: 'Wallabag\CoreBundle\Helper\FileCookieJar'
+        alias: 'Wallabag\Helper\FileCookieJar'
 
-    Wallabag\CoreBundle\Helper\HttpClientFactory:
+    Wallabag\Helper\HttpClientFactory:
         calls:
-            - ['addSubscriber', ['@Wallabag\CoreBundle\Guzzle\AuthenticatorSubscriber']]
-            - ['addSubscriber', ['@Wallabag\CoreBundle\Guzzle\FixupMondeDiplomatiqueUriSubscriber']]
+            - ['addSubscriber', ['@Wallabag\Guzzle\AuthenticatorSubscriber']]
+            - ['addSubscriber', ['@Wallabag\Guzzle\FixupMondeDiplomatiqueUriSubscriber']]
 
     RulerZ\RulerZ:
         alias: rulerz
 
-    Wallabag\CoreBundle\Operator\PHP\Matches:
+    Wallabag\Operator\PHP\Matches:
         tags:
             - { name: rulerz.operator, target: native, operator: matches }
 
-    Wallabag\CoreBundle\Operator\Doctrine\Matches:
+    Wallabag\Operator\Doctrine\Matches:
         tags:
             - { name: rulerz.operator, target: doctrine, operator: matches, inline: true }
 
-    Wallabag\CoreBundle\Operator\PHP\NotMatches:
+    Wallabag\Operator\PHP\NotMatches:
         tags:
             - { name: rulerz.operator, target: native, operator: notmatches }
 
-    Wallabag\CoreBundle\Operator\Doctrine\NotMatches:
+    Wallabag\Operator\Doctrine\NotMatches:
         tags:
             - { name: rulerz.operator, target: doctrine, operator: notmatches, inline: true }
 
-    Wallabag\CoreBundle\Operator\PHP\PatternMatches:
+    Wallabag\Operator\PHP\PatternMatches:
         tags:
             - { name: rulerz.operator, target: native, operator: "~" }
 
@@ -239,26 +239,26 @@ services:
                 path: '%redis_path%'
                 password: '%redis_password%'
 
-    Wallabag\CoreBundle\Event\Subscriber\SQLiteCascadeDeleteSubscriber:
+    Wallabag\Event\Subscriber\SQLiteCascadeDeleteSubscriber:
         tags:
             - { name: doctrine.event_subscriber }
 
-    Wallabag\CoreBundle\Event\Subscriber\DownloadImagesSubscriber:
+    Wallabag\Event\Subscriber\DownloadImagesSubscriber:
         arguments:
             $enabled: '@=service(''craue_config'').get(''download_images_enabled'')'
 
-    Wallabag\CoreBundle\Helper\DownloadImages:
+    Wallabag\Helper\DownloadImages:
         arguments:
             $baseFolder: "%kernel.project_dir%/web/assets/images"
 
-    Wallabag\CoreBundle\Command\InstallCommand:
+    Wallabag\Command\InstallCommand:
         arguments:
             $databaseDriver: '%database_driver%'
             $databaseName: '%database_name%'
             $defaultSettings: '%wallabag_core.default_internal_settings%'
             $defaultIgnoreOriginInstanceRules: '%wallabag_core.default_ignore_origin_instance_rules%'
 
-    Wallabag\CoreBundle\Mailer\UserMailer:
+    Wallabag\Mailer\UserMailer:
         arguments:
             $parameters:
                 template:
@@ -268,7 +268,7 @@ services:
                     confirmation: '%fos_user.registration.confirmation.from_email%'
                     resetting: '%fos_user.resetting.email.from_email%'
 
-    Wallabag\CoreBundle\Event\Listener\CreateConfigListener:
+    Wallabag\Event\Listener\CreateConfigListener:
         arguments:
             $itemsOnPage: "%wallabag_core.items_on_page%"
             $feedLimit: "%wallabag_core.feed_limit%"
@@ -278,57 +278,57 @@ services:
             $listMode: "%wallabag_core.list_mode%"
             $displayThumbnails: "%wallabag_core.display_thumbnails%"
 
-    Wallabag\CoreBundle\Event\Listener\AuthenticationFailureListener:
+    Wallabag\Event\Listener\AuthenticationFailureListener:
         tags:
             - { name: kernel.event_listener, event: security.authentication.failure, method: onAuthenticationFailure }
 
-    Wallabag\CoreBundle\Import\PocketImport:
+    Wallabag\Import\PocketImport:
         calls:
             - [ setClient, [ '@Symfony\Contracts\HttpClient\HttpClientInterface $pocketClient' ] ]
         tags:
             -  { name: wallabag_core.import, alias: pocket }
 
-    Wallabag\CoreBundle\Import\WallabagV1Import:
+    Wallabag\Import\WallabagV1Import:
         tags:
             -  { name: wallabag_core.import, alias: wallabag_v1 }
 
-    Wallabag\CoreBundle\Import\WallabagV2Import:
+    Wallabag\Import\WallabagV2Import:
         tags:
             -  { name: wallabag_core.import, alias: wallabag_v2 }
 
-    Wallabag\CoreBundle\Import\ElcuratorImport:
+    Wallabag\Import\ElcuratorImport:
         tags:
             -  { name: wallabag_core.import, alias: elcurator }
 
-    Wallabag\CoreBundle\Import\ReadabilityImport:
+    Wallabag\Import\ReadabilityImport:
         tags:
             -  { name: wallabag_core.import, alias: readability }
 
-    Wallabag\CoreBundle\Import\InstapaperImport:
+    Wallabag\Import\InstapaperImport:
         tags:
             -  { name: wallabag_core.import, alias: instapaper }
 
-    Wallabag\CoreBundle\Import\PinboardImport:
+    Wallabag\Import\PinboardImport:
         tags:
             -  { name: wallabag_core.import, alias: pinboard }
 
-    Wallabag\CoreBundle\Import\DeliciousImport:
+    Wallabag\Import\DeliciousImport:
         tags:
             -  { name: wallabag_core.import, alias: delicious }
 
-    Wallabag\CoreBundle\Import\FirefoxImport:
+    Wallabag\Import\FirefoxImport:
         tags:
             -  { name: wallabag_core.import, alias: firefox }
 
-    Wallabag\CoreBundle\Import\ChromeImport:
+    Wallabag\Import\ChromeImport:
         tags:
             -  { name: wallabag_core.import, alias: chrome }
 
-    Wallabag\CoreBundle\Import\ShaarliImport:
+    Wallabag\Import\ShaarliImport:
         tags:
             -  { name: wallabag_core.import, alias: shaarli }
 
-    Wallabag\CoreBundle\Import\PocketHtmlImport:
+    Wallabag\Import\PocketHtmlImport:
         tags:
             -  { name: wallabag_core.import, alias: pocket_html }
 

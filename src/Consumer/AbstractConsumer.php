@@ -1,16 +1,16 @@
 <?php
 
-namespace Wallabag\CoreBundle\Consumer;
+namespace Wallabag\Consumer;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Event\EntrySavedEvent;
-use Wallabag\CoreBundle\Import\AbstractImport;
-use Wallabag\CoreBundle\Repository\UserRepository;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\Tag;
+use Wallabag\Event\EntrySavedEvent;
+use Wallabag\Import\AbstractImport;
+use Wallabag\Repository\UserRepository;
 
 abstract class AbstractConsumer
 {

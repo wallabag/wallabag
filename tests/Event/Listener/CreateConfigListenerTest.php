@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Event\Listener;
+namespace Tests\Wallabag\Event\Listener;
 
 use Doctrine\ORM\EntityManager;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
@@ -10,9 +10,9 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Wallabag\CoreBundle\Entity\Config;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Event\Listener\CreateConfigListener;
+use Wallabag\Entity\Config;
+use Wallabag\Entity\User;
+use Wallabag\Event\Listener\CreateConfigListener;
 
 class CreateConfigListenerTest extends TestCase
 {

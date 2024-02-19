@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller\Api;
+namespace Wallabag\Controller\Api;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -8,10 +8,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\CoreBundle\Controller\AbstractController;
-use Wallabag\CoreBundle\Entity\Api\Client;
-use Wallabag\CoreBundle\Form\Type\Api\ClientType;
-use Wallabag\CoreBundle\Repository\Api\ClientRepository;
+use Wallabag\Controller\AbstractController;
+use Wallabag\Entity\Api\Client;
+use Wallabag\Form\Type\Api\ClientType;
+use Wallabag\Repository\Api\ClientRepository;
 
 class DeveloperController extends AbstractController
 {

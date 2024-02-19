@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Command;
+namespace Tests\Wallabag\Command;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\CoreBundle\Entity\Entry;
+use Tests\Wallabag\WallabagCoreTestCase;
+use Wallabag\Entity\Entry;
 
 class ReloadEntryCommandTest extends WallabagCoreTestCase
 {

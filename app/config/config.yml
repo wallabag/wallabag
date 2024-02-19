@@ -61,7 +61,7 @@ doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
         types:
-            json_array: Wallabag\CoreBundle\Doctrine\JsonArrayType
+            json_array: Wallabag\Doctrine\JsonArrayType
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
@@ -73,7 +73,7 @@ doctrine:
                         type: annotation
                         is_bundle: false
                         dir: '%kernel.project_dir%/src/Entity'
-                        prefix: 'Wallabag\CoreBundle\Entity'
+                        prefix: 'Wallabag\Entity'
                         alias: Wallabag
 
 stof_doctrine_extensions:
@@ -177,7 +177,7 @@ nelmio_cors:
 fos_user:
     db_driver: orm
     firewall_name: secured_area
-    user_class: Wallabag\CoreBundle\Entity\User
+    user_class: Wallabag\Entity\User
     registration:
         confirmation:
             enabled: "%fosuser_confirmation%"
@@ -185,14 +185,14 @@ fos_user:
         address: "%from_email%"
         sender_name: wallabag
     service:
-        mailer: Wallabag\CoreBundle\Mailer\UserMailer
+        mailer: Wallabag\Mailer\UserMailer
 
 fos_oauth_server:
     db_driver:           orm
-    client_class:        Wallabag\CoreBundle\Entity\Api\Client
-    access_token_class:  Wallabag\CoreBundle\Entity\Api\AccessToken
-    refresh_token_class: Wallabag\CoreBundle\Entity\Api\RefreshToken
-    auth_code_class:     Wallabag\CoreBundle\Entity\Api\AuthCode
+    client_class:        Wallabag\Entity\Api\Client
+    access_token_class:  Wallabag\Entity\Api\AccessToken
+    refresh_token_class: Wallabag\Entity\Api\RefreshToken
+    auth_code_class:     Wallabag\Entity\Api\AuthCode
     service:
         user_provider: fos_user.user_provider.username_email
         options:
@@ -218,7 +218,7 @@ scheb_two_factor:
         sender_email: "%twofactor_sender%"
         digits: 6
         template: "Authentication/form.html.twig"
-        mailer: Wallabag\CoreBundle\Mailer\AuthCodeMailer
+        mailer: Wallabag\Mailer\AuthCodeMailer
 
 rulerz:
     targets:
@@ -433,7 +433,7 @@ sensio_framework_extra:
 httplug:
     clients:
         wallabag_core:
-            factory: Wallabag\CoreBundle\Helper\HttpClientFactory
+            factory: Wallabag\Helper\HttpClientFactory
             config:
                 defaults:
                     timeout: 10
@@ -443,7 +443,7 @@ httplug:
 
 # define custom entity so we can override length attribute to fix utf8mb4 issue
 craue_config:
-    entity_name: Wallabag\CoreBundle\Entity\InternalSetting
+    entity_name: Wallabag\Entity\InternalSetting
 
 when@dev:
     maker:

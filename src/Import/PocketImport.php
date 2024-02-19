@@ -1,11 +1,11 @@
 <?php
 
-namespace Wallabag\CoreBundle\Import;
+namespace Wallabag\Import;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\Entity\Entry;
 
 class PocketImport extends AbstractImport
 {

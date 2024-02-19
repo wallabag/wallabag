@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Import;
+namespace Tests\Wallabag\Import;
 
 use PHPUnit\Framework\TestCase;
-use Wallabag\CoreBundle\Import\ImportChain;
-use Wallabag\CoreBundle\Import\ImportInterface;
+use Wallabag\Import\ImportChain;
+use Wallabag\Import\ImportInterface;
 
 class ImportChainTest extends TestCase
 {

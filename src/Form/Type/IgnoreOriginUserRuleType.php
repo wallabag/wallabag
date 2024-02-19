@@ -1,13 +1,13 @@
 <?php
 
-namespace Wallabag\CoreBundle\Form\Type;
+namespace Wallabag\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Wallabag\CoreBundle\Entity\IgnoreOriginUserRule;
+use Wallabag\Entity\IgnoreOriginUserRule;
 
 class IgnoreOriginUserRuleType extends AbstractType
 {

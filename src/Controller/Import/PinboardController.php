@@ -1,16 +1,16 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller\Import;
+namespace Wallabag\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\CoreBundle\Controller\AbstractController;
-use Wallabag\CoreBundle\Form\Type\UploadImportType;
-use Wallabag\CoreBundle\Import\PinboardImport;
-use Wallabag\CoreBundle\Redis\Producer as RedisProducer;
+use Wallabag\Controller\AbstractController;
+use Wallabag\Form\Type\UploadImportType;
+use Wallabag\Import\PinboardImport;
+use Wallabag\Redis\Producer as RedisProducer;
 
 class PinboardController extends AbstractController
 {

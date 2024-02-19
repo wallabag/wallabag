@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\SiteConfig\Authenticator;
+namespace Wallabag\SiteConfig\Authenticator;
 
 use GuzzleHttp\ClientInterface;
 

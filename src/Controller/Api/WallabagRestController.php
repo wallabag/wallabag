@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller\Api;
+namespace Wallabag\Controller\Api;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,8 +16,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\CoreBundle\Entity\Api\ApplicationInfo;
-use Wallabag\CoreBundle\Entity\User;
+use Wallabag\Entity\Api\ApplicationInfo;
+use Wallabag\Entity\User;
 
 class WallabagRestController extends AbstractFOSRestController
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Wallabag\CoreBundle\Event;
+namespace Wallabag\Event;
 
 use Symfony\Contracts\EventDispatcher\Event;
-use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\Entity\Entry;
 
 /**
  * This event is fired as soon as an entry is deleted.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller\Import;
+namespace Wallabag\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
@@ -10,9 +10,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\CoreBundle\Controller\AbstractController;
-use Wallabag\CoreBundle\Import\PocketImport;
-use Wallabag\CoreBundle\Redis\Producer as RedisProducer;
+use Wallabag\Controller\AbstractController;
+use Wallabag\Import\PocketImport;
+use Wallabag\Redis\Producer as RedisProducer;
 
 class PocketController extends AbstractController
 {

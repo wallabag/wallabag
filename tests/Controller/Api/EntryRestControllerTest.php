@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Controller\Api;
+namespace Tests\Wallabag\Controller\Api;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\Container;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Helper\ContentProxy;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\Tag;
+use Wallabag\Entity\User;
+use Wallabag\Helper\ContentProxy;
 
 class EntryRestControllerTest extends WallabagApiTestCase
 {

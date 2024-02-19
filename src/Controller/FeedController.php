@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller;
+namespace Wallabag\Controller;
 
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
@@ -12,10 +12,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Helper\PreparePagerForEntries;
-use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\Entity\Tag;
+use Wallabag\Entity\User;
+use Wallabag\Helper\PreparePagerForEntries;
+use Wallabag\Repository\EntryRepository;
 
 class FeedController extends AbstractController
 {
@@ -31,7 +31,7 @@ class FeedController extends AbstractController
      *
      * @Route("/feed/{username}/{token}/unread/{page}", name="unread_feed", defaults={"page"=1, "_format"="xml"})
      *
-     * @ParamConverter("user", class="Wallabag\CoreBundle\Entity\User", converter="username_feed_token_converter")
+     * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
      *
      * @return Response
      */
@@ -45,7 +45,7 @@ class FeedController extends AbstractController
      *
      * @Route("/feed/{username}/{token}/archive/{page}", name="archive_feed", defaults={"page"=1, "_format"="xml"})
      *
-     * @ParamConverter("user", class="Wallabag\CoreBundle\Entity\User", converter="username_feed_token_converter")
+     * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
      *
      * @return Response
      */
@@ -59,7 +59,7 @@ class FeedController extends AbstractController
      *
      * @Route("/feed/{username}/{token}/starred/{page}", name="starred_feed", defaults={"page"=1, "_format"="xml"})
      *
-     * @ParamConverter("user", class="Wallabag\CoreBundle\Entity\User", converter="username_feed_token_converter")
+     * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
      *
      * @return Response
      */
@@ -73,7 +73,7 @@ class FeedController extends AbstractController
      *
      * @Route("/feed/{username}/{token}/all/{page}", name="all_feed", defaults={"page"=1, "_format"="xml"})
      *
-     * @ParamConverter("user", class="Wallabag\CoreBundle\Entity\User", converter="username_feed_token_converter")
+     * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
      *
      * @return Response
      */
@@ -87,7 +87,7 @@ class FeedController extends AbstractController
      *
      * @Route("/feed/{username}/{token}/tags/{slug}/{page}", name="tag_feed", defaults={"page"=1, "_format"="xml"})
      *
-     * @ParamConverter("user", class="Wallabag\CoreBundle\Entity\User", converter="username_feed_token_converter")
+     * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      *
      * @return Response

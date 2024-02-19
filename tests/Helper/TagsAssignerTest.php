@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Helper;
+namespace Tests\Wallabag\Helper;
 
 use PHPUnit\Framework\TestCase;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\Tag;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Helper\TagsAssigner;
-use Wallabag\CoreBundle\Repository\TagRepository;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\Tag;
+use Wallabag\Entity\User;
+use Wallabag\Helper\TagsAssigner;
+use Wallabag\Repository\TagRepository;
 
 class TagsAssignerTest extends TestCase
 {

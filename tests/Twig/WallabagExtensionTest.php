@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Twig;
+namespace Tests\Wallabag\Twig;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\CoreBundle\Repository\EntryRepository;
-use Wallabag\CoreBundle\Repository\TagRepository;
-use Wallabag\CoreBundle\Twig\WallabagExtension;
+use Wallabag\Repository\EntryRepository;
+use Wallabag\Repository\TagRepository;
+use Wallabag\Twig\WallabagExtension;
 
 class WallabagExtensionTest extends TestCase
 {

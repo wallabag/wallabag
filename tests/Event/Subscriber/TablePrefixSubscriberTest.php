@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Event\Subscriber;
+namespace Tests\Wallabag\Event\Subscriber;
 
 use Doctrine\Common\EventManager;
 use Doctrine\DBAL\Platforms\MySQLPlatform;
@@ -10,8 +10,8 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use PHPUnit\Framework\TestCase;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Event\Subscriber\TablePrefixSubscriber;
+use Wallabag\Entity\User;
+use Wallabag\Event\Subscriber\TablePrefixSubscriber;
 
 class TablePrefixSubscriberTest extends TestCase
 {
@@ -93,7 +93,7 @@ class TablePrefixSubscriberTest extends TestCase
 
         $subscriber = new TablePrefixSubscriber('yo_');
 
-        $metaClass = new ClassMetadata('Wallabag\CoreBundle\Entity\Entry');
+        $metaClass = new ClassMetadata('Wallabag\Entity\Entry');
         $metaClass->setPrimaryTable(['name' => 'entry']);
         $metaClass->mapManyToMany([
             'fieldName' => 'tags',

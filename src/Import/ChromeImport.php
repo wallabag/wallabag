@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Import;
+namespace Wallabag\Import;
 
 class ChromeImport extends BrowserImport
 {

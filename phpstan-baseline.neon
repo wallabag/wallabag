@@ -1,17 +1,17 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Method Wallabag\\\\CoreBundle\\\\Controller\\\\AnnotationController\\:\\:postAnnotationAction\\(\\) should return Symfony\\\\Component\\\\HttpFoundation\\\\JsonResponse but returns Symfony\\\\Component\\\\Form\\\\FormInterface\\<mixed\\>\\.$#"
+			message: "#^Method Wallabag\\\\Controller\\\\AnnotationController\\:\\:postAnnotationAction\\(\\) should return Symfony\\\\Component\\\\HttpFoundation\\\\JsonResponse but returns Symfony\\\\Component\\\\Form\\\\FormInterface\\<mixed\\>\\.$#"
 			count: 1
 			path: src/Controller/AnnotationController.php
 
 		-
-			message: "#^Method Wallabag\\\\CoreBundle\\\\Controller\\\\AnnotationController\\:\\:putAnnotationAction\\(\\) should return Symfony\\\\Component\\\\HttpFoundation\\\\JsonResponse but returns Symfony\\\\Component\\\\Form\\\\FormInterface\\<null\\>\\.$#"
+			message: "#^Method Wallabag\\\\Controller\\\\AnnotationController\\:\\:putAnnotationAction\\(\\) should return Symfony\\\\Component\\\\HttpFoundation\\\\JsonResponse but returns Symfony\\\\Component\\\\Form\\\\FormInterface\\<null\\>\\.$#"
 			count: 1
 			path: src/Controller/AnnotationController.php
 
 		-
-			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Entity\\\\RuleInterface\\:\\:getConfig\\(\\)\\.$#"
+			message: "#^Call to an undefined method Wallabag\\\\Entity\\\\RuleInterface\\:\\:getConfig\\(\\)\\.$#"
 			count: 1
 			path: src/Controller/ConfigController.php
 
@@ -21,32 +21,32 @@ parameters:
 			path: src/Controller/ConfigController.php
 
 		-
-			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
+			message: "#^Call to an undefined method Wallabag\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
 			count: 1
 			path: src/Controller/Import/BrowserController.php
 
 		-
-			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
+			message: "#^Call to an undefined method Wallabag\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
 			count: 1
 			path: src/Controller/Import/BrowserController.php
 
 		-
-			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
+			message: "#^Call to an undefined method Wallabag\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
 			count: 1
 			path: src/Controller/Import/HtmlController.php
 
 		-
-			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
+			message: "#^Call to an undefined method Wallabag\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
 			count: 1
 			path: src/Controller/Import/HtmlController.php
 
 		-
-			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
+			message: "#^Call to an undefined method Wallabag\\\\Import\\\\ImportInterface\\:\\:setFilepath\\(\\)\\.$#"
 			count: 1
 			path: src/Controller/Import/WallabagController.php
 
 		-
-			message: "#^Call to an undefined method Wallabag\\\\CoreBundle\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
+			message: "#^Call to an undefined method Wallabag\\\\Import\\\\ImportInterface\\:\\:setUser\\(\\)\\.$#"
 			count: 1
 			path: src/Controller/Import/WallabagController.php
 
@@ -66,7 +66,7 @@ parameters:
 			path: src/Mailer/AuthCodeMailer.php
 
 		-
-			message: "#^PHPDoc type Symfony\\\\Component\\\\Mailer\\\\MailerInterface of property Wallabag\\\\CoreBundle\\\\Mailer\\\\UserMailer\\:\\:\\$mailer is not covariant with PHPDoc type Swift_Mailer of overridden property FOS\\\\UserBundle\\\\Mailer\\\\TwigSwiftMailer\\:\\:\\$mailer\\.$#"
+			message: "#^PHPDoc type Symfony\\\\Component\\\\Mailer\\\\MailerInterface of property Wallabag\\\\Mailer\\\\UserMailer\\:\\:\\$mailer is not covariant with PHPDoc type Swift_Mailer of overridden property FOS\\\\UserBundle\\\\Mailer\\\\TwigSwiftMailer\\:\\:\\$mailer\\.$#"
 			count: 1
 			path: src/Mailer/UserMailer.php
 

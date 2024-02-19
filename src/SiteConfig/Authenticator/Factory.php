@@ -1,8 +1,8 @@
 <?php
 
-namespace Wallabag\CoreBundle\SiteConfig\Authenticator;
+namespace Wallabag\SiteConfig\Authenticator;
 
-use Wallabag\CoreBundle\SiteConfig\SiteConfig;
+use Wallabag\SiteConfig\SiteConfig;
 
 /**
  * Builds an Authenticator based on a SiteConfig.

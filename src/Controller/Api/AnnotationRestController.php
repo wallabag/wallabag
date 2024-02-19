@@ -1,14 +1,14 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller\Api;
+namespace Wallabag\Controller\Api;
 
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Wallabag\CoreBundle\Entity\Annotation;
-use Wallabag\CoreBundle\Entity\Entry;
+use Wallabag\Entity\Annotation;
+use Wallabag\Entity\Entry;
 
 class AnnotationRestController extends WallabagRestController
 {
@@ -42,7 +42,7 @@ class AnnotationRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        return $this->forward('Wallabag\CoreBundle\Controller\AnnotationController::getAnnotationsAction', [
+        return $this->forward('Wallabag\Controller\AnnotationController::getAnnotationsAction', [
             'entry' => $entry,
         ]);
     }
@@ -108,7 +108,7 @@ class AnnotationRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        return $this->forward('Wallabag\CoreBundle\Controller\AnnotationController::postAnnotationAction', [
+        return $this->forward('Wallabag\Controller\AnnotationController::postAnnotationAction', [
             'request' => $request,
             'entry' => $entry,
         ]);
@@ -144,7 +144,7 @@ class AnnotationRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        return $this->forward('Wallabag\CoreBundle\Controller\AnnotationController::putAnnotationAction', [
+        return $this->forward('Wallabag\Controller\AnnotationController::putAnnotationAction', [
             'annotation' => $annotation,
             'request' => $request,
         ]);
@@ -180,7 +180,7 @@ class AnnotationRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        return $this->forward('Wallabag\CoreBundle\Controller\AnnotationController::deleteAnnotationAction', [
+        return $this->forward('Wallabag\Controller\AnnotationController::deleteAnnotationAction', [
             'annotation' => $annotation,
         ]);
     }

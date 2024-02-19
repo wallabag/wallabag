@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Tools;
+namespace Wallabag\Tools;
 
 class Utils
 {

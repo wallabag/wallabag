@@ -1,14 +1,14 @@
 <?php
 
-namespace Wallabag\CoreBundle\ParamConverter;
+namespace Wallabag\ParamConverter;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Repository\UserRepository;
+use Wallabag\Entity\User;
+use Wallabag\Repository\UserRepository;
 
 /**
  * ParamConverter used in the Feed controller to retrieve the right user according to
@@ -50,7 +50,7 @@ class UsernameFeedTokenConverter implements ParamConverterInterface
         $em = $this->registry->getManagerForClass($configuration->getClass());
 
         // Check, if class name is what we need
-        if (null !== $em && 'Wallabag\CoreBundle\Entity\User' !== $em->getClassMetadata($configuration->getClass())->getName()) {
+        if (null !== $em && 'Wallabag\Entity\User' !== $em->getClassMetadata($configuration->getClass())->getName()) {
             return false;
         }
 

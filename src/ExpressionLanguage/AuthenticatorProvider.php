@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\ExpressionLanguage;
+namespace Wallabag\ExpressionLanguage;
 
 use GuzzleHttp\ClientInterface;
 use Symfony\Component\ExpressionLanguage\ExpressionFunction;

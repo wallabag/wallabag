@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller\Api;
+namespace Wallabag\Controller\Api;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;

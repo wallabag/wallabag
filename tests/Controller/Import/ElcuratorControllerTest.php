@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Controller\Import;
+namespace Tests\Wallabag\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
 use Predis\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\CoreBundle\Entity\Entry;
+use Tests\Wallabag\WallabagCoreTestCase;
+use Wallabag\Entity\Entry;
 
 class ElcuratorControllerTest extends WallabagCoreTestCase
 {

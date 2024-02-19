@@ -1,14 +1,14 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller\Import;
+namespace Wallabag\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use Predis\Client;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Wallabag\CoreBundle\Consumer\RabbitMQConsumerTotalProxy;
-use Wallabag\CoreBundle\Controller\AbstractController;
-use Wallabag\CoreBundle\Import\ImportChain;
+use Wallabag\Consumer\RabbitMQConsumerTotalProxy;
+use Wallabag\Controller\AbstractController;
+use Wallabag\Import\ImportChain;
 
 class ImportController extends AbstractController
 {

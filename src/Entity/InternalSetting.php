@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Entity;
+namespace Wallabag\Entity;
 
 use Craue\ConfigBundle\Entity\BaseSetting;
 use Doctrine\ORM\Mapping as ORM;

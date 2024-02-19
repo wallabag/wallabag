@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Entity\Api;
+namespace Wallabag\Entity\Api;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\OAuthServerBundle\Entity\Client as BaseClient;
@@ -8,11 +8,11 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
 use OpenApi\Annotations as OA;
-use Wallabag\CoreBundle\Entity\User;
+use Wallabag\Entity\User;
 
 /**
  * @ORM\Table("oauth2_clients")
- * @ORM\Entity(repositoryClass="Wallabag\CoreBundle\Repository\Api\ClientRepository")
+ * @ORM\Entity(repositoryClass="Wallabag\Repository\Api\ClientRepository")
  */
 class Client extends BaseClient
 {
@@ -39,12 +39,12 @@ class Client extends BaseClient
     protected $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\Api\RefreshToken", mappedBy="client", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Wallabag\Entity\Api\RefreshToken", mappedBy="client", cascade={"remove"})
      */
     protected $refreshTokens;
 
     /**
-     * @ORM\OneToMany(targetEntity="Wallabag\CoreBundle\Entity\Api\AccessToken", mappedBy="client", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Wallabag\Entity\Api\AccessToken", mappedBy="client", cascade={"remove"})
      */
     protected $accessTokens;
 
@@ -63,7 +63,7 @@ class Client extends BaseClient
     protected $secret;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Wallabag\CoreBundle\Entity\User", inversedBy="clients")
+     * @ORM\ManyToOne(targetEntity="Wallabag\Entity\User", inversedBy="clients")
      */
     private $user;
 

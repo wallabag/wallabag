@@ -1,10 +1,10 @@
 <?php
 
-namespace Wallabag\CoreBundle\DataFixtures;
+namespace Wallabag\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Wallabag\CoreBundle\Entity\Tag;
+use Wallabag\Entity\Tag;
 
 class TagFixtures extends Fixture
 {

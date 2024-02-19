@@ -1,14 +1,14 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller\Import;
+namespace Wallabag\Controller\Import;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Wallabag\CoreBundle\Controller\AbstractController;
-use Wallabag\CoreBundle\Form\Type\UploadImportType;
-use Wallabag\CoreBundle\Import\ImportInterface;
+use Wallabag\Controller\AbstractController;
+use Wallabag\Form\Type\UploadImportType;
+use Wallabag\Import\ImportInterface;
 
 abstract class HtmlController extends AbstractController
 {

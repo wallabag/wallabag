@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Helper;
+namespace Tests\Wallabag\Helper;
 
 use Graby\Graby;
 use Monolog\Handler\TestHandler;
@@ -10,11 +10,11 @@ use Psr\Log\NullLogger;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\RecursiveValidator;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Helper\ContentProxy;
-use Wallabag\CoreBundle\Helper\RuleBasedIgnoreOriginProcessor;
-use Wallabag\CoreBundle\Helper\RuleBasedTagger;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\User;
+use Wallabag\Helper\ContentProxy;
+use Wallabag\Helper\RuleBasedIgnoreOriginProcessor;
+use Wallabag\Helper\RuleBasedTagger;
 
 class ContentProxyTest extends TestCase
 {

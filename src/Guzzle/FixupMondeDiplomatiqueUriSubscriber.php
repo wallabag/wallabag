@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Guzzle;
+namespace Wallabag\Guzzle;
 
 use GuzzleHttp\Event\CompleteEvent;
 use GuzzleHttp\Event\SubscriberInterface;

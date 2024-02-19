@@ -1,14 +1,14 @@
 <?php
 
-namespace Wallabag\CoreBundle\Controller;
+namespace Wallabag\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Wallabag\CoreBundle\Helper\EntriesExport;
-use Wallabag\CoreBundle\Repository\EntryRepository;
-use Wallabag\CoreBundle\Repository\TagRepository;
+use Wallabag\Helper\EntriesExport;
+use Wallabag\Repository\EntryRepository;
+use Wallabag\Repository\TagRepository;
 
 /**
  * The try/catch can be removed once all formats will be implemented.

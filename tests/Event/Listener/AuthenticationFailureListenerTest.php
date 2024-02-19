@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Event\Listener;
+namespace Tests\Wallabag\Event\Listener;
 
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\AuthenticationEvents;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Wallabag\CoreBundle\Event\Listener\AuthenticationFailureListener;
+use Wallabag\Event\Listener\AuthenticationFailureListener;
 
 class AuthenticationFailureListenerTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Command\Import;
+namespace Wallabag\Command\Import;
 
 use Doctrine\DBAL\Driver\Middleware;
 use Doctrine\DBAL\Logging\Middleware as LoggingMiddleware;
@@ -13,19 +13,19 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Import\ChromeImport;
-use Wallabag\CoreBundle\Import\DeliciousImport;
-use Wallabag\CoreBundle\Import\ElcuratorImport;
-use Wallabag\CoreBundle\Import\FirefoxImport;
-use Wallabag\CoreBundle\Import\InstapaperImport;
-use Wallabag\CoreBundle\Import\PinboardImport;
-use Wallabag\CoreBundle\Import\PocketHtmlImport;
-use Wallabag\CoreBundle\Import\ReadabilityImport;
-use Wallabag\CoreBundle\Import\ShaarliImport;
-use Wallabag\CoreBundle\Import\WallabagV1Import;
-use Wallabag\CoreBundle\Import\WallabagV2Import;
-use Wallabag\CoreBundle\Repository\UserRepository;
+use Wallabag\Entity\User;
+use Wallabag\Import\ChromeImport;
+use Wallabag\Import\DeliciousImport;
+use Wallabag\Import\ElcuratorImport;
+use Wallabag\Import\FirefoxImport;
+use Wallabag\Import\InstapaperImport;
+use Wallabag\Import\PinboardImport;
+use Wallabag\Import\PocketHtmlImport;
+use Wallabag\Import\ReadabilityImport;
+use Wallabag\Import\ShaarliImport;
+use Wallabag\Import\WallabagV1Import;
+use Wallabag\Import\WallabagV2Import;
+use Wallabag\Repository\UserRepository;
 
 class ImportCommand extends Command
 {

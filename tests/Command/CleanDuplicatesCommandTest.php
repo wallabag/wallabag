@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Wallabag\CoreBundle\Command;
+namespace Tests\Wallabag\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\Wallabag\CoreBundle\WallabagCoreTestCase;
-use Wallabag\CoreBundle\Entity\Entry;
-use Wallabag\CoreBundle\Entity\User;
+use Tests\Wallabag\WallabagCoreTestCase;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\User;
 
 class CleanDuplicatesCommandTest extends WallabagCoreTestCase
 {
@@ -93,7 +93,7 @@ class CleanDuplicatesCommandTest extends WallabagCoreTestCase
         $nbEntries = $em->getRepository(Entry::class)->findAllByUrlAndUserId($url, $this->getLoggedInUserId());
         $this->assertCount(1, $nbEntries);
 
-        $query = $em->createQuery('DELETE FROM Wallabag\CoreBundle\Entity\Entry e WHERE e.url = :url');
+        $query = $em->createQuery('DELETE FROM Wallabag\Entity\Entry e WHERE e.url = :url');
         $query->setParameter('url', $url);
         $query->execute();
     }

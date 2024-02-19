@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\CoreBundle\Command;
+namespace Wallabag\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NoResultException;
@@ -9,9 +9,9 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Wallabag\CoreBundle\Entity\User;
-use Wallabag\CoreBundle\Helper\RuleBasedTagger;
-use Wallabag\CoreBundle\Repository\UserRepository;
+use Wallabag\Entity\User;
+use Wallabag\Helper\RuleBasedTagger;
+use Wallabag\Repository\UserRepository;
 
 class TagAllCommand extends Command
 {

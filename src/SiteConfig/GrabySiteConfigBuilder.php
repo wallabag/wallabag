@@ -1,11 +1,11 @@
 <?php
 
-namespace Wallabag\CoreBundle\SiteConfig;
+namespace Wallabag\SiteConfig;
 
 use Graby\SiteConfig\ConfigBuilder;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Wallabag\CoreBundle\Repository\SiteCredentialRepository;
+use Wallabag\Repository\SiteCredentialRepository;
 
 class GrabySiteConfigBuilder implements SiteConfigBuilder
 {
