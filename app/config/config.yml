@@ -68,6 +68,13 @@ doctrine:
         entity_managers:
             default:
                 auto_mapping: true
+                mappings:
+                    Wallabag:
+                        type: annotation
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/Entity'
+                        prefix: 'Wallabag\CoreBundle\Entity'
+                        alias: Wallabag
 
 stof_doctrine_extensions:
     default_locale: "%locale%"

@@ -35,9 +35,6 @@ class AppKernel extends Kernel
             new Http\HttplugBundle\HttplugBundle(),
             new Sentry\SentryBundle\SentryBundle(),
             new Twig\Extra\TwigExtraBundle\TwigExtraBundle(),
-
-            // wallabag bundles
-            new Wallabag\CoreBundle\WallabagCoreBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

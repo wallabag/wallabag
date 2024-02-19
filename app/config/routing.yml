@@ -1,5 +1,5 @@
 app:
-    resource: "@WallabagCoreBundle/Controller/"
+    resource: ../../src/Controller/
     type: annotation
 
 doc-api:
