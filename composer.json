@@ -196,9 +196,9 @@
     },
     "config": {
         "allow-plugins": {
-            "phpstan/extension-installer": true,
+            "ergebnis/composer-normalize": true,
             "php-http/discovery": true,
-            "ergebnis/composer-normalize": true
+            "phpstan/extension-installer": true
         },
         "bin-dir": "bin",
         "platform": {
