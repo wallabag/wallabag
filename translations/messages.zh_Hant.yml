@@ -8,7 +8,7 @@ config:
         reset: 重設區域
         new_user: 新增使用者
         user_info: 使用者資訊
-    page_title: 設定
+    page_title: 設置
     form_settings:
         theme_label: 主題
         reading_speed:
@@ -25,6 +25,7 @@ config:
         help_items_per_page: 你可以調整每頁呈現的項目數量。
         items_per_page_label: 每頁項目數量
         language_label: 語言
+        android_configuration: 設置你的 Android 應用程式
     form_feed:
         description: 你可以使用你喜愛的 Atom 閱讀器來閱讀由 wallabag 提供的 Atom 訂閱源。為此你需要先產生一組 token。
         feed_link:
@@ -44,10 +45,17 @@ config:
             variable_description:
                 url: 條目網址
         delete_rule_label: 刪除
+        card:
+            new_tagging_rule: 新增標籤規則
+        import_submit: 匯入
+        rule_label: 規則
+        edit_rule_label: 編輯
     otp:
         app:
             cancel: 取消
             qrcode_label: QR碼
+    reset:
+        tags: 移除所有標籤
 menu:
     left:
         quickstart: 快速開始
@@ -66,7 +74,7 @@ menu:
         theme_toggle_dark: 深色主題
         theme_toggle_auto: 根據系統設定自動設定主題
         developer: 客戶端 API 管理
-        config: 設定
+        config: 設置
         unread: 未讀
         starred: 收藏
         about: 關於
@@ -120,11 +128,17 @@ entry:
             url_label: 網址
     view:
         left_menu:
-            theme_toggle_dark: 灰暗
+            theme_toggle_dark: 深色
             delete: 刪除
             theme_toggle_light: 淺色
             set_as_unread: 標記為未讀
             export: 匯出
+            print: 列印
+            add_a_tag: 添加標籤
+            share_content: 分享
+            back_to_homepage: 返回
+            set_as_read: 標記為已讀
+        edit_title: 編輯標題
     filters:
         unread_label: 未讀
         archived_label: 已歸檔
@@ -132,9 +146,13 @@ entry:
     page_titles:
         untagged: 未標簽條目
         all: 所有項目
+        unread: 未讀條目
 howto:
     shortcuts:
         arrows_navigation: 在項目間導覽
+        go_config: 前往設置
+    top_menu:
+        mobile_apps: 行動電話應用程式
 quickstart:
     first_steps:
         unread_articles: 然後將他分類！
@@ -143,12 +161,17 @@ quickstart:
         export: 將你的項目轉換為 ePUB 或 PDF 版本
     configure:
         tagging_rules: 撰寫規則來自動化標籤你的項目
+        language: 變更語言及介面
+        title: 設置應用程式
     intro:
         title: 歡迎使用 wallabag!
     page_title: 快速開始
+    admin:
+        new_user: 新增使用者
 import:
     wallabag_v1:
         description: 這個匯入器將會匯入 wallabag v1 中你所有的項目。在設定頁面的 "匯出 wallabag 資料" 頁簽中，點選 "匯出 JSON 檔"，你將會得到檔名為 "wallabag-export-1-xxxx-xx-xx.json" 檔案。
+    page_title: 匯入
 about:
     who_behind_wallabag:
         version: 版本
@@ -163,6 +186,8 @@ tag:
         untagged: 未標簽條目
         no_untagged_entries: 沒有未標簽條目。
         see_untagged_entries: 檢視未標簽條目
+    confirm:
+        delete: 刪除 %name% 標籤
 user:
     form:
         username_label: 使用者名稱
@@ -170,13 +195,37 @@ user:
         delete_confirm: 你確定？
         delete: 刪除
         save: 儲存
+        password_label: 密碼
+    new_user: 新增使用者
+    list:
+        edit_action: 編輯
+        create_new_one: 新增使用者
 ignore_origin_instance_rule:
     form:
         delete: 刪除
         save: 儲存
         delete_confirm: 你確定？
+        rule_label: 規則
+    list:
+        edit_action: 編輯
 site_credential:
     form:
         delete_confirm: 你確定？
         save: 儲存
         delete: 刪除
+        username_label: 登入
+        password_label: 密碼
+    list:
+        edit_action: 編輯
+developer:
+    client_parameter:
+        back: 返回
+    howto:
+        back: 返回
+    client:
+        action_back: 返回
+flashes:
+    config:
+        notice:
+            config_saved: 已儲存設置。
+            password_updated: 已更新密碼
