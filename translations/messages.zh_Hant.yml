@@ -12,18 +12,18 @@ config:
     form_settings:
         theme_label: 主題
         reading_speed:
-            300_word: 我每分鐘約可讀 300 個字
+            300_word: 我每分鐘可讀約 300 個字
             label: 閱讀速度
             help_message: 你可以使用線上工具來預估你的閱讀速度：
-            100_word: 我每分鐘約可讀 100 個字
-            200_word: 我每分鐘約可讀 200 個字
-            400_word: 我每分鐘約可讀 400 個字
+            100_word: 我每分鐘可讀約 100 個字
+            200_word: 我每分鐘可讀約 200 個字
+            400_word: 我每分鐘可讀約 400 個字
         action_mark_as_read:
             redirect_homepage: 回到首頁
             redirect_current_page: 停留在本頁
             label: 將一個項目刪除、收藏或標記為已讀後該做什麼呢？
-        help_items_per_page: 你可以調整每頁呈現的項目數量。
-        items_per_page_label: 每頁項目數量
+        help_items_per_page: 你可以調整每頁顯示的文章數。
+        items_per_page_label: 每頁項目數
         language_label: 語言
         android_configuration: 設置你的 Android 應用程式
     form_feed:
@@ -31,7 +31,10 @@ config:
         feed_link:
             unread: 未讀
             archive: 已歸檔
-            starred: 收藏
+            starred: 已收藏
+            all: 全部
+        feed_links: 訂閱源連結
+        feed_limit: 訂閱源內的項目數
     form_user:
         delete:
             description: 如果你移除了你自己的帳號，你所有的項目、標籤、註釋包含你的帳號本身都會被 "用久" 的移除（無法復原）。然後你將會被自動登出。
@@ -73,10 +76,10 @@ menu:
         theme_toggle_light: 淺色主題
         theme_toggle_dark: 深色主題
         theme_toggle_auto: 根據系統設定自動設定主題
-        developer: 客戶端 API 管理
+        developer: 用戶端 API 管理
         config: 設置
         unread: 未讀
-        starred: 收藏
+        starred: 已收藏
         about: 關於
         save_link: 儲存連結
         all_articles: 所有項目
@@ -142,7 +145,7 @@ entry:
     filters:
         unread_label: 未讀
         archived_label: 已歸檔
-        starred_label: 收藏
+        starred_label: 已收藏
     page_titles:
         untagged: 未標簽條目
         all: 所有項目
@@ -163,11 +166,13 @@ quickstart:
         tagging_rules: 撰寫規則來自動化標籤你的項目
         language: 變更語言及介面
         title: 設置應用程式
+        feed: 開啟訂閱源
     intro:
         title: 歡迎使用 wallabag!
     page_title: 快速開始
     admin:
         new_user: 新增使用者
+    more: 更多…
 import:
     wallabag_v1:
         description: 這個匯入器將會匯入 wallabag v1 中你所有的項目。在設定頁面的 "匯出 wallabag 資料" 頁簽中，點選 "匯出 JSON 檔"，你將會得到檔名為 "wallabag-export-1-xxxx-xx-xx.json" 檔案。
@@ -178,6 +183,8 @@ about:
     page_title: 關於
     top_menu:
         who_behind_wallabag: wallabag 的背後
+    getting_help:
+        documentation: 說明書
 tag:
     page_title: 標籤
     new:
@@ -186,6 +193,7 @@ tag:
         untagged: 未標簽條目
         no_untagged_entries: 沒有未標簽條目。
         see_untagged_entries: 檢視未標簽條目
+        number_on_the_page: '{0} 沒有任何標籤。|{1} 有 1 個標籤。|]1,Inf[ 共有 %count% 個標籤。'
     confirm:
         delete: 刪除 %name% 標籤
 user:
@@ -220,12 +228,22 @@ site_credential:
 developer:
     client_parameter:
         back: 返回
+        field_id: 用戶端 ID
     howto:
         back: 返回
     client:
         action_back: 返回
+    existing_clients:
+        field_id: 用戶端 ID
+    welcome_message: 歡迎使用 wallabag API
+    documentation: 說明書
+    full_documentation: 檢視完整的 API 說明書
+    page_title: 用戶端 API 管理
 flashes:
     config:
         notice:
             config_saved: 已儲存設置。
             password_updated: 已更新密碼
+            feed_updated: 已更新訂閱源資訊
+            feed_token_updated: 已更新訂閱源 token
+            feed_token_revoked: 已註銷訂閱源 token
