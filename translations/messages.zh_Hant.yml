@@ -20,12 +20,17 @@ config:
             400_word: 我每分鐘可讀約 400 個字
         action_mark_as_read:
             redirect_homepage: 回到首頁
-            redirect_current_page: 停留在本頁
-            label: 將一個項目刪除、收藏或標記為已讀後該做什麼呢？
+            redirect_current_page: 停留於當前頁面
+            label: 將一篇文章刪除、收藏或標記為已讀後該怎麼做？
         help_items_per_page: 你可以調整每頁顯示的文章數。
         items_per_page_label: 每頁項目數
         language_label: 語言
         android_configuration: 設置你的 Android 應用程式
+        help_display_thumbnails: 可以決定是否顯示文章縮圖。連線緩慢時有所幫助。
+        display_thumbnails_label: 顯示文章縮圖（用於連線緩慢時）。
+        help_pocket_consumer_key: 匯入 Pocket 時必須。可於你的 Pocket 帳號內建立。
+        pocket_consumer_key_label: 使用 Pocket 的消費者密鑰匯入內容
+        help_reading_speed: wallabag 能夠計算閱讀每篇文章的所需時間。你可在此設定，不論你偏好快速或慢速閱讀，wallabag 均能運算每篇文章需要的閱讀時間。
     form_feed:
         description: 你可以使用你喜愛的 Atom 閱讀器來閱讀由 wallabag 提供的 Atom 訂閱源。為此你需要先產生一組 token。
         feed_link:
@@ -35,10 +40,28 @@ config:
             all: 全部
         feed_links: 訂閱源連結
         feed_limit: 訂閱源內的項目數
+        no_token: 沒有 token
+        token_label: 訂閱源 token
+        token_create: 建立你的 token
+        token_reset: 再次產生 token
+        token_revoke: 註銷 token
     form_user:
         delete:
             description: 如果你移除了你自己的帳號，你所有的項目、標籤、註釋包含你的帳號本身都會被 "用久" 的移除（無法復原）。然後你將會被自動登出。
         name_label: 名稱
+        two_factor:
+            emailTwoFactor_label: 使用電子郵件（以接收代碼）
+            table_method: 方式
+            table_state: 狀態
+            state_enabled: 已啟用
+            table_action: 操作
+            action_email: 使用電子郵件
+            state_disabled: 已停用
+            action_app: 使用驗證器
+            googleTwoFactor_label: 使用驗證器（開啟例如 Google Authenticator 、Authy 或 FreeOTP 等應用程式以取得一次性代碼）
+        two_factor_description: 開啟雙重驗證即意味每當有不信任的連線時，你會收到付有代碼的電子郵件。
+        login_label: 登入（無法更改）
+        email_label: 電子郵件
     form:
         save: 儲存
     form_rules:
@@ -57,8 +80,18 @@ config:
         app:
             cancel: 取消
             qrcode_label: QR碼
+            two_factor_code_description_1: 你剛啟用雙重驗證器，開啟你的應用程式然後使用出現的代碼以取得一次性密碼。頁面重整後它將會消失。
+            two_factor_code_description_3: 此外，請把下列備用代碼保存於安全的地方。以便你不能使用驗證器之需：
+            two_factor_code_description_4: 測試顯示於驗證器的代碼：
+            enable: 啟用
+        page_title: 雙重驗證
     reset:
         tags: 移除所有標籤
+    form_password:
+        description: 你可在此變更密碼。新密碼須至少有 8 個字元。
+        old_password_label: 目前密碼
+        new_password_label: 新密碼
+        repeat_new_password_label: 再次輸入新密碼
 menu:
     left:
         quickstart: 快速開始
@@ -121,6 +154,8 @@ entry:
         export_title: 匯出
         delete: 刪除
         add_tags: 添加標簽
+        number_on_the_page: '{0} 沒有任何條目。|{1} 有 1 篇條目。|]1,Inf[ 共有 %count% 篇條目。'
+        reading_time: 閱讀約需時
     edit:
         url_label: 網址
         title_label: 標題
@@ -141,6 +176,7 @@ entry:
             share_content: 分享
             back_to_homepage: 返回
             set_as_read: 標記為已讀
+            share_email_label: 電子郵件
         edit_title: 編輯標題
     filters:
         unread_label: 未讀
@@ -150,10 +186,13 @@ entry:
         untagged: 未標簽條目
         all: 所有項目
         unread: 未讀條目
+    metadata:
+        reading_time: 閱讀約需時
 howto:
     shortcuts:
         arrows_navigation: 在項目間導覽
         go_config: 前往設置
+        action: 動作
     top_menu:
         mobile_apps: 行動電話應用程式
 quickstart:
@@ -173,10 +212,15 @@ quickstart:
     admin:
         new_user: 新增使用者
     more: 更多…
+    support:
+        email: 經由電子郵件
 import:
     wallabag_v1:
         description: 這個匯入器將會匯入 wallabag v1 中你所有的項目。在設定頁面的 "匯出 wallabag 資料" 頁簽中，點選 "匯出 JSON 檔"，你將會得到檔名為 "wallabag-export-1-xxxx-xx-xx.json" 檔案。
     page_title: 匯入
+    pocket:
+        config_missing:
+            admin_message: 需要定義 %keyurls%a pocket_consumer_key%keyurle%。
 about:
     who_behind_wallabag:
         version: 版本
@@ -204,10 +248,17 @@ user:
         delete: 刪除
         save: 儲存
         password_label: 密碼
+        last_login_label: 最後登入
+        email_label: 電子郵件
+        enabled_label: 已啟用
+        twofactor_email_label: 經電子郵件進行雙重驗證
+        repeat_new_password_label: 再次輸入新密碼
+        twofactor_google_label: 經驗證器進行雙重驗證
     new_user: 新增使用者
     list:
         edit_action: 編輯
         create_new_one: 新增使用者
+    edit_user: 編輯現有使用者
 ignore_origin_instance_rule:
     form:
         delete: 刪除
@@ -247,3 +298,5 @@ flashes:
             feed_updated: 已更新訂閱源資訊
             feed_token_updated: 已更新訂閱源 token
             feed_token_revoked: 已註銷訂閱源 token
+            otp_enabled: 已啟用雙重驗證
+            otp_disabled: 已停用雙重驗證
