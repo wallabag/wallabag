@@ -129,6 +129,7 @@
         "symfony/error-handler": "^5.4.35",
         "symfony/event-dispatcher": "^5.4.35",
         "symfony/event-dispatcher-contracts": "^2.5.2",
+        "symfony/expression-language": "^5.4.35",
         "symfony/finder": "^5.4.35",
         "symfony/form": "^5.4.35",
         "symfony/framework-bundle": "^5.4.35",
