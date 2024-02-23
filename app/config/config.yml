@@ -86,7 +86,7 @@ stof_doctrine_extensions:
 
 doctrine_migrations:
     migrations_paths:
-        'Application\Migrations': "%kernel.project_dir%/app/DoctrineMigrations"
+        'Application\Migrations': '%kernel.project_dir%/migrations'
     storage:
         table_storage:
             table_name: 'migration_versions'
