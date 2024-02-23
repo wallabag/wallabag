@@ -100,7 +100,6 @@
         "php-http/guzzle5-adapter": "^2.0",
         "php-http/httplug": "^2.4",
         "php-http/httplug-bundle": "^1.32",
-        "php-http/message": "^1.16",
         "pragmarx/recovery": "^0.2.1",
         "predis/predis": "^2.2.2",
         "psr/http-client": "^1.0.3",
