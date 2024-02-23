@@ -35,7 +35,7 @@ config:
         description: 你可以使用你喜愛的 Atom 閱讀器來閱讀由 wallabag 提供的 Atom 訂閱源。為此你需要先產生一組 token。
         feed_link:
             unread: 未讀
-            archive: 已歸檔
+            archive: 已封存
             starred: 已收藏
             all: 全部
         feed_links: 訂閱源連結
@@ -47,7 +47,9 @@ config:
         token_revoke: 註銷 token
     form_user:
         delete:
-            description: 如果你移除了你自己的帳號，你所有的項目、標籤、註釋包含你的帳號本身都會被 "用久" 的移除（無法復原）。然後你將會被自動登出。
+            description: 如你移除自己的帳號，你所有的項目、標籤、註釋以及帳號本身都會被「永久」地移除（無法復原）。然後你將會被登出。
+            title: 刪除我的帳號（危險地帶）
+            confirm: 你真的確定？（此舉無法復原）
         name_label: 名稱
         two_factor:
             emailTwoFactor_label: 使用電子郵件（以接收代碼）
@@ -70,12 +72,20 @@ config:
         faq:
             variable_description:
                 url: 條目網址
+                title: 條目標題
+            how_to_use_them_title: 應怎麼使用？
+            title: 常見問題
+            tagging_rules_definition_description: 它們是 wallabag 為新條目自動加上標籤的規則。<br />每當添加新條目時， 所有的標籤規則將用於新增你已設置的標籤，以免卻手動分類的麻煩。
+            tagging_rules_definition_title: 「標籤規則」的意思是？
         delete_rule_label: 刪除
         card:
             new_tagging_rule: 新增標籤規則
+            import_tagging_rules: 匯入標籤規則
+            export_tagging_rules: 匯出標籤規則
         import_submit: 匯入
         rule_label: 規則
         edit_rule_label: 編輯
+        file_label: JSON 檔案
     otp:
         app:
             cancel: 取消
@@ -87,11 +97,21 @@ config:
         page_title: 雙重驗證
     reset:
         tags: 移除所有標籤
+        title: 重設區域（危險地帶）
+        entries: 移除所有條目
+        archived: 移除所有已封存條目
+        confirm: 你真的確定？（此舉無法復原）
+        description: 點擊以下按鈕時，你將能移除自己帳號內的部分資料。須注意這些行動是不可回溯的。
+        annotations: 移除所有註釋
     form_password:
         description: 你可在此變更密碼。新密碼須至少有 8 個字元。
         old_password_label: 目前密碼
         new_password_label: 新密碼
         repeat_new_password_label: 再次輸入新密碼
+    form_ignore_origin_rules:
+        faq:
+            title: 常見問題
+            how_to_use_them_title: 應怎麼使用？
 menu:
     left:
         quickstart: 快速開始
@@ -140,7 +160,7 @@ security:
         page_title: 建立一個新帳號
         go_to_account: 前往你的帳號
     resetting:
-        description: 請輸入您的電子郵件地址，我們將會寄送密碼重製操作指示。
+        description: 請輸入你的電子郵件地址，我們將會寄送重設密碼操作指示。
 footer:
     wallabag:
         elsewhere: 將 wallabag 隨身攜帶
@@ -156,14 +176,18 @@ entry:
         add_tags: 添加標簽
         number_on_the_page: '{0} 沒有任何條目。|{1} 有 1 篇條目。|]1,Inf[ 共有 %count% 篇條目。'
         reading_time: 閱讀約需時
+        reading_time_minutes_short: '%readingTime% 分鐘'
+        reading_time_less_one_minute_short: '&lt; 1 分鐘'
     edit:
         url_label: 網址
         title_label: 標題
         save_label: 儲存
         origin_url_label: 來源網址（該條目內所列）
+        page_title: 編輯條目
     new:
         form_new:
             url_label: 網址
+        placeholder: http://website.com
     view:
         left_menu:
             theme_toggle_dark: 深色
@@ -178,16 +202,23 @@ entry:
             set_as_read: 標記為已讀
             share_email_label: 電子郵件
         edit_title: 編輯標題
+        annotations_on_the_entry: '{0} 沒有註釋|{1}有 1 個註釋|]1,Inf[ 有 %count% 個註釋'
     filters:
         unread_label: 未讀
-        archived_label: 已歸檔
+        archived_label: 已封存
         starred_label: 已收藏
+        reading_time:
+            label: 閱讀時間（分鐘）
     page_titles:
         untagged: 未標簽條目
         all: 所有項目
         unread: 未讀條目
+        archived: 已封存條目
+        with_annotations: 含註釋條目
     metadata:
         reading_time: 閱讀約需時
+        reading_time_minutes_short: '%readingTime% 分鐘'
+    default_title: 條目標題
 howto:
     shortcuts:
         arrows_navigation: 在項目間導覽
@@ -216,11 +247,16 @@ quickstart:
         email: 經由電子郵件
 import:
     wallabag_v1:
-        description: 這個匯入器將會匯入 wallabag v1 中你所有的項目。在設定頁面的 "匯出 wallabag 資料" 頁簽中，點選 "匯出 JSON 檔"，你將會得到檔名為 "wallabag-export-1-xxxx-xx-xx.json" 檔案。
+        description: 這匯入器將匯入 wallabag v1 中你所有的文章。在設置頁面的「匯出 wallabag 資料」部分點選「匯出 JSON 檔」，你將得到名為「wallabag-export-1-xxxx-xx-xx.json」的檔案。
     page_title: 匯入
     pocket:
         config_missing:
             admin_message: 需要定義 %keyurls%a pocket_consumer_key%keyurle%。
+    wallabag_v2:
+        description: 這匯入器將匯入 wallabag v2 中你所有的文章。先前往「全部文章」，然後於側邊欄點選「JSON」，你將得到名為「All articles.json」的檔案。
+    form:
+        file_label: 檔案
+        save_label: 上載檔案
 about:
     who_behind_wallabag:
         version: 版本
@@ -290,6 +326,8 @@ developer:
     documentation: 說明書
     full_documentation: 檢視完整的 API 說明書
     page_title: 用戶端 API 管理
+    remove:
+        warn_message_1: 你能夠移除用戶端 %name%。此乃不可回溯之舉！
 flashes:
     config:
         notice:
@@ -300,3 +338,11 @@ flashes:
             feed_token_revoked: 已註銷訂閱源 token
             otp_enabled: 已啟用雙重驗證
             otp_disabled: 已停用雙重驗證
+            entries_reset: 已重設條目
+            archived_reset: 完成刪除已封存條目
+            tags_reset: 已重設標籤
+            annotations_reset: 已重設註釋
+    entry:
+        notice:
+            entry_archived: 已封存條目
+            entry_unarchived: 已取消封存條目
