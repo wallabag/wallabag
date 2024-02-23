@@ -133,6 +133,7 @@
         "symfony/form": "^5.4.35",
         "symfony/framework-bundle": "^5.4.35",
         "symfony/google-mailer": "^5.4.35",
+        "symfony/http-client": "^5.4.35",
         "symfony/http-foundation": "^5.4.35",
         "symfony/http-kernel": "^5.4.35",
         "symfony/intl": "^5.4.35",
