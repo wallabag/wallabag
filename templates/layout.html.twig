@@ -156,8 +156,8 @@
                 </ul>
 
             </div>
-            {{ render(controller('Wallabag\\CoreBundle\\Controller\\EntryController::searchFormAction', {'currentRoute': current_route})) }}
-            {{ render(controller('Wallabag\\CoreBundle\\Controller\\EntryController::addEntryFormAction')) }}
+            {{ render(controller('Wallabag\\Controller\\EntryController::searchFormAction', {'currentRoute': current_route})) }}
+            {{ render(controller('Wallabag\\Controller\\EntryController::addEntryFormAction')) }}
         </div>
     </nav>
 {% endblock %}

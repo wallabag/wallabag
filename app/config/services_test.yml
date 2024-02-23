@@ -8,12 +8,12 @@ services:
         alias: fos_user.security.login_manager
         public: true
 
-    wallabag_core.entry_repository.test:
-        alias: Wallabag\CoreBundle\Repository\EntryRepository
+    wallabag.entry_repository.test:
+        alias: Wallabag\Repository\EntryRepository
         public: true
 
     wallabag_user.user_repository.test:
-        alias: Wallabag\CoreBundle\Repository\UserRepository
+        alias: Wallabag\Repository\UserRepository
         public: true
 
     filesystem_cache:
@@ -22,7 +22,7 @@ services:
             - "%kernel.cache_dir%/doctrine/metadata"
 
     # fixtures
-    Wallabag\CoreBundle\DataFixtures\:
-        resource: '../../src/Wallabag/CoreBundle/DataFixtures/*'
+    Wallabag\DataFixtures\:
+        resource: '../../src/DataFixtures/*'
         tags: ['doctrine.fixture.orm']
         autowire: true

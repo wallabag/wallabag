@@ -1,5 +1,5 @@
 app:
-    resource: "@WallabagCoreBundle/Controller/"
+    resource: ../../src/Controller/
     type: annotation
 
 doc-api:
@@ -9,7 +9,7 @@ doc-api:
 homepage:
     path: "/{page}"
     defaults:
-        _controller: 'Wallabag\CoreBundle\Controller\EntryController::showUnreadAction'
+        _controller: 'Wallabag\Controller\EntryController::showUnreadAction'
         page : 1
     requirements:
         page: \d+

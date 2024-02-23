@@ -3,7 +3,7 @@
 {% block title %}{{ 'import.page_title'|trans }}{% endblock %}
 
 {% block messages %}
-    {{ render(controller('Wallabag\\CoreBundle\\Controller\\Import\\ImportController::checkQueueAction')) }}
+    {{ render(controller('Wallabag\\Controller\\Import\\ImportController::checkQueueAction')) }}
 
     {{ parent() }}
 {% endblock %}
