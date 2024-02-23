@@ -96,7 +96,6 @@
         "php-amqplib/php-amqplib": "^3.6.1",
         "php-amqplib/rabbitmq-bundle": "^2.14.0",
         "php-http/client-common": "^2.7.1",
-        "php-http/discovery": "^1.19.2",
         "php-http/guzzle5-adapter": "^2.0",
         "php-http/httplug": "^2.4",
         "php-http/httplug-bundle": "^1.32",
