@@ -4,9 +4,9 @@ namespace Tests\Wallabag\Command;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 
-class ListUserCommandTest extends WallabagCoreTestCase
+class ListUserCommandTest extends WallabagTestCase
 {
     public function testRunListUserCommand()
     {

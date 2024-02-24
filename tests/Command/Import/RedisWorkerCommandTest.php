@@ -8,9 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 
-class RedisWorkerCommandTest extends WallabagCoreTestCase
+class RedisWorkerCommandTest extends WallabagTestCase
 {
     public function testRunRedisWorkerCommandWithoutArguments()
     {

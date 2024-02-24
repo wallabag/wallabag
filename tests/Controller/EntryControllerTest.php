@@ -5,7 +5,7 @@ namespace Tests\Wallabag\Controller;
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Annotation;
 use Wallabag\Entity\Config as ConfigEntity;
 use Wallabag\Entity\Entry;
@@ -15,7 +15,7 @@ use Wallabag\Entity\User;
 use Wallabag\Helper\ContentProxy;
 use Wallabag\Helper\CryptoProxy;
 
-class EntryControllerTest extends WallabagCoreTestCase
+class EntryControllerTest extends WallabagTestCase
 {
     public const AN_URL_CONTAINING_AN_ARTICLE_WITH_IMAGE = 'https://www.lemonde.fr/judo/article/2017/11/11/judo-la-decima-de-teddy-riner_5213605_1556020.html';
     public $downloadImagesEnabled = false;

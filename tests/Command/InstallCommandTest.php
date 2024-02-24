@@ -13,10 +13,10 @@ use Symfony\Component\Console\Command\LazyCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Command\InstallCommand;
 
-class InstallCommandTest extends WallabagCoreTestCase
+class InstallCommandTest extends WallabagTestCase
 {
     public static function setUpBeforeClass(): void
     {

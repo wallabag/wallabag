@@ -2,9 +2,9 @@
 
 namespace Tests\Wallabag\Controller\Import;
 
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 
-class ImportControllerTest extends WallabagCoreTestCase
+class ImportControllerTest extends WallabagTestCase
 {
     public function testLogin()
     {

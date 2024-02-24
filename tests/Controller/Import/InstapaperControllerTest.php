@@ -6,10 +6,10 @@ use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
 use Predis\Client;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Entry;
 
-class InstapaperControllerTest extends WallabagCoreTestCase
+class InstapaperControllerTest extends WallabagTestCase
 {
     public function testImportInstapaper()
     {

@@ -7,9 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 
-class ImportCommandTest extends WallabagCoreTestCase
+class ImportCommandTest extends WallabagTestCase
 {
     public function testRunImportCommandWithoutArguments()
     {

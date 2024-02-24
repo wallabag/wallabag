@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\Entity\User;
 
-abstract class WallabagCoreTestCase extends WebTestCase
+abstract class WallabagTestCase extends WebTestCase
 {
     /**
      * @var KernelBrowser|null

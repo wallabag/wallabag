@@ -5,10 +5,10 @@ namespace Tests\Wallabag\Controller;
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\SiteCredential;
 
-class SiteCredentialControllerTest extends WallabagCoreTestCase
+class SiteCredentialControllerTest extends WallabagTestCase
 {
     public function testAccessDeniedBecauseFeatureDisabled()
     {

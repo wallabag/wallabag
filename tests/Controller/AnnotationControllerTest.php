@@ -4,12 +4,12 @@ namespace Tests\Wallabag\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Annotation;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\User;
 
-class AnnotationControllerTest extends WallabagCoreTestCase
+class AnnotationControllerTest extends WallabagTestCase
 {
     /**
      * @var KernelBrowser

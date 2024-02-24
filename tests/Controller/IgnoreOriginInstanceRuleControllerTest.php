@@ -2,9 +2,9 @@
 
 namespace Tests\Wallabag\Controller;
 
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 
-class IgnoreOriginInstanceRuleControllerTest extends WallabagCoreTestCase
+class IgnoreOriginInstanceRuleControllerTest extends WallabagTestCase
 {
     public function testListIgnoreOriginInstanceRule()
     {

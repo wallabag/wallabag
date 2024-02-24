@@ -5,9 +5,9 @@ namespace Tests\Wallabag\Command;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 
-class ExportCommandTest extends WallabagCoreTestCase
+class ExportCommandTest extends WallabagTestCase
 {
     public function testExportCommandWithoutUsername()
     {
