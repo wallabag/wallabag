@@ -162,7 +162,7 @@ class PinboardControllerTest extends WallabagCoreTestCase
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->findByUrlAndUserId(
-                'https://ilia.ws/files/nginx_torontophpug.pdf',
+                'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
                 $this->getLoggedInUserId()
             );
 
