@@ -48,7 +48,6 @@ data/db/wallabag*.sqlite
 # assets stuff
 node_modules/
 bin
-app/Resources/build/
 package-lock.json
 
 # Test-generated files

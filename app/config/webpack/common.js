@@ -6,8 +6,8 @@ const projectDir = path.resolve(__dirname, '../../../');
 
 module.exports = {
   entry: {
-    material: path.join(projectDir, './app/Resources/static/themes/material/index.js'),
-    public: path.join(projectDir, './app/Resources/static/themes/_global/share.js'),
+    material: path.join(projectDir, './assets/material/index.js'),
+    public: path.join(projectDir, './assets/_global/share.js'),
   },
   output: {
     filename: '[name].js',
@@ -25,7 +25,7 @@ module.exports = {
       configFile: 'stylelint.config.js',
       failOnError: false,
       quiet: false,
-      context: 'app/Resources/static/themes',
+      context: 'assets',
       files: '**/*.scss',
     }),
   ],
