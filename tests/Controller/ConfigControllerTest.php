@@ -1313,7 +1313,8 @@ class ConfigControllerTest extends WallabagTestCase
         $client->submit($form, $data);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
-        $user = $client->getContainer()->get('fos_user.user_manager.test')->findUserBy(['username' => 'admin']);
+        $user = static::getContainer()->get('fos_user.user_manager')->findUserBy(['username' => 'admin']);
+        \assert($user instanceof User);
         $taggingRules = $user->getConfig()->getTaggingRules()->toArray();
         $this->assertCount(5, $taggingRules);
         $this->assertSame('title matches "football"', $taggingRules[4]->getRule());

@@ -43,10 +43,10 @@ abstract class WallabagApiTestCase extends WebTestCase
     protected function createAuthorizedClient()
     {
         $client = $this->createUnauthorizedClient();
-        $container = $client->getContainer();
+        $container = static::getContainer();
 
         /** @var UserManager $userManager */
-        $userManager = $container->get('fos_user.user_manager.test');
+        $userManager = $container->get('fos_user.user_manager');
         $firewallName = $container->getParameter('fos_user.firewall_name');
 
         $this->user = $userManager->findUserBy(['username' => 'admin']);

@@ -5,6 +5,7 @@ namespace Tests\Wallabag\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Entry;
+use Wallabag\Repository\UserRepository;
 
 class ExportControllerTest extends WallabagTestCase
 {
@@ -328,11 +329,9 @@ class ExportControllerTest extends WallabagTestCase
 
     private function setUpForJsonExportFromSearch()
     {
-        $client = $this->getTestClient();
         $em = $this->getEntityManager();
 
-        $userRepository = $client->getContainer()
-            ->get('wallabag_user.user_repository.test');
+        $userRepository = static::getContainer()->get(UserRepository::class);
 
         $user = $userRepository->findOneByUserName('admin');
         $this->adminEntry = new Entry($user);

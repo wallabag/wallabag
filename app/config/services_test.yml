@@ -1,21 +1,4 @@
 services:
-    # see https://github.com/symfony/symfony/issues/24543
-    fos_user.user_manager.test:
-        alias: fos_user.user_manager
-        public: true
-
-    fos_user.security.login_manager.test:
-        alias: fos_user.security.login_manager
-        public: true
-
-    wallabag.entry_repository.test:
-        alias: Wallabag\Repository\EntryRepository
-        public: true
-
-    wallabag_user.user_repository.test:
-        alias: Wallabag\Repository\UserRepository
-        public: true
-
     filesystem_cache:
         class: Doctrine\Common\Cache\FilesystemCache
         arguments:
