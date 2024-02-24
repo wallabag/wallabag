@@ -16,6 +16,8 @@
     <php>
         <ini name="error_reporting" value="-1" />
         <server name="KERNEL_CLASS" value="AppKernel" />
+        <server name="APP_ENV" value="test" />
+        <server name="APP_DEBUG" value="0" />
         <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
     </php>
 
