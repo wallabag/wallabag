@@ -58,3 +58,5 @@ specialexport.json
 
 # Custom CSS file
 web/custom.css
+
+.env.local
