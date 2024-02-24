@@ -73,10 +73,16 @@ config:
             variable_description:
                 url: 條目網址
                 title: 條目標題
+                label: 變數
             how_to_use_them_title: 應怎麼使用？
             title: 常見問題
             tagging_rules_definition_description: 它們是 wallabag 為新條目自動加上標籤的規則。<br />每當添加新條目時， 所有的標籤規則將用於新增你已設置的標籤，以免卻手動分類的麻煩。
             tagging_rules_definition_title: 「標籤規則」的意思是？
+            meaning: 意思
+            variables_available_title: 規則可使用的變數和運算子有哪些？
+            operator_description:
+                label: 運算子
+            how_to_use_them_description: 先假設你想把閱讀需時 3 分鐘以下的新條目加上「 <i>短文</i>」標籤。<br />在那情況下， 你應該在 <i>規則</i> 欄填上「readingTime &lt;= 3」和「<i>短文</i>」於 <i>標籤</i> 欄內。<br />可使用半形逗號加上多個標籤：「<i>短文, 必讀</i>。」<br />複合規則可利用預定義運算子編寫：如「<i>readingTime &gt;= 5 AND domainName = "www.php.net"</i>」則標籤為「 <i>長文, php</i>。」
         delete_rule_label: 刪除
         card:
             new_tagging_rule: 新增標籤規則
@@ -86,6 +92,8 @@ config:
         rule_label: 規則
         edit_rule_label: 編輯
         file_label: JSON 檔案
+        if_label: 如
+        then_tag_as_label: 則標籤為
     otp:
         app:
             cancel: 取消
@@ -112,6 +120,12 @@ config:
         faq:
             title: 常見問題
             how_to_use_them_title: 應怎麼使用？
+            variables_available_title: 規則可使用的變數和運算子有哪些？
+            meaning: 意思
+            variable_description:
+                label: 變數
+            operator_description:
+                label: 運算子
 menu:
     left:
         quickstart: 快速開始
@@ -248,15 +262,36 @@ quickstart:
 import:
     wallabag_v1:
         description: 這匯入器將匯入 wallabag v1 中你所有的文章。在設置頁面的「匯出 wallabag 資料」部分點選「匯出 JSON 檔」，你將得到名為「wallabag-export-1-xxxx-xx-xx.json」的檔案。
+        page_title: 匯入 > Wallabag v1
     page_title: 匯入
     pocket:
         config_missing:
             admin_message: 需要定義 %keyurls%a pocket_consumer_key%keyurle%。
+        page_title: 匯入 > Pocket
     wallabag_v2:
         description: 這匯入器將匯入 wallabag v2 中你所有的文章。先前往「全部文章」，然後於側邊欄點選「JSON」，你將得到名為「All articles.json」的檔案。
+        page_title: 匯入 > Wallabag v2
     form:
         file_label: 檔案
         save_label: 上載檔案
+    chrome:
+        page_title: 匯入 > Chrome
+    elcurator:
+        page_title: 匯入 > elCurator
+    pinboard:
+        page_title: 匯入 > Pinboard
+    delicious:
+        page_title: 匯入 > del.icio.us
+    pocket_html:
+        page_title: 匯入 > Pocket HTML
+    firefox:
+        page_title: 匯入 > Firefox
+    instapaper:
+        page_title: 匯入 > Instapaper
+    readability:
+        page_title: 匯入 > Readability
+    shaarli:
+        page_title: 匯入 > Shaarli
 about:
     who_behind_wallabag:
         version: 版本
@@ -328,6 +363,8 @@ developer:
     page_title: 用戶端 API 管理
     remove:
         warn_message_1: 你能夠移除用戶端 %name%。此乃不可回溯之舉！
+    clients:
+        title: 用戶端
 flashes:
     config:
         notice:
