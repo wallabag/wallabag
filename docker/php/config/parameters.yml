@@ -35,7 +35,7 @@ parameters:
     rss_limit: 50
 
     # RabbitMQ processing
-    rabbitmq_host: ${RABBITMQ_HOST:-localhost}
+    rabbitmq_host: ${RABBITMQ_HOST:-rabbitmq}
     rabbitmq_port: ${RABBITMQ_PORT:-5672}
     rabbitmq_user: ${RABBITMQ_USER:-guest}
     rabbitmq_password: ${RABBITMQ_PASSWORD:-guest}
