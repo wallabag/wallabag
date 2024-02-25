@@ -74,6 +74,13 @@ config:
                 url: 條目網址
                 title: 條目標題
                 label: 變數
+                isArchived: 條目是否已封存
+                isStarred: 條目是否已收藏
+                domainName: 條目域名
+                content: 條目內容
+                language: 條目使用語言
+                mimetype: 條目檔案類型
+                readingTime: 預計閱讀需時（分鐘）
             how_to_use_them_title: 應怎麼使用？
             title: 常見問題
             tagging_rules_definition_description: 它們是 wallabag 為新條目自動加上標籤的規則。<br />每當添加新條目時， 所有的標籤規則將用於新增你已設置的標籤，以免卻手動分類的麻煩。
@@ -82,12 +89,25 @@ config:
             variables_available_title: 規則可使用的變數和運算子有哪些？
             operator_description:
                 label: 運算子
+                greater_than: 相等或大於…
+                or: 或
+                and: 和
+                equal_to: 等於…
+                strictly_greater_than: 必須大於…
+                less_than: 相等或少於…
+                strictly_less_than: 必須少於…
+                matches: 當 <i>主體</i>符合 <i>搜尋條件</i>（不分大小寫）。<br />例如： <code>title matches "足球"</code>
+                notmatches: 當 <i>主體</i>並不符合 <i>搜尋條件</i>（不分大小寫）。<br />例如： <code>title notmatches "足球"</code>
+                not_equal_to: 不等於…
             how_to_use_them_description: 先假設你想把閱讀需時 3 分鐘以下的新條目加上「 <i>短文</i>」標籤。<br />在那情況下， 你應該在 <i>規則</i> 欄填上「readingTime &lt;= 3」和「<i>短文</i>」於 <i>標籤</i> 欄內。<br />可使用半形逗號加上多個標籤：「<i>短文, 必讀</i>。」<br />複合規則可利用預定義運算子編寫：如「<i>readingTime &gt;= 5 AND domainName = "www.php.net"</i>」則標籤為「 <i>長文, php</i>。」
+            variables_available_description: 建立規則時可使用以下的變數和運算子：
         delete_rule_label: 刪除
         card:
-            new_tagging_rule: 新增標籤規則
+            new_tagging_rule: 建立標籤規則
             import_tagging_rules: 匯入標籤規則
             export_tagging_rules: 匯出標籤規則
+            export_tagging_rules_detail: 將提供一個可用於匯入或備份標籤規則的 JSON 檔案。
+            import_tagging_rules_detail: 你需選取先前匯出的 JSON 檔案。
         import_submit: 匯入
         rule_label: 規則
         edit_rule_label: 編輯
@@ -181,7 +201,7 @@ footer:
         social: 社群
         powered_by: 運行於
         about: 關於
-    stats: 自從 %user_creation% 以來，你已閱讀 %nb_archives% 篇項目. 這大約是 %per_day% 篇一天!
+    stats: 自 %user_creation% 以來，你已閱讀 %nb_archives% 篇文章。這大約是 %per_day% 篇一天！
 entry:
     list:
         show_same_domain: 顯示同一域名的項目
@@ -192,6 +212,8 @@ entry:
         reading_time: 閱讀約需時
         reading_time_minutes_short: '%readingTime% 分鐘'
         reading_time_less_one_minute_short: '&lt; 1 分鐘'
+        reading_time_less_one_minute: 閱讀約需時：&lt; 1 分鐘
+        reading_time_minutes: 閱讀約需時： %readingTime% 分鐘
     edit:
         url_label: 網址
         title_label: 標題
@@ -217,12 +239,18 @@ entry:
             share_email_label: 電子郵件
         edit_title: 編輯標題
         annotations_on_the_entry: '{0} 沒有註釋|{1}有 1 個註釋|]1,Inf[ 有 %count% 個註釋'
+        created_at: 建立日期
+        published_at: 發布日期
+        published_by: 發布者
+        provided_by: 得知途經
     filters:
         unread_label: 未讀
         archived_label: 已封存
         starred_label: 已收藏
         reading_time:
             label: 閱讀時間（分鐘）
+        created_at:
+            label: 建立日期
     page_titles:
         untagged: 未標簽條目
         all: 所有項目
@@ -244,7 +272,7 @@ quickstart:
     first_steps:
         unread_articles: 然後將他分類！
     docs:
-        all_docs: 還有另外許多的項目！
+        all_docs: 以及更多文章！
         export: 將你的項目轉換為 ePUB 或 PDF 版本
     configure:
         tagging_rules: 撰寫規則來自動化標籤你的項目
@@ -256,9 +284,14 @@ quickstart:
     page_title: 快速開始
     admin:
         new_user: 新增使用者
+        export: 匯出設置
     more: 更多…
     support:
         email: 經由電子郵件
+        title: 支援
+        description: 如需協助，我們在此。
+        github: 在 GitHub
+        gitter: 在 Gitter
 import:
     wallabag_v1:
         description: 這匯入器將匯入 wallabag v1 中你所有的文章。在設置頁面的「匯出 wallabag 資料」部分點選「匯出 JSON 檔」，你將得到名為「wallabag-export-1-xxxx-xx-xx.json」的檔案。
@@ -298,8 +331,12 @@ about:
     page_title: 關於
     top_menu:
         who_behind_wallabag: wallabag 的背後
+        helping: 幫助 wallabag
+        getting_help: 取得協助
+        contributors: 貢獻者
     getting_help:
         documentation: 說明書
+        support: <a href="https://github.com/wallabag/wallabag/issues">於 GitHub</a>
 tag:
     page_title: 標籤
     new:
