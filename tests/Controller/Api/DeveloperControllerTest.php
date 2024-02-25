@@ -3,10 +3,10 @@
 namespace Tests\Wallabag\Controller\Api;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Api\Client;
 
-class DeveloperControllerTest extends WallabagCoreTestCase
+class DeveloperControllerTest extends WallabagTestCase
 {
     public function testCreateClient()
     {

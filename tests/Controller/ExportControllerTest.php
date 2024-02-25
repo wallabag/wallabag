@@ -3,10 +3,10 @@
 namespace Tests\Wallabag\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Entry;
 
-class ExportControllerTest extends WallabagCoreTestCase
+class ExportControllerTest extends WallabagTestCase
 {
     private $adminEntry;
     private $bobEntry;

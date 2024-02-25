@@ -8,12 +8,12 @@ use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\User;
 use Wallabag\Repository\SiteCredentialRepository;
 use Wallabag\SiteConfig\GrabySiteConfigBuilder;
 
-class GrabySiteConfigBuilderTest extends WallabagCoreTestCase
+class GrabySiteConfigBuilderTest extends WallabagTestCase
 {
     private $builder;
 

@@ -4,10 +4,10 @@ namespace Tests\Wallabag\Command;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Entry;
 
-class ReloadEntryCommandTest extends WallabagCoreTestCase
+class ReloadEntryCommandTest extends WallabagTestCase
 {
     public $url = 'https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html';
 

@@ -2,10 +2,10 @@
 
 namespace Tests\Wallabag\Entity;
 
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Entry;
 
-class EntryTest extends WallabagCoreTestCase
+class EntryTest extends WallabagTestCase
 {
     public function testGetLanguage()
     {

@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Annotation;
 use Wallabag\Entity\Config as ConfigEntity;
 use Wallabag\Entity\Entry;
@@ -15,7 +15,7 @@ use Wallabag\Entity\Tag;
 use Wallabag\Entity\TaggingRule;
 use Wallabag\Entity\User;
 
-class ConfigControllerTest extends WallabagCoreTestCase
+class ConfigControllerTest extends WallabagTestCase
 {
     public function testLogin()
     {

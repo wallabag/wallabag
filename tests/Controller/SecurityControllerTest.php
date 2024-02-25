@@ -3,10 +3,10 @@
 namespace Tests\Wallabag\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\User;
 
-class SecurityControllerTest extends WallabagCoreTestCase
+class SecurityControllerTest extends WallabagTestCase
 {
     public function testLoginWithEmail()
     {

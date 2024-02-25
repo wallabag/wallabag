@@ -2,13 +2,13 @@
 
 namespace Tests\Wallabag\Controller;
 
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 
 /**
  * The controller `SettingsController` does not exist.
  * This test cover security against the internal settings page managed by CraueConfigBundle.
  */
-class SettingsControllerTest extends WallabagCoreTestCase
+class SettingsControllerTest extends WallabagTestCase
 {
     public function testSettingsWithAdmin()
     {

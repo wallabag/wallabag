@@ -3,7 +3,7 @@
 namespace Tests\Wallabag\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\Tag;
 use Wallabag\Entity\User;
@@ -11,7 +11,7 @@ use Wallabag\Entity\User;
 /**
  * @group Tag
  */
-class TagControllerTest extends WallabagCoreTestCase
+class TagControllerTest extends WallabagTestCase
 {
     public $tagName = 'opensource';
     public $caseTagName = 'OpenSource';

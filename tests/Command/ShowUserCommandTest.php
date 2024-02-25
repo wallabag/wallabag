@@ -6,10 +6,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\User;
 
-class ShowUserCommandTest extends WallabagCoreTestCase
+class ShowUserCommandTest extends WallabagTestCase
 {
     public function testRunShowUserCommandWithoutUsername()
     {

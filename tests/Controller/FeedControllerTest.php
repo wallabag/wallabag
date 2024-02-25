@@ -3,11 +3,11 @@
 namespace Tests\Wallabag\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\User;
 
-class FeedControllerTest extends WallabagCoreTestCase
+class FeedControllerTest extends WallabagTestCase
 {
     public function validateDom($xml, $type, $nb = null, $tagValue = null)
     {

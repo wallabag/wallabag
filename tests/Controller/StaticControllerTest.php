@@ -2,9 +2,9 @@
 
 namespace Tests\Wallabag\Controller;
 
-use Tests\Wallabag\WallabagCoreTestCase;
+use Tests\Wallabag\WallabagTestCase;
 
-class StaticControllerTest extends WallabagCoreTestCase
+class StaticControllerTest extends WallabagTestCase
 {
     public function testAbout()
     {
