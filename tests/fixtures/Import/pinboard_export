@@ -22,14 +22,14 @@
     "tags": "varnish PHP"
   },
   {
-    "href": "https://ilia.ws/files/nginx_torontophpug.pdf",
-    "description": "Nginx Tricks for PHP Developers",
+    "href": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+    "description": "Dummy PDF file",
     "extended": "",
     "meta": "9adbb5c4ca6760e335b920800d88c70a",
     "hash": "0189bb08f8bd0122c6544bed4624c546",
     "time": "2016-10-05T07:11:27Z",
     "shared": "yes",
     "toread": "no",
-    "tags": "nginx PHP best_practice"
+    "tags": "dummy PDF file"
   }
 ]
