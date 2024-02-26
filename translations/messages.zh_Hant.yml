@@ -4,7 +4,7 @@ config:
         settings: 設定
         password: 密碼
         rules: 標籤規則
-        ignore_origin: 忽略原始規則
+        ignore_origin: 忽略來源規則
         reset: 重設區域
         new_user: 新增使用者
         user_info: 使用者資訊
@@ -62,7 +62,7 @@ config:
             action_app: 使用驗證器
             googleTwoFactor_label: 使用驗證器（開啟例如 Google Authenticator 、Authy 或 FreeOTP 等應用程式以取得一次性代碼）
         two_factor_description: 開啟雙重驗證即意味每當有不信任的連線時，你會收到付有代碼的電子郵件。
-        login_label: 登入（無法更改）
+        login_label: 登入帳號（無法更改）
         email_label: 電子郵件
     form:
         save: 儲存
@@ -96,8 +96,8 @@ config:
                 strictly_greater_than: 必須大於…
                 less_than: 相等或少於…
                 strictly_less_than: 必須少於…
-                matches: 當 <i>主體</i>符合 <i>搜尋條件</i>（不分大小寫）。<br />例如： <code>title matches "足球"</code>
-                notmatches: 當 <i>主體</i>並不符合 <i>搜尋條件</i>（不分大小寫）。<br />例如： <code>title notmatches "足球"</code>
+                matches: 當 <i>對象</i>符合 <i>搜尋條件</i>（不分大小寫）。<br />例如： <code>title matches "football"</code>
+                notmatches: 當 <i>對象</i>並不符合 <i>搜尋條件</i>（不分大小寫）。<br />例如： <code>title notmatches "football"</code>
                 not_equal_to: 不等於…
             how_to_use_them_description: 先假設你想把閱讀需時 3 分鐘以下的新條目加上「 <i>短文</i>」標籤。<br />在那情況下， 你應該在 <i>規則</i> 欄填上「readingTime &lt;= 3」和「<i>短文</i>」於 <i>標籤</i> 欄內。<br />可使用半形逗號加上多個標籤：「<i>短文, 必讀</i>。」<br />複合規則可利用預定義運算子編寫：如「<i>readingTime &gt;= 5 AND domainName = "www.php.net"</i>」則標籤為「 <i>長文, php</i>。」
             variables_available_description: 建立規則時可使用以下的變數和運算子：
@@ -144,12 +144,17 @@ config:
             meaning: 意思
             variable_description:
                 label: 變數
+                host: 網路主機位址
             operator_description:
                 label: 運算子
+            ignore_origin_rules_definition_title: 「忽略來源規則」的意思是？
+            variables_available_description: 建立忽略來源規則時可使用以下的變數和運算子：
+            ignore_origin_rules_definition_description: 它們是 wallabag 用來忽略網域名稱轉址作為來源的規則。<br />如存取新條目時發生重新導向，所有忽略來源規則（ <i>基於使用者定義及實例定義</i>）將用於忽略來源網址。
+            how_to_use_them_description: 先假設你想忽略條目來源「<i>rss.example.com</i>」（ <i>因得知重新導向後的域名為 example.com</i>）。<br />在那情況下，你應該在 <i>規則</i> 欄內填上「host = "rss.example.com"」。
 menu:
     left:
         quickstart: 快速開始
-        ignore_origin_instance_rules: 全域忽略原始規則
+        ignore_origin_instance_rules: 全域忽略來源規則
         howto: 指南
         with_annotations: 附有註釋的
         tags: 標籤
@@ -267,7 +272,13 @@ howto:
         go_config: 前往設置
         action: 動作
     top_menu:
-        mobile_apps: 行動電話應用程式
+        mobile_apps: 行動裝置應用程式
+    mobile_apps:
+        android:
+            via_google_play: 經由 Google Play
+            via_f_droid: 經由 F-Droid
+        ios: 於 App Store
+        windows: 於 Microsoft Store
 quickstart:
     first_steps:
         unread_articles: 然後將他分類！
@@ -362,28 +373,50 @@ user:
         twofactor_email_label: 經電子郵件進行雙重驗證
         repeat_new_password_label: 再次輸入新密碼
         twofactor_google_label: 經驗證器進行雙重驗證
+        back_to_list: 返回列表
     new_user: 新增使用者
     list:
         edit_action: 編輯
         create_new_one: 新增使用者
+        no: 否
+        actions: 操作
+        yes: 是
     edit_user: 編輯現有使用者
+    page_title: 使用者管理
 ignore_origin_instance_rule:
     form:
         delete: 刪除
         save: 儲存
         delete_confirm: 你確定？
         rule_label: 規則
+        back_to_list: 返回列表
     list:
         edit_action: 編輯
+        actions: 操作
+        yes: 是
+        no: 否
+    edit_ignore_origin_instance_rule: 編輯現有全域忽略來源規則
+    new_ignore_origin_instance_rule: 建立全域忽略來源規則
+    page_title: 全域忽略來源規則
 site_credential:
     form:
         delete_confirm: 你確定？
         save: 儲存
         delete: 刪除
-        username_label: 登入
+        username_label: 登入帳號
         password_label: 密碼
+        back_to_list: 返回列表
+        host_label: 網路主機名稱（subdomain.example.org，.example.org 等等）
     list:
         edit_action: 編輯
+        yes: 是
+        no: 否
+        create_new_one: 建立新憑證
+        actions: 操作
+    new_site_credential: 建立新憑證
+    edit_site_credential: 編輯現有憑證
+    page_title: 網站憑證管理
+    description: 你可以在這管理（建立、編輯及刪除）需要憑證的網站，例如付費和認證等。
 developer:
     client_parameter:
         back: 返回
@@ -420,3 +453,10 @@ flashes:
         notice:
             entry_archived: 已封存條目
             entry_unarchived: 已取消封存條目
+    site_credential:
+        notice:
+            added: 已新增網站憑證「%host%」
+            updated: 已更新網站憑證「%host%」
+            deleted: 已刪除網站憑證「%host%」
+error:
+    page_title: 出現錯誤
