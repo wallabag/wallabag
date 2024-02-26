@@ -14,6 +14,7 @@ if (!isPartialRun()) {
         'doctrine:database:drop',
         '--force',
         '--env=test',
+        '--no-debug',
     ]))->run(function ($type, $buffer) {
         echo $buffer;
     });
@@ -23,6 +24,7 @@ if (!isPartialRun()) {
         __DIR__ . '/../bin/console',
         'doctrine:database:create',
         '--env=test',
+        '--no-debug',
     ]))->mustRun(function ($type, $buffer) {
         echo $buffer;
     });
@@ -33,6 +35,7 @@ if (!isPartialRun()) {
         'doctrine:migrations:migrate',
         '--no-interaction',
         '--env=test',
+        '--no-debug',
         '-vv',
     ]))->mustRun(function ($type, $buffer) {
         echo $buffer;
@@ -45,6 +48,7 @@ if (!isPartialRun()) {
     'doctrine:fixtures:load',
     '--no-interaction',
     '--env=test',
+    '--no-debug',
 ]))->mustRun(function ($type, $buffer) {
     echo $buffer;
 });

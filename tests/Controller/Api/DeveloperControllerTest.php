@@ -132,7 +132,7 @@ class DeveloperControllerTest extends WallabagTestCase
     {
         $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
-        $userManager = $client->getContainer()->get('fos_user.user_manager.test');
+        $userManager = static::getContainer()->get('fos_user.user_manager');
         $user = $userManager->findUserBy(['username' => $username]);
         $apiClient = new Client($user);
         $apiClient->setName('My app');

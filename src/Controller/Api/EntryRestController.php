@@ -528,7 +528,7 @@ class EntryRestController extends WallabagRestController
         $limit = $this->getParameter('wallabag.api_limit_mass_actions');
 
         if (\count($urls) > $limit) {
-            throw new HttpException(400, 'API limit reached');
+            throw new BadRequestHttpException('API limit reached');
         }
 
         $results = [];

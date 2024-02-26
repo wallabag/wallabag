@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Entry;
+use Wallabag\Repository\EntryRepository;
+use Wallabag\Repository\UserRepository;
 
 class ReloadEntryCommandTest extends WallabagTestCase
 {
@@ -35,7 +37,7 @@ class ReloadEntryCommandTest extends WallabagTestCase
     {
         parent::setUp();
 
-        $userRepository = $this->getTestClient()->getContainer()->get('wallabag_user.user_repository.test');
+        $userRepository = static::getContainer()->get(UserRepository::class);
 
         $user = $userRepository->findOneByUserName('admin');
         $this->adminEntry = new Entry($user);
@@ -80,9 +82,8 @@ class ReloadEntryCommandTest extends WallabagTestCase
             'interactive' => false,
         ]);
 
-        $reloadedEntries = $this->getTestClient()
-            ->getContainer()
-            ->get('wallabag.entry_repository.test')
+        $reloadedEntries = static::getContainer()
+            ->get(EntryRepository::class)
             ->findById([$this->adminEntry->getId(), $this->bobEntry->getId()]);
 
         foreach ($reloadedEntries as $reloadedEntry) {
@@ -107,7 +108,7 @@ class ReloadEntryCommandTest extends WallabagTestCase
             'interactive' => false,
         ]);
 
-        $entryRepository = $this->getTestClient()->getContainer()->get('wallabag.entry_repository.test');
+        $entryRepository = static::getContainer()->get(EntryRepository::class);
 
         $reloadedAdminEntry = $entryRepository->find($this->adminEntry->getId());
         $this->assertNotEmpty($reloadedAdminEntry->getContent());
@@ -128,7 +129,7 @@ class ReloadEntryCommandTest extends WallabagTestCase
             '--only-not-parsed' => true,
         ]);
 
-        $entryRepository = $this->getTestClient()->getContainer()->get('wallabag.entry_repository.test');
+        $entryRepository = static::getContainer()->get(EntryRepository::class);
 
         $reloadedBobParsedEntry = $entryRepository->find($this->bobParsedEntry->getId());
         $this->assertEmpty($reloadedBobParsedEntry->getContent());

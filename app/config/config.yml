@@ -125,6 +125,9 @@ fos_rest:
             # for an unknown reason, EACH REQUEST goes to FOS\RestBundle\EventListener\FormatListener
             # so we need to add custom rule for custom api export but also for all other routes of the application...
             - { path: '^/', priorities: ['text/html', '*/*'], fallback_format: html, prefer_extension: false }
+    exception:
+        messages:
+            Symfony\Component\HttpKernel\Exception\BadRequestHttpException: true
 
 nelmio_api_doc:
     areas:

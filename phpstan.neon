@@ -8,7 +8,7 @@ parameters:
         - tests
 
     symfony:
-        container_xml_path: %rootDir%/../../../var/cache/test/AppKernelTestDebugContainer.xml
+        container_xml_path: %rootDir%/../../../var/cache/dev/AppKernelDevDebugContainer.xml
 
     doctrine:
         objectManagerLoader: tests/object-manager.php
