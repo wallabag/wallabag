@@ -27,7 +27,7 @@ class FeedControllerTest extends WallabagTestCase
 
         $this->assertSame(1, $xpath->query('/a:feed/a:title')->length);
         $this->assertStringContainsString('favicon.ico', $xpath->query('/a:feed/a:icon')->item(0)->nodeValue);
-        $this->assertStringContainsString('logo-square.png', $xpath->query('/a:feed/a:logo')->item(0)->nodeValue);
+        $this->assertStringContainsString('logo-square.svg', $xpath->query('/a:feed/a:logo')->item(0)->nodeValue);
 
         $this->assertSame(1, $xpath->query('/a:feed/a:updated')->length);
 

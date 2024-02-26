@@ -85,9 +85,6 @@ module.exports = merge(commonConfig, {
         test: /\.(jpg|png|gif|svg|ico)$/,
         exclude: /node_modules/,
         type: 'asset/resource',
-        generator: {
-          filename: (content) => content.filename.replace('app/Resources/static/', ''),
-        },
       },
       {
         test: /\.(eot|ttf|woff|woff2)$/,
