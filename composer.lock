@@ -8804,16 +8804,16 @@
         },
         {
             "name": "sentry/sentry-symfony",
-            "version": "4.13.2",
+            "version": "4.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-symfony.git",
-                "reference": "bf049e69863465f2e0ba2555dbb5224641a37d67"
+                "reference": "001c4cfd8fe93cbb00edaca903ffbfac28259170"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/bf049e69863465f2e0ba2555dbb5224641a37d67",
-                "reference": "bf049e69863465f2e0ba2555dbb5224641a37d67",
+                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/001c4cfd8fe93cbb00edaca903ffbfac28259170",
+                "reference": "001c4cfd8fe93cbb00edaca903ffbfac28259170",
                 "shasum": ""
             },
             "require": {
@@ -8834,8 +8834,8 @@
                 "symfony/security-http": "^4.4.20||^5.0.11||^6.0||^7.0"
             },
             "require-dev": {
-                "doctrine/dbal": "^2.13||^3.0",
-                "doctrine/doctrine-bundle": "^1.12||^2.5",
+                "doctrine/dbal": "^2.13||^3.3||^4.0",
+                "doctrine/doctrine-bundle": "^2.6",
                 "friendsofphp/php-cs-fixer": "^2.19||^3.40",
                 "masterminds/html5": "^2.8",
                 "phpstan/extension-installer": "^1.0",
@@ -8902,7 +8902,7 @@
             ],
             "support": {
                 "issues": "https://github.com/getsentry/sentry-symfony/issues",
-                "source": "https://github.com/getsentry/sentry-symfony/tree/4.13.2"
+                "source": "https://github.com/getsentry/sentry-symfony/tree/4.14.0"
             },
             "funding": [
                 {
@@ -8914,7 +8914,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2024-01-11T14:55:45+00:00"
+            "time": "2024-02-26T09:27:19+00:00"
         },
         {
             "name": "simplepie/simplepie",
