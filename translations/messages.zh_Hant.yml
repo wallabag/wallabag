@@ -145,8 +145,10 @@ config:
             variable_description:
                 label: 變數
                 host: 網路主機位址
+                _all: 完整網址，主要用作模式匹配
             operator_description:
                 label: 運算子
+                matches: 當 <i>對象</i>符合 <i>搜尋條件</i>（不分大小寫）。<br />例如： <code>_all ~ "https?://rss.example.com/foobar/.*"</code>
             ignore_origin_rules_definition_title: 「忽略來源規則」的意思是？
             variables_available_description: 建立忽略來源規則時可使用以下的變數和運算子：
             ignore_origin_rules_definition_description: 它們是 wallabag 用來忽略網域名稱轉址作為來源的規則。<br />如存取新條目時發生重新導向，所有忽略來源規則（ <i>基於使用者定義及實例定義</i>）將用於忽略來源網址。
@@ -189,7 +191,7 @@ security:
     login:
         submit: 登入
         register: 註冊
-        page_title: 歡迎使用 wallabag!
+        page_title: 歡迎使用 wallabag！
         keep_logged_in: 保持登入狀態
         forgot_password: 忘記密碼了嗎？
         cancel: 取消
@@ -279,19 +281,23 @@ howto:
             via_f_droid: 經由 F-Droid
         ios: 於 App Store
         windows: 於 Microsoft Store
+    page_title: 指南
+    tab_menu:
+        add_link: 添加連結
 quickstart:
     first_steps:
         unread_articles: 然後將他分類！
     docs:
         all_docs: 以及更多文章！
         export: 將你的項目轉換為 ePUB 或 PDF 版本
+        title: 完整說明文件
     configure:
         tagging_rules: 撰寫規則來自動化標籤你的項目
         language: 變更語言及介面
         title: 設置應用程式
         feed: 開啟訂閱源
     intro:
-        title: 歡迎使用 wallabag!
+        title: 歡迎使用 wallabag！
     page_title: 快速開始
     admin:
         new_user: 新增使用者
@@ -346,7 +352,7 @@ about:
         getting_help: 取得協助
         contributors: 貢獻者
     getting_help:
-        documentation: 說明書
+        documentation: 說明文件
         support: <a href="https://github.com/wallabag/wallabag/issues">於 GitHub</a>
 tag:
     page_title: 標籤
@@ -421,20 +427,39 @@ developer:
     client_parameter:
         back: 返回
         field_id: 用戶端 ID
+        field_name: 用戶端名稱
+        read_howto: 閱讀指南「如何建立第一個應用程式」
+        field_secret: 用戶端密碼
+        page_title: 用戶端 API 管理 > 用戶端參數
     howto:
         back: 返回
+        page_title: 用戶端 API 管理 > 如何建立第一個應用程式
+        description:
+            paragraph_8: 如果想知道全部 API 端點，你可以查看<a href="%link%">我們的 API 說明文件</a>。
     client:
         action_back: 返回
+        form:
+            name_label: 用戶端名稱
+            save_label: 建立新用戶端
+        copy_to_clipboard: 複製
+        page_title: 用戶端 API 管理 > 新用戶端
     existing_clients:
         field_id: 用戶端 ID
+        title: 現有用戶端
+        field_secret: 用戶端密碼
+        no_client: 沒有用戶端。
     welcome_message: 歡迎使用 wallabag API
-    documentation: 說明書
-    full_documentation: 檢視完整的 API 說明書
+    documentation: 說明文件
+    full_documentation: 檢視完整的 API 說明文件
     page_title: 用戶端 API 管理
     remove:
         warn_message_1: 你能夠移除用戶端 %name%。此乃不可回溯之舉！
+        action: 移除用戶端 %name%
     clients:
         title: 用戶端
+        create_new: 建立新用戶端
+    list_methods: API methods 列表
+    how_to_first_app: 如何建立第一個應用程式
 flashes:
     config:
         notice:
@@ -458,5 +483,9 @@ flashes:
             added: 已新增網站憑證「%host%」
             updated: 已更新網站憑證「%host%」
             deleted: 已刪除網站憑證「%host%」
+    developer:
+        notice:
+            client_created: 已建立新用戶端 %name%。
+            client_deleted: 已刪除用戶端 %name%
 error:
     page_title: 出現錯誤
