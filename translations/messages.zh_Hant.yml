@@ -96,8 +96,8 @@ config:
                 strictly_greater_than: 必須大於…
                 less_than: 相等或少於…
                 strictly_less_than: 必須少於…
-                matches: 當 <i>對象</i>符合 <i>搜尋條件</i>（不分大小寫）。<br />例如： <code>title matches "football"</code>
-                notmatches: 當 <i>對象</i>並不符合 <i>搜尋條件</i>（不分大小寫）。<br />例如： <code>title notmatches "football"</code>
+                matches: 當 <i>對象</i> 符合 <i>搜尋條件</i>（不分大小寫）。<br />例如：<code>title matches "football"</code>
+                notmatches: 當 <i>對象</i> 並不符合 <i>搜尋條件</i>（不分大小寫）。<br />例如：<code>title notmatches "football"</code>
                 not_equal_to: 不等於…
             how_to_use_them_description: 先假設你想把閱讀需時 3 分鐘以下的新條目加上「 <i>短文</i>」標籤。<br />在那情況下， 你應該在 <i>規則</i> 欄填上「readingTime &lt;= 3」和「<i>短文</i>」於 <i>標籤</i> 欄內。<br />可使用半形逗號加上多個標籤：「<i>短文, 必讀</i>。」<br />複合規則可利用預定義運算子編寫：如「<i>readingTime &gt;= 5 AND domainName = "www.php.net"</i>」則標籤為「 <i>長文, php</i>。」
             variables_available_description: 建立規則時可使用以下的變數和運算子：
@@ -119,9 +119,11 @@ config:
             cancel: 取消
             qrcode_label: QR碼
             two_factor_code_description_1: 你剛啟用雙重驗證器，開啟你的應用程式然後使用出現的代碼以取得一次性密碼。頁面重整後它將會消失。
-            two_factor_code_description_3: 此外，請把下列備用代碼保存於安全的地方。以便你不能使用驗證器之需：
+            two_factor_code_description_3: 此外，請把下列備用代碼保存於安全的地方。以便你不能使用驗證器時之需：
             two_factor_code_description_4: 測試顯示於驗證器的代碼：
             enable: 啟用
+            two_factor_code_description_2: 你可以使用應用程式來掃描以下QR碼：
+            two_factor_code_description_5: 如果你看不到或無法掃描QR碼，請在應用程式內輸入以下代碼：
         page_title: 雙重驗證
     reset:
         tags: 移除所有標籤
@@ -148,7 +150,7 @@ config:
                 _all: 完整網址，主要用作模式匹配
             operator_description:
                 label: 運算子
-                matches: 當 <i>對象</i>符合 <i>搜尋條件</i>（不分大小寫）。<br />例如： <code>_all ~ "https?://rss.example.com/foobar/.*"</code>
+                matches: 當 <i>對象</i> 符合 <i>搜尋條件</i>（不分大小寫）。<br />例如：<code>_all ~ "https?://rss.example.com/foobar/.*"</code>
             ignore_origin_rules_definition_title: 「忽略來源規則」的意思是？
             variables_available_description: 建立忽略來源規則時可使用以下的變數和運算子：
             ignore_origin_rules_definition_description: 它們是 wallabag 用來忽略網域名稱轉址作為來源的規則。<br />如存取新條目時發生重新導向，所有忽略來源規則（ <i>基於使用者定義及實例定義</i>）將用於忽略來源網址。
@@ -244,6 +246,8 @@ entry:
             back_to_homepage: 返回
             set_as_read: 標記為已讀
             share_email_label: 電子郵件
+            problem:
+                description: 這篇文章出問題了嗎？
         edit_title: 編輯標題
         annotations_on_the_entry: '{0} 沒有註釋|{1}有 1 個註釋|]1,Inf[ 有 %count% 個註釋'
         created_at: 建立日期
@@ -273,6 +277,7 @@ howto:
         arrows_navigation: 在項目間導覽
         go_config: 前往設置
         action: 動作
+        go_developers: 往開發者頁面
     top_menu:
         mobile_apps: 行動裝置應用程式
     mobile_apps:
@@ -309,6 +314,9 @@ quickstart:
         description: 如需協助，我們在此。
         github: 在 GitHub
         gitter: 在 Gitter
+    developer:
+        create_application: 建立你的第三方應用程式
+        title: 開發者
 import:
     wallabag_v1:
         description: 這匯入器將匯入 wallabag v1 中你所有的文章。在設置頁面的「匯出 wallabag 資料」部分點選「匯出 JSON 檔」，你將得到名為「wallabag-export-1-xxxx-xx-xx.json」的檔案。
@@ -345,6 +353,7 @@ import:
 about:
     who_behind_wallabag:
         version: 版本
+        many_contributors: 以及<a href="https://github.com/wallabag/wallabag/graphs/contributors">在 GitHub 上</a>的眾多貢獻者♥
     page_title: 關於
     top_menu:
         who_behind_wallabag: wallabag 的背後
@@ -354,6 +363,10 @@ about:
     getting_help:
         documentation: 說明文件
         support: <a href="https://github.com/wallabag/wallabag/issues">於 GitHub</a>
+    contributors:
+        description: 為 wallabag 網路應用程式版的貢獻者們送上感謝
+    third_party:
+        license: 授權條款
 tag:
     page_title: 標籤
     new:
@@ -428,14 +441,20 @@ developer:
         back: 返回
         field_id: 用戶端 ID
         field_name: 用戶端名稱
-        read_howto: 閱讀指南「如何建立第一個應用程式」
+        read_howto: 閱讀指南「建立我的第一個應用程式」
         field_secret: 用戶端密碼
         page_title: 用戶端 API 管理 > 用戶端參數
+        page_description: 這邊是你的用戶端參數。
     howto:
         back: 返回
         page_title: 用戶端 API 管理 > 如何建立第一個應用程式
         description:
             paragraph_8: 如果想知道全部 API 端點，你可以查看<a href="%link%">我們的 API 說明文件</a>。
+            paragraph_2: 你需要 token 作為第三方應用程式及 wallabag API 之間傳遞資訊的橋樑。
+            paragraph_4: 現在建立你的 token（需把 client_id「用戶端 ID」、client_secret「用戶端密碼」、username「使用者名稱」和 password「密碼」替換為相應值）：
+            paragraph_1: 以下指令均基於 <a href="https://github.com/jkbrzt/httpie">HTTPie 函式庫</a>。請在使用前確定已安裝於你的系統內。
+            paragraph_3: 點擊<a href="%link%">建立新用戶端</a>以取得所需的 token。
+            paragraph_6: access_token 用於向 API 端點進行有效的請求。例：
     client:
         action_back: 返回
         form:
@@ -459,7 +478,7 @@ developer:
         title: 用戶端
         create_new: 建立新用戶端
     list_methods: API methods 列表
-    how_to_first_app: 如何建立第一個應用程式
+    how_to_first_app: 如何建立我的第一個應用程式
 flashes:
     config:
         notice:
