@@ -12,3 +12,6 @@ misc: 雜項
 import: 匯入
 entry: 文章
 modify_settings: 套用
+matomo_enabled: 啟用 Matomo
+import_with_rabbitmq: 啟用 RabbitMQ 以異步方式匯入資料
+import_with_redis: 啟用 Redis 以異步方式匯入資料
