@@ -211,7 +211,7 @@ footer:
     wallabag:
         elsewhere: 將 wallabag 隨身攜帶
         social: 社群
-        powered_by: 運行於
+        powered_by: 技術支援—
         about: 關於
     stats: 自 %user_creation% 以來，你已閱讀 %nb_archives% 篇文章。這大約是 %per_day% 篇一天！
 entry:
@@ -265,6 +265,11 @@ entry:
             label: 閱讀時間（分鐘）
         created_at:
             label: 建立日期
+        action:
+            filter: 篩選
+            clear: 清除
+        domain_label: 域名
+        language_label: 語言
     page_titles:
         untagged: 未標簽條目
         all: 所有項目
@@ -272,6 +277,8 @@ entry:
         archived: 已封存條目
         with_annotations: 含註釋條目
         starred: 已收藏條目
+        filtered_tags: 經由標籤篩選：
+        filtered_search: 經由搜尋篩選：
     metadata:
         reading_time: 閱讀約需時
         reading_time_minutes_short: '%readingTime% 分鐘'
@@ -350,6 +357,7 @@ import:
     wallabag_v1:
         description: 這匯入器將匯入你在 wallabag v1 中的所有文章。在設置頁面的「匯出 wallabag 資料」部分點選「匯出 JSON 檔」，你將得到名為「wallabag-export-1-xxxx-xx-xx.json」的檔案。
         page_title: 匯入 > Wallabag v1
+        how_to: 請選取你的 wallabag 匯出檔案然後點擊以下按鈕上載以匯入資料。
     page_title: 匯入
     pocket:
         config_missing:
@@ -358,6 +366,8 @@ import:
             user_message: 你的伺服器管理員需要設定 Pocket 用 API 密鑰。
         page_title: 匯入 > Pocket
         description: 這匯入器將匯入你在 Pocket 中的所有資料。Pocket 並不允許我們從他們那邊擷取內容，因此 wallabag 將重新存取可讀的文章。
+        connect_to_pocket: 和 Pocket 連線並匯入資料
+        authorize_message: 你能夠匯入在 Pocket 中的所有資料。只需點擊以下按鈕並允許應用程式連上 getpocket.com。
     wallabag_v2:
         description: 這匯入器將匯入你在 wallabag v2 中的所有文章。先前往「全部文章」，然後於側邊欄點選「JSON」，你將得到名為「All articles.json」的檔案。
         page_title: 匯入 > Wallabag v2
@@ -368,22 +378,35 @@ import:
         mark_as_read_label: 把所有條目均標為已讀
     chrome:
         page_title: 匯入 > Chrome
+        description: 這匯入器將匯入你在 Chrome 中的全部書籤。 其檔案位置則基於你的作業系統：<ul><li>Linux 的話，請找 <code>~/.config/chromium/Default/</code> 目錄</li><li>Windows的話，應當在 <code>%LOCALAPPDATA%\Google\Chrome\User Data\Default</code></li><li>至於 OS X，則理應位於<code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>當到達指定位置，複製 <code>Bookmarks</code> 檔案到你可以找到的位置。<em><br>請注意如你使用的是 Chromium 而非 Chrome，則須對路徑作出相應調整。</em></p>
     elcurator:
         page_title: 匯入 > elCurator
+        description: 這匯入器將匯入你在 elCurator 中的所有文章。
     pinboard:
         page_title: 匯入 > Pinboard
+        how_to: 請選取你的 Pinboard 匯出檔案然後點擊以下按鈕上載以匯入資料。
+        description: 這匯入器將匯入你在 Pinboard 中的所有文章。在備份頁（https://pinboard.in/settings/backup）的「Bookmarks」部分點擊「JSON」後，將提供一個可下載的 JSON 檔案（名為「pinboard_export 」之類）。
     delicious:
         page_title: 匯入 > del.icio.us
+        how_to: 請選取你的 Delicious 匯出檔案然後點擊以下按鈕上載以匯入資料。
+        description: 這匯入器將匯入你在 Delicious 中的全部書籤。由 2021 年開始，你能利用匯出頁（https://del.icio.us/export）再次匯出你的資料。請選擇「JSON」格式下載（名為「delicious_export.2021.02.06_21.10.json」之類）。
     pocket_html:
         page_title: 匯入 > Pocket HTML
+        description: 這匯入器將匯入你在 Pocket 中的全部書籤（經 HTML 匯出）。你只須前往 https://getpocket.com/export 匯出 HTML檔案，將提供一個可下載的 HTML 檔案（名為「ril_export.html」之類）。
     firefox:
         page_title: 匯入 > Firefox
+        description: 這匯入器將匯入你在 Firefox 中的全部書籤。在書籤收藏庫（Ctrl+Shift+O）的「匯入及備份」中選擇「備份」後，你將取得一個 JSON 檔案。
     instapaper:
         page_title: 匯入 > Instapaper
+        description: 這匯入器將匯入你在 Instapaper 中的所有文章。在設定頁（https://www.instapaper.com/user）的「Export」部分點擊「Download .CSV file」後，將提供一個可下載的 CSV 檔案（名為「instapaper-export.csv」之類）。
+        how_to: 請選取你的 Instapaper 匯出檔案然後點擊以下按鈕上載以匯入資料。
     readability:
         page_title: 匯入 > Readability
+        how_to: 請選取你的 Readability 匯出檔案然後點擊以下按鈕上載以匯入資料。
+        description: 這匯入器將匯入你在 Readability 中的所有文章。
     shaarli:
         page_title: 匯入 > Shaarli
+        description: 這匯入器將匯入你在 Shaarli 中的全部書籤。先到 Tools 頁點擊「Export database」，選擇你想保存的書籤然後將之匯出。你將得到一個 HTML 檔案。
     action:
         import_contents: 匯入內容
     page_description: 歡迎使用 wallabag 匯入器。請選取想要轉移的來源。
@@ -439,6 +462,9 @@ user:
         yes: 是
     edit_user: 編輯現有使用者
     page_title: 使用者管理
+    description: 你能夠在此頁面管理所有使用者（建立、編輯以及刪除）
+    search:
+        placeholder: 經由使用者名稱或電子郵件篩選
 ignore_origin_instance_rule:
     form:
         delete: 刪除
