@@ -51,6 +51,7 @@ config:
             description: 如你移除自己的帳號，你所有的項目、標籤、註釋以及帳號本身都會被「永久」地移除（無法復原）。然後你將會被登出。
             title: 刪除我的帳號（危險地帶）
             confirm: 你真的確定？（此舉無法復原）
+            button: 刪除我的帳號
         name_label: 名稱
         two_factor:
             emailTwoFactor_label: 使用電子郵件（以接收代碼）
@@ -152,6 +153,7 @@ config:
             operator_description:
                 label: 運算子
                 matches: 當 <i>對象</i> 符合 <i>搜尋條件</i>（不分大小寫）。<br />例如：<code>_all ~ "https?://rss.example.com/foobar/.*"</code>
+                equal_to: 等同……
             ignore_origin_rules_definition_title: 「忽略來源規則」的意思是？
             variables_available_description: 建立忽略來源規則時可使用以下的變數和運算子：
             ignore_origin_rules_definition_description: 它們是 wallabag 用來忽略網域名稱轉址作為來源的規則。<br />如存取新條目時發生重新導向，所有忽略來源規則（ <i>基於使用者定義及實例定義</i>）將用於忽略來源網址。
@@ -269,6 +271,7 @@ entry:
         unread: 未讀條目
         archived: 已封存條目
         with_annotations: 含註釋條目
+        starred: 已收藏條目
     metadata:
         reading_time: 閱讀約需時
         reading_time_minutes_short: '%readingTime% 分鐘'
@@ -330,6 +333,7 @@ quickstart:
     admin:
         new_user: 新增使用者
         export: 匯出設置
+        import: 設置匯入
     more: 更多…
     support:
         email: 經由電子郵件
@@ -344,20 +348,23 @@ quickstart:
         use_docker: 使用 Docker 安裝 wallabag
 import:
     wallabag_v1:
-        description: 這匯入器將匯入 wallabag v1 中你所有的文章。在設置頁面的「匯出 wallabag 資料」部分點選「匯出 JSON 檔」，你將得到名為「wallabag-export-1-xxxx-xx-xx.json」的檔案。
+        description: 這匯入器將匯入你在 wallabag v1 中的所有文章。在設置頁面的「匯出 wallabag 資料」部分點選「匯出 JSON 檔」，你將得到名為「wallabag-export-1-xxxx-xx-xx.json」的檔案。
         page_title: 匯入 > Wallabag v1
     page_title: 匯入
     pocket:
         config_missing:
-            admin_message: 需要定義 %keyurls%a pocket_consumer_key%keyurle%。
+            admin_message: 你需要設定 %keyurls%pocket_consumer_key%keyurle%（Pocket 的消費者密鑰） 。
+            description: 尚未設置匯入 Pocket。
+            user_message: 你的伺服器管理員需要設定 Pocket 用 API 密鑰。
         page_title: 匯入 > Pocket
+        description: 這匯入器將匯入你在 Pocket 中的所有資料。Pocket 並不允許我們從他們那邊擷取內容，因此 wallabag 將重新存取可讀的文章。
     wallabag_v2:
-        description: 這匯入器將匯入 wallabag v2 中你所有的文章。先前往「全部文章」，然後於側邊欄點選「JSON」，你將得到名為「All articles.json」的檔案。
+        description: 這匯入器將匯入你在 wallabag v2 中的所有文章。先前往「全部文章」，然後於側邊欄點選「JSON」，你將得到名為「All articles.json」的檔案。
         page_title: 匯入 > Wallabag v2
     form:
         file_label: 檔案
         save_label: 上載檔案
-        mark_as_read_title: 全部標示為已讀？
+        mark_as_read_title: 是否全部標示為已讀？
         mark_as_read_label: 把所有條目均標為已讀
     chrome:
         page_title: 匯入 > Chrome
@@ -379,6 +386,7 @@ import:
         page_title: 匯入 > Shaarli
     action:
         import_contents: 匯入內容
+    page_description: 歡迎使用 wallabag 匯入器。請選取想要轉移的來源。
 about:
     who_behind_wallabag:
         version: 版本
