@@ -312,6 +312,7 @@ howto:
         go_starred: 前往收藏頁
     top_menu:
         mobile_apps: 行動裝置應用程式
+        bookmarklet: 小書籤
     mobile_apps:
         android:
             via_google_play: 經由 Google Play
