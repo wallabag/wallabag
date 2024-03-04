@@ -211,7 +211,7 @@ footer:
     wallabag:
         elsewhere: 將 wallabag 隨身攜帶
         social: 社群
-        powered_by: 技術支援—
+        powered_by: 威力本源
         about: 關於
     stats: 自 %user_creation% 以來，你已閱讀 %nb_archives% 篇文章。這大約是 %per_day% 篇一天！
 entry:
@@ -323,6 +323,8 @@ howto:
     tab_menu:
         add_link: 添加連結
         shortcuts: 使用快速鍵
+    bookmarklet:
+        description: 拖曳這連結到你的書籤列上：
 quickstart:
     first_steps:
         unread_articles: 然後將他分類！
@@ -376,10 +378,11 @@ import:
         file_label: 檔案
         save_label: 上載檔案
         mark_as_read_title: 是否全部標示為已讀？
-        mark_as_read_label: 把所有條目均標為已讀
+        mark_as_read_label: 把匯入的所有條目均標為已讀
     chrome:
         page_title: 匯入 > Chrome
         description: 這匯入器將匯入你在 Chrome 中的全部書籤。 其檔案位置則基於你的作業系統：<ul><li>Linux 的話，請找 <code>~/.config/chromium/Default/</code> 目錄</li><li>Windows的話，應當在 <code>%LOCALAPPDATA%\Google\Chrome\User Data\Default</code></li><li>至於 OS X，則理應位於<code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>當到達指定位置，複製 <code>Bookmarks</code> 檔案到你可以找到的位置。<em><br>請注意如你使用的是 Chromium 而非 Chrome，則須對路徑作出相應調整。</em></p>
+        how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要存取全部的文章，整個過程可能會花費一段時間。
     elcurator:
         page_title: 匯入 > elCurator
         description: 這匯入器將匯入你在 elCurator 中的所有文章。
@@ -394,9 +397,11 @@ import:
     pocket_html:
         page_title: 匯入 > Pocket HTML
         description: 這匯入器將匯入你在 Pocket 中的全部書籤（經 HTML 匯出）。你只須前往 https://getpocket.com/export 匯出 HTML檔案，將提供一個可下載的 HTML 檔案（名為「ril_export.html」之類）。
+        how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要存取全部的文章，整個過程可能會花費一段時間。
     firefox:
         page_title: 匯入 > Firefox
         description: 這匯入器將匯入你在 Firefox 中的全部書籤。在書籤收藏庫（Ctrl+Shift+O）的「匯入及備份」中選擇「備份」後，你將取得一個 JSON 檔案。
+        how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要存取全部的文章，整個過程可能會花費一段時間。
     instapaper:
         page_title: 匯入 > Instapaper
         description: 這匯入器將匯入你在 Instapaper 中的所有文章。在設定頁（https://www.instapaper.com/user）的「Export」部分點擊「Download .CSV file」後，將提供一個可下載的 CSV 檔案（名為「instapaper-export.csv」之類）。
@@ -408,6 +413,7 @@ import:
     shaarli:
         page_title: 匯入 > Shaarli
         description: 這匯入器將匯入你在 Shaarli 中的全部書籤。先到 Tools 頁點擊「Export database」，選擇你想保存的書籤然後將之匯出。你將得到一個 HTML 檔案。
+        how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要存取全部的文章，整個過程可能會花費一段時間。
     action:
         import_contents: 匯入內容
     page_description: 歡迎使用 wallabag 匯入器。請選取想要轉移的來源。
@@ -478,9 +484,11 @@ ignore_origin_instance_rule:
         actions: 操作
         yes: 是
         no: 否
+        create_new_one: 建立新的全域忽略來源規則
     edit_ignore_origin_instance_rule: 編輯現有全域忽略來源規則
     new_ignore_origin_instance_rule: 建立全域忽略來源規則
     page_title: 全域忽略來源規則
+    description: 你可在此管理忽略部分來源格式的全域忽略來源規則。
 site_credential:
     form:
         delete_confirm: 你確定？
@@ -572,5 +580,10 @@ flashes:
         notice:
             client_created: 已建立新用戶端 %name%。
             client_deleted: 已刪除用戶端 %name%
+    ignore_origin_instance_rule:
+        notice:
+            deleted: 已刪除全域忽略來源規則
+            updated: 已更新全域忽略來源規則
+            added: 已添加全域忽略來源規則
 error:
     page_title: 出現錯誤
