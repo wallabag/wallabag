@@ -31,6 +31,7 @@ config:
         help_pocket_consumer_key: 匯入 Pocket 時必須。可於你的 Pocket 帳號內建立。
         pocket_consumer_key_label: 使用 Pocket 的消費者密鑰匯入內容
         help_reading_speed: wallabag 能夠計算閱讀每篇文章的所需時間。你可在此設定，不論你偏好快速或慢速閱讀，wallabag 均能運算每篇文章需要的閱讀時間。
+        fontsize_label: 字體大小
     form_feed:
         description: 你可以使用你喜愛的 Atom 閱讀器來閱讀由 wallabag 提供的 Atom 訂閱源。為此你需要先產生一組 token。
         feed_link:
@@ -50,6 +51,7 @@ config:
             description: 如你移除自己的帳號，你所有的項目、標籤、註釋以及帳號本身都會被「永久」地移除（無法復原）。然後你將會被登出。
             title: 刪除我的帳號（危險地帶）
             confirm: 你真的確定？（此舉無法復原）
+            button: 刪除我的帳號
         name_label: 名稱
         two_factor:
             emailTwoFactor_label: 使用電子郵件（以接收代碼）
@@ -96,8 +98,8 @@ config:
                 strictly_greater_than: 必須大於…
                 less_than: 相等或少於…
                 strictly_less_than: 必須少於…
-                matches: 當 <i>對象</i>符合 <i>搜尋條件</i>（不分大小寫）。<br />例如： <code>title matches "football"</code>
-                notmatches: 當 <i>對象</i>並不符合 <i>搜尋條件</i>（不分大小寫）。<br />例如： <code>title notmatches "football"</code>
+                matches: 當 <i>對象</i> 符合 <i>搜尋條件</i>（不分大小寫）。<br />例如：<code>title matches "football"</code>
+                notmatches: 當 <i>對象</i> 並不符合 <i>搜尋條件</i>（不分大小寫）。<br />例如：<code>title notmatches "football"</code>
                 not_equal_to: 不等於…
             how_to_use_them_description: 先假設你想把閱讀需時 3 分鐘以下的新條目加上「 <i>短文</i>」標籤。<br />在那情況下， 你應該在 <i>規則</i> 欄填上「readingTime &lt;= 3」和「<i>短文</i>」於 <i>標籤</i> 欄內。<br />可使用半形逗號加上多個標籤：「<i>短文, 必讀</i>。」<br />複合規則可利用預定義運算子編寫：如「<i>readingTime &gt;= 5 AND domainName = "www.php.net"</i>」則標籤為「 <i>長文, php</i>。」
             variables_available_description: 建立規則時可使用以下的變數和運算子：
@@ -119,9 +121,11 @@ config:
             cancel: 取消
             qrcode_label: QR碼
             two_factor_code_description_1: 你剛啟用雙重驗證器，開啟你的應用程式然後使用出現的代碼以取得一次性密碼。頁面重整後它將會消失。
-            two_factor_code_description_3: 此外，請把下列備用代碼保存於安全的地方。以便你不能使用驗證器之需：
+            two_factor_code_description_3: 此外，請把下列備用代碼保存於安全的地方。以便你不能使用驗證器時之需：
             two_factor_code_description_4: 測試顯示於驗證器的代碼：
             enable: 啟用
+            two_factor_code_description_2: 你可以使用應用程式來掃描以下QR碼：
+            two_factor_code_description_5: 如果你看不到或無法掃描QR碼，請在應用程式內輸入以下代碼：
         page_title: 雙重驗證
     reset:
         tags: 移除所有標籤
@@ -148,7 +152,8 @@ config:
                 _all: 完整網址，主要用作模式匹配
             operator_description:
                 label: 運算子
-                matches: 當 <i>對象</i>符合 <i>搜尋條件</i>（不分大小寫）。<br />例如： <code>_all ~ "https?://rss.example.com/foobar/.*"</code>
+                matches: 當 <i>對象</i> 符合 <i>搜尋條件</i>（不分大小寫）。<br />例如：<code>_all ~ "https?://rss.example.com/foobar/.*"</code>
+                equal_to: 等同……
             ignore_origin_rules_definition_title: 「忽略來源規則」的意思是？
             variables_available_description: 建立忽略來源規則時可使用以下的變數和運算子：
             ignore_origin_rules_definition_description: 它們是 wallabag 用來忽略網域名稱轉址作為來源的規則。<br />如存取新條目時發生重新導向，所有忽略來源規則（ <i>基於使用者定義及實例定義</i>）將用於忽略來源網址。
@@ -206,7 +211,7 @@ footer:
     wallabag:
         elsewhere: 將 wallabag 隨身攜帶
         social: 社群
-        powered_by: 運行於
+        powered_by: 威力本源
         about: 關於
     stats: 自 %user_creation% 以來，你已閱讀 %nb_archives% 篇文章。這大約是 %per_day% 篇一天！
 entry:
@@ -244,6 +249,8 @@ entry:
             back_to_homepage: 返回
             set_as_read: 標記為已讀
             share_email_label: 電子郵件
+            problem:
+                description: 這篇文章出問題了嗎？
         edit_title: 編輯標題
         annotations_on_the_entry: '{0} 沒有註釋|{1}有 1 個註釋|]1,Inf[ 有 %count% 個註釋'
         created_at: 建立日期
@@ -258,23 +265,54 @@ entry:
             label: 閱讀時間（分鐘）
         created_at:
             label: 建立日期
+        action:
+            filter: 篩選
+            clear: 清除
+        domain_label: 域名
+        language_label: 語言
     page_titles:
         untagged: 未標簽條目
         all: 所有項目
         unread: 未讀條目
         archived: 已封存條目
         with_annotations: 含註釋條目
+        starred: 已收藏條目
+        filtered_tags: 經由標籤篩選：
+        filtered_search: 經由搜尋篩選：
     metadata:
         reading_time: 閱讀約需時
         reading_time_minutes_short: '%readingTime% 分鐘'
     default_title: 條目標題
 howto:
     shortcuts:
-        arrows_navigation: 在項目間導覽
+        arrows_navigation: 在文章間瀏覽
         go_config: 前往設置
         action: 動作
+        go_developers: 往開發者頁面
+        search: 顯示搜尋欄位
+        article_title: 在條目頁面可用的快速鍵
+        toggle_archive: 變更條目的閱讀狀態
+        toggle_favorite: 變更條目的收藏狀態
+        hide_form: 隱藏現有的搜尋或新連結欄位
+        go_archive: 前往封存頁
+        go_all: 往所有條目頁面
+        delete: 刪除條目
+        add_link: 添加新連結
+        open_article: 開啟所選條目
+        go_logout: 登出
+        open_original: 開啟條目的原文網址
+        page_description: 以下是 wallabag 內可用的快速鍵。
+        shortcut: 快速鍵
+        go_import: 前往匯入頁
+        list_title: 在列表頁面可用的快速鍵
+        go_tags: 前往標籤頁
+        go_howto: 前往指南（這頁！）
+        all_pages_title: 所有頁面可用的快速鍵
+        go_unread: 前往未讀頁
+        go_starred: 前往收藏頁
     top_menu:
         mobile_apps: 行動裝置應用程式
+        bookmarklet: 小書籤
     mobile_apps:
         android:
             via_google_play: 經由 Google Play
@@ -284,6 +322,9 @@ howto:
     page_title: 指南
     tab_menu:
         add_link: 添加連結
+        shortcuts: 使用快速鍵
+    bookmarklet:
+        description: 拖曳這連結到你的書籤列上：
 quickstart:
     first_steps:
         unread_articles: 然後將他分類！
@@ -302,6 +343,7 @@ quickstart:
     admin:
         new_user: 新增使用者
         export: 匯出設置
+        import: 設置匯入
     more: 更多…
     support:
         email: 經由電子郵件
@@ -309,42 +351,76 @@ quickstart:
         description: 如需協助，我們在此。
         github: 在 GitHub
         gitter: 在 Gitter
+    developer:
+        create_application: 建立你的第三方應用程式
+        title: 開發者
+        description: 我們亦有考慮開發者的需要：Docker、API、翻譯，以及其他。
+        use_docker: 使用 Docker 安裝 wallabag
 import:
     wallabag_v1:
-        description: 這匯入器將匯入 wallabag v1 中你所有的文章。在設置頁面的「匯出 wallabag 資料」部分點選「匯出 JSON 檔」，你將得到名為「wallabag-export-1-xxxx-xx-xx.json」的檔案。
+        description: 這匯入器將匯入你在 wallabag v1 中的所有文章。在設置頁面的「匯出 wallabag 資料」部分點選「匯出 JSON 檔」，你將得到名為「wallabag-export-1-xxxx-xx-xx.json」的檔案。
         page_title: 匯入 > Wallabag v1
+        how_to: 請選取你的 wallabag 匯出檔案然後點擊以下按鈕上載以匯入資料。
     page_title: 匯入
     pocket:
         config_missing:
-            admin_message: 需要定義 %keyurls%a pocket_consumer_key%keyurle%。
+            admin_message: 你需要設定 %keyurls%pocket_consumer_key%keyurle%（Pocket 的消費者密鑰） 。
+            description: 尚未設置匯入 Pocket。
+            user_message: 你的伺服器管理員需要設定 Pocket 用 API 密鑰。
         page_title: 匯入 > Pocket
+        description: 這匯入器將匯入你在 Pocket 中的所有資料。Pocket 並不允許我們從他們那邊擷取內容，因此 wallabag 將重新存取可讀的文章。
+        connect_to_pocket: 和 Pocket 連線並匯入資料
+        authorize_message: 你能夠匯入在 Pocket 中的所有資料。只需點擊以下按鈕並允許應用程式連上 getpocket.com。
     wallabag_v2:
-        description: 這匯入器將匯入 wallabag v2 中你所有的文章。先前往「全部文章」，然後於側邊欄點選「JSON」，你將得到名為「All articles.json」的檔案。
+        description: 這匯入器將匯入你在 wallabag v2 中的所有文章。先前往「全部文章」，然後於側邊欄點選「JSON」，你將得到名為「All articles.json」的檔案。
         page_title: 匯入 > Wallabag v2
     form:
         file_label: 檔案
         save_label: 上載檔案
+        mark_as_read_title: 是否全部標示為已讀？
+        mark_as_read_label: 把匯入的所有條目均標為已讀
     chrome:
         page_title: 匯入 > Chrome
+        description: 這匯入器將匯入你在 Chrome 中的全部書籤。 其檔案位置則基於你的作業系統：<ul><li>Linux 的話，請找 <code>~/.config/chromium/Default/</code> 目錄</li><li>Windows的話，應當在 <code>%LOCALAPPDATA%\Google\Chrome\User Data\Default</code></li><li>至於 OS X，則理應位於<code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>當到達指定位置，複製 <code>Bookmarks</code> 檔案到你可以找到的位置。<em><br>請注意如你使用的是 Chromium 而非 Chrome，則須對路徑作出相應調整。</em></p>
+        how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要存取全部的文章，整個過程可能會花費一段時間。
     elcurator:
         page_title: 匯入 > elCurator
+        description: 這匯入器將匯入你在 elCurator 中的所有文章。
     pinboard:
         page_title: 匯入 > Pinboard
+        how_to: 請選取你的 Pinboard 匯出檔案然後點擊以下按鈕上載以匯入資料。
+        description: 這匯入器將匯入你在 Pinboard 中的所有文章。在備份頁（https://pinboard.in/settings/backup）的「Bookmarks」部分點擊「JSON」後，將提供一個可下載的 JSON 檔案（名為「pinboard_export 」之類）。
     delicious:
         page_title: 匯入 > del.icio.us
+        how_to: 請選取你的 Delicious 匯出檔案然後點擊以下按鈕上載以匯入資料。
+        description: 這匯入器將匯入你在 Delicious 中的全部書籤。由 2021 年開始，你能利用匯出頁（https://del.icio.us/export）再次匯出你的資料。請選擇「JSON」格式下載（名為「delicious_export.2021.02.06_21.10.json」之類）。
     pocket_html:
         page_title: 匯入 > Pocket HTML
+        description: 這匯入器將匯入你在 Pocket 中的全部書籤（經 HTML 匯出）。你只須前往 https://getpocket.com/export 匯出 HTML檔案，將提供一個可下載的 HTML 檔案（名為「ril_export.html」之類）。
+        how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要存取全部的文章，整個過程可能會花費一段時間。
     firefox:
         page_title: 匯入 > Firefox
+        description: 這匯入器將匯入你在 Firefox 中的全部書籤。在書籤收藏庫（Ctrl+Shift+O）的「匯入及備份」中選擇「備份」後，你將取得一個 JSON 檔案。
+        how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要存取全部的文章，整個過程可能會花費一段時間。
     instapaper:
         page_title: 匯入 > Instapaper
+        description: 這匯入器將匯入你在 Instapaper 中的所有文章。在設定頁（https://www.instapaper.com/user）的「Export」部分點擊「Download .CSV file」後，將提供一個可下載的 CSV 檔案（名為「instapaper-export.csv」之類）。
+        how_to: 請選取你的 Instapaper 匯出檔案然後點擊以下按鈕上載以匯入資料。
     readability:
         page_title: 匯入 > Readability
+        how_to: 請選取你的 Readability 匯出檔案然後點擊以下按鈕上載以匯入資料。
+        description: 這匯入器將匯入你在 Readability 中的所有文章。
     shaarli:
         page_title: 匯入 > Shaarli
+        description: 這匯入器將匯入你在 Shaarli 中的全部書籤。先到 Tools 頁點擊「Export database」，選擇你想保存的書籤然後將之匯出。你將得到一個 HTML 檔案。
+        how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要存取全部的文章，整個過程可能會花費一段時間。
+    action:
+        import_contents: 匯入內容
+    page_description: 歡迎使用 wallabag 匯入器。請選取想要轉移的來源。
 about:
     who_behind_wallabag:
         version: 版本
+        many_contributors: 以及<a href="https://github.com/wallabag/wallabag/graphs/contributors">在 GitHub 上</a>的眾多貢獻者♥
     page_title: 關於
     top_menu:
         who_behind_wallabag: wallabag 的背後
@@ -354,6 +430,10 @@ about:
     getting_help:
         documentation: 說明文件
         support: <a href="https://github.com/wallabag/wallabag/issues">於 GitHub</a>
+    contributors:
+        description: 為 wallabag 網路應用程式版的貢獻者們送上感謝
+    third_party:
+        license: 授權條款
 tag:
     page_title: 標籤
     new:
@@ -389,6 +469,9 @@ user:
         yes: 是
     edit_user: 編輯現有使用者
     page_title: 使用者管理
+    description: 你能夠在此頁面管理所有使用者（建立、編輯以及刪除）
+    search:
+        placeholder: 經由使用者名稱或電子郵件篩選
 ignore_origin_instance_rule:
     form:
         delete: 刪除
@@ -401,9 +484,11 @@ ignore_origin_instance_rule:
         actions: 操作
         yes: 是
         no: 否
+        create_new_one: 建立新的全域忽略來源規則
     edit_ignore_origin_instance_rule: 編輯現有全域忽略來源規則
     new_ignore_origin_instance_rule: 建立全域忽略來源規則
     page_title: 全域忽略來源規則
+    description: 你可在此管理忽略部分來源格式的全域忽略來源規則。
 site_credential:
     form:
         delete_confirm: 你確定？
@@ -428,14 +513,22 @@ developer:
         back: 返回
         field_id: 用戶端 ID
         field_name: 用戶端名稱
-        read_howto: 閱讀指南「如何建立第一個應用程式」
+        read_howto: 閱讀指南「建立我的第一個應用程式」
         field_secret: 用戶端密碼
         page_title: 用戶端 API 管理 > 用戶端參數
+        page_description: 這邊是你的用戶端參數。
     howto:
         back: 返回
         page_title: 用戶端 API 管理 > 如何建立第一個應用程式
         description:
             paragraph_8: 如果想知道全部 API 端點，你可以查看<a href="%link%">我們的 API 說明文件</a>。
+            paragraph_2: 你需要 token 作為第三方應用程式及 wallabag API 之間傳遞資訊的橋樑。
+            paragraph_4: 現在建立你的 token（需把 client_id「用戶端 ID」、client_secret「用戶端密碼」、username「使用者名稱」和 password「密碼」替換為相應值）：
+            paragraph_1: 以下指令均基於 <a href="https://github.com/jkbrzt/httpie">HTTPie 函式庫</a>。請在使用前確定已安裝於你的系統內。
+            paragraph_3: 點擊<a href="%link%">建立新用戶端</a>以取得所需的 token。
+            paragraph_6: access_token 用於向 API 端點進行有效的請求。如：
+            paragraph_5: API 將提供類似下例的 response：
+            paragraph_7: 這將提供你使用者的所有條目。
     client:
         action_back: 返回
         form:
@@ -459,7 +552,7 @@ developer:
         title: 用戶端
         create_new: 建立新用戶端
     list_methods: API methods 列表
-    how_to_first_app: 如何建立第一個應用程式
+    how_to_first_app: 如何建立我的第一個應用程式
 flashes:
     config:
         notice:
@@ -487,5 +580,10 @@ flashes:
         notice:
             client_created: 已建立新用戶端 %name%。
             client_deleted: 已刪除用戶端 %name%
+    ignore_origin_instance_rule:
+        notice:
+            deleted: 已刪除全域忽略來源規則
+            updated: 已更新全域忽略來源規則
+            added: 已添加全域忽略來源規則
 error:
     page_title: 出現錯誤
