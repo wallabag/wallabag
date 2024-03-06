@@ -32,6 +32,7 @@ config:
         pocket_consumer_key_label: 使用 Pocket 的消費者密鑰匯入內容
         help_reading_speed: wallabag 能夠計算閱讀每篇文章的所需時間。你可在此設定，不論你偏好快速或慢速閱讀，wallabag 均能運算每篇文章需要的閱讀時間。
         fontsize_label: 字體大小
+        help_language: 你可以變更 wallabag 介面的語言。
     form_feed:
         description: 你可以使用你喜愛的 Atom 閱讀器來閱讀由 wallabag 提供的 Atom 訂閱源。為此你需要先產生一組 token。
         feed_link:
@@ -182,7 +183,7 @@ menu:
         about: 關於
         save_link: 儲存連結
         all_articles: 所有項目
-        archive: 歸檔
+        archive: 封存
     top:
         random_entry: 由列表中隨機選擇項目
         account: 我的帳號
@@ -313,6 +314,7 @@ howto:
     top_menu:
         mobile_apps: 行動裝置應用程式
         bookmarklet: 小書籤
+        browser_addons: 瀏覽器附加元件
     mobile_apps:
         android:
             via_google_play: 經由 Google Play
@@ -325,9 +327,17 @@ howto:
         shortcuts: 使用快速鍵
     bookmarklet:
         description: 拖曳這連結到你的書籤列上：
+    browser_addons:
+        firefox: Firefox 附加元件
+        chrome: Chrome 擴充功能
+        opera: Opera 外掛程式
+    page_description: 可使用數種方式來儲存文章：
 quickstart:
     first_steps:
-        unread_articles: 然後將他分類！
+        unread_articles: 然後將之分類！
+        new_article: 儲存你的首篇文章
+        description: 現在 wallabag 經已設置完畢，是時候封存網頁了。你可以點擊位於右上角的 + 符號以添加連結。
+        title: 首要步驟
     docs:
         all_docs: 以及更多文章！
         export: 將你的項目轉換為 ePUB 或 PDF 版本
@@ -337,6 +347,7 @@ quickstart:
         language: 變更語言及介面
         title: 設置應用程式
         feed: 開啟訂閱源
+        description: 為了令應用程式符合你的需要，得先查看 wallabag 的設置。
     intro:
         title: 歡迎使用 wallabag！
     page_title: 快速開始
@@ -356,6 +367,14 @@ quickstart:
         title: 開發者
         description: 我們亦有考慮開發者的需要：Docker、API、翻譯，以及其他。
         use_docker: 使用 Docker 安裝 wallabag
+    migrate:
+        wallabag_v2: 從 wallabag v2 遷移
+        readability: 從 Readability 遷移
+        title: 從既有服務遷移
+        pocket: 從 Pocket 遷移
+        wallabag_v1: 從 wallabag v1 遷移
+        instapaper: 從 Instapaper 遷移
+        description: 你在使用其他服務嗎？我們能協助你將資料擷取到 wallabag。
 import:
     wallabag_v1:
         description: 這匯入器將匯入你在 wallabag v1 中的所有文章。在設置頁面的「匯出 wallabag 資料」部分點選「匯出 JSON 檔」，你將得到名為「wallabag-export-1-xxxx-xx-xx.json」的檔案。
@@ -416,7 +435,7 @@ import:
         how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要存取全部的文章，整個過程可能會花費一段時間。
     action:
         import_contents: 匯入內容
-    page_description: 歡迎使用 wallabag 匯入器。請選取想要轉移的來源。
+    page_description: 歡迎使用 wallabag 匯入器。請選取想要遷移的服務來源。
 about:
     who_behind_wallabag:
         version: 版本
@@ -438,6 +457,7 @@ tag:
     page_title: 標籤
     new:
         add: 添加
+        placeholder: 你可使用半形逗號分隔多個標籤。
     list:
         untagged: 未標簽條目
         no_untagged_entries: 沒有未標簽條目。
@@ -534,6 +554,7 @@ developer:
         form:
             name_label: 用戶端名稱
             save_label: 建立新用戶端
+            redirect_uris_label: 重定向 URI（選填）
         copy_to_clipboard: 複製
         page_title: 用戶端 API 管理 > 新用戶端
     existing_clients:
