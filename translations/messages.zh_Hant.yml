@@ -164,7 +164,7 @@ menu:
         quickstart: 快速開始
         ignore_origin_instance_rules: 全域忽略來源規則
         howto: 指南
-        with_annotations: 附有註釋的
+        with_annotations: 含註釋
         tags: 標籤
         internal_settings: 內部設定
         import: 匯入
@@ -252,6 +252,8 @@ entry:
             share_email_label: 電子郵件
             problem:
                 description: 這篇文章出問題了嗎？
+            delete_public_link: 刪除公開連結
+            public_link: 公開連結
         edit_title: 編輯標題
         annotations_on_the_entry: '{0} 沒有註釋|{1}有 1 個註釋|]1,Inf[ 有 %count% 個註釋'
         created_at: 建立日期
@@ -264,13 +266,26 @@ entry:
         starred_label: 已收藏
         reading_time:
             label: 閱讀時間（分鐘）
+            from: 從
+            to: 到
         created_at:
             label: 建立日期
+            from: 由
+            to: 直至
         action:
             filter: 篩選
             clear: 清除
         domain_label: 域名
         language_label: 語言
+        title: 篩選條件
+        annotated_label: 已附註
+        preview_picture_label: 含預覽圖像
+        preview_picture_help: 預覽圖像
+        http_status_label: HTTP 狀態碼
+        parsed_label: 未正確擷取
+        status_label: 狀態
+        is_public_label: 設有公開連結
+        is_public_help: 公開連結
     page_titles:
         untagged: 未標簽條目
         all: 所有項目
@@ -278,12 +293,15 @@ entry:
         archived: 已封存條目
         with_annotations: 含註釋條目
         starred: 已收藏條目
-        filtered_tags: 經由標籤篩選：
-        filtered_search: 經由搜尋篩選：
+        filtered_tags: 經標籤篩選：
+        filtered_search: 經搜尋篩選：
+        filtered: 已篩選項目
     metadata:
         reading_time: 閱讀約需時
         reading_time_minutes_short: '%readingTime% 分鐘'
     default_title: 條目標題
+    search:
+        placeholder: 想要尋找甚麼？
 howto:
     shortcuts:
         arrows_navigation: 在文章間瀏覽
@@ -342,6 +360,9 @@ quickstart:
         all_docs: 以及更多文章！
         export: 將你的項目轉換為 ePUB 或 PDF 版本
         title: 完整說明文件
+        annotate: 在文章中插入註釋
+        description: wallabag 功能眾多。勿猶豫，馬上閱讀使用手冊並學以致用吧。
+        search_filters: 來看看你能利用搜尋及篩選功能來查找文章
     configure:
         tagging_rules: 撰寫規則來自動化標籤你的項目
         language: 變更語言及介面
@@ -401,7 +422,7 @@ import:
     chrome:
         page_title: 匯入 > Chrome
         description: 這匯入器將匯入你在 Chrome 中的全部書籤。 其檔案位置則基於你的作業系統：<ul><li>Linux 的話，請找 <code>~/.config/chromium/Default/</code> 目錄</li><li>Windows的話，應當在 <code>%LOCALAPPDATA%\Google\Chrome\User Data\Default</code></li><li>至於 OS X，則理應位於<code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>當到達指定位置，複製 <code>Bookmarks</code> 檔案到你可以找到的位置。<em><br>請注意如你使用的是 Chromium 而非 Chrome，則須對路徑作出相應調整。</em></p>
-        how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要存取全部的文章，整個過程可能會花費一段時間。
+        how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要擷取全部的文章，整個過程可能會花費一段時間。
     elcurator:
         page_title: 匯入 > elCurator
         description: 這匯入器將匯入你在 elCurator 中的所有文章。
@@ -416,11 +437,11 @@ import:
     pocket_html:
         page_title: 匯入 > Pocket HTML
         description: 這匯入器將匯入你在 Pocket 中的全部書籤（經 HTML 匯出）。你只須前往 https://getpocket.com/export 匯出 HTML檔案，將提供一個可下載的 HTML 檔案（名為「ril_export.html」之類）。
-        how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要存取全部的文章，整個過程可能會花費一段時間。
+        how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要擷取全部的文章，整個過程可能會花費一段時間。
     firefox:
         page_title: 匯入 > Firefox
         description: 這匯入器將匯入你在 Firefox 中的全部書籤。在書籤收藏庫（Ctrl+Shift+O）的「匯入及備份」中選擇「備份」後，你將取得一個 JSON 檔案。
-        how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要存取全部的文章，整個過程可能會花費一段時間。
+        how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要擷取全部的文章，整個過程可能會花費一段時間。
     instapaper:
         page_title: 匯入 > Instapaper
         description: 這匯入器將匯入你在 Instapaper 中的所有文章。在設定頁（https://www.instapaper.com/user）的「Export」部分點擊「Download .CSV file」後，將提供一個可下載的 CSV 檔案（名為「instapaper-export.csv」之類）。
@@ -432,7 +453,7 @@ import:
     shaarli:
         page_title: 匯入 > Shaarli
         description: 這匯入器將匯入你在 Shaarli 中的全部書籤。先到 Tools 頁點擊「Export database」，選擇你想保存的書籤然後將之匯出。你將得到一個 HTML 檔案。
-        how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要存取全部的文章，整個過程可能會花費一段時間。
+        how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要擷取全部的文章，整個過程可能會花費一段時間。
     action:
         import_contents: 匯入內容
     page_description: 歡迎使用 wallabag 匯入器。請選取想要遷移的服務來源。
@@ -562,6 +583,7 @@ developer:
         title: 現有用戶端
         field_secret: 用戶端密碼
         no_client: 沒有用戶端。
+        field_uris: 重定向 URI
     welcome_message: 歡迎使用 wallabag API
     documentation: 說明文件
     full_documentation: 檢視完整的 API 說明文件
