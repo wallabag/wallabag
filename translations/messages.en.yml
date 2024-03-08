@@ -502,6 +502,7 @@ import:
     elcurator:
         page_title: 'Import > elCurator'
         description: 'This importer will import all your elCurator articles.'
+        how_to: Please select your elCurator export and click on the button below to upload and import it.
     readability:
         page_title: Import > Readability
         description: This importer will import all your Readability articles.
