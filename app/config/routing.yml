@@ -3,7 +3,7 @@ app:
     type: annotation
 
 doc-api:
-    resource: "@NelmioApiDocBundle/Resources/config/routing/swaggerui.xml"
+    resource: "@NelmioApiDocBundle/config/routing/swaggerui.xml"
     prefix: /api/doc
 
 homepage:
