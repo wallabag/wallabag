@@ -227,6 +227,9 @@ entry:
         reading_time_less_one_minute_short: '&lt; 1 分鐘'
         reading_time_less_one_minute: 閱讀約需時：&lt; 1 分鐘
         reading_time_minutes: 閱讀約需時： %readingTime% 分鐘
+        original_article: 原文
+        toogle_as_read: 變更閱讀狀態
+        toogle_as_star: 變更收藏狀態
     edit:
         url_label: 網址
         title_label: 標題
@@ -254,12 +257,19 @@ entry:
                 description: 這篇文章出問題了嗎？
             delete_public_link: 刪除公開連結
             public_link: 公開連結
+            theme_toggle: 變更主題
+            back_to_top: 回到頂端
+            set_as_starred: 變更收藏狀態
+            re_fetch_content: 再次擷取內容
+            theme_toggle_auto: 自動
+            view_original_article: 原文連結
         edit_title: 編輯標題
         annotations_on_the_entry: '{0} 沒有註釋|{1}有 1 個註釋|]1,Inf[ 有 %count% 個註釋'
         created_at: 建立日期
         published_at: 發布日期
         published_by: 發布者
         provided_by: 得知途經
+        original_article: 原文
     filters:
         unread_label: 未讀
         archived_label: 已封存
@@ -628,5 +638,8 @@ flashes:
             deleted: 已刪除全域忽略來源規則
             updated: 已更新全域忽略來源規則
             added: 已添加全域忽略來源規則
+    tag:
+        notice:
+            tag_added: 已添加標籤
 error:
     page_title: 出現錯誤
