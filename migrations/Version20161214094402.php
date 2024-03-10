@@ -17,7 +17,11 @@ class Version20161214094402 extends WallabagMigration
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
 
-        $this->skipIf($entryTable->hasColumn('uid'), 'It seems that you already played this migration.');
+        if ($entryTable->hasColumn('uid')) {
+            $this->write('It seems that you already played this migration.');
+
+            return;
+        }
 
         $platform = $this->connection->getDatabasePlatform();
 
@@ -41,7 +45,11 @@ class Version20161214094402 extends WallabagMigration
     {
         $entryTable = $schema->getTable($this->getTable('entry'));
 
-        $this->skipIf($entryTable->hasColumn('uuid'), 'It seems that you already played this migration.');
+        if ($entryTable->hasColumn('uuid')) {
+            $this->write('It seems that you already played this migration.');
+
+            return;
+        }
 
         $platform = $this->connection->getDatabasePlatform();
 
