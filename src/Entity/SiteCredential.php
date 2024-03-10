@@ -59,14 +59,15 @@ class SiteCredential
     private $createdAt;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      *
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Wallabag\Entity\User", inversedBy="siteCredentials")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
@@ -187,7 +188,7 @@ class SiteCredential
     /**
      * Get updatedAt.
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getUpdatedAt()
     {

@@ -12,25 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity(repositoryClass="Craue\ConfigBundle\Repository\SettingRepository")
  * @ORM\Table(name="`internal_setting`")
- * @ORM\AttributeOverrides({
- *      @ORM\AttributeOverride(name="name",
- *          column=@ORM\Column(
- *              length = 191
- *          )
- *      ),
- *      @ORM\AttributeOverride(name="section",
- *          column=@ORM\Column(
- *              length = 191
- *          )
- *      )
- * })
  */
 class InternalSetting extends BaseSetting
 {
     /**
      * @var string|null
      *
-     * @ORM\Column(name="value", type="string", nullable=true, length=191)
+     * @ORM\Column(name="value", type="string", nullable=true)
      */
     protected $value;
 }

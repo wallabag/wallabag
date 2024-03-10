@@ -38,6 +38,7 @@ class IgnoreOriginUserRule implements IgnoreOriginRuleInterface, RuleInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="Wallabag\Entity\Config", inversedBy="ignoreOriginRules")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $config;
 
