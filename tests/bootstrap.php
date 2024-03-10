@@ -40,6 +40,17 @@ if (!isPartialRun()) {
     ]))->mustRun(function ($type, $buffer) {
         echo $buffer;
     });
+
+    (new Process([
+        'php',
+        __DIR__ . '/../bin/console',
+        'doctrine:schema:validate',
+        '--no-interaction',
+        '--env=test',
+        '-v',
+    ]))->mustRun(function ($type, $buffer) {
+        echo $buffer;
+    });
 }
 
 (new Process([

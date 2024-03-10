@@ -8,22 +8,6 @@ use FOS\OAuthServerBundle\Entity\RefreshToken as BaseRefreshToken;
 /**
  * @ORM\Table("oauth2_refresh_tokens")
  * @ORM\Entity
- * @ORM\AttributeOverrides({
- *     @ORM\AttributeOverride(name="token",
- *         column=@ORM\Column(
- *             name   = "token",
- *             type   = "string",
- *             length = 191
- *         )
- *     ),
- *     @ORM\AttributeOverride(name="scope",
- *         column=@ORM\Column(
- *             name   = "scope",
- *             type   = "string",
- *             length = 191
- *         )
- *     )
- * })
  */
 class RefreshToken extends BaseRefreshToken
 {

@@ -15,9 +15,8 @@ use JMS\Serializer\Annotation\XmlRoot;
  * @XmlRoot("tag")
  * @ORM\Table(
  *     name="`tag`",
- *     options={"collate"="utf8mb4_bin", "charset"="utf8mb4"},
  *     indexes={
- *         @ORM\Index(name="tag_label", columns={"label"}, options={"lengths"={255}}),
+ *         @ORM\Index(columns={"label"}),
  *     }
  * )
  * @ORM\Entity(repositoryClass="Wallabag\Repository\TagRepository")
