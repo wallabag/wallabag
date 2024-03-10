@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(
  *     name="`config`",
  *     indexes={
- *         @ORM\Index(name="config_feed_token", columns={"feed_token"}, options={"lengths"={255}}),
+ *         @ORM\Index(columns={"feed_token"}),
  *     }
  * )
  */
