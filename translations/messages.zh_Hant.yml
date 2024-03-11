@@ -312,6 +312,8 @@ entry:
     default_title: 條目標題
     search:
         placeholder: 想要尋找甚麼？
+    confirm:
+        reload: 你確定想要重新載入文章嗎？
 howto:
     shortcuts:
         arrows_navigation: 在文章間瀏覽
@@ -373,6 +375,7 @@ quickstart:
         annotate: 在文章中插入註釋
         description: wallabag 功能眾多。勿猶豫，馬上閱讀使用手冊並學以致用吧。
         search_filters: 來看看你能利用搜尋及篩選功能來查找文章
+        fetching_errors: 當擷取文章時出現錯誤應該怎麼辦？
     configure:
         tagging_rules: 撰寫規則來自動化標籤你的項目
         language: 變更語言及介面
@@ -620,10 +623,22 @@ flashes:
             archived_reset: 完成刪除已封存條目
             tags_reset: 已重設標籤
             annotations_reset: 已重設註釋
+            tagging_rules_updated: 已更新標籤規則
+            tagging_rules_deleted: 已刪除標籤規則
+            ignore_origin_rules_updated: 已更新忽略來源規則
+            ignore_origin_rules_deleted: 已刪除忽略來源規則
     entry:
         notice:
             entry_archived: 已封存條目
             entry_unarchived: 已取消封存條目
+            entry_reloaded_failed: 已重新載入項目但未能擷取內容
+            entry_updated: 已更新項目
+            entry_saved_failed: 已儲存項目但未能擷取內容
+            entry_reloaded: 已重新載入項目
+            entry_starred: 條目已收藏
+            entry_deleted: 已刪除項目
+            entry_unstarred: 已取消收藏條目
+            entry_already_saved: 已於 %date% 儲存該項目
     site_credential:
         notice:
             added: 已新增網站憑證「%host%」
@@ -641,5 +656,9 @@ flashes:
     tag:
         notice:
             tag_added: 已添加標籤
+    user:
+        notice:
+            updated: 已更新使用者「%username%」
+            deleted: 已刪除使用者「%username%」
 error:
     page_title: 出現錯誤
