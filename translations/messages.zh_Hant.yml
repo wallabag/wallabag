@@ -230,6 +230,9 @@ entry:
         original_article: 原文
         toogle_as_read: 變更閱讀狀態
         toogle_as_star: 變更收藏狀態
+        assign_search_tag: 為全部搜尋結果均加上同名標籤
+        number_of_tags: '{1}以及另一個標籤|]1,Inf[及另外 %count% 個標籤'
+        mass_action_tags_input_placeholder: 標籤1, 標籤2, 標籤3
     edit:
         url_label: 網址
         title_label: 標題
@@ -314,6 +317,9 @@ entry:
         placeholder: 想要尋找甚麼？
     confirm:
         reload: 你確定想要重新載入文章嗎？
+        delete: 你確定要移除該文章嗎？
+        delete_tag: 你確定要移除該文章的指定標籤嗎？
+        delete_entries: 你確定要移除指定文章嗎？
 howto:
     shortcuts:
         arrows_navigation: 在文章間瀏覽
@@ -627,6 +633,8 @@ flashes:
             tagging_rules_deleted: 已刪除標籤規則
             ignore_origin_rules_updated: 已更新忽略來源規則
             ignore_origin_rules_deleted: 已刪除忽略來源規則
+            tagging_rules_imported: 已匯入標籤規則
+            tagging_rules_not_imported: 匯入標籤規則時出現錯誤
     entry:
         notice:
             entry_archived: 已封存條目
@@ -656,9 +664,15 @@ flashes:
     tag:
         notice:
             tag_added: 已添加標籤
+            tag_renamed: 已重新命名標籤
     user:
         notice:
             updated: 已更新使用者「%username%」
             deleted: 已刪除使用者「%username%」
+    import:
+        notice:
+            failed: 匯入失敗，請重試。
+            failed_on_file: 匯入時出現錯誤。請檢查你的匯入檔案。
+            summary: 匯入概況：已匯入%imported% 篇，既有 %skipped% 篇。
 error:
     page_title: 出現錯誤
