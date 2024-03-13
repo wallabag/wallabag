@@ -1,5 +1,5 @@
 download_pictures: 下載圖片至你的服務器上
-diaspora_url: diaspora* URL(如果該服務已啟用)
+diaspora_url: diaspora* 網址，如已啟用該服務
 settings_changed: 已更新設置
 export_epub: 啟用 ePub 輸出
 export_pdf: 啟用 PDF 輸出
@@ -15,3 +15,10 @@ modify_settings: 套用
 matomo_enabled: 啟用 Matomo
 import_with_rabbitmq: 啟用 RabbitMQ 以異步方式匯入資料
 import_with_redis: 啟用 Redis 以異步方式匯入資料
+shaarli_url: Shaarli 網址，如已啟用該服務
+unmark_url: Unmark 網址，如已啟用該服務
+share_diaspora: 啟用分享到 diaspora*
+share_mail: 啟用以電子郵件分享
+share_shaarli: 啟用分享到 Shaarli
+share_twitter: 啟用分享到 X（前 Twitter）
+share_unmark: 啟用分享到 Unmark.it
