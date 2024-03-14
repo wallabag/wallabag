@@ -665,6 +665,7 @@ flashes:
         notice:
             tag_added: 已添加標籤
             tag_renamed: 已重新命名標籤
+            too_much_tags: 為防止產生效能問題，你不能一口氣添加 %tags% 個或以上，和 %characters% 字完以上的標籤。
     user:
         notice:
             updated: 已更新使用者「%username%」
