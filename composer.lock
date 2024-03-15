@@ -5706,22 +5706,23 @@
         },
         {
             "name": "nelmio/api-doc-bundle",
-            "version": "v4.23.1",
+            "version": "v4.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/NelmioApiDocBundle.git",
-                "reference": "a15b5923602c669007ea53a1a87991e9e147daab"
+                "reference": "9fb5170b5f7a88d1aaade05e3eb399e697ac0941"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/a15b5923602c669007ea53a1a87991e9e147daab",
-                "reference": "a15b5923602c669007ea53a1a87991e9e147daab",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/9fb5170b5f7a88d1aaade05e3eb399e697ac0941",
+                "reference": "9fb5170b5f7a88d1aaade05e3eb399e697ac0941",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": ">=7.2",
-                "phpdocumentor/reflection-docblock": "^3.1|^4.0|^5.0",
+                "php": ">=7.4",
+                "phpdocumentor/reflection-docblock": "^4.3.4|^5.0",
+                "phpdocumentor/type-resolver": "^1.8.2",
                 "psr/cache": "^1.0|^2.0|^3.0",
                 "psr/container": "^1.0|^2.0",
                 "psr/log": "^1.0|^2.0|^3.0",
@@ -5733,9 +5734,9 @@
                 "symfony/http-foundation": "^5.4|^6.0|^7.0",
                 "symfony/http-kernel": "^5.4|^6.0|^7.0",
                 "symfony/options-resolver": "^5.4|^6.0|^7.0",
-                "symfony/property-info": "^5.4|^6.0|^7.0",
+                "symfony/property-info": "^5.4.10|^6.0|^7.0",
                 "symfony/routing": "^5.4|^6.0|^7.0",
-                "zircote/swagger-php": "^4.2.15"
+                "zircote/swagger-php": "^4.6.1"
             },
             "require-dev": {
                 "api-platform/core": "^2.7.0|^3",
@@ -5807,9 +5808,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nelmio/NelmioApiDocBundle/issues",
-                "source": "https://github.com/nelmio/NelmioApiDocBundle/tree/v4.23.1"
+                "source": "https://github.com/nelmio/NelmioApiDocBundle/tree/v4.24.0"
             },
-            "time": "2024-03-07T09:21:17+00:00"
+            "time": "2024-03-14T15:14:05+00:00"
         },
         {
             "name": "nelmio/cors-bundle",
@@ -15496,16 +15497,16 @@
         },
         {
             "name": "zircote/swagger-php",
-            "version": "4.8.4",
+            "version": "4.8.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zircote/swagger-php.git",
-                "reference": "bdee7f5a9216ce103ba2c953c1c43c4a3e139e4c"
+                "reference": "fe45a0e98a156999ddafc31c9ad333fdcadbcb2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zircote/swagger-php/zipball/bdee7f5a9216ce103ba2c953c1c43c4a3e139e4c",
-                "reference": "bdee7f5a9216ce103ba2c953c1c43c4a3e139e4c",
+                "url": "https://api.github.com/repos/zircote/swagger-php/zipball/fe45a0e98a156999ddafc31c9ad333fdcadbcb2d",
+                "reference": "fe45a0e98a156999ddafc31c9ad333fdcadbcb2d",
                 "shasum": ""
             },
             "require": {
@@ -15571,9 +15572,9 @@
             ],
             "support": {
                 "issues": "https://github.com/zircote/swagger-php/issues",
-                "source": "https://github.com/zircote/swagger-php/tree/4.8.4"
+                "source": "https://github.com/zircote/swagger-php/tree/4.8.6"
             },
-            "time": "2024-02-04T21:16:47+00:00"
+            "time": "2024-03-15T01:13:55+00:00"
         }
     ],
     "packages-dev": [
