@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Entity\Tag;
 use Wallabag\CoreBundle\Event\EntryDeletedEvent;
@@ -688,8 +689,15 @@ class EntryRestController extends WallabagRestController
      *
      * @return JsonResponse
      */
-    public function postEntriesAction(Request $request, EntryRepository $entryRepository, ContentProxy $contentProxy, LoggerInterface $logger, TagsAssigner $tagsAssigner, EventDispatcherInterface $eventDispatcher)
-    {
+    public function postEntriesAction(
+        Request $request,
+        EntryRepository $entryRepository,
+        ContentProxy $contentProxy,
+        LoggerInterface $logger,
+        TagsAssigner $tagsAssigner,
+        EventDispatcherInterface $eventDispatcher,
+        ValidatorInterface $validator
+    ) {
         $this->validateAuthentication();
 
         $url = $request->request->get('url');
@@ -758,6 +766,13 @@ class EntryRestController extends WallabagRestController
 
         if (empty($entry->getTitle())) {
             $contentProxy->setDefaultEntryTitle($entry);
+        }
+
+        $errors = $validator->validate($entry);
+        if (\count($errors) > 0) {
+            $errorsString = (string) $errors;
+
+            return $this->sendResponse($errorsString);
         }
 
         $this->entityManager->persist($entry);

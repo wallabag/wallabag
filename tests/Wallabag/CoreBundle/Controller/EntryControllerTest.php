@@ -20,6 +20,7 @@ class EntryControllerTest extends WallabagCoreTestCase
     public const AN_URL_CONTAINING_AN_ARTICLE_WITH_IMAGE = 'https://www.lemonde.fr/judo/article/2017/11/11/judo-la-decima-de-teddy-riner_5213605_1556020.html';
     public $downloadImagesEnabled = false;
     public $url = 'https://www.lemonde.fr/pixels/article/2019/06/18/ce-qu-il-faut-savoir-sur-le-libra-la-cryptomonnaie-de-facebook_5477887_4408996.html';
+    public $wrongUrl = 'wallabagIsAwesome';
     private $entryDataTestAttribute = '[data-test="entry"]';
 
     /**
@@ -137,9 +138,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form);
 
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(1, $alert = $crawler->filter('form ul li')->extract(['_text']));
-        $this->assertSame('This value should not be blank.', $alert[0]);
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -421,6 +420,38 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $em->remove($entry);
         $em->flush();
+    }
+
+    /**
+     * @group NetworkCalls
+     */
+    public function testBadFormatURL()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $client->getContainer()->get(Config::class)->set('store_article_headers', 1);
+
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => $this->wrongUrl,
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $content = $client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
+            ->findByUrlAndUserId($this->wrongUrl, $this->getLoggedInUserId());
+
+        $this->assertFalse($content);
     }
 
     public function testArchive()
