@@ -22,3 +22,9 @@ share_mail: 啟用以電子郵件分享
 share_shaarli: 啟用分享到 Shaarli
 share_twitter: 啟用分享到 X（前 Twitter）
 share_unmark: 啟用分享到 Unmark.it
+matomo_host: 你的 Matomo 網路主機位址（省略 http:// 或 https://）
+matomo_site_id: 你的網站 Matomo ID
+api_user_registration: 允許經由 API 註冊
+download_images_enabled: 下載圖像到本地主機
+restricted_access: 啟用付費網站認證
+shaarli_share_origin_url: 啟用分享原文網址至 Shaarli，如已啟用該服務
