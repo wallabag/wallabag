@@ -395,6 +395,7 @@ quickstart:
         new_user: 新增使用者
         export: 匯出設置
         import: 設置匯入
+        analytics: 設置資料分析
     more: 更多…
     support:
         email: 經由電子郵件
