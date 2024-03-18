@@ -11,7 +11,7 @@ howto:
         go_archive: Ir ó arquivo
         go_starred: Ir ós que teñen estrela
         go_unread: Ir a non lidos
-        all_pages_title: Atallos dispoñibles en tódalas páxinas
+        all_pages_title: Atallos dispoñibles en todas as páxinas
         action: Acción
         shortcut: Atallo
         page_description: Aquí están os atallos dispoñibles en wallabag.
@@ -239,7 +239,7 @@ config:
             variables_available_description: 'Podes usar as seguintes variables e operadores para crear regras de etiquetado:'
             variables_available_title: Que variables e operadores se poden usar nas regras?
             how_to_use_them_title: Como se utilizan?
-            tagging_rules_definition_description: Son regras utilizadas por wallabag para etiquetar automáticamente novas entradas.<br />Cada vez que se engade un elemento usaranse tódalas regras de etiquetados configuradas, aforrándoche o traballo de clasificar manualmente as túas entradas.
+            tagging_rules_definition_description: Son regras utilizadas por wallabag para etiquetar automáticamente as novas entradas.<br />Cada vez que se engada un elemento usaranse todas as regras de etiquetado configuradas, aforrándoche o traballo de clasificar manualmente as túas entradas.
             tagging_rules_definition_title: Que significa "regras de etiquetado"?
             title: PMF
         export: Exportar
@@ -316,7 +316,7 @@ config:
         delete:
             button: Eliminar a miña conta
             confirm: Seguro que desexas facelo? (NON TEN VOLTA)
-            description: Se eliminas a conta, TÓDOLOS teus artigos, TÓDALAS etiquetas e TÓDALAS notas da túa conta serán eliminadas PERMANENTEMENTE (non hai volta atrás!). Após, serás desconectada.
+            description: Se eliminas a conta, TODOS os teus artigos, TODAS as etiquetas e TODAS as notas da túa conta serán eliminadas PERMANENTEMENTE (non hai volta atrás!). Após, serás desconectada.
             title: Elimina a miña conta (a.k.a. Zona Perigosa)
         two_factor:
             action_app: Usar App OTP
@@ -349,7 +349,7 @@ config:
     form:
         save: Gardar
     tab_menu:
-        reset: Restablecer área
+        reset: Restablecer
         ignore_origin: Ignorar regras de orixe
         new_user: Engadir usuaria
         rules: Regras de etiquetado
@@ -699,7 +699,7 @@ site_credential:
         yes: Si
         edit_action: Editar
         actions: Accións
-    description: Aquí podes xestionar tódalas credenciais para sitios que as requiran (crear, editar e eliminar), como un valado de pagamento, autenticación, etc.
+    description: Aquí podes xestionar todas as credenciais para sitios que as requiran (crear, editar e eliminar), como un valado de pagamento, autenticación, etc.
     edit_site_credential: Editar unha credencial existente
     new_site_credential: Crear unha credencial
     page_title: Xestión das credenciais do sitio
@@ -727,7 +727,7 @@ user:
         yes: Si
         edit_action: Editar
         actions: Accións
-    description: Aquí podes xestionar tódalas usuarias (crear, editar e eliminar)
+    description: Aquí podes xestionar todas as usuarias (crear, editar e eliminar)
     edit_user: Editar usuaria existente
     new_user: Crear unha nova usuaria
     page_title: Xestión de usuarias
