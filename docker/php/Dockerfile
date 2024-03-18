@@ -75,7 +75,14 @@ RUN mkdir -p /tmp/blackfire \
 
 RUN npm install -g yarn
 
-RUN apt-get update && apt-get install -y gettext-base
+# RUN curl -L -o /usr/local/bin/envsubst https://github.com/a8m/envsubst/releases/download/v1.1.0/envsubst-`uname -s`-`uname -m`; \
+#     chmod +x /usr/local/bin/envsubst
+
+RUN apt-get update && apt-get install -y golang
+
+RUN go install github.com/a8m/envsubst/cmd/envsubst@v1.1.0 \
+    && mv -v $HOME/go/bin/envsubst /usr/local/bin/envsubst \
+    && chmod +x /usr/local/bin/envsubst
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
