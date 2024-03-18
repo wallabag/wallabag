@@ -185,7 +185,7 @@ menu:
         all_articles: 所有項目
         archive: 封存
     top:
-        random_entry: 由列表中隨機選擇項目
+        random_entry: 跳至列表中的隨機項目
         account: 我的帳號
         export: 匯出
         filter_entries: 項目篩選
@@ -258,6 +258,7 @@ entry:
             share_email_label: 電子郵件
             problem:
                 description: 這篇文章出問題了嗎？
+                label: 有問題？
             delete_public_link: 刪除公開連結
             public_link: 公開連結
             theme_toggle: 變更主題
@@ -320,6 +321,8 @@ entry:
         delete: 你確定要移除該文章嗎？
         delete_tag: 你確定要移除該文章的指定標籤嗎？
         delete_entries: 你確定要移除指定文章嗎？
+    public:
+        shared_by_wallabag: 這篇文章是 %username% 經由 <a href='%wallabag_instance%'>wallabag</a> 分享
 howto:
     shortcuts:
         arrows_navigation: 在文章間瀏覽
@@ -671,10 +674,14 @@ flashes:
         notice:
             updated: 已更新使用者「%username%」
             deleted: 已刪除使用者「%username%」
+            added: 已新增使用者「%username%」
     import:
         notice:
             failed: 匯入失敗，請重試。
             failed_on_file: 匯入時出現錯誤。請檢查你的匯入檔案。
             summary: 匯入概況：已匯入%imported% 篇，既有 %skipped% 篇。
+        error:
+            rabbit_enabled_not_installed: 已啟用 RabbitMQ 處理異步匯入，但我們<u>似乎無法連線</u>。請檢查 RabbitMQ 設置。
+            redis_enabled_not_installed: 已啟用 Redis 處理異步匯入，但我們<u>似乎無法連線</u>。請檢查 Redis 設置。
 error:
     page_title: 出現錯誤
