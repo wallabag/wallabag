@@ -23,6 +23,7 @@ parameters:
         hr: 'Hrvatski'
         cs: 'Čeština'
         el: 'Ελληνικά'
+        gl: 'Galego'
     wallabag.items_on_page: 12
     wallabag.language: '%locale%'
     wallabag.feed_limit: 50
