@@ -1663,16 +1663,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "2.19.1",
+            "version": "2.19.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/orm.git",
-                "reference": "abcad6fa45768fe8481cf4772c6e20a80c42bf72"
+                "reference": "40a0964f06e142e173b783c45688e5f5efaed6aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/abcad6fa45768fe8481cf4772c6e20a80c42bf72",
-                "reference": "abcad6fa45768fe8481cf4772c6e20a80c42bf72",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/40a0964f06e142e173b783c45688e5f5efaed6aa",
+                "reference": "40a0964f06e142e173b783c45688e5f5efaed6aa",
                 "shasum": ""
             },
             "require": {
@@ -1758,9 +1758,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/orm/issues",
-                "source": "https://github.com/doctrine/orm/tree/2.19.1"
+                "source": "https://github.com/doctrine/orm/tree/2.19.2"
             },
-            "time": "2024-03-16T20:23:13+00:00"
+            "time": "2024-03-18T19:12:56+00:00"
         },
         {
             "name": "doctrine/persistence",
