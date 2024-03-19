@@ -870,8 +870,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
         }
 
         $this->client->request('PATCH', '/api/entries/' . $entry->getId() . '.json', [
-                'origin_url' => null,
-            ]);
+            'origin_url' => null,
+        ]);
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 

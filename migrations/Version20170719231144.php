@@ -37,7 +37,7 @@ class Version20170719231144 extends WallabagMigration
                 WHERE  LOWER(label) = :label
                 ORDER BY id ASC',
                 [
-                  'label' => $label,
+                    'label' => $label,
                 ]
             );
 
