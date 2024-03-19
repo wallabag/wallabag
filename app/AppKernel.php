@@ -72,10 +72,10 @@ class AppKernel extends Kernel
         $loader->load(function ($container) {
             if ($container->getParameter('use_webpack_dev_server')) {
                 $container->loadFromExtension('framework', [
-                   'assets' => [
-                       'base_url' => 'http://localhost:8080/',
-                   ],
-               ]);
+                    'assets' => [
+                        'base_url' => 'http://localhost:8080/',
+                    ],
+                ]);
             } else {
                 $container->loadFromExtension('framework', [
                     'assets' => [
