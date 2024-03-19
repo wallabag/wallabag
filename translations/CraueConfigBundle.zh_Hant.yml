@@ -28,3 +28,7 @@ api_user_registration: 允許經由 API 註冊
 download_images_enabled: 下載圖像到本地主機
 restricted_access: 啟用付費網站認證
 shaarli_share_origin_url: 啟用分享原文網址至 Shaarli，如已啟用該服務
+store_article_headers: 允許 wallabag 儲存每篇文章的 HTTP Header
+share_public: 允許公開條目連結
+show_printlink: 顯示列印用連結
+wallabag_support_url: wallabag 的支援連結
