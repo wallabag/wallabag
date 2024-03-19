@@ -484,6 +484,9 @@ about:
     who_behind_wallabag:
         version: 版本
         many_contributors: 以及<a href="https://github.com/wallabag/wallabag/graphs/contributors">在 GitHub 上</a>的眾多貢獻者♥
+        website: 網站
+        project_website: 專案網站
+        license: 授權
     page_title: 關於
     top_menu:
         who_behind_wallabag: wallabag 的背後
@@ -493,10 +496,16 @@ about:
     getting_help:
         documentation: 說明文件
         support: <a href="https://github.com/wallabag/wallabag/issues">於 GitHub</a>
+        bug_reports: 報告漏洞
     contributors:
         description: 為 wallabag 網路應用程式版的貢獻者們送上感謝
     third_party:
         license: 授權條款
+        description: 以下是 wallabag 使用的第三方函式庫（及其授權）：
+        package: 套件
+    helping:
+        by_paypal: 經由 Liberapay
+        description: wallabag 是免費且開源的。你能協助我們：
 tag:
     page_title: 標籤
     new:
