@@ -28,11 +28,13 @@
                                 {{ form_widget(edit_form.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
                                 {{ form_widget(edit_form._token) }}
                             </form>
-                            <p>
-                                {{ form_start(delete_form) }}
-                                    <button onclick="return confirm('{{ 'ignore_origin_instance_rule.form.delete_confirm'|trans|escape('js') }}')" type="submit" class="btn waves-effect waves-light red">{{ 'ignore_origin_instance_rule.form.delete'|trans }}</button>
-                                {{ form_end(delete_form) }}
-                            </p>
+                            {% if is_granted('DELETE', rule) %}
+                                <p>
+                                    {{ form_start(delete_form) }}
+                                        <button onclick="return confirm('{{ 'ignore_origin_instance_rule.form.delete_confirm'|trans|escape('js') }}')" type="submit" class="btn waves-effect waves-light red">{{ 'ignore_origin_instance_rule.form.delete'|trans }}</button>
+                                    {{ form_end(delete_form) }}
+                                </p>
+                            {% endif %}
                             <p><a class="waves-effect waves-light btn blue-grey" href="{{ path('ignore_origin_instance_rules_index') }}">{{ 'ignore_origin_instance_rule.form.back_to_list'|trans }}</a></p>
                         </div>
                     </div>

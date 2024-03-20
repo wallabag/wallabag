@@ -11,6 +11,8 @@ class AdminVoter extends Voter
 {
     public const LIST_USERS = 'LIST_USERS';
     public const CREATE_USERS = 'CREATE_USERS';
+    public const LIST_IGNORE_ORIGIN_INSTANCE_RULES = 'LIST_IGNORE_ORIGIN_INSTANCE_RULES';
+    public const CREATE_IGNORE_ORIGIN_INSTANCE_RULES = 'CREATE_IGNORE_ORIGIN_INSTANCE_RULES';
 
     private Security $security;
 
@@ -21,7 +23,7 @@ class AdminVoter extends Voter
 
     protected function supports(string $attribute, $subject): bool
     {
-        if (!\in_array($attribute, [self::LIST_USERS, self::CREATE_USERS], true)) {
+        if (!\in_array($attribute, [self::LIST_USERS, self::CREATE_USERS, self::LIST_IGNORE_ORIGIN_INSTANCE_RULES, self::CREATE_IGNORE_ORIGIN_INSTANCE_RULES], true)) {
             return false;
         }
 
@@ -39,6 +41,8 @@ class AdminVoter extends Voter
         switch ($attribute) {
             case self::LIST_USERS:
             case self::CREATE_USERS:
+            case self::LIST_IGNORE_ORIGIN_INSTANCE_RULES:
+            case self::CREATE_IGNORE_ORIGIN_INSTANCE_RULES:
                 return $this->security->isGranted('ROLE_SUPER_ADMIN');
         }
 

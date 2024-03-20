@@ -64,4 +64,32 @@ class AdminVoterTest extends TestCase
 
         $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->adminVoter->vote($this->token, null, [AdminVoter::CREATE_USERS]));
     }
+
+    public function testVoteReturnsDeniedForNonSuperAdminListIgnoreOriginInstanceRules(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_SUPER_ADMIN')->willReturn(false);
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->adminVoter->vote($this->token, null, [AdminVoter::LIST_IGNORE_ORIGIN_INSTANCE_RULES]));
+    }
+
+    public function testVoteReturnsGrantedForSuperAdminListIgnoreOriginInstanceRules(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_SUPER_ADMIN')->willReturn(true);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->adminVoter->vote($this->token, null, [AdminVoter::LIST_IGNORE_ORIGIN_INSTANCE_RULES]));
+    }
+
+    public function testVoteReturnsDeniedForNonSuperAdminCreateIgnoreOriginInstanceRules(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_SUPER_ADMIN')->willReturn(false);
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->adminVoter->vote($this->token, null, [AdminVoter::CREATE_IGNORE_ORIGIN_INSTANCE_RULES]));
+    }
+
+    public function testVoteReturnsGrantedForSuperAdminCreateIgnoreOriginInstanceRules(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_SUPER_ADMIN')->willReturn(true);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->adminVoter->vote($this->token, null, [AdminVoter::CREATE_IGNORE_ORIGIN_INSTANCE_RULES]));
+    }
 }
