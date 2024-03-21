@@ -8,6 +8,7 @@ config:
         reset: 重設區域
         new_user: 新增使用者
         user_info: 使用者資訊
+        article_display: 顯示文章
     page_title: 設置
     form_settings:
         theme_label: 主題
@@ -33,6 +34,14 @@ config:
         help_reading_speed: wallabag 能夠計算閱讀每篇文章的所需時間。你可在此設定，不論你偏好快速或慢速閱讀，wallabag 均能運算每篇文章需要的閱讀時間。
         fontsize_label: 字體大小
         help_language: 你可以變更 wallabag 介面的語言。
+        android_instruction: 按此以預先填寫你的 Android 應用程式
+        help_font: 你能選擇顯示的字型。
+        help_fontsize: 你能選擇字型大小。
+        help_lineheight: 你能選擇字行間距。
+        help_maxwidth: 你能選擇文章的闊度上限。
+        font_label: 字體
+        lineheight_label: 行高
+        maxwidth_label: 闊度上限
     form_feed:
         description: 你可以使用你喜愛的 Atom 閱讀器來閱讀由 wallabag 提供的 Atom 訂閱源。為此你需要先產生一組 token。
         feed_link:
@@ -233,6 +242,7 @@ entry:
         assign_search_tag: 為全部搜尋結果均加上同名標籤
         number_of_tags: '{1}以及另一個標籤|]1,Inf[及另外 %count% 個標籤'
         mass_action_tags_input_placeholder: 標籤1, 標籤2, 標籤3
+        toggle_mass_action: 進行批次操作
     edit:
         url_label: 網址
         title_label: 標題
@@ -243,6 +253,7 @@ entry:
         form_new:
             url_label: 網址
         placeholder: http://website.com
+        page_title: 儲存新項目
     view:
         left_menu:
             theme_toggle_dark: 深色
@@ -310,9 +321,12 @@ entry:
         filtered_tags: 經標籤篩選：
         filtered_search: 經搜尋篩選：
         filtered: 已篩選項目
+        same_domain: 同一域名
     metadata:
         reading_time: 閱讀約需時
         reading_time_minutes_short: '%readingTime% 分鐘'
+        published_on: 發布於
+        added_on: 添加於
     default_title: 條目標題
     search:
         placeholder: 想要尋找甚麼？
@@ -328,7 +342,7 @@ howto:
         arrows_navigation: 在文章間瀏覽
         go_config: 前往設置
         action: 動作
-        go_developers: 往開發者頁面
+        go_developers: 往開發人員頁面
         search: 顯示搜尋欄位
         article_title: 在條目頁面可用的快速鍵
         toggle_archive: 變更條目的閱讀狀態
@@ -371,6 +385,8 @@ howto:
         chrome: Chrome 擴充功能
         opera: Opera 外掛程式
     page_description: 可使用數種方式來儲存文章：
+    form:
+        description: 例如這頁面
 quickstart:
     first_steps:
         unread_articles: 然後將之分類！
@@ -408,8 +424,8 @@ quickstart:
         gitter: 在 Gitter
     developer:
         create_application: 建立你的第三方應用程式
-        title: 開發者
-        description: 我們亦有考慮開發者的需要：Docker、API、翻譯，以及其他。
+        title: 開發人員
+        description: 我們亦有考慮開發人員的需要：Docker、API、翻譯，以及其他。
         use_docker: 使用 Docker 安裝 wallabag
     migrate:
         wallabag_v2: 從 wallabag v2 遷移
@@ -480,6 +496,8 @@ import:
     action:
         import_contents: 匯入內容
     page_description: 歡迎使用 wallabag 匯入器。請選取想要遷移的服務來源。
+    worker:
+        download_images_warning: 你已啟用本機下載文章圖像。當和傳統格式一同匯入時會需時極久（甚至失敗）。我們<strong>強力建議</strong>啟用異步方式匯入資料以防止出錯。
 about:
     who_behind_wallabag:
         version: 版本
@@ -487,12 +505,14 @@ about:
         website: 網站
         project_website: 專案網站
         license: 授權
+        developped_by: 開發人員
     page_title: 關於
     top_menu:
         who_behind_wallabag: wallabag 的背後
         helping: 幫助 wallabag
         getting_help: 取得協助
         contributors: 貢獻者
+        third_party: 第三方函式庫
     getting_help:
         documentation: 說明文件
         support: <a href="https://github.com/wallabag/wallabag/issues">於 GitHub</a>
@@ -610,12 +630,14 @@ developer:
             redirect_uris_label: 重定向 URI（選填）
         copy_to_clipboard: 複製
         page_title: 用戶端 API 管理 > 新用戶端
+        page_description: 你將建立新用戶端，請於下欄填寫應用程式的重定向 URI。
     existing_clients:
         field_id: 用戶端 ID
         title: 現有用戶端
         field_secret: 用戶端密碼
         no_client: 沒有用戶端。
         field_uris: 重定向 URI
+        field_grant_types: 已許可授權方式
     welcome_message: 歡迎使用 wallabag API
     documentation: 說明文件
     full_documentation: 檢視完整的 API 說明文件
@@ -623,6 +645,7 @@ developer:
     remove:
         warn_message_1: 你能夠移除用戶端 %name%。此乃不可回溯之舉！
         action: 移除用戶端 %name%
+        warn_message_2: 你移除的話，所有利用該用戶端的應用程式均無法再次通過 wallabag 驗證。
     clients:
         title: 用戶端
         create_new: 建立新用戶端
@@ -694,3 +717,5 @@ flashes:
             redis_enabled_not_installed: 已啟用 Redis 處理異步匯入，但我們<u>似乎無法連線</u>。請檢查 Redis 設置。
 error:
     page_title: 出現錯誤
+export:
+    unknown: 不明
