@@ -3,6 +3,7 @@
 namespace Wallabag\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -34,6 +35,7 @@ class IgnoreOriginInstanceRuleController extends AbstractController
      * Lists all IgnoreOriginInstanceRule entities.
      *
      * @Route("/", name="ignore_origin_instance_rules_index", methods={"GET"})
+     * @IsGranted("LIST_IGNORE_ORIGIN_INSTANCE_RULES")
      */
     public function indexAction(IgnoreOriginInstanceRuleRepository $repository)
     {
@@ -48,6 +50,7 @@ class IgnoreOriginInstanceRuleController extends AbstractController
      * Creates a new ignore origin instance rule entity.
      *
      * @Route("/new", name="ignore_origin_instance_rules_new", methods={"GET", "POST"})
+     * @IsGranted("CREATE_IGNORE_ORIGIN_INSTANCE_RULES")
      *
      * @return Response
      */
@@ -80,6 +83,7 @@ class IgnoreOriginInstanceRuleController extends AbstractController
      * Displays a form to edit an existing ignore origin instance rule entity.
      *
      * @Route("/{id}/edit", name="ignore_origin_instance_rules_edit", methods={"GET", "POST"})
+     * @IsGranted("EDIT", subject="ignoreOriginInstanceRule")
      *
      * @return Response
      */
@@ -112,6 +116,7 @@ class IgnoreOriginInstanceRuleController extends AbstractController
      * Deletes a site credential entity.
      *
      * @Route("/{id}", name="ignore_origin_instance_rules_delete", methods={"DELETE"})
+     * @IsGranted("DELETE", subject="ignoreOriginInstanceRule")
      *
      * @return RedirectResponse
      */
