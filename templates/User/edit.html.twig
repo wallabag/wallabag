@@ -66,9 +66,13 @@
                                 {{ form_widget(edit_form._token) }}
                             </form>
                             <p>
-                                {{ form_start(delete_form) }}
-                                    <button {% if app.user.id == user.id %}disabled="disabled"{% endif %} onclick="return confirm('{{ 'user.form.delete_confirm'|trans|escape('js') }}')" type="submit" class="btn waves-effect waves-light red">{{ 'user.form.delete'|trans }}</button>
-                                {{ form_end(delete_form) }}
+                                {% if is_granted('DELETE', user) %}
+                                    {{ form_start(delete_form) }}
+                                        <button onclick="return confirm('{{ 'user.form.delete_confirm'|trans|escape('js') }}')" type="submit" class="btn waves-effect waves-light red">{{ 'user.form.delete'|trans }}</button>
+                                    {{ form_end(delete_form) }}
+                                {% else %}
+                                    <button disabled="disabled" type="button" class="btn waves-effect waves-light red">{{ 'user.form.delete'|trans }}</button>
+                                {% endif %}
                             </p>
                             <p><a class="waves-effect waves-light btn blue-grey" href="{{ path('user_index') }}">{{ 'user.form.back_to_list'|trans }}</a></p>
                         </div>
