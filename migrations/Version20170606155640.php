@@ -13,14 +13,22 @@ class Version20170606155640 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        $this->skipIf(!$schema->hasTable($this->getTable('craue_config_setting')), 'Table already renamed');
+        if (!$schema->hasTable($this->getTable('craue_config_setting'))) {
+            $this->write('Table already renamed');
+
+            return;
+        }
 
         $apiUserRegistration = $this->container
             ->get('doctrine.orm.default_entity_manager')
             ->getConnection()
             ->fetchOne('SELECT * FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'wallabag_url'");
 
-        $this->skipIf(false === $apiUserRegistration, 'It seems that you already played this migration.');
+        if (false === $apiUserRegistration) {
+            $this->write('It seems that you already played this migration.');
+
+            return;
+        }
 
         $this->addSql('DELETE FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'wallabag_url'");
     }
