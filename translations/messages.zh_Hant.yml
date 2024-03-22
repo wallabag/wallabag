@@ -58,7 +58,7 @@ config:
         token_revoke: 註銷 token
     form_user:
         delete:
-            description: 如你移除自己的帳號，你所有的項目、標籤、註釋以及帳號本身都會被「永久」地移除（無法復原）。然後你將會被登出。
+            description: 如你移除自己的帳號，你所有的文章、標籤、註釋以及帳號本身都會被「永久」地移除（無法復原）。然後你將會被登出。
             title: 刪除我的帳號（危險地帶）
             confirm: 你真的確定？（此舉無法復原）
             button: 刪除我的帳號
@@ -179,7 +179,7 @@ menu:
         import: 匯入
         logout: 登出
         search: 搜尋
-        back_to_unread: 回到未讀項目
+        back_to_unread: 回到未讀文章
         users_management: 使用者管理
         site_credentials: 網站憑證
         theme_toggle_light: 淺色主題
@@ -191,15 +191,15 @@ menu:
         starred: 已收藏
         about: 關於
         save_link: 儲存連結
-        all_articles: 所有項目
+        all_articles: 所有條目
         archive: 封存
     top:
-        random_entry: 跳至列表中的隨機項目
+        random_entry: 跳至列表中的隨機條目
         account: 我的帳號
         export: 匯出
-        filter_entries: 項目篩選
+        filter_entries: 條目篩選
         search: 搜尋
-        add_new_entry: 新增項目
+        add_new_entry: 新增條目
     search_form:
         input_label: 請在此輸入搜尋字串
 security:
@@ -226,7 +226,7 @@ footer:
     stats: 自 %user_creation% 以來，你已閱讀 %nb_archives% 篇文章。這大約是 %per_day% 篇一天！
 entry:
     list:
-        show_same_domain: 顯示同一域名的項目
+        show_same_domain: 顯示同一域名的文章
         export_title: 匯出
         delete: 刪除
         add_tags: 添加標簽
@@ -253,7 +253,7 @@ entry:
         form_new:
             url_label: 網址
         placeholder: http://website.com
-        page_title: 儲存新項目
+        page_title: 儲存新條目
     view:
         left_menu:
             theme_toggle_dark: 深色
@@ -313,14 +313,14 @@ entry:
         is_public_help: 公開連結
     page_titles:
         untagged: 未標簽條目
-        all: 所有項目
+        all: 所有條目
         unread: 未讀條目
         archived: 已封存條目
         with_annotations: 含註釋條目
         starred: 已收藏條目
         filtered_tags: 經標籤篩選：
         filtered_search: 經搜尋篩選：
-        filtered: 已篩選項目
+        filtered: 已篩選條目
         same_domain: 同一域名
     metadata:
         reading_time: 閱讀約需時
@@ -395,14 +395,14 @@ quickstart:
         title: 首要步驟
     docs:
         all_docs: 以及更多文章！
-        export: 將你的項目轉換為 ePUB 或 PDF 版本
+        export: 將你的文章轉換為 ePUB 或 PDF 格式
         title: 完整說明文件
         annotate: 在文章中插入註釋
         description: wallabag 功能眾多。勿猶豫，馬上閱讀使用手冊並學以致用吧。
         search_filters: 來看看你能利用搜尋及篩選功能來查找文章
         fetching_errors: 當擷取文章時出現錯誤應該怎麼辦？
     configure:
-        tagging_rules: 撰寫規則來自動化標籤你的項目
+        tagging_rules: 撰寫規則來自動化標籤你的文章
         language: 變更語言及介面
         title: 設置應用程式
         feed: 開啟訂閱源
@@ -671,18 +671,21 @@ flashes:
             ignore_origin_rules_deleted: 已刪除忽略來源規則
             tagging_rules_imported: 已匯入標籤規則
             tagging_rules_not_imported: 匯入標籤規則時出現錯誤
+            user_updated: 已更新資訊
     entry:
         notice:
             entry_archived: 已封存條目
             entry_unarchived: 已取消封存條目
-            entry_reloaded_failed: 已重新載入項目但未能擷取內容
-            entry_updated: 已更新項目
-            entry_saved_failed: 已儲存項目但未能擷取內容
-            entry_reloaded: 已重新載入項目
+            entry_reloaded_failed: 已重新載入條目但未能擷取內容
+            entry_updated: 已更新條目
+            entry_saved_failed: 已儲存條目但未能擷取內容
+            entry_reloaded: 已重新載入條目
             entry_starred: 條目已收藏
-            entry_deleted: 已刪除項目
+            entry_deleted: 已刪除條目
             entry_unstarred: 已取消收藏條目
-            entry_already_saved: 已於 %date% 儲存該項目
+            entry_already_saved: 已於 %date% 儲存該條目
+            entry_saved: 已儲存條目
+            no_random_entry: 查無條件相符之文章
     site_credential:
         notice:
             added: 已新增網站憑證「%host%」
