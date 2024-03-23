@@ -141,6 +141,7 @@ class EntryController extends AbstractController
      * @param int $page
      *
      * @Route("/search/{page}", name="search", defaults={"page" = 1})
+     * @IsGranted("LIST_ENTRIES")
      *
      * Default parameter for page is hardcoded (in duplication of the defaults from the Route)
      * because this controller is also called inside the layout template without any page as argument
@@ -279,6 +280,7 @@ class EntryController extends AbstractController
      * @param int $page
      *
      * @Route("/all/list/{page}", name="all", defaults={"page" = "1"})
+     * @IsGranted("LIST_ENTRIES")
      *
      * @return Response
      */
@@ -293,6 +295,7 @@ class EntryController extends AbstractController
      * @param int $page
      *
      * @Route("/unread/list/{page}", name="unread", defaults={"page" = "1"})
+     * @IsGranted("LIST_ENTRIES")
      *
      * @return Response
      */
@@ -312,6 +315,7 @@ class EntryController extends AbstractController
      * @param int $page
      *
      * @Route("/archive/list/{page}", name="archive", defaults={"page" = "1"})
+     * @IsGranted("LIST_ENTRIES")
      *
      * @return Response
      */
@@ -326,6 +330,7 @@ class EntryController extends AbstractController
      * @param int $page
      *
      * @Route("/starred/list/{page}", name="starred", defaults={"page" = "1"})
+     * @IsGranted("LIST_ENTRIES")
      *
      * @return Response
      */
@@ -340,6 +345,7 @@ class EntryController extends AbstractController
      * @param int $page
      *
      * @Route("/untagged/list/{page}", name="untagged", defaults={"page" = "1"})
+     * @IsGranted("LIST_ENTRIES")
      *
      * @return Response
      */
@@ -354,6 +360,7 @@ class EntryController extends AbstractController
      * @param int $page
      *
      * @Route("/annotated/list/{page}", name="annotated", defaults={"page" = "1"})
+     * @IsGranted("LIST_ENTRIES")
      *
      * @return Response
      */
@@ -366,6 +373,7 @@ class EntryController extends AbstractController
      * Shows random entry depending on the given type.
      *
      * @Route("/{type}/random", name="random_entry", requirements={"type": "unread|starred|archive|untagged|annotated|all"})
+     * @IsGranted("LIST_ENTRIES")
      *
      * @return RedirectResponse
      */
@@ -590,6 +598,7 @@ class EntryController extends AbstractController
      * @param int $page
      *
      * @Route("/domain/{id}/{page}", requirements={"id" = ".+"}, defaults={"page" = 1}, name="same_domain")
+     * @IsGranted("LIST_ENTRIES")
      *
      * @return Response
      */

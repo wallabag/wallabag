@@ -213,12 +213,14 @@
         </li>
         {% endif %}
 
-        <li class="bold border-top border-bottom">
-            <a class="waves-effect collapsible-header" title="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', {'type': 'all'}) }}">
-                <i class="material-icons small">casino</i>
-                <span>{{ 'menu.top.random_entry'|trans }}</span>
-            </a>
-        </li>
+        {% if is_granted('LIST_ENTRIES') %}
+            <li class="bold border-top border-bottom">
+                <a class="waves-effect collapsible-header" title="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', {'type': 'all'}) }}">
+                    <i class="material-icons small">casino</i>
+                    <span>{{ 'menu.top.random_entry'|trans }}</span>
+                </a>
+            </li>
+        {% endif %}
 
         <li class="bold">
             <a class="waves-effect collapsible-header">

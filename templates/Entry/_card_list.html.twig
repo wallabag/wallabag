@@ -18,7 +18,9 @@
 
     <ul class="tools-list hide-on-small-only">
         <li>
-            <a title="{{ 'entry.list.show_same_domain'|trans }}" class="tool grey-text" href="{{ path('same_domain', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">language</i></a>
+            {% if is_granted('LIST_ENTRIES') %}
+                <a title="{{ 'entry.list.show_same_domain'|trans }}" class="tool grey-text" href="{{ path('same_domain', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">language</i></a>
+            {% endif %}
             {% if is_granted('ARCHIVE', entry) %}
                 <a title="{{ 'entry.list.toogle_as_read'|trans }}" class="tool grey-text" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i></a>
             {% endif %}

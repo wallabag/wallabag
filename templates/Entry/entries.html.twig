@@ -109,7 +109,7 @@
     </div>
 
     <!-- Filters -->
-    {% if form is not null %}
+    {% if form is not null and is_granted('LIST_ENTRIES') %}
     <div id="filters" class="side-nav right-aligned">
         <form action="{{ path('all') }}">
 
