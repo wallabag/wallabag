@@ -87,7 +87,7 @@
         {% if is_granted('STAR', entry) %}
             <li class="bold hide-on-med-and-down">
                 <a class="waves-effect collapsible-header favorite" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" id="setFav">
-                    <i class="material-icons spall">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
+                    <i class="material-icons small">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
                     <span>{{ 'entry.view.left_menu.set_as_starred'|trans }}</span>
                 </a>
                 <div class="collapsible-body"></div>
