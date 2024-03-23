@@ -25,11 +25,13 @@
                 </li>
             </ul>
             <ul class="right">
-                <li>
-                    <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_read'|trans }}" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" id="markAsRead">
-                        <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
-                    </a>
-                </li>
+                {% if is_granted('ARCHIVE', entry) %}
+                    <li>
+                        <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_read'|trans }}" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" id="markAsRead">
+                            <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
+                        </a>
+                    </li>
+                {% endif %}
                 {% if is_granted('STAR', entry) %}
                     <li>
                         <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" id="setFav">
@@ -72,13 +74,15 @@
             {% set mark_as_read_label = 'entry.view.left_menu.set_as_read' %}
         {% endif %}
 
-        <li class="bold hide-on-med-and-down">
-            <a class="waves-effect collapsible-header markasread" title="{{ mark_as_read_label|trans }}" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" id="markAsRead">
-                <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
-                <span>{{ mark_as_read_label|trans }}</span>
-            </a>
-            <div class="collapsible-body"></div>
-        </li>
+        {% if is_granted('ARCHIVE', entry) %}
+            <li class="bold hide-on-med-and-down">
+                <a class="waves-effect collapsible-header markasread" title="{{ mark_as_read_label|trans }}" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" id="markAsRead">
+                    <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
+                    <span>{{ mark_as_read_label|trans }}</span>
+                </a>
+                <div class="collapsible-body"></div>
+            </li>
+        {% endif %}
 
         {% if is_granted('STAR', entry) %}
             <li class="bold hide-on-med-and-down">
@@ -310,7 +314,9 @@
               <i class="material-icons">menu</i>
             </a>
             <ul>
-              <li><a class="btn-floating" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i></a></li>
+                {% if is_granted('ARCHIVE', entry) %}
+                    <li><a class="btn-floating" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i></a></li>
+                {% endif %}
                 {% if is_granted('STAR', entry) %}
                     <li><a class="btn-floating" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i></a></li>
                 {% endif %}

@@ -432,13 +432,12 @@ class EntryController extends AbstractController
      * Changes read status for an entry.
      *
      * @Route("/archive/{id}", requirements={"id" = "\d+"}, name="archive_entry")
+     * @IsGranted("ARCHIVE", subject="entry")
      *
      * @return RedirectResponse
      */
     public function toggleArchiveAction(Request $request, Entry $entry)
     {
-        $this->checkUserAction($entry);
-
         $entry->toggleArchive();
         $this->entityManager->flush();
 
