@@ -151,11 +151,13 @@
                                 </a>
                             </li>
                         {% endif %}
-                        <li>
-                            <a href="{{ path('delete_share', {'id': entry.id}) }}" title="{{ 'entry.view.left_menu.delete_public_link'|trans }}" class="tool icon-no-eye">
-                                <span>{{ 'entry.view.left_menu.delete_public_link'|trans }}</span>
-                            </a>
-                        </li>
+                        {% if is_granted('UNSHARE', entry) %}
+                            <li>
+                                <a href="{{ path('delete_share', {'id': entry.id}) }}" title="{{ 'entry.view.left_menu.delete_public_link'|trans }}" class="tool icon-no-eye">
+                                    <span>{{ 'entry.view.left_menu.delete_public_link'|trans }}</span>
+                                </a>
+                            </li>
+                        {% endif %}
                     {% endif %}
                     {% if craue_setting('share_twitter') %}
                         <li>

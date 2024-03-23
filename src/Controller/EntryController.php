@@ -549,13 +549,12 @@ class EntryController extends AbstractController
      * Disable public sharing for an entry.
      *
      * @Route("/share/delete/{id}", requirements={"id" = "\d+"}, name="delete_share")
+     * @IsGranted("UNSHARE", subject="entry")
      *
      * @return Response
      */
     public function deleteShareAction(Entry $entry)
     {
-        $this->checkUserAction($entry);
-
         $entry->cleanUid();
 
         $this->entityManager->persist($entry);
