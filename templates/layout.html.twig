@@ -174,7 +174,9 @@
             {% if is_granted('LIST_ENTRIES') %}
                 {{ render(controller('Wallabag\\Controller\\EntryController::searchFormAction', {'currentRoute': current_route})) }}
             {% endif %}
-            {{ render(controller('Wallabag\\Controller\\EntryController::addEntryFormAction')) }}
+            {% if is_granted('CREATE_ENTRIES') %}
+                {{ render(controller('Wallabag\\Controller\\EntryController::addEntryFormAction')) }}
+            {% endif %}
         </div>
     </nav>
 {% endblock %}

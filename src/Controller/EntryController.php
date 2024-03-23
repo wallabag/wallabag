@@ -171,6 +171,7 @@ class EntryController extends AbstractController
 
     /**
      * @Route("/new-entry", name="new_entry")
+     * @IsGranted("CREATE_ENTRIES")
      *
      * @return Response
      */
@@ -212,6 +213,7 @@ class EntryController extends AbstractController
 
     /**
      * @Route("/bookmarklet", name="bookmarklet")
+     * @IsGranted("CREATE_ENTRIES")
      *
      * @return Response
      */
@@ -235,6 +237,7 @@ class EntryController extends AbstractController
 
     /**
      * @Route("/new", name="new")
+     * @IsGranted("CREATE_ENTRIES")
      *
      * @return Response
      */

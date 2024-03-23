@@ -21,9 +21,11 @@
 
                         <div class="row">
 
-                            <div class="col s12">
-                                <a href="{{ path('new') }}">{{ 'howto.form.description'|trans }}</a>
-                            </div>
+                            {% if is_granted('CREATE_ENTRIES') %}
+                                <div class="col s12">
+                                    <a href="{{ path('new') }}">{{ 'howto.form.description'|trans }}</a>
+                                </div>
+                            {% endif %}
 
                             <div class="col s12">
                                 <h5>{{ 'howto.top_menu.browser_addons'|trans }}</h5>
@@ -43,12 +45,13 @@
                                 </ul>
                             </div>
 
-                            <div class="col s12">
-                                <h5>{{ 'howto.top_menu.bookmarklet'|trans }}</h5>
-                                {{ 'howto.bookmarklet.description'|trans }}
-                                {% include 'Static/_bookmarklet.html.twig' %}
-                            </div>
-
+                            {% if is_granted('CREATE_ENTRIES') %}
+                                <div class="col s12">
+                                    <h5>{{ 'howto.top_menu.bookmarklet'|trans }}</h5>
+                                    {{ 'howto.bookmarklet.description'|trans }}
+                                    {% include 'Static/_bookmarklet.html.twig' %}
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
 

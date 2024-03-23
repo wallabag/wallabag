@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\Security;
 class MainVoter extends Voter
 {
     public const LIST_ENTRIES = 'LIST_ENTRIES';
+    public const CREATE_ENTRIES = 'CREATE_ENTRIES';
 
     private Security $security;
 
@@ -23,7 +24,7 @@ class MainVoter extends Voter
             return false;
         }
 
-        if (!\in_array($attribute, [self::LIST_ENTRIES], true)) {
+        if (!\in_array($attribute, [self::LIST_ENTRIES, self::CREATE_ENTRIES], true)) {
             return false;
         }
 
@@ -34,6 +35,7 @@ class MainVoter extends Voter
     {
         switch ($attribute) {
             case self::LIST_ENTRIES:
+            case self::CREATE_ENTRIES:
                 return $this->security->isGranted('ROLE_USER');
         }
 
