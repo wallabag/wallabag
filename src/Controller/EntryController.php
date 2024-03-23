@@ -387,13 +387,12 @@ class EntryController extends AbstractController
      * Shows entry content.
      *
      * @Route("/view/{id}", requirements={"id" = "\d+"}, name="view")
+     * @IsGranted("VIEW", subject="entry")
      *
      * @return Response
      */
     public function viewAction(Entry $entry)
     {
-        $this->checkUserAction($entry);
-
         return $this->render(
             'Entry/entry.html.twig',
             ['entry' => $entry]

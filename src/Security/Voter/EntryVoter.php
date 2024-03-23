@@ -9,6 +9,7 @@ use Wallabag\Entity\User;
 
 class EntryVoter extends Voter
 {
+    public const VIEW = 'VIEW';
     public const EDIT = 'EDIT';
 
     protected function supports(string $attribute, $subject): bool
@@ -17,7 +18,7 @@ class EntryVoter extends Voter
             return false;
         }
 
-        if (!\in_array($attribute, [self::EDIT], true)) {
+        if (!\in_array($attribute, [self::VIEW, self::EDIT], true)) {
             return false;
         }
 
@@ -35,6 +36,7 @@ class EntryVoter extends Voter
         }
 
         switch ($attribute) {
+            case self::VIEW:
             case self::EDIT:
                 return $user === $subject->getUser();
         }
