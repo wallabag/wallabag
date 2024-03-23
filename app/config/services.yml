@@ -109,6 +109,9 @@ services:
     Doctrine\ORM\EntityManagerInterface:
         alias: doctrine.orm.entity_manager
 
+    Doctrine\Migrations\Metadata\Storage\TableMetadataStorageConfiguration:
+        alias: doctrine.migrations.storage.table_storage
+
     Doctrine\Persistence\ManagerRegistry:
         alias: doctrine
 
@@ -171,6 +174,12 @@ services:
             - { name: request.param_converter, converter: username_feed_token_converter }
 
     Wallabag\Event\Subscriber\TablePrefixSubscriber:
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    Wallabag\Event\Subscriber\SchemaAdapterSubscriber:
+        arguments:
+            $databaseTablePrefix: "%database_table_prefix%"
         tags:
             - { name: doctrine.event_subscriber }
 
@@ -254,7 +263,6 @@ services:
     Wallabag\Command\InstallCommand:
         arguments:
             $databaseDriver: '%database_driver%'
-            $databaseName: '%database_name%'
             $defaultSettings: '%wallabag.default_internal_settings%'
             $defaultIgnoreOriginInstanceRules: '%wallabag.default_ignore_origin_instance_rules%'
 

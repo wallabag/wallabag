@@ -1,2 +1,2 @@
 parameters:
-    env(DATABASE_URL): sqlite:///%kernel.project_dir%/data/db/wallabag_test.sqlite?charset=utf8
+    env(DATABASE_URL): sqlite:///%kernel.project_dir%/data/db/wallabag%wallabag_dbname_suffix%.sqlite?charset=utf8

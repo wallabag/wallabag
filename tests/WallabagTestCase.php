@@ -3,11 +3,8 @@
 namespace Tests\Wallabag;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\Entity\User;
 
@@ -37,40 +34,6 @@ abstract class WallabagTestCase extends WebTestCase
     public function getTestClient()
     {
         return $this->client;
-    }
-
-    public function resetDatabase(KernelBrowser $client)
-    {
-        $application = new Application($client->getKernel());
-        $application->setAutoExit(false);
-
-        $application->run(new ArrayInput([
-            'command' => 'doctrine:schema:drop',
-            '--no-interaction' => true,
-            '--force' => true,
-            '--full-database' => true,
-            '--env' => 'test',
-        ]), new NullOutput());
-
-        $application->run(new ArrayInput([
-            'command' => 'doctrine:migrations:migrate',
-            '--no-interaction' => true,
-            '--env' => 'test',
-        ]), new NullOutput());
-
-        $application->run(new ArrayInput([
-            'command' => 'doctrine:fixtures:load',
-            '--no-interaction' => true,
-            '--env' => 'test',
-        ]), new NullOutput());
-
-        /*
-         * Recreate client to avoid error:
-         *
-         * [Doctrine\DBAL\ConnectionException]
-         * Transaction commit failed because the transaction has been marked for rollback only.
-         */
-        $this->client = $this->getNewClient();
     }
 
     public function getEntityManager()

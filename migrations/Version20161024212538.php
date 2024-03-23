@@ -17,7 +17,11 @@ class Version20161024212538 extends WallabagMigration
     {
         $clientsTable = $schema->getTable($this->getTable('oauth2_clients'));
 
-        $this->skipIf($clientsTable->hasColumn('user_id'), 'It seems that you already played this migration.');
+        if ($clientsTable->hasColumn('user_id')) {
+            $this->write('It seems that you already played this migration.');
+
+            return;
+        }
 
         $clientsTable->addColumn('user_id', 'integer', ['notnull' => false]);
 
@@ -34,7 +38,11 @@ class Version20161024212538 extends WallabagMigration
     {
         $clientsTable = $schema->getTable($this->getTable('oauth2_clients'));
 
-        $this->skipIf(!$clientsTable->hasColumn('user_id'), 'It seems that you already played this migration.');
+        if ($clientsTable->hasColumn('user_id')) {
+            $this->write('It seems that you already played this migration.');
+
+            return;
+        }
 
         $clientsTable->dropColumn('user_id', 'integer');
 

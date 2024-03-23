@@ -7,6 +7,7 @@ use Doctrine\DBAL\Exception\DriverException;
 use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
+use Doctrine\Migrations\Metadata\Storage\TableMetadataStorageConfiguration;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Event\UserEvent;
 use FOS\UserBundle\FOSUserEvents;
@@ -35,32 +36,26 @@ class InstallCommand extends Command
         'curl_exec',
         'curl_multi_init',
     ];
-    private bool $runOtherCommands = true;
 
     private EntityManagerInterface $entityManager;
     private EventDispatcherInterface $dispatcher;
     private UserManagerInterface $userManager;
+    private TableMetadataStorageConfiguration $tableMetadataStorageConfiguration;
     private string $databaseDriver;
-    private string $databaseName;
     private array $defaultSettings;
     private array $defaultIgnoreOriginInstanceRules;
 
-    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $dispatcher, UserManagerInterface $userManager, string $databaseDriver, string $databaseName, array $defaultSettings, array $defaultIgnoreOriginInstanceRules)
+    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $dispatcher, UserManagerInterface $userManager, TableMetadataStorageConfiguration $tableMetadataStorageConfiguration, string $databaseDriver, array $defaultSettings, array $defaultIgnoreOriginInstanceRules)
     {
         $this->entityManager = $entityManager;
         $this->dispatcher = $dispatcher;
         $this->userManager = $userManager;
+        $this->tableMetadataStorageConfiguration = $tableMetadataStorageConfiguration;
         $this->databaseDriver = $databaseDriver;
-        $this->databaseName = $databaseName;
         $this->defaultSettings = $defaultSettings;
         $this->defaultIgnoreOriginInstanceRules = $defaultIgnoreOriginInstanceRules;
 
         parent::__construct();
-    }
-
-    public function disableRunOtherCommands(): void
-    {
-        $this->runOtherCommands = false;
     }
 
     protected function configure()
@@ -127,7 +122,7 @@ class InstallCommand extends Command
             $conn->connect();
         } catch (\Exception $e) {
             if (!str_contains($e->getMessage(), 'Unknown database')
-                && !str_contains($e->getMessage(), 'database "' . $this->databaseName . '" does not exist')) {
+                && !str_contains($e->getMessage(), 'database "' . $conn->getDatabase() . '" does not exist')) {
                 $fulfilled = false;
                 $status = '<error>ERROR!</error>';
                 $help = 'Can\'t connect to the database: ' . $e->getMessage();
@@ -198,13 +193,21 @@ class InstallCommand extends Command
     {
         $this->io->section('Step 2 of 4: Setting up database.');
 
+        $conn = $this->entityManager->getConnection();
+        $databasePlatform = $conn->isConnected() ? $conn->getDatabasePlatform() : null;
+
         // user want to reset everything? Don't care about what is already here
         if (true === $this->defaultInput->getOption('reset')) {
             $this->io->text('Dropping database, creating database and schema, clearing the cache');
 
+            $this->runCommand('doctrine:schema:drop', ['--force' => true, '--full-database' => true]);
+
+            if (!$databasePlatform instanceof PostgreSQLPlatform) {
+                $this->runCommand('doctrine:database:drop', ['--force' => true]);
+                $this->runCommand('doctrine:database:create');
+            }
+
             $this
-                ->runCommand('doctrine:database:drop', ['--force' => true])
-                ->runCommand('doctrine:database:create')
                 ->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true])
                 ->runCommand('cache:clear')
             ;
@@ -231,19 +234,20 @@ class InstallCommand extends Command
         if ($this->io->confirm('It appears that your database already exists. Would you like to reset it?', false)) {
             $this->io->text('Dropping database, creating database and schema...');
 
-            $this
-                ->runCommand('doctrine:database:drop', ['--force' => true])
-                ->runCommand('doctrine:database:create')
-                ->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true])
-            ;
+            $this->runCommand('doctrine:schema:drop', ['--force' => true, '--full-database' => true]);
+
+            if (!$databasePlatform instanceof PostgreSQLPlatform) {
+                $this->runCommand('doctrine:database:drop', ['--force' => true]);
+                $this->runCommand('doctrine:database:create');
+            }
+
+            $this->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true]);
         } elseif ($this->isSchemaPresent()) {
             if ($this->io->confirm('Seems like your database contains schema. Do you want to reset it?', false)) {
                 $this->io->text('Dropping schema and creating schema...');
 
-                $this
-                    ->runCommand('doctrine:schema:drop', ['--force' => true])
-                    ->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true])
-                ;
+                $this->dropWallabagSchemaOnly();
+                $this->runCommand('doctrine:migrations:migrate', ['--no-interaction' => true]);
             }
         } else {
             $this->io->text('Creating schema...');
@@ -333,10 +337,6 @@ class InstallCommand extends Command
      */
     private function runCommand($command, $parameters = [])
     {
-        if (!$this->runOtherCommands) {
-            return $this;
-        }
-
         $parameters = array_merge(
             ['command' => $command],
             $parameters,
@@ -376,7 +376,13 @@ class InstallCommand extends Command
     private function isDatabasePresent()
     {
         $connection = $this->entityManager->getConnection();
-        $databaseName = $connection->getDatabase();
+        $params = $connection->getParams();
+
+        if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {
+            $databaseName = $params['path'];
+        } else {
+            $databaseName = $params['dbname'];
+        }
 
         try {
             $schemaManager = $connection->createSchemaManager();
@@ -396,8 +402,6 @@ class InstallCommand extends Command
 
         // custom verification for sqlite, since `getListDatabasesSQL` doesn't work for sqlite
         if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {
-            $params = $connection->getParams();
-
             if (isset($params['path']) && file_exists($params['path'])) {
                 return true;
             }
@@ -416,14 +420,21 @@ class InstallCommand extends Command
 
     /**
      * Check if the schema is already created.
-     * If we found at least one table, it means the schema exists.
-     *
-     * @return bool
+     * We use the Doctrine Migrations table for the check.
      */
-    private function isSchemaPresent()
+    private function isSchemaPresent(): bool
     {
         $schemaManager = $this->entityManager->getConnection()->createSchemaManager();
 
-        return \count($schemaManager->listTableNames()) > 0 ? true : false;
+        return $schemaManager->tablesExist([$this->tableMetadataStorageConfiguration->getTableName()]);
+    }
+
+    private function dropWallabagSchemaOnly(): void
+    {
+        $this->runCommand('doctrine:schema:drop', ['--force' => true]);
+
+        $connection = $this->entityManager->getConnection();
+        $databasePlatform = $connection->getDatabasePlatform();
+        $connection->executeQuery('DROP TABLE ' . $databasePlatform->quoteIdentifier($this->tableMetadataStorageConfiguration->getTableName()) . ';');
     }
 }
