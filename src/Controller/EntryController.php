@@ -489,13 +489,12 @@ class EntryController extends AbstractController
      * Deletes entry and redirect to the homepage or the last viewed page.
      *
      * @Route("/delete/{id}", requirements={"id" = "\d+"}, name="delete_entry")
+     * @IsGranted("DELETE", subject="entry")
      *
      * @return RedirectResponse
      */
     public function deleteEntryAction(Request $request, Entry $entry)
     {
-        $this->checkUserAction($entry);
-
         // generates the view url for this entry to check for redirection later
         // to avoid redirecting to the deleted entry. Ugh.
         $url = $this->generateUrl(
@@ -710,16 +709,6 @@ class EntryController extends AbstractController
         }
 
         $this->addFlash('notice', $message);
-    }
-
-    /**
-     * Check if the logged user can manage the given entry.
-     */
-    private function checkUserAction(Entry $entry)
-    {
-        if (null === $this->getUser() || $this->getUser()->getId() !== $entry->getUser()->getId()) {
-            throw $this->createAccessDeniedException('You can not access this entry.');
-        }
     }
 
     /**
