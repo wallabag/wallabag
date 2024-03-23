@@ -33,7 +33,7 @@
             {% if entries.count > 0 %}
                 <a class="results-item" href="{{ path('switch_view_mode', {redirect: current_path}) }}"><i class="material-icons">{% if list_mode == 0 %}view_list{% else %}view_module{% endif %}</i></a>
             {% endif %}
-            {% if entries.count > 0 %}
+            {% if entries.count > 0 and is_granted('EDIT_ENTRIES') %}
                 <label for="mass-action-inputs-displayed" class="mass-action-toggle results-item tooltipped" data-position="right" data-delay="50" data-tooltip="{{ 'entry.list.toggle_mass_action'|trans }}"><i class="material-icons">library_add_check</i></label>
             {% endif %}
             {% if app.user.config.feedToken %}
@@ -109,7 +109,7 @@
     </div>
 
     <!-- Filters -->
-    {% if form is not null %}
+    {% if form is not null and is_granted('LIST_ENTRIES') %}
     <div id="filters" class="side-nav right-aligned">
         <form action="{{ path('all') }}">
 

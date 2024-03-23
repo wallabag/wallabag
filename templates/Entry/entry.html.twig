@@ -25,16 +25,20 @@
                 </li>
             </ul>
             <ul class="right">
-                <li>
-                    <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_read'|trans }}" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" id="markAsRead">
-                        <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
-                    </a>
-                </li>
-                <li>
-                    <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" id="setFav">
-                        <i class="material-icons small">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
-                    </a>
-                </li>
+                {% if is_granted('ARCHIVE', entry) %}
+                    <li>
+                        <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_read'|trans }}" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" id="markAsRead">
+                            <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if is_granted('STAR', entry) %}
+                    <li>
+                        <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" id="setFav">
+                            <i class="material-icons small">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </nav>
@@ -55,41 +59,50 @@
             <div class="collapsible-body"></div>
         </li>
 
-        <li class="bold">
-            <a class="waves-effect collapsible-header" onclick="return confirm('{{ 'entry.confirm.reload'|trans|escape('js') }}')" title="{{ 'entry.view.left_menu.re_fetch_content'|trans }}" href="{{ path('reload_entry', {'id': entry.id}) }}" id="reload">
-                <i class="material-icons small">refresh</i>
-                <span>{{ 'entry.view.left_menu.re_fetch_content'|trans }}</span>
-            </a>
-            <div class="collapsible-body"></div>
-        </li>
+        {% if is_granted('RELOAD', entry) %}
+            <li class="bold">
+                <a class="waves-effect collapsible-header" onclick="return confirm('{{ 'entry.confirm.reload'|trans|escape('js') }}')" title="{{ 'entry.view.left_menu.re_fetch_content'|trans }}" href="{{ path('reload_entry', {'id': entry.id}) }}" id="reload">
+                    <i class="material-icons small">refresh</i>
+                    <span>{{ 'entry.view.left_menu.re_fetch_content'|trans }}</span>
+                </a>
+                <div class="collapsible-body"></div>
+            </li>
+        {% endif %}
 
         {% set mark_as_read_label = 'entry.view.left_menu.set_as_unread' %}
         {% if entry.isArchived == 0 %}
             {% set mark_as_read_label = 'entry.view.left_menu.set_as_read' %}
         {% endif %}
 
-        <li class="bold hide-on-med-and-down">
-            <a class="waves-effect collapsible-header markasread" title="{{ mark_as_read_label|trans }}" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" id="markAsRead">
-                <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
-                <span>{{ mark_as_read_label|trans }}</span>
-            </a>
-            <div class="collapsible-body"></div>
-        </li>
+        {% if is_granted('ARCHIVE', entry) %}
+            <li class="bold hide-on-med-and-down">
+                <a class="waves-effect collapsible-header markasread" title="{{ mark_as_read_label|trans }}" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" id="markAsRead">
+                    <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
+                    <span>{{ mark_as_read_label|trans }}</span>
+                </a>
+                <div class="collapsible-body"></div>
+            </li>
+        {% endif %}
 
-        <li class="bold hide-on-med-and-down">
-            <a class="waves-effect collapsible-header favorite" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" id="setFav">
-                <i class="material-icons spall">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
-                <span>{{ 'entry.view.left_menu.set_as_starred'|trans }}</span>
-            </a>
-            <div class="collapsible-body"></div>
-        </li>
-        <li class="bold border-bottom">
-            <a class="waves-effect collapsible-header delete" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', {'id': entry.id, redirect: current_path}) }}">
-                <i class="material-icons small">delete</i>
-                <span>{{ 'entry.view.left_menu.delete'|trans }}</span>
-            </a>
-            <div class="collapsible-body"></div>
-        </li>
+        {% if is_granted('STAR', entry) %}
+            <li class="bold hide-on-med-and-down">
+                <a class="waves-effect collapsible-header favorite" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" id="setFav">
+                    <i class="material-icons small">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
+                    <span>{{ 'entry.view.left_menu.set_as_starred'|trans }}</span>
+                </a>
+                <div class="collapsible-body"></div>
+            </li>
+        {% endif %}
+
+        {% if is_granted('DELETE', entry) %}
+            <li class="bold border-bottom">
+                <a class="waves-effect collapsible-header delete" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', {'id': entry.id, redirect: current_path}) }}">
+                    <i class="material-icons small">delete</i>
+                    <span>{{ 'entry.view.left_menu.delete'|trans }}</span>
+                </a>
+                <div class="collapsible-body"></div>
+            </li>
+        {% endif %}
 
         <li class="bold border-bottom">
             <a class="waves-effect collapsible-header" id="nav-btn-add-tag">
@@ -134,16 +147,20 @@
             <div class="collapsible-body">
                 <ul>
                     {% if craue_setting('share_public') %}
-                        <li>
-                            <a href="{{ path('share', {'id': entry.id}) }}" target="_blank" title="{{ 'entry.view.left_menu.public_link'|trans }}" class="tool icon-eye">
-                                <span>{{ 'entry.view.left_menu.public_link'|trans }}</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ path('delete_share', {'id': entry.id}) }}" title="{{ 'entry.view.left_menu.delete_public_link'|trans }}" class="tool icon-no-eye">
-                                <span>{{ 'entry.view.left_menu.delete_public_link'|trans }}</span>
-                            </a>
-                        </li>
+                        {% if is_granted('SHARE', entry) %}
+                            <li>
+                                <a href="{{ path('share', {'id': entry.id}) }}" target="_blank" title="{{ 'entry.view.left_menu.public_link'|trans }}" class="tool icon-eye">
+                                    <span>{{ 'entry.view.left_menu.public_link'|trans }}</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if is_granted('UNSHARE', entry) %}
+                            <li>
+                                <a href="{{ path('delete_share', {'id': entry.id}) }}" title="{{ 'entry.view.left_menu.delete_public_link'|trans }}" class="tool icon-no-eye">
+                                    <span>{{ 'entry.view.left_menu.delete_public_link'|trans }}</span>
+                                </a>
+                            </li>
+                        {% endif %}
                     {% endif %}
                     {% if craue_setting('share_twitter') %}
                         <li>
@@ -196,12 +213,14 @@
         </li>
         {% endif %}
 
-        <li class="bold border-top border-bottom">
-            <a class="waves-effect collapsible-header" title="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', {'type': 'all'}) }}">
-                <i class="material-icons small">casino</i>
-                <span>{{ 'menu.top.random_entry'|trans }}</span>
-            </a>
-        </li>
+        {% if is_granted('LIST_ENTRIES') %}
+            <li class="bold border-top border-bottom">
+                <a class="waves-effect collapsible-header" title="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', {'type': 'all'}) }}">
+                    <i class="material-icons small">casino</i>
+                    <span>{{ 'menu.top.random_entry'|trans }}</span>
+                </a>
+            </li>
+        {% endif %}
 
         <li class="bold">
             <a class="waves-effect collapsible-header">
@@ -235,7 +254,12 @@
 {% block content %}
     <div id="article" class="article">
         <header class="mbm">
-            <h1><span{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>{{ entry.title|striptags|default('entry.default_title'|trans)|raw }}</span> <a class="title-edit" href="{{ path('edit', {'id': entry.id}) }}" title="{{ 'entry.view.edit_title'|trans }}"><i class="material-icons grey-text">create</i></a></h1>
+            <h1>
+                <span{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>{{ entry.title|striptags|default('entry.default_title'|trans)|raw }}</span>
+                {% if is_granted('EDIT', entry) %}
+                    <a class="title-edit" href="{{ path('edit', {'id': entry.id}) }}" title="{{ 'entry.view.edit_title'|trans }}"><i class="material-icons grey-text">create</i></a>
+                {% endif %}
+            </h1>
         </header>
         <aside class="entry-info">
             <div class="tools entry-tools grey-text" dir="auto">
@@ -299,9 +323,15 @@
               <i class="material-icons">menu</i>
             </a>
             <ul>
-              <li><a class="btn-floating" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i></a></li>
-              <li><a class="btn-floating" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i></a></li>
-              <li><a class="btn-floating" href="{{ path('delete_entry', {'id': entry.id, redirect: current_path}) }}" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')"><i class="material-icons">delete</i></a></li>
+                {% if is_granted('ARCHIVE', entry) %}
+                    <li><a class="btn-floating" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i></a></li>
+                {% endif %}
+                {% if is_granted('STAR', entry) %}
+                    <li><a class="btn-floating" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i></a></li>
+                {% endif %}
+                {% if is_granted('DELETE', entry) %}
+                    <li><a class="btn-floating" href="{{ path('delete_entry', {'id': entry.id, redirect: current_path}) }}" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')"><i class="material-icons">delete</i></a></li>
+                {% endif %}
             </ul>
         </div>
     </div>

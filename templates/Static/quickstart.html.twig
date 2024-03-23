@@ -37,7 +37,9 @@
                                 <div class="card-action">
                                     <ul>
                                         <li><a href="https://doc.wallabag.org/en/user/articles/save.html">{{ 'quickstart.first_steps.new_article'|trans }}</a></li>
-                                        <li><a href="{{ path('unread') }}">{{ 'quickstart.first_steps.unread_articles'|trans }}</a></li>
+                                        {% if is_granted('LIST_ENTRIES') %}
+                                            <li><a href="{{ path('unread') }}">{{ 'quickstart.first_steps.unread_articles'|trans }}</a></li>
+                                        {% endif %}
                                     </ul>
                                 </div>
                             </div>
