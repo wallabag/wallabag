@@ -2,10 +2,14 @@
     {% include "Entry/Card/_mass_checkbox.html.twig" with {'entry': entry} only %}
     {% if app.user.config.displayThumbnails %}
     <div class="card-preview">
-        <a href="{{ path('view', {'id': entry.id}) }}">
-            {% set preview_class_modifier = entry.previewPicture ? '' : ' preview--default' %}
+        {% set preview_class_modifier = entry.previewPicture ? '' : ' preview--default' %}
+        {% if is_granted('VIEW', entry) %}
+            <a href="{{ path('view', {'id': entry.id}) }}">
+                <span class="preview{{ preview_class_modifier }}" style="background-image: url({{ entry.previewPicture|default(asset('img/logo-square.svg')) }})"></span>
+            </a>
+        {% else %}
             <span class="preview{{ preview_class_modifier }}" style="background-image: url({{ entry.previewPicture|default(asset('img/logo-square.svg')) }})"></span>
-        </a>
+        {% endif %}
     </div>
     {% endif %}
     {% include "Entry/Card/_content.html.twig" with {'entry': entry, 'withMetadata': true, 'subClass': 'metadata'} only %}
@@ -14,10 +18,18 @@
 
     <ul class="tools-list hide-on-small-only">
         <li>
-            <a title="{{ 'entry.list.show_same_domain'|trans }}" class="tool grey-text" href="{{ path('same_domain', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">language</i></a>
-            <a title="{{ 'entry.list.toogle_as_read'|trans }}" class="tool grey-text" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i></a>
-            <a title="{{ 'entry.list.toogle_as_star'|trans }}" class="tool grey-text" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">{% if entry.isStarred == 0 %}star_border{% else %}star{% endif %}</i></a>
-            <a title="{{ 'entry.list.delete'|trans }}" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" class="tool grey-text delete" href="{{ path('delete_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">delete</i></a>
+            {% if is_granted('LIST_ENTRIES') %}
+                <a title="{{ 'entry.list.show_same_domain'|trans }}" class="tool grey-text" href="{{ path('same_domain', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">language</i></a>
+            {% endif %}
+            {% if is_granted('ARCHIVE', entry) %}
+                <a title="{{ 'entry.list.toogle_as_read'|trans }}" class="tool grey-text" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i></a>
+            {% endif %}
+            {% if is_granted('STAR', entry) %}
+                <a title="{{ 'entry.list.toogle_as_star'|trans }}" class="tool grey-text" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">{% if entry.isStarred == 0 %}star_border{% else %}star{% endif %}</i></a>
+            {% endif %}
+            {% if is_granted('DELETE', entry) %}
+                <a title="{{ 'entry.list.delete'|trans }}" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" class="tool grey-text delete" href="{{ path('delete_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">delete</i></a>
+            {% endif %}
         </li>
     </ul>
 </div>

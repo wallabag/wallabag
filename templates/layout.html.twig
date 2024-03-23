@@ -30,9 +30,13 @@
         <ul id="slide-out" class="left-bar side-nav fixed">
             {% block logo %}
                 <li class="logo border-bottom">
-                    <a title="{{ 'menu.left.back_to_unread'|trans }}" href="{{ path('unread') }}">
-                        <img src="{{ asset('img/logo-square.svg') }}" alt="wallabag logo" />
-                    </a>
+                    {% if is_granted('LIST_ENTRIES') %}
+                        <a title="{{ 'menu.left.back_to_unread'|trans }}" href="{{ path('unread') }}">
+                            <img src="{{ asset('img/logo-square.svg') }}" alt="wallabag logo" />
+                        </a>
+                    {% else %}
+                        <img src="{{ asset('img/logo-square.svg') }}" alt="wallabag logo"/>
+                    {% endif %}
                 </li>
             {% endblock %}
 
@@ -54,21 +58,23 @@
                {% set active_route = 'untagged' %}
             {% endif %}
 
-            <li class="bold {% if active_route == 'unread' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('unread') }}">{{ 'menu.left.unread'|trans }} <span class="items-number grey-text">{{ count_entries('unread') }}</span></a>
-            </li>
-            <li class="bold {% if active_route == 'starred' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('starred') }}">{{ 'menu.left.starred'|trans }} <span class="items-number grey-text">{{ count_entries('starred') }}</span></a>
-            </li>
-            <li class="bold {% if active_route == 'archive' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('archive') }}">{{ 'menu.left.archive'|trans }} <span class="items-number grey-text">{{ count_entries('archive') }}</span></a>
-            </li>
-            <li class="bold {% if active_route == 'annotated' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('annotated') }}">{{ 'menu.left.with_annotations'|trans }} <span class="items-number grey-text">{{ count_entries('annotated') }}</span></a>
-            </li>
-            <li class="bold {% if active_route == 'all' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('all') }}">{{ 'menu.left.all_articles'|trans }} <span class="items-number grey-text">{{ count_entries('all') }}</span></a>
-            </li>
+            {% if is_granted('LIST_ENTRIES') %}
+                <li class="bold {% if active_route == 'unread' %}active{% endif %}">
+                    <a class="waves-effect" href="{{ path('unread') }}">{{ 'menu.left.unread'|trans }} <span class="items-number grey-text">{{ count_entries('unread') }}</span></a>
+                </li>
+                <li class="bold {% if active_route == 'starred' %}active{% endif %}">
+                    <a class="waves-effect" href="{{ path('starred') }}">{{ 'menu.left.starred'|trans }} <span class="items-number grey-text">{{ count_entries('starred') }}</span></a>
+                </li>
+                <li class="bold {% if active_route == 'archive' %}active{% endif %}">
+                    <a class="waves-effect" href="{{ path('archive') }}">{{ 'menu.left.archive'|trans }} <span class="items-number grey-text">{{ count_entries('archive') }}</span></a>
+                </li>
+                <li class="bold {% if active_route == 'annotated' %}active{% endif %}">
+                    <a class="waves-effect" href="{{ path('annotated') }}">{{ 'menu.left.with_annotations'|trans }} <span class="items-number grey-text">{{ count_entries('annotated') }}</span></a>
+                </li>
+                <li class="bold {% if active_route == 'all' %}active{% endif %}">
+                    <a class="waves-effect" href="{{ path('all') }}">{{ 'menu.left.all_articles'|trans }} <span class="items-number grey-text">{{ count_entries('all') }}</span></a>
+                </li>
+            {% endif %}
             <li class="bold {% if current_route == 'tags' %}active{% endif %}">
                 <a class="waves-effect" href="{{ path('tag') }}">{{ 'menu.left.tags'|trans }} <span class="items-number grey-text">{{ count_tags() }}</span></a>
             </li>
@@ -93,7 +99,7 @@
                             <i class="material-icons">search</i>
                         </a>
                     </li>
-                    {% if active_route %}
+                    {% if active_route and is_granted('LIST_ENTRIES') %}
                     <li id="button_random">
                         <a class="waves-effect tooltipped js-random-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', {'type': active_route}) }}">
                             <i class="material-icons">casino</i>
@@ -165,8 +171,12 @@
                 </ul>
 
             </div>
-            {{ render(controller('Wallabag\\Controller\\EntryController::searchFormAction', {'currentRoute': current_route})) }}
-            {{ render(controller('Wallabag\\Controller\\EntryController::addEntryFormAction')) }}
+            {% if is_granted('LIST_ENTRIES') %}
+                {{ render(controller('Wallabag\\Controller\\EntryController::searchFormAction', {'currentRoute': current_route})) }}
+            {% endif %}
+            {% if is_granted('CREATE_ENTRIES') %}
+                {{ render(controller('Wallabag\\Controller\\EntryController::addEntryFormAction')) }}
+            {% endif %}
         </div>
     </nav>
 {% endblock %}
