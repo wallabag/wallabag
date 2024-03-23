@@ -56,6 +56,7 @@ class EntryController extends AbstractController
 
     /**
      * @Route("/mass", name="mass_action")
+     * @IsGranted("EDIT_ENTRIES")
      *
      * @return Response
      */
