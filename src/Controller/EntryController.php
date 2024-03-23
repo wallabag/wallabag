@@ -581,6 +581,7 @@ class EntryController extends AbstractController
      *
      * @Route("/share/{uid}", requirements={"uid" = ".+"}, name="share_entry")
      * @Cache(maxage="25200", smaxage="25200", public=true)
+     * @IsGranted("PUBLIC_ACCESS")
      *
      * @return Response
      */
