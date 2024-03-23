@@ -83,4 +83,32 @@ class MainVoterTest extends TestCase
 
         $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->mainVoter->vote($this->token, null, [MainVoter::EDIT_ENTRIES]));
     }
+
+    public function testVoteReturnsDeniedForNonUserListSiteCredentials(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_USER')->willReturn(false);
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->mainVoter->vote($this->token, null, [MainVoter::LIST_SITE_CREDENTIALS]));
+    }
+
+    public function testVoteReturnsGrantedForUserListSiteCredentials(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_USER')->willReturn(true);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->mainVoter->vote($this->token, null, [MainVoter::LIST_SITE_CREDENTIALS]));
+    }
+
+    public function testVoteReturnsDeniedForNonUserCreateSiteCredentials(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_USER')->willReturn(false);
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->mainVoter->vote($this->token, null, [MainVoter::CREATE_SITE_CREDENTIALS]));
+    }
+
+    public function testVoteReturnsGrantedForUserCreateSiteCredentials(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_USER')->willReturn(true);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->mainVoter->vote($this->token, null, [MainVoter::CREATE_SITE_CREDENTIALS]));
+    }
 }

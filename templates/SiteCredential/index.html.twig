@@ -23,16 +23,20 @@
                                 <tr>
                                     <td>{{ credential.host }}</td>
                                     <td>
-                                        <a href="{{ path('site_credentials_edit', {'id': credential.id}) }}">{{ 'site_credential.list.edit_action'|trans }}</a>
+                                        {% if is_granted('EDIT', credential) %}
+                                            <a href="{{ path('site_credentials_edit', {'id': credential.id}) }}">{{ 'site_credential.list.edit_action'|trans }}</a>
+                                        {% endif %}
                                     </td>
                                 </tr>
                             {% endfor %}
                             </tbody>
                         </table>
-                        <br />
-                        <p>
-                            <a href="{{ path('site_credentials_new') }}" class="waves-effect waves-light btn">{{ 'site_credential.list.create_new_one'|trans }}</a>
-                        </p>
+                        {% if is_granted('CREATE_SITE_CREDENTIALS') %}
+                            <br />
+                            <p>
+                                <a href="{{ path('site_credentials_new') }}" class="waves-effect waves-light btn">{{ 'site_credential.list.create_new_one'|trans }}</a>
+                            </p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
