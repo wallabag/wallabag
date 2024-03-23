@@ -55,13 +55,15 @@
             <div class="collapsible-body"></div>
         </li>
 
-        <li class="bold">
-            <a class="waves-effect collapsible-header" onclick="return confirm('{{ 'entry.confirm.reload'|trans|escape('js') }}')" title="{{ 'entry.view.left_menu.re_fetch_content'|trans }}" href="{{ path('reload_entry', {'id': entry.id}) }}" id="reload">
-                <i class="material-icons small">refresh</i>
-                <span>{{ 'entry.view.left_menu.re_fetch_content'|trans }}</span>
-            </a>
-            <div class="collapsible-body"></div>
-        </li>
+        {% if is_granted('RELOAD', entry) %}
+            <li class="bold">
+                <a class="waves-effect collapsible-header" onclick="return confirm('{{ 'entry.confirm.reload'|trans|escape('js') }}')" title="{{ 'entry.view.left_menu.re_fetch_content'|trans }}" href="{{ path('reload_entry', {'id': entry.id}) }}" id="reload">
+                    <i class="material-icons small">refresh</i>
+                    <span>{{ 'entry.view.left_menu.re_fetch_content'|trans }}</span>
+                </a>
+                <div class="collapsible-body"></div>
+            </li>
+        {% endif %}
 
         {% set mark_as_read_label = 'entry.view.left_menu.set_as_unread' %}
         {% if entry.isArchived == 0 %}

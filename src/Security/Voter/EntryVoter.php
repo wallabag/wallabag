@@ -11,6 +11,7 @@ class EntryVoter extends Voter
 {
     public const VIEW = 'VIEW';
     public const EDIT = 'EDIT';
+    public const RELOAD = 'RELOAD';
 
     protected function supports(string $attribute, $subject): bool
     {
@@ -18,7 +19,7 @@ class EntryVoter extends Voter
             return false;
         }
 
-        if (!\in_array($attribute, [self::VIEW, self::EDIT], true)) {
+        if (!\in_array($attribute, [self::VIEW, self::EDIT, self::RELOAD], true)) {
             return false;
         }
 
@@ -38,6 +39,7 @@ class EntryVoter extends Voter
         switch ($attribute) {
             case self::VIEW:
             case self::EDIT:
+            case self::RELOAD:
                 return $user === $subject->getUser();
         }
 

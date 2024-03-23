@@ -404,13 +404,12 @@ class EntryController extends AbstractController
      * Refetch content from the website and make it readable again.
      *
      * @Route("/reload/{id}", requirements={"id" = "\d+"}, name="reload_entry")
+     * @IsGranted("RELOAD", subject="entry")
      *
      * @return RedirectResponse
      */
     public function reloadAction(Entry $entry)
     {
-        $this->checkUserAction($entry);
-
         $this->updateEntry($entry, 'entry_reloaded');
 
         // if refreshing entry failed, don't save it

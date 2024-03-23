@@ -62,4 +62,18 @@ class EntryVoterTest extends TestCase
 
         $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::EDIT]));
     }
+
+    public function testVoteReturnsDeniedForNonEntryUserReload(): void
+    {
+        $this->token->method('getUser')->willReturn(new User());
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::RELOAD]));
+    }
+
+    public function testVoteReturnsGrantedForEntryUserReload(): void
+    {
+        $this->token->method('getUser')->willReturn($this->user);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::RELOAD]));
+    }
 }
