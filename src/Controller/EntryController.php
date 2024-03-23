@@ -461,13 +461,12 @@ class EntryController extends AbstractController
      * Changes starred status for an entry.
      *
      * @Route("/star/{id}", requirements={"id" = "\d+"}, name="star_entry")
+     * @IsGranted("STAR", subject="entry")
      *
      * @return RedirectResponse
      */
     public function toggleStarAction(Request $request, Entry $entry)
     {
-        $this->checkUserAction($entry);
-
         $entry->toggleStar();
         $entry->updateStar($entry->isStarred());
         $this->entityManager->flush();
