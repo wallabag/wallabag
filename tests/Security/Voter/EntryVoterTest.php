@@ -104,4 +104,18 @@ class EntryVoterTest extends TestCase
 
         $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::ARCHIVE]));
     }
+
+    public function testVoteReturnsDeniedForNonEntryUserShare(): void
+    {
+        $this->token->method('getUser')->willReturn(new User());
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::SHARE]));
+    }
+
+    public function testVoteReturnsGrantedForEntryUserShare(): void
+    {
+        $this->token->method('getUser')->willReturn($this->user);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::SHARE]));
+    }
 }

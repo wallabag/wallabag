@@ -144,11 +144,13 @@
             <div class="collapsible-body">
                 <ul>
                     {% if craue_setting('share_public') %}
-                        <li>
-                            <a href="{{ path('share', {'id': entry.id}) }}" target="_blank" title="{{ 'entry.view.left_menu.public_link'|trans }}" class="tool icon-eye">
-                                <span>{{ 'entry.view.left_menu.public_link'|trans }}</span>
-                            </a>
-                        </li>
+                        {% if is_granted('SHARE', entry) %}
+                            <li>
+                                <a href="{{ path('share', {'id': entry.id}) }}" target="_blank" title="{{ 'entry.view.left_menu.public_link'|trans }}" class="tool icon-eye">
+                                    <span>{{ 'entry.view.left_menu.public_link'|trans }}</span>
+                                </a>
+                            </li>
+                        {% endif %}
                         <li>
                             <a href="{{ path('delete_share', {'id': entry.id}) }}" title="{{ 'entry.view.left_menu.delete_public_link'|trans }}" class="tool icon-no-eye">
                                 <span>{{ 'entry.view.left_menu.delete_public_link'|trans }}</span>

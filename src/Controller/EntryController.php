@@ -527,13 +527,12 @@ class EntryController extends AbstractController
      * Get public URL for entry (and generate it if necessary).
      *
      * @Route("/share/{id}", requirements={"id" = "\d+"}, name="share")
+     * @IsGranted("SHARE", subject="entry")
      *
      * @return Response
      */
     public function shareAction(Entry $entry)
     {
-        $this->checkUserAction($entry);
-
         if (null === $entry->getUid()) {
             $entry->generateUid();
 

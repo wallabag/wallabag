@@ -14,6 +14,7 @@ class EntryVoter extends Voter
     public const RELOAD = 'RELOAD';
     public const STAR = 'STAR';
     public const ARCHIVE = 'ARCHIVE';
+    public const SHARE = 'SHARE';
 
     protected function supports(string $attribute, $subject): bool
     {
@@ -21,7 +22,7 @@ class EntryVoter extends Voter
             return false;
         }
 
-        if (!\in_array($attribute, [self::VIEW, self::EDIT, self::RELOAD, self::STAR, self::ARCHIVE], true)) {
+        if (!\in_array($attribute, [self::VIEW, self::EDIT, self::RELOAD, self::STAR, self::ARCHIVE, self::SHARE], true)) {
             return false;
         }
 
@@ -44,6 +45,7 @@ class EntryVoter extends Voter
             case self::RELOAD:
             case self::STAR:
             case self::ARCHIVE:
+            case self::SHARE:
                 return $user === $subject->getUser();
         }
 
