@@ -1,0 +1,51 @@
+<?php
+
+namespace Security\Voter;
+
+use PHPUnit\Framework\TestCase;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
+use Wallabag\Entity\Entry;
+use Wallabag\Entity\User;
+use Wallabag\Security\Voter\EntryVoter;
+
+class EntryVoterTest extends TestCase
+{
+    private $token;
+    private $user;
+    private $entry;
+    private $entryVoter;
+
+    protected function setUp(): void
+    {
+        $this->token = $this->createMock(TokenInterface::class);
+        $this->user = new User();
+        $this->entry = new Entry($this->user);
+
+        $this->entryVoter = new EntryVoter();
+    }
+
+    public function testVoteReturnsAbstainForInvalidSubject(): void
+    {
+        $this->assertSame(VoterInterface::ACCESS_ABSTAIN, $this->entryVoter->vote($this->token, new \stdClass(), [EntryVoter::EDIT]));
+    }
+
+    public function testVoteReturnsAbstainForInvalidAttribute(): void
+    {
+        $this->assertSame(VoterInterface::ACCESS_ABSTAIN, $this->entryVoter->vote($this->token, $this->entry, ['INVALID']));
+    }
+
+    public function testVoteReturnsDeniedForNonEntryUserEdit(): void
+    {
+        $this->token->method('getUser')->willReturn(new User());
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::EDIT]));
+    }
+
+    public function testVoteReturnsGrantedForEntryUserEdit(): void
+    {
+        $this->token->method('getUser')->willReturn($this->user);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::EDIT]));
+    }
+}

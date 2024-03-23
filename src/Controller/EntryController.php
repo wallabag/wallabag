@@ -8,12 +8,14 @@ use Doctrine\ORM\NoResultException;
 use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Spiriit\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\Tag;
@@ -38,8 +40,9 @@ class EntryController extends AbstractController
     private PreparePagerForEntries $preparePagerForEntriesHelper;
     private FilterBuilderUpdaterInterface $filterBuilderUpdater;
     private ContentProxy $contentProxy;
+    private Security $security;
 
-    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher, EntryRepository $entryRepository, Redirect $redirectHelper, PreparePagerForEntries $preparePagerForEntriesHelper, FilterBuilderUpdaterInterface $filterBuilderUpdater, ContentProxy $contentProxy)
+    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher, EntryRepository $entryRepository, Redirect $redirectHelper, PreparePagerForEntries $preparePagerForEntriesHelper, FilterBuilderUpdaterInterface $filterBuilderUpdater, ContentProxy $contentProxy, Security $security)
     {
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
@@ -48,6 +51,7 @@ class EntryController extends AbstractController
         $this->preparePagerForEntriesHelper = $preparePagerForEntriesHelper;
         $this->filterBuilderUpdater = $filterBuilderUpdater;
         $this->contentProxy = $contentProxy;
+        $this->security = $security;
     }
 
     /**
@@ -104,7 +108,9 @@ class EntryController extends AbstractController
                 /** @var Entry * */
                 $entry = $this->entryRepository->findById((int) $id)[0];
 
-                $this->checkUserAction($entry);
+                if (!$this->security->isGranted('EDIT', $entry)) {
+                    throw $this->createAccessDeniedException('You can not access this entry.');
+                }
 
                 if ('toggle-read' === $action) {
                     $entry->toggleArchive();
@@ -240,13 +246,12 @@ class EntryController extends AbstractController
      * Edit an entry content.
      *
      * @Route("/edit/{id}", requirements={"id" = "\d+"}, name="edit")
+     * @IsGranted("EDIT", subject="entry")
      *
      * @return Response
      */
     public function editEntryAction(Request $request, Entry $entry)
     {
-        $this->checkUserAction($entry);
-
         $form = $this->createForm(EditEntryType::class, $entry);
 
         $form->handleRequest($request);

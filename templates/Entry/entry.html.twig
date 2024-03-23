@@ -235,7 +235,12 @@
 {% block content %}
     <div id="article" class="article">
         <header class="mbm">
-            <h1><span{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>{{ entry.title|striptags|default('entry.default_title'|trans)|raw }}</span> <a class="title-edit" href="{{ path('edit', {'id': entry.id}) }}" title="{{ 'entry.view.edit_title'|trans }}"><i class="material-icons grey-text">create</i></a></h1>
+            <h1>
+                <span{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>{{ entry.title|striptags|default('entry.default_title'|trans)|raw }}</span>
+                {% if is_granted('EDIT', entry) %}
+                    <a class="title-edit" href="{{ path('edit', {'id': entry.id}) }}" title="{{ 'entry.view.edit_title'|trans }}"><i class="material-icons grey-text">create</i></a>
+                {% endif %}
+            </h1>
         </header>
         <aside class="entry-info">
             <div class="tools entry-tools grey-text" dir="auto">
