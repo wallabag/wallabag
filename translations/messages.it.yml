@@ -64,6 +64,7 @@ config:
         rules: Regole di etichettatura
         new_user: Aggiungi utente
         feed: Flussi
+        reset: Area di reset
     form:
         save: Salva
     form_settings:
@@ -171,6 +172,7 @@ config:
             import_tagging_rules_detail: Devi selezionare il file JSON che hai precedentemente esportato.
             import_tagging_rules: Importa le regole di etichettatura
             new_tagging_rule: Crea una regola di etichettatura
+            export_tagging_rules_detail: Questo scaricherà un file JSON che potrai usare per importare le regole di etichettatura altrove o per farne un backup.
 entry:
     default_title: Titolo del contenuto
     page_titles:
@@ -551,6 +553,8 @@ flashes:
             tags_reset: Reset etichette
             entries_reset: Reset articoli
             archived_reset: Voci archiviate eliminate
+            tagging_rules_imported: Regole di etichettatura importate
+            tagging_rules_not_imported: Errore nell'importare le regole di etichettatura
     entry:
         notice:
             entry_already_saved: Contenuto già salvato in data %date%
@@ -612,3 +616,6 @@ site_credential:
         delete: Elimina
         delete_confirm: Sei sicuro/a?
         back_to_list: Torna alla lista
+ignore_origin_instance_rule:
+    new_ignore_origin_instance_rule: Crea una regola globale per ignorare l'origine
+    page_title: Regole globali per ignorare l'origine
