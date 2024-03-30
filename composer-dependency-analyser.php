@@ -78,5 +78,6 @@ return $config
     ->ignoreErrorsOnPackages([
         'guzzlehttp/streams',
         'monolog/monolog',
+        'symfony/filesystem',
     ], [ErrorType::PROD_DEPENDENCY_ONLY_IN_DEV])
 ;
