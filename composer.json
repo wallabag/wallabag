@@ -185,6 +185,7 @@
         "symfony/debug-bundle": "^5.4.35",
         "symfony/maker-bundle": "^1.43",
         "symfony/phpunit-bridge": "^7.0.3",
+        "symfony/process": "^5.4",
         "symfony/var-dumper": "^5.4.35",
         "symfony/web-profiler-bundle": "^5.4.35",
         "symfony/web-server-bundle": "^4.4.44"
