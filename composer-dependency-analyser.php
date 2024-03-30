@@ -79,5 +79,6 @@ return $config
         'guzzlehttp/streams',
         'monolog/monolog',
         'symfony/filesystem',
+        'symfony/http-client',
     ], [ErrorType::PROD_DEPENDENCY_ONLY_IN_DEV])
 ;
