@@ -2,11 +2,11 @@
 
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\SkipMigrationException;
 use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\Exception\SkipMigration;
 use Wallabag\Doctrine\WallabagMigration;
 
 /**
@@ -75,7 +75,7 @@ EOD
 
         switch (true) {
             case $platform instanceof SqlitePlatform:
-                throw new SkipMigrationException('Too complex ...');
+                throw new SkipMigration('Too complex ...');
                 break;
             case $platform instanceof MySQLPlatform:
                 $this->addSql('ALTER TABLE ' . $tableName . ' MODIFY quote VARCHAR(255) NOT NULL');

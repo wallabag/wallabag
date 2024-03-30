@@ -2,11 +2,11 @@
 
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\SkipMigrationException;
 use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\Exception\SkipMigration;
 use Wallabag\Doctrine\WallabagMigration;
 
 /**
@@ -98,6 +98,6 @@ final class Version20190510141130 extends WallabagMigration
 
     public function down(Schema $schema): void
     {
-        throw new SkipMigrationException('Too complex ...');
+        throw new SkipMigration('Too complex ...');
     }
 }
