@@ -41,6 +41,9 @@ jobs:
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 
+      - name: "Run Composer dependency analyser"
+        run: "bin/composer-dependency-analyser"
+
       - name: "Run PHP CS Fixer"
         run: "bin/php-cs-fixer fix --verbose --dry-run --format=checkstyle | cs2pr"
 

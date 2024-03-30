@@ -2,8 +2,8 @@
 
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\SkipMigrationException;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\Exception\SkipMigration;
 use Wallabag\Doctrine\WallabagMigration;
 
 /**
@@ -18,6 +18,6 @@ final class Version20200414120227 extends WallabagMigration
 
     public function down(Schema $schema): void
     {
-        throw new SkipMigrationException('Not possible ... ');
+        throw new SkipMigration('Not possible ... ');
     }
 }
