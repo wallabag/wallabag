@@ -77,6 +77,7 @@
         "friendsofsymfony/user-bundle": "^3.2.1",
         "guzzlehttp/guzzle": "^5.3.4",
         "guzzlehttp/psr7": "^2.6.2",
+        "guzzlehttp/streams": "^3.0",
         "html2text/html2text": "^4.3.1",
         "incenteev/composer-parameter-handler": "^2.2",
         "j0k3r/graby": "^2.4.5",

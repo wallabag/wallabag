@@ -75,4 +75,7 @@ return $config
         'wallabag/rulerz-bundle',
         'willdurand/hateoas-bundle',
     ], [ErrorType::UNUSED_DEPENDENCY])
+    ->ignoreErrorsOnPackages([
+        'guzzlehttp/streams',
+    ], [ErrorType::PROD_DEPENDENCY_ONLY_IN_DEV])
 ;
