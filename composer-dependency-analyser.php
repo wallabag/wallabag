@@ -12,6 +12,7 @@ return $config
     ->addPathToScan(__DIR__ . '/migrations', false)
     ->addPathToScan(__DIR__ . '/src', false)
     ->addPathToScan(__DIR__ . '/web', false)
+    ->addPathToScan(__DIR__ . '/fixtures', true)
     ->addPathToScan(__DIR__ . '/tests', true)
     ->ignoreErrorsOnPackages([
         'babdev/pagerfanta-bundle',

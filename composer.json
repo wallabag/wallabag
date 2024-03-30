@@ -200,7 +200,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\Wallabag\\": "tests/"
+            "Tests\\Wallabag\\": "tests/",
+            "Wallabag\\DataFixtures\\": "fixtures/"
         },
         "files": [
             "tests/functions.php"
