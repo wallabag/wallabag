@@ -77,5 +77,6 @@ return $config
     ], [ErrorType::UNUSED_DEPENDENCY])
     ->ignoreErrorsOnPackages([
         'guzzlehttp/streams',
+        'monolog/monolog',
     ], [ErrorType::PROD_DEPENDENCY_ONLY_IN_DEV])
 ;

@@ -88,6 +88,7 @@
         "lcobucci/jwt": "^4.3",
         "mgargano/simplehtmldom": "^1.5",
         "mnapoli/piwik-twig-extension": "^3.0",
+        "monolog/monolog": "^2.9",
         "nelmio/api-doc-bundle": "^4.20.0",
         "nelmio/cors-bundle": "^2.4",
         "ocramius/proxy-manager": "^2.1.1",
