@@ -415,6 +415,8 @@ quickstart:
         export: 匯出設置
         import: 設置匯入
         analytics: 設置資料分析
+        title: 管理
+        description: 作為管理員，你有 wallabag 的各種權限。包括：
     more: 更多…
     support:
         email: 經由電子郵件
