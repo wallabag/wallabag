@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.6.9](https://github.com/wallabag/wallabag/tree/2.6.9)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.8...2.6.9)
+
+### Fixes
+* Fix same domain pagination by @yguedidi in https://github.com/wallabag/wallabag/pull/7266
+* Upgrade PHP dependencies by @yguedidi in https://github.com/wallabag/wallabag/pull/7272
+* Use a proper "how to" for elCurator by @j0k3r in https://github.com/wallabag/wallabag/pull/7323
+
 ## [2.6.8](https://github.com/wallabag/wallabag/tree/2.6.8)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.7...2.6.8)
 
