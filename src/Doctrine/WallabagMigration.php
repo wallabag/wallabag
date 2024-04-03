@@ -41,6 +41,11 @@ abstract class WallabagMigration extends AbstractMigration implements ContainerA
         return false;
     }
 
+    protected function getTablePrefix(): string
+    {
+        return (string) $this->container->getParameter('database_table_prefix');
+    }
+
     protected function getTable($tableName, $unEscaped = false)
     {
         $table = $this->container->getParameter('database_table_prefix') . $tableName;
@@ -56,5 +61,36 @@ abstract class WallabagMigration extends AbstractMigration implements ContainerA
 
         // return escaped table
         return '`' . $table . '`';
+    }
+
+    protected function getForeignKeyName(string $tableName, string $foreignColumnName): string
+    {
+        return $this->generateIdentifierName([$this->getTable($tableName, true), $foreignColumnName], 'fk');
+    }
+
+    protected function getIndexName(string $tableName, $indexedColumnNames): string
+    {
+        $indexedColumnNames = (array) $indexedColumnNames;
+
+        return $this->generateIdentifierName(array_merge([$this->getTable($tableName, true)], $indexedColumnNames), 'idx');
+    }
+
+    protected function getUniqueIndexName(string $tableName, string $indexedColumnName): string
+    {
+        return $this->generateIdentifierName([$this->getTable($tableName, true), $indexedColumnName], 'uniq');
+    }
+
+    /**
+     * @see \Doctrine\DBAL\Schema\AbstractAsset::_generateIdentifierName
+     *
+     * @param string[] $columnNames
+     */
+    protected function generateIdentifierName(array $columnNames, string $prefix = ''): string
+    {
+        $hash = implode('', array_map(static function ($column): string {
+            return dechex(crc32($column));
+        }, $columnNames));
+
+        return strtoupper(substr($prefix . '_' . $hash, 0, $this->platform->getMaxIdentifierLength()));
     }
 }

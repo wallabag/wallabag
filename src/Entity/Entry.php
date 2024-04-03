@@ -21,16 +21,15 @@ use Wallabag\Helper\UrlHasher;
  * @ORM\Entity(repositoryClass="Wallabag\Repository\EntryRepository")
  * @ORM\Table(
  *     name="`entry`",
- *     options={"collate"="utf8mb4_unicode_ci", "charset"="utf8mb4"},
  *     indexes={
- *         @ORM\Index(name="created_at", columns={"created_at"}),
- *         @ORM\Index(name="uid", columns={"uid"}),
- *         @ORM\Index(name="hashed_url_user_id", columns={"user_id", "hashed_url"}, options={"lengths"={null, 40}}),
- *         @ORM\Index(name="hashed_given_url_user_id", columns={"user_id", "hashed_given_url"}, options={"lengths"={null, 40}}),
- *         @ORM\Index(name="user_language", columns={"language", "user_id"}),
- *         @ORM\Index(name="user_archived", columns={"user_id", "is_archived", "archived_at"}),
- *         @ORM\Index(name="user_created", columns={"user_id", "created_at"}),
- *         @ORM\Index(name="user_starred", columns={"user_id", "is_starred", "starred_at"})
+ *         @ORM\Index(columns={"created_at"}),
+ *         @ORM\Index(columns={"uid"}),
+ *         @ORM\Index(columns={"user_id", "hashed_url"}),
+ *         @ORM\Index(columns={"user_id", "hashed_given_url"}),
+ *         @ORM\Index(columns={"language", "user_id"}),
+ *         @ORM\Index(columns={"user_id", "is_archived", "archived_at"}),
+ *         @ORM\Index(columns={"user_id", "created_at"}),
+ *         @ORM\Index(columns={"user_id", "is_starred", "starred_at"})
  *     }
  * )
  * @ORM\HasLifecycleCallbacks()
@@ -279,7 +278,7 @@ class Entry
      *
      * @Exclude
      *
-     * @ORM\Column(name="is_not_parsed", type="boolean")
+     * @ORM\Column(name="is_not_parsed", type="boolean", options={"default": false})
      *
      * @Groups({"entries_for_user", "export_all"})
      */
@@ -1017,11 +1016,9 @@ class Entry
     /**
      * Set isNotParsed.
      *
-     * @param bool $isNotParsed
-     *
      * @return Entry
      */
-    public function setNotParsed($isNotParsed)
+    public function setNotParsed(bool $isNotParsed)
     {
         $this->isNotParsed = $isNotParsed;
 
@@ -1030,10 +1027,8 @@ class Entry
 
     /**
      * Get isNotParsed.
-     *
-     * @return bool
      */
-    public function isNotParsed()
+    public function isNotParsed(): bool
     {
         return $this->isNotParsed;
     }
