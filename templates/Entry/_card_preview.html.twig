@@ -8,10 +8,14 @@
             {% endfor %}
             </ul>
             {% if app.user.config.displayThumbnails %}
-            <a href="{{ path('view', {'id': entry.id}) }}">
                 {% set preview_class_modifier = entry.previewPicture ? '' : ' preview--default' %}
-                <span class="preview{{ preview_class_modifier }}" style="background-image: url({{ entry.previewPicture|default(asset('img/logo-square.svg')) }})"></span>
-            </a>
+                {% if is_granted('VIEW', entry) %}
+                    <a href="{{ path('view', {'id': entry.id}) }}">
+                        <span class="preview{{ preview_class_modifier }}" style="background-image: url({{ entry.previewPicture|default(asset('img/logo-square.svg')) }})"></span>
+                    </a>
+                {% else %}
+                    <span class="preview{{ preview_class_modifier }}" style="background-image: url({{ entry.previewPicture|default(asset('img/logo-square.svg')) }})"></span>
+                {% endif %}
             {% endif %}
         </div>
         {% include "Entry/Card/_content.html.twig" with {'entry': entry, 'withPreview': true} only %}
@@ -20,9 +24,13 @@
     <div class="card-reveal">
         <i class="card-title activator grey-text text-darken-4 material-icons right">clear</i>
         <span class="card-title">
-            <a href="{{ path('view', {'id': entry.id}) }}" title="{{ entry.title|striptags|e('html_attr') }}">
+            {% if is_granted('VIEW', entry) %}
+                <a href="{{ path('view', {'id': entry.id}) }}" title="{{ entry.title|striptags|e('html_attr') }}">
+                    {{ entry.title|striptags|u.truncate(80, '…', false)|raw }}
+                </a>
+            {% else %}
                 {{ entry.title|striptags|u.truncate(80, '…', false)|raw }}
-            </a>
+            {% endif %}
         </span>
 
         <p>{{ entry.content|striptags|slice(0, 250)|raw }}&hellip;</p>

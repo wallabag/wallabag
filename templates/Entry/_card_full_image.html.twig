@@ -7,9 +7,13 @@
             {% endfor %}
             </ul>
             {% if app.user.config.displayThumbnails %}
-            <a href="{{ path('view', {'id': entry.id}) }}">
-                <span class="preview" style="background-image: url({{ entry.previewPicture }})"></span>
-            </a>
+                {% if is_granted('VIEW', entry) %}
+                    <a href="{{ path('view', {'id': entry.id}) }}">
+                        <span class="preview" style="background-image: url({{ entry.previewPicture }})"></span>
+                    </a>
+                {% else %}
+                    <span class="preview" style="background-image: url({{ entry.previewPicture }})"></span>
+                {% endif %}
             {% endif %}
         </div>
         {% include "Entry/Card/_content.html.twig" with {'entry': entry} only %}

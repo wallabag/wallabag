@@ -8,12 +8,14 @@ use Doctrine\ORM\NoResultException;
 use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Spiriit\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\Tag;
@@ -38,8 +40,9 @@ class EntryController extends AbstractController
     private PreparePagerForEntries $preparePagerForEntriesHelper;
     private FilterBuilderUpdaterInterface $filterBuilderUpdater;
     private ContentProxy $contentProxy;
+    private Security $security;
 
-    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher, EntryRepository $entryRepository, Redirect $redirectHelper, PreparePagerForEntries $preparePagerForEntriesHelper, FilterBuilderUpdaterInterface $filterBuilderUpdater, ContentProxy $contentProxy)
+    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher, EntryRepository $entryRepository, Redirect $redirectHelper, PreparePagerForEntries $preparePagerForEntriesHelper, FilterBuilderUpdaterInterface $filterBuilderUpdater, ContentProxy $contentProxy, Security $security)
     {
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
@@ -48,10 +51,12 @@ class EntryController extends AbstractController
         $this->preparePagerForEntriesHelper = $preparePagerForEntriesHelper;
         $this->filterBuilderUpdater = $filterBuilderUpdater;
         $this->contentProxy = $contentProxy;
+        $this->security = $security;
     }
 
     /**
      * @Route("/mass", name="mass_action")
+     * @IsGranted("EDIT_ENTRIES")
      *
      * @return Response
      */
@@ -104,7 +109,9 @@ class EntryController extends AbstractController
                 /** @var Entry * */
                 $entry = $this->entryRepository->findById((int) $id)[0];
 
-                $this->checkUserAction($entry);
+                if (!$this->security->isGranted('EDIT', $entry)) {
+                    throw $this->createAccessDeniedException('You can not access this entry.');
+                }
 
                 if ('toggle-read' === $action) {
                     $entry->toggleArchive();
@@ -135,6 +142,7 @@ class EntryController extends AbstractController
      * @param int $page
      *
      * @Route("/search/{page}", name="search", defaults={"page" = 1})
+     * @IsGranted("LIST_ENTRIES")
      *
      * Default parameter for page is hardcoded (in duplication of the defaults from the Route)
      * because this controller is also called inside the layout template without any page as argument
@@ -164,6 +172,7 @@ class EntryController extends AbstractController
 
     /**
      * @Route("/new-entry", name="new_entry")
+     * @IsGranted("CREATE_ENTRIES")
      *
      * @return Response
      */
@@ -205,6 +214,7 @@ class EntryController extends AbstractController
 
     /**
      * @Route("/bookmarklet", name="bookmarklet")
+     * @IsGranted("CREATE_ENTRIES")
      *
      * @return Response
      */
@@ -228,6 +238,7 @@ class EntryController extends AbstractController
 
     /**
      * @Route("/new", name="new")
+     * @IsGranted("CREATE_ENTRIES")
      *
      * @return Response
      */
@@ -240,13 +251,12 @@ class EntryController extends AbstractController
      * Edit an entry content.
      *
      * @Route("/edit/{id}", requirements={"id" = "\d+"}, name="edit")
+     * @IsGranted("EDIT", subject="entry")
      *
      * @return Response
      */
     public function editEntryAction(Request $request, Entry $entry)
     {
-        $this->checkUserAction($entry);
-
         $form = $this->createForm(EditEntryType::class, $entry);
 
         $form->handleRequest($request);
@@ -274,6 +284,7 @@ class EntryController extends AbstractController
      * @param int $page
      *
      * @Route("/all/list/{page}", name="all", defaults={"page" = "1"})
+     * @IsGranted("LIST_ENTRIES")
      *
      * @return Response
      */
@@ -288,6 +299,7 @@ class EntryController extends AbstractController
      * @param int $page
      *
      * @Route("/unread/list/{page}", name="unread", defaults={"page" = "1"})
+     * @IsGranted("LIST_ENTRIES")
      *
      * @return Response
      */
@@ -307,6 +319,7 @@ class EntryController extends AbstractController
      * @param int $page
      *
      * @Route("/archive/list/{page}", name="archive", defaults={"page" = "1"})
+     * @IsGranted("LIST_ENTRIES")
      *
      * @return Response
      */
@@ -321,6 +334,7 @@ class EntryController extends AbstractController
      * @param int $page
      *
      * @Route("/starred/list/{page}", name="starred", defaults={"page" = "1"})
+     * @IsGranted("LIST_ENTRIES")
      *
      * @return Response
      */
@@ -335,6 +349,7 @@ class EntryController extends AbstractController
      * @param int $page
      *
      * @Route("/untagged/list/{page}", name="untagged", defaults={"page" = "1"})
+     * @IsGranted("LIST_ENTRIES")
      *
      * @return Response
      */
@@ -349,6 +364,7 @@ class EntryController extends AbstractController
      * @param int $page
      *
      * @Route("/annotated/list/{page}", name="annotated", defaults={"page" = "1"})
+     * @IsGranted("LIST_ENTRIES")
      *
      * @return Response
      */
@@ -361,6 +377,7 @@ class EntryController extends AbstractController
      * Shows random entry depending on the given type.
      *
      * @Route("/{type}/random", name="random_entry", requirements={"type": "unread|starred|archive|untagged|annotated|all"})
+     * @IsGranted("LIST_ENTRIES")
      *
      * @return RedirectResponse
      */
@@ -382,13 +399,12 @@ class EntryController extends AbstractController
      * Shows entry content.
      *
      * @Route("/view/{id}", requirements={"id" = "\d+"}, name="view")
+     * @IsGranted("VIEW", subject="entry")
      *
      * @return Response
      */
     public function viewAction(Entry $entry)
     {
-        $this->checkUserAction($entry);
-
         return $this->render(
             'Entry/entry.html.twig',
             ['entry' => $entry]
@@ -400,13 +416,12 @@ class EntryController extends AbstractController
      * Refetch content from the website and make it readable again.
      *
      * @Route("/reload/{id}", requirements={"id" = "\d+"}, name="reload_entry")
+     * @IsGranted("RELOAD", subject="entry")
      *
      * @return RedirectResponse
      */
     public function reloadAction(Entry $entry)
     {
-        $this->checkUserAction($entry);
-
         $this->updateEntry($entry, 'entry_reloaded');
 
         // if refreshing entry failed, don't save it
@@ -429,13 +444,12 @@ class EntryController extends AbstractController
      * Changes read status for an entry.
      *
      * @Route("/archive/{id}", requirements={"id" = "\d+"}, name="archive_entry")
+     * @IsGranted("ARCHIVE", subject="entry")
      *
      * @return RedirectResponse
      */
     public function toggleArchiveAction(Request $request, Entry $entry)
     {
-        $this->checkUserAction($entry);
-
         $entry->toggleArchive();
         $this->entityManager->flush();
 
@@ -458,13 +472,12 @@ class EntryController extends AbstractController
      * Changes starred status for an entry.
      *
      * @Route("/star/{id}", requirements={"id" = "\d+"}, name="star_entry")
+     * @IsGranted("STAR", subject="entry")
      *
      * @return RedirectResponse
      */
     public function toggleStarAction(Request $request, Entry $entry)
     {
-        $this->checkUserAction($entry);
-
         $entry->toggleStar();
         $entry->updateStar($entry->isStarred());
         $this->entityManager->flush();
@@ -488,13 +501,12 @@ class EntryController extends AbstractController
      * Deletes entry and redirect to the homepage or the last viewed page.
      *
      * @Route("/delete/{id}", requirements={"id" = "\d+"}, name="delete_entry")
+     * @IsGranted("DELETE", subject="entry")
      *
      * @return RedirectResponse
      */
     public function deleteEntryAction(Request $request, Entry $entry)
     {
-        $this->checkUserAction($entry);
-
         // generates the view url for this entry to check for redirection later
         // to avoid redirecting to the deleted entry. Ugh.
         $url = $this->generateUrl(
@@ -526,13 +538,12 @@ class EntryController extends AbstractController
      * Get public URL for entry (and generate it if necessary).
      *
      * @Route("/share/{id}", requirements={"id" = "\d+"}, name="share")
+     * @IsGranted("SHARE", subject="entry")
      *
      * @return Response
      */
     public function shareAction(Entry $entry)
     {
-        $this->checkUserAction($entry);
-
         if (null === $entry->getUid()) {
             $entry->generateUid();
 
@@ -549,13 +560,12 @@ class EntryController extends AbstractController
      * Disable public sharing for an entry.
      *
      * @Route("/share/delete/{id}", requirements={"id" = "\d+"}, name="delete_share")
+     * @IsGranted("UNSHARE", subject="entry")
      *
      * @return Response
      */
     public function deleteShareAction(Entry $entry)
     {
-        $this->checkUserAction($entry);
-
         $entry->cleanUid();
 
         $this->entityManager->persist($entry);
@@ -571,6 +581,7 @@ class EntryController extends AbstractController
      *
      * @Route("/share/{uid}", requirements={"uid" = ".+"}, name="share_entry")
      * @Cache(maxage="25200", smaxage="25200", public=true)
+     * @IsGranted("PUBLIC_ACCESS")
      *
      * @return Response
      */
@@ -592,6 +603,7 @@ class EntryController extends AbstractController
      * @param int $page
      *
      * @Route("/domain/{id}/{page}", requirements={"id" = ".+"}, defaults={"page" = 1}, name="same_domain")
+     * @IsGranted("LIST_ENTRIES")
      *
      * @return Response
      */
@@ -711,16 +723,6 @@ class EntryController extends AbstractController
         }
 
         $this->addFlash('notice', $message);
-    }
-
-    /**
-     * Check if the logged user can manage the given entry.
-     */
-    private function checkUserAction(Entry $entry)
-    {
-        if (null === $this->getUser() || $this->getUser()->getId() !== $entry->getUser()->getId()) {
-            throw $this->createAccessDeniedException('You can not access this entry.');
-        }
     }
 
     /**

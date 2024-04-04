@@ -11,9 +11,11 @@
 
     <div class="row">
         <ul class="card-tag-labels">
-            <li class="chip">
-                <a href="{{ path('untagged') }}">{{ 'tag.list.untagged'|trans }} ({{ nbEntriesUntagged }})</a>
-            </li>
+            {% if is_granted('LIST_ENTRIES') %}
+                <li class="chip">
+                    <a href="{{ path('untagged') }}">{{ 'tag.list.untagged'|trans }} ({{ nbEntriesUntagged }})</a>
+                </li>
+            {% endif %}
             {% for tag in tags %}
                 <li title="{{ tag.label }} ({{ tag.nbEntries }})" id="tag-{{ tag.id }}" class="chip">
                     <a href="{{ path('tag_entries', {'slug': tag.slug}) }}" class="card-tag-link" data-handle="tag-link">
