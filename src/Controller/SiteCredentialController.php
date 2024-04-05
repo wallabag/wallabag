@@ -4,6 +4,7 @@ namespace Wallabag\Controller;
 
 use Craue\ConfigBundle\Util\Config;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -41,6 +42,7 @@ class SiteCredentialController extends AbstractController
      * Lists all User entities.
      *
      * @Route("/", name="site_credentials_index", methods={"GET"})
+     * @IsGranted("LIST_SITE_CREDENTIALS")
      */
     public function indexAction(SiteCredentialRepository $repository)
     {
@@ -57,6 +59,7 @@ class SiteCredentialController extends AbstractController
      * Creates a new site credential entity.
      *
      * @Route("/new", name="site_credentials_new", methods={"GET", "POST"})
+     * @IsGranted("CREATE_SITE_CREDENTIALS")
      *
      * @return Response
      */
@@ -94,14 +97,13 @@ class SiteCredentialController extends AbstractController
      * Displays a form to edit an existing site credential entity.
      *
      * @Route("/{id}/edit", name="site_credentials_edit", methods={"GET", "POST"})
+     * @IsGranted("EDIT", subject="siteCredential")
      *
      * @return Response
      */
     public function editAction(Request $request, SiteCredential $siteCredential)
     {
         $this->isSiteCredentialsEnabled();
-
-        $this->checkUserAction($siteCredential);
 
         $deleteForm = $this->createDeleteForm($siteCredential);
         $editForm = $this->createForm(SiteCredentialType::class, $siteCredential);
@@ -133,14 +135,13 @@ class SiteCredentialController extends AbstractController
      * Deletes a site credential entity.
      *
      * @Route("/{id}", name="site_credentials_delete", methods={"DELETE"})
+     * @IsGranted("DELETE", subject="siteCredential")
      *
      * @return RedirectResponse
      */
     public function deleteAction(Request $request, SiteCredential $siteCredential)
     {
         $this->isSiteCredentialsEnabled();
-
-        $this->checkUserAction($siteCredential);
 
         $form = $this->createDeleteForm($siteCredential);
         $form->handleRequest($request);
@@ -182,17 +183,5 @@ class SiteCredentialController extends AbstractController
             ->setMethod('DELETE')
             ->getForm()
         ;
-    }
-
-    /**
-     * Check if the logged user can manage the given site credential.
-     *
-     * @param SiteCredential $siteCredential The site credential entity
-     */
-    private function checkUserAction(SiteCredential $siteCredential)
-    {
-        if (null === $this->getUser() || $this->getUser()->getId() !== $siteCredential->getUser()->getId()) {
-            throw $this->createAccessDeniedException('You can not access this site credential.');
-        }
     }
 }
