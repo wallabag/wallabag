@@ -8,6 +8,7 @@ use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\Persistence\ManagerRegistry;
+use GuzzleHttp\Psr7\Uri;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Command\LazyCommand;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -36,50 +37,57 @@ class InstallCommandTest extends WallabagTestCase
 
         /** @var Connection $connection */
         $connection = $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection();
-        if ($connection->getDatabasePlatform() instanceof PostgreSQLPlatform) {
-            /*
-             * LOG:  statement: CREATE DATABASE "wallabag"
-             * ERROR:  source database "template1" is being accessed by other users
-             * DETAIL:  There is 1 other session using the database.
-             * STATEMENT:  CREATE DATABASE "wallabag"
-             * FATAL:  database "wallabag" does not exist
-             *
-             * http://stackoverflow.com/a/14374832/569101
-             */
-            $this->markTestSkipped('PostgreSQL spotted: can\'t find a good way to drop current database, skipping.');
-        }
+
+        $originalDatabaseUrl = $this->getTestClient()->getContainer()->getParameter('env(DATABASE_URL)');
+        $dbnameSuffix = $this->getTestClient()->getContainer()->getParameter('wallabag_dbname_suffix');
+        $tmpDatabaseName = 'wallabag_' . bin2hex(random_bytes(5));
 
         if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {
-            // Environnement variable useful only for sqlite to avoid the error "attempt to write a readonly database"
-            // We can't define always this environnement variable because pdo_mysql seems to use it
-            // and we have the error:
-            // SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax;
-            // check the manual that corresponds to your MariaDB server version for the right syntax to use
-            // near '/tmp/wallabag_testTYj1kp' at line 1
-            $databasePath = tempnam(sys_get_temp_dir(), 'wallabag_test');
-            putenv("DATABASE_URL=sqlite:///$databasePath?charset=utf8");
-
-            // The environnement has been changed, recreate the client in order to update connection
-            parent::setUp();
+            $tmpDatabaseUrl = str_replace('wallabag' . $dbnameSuffix . '.sqlite', $tmpDatabaseName . $dbnameSuffix . '.sqlite', $originalDatabaseUrl);
+        } else {
+            $tmpDatabaseUrl = (string) (new Uri($originalDatabaseUrl))->withPath($tmpDatabaseName);
         }
 
-        $this->resetDatabase($this->getTestClient());
+        putenv("DATABASE_URL=$tmpDatabaseUrl");
+
+        if ($connection->getDatabasePlatform() instanceof PostgreSQLPlatform) {
+            // PostgreSQL requires that the database exists before connecting to it
+            $tmpTestDatabaseName = $tmpDatabaseName . $dbnameSuffix;
+            $connection->executeQuery('CREATE DATABASE ' . $tmpTestDatabaseName);
+        }
+
+        // The environnement has been changed, recreate the client in order to update connection
+        $this->getNewClient();
     }
 
     protected function tearDown(): void
     {
         $databaseUrl = getenv('DATABASE_URL');
-        $databasePath = parse_url($databaseUrl, \PHP_URL_PATH);
-        // Remove the real environnement variable
-        putenv('DATABASE_URL');
 
-        if ($databasePath && file_exists($databasePath)) {
-            unlink($databasePath);
+        /** @var Connection $connection */
+        $connection = $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection();
+
+        if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {
+            // Remove the real environnement variable
+            putenv('DATABASE_URL');
+
+            $databasePath = parse_url($databaseUrl, \PHP_URL_PATH);
+
+            if (file_exists($databasePath)) {
+                unlink($databasePath);
+            }
         } else {
+            $testDatabaseName = $connection->getDatabase();
+            $connection->close();
+
+            // Remove the real environnement variable
+            putenv('DATABASE_URL');
+
             // Create a new client to avoid the error:
             // Transaction commit failed because the transaction has been marked for rollback only.
-            $client = $this->getNewClient();
-            $this->resetDatabase($client);
+            $this->getNewClient();
+
+            $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->executeQuery('DROP DATABASE ' . $testDatabaseName);
         }
 
         parent::tearDown();
@@ -87,12 +95,9 @@ class InstallCommandTest extends WallabagTestCase
 
     public function testRunInstallCommand()
     {
-        $command = $this->getCommand();
+        $this->setupDatabase();
 
-        // enable calling other commands for MySQL only because rollback isn't supported
-        if (!$this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof MySQLPlatform) {
-            $command->disableRunOtherCommands();
-        }
+        $command = $this->getCommand();
 
         $tester = new CommandTester($command);
         $tester->setInputs([
@@ -112,12 +117,9 @@ class InstallCommandTest extends WallabagTestCase
 
     public function testRunInstallCommandWithReset()
     {
-        if ($this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof MySQLPlatform) {
-            $this->markTestSkipped('Rollback are not properly handled for MySQL, skipping.');
-        }
+        $this->setupDatabase();
 
         $command = $this->getCommand();
-        $command->disableRunOtherCommands();
 
         $tester = new CommandTester($command);
         $tester->setInputs([
@@ -140,10 +142,10 @@ class InstallCommandTest extends WallabagTestCase
         $this->assertStringContainsString('Dropping database, creating database and schema, clearing the cache', $tester->getDisplay());
     }
 
-    public function testRunInstallCommandWithDatabaseRemoved()
+    public function testRunInstallCommandWithNonExistingDatabase()
     {
-        if ($this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof MySQLPlatform) {
-            $this->markTestSkipped('Rollback are not properly handled for MySQL, skipping.');
+        if ($this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof PostgreSQLPlatform) {
+            $this->markTestSkipped('PostgreSQL spotted: PostgreSQL requires that the database exists before connecting to it, skipping.');
         }
 
         // skipped SQLite check when database is removed because while testing for the connection,
@@ -153,15 +155,6 @@ class InstallCommandTest extends WallabagTestCase
         }
 
         $application = new Application($this->getTestClient()->getKernel());
-
-        // drop database first, so the install command won't ask to reset things
-        $command = $application->find('doctrine:database:drop');
-        $command->run(new ArrayInput([
-            '--force' => true,
-        ]), new NullOutput());
-
-        // start a new application to avoid lagging connexion to pgsql
-        $this->getNewClient();
 
         $command = $this->getCommand();
 
@@ -185,12 +178,9 @@ class InstallCommandTest extends WallabagTestCase
 
     public function testRunInstallCommandChooseResetSchema()
     {
-        if ($this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof MySQLPlatform) {
-            $this->markTestSkipped('Rollback are not properly handled for MySQL, skipping.');
-        }
+        $this->setupDatabase();
 
         $command = $this->getCommand();
-        $command->disableRunOtherCommands();
 
         $tester = new CommandTester($command);
         $tester->setInputs([
@@ -210,28 +200,7 @@ class InstallCommandTest extends WallabagTestCase
 
     public function testRunInstallCommandChooseNothing()
     {
-        /*
-         *  [PHPUnit\Framework\Error\Warning (2)]
-         *  filemtime(): stat failed for /home/runner/work/wallabag/wallabag/var/cache/tes_/ContainerNVNxA24/appAppKernelTestDebugContainer.php
-         *
-         * I don't know from where the "/tes_/" come from, it should be "/test/" instead ...
-         */
-        if ($this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof MySQLPlatform) {
-            $this->markTestSkipped('That test is failing when using MySQL when clearing the cache (see code comment)');
-        }
-
         $application = new Application($this->getTestClient()->getKernel());
-
-        // drop database first, so the install command won't ask to reset things
-        $command = $application->find('doctrine:database:drop');
-        $command->run(new ArrayInput([
-            '--force' => true,
-        ]), new NullOutput());
-
-        $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->close();
-
-        $command = $application->find('doctrine:database:create');
-        $command->run(new ArrayInput([]), new NullOutput());
 
         $command = $this->getCommand();
 
@@ -247,17 +216,24 @@ class InstallCommandTest extends WallabagTestCase
         $this->assertStringContainsString('Administration setup.', $tester->getDisplay());
         $this->assertStringContainsString('Config setup.', $tester->getDisplay());
 
-        $this->assertStringContainsString('Creating schema', $tester->getDisplay());
+        $databasePlatform = $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform();
+
+        if ($databasePlatform instanceof SqlitePlatform || $databasePlatform instanceof PostgreSQLPlatform) {
+            // SQLite and PostgreSQL always have the database created, so we create the schema only
+            $this->assertStringContainsString('Creating schema', $tester->getDisplay());
+        }
+
+        if ($databasePlatform instanceof MySQLPlatform) {
+            // MySQL can start with a non-existing database, so we create both the database and the schema
+            $this->assertStringContainsString('Creating database and schema', $tester->getDisplay());
+        }
     }
 
     public function testRunInstallCommandNoInteraction()
     {
-        if ($this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection()->getDatabasePlatform() instanceof MySQLPlatform) {
-            $this->markTestSkipped('Rollback are not properly handled for MySQL, skipping.');
-        }
+        $this->setupDatabase();
 
         $command = $this->getCommand();
-        $command->disableRunOtherCommands();
 
         $tester = new CommandTester($command);
         $tester->execute([], [
@@ -283,5 +259,37 @@ class InstallCommandTest extends WallabagTestCase
         \assert($command instanceof InstallCommand);
 
         return $command;
+    }
+
+    private function setupDatabase()
+    {
+        $application = new Application($this->getTestClient()->getKernel());
+        $application->setAutoExit(false);
+
+        $application->run(new ArrayInput([
+            'command' => 'doctrine:database:create',
+            '--no-interaction' => true,
+            '--env' => 'test',
+        ]), new NullOutput());
+
+        $application->run(new ArrayInput([
+            'command' => 'doctrine:migrations:migrate',
+            '--no-interaction' => true,
+            '--env' => 'test',
+        ]), new NullOutput());
+
+        $application->run(new ArrayInput([
+            'command' => 'doctrine:fixtures:load',
+            '--no-interaction' => true,
+            '--env' => 'test',
+        ]), new NullOutput());
+
+        /*
+         * Recreate client to avoid error:
+         *
+         * [Doctrine\DBAL\ConnectionException]
+         * Transaction commit failed because the transaction has been marked for rollback only.
+         */
+        $this->getNewClient();
     }
 }
