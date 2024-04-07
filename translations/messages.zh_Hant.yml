@@ -409,6 +409,7 @@ quickstart:
         description: 為了令應用程式符合你的需要，得先查看 wallabag 的設置。
     intro:
         title: 歡迎使用 wallabag！
+        paragraph_2: 跟著我們吧！
     page_title: 快速開始
     admin:
         new_user: 新增使用者
@@ -417,6 +418,7 @@ quickstart:
         analytics: 設置資料分析
         title: 管理
         description: 作為管理員，你有 wallabag 的各種權限。包括：
+        sharing: 啟用部分用於分享文章的參數
     more: 更多…
     support:
         email: 經由電子郵件
