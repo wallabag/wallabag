@@ -5708,16 +5708,16 @@
         },
         {
             "name": "nelmio/api-doc-bundle",
-            "version": "v4.25.1",
+            "version": "4.25.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/NelmioApiDocBundle.git",
-                "reference": "f594e600bf5943008562be35c4acd60957434d22"
+                "reference": "fc5d60d74b63806f7d6bb80b8393db1a12ae2dbc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/f594e600bf5943008562be35c4acd60957434d22",
-                "reference": "f594e600bf5943008562be35c4acd60957434d22",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/fc5d60d74b63806f7d6bb80b8393db1a12ae2dbc",
+                "reference": "fc5d60d74b63806f7d6bb80b8393db1a12ae2dbc",
                 "shasum": ""
             },
             "require": {
@@ -5751,8 +5751,11 @@
                 "friendsofsymfony/rest-bundle": "^2.8|^3.0",
                 "jms/serializer": "^1.14|^3.0",
                 "jms/serializer-bundle": "^2.3|^3.0|^4.0|^5.0",
+                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan-phpunit": "^1.3",
+                "phpstan/phpstan-strict-rules": "^1.5",
+                "phpstan/phpstan-symfony": "^1.3",
                 "phpunit/phpunit": "^8.5|^9.6",
-                "sensio/framework-extra-bundle": "^5.4|^6.0",
                 "symfony/asset": "^5.4|^6.0|^7.0",
                 "symfony/browser-kit": "^5.4|^6.0|^7.0",
                 "symfony/cache": "^5.4|^6.0|^7.0",
@@ -5814,9 +5817,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nelmio/NelmioApiDocBundle/issues",
-                "source": "https://github.com/nelmio/NelmioApiDocBundle/tree/v4.25.1"
+                "source": "https://github.com/nelmio/NelmioApiDocBundle/tree/4.25.2"
             },
-            "time": "2024-04-04T08:16:08+00:00"
+            "time": "2024-04-06T12:08:11+00:00"
         },
         {
             "name": "nelmio/cors-bundle",
