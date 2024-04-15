@@ -1550,7 +1550,7 @@ class EntryControllerTest extends WallabagTestCase
                 'zh_CN',
             ],
             'pt_BR' => [
-                'https://esportes.r7.com/lance/futebol/victor-hugo-e-matheus-franca-devem-desfalcar-flamengo-no-carioca-22112022',
+                'https://esportes.r7.com/lance/futebol/victor-hugo-e-matheus-franca-devem-desfalcar-flamengo-no-carioca-22112022/',
                 'pt_BR',
             ],
             'es-ES' => [
