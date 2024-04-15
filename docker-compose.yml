@@ -50,7 +50,7 @@ services:
     #     env_file:
     #         - ./docker/postgres/env
     #     healthcheck:
-    #         test: ["CMD-SHELL", "pg_isready -q || exit 1"]
+    #         test: ["CMD-SHELL", "pg_isready -U wallabag -q || exit 1"]
     #         interval: 10s
     #         timeout: 3s
     #         retries: 3
