@@ -78,6 +78,9 @@ class Entry
      * @var string
      *
      * @Assert\NotBlank()
+     * @Assert\Url(
+     *     message = "The url '{{ value }}' is not a valid url",
+     * )
      * @ORM\Column(name="url", type="text", nullable=true)
      *
      * @Groups({"entries_for_user", "export_all"})
