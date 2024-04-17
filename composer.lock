@@ -13909,16 +13909,16 @@
         },
         {
             "name": "symfony/twig-bridge",
-            "version": "v5.4.35",
+            "version": "v5.4.38",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/twig-bridge.git",
-                "reference": "e6ae362b7c4f1d6e99f61f59b0c93b9f027b4c73"
+                "reference": "5984ba96a504524ebc51bd2309a66124599be6ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/twig-bridge/zipball/e6ae362b7c4f1d6e99f61f59b0c93b9f027b4c73",
-                "reference": "e6ae362b7c4f1d6e99f61f59b0c93b9f027b4c73",
+                "url": "https://api.github.com/repos/symfony/twig-bridge/zipball/5984ba96a504524ebc51bd2309a66124599be6ba",
+                "reference": "5984ba96a504524ebc51bd2309a66124599be6ba",
                 "shasum": ""
             },
             "require": {
@@ -14010,7 +14010,7 @@
             "description": "Provides integration for Twig with various Symfony components",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/twig-bridge/tree/v5.4.35"
+                "source": "https://github.com/symfony/twig-bridge/tree/v5.4.38"
             },
             "funding": [
                 {
@@ -14026,20 +14026,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-30T08:00:51+00:00"
+            "time": "2024-03-27T20:05:04+00:00"
         },
         {
             "name": "symfony/twig-bundle",
-            "version": "v5.4.35",
+            "version": "v5.4.36",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/twig-bundle.git",
-                "reference": "f59b91e23c7c790e71a187c3fa4aefdc5391d682"
+                "reference": "37a338733c456fc8cd056c2e0f20bae020cbec70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/twig-bundle/zipball/f59b91e23c7c790e71a187c3fa4aefdc5391d682",
-                "reference": "f59b91e23c7c790e71a187c3fa4aefdc5391d682",
+                "url": "https://api.github.com/repos/symfony/twig-bundle/zipball/37a338733c456fc8cd056c2e0f20bae020cbec70",
+                "reference": "37a338733c456fc8cd056c2e0f20bae020cbec70",
                 "shasum": ""
             },
             "require": {
@@ -14100,7 +14100,7 @@
             "description": "Provides a tight integration of Twig into the Symfony full-stack framework",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/twig-bundle/tree/v5.4.35"
+                "source": "https://github.com/symfony/twig-bundle/tree/v5.4.36"
             },
             "funding": [
                 {
@@ -14116,7 +14116,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-23T13:51:25+00:00"
+            "time": "2024-02-15T11:19:14+00:00"
         },
         {
             "name": "symfony/validator",
@@ -14731,34 +14731,34 @@
         },
         {
             "name": "twig/extra-bundle",
-            "version": "v3.8.0",
+            "version": "v3.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/twig-extra-bundle.git",
-                "reference": "32807183753de0388c8e59f7ac2d13bb47311140"
+                "reference": "3a68ffc7747ecc25823cabe2127710ced516a16a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/twig-extra-bundle/zipball/32807183753de0388c8e59f7ac2d13bb47311140",
-                "reference": "32807183753de0388c8e59f7ac2d13bb47311140",
+                "url": "https://api.github.com/repos/twigphp/twig-extra-bundle/zipball/3a68ffc7747ecc25823cabe2127710ced516a16a",
+                "reference": "3a68ffc7747ecc25823cabe2127710ced516a16a",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2.5",
-                "symfony/framework-bundle": "^5.4|^6.0|^7.0",
-                "symfony/twig-bundle": "^5.4|^6.0|^7.0",
+                "symfony/framework-bundle": "^5.4|^6.4|^7.0",
+                "symfony/twig-bundle": "^5.4|^6.4|^7.0",
                 "twig/twig": "^3.0"
             },
             "require-dev": {
                 "league/commonmark": "^1.0|^2.0",
                 "symfony/phpunit-bridge": "^6.4|^7.0",
                 "twig/cache-extra": "^3.0",
-                "twig/cssinliner-extra": "^2.12|^3.0",
-                "twig/html-extra": "^2.12|^3.0",
-                "twig/inky-extra": "^2.12|^3.0",
-                "twig/intl-extra": "^2.12|^3.0",
-                "twig/markdown-extra": "^2.12|^3.0",
-                "twig/string-extra": "^2.12|^3.0"
+                "twig/cssinliner-extra": "^3.0",
+                "twig/html-extra": "^3.0",
+                "twig/inky-extra": "^3.0",
+                "twig/intl-extra": "^3.0",
+                "twig/markdown-extra": "^3.0",
+                "twig/string-extra": "^3.0"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -14789,7 +14789,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/twigphp/twig-extra-bundle/tree/v3.8.0"
+                "source": "https://github.com/twigphp/twig-extra-bundle/tree/v3.9.0"
             },
             "funding": [
                 {
@@ -14801,25 +14801,25 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-11-21T14:02:01+00:00"
+            "time": "2024-02-07T08:24:24+00:00"
         },
         {
             "name": "twig/string-extra",
-            "version": "v3.8.0",
+            "version": "v3.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/string-extra.git",
-                "reference": "b0c9037d96baff79abe368dc092a59b726517548"
+                "reference": "5ff1c41366aa003d45f6e2707c5d698c1b37ff99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/string-extra/zipball/b0c9037d96baff79abe368dc092a59b726517548",
-                "reference": "b0c9037d96baff79abe368dc092a59b726517548",
+                "url": "https://api.github.com/repos/twigphp/string-extra/zipball/5ff1c41366aa003d45f6e2707c5d698c1b37ff99",
+                "reference": "5ff1c41366aa003d45f6e2707c5d698c1b37ff99",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2.5",
-                "symfony/string": "^5.4|^6.0|^7.0",
+                "symfony/string": "^5.4|^6.4|^7.0",
                 "symfony/translation-contracts": "^1.1|^2|^3",
                 "twig/twig": "^3.0"
             },
@@ -14856,7 +14856,7 @@
                 "unicode"
             ],
             "support": {
-                "source": "https://github.com/twigphp/string-extra/tree/v3.8.0"
+                "source": "https://github.com/twigphp/string-extra/tree/v3.9.0"
             },
             "funding": [
                 {
@@ -14868,7 +14868,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-11-21T14:02:01+00:00"
+            "time": "2024-02-10T08:52:03+00:00"
         },
         {
             "name": "twig/twig",
