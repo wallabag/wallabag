@@ -29,6 +29,9 @@ updates:
     symfony-dependencies:
       patterns:
         - "symfony/*"
+    twig-dependencies:
+      patterns:
+        - "twig/*"
   reviewers:
   - j0k3r
   - yguedidi
