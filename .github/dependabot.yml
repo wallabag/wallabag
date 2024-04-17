@@ -32,6 +32,9 @@ updates:
     twig-dependencies:
       patterns:
         - "twig/*"
+    phpstan-dependencies:
+      patterns:
+        - "phpstan/*"
   reviewers:
   - j0k3r
   - yguedidi
