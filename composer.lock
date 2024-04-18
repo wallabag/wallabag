@@ -18774,16 +18774,16 @@
         },
         {
             "name": "shipmonk/composer-dependency-analyser",
-            "version": "1.5.1",
+            "version": "1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shipmonk-rnd/composer-dependency-analyser.git",
-                "reference": "82b9f82df2054496c1422dca31ae44a50b98484e"
+                "reference": "701b48519fd097732635d0083d5731724e413120"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shipmonk-rnd/composer-dependency-analyser/zipball/82b9f82df2054496c1422dca31ae44a50b98484e",
-                "reference": "82b9f82df2054496c1422dca31ae44a50b98484e",
+                "url": "https://api.github.com/repos/shipmonk-rnd/composer-dependency-analyser/zipball/701b48519fd097732635d0083d5731724e413120",
+                "reference": "701b48519fd097732635d0083d5731724e413120",
                 "shasum": ""
             },
             "require": {
@@ -18796,6 +18796,7 @@
                 "ergebnis/composer-normalize": "^2.19",
                 "ext-dom": "*",
                 "ext-libxml": "*",
+                "phpcompatibility/php-compatibility": "^9.3",
                 "phpstan/phpstan": "^1.10.63",
                 "phpstan/phpstan-phpunit": "^1.1.1",
                 "phpstan/phpstan-strict-rules": "^1.2.3",
@@ -18833,9 +18834,9 @@
             ],
             "support": {
                 "issues": "https://github.com/shipmonk-rnd/composer-dependency-analyser/issues",
-                "source": "https://github.com/shipmonk-rnd/composer-dependency-analyser/tree/1.5.1"
+                "source": "https://github.com/shipmonk-rnd/composer-dependency-analyser/tree/1.5.2"
             },
-            "time": "2024-04-11T12:32:42+00:00"
+            "time": "2024-04-17T08:30:48+00:00"
         },
         {
             "name": "symfony/browser-kit",
