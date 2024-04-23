@@ -18774,16 +18774,16 @@
         },
         {
             "name": "shipmonk/composer-dependency-analyser",
-            "version": "1.5.2",
+            "version": "1.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shipmonk-rnd/composer-dependency-analyser.git",
-                "reference": "701b48519fd097732635d0083d5731724e413120"
+                "reference": "00b5023bcc0c9c4f34c9246b3faf5b780e144622"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shipmonk-rnd/composer-dependency-analyser/zipball/701b48519fd097732635d0083d5731724e413120",
-                "reference": "701b48519fd097732635d0083d5731724e413120",
+                "url": "https://api.github.com/repos/shipmonk-rnd/composer-dependency-analyser/zipball/00b5023bcc0c9c4f34c9246b3faf5b780e144622",
+                "reference": "00b5023bcc0c9c4f34c9246b3faf5b780e144622",
                 "shasum": ""
             },
             "require": {
@@ -18834,9 +18834,9 @@
             ],
             "support": {
                 "issues": "https://github.com/shipmonk-rnd/composer-dependency-analyser/issues",
-                "source": "https://github.com/shipmonk-rnd/composer-dependency-analyser/tree/1.5.2"
+                "source": "https://github.com/shipmonk-rnd/composer-dependency-analyser/tree/1.5.3"
             },
-            "time": "2024-04-17T08:30:48+00:00"
+            "time": "2024-04-22T13:28:23+00:00"
         },
         {
             "name": "symfony/browser-kit",
