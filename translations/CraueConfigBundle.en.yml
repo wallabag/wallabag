@@ -16,6 +16,7 @@ share_mail: Enable share by e-mail
 share_shaarli: Enable sharing to Shaarli
 share_twitter: Enable sharing to Twitter
 share_unmark: Enable sharing to Unmark.it
+share_linkding: Enable sharing to Linkding
 show_printlink: Display a link to print content
 wallabag_support_url: Support URL for wallabag
 entry: article

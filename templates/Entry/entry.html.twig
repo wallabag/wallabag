@@ -138,7 +138,7 @@
                 </li>
             </ul>
         </li>
-        {% if craue_setting('share_public') or craue_setting('share_twitter') or craue_setting('share_shaarli') or craue_setting('share_diaspora') or craue_setting('share_unmark') or craue_setting('share_mail') %}
+        {% if craue_setting('share_public') or craue_setting('share_twitter') or craue_setting('share_shaarli') or craue_setting('share_diaspora') or craue_setting('share_unmark') or craue_setting('share_linkding') or craue_setting('share_mail') %}
         <li class="bold">
             <a class="waves-effect collapsible-header">
                 <i class="material-icons small">share</i>
@@ -187,6 +187,13 @@
                         <li>
                             <a href="{{ craue_setting('unmark_url') }}/mark/add?url={{ entry.url|url_encode }}&amp;title={{ entry.title|striptags|url_encode }}&amp;v=6" target="_blank" rel="noopener" class="tool icon-image unmark" title="unmark">
                                 <span>unmark.it</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if craue_setting('share_linkding') %}
+                        <li>
+                            <a href="{{ craue_setting('linkding_url') }}/bookmarks/new?url={{ entry.url|url_encode }}" target="_blank" rel="noopener" class="tool icon-image linkding" title="linkding">
+                                <span>linkding</span>
                             </a>
                         </li>
                     {% endif %}

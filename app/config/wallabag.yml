@@ -67,6 +67,14 @@ parameters:
             value: https://myshaarli.com
             section: entry
         -
+            name: share_linkding
+            value: 1
+            section: entry
+        -
+            name: linkding_url
+            value: https://linkding.example.com
+            section: entry
+        -
             name: share_mail
             value: 1
             section: entry
