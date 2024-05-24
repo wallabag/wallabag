@@ -32,3 +32,4 @@ api_user_registration: Włącz rejestrację użytkownika przez API
 unmark_url: Odznacz URL, jeżeli usługa jest włączona
 store_article_headers: Włącz, jeżeli wallabag ma zapisywać nagłówki HTTP dla każdego artykułu
 shaarli_share_origin_url: Włącz udostępnianie oryginalnego adresu URL do Shaarli, jeśli usługa jest włączona
+share_linkding: Włącz udostępnianie dla Linkding
