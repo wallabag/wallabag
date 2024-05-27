@@ -5042,10 +5042,10 @@ stylelint-scss@^5.3.0, stylelint-scss@^5.3.2:
     postcss-selector-parser "^6.0.13"
     postcss-value-parser "^4.2.0"
 
-stylelint-webpack-plugin@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/stylelint-webpack-plugin/-/stylelint-webpack-plugin-5.0.0.tgz#6315ee028c20d92be60ef2cedba6091c8107735d"
-  integrity sha512-f56OmfvIYfZpL5+TKg3LZ+Ehzoar5GAwytUtsdti+W6WhR3UpQC36vmXHsKxx9ibj7dKXCIKea6w0U+LdVSBmg==
+stylelint-webpack-plugin@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/stylelint-webpack-plugin/-/stylelint-webpack-plugin-5.0.1.tgz#13a7589a8d4cc00b155b9f792876334ca0bcaf71"
+  integrity sha512-07lpo1uVoFctKv0EOOg/YSrUppcLMjNBSMRqgooNnlbfAOgQfMzvLK+EbXz0HQiEgZobr+XQX9md/TgwTGdzbw==
   dependencies:
     globby "^11.1.0"
     jest-worker "^29.7.0"
