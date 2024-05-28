@@ -6375,16 +6375,16 @@
         },
         {
             "name": "php-http/discovery",
-            "version": "1.19.2",
+            "version": "1.19.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/discovery.git",
-                "reference": "61e1a1eb69c92741f5896d9e05fb8e9d7e8bb0cb"
+                "reference": "0700efda8d7526335132360167315fdab3aeb599"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/discovery/zipball/61e1a1eb69c92741f5896d9e05fb8e9d7e8bb0cb",
-                "reference": "61e1a1eb69c92741f5896d9e05fb8e9d7e8bb0cb",
+                "url": "https://api.github.com/repos/php-http/discovery/zipball/0700efda8d7526335132360167315fdab3aeb599",
+                "reference": "0700efda8d7526335132360167315fdab3aeb599",
                 "shasum": ""
             },
             "require": {
@@ -6408,7 +6408,8 @@
                 "php-http/httplug": "^1.0 || ^2.0",
                 "php-http/message-factory": "^1.0",
                 "phpspec/phpspec": "^5.1 || ^6.1 || ^7.3",
-                "symfony/phpunit-bridge": "^6.2"
+                "sebastian/comparator": "^3.0.5 || ^4.0.8",
+                "symfony/phpunit-bridge": "^6.4.4 || ^7.0.1"
             },
             "type": "composer-plugin",
             "extra": {
@@ -6447,9 +6448,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/discovery/issues",
-                "source": "https://github.com/php-http/discovery/tree/1.19.2"
+                "source": "https://github.com/php-http/discovery/tree/1.19.4"
             },
-            "time": "2023-11-30T16:49:05+00:00"
+            "time": "2024-03-29T13:00:05+00:00"
         },
         {
             "name": "php-http/guzzle5-adapter",
@@ -6578,16 +6579,16 @@
         },
         {
             "name": "php-http/httplug-bundle",
-            "version": "1.33.0",
+            "version": "1.33.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/HttplugBundle.git",
-                "reference": "76e4c5d91f5149b56f3fccccd7a6e66901177b09"
+                "reference": "b7ad2c1951edec36ef0bd9897e309b0038c59a54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/76e4c5d91f5149b56f3fccccd7a6e66901177b09",
-                "reference": "76e4c5d91f5149b56f3fccccd7a6e66901177b09",
+                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/b7ad2c1951edec36ef0bd9897e309b0038c59a54",
+                "reference": "b7ad2c1951edec36ef0bd9897e309b0038c59a54",
                 "shasum": ""
             },
             "require": {
@@ -6674,9 +6675,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/HttplugBundle/issues",
-                "source": "https://github.com/php-http/HttplugBundle/tree/1.33.0"
+                "source": "https://github.com/php-http/HttplugBundle/tree/1.33.1"
             },
-            "time": "2024-02-27T16:04:16+00:00"
+            "time": "2024-05-27T11:35:05+00:00"
         },
         {
             "name": "php-http/logger-plugin",
@@ -6739,16 +6740,16 @@
         },
         {
             "name": "php-http/message",
-            "version": "1.16.0",
+            "version": "1.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/message.git",
-                "reference": "47a14338bf4ebd67d317bf1144253d7db4ab55fd"
+                "reference": "5997f3289332c699fa2545c427826272498a2088"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/message/zipball/47a14338bf4ebd67d317bf1144253d7db4ab55fd",
-                "reference": "47a14338bf4ebd67d317bf1144253d7db4ab55fd",
+                "url": "https://api.github.com/repos/php-http/message/zipball/5997f3289332c699fa2545c427826272498a2088",
+                "reference": "5997f3289332c699fa2545c427826272498a2088",
                 "shasum": ""
             },
             "require": {
@@ -6802,9 +6803,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/message/issues",
-                "source": "https://github.com/php-http/message/tree/1.16.0"
+                "source": "https://github.com/php-http/message/tree/1.16.1"
             },
-            "time": "2023-05-17T06:43:38+00:00"
+            "time": "2024-03-07T13:22:09+00:00"
         },
         {
             "name": "php-http/message-factory",
@@ -6863,16 +6864,16 @@
         },
         {
             "name": "php-http/promise",
-            "version": "1.3.0",
+            "version": "1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/promise.git",
-                "reference": "2916a606d3b390f4e9e8e2b8dd68581508be0f07"
+                "reference": "fc85b1fba37c169a69a07ef0d5a8075770cc1f83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/promise/zipball/2916a606d3b390f4e9e8e2b8dd68581508be0f07",
-                "reference": "2916a606d3b390f4e9e8e2b8dd68581508be0f07",
+                "url": "https://api.github.com/repos/php-http/promise/zipball/fc85b1fba37c169a69a07ef0d5a8075770cc1f83",
+                "reference": "fc85b1fba37c169a69a07ef0d5a8075770cc1f83",
                 "shasum": ""
             },
             "require": {
@@ -6909,9 +6910,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/promise/issues",
-                "source": "https://github.com/php-http/promise/tree/1.3.0"
+                "source": "https://github.com/php-http/promise/tree/1.3.1"
             },
-            "time": "2024-01-04T18:49:48+00:00"
+            "time": "2024-03-15T13:55:21+00:00"
         },
         {
             "name": "php-http/stopwatch-plugin",
