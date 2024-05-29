@@ -1,6 +1,6 @@
 howto:
     shortcuts:
-        list_title: Atallos dispoñibles nas páxinas con listaxes
+        list_title: Atallos dispoñibles nas páxinas con listas
         go_logout: Saír
         go_howto: Ir ós titoriais (esta páxina!)
         go_developers: Ir a desenvolvedoras
@@ -34,15 +34,15 @@ howto:
             via_f_droid: vía F-Droid
             via_google_play: vía Google Play
     browser_addons:
-        opera: Engadido para Opera
-        chrome: Engadido para Chrome
-        firefox: Engadido para Firefox
+        opera: Complemento para Opera
+        chrome: Complemento para Chrome
+        firefox: Complemento para Firefox
     form:
         description: Grazas a este formulario
     top_menu:
         bookmarklet: Marcador activo
         mobile_apps: Apps móbiles
-        browser_addons: Engadidos do navegador
+        browser_addons: Complementos do navegador
     page_description: 'Hai varios xeitos de gardar un artigo:'
     tab_menu:
         shortcuts: Usar atallos
@@ -52,7 +52,7 @@ about:
     third_party:
         license: Licenza
         package: Paquete
-        description: 'Aquí tes unha listaxe das bibliotecas de terceiros que utiliza wallabag (coa súa licenza):'
+        description: 'Aquí tes unha lista cos compoñentes de terceiros que utiliza wallabag (coa súa licenza):'
     contributors:
         description: Grazas ás colaboradoras na aplicación web de wallabag
     helping:
@@ -591,7 +591,7 @@ developer:
     clients:
         create_new: Crear un novo cliente
         title: Clientes
-    list_methods: Listaxe dos métodos API
+    list_methods: Lista dos métodos API
     full_documentation: Ver a documentación completa da API
     how_to_first_app: Como crear a miña primeira aplicación
     documentation: Documentación
