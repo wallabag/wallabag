@@ -32,3 +32,4 @@ restricted_access: Ödeme ile erişim sağlanabilen siteler için kimlik doğrul
 api_user_registration: API aracılığıyla kullanıcı kaydını aç
 store_article_headers: Eğer wallabag her makale için HTTP üst bilgilerini saklıyorsa etkinleştirin
 shaarli_share_origin_url: Hizmet etkinse, orijinal URL'yi Shaarli'ye paylaşmayı etkinleştir
+share_linkding: Linkding ile paylaşımı etkinleştir
