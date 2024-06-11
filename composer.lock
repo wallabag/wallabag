@@ -17338,20 +17338,20 @@
         },
         {
             "name": "phpstan/extension-installer",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/extension-installer.git",
-                "reference": "5b19a72c93e79bb0d410ac2cd55f02c4a6e0cfbe"
+                "reference": "f6b87faf9fc7978eab2f7919a8760bc9f58f9203"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/extension-installer/zipball/5b19a72c93e79bb0d410ac2cd55f02c4a6e0cfbe",
-                "reference": "5b19a72c93e79bb0d410ac2cd55f02c4a6e0cfbe",
+                "url": "https://api.github.com/repos/phpstan/extension-installer/zipball/f6b87faf9fc7978eab2f7919a8760bc9f58f9203",
+                "reference": "f6b87faf9fc7978eab2f7919a8760bc9f58f9203",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^2.6.0",
+                "composer-plugin-api": "^2.0",
                 "php": "^7.2 || ^8.0",
                 "phpstan/phpstan": "^1.9.0"
             },
@@ -17376,9 +17376,9 @@
             "description": "Composer plugin for automatic installation of PHPStan extensions",
             "support": {
                 "issues": "https://github.com/phpstan/extension-installer/issues",
-                "source": "https://github.com/phpstan/extension-installer/tree/1.4.0"
+                "source": "https://github.com/phpstan/extension-installer/tree/1.4.1"
             },
-            "time": "2024-06-06T11:26:29+00:00"
+            "time": "2024-06-10T08:20:49+00:00"
         },
         {
             "name": "phpstan/phpstan",
