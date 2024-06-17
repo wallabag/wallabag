@@ -32,3 +32,4 @@ store_article_headers: 允許 wallabag 儲存每篇文章的 HTTP Header
 share_public: 允許公開條目連結
 show_printlink: 顯示列印用連結
 wallabag_support_url: wallabag 的支援連結
+share_linkding: 啟用分享至 Linkding
