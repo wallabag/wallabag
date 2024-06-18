@@ -327,6 +327,7 @@ entry:
         reading_time_minutes_short: '%readingTime% 分鐘'
         published_on: 發布於
         added_on: 添加於
+        address: 地址
     default_title: 條目標題
     search:
         placeholder: 想要尋找甚麼？
@@ -502,6 +503,7 @@ import:
     page_description: 歡迎使用 wallabag 匯入器。請選取想要遷移的服務來源。
     worker:
         download_images_warning: 你已啟用本機下載文章圖像。當和傳統格式一同匯入時會需時極久（甚至失敗）。我們<strong>強力建議</strong>啟用異步方式匯入資料以防止出錯。
+        enabled: 匯入是異步進行的。當匯入任務啟動後，一個外部 Worker 將一次處理一項作業。目前的服務是：
 about:
     who_behind_wallabag:
         version: 版本
@@ -557,6 +559,7 @@ user:
         repeat_new_password_label: 再次輸入新密碼
         twofactor_google_label: 經驗證器進行雙重驗證
         back_to_list: 返回列表
+        plain_password_label: ????
     new_user: 新增使用者
     list:
         edit_action: 編輯
@@ -624,7 +627,7 @@ developer:
             paragraph_1: 以下指令均基於 <a href="https://github.com/jkbrzt/httpie">HTTPie 函式庫</a>。請在使用前確定已安裝於你的系統內。
             paragraph_3: 點擊<a href="%link%">建立新用戶端</a>以取得所需的 token。
             paragraph_6: access_token 用於向 API 端點進行有效的請求。如：
-            paragraph_5: API 將提供類似下例的 response：
+            paragraph_5: API 將傳回類似以下的回應：
             paragraph_7: 這將提供你使用者的所有條目。
     client:
         action_back: 返回
@@ -719,6 +722,7 @@ flashes:
             failed: 匯入失敗，請重試。
             failed_on_file: 匯入時出現錯誤。請檢查你的匯入檔案。
             summary: 匯入概況：已匯入%imported% 篇，既有 %skipped% 篇。
+            summary_with_queue: 匯入摘要：%queued% 個項目在佇列。
         error:
             rabbit_enabled_not_installed: 已啟用 RabbitMQ 處理異步匯入，但我們<u>似乎無法連線</u>。請檢查 RabbitMQ 設置。
             redis_enabled_not_installed: 已啟用 Redis 處理異步匯入，但我們<u>似乎無法連線</u>。請檢查 Redis 設置。
