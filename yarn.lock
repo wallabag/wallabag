@@ -3571,10 +3571,10 @@ jquery@~1.11.0:
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-1.11.3.tgz#dd8b74278b27102d29df63eae28308a8cfa1b583"
   integrity sha512-pHM/XLofp0FJc0/0AsRm8q/5ob+a1kno+vfclXGozaMBPv3qD7Xq19loECVcBB4MOLdygnyneQMPTsH5QiVNBQ==
 
-jr-qrcode@^1.0.7:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/jr-qrcode/-/jr-qrcode-1.1.4.tgz#c419bf3ab655f3233360308939d71b13849690be"
-  integrity sha512-041B7axC/tzKRFbCc4g5QCaPzga2IgyBGmUBkWQ+t4CMl83DBzFv9tq9XdJr7uIqe9X6zYZC7Cy5J9ttiBNxrw==
+jr-qrcode@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/jr-qrcode/-/jr-qrcode-1.2.1.tgz#063f04720bf33bea135c40777dc8ab8d26e213f8"
+  integrity sha512-RXv5g2bIiLtkYDa6EcrE2gJC7dvLohNygrsrQ7+2UizBXeQKZ2UQd8owf0OHt+UXt6CFEg0xABxVf2axErzHlA==
 
 js-tokens@^4.0.0:
   version "4.0.0"
