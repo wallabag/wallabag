@@ -1,1 +1,7 @@
-{}
+validator:
+    password_must_match: يجب مطابقة كلمات المرور.
+    password_wrong_value: كلمة المرور المدخلة غير صحيحة.
+    password_too_short: يجب أن تتكون كلمة المرور الخاصة بك من 8 أحرف على الأقل.
+    item_per_page_too_high: سيؤدي هذا بالتأكيد إلى تدمير التطبيق
+    quote_length_too_high: الاقتباس طويل جدًا. يجب أن يحتوي على {{ Limit }} حرف أو أقل.
+    rss_limit_too_high: سيؤدي هذا بالتأكيد إلى تدمير التطبيق
