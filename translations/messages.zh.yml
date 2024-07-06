@@ -140,6 +140,7 @@ config:
         title: '重置区（危险区域）'
         description: '一旦你点击这个按钮，你就可以移除你账号中的某些信息。请注意这些操作是不可撤销的。'
         annotations: "删除所有标注"
+        tagging_rules: "删除所有标签规则"
         tags: "删除所有标签"
         entries: "删除所有项目"
         archived: "删除所有已存档项目"
@@ -678,6 +679,7 @@ flashes:
             feed_token_revoked: '订阅源令牌已作废'
             annotations_reset: 标注已重置
             tags_reset: 标签已重置
+            tagging_rules_reset: 标签规则已重置
             entries_reset: 项目列表已重置
             archived_reset: 所有存档项目已删除
             otp_enabled: 两步验证已启用

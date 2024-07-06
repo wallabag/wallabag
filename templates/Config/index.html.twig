@@ -640,6 +640,15 @@
                         <div class="row">
                             <h5>{{ 'config.reset.title'|trans }}</h5>
                             <p>{{ 'config.reset.description'|trans }}</p>
+                            {% if app.user.config.taggingRules is not empty %}
+                            <p>
+                                <form action="{{ path('config_reset', {type: 'tagging_rules'}) }}" method="post" onsubmit="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" name="reset-tagging-rules">
+                                    <input type="hidden" name="token" value="{{ csrf_token('reset-area') }}" />
+
+                                    <button class="waves-effect waves-light btn red" type="submit">{{ 'config.reset.tagging_rules'|trans }}</button>
+                                </form>
+                            </p>
+                            {% endif %}
                             <p>
                                 <form action="{{ path('config_reset', {type: 'annotations'}) }}" method="post" onsubmit="return confirm('{{ 'config.reset.confirm'|trans|escape('js') }}')" name="reset-annotations">
                                     <input type="hidden" name="token" value="{{ csrf_token('reset-area') }}" />
