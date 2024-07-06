@@ -14,12 +14,12 @@ class TaggingRuleRepository extends ServiceEntityRepository
     }
 
     /**
-     * Remove all tagging rule for a config.
+     * Remove all tagging rules for a config.
      * Used when a user wants to reset.
      *
      * @param int $configId
      */
-    public function removeAllTaggingRules($configId)
+    public function removeAllByConfigId($configId)
     {
         $this->getEntityManager()
             ->createQuery('DELETE FROM Wallabag\Entity\TaggingRule tr WHERE tr.config = :configId')

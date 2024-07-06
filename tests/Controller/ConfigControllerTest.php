@@ -870,6 +870,12 @@ class ConfigControllerTest extends WallabagTestCase
         $tag->setLabel('super');
         $em->persist($tag);
 
+        $taggingRule = new TaggingRule();
+        $taggingRule->setConfig($user->getConfig());
+        $taggingRule->setRule('readingTime <= 30');
+        $taggingRule->setTags(['aTestTag']);
+        $em->persist($taggingRule);
+
         $entry = new Entry($user);
         $entry->setUrl('https://www.lemonde.fr/europe/article/2016/10/01/pour-le-psoe-chaque-election-s-est-transformee-en-une-agonie_5006476_3214.html');
         $entry->setContent('Youhou');
@@ -909,6 +915,23 @@ class ConfigControllerTest extends WallabagTestCase
             ->findByEntryIdAndUserId($entry->getId(), $user->getId());
 
         $this->assertEmpty($annotationsReset, 'Annotations were reset');
+
+        // reset taggingRules
+        $crawler = $client->request('GET', '/config#set3');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=reset-tagging-rules]')->form();
+        $client->submit($form);
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertStringContainsString('flashes.config.notice.tagging_rules_reset', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
+
+        $taggingRuleReset = $em
+            ->getRepository(TaggingRule::class)
+            ->count(['config' => $user->getConfig()]);
+
+        $this->assertSame(0, $taggingRuleReset, 'Tagging rules were reset');
 
         // reset tags
         $crawler = $client->request('GET', '/config#set3');

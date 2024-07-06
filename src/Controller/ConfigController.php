@@ -576,7 +576,7 @@ class ConfigController extends AbstractController
                 $annotationRepository->removeAllByUserId($this->getUser()->getId());
                 break;
             case 'tagging_rules':
-                $taggingRuleRepository->removeAllTaggingRules($this->getConfig()->getId());
+                $taggingRuleRepository->removeAllByConfigId($this->getConfig()->getId());
                 break;
             case 'tags':
                 $this->removeAllTagsByUserId($this->getUser()->getId());
