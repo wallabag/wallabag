@@ -17,9 +17,9 @@ use Wallabag\Helper\CryptoProxy;
 
 class EntryControllerTest extends WallabagTestCase
 {
-    public const AN_URL_CONTAINING_AN_ARTICLE_WITH_IMAGE = 'https://www.lemonde.fr/judo/article/2017/11/11/judo-la-decima-de-teddy-riner_5213605_1556020.html';
+    public const AN_URL_CONTAINING_AN_ARTICLE_WITH_IMAGE = 'https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment';
     public $downloadImagesEnabled = false;
-    public $url = 'https://www.lemonde.fr/pixels/article/2019/06/18/ce-qu-il-faut-savoir-sur-le-libra-la-cryptomonnaie-de-facebook_5477887_4408996.html';
+    public $url = 'https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment';
     private $entryDataTestAttribute = '[data-test="entry"]';
 
     /**
@@ -175,9 +175,9 @@ class EntryControllerTest extends WallabagTestCase
 
         $this->assertInstanceOf(Entry::class, $content);
         $this->assertSame($this->url, $content->getUrl());
-        $this->assertStringContainsString('la cryptomonnaie de Facebook', $content->getTitle());
+        $this->assertStringContainsString('Comment Hidalgo', $content->getTitle());
         $this->assertSame('fr', $content->getLanguage());
-        $this->assertArrayHasKey('x-frame-options', $content->getHeaders());
+        $this->assertArrayHasKey('cache-control', $content->getHeaders());
         $client->getContainer()->get(Config::class)->set('store_article_headers', 0);
     }
 
@@ -1246,7 +1246,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $this->assertInstanceOf(Entry::class, $entry);
         $this->assertSame($url, $entry->getUrl());
-        $this->assertStringContainsString('Judo', $entry->getTitle());
+        $this->assertStringContainsString('Comment Hidalgo', $entry->getTitle());
         // instead of checking for the filename (which might change) check that the image is now local
         $this->assertStringContainsString(rtrim($client->getContainer()->getParameter('domain_name'), '/') . '/assets/images/', $entry->getContent());
 

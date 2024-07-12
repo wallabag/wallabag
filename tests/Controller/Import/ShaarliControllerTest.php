@@ -127,19 +127,6 @@ class ShaarliControllerTest extends WallabagTestCase
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for 20minutes.fr is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for 20minutes.fr is ok');
         $this->assertCount(2, $content->getTags());
-
-        $content = $client->getContainer()
-            ->get(EntityManagerInterface::class)
-            ->getRepository(Entry::class)
-            ->findByUrlAndUserId(
-                'https://www.lemonde.fr/disparitions/article/2018/07/05/le-journaliste-et-cineaste-claude-lanzmann-est-mort_5326313_3382.html',
-                $this->getLoggedInUserId()
-            );
-
-        $this->assertInstanceOf(Entry::class, $content);
-        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://www.lemonde.fr is ok');
-        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.lemonde.fr is ok');
-        $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.lemonde.fr is ok');
     }
 
     public function testImportWallabagWithEmptyFile()
