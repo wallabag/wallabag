@@ -30,7 +30,7 @@ class UserMailer extends TwigSwiftMailer
     protected $twig;
 
     /**
-     * @var array
+     * @var array{template: array{confirmation: string, resetting: string}, from_email: array{confirmation: array<string, string>|string, resetting: array<string, string>|string}}
      */
     protected $parameters;
 
