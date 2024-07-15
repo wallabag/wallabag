@@ -86,7 +86,7 @@
         "kphoen/rulerz": "^0.21.1",
         "kphoen/rulerz-bundle": "^0.15",
         "laminas/laminas-code": "^4.7.1",
-        "lcobucci/jwt": "^4.3.0",
+        "lcobucci/jwt": "4.1.5",
         "lexik/form-filter-bundle": "^7.0.3",
         "mgargano/simplehtmldom": "^1.5",
         "mnapoli/piwik-twig-extension": "^3.0",

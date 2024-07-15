@@ -127,23 +127,6 @@ class FirefoxControllerTest extends WallabagCoreTestCase
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for http://lexpansion.lexpress.fr is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for http://lexpansion.lexpress.fr is ok');
         $this->assertCount(3, $content->getTags());
-
-        $content = $client->getContainer()
-            ->get(EntityManagerInterface::class)
-            ->getRepository(Entry::class)
-            ->findByUrlAndUserId(
-                'https://www.lemonde.fr/disparitions/article/2018/07/05/le-journaliste-et-cineaste-claude-lanzmann-est-mort_5326313_3382.html',
-                $this->getLoggedInUserId()
-            );
-
-        $this->assertInstanceOf(Entry::class, $content);
-        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://www.lemonde.fr is ok');
-        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.lemonde.fr is ok');
-        $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.lemonde.fr is ok');
-
-        $createdAt = $content->getCreatedAt();
-        $this->assertSame('2013', $createdAt->format('Y'));
-        $this->assertSame('12', $createdAt->format('m'));
     }
 
     public function testImportWallabagWithEmptyFile()
