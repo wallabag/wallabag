@@ -559,7 +559,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testPostEntry()
     {
         $this->client->request('POST', '/api/entries.json', [
-            'url' => 'https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
+            'url' => 'https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment',
             'tags' => 'google',
             'title' => 'New title for my article',
             'content' => 'my content',
@@ -574,7 +574,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertGreaterThan(0, $content['id']);
-        $this->assertSame('https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html', $content['url']);
+        $this->assertSame('https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment', $content['url']);
         $this->assertSame(0, $content['is_archived']);
         $this->assertSame(0, $content['is_starred']);
         $this->assertNull($content['starred_at']);
@@ -596,7 +596,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
         $entry = new Entry($em->getReference(User::class, $this->getUserId()));
-        $entry->setUrl('https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html');
+        $entry->setUrl('https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment');
         $entry->setArchived(true);
         $entry->addTag((new Tag())->setLabel('google'));
         $entry->addTag((new Tag())->setLabel('apple'));
@@ -605,7 +605,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $em->clear();
 
         $this->client->request('POST', '/api/entries.json', [
-            'url' => 'https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
+            'url' => 'https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment',
             'archive' => '1',
             'tags' => 'google, apple',
         ]);
@@ -615,7 +615,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertGreaterThan(0, $content['id']);
-        $this->assertSame('https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html', $content['url']);
+        $this->assertSame('https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment', $content['url']);
         $this->assertSame(1, $content['is_archived']);
         $this->assertSame(0, $content['is_starred']);
         $this->assertCount(3, $content['tags']);
@@ -699,7 +699,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testPostEntryWithOriginUrl()
     {
         $this->client->request('POST', '/api/entries.json', [
-            'url' => 'https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
+            'url' => 'https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment',
             'tags' => 'google',
             'title' => 'New title for my article',
             'content' => 'my content',
@@ -715,7 +715,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $content = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->assertGreaterThan(0, $content['id']);
-        $this->assertSame('https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html', $content['url']);
+        $this->assertSame('https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment', $content['url']);
         $this->assertSame('http://mysource.tld', $content['origin_url']);
     }
 
@@ -1223,7 +1223,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testReloadEntry()
     {
         $this->client->request('POST', '/api/entries.json', [
-            'url' => 'https://www.lemonde.fr/pixels/article/2015/03/28/plongee-dans-l-univers-d-ingress-le-jeu-de-google-aux-frontieres-du-reel_4601155_4408996.html',
+            'url' => 'https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment',
             'archive' => '1',
             'tags' => 'google, apple',
         ]);
