@@ -143,6 +143,7 @@ config:
         entries: Usuń WSZYTSTKIE wpisy
         archived: Usuń WSZYSTKIE zarchiwizowane wpisy
         confirm: Jesteś pewien? (tej operacji NIE MOŻNA cofnąć)
+        tagging_rules: Usuń WSZYSTKIE reguły tagowania
     form_password:
         description: Tutaj możesz zmienić swoje hasło. Twoje nowe hasło powinno mieć conajmniej 8 znaków.
         old_password_label: Stare hasło
@@ -687,6 +688,7 @@ flashes:
             otp_disabled: Wyłączono uwierzytelnianie dwuskładnikowe
             tagging_rules_not_imported: Błąd podczas importowania zasad tagowania
             ignore_origin_rules_deleted: Usunięto zasadę ignorowania pochodzenia
+            tagging_rules_reset: Reguły tagowania zostały zresetowane
     entry:
         notice:
             entry_already_saved: Wpis już został dodany %date%
