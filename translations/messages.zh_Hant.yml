@@ -139,6 +139,7 @@ config:
         page_title: 雙重驗證
     reset:
         tags: 移除所有標籤
+        tagging_rules: 移除所有標籤規則
         title: 重設區域（危險地帶）
         entries: 移除所有條目
         archived: 移除所有已封存條目
@@ -671,6 +672,7 @@ flashes:
             entries_reset: 已重設條目
             archived_reset: 完成刪除已封存條目
             tags_reset: 已重設標籤
+            tagging_rules_reset: 已重設標籤規則
             annotations_reset: 已重設註釋
             tagging_rules_updated: 已更新標籤規則
             tagging_rules_deleted: 已刪除標籤規則
