@@ -196,6 +196,7 @@ config:
         entries: TÜM girdileri sil
         archived: TÜM arşivlenmiş girdileri sil
         confirm: Emin misiniz? (BU İŞLEM GERİ ALINAMAZ)
+        tagging_rules: Tüm etiketleme kurallarını kaldır
     otp:
         app:
             two_factor_code_description_1: OTP iki aşamalı kimlik doğrulamasını etkinleştirdiniz, OTP uygulamanızı açın ve tek seferlik bir parola almak için bu kodu kullanın. Sayfa yeniden yüklendikten sonra kaybolacaktır.
@@ -613,6 +614,7 @@ flashes:
             feed_updated: Akış bilgileri güncellendi
             ignore_origin_rules_updated: Orijinal kaynağı yok say kuralı güncellendi
             ignore_origin_rules_deleted: Orijinal kaynağı yok say kuralı silindi
+            tagging_rules_reset: Etiketleme kuralları sıfırlandı
     entry:
         notice:
             entry_already_saved: Makale zaten %date% tarihinde kaydedilmiş
