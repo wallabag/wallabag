@@ -106,14 +106,14 @@ class EntryControllerTest extends WallabagTestCase
 
         $crawler = $client->request('GET', '/');
 
-        $this->assertCount(4, $crawler->filter($this->entryDataTestAttribute));
+        $this->assertCount(5, $crawler->filter($this->entryDataTestAttribute));
 
         // Good URL
         $client->request('GET', '/bookmarklet', ['url' => $this->url]);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $client->followRedirect();
         $crawler = $client->request('GET', '/');
-        $this->assertCount(5, $crawler->filter($this->entryDataTestAttribute));
+        $this->assertCount(6, $crawler->filter($this->entryDataTestAttribute));
 
         $em = $client->getContainer()
             ->get(EntityManagerInterface::class);
@@ -803,7 +803,7 @@ class EntryControllerTest extends WallabagTestCase
         $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/all/list');
-        $this->assertCount(5, $crawler->filter($this->entryDataTestAttribute));
+        $this->assertCount(6, $crawler->filter($this->entryDataTestAttribute));
 
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl($this->url);
@@ -812,7 +812,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->getEntityManager()->flush();
 
         $crawler = $client->request('GET', '/all/list');
-        $this->assertCount(6, $crawler->filter($this->entryDataTestAttribute));
+        $this->assertCount(7, $crawler->filter($this->entryDataTestAttribute));
 
         $form = $crawler->filter('button[id=submit-filter]')->form();
 
@@ -822,7 +822,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(5, $crawler->filter($this->entryDataTestAttribute));
+        $this->assertCount(6, $crawler->filter($this->entryDataTestAttribute));
     }
 
     public function testFilterOnReadingTimeOnlyLower()
@@ -867,7 +867,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(4, $crawler->filter($this->entryDataTestAttribute));
+        $this->assertCount(5, $crawler->filter($this->entryDataTestAttribute));
 
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl($this->url);
@@ -877,7 +877,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(5, $crawler->filter($this->entryDataTestAttribute));
+        $this->assertCount(6, $crawler->filter($this->entryDataTestAttribute));
     }
 
     public function testFilterOnCreationDate()
@@ -908,7 +908,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(4, $crawler->filter($this->entryDataTestAttribute));
+        $this->assertCount(5, $crawler->filter($this->entryDataTestAttribute));
 
         $data = [
             'entry_filter[createdAt][left_date]' => $today->format('Y-m-d'),
@@ -917,7 +917,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(4, $crawler->filter($this->entryDataTestAttribute));
+        $this->assertCount(5, $crawler->filter($this->entryDataTestAttribute));
 
         $data = [
             'entry_filter[createdAt][left_date]' => '1970-01-01',
@@ -1394,7 +1394,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(8, $crawler->filter($this->entryDataTestAttribute));
+        $this->assertCount(9, $crawler->filter($this->entryDataTestAttribute));
     }
 
     public function testSearch()
@@ -1418,7 +1418,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(4, $crawler->filter($this->entryDataTestAttribute));
+        $this->assertCount(5, $crawler->filter($this->entryDataTestAttribute));
 
         // Add a check with useless spaces before and after the search term
         $crawler = $client->request('GET', '/unread/list');
@@ -1430,7 +1430,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $this->assertCount(4, $crawler->filter($this->entryDataTestAttribute));
+        $this->assertCount(5, $crawler->filter($this->entryDataTestAttribute));
 
         // Search on starred list
         $crawler = $client->request('GET', '/starred/list');
