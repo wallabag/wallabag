@@ -312,6 +312,7 @@ config:
         annotations: Eliminar TODAS as notas
         description: Premendo nos botóns poderás eliminar algunha información relativa á túa conta. Ten tino co que fas, xa que será IRREVERSIBLE.
         title: Área de restablecemento (Perigo!)
+        tagging_rules: Eliminar TODAS as regras de etiquetado
     form_user:
         delete:
             button: Eliminar a miña conta
@@ -665,6 +666,7 @@ flashes:
             user_updated: Información actualizada
             password_updated: Contrasinal actualizado
             config_saved: Gardouse o axuste.
+            tagging_rules_reset: Restablecer regras de etiquetado
 error:
     page_title: Houbo un fallo
 ignore_origin_instance_rule:
