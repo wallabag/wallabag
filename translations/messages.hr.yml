@@ -264,6 +264,7 @@ config:
         confirm: Stvarno? (OVO JE NEPOVRATNA RADNJA)
         annotations: Ukloni SVE napomene
         tags: Ukloni SVE oznake
+        tagging_rules: Ukloni SVA pravila označavanja
     form_password:
         repeat_new_password_label: Ponovi novu lozinku
         old_password_label: Trenutačna lozinka
@@ -437,6 +438,7 @@ flashes:
             feed_token_revoked: Token feeda opozvan
             feed_token_updated: Token feeda aktualiziran
             feed_updated: Podaci feeda aktualizirani
+            tagging_rules_reset: Pravila označavanja resetirana
     site_credential:
         notice:
             deleted: Podaci za prijavu na stranicu „%host%” izbrisani
