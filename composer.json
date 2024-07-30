@@ -116,7 +116,7 @@
         "scheb/2fa-trusted-device": "^5.13.2",
         "scssphp/scssphp": "^1.12.1",
         "sensio/framework-extra-bundle": "^6.2.10",
-        "sentry/sentry-symfony": "^4.13.2",
+        "sentry/sentry-symfony": "^5.0.1",
         "spiriitlabs/form-filter-bundle": "^10.0",
         "stof/doctrine-extensions-bundle": "^1.11.0",
         "symfony/asset": "^5.4.35",
