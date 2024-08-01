@@ -640,8 +640,8 @@ flashes:
             entry_starred: Entrada marcada con estrela
             entry_unarchived: Entrada desarquivada
             entry_archived: Entrada arquivada
-            entry_reloaded_failed: Entrada recargada pero fallou a obtención do contido
-            entry_reloaded: Entrada recargada
+            entry_reloaded_failed: Volveuse a cargar o artigo pero fallou a obtención do contido
+            entry_reloaded: Volveuse a cargar o artigo
             entry_updated: Entrada actualizada
             entry_saved_failed: A entrada gardouse pero fallou a obtención do contido
             entry_saved: Entrada gardada
