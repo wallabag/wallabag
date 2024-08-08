@@ -280,6 +280,18 @@ class EntryRestController extends WallabagRestController
      *             example="example.com",
      *         )
      *     ),
+     *     @OA\Parameter(
+     *         name="http_status",
+     *         in="query",
+     *         description="filter entries with matching http status code",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="integer",
+     *             minimum=100,
+     *             maximum=527,
+     *             example="200",
+     *         )
+     *     ),
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -306,6 +318,7 @@ class EntryRestController extends WallabagRestController
         $since = $request->query->get('since', 0);
         $detail = strtolower($request->query->get('detail', 'full'));
         $domainName = (null === $request->query->get('domain_name')) ? '' : (string) $request->query->get('domain_name');
+        $httpStatus = (!\array_key_exists((int) $request->query->get('http_status'), Response::$statusTexts)) ? null : (int) $request->query->get('http_status');
 
         try {
             /** @var Pagerfanta $pager */
@@ -320,7 +333,8 @@ class EntryRestController extends WallabagRestController
                 $tags,
                 $detail,
                 $domainName,
-                $isNotParsed
+                $isNotParsed,
+                $httpStatus
             );
         } catch (\Exception $e) {
             throw new BadRequestHttpException($e->getMessage());

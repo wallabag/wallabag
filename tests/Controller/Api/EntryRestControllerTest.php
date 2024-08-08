@@ -170,6 +170,50 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
 
+    public function testGetEntriesByHttpStatusWithMatching()
+    {
+        $this->client->request('GET', '/api/entries?http_status=302');
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThanOrEqual(1, \count($content));
+        $this->assertNotEmpty($content['_embedded']['items']);
+        $this->assertSame(1, $content['total']);
+        $this->assertSame(1, $content['page']);
+        $this->assertGreaterThanOrEqual(1, $content['pages']);
+
+        $this->assertSame('test title entry7', $content['_embedded']['items'][0]['title']);
+        $this->assertSame('302', $content['_embedded']['items'][0]['http_status']);
+
+        $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
+    }
+
+    public function testGetEntriesByHttpStatusNoMatching()
+    {
+        $this->client->request('GET', '/api/entries?http_status=404');
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertGreaterThanOrEqual(1, \count($content));
+        $this->assertEmpty($content['_embedded']['items']);
+        $this->assertSame(0, $content['total']);
+        $this->assertSame(1, $content['page']);
+        $this->assertGreaterThanOrEqual(1, $content['pages']);
+
+        $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
+    }
+
+    public function testGetEntriesWithBadHttpStatusParam()
+    {
+        $this->client->request('GET', '/api/entries?http_status=10000');
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+    }
+
     public function testGetEntriesWithFullOptions()
     {
         $this->client->request('GET', '/api/entries', [
@@ -183,6 +227,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             'since' => 1443274283,
             'public' => 0,
             'notParsed' => 0,
+            'http_status' => 200,
         ]);
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
