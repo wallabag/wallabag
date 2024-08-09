@@ -75,7 +75,7 @@ about:
         helping: Axudar a wallabag
         getting_help: Obter axuda
         who_behind_wallabag: Quen está detrás de wallabag
-    page_title: Acerca de
+    page_title: Sobre
 entry:
     metadata:
         published_on: Publicado o
@@ -312,6 +312,7 @@ config:
         annotations: Eliminar TODAS as notas
         description: Premendo nos botóns poderás eliminar algunha información relativa á túa conta. Ten tino co que fas, xa que será IRREVERSIBLE.
         title: Área de restablecemento (Perigo!)
+        tagging_rules: Eliminar TODAS as regras de etiquetado
     form_user:
         delete:
             button: Eliminar a miña conta
@@ -362,7 +363,7 @@ config:
 footer:
     stats: Desde %user_creation% liches %nb_archives% artigos. Que ven sendo %per_day% ao día!
     wallabag:
-        about: Acerca de
+        about: Sobre
         powered_by: grazas a
         social: Social
         elsewhere: Leva wallabag contigo
@@ -387,7 +388,7 @@ menu:
         back_to_unread: Volver ós artigos non lidos
         save_link: Gardar ligazón
         search: Buscar
-        about: Acerca de
+        about: Sobre
         logout: Saír
         developer: Xestión dos clientes API
         howto: Titoriais
@@ -530,7 +531,7 @@ quickstart:
     admin:
         import: Configurar importación
         export: Configurar exportación
-        sharing: Activar parámetros para compartir artigos
+        sharing: Activar parámetros respecto a compartir artigos
         analytics: Configurar estatísticas
         new_user: Crear unha nova usuaria
         description: 'Como administradora, tes certos privilexios en wallabag. Podes:'
@@ -552,7 +553,7 @@ developer:
         field_grant_types: Tipos de acceso permitidos
         no_client: Sen clientes.
         field_uris: Redirixir URIs
-        field_secret: Segreda do cliente
+        field_secret: Chave secreta
         field_id: ID do cliente
         title: Clientes existentes
     howto:
@@ -570,7 +571,7 @@ developer:
     client_parameter:
         read_howto: Ler o titorial "Crear a miña primeira aplicación"
         back: Atrás
-        field_secret: Segreda do cliente
+        field_secret: Chave secreta
         field_id: ID do cliente
         field_name: Nome do cliente
         page_description: Aquí están os parámetros do cliente.
@@ -582,7 +583,7 @@ developer:
             save_label: Crear un novo cliente
             redirect_uris_label: URIs de redirección (optativo)
             name_label: Nome do cliente
-        page_description: Vas crear un novo cliene. Completa o campo inferior para a URI de redirección da túa aplicación.
+        page_description: Vas crear un novo cliente. Completa o campo inferior para a URI de redirección da túa aplicación.
         page_title: Xestión de clientes API > Novo cliente
     remove:
         action: Eliminar o cliente %name%
@@ -639,8 +640,8 @@ flashes:
             entry_starred: Entrada marcada con estrela
             entry_unarchived: Entrada desarquivada
             entry_archived: Entrada arquivada
-            entry_reloaded_failed: Entrada recargada pero fallou a obtención do contido
-            entry_reloaded: Entrada recargada
+            entry_reloaded_failed: Volveuse a cargar o artigo pero fallou a obtención do contido
+            entry_reloaded: Volveuse a cargar o artigo
             entry_updated: Entrada actualizada
             entry_saved_failed: A entrada gardouse pero fallou a obtención do contido
             entry_saved: Entrada gardada
@@ -665,6 +666,7 @@ flashes:
             user_updated: Información actualizada
             password_updated: Contrasinal actualizado
             config_saved: Gardouse o axuste.
+            tagging_rules_reset: Restablecer regras de etiquetado
 error:
     page_title: Houbo un fallo
 ignore_origin_instance_rule:
