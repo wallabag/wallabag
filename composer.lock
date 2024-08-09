@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "41a679553ce512cb618f3666e243720c",
+    "content-hash": "7db2da98247b69e135c941b93e729f1a",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -19422,16 +19422,16 @@
         },
         {
             "name": "shipmonk/composer-dependency-analyser",
-            "version": "1.5.3",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shipmonk-rnd/composer-dependency-analyser.git",
-                "reference": "00b5023bcc0c9c4f34c9246b3faf5b780e144622"
+                "reference": "bca862b2830a453734aee048eb0cdab82e5c9da3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shipmonk-rnd/composer-dependency-analyser/zipball/00b5023bcc0c9c4f34c9246b3faf5b780e144622",
-                "reference": "00b5023bcc0c9c4f34c9246b3faf5b780e144622",
+                "url": "https://api.github.com/repos/shipmonk-rnd/composer-dependency-analyser/zipball/bca862b2830a453734aee048eb0cdab82e5c9da3",
+                "reference": "bca862b2830a453734aee048eb0cdab82e5c9da3",
                 "shasum": ""
             },
             "require": {
@@ -19482,9 +19482,9 @@
             ],
             "support": {
                 "issues": "https://github.com/shipmonk-rnd/composer-dependency-analyser/issues",
-                "source": "https://github.com/shipmonk-rnd/composer-dependency-analyser/tree/1.5.3"
+                "source": "https://github.com/shipmonk-rnd/composer-dependency-analyser/tree/1.7.0"
             },
-            "time": "2024-04-22T13:28:23+00:00"
+            "time": "2024-08-08T08:12:32+00:00"
         },
         {
             "name": "symfony/browser-kit",
