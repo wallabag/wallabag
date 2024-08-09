@@ -553,7 +553,7 @@ developer:
         field_grant_types: Tipos de acceso permitidos
         no_client: Sen clientes.
         field_uris: Redirixir URIs
-        field_secret: Segreda do cliente
+        field_secret: Chave secreta
         field_id: ID do cliente
         title: Clientes existentes
     howto:
@@ -571,7 +571,7 @@ developer:
     client_parameter:
         read_howto: Ler o titorial "Crear a miña primeira aplicación"
         back: Atrás
-        field_secret: Segreda do cliente
+        field_secret: Chave secreta
         field_id: ID do cliente
         field_name: Nome do cliente
         page_description: Aquí están os parámetros do cliente.
