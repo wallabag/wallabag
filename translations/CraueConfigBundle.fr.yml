@@ -32,3 +32,4 @@ restricted_access: Activer l'authentification pour les sites avec paywall
 api_user_registration: Activer la création de compte depuis l'API
 store_article_headers: Activer le stockage des en-têtes HTTP de chaque article
 shaarli_share_origin_url: Activer le partage de l'adresse d'origine vers Shaarli, si le service est activé
+share_linkding: Activer le partage à Linkding
