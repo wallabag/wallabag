@@ -50,17 +50,17 @@ class GenerateUrlHashesCommand extends Command
                 $user = $this->getUser($username);
                 $this->generateHashedUrls($user);
             } catch (NoResultException $e) {
-                $output->writeln(sprintf('<error>User "%s" not found.</error>', $username));
+                $output->writeln(\sprintf('<error>User "%s" not found.</error>', $username));
 
                 return 1;
             }
         } else {
             $users = $this->userRepository->findAll();
 
-            $output->writeln(sprintf('Generating hashed urls for "%d" users', \count($users)));
+            $output->writeln(\sprintf('Generating hashed urls for "%d" users', \count($users)));
 
             foreach ($users as $user) {
-                $output->writeln(sprintf('Processing user: %s', $user->getUsername()));
+                $output->writeln(\sprintf('Processing user: %s', $user->getUsername()));
                 $this->generateHashedUrls($user);
             }
             $output->writeln('Finished generated hashed urls');
@@ -86,7 +86,7 @@ class GenerateUrlHashesCommand extends Command
 
         $this->entityManager->flush();
 
-        $this->output->writeln(sprintf('Generated hashed urls for user: %s', $user->getUserName()));
+        $this->output->writeln(\sprintf('Generated hashed urls for user: %s', $user->getUserName()));
     }
 
     /**

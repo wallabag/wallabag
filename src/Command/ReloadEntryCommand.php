@@ -63,7 +63,7 @@ class ReloadEntryCommand extends Command
                     ->findOneByUserName($username)
                     ->getId();
             } catch (NoResultException $e) {
-                $io->error(sprintf('User "%s" not found.', $username));
+                $io->error(\sprintf('User "%s" not found.', $username));
 
                 return 1;
             }
@@ -80,7 +80,7 @@ class ReloadEntryCommand extends Command
         }
 
         $io->note(
-            sprintf(
+            \sprintf(
                 "You're going to reload %s entries. Depending on the number of entry to reload, this could be a very long process.",
                 $nbEntries
             )

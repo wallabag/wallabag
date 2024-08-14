@@ -1088,7 +1088,7 @@ class EntryRestController extends WallabagRestController
     {
         $expect = $request->query->get('expect', 'entry');
         if (!\in_array($expect, ['id', 'entry'], true)) {
-            throw new BadRequestHttpException(sprintf("expect: 'id' or 'entry' expected, %s given", $expect));
+            throw new BadRequestHttpException(\sprintf("expect: 'id' or 'entry' expected, %s given", $expect));
         }
         $this->validateAuthentication();
         $this->validateUserAccess($entry->getUser()->getId());

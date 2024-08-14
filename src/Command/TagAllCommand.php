@@ -49,12 +49,12 @@ class TagAllCommand extends Command
         try {
             $user = $this->getUser($input->getArgument('username'));
         } catch (NoResultException $e) {
-            $io->error(sprintf('User "%s" not found.', $input->getArgument('username')));
+            $io->error(\sprintf('User "%s" not found.', $input->getArgument('username')));
 
             return 1;
         }
 
-        $io->text(sprintf('Tagging entries for user <info>%s</info>...', $user->getUserName()));
+        $io->text(\sprintf('Tagging entries for user <info>%s</info>...', $user->getUserName()));
 
         $entries = $this->ruleBasedTagger->tagAllForUser($user);
 

@@ -98,7 +98,7 @@ class ImportCommand extends Command
         $output->writeln('Start : ' . (new \DateTime())->format('d-m-Y G:i:s') . ' ---');
 
         if (!file_exists($input->getArgument('filepath'))) {
-            throw new Exception(sprintf('File "%s" not found', $input->getArgument('filepath')));
+            throw new Exception(\sprintf('File "%s" not found', $input->getArgument('filepath')));
         }
 
         // Turning off doctrine default logs queries for saving memory
@@ -115,7 +115,7 @@ class ImportCommand extends Command
         }
 
         if (!\is_object($entityUser)) {
-            throw new Exception(sprintf('User "%s" not found', $input->getArgument('username')));
+            throw new Exception(\sprintf('User "%s" not found', $input->getArgument('username')));
         }
 
         // Authenticate user for paywalled websites

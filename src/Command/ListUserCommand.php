@@ -59,7 +59,7 @@ class ListUserCommand extends Command
         $io->table(['username', 'email', 'is enabled?', 'is admin?'], $rows);
 
         $io->success(
-            sprintf(
+            \sprintf(
                 '%s/%s%s user(s) displayed.',
                 \count($users),
                 $nbUsers,

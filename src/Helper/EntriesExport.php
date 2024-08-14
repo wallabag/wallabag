@@ -119,7 +119,7 @@ class EntriesExport
             return $this->$functionName();
         }
 
-        throw new \InvalidArgumentException(sprintf('The format "%s" is not yet supported.', $format));
+        throw new \InvalidArgumentException(\sprintf('The format "%s" is not yet supported.', $format));
     }
 
     public function exportJsonData()
@@ -196,7 +196,7 @@ class EntriesExport
             foreach ($entry->getTags() as $tag) {
                 $book->setSubject($tag->getLabel());
             }
-            $filename = sha1(sprintf('%s:%s', $entry->getUrl(), $entry->getTitle()));
+            $filename = sha1(\sprintf('%s:%s', $entry->getUrl(), $entry->getTitle()));
 
             $publishedBy = $entry->getPublishedBy();
             $authors = $this->translator->trans('export.unknown');
@@ -232,8 +232,8 @@ class EntriesExport
         $book->addChapter('Notices', 'Cover2.html', $content_start . $this->getExportInformation('PHPePub') . $bookEnd);
 
         // Could also be the ISBN number, prefered for published books, or a UUID.
-        $hash = sha1(sprintf('%s:%s', $this->wallabagUrl, implode(',', $entryIds)));
-        $book->setIdentifier(sprintf('urn:wallabag:%s', $hash), EPub::IDENTIFIER_URI);
+        $hash = sha1(\sprintf('%s:%s', $this->wallabagUrl, implode(',', $entryIds)));
+        $book->setIdentifier(\sprintf('urn:wallabag:%s', $hash), EPub::IDENTIFIER_URI);
 
         return Response::create(
             $book->getBook(),

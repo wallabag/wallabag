@@ -17,9 +17,9 @@ class NotMatches
     public function __invoke($subject, $pattern)
     {
         if ("'" === $pattern[0]) {
-            $pattern = sprintf("'%%%s%%'", substr($pattern, 1, -1));
+            $pattern = \sprintf("'%%%s%%'", substr($pattern, 1, -1));
         }
 
-        return sprintf('UPPER(%s) NOT LIKE UPPER(%s)', $subject, $pattern);
+        return \sprintf('UPPER(%s) NOT LIKE UPPER(%s)', $subject, $pattern);
     }
 }
