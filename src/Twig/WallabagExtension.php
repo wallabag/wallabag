@@ -111,7 +111,7 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
                 $qb = $this->entryRepository->getCountBuilderForAllByUser($user->getId());
                 break;
             default:
-                throw new \InvalidArgumentException(sprintf('Type "%s" is not implemented.', $type));
+                throw new \InvalidArgumentException(\sprintf('Type "%s" is not implemented.', $type));
         }
 
         $query = $qb

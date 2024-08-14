@@ -41,7 +41,7 @@ class RedisWorkerCommand extends Command
         $serviceName = $input->getArgument('serviceName');
 
         if (!$this->container->has('wallabag.queue.redis.' . $serviceName) || !$this->container->has('wallabag.consumer.redis.' . $serviceName)) {
-            throw new Exception(sprintf('No queue or consumer found for service name: "%s"', $input->getArgument('serviceName')));
+            throw new Exception(\sprintf('No queue or consumer found for service name: "%s"', $input->getArgument('serviceName')));
         }
 
         $worker = new QueueWorker(

@@ -56,7 +56,7 @@ class ExportCommand extends Command
         try {
             $user = $this->userRepository->findOneByUserName($input->getArgument('username'));
         } catch (NoResultException $e) {
-            $io->error(sprintf('User "%s" not found.', $input->getArgument('username')));
+            $io->error(\sprintf('User "%s" not found.', $input->getArgument('username')));
 
             return 1;
         }
@@ -66,12 +66,12 @@ class ExportCommand extends Command
             ->getQuery()
             ->getResult();
 
-        $io->text(sprintf('Exporting <info>%d</info> entrie(s) for user <info>%s</info>...', \count($entries), $user->getUserName()));
+        $io->text(\sprintf('Exporting <info>%d</info> entrie(s) for user <info>%s</info>...', \count($entries), $user->getUserName()));
 
         $filePath = $input->getArgument('filepath');
 
         if (!$filePath) {
-            $filePath = $this->projectDir . '/' . sprintf('%s-export.json', $user->getUsername());
+            $filePath = $this->projectDir . '/' . \sprintf('%s-export.json', $user->getUsername());
         }
 
         try {
@@ -82,7 +82,7 @@ class ExportCommand extends Command
                 ->exportJsonData();
             file_put_contents($filePath, $data);
         } catch (\InvalidArgumentException $e) {
-            $io->error(sprintf('Error: "%s"', $e->getMessage()));
+            $io->error(\sprintf('Error: "%s"', $e->getMessage()));
 
             return 1;
         }

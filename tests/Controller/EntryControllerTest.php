@@ -1709,7 +1709,7 @@ class EntryControllerTest extends WallabagTestCase
         // the deletion link of the first tag
         $link = $crawler->filter('body div#article div.tools ul.tags li.chip a')->extract(['href'])[1];
 
-        $this->assertStringStartsWith(sprintf('/remove-tag/%s/%s', $entry->getId(), $tag->getId()), $link);
+        $this->assertStringStartsWith(\sprintf('/remove-tag/%s/%s', $entry->getId(), $tag->getId()), $link);
     }
 
     public function testRandom()

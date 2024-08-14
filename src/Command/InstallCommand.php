@@ -109,7 +109,7 @@ class InstallCommand extends Command
             $help = 'Database driver "' . $this->databaseDriver . '" is not installed.';
         }
 
-        $rows[] = [sprintf($label, $this->databaseDriver), $status, $help];
+        $rows[] = [\sprintf($label, $this->databaseDriver), $status, $help];
 
         // testing if connection to the database can be established
         $label = '<comment>Database connection</comment>';
@@ -388,12 +388,12 @@ class InstallCommand extends Command
             $schemaManager = $connection->createSchemaManager();
         } catch (\Exception $exception) {
             // mysql & sqlite
-            if (str_contains($exception->getMessage(), sprintf("Unknown database '%s'", $databaseName))) {
+            if (str_contains($exception->getMessage(), \sprintf("Unknown database '%s'", $databaseName))) {
                 return false;
             }
 
             // pgsql
-            if (str_contains($exception->getMessage(), sprintf('database "%s" does not exist', $databaseName))) {
+            if (str_contains($exception->getMessage(), \sprintf('database "%s" does not exist', $databaseName))) {
                 return false;
             }
 

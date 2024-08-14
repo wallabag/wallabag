@@ -114,7 +114,7 @@ class EntryFilterType extends AbstractType
                         return false;
                     }
 
-                    $paramName = sprintf('%s', str_replace('.', '_', $field));
+                    $paramName = \sprintf('%s', str_replace('.', '_', $field));
                     $expression = $filterQuery->getExpr()->eq($field, ':' . $paramName);
                     $parameters = [$paramName => $value];
 

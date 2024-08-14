@@ -306,7 +306,7 @@ class EntryRepository extends ServiceEntityRepository
             $fields = array_filter($fieldNames, function ($k) {
                 return 'content' !== $k;
             });
-            $qb->select(sprintf('partial e.{%s}', implode(',', $fields)));
+            $qb->select(\sprintf('partial e.{%s}', implode(',', $fields)));
         }
 
         if (null !== $isArchived) {
@@ -780,6 +780,6 @@ class EntryRepository extends ServiceEntityRepository
      */
     private function sortQueryBuilder(QueryBuilder $qb, $sortBy = 'createdAt', $direction = 'desc')
     {
-        return $qb->orderBy(sprintf('e.%s', $sortBy), $direction);
+        return $qb->orderBy(\sprintf('e.%s', $sortBy), $direction);
     }
 }

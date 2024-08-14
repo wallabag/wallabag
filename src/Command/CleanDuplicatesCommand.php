@@ -56,7 +56,7 @@ class CleanDuplicatesCommand extends Command
                 $user = $this->getUser($username);
                 $this->cleanDuplicates($user);
             } catch (NoResultException $e) {
-                $this->io->error(sprintf('User "%s" not found.', $username));
+                $this->io->error(\sprintf('User "%s" not found.', $username));
 
                 return 1;
             }
@@ -65,13 +65,13 @@ class CleanDuplicatesCommand extends Command
         } else {
             $users = $this->userRepository->findAll();
 
-            $this->io->text(sprintf('Cleaning through <info>%d</info> user accounts', \count($users)));
+            $this->io->text(\sprintf('Cleaning through <info>%d</info> user accounts', \count($users)));
 
             foreach ($users as $user) {
-                $this->io->text(sprintf('Processing user <info>%s</info>', $user->getUsername()));
+                $this->io->text(\sprintf('Processing user <info>%s</info>', $user->getUsername()));
                 $this->cleanDuplicates($user);
             }
-            $this->io->success(sprintf('Finished cleaning. %d duplicates found in total', $this->duplicates));
+            $this->io->success(\sprintf('Finished cleaning. %d duplicates found in total', $this->duplicates));
         }
 
         return 0;
@@ -99,7 +99,7 @@ class CleanDuplicatesCommand extends Command
 
         $this->duplicates += $duplicatesCount;
 
-        $this->io->text(sprintf('Cleaned <info>%d</info> duplicates for user <info>%s</info>', $duplicatesCount, $user->getUserName()));
+        $this->io->text(\sprintf('Cleaned <info>%d</info> duplicates for user <info>%s</info>', $duplicatesCount, $user->getUserName()));
     }
 
     private function similarUrl($url)

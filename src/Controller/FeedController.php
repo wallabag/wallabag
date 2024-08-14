@@ -102,7 +102,7 @@ class FeedController extends AbstractController
         ];
 
         if (!isset($sorts[$sort])) {
-            throw new BadRequestHttpException(sprintf('Sort "%s" is not available.', $sort));
+            throw new BadRequestHttpException(\sprintf('Sort "%s" is not available.', $sort));
         }
 
         $url = $this->generateUrl(
@@ -200,7 +200,7 @@ class FeedController extends AbstractController
                 $qb = $this->entryRepository->getBuilderForAllByUser($user->getId());
                 break;
             default:
-                throw new \InvalidArgumentException(sprintf('Type "%s" is not implemented.', $type));
+                throw new \InvalidArgumentException(\sprintf('Type "%s" is not implemented.', $type));
         }
 
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);

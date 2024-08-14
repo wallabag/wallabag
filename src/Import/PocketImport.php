@@ -60,7 +60,7 @@ class PocketImport extends AbstractImport
 
             return $response->toArray()['code'];
         } catch (ExceptionInterface $e) {
-            $this->logger->error(sprintf('PocketImport: Failed to request token: %s', $e->getMessage()), ['exception' => $e]);
+            $this->logger->error(\sprintf('PocketImport: Failed to request token: %s', $e->getMessage()), ['exception' => $e]);
 
             return false;
         }
@@ -88,7 +88,7 @@ class PocketImport extends AbstractImport
 
             return true;
         } catch (ExceptionInterface $e) {
-            $this->logger->error(sprintf('PocketImport: Failed to authorize client: %s', $e->getMessage()), ['exception' => $e]);
+            $this->logger->error(\sprintf('PocketImport: Failed to authorize client: %s', $e->getMessage()), ['exception' => $e]);
 
             return false;
         }
@@ -132,7 +132,7 @@ class PocketImport extends AbstractImport
 
             return true;
         } catch (ExceptionInterface $e) {
-            $this->logger->error(sprintf('PocketImport: Failed to import: %s', $e->getMessage()), ['exception' => $e]);
+            $this->logger->error(\sprintf('PocketImport: Failed to import: %s', $e->getMessage()), ['exception' => $e]);
 
             return false;
         }

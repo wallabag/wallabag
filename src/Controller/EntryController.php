@@ -657,7 +657,7 @@ class EntryController extends AbstractController
                 $qb = $this->entryRepository->getBuilderForAllByUser($this->getUser()->getId());
                 break;
             default:
-                throw new \InvalidArgumentException(sprintf('Type "%s" is not implemented.', $type));
+                throw new \InvalidArgumentException(\sprintf('Type "%s" is not implemented.', $type));
         }
 
         $form = $this->createForm(EntryFilterType::class, [], $formOptions);
