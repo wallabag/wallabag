@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.6.10](https://github.com/wallabag/wallabag/tree/2.6.10)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.9...2.6.10)
+
+### Fixes
+
+* Update site config & tests by @j0k3r in https://github.com/wallabag/wallabag/pull/7582 (fixes "Key provided is shorter
+  than 256 bits, only 240 bits provided" https://github.com/wallabag/wallabag/issues/7531)
+* Update site config by @yguedidi in https://github.com/wallabag/wallabag/pull/7623
+
 ## [2.6.9](https://github.com/wallabag/wallabag/tree/2.6.9)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.8...2.6.9)
 
