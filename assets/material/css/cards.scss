@@ -268,9 +268,11 @@ a.original:not(.waves-effect) {
     }
 
     @include mixin-reading-time {
-      padding: 0 5px;
-      flex-wrap: wrap;
-      margin-left: auto;
+      & {
+        padding: 0 5px;
+        flex-wrap: wrap;
+        margin-left: auto;
+      }
 
       i.material-icons {
         font-size: 20px;
