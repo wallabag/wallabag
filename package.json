@@ -74,10 +74,10 @@
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {
-    "@fontsource/atkinson-hyperlegible": "^5.0.20",
-    "@fontsource/eb-garamond": "^5.0.18",
-    "@fontsource/montserrat": "^5.0.18",
-    "@fontsource/oswald": "^5.0.20",
+    "@fontsource/atkinson-hyperlegible": "^5.0.21",
+    "@fontsource/eb-garamond": "^5.0.19",
+    "@fontsource/montserrat": "^5.0.19",
+    "@fontsource/oswald": "^5.0.21",
     "annotator": "wallabag/annotator#master",
     "clipboard": "^2.0.11",
     "hammerjs": "^2.0.8",
