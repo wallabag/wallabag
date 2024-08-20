@@ -1,0 +1,44 @@
+baseURL: https://doc.wallabag.org
+title: wallabag documentation
+
+menu:
+  main:
+    - identifier: documentation
+      name: Documentation
+      pageRef: /
+      weight: 1
+    - name: Search
+      weight: 2
+      params:
+        type: search
+    - name: GitHub
+      weight: 3
+      url: "https://github.com/wallabag"
+      params:
+        icon: github
+
+params:
+  theme:
+    default: system
+    displayToggle: true
+
+  search:
+    enable: true
+    type: flexsearch
+
+    flexsearch:
+      index: content
+      tokenize: forward
+
+  editURL:
+    enable: true
+    base: "https://github.com/wallabag/doc/edit/master/content"
+
+  highlight:
+    copy:
+      enable: true
+      display: hover
+
+module:
+  imports:
+    - path: github.com/imfing/hextra
