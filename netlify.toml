@@ -1,0 +1,12 @@
+[build]
+  publish = "public/"
+
+[build.environment]
+  HUGO_VERSION = "0.132.1"
+  GO_VERSION = "1.22.5"
+
+[context.production]
+  command = "hugo"
+
+[context.deploy-preview]
+  command = "hugo --buildDrafts -e preview -b $DEPLOY_PRIME_URL"
