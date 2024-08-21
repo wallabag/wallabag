@@ -17228,16 +17228,16 @@
         },
         {
             "name": "phpstan/phpstan-doctrine",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-doctrine.git",
-                "reference": "caa046bd6152818e781260fb3a7a96d6b0fadeed"
+                "reference": "a9bb990e0a1ab33078aa925114845769b4abbb96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/caa046bd6152818e781260fb3a7a96d6b0fadeed",
-                "reference": "caa046bd6152818e781260fb3a7a96d6b0fadeed",
+                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/a9bb990e0a1ab33078aa925114845769b4abbb96",
+                "reference": "a9bb990e0a1ab33078aa925114845769b4abbb96",
                 "shasum": ""
             },
             "require": {
@@ -17294,9 +17294,9 @@
             "description": "Doctrine extensions for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-doctrine/issues",
-                "source": "https://github.com/phpstan/phpstan-doctrine/tree/1.5.0"
+                "source": "https://github.com/phpstan/phpstan-doctrine/tree/1.5.1"
             },
-            "time": "2024-08-05T13:47:07+00:00"
+            "time": "2024-08-20T16:55:00+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
