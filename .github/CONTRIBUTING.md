@@ -60,3 +60,12 @@ To run the PHP formatter:
 
 - when testing using Docker: `docker-compose run --rm php bin/php-cs-fixer fix`
 - otherwise: `php bin/php-cs-fixer fix`
+
+## Expected errors (windows, vscode)
+
+Expected linebreaks to be 'LF' but found 'CRLF' linebreak-style using this command docker
+`git config core.autocrlf false`
+`git rm --cached -r .`
+`git reset --hard`
+### Note - Make sure you don't have any un-committed changes else it will be deleted!
+
