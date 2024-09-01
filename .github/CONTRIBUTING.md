@@ -63,9 +63,11 @@ To run the PHP formatter:
 
 ## Expected errors (windows, vscode)
 
-Expected linebreaks to be 'LF' but found 'CRLF' linebreak-style using this command docker
-`git config core.autocrlf false`
-`git rm --cached -r .`
-`git reset --hard`
+- Expected linebreaks to be 'LF' but found 'CRLF' linebreak-style using this command docker
+
+Solution
+- `git config core.autocrlf false`
+- `git rm --cached -r .`
+- `git reset --hard`
 ### Note - Make sure you don't have any un-committed changes else it will be deleted!
 
