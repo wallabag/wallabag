@@ -87,6 +87,17 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
                 'tags' => ['bar-tag'],
                 'is_not_parsed' => true,
             ],
+            'entry7' => [
+                'user' => 'admin-user',
+                'url' => 'http://0.0.0.0/entry7',
+                'reading_time' => 12,
+                'domain' => 'redirect.io',
+                'mime' => 'text/html',
+                'title' => 'test title entry7',
+                'http_status' => '302',
+                'content' => 'This is redirect/o/',
+                'language' => 'de',
+            ],
         ];
 
         foreach ($entries as $reference => $item) {
@@ -131,6 +142,10 @@ class EntryFixtures extends Fixture implements DependentFixtureInterface
 
             if (isset($item['is_not_parsed'])) {
                 $entry->setNotParsed($item['is_not_parsed']);
+            }
+
+            if (isset($item['http_status'])) {
+                $entry->setHttpStatus($item['http_status']);
             }
 
             $manager->persist($entry);

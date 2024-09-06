@@ -285,13 +285,14 @@ class EntryRepository extends ServiceEntityRepository
      * @param string $tags
      * @param string $detail      'metadata' or 'full'. Include content field if 'full'
      * @param string $domainName
+     * @param int    $httpStatus
      * @param bool   $isNotParsed
      *
      * @todo Breaking change: replace default detail=full by detail=metadata in a future version
      *
      * @return Pagerfanta
      */
-    public function findEntries($userId, $isArchived = null, $isStarred = null, $isPublic = null, $sort = 'created', $order = 'asc', $since = 0, $tags = '', $detail = 'full', $domainName = '', $isNotParsed = null)
+    public function findEntries($userId, $isArchived = null, $isStarred = null, $isPublic = null, $sort = 'created', $order = 'asc', $since = 0, $tags = '', $detail = 'full', $domainName = '', $isNotParsed = null, $httpStatus = null)
     {
         if (!\in_array(strtolower($detail), ['full', 'metadata'], true)) {
             throw new \Exception('Detail "' . $detail . '" parameter is wrong, allowed: full or metadata');
@@ -348,6 +349,10 @@ class EntryRepository extends ServiceEntityRepository
                 // bound parameter to the main query builder
                 $qb->setParameter('label' . $i, $tag);
             }
+        }
+
+        if (\is_int($httpStatus)) {
+            $qb->andWhere('e.httpStatus = :httpStatus')->setParameter('httpStatus', $httpStatus);
         }
 
         if (\is_string($domainName) && '' !== $domainName) {
