@@ -143,6 +143,7 @@ config:
         entries: Eliminar TODOS los artículos
         archived: Eliminar TODOS los artículos archivados
         confirm: ¿Estás completamente seguro? (NO SE PUEDE DESHACER)
+        tagging_rules: Eliminar TODAS las reglas de etiquetado
     form_password:
         description: "Puedes cambiar la contraseña aquí. Tu nueva contraseña debe tener al menos 8 caracteres."
         old_password_label: 'Contraseña actual'
@@ -684,6 +685,7 @@ flashes:
             tagging_rules_not_imported: Error durante la importación de las reglas de etiquetado
             ignore_origin_rules_deleted: Regla de origen ignorado eliminada
             ignore_origin_rules_updated: Regla de origen ignorado actualizada
+            tagging_rules_reset: Se han restablecido las reglas de etiquetas
     entry:
         notice:
             entry_already_saved: 'Artículo ya guardado el %fecha%'
