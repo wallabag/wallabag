@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f733733c88aad761aa9420174427611b",
+    "content-hash": "6407ed5fbd4b0973ed565c2a136d3a81",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -4480,16 +4480,16 @@
         },
         {
             "name": "j0k3r/graby-site-config",
-            "version": "1.0.189",
+            "version": "1.0.191",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby-site-config.git",
-                "reference": "4c4721be3e7b8830dd6881ff80e149fb14a19bb8"
+                "reference": "cb1bba4d1b86a855ba0e3c6de688e14fa54036c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/4c4721be3e7b8830dd6881ff80e149fb14a19bb8",
-                "reference": "4c4721be3e7b8830dd6881ff80e149fb14a19bb8",
+                "url": "https://api.github.com/repos/j0k3r/graby-site-config/zipball/cb1bba4d1b86a855ba0e3c6de688e14fa54036c5",
+                "reference": "cb1bba4d1b86a855ba0e3c6de688e14fa54036c5",
                 "shasum": ""
             },
             "require": {
@@ -4518,9 +4518,9 @@
             "description": "Graby site config files",
             "support": {
                 "issues": "https://github.com/j0k3r/graby-site-config/issues",
-                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.189"
+                "source": "https://github.com/j0k3r/graby-site-config/tree/1.0.191"
             },
-            "time": "2024-07-01T02:17:59+00:00"
+            "time": "2024-09-01T02:26:18+00:00"
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",

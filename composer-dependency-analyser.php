@@ -21,6 +21,7 @@ return $config
         'friendsofphp/php-cs-fixer',
         'friendsoftwig/twigcs',
         'incenteev/composer-parameter-handler',
+        'j0k3r/graby-site-config',
         'laminas/laminas-code',
         'lcobucci/jwt',
         'mgargano/simplehtmldom',
