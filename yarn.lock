@@ -1172,25 +1172,25 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.57.0.tgz#a5417ae8427873f1dd08b70b3574b453e67b5f7f"
   integrity sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==
 
-"@fontsource/atkinson-hyperlegible@^5.0.21":
-  version "5.0.21"
-  resolved "https://registry.yarnpkg.com/@fontsource/atkinson-hyperlegible/-/atkinson-hyperlegible-5.0.21.tgz#20cb2161b5b62ccb48405fddcf83883cb8a69872"
-  integrity sha512-wdfH+i/vkiV+wcR+jklZuFYFLfIcGU6bPqOS9YXbvDLMN+7dfPADVCSwkqMMriWR1hbhr/2TUfyBS3lak7IDkQ==
+"@fontsource/atkinson-hyperlegible@^5.0.22":
+  version "5.0.22"
+  resolved "https://registry.yarnpkg.com/@fontsource/atkinson-hyperlegible/-/atkinson-hyperlegible-5.0.22.tgz#e0361063cd5ebf6f0dfd3f0c861ef4afa63d5094"
+  integrity sha512-3KrBvUvqMNv/n2UN0/SGHnnoL92+o7pD1knkrez3/BaneWhOkzcLN/ulMOcF1YArQ5OwRW7TFPHgVOtEyTA+Lw==
 
-"@fontsource/eb-garamond@^5.0.19":
-  version "5.0.19"
-  resolved "https://registry.yarnpkg.com/@fontsource/eb-garamond/-/eb-garamond-5.0.19.tgz#53d5f877fa27e4bcf1e872d5aafd47c3b7789fda"
-  integrity sha512-AI7qTo4w+pwBQ4TLvm8m1aQNCJg1sg3tb39jLpG5hfMYZaZLkt1MYe8HXjDGKSdBR41lspFTGBfSZh2STjBVsw==
+"@fontsource/eb-garamond@^5.0.20":
+  version "5.0.20"
+  resolved "https://registry.yarnpkg.com/@fontsource/eb-garamond/-/eb-garamond-5.0.20.tgz#8015c8950faac190546b6c2c06f2170fab4ba112"
+  integrity sha512-y9/lWPcAxo+ZDqEgVgP0UNF03nYHQX+xnV+CvVWEfH7wIODhQIPtSOqv7mC3F43LDsnapvTSdvBu4zDf0bEpAA==
 
-"@fontsource/montserrat@^5.0.19":
-  version "5.0.19"
-  resolved "https://registry.yarnpkg.com/@fontsource/montserrat/-/montserrat-5.0.19.tgz#e062bf93b6c244b92a9d798a71c5bba5ee5178d0"
-  integrity sha512-d2JyNIE0i2FOqLFkaSrfsyDzFzkzdER7d3xeHqFOTK5OFE+yiFyvlIBMXg5q+nNpMmVoW+2Q182Csn28o+kijQ==
+"@fontsource/montserrat@^5.0.20":
+  version "5.0.20"
+  resolved "https://registry.yarnpkg.com/@fontsource/montserrat/-/montserrat-5.0.20.tgz#17d317b27aa9f432b2a3e2ae38d53ea24fe527d3"
+  integrity sha512-9woBFkQBhhuEyeHyy6s9IKokjyC8NKuwv+yUw7dqOw2E0zRzD6pxk/KYt+SzKHz5B77AkGKu7swp4dI6mptQkw==
 
-"@fontsource/oswald@^5.0.21":
-  version "5.0.21"
-  resolved "https://registry.yarnpkg.com/@fontsource/oswald/-/oswald-5.0.21.tgz#6e62a4ff8a6c77745ac53bb7d50ad81942f717e4"
-  integrity sha512-1asbeawh2RyIabEiNpqTiouWJ1/P8SIKu1YhEgXEXzR61XWAsXo521RNs5g3HoEs3SRpaI1mNEpwANwkyIgVaA==
+"@fontsource/oswald@^5.0.22":
+  version "5.0.22"
+  resolved "https://registry.yarnpkg.com/@fontsource/oswald/-/oswald-5.0.22.tgz#d6a0484b8b0a5509e6cf23b5a13eb9488c5af54b"
+  integrity sha512-86WuXyTSXLS1gJfSOFZZ0lq7r6nsBWOE6SndIREvFoaT45Ayvl0Ql10AnzT8TQl3vklozo8peaMJUaTyjiXPTA==
 
 "@humanwhocodes/config-array@^0.11.14":
   version "0.11.14"
@@ -5290,7 +5290,16 @@ statuses@2.0.1:
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA==
 
-"string-width-cjs@npm:string-width@^4.2.0", string-width@^4.1.0, string-width@^4.2.3:
+"string-width-cjs@npm:string-width@^4.2.0":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
+  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
+  dependencies:
+    emoji-regex "^8.0.0"
+    is-fullwidth-code-point "^3.0.0"
+    strip-ansi "^6.0.1"
+
+string-width@^4.1.0, string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -5349,7 +5358,14 @@ string_decoder@~1.1.1:
   dependencies:
     safe-buffer "~5.1.0"
 
-"strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.0, strip-ansi@^6.0.1:
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
+  integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
+  dependencies:
+    ansi-regex "^5.0.1"
+
+strip-ansi@^6.0.0, strip-ansi@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
