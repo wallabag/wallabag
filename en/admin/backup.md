@@ -28,5 +28,4 @@ data/db from the wallabag application directory.
 
 ## Pictures
 
-The pictures retrieved by wallabag are stored under web/assets/images (the
-images storage will be implemented in wallabag 2.2).
+The pictures retrieved by wallabag are stored under `web/assets/images`.
