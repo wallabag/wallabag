@@ -10,7 +10,9 @@ cascade:
 
 The main documentation for this application is organized into multiple sections:
 
--   user-related docs
--   apps-related docs
--   administator-related docs
--   developer-related docs
+{{< cards >}}
+  {{< card link="user" title="User" icon="user" >}}
+  {{< card link="apps" title="Apps" icon="device-mobile" >}}
+  {{< card link="admin" title="Administration" icon="server" >}}
+  {{< card link="developer" title="Development" icon="terminal" >}}
+{{< /cards >}}
