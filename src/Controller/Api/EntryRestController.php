@@ -477,7 +477,7 @@ class EntryRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        $urls = json_decode($request->query->get('urls', []));
+        $urls = json_decode(urldecode($request->query->get('urls', '[]')));
 
         if (empty($urls)) {
             return $this->sendResponse([]);
@@ -487,6 +487,7 @@ class EntryRestController extends WallabagRestController
 
         // handle multiple urls
         foreach ($urls as $key => $url) {
+            $url = $url->url;
             $entry = $entryRepository->findByUrlAndUserId(
                 $url,
                 $this->getUser()->getId()
@@ -537,7 +538,7 @@ class EntryRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        $urls = json_decode($request->query->get('urls', []));
+        $urls = json_decode(urldecode($request->query->get('urls', '[]')));
 
         $limit = $this->getParameter('wallabag.api_limit_mass_actions');
 
@@ -552,6 +553,7 @@ class EntryRestController extends WallabagRestController
 
         // handle multiple urls
         foreach ($urls as $key => $url) {
+            $url = $url->url;
             $entry = $entryRepository->findByUrlAndUserId(
                 $url,
                 $this->getUser()->getId()
@@ -1287,7 +1289,7 @@ class EntryRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        $list = json_decode($request->query->get('list', []));
+        $urls = json_decode(urldecode($request->query->get('list', '[]')));
 
         if (empty($list)) {
             return $this->sendResponse([]);
@@ -1354,7 +1356,7 @@ class EntryRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        $list = json_decode($request->query->get('list', []));
+        $urls = json_decode(urldecode($request->query->get('list', '[]')));
 
         if (empty($list)) {
             return $this->sendResponse([]);
