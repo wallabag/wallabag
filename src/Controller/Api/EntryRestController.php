@@ -1289,7 +1289,7 @@ class EntryRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        $urls = json_decode(urldecode($request->query->get('list', '[]')));
+        $list = json_decode(urldecode($request->query->get('list', '[]')));
 
         if (empty($list)) {
             return $this->sendResponse([]);
@@ -1356,7 +1356,7 @@ class EntryRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        $urls = json_decode(urldecode($request->query->get('list', '[]')));
+        $list = json_decode(urldecode($request->query->get('list', '[]')));
 
         if (empty($list)) {
             return $this->sendResponse([]);
