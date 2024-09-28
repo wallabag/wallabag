@@ -1304,7 +1304,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             ],
         ];
 
-        $this->client->request('POST', '/api/entries/tags/lists?list=' . json_encode($list));
+        $this->client->request('POST', '/api/entries/tags/lists?list=' . urlencode(json_encode($list)));
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
@@ -1351,7 +1351,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             ],
         ];
 
-        $this->client->request('DELETE', '/api/entries/tags/list?list=' . json_encode($list));
+        $this->client->request('DELETE', '/api/entries/tags/list?list=' . urlencode(json_encode($list)));
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
         $entry = $em->getRepository(Entry::class)->find($entry->getId());
@@ -1376,7 +1376,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             'http://0.0.0.0/entry2',
         ];
 
-        $this->client->request('POST', '/api/entries/lists?urls=' . json_encode($list));
+        $this->client->request('POST', '/api/entries/lists?urls=' . urlencode(json_encode($list)));
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
@@ -1412,7 +1412,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             'http://0.0.0.0/test-entry-not-exist',
         ];
 
-        $this->client->request('DELETE', '/api/entries/list?urls=' . json_encode($list));
+        $this->client->request('DELETE', '/api/entries/list?urls=' . urlencode(json_encode($list)));
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
