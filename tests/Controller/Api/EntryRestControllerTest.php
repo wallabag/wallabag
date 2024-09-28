@@ -1323,7 +1323,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testPostEntriesTagsListActionNoList()
     {
-        $this->client->request('POST', '/api/entries/tags/lists?list=' . json_encode([]));
+        $this->client->request('POST', '/api/entries/tags/lists?list=' . urlencode(json_encode([])));
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
@@ -1391,7 +1391,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
     public function testPostEntriesListActionWithNoUrls()
     {
-        $this->client->request('POST', '/api/entries/lists?urls=' . json_encode([]));
+        $this->client->request('POST', '/api/entries/lists?urls=' . urlencode(json_encode([])));
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
@@ -1452,7 +1452,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             'http://0.0.0.0/entry1',
         ];
 
-        $this->client->request('POST', '/api/entries/lists?urls=' . json_encode($list));
+        $this->client->request('POST', '/api/entries/lists?urls=' . urlencode(json_encode($list)));
 
         $this->assertSame(400, $this->client->getResponse()->getStatusCode());
         $this->assertStringContainsString('API limit reached', $this->client->getResponse()->getContent());
