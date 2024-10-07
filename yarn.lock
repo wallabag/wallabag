@@ -1177,10 +1177,10 @@
   resolved "https://registry.yarnpkg.com/@fontsource/atkinson-hyperlegible/-/atkinson-hyperlegible-5.1.0.tgz#bd76e32d9cb946526302946ef55bf0095cd7d77d"
   integrity sha512-2qT7mpgHWYM0bB3+5zbcfy49PD5xil/8t3maXxdgFpJo2dFaD9qBgk5u72KgK7ZtmGOWbCjCoAk5e+vpOIqfvA==
 
-"@fontsource/eb-garamond@^5.1.0":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/eb-garamond/-/eb-garamond-5.1.0.tgz#2a76895a7cf4e91aebf9658aaf17f2ddfeb3b8e7"
-  integrity sha512-FEIWkPgBY9CEhZP1YmA36k/f5Hj4z1Tv2FxIiG8aYHmkKGZNVCVIeO345lCVtpG32ZVQKs8te+JpVtg/GCHXyg==
+"@fontsource/eb-garamond@^5.1.1":
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/@fontsource/eb-garamond/-/eb-garamond-5.1.1.tgz#d41dfdedbb46001d3a16262c37cb924c6ce19fcf"
+  integrity sha512-fB/T2F+Hvic0f8AU1oZXc64OyWDrce5x01JUafnC+u2OSILMales+g4CtD02CPP7l9x2AydqD4yV/tK7YbKeMg==
 
 "@fontsource/montserrat@^5.1.0":
   version "5.1.0"

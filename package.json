@@ -75,7 +75,7 @@
   },
   "dependencies": {
     "@fontsource/atkinson-hyperlegible": "^5.1.0",
-    "@fontsource/eb-garamond": "^5.1.0",
+    "@fontsource/eb-garamond": "^5.1.1",
     "@fontsource/montserrat": "^5.1.0",
     "@fontsource/oswald": "^5.1.0",
     "annotator": "wallabag/annotator#master",
