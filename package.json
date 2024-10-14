@@ -41,9 +41,9 @@
     "url": "https://github.com/wallabag/wallabag/issues"
   },
   "devDependencies": {
-    "@babel/core": "^7.25.7",
-    "@babel/eslint-parser": "^7.25.7",
-    "@babel/preset-env": "^7.25.7",
+    "@babel/core": "^7.25.8",
+    "@babel/eslint-parser": "^7.25.8",
+    "@babel/preset-env": "^7.25.8",
     "autoprefixer": "^10.4.20",
     "babel-loader": "^9.2.1",
     "css-loader": "^7.1.2",
