@@ -4928,110 +4928,110 @@ safe-regex-test@^1.0.3:
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
-sass-embedded-android-arm64@1.79.4:
-  version "1.79.4"
-  resolved "https://registry.yarnpkg.com/sass-embedded-android-arm64/-/sass-embedded-android-arm64-1.79.4.tgz#09ac7ff705a6674a4eed7302fe6e3a4c7070d875"
-  integrity sha512-0JAZ8TtXYv9yI3Yasaq03xvo7DLJOmD+Exb30oJKxXcWTAV9TB0ZWKoIRsFxbCyPxyn7ouxkaCEXQtaTRKrmfw==
+sass-embedded-android-arm64@1.79.5:
+  version "1.79.5"
+  resolved "https://registry.yarnpkg.com/sass-embedded-android-arm64/-/sass-embedded-android-arm64-1.79.5.tgz#64649c79e08f90a3875dcc99ca176fadcb3d4865"
+  integrity sha512-pq1RJTENkRmEUMLiVuSGYwuLk8zXovWzrjQxlWZTF/Jn5F7Ypi/3v5huMmgJF5n+etsxjio1PN1idaQ5tPLBmg==
 
-sass-embedded-android-arm@1.79.4:
-  version "1.79.4"
-  resolved "https://registry.yarnpkg.com/sass-embedded-android-arm/-/sass-embedded-android-arm-1.79.4.tgz#500451bbaec62f38761c9534033cbc1190b5fdd3"
-  integrity sha512-YOVpDGDcwWUQvktpJhYo4zOkknDpdX6ALpaeHDTX6GBUvnZfx+Widh76v+QFUhiJQ/I/hndXg1jv/PKilOHRrw==
+sass-embedded-android-arm@1.79.5:
+  version "1.79.5"
+  resolved "https://registry.yarnpkg.com/sass-embedded-android-arm/-/sass-embedded-android-arm-1.79.5.tgz#ad6cacfeb418a79e1fac48146fb6842028ba0bc8"
+  integrity sha512-gYtpQAE2uNFa5IBKBIzUq5ETDS6gnVRmhP5j+N5JGrOThYaGPcG4KrjlU9R3BfCmc7zP5WvlHFZsxSz+2JRT2w==
 
-sass-embedded-android-ia32@1.79.4:
-  version "1.79.4"
-  resolved "https://registry.yarnpkg.com/sass-embedded-android-ia32/-/sass-embedded-android-ia32-1.79.4.tgz#29d0b07a56362c3d7e40dc5f1e7a08e1d07f0483"
-  integrity sha512-IjO3RoyvNN84ZyfAR5s/a8TIdNPfClb7CLGrswB3BN/NElYIJUJMVHD6+Y8W9QwBIZ8DrK1IdLFSTV8nn82xMA==
+sass-embedded-android-ia32@1.79.5:
+  version "1.79.5"
+  resolved "https://registry.yarnpkg.com/sass-embedded-android-ia32/-/sass-embedded-android-ia32-1.79.5.tgz#5360f9b583288d670753814745c227f86ae24e7d"
+  integrity sha512-CgJZjLxYRkgjTP/76WumLlF7+1aW0LA+DSEJhkVaCxe5avndRCmPrNcX0PrtYSDvUgeQDvY7xF+fT9QXN1+NgQ==
 
-sass-embedded-android-riscv64@1.79.4:
-  version "1.79.4"
-  resolved "https://registry.yarnpkg.com/sass-embedded-android-riscv64/-/sass-embedded-android-riscv64-1.79.4.tgz#0ac6efa88497877bc6f9128498f7cef3d5979e5f"
-  integrity sha512-uOT8nXmKxSwuIdcqvElVWBFcm/+YcIvmwfoKbpuuSOSxUe9eqFzxo+fk7ILhynzf6FBlvRUH5DcjGj+sXtCc3w==
+sass-embedded-android-riscv64@1.79.5:
+  version "1.79.5"
+  resolved "https://registry.yarnpkg.com/sass-embedded-android-riscv64/-/sass-embedded-android-riscv64-1.79.5.tgz#b2c1476772f0008c1388ea38a7294ef5c0db6ef6"
+  integrity sha512-OLbdmDSM/eOjO01PUYbS54BQOCM/HHHHWk/4M8HHdxwF3ojy5eqQaA63R1YQ3IJvLEE7dnudofOXmL01B5+yvQ==
 
-sass-embedded-android-x64@1.79.4:
-  version "1.79.4"
-  resolved "https://registry.yarnpkg.com/sass-embedded-android-x64/-/sass-embedded-android-x64-1.79.4.tgz#1c80ac24b5322a8c5322369cae2dc39df018f834"
-  integrity sha512-W2FQoj3Z2J2DirNs3xSBVvrhMuqLnsqvOPulxOkhL/074+faKOZZnPx2tZ5zsHbY97SonciiU0SV0mm98xI42w==
+sass-embedded-android-x64@1.79.5:
+  version "1.79.5"
+  resolved "https://registry.yarnpkg.com/sass-embedded-android-x64/-/sass-embedded-android-x64-1.79.5.tgz#c90533e0eaad9525e753b1ac8f3790e159017416"
+  integrity sha512-UbXxk/rdR3aVBkB7Fh/eAUL7oUADWgQrYpLe9Xu5A0gmthw0/zo/pu7kweBSrbgHnPfWIt/uxwmW4eEAmqqZWQ==
 
-sass-embedded-darwin-arm64@1.79.4:
-  version "1.79.4"
-  resolved "https://registry.yarnpkg.com/sass-embedded-darwin-arm64/-/sass-embedded-darwin-arm64-1.79.4.tgz#2e8761be8fd2bdb2bbfde32b3a796840712c7d55"
-  integrity sha512-pcYtbN1VUAAcfgyHeX8ySndDWGjIvcq6rldduktPbGGuAlEWFDfnwjTbv0hS945ggdzZ6TFnaFlLEDr0SjKzBA==
+sass-embedded-darwin-arm64@1.79.5:
+  version "1.79.5"
+  resolved "https://registry.yarnpkg.com/sass-embedded-darwin-arm64/-/sass-embedded-darwin-arm64-1.79.5.tgz#688c57bccb7edf1adb9965495005a074111a0caa"
+  integrity sha512-qeEl9XhYetZSY1j4nqvh3hB8tfYOAGsOQyVOCaxyX1bubMRSGPvPNIyftm14QzK7EDrE/K/0+FwCvflarOV4NQ==
 
-sass-embedded-darwin-x64@1.79.4:
-  version "1.79.4"
-  resolved "https://registry.yarnpkg.com/sass-embedded-darwin-x64/-/sass-embedded-darwin-x64-1.79.4.tgz#86566e0804d0e3d5da88270e179a74b4fea51cf0"
-  integrity sha512-ir8CFTfc4JLx/qCP8LK1/3pWv35nRyAQkUK7lBIKM6hWzztt64gcno9rZIk4SpHr7Z/Bp1IYWWRS4ZT+4HmsbA==
+sass-embedded-darwin-x64@1.79.5:
+  version "1.79.5"
+  resolved "https://registry.yarnpkg.com/sass-embedded-darwin-x64/-/sass-embedded-darwin-x64-1.79.5.tgz#7f2011a9120a822ef227fbab7ed80881909a9850"
+  integrity sha512-y4pvkYCQhgruxlncub/2j+cZSmlpsZX9Rp1aTRIKvlNagqFStYzFZ6kX3CErlfCEAMYwRVEhP8z/OOoDqnjaZA==
 
-sass-embedded-linux-arm64@1.79.4:
-  version "1.79.4"
-  resolved "https://registry.yarnpkg.com/sass-embedded-linux-arm64/-/sass-embedded-linux-arm64-1.79.4.tgz#eeb141c86bf4698decbade5e8e9f7f21df1884f8"
-  integrity sha512-XIVn2mCuA422SR2kmKjF6jhjMs1Vrt1DbZ/ktSp+eR0sU4ugu2htg45GajiUFSKKRj7Sc+cBdThq1zPPsDLf1w==
+sass-embedded-linux-arm64@1.79.5:
+  version "1.79.5"
+  resolved "https://registry.yarnpkg.com/sass-embedded-linux-arm64/-/sass-embedded-linux-arm64-1.79.5.tgz#ce5845e2dc90edfc273ba9c94768e77565ab8452"
+  integrity sha512-kiUbrLiNAA7vOe6kpdukRhCad1u7ebwhB0ZE63+IgF5HFZ/Qo6GkhHIrVM9AfeLxUT3N6Z4BNtgdcRa9na4Pwg==
 
-sass-embedded-linux-arm@1.79.4:
-  version "1.79.4"
-  resolved "https://registry.yarnpkg.com/sass-embedded-linux-arm/-/sass-embedded-linux-arm-1.79.4.tgz#20beecc8632d958057cef8c11ba2f914e0844545"
-  integrity sha512-H/XEE3rY7c+tY0qDaELjPjC6VheAhBo1tPJQ6UHoBEf8xrbT/RT3dWiIS8grp9Vk54RCn05BEB/+POaljvvKGA==
+sass-embedded-linux-arm@1.79.5:
+  version "1.79.5"
+  resolved "https://registry.yarnpkg.com/sass-embedded-linux-arm/-/sass-embedded-linux-arm-1.79.5.tgz#367286efd539af519c8e6e9b1619ae15376cafcf"
+  integrity sha512-rX6qAR8pE1pevYhGzbCpGFexdH4z6QMnw3IeiCNmkpJ4zMXNEN336xl6SZN0xaPiGuNDhUFcq0wgSq3RDKS5vQ==
 
-sass-embedded-linux-ia32@1.79.4:
-  version "1.79.4"
-  resolved "https://registry.yarnpkg.com/sass-embedded-linux-ia32/-/sass-embedded-linux-ia32-1.79.4.tgz#63a3976753c12a7665be5abc0ecdbbc8000a421d"
-  integrity sha512-3nqZxV4nuUTb1ahLexVl4hsnx1KKwiGdHEf1xHWTZai6fYFMcwyNPrHySCQzFHqb5xiqSpPzzrKjuDhF6+guuQ==
+sass-embedded-linux-ia32@1.79.5:
+  version "1.79.5"
+  resolved "https://registry.yarnpkg.com/sass-embedded-linux-ia32/-/sass-embedded-linux-ia32-1.79.5.tgz#0610e1fcc2c5162513e2ff1accff4f950387f471"
+  integrity sha512-12pj3fBV0+VAX/RI6uYFxi/MoUoihRKP7iVpo9MaT/m+EtvN6mYsDpi/T4pTq2dKQYljoaFq8Rb6tR+FinS1zg==
 
-sass-embedded-linux-musl-arm64@1.79.4:
-  version "1.79.4"
-  resolved "https://registry.yarnpkg.com/sass-embedded-linux-musl-arm64/-/sass-embedded-linux-musl-arm64-1.79.4.tgz#ec9bdb7a4f304b3f7e3f15bf74b041b2aa70bf37"
-  integrity sha512-C6qX06waPEfDgOHR8jXoYxl0EtIXOyBDyyonrLO3StRjWjGx7XMQj2hA/KXSsV+Hr71fBOsaViosqWXPzTbEiQ==
+sass-embedded-linux-musl-arm64@1.79.5:
+  version "1.79.5"
+  resolved "https://registry.yarnpkg.com/sass-embedded-linux-musl-arm64/-/sass-embedded-linux-musl-arm64-1.79.5.tgz#e49c09238f0225f34b756c5d31a4d31fed32ef44"
+  integrity sha512-Qg1HuQ+ebz3wfPT7xty2G8BpDLXdyfMk7WqKd+X1DlFEcY/kcNapwMVFXS2fCYTTR3gcbIZ4p7eUiQySlkj93A==
 
-sass-embedded-linux-musl-arm@1.79.4:
-  version "1.79.4"
-  resolved "https://registry.yarnpkg.com/sass-embedded-linux-musl-arm/-/sass-embedded-linux-musl-arm-1.79.4.tgz#95eb1727e83a460573f7bf03d285aa1b3e40d6ba"
-  integrity sha512-HnbU1DEiQdUayioNzxh2WlbTEgQRBPTgIIvof8J63QLmVItUqE7EkWYkSUy4RhO+8NsuN9wzGmGTzFBvTImU7g==
+sass-embedded-linux-musl-arm@1.79.5:
+  version "1.79.5"
+  resolved "https://registry.yarnpkg.com/sass-embedded-linux-musl-arm/-/sass-embedded-linux-musl-arm-1.79.5.tgz#b7a9dad59932d30950e050566b621ea6eb2f35aa"
+  integrity sha512-EHFrbTgRymEFTf3JnjHzC24PO0WHFjLUEWUJqSuWKZw0+BCL7120MvYIrfkYymPp5UYk+STIjj+Fd9dYSWBrAg==
 
-sass-embedded-linux-musl-ia32@1.79.4:
-  version "1.79.4"
-  resolved "https://registry.yarnpkg.com/sass-embedded-linux-musl-ia32/-/sass-embedded-linux-musl-ia32-1.79.4.tgz#28f07c73be0179ef81bfdcf2cc031c4ae6534195"
-  integrity sha512-y5b0fdOPWyhj4c+mc88GvQiC5onRH1V0iNaWNjsiZ+L4hHje6T98nDLrCJn0fz5GQnXjyLCLZduMWbfV0QjHGg==
+sass-embedded-linux-musl-ia32@1.79.5:
+  version "1.79.5"
+  resolved "https://registry.yarnpkg.com/sass-embedded-linux-musl-ia32/-/sass-embedded-linux-musl-ia32-1.79.5.tgz#c301d39c57688bd03c0bc8e6a39a4d538e4d1916"
+  integrity sha512-2qdsGIcdCnpsw8Ijuq8uk4RifxV/lTd1mqjrfge7AfFBtQIExbxZoYBtbSrcY63ONa+UWEf9Z1p6rZ3QySKWlg==
 
-sass-embedded-linux-musl-riscv64@1.79.4:
-  version "1.79.4"
-  resolved "https://registry.yarnpkg.com/sass-embedded-linux-musl-riscv64/-/sass-embedded-linux-musl-riscv64-1.79.4.tgz#143e8f1455f5c0869994f3de1958f1b9be324701"
-  integrity sha512-G2M5ADMV9SqnkwpM0S+UzDz7xR2njCOhofku/sDMZABzAjQQWTsAykKoGmzlT98fTw2HbNhb6u74umf2WLhCfw==
+sass-embedded-linux-musl-riscv64@1.79.5:
+  version "1.79.5"
+  resolved "https://registry.yarnpkg.com/sass-embedded-linux-musl-riscv64/-/sass-embedded-linux-musl-riscv64-1.79.5.tgz#0d159299a7ae4715d3f8d011447caca781963e27"
+  integrity sha512-wrc6s8YQt95koSkaLoP5HtvAAKxTPWqYZVxnoqp2bHgkKWlr4ymJll9vMcdU3//VxTgJbuH83U5ajzNCtHd0NQ==
 
-sass-embedded-linux-musl-x64@1.79.4:
-  version "1.79.4"
-  resolved "https://registry.yarnpkg.com/sass-embedded-linux-musl-x64/-/sass-embedded-linux-musl-x64-1.79.4.tgz#c26720b1497bbbbf55b54138ffb313257c5dbe19"
-  integrity sha512-kQm8dCU3DXf7DtUGWYPiPs03KJYKvFeiZJHhSx993DCM8D2b0wCXWky0S0Z46gf1sEur0SN4Lvnt1WczTqxIBw==
+sass-embedded-linux-musl-x64@1.79.5:
+  version "1.79.5"
+  resolved "https://registry.yarnpkg.com/sass-embedded-linux-musl-x64/-/sass-embedded-linux-musl-x64-1.79.5.tgz#d353065b40733cdf2b025a0a045a37265751de46"
+  integrity sha512-1J6JrGpVp07GsBEzEGj/9u6UkVUuga2U7kpfkQxIdYOLmXmXmni6zNx89VehaP7X5OSscwJc/Zufh++6VcRQHw==
 
-sass-embedded-linux-riscv64@1.79.4:
-  version "1.79.4"
-  resolved "https://registry.yarnpkg.com/sass-embedded-linux-riscv64/-/sass-embedded-linux-riscv64-1.79.4.tgz#648b70dbb749349ca0fb569280d05b5463bb4770"
-  integrity sha512-GaTI/mXYWYSzG5wxtM4H2cozLpATyh+4l+rO9FFKOL8e1sUOLAzTeRdU2nSBYCuRqsxRuTZIwCXhSz9Q3NRuNA==
+sass-embedded-linux-riscv64@1.79.5:
+  version "1.79.5"
+  resolved "https://registry.yarnpkg.com/sass-embedded-linux-riscv64/-/sass-embedded-linux-riscv64-1.79.5.tgz#5707c645fe81fb43cff1bd5cc0cdc6e1b2c4bfb6"
+  integrity sha512-G45UKRAUgvxXhLROowTgVmyIVyGtRZoCMVH1vPi0EG5SePy43AkhjQVaUb6Ol6lfRRNpQqBFKw3UabxaMCM0Ow==
 
-sass-embedded-linux-x64@1.79.4:
-  version "1.79.4"
-  resolved "https://registry.yarnpkg.com/sass-embedded-linux-x64/-/sass-embedded-linux-x64-1.79.4.tgz#b84a99a2178bde7c984c244544688ab4a46869d6"
-  integrity sha512-f9laGkqHgC01h99Qt4LsOV+OLMffjvUcTu14hYWqMS9QVX5a4ihMwpf1NoAtTUytb7cVF3rYY/NVGuXt6G3ppQ==
+sass-embedded-linux-x64@1.79.5:
+  version "1.79.5"
+  resolved "https://registry.yarnpkg.com/sass-embedded-linux-x64/-/sass-embedded-linux-x64-1.79.5.tgz#9da0591ff6113fdc9a6ecea8ef9d3ed039ac962c"
+  integrity sha512-EOk6pULzxM9b5B8uuuZbQXqfg2BQheAovQeYAw4ueHikaFoESOfaA8OG4kl0v1m5v5tKqAHOjy7xFhtpbEpqEw==
 
-sass-embedded-win32-arm64@1.79.4:
-  version "1.79.4"
-  resolved "https://registry.yarnpkg.com/sass-embedded-win32-arm64/-/sass-embedded-win32-arm64-1.79.4.tgz#2e60184cc5acf58f2004aa3a7eda4c27645d26b7"
-  integrity sha512-cidBvtaA2cJ6dNlwQEa8qak+ezypurzKs0h0QAHLH324+j/6Jum7LCnQhZRPYJBFjHl+WYd7KwzPnJ2X5USWnQ==
+sass-embedded-win32-arm64@1.79.5:
+  version "1.79.5"
+  resolved "https://registry.yarnpkg.com/sass-embedded-win32-arm64/-/sass-embedded-win32-arm64-1.79.5.tgz#919ff85cb65219eb61b9e1415850909e9e70a64f"
+  integrity sha512-KdkJOmJSe5lhR4Kxn522GbZo4jRUnQ+V4JQSaIbyxKndBpD81NGPYhDs0ikpJciqrwbmiBxVD5Qqeim6B1gdxA==
 
-sass-embedded-win32-ia32@1.79.4:
-  version "1.79.4"
-  resolved "https://registry.yarnpkg.com/sass-embedded-win32-ia32/-/sass-embedded-win32-ia32-1.79.4.tgz#b3b885cfd75eebfadbb78eacd0538fdac7c6fc5c"
-  integrity sha512-hexdmNTIZGTKNTzlMcdvEXzYuxOJcY89zqgsf45aQ2YMy4y2M8dTOxRI/Vz7p4iRxVp1Jow6LCtaLHrNI2Ordg==
+sass-embedded-win32-ia32@1.79.5:
+  version "1.79.5"
+  resolved "https://registry.yarnpkg.com/sass-embedded-win32-ia32/-/sass-embedded-win32-ia32-1.79.5.tgz#eba284fb9df058a9d8bb452831cab0393bf7006e"
+  integrity sha512-1YX4TVw6j3eqxRyPK3t45V5WSyAzql6EgKIEtjPQ0+ByRyqLRuHXlotHPX6KOcc0rA3LMUHmdskN1o08sRIDhA==
 
-sass-embedded-win32-x64@1.79.4:
-  version "1.79.4"
-  resolved "https://registry.yarnpkg.com/sass-embedded-win32-x64/-/sass-embedded-win32-x64-1.79.4.tgz#d240b1d43f36049124117e32958e42e02c4f6eac"
-  integrity sha512-73yrpiWIbti6DkxhWURklkgSLYKfU9itDmvHxB+oYSb4vQveIApqTwSyTOuIUb/6Da/EsgEpdJ4Lbj4sLaMZWA==
+sass-embedded-win32-x64@1.79.5:
+  version "1.79.5"
+  resolved "https://registry.yarnpkg.com/sass-embedded-win32-x64/-/sass-embedded-win32-x64-1.79.5.tgz#64e5cbbb441fb39d67185a0bec64323306dba8a1"
+  integrity sha512-8Tj9hBpOd6e+j23uTDecFb1ezQhvjQ+jvgKdVg9VlvwKUWmEStnHKA0x1uIQTThIM3dLCsYe63b/wX43gP8tBA==
 
-sass-embedded@^1.79.4:
-  version "1.79.4"
-  resolved "https://registry.yarnpkg.com/sass-embedded/-/sass-embedded-1.79.4.tgz#45d52b9ca754c526763a1e255d4b98f788ff755b"
-  integrity sha512-3AATrtStMgxYjkit02/Ix8vx/P7qderYG6DHjmehfk5jiw53OaWVScmcGJSwp/d77kAkxDQ+Y0r+79VynGmrkw==
+sass-embedded@^1.79.5:
+  version "1.79.5"
+  resolved "https://registry.yarnpkg.com/sass-embedded/-/sass-embedded-1.79.5.tgz#c8f21531aa8f9ac846032e5da633861c2379d9fa"
+  integrity sha512-QFdalnjGFkbNvb6/uQGmP4OIN+GQ5/R77eu0PsXduDB1YP5JW5DSWFVDAyK6l6C54P+3J3eXkjuPYC0mcwX+AA==
   dependencies:
     "@bufbuild/protobuf" "^2.0.0"
     buffer-builder "^0.2.0"
@@ -5041,26 +5041,26 @@ sass-embedded@^1.79.4:
     supports-color "^8.1.1"
     varint "^6.0.0"
   optionalDependencies:
-    sass-embedded-android-arm "1.79.4"
-    sass-embedded-android-arm64 "1.79.4"
-    sass-embedded-android-ia32 "1.79.4"
-    sass-embedded-android-riscv64 "1.79.4"
-    sass-embedded-android-x64 "1.79.4"
-    sass-embedded-darwin-arm64 "1.79.4"
-    sass-embedded-darwin-x64 "1.79.4"
-    sass-embedded-linux-arm "1.79.4"
-    sass-embedded-linux-arm64 "1.79.4"
-    sass-embedded-linux-ia32 "1.79.4"
-    sass-embedded-linux-musl-arm "1.79.4"
-    sass-embedded-linux-musl-arm64 "1.79.4"
-    sass-embedded-linux-musl-ia32 "1.79.4"
-    sass-embedded-linux-musl-riscv64 "1.79.4"
-    sass-embedded-linux-musl-x64 "1.79.4"
-    sass-embedded-linux-riscv64 "1.79.4"
-    sass-embedded-linux-x64 "1.79.4"
-    sass-embedded-win32-arm64 "1.79.4"
-    sass-embedded-win32-ia32 "1.79.4"
-    sass-embedded-win32-x64 "1.79.4"
+    sass-embedded-android-arm "1.79.5"
+    sass-embedded-android-arm64 "1.79.5"
+    sass-embedded-android-ia32 "1.79.5"
+    sass-embedded-android-riscv64 "1.79.5"
+    sass-embedded-android-x64 "1.79.5"
+    sass-embedded-darwin-arm64 "1.79.5"
+    sass-embedded-darwin-x64 "1.79.5"
+    sass-embedded-linux-arm "1.79.5"
+    sass-embedded-linux-arm64 "1.79.5"
+    sass-embedded-linux-ia32 "1.79.5"
+    sass-embedded-linux-musl-arm "1.79.5"
+    sass-embedded-linux-musl-arm64 "1.79.5"
+    sass-embedded-linux-musl-ia32 "1.79.5"
+    sass-embedded-linux-musl-riscv64 "1.79.5"
+    sass-embedded-linux-musl-x64 "1.79.5"
+    sass-embedded-linux-riscv64 "1.79.5"
+    sass-embedded-linux-x64 "1.79.5"
+    sass-embedded-win32-arm64 "1.79.5"
+    sass-embedded-win32-ia32 "1.79.5"
+    sass-embedded-win32-x64 "1.79.5"
 
 sass-loader@^16.0.2:
   version "16.0.2"
