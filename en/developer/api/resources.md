@@ -11,6 +11,9 @@ list of them:
 -   [A plugin](https://github.com/joshp23/ttrss-to-wallabag-v2) designed
     for [Tiny Tiny RSS](https://tt-rss.org/)
     that makes use of the wallabag v2 API. By Josh Panter.
+-   [A plugin](https://github.com/Joedmin/xExtension-wallabag-button) designed
+    for [FreshRSS](https://www.freshrss.org/)
+    that makes use of the wallabag v2 API. By Joedmin.
 -   [Golang wrapper for the wallabag
     API](https://github.com/Strubbl/wallabago) by Strubbl, for his
     projects [wallabag-stats
