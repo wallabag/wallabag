@@ -474,7 +474,6 @@ quickstart:
         description: Jeżeli potrzebujesz pomocy, jesteśmy tutaj dla ciebie.
         github: na GitHubie
         email: przez e-mail
-        matrix: na Gitterze
 tag:
     page_title: Tagi
     list:
