@@ -457,7 +457,7 @@ quickstart:
         description: Parce que vous avez peut-être besoin de nous poser une question, nous sommes disponibles pour vous.
         github: Sur GitHub
         email: Par courriel
-        gitter: Sur Gitter
+        matrix: Sur Matrix
 tag:
     confirm:
         delete: Supprimer le tag %name%

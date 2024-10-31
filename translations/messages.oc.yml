@@ -473,7 +473,7 @@ quickstart:
         description: Perque avètz benlèu besonh de nos pausar una question, sèm disponibles per vosautres.
         github: Sus GitHub
         email: Per e-mail
-        gitter: Sus Gitter
+        matrix: Sus Matrix
 tag:
     page_title: Etiquetas
     list:
