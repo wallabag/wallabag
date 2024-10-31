@@ -57,6 +57,7 @@ class ImportController extends AbstractController
                     + $this->rabbitMQConsumerTotalProxy->getTotalMessage('pinboard')
                     + $this->rabbitMQConsumerTotalProxy->getTotalMessage('delicious')
                     + $this->rabbitMQConsumerTotalProxy->getTotalMessage('elcurator')
+                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('omnivore')
                 ;
             } catch (\Exception $e) {
                 $rabbitNotInstalled = true;
@@ -75,6 +76,7 @@ class ImportController extends AbstractController
                     + $redis->llen('wallabag.import.pinboard')
                     + $redis->llen('wallabag.import.delicious')
                     + $redis->llen('wallabag.import.elcurator')
+                    + $redis->llen('wallabag.import.omnivore')
                 ;
             } catch (\Exception $e) {
                 $redisNotInstalled = true;

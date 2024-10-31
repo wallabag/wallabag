@@ -503,6 +503,10 @@ import:
         page_title: 'Import > elCurator'
         description: 'This importer will import all your elCurator articles.'
         how_to: Please select your elCurator export and click on the button below to upload and import it.
+    omnivore:
+        page_title: 'Import > Omnivore'
+        description: 'This importer will import all your Omnivore articles.'
+        how_to: Please unzip your Omnivore export, then upload each JSON file named "metadata_x_to_y.json" one by one.
     readability:
         page_title: Import > Readability
         description: This importer will import all your Readability articles.

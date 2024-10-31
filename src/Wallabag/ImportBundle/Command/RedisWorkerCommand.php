@@ -27,7 +27,7 @@ class RedisWorkerCommand extends Command
         $this
             ->setName('wallabag:import:redis-worker')
             ->setDescription('Launch Redis worker')
-            ->addArgument('serviceName', InputArgument::REQUIRED, 'Service to use: wallabag_v1, wallabag_v2, pocket, readability, pinboard, delicious, firefox, chrome or instapaper')
+            ->addArgument('serviceName', InputArgument::REQUIRED, 'Service to use: wallabag_v1, wallabag_v2, pocket, readability, pinboard, delicious, omnivore, firefox, chrome or instapaper')
             ->addOption('maxIterations', '', InputOption::VALUE_OPTIONAL, 'Number of iterations before stopping', false)
         ;
     }

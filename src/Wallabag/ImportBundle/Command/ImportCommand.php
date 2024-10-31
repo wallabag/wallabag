@@ -15,6 +15,7 @@ use Wallabag\ImportBundle\Import\ChromeImport;
 use Wallabag\ImportBundle\Import\DeliciousImport;
 use Wallabag\ImportBundle\Import\FirefoxImport;
 use Wallabag\ImportBundle\Import\InstapaperImport;
+use Wallabag\ImportBundle\Import\OmnivoreImport;
 use Wallabag\ImportBundle\Import\PinboardImport;
 use Wallabag\ImportBundle\Import\ReadabilityImport;
 use Wallabag\ImportBundle\Import\WallabagV1Import;
@@ -34,9 +35,10 @@ class ImportCommand extends Command
     private InstapaperImport $instapaperImport;
     private PinboardImport $pinboardImport;
     private DeliciousImport $deliciousImport;
+    private OmnivoreImport $omnivoreImport;
     private WallabagV1Import $wallabagV1Import;
 
-    public function __construct(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage, UserRepository $userRepository, WallabagV2Import $wallabagV2Import, FirefoxImport $firefoxImport, ChromeImport $chromeImport, ReadabilityImport $readabilityImport, InstapaperImport $instapaperImport, PinboardImport $pinboardImport, DeliciousImport $deliciousImport, WallabagV1Import $wallabagV1Import)
+    public function __construct(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage, UserRepository $userRepository, WallabagV2Import $wallabagV2Import, FirefoxImport $firefoxImport, ChromeImport $chromeImport, ReadabilityImport $readabilityImport, InstapaperImport $instapaperImport, PinboardImport $pinboardImport, DeliciousImport $deliciousImport, OmnivoreImport $omnivoreImport, WallabagV1Import $wallabagV1Import)
     {
         $this->entityManager = $entityManager;
         $this->tokenStorage = $tokenStorage;
@@ -48,6 +50,7 @@ class ImportCommand extends Command
         $this->instapaperImport = $instapaperImport;
         $this->pinboardImport = $pinboardImport;
         $this->deliciousImport = $deliciousImport;
+        $this->omnivoreImport = $omnivoreImport;
         $this->wallabagV1Import = $wallabagV1Import;
 
         parent::__construct();
@@ -119,6 +122,9 @@ class ImportCommand extends Command
                 break;
             case 'delicious':
                 $import = $this->deliciousImport;
+                break;
+            case 'omnivore':
+                $import = $this->omnivoreImport;
                 break;
             default:
                 $import = $this->wallabagV1Import;
