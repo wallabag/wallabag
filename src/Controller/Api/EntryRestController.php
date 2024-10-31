@@ -798,7 +798,10 @@ class EntryRestController extends WallabagRestController
 
         $errors = $validator->validate($entry);
         if (\count($errors) > 0) {
-            $errorsString = (string) $errors;
+            $errorsString = '';
+            foreach ($errors as $error) {
+                $errorsString .= $error->getMessage() . "\n";
+            }
 
             return $this->sendResponse($errorsString);
         }
