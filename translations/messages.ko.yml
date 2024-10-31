@@ -643,7 +643,7 @@ quickstart:
     more: 더보기…
     page_title: 빠른시작
     support:
-        gitter: Gitter 에서
+        matrix: Matrix 에서
         email: 이메일로
         github: GitHub에서
         description: 도움이 필요하시면 저희가 도와 드리겠습니다.

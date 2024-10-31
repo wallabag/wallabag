@@ -410,7 +410,7 @@ quickstart:
         language: Endre språk og utseende
         title: Sett opp programmet
     support:
-        gitter: På Gitter
+        matrix: På Matrix
         email: Per e-post
         github: på GitHub
         title: Støtte

@@ -462,7 +462,7 @@ quickstart:
         description: 何か助けが必要な場合は、私たちがお役に立ちます。
         github: GitHub 上で
         email: メールで
-        gitter: Gitter 上で
+        matrix: Matrix 上で
 tag:
     list:
         number_on_the_page: '{0} タグはありません。|{1} 1 つタグがあります。|]1,Inf[ %count% タグがあります。'

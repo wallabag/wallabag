@@ -628,7 +628,6 @@ quickstart:
         use_docker: Koristi Docker za instliranje wallabaga
     support:
         github: Na GitHubu
-        gitter: Na Gitteru
         title: Podrška
         email: Putem e-maila
         description: Ako trebaš pomoć, spremni smo ti pomoći.
