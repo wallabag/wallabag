@@ -69,6 +69,22 @@ services:
         arguments:
             $import: '@Wallabag\ImportBundle\Import\DeliciousImport'
 
+    # Omnivore
+    wallabag_import.queue.redis.omnivore:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            $queueName: "wallabag.import.omnivore"
+
+    wallabag_import.producer.redis.omnivore:
+        class: Wallabag\ImportBundle\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.omnivore"
+
+    wallabag_import.consumer.redis.omnivore:
+        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        arguments:
+            $import: '@Wallabag\ImportBundle\Import\OmnivoreImport'
+
     # pocket
     wallabag_import.queue.redis.pocket:
         class: Simpleue\Queue\RedisQueue

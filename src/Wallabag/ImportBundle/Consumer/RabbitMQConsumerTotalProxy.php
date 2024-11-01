@@ -20,8 +20,9 @@ class RabbitMQConsumerTotalProxy
     private Consumer $pinboardConsumer;
     private Consumer $deliciousConsumer;
     private Consumer $elcuratorConsumer;
+    private Consumer $omnivoreConsumer;
 
-    public function __construct(Consumer $pocketConsumer, Consumer $readabilityConsumer, Consumer $wallabagV1Consumer, Consumer $wallabagV2Consumer, Consumer $firefoxConsumer, Consumer $chromeConsumer, Consumer $instapaperConsumer, Consumer $pinboardConsumer, Consumer $deliciousConsumer, Consumer $elcuratorConsumer)
+    public function __construct(Consumer $pocketConsumer, Consumer $readabilityConsumer, Consumer $wallabagV1Consumer, Consumer $wallabagV2Consumer, Consumer $firefoxConsumer, Consumer $chromeConsumer, Consumer $instapaperConsumer, Consumer $pinboardConsumer, Consumer $deliciousConsumer, Consumer $elcuratorConsumer, Consumer $omnivoreConsumer)
     {
         $this->pocketConsumer = $pocketConsumer;
         $this->readabilityConsumer = $readabilityConsumer;
@@ -33,6 +34,7 @@ class RabbitMQConsumerTotalProxy
         $this->pinboardConsumer = $pinboardConsumer;
         $this->deliciousConsumer = $deliciousConsumer;
         $this->elcuratorConsumer = $elcuratorConsumer;
+        $this->omnivoreConsumer = $omnivoreConsumer;
     }
 
     /**
@@ -76,6 +78,9 @@ class RabbitMQConsumerTotalProxy
                 break;
             case 'elcurator':
                 $consumer = $this->elcuratorConsumer;
+                break;
+            case 'omnivore':
+                $consumer = $this->omnivoreConsumer;
                 break;
             default:
                 return 0;
