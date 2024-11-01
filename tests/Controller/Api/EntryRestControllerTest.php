@@ -601,6 +601,25 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame(400, $this->client->getResponse()->getStatusCode());
     }
 
+    public function testBadFormatURL()
+    {
+        $this->client->request('POST', '/api/entries.json', [
+            'url' => 'wallabagIsAwesome',
+            'tags' => 'google',
+            'title' => 'New title for my article',
+            'content' => 'my content',
+            'language' => 'de',
+            'published_at' => '2016-09-08T11:55:58+0200',
+            'authors' => 'bob,helen',
+            'public' => 1,
+        ]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+        $this->assertStringContainsString('The url \'"wallabagIsAwesome"\' is not a valid url', $content);
+    }
+
     public function testPostEntry()
     {
         $this->client->request('POST', '/api/entries.json', [
