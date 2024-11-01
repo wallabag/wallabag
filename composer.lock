@@ -5626,16 +5626,16 @@
         },
         {
             "name": "nelmio/api-doc-bundle",
-            "version": "v4.32.3",
+            "version": "v4.33.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/NelmioApiDocBundle.git",
-                "reference": "c0a4aee62325be5a2ba101b53ac255bfb2069cc2"
+                "reference": "9ee5f586213fc77c9adc56bd59cc9229a9da2527"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/c0a4aee62325be5a2ba101b53ac255bfb2069cc2",
-                "reference": "c0a4aee62325be5a2ba101b53ac255bfb2069cc2",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/9ee5f586213fc77c9adc56bd59cc9229a9da2527",
+                "reference": "9ee5f586213fc77c9adc56bd59cc9229a9da2527",
                 "shasum": ""
             },
             "require": {
@@ -5736,7 +5736,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nelmio/NelmioApiDocBundle/issues",
-                "source": "https://github.com/nelmio/NelmioApiDocBundle/tree/v4.32.3"
+                "source": "https://github.com/nelmio/NelmioApiDocBundle/tree/v4.33.0"
             },
             "funding": [
                 {
@@ -5744,7 +5744,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-25T14:07:25+00:00"
+            "time": "2024-10-31T12:10:57+00:00"
         },
         {
             "name": "nelmio/cors-bundle",
