@@ -144,7 +144,7 @@ The article window consists from:
 
    ![Edit title](../../../img/user/wallabagger/use-edittitle.png)
 
-  - set archived and starred flags icons ![Flags icons](../../../img/user/wallabagger/use-flagsicons.png) These icons change its appeareance when the flags are set ![Flags is set](../../../img/user/wallabagger/use-flagsset.png)
+  - set archived and starred flags icons ![Flags icons](../../../img/user/wallabagger/use-flagsicons.png) These icons change its appearance when the flags are set ![Flags is set](../../../img/user/wallabagger/use-flagsset.png)
   - delete article icon ![Delete icon](../../../img/user/wallabagger/use-deleteicon.png) clicking it opens a confirmation dialog  to make sure you want to delete your article
 
    ![Delete dialog](../../../img/user/wallabagger/use-deletedialog.png)
@@ -176,5 +176,5 @@ or on
 
 ### Windows Phone
 
-You can downlaod the [Windows Phone application
+You can download the [Windows Phone application
 here](https://www.microsoft.com/store/apps/9nblggh5x3p6).

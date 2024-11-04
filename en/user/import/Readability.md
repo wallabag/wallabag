@@ -5,7 +5,7 @@
 On the tools
 ([<https://www.readability.com/tools/>](https://www.readability.com/tools/))
 page, click on "Export your data" in the "Data Export" section. You will
-received an email to download a json (which does not end with .json in
+receive an email to download a json (which does not end with .json in
 fact).
 
 ## Import your data into wallabag

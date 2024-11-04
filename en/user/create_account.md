@@ -6,7 +6,7 @@ On the login page, click on `Register` button.
 
 ![Registration form](../../img/user/registration_form.png)
 
-You have to fill the form. Please sure to type a valid email address,
+You have to fill the form. Please be sure to type a valid email address,
 we'll send you an activation email.
 
 ![Email was sent to activate account](../../img/user/sent_email.png)
