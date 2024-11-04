@@ -4,7 +4,7 @@ Articles are the core feature of wallabag. wallabag's content parser, named Grab
 
 ## Mark articles as read
 
-When you mark an article as read, it gets out of the category « Unread » and gets puts in the « Archive » category.
+When you mark an article as read, it moves from the category « Unread » to in the « Archive » category.
 
 ## Favorite articles
 
