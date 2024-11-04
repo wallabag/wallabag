@@ -20,6 +20,6 @@ une liste non exhaustive :
     graphe](https://codeberg.org/strubbl/wallabag-stats) et l'outil de
     ligne de commande
     [wallabag-add-article](https://codeberg.org/strubbl/wallabag-add-article).
--   Tool to automatically download Wallabag articles into your local
+-   Tool to automatically download wallabag articles into your local
     computer or Kobo ebook reader
     [wallabako](https://gitlab.com/anarcat/wallabako) par anarcat.

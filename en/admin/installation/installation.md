@@ -24,7 +24,7 @@ If you want to use SQLite to store your data, please put `%kernel.root_dir%/../d
 {% endhint %}
 
 {% hint style="info" %}
-If you're installing Wallabag behind Squid as a reverse proxy, make sure to update your `squid.conf` configuration to include `login=PASS` in the `cache_peer` line. This is necessary for API calls to work properly.
+If you're installing wallabag behind Squid as a reverse proxy, make sure to update your `squid.conf` configuration to include `login=PASS` in the `cache_peer` line. This is necessary for API calls to work properly.
 {% endhint %}
 
 ## On shared hosting
@@ -35,7 +35,7 @@ configuration uses MySQL for the database. To add the setting for your database,
 We have already created a user: the login and password are `wallabag`.
 
 With this package, wallabag doesn't check for mandatory extensions used
-in the application (theses checks are made during `composer install`
+in the application (these checks are made during `composer install`
 when you have a dedicated web server, see above).
 
 Execute this command to download and extract the latest package:

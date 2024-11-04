@@ -9,7 +9,7 @@ procedure for wallabag v1 or v2.
 ## Steps to configure your app
 
 When you first start the app, you see the welcome screen, where you are
-adviced to configure the app for your wallabag instance at first.
+advised to configure the app for your wallabag instance at first.
 
 ![Welcome screen](../../img/user/android_welcome_screen.en.png)
 
