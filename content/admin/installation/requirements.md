@@ -14,7 +14,7 @@ To install wallabag easily, we provide a `Makefile`, so you need to have the `ma
 wallabag uses a large number of PHP libraries.
 These libraries must be installed with a tool called **Composer**.
 
-Check that the installed version is at least the 1.8.0:
+Check that the installed version is at least 1.8.0:
 
     composer --version
 
@@ -22,11 +22,11 @@ If not, try to upgrade it using
 
     composer selfupdate
 
-If that command isn't recognized, please, [re-install it](https://getcomposer.org/doc/00-intro.md).
+If that command isn't recognized, please [re-install it](https://getcomposer.org/doc/00-intro.md).
 
 ## PHP Extensions
 
-You'll also need the following extensions. Some of these may already activated, so you may not have to install all corresponding packages.
+You'll also need the following extensions. Some of these may already be activated, so you may not have to install all corresponding packages.
 
 -   php-session
 -   php-ctype

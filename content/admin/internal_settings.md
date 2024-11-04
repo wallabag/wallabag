@@ -3,7 +3,7 @@ title: Internal Settings
 weight: 9
 ---
 
-The internal settings page is only available for the instance administrator. It allows to handle more sensible settings, such as activating some features.
+The internal settings page is only available for the instance administrator. It allows handling more sensitive settings, such as activating specific features.
 
 ## Analytics
 
@@ -45,9 +45,9 @@ URL Shaarli instance.
 
 `1` to show the share button for email, `0` to deactivate.
 
-### Allow public url for entries
+### Allow public URL for entries
 
-`1` to allow to publicly share articles, `0` to deactivate.
+`1` to allow publicly sharing articles, `0` to deactivate.
 
 ### Enable share to Shaarli
 
@@ -125,14 +125,14 @@ Username of the account used for demo.
 
 ### Download images locally
 
-`1` to activate local pictures downloading, `0`, to deactivate.
+`1` to activate local picture downloading, `0` to deactivate.
 
-Once this feature is activated, the articles pictures will be downloaded in the `/web/assets/images` folder of your wallabag instance. The path of pictures in articles will also be updated to the path of pictures which are on your instance.
+Once this feature is activated, the article pictures will be downloaded in the `/web/assets/images` folder of your wallabag instance. The path of pictures in articles will also be updated to the path of pictures which are on your instance.
 
 {{< callout type="info" >}}
-If you want GIFs to keep animation, install `imagick` PHP extension. It's mostly available through distros packet management as `php-imagick`.
+If you want GIFs to keep animation, install the `imagick` PHP extension. It's mostly available through distros packet management as `php-imagick`.
 {{< /callout >}}
 
 ### Support URL for wallabag
 
-URL used in emails sent by wallabag for any help request.
+URL used in emails sent by wallabag for help requests.

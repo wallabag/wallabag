@@ -180,6 +180,6 @@ curl --request DELETE "https://localhost:8000/api/entries/1.html?access_token=ZG
 
 ## Other methods
 
-We didn't write samples for each API method.
+We didn't write examples for each API method.
 
-Have a look on the listing here: https://app.wallabag.it/api/doc to know each method.
+Have a look on the listing here: https://app.wallabag.it/api/doc to learn about each method.

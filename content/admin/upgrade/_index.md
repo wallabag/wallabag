@@ -20,12 +20,12 @@ But **first**, ensure you have `composer` installed on your server (or at least 
 
 Same steps as for [upgrading from 2.2.x to 2.3.x](#upgrading-from-22x-to-23x).
 
-⚠️ **There are two points to focus for that update**:
+⚠️ **There are two points to focus on for that update**:
 
 1. We added new fields in the database, don't forget to run migration (by running `make update`) otherwise your wallabag won't work.
 2. We've updated the mailer config which needs to be replicated otherwise the image might not work.
 
-   We removed in `app/config/parameters.yml`:
+   We removed these fields from `app/config/parameters.yml`:
    - `mailer_transport`
    - `mailer_user`
    - `mailer_password`
@@ -44,16 +44,15 @@ Same steps as for [upgrading from 2.2.x to 2.3.x](#upgrading-from-22x-to-23x).
 
 ### For shared hosting
 
-PHP version compatibility have changed, check the [release notes](https://github.com/wallabag/wallabag/releases/tag/2.4.0) for details.
+PHP version compatibility has changed. Check the [release notes](https://github.com/wallabag/wallabag/releases/tag/2.4.0) for details.
 
-[Apply the general steps for upgrades on the shared hosting](#upgrade-on-a-shared-hosting) with the following modifications :
+[Apply the general steps for upgrades on shared hosting](#upgrade-on-a-shared-hosting) with the following modifications:
 
 Use these [data queries for the database upgrade to 2.4]({{< relref "query-upgrade-23-24.md" >}}).
 
-Four parameters were created and MUST be added to your `app/config/parameters.yml` file : `mailer_port`, `mailer_encryption`, `mailer_auth_mode` and `sentry_dsn` 
+Four parameters were created and MUST be added to your `app/config/parameters.yml` file: `mailer_port`, `mailer_encryption`, `mailer_auth_mode` and `sentry_dsn`.
 
-Do not forget to run `bin/console cache:clear --env=prod` in the wallabag directory afterwards
-
+Do not forget to run `bin/console cache:clear --env=prod` in the wallabag directory afterwards.
 
 ## Upgrading from 2.3.x to 2.3.y
 
@@ -63,7 +62,7 @@ make update
 
 That's all.
 
-If you got an error with `Not a git repository`, it means you didn't install wallabag using git but rather using an archive. [Follow steps for the shared hosting](#upgrade-on-a-shared-hosting) then.
+If you get an error with `Not a git repository`, it means you installed wallabag using an archive rather than git. In this case, [follow the steps for shared hosting](#upgrade-on-a-shared-hosting).
 
 ## Upgrading from 2.2.x to 2.3.x
 
@@ -76,7 +75,7 @@ make update
 ### Upgrade on a shared hosting
 
 1. Backup your `app/config/parameters.yml` file.
-1. Download the last release of wallabag:
+1. Download the latest release of wallabag:
 
     ```bash
     wget https://wllbg.org/latest-v2-package && tar xvf latest-v2-package
@@ -85,13 +84,13 @@ make update
     You will find the [md5 hash of the latest package on our website](https://wallabag.org/en#download).
 
 1. Extract the archive in your wallabag folder and replace `app/config/parameters.yml` with yours.
-1. Please check that your `app/config/parameters.yml` contains all the parameters as they are **all mandatory**. You can find [here a documentation about parameters]({{< relref "parameters.md" >}}).
-1. If you have modified the `app/config/parameters.yml` file, run `bin/console cache:clear --env=prod` afterwards in the wallabag directory. A warning will appear if a parameter was forgotten.
-1. If you use SQLite, you must also copy your `data/` folder inside the new installation.
-1. Empty `var/cache` folder.
-1. You must run some SQL queries to upgrade your database. We assume that the table prefix is `wallabag_`. Don't forget to backup your database before migrating.
+1. Please check that your `app/config/parameters.yml` contains all the parameters as they are **all mandatory**. You can find documentation about parameters [here]({{< relref "parameters.md" >}}).
+1. If you have modified the `app/config/parameters.yml` file, run `bin/console cache:clear --env=prod` afterwards in the wallabag directory. A warning will appear if any parameter is missing.
+1. If you use SQLite, you must also copy your `data/` folder into the new installation.
+1. Empty the `var/cache` folder.
+1. You must run SQL queries to upgrade your database. We assume that the table prefix is `wallabag_`. Don't forget to backup your database before migrating.
 1. You may encounter issues with indexes names: if so, please change queries with the correct index name.
-1. [You can find all the queries here]({{< relref "query-upgrade-22-23.md" >}}).
+1. You can find all the required queries in the [query upgrade documentation]({{< relref "query-upgrade-22-23.md" >}}).
 
 ## Upgrading from 2.x.y to 2.3.x
 

@@ -13,8 +13,8 @@ Since 2.6.6, the `gmail` transport is available again using the DSN: `gmail+smtp
 | -----|-------------|-------- |
 | mailer_dsn | One liner with all the mailer parameters `smtp://user:pass@host:465`. Any characters considered special need to be urlencoded in `user`, `pass` and `host`. | smtp://127.0.0.1 |
 
-note: In a case, that after supplying urlencoded characters, the start up process crashes, try "escaping" them with additional % character:
-eg. pass%20word -> pass%%20word. Might be useful for Google App Passwords.
+note: In the event that supplying URL-encoded characters causes the startup process to crash, try "escaping" them with an additional % character:
+e.g., pass%20word -> pass%%20word. This might be useful for Google App Passwords.
 
 {{< callout type="info" >}}
 Symfony can support other transports which aren't shipped by default with wallabag: Amazon SES, MailChimp, Mailgun, Postmark & SendGrid.
@@ -26,7 +26,7 @@ You can install them using Composer. It's a more complex step to do, [check the 
 
 On wallabag < 2.6.1, the mailer was different (we were using an older version of Symfony).
 
-Here are the previous parameters available.
+Here are the previously available parameters.
 
 | Name | Description | Default |
 | -----|-------------|-------- |
