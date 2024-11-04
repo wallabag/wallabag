@@ -5,39 +5,38 @@ weight: 5
 
 ## Tips for front-end developers
 
-Starting from version 2.3, wallabag uses webpack to bundle its assets.
+wallabag uses webpack to bundle its assets since version 2.3.
 
 ### Dev mode
 
-If the server runs in dev mode, you need to run `yarn build:dev` to
-generate the outputted javascript files for each theme. These are named
-`%theme%.dev.js` and are ignored by git. You need to relaunch
-`yarn build:dev` for each change made to one of the assets files
-(js, css, pictures, fonts,...).
+When running the server in development mode, execute `yarn build:dev` to
+generate JavaScript files for each theme. The generated files are named
+`%theme%.dev.js` and git ignores them. You must run `yarn build:dev` again
+after making any changes to asset files (JavaScript, CSS, images, fonts, etc.).
 
 ### Live reload
 
-Webpack brings support for live reload, which means you don't need to
-regenerate the assets file for each change neither reload the page
-manually. Changes are applied automatically in the web page. Just set
-the `use_webpack_dev_server` setting to `true` in
-`app/config/config.yml` and run `yarn watch` and you're good to go.
+Webpack's live reload feature eliminates the need to manually regenerate
+asset files or refresh the page after making changes. The changes appear
+automatically in the web page. To enable this feature:
 
-Don't forget to put back `use_webpack_dev_server` to `false` when not
+1. Set `use_webpack_dev_server` to `true` in `app/config/config.yml`
+2. Run `yarn watch`
+
+Important: Set `use_webpack_dev_server` back to `false` when you finish
 using the live reload feature.
-
 
 ### Production builds
 
-When you want to commit your changes, build them in production
-environment by using `yarn build:prod`. This will build all the
-assets needed for wallabag. To test that it properly works, you'll need
-to have a server in production mode, for instance with
-`bin/console server:run --env=prod`.
+Before committing changes, build the assets for production by running
+`yarn build:prod`. This command builds all necessary assets for wallabag.
+To verify the build works correctly, start a server in production mode
+using `bin/console server:run --env=prod`.
 
-Don't forget to generate production builds before committing !
+Remember: Always generate production builds before committing changes!
 
 ## Code style
 
-Code style is checked by two tools : stylelint for (S)CSS and eslint for
-JS. ESlint config is based on the Airbnb base preset.
+Two tools check code style:
+- stylelint for (S)CSS
+- eslint for JavaScript (using the Airbnb base preset configuration)

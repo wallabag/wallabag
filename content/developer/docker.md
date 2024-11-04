@@ -6,14 +6,13 @@ weight: 2
 Run wallabag in docker-compose
 ==============================
 
-This document describes the usage of docker for wallabag development
-purposes. In order to run wallabag in production, please use the
+This document describes how to use Docker for wallabag development
+purposes. For running wallabag in production, please use the
 [official docker-compose configuration
 provided](https://github.com/wallabag/docker).
 
-In order to run your own development instance of wallabag, you may want
-to use the pre-configured docker compose files provided along in the
-wallabag repository.
+To run your own development instance of wallabag, you can use the
+pre-configured docker compose files provided in the wallabag repository.
 
 Requirements
 ------------
@@ -26,9 +25,8 @@ system and up to date.
 Switch DBMS
 -----------
 
-By default, wallabag will start with a SQLite database. Since wallabag
-provides support for Postgresql and MySQL, docker containers are also
-available for these ones.
+By default, wallabag starts with a SQLite database. However, wallabag
+also supports PostgreSQL and MySQL. Docker containers are available for both.
 
 In `docker-compose.yml`, for the chosen DBMS uncomment:
 
@@ -57,4 +55,4 @@ Run wallabag
 
 At various step, you'll probably run into UNIX permission problems, bad
 paths in generated cache, etc… Operations like removing cache files or
-changing files owners might be frequently required, so don't be afraid !
+changing files owners might be frequently required, so don't be afraid!
