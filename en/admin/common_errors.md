@@ -1,6 +1,6 @@
 # Common errors
 
-Here is a list of commong errors that we saw in GitHub's issues.
+Here is a list of common errors that we have seen in GitHub's issues.
 
 ## Migration script assumes quote table names are enabled for MySQL
 
@@ -8,7 +8,7 @@ If during migration you got some problems with MySQL with an error like that:
 
 > SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '"wallabag_entry" ADD uuid LONGTEXT DEFAULT NULL' at line 1
 
-It means you should enabled the `ANSI_QUOTES` of `SQL_MODE`.
+It means you should enable the `ANSI_QUOTES` of `SQL_MODE`.
 
 You can do that in your `app/config/config.yml` file:
 
