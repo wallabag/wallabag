@@ -19,7 +19,7 @@ By default, if a website can't be fetched because of a request error (a page not
 If you find a line starting with `graby.ERROR` during the timeframe of your test, it means the request failed because of an error. The status code of the error can already give you a hint of the issue:
 
 - a `404` code means that wallabag couldn't find the article at the given address;
-- a `403` code means that access to the page is forbidden (either because of a misconfiguration of the remote server or because the host has taken anti-scrapping measures);
+- a `403` code means that access to the page is forbidden (either because of a misconfiguration of the remote server or because the host has taken anti-scraping measures);
 - a `500` code might indicate an issue with the remote server or your internet connection;
 - `504` or `408` codes could indicate a time-out in the connection with the server.
 

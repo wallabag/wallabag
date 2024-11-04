@@ -28,7 +28,7 @@ URL of your Diaspora\* instance.
 
 ### Enable authentication for websites with paywall
 
-`1` to activate authentification for articles with a paywall (ex: Mediapart, Next INpact, etc.).
+`1` to activate authentication for articles with a paywall (ex: Mediapart, Next INpact, etc.).
 
 ### Shaarli URL, if the service is enabled
 
