@@ -4959,28 +4959,29 @@
         },
         {
             "name": "jms/serializer-bundle",
-            "version": "5.4.0",
+            "version": "5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/JMSSerializerBundle.git",
-                "reference": "6fa2dd0083e00fe21c5da171556d7ecabc14b437"
+                "reference": "2eefc11a4518c89004496e76384f2193ce1f0073"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSSerializerBundle/zipball/6fa2dd0083e00fe21c5da171556d7ecabc14b437",
-                "reference": "6fa2dd0083e00fe21c5da171556d7ecabc14b437",
+                "url": "https://api.github.com/repos/schmittjoh/JMSSerializerBundle/zipball/2eefc11a4518c89004496e76384f2193ce1f0073",
+                "reference": "2eefc11a4518c89004496e76384f2193ce1f0073",
                 "shasum": ""
             },
             "require": {
                 "jms/metadata": "^2.6",
-                "jms/serializer": "^3.28",
+                "jms/serializer": "^3.31",
                 "php": "^7.4 || ^8.0",
                 "symfony/config": "^5.4 || ^6.0 || ^7.0",
                 "symfony/dependency-injection": "^5.4 || ^6.0 || ^7.0",
                 "symfony/framework-bundle": "^5.4 || ^6.0 || ^7.0"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^8.1",
+                "doctrine/annotations": "^1.14 || ^2.0",
+                "doctrine/coding-standard": "^12.0",
                 "doctrine/orm": "^2.14",
                 "phpunit/phpunit": "^8.0 || ^9.0",
                 "symfony/expression-language": "^5.4 || ^6.0 || ^7.0",
@@ -5035,7 +5036,7 @@
             ],
             "support": {
                 "issues": "https://github.com/schmittjoh/JMSSerializerBundle/issues",
-                "source": "https://github.com/schmittjoh/JMSSerializerBundle/tree/5.4.0"
+                "source": "https://github.com/schmittjoh/JMSSerializerBundle/tree/5.5.0"
             },
             "funding": [
                 {
@@ -5043,7 +5044,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-12T15:33:15+00:00"
+            "time": "2024-11-01T10:36:10+00:00"
         },
         {
             "name": "khanamiryan/qrcode-detector-decoder",
