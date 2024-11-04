@@ -1,7 +1,7 @@
 # Settings
 ## Theme
 
-wallabag is customizable. You can choose your prefered theme here. The
+wallabag is customizable. You can choose your preferred theme here. The
 default theme is `Material`, it's the theme used in the documentation
 screenshots.
 
