@@ -484,7 +484,7 @@ quickstart:
         description: '如果你需要帮助，我们在这里。'
         github: 'GitHub 上'
         email: '通过 Email'
-        gitter: 'Gitter 上'
+        matrix: 'Matrix 上'
 tag:
     page_title: '标签'
     list:

@@ -322,7 +322,7 @@ quickstart:
         description: 'Se você precisa de ajuda, nós estamos aqui.'
         github: 'No GitHub'
         email: 'Por e-mail'
-        gitter: 'No Gitter'
+        matrix: 'No Matrix'
 tag:
     page_title: 'Tags'
     list:

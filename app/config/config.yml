@@ -277,6 +277,11 @@ old_sound_rabbit_mq:
             exchange_options:
                 name: 'wallabag.import.elcurator'
                 type: topic
+        import_omnivore:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.omnivore'
+                type: topic
         import_firefox:
             connection: default
             exchange_options:
@@ -369,6 +374,15 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.elcurator'
             callback: wallabag.consumer.amqp.elcurator
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+        import_omnivore:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.omnivore'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.omnivore'
+            callback: wallabag.consumer.amqp.omnivore
             qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
         import_firefox:
             connection: default

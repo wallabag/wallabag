@@ -401,7 +401,7 @@ quickstart:
         description: Se hai bisogno di aiuto, siamo qui per te.
         github: Su GitHub
         email: Per e-mail
-        gitter: Su Gitter
+        matrix: Su Matrix
 tag:
     page_title: Etichette
     list:

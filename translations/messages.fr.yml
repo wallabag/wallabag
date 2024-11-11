@@ -469,7 +469,7 @@ quickstart:
         description: Parce que vous avez peut-être besoin de nous poser une question, nous sommes disponibles pour vous.
         github: Sur GitHub
         email: Par courriel
-        gitter: Sur Gitter
+        matrix: Sur Matrix
 tag:
     confirm:
         delete: Supprimer le tag %name%
@@ -507,7 +507,7 @@ import:
     wallabag_v1:
         page_title: Importer > wallabag v1
         description: Cet outil va importer toutes vos données de wallabag v1. Sur votre page de configuration de wallabag v1, cliquez sur « Export JSON » dans la section « Exporter vos données de wallabag ». Vous allez récupérer un fichier « wallabag-export-1-xxxx-xx-xx.json ».
-        how_to: Choisissez le fichier de votre export wallabag v1 et cliquez sur le bouton ci-dessous pour l’importer.
+        how_to: Choisissez le fichier de votre export wallabag et cliquez sur le bouton ci-dessous pour l’importer.
     wallabag_v2:
         page_title: Importer > wallabag v2
         description: Cet outil va importer tous vos articles d’une autre instance de wallabag v2. Allez dans tous vos articles, puis, sur la barre latérale, cliquez sur « JSON ». Vous allez récupérer un fichier « All articles.json ».
@@ -537,6 +537,7 @@ import:
     elcurator:
         description: Cet outil va importer tous vos articles depuis elCurator.
         page_title: Importer > elCurator
+        how_to: Choisissez le fichier de votre export elCurator et cliquez sur le bouton ci-dessous pour l’importer.
     delicious:
         page_title: Importer > del.icio.us
         how_to: Choisissez le fichier de votre export Delicious et cliquez sur le bouton ci-dessous pour l'importer.

@@ -497,7 +497,7 @@ tag:
         delete: Eliminar a etiqueta %name%
 quickstart:
     support:
-        gitter: En Gitter
+        matrix: En Matrix
         email: Por email
         github: En GitHub
         description: Se precisas axuda, aquí estamos para ti.

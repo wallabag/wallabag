@@ -19,6 +19,7 @@ use Wallabag\Import\DeliciousImport;
 use Wallabag\Import\ElcuratorImport;
 use Wallabag\Import\FirefoxImport;
 use Wallabag\Import\InstapaperImport;
+use Wallabag\Import\OmnivoreImport;
 use Wallabag\Import\PinboardImport;
 use Wallabag\Import\PocketHtmlImport;
 use Wallabag\Import\ReadabilityImport;
@@ -42,6 +43,7 @@ class ImportCommand extends Command
     private InstapaperImport $instapaperImport;
     private PinboardImport $pinboardImport;
     private DeliciousImport $deliciousImport;
+    private OmnivoreImport $omnivoreImport;
     private WallabagV1Import $wallabagV1Import;
     private ElcuratorImport $elcuratorImport;
     private ShaarliImport $shaarliImport;
@@ -61,7 +63,8 @@ class ImportCommand extends Command
         WallabagV1Import $wallabagV1Import,
         ElcuratorImport $elcuratorImport,
         ShaarliImport $shaarliImport,
-        PocketHtmlImport $pocketHtmlImport
+        PocketHtmlImport $pocketHtmlImport,
+        OmnivoreImport $omnivoreImport
     ) {
         $this->entityManager = $entityManager;
         $this->tokenStorage = $tokenStorage;
@@ -73,6 +76,7 @@ class ImportCommand extends Command
         $this->instapaperImport = $instapaperImport;
         $this->pinboardImport = $pinboardImport;
         $this->deliciousImport = $deliciousImport;
+        $this->omnivoreImport = $omnivoreImport;
         $this->wallabagV1Import = $wallabagV1Import;
         $this->elcuratorImport = $elcuratorImport;
         $this->shaarliImport = $shaarliImport;
@@ -158,6 +162,9 @@ class ImportCommand extends Command
                 break;
             case 'pocket':
                 $import = $this->pocketHtmlImport;
+                break;
+            case 'omnivore':
+                $import = $this->omnivoreImport;
                 break;
             default:
                 $import = $this->wallabagV1Import;

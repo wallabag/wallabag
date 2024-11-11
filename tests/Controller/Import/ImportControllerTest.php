@@ -24,6 +24,6 @@ class ImportControllerTest extends WallabagTestCase
         $crawler = $client->request('GET', '/import/');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertSame(12, $crawler->filter('blockquote')->count());
+        $this->assertSame(13, $crawler->filter('blockquote')->count());
     }
 }
