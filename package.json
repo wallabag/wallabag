@@ -54,7 +54,7 @@
     "file-loader": "^6.2.0",
     "lato-font": "^3.0.0",
     "mini-css-extract-plugin": "^2.9.2",
-    "postcss": "^8.4.47",
+    "postcss": "^8.4.48",
     "postcss-loader": "^8.1.1",
     "postcss-scss": "^4.0.9",
     "sass-embedded": "^1.80.6",
