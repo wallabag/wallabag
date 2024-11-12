@@ -307,6 +307,22 @@ class ExportControllerTest extends WallabagTestCase
         $this->assertNotEmpty('updated_at', (string) $content->entry[0]->updated_at);
     }
 
+    public function testMdExport()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+        $client->request('GET', '/export/all.md');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $headers = $client->getResponse()->headers;
+        $content = $client->getResponse()->getContent();
+        $this->assertSame('text/markdown; charset=UTF-8', $headers->get('content-type'));
+        $this->assertSame('attachment; filename="All articles.md"', $headers->get('content-disposition'));
+        $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
+        $this->assertStringContainsString('=================', $content);
+    }
+
     public function testJsonExportFromSameDomain()
     {
         $this->logInAs('admin');

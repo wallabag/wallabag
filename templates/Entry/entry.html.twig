@@ -242,6 +242,7 @@
                     {% if craue_setting('export_json') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'json'}) }}" title="Generate JSON file">JSON</a></li>{% endif %}
                     {% if craue_setting('export_txt') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'txt'}) }}" title="Generate TXT file">TXT</a></li>{% endif %}
                     {% if craue_setting('export_xml') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'xml'}) }}" title="Generate XML file">XML</a></li>{% endif %}
+                    {% if craue_setting('export_md') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'md'}) }}" title="Generate MD file">Markdown</a></li>{% endif %}
                 </ul>
             </div>
         </li>
