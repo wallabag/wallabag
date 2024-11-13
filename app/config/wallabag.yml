@@ -115,6 +115,10 @@ parameters:
             value: 1
             section: export
         -
+            name: export_md
+            value: 1
+            section: export
+        -
             name: import_with_redis
             value: 0
             section: import
