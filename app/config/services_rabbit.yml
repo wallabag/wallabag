@@ -6,6 +6,7 @@ services:
         public: true
 
     Wallabag\Consumer\RabbitMQConsumerTotalProxy:
+        lazy: true
         arguments:
             $pocketConsumer: '@old_sound_rabbit_mq.import_pocket_consumer'
             $readabilityConsumer: '@old_sound_rabbit_mq.import_readability_consumer'
