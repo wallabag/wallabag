@@ -1,1 +1,137 @@
-{}
+security:
+    login:
+        page_title: Сардэчна запрашаем у wallabag!
+        keep_logged_in: Захаваць мяне ў сыстэме
+        forgot_password: Забыліся на пароль?
+        submit: Увайсьці
+        register: Зарэгістравацца
+        cancel: Скасаваць
+        username: Імя карыстальніка
+        password: Пароль
+    register:
+        page_title: Стварыць уліковы запіс
+        go_to_account: Перайсьці ва ўліковы запіс
+    resetting:
+        description: Увядзіце ніжэй свой адрас электроннай пошты, і мы вышлем вам інструкцыйі па скідзе пароля.
+menu:
+    left:
+        starred: Пазначаныя
+        archive: Архіў
+        with_annotations: З анатацыямі
+        internal_settings: Унутраныя налады
+        import: Імпарт
+        howto: Інструкцыя
+        developer: Кіраваньне кліентамі API
+        logout: Выйсьці
+        about: Аб wallabag
+        search: Пошук
+        save_link: Захаваць спасылку
+        back_to_unread: Вярнуцца да непрачытаных артыкулаў
+        users_management: Кіраваньне карыстальнікамі
+        site_credentials: Уліковыя даныя сайта
+        quickstart: Хуткі старт
+        theme_toggle_light: Сьветлая тэма
+        theme_toggle_dark: Цёмная тэма
+        theme_toggle_auto: Аўтаматычная тэма
+        config: Канфігурацыя
+        tags: Тэгі
+        unread: Непрачытанае
+        all_articles: Усе запісы
+        ignore_origin_instance_rules: Ґлябальныя правілы йґнараваньня крыніцы
+    top:
+        add_new_entry: Дадаць новы запіс
+        search: Пошук
+        filter_entries: Фільтраваць запісы
+        export: Экспарт
+        account: Мой уліковы запіс
+        random_entry: Перайсьці да выпадковага запісу з гэтага сьпісу
+    search_form:
+        input_label: Увядзіце шуканае тут
+footer:
+    wallabag:
+        elsewhere: Вазьміце wallabag з сабой
+        social: Сац. сеткі
+        about: Аб wallabag
+        powered_by: створана з дапамогай
+    stats: З %user_creation% вы прачыталі %nb_archives% артыкулаў. Гэта прыкладна %per_day% у дзень!
+config:
+    page_title: Канфігурацыя
+    tab_menu:
+        settings: Налады
+        feed: Стужкі
+        user_info: Інфармацыя аб карыстальніку
+        password: Пароль
+        rules: Правілы выстаўленьня тэгаў
+        new_user: Дадаць карыстальніка
+        ignore_origin: Іґнараваць правілы крыніцы
+        reset: Скінуць вобласьць
+        article_display: Адлюстраваньне артыкула
+    form_settings:
+        items_per_page_label: Запісаў на старонцы
+        reading_speed:
+            label: Хуткасьць чытаньня
+            help_message: 'Вы можаце выкарыстоўваць анлайн-інструмэнты для ацэнкі хуткасьці чытаньня:'
+            200_word: Я чытаю ~200 словаў у хвіліну
+            300_word: Я чытаю ~300 словаў у хвіліну
+            400_word: Я чытаю ~400 словаў у хвіліну
+            100_word: Я чытаю ~100 словаў у хвіліну
+        action_mark_as_read:
+            label: Што рабіць пасьля выдаленьня артыкула, пазначэньня яго зоркай або пазначэньня як прачытанага?
+            redirect_homepage: Да хатняй старонцы
+            redirect_current_page: Застацца на бягучай старонцы
+        pocket_consumer_key_label: Ключ ад Pocket для ймпарту кантэнту
+        android_configuration: Наладзьце сваю Android аплікацыю
+        help_items_per_page: Вы можаце зьмяніць колькасьць артыкулаў, якія адлюстроўваюцца на кожнай старонцы.
+        help_language: Вы можаце зьмяніць мову йнтэрфэйсу wallabag.
+        help_pocket_consumer_key: Патрабуецца для ймпарту з Pocket. Вы можаце стварыць яго ў сваім уліковым запісе Pocket.
+        help_display_thumbnails: Вы можаце вырашыць, ці хочаце вы каб мініятуры артыкулаў адлюстроўваліся. Карысна калі ў вас павольнае злучэньне зь сеткай.
+        help_font: Вы можаце абраць сямейства шрыфтоў, якое хочаце выкарыстоўваць.
+        help_fontsize: Вы можаце абраць памер шрыфта, які хочаце выкарыстоўваць.
+        help_lineheight: Вы можаце абраць вышыню лінійі, якую хочаце выкарыстоўваць.
+        help_maxwidth: Вы можаце абраць максымальную шырыню, якую хочаце выкарыстоўваць.
+        display_thumbnails_label: Адлюстраваньне мініятур артыкулаў (карысна калі ў вас павольнае злучэньне зь сеткай).
+        font_label: Сямейства шрыфтоў
+        fontsize_label: Памер шрыфта
+        lineheight_label: Вышыня лінійі
+        maxwidth_label: Максімальная шырыня
+        language_label: Мова
+        android_instruction: Націсьніце тут, каб прадусталяваць вашую Android аплікацыю
+        help_reading_speed: wallabag разьлічвае час чытаньня для кожнага артыкула. Вы можаце вызначыць тут, як хутка вы чытаеце. wallabag пералічыць час чытаньня для кожнага артыкула.
+    form_feed:
+        no_token: Няма токена
+        token_create: Стварыць свой токен
+        token_reset: Аднавіце свой токен
+        token_revoke: Адклікаць токен
+        feed_links: Спасылкі на стужкі
+        feed_link:
+            starred: Пазначаныя
+            archive: Архіваваныя
+            all: Усе
+            unread: Непрачытанае
+        feed_limit: Колькасьць элемэнтаў у стужцы
+        description: Навінавыя стужкі Atom, якія прадстаўляюцца wallabag, дазваляюць чытаць захаваныя артыкулы пры дапамозе ўпадабанай вамі Atom-чыталкі. Спачатку вам трэба зґенераваць токен.
+        token_label: Токен стужкі
+    form_user:
+        login_label: Лагін (ня можа быць зьменены)
+        name_label: Імя
+        email_label: Электронная пошта
+        two_factor:
+            googleTwoFactor_label: Выкарыстоўваючы праґраму OTP (адкрыйце праґраму, напрыклад Google Authenticator, Authy альбо FreeOTP, каб атрымаць аднаразовы код)
+            table_method: Мэтад
+            table_state: Стан
+            table_action: Дзеяньне
+            state_enabled: Уключана
+            state_disabled: Выключана
+            action_email: Выкарыстаць электронную пошту
+            action_app: Выкарыстаць OTP аплікацыю
+            emailTwoFactor_label: З дапамогай электроннай пошты (атрымаць код па электроннай пошце)
+        two_factor_description: Уключэньне двухфактарнай аўтэнтыфікацыйі азначае, што вы будзеце атрымліваць электронны ліст з кодам пры кожным новым ненадзейным злучэньні.
+        delete:
+            title: Выдаліць мой уліковы запіс (ці небясьпечная зона)
+            description: Калі вы выдаліце свой уліковы запіс, УСЕ вашыя АРТЫКУЛЫ, тэгі, АНАТАЦЫІ й ВАШ УЛІКОВЫ ЗАПІС будуць ПЕРМАНЕНТНА выдаленыя (ГЭТА НЕЛЬГА АДМЯНІЦЬ). Таксама, потым вы выйдзеце з сыстэмы.
+            button: Выдаліць мой уліковы запіс
+            confirm: Вы ўпэўненыя? (ГЭТА НЕЛЬГА АДМЯНІЦЬ)
+    reset:
+        title: Зона скіду (ці небясьпечная зона)
+    form:
+        save: Захаваць
