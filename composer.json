@@ -216,9 +216,6 @@
             "phpstan/extension-installer": true
         },
         "bin-dir": "bin",
-        "platform": {
-            "php": "8.1.31"
-        },
         "sort-packages": true
     },
     "extra": {
