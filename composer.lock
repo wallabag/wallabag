@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "56da077e9ec08517879debdd9d921d76",
+    "content-hash": "05e9b64161ba21846280969b0a64a9da",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -19884,8 +19884,5 @@
         "ext-xml": "*"
     },
     "platform-dev": {},
-    "platform-overrides": {
-        "php": "8.1.30"
-    },
     "plugin-api-version": "2.6.0"
 }
