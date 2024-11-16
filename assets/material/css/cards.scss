@@ -1,3 +1,5 @@
+@use "variables";
+
 /* ==========================================================================
    Cards
    ========================================================================== */
@@ -73,7 +75,7 @@ main {
 
   .card-entry-labels-hidden li {
     display: inline-block;
-    background-color: $blue-accent-color;
+    background-color: variables.$blue-accent-color;
     margin: 0 5px;
     padding: 5px 12px;
     border-radius: 3px;
@@ -156,7 +158,7 @@ a.original:not(.waves-effect) {
 .card-tag-labels li {
   margin: 10px 10px 10px auto;
   padding: 5px 12px 5px 16px !important;
-  background-color: $blue-accent-color;
+  background-color: variables.$blue-accent-color;
   border-radius: 3px;
   color: #fff;
   cursor: default;
@@ -247,7 +249,7 @@ a.original:not(.waves-effect) {
     }
 
     .chip {
-      background-color: $blue-accent-color;
+      background-color: variables.$blue-accent-color;
       padding: 0 7px;
       margin: auto 1px;
       border-radius: 6px;
