@@ -33,13 +33,13 @@ services:
             $fonts: '%wallabag.fonts%'
 
     Wallabag\:
-        resource: '../../src/*'
-        exclude: ['../../src/{Consumer,Controller,Entity,ExpressionLanguage,DataFixtures,Redis}', '../../src/Event/*Event.php']
+        resource: '../src/*'
+        exclude: ['../src/{Consumer,Controller,Entity,ExpressionLanguage,DataFixtures,Redis}', '../src/Event/*Event.php']
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     Wallabag\Controller\:
-        resource: '../../src/Controller/'
+        resource: '../src/Controller/'
         tags: ['controller.service_arguments']
 
     # inject alias service into controllers

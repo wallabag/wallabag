@@ -6,6 +6,6 @@ services:
 
     # fixtures
     Wallabag\DataFixtures\:
-        resource: '../../fixtures/*'
+        resource: '../fixtures/*'
         tags: ['doctrine.fixture.orm']
         autowire: true
