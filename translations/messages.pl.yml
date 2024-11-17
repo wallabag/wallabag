@@ -485,6 +485,7 @@ quickstart:
         description: Jeżeli potrzebujesz pomocy, jesteśmy tutaj dla ciebie.
         github: na GitHubie
         email: przez e-mail
+        matrix: Na Matriksie
 tag:
     page_title: Tagi
     list:
@@ -525,7 +526,7 @@ import:
         how_to: Wybierz swój plik eksportu z wallabag i kliknij przycisk poniżej, aby go przesłać i zaimportować.
     wallabag_v2:
         page_title: Importuj > Wallabag v2
-        description: Ten importer, zaimportuje wszystkie twoje artykułu z wallabag v2. Idź do wszystkich artykułów, a następnie na panelu exportu kliknij na "JSON". Otrzymasz plik "All articles.json".
+        description: Ten importer zaimportuje wszystkie Twoje artykuły z wallabag v2. Przejdź do Wszyskie, a następnie na pasku bocznym eksportu kliknij „JSON”. Otrzymasz plik „All articles.json”.
     readability:
         page_title: Importuj > Readability
         description: Ten importer zaimportuje wszystkie twoje artykuły z Readability.
@@ -552,6 +553,7 @@ import:
     elcurator:
         page_title: Importuj > elCurator
         description: Ten importer zaimportuje wszystkie twoje artykuły z elCurator.
+        how_to: Wybierz plik eksportowany przez elCurator i kliknij poniższy przycisk, aby go przesłać i zaimportować.
     delicious:
         page_title: Importuj > del.icio.us
         description: Ten importer zaimportuje wszystkie zakładki Delicious. Od 2021 r. możesz ponownie wyeksportować z niego swoje dane za pomocą strony eksportu (https://del.icio.us/export). Wybierz format "JSON" i pobierz go (np. "delicious_export.2021.02.06_21.10.json").
@@ -564,6 +566,10 @@ import:
         page_title: Importuj > Pocket HTML
         description: Ten importer zaimportuje wszystkie zakładki Pocket (za pośrednictwem eksportu HTML). Po prostu przejdź do https://getpocket.com/export, a następnie wyeksportuj plik HTML. Plik HTML zostanie pobrany (np. „ril_export.html”).
         how_to: Wybierz swój plik z zakładkami i naciśnij poniższy przycisk, aby je zaimportować. Może to zająć dłuższą chwilę, zanim wszystkie artykuły zostaną przeniesione.
+    omnivore:
+        description: Ten importer zaimportuje wszystkie Twoje artykuły z Omnivore.
+        page_title: Importuj > Omnivore
+        how_to: Rozpakuj eksport z Omnivore, a następnie prześlij po kolei wszystkie pliki JSON o nazwie „metadata_x_to_y.json”.
 developer:
     page_title: Zarządzanie klientami API
     welcome_message: Witaj w API wallabag
