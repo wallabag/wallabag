@@ -6,8 +6,3 @@ imports:
 parameters:
     fosuser_registration: true
     wallabag_dbname_suffix: '_test'
-
-dama_doctrine_test:
-    enable_static_connection: true
-    enable_static_meta_data_cache: true
-    enable_static_query_cache: true

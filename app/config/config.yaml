@@ -3,6 +3,7 @@ imports:
     - { resource: security.yaml }
     - { resource: services.yaml }
     - { resource: ../../config/packages/craue_config.yaml }
+    - { resource: ../../config/packages/dama_doctrine_test_bundle.yaml }
     - { resource: ../../config/packages/doctrine.yaml }
     - { resource: ../../config/packages/doctrine_migrations.yaml }
     - { resource: ../../config/packages/fos_js_routing.yaml }
