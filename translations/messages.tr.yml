@@ -471,7 +471,7 @@ quickstart:
         description: Eğer yardıma ihtiyacınız varsa, biz her daim senin için burada olacağız.
         github: GitHub
         email: E-posta
-        gitter: Gitter
+        matrix: Matrix
     more: Daha fazlası…
     admin:
         title: Yönetim

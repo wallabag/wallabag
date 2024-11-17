@@ -1,6 +1,6 @@
 {% extends "layout.html.twig" %}
 
-{% block title %}{{ 'import.elcurator.page_title'|trans }}{% endblock %}
+{% block title %}{{ 'import.omnivore.page_title'|trans }}{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -10,7 +10,7 @@
 
             <div class="row">
                 <blockquote>{{ import.description|trans }}</blockquote>
-                <p>{{ 'import.elcurator.how_to'|trans }}</p>
+                <p>{{ 'import.omnivore.how_to'|trans }}</p>
 
                 <div class="col s12">
                     {{ form_start(form, {'method': 'POST'}) }}

@@ -20,6 +20,7 @@ services:
             $elcuratorConsumer: '@old_sound_rabbit_mq.import_elcurator_consumer'
             $shaarliConsumer: '@old_sound_rabbit_mq.import_shaarli_consumer'
             $pocketHtmlConsumer: '@old_sound_rabbit_mq.import_pocket_html_consumer'
+            $omnivoreConsumer: '@old_sound_rabbit_mq.import_omnivore_consumer'
 
     wallabag.consumer.amqp.pocket:
         class: Wallabag\Consumer\AMQPEntryConsumer
@@ -45,6 +46,11 @@ services:
         class: Wallabag\Consumer\AMQPEntryConsumer
         arguments:
             $import: '@Wallabag\Import\DeliciousImport'
+
+    wallabag.consumer.amqp.omnivore:
+        class: Wallabag\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: '@Wallabag\Import\OmnivoreImport'
 
     wallabag.consumer.amqp.wallabag_v1:
         class: Wallabag\Consumer\AMQPEntryConsumer

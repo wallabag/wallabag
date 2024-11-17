@@ -467,7 +467,7 @@ quickstart:
         description: Wenn du Hilfe brauchst, wir sind für dich da.
         github: Auf GitHub
         email: Über E-Mail
-        gitter: Auf Gitter
+        matrix: Auf Matrix
 tag:
     page_title: Tags
     list:

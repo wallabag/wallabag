@@ -37,6 +37,17 @@ return $config
         // 'psr_autoloading' => true,
         'strict_comparison' => true,
         'strict_param' => true,
+        // We override next rule because of current @Symfony ruleSet
+        // 'parameters' element is breaking PHP 7.4
+        // https://cs.symfony.com/doc/rules/control_structure/trailing_comma_in_multiline.html
+        // TODO: remove this configuration after dropping support of PHP 7.4
+        'trailing_comma_in_multiline' => [
+            'elements' => [
+                'arrays',
+                'array_destructuring',
+                'match',
+            ],
+        ],
         'concat_space' => [
             'spacing' => 'one',
         ],
