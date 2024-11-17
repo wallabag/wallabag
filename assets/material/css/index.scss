@@ -1,18 +1,18 @@
-@import "variables";
+@use "variables";
 
 /* Style */
-@import "article";
-@import "cards";
-@import "entries";
-@import "filters";
-@import "layout";
-@import "nav";
-@import "sidenav";
-@import "various";
-@import "dark_theme";
+@use "article";
+@use "cards";
+@use "entries";
+@use "filters";
+@use "layout";
+@use "nav";
+@use "sidenav";
+@use "various";
+@use "dark_theme";
 
 /* Tools */
-@import "fonts";
-@import "icons";
-@import "print";
-@import "media_queries";
+@use "fonts";
+@use "icons";
+@use "print";
+@use "media_queries";

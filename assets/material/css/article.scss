@@ -1,3 +1,5 @@
+@use "variables";
+
 /* ==========================================================================
    Article
    ========================================================================== */
@@ -54,7 +56,7 @@
     }
 
     a {
-      border-bottom: 1px dotted $blue-accent-color;
+      border-bottom: 1px dotted variables.$blue-accent-color;
       text-decoration: none;
     }
 
