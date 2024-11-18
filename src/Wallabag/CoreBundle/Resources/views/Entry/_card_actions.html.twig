@@ -7,7 +7,7 @@
         </div>
     </div>
 
-    {% set current_path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+    {% set current_path = app.request.requesturi %}
 
     <ul class="tools right">
         <li>
