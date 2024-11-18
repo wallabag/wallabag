@@ -32,7 +32,7 @@ build: ## Run webpack
 	@yarn build:$(ENV)
 
 test: ## Launch wallabag testsuite
-	XDEBUG_MODE=off php -dmemory_limit=-1 bin/phpunit -v
+	@XDEBUG_MODE=off php -dmemory_limit=-1 bin/phpunit -v
 
 release: ## Create a package. Need a VERSION parameter (eg: `make release VERSION=master`).
 ifndef VERSION
