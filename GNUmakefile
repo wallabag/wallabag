@@ -11,6 +11,18 @@ else
 	override ENV = prod
 endif
 
+DOCKER_COMPOSE_RUNNING := $(shell docker-compose ps -q | grep -q . && echo 1 || echo 0)
+
+ifeq ($(DOCKER_COMPOSE_RUNNING), 1)
+  PHP := docker compose run --rm php php
+  PHP_NO_XDEBUG := docker compose run -e XDEBUG_MODE=off --rm php php
+  YARN := docker compose run --rm php yarn
+else
+  PHP := php
+  PHP_NO_XDEBUG := XDEBUG_MODE=off php
+  YARN := yarn
+endif
+
 help: ## Display this help menu
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
@@ -25,14 +37,14 @@ dev: build ## Install the latest dev version
 	@./scripts/dev.sh
 
 run: ## Run the wallabag built-in server
-	@php bin/console server:run --env=dev
+	@$(PHP) bin/console server:run --env=dev
 
 build: ## Run webpack
-	@yarn install
-	@yarn build:$(ENV)
+	@$(YARN) install
+	@$(YARN) build:$(ENV)
 
 test: ## Launch wallabag testsuite
-	@XDEBUG_MODE=off php -dmemory_limit=-1 bin/phpunit -v
+	@$(PHP_NO_XDEBUG) -dmemory_limit=-1 bin/phpunit -v
 
 release: ## Create a package. Need a VERSION parameter (eg: `make release VERSION=master`).
 ifndef VERSION

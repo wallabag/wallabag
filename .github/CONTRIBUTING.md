@@ -50,11 +50,7 @@ Please fork wallabag and work with **the master branch**.
 
 All pull requests need to pass the tests and the code needs match the style guide.
 
-To run the tests locally run:
-
-- when testing using Docker: `docker-compose run --rm php bin/phpunit` (or `docker-compose run --rm php make test` if you
-  prefer using `make`)
-- otherwise: `bin/phpunit` (or `make test`)
+To run the tests locally run `make test`.
 
 To run the PHP formatter:
 
