@@ -53,3 +53,5 @@ All pull requests need to pass the tests and the code needs match the style guid
 To run the tests locally run `make test`.
 
 To run the PHP formatter run `make fix-cs`.
+
+To run the PHPStan static analysis run `make phpstan`.

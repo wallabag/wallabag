@@ -49,6 +49,9 @@ test: ## Launch wallabag testsuite
 fix-cs: ## Run PHP-CS-Fixer
 	@$(PHP_NO_XDEBUG) bin/php-cs-fixer fix
 
+phpstan: ## Run PHPStan
+	@$(PHP_NO_XDEBUG) bin/phpstan analyse
+
 release: ## Create a package. Need a VERSION parameter (eg: `make release VERSION=master`).
 ifndef VERSION
 	$(error VERSION is not set)
@@ -58,6 +61,6 @@ endif
 deploy: ## Deploy wallabag
 	@bundle exec cap staging deploy
 
-.PHONY: help install update build test release deploy run dev fix-cs
+.PHONY: help install update build test release deploy run dev fix-cs phpstan
 
 .DEFAULT_GOAL := install
