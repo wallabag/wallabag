@@ -34,7 +34,7 @@ class TaggingRule implements RuleInterface
      * @Assert\NotBlank()
      * @Assert\Length(max=255)
      * @RulerZAssert\ValidRule(
-     *  allowed_variables={"title", "url", "isArchived", "isStared", "content", "language", "mimetype", "readingTime", "domainName"},
+     *  allowed_variables={"title", "url", "isArchived", "isStarred", "content", "language", "mimetype", "readingTime", "domainName"},
      *  allowed_operators={">", "<", ">=", "<=", "=", "is", "!=", "and", "not", "or", "matches", "notmatches"}
      * )
      * @ORM\Column(name="rule", type="string", nullable=false)
