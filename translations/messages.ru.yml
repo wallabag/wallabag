@@ -469,7 +469,7 @@ quickstart:
         description: 'Если Вам нужна помощь, мы здесь чтобы помочь Вам.'
         github: 'На GitHub'
         email: 'По email'
-        gitter: 'На Gitter'
+        matrix: 'На Matrix'
 tag:
     page_title: 'Теги'
     list:

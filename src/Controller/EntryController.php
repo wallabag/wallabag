@@ -602,7 +602,7 @@ class EntryController extends AbstractController
      *
      * @param int $page
      *
-     * @Route("/domain/{id}/{page}", requirements={"id" = ".+"}, defaults={"page" = 1}, name="same_domain")
+     * @Route("/domain/{id}/{page}", requirements={"id" = "\d+"}, defaults={"page" = 1}, name="same_domain")
      * @IsGranted("LIST_ENTRIES")
      *
      * @return Response

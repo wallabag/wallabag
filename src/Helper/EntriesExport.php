@@ -5,6 +5,7 @@ namespace Wallabag\Helper;
 use Html2Text\Html2Text;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
+use League\HTMLToMarkdown\HtmlConverter;
 use PHPePub\Core\EPub;
 use PHPePub\Core\Structure\OPF\DublinCore;
 use Symfony\Component\HttpFoundation\Response;
@@ -129,10 +130,8 @@ class EntriesExport
 
     /**
      * Use PHPePub to dump a .epub file.
-     *
-     * @return Response
      */
-    private function produceEpub()
+    private function produceEpub(): Response
     {
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
         \assert($user instanceof User);
@@ -249,10 +248,8 @@ class EntriesExport
 
     /**
      * Use TCPDF to dump a .pdf file.
-     *
-     * @return Response
      */
-    private function producePdf()
+    private function producePdf(): Response
     {
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
         \assert($user instanceof User);
@@ -326,10 +323,8 @@ class EntriesExport
 
     /**
      * Inspired from CsvFileDumper.
-     *
-     * @return Response
      */
-    private function produceCsv()
+    private function produceCsv(): Response
     {
         $delimiter = ';';
         $enclosure = '"';
@@ -372,10 +367,8 @@ class EntriesExport
 
     /**
      * Dump a JSON file.
-     *
-     * @return Response
      */
-    private function produceJson()
+    private function produceJson(): Response
     {
         return Response::create(
             $this->prepareSerializingContent('json'),
@@ -390,10 +383,8 @@ class EntriesExport
 
     /**
      * Dump a XML file.
-     *
-     * @return Response
      */
-    private function produceXml()
+    private function produceXml(): Response
     {
         return Response::create(
             $this->prepareSerializingContent('xml'),
@@ -408,10 +399,8 @@ class EntriesExport
 
     /**
      * Dump a TXT file.
-     *
-     * @return Response
      */
-    private function produceTxt()
+    private function produceTxt(): Response
     {
         $content = '';
         $bar = str_repeat('=', 100);
@@ -427,6 +416,29 @@ class EntriesExport
             [
                 'Content-type' => 'text/plain',
                 'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.txt"',
+                'Content-Transfer-Encoding' => 'UTF-8',
+            ]
+        );
+    }
+
+    /**
+     * Dump a Markdown file.
+     */
+    private function produceMd(): Response
+    {
+        $content = '';
+        $converter = new HtmlConverter();
+        $converter->getConfig()->setOption('strip_tags', true);
+        foreach ($this->entries as $entry) {
+            $content .= $converter->convert('<h1>' . $entry->getTitle() . '</h1>' . $entry->getContent());
+        }
+
+        return Response::create(
+            $content,
+            200,
+            [
+                'Content-type' => 'text/markdown',
+                'Content-Disposition' => 'attachment; filename="' . $this->getSanitizedFilename() . '.md"',
                 'Content-Transfer-Encoding' => 'UTF-8',
             ]
         );

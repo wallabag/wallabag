@@ -1,5 +1,5 @@
 parameters:
-    wallabag.version: 2.6.8
+    wallabag.version: 2.6.10
     wallabag.paypal_url: "https://liberapay.com/wallabag/donate"
     wallabag.languages:
         en: 'English'
@@ -115,6 +115,10 @@ parameters:
             value: 1
             section: export
         -
+            name: export_md
+            value: 1
+            section: export
+        -
             name: import_with_redis
             value: 0
             section: import
@@ -140,7 +144,7 @@ parameters:
             section: misc
         -
             name: wallabag_support_url
-            value: https://www.wallabag.org/pages/support.html
+            value: https://github.com/wallabag/wallabag/issues/new/choose
             section: misc
         -
             name: api_user_registration

@@ -58,6 +58,11 @@ services:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_elcurator_producer'
             $redisProducer: '@wallabag.producer.redis.elcurator'
 
+    Wallabag\Controller\Import\OmnivoreController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_omnivore_producer'
+            $redisProducer: '@wallabag.producer.redis.omnivore'
+
     Wallabag\Controller\Import\FirefoxController:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_firefox_producer'
@@ -323,6 +328,10 @@ services:
     Wallabag\Import\DeliciousImport:
         tags:
             -  { name: wallabag.import, alias: delicious }
+
+    Wallabag\Import\OmnivoreImport:
+        tags:
+            -  { name: wallabag.import, alias: omnivore }
 
     Wallabag\Import\FirefoxImport:
         tags:

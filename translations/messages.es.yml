@@ -485,7 +485,7 @@ quickstart:
         description: 'Si necesitas ayuda, estamos a tu disposición.'
         github: 'En GitHub'
         email: 'Por correo electrónico'
-        gitter: 'En Gitter'
+        matrix: 'En Matrix'
 tag:
     page_title: 'Etiquetas'
     list:

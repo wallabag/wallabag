@@ -1,3 +1,5 @@
+@use "variables";
+
 /* ==========================================================================
  * Entries
  * ========================================================================== */
@@ -84,7 +86,7 @@
   }
 
   .mass-action-tags-input.mass-action-tags-input.mass-action-tags-input:focus {
-    border-bottom: 3px solid $blue-accent-color;
+    border-bottom: 3px solid variables.$blue-accent-color;
     box-shadow: none;
   }
 }

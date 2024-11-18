@@ -15,15 +15,20 @@
             {% include 'Import/_information.html.twig' %}
 
             {{ 'import.page_description'|trans }}
-            <ul>
+            <div class="row">
                 {% for import in imports %}
-                    <li>
-                        <h5>{{ import.name }}</h5>
-                        <blockquote>{{ import.description|trans|raw }}</blockquote>
-                        <p><a class="waves-effect waves-light btn" href="{{ path(import.url) }}">{{ 'import.action.import_contents'|trans }}</a></p>
-                    </li>
+                <div class="col s6 m3">
+                    <div class="card">
+                      <div class="card-content">
+                        <span class="card-title">{{ import.name }}</span>
+                      </div>
+                      <div class="card-action">
+                        <a href="{{ path(import.url) }}">{{ 'import.action.import_contents'|trans }}</a>
+                      </div>
+                    </div>
+                  </div>
                 {% endfor %}
-            </ul>
+            </div>
         </div>
     </div>
 </div>

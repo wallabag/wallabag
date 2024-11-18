@@ -105,6 +105,7 @@
             {% if craue_setting('export_csv') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'csv', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">CSV</a></li>{% endif %}
             {% if craue_setting('export_txt') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'txt', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">TXT</a></li>{% endif %}
             {% if craue_setting('export_xml') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'xml', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">XML</a></li>{% endif %}
+            {% if craue_setting('export_md') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'md', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">Markdown</a></li>{% endif %}
         </ul>
     </div>
 

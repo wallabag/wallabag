@@ -382,7 +382,7 @@ quickstart:
         description: Ha segítségre van szüksége, itt vagyunk az Ön számára.
         github: A GitHub-on
         email: E-mailben
-        gitter: A Gitter-en
+        matrix: A Matrix-en
 tag:
     page_title: Címkék
     list:

@@ -526,7 +526,7 @@ quickstart:
         title: Sett opp programmet
         description: For å få applikasjon til og passe deg, ta en titt på konfigurasjonen til wallabag.
     support:
-        gitter: På Gitter
+        matrix: På Matrix
         email: Per e-post
         github: På GitHub
         title: Støtte

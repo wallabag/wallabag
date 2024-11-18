@@ -189,7 +189,7 @@ menu:
         random_entry: Spring naar een willekeurig item van de lijst
     left:
         site_credentials: Site inloggegevens
-        users_management: Gebruikeresbeheer
+        users_management: Gebruikersbeheer
         back_to_unread: Terug naar ongelezen artikelen
         save_link: Bewaar een link
         search: Zoeken
@@ -463,7 +463,7 @@ quickstart:
     support:
         description: Wij zijn er voor u als u hulp nodig heeft.
         title: Ondersteuning
-        gitter: Op Gitter
+        matrix: Op Matrix
         email: Per e-mail
         github: Op GitHub
     docs:
