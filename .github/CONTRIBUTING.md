@@ -52,7 +52,4 @@ All pull requests need to pass the tests and the code needs match the style guid
 
 To run the tests locally run `make test`.
 
-To run the PHP formatter:
-
-- when testing using Docker: `docker-compose run --rm php bin/php-cs-fixer fix`
-- otherwise: `php bin/php-cs-fixer fix`
+To run the PHP formatter run `make fix-cs`.

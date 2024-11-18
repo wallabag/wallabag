@@ -46,6 +46,9 @@ build: ## Run webpack
 test: ## Launch wallabag testsuite
 	@$(PHP_NO_XDEBUG) -dmemory_limit=-1 bin/phpunit -v
 
+fix-cs: ## Run PHP-CS-Fixer
+	@$(PHP_NO_XDEBUG) bin/php-cs-fixer fix
+
 release: ## Create a package. Need a VERSION parameter (eg: `make release VERSION=master`).
 ifndef VERSION
 	$(error VERSION is not set)
@@ -55,6 +58,6 @@ endif
 deploy: ## Deploy wallabag
 	@bundle exec cap staging deploy
 
-.PHONY: help install update build test release deploy run dev
+.PHONY: help install update build test release deploy run dev fix-cs
 
 .DEFAULT_GOAL := install
