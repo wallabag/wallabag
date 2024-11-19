@@ -1,7 +1,7 @@
 # This file is a "template" of what your parameters.yml file should look like
 parameters:
     # Uncomment these settings or manually update your parameters.yml
-    # to use docker-compose
+    # to use Docker Compose
     #
     # database_driver: %env.database_driver%
     # database_host: %env.database_host%

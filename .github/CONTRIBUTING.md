@@ -7,11 +7,11 @@
 - Clone the repository
 - Ensure your Docker daemon is running
 - Copy `docker/php/env.example` to `docker/php/env` and customize
-- Launch `docker-compose run --rm php composer install` to bootstrap php dependencies
-- Launch `docker-compose run --rm php bin/console wallabag:install` to bootstrap your installation
-- Launch `docker-compose run --rm php yarn install` to bootstrap dependencies for the frontend
-- Launch `docker-compose run --rm php yarn build:dev` to build assets for the frontend
-- Launch `docker-compose up -d` to start the stack
+- Launch `docker compose run --rm php composer install` to bootstrap php dependencies
+- Launch `docker compose run --rm php bin/console wallabag:install` to bootstrap your installation
+- Launch `docker compose run --rm php yarn install` to bootstrap dependencies for the frontend
+- Launch `docker compose run --rm php yarn build:dev` to build assets for the frontend
+- Launch `docker compose up -d` to start the stack
 
 You'll then have:
 - a PHP daemon with standalone web server
