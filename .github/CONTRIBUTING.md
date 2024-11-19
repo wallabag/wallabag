@@ -20,7 +20,7 @@ You'll then have:
 
 You can now access your wallabag instance using that url: `http://127.0.0.1:8000`
 
-If you want to test using an other database than SQLite, uncomment the `postgres` or `mariadb` code from the `docker-compose.yml` file at the root of the repo. Also uncomment related line in the `php` section so the database will be linked to your PHP instance.
+If you want to test using an other database than SQLite, uncomment the `postgres` or `mariadb` code from the `compose.yaml` file at the root of the repo. Also uncomment related line in the `php` section so the database will be linked to your PHP instance.
 
 ### Using your own PHP server
 
