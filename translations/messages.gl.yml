@@ -468,6 +468,7 @@ import:
     elcurator:
         description: Este importador traerá todos os teus artigos de elCurator.
         page_title: Importar > elCurator
+        how_to: Selecciona a exportación desde elCurator e preme no botón inferior para subila e importala.
     delicious:
         page_title: Importar > del.icio.us
         how_to: Elixe a exportación de Delicious e preme no botón inferior para subilo e importalo.
@@ -480,6 +481,10 @@ import:
         page_title: Importar > Shaarli
         description: Este importador traerá todos os teus marcadores de Shaarli. Vai á sección Ferramentas, e despois en "Exportar base de datos", elixe os teus marcadores e expórtaos. Terás un ficheiro HTML.
         how_to: Elixe o ficheiro de copia de apoio cos marcadores para importalos. Ten en conta que o proceso podería demorarse porque hai que descargar todos os artigos.
+    omnivore:
+        page_title: Importar > Omnivore
+        how_to: Descomprime a exportación de Omnivore, e despois sube un a un cada ficheiro JSON con nome «metadata_x_to_y.json".
+        description: Este importador vai traer todos os teus artigos de Omnivore.
 export:
     unknown: Descoñecido
     footer_template: <div style="text-align:center;"><p>Creado por wallabag con %method%</p><p>Abre <a href="https://github.com/wallabag/wallabag/issues">unha incidencia</a> se tes problemas para visualizar este E-Book no teu dispositivo.</p></div>
