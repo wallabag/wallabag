@@ -4,6 +4,7 @@ namespace Wallabag\SiteConfig\Authenticator;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Cookie\CookieJar;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Wallabag\ExpressionLanguage\AuthenticatorProvider;
 use Wallabag\SiteConfig\SiteConfig;
@@ -54,22 +55,16 @@ class LoginFormAuthenticator implements Authenticator
 
     public function isLoginRequired($html)
     {
-        $useInternalErrors = libxml_use_internal_errors(true);
-
         // need to check for the login dom element ($options['not_logged_in_xpath']) in the HTML
-        $doc = new \DOMDocument();
-        $doc->loadHTML($html);
+        try {
+            $crawler = new Crawler((string) $html);
 
-        $xpath = new \DOMXPath($doc);
-        $loggedIn = $xpath->evaluate((string) $this->siteConfig->getNotLoggedInXpath());
-
-        if (false === $loggedIn) {
+            $loggedIn = $crawler->evaluate((string) $this->siteConfig->getNotLoggedInXpath());
+        } catch (\Throwable $e) {
             return false;
         }
 
-        libxml_use_internal_errors($useInternalErrors);
-
-        return $loggedIn->length > 0;
+        return \count($loggedIn) > 0;
     }
 
     /**
