@@ -34,7 +34,7 @@ jobs:
         run: |
           sudo systemctl start mysql.service
           sudo mysql -u root -proot -h 127.0.0.1 -e "CREATE DATABASE wallabag_test"
-          cp app/config/tests/parameters_test.mysql.yml app/config/parameters_test.yml
+          cp tests/configs/parameters_test.mysql.yaml config/parameters_test.yaml
 
       - name: "Install dependencies with Composer"
         uses: "ramsey/composer-install@v3"

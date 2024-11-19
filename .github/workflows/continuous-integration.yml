@@ -77,7 +77,7 @@ jobs:
           composer-options: "--optimize-autoloader --prefer-dist"
 
       - name: "Prepare database configuration"
-        run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
+        run: cp tests/configs/parameters_test.${{ matrix.database }}.yaml app/config/parameters_test.yaml
 
       - name: "Run PHPUnit"
         run: "php bin/phpunit -v"
@@ -199,7 +199,7 @@ jobs:
           composer-options: "--optimize-autoloader --prefer-dist"
 
       - name: "Prepare database configuration"
-        run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
+        run: cp tests/configs/parameters_test.${{ matrix.database }}.yaml app/config/parameters_test.yaml
 
       - name: "Run PHPUnit"
         run: "php bin/phpunit -v"

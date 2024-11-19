@@ -1,0 +1,34 @@
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true
+    view:
+        mime_types:
+            csv:
+                - 'text/csv'
+                - 'text/plain'
+            pdf:
+                - 'application/pdf'
+            epub:
+                - 'application/epub+zip'
+        view_response_listener: 'force'
+        formats:
+            xml: true
+            json: true
+            txt: true
+            csv: true
+            pdf: true
+            epub: true
+        failed_validation: HTTP_BAD_REQUEST
+    routing_loader: false
+    format_listener:
+        enabled: true
+        rules:
+            - { path: "^/api/entries/([0-9]+)/export.(.*)", priorities: [ 'epub', 'pdf', 'txt', 'csv' ], fallback_format: json, prefer_extension: false }
+            - { path: "^/api", priorities: [ 'json', 'xml' ], fallback_format: json, prefer_extension: false }
+            - { path: "^/annotations", priorities: [ 'json', 'xml' ], fallback_format: json, prefer_extension: false }
+            # for an unknown reason, EACH REQUEST goes to FOS\RestBundle\EventListener\FormatListener
+            # so we need to add custom rule for custom api export but also for all other routes of the application...
+            - { path: '^/', priorities: [ 'text/html', '*/*' ], fallback_format: html, prefer_extension: false }
+    exception:
+        messages:
+            Symfony\Component\HttpKernel\Exception\BadRequestHttpException: true

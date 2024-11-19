@@ -30,7 +30,7 @@ class FeedType extends AbstractType
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'feed_config';
     }

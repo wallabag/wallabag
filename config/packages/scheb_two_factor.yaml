@@ -1,0 +1,20 @@
+scheb_two_factor:
+    trusted_device:
+        enabled: true
+        cookie_name: wllbg_trusted_computer
+        lifetime: 2592000
+
+    backup_codes:
+        enabled: true
+
+    google:
+        enabled: true
+        issuer: "%server_name%"
+        template: "Authentication/form.html.twig"
+
+    email:
+        enabled: true
+        sender_email: "%twofactor_sender%"
+        digits: 6
+        template: "Authentication/form.html.twig"
+        mailer: Wallabag\Mailer\AuthCodeMailer

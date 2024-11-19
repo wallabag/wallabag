@@ -1,3 +1,10 @@
+imports:
+    - { resource: parameters_test.yaml }
+
+parameters:
+    fosuser_registration: true
+    wallabag_dbname_suffix: '_test'
+
 services:
     filesystem_cache:
         class: Doctrine\Common\Cache\FilesystemCache
@@ -6,6 +13,6 @@ services:
 
     # fixtures
     Wallabag\DataFixtures\:
-        resource: '../../fixtures/*'
+        resource: '../fixtures/*'
         tags: ['doctrine.fixture.orm']
         autowire: true

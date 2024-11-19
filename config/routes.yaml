@@ -1,10 +1,6 @@
 app:
-    resource: ../../src/Controller/
+    resource: ../src/Controller/
     type: annotation
-
-doc-api:
-    resource: "@NelmioApiDocBundle/config/routing/swaggerui.xml"
-    prefix: /api/doc
 
 doc-api-json:
     path: /api/doc.json
@@ -18,28 +14,6 @@ homepage:
         page : 1
     requirements:
         page: \d+
-
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-
-fos_oauth_server_token:
-    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
-
-craue_config_settings_modify:
-    path: /settings
-    defaults:
-        _controller: 'Craue\ConfigBundle\Controller\SettingsController::modifyAction'
-
-fos_js_routing:
-    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
-
-2fa_login:
-    path: /2fa
-    defaults:
-        _controller: "scheb_two_factor.form_controller:form"
-
-2fa_login_check:
-    path: /2fa_check
 
 # redirect RSS feed to Atom
 rss_to_atom_unread:

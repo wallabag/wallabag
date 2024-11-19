@@ -1,0 +1,13 @@
+fos_js_routing:
+    routes_to_expose:
+        - homepage
+        - starred
+        - archive
+        - all
+        - tag
+        - config
+        - import
+        - developer
+        - howto
+        - fos_user_security_logout
+        - new

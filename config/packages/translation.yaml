@@ -1,0 +1,11 @@
+framework:
+    translator:
+        enabled: true
+        fallback: "%locale%"
+        default_path: '%kernel.project_dir%/translations'
+    default_locale: "%locale%"
+
+when@test:
+    framework:
+        translator:
+            enabled: false

@@ -31,7 +31,7 @@ class IgnoreOriginUserRuleType extends AbstractType
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ignore_origin_user_rule';
     }

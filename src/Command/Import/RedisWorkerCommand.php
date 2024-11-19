@@ -33,7 +33,7 @@ class RedisWorkerCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('Worker started at: ' . (new \DateTime())->format('d-m-Y G:i:s'));
         $output->writeln('Waiting for message ...');

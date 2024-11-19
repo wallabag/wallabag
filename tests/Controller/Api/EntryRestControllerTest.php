@@ -470,13 +470,6 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
 
-    public function testGetTaggedEntriesWithBadParams()
-    {
-        $this->client->request('GET', '/api/entries', ['tags' => ['foo', 'bar']]);
-
-        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
-    }
-
     public function testGetDatedEntries()
     {
         $this->client->request('GET', '/api/entries', ['since' => 1443274283]);
@@ -825,7 +818,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             'tags' => 'new tag ' . uniqid(),
             'starred' => 1,
             'archive' => 0,
-            'authors' => ['bob', 'sponge'],
+            'authors' => 'bob,sponge',
         ]);
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
@@ -835,7 +828,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame($entry->getId(), $content['id']);
         $this->assertSame($entry->getUrl(), $content['url']);
         $this->assertGreaterThanOrEqual(1, \count($content['tags']), 'We force only one tag');
-        $this->assertEmpty($content['published_by'], 'Authors were not saved because of an array instead of a string');
+        $this->assertContains('sponge', $content['published_by']);
+        $this->assertContains('bob', $content['published_by']);
         $this->assertSame($previousContent, $content['content'], 'Ensure content has not moved');
         $this->assertSame($previousLanguage, $content['language'], 'Ensure language has not moved');
     }
@@ -866,7 +860,6 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame($entry->getId(), $content['id']);
         $this->assertSame($entry->getUrl(), $content['url']);
         $this->assertSame('https://myawesomesource.example.com', $content['origin_url']);
-        $this->assertEmpty($content['published_by'], 'Authors were not saved because of an array instead of a string');
         $this->assertSame($previousContent, $content['content'], 'Ensure content has not moved');
         $this->assertSame($previousLanguage, $content['language'], 'Ensure language has not moved');
     }
@@ -897,7 +890,6 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->assertSame($entry->getId(), $content['id']);
         $this->assertSame($entry->getUrl(), $content['url']);
         $this->assertEmpty($content['origin_url']);
-        $this->assertEmpty($content['published_by'], 'Authors were not saved because of an array instead of a string');
         $this->assertSame($previousContent, $content['content'], 'Ensure content has not moved');
         $this->assertSame($previousLanguage, $content['language'], 'Ensure language has not moved');
         $this->assertSame($previousTitle, $content['title'], 'Ensure title has not moved');

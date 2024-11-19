@@ -1,27 +1,27 @@
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
 # Cache, logs & sessions
-/var/*
-!/var/cache
-/var/cache/*
-!var/cache/.gitkeep
-!/var/logs
-/var/logs/*
-!var/logs/.gitkeep
-!/var/sessions
-/var/sessions/*
-!var/sessions/.gitkeep
 /bin/*
 !/bin/console
 .php-cs-fixer.php
 .php-cs-fixer.cache
-.phpunit.result.cache
-phpunit.xml
 docker-compose.override.yml
 
 # Parameters
 /app/config/parameters.yml
-
-# Managed by Composer
-/vendor/
 
 # Assets and user uploads
 web/uploads/

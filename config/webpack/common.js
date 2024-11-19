@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 
-const projectDir = path.resolve(__dirname, '../../../');
+const projectDir = path.resolve(__dirname, '../../');
 
 module.exports = {
   entry: {

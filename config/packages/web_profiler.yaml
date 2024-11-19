@@ -1,0 +1,17 @@
+when@dev:
+    framework:
+        profiler:
+            only_exceptions: false
+
+    web_profiler:
+        toolbar: true
+        intercept_redirects: false
+
+when@test:
+    framework:
+        profiler:
+            collect: false
+
+    web_profiler:
+        toolbar: false
+        intercept_redirects: false

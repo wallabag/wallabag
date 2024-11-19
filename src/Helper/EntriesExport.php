@@ -234,7 +234,7 @@ class EntriesExport
         $hash = sha1(\sprintf('%s:%s', $this->wallabagUrl, implode(',', $entryIds)));
         $book->setIdentifier(\sprintf('urn:wallabag:%s', $hash), EPub::IDENTIFIER_URI);
 
-        return Response::create(
+        return new Response(
             $book->getBook(),
             200,
             [
@@ -309,7 +309,7 @@ class EntriesExport
         // set image scale factor
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
-        return Response::create(
+        return new Response(
             $pdf->Output('', 'S'),
             200,
             [
@@ -354,7 +354,7 @@ class EntriesExport
         $output = stream_get_contents($handle);
         fclose($handle);
 
-        return Response::create(
+        return new Response(
             $output,
             200,
             [
@@ -370,7 +370,7 @@ class EntriesExport
      */
     private function produceJson(): Response
     {
-        return Response::create(
+        return new Response(
             $this->prepareSerializingContent('json'),
             200,
             [
@@ -386,7 +386,7 @@ class EntriesExport
      */
     private function produceXml(): Response
     {
-        return Response::create(
+        return new Response(
             $this->prepareSerializingContent('xml'),
             200,
             [
@@ -410,7 +410,7 @@ class EntriesExport
             $content .= $html->getText();
         }
 
-        return Response::create(
+        return new Response(
             $content,
             200,
             [

@@ -1,15 +1,34 @@
-imports:
-    - { resource: services_rabbit.yml }
-    - { resource: services_redis.yml }
-    - { resource: parameters_addons.yml }
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
 
+imports:
+    - { resource: ../app/config/parameters.yml }
+    - { resource: services_rabbit.yaml }
+    - { resource: services_redis.yaml }
+    - { resource: parameters_addons.yaml }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    env(APP_SECRET): '%secret%'
     spiriit_form_filter.get_filter.doctrine_orm.class: Wallabag\Event\Subscriber\CustomDoctrineORMSubscriber
+    # Allows to use the live reload feature for changes in assets
+    use_webpack_dev_server: false
+    craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\SymfonyCacheComponentAdapter
+
+when@dev:
+    parameters:
+        env(DATABASE_URL): '%database_scheme%://%database_user%:%database_password%@%database_host%:%database_port%/%database_name%?unix_socket=%database_socket%&charset=%database_charset%'
+
+when@prod:
+    parameters:
+        env(DATABASE_URL): '%database_scheme%://%database_user%:%database_password%@%database_host%:%database_port%/%database_name%?unix_socket=%database_socket%&charset=%database_charset%'
 
 services:
+    # default configuration for services in *this* file
     _defaults:
-        autowire: true
-        autoconfigure: true
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         public: true
         bind:
             $projectDir: '%kernel.project_dir%'
@@ -32,14 +51,23 @@ services:
             $supportUrl: '@=service(''craue_config'').get(''wallabag_support_url'')'
             $fonts: '%wallabag.fonts%'
 
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    # App\:
+    #     resource: '../src/'
+    #     exclude:
+    #         - '../src/DependencyInjection/'
+    #         - '../src/Entity/'
+    #         - '../src/Kernel.php'
+
     Wallabag\:
-        resource: '../../src/*'
-        exclude: ['../../src/{Consumer,Controller,Entity,ExpressionLanguage,DataFixtures,Redis}', '../../src/Event/*Event.php']
+        resource: '../src/*'
+        exclude: ['../src/{Consumer,Controller,Entity,ExpressionLanguage,DataFixtures,Redis}', '../src/Event/*Event.php', '../src/Kernel.php']
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     Wallabag\Controller\:
-        resource: '../../src/Controller/'
+        resource: '../src/Controller/'
         tags: ['controller.service_arguments']
 
     # inject alias service into controllers
@@ -107,6 +135,9 @@ services:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_pocket_html_producer'
             $redisProducer: '@wallabag.producer.redis.pocket_html'
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
 
     Doctrine\DBAL\Connection:
         alias: doctrine.dbal.default_connection

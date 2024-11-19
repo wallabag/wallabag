@@ -1,0 +1,10 @@
+httplug:
+    clients:
+        wallabag:
+            factory: Wallabag\Helper\HttpClientFactory
+            config:
+                defaults:
+                    timeout: 10
+            plugins: [ 'httplug.plugin.logger' ]
+    discovery:
+        client: false

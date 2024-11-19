@@ -31,8 +31,6 @@ services:
             # - ./docker/postgres/env
             # Uncomment to enable Xdebug
             # - ./docker/php/xdebug
-            - .env
-            - .env.local
         ports:
             - 8000:8000
             # Uncomment to permit Xdebug remote session
