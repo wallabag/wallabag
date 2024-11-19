@@ -2,6 +2,8 @@
 
 namespace Wallabag\Import;
 
+use Symfony\Component\DomCrawler\Crawler;
+
 class PocketHtmlImport extends HtmlImport
 {
     protected $filepath;
@@ -44,27 +46,23 @@ class PocketHtmlImport extends HtmlImport
             return false;
         }
 
-        $html = new \DOMDocument();
+        $crawler = new Crawler(file_get_contents($this->filepath));
 
-        libxml_use_internal_errors(true);
-        $html->loadHTMLFile($this->filepath);
-        $hrefs = $html->getElementsByTagName('a');
-        libxml_use_internal_errors(false);
+        $hrefs = $crawler->filterXPath('//a');
 
-        if (0 === $hrefs->length) {
+        if (0 === $hrefs->count()) {
             $this->logger->error('Pocket HTML: no entries in imported file');
 
             return false;
         }
 
-        $entries = [];
-        foreach ($hrefs as $href) {
-            $entry = [];
-            $entry['url'] = $href->getAttribute('href');
-            $entry['tags'] = $href->getAttribute('tags');
-            $entry['created_at'] = $href->getAttribute('time_added');
-            $entries[] = $entry;
-        }
+        $entries = $hrefs->each(function (Crawler $node) {
+            return [
+                'url' => $node->attr('href'),
+                'tags' => $node->attr('tags'),
+                'created_at' => $node->attr('time_added'),
+            ];
+        });
 
         if ($this->producer) {
             $this->parseEntriesForProducer($entries);
