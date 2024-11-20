@@ -2,6 +2,7 @@
 
 namespace Wallabag\Import;
 
+use Symfony\Component\DomCrawler\Crawler;
 use Wallabag\Entity\Entry;
 use Wallabag\Event\EntrySavedEvent;
 
@@ -29,27 +30,23 @@ abstract class HtmlImport extends AbstractImport
             return false;
         }
 
-        $html = new \DOMDocument();
+        $crawler = new Crawler(file_get_contents($this->filepath));
 
-        libxml_use_internal_errors(true);
-        $html->loadHTMLFile($this->filepath);
-        $hrefs = $html->getElementsByTagName('a');
-        libxml_use_internal_errors(false);
+        $hrefs = $crawler->filterXPath('//a');
 
-        if (0 === $hrefs->length) {
+        if (0 === $hrefs->count()) {
             $this->logger->error('Wallabag HTML: no entries in imported file');
 
             return false;
         }
 
-        $entries = [];
-        foreach ($hrefs as $href) {
-            $entry = [];
-            $entry['url'] = $href->getAttribute('href');
-            $entry['tags'] = $href->getAttribute('tags');
-            $entry['created_at'] = $href->getAttribute('add_date');
-            $entries[] = $entry;
-        }
+        $entries = $hrefs->each(function (Crawler $node) {
+            return [
+                'url' => $node->attr('href'),
+                'tags' => $node->attr('tags'),
+                'created_at' => $node->attr('add_date'),
+            ];
+        });
 
         if ($this->producer) {
             $this->parseEntriesForProducer($entries);

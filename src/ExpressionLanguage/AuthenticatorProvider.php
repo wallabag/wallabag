@@ -3,6 +3,7 @@
 namespace Wallabag\ExpressionLanguage;
 
 use GuzzleHttp\ClientInterface;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\ExpressionLanguage\ExpressionFunction;
 use Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
 
@@ -69,27 +70,19 @@ class AuthenticatorProvider implements ExpressionFunctionProviderInterface
                 throw new \Exception('Not supported');
             },
             function (array $arguments, $xpathQuery, $html) {
-                $useInternalErrors = libxml_use_internal_errors(true);
+                try {
+                    $crawler = new Crawler((string) $html);
 
-                $doc = new \DOMDocument();
-                $doc->loadHTML((string) $html, \LIBXML_NOCDATA | \LIBXML_NOWARNING | \LIBXML_NOERROR);
-
-                $xpath = new \DOMXPath($doc);
-                $domNodeList = $xpath->query($xpathQuery);
-
-                if (0 === $domNodeList->length) {
+                    $crawler = $crawler->filterXPath($xpathQuery);
+                } catch (\Throwable $e) {
                     return '';
                 }
 
-                $domNode = $domNodeList->item(0);
-
-                libxml_use_internal_errors($useInternalErrors);
-
-                if (null === $domNode || null === $domNode->attributes) {
+                if (0 === $crawler->count()) {
                     return '';
                 }
 
-                return $domNode->attributes->getNamedItem('value')->nodeValue;
+                return (string) $crawler->first()->attr('value');
             }
         );
     }
