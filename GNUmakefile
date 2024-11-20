@@ -11,7 +11,7 @@ else
 	override ENV = prod
 endif
 
-DOCKER_COMPOSE_RUNNING := $(shell docker-compose ps -q | grep -q . && echo 1 || echo 0)
+DOCKER_COMPOSE_RUNNING := $(shell docker compose ps -q | grep -q . && echo 1 || echo 0)
 
 ifeq ($(DOCKER_COMPOSE_RUNNING), 1)
   PHP := docker compose run --rm php php

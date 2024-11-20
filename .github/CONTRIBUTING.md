@@ -7,11 +7,11 @@
 - Clone the repository
 - Ensure your Docker daemon is running
 - Copy `docker/php/env.example` to `docker/php/env` and customize
-- Launch `docker-compose run --rm php composer install` to bootstrap php dependencies
-- Launch `docker-compose run --rm php bin/console wallabag:install` to bootstrap your installation
-- Launch `docker-compose run --rm php yarn install` to bootstrap dependencies for the frontend
-- Launch `docker-compose run --rm php yarn build:dev` to build assets for the frontend
-- Launch `docker-compose up -d` to start the stack
+- Launch `docker compose run --rm php composer install` to bootstrap php dependencies
+- Launch `docker compose run --rm php bin/console wallabag:install` to bootstrap your installation
+- Launch `docker compose run --rm php yarn install` to bootstrap dependencies for the frontend
+- Launch `docker compose run --rm php yarn build:dev` to build assets for the frontend
+- Launch `docker compose up -d` to start the stack
 
 You'll then have:
 - a PHP daemon with standalone web server
@@ -20,7 +20,7 @@ You'll then have:
 
 You can now access your wallabag instance using that url: `http://127.0.0.1:8000`
 
-If you want to test using an other database than SQLite, uncomment the `postgres` or `mariadb` code from the `docker-compose.yml` file at the root of the repo. Also uncomment related line in the `php` section so the database will be linked to your PHP instance.
+If you want to test using an other database than SQLite, uncomment the `postgres` or `mariadb` code from the `compose.yaml` file at the root of the repo. Also uncomment related line in the `php` section so the database will be linked to your PHP instance.
 
 ### Using your own PHP server
 
