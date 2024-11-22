@@ -9,7 +9,7 @@
 {% elseif current_route == 'search' %}
     {{ 'entry.page_titles.filtered_search'|trans }} {{ filter }}
 {% elseif current_route == 'tag_entries' %}
-    {{ 'entry.page_titles.filtered_tags'|trans }} {{ filter }}
+    {{ 'entry.page_titles.filtered_tags'|trans }} {{ tag.label }}
 {% elseif current_route == 'untagged' %}
     {{ 'entry.page_titles.untagged'|trans }}
 {% elseif current_route == 'same_domain' %}
