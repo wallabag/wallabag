@@ -16,7 +16,7 @@ class LoginFormAuthenticator implements Authenticator
         $postFields = [
             $siteConfig->getUsernameField() => $siteConfig->getUsername(),
             $siteConfig->getPasswordField() => $siteConfig->getPassword(),
-        ] + $this->getExtraFields($guzzle);
+        ] + $this->getExtraFields($siteConfig, $guzzle);
 
         $guzzle->post(
             $siteConfig->getLoginUri(),
