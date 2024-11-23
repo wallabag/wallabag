@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Wallabag\SiteConfig\Authenticator;
+namespace Tests\Wallabag\SiteConfig;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\Mock;
 use PHPUnit\Framework\TestCase;
-use Wallabag\SiteConfig\Authenticator\LoginFormAuthenticator;
+use Wallabag\SiteConfig\LoginFormAuthenticator;
 use Wallabag\SiteConfig\SiteConfig;
 
 class LoginFormAuthenticatorTest extends TestCase
@@ -80,7 +80,7 @@ class LoginFormAuthenticatorTest extends TestCase
 
         $response->expects($this->any())
             ->method('getBody')
-            ->willReturn(file_get_contents(__DIR__ . '/../../fixtures/aoc.media.html'));
+            ->willReturn(file_get_contents(__DIR__ . '/../fixtures/aoc.media.html'));
 
         $response->expects($this->any())
             ->method('getStatusCode')
@@ -142,7 +142,7 @@ class LoginFormAuthenticatorTest extends TestCase
 
         $response->expects($this->any())
             ->method('getBody')
-            ->willReturn(file_get_contents(__DIR__ . '/../../fixtures/nextinpact-login.html'));
+            ->willReturn(file_get_contents(__DIR__ . '/../fixtures/nextinpact-login.html'));
 
         $response->expects($this->any())
             ->method('getStatusCode')
@@ -211,7 +211,7 @@ class LoginFormAuthenticatorTest extends TestCase
         ]);
 
         $auth = new LoginFormAuthenticator();
-        $loginRequired = $auth->isLoginRequired($siteConfig, file_get_contents(__DIR__ . '/../../fixtures/nextinpact-login.html'));
+        $loginRequired = $auth->isLoginRequired($siteConfig, file_get_contents(__DIR__ . '/../fixtures/nextinpact-login.html'));
 
         $this->assertFalse($loginRequired);
     }
@@ -228,7 +228,7 @@ class LoginFormAuthenticatorTest extends TestCase
         ]);
 
         $auth = new LoginFormAuthenticator();
-        $loginRequired = $auth->isLoginRequired($siteConfig, file_get_contents(__DIR__ . '/../../fixtures/nextinpact-article.html'));
+        $loginRequired = $auth->isLoginRequired($siteConfig, file_get_contents(__DIR__ . '/../fixtures/nextinpact-article.html'));
 
         $this->assertTrue($loginRequired);
     }

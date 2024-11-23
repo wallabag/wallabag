@@ -9,7 +9,7 @@ use GuzzleHttp\Message\RequestInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Wallabag\SiteConfig\Authenticator\LoginFormAuthenticator;
+use Wallabag\SiteConfig\LoginFormAuthenticator;
 use Wallabag\SiteConfig\SiteConfig;
 use Wallabag\SiteConfig\SiteConfigBuilder;
 

@@ -1,13 +1,12 @@
 <?php
 
-namespace Wallabag\SiteConfig\Authenticator;
+namespace Wallabag\SiteConfig;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Cookie\CookieJar;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Wallabag\ExpressionLanguage\AuthenticatorProvider;
-use Wallabag\SiteConfig\SiteConfig;
 
 class LoginFormAuthenticator
 {

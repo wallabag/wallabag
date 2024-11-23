@@ -14,7 +14,7 @@ use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
 use Wallabag\Guzzle\AuthenticatorSubscriber;
 use Wallabag\SiteConfig\ArraySiteConfigBuilder;
-use Wallabag\SiteConfig\Authenticator\LoginFormAuthenticator;
+use Wallabag\SiteConfig\LoginFormAuthenticator;
 
 class AuthenticatorSubscriberTest extends TestCase
 {
