@@ -9,8 +9,13 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Wallabag\ExpressionLanguage\AuthenticatorProvider;
 use Wallabag\SiteConfig\SiteConfig;
 
-class LoginFormAuthenticator implements Authenticator
+class LoginFormAuthenticator
 {
+    /**
+     * Logs the configured user on the given Guzzle client.
+     *
+     * @return self
+     */
     public function login(SiteConfig $siteConfig, ClientInterface $guzzle)
     {
         $postFields = [
@@ -26,6 +31,11 @@ class LoginFormAuthenticator implements Authenticator
         return $this;
     }
 
+    /**
+     * Checks if we are logged into the site, but without calling the server (e.g. do we have a Cookie).
+     *
+     * @return bool
+     */
     public function isLoggedIn(SiteConfig $siteConfig, ClientInterface $guzzle)
     {
         if (($cookieJar = $guzzle->getDefaultOption('cookies')) instanceof CookieJar) {
@@ -41,6 +51,13 @@ class LoginFormAuthenticator implements Authenticator
         return false;
     }
 
+    /**
+     * Checks from the HTML of a page if authentication is requested by a grabbed page.
+     *
+     * @param string $html
+     *
+     * @return bool
+     */
     public function isLoginRequired(SiteConfig $siteConfig, $html)
     {
         // need to check for the login dom element ($options['not_logged_in_xpath']) in the HTML

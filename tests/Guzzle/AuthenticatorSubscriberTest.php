@@ -14,13 +14,13 @@ use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
 use Wallabag\Guzzle\AuthenticatorSubscriber;
 use Wallabag\SiteConfig\ArraySiteConfigBuilder;
-use Wallabag\SiteConfig\Authenticator\Authenticator;
+use Wallabag\SiteConfig\Authenticator\LoginFormAuthenticator;
 
 class AuthenticatorSubscriberTest extends TestCase
 {
     public function testGetEvents()
     {
-        $authenticator = $this->getMockBuilder(Authenticator::class)
+        $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -38,7 +38,7 @@ class AuthenticatorSubscriberTest extends TestCase
 
     public function testLoginIfRequiredNotRequired()
     {
-        $authenticator = $this->getMockBuilder(Authenticator::class)
+        $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -71,7 +71,7 @@ class AuthenticatorSubscriberTest extends TestCase
 
     public function testLoginIfRequiredWithNotLoggedInUser()
     {
-        $authenticator = $this->getMockBuilder(Authenticator::class)
+        $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -123,7 +123,7 @@ class AuthenticatorSubscriberTest extends TestCase
 
     public function testLoginIfRequestedNotRequired()
     {
-        $authenticator = $this->getMockBuilder(Authenticator::class)
+        $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -156,7 +156,7 @@ class AuthenticatorSubscriberTest extends TestCase
 
     public function testLoginIfRequestedNotRequested()
     {
-        $authenticator = $this->getMockBuilder(Authenticator::class)
+        $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -205,7 +205,7 @@ class AuthenticatorSubscriberTest extends TestCase
 
     public function testLoginIfRequestedRequested()
     {
-        $authenticator = $this->getMockBuilder(Authenticator::class)
+        $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -263,7 +263,7 @@ class AuthenticatorSubscriberTest extends TestCase
 
     public function testLoginIfRequestedRedirect()
     {
-        $authenticator = $this->getMockBuilder(Authenticator::class)
+        $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
             ->disableOriginalConstructor()
             ->getMock();
 

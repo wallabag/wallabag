@@ -9,7 +9,7 @@ use GuzzleHttp\Message\RequestInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Wallabag\SiteConfig\Authenticator\Authenticator;
+use Wallabag\SiteConfig\Authenticator\LoginFormAuthenticator;
 use Wallabag\SiteConfig\SiteConfig;
 use Wallabag\SiteConfig\SiteConfigBuilder;
 
@@ -23,7 +23,7 @@ class AuthenticatorSubscriber implements SubscriberInterface, LoggerAwareInterfa
     /** @var SiteConfigBuilder */
     private $configBuilder;
 
-    /** @var Authenticator */
+    /** @var LoginFormAuthenticator */
     private $authenticator;
 
     /** @var LoggerInterface */
@@ -32,7 +32,7 @@ class AuthenticatorSubscriber implements SubscriberInterface, LoggerAwareInterfa
     /**
      * AuthenticatorSubscriber constructor.
      */
-    public function __construct(SiteConfigBuilder $configBuilder, Authenticator $authenticator)
+    public function __construct(SiteConfigBuilder $configBuilder, LoginFormAuthenticator $authenticator)
     {
         $this->configBuilder = $configBuilder;
         $this->authenticator = $authenticator;
