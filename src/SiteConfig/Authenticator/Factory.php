@@ -14,8 +14,8 @@ class Factory
      *
      * @throw \OutOfRangeException if there are no credentials for this host
      */
-    public function buildFromSiteConfig(SiteConfig $siteConfig)
+    public function buildFromSiteConfig()
     {
-        return new LoginFormAuthenticator($siteConfig);
+        return new LoginFormAuthenticator();
     }
 }

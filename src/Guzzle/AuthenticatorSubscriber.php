@@ -62,14 +62,14 @@ class AuthenticatorSubscriber implements SubscriberInterface, LoggerAwareInterfa
         }
 
         $client = $event->getClient();
-        $authenticator = $this->authenticatorFactory->buildFromSiteConfig($config);
+        $authenticator = $this->authenticatorFactory->buildFromSiteConfig();
 
-        if (!$authenticator->isLoggedIn($client)) {
+        if (!$authenticator->isLoggedIn($config, $client)) {
             $this->logger->debug('loginIfRequired> user is not logged in, attach authenticator');
 
             $emitter = $client->getEmitter();
             $emitter->detach($this);
-            $authenticator->login($client);
+            $authenticator->login($config, $client);
             $emitter->attach($this);
         }
     }
@@ -94,8 +94,8 @@ class AuthenticatorSubscriber implements SubscriberInterface, LoggerAwareInterfa
             return;
         }
 
-        $authenticator = $this->authenticatorFactory->buildFromSiteConfig($config);
-        $isLoginRequired = $authenticator->isLoginRequired($body);
+        $authenticator = $this->authenticatorFactory->buildFromSiteConfig();
+        $isLoginRequired = $authenticator->isLoginRequired($config, $body);
 
         $this->logger->debug('loginIfRequested> retry #' . $this->retries . ' with login ' . ($isLoginRequired ? '' : 'not ') . 'required');
 
@@ -104,7 +104,7 @@ class AuthenticatorSubscriber implements SubscriberInterface, LoggerAwareInterfa
 
             $emitter = $client->getEmitter();
             $emitter->detach($this);
-            $authenticator->login($client);
+            $authenticator->login($config, $client);
             $emitter->attach($this);
 
             $event->retry();

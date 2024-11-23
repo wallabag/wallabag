@@ -3,6 +3,7 @@
 namespace Wallabag\SiteConfig\Authenticator;
 
 use GuzzleHttp\ClientInterface;
+use Wallabag\SiteConfig\SiteConfig;
 
 interface Authenticator
 {
@@ -11,14 +12,14 @@ interface Authenticator
      *
      * @return self
      */
-    public function login(ClientInterface $guzzle);
+    public function login(SiteConfig $siteConfig, ClientInterface $guzzle);
 
     /**
      * Checks if we are logged into the site, but without calling the server (e.g. do we have a Cookie).
      *
      * @return bool
      */
-    public function isLoggedIn(ClientInterface $guzzle);
+    public function isLoggedIn(SiteConfig $siteConfig, ClientInterface $guzzle);
 
     /**
      * Checks from the HTML of a page if authentication is requested by a grabbed page.
@@ -27,5 +28,5 @@ interface Authenticator
      *
      * @return bool
      */
-    public function isLoginRequired($html);
+    public function isLoginRequired(SiteConfig $siteConfig, $html);
 }
