@@ -11,9 +11,6 @@ use Wallabag\SiteConfig\SiteConfig;
 
 class LoginFormAuthenticator implements Authenticator
 {
-    /** @var \GuzzleHttp\Client */
-    protected $guzzle;
-
     /** @var SiteConfig */
     private $siteConfig;
 
