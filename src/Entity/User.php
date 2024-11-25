@@ -132,14 +132,14 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     protected $config;
 
     /**
-     * @var ArrayCollection&iterable<\Wallabag\Entity\SiteCredential>
+     * @var ArrayCollection&iterable<SiteCredential>
      *
      * @ORM\OneToMany(targetEntity="Wallabag\Entity\SiteCredential", mappedBy="user", cascade={"remove"})
      */
     protected $siteCredentials;
 
     /**
-     * @var ArrayCollection&iterable<\Wallabag\Entity\Api\Client>
+     * @var ArrayCollection&iterable<Client>
      *
      * @ORM\OneToMany(targetEntity="Wallabag\Entity\Api\Client", mappedBy="user", cascade={"remove"})
      */
