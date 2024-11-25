@@ -14,16 +14,19 @@ use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
 use Wallabag\Guzzle\AuthenticatorSubscriber;
 use Wallabag\SiteConfig\ArraySiteConfigBuilder;
-use Wallabag\SiteConfig\Authenticator\Authenticator;
-use Wallabag\SiteConfig\Authenticator\Factory;
+use Wallabag\SiteConfig\LoginFormAuthenticator;
 
 class AuthenticatorSubscriberTest extends TestCase
 {
     public function testGetEvents()
     {
+        $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $subscriber = new AuthenticatorSubscriber(
             new ArraySiteConfigBuilder(),
-            new Factory()
+            $authenticator
         );
         $events = $subscriber->getEvents();
 
@@ -35,8 +38,12 @@ class AuthenticatorSubscriberTest extends TestCase
 
     public function testLoginIfRequiredNotRequired()
     {
+        $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $builder = new ArraySiteConfigBuilder(['example.com' => []]);
-        $subscriber = new AuthenticatorSubscriber($builder, new Factory());
+        $subscriber = new AuthenticatorSubscriber($builder, $authenticator);
 
         $logger = new Logger('foo');
         $handler = new TestHandler();
@@ -64,7 +71,7 @@ class AuthenticatorSubscriberTest extends TestCase
 
     public function testLoginIfRequiredWithNotLoggedInUser()
     {
-        $authenticator = $this->getMockBuilder(Authenticator::class)
+        $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -75,16 +82,8 @@ class AuthenticatorSubscriberTest extends TestCase
         $authenticator->expects($this->once())
             ->method('login');
 
-        $factory = $this->getMockBuilder(Factory::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $factory->expects($this->once())
-            ->method('buildFromSiteConfig')
-            ->willReturn($authenticator);
-
         $builder = new ArraySiteConfigBuilder(['example.com' => ['requiresLogin' => true]]);
-        $subscriber = new AuthenticatorSubscriber($builder, $factory);
+        $subscriber = new AuthenticatorSubscriber($builder, $authenticator);
 
         $logger = new Logger('foo');
         $handler = new TestHandler();
@@ -124,8 +123,12 @@ class AuthenticatorSubscriberTest extends TestCase
 
     public function testLoginIfRequestedNotRequired()
     {
+        $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $builder = new ArraySiteConfigBuilder(['example.com' => []]);
-        $subscriber = new AuthenticatorSubscriber($builder, new Factory());
+        $subscriber = new AuthenticatorSubscriber($builder, $authenticator);
 
         $logger = new Logger('foo');
         $handler = new TestHandler();
@@ -153,7 +156,7 @@ class AuthenticatorSubscriberTest extends TestCase
 
     public function testLoginIfRequestedNotRequested()
     {
-        $authenticator = $this->getMockBuilder(Authenticator::class)
+        $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -161,19 +164,11 @@ class AuthenticatorSubscriberTest extends TestCase
             ->method('isLoginRequired')
             ->willReturn(false);
 
-        $factory = $this->getMockBuilder(Factory::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $factory->expects($this->once())
-            ->method('buildFromSiteConfig')
-            ->willReturn($authenticator);
-
         $builder = new ArraySiteConfigBuilder(['example.com' => [
             'requiresLogin' => true,
             'notLoggedInXpath' => '//html',
         ]]);
-        $subscriber = new AuthenticatorSubscriber($builder, $factory);
+        $subscriber = new AuthenticatorSubscriber($builder, $authenticator);
 
         $logger = new Logger('foo');
         $handler = new TestHandler();
@@ -210,7 +205,7 @@ class AuthenticatorSubscriberTest extends TestCase
 
     public function testLoginIfRequestedRequested()
     {
-        $authenticator = $this->getMockBuilder(Authenticator::class)
+        $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -221,19 +216,11 @@ class AuthenticatorSubscriberTest extends TestCase
         $authenticator->expects($this->once())
             ->method('login');
 
-        $factory = $this->getMockBuilder(Factory::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $factory->expects($this->once())
-            ->method('buildFromSiteConfig')
-            ->willReturn($authenticator);
-
         $builder = new ArraySiteConfigBuilder(['example.com' => [
             'requiresLogin' => true,
             'notLoggedInXpath' => '//html',
         ]]);
-        $subscriber = new AuthenticatorSubscriber($builder, $factory);
+        $subscriber = new AuthenticatorSubscriber($builder, $authenticator);
 
         $logger = new Logger('foo');
         $handler = new TestHandler();
@@ -276,7 +263,7 @@ class AuthenticatorSubscriberTest extends TestCase
 
     public function testLoginIfRequestedRedirect()
     {
-        $factory = $this->getMockBuilder(Factory::class)
+        $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -284,7 +271,7 @@ class AuthenticatorSubscriberTest extends TestCase
             'requiresLogin' => true,
             'notLoggedInXpath' => '//html',
         ]]);
-        $subscriber = new AuthenticatorSubscriber($builder, $factory);
+        $subscriber = new AuthenticatorSubscriber($builder, $authenticator);
 
         $logger = new Logger('foo');
         $handler = new TestHandler();

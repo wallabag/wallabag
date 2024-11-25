@@ -9,7 +9,7 @@ use GuzzleHttp\Message\RequestInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Wallabag\SiteConfig\Authenticator\Factory;
+use Wallabag\SiteConfig\LoginFormAuthenticator;
 use Wallabag\SiteConfig\SiteConfig;
 use Wallabag\SiteConfig\SiteConfigBuilder;
 
@@ -23,8 +23,8 @@ class AuthenticatorSubscriber implements SubscriberInterface, LoggerAwareInterfa
     /** @var SiteConfigBuilder */
     private $configBuilder;
 
-    /** @var Factory */
-    private $authenticatorFactory;
+    /** @var LoginFormAuthenticator */
+    private $authenticator;
 
     /** @var LoggerInterface */
     private $logger;
@@ -32,10 +32,10 @@ class AuthenticatorSubscriber implements SubscriberInterface, LoggerAwareInterfa
     /**
      * AuthenticatorSubscriber constructor.
      */
-    public function __construct(SiteConfigBuilder $configBuilder, Factory $authenticatorFactory)
+    public function __construct(SiteConfigBuilder $configBuilder, LoginFormAuthenticator $authenticator)
     {
         $this->configBuilder = $configBuilder;
-        $this->authenticatorFactory = $authenticatorFactory;
+        $this->authenticator = $authenticator;
         $this->logger = new NullLogger();
     }
 
@@ -62,14 +62,13 @@ class AuthenticatorSubscriber implements SubscriberInterface, LoggerAwareInterfa
         }
 
         $client = $event->getClient();
-        $authenticator = $this->authenticatorFactory->buildFromSiteConfig($config);
 
-        if (!$authenticator->isLoggedIn($client)) {
+        if (!$this->authenticator->isLoggedIn($config, $client)) {
             $this->logger->debug('loginIfRequired> user is not logged in, attach authenticator');
 
             $emitter = $client->getEmitter();
             $emitter->detach($this);
-            $authenticator->login($client);
+            $this->authenticator->login($config, $client);
             $emitter->attach($this);
         }
     }
@@ -94,8 +93,7 @@ class AuthenticatorSubscriber implements SubscriberInterface, LoggerAwareInterfa
             return;
         }
 
-        $authenticator = $this->authenticatorFactory->buildFromSiteConfig($config);
-        $isLoginRequired = $authenticator->isLoginRequired($body);
+        $isLoginRequired = $this->authenticator->isLoginRequired($config, $body);
 
         $this->logger->debug('loginIfRequested> retry #' . $this->retries . ' with login ' . ($isLoginRequired ? '' : 'not ') . 'required');
 
@@ -104,7 +102,7 @@ class AuthenticatorSubscriber implements SubscriberInterface, LoggerAwareInterfa
 
             $emitter = $client->getEmitter();
             $emitter->detach($this);
-            $authenticator->login($client);
+            $this->authenticator->login($config, $client);
             $emitter->attach($this);
 
             $event->retry();

@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Wallabag\SiteConfig\Authenticator;
+namespace Tests\Wallabag\SiteConfig;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\Mock;
 use PHPUnit\Framework\TestCase;
-use Wallabag\SiteConfig\Authenticator\LoginFormAuthenticator;
+use Wallabag\SiteConfig\LoginFormAuthenticator;
 use Wallabag\SiteConfig\SiteConfig;
 
 class LoginFormAuthenticatorTest extends TestCase
@@ -35,8 +35,8 @@ class LoginFormAuthenticatorTest extends TestCase
             'password' => 'unkn0wn',
         ]);
 
-        $auth = new LoginFormAuthenticator($siteConfig);
-        $res = $auth->login($guzzle);
+        $auth = new LoginFormAuthenticator();
+        $res = $auth->login($siteConfig, $guzzle);
 
         $this->assertInstanceOf(LoginFormAuthenticator::class, $res);
     }
@@ -65,8 +65,8 @@ class LoginFormAuthenticatorTest extends TestCase
             'password' => 'unkn0wn',
         ]);
 
-        $auth = new LoginFormAuthenticator($siteConfig);
-        $res = $auth->login($guzzle);
+        $auth = new LoginFormAuthenticator();
+        $res = $auth->login($siteConfig, $guzzle);
 
         $this->assertInstanceOf(LoginFormAuthenticator::class, $res);
     }
@@ -80,7 +80,7 @@ class LoginFormAuthenticatorTest extends TestCase
 
         $response->expects($this->any())
             ->method('getBody')
-            ->willReturn(file_get_contents(__DIR__ . '/../../fixtures/aoc.media.html'));
+            ->willReturn(file_get_contents(__DIR__ . '/../fixtures/aoc.media.html'));
 
         $response->expects($this->any())
             ->method('getStatusCode')
@@ -128,8 +128,8 @@ class LoginFormAuthenticatorTest extends TestCase
             'password' => 'unkn0wn',
         ]);
 
-        $auth = new LoginFormAuthenticator($siteConfig);
-        $res = $auth->login($client);
+        $auth = new LoginFormAuthenticator();
+        $res = $auth->login($siteConfig, $client);
 
         $this->assertInstanceOf(LoginFormAuthenticator::class, $res);
     }
@@ -142,7 +142,7 @@ class LoginFormAuthenticatorTest extends TestCase
 
         $response->expects($this->any())
             ->method('getBody')
-            ->willReturn(file_get_contents(__DIR__ . '/../../fixtures/nextinpact-login.html'));
+            ->willReturn(file_get_contents(__DIR__ . '/../fixtures/nextinpact-login.html'));
 
         $response->expects($this->any())
             ->method('getStatusCode')
@@ -194,8 +194,8 @@ class LoginFormAuthenticatorTest extends TestCase
             'password' => 'unkn0wn',
         ]);
 
-        $auth = new LoginFormAuthenticator($siteConfig);
-        $res = $auth->login($client);
+        $auth = new LoginFormAuthenticator();
+        $res = $auth->login($siteConfig, $client);
 
         $this->assertInstanceOf(LoginFormAuthenticator::class, $res);
     }
@@ -210,8 +210,8 @@ class LoginFormAuthenticatorTest extends TestCase
             'password' => 'unkn0wn',
         ]);
 
-        $auth = new LoginFormAuthenticator($siteConfig);
-        $loginRequired = $auth->isLoginRequired(file_get_contents(__DIR__ . '/../../fixtures/nextinpact-login.html'));
+        $auth = new LoginFormAuthenticator();
+        $loginRequired = $auth->isLoginRequired($siteConfig, file_get_contents(__DIR__ . '/../fixtures/nextinpact-login.html'));
 
         $this->assertFalse($loginRequired);
     }
@@ -227,8 +227,8 @@ class LoginFormAuthenticatorTest extends TestCase
             'notLoggedInXpath' => '//h2[@class="title_reserve_article"]',
         ]);
 
-        $auth = new LoginFormAuthenticator($siteConfig);
-        $loginRequired = $auth->isLoginRequired(file_get_contents(__DIR__ . '/../../fixtures/nextinpact-article.html'));
+        $auth = new LoginFormAuthenticator();
+        $loginRequired = $auth->isLoginRequired($siteConfig, file_get_contents(__DIR__ . '/../fixtures/nextinpact-article.html'));
 
         $this->assertTrue($loginRequired);
     }

@@ -1,50 +1,47 @@
 <?php
 
-namespace Wallabag\SiteConfig\Authenticator;
+namespace Wallabag\SiteConfig;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Cookie\CookieJar;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Wallabag\ExpressionLanguage\AuthenticatorProvider;
-use Wallabag\SiteConfig\SiteConfig;
 
-class LoginFormAuthenticator implements Authenticator
+class LoginFormAuthenticator
 {
-    /** @var \GuzzleHttp\Client */
-    protected $guzzle;
-
-    /** @var SiteConfig */
-    private $siteConfig;
-
-    public function __construct(SiteConfig $siteConfig)
-    {
-        // @todo OptionResolver
-        $this->siteConfig = $siteConfig;
-    }
-
-    public function login(ClientInterface $guzzle)
+    /**
+     * Logs the configured user on the given Guzzle client.
+     *
+     * @return self
+     */
+    public function login(SiteConfig $siteConfig, ClientInterface $guzzle)
     {
         $postFields = [
-            $this->siteConfig->getUsernameField() => $this->siteConfig->getUsername(),
-            $this->siteConfig->getPasswordField() => $this->siteConfig->getPassword(),
-        ] + $this->getExtraFields($guzzle);
+            $siteConfig->getUsernameField() => $siteConfig->getUsername(),
+            $siteConfig->getPasswordField() => $siteConfig->getPassword(),
+        ] + $this->getExtraFields($siteConfig, $guzzle);
 
         $guzzle->post(
-            $this->siteConfig->getLoginUri(),
+            $siteConfig->getLoginUri(),
             ['body' => $postFields, 'allow_redirects' => true, 'verify' => false]
         );
 
         return $this;
     }
 
-    public function isLoggedIn(ClientInterface $guzzle)
+    /**
+     * Checks if we are logged into the site, but without calling the server (e.g. do we have a Cookie).
+     *
+     * @return bool
+     */
+    public function isLoggedIn(SiteConfig $siteConfig, ClientInterface $guzzle)
     {
         if (($cookieJar = $guzzle->getDefaultOption('cookies')) instanceof CookieJar) {
             /** @var \GuzzleHttp\Cookie\SetCookie $cookie */
             foreach ($cookieJar as $cookie) {
                 // check required cookies
-                if ($cookie->getDomain() === $this->siteConfig->getHost()) {
+                if ($cookie->getDomain() === $siteConfig->getHost()) {
                     return true;
                 }
             }
@@ -53,13 +50,20 @@ class LoginFormAuthenticator implements Authenticator
         return false;
     }
 
-    public function isLoginRequired($html)
+    /**
+     * Checks from the HTML of a page if authentication is requested by a grabbed page.
+     *
+     * @param string $html
+     *
+     * @return bool
+     */
+    public function isLoginRequired(SiteConfig $siteConfig, $html)
     {
         // need to check for the login dom element ($options['not_logged_in_xpath']) in the HTML
         try {
             $crawler = new Crawler((string) $html);
 
-            $loggedIn = $crawler->evaluate((string) $this->siteConfig->getNotLoggedInXpath());
+            $loggedIn = $crawler->evaluate((string) $siteConfig->getNotLoggedInXpath());
         } catch (\Throwable $e) {
             return false;
         }
@@ -73,17 +77,17 @@ class LoginFormAuthenticator implements Authenticator
      *
      * @return array
      */
-    private function getExtraFields(ClientInterface $guzzle)
+    private function getExtraFields(SiteConfig $siteConfig, ClientInterface $guzzle)
     {
         $extraFields = [];
 
-        foreach ($this->siteConfig->getExtraFields() as $fieldName => $fieldValue) {
+        foreach ($siteConfig->getExtraFields() as $fieldName => $fieldValue) {
             if ('@=' === substr($fieldValue, 0, 2)) {
                 $expressionLanguage = $this->getExpressionLanguage($guzzle);
                 $fieldValue = $expressionLanguage->evaluate(
                     substr($fieldValue, 2),
                     [
-                        'config' => $this->siteConfig,
+                        'config' => $siteConfig,
                     ]
                 );
             }
