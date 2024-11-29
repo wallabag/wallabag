@@ -550,6 +550,7 @@ import:
     elcurator:
         description: Esta herramienta importará todos tus artículos desde elCurator.
         page_title: Importar > elCurator
+        how_to: Seleccione su exportación de elCurator y haga clic en el botón a continuación para cargarla e importarla.
     delicious:
         page_title: Importar > del.icio.us
         description: Importa todos tus artículos de Delicious. Desde 2021 puedes exportar tus datos de nuevo utilizando la página de exportación (https://del.icio.us/export). Elige el formato "JSON" y descárgalo (por ejemplo "delicious_export.2021.02.06_21.10.json").
@@ -562,6 +563,10 @@ import:
         description: Esta herramienta importará todos tus marcadores de Pocket (vía HTML). Sólo tienes que ir a https://getpocket.com/export, y luego exportar el archivo HTML. Se descargará un archivo HTML (como "ril_export.html").
         page_title: Importar > Pocket HTML
         how_to: Por favor, elige el archivo de la copia de seguridad del marcador y haz clic en el botón inferior para importarlo. Ten en cuenta que el proceso puede llevar mucho tiempo, ya que hay que recuperar todos los artículos.
+    omnivore:
+        page_title: Importar > Omnivore
+        description: Este importador importará todos sus artículos de Omnivore.
+        how_to: Por favor, descomprima su exportación de Omnivore y luego cargue cada archivo JSON llamado "metadata_x_to_y.json" uno por uno.
 developer:
     page_title: 'Gestión de clientes API'
     welcome_message: 'Bienvenido al API de wallabag'
