@@ -219,7 +219,6 @@ services:
     Wallabag\Helper\HttpClientFactory:
         calls:
             - ['addSubscriber', ['@Wallabag\Guzzle\AuthenticatorSubscriber']]
-            - ['addSubscriber', ['@Wallabag\Guzzle\FixupMondeDiplomatiqueUriSubscriber']]
 
     RulerZ\RulerZ:
         alias: rulerz
