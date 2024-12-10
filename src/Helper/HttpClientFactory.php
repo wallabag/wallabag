@@ -18,6 +18,9 @@ class HttpClientFactory implements ClientFactory
     /** @var SubscriberInterface[] */
     private $subscribers = [];
 
+    /** @var string */
+    private $userAgent;
+
     /** @var CookieJar */
     private $cookieJar;
 
@@ -45,6 +48,14 @@ class HttpClientFactory implements ClientFactory
     }
 
     /**
+     * Set the default user-agent.
+     */
+    public function setUserAgent(string $userAgent)
+    {
+        $this->userAgent = $userAgent;
+    }
+
+    /**
      * Input an array of configuration to be able to create a HttpClient.
      *
      * @return HttpClient
@@ -62,6 +73,14 @@ class HttpClientFactory implements ClientFactory
         if (!isset($config['defaults']['cookies'])) {
             // need to set the (shared) cookie jar
             $config['defaults']['cookies'] = $this->cookieJar;
+        }
+
+        if (!isset($config['defaults']['headers'])) {
+            $config['defaults']['headers'] = [];
+        }
+        if (!isset($config['defaults']['headers']['User-Agent'])) {
+            // need to set the user-agent
+            $config['defaults']['headers']['User-Agent'] = $this->userAgent;
         }
 
         $guzzle = new GuzzleClient($config);
