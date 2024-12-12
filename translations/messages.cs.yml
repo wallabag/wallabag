@@ -82,7 +82,7 @@ entry:
         reading_time_less_one_minute: 'odhadovaný čas čtení: &lt; 1 min'
         reading_time_minutes: 'odhadovaný čas čtení: %readingTime% min'
         reading_time: odhadovaný čas čtení
-        number_on_the_page: '{0} Nemáte žádné položky.|{1} Máte jednu položku.|]1,4[ Máte %count% položky.|]4,Inf[ Máte %count% položek.'
+        number_on_the_page: '{0} Nemáte žádné položky.|{1} Máte jednu položku.|]1,4] Máte %count% položky.|[5,Inf] Máte %count% položek.'
         show_same_domain: Zobrazit články se stejnou doménou
         assign_search_tag: Přiřadit toto hledání jako štítek ke každému výsledku
         toggle_mass_action: Přepnout hromadnou akci
@@ -348,7 +348,7 @@ tag:
         untagged: Položky bez štítků
         no_untagged_entries: Nejsou žádné položky bez štítků.
         see_untagged_entries: Zobrazit položky bez štítků
-        number_on_the_page: '{0}Nejsou žádné štítky.|{1} Je jeden štítek.|]1,4[ Jsou %count% štítky.|]4,Inf[ Je %count% štítků.'
+        number_on_the_page: '{0}Nejsou žádné štítky.|{1} Je jeden štítek.|]1,4] Jsou %count% štítky.|[5,Inf] Je %count% štítků.'
     confirm:
         delete: Odstranit štítek %name%
 quickstart:
