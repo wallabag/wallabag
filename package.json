@@ -81,7 +81,7 @@
     "annotator": "wallabag/annotator#master",
     "clipboard": "^2.0.11",
     "hammerjs": "^2.0.8",
-    "highlight.js": "^11.10.0",
+    "highlight.js": "^11.11.0",
     "icomoon-free-npm": "^0.0.0",
     "jquery": "^3.7.1",
     "jquery.cookie": "^1.4.1",
