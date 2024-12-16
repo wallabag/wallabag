@@ -14407,16 +14407,16 @@
         },
         {
             "name": "tecnickcom/tcpdf",
-            "version": "6.7.7",
+            "version": "6.7.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/TCPDF.git",
-                "reference": "cfbc0028cc23f057f2baf9e73bdc238153c22086"
+                "reference": "7956f5e37863c6a569d5ccfae826f353a12a2493"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/cfbc0028cc23f057f2baf9e73bdc238153c22086",
-                "reference": "cfbc0028cc23f057f2baf9e73bdc238153c22086",
+                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/7956f5e37863c6a569d5ccfae826f353a12a2493",
+                "reference": "7956f5e37863c6a569d5ccfae826f353a12a2493",
                 "shasum": ""
             },
             "require": {
@@ -14467,7 +14467,7 @@
             ],
             "support": {
                 "issues": "https://github.com/tecnickcom/TCPDF/issues",
-                "source": "https://github.com/tecnickcom/TCPDF/tree/6.7.7"
+                "source": "https://github.com/tecnickcom/TCPDF/tree/6.7.8"
             },
             "funding": [
                 {
@@ -14475,7 +14475,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2024-10-26T12:15:02+00:00"
+            "time": "2024-12-13T19:31:40+00:00"
         },
         {
             "name": "thecodingmachine/safe",
