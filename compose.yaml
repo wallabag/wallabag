@@ -31,8 +31,8 @@ services:
             # - ./docker/postgres/env
             # Uncomment to enable Xdebug
             # - ./docker/php/xdebug
-            - .env
-            - .env.local
+            # Uncomment to enable Blackfire
+            # - ./docker/php/blackfire
         ports:
             - 8000:8000
             # Uncomment to permit Xdebug remote session
@@ -76,12 +76,11 @@ services:
             timeout: 3s
             retries: 3
 
-    blackfire:
-        image: blackfire/blackfire:2
-        ports: [ "8307" ]
-        env_file:
-            - .env
-            - .env.local
+    # blackfire:
+    #     image: blackfire/blackfire:2
+    #     ports: [ "8307" ]
+    #     env_file:
+    #         - ./docker/php/blackfire
 
 volumes:
     db-data:

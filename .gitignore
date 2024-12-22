@@ -38,6 +38,7 @@ web/uploads/
 
 # Development
 docker/php/env
+docker/php/blackfire
 
 # Composer PHAR
 /composer.phar
