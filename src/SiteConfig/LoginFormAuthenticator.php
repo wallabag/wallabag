@@ -10,11 +10,11 @@ use Wallabag\ExpressionLanguage\AuthenticatorProvider;
 
 class LoginFormAuthenticator
 {
-    private AuthenticatorProvider $authenticatorProvider;
+    private ExpressionLanguage $expressionLanguage;
 
     public function __construct(AuthenticatorProvider $authenticatorProvider)
     {
-        $this->authenticatorProvider = $authenticatorProvider;
+        $this->expressionLanguage = new ExpressionLanguage(null, [$authenticatorProvider]);
     }
 
     /**
@@ -90,8 +90,7 @@ class LoginFormAuthenticator
 
         foreach ($siteConfig->getExtraFields() as $fieldName => $fieldValue) {
             if ('@=' === substr($fieldValue, 0, 2)) {
-                $expressionLanguage = $this->getExpressionLanguage();
-                $fieldValue = $expressionLanguage->evaluate(
+                $fieldValue = $this->expressionLanguage->evaluate(
                     substr($fieldValue, 2),
                     [
                         'config' => $siteConfig,
@@ -103,16 +102,5 @@ class LoginFormAuthenticator
         }
 
         return $extraFields;
-    }
-
-    /**
-     * @return ExpressionLanguage
-     */
-    private function getExpressionLanguage()
-    {
-        return new ExpressionLanguage(
-            null,
-            [$this->authenticatorProvider]
-        );
     }
 }
