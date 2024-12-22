@@ -34,7 +34,7 @@ services:
 
     Wallabag\:
         resource: '../../src/*'
-        exclude: ['../../src/{Consumer,Controller,Entity,ExpressionLanguage,DataFixtures,Redis}', '../../src/Event/*Event.php']
+        exclude: ['../../src/{Consumer,Controller,Entity,DataFixtures,Redis}', '../../src/Event/*Event.php']
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class

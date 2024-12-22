@@ -2,21 +2,18 @@
 
 namespace Wallabag\ExpressionLanguage;
 
-use GuzzleHttp\ClientInterface;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\ExpressionLanguage\ExpressionFunction;
 use Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class AuthenticatorProvider implements ExpressionFunctionProviderInterface
 {
-    /**
-     * @var ClientInterface
-     */
-    private $guzzle;
+    private HttpClientInterface $requestHtmlFunctionClient;
 
-    public function __construct(ClientInterface $guzzle)
+    public function __construct(HttpClientInterface $requestHtmlFunctionClient)
     {
-        $this->guzzle = $guzzle;
+        $this->requestHtmlFunctionClient = $requestHtmlFunctionClient;
     }
 
     public function getFunctions(): array
@@ -38,7 +35,7 @@ class AuthenticatorProvider implements ExpressionFunctionProviderInterface
                 throw new \Exception('Not supported');
             },
             function (array $arguments, $uri) {
-                return $this->guzzle->get($uri, $options)->getBody();
+                return $this->requestHtmlFunctionClient->request('GET', $uri)->getContent();
             }
         );
     }

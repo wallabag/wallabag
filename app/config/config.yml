@@ -45,6 +45,8 @@ framework:
                 headers:
                     Content-Type: 'application/json'
                     X-Accept: 'application/json'
+            request_html_function.client:
+                scope: '.*'
 
 # Twig Configuration
 twig:
