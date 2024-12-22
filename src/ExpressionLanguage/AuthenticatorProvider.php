@@ -37,7 +37,7 @@ class AuthenticatorProvider implements ExpressionFunctionProviderInterface
             function () {
                 throw new \Exception('Not supported');
             },
-            function (array $arguments, $uri, array $options = []) {
+            function (array $arguments, $uri) {
                 return $this->guzzle->get($uri, $options)->getBody();
             }
         );
