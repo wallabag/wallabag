@@ -10,6 +10,13 @@ use Wallabag\ExpressionLanguage\AuthenticatorProvider;
 
 class LoginFormAuthenticator
 {
+    private ExpressionLanguage $expressionLanguage;
+
+    public function __construct(AuthenticatorProvider $authenticatorProvider)
+    {
+        $this->expressionLanguage = new ExpressionLanguage(null, [$authenticatorProvider]);
+    }
+
     /**
      * Logs the configured user on the given Guzzle client.
      *
@@ -20,7 +27,7 @@ class LoginFormAuthenticator
         $postFields = [
             $siteConfig->getUsernameField() => $siteConfig->getUsername(),
             $siteConfig->getPasswordField() => $siteConfig->getPassword(),
-        ] + $this->getExtraFields($siteConfig, $guzzle);
+        ] + $this->getExtraFields($siteConfig);
 
         $guzzle->post(
             $siteConfig->getLoginUri(),
@@ -77,14 +84,13 @@ class LoginFormAuthenticator
      *
      * @return array
      */
-    private function getExtraFields(SiteConfig $siteConfig, ClientInterface $guzzle)
+    private function getExtraFields(SiteConfig $siteConfig)
     {
         $extraFields = [];
 
         foreach ($siteConfig->getExtraFields() as $fieldName => $fieldValue) {
             if ('@=' === substr($fieldValue, 0, 2)) {
-                $expressionLanguage = $this->getExpressionLanguage($guzzle);
-                $fieldValue = $expressionLanguage->evaluate(
+                $fieldValue = $this->expressionLanguage->evaluate(
                     substr($fieldValue, 2),
                     [
                         'config' => $siteConfig,
@@ -96,16 +102,5 @@ class LoginFormAuthenticator
         }
 
         return $extraFields;
-    }
-
-    /**
-     * @return ExpressionLanguage
-     */
-    private function getExpressionLanguage(ClientInterface $guzzle)
-    {
-        return new ExpressionLanguage(
-            null,
-            [new AuthenticatorProvider($guzzle)]
-        );
     }
 }

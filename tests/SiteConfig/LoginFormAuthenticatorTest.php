@@ -7,6 +7,9 @@ use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\Mock;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpClient\MockHttpClient;
+use Symfony\Component\HttpClient\Response\MockResponse;
+use Wallabag\ExpressionLanguage\AuthenticatorProvider;
 use Wallabag\SiteConfig\LoginFormAuthenticator;
 use Wallabag\SiteConfig\SiteConfig;
 
@@ -22,6 +25,8 @@ class LoginFormAuthenticatorTest extends TestCase
         $guzzle = new Client();
         $guzzle->getEmitter()->attach(new Mock([$response]));
 
+        $mockHttpClient = new MockHttpClient([new MockResponse('', ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']])]);
+
         $siteConfig = new SiteConfig([
             'host' => 'example.com',
             'loginUri' => 'http://example.com/login',
@@ -35,7 +40,8 @@ class LoginFormAuthenticatorTest extends TestCase
             'password' => 'unkn0wn',
         ]);
 
-        $auth = new LoginFormAuthenticator();
+        $authenticatorProvider = new AuthenticatorProvider($mockHttpClient);
+        $auth = new LoginFormAuthenticator($authenticatorProvider);
         $res = $auth->login($siteConfig, $guzzle);
 
         $this->assertInstanceOf(LoginFormAuthenticator::class, $res);
@@ -51,6 +57,8 @@ class LoginFormAuthenticatorTest extends TestCase
         $guzzle = new Client();
         $guzzle->getEmitter()->attach(new Mock([$response, $response]));
 
+        $mockHttpClient = new MockHttpClient([new MockResponse('<html></html>', ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']])]);
+
         $siteConfig = new SiteConfig([
             'host' => 'example.com',
             'loginUri' => 'http://example.com/login',
@@ -65,7 +73,8 @@ class LoginFormAuthenticatorTest extends TestCase
             'password' => 'unkn0wn',
         ]);
 
-        $auth = new LoginFormAuthenticator();
+        $authenticatorProvider = new AuthenticatorProvider($mockHttpClient);
+        $auth = new LoginFormAuthenticator($authenticatorProvider);
         $res = $auth->login($siteConfig, $guzzle);
 
         $this->assertInstanceOf(LoginFormAuthenticator::class, $res);
@@ -85,6 +94,8 @@ class LoginFormAuthenticatorTest extends TestCase
         $response->expects($this->any())
             ->method('getStatusCode')
             ->willReturn(200);
+
+        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../fixtures/aoc.media.html'), ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']])]);
 
         $client = $this->getMockBuilder(Client::class)
             ->disableOriginalConstructor()
@@ -128,7 +139,8 @@ class LoginFormAuthenticatorTest extends TestCase
             'password' => 'unkn0wn',
         ]);
 
-        $auth = new LoginFormAuthenticator();
+        $authenticatorProvider = new AuthenticatorProvider($mockHttpClient);
+        $auth = new LoginFormAuthenticator($authenticatorProvider);
         $res = $auth->login($siteConfig, $client);
 
         $this->assertInstanceOf(LoginFormAuthenticator::class, $res);
@@ -147,6 +159,8 @@ class LoginFormAuthenticatorTest extends TestCase
         $response->expects($this->any())
             ->method('getStatusCode')
             ->willReturn(200);
+
+        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../fixtures/nextinpact-login.html'), ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']])]);
 
         $client = $this->getMockBuilder(Client::class)
             ->disableOriginalConstructor()
@@ -194,7 +208,8 @@ class LoginFormAuthenticatorTest extends TestCase
             'password' => 'unkn0wn',
         ]);
 
-        $auth = new LoginFormAuthenticator();
+        $authenticatorProvider = new AuthenticatorProvider($mockHttpClient);
+        $auth = new LoginFormAuthenticator($authenticatorProvider);
         $res = $auth->login($siteConfig, $client);
 
         $this->assertInstanceOf(LoginFormAuthenticator::class, $res);
@@ -210,7 +225,10 @@ class LoginFormAuthenticatorTest extends TestCase
             'password' => 'unkn0wn',
         ]);
 
-        $auth = new LoginFormAuthenticator();
+        $mockHttpClient = new MockHttpClient();
+
+        $authenticatorProvider = new AuthenticatorProvider($mockHttpClient);
+        $auth = new LoginFormAuthenticator($authenticatorProvider);
         $loginRequired = $auth->isLoginRequired($siteConfig, file_get_contents(__DIR__ . '/../fixtures/nextinpact-login.html'));
 
         $this->assertFalse($loginRequired);
@@ -227,7 +245,10 @@ class LoginFormAuthenticatorTest extends TestCase
             'notLoggedInXpath' => '//h2[@class="title_reserve_article"]',
         ]);
 
-        $auth = new LoginFormAuthenticator();
+        $mockHttpClient = new MockHttpClient();
+
+        $authenticatorProvider = new AuthenticatorProvider($mockHttpClient);
+        $auth = new LoginFormAuthenticator($authenticatorProvider);
         $loginRequired = $auth->isLoginRequired($siteConfig, file_get_contents(__DIR__ . '/../fixtures/nextinpact-article.html'));
 
         $this->assertTrue($loginRequired);
