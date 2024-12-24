@@ -5,12 +5,11 @@ weight: 1
 
 ## Creating a new API client
 
-In your wallabag account, you can create a new API client at this URL
+In your wallabag account, you can create a new API client by visiting:
 https://app.wallabag.it/developer/client/create.
 
-Just give the redirect URL of your application and create your client.
-If your application is a desktop one, put whatever URL suits you the
-most.
+Provide the redirect URL of your application and create your client.
+If your application is a desktop one, use any URL that suits your needs.
 
 You get information like this:
 
@@ -26,9 +25,8 @@ Client secret:
 
 ## Obtaining a access token
 
-For each API call, you'll need a token. Let's create it with this
-command (replace `client_id`, `client_secret`, `username` and `password`
-with their values):
+For each API call, you'll need an access token. Create one using the following 
+command, replacing `client_id`, `client_secret`, `username`, and `password` with your actual values:
 
 ```bash
 http POST http://localhost:8000/oauth/v2/token \
@@ -39,7 +37,7 @@ http POST http://localhost:8000/oauth/v2/token \
     password=wallabag
 ```
 
-You'll have this in return:
+The response will look like this:
 
 ```http
 HTTP/1.1 200 OK
@@ -62,7 +60,7 @@ X-Powered-By: PHP/7.0.4
 }
 ```
 
-We'll work with the `access_token` value in our next calls.
+We will use the `access_token` value in our subsequent API calls.
 
 cURL example:
 
