@@ -9,7 +9,7 @@ weight: 4
 
 [PHP’s built-in web server](https://www.php.net/manual/en/features.commandline.webserver.php) allows you to develop without installing a web server like Nginx or Apache.
 
-To install PHP dependencies, build the `dev` version of the front-end, configure wallabag and start the built-in server, do:
+To install PHP dependencies, build the `dev` version of the front-end, configure wallabag, and start the built-in server, run:
 
 ```
 make dev

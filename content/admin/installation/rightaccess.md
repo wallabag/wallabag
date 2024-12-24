@@ -7,25 +7,25 @@ weight: 4
 
 When we just want to test wallabag, we just run the command `make run`
 to start our wallabag instance and everything will go smoothly because
-the user who started the project can access to the current folder
+the user who started the project can access the current folder
 naturally, without any problem.
 
 ### Production environment
 
-As soon as we use Apache or Nginx to access to our wallabag instance,
-and not from the command `make run` to start it, we should take care to
-grant the good rights on the good folders to keep safe all the folders
-of the project.
+As soon as we use Apache or Nginx to access our wallabag instance,
+and not the command `make run` to start it, we should take care to
+grant the correct rights on the correct folders to keep all the folders
+of the project safe.
 
-To do so, the folder name, known as `DocumentRoot` (for apache) or
+To do so, the folder name, known as `DocumentRoot` (for Apache) or
 `root` (for Nginx), has to be absolutely accessible by the Apache/Nginx
-user. Its name is generally `www-data`, `apache` or `nobody` (depending
-on linux system used).
+user. Its name is generally `www-data`, `apache`, or `nobody` (depending
+on the Linux system used).
 
 So the folder `/var/www/wallabag/web` has to be accessible by this last
 one. But this may not be enough if we just care about this folder,
 because we could meet a blank page or get an error 500 when trying to
-access to the homepage of the project.
+access the homepage of the project.
 
 This is due to the fact that we will need to grant the same rights
 access on the folder `/var/www/wallabag/var` like those we gave on the
