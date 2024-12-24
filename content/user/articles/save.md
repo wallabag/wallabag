@@ -40,16 +40,6 @@ here](https://addons.mozilla.org/firefox/addon/wallabagger/).
 You can download the [Chrome addon
 here](https://chrome.google.com/webstore/detail/wallabagger/gbmgphmejlcoihgedabhgjdkcahacjlj?hl=fr).
 
-### Opera
-
-You can download the [Opera addon
-here](https://addons.opera.com/en/extensions/details/wallabagger/).
-
-### Edge
-
-You can download the [Edge addon
-here](https://www.microsoft.com/en-us/store/p/wallabagger/9p41cnlppmfz).
-
 ### How to use our addon
 
 wallabagger is a browser extension to add pages to wallabag, with the ability to:
@@ -168,16 +158,6 @@ When you type the name of a new tag in the input field, after three letters, Wal
 
 You can add typed in input field tag by pressing ",", ";" or the Space key (if you didn't checked the option "Use space in tags" inside the extension settings) or the Enter key (if you checked the option)
 
-## By using your smartphone application
+## By using your smartphone
 
-### Android
-
-You can download the [Android application
-here](https://play.google.com/store/apps/details?id=fr.gaulupeau.apps.InThePoche)
-or on
-[F-Droid](https://f-droid.org/repository/browse/?fdid=fr.gaulupeau.apps.InThePoche).
-
-### Windows Phone
-
-You can download the [Windows Phone application
-here](https://www.microsoft.com/store/apps/9nblggh5x3p6).
+Check the [dedicated page]({{< relref "../../apps/" >}}) for the mobile apps.
