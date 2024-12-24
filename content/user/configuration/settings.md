@@ -3,15 +3,9 @@ title: Settings
 weight: 1
 ---
 
-## Theme
-
-wallabag is customizable. You can choose your preferred theme here. The
-default theme is `Material`, it's the theme used in the documentation
-screenshots.
-
 ## Items per page
 
-You can change the number of articles displayed on each page.
+You can change the number of articles displayed on each page. The default is 12 articles per page.
 
 ## Reading speed
 
@@ -20,11 +14,12 @@ here, through this list, if you are a fast or a slow reader. wallabag
 will recalculate the reading time for each article.
 
 ## Redirection
+
 Where do you want to be redirected to after marking an article as read?
 
-Each time you'll do some actions (after marking an article as
+Each time you'll do some actions (_after marking an article as
 read/favorite, after deleting an article, after removing a tag from an
-entry), you can be redirected:
+entry_), you will be redirected whether:
 
 -   To the homepage
 -   To the current page
