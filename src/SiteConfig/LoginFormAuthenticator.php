@@ -31,7 +31,7 @@ class LoginFormAuthenticator
 
         $guzzle->post(
             $siteConfig->getLoginUri(),
-            ['body' => $postFields, 'allow_redirects' => true, 'verify' => false]
+            ['body' => $postFields, 'allow_redirects' => true, 'verify' => false] + ($siteConfig->hasHttpHeaders() ? ['headers' => $siteConfig->getHttpHeaders()] : []),
         );
 
         return $this;
