@@ -5,8 +5,9 @@ use ShipMonk\ComposerDependencyAnalyser\Config\ErrorType;
 
 $config = new Configuration();
 
-return $config
+$config
     ->disableComposerAutoloadPathScan()
+    ->disableExtensionsAnalysis()
     ->enableAnalysisOfUnusedDevDependencies()
     ->addPathToScan(__DIR__ . '/app', false)
     ->addPathToScan(__DIR__ . '/migrations', false)
@@ -50,8 +51,6 @@ return $config
         'symfony/google-mailer',
         'symfony/intl',
         'symfony/phpunit-bridge',
-        'symfony/polyfill-php80',
-        'symfony/polyfill-php81',
         'symfony/proxy-manager-bridge',
         'symfony/templating',
         'symfony/var-dumper',
@@ -72,3 +71,13 @@ return $config
         'symfony/web-server-bundle',
     ], [ErrorType::DEV_DEPENDENCY_IN_PROD])
 ;
+
+if (\PHP_VERSION_ID >= 80000) {
+    $config->ignoreErrorsOnPackage('symfony/polyfill-php80', [ErrorType::UNUSED_DEPENDENCY]);
+}
+
+if (\PHP_VERSION_ID >= 80100) {
+    $config->ignoreErrorsOnPackage('symfony/polyfill-php81', [ErrorType::UNUSED_DEPENDENCY]);
+}
+
+return $config;
