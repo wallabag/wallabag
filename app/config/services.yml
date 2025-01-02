@@ -22,7 +22,6 @@ services:
             $fetchingErrorMessage: '%wallabag.fetching_error_message%'
             $languages: '%wallabag.languages%'
             $lifeTime: '%wallabag.cache_lifetime%'
-            $cookieFile: "%kernel.cache_dir%/cookiejar.json"
             $logoPath: 'web/img/appicon/apple-touch-icon-152.png'
             $registrationEnabled: '%fosuser_registration%'
             $restrictedAccess: '@=service(''craue_config'').get(''restricted_access'')'
@@ -213,8 +212,7 @@ services:
     Wallabag\SiteConfig\SiteConfigBuilder:
         alias: Wallabag\SiteConfig\GrabySiteConfigBuilder
 
-    GuzzleHttp\Cookie\CookieJar:
-        alias: 'Wallabag\Helper\FileCookieJar'
+    GuzzleHttp\Cookie\CookieJar: ~
 
     Wallabag\Helper\HttpClientFactory:
         calls:
