@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a45ce1bad60f024c66e17b6aca7ad88d",
+    "content-hash": "5d0c837f0b291b94d75f9304994b997b",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -9276,6 +9276,78 @@
                 }
             ],
             "time": "2024-10-22T13:05:35+00:00"
+        },
+        {
+            "name": "symfony/browser-kit",
+            "version": "v5.4.35",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/browser-kit.git",
+                "reference": "2f6f979b579ed1c051465c3c2fb81daf5bb4a002"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/2f6f979b579ed1c051465c3c2fb81daf5bb4a002",
+                "reference": "2f6f979b579ed1c051465c3c2fb81daf5bb4a002",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/dom-crawler": "^4.4|^5.0|^6.0",
+                "symfony/polyfill-php80": "^1.16"
+            },
+            "require-dev": {
+                "symfony/css-selector": "^4.4|^5.0|^6.0",
+                "symfony/http-client": "^4.4|^5.0|^6.0",
+                "symfony/mime": "^4.4|^5.0|^6.0",
+                "symfony/process": "^4.4|^5.0|^6.0"
+            },
+            "suggest": {
+                "symfony/process": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\BrowserKit\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Simulates the behavior of a web browser, allowing you to make requests, click on links and submit forms programmatically",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/browser-kit/tree/v5.4.35"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-01-23T13:51:25+00:00"
         },
         {
             "name": "symfony/cache",
@@ -19651,78 +19723,6 @@
             "time": "2024-08-08T08:12:32+00:00"
         },
         {
-            "name": "symfony/browser-kit",
-            "version": "v5.4.45",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/browser-kit.git",
-                "reference": "03cce39764429e07fbab9b989a1182a24578341d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/03cce39764429e07fbab9b989a1182a24578341d",
-                "reference": "03cce39764429e07fbab9b989a1182a24578341d",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2.5",
-                "symfony/dom-crawler": "^4.4|^5.0|^6.0",
-                "symfony/polyfill-php80": "^1.16"
-            },
-            "require-dev": {
-                "symfony/css-selector": "^4.4|^5.0|^6.0",
-                "symfony/http-client": "^4.4|^5.0|^6.0",
-                "symfony/mime": "^4.4|^5.0|^6.0",
-                "symfony/process": "^4.4|^5.0|^6.0"
-            },
-            "suggest": {
-                "symfony/process": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\BrowserKit\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Simulates the behavior of a web browser, allowing you to make requests, click on links and submit forms programmatically",
-            "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/browser-kit/tree/v5.4.45"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2024-10-22T13:05:35+00:00"
-        },
-        {
             "name": "symfony/css-selector",
             "version": "v5.4.45",
             "source": {
@@ -20337,7 +20337,7 @@
         "ext-tokenizer": "*",
         "ext-xml": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "platform-overrides": {
         "php": "7.4.29"
     },
