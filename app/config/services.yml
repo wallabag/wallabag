@@ -191,6 +191,8 @@ services:
     Graby\Graby:
         arguments:
             $config:
+                http_client:
+                    ua_browser: "%wallabag.user_agent%"
                 error_message: '%wallabag.fetching_error_message%'
                 error_message_title: '%wallabag.fetching_error_message_title%'
         calls:
@@ -217,6 +219,8 @@ services:
         alias: 'Wallabag\Helper\FileCookieJar'
 
     Wallabag\Helper\HttpClientFactory:
+        arguments:
+            $userAgent: "%wallabag.user_agent%"
         calls:
             - ['addSubscriber', ['@Wallabag\Guzzle\AuthenticatorSubscriber']]
 
