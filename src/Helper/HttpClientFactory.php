@@ -32,11 +32,12 @@ class HttpClientFactory implements ClientFactory
      *
      * @param string $restrictedAccess This param is a kind of boolean. Values: 0 or 1
      */
-    public function __construct(CookieJar $cookieJar, $restrictedAccess, LoggerInterface $logger)
+    public function __construct(CookieJar $cookieJar, $restrictedAccess, LoggerInterface $logger, string $userAgent)
     {
         $this->cookieJar = $cookieJar;
         $this->restrictedAccess = $restrictedAccess;
         $this->logger = $logger;
+        $this->userAgent = $userAgent;
     }
 
     /**
@@ -45,14 +46,6 @@ class HttpClientFactory implements ClientFactory
     public function addSubscriber(SubscriberInterface $subscriber)
     {
         $this->subscribers[] = $subscriber;
-    }
-
-    /**
-     * Set the default user-agent.
-     */
-    public function setUserAgent(string $userAgent)
-    {
-        $this->userAgent = $userAgent;
     }
 
     /**
