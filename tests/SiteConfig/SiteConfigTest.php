@@ -39,7 +39,7 @@ class SiteConfigTest extends TestCase
             'password' => 'unkn0wn',
             'httpHeaders' => [
                 'user-agent' => 'Wallabag (Guzzle/5)',
-            ]
+            ],
         ]);
 
         $this->assertInstanceOf(SiteConfig::class, $config);
