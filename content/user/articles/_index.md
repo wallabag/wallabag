@@ -1,6 +1,6 @@
 ---
 title: Articles
-weight: 2
+weight: 3
 ---
 
 Articles are the core feature of wallabag. wallabag's content parser, named Graby gets the content from articles, and only the content.
