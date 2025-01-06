@@ -32,3 +32,4 @@ export_epub: Ενεργοποίηση εξαγωγής ePub
 diaspora_url: URL του diaspora*, αν είναι ενεργοποιημένη η υπηρεσία
 download_pictures: Λήψη των εικόνων στον διακομιστή σας
 settings_changed: Η ρύθμιση παραμέτρων ενημερώθηκε
+share_linkding: Ενεργοποίηση κοινοποίησης στο LinkedIn
