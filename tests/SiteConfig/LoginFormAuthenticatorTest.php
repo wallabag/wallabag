@@ -17,16 +17,6 @@ class LoginFormAuthenticatorTest extends TestCase
 {
     public function testLoginPost()
     {
-        $response = new Response(
-            200,
-            ['content-type' => 'text/html'],
-            Stream::factory('')
-        );
-        $guzzle = new Client();
-        $guzzle->getEmitter()->attach(new Mock([$response]));
-
-        $mockHttpClient = new MockHttpClient([new MockResponse('', ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']])]);
-
         $siteConfig = new SiteConfig([
             'host' => 'example.com',
             'loginUri' => 'http://example.com/login',
@@ -40,6 +30,16 @@ class LoginFormAuthenticatorTest extends TestCase
             'password' => 'unkn0wn',
         ]);
 
+        $response = new Response(
+            200,
+            ['content-type' => 'text/html'],
+            Stream::factory('')
+        );
+        $guzzle = new Client();
+        $guzzle->getEmitter()->attach(new Mock([$response]));
+
+        $mockHttpClient = new MockHttpClient([new MockResponse('', ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']])]);
+
         $authenticatorProvider = new AuthenticatorProvider($mockHttpClient);
         $auth = new LoginFormAuthenticator($authenticatorProvider);
         $res = $auth->login($siteConfig, $guzzle);
@@ -49,16 +49,6 @@ class LoginFormAuthenticatorTest extends TestCase
 
     public function testLoginPostWithExtraFieldsButEmptyHtml()
     {
-        $response = new Response(
-            200,
-            ['content-type' => 'text/html'],
-            Stream::factory('<html></html>')
-        );
-        $guzzle = new Client();
-        $guzzle->getEmitter()->attach(new Mock([$response, $response]));
-
-        $mockHttpClient = new MockHttpClient([new MockResponse('<html></html>', ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']])]);
-
         $siteConfig = new SiteConfig([
             'host' => 'example.com',
             'loginUri' => 'http://example.com/login',
@@ -73,6 +63,16 @@ class LoginFormAuthenticatorTest extends TestCase
             'password' => 'unkn0wn',
         ]);
 
+        $response = new Response(
+            200,
+            ['content-type' => 'text/html'],
+            Stream::factory('<html></html>')
+        );
+        $guzzle = new Client();
+        $guzzle->getEmitter()->attach(new Mock([$response, $response]));
+
+        $mockHttpClient = new MockHttpClient([new MockResponse('<html></html>', ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']])]);
+
         $authenticatorProvider = new AuthenticatorProvider($mockHttpClient);
         $auth = new LoginFormAuthenticator($authenticatorProvider);
         $res = $auth->login($siteConfig, $guzzle);
@@ -83,6 +83,19 @@ class LoginFormAuthenticatorTest extends TestCase
     // testing preg_match
     public function testLoginPostWithExtraFieldsWithRegex()
     {
+        $siteConfig = new SiteConfig([
+            'host' => 'aoc.media',
+            'loginUri' => 'https://aoc.media/wp-admin/admin-ajax.php',
+            'usernameField' => 'nom',
+            'passwordField' => 'password',
+            'extraFields' => [
+                'action' => 'login_user',
+                'security' => '@=preg_match(\'/security\\\":\\\"([a-z0-9]+)\\\"/si\', request_html(\'https://aoc.media/\'))',
+            ],
+            'username' => 'johndoe',
+            'password' => 'unkn0wn',
+        ]);
+
         $response = $this->getMockBuilder(Response::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -126,19 +139,6 @@ class LoginFormAuthenticatorTest extends TestCase
             )
             ->willReturn($response);
 
-        $siteConfig = new SiteConfig([
-            'host' => 'aoc.media',
-            'loginUri' => 'https://aoc.media/wp-admin/admin-ajax.php',
-            'usernameField' => 'nom',
-            'passwordField' => 'password',
-            'extraFields' => [
-                'action' => 'login_user',
-                'security' => '@=preg_match(\'/security\\\":\\\"([a-z0-9]+)\\\"/si\', request_html(\'https://aoc.media/\'))',
-            ],
-            'username' => 'johndoe',
-            'password' => 'unkn0wn',
-        ]);
-
         $authenticatorProvider = new AuthenticatorProvider($mockHttpClient);
         $auth = new LoginFormAuthenticator($authenticatorProvider);
         $res = $auth->login($siteConfig, $client);
@@ -148,6 +148,19 @@ class LoginFormAuthenticatorTest extends TestCase
 
     public function testLoginPostWithExtraFieldsWithData()
     {
+        $siteConfig = new SiteConfig([
+            'host' => 'nextinpact.com',
+            'loginUri' => 'https://compte.nextinpact.com/Account/Login',
+            'usernameField' => 'UserName',
+            'passwordField' => 'Password',
+            'extraFields' => [
+                '__RequestVerificationToken' => '@=xpath(\'//form[@action="/Account/Login"]/input[@name="__RequestVerificationToken"]\', request_html(\'https://compte.nextinpact.com/Account/Login?http://www.nextinpact.com/\', {\'headers\': {\'X-Requested-With\':\'XMLHttpRequest\'}}))',
+                'returnUrl' => 'https://www.nextinpact.com/news/102835-pour-cour-comptes-fonctionnement-actuel-vote-par-internet-nest-pas-satisfaisant.htm',
+            ],
+            'username' => 'johndoe',
+            'password' => 'unkn0wn',
+        ]);
+
         $response = $this->getMockBuilder(Response::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -194,19 +207,6 @@ class LoginFormAuthenticatorTest extends TestCase
                 ])
             )
             ->willReturn($response);
-
-        $siteConfig = new SiteConfig([
-            'host' => 'nextinpact.com',
-            'loginUri' => 'https://compte.nextinpact.com/Account/Login',
-            'usernameField' => 'UserName',
-            'passwordField' => 'Password',
-            'extraFields' => [
-                '__RequestVerificationToken' => '@=xpath(\'//form[@action="/Account/Login"]/input[@name="__RequestVerificationToken"]\', request_html(\'https://compte.nextinpact.com/Account/Login?http://www.nextinpact.com/\', {\'headers\': {\'X-Requested-With\':\'XMLHttpRequest\'}}))',
-                'returnUrl' => 'https://www.nextinpact.com/news/102835-pour-cour-comptes-fonctionnement-actuel-vote-par-internet-nest-pas-satisfaisant.htm',
-            ],
-            'username' => 'johndoe',
-            'password' => 'unkn0wn',
-        ]);
 
         $authenticatorProvider = new AuthenticatorProvider($mockHttpClient);
         $auth = new LoginFormAuthenticator($authenticatorProvider);
