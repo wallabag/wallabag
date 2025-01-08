@@ -334,19 +334,19 @@ config:
         name_label: Nome
         two_factor_description: Se activas o segundo factor de autenticación recibirás un email cun código en cada nova conexión que aínda non verificases.
     form_feed:
-        feed_limit: Número de elementos na fonte
+        feed_limit: Número de elementos na canle
         feed_link:
             all: Todo
             archive: Arquivado
             starred: Con estrela
             unread: Sen ler
-        feed_links: Ligazóns da fonte
+        feed_links: Ligazóns da canle
         token_revoke: Revogar o token
         token_reset: Volver a crear o token
         token_create: Crea o token
         no_token: Sen token
-        token_label: Token da fonte
-        description: As fontes Atom proporcionadas por wallabag permítenche ler no teu lector Atom favorito os artigos que gardaches. Primeiro tes que crear un token.
+        token_label: Token da canle
+        description: As canles Atom proporcionadas por wallabag permítenche ler no teu lector Atom favorito os artigos que gardaches. Primeiro debes crear un token.
     form:
         save: Gardar
     tab_menu:
@@ -356,7 +356,7 @@ config:
         rules: Regras de etiquetado
         password: Contrasinal
         user_info: Información da usuaria
-        feed: Fontes
+        feed: Canles
         settings: Axustes
         article_display: Visualización do artigo
     page_title: Configuración
@@ -543,7 +543,7 @@ quickstart:
         title: Administración
     configure:
         tagging_rules: Establece regras para etiquetar automáticamente os artigos
-        feed: Activar fontes
+        feed: Activar canles
         language: Cambiar o idioma e interface
         description: Para poder adaptar a aplicación ás túas preferencias, entra nos axustes de wallabag.
         title: Configurar a aplicación
@@ -663,9 +663,9 @@ flashes:
             entries_reset: Restablecemento das entradas
             tags_reset: Restablecemento das etiquetas
             annotations_reset: Restablecemento das anotacións
-            feed_token_revoked: Revogado o token da fonte
-            feed_token_updated: Actualizado o token da fonte
-            feed_updated: Actualizada a información da fonte
+            feed_token_revoked: Revogado o token da canle
+            feed_token_updated: Actualizado o token da canle
+            feed_updated: Actualizada a información da canle
             tagging_rules_deleted: Regra de etiquetado eliminada
             tagging_rules_updated: Regras de etiquetado actualizadas
             user_updated: Información actualizada
