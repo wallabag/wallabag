@@ -32,7 +32,6 @@ class AppKernel extends Kernel
             new BabDev\PagerfantaBundle\BabDevPagerfantaBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
-            new Http\HttplugBundle\HttplugBundle(),
             new Sentry\SentryBundle\SentryBundle(),
             new Twig\Extra\TwigExtraBundle\TwigExtraBundle(),
             new Symfony\WebpackEncoreBundle\WebpackEncoreBundle(),

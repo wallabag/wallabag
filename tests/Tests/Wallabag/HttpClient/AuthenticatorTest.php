@@ -2,40 +2,16 @@
 
 namespace Tests\Wallabag\HttpClient;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Event\BeforeEvent;
-use GuzzleHttp\Event\CompleteEvent;
-use GuzzleHttp\Message\Request;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
-use GuzzleHttp\Subscriber\Mock;
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
+use Symfony\Contracts\HttpClient\ResponseInterface;
 use Wallabag\HttpClient\Authenticator;
 use Wallabag\SiteConfig\ArraySiteConfigBuilder;
 use Wallabag\SiteConfig\LoginFormAuthenticator;
 
 class AuthenticatorTest extends TestCase
 {
-    public function testGetEvents()
-    {
-        $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $subscriber = new Authenticator(
-            new ArraySiteConfigBuilder(),
-            $authenticator
-        );
-        $events = $subscriber->getEvents();
-
-        $this->assertArrayHasKey('before', $events);
-        $this->assertArrayHasKey('complete', $events);
-        $this->assertSame('loginIfRequired', $events['before'][0]);
-        $this->assertSame('loginIfRequested', $events['complete'][0]);
-    }
-
     public function testLoginIfRequiredNotRequired()
     {
         $authenticator = $this->getMockBuilder(LoginFormAuthenticator::class)
@@ -51,17 +27,9 @@ class AuthenticatorTest extends TestCase
 
         $subscriber->setLogger($logger);
 
-        $request = new Request('GET', 'http://www.example.com');
+        $login = $subscriber->loginIfRequired('http://www.example.com');
 
-        $event = $this->getMockBuilder(BeforeEvent::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $event->expects($this->once())
-            ->method('getRequest')
-            ->willReturn($request);
-
-        $subscriber->loginIfRequired($event);
+        $this->assertFalse($login);
 
         $records = $handler->getRecords();
 
@@ -91,29 +59,9 @@ class AuthenticatorTest extends TestCase
 
         $subscriber->setLogger($logger);
 
-        $response = new Response(
-            200,
-            ['content-type' => 'text/html'],
-            Stream::factory('')
-        );
-        $guzzle = new Client();
-        $guzzle->getEmitter()->attach(new Mock([$response]));
+        $login = $subscriber->loginIfRequired('http://www.example.com');
 
-        $request = new Request('GET', 'http://www.example.com');
-
-        $event = $this->getMockBuilder(BeforeEvent::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $event->expects($this->once())
-            ->method('getRequest')
-            ->willReturn($request);
-
-        $event->expects($this->once())
-            ->method('getClient')
-            ->willReturn($guzzle);
-
-        $subscriber->loginIfRequired($event);
+        $this->assertTrue($login);
 
         $records = $handler->getRecords();
 
@@ -136,17 +84,18 @@ class AuthenticatorTest extends TestCase
 
         $subscriber->setLogger($logger);
 
-        $request = new Request('GET', 'http://www.example.com');
-
-        $event = $this->getMockBuilder(CompleteEvent::class)
+        $response = $this->getMockBuilder(ResponseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $event->expects($this->once())
-            ->method('getRequest')
-            ->willReturn($request);
+        $response->expects($this->once())
+            ->method('getInfo')
+            ->with($this->equalTo('url'))
+            ->willReturn('http://www.example.com');
 
-        $subscriber->loginIfRequested($event);
+        $login = $subscriber->loginIfRequested($response);
+
+        $this->assertFalse($login);
 
         $records = $handler->getRecords();
 
@@ -176,31 +125,27 @@ class AuthenticatorTest extends TestCase
 
         $subscriber->setLogger($logger);
 
-        $response = new Response(
-            200,
-            ['content-type' => 'text/html'],
-            Stream::factory('<html><body/></html>')
-        );
-        $request = new Request('GET', 'http://www.example.com');
-
-        $event = $this->getMockBuilder(CompleteEvent::class)
+        $response = $this->getMockBuilder(ResponseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $event->expects($this->once())
-            ->method('getResponse')
-            ->willReturn($response);
+        $response->expects($this->once())
+            ->method('getInfo')
+            ->with($this->equalTo('url'))
+            ->willReturn('http://www.example.com');
 
-        $event->expects($this->once())
-            ->method('getRequest')
-            ->willReturn($request);
+        $response->expects($this->once())
+            ->method('getContent')
+            ->willReturn('<html><body/></html>');
 
-        $subscriber->loginIfRequested($event);
+        $login = $subscriber->loginIfRequested($response);
+
+        $this->assertFalse($login);
 
         $records = $handler->getRecords();
 
         $this->assertCount(1, $records);
-        $this->assertSame('loginIfRequested> retry #0 with login not required', $records[0]['message']);
+        $this->assertSame('loginIfRequested> retry with login not required', $records[0]['message']);
     }
 
     public function testLoginIfRequestedRequested()
@@ -228,37 +173,27 @@ class AuthenticatorTest extends TestCase
 
         $subscriber->setLogger($logger);
 
-        $response = new Response(
-            200,
-            ['content-type' => 'text/html'],
-            Stream::factory('<html><body/></html>')
-        );
-        $guzzle = new Client();
-        $guzzle->getEmitter()->attach(new Mock([$response]));
-        $request = new Request('GET', 'http://www.example.com');
-
-        $event = $this->getMockBuilder(CompleteEvent::class)
+        $response = $this->getMockBuilder(ResponseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $event->expects($this->once())
-            ->method('getResponse')
-            ->willReturn($response);
+        $response->expects($this->once())
+            ->method('getInfo')
+            ->with($this->equalTo('url'))
+            ->willReturn('http://www.example.com');
 
-        $event->expects($this->once())
-            ->method('getRequest')
-            ->willReturn($request);
+        $response->expects($this->once())
+            ->method('getContent')
+            ->willReturn('<html><body/></html>');
 
-        $event->expects($this->any())
-            ->method('getClient')
-            ->willReturn($guzzle);
+        $login = $subscriber->loginIfRequested($response);
 
-        $subscriber->loginIfRequested($event);
+        $this->assertTrue($login);
 
         $records = $handler->getRecords();
 
         $this->assertCount(1, $records);
-        $this->assertSame('loginIfRequested> retry #0 with login required', $records[0]['message']);
+        $this->assertSame('loginIfRequested> retry with login required', $records[0]['message']);
     }
 
     public function testLoginIfRequestedRedirect()
@@ -279,32 +214,22 @@ class AuthenticatorTest extends TestCase
 
         $subscriber->setLogger($logger);
 
-        $response = new Response(
-            301,
-            [],
-            Stream::factory('')
-        );
-        $guzzle = new Client();
-        $guzzle->getEmitter()->attach(new Mock([$response]));
-        $request = new Request('GET', 'http://www.example.com');
-
-        $event = $this->getMockBuilder(CompleteEvent::class)
+        $response = $this->getMockBuilder(ResponseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $event->expects($this->once())
-            ->method('getResponse')
-            ->willReturn($response);
+        $response->expects($this->once())
+            ->method('getInfo')
+            ->with($this->equalTo('url'))
+            ->willReturn('http://www.example.com');
 
-        $event->expects($this->once())
-            ->method('getRequest')
-            ->willReturn($request);
+        $response->expects($this->once())
+            ->method('getContent')
+            ->willReturn('');
 
-        $event->expects($this->any())
-            ->method('getClient')
-            ->willReturn($guzzle);
+        $login = $subscriber->loginIfRequested($response);
 
-        $subscriber->loginIfRequested($event);
+        $this->assertFalse($login);
 
         $records = $handler->getRecords();
 

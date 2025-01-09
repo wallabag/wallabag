@@ -2,18 +2,19 @@
 
 namespace Wallabag\SiteConfig;
 
-use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Cookie\CookieJar;
+use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Wallabag\ExpressionLanguage\AuthenticatorProvider;
 
 class LoginFormAuthenticator
 {
+    private HttpBrowser $browser;
     private ExpressionLanguage $expressionLanguage;
 
-    public function __construct(AuthenticatorProvider $authenticatorProvider)
+    public function __construct(HttpBrowser $browser, AuthenticatorProvider $authenticatorProvider)
     {
+        $this->browser = $browser;
         $this->expressionLanguage = new ExpressionLanguage(null, [$authenticatorProvider]);
     }
 
@@ -22,17 +23,14 @@ class LoginFormAuthenticator
      *
      * @return self
      */
-    public function login(SiteConfig $siteConfig, ClientInterface $guzzle)
+    public function login(SiteConfig $siteConfig)
     {
         $postFields = [
             $siteConfig->getUsernameField() => $siteConfig->getUsername(),
             $siteConfig->getPasswordField() => $siteConfig->getPassword(),
         ] + $this->getExtraFields($siteConfig);
 
-        $guzzle->post(
-            $siteConfig->getLoginUri(),
-            ['body' => $postFields, 'allow_redirects' => true, 'verify' => false]
-        );
+        $this->browser->request('POST', $siteConfig->getLoginUri(), $postFields);
 
         return $this;
     }
@@ -42,15 +40,12 @@ class LoginFormAuthenticator
      *
      * @return bool
      */
-    public function isLoggedIn(SiteConfig $siteConfig, ClientInterface $guzzle)
+    public function isLoggedIn(SiteConfig $siteConfig)
     {
-        if (($cookieJar = $guzzle->getDefaultOption('cookies')) instanceof CookieJar) {
-            /** @var \GuzzleHttp\Cookie\SetCookie $cookie */
-            foreach ($cookieJar as $cookie) {
-                // check required cookies
-                if ($cookie->getDomain() === $siteConfig->getHost()) {
-                    return true;
-                }
+        foreach ($this->browser->getCookieJar()->all() as $cookie) {
+            // check required cookies
+            if ($cookie->getDomain() === $siteConfig->getHost()) {
+                return true;
             }
         }
 
