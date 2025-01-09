@@ -1,16 +1,16 @@
 <?php
 
-namespace Tests\Wallabag\Guzzle;
+namespace Tests\Wallabag\HttpClient;
 
 use Monolog\Handler\TestHandler;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\HttpClient\ResponseInterface;
-use Wallabag\Guzzle\AuthenticatorSubscriber;
+use Wallabag\HttpClient\Authenticator;
 use Wallabag\SiteConfig\ArraySiteConfigBuilder;
 use Wallabag\SiteConfig\LoginFormAuthenticator;
 
-class AuthenticatorSubscriberTest extends TestCase
+class AuthenticatorTest extends TestCase
 {
     public function testLoginIfRequiredNotRequired()
     {
@@ -19,7 +19,7 @@ class AuthenticatorSubscriberTest extends TestCase
             ->getMock();
 
         $builder = new ArraySiteConfigBuilder(['example.com' => []]);
-        $subscriber = new AuthenticatorSubscriber($builder, $authenticator);
+        $subscriber = new \Wallabag\HttpClient\Authenticator($builder, $authenticator);
 
         $logger = new Logger('foo');
         $handler = new TestHandler();
@@ -51,7 +51,7 @@ class AuthenticatorSubscriberTest extends TestCase
             ->method('login');
 
         $builder = new ArraySiteConfigBuilder(['example.com' => ['requiresLogin' => true]]);
-        $subscriber = new AuthenticatorSubscriber($builder, $authenticator);
+        $subscriber = new Authenticator($builder, $authenticator);
 
         $logger = new Logger('foo');
         $handler = new TestHandler();
@@ -76,7 +76,7 @@ class AuthenticatorSubscriberTest extends TestCase
             ->getMock();
 
         $builder = new ArraySiteConfigBuilder(['example.com' => []]);
-        $subscriber = new AuthenticatorSubscriber($builder, $authenticator);
+        $subscriber = new Authenticator($builder, $authenticator);
 
         $logger = new Logger('foo');
         $handler = new TestHandler();
@@ -117,7 +117,7 @@ class AuthenticatorSubscriberTest extends TestCase
             'requiresLogin' => true,
             'notLoggedInXpath' => '//html',
         ]]);
-        $subscriber = new AuthenticatorSubscriber($builder, $authenticator);
+        $subscriber = new Authenticator($builder, $authenticator);
 
         $logger = new Logger('foo');
         $handler = new TestHandler();
@@ -165,7 +165,7 @@ class AuthenticatorSubscriberTest extends TestCase
             'requiresLogin' => true,
             'notLoggedInXpath' => '//html',
         ]]);
-        $subscriber = new AuthenticatorSubscriber($builder, $authenticator);
+        $subscriber = new Authenticator($builder, $authenticator);
 
         $logger = new Logger('foo');
         $handler = new TestHandler();
@@ -206,7 +206,7 @@ class AuthenticatorSubscriberTest extends TestCase
             'requiresLogin' => true,
             'notLoggedInXpath' => '//html',
         ]]);
-        $subscriber = new AuthenticatorSubscriber($builder, $authenticator);
+        $subscriber = new Authenticator($builder, $authenticator);
 
         $logger = new Logger('foo');
         $handler = new TestHandler();
