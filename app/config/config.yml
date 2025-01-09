@@ -47,6 +47,10 @@ framework:
                     X-Accept: 'application/json'
             request_html_function.client:
                 scope: '.*'
+            browser.client:
+                scope: '.*'
+                verify_host: false
+                verify_peer: false
 
 # Twig Configuration
 twig:

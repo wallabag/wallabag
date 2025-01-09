@@ -218,6 +218,10 @@ services:
 
     GuzzleHttp\Cookie\CookieJar: ~
 
+    Symfony\Component\BrowserKit\HttpBrowser:
+        arguments:
+            $client: '@browser.client'
+
     Wallabag\Helper\HttpClientFactory:
         calls:
             - ['addSubscriber', ['@Wallabag\Guzzle\AuthenticatorSubscriber']]
