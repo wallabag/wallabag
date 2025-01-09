@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\Guzzle;
+namespace Wallabag\HttpClient;
 
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\UriInterface;
@@ -12,7 +12,7 @@ use Wallabag\SiteConfig\LoginFormAuthenticator;
 use Wallabag\SiteConfig\SiteConfig;
 use Wallabag\SiteConfig\SiteConfigBuilder;
 
-class AuthenticatorSubscriber implements LoggerAwareInterface
+class Authenticator implements LoggerAwareInterface
 {
     /** @var SiteConfigBuilder */
     private $configBuilder;
@@ -23,9 +23,6 @@ class AuthenticatorSubscriber implements LoggerAwareInterface
     /** @var LoggerInterface */
     private $logger;
 
-    /**
-     * AuthenticatorSubscriber constructor.
-     */
     public function __construct(SiteConfigBuilder $configBuilder, LoginFormAuthenticator $authenticator)
     {
         $this->configBuilder = $configBuilder;
