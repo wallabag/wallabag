@@ -2,24 +2,18 @@
 
 namespace Wallabag\HttpClient;
 
-use GuzzleHttp\Event\BeforeEvent;
-use GuzzleHttp\Event\CompleteEvent;
-use GuzzleHttp\Event\SubscriberInterface;
-use GuzzleHttp\Message\RequestInterface;
+use GuzzleHttp\Psr7\Uri;
+use Psr\Http\Message\UriInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Symfony\Contracts\HttpClient\ResponseInterface;
 use Wallabag\SiteConfig\LoginFormAuthenticator;
 use Wallabag\SiteConfig\SiteConfig;
 use Wallabag\SiteConfig\SiteConfigBuilder;
 
-class Authenticator implements SubscriberInterface, LoggerAwareInterface
+class Authenticator implements LoggerAwareInterface
 {
-    // avoid loop when login failed which can just be a bad login/password
-    // after 2 attempts, we skip the login
-    public const MAX_RETRIES = 2;
-    private int $retries = 0;
-
     /** @var SiteConfigBuilder */
     private $configBuilder;
 
@@ -29,9 +23,6 @@ class Authenticator implements SubscriberInterface, LoggerAwareInterface
     /** @var LoggerInterface */
     private $logger;
 
-    /**
-     * AuthenticatorSubscriber constructor.
-     */
     public function __construct(SiteConfigBuilder $configBuilder, LoginFormAuthenticator $authenticator)
     {
         $this->configBuilder = $configBuilder;
@@ -44,78 +35,61 @@ class Authenticator implements SubscriberInterface, LoggerAwareInterface
         $this->logger = $logger;
     }
 
-    public function getEvents(): array
+    public function loginIfRequired(string $url): bool
     {
-        return [
-            'before' => ['loginIfRequired'],
-            'complete' => ['loginIfRequested'],
-        ];
-    }
-
-    public function loginIfRequired(BeforeEvent $event)
-    {
-        $config = $this->buildSiteConfig($event->getRequest());
+        $config = $this->buildSiteConfig(new Uri($url));
         if (false === $config || !$config->requiresLogin()) {
             $this->logger->debug('loginIfRequired> will not require login');
 
-            return;
+            return false;
         }
 
-        $client = $event->getClient();
-
-        if (!$this->authenticator->isLoggedIn($config, $client)) {
-            $this->logger->debug('loginIfRequired> user is not logged in, attach authenticator');
-
-            $emitter = $client->getEmitter();
-            $emitter->detach($this);
-            $this->authenticator->login($config, $client);
-            $emitter->attach($this);
+        if ($this->authenticator->isLoggedIn($config)) {
+            return false;
         }
+
+        $this->logger->debug('loginIfRequired> user is not logged in, attach authenticator');
+
+        $this->authenticator->login($config);
+
+        return true;
     }
 
-    public function loginIfRequested(CompleteEvent $event)
+    public function loginIfRequested(ResponseInterface $response): bool
     {
-        $config = $this->buildSiteConfig($event->getRequest());
+        $config = $this->buildSiteConfig(new Uri($response->getInfo('url')));
         if (false === $config || !$config->requiresLogin()) {
             $this->logger->debug('loginIfRequested> will not require login');
 
-            return;
+            return false;
         }
 
-        $body = $event->getResponse()->getBody();
+        $body = $response->getContent();
 
-        if (
-            null === $body
-            || '' === $body->getContents()
-        ) {
+        if ('' === $body) {
             $this->logger->debug('loginIfRequested> empty body, ignoring');
 
-            return;
+            return false;
         }
 
         $isLoginRequired = $this->authenticator->isLoginRequired($config, $body);
 
-        $this->logger->debug('loginIfRequested> retry #' . $this->retries . ' with login ' . ($isLoginRequired ? '' : 'not ') . 'required');
+        $this->logger->debug('loginIfRequested> retry with login ' . ($isLoginRequired ? '' : 'not ') . 'required');
 
-        if ($isLoginRequired && $this->retries < self::MAX_RETRIES) {
-            $client = $event->getClient();
-
-            $emitter = $client->getEmitter();
-            $emitter->detach($this);
-            $this->authenticator->login($config, $client);
-            $emitter->attach($this);
-
-            $event->retry();
-
-            ++$this->retries;
+        if (!$isLoginRequired) {
+            return false;
         }
+
+        $this->authenticator->login($config);
+
+        return true;
     }
 
     /**
      * @return SiteConfig|false
      */
-    private function buildSiteConfig(RequestInterface $request)
+    private function buildSiteConfig(UriInterface $uri)
     {
-        return $this->configBuilder->buildForHost($request->getHost());
+        return $this->configBuilder->buildForHost($uri->getHost());
     }
 }
