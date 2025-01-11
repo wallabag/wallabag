@@ -47,8 +47,6 @@ parameters:
 
     from_email: no-reply@wallabag.org
 
-    rss_limit: 50
-
     # RabbitMQ processing
     rabbitmq_host: localhost
     rabbitmq_port: 5672
