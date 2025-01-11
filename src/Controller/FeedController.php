@@ -150,7 +150,6 @@ class FeedController extends AbstractController
                 'url' => $url,
                 'entries' => $entries,
                 'user' => $user->getUsername(),
-                'domainName' => $this->getParameter('domain_name'),
                 'version' => $this->getParameter('wallabag.version'),
                 'tag' => $tag->getSlug(),
                 'updated' => $this->prepareFeedUpdatedDate($entries, $sort),
@@ -231,7 +230,6 @@ class FeedController extends AbstractController
             'url' => $url,
             'entries' => $entries,
             'user' => $user->getUsername(),
-            'domainName' => $this->getParameter('domain_name'),
             'version' => $this->getParameter('wallabag.version'),
             'updated' => $this->prepareFeedUpdatedDate($entries),
         ], new Response('', 200, ['Content-Type' => 'application/atom+xml']));
