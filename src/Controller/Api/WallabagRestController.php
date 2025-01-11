@@ -26,14 +26,16 @@ class WallabagRestController extends AbstractFOSRestController
     protected AuthorizationCheckerInterface $authorizationChecker;
     protected TokenStorageInterface $tokenStorage;
     protected TranslatorInterface $translator;
+    protected bool $registrationEnabled;
 
-    public function __construct(EntityManagerInterface $entityManager, SerializerInterface $serializer, AuthorizationCheckerInterface $authorizationChecker, TokenStorageInterface $tokenStorage, TranslatorInterface $translator)
+    public function __construct(EntityManagerInterface $entityManager, SerializerInterface $serializer, AuthorizationCheckerInterface $authorizationChecker, TokenStorageInterface $tokenStorage, TranslatorInterface $translator, bool $registrationEnabled)
     {
         $this->entityManager = $entityManager;
         $this->serializer = $serializer;
         $this->authorizationChecker = $authorizationChecker;
         $this->tokenStorage = $tokenStorage;
         $this->translator = $translator;
+        $this->registrationEnabled = $registrationEnabled;
     }
 
     /**
@@ -86,7 +88,7 @@ class WallabagRestController extends AbstractFOSRestController
     {
         $info = new ApplicationInfo(
             $this->getParameter('wallabag.version'),
-            $this->getParameter('fosuser_registration') && $craueConfig->get('api_user_registration'),
+            $this->registrationEnabled && $craueConfig->get('api_user_registration'),
         );
 
         return (new JsonResponse())->setJson($this->serializer->serialize($info, 'json'));
