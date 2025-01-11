@@ -81,6 +81,7 @@ class AppKernel extends Kernel
 
         if (file_exists($this->getProjectDir() . '/app/config/parameters.yml')) {
             $loader->load(function (ContainerBuilder $container) {
+                $this->loadEnvVarsFromParameters($container);
                 $this->processDatabaseParameters($container);
             });
         }
@@ -89,6 +90,53 @@ class AppKernel extends Kernel
     protected function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new ImportCompilerPass());
+    }
+
+    private function loadEnvVarsFromParameters(ContainerBuilder $container)
+    {
+        $this->setEnvVarFromParameter($container, 'DATABASE_DRIVER', 'database_driver');
+        $this->setEnvVarFromParameter($container, 'DATABASE_HOST', 'database_host');
+        $this->setEnvVarFromParameter($container, 'DATABASE_PORT', 'database_port');
+        $this->setEnvVarFromParameter($container, 'DATABASE_NAME', 'database_name');
+        $this->setEnvVarFromParameter($container, 'DATABASE_USER', 'database_user');
+        $this->setEnvVarFromParameter($container, 'DATABASE_PASSWORD', 'database_password');
+        $this->setEnvVarFromParameter($container, 'DATABASE_PATH', 'database_path');
+        $this->setEnvVarFromParameter($container, 'DATABASE_TABLE_PREFIX', 'database_table_prefix');
+        $this->setEnvVarFromParameter($container, 'DATABASE_SOCKET', 'database_socket');
+        $this->setEnvVarFromParameter($container, 'DATABASE_CHARSET', 'database_charset');
+
+        $this->setEnvVarFromParameter($container, 'DOMAIN_NAME', 'domain_name');
+        $this->setEnvVarFromParameter($container, 'SERVER_NAME', 'server_name');
+        $this->setEnvVarFromParameter($container, 'MAILER_DSN', 'mailer_dsn');
+        $this->setEnvVarFromParameter($container, 'LOCALE', 'locale');
+        $this->setEnvVarFromParameter($container, 'SECRET', 'secret');
+
+        $this->setEnvVarFromParameter($container, 'TWOFACTOR_SENDER', 'twofactor_sender');
+        $this->setEnvVarFromParameter($container, 'FOSUSER_REGISTRATION', 'fosuser_registration');
+        $this->setEnvVarFromParameter($container, 'FOSUSER_CONFIRMATION', 'fosuser_confirmation');
+        $this->setEnvVarFromParameter($container, 'FOS_OAUTH_SERVER_ACCESS_TOKEN_LIFETIME', 'fos_oauth_server_access_token_lifetime');
+        $this->setEnvVarFromParameter($container, 'FOS_OAUTH_SERVER_REFRESH_TOKEN_LIFETIME', 'fos_oauth_server_refresh_token_lifetime');
+        $this->setEnvVarFromParameter($container, 'FROM_EMAIL', 'from_email');
+
+        $this->setEnvVarFromParameter($container, 'RABBITMQ_HOST', 'rabbitmq_host');
+        $this->setEnvVarFromParameter($container, 'RABBITMQ_PORT', 'rabbitmq_port');
+        $this->setEnvVarFromParameter($container, 'RABBITMQ_USER', 'rabbitmq_user');
+        $this->setEnvVarFromParameter($container, 'RABBITMQ_PASSWORD', 'rabbitmq_password');
+        $this->setEnvVarFromParameter($container, 'RABBITMQ_PREFETCH_COUNT', 'rabbitmq_prefetch_count');
+
+        $this->setEnvVarFromParameter($container, 'REDIS_SCHEME', 'redis_scheme');
+        $this->setEnvVarFromParameter($container, 'REDIS_HOST', 'redis_host');
+        $this->setEnvVarFromParameter($container, 'REDIS_PORT', 'redis_port');
+        $this->setEnvVarFromParameter($container, 'REDIS_PATH', 'redis_path');
+        $this->setEnvVarFromParameter($container, 'REDIS_PASSWORD', 'redis_password');
+
+        $this->setEnvVarFromParameter($container, 'SENTRY_DSN', 'sentry_dsn');
+    }
+
+    private function setEnvVarFromParameter(ContainerBuilder $container, string $envVar, string $parameter)
+    {
+        $_ENV[$envVar] = $_SERVER[$envVar] = (string) $container->getParameter($parameter);
+        $container->setParameter('env(' . $envVar . ')', (string) $container->getParameter($parameter));
     }
 
     private function processDatabaseParameters(ContainerBuilder $container)
