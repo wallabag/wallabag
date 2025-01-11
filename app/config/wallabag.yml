@@ -25,7 +25,7 @@ parameters:
         el: 'Ελληνικά'
         gl: 'Galego'
     wallabag.items_on_page: 12
-    wallabag.language: '%locale%'
+    wallabag.language: '%env(LOCALE)%'
     wallabag.feed_limit: 50
     wallabag.reading_speed: 200
     wallabag.cache_lifetime: 10

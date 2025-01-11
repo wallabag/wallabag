@@ -45,7 +45,7 @@ security:
 
             anonymous: true
             remember_me:
-                secret: "%secret%"
+                secret: "%env(SECRET)%"
                 lifetime: 31536000
                 path: /
                 domain: ~
