@@ -51,26 +51,17 @@ class AuthCodeMailer implements AuthCodeMailerInterface
     private $supportUrl;
 
     /**
-     * Url for the wallabag instance (only used for image in the HTML email template).
-     *
-     * @var string
-     */
-    private $wallabagUrl;
-
-    /**
      * @param string $senderEmail
      * @param string $senderName
      * @param string $supportUrl  wallabag support url
-     * @param string $wallabagUrl wallabag instance url
      */
-    public function __construct(MailerInterface $mailer, Environment $twig, $senderEmail, $senderName, $supportUrl, $wallabagUrl)
+    public function __construct(MailerInterface $mailer, Environment $twig, $senderEmail, $senderName, $supportUrl)
     {
         $this->mailer = $mailer;
         $this->twig = $twig;
         $this->senderEmail = $senderEmail;
         $this->senderName = $senderName;
         $this->supportUrl = $supportUrl;
-        $this->wallabagUrl = $wallabagUrl;
     }
 
     /**
@@ -85,7 +76,6 @@ class AuthCodeMailer implements AuthCodeMailerInterface
             'user' => $user->getName(),
             'code' => $user->getEmailAuthCode(),
             'support_url' => $this->supportUrl,
-            'wallabag_url' => $this->wallabagUrl,
         ]);
         $bodyText = $template->renderBlock('body_text', [
             'user' => $user->getName(),

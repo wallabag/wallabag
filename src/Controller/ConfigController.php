@@ -257,7 +257,6 @@ class ConfigController extends AbstractController
                 'username' => $user->getUsername(),
                 'token' => $config->getFeedToken(),
             ],
-            'wallabag_url' => $this->getParameter('domain_name'),
             'enabled_users' => $userRepository->getSumEnabledUsers(),
         ]);
     }
