@@ -220,12 +220,11 @@ class EntriesExport
 
             if (null !== $entry->getPreviewPicture()) {
                 // TODO Try to re-use the cover image from before
-                $chapter = $chapter . "<img src=\"{$entry->getPreviewPicture()}\">";
+                $chapter .= "<img src=\"{$entry->getPreviewPicture()}\">";
             }
 
             // TODO Add translations for internal and public links
-            $chapter = $chapter .
-                '<dl>' .
+            $chapter .= '<dl>' .
                 '<dt>' . $this->translator->trans('entry.view.published_by') . '</dt><dd>' . $authors . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.published_on') . '</dt><dd>' . $publishedDate . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.added_on') . '</dt><dd>' . $entry->getCreatedAt()->format('Y-m-d') . '</dd>' .
@@ -235,16 +234,16 @@ class EntriesExport
 
             if ($entry->isPublic()) {
                 $publicLink = $this->wallabagUrl . '/share/' . $entry->getUid();
-                $chapter = $chapter . '<dt>Public link</dt><dd><a href="' . $publicLink . '">' . $publicLink . '</a></dd>';
+                $chapter .= '<dt>Public link</dt><dd><a href="' . $publicLink . '">' . $publicLink . '</a></dd>';
             }
 
-            $chapter = $chapter . '</dl>' .
+            $chapter .= '</dl>' .
                 "<h2>{$entry->getTitle()}</h2>" .
                 $entry->getContent() .
                 $chapterEnd;
 
             $entryIds[] = $entry->getId();
-            $book->addChapter($chapterName, "{$filename}.html", $chapter, true, EPub::EXTERNAL_REF_ADD);
+            $book->addChapter($chapterName, "{$filename}.xhtml", $chapter, true, EPub::EXTERNAL_REF_ADD);
         }
 
         $book->addChapter('Notices', 'CoverBack.xhtml', $chapterStart . $this->getExportInformation('PHPePub') . $chapterEnd);
@@ -252,6 +251,9 @@ class EntriesExport
         // Set identifier to a hash of the wallabag server URL plus comma-separated entry IDs
         $hash = sha1(\sprintf('%s:%s', $this->wallabagUrl, implode(',', $entryIds)));
         $book->setIdentifier(\sprintf('urn:wallabag:%s', $hash), EPub::IDENTIFIER_URI);
+
+        // Do not add "Guide" chapter for "CoverPage"
+        $book->setisReferencesAddedToToc(false);
 
         return Response::create(
             $book->getBook(),
