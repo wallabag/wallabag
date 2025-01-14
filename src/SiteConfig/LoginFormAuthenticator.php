@@ -29,10 +29,12 @@ class LoginFormAuthenticator
             $siteConfig->getPasswordField() => $siteConfig->getPassword(),
         ] + $this->getExtraFields($siteConfig);
 
-        $guzzle->post(
-            $siteConfig->getLoginUri(),
-            ['body' => $postFields, 'allow_redirects' => true, 'verify' => false]
-        );
+        $params = ['body' => $postFields, 'allow_redirects' => true, 'verify' => false];
+        if ($siteConfig->hasHttpHeaders()) {
+            $params['headers'] = $siteConfig->getHttpHeaders();
+        }
+
+        $guzzle->post($siteConfig->getLoginUri(), $params);
 
         return $this;
     }

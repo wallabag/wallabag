@@ -71,6 +71,13 @@ class SiteConfig
     protected $password;
 
     /**
+     * Associative array of HTTP headers to send with the form.
+     *
+     * @var array
+     */
+    protected $httpHeaders = [];
+
+    /**
      * SiteConfig constructor. Sets the properties by name given a hash.
      *
      * @throws \InvalidArgumentException if a property doesn't exist
@@ -259,5 +266,33 @@ class SiteConfig
         $this->password = $password;
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getHttpHeaders()
+    {
+        return $this->httpHeaders;
+    }
+
+    /**
+     * @param array $httpHeaders
+     *
+     * @return SiteConfig
+     */
+    public function setHttpHeaders($httpHeaders)
+    {
+        $this->httpHeaders = $httpHeaders;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasHttpHeaders()
+    {
+        return !empty($this->httpHeaders);
     }
 }
