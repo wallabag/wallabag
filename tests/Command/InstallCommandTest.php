@@ -19,6 +19,8 @@ use Wallabag\Command\InstallCommand;
 
 class InstallCommandTest extends WallabagTestCase
 {
+    private string $originalDatabaseUrl;
+
     public static function setUpBeforeClass(): void
     {
         // disable doctrine-test-bundle
@@ -38,14 +40,14 @@ class InstallCommandTest extends WallabagTestCase
         /** @var Connection $connection */
         $connection = $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection();
 
-        $originalDatabaseUrl = $this->getTestClient()->getContainer()->getParameter('database_url');
+        $this->originalDatabaseUrl = $this->getTestClient()->getContainer()->getParameter('database_url');
         $dbnameSuffix = $this->getTestClient()->getContainer()->getParameter('wallabag_dbname_suffix');
         $tmpDatabaseName = 'wallabag_' . bin2hex(random_bytes(5));
 
         if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {
-            $tmpDatabaseUrl = str_replace('wallabag' . $dbnameSuffix . '.sqlite', $tmpDatabaseName . $dbnameSuffix . '.sqlite', $originalDatabaseUrl);
+            $tmpDatabaseUrl = str_replace('wallabag' . $dbnameSuffix . '.sqlite', $tmpDatabaseName . $dbnameSuffix . '.sqlite', $this->originalDatabaseUrl);
         } else {
-            $tmpDatabaseUrl = (string) (new Uri($originalDatabaseUrl))->withPath($tmpDatabaseName);
+            $tmpDatabaseUrl = (string) (new Uri($this->originalDatabaseUrl))->withPath($tmpDatabaseName);
         }
 
         putenv("DATABASE_URL=$tmpDatabaseUrl");
@@ -67,9 +69,8 @@ class InstallCommandTest extends WallabagTestCase
         /** @var Connection $connection */
         $connection = $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection();
 
-        if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {
-            // Remove the real environnement variable
-            putenv('DATABASE_URL');
+        if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {// Remove the real environnement variable
+            putenv('DATABASE_URL=' . $this->originalDatabaseUrl);
 
             $databasePath = parse_url($databaseUrl, \PHP_URL_PATH);
 
@@ -80,8 +81,7 @@ class InstallCommandTest extends WallabagTestCase
             $testDatabaseName = $connection->getDatabase();
             $connection->close();
 
-            // Remove the real environnement variable
-            putenv('DATABASE_URL');
+            putenv('DATABASE_URL=' . $this->originalDatabaseUrl);
 
             // Create a new client to avoid the error:
             // Transaction commit failed because the transaction has been marked for rollback only.
