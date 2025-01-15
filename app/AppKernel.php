@@ -79,9 +79,11 @@ class AppKernel extends Kernel
             $container->addObjectResource($this);
         });
 
-        $loader->load(function (ContainerBuilder $container) {
-            $this->processDatabaseParameters($container);
-        });
+        if (file_exists($this->getProjectDir() . '/app/config/parameters.yml')) {
+            $loader->load(function (ContainerBuilder $container) {
+                $this->processDatabaseParameters($container);
+            });
+        }
     }
 
     protected function build(ContainerBuilder $container)
