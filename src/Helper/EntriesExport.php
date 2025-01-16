@@ -192,8 +192,11 @@ class EntriesExport
             // use a hash of the original URL plus title as chapter filename inside the Epub
             $filename = sha1(\sprintf('%s:%s', $entry->getUrl(), $entry->getTitle()));
 
+            $authors = $entry->getDomainName();
+            if (empty($authors)) { // TODO Test this
+                $authors = $this->translator->trans('export.unknown');
+            }
             $publishedBy = $entry->getPublishedBy();
-            $authors = $this->translator->trans('export.unknown');
             if (!empty($publishedBy)) {
                 $authors = implode(',', $publishedBy);
             }
