@@ -4,27 +4,22 @@ namespace Wallabag\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Wallabag\Entity\IgnoreOriginInstanceRule;
 
-class IgnoreOriginInstanceRuleFixtures extends Fixture implements ContainerAwareInterface
+class IgnoreOriginInstanceRuleFixtures extends Fixture
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
+    private array $defaultIgnoreOriginInstanceRules;
 
-    public function setContainer(?ContainerInterface $container = null)
+    public function __construct(array $defaultIgnoreOriginInstanceRules)
     {
-        $this->container = $container;
+        $this->defaultIgnoreOriginInstanceRules = $defaultIgnoreOriginInstanceRules;
     }
 
     public function load(ObjectManager $manager): void
     {
-        foreach ($this->container->getParameter('wallabag.default_ignore_origin_instance_rules') as $ignore_origin_instance_rule) {
+        foreach ($this->defaultIgnoreOriginInstanceRules as $ignoreOriginInstanceRule) {
             $newIgnoreOriginInstanceRule = new IgnoreOriginInstanceRule();
-            $newIgnoreOriginInstanceRule->setRule($ignore_origin_instance_rule['rule']);
+            $newIgnoreOriginInstanceRule->setRule($ignoreOriginInstanceRule['rule']);
             $manager->persist($newIgnoreOriginInstanceRule);
         }
 
