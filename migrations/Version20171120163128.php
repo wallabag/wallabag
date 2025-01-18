@@ -12,9 +12,7 @@ class Version20171120163128 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        $storeArticleHeaders = $this->container
-            ->get('doctrine.orm.default_entity_manager')
-            ->getConnection()
+        $storeArticleHeaders = $this->connection
             ->fetchOne('SELECT * FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'store_article_headers'");
 
         $this->skipIf(false !== $storeArticleHeaders, 'It seems that you already played this migration.');

@@ -19,9 +19,7 @@ class Version20170606155640 extends WallabagMigration
             return;
         }
 
-        $apiUserRegistration = $this->container
-            ->get('doctrine.orm.default_entity_manager')
-            ->getConnection()
+        $apiUserRegistration = $this->connection
             ->fetchOne('SELECT * FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'wallabag_url'");
 
         if (false === $apiUserRegistration) {

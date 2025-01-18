@@ -95,6 +95,8 @@ doctrine_migrations:
             version_column_name: 'version'
             version_column_length: 192
             executed_at_column_name: 'executed_at'
+    services:
+        Doctrine\Migrations\Version\MigrationFactory: Wallabag\Doctrine\MigrationFactoryDecorator
 
 fos_rest:
     param_fetcher_listener: true

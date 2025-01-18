@@ -12,9 +12,7 @@ class Version20170327194233 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        $scuttle = $this->container
-            ->get('doctrine.orm.default_entity_manager')
-            ->getConnection()
+        $scuttle = $this->connection
             ->fetchOne('SELECT * FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'share_scuttle'");
 
         $this->skipIf(false !== $scuttle, 'It seems that you already played this migration.');

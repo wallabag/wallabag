@@ -30,6 +30,7 @@ services:
             $storeArticleHeaders: '@=service(''craue_config'').get(''store_article_headers'')'
             $supportUrl: '@=service(''craue_config'').get(''wallabag_support_url'')'
             $fonts: '%wallabag.fonts%'
+            $defaultIgnoreOriginInstanceRules: '%wallabag.default_ignore_origin_instance_rules%'
 
     Wallabag\:
         resource: '../../src/*'
@@ -106,6 +107,9 @@ services:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_pocket_html_producer'
             $redisProducer: '@wallabag.producer.redis.pocket_html'
+
+    Wallabag\Doctrine\MigrationFactoryDecorator:
+        decorates: doctrine.migrations.migrations_factory
 
     Doctrine\DBAL\Connection:
         alias: doctrine.dbal.default_connection

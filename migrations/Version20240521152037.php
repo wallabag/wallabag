@@ -12,18 +12,14 @@ final class Version20240521152037 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        $share = $this->container
-            ->get('doctrine.orm.default_entity_manager')
-            ->getConnection()
+        $share = $this->connection
             ->fetchOne('SELECT * FROM ' . $this->getTable('internal_setting') . " WHERE name = 'share_linkding'");
 
         if (false === $share) {
             $this->addSql('INSERT INTO ' . $this->getTable('internal_setting') . " (name, value, section) VALUES ('share_linkding', 0, 'entry')");
         }
 
-        $linkding = $this->container
-            ->get('doctrine.orm.default_entity_manager')
-            ->getConnection()
+        $linkding = $this->connection
             ->fetchOne('SELECT * FROM ' . $this->getTable('internal_setting') . " WHERE name = 'linkding_url'");
 
         if (false === $linkding) {
