@@ -15,7 +15,7 @@ class SchemaAdapterSubscriber implements EventSubscriber
         $this->databaseTablePrefix = $databaseTablePrefix;
     }
 
-    public function getSubscribedEvents()
+    public function getSubscribedEvents(): array
     {
         return ['postGenerateSchema'];
     }

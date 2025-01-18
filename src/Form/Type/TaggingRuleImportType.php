@@ -22,7 +22,7 @@ class TaggingRuleImportType extends AbstractType
         ;
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'upload_tagging_rule_file';
     }

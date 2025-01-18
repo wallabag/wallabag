@@ -11,7 +11,7 @@ use Wallabag\Entity\User;
 
 class AnnotationFixtures extends Fixture implements DependentFixtureInterface
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $annotation1 = new Annotation($this->getReference('admin-user', User::class));
         $annotation1->setEntry($this->getReference('entry1', Entry::class));

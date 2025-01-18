@@ -25,7 +25,7 @@ class TablePrefixSubscriber implements EventSubscriber
         $this->tablePrefix = (string) $tablePrefix;
     }
 
-    public function getSubscribedEvents()
+    public function getSubscribedEvents(): array
     {
         return ['loadClassMetadata'];
     }
