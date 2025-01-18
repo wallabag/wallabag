@@ -41,11 +41,6 @@ abstract class WallabagMigration extends AbstractMigration implements ContainerA
         return false;
     }
 
-    protected function getTablePrefix(): string
-    {
-        return (string) $this->container->getParameter('database_table_prefix');
-    }
-
     protected function getTable($tableName, $unEscaped = false)
     {
         $table = $this->container->getParameter('database_table_prefix') . $tableName;
