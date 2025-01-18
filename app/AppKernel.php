@@ -82,7 +82,7 @@ class AppKernel extends Kernel
         if (file_exists($this->getProjectDir() . '/app/config/parameters.yml')) {
             $loader->load(function (ContainerBuilder $container) {
                 $this->loadEnvVarsFromParameters($container);
-                $this->processDatabaseParameters($container);
+                $this->defineDatabaseUrlEnvVar($container);
             });
         }
     }
@@ -139,7 +139,7 @@ class AppKernel extends Kernel
         $container->setParameter('env(' . $envVar . ')', (string) $container->getParameter($parameter));
     }
 
-    private function processDatabaseParameters(ContainerBuilder $container)
+    private function defineDatabaseUrlEnvVar(ContainerBuilder $container)
     {
         switch ($container->getParameter('database_driver')) {
             case 'pdo_mysql':
@@ -155,15 +155,39 @@ class AppKernel extends Kernel
                 throw new RuntimeException('Unsupported database driver: ' . $container->getParameter('database_driver'));
         }
 
-        $container->setParameter('database_scheme', $scheme);
+        $user = $container->getParameter('database_user');
+        $password = $container->getParameter('database_password');
+        $host = $container->getParameter('database_host');
+        $port = $container->getParameter('database_port');
+        $name = $container->getParameter('database_name');
 
         if ('sqlite' === $scheme) {
-            $container->setParameter('database_name', $container->getParameter('database_path'));
+            $name = $container->getParameter('database_path');
         }
 
-        $container->setParameter('database_user', (string) $container->getParameter('database_user'));
-        $container->setParameter('database_password', (string) $container->getParameter('database_password'));
-        $container->setParameter('database_port', (string) $container->getParameter('database_port'));
-        $container->setParameter('database_socket', (string) $container->getParameter('database_socket'));
+        $url = $scheme . '://' . $user . ':' . $password . '@' . $host;
+
+        if ($port) {
+            $url .= ':' . $port;
+        }
+
+        $url .= '/' . $name;
+
+        $query = [];
+
+        if ($container->getParameter('database_socket')) {
+            $query['unix_socket'] = $container->getParameter('database_socket');
+        }
+
+        if ($container->getParameter('database_charset')) {
+            $query['charset'] = $container->getParameter('database_charset');
+        }
+
+        if ([] !== $query) {
+            $url .= '?' . http_build_query($query);
+        }
+
+        $_ENV['DATABASE_URL'] = $_SERVER['DATABASE_URL'] = $url;
+        $container->setParameter('env(DATABASE_URL)', $url);
     }
 }
