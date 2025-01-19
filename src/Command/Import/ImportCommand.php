@@ -125,7 +125,6 @@ class ImportCommand extends Command
         // Authenticate user for paywalled websites
         $token = new UsernamePasswordToken(
             $entityUser,
-            null,
             'main',
             $entityUser->getRoles());
 
