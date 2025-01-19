@@ -6,7 +6,7 @@ const projectDir = path.resolve(__dirname, '../../../');
 
 module.exports = {
   entry: {
-    material: path.join(projectDir, './assets/index.js'),
+    main: path.join(projectDir, './assets/index.js'),
     public: path.join(projectDir, './assets/share.js'),
   },
   output: {
