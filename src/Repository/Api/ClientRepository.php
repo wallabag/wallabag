@@ -16,7 +16,7 @@ class ClientRepository extends ServiceEntityRepository
         parent::__construct($registry, Client::class);
     }
 
-    public function findOneBy(array $criteria, ?array $orderBy = null)
+    public function findOneBy(array $criteria, ?array $orderBy = null): ?object
     {
         if (!empty($criteria['id'])) {
             // cast client id to be an integer to avoid postgres error:

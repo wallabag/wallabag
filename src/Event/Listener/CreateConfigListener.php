@@ -38,7 +38,7 @@ class CreateConfigListener implements EventSubscriberInterface
         $this->displayThumbnails = $displayThumbnails;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             // when a user register using the normal form
@@ -53,8 +53,8 @@ class CreateConfigListener implements EventSubscriberInterface
     {
         $language = $this->language;
 
-        if ($this->requestStack->getMasterRequest()) {
-            $session = $this->requestStack->getMasterRequest()->getSession();
+        if ($this->requestStack->getMainRequest()) {
+            $session = $this->requestStack->getMainRequest()->getSession();
             $language = $session->get('_locale', $this->language);
         }
 

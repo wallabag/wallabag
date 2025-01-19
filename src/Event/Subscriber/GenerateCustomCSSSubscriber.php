@@ -18,7 +18,7 @@ class GenerateCustomCSSSubscriber implements EventSubscriberInterface
         $this->compiler = $compiler;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             ConfigUpdatedEvent::NAME => 'onConfigUpdated',

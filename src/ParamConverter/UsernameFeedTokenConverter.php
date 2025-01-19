@@ -33,7 +33,7 @@ class UsernameFeedTokenConverter implements ParamConverterInterface
      *
      * Check, if object supported by our converter
      */
-    public function supports(ParamConverter $configuration)
+    public function supports(ParamConverter $configuration): bool
     {
         // If there is no manager, this means that only Doctrine DBAL is configured
         // In this case we can do nothing and just return
@@ -65,7 +65,7 @@ class UsernameFeedTokenConverter implements ParamConverterInterface
      * @throws \InvalidArgumentException When route attributes are missing
      * @throws NotFoundHttpException     When object not found
      */
-    public function apply(Request $request, ParamConverter $configuration)
+    public function apply(Request $request, ParamConverter $configuration): bool
     {
         $username = $request->attributes->get('username');
         $feedToken = $request->attributes->get('token');

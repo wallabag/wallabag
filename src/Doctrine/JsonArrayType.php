@@ -25,12 +25,12 @@ class JsonArrayType extends JsonType
         return json_decode($value, true);
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'json_array';
     }
 
-    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;
     }

@@ -625,6 +625,7 @@ class EntryController extends AbstractController
     {
         $searchTerm = (isset($request->query->get('search_entry')['term']) ? trim($request->query->get('search_entry')['term']) : '');
         $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
+        $currentEntryId = $request->attributes->getInt('id');
 
         $formOptions = [];
 
@@ -651,7 +652,7 @@ class EntryController extends AbstractController
                 $formOptions['filter_unread'] = true;
                 break;
             case 'same-domain':
-                $qb = $this->entryRepository->getBuilderForSameDomainByUser($this->getUser()->getId(), $request->get('id'));
+                $qb = $this->entryRepository->getBuilderForSameDomainByUser($this->getUser()->getId(), $currentEntryId);
                 break;
             case 'all':
                 $qb = $this->entryRepository->getBuilderForAllByUser($this->getUser()->getId());
@@ -664,7 +665,7 @@ class EntryController extends AbstractController
 
         if ($request->query->has($form->getName())) {
             // manually bind values from the request
-            $form->submit($request->query->get($form->getName()));
+            $form->submit($request->query->all($form->getName()));
 
             // build the query from the given form object
             $this->filterBuilderUpdater->addFilterConditions($form, $qb);

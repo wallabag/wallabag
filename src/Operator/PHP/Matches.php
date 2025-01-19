@@ -16,6 +16,10 @@ class Matches
 {
     public function __invoke($subject, $pattern)
     {
+        if (null === $subject) {
+            return false;
+        }
+
         return false !== stripos($subject, $pattern);
     }
 }
