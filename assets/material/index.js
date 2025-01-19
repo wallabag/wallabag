@@ -20,7 +20,7 @@ import '@fontsource/montserrat';
 import '@fontsource/oswald';
 
 /* Highlight */
-import '../_global/js/highlight';
+import './js/highlight';
 
 import { savePercent, retrievePercent } from '../_global/js/tools';
 
