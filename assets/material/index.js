@@ -18,7 +18,6 @@ import '@fontsource/atkinson-hyperlegible';
 import '@fontsource/eb-garamond';
 import '@fontsource/montserrat';
 import '@fontsource/oswald';
-import '../_global/global.scss';
 
 /* Shortcuts */
 import '../_global/js/shortcuts/entry';
