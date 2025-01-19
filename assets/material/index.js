@@ -22,11 +22,9 @@ import '@fontsource/oswald';
 /* Highlight */
 import './js/highlight';
 
-import { savePercent, retrievePercent } from '../_global/js/tools';
-
 /* Tools */
 import {
-  initExport, initFilters, initRandom, initPreviewText,
+  savePercent, retrievePercent, initExport, initFilters, initRandom, initPreviewText,
 } from './js/tools';
 
 /* Import shortcuts */
