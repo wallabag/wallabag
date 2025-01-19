@@ -19,10 +19,6 @@ import '@fontsource/eb-garamond';
 import '@fontsource/montserrat';
 import '@fontsource/oswald';
 
-/* Shortcuts */
-import '../_global/js/shortcuts/entry';
-import '../_global/js/shortcuts/main';
-
 /* Highlight */
 import '../_global/js/highlight';
 
