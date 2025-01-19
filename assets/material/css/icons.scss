@@ -125,24 +125,24 @@ a.icon-image {
   }
 
   &.diaspora::before {
-    background: url("../../_global/img/icons/diaspora-icon--black.png") no-repeat center/80%;
+    background: url("../img/icons/diaspora-icon--black.png") no-repeat center/80%;
   }
 
   &.unmark::before {
-    background: url("../../_global/img/icons/unmark-icon--black.png") no-repeat center/80%;
+    background: url("../img/icons/unmark-icon--black.png") no-repeat center/80%;
   }
 
   &.linkding::before {
-    background: url("../../_global/img/icons/linkding.svg") no-repeat center/80%;
+    background: url("../img/icons/linkding.svg") no-repeat center/80%;
     filter: grayscale(1);
   }
 
   &.shaarli::before {
-    background: url("../../_global/img/icons/shaarli.png") no-repeat center/80%;
+    background: url("../img/icons/shaarli.png") no-repeat center/80%;
   }
 
   &.scuttle::before {
-    background: url("../../_global/img/icons/scuttle.png") no-repeat center/80%;
+    background: url("../img/icons/scuttle.png") no-repeat center/80%;
   }
 }
 
