@@ -221,7 +221,7 @@ class EntryController extends AbstractController
     public function addEntryViaBookmarkletAction(Request $request)
     {
         $entry = new Entry($this->getUser());
-        $entry->setUrl($request->get('url'));
+        $entry->setUrl($request->query->get('url'));
 
         if (false === $this->checkIfEntryAlreadyExists($entry)) {
             $this->updateEntry($entry);
@@ -623,7 +623,7 @@ class EntryController extends AbstractController
      */
     private function showEntries($type, Request $request, $page)
     {
-        $searchTerm = (isset($request->get('search_entry')['term']) ? trim($request->get('search_entry')['term']) : '');
+        $searchTerm = (isset($request->query->get('search_entry')['term']) ? trim($request->query->get('search_entry')['term']) : '');
         $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
 
         $formOptions = [];

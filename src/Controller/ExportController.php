@@ -69,7 +69,7 @@ class ExportController extends AbstractController
         if ('same_domain' === $category) {
             $entries = $entryRepository->getBuilderForSameDomainByUser(
                 $this->getUser()->getId(),
-                $request->get('entry')
+                $request->query->get('entry')
             )->getQuery()
              ->getResult();
 
@@ -84,7 +84,7 @@ class ExportController extends AbstractController
 
             $title = 'Tag ' . $tag->getLabel();
         } elseif ('search' === $category) {
-            $searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
+            $searchTerm = (isset($request->query->get('search_entry')['term']) ? $request->query->get('search_entry')['term'] : '');
             $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
 
             $entries = $entryRepository->getBuilderForSearchByUser(
