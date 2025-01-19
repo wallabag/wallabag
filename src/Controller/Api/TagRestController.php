@@ -70,7 +70,7 @@ class TagRestController extends WallabagRestController
     public function deleteTagLabelAction(Request $request, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
         $this->validateAuthentication();
-        $label = $request->get('tag', '');
+        $label = $request->request->get('tag', $request->query->get('tag', ''));
 
         $tags = $tagRepository->findByLabelsAndUser([$label], $this->getUser()->getId());
 
@@ -119,7 +119,7 @@ class TagRestController extends WallabagRestController
     {
         $this->validateAuthentication();
 
-        $tagsLabels = $request->get('tags', '');
+        $tagsLabels = $request->request->get('tags', $request->query->get('tags', ''));
 
         $tags = $tagRepository->findByLabelsAndUser(explode(',', $tagsLabels), $this->getUser()->getId());
 

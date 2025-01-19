@@ -411,7 +411,7 @@ class ConfigController extends AbstractController
 
         $isValid = $googleAuthenticator->checkCode(
             $this->getUser(),
-            $request->get('_auth_code')
+            $request->request->get('_auth_code')
         );
 
         if (true === $isValid) {
