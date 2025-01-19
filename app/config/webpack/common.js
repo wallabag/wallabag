@@ -6,8 +6,8 @@ const projectDir = path.resolve(__dirname, '../../../');
 
 module.exports = {
   entry: {
-    material: path.join(projectDir, './assets/material/index.js'),
-    public: path.join(projectDir, './assets/material/share.js'),
+    material: path.join(projectDir, './assets/index.js'),
+    public: path.join(projectDir, './assets/share.js'),
   },
   output: {
     filename: '[name].js',
