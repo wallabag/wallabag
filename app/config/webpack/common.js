@@ -11,7 +11,7 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(projectDir, 'web/wallassets'),
+    path: path.resolve(projectDir, 'web/build'),
     publicPath: '',
   },
   plugins: [

@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming changes
+
+* `wallassets/` folder renamed to `build/`
+
 ## [2.6.10](https://github.com/wallabag/wallabag/tree/2.6.10)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.9...2.6.10)
 
