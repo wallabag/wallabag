@@ -1,1 +1,1 @@
-import './css/share.scss';
+import './scss/share.scss';

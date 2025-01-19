@@ -32,7 +32,7 @@ import './js/shortcuts/main';
 import './js/shortcuts/entry';
 
 /* Theme style */
-import './css/index.scss';
+import './scss/index.scss';
 
 const mobileMaxWidth = 993;
 
