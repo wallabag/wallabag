@@ -309,6 +309,7 @@ config:
         annotations: Odebrat VŠECHNY anotace
         description: Stisknutím níže uvedených tlačítek budete mít možnost odebrat některé informace ze svého účtu. Uvědomte si, že tyto akce jsou NEVRATNÉ.
         title: Oblast obnovení (alias nebezpečná zóna)
+        tagging_rules: Odstranit VŠECHNA pravidla štítkování
     form_feed:
         feed_limit: Počet položek v kanálu
         feed_link:
@@ -357,6 +358,7 @@ quickstart:
         email: E-mailem
         github: Na GitHubu
         description: Pokud potřebujete pomoc, jsme tu pro vás.
+        matrix: Na Matrixu
     docs:
         title: Úplná dokumentace
         all_docs: A spousta dalších článků!
@@ -549,6 +551,7 @@ import:
     elcurator:
         description: Tento importér naimportuje všechny vaše články z elCurator.
         page_title: Import > elCurator
+        how_to: Vyberte svůj export z elCuratoru a kliknutím na níže uvedené tlačítko jej nahrajte a importujte.
     wallabag_v2:
         description: Tento importér naimportuje všechny vaše články z wallabagu v2. Přejděte na Všechny články a pak na postranním panelu pro export klikněte na „JSON“. Získáte soubor „All articles.json“.
         page_title: Import > Wallabag v2
@@ -564,6 +567,10 @@ import:
         how_to: Zvolte soubor zálohy záložek a kliknutím na níže uvedené tlačítko jej naimportujte. Pamatujte na to, že tento proces může trvat dlouho, protože je třeba načíst všechny články.
         page_title: Import > Pocket HTML
         description: Tento importér naimportuje všechny vaše záložky z Pocket. Stačí přejít na https://getpocket.com/export) a exportovat soubor HTML, který bude stažen (například „ril_export.html“).
+    omnivore:
+        how_to: Rozbalte prosím svůj export z Omnivoru, následně nahrajte jeden po druhém všechny JSON soubory s názevem "metadata_x_to_y.json".
+        page_title: Import > Omnivore
+        description: Tento importér naimportuje všechny vaše články z Omnivore.
 flashes:
     config:
         notice:
@@ -585,6 +592,7 @@ flashes:
             tagging_rules_updated: Pravidla štítkování byla aktualizována
             user_updated: Informace byla aktualizována
             config_saved: Konfigurace byla uložena.
+            tagging_rules_reset: Pravidla štítkování byla obnovena
     ignore_origin_instance_rule:
         notice:
             deleted: Globální pravidlo ignorování bylo odstraněno
