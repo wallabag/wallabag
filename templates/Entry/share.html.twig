@@ -18,9 +18,9 @@
         <meta name="twitter:title" content="{{ entry.title|e|raw }}" />
         <meta name="twitter:description" content="{{ entry.content|striptags|slice(0, 300)|raw }}&hellip;" />
         {% if app.debug %}
-            <script src="{{ asset('wallassets/public.dev.js') }}"></script>
+            <script src="{{ asset('build/public.dev.js') }}"></script>
         {% else %}
-            <link rel="stylesheet" href="{{ asset('wallassets/public.css') }}">
+            <link rel="stylesheet" href="{{ asset('build/public.css') }}">
         {% endif %}
 
     </head>

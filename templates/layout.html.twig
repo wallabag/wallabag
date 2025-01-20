@@ -3,13 +3,13 @@
 {% block css %}
     {{ parent() }}
     {% if not app.debug %}
-        <link rel="stylesheet" href="{{ asset('wallassets/material.css') }}">
+        <link rel="stylesheet" href="{{ asset('build/main.css') }}">
     {% endif %}
 {% endblock %}
 
 {% block scripts %}
     {{ parent() }}
-    <script src="{{ asset('wallassets/material' ~ (app.debug ? '.dev' : '') ~ '.js') }}"></script>
+    <script src="{{ asset('build/main' ~ (app.debug ? '.dev' : '') ~ '.js') }}"></script>
 {% endblock %}
 
 {% block header %}
