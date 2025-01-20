@@ -21,9 +21,7 @@ class Version20160410190541 extends WallabagMigration
             'length' => 23,
         ]);
 
-        $sharePublic = $this->container
-            ->get('doctrine.orm.default_entity_manager')
-            ->getConnection()
+        $sharePublic = $this->connection
             ->fetchOne('SELECT * FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'share_public'");
 
         if (false === $sharePublic) {

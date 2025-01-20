@@ -12,9 +12,7 @@ class Version20171125164500 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        $shaarliShareOriginUrl = $this->container
-            ->get('doctrine.orm.default_entity_manager')
-            ->getConnection()
+        $shaarliShareOriginUrl = $this->connection
             ->fetchOne('SELECT * FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'shaarli_share_origin_url'");
 
         $this->skipIf(false !== $shaarliShareOriginUrl, 'It seems that you already played this migration.');

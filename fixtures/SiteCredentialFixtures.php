@@ -5,37 +5,32 @@ namespace Wallabag\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Wallabag\Entity\SiteCredential;
 use Wallabag\Entity\User;
 use Wallabag\Helper\CryptoProxy;
 
-class SiteCredentialFixtures extends Fixture implements DependentFixtureInterface, ContainerAwareInterface
+class SiteCredentialFixtures extends Fixture implements DependentFixtureInterface
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
+    private CryptoProxy $cryptoProxy;
 
-    public function setContainer(?ContainerInterface $container = null)
+    public function __construct(CryptoProxy $cryptoProxy)
     {
-        $this->container = $container;
+        $this->cryptoProxy = $cryptoProxy;
     }
 
     public function load(ObjectManager $manager): void
     {
         $credential = new SiteCredential($this->getReference('admin-user', User::class));
         $credential->setHost('.super.com');
-        $credential->setUsername($this->container->get(CryptoProxy::class)->crypt('.super'));
-        $credential->setPassword($this->container->get(CryptoProxy::class)->crypt('bar'));
+        $credential->setUsername($this->cryptoProxy->crypt('.super'));
+        $credential->setPassword($this->cryptoProxy->crypt('bar'));
 
         $manager->persist($credential);
 
         $credential = new SiteCredential($this->getReference('admin-user', User::class));
         $credential->setHost('paywall.example.com');
-        $credential->setUsername($this->container->get(CryptoProxy::class)->crypt('paywall.example'));
-        $credential->setPassword($this->container->get(CryptoProxy::class)->crypt('bar'));
+        $credential->setUsername($this->cryptoProxy->crypt('paywall.example'));
+        $credential->setPassword($this->cryptoProxy->crypt('bar'));
 
         $manager->persist($credential);
 

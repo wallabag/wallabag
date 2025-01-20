@@ -301,7 +301,7 @@ final class Version20240310150000 extends WallabagMigration
 
                 $this->addSql('ALTER TABLE ' . $this->getTable('oauth2_clients') . ' ALTER name TYPE BYTEA USING name::bytea;');
 
-                $this->addSql('ALTER TABLE ' . $this->getTable('ignore_origin_instance_rule') . ' ALTER id SET DEFAULT nextval(\'' . $this->getTablePrefix() . 'ignore_origin_instance_rule_id_seq\');');
+                $this->addSql('ALTER TABLE ' . $this->getTable('ignore_origin_instance_rule') . ' ALTER id SET DEFAULT nextval(\'' . $this->getTable('ignore_origin_instance_rule_id_seq', true) . '\');');
 
                 $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' ALTER salt SET NOT NULL;');
                 $this->addSql('ALTER TABLE ' . $this->getTable('user') . ' ALTER confirmation_token TYPE VARCHAR(255);');
@@ -315,9 +315,9 @@ final class Version20240310150000 extends WallabagMigration
                 $this->addSql('ALTER TABLE ' . $this->getTable('entry') . ' ALTER hashed_given_url TYPE TEXT;');
                 $this->addSql('ALTER TABLE ' . $this->getTable('entry') . ' ALTER is_not_parsed DROP NOT NULL;');
 
-                $this->addSql('ALTER TABLE ' . $this->getTable('site_credential') . ' ALTER id SET DEFAULT nextval(\'' . $this->getTablePrefix() . 'site_credential_id_seq\');');
+                $this->addSql('ALTER TABLE ' . $this->getTable('site_credential') . ' ALTER id SET DEFAULT nextval(\'' . $this->getTable('site_credential_id_seq', true) . '\');');
 
-                $this->addSql('ALTER TABLE ' . $this->getTable('ignore_origin_user_rule') . ' ALTER id SET DEFAULT nextval(\'' . $this->getTablePrefix() . 'ignore_origin_user_rule_id_seq\');');
+                $this->addSql('ALTER TABLE ' . $this->getTable('ignore_origin_user_rule') . ' ALTER id SET DEFAULT nextval(\'' . $this->getTable('ignore_origin_user_rule_id_seq', true) . '\');');
                 break;
         }
 

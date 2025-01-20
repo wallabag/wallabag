@@ -12,9 +12,7 @@ class Version20161031132655 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        $images = $this->container
-            ->get('doctrine.orm.default_entity_manager')
-            ->getConnection()
+        $images = $this->connection
             ->fetchOne('SELECT * FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'download_images_enabled'");
 
         $this->skipIf(false !== $images, 'It seems that you already played this migration.');
