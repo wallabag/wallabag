@@ -61,7 +61,7 @@ class ConfigController extends AbstractController
         AnnotationRepository $annotationRepository,
         ConfigRepository $configRepository,
         EventDispatcherInterface $eventDispatcher,
-        Redirect $redirectHelper
+        Redirect $redirectHelper,
     ) {
         $this->entityManager = $entityManager;
         $this->userManager = $userManager;
