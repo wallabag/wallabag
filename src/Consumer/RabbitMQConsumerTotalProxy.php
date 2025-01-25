@@ -37,7 +37,7 @@ class RabbitMQConsumerTotalProxy
         Consumer $elcuratorConsumer,
         Consumer $shaarliConsumer,
         Consumer $pocketHtmlConsumer,
-        Consumer $omnivoreConsumer
+        Consumer $omnivoreConsumer,
     ) {
         $this->pocketConsumer = $pocketConsumer;
         $this->readabilityConsumer = $readabilityConsumer;
