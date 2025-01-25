@@ -41,6 +41,9 @@ jobs:
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 
+      - name: "Run Composer validate"
+        run: "composer validate"
+
       - name: "Run Composer dependency analyser"
         run: "bin/composer-dependency-analyser"
 
