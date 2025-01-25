@@ -191,11 +191,17 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
 
+    psr18.wallabag.client:
+        class: Symfony\Component\HttpClient\Psr18Client
+        arguments:
+            $client: '@Wallabag\HttpClient\WallabagClient'
+
     Graby\Graby:
         arguments:
             $config:
                 error_message: '%wallabag.fetching_error_message%'
                 error_message_title: '%wallabag.fetching_error_message_title%'
+            $client: '@psr18.wallabag.client'
         calls:
             - [ setLogger, [ "@logger" ] ]
         tags:
@@ -205,9 +211,6 @@ services:
         arguments:
             $config: {}
 
-    wallabag.http_client:
-        alias: 'httplug.client.wallabag'
-
     Wallabag\SiteConfig\GrabySiteConfigBuilder:
         tags:
             - { name: monolog.logger, channel: graby }
@@ -216,11 +219,9 @@ services:
     Wallabag\SiteConfig\SiteConfigBuilder:
         alias: Wallabag\SiteConfig\GrabySiteConfigBuilder
 
-    GuzzleHttp\Cookie\CookieJar: ~
-
-    Wallabag\Helper\HttpClientFactory:
-        calls:
-            - ['addSubscriber', ['@Wallabag\Guzzle\AuthenticatorSubscriber']]
+    Symfony\Component\BrowserKit\HttpBrowser:
+        arguments:
+            $client: '@browser.client'
 
     RulerZ\RulerZ:
         alias: rulerz

@@ -24,13 +24,12 @@ $config
         'incenteev/composer-parameter-handler',
         'j0k3r/graby-site-config',
         'laminas/laminas-code',
+        'lcobucci/clock',
         'lcobucci/jwt',
         'mgargano/simplehtmldom',
         'mnapoli/piwik-twig-extension',
         'ocramius/proxy-manager',
         'pagerfanta/twig',
-        'php-http/client-common',
-        'php-http/httplug',
         'php-http/mock-client',
         'phpstan/extension-installer',
         'phpstan/phpstan',
@@ -39,13 +38,11 @@ $config
         'phpstan/phpstan-symfony',
         'psr/http-client',
         'psr/http-factory',
-        'psr/http-message',
         'rulerz-php/doctrine-orm',
         'scheb/2fa-qr-code',
         'scheb/2fa-trusted-device',
         'shipmonk/composer-dependency-analyser',
         'symfony/asset',
-        'symfony/browser-kit',
         'symfony/css-selector',
         'symfony/doctrine-bridge',
         'symfony/google-mailer',
@@ -57,10 +54,8 @@ $config
         'twig/string-extra',
     ], [ErrorType::UNUSED_DEPENDENCY])
     ->ignoreErrorsOnPackages([
-        'guzzlehttp/streams',
         'monolog/monolog',
         'symfony/filesystem',
-        'symfony/http-client',
     ], [ErrorType::PROD_DEPENDENCY_ONLY_IN_DEV])
     ->ignoreErrorsOnPackages([
         'dama/doctrine-test-bundle',
@@ -71,9 +66,5 @@ $config
         'symfony/web-server-bundle',
     ], [ErrorType::DEV_DEPENDENCY_IN_PROD])
 ;
-
-if (\PHP_VERSION_ID >= 80000) {
-    $config->ignoreErrorsOnPackage('symfony/polyfill-php80', [ErrorType::UNUSED_DEPENDENCY]);
-}
 
 return $config;
