@@ -22,7 +22,7 @@ use Wallabag\Helper\EntityTimestampsTrait;
  *
  * @XmlRoot("user")
  * @ORM\Entity(repositoryClass="Wallabag\Repository\UserRepository")
- * @ORM\Table(name="`user`")
+ * @ORM\Table(name="user")
  * @ORM\HasLifecycleCallbacks()
  *
  * @UniqueEntity("email")
