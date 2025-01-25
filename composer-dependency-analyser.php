@@ -76,8 +76,4 @@ if (\PHP_VERSION_ID >= 80000) {
     $config->ignoreErrorsOnPackage('symfony/polyfill-php80', [ErrorType::UNUSED_DEPENDENCY]);
 }
 
-if (\PHP_VERSION_ID >= 80100) {
-    $config->ignoreErrorsOnPackage('symfony/polyfill-php81', [ErrorType::UNUSED_DEPENDENCY]);
-}
-
 return $config;
