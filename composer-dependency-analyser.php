@@ -24,6 +24,7 @@ $config
         'incenteev/composer-parameter-handler',
         'j0k3r/graby-site-config',
         'laminas/laminas-code',
+        'lcobucci/clock',
         'lcobucci/jwt',
         'mgargano/simplehtmldom',
         'mnapoli/piwik-twig-extension',

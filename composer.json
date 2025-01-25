@@ -84,6 +84,7 @@
         "jms/serializer": "^3.32.3",
         "jms/serializer-bundle": "^5.5.1",
         "laminas/laminas-code": "^4.16.0",
+        "lcobucci/clock": "2.2.0",
         "lcobucci/jwt": "^4.3",
         "league/html-to-markdown": "^5.1.1",
         "mgargano/simplehtmldom": "^1.5",
