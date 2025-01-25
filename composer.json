@@ -185,6 +185,18 @@
         "symfony/web-profiler-bundle": "^5.4.35",
         "symfony/web-server-bundle": "^4.4.44"
     },
+    "replace": {
+        "symfony/polyfill-php54": "*",
+        "symfony/polyfill-php55": "*",
+        "symfony/polyfill-php56": "*",
+        "symfony/polyfill-php70": "*",
+        "symfony/polyfill-php71": "*",
+        "symfony/polyfill-php72": "*",
+        "symfony/polyfill-php73": "*",
+        "symfony/polyfill-php74": "*",
+        "symfony/polyfill-php80": "*",
+        "symfony/polyfill-php81": "*"
+    },
     "suggest": {
         "ext-imagick": "To keep GIF animation when downloading image is enabled"
     },
