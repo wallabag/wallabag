@@ -1,6 +1,6 @@
 <?php
 
-namespace Wallabag\Guzzle;
+namespace Wallabag\HttpClient;
 
 use GuzzleHttp\Event\BeforeEvent;
 use GuzzleHttp\Event\CompleteEvent;
@@ -13,7 +13,7 @@ use Wallabag\SiteConfig\LoginFormAuthenticator;
 use Wallabag\SiteConfig\SiteConfig;
 use Wallabag\SiteConfig\SiteConfigBuilder;
 
-class AuthenticatorSubscriber implements SubscriberInterface, LoggerAwareInterface
+class Authenticator implements SubscriberInterface, LoggerAwareInterface
 {
     // avoid loop when login failed which can just be a bad login/password
     // after 2 attempts, we skip the login

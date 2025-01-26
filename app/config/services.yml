@@ -220,7 +220,7 @@ services:
 
     Wallabag\Helper\HttpClientFactory:
         calls:
-            - ['addSubscriber', ['@Wallabag\Guzzle\AuthenticatorSubscriber']]
+            - ['addSubscriber', ['@Wallabag\HttpClient\Authenticator']]
 
     RulerZ\RulerZ:
         alias: rulerz
