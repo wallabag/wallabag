@@ -2,14 +2,14 @@
 
 {% block css %}
     {{ parent() }}
-    {% if not app.debug %}
-        <link rel="stylesheet" href="{{ asset('build/main.css') }}">
-    {% endif %}
+
+    {{ encore_entry_link_tags('main') }}
 {% endblock %}
 
 {% block scripts %}
     {{ parent() }}
-    <script src="{{ asset('build/main' ~ (app.debug ? '.dev' : '') ~ '.js') }}"></script>
+
+    {{ encore_entry_script_tags('main') }}
 {% endblock %}
 
 {% block header %}
