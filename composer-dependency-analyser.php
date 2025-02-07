@@ -29,8 +29,6 @@ $config
         'mnapoli/piwik-twig-extension',
         'ocramius/proxy-manager',
         'pagerfanta/twig',
-        'php-http/client-common',
-        'php-http/httplug',
         'php-http/mock-client',
         'phpstan/extension-installer',
         'phpstan/phpstan',
@@ -39,13 +37,11 @@ $config
         'phpstan/phpstan-symfony',
         'psr/http-client',
         'psr/http-factory',
-        'psr/http-message',
         'rulerz-php/doctrine-orm',
         'scheb/2fa-qr-code',
         'scheb/2fa-trusted-device',
         'shipmonk/composer-dependency-analyser',
         'symfony/asset',
-        'symfony/browser-kit',
         'symfony/css-selector',
         'symfony/doctrine-bridge',
         'symfony/google-mailer',
@@ -57,10 +53,8 @@ $config
         'twig/string-extra',
     ], [ErrorType::UNUSED_DEPENDENCY])
     ->ignoreErrorsOnPackages([
-        'guzzlehttp/streams',
         'monolog/monolog',
         'symfony/filesystem',
-        'symfony/http-client',
     ], [ErrorType::PROD_DEPENDENCY_ONLY_IN_DEV])
     ->ignoreErrorsOnPackages([
         'dama/doctrine-test-bundle',
