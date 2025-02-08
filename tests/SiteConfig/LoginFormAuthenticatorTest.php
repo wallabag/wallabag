@@ -253,4 +253,61 @@ class LoginFormAuthenticatorTest extends TestCase
 
         $this->assertTrue($loginRequired);
     }
+
+    public function testLoginPostWithUserAgentHeaderWithData()
+    {
+        $response = $this->getMockBuilder(Response::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $response->expects($this->any())
+            ->method('getBody')
+            ->willReturn(file_get_contents(__DIR__ . '/../fixtures/nextinpact-login.html'));
+
+        $response->expects($this->any())
+            ->method('getStatusCode')
+            ->willReturn(200);
+
+        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../fixtures/nextinpact-login.html'), ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']])]);
+
+        $client = $this->getMockBuilder(Client::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $client->expects($this->any())
+            ->method('post')
+            ->with(
+                $this->equalTo('https://compte.nextinpact.com/Account/Login'),
+                $this->equalTo([
+                    'body' => [
+                        'UserName' => 'johndoe',
+                        'Password' => 'unkn0wn',
+                    ],
+                    'headers' => [
+                        'user-agent' => 'Wallabag (Guzzle/5)',
+                    ],
+                    'allow_redirects' => true,
+                    'verify' => false,
+                ])
+            )
+            ->willReturn($response);
+
+        $siteConfig = new SiteConfig([
+            'host' => 'nextinpact.com',
+            'loginUri' => 'https://compte.nextinpact.com/Account/Login',
+            'usernameField' => 'UserName',
+            'passwordField' => 'Password',
+            'username' => 'johndoe',
+            'password' => 'unkn0wn',
+            'httpHeaders' => [
+                'user-agent' => 'Wallabag (Guzzle/5)',
+            ],
+        ]);
+
+        $authenticatorProvider = new AuthenticatorProvider($mockHttpClient);
+        $auth = new LoginFormAuthenticator($authenticatorProvider);
+        $res = $auth->login($siteConfig, $client);
+
+        $this->assertInstanceOf(LoginFormAuthenticator::class, $res);
+    }
 }
