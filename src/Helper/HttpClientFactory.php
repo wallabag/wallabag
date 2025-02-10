@@ -18,6 +18,9 @@ class HttpClientFactory implements ClientFactory
     /** @var SubscriberInterface[] */
     private $subscribers = [];
 
+    /** @var string */
+    private $userAgent;
+
     /** @var CookieJar */
     private $cookieJar;
 
@@ -29,11 +32,12 @@ class HttpClientFactory implements ClientFactory
      *
      * @param string $restrictedAccess This param is a kind of boolean. Values: 0 or 1
      */
-    public function __construct(CookieJar $cookieJar, $restrictedAccess, LoggerInterface $logger)
+    public function __construct(CookieJar $cookieJar, $restrictedAccess, LoggerInterface $logger, string $userAgent)
     {
         $this->cookieJar = $cookieJar;
         $this->restrictedAccess = $restrictedAccess;
         $this->logger = $logger;
+        $this->userAgent = $userAgent;
     }
 
     /**
@@ -52,6 +56,14 @@ class HttpClientFactory implements ClientFactory
     public function createClient(array $config = [])
     {
         $this->logger->log('debug', 'Restricted access config enabled?', ['enabled' => (int) $this->restrictedAccess]);
+
+        if (!isset($config['defaults']['headers'])) {
+            $config['defaults']['headers'] = [];
+        }
+        if (!isset($config['defaults']['headers']['User-Agent'])) {
+            // need to set the user-agent
+            $config['defaults']['headers']['User-Agent'] = $this->userAgent;
+        }
 
         if (0 === (int) $this->restrictedAccess) {
             return new GuzzleAdapter(new GuzzleClient($config));
