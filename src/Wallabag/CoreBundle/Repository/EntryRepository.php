@@ -227,21 +227,6 @@ class EntryRepository extends ServiceEntityRepository
     }
 
     /**
-     * Retrieve entries with annotations count for a user.
-     *
-     * @param int $userId
-     *
-     * @return QueryBuilder
-     */
-    public function getCountBuilderForAnnotationsByUser($userId)
-    {
-        return $this
-            ->getQueryBuilderByUser($userId)
-            ->innerJoin('e.annotations', 'a')
-            ;
-    }
-
-    /**
      * Retrieve untagged entries for a user.
      *
      * @param int $userId
