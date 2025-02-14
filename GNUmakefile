@@ -55,6 +55,9 @@ phpstan: ## Run PHPStan
 lint-js: ## Run ESLint
 	@$(YARN) lint:js
 
+lint-scss: ## Run Stylelint
+	@$(YARN) lint:scss
+
 release: ## Create a package. Need a VERSION parameter (eg: `make release VERSION=master`).
 ifndef VERSION
 	$(error VERSION is not set)

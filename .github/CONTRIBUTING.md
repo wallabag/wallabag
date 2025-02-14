@@ -57,3 +57,5 @@ To run the PHP formatter run `make fix-cs`.
 To run the PHPStan static analysis run `make phpstan`.
 
 To run the JS linter run `make lint-js`.
+
+To run the SCSS linter run `make lint-scss`.

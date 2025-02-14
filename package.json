@@ -67,7 +67,6 @@
     "stylelint-config-standard": "^34.0.0",
     "stylelint-config-standard-scss": "^11.1.0",
     "stylelint-scss": "^5.3.2",
-    "stylelint-webpack-plugin": "^5.0.1",
     "terser-webpack-plugin": "^5.3.11",
     "url-loader": "^4.1.1",
     "webpack": "^5.98.0",
@@ -103,6 +102,7 @@
     "build:dev": "encore dev",
     "watch": "encore dev --watch",
     "build:prod": "encore production --progress",
-    "lint:js": "eslint assets/*.js assets/js/*.js assets/js/**/*.js"
+    "lint:js": "eslint assets/*.js assets/js/*.js assets/js/**/*.js",
+    "lint:scss": "stylelint assets/scss/*.scss assets/scss/**/*.scss"
   }
 }

@@ -73,3 +73,6 @@ jobs:
 
       - name: "Run ESLint"
         run: "yarn lint:js"
+
+      - name: "Run Stylelint"
+        run: "yarn lint:scss"
