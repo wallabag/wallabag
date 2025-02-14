@@ -30,6 +30,12 @@ jobs:
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: "Install Node"
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: 'yarn'
+
       - name: "Setup MySQL"
         run: |
           sudo systemctl start mysql.service
@@ -40,6 +46,9 @@ jobs:
         uses: "ramsey/composer-install@v3"
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
+
+      - name: "Install dependencies with Yarn"
+        run: yarn install
 
       - name: "Run Composer validate"
         run: "composer validate"
@@ -61,3 +70,6 @@ jobs:
 
       - name: "Run ergebnis/composer-normalize"
         run: "composer normalize --dry-run --no-check-lock"
+
+      - name: "Run ESLint"
+        run: "yarn lint:js"

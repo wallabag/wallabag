@@ -52,6 +52,9 @@ fix-cs: ## Run PHP-CS-Fixer
 phpstan: ## Run PHPStan
 	@$(PHP_NO_XDEBUG) bin/phpstan analyse
 
+lint-js: ## Run ESLint
+	@$(YARN) lint:js
+
 release: ## Create a package. Need a VERSION parameter (eg: `make release VERSION=master`).
 ifndef VERSION
 	$(error VERSION is not set)

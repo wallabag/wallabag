@@ -102,6 +102,7 @@
     "dev-server": "encore dev-server",
     "build:dev": "encore dev",
     "watch": "encore dev --watch",
-    "build:prod": "encore production --progress"
+    "build:prod": "encore production --progress",
+    "lint:js": "eslint assets/*.js assets/js/*.js assets/js/**/*.js"
   }
 }

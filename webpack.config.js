@@ -24,7 +24,6 @@ Encore
   .enableSassLoader()
   .enablePostCssLoader()
   .autoProvidejQuery()
-  .enableEslintPlugin()
   .addPlugin(new StyleLintPlugin({
     configFile: 'stylelint.config.js',
     failOnError: false,
