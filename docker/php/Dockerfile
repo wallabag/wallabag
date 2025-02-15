@@ -12,8 +12,7 @@ RUN apt-get update \
       openssl \
       software-properties-common
 
-RUN curl 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key' | apt-key add - \
-    && echo "deb https://deb.nodesource.com/node_${NODE_VERSION}.x $(lsb_release -cs) main" > /etc/apt/sources.list.d/nodesource.list
+RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash -
 
 RUN apt-get update && apt-get install -y \
         libmcrypt-dev \
