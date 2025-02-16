@@ -1,2 +1,3 @@
 parameters:
     env(DATABASE_URL): postgres://wallabag:wallabagrocks@localhost/wallabag?charset=utf8
+    database_url: '%env(resolve:DATABASE_URL)%'

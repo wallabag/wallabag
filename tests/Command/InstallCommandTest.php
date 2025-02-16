@@ -38,7 +38,7 @@ class InstallCommandTest extends WallabagTestCase
         /** @var Connection $connection */
         $connection = $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection();
 
-        $originalDatabaseUrl = $this->getTestClient()->getContainer()->getParameter('env(DATABASE_URL)');
+        $originalDatabaseUrl = $this->getTestClient()->getContainer()->getParameter('database_url');
         $dbnameSuffix = $this->getTestClient()->getContainer()->getParameter('wallabag_dbname_suffix');
         $tmpDatabaseName = 'wallabag_' . bin2hex(random_bytes(5));
 
