@@ -85,13 +85,6 @@ class SecurityControllerTest extends WallabagTestCase
     public function testEnabledRegistration()
     {
         $client = $this->getTestClient();
-
-        if (!$client->getContainer()->getParameter('fosuser_registration')) {
-            $this->markTestSkipped('fosuser_registration is not enabled.');
-
-            return;
-        }
-
         $client->followRedirects();
         $client->request('GET', '/register');
         $this->assertStringContainsString('registration.submit', $client->getResponse()->getContent());

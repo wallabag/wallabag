@@ -3,7 +3,7 @@ imports:
     - { resource: services_test.yml }
 
 parameters:
-    fosuser_registration: true
+    fosuser_registration: '%env(FOSUSER_REGISTRATION)%'
     database_url: '%env(resolve:DATABASE_URL)%'
     domain_name: '%env(DOMAIN_NAME)%'
 

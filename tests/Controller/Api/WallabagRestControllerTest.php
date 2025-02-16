@@ -41,12 +41,6 @@ class WallabagRestControllerTest extends WallabagApiTestCase
         // create a new client instead of using $this->client to be sure client isn't authenticated
         $client = $this->createUnauthorizedClient();
 
-        if (!$client->getContainer()->getParameter('fosuser_registration')) {
-            $this->markTestSkipped('fosuser_registration is not enabled.');
-
-            return;
-        }
-
         $client->getContainer()->get(Config::class)->set('api_user_registration', 1);
 
         $client->request('GET', '/api/info');
