@@ -6,6 +6,7 @@ imports:
 parameters:
     fosuser_registration: true
     wallabag_dbname_suffix: '_test'
+    domain_name: '%env(DOMAIN_NAME)%'
 
 framework:
     test: ~
