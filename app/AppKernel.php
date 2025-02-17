@@ -69,22 +69,6 @@ class AppKernel extends Kernel
     {
         $loader->load($this->getProjectDir() . '/app/config/config_' . $this->getEnvironment() . '.yml');
 
-        $loader->load(function ($container) {
-            if ($container->getParameter('use_webpack_dev_server')) {
-                $container->loadFromExtension('framework', [
-                    'assets' => [
-                        'base_url' => 'http://localhost:8080/',
-                    ],
-                ]);
-            } else {
-                $container->loadFromExtension('framework', [
-                    'assets' => [
-                        'base_url' => $container->getParameter('domain_name'),
-                    ],
-                ]);
-            }
-        });
-
         $loader->load(function (ContainerBuilder $container) {
             // $container->setParameter('container.autowiring.strict_mode', true);
             // $container->setParameter('container.dumper.inline_class_loader', true);

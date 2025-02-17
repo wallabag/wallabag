@@ -5,8 +5,6 @@ imports:
     - { resource: wallabag.yml }
 
 parameters:
-    # Allows to use the live reload feature for changes in assets
-    use_webpack_dev_server: false
     craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\SymfonyCacheComponentAdapter
     env(DATABASE_URL): '%database_scheme%://%database_user%:%database_password%@%database_host%:%database_port%/%database_name%?unix_socket=%database_socket%&charset=%database_charset%'
 
@@ -34,6 +32,7 @@ framework:
     fragments: ~
     http_method_override: true
     assets:
+        base_url: '%domain_name%'
         json_manifest_path: '%kernel.project_dir%/web/build/manifest.json'
     mailer:
         dsn: "%mailer_dsn%"
