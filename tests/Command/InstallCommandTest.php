@@ -41,11 +41,18 @@ class InstallCommandTest extends WallabagTestCase
         $connection = $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection();
 
         $this->originalDatabaseUrl = $this->getTestClient()->getContainer()->getParameter('database_url');
-        $dbnameSuffix = $this->getTestClient()->getContainer()->getParameter('wallabag_dbname_suffix');
-        $tmpDatabaseName = 'wallabag_' . bin2hex(random_bytes(5));
+        $tmpDatabaseName = 'wallabag_test_' . bin2hex(random_bytes(5));
 
         if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {
-            $tmpDatabaseUrl = str_replace('wallabag' . $dbnameSuffix . '.sqlite', $tmpDatabaseName . $dbnameSuffix . '.sqlite', $this->originalDatabaseUrl);
+            $tmpDatabaseName = $this->getTestClient()->getContainer()->getParameter('kernel.project_dir') . '/data/db/' . $tmpDatabaseName . '.sqlite';
+
+            /** @see \Doctrine\DBAL\Tools\DsnParser::parse */
+            $url = preg_replace('#^((?:pdo-)?sqlite3?):///#', '$1://localhost/', $this->originalDatabaseUrl);
+
+            $tmpDatabaseUrl = (string) (new Uri($url))->withPath($tmpDatabaseName);
+
+            // Add back the leading "/" that was removed by withPath, and remove the "localhost" part
+            $tmpDatabaseUrl = str_replace('//localhost', '///', $tmpDatabaseUrl);
         } else {
             $tmpDatabaseUrl = (string) (new Uri($this->originalDatabaseUrl))->withPath($tmpDatabaseName);
         }
@@ -54,8 +61,7 @@ class InstallCommandTest extends WallabagTestCase
 
         if ($connection->getDatabasePlatform() instanceof PostgreSQLPlatform) {
             // PostgreSQL requires that the database exists before connecting to it
-            $tmpTestDatabaseName = $tmpDatabaseName . $dbnameSuffix;
-            $connection->executeQuery('CREATE DATABASE ' . $tmpTestDatabaseName);
+            $connection->executeQuery('CREATE DATABASE ' . $tmpDatabaseName);
         }
 
         // The environnement has been changed, recreate the client in order to update connection
@@ -72,7 +78,10 @@ class InstallCommandTest extends WallabagTestCase
         if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {// Remove the real environnement variable
             $_ENV['DATABASE_URL'] = $_SERVER['DATABASE_URL'] = $this->originalDatabaseUrl;
 
-            $databasePath = parse_url($databaseUrl, \PHP_URL_PATH);
+            /** @see \Doctrine\DBAL\Tools\DsnParser::parse */
+            $url = preg_replace('#^((?:pdo-)?sqlite3?):///#', '$1://localhost/', $databaseUrl);
+
+            $databasePath = parse_url($url, \PHP_URL_PATH);
 
             if (file_exists($databasePath)) {
                 unlink($databasePath);
