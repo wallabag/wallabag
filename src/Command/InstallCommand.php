@@ -7,6 +7,7 @@ use Doctrine\DBAL\Exception\DriverException;
 use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
+use Doctrine\DBAL\Tools\DsnParser;
 use Doctrine\Migrations\Metadata\Storage\TableMetadataStorageConfiguration;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Event\UserEvent;
@@ -41,17 +42,17 @@ class InstallCommand extends Command
     private EventDispatcherInterface $dispatcher;
     private UserManagerInterface $userManager;
     private TableMetadataStorageConfiguration $tableMetadataStorageConfiguration;
-    private string $databaseDriver;
+    private string $databaseUrl;
     private array $defaultSettings;
     private array $defaultIgnoreOriginInstanceRules;
 
-    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $dispatcher, UserManagerInterface $userManager, TableMetadataStorageConfiguration $tableMetadataStorageConfiguration, string $databaseDriver, array $defaultSettings, array $defaultIgnoreOriginInstanceRules)
+    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $dispatcher, UserManagerInterface $userManager, TableMetadataStorageConfiguration $tableMetadataStorageConfiguration, string $databaseUrl, array $defaultSettings, array $defaultIgnoreOriginInstanceRules)
     {
         $this->entityManager = $entityManager;
         $this->dispatcher = $dispatcher;
         $this->userManager = $userManager;
         $this->tableMetadataStorageConfiguration = $tableMetadataStorageConfiguration;
-        $this->databaseDriver = $databaseDriver;
+        $this->databaseUrl = $databaseUrl;
         $this->defaultSettings = $defaultSettings;
         $this->defaultIgnoreOriginInstanceRules = $defaultIgnoreOriginInstanceRules;
 
@@ -103,13 +104,24 @@ class InstallCommand extends Command
         $status = '<info>OK!</info>';
         $help = '';
 
-        if (!\extension_loaded($this->databaseDriver)) {
+        /** @see \Doctrine\DBAL\DriverManager::$driverSchemeAliases */
+        $params = (new DsnParser([
+            'mysql' => 'pdo_mysql',
+            'mysql2' => 'pdo_mysql', // Amazon RDS, for some weird reason
+            'postgres' => 'pdo_pgsql',
+            'postgresql' => 'pdo_pgsql',
+            'pgsql' => 'pdo_pgsql',
+            'sqlite' => 'pdo_sqlite',
+            'sqlite3' => 'pdo_sqlite',
+        ]))->parse($this->databaseUrl);
+
+        if (!\extension_loaded($params['driver'])) {
             $fulfilled = false;
             $status = '<error>ERROR!</error>';
-            $help = 'Database driver "' . $this->databaseDriver . '" is not installed.';
+            $help = 'Database driver "' . $params['driver'] . '" is not installed.';
         }
 
-        $rows[] = [\sprintf($label, $this->databaseDriver), $status, $help];
+        $rows[] = [\sprintf($label, $params['driver']), $status, $help];
 
         // testing if connection to the database can be established
         $label = '<comment>Database connection</comment>';

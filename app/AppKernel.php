@@ -94,7 +94,6 @@ class AppKernel extends Kernel
 
     private function loadEnvVarsFromParameters(ContainerBuilder $container)
     {
-        $this->setEnvVarFromParameter($container, 'DATABASE_DRIVER', 'database_driver');
         $this->setEnvVarFromParameter($container, 'DATABASE_HOST', 'database_host');
         $this->setEnvVarFromParameter($container, 'DATABASE_PORT', 'database_port');
         $this->setEnvVarFromParameter($container, 'DATABASE_NAME', 'database_name');
