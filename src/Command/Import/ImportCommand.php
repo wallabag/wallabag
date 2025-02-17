@@ -64,7 +64,7 @@ class ImportCommand extends Command
         ElcuratorImport $elcuratorImport,
         ShaarliImport $shaarliImport,
         PocketHtmlImport $pocketHtmlImport,
-        OmnivoreImport $omnivoreImport
+        OmnivoreImport $omnivoreImport,
     ) {
         $this->entityManager = $entityManager;
         $this->tokenStorage = $tokenStorage;

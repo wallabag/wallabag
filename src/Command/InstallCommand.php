@@ -426,7 +426,7 @@ class InstallCommand extends Command
     {
         $schemaManager = $this->entityManager->getConnection()->createSchemaManager();
 
-        return $schemaManager->listTableNames() !== [];
+        return [] !== $schemaManager->listTableNames();
     }
 
     private function dropWallabagSchemaOnly(): void
