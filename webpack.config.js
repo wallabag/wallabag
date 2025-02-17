@@ -1,5 +1,4 @@
 const Encore = require('@symfony/webpack-encore');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 if (!Encore.isRuntimeEnvironmentConfigured()) {
   Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
@@ -23,14 +22,6 @@ Encore
   })
   .enableSassLoader()
   .enablePostCssLoader()
-  .autoProvidejQuery()
-  .enableEslintPlugin()
-  .addPlugin(new StyleLintPlugin({
-    configFile: 'stylelint.config.js',
-    failOnError: false,
-    quiet: false,
-    context: 'assets',
-    files: '**/*.scss',
-  }));
+  .autoProvidejQuery();
 
 module.exports = Encore.getWebpackConfig();

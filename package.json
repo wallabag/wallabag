@@ -44,7 +44,7 @@
     "@babel/core": "^7.26.9",
     "@babel/eslint-parser": "^7.26.8",
     "@babel/preset-env": "^7.26.9",
-    "@symfony/webpack-encore": "^4.7.0",
+    "@symfony/webpack-encore": "^5.0.1",
     "autoprefixer": "^10.4.20",
     "babel-loader": "^9.2.1",
     "core-js": "^3.23.0",
@@ -67,7 +67,6 @@
     "stylelint-config-standard": "^34.0.0",
     "stylelint-config-standard-scss": "^11.1.0",
     "stylelint-scss": "^5.3.2",
-    "stylelint-webpack-plugin": "^5.0.1",
     "terser-webpack-plugin": "^5.3.11",
     "url-loader": "^4.1.1",
     "webpack": "^5.98.0",
@@ -102,6 +101,8 @@
     "dev-server": "encore dev-server",
     "build:dev": "encore dev",
     "watch": "encore dev --watch",
-    "build:prod": "encore production --progress"
+    "build:prod": "encore production --progress",
+    "lint:js": "eslint assets/*.js assets/js/*.js assets/js/**/*.js",
+    "lint:scss": "stylelint assets/scss/*.scss assets/scss/**/*.scss"
   }
 }
