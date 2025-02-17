@@ -1,11 +1,11 @@
 imports:
     - { resource: config_dev.yml }
-    - { resource: parameters_test.yml }
     - { resource: services_test.yml }
 
 parameters:
     fosuser_registration: true
     wallabag_dbname_suffix: '_test'
+    database_url: '%env(resolve:DATABASE_URL)%'
     domain_name: '%env(DOMAIN_NAME)%'
 
 framework:

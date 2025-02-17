@@ -1,4 +1,0 @@
-parameters:
-    env(DATABASE_URL): mysql://root:root@127.0.0.1:3306/wallabag?charset=utf8mb4
-    database_url: '%env(resolve:DATABASE_URL)%'
-    domain_name: '%env(DOMAIN_NAME)%'

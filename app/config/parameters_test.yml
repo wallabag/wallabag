@@ -1,4 +1,0 @@
-parameters:
-    database_path: "%kernel.project_dir%/data/db/wallabag%wallabag_dbname_suffix%.sqlite"
-    database_url: '%env(resolve:DATABASE_URL)%'
-    domain_name: '%env(DOMAIN_NAME)%'

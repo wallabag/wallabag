@@ -17,9 +17,6 @@
 phpunit.xml
 compose.override.yaml
 
-# Parameters
-/app/config/parameters.yml
-
 # Managed by Composer
 /vendor/
 

@@ -77,7 +77,6 @@
         "friendsofsymfony/user-bundle": "^3.2.1",
         "guzzlehttp/psr7": "^2.6.2",
         "html2text/html2text": "^4.3.1",
-        "incenteev/composer-parameter-handler": "^2.2",
         "j0k3r/graby": "^2.4.5",
         "j0k3r/graby-site-config": "^1.0",
         "javibravo/simpleue": "^2.1",
@@ -223,9 +222,6 @@
         "sort-packages": true
     },
     "extra": {
-        "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
-        },
         "public-dir": "web",
         "symfony": {
             "allow-contrib": true,
@@ -240,7 +236,6 @@
             "@post-cmd"
         ],
         "post-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "bin/console cache:clear --no-warmup",
             "bin/console assets:install web --symlink --relative"
         ]
