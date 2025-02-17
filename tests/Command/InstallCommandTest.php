@@ -50,7 +50,7 @@ class InstallCommandTest extends WallabagTestCase
             $tmpDatabaseUrl = (string) (new Uri($this->originalDatabaseUrl))->withPath($tmpDatabaseName);
         }
 
-        putenv("DATABASE_URL=$tmpDatabaseUrl");
+        $_ENV['DATABASE_URL'] = $_SERVER['DATABASE_URL'] = $tmpDatabaseUrl;
 
         if ($connection->getDatabasePlatform() instanceof PostgreSQLPlatform) {
             // PostgreSQL requires that the database exists before connecting to it
@@ -64,13 +64,13 @@ class InstallCommandTest extends WallabagTestCase
 
     protected function tearDown(): void
     {
-        $databaseUrl = getenv('DATABASE_URL');
+        $databaseUrl = $_SERVER['DATABASE_URL'];
 
         /** @var Connection $connection */
         $connection = $this->getTestClient()->getContainer()->get(ManagerRegistry::class)->getConnection();
 
         if ($connection->getDatabasePlatform() instanceof SqlitePlatform) {// Remove the real environnement variable
-            putenv('DATABASE_URL=' . $this->originalDatabaseUrl);
+            $_ENV['DATABASE_URL'] = $_SERVER['DATABASE_URL'] = $this->originalDatabaseUrl;
 
             $databasePath = parse_url($databaseUrl, \PHP_URL_PATH);
 
@@ -81,7 +81,7 @@ class InstallCommandTest extends WallabagTestCase
             $testDatabaseName = $connection->getDatabase();
             $connection->close();
 
-            putenv('DATABASE_URL=' . $this->originalDatabaseUrl);
+            $_ENV['DATABASE_URL'] = $_SERVER['DATABASE_URL'] = $this->originalDatabaseUrl;
 
             // Create a new client to avoid the error:
             // Transaction commit failed because the transaction has been marked for rollback only.
