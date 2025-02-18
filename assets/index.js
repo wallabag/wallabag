@@ -277,7 +277,8 @@ $(document).ready(() => {
   // sidenav
   $('.sidenav-trigger').sidenav();
   $('select').formSelect();
-  $('.collapsible').collapsible({
+  $('.collapsible[data-collapsible="accordion"]').collapsible();
+  $('.collapsible[data-collapsible="expandable"]').collapsible({
     accordion: false,
   });
   $('.datepicker').pickadate({
