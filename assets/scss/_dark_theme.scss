@@ -14,7 +14,7 @@
   .dropdown-content,
   .sidenav,
   .sidenav .collapsible-body,
-  .sidenav.fixed .collapsible-body,
+  .sidenav.sidenav-fixed .collapsible-body,
   .tabs {
     background-color: #131716;
   }
@@ -88,7 +88,7 @@
   .mass-action-tags .mass-action-tags-input.mass-action-tags-input,
   .sidenav li:not(.logo) > a:hover,
   .sidenav .collapsible-header:hover,
-  .sidenav.fixed .collapsible-header:hover {
+  .sidenav.sidenav-fixed .collapsible-header:hover {
     background-color: #1d1d1d;
   }
 

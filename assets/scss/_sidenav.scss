@@ -22,14 +22,14 @@
     margin: 0;
   }
 
-  &.fixed a {
+  &.sidenav-fixed a {
     font-size: 13px;
     line-height: 44px;
     height: 44px;
   }
 
   .collapsible-header,
-  &.fixed .collapsible-header {
+  &.sidenav-fixed .collapsible-header {
     height: 45px;
     line-height: 44px;
     padding: 0 20px;
