@@ -183,4 +183,62 @@ class LoginFormAuthenticatorTest extends TestCase
 
         $this->assertTrue($loginRequired);
     }
+
+    public function testLoginPostWithUserAgentHeaderWithData()
+    {
+        $siteConfig = new SiteConfig([
+            'host' => 'nextinpact.com',
+            'loginUri' => 'https://compte.nextinpact.com/Account/Login',
+            'usernameField' => 'UserName',
+            'passwordField' => 'Password',
+            'username' => 'johndoe',
+            'password' => 'unkn0wn',
+            'httpHeaders' => [
+                'user-agent' => 'Wallabag (Guzzle/5)',
+            ],
+        ]);
+
+        $browserResponse = new MockResponse('<html></html>', ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']]);
+        $browserClient = new MockHttpClient([$browserResponse]);
+        $browser = $this->getMockBuilder(HttpBrowser::class)
+            ->setConstructorArgs([$browserClient])
+            ->getMock();
+        $browser->expects($this->any())
+            ->method('request')
+            ->with(
+                $this->equalTo('POST'),
+                $this->equalTo('https://compte.nextinpact.com/Account/Login'),
+                $this->equalTo([
+                    'UserName' => 'johndoe',
+                    'Password' => 'unkn0wn',
+                ]),
+                $this->equalTo([]),
+                $this->equalTo([
+                    'HTTP_user-agent' => 'Wallabag (Guzzle/5)',
+                ]),
+            )
+        ;
+
+        $requestHtmlFunctionResponse = $this->getMockBuilder(ResponseInterface::class)->getMock();
+        $requestHtmlFunctionResponse->expects($this->any())
+            ->method('getContent')
+            ->willReturn(file_get_contents(__DIR__ . '/../fixtures/nextinpact-login.html'))
+        ;
+        $requestHtmlFunctionClient = $this->getMockBuilder(HttpClientInterface::class)->getMock();
+        $requestHtmlFunctionClient->expects($this->any())
+            ->method('request')
+            ->with(
+                $this->equalTo('GET'),
+                $this->equalTo('https://nextinpact.com/'),
+            )
+            ->willReturn($requestHtmlFunctionResponse)
+        ;
+        $authenticatorProvider = new AuthenticatorProvider($requestHtmlFunctionClient);
+
+        $auth = new LoginFormAuthenticator($browser, $authenticatorProvider);
+
+        $res = $auth->login($siteConfig);
+
+        $this->assertInstanceOf(LoginFormAuthenticator::class, $res);
+    }
 }

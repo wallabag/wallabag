@@ -30,7 +30,7 @@ class LoginFormAuthenticator
             $siteConfig->getPasswordField() => $siteConfig->getPassword(),
         ] + $this->getExtraFields($siteConfig);
 
-        $this->browser->request('POST', $siteConfig->getLoginUri(), $postFields);
+        $this->browser->request('POST', $siteConfig->getLoginUri(), $postFields, [], $this->getHttpHeaders($siteConfig));
 
         return $this;
     }
@@ -71,6 +71,20 @@ class LoginFormAuthenticator
         }
 
         return \count($loggedIn) > 0;
+    }
+
+    /**
+     * Processes http_header(*) config, prepending HTTP_ string to the header's name.
+     * See : https://github.com/symfony/browser-kit/blob/5.4/AbstractBrowser.php#L349.
+     */
+    protected function getHttpHeaders(SiteConfig $siteConfig): array
+    {
+        $headers = [];
+        foreach ($siteConfig->getHttpHeaders() as $headerName => $headerValue) {
+            $headers["HTTP_$headerName"] = $headerValue;
+        }
+
+        return $headers;
     }
 
     /**
