@@ -86,7 +86,7 @@
     {% endif %}
 
     <!-- Export -->
-    <div id="export" class="side-nav right-aligned">
+    <div id="export" class="sidenav right-aligned">
     {% set current_tag = null %}
     {% if tag is defined %}
         {% set current_tag = tag.slug %}
@@ -111,7 +111,7 @@
 
     <!-- Filters -->
     {% if form is not null and is_granted('LIST_ENTRIES') %}
-    <div id="filters" class="side-nav right-aligned">
+    <div id="filters" class="sidenav right-aligned">
         <form action="{{ path('all') }}">
 
             <h4 class="center">{{ 'entry.filters.title'|trans }}</h4>

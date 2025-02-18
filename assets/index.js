@@ -308,7 +308,7 @@ $(document).ready(() => {
     $('.nav-panel-add-tag').toggle(100);
     $('.nav-panel-menu').addClass('hidden');
     if (window.innerWidth < mobileMaxWidth) {
-      $('.side-nav').sideNav('hide');
+      $('.sidenav').sideNav('hide');
     }
     $('#tag_label').focus();
     return false;

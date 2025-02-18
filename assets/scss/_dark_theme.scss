@@ -12,9 +12,9 @@
   .collapsible-header,
   .collection,
   .dropdown-content,
-  .side-nav,
-  .side-nav .collapsible-body,
-  .side-nav.fixed .collapsible-body,
+  .sidenav,
+  .sidenav .collapsible-body,
+  .sidenav.fixed .collapsible-body,
   .tabs {
     background-color: #131716;
   }
@@ -61,8 +61,8 @@
   .dropdown-content li > a,
   .nav-panels .input-field input:focus,
   .results-item,
-  .side-nav li > a,
-  .side-nav li > a > i.material-icons {
+  .sidenav li > a,
+  .sidenav li > a > i.material-icons {
     color: #dfdfdf;
   }
 
@@ -81,14 +81,14 @@
     color: #dfdfdf !important;
   }
 
-  .side-nav li.active {
+  .sidenav li.active {
     background-color: #2f2f2f;
   }
 
   .mass-action-tags .mass-action-tags-input.mass-action-tags-input,
-  .side-nav li:not(.logo) > a:hover,
-  .side-nav .collapsible-header:hover,
-  .side-nav.fixed .collapsible-header:hover {
+  .sidenav li:not(.logo) > a:hover,
+  .sidenav .collapsible-header:hover,
+  .sidenav.fixed .collapsible-header:hover {
     background-color: #1d1d1d;
   }
 
