@@ -314,7 +314,7 @@ $(document).ready(() => {
     $('.nav-panel-add-tag').toggle(100);
     $('.nav-panel-menu').addClass('hidden');
     if (window.innerWidth < mobileMaxWidth) {
-      $('.sidenav').sidenav('hide');
+      $('.sidenav').sidenav('close');
     }
     $('#tag_label').focus();
     return false;
