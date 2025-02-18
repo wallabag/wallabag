@@ -276,7 +276,7 @@ const articleScroll = () => {
 $(document).ready(() => {
   // sideNav
   $('.button-collapse').sideNav();
-  $('select').material_select();
+  $('select').formSelect();
   $('.collapsible').collapsible({
     accordion: false,
   });
