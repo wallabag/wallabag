@@ -2,7 +2,7 @@ import $ from 'jquery';
 
 /* Materialize imports */
 import '@materializecss/materialize/dist/css/materialize.css';
-import '@materializecss/materialize/dist/js/materialize';
+import M from '@materializecss/materialize/dist/js/materialize';
 
 /* Annotations */
 import annotator from 'annotator';
@@ -44,6 +44,8 @@ const mobileMaxWidth = 993;
  ========================================================================== */
 
 $(document).ready(() => {
+  M.AutoInit();
+
   if ($('#article').length) {
     const app = new annotator.App();
 
