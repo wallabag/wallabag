@@ -37,7 +37,7 @@ class LoginFormAuthenticatorTest extends TestCase
         $requestHtmlFunctionClient = new MockHttpClient([$requestHtmlFunctionResponse]);
         $authenticatorProvider = new AuthenticatorProvider($requestHtmlFunctionClient);
 
-        $auth = new LoginFormAuthenticator($browser, $authenticatorProvider);
+        $auth = new LoginFormAuthenticator($browser, $authenticatorProvider, 'Wallabag (Symfony HttpClient/5)');
 
         $res = $auth->login($siteConfig);
 
@@ -68,7 +68,7 @@ class LoginFormAuthenticatorTest extends TestCase
         $requestHtmlFunctionClient = new MockHttpClient([$requestHtmlFunctionResponse]);
         $authenticatorProvider = new AuthenticatorProvider($requestHtmlFunctionClient);
 
-        $auth = new LoginFormAuthenticator($browser, $authenticatorProvider);
+        $auth = new LoginFormAuthenticator($browser, $authenticatorProvider, 'Wallabag (Symfony HttpClient/5)');
 
         $res = $auth->login($siteConfig);
 
@@ -126,7 +126,7 @@ class LoginFormAuthenticatorTest extends TestCase
         ;
         $authenticatorProvider = new AuthenticatorProvider($requestHtmlFunctionClient);
 
-        $auth = new LoginFormAuthenticator($browser, $authenticatorProvider);
+        $auth = new LoginFormAuthenticator($browser, $authenticatorProvider, 'Wallabag (Symfony HttpClient/5)');
 
         $res = $auth->login($siteConfig);
 
@@ -151,7 +151,7 @@ class LoginFormAuthenticatorTest extends TestCase
         $requestHtmlFunctionClient = new MockHttpClient([$requestHtmlFunctionResponse]);
         $authenticatorProvider = new AuthenticatorProvider($requestHtmlFunctionClient);
 
-        $auth = new LoginFormAuthenticator($browser, $authenticatorProvider);
+        $auth = new LoginFormAuthenticator($browser, $authenticatorProvider, 'Wallabag (Symfony HttpClient/5)');
 
         $loginRequired = $auth->isLoginRequired($siteConfig, file_get_contents(__DIR__ . '/../fixtures/nextinpact-login.html'));
 
@@ -177,7 +177,7 @@ class LoginFormAuthenticatorTest extends TestCase
         $requestHtmlFunctionClient = new MockHttpClient([$requestHtmlFunctionResponse]);
         $authenticatorProvider = new AuthenticatorProvider($requestHtmlFunctionClient);
 
-        $auth = new LoginFormAuthenticator($browser, $authenticatorProvider);
+        $auth = new LoginFormAuthenticator($browser, $authenticatorProvider, 'Wallabag (Symfony HttpClient/5)');
 
         $loginRequired = $auth->isLoginRequired($siteConfig, file_get_contents(__DIR__ . '/../fixtures/nextinpact-article.html'));
 
@@ -235,7 +235,7 @@ class LoginFormAuthenticatorTest extends TestCase
         ;
         $authenticatorProvider = new AuthenticatorProvider($requestHtmlFunctionClient);
 
-        $auth = new LoginFormAuthenticator($browser, $authenticatorProvider);
+        $auth = new LoginFormAuthenticator($browser, $authenticatorProvider, 'Wallabag (Symfony HttpClient/5)');
 
         $res = $auth->login($siteConfig);
 
