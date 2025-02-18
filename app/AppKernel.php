@@ -69,6 +69,8 @@ class AppKernel extends Kernel
     {
         if (file_exists($this->getProjectDir() . '/app/config/parameters.yml')) {
             $loader->load($this->getProjectDir() . '/app/config/parameters.yml');
+
+            @trigger_error('The "app/config/parameters.yml" file is deprecated and will not be supported in a future version. Move your configuration to environment variables and remove the file.', \E_USER_DEPRECATED);
         }
 
         $loader->load($this->getProjectDir() . '/app/config/config_' . $this->getEnvironment() . '.yml');
