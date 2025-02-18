@@ -274,8 +274,8 @@ const articleScroll = () => {
 };
 
 $(document).ready(() => {
-  // sideNav
-  $('.button-collapse').sideNav();
+  // sidenav
+  $('.button-collapse').sidenav();
   $('select').formSelect();
   $('.collapsible').collapsible({
     accordion: false,
@@ -308,7 +308,7 @@ $(document).ready(() => {
     $('.nav-panel-add-tag').toggle(100);
     $('.nav-panel-menu').addClass('hidden');
     if (window.innerWidth < mobileMaxWidth) {
-      $('.sidenav').sideNav('hide');
+      $('.sidenav').sidenav('hide');
     }
     $('#tag_label').focus();
     return false;
