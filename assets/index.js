@@ -281,7 +281,7 @@ $(document).ready(() => {
   $('.collapsible[data-collapsible="expandable"]').collapsible({
     accordion: false,
   });
-  $('.datepicker').pickadate({
+  $('.datepicker').datepicker({
     selectMonths: true,
     selectYears: 15,
     formatSubmit: 'yyyy-mm-dd',
