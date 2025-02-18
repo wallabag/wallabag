@@ -275,7 +275,7 @@ const articleScroll = () => {
 
 $(document).ready(() => {
   // sidenav
-  $('.button-collapse').sidenav();
+  $('.sidenav-trigger').sidenav();
   $('select').formSelect();
   $('.collapsible').collapsible({
     accordion: false,
