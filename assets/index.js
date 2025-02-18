@@ -1,8 +1,8 @@
 import $ from 'jquery';
 
 /* Materialize imports */
-import 'materialize-css/dist/css/materialize.css';
-import 'materialize-css/dist/js/materialize';
+import '@materializecss/materialize/dist/css/materialize.css';
+import '@materializecss/materialize/dist/js/materialize';
 
 /* Annotations */
 import annotator from 'annotator';
