@@ -724,7 +724,7 @@ class EntryRestController extends WallabagRestController
         LoggerInterface $logger,
         TagsAssigner $tagsAssigner,
         EventDispatcherInterface $eventDispatcher,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
     ) {
         $this->validateAuthentication();
 

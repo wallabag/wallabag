@@ -24,6 +24,7 @@ $config
         'incenteev/composer-parameter-handler',
         'j0k3r/graby-site-config',
         'laminas/laminas-code',
+        'lcobucci/clock',
         'lcobucci/jwt',
         'mgargano/simplehtmldom',
         'mnapoli/piwik-twig-extension',
@@ -65,9 +66,5 @@ $config
         'symfony/web-server-bundle',
     ], [ErrorType::DEV_DEPENDENCY_IN_PROD])
 ;
-
-if (\PHP_VERSION_ID >= 80000) {
-    $config->ignoreErrorsOnPackage('symfony/polyfill-php80', [ErrorType::UNUSED_DEPENDENCY]);
-}
 
 return $config;
