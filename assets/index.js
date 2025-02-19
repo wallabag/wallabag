@@ -279,14 +279,6 @@ $(document).ready(() => {
   $('.collapsible[data-collapsible="expandable"]').collapsible({
     accordion: false,
   });
-  $('.datepicker').datepicker({
-    selectMonths: true,
-    selectYears: 15,
-    formatSubmit: 'yyyy-mm-dd',
-    hiddenName: false,
-    format: 'yyyy-mm-dd',
-    container: 'body',
-  });
 
   $('.dropdown-trigger').dropdown({ hover: false });
   $('.dropdown-trigger[data-covertrigger="false"][data-constrainwidth="false"]').dropdown({
