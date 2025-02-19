@@ -2,7 +2,7 @@ import $ from 'jquery';
 
 /* Materialize imports */
 import '@materializecss/materialize/dist/css/materialize.css';
-import M from '@materializecss/materialize/dist/js/materialize';
+import '@materializecss/materialize/dist/js/materialize';
 
 /* Annotations */
 import annotator from 'annotator';
@@ -44,8 +44,6 @@ const mobileMaxWidth = 993;
  ========================================================================== */
 
 $(document).ready(() => {
-  M.AutoInit();
-
   if ($('#article').length) {
     const app = new annotator.App();
 
@@ -275,7 +273,7 @@ const articleScroll = () => {
 
 $(document).ready(() => {
   // sidenav
-  $('.sidenav-trigger').sidenav();
+  $('.sidenav').sidenav();
   $('select').formSelect();
   $('.collapsible[data-collapsible="accordion"]').collapsible();
   $('.collapsible[data-collapsible="expandable"]').collapsible({
@@ -296,6 +294,9 @@ $(document).ready(() => {
     coverTrigger: false,
     constrainWidth: false,
   });
+
+  $('.tabs').tabs();
+  $('.tooltipped').tooltip();
 
   initFilters();
   initExport();
