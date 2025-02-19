@@ -223,12 +223,12 @@
                     {{ form_label(form.createdAt) }}
                 </div>
 
-                <div class="input-field col s6">
-                    {{ form_widget(form.createdAt.left_date, {'type': 'date', 'attr': {'class': 'datepicker', 'data-value': form.createdAt.left_date.vars.value}}) }}
+                <div class="input-field col s12">
+                    {{ form_widget(form.createdAt.left_date, {'type': 'date', 'attr': {'data-value': form.createdAt.left_date.vars.value}}) }}
                     <label for="entry_filter_createdAt_left_date" class="active">{{ 'entry.filters.created_at.from'|trans }}</label>
                 </div>
-                <div class="input-field col s6">
-                    {{ form_widget(form.createdAt.right_date, {'type': 'date', 'attr': {'class': 'datepicker', 'data-value': form.createdAt.right_date.vars.value}}) }}
+                <div class="input-field col s12">
+                    {{ form_widget(form.createdAt.right_date, {'type': 'date', 'attr': {'data-value': form.createdAt.right_date.vars.value}}) }}
                     <label for="entry_filter_createdAt_right_date" class="active">{{ 'entry.filters.created_at.to'|trans }}</label>
                 </div>
 
