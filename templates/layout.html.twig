@@ -27,7 +27,7 @@
 
 {% block menu %}
     <nav class="cyan darken-1">
-        <ul id="slide-out" class="left-bar side-nav fixed">
+        <ul id="slide-out" class="left-bar sidenav sidenav-fixed">
             {% block logo %}
                 <li class="logo border-bottom">
                     {% if is_granted('LIST_ENTRIES') %}
@@ -82,7 +82,7 @@
         <div class="nav-panels">
             <div class="nav-panel-actions nav-panel-item">
                 <div class="nav-panel-top">
-                    <button data-activates="slide-out" class="nav-panel-menu button-collapse"><i class="material-icons">menu</i></button>
+                    <a href="#" data-target="slide-out" class="nav-panel-menu sidenav-trigger"><i class="material-icons">menu</i></a>
                     <h1 class="left action">
                         {% block title %}
                         {% endblock %}
@@ -107,17 +107,17 @@
                     </li>
                     {% endif %}
                     <li id="button_filters" class="button-filters">
-                        <a class="nav-panel-menu button-collapse-right tooltipped js-filters-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-activates="filters">
+                        <a class="nav-panel-menu sidenav-trigger tooltipped js-filters-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-target="filters">
                             <i class="material-icons">filter_list</i>
                         </a>
                     </li>
                     <li id="button_export" class="button-export">
-                        <a class="nav-panel-menu button-collapse-right tooltipped js-export-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.export'|trans }}" href="#" data-activates="export">
+                        <a class="nav-panel-menu sidenav-trigger tooltipped js-export-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.export'|trans }}" href="#" data-target="export">
                             <i class="material-icons">file_download</i>
                         </a>
                     </li>
                     <li class="bold">
-                        <a class="wave-effect tooltipped dropdown-button" data-beloworigin="true" data-constrainwidth="false" data-activates="dropdown-account" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.account'|trans }}" href="#" id="news_menu">
+                        <a class="wave-effect tooltipped dropdown-trigger" data-covertrigger="false" data-constrainwidth="false" data-target="dropdown-account" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.account'|trans }}" href="#" id="news_menu">
                             <i class="material-icons" id="news_link">account_circle</i>
                         </a>
                     </li>

@@ -24,9 +24,11 @@
                 <input type="password" id="password" name="_password" />
             </div>
 
-            <div class="input-field col s12">
-                <input type="checkbox" id="remember_me" name="_remember_me" checked />
-                <label for="remember_me">{{ 'security.login.keep_logged_in'|trans }}</label>
+            <div class="input-field col s12 with-checkbox">
+                <label for="remember_me">
+                    <input type="checkbox" id="remember_me" name="_remember_me" checked/>
+                    <span>{{ 'security.login.keep_logged_in'|trans }}</span>
+                </label>
             </div>
 
         </div>

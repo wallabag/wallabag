@@ -15,9 +15,9 @@ updates:
       patterns:
         - "*fontsource*"
   ignore:
-  - dependency-name: materialize-css
+  - dependency-name: @materializecss/materialize
     versions:
-    - "> 0.98.2"
+    - "> 1.2.2"
 - package-ecosystem: composer
   directory: "/"
   schedule:

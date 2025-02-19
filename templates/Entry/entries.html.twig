@@ -86,7 +86,7 @@
     {% endif %}
 
     <!-- Export -->
-    <div id="export" class="side-nav right-aligned">
+    <div id="export" class="sidenav">
     {% set current_tag = null %}
     {% if tag is defined %}
         {% set current_tag = tag.slug %}
@@ -111,7 +111,7 @@
 
     <!-- Filters -->
     {% if form is not null and is_granted('LIST_ENTRIES') %}
-    <div id="filters" class="side-nav right-aligned">
+    <div id="filters" class="sidenav">
         <form action="{{ path('all') }}">
 
             <h4 class="center">{{ 'entry.filters.title'|trans }}</h4>
@@ -128,28 +128,38 @@
                 </div>
 
                 <div class="input-field col s6 with-checkbox">
-                    {{ form_widget(form.isArchived) }}
-                    {{ form_label(form.isArchived) }}
+                    <label for="{{ form.isArchived.vars.id }}">
+                        {{ form_widget(form.isArchived) }}
+                        <span>{{ form.isArchived.vars.label|trans }}</span>
+                    </label>
                 </div>
 
                 <div class="input-field col s6 with-checkbox">
-                    {{ form_widget(form.isStarred) }}
-                    {{ form_label(form.isStarred) }}
+                    <label for="{{ form.isStarred.vars.id }}">
+                        {{ form_widget(form.isStarred) }}
+                        <span>{{ form.isStarred.vars.label|trans }}</span>
+                    </label>
                 </div>
 
                 <div class="input-field col s12 with-checkbox">
-                    {{ form_widget(form.isUnread) }}
-                    {{ form_label(form.isUnread) }}
+                    <label for="{{ form.isUnread.vars.id }}">
+                        {{ form_widget(form.isUnread) }}
+                        <span>{{ form.isUnread.vars.label|trans }}</span>
+                    </label>
                 </div>
 
                 <div class="input-field col s12 with-checkbox">
-                    {{ form_widget(form.isAnnotated) }}
-                    {{ form_label(form.isAnnotated) }}
+                    <label for="{{ form.isAnnotated.vars.id }}">
+                        {{ form_widget(form.isAnnotated) }}
+                        <span>{{ form.isAnnotated.vars.label|trans }}</span>
+                    </label>
                 </div>
 
                 <div class="input-field col s12 with-checkbox">
-                    {{ form_widget(form.isNotParsed) }}
-                    {{ form_label(form.isNotParsed) }}
+                    <label for="{{ form.isNotParsed.vars.id }}">
+                        {{ form_widget(form.isNotParsed) }}
+                        <span>{{ form.isNotParsed.vars.label|trans }}</span>
+                    </label>
                 </div>
 
                 <div class="col s12">
@@ -157,8 +167,10 @@
                 </div>
 
                 <div class="input-field col s12 with-checkbox">
-                    {{ form_widget(form.previewPicture) }}
-                    {{ form_label(form.previewPicture) }}
+                    <label for="{{ form.previewPicture.vars.id }}">
+                        {{ form_widget(form.previewPicture) }}
+                        <span>{{ form.previewPicture.vars.label|trans }}</span>
+                    </label>
                 </div>
 
                 <div class="col s12">
@@ -166,8 +178,10 @@
                 </div>
 
                 <div class="input-field col s12 with-checkbox">
-                    {{ form_widget(form.isPublic) }}
-                    {{ form_label(form.isPublic) }}
+                    <label for="{{ form.isPublic.vars.id }}">
+                        {{ form_widget(form.isPublic) }}
+                        <span>{{ form.isPublic.vars.label|trans }}</span>
+                    </label>
                 </div>
 
                 <div class="col s12">
@@ -209,12 +223,12 @@
                     {{ form_label(form.createdAt) }}
                 </div>
 
-                <div class="input-field col s6">
-                    {{ form_widget(form.createdAt.left_date, {'type': 'date', 'attr': {'class': 'datepicker', 'data-value': form.createdAt.left_date.vars.value}}) }}
+                <div class="input-field col s12">
+                    {{ form_widget(form.createdAt.left_date, {'type': 'date', 'attr': {'data-value': form.createdAt.left_date.vars.value}}) }}
                     <label for="entry_filter_createdAt_left_date" class="active">{{ 'entry.filters.created_at.from'|trans }}</label>
                 </div>
-                <div class="input-field col s6">
-                    {{ form_widget(form.createdAt.right_date, {'type': 'date', 'attr': {'class': 'datepicker', 'data-value': form.createdAt.right_date.vars.value}}) }}
+                <div class="input-field col s12">
+                    {{ form_widget(form.createdAt.right_date, {'type': 'date', 'attr': {'data-value': form.createdAt.right_date.vars.value}}) }}
                     <label for="entry_filter_createdAt_right_date" class="active">{{ 'entry.filters.created_at.to'|trans }}</label>
                 </div>
 

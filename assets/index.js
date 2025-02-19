@@ -1,8 +1,8 @@
 import $ from 'jquery';
 
 /* Materialize imports */
-import 'materialize-css/dist/css/materialize.css';
-import 'materialize-css/dist/js/materialize';
+import '@materializecss/materialize/dist/css/materialize.css';
+import '@materializecss/materialize/dist/js/materialize';
 
 /* Annotations */
 import annotator from 'annotator';
@@ -272,22 +272,23 @@ const articleScroll = () => {
 };
 
 $(document).ready(() => {
-  // sideNav
-  $('.button-collapse').sideNav();
-  $('select').material_select();
-  $('.collapsible').collapsible({
+  // sidenav
+  $('.sidenav').sidenav();
+  $('select').formSelect();
+  $('.collapsible[data-collapsible="accordion"]').collapsible();
+  $('.collapsible[data-collapsible="expandable"]').collapsible({
     accordion: false,
-  });
-  $('.datepicker').pickadate({
-    selectMonths: true,
-    selectYears: 15,
-    formatSubmit: 'yyyy-mm-dd',
-    hiddenName: false,
-    format: 'yyyy-mm-dd',
-    container: 'body',
   });
 
   $('.dropdown-trigger').dropdown({ hover: false });
+  $('.dropdown-trigger[data-covertrigger="false"][data-constrainwidth="false"]').dropdown({
+    hover: false,
+    coverTrigger: false,
+    constrainWidth: false,
+  });
+
+  $('.tabs').tabs();
+  $('.tooltipped').tooltip();
 
   initFilters();
   initExport();
@@ -306,7 +307,7 @@ $(document).ready(() => {
     $('.nav-panel-add-tag').toggle(100);
     $('.nav-panel-menu').addClass('hidden');
     if (window.innerWidth < mobileMaxWidth) {
-      $('.side-nav').sideNav('hide');
+      $('.sidenav').sidenav('close');
     }
     $('#tag_label').focus();
     return false;
