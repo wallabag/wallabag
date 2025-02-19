@@ -32,7 +32,7 @@ function initFilters() {
   // no display if filters not available
   if ($('div').is('#filters')) {
     $('#button_filters').show();
-    $('.js-filters-action').sidenav({ edge: 'right' });
+    $('#filters.sidenav').sidenav({ edge: 'right' });
     $('#clear_form_filters').on('click', () => {
       $('#filters input').val('');
       $('#filters :checked').removeAttr('checked');
@@ -46,7 +46,7 @@ function initExport() {
   // no display if export not available
   if ($('div').is('#export')) {
     $('#button_export').show();
-    $('.js-export-action').sidenav({ edge: 'right' });
+    $('#export.sidenav').sidenav({ edge: 'right' });
   }
 }
 
