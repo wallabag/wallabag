@@ -110,11 +110,8 @@
                                 <div class="input-field col s12">
                                     <h5>{{ 'config.form_settings.android_configuration'|trans }}</h5>
                                     <a href="wallabag://{{ app.user.username }}@{{ wallabag_url }}" class="waves-effect waves-light btn hide-on-large-only">{{ 'config.form_settings.android_instruction'|trans }}</a>
-                                    <img id="androidQrcode" class="hide-on-med-and-down" alt="{{ 'config.otp.app.qrcode_label'|trans }}" />
+                                    <img class="hide-on-med-and-down jr-qrcode" alt="{{ 'config.otp.app.qrcode_label'|trans }}" data-url="wallabag://{{ app.user.username }}@{{ wallabag_url }}" />
                                 </div>
-                                <script>
-                                    document.getElementById('androidQrcode').src = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');
-                                </script>
                             </div>
 
                             <h5>{{ 'config.tab_menu.article_display'|trans }}</h5>

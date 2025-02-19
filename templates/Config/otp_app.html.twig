@@ -15,10 +15,7 @@
                             <p>{{ 'config.otp.app.two_factor_code_description_2'|trans }}</p>
 
                             <p>
-                                <img id="2faQrcode" class="hide-on-med-and-down" />
-                                <script>
-                                    document.getElementById('2faQrcode').src = jrQrcode.getQrBase64('{{ qr_code|raw }}');
-                                </script>
+                                <img class="hide-on-med-and-down jr-qrcode" data-url="{{ qr_code|raw }}" />
                             </p>
 
                             <p>
