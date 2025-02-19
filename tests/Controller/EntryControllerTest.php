@@ -1561,7 +1561,7 @@ class EntryControllerTest extends WallabagTestCase
     {
         return [
             'ru' => [
-                'https://ru.wikipedia.org/wiki/Открытое_программное_обеспечение',
+                'https://ru.wikipedia.org/wiki/%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9_%D1%8F%D0%B7%D1%8B%D0%BA',
                 'ru',
             ],
             'fr' => [
@@ -1569,23 +1569,23 @@ class EntryControllerTest extends WallabagTestCase
                 'fr',
             ],
             'de' => [
-                'https://www.bild.de/politik/ausland/theresa-may/wahlbeben-grossbritannien-analyse-52108924.bild.html',
+                'https://de.wikipedia.org/wiki/Deutsche_Sprache',
                 'de',
             ],
             'it' => [
-                'https://www.ansa.it/sito/notizie/mondo/europa/2017/06/08/voto-gb-seggi-aperti-misure-sicurezza-rafforzate_0cb71f7f-e23b-4d5f-95ca-bc12296419f0.html',
+                'https://it.wikipedia.org/wiki/Lingua_italiana',
                 'it',
             ],
-            'zh_CN' => [
-                'http://tuijian.hao123.com/tuijian/?__noscript__-=1',
-                'zh_CN',
+            'zh' => [
+                'https://zh.wikipedia.org/wiki/%E7%8F%BE%E4%BB%A3%E6%A8%99%E6%BA%96%E6%BC%A2%E8%AA%9E',
+                'zh',
             ],
             'pt_BR' => [
-                'https://esportes.r7.com/lance/futebol/victor-hugo-e-matheus-franca-devem-desfalcar-flamengo-no-carioca-22112022/',
+                'https://www.monpetitbresil.com/pages/quem-somos',
                 'pt_BR',
             ],
-            'es-ES' => [
-                'https://elpais.com/internacional/2022-11-03/ultima-hora-de-la-guerra-entre-rusia-y-ucrania-hoy-en-directo.html',
+            'es' => [
+                'https://es.wikipedia.org/wiki/Idioma_espa%C3%B1ol',
                 'es',
             ],
         ];
