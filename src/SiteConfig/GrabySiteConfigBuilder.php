@@ -85,6 +85,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
             'notLoggedInXpath' => $config->not_logged_in_xpath ?: null,
             'username' => $credentials['username'],
             'password' => $credentials['password'],
+            'httpHeaders' => $config->http_header,
         ];
 
         $config = new SiteConfig($parameters);
