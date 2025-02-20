@@ -76,18 +76,6 @@ config:
             400_word: 'Posso ler ~400 palavras por minuto'
         pocket_consumer_key_label: 'Chave do consumidor do Pocket para importar conteúdo'
         help_pocket_consumer_key: Necessário para importar do Pocket. Pode criá-lo na sua conta do Pocket.
-    form_rss:
-        description: 'Feeds RSS providos pelo wallabag permitem que você leia seus artigos salvos em seu leitor de RSS favorito. Você precisa gerar um token primeiro.'
-        token_label: 'Token RSS'
-        no_token: 'Nenhum Token'
-        token_create: 'Criar seu token'
-        token_reset: 'Gerar novamente seu token'
-        rss_links: 'Links RSS'
-        rss_link:
-            unread: 'Não lido'
-            starred: 'Destacado'
-            archive: 'Arquivado'
-        rss_limit: 'Número de itens no feed'
     form_user:
         two_factor_description: 'Habilitar autenticação de dois passos significa que você receberá um e-mail com um código a cada nova conexão desconhecida.'
         name_label: 'Nome'

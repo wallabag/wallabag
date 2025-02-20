@@ -251,14 +251,6 @@ config:
         old_password_label: Aktuální heslo
         description: Zde můžete změnit své heslo. Vaše nové heslo by mělo být alespoň 8 znaků dlouhé.
         repeat_new_password_label: Zopakujte nové heslo
-    form_rss:
-        rss_limit: Počet položek v novinkovém kanálu
-        rss_link:
-            all: Všechny
-            archive: Archivované
-            unread: Nepřečtené
-        token_create: Vytvořit váš token
-        no_token: Žádný token
     tab_menu:
         rss: RSS
         settings: Nastavení

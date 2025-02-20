@@ -100,19 +100,6 @@ config:
         lineheight_label: Wysokość linii
         maxwidth_label: Maksymalna szerokość
         help_fontsize: Możesz wybrać rozmiar czcionek do użycia.
-    form_rss:
-        description: Kanały RSS prowadzone przez wallabag pozwalają Ci na czytanie twoich zapisanych artykułów w twoim ulubionym czytniku RSS. Musisz najpierw wygenerować tokena.‌
-        token_label: Token RSS
-        no_token: Brak tokena
-        token_create: Stwórz tokena
-        token_reset: Zresetuj swojego tokena
-        rss_links: RSS links
-        rss_link:
-            unread: Nieprzeczytane
-            starred: Oznaczone gwiazdką
-            archive: Archiwum
-            all: Wszystkie
-        rss_limit: Link do RSS
     form_user:
         two_factor_description: Włączenie autoryzacji dwuetapowej oznacza, że będziesz otrzymywał maile z kodem przy każdym nowym, niezaufanym połączeniu.
         name_label: Nazwa

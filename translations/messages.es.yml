@@ -99,20 +99,7 @@ config:
         lineheight_label: Interlineación
         maxwidth_label: Anchura máxima
         help_display_thumbnails: Puedes decidir si deseas mostrar o no las miniaturas de los artículos. Útil para conexiones lentas.
-        display_thumbnails_label: Mostrar las miniaturas de los artículos (útil para conexiones lentas).
-    form_rss:
-        description: 'Los feeds RSS proporcionados por wallabag permiten leer los artículos guardados con su lector RSS favorito. Primero necesitas generar un token.'
-        token_label: 'Token RSS'
-        no_token: 'Sin token'
-        token_create: 'Crear un token'
-        token_reset: 'Reiniciar el token'
-        rss_links: 'URLs de feeds RSS'
-        rss_link:
-            unread: 'Sin leer'
-            starred: 'Favoritos'
-            archive: 'Archivados'
-            all: Todos
-        rss_limit: 'Número de artículos en el feed RSS'
+        display_thumbnails_label: Mostrar las miniaturas de los artículos (útil para conexiones lentas). 'Número de artículos en el feed RSS'
     form_user:
         two_factor_description: "Activar la autenticación en dos pasos significa que recibirás un código por correo electrónico en cada nueva conexión que no sea de confianza."
         name_label: 'Nombre'
