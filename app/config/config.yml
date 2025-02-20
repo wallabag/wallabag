@@ -60,6 +60,7 @@ twig:
     form_themes:
         - "@SpiriitFormFilter/Form/form_div_layout.html.twig"
     globals:
+        wallabag_url: '%domain_name%'
         registration_enabled: '%fosuser_registration%'
 
 # Doctrine Configuration

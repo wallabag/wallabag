@@ -63,8 +63,7 @@ TWIG;
             $this->twig,
             'nobody@test.io',
             'wallabag test',
-            'http://0.0.0.0/support',
-            'http://0.0.0.0/'
+            'http://0.0.0.0/support'
         );
 
         $authCodeMailer->sendAuthCode($user);
