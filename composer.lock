@@ -16297,16 +16297,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.69.0",
+            "version": "v3.69.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "630a59448c00729bc235d5e95cfedefeaca37523"
+                "reference": "13b0c0eede38c11cd674b080f2b485d0f14ffa9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/630a59448c00729bc235d5e95cfedefeaca37523",
-                "reference": "630a59448c00729bc235d5e95cfedefeaca37523",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/13b0c0eede38c11cd674b080f2b485d0f14ffa9f",
+                "reference": "13b0c0eede38c11cd674b080f2b485d0f14ffa9f",
                 "shasum": ""
             },
             "require": {
@@ -16388,7 +16388,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.69.0"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.69.1"
             },
             "funding": [
                 {
@@ -16396,7 +16396,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-14T16:19:23+00:00"
+            "time": "2025-02-18T23:57:43+00:00"
         },
         {
             "name": "friendsoftwig/twigcs",
@@ -18078,23 +18078,24 @@
         },
         {
             "name": "react/promise",
-            "version": "v2.11.0",
+            "version": "v3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/promise.git",
-                "reference": "1a8460931ea36dc5c76838fec5734d55c88c6831"
+                "reference": "8a164643313c71354582dc850b42b33fa12a4b63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/promise/zipball/1a8460931ea36dc5c76838fec5734d55c88c6831",
-                "reference": "1a8460931ea36dc5c76838fec5734d55c88c6831",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/8a164643313c71354582dc850b42b33fa12a4b63",
+                "reference": "8a164643313c71354582dc850b42b33fa12a4b63",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0"
+                "php": ">=7.1.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^9.6 || ^5.7 || ^4.8.36"
+                "phpstan/phpstan": "1.10.39 || 1.4.10",
+                "phpunit/phpunit": "^9.6 || ^7.5"
             },
             "type": "library",
             "autoload": {
@@ -18138,7 +18139,7 @@
             ],
             "support": {
                 "issues": "https://github.com/reactphp/promise/issues",
-                "source": "https://github.com/reactphp/promise/tree/v2.11.0"
+                "source": "https://github.com/reactphp/promise/tree/v3.2.0"
             },
             "funding": [
                 {
@@ -18146,7 +18147,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2023-11-16T16:16:50+00:00"
+            "time": "2024-05-24T10:39:05+00:00"
         },
         {
             "name": "react/socket",
@@ -19950,9 +19951,9 @@
         "ext-tokenizer": "*",
         "ext-xml": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "platform-overrides": {
         "php": "7.4.29"
     },
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
