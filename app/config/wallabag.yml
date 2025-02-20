@@ -177,3 +177,4 @@ parameters:
         - 'Oswald'
     wallabag.allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain', 'text/csv', 'text/html']
     wallabag.resource_dir: "%kernel.project_dir%/web/uploads/import"
+    wallabag.user_agent: "Wallabag (Symfony HttpClient/5)"

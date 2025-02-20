@@ -11,11 +11,13 @@ class LoginFormAuthenticator
 {
     private HttpBrowser $browser;
     private ExpressionLanguage $expressionLanguage;
+    private string $defaultUserAgent;
 
-    public function __construct(HttpBrowser $browser, AuthenticatorProvider $authenticatorProvider)
+    public function __construct(HttpBrowser $browser, AuthenticatorProvider $authenticatorProvider, string $defaultUserAgent)
     {
         $this->browser = $browser;
         $this->expressionLanguage = new ExpressionLanguage(null, [$authenticatorProvider]);
+        $this->defaultUserAgent = $defaultUserAgent;
     }
 
     /**
@@ -30,7 +32,7 @@ class LoginFormAuthenticator
             $siteConfig->getPasswordField() => $siteConfig->getPassword(),
         ] + $this->getExtraFields($siteConfig);
 
-        $this->browser->request('POST', $siteConfig->getLoginUri(), $postFields);
+        $this->browser->request('POST', $siteConfig->getLoginUri(), $postFields, [], ['HTTP_user-agent' => $this->defaultUserAgent]);
 
         return $this;
     }
