@@ -99,7 +99,7 @@ config:
         lineheight_label: Interlineación
         maxwidth_label: Anchura máxima
         help_display_thumbnails: Puedes decidir si deseas mostrar o no las miniaturas de los artículos. Útil para conexiones lentas.
-        display_thumbnails_label: Mostrar las miniaturas de los artículos (útil para conexiones lentas). 'Número de artículos en el feed RSS'
+        display_thumbnails_label: Mostrar las miniaturas de los artículos (útil para conexiones lentas).'
     form_user:
         two_factor_description: "Activar la autenticación en dos pasos significa que recibirás un código por correo electrónico en cada nueva conexión que no sea de confianza."
         name_label: 'Nombre'
