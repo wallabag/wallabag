@@ -78,19 +78,6 @@ config:
         help_reading_speed: A wallabag kiszámítja az elolvasási időt minden egyes cikkre. Itt meghatározhatja, ennek a listának köszönhetően, hogy mennyire gyors vagy lassú olvasó. A wallabag újra ki fogja számítani az elolvasási időt minden egyes cikkre.
         help_language: Megváltoztathatja a wallabag felületének a nyelvét.
         help_pocket_consumer_key: A Pocket importálásához szükséges. Ezt a Pocket fiókodban hozhatod létre.
-    form_rss:
-        description: A wallabag által biztosított RSS-hírfolyam lehetővé teszi hogy az elmentett cikkeit a kedvenc RSS hírolvasójában olvashassa el. Ehhez először viszont létre kell hoznia egy hozzáférési kulcsot.
-        token_label: RSS hozzáférési kulcs
-        no_token: Nincs hozzáférési kulcs
-        token_create: Hozzáférési kulcsának létrehozása
-        token_reset: Új hozzáférési kulcs létrehozása
-        rss_links: RSS linkek
-        rss_link:
-            unread: Olvasatlan
-            starred: Csillagozott
-            archive: Archivált
-            all: Összes
-        rss_limit: Tételek száma a hírcsatornában
     form_user:
         two_factor_description: A kétfaktoros hitelesítés engedélyezésével egy biztonsági kódot tartalmazó e-mailt fog kapni minden új, nem azonosítható eszközről történő bejelentkezés esetén.
         name_label: Név

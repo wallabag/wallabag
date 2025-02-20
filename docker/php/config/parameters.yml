@@ -32,8 +32,6 @@ parameters:
 
     from_email: ${FROM_EMAIL:-wallabag@example.com}
 
-    rss_limit: 50
-
     # RabbitMQ processing
     rabbitmq_host: ${RABBITMQ_HOST:-rabbitmq}
     rabbitmq_port: ${RABBITMQ_PORT:-5672}

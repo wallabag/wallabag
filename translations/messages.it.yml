@@ -88,19 +88,6 @@ config:
         help_reading_speed: wallabag calcola un tempo di lettura per ogni articolo. Puoi definire qui, grazie a questa lista, se sei un lettore lento o veloce. wallabag ricalcolerà la velocità di lettura per ogni articolo.
         help_language: Puoi cambiare la lingua dell'interfaccia di wallabag.
         help_pocket_consumer_key: Richiesta per importare da Pocket. La puoi creare nel tuo account Pocket.
-    form_rss:
-        description: I feed RSS generati da wallabag ti permettono di leggere i tuoi contenuti salvati con il tuo lettore di RSS preferito. Prima, devi generare un token.
-        token_label: Token RSS
-        no_token: Nessun token
-        token_create: Crea il tuo token
-        token_reset: Rigenera il tuo token
-        rss_links: Collegamenti RSS
-        rss_link:
-            unread: Non letti
-            starred: Preferiti
-            archive: Archiviati
-            all: Tutti
-        rss_limit: Numero di elementi nel feed
     form_user:
         two_factor_description: Abilitando l'autenticazione a due fattori riceverai un'e-mail con un codice per ogni nuova connesione non verificata.
         name_label: Nome

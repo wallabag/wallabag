@@ -55,19 +55,6 @@ config:
             googleTwoFactor_label: Gebruik maken van OTP app (open de app, zoals Google Authenticator, Authy of FreeOTP, om een eenmalige code te krijgen)
             emailTwoFactor_label: Gebruik maken van email (ontvang een code per mail)
         login_label: Login (kan niet veranderd worden)
-    form_rss:
-        rss_limit: Aantal items in de lijst
-        rss_link:
-            all: Alles
-            archive: Gearchiveerd
-            starred: Gemarkeerd
-            unread: Ongelezen
-        rss_links: RSS-koppelingen
-        token_reset: Token opnieuw genereren
-        token_create: Creëer uw token
-        no_token: Geen token
-        token_label: RSS-token
-        description: Met RSS-feeds van wallabag kunt u uw opgeslagen artikelen lezen met uw favoriete RSS-lezer. U moet wel eerst een token genereren.
     form_rules:
         faq:
             tagging_rules_definition_description: Dit zijn regels die door Wallabag worden gebruikt om automatisch nieuwe items te labelen. <br /> Elke keer dat een nieuw item wordt toegevoegd, worden alle labelregels gebruikt om de labels toe te voegen die je hebt geconfigureerd, waardoor je de moeite van het handmatig classificeren van je items bespaart.

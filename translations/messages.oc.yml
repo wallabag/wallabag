@@ -100,19 +100,6 @@ config:
         fontsize_label: Talha de polissa
         lineheight_label: Nautor de linha
         maxwidth_label: Largor maximala
-    form_rss:
-        description: Los fluxes RSS fornits per wallabag vos permeton de legir vòstres articles salvagardats dins vòstre lector de fluxes preferit. Per los poder emplegar, vos cal, d'en primièr crear un geton.
-        token_label: Geton RSS
-        no_token: Pas cap de geton generat
-        token_create: Creatz vòstre geton
-        token_reset: Reïnicializatz vòstre geton
-        rss_links: URLs de vòstres fluxes RSS
-        rss_link:
-            unread: Pas legits
-            starred: Favorits
-            archive: Legits
-            all: Totes
-        rss_limit: Nombre d'articles dins un flux RSS
     form_user:
         two_factor_description: Activar l'autentificacion en dos temps vòl dire que recebretz un còdi per corrièl per cada novèla connexion pas aprovada.
         name_label: Nom

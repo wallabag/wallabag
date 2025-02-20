@@ -146,19 +146,6 @@ about:
         bug_reports: Izvještaji o greškama
     page_title: Informacije
 config:
-    form_rss:
-        rss_limit: Broj stavki u feedu
-        rss_link:
-            unread: Nepročitano
-            archive: Arhivirano
-            starred: Favorizirano
-            all: Sve
-        token_label: RSS token
-        description: RSS feedovi koje pruža wallabag dozvoljavaju ti čitati tvoje spremljene članke s tvojim omiljenim čitačem RSS-a. Najprije moraš generirati token.
-        no_token: Nema tokena
-        token_reset: Ponovo generiraj token
-        token_create: Stvori token
-        rss_links: RSS poveznice
     form_rules:
         faq:
             variable_description:
