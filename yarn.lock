@@ -1056,10 +1056,10 @@
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.27.8.tgz#6667fac16c436b5434a387a34dedb013198f6e6e"
   integrity sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==
 
-"@symfony/webpack-encore@^5.0.1":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@symfony/webpack-encore/-/webpack-encore-5.0.1.tgz#c424baf820ecefc8f8e3b22f8e9778dd3f039eaf"
-  integrity sha512-2l9ssZCJDMKOXi1iggjn7HEaErdYvITvuheLvtXHAgR2mauV2FiE/pNFS+Bqz2sbj1g4pPcqJIl5AwFE9etOgg==
+"@symfony/webpack-encore@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@symfony/webpack-encore/-/webpack-encore-5.1.0.tgz#d5664153136959e3baf3e248c9b55350c2c81a6d"
+  integrity sha512-uSaRnssJj+ZHH9UcHRGI8kQzFb5hfCiPtBwP15vuKH5hTPGeJjQouDDo4UaPB3LuSYJXudKFiSDAnj/4d2z4aQ==
   dependencies:
     "@nuxt/friendly-errors-webpack-plugin" "^2.5.1"
     babel-loader "^9.1.3"
