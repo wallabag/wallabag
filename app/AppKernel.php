@@ -77,6 +77,7 @@ class AppKernel extends Kernel
 
         $loader->load(function (ContainerBuilder $container) {
             $this->processDatabaseParameters($container);
+            $this->defineRedisUrlEnvVar($container);
         });
     }
 
@@ -111,5 +112,30 @@ class AppKernel extends Kernel
         $container->setParameter('database_password', (string) $container->getParameter('database_password'));
         $container->setParameter('database_port', (string) $container->getParameter('database_port'));
         $container->setParameter('database_socket', (string) $container->getParameter('database_socket'));
+    }
+
+    private function defineRedisUrlEnvVar(ContainerBuilder $container)
+    {
+        $scheme = $container->getParameter('redis_scheme');
+        $host = $container->getParameter('redis_host');
+        $port = $container->getParameter('redis_port');
+        $path = $container->getParameter('redis_path');
+        $password = $container->getParameter('redis_password');
+
+        $url = $scheme . '://';
+
+        if ($password) {
+            $url .= $password . '@';
+        }
+
+        $url .= $host;
+
+        if ($port) {
+            $url .= ':' . $port;
+        }
+
+        $url .= '/' . ltrim($path, '/');
+
+        $container->setParameter('env(REDIS_URL)', $url);
     }
 }

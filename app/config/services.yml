@@ -248,12 +248,7 @@ services:
 
     Predis\Client:
         arguments:
-            $parameters:
-                scheme: '%redis_scheme%'
-                host: '%redis_host%'
-                port: '%redis_port%'
-                path: '%redis_path%'
-                password: '%redis_password%'
+            $parameters: '%env(REDIS_URL)%'
 
     Wallabag\Event\Subscriber\SQLiteCascadeDeleteSubscriber:
         tags:
