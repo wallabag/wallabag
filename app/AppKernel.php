@@ -78,6 +78,7 @@ class AppKernel extends Kernel
         $loader->load(function (ContainerBuilder $container) {
             $this->processDatabaseParameters($container);
             $this->defineRedisUrlEnvVar($container);
+            $this->defineRabbitMqUrlEnvVar($container);
         });
     }
 
@@ -137,5 +138,21 @@ class AppKernel extends Kernel
         $url .= '/' . ltrim($path, '/');
 
         $container->setParameter('env(REDIS_URL)', $url);
+    }
+
+    private function defineRabbitMqUrlEnvVar(ContainerBuilder $container)
+    {
+        $host = $container->getParameter('rabbitmq_host');
+        $port = $container->getParameter('rabbitmq_port');
+        $user = $container->getParameter('rabbitmq_user');
+        $password = $container->getParameter('rabbitmq_password');
+
+        $url = 'amqp://' . $user . ':' . $password . '@' . $host;
+
+        if ($port) {
+            $url .= ':' . $port;
+        }
+
+        $container->setParameter('env(RABBITMQ_URL)', $url);
     }
 }

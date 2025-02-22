@@ -239,12 +239,8 @@ rulerz:
 old_sound_rabbit_mq:
     connections:
         default:
-            host:     "%rabbitmq_host%"
-            port:     "%rabbitmq_port%"
-            user:     "%rabbitmq_user%"
-            password: "%rabbitmq_password%"
-            vhost:    /
-            lazy:     true
+            url: "%env(RABBITMQ_URL)%"
+            lazy: true
     producers:
         import_pocket:
             connection: default
