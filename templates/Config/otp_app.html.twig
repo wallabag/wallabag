@@ -15,7 +15,7 @@
                             <p>{{ 'config.otp.app.two_factor_code_description_2'|trans }}</p>
 
                             <p>
-                                <img class="hide-on-med-and-down jr-qrcode" data-url="{{ qr_code|raw }}" />
+                                <img data-controller="qrcode" data-qrcode-url-value="{{ qr_code|raw }}" class="hide-on-med-and-down" />
                             </p>
 
                             <p>
