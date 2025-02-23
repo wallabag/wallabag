@@ -27,7 +27,7 @@ import './js/highlight';
 
 /* Tools */
 import {
-  savePercent, retrievePercent, initExport, initFilters, initRandom, initPreviewText,
+  savePercent, retrievePercent, initExport, initFilters, initPreviewText,
 } from './js/tools';
 
 /* Import shortcuts */
@@ -293,7 +293,6 @@ $(document).ready(() => {
 
   initFilters();
   initExport();
-  initRandom();
   stickyNav();
   articleScroll();
   initPreviewText();

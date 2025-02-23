@@ -1,5 +1,8 @@
 {% extends "layout.html.twig" %}
 
+{% set has_filters = form is not null %}
+{% set has_exports = craue_setting('export_epub') or craue_setting('export_pdf') or craue_setting('export_json') or craue_setting('export_csv') or craue_setting('export_txt') or craue_setting('export_xml') or craue_setting('export_md') %}
+
 {% block head %}
     {{ parent() }}
     {% if tag is defined and app.user.config.feedToken %}
@@ -16,6 +19,30 @@
         {% set filter = searchTerm %}
     {% endif %}
     {% include "Entry/_title.html.twig" with {'filter': filter} %}
+{% endblock %}
+
+{% block nav_panel_extra_actions %}
+    {% if active_route %}
+        <li>
+            <a class="waves-effect tooltipped js-random-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', {'type': active_route}) }}">
+                <i class="material-icons">casino</i>
+            </a>
+        </li>
+    {% endif %}
+    {% if has_filters %}
+        <li class="button-filters">
+            <a class="nav-panel-menu sidenav-trigger tooltipped js-filters-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-target="filters">
+                <i class="material-icons">filter_list</i>
+            </a>
+        </li>
+    {% endif %}
+    {% if has_exports %}
+        <li class="button-export">
+            <a class="nav-panel-menu sidenav-trigger tooltipped js-export-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.export'|trans }}" href="#" data-target="export">
+                <i class="material-icons">file_download</i>
+            </a>
+        </li>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -86,7 +113,7 @@
     {% endif %}
 
     <!-- Export -->
-    {% if is_granted('EXPORT_ENTRIES') %}
+    {% if has_exports and is_granted('EXPORT_ENTRIES') %}
         <div id="export" class="sidenav">
         {% set current_tag = null %}
         {% if tag is defined %}
@@ -112,7 +139,7 @@
     {% endif %}
 
     <!-- Filters -->
-    {% if form is not null and is_granted('LIST_ENTRIES') %}
+    {% if has_filters %}
     <div id="filters" class="sidenav">
         <form action="{{ path('all') }}">
 
