@@ -31,20 +31,6 @@ function retrievePercent(id, resized) {
   return true;
 }
 
-function initFilters() {
-  // no display if filters not available
-  if ($('div').is('#filters')) {
-    $('#filters.sidenav').sidenav({ edge: 'right' });
-  }
-}
-
-function initExport() {
-  // no display if export not available
-  if ($('div').is('#export')) {
-    $('#export.sidenav').sidenav({ edge: 'right' });
-  }
-}
-
 function initPreviewText() {
   // no display if preview_text not available
   if ($('div').is('#preview-article')) {
@@ -64,7 +50,5 @@ function initPreviewText() {
 export {
   savePercent,
   retrievePercent,
-  initExport,
-  initFilters,
   initPreviewText,
 };
