@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -136,6 +137,7 @@ class TagController extends AbstractController
      * @param int $page
      *
      * @Route("/tag/list/{slug}/{page}", name="tag_entries", methods={"GET"}, defaults={"page" = "1"})
+     * @IsGranted("LIST_ENTRIES")
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      *
      * @return Response
