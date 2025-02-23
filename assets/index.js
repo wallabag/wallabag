@@ -27,7 +27,7 @@ import './js/highlight';
 
 /* Tools */
 import {
-  savePercent, retrievePercent, initExport, initFilters, initPreviewText,
+  savePercent, retrievePercent, initPreviewText,
 } from './js/tools';
 
 /* Import shortcuts */
@@ -273,7 +273,10 @@ const articleScroll = () => {
 
 $(document).ready(() => {
   // sidenav
-  $('.sidenav').sidenav();
+  document.querySelectorAll('.sidenav').forEach((element) => {
+    $(element).sidenav({ edge: element.getAttribute('data-edge') ?? 'left' });
+  });
+
   $('select').formSelect();
   $('.collapsible[data-collapsible="accordion"]').collapsible();
   $('.collapsible[data-collapsible="expandable"]').collapsible({
@@ -291,8 +294,6 @@ $(document).ready(() => {
   $('.tooltipped').tooltip();
   $('.fixed-action-btn').floatingActionButton();
 
-  initFilters();
-  initExport();
   stickyNav();
   articleScroll();
   initPreviewText();
