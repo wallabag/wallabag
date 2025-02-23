@@ -1,3 +1,5 @@
+import './bootstrap.js';
+
 import $ from 'jquery';
 
 /* Materialize imports */
