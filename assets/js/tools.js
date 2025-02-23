@@ -31,7 +31,6 @@ function retrievePercent(id, resized) {
 function initFilters() {
   // no display if filters not available
   if ($('div').is('#filters')) {
-    $('#button_filters').show();
     $('#filters.sidenav').sidenav({ edge: 'right' });
     $('#clear_form_filters').on('click', () => {
       $('#filters input').val('');
@@ -45,15 +44,7 @@ function initFilters() {
 function initExport() {
   // no display if export not available
   if ($('div').is('#export')) {
-    $('#button_export').show();
     $('#export.sidenav').sidenav({ edge: 'right' });
-  }
-}
-
-function initRandom() {
-  // no display if export (ie: entries) not available
-  if ($('div').is('#export')) {
-    $('#button_random').show();
   }
 }
 
@@ -78,6 +69,5 @@ export {
   retrievePercent,
   initExport,
   initFilters,
-  initRandom,
   initPreviewText,
 };
