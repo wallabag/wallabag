@@ -12,9 +12,6 @@ import annotator from 'annotator';
 import ClipboardJS from 'clipboard';
 import 'mathjax/es5/tex-svg';
 
-/* jrQrcode */
-import jrQrcode from 'jr-qrcode';
-
 /* Fonts */
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import 'lato-font/css/lato-font.css';
@@ -341,11 +338,5 @@ $(document).ready(() => {
       e.preventDefault();
       $('form[name="form_mass_action"] button[name="tag"]').trigger('click');
     }
-  });
-
-  document.querySelectorAll('img.jr-qrcode').forEach((qrcode) => {
-    const src = jrQrcode.getQrBase64(qrcode.getAttribute('data-url'));
-
-    qrcode.setAttribute('src', src);
   });
 });
