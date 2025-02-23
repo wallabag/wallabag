@@ -10,6 +10,7 @@ Encore
   .addEntry('main', './assets/index.js')
   .addEntry('public', './assets/share.js')
   .splitEntryChunks()
+  .enableStimulusBridge('./assets/controllers.json')
   .enableSingleRuntimeChunk()
   .cleanupOutputBeforeBuild()
   .enableBuildNotifications()
