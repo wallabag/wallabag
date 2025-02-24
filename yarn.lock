@@ -1379,15 +1379,14 @@ ajv@^8.0.0, ajv@^8.0.1, ajv@^8.9.0:
 
 annotator@wallabag/annotator#master:
   version "2.0.0-alpha.3"
-  resolved "https://codeload.github.com/wallabag/annotator/tar.gz/9245466498a4d2b4254980865ab07117dceb7735"
+  resolved "https://codeload.github.com/wallabag/annotator/tar.gz/3047fc22c83873efb10753187222cdb8cbb40d13"
   dependencies:
     backbone-extend-standalone "^0.1.2"
     clean-css "^4.1.11"
     enhance-css "^1.1.0"
     es6-promise "^3.0.2"
     insert-css "^0.2.0"
-    jquery "^1.11.3"
-    xpath-range "0.0.5"
+    jquery "^3.7.1"
 
 ansi-regex@^5.0.1:
   version "5.0.1"
@@ -3364,20 +3363,10 @@ jquery.cookie@^1.4.1:
   resolved "https://registry.yarnpkg.com/jquery.cookie/-/jquery.cookie-1.4.1.tgz#d63dce209eab691fe63316db08ca9e47e0f9385b"
   integrity sha512-c/hZOOL+8VSw/FkTVH637gS1/6YzMSCROpTZ2qBYwJ7s7sHajU7uBkSSiE5+GXWwrfCCyO+jsYjUQ7Hs2rIxAA==
 
-jquery@^1.11.3:
-  version "1.12.4"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-1.12.4.tgz#01e1dfba290fe73deba77ceeacb0f9ba2fec9e0c"
-  integrity sha512-UEVp7PPK9xXYSk8xqXCJrkXnKZtlgWkd2GsAQbMRFK6S/ePU2JN5G2Zum8hIVjzR3CpdfSqdqAzId/xd4TJHeg==
-
 jquery@^3.7.1:
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.7.1.tgz#083ef98927c9a6a74d05a6af02806566d16274de"
   integrity sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==
-
-jquery@~1.11.0:
-  version "1.11.3"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-1.11.3.tgz#dd8b74278b27102d29df63eae28308a8cfa1b583"
-  integrity sha512-pHM/XLofp0FJc0/0AsRm8q/5ob+a1kno+vfclXGozaMBPv3qD7Xq19loECVcBB4MOLdygnyneQMPTsH5QiVNBQ==
 
 jr-qrcode@^1.2.1:
   version "1.2.1"
@@ -5568,13 +5557,6 @@ write-file-atomic@^5.0.1:
   dependencies:
     imurmurhash "^0.1.4"
     signal-exit "^4.0.1"
-
-xpath-range@0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/xpath-range/-/xpath-range-0.0.5.tgz#45d3379555c72c2f218abb8ba424d42e0665d911"
-  integrity sha512-8GDIhHLgdRPajLw0VtsjLaj4e0WVpp/64oTX4ZHEZlCOjeK91RuJw+eCop5BKVxYPPKAx03V50S/3MrLX16NcQ==
-  dependencies:
-    jquery "~1.11.0"
 
 yallist@^3.0.2:
   version "3.1.1"
