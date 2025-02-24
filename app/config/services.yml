@@ -15,15 +15,15 @@ services:
             $projectDir: '%kernel.project_dir%'
             $debug: '%kernel.debug%'
             $defaultLocale: '%kernel.default_locale%'
-            $wallabagUrl: '%domain_name%'
-            $tablePrefix: "%database_table_prefix%"
+            $wallabagUrl: '%env(DOMAIN_NAME)%'
+            $tablePrefix: "%env(DATABASE_TABLE_PREFIX)%"
             $encryptionKeyPath: "%wallabag.site_credentials.encryption_key_path%"
             $fetchingErrorMessageTitle: "%wallabag.fetching_error_message_title%"
             $fetchingErrorMessage: '%wallabag.fetching_error_message%'
             $languages: '%wallabag.languages%'
             $lifeTime: '%wallabag.cache_lifetime%'
             $logoPath: 'web/img/appicon/apple-touch-icon-152.png'
-            $registrationEnabled: '%fosuser_registration%'
+            $registrationEnabled: '%env(bool:FOSUSER_REGISTRATION)%'
             $restrictedAccess: '@=service(''craue_config'').get(''restricted_access'')'
             $senderEmail: "%scheb_two_factor.email.sender_email%"
             $senderName: "%scheb_two_factor.email.sender_name%"
@@ -187,7 +187,7 @@ services:
 
     Wallabag\Event\Subscriber\SchemaAdapterSubscriber:
         arguments:
-            $databaseTablePrefix: "%database_table_prefix%"
+            $databaseTablePrefix: "%env(DATABASE_TABLE_PREFIX)%"
         tags:
             - { name: doctrine.event_subscriber }
 
@@ -249,11 +249,11 @@ services:
     Predis\Client:
         arguments:
             $parameters:
-                scheme: '%redis_scheme%'
-                host: '%redis_host%'
-                port: '%redis_port%'
-                path: '%redis_path%'
-                password: '%redis_password%'
+                scheme: '%env(REDIS_SCHEME)%'
+                host: '%env(REDIS_HOST)%'
+                port: '%env(int:REDIS_PORT)%'
+                path: '%env(REDIS_PATH)%'
+                password: '%env(REDIS_PASSWORD)%'
 
     Wallabag\Event\Subscriber\SQLiteCascadeDeleteSubscriber:
         tags:
@@ -269,7 +269,7 @@ services:
 
     Wallabag\Command\InstallCommand:
         arguments:
-            $databaseDriver: '%database_driver%'
+            $databaseUrl: '%env(DATABASE_URL)%'
             $defaultSettings: '%wallabag.default_internal_settings%'
             $defaultIgnoreOriginInstanceRules: '%wallabag.default_ignore_origin_instance_rules%'
 

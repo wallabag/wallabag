@@ -1,9 +1,12 @@
 <?php
 
+use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 
 require __DIR__ . '/../vendor/autoload.php';
+
+(new Dotenv())->bootEnv(dirname(__DIR__) . '/.env');
 
 (new Filesystem())->remove(__DIR__ . '/../var/cache/test');
 

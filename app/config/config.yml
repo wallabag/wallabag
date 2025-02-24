@@ -1,20 +1,18 @@
 imports:
-    - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: wallabag.yml }
 
 parameters:
     craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\SymfonyCacheComponentAdapter
-    env(DATABASE_URL): '%database_scheme%://%database_user%:%database_password%@%database_host%:%database_port%/%database_name%?unix_socket=%database_socket%&charset=%database_charset%'
 
 framework:
     #esi:             ~
     translator:
         enabled: true
-        fallback: "%locale%"
+        fallback: "%env(LOCALE)%"
         default_path: '%kernel.project_dir%/translations'
-    secret: "%secret%"
+    secret: "%env(SECRET)%"
     router:
         resource: "%kernel.project_dir%/app/config/routing.yml"
         strict_requirements: ~
@@ -22,7 +20,7 @@ framework:
     csrf_protection: ~
     validation:
         enable_annotations: true
-    default_locale: "%locale%"
+    default_locale: "%env(LOCALE)%"
     trusted_hosts: ~
     session:
         # handler_id set to null will use default session handler from php.ini
@@ -32,10 +30,10 @@ framework:
     fragments: ~
     http_method_override: true
     assets:
-        base_url: '%domain_name%'
+        base_url: '%env(DOMAIN_NAME)%'
         json_manifest_path: '%kernel.project_dir%/web/build/manifest.json'
     mailer:
-        dsn: "%mailer_dsn%"
+        dsn: "%env(MAILER_DSN)%"
     http_client:
         scoped_clients:
             download_images.client:
@@ -60,8 +58,8 @@ twig:
     form_themes:
         - "@SpiriitFormFilter/Form/form_div_layout.html.twig"
     globals:
-        wallabag_url: '%domain_name%'
-        registration_enabled: '%fosuser_registration%'
+        wallabag_url: '%env(DOMAIN_NAME)%'
+        registration_enabled: '%env(bool:FOSUSER_REGISTRATION)%'
 
 # Doctrine Configuration
 doctrine:
@@ -84,7 +82,7 @@ doctrine:
                         alias: Wallabag
 
 stof_doctrine_extensions:
-    default_locale: "%locale%"
+    default_locale: "%env(LOCALE)%"
     translation_fallback: true
     orm:
         default:
@@ -192,9 +190,9 @@ fos_user:
     user_class: Wallabag\Entity\User
     registration:
         confirmation:
-            enabled: "%fosuser_confirmation%"
+            enabled: "%env(bool:FOSUSER_CONFIRMATION)%"
     from_email:
-        address: "%from_email%"
+        address: "%env(FROM_EMAIL)%"
         sender_name: wallabag
     service:
         mailer: Wallabag\Mailer\UserMailer
@@ -208,8 +206,8 @@ fos_oauth_server:
     service:
         user_provider: fos_user.user_provider.username_email
         options:
-            refresh_token_lifetime: "%fos_oauth_server_refresh_token_lifetime%"
-            access_token_lifetime: "%fos_oauth_server_access_token_lifetime%"
+            refresh_token_lifetime: "%env(FOS_OAUTH_SERVER_REFRESH_TOKEN_LIFETIME)%"
+            access_token_lifetime: "%env(FOS_OAUTH_SERVER_ACCESS_TOKEN_LIFETIME)%"
 
 scheb_two_factor:
     trusted_device:
@@ -222,12 +220,12 @@ scheb_two_factor:
 
     google:
         enabled: true
-        issuer: "%server_name%"
+        issuer: "%env(SERVER_NAME)%"
         template: "Authentication/form.html.twig"
 
     email:
         enabled: true
-        sender_email: "%twofactor_sender%"
+        sender_email: "%env(TWOFACTOR_SENDER)%"
         digits: 6
         template: "Authentication/form.html.twig"
         mailer: Wallabag\Mailer\AuthCodeMailer
@@ -239,10 +237,10 @@ rulerz:
 old_sound_rabbit_mq:
     connections:
         default:
-            host:     "%rabbitmq_host%"
-            port:     "%rabbitmq_port%"
-            user:     "%rabbitmq_user%"
-            password: "%rabbitmq_password%"
+            host:     "%env(RABBITMQ_HOST)%"
+            port:     "%env(int:RABBITMQ_PORT)%"
+            user:     "%env(RABBITMQ_USER)%"
+            password: "%env(RABBITMQ_PASSWORD)%"
             vhost:    /
             lazy:     true
     producers:
@@ -320,7 +318,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.pocket'
             callback: wallabag.consumer.amqp.pocket
-            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+            qos_options: {prefetch_count: "%env(int:RABBITMQ_PREFETCH_COUNT)%"}
         import_readability:
             connection: default
             exchange_options:
@@ -329,7 +327,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.readability'
             callback: wallabag.consumer.amqp.readability
-            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+            qos_options: {prefetch_count: "%env(int:RABBITMQ_PREFETCH_COUNT)%"}
         import_instapaper:
             connection: default
             exchange_options:
@@ -338,7 +336,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.instapaper'
             callback: wallabag.consumer.amqp.instapaper
-            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+            qos_options: {prefetch_count: "%env(int:RABBITMQ_PREFETCH_COUNT)%"}
         import_pinboard:
             connection: default
             exchange_options:
@@ -347,7 +345,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.pinboard'
             callback: wallabag.consumer.amqp.pinboard
-            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+            qos_options: {prefetch_count: "%env(int:RABBITMQ_PREFETCH_COUNT)%"}
         import_delicious:
             connection: default
             exchange_options:
@@ -356,7 +354,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.delicious'
             callback: wallabag.consumer.amqp.delicious
-            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+            qos_options: {prefetch_count: "%env(int:RABBITMQ_PREFETCH_COUNT)%"}
         import_wallabag_v1:
             connection: default
             exchange_options:
@@ -365,7 +363,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.wallabag_v1'
             callback: wallabag.consumer.amqp.wallabag_v1
-            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+            qos_options: {prefetch_count: "%env(int:RABBITMQ_PREFETCH_COUNT)%"}
         import_wallabag_v2:
             connection: default
             exchange_options:
@@ -374,7 +372,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.wallabag_v2'
             callback: wallabag.consumer.amqp.wallabag_v2
-            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+            qos_options: {prefetch_count: "%env(int:RABBITMQ_PREFETCH_COUNT)%"}
         import_elcurator:
             connection: default
             exchange_options:
@@ -383,7 +381,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.elcurator'
             callback: wallabag.consumer.amqp.elcurator
-            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+            qos_options: {prefetch_count: "%env(int:RABBITMQ_PREFETCH_COUNT)%"}
         import_omnivore:
             connection: default
             exchange_options:
@@ -392,7 +390,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.omnivore'
             callback: wallabag.consumer.amqp.omnivore
-            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+            qos_options: {prefetch_count: "%env(int:RABBITMQ_PREFETCH_COUNT)%"}
         import_firefox:
             connection: default
             exchange_options:
@@ -401,7 +399,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.firefox'
             callback: wallabag.consumer.amqp.firefox
-            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+            qos_options: {prefetch_count: "%env(int:RABBITMQ_PREFETCH_COUNT)%"}
         import_chrome:
             connection: default
             exchange_options:
@@ -410,7 +408,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.chrome'
             callback: wallabag.consumer.amqp.chrome
-            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+            qos_options: {prefetch_count: "%env(int:RABBITMQ_PREFETCH_COUNT)%"}
         import_shaarli:
             connection: default
             exchange_options:
@@ -419,7 +417,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.shaarli'
             callback: wallabag.consumer.amqp.shaarli
-            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+            qos_options: {prefetch_count: "%env(int:RABBITMQ_PREFETCH_COUNT)%"}
         import_pocket_html:
             connection: default
             exchange_options:
@@ -428,7 +426,7 @@ old_sound_rabbit_mq:
             queue_options:
                 name: 'wallabag.import.pocket_html'
             callback: wallabag.consumer.amqp.pocket_html
-            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+            qos_options: {prefetch_count: "%env(int:RABBITMQ_PREFETCH_COUNT)%"}
 
 fos_js_routing:
     routes_to_expose:

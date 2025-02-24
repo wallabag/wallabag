@@ -67,6 +67,12 @@ class AppKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
+        if (file_exists($this->getProjectDir() . '/app/config/parameters.yml')) {
+            $loader->load($this->getProjectDir() . '/app/config/parameters.yml');
+
+            @trigger_error('The "app/config/parameters.yml" file is deprecated and will not be supported in a future version. Move your configuration to environment variables and remove the file.', \E_USER_DEPRECATED);
+        }
+
         $loader->load($this->getProjectDir() . '/app/config/config_' . $this->getEnvironment() . '.yml');
 
         $loader->load(function (ContainerBuilder $container) {
@@ -75,9 +81,12 @@ class AppKernel extends Kernel
             $container->addObjectResource($this);
         });
 
-        $loader->load(function (ContainerBuilder $container) {
-            $this->processDatabaseParameters($container);
-        });
+        if (file_exists($this->getProjectDir() . '/app/config/parameters.yml')) {
+            $loader->load(function (ContainerBuilder $container) {
+                $this->loadEnvVarsFromParameters($container);
+                $this->defineDatabaseUrlEnvVar($container);
+            });
+        }
     }
 
     protected function build(ContainerBuilder $container)
@@ -85,7 +94,45 @@ class AppKernel extends Kernel
         $container->addCompilerPass(new ImportCompilerPass());
     }
 
-    private function processDatabaseParameters(ContainerBuilder $container)
+    private function loadEnvVarsFromParameters(ContainerBuilder $container)
+    {
+        $this->setEnvVarFromParameter($container, 'DATABASE_TABLE_PREFIX', 'database_table_prefix');
+
+        $this->setEnvVarFromParameter($container, 'DOMAIN_NAME', 'domain_name');
+        $this->setEnvVarFromParameter($container, 'SERVER_NAME', 'server_name');
+        $this->setEnvVarFromParameter($container, 'MAILER_DSN', 'mailer_dsn');
+        $this->setEnvVarFromParameter($container, 'LOCALE', 'locale');
+        $this->setEnvVarFromParameter($container, 'SECRET', 'secret');
+
+        $this->setEnvVarFromParameter($container, 'TWOFACTOR_SENDER', 'twofactor_sender');
+        $this->setEnvVarFromParameter($container, 'FOSUSER_REGISTRATION', 'fosuser_registration');
+        $this->setEnvVarFromParameter($container, 'FOSUSER_CONFIRMATION', 'fosuser_confirmation');
+        $this->setEnvVarFromParameter($container, 'FOS_OAUTH_SERVER_ACCESS_TOKEN_LIFETIME', 'fos_oauth_server_access_token_lifetime');
+        $this->setEnvVarFromParameter($container, 'FOS_OAUTH_SERVER_REFRESH_TOKEN_LIFETIME', 'fos_oauth_server_refresh_token_lifetime');
+        $this->setEnvVarFromParameter($container, 'FROM_EMAIL', 'from_email');
+
+        $this->setEnvVarFromParameter($container, 'RABBITMQ_HOST', 'rabbitmq_host');
+        $this->setEnvVarFromParameter($container, 'RABBITMQ_PORT', 'rabbitmq_port');
+        $this->setEnvVarFromParameter($container, 'RABBITMQ_USER', 'rabbitmq_user');
+        $this->setEnvVarFromParameter($container, 'RABBITMQ_PASSWORD', 'rabbitmq_password');
+        $this->setEnvVarFromParameter($container, 'RABBITMQ_PREFETCH_COUNT', 'rabbitmq_prefetch_count');
+
+        $this->setEnvVarFromParameter($container, 'REDIS_SCHEME', 'redis_scheme');
+        $this->setEnvVarFromParameter($container, 'REDIS_HOST', 'redis_host');
+        $this->setEnvVarFromParameter($container, 'REDIS_PORT', 'redis_port');
+        $this->setEnvVarFromParameter($container, 'REDIS_PATH', 'redis_path');
+        $this->setEnvVarFromParameter($container, 'REDIS_PASSWORD', 'redis_password');
+
+        $this->setEnvVarFromParameter($container, 'SENTRY_DSN', 'sentry_dsn');
+    }
+
+    private function setEnvVarFromParameter(ContainerBuilder $container, string $envVar, string $parameter)
+    {
+        $_ENV[$envVar] = $_SERVER[$envVar] = (string) $container->getParameter($parameter);
+        $container->setParameter('env(' . $envVar . ')', (string) $container->getParameter($parameter));
+    }
+
+    private function defineDatabaseUrlEnvVar(ContainerBuilder $container)
     {
         switch ($container->getParameter('database_driver')) {
             case 'pdo_mysql':
@@ -101,15 +148,39 @@ class AppKernel extends Kernel
                 throw new RuntimeException('Unsupported database driver: ' . $container->getParameter('database_driver'));
         }
 
-        $container->setParameter('database_scheme', $scheme);
+        $user = $container->getParameter('database_user');
+        $password = $container->getParameter('database_password');
+        $host = $container->getParameter('database_host');
+        $port = $container->getParameter('database_port');
+        $name = $container->getParameter('database_name');
 
         if ('sqlite' === $scheme) {
-            $container->setParameter('database_name', $container->getParameter('database_path'));
+            $name = $container->getParameter('database_path');
         }
 
-        $container->setParameter('database_user', (string) $container->getParameter('database_user'));
-        $container->setParameter('database_password', (string) $container->getParameter('database_password'));
-        $container->setParameter('database_port', (string) $container->getParameter('database_port'));
-        $container->setParameter('database_socket', (string) $container->getParameter('database_socket'));
+        $url = $scheme . '://' . $user . ':' . $password . '@' . $host;
+
+        if ($port) {
+            $url .= ':' . $port;
+        }
+
+        $url .= '/' . $name;
+
+        $query = [];
+
+        if ($container->getParameter('database_socket')) {
+            $query['unix_socket'] = $container->getParameter('database_socket');
+        }
+
+        if ($container->getParameter('database_charset')) {
+            $query['charset'] = $container->getParameter('database_charset');
+        }
+
+        if ([] !== $query) {
+            $url .= '?' . http_build_query($query);
+        }
+
+        $_ENV['DATABASE_URL'] = $_SERVER['DATABASE_URL'] = $url;
+        $container->setParameter('env(DATABASE_URL)', $url);
     }
 }

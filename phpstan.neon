@@ -6,6 +6,8 @@ parameters:
     paths:
         - src
         - tests
+    bootstrapFiles:
+        - tests/phpstan-bootstrap.php
 
     symfony:
         container_xml_path: %rootDir%/../../../var/cache/dev/AppKernelDevDebugContainer.xml

@@ -89,7 +89,7 @@ jobs:
         run: yarn build:dev
 
       - name: "Prepare database configuration"
-        run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
+        run: cp app/config/tests/.env.${{ matrix.database }} .env.test.local
 
       - name: "Run PHPUnit"
         run: "php bin/phpunit -v"
@@ -140,8 +140,7 @@ jobs:
 
       - name: "Remove database prefix"
         run: |
-          pip install --user yq
-          yq -Y --in-place '.parameters.database_table_prefix = ""' app/config/parameters.yml.dist
+          sed -i 's/DATABASE_TABLE_PREFIX=wallabag_/DATABASE_TABLE_PREFIX=/' .env
 
       - name: "Setup MySQL"
         if: "${{ matrix.database == 'mysql' }}"
@@ -169,7 +168,7 @@ jobs:
         run: yarn build:dev
 
       - name: "Prepare database configuration"
-        run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
+        run: cp app/config/tests/.env.${{ matrix.database }} .env.test.local
 
       - name: "Run PHPUnit"
         run: "php bin/phpunit -v"
@@ -235,7 +234,7 @@ jobs:
         run: yarn build:dev
 
       - name: "Prepare database configuration"
-        run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
+        run: cp app/config/tests/.env.${{ matrix.database }} .env.test.local
 
       - name: "Run PHPUnit"
         run: "php bin/phpunit -v"
