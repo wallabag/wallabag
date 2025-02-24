@@ -40,7 +40,7 @@ parameters:
     rabbitmq_prefetch_count: ${RABBITMQ_PREFETCH_COUNT:-10}
 
     # Redis processing
-    redis_scheme: ${REDIS_SCHEME:-tcp}
+    redis_scheme: ${REDIS_SCHEME:-redis}
     redis_host: ${REDIS_HOST:-redis}
     redis_port: ${REDIS_PORT:-6379}
     redis_path: ${REDIS_PATH:-~}
