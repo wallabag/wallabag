@@ -175,5 +175,11 @@ parameters:
         - 'Montserrat'
         - 'OpenDyslexicRegular'
         - 'Oswald'
-    wallabag.allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain', 'text/csv', 'text/html']
+    wallabag.allow_mimetypes:
+        - 'application/octet-stream'
+        - 'application/json'
+        - 'text/plain'
+        - 'text/csv'
+        - 'text/html'
+        - 'application/vnd.ms-excel'
     wallabag.resource_dir: "%kernel.project_dir%/web/uploads/import"
