@@ -28,7 +28,7 @@ Switch DBMS
 By default, wallabag starts with a SQLite database. However, wallabag
 also supports PostgreSQL and MySQL. Docker containers are available for both.
 
-In `docker-compose.yml`, for the chosen DBMS uncomment:
+In `compose.yaml` (or `docker-compose.yml` for wallabag < 2.7), for the chosen DBMS uncomment:
 
 -   the container definition (`postgres` or `mariadb` root level block)
 -   the container link in the `php` container
@@ -49,7 +49,7 @@ Run wallabag
     with commented ones (with values prefixed by `env.`)
 3.  `composer install` the project dependencies
 4.  `php bin/console wallabag:install` to create the schema
-5.  `docker-compose up` to run the containers
+5.  `docker compose up` to run the containers (or `docker-compose up` for wallabag < 2.7)
 6.  Finally, browse to <http://localhost:8080/> to find your freshly
     installed wallabag.
 
