@@ -41,22 +41,25 @@
 
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        {{ form_widget(edit_form.enabled) }}
-                                        {{ form_label(edit_form.enabled) }}
-                                        {{ form_errors(edit_form.enabled) }}
+                                        <label for="{{ edit_form.enabled.vars.id }}">
+                                            {{ form_widget(edit_form.enabled) }}
+                                            <span>{{ edit_form.enabled.vars.label|trans }}</span>
+                                        </label>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        {{ form_widget(edit_form.emailTwoFactor) }}
-                                        {{ form_label(edit_form.emailTwoFactor) }}
-                                        {{ form_errors(edit_form.emailTwoFactor) }}
+                                        <label for="{{ edit_form.emailTwoFactor.vars.id }}">
+                                            {{ form_widget(edit_form.emailTwoFactor) }}
+                                            <span>{{ edit_form.emailTwoFactor.vars.label|trans }}</span>
+                                        </label>
                                     </div>
                                     <div class="input-field col s12">
-                                        {{ form_widget(edit_form.googleTwoFactor) }}
-                                        {{ form_label(edit_form.googleTwoFactor) }}
-                                        {{ form_errors(edit_form.googleTwoFactor) }}
+                                        <label for="{{ edit_form.googleTwoFactor.vars.id }}">
+                                            {{ form_widget(edit_form.googleTwoFactor) }}
+                                            <span>{{ edit_form.googleTwoFactor.vars.label|trans }}</span>
+                                        </label>
                                     </div>
                                 </div>
 
