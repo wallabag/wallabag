@@ -25,7 +25,7 @@
 
                 <h4>{{ 'developer.existing_clients.title'|trans }}</h4>
                 {% if clients %}
-                    <ul class="collapsible" data-collapsible="expandable">
+                    <ul class="collapsible" data-controller="materialize--collapsible" data-materialize--collapsible-accordion-value="false">
                         {% for client in clients %}
                             <li>
                                 <div class="collapsible-header">{{ client.name }} - #{{ client.id }}</div>
