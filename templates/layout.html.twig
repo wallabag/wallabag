@@ -90,18 +90,18 @@
                 </div>
                 <ul class="input-field nav-panel-buttom">
                     <li class="bold toggle-add-url-container">
-                        <a class="waves-effect tooltipped toggle-add-url" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.add_new_entry'|trans }}" href="{{ path('new') }}" id="nav-btn-add">
+                        <a class="waves-effect toggle-add-url" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.add_new_entry'|trans }}" href="{{ path('new') }}" id="nav-btn-add">
                             <i class="material-icons">add</i>
                         </a>
                     </li>
                     <li>
-                        <a class="waves-effect tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.search'|trans }}" href="javascript: void(null);" id="nav-btn-search">
+                        <a class="waves-effect" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.search'|trans }}" href="javascript: void(null);" id="nav-btn-search">
                             <i class="material-icons">search</i>
                         </a>
                     </li>
                     {% block nav_panel_extra_actions '' %}
                     <li class="bold">
-                        <a class="wave-effect tooltipped dropdown-trigger" data-covertrigger="false" data-constrainwidth="false" data-target="dropdown-account" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.account'|trans }}" href="#" id="news_menu">
+                        <a class="wave-effect dropdown-trigger" data-controller="materialize--tooltip" data-covertrigger="false" data-constrainwidth="false" data-target="dropdown-account" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.account'|trans }}" href="#" id="news_menu">
                             <i class="material-icons" id="news_link">account_circle</i>
                         </a>
                     </li>

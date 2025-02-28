@@ -24,21 +24,21 @@
 {% block nav_panel_extra_actions %}
     {% if active_route %}
         <li>
-            <a class="waves-effect tooltipped js-random-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', {'type': active_route}) }}">
+            <a class="waves-effect js-random-action" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', {'type': active_route}) }}">
                 <i class="material-icons">casino</i>
             </a>
         </li>
     {% endif %}
     {% if has_filters %}
         <li class="button-filters">
-            <a class="nav-panel-menu sidenav-trigger tooltipped js-filters-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-target="filters">
+            <a class="nav-panel-menu sidenav-trigger js-filters-action" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-target="filters">
                 <i class="material-icons">filter_list</i>
             </a>
         </li>
     {% endif %}
     {% if has_exports %}
         <li class="button-export">
-            <a class="nav-panel-menu sidenav-trigger tooltipped js-export-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.export'|trans }}" href="#" data-target="export">
+            <a class="nav-panel-menu sidenav-trigger js-export-action" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.export'|trans }}" href="#" data-target="export">
                 <i class="material-icons">file_download</i>
             </a>
         </li>
@@ -61,7 +61,7 @@
                 <a class="results-item" href="{{ path('switch_view_mode', {redirect: current_path}) }}"><i class="material-icons">{% if list_mode == 0 %}view_list{% else %}view_module{% endif %}</i></a>
             {% endif %}
             {% if entries.count > 0 and is_granted('EDIT_ENTRIES') %}
-                <label for="mass-action-inputs-displayed" class="mass-action-toggle results-item tooltipped" data-position="right" data-delay="50" data-tooltip="{{ 'entry.list.toggle_mass_action'|trans }}"><i class="material-icons">library_add_check</i></label>
+                <label for="mass-action-inputs-displayed" class="mass-action-toggle results-item" data-controller="materialize--tooltip" data-position="right" data-delay="50" data-tooltip="{{ 'entry.list.toggle_mass_action'|trans }}"><i class="material-icons">library_add_check</i></label>
             {% endif %}
             {% if app.user.config.feedToken %}
                 {% include "Entry/_feed_link.html.twig" %}
