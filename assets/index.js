@@ -285,7 +285,6 @@ $(document).ready(() => {
     constrainWidth: false,
   });
 
-  $('.tabs').tabs();
   $('.tooltipped').tooltip();
   $('.fixed-action-btn').floatingActionButton();
 
