@@ -39,8 +39,6 @@ import './js/shortcuts/entry';
 /* Theme style */
 import './scss/index.scss';
 
-const mobileMaxWidth = 993;
-
 /* ==========================================================================
  Annotations & Remember position
  ========================================================================== */
@@ -274,11 +272,6 @@ const articleScroll = () => {
 };
 
 $(document).ready(() => {
-  // sidenav
-  document.querySelectorAll('.sidenav').forEach((element) => {
-    $(element).sidenav({ edge: element.getAttribute('data-edge') ?? 'left' });
-  });
-
   $('select').formSelect();
   $('.collapsible[data-collapsible="accordion"]').collapsible();
   $('.collapsible[data-collapsible="expandable"]').collapsible({
@@ -309,9 +302,6 @@ $(document).ready(() => {
   $('#nav-btn-add-tag').on('click', () => {
     $('.nav-panel-add-tag').toggle();
     $('.nav-panel-menu').addClass('hidden');
-    if (window.innerWidth < mobileMaxWidth) {
-      $('.sidenav').sidenav('close');
-    }
     $('#tag_label').focus();
     return false;
   });

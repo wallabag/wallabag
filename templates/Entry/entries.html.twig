@@ -114,7 +114,7 @@
 
     <!-- Export -->
     {% if has_exports and is_granted('EXPORT_ENTRIES') %}
-        <div id="export" class="sidenav" data-edge="right">
+        <div id="export" class="sidenav" data-controller="materialize--sidenav" data-materialize--sidenav-edge-value="right">
         {% set current_tag = null %}
         {% if tag is defined %}
             {% set current_tag = tag.slug %}
@@ -140,7 +140,7 @@
 
     <!-- Filters -->
     {% if has_filters %}
-    <div id="filters" class="sidenav" data-edge="right">
+    <div id="filters" class="sidenav" data-controller="materialize--sidenav" data-materialize--sidenav-edge-value="right">
         <form action="{{ path('all') }}">
 
             <h4 class="center">{{ 'entry.filters.title'|trans }}</h4>
