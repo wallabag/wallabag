@@ -274,13 +274,6 @@ const articleScroll = () => {
 $(document).ready(() => {
   $('select').formSelect();
 
-  $('.dropdown-trigger').dropdown({ hover: false });
-  $('.dropdown-trigger[data-covertrigger="false"][data-constrainwidth="false"]').dropdown({
-    hover: false,
-    coverTrigger: false,
-    constrainWidth: false,
-  });
-
   $('.fixed-action-btn').floatingActionButton();
 
   stickyNav();
