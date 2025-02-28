@@ -11,7 +11,7 @@
 
                     <div class="row">
                         <div class="div_tabs col s12">
-                            <ul class="tabs">
+                            <ul class="tabs" data-controller="materialize--tabs">
                                 {% for section in sections|craue_sortSections %}
                                     <li class="tab col s12 m6 l3"><a href="#set-{{ section }}">{{ section|trans({}, 'CraueConfigBundle') }}</a></li>
                                 {% endfor %}
