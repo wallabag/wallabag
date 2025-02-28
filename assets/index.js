@@ -285,7 +285,6 @@ $(document).ready(() => {
     constrainWidth: false,
   });
 
-  $('.tooltipped').tooltip();
   $('.fixed-action-btn').floatingActionButton();
 
   stickyNav();
