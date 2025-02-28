@@ -42,7 +42,7 @@
             </ul>
         </div>
     </nav>
-    <ul id="slide-out" class="left-bar collapsible sidenav sidenav-fixed reader-mode" data-collapsible="accordion">
+    <ul id="slide-out" class="left-bar collapsible sidenav sidenav-fixed reader-mode" data-collapsible="accordion" data-controller="materialize--sidenav">
         <li class="bold border-bottom hide-on-med-and-down">
             <a class="waves-effect collapsible-header" href="{{ path('homepage') }}">
                 <i class="material-icons small">arrow_back</i>
@@ -105,7 +105,7 @@
         {% endif %}
 
         <li class="bold border-bottom">
-            <a class="waves-effect collapsible-header" id="nav-btn-add-tag">
+            <a class="waves-effect collapsible-header" id="nav-btn-add-tag" data-action="click->materialize--sidenav#close">
                 <i class="material-icons small">label_outline</i>
                 <span>{{ 'entry.view.left_menu.add_a_tag'|trans }}</span>
             </a>
