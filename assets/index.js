@@ -1,3 +1,5 @@
+import './bootstrap.js';
+
 import $ from 'jquery';
 
 /* Materialize imports */
@@ -9,9 +11,6 @@ import annotator from 'annotator';
 
 import ClipboardJS from 'clipboard';
 import 'mathjax/es5/tex-svg';
-
-/* jrQrcode */
-import jrQrcode from 'jr-qrcode';
 
 /* Fonts */
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
@@ -272,24 +271,6 @@ const articleScroll = () => {
 };
 
 $(document).ready(() => {
-  // sidenav
-  $('.sidenav').sidenav();
-  $('select').formSelect();
-  $('.collapsible[data-collapsible="accordion"]').collapsible();
-  $('.collapsible[data-collapsible="expandable"]').collapsible({
-    accordion: false,
-  });
-
-  $('.dropdown-trigger').dropdown({ hover: false });
-  $('.dropdown-trigger[data-covertrigger="false"][data-constrainwidth="false"]').dropdown({
-    hover: false,
-    coverTrigger: false,
-    constrainWidth: false,
-  });
-
-  $('.tabs').tabs();
-  $('.tooltipped').tooltip();
-
   initFilters();
   initExport();
   initRandom();
@@ -375,11 +356,5 @@ $(document).ready(() => {
       e.preventDefault();
       $('form[name="form_mass_action"] button[name="tag"]').trigger('click');
     }
-  });
-
-  document.querySelectorAll('img.jr-qrcode').forEach((qrcode) => {
-    const src = jrQrcode.getQrBase64(qrcode.getAttribute('data-url'));
-
-    qrcode.setAttribute('src', src);
   });
 });
