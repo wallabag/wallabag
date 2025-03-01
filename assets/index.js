@@ -21,9 +21,6 @@ import '@fontsource/eb-garamond';
 import '@fontsource/montserrat';
 import '@fontsource/oswald';
 
-/* Highlight */
-import './js/highlight';
-
 /* Tools */
 import {
   savePercent, retrievePercent, initPreviewText,

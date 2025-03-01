@@ -18,14 +18,14 @@
                                 <img data-controller="qrcode" data-qrcode-url-value="{{ qr_code|raw }}" class="hide-on-med-and-down" />
                             </p>
 
-                            <p>
-                                {{ 'config.otp.app.two_factor_code_description_5'|trans }} <pre>{{ secret }}</pre>
-                            </p>
+                            <div data-controller="highlight">
+                                {{ 'config.otp.app.two_factor_code_description_5'|trans }} <pre><code>{{ secret }}</code></pre>
+                            </div>
                         </li>
                         <li>
                             <p>{{ 'config.otp.app.two_factor_code_description_3'|trans }}</p>
 
-                            <p><pre>{{ backupCodes|join("\n") }}</pre></p>
+                            <div data-controller="highlight"><pre><code>{{ backupCodes|join("\n") }}</code></pre></div>
                         </li>
                         <li>
                             <p>{{ 'config.otp.app.two_factor_code_description_4'|trans }}</p>
