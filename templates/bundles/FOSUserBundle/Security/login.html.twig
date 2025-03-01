@@ -5,11 +5,11 @@
     <div class="card-content">
 
         {% if error %}
-            <script>Materialize.toast('{{ error.messageKey|trans(error.messageData, 'security') }}', 4000)</script>
+            <p class="material-toast hidden">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
         {% endif %}
 
         {% for flash_message in app.session.flashbag.get('notice') %}
-            <script>Materialize.toast('{{ flash_message }}')</script>
+            <p class="material-toast hidden">{{ flash_message }}</p>
         {% endfor %}
 
         <div class="row">
