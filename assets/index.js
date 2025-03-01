@@ -262,10 +262,10 @@ const articleScroll = () => {
       const toggleScrollDataName = 'toggle-auto';
       if ((s + c) > articleElBottom) {
         fixedActionBtn.data(toggleScrollDataName, true);
-        fixedActionBtn.openFAB();
+        fixedActionBtn.floatingActionButton('open');
       } else if (fixedActionBtn.data(toggleScrollDataName) === true) {
         fixedActionBtn.data(toggleScrollDataName, false);
-        fixedActionBtn.closeFAB();
+        fixedActionBtn.floatingActionButton('close');
       }
     });
   }
@@ -289,6 +289,7 @@ $(document).ready(() => {
 
   $('.tabs').tabs();
   $('.tooltipped').tooltip();
+  $('.fixed-action-btn').floatingActionButton();
 
   initFilters();
   initExport();
