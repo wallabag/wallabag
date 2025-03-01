@@ -142,6 +142,12 @@
     background-color: transparent;
   }
 
+  .z-depth-4 {
+    box-shadow: 0 16px 24px 2px rgba(255 255 255 / 14%),
+                0 6px 30px 5px rgba(255 255 255 / 12%),
+                0 8px 10px -7px rgba(255 255 255 / 20%);
+  }
+
   @media only screen and (min-width: 992px) {
     #article {
       background-color: #101010;
