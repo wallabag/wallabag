@@ -272,8 +272,6 @@ const articleScroll = () => {
 };
 
 $(document).ready(() => {
-  $('select').formSelect();
-
   $('.fixed-action-btn').floatingActionButton();
 
   stickyNav();

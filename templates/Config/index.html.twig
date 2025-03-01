@@ -71,7 +71,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="input-field col s11">
+                                <div class="input-field col s11" data-controller="materialize--form-select">
                                     {{ form_errors(form.config.action_mark_as_read) }}
                                     {{ form_widget(form.config.action_mark_as_read) }}
                                     {{ form_label(form.config.action_mark_as_read) }}
@@ -79,7 +79,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="input-field col s11">
+                                <div class="input-field col s11" data-controller="materialize--form-select">
                                     {{ form_errors(form.config.language) }}
                                     {{ form_widget(form.config.language) }}
                                     {{ form_label(form.config.language) }}
@@ -119,7 +119,7 @@
                             <h5>{{ 'config.tab_menu.article_display'|trans }}</h5>
 
                             <div class="row">
-                                <div class="input-field col s5">
+                                <div class="input-field col s5" data-controller="materialize--form-select">
                                     {{ form_errors(form.config.font) }}
                                     {{ form_widget(form.config.font) }}
                                     {{ form_label(form.config.font) }}
