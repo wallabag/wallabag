@@ -22,7 +22,10 @@ function retrievePercent(id, resized) {
   const scroll = bheight * percent;
 
   if (!resized) {
-    $('html,body').animate({ scrollTop: scroll }, 'fast');
+    window.scrollTo({
+      top: scroll,
+      behavior: 'smooth',
+    });
   }
 
   return true;
