@@ -326,7 +326,7 @@
             {% endif %}
 
         </aside>
-        <article{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>
+        <article{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %} data-controller="highlight">
             {{ entry.content|raw }}
         </article>
 
