@@ -298,13 +298,13 @@ $(document).ready(() => {
   initPreviewText();
 
   const toggleNav = (toShow, toFocus) => {
-    $('.nav-panel-actions').hide(100);
-    $(toShow).show(100);
+    $('.nav-panel-actions').hide();
+    $(toShow).show();
     $(toFocus).focus();
   };
 
   $('#nav-btn-add-tag').on('click', () => {
-    $('.nav-panel-add-tag').toggle(100);
+    $('.nav-panel-add-tag').toggle();
     $('.nav-panel-menu').addClass('hidden');
     if (window.innerWidth < mobileMaxWidth) {
       $('.sidenav').sidenav('close');
@@ -353,8 +353,8 @@ $(document).ready(() => {
   });
 
   $('.close').on('click', (e) => {
-    $(e.target).parent('.nav-panel-item').hide(100);
-    $('.nav-panel-actions').show(100);
+    $(e.target).parent('.nav-panel-item').hide();
+    $('.nav-panel-actions').show();
     return false;
   });
 
