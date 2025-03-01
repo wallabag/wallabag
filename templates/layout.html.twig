@@ -17,9 +17,7 @@
 
 {% block messages %}
     {% for flash_message in app.session.flashbag.get('notice') %}
-        <script>
-            Materialize.toast('{{ flash_message|trans }}', 4000);
-        </script>
+        <p class="material-toast hidden">{{ flash_message|trans }}</p>
     {% endfor %}
 {% endblock %}
 

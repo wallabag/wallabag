@@ -1,13 +1,9 @@
 {% if nbRedisMessages is defined and nbRedisMessages > 0 %}
-    <script>
-        Materialize.toast('Messages in queue: {{ nbRedisMessages }}', 4000);
-    </script>
+    <p class="material-toast hidden">Messages in queue: {{ nbRedisMessages }}</p>
 {% endif %}
 
 {% if nbRabbitMessages is defined and nbRabbitMessages > 0 %}
-    <script>
-        Materialize.toast('Messages in queue: {{ nbRabbitMessages }}', 4000);
-    </script>
+    <p class="material-toast hidden">Messages in queue: {{ nbRabbitMessages }}</p>
 {% endif %}
 
 {% if redisNotInstalled is defined and redisNotInstalled  %}
