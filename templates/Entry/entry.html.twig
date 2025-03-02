@@ -326,7 +326,15 @@
             {% endif %}
 
         </aside>
-        <article{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %} data-controller="highlight">
+        <article
+            {% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}
+            data-controller="highlight annotations"
+            data-annotations-entry-id-value="{{ entry.id }}"
+            data-annotations-create-url-value="{{ path('annotations_post_annotation', {'entry': entry.id}) }}"
+            data-annotations-update-url-value="{{ path('annotations_put_annotation', {'annotation': 'idAnnotation'}) }}"
+            data-annotations-destroy-url-value="{{ path('annotations_delete_annotation', {'annotation': 'idAnnotation'}) }}"
+            data-annotations-search-url-value="{{ path('annotations_get_annotations', {'entry': entry.id}) }}"
+        >
             {{ entry.content|raw }}
         </article>
 
@@ -347,19 +355,6 @@
             </ul>
         </div>
     </div>
-
-<script id="annotationroutes" type="application/json">
-{
-    "prefix": "",
-    "urls": {
-        "create": "{{ path('annotations_post_annotation', {'entry': entry.id}) }}",
-        "update": "{{ path('annotations_put_annotation', {'annotation': 'idAnnotation'}) }}",
-        "destroy": "{{ path('annotations_delete_annotation', {'annotation': 'idAnnotation'}) }}",
-        "search": "{{ path('annotations_get_annotations', {'entry': entry.id}) }}"
-    },
-    "entryId": "{{ entry.id }}"
-}</script>
-
 {% endblock %}
 
 {% block footer %}
