@@ -330,7 +330,7 @@
             {{ entry.content|raw }}
         </article>
 
-        <div class="fixed-action-btn js-fixed-action-btn horizontal click-to-toggle hide-on-large-only">
+        <div class="fixed-action-btn horizontal click-to-toggle hide-on-large-only" data-controller="materialize--fab" data-action="scroll@window->materialize--fab#autoDisplay">
             <a class="btn-floating btn-large" data-toggle="actions">
               <i class="material-icons">menu</i>
             </a>
