@@ -35,14 +35,14 @@
                                             <td>{{ 'developer.existing_clients.field_id'|trans }}</td>
                                             <td>
                                                 <strong><code>{{ client.clientId }}</code></strong>
-                                                <button class="btn" data-clipboard-text="{{ client.clientId }}">{{ 'developer.client.copy_to_clipboard'|trans }}</button>
+                                                <button class="btn" data-controller="clipboard" data-clipboard-text="{{ client.clientId }}">{{ 'developer.client.copy_to_clipboard'|trans }}</button>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>{{ 'developer.existing_clients.field_secret'|trans }}</td>
                                             <td>
                                                 <strong><code>{{ client.secret }}</code></strong>
-                                                <button class="btn" data-clipboard-text="{{ client.secret }}">{{ 'developer.client.copy_to_clipboard'|trans }}</button>
+                                                <button class="btn" data-controller="clipboard" data-clipboard-text="{{ client.secret }}">{{ 'developer.client.copy_to_clipboard'|trans }}</button>
                                             </td>
                                         </tr>
                                         <tr>
