@@ -255,25 +255,13 @@ const articleScroll = () => {
       const s = $(window).scrollTop();
       const d = $(document).height();
       const c = $(window).height();
-      const articleElBottom = articleEl.offset().top + articleEl.height();
       const scrollPercent = (s / (d - c)) * 100;
       $('.progress .determinate').css('width', `${scrollPercent}%`);
-      const fixedActionBtn = $('.js-fixed-action-btn');
-      const toggleScrollDataName = 'toggle-auto';
-      if ((s + c) > articleElBottom) {
-        fixedActionBtn.data(toggleScrollDataName, true);
-        fixedActionBtn.floatingActionButton('open');
-      } else if (fixedActionBtn.data(toggleScrollDataName) === true) {
-        fixedActionBtn.data(toggleScrollDataName, false);
-        fixedActionBtn.floatingActionButton('close');
-      }
     });
   }
 };
 
 $(document).ready(() => {
-  $('.fixed-action-btn').floatingActionButton();
-
   stickyNav();
   articleScroll();
   initPreviewText();
