@@ -1,5 +1,8 @@
 {% extends "layout.html.twig" %}
 
+{% set has_filters = form is not null %}
+{% set has_exports = craue_setting('export_epub') or craue_setting('export_pdf') or craue_setting('export_json') or craue_setting('export_csv') or craue_setting('export_txt') or craue_setting('export_xml') or craue_setting('export_md') %}
+
 {% block head %}
     {{ parent() }}
     {% if tag is defined and app.user.config.feedToken %}
@@ -18,6 +21,30 @@
     {% include "Entry/_title.html.twig" with {'filter': filter} %}
 {% endblock %}
 
+{% block nav_panel_extra_actions %}
+    {% if active_route %}
+        <li>
+            <a class="waves-effect js-random-action" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', {'type': active_route}) }}">
+                <i class="material-icons">casino</i>
+            </a>
+        </li>
+    {% endif %}
+    {% if has_filters %}
+        <li class="button-filters">
+            <a class="nav-panel-menu sidenav-trigger js-filters-action" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-target="filters">
+                <i class="material-icons">filter_list</i>
+            </a>
+        </li>
+    {% endif %}
+    {% if has_exports %}
+        <li class="button-export">
+            <a class="nav-panel-menu sidenav-trigger js-export-action" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.export'|trans }}" href="#" data-target="export">
+                <i class="material-icons">file_download</i>
+            </a>
+        </li>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
     {% set current_path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
     {% set list_mode = app.user.config.listMode %}
@@ -34,7 +61,7 @@
                 <a class="results-item" href="{{ path('switch_view_mode', {redirect: current_path}) }}"><i class="material-icons">{% if list_mode == 0 %}view_list{% else %}view_module{% endif %}</i></a>
             {% endif %}
             {% if entries.count > 0 and is_granted('EDIT_ENTRIES') %}
-                <label for="mass-action-inputs-displayed" class="mass-action-toggle results-item tooltipped" data-position="right" data-delay="50" data-tooltip="{{ 'entry.list.toggle_mass_action'|trans }}"><i class="material-icons">library_add_check</i></label>
+                <label for="mass-action-inputs-displayed" class="mass-action-toggle results-item" data-controller="materialize--tooltip" data-position="right" data-delay="50" data-tooltip="{{ 'entry.list.toggle_mass_action'|trans }}"><i class="material-icons">library_add_check</i></label>
             {% endif %}
             {% if app.user.config.feedToken %}
                 {% include "Entry/_feed_link.html.twig" %}
@@ -86,7 +113,8 @@
     {% endif %}
 
     <!-- Export -->
-    <div id="export" class="sidenav">
+    {% if has_exports %}
+    <div id="export" class="sidenav" data-controller="materialize--sidenav" data-sidenav-edge-value="right">
     {% set current_tag = null %}
     {% if tag is defined %}
         {% set current_tag = tag.slug %}
@@ -108,10 +136,11 @@
             {% if craue_setting('export_md') %}<li class="bold"><a class="waves-effect" href="{{ path('export_entries', {'category': current_route, 'format': 'md', 'tag': current_tag, 'search_entry[term]': export_search_term, 'currentRoute': previous_route, 'entry': entry}) }}">Markdown</a></li>{% endif %}
         </ul>
     </div>
+    {% endif %}
 
     <!-- Filters -->
-    {% if form is not null and is_granted('LIST_ENTRIES') %}
-    <div id="filters" class="sidenav">
+    {% if has_filters %}
+    <div id="filters" class="sidenav" data-controller="materialize--sidenav" data-sidenav-edge-value="right">
         <form action="{{ path('all') }}">
 
             <h4 class="center">{{ 'entry.filters.title'|trans }}</h4>
@@ -233,7 +262,7 @@
                 </div>
 
                 <div class="col s6">
-                    <a href="#!" class="center waves-effect waves-green btn-flat" id="clear_form_filters">{{ 'entry.filters.action.clear'|trans }}</a>
+                    <button type="reset" class="center waves-effect waves-green btn-flat">{{ 'entry.filters.action.clear'|trans }}</button>
                 </div>
 
                 <div class="col s6">

@@ -1,17 +1,12 @@
+import './bootstrap';
+
 import $ from 'jquery';
 
 /* Materialize imports */
 import '@materializecss/materialize/dist/css/materialize.css';
-import M from '@materializecss/materialize/dist/js/materialize';
+import '@materializecss/materialize/dist/js/materialize';
 
-/* Annotations */
-import annotator from 'annotator';
-
-import ClipboardJS from 'clipboard';
 import 'mathjax/es5/tex-svg';
-
-/* jrQrcode */
-import jrQrcode from 'jr-qrcode';
 
 /* Fonts */
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
@@ -22,12 +17,9 @@ import '@fontsource/eb-garamond';
 import '@fontsource/montserrat';
 import '@fontsource/oswald';
 
-/* Highlight */
-import './js/highlight';
-
 /* Tools */
 import {
-  savePercent, retrievePercent, initExport, initFilters, initRandom, initPreviewText,
+  initPreviewText,
 } from './js/tools';
 
 /* Import shortcuts */
@@ -37,61 +29,7 @@ import './js/shortcuts/entry';
 /* Theme style */
 import './scss/index.scss';
 
-const mobileMaxWidth = 993;
-
-/* ==========================================================================
- Annotations & Remember position
- ========================================================================== */
-
 $(document).ready(() => {
-  if ($('#article').length) {
-    const app = new annotator.App();
-
-    app.include(annotator.ui.main, {
-      element: document.querySelector('article'),
-    });
-
-    const authorization = {
-      permits() { return true; },
-    };
-    app.registry.registerUtility(authorization, 'authorizationPolicy');
-
-    const x = JSON.parse($('#annotationroutes').html());
-    app.include(annotator.storage.http, $.extend({}, x, {
-      onError(msg, xhr) {
-        if (!Object.prototype.hasOwnProperty.call(xhr, 'responseJSON')) {
-          annotator.notification.banner('An error occurred', 'error');
-          return;
-        }
-        $.each(xhr.responseJSON.children, (k, v) => {
-          if (v.errors) {
-            $.each(v.errors, (n, errorText) => {
-              annotator.notification.banner(errorText, 'error');
-            });
-          }
-        });
-      },
-    }));
-
-    app.start().then(() => {
-      app.annotations.load({ entry: x.entryId });
-    });
-
-    $(window).scroll(() => {
-      const scrollTop = $(window).scrollTop();
-      const docHeight = $(document).height();
-      const scrollPercent = (scrollTop) / (docHeight);
-      const scrollPercentRounded = Math.round(scrollPercent * 100) / 100;
-      savePercent(x.entryId, scrollPercentRounded);
-    });
-
-    retrievePercent(x.entryId);
-
-    $(window).resize(() => {
-      retrievePercent(x.entryId, true);
-    });
-  }
-
   document.querySelectorAll('[data-handler=tag-rename]').forEach((item) => {
     const current = item;
     current.wallabag_edit_mode = false;
@@ -127,12 +65,6 @@ $(document).ready(() => {
 
   $('#user_emailTwoFactor').on('change', () => {
     $('#user_googleTwoFactor').prop('checked', false);
-  });
-
-  // handle copy to clipboard for developer stuff
-  const clipboard = new ClipboardJS('.btn');
-  clipboard.on('success', (e) => {
-    e.clearSelection();
   });
 });
 
@@ -248,54 +180,8 @@ const stickyNav = () => {
   });
 };
 
-const articleScroll = () => {
-  const articleEl = $('#article');
-  if (articleEl.length > 0) {
-    $(window).scroll(() => {
-      const s = $(window).scrollTop();
-      const d = $(document).height();
-      const c = $(window).height();
-      const articleElBottom = articleEl.offset().top + articleEl.height();
-      const scrollPercent = (s / (d - c)) * 100;
-      $('.progress .determinate').css('width', `${scrollPercent}%`);
-      const fixedActionBtn = $('.js-fixed-action-btn');
-      const toggleScrollDataName = 'toggle-auto';
-      if ((s + c) > articleElBottom) {
-        fixedActionBtn.data(toggleScrollDataName, true);
-        fixedActionBtn.floatingActionButton('open');
-      } else if (fixedActionBtn.data(toggleScrollDataName) === true) {
-        fixedActionBtn.data(toggleScrollDataName, false);
-        fixedActionBtn.floatingActionButton('close');
-      }
-    });
-  }
-};
-
 $(document).ready(() => {
-  // sidenav
-  $('.sidenav').sidenav();
-  $('select').formSelect();
-  $('.collapsible[data-collapsible="accordion"]').collapsible();
-  $('.collapsible[data-collapsible="expandable"]').collapsible({
-    accordion: false,
-  });
-
-  $('.dropdown-trigger').dropdown({ hover: false });
-  $('.dropdown-trigger[data-covertrigger="false"][data-constrainwidth="false"]').dropdown({
-    hover: false,
-    coverTrigger: false,
-    constrainWidth: false,
-  });
-
-  $('.tabs').tabs();
-  $('.tooltipped').tooltip();
-  $('.fixed-action-btn').floatingActionButton();
-
-  initFilters();
-  initExport();
-  initRandom();
   stickyNav();
-  articleScroll();
   initPreviewText();
 
   const toggleNav = (toShow, toFocus) => {
@@ -307,9 +193,6 @@ $(document).ready(() => {
   $('#nav-btn-add-tag').on('click', () => {
     $('.nav-panel-add-tag').toggle();
     $('.nav-panel-menu').addClass('hidden');
-    if (window.innerWidth < mobileMaxWidth) {
-      $('.sidenav').sidenav('close');
-    }
     $('#tag_label').focus();
     return false;
   });
@@ -376,17 +259,5 @@ $(document).ready(() => {
       e.preventDefault();
       $('form[name="form_mass_action"] button[name="tag"]').trigger('click');
     }
-  });
-
-  document.querySelectorAll('img.jr-qrcode').forEach((qrcode) => {
-    const src = jrQrcode.getQrBase64(qrcode.getAttribute('data-url'));
-
-    qrcode.setAttribute('src', src);
-  });
-
-  document.querySelectorAll('.material-toast').forEach((toast) => {
-    M.toast({
-      text: toast.innerText,
-    });
   });
 });
