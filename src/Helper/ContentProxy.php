@@ -102,7 +102,7 @@ class ContentProxy
         );
 
         if (0 === \count($errors)) {
-            $entry->setLanguage($value);
+            $entry->setLanguage(\Locale::canonicalize($value));
 
             return;
         }
