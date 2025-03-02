@@ -6,7 +6,6 @@ import $ from 'jquery';
 import '@materializecss/materialize/dist/css/materialize.css';
 import '@materializecss/materialize/dist/js/materialize';
 
-import ClipboardJS from 'clipboard';
 import 'mathjax/es5/tex-svg';
 
 /* Fonts */
@@ -66,12 +65,6 @@ $(document).ready(() => {
 
   $('#user_emailTwoFactor').on('change', () => {
     $('#user_googleTwoFactor').prop('checked', false);
-  });
-
-  // handle copy to clipboard for developer stuff
-  const clipboard = new ClipboardJS('.btn');
-  clipboard.on('success', (e) => {
-    e.clearSelection();
   });
 });
 
