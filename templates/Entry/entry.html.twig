@@ -8,7 +8,7 @@
 
 {% block menu %}
     <div class="progress">
-        <div class="determinate"></div>
+        <div class="determinate" data-controller="scroll-indicator" data-action="scroll@window->scroll-indicator#updateWidth"></div>
     </div>
     <nav class="hide-on-large-only js-entry-nav-top">
         <div class="nav-panel-item cyan darken-1">

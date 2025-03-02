@@ -242,22 +242,8 @@ const stickyNav = () => {
   });
 };
 
-const articleScroll = () => {
-  const articleEl = $('#article');
-  if (articleEl.length > 0) {
-    $(window).scroll(() => {
-      const s = $(window).scrollTop();
-      const d = $(document).height();
-      const c = $(window).height();
-      const scrollPercent = (s / (d - c)) * 100;
-      $('.progress .determinate').css('width', `${scrollPercent}%`);
-    });
-  }
-};
-
 $(document).ready(() => {
   stickyNav();
-  articleScroll();
   initPreviewText();
 
   const toggleNav = (toShow, toFocus) => {
