@@ -6,9 +6,6 @@ import $ from 'jquery';
 import '@materializecss/materialize/dist/css/materialize.css';
 import '@materializecss/materialize/dist/js/materialize';
 
-/* Annotations */
-import annotator from 'annotator';
-
 import ClipboardJS from 'clipboard';
 import 'mathjax/es5/tex-svg';
 
@@ -33,45 +30,7 @@ import './js/shortcuts/entry';
 /* Theme style */
 import './scss/index.scss';
 
-/* ==========================================================================
- Annotations
- ========================================================================== */
-
 $(document).ready(() => {
-  if ($('#article').length) {
-    const app = new annotator.App();
-
-    app.include(annotator.ui.main, {
-      element: document.querySelector('article'),
-    });
-
-    const authorization = {
-      permits() { return true; },
-    };
-    app.registry.registerUtility(authorization, 'authorizationPolicy');
-
-    const x = JSON.parse($('#annotationroutes').html());
-    app.include(annotator.storage.http, $.extend({}, x, {
-      onError(msg, xhr) {
-        if (!Object.prototype.hasOwnProperty.call(xhr, 'responseJSON')) {
-          annotator.notification.banner('An error occurred', 'error');
-          return;
-        }
-        $.each(xhr.responseJSON.children, (k, v) => {
-          if (v.errors) {
-            $.each(v.errors, (n, errorText) => {
-              annotator.notification.banner(errorText, 'error');
-            });
-          }
-        });
-      },
-    }));
-
-    app.start().then(() => {
-      app.annotations.load({ entry: x.entryId });
-    });
-  }
-
   document.querySelectorAll('[data-handler=tag-rename]').forEach((item) => {
     const current = item;
     current.wallabag_edit_mode = false;
