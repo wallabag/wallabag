@@ -81,7 +81,7 @@
     "@fontsource/montserrat": "^5.1.1",
     "@fontsource/oswald": "^5.1.1",
     "@materializecss/materialize": "^1.2.2",
-    "annotator": "wallabag/annotator#master",
+    "annotator": "wallabag/annotator#v2.0.0-alpha.4",
     "clipboard": "^2.0.11",
     "hammerjs": "^2.0.8",
     "highlight.js": "^11.11.1",
