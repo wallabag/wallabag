@@ -1,36 +1,5 @@
 import $ from 'jquery';
 
-function supportsLocalStorage() {
-  try {
-    return 'localStorage' in window && window.localStorage !== null;
-  } catch (e) {
-    return false;
-  }
-}
-
-function savePercent(id, percent) {
-  if (!supportsLocalStorage()) { return false; }
-  localStorage[`wallabag.article.${id}.percent`] = percent;
-  return true;
-}
-
-function retrievePercent(id, resized) {
-  if (!supportsLocalStorage()) { return false; }
-
-  const bheight = $(document).height();
-  const percent = localStorage[`wallabag.article.${id}.percent`];
-  const scroll = bheight * percent;
-
-  if (!resized) {
-    window.scrollTo({
-      top: scroll,
-      behavior: 'smooth',
-    });
-  }
-
-  return true;
-}
-
 function initPreviewText() {
   // no display if preview_text not available
   if ($('div').is('#preview-article')) {
@@ -48,7 +17,5 @@ function initPreviewText() {
 }
 
 export {
-  savePercent,
-  retrievePercent,
   initPreviewText,
 };
