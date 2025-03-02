@@ -23,7 +23,7 @@ import '@fontsource/oswald';
 
 /* Tools */
 import {
-  savePercent, retrievePercent, initPreviewText,
+  initPreviewText,
 } from './js/tools';
 
 /* Import shortcuts */
@@ -34,7 +34,7 @@ import './js/shortcuts/entry';
 import './scss/index.scss';
 
 /* ==========================================================================
- Annotations & Remember position
+ Annotations
  ========================================================================== */
 
 $(document).ready(() => {
@@ -69,20 +69,6 @@ $(document).ready(() => {
 
     app.start().then(() => {
       app.annotations.load({ entry: x.entryId });
-    });
-
-    $(window).scroll(() => {
-      const scrollTop = $(window).scrollTop();
-      const docHeight = $(document).height();
-      const scrollPercent = (scrollTop) / (docHeight);
-      const scrollPercentRounded = Math.round(scrollPercent * 100) / 100;
-      savePercent(x.entryId, scrollPercentRounded);
-    });
-
-    retrievePercent(x.entryId);
-
-    $(window).resize(() => {
-      retrievePercent(x.entryId, true);
     });
   }
 
