@@ -1581,7 +1581,7 @@ class EntryControllerTest extends WallabagTestCase
                 'zh',
             ],
             'pt_BR' => [
-                'https://www.monpetitbresil.com/pages/quem-somos',
+                'https://www.gov.br/pt-br',
                 'pt_BR',
             ],
             'es' => [
