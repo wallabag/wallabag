@@ -4,7 +4,7 @@ import $ from 'jquery';
 
 /* Materialize imports */
 import '@materializecss/materialize/dist/css/materialize.css';
-import M from '@materializecss/materialize/dist/js/materialize';
+import '@materializecss/materialize/dist/js/materialize';
 
 /* Annotations */
 import annotator from 'annotator';
@@ -347,11 +347,5 @@ $(document).ready(() => {
     const src = jrQrcode.getQrBase64(qrcode.getAttribute('data-url'));
 
     qrcode.setAttribute('src', src);
-  });
-
-  document.querySelectorAll('.material-toast').forEach((toast) => {
-    M.toast({
-      text: toast.innerText,
-    });
   });
 });

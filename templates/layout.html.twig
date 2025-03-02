@@ -35,7 +35,7 @@
 
 {% block messages %}
     {% for flash_message in app.session.flashbag.get('notice') %}
-        <p class="material-toast hidden">{{ flash_message|trans }}</p>
+        <p class="hidden" data-controller="materialize--toast">{{ flash_message|trans }}</p>
     {% endfor %}
 {% endblock %}
 
