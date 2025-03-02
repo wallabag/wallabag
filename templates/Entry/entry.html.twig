@@ -262,7 +262,7 @@
 {% endblock %}
 
 {% block content %}
-    <div id="article" class="article">
+    <div id="article" class="article" data-controller="scroll-storage" data-scroll-storage-entry-id-value="{{ entry.id }}" data-action="scroll@window->scroll-storage#saveScroll">
         <header class="mbm">
             <h1>
                 <span{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>{{ entry.title|striptags|default('entry.default_title'|trans)|raw }}</span>
