@@ -891,25 +891,25 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.57.1.tgz#de633db3ec2ef6a3c89e2f19038063e8a122e2c2"
   integrity sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==
 
-"@fontsource/atkinson-hyperlegible@^5.1.1":
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/@fontsource/atkinson-hyperlegible/-/atkinson-hyperlegible-5.1.1.tgz#faec86532a43493e948b0b7f50493bcb3126bbe4"
-  integrity sha512-AxjSa0Ld2CrHqz3GV0gHVY7R5ySBw5c1B7FXLz59aUeFK9rJNm5ivc14qzYKaDi0lYCjFQtfpqb9pklie91PeA==
+"@fontsource/atkinson-hyperlegible@^5.2.5":
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/atkinson-hyperlegible/-/atkinson-hyperlegible-5.2.5.tgz#2cac73f0a3f840112ffc776a977449d8447b607a"
+  integrity sha512-looo8B/DHWsKG439j4hHsr2Fq3/CRkM9gpwxUu35aID4q24tYgxLmQqHbwAKA8+uV7y/fHnPkqBNsM83g+cu2A==
 
-"@fontsource/eb-garamond@^5.1.2":
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/@fontsource/eb-garamond/-/eb-garamond-5.1.2.tgz#d6ffd8c386b21ca4c1f6d17c9f6e3cceaf7ac7a9"
-  integrity sha512-On24xvqbbC4Y0dRS+OKDlxPYtixFWEzwu7QqJ9yIzKS9pgPNxs/FgICnO7YD4GzY2obisnYHQLZILWFsIQUCrQ==
+"@fontsource/eb-garamond@^5.2.5":
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/eb-garamond/-/eb-garamond-5.2.5.tgz#3a21d9709c45269d159c1def77169a47864338eb"
+  integrity sha512-1c2I2QjDu7sEzs7Pb/fc3aX8mKrVwlBm05KttfrAQK11GYBXLSBS7KpcGB8IgQj/b/WH7sxP1XtYRsKTfNpvWQ==
 
-"@fontsource/montserrat@^5.1.1":
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/@fontsource/montserrat/-/montserrat-5.1.1.tgz#25f420893ae1726b375ac921542138c16557966d"
-  integrity sha512-myTQCo0XWf5AXc3Pm5GFFTstueYTacE+gpL3G8Vf5ELpr/rBfW+zr7dKLPYXlq2r21HHwfyw6yueKWccWUtKBA==
+"@fontsource/montserrat@^5.2.5":
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/montserrat/-/montserrat-5.2.5.tgz#1095d286c156a42a864ade432e2b094acfde3b0b"
+  integrity sha512-/OA+bdg1yqUArDUnEeCqDwgTDiIpvED56TxYskje8UKpsvjl/0A9eNod7IcdHz6/Osi70vo7briRO3la8/u+5Q==
 
-"@fontsource/oswald@^5.1.1":
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/@fontsource/oswald/-/oswald-5.1.1.tgz#fdf40cca1d5c02c9b0cc0d5ac20eacb71a01731d"
-  integrity sha512-MXymZDN08CJ4q/5+ur6u7YM3xcgPf6OXzUy7ngrRdGYXR9Oxal1A1m3FhFVLP5X0pWW6l2W1awC9YkTGWrbsXg==
+"@fontsource/oswald@^5.2.5":
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/oswald/-/oswald-5.2.5.tgz#01ef5b61fae44542eb22330255d32b728ee45b0c"
+  integrity sha512-Sw8ayEYCoOzG2ISw5HaX3d5ILt3OEG2VFX2nzHaGywYD9p0WvVfO4SBK5/y9JGuOty3jA6OhptxOYZgwjTTPLQ==
 
 "@humanwhocodes/config-array@^0.13.0":
   version "0.13.0"
