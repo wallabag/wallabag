@@ -103,7 +103,6 @@
         "psr/http-factory": "^1.1.0",
         "psr/http-message": "^2.0",
         "psr/log": "^1.1.4",
-        "rulerz-php/doctrine-orm": "dev-master",
         "scheb/2fa-backup-code": "^5.13.2",
         "scheb/2fa-bundle": "^5.13.2",
         "scheb/2fa-email": "^5.13.2",

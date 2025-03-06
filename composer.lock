@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0082094723babdca23d61c87b0d5dca3",
+    "content-hash": "1ac72835fc69aa3c7d966064535196d4",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -7669,64 +7669,6 @@
                 "source": "https://github.com/ralouphie/getallheaders/tree/develop"
             },
             "time": "2019-03-08T08:55:37+00:00"
-        },
-        {
-            "name": "rulerz-php/doctrine-orm",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rulerz-php/doctrine-orm.git",
-                "reference": "3ff5c8507e23942fa4af14818ab92f0e91bfaebe"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/rulerz-php/doctrine-orm/zipball/3ff5c8507e23942fa4af14818ab92f0e91bfaebe",
-                "reference": "3ff5c8507e23942fa4af14818ab92f0e91bfaebe",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/orm": "^2.4",
-                "kphoen/rulerz": "dev-master as 1.0.0",
-                "php": ">=7.1"
-            },
-            "require-dev": {
-                "behat/behat": "~3.0",
-                "kphoen/rusty": "dev-master",
-                "liip/rmt": "^1.2",
-                "phpunit/phpunit": "^7.1"
-            },
-            "default-branch": true,
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "RulerZ\\DoctrineORM\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kévin Gomez",
-                    "email": "contact@kevingomez.fr",
-                    "homepage": "http://www.kevingomez.fr/"
-                }
-            ],
-            "description": "Doctrine ORM compilation target for RulerZ",
-            "keywords": [
-                "doctrine",
-                "engine",
-                "orm",
-                "rule",
-                "rulerz",
-                "specification"
-            ],
-            "support": {
-                "issues": "https://github.com/rulerz-php/doctrine-orm/issues",
-                "source": "https://github.com/rulerz-php/doctrine-orm/tree/master"
-            },
-            "time": "2020-01-03T14:08:51+00:00"
         },
         {
             "name": "scheb/2fa-backup-code",
@@ -19559,7 +19501,6 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "friendsofsymfony/oauth-server-bundle": 20,
-        "rulerz-php/doctrine-orm": 20,
         "wallabag/rulerz": 20,
         "wallabag/rulerz-bundle": 20
     },
@@ -19586,6 +19527,6 @@
         "ext-tokenizer": "*",
         "ext-xml": "*"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }

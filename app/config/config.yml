@@ -232,10 +232,6 @@ scheb_two_factor:
         template: "Authentication/form.html.twig"
         mailer: Wallabag\Mailer\AuthCodeMailer
 
-rulerz:
-    targets:
-        doctrine: true
-
 old_sound_rabbit_mq:
     connections:
         default:
