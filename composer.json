@@ -140,7 +140,6 @@
         "symfony/mime": "^5.4.35",
         "symfony/monolog-bundle": "^3.10",
         "symfony/options-resolver": "^5.4.21",
-        "symfony/polyfill-php80": "^1.29",
         "symfony/proxy-manager-bridge": "^5.4.21",
         "symfony/routing": "^5.4.35",
         "symfony/security-bundle": "^5.4.35",
