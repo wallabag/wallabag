@@ -1,4 +1,4 @@
-FROM php:8.1-fpm AS rootless
+FROM php:8.2-fpm AS rootless
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG NODE_VERSION=20
@@ -50,14 +50,13 @@ RUN docker-php-ext-install -j "$(nproc)" \
         tidy \
         zip
 
-RUN pecl install redis; \
-    pecl install imagick; \
-    pecl install xdebug-3.1.6; \
-    docker-php-ext-enable \
+RUN pecl install redis-6.1.0 \
+    && pecl install imagick-3.7.0 \
+    && pecl install xdebug-3.4.1 \
+    && docker-php-ext-enable \
         redis \
         imagick \
-        xdebug \
-    ;
+        xdebug
 
 RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
     && architecture=$(uname -m) \
