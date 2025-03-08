@@ -119,19 +119,19 @@
             </a>
             <ul class="collapsible-body">
                 <li>
-                    <a href="#" class="js-theme-toggle" data-theme="light">
+                    <a href="#" data-action="click->dark-theme#useLight:prevent">
                         <i class="theme-toggle-icon material-icons tiny">brightness_high</i>
                         <span>{{ 'entry.view.left_menu.theme_toggle_light'|trans }}</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="js-theme-toggle" data-theme="dark">
+                    <a href="#" data-action="click->dark-theme#useDark:prevent">
                         <i class="theme-toggle-icon material-icons tiny">brightness_low</i>
                         <span>{{ 'entry.view.left_menu.theme_toggle_dark'|trans }}</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="js-theme-toggle" data-theme="auto">
+                    <a href="#" data-action="click->dark-theme#useAuto:prevent">
                         <i class="theme-toggle-icon material-icons tiny">brightness_auto</i>
                         <span>{{ 'entry.view.left_menu.theme_toggle_auto'|trans }}</span>
                     </a>
