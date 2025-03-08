@@ -129,16 +129,7 @@ import './scss/index.scss';
   addDarkThemeListeners();
 }());
 
-const stickyNav = () => {
-  const nav = $('.js-entry-nav-top');
-  $('[data-toggle="actions"]').click(() => {
-    nav.toggleClass('entry-nav-top--sticky');
-  });
-};
-
 $(document).ready(() => {
-  stickyNav();
-
   $('#nav-btn-add-tag').on('click', () => {
     $('.nav-panel-add-tag').toggle();
     $('.nav-panel-menu').addClass('hidden');
