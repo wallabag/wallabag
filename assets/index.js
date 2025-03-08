@@ -173,23 +173,4 @@ $(document).ready(() => {
     $('.nav-panel-actions').show();
     return false;
   });
-
-  const mainCheckboxes = document.querySelectorAll('[data-js="checkboxes-toggle"]');
-  if (mainCheckboxes.length) {
-    [...mainCheckboxes].forEach((el) => {
-      el.addEventListener('click', () => {
-        const checkboxes = document.querySelectorAll(el.dataset.toggle);
-        [...checkboxes].forEach((checkbox) => {
-          const checkboxClone = checkbox;
-          checkboxClone.checked = el.checked;
-        });
-      });
-    });
-  }
-  $('form[name="form_mass_action"] input[name="tags"]').on('keydown', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      $('form[name="form_mass_action"] button[name="tag"]').trigger('click');
-    }
-  });
 });
