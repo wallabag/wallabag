@@ -42,7 +42,7 @@
             </ul>
         </div>
     </nav>
-    <ul id="slide-out" class="left-bar collapsible sidenav sidenav-fixed reader-mode" data-controller="materialize--sidenav materialize--collapsible">
+    <ul id="slide-out" class="left-bar collapsible sidenav sidenav-fixed reader-mode" data-controller="materialize--sidenav materialize--collapsible leftbar">
         <li class="bold border-bottom hide-on-med-and-down">
             <a class="waves-effect collapsible-header" href="{{ path('homepage') }}">
                 <i class="material-icons small">arrow_back</i>
@@ -105,7 +105,7 @@
         {% endif %}
 
         <li class="bold border-bottom">
-            <a class="waves-effect collapsible-header" id="nav-btn-add-tag" data-action="click->materialize--sidenav#close">
+            <a class="waves-effect collapsible-header" id="nav-btn-add-tag" data-action="click->materialize--sidenav#close click->leftbar#toggleAddTagForm">
                 <i class="material-icons small">label_outline</i>
                 <span>{{ 'entry.view.left_menu.add_a_tag'|trans }}</span>
             </a>
@@ -320,7 +320,7 @@
             </div>
 
             {% if is_granted('TAG', entry) %}
-                <div class="input-field nav-panel-add-tag" style="display: none">
+                <div class="input-field nav-panel-add-tag hidden" data-controller="add-tag" data-action="leftbar:toggleAddTagForm@window->add-tag#toggle">
                     {{ render(controller('Wallabag\\Controller\\TagController::addTagFormAction', {'id': entry.id})) }}
                 </div>
             {% endif %}
