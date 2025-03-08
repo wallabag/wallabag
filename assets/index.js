@@ -24,27 +24,6 @@ import './js/shortcuts/entry';
 /* Theme style */
 import './scss/index.scss';
 
-$(document).ready(() => {
-  document.querySelectorAll('[data-handler=tag-rename]').forEach((item) => {
-    const current = item;
-    current.wallabag_edit_mode = false;
-    current.onclick = (event) => {
-      const target = event.currentTarget;
-
-      if (target.wallabag_edit_mode === false) {
-        $(target.parentNode.querySelector('[data-handle=tag-link]')).addClass('hidden');
-        $(target.parentNode.querySelector('[data-handle=tag-rename-form]')).removeClass('hidden');
-        target.parentNode.querySelector('[data-handle=tag-rename-form] input').focus();
-        target.querySelector('.material-icons').innerHTML = 'done';
-
-        target.wallabag_edit_mode = true;
-      } else {
-        target.parentNode.querySelector('[data-handle=tag-rename-form]').submit();
-      }
-    };
-  });
-});
-
 (function darkTheme() {
   const rootEl = document.querySelector('html');
   const themeDom = {
