@@ -21,7 +21,7 @@
                         </ul>
                     </div>
 
-                    <div id="set1" class="col s12">
+                    <div id="set1" class="col s12" data-controller="config">
                         {{ form_start(form.config) }}
                             {{ form_errors(form.config) }}
 
@@ -121,7 +121,7 @@
                             <div class="row">
                                 <div class="input-field col s5" data-controller="materialize--form-select">
                                     {{ form_errors(form.config.font) }}
-                                    {{ form_widget(form.config.font) }}
+                                    {{ form_widget(form.config.font, {attr: {'data-config-target': 'font', 'data-action': 'config#updatePreview'}}) }}
                                     {{ form_label(form.config.font) }}
                                 </div>
                                 <div class="input-field col s1">
@@ -132,7 +132,7 @@
 
                                 <div class="input-field col s5">
                                     {{ form_errors(form.config.lineHeight) }}
-                                    {{ form_widget(form.config.lineHeight) }}
+                                    {{ form_widget(form.config.lineHeight, {attr: {'data-config-target': 'lineHeight', 'data-action': 'config#updatePreview'}}) }}
                                     {{ form_label(form.config.lineHeight, null, {'label_attr': {'class': 'settings-range-label'}}) }}
                                 </div>
                                 <div class="input-field col s1">
@@ -145,7 +145,7 @@
                             <div class="row">
                                 <div class="input-field col s5">
                                     {{ form_errors(form.config.fontsize) }}
-                                    {{ form_widget(form.config.fontsize) }}
+                                    {{ form_widget(form.config.fontsize, {attr: {'data-config-target': 'fontSize', 'data-action': 'config#updatePreview'}}) }}
                                     {{ form_label(form.config.fontsize, null, {'label_attr': {'class': 'settings-range-label'}}) }}
                                 </div>
                                 <div class="input-field col s1">
@@ -156,7 +156,7 @@
 
                                 <div class="input-field col s5">
                                     {{ form_errors(form.config.maxWidth) }}
-                                    {{ form_widget(form.config.maxWidth) }}
+                                    {{ form_widget(form.config.maxWidth, {attr: {'data-config-target': 'maxWidth', 'data-action': 'config#updatePreview'}}) }}
                                     {{ form_label(form.config.maxWidth, null, {'label_attr': {'class': 'settings-range-label'}}) }}
                                 </div>
                                 <div class="input-field col s1">
@@ -168,8 +168,8 @@
 
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <div id="preview-article">
-                                        <article id="preview-content">
+                                    <div id="preview-article" data-config-target="previewArticle">
+                                        <article id="preview-content" data-config-target="previewContent">
                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                                         </article>
                                     </div>
