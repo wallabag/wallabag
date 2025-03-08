@@ -10,7 +10,7 @@
     <div class="progress">
         <div class="determinate" data-controller="scroll-indicator" data-action="scroll@window->scroll-indicator#updateWidth"></div>
     </div>
-    <nav class="hide-on-large-only js-entry-nav-top">
+    <nav class="hide-on-large-only" data-controller="sticky-nav" data-action="materialize--fab:click@window->sticky-nav#toggle">
         <div class="nav-panel-item cyan darken-1">
             <ul>
                 <li>
@@ -338,7 +338,7 @@
             {{ entry.content|raw }}
         </article>
 
-        <div class="fixed-action-btn horizontal click-to-toggle hide-on-large-only" data-controller="materialize--fab" data-action="scroll@window->materialize--fab#autoDisplay">
+        <div class="fixed-action-btn horizontal click-to-toggle hide-on-large-only" data-controller="materialize--fab" data-action="scroll@window->materialize--fab#autoDisplay click->materialize--fab#click">
             <a class="btn-floating btn-large" data-toggle="actions">
               <i class="material-icons">menu</i>
             </a>
