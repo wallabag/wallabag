@@ -48,16 +48,16 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row" data-controller="fake-radio">
                                     <div class="input-field col s12">
                                         <label for="{{ edit_form.emailTwoFactor.vars.id }}">
-                                            {{ form_widget(edit_form.emailTwoFactor) }}
+                                            {{ form_widget(edit_form.emailTwoFactor, {attr: {'data-fake-radio-target': 'emailTwoFactor', 'data-action': 'fake-radio#uncheckGoogle'}}) }}
                                             <span>{{ edit_form.emailTwoFactor.vars.label|trans }}</span>
                                         </label>
                                     </div>
                                     <div class="input-field col s12">
                                         <label for="{{ edit_form.googleTwoFactor.vars.id }}">
-                                            {{ form_widget(edit_form.googleTwoFactor) }}
+                                            {{ form_widget(edit_form.googleTwoFactor, {attr: {'data-fake-radio-target': 'googleTwoFactor', 'data-action': 'fake-radio#uncheckEmail'}}) }}
                                             <span>{{ edit_form.googleTwoFactor.vars.label|trans }}</span>
                                         </label>
                                     </div>
