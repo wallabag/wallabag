@@ -19,18 +19,19 @@
             {% for tagWithNbEntries in allTagsWithNbEntries %}
                 {% set tag = tagWithNbEntries.tag %}
                 {% set nbEntries = tagWithNbEntries.nbEntries %}
-                <li title="{{ tag.label }} ({{ nbEntries }})" id="tag-{{ tag.id }}" class="chip">
-                    <a href="{{ path('tag_entries', {'slug': tag.slug}) }}" class="card-tag-link" data-handle="tag-link">
+                <li title="{{ tag.label }} ({{ nbEntries }})" id="tag-{{ tag.id }}" class="chip" data-controller="tag">
+                    <a href="{{ path('tag_entries', {'slug': tag.slug}) }}" class="card-tag-link" data-tag-target="link">
                         {{ tag.label }}&nbsp;({{ nbEntries }})
                     </a>
                     {% if renameForms is defined and renameForms[tag.id] is defined and is_granted('EDIT', tag) %}
-                    <form class="card-tag-form hidden" data-handle="tag-rename-form" action="{{ path('tag_rename', {'slug': tag.slug, redirect: current_path}) }}" method="POST">
-                        {{ form_widget(renameForms[tag.id].label, {'attr': {'value': tag.label}}) }}
+                    <form class="card-tag-form hidden" data-tag-target="form" action="{{ path('tag_rename', {'slug': tag.slug, redirect: current_path}) }}" method="POST">
+                        {{ form_widget(renameForms[tag.id].label, {'attr': {'value': tag.label, 'data-tag-target': 'input'}}) }}
                         {{ form_rest(renameForms[tag.id]) }}
+                        <button type="submit"><i class="material-icons">done</i></button>
                     </form>
-                    <a class="card-tag-icon card-tag-rename" data-handler="tag-rename" href="javascript:void(0);">
+                    <button type="button" data-tag-target="edit" data-action="tag#showForm">
                         <i class="material-icons">mode_edit</i>
-                    </a>
+                    </button>
                     {% endif %}
                     {% if is_granted('DELETE', tag) %}
                         <a id="delete-{{ tag.slug }}" href="{{ path('tag_delete', {'slug': tag.slug, redirect: current_path}) }}" class="card-tag-icon card-tag-delete" onclick="return confirm('{{ 'tag.confirm.delete'|trans({'%name%': tag.label})|escape('js') }}')">
