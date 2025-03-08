@@ -17,7 +17,6 @@ import '@fontsource/oswald';
 
 /* Import shortcuts */
 import './js/shortcuts/main';
-import './js/shortcuts/entry';
 
 /* Theme style */
 import './scss/index.scss';
