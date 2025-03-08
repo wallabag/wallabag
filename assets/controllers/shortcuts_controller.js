@@ -100,5 +100,16 @@ export default class extends Controller {
       e.preventDefault();
       this.showActionsTarget.click();
     });
+
+    const originalStopCallback = Mousetrap.prototype.stopCallback;
+
+    Mousetrap.prototype.stopCallback = (e, element, combo) => {
+      // allow esc key to be used in input fields of topbar
+      if (combo === 'esc' && element.dataset.topbarTarget !== undefined) {
+        return false;
+      }
+
+      return originalStopCallback(e, element);
+    };
   }
 }
