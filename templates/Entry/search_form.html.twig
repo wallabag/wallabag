@@ -1,4 +1,4 @@
-<form class="input-field nav-panel-item nav-panel-search" style="display: none" name="search" method="GET" action="{{ path('search') }}">
+<form class="input-field nav-panel-item nav-panel-search" style="display: none" name="search" method="GET" action="{{ path('search') }}" data-topbar-target="search">
     {% if form_errors(form) %}
         <span class="black-text">{{ form_errors(form) }}</span>
     {% endif %}
@@ -10,8 +10,8 @@
 
     <input type="hidden" name="currentRoute" value="{{ currentRoute }}" />
 
-    {{ form_widget(form.term, {'attr': {'autocomplete': 'off', 'placeholder': 'entry.search.placeholder'}}) }}
-    <i class="material-icons close" aria-label="clear" role="button"></i>
+    {{ form_widget(form.term, {'attr': {'autocomplete': 'off', 'placeholder': 'entry.search.placeholder', 'data-topbar-target': 'searchInput'}}) }}
+    <i class="material-icons close" aria-label="clear" role="button" data-action="click->topbar#showActions"></i>
 
     {{ form_rest(form) }}
 </form>

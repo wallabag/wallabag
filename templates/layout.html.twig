@@ -79,8 +79,8 @@
                 </li>
             {% endif %}
         </ul>
-        <div class="nav-panels">
-            <div class="nav-panel-actions nav-panel-item">
+        <div class="nav-panels" data-controller="topbar">
+            <div class="nav-panel-actions nav-panel-item" data-topbar-target="actions">
                 <div class="nav-panel-top">
                     <a href="#" data-target="slide-out" class="nav-panel-menu sidenav-trigger"><i class="material-icons">menu</i></a>
                     <h1 class="left action">
@@ -90,12 +90,12 @@
                 </div>
                 <ul class="input-field nav-panel-buttom">
                     <li class="bold toggle-add-url-container">
-                        <a class="waves-effect toggle-add-url" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.add_new_entry'|trans }}" href="{{ path('new') }}" id="nav-btn-add">
+                        <a class="waves-effect toggle-add-url" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.add_new_entry'|trans }}" href="{{ path('new') }}" id="nav-btn-add" data-action="topbar#showAddUrl:prevent:stop">
                             <i class="material-icons">add</i>
                         </a>
                     </li>
                     <li>
-                        <a class="waves-effect" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.search'|trans }}" href="javascript: void(null);" id="nav-btn-search">
+                        <a class="waves-effect" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.search'|trans }}" href="javascript: void(null);" id="nav-btn-search" data-action="topbar#showSearch:prevent:stop">
                             <i class="material-icons">search</i>
                         </a>
                     </li>
