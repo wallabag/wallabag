@@ -52,7 +52,7 @@
         </li>
 
         <li class="bold border-bottom hide-on-med-and-down">
-            <a class="waves-effect collapsible-header original" href="{{ entry.url|e }}" target="_blank" rel="noopener">
+            <a class="waves-effect collapsible-header original" href="{{ entry.url|e }}" target="_blank" rel="noopener" data-shortcuts-target="openOriginal">
                 <i class="material-icons small">link</i>
                 <span>{{ 'entry.view.left_menu.view_original_article'|trans }}</span>
             </a>
@@ -76,7 +76,7 @@
 
         {% if is_granted('ARCHIVE', entry) %}
             <li class="bold hide-on-med-and-down">
-                <a class="waves-effect collapsible-header markasread" title="{{ mark_as_read_label|trans }}" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" id="markAsRead">
+                <a class="waves-effect collapsible-header markasread" title="{{ mark_as_read_label|trans }}" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" id="markAsRead" data-shortcuts-target="markAsRead">
                     <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
                     <span>{{ mark_as_read_label|trans }}</span>
                 </a>
@@ -86,7 +86,7 @@
 
         {% if is_granted('STAR', entry) %}
             <li class="bold hide-on-med-and-down">
-                <a class="waves-effect collapsible-header favorite" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" id="setFav">
+                <a class="waves-effect collapsible-header favorite" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" id="setFav" data-shortcuts-target="markAsFavorite">
                     <i class="material-icons small">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
                     <span>{{ 'entry.view.left_menu.set_as_starred'|trans }}</span>
                 </a>
@@ -96,7 +96,7 @@
 
         {% if is_granted('DELETE', entry) %}
             <li class="bold border-bottom">
-                <a class="waves-effect collapsible-header delete" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', {'id': entry.id, redirect: current_path}) }}">
+                <a class="waves-effect collapsible-header delete" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', {'id': entry.id, redirect: current_path}) }}" data-shortcuts-target="deleteEntry">
                     <i class="material-icons small">delete</i>
                     <span>{{ 'entry.view.left_menu.delete'|trans }}</span>
                 </a>
