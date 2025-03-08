@@ -23,7 +23,7 @@ jobs:
         uses: "shivammathur/setup-php@v2"
         with:
           coverage: "none"
-          php-version: "7.4"
+          php-version: "8.2"
           tools: cs2pr, pecl
           extensions: pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
