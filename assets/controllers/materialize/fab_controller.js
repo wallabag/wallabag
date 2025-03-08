@@ -22,6 +22,10 @@ export default class extends Controller {
     }
   }
 
+  click() {
+    this.dispatch('click');
+  }
+
   disconnect() {
     this.instance.destroy();
   }
