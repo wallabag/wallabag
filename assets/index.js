@@ -128,12 +128,3 @@ import './scss/index.scss';
   preferedColorScheme.init();
   addDarkThemeListeners();
 }());
-
-$(document).ready(() => {
-  $('#nav-btn-add-tag').on('click', () => {
-    $('.nav-panel-add-tag').toggle();
-    $('.nav-panel-menu').addClass('hidden');
-    $('#tag_label').focus();
-    return false;
-  });
-});
