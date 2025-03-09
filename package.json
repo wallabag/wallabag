@@ -102,7 +102,7 @@
     "build:dev": "encore dev",
     "watch": "encore dev --watch",
     "build:prod": "encore production --progress",
-    "lint:js": "eslint assets/*.js assets/js/**/*.js assets/controllers/*.js",
+    "lint:js": "eslint assets/*.js assets/controllers/*.js",
     "lint:scss": "stylelint assets/scss/*.scss assets/scss/**/*.scss"
   }
 }

@@ -53,8 +53,8 @@
     {% if current_route == 'homepage' %}
         {% set current_route = 'unread' %}
     {% endif %}
-    <form name="form_mass_action" action="{{ path('mass_action', {redirect: current_path}) }}" method="post" data-controller="batch-edit">
-    <div class="results">
+    <form name="form_mass_action" action="{{ path('mass_action', {redirect: current_path}) }}" method="post" data-controller="batch-edit entries-navigation">
+    <div class="results" data-entries-navigation-target="paginationWrapper">
         <div class="nb-results">
             {{ 'entry.list.number_on_the_page'|trans({'%count%': entries.count}) }}
             {% if entries.count > 0 %}
@@ -92,7 +92,7 @@
         <ol class="entries {% if list_mode == 1 %}collection{% else %}row entries-row data{% endif %}">
 
             {% for entry in entries %}
-                <li id="entry-{{ entry.id|e }}" class="{% if list_mode != 0 %}col collection-item{% endif %} s12" data-entry-id="{{ entry.id|e }}" data-test="entry">
+                <li id="entry-{{ entry.id|e }}" class="{% if list_mode != 0 %}col collection-item{% endif %} s12" data-entry-id="{{ entry.id|e }}" data-test="entry" data-entries-navigation-target="card">
                     {% if list_mode == 1 %}
                         {% include "Entry/_card_list.html.twig" with {'entry': entry, 'currentRoute': current_route, 'routes': entries_with_archived_class_routes} only %}
                     {% elseif not entry.previewPicture is null and entry.mimetype starts with 'image/' %}

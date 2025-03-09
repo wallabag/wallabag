@@ -15,8 +15,5 @@ import '@fontsource/eb-garamond';
 import '@fontsource/montserrat';
 import '@fontsource/oswald';
 
-/* Import shortcuts */
-import './js/shortcuts/main';
-
 /* Theme style */
 import './scss/index.scss';
