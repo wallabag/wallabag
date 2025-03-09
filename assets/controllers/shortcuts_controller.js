@@ -4,6 +4,8 @@ import Mousetrap from 'mousetrap';
 export default class extends Controller {
   static targets = ['openOriginal', 'markAsFavorite', 'markAsRead', 'deleteEntry', 'showAddUrl', 'showSearch', 'showActions'];
 
+  static outlets = ['entries-navigation'];
+
   connect() {
     /* Go to */
     Mousetrap.bind('g u', () => {
@@ -111,5 +113,29 @@ export default class extends Controller {
 
       return originalStopCallback(e, element);
     };
+
+    Mousetrap.bind('right', () => {
+      if (!this.hasEntriesNavigationOutlet) {
+        return;
+      }
+
+      this.entriesNavigationOutlet.selectRightCard();
+    });
+
+    Mousetrap.bind('left', () => {
+      if (!this.hasEntriesNavigationOutlet) {
+        return;
+      }
+
+      this.entriesNavigationOutlet.selectLeftCard();
+    });
+
+    Mousetrap.bind('enter', () => {
+      if (!this.hasEntriesNavigationOutlet) {
+        return;
+      }
+
+      this.entriesNavigationOutlet.selectCurrentCard();
+    });
   }
 }
