@@ -1396,7 +1396,6 @@ ajv@^8.0.0, ajv@^8.0.1, ajv@^8.9.0:
 
 annotator@wallabag/annotator#master:
   version "2.0.0-alpha.4"
-  uid "082069d777ed0fe5080392e85675ef3a519c7886"
   resolved "https://codeload.github.com/wallabag/annotator/tar.gz/082069d777ed0fe5080392e85675ef3a519c7886"
   dependencies:
     backbone-extend-standalone "^0.1.2"
@@ -3377,11 +3376,6 @@ jiti@^1.20.0:
   version "1.21.0"
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.21.0.tgz#7c97f8fe045724e136a397f7340475244156105d"
   integrity sha512-gFqAIbuKyyso/3G2qhiO2OM6shY6EPP/R0+mkDbyspxKazh8BXDC5FiFsUjlczgdNz/vfra0da2y+aHrusLG/Q==
-
-jquery.cookie@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/jquery.cookie/-/jquery.cookie-1.4.1.tgz#d63dce209eab691fe63316db08ca9e47e0f9385b"
-  integrity sha512-c/hZOOL+8VSw/FkTVH637gS1/6YzMSCROpTZ2qBYwJ7s7sHajU7uBkSSiE5+GXWwrfCCyO+jsYjUQ7Hs2rIxAA==
 
 jquery@^3.7.1:
   version "3.7.1"

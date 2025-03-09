@@ -22,7 +22,6 @@ Encore
     config.corejs = '3.23';
   })
   .enableSassLoader()
-  .enablePostCssLoader()
-  .autoProvidejQuery();
+  .enablePostCssLoader();
 
 module.exports = Encore.getWebpackConfig();
