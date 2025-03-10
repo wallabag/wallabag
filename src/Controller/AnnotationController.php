@@ -5,6 +5,7 @@ namespace Wallabag\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use JMS\Serializer\SerializerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,6 +37,7 @@ class AnnotationController extends AbstractFOSRestController
      * @see Api\WallabagRestController
      *
      * @Route("/annotations/{entry}.{_format}", name="annotations_get_annotations", methods={"GET"}, defaults={"_format": "json"})
+     * @IsGranted("LIST_ANNOTATIONS", subject="entry")
      *
      * @return JsonResponse
      */
@@ -57,6 +59,7 @@ class AnnotationController extends AbstractFOSRestController
      * @see Api\WallabagRestController
      *
      * @Route("/annotations/{entry}.{_format}", name="annotations_post_annotation", methods={"POST"}, defaults={"_format": "json"})
+     * @IsGranted("CREATE_ANNOTATIONS", subject="entry")
      *
      * @return JsonResponse
      */
@@ -91,14 +94,13 @@ class AnnotationController extends AbstractFOSRestController
      * @see Api\WallabagRestController
      *
      * @Route("/annotations/{annotation}.{_format}", name="annotations_put_annotation", methods={"PUT"}, defaults={"_format": "json"})
+     * @IsGranted("EDIT", subject="annotation")
      *
      * @return JsonResponse
      */
-    public function putAnnotationAction(Request $request, AnnotationRepository $annotationRepository, int $annotation)
+    public function putAnnotationAction(Request $request, Annotation $annotation)
     {
         try {
-            $annotation = $this->validateAnnotation($annotationRepository, $annotation, $this->getUser()->getId());
-
             $data = json_decode($request->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
             $form = $this->formFactory->createNamed('', EditAnnotationType::class, $annotation, [
@@ -128,14 +130,13 @@ class AnnotationController extends AbstractFOSRestController
      * @see Api\WallabagRestController
      *
      * @Route("/annotations/{annotation}.{_format}", name="annotations_delete_annotation", methods={"DELETE"}, defaults={"_format": "json"})
+     * @IsGranted("DELETE", subject="annotation")
      *
      * @return JsonResponse
      */
-    public function deleteAnnotationAction(AnnotationRepository $annotationRepository, int $annotation)
+    public function deleteAnnotationAction(Annotation $annotation)
     {
         try {
-            $annotation = $this->validateAnnotation($annotationRepository, $annotation, $this->getUser()->getId());
-
             $this->entityManager->remove($annotation);
             $this->entityManager->flush();
 
@@ -156,16 +157,5 @@ class AnnotationController extends AbstractFOSRestController
         \assert(null === $user || $user instanceof User);
 
         return $user;
-    }
-
-    private function validateAnnotation(AnnotationRepository $annotationRepository, int $annotationId, int $userId)
-    {
-        $annotation = $annotationRepository->findOneByIdAndUserId($annotationId, $userId);
-
-        if (null === $annotation) {
-            throw new NotFoundHttpException();
-        }
-
-        return $annotation;
     }
 }

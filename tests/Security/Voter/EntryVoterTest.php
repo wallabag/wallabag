@@ -146,4 +146,32 @@ class EntryVoterTest extends TestCase
 
         $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::DELETE]));
     }
+
+    public function testVoteReturnsDeniedForNonEntryUserListAnnotations(): void
+    {
+        $this->token->method('getUser')->willReturn(new User());
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::LIST_ANNOTATIONS]));
+    }
+
+    public function testVoteReturnsGrantedForEntryUserListAnnotations(): void
+    {
+        $this->token->method('getUser')->willReturn($this->user);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::LIST_ANNOTATIONS]));
+    }
+
+    public function testVoteReturnsDeniedForNonEntryUserCreateAnnotations(): void
+    {
+        $this->token->method('getUser')->willReturn(new User());
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::CREATE_ANNOTATIONS]));
+    }
+
+    public function testVoteReturnsGrantedForEntryUserCreateAnnotations(): void
+    {
+        $this->token->method('getUser')->willReturn($this->user);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::CREATE_ANNOTATIONS]));
+    }
 }

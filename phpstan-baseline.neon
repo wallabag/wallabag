@@ -6,7 +6,7 @@ parameters:
 			path: src/Controller/AnnotationController.php
 
 		-
-			message: "#^Method Wallabag\\\\Controller\\\\AnnotationController\\:\\:putAnnotationAction\\(\\) should return Symfony\\\\Component\\\\HttpFoundation\\\\JsonResponse but returns Symfony\\\\Component\\\\Form\\\\FormInterface\\<null\\>\\.$#"
+			message: "#^Method Wallabag\\\\Controller\\\\AnnotationController\\:\\:putAnnotationAction\\(\\) should return Symfony\\\\Component\\\\HttpFoundation\\\\JsonResponse but returns Symfony\\\\Component\\\\Form\\\\FormInterface\\<mixed\\>\\.$#"
 			count: 1
 			path: src/Controller/AnnotationController.php
 
