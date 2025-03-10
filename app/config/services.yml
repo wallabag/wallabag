@@ -230,17 +230,9 @@ services:
         tags:
             - { name: rulerz.operator, target: native, operator: matches }
 
-    Wallabag\Operator\Doctrine\Matches:
-        tags:
-            - { name: rulerz.operator, target: doctrine, operator: matches, inline: true }
-
     Wallabag\Operator\PHP\NotMatches:
         tags:
             - { name: rulerz.operator, target: native, operator: notmatches }
-
-    Wallabag\Operator\Doctrine\NotMatches:
-        tags:
-            - { name: rulerz.operator, target: doctrine, operator: notmatches, inline: true }
 
     Wallabag\Operator\PHP\PatternMatches:
         tags:
