@@ -4,6 +4,7 @@ namespace Wallabag\Controller\Api;
 
 use Nelmio\ApiDocBundle\Annotation\Operation;
 use OpenApi\Annotations as OA;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,13 +36,12 @@ class AnnotationRestController extends WallabagRestController
      * )
      *
      * @Route("/api/annotations/{entry}.{_format}", name="api_get_annotations", methods={"GET"}, defaults={"_format": "json"})
+     * @IsGranted("LIST_ANNOTATIONS", subject="entry")
      *
      * @return Response
      */
     public function getAnnotationsAction(Entry $entry)
     {
-        $this->validateAuthentication();
-
         return $this->forward('Wallabag\Controller\AnnotationController::getAnnotationsAction', [
             'entry' => $entry,
         ]);
@@ -101,13 +101,12 @@ class AnnotationRestController extends WallabagRestController
      * )
      *
      * @Route("/api/annotations/{entry}.{_format}", name="api_post_annotation", methods={"POST"}, defaults={"_format": "json"})
+     * @IsGranted("CREATE_ANNOTATIONS", subject="entry")
      *
      * @return Response
      */
     public function postAnnotationAction(Request $request, Entry $entry)
     {
-        $this->validateAuthentication();
-
         return $this->forward('Wallabag\Controller\AnnotationController::postAnnotationAction', [
             'request' => $request,
             'entry' => $entry,
@@ -137,13 +136,12 @@ class AnnotationRestController extends WallabagRestController
      * )
      *
      * @Route("/api/annotations/{annotation}.{_format}", name="api_put_annotation", methods={"PUT"}, defaults={"_format": "json"})
+     * @IsGranted("EDIT", subject="annotation")
      *
      * @return Response
      */
-    public function putAnnotationAction(int $annotation, Request $request)
+    public function putAnnotationAction(Annotation $annotation, Request $request)
     {
-        $this->validateAuthentication();
-
         return $this->forward('Wallabag\Controller\AnnotationController::putAnnotationAction', [
             'annotation' => $annotation,
             'request' => $request,
@@ -173,13 +171,12 @@ class AnnotationRestController extends WallabagRestController
      * )
      *
      * @Route("/api/annotations/{annotation}.{_format}", name="api_delete_annotation", methods={"DELETE"}, defaults={"_format": "json"})
+     * @IsGranted("DELETE", subject="annotation")
      *
      * @return Response
      */
-    public function deleteAnnotationAction(int $annotation)
+    public function deleteAnnotationAction(Annotation $annotation)
     {
-        $this->validateAuthentication();
-
         return $this->forward('Wallabag\Controller\AnnotationController::deleteAnnotationAction', [
             'annotation' => $annotation,
         ]);
