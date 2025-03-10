@@ -55,7 +55,7 @@ class EntryController extends AbstractController
     }
 
     /**
-     * @Route("/mass", name="mass_action")
+     * @Route("/mass", name="mass_action", methods={"POST"})
      * @IsGranted("EDIT_ENTRIES")
      *
      * @return Response
@@ -141,7 +141,7 @@ class EntryController extends AbstractController
     /**
      * @param int $page
      *
-     * @Route("/search/{page}", name="search", defaults={"page" = 1})
+     * @Route("/search/{page}", name="search", methods={"GET", "POST"}, defaults={"page" = 1})
      * @IsGranted("LIST_ENTRIES")
      *
      * Default parameter for page is hardcoded (in duplication of the defaults from the Route)
@@ -171,7 +171,7 @@ class EntryController extends AbstractController
     }
 
     /**
-     * @Route("/new-entry", name="new_entry")
+     * @Route("/new-entry", name="new_entry", methods={"GET", "POST"})
      * @IsGranted("CREATE_ENTRIES")
      *
      * @return Response
@@ -215,7 +215,7 @@ class EntryController extends AbstractController
     }
 
     /**
-     * @Route("/bookmarklet", name="bookmarklet")
+     * @Route("/bookmarklet", name="bookmarklet", methods={"GET"})
      * @IsGranted("CREATE_ENTRIES")
      *
      * @return Response
@@ -239,7 +239,7 @@ class EntryController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="new")
+     * @Route("/new", name="new", methods={"GET"})
      * @IsGranted("CREATE_ENTRIES")
      *
      * @return Response
@@ -252,7 +252,7 @@ class EntryController extends AbstractController
     /**
      * Edit an entry content.
      *
-     * @Route("/edit/{id}", requirements={"id" = "\d+"}, name="edit")
+     * @Route("/edit/{id}", name="edit", methods={"GET", "POST"}, requirements={"id" = "\d+"})
      * @IsGranted("EDIT", subject="entry")
      *
      * @return Response
@@ -285,7 +285,7 @@ class EntryController extends AbstractController
      *
      * @param int $page
      *
-     * @Route("/all/list/{page}", name="all", defaults={"page" = "1"})
+     * @Route("/all/list/{page}", name="all", methods={"GET"}, defaults={"page" = "1"})
      * @IsGranted("LIST_ENTRIES")
      *
      * @return Response
@@ -300,7 +300,7 @@ class EntryController extends AbstractController
      *
      * @param int $page
      *
-     * @Route("/unread/list/{page}", name="unread", defaults={"page" = "1"})
+     * @Route("/unread/list/{page}", name="unread", methods={"GET"}, defaults={"page" = "1"})
      * @IsGranted("LIST_ENTRIES")
      *
      * @return Response
@@ -320,7 +320,7 @@ class EntryController extends AbstractController
      *
      * @param int $page
      *
-     * @Route("/archive/list/{page}", name="archive", defaults={"page" = "1"})
+     * @Route("/archive/list/{page}", name="archive", methods={"GET"}, defaults={"page" = "1"})
      * @IsGranted("LIST_ENTRIES")
      *
      * @return Response
@@ -335,7 +335,7 @@ class EntryController extends AbstractController
      *
      * @param int $page
      *
-     * @Route("/starred/list/{page}", name="starred", defaults={"page" = "1"})
+     * @Route("/starred/list/{page}", name="starred", methods={"GET"}, defaults={"page" = "1"})
      * @IsGranted("LIST_ENTRIES")
      *
      * @return Response
@@ -350,7 +350,7 @@ class EntryController extends AbstractController
      *
      * @param int $page
      *
-     * @Route("/untagged/list/{page}", name="untagged", defaults={"page" = "1"})
+     * @Route("/untagged/list/{page}", name="untagged", methods={"GET"}, defaults={"page" = "1"})
      * @IsGranted("LIST_ENTRIES")
      *
      * @return Response
@@ -365,7 +365,7 @@ class EntryController extends AbstractController
      *
      * @param int $page
      *
-     * @Route("/annotated/list/{page}", name="annotated", defaults={"page" = "1"})
+     * @Route("/annotated/list/{page}", name="annotated", methods={"GET"}, defaults={"page" = "1"})
      * @IsGranted("LIST_ENTRIES")
      *
      * @return Response
@@ -378,7 +378,7 @@ class EntryController extends AbstractController
     /**
      * Shows random entry depending on the given type.
      *
-     * @Route("/{type}/random", name="random_entry", requirements={"type": "unread|starred|archive|untagged|annotated|all"})
+     * @Route("/{type}/random", name="random_entry", methods={"GET"}, requirements={"type": "unread|starred|archive|untagged|annotated|all"})
      * @IsGranted("LIST_ENTRIES")
      *
      * @return RedirectResponse
@@ -400,7 +400,7 @@ class EntryController extends AbstractController
     /**
      * Shows entry content.
      *
-     * @Route("/view/{id}", requirements={"id" = "\d+"}, name="view")
+     * @Route("/view/{id}", name="view", methods={"GET"}, requirements={"id" = "\d+"})
      * @IsGranted("VIEW", subject="entry")
      *
      * @return Response
@@ -417,7 +417,7 @@ class EntryController extends AbstractController
      * Reload an entry.
      * Refetch content from the website and make it readable again.
      *
-     * @Route("/reload/{id}", requirements={"id" = "\d+"}, name="reload_entry")
+     * @Route("/reload/{id}", name="reload_entry", methods={"GET"}, requirements={"id" = "\d+"})
      * @IsGranted("RELOAD", subject="entry")
      *
      * @return RedirectResponse
@@ -445,7 +445,7 @@ class EntryController extends AbstractController
     /**
      * Changes read status for an entry.
      *
-     * @Route("/archive/{id}", requirements={"id" = "\d+"}, name="archive_entry")
+     * @Route("/archive/{id}", name="archive_entry", methods={"GET"}, requirements={"id" = "\d+"})
      * @IsGranted("ARCHIVE", subject="entry")
      *
      * @return RedirectResponse
@@ -473,7 +473,7 @@ class EntryController extends AbstractController
     /**
      * Changes starred status for an entry.
      *
-     * @Route("/star/{id}", requirements={"id" = "\d+"}, name="star_entry")
+     * @Route("/star/{id}", name="star_entry", methods={"GET"}, requirements={"id" = "\d+"})
      * @IsGranted("STAR", subject="entry")
      *
      * @return RedirectResponse
@@ -502,7 +502,7 @@ class EntryController extends AbstractController
     /**
      * Deletes entry and redirect to the homepage or the last viewed page.
      *
-     * @Route("/delete/{id}", requirements={"id" = "\d+"}, name="delete_entry")
+     * @Route("/delete/{id}", name="delete_entry", methods={"GET"}, requirements={"id" = "\d+"})
      * @IsGranted("DELETE", subject="entry")
      *
      * @return RedirectResponse
@@ -539,7 +539,7 @@ class EntryController extends AbstractController
     /**
      * Get public URL for entry (and generate it if necessary).
      *
-     * @Route("/share/{id}", requirements={"id" = "\d+"}, name="share")
+     * @Route("/share/{id}", name="share", methods={"GET"}, requirements={"id" = "\d+"})
      * @IsGranted("SHARE", subject="entry")
      *
      * @return Response
@@ -561,7 +561,7 @@ class EntryController extends AbstractController
     /**
      * Disable public sharing for an entry.
      *
-     * @Route("/share/delete/{id}", requirements={"id" = "\d+"}, name="delete_share")
+     * @Route("/share/delete/{id}", name="delete_share", methods={"GET"}, requirements={"id" = "\d+"})
      * @IsGranted("UNSHARE", subject="entry")
      *
      * @return Response
@@ -581,7 +581,7 @@ class EntryController extends AbstractController
     /**
      * Ability to view a content publicly.
      *
-     * @Route("/share/{uid}", requirements={"uid" = ".+"}, name="share_entry")
+     * @Route("/share/{uid}", name="share_entry", methods={"GET"}, requirements={"uid" = ".+"})
      * @Cache(maxage="25200", smaxage="25200", public=true)
      * @IsGranted("PUBLIC_ACCESS")
      *
@@ -604,7 +604,7 @@ class EntryController extends AbstractController
      *
      * @param int $page
      *
-     * @Route("/domain/{id}/{page}", requirements={"id" = "\d+"}, defaults={"page" = 1}, name="same_domain")
+     * @Route("/domain/{id}/{page}", name="same_domain", methods={"GET"}, requirements={"id" = "\d+"}, defaults={"page" = 1})
      * @IsGranted("LIST_ENTRIES")
      *
      * @return Response

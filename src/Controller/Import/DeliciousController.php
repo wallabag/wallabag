@@ -24,7 +24,7 @@ class DeliciousController extends AbstractController
     }
 
     /**
-     * @Route("/import/delicious", name="import_delicious")
+     * @Route("/import/delicious", name="import_delicious", methods={"GET", "POST"})
      */
     public function indexAction(Request $request, DeliciousImport $delicious, Config $craueConfig, TranslatorInterface $translator)
     {

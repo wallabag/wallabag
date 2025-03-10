@@ -26,7 +26,7 @@ class WallabagV1Controller extends WallabagController
     }
 
     /**
-     * @Route("/import/wallabag-v1", name="import_wallabag_v1")
+     * @Route("/import/wallabag-v1", name="import_wallabag_v1", methods={"GET", "POST"})
      */
     public function indexAction(Request $request, TranslatorInterface $translator)
     {

@@ -56,7 +56,7 @@ class PocketControllerTest extends WallabagTestCase
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $client->request('GET', '/import/pocket/auth');
+        $client->request('POST', '/import/pocket/auth');
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
     }
@@ -77,7 +77,7 @@ class PocketControllerTest extends WallabagTestCase
 
         static::$kernel->getContainer()->set(PocketImport::class, $pocketImport);
 
-        $client->request('GET', '/import/pocket/auth');
+        $client->request('POST', '/import/pocket/auth');
 
         $this->assertSame(301, $client->getResponse()->getStatusCode());
         $this->assertStringContainsString('getpocket.com/auth/authorize', $client->getResponse()->headers->get('location'));

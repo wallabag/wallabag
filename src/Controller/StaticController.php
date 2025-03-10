@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class StaticController extends AbstractController
 {
     /**
-     * @Route("/howto", name="howto")
+     * @Route("/howto", name="howto", methods={"GET"})
      */
     public function howtoAction()
     {
@@ -22,7 +22,7 @@ class StaticController extends AbstractController
     }
 
     /**
-     * @Route("/about", name="about")
+     * @Route("/about", name="about", methods={"GET"})
      */
     public function aboutAction()
     {
@@ -36,7 +36,7 @@ class StaticController extends AbstractController
     }
 
     /**
-     * @Route("/quickstart", name="quickstart")
+     * @Route("/quickstart", name="quickstart", methods={"GET"})
      */
     public function quickstartAction()
     {

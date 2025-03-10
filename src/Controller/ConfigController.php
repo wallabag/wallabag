@@ -74,7 +74,7 @@ class ConfigController extends AbstractController
     }
 
     /**
-     * @Route("/config", name="config")
+     * @Route("/config", name="config", methods={"GET", "POST"})
      */
     public function indexAction(Request $request, Config $craueConfig, TaggingRuleRepository $taggingRuleRepository, IgnoreOriginUserRuleRepository $ignoreOriginUserRuleRepository, UserRepository $userRepository)
     {
@@ -436,7 +436,7 @@ class ConfigController extends AbstractController
     }
 
     /**
-     * @Route("/generate-token", name="generate_token")
+     * @Route("/generate-token", name="generate_token", methods={"GET"})
      *
      * @return RedirectResponse|JsonResponse
      */
@@ -461,7 +461,7 @@ class ConfigController extends AbstractController
     }
 
     /**
-     * @Route("/revoke-token", name="revoke_token")
+     * @Route("/revoke-token", name="revoke_token", methods={"GET"})
      *
      * @return RedirectResponse|JsonResponse
      */
@@ -488,7 +488,7 @@ class ConfigController extends AbstractController
     /**
      * Deletes a tagging rule and redirect to the config homepage.
      *
-     * @Route("/tagging-rule/delete/{id}", requirements={"id" = "\d+"}, name="delete_tagging_rule")
+     * @Route("/tagging-rule/delete/{id}", name="delete_tagging_rule", methods={"GET"}, requirements={"id" = "\d+"})
      *
      * @return RedirectResponse
      */
@@ -510,7 +510,7 @@ class ConfigController extends AbstractController
     /**
      * Edit a tagging rule.
      *
-     * @Route("/tagging-rule/edit/{id}", requirements={"id" = "\d+"}, name="edit_tagging_rule")
+     * @Route("/tagging-rule/edit/{id}", name="edit_tagging_rule", methods={"GET"}, requirements={"id" = "\d+"})
      *
      * @return RedirectResponse
      */
@@ -524,7 +524,7 @@ class ConfigController extends AbstractController
     /**
      * Deletes an ignore origin rule and redirect to the config homepage.
      *
-     * @Route("/ignore-origin-user-rule/delete/{id}", requirements={"id" = "\d+"}, name="delete_ignore_origin_rule")
+     * @Route("/ignore-origin-user-rule/delete/{id}", name="delete_ignore_origin_rule", methods={"GET"}, requirements={"id" = "\d+"})
      *
      * @return RedirectResponse
      */
@@ -546,7 +546,7 @@ class ConfigController extends AbstractController
     /**
      * Edit an ignore origin rule.
      *
-     * @Route("/ignore-origin-user-rule/edit/{id}", requirements={"id" = "\d+"}, name="edit_ignore_origin_rule")
+     * @Route("/ignore-origin-user-rule/edit/{id}", name="edit_ignore_origin_rule", methods={"GET"}, requirements={"id" = "\d+"})
      *
      * @return RedirectResponse
      */
@@ -560,7 +560,7 @@ class ConfigController extends AbstractController
     /**
      * Remove all annotations OR tags OR entries for the current user.
      *
-     * @Route("/reset/{type}", requirements={"id" = "annotations|tags|entries|tagging_rules"}, name="config_reset", methods={"POST"})
+     * @Route("/reset/{type}", name="config_reset", methods={"POST"}, requirements={"id" = "annotations|tags|entries|tagging_rules"})
      *
      * @return RedirectResponse
      */
@@ -647,7 +647,7 @@ class ConfigController extends AbstractController
     /**
      * Switch view mode for current user.
      *
-     * @Route("/config/view-mode", name="switch_view_mode")
+     * @Route("/config/view-mode", name="switch_view_mode", methods={"GET"})
      *
      * @return RedirectResponse
      */
@@ -669,7 +669,7 @@ class ConfigController extends AbstractController
      *
      * @param string $language
      *
-     * @Route("/locale/{language}", name="changeLocale")
+     * @Route("/locale/{language}", name="changeLocale", methods={"GET"})
      *
      * @return RedirectResponse
      */
@@ -687,7 +687,7 @@ class ConfigController extends AbstractController
     /**
      * Export tagging rules for the logged in user.
      *
-     * @Route("/tagging-rule/export", name="export_tagging_rule")
+     * @Route("/tagging-rule/export", name="export_tagging_rule", methods={"GET"})
      *
      * @return Response
      */

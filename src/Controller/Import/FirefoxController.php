@@ -26,7 +26,7 @@ class FirefoxController extends BrowserController
     }
 
     /**
-     * @Route("/import/firefox", name="import_firefox")
+     * @Route("/import/firefox", name="import_firefox", methods={"GET", "POST"})
      */
     public function indexAction(Request $request, TranslatorInterface $translator)
     {

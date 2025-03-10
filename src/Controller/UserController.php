@@ -145,7 +145,7 @@ class UserController extends AbstractController
     /**
      * @param int $page
      *
-     * @Route("/users/list/{page}", name="user_index", defaults={"page" = 1})
+     * @Route("/users/list/{page}", name="user_index", methods={"GET"}, defaults={"page" = 1})
      * @IsGranted("LIST_USERS")
      *
      * Default parameter for page is hardcoded (in duplication of the defaults from the Route)

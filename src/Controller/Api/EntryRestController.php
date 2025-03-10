@@ -84,7 +84,7 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/exists.{_format}", methods={"GET"}, name="api_get_entries_exists", defaults={"_format": "json"})
+     * @Route("/api/entries/exists.{_format}", name="api_get_entries_exists", methods={"GET"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -299,7 +299,7 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries.{_format}", methods={"GET"}, name="api_get_entries", defaults={"_format": "json"})
+     * @Route("/api/entries.{_format}", name="api_get_entries", methods={"GET"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -391,7 +391,7 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}.{_format}", methods={"GET"}, name="api_get_entry", defaults={"_format": "json"})
+     * @Route("/api/entries/{entry}.{_format}", name="api_get_entry", methods={"GET"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -435,7 +435,7 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}/export.{_format}", methods={"GET"}, name="api_get_entry_export", defaults={"_format": "json"})
+     * @Route("/api/entries/{entry}/export.{_format}", name="api_get_entry_export", methods={"GET"}, defaults={"_format": "json"})
      *
      * @return Response
      */
@@ -470,7 +470,7 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/list.{_format}", methods={"DELETE"}, name="api_delete_entries_list", defaults={"_format": "json"})
+     * @Route("/api/entries/list.{_format}", name="api_delete_entries_list", methods={"DELETE"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -528,7 +528,7 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/lists.{_format}", methods={"POST"}, name="api_post_entries_list", defaults={"_format": "json"})
+     * @Route("/api/entries/lists.{_format}", name="api_post_entries_list", methods={"POST"}, defaults={"_format": "json"})
      *
      * @throws HttpException When limit is reached
      *
@@ -713,7 +713,7 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries.{_format}", methods={"POST"}, name="api_post_entries", defaults={"_format": "json"})
+     * @Route("/api/entries.{_format}", name="api_post_entries", methods={"POST"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -938,7 +938,7 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}.{_format}", methods={"PATCH"}, name="api_patch_entries", defaults={"_format": "json"})
+     * @Route("/api/entries/{entry}.{_format}", name="api_patch_entries", methods={"PATCH"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -1055,7 +1055,7 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}/reload.{_format}", methods={"PATCH"}, name="api_patch_entries_reload", defaults={"_format": "json"})
+     * @Route("/api/entries/{entry}/reload.{_format}", name="api_patch_entries_reload", methods={"PATCH"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -1112,7 +1112,7 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}.{_format}", methods={"DELETE"}, name="api_delete_entries", defaults={"_format": "json"})
+     * @Route("/api/entries/{entry}.{_format}", name="api_delete_entries", methods={"DELETE"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -1165,7 +1165,7 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}/tags.{_format}", methods={"GET"}, name="api_get_entries_tags", defaults={"_format": "json"})
+     * @Route("/api/entries/{entry}/tags.{_format}", name="api_get_entries_tags", methods={"GET"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -1209,7 +1209,7 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}/tags.{_format}", methods={"POST"}, name="api_post_entries_tags", defaults={"_format": "json"})
+     * @Route("/api/entries/{entry}/tags.{_format}", name="api_post_entries_tags", methods={"POST"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -1261,7 +1261,7 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}/tags/{tag}.{_format}", methods={"DELETE"}, name="api_delete_entries_tags", defaults={"_format": "json"})
+     * @Route("/api/entries/{entry}/tags/{tag}.{_format}", name="api_delete_entries_tags", methods={"DELETE"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -1297,7 +1297,7 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/tags/list.{_format}", methods={"DELETE"}, name="api_delete_entries_tags_list", defaults={"_format": "json"})
+     * @Route("/api/entries/tags/list.{_format}", name="api_delete_entries_tags_list", methods={"DELETE"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -1364,7 +1364,7 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/tags/lists.{_format}", methods={"POST"}, name="api_post_entries_tags_list", defaults={"_format": "json"})
+     * @Route("/api/entries/tags/lists.{_format}", name="api_post_entries_tags_list", methods={"POST"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */

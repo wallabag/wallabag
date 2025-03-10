@@ -30,7 +30,7 @@ class PocketController extends AbstractController
     }
 
     /**
-     * @Route("/import/pocket", name="import_pocket")
+     * @Route("/import/pocket", name="import_pocket", methods={"GET"})
      */
     public function indexAction(PocketImport $pocketImport)
     {
@@ -51,7 +51,7 @@ class PocketController extends AbstractController
     }
 
     /**
-     * @Route("/import/pocket/auth", name="import_pocket_auth")
+     * @Route("/import/pocket/auth", name="import_pocket_auth", methods={"POST"})
      */
     public function authAction(Request $request, PocketImport $pocketImport)
     {
@@ -81,7 +81,7 @@ class PocketController extends AbstractController
     }
 
     /**
-     * @Route("/import/pocket/callback", name="import_pocket_callback")
+     * @Route("/import/pocket/callback", name="import_pocket_callback", methods={"GET"})
      */
     public function callbackAction(PocketImport $pocketImport, TranslatorInterface $translator)
     {

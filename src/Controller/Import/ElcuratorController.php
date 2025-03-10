@@ -26,7 +26,7 @@ class ElcuratorController extends WallabagController
     }
 
     /**
-     * @Route("/import/elcurator", name="import_elcurator")
+     * @Route("/import/elcurator", name="import_elcurator", methods={"GET", "POST"})
      */
     public function indexAction(Request $request, TranslatorInterface $translator)
     {

@@ -29,7 +29,7 @@ class FeedController extends AbstractController
     /**
      * Shows unread entries for current user.
      *
-     * @Route("/feed/{username}/{token}/unread/{page}", name="unread_feed", defaults={"page"=1, "_format"="xml"})
+     * @Route("/feed/{username}/{token}/unread/{page}", name="unread_feed", methods={"GET"}, defaults={"page"=1, "_format"="xml"})
      *
      * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
      *
@@ -43,7 +43,7 @@ class FeedController extends AbstractController
     /**
      * Shows read entries for current user.
      *
-     * @Route("/feed/{username}/{token}/archive/{page}", name="archive_feed", defaults={"page"=1, "_format"="xml"})
+     * @Route("/feed/{username}/{token}/archive/{page}", name="archive_feed", methods={"GET"}, defaults={"page"=1, "_format"="xml"})
      *
      * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
      *
@@ -57,7 +57,7 @@ class FeedController extends AbstractController
     /**
      * Shows starred entries for current user.
      *
-     * @Route("/feed/{username}/{token}/starred/{page}", name="starred_feed", defaults={"page"=1, "_format"="xml"})
+     * @Route("/feed/{username}/{token}/starred/{page}", name="starred_feed", methods={"GET"}, defaults={"page"=1, "_format"="xml"})
      *
      * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
      *
@@ -71,7 +71,7 @@ class FeedController extends AbstractController
     /**
      * Shows all entries for current user.
      *
-     * @Route("/feed/{username}/{token}/all/{page}", name="all_feed", defaults={"page"=1, "_format"="xml"})
+     * @Route("/feed/{username}/{token}/all/{page}", name="all_feed", methods={"GET"}, defaults={"page"=1, "_format"="xml"})
      *
      * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
      *
@@ -85,7 +85,7 @@ class FeedController extends AbstractController
     /**
      * Shows entries associated to a tag for current user.
      *
-     * @Route("/feed/{username}/{token}/tags/{slug}/{page}", name="tag_feed", defaults={"page"=1, "_format"="xml"})
+     * @Route("/feed/{username}/{token}/tags/{slug}/{page}", name="tag_feed", methods={"GET"}, defaults={"page"=1, "_format"="xml"})
      *
      * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})

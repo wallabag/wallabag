@@ -35,7 +35,7 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("/new-tag/{entry}", requirements={"entry" = "\d+"}, name="new_tag", methods={"POST"})
+     * @Route("/new-tag/{entry}", name="new_tag", methods={"POST"}, requirements={"entry" = "\d+"})
      *
      * @return Response
      */
@@ -86,7 +86,7 @@ class TagController extends AbstractController
     /**
      * Removes tag from entry.
      *
-     * @Route("/remove-tag/{entry}/{tag}", requirements={"entry" = "\d+", "tag" = "\d+"}, name="remove_tag")
+     * @Route("/remove-tag/{entry}/{tag}", name="remove_tag", methods={"GET"}, requirements={"entry" = "\d+", "tag" = "\d+"})
      *
      * @return Response
      */
@@ -111,7 +111,7 @@ class TagController extends AbstractController
     /**
      * Shows tags for current user.
      *
-     * @Route("/tag/list", name="tag")
+     * @Route("/tag/list", name="tag", methods={"GET"})
      *
      * @return Response
      */
@@ -135,7 +135,7 @@ class TagController extends AbstractController
     /**
      * @param int $page
      *
-     * @Route("/tag/list/{slug}/{page}", name="tag_entries", defaults={"page" = "1"})
+     * @Route("/tag/list/{slug}/{page}", name="tag_entries", methods={"GET"}, defaults={"page" = "1"})
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      *
      * @return Response
@@ -174,7 +174,7 @@ class TagController extends AbstractController
      * Rename a given tag with a new label
      * Create a new tag with the new name and drop the old one.
      *
-     * @Route("/tag/rename/{slug}", name="tag_rename")
+     * @Route("/tag/rename/{slug}", name="tag_rename", methods={"POST"})
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      *
      * @return Response
@@ -227,7 +227,7 @@ class TagController extends AbstractController
     /**
      * Tag search results with the current search term.
      *
-     * @Route("/tag/search/{filter}", name="tag_this_search")
+     * @Route("/tag/search/{filter}", name="tag_this_search", methods={"GET"})
      *
      * @return Response
      */
@@ -262,7 +262,7 @@ class TagController extends AbstractController
     /**
      * Delete a given tag for the current user.
      *
-     * @Route("/tag/delete/{slug}", name="tag_delete")
+     * @Route("/tag/delete/{slug}", name="tag_delete", methods={"GET"})
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      *
      * @return Response

@@ -26,7 +26,7 @@ class ShaarliController extends HtmlController
     }
 
     /**
-     * @Route("/import/shaarli", name="import_shaarli")
+     * @Route("/import/shaarli", name="import_shaarli", methods={"GET", "POST"})
      */
     public function indexAction(Request $request, TranslatorInterface $translator)
     {

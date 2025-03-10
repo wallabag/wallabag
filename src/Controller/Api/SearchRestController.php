@@ -54,7 +54,7 @@ class SearchRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/search.{_format}", methods={"GET"}, name="api_get_search", defaults={"_format": "json"})
+     * @Route("/api/search.{_format}", name="api_get_search", methods={"GET"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */

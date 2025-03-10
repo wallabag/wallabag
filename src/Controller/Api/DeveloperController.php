@@ -18,7 +18,7 @@ class DeveloperController extends AbstractController
     /**
      * List all clients and link to create a new one.
      *
-     * @Route("/developer", name="developer")
+     * @Route("/developer", name="developer", methods={"GET"})
      *
      * @return Response
      */
@@ -34,7 +34,7 @@ class DeveloperController extends AbstractController
     /**
      * Create a client (an app).
      *
-     * @Route("/developer/client/create", name="developer_create_client")
+     * @Route("/developer/client/create", name="developer_create_client", methods={"GET", "POST"})
      *
      * @return Response
      */
@@ -69,7 +69,7 @@ class DeveloperController extends AbstractController
     /**
      * Remove a client.
      *
-     * @Route("/developer/client/delete/{id}", requirements={"id" = "\d+"}, name="developer_delete_client", methods={"POST"})
+     * @Route("/developer/client/delete/{id}", name="developer_delete_client", methods={"POST"}, requirements={"id" = "\d+"})
      *
      * @return RedirectResponse
      */
@@ -97,7 +97,7 @@ class DeveloperController extends AbstractController
     /**
      * Display developer how to use an existing app.
      *
-     * @Route("/developer/howto/first-app", name="developer_howto_firstapp")
+     * @Route("/developer/howto/first-app", name="developer_howto_firstapp", methods={"GET"})
      *
      * @return Response
      */
