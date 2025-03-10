@@ -35,7 +35,7 @@ class AnnotationController extends AbstractFOSRestController
      *
      * @see Api\WallabagRestController
      *
-     * @Route("/annotations/{entry}.{_format}", methods={"GET"}, name="annotations_get_annotations", defaults={"_format": "json"})
+     * @Route("/annotations/{entry}.{_format}", name="annotations_get_annotations", methods={"GET"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -56,7 +56,7 @@ class AnnotationController extends AbstractFOSRestController
      *
      * @see Api\WallabagRestController
      *
-     * @Route("/annotations/{entry}.{_format}", methods={"POST"}, name="annotations_post_annotation", defaults={"_format": "json"})
+     * @Route("/annotations/{entry}.{_format}", name="annotations_post_annotation", methods={"POST"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -90,7 +90,7 @@ class AnnotationController extends AbstractFOSRestController
      *
      * @see Api\WallabagRestController
      *
-     * @Route("/annotations/{annotation}.{_format}", methods={"PUT"}, name="annotations_put_annotation", defaults={"_format": "json"})
+     * @Route("/annotations/{annotation}.{_format}", name="annotations_put_annotation", methods={"PUT"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -127,7 +127,7 @@ class AnnotationController extends AbstractFOSRestController
      *
      * @see Api\WallabagRestController
      *
-     * @Route("/annotations/{annotation}.{_format}", methods={"DELETE"}, name="annotations_delete_annotation", defaults={"_format": "json"})
+     * @Route("/annotations/{annotation}.{_format}", name="annotations_delete_annotation", methods={"DELETE"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */

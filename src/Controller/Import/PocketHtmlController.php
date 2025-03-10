@@ -26,7 +26,7 @@ class PocketHtmlController extends HtmlController
     }
 
     /**
-     * @Route("/import/pocket_html", name="import_pocket_html")
+     * @Route("/import/pocket_html", name="import_pocket_html", methods={"GET", "POST"})
      */
     public function indexAction(Request $request, TranslatorInterface $translator)
     {

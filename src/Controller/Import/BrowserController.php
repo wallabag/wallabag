@@ -13,7 +13,7 @@ use Wallabag\Import\ImportInterface;
 abstract class BrowserController extends AbstractController
 {
     /**
-     * @Route("/import/browser", name="import_browser")
+     * @Route("/import/browser", name="import_browser", methods={"GET", "POST"})
      *
      * @return Response
      */

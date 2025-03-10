@@ -57,7 +57,7 @@ class WallabagRestController extends AbstractFOSRestController
      *
      * @deprecated Should use info endpoint instead
      *
-     * @Route("/api/version.{_format}", methods={"GET"}, name="api_get_version", defaults={"_format": "json"})
+     * @Route("/api/version.{_format}", name="api_get_version", methods={"GET"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -80,7 +80,7 @@ class WallabagRestController extends AbstractFOSRestController
      *     )
      * )
      *
-     * @Route("/api/info.{_format}", methods={"GET"}, name="api_get_info", defaults={"_format": "json"})
+     * @Route("/api/info.{_format}", name="api_get_info", methods={"GET"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */

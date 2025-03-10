@@ -13,7 +13,7 @@ use Wallabag\Import\ImportInterface;
 abstract class HtmlController extends AbstractController
 {
     /**
-     * @Route("/import/html", name="import_html")
+     * @Route("/import/html", name="import_html", methods={"GET", "POST"})
      *
      * @return Response
      */

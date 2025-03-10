@@ -26,7 +26,7 @@ class TagRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/tags.{_format}", methods={"GET"}, name="api_get_tags", defaults={"_format": "json"})
+     * @Route("/api/tags.{_format}", name="api_get_tags", methods={"GET"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -63,7 +63,7 @@ class TagRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/tag/label.{_format}", methods={"DELETE"}, name="api_delete_tag_label", defaults={"_format": "json"})
+     * @Route("/api/tag/label.{_format}", name="api_delete_tag_label", methods={"DELETE"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -111,7 +111,7 @@ class TagRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/tags/label.{_format}", methods={"DELETE"}, name="api_delete_tags_label", defaults={"_format": "json"})
+     * @Route("/api/tags/label.{_format}", name="api_delete_tags_label", methods={"DELETE"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -158,7 +158,7 @@ class TagRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/tags/{tag}.{_format}", methods={"DELETE"}, name="api_delete_tag", defaults={"_format": "json"})
+     * @Route("/api/tags/{tag}.{_format}", name="api_delete_tag", methods={"DELETE"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */

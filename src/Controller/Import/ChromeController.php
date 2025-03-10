@@ -26,7 +26,7 @@ class ChromeController extends BrowserController
     }
 
     /**
-     * @Route("/import/chrome", name="import_chrome")
+     * @Route("/import/chrome", name="import_chrome", methods={"GET", "POST"})
      */
     public function indexAction(Request $request, TranslatorInterface $translator)
     {

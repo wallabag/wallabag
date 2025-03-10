@@ -24,7 +24,7 @@ class OmnivoreController extends AbstractController
     }
 
     /**
-     * @Route("/import/omnivore", name="import_omnivore")
+     * @Route("/import/omnivore", name="import_omnivore", methods={"GET", "POST"})
      */
     public function indexAction(Request $request, OmnivoreImport $omnivore, Config $craueConfig, TranslatorInterface $translator)
     {

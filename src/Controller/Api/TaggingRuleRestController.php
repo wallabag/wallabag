@@ -23,7 +23,7 @@ class TaggingRuleRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/taggingrule/export.{_format}", methods={"GET"}, name="api_get_taggingrule_export", defaults={"_format": "json"})
+     * @Route("/api/taggingrule/export.{_format}", name="api_get_taggingrule_export", methods={"GET"}, defaults={"_format": "json"})
      *
      * @return Response
      */

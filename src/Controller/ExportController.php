@@ -19,7 +19,7 @@ class ExportController extends AbstractController
     /**
      * Gets one entry content.
      *
-     * @Route("/export/{id}.{format}", name="export_entry", requirements={
+     * @Route("/export/{id}.{format}", name="export_entry", methods={"GET"}, requirements={
      *     "format": "epub|pdf|json|xml|txt|csv|md",
      *     "id": "\d+"
      * })
@@ -53,7 +53,7 @@ class ExportController extends AbstractController
     /**
      * Export all entries for current user.
      *
-     * @Route("/export/{category}.{format}", name="export_entries", requirements={
+     * @Route("/export/{category}.{format}", name="export_entries", methods={"GET"}, requirements={
      *     "format": "epub|pdf|json|xml|txt|csv|md",
      *     "category": "all|unread|starred|archive|tag_entries|untagged|search|annotated|same_domain"
      * })

@@ -34,7 +34,7 @@ class AnnotationRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/annotations/{entry}.{_format}", methods={"GET"}, name="api_get_annotations", defaults={"_format": "json"})
+     * @Route("/api/annotations/{entry}.{_format}", name="api_get_annotations", methods={"GET"}, defaults={"_format": "json"})
      *
      * @return Response
      */
@@ -100,7 +100,7 @@ class AnnotationRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/annotations/{entry}.{_format}", methods={"POST"}, name="api_post_annotation", defaults={"_format": "json"})
+     * @Route("/api/annotations/{entry}.{_format}", name="api_post_annotation", methods={"POST"}, defaults={"_format": "json"})
      *
      * @return Response
      */
@@ -136,7 +136,7 @@ class AnnotationRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/annotations/{annotation}.{_format}", methods={"PUT"}, name="api_put_annotation", defaults={"_format": "json"})
+     * @Route("/api/annotations/{annotation}.{_format}", name="api_put_annotation", methods={"PUT"}, defaults={"_format": "json"})
      *
      * @return Response
      */
@@ -172,7 +172,7 @@ class AnnotationRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/annotations/{annotation}.{_format}", methods={"DELETE"}, name="api_delete_annotation", defaults={"_format": "json"})
+     * @Route("/api/annotations/{annotation}.{_format}", name="api_delete_annotation", methods={"DELETE"}, defaults={"_format": "json"})
      *
      * @return Response
      */

@@ -20,7 +20,7 @@ class ImportController extends AbstractController
     }
 
     /**
-     * @Route("/import/", name="import")
+     * @Route("/import/", name="import", methods={"GET"})
      */
     public function importAction(ImportChain $importChain)
     {
