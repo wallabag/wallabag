@@ -2,6 +2,7 @@
 
 namespace Wallabag\Controller\Import;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +15,7 @@ abstract class HtmlController extends AbstractController
 {
     /**
      * @Route("/import/html", name="import_html", methods={"GET", "POST"})
+     * @IsGranted("IMPORT_ENTRIES")
      *
      * @return Response
      */

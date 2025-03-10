@@ -4,6 +4,7 @@ namespace Wallabag\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -27,6 +28,7 @@ class WallabagV2Controller extends WallabagController
 
     /**
      * @Route("/import/wallabag-v2", name="import_wallabag_v2", methods={"GET", "POST"})
+     * @IsGranted("IMPORT_ENTRIES")
      */
     public function indexAction(Request $request, TranslatorInterface $translator)
     {

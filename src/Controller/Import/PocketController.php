@@ -4,6 +4,7 @@ namespace Wallabag\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -31,6 +32,7 @@ class PocketController extends AbstractController
 
     /**
      * @Route("/import/pocket", name="import_pocket", methods={"GET"})
+     * @IsGranted("IMPORT_ENTRIES")
      */
     public function indexAction(PocketImport $pocketImport)
     {
@@ -52,6 +54,7 @@ class PocketController extends AbstractController
 
     /**
      * @Route("/import/pocket/auth", name="import_pocket_auth", methods={"POST"})
+     * @IsGranted("IMPORT_ENTRIES")
      */
     public function authAction(Request $request, PocketImport $pocketImport)
     {
@@ -82,6 +85,7 @@ class PocketController extends AbstractController
 
     /**
      * @Route("/import/pocket/callback", name="import_pocket_callback", methods={"GET"})
+     * @IsGranted("IMPORT_ENTRIES")
      */
     public function callbackAction(PocketImport $pocketImport, TranslatorInterface $translator)
     {

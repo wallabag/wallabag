@@ -4,6 +4,7 @@ namespace Wallabag\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -25,6 +26,7 @@ class PinboardController extends AbstractController
 
     /**
      * @Route("/import/pinboard", name="import_pinboard", methods={"GET", "POST"})
+     * @IsGranted("IMPORT_ENTRIES")
      */
     public function indexAction(Request $request, PinboardImport $pinboard, Config $craueConfig, TranslatorInterface $translator)
     {
