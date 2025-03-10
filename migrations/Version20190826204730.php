@@ -50,7 +50,7 @@ final class Version20190826204730 extends WallabagMigration
                 ->fetchOne('SELECT * FROM ' . $this->getTable('ignore_origin_instance_rule') . " WHERE rule = '" . $entity['rule'] . "'");
 
             if (false === $previous_rule) {
-                $this->addSql('INSERT INTO ' . $this->getTable('ignore_origin_instance_rule') . " (rule) VALUES ('" . $entity['rule'] . "');");
+                $this->connection->executeQuery('INSERT INTO ' . $this->getTable('ignore_origin_instance_rule') . " (rule) VALUES ('" . $entity['rule'] . "');");
             }
         }
     }
