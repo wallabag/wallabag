@@ -1,5 +1,5 @@
 ---
-title: oAuth
+title: OAuth
 weight: 1
 ---
 
