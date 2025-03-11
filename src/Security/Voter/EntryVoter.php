@@ -20,6 +20,7 @@ class EntryVoter extends Voter
     public const DELETE = 'DELETE';
     public const LIST_ANNOTATIONS = 'LIST_ANNOTATIONS';
     public const CREATE_ANNOTATIONS = 'CREATE_ANNOTATIONS';
+    public const LIST_TAGS = 'LIST_TAGS';
     public const TAG = 'TAG';
     public const UNTAG = 'UNTAG';
 
@@ -29,7 +30,7 @@ class EntryVoter extends Voter
             return false;
         }
 
-        if (!\in_array($attribute, [self::VIEW, self::EDIT, self::RELOAD, self::STAR, self::ARCHIVE, self::SHARE, self::UNSHARE, self::EXPORT, self::DELETE, self::LIST_ANNOTATIONS, self::CREATE_ANNOTATIONS, self::TAG, self::UNTAG], true)) {
+        if (!\in_array($attribute, [self::VIEW, self::EDIT, self::RELOAD, self::STAR, self::ARCHIVE, self::SHARE, self::UNSHARE, self::EXPORT, self::DELETE, self::LIST_ANNOTATIONS, self::CREATE_ANNOTATIONS, self::LIST_TAGS, self::TAG, self::UNTAG], true)) {
             return false;
         }
 
@@ -58,6 +59,7 @@ class EntryVoter extends Voter
             case self::DELETE:
             case self::LIST_ANNOTATIONS:
             case self::CREATE_ANNOTATIONS:
+            case self::LIST_TAGS:
             case self::TAG:
             case self::UNTAG:
                 return $user === $subject->getUser();
