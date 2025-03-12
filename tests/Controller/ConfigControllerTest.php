@@ -577,9 +577,9 @@ class ConfigControllerTest extends WallabagTestCase
 
         $crawler = $client->request('GET', '/tagging-rule/delete/' . $rule->getId());
 
-        $this->assertSame(403, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertStringContainsString('You can not access this rule', $body[0]);
+        $this->assertStringContainsString('404: Not Found', $body[0]);
     }
 
     public function testEditingTaggingRuleFromAnOtherUser()
@@ -593,9 +593,9 @@ class ConfigControllerTest extends WallabagTestCase
 
         $crawler = $client->request('GET', '/tagging-rule/edit/' . $rule->getId());
 
-        $this->assertSame(403, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertStringContainsString('You can not access this rule', $body[0]);
+        $this->assertStringContainsString('404: Not Found', $body[0]);
     }
 
     public function testIgnoreOriginRuleCreation()
@@ -714,9 +714,9 @@ class ConfigControllerTest extends WallabagTestCase
 
         $crawler = $client->request('GET', '/ignore-origin-user-rule/edit/' . $rule->getId());
 
-        $this->assertSame(403, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertStringContainsString('You can not access this rule', $body[0]);
+        $this->assertStringContainsString('404: Not Found', $body[0]);
     }
 
     public function testEditingIgnoreOriginRuleFromAnOtherUser()
@@ -730,9 +730,9 @@ class ConfigControllerTest extends WallabagTestCase
 
         $crawler = $client->request('GET', '/ignore-origin-user-rule/edit/' . $rule->getId());
 
-        $this->assertSame(403, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertStringContainsString('You can not access this rule', $body[0]);
+        $this->assertStringContainsString('404: Not Found', $body[0]);
     }
 
     public function testDeleteUserButtonVisibility()
@@ -767,7 +767,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertStringNotContainsString('config.form_user.delete.button', $body[0]);
 
         $client->request('POST', '/account/delete');
-        $this->assertSame(403, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
 
         $user = $em
             ->getRepository(User::class)

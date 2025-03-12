@@ -114,7 +114,7 @@ class SiteCredentialControllerTest extends WallabagTestCase
 
         $client->request('GET', '/site-credentials/' . $credential->getId() . '/edit');
 
-        $this->assertSame(403, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
     public function testDeleteSiteCredential()

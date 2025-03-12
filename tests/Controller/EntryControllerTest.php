@@ -781,7 +781,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $client->request('GET', '/view/' . $content->getId());
 
-        $this->assertSame(403, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
     public function testFilterOnReadingTime()
