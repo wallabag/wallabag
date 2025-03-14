@@ -6,6 +6,7 @@ use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,6 +31,7 @@ class FeedController extends AbstractController
      * Shows unread entries for current user.
      *
      * @Route("/feed/{username}/{token}/unread/{page}", name="unread_feed", methods={"GET"}, defaults={"page"=1, "_format"="xml"})
+     * @IsGranted("PUBLIC_ACCESS")
      *
      * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
      *
@@ -44,6 +46,7 @@ class FeedController extends AbstractController
      * Shows read entries for current user.
      *
      * @Route("/feed/{username}/{token}/archive/{page}", name="archive_feed", methods={"GET"}, defaults={"page"=1, "_format"="xml"})
+     * @IsGranted("PUBLIC_ACCESS")
      *
      * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
      *
@@ -58,6 +61,7 @@ class FeedController extends AbstractController
      * Shows starred entries for current user.
      *
      * @Route("/feed/{username}/{token}/starred/{page}", name="starred_feed", methods={"GET"}, defaults={"page"=1, "_format"="xml"})
+     * @IsGranted("PUBLIC_ACCESS")
      *
      * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
      *
@@ -72,6 +76,7 @@ class FeedController extends AbstractController
      * Shows all entries for current user.
      *
      * @Route("/feed/{username}/{token}/all/{page}", name="all_feed", methods={"GET"}, defaults={"page"=1, "_format"="xml"})
+     * @IsGranted("PUBLIC_ACCESS")
      *
      * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
      *
@@ -86,6 +91,7 @@ class FeedController extends AbstractController
      * Shows entries associated to a tag for current user.
      *
      * @Route("/feed/{username}/{token}/tags/{slug}/{page}", name="tag_feed", methods={"GET"}, defaults={"page"=1, "_format"="xml"})
+     * @IsGranted("PUBLIC_ACCESS")
      *
      * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
