@@ -21,7 +21,7 @@ updates:
 - package-ecosystem: composer
   directory: "/"
   schedule:
-    interval: daily
+    interval: weekly
     time: "04:00"
     timezone: Europe/Paris
   open-pull-requests-limit: 10
@@ -40,13 +40,8 @@ updates:
   - yguedidi
   - Kdecherf
   ignore:
-  - dependency-name: lcobucci/jwt
-    versions:
-    - ">= 4.2.0"
-  # until we add support for Symfony 5+
   - dependency-name: symfony/*
-    versions:
-    - ">= 5.0.0"
+    update-types: [ "version-update:semver-major" ]
 - package-ecosystem: github-actions
   directory: "/"
   schedule:
