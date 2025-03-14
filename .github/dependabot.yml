@@ -40,10 +40,8 @@ updates:
   - yguedidi
   - Kdecherf
   ignore:
-  # until we add support for Symfony 5+
   - dependency-name: symfony/*
-    versions:
-    - ">= 5.0.0"
+    update-types: [ "version-update:semver-major" ]
 - package-ecosystem: github-actions
   directory: "/"
   schedule:
