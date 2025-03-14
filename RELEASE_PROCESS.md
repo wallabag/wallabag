@@ -25,13 +25,13 @@ During this documentation, we assume the release is `$LAST_WALLABAG_RELEASE` (li
 ### Target PHP version
 `composer.lock` is _always_ built for a particular version, by default the one it is generated (with `composer update`).
 
-If the PHP version used to generate the .lock isn't a widely available one (like PHP 8), a more common one should
+If the PHP version used to generate the .lock isn't a widely available one (like latest PHP versions), a more common one should
 be locally specified in `composer.lock`:
 
 ```json
     "config": {
         "platform": {
-            "php": "7.4.29",
+            "php": "8.2.27",
             "ext-something": "4.0"
         }
     }
