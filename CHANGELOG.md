@@ -2,6 +2,7 @@
 
 ## Upcoming changes
 
+* **[BC BREAK]** Convert 403 errors to 404 errors by @yguedidi in https://github.com/wallabag/wallabag/pull/8075
 * `wallassets/` folder renamed to `build/`
 
 ## [2.6.10](https://github.com/wallabag/wallabag/tree/2.6.10)

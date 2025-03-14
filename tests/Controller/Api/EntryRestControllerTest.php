@@ -110,7 +110,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->client->request('GET', '/api/entries/' . $entry->getId() . '.json');
 
-        $this->assertSame(403, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
     }
 
     public function testGetEntries()
@@ -1260,14 +1260,14 @@ class EntryRestControllerTest extends WallabagApiTestCase
     {
         $this->client->request('GET', '/api/entries/exists?url=');
 
-        $this->assertSame(403, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
     }
 
     public function testGetEntriesExistsWithNoHashedUrl()
     {
         $this->client->request('GET', '/api/entries/exists?hashed_url=');
 
-        $this->assertSame(403, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
     }
 
     public function testReloadEntryErrorWhileFetching()

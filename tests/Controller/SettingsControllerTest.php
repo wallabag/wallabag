@@ -27,6 +27,6 @@ class SettingsControllerTest extends WallabagTestCase
 
         $crawler = $client->request('GET', '/settings');
 
-        $this->assertSame(403, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 }
