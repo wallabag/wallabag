@@ -69,7 +69,7 @@
         "doctrine/migrations": "^3.8.2",
         "doctrine/orm": "^2.20.2",
         "doctrine/persistence": "^3.4",
-        "egulias/email-validator": "^3.2.6",
+        "egulias/email-validator": "^4.0.3",
         "enshrined/svg-sanitize": "^0.21",
         "friendsofsymfony/jsrouting-bundle": "^2.8",
         "friendsofsymfony/oauth-server-bundle": "dev-master#dc8ff343363cf794d30eb1a123610d186a43f162",
