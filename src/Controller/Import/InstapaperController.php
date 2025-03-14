@@ -4,6 +4,7 @@ namespace Wallabag\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -25,6 +26,7 @@ class InstapaperController extends AbstractController
 
     /**
      * @Route("/import/instapaper", name="import_instapaper", methods={"GET", "POST"})
+     * @IsGranted("IMPORT_ENTRIES")
      */
     public function indexAction(Request $request, InstapaperImport $instapaper, Config $craueConfig, TranslatorInterface $translator)
     {

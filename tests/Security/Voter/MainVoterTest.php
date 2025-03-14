@@ -98,6 +98,20 @@ class MainVoterTest extends TestCase
         $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->mainVoter->vote($this->token, null, [MainVoter::EXPORT_ENTRIES]));
     }
 
+    public function testVoteReturnsDeniedForNonUserImportEntries(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_USER')->willReturn(false);
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->mainVoter->vote($this->token, null, [MainVoter::IMPORT_ENTRIES]));
+    }
+
+    public function testVoteReturnsGrantedForUserImportEntries(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_USER')->willReturn(true);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->mainVoter->vote($this->token, null, [MainVoter::IMPORT_ENTRIES]));
+    }
+
     public function testVoteReturnsDeniedForNonUserListSiteCredentials(): void
     {
         $this->security->method('isGranted')->with('ROLE_USER')->willReturn(false);

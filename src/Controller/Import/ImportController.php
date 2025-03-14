@@ -4,6 +4,7 @@ namespace Wallabag\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use Predis\Client;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Wallabag\Consumer\RabbitMQConsumerTotalProxy;
@@ -21,6 +22,7 @@ class ImportController extends AbstractController
 
     /**
      * @Route("/import/", name="import", methods={"GET"})
+     * @IsGranted("IMPORT_ENTRIES")
      */
     public function importAction(ImportChain $importChain)
     {

@@ -123,7 +123,9 @@
                 <ul id="dropdown-account" class="dropdown-content">
                     <li><a href="{{ path('config') }}"><i class="material-icons">settings</i> {{ 'menu.left.config'|trans }}</a></li>
                     <li><a href="{{ path('developer') }}"><i class="material-icons">smartphone</i> {{ 'menu.left.developer'|trans }}</a></li>
-                    <li><a href="{{ path('import') }}"><i class="material-icons">import_export</i> {{ 'menu.left.import'|trans }}</a></li>
+                    {% if is_granted('IMPORT_ENTRIES') %}
+                        <li><a href="{{ path('import') }}"><i class="material-icons">import_export</i> {{ 'menu.left.import'|trans }}</a></li>
+                    {% endif %}
                     {% if craue_setting('restricted_access') and is_granted('LIST_SITE_CREDENTIALS') %}
                         <li><a href="{{ path('site_credentials_index') }}"><i class="material-icons">vpn_key</i> {{ 'menu.left.site_credentials'|trans }}</a></li>
                     {% endif %}

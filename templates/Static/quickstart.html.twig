@@ -45,22 +45,24 @@
                             </div>
                         </li>
 
-                        <li class="col l4 m6 s12">
-                            <div class="card light-green darken-1">
-                                <div class="card-content white-text">
-                                    <span class="card-title white-text">{{ 'quickstart.migrate.title'|trans }}</span>
-                                    <p>{{ 'quickstart.migrate.description'|trans }}</p>
+                        {% if is_granted('IMPORT_ENTRIES') %}
+                            <li class="col l4 m6 s12">
+                                <div class="card light-green darken-1">
+                                    <div class="card-content white-text">
+                                        <span class="card-title white-text">{{ 'quickstart.migrate.title'|trans }}</span>
+                                        <p>{{ 'quickstart.migrate.description'|trans }}</p>
+                                    </div>
+                                    <div class="card-action">
+                                        <ul>
+                                            <li><a href="{{ path('import_pocket') }}">{{ 'quickstart.migrate.pocket'|trans }}</a></li>
+                                            <li><a href="{{ path('import_readability') }}">{{ 'quickstart.migrate.readability'|trans }}</a></li>
+                                            <li><a href="{{ path('import_instapaper') }}">{{ 'quickstart.migrate.instapaper'|trans }}</a></li>
+                                            <li><a href="{{ path('import') }}">{{ 'quickstart.more'|trans }}</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="card-action">
-                                    <ul>
-                                        <li><a href="{{ path('import_pocket') }}">{{ 'quickstart.migrate.pocket'|trans }}</a></li>
-                                        <li><a href="{{ path('import_readability') }}">{{ 'quickstart.migrate.readability'|trans }}</a></li>
-                                        <li><a href="{{ path('import_instapaper') }}">{{ 'quickstart.migrate.instapaper'|trans }}</a></li>
-                                        <li><a href="{{ path('import') }}">{{ 'quickstart.more'|trans }}</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                        {% endif %}
 
                         <li class="col l4 m6 s12">
                             <div class="card blue darken-1">
