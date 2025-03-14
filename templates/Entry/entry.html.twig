@@ -229,23 +229,25 @@
             </li>
         {% endif %}
 
-        <li class="bold">
-            <a class="waves-effect collapsible-header">
-                <i class="material-icons small">file_download</i>
-                <span>{{ 'entry.view.left_menu.export'|trans }}</span>
-            </a>
-            <div class="collapsible-body">
-                <ul>
-                    {% if craue_setting('export_epub') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'epub'}) }}" title="Generate ePub file">EPUB</a></li>{% endif %}
-                    {% if craue_setting('export_pdf') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'pdf'}) }}" title="Generate PDF file">PDF</a></li>{% endif %}
-                    {% if craue_setting('export_csv') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'csv'}) }}" title="Generate CSV file">CSV</a></li>{% endif %}
-                    {% if craue_setting('export_json') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'json'}) }}" title="Generate JSON file">JSON</a></li>{% endif %}
-                    {% if craue_setting('export_txt') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'txt'}) }}" title="Generate TXT file">TXT</a></li>{% endif %}
-                    {% if craue_setting('export_xml') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'xml'}) }}" title="Generate XML file">XML</a></li>{% endif %}
-                    {% if craue_setting('export_md') %}<li><a href="{{ path('export_entry', {'id': entry.id, 'format': 'md'}) }}" title="Generate MD file">Markdown</a></li>{% endif %}
-                </ul>
-            </div>
-        </li>
+        {% if is_granted('EXPORT', entry) %}
+            <li class="bold">
+                <a class="waves-effect collapsible-header">
+                    <i class="material-icons small">file_download</i>
+                    <span>{{ 'entry.view.left_menu.export'|trans }}</span>
+                </a>
+                <div class="collapsible-body">
+                    <ul>
+                        {% if craue_setting('export_epub') %}<li><a href="{{ path('export_entry', {entry: entry.id, 'format': 'epub'}) }}" title="Generate ePub file">EPUB</a></li>{% endif %}
+                        {% if craue_setting('export_pdf') %}<li><a href="{{ path('export_entry', {entry: entry.id, 'format': 'pdf'}) }}" title="Generate PDF file">PDF</a></li>{% endif %}
+                        {% if craue_setting('export_csv') %}<li><a href="{{ path('export_entry', {entry: entry.id, 'format': 'csv'}) }}" title="Generate CSV file">CSV</a></li>{% endif %}
+                        {% if craue_setting('export_json') %}<li><a href="{{ path('export_entry', {entry: entry.id, 'format': 'json'}) }}" title="Generate JSON file">JSON</a></li>{% endif %}
+                        {% if craue_setting('export_txt') %}<li><a href="{{ path('export_entry', {entry: entry.id, 'format': 'txt'}) }}" title="Generate TXT file">TXT</a></li>{% endif %}
+                        {% if craue_setting('export_xml') %}<li><a href="{{ path('export_entry', {entry: entry.id, 'format': 'xml'}) }}" title="Generate XML file">XML</a></li>{% endif %}
+                        {% if craue_setting('export_md') %}<li><a href="{{ path('export_entry', {entry: entry.id, 'format': 'md'}) }}" title="Generate MD file">Markdown</a></li>{% endif %}
+                    </ul>
+                </div>
+            </li>
+        {% endif %}
 
         <li class="bold">
             <a class="waves-effect collapsible-header" href="mailto:siteconfig@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{{ 'entry.view.left_menu.problem.description'|trans }}">

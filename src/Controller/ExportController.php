@@ -2,10 +2,12 @@
 
 namespace Wallabag\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Wallabag\Entity\Entry;
 use Wallabag\Helper\EntriesExport;
 use Wallabag\Repository\EntryRepository;
 use Wallabag\Repository\TagRepository;
@@ -19,27 +21,17 @@ class ExportController extends AbstractController
     /**
      * Gets one entry content.
      *
-     * @Route("/export/{id}.{format}", name="export_entry", methods={"GET"}, requirements={
+     * @Route("/export/{entry}.{format}", name="export_entry", methods={"GET"}, requirements={
      *     "format": "epub|pdf|json|xml|txt|csv|md",
-     *     "id": "\d+"
+     *     "entry": "\d+"
      * })
+     * @IsGranted("EXPORT", subject="entry")
      *
      * @return Response
      */
-    public function downloadEntryAction(Request $request, EntryRepository $entryRepository, EntriesExport $entriesExport, string $format, int $id)
+    public function downloadEntryAction(Request $request, EntryRepository $entryRepository, EntriesExport $entriesExport, string $format, Entry $entry)
     {
         try {
-            $entry = $entryRepository->find($id);
-
-            /*
-             * We duplicate EntryController::checkUserAction here as a quick fix for an improper authorization vulnerability
-             *
-             * This should be eventually rewritten
-             */
-            if (null === $entry || null === $this->getUser() || $this->getUser()->getId() !== $entry->getUser()->getId()) {
-                throw new NotFoundHttpException();
-            }
-
             return $entriesExport
                 ->setEntries($entry)
                 ->updateTitle('entry')
@@ -57,6 +49,7 @@ class ExportController extends AbstractController
      *     "format": "epub|pdf|json|xml|txt|csv|md",
      *     "category": "all|unread|starred|archive|tag_entries|untagged|search|annotated|same_domain"
      * })
+     * @IsGranted("EXPORT_ENTRIES")
      *
      * @return Response
      */

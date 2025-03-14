@@ -16,6 +16,7 @@ class EntryVoter extends Voter
     public const ARCHIVE = 'ARCHIVE';
     public const SHARE = 'SHARE';
     public const UNSHARE = 'UNSHARE';
+    public const EXPORT = 'EXPORT';
     public const DELETE = 'DELETE';
     public const LIST_ANNOTATIONS = 'LIST_ANNOTATIONS';
     public const CREATE_ANNOTATIONS = 'CREATE_ANNOTATIONS';
@@ -26,7 +27,7 @@ class EntryVoter extends Voter
             return false;
         }
 
-        if (!\in_array($attribute, [self::VIEW, self::EDIT, self::RELOAD, self::STAR, self::ARCHIVE, self::SHARE, self::UNSHARE, self::DELETE, self::LIST_ANNOTATIONS, self::CREATE_ANNOTATIONS], true)) {
+        if (!\in_array($attribute, [self::VIEW, self::EDIT, self::RELOAD, self::STAR, self::ARCHIVE, self::SHARE, self::UNSHARE, self::EXPORT, self::DELETE, self::LIST_ANNOTATIONS, self::CREATE_ANNOTATIONS], true)) {
             return false;
         }
 
@@ -51,6 +52,7 @@ class EntryVoter extends Voter
             case self::ARCHIVE:
             case self::SHARE:
             case self::UNSHARE:
+            case self::EXPORT:
             case self::DELETE:
             case self::LIST_ANNOTATIONS:
             case self::CREATE_ANNOTATIONS:
