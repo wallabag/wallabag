@@ -188,4 +188,32 @@ class EntryVoterTest extends TestCase
 
         $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::CREATE_ANNOTATIONS]));
     }
+
+    public function testVoteReturnsDeniedForNonEntryUserTag(): void
+    {
+        $this->token->method('getUser')->willReturn(new User());
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::TAG]));
+    }
+
+    public function testVoteReturnsGrantedForEntryUserTag(): void
+    {
+        $this->token->method('getUser')->willReturn($this->user);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::TAG]));
+    }
+
+    public function testVoteReturnsDeniedForNonEntryUserUntag(): void
+    {
+        $this->token->method('getUser')->willReturn(new User());
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::UNTAG]));
+    }
+
+    public function testVoteReturnsGrantedForEntryUserUntag(): void
+    {
+        $this->token->method('getUser')->willReturn($this->user);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::UNTAG]));
+    }
 }

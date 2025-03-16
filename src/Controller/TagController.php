@@ -6,10 +6,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\Tag;
@@ -26,16 +28,19 @@ class TagController extends AbstractController
     private EntityManagerInterface $entityManager;
     private TagsAssigner $tagsAssigner;
     private Redirect $redirectHelper;
+    private Security $security;
 
-    public function __construct(EntityManagerInterface $entityManager, TagsAssigner $tagsAssigner, Redirect $redirectHelper)
+    public function __construct(EntityManagerInterface $entityManager, TagsAssigner $tagsAssigner, Redirect $redirectHelper, Security $security)
     {
         $this->entityManager = $entityManager;
         $this->tagsAssigner = $tagsAssigner;
         $this->redirectHelper = $redirectHelper;
+        $this->security = $security;
     }
 
     /**
      * @Route("/new-tag/{entry}", name="new_tag", methods={"POST"}, requirements={"entry" = "\d+"})
+     * @IsGranted("TAG", subject="entry")
      *
      * @return Response
      */
@@ -59,8 +64,6 @@ class TagController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->checkUserAction($entry);
-
             $this->tagsAssigner->assignTagsToEntry(
                 $entry,
                 $form->get('label')->getData()
@@ -87,18 +90,17 @@ class TagController extends AbstractController
      * Removes tag from entry.
      *
      * @Route("/remove-tag/{entry}/{tag}", name="remove_tag", methods={"GET"}, requirements={"entry" = "\d+", "tag" = "\d+"})
+     * @IsGranted("UNTAG", subject="entry")
      *
      * @return Response
      */
     public function removeTagFromEntry(Request $request, Entry $entry, Tag $tag)
     {
-        $this->checkUserAction($entry);
-
         $entry->removeTag($tag);
         $this->entityManager->flush();
 
         // remove orphan tag in case no entries are associated to it
-        if (0 === \count($tag->getEntries())) {
+        if (0 === \count($tag->getEntries()) && $this->security->isGranted('DELETE', $tag)) {
             $this->entityManager->remove($tag);
             $this->entityManager->flush();
         }
@@ -112,21 +114,22 @@ class TagController extends AbstractController
      * Shows tags for current user.
      *
      * @Route("/tag/list", name="tag", methods={"GET"})
+     * @IsGranted("LIST_TAGS")
      *
      * @return Response
      */
     public function showTagAction(TagRepository $tagRepository, EntryRepository $entryRepository)
     {
-        $tags = $tagRepository->findAllFlatTagsWithNbEntries($this->getUser()->getId());
+        $allTagsWithNbEntries = $tagRepository->findAllTagsWithNbEntries($this->getUser()->getId());
         $nbEntriesUntagged = $entryRepository->countUntaggedEntriesByUser($this->getUser()->getId());
 
         $renameForms = [];
-        foreach ($tags as $tag) {
-            $renameForms[$tag['id']] = $this->createForm(RenameTagType::class, new Tag())->createView();
+        foreach ($allTagsWithNbEntries as $tagWithNbEntries) {
+            $renameForms[$tagWithNbEntries['tag']->getId()] = $this->createForm(RenameTagType::class, new Tag())->createView();
         }
 
         return $this->render('Tag/tags.html.twig', [
-            'tags' => $tags,
+            'allTagsWithNbEntries' => $allTagsWithNbEntries,
             'renameForms' => $renameForms,
             'nbEntriesUntagged' => $nbEntriesUntagged,
         ]);
@@ -137,6 +140,8 @@ class TagController extends AbstractController
      *
      * @Route("/tag/list/{slug}/{page}", name="tag_entries", methods={"GET"}, defaults={"page" = "1"})
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
+     * @IsGranted("LIST_ENTRIES")
+     * @IsGranted("VIEW", subject="tag")
      *
      * @return Response
      */
@@ -176,6 +181,7 @@ class TagController extends AbstractController
      *
      * @Route("/tag/rename/{slug}", name="tag_rename", methods={"POST"})
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
+     * @IsGranted("EDIT", subject="tag")
      *
      * @return Response
      */
@@ -228,6 +234,7 @@ class TagController extends AbstractController
      * Tag search results with the current search term.
      *
      * @Route("/tag/search/{filter}", name="tag_this_search", methods={"GET"})
+     * @IsGranted("CREATE_TAGS")
      *
      * @return Response
      */
@@ -264,6 +271,7 @@ class TagController extends AbstractController
      *
      * @Route("/tag/delete/{slug}", name="tag_delete", methods={"GET"})
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
+     * @IsGranted("DELETE", subject="tag")
      *
      * @return Response
      */
@@ -281,15 +289,5 @@ class TagController extends AbstractController
         $redirectUrl = $this->redirectHelper->to($request->query->get('redirect'), true);
 
         return $this->redirect($redirectUrl);
-    }
-
-    /**
-     * Check if the logged user can manage the given entry.
-     */
-    private function checkUserAction(Entry $entry)
-    {
-        if (null === $this->getUser() || $this->getUser()->getId() !== $entry->getUser()->getId()) {
-            throw $this->createAccessDeniedException('You can not access this entry.');
-        }
     }
 }

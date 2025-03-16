@@ -6,7 +6,7 @@
     {% set current_path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
 
     <div class="results clearfix">
-        {{ 'tag.list.number_on_the_page'|trans({'%count%': tags|length}) }}
+        {{ 'tag.list.number_on_the_page'|trans({'%count%': allTagsWithNbEntries|length}) }}
     </div>
 
     <div class="row">
@@ -16,12 +16,14 @@
                     <a href="{{ path('untagged') }}">{{ 'tag.list.untagged'|trans }} ({{ nbEntriesUntagged }})</a>
                 </li>
             {% endif %}
-            {% for tag in tags %}
-                <li title="{{ tag.label }} ({{ tag.nbEntries }})" id="tag-{{ tag.id }}" class="chip">
+            {% for tagWithNbEntries in allTagsWithNbEntries %}
+                {% set tag = tagWithNbEntries.tag %}
+                {% set nbEntries = tagWithNbEntries.nbEntries %}
+                <li title="{{ tag.label }} ({{ nbEntries }})" id="tag-{{ tag.id }}" class="chip">
                     <a href="{{ path('tag_entries', {'slug': tag.slug}) }}" class="card-tag-link" data-handle="tag-link">
-                        {{ tag.label }}&nbsp;({{ tag.nbEntries }})
+                        {{ tag.label }}&nbsp;({{ nbEntries }})
                     </a>
-                    {% if renameForms is defined and renameForms[tag.id] is defined %}
+                    {% if renameForms is defined and renameForms[tag.id] is defined and is_granted('EDIT', tag) %}
                     <form class="card-tag-form hidden" data-handle="tag-rename-form" action="{{ path('tag_rename', {'slug': tag.slug, redirect: current_path}) }}" method="POST">
                         {{ form_widget(renameForms[tag.id].label, {'attr': {'value': tag.label}}) }}
                         {{ form_rest(renameForms[tag.id]) }}
@@ -30,9 +32,11 @@
                         <i class="material-icons">mode_edit</i>
                     </a>
                     {% endif %}
-                    <a id="delete-{{ tag.slug }}" href="{{ path('tag_delete', {'slug': tag.slug, redirect: current_path}) }}" class="card-tag-icon card-tag-delete" onclick="return confirm('{{ 'tag.confirm.delete'|trans({'%name%': tag.label})|escape('js') }}')">
-                        <i class="material-icons">delete</i>
-                    </a>
+                    {% if is_granted('DELETE', tag) %}
+                        <a id="delete-{{ tag.slug }}" href="{{ path('tag_delete', {'slug': tag.slug, redirect: current_path}) }}" class="card-tag-icon card-tag-delete" onclick="return confirm('{{ 'tag.confirm.delete'|trans({'%name%': tag.label})|escape('js') }}')">
+                            <i class="material-icons">delete</i>
+                        </a>
+                    {% endif %}
                     {% if app.user.config.feedToken %}
                         <a rel="alternate" type="application/atom+xml" href="{{ path('tag_feed', {'username': app.user.username, 'token': app.user.config.feedToken, 'slug': tag.slug}) }}" class="card-tag-icon"><i class="material-icons">rss_feed</i></a>
                     {% endif %}
