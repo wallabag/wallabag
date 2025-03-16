@@ -41,8 +41,10 @@
                         <div class="row">
                             <div class="input-field col s11 settings-checkbox-col">
                                 {{ form_errors(form.config.display_thumbnails) }}
-                                {{ form_widget(form.config.display_thumbnails) }}
-                                {{ form_label(form.config.display_thumbnails, null, {'label_attr': {'class': 'settings-checkbox-label'}}) }}
+                                <label for="{{ form.config.display_thumbnails.vars.id }}" class="settings-checkbox-label">
+                                    {{ form_widget(form.config.display_thumbnails) }}
+                                    <span>{{ form.config.display_thumbnails.vars.label|trans }}</span>
+                                </label>
                             </div>
                             <div class="input-field col s1">
                                 <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_display_thumbnails'|trans }}">
