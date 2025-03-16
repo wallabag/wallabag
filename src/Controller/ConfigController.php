@@ -10,6 +10,7 @@ use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use PragmaRX\Recovery\Recovery as BackupCodes;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -22,7 +23,6 @@ use Symfony\Component\Validator\Constraints\Locale as LocaleConstraint;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Wallabag\Entity\Config as ConfigEntity;
 use Wallabag\Entity\IgnoreOriginUserRule;
-use Wallabag\Entity\RuleInterface;
 use Wallabag\Entity\TaggingRule;
 use Wallabag\Event\ConfigUpdatedEvent;
 use Wallabag\Form\Type\ChangePasswordType;
@@ -75,6 +75,7 @@ class ConfigController extends AbstractController
 
     /**
      * @Route("/config", name="config", methods={"GET", "POST"})
+     * @IsGranted("EDIT_CONFIG")
      */
     public function indexAction(Request $request, Config $craueConfig, TaggingRuleRepository $taggingRuleRepository, IgnoreOriginUserRuleRepository $ignoreOriginUserRuleRepository, UserRepository $userRepository)
     {
@@ -265,6 +266,7 @@ class ConfigController extends AbstractController
      * Disable 2FA using email.
      *
      * @Route("/config/otp/email/disable", name="disable_otp_email", methods={"POST"})
+     * @IsGranted("EDIT_CONFIG")
      */
     public function disableOtpEmailAction(Request $request)
     {
@@ -289,6 +291,7 @@ class ConfigController extends AbstractController
      * Enable 2FA using email.
      *
      * @Route("/config/otp/email", name="config_otp_email", methods={"POST"})
+     * @IsGranted("EDIT_CONFIG")
      */
     public function otpEmailAction(Request $request)
     {
@@ -316,6 +319,7 @@ class ConfigController extends AbstractController
      * Disable 2FA using OTP app.
      *
      * @Route("/config/otp/app/disable", name="disable_otp_app", methods={"POST"})
+     * @IsGranted("EDIT_CONFIG")
      */
     public function disableOtpAppAction(Request $request)
     {
@@ -342,6 +346,7 @@ class ConfigController extends AbstractController
      * Enable 2FA using OTP app, user will need to confirm the generated code from the app.
      *
      * @Route("/config/otp/app", name="config_otp_app", methods={"POST"})
+     * @IsGranted("EDIT_CONFIG")
      */
     public function otpAppAction(Request $request, GoogleAuthenticatorInterface $googleAuthenticator)
     {
@@ -383,6 +388,7 @@ class ConfigController extends AbstractController
      * Cancelling 2FA using OTP app.
      *
      * @Route("/config/otp/app/cancel", name="config_otp_app_cancel")
+     * @IsGranted("EDIT_CONFIG")
      *
      * XXX: commented until we rewrite 2fa with a real two-steps activation
      */
@@ -401,6 +407,7 @@ class ConfigController extends AbstractController
      * Validate OTP code.
      *
      * @Route("/config/otp/app/check", name="config_otp_app_check", methods={"POST"})
+     * @IsGranted("EDIT_CONFIG")
      */
     public function otpAppCheckAction(Request $request, GoogleAuthenticatorInterface $googleAuthenticator)
     {
@@ -437,6 +444,7 @@ class ConfigController extends AbstractController
 
     /**
      * @Route("/generate-token", name="generate_token", methods={"GET"})
+     * @IsGranted("EDIT_CONFIG")
      *
      * @return RedirectResponse|JsonResponse
      */
@@ -462,6 +470,7 @@ class ConfigController extends AbstractController
 
     /**
      * @Route("/revoke-token", name="revoke_token", methods={"GET"})
+     * @IsGranted("EDIT_CONFIG")
      *
      * @return RedirectResponse|JsonResponse
      */
@@ -488,15 +497,14 @@ class ConfigController extends AbstractController
     /**
      * Deletes a tagging rule and redirect to the config homepage.
      *
-     * @Route("/tagging-rule/delete/{id}", name="delete_tagging_rule", methods={"GET"}, requirements={"id" = "\d+"})
+     * @Route("/tagging-rule/delete/{taggingRule}", name="delete_tagging_rule", methods={"GET"}, requirements={"taggingRule" = "\d+"})
+     * @IsGranted("DELETE", subject="taggingRule")
      *
      * @return RedirectResponse
      */
-    public function deleteTaggingRuleAction(TaggingRule $rule)
+    public function deleteTaggingRuleAction(TaggingRule $taggingRule)
     {
-        $this->validateRuleAction($rule);
-
-        $this->entityManager->remove($rule);
+        $this->entityManager->remove($taggingRule);
         $this->entityManager->flush();
 
         $this->addFlash(
@@ -510,29 +518,27 @@ class ConfigController extends AbstractController
     /**
      * Edit a tagging rule.
      *
-     * @Route("/tagging-rule/edit/{id}", name="edit_tagging_rule", methods={"GET"}, requirements={"id" = "\d+"})
+     * @Route("/tagging-rule/edit/{taggingRule}", name="edit_tagging_rule", methods={"GET"}, requirements={"taggingRule" = "\d+"})
+     * @IsGranted("EDIT", subject="taggingRule")
      *
      * @return RedirectResponse
      */
-    public function editTaggingRuleAction(TaggingRule $rule)
+    public function editTaggingRuleAction(TaggingRule $taggingRule)
     {
-        $this->validateRuleAction($rule);
-
-        return $this->redirect($this->generateUrl('config') . '?tagging-rule=' . $rule->getId() . '#set5');
+        return $this->redirect($this->generateUrl('config') . '?tagging-rule=' . $taggingRule->getId() . '#set5');
     }
 
     /**
      * Deletes an ignore origin rule and redirect to the config homepage.
      *
-     * @Route("/ignore-origin-user-rule/delete/{id}", name="delete_ignore_origin_rule", methods={"GET"}, requirements={"id" = "\d+"})
+     * @Route("/ignore-origin-user-rule/delete/{ignoreOriginUserRule}", name="delete_ignore_origin_rule", methods={"GET"}, requirements={"ignoreOriginUserRule" = "\d+"})
+     * @IsGranted("DELETE", subject="ignoreOriginUserRule")
      *
      * @return RedirectResponse
      */
-    public function deleteIgnoreOriginRuleAction(IgnoreOriginUserRule $rule)
+    public function deleteIgnoreOriginRuleAction(IgnoreOriginUserRule $ignoreOriginUserRule)
     {
-        $this->validateRuleAction($rule);
-
-        $this->entityManager->remove($rule);
+        $this->entityManager->remove($ignoreOriginUserRule);
         $this->entityManager->flush();
 
         $this->addFlash(
@@ -546,21 +552,21 @@ class ConfigController extends AbstractController
     /**
      * Edit an ignore origin rule.
      *
-     * @Route("/ignore-origin-user-rule/edit/{id}", name="edit_ignore_origin_rule", methods={"GET"}, requirements={"id" = "\d+"})
+     * @Route("/ignore-origin-user-rule/edit/{ignoreOriginUserRule}", name="edit_ignore_origin_rule", methods={"GET"}, requirements={"ignoreOriginUserRule" = "\d+"})
+     * @IsGranted("EDIT", subject="ignoreOriginUserRule")
      *
      * @return RedirectResponse
      */
-    public function editIgnoreOriginRuleAction(IgnoreOriginUserRule $rule)
+    public function editIgnoreOriginRuleAction(IgnoreOriginUserRule $ignoreOriginUserRule)
     {
-        $this->validateRuleAction($rule);
-
-        return $this->redirect($this->generateUrl('config') . '?ignore-origin-user-rule=' . $rule->getId() . '#set6');
+        return $this->redirect($this->generateUrl('config') . '?ignore-origin-user-rule=' . $ignoreOriginUserRule->getId() . '#set6');
     }
 
     /**
      * Remove all annotations OR tags OR entries for the current user.
      *
      * @Route("/reset/{type}", name="config_reset", methods={"POST"}, requirements={"id" = "annotations|tags|entries|tagging_rules"})
+     * @IsGranted("EDIT_CONFIG")
      *
      * @return RedirectResponse
      */
@@ -616,6 +622,7 @@ class ConfigController extends AbstractController
      * Delete account for current user.
      *
      * @Route("/account/delete", name="delete_account", methods={"POST"})
+     * @IsGranted("EDIT_CONFIG")
      *
      * @throws AccessDeniedHttpException
      *
@@ -648,6 +655,7 @@ class ConfigController extends AbstractController
      * Switch view mode for current user.
      *
      * @Route("/config/view-mode", name="switch_view_mode", methods={"GET"})
+     * @IsGranted("EDIT_CONFIG")
      *
      * @return RedirectResponse
      */
@@ -670,6 +678,7 @@ class ConfigController extends AbstractController
      * @param string $language
      *
      * @Route("/locale/{language}", name="changeLocale", methods={"GET"})
+     * @IsGranted("PUBLIC_ACCESS")
      *
      * @return RedirectResponse
      */
@@ -688,6 +697,7 @@ class ConfigController extends AbstractController
      * Export tagging rules for the logged in user.
      *
      * @Route("/tagging-rule/export", name="export_tagging_rule", methods={"GET"})
+     * @IsGranted("EDIT_CONFIG")
      *
      * @return Response
      */
@@ -766,16 +776,6 @@ class ConfigController extends AbstractController
         }
 
         $this->entityManager->flush();
-    }
-
-    /**
-     * Validate that a rule can be edited/deleted by the current user.
-     */
-    private function validateRuleAction(RuleInterface $rule)
-    {
-        if ($this->getUser()->getId() !== $rule->getConfig()->getUser()->getId()) {
-            throw $this->createAccessDeniedException('You can not access this rule.');
-        }
     }
 
     /**

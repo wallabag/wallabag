@@ -11,11 +11,6 @@ parameters:
 			path: src/Controller/AnnotationController.php
 
 		-
-			message: "#^Call to an undefined method Wallabag\\\\Entity\\\\RuleInterface\\:\\:getConfig\\(\\)\\.$#"
-			count: 1
-			path: src/Controller/ConfigController.php
-
-		-
 			message: "#^Method FOS\\\\UserBundle\\\\Model\\\\UserManagerInterface\\:\\:updateUser\\(\\) invoked with 2 parameters, 1 required\\.$#"
 			count: 6
 			path: src/Controller/ConfigController.php
