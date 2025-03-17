@@ -49,7 +49,8 @@ class TagRestControllerTest extends WallabagApiTestCase
 
         $em->persist($entry);
         $em->flush();
-        $em->clear();
+
+        $this->client = $this->createAuthorizedClient();
 
         $this->client->request('DELETE', '/api/tags/' . $tag->getId() . '.json');
 

@@ -541,7 +541,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $em->persist($entry);
         $em->flush();
 
-        $em->clear();
+        $this->client = $this->createAuthorizedClient();
 
         $e = [
             'title' => $entry->getTitle(),
@@ -574,7 +574,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $em->persist($entry);
         $em->flush();
 
-        $em->clear();
+        $this->client = $this->createAuthorizedClient();
 
         $id = $entry->getId();
 
@@ -666,7 +666,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $entry->addTag((new Tag())->setLabel('apple'));
         $em->persist($entry);
         $em->flush();
-        $em->clear();
+
+        $this->client = $this->createAuthorizedClient();
 
         $this->client->request('POST', '/api/entries.json', [
             'url' => 'https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment',
@@ -1361,7 +1362,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $em->persist($entry);
         $em->flush();
 
-        $em->clear();
+        $this->client = $this->createAuthorizedClient();
 
         $list = [
             [
@@ -1425,7 +1426,9 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $em->persist((new Entry($em->getReference(User::class, $this->getUserId())))->setUrl('http://0.0.0.0/test-entry1'));
 
         $em->flush();
-        $em->clear();
+
+        $this->client = $this->createAuthorizedClient();
+
         $list = [
             'http://0.0.0.0/test-entry1',
             'http://0.0.0.0/test-entry-not-exist',
@@ -1487,7 +1490,8 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $entry->setPublishedAt(new \DateTime('2017-06-26T07:46:02+0200'));
         $em->persist($entry);
         $em->flush();
-        $em->clear();
+
+        $this->client = $this->createAuthorizedClient();
 
         $this->client->request('POST', '/api/entries.json', [
             'url' => 'https://www.lemonde.fr/m-perso/article/2017/06/25/antoine-de-caunes-je-veux-avoir-le-droit-de-tatonner_5150728_4497916.html',
