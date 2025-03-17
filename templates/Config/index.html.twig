@@ -381,10 +381,10 @@
                                         {{ 'config.form_rules.then_tag_as_label'|trans }}
                                         « {{ tagging_rule.tags|join(', ') }} »
 
-                                        <a href="{{ path('edit_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="mode_edit_tagging_rule">
+                                        <a href="{{ path('edit_tagging_rule', {taggingRule: tagging_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="mode_edit_tagging_rule">
                                             <i class="tool grey-text material-icons">mode_edit</i>
                                         </a>
-                                        <a href="{{ path('delete_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="delete_tagging_rule">
+                                        <a href="{{ path('delete_tagging_rule', {taggingRule: tagging_rule.id}) }}" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="delete_tagging_rule">
                                             <i class="tool grey-text material-icons">delete</i>
                                         </a>
                                     </li>
@@ -561,10 +561,10 @@
                                     <li>
                                         {{ 'config.form_rules.if_label'|trans }}
                                         « {{ ignore_origin_rule.rule }} »
-                                        <a href="{{ path('edit_ignore_origin_rule', {id: ignore_origin_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="mode_edit">
+                                        <a href="{{ path('edit_ignore_origin_rule', {ignoreOriginUserRule: ignore_origin_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="mode_edit">
                                             <i class="tool grey-text material-icons">mode_edit</i>
                                         </a>
-                                        <a href="{{ path('delete_ignore_origin_rule', {id: ignore_origin_rule.id}) }}" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="delete">
+                                        <a href="{{ path('delete_ignore_origin_rule', {ignoreOriginUserRule: ignore_origin_rule.id}) }}" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="delete">
                                             <i class="tool grey-text material-icons">delete</i>
                                         </a>
                                     </li>

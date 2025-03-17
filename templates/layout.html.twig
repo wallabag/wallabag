@@ -121,7 +121,9 @@
                     </li>
                 </ul>
                 <ul id="dropdown-account" class="dropdown-content">
-                    <li><a href="{{ path('config') }}"><i class="material-icons">settings</i> {{ 'menu.left.config'|trans }}</a></li>
+                    {% if is_granted('EDIT_CONFIG') %}
+                        <li><a href="{{ path('config') }}"><i class="material-icons">settings</i> {{ 'menu.left.config'|trans }}</a></li>
+                    {% endif %}
                     <li><a href="{{ path('developer') }}"><i class="material-icons">smartphone</i> {{ 'menu.left.developer'|trans }}</a></li>
                     {% if is_granted('IMPORT_ENTRIES') %}
                         <li><a href="{{ path('import') }}"><i class="material-icons">import_export</i> {{ 'menu.left.import'|trans }}</a></li>
