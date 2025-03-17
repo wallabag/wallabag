@@ -2,12 +2,14 @@
 
 namespace Wallabag\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Routing\Annotation\Route;
 
 class StaticController extends AbstractController
 {
     /**
      * @Route("/howto", name="howto", methods={"GET"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function howtoAction()
     {
@@ -23,6 +25,7 @@ class StaticController extends AbstractController
 
     /**
      * @Route("/about", name="about", methods={"GET"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function aboutAction()
     {
@@ -37,6 +40,7 @@ class StaticController extends AbstractController
 
     /**
      * @Route("/quickstart", name="quickstart", methods={"GET"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function quickstartAction()
     {
