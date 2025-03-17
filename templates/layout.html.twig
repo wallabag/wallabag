@@ -73,9 +73,11 @@
                     <a class="waves-effect" href="{{ path('all') }}">{{ 'menu.left.all_articles'|trans }} <span class="items-number grey-text">{{ count_entries('all') }}</span></a>
                 </li>
             {% endif %}
-            <li class="bold {% if current_route == 'tags' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('tag') }}">{{ 'menu.left.tags'|trans }} <span class="items-number grey-text">{{ count_tags() }}</span></a>
-            </li>
+            {% if is_granted('LIST_TAGS') %}
+                <li class="bold {% if current_route == 'tags' %}active{% endif %}">
+                    <a class="waves-effect" href="{{ path('tag') }}">{{ 'menu.left.tags'|trans }} <span class="items-number grey-text">{{ count_tags() }}</span></a>
+                </li>
+            {% endif %}
         </ul>
         <div class="nav-panels">
             <div class="nav-panel-actions nav-panel-item">

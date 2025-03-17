@@ -316,12 +316,14 @@
                         </li>
                     {% endif %}
                 </ul>
-                {% include "Entry/_tags.html.twig" with {'tags': entry.tags, 'entryId': entry.id, 'withRemove': true} only %}
+                {% include "Entry/_tags.html.twig" with {'tags': entry.tags, 'entryId': entry.id, 'withRemove': is_granted('UNTAG', entry)} only %}
             </div>
 
-            <div class="input-field nav-panel-add-tag" style="display: none">
-                {{ render(controller('Wallabag\\Controller\\TagController::addTagFormAction', {'id': entry.id})) }}
-            </div>
+            {% if is_granted('TAG', entry) %}
+                <div class="input-field nav-panel-add-tag" style="display: none">
+                    {{ render(controller('Wallabag\\Controller\\TagController::addTagFormAction', {'id': entry.id})) }}
+                </div>
+            {% endif %}
 
         </aside>
         <article{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>

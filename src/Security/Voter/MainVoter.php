@@ -13,6 +13,8 @@ class MainVoter extends Voter
     public const EDIT_ENTRIES = 'EDIT_ENTRIES';
     public const EXPORT_ENTRIES = 'EXPORT_ENTRIES';
     public const IMPORT_ENTRIES = 'IMPORT_ENTRIES';
+    public const LIST_TAGS = 'LIST_TAGS';
+    public const CREATE_TAGS = 'CREATE_TAGS';
     public const LIST_SITE_CREDENTIALS = 'LIST_SITE_CREDENTIALS';
     public const CREATE_SITE_CREDENTIALS = 'CREATE_SITE_CREDENTIALS';
     public const EDIT_CONFIG = 'EDIT_CONFIG';
@@ -30,7 +32,7 @@ class MainVoter extends Voter
             return false;
         }
 
-        if (!\in_array($attribute, [self::LIST_ENTRIES, self::CREATE_ENTRIES, self::EDIT_ENTRIES, self::EXPORT_ENTRIES, self::IMPORT_ENTRIES, self::LIST_SITE_CREDENTIALS, self::CREATE_SITE_CREDENTIALS, self::EDIT_CONFIG], true)) {
+        if (!\in_array($attribute, [self::LIST_ENTRIES, self::CREATE_ENTRIES, self::EDIT_ENTRIES, self::EXPORT_ENTRIES, self::IMPORT_ENTRIES, self::LIST_TAGS, self::CREATE_TAGS, self::LIST_SITE_CREDENTIALS, self::CREATE_SITE_CREDENTIALS, self::EDIT_CONFIG], true)) {
             return false;
         }
 
@@ -45,6 +47,8 @@ class MainVoter extends Voter
             case self::EDIT_ENTRIES:
             case self::EXPORT_ENTRIES:
             case self::IMPORT_ENTRIES:
+            case self::LIST_TAGS:
+            case self::CREATE_TAGS:
             case self::LIST_SITE_CREDENTIALS:
             case self::CREATE_SITE_CREDENTIALS:
             case self::EDIT_CONFIG:

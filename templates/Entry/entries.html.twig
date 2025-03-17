@@ -40,7 +40,7 @@
                 {% include "Entry/_feed_link.html.twig" %}
             {% endif %}
         </div>
-        {% if current_route == 'search' %}<div><a href="{{ path('tag_this_search', {'filter': searchTerm, 'currentRoute': app.request.get('currentRoute'), redirect: current_path}) }}" title="{{ 'entry.list.assign_search_tag'|trans }}">{{ 'entry.list.assign_search_tag'|trans }}</a></div>{% endif %}
+        {% if current_route == 'search' and is_granted('CREATE_TAGS') %}<div><a href="{{ path('tag_this_search', {'filter': searchTerm, 'currentRoute': app.request.get('currentRoute'), redirect: current_path}) }}" title="{{ 'entry.list.assign_search_tag'|trans }}">{{ 'entry.list.assign_search_tag'|trans }}</a></div>{% endif %}
         {% if entries.getNbPages > 1 %}
             {{ pagerfanta(entries, 'default_wallabag') }}
         {% endif %}
