@@ -646,12 +646,16 @@ class ConfigController extends AbstractController
     /**
      * Switch view mode for current user.
      *
-     * @Route("/config/view-mode", name="switch_view_mode")
+     * @Route("/config/view-mode", name="switch_view_mode", methods={"POST"})
      *
      * @return RedirectResponse
      */
     public function changeViewModeAction(Request $request)
     {
+        if (!$this->isCsrfTokenValid('switch-view-mode', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $user = $this->getUser();
         $user->getConfig()->setListMode(!$user->getConfig()->getListMode());
 

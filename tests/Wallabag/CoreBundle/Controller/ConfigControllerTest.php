@@ -1116,18 +1116,17 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $client->request('GET', '/unread/list');
+        $crawler = $client->request('GET', '/unread/list');
 
         $this->assertStringContainsString('row data', $client->getResponse()->getContent());
 
-        $client->request('GET', '/config/view-mode');
-        $crawler = $client->followRedirect();
+        $form = $crawler->filter('.nb-results')->selectButton('view_list')->form();
 
-        $client->request('GET', '/unread/list');
+        $client->submit($form);
+
+        $client->followRedirect();
 
         $this->assertStringContainsString('collection', $client->getResponse()->getContent());
-
-        $client->request('GET', '/config/view-mode');
     }
 
     public function testChangeLocaleWithoutReferer()
@@ -1378,7 +1377,5 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $client->request('GET', '/unread/list');
 
         $this->assertStringNotContainsString('class="preview"', $client->getResponse()->getContent());
-
-        $client->request('GET', '/config/view-mode');
     }
 }

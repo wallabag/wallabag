@@ -228,10 +228,10 @@ $(document).ready(() => {
       });
     });
   }
-  $('form[name="form_mass_action"] input[name="tags"]').on('keydown', (e) => {
+  $('input[name="tags"][form="form_mass_action"]').on('keydown', (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      $('form[name="form_mass_action"] button[name="tag"]').trigger('click');
+      $('button[name="tag"][form="form_mass_action"]').trigger('click');
     }
   });
 });
