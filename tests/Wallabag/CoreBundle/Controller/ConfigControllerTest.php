@@ -328,31 +328,14 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('config.form_feed.no_token', $body[0]);
 
-        $client->request('GET', '/generate-token');
+        $client->submit($crawler->selectButton('config.form_feed.token_create')->form());
+
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('config.form_feed.token_reset', $body[0]);
-    }
-
-    public function testGenerateTokenAjax()
-    {
-        $this->logInAs('admin');
-        $client = $this->getTestClient();
-
-        $client->request(
-            'GET',
-            '/generate-token',
-            [],
-            [],
-            ['HTTP_X-Requested-With' => 'XMLHttpRequest']
-        );
-
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $content = json_decode($client->getResponse()->getContent(), true);
-        $this->assertArrayHasKey('token', $content);
     }
 
     public function testRevokeTokenAjax()

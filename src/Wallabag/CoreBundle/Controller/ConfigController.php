@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraints\Locale as LocaleConstraint;
@@ -429,21 +430,21 @@ class ConfigController extends AbstractController
     }
 
     /**
-     * @Route("/generate-token", name="generate_token")
+     * @Route("/generate-token", name="generate_token", methods={"POST"})
      *
      * @return RedirectResponse|JsonResponse
      */
     public function generateTokenAction(Request $request)
     {
+        if (!$this->isCsrfTokenValid('generate-token', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $config = $this->getConfig();
         $config->setFeedToken(Utils::generateToken());
 
         $this->entityManager->persist($config);
         $this->entityManager->flush();
-
-        if ($request->isXmlHttpRequest()) {
-            return new JsonResponse(['token' => $config->getFeedToken()]);
-        }
 
         $this->addFlash(
             'notice',
