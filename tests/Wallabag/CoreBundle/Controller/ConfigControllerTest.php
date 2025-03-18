@@ -1133,19 +1133,21 @@ class ConfigControllerTest extends WallabagCoreTestCase
     {
         $client = $this->getTestClient();
 
-        $client->request('GET', '/locale/de');
-        $client->followRedirect();
+        $crawler = $client->request('POST', '/locale/de');
 
-        $this->assertSame('de', $client->getRequest()->getLocale());
-        $this->assertSame('de', $client->getContainer()->get(SessionInterface::class)->get('_locale'));
+        $this->assertSame(400, $client->getResponse()->getStatusCode());
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+        $this->assertStringContainsString('Bad CSRF token.', $body[0]);
     }
 
     public function testChangeLocaleWithReferer()
     {
         $client = $this->getTestClient();
 
-        $client->request('GET', '/login');
-        $client->request('GET', '/locale/de');
+        $crawler = $client->request('GET', '/login');
+
+        $client->submit($crawler->selectButton('Deutsch')->form());
+
         $client->followRedirect();
 
         $this->assertSame('de', $client->getRequest()->getLocale());
@@ -1156,8 +1158,12 @@ class ConfigControllerTest extends WallabagCoreTestCase
     {
         $client = $this->getTestClient();
 
-        $client->request('GET', '/login');
-        $client->request('GET', '/locale/yuyuyuyu');
+        $crawler = $client->request('GET', '/login');
+        $token = $crawler->filter('form[action="/locale/de"] input[name=token]')->attr('value');
+
+        $client->request('POST', '/locale/yuyuyuyu', [
+            'token' => $token,
+        ]);
         $client->followRedirect();
 
         $this->assertNotSame('yuyuyuyu', $client->getRequest()->getLocale());

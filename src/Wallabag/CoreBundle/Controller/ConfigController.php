@@ -672,12 +672,16 @@ class ConfigController extends AbstractController
      *
      * @param string $language
      *
-     * @Route("/locale/{language}", name="changeLocale")
+     * @Route("/locale/{language}", name="changeLocale", methods={"POST"})
      *
      * @return RedirectResponse
      */
     public function setLocaleAction(Request $request, ValidatorInterface $validator, $language = null)
     {
+        if (!$this->isCsrfTokenValid('change-locale', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $errors = $validator->validate($language, (new LocaleConstraint()));
 
         if (0 === \count($errors)) {
