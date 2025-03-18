@@ -189,6 +189,20 @@ class EntryVoterTest extends TestCase
         $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::CREATE_ANNOTATIONS]));
     }
 
+    public function testVoteReturnsDeniedForNonEntryUserListTags(): void
+    {
+        $this->token->method('getUser')->willReturn(new User());
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::LIST_TAGS]));
+    }
+
+    public function testVoteReturnsGrantedForEntryUserListTags(): void
+    {
+        $this->token->method('getUser')->willReturn($this->user);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::LIST_TAGS]));
+    }
+
     public function testVoteReturnsDeniedForNonEntryUserTag(): void
     {
         $this->token->method('getUser')->willReturn(new User());

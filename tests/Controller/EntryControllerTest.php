@@ -538,7 +538,8 @@ class EntryControllerTest extends WallabagTestCase
         $entry->setContent('');
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
-        $this->getEntityManager()->clear();
+
+        $client = $this->getTestClient();
 
         $client->request('GET', '/reload/' . $entry->getId());
 
@@ -670,7 +671,8 @@ class EntryControllerTest extends WallabagTestCase
         $entry->setUrl($this->url);
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
-        $this->getEntityManager()->clear();
+
+        $client = $this->getTestClient();
 
         $client->request('GET', '/archive/' . $entry->getId());
 
@@ -693,7 +695,8 @@ class EntryControllerTest extends WallabagTestCase
         $entry->setUrl($this->url);
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
-        $this->getEntityManager()->clear();
+
+        $client = $this->getTestClient();
 
         $client->request('GET', '/star/' . $entry->getId());
 
@@ -1200,7 +1203,8 @@ class EntryControllerTest extends WallabagTestCase
         $content->setUrl($this->url);
         $this->getEntityManager()->persist($content);
         $this->getEntityManager()->flush();
-        $this->getEntityManager()->clear();
+
+        $client = $this->getTestClient();
 
         // no uid
         $client->request('GET', '/share/' . $content->getUid());
@@ -1791,7 +1795,8 @@ class EntryControllerTest extends WallabagTestCase
         $this->getEntityManager()->persist($entry3);
 
         $this->getEntityManager()->flush();
-        $this->getEntityManager()->clear();
+
+        $client = $this->getTestClient();
 
         $entries = [];
         $entries[] = $entry1->getId();

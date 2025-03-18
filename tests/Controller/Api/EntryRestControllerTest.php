@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\Container;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\Tag;
-use Wallabag\Entity\User;
 use Wallabag\Helper\ContentProxy;
 
 class EntryRestControllerTest extends WallabagApiTestCase
@@ -535,13 +534,13 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testDeleteEntry()
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
-        $entry = new Entry($em->getReference(User::class, 1));
+        $entry = new Entry($this->user);
         $entry->setUrl('http://0.0.0.0/test-delete-entry');
         $entry->setTitle('Test delete entry');
         $em->persist($entry);
         $em->flush();
 
-        $em->clear();
+        $this->client = $this->createAuthorizedClient();
 
         $e = [
             'title' => $entry->getTitle(),
@@ -569,12 +568,12 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testDeleteEntryExpectId()
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
-        $entry = new Entry($em->getReference(User::class, 1));
+        $entry = new Entry($this->user);
         $entry->setUrl('http://0.0.0.0/test-delete-entry-id');
         $em->persist($entry);
         $em->flush();
 
-        $em->clear();
+        $this->client = $this->createAuthorizedClient();
 
         $id = $entry->getId();
 
@@ -659,14 +658,15 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testPostSameEntry()
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
-        $entry = new Entry($em->getReference(User::class, $this->getUserId()));
+        $entry = new Entry($this->user);
         $entry->setUrl('https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment');
         $entry->setArchived(true);
         $entry->addTag((new Tag())->setLabel('google'));
         $entry->addTag((new Tag())->setLabel('apple'));
         $em->persist($entry);
         $em->flush();
-        $em->clear();
+
+        $this->client = $this->createAuthorizedClient();
 
         $this->client->request('POST', '/api/entries.json', [
             'url' => 'https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment',
@@ -1354,14 +1354,14 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testDeleteEntriesTagsListAction()
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
-        $entry = new Entry($em->getReference(User::class, $this->getUserId()));
+        $entry = new Entry($this->user);
         $entry->setUrl('http://0.0.0.0/test-entry');
         $entry->addTag((new Tag())->setLabel('foo-tag'));
         $entry->addTag((new Tag())->setLabel('bar-tag'));
         $em->persist($entry);
         $em->flush();
 
-        $em->clear();
+        $this->client = $this->createAuthorizedClient();
 
         $list = [
             [
@@ -1422,10 +1422,12 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testDeleteEntriesListAction()
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
-        $em->persist((new Entry($em->getReference(User::class, $this->getUserId())))->setUrl('http://0.0.0.0/test-entry1'));
+        $em->persist((new Entry($this->user))->setUrl('http://0.0.0.0/test-entry1'));
 
         $em->flush();
-        $em->clear();
+
+        $this->client = $this->createAuthorizedClient();
+
         $list = [
             'http://0.0.0.0/test-entry1',
             'http://0.0.0.0/test-entry-not-exist',
@@ -1480,14 +1482,15 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testRePostEntryAndReUsePublishedAt()
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
-        $entry = new Entry($em->getReference(User::class, $this->getUserId()));
+        $entry = new Entry($this->user);
         $entry->setTitle('Antoine de Caunes : « Je veux avoir le droit de tâtonner »');
         $entry->setContent('hihi');
         $entry->setUrl('https://www.lemonde.fr/m-perso/article/2017/06/25/antoine-de-caunes-je-veux-avoir-le-droit-de-tatonner_5150728_4497916.html');
         $entry->setPublishedAt(new \DateTime('2017-06-26T07:46:02+0200'));
         $em->persist($entry);
         $em->flush();
-        $em->clear();
+
+        $this->client = $this->createAuthorizedClient();
 
         $this->client->request('POST', '/api/entries.json', [
             'url' => 'https://www.lemonde.fr/m-perso/article/2017/06/25/antoine-de-caunes-je-veux-avoir-le-droit-de-tatonner_5150728_4497916.html',

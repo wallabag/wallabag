@@ -80,7 +80,8 @@ class ConfigControllerTest extends WallabagTestCase
         $this->getEntityManager()->persist($entry);
 
         $this->getEntityManager()->flush();
-        $this->getEntityManager()->clear();
+
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/unread/list');
         $form = $crawler->filter('button[id=submit-filter]')->form();
