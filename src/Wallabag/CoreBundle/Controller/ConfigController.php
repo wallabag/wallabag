@@ -522,12 +522,16 @@ class ConfigController extends AbstractController
     /**
      * Deletes an ignore origin rule and redirect to the config homepage.
      *
-     * @Route("/ignore-origin-user-rule/delete/{id}", requirements={"id" = "\d+"}, name="delete_ignore_origin_rule")
+     * @Route("/ignore-origin-user-rule/delete/{id}", name="delete_ignore_origin_rule", methods={"POST"}, requirements={"id" = "\d+"})
      *
      * @return RedirectResponse
      */
-    public function deleteIgnoreOriginRuleAction(IgnoreOriginUserRule $rule)
+    public function deleteIgnoreOriginRuleAction(Request $request, IgnoreOriginUserRule $rule)
     {
+        if (!$this->isCsrfTokenValid('delete-ignore-origin-rule', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $this->validateRuleAction($rule);
 
         $this->entityManager->remove($rule);

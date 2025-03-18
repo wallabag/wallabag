@@ -642,9 +642,9 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertStringContainsString('host = "example.org"', $crawler->filter('body')->extract(['_text'])[0]);
 
-        $deleteLink = $crawler->filter('div[id=set6] a.delete')->last()->link();
+        $form = $crawler->filter('#set6')->selectButton('delete')->form();
 
-        $crawler = $client->click($deleteLink);
+        $crawler = $client->submit($form);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
@@ -709,11 +709,11 @@ class ConfigControllerTest extends WallabagCoreTestCase
             ->getRepository(IgnoreOriginUserRule::class)
             ->findAll()[0];
 
-        $crawler = $client->request('GET', '/ignore-origin-user-rule/edit/' . $rule->getId());
+        $crawler = $client->request('POST', '/ignore-origin-user-rule/delete/' . $rule->getId());
 
-        $this->assertSame(403, $client->getResponse()->getStatusCode());
+        $this->assertSame(400, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertStringContainsString('You can not access this rule', $body[0]);
+        $this->assertStringContainsString('Bad CSRF token.', $body[0]);
     }
 
     public function testEditingIgnoreOriginRuleFromAnOtherUser()
