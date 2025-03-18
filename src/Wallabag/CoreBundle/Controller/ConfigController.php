@@ -482,12 +482,16 @@ class ConfigController extends AbstractController
     /**
      * Deletes a tagging rule and redirect to the config homepage.
      *
-     * @Route("/tagging-rule/delete/{id}", requirements={"id" = "\d+"}, name="delete_tagging_rule")
+     * @Route("/tagging-rule/delete/{id}", name="delete_tagging_rule", methods={"POST"}, requirements={"id" = "\d+"})
      *
      * @return RedirectResponse
      */
-    public function deleteTaggingRuleAction(TaggingRule $rule)
+    public function deleteTaggingRuleAction(Request $request, TaggingRule $rule)
     {
+        if (!$this->isCsrfTokenValid('delete-tagging-rule', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $this->validateRuleAction($rule);
 
         $this->entityManager->remove($rule);

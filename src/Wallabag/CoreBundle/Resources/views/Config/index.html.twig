@@ -340,9 +340,13 @@
                                         <a href="{{ path('edit_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="mode_edit_tagging_rule">
                                             <i class="tool grey-text material-icons">mode_edit</i>
                                         </a>
-                                        <a href="{{ path('delete_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="delete_tagging_rule">
-                                            <i class="tool grey-text material-icons">delete</i>
-                                        </a>
+                                        <form action="{{ path('delete_tagging_rule', {id: tagging_rule.id}) }}" method="post" class="inline-block">
+                                            <input type="hidden" name="token" value="{{ csrf_token('delete-tagging-rule') }}"/>
+
+                                            <button type="submit" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="btn-link">
+                                                <i class="tool grey-text material-icons">delete</i>
+                                            </button>
+                                        </form>
                                     </li>
                                     {% endfor %}
                                 </ul>

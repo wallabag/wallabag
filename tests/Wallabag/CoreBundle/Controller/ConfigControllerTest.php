@@ -481,9 +481,8 @@ class ConfigControllerTest extends WallabagCoreTestCase
 
         $this->assertStringContainsString('readingTime <= 30', $crawler->filter('body')->extract(['_text'])[0]);
 
-        $deleteLink = $crawler->filter('.delete_tagging_rule')->last()->link();
+        $crawler = $client->submit($crawler->filter('#set5')->selectButton('delete')->form());
 
-        $crawler = $client->click($deleteLink);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
@@ -573,11 +572,11 @@ class ConfigControllerTest extends WallabagCoreTestCase
             ->getRepository(TaggingRule::class)
             ->findAll()[0];
 
-        $crawler = $client->request('GET', '/tagging-rule/delete/' . $rule->getId());
+        $crawler = $client->request('POST', '/tagging-rule/delete/' . $rule->getId());
 
-        $this->assertSame(403, $client->getResponse()->getStatusCode());
+        $this->assertSame(400, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertStringContainsString('You can not access this rule', $body[0]);
+        $this->assertStringContainsString('Bad CSRF token.', $body[0]);
     }
 
     public function testEditingTaggingRuleFromAnOtherUser()
