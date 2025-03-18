@@ -455,21 +455,21 @@ class ConfigController extends AbstractController
     }
 
     /**
-     * @Route("/revoke-token", name="revoke_token")
+     * @Route("/revoke-token", name="revoke_token", methods={"POST"})
      *
      * @return RedirectResponse|JsonResponse
      */
     public function revokeTokenAction(Request $request)
     {
+        if (!$this->isCsrfTokenValid('revoke-token', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $config = $this->getConfig();
         $config->setFeedToken(null);
 
         $this->entityManager->persist($config);
         $this->entityManager->flush();
-
-        if ($request->isXmlHttpRequest()) {
-            return new JsonResponse();
-        }
 
         $this->addFlash(
             'notice',

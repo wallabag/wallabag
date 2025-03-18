@@ -343,15 +343,29 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $client->request(
-            'GET',
-            '/revoke-token',
-            [],
-            [],
-            ['HTTP_X-Requested-With' => 'XMLHttpRequest']
-        );
+        // set the token
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
+        $user = $em
+            ->getRepository(User::class)
+            ->findOneByUsername('admin');
 
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        if (!$user) {
+            $this->markTestSkipped('No user found in db.');
+        }
+
+        $config = $user->getConfig();
+        $config->setFeedToken('abcd1234');
+        $em->persist($config);
+        $em->flush();
+
+        $crawler = $client->request('GET', '/config');
+
+        $client->submit($crawler->selectButton('config.form_feed.token_revoke')->form());
+
+        $crawler = $client->followRedirect();
+
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+        $this->assertStringContainsString('config.form_feed.token_create', $body[0]);
     }
 
     public function testFeedUpdate()

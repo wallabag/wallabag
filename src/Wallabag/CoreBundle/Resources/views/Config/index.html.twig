@@ -146,7 +146,12 @@
 
                                             <button type="submit" class="btn-link">{{ 'config.form_feed.token_reset'|trans }}</button>
                                         </form>
-                                        – <a href="{{ path('revoke_token') }}">{{ 'config.form_feed.token_revoke'|trans }}</a>
+                                        –
+                                        <form action="{{ path('revoke_token') }}" method="post" class="inline-block">
+                                            <input type="hidden" name="token" value="{{ csrf_token('revoke-token') }}"/>
+
+                                            <button type="submit" class="btn-link">{{ 'config.form_feed.token_revoke'|trans }}</button>
+                                        </form>
                                     {% else %}
                                         –
                                         <form action="{{ path('generate_token') }}" method="post" class="inline-block">
