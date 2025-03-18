@@ -14,7 +14,7 @@
     {% endif %}
     {% include "Entry/Card/_content.html.twig" with {'entry': entry, 'withMetadata': true, 'subClass': 'metadata'} only %}
 
-    {% set current_path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+    {% set current_path = app.request.requesturi %}
 
     <ul class="tools-list hide-on-small-only">
         <li>

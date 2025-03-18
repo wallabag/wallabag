@@ -1561,6 +1561,38 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(2, $crawler->filter($this->entryDataTestAttribute));
     }
 
+    public function testActionInSearchResults()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $config = $this->getLoggedInUser()->getConfig();
+        $config->setActionMarkAsRead(ConfigEntity::REDIRECT_TO_CURRENT_PAGE);
+        $this->getEntityManager()->persist($config);
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+        $entry->setTitle('ActionInSearchResults');
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+
+        // Search on unread list
+        $crawler = $client->request('GET', '/unread/list');
+
+        $form = $crawler->filter('form[name=search]')->form();
+        $data = [
+            'search_entry[term]' => 'ActionInSearchResults',
+        ];
+
+        $crawler = $client->submit($form, $data);
+        $currentUrl = $client->getRequest()->getUri();
+        $element = $crawler->filter('a[data-action="delete"]')->link();
+        $client->click($element);
+        $client->followRedirect();
+        $nextUrl = $client->getRequest()->getUri();
+        $this->assertSame($currentUrl, $nextUrl);
+    }
+
     public function dataForLanguage()
     {
         return [

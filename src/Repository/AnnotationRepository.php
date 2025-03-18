@@ -148,6 +148,12 @@ class AnnotationRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function getCountBuilderByUser($userId = null)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.user = :userId')->setParameter('userId', $userId);
+    }
+
     /**
      * Return a query builder to used by other getBuilderFor* method.
      *

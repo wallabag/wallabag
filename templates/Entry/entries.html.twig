@@ -46,7 +46,7 @@
 {% endblock %}
 
 {% block content %}
-    {% set current_path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+    {% set current_path = app.request.requesturi %}
     {% set list_mode = app.user.config.listMode %}
     {% set entries_with_archived_class_routes = ['tag_entries', 'search', 'all'] %}
     {% set current_route = app.request.attributes.get('_route') %}

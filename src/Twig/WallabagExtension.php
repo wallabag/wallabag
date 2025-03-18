@@ -9,6 +9,7 @@ use Twig\Extension\GlobalsInterface;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 use Wallabag\Entity\User;
+use Wallabag\Repository\AnnotationRepository;
 use Wallabag\Repository\EntryRepository;
 use Wallabag\Repository\TagRepository;
 
@@ -16,14 +17,16 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
 {
     private $tokenStorage;
     private $entryRepository;
+    private $annotationRepository;
     private $tagRepository;
     private $lifeTime;
     private $translator;
     private $projectDir;
 
-    public function __construct(EntryRepository $entryRepository, TagRepository $tagRepository, TokenStorageInterface $tokenStorage, $lifeTime, TranslatorInterface $translator, string $projectDir)
+    public function __construct(EntryRepository $entryRepository, AnnotationRepository $annotationRepository, TagRepository $tagRepository, TokenStorageInterface $tokenStorage, $lifeTime, TranslatorInterface $translator, string $projectDir)
     {
         $this->entryRepository = $entryRepository;
+        $this->annotationRepository = $annotationRepository;
         $this->tagRepository = $tagRepository;
         $this->tokenStorage = $tokenStorage;
         $this->lifeTime = $lifeTime;
@@ -96,28 +99,25 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
 
         switch ($type) {
             case 'starred':
-                $qb = $this->entryRepository->getCountBuilderForStarredByUser($user->getId());
+                $qb = $this->entryRepository->getCountBuilderForStarredByUser($user->getId())->select('COUNT(e.id)');
                 break;
             case 'archive':
-                $qb = $this->entryRepository->getCountBuilderForArchiveByUser($user->getId());
+                $qb = $this->entryRepository->getCountBuilderForArchiveByUser($user->getId())->select('COUNT(e.id)');
                 break;
             case 'unread':
-                $qb = $this->entryRepository->getCountBuilderForUnreadByUser($user->getId());
+                $qb = $this->entryRepository->getCountBuilderForUnreadByUser($user->getId())->select('COUNT(e.id)');
                 break;
             case 'annotated':
-                $qb = $this->entryRepository->getCountBuilderForAnnotationsByUser($user->getId());
+                $qb = $this->annotationRepository->getCountBuilderByUser($user->getId())->select('COUNT(DISTINCT e.entry)');
                 break;
             case 'all':
-                $qb = $this->entryRepository->getCountBuilderForAllByUser($user->getId());
+                $qb = $this->entryRepository->getCountBuilderForAllByUser($user->getId())->select('COUNT(e.id)');
                 break;
             default:
                 throw new \InvalidArgumentException(\sprintf('Type "%s" is not implemented.', $type));
         }
 
-        $query = $qb
-            ->select('COUNT(e.id)')
-            ->getQuery();
-
+        $query = $qb->getQuery();
         $query->useQueryCache(true);
         $query->enableResultCache($this->lifeTime);
 
