@@ -11,7 +11,7 @@ class IgnoreOriginInstanceRuleControllerTest extends WallabagTestCase
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/ignore-origin-instance-rules/');
+        $crawler = $client->request('GET', '/ignore-origin-instance-rules');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
