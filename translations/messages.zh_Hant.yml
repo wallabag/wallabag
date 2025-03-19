@@ -222,7 +222,7 @@ footer:
     wallabag:
         elsewhere: 將 wallabag 隨身攜帶
         social: 社群
-        powered_by: 威力本源
+        powered_by: 技術提供
         about: 關於
     stats: 自 %user_creation% 以來，你已閱讀 %nb_archives% 篇文章。這大約是 %per_day% 篇一天！
 entry:
