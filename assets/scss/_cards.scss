@@ -186,6 +186,14 @@ a.original:not(.waves-effect) {
   color: #fff;
 }
 
+.card-tag-labels button {
+  background: transparent;
+  border: none;
+  font-weight: normal;
+  color: #fff;
+  cursor: pointer;
+}
+
 .card-tag-link {
   width: calc(100% - 24px);
   line-height: 1.3;
@@ -196,6 +204,7 @@ a.original:not(.waves-effect) {
 
 .card-tag-form {
   display: flex;
+  align-items: center;
   min-width: 100px;
   flex-grow: 1;
 }
