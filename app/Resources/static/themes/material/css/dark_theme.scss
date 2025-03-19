@@ -62,7 +62,9 @@
   .nav-panels .input-field input:focus,
   .results-item,
   .side-nav li > a,
-  .side-nav li > a > i.material-icons {
+  .side-nav li > a > i.material-icons,
+  .side-nav li button,
+  .side-nav li button > i.material-icons {
     color: #dfdfdf;
   }
 

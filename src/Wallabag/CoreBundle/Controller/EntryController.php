@@ -14,6 +14,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -400,12 +401,16 @@ class EntryController extends AbstractController
      * Reload an entry.
      * Refetch content from the website and make it readable again.
      *
-     * @Route("/reload/{id}", requirements={"id" = "\d+"}, name="reload_entry")
+     * @Route("/reload/{id}", name="reload_entry", methods={"POST"}, requirements={"id" = "\d+"})
      *
      * @return RedirectResponse
      */
-    public function reloadAction(Entry $entry)
+    public function reloadAction(Request $request, Entry $entry)
     {
+        if (!$this->isCsrfTokenValid('reload-entry', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $this->checkUserAction($entry);
 
         $this->updateEntry($entry, 'entry_reloaded');

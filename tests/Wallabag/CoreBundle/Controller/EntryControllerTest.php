@@ -509,7 +509,9 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->flush();
         $this->getEntityManager()->clear();
 
-        $client->request('GET', '/reload/' . $entry->getId());
+        $crawler = $client->request('GET', '/view/' . $entry->getId());
+
+        $client->submit($crawler->selectButton('entry.view.left_menu.re_fetch_content')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
@@ -530,7 +532,9 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
 
-        $client->request('GET', '/reload/' . $entry->getId());
+        $crawler = $client->request('GET', '/view/' . $entry->getId());
+
+        $client->submit($crawler->selectButton('entry.view.left_menu.re_fetch_content')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 

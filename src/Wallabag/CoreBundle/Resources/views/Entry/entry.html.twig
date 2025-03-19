@@ -56,10 +56,14 @@
         </li>
 
         <li class="bold">
-            <a class="waves-effect collapsible-header" onclick="return confirm('{{ 'entry.confirm.reload'|trans|escape('js') }}')" title="{{ 'entry.view.left_menu.re_fetch_content'|trans }}" href="{{ path('reload_entry', {'id': entry.id}) }}" id="reload">
-                <i class="material-icons small">refresh</i>
-                <span>{{ 'entry.view.left_menu.re_fetch_content'|trans }}</span>
-            </a>
+            <form action="{{ path('reload_entry', {'id': entry.id}) }}" method="post">
+                <input type="hidden" name="token" value="{{ csrf_token('reload-entry') }}"/>
+
+                <button type="submit" class="waves-effect collapsible-header" onclick="return confirm('{{ 'entry.confirm.reload'|trans|escape('js') }}')" title="{{ 'entry.view.left_menu.re_fetch_content'|trans }}">
+                    <i class="material-icons small">refresh</i>
+                    <span>{{ 'entry.view.left_menu.re_fetch_content'|trans }}</span>
+                </button>
+            </form>
             <div class="collapsible-body"></div>
         </li>
 
