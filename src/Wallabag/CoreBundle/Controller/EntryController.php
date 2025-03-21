@@ -434,12 +434,16 @@ class EntryController extends AbstractController
     /**
      * Changes read status for an entry.
      *
-     * @Route("/archive/{id}", requirements={"id" = "\d+"}, name="archive_entry")
+     * @Route("/archive/{id}", name="archive_entry", methods={"POST"}, requirements={"id" = "\d+"})
      *
      * @return RedirectResponse
      */
     public function toggleArchiveAction(Request $request, Entry $entry)
     {
+        if (!$this->isCsrfTokenValid('archive-entry', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $this->checkUserAction($entry);
 
         $entry->toggleArchive();

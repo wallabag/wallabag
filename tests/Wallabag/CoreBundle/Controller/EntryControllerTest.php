@@ -645,7 +645,9 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->flush();
         $this->getEntityManager()->clear();
 
-        $client->request('GET', '/archive/' . $entry->getId());
+        $crawler = $client->request('GET', '/view/' . $entry->getId());
+
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.set_as_read')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
@@ -1283,8 +1285,9 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->getEntityManager()->flush();
 
-        $client->request('GET', '/view/' . $entry->getId());
-        $client->request('GET', '/archive/' . $entry->getId());
+        $crawler = $client->request('GET', '/view/' . $entry->getId());
+
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.set_as_read')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertSame('/', $client->getResponse()->headers->get('location'));
@@ -1308,8 +1311,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/view/' . $entry->getId());
 
-        $link = $crawler->filter('a[id="markAsRead"]')->link();
-        $client->click($link);
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.set_as_read')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertStringContainsString('/view/' . $entry->getId(), $client->getResponse()->headers->get('location'));

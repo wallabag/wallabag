@@ -15,7 +15,7 @@ $(document).ready(() => {
 
     /* mark as read */
     Mousetrap.bind('a', () => {
-      $('ul.side-nav a.markasread i')[0].click();
+      $('ul.side-nav button.markasread i')[0].click();
     });
 
     /* delete */
