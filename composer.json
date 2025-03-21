@@ -161,7 +161,7 @@
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^8.2.2",
-        "doctrine/data-fixtures": "^1.8.1",
+        "doctrine/data-fixtures": "^2.0.2",
         "doctrine/doctrine-fixtures-bundle": "^3.7.1",
         "ergebnis/composer-normalize": "^2.45.0",
         "friendsofphp/php-cs-fixer": "^3.70.2",
