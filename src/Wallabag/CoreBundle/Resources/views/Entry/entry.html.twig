@@ -35,9 +35,13 @@
                     </form>
                 </li>
                 <li>
-                    <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" id="setFav">
-                        <i class="material-icons small">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
-                    </a>
+                    <form action="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" method="post" class="inline-block">
+                        <input type="hidden" name="token" value="{{ csrf_token('star-entry') }}"/>
+
+                        <button type="submit" class="waves-effect" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}">
+                            <i class="material-icons small">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
+                        </button>
+                    </form>
                 </li>
             </ul>
         </div>
@@ -89,10 +93,14 @@
         </li>
 
         <li class="bold hide-on-med-and-down">
-            <a class="waves-effect collapsible-header favorite" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" id="setFav">
-                <i class="material-icons spall">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
-                <span>{{ 'entry.view.left_menu.set_as_starred'|trans }}</span>
-            </a>
+            <form action="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" method="post">
+                <input type="hidden" name="token" value="{{ csrf_token('star-entry') }}"/>
+
+                <button type="submit" class="waves-effect collapsible-header favorite" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}">
+                    <i class="material-icons spall">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
+                    <span>{{ 'entry.view.left_menu.set_as_starred'|trans }}</span>
+                </button>
+            </form>
             <div class="collapsible-body"></div>
         </li>
         <li class="bold border-bottom">
@@ -321,7 +329,15 @@
                       </button>
                   </form>
               </li>
-              <li><a class="btn-floating" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i></a></li>
+              <li>
+                  <form action="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" method="post" class="inline-block">
+                      <input type="hidden" name="token" value="{{ csrf_token('star-entry') }}"/>
+
+                      <button type="submit" class="btn-floating">
+                          <i class="material-icons">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
+                      </button>
+                  </form>
+              </li>
               <li><a class="btn-floating" href="{{ path('delete_entry', {'id': entry.id, redirect: current_path}) }}" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')"><i class="material-icons">delete</i></a></li>
             </ul>
         </div>

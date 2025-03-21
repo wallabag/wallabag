@@ -23,7 +23,13 @@
             </form>
         </li>
         <li>
-            <a title="{{ 'entry.list.toogle_as_star'|trans }}" class="tool grey-text" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" data-action="star" data-entry-id="{{ entry.id }}"><i class="material-icons">{% if entry.isStarred == 0 %}star_border{% else %}star{% endif %}</i></a>
+            <form action="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" method="post" class="inline-block">
+                <input type="hidden" name="token" value="{{ csrf_token('star-entry') }}"/>
+
+                <button type="submit" class="btn-link tool grey-text" title="{{ 'entry.list.toogle_as_star'|trans }}">
+                    <i class="material-icons">{% if entry.isStarred == 0 %}star_border{% else %}star{% endif %}</i>
+                </button>
+            </form>
         </li>
         <li>
             <a title="{{ 'entry.list.delete'|trans }}" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" data-action-confirm="{{ 'entry.confirm.delete'|trans }}" class="tool grey-text delete" href="{{ path('delete_entry', {'id': entry.id, redirect: current_path}) }}" data-action="delete" data-entry-id="{{ entry.id }}"><i class="material-icons">delete</i></a>

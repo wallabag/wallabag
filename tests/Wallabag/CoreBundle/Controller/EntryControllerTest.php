@@ -670,7 +670,9 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->flush();
         $this->getEntityManager()->clear();
 
-        $client->request('GET', '/star/' . $entry->getId());
+        $crawler = $client->request('GET', '/view/' . $entry->getId());
+
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.set_as_starred')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 

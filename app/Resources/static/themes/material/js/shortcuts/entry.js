@@ -10,7 +10,7 @@ $(document).ready(() => {
 
     /* mark as favorite */
     Mousetrap.bind('f', () => {
-      $('ul.side-nav a.favorite i')[0].click();
+      $('ul.side-nav button.favorite i')[0].click();
     });
 
     /* mark as read */
