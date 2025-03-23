@@ -1185,12 +1185,19 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame(404, $client->getResponse()->getStatusCode());
 
         // removing the share
-        $client->request('GET', '/share/delete/' . $content->getId());
+        $client->getContainer()->get(Config::class)->set('share_public', 1);
+        $this->logInAs('admin');
+        $crawler = $client->request('GET', '/view/' . $content->getId());
+
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.delete_public_link')->form());
+
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
-        // share is now disable
+        // share is now removed
         $client->request('GET', '/share/' . $content->getUid());
         $this->assertSame(404, $client->getResponse()->getStatusCode());
+
+        $client->getContainer()->get(Config::class)->set('share_public', 0);
     }
 
     /**

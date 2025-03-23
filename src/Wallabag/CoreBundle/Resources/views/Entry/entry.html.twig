@@ -168,9 +168,13 @@
                             </form>
                         </li>
                         <li>
-                            <a href="{{ path('delete_share', {'id': entry.id}) }}" title="{{ 'entry.view.left_menu.delete_public_link'|trans }}" class="tool icon-no-eye">
-                                <span>{{ 'entry.view.left_menu.delete_public_link'|trans }}</span>
-                            </a>
+                            <form action="{{ path('delete_share', {'id': entry.id}) }}" method="post">
+                                <input type="hidden" name="token" value="{{ csrf_token('delete-share') }}"/>
+
+                                <button type="submit" class="btn-link tool icon-no-eye" title="{{ 'entry.view.left_menu.delete_public_link'|trans }}">
+                                    <span>{{ 'entry.view.left_menu.delete_public_link'|trans }}</span>
+                                </button>
+                            </form>
                         </li>
                     {% endif %}
                     {% if craue_setting('share_twitter') %}

@@ -570,12 +570,16 @@ class EntryController extends AbstractController
     /**
      * Disable public sharing for an entry.
      *
-     * @Route("/share/delete/{id}", requirements={"id" = "\d+"}, name="delete_share")
+     * @Route("/share/delete/{id}", name="delete_share", methods={"POST"}, requirements={"id" = "\d+"})
      *
      * @return Response
      */
-    public function deleteShareAction(Entry $entry)
+    public function deleteShareAction(Request $request, Entry $entry)
     {
+        if (!$this->isCsrfTokenValid('delete-share', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $this->checkUserAction($entry);
 
         $entry->cleanUid();
