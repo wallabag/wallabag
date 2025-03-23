@@ -1155,7 +1155,10 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame(404, $client->getResponse()->getStatusCode());
 
         // generating the uid
-        $client->request('GET', '/share/' . $content->getId());
+        $crawler = $client->request('GET', '/view/' . $content->getId());
+
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.public_link')->form());
+
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $shareUrl = $client->getResponse()->getTargetUrl();

@@ -159,9 +159,13 @@
                 <ul>
                     {% if craue_setting('share_public') %}
                         <li>
-                            <a href="{{ path('share', {'id': entry.id}) }}" target="_blank" title="{{ 'entry.view.left_menu.public_link'|trans }}" class="tool icon-eye">
-                                <span>{{ 'entry.view.left_menu.public_link'|trans }}</span>
-                            </a>
+                            <form action="{{ path('share', {'id': entry.id}) }}" method="post">
+                                <input type="hidden" name="token" value="{{ csrf_token('share-entry') }}"/>
+
+                                <button type="submit" formtarget="_blank" class="btn-link tool icon-eye" title="{{ 'entry.view.left_menu.public_link'|trans }}">
+                                    <span>{{ 'entry.view.left_menu.public_link'|trans }}</span>
+                                </button>
+                            </form>
                         </li>
                         <li>
                             <a href="{{ path('delete_share', {'id': entry.id}) }}" title="{{ 'entry.view.left_menu.delete_public_link'|trans }}" class="tool icon-no-eye">

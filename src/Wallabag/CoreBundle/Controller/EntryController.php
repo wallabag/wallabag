@@ -543,12 +543,16 @@ class EntryController extends AbstractController
     /**
      * Get public URL for entry (and generate it if necessary).
      *
-     * @Route("/share/{id}", requirements={"id" = "\d+"}, name="share")
+     * @Route("/share/{id}", name="share", methods={"POST"}, requirements={"id" = "\d+"})
      *
      * @return Response
      */
-    public function shareAction(Entry $entry)
+    public function shareAction(Request $request, Entry $entry)
     {
+        if (!$this->isCsrfTokenValid('share-entry', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $this->checkUserAction($entry);
 
         if (null === $entry->getUid()) {
@@ -587,7 +591,7 @@ class EntryController extends AbstractController
     /**
      * Ability to view a content publicly.
      *
-     * @Route("/share/{uid}", requirements={"uid" = ".+"}, name="share_entry")
+     * @Route("/share/{uid}", name="share_entry", methods={"GET"}, requirements={"uid" = ".+"})
      * @Cache(maxage="25200", smaxage="25200", public=true)
      *
      * @return Response
