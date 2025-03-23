@@ -547,7 +547,7 @@ class TagControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $client->click($crawler->selectLink('entry.list.assign_search_tag')->link());
+        $client->submit($crawler->selectButton('entry.list.assign_search_tag')->form());
         $client->followRedirect();
 
         $entries = $client->getContainer()
