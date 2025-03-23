@@ -263,7 +263,7 @@ class ConfigController extends AbstractController
     public function disableOtpEmailAction(Request $request)
     {
         if (!$this->isCsrfTokenValid('otp', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
         $user = $this->getUser();
@@ -287,7 +287,7 @@ class ConfigController extends AbstractController
     public function otpEmailAction(Request $request)
     {
         if (!$this->isCsrfTokenValid('otp', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
         $user = $this->getUser();
@@ -314,7 +314,7 @@ class ConfigController extends AbstractController
     public function disableOtpAppAction(Request $request)
     {
         if (!$this->isCsrfTokenValid('otp', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
         $user = $this->getUser();
@@ -340,7 +340,7 @@ class ConfigController extends AbstractController
     public function otpAppAction(Request $request, GoogleAuthenticatorInterface $googleAuthenticator)
     {
         if (!$this->isCsrfTokenValid('otp', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
         $user = $this->getUser();
@@ -399,7 +399,7 @@ class ConfigController extends AbstractController
     public function otpAppCheckAction(Request $request, GoogleAuthenticatorInterface $googleAuthenticator)
     {
         if (!$this->isCsrfTokenValid('otp', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
         $isValid = $googleAuthenticator->checkCode(
@@ -569,7 +569,7 @@ class ConfigController extends AbstractController
     public function resetAction(Request $request, string $type, AnnotationRepository $annotationRepository, EntryRepository $entryRepository)
     {
         if (!$this->isCsrfTokenValid('reset-area', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
         switch ($type) {
@@ -623,7 +623,7 @@ class ConfigController extends AbstractController
     public function deleteAccountAction(Request $request, UserRepository $userRepository, TokenStorageInterface $tokenStorage)
     {
         if (!$this->isCsrfTokenValid('delete-account', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
         $enabledUsers = $userRepository->getSumEnabledUsers();

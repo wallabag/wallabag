@@ -794,7 +794,7 @@ class ConfigControllerTest extends WallabagCoreTestCase
         $this->assertStringNotContainsString('config.form_user.delete.button', $body[0]);
 
         $client->request('POST', '/account/delete');
-        $this->assertSame(403, $client->getResponse()->getStatusCode());
+        $this->assertSame(400, $client->getResponse()->getStatusCode());
 
         $user = $em
             ->getRepository(User::class)
