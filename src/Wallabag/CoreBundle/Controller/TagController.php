@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -87,12 +88,16 @@ class TagController extends AbstractController
     /**
      * Removes tag from entry.
      *
-     * @Route("/remove-tag/{entry}/{tag}", requirements={"entry" = "\d+", "tag" = "\d+"}, name="remove_tag")
+     * @Route("/remove-tag/{entry}/{tag}", name="remove_tag", methods={"POST"}, requirements={"entry" = "\d+", "tag" = "\d+"})
      *
      * @return Response
      */
     public function removeTagFromEntry(Request $request, Entry $entry, Tag $tag)
     {
+        if (!$this->isCsrfTokenValid('remove-tag', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $this->checkUserAction($entry);
 
         $entry->removeTag($tag);

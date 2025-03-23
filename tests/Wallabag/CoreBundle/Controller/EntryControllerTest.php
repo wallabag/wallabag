@@ -1694,7 +1694,7 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->assertSame('example.com', $content->getDomainName());
     }
 
-    public function testEntryDeleteTagLink()
+    public function testEntryDeleteTagForm()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1705,10 +1705,7 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->request('GET', '/view/' . $entry->getId());
 
-        // As long as the deletion link of a tag is following
-        // a link to the tag view, we take the second one to retrieve
-        // the deletion link of the first tag
-        $link = $crawler->filter('body div#article div.tools ul.tags li.chip a')->extract(['href'])[1];
+        $link = $crawler->filter('body div#article div.tools ul.tags li.chip form')->extract(['action'])[0];
 
         $this->assertStringStartsWith(sprintf('/remove-tag/%s/%s', $entry->getId(), $tag->getId()), $link);
     }

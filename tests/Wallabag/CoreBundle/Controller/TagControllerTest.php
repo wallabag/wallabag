@@ -126,8 +126,8 @@ class TagControllerTest extends WallabagCoreTestCase
         $crawler = $client->request('GET', '/view/' . $entry->getId());
         $entryUri = $client->getRequest()->getRequestUri();
 
-        $link = $crawler->filter('a[href^="/remove-tag/' . $entry->getId() . '/' . $tag->getId() . '"]')->link();
-        $client->click($link);
+        $form = $crawler->filter('form[action^="/remove-tag/' . $entry->getId() . '/' . $tag->getId() . '"]')->form();
+        $client->submit($form);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertSame($entryUri, $client->getResponse()->getTargetUrl());
@@ -136,9 +136,8 @@ class TagControllerTest extends WallabagCoreTestCase
         $entry = $this->getEntityManager()->getRepository(Entry::class)->find($entry->getId());
         $this->assertNotContains($this->tagName, $entry->getTagsLabel());
 
-        $client->request('GET', '/remove-tag/' . $entry->getId() . '/' . $tag->getId());
-
-        $this->assertSame(404, $client->getResponse()->getStatusCode());
+        $client->request('GET', '/view/' . $entry->getId());
+        $this->assertStringNotContainsString('/remove-tag/' . $entry->getId() . '/' . $tag->getId(), $client->getResponse()->getContent());
 
         $tag = $client->getContainer()
             ->get(EntityManagerInterface::class)
