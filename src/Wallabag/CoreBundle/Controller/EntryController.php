@@ -501,12 +501,16 @@ class EntryController extends AbstractController
     /**
      * Deletes entry and redirect to the homepage or the last viewed page.
      *
-     * @Route("/delete/{id}", requirements={"id" = "\d+"}, name="delete_entry")
+     * @Route("/delete/{id}", name="delete_entry", methods={"POST"}, requirements={"id" = "\d+"})
      *
      * @return RedirectResponse
      */
     public function deleteEntryAction(Request $request, Entry $entry)
     {
+        if (!$this->isCsrfTokenValid('delete-entry', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $this->checkUserAction($entry);
 
         // generates the view url for this entry to check for redirection later

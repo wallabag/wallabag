@@ -694,13 +694,11 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
 
-        $client->request('GET', '/delete/' . $entry->getId());
+        $crawler = $client->request('POST', '/delete/' . $entry->getId());
 
-        $this->assertSame(302, $client->getResponse()->getStatusCode());
-
-        $client->request('GET', '/delete/' . $entry->getId());
-
-        $this->assertSame(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(400, $client->getResponse()->getStatusCode());
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+        $this->assertStringContainsString('Bad CSRF token.', $body[0]);
     }
 
     /**
@@ -736,10 +734,11 @@ class EntryControllerTest extends WallabagCoreTestCase
         $em->persist($content);
         $em->flush();
 
-        $client->request('GET', '/view/' . $content->getId());
+        $crawler = $client->request('GET', '/view/' . $content->getId());
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $client->request('GET', '/delete/' . $content->getId());
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.delete')->form());
+
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $client->followRedirect();
@@ -1264,7 +1263,9 @@ class EntryControllerTest extends WallabagCoreTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
-        $client->request('GET', '/delete/' . $content->getId());
+        $crawler = $client->request('GET', '/view/' . $content->getId());
+
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.delete')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
@@ -1437,7 +1438,8 @@ class EntryControllerTest extends WallabagCoreTestCase
         $crawler = $client->submit($form, $data);
 
         $this->assertCount(1, $crawler->filter($this->entryDataTestAttribute));
-        $client->request('GET', '/delete/' . $entry->getId());
+
+        $client->submit($crawler->filter('.tools, .tools-list')->selectButton('delete')->form());
 
         // test on list of all articles
         $crawler = $client->request('GET', '/all/list');
@@ -1508,8 +1510,8 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $crawler = $client->submit($form, $data);
         $currentUrl = $client->getRequest()->getUri();
-        $element = $crawler->filter('a[data-action="delete"]')->link();
-        $client->click($element);
+        $form = $crawler->filter('.tools, .tools-list')->selectButton('delete')->form();
+        $client->submit($form);
         $client->followRedirect();
         $nextUrl = $client->getRequest()->getUri();
         $this->assertSame($currentUrl, $nextUrl);
@@ -1752,8 +1754,8 @@ class EntryControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->clear();
 
         $entries = [];
-        $entries[] = $entry1->getId();
-        $entries[] = $entry2->getId();
+        $entries[] = $entry1Id = $entry1->getId();
+        $entries[] = $entry2Id = $entry2->getId();
 
         // Mass actions : archive
         $client->request('POST', '/mass', [
@@ -1835,11 +1837,19 @@ class EntryControllerTest extends WallabagCoreTestCase
             'entry-checkbox' => $entries,
         ]);
 
-        $client->request('GET', '/delete/' . $entry1->getId());
-        $this->assertSame(404, $client->getResponse()->getStatusCode());
+        $res = $client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
+            ->find($entry1Id);
 
-        $client->request('GET', '/delete/' . $entry2->getId());
-        $this->assertSame(404, $client->getResponse()->getStatusCode());
+        $this->assertNull($res);
+
+        $res = $client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
+            ->find($entry2Id);
+
+        $this->assertNull($res);
     }
 
     public function testGetSameDomainEntries()

@@ -20,7 +20,7 @@ $(document).ready(() => {
 
     /* delete */
     Mousetrap.bind('del', () => {
-      $('ul.side-nav a.delete i')[0].click();
+      $('ul.side-nav button.delete i')[0].click();
     });
   }
 });
