@@ -28,9 +28,13 @@
                         <i class="material-icons">mode_edit</i>
                     </a>
                     {% endif %}
-                    <a id="delete-{{ tag.slug }}" href="{{ path('tag_delete', {'slug': tag.slug, redirect: current_path}) }}" class="card-tag-icon card-tag-delete" onclick="return confirm('{{ 'tag.confirm.delete'|trans({'%name%': tag.label})|escape('js') }}')">
-                        <i class="material-icons">delete</i>
-                    </a>
+                    <form action="{{ path('tag_delete', {'slug': tag.slug, redirect: current_path}) }}" method="post" class="inline-block">
+                        <input type="hidden" name="token" value="{{ csrf_token('tag-delete') }}"/>
+
+                        <button type="submit" class="btn-link card-tag-icon card-tag-delete" onclick="return confirm('{{ 'tag.confirm.delete'|trans({'%name%': tag.label})|escape('js') }}')">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </form>
                     {% if app.user.config.feedToken %}
                         <a rel="alternate" type="application/atom+xml" href="{{ path('tag_feed', {'username': app.user.username, 'token': app.user.config.feedToken, 'slug': tag.slug}) }}" class="card-tag-icon"><i class="material-icons">rss_feed</i></a>
                     {% endif %}

@@ -272,13 +272,17 @@ class TagController extends AbstractController
     /**
      * Delete a given tag for the current user.
      *
-     * @Route("/tag/delete/{slug}", name="tag_delete")
+     * @Route("/tag/delete/{slug}", name="tag_delete", methods={"POST"})
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      *
      * @return Response
      */
     public function removeTagAction(Tag $tag, Request $request, EntryRepository $entryRepository)
     {
+        if (!$this->isCsrfTokenValid('tag-delete', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         foreach ($tag->getEntriesByUserId($this->getUser()->getId()) as $entry) {
             $entryRepository->removeTag($this->getUser()->getId(), $tag);
         }

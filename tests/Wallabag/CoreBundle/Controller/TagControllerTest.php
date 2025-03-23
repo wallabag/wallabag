@@ -168,8 +168,8 @@ class TagControllerTest extends WallabagCoreTestCase
         $this->getEntityManager()->clear();
 
         $crawler = $client->request('GET', '/tag/list');
-        $link = $crawler->filter('a[id="delete-' . $tag->getSlug() . '"]')->link();
-        $client->click($link);
+        $form = $crawler->filter('#tag-' . $tag->getId())->selectButton('delete')->form();
+        $client->submit($form);
 
         $tag = $client->getContainer()
             ->get(EntityManagerInterface::class)
