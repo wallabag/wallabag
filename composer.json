@@ -57,7 +57,7 @@
         "ext-tidy": "*",
         "ext-tokenizer": "*",
         "ext-xml": "*",
-        "babdev/pagerfanta-bundle": "^3.8",
+        "babdev/pagerfanta-bundle": "^4.5",
         "craue/config-bundle": "^2.7.0",
         "defuse/php-encryption": "^2.4",
         "doctrine/collections": "^1.8",
