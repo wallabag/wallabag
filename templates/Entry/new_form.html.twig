@@ -1,4 +1,4 @@
-<form class="input-field nav-panel-item nav-panel-add" style="display: none" name="entry" method="post" action="{{ path('new_entry') }}">
+<form class="input-field nav-panel-item nav-panel-add" style="display: none" name="entry" method="post" action="{{ path('new_entry') }}" data-topbar-target="addUrl" data-action="topbar#submittingUrl">
     {% if form_errors(form) %}
         <span class="black-text">{{ form_errors(form) }}</span>
     {% endif %}
@@ -8,8 +8,8 @@
         <span class="black-text">{{ form_errors(form.url) }}</span>
     {% endif %}
 
-    {{ form_widget(form.url, {'attr': {'autocomplete': 'off', 'placeholder': 'entry.new.placeholder'}}) }}
-    <i class="material-icons close" aria-label="clear" role="button"></i>
+    {{ form_widget(form.url, {'attr': {'autocomplete': 'off', 'placeholder': 'entry.new.placeholder', 'data-topbar-target': 'addUrlInput'}}) }}
+    <i class="material-icons close" aria-label="clear" role="button" data-action="click->topbar#showActions" data-shortcuts-target="showActions"></i>
 
     {{ form_rest(form) }}
 </form>

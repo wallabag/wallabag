@@ -8,9 +8,9 @@
 
 {% block menu %}
     <div class="progress">
-        <div class="determinate"></div>
+        <div class="determinate" data-controller="scroll-indicator" data-action="scroll@window->scroll-indicator#updateWidth"></div>
     </div>
-    <nav class="hide-on-large-only js-entry-nav-top">
+    <nav class="hide-on-large-only" data-controller="sticky-nav" data-action="materialize--fab:click@window->sticky-nav#toggle">
         <div class="nav-panel-item cyan darken-1">
             <ul>
                 <li>
@@ -42,7 +42,7 @@
             </ul>
         </div>
     </nav>
-    <ul id="slide-out" class="left-bar collapsible sidenav sidenav-fixed reader-mode" data-collapsible="accordion">
+    <ul id="slide-out" class="left-bar collapsible sidenav sidenav-fixed reader-mode" data-controller="materialize--sidenav materialize--collapsible leftbar">
         <li class="bold border-bottom hide-on-med-and-down">
             <a class="waves-effect collapsible-header" href="{{ path('homepage') }}">
                 <i class="material-icons small">arrow_back</i>
@@ -52,7 +52,7 @@
         </li>
 
         <li class="bold border-bottom hide-on-med-and-down">
-            <a class="waves-effect collapsible-header original" href="{{ entry.url|e }}" target="_blank" rel="noopener">
+            <a class="waves-effect collapsible-header original" href="{{ entry.url|e }}" target="_blank" rel="noopener" data-shortcuts-target="openOriginal">
                 <i class="material-icons small">link</i>
                 <span>{{ 'entry.view.left_menu.view_original_article'|trans }}</span>
             </a>
@@ -76,7 +76,7 @@
 
         {% if is_granted('ARCHIVE', entry) %}
             <li class="bold hide-on-med-and-down">
-                <a class="waves-effect collapsible-header markasread" title="{{ mark_as_read_label|trans }}" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" id="markAsRead">
+                <a class="waves-effect collapsible-header markasread" title="{{ mark_as_read_label|trans }}" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" id="markAsRead" data-shortcuts-target="markAsRead">
                     <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
                     <span>{{ mark_as_read_label|trans }}</span>
                 </a>
@@ -86,7 +86,7 @@
 
         {% if is_granted('STAR', entry) %}
             <li class="bold hide-on-med-and-down">
-                <a class="waves-effect collapsible-header favorite" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" id="setFav">
+                <a class="waves-effect collapsible-header favorite" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" id="setFav" data-shortcuts-target="markAsFavorite">
                     <i class="material-icons small">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
                     <span>{{ 'entry.view.left_menu.set_as_starred'|trans }}</span>
                 </a>
@@ -96,7 +96,7 @@
 
         {% if is_granted('DELETE', entry) %}
             <li class="bold border-bottom">
-                <a class="waves-effect collapsible-header delete" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', {'id': entry.id, redirect: current_path}) }}">
+                <a class="waves-effect collapsible-header delete" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', {'id': entry.id, redirect: current_path}) }}" data-shortcuts-target="deleteEntry">
                     <i class="material-icons small">delete</i>
                     <span>{{ 'entry.view.left_menu.delete'|trans }}</span>
                 </a>
@@ -105,7 +105,7 @@
         {% endif %}
 
         <li class="bold border-bottom">
-            <a class="waves-effect collapsible-header" id="nav-btn-add-tag">
+            <a class="waves-effect collapsible-header" id="nav-btn-add-tag" data-action="click->materialize--sidenav#close click->leftbar#toggleAddTagForm">
                 <i class="material-icons small">label_outline</i>
                 <span>{{ 'entry.view.left_menu.add_a_tag'|trans }}</span>
             </a>
@@ -119,19 +119,19 @@
             </a>
             <ul class="collapsible-body">
                 <li>
-                    <a href="#" class="js-theme-toggle" data-theme="light">
+                    <a href="#" data-action="click->dark-theme#useLight:prevent">
                         <i class="theme-toggle-icon material-icons tiny">brightness_high</i>
                         <span>{{ 'entry.view.left_menu.theme_toggle_light'|trans }}</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="js-theme-toggle" data-theme="dark">
+                    <a href="#" data-action="click->dark-theme#useDark:prevent">
                         <i class="theme-toggle-icon material-icons tiny">brightness_low</i>
                         <span>{{ 'entry.view.left_menu.theme_toggle_dark'|trans }}</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="js-theme-toggle" data-theme="auto">
+                    <a href="#" data-action="click->dark-theme#useAuto:prevent">
                         <i class="theme-toggle-icon material-icons tiny">brightness_auto</i>
                         <span>{{ 'entry.view.left_menu.theme_toggle_auto'|trans }}</span>
                     </a>
@@ -262,7 +262,7 @@
 {% endblock %}
 
 {% block content %}
-    <div id="article" class="article">
+    <div id="article" class="article" data-controller="scroll-storage" data-scroll-storage-entry-id-value="{{ entry.id }}" data-action="scroll@window->scroll-storage#saveScroll">
         <header class="mbm">
             <h1>
                 <span{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>{{ entry.title|striptags|default('entry.default_title'|trans)|raw }}</span>
@@ -320,17 +320,25 @@
             </div>
 
             {% if is_granted('TAG', entry) %}
-                <div class="input-field nav-panel-add-tag" style="display: none">
+                <div class="input-field nav-panel-add-tag hidden" data-controller="add-tag" data-action="leftbar:toggleAddTagForm@window->add-tag#toggle">
                     {{ render(controller('Wallabag\\Controller\\TagController::addTagFormAction', {'id': entry.id})) }}
                 </div>
             {% endif %}
 
         </aside>
-        <article{% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}>
+        <article
+            {% if entry.language is defined and entry.language is not null %} lang="{{ entry.getHTMLLanguage() }}"{% endif %}
+            data-controller="highlight annotations"
+            data-annotations-entry-id-value="{{ entry.id }}"
+            data-annotations-create-url-value="{{ path('annotations_post_annotation', {'entry': entry.id}) }}"
+            data-annotations-update-url-value="{{ path('annotations_put_annotation', {'annotation': 'idAnnotation'}) }}"
+            data-annotations-destroy-url-value="{{ path('annotations_delete_annotation', {'annotation': 'idAnnotation'}) }}"
+            data-annotations-search-url-value="{{ path('annotations_get_annotations', {'entry': entry.id}) }}"
+        >
             {{ entry.content|raw }}
         </article>
 
-        <div class="fixed-action-btn js-fixed-action-btn horizontal click-to-toggle hide-on-large-only">
+        <div class="fixed-action-btn horizontal click-to-toggle hide-on-large-only" data-controller="materialize--fab" data-action="scroll@window->materialize--fab#autoDisplay click->materialize--fab#click">
             <a class="btn-floating btn-large" data-toggle="actions">
               <i class="material-icons">menu</i>
             </a>
@@ -347,19 +355,6 @@
             </ul>
         </div>
     </div>
-
-<script id="annotationroutes" type="application/json">
-{
-    "prefix": "",
-    "urls": {
-        "create": "{{ path('annotations_post_annotation', {'entry': entry.id}) }}",
-        "update": "{{ path('annotations_put_annotation', {'annotation': 'idAnnotation'}) }}",
-        "destroy": "{{ path('annotations_delete_annotation', {'annotation': 'idAnnotation'}) }}",
-        "search": "{{ path('annotations_get_annotations', {'entry': entry.id}) }}"
-    },
-    "entryId": "{{ entry.id }}"
-}</script>
-
 {% endblock %}
 
 {% block footer %}
