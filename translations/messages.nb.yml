@@ -192,6 +192,7 @@ config:
         tags: Fjern ALLE etiketter
         annotations: Fjern ALLE anføringer
         title: Tilbakestill område (faresone)
+        tagging_rules: Fjern ALLE regler for tagging
     form_feed:
         no_token: Ingen symbol
         token_label: Strøm-symbol
