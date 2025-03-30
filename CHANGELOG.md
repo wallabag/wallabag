@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.6.11](https://github.com/wallabag/wallabag/tree/2.6.11)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.10...2.6.11)
+
+### Security fix
+* Protect actions with a CSRF token by @yguedidi in https://github.com/wallabag/wallabag/commit/99c8a06594d6ee7480ce4d041ccff3025b353656
+
 ## [2.6.10](https://github.com/wallabag/wallabag/tree/2.6.10)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.9...2.6.10)
 
