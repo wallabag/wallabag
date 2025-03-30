@@ -53,12 +53,16 @@ class EntryController extends AbstractController
     }
 
     /**
-     * @Route("/mass", name="mass_action")
+     * @Route("/mass", name="mass_action", methods={"POST"})
      *
      * @return Response
      */
     public function massAction(Request $request, TagRepository $tagRepository)
     {
+        if (!$this->isCsrfTokenValid('mass-action', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $values = $request->request->all();
 
         $tagsToAdd = [];

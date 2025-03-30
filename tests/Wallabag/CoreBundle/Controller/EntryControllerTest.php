@@ -1764,8 +1764,12 @@ class EntryControllerTest extends WallabagCoreTestCase
         $entries[] = $entry1Id = $entry1->getId();
         $entries[] = $entry2Id = $entry2->getId();
 
+        $crawler = $client->request('GET', '/all/list');
+        $token = $crawler->filter('#form_mass_action input[name=token]')->attr('value');
+
         // Mass actions : archive
         $client->request('POST', '/mass', [
+            'token' => $token,
             'toggle-archive' => '',
             'entry-checkbox' => $entries,
         ]);
@@ -1786,8 +1790,12 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertSame(1, $res->isArchived());
 
+        $crawler = $client->request('GET', '/all/list');
+        $token = $crawler->filter('#form_mass_action input[name=token]')->attr('value');
+
         // Mass actions : star
         $client->request('POST', '/mass', [
+            'token' => $token,
             'toggle-star' => '',
             'entry-checkbox' => $entries,
         ]);
@@ -1808,8 +1816,12 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertSame(1, $res->isStarred());
 
+        $crawler = $client->request('GET', '/all/list');
+        $token = $crawler->filter('#form_mass_action input[name=token]')->attr('value');
+
         // Mass actions : tag
         $client->request('POST', '/mass', [
+            'token' => $token,
             'tag' => '',
             'tags' => 'foo',
             'entry-checkbox' => $entries,
@@ -1838,8 +1850,12 @@ class EntryControllerTest extends WallabagCoreTestCase
 
         $this->assertNotContains('foo', $res->getTagsLabel());
 
+        $crawler = $client->request('GET', '/all/list');
+        $token = $crawler->filter('#form_mass_action input[name=token]')->attr('value');
+
         // Mass actions : delete
         $client->request('POST', '/mass', [
+            'token' => $token,
             'delete' => '',
             'entry-checkbox' => $entries,
         ]);
