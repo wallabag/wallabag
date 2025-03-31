@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "13d9840ae946715b01015bc5087aeca8",
+    "content-hash": "41cfd446eeffc59c54d498f51042576d",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -6004,29 +6004,26 @@
         },
         {
             "name": "pagerfanta/doctrine-orm-adapter",
-            "version": "v3.8.0",
+            "version": "v4.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Pagerfanta/doctrine-orm-adapter.git",
-                "reference": "d0865fbfc7f8dd6e4c16f76135f904c60c3af3b5"
+                "reference": "b3be49948e84b67c023c820abc54ea574a100d5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Pagerfanta/doctrine-orm-adapter/zipball/d0865fbfc7f8dd6e4c16f76135f904c60c3af3b5",
-                "reference": "d0865fbfc7f8dd6e4c16f76135f904c60c3af3b5",
+                "url": "https://api.github.com/repos/Pagerfanta/doctrine-orm-adapter/zipball/b3be49948e84b67c023c820abc54ea574a100d5d",
+                "reference": "b3be49948e84b67c023c820abc54ea574a100d5d",
                 "shasum": ""
             },
             "require": {
-                "doctrine/orm": "^2.8",
-                "pagerfanta/core": "^3.0",
-                "php": "^7.4 || ^8.0",
-                "symfony/deprecation-contracts": "^2.1 || ^3.0"
+                "doctrine/orm": "^2.14 || ^3.0",
+                "pagerfanta/core": "^3.7 || ^4.0",
+                "php": "^8.1"
             },
             "require-dev": {
-                "doctrine/annotations": "^1.11.1",
-                "doctrine/cache": "^1.11 || ^2.0",
-                "phpunit/phpunit": "^9.6 || ^10.0",
-                "symfony/cache": "^4.4 || ^5.4 || ^6.0"
+                "phpunit/phpunit": "^10.5",
+                "symfony/cache": "^5.4 || ^6.3 || ^7.0"
             },
             "type": "library",
             "autoload": {
@@ -6048,9 +6045,9 @@
                 "pagerfanta"
             ],
             "support": {
-                "source": "https://github.com/Pagerfanta/doctrine-orm-adapter/tree/v3.8.0"
+                "source": "https://github.com/Pagerfanta/doctrine-orm-adapter/tree/v4.7.1"
             },
-            "time": "2023-04-15T16:39:14+00:00"
+            "time": "2024-11-30T19:18:10+00:00"
         },
         {
             "name": "pagerfanta/twig",
