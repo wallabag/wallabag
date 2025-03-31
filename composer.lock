@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8cb048a08e401494c06e92ca5ecdf49d",
+    "content-hash": "13d9840ae946715b01015bc5087aeca8",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -6054,26 +6054,25 @@
         },
         {
             "name": "pagerfanta/twig",
-            "version": "v3.8.0",
+            "version": "v4.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Pagerfanta/twig.git",
-                "reference": "19ba831401d7bc5249997c09c574e5c922773b12"
+                "reference": "f3eb17928c61fe6f72abc822825e1006afae6257"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Pagerfanta/twig/zipball/19ba831401d7bc5249997c09c574e5c922773b12",
-                "reference": "19ba831401d7bc5249997c09c574e5c922773b12",
+                "url": "https://api.github.com/repos/Pagerfanta/twig/zipball/f3eb17928c61fe6f72abc822825e1006afae6257",
+                "reference": "f3eb17928c61fe6f72abc822825e1006afae6257",
                 "shasum": ""
             },
             "require": {
-                "pagerfanta/core": "^3.0",
-                "php": "^7.4 || ^8.0",
-                "symfony/polyfill-php80": "^1.15",
+                "pagerfanta/core": "^3.7 || ^4.0",
+                "php": "^8.1",
                 "twig/twig": "^2.13 || ^3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^9.6 || ^10.0"
+                "phpunit/phpunit": "^10.5"
             },
             "type": "library",
             "autoload": {
@@ -6093,9 +6092,9 @@
                 "pagerfanta"
             ],
             "support": {
-                "source": "https://github.com/Pagerfanta/twig/tree/v3.8.0"
+                "source": "https://github.com/Pagerfanta/twig/tree/v4.7.1"
             },
-            "time": "2023-04-15T16:39:14+00:00"
+            "time": "2024-12-13T15:11:13+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
