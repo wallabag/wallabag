@@ -33,7 +33,7 @@ craue_config_settings_modify:
         _controller: 'Craue\ConfigBundle\Controller\SettingsController::modifyAction'
 
 fos_js_routing:
-    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing-sf4.xml"
 
 2fa_login:
     path: /2fa
