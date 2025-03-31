@@ -21,7 +21,7 @@ class IgnoreOriginUserRuleFixtures extends Fixture implements DependentFixtureIn
         $manager->flush();
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             UserFixtures::class,
