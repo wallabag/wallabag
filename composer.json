@@ -60,7 +60,7 @@
         "babdev/pagerfanta-bundle": "^4.5",
         "craue/config-bundle": "^2.7.0",
         "defuse/php-encryption": "^2.4",
-        "doctrine/collections": "^1.8",
+        "doctrine/collections": "^2.3",
         "doctrine/common": "^3.5.0",
         "doctrine/dbal": "^3.9.4",
         "doctrine/doctrine-bundle": "^2.13.2",
