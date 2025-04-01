@@ -625,7 +625,7 @@ class EntryController extends AbstractController
      */
     private function showEntries($type, Request $request, $page)
     {
-        $searchTerm = (isset($request->query->get('search_entry')['term']) ? trim($request->query->get('search_entry')['term']) : '');
+        $searchTerm = (isset($request->query->all('search_entry')['term']) ? trim($request->query->all('search_entry')['term']) : '');
         $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
         $currentEntryId = $request->attributes->getInt('id');
 

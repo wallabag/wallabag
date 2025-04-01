@@ -67,6 +67,11 @@ class WallabagClient implements HttpClientInterface
         return $this->httpClient->stream($responses, $timeout);
     }
 
+    public function withOptions(array $options): HttpClientInterface
+    {
+        return new self($this->restrictedAccess, $this->browser, $this->authenticator, $this->logger);
+    }
+
     private function getCookieHeader(string $url): ?string
     {
         $cookies = [];
