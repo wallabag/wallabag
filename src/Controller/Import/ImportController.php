@@ -14,10 +14,12 @@ use Wallabag\Import\ImportChain;
 class ImportController extends AbstractController
 {
     private RabbitMQConsumerTotalProxy $rabbitMQConsumerTotalProxy;
+    private Client $redisClient;
 
-    public function __construct(RabbitMQConsumerTotalProxy $rabbitMQConsumerTotalProxy)
+    public function __construct(RabbitMQConsumerTotalProxy $rabbitMQConsumerTotalProxy, Client $redisClient)
     {
         $this->rabbitMQConsumerTotalProxy = $rabbitMQConsumerTotalProxy;
+        $this->redisClient = $redisClient;
     }
 
     /**
@@ -67,22 +69,20 @@ class ImportController extends AbstractController
                 $rabbitNotInstalled = true;
             }
         } elseif ($craueConfig->get('import_with_redis')) {
-            $redis = $this->get(Client::class);
-
             try {
-                $nbRedisMessages = $redis->llen('wallabag.import.pocket')
-                    + $redis->llen('wallabag.import.readability')
-                    + $redis->llen('wallabag.import.wallabag_v1')
-                    + $redis->llen('wallabag.import.wallabag_v2')
-                    + $redis->llen('wallabag.import.firefox')
-                    + $redis->llen('wallabag.import.chrome')
-                    + $redis->llen('wallabag.import.instapaper')
-                    + $redis->llen('wallabag.import.pinboard')
-                    + $redis->llen('wallabag.import.delicious')
-                    + $redis->llen('wallabag.import.elcurator')
-                    + $redis->llen('wallabag.import.shaarli')
-                    + $redis->llen('wallabag.import.pocket_html')
-                    + $redis->llen('wallabag.import.omnivore')
+                $nbRedisMessages = $this->redisClient->llen('wallabag.import.pocket')
+                    + $this->redisClient->llen('wallabag.import.readability')
+                    + $this->redisClient->llen('wallabag.import.wallabag_v1')
+                    + $this->redisClient->llen('wallabag.import.wallabag_v2')
+                    + $this->redisClient->llen('wallabag.import.firefox')
+                    + $this->redisClient->llen('wallabag.import.chrome')
+                    + $this->redisClient->llen('wallabag.import.instapaper')
+                    + $this->redisClient->llen('wallabag.import.pinboard')
+                    + $this->redisClient->llen('wallabag.import.delicious')
+                    + $this->redisClient->llen('wallabag.import.elcurator')
+                    + $this->redisClient->llen('wallabag.import.shaarli')
+                    + $this->redisClient->llen('wallabag.import.pocket_html')
+                    + $this->redisClient->llen('wallabag.import.omnivore')
                 ;
             } catch (\Exception $e) {
                 $redisNotInstalled = true;
