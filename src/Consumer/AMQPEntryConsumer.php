@@ -9,6 +9,6 @@ class AMQPEntryConsumer extends AbstractConsumer implements ConsumerInterface
 {
     public function execute(AMQPMessage $msg)
     {
-        return $this->handleMessage($msg->body);
+        return $this->handleMessage($msg->getBody());
     }
 }

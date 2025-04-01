@@ -115,6 +115,6 @@ class RabbitMQConsumerTotalProxy
             return 0;
         }
 
-        return $message->delivery_info['message_count'] + 1;
+        return $message->getMessageCount() + 1;
     }
 }
