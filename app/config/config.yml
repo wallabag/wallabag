@@ -197,7 +197,7 @@ fos_user:
         address: "%from_email%"
         sender_name: wallabag
     service:
-        mailer: Wallabag\Mailer\UserMailer
+        mailer: fos_user.mailer.twig_symfony
 
 fos_oauth_server:
     db_driver:           orm
