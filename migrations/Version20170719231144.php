@@ -20,7 +20,7 @@ class Version20170719231144 extends WallabagMigration
         }
 
         // Find tags which need to be merged
-        $dupTags = $this->connection->query('
+        $dupTags = $this->connection->executeQuery('
             SELECT LOWER(label) AS lower_label
             FROM   ' . $this->getTable('tag') . '
             GROUP BY LOWER(label)
@@ -31,7 +31,7 @@ class Version20170719231144 extends WallabagMigration
             $label = $duplicates['lower_label'];
 
             // Retrieve all duplicate tags for a given tag
-            $tags = $this->connection->query('
+            $tags = $this->connection->executeQuery('
                 SELECT id
                 FROM   ' . $this->getTable('tag') . '
                 WHERE  LOWER(label) = :label
