@@ -1,5 +1,5 @@
 security:
-    encoders:
+    password_hashers:
         FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
