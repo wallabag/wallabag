@@ -9,6 +9,7 @@ use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Mapping\DefaultQuoteStrategy;
 use PHPUnit\Framework\TestCase;
 use Wallabag\Entity\User;
 use Wallabag\Event\Subscriber\TablePrefixSubscriber;
@@ -57,7 +58,7 @@ class TablePrefixSubscriberTest extends TestCase
         $subscriber->loadClassMetadata($metaDataEvent);
 
         $this->assertSame($finalTableName, $metaDataEvent->getClassMetadata()->getTableName());
-        $this->assertSame($finalTableNameQuoted, $metaDataEvent->getClassMetadata()->getQuotedTableName($platform));
+        $this->assertSame($finalTableNameQuoted, (new DefaultQuoteStrategy())->getTableName($metaClass, $platform));
     }
 
     /**
@@ -82,7 +83,7 @@ class TablePrefixSubscriberTest extends TestCase
         $evm->dispatchEvent('loadClassMetadata', $metaDataEvent);
 
         $this->assertSame($finalTableName, $metaDataEvent->getClassMetadata()->getTableName());
-        $this->assertSame($finalTableNameQuoted, $metaDataEvent->getClassMetadata()->getQuotedTableName($platform));
+        $this->assertSame($finalTableNameQuoted, (new DefaultQuoteStrategy())->getTableName($metaClass, $platform));
     }
 
     public function testPrefixManyToMany()
@@ -115,6 +116,6 @@ class TablePrefixSubscriberTest extends TestCase
 
         $this->assertSame('yo_entry', $metaDataEvent->getClassMetadata()->getTableName());
         $this->assertSame('yo_entry_tag', $metaDataEvent->getClassMetadata()->associationMappings['tags']['joinTable']['name']);
-        $this->assertSame('yo_entry', $metaDataEvent->getClassMetadata()->getQuotedTableName(new MySQLPlatform()));
+        $this->assertSame('yo_entry', (new DefaultQuoteStrategy())->getTableName($metaClass, new MySQLPlatform()));
     }
 }

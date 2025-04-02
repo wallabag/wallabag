@@ -14,7 +14,7 @@ use Doctrine\DBAL\Types\JsonType;
  */
 class JsonArrayType extends JsonType
 {
-    public function convertToPHPValue($value, AbstractPlatform $platform)
+    public function convertToPHPValue($value, AbstractPlatform $platform): mixed
     {
         if (null === $value || '' === $value) {
             return [];

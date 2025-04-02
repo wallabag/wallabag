@@ -1721,7 +1721,7 @@ class EntryControllerTest extends WallabagTestCase
         $container = $client->getContainer();
         $contentProxy = $this->getMockBuilder(ContentProxy::class)
             ->disableOriginalConstructor()
-            ->setMethods(['updateEntry'])
+            ->onlyMethods(['updateEntry'])
             ->getMock();
         $contentProxy->expects($this->any())
             ->method('updateEntry')

@@ -29,6 +29,7 @@ framework:
         handler_id: session.handler.native_file
         save_path: "%kernel.project_dir%/var/sessions/%kernel.environment%"
         cookie_secure: auto
+        storage_factory_id: session.storage.factory.native
     fragments: ~
     http_method_override: true
     assets:
@@ -197,7 +198,7 @@ fos_user:
         address: "%from_email%"
         sender_name: wallabag
     service:
-        mailer: Wallabag\Mailer\UserMailer
+        mailer: fos_user.mailer.twig_symfony
 
 fos_oauth_server:
     db_driver:           orm
