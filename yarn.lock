@@ -911,6 +911,16 @@
   resolved "https://registry.yarnpkg.com/@fontsource/oswald/-/oswald-5.2.5.tgz#01ef5b61fae44542eb22330255d32b728ee45b0c"
   integrity sha512-Sw8ayEYCoOzG2ISw5HaX3d5ILt3OEG2VFX2nzHaGywYD9p0WvVfO4SBK5/y9JGuOty3jA6OhptxOYZgwjTTPLQ==
 
+"@hotwired/stimulus-webpack-helpers@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@hotwired/stimulus-webpack-helpers/-/stimulus-webpack-helpers-1.0.1.tgz#4cd74487adeca576c9865ac2b9fe5cb20cef16dd"
+  integrity sha512-wa/zupVG0eWxRYJjC1IiPBdt3Lruv0RqGN+/DTMmUWUyMAEB27KXmVY6a8YpUVTM7QwVuaLNGW4EqDgrS2upXQ==
+
+"@hotwired/stimulus@^3.2.2":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@hotwired/stimulus/-/stimulus-3.2.2.tgz#071aab59c600fed95b97939e605ff261a4251608"
+  integrity sha512-eGeIqNOQpXoPAIP7tC1+1Yc1yl1xnwYqg+3mzqxyrbE5pg5YFBZcA6YoTiByJB6DKAEsiWtl6tjTJS4IYtbB7A==
+
 "@humanwhocodes/config-array@^0.13.0":
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.13.0.tgz#fb907624df3256d04b9aa2df50d7aa97ec648748"
@@ -1056,6 +1066,16 @@
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.27.8.tgz#6667fac16c436b5434a387a34dedb013198f6e6e"
   integrity sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==
 
+"@symfony/stimulus-bridge@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@symfony/stimulus-bridge/-/stimulus-bridge-4.0.0.tgz#dbd352a373f8ff323f2895e0bb29f22b9abcc122"
+  integrity sha512-BfeXHAyNtE2hFJtTKFS8vLW2ElqNyzUZJJ4TMeUhrjBjYVt4/myeQxpLidy995l+TEzryE7YrnShqLviBr3pAg==
+  dependencies:
+    "@hotwired/stimulus-webpack-helpers" "^1.0.1"
+    "@types/webpack-env" "^1.16.4"
+    loader-utils "^2.0.0 || ^3.0.0"
+    schema-utils "^3.0.0 || ^4.0.0"
+
 "@symfony/webpack-encore@^5.1.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@symfony/webpack-encore/-/webpack-encore-5.1.0.tgz#d5664153136959e3baf3e248c9b55350c2c81a6d"
@@ -1148,6 +1168,11 @@
   version "2.4.4"
   resolved "https://registry.yarnpkg.com/@types/normalize-package-data/-/normalize-package-data-2.4.4.tgz#56e2cc26c397c038fab0e3a917a12d5c5909e901"
   integrity sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==
+
+"@types/webpack-env@^1.16.4":
+  version "1.18.8"
+  resolved "https://registry.yarnpkg.com/@types/webpack-env/-/webpack-env-1.18.8.tgz#71f083718c094204d7b64443701d32f1db3989e3"
+  integrity sha512-G9eAoJRMLjcvN4I08wB5I7YofOb/kaJNd5uoCMX+LbKXTPCF+ZIHuqTnFaK9Jz1rgs035f9JUPUhNFtqgucy/A==
 
 "@types/yargs-parser@*":
   version "21.0.3"
@@ -1371,7 +1396,6 @@ ajv@^8.0.0, ajv@^8.0.1, ajv@^8.9.0:
 
 annotator@wallabag/annotator#master:
   version "2.0.0-alpha.4"
-  uid "082069d777ed0fe5080392e85675ef3a519c7886"
   resolved "https://codeload.github.com/wallabag/annotator/tar.gz/082069d777ed0fe5080392e85675ef3a519c7886"
   dependencies:
     backbone-extend-standalone "^0.1.2"
@@ -3353,11 +3377,6 @@ jiti@^1.20.0:
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.21.0.tgz#7c97f8fe045724e136a397f7340475244156105d"
   integrity sha512-gFqAIbuKyyso/3G2qhiO2OM6shY6EPP/R0+mkDbyspxKazh8BXDC5FiFsUjlczgdNz/vfra0da2y+aHrusLG/Q==
 
-jquery.cookie@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/jquery.cookie/-/jquery.cookie-1.4.1.tgz#d63dce209eab691fe63316db08ca9e47e0f9385b"
-  integrity sha512-c/hZOOL+8VSw/FkTVH637gS1/6YzMSCROpTZ2qBYwJ7s7sHajU7uBkSSiE5+GXWwrfCCyO+jsYjUQ7Hs2rIxAA==
-
 jquery@^3.7.1:
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.7.1.tgz#083ef98927c9a6a74d05a6af02806566d16274de"
@@ -3480,6 +3499,11 @@ loader-utils@^2.0.0:
     big.js "^5.2.2"
     emojis-list "^3.0.0"
     json5 "^2.1.2"
+
+"loader-utils@^2.0.0 || ^3.0.0":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-3.3.1.tgz#735b9a19fd63648ca7adbd31c2327dfe281304e5"
+  integrity sha512-FMJTLMXfCLMLfJxcX9PFqX5qD88Z5MRGaZCVzfuqeZSPsyiBzs+pahDQjbIWz2QIzPZz0NX9Zy4FX3lmK6YHIg==
 
 locate-path@^5.0.0:
   version "5.0.0"
@@ -4680,7 +4704,7 @@ schema-utils@^3.0.0:
     ajv "^6.12.5"
     ajv-keywords "^3.5.2"
 
-schema-utils@^4.0.0, schema-utils@^4.2.0, schema-utils@^4.3.0:
+"schema-utils@^3.0.0 || ^4.0.0", schema-utils@^4.0.0, schema-utils@^4.2.0, schema-utils@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-4.3.0.tgz#3b669f04f71ff2dfb5aba7ce2d5a9d79b35622c0"
   integrity sha512-Gf9qqc58SpCA/xdziiHz35F4GNIWYWZrEshUc/G/r5BnLph6xpKuLeoJoQuj5WfBIx/eQLf+hmVPYHaxJu7V2g==
