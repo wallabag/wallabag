@@ -119,7 +119,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
                 continue;
             }
 
-            list($fieldName, $fieldValue) = explode('=', $extraField, 2);
+            [$fieldName, $fieldValue] = explode('=', $extraField, 2);
             $extraFields[$fieldName] = $fieldValue;
         }
 
