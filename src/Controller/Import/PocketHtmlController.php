@@ -14,10 +14,10 @@ use Wallabag\Redis\Producer as RedisProducer;
 class PocketHtmlController extends HtmlController
 {
     public function __construct(
-        private PocketHtmlImport $pocketHtmlImport,
-        private Config $craueConfig,
-        private RabbitMqProducer $rabbitMqProducer,
-        private RedisProducer $redisProducer,
+        private readonly PocketHtmlImport $pocketHtmlImport,
+        private readonly Config $craueConfig,
+        private readonly RabbitMqProducer $rabbitMqProducer,
+        private readonly RedisProducer $redisProducer,
     ) {
     }
 

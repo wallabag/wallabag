@@ -30,8 +30,8 @@ use Wallabag\Repository\UserRepository;
 class UserController extends AbstractController
 {
     public function __construct(
-        private EntityManagerInterface $entityManager,
-        private TranslatorInterface $translator,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 

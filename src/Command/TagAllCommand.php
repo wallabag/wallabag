@@ -19,9 +19,9 @@ class TagAllCommand extends Command
     protected static $defaultDescription = 'Tag all entries using the tagging rules.';
 
     public function __construct(
-        private EntityManagerInterface $entityManager,
-        private RuleBasedTagger $ruleBasedTagger,
-        private UserRepository $userRepository,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly RuleBasedTagger $ruleBasedTagger,
+        private readonly UserRepository $userRepository,
     ) {
         parent::__construct();
     }

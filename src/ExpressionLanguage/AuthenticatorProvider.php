@@ -10,7 +10,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class AuthenticatorProvider implements ExpressionFunctionProviderInterface
 {
     public function __construct(
-        private HttpClientInterface $requestHtmlFunctionClient,
+        private readonly HttpClientInterface $requestHtmlFunctionClient,
     ) {
     }
 

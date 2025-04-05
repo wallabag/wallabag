@@ -14,8 +14,8 @@ use Wallabag\Import\ImportChain;
 class ImportController extends AbstractController
 {
     public function __construct(
-        private RabbitMQConsumerTotalProxy $rabbitMQConsumerTotalProxy,
-        private Client $redisClient,
+        private readonly RabbitMQConsumerTotalProxy $rabbitMQConsumerTotalProxy,
+        private readonly Client $redisClient,
     ) {
     }
 

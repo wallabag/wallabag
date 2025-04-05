@@ -17,7 +17,7 @@ class CryptoProxy
 
     public function __construct(
         $encryptionKeyPath,
-        private LoggerInterface $logger,
+        private readonly LoggerInterface $logger,
     ) {
         if (!file_exists($encryptionKeyPath)) {
             $key = Key::createNewRandomKey();

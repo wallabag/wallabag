@@ -11,10 +11,10 @@ use Doctrine\Migrations\Version\MigrationFactory;
 class MigrationFactoryDecorator implements MigrationFactory
 {
     public function __construct(
-        private MigrationFactory $migrationFactory,
-        private string $tablePrefix,
-        private array $defaultIgnoreOriginInstanceRules,
-        private string $fetchingErrorMessage,
+        private readonly MigrationFactory $migrationFactory,
+        private readonly string $tablePrefix,
+        private readonly array $defaultIgnoreOriginInstanceRules,
+        private readonly string $fetchingErrorMessage,
     ) {
     }
 

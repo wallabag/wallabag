@@ -9,7 +9,7 @@ use Wallabag\Entity\IgnoreOriginInstanceRule;
 class IgnoreOriginInstanceRuleFixtures extends Fixture
 {
     public function __construct(
-        private array $defaultIgnoreOriginInstanceRules,
+        private readonly array $defaultIgnoreOriginInstanceRules,
     ) {
     }
 

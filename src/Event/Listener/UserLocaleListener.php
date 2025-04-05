@@ -17,7 +17,7 @@ use Wallabag\Entity\User;
 class UserLocaleListener
 {
     public function __construct(
-        private SessionInterface $session,
+        private readonly SessionInterface $session,
     ) {
     }
 

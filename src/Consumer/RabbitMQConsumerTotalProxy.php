@@ -11,19 +11,19 @@ use OldSound\RabbitMqBundle\RabbitMq\Consumer;
 class RabbitMQConsumerTotalProxy
 {
     public function __construct(
-        private Consumer $pocketConsumer,
-        private Consumer $readabilityConsumer,
-        private Consumer $wallabagV1Consumer,
-        private Consumer $wallabagV2Consumer,
-        private Consumer $firefoxConsumer,
-        private Consumer $chromeConsumer,
-        private Consumer $instapaperConsumer,
-        private Consumer $pinboardConsumer,
-        private Consumer $deliciousConsumer,
-        private Consumer $elcuratorConsumer,
-        private Consumer $shaarliConsumer,
-        private Consumer $pocketHtmlConsumer,
-        private Consumer $omnivoreConsumer,
+        private readonly Consumer $pocketConsumer,
+        private readonly Consumer $readabilityConsumer,
+        private readonly Consumer $wallabagV1Consumer,
+        private readonly Consumer $wallabagV2Consumer,
+        private readonly Consumer $firefoxConsumer,
+        private readonly Consumer $chromeConsumer,
+        private readonly Consumer $instapaperConsumer,
+        private readonly Consumer $pinboardConsumer,
+        private readonly Consumer $deliciousConsumer,
+        private readonly Consumer $elcuratorConsumer,
+        private readonly Consumer $shaarliConsumer,
+        private readonly Consumer $pocketHtmlConsumer,
+        private readonly Consumer $omnivoreConsumer,
     ) {
     }
 

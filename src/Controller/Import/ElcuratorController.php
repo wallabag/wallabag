@@ -14,10 +14,10 @@ use Wallabag\Redis\Producer as RedisProducer;
 class ElcuratorController extends WallabagController
 {
     public function __construct(
-        private ElcuratorImport $elcuratorImport,
-        private Config $craueConfig,
-        private RabbitMqProducer $rabbitMqProducer,
-        private RedisProducer $redisProducer,
+        private readonly ElcuratorImport $elcuratorImport,
+        private readonly Config $craueConfig,
+        private readonly RabbitMqProducer $rabbitMqProducer,
+        private readonly RedisProducer $redisProducer,
     ) {
     }
 

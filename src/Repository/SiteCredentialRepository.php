@@ -16,7 +16,7 @@ class SiteCredentialRepository extends ServiceEntityRepository
 {
     public function __construct(
         ManagerRegistry $registry,
-        private CryptoProxy $cryptoProxy,
+        private readonly CryptoProxy $cryptoProxy,
     ) {
         parent::__construct($registry, SiteCredential::class);
     }

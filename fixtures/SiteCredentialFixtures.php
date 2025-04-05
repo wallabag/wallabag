@@ -12,7 +12,7 @@ use Wallabag\Helper\CryptoProxy;
 class SiteCredentialFixtures extends Fixture implements DependentFixtureInterface
 {
     public function __construct(
-        private CryptoProxy $cryptoProxy,
+        private readonly CryptoProxy $cryptoProxy,
     ) {
     }
 

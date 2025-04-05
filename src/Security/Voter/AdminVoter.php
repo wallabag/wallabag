@@ -15,7 +15,7 @@ class AdminVoter extends Voter
     public const CREATE_IGNORE_ORIGIN_INSTANCE_RULES = 'CREATE_IGNORE_ORIGIN_INSTANCE_RULES';
 
     public function __construct(
-        private Security $security,
+        private readonly Security $security,
     ) {
     }
 

@@ -25,8 +25,8 @@ class EntryFilterType extends AbstractType
      * Repository & user are used to get a list of language entries for this user.
      */
     public function __construct(
-        private EntryRepository $repository,
-        private TokenStorageInterface $tokenStorage,
+        private readonly EntryRepository $repository,
+        private readonly TokenStorageInterface $tokenStorage,
     ) {
     }
 

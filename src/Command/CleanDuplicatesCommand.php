@@ -23,9 +23,9 @@ class CleanDuplicatesCommand extends Command
     protected int $duplicates = 0;
 
     public function __construct(
-        private EntityManagerInterface $entityManager,
-        private EntryRepository $entryRepository,
-        private UserRepository $userRepository,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly EntryRepository $entryRepository,
+        private readonly UserRepository $userRepository,
     ) {
         parent::__construct();
     }

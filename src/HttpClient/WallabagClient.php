@@ -11,13 +11,13 @@ use Symfony\Contracts\HttpClient\ResponseStreamInterface;
 
 class WallabagClient implements HttpClientInterface
 {
-    private HttpClientInterface $httpClient;
+    private readonly HttpClientInterface $httpClient;
 
     public function __construct(
         private $restrictedAccess,
-        private HttpBrowser $browser,
-        private Authenticator $authenticator,
-        private LoggerInterface $logger,
+        private readonly HttpBrowser $browser,
+        private readonly Authenticator $authenticator,
+        private readonly LoggerInterface $logger,
     ) {
         $this->httpClient = HttpClient::create([
             'timeout' => 10,

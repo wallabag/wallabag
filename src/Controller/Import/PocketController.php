@@ -18,10 +18,10 @@ use Wallabag\Redis\Producer as RedisProducer;
 class PocketController extends AbstractController
 {
     public function __construct(
-        private Config $craueConfig,
-        private RabbitMqProducer $rabbitMqProducer,
-        private RedisProducer $redisProducer,
-        private SessionInterface $session,
+        private readonly Config $craueConfig,
+        private readonly RabbitMqProducer $rabbitMqProducer,
+        private readonly RedisProducer $redisProducer,
+        private readonly SessionInterface $session,
     ) {
     }
 

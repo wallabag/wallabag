@@ -31,10 +31,10 @@ class EntriesExport
      * @param TokenStorageInterface $tokenStorage Needed to retrieve the current user
      */
     public function __construct(
-        private TranslatorInterface $translator,
+        private readonly TranslatorInterface $translator,
         private $wallabagUrl,
         private $logoPath,
-        private TokenStorageInterface $tokenStorage,
+        private readonly TokenStorageInterface $tokenStorage,
     ) {
     }
 

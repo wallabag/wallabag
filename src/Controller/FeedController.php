@@ -21,7 +21,7 @@ use Wallabag\Repository\EntryRepository;
 class FeedController extends AbstractController
 {
     public function __construct(
-        private EntryRepository $entryRepository,
+        private readonly EntryRepository $entryRepository,
     ) {
     }
 

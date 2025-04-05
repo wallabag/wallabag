@@ -18,10 +18,10 @@ class ExportCommand extends Command
     protected static $defaultDescription = 'Export all entries for an user';
 
     public function __construct(
-        private EntryRepository $entryRepository,
-        private UserRepository $userRepository,
-        private EntriesExport $entriesExport,
-        private string $projectDir,
+        private readonly EntryRepository $entryRepository,
+        private readonly UserRepository $userRepository,
+        private readonly EntriesExport $entriesExport,
+        private readonly string $projectDir,
     ) {
         parent::__construct();
     }

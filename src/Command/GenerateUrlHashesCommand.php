@@ -21,9 +21,9 @@ class GenerateUrlHashesCommand extends Command
     protected OutputInterface $output;
 
     public function __construct(
-        private EntityManagerInterface $entityManager,
-        private EntryRepository $entryRepository,
-        private UserRepository $userRepository,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly EntryRepository $entryRepository,
+        private readonly UserRepository $userRepository,
     ) {
         parent::__construct();
     }

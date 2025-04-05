@@ -34,14 +34,14 @@ use Wallabag\Repository\TagRepository;
 class EntryController extends AbstractController
 {
     public function __construct(
-        private EntityManagerInterface $entityManager,
-        private EventDispatcherInterface $eventDispatcher,
-        private EntryRepository $entryRepository,
-        private Redirect $redirectHelper,
-        private PreparePagerForEntries $preparePagerForEntriesHelper,
-        private FilterBuilderUpdaterInterface $filterBuilderUpdater,
-        private ContentProxy $contentProxy,
-        private Security $security,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly EntryRepository $entryRepository,
+        private readonly Redirect $redirectHelper,
+        private readonly PreparePagerForEntries $preparePagerForEntriesHelper,
+        private readonly FilterBuilderUpdaterInterface $filterBuilderUpdater,
+        private readonly ContentProxy $contentProxy,
+        private readonly Security $security,
     ) {
     }
 

@@ -11,7 +11,7 @@ use Wallabag\Entity\User;
 class PreparePagerForEntries
 {
     public function __construct(
-        private TokenStorageInterface $tokenStorage,
+        private readonly TokenStorageInterface $tokenStorage,
     ) {
     }
 

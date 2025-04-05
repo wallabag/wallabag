@@ -9,10 +9,10 @@ use Wallabag\ExpressionLanguage\AuthenticatorProvider;
 
 class LoginFormAuthenticator
 {
-    private ExpressionLanguage $expressionLanguage;
+    private readonly ExpressionLanguage $expressionLanguage;
 
     public function __construct(
-        private HttpBrowser $browser,
+        private readonly HttpBrowser $browser,
         AuthenticatorProvider $authenticatorProvider,
     ) {
         $this->expressionLanguage = new ExpressionLanguage(null, [$authenticatorProvider]);

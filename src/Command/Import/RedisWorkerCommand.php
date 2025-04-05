@@ -17,7 +17,7 @@ class RedisWorkerCommand extends Command
     protected static $defaultDescription = 'Launch Redis worker';
 
     public function __construct(
-        private ContainerInterface $container,
+        private readonly ContainerInterface $container,
     ) {
         parent::__construct();
     }
