@@ -120,7 +120,7 @@ abstract class WallabagTestCase extends WebTestCase
     {
         try {
             $this->client->getContainer()->get(Client::class)->connect();
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             $this->markTestSkipped('Redis is not installed/activated');
         }
     }

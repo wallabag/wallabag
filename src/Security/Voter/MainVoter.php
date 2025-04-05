@@ -41,22 +41,9 @@ class MainVoter extends Voter
 
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
-        switch ($attribute) {
-            case self::LIST_ENTRIES:
-            case self::CREATE_ENTRIES:
-            case self::EDIT_ENTRIES:
-            case self::EXPORT_ENTRIES:
-            case self::IMPORT_ENTRIES:
-            case self::DELETE_ENTRIES:
-            case self::LIST_TAGS:
-            case self::CREATE_TAGS:
-            case self::DELETE_TAGS:
-            case self::LIST_SITE_CREDENTIALS:
-            case self::CREATE_SITE_CREDENTIALS:
-            case self::EDIT_CONFIG:
-                return $this->security->isGranted('ROLE_USER');
-        }
-
-        return false;
+        return match ($attribute) {
+            self::LIST_ENTRIES, self::CREATE_ENTRIES, self::EDIT_ENTRIES, self::EXPORT_ENTRIES, self::IMPORT_ENTRIES, self::DELETE_ENTRIES, self::LIST_TAGS, self::CREATE_TAGS, self::DELETE_TAGS, self::LIST_SITE_CREDENTIALS, self::CREATE_SITE_CREDENTIALS, self::EDIT_CONFIG => $this->security->isGranted('ROLE_USER'),
+            default => false,
+        };
     }
 }

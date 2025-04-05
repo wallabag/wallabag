@@ -35,12 +35,9 @@ class SiteCredentialVoter extends Voter
             return false;
         }
 
-        switch ($attribute) {
-            case self::EDIT:
-            case self::DELETE:
-                return $user === $subject->getUser();
-        }
-
-        return false;
+        return match ($attribute) {
+            self::EDIT, self::DELETE => $user === $subject->getUser(),
+            default => false,
+        };
     }
 }

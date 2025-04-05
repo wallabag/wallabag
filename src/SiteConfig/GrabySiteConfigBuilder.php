@@ -26,7 +26,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
 
         // required by credentials below
         $host = strtolower($host);
-        if ('www.' === substr($host, 0, 4)) {
+        if (str_starts_with($host, 'www.')) {
             $host = substr($host, 4);
         }
 

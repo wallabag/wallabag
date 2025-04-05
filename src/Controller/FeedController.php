@@ -141,7 +141,7 @@ class FeedController extends AbstractController
 
         try {
             $entries->setCurrentPage($page);
-        } catch (OutOfRangeCurrentPageException $e) {
+        } catch (OutOfRangeCurrentPageException) {
             if ($page > 1) {
                 return $this->redirect($url . '?page=' . $entries->getNbPages(), 302);
             }
@@ -189,22 +189,13 @@ class FeedController extends AbstractController
      */
     private function showEntries(string $type, User $user, $page = 1)
     {
-        switch ($type) {
-            case 'starred':
-                $qb = $this->entryRepository->getBuilderForStarredByUser($user->getId());
-                break;
-            case 'archive':
-                $qb = $this->entryRepository->getBuilderForArchiveByUser($user->getId());
-                break;
-            case 'unread':
-                $qb = $this->entryRepository->getBuilderForUnreadByUser($user->getId());
-                break;
-            case 'all':
-                $qb = $this->entryRepository->getBuilderForAllByUser($user->getId());
-                break;
-            default:
-                throw new \InvalidArgumentException(\sprintf('Type "%s" is not implemented.', $type));
-        }
+        $qb = match ($type) {
+            'starred' => $this->entryRepository->getBuilderForStarredByUser($user->getId()),
+            'archive' => $this->entryRepository->getBuilderForArchiveByUser($user->getId()),
+            'unread' => $this->entryRepository->getBuilderForUnreadByUser($user->getId()),
+            'all' => $this->entryRepository->getBuilderForAllByUser($user->getId()),
+            default => throw new \InvalidArgumentException(\sprintf('Type "%s" is not implemented.', $type)),
+        };
 
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
         $entries = new Pagerfanta($pagerAdapter);
@@ -223,7 +214,7 @@ class FeedController extends AbstractController
 
         try {
             $entries->setCurrentPage((int) $page);
-        } catch (OutOfRangeCurrentPageException $e) {
+        } catch (OutOfRangeCurrentPageException) {
             if ($page > 1) {
                 return $this->redirect($url . '/' . $entries->getNbPages());
             }

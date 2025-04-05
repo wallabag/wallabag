@@ -44,7 +44,7 @@ class ShowUserCommand extends Command
         try {
             $user = $this->getUser($username);
             $this->showUser($user);
-        } catch (NoResultException $e) {
+        } catch (NoResultException) {
             $this->io->error(\sprintf('User "%s" not found.', $username));
 
             return 1;

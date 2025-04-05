@@ -55,7 +55,7 @@ class ReloadEntryCommand extends Command
                 $userId = $this->userRepository
                     ->findOneByUserName($username)
                     ->getId();
-            } catch (NoResultException $e) {
+            } catch (NoResultException) {
                 $io->error(\sprintf('User "%s" not found.', $username));
 
                 return 1;

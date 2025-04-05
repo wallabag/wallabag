@@ -62,7 +62,7 @@ class ImportController extends AbstractController
                     + $this->rabbitMQConsumerTotalProxy->getTotalMessage('pocket_html')
                     + $this->rabbitMQConsumerTotalProxy->getTotalMessage('omnivore')
                 ;
-            } catch (\Exception $e) {
+            } catch (\Exception) {
                 $rabbitNotInstalled = true;
             }
         } elseif ($craueConfig->get('import_with_redis')) {
@@ -81,7 +81,7 @@ class ImportController extends AbstractController
                     + $this->redisClient->llen('wallabag.import.pocket_html')
                     + $this->redisClient->llen('wallabag.import.omnivore')
                 ;
-            } catch (\Exception $e) {
+            } catch (\Exception) {
                 $redisNotInstalled = true;
             }
         }

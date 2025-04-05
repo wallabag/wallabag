@@ -171,7 +171,7 @@ class DownloadImages
 
         try {
             $im = imagecreatefromstring($res->getContent());
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             $im = false;
         }
 
@@ -190,7 +190,7 @@ class DownloadImages
                         $imagick->readImageBlob($res->getContent());
                         $imagick->setImageFormat('gif');
                         $imagick->writeImages($localPath, true);
-                    } catch (\Exception $e) {
+                    } catch (\Exception) {
                         // if Imagick fail, fallback to the default solution
                         imagegif($im, $localPath);
                     }

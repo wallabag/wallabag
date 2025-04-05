@@ -47,24 +47,9 @@ class EntryVoter extends Voter
             return false;
         }
 
-        switch ($attribute) {
-            case self::VIEW:
-            case self::EDIT:
-            case self::RELOAD:
-            case self::STAR:
-            case self::ARCHIVE:
-            case self::SHARE:
-            case self::UNSHARE:
-            case self::EXPORT:
-            case self::DELETE:
-            case self::LIST_ANNOTATIONS:
-            case self::CREATE_ANNOTATIONS:
-            case self::LIST_TAGS:
-            case self::TAG:
-            case self::UNTAG:
-                return $user === $subject->getUser();
-        }
-
-        return false;
+        return match ($attribute) {
+            self::VIEW, self::EDIT, self::RELOAD, self::STAR, self::ARCHIVE, self::SHARE, self::UNSHARE, self::EXPORT, self::DELETE, self::LIST_ANNOTATIONS, self::CREATE_ANNOTATIONS, self::LIST_TAGS, self::TAG, self::UNTAG => $user === $subject->getUser(),
+            default => false,
+        };
     }
 }
