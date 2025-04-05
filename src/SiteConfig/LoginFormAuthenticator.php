@@ -98,9 +98,9 @@ class LoginFormAuthenticator
         $extraFields = [];
 
         foreach ($siteConfig->getExtraFields() as $fieldName => $fieldValue) {
-            if (str_starts_with($fieldValue, '@=')) {
+            if (str_starts_with((string) $fieldValue, '@=')) {
                 $fieldValue = $this->expressionLanguage->evaluate(
-                    substr($fieldValue, 2),
+                    substr((string) $fieldValue, 2),
                     [
                         'config' => $siteConfig,
                     ]

@@ -100,8 +100,8 @@ class CleanDuplicatesCommand extends Command
 
     private function similarUrl($url)
     {
-        if (\in_array(substr($url, -1), ['/', '#'], true)) { // get rid of "/" and "#" and the end of urls
-            return substr($url, 0, \strlen($url));
+        if (\in_array(substr((string) $url, -1), ['/', '#'], true)) { // get rid of "/" and "#" and the end of urls
+            return substr((string) $url, 0, \strlen((string) $url));
         }
 
         return $url;

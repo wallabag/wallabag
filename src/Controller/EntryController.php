@@ -67,7 +67,7 @@ class EntryController extends AbstractController
             $action = 'tag';
 
             if (isset($values['tags'])) {
-                $labels = array_filter(explode(',', $values['tags']),
+                $labels = array_filter(explode(',', (string) $values['tags']),
                     function ($v) {
                         $v = trim($v);
 
@@ -616,7 +616,7 @@ class EntryController extends AbstractController
      */
     private function showEntries($type, Request $request, $page)
     {
-        $searchTerm = (isset($request->query->all('search_entry')['term']) ? trim($request->query->all('search_entry')['term']) : '');
+        $searchTerm = (isset($request->query->all('search_entry')['term']) ? trim((string) $request->query->all('search_entry')['term']) : '');
         $currentRoute = $request->query->get('currentRoute') ?? '';
         $currentEntryId = $request->attributes->getInt('id');
 

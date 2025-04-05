@@ -34,20 +34,20 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
     public function getFilters(): array
     {
         return [
-            new TwigFilter('removeWww', [$this, 'removeWww']),
-            new TwigFilter('removeScheme', [$this, 'removeScheme']),
-            new TwigFilter('removeSchemeAndWww', [$this, 'removeSchemeAndWww']),
+            new TwigFilter('removeWww', $this->removeWww(...)),
+            new TwigFilter('removeScheme', $this->removeScheme(...)),
+            new TwigFilter('removeSchemeAndWww', $this->removeSchemeAndWww(...)),
         ];
     }
 
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('count_entries', [$this, 'countEntries']),
-            new TwigFunction('count_tags', [$this, 'countTags']),
-            new TwigFunction('display_stats', [$this, 'displayStats']),
-            new TwigFunction('asset_file_exists', [$this, 'assetFileExists']),
-            new TwigFunction('theme_class', [$this, 'themeClass']),
+            new TwigFunction('count_entries', $this->countEntries(...)),
+            new TwigFunction('count_tags', $this->countTags(...)),
+            new TwigFunction('display_stats', $this->displayStats(...)),
+            new TwigFunction('asset_file_exists', $this->assetFileExists(...)),
+            new TwigFunction('theme_class', $this->themeClass(...)),
         ];
     }
 

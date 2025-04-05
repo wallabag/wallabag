@@ -36,7 +36,7 @@ class FeedControllerTest extends WallabagTestCase
         $this->assertSame('admin', $xpath->query('/a:feed/a:author/a:name')->item(0)->nodeValue);
 
         $this->assertSame(1, $xpath->query('/a:feed/a:subtitle')->length);
-        if (null !== $tagValue && str_starts_with($type, 'tag')) {
+        if (null !== $tagValue && str_starts_with((string) $type, 'tag')) {
             $this->assertSame('wallabag — ' . $type . ' ' . $tagValue . ' feed', $xpath->query('/a:feed/a:title')->item(0)->nodeValue);
             $this->assertSame('Atom feed for entries tagged with ' . $tagValue, $xpath->query('/a:feed/a:subtitle')->item(0)->nodeValue);
         } else {
