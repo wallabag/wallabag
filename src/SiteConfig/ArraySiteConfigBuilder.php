@@ -25,10 +25,6 @@ class ArraySiteConfigBuilder implements SiteConfigBuilder
             $host = substr($host, 4);
         }
 
-        if (isset($this->configs[$host])) {
-            return $this->configs[$host];
-        }
-
-        return false;
+        return $this->configs[$host] ?? false;
     }
 }

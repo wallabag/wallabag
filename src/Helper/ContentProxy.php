@@ -59,7 +59,7 @@ class ContentProxy
 
             $fetchedContent['title'] = $this->sanitizeContentTitle(
                 $fetchedContent['title'],
-                isset($fetchedContent['headers']['content-type']) ? $fetchedContent['headers']['content-type'] : ''
+                $fetchedContent['headers']['content-type'] ?? ''
             );
 
             // when content is imported, we have information in $content

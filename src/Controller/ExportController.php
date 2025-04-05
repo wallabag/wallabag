@@ -77,8 +77,8 @@ class ExportController extends AbstractController
 
             $title = 'Tag ' . $tag->getLabel();
         } elseif ('search' === $category) {
-            $searchTerm = (isset($request->query->all('search_entry')['term']) ? $request->query->all('search_entry')['term'] : '');
-            $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
+            $searchTerm = $request->query->all('search_entry')['term'] ?? '';
+            $currentRoute = $request->query->get('currentRoute') ?? '';
 
             $entries = $entryRepository->getBuilderForSearchByUser(
                 $this->getUser()->getId(),
