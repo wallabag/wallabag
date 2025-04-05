@@ -1,21 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/Entity/Tag.php
-
-		-
-			message: "#^Negated boolean expression is always true\\.$#"
-			count: 1
-			path: src/Entity/Tag.php
-
-		-
-			message: "#^Unreachable statement \\- code above always terminates\\.$#"
-			count: 1
-			path: src/Entity/Tag.php
-
-		-
 			message: "#^Property Wallabag\\\\Entity\\\\User\\:\\:\\$clients \\(Doctrine\\\\Common\\\\Collections\\\\ArrayCollection&iterable\\<Wallabag\\\\Entity\\\\Api\\\\Client\\>\\) in empty\\(\\) is not falsy\\.$#"
 			count: 1
 			path: src/Entity/User.php
