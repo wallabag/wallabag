@@ -34,9 +34,7 @@ class AuthenticatorProvider implements ExpressionFunctionProviderInterface
             function (): void {
                 throw new \Exception('Not supported');
             },
-            function (array $arguments, $uri) {
-                return $this->requestHtmlFunctionClient->request('GET', $uri)->getContent();
-            }
+            fn (array $arguments, $uri) => $this->requestHtmlFunctionClient->request('GET', $uri)->getContent()
         );
     }
 

@@ -294,9 +294,7 @@ class DownloadImages
                 preg_match_all($pattern, $srcsetAttribute, $matches);
 
                 $srcset = \call_user_func_array('array_merge', $matches);
-                $srcsetUrls = array_map(function ($src) {
-                    return trim(explode(' ', $src, 2)[0]);
-                }, $srcset);
+                $srcsetUrls = array_map(fn ($src) => trim(explode(' ', $src, 2)[0]), $srcset);
                 $urls = array_merge($srcsetUrls, $urls);
             }
 

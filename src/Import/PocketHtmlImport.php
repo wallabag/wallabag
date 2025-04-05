@@ -56,13 +56,11 @@ class PocketHtmlImport extends HtmlImport
             return false;
         }
 
-        $entries = $hrefs->each(function (Crawler $node) {
-            return [
-                'url' => $node->attr('href'),
-                'tags' => $node->attr('tags'),
-                'created_at' => $node->attr('time_added'),
-            ];
-        });
+        $entries = $hrefs->each(fn (Crawler $node) => [
+            'url' => $node->attr('href'),
+            'tags' => $node->attr('tags'),
+            'created_at' => $node->attr('time_added'),
+        ]);
 
         if ($this->producer) {
             $this->parseEntriesForProducer($entries);

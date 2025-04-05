@@ -207,9 +207,7 @@ JSON
         $this->em
             ->expects($this->any())
             ->method('persist')
-            ->with($this->callback(function ($persistedEntry) {
-                return (bool) $persistedEntry->isArchived() && (bool) $persistedEntry->isStarred();
-            }));
+            ->with($this->callback(fn ($persistedEntry) => (bool) $persistedEntry->isArchived() && (bool) $persistedEntry->isStarred()));
 
         $entry = new Entry($this->user);
 
@@ -299,9 +297,7 @@ JSON
         $this->em
             ->expects($this->any())
             ->method('persist')
-            ->with($this->callback(function ($persistedEntry) {
-                return (bool) $persistedEntry->isArchived();
-            }));
+            ->with($this->callback(fn ($persistedEntry) => (bool) $persistedEntry->isArchived()));
 
         $entry = new Entry($this->user);
 
