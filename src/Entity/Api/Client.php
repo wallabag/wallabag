@@ -9,43 +9,34 @@ use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
 use OpenApi\Annotations as OA;
 use Wallabag\Entity\User;
+use Wallabag\Repository\Api\ClientRepository;
 
-/**
- * @ORM\Table("oauth2_clients")
- * @ORM\Entity(repositoryClass="Wallabag\Repository\Api\ClientRepository")
- */
+#[ORM\Table('oauth2_clients')]
+#[ORM\Entity(repositoryClass: ClientRepository::class)]
 class Client extends BaseClient
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+    #[ORM\Id]
+    #[ORM\Column(type: 'integer')]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="text", nullable=false)
      *
      * @OA\Property(
      *      description="Name of the API client",
      *      type="string",
      *      example="Default Client",
      * )
-     *
      * @Groups({"user_api_with_client"})
      */
+    #[ORM\Column(name: 'name', type: 'text', nullable: false)]
     protected $name;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Wallabag\Entity\Api\RefreshToken", mappedBy="client", cascade={"remove"})
-     */
+    #[ORM\OneToMany(targetEntity: RefreshToken::class, mappedBy: 'client', cascade: ['remove'])]
     protected $refreshTokens;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Wallabag\Entity\Api\AccessToken", mappedBy="client", cascade={"remove"})
-     */
+    #[ORM\OneToMany(targetEntity: AccessToken::class, mappedBy: 'client', cascade: ['remove'])]
     protected $accessTokens;
 
     /**
@@ -62,9 +53,7 @@ class Client extends BaseClient
      */
     protected $secret;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Wallabag\Entity\User", inversedBy="clients")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'clients')]
     private $user;
 
     public function __construct(User $user)

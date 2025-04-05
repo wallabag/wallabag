@@ -6,18 +6,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Wallabag\Repository\ConfigRepository;
 
 /**
  * Config.
- *
- * @ORM\Entity(repositoryClass="Wallabag\Repository\ConfigRepository")
- * @ORM\Table(
- *     name="`config`",
- *     indexes={
- *         @ORM\Index(columns={"feed_token"}),
- *     }
- * )
  */
+#[ORM\Table(name: '`config`')]
+#[ORM\Index(columns: ['feed_token'])]
+#[ORM\Entity(repositoryClass: ConfigRepository::class)]
 class Config
 {
     public const REDIRECT_TO_HOMEPAGE = 0;
@@ -26,12 +22,11 @@ class Config
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     *
      * @Groups({"config_api"})
      */
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private $id;
 
     /**
@@ -43,150 +38,134 @@ class Config
      *      max = 100000,
      *      maxMessage = "validator.item_per_page_too_high"
      * )
-     * @ORM\Column(name="items_per_page", type="integer", nullable=false)
      *
      * @Groups({"config_api"})
      */
+    #[ORM\Column(name: 'items_per_page', type: 'integer', nullable: false)]
     private $itemsPerPage;
 
     /**
      * @var string
      *
      * @Assert\NotBlank()
-     * @ORM\Column(name="language", type="string", nullable=false)
      *
      * @Groups({"config_api"})
      */
+    #[ORM\Column(name: 'language', type: 'string', nullable: false)]
     private $language;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="feed_token", type="string", nullable=true)
-     *
      * @Groups({"config_api"})
      */
+    #[ORM\Column(name: 'feed_token', type: 'string', nullable: true)]
     private $feedToken;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(name="feed_limit", type="integer", nullable=true)
      * @Assert\Range(
      *      min = 1,
      *      max = 100000,
      *      maxMessage = "validator.feed_limit_too_high"
      * )
-     *
      * @Groups({"config_api"})
      */
+    #[ORM\Column(name: 'feed_limit', type: 'integer', nullable: true)]
     private $feedLimit;
 
     /**
      * @var float|null
      *
-     * @ORM\Column(name="reading_speed", type="float", nullable=true)
-     *
      * @Groups({"config_api"})
      */
+    #[ORM\Column(name: 'reading_speed', type: 'float', nullable: true)]
     private $readingSpeed;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(name="pocket_consumer_key", type="string", nullable=true)
      */
+    #[ORM\Column(name: 'pocket_consumer_key', type: 'string', nullable: true)]
     private $pocketConsumerKey;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(name="action_mark_as_read", type="integer", nullable=true, options={"default" = 0})
-     *
      * @Groups({"config_api"})
      */
+    #[ORM\Column(name: 'action_mark_as_read', type: 'integer', nullable: true, options: ['default' => 0])]
     private $actionMarkAsRead;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(name="list_mode", type="integer", nullable=true)
-     *
      * @Groups({"config_api"})
      */
+    #[ORM\Column(name: 'list_mode', type: 'integer', nullable: true)]
     private $listMode;
 
     /**
      * @var int|null
      *
-     * @ORM\Column(name="display_thumbnails", type="integer", nullable=true, options={"default" = 1})
-     *
      * @Groups({"config_api"})
      */
+    #[ORM\Column(name: 'display_thumbnails', type: 'integer', nullable: true, options: ['default' => 1])]
     private $displayThumbnails;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="font", type="text", nullable=true)
-     *
      * @Groups({"config_api"})
      */
+    #[ORM\Column(name: 'font', type: 'text', nullable: true)]
     private $font;
 
     /**
      * @var float|null
      *
-     * @ORM\Column(name="fontsize", type="float", nullable=true)
-     *
      * @Groups({"config_api"})
      */
+    #[ORM\Column(name: 'fontsize', type: 'float', nullable: true)]
     private $fontsize;
 
     /**
      * @var float|null
      *
-     * @ORM\Column(name="line_height", type="float", nullable=true)
-     *
      * @Groups({"config_api"})
      */
+    #[ORM\Column(name: 'line_height', type: 'float', nullable: true)]
     private $lineHeight;
 
     /**
      * @var float|null
      *
-     * @ORM\Column(name="max_width", type="float", nullable=true)
-     *
      * @Groups({"config_api"})
      */
+    #[ORM\Column(name: 'max_width', type: 'float', nullable: true)]
     private $maxWidth;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(name="custom_css", type="text", nullable=true)
      */
+    #[ORM\Column(name: 'custom_css', type: 'text', nullable: true)]
     private $customCSS;
 
-    /**
-     * @ORM\OneToOne(targetEntity="Wallabag\Entity\User", inversedBy="config")
-     */
+    #[ORM\OneToOne(targetEntity: User::class, inversedBy: 'config')]
     private $user;
 
     /**
      * @var ArrayCollection<TaggingRule>
-     *
-     * @ORM\OneToMany(targetEntity="Wallabag\Entity\TaggingRule", mappedBy="config", cascade={"remove"})
-     * @ORM\OrderBy({"id" = "ASC"})
      */
+    #[ORM\OneToMany(targetEntity: TaggingRule::class, mappedBy: 'config', cascade: ['remove'])]
+    #[ORM\OrderBy(['id' => 'ASC'])]
     private $taggingRules;
 
     /**
      * @var ArrayCollection<IgnoreOriginUserRule>
-     *
-     * @ORM\OneToMany(targetEntity="Wallabag\Entity\IgnoreOriginUserRule", mappedBy="config", cascade={"remove"})
-     * @ORM\OrderBy({"id" = "ASC"})
      */
+    #[ORM\OneToMany(targetEntity: IgnoreOriginUserRule::class, mappedBy: 'config', cascade: ['remove'])]
+    #[ORM\OrderBy(['id' => 'ASC'])]
     private $ignoreOriginRules;
 
     /*

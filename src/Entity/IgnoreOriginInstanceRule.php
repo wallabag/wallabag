@@ -5,22 +5,21 @@ namespace Wallabag\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\RulerZ\Validator\Constraints as RulerZAssert;
 use Symfony\Component\Validator\Constraints as Assert;
+use Wallabag\Repository\IgnoreOriginInstanceRuleRepository;
 
 /**
  * Ignore Origin rule.
- *
- * @ORM\Entity(repositoryClass="Wallabag\Repository\IgnoreOriginInstanceRuleRepository")
- * @ORM\Table(name="`ignore_origin_instance_rule`")
  */
+#[ORM\Table(name: '`ignore_origin_instance_rule`')]
+#[ORM\Entity(repositoryClass: IgnoreOriginInstanceRuleRepository::class)]
 class IgnoreOriginInstanceRule implements IgnoreOriginRuleInterface, RuleInterface
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private $id;
 
     /**
@@ -32,8 +31,8 @@ class IgnoreOriginInstanceRule implements IgnoreOriginRuleInterface, RuleInterfa
      *  allowed_variables={"host","_all"},
      *  allowed_operators={"=","~"}
      * )
-     * @ORM\Column(name="rule", type="string", nullable=false)
      */
+    #[ORM\Column(name: 'rule', type: 'string', nullable: false)]
     private $rule;
 
     /**

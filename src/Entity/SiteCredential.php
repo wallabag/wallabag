@@ -5,25 +5,24 @@ namespace Wallabag\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\Helper\EntityTimestampsTrait;
+use Wallabag\Repository\SiteCredentialRepository;
 
 /**
  * SiteCredential.
- *
- * @ORM\Entity(repositoryClass="Wallabag\Repository\SiteCredentialRepository")
- * @ORM\Table(name="`site_credential`")
- * @ORM\HasLifecycleCallbacks()
  */
+#[ORM\Table(name: '`site_credential`')]
+#[ORM\Entity(repositoryClass: SiteCredentialRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class SiteCredential
 {
     use EntityTimestampsTrait;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private $id;
 
     /**
@@ -31,44 +30,40 @@ class SiteCredential
      *
      * @Assert\NotBlank()
      * @Assert\Length(max=255)
-     * @ORM\Column(name="host", type="string", length=255)
      */
+    #[ORM\Column(name: 'host', type: 'string', length: 255)]
     private $host;
 
     /**
      * @var string
      *
      * @Assert\NotBlank()
-     * @ORM\Column(name="username", type="text")
      */
+    #[ORM\Column(name: 'username', type: 'text')]
     private $username;
 
     /**
      * @var string
      *
      * @Assert\NotBlank()
-     * @ORM\Column(name="password", type="text")
      */
+    #[ORM\Column(name: 'password', type: 'text')]
     private $password;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="createdAt", type="datetime")
      */
+    #[ORM\Column(name: 'createdAt', type: 'datetime')]
     private $createdAt;
 
     /**
      * @var \DateTime|null
-     *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
+    #[ORM\Column(name: 'updated_at', type: 'datetime', nullable: true)]
     private $updatedAt;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Wallabag\Entity\User", inversedBy="siteCredentials")
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'siteCredentials')]
     private $user;
 
     /*

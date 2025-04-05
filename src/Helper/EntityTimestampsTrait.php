@@ -9,10 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 trait EntityTimestampsTrait
 {
-    /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
     public function timestamps()
     {
         if (null === $this->createdAt) {
