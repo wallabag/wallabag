@@ -161,7 +161,7 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $searchTerm = (isset($request->query->all('search_user')['term']) ? $request->query->all('search_user')['term'] : '');
+            $searchTerm = $request->query->all('search_user')['term'] ?? '';
 
             $qb = $userRepository->getQueryBuilderForSearch($searchTerm);
         }
