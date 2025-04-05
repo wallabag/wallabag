@@ -10,49 +10,46 @@ use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Component\Validator\Constraints as Assert;
 use Wallabag\Helper\EntityTimestampsTrait;
+use Wallabag\Repository\AnnotationRepository;
 
 /**
  * Annotation.
  *
- * @ORM\Table(name="annotation")
- * @ORM\Entity(repositoryClass="Wallabag\Repository\AnnotationRepository")
- * @ORM\HasLifecycleCallbacks()
  * @ExclusionPolicy("none")
  */
+#[ORM\Table(name: 'annotation')]
+#[ORM\Entity(repositoryClass: AnnotationRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Annotation
 {
     use EntityTimestampsTrait;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="text", type="text")
-     *
      * @Groups({"entries_for_user", "export_all"})
      */
+    #[ORM\Column(name: 'text', type: 'text')]
     private $text;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime")
      */
+    #[ORM\Column(name: 'created_at', type: 'datetime')]
     private $createdAt;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime")
      */
+    #[ORM\Column(name: 'updated_at', type: 'datetime')]
     private $updatedAt;
 
     /**
@@ -62,34 +59,31 @@ class Annotation
      *     max = 10000,
      *     maxMessage = "validator.quote_length_too_high"
      * )
-     * @ORM\Column(name="quote", type="text")
      *
      * @Groups({"entries_for_user", "export_all"})
      */
+    #[ORM\Column(name: 'quote', type: 'text')]
     private $quote;
 
     /**
      * @var array
      *
-     * @ORM\Column(name="ranges", type="array")
-     *
      * @Groups({"entries_for_user", "export_all"})
      */
+    #[ORM\Column(name: 'ranges', type: 'array')]
     private $ranges;
 
     /**
      * @Exclude
-     *
-     * @ORM\ManyToOne(targetEntity="Wallabag\Entity\User")
      */
+    #[ORM\ManyToOne(targetEntity: User::class)]
     private $user;
 
     /**
      * @Exclude
-     *
-     * @ORM\ManyToOne(targetEntity="Wallabag\Entity\Entry", inversedBy="annotations")
-     * @ORM\JoinColumn(name="entry_id", referencedColumnName="id", onDelete="cascade")
      */
+    #[ORM\JoinColumn(name: 'entry_id', referencedColumnName: 'id', onDelete: 'cascade')]
+    #[ORM\ManyToOne(targetEntity: Entry::class, inversedBy: 'annotations')]
     private $entry;
 
     /*

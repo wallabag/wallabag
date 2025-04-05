@@ -8,24 +8,23 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\XmlRoot;
 use Symfony\Bridge\RulerZ\Validator\Constraints as RulerZAssert;
 use Symfony\Component\Validator\Constraints as Assert;
+use Wallabag\Repository\TaggingRuleRepository;
 
 /**
  * Tagging rule.
  *
  * @XmlRoot("tagging_rule")
- * @ORM\Entity(repositoryClass="Wallabag\Repository\TaggingRuleRepository")
- * @ORM\Table(name="`tagging_rule`")
- * @ORM\Entity
  */
+#[ORM\Table(name: '`tagging_rule`')]
+#[ORM\Entity(repositoryClass: TaggingRuleRepository::class)]
 class TaggingRule implements RuleInterface
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private $id;
 
     /**
@@ -37,27 +36,26 @@ class TaggingRule implements RuleInterface
      *  allowed_variables={"title", "url", "isArchived", "isStarred", "content", "language", "mimetype", "readingTime", "domainName"},
      *  allowed_operators={">", "<", ">=", "<=", "=", "is", "!=", "and", "not", "or", "matches", "notmatches"}
      * )
-     * @ORM\Column(name="rule", type="string", nullable=false)
      *
      * @Groups({"export_tagging_rule"})
      */
+    #[ORM\Column(name: 'rule', type: 'string', nullable: false)]
     private $rule;
 
     /**
      * @var array<string>
      *
      * @Assert\NotBlank()
-     * @ORM\Column(name="tags", type="simple_array", nullable=false)
      *
      * @Groups({"export_tagging_rule"})
      */
+    #[ORM\Column(name: 'tags', type: 'simple_array', nullable: false)]
     private $tags = [];
 
     /**
      * @Exclude
-     *
-     * @ORM\ManyToOne(targetEntity="Wallabag\Entity\Config", inversedBy="taggingRules")
      */
+    #[ORM\ManyToOne(targetEntity: Config::class, inversedBy: 'taggingRules')]
     private $config;
 
     /**

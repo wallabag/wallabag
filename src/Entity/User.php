@@ -16,18 +16,19 @@ use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface as GoogleTwoFactorInte
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Wallabag\Entity\Api\Client;
 use Wallabag\Helper\EntityTimestampsTrait;
+use Wallabag\Repository\UserRepository;
 
 /**
  * User.
  *
  * @XmlRoot("user")
- * @ORM\Entity(repositoryClass="Wallabag\Repository\UserRepository")
- * @ORM\Table(name="`user`")
- * @ORM\HasLifecycleCallbacks()
  *
  * @UniqueEntity("email")
  * @UniqueEntity("username")
  */
+#[ORM\Table(name: '`user`')]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorInterface, BackupCodeInterface
 {
     use EntityTimestampsTrait;
@@ -35,10 +36,6 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     /** @Serializer\XmlAttribute */
     /**
      * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      *
      * @OA\Property(
      *      description="The unique numeric id of the user",
@@ -48,21 +45,22 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      *
      * @Groups({"user_api", "user_api_with_client"})
      */
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     protected $id;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(name="name", type="text", nullable=true)
      *
      * @OA\Property(
      *      description="The personal Name of the user",
      *      type="string",
      *      example="Walla Baggger",
      * )
-     *
      * @Groups({"user_api", "user_api_with_client"})
      */
+    #[ORM\Column(name: 'name', type: 'text', nullable: true)]
     protected $name;
 
     /**
@@ -94,55 +92,45 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_at", type="datetime")
-     *
      * @OA\Property(
      *      description="Creation date of the user account. (In ISO 8601 format)",
      *      type="string",
      *      example="2023-06-27T19:25:44+0000",
      * )
-     *
      * @Groups({"user_api", "user_api_with_client"})
      */
+    #[ORM\Column(name: 'created_at', type: 'datetime')]
     protected $createdAt;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime")
      *
      * @OA\Property(
      *      description="Update date of the user account. (In ISO 8601 format)",
      *      type="string",
      *      example="2023-06-27T19:37:30+0000",
      * )
-     *
      * @Groups({"user_api", "user_api_with_client"})
      */
+    #[ORM\Column(name: 'updated_at', type: 'datetime')]
     protected $updatedAt;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Wallabag\Entity\Entry", mappedBy="user", cascade={"remove"})
-     */
+    #[ORM\OneToMany(targetEntity: Entry::class, mappedBy: 'user', cascade: ['remove'])]
     protected $entries;
 
-    /**
-     * @ORM\OneToOne(targetEntity="Wallabag\Entity\Config", mappedBy="user", cascade={"remove"})
-     */
+    #[ORM\OneToOne(targetEntity: Config::class, mappedBy: 'user', cascade: ['remove'])]
     protected $config;
 
     /**
      * @var ArrayCollection&iterable<SiteCredential>
-     *
-     * @ORM\OneToMany(targetEntity="Wallabag\Entity\SiteCredential", mappedBy="user", cascade={"remove"})
      */
+    #[ORM\OneToMany(targetEntity: SiteCredential::class, mappedBy: 'user', cascade: ['remove'])]
     protected $siteCredentials;
 
     /**
      * @var ArrayCollection&iterable<Client>
-     *
-     * @ORM\OneToMany(targetEntity="Wallabag\Entity\Api\Client", mappedBy="user", cascade={"remove"})
      */
+    #[ORM\OneToMany(targetEntity: Client::class, mappedBy: 'user', cascade: ['remove'])]
     protected $clients;
 
     /**
@@ -158,28 +146,22 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      */
     protected $default_client;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $authCode;
 
-    /**
-     * @ORM\Column(name="googleAuthenticatorSecret", type="string", nullable=true)
-     */
+    #[ORM\Column(name: 'googleAuthenticatorSecret', type: 'string', nullable: true)]
     private $googleAuthenticatorSecret;
 
     /**
      * @var array
-     *
-     * @ORM\Column(type="json", nullable=true)
      */
+    #[ORM\Column(type: 'json', nullable: true)]
     private $backupCodes;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(type="boolean")
      */
+    #[ORM\Column(type: 'boolean')]
     private $emailTwoFactor = false;
 
     public function __construct()

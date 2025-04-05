@@ -8,50 +8,45 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\XmlRoot;
+use Wallabag\Repository\TagRepository;
 
 /**
  * Tag.
  *
  * @XmlRoot("tag")
- * @ORM\Table(
- *     name="`tag`",
- *     indexes={
- *         @ORM\Index(columns={"label"}),
- *     }
- * )
- * @ORM\Entity(repositoryClass="Wallabag\Repository\TagRepository")
  * @ExclusionPolicy("all")
  */
+#[ORM\Table(name: '`tag`')]
+#[ORM\Index(columns: ['label'])]
+#[ORM\Entity(repositoryClass: TagRepository::class)]
 class Tag
 {
     /**
      * @var int
      *
      * @Expose
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private $id;
 
     /**
      * @var string
      *
      * @Expose
-     * @ORM\Column(name="label", type="text")
      */
+    #[ORM\Column(name: 'label', type: 'text')]
     private $label;
 
     /**
      * @Expose
      * @Gedmo\Slug(fields={"label"}, prefix="t:")
-     * @ORM\Column(length=128, unique=true)
      */
+    #[ORM\Column(length: 128, unique: true)]
     private $slug;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Entry", mappedBy="tags", cascade={"persist"})
-     */
+    #[ORM\ManyToMany(targetEntity: Entry::class, mappedBy: 'tags', cascade: ['persist'])]
     private $entries;
 
     public function __construct()

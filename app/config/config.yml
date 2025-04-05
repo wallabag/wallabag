@@ -78,7 +78,7 @@ doctrine:
                 auto_mapping: true
                 mappings:
                     Wallabag:
-                        type: annotation
+                        type: attribute
                         is_bundle: false
                         dir: '%kernel.project_dir%/src/Entity'
                         prefix: 'Wallabag\Entity'
