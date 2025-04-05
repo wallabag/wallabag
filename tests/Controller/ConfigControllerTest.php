@@ -351,7 +351,7 @@ class ConfigControllerTest extends WallabagTestCase
         );
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $content = json_decode($client->getResponse()->getContent(), true);
+        $content = json_decode((string) $client->getResponse()->getContent(), true);
         $this->assertArrayHasKey('token', $content);
     }
 
@@ -1296,7 +1296,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertSame('attachment; filename="tagging_rules_admin.json"', $headers->get('content-disposition'));
         $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
 
-        $content = json_decode($client->getResponse()->getContent(), true);
+        $content = json_decode((string) $client->getResponse()->getContent(), true);
 
         $this->assertCount(4, $content);
         $this->assertSame('content matches "spurs"', $content[0]['rule']);

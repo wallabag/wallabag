@@ -15,15 +15,11 @@ class UpdatePicturesPathCommand extends Command
     protected static $defaultName = 'wallabag:update-pictures-path';
     protected static $defaultDescription = 'Update the path of the pictures for each entry when you changed your wallabag instance URL.';
 
-    private EntityManagerInterface $entityManager;
-    private EntryRepository $entryRepository;
-    private string $wallabagUrl;
-
-    public function __construct(EntityManagerInterface $entityManager, EntryRepository $entryRepository, $wallabagUrl)
-    {
-        $this->entityManager = $entityManager;
-        $this->entryRepository = $entryRepository;
-        $this->wallabagUrl = $wallabagUrl;
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly EntryRepository $entryRepository,
+        private readonly string $wallabagUrl,
+    ) {
         parent::__construct();
     }
 

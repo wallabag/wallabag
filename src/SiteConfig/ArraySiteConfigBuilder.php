@@ -21,14 +21,10 @@ class ArraySiteConfigBuilder implements SiteConfigBuilder
     {
         $host = strtolower($host);
 
-        if ('www.' === substr($host, 0, 4)) {
+        if (str_starts_with($host, 'www.')) {
             $host = substr($host, 4);
         }
 
-        if (isset($this->configs[$host])) {
-            return $this->configs[$host];
-        }
-
-        return false;
+        return $this->configs[$host] ?? false;
     }
 }

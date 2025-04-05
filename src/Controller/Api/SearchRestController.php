@@ -55,11 +55,10 @@ class SearchRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/search.{_format}", name="api_get_search", methods={"GET"}, defaults={"_format": "json"})
-     * @IsGranted("LIST_ENTRIES")
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/search.{_format}', name: 'api_get_search', methods: ['GET'], defaults: ['_format' => 'json'])]
+    #[IsGranted('LIST_ENTRIES')]
     public function getSearchAction(Request $request, EntryRepository $entryRepository)
     {
         $term = $request->query->get('term');

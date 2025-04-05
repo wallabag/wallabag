@@ -9,15 +9,11 @@ use Wallabag\Repository\IgnoreOriginInstanceRuleRepository;
 
 class RuleBasedIgnoreOriginProcessor
 {
-    protected $rulerz;
-    protected $logger;
-    protected $ignoreOriginInstanceRuleRepository;
-
-    public function __construct(RulerZ $rulerz, LoggerInterface $logger, IgnoreOriginInstanceRuleRepository $ignoreOriginInstanceRuleRepository)
-    {
-        $this->rulerz = $rulerz;
-        $this->logger = $logger;
-        $this->ignoreOriginInstanceRuleRepository = $ignoreOriginInstanceRuleRepository;
+    public function __construct(
+        protected RulerZ $rulerz,
+        protected LoggerInterface $logger,
+        protected IgnoreOriginInstanceRuleRepository $ignoreOriginInstanceRuleRepository,
+    ) {
     }
 
     /**

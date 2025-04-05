@@ -15,11 +15,9 @@ use Simpleue\Queue\RedisQueue;
  */
 class Producer implements ProducerInterface
 {
-    private $queue;
-
-    public function __construct(RedisQueue $queue)
-    {
-        $this->queue = $queue;
+    public function __construct(
+        private readonly RedisQueue $queue,
+    ) {
     }
 
     /**

@@ -11,16 +11,11 @@ use Symfony\Component\Form\DataTransformerInterface;
 class StringToListTransformer implements DataTransformerInterface
 {
     /**
-     * @var string
-     */
-    private $separator;
-
-    /**
      * @param string $separator The separator used in the list
      */
-    public function __construct($separator = ',')
-    {
-        $this->separator = $separator;
+    public function __construct(
+        private $separator = ',',
+    ) {
     }
 
     /**

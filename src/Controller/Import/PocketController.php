@@ -17,23 +17,16 @@ use Wallabag\Redis\Producer as RedisProducer;
 
 class PocketController extends AbstractController
 {
-    private Config $craueConfig;
-    private RabbitMqProducer $rabbitMqProducer;
-    private RedisProducer $redisProducer;
-    private SessionInterface $session;
-
-    public function __construct(Config $craueConfig, RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer, SessionInterface $session)
-    {
-        $this->craueConfig = $craueConfig;
-        $this->rabbitMqProducer = $rabbitMqProducer;
-        $this->redisProducer = $redisProducer;
-        $this->session = $session;
+    public function __construct(
+        private readonly Config $craueConfig,
+        private readonly RabbitMqProducer $rabbitMqProducer,
+        private readonly RedisProducer $redisProducer,
+        private readonly SessionInterface $session,
+    ) {
     }
 
-    /**
-     * @Route("/import/pocket", name="import_pocket", methods={"GET"})
-     * @IsGranted("IMPORT_ENTRIES")
-     */
+    #[Route(path: '/import/pocket', name: 'import_pocket', methods: ['GET'])]
+    #[IsGranted('IMPORT_ENTRIES')]
     public function indexAction(PocketImport $pocketImport)
     {
         $pocket = $this->getPocketImportService($pocketImport);
@@ -52,10 +45,8 @@ class PocketController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/import/pocket/auth", name="import_pocket_auth", methods={"POST"})
-     * @IsGranted("IMPORT_ENTRIES")
-     */
+    #[Route(path: '/import/pocket/auth', name: 'import_pocket_auth', methods: ['POST'])]
+    #[IsGranted('IMPORT_ENTRIES')]
     public function authAction(Request $request, PocketImport $pocketImport)
     {
         $requestToken = $this->getPocketImportService($pocketImport)
@@ -83,10 +74,8 @@ class PocketController extends AbstractController
         );
     }
 
-    /**
-     * @Route("/import/pocket/callback", name="import_pocket_callback", methods={"GET"})
-     * @IsGranted("IMPORT_ENTRIES")
-     */
+    #[Route(path: '/import/pocket/callback', name: 'import_pocket_callback', methods: ['GET'])]
+    #[IsGranted('IMPORT_ENTRIES')]
     public function callbackAction(PocketImport $pocketImport, TranslatorInterface $translator)
     {
         $message = 'flashes.import.notice.failed';

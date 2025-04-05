@@ -9,12 +9,12 @@ use Wallabag\ExpressionLanguage\AuthenticatorProvider;
 
 class LoginFormAuthenticator
 {
-    private HttpBrowser $browser;
-    private ExpressionLanguage $expressionLanguage;
+    private readonly ExpressionLanguage $expressionLanguage;
 
-    public function __construct(HttpBrowser $browser, AuthenticatorProvider $authenticatorProvider)
-    {
-        $this->browser = $browser;
+    public function __construct(
+        private readonly HttpBrowser $browser,
+        AuthenticatorProvider $authenticatorProvider,
+    ) {
         $this->expressionLanguage = new ExpressionLanguage(null, [$authenticatorProvider]);
     }
 
@@ -66,7 +66,7 @@ class LoginFormAuthenticator
             $crawler = new Crawler((string) $html);
 
             $loggedIn = $crawler->evaluate((string) $siteConfig->getNotLoggedInXpath());
-        } catch (\Throwable $e) {
+        } catch (\Throwable) {
             return false;
         }
 
@@ -98,9 +98,9 @@ class LoginFormAuthenticator
         $extraFields = [];
 
         foreach ($siteConfig->getExtraFields() as $fieldName => $fieldValue) {
-            if ('@=' === substr($fieldValue, 0, 2)) {
+            if (str_starts_with((string) $fieldValue, '@=')) {
                 $fieldValue = $this->expressionLanguage->evaluate(
-                    substr($fieldValue, 2),
+                    substr((string) $fieldValue, 2),
                     [
                         'config' => $siteConfig,
                     ]

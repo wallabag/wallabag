@@ -10,17 +10,12 @@ use Doctrine\Migrations\Version\MigrationFactory;
  */
 class MigrationFactoryDecorator implements MigrationFactory
 {
-    private MigrationFactory $migrationFactory;
-    private string $tablePrefix;
-    private array $defaultIgnoreOriginInstanceRules;
-    private string $fetchingErrorMessage;
-
-    public function __construct(MigrationFactory $migrationFactory, string $tablePrefix, array $defaultIgnoreOriginInstanceRules, string $fetchingErrorMessage)
-    {
-        $this->migrationFactory = $migrationFactory;
-        $this->tablePrefix = $tablePrefix;
-        $this->defaultIgnoreOriginInstanceRules = $defaultIgnoreOriginInstanceRules;
-        $this->fetchingErrorMessage = $fetchingErrorMessage;
+    public function __construct(
+        private readonly MigrationFactory $migrationFactory,
+        private readonly string $tablePrefix,
+        private readonly array $defaultIgnoreOriginInstanceRules,
+        private readonly string $fetchingErrorMessage,
+    ) {
     }
 
     public function createVersion(string $migrationClassName): AbstractMigration

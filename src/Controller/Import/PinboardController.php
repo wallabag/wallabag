@@ -15,19 +15,14 @@ use Wallabag\Redis\Producer as RedisProducer;
 
 class PinboardController extends AbstractController
 {
-    private RabbitMqProducer $rabbitMqProducer;
-    private RedisProducer $redisProducer;
-
-    public function __construct(RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
-    {
-        $this->rabbitMqProducer = $rabbitMqProducer;
-        $this->redisProducer = $redisProducer;
+    public function __construct(
+        private readonly RabbitMqProducer $rabbitMqProducer,
+        private readonly RedisProducer $redisProducer,
+    ) {
     }
 
-    /**
-     * @Route("/import/pinboard", name="import_pinboard", methods={"GET", "POST"})
-     * @IsGranted("IMPORT_ENTRIES")
-     */
+    #[Route(path: '/import/pinboard', name: 'import_pinboard', methods: ['GET', 'POST'])]
+    #[IsGranted('IMPORT_ENTRIES')]
     public function indexAction(Request $request, PinboardImport $pinboard, Config $craueConfig, TranslatorInterface $translator)
     {
         $form = $this->createForm(UploadImportType::class);

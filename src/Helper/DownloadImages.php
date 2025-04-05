@@ -16,19 +16,16 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 class DownloadImages
 {
     public const REGENERATE_PICTURES_QUALITY = 80;
-
-    private $client;
-    private $baseFolder;
-    private $logger;
     private $mimeTypes;
     private $wallabagUrl;
 
-    public function __construct(HttpClientInterface $downloadImagesClient, $baseFolder, $wallabagUrl, LoggerInterface $logger)
-    {
-        $this->client = $downloadImagesClient;
-        $this->baseFolder = $baseFolder;
-        $this->wallabagUrl = rtrim($wallabagUrl, '/');
-        $this->logger = $logger;
+    public function __construct(
+        private readonly HttpClientInterface $client,
+        private $baseFolder,
+        $wallabagUrl,
+        private readonly LoggerInterface $logger,
+    ) {
+        $this->wallabagUrl = rtrim((string) $wallabagUrl, '/');
         $this->mimeTypes = new MimeTypes();
 
         $this->setFolder();
@@ -174,7 +171,7 @@ class DownloadImages
 
         try {
             $im = imagecreatefromstring($res->getContent());
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             $im = false;
         }
 
@@ -193,7 +190,7 @@ class DownloadImages
                         $imagick->readImageBlob($res->getContent());
                         $imagick->setImageFormat('gif');
                         $imagick->writeImages($localPath, true);
-                    } catch (\Exception $e) {
+                    } catch (\Exception) {
                         // if Imagick fail, fallback to the default solution
                         imagegif($im, $localPath);
                     }
@@ -294,9 +291,7 @@ class DownloadImages
                 preg_match_all($pattern, $srcsetAttribute, $matches);
 
                 $srcset = \call_user_func_array('array_merge', $matches);
-                $srcsetUrls = array_map(function ($src) {
-                    return trim(explode(' ', $src, 2)[0]);
-                }, $srcset);
+                $srcsetUrls = array_map(fn ($src) => trim(explode(' ', (string) $src, 2)[0]), $srcset);
                 $urls = array_merge($srcsetUrls, $urls);
             }
 

@@ -19,10 +19,6 @@ use Wallabag\Entity\User;
  */
 class EntriesExport
 {
-    private $wallabagUrl;
-    private $logoPath;
-    private $translator;
-    private $tokenStorage;
     private $title = '';
     private $entries = [];
     private $author = 'wallabag';
@@ -34,12 +30,12 @@ class EntriesExport
      * @param string                $logoPath     Path to the logo FROM THE BUNDLE SCOPE
      * @param TokenStorageInterface $tokenStorage Needed to retrieve the current user
      */
-    public function __construct(TranslatorInterface $translator, $wallabagUrl, $logoPath, TokenStorageInterface $tokenStorage)
-    {
-        $this->translator = $translator;
-        $this->wallabagUrl = $wallabagUrl;
-        $this->logoPath = $logoPath;
-        $this->tokenStorage = $tokenStorage;
+    public function __construct(
+        private readonly TranslatorInterface $translator,
+        private $wallabagUrl,
+        private $logoPath,
+        private readonly TokenStorageInterface $tokenStorage,
+    ) {
     }
 
     /**

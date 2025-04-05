@@ -27,27 +27,24 @@ class SiteCredential
 
     /**
      * @var string
-     *
-     * @Assert\NotBlank()
-     * @Assert\Length(max=255)
      */
     #[ORM\Column(name: 'host', type: 'string', length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
     private $host;
 
     /**
      * @var string
-     *
-     * @Assert\NotBlank()
      */
     #[ORM\Column(name: 'username', type: 'text')]
+    #[Assert\NotBlank]
     private $username;
 
     /**
      * @var string
-     *
-     * @Assert\NotBlank()
      */
     #[ORM\Column(name: 'password', type: 'text')]
+    #[Assert\NotBlank]
     private $password;
 
     /**

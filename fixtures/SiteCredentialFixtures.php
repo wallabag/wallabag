@@ -11,11 +11,9 @@ use Wallabag\Helper\CryptoProxy;
 
 class SiteCredentialFixtures extends Fixture implements DependentFixtureInterface
 {
-    private CryptoProxy $cryptoProxy;
-
-    public function __construct(CryptoProxy $cryptoProxy)
-    {
-        $this->cryptoProxy = $cryptoProxy;
+    public function __construct(
+        private readonly CryptoProxy $cryptoProxy,
+    ) {
     }
 
     public function load(ObjectManager $manager): void

@@ -12,11 +12,9 @@ class UserVoter extends Voter
     public const EDIT = 'EDIT';
     public const DELETE = 'DELETE';
 
-    private Security $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
+    public function __construct(
+        private readonly Security $security,
+    ) {
     }
 
     protected function supports(string $attribute, $subject): bool

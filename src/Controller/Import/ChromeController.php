@@ -13,23 +13,16 @@ use Wallabag\Redis\Producer as RedisProducer;
 
 class ChromeController extends BrowserController
 {
-    private ChromeImport $chromeImport;
-    private Config $craueConfig;
-    private RabbitMqProducer $rabbitMqProducer;
-    private RedisProducer $redisProducer;
-
-    public function __construct(ChromeImport $chromeImport, Config $craueConfig, RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
-    {
-        $this->chromeImport = $chromeImport;
-        $this->craueConfig = $craueConfig;
-        $this->rabbitMqProducer = $rabbitMqProducer;
-        $this->redisProducer = $redisProducer;
+    public function __construct(
+        private readonly ChromeImport $chromeImport,
+        private readonly Config $craueConfig,
+        private readonly RabbitMqProducer $rabbitMqProducer,
+        private readonly RedisProducer $redisProducer,
+    ) {
     }
 
-    /**
-     * @Route("/import/chrome", name="import_chrome", methods={"GET", "POST"})
-     * @IsGranted("IMPORT_ENTRIES")
-     */
+    #[Route(path: '/import/chrome', name: 'import_chrome', methods: ['GET', 'POST'])]
+    #[IsGranted('IMPORT_ENTRIES')]
     public function indexAction(Request $request, TranslatorInterface $translator)
     {
         return parent::indexAction($request, $translator);

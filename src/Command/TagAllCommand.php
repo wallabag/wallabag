@@ -18,16 +18,11 @@ class TagAllCommand extends Command
     protected static $defaultName = 'wallabag:tag:all';
     protected static $defaultDescription = 'Tag all entries using the tagging rules.';
 
-    private EntityManagerInterface $entityManager;
-    private RuleBasedTagger $ruleBasedTagger;
-    private UserRepository $userRepository;
-
-    public function __construct(EntityManagerInterface $entityManager, RuleBasedTagger $ruleBasedTagger, UserRepository $userRepository)
-    {
-        $this->entityManager = $entityManager;
-        $this->ruleBasedTagger = $ruleBasedTagger;
-        $this->userRepository = $userRepository;
-
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly RuleBasedTagger $ruleBasedTagger,
+        private readonly UserRepository $userRepository,
+    ) {
         parent::__construct();
     }
 
@@ -48,7 +43,7 @@ class TagAllCommand extends Command
 
         try {
             $user = $this->getUser($input->getArgument('username'));
-        } catch (NoResultException $e) {
+        } catch (NoResultException) {
             $io->error(\sprintf('User "%s" not found.', $input->getArgument('username')));
 
             return 1;

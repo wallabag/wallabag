@@ -17,12 +17,10 @@ class ShowUserCommand extends Command
     protected static $defaultDescription = 'Show user details';
 
     protected SymfonyStyle $io;
-    private UserRepository $userRepository;
 
-    public function __construct(UserRepository $userRepository)
-    {
-        $this->userRepository = $userRepository;
-
+    public function __construct(
+        private readonly UserRepository $userRepository,
+    ) {
         parent::__construct();
     }
 
@@ -46,7 +44,7 @@ class ShowUserCommand extends Command
         try {
             $user = $this->getUser($username);
             $this->showUser($user);
-        } catch (NoResultException $e) {
+        } catch (NoResultException) {
             $this->io->error(\sprintf('User "%s" not found.', $username));
 
             return 1;

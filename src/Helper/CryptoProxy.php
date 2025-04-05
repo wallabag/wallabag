@@ -13,13 +13,12 @@ use Psr\Log\LoggerInterface;
  */
 class CryptoProxy
 {
-    private $logger;
     private $encryptionKey;
 
-    public function __construct($encryptionKeyPath, LoggerInterface $logger)
-    {
-        $this->logger = $logger;
-
+    public function __construct(
+        $encryptionKeyPath,
+        private readonly LoggerInterface $logger,
+    ) {
         if (!file_exists($encryptionKeyPath)) {
             $key = Key::createNewRandomKey();
 

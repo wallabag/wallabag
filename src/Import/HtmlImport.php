@@ -40,13 +40,11 @@ abstract class HtmlImport extends AbstractImport
             return false;
         }
 
-        $entries = $hrefs->each(function (Crawler $node) {
-            return [
-                'url' => $node->attr('href'),
-                'tags' => $node->attr('tags'),
-                'created_at' => $node->attr('add_date'),
-            ];
-        });
+        $entries = $hrefs->each(fn (Crawler $node) => [
+            'url' => $node->attr('href'),
+            'tags' => $node->attr('tags'),
+            'created_at' => $node->attr('add_date'),
+        ]);
 
         if ($this->producer) {
             $this->parseEntriesForProducer($entries);

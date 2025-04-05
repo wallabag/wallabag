@@ -17,52 +17,17 @@ use Wallabag\Entity\User;
 class AuthCodeMailer implements AuthCodeMailerInterface
 {
     /**
-     * Mailer.
-     *
-     * @var MailerInterface
+     * @param string $senderEmail sender email address
+     * @param string $senderName  sender name
+     * @param string $supportUrl  support URL to report any bugs
      */
-    private $mailer;
-
-    /**
-     * Twig to render the html's email.
-     *
-     * @var Environment
-     */
-    private $twig;
-
-    /**
-     * Sender email address.
-     *
-     * @var string
-     */
-    private $senderEmail;
-
-    /**
-     * Sender name.
-     *
-     * @var string
-     */
-    private $senderName;
-
-    /**
-     * Support URL to report any bugs.
-     *
-     * @var string
-     */
-    private $supportUrl;
-
-    /**
-     * @param string $senderEmail
-     * @param string $senderName
-     * @param string $supportUrl  wallabag support url
-     */
-    public function __construct(MailerInterface $mailer, Environment $twig, $senderEmail, $senderName, $supportUrl)
-    {
-        $this->mailer = $mailer;
-        $this->twig = $twig;
-        $this->senderEmail = $senderEmail;
-        $this->senderName = $senderName;
-        $this->supportUrl = $supportUrl;
+    public function __construct(
+        private readonly MailerInterface $mailer,
+        private readonly Environment $twig,
+        private $senderEmail,
+        private $senderName,
+        private $supportUrl,
+    ) {
     }
 
     /**

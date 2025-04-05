@@ -37,11 +37,11 @@ $config
         'phpstan/phpstan-symfony',
         'psr/http-client',
         'psr/http-factory',
+        'rector/rector',
         'scheb/2fa-trusted-device',
         'shipmonk/composer-dependency-analyser',
         'symfony/asset',
         'symfony/css-selector',
-        'symfony/doctrine-bridge',
         'symfony/google-mailer',
         'symfony/intl',
         'symfony/phpunit-bridge',
@@ -62,6 +62,9 @@ $config
         'symfony/web-profiler-bundle',
         'symfony/web-server-bundle',
     ], [ErrorType::DEV_DEPENDENCY_IN_PROD])
+    ->ignoreErrorsOnPackages([
+        'gedmo/doctrine-extensions',
+    ], [ErrorType::SHADOW_DEPENDENCY])
 ;
 
 return $config;
