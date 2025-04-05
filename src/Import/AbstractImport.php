@@ -173,9 +173,7 @@ abstract class AbstractImport implements ImportInterface
 
                 $entryToBeFlushed = [];
 
-                // clear only affected entities
-                $this->em->clear(Entry::class);
-                $this->em->clear(Tag::class);
+                $this->em->clear();
             }
             ++$i;
         }

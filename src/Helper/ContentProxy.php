@@ -100,7 +100,9 @@ class ContentProxy
             return;
         }
 
-        $this->logger->warning('Language validation failed. ' . (string) $errors);
+        foreach ($errors as $error) {
+            $this->logger->warning('Language validation failed. ' . $error->getMessage());
+        }
     }
 
     /**
@@ -121,7 +123,9 @@ class ContentProxy
             return;
         }
 
-        $this->logger->warning('PreviewPicture validation failed. ' . (string) $errors);
+        foreach ($errors as $error) {
+            $this->logger->warning('PreviewPicture validation failed. ' . $error->getMessage());
+        }
     }
 
     /**

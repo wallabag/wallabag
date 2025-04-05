@@ -14,14 +14,12 @@ use Wallabag\Repository\UserRepository;
 
 abstract class AbstractConsumer
 {
-    protected $logger;
-
     public function __construct(
         protected EntityManagerInterface $em,
         protected UserRepository $userRepository,
         protected AbstractImport $import,
         protected EventDispatcherInterface $eventDispatcher,
-        ?LoggerInterface $logger = null,
+        protected ?LoggerInterface $logger = null,
     ) {
         $this->logger = $logger ?: new NullLogger();
     }
@@ -71,9 +69,7 @@ abstract class AbstractConsumer
             // entry saved, dispatch event about it!
             $this->eventDispatcher->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
 
-            // clear only affected entities
-            $this->em->clear(Entry::class);
-            $this->em->clear(Tag::class);
+            $this->em->clear();
         } catch (\Exception $e) {
             $this->logger->warning('Unable to save entry', ['entry' => $storedEntry, 'exception' => $e]);
 
