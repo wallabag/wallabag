@@ -107,7 +107,6 @@
         "scheb/2fa-bundle": "^5.13.2",
         "scheb/2fa-email": "^5.13.2",
         "scheb/2fa-google-authenticator": "^5.13.2",
-        "scheb/2fa-qr-code": "^5.13.2",
         "scheb/2fa-trusted-device": "^5.13.2",
         "scssphp/scssphp": "^2.0.1",
         "sensio/framework-extra-bundle": "^6.2.10",
