@@ -21,14 +21,10 @@ class ExportController extends AbstractController
     /**
      * Gets one entry content.
      *
-     * @Route("/export/{entry}.{format}", name="export_entry", methods={"GET"}, requirements={
-     *     "format": "epub|pdf|json|xml|txt|csv|md",
-     *     "entry": "\d+"
-     * })
      * @IsGranted("EXPORT", subject="entry")
-     *
      * @return Response
      */
+    #[Route(path: '/export/{entry}.{format}', name: 'export_entry', methods: ['GET'], requirements: ['format' => 'epub|pdf|json|xml|txt|csv|md', 'entry' => '\d+'])]
     public function downloadEntryAction(Request $request, EntryRepository $entryRepository, EntriesExport $entriesExport, string $format, Entry $entry)
     {
         try {
@@ -45,14 +41,10 @@ class ExportController extends AbstractController
     /**
      * Export all entries for current user.
      *
-     * @Route("/export/{category}.{format}", name="export_entries", methods={"GET"}, requirements={
-     *     "format": "epub|pdf|json|xml|txt|csv|md",
-     *     "category": "all|unread|starred|archive|tag_entries|untagged|search|annotated|same_domain"
-     * })
      * @IsGranted("EXPORT_ENTRIES")
-     *
      * @return Response
      */
+    #[Route(path: '/export/{category}.{format}', name: 'export_entries', methods: ['GET'], requirements: ['format' => 'epub|pdf|json|xml|txt|csv|md', 'category' => 'all|unread|starred|archive|tag_entries|untagged|search|annotated|same_domain'])]
     public function downloadEntriesAction(Request $request, EntryRepository $entryRepository, TagRepository $tagRepository, EntriesExport $entriesExport, string $format, string $category, int $entry = 0)
     {
         $method = ucfirst($category);

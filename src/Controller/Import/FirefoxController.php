@@ -22,9 +22,9 @@ class FirefoxController extends BrowserController
     }
 
     /**
-     * @Route("/import/firefox", name="import_firefox", methods={"GET", "POST"})
      * @IsGranted("IMPORT_ENTRIES")
      */
+    #[Route(path: '/import/firefox', name: 'import_firefox', methods: ['GET', 'POST'])]
     public function indexAction(Request $request, TranslatorInterface $translator)
     {
         return parent::indexAction($request, $translator);

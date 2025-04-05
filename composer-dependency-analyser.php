@@ -42,7 +42,6 @@ $config
         'shipmonk/composer-dependency-analyser',
         'symfony/asset',
         'symfony/css-selector',
-        'symfony/doctrine-bridge',
         'symfony/google-mailer',
         'symfony/intl',
         'symfony/phpunit-bridge',

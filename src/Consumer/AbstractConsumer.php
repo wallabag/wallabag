@@ -7,7 +7,6 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Wallabag\Entity\Entry;
-use Wallabag\Entity\Tag;
 use Wallabag\Event\EntrySavedEvent;
 use Wallabag\Import\AbstractImport;
 use Wallabag\Repository\UserRepository;

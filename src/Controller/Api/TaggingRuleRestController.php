@@ -23,10 +23,9 @@ class TaggingRuleRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/taggingrule/export.{_format}", name="api_get_taggingrule_export", methods={"GET"}, defaults={"_format": "json"})
-     *
      * @return Response
      */
+    #[Route(path: '/api/taggingrule/export.{_format}', name: 'api_get_taggingrule_export', methods: ['GET'], defaults: ['_format' => 'json'])]
     public function getTaggingruleExportAction()
     {
         $this->validateAuthentication();

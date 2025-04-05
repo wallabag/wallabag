@@ -25,14 +25,14 @@ class IgnoreOriginUserRule implements IgnoreOriginRuleInterface, RuleInterface
     /**
      * @var string
      *
-     * @Assert\NotBlank()
-     * @Assert\Length(max=255)
      * @RulerZAssert\ValidRule(
      *  allowed_variables={"host","_all"},
      *  allowed_operators={"=","~"}
      * )
      */
     #[ORM\Column(name: 'rule', type: 'string', nullable: false)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
     private $rule;
 
     #[ORM\JoinColumn(nullable: false)]

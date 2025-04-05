@@ -32,26 +32,20 @@ class Config
     /**
      * @var int
      *
-     * @Assert\NotBlank()
-     * @Assert\Range(
-     *      min = 1,
-     *      max = 100000,
-     *      maxMessage = "validator.item_per_page_too_high"
-     * )
-     *
      * @Groups({"config_api"})
      */
     #[ORM\Column(name: 'items_per_page', type: 'integer', nullable: false)]
+    #[Assert\NotBlank]
+    #[Assert\Range(min: 1, max: 100000, maxMessage: 'validator.item_per_page_too_high')]
     private $itemsPerPage;
 
     /**
      * @var string
      *
-     * @Assert\NotBlank()
-     *
      * @Groups({"config_api"})
      */
     #[ORM\Column(name: 'language', type: 'string', nullable: false)]
+    #[Assert\NotBlank]
     private $language;
 
     /**
@@ -65,14 +59,10 @@ class Config
     /**
      * @var int|null
      *
-     * @Assert\Range(
-     *      min = 1,
-     *      max = 100000,
-     *      maxMessage = "validator.feed_limit_too_high"
-     * )
      * @Groups({"config_api"})
      */
     #[ORM\Column(name: 'feed_limit', type: 'integer', nullable: true)]
+    #[Assert\Range(min: 1, max: 100000, maxMessage: 'validator.feed_limit_too_high')]
     private $feedLimit;
 
     /**

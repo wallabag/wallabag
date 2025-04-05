@@ -26,10 +26,9 @@ class TagRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/tags.{_format}", name="api_get_tags", methods={"GET"}, defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/tags.{_format}', name: 'api_get_tags', methods: ['GET'], defaults: ['_format' => 'json'])]
     public function getTagsAction(TagRepository $tagRepository)
     {
         $this->validateAuthentication();
@@ -63,10 +62,9 @@ class TagRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/tag/label.{_format}", name="api_delete_tag_label", methods={"DELETE"}, defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/tag/label.{_format}', name: 'api_delete_tag_label', methods: ['DELETE'], defaults: ['_format' => 'json'])]
     public function deleteTagLabelAction(Request $request, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
         $this->validateAuthentication();
@@ -111,10 +109,9 @@ class TagRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/tags/label.{_format}", name="api_delete_tags_label", methods={"DELETE"}, defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/tags/label.{_format}', name: 'api_delete_tags_label', methods: ['DELETE'], defaults: ['_format' => 'json'])]
     public function deleteTagsLabelAction(Request $request, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
         $this->validateAuthentication();
@@ -158,10 +155,9 @@ class TagRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/tags/{tag}.{_format}", name="api_delete_tag", methods={"DELETE"}, defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/tags/{tag}.{_format}', name: 'api_delete_tag', methods: ['DELETE'], defaults: ['_format' => 'json'])]
     public function deleteTagAction(Tag $tag, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
         $this->validateAuthentication();

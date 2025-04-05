@@ -55,14 +55,10 @@ class Annotation
     /**
      * @var string
      *
-     * @Assert\Length(
-     *     max = 10000,
-     *     maxMessage = "validator.quote_length_too_high"
-     * )
-     *
      * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'quote', type: 'text')]
+    #[Assert\Length(max: 10000, maxMessage: 'validator.quote_length_too_high')]
     private $quote;
 
     /**

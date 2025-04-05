@@ -22,9 +22,9 @@ class WallabagV2Controller extends WallabagController
     }
 
     /**
-     * @Route("/import/wallabag-v2", name="import_wallabag_v2", methods={"GET", "POST"})
      * @IsGranted("IMPORT_ENTRIES")
      */
+    #[Route(path: '/import/wallabag-v2', name: 'import_wallabag_v2', methods: ['GET', 'POST'])]
     public function indexAction(Request $request, TranslatorInterface $translator)
     {
         return parent::indexAction($request, $translator);

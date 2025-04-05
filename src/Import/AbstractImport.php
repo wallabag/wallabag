@@ -7,7 +7,6 @@ use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Wallabag\Entity\Entry;
-use Wallabag\Entity\Tag;
 use Wallabag\Entity\User;
 use Wallabag\Event\EntrySavedEvent;
 use Wallabag\Helper\ContentProxy;

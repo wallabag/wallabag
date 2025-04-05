@@ -26,9 +26,9 @@ class PocketController extends AbstractController
     }
 
     /**
-     * @Route("/import/pocket", name="import_pocket", methods={"GET"})
      * @IsGranted("IMPORT_ENTRIES")
      */
+    #[Route(path: '/import/pocket', name: 'import_pocket', methods: ['GET'])]
     public function indexAction(PocketImport $pocketImport)
     {
         $pocket = $this->getPocketImportService($pocketImport);
@@ -48,9 +48,9 @@ class PocketController extends AbstractController
     }
 
     /**
-     * @Route("/import/pocket/auth", name="import_pocket_auth", methods={"POST"})
      * @IsGranted("IMPORT_ENTRIES")
      */
+    #[Route(path: '/import/pocket/auth', name: 'import_pocket_auth', methods: ['POST'])]
     public function authAction(Request $request, PocketImport $pocketImport)
     {
         $requestToken = $this->getPocketImportService($pocketImport)
@@ -79,9 +79,9 @@ class PocketController extends AbstractController
     }
 
     /**
-     * @Route("/import/pocket/callback", name="import_pocket_callback", methods={"GET"})
      * @IsGranted("IMPORT_ENTRIES")
      */
+    #[Route(path: '/import/pocket/callback', name: 'import_pocket_callback', methods: ['GET'])]
     public function callbackAction(PocketImport $pocketImport, TranslatorInterface $translator)
     {
         $message = 'flashes.import.notice.failed';

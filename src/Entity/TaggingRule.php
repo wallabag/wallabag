@@ -30,8 +30,6 @@ class TaggingRule implements RuleInterface
     /**
      * @var string
      *
-     * @Assert\NotBlank()
-     * @Assert\Length(max=255)
      * @RulerZAssert\ValidRule(
      *  allowed_variables={"title", "url", "isArchived", "isStarred", "content", "language", "mimetype", "readingTime", "domainName"},
      *  allowed_operators={">", "<", ">=", "<=", "=", "is", "!=", "and", "not", "or", "matches", "notmatches"}
@@ -40,16 +38,17 @@ class TaggingRule implements RuleInterface
      * @Groups({"export_tagging_rule"})
      */
     #[ORM\Column(name: 'rule', type: 'string', nullable: false)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
     private $rule;
 
     /**
      * @var array<string>
      *
-     * @Assert\NotBlank()
-     *
      * @Groups({"export_tagging_rule"})
      */
     #[ORM\Column(name: 'tags', type: 'simple_array', nullable: false)]
+    #[Assert\NotBlank]
     private $tags = [];
 
     /**

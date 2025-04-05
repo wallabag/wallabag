@@ -38,9 +38,9 @@ class UserController extends AbstractController
     /**
      * Creates a new User entity.
      *
-     * @Route("/users/new", name="user_new", methods={"GET", "POST"})
      * @IsGranted("CREATE_USERS")
      */
+    #[Route(path: '/users/new', name: 'user_new', methods: ['GET', 'POST'])]
     public function newAction(Request $request, UserManagerInterface $userManager, EventDispatcherInterface $eventDispatcher)
     {
         $user = $userManager->createUser();
@@ -75,9 +75,9 @@ class UserController extends AbstractController
     /**
      * Displays a form to edit an existing User entity.
      *
-     * @Route("/users/{id}/edit", name="user_edit", methods={"GET", "POST"})
      * @IsGranted("EDIT", subject="user")
      */
+    #[Route(path: '/users/{id}/edit', name: 'user_edit', methods: ['GET', 'POST'])]
     public function editAction(Request $request, User $user, UserManagerInterface $userManager, GoogleAuthenticatorInterface $googleAuthenticator)
     {
         $deleteForm = $this->createDeleteForm($user);
@@ -118,9 +118,9 @@ class UserController extends AbstractController
     /**
      * Deletes a User entity.
      *
-     * @Route("/users/{id}", name="user_delete", methods={"DELETE"})
      * @IsGranted("DELETE", subject="user")
      */
+    #[Route(path: '/users/{id}', name: 'user_delete', methods: ['DELETE'])]
     public function deleteAction(Request $request, User $user)
     {
         $form = $this->createDeleteForm($user);
@@ -142,14 +142,13 @@ class UserController extends AbstractController
     /**
      * @param int $page
      *
-     * @Route("/users/list/{page}", name="user_index", methods={"GET"}, defaults={"page" = 1})
      * @IsGranted("LIST_USERS")
      *
      * Default parameter for page is hardcoded (in duplication of the defaults from the Route)
      * because this controller is also called inside the layout template without any page as argument
-     *
      * @return Response
      */
+    #[Route(path: '/users/list/{page}', name: 'user_index', methods: ['GET'], defaults: ['page' => 1])]
     public function searchFormAction(Request $request, UserRepository $userRepository, $page = 1)
     {
         $qb = $userRepository->createQueryBuilder('u');
