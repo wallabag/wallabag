@@ -50,7 +50,7 @@ class UsernameFeedTokenConverter implements ParamConverterInterface
         $em = $this->registry->getManagerForClass($configuration->getClass());
 
         // Check, if class name is what we need
-        if (null !== $em && 'Wallabag\Entity\User' !== $em->getClassMetadata($configuration->getClass())->getName()) {
+        if (null !== $em && User::class !== $em->getClassMetadata($configuration->getClass())->getName()) {
             return false;
         }
 
