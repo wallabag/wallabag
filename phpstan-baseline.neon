@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Method Wallabag\\\\Event\\\\Subscriber\\\\DownloadImagesSubscriber\\:\\:downloadImages\\(\\) never returns false so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/Event/Subscriber/DownloadImagesSubscriber.php
-
-		-
 			message: "#^Strict comparison using \\=\\=\\= between null and string will always evaluate to false\\.$#"
 			count: 1
 			path: src/Form/DataTransformer/StringToListTransformer.php
