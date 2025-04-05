@@ -31,7 +31,7 @@ class AuthenticatorProvider implements ExpressionFunctionProviderInterface
     {
         return new ExpressionFunction(
             'request_html',
-            function () {
+            function (): void {
                 throw new \Exception('Not supported');
             },
             function (array $arguments, $uri) {
@@ -44,7 +44,7 @@ class AuthenticatorProvider implements ExpressionFunctionProviderInterface
     {
         return new ExpressionFunction(
             'preg_match',
-            function () {
+            function (): void {
                 throw new \Exception('Not supported');
             },
             function (array $arguments, $pattern, $html) {
@@ -63,7 +63,7 @@ class AuthenticatorProvider implements ExpressionFunctionProviderInterface
     {
         return new ExpressionFunction(
             'xpath',
-            function () {
+            function (): void {
                 throw new \Exception('Not supported');
             },
             function (array $arguments, $xpathQuery, $html) {

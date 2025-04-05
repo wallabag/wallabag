@@ -3,6 +3,7 @@
 namespace Tests\Wallabag;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Predis\Client;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -118,7 +119,7 @@ abstract class WallabagTestCase extends WebTestCase
     protected function checkRedis()
     {
         try {
-            $this->client->getContainer()->get(\Predis\Client::class)->connect();
+            $this->client->getContainer()->get(Client::class)->connect();
         } catch (\Exception $e) {
             $this->markTestSkipped('Redis is not installed/activated');
         }
