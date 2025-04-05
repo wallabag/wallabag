@@ -20,6 +20,6 @@ class NotMatches
             return true;
         }
 
-        return false === stripos($subject, $pattern);
+        return false === stripos($subject, (string) $pattern);
     }
 }
