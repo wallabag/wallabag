@@ -15,7 +15,7 @@ return RectorConfig::configure()
     ])
     ->withRootFiles()
     ->withImportNames(importShortClasses: false)
-    ->withAttributesSets(symfony: true, doctrine: true)
+    ->withAttributesSets(symfony: true, doctrine: true, gedmo: true)
     ->withConfiguredRule(ClassPropertyAssignToConstructorPromotionRector::class, [
         'inline_public' => true,
     ])

@@ -62,6 +62,9 @@ $config
         'symfony/web-profiler-bundle',
         'symfony/web-server-bundle',
     ], [ErrorType::DEV_DEPENDENCY_IN_PROD])
+    ->ignoreErrorsOnPackages([
+        'gedmo/doctrine-extensions',
+    ], [ErrorType::SHADOW_DEPENDENCY])
 ;
 
 return $config;
