@@ -16,8 +16,8 @@ use Wallabag\Redis\Producer as RedisProducer;
 class ReadabilityController extends AbstractController
 {
     public function __construct(
-        private RabbitMqProducer $rabbitMqProducer,
-        private RedisProducer $redisProducer,
+        private readonly RabbitMqProducer $rabbitMqProducer,
+        private readonly RedisProducer $redisProducer,
     ) {
     }
 

@@ -45,14 +45,14 @@ use Wallabag\Tools\Utils;
 class ConfigController extends AbstractController
 {
     public function __construct(
-        private EntityManagerInterface $entityManager,
-        private UserManagerInterface $userManager,
-        private EntryRepository $entryRepository,
-        private TagRepository $tagRepository,
-        private AnnotationRepository $annotationRepository,
-        private ConfigRepository $configRepository,
-        private EventDispatcherInterface $eventDispatcher,
-        private Redirect $redirectHelper,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly UserManagerInterface $userManager,
+        private readonly EntryRepository $entryRepository,
+        private readonly TagRepository $tagRepository,
+        private readonly AnnotationRepository $annotationRepository,
+        private readonly ConfigRepository $configRepository,
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly Redirect $redirectHelper,
     ) {
     }
 

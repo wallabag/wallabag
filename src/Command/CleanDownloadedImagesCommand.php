@@ -17,8 +17,8 @@ class CleanDownloadedImagesCommand extends Command
     protected static $defaultDescription = 'Cleans downloaded images which are no more associated to an entry';
 
     public function __construct(
-        private EntryRepository $entryRepository,
-        private DownloadImages $downloadImages,
+        private readonly EntryRepository $entryRepository,
+        private readonly DownloadImages $downloadImages,
     ) {
         parent::__construct();
     }

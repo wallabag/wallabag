@@ -16,7 +16,7 @@ use Wallabag\Entity\Config;
 class CreateConfigListener implements EventSubscriberInterface
 {
     public function __construct(
-        private EntityManagerInterface $em,
+        private readonly EntityManagerInterface $em,
         private $itemsOnPage,
         private $feedLimit,
         private $language,
@@ -24,7 +24,7 @@ class CreateConfigListener implements EventSubscriberInterface
         private $actionMarkAsRead,
         private $listMode,
         private $displayThumbnails,
-        private RequestStack $requestStack,
+        private readonly RequestStack $requestStack,
     ) {
     }
 

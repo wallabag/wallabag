@@ -19,7 +19,7 @@ class ShowUserCommand extends Command
     protected SymfonyStyle $io;
 
     public function __construct(
-        private UserRepository $userRepository,
+        private readonly UserRepository $userRepository,
     ) {
         parent::__construct();
     }

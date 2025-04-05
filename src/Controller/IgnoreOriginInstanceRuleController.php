@@ -21,8 +21,8 @@ use Wallabag\Repository\IgnoreOriginInstanceRuleRepository;
 class IgnoreOriginInstanceRuleController extends AbstractController
 {
     public function __construct(
-        private EntityManagerInterface $entityManager,
-        private TranslatorInterface $translator,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 

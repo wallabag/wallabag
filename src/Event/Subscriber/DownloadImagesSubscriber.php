@@ -13,10 +13,10 @@ use Wallabag\Helper\DownloadImages;
 class DownloadImagesSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private EntityManagerInterface $em,
-        private DownloadImages $downloadImages,
+        private readonly EntityManagerInterface $em,
+        private readonly DownloadImages $downloadImages,
         private $enabled,
-        private LoggerInterface $logger,
+        private readonly LoggerInterface $logger,
     ) {
     }
 

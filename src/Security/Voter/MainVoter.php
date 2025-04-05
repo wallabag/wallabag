@@ -22,7 +22,7 @@ class MainVoter extends Voter
     public const EDIT_CONFIG = 'EDIT_CONFIG';
 
     public function __construct(
-        private Security $security,
+        private readonly Security $security,
     ) {
     }
 

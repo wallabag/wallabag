@@ -18,8 +18,8 @@ class Authenticator implements LoggerAwareInterface
     private $logger;
 
     public function __construct(
-        private SiteConfigBuilder $configBuilder,
-        private LoginFormAuthenticator $authenticator,
+        private readonly SiteConfigBuilder $configBuilder,
+        private readonly LoginFormAuthenticator $authenticator,
     ) {
         $this->logger = new NullLogger();
     }

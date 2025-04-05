@@ -14,8 +14,8 @@ use Wallabag\Entity\User;
 class Redirect
 {
     public function __construct(
-        private UrlGeneratorInterface $router,
-        private TokenStorageInterface $tokenStorage,
+        private readonly UrlGeneratorInterface $router,
+        private readonly TokenStorageInterface $tokenStorage,
     ) {
     }
 

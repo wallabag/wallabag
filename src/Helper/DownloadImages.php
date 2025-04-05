@@ -20,10 +20,10 @@ class DownloadImages
     private $wallabagUrl;
 
     public function __construct(
-        private HttpClientInterface $client,
+        private readonly HttpClientInterface $client,
         private $baseFolder,
         $wallabagUrl,
-        private LoggerInterface $logger,
+        private readonly LoggerInterface $logger,
     ) {
         $this->wallabagUrl = rtrim($wallabagUrl, '/');
         $this->mimeTypes = new MimeTypes();

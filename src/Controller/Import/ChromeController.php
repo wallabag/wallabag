@@ -14,10 +14,10 @@ use Wallabag\Redis\Producer as RedisProducer;
 class ChromeController extends BrowserController
 {
     public function __construct(
-        private ChromeImport $chromeImport,
-        private Config $craueConfig,
-        private RabbitMqProducer $rabbitMqProducer,
-        private RedisProducer $redisProducer,
+        private readonly ChromeImport $chromeImport,
+        private readonly Config $craueConfig,
+        private readonly RabbitMqProducer $rabbitMqProducer,
+        private readonly RedisProducer $redisProducer,
     ) {
     }
 

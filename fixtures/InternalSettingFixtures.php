@@ -9,7 +9,7 @@ use Wallabag\Entity\InternalSetting;
 class InternalSettingFixtures extends Fixture
 {
     public function __construct(
-        private array $defaultInternalSettings,
+        private readonly array $defaultInternalSettings,
     ) {
     }
 

@@ -22,11 +22,11 @@ class ReloadEntryCommand extends Command
     protected static $defaultDescription = 'Reload entries';
 
     public function __construct(
-        private EntryRepository $entryRepository,
-        private UserRepository $userRepository,
-        private EntityManagerInterface $entityManager,
-        private ContentProxy $contentProxy,
-        private EventDispatcherInterface $dispatcher,
+        private readonly EntryRepository $entryRepository,
+        private readonly UserRepository $userRepository,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly ContentProxy $contentProxy,
+        private readonly EventDispatcherInterface $dispatcher,
     ) {
         parent::__construct();
     }

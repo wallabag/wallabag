@@ -14,10 +14,10 @@ use Wallabag\Redis\Producer as RedisProducer;
 class WallabagV1Controller extends WallabagController
 {
     public function __construct(
-        private WallabagV1Import $wallabagImport,
-        private Config $craueConfig,
-        private RabbitMqProducer $rabbitMqProducer,
-        private RedisProducer $redisProducer,
+        private readonly WallabagV1Import $wallabagImport,
+        private readonly Config $craueConfig,
+        private readonly RabbitMqProducer $rabbitMqProducer,
+        private readonly RedisProducer $redisProducer,
     ) {
     }
 

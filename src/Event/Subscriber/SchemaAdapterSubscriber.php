@@ -9,7 +9,7 @@ use Doctrine\ORM\Tools\Event\GenerateSchemaEventArgs;
 class SchemaAdapterSubscriber implements EventSubscriber
 {
     public function __construct(
-        private string $databaseTablePrefix,
+        private readonly string $databaseTablePrefix,
     ) {
     }
 

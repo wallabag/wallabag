@@ -13,7 +13,7 @@ class UserVoter extends Voter
     public const DELETE = 'DELETE';
 
     public function __construct(
-        private Security $security,
+        private readonly Security $security,
     ) {
     }
 

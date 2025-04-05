@@ -22,7 +22,7 @@ class UsernameFeedTokenConverter implements ParamConverterInterface
      * @param ManagerRegistry $registry Manager registry
      */
     public function __construct(
-        private ?ManagerRegistry $registry = null,
+        private readonly ?ManagerRegistry $registry = null,
     ) {
     }
 

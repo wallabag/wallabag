@@ -22,8 +22,8 @@ class AuthCodeMailer implements AuthCodeMailerInterface
      * @param string $supportUrl  support URL to report any bugs
      */
     public function __construct(
-        private MailerInterface $mailer,
-        private Environment $twig,
+        private readonly MailerInterface $mailer,
+        private readonly Environment $twig,
         private $senderEmail,
         private $senderName,
         private $supportUrl,

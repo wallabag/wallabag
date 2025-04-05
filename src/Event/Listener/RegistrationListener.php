@@ -15,7 +15,7 @@ class RegistrationListener implements EventSubscriberInterface
      */
     public function __construct(
         private $registrationEnabled,
-        private UrlGeneratorInterface $urlGenerator,
+        private readonly UrlGeneratorInterface $urlGenerator,
     ) {
     }
 

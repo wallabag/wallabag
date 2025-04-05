@@ -10,8 +10,8 @@ use Wallabag\Event\ConfigUpdatedEvent;
 class GenerateCustomCSSSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private EntityManagerInterface $em,
-        private Compiler $compiler,
+        private readonly EntityManagerInterface $em,
+        private readonly Compiler $compiler,
     ) {
     }
 

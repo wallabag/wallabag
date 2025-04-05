@@ -16,13 +16,13 @@ use Wallabag\Repository\TagRepository;
 class WallabagExtension extends AbstractExtension implements GlobalsInterface
 {
     public function __construct(
-        private EntryRepository $entryRepository,
-        private AnnotationRepository $annotationRepository,
-        private TagRepository $tagRepository,
-        private TokenStorageInterface $tokenStorage,
+        private readonly EntryRepository $entryRepository,
+        private readonly AnnotationRepository $annotationRepository,
+        private readonly TagRepository $tagRepository,
+        private readonly TokenStorageInterface $tokenStorage,
         private $lifeTime,
-        private TranslatorInterface $translator,
-        private string $projectDir,
+        private readonly TranslatorInterface $translator,
+        private readonly string $projectDir,
     ) {
     }
 

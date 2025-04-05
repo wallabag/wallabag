@@ -38,13 +38,13 @@ class InstallCommand extends Command
     ];
 
     public function __construct(
-        private EntityManagerInterface $entityManager,
-        private EventDispatcherInterface $dispatcher,
-        private UserManagerInterface $userManager,
-        private TableMetadataStorageConfiguration $tableMetadataStorageConfiguration,
-        private string $databaseDriver,
-        private array $defaultSettings,
-        private array $defaultIgnoreOriginInstanceRules,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly EventDispatcherInterface $dispatcher,
+        private readonly UserManagerInterface $userManager,
+        private readonly TableMetadataStorageConfiguration $tableMetadataStorageConfiguration,
+        private readonly string $databaseDriver,
+        private readonly array $defaultSettings,
+        private readonly array $defaultIgnoreOriginInstanceRules,
     ) {
         parent::__construct();
     }

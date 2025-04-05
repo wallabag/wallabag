@@ -34,21 +34,21 @@ class ImportCommand extends Command
     protected static $defaultDescription = 'Import entries from a JSON export';
 
     public function __construct(
-        private EntityManagerInterface $entityManager,
-        private TokenStorageInterface $tokenStorage,
-        private UserRepository $userRepository,
-        private WallabagV2Import $wallabagV2Import,
-        private FirefoxImport $firefoxImport,
-        private ChromeImport $chromeImport,
-        private ReadabilityImport $readabilityImport,
-        private InstapaperImport $instapaperImport,
-        private PinboardImport $pinboardImport,
-        private DeliciousImport $deliciousImport,
-        private WallabagV1Import $wallabagV1Import,
-        private ElcuratorImport $elcuratorImport,
-        private ShaarliImport $shaarliImport,
-        private PocketHtmlImport $pocketHtmlImport,
-        private OmnivoreImport $omnivoreImport,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly UserRepository $userRepository,
+        private readonly WallabagV2Import $wallabagV2Import,
+        private readonly FirefoxImport $firefoxImport,
+        private readonly ChromeImport $chromeImport,
+        private readonly ReadabilityImport $readabilityImport,
+        private readonly InstapaperImport $instapaperImport,
+        private readonly PinboardImport $pinboardImport,
+        private readonly DeliciousImport $deliciousImport,
+        private readonly WallabagV1Import $wallabagV1Import,
+        private readonly ElcuratorImport $elcuratorImport,
+        private readonly ShaarliImport $shaarliImport,
+        private readonly PocketHtmlImport $pocketHtmlImport,
+        private readonly OmnivoreImport $omnivoreImport,
     ) {
         parent::__construct();
     }

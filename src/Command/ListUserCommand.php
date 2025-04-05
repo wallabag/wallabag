@@ -16,7 +16,7 @@ class ListUserCommand extends Command
     protected static $defaultDescription = 'List all users';
 
     public function __construct(
-        private UserRepository $userRepository,
+        private readonly UserRepository $userRepository,
     ) {
         parent::__construct();
     }
