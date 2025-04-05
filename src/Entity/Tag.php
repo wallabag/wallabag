@@ -12,38 +12,33 @@ use Wallabag\Repository\TagRepository;
 
 /**
  * Tag.
- *
- * @XmlRoot("tag")
- * @ExclusionPolicy("all")
  */
 #[ORM\Table(name: '`tag`')]
 #[ORM\Index(columns: ['label'])]
 #[ORM\Entity(repositoryClass: TagRepository::class)]
+#[XmlRoot('tag')]
+#[ExclusionPolicy('all')]
 class Tag implements \Stringable
 {
     /**
      * @var int
-     *
-     * @Expose
      */
     #[ORM\Column(name: 'id', type: 'integer')]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[Expose]
     private $id;
 
     /**
      * @var string
-     *
-     * @Expose
      */
     #[ORM\Column(name: 'label', type: 'text')]
+    #[Expose]
     private $label;
 
-    /**
-     * @Expose
-     */
     #[ORM\Column(length: 128, unique: true)]
     #[Gedmo\Slug(fields: ['label'], prefix: 't:')]
+    #[Expose]
     private $slug;
 
     #[ORM\ManyToMany(targetEntity: Entry::class, mappedBy: 'tags', cascade: ['persist'])]

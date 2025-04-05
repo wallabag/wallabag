@@ -21,56 +21,50 @@ class Config
 
     /**
      * @var int
-     *
-     * @Groups({"config_api"})
      */
     #[ORM\Column(name: 'id', type: 'integer')]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[Groups(['config_api'])]
     private $id;
 
     /**
      * @var int
-     *
-     * @Groups({"config_api"})
      */
     #[ORM\Column(name: 'items_per_page', type: 'integer', nullable: false)]
     #[Assert\NotBlank]
     #[Assert\Range(min: 1, max: 100000, maxMessage: 'validator.item_per_page_too_high')]
+    #[Groups(['config_api'])]
     private $itemsPerPage;
 
     /**
      * @var string
-     *
-     * @Groups({"config_api"})
      */
     #[ORM\Column(name: 'language', type: 'string', nullable: false)]
     #[Assert\NotBlank]
+    #[Groups(['config_api'])]
     private $language;
 
     /**
      * @var string|null
-     *
-     * @Groups({"config_api"})
      */
     #[ORM\Column(name: 'feed_token', type: 'string', nullable: true)]
+    #[Groups(['config_api'])]
     private $feedToken;
 
     /**
      * @var int|null
-     *
-     * @Groups({"config_api"})
      */
     #[ORM\Column(name: 'feed_limit', type: 'integer', nullable: true)]
     #[Assert\Range(min: 1, max: 100000, maxMessage: 'validator.feed_limit_too_high')]
+    #[Groups(['config_api'])]
     private $feedLimit;
 
     /**
      * @var float|null
-     *
-     * @Groups({"config_api"})
      */
     #[ORM\Column(name: 'reading_speed', type: 'float', nullable: true)]
+    #[Groups(['config_api'])]
     private $readingSpeed;
 
     /**
@@ -81,58 +75,51 @@ class Config
 
     /**
      * @var int|null
-     *
-     * @Groups({"config_api"})
      */
     #[ORM\Column(name: 'action_mark_as_read', type: 'integer', nullable: true, options: ['default' => 0])]
+    #[Groups(['config_api'])]
     private $actionMarkAsRead;
 
     /**
      * @var int|null
-     *
-     * @Groups({"config_api"})
      */
     #[ORM\Column(name: 'list_mode', type: 'integer', nullable: true)]
+    #[Groups(['config_api'])]
     private $listMode;
 
     /**
      * @var int|null
-     *
-     * @Groups({"config_api"})
      */
     #[ORM\Column(name: 'display_thumbnails', type: 'integer', nullable: true, options: ['default' => 1])]
+    #[Groups(['config_api'])]
     private $displayThumbnails;
 
     /**
      * @var string|null
-     *
-     * @Groups({"config_api"})
      */
     #[ORM\Column(name: 'font', type: 'text', nullable: true)]
+    #[Groups(['config_api'])]
     private $font;
 
     /**
      * @var float|null
-     *
-     * @Groups({"config_api"})
      */
     #[ORM\Column(name: 'fontsize', type: 'float', nullable: true)]
+    #[Groups(['config_api'])]
     private $fontsize;
 
     /**
      * @var float|null
-     *
-     * @Groups({"config_api"})
      */
     #[ORM\Column(name: 'line_height', type: 'float', nullable: true)]
+    #[Groups(['config_api'])]
     private $lineHeight;
 
     /**
      * @var float|null
-     *
-     * @Groups({"config_api"})
      */
     #[ORM\Column(name: 'max_width', type: 'float', nullable: true)]
+    #[Groups(['config_api'])]
     private $maxWidth;
 
     /**

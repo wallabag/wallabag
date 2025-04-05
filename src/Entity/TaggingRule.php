@@ -12,11 +12,10 @@ use Wallabag\Repository\TaggingRuleRepository;
 
 /**
  * Tagging rule.
- *
- * @XmlRoot("tagging_rule")
  */
 #[ORM\Table(name: '`tagging_rule`')]
 #[ORM\Entity(repositoryClass: TaggingRuleRepository::class)]
+#[XmlRoot('tagging_rule')]
 class TaggingRule implements RuleInterface
 {
     /**
@@ -34,27 +33,23 @@ class TaggingRule implements RuleInterface
      *  allowed_variables={"title", "url", "isArchived", "isStarred", "content", "language", "mimetype", "readingTime", "domainName"},
      *  allowed_operators={">", "<", ">=", "<=", "=", "is", "!=", "and", "not", "or", "matches", "notmatches"}
      * )
-     *
-     * @Groups({"export_tagging_rule"})
      */
     #[ORM\Column(name: 'rule', type: 'string', nullable: false)]
     #[Assert\NotBlank]
     #[Assert\Length(max: 255)]
+    #[Groups(['export_tagging_rule'])]
     private $rule;
 
     /**
      * @var array<string>
-     *
-     * @Groups({"export_tagging_rule"})
      */
     #[ORM\Column(name: 'tags', type: 'simple_array', nullable: false)]
     #[Assert\NotBlank]
+    #[Groups(['export_tagging_rule'])]
     private $tags = [];
 
-    /**
-     * @Exclude
-     */
     #[ORM\ManyToOne(targetEntity: Config::class, inversedBy: 'taggingRules')]
+    #[Exclude]
     private $config;
 
     /**
