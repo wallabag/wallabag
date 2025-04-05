@@ -37,6 +37,7 @@ $config
         'phpstan/phpstan-symfony',
         'psr/http-client',
         'psr/http-factory',
+        'rector/rector',
         'scheb/2fa-trusted-device',
         'shipmonk/composer-dependency-analyser',
         'symfony/asset',
