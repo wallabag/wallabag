@@ -41,9 +41,9 @@ class Tag implements \Stringable
 
     /**
      * @Expose
-     * @Gedmo\Slug(fields={"label"}, prefix="t:")
      */
     #[ORM\Column(length: 128, unique: true)]
+    #[Gedmo\Slug(fields: ['label'], prefix: 't:')]
     private $slug;
 
     #[ORM\ManyToMany(targetEntity: Entry::class, mappedBy: 'tags', cascade: ['persist'])]
