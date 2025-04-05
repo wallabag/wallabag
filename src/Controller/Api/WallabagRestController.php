@@ -50,10 +50,9 @@ class WallabagRestController extends AbstractFOSRestController
      *
      * @deprecated Should use info endpoint instead
      *
-     * @Route("/api/version.{_format}", name="api_get_version", methods={"GET"}, defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/version.{_format}', name: 'api_get_version', methods: ['GET'], defaults: ['_format' => 'json'])]
     public function getVersionAction()
     {
         $version = $this->getParameter('wallabag.version');
@@ -73,10 +72,9 @@ class WallabagRestController extends AbstractFOSRestController
      *     )
      * )
      *
-     * @Route("/api/info.{_format}", name="api_get_info", methods={"GET"}, defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/info.{_format}', name: 'api_get_info', methods: ['GET'], defaults: ['_format' => 'json'])]
     public function getInfoAction(Config $craueConfig)
     {
         $info = new ApplicationInfo(

@@ -8,9 +8,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class StaticController extends AbstractController
 {
     /**
-     * @Route("/howto", name="howto", methods={"GET"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
+    #[Route(path: '/howto', name: 'howto', methods: ['GET'])]
     public function howtoAction()
     {
         $addonsUrl = $this->getParameter('addons_url');
@@ -24,9 +24,9 @@ class StaticController extends AbstractController
     }
 
     /**
-     * @Route("/about", name="about", methods={"GET"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
+    #[Route(path: '/about', name: 'about', methods: ['GET'])]
     public function aboutAction()
     {
         return $this->render(
@@ -39,9 +39,9 @@ class StaticController extends AbstractController
     }
 
     /**
-     * @Route("/quickstart", name="quickstart", methods={"GET"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
+    #[Route(path: '/quickstart', name: 'quickstart', methods: ['GET'])]
     public function quickstartAction()
     {
         return $this->render(

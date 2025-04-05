@@ -46,11 +46,10 @@ class EntryController extends AbstractController
     }
 
     /**
-     * @Route("/mass", name="mass_action", methods={"POST"})
      * @IsGranted("EDIT_ENTRIES")
-     *
      * @return Response
      */
+    #[Route(path: '/mass', name: 'mass_action', methods: ['POST'])]
     public function massAction(Request $request, TagRepository $tagRepository)
     {
         $values = $request->request->all();
@@ -132,14 +131,13 @@ class EntryController extends AbstractController
     /**
      * @param int $page
      *
-     * @Route("/search/{page}", name="search", methods={"GET", "POST"}, defaults={"page" = 1})
      * @IsGranted("LIST_ENTRIES")
      *
      * Default parameter for page is hardcoded (in duplication of the defaults from the Route)
      * because this controller is also called inside the layout template without any page as argument
-     *
      * @return Response
      */
+    #[Route(path: '/search/{page}', name: 'search', methods: ['GET', 'POST'], defaults: ['page' => 1])]
     public function searchFormAction(Request $request, $page = 1, $currentRoute = null)
     {
         // fallback to retrieve currentRoute from query parameter instead of injected one (when using inside a template)
@@ -162,11 +160,10 @@ class EntryController extends AbstractController
     }
 
     /**
-     * @Route("/new-entry", name="new_entry", methods={"GET", "POST"})
      * @IsGranted("CREATE_ENTRIES")
-     *
      * @return Response
      */
+    #[Route(path: '/new-entry', name: 'new_entry', methods: ['GET', 'POST'])]
     public function addEntryFormAction(Request $request, TranslatorInterface $translator)
     {
         $entry = new Entry($this->getUser());
@@ -206,11 +203,10 @@ class EntryController extends AbstractController
     }
 
     /**
-     * @Route("/bookmarklet", name="bookmarklet", methods={"GET"})
      * @IsGranted("CREATE_ENTRIES")
-     *
      * @return Response
      */
+    #[Route(path: '/bookmarklet', name: 'bookmarklet', methods: ['GET'])]
     public function addEntryViaBookmarkletAction(Request $request)
     {
         $entry = new Entry($this->getUser());
@@ -230,11 +226,10 @@ class EntryController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="new", methods={"GET"})
      * @IsGranted("CREATE_ENTRIES")
-     *
      * @return Response
      */
+    #[Route(path: '/new', name: 'new', methods: ['GET'])]
     public function addEntryAction()
     {
         return $this->render('Entry/new.html.twig');
@@ -243,11 +238,10 @@ class EntryController extends AbstractController
     /**
      * Edit an entry content.
      *
-     * @Route("/edit/{id}", name="edit", methods={"GET", "POST"}, requirements={"id" = "\d+"})
      * @IsGranted("EDIT", subject="entry")
-     *
      * @return Response
      */
+    #[Route(path: '/edit/{id}', name: 'edit', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
     public function editEntryAction(Request $request, Entry $entry)
     {
         $form = $this->createForm(EditEntryType::class, $entry);
@@ -276,11 +270,10 @@ class EntryController extends AbstractController
      *
      * @param int $page
      *
-     * @Route("/all/list/{page}", name="all", methods={"GET"}, defaults={"page" = "1"})
      * @IsGranted("LIST_ENTRIES")
-     *
      * @return Response
      */
+    #[Route(path: '/all/list/{page}', name: 'all', methods: ['GET'], defaults: ['page' => '1'])]
     public function showAllAction(Request $request, $page)
     {
         return $this->showEntries('all', $request, $page);
@@ -291,11 +284,10 @@ class EntryController extends AbstractController
      *
      * @param int $page
      *
-     * @Route("/unread/list/{page}", name="unread", methods={"GET"}, defaults={"page" = "1"})
      * @IsGranted("LIST_ENTRIES")
-     *
      * @return Response
      */
+    #[Route(path: '/unread/list/{page}', name: 'unread', methods: ['GET'], defaults: ['page' => '1'])]
     public function showUnreadAction(Request $request, $page)
     {
         // load the quickstart if no entry in database
@@ -311,11 +303,10 @@ class EntryController extends AbstractController
      *
      * @param int $page
      *
-     * @Route("/archive/list/{page}", name="archive", methods={"GET"}, defaults={"page" = "1"})
      * @IsGranted("LIST_ENTRIES")
-     *
      * @return Response
      */
+    #[Route(path: '/archive/list/{page}', name: 'archive', methods: ['GET'], defaults: ['page' => '1'])]
     public function showArchiveAction(Request $request, $page)
     {
         return $this->showEntries('archive', $request, $page);
@@ -326,11 +317,10 @@ class EntryController extends AbstractController
      *
      * @param int $page
      *
-     * @Route("/starred/list/{page}", name="starred", methods={"GET"}, defaults={"page" = "1"})
      * @IsGranted("LIST_ENTRIES")
-     *
      * @return Response
      */
+    #[Route(path: '/starred/list/{page}', name: 'starred', methods: ['GET'], defaults: ['page' => '1'])]
     public function showStarredAction(Request $request, $page)
     {
         return $this->showEntries('starred', $request, $page);
@@ -341,11 +331,10 @@ class EntryController extends AbstractController
      *
      * @param int $page
      *
-     * @Route("/untagged/list/{page}", name="untagged", methods={"GET"}, defaults={"page" = "1"})
      * @IsGranted("LIST_ENTRIES")
-     *
      * @return Response
      */
+    #[Route(path: '/untagged/list/{page}', name: 'untagged', methods: ['GET'], defaults: ['page' => '1'])]
     public function showUntaggedEntriesAction(Request $request, $page)
     {
         return $this->showEntries('untagged', $request, $page);
@@ -356,11 +345,10 @@ class EntryController extends AbstractController
      *
      * @param int $page
      *
-     * @Route("/annotated/list/{page}", name="annotated", methods={"GET"}, defaults={"page" = "1"})
      * @IsGranted("LIST_ENTRIES")
-     *
      * @return Response
      */
+    #[Route(path: '/annotated/list/{page}', name: 'annotated', methods: ['GET'], defaults: ['page' => '1'])]
     public function showWithAnnotationsEntriesAction(Request $request, $page)
     {
         return $this->showEntries('annotated', $request, $page);
@@ -369,11 +357,10 @@ class EntryController extends AbstractController
     /**
      * Shows random entry depending on the given type.
      *
-     * @Route("/{type}/random", name="random_entry", methods={"GET"}, requirements={"type": "unread|starred|archive|untagged|annotated|all"})
      * @IsGranted("LIST_ENTRIES")
-     *
      * @return RedirectResponse
      */
+    #[Route(path: '/{type}/random', name: 'random_entry', methods: ['GET'], requirements: ['type' => 'unread|starred|archive|untagged|annotated|all'])]
     public function redirectRandomEntryAction(string $type = 'all')
     {
         try {
@@ -391,11 +378,10 @@ class EntryController extends AbstractController
     /**
      * Shows entry content.
      *
-     * @Route("/view/{id}", name="view", methods={"GET"}, requirements={"id" = "\d+"})
      * @IsGranted("VIEW", subject="entry")
-     *
      * @return Response
      */
+    #[Route(path: '/view/{id}', name: 'view', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function viewAction(Entry $entry)
     {
         return $this->render(
@@ -408,11 +394,10 @@ class EntryController extends AbstractController
      * Reload an entry.
      * Refetch content from the website and make it readable again.
      *
-     * @Route("/reload/{id}", name="reload_entry", methods={"GET"}, requirements={"id" = "\d+"})
      * @IsGranted("RELOAD", subject="entry")
-     *
      * @return RedirectResponse
      */
+    #[Route(path: '/reload/{id}', name: 'reload_entry', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function reloadAction(Entry $entry)
     {
         $this->updateEntry($entry, 'entry_reloaded');
@@ -436,11 +421,10 @@ class EntryController extends AbstractController
     /**
      * Changes read status for an entry.
      *
-     * @Route("/archive/{id}", name="archive_entry", methods={"GET"}, requirements={"id" = "\d+"})
      * @IsGranted("ARCHIVE", subject="entry")
-     *
      * @return RedirectResponse
      */
+    #[Route(path: '/archive/{id}', name: 'archive_entry', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function toggleArchiveAction(Request $request, Entry $entry)
     {
         $entry->toggleArchive();
@@ -464,11 +448,10 @@ class EntryController extends AbstractController
     /**
      * Changes starred status for an entry.
      *
-     * @Route("/star/{id}", name="star_entry", methods={"GET"}, requirements={"id" = "\d+"})
      * @IsGranted("STAR", subject="entry")
-     *
      * @return RedirectResponse
      */
+    #[Route(path: '/star/{id}', name: 'star_entry', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function toggleStarAction(Request $request, Entry $entry)
     {
         $entry->toggleStar();
@@ -493,11 +476,10 @@ class EntryController extends AbstractController
     /**
      * Deletes entry and redirect to the homepage or the last viewed page.
      *
-     * @Route("/delete/{id}", name="delete_entry", methods={"GET"}, requirements={"id" = "\d+"})
      * @IsGranted("DELETE", subject="entry")
-     *
      * @return RedirectResponse
      */
+    #[Route(path: '/delete/{id}', name: 'delete_entry', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function deleteEntryAction(Request $request, Entry $entry)
     {
         // generates the view url for this entry to check for redirection later
@@ -530,11 +512,10 @@ class EntryController extends AbstractController
     /**
      * Get public URL for entry (and generate it if necessary).
      *
-     * @Route("/share/{id}", name="share", methods={"GET"}, requirements={"id" = "\d+"})
      * @IsGranted("SHARE", subject="entry")
-     *
      * @return Response
      */
+    #[Route(path: '/share/{id}', name: 'share', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function shareAction(Entry $entry)
     {
         if (null === $entry->getUid()) {
@@ -552,11 +533,10 @@ class EntryController extends AbstractController
     /**
      * Disable public sharing for an entry.
      *
-     * @Route("/share/delete/{id}", name="delete_share", methods={"GET"}, requirements={"id" = "\d+"})
      * @IsGranted("UNSHARE", subject="entry")
-     *
      * @return Response
      */
+    #[Route(path: '/share/delete/{id}', name: 'delete_share', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function deleteShareAction(Entry $entry)
     {
         $entry->cleanUid();
@@ -572,12 +552,11 @@ class EntryController extends AbstractController
     /**
      * Ability to view a content publicly.
      *
-     * @Route("/share/{uid}", name="share_entry", methods={"GET"}, requirements={"uid" = ".+"})
      * @Cache(maxage="25200", smaxage="25200", public=true)
      * @IsGranted("PUBLIC_ACCESS")
-     *
      * @return Response
      */
+    #[Route(path: '/share/{uid}', name: 'share_entry', methods: ['GET'], requirements: ['uid' => '.+'])]
     public function shareEntryAction(Entry $entry, Config $craueConfig)
     {
         if (!$craueConfig->get('share_public')) {
@@ -595,11 +574,10 @@ class EntryController extends AbstractController
      *
      * @param int $page
      *
-     * @Route("/domain/{id}/{page}", name="same_domain", methods={"GET"}, requirements={"id" = "\d+"}, defaults={"page" = 1})
      * @IsGranted("LIST_ENTRIES")
-     *
      * @return Response
      */
+    #[Route(path: '/domain/{id}/{page}', name: 'same_domain', methods: ['GET'], requirements: ['id' => '\d+'], defaults: ['page' => 1])]
     public function getSameDomainEntries(Request $request, $page = 1)
     {
         return $this->showEntries('same-domain', $request, $page);

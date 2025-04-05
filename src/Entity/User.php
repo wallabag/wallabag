@@ -22,13 +22,12 @@ use Wallabag\Repository\UserRepository;
  * User.
  *
  * @XmlRoot("user")
- *
- * @UniqueEntity("email")
- * @UniqueEntity("username")
  */
 #[ORM\Table(name: '`user`')]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[UniqueEntity('email')]
+#[UniqueEntity('username')]
 class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorInterface, BackupCodeInterface
 {
     use EntityTimestampsTrait;

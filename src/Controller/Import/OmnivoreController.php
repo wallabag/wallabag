@@ -22,9 +22,9 @@ class OmnivoreController extends AbstractController
     }
 
     /**
-     * @Route("/import/omnivore", name="import_omnivore", methods={"GET", "POST"})
      * @IsGranted("IMPORT_ENTRIES")
      */
+    #[Route(path: '/import/omnivore', name: 'import_omnivore', methods: ['GET', 'POST'])]
     public function indexAction(Request $request, OmnivoreImport $omnivore, Config $craueConfig, TranslatorInterface $translator)
     {
         $form = $this->createForm(UploadImportType::class);

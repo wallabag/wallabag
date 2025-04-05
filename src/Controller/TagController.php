@@ -34,11 +34,10 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("/new-tag/{entry}", name="new_tag", methods={"POST"}, requirements={"entry" = "\d+"})
      * @IsGranted("TAG", subject="entry")
-     *
      * @return Response
      */
+    #[Route(path: '/new-tag/{entry}', name: 'new_tag', methods: ['POST'], requirements: ['entry' => '\d+'])]
     public function addTagFormAction(Request $request, Entry $entry, TranslatorInterface $translator)
     {
         $form = $this->createForm(NewTagType::class, new Tag());
@@ -84,11 +83,10 @@ class TagController extends AbstractController
     /**
      * Removes tag from entry.
      *
-     * @Route("/remove-tag/{entry}/{tag}", name="remove_tag", methods={"GET"}, requirements={"entry" = "\d+", "tag" = "\d+"})
      * @IsGranted("UNTAG", subject="entry")
-     *
      * @return Response
      */
+    #[Route(path: '/remove-tag/{entry}/{tag}', name: 'remove_tag', methods: ['GET'], requirements: ['entry' => '\d+', 'tag' => '\d+'])]
     public function removeTagFromEntry(Request $request, Entry $entry, Tag $tag)
     {
         $entry->removeTag($tag);
@@ -108,11 +106,10 @@ class TagController extends AbstractController
     /**
      * Shows tags for current user.
      *
-     * @Route("/tag/list", name="tag", methods={"GET"})
      * @IsGranted("LIST_TAGS")
-     *
      * @return Response
      */
+    #[Route(path: '/tag/list', name: 'tag', methods: ['GET'])]
     public function showTagAction(TagRepository $tagRepository, EntryRepository $entryRepository)
     {
         $allTagsWithNbEntries = $tagRepository->findAllTagsWithNbEntries($this->getUser()->getId());
@@ -133,13 +130,12 @@ class TagController extends AbstractController
     /**
      * @param int $page
      *
-     * @Route("/tag/list/{slug}/{page}", name="tag_entries", methods={"GET"}, defaults={"page" = "1"})
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      * @IsGranted("LIST_ENTRIES")
      * @IsGranted("VIEW", subject="tag")
-     *
      * @return Response
      */
+    #[Route(path: '/tag/list/{slug}/{page}', name: 'tag_entries', methods: ['GET'], defaults: ['page' => '1'])]
     public function showEntriesForTagAction(Tag $tag, EntryRepository $entryRepository, PreparePagerForEntries $preparePagerForEntries, $page, Request $request)
     {
         $entriesByTag = $entryRepository->findAllByTagId(
@@ -174,12 +170,11 @@ class TagController extends AbstractController
      * Rename a given tag with a new label
      * Create a new tag with the new name and drop the old one.
      *
-     * @Route("/tag/rename/{slug}", name="tag_rename", methods={"POST"})
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      * @IsGranted("EDIT", subject="tag")
-     *
      * @return Response
      */
+    #[Route(path: '/tag/rename/{slug}', name: 'tag_rename', methods: ['POST'])]
     public function renameTagAction(Tag $tag, Request $request, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
         $form = $this->createForm(RenameTagType::class, new Tag());
@@ -228,11 +223,10 @@ class TagController extends AbstractController
     /**
      * Tag search results with the current search term.
      *
-     * @Route("/tag/search/{filter}", name="tag_this_search", methods={"GET"})
      * @IsGranted("CREATE_TAGS")
-     *
      * @return Response
      */
+    #[Route(path: '/tag/search/{filter}', name: 'tag_this_search', methods: ['GET'])]
     public function tagThisSearchAction($filter, Request $request, EntryRepository $entryRepository)
     {
         $currentRoute = $request->query->has('currentRoute') ? $request->query->get('currentRoute') : '';
@@ -264,12 +258,11 @@ class TagController extends AbstractController
     /**
      * Delete a given tag for the current user.
      *
-     * @Route("/tag/delete/{slug}", name="tag_delete", methods={"GET"})
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      * @IsGranted("DELETE", subject="tag")
-     *
      * @return Response
      */
+    #[Route(path: '/tag/delete/{slug}', name: 'tag_delete', methods: ['GET'])]
     public function removeTagAction(Tag $tag, Request $request, EntryRepository $entryRepository)
     {
         foreach ($tag->getEntriesByUserId($this->getUser()->getId()) as $entry) {

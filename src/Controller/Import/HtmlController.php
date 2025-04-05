@@ -14,11 +14,10 @@ use Wallabag\Import\ImportInterface;
 abstract class HtmlController extends AbstractController
 {
     /**
-     * @Route("/import/html", name="import_html", methods={"GET", "POST"})
      * @IsGranted("IMPORT_ENTRIES")
-     *
      * @return Response
      */
+    #[Route(path: '/import/html', name: 'import_html', methods: ['GET', 'POST'])]
     public function indexAction(Request $request, TranslatorInterface $translator)
     {
         $form = $this->createForm(UploadImportType::class);

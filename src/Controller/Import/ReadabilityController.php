@@ -22,9 +22,9 @@ class ReadabilityController extends AbstractController
     }
 
     /**
-     * @Route("/import/readability", name="import_readability", methods={"GET", "POST"})
      * @IsGranted("IMPORT_ENTRIES")
      */
+    #[Route(path: '/import/readability', name: 'import_readability', methods: ['GET', 'POST'])]
     public function indexAction(Request $request, ReadabilityImport $readability, Config $craueConfig, TranslatorInterface $translator)
     {
         $form = $this->createForm(UploadImportType::class);
