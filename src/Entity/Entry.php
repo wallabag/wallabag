@@ -746,7 +746,7 @@ class Entry
     /**
      * Get previewPicture.
      *
-     * @return string
+     * @return string|null
      */
     public function getPreviewPicture()
     {
