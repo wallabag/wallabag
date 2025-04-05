@@ -562,7 +562,7 @@ class EntryRestController extends WallabagRestController
             $this->entityManager->persist($entry);
             $this->entityManager->flush();
 
-            $results[$key]['entry'] = $entry instanceof Entry ? $entry->getId() : false;
+            $results[$key]['entry'] = $entry->getId();
 
             // entry saved, dispatch event about it!
             $eventDispatcher->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
