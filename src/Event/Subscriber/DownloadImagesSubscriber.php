@@ -79,7 +79,7 @@ class DownloadImagesSubscriber implements EventSubscriberInterface
      *
      * @todo If we want to add async download, it should be done in that method
      *
-     * @return string|false False in case of async
+     * @return string
      */
     private function downloadImages(Entry $entry)
     {

@@ -3,6 +3,7 @@
 namespace Wallabag\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation\ExclusionPolicy;
@@ -41,8 +42,11 @@ class Tag implements \Stringable
     #[Expose]
     private $slug;
 
+    /**
+     * @var Collection<Entry>
+     */
     #[ORM\ManyToMany(targetEntity: Entry::class, mappedBy: 'tags', cascade: ['persist'])]
-    private $entries;
+    private Collection $entries;
 
     public function __construct()
     {
@@ -121,7 +125,7 @@ class Tag implements \Stringable
     /**
      * Get entries for this tag.
      *
-     * @return ArrayCollection<Entry>
+     * @return Collection<Entry>
      */
     public function getEntries()
     {

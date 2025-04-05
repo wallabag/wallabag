@@ -3,6 +3,7 @@
 namespace Wallabag\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation\Exclude;
@@ -233,11 +234,14 @@ class Entry
     #[Groups(['export_all'])]
     private $user;
 
+    /**
+     * @var Collection<Tag>
+     */
     #[ORM\JoinTable(name: 'entry_tag')]
     #[ORM\JoinColumn(name: 'entry_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'tag_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'entries', cascade: ['persist'])]
-    private $tags;
+    private Collection $tags;
 
     /*
      * @param User     $user
@@ -589,7 +593,7 @@ class Entry
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getDomainName()
     {
@@ -597,7 +601,7 @@ class Entry
     }
 
     /**
-     * @param string $domainName
+     * @param string|null $domainName
      */
     public function setDomainName($domainName)
     {
@@ -605,7 +609,7 @@ class Entry
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
     public function getTags()
     {
@@ -696,7 +700,7 @@ class Entry
     /**
      * Get previewPicture.
      *
-     * @return string
+     * @return string|null
      */
     public function getPreviewPicture()
     {
@@ -706,7 +710,7 @@ class Entry
     /**
      * Set language.
      *
-     * @param string $language
+     * @param string|null $language
      *
      * @return Entry
      */
@@ -720,7 +724,7 @@ class Entry
     /**
      * Get language.
      *
-     * @return string
+     * @return string|null
      */
     public function getLanguage()
     {
@@ -808,7 +812,7 @@ class Entry
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTimeInterface|null
      */
     public function getPublishedAt()
     {

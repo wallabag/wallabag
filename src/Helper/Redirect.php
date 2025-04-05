@@ -20,8 +20,8 @@ class Redirect
     }
 
     /**
-     * @param string $url                    URL to redirect
-     * @param bool   $ignoreActionMarkAsRead Ignore configured action when mark as read
+     * @param string|null $url                    URL to redirect
+     * @param bool        $ignoreActionMarkAsRead Ignore configured action when mark as read
      *
      * @return string
      */

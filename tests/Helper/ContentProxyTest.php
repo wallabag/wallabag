@@ -55,7 +55,7 @@ class ContentProxyTest extends TestCase
         $this->assertEmpty($entry->getPreviewPicture());
         $this->assertEmpty($entry->getMimetype());
         $this->assertEmpty($entry->getLanguage());
-        $this->assertSame(0.0, $entry->getReadingTime());
+        $this->assertSame(0, $entry->getReadingTime());
         $this->assertNull($entry->getDomainName());
         $this->assertTrue($entry->isNotParsed());
     }
@@ -95,7 +95,7 @@ class ContentProxyTest extends TestCase
         $this->assertEmpty($entry->getPreviewPicture());
         $this->assertEmpty($entry->getMimetype());
         $this->assertEmpty($entry->getLanguage());
-        $this->assertSame(0.0, $entry->getReadingTime());
+        $this->assertSame(0, $entry->getReadingTime());
         $this->assertSame('0.0.0.0', $entry->getDomainName());
         $this->assertTrue($entry->isNotParsed());
     }
@@ -138,7 +138,7 @@ class ContentProxyTest extends TestCase
         $this->assertEmpty($entry->getLanguage());
         $this->assertEmpty($entry->getHttpStatus());
         $this->assertEmpty($entry->getMimetype());
-        $this->assertSame(0.0, $entry->getReadingTime());
+        $this->assertSame(0, $entry->getReadingTime());
         $this->assertSame('domain.io', $entry->getDomainName());
         $this->assertTrue($entry->isNotParsed());
     }
@@ -184,7 +184,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
         $this->assertSame('200', $entry->getHttpStatus());
-        $this->assertSame(4.0, $entry->getReadingTime());
+        $this->assertSame(4, $entry->getReadingTime());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
         $this->assertFalse($entry->isNotParsed());
     }
@@ -230,7 +230,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
         $this->assertSame('200', $entry->getHttpStatus());
-        $this->assertSame(4.0, $entry->getReadingTime());
+        $this->assertSame(4, $entry->getReadingTime());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
         $this->assertFalse($entry->isNotParsed());
     }
@@ -275,7 +275,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
         $this->assertSame('200', $entry->getHttpStatus());
-        $this->assertSame(0.0, $entry->getReadingTime());
+        $this->assertSame(0, $entry->getReadingTime());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
         $this->assertFalse($entry->isNotParsed());
     }
@@ -320,7 +320,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
         $this->assertSame('200', $entry->getHttpStatus());
-        $this->assertSame(0.0, $entry->getReadingTime());
+        $this->assertSame(0, $entry->getReadingTime());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
         $this->assertFalse($entry->isNotParsed());
     }
@@ -368,7 +368,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertNull($entry->getLanguage());
         $this->assertSame('200', $entry->getHttpStatus());
-        $this->assertSame(4.0, $entry->getReadingTime());
+        $this->assertSame(4, $entry->getReadingTime());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
         $this->assertFalse($entry->isNotParsed());
     }
@@ -422,7 +422,7 @@ class ContentProxyTest extends TestCase
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
         $this->assertSame('200', $entry->getHttpStatus());
-        $this->assertSame(4.0, $entry->getReadingTime());
+        $this->assertSame(4, $entry->getReadingTime());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
         $this->assertFalse($entry->isNotParsed());
     }
@@ -461,7 +461,7 @@ class ContentProxyTest extends TestCase
         $this->assertStringContainsString('content', $entry->getContent());
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
-        $this->assertSame(4.0, $entry->getReadingTime());
+        $this->assertSame(4, $entry->getReadingTime());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
         $this->assertSame('24/03/2014', $entry->getPublishedAt()->format('d/m/Y'));
         $this->assertContains('Jeremy', $entry->getPublishedBy());
@@ -505,7 +505,7 @@ class ContentProxyTest extends TestCase
         $this->assertStringContainsString('content', $entry->getContent());
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
-        $this->assertSame(4.0, $entry->getReadingTime());
+        $this->assertSame(4, $entry->getReadingTime());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
         $this->assertSame('08/09/2016', $entry->getPublishedAt()->format('d/m/Y'));
         $this->assertFalse($entry->isNotParsed());
@@ -545,7 +545,7 @@ class ContentProxyTest extends TestCase
         $this->assertStringContainsString('content', $entry->getContent());
         $this->assertSame('text/html', $entry->getMimetype());
         $this->assertSame('fr', $entry->getLanguage());
-        $this->assertSame(4.0, $entry->getReadingTime());
+        $this->assertSame(4, $entry->getReadingTime());
         $this->assertSame('1.1.1.1', $entry->getDomainName());
         $this->assertNull($entry->getPublishedAt());
         $this->assertFalse($entry->isNotParsed());
@@ -883,42 +883,42 @@ class ContentProxyTest extends TestCase
          */
         $this->markTestSkipped('Encoding issue in PHP >= 8.1');
 
-        // See http://graphemica.com for more info about the characters
-        // '😻ℤ�z' (U+1F63B or F09F98BB; U+2124 or E284A4; invalid character 81; U+007A or 7A) in hexadecimal and UTF-8
-        // 0x81 is not a valid character for UTF16, UTF8 and WINDOWS-1252
-        $actualTitle = $this->hexToStr('F09F98BB' . 'E284A4' . '81' . '7A');
-
-        $tagger = $this->getTaggerMock();
-        $tagger->expects($this->once())
-            ->method('tag');
-
-        $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
-
-        $graby = $this->getMockBuilder(Graby::class)
-            ->onlyMethods(['fetchContent'])
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $graby->expects($this->any())
-            ->method('fetchContent')
-            ->willReturn([
-                'html' => false,
-                'title' => $actualTitle,
-                'url' => '',
-                'headers' => [
-                    'content-type' => 'application/pdf',
-                ],
-                'language' => '',
-            ]);
-
-        $proxy = new ContentProxy($graby, $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
-        $entry = new Entry(new User());
-        $proxy->updateEntry($entry, 'http://0.0.0.0');
-
-        // '😻ℤz' (U+1F63B or F09F98BB; U+2124 or E284A4; U+007A or 7A) in hexadecimal and UTF-8
-        // the 0x81 (represented by �) is invalid for UTF16, UTF8 and WINDOWS-1252 and is removed
-        $expectedTitle = 'F09F98BB' . 'E284A4' . '7A';
-        $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
+        // // See http://graphemica.com for more info about the characters
+        // // '😻ℤ�z' (U+1F63B or F09F98BB; U+2124 or E284A4; invalid character 81; U+007A or 7A) in hexadecimal and UTF-8
+        // // 0x81 is not a valid character for UTF16, UTF8 and WINDOWS-1252
+        // $actualTitle = $this->hexToStr('F09F98BB' . 'E284A4' . '81' . '7A');
+        //
+        // $tagger = $this->getTaggerMock();
+        // $tagger->expects($this->once())
+        //     ->method('tag');
+        //
+        // $ruleBasedIgnoreOriginProcessor = $this->getRuleBasedIgnoreOriginProcessorMock();
+        //
+        // $graby = $this->getMockBuilder(Graby::class)
+        //     ->onlyMethods(['fetchContent'])
+        //     ->disableOriginalConstructor()
+        //     ->getMock();
+        //
+        // $graby->expects($this->any())
+        //     ->method('fetchContent')
+        //     ->willReturn([
+        //         'html' => false,
+        //         'title' => $actualTitle,
+        //         'url' => '',
+        //         'headers' => [
+        //             'content-type' => 'application/pdf',
+        //         ],
+        //         'language' => '',
+        //     ]);
+        //
+        // $proxy = new ContentProxy($graby, $tagger, $ruleBasedIgnoreOriginProcessor, $this->getValidator(), $this->getLogger(), $this->fetchingErrorMessage);
+        // $entry = new Entry(new User());
+        // $proxy->updateEntry($entry, 'http://0.0.0.0');
+        //
+        // // '😻ℤz' (U+1F63B or F09F98BB; U+2124 or E284A4; U+007A or 7A) in hexadecimal and UTF-8
+        // // the 0x81 (represented by �) is invalid for UTF16, UTF8 and WINDOWS-1252 and is removed
+        // $expectedTitle = 'F09F98BB' . 'E284A4' . '7A';
+        // $this->assertSame($expectedTitle, $this->strToHex($entry->getTitle()));
     }
 
     /**

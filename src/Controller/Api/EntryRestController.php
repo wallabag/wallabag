@@ -554,7 +554,7 @@ class EntryRestController extends WallabagRestController
             $this->entityManager->persist($entry);
             $this->entityManager->flush();
 
-            $results[$key]['entry'] = $entry instanceof Entry ? $entry->getId() : false;
+            $results[$key]['entry'] = $entry->getId();
 
             // entry saved, dispatch event about it!
             $eventDispatcher->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
@@ -734,7 +734,7 @@ class EntryRestController extends WallabagRestController
                     'html' => !empty($data['content']) ? $data['content'] : $entry->getContent(),
                     'url' => $entry->getUrl(),
                     'language' => !empty($data['language']) ? $data['language'] : $entry->getLanguage(),
-                    'date' => !empty($data['publishedAt']) ? $data['publishedAt'] : $entry->getPublishedAt(),
+                    'date' => !empty($data['publishedAt']) ? $data['publishedAt'] : $entry->getPublishedAt()?->format('Y-m-d H:i:s') ?? '',
                     // faking the open graph preview picture
                     'image' => !empty($data['picture']) ? $data['picture'] : $entry->getPreviewPicture(),
                     'authors' => \is_string($data['authors']) ? explode(',', $data['authors']) : $entry->getPublishedBy(),

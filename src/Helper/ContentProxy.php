@@ -143,11 +143,8 @@ class ContentProxy
         }
 
         try {
-            // is it already a DateTime?
             // (it's inside the try/catch in case of fail to be parse time string)
-            if (!$date instanceof \DateTime) {
-                $date = new \DateTime($date);
-            }
+            $date = new \DateTime($date);
 
             $entry->setPublishedAt($date);
         } catch (\Exception $e) {

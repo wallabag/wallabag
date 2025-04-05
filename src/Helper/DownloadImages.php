@@ -98,10 +98,10 @@ class DownloadImages
      *     - re-saved it (for security reason)
      *     - return the new local path.
      *
-     * @param int    $entryId      ID of the entry
-     * @param string $imagePath    Path to the image to retrieve
-     * @param string $url          Url from where the image were found
-     * @param string $relativePath Relative local path to saved the image
+     * @param int         $entryId      ID of the entry
+     * @param string|null $imagePath    Path to the image to retrieve
+     * @param string      $url          Url from where the image were found
+     * @param string      $relativePath Relative local path to saved the image
      *
      * @return string|false Relative url to access the image from the web
      */
@@ -136,7 +136,7 @@ class DownloadImages
         }
 
         $ext = $this->getExtensionFromResponse($res, $imagePath);
-        if (false === $res) {
+        if (false === $ext) {
             return false;
         }
 

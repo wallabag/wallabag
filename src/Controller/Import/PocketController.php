@@ -61,10 +61,10 @@ class PocketController extends AbstractController
             return $this->redirect($this->generateUrl('import_pocket'));
         }
 
-        $form = $request->request->get('form');
+        $form = $request->request->all('form');
 
         $this->session->set('import.pocket.code', $requestToken);
-        if (null !== $form && \array_key_exists('mark_as_read', $form)) {
+        if (\array_key_exists('mark_as_read', $form)) {
             $this->session->set('mark_as_read', $form['mark_as_read']);
         }
 
