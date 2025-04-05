@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Offset 'tags' on array\\{title\\: mixed, url\\: mixed, is_archived\\: bool, is_starred\\: false, created_at\\: mixed, tags\\: non\\-empty\\-array\\<int, string\\>\\} in empty\\(\\) always exists and is not falsy\\.$#"
-			count: 1
-			path: src/Import/PinboardImport.php
-
-		-
 			message: "#^Property Wallabag\\\\Mailer\\\\AuthCodeMailer\\:\\:\\$senderName \\(string\\) on left side of \\?\\? is not nullable\\.$#"
 			count: 1
 			path: src/Mailer/AuthCodeMailer.php
