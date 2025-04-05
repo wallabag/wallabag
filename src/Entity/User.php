@@ -3,6 +3,7 @@
 namespace Wallabag\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use JMS\Serializer\Annotation\Accessor;
@@ -122,16 +123,16 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     protected $config;
 
     /**
-     * @var ArrayCollection&iterable<SiteCredential>
+     * @var Collection<SiteCredential>
      */
     #[ORM\OneToMany(targetEntity: SiteCredential::class, mappedBy: 'user', cascade: ['remove'])]
-    protected $siteCredentials;
+    protected Collection $siteCredentials;
 
     /**
-     * @var ArrayCollection&iterable<Client>
+     * @var Collection<Client>
      */
     #[ORM\OneToMany(targetEntity: Client::class, mappedBy: 'user', cascade: ['remove'])]
-    protected $clients;
+    protected Collection $clients;
 
     /**
      * @see getFirstClient() below
@@ -168,6 +169,8 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     {
         parent::__construct();
         $this->entries = new ArrayCollection();
+        $this->siteCredentials = new ArrayCollection();
+        $this->clients = new ArrayCollection();
         $this->roles = ['ROLE_USER'];
     }
 
@@ -222,7 +225,7 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     }
 
     /**
-     * @return ArrayCollection<Entry>
+     * @return Collection<Entry>
      */
     public function getEntries()
     {
@@ -344,13 +347,15 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      */
     public function addClient(Client $client)
     {
-        $this->clients[] = $client;
+        if (!$this->clients->contains($client)) {
+            $this->clients->add($client);
+        }
 
         return $this;
     }
 
     /**
-     * @return ArrayCollection<Client>
+     * @return Collection<Client>
      */
     public function getClients()
     {
@@ -364,7 +369,7 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      */
     public function getFirstClient()
     {
-        if (!empty($this->clients)) {
+        if (!$this->clients->isEmpty()) {
             return $this->clients->first();
         }
 

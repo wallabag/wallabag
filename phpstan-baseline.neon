@@ -1,16 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Property Wallabag\\\\Entity\\\\User\\:\\:\\$clients \\(Doctrine\\\\Common\\\\Collections\\\\ArrayCollection&iterable\\<Wallabag\\\\Entity\\\\Api\\\\Client\\>\\) in empty\\(\\) is not falsy\\.$#"
-			count: 1
-			path: src/Entity/User.php
-
-		-
-			message: "#^Unreachable statement \\- code above always terminates\\.$#"
-			count: 1
-			path: src/Entity/User.php
-
-		-
 			message: "#^Method Wallabag\\\\Event\\\\Subscriber\\\\DownloadImagesSubscriber\\:\\:downloadImages\\(\\) never returns false so it can be removed from the return type\\.$#"
 			count: 1
 			path: src/Event/Subscriber/DownloadImagesSubscriber.php
