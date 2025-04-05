@@ -43,8 +43,6 @@ class WallabagRestControllerTest extends WallabagApiTestCase
 
         if (!$client->getContainer()->getParameter('fosuser_registration')) {
             $this->markTestSkipped('fosuser_registration is not enabled.');
-
-            return;
         }
 
         $client->getContainer()->get(Config::class)->set('api_user_registration', 1);

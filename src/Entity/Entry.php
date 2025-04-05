@@ -637,7 +637,7 @@ class Entry
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getDomainName()
     {
@@ -645,7 +645,7 @@ class Entry
     }
 
     /**
-     * @param string $domainName
+     * @param string|null $domainName
      */
     public function setDomainName($domainName)
     {
@@ -756,7 +756,7 @@ class Entry
     /**
      * Set language.
      *
-     * @param string $language
+     * @param string|null $language
      *
      * @return Entry
      */
@@ -770,7 +770,7 @@ class Entry
     /**
      * Get language.
      *
-     * @return string
+     * @return string|null
      */
     public function getLanguage()
     {

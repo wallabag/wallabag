@@ -24,10 +24,10 @@ class Utils
      *
      * @param string $text
      *
-     * @return float
+     * @return int
      */
     public static function getReadingTime($text)
     {
-        return floor(\count(preg_split('~([^\p{L}\p{N}\']+|(\p{Han}|\p{Hiragana}|\p{Katakana}|\p{Hangul}){1,2})~u', strip_tags($text))) / 200);
+        return (int) floor(\count(preg_split('~([^\p{L}\p{N}\']+|(\p{Han}|\p{Hiragana}|\p{Katakana}|\p{Hangul}){1,2})~u', strip_tags($text))) / 200);
     }
 }
