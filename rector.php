@@ -13,4 +13,5 @@ return RectorConfig::configure()
         __DIR__ . '/web',
     ])
     ->withImportNames(importShortClasses: false)
+    ->withAttributesSets(doctrine: true)
     ->withTypeCoverageLevel(0);
