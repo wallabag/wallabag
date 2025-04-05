@@ -95,9 +95,7 @@ class FirefoxImportTest extends TestCase
         $this->em
             ->expects($this->any())
             ->method('persist')
-            ->with($this->callback(function ($persistedEntry) {
-                return (bool) $persistedEntry->isArchived();
-            }));
+            ->with($this->callback(fn ($persistedEntry) => (bool) $persistedEntry->isArchived()));
 
         $res = $firefoxImport->setMarkAsRead(true)->import();
 

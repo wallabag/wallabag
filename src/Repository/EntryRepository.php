@@ -289,9 +289,7 @@ class EntryRepository extends ServiceEntityRepository
 
         if ('metadata' === $detail) {
             $fieldNames = $this->getClassMetadata()->getFieldNames();
-            $fields = array_filter($fieldNames, function ($k) {
-                return 'content' !== $k;
-            });
+            $fields = array_filter($fieldNames, fn ($k) => 'content' !== $k);
             $qb->select(\sprintf('partial e.{%s}', implode(',', $fields)));
         }
 

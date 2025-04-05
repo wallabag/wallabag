@@ -367,9 +367,7 @@ class ConfigController extends AbstractController
 
         $backupCodes = (new BackupCodes())->toArray();
         $backupCodesHashed = array_map(
-            function ($backupCode) {
-                return password_hash($backupCode, \PASSWORD_DEFAULT);
-            },
+            fn ($backupCode) => password_hash($backupCode, \PASSWORD_DEFAULT),
             $backupCodes
         );
 
