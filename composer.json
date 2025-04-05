@@ -173,6 +173,7 @@
         "phpstan/phpstan-phpunit": "^1.4.2",
         "phpstan/phpstan-symfony": "^1.4.13",
         "phpunit/phpunit": "^9.6.22",
+        "rector/rector": "^1.2",
         "shipmonk/composer-dependency-analyser": "^1.8.2",
         "symfony/css-selector": "^5.4.45",
         "symfony/debug-bundle": "^5.4.45",
