@@ -23,5 +23,5 @@ return RectorConfig::configure()
             __DIR__ . '/src/Entity/*',
         ],
     ])
-    ->withPhpSets(php81: true)
+    ->withPhpSets()
     ->withTypeCoverageLevel(0);
