@@ -28,9 +28,9 @@ class Client extends BaseClient
      *      type="string",
      *      example="Default Client",
      * )
-     * @Groups({"user_api_with_client"})
      */
     #[ORM\Column(name: 'name', type: 'text', nullable: false)]
+    #[Groups(['user_api_with_client'])]
     protected $name;
 
     #[ORM\OneToMany(targetEntity: RefreshToken::class, mappedBy: 'client', cascade: ['remove'])]
@@ -47,10 +47,9 @@ class Client extends BaseClient
      *      type="string",
      *      example="2lmubx2m9vy80ss8c4wwcsg8ok44s88ocwcc8wo0w884oc8440",
      * )
-     *
-     * @SerializedName("client_secret")
-     * @Groups({"user_api_with_client"})
      */
+    #[SerializedName('client_secret')]
+    #[Groups(['user_api_with_client'])]
     protected $secret;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'clients')]
@@ -95,17 +94,15 @@ class Client extends BaseClient
     }
 
     /**
-     * @VirtualProperty
-     *
      * @OA\Property(
      *      description="Client secret used for authorization",
      *      type="string",
      *      example="3_1lpybsn0od40css4w4ko8gsc8cwwskggs8kgg448ko0owo4c84",
      * )
-     *
-     * @SerializedName("client_id")
-     * @Groups({"user_api_with_client"})
      */
+    #[VirtualProperty]
+    #[SerializedName('client_id')]
+    #[Groups(['user_api_with_client'])]
     public function getClientId()
     {
         return $this->getId() . '_' . $this->getRandomId();
