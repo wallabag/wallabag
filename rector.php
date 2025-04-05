@@ -14,5 +14,5 @@ return RectorConfig::configure()
     ])
     ->withImportNames(importShortClasses: false)
     ->withAttributesSets(doctrine: true)
-    ->withPhpSets(php71: true)
+    ->withPhpSets(php73: true)
     ->withTypeCoverageLevel(0);
