@@ -45,10 +45,10 @@ class TagController extends AbstractController
         $form->handleRequest($request);
 
         $tags = $form->get('label')->getData() ?? '';
-        $tagsExploded = explode(',', $tags);
+        $tagsExploded = explode(',', (string) $tags);
 
         // avoid too much tag to be added
-        if (\count($tagsExploded) >= NewTagType::MAX_TAGS || \strlen($tags) >= NewTagType::MAX_LENGTH) {
+        if (\count($tagsExploded) >= NewTagType::MAX_TAGS || \strlen((string) $tags) >= NewTagType::MAX_LENGTH) {
             $message = $translator->trans('flashes.tag.notice.too_much_tags', [
                 '%tags%' => NewTagType::MAX_TAGS,
                 '%characters%' => NewTagType::MAX_LENGTH,
@@ -250,7 +250,7 @@ class TagController extends AbstractController
 
             // check to avoid duplicate tags creation
             foreach ($this->entityManager->getUnitOfWork()->getScheduledEntityInsertions() as $entity) {
-                if ($entity instanceof Tag && strtolower($entity->getLabel()) === strtolower($filter)) {
+                if ($entity instanceof Tag && strtolower($entity->getLabel()) === strtolower((string) $filter)) {
                     continue 2;
                 }
                 $this->entityManager->persist($entry);

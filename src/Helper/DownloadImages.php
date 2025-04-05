@@ -25,7 +25,7 @@ class DownloadImages
         $wallabagUrl,
         private readonly LoggerInterface $logger,
     ) {
-        $this->wallabagUrl = rtrim($wallabagUrl, '/');
+        $this->wallabagUrl = rtrim((string) $wallabagUrl, '/');
         $this->mimeTypes = new MimeTypes();
 
         $this->setFolder();
@@ -291,7 +291,7 @@ class DownloadImages
                 preg_match_all($pattern, $srcsetAttribute, $matches);
 
                 $srcset = \call_user_func_array('array_merge', $matches);
-                $srcsetUrls = array_map(fn ($src) => trim(explode(' ', $src, 2)[0]), $srcset);
+                $srcsetUrls = array_map(fn ($src) => trim(explode(' ', (string) $src, 2)[0]), $srcset);
                 $urls = array_merge($srcsetUrls, $urls);
             }
 

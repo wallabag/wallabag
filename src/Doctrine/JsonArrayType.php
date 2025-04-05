@@ -22,7 +22,7 @@ class JsonArrayType extends JsonType
 
         $value = \is_resource($value) ? stream_get_contents($value) : $value;
 
-        return json_decode($value, true);
+        return json_decode((string) $value, true);
     }
 
     public function getName(): string

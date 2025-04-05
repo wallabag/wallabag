@@ -20,6 +20,6 @@ class Matches
             return false;
         }
 
-        return false !== stripos($subject, (string) $pattern);
+        return false !== stripos((string) $subject, (string) $pattern);
     }
 }

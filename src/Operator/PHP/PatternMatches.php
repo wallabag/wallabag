@@ -16,7 +16,7 @@ class PatternMatches
 {
     public function __invoke($subject, $pattern)
     {
-        $count = preg_match("`$pattern`i", $subject);
+        $count = preg_match("`$pattern`i", (string) $subject);
 
         return \is_int($count) && $count > 0;
     }

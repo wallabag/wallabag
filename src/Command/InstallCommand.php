@@ -144,7 +144,7 @@ class InstallCommand extends Command
             // return version should be like "PostgreSQL 9.5.4 on x86_64-apple-darwin15.6.0, compiled by Apple LLVM version 8.0.0 (clang-800.0.38), 64-bit"
             $version = $conn->executeQuery('SELECT version();')->fetchOne();
 
-            preg_match('/PostgreSQL ([0-9\.]+)/i', $version, $matches);
+            preg_match('/PostgreSQL ([0-9\.]+)/i', (string) $version, $matches);
 
             if (isset($matches[1]) & version_compare($matches[1], '9.2.0', '<')) {
                 $fulfilled = false;

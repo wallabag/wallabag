@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
 use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
-use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
 
 return RectorConfig::configure()
     ->withPaths([
@@ -19,13 +18,10 @@ return RectorConfig::configure()
     ->withConfiguredRule(ClassPropertyAssignToConstructorPromotionRector::class, [
         'inline_public' => true,
     ])
-    ->withRules([
-        ReadOnlyPropertyRector::class,
-    ])
     ->withSkip([
         ClassPropertyAssignToConstructorPromotionRector::class => [
             __DIR__ . '/src/Entity/*',
         ],
     ])
-    ->withPhpSets(php80: true)
+    ->withPhpSets(php81: true)
     ->withTypeCoverageLevel(0);

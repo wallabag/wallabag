@@ -39,7 +39,7 @@ class TagsAssigner
         }
 
         foreach ($tags as $label) {
-            $label = trim(mb_convert_case($label, \MB_CASE_LOWER));
+            $label = trim(mb_convert_case((string) $label, \MB_CASE_LOWER));
 
             // avoid empty tag
             if ('' === $label) {

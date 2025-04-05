@@ -383,7 +383,7 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
         foreach ($this->backupCodes as $key => $backupCode) {
             // backup code are hashed using `password_hash`
             // see ConfigController->otpAppAction
-            if (password_verify($code, $backupCode)) {
+            if (password_verify($code, (string) $backupCode)) {
                 return $key;
             }
         }
