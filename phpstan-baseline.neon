@@ -3,21 +3,6 @@ parameters:
 		-
 			message: "#^If condition is always false\\.$#"
 			count: 1
-			path: src/Entity/Entry.php
-
-		-
-			message: "#^Negated boolean expression is always true\\.$#"
-			count: 1
-			path: src/Entity/Entry.php
-
-		-
-			message: "#^Unreachable statement \\- code above always terminates\\.$#"
-			count: 1
-			path: src/Entity/Entry.php
-
-		-
-			message: "#^If condition is always false\\.$#"
-			count: 1
 			path: src/Entity/Tag.php
 
 		-

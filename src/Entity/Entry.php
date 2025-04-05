@@ -3,6 +3,7 @@
 namespace Wallabag\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation\Exclude;
@@ -267,11 +268,14 @@ class Entry
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'entries')]
     private $user;
 
+    /**
+     * @var Collection<Tag>
+     */
     #[ORM\JoinTable(name: 'entry_tag')]
     #[ORM\JoinColumn(name: 'entry_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\InverseJoinColumn(name: 'tag_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'entries', cascade: ['persist'])]
-    private $tags;
+    private Collection $tags;
 
     /*
      * @param User     $user
@@ -649,7 +653,7 @@ class Entry
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
     public function getTags()
     {
