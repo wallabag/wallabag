@@ -4,6 +4,7 @@ namespace Wallabag\Event\Subscriber;
 
 use Spiriit\Bundle\FormFilterBundle\Event\GetFilterConditionEvent;
 use Spiriit\Bundle\FormFilterBundle\Event\Subscriber\DoctrineORMSubscriber;
+use Spiriit\Bundle\FormFilterBundle\Filter\Doctrine\ORMQuery;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -14,7 +15,11 @@ class CustomDoctrineORMSubscriber extends DoctrineORMSubscriber implements Event
 {
     public function filterDateRange(GetFilterConditionEvent $event)
     {
-        $expr = $event->getFilterQuery()->getExpressionBuilder();
+        $filterQuery = $event->getFilterQuery();
+
+        \assert($filterQuery instanceof ORMQuery);
+
+        $expr = $filterQuery->getExpressionBuilder();
         $values = $event->getValues();
         $value = $values['value'];
 

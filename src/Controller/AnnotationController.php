@@ -85,7 +85,7 @@ class AnnotationController extends AbstractFOSRestController
             return JsonResponse::fromJsonString($json);
         }
 
-        return $form;
+        return new JsonResponse(status: 400);
     }
 
     /**
@@ -118,7 +118,7 @@ class AnnotationController extends AbstractFOSRestController
                 return JsonResponse::fromJsonString($json);
             }
 
-            return $form;
+            return new JsonResponse(status: 400);
         } catch (\InvalidArgumentException $e) {
             throw new NotFoundHttpException($e);
         }

@@ -64,7 +64,7 @@ abstract class HtmlImport extends AbstractImport
      *
      * @param string $filepath
      */
-    public function setFilepath($filepath)
+    public function setFilepath($filepath): static
     {
         $this->filepath = $filepath;
 

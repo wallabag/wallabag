@@ -2,6 +2,7 @@
 
 namespace Wallabag\Form\Type;
 
+use Spiriit\Bundle\FormFilterBundle\Filter\Doctrine\ORMQuery;
 use Spiriit\Bundle\FormFilterBundle\Filter\FilterOperands;
 use Spiriit\Bundle\FormFilterBundle\Filter\Form\Type\CheckboxFilterType;
 use Spiriit\Bundle\FormFilterBundle\Filter\Form\Type\ChoiceFilterType;
@@ -57,6 +58,8 @@ class EntryFilterType extends AbstractType
                         return;
                     }
 
+                    \assert($filterQuery instanceof ORMQuery);
+
                     $min = (int) ($lower * $user->getConfig()->getReadingSpeed() / 200);
                     $max = (int) ($upper * $user->getConfig()->getReadingSpeed() / 200);
 
@@ -98,6 +101,9 @@ class EntryFilterType extends AbstractType
                     if (empty($value) || \strlen($value) <= 2) {
                         return false;
                     }
+
+                    \assert($filterQuery instanceof ORMQuery);
+
                     $expression = $filterQuery->getExpr()->like($field, $filterQuery->getExpr()->lower($filterQuery->getExpr()->literal('%' . $value . '%')));
 
                     return $filterQuery->createCondition($expression);
@@ -113,6 +119,8 @@ class EntryFilterType extends AbstractType
                     if (false === \array_key_exists($value, Response::$statusTexts)) {
                         return false;
                     }
+
+                    \assert($filterQuery instanceof ORMQuery);
 
                     $paramName = \sprintf('%s', str_replace('.', '_', $field));
                     $expression = $filterQuery->getExpr()->eq($field, ':' . $paramName);
@@ -143,6 +151,8 @@ class EntryFilterType extends AbstractType
                         return false;
                     }
 
+                    \assert($filterQuery instanceof ORMQuery);
+
                     $expression = $filterQuery->getExpr()->eq('e.isArchived', 'false');
 
                     return $filterQuery->createCondition($expression);
@@ -170,6 +180,8 @@ class EntryFilterType extends AbstractType
                         return false;
                     }
 
+                    \assert($filterQuery instanceof ORMQuery);
+
                     $expression = $filterQuery->getExpr()->isNotNull($field);
 
                     return $filterQuery->createCondition($expression);
@@ -181,6 +193,8 @@ class EntryFilterType extends AbstractType
                     if (false === $values['value']) {
                         return false;
                     }
+
+                    \assert($filterQuery instanceof ORMQuery);
 
                     // is_public isn't a real field
                     // we should use the "uid" field to determine if the entry has been made public

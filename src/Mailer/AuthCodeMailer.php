@@ -8,6 +8,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 use Twig\Environment;
+use Wallabag\Entity\User;
 
 /**
  * Custom mailer for TwoFactorBundle email.
@@ -69,6 +70,8 @@ class AuthCodeMailer implements AuthCodeMailerInterface
      */
     public function sendAuthCode(TwoFactorInterface $user): void
     {
+        \assert($user instanceof User);
+
         $template = $this->twig->load('TwoFactor/email_auth_code.html.twig');
 
         $subject = $template->renderBlock('subject', []);

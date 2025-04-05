@@ -45,7 +45,7 @@ class FeedControllerTest extends WallabagTestCase
         }
 
         $this->assertSame(1, $xpath->query('/a:feed/a:link[@rel="self"]')->length);
-        $this->assertStringContainsString($type, $xpath->query('/a:feed/a:link[@rel="self"]')->item(0)->getAttribute('href'));
+        $this->assertStringContainsString($type, $xpath->query('/a:feed/a:link[@rel="self"]')->item(0)->attributes['href']->value);
 
         $this->assertSame(1, $xpath->query('/a:feed/a:link[@rel="last"]')->length);
 

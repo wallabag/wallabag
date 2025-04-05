@@ -109,7 +109,8 @@ class ConfigController extends AbstractController
             $message = 'flashes.config.notice.password_updated';
 
             $user->setPlainPassword($pwdForm->get('new_password')->getData());
-            $this->userManager->updateUser($user, true);
+            $this->userManager->updateUser($user);
+            $this->entityManager->flush();
 
             $this->addFlash('notice', $message);
 
@@ -124,7 +125,8 @@ class ConfigController extends AbstractController
         $userForm->handleRequest($request);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
-            $this->userManager->updateUser($user, true);
+            $this->userManager->updateUser($user);
+            $this->entityManager->flush();
 
             $this->addFlash(
                 'notice',
@@ -277,7 +279,8 @@ class ConfigController extends AbstractController
         $user = $this->getUser();
         $user->setEmailTwoFactor(false);
 
-        $this->userManager->updateUser($user, true);
+        $this->userManager->updateUser($user);
+        $this->entityManager->flush();
 
         $this->addFlash(
             'notice',
@@ -305,7 +308,8 @@ class ConfigController extends AbstractController
         $user->setBackupCodes(null);
         $user->setEmailTwoFactor(true);
 
-        $this->userManager->updateUser($user, true);
+        $this->userManager->updateUser($user);
+        $this->entityManager->flush();
 
         $this->addFlash(
             'notice',
@@ -332,7 +336,8 @@ class ConfigController extends AbstractController
         $user->setGoogleAuthenticatorSecret('');
         $user->setBackupCodes(null);
 
-        $this->userManager->updateUser($user, true);
+        $this->userManager->updateUser($user);
+        $this->entityManager->flush();
 
         $this->addFlash(
             'notice',
@@ -370,7 +375,8 @@ class ConfigController extends AbstractController
 
         $user->setBackupCodes($backupCodesHashed);
 
-        $this->userManager->updateUser($user, true);
+        $this->userManager->updateUser($user);
+        $this->entityManager->flush();
 
         $this->addFlash(
             'notice',

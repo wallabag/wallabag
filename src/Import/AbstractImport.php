@@ -65,7 +65,7 @@ abstract class AbstractImport implements ImportInterface
      *
      * @param bool $markAsRead
      */
-    public function setMarkAsRead($markAsRead)
+    public function setMarkAsRead($markAsRead): static
     {
         $this->markAsRead = $markAsRead;
 
@@ -99,6 +99,11 @@ abstract class AbstractImport implements ImportInterface
             'imported' => $this->importedEntries,
             'queued' => $this->queuedEntries,
         ];
+    }
+
+    public function setFilepath($filepath): static
+    {
+        return $this;
     }
 
     /**
