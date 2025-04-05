@@ -25,17 +25,12 @@ use Wallabag\Repository\TagRepository;
 
 class TagController extends AbstractController
 {
-    private EntityManagerInterface $entityManager;
-    private TagsAssigner $tagsAssigner;
-    private Redirect $redirectHelper;
-    private Security $security;
-
-    public function __construct(EntityManagerInterface $entityManager, TagsAssigner $tagsAssigner, Redirect $redirectHelper, Security $security)
-    {
-        $this->entityManager = $entityManager;
-        $this->tagsAssigner = $tagsAssigner;
-        $this->redirectHelper = $redirectHelper;
-        $this->security = $security;
+    public function __construct(
+        private EntityManagerInterface $entityManager,
+        private TagsAssigner $tagsAssigner,
+        private Redirect $redirectHelper,
+        private Security $security,
+    ) {
     }
 
     /**

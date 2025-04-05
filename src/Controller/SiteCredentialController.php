@@ -23,17 +23,12 @@ use Wallabag\Repository\SiteCredentialRepository;
  */
 class SiteCredentialController extends AbstractController
 {
-    private EntityManagerInterface $entityManager;
-    private TranslatorInterface $translator;
-    private CryptoProxy $cryptoProxy;
-    private Config $craueConfig;
-
-    public function __construct(EntityManagerInterface $entityManager, TranslatorInterface $translator, CryptoProxy $cryptoProxy, Config $craueConfig)
-    {
-        $this->entityManager = $entityManager;
-        $this->translator = $translator;
-        $this->cryptoProxy = $cryptoProxy;
-        $this->craueConfig = $craueConfig;
+    public function __construct(
+        private EntityManagerInterface $entityManager,
+        private TranslatorInterface $translator,
+        private CryptoProxy $cryptoProxy,
+        private Config $craueConfig,
+    ) {
     }
 
     /**

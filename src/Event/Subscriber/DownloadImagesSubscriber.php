@@ -12,17 +12,12 @@ use Wallabag\Helper\DownloadImages;
 
 class DownloadImagesSubscriber implements EventSubscriberInterface
 {
-    private $em;
-    private $downloadImages;
-    private $enabled;
-    private $logger;
-
-    public function __construct(EntityManagerInterface $em, DownloadImages $downloadImages, $enabled, LoggerInterface $logger)
-    {
-        $this->em = $em;
-        $this->downloadImages = $downloadImages;
-        $this->enabled = $enabled;
-        $this->logger = $logger;
+    public function __construct(
+        private EntityManagerInterface $em,
+        private DownloadImages $downloadImages,
+        private $enabled,
+        private LoggerInterface $logger,
+    ) {
     }
 
     public static function getSubscribedEvents(): array

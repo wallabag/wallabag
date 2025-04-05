@@ -21,16 +21,13 @@ use Wallabag\Repository\EntryRepository;
 
 class EntryFilterType extends AbstractType
 {
-    private $repository;
-    private $tokenStorage;
-
     /**
      * Repository & user are used to get a list of language entries for this user.
      */
-    public function __construct(EntryRepository $entryRepository, TokenStorageInterface $tokenStorage)
-    {
-        $this->repository = $entryRepository;
-        $this->tokenStorage = $tokenStorage;
+    public function __construct(
+        private EntryRepository $repository,
+        private TokenStorageInterface $tokenStorage,
+    ) {
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)

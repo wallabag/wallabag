@@ -44,33 +44,16 @@ use Wallabag\Tools\Utils;
 
 class ConfigController extends AbstractController
 {
-    private EntityManagerInterface $entityManager;
-    private UserManagerInterface $userManager;
-    private EntryRepository $entryRepository;
-    private TagRepository $tagRepository;
-    private AnnotationRepository $annotationRepository;
-    private ConfigRepository $configRepository;
-    private EventDispatcherInterface $eventDispatcher;
-    private Redirect $redirectHelper;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        UserManagerInterface $userManager,
-        EntryRepository $entryRepository,
-        TagRepository $tagRepository,
-        AnnotationRepository $annotationRepository,
-        ConfigRepository $configRepository,
-        EventDispatcherInterface $eventDispatcher,
-        Redirect $redirectHelper,
+        private EntityManagerInterface $entityManager,
+        private UserManagerInterface $userManager,
+        private EntryRepository $entryRepository,
+        private TagRepository $tagRepository,
+        private AnnotationRepository $annotationRepository,
+        private ConfigRepository $configRepository,
+        private EventDispatcherInterface $eventDispatcher,
+        private Redirect $redirectHelper,
     ) {
-        $this->entityManager = $entityManager;
-        $this->userManager = $userManager;
-        $this->entryRepository = $entryRepository;
-        $this->tagRepository = $tagRepository;
-        $this->annotationRepository = $annotationRepository;
-        $this->configRepository = $configRepository;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->redirectHelper = $redirectHelper;
     }
 
     /**

@@ -14,19 +14,13 @@ use Wallabag\SiteConfig\SiteConfigBuilder;
 
 class Authenticator implements LoggerAwareInterface
 {
-    /** @var SiteConfigBuilder */
-    private $configBuilder;
-
-    /** @var LoginFormAuthenticator */
-    private $authenticator;
-
     /** @var LoggerInterface */
     private $logger;
 
-    public function __construct(SiteConfigBuilder $configBuilder, LoginFormAuthenticator $authenticator)
-    {
-        $this->configBuilder = $configBuilder;
-        $this->authenticator = $authenticator;
+    public function __construct(
+        private SiteConfigBuilder $configBuilder,
+        private LoginFormAuthenticator $authenticator,
+    ) {
         $this->logger = new NullLogger();
     }
 

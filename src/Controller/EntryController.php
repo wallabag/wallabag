@@ -33,25 +33,16 @@ use Wallabag\Repository\TagRepository;
 
 class EntryController extends AbstractController
 {
-    private EntityManagerInterface $entityManager;
-    private EventDispatcherInterface $eventDispatcher;
-    private EntryRepository $entryRepository;
-    private Redirect $redirectHelper;
-    private PreparePagerForEntries $preparePagerForEntriesHelper;
-    private FilterBuilderUpdaterInterface $filterBuilderUpdater;
-    private ContentProxy $contentProxy;
-    private Security $security;
-
-    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher, EntryRepository $entryRepository, Redirect $redirectHelper, PreparePagerForEntries $preparePagerForEntriesHelper, FilterBuilderUpdaterInterface $filterBuilderUpdater, ContentProxy $contentProxy, Security $security)
-    {
-        $this->entityManager = $entityManager;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->entryRepository = $entryRepository;
-        $this->redirectHelper = $redirectHelper;
-        $this->preparePagerForEntriesHelper = $preparePagerForEntriesHelper;
-        $this->filterBuilderUpdater = $filterBuilderUpdater;
-        $this->contentProxy = $contentProxy;
-        $this->security = $security;
+    public function __construct(
+        private EntityManagerInterface $entityManager,
+        private EventDispatcherInterface $eventDispatcher,
+        private EntryRepository $entryRepository,
+        private Redirect $redirectHelper,
+        private PreparePagerForEntries $preparePagerForEntriesHelper,
+        private FilterBuilderUpdaterInterface $filterBuilderUpdater,
+        private ContentProxy $contentProxy,
+        private Security $security,
+    ) {
     }
 
     /**

@@ -13,17 +13,12 @@ use Wallabag\Redis\Producer as RedisProducer;
 
 class FirefoxController extends BrowserController
 {
-    private FirefoxImport $firefoxImport;
-    private Config $craueConfig;
-    private RabbitMqProducer $rabbitMqProducer;
-    private RedisProducer $redisProducer;
-
-    public function __construct(FirefoxImport $firefoxImport, Config $craueConfig, RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
-    {
-        $this->firefoxImport = $firefoxImport;
-        $this->craueConfig = $craueConfig;
-        $this->rabbitMqProducer = $rabbitMqProducer;
-        $this->redisProducer = $redisProducer;
+    public function __construct(
+        private FirefoxImport $firefoxImport,
+        private Config $craueConfig,
+        private RabbitMqProducer $rabbitMqProducer,
+        private RedisProducer $redisProducer,
+    ) {
     }
 
     /**

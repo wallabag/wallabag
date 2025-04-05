@@ -9,13 +9,10 @@ use Wallabag\Event\ConfigUpdatedEvent;
 
 class GenerateCustomCSSSubscriber implements EventSubscriberInterface
 {
-    private $em;
-    private $compiler;
-
-    public function __construct(EntityManagerInterface $em, Compiler $compiler)
-    {
-        $this->em = $em;
-        $this->compiler = $compiler;
+    public function __construct(
+        private EntityManagerInterface $em,
+        private Compiler $compiler,
+    ) {
     }
 
     public static function getSubscribedEvents(): array

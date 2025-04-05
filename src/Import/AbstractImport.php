@@ -15,11 +15,6 @@ use Wallabag\Helper\TagsAssigner;
 
 abstract class AbstractImport implements ImportInterface
 {
-    protected $em;
-    protected $logger;
-    protected $contentProxy;
-    protected $tagsAssigner;
-    protected $eventDispatcher;
     protected $producer;
     protected $user;
     protected $markAsRead;
@@ -28,13 +23,13 @@ abstract class AbstractImport implements ImportInterface
     protected $importedEntries = 0;
     protected $queuedEntries = 0;
 
-    public function __construct(EntityManagerInterface $em, ContentProxy $contentProxy, TagsAssigner $tagsAssigner, EventDispatcherInterface $eventDispatcher, LoggerInterface $logger)
-    {
-        $this->em = $em;
-        $this->logger = $logger;
-        $this->contentProxy = $contentProxy;
-        $this->tagsAssigner = $tagsAssigner;
-        $this->eventDispatcher = $eventDispatcher;
+    public function __construct(
+        protected EntityManagerInterface $em,
+        protected ContentProxy $contentProxy,
+        protected TagsAssigner $tagsAssigner,
+        protected EventDispatcherInterface $eventDispatcher,
+        protected LoggerInterface $logger,
+    ) {
     }
 
     public function setLogger(LoggerInterface $logger): void
@@ -178,9 +173,7 @@ abstract class AbstractImport implements ImportInterface
 
                 $entryToBeFlushed = [];
 
-                // clear only affected entities
-                $this->em->clear(Entry::class);
-                $this->em->clear(Tag::class);
+                $this->em->clear();
             }
             ++$i;
         }

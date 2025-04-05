@@ -10,14 +10,15 @@ use Wallabag\Helper\TagsAssigner;
 
 class WallabagV1Import extends WallabagImport
 {
-    protected $fetchingErrorMessage;
-    protected $fetchingErrorMessageTitle;
-
-    public function __construct(EntityManagerInterface $em, ContentProxy $contentProxy, TagsAssigner $tagsAssigner, EventDispatcherInterface $eventDispatcher, LoggerInterface $logger, $fetchingErrorMessageTitle, $fetchingErrorMessage)
-    {
-        $this->fetchingErrorMessageTitle = $fetchingErrorMessageTitle;
-        $this->fetchingErrorMessage = $fetchingErrorMessage;
-
+    public function __construct(
+        EntityManagerInterface $em,
+        ContentProxy $contentProxy,
+        TagsAssigner $tagsAssigner,
+        EventDispatcherInterface $eventDispatcher,
+        LoggerInterface $logger,
+        protected $fetchingErrorMessageTitle,
+        protected $fetchingErrorMessage,
+    ) {
         parent::__construct($em, $contentProxy, $tagsAssigner, $eventDispatcher, $logger);
     }
 

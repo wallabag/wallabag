@@ -15,13 +15,10 @@ use Wallabag\Redis\Producer as RedisProducer;
 
 class OmnivoreController extends AbstractController
 {
-    private RabbitMqProducer $rabbitMqProducer;
-    private RedisProducer $redisProducer;
-
-    public function __construct(RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
-    {
-        $this->rabbitMqProducer = $rabbitMqProducer;
-        $this->redisProducer = $redisProducer;
+    public function __construct(
+        private RabbitMqProducer $rabbitMqProducer,
+        private RedisProducer $redisProducer,
+    ) {
     }
 
     /**

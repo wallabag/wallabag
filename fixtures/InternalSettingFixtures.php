@@ -8,11 +8,9 @@ use Wallabag\Entity\InternalSetting;
 
 class InternalSettingFixtures extends Fixture
 {
-    private array $defaultInternalSettings;
-
-    public function __construct(array $defaultInternalSettings)
-    {
-        $this->defaultInternalSettings = $defaultInternalSettings;
+    public function __construct(
+        private array $defaultInternalSettings,
+    ) {
     }
 
     public function load(ObjectManager $manager): void

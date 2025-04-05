@@ -37,24 +37,15 @@ class InstallCommand extends Command
         'curl_multi_init',
     ];
 
-    private EntityManagerInterface $entityManager;
-    private EventDispatcherInterface $dispatcher;
-    private UserManagerInterface $userManager;
-    private TableMetadataStorageConfiguration $tableMetadataStorageConfiguration;
-    private string $databaseDriver;
-    private array $defaultSettings;
-    private array $defaultIgnoreOriginInstanceRules;
-
-    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $dispatcher, UserManagerInterface $userManager, TableMetadataStorageConfiguration $tableMetadataStorageConfiguration, string $databaseDriver, array $defaultSettings, array $defaultIgnoreOriginInstanceRules)
-    {
-        $this->entityManager = $entityManager;
-        $this->dispatcher = $dispatcher;
-        $this->userManager = $userManager;
-        $this->tableMetadataStorageConfiguration = $tableMetadataStorageConfiguration;
-        $this->databaseDriver = $databaseDriver;
-        $this->defaultSettings = $defaultSettings;
-        $this->defaultIgnoreOriginInstanceRules = $defaultIgnoreOriginInstanceRules;
-
+    public function __construct(
+        private EntityManagerInterface $entityManager,
+        private EventDispatcherInterface $dispatcher,
+        private UserManagerInterface $userManager,
+        private TableMetadataStorageConfiguration $tableMetadataStorageConfiguration,
+        private string $databaseDriver,
+        private array $defaultSettings,
+        private array $defaultIgnoreOriginInstanceRules,
+    ) {
         parent::__construct();
     }
 

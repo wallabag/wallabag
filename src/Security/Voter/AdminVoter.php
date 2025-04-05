@@ -14,11 +14,9 @@ class AdminVoter extends Voter
     public const LIST_IGNORE_ORIGIN_INSTANCE_RULES = 'LIST_IGNORE_ORIGIN_INSTANCE_RULES';
     public const CREATE_IGNORE_ORIGIN_INSTANCE_RULES = 'CREATE_IGNORE_ORIGIN_INSTANCE_RULES';
 
-    private Security $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
+    public function __construct(
+        private Security $security,
+    ) {
     }
 
     protected function supports(string $attribute, $subject): bool

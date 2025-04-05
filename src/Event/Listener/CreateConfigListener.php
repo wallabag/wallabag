@@ -15,27 +15,17 @@ use Wallabag\Entity\Config;
  */
 class CreateConfigListener implements EventSubscriberInterface
 {
-    private $em;
-    private $itemsOnPage;
-    private $feedLimit;
-    private $language;
-    private $readingSpeed;
-    private $actionMarkAsRead;
-    private $listMode;
-    private $requestStack;
-    private $displayThumbnails;
-
-    public function __construct(EntityManagerInterface $em, $itemsOnPage, $feedLimit, $language, $readingSpeed, $actionMarkAsRead, $listMode, $displayThumbnails, RequestStack $requestStack)
-    {
-        $this->em = $em;
-        $this->itemsOnPage = $itemsOnPage;
-        $this->feedLimit = $feedLimit;
-        $this->language = $language;
-        $this->readingSpeed = $readingSpeed;
-        $this->actionMarkAsRead = $actionMarkAsRead;
-        $this->listMode = $listMode;
-        $this->requestStack = $requestStack;
-        $this->displayThumbnails = $displayThumbnails;
+    public function __construct(
+        private EntityManagerInterface $em,
+        private $itemsOnPage,
+        private $feedLimit,
+        private $language,
+        private $readingSpeed,
+        private $actionMarkAsRead,
+        private $listMode,
+        private $displayThumbnails,
+        private RequestStack $requestStack,
+    ) {
     }
 
     public static function getSubscribedEvents(): array

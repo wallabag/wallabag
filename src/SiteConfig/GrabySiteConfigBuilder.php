@@ -10,34 +10,14 @@ use Wallabag\Repository\SiteCredentialRepository;
 class GrabySiteConfigBuilder implements SiteConfigBuilder
 {
     /**
-     * @var ConfigBuilder
-     */
-    private $grabyConfigBuilder;
-
-    /**
-     * @var SiteCredentialRepository
-     */
-    private $credentialRepository;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * @var TokenStorageInterface
-     */
-    private $token;
-
-    /**
      * GrabySiteConfigBuilder constructor.
      */
-    public function __construct(ConfigBuilder $grabyConfigBuilder, TokenStorageInterface $token, SiteCredentialRepository $credentialRepository, LoggerInterface $logger)
-    {
-        $this->grabyConfigBuilder = $grabyConfigBuilder;
-        $this->credentialRepository = $credentialRepository;
-        $this->logger = $logger;
-        $this->token = $token;
+    public function __construct(
+        private ConfigBuilder $grabyConfigBuilder,
+        private TokenStorageInterface $token,
+        private SiteCredentialRepository $credentialRepository,
+        private LoggerInterface $logger,
+    ) {
     }
 
     public function buildForHost($host)

@@ -20,11 +20,9 @@ use Wallabag\Repository\EntryRepository;
 
 class FeedController extends AbstractController
 {
-    private EntryRepository $entryRepository;
-
-    public function __construct(EntryRepository $entryRepository)
-    {
-        $this->entryRepository = $entryRepository;
+    public function __construct(
+        private EntryRepository $entryRepository,
+    ) {
     }
 
     /**

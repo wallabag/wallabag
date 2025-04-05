@@ -21,11 +21,9 @@ class MainVoter extends Voter
     public const CREATE_SITE_CREDENTIALS = 'CREATE_SITE_CREDENTIALS';
     public const EDIT_CONFIG = 'EDIT_CONFIG';
 
-    private Security $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
+    public function __construct(
+        private Security $security,
+    ) {
     }
 
     protected function supports(string $attribute, $subject): bool

@@ -8,14 +8,9 @@ use Wallabag\Repository\TagRepository;
 
 class TagsAssigner
 {
-    /**
-     * @var TagRepository
-     */
-    protected $tagRepository;
-
-    public function __construct(TagRepository $tagRepository)
-    {
-        $this->tagRepository = $tagRepository;
+    public function __construct(
+        protected TagRepository $tagRepository,
+    ) {
     }
 
     /**

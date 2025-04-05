@@ -9,13 +9,10 @@ use Symfony\Component\Security\Http\Event\LoginFailureEvent;
 
 class AuthenticationFailureListener implements EventSubscriberInterface
 {
-    private $requestStack;
-    private $logger;
-
-    public function __construct(RequestStack $requestStack, LoggerInterface $logger)
-    {
-        $this->requestStack = $requestStack;
-        $this->logger = $logger;
+    public function __construct(
+        private RequestStack $requestStack,
+        private LoggerInterface $logger,
+    ) {
     }
 
     public static function getSubscribedEvents(): array
