@@ -402,7 +402,7 @@ class InstallCommand extends Command
 
         try {
             return \in_array($databaseName, $schemaManager->listDatabases(), true);
-        } catch (DriverException $e) {
+        } catch (DriverException) {
             // it means we weren't able to get database list, assume the database doesn't exist
 
             return false;

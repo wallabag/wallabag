@@ -120,19 +120,12 @@ class AppKernel extends Kernel
 
     private function processDatabaseParameters(ContainerBuilder $container)
     {
-        switch ($container->getParameter('database_driver')) {
-            case 'pdo_mysql':
-                $scheme = 'mysql';
-                break;
-            case 'pdo_pgsql':
-                $scheme = 'pgsql';
-                break;
-            case 'pdo_sqlite':
-                $scheme = 'sqlite';
-                break;
-            default:
-                throw new RuntimeException('Unsupported database driver: ' . $container->getParameter('database_driver'));
-        }
+        $scheme = match ($container->getParameter('database_driver')) {
+            'pdo_mysql' => 'mysql',
+            'pdo_pgsql' => 'pgsql',
+            'pdo_sqlite' => 'sqlite',
+            default => throw new RuntimeException('Unsupported database driver: ' . $container->getParameter('database_driver')),
+        };
 
         $container->setParameter('database_scheme', $scheme);
 

@@ -51,7 +51,7 @@ class CleanDuplicatesCommand extends Command
             try {
                 $user = $this->getUser($username);
                 $this->cleanDuplicates($user);
-            } catch (NoResultException $e) {
+            } catch (NoResultException) {
                 $this->io->error(\sprintf('User "%s" not found.', $username));
 
                 return 1;

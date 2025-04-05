@@ -89,25 +89,14 @@ class WallabagExtension extends AbstractExtension implements GlobalsInterface
             return 0;
         }
 
-        switch ($type) {
-            case 'starred':
-                $qb = $this->entryRepository->getCountBuilderForStarredByUser($user->getId())->select('COUNT(e.id)');
-                break;
-            case 'archive':
-                $qb = $this->entryRepository->getCountBuilderForArchiveByUser($user->getId())->select('COUNT(e.id)');
-                break;
-            case 'unread':
-                $qb = $this->entryRepository->getCountBuilderForUnreadByUser($user->getId())->select('COUNT(e.id)');
-                break;
-            case 'annotated':
-                $qb = $this->annotationRepository->getCountBuilderByUser($user->getId())->select('COUNT(DISTINCT e.entry)');
-                break;
-            case 'all':
-                $qb = $this->entryRepository->getCountBuilderForAllByUser($user->getId())->select('COUNT(e.id)');
-                break;
-            default:
-                throw new \InvalidArgumentException(\sprintf('Type "%s" is not implemented.', $type));
-        }
+        $qb = match ($type) {
+            'starred' => $this->entryRepository->getCountBuilderForStarredByUser($user->getId())->select('COUNT(e.id)'),
+            'archive' => $this->entryRepository->getCountBuilderForArchiveByUser($user->getId())->select('COUNT(e.id)'),
+            'unread' => $this->entryRepository->getCountBuilderForUnreadByUser($user->getId())->select('COUNT(e.id)'),
+            'annotated' => $this->annotationRepository->getCountBuilderByUser($user->getId())->select('COUNT(DISTINCT e.entry)'),
+            'all' => $this->entryRepository->getCountBuilderForAllByUser($user->getId())->select('COUNT(e.id)'),
+            default => throw new \InvalidArgumentException(\sprintf('Type "%s" is not implemented.', $type)),
+        };
 
         $query = $qb->getQuery();
         $query->useQueryCache(true);

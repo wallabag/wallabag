@@ -153,7 +153,7 @@ class TagController extends AbstractController
 
         try {
             $entries->setCurrentPage($page);
-        } catch (OutOfRangeCurrentPageException $e) {
+        } catch (OutOfRangeCurrentPageException) {
             if ($page > 1) {
                 return $this->redirect($this->generateUrl($request->attributes->get('_route'), [
                     'slug' => $tag->getSlug(),

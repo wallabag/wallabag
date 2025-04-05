@@ -43,7 +43,7 @@ class TagAllCommand extends Command
 
         try {
             $user = $this->getUser($input->getArgument('username'));
-        } catch (NoResultException $e) {
+        } catch (NoResultException) {
             $io->error(\sprintf('User "%s" not found.', $input->getArgument('username')));
 
             return 1;

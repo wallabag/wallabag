@@ -97,43 +97,20 @@ class ImportCommand extends Command
         $this->tokenStorage->setToken($token);
         $user = $this->tokenStorage->getToken()->getUser();
 
-        switch ($input->getOption('importer')) {
-            case 'v2':
-                $import = $this->wallabagV2Import;
-                break;
-            case 'firefox':
-                $import = $this->firefoxImport;
-                break;
-            case 'chrome':
-                $import = $this->chromeImport;
-                break;
-            case 'readability':
-                $import = $this->readabilityImport;
-                break;
-            case 'instapaper':
-                $import = $this->instapaperImport;
-                break;
-            case 'pinboard':
-                $import = $this->pinboardImport;
-                break;
-            case 'delicious':
-                $import = $this->deliciousImport;
-                break;
-            case 'elcurator':
-                $import = $this->elcuratorImport;
-                break;
-            case 'shaarli':
-                $import = $this->shaarliImport;
-                break;
-            case 'pocket':
-                $import = $this->pocketHtmlImport;
-                break;
-            case 'omnivore':
-                $import = $this->omnivoreImport;
-                break;
-            default:
-                $import = $this->wallabagV1Import;
-        }
+        $import = match ($input->getOption('importer')) {
+            'v2' => $this->wallabagV2Import,
+            'firefox' => $this->firefoxImport,
+            'chrome' => $this->chromeImport,
+            'readability' => $this->readabilityImport,
+            'instapaper' => $this->instapaperImport,
+            'pinboard' => $this->pinboardImport,
+            'delicious' => $this->deliciousImport,
+            'elcurator' => $this->elcuratorImport,
+            'shaarli' => $this->shaarliImport,
+            'pocket' => $this->pocketHtmlImport,
+            'omnivore' => $this->omnivoreImport,
+            default => $this->wallabagV1Import,
+        };
 
         $import->setMarkAsRead($input->getOption('markAsRead'));
         $import->setDisableContentUpdate($input->getOption('disableContentUpdate'));

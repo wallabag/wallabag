@@ -169,7 +169,7 @@ class UserController extends AbstractController
 
         try {
             $pagerFanta->setCurrentPage($page);
-        } catch (OutOfRangeCurrentPageException $e) {
+        } catch (OutOfRangeCurrentPageException) {
             if ($page > 1) {
                 return $this->redirect($this->generateUrl('user_index', ['page' => $pagerFanta->getNbPages()]), 302);
             }

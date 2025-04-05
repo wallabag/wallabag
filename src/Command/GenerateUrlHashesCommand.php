@@ -45,7 +45,7 @@ class GenerateUrlHashesCommand extends Command
             try {
                 $user = $this->getUser($username);
                 $this->generateHashedUrls($user);
-            } catch (NoResultException $e) {
+            } catch (NoResultException) {
                 $output->writeln(\sprintf('<error>User "%s" not found.</error>', $username));
 
                 return 1;

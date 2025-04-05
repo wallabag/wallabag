@@ -379,7 +379,7 @@ class EntryController extends AbstractController
         try {
             $entry = $this->entryRepository
                 ->getRandomEntry($this->getUser()->getId(), $type);
-        } catch (NoResultException $e) {
+        } catch (NoResultException) {
             $this->addFlash('notice', 'flashes.entry.notice.no_random_entry');
 
             return $this->redirect($this->generateUrl($type));
@@ -670,7 +670,7 @@ class EntryController extends AbstractController
 
         try {
             $entries->setCurrentPage($page);
-        } catch (OutOfRangeCurrentPageException $e) {
+        } catch (OutOfRangeCurrentPageException) {
             if ($page > 1) {
                 return $this->redirect($this->generateUrl($type, ['page' => $entries->getNbPages()]), 302);
             }
@@ -699,7 +699,7 @@ class EntryController extends AbstractController
 
         try {
             $this->contentProxy->updateEntry($entry, $entry->getUrl());
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             // $this->logger->error('Error while saving an entry', [
             //     'exception' => $e,
             //     'entry' => $entry,

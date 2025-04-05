@@ -36,14 +36,9 @@ class AdminVoter extends Voter
             return false;
         }
 
-        switch ($attribute) {
-            case self::LIST_USERS:
-            case self::CREATE_USERS:
-            case self::LIST_IGNORE_ORIGIN_INSTANCE_RULES:
-            case self::CREATE_IGNORE_ORIGIN_INSTANCE_RULES:
-                return $this->security->isGranted('ROLE_SUPER_ADMIN');
-        }
-
-        return false;
+        return match ($attribute) {
+            self::LIST_USERS, self::CREATE_USERS, self::LIST_IGNORE_ORIGIN_INSTANCE_RULES, self::CREATE_IGNORE_ORIGIN_INSTANCE_RULES => $this->security->isGranted('ROLE_SUPER_ADMIN'),
+            default => false,
+        };
     }
 }

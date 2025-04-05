@@ -42,13 +42,9 @@ class TagVoter extends Voter
             return false;
         }
 
-        switch ($attribute) {
-            case self::VIEW:
-            case self::EDIT:
-            case self::DELETE:
-                return $this->security->isGranted('ROLE_USER');
-        }
-
-        return false;
+        return match ($attribute) {
+            self::VIEW, self::EDIT, self::DELETE => $this->security->isGranted('ROLE_USER'),
+            default => false,
+        };
     }
 }

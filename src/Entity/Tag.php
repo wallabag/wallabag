@@ -19,7 +19,7 @@ use Wallabag\Repository\TagRepository;
 #[ORM\Table(name: '`tag`')]
 #[ORM\Index(columns: ['label'])]
 #[ORM\Entity(repositoryClass: TagRepository::class)]
-class Tag
+class Tag implements \Stringable
 {
     /**
      * @var int
@@ -54,7 +54,7 @@ class Tag
         $this->entries = new ArrayCollection();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->label;
     }

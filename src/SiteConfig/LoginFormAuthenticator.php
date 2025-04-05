@@ -66,7 +66,7 @@ class LoginFormAuthenticator
             $crawler = new Crawler((string) $html);
 
             $loggedIn = $crawler->evaluate((string) $siteConfig->getNotLoggedInXpath());
-        } catch (\Throwable $e) {
+        } catch (\Throwable) {
             return false;
         }
 
@@ -98,7 +98,7 @@ class LoginFormAuthenticator
         $extraFields = [];
 
         foreach ($siteConfig->getExtraFields() as $fieldName => $fieldValue) {
-            if ('@=' === substr($fieldValue, 0, 2)) {
+            if (str_starts_with($fieldValue, '@=')) {
                 $fieldValue = $this->expressionLanguage->evaluate(
                     substr($fieldValue, 2),
                     [

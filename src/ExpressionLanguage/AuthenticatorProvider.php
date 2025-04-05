@@ -67,7 +67,7 @@ class AuthenticatorProvider implements ExpressionFunctionProviderInterface
                     $crawler = new Crawler((string) $html);
 
                     $crawler = $crawler->filterXPath($xpathQuery);
-                } catch (\Throwable $e) {
+                } catch (\Throwable) {
                     return '';
                 }
 

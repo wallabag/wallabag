@@ -35,12 +35,9 @@ class AnnotationVoter extends Voter
             return false;
         }
 
-        switch ($attribute) {
-            case self::EDIT:
-            case self::DELETE:
-                return $subject->getUser() === $user;
-        }
-
-        return false;
+        return match ($attribute) {
+            self::EDIT, self::DELETE => $subject->getUser() === $user,
+            default => false,
+        };
     }
 }
