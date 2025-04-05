@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Property Wallabag\\\\Mailer\\\\AuthCodeMailer\\:\\:\\$senderName \\(string\\) on left side of \\?\\? is not nullable\\.$#"
-			count: 1
-			path: src/Mailer/AuthCodeMailer.php
-
-		-
 			message: "#^Strict comparison using \\=\\=\\= between null and string will always evaluate to false\\.$#"
 			count: 1
 			path: src/ParamConverter/UsernameFeedTokenConverter.php
