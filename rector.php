@@ -13,6 +13,7 @@ return RectorConfig::configure()
         __DIR__ . '/tests',
         __DIR__ . '/web',
     ])
+    ->withRootFiles()
     ->withImportNames(importShortClasses: false)
     ->withAttributesSets(doctrine: true)
     ->withConfiguredRule(ClassPropertyAssignToConstructorPromotionRector::class, [
