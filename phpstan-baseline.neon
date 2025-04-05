@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Strict comparison using \\=\\=\\= between null and Pagerfanta\\\\Pagerfanta will always evaluate to false\\.$#"
-			count: 1
-			path: src/Controller/FeedController.php
-
-		-
 			message: "#^Call to function array_key_exists\\(\\) with 'mark_as_read' and bool\\|float\\|int\\|string will always evaluate to false\\.$#"
 			count: 1
 			path: src/Controller/Import/PocketController.php
