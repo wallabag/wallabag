@@ -19,16 +19,12 @@ class GenerateUrlHashesCommand extends Command
     protected static $defaultDescription = 'Generates hashed urls for each entry';
 
     protected OutputInterface $output;
-    private EntityManagerInterface $entityManager;
-    private EntryRepository $entryRepository;
-    private UserRepository $userRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, EntryRepository $entryRepository, UserRepository $userRepository)
-    {
-        $this->entityManager = $entityManager;
-        $this->entryRepository = $entryRepository;
-        $this->userRepository = $userRepository;
-
+    public function __construct(
+        private EntityManagerInterface $entityManager,
+        private EntryRepository $entryRepository,
+        private UserRepository $userRepository,
+    ) {
         parent::__construct();
     }
 

@@ -21,21 +21,14 @@ use Wallabag\Entity\User;
 
 class WallabagRestController extends AbstractFOSRestController
 {
-    protected EntityManagerInterface $entityManager;
-    protected SerializerInterface $serializer;
-    protected AuthorizationCheckerInterface $authorizationChecker;
-    protected TokenStorageInterface $tokenStorage;
-    protected TranslatorInterface $translator;
-    protected bool $registrationEnabled;
-
-    public function __construct(EntityManagerInterface $entityManager, SerializerInterface $serializer, AuthorizationCheckerInterface $authorizationChecker, TokenStorageInterface $tokenStorage, TranslatorInterface $translator, bool $registrationEnabled)
-    {
-        $this->entityManager = $entityManager;
-        $this->serializer = $serializer;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->tokenStorage = $tokenStorage;
-        $this->translator = $translator;
-        $this->registrationEnabled = $registrationEnabled;
+    public function __construct(
+        protected EntityManagerInterface $entityManager,
+        protected SerializerInterface $serializer,
+        protected AuthorizationCheckerInterface $authorizationChecker,
+        protected TokenStorageInterface $tokenStorage,
+        protected TranslatorInterface $translator,
+        protected bool $registrationEnabled,
+    ) {
     }
 
     /**

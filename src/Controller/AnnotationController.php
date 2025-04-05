@@ -20,15 +20,11 @@ use Wallabag\Repository\AnnotationRepository;
 
 class AnnotationController extends AbstractFOSRestController
 {
-    protected EntityManagerInterface $entityManager;
-    protected SerializerInterface $serializer;
-    protected FormFactoryInterface $formFactory;
-
-    public function __construct(EntityManagerInterface $entityManager, SerializerInterface $serializer, FormFactoryInterface $formFactory)
-    {
-        $this->entityManager = $entityManager;
-        $this->serializer = $serializer;
-        $this->formFactory = $formFactory;
+    public function __construct(
+        protected EntityManagerInterface $entityManager,
+        protected SerializerInterface $serializer,
+        protected FormFactoryInterface $formFactory,
+    ) {
     }
 
     /**

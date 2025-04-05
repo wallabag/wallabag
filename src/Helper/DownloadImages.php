@@ -16,19 +16,16 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 class DownloadImages
 {
     public const REGENERATE_PICTURES_QUALITY = 80;
-
-    private $client;
-    private $baseFolder;
-    private $logger;
     private $mimeTypes;
     private $wallabagUrl;
 
-    public function __construct(HttpClientInterface $downloadImagesClient, $baseFolder, $wallabagUrl, LoggerInterface $logger)
-    {
-        $this->client = $downloadImagesClient;
-        $this->baseFolder = $baseFolder;
+    public function __construct(
+        private HttpClientInterface $client,
+        private $baseFolder,
+        $wallabagUrl,
+        private LoggerInterface $logger,
+    ) {
         $this->wallabagUrl = rtrim($wallabagUrl, '/');
-        $this->logger = $logger;
         $this->mimeTypes = new MimeTypes();
 
         $this->setFolder();

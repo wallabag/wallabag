@@ -20,13 +20,10 @@ use Wallabag\Repository\IgnoreOriginInstanceRuleRepository;
  */
 class IgnoreOriginInstanceRuleController extends AbstractController
 {
-    private EntityManagerInterface $entityManager;
-    private TranslatorInterface $translator;
-
-    public function __construct(EntityManagerInterface $entityManager, TranslatorInterface $translator)
-    {
-        $this->entityManager = $entityManager;
-        $this->translator = $translator;
+    public function __construct(
+        private EntityManagerInterface $entityManager,
+        private TranslatorInterface $translator,
+    ) {
     }
 
     /**

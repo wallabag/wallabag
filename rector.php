@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
+use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
 
 return RectorConfig::configure()
     ->withPaths([
@@ -14,5 +15,13 @@ return RectorConfig::configure()
     ])
     ->withImportNames(importShortClasses: false)
     ->withAttributesSets(doctrine: true)
+    ->withConfiguredRule(ClassPropertyAssignToConstructorPromotionRector::class, [
+        'inline_public' => true,
+    ])
+    ->withSkip([
+        ClassPropertyAssignToConstructorPromotionRector::class => [
+            __DIR__ . '/src/Entity/*',
+        ],
+    ])
     ->withPhpSets(php74: true)
     ->withTypeCoverageLevel(0);

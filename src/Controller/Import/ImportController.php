@@ -13,13 +13,10 @@ use Wallabag\Import\ImportChain;
 
 class ImportController extends AbstractController
 {
-    private RabbitMQConsumerTotalProxy $rabbitMQConsumerTotalProxy;
-    private Client $redisClient;
-
-    public function __construct(RabbitMQConsumerTotalProxy $rabbitMQConsumerTotalProxy, Client $redisClient)
-    {
-        $this->rabbitMQConsumerTotalProxy = $rabbitMQConsumerTotalProxy;
-        $this->redisClient = $redisClient;
+    public function __construct(
+        private RabbitMQConsumerTotalProxy $rabbitMQConsumerTotalProxy,
+        private Client $redisClient,
+    ) {
     }
 
     /**

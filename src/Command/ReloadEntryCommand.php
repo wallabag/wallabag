@@ -21,20 +21,13 @@ class ReloadEntryCommand extends Command
     protected static $defaultName = 'wallabag:entry:reload';
     protected static $defaultDescription = 'Reload entries';
 
-    private EntryRepository $entryRepository;
-    private UserRepository $userRepository;
-    private EntityManagerInterface $entityManager;
-    private ContentProxy $contentProxy;
-    private EventDispatcherInterface $dispatcher;
-
-    public function __construct(EntryRepository $entryRepository, UserRepository $userRepository, EntityManagerInterface $entityManager, ContentProxy $contentProxy, EventDispatcherInterface $dispatcher)
-    {
-        $this->entryRepository = $entryRepository;
-        $this->userRepository = $userRepository;
-        $this->entityManager = $entityManager;
-        $this->contentProxy = $contentProxy;
-        $this->dispatcher = $dispatcher;
-
+    public function __construct(
+        private EntryRepository $entryRepository,
+        private UserRepository $userRepository,
+        private EntityManagerInterface $entityManager,
+        private ContentProxy $contentProxy,
+        private EventDispatcherInterface $dispatcher,
+    ) {
         parent::__construct();
     }
 

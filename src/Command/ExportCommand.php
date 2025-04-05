@@ -17,18 +17,12 @@ class ExportCommand extends Command
     protected static $defaultName = 'wallabag:export';
     protected static $defaultDescription = 'Export all entries for an user';
 
-    private EntryRepository $entryRepository;
-    private UserRepository $userRepository;
-    private EntriesExport $entriesExport;
-    private string $projectDir;
-
-    public function __construct(EntryRepository $entryRepository, UserRepository $userRepository, EntriesExport $entriesExport, string $projectDir)
-    {
-        $this->entryRepository = $entryRepository;
-        $this->userRepository = $userRepository;
-        $this->entriesExport = $entriesExport;
-        $this->projectDir = $projectDir;
-
+    public function __construct(
+        private EntryRepository $entryRepository,
+        private UserRepository $userRepository,
+        private EntriesExport $entriesExport,
+        private string $projectDir,
+    ) {
         parent::__construct();
     }
 

@@ -8,11 +8,9 @@ use Wallabag\Entity\IgnoreOriginInstanceRule;
 
 class IgnoreOriginInstanceRuleFixtures extends Fixture
 {
-    private array $defaultIgnoreOriginInstanceRules;
-
-    public function __construct(array $defaultIgnoreOriginInstanceRules)
-    {
-        $this->defaultIgnoreOriginInstanceRules = $defaultIgnoreOriginInstanceRules;
+    public function __construct(
+        private array $defaultIgnoreOriginInstanceRules,
+    ) {
     }
 
     public function load(ObjectManager $manager): void

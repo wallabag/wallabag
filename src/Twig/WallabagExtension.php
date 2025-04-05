@@ -15,23 +15,15 @@ use Wallabag\Repository\TagRepository;
 
 class WallabagExtension extends AbstractExtension implements GlobalsInterface
 {
-    private $tokenStorage;
-    private $entryRepository;
-    private $annotationRepository;
-    private $tagRepository;
-    private $lifeTime;
-    private $translator;
-    private $projectDir;
-
-    public function __construct(EntryRepository $entryRepository, AnnotationRepository $annotationRepository, TagRepository $tagRepository, TokenStorageInterface $tokenStorage, $lifeTime, TranslatorInterface $translator, string $projectDir)
-    {
-        $this->entryRepository = $entryRepository;
-        $this->annotationRepository = $annotationRepository;
-        $this->tagRepository = $tagRepository;
-        $this->tokenStorage = $tokenStorage;
-        $this->lifeTime = $lifeTime;
-        $this->translator = $translator;
-        $this->projectDir = $projectDir;
+    public function __construct(
+        private EntryRepository $entryRepository,
+        private AnnotationRepository $annotationRepository,
+        private TagRepository $tagRepository,
+        private TokenStorageInterface $tokenStorage,
+        private $lifeTime,
+        private TranslatorInterface $translator,
+        private string $projectDir,
+    ) {
     }
 
     public function getGlobals(): array

@@ -12,11 +12,9 @@ class ConfigUpdatedEvent extends Event
 {
     public const NAME = 'config.updated';
 
-    protected $config;
-
-    public function __construct(Config $entry)
-    {
-        $this->config = $entry;
+    public function __construct(
+        protected Config $config,
+    ) {
     }
 
     public function getConfig(): Config

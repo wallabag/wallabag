@@ -17,11 +17,9 @@ use Wallabag\Entity\Entry;
  */
 class SQLiteCascadeDeleteSubscriber implements EventSubscriber
 {
-    private $doctrine;
-
-    public function __construct(ManagerRegistry $doctrine)
-    {
-        $this->doctrine = $doctrine;
+    public function __construct(
+        private ManagerRegistry $doctrine,
+    ) {
     }
 
     /**

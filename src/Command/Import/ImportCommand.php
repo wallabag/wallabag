@@ -33,55 +33,23 @@ class ImportCommand extends Command
     protected static $defaultName = 'wallabag:import';
     protected static $defaultDescription = 'Import entries from a JSON export';
 
-    private EntityManagerInterface $entityManager;
-    private TokenStorageInterface $tokenStorage;
-    private UserRepository $userRepository;
-    private WallabagV2Import $wallabagV2Import;
-    private FirefoxImport $firefoxImport;
-    private ChromeImport $chromeImport;
-    private ReadabilityImport $readabilityImport;
-    private InstapaperImport $instapaperImport;
-    private PinboardImport $pinboardImport;
-    private DeliciousImport $deliciousImport;
-    private OmnivoreImport $omnivoreImport;
-    private WallabagV1Import $wallabagV1Import;
-    private ElcuratorImport $elcuratorImport;
-    private ShaarliImport $shaarliImport;
-    private PocketHtmlImport $pocketHtmlImport;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        TokenStorageInterface $tokenStorage,
-        UserRepository $userRepository,
-        WallabagV2Import $wallabagV2Import,
-        FirefoxImport $firefoxImport,
-        ChromeImport $chromeImport,
-        ReadabilityImport $readabilityImport,
-        InstapaperImport $instapaperImport,
-        PinboardImport $pinboardImport,
-        DeliciousImport $deliciousImport,
-        WallabagV1Import $wallabagV1Import,
-        ElcuratorImport $elcuratorImport,
-        ShaarliImport $shaarliImport,
-        PocketHtmlImport $pocketHtmlImport,
-        OmnivoreImport $omnivoreImport,
+        private EntityManagerInterface $entityManager,
+        private TokenStorageInterface $tokenStorage,
+        private UserRepository $userRepository,
+        private WallabagV2Import $wallabagV2Import,
+        private FirefoxImport $firefoxImport,
+        private ChromeImport $chromeImport,
+        private ReadabilityImport $readabilityImport,
+        private InstapaperImport $instapaperImport,
+        private PinboardImport $pinboardImport,
+        private DeliciousImport $deliciousImport,
+        private WallabagV1Import $wallabagV1Import,
+        private ElcuratorImport $elcuratorImport,
+        private ShaarliImport $shaarliImport,
+        private PocketHtmlImport $pocketHtmlImport,
+        private OmnivoreImport $omnivoreImport,
     ) {
-        $this->entityManager = $entityManager;
-        $this->tokenStorage = $tokenStorage;
-        $this->userRepository = $userRepository;
-        $this->wallabagV2Import = $wallabagV2Import;
-        $this->firefoxImport = $firefoxImport;
-        $this->chromeImport = $chromeImport;
-        $this->readabilityImport = $readabilityImport;
-        $this->instapaperImport = $instapaperImport;
-        $this->pinboardImport = $pinboardImport;
-        $this->deliciousImport = $deliciousImport;
-        $this->omnivoreImport = $omnivoreImport;
-        $this->wallabagV1Import = $wallabagV1Import;
-        $this->elcuratorImport = $elcuratorImport;
-        $this->shaarliImport = $shaarliImport;
-        $this->pocketHtmlImport = $pocketHtmlImport;
-
         parent::__construct();
     }
 

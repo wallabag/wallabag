@@ -13,17 +13,12 @@ use Wallabag\Redis\Producer as RedisProducer;
 
 class WallabagV2Controller extends WallabagController
 {
-    private WallabagV2Import $wallabagImport;
-    private Config $craueConfig;
-    private RabbitMqProducer $rabbitMqProducer;
-    private RedisProducer $redisProducer;
-
-    public function __construct(WallabagV2Import $wallabagImport, Config $craueConfig, RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
-    {
-        $this->wallabagImport = $wallabagImport;
-        $this->craueConfig = $craueConfig;
-        $this->rabbitMqProducer = $rabbitMqProducer;
-        $this->redisProducer = $redisProducer;
+    public function __construct(
+        private WallabagV2Import $wallabagImport,
+        private Config $craueConfig,
+        private RabbitMqProducer $rabbitMqProducer,
+        private RedisProducer $redisProducer,
+    ) {
     }
 
     /**

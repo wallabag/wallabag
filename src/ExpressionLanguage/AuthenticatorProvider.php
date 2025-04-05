@@ -9,11 +9,9 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class AuthenticatorProvider implements ExpressionFunctionProviderInterface
 {
-    private HttpClientInterface $requestHtmlFunctionClient;
-
-    public function __construct(HttpClientInterface $requestHtmlFunctionClient)
-    {
-        $this->requestHtmlFunctionClient = $requestHtmlFunctionClient;
+    public function __construct(
+        private HttpClientInterface $requestHtmlFunctionClient,
+    ) {
     }
 
     public function getFunctions(): array

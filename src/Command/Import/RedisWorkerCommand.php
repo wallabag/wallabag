@@ -16,12 +16,9 @@ class RedisWorkerCommand extends Command
     protected static $defaultName = 'wallabag:import:redis-worker';
     protected static $defaultDescription = 'Launch Redis worker';
 
-    private $container;
-
-    public function __construct(ContainerInterface $container)
-    {
-        $this->container = $container;
-
+    public function __construct(
+        private ContainerInterface $container,
+    ) {
         parent::__construct();
     }
 

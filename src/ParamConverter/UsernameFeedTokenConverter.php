@@ -18,14 +18,12 @@ use Wallabag\Repository\UserRepository;
  */
 class UsernameFeedTokenConverter implements ParamConverterInterface
 {
-    private $registry;
-
     /**
      * @param ManagerRegistry $registry Manager registry
      */
-    public function __construct(?ManagerRegistry $registry = null)
-    {
-        $this->registry = $registry;
+    public function __construct(
+        private ?ManagerRegistry $registry = null,
+    ) {
     }
 
     /**

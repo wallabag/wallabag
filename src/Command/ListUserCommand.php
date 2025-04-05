@@ -15,12 +15,9 @@ class ListUserCommand extends Command
     protected static $defaultName = 'wallabag:user:list';
     protected static $defaultDescription = 'List all users';
 
-    private UserRepository $userRepository;
-
-    public function __construct(UserRepository $userRepository)
-    {
-        $this->userRepository = $userRepository;
-
+    public function __construct(
+        private UserRepository $userRepository,
+    ) {
         parent::__construct();
     }
 

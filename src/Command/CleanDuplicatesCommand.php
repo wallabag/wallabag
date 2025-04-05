@@ -21,16 +21,12 @@ class CleanDuplicatesCommand extends Command
 
     protected SymfonyStyle $io;
     protected int $duplicates = 0;
-    private EntityManagerInterface $entityManager;
-    private EntryRepository $entryRepository;
-    private UserRepository $userRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, EntryRepository $entryRepository, UserRepository $userRepository)
-    {
-        $this->entityManager = $entityManager;
-        $this->entryRepository = $entryRepository;
-        $this->userRepository = $userRepository;
-
+    public function __construct(
+        private EntityManagerInterface $entityManager,
+        private EntryRepository $entryRepository,
+        private UserRepository $userRepository,
+    ) {
         parent::__construct();
     }
 

@@ -13,17 +13,12 @@ use Wallabag\Redis\Producer as RedisProducer;
 
 class ShaarliController extends HtmlController
 {
-    private ShaarliImport $shaarliImport;
-    private Config $craueConfig;
-    private RabbitMqProducer $rabbitMqProducer;
-    private RedisProducer $redisProducer;
-
-    public function __construct(ShaarliImport $shaarliImport, Config $craueConfig, RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
-    {
-        $this->shaarliImport = $shaarliImport;
-        $this->craueConfig = $craueConfig;
-        $this->rabbitMqProducer = $rabbitMqProducer;
-        $this->redisProducer = $redisProducer;
+    public function __construct(
+        private ShaarliImport $shaarliImport,
+        private Config $craueConfig,
+        private RabbitMqProducer $rabbitMqProducer,
+        private RedisProducer $redisProducer,
+    ) {
     }
 
     /**

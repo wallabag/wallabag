@@ -14,18 +14,15 @@ use Wallabag\Repository\UserRepository;
 
 abstract class AbstractConsumer
 {
-    protected $em;
-    protected $userRepository;
-    protected $import;
-    protected $eventDispatcher;
     protected $logger;
 
-    public function __construct(EntityManagerInterface $em, UserRepository $userRepository, AbstractImport $import, EventDispatcherInterface $eventDispatcher, ?LoggerInterface $logger = null)
-    {
-        $this->em = $em;
-        $this->userRepository = $userRepository;
-        $this->import = $import;
-        $this->eventDispatcher = $eventDispatcher;
+    public function __construct(
+        protected EntityManagerInterface $em,
+        protected UserRepository $userRepository,
+        protected AbstractImport $import,
+        protected EventDispatcherInterface $eventDispatcher,
+        ?LoggerInterface $logger = null,
+    ) {
         $this->logger = $logger ?: new NullLogger();
     }
 
