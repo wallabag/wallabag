@@ -21,10 +21,8 @@ class WallabagV1Controller extends WallabagController
     ) {
     }
 
-    /**
-     * @IsGranted("IMPORT_ENTRIES")
-     */
     #[Route(path: '/import/wallabag-v1', name: 'import_wallabag_v1', methods: ['GET', 'POST'])]
+    #[IsGranted('IMPORT_ENTRIES')]
     public function indexAction(Request $request, TranslatorInterface $translator)
     {
         return parent::indexAction($request, $translator);

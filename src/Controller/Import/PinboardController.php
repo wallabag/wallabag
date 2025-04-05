@@ -21,10 +21,8 @@ class PinboardController extends AbstractController
     ) {
     }
 
-    /**
-     * @IsGranted("IMPORT_ENTRIES")
-     */
     #[Route(path: '/import/pinboard', name: 'import_pinboard', methods: ['GET', 'POST'])]
+    #[IsGranted('IMPORT_ENTRIES')]
     public function indexAction(Request $request, PinboardImport $pinboard, Config $craueConfig, TranslatorInterface $translator)
     {
         $form = $this->createForm(UploadImportType::class);

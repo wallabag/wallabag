@@ -19,10 +19,8 @@ class ImportController extends AbstractController
     ) {
     }
 
-    /**
-     * @IsGranted("IMPORT_ENTRIES")
-     */
     #[Route(path: '/import/', name: 'import', methods: ['GET'])]
+    #[IsGranted('IMPORT_ENTRIES')]
     public function importAction(ImportChain $importChain)
     {
         return $this->render('Import/index.html.twig', [

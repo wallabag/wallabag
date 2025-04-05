@@ -21,10 +21,8 @@ class ChromeController extends BrowserController
     ) {
     }
 
-    /**
-     * @IsGranted("IMPORT_ENTRIES")
-     */
     #[Route(path: '/import/chrome', name: 'import_chrome', methods: ['GET', 'POST'])]
+    #[IsGranted('IMPORT_ENTRIES')]
     public function indexAction(Request $request, TranslatorInterface $translator)
     {
         return parent::indexAction($request, $translator);

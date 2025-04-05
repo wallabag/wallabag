@@ -21,10 +21,8 @@ class DeliciousController extends AbstractController
     ) {
     }
 
-    /**
-     * @IsGranted("IMPORT_ENTRIES")
-     */
     #[Route(path: '/import/delicious', name: 'import_delicious', methods: ['GET', 'POST'])]
+    #[IsGranted('IMPORT_ENTRIES')]
     public function indexAction(Request $request, DeliciousImport $delicious, Config $craueConfig, TranslatorInterface $translator)
     {
         $form = $this->createForm(UploadImportType::class);

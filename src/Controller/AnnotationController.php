@@ -32,10 +32,10 @@ class AnnotationController extends AbstractFOSRestController
      *
      * @see Api\WallabagRestController
      *
-     * @IsGranted("LIST_ANNOTATIONS", subject="entry")
      * @return JsonResponse
      */
     #[Route(path: '/annotations/{entry}.{_format}', name: 'annotations_get_annotations', methods: ['GET'], defaults: ['_format' => 'json'])]
+    #[IsGranted('LIST_ANNOTATIONS', subject: 'entry')]
     public function getAnnotationsAction(Entry $entry, AnnotationRepository $annotationRepository)
     {
         $annotationRows = $annotationRepository->findByEntryIdAndUserId($entry->getId(), $this->getUser()->getId());
@@ -53,10 +53,10 @@ class AnnotationController extends AbstractFOSRestController
      *
      * @see Api\WallabagRestController
      *
-     * @IsGranted("CREATE_ANNOTATIONS", subject="entry")
      * @return JsonResponse
      */
     #[Route(path: '/annotations/{entry}.{_format}', name: 'annotations_post_annotation', methods: ['POST'], defaults: ['_format' => 'json'])]
+    #[IsGranted('CREATE_ANNOTATIONS', subject: 'entry')]
     public function postAnnotationAction(Request $request, Entry $entry)
     {
         $data = json_decode($request->getContent(), true);
@@ -87,10 +87,10 @@ class AnnotationController extends AbstractFOSRestController
      *
      * @see Api\WallabagRestController
      *
-     * @IsGranted("EDIT", subject="annotation")
      * @return JsonResponse
      */
     #[Route(path: '/annotations/{annotation}.{_format}', name: 'annotations_put_annotation', methods: ['PUT'], defaults: ['_format' => 'json'])]
+    #[IsGranted('EDIT', subject: 'annotation')]
     public function putAnnotationAction(Request $request, Annotation $annotation)
     {
         try {
@@ -122,10 +122,10 @@ class AnnotationController extends AbstractFOSRestController
      *
      * @see Api\WallabagRestController
      *
-     * @IsGranted("DELETE", subject="annotation")
      * @return JsonResponse
      */
     #[Route(path: '/annotations/{annotation}.{_format}', name: 'annotations_delete_annotation', methods: ['DELETE'], defaults: ['_format' => 'json'])]
+    #[IsGranted('DELETE', subject: 'annotation')]
     public function deleteAnnotationAction(Annotation $annotation)
     {
         try {

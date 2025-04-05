@@ -21,10 +21,8 @@ class PocketHtmlController extends HtmlController
     ) {
     }
 
-    /**
-     * @IsGranted("IMPORT_ENTRIES")
-     */
     #[Route(path: '/import/pocket_html', name: 'import_pocket_html', methods: ['GET', 'POST'])]
+    #[IsGranted('IMPORT_ENTRIES')]
     public function indexAction(Request $request, TranslatorInterface $translator)
     {
         return parent::indexAction($request, $translator);
