@@ -11,6 +11,7 @@ use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\DefaultQuoteStrategy;
 use PHPUnit\Framework\TestCase;
+use Wallabag\Entity\Entry;
 use Wallabag\Entity\User;
 use Wallabag\Event\Subscriber\TablePrefixSubscriber;
 
@@ -94,7 +95,7 @@ class TablePrefixSubscriberTest extends TestCase
 
         $subscriber = new TablePrefixSubscriber('yo_');
 
-        $metaClass = new ClassMetadata('Wallabag\Entity\Entry');
+        $metaClass = new ClassMetadata(Entry::class);
         $metaClass->setPrimaryTable(['name' => 'entry']);
         $metaClass->mapManyToMany([
             'fieldName' => 'tags',
