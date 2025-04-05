@@ -14,10 +14,10 @@ use Wallabag\Import\ImportInterface;
 abstract class BrowserController extends AbstractController
 {
     /**
-     * @IsGranted("IMPORT_ENTRIES")
      * @return Response
      */
     #[Route(path: '/import/browser', name: 'import_browser', methods: ['GET', 'POST'])]
+    #[IsGranted('IMPORT_ENTRIES')]
     public function indexAction(Request $request, TranslatorInterface $translator)
     {
         $form = $this->createForm(UploadImportType::class);

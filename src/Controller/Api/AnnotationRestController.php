@@ -34,11 +34,11 @@ class AnnotationRestController extends WallabagRestController
      *         description="Returned when successful"
      *     )
      * )
-     * @IsGranted("LIST_ANNOTATIONS", subject="entry")
      *
      * @return Response
      */
     #[Route(path: '/api/annotations/{entry}.{_format}', name: 'api_get_annotations', methods: ['GET'], defaults: ['_format' => 'json'])]
+    #[IsGranted('LIST_ANNOTATIONS', subject: 'entry')]
     public function getAnnotationsAction(Entry $entry)
     {
         return $this->forward('Wallabag\Controller\AnnotationController::getAnnotationsAction', [
@@ -99,11 +99,10 @@ class AnnotationRestController extends WallabagRestController
      *     )
      * )
      *
-     * @IsGranted("CREATE_ANNOTATIONS", subject="entry")
-     *
      * @return Response
      */
     #[Route(path: '/api/annotations/{entry}.{_format}', name: 'api_post_annotation', methods: ['POST'], defaults: ['_format' => 'json'])]
+    #[IsGranted('CREATE_ANNOTATIONS', subject: 'entry')]
     public function postAnnotationAction(Request $request, Entry $entry)
     {
         return $this->forward('Wallabag\Controller\AnnotationController::postAnnotationAction', [
@@ -133,11 +132,11 @@ class AnnotationRestController extends WallabagRestController
      *         description="Returned when successful"
      *     )
      * )
-     * @IsGranted("EDIT", subject="annotation")
      *
      * @return Response
      */
     #[Route(path: '/api/annotations/{annotation}.{_format}', name: 'api_put_annotation', methods: ['PUT'], defaults: ['_format' => 'json'])]
+    #[IsGranted('EDIT', subject: 'annotation')]
     public function putAnnotationAction(Annotation $annotation, Request $request)
     {
         return $this->forward('Wallabag\Controller\AnnotationController::putAnnotationAction', [
@@ -167,11 +166,11 @@ class AnnotationRestController extends WallabagRestController
      *         description="Returned when successful"
      *     )
      * )
-     * @IsGranted("DELETE", subject="annotation")
      *
      * @return Response
      */
     #[Route(path: '/api/annotations/{annotation}.{_format}', name: 'api_delete_annotation', methods: ['DELETE'], defaults: ['_format' => 'json'])]
+    #[IsGranted('DELETE', subject: 'annotation')]
     public function deleteAnnotationAction(Annotation $annotation)
     {
         return $this->forward('Wallabag\Controller\AnnotationController::deleteAnnotationAction', [

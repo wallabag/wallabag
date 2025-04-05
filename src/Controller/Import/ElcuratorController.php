@@ -21,10 +21,8 @@ class ElcuratorController extends WallabagController
     ) {
     }
 
-    /**
-     * @IsGranted("IMPORT_ENTRIES")
-     */
     #[Route(path: '/import/elcurator', name: 'import_elcurator', methods: ['GET', 'POST'])]
+    #[IsGranted('IMPORT_ENTRIES')]
     public function indexAction(Request $request, TranslatorInterface $translator)
     {
         return parent::indexAction($request, $translator);

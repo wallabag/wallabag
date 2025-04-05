@@ -7,10 +7,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class StaticController extends AbstractController
 {
-    /**
-     * @IsGranted("IS_AUTHENTICATED_FULLY")
-     */
     #[Route(path: '/howto', name: 'howto', methods: ['GET'])]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function howtoAction()
     {
         $addonsUrl = $this->getParameter('addons_url');
@@ -23,10 +21,8 @@ class StaticController extends AbstractController
         );
     }
 
-    /**
-     * @IsGranted("IS_AUTHENTICATED_FULLY")
-     */
     #[Route(path: '/about', name: 'about', methods: ['GET'])]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function aboutAction()
     {
         return $this->render(
@@ -38,10 +34,8 @@ class StaticController extends AbstractController
         );
     }
 
-    /**
-     * @IsGranted("IS_AUTHENTICATED_FULLY")
-     */
     #[Route(path: '/quickstart', name: 'quickstart', methods: ['GET'])]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function quickstartAction()
     {
         return $this->render(

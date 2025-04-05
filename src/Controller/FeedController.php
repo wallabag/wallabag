@@ -28,12 +28,11 @@ class FeedController extends AbstractController
     /**
      * Shows unread entries for current user.
      *
-     * @IsGranted("PUBLIC_ACCESS")
-     *
-     * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
      * @return Response
      */
     #[Route(path: '/feed/{username}/{token}/unread/{page}', name: 'unread_feed', methods: ['GET'], defaults: ['page' => 1, '_format' => 'xml'])]
+    #[IsGranted('PUBLIC_ACCESS')]
+    #[ParamConverter('user', class: User::class, converter: 'username_feed_token_converter')]
     public function showUnreadFeedAction(User $user, $page)
     {
         return $this->showEntries('unread', $user, $page);
@@ -42,12 +41,11 @@ class FeedController extends AbstractController
     /**
      * Shows read entries for current user.
      *
-     * @IsGranted("PUBLIC_ACCESS")
-     *
-     * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
      * @return Response
      */
     #[Route(path: '/feed/{username}/{token}/archive/{page}', name: 'archive_feed', methods: ['GET'], defaults: ['page' => 1, '_format' => 'xml'])]
+    #[IsGranted('PUBLIC_ACCESS')]
+    #[ParamConverter('user', class: User::class, converter: 'username_feed_token_converter')]
     public function showArchiveFeedAction(User $user, $page)
     {
         return $this->showEntries('archive', $user, $page);
@@ -56,12 +54,11 @@ class FeedController extends AbstractController
     /**
      * Shows starred entries for current user.
      *
-     * @IsGranted("PUBLIC_ACCESS")
-     *
-     * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
      * @return Response
      */
     #[Route(path: '/feed/{username}/{token}/starred/{page}', name: 'starred_feed', methods: ['GET'], defaults: ['page' => 1, '_format' => 'xml'])]
+    #[IsGranted('PUBLIC_ACCESS')]
+    #[ParamConverter('user', class: User::class, converter: 'username_feed_token_converter')]
     public function showStarredFeedAction(User $user, $page)
     {
         return $this->showEntries('starred', $user, $page);
@@ -70,12 +67,11 @@ class FeedController extends AbstractController
     /**
      * Shows all entries for current user.
      *
-     * @IsGranted("PUBLIC_ACCESS")
-     *
-     * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
      * @return Response
      */
     #[Route(path: '/feed/{username}/{token}/all/{page}', name: 'all_feed', methods: ['GET'], defaults: ['page' => 1, '_format' => 'xml'])]
+    #[IsGranted('PUBLIC_ACCESS')]
+    #[ParamConverter('user', class: User::class, converter: 'username_feed_token_converter')]
     public function showAllFeedAction(User $user, $page)
     {
         return $this->showEntries('all', $user, $page);
@@ -84,13 +80,12 @@ class FeedController extends AbstractController
     /**
      * Shows entries associated to a tag for current user.
      *
-     * @IsGranted("PUBLIC_ACCESS")
-     *
-     * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
-     * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      * @return Response
      */
     #[Route(path: '/feed/{username}/{token}/tags/{slug}/{page}', name: 'tag_feed', methods: ['GET'], defaults: ['page' => 1, '_format' => 'xml'])]
+    #[IsGranted('PUBLIC_ACCESS')]
+    #[ParamConverter('user', class: User::class, converter: 'username_feed_token_converter')]
+    #[ParamConverter('tag', options: ['mapping' => ['slug' => 'slug']])]
     public function showTagsFeedAction(Request $request, User $user, Tag $tag, PreparePagerForEntries $preparePagerForEntries, $page)
     {
         $sort = $request->query->get('sort', 'created');
