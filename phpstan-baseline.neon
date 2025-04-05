@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Instanceof between string and DateTime will always evaluate to false\\.$#"
-			count: 1
-			path: src/Helper/ContentProxy.php
-
-		-
 			message: "#^Strict comparison using \\=\\=\\= between false and Symfony\\\\Contracts\\\\HttpClient\\\\ResponseInterface will always evaluate to false\\.$#"
 			count: 1
 			path: src/Helper/DownloadImages.php
@@ -54,11 +49,6 @@ parameters:
 			message: "#^Unreachable statement \\- code above always terminates\\.$#"
 			count: 1
 			path: tests/Controller/SecurityControllerTest.php
-
-		-
-			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertNull\\(\\) with DateTimeInterface will always evaluate to false\\.$#"
-			count: 1
-			path: tests/Helper/ContentProxyTest.php
 
 		-
 			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertNull\\(\\) with string will always evaluate to false\\.$#"

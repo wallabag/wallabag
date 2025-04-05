@@ -859,7 +859,7 @@ class Entry
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTimeInterface|null
      */
     public function getPublishedAt()
     {
