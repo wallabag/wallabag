@@ -21,16 +21,12 @@ class CleanDuplicatesCommand extends Command
 
     protected SymfonyStyle $io;
     protected int $duplicates = 0;
-    private EntityManagerInterface $entityManager;
-    private EntryRepository $entryRepository;
-    private UserRepository $userRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, EntryRepository $entryRepository, UserRepository $userRepository)
-    {
-        $this->entityManager = $entityManager;
-        $this->entryRepository = $entryRepository;
-        $this->userRepository = $userRepository;
-
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly EntryRepository $entryRepository,
+        private readonly UserRepository $userRepository,
+    ) {
         parent::__construct();
     }
 
@@ -55,7 +51,7 @@ class CleanDuplicatesCommand extends Command
             try {
                 $user = $this->getUser($username);
                 $this->cleanDuplicates($user);
-            } catch (NoResultException $e) {
+            } catch (NoResultException) {
                 $this->io->error(\sprintf('User "%s" not found.', $username));
 
                 return 1;
@@ -104,8 +100,8 @@ class CleanDuplicatesCommand extends Command
 
     private function similarUrl($url)
     {
-        if (\in_array(substr($url, -1), ['/', '#'], true)) { // get rid of "/" and "#" and the end of urls
-            return substr($url, 0, \strlen($url));
+        if (\in_array(substr((string) $url, -1), ['/', '#'], true)) { // get rid of "/" and "#" and the end of urls
+            return substr((string) $url, 0, \strlen((string) $url));
         }
 
         return $url;

@@ -15,7 +15,7 @@ if (!isPartialRun()) {
         '--force',
         '--env=test',
         '--no-debug',
-    ]))->run(function ($type, $buffer) {
+    ]))->run(function ($type, $buffer): void {
         echo $buffer;
     });
 
@@ -25,7 +25,7 @@ if (!isPartialRun()) {
         'doctrine:database:create',
         '--env=test',
         '--no-debug',
-    ]))->mustRun(function ($type, $buffer) {
+    ]))->mustRun(function ($type, $buffer): void {
         echo $buffer;
     });
 
@@ -37,7 +37,7 @@ if (!isPartialRun()) {
         '--env=test',
         '--no-debug',
         '-vv',
-    ]))->mustRun(function ($type, $buffer) {
+    ]))->mustRun(function ($type, $buffer): void {
         echo $buffer;
     });
 
@@ -48,7 +48,7 @@ if (!isPartialRun()) {
         '--no-interaction',
         '--env=test',
         '-v',
-    ]))->mustRun(function ($type, $buffer) {
+    ]))->mustRun(function ($type, $buffer): void {
         echo $buffer;
     });
 }
@@ -60,6 +60,6 @@ if (!isPartialRun()) {
     '--no-interaction',
     '--env=test',
     '--no-debug',
-]))->mustRun(function ($type, $buffer) {
+]))->mustRun(function ($type, $buffer): void {
     echo $buffer;
 });

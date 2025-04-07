@@ -20,15 +20,13 @@ use Wallabag\Repository\UserRepository;
 
 /**
  * User.
- *
- * @XmlRoot("user")
- *
- * @UniqueEntity("email")
- * @UniqueEntity("username")
  */
 #[ORM\Table(name: '`user`')]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[UniqueEntity('email')]
+#[UniqueEntity('username')]
+#[XmlRoot('user')]
 class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorInterface, BackupCodeInterface
 {
     use EntityTimestampsTrait;
@@ -42,12 +40,11 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      *      type="int",
      *      example=12,
      * )
-     *
-     * @Groups({"user_api", "user_api_with_client"})
      */
     #[ORM\Column(name: 'id', type: 'integer')]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[Groups(['user_api', 'user_api_with_client'])]
     protected $id;
 
     /**
@@ -58,9 +55,9 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      *      type="string",
      *      example="Walla Baggger",
      * )
-     * @Groups({"user_api", "user_api_with_client"})
      */
     #[ORM\Column(name: 'name', type: 'text', nullable: true)]
+    #[Groups(['user_api', 'user_api_with_client'])]
     protected $name;
 
     /**
@@ -71,9 +68,8 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      *      type="string",
      *      example="wallabag",
      * )
-     *
-     * @Groups({"user_api", "user_api_with_client"})
      */
+    #[Groups(['user_api', 'user_api_with_client'])]
     protected $username;
 
     /**
@@ -84,9 +80,8 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      *      type="string",
      *      example="wallabag@wallabag.io",
      * )
-     *
-     * @Groups({"user_api", "user_api_with_client"})
      */
+    #[Groups(['user_api', 'user_api_with_client'])]
     protected $email;
 
     /**
@@ -97,9 +92,9 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      *      type="string",
      *      example="2023-06-27T19:25:44+0000",
      * )
-     * @Groups({"user_api", "user_api_with_client"})
      */
     #[ORM\Column(name: 'created_at', type: 'datetime')]
+    #[Groups(['user_api', 'user_api_with_client'])]
     protected $createdAt;
 
     /**
@@ -110,9 +105,9 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      *      type="string",
      *      example="2023-06-27T19:37:30+0000",
      * )
-     * @Groups({"user_api", "user_api_with_client"})
      */
     #[ORM\Column(name: 'updated_at', type: 'datetime')]
+    #[Groups(['user_api', 'user_api_with_client'])]
     protected $updatedAt;
 
     #[ORM\OneToMany(targetEntity: Entry::class, mappedBy: 'user', cascade: ['remove'])]
@@ -140,10 +135,9 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      *      description="Default client created during user registration. Used for further authorization",
      *      ref=@Model(type=Client::class, groups={"user_api_with_client"})
      * )
-     *
-     * @Groups({"user_api_with_client"})
-     * @Accessor(getter="getFirstClient")
      */
+    #[Groups(['user_api_with_client'])]
+    #[Accessor(getter: 'getFirstClient')]
     protected $default_client;
 
     #[ORM\Column(type: 'integer', nullable: true)]
@@ -383,7 +377,7 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
         foreach ($this->backupCodes as $key => $backupCode) {
             // backup code are hashed using `password_hash`
             // see ConfigController->otpAppAction
-            if (password_verify($code, $backupCode)) {
+            if (password_verify($code, (string) $backupCode)) {
                 return $key;
             }
         }

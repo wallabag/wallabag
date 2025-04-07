@@ -14,17 +14,12 @@ use Wallabag\Repository\TagRepository;
 
 class RuleBasedTagger
 {
-    private $rulerz;
-    private $tagRepository;
-    private $entryRepository;
-    private $logger;
-
-    public function __construct(RulerZ $rulerz, TagRepository $tagRepository, EntryRepository $entryRepository, LoggerInterface $logger)
-    {
-        $this->rulerz = $rulerz;
-        $this->tagRepository = $tagRepository;
-        $this->entryRepository = $entryRepository;
-        $this->logger = $logger;
+    public function __construct(
+        private readonly RulerZ $rulerz,
+        private readonly TagRepository $tagRepository,
+        private readonly EntryRepository $entryRepository,
+        private readonly LoggerInterface $logger,
+    ) {
     }
 
     /**

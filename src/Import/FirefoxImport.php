@@ -39,7 +39,7 @@ class FirefoxImport extends BrowserImport
             'is_archived' => (int) $this->markAsRead,
             'is_starred' => false,
             'tags' => '',
-            'created_at' => substr($entry['dateAdded'], 0, 10),
+            'created_at' => substr((string) $entry['dateAdded'], 0, 10),
         ];
 
         if (\array_key_exists('tags', $entry) && '' !== $entry['tags']) {

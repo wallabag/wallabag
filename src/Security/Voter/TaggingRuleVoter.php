@@ -35,12 +35,9 @@ class TaggingRuleVoter extends Voter
             return false;
         }
 
-        switch ($attribute) {
-            case self::EDIT:
-            case self::DELETE:
-                return $subject->getConfig()->getUser() === $user;
-        }
-
-        return false;
+        return match ($attribute) {
+            self::EDIT, self::DELETE => $subject->getConfig()->getUser() === $user,
+            default => false,
+        };
     }
 }

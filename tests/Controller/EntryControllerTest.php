@@ -1283,7 +1283,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertSame($url, $entry->getUrl());
         $this->assertStringContainsString('Comment Hidalgo', $entry->getTitle());
         // instead of checking for the filename (which might change) check that the image is now local
-        $this->assertStringContainsString(rtrim($client->getContainer()->getParameter('domain_name'), '/') . '/assets/images/', $entry->getContent());
+        $this->assertStringContainsString(rtrim((string) $client->getContainer()->getParameter('domain_name'), '/') . '/assets/images/', $entry->getContent());
 
         $client->getContainer()->get(Config::class)->set('download_images_enabled', 0);
     }

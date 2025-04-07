@@ -85,11 +85,10 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/exists.{_format}", name="api_get_entries_exists", methods={"GET"}, defaults={"_format": "json"})
-     * @IsGranted("LIST_ENTRIES")
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/exists.{_format}', name: 'api_get_entries_exists', methods: ['GET'], defaults: ['_format' => 'json'])]
+    #[IsGranted('LIST_ENTRIES')]
     public function getEntriesExistsAction(Request $request, EntryRepository $entryRepository)
     {
         $returnId = (null === $request->query->get('return_id')) ? false : (bool) $request->query->get('return_id');
@@ -132,9 +131,7 @@ class EntryRestController extends WallabagRestController
         }
 
         if (false === $returnId) {
-            $results = array_map(function ($v) {
-                return null !== $v;
-            }, $results);
+            $results = array_map(fn ($v) => null !== $v, $results);
         }
 
         $results = $this->replaceUrlHashes($results, $urlHashMap);
@@ -299,11 +296,10 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries.{_format}", name="api_get_entries", methods={"GET"}, defaults={"_format": "json"})
-     * @IsGranted("LIST_ENTRIES")
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries.{_format}', name: 'api_get_entries', methods: ['GET'], defaults: ['_format' => 'json'])]
+    #[IsGranted('LIST_ENTRIES')]
     public function getEntriesAction(Request $request, EntryRepository $entryRepository)
     {
         $isArchived = (null === $request->query->get('archive')) ? null : (bool) $request->query->get('archive');
@@ -390,11 +386,10 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}.{_format}", name="api_get_entry", methods={"GET"}, defaults={"_format": "json"})
-     * @IsGranted("VIEW", subject="entry")
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/{entry}.{_format}', name: 'api_get_entry', methods: ['GET'], defaults: ['_format' => 'json'])]
+    #[IsGranted('VIEW', subject: 'entry')]
     public function getEntryAction(Entry $entry)
     {
         return $this->sendResponse($entry);
@@ -432,11 +427,10 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}/export.{_format}", name="api_get_entry_export", methods={"GET"}, defaults={"_format": "json"})
-     * @IsGranted("VIEW", subject="entry")
-     *
      * @return Response
      */
+    #[Route(path: '/api/entries/{entry}/export.{_format}', name: 'api_get_entry_export', methods: ['GET'], defaults: ['_format' => 'json'])]
+    #[IsGranted('VIEW', subject: 'entry')]
     public function getEntryExportAction(Entry $entry, Request $request, EntriesExport $entriesExport)
     {
         return $entriesExport
@@ -465,11 +459,10 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/list.{_format}", name="api_delete_entries_list", methods={"DELETE"}, defaults={"_format": "json"})
-     * @IsGranted("DELETE_ENTRIES")
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/list.{_format}', name: 'api_delete_entries_list', methods: ['DELETE'], defaults: ['_format' => 'json'])]
+    #[IsGranted('DELETE_ENTRIES')]
     public function deleteEntriesListAction(Request $request, EntryRepository $entryRepository, EventDispatcherInterface $eventDispatcher)
     {
         $urls = json_decode($request->query->get('urls', '[]'));
@@ -522,13 +515,12 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/lists.{_format}", name="api_post_entries_list", methods={"POST"}, defaults={"_format": "json"})
-     * @IsGranted("CREATE_ENTRIES")
-     *
      * @throws HttpException When limit is reached
      *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/lists.{_format}', name: 'api_post_entries_list', methods: ['POST'], defaults: ['_format' => 'json'])]
+    #[IsGranted('CREATE_ENTRIES')]
     public function postEntriesListAction(Request $request, EntryRepository $entryRepository, EventDispatcherInterface $eventDispatcher, ContentProxy $contentProxy)
     {
         $urls = json_decode($request->query->get('urls', '[]'));
@@ -706,11 +698,10 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries.{_format}", name="api_post_entries", methods={"POST"}, defaults={"_format": "json"})
-     * @IsGranted("CREATE_ENTRIES")
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries.{_format}', name: 'api_post_entries', methods: ['POST'], defaults: ['_format' => 'json'])]
+    #[IsGranted('CREATE_ENTRIES')]
     public function postEntriesAction(
         Request $request,
         EntryRepository $entryRepository,
@@ -930,11 +921,10 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}.{_format}", name="api_patch_entries", methods={"PATCH"}, defaults={"_format": "json"})
-     * @IsGranted("EDIT", subject="entry")
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/{entry}.{_format}', name: 'api_patch_entries', methods: ['PATCH'], defaults: ['_format' => 'json'])]
+    #[IsGranted('EDIT', subject: 'entry')]
     public function patchEntriesAction(Entry $entry, Request $request, ContentProxy $contentProxy, LoggerInterface $logger, TagsAssigner $tagsAssigner, EventDispatcherInterface $eventDispatcher)
     {
         $data = $this->retrieveValueFromRequest($request);
@@ -1045,11 +1035,10 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}/reload.{_format}", name="api_patch_entries_reload", methods={"PATCH"}, defaults={"_format": "json"})
-     * @IsGranted("RELOAD", subject="entry")
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/{entry}/reload.{_format}', name: 'api_patch_entries_reload', methods: ['PATCH'], defaults: ['_format' => 'json'])]
+    #[IsGranted('RELOAD', subject: 'entry')]
     public function patchEntriesReloadAction(Entry $entry, ContentProxy $contentProxy, LoggerInterface $logger, EventDispatcherInterface $eventDispatcher)
     {
         try {
@@ -1100,11 +1089,10 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}.{_format}", name="api_delete_entries", methods={"DELETE"}, defaults={"_format": "json"})
-     * @IsGranted("DELETE", subject="entry")
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/{entry}.{_format}', name: 'api_delete_entries', methods: ['DELETE'], defaults: ['_format' => 'json'])]
+    #[IsGranted('DELETE', subject: 'entry')]
     public function deleteEntriesAction(Entry $entry, Request $request, EventDispatcherInterface $eventDispatcher)
     {
         $expect = $request->query->get('expect', 'entry');
@@ -1152,11 +1140,10 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}/tags.{_format}", name="api_get_entries_tags", methods={"GET"}, defaults={"_format": "json"})
-     * @IsGranted("LIST_TAGS", subject="entry")
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/{entry}/tags.{_format}', name: 'api_get_entries_tags', methods: ['GET'], defaults: ['_format' => 'json'])]
+    #[IsGranted('LIST_TAGS', subject: 'entry')]
     public function getEntriesTagsAction(Entry $entry)
     {
         return $this->sendResponse($entry->getTags());
@@ -1194,11 +1181,10 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}/tags.{_format}", name="api_post_entries_tags", methods={"POST"}, defaults={"_format": "json"})
-     * @IsGranted("TAG", subject="entry")
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/{entry}/tags.{_format}', name: 'api_post_entries_tags', methods: ['POST'], defaults: ['_format' => 'json'])]
+    #[IsGranted('TAG', subject: 'entry')]
     public function postEntriesTagsAction(Request $request, Entry $entry, TagsAssigner $tagsAssigner)
     {
         $tags = $request->request->get('tags', '');
@@ -1244,11 +1230,10 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}/tags/{tag}.{_format}", name="api_delete_entries_tags", methods={"DELETE"}, defaults={"_format": "json"})
-     * @IsGranted("UNTAG", subject="entry")
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/{entry}/tags/{tag}.{_format}', name: 'api_delete_entries_tags', methods: ['DELETE'], defaults: ['_format' => 'json'])]
+    #[IsGranted('UNTAG', subject: 'entry')]
     public function deleteEntriesTagsAction(Entry $entry, Tag $tag)
     {
         $entry->removeTag($tag);
@@ -1278,11 +1263,10 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/tags/list.{_format}", name="api_delete_entries_tags_list", methods={"DELETE"}, defaults={"_format": "json"})
-     * @IsGranted("DELETE_TAGS")
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/tags/list.{_format}', name: 'api_delete_entries_tags_list', methods: ['DELETE'], defaults: ['_format' => 'json'])]
+    #[IsGranted('DELETE_TAGS')]
     public function deleteEntriesTagsListAction(Request $request, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
         $list = json_decode($request->query->get('list', '[]'));
@@ -1344,11 +1328,10 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/tags/lists.{_format}", name="api_post_entries_tags_list", methods={"POST"}, defaults={"_format": "json"})
-     * @IsGranted("CREATE_TAGS")
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/tags/lists.{_format}', name: 'api_post_entries_tags_list', methods: ['POST'], defaults: ['_format' => 'json'])]
+    #[IsGranted('CREATE_TAGS')]
     public function postEntriesTagsListAction(Request $request, EntryRepository $entryRepository, TagsAssigner $tagsAssigner)
     {
         $list = json_decode($request->query->get('list', '[]'));

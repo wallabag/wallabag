@@ -13,13 +13,10 @@ use Wallabag\Entity\User;
  */
 class Redirect
 {
-    private $router;
-    private $tokenStorage;
-
-    public function __construct(UrlGeneratorInterface $router, TokenStorageInterface $tokenStorage)
-    {
-        $this->router = $router;
-        $this->tokenStorage = $tokenStorage;
+    public function __construct(
+        private readonly UrlGeneratorInterface $router,
+        private readonly TokenStorageInterface $tokenStorage,
+    ) {
     }
 
     /**

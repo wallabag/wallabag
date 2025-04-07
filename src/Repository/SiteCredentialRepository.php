@@ -14,13 +14,11 @@ use Wallabag\Helper\CryptoProxy;
  */
 class SiteCredentialRepository extends ServiceEntityRepository
 {
-    private $cryptoProxy;
-
-    public function __construct(ManagerRegistry $registry, CryptoProxy $cryptoProxy)
-    {
+    public function __construct(
+        ManagerRegistry $registry,
+        private readonly CryptoProxy $cryptoProxy,
+    ) {
         parent::__construct($registry, SiteCredential::class);
-
-        $this->cryptoProxy = $cryptoProxy;
     }
 
     /**

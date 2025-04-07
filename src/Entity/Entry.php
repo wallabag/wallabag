@@ -18,7 +18,6 @@ use Wallabag\Repository\EntryRepository;
 /**
  * Entry.
  *
- * @XmlRoot("entry")
  * @Hateoas\Relation("self", href = "expr('/api/entries/' ~ object.getId())")
  */
 #[ORM\Table(name: '`entry`')]
@@ -32,6 +31,7 @@ use Wallabag\Repository\EntryRepository;
 #[ORM\Index(columns: ['user_id', 'is_starred', 'starred_at'])]
 #[ORM\Entity(repositoryClass: EntryRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[XmlRoot('entry')]
 class Entry
 {
     use EntityTimestampsTrait;
@@ -39,43 +39,36 @@ class Entry
     /** @Serializer\XmlAttribute */
     /**
      * @var int
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'id', type: 'integer')]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $id;
 
     /**
      * @var string|null
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'uid', type: 'string', length: 23, nullable: true)]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $uid;
 
     /**
      * @var string|null
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'title', type: 'text', nullable: true)]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $title;
 
     /**
      * Define the url fetched by wallabag (the final url after potential redirections).
      *
      * @var string|null
-     *
-     * @Assert\NotBlank()
-     * @Assert\Url(
-     *     message = "The url '{{ value }}' is not a valid url",
-     * )
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'url', type: 'text', nullable: true)]
+    #[Assert\NotBlank]
+    #[Assert\Url(message: "The url '{{ value }}' is not a valid url")]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $url;
 
     /**
@@ -88,20 +81,18 @@ class Entry
      * From where user retrieved/found the url (an other article, a twitter, or the given_url if non are provided).
      *
      * @var string|null
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'origin_url', type: 'text', nullable: true)]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $originUrl;
 
     /**
      * Define the url entered by the user (without redirections).
      *
      * @var string|null
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'given_url', type: 'text', nullable: true)]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $givenUrl;
 
     /**
@@ -112,159 +103,134 @@ class Entry
 
     /**
      * @var bool
-     *
-     * @Exclude
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'is_archived', type: 'boolean')]
+    #[Exclude]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $isArchived = false;
 
     /**
      * @var \DateTimeInterface|null
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'archived_at', type: 'datetime', nullable: true)]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $archivedAt;
 
     /**
      * @var bool
-     *
-     * @Exclude
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'is_starred', type: 'boolean')]
+    #[Exclude]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $isStarred = false;
 
     /**
      * @var string|null
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'content', type: 'text', nullable: true)]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $content;
 
     /**
      * @var \DateTimeInterface
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'created_at', type: 'datetime')]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $createdAt;
 
     /**
      * @var \DateTimeInterface
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'updated_at', type: 'datetime')]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $updatedAt;
 
     /**
      * @var \DateTimeInterface|null
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'published_at', type: 'datetime', nullable: true)]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $publishedAt;
 
     /**
      * @var array|null
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'published_by', type: 'array', nullable: true)]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $publishedBy;
 
     /**
      * @var \DateTimeInterface|null
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'starred_at', type: 'datetime', nullable: true)]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $starredAt;
 
-    /**
-     * @Groups({"entries_for_user", "export_all"})
-     */
     #[ORM\JoinTable]
     #[ORM\OneToMany(targetEntity: Annotation::class, mappedBy: 'entry', cascade: ['persist', 'remove'])]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $annotations;
 
     /**
      * @var string|null
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'mimetype', type: 'text', nullable: true)]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $mimetype;
 
     /**
      * @var string|null
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'language', type: 'string', length: 20, nullable: true)]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $language;
 
     /**
      * @var int
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'reading_time', type: 'integer', nullable: false)]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $readingTime = 0;
 
     /**
      * @var string|null
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'domain_name', type: 'text', nullable: true)]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $domainName;
 
     /**
      * @var string|null
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'preview_picture', type: 'text', nullable: true)]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $previewPicture;
 
     /**
      * @var string|null
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'http_status', type: 'string', length: 3, nullable: true)]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $httpStatus;
 
     /**
      * @var array|null
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'headers', type: 'array', nullable: true)]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $headers;
 
     /**
      * @var bool
-     *
-     * @Exclude
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'is_not_parsed', type: 'boolean', options: ['default' => false])]
+    #[Exclude]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $isNotParsed = false;
 
-    /**
-     * @Exclude
-     *
-     * @Groups({"export_all"})
-     */
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'entries')]
+    #[Exclude]
+    #[Groups(['export_all'])]
     private $user;
 
     #[ORM\JoinTable(name: 'entry_tag')]
@@ -403,11 +369,9 @@ class Entry
         return $this->isArchived;
     }
 
-    /**
-     * @VirtualProperty
-     * @SerializedName("is_archived")
-     * @Groups({"entries_for_user", "export_all"})
-     */
+    #[VirtualProperty]
+    #[SerializedName('is_archived')]
+    #[Groups(['entries_for_user', 'export_all'])]
     public function is_Archived()
     {
         return (int) $this->isArchived();
@@ -444,11 +408,9 @@ class Entry
         return $this->isStarred;
     }
 
-    /**
-     * @VirtualProperty
-     * @SerializedName("is_starred")
-     * @Groups({"entries_for_user", "export_all"})
-     */
+    #[VirtualProperty]
+    #[SerializedName('is_starred')]
+    #[Groups(['entries_for_user', 'export_all'])]
     public function is_Starred()
     {
         return (int) $this->isStarred();
@@ -493,28 +455,22 @@ class Entry
         return $this->user;
     }
 
-    /**
-     * @VirtualProperty
-     * @SerializedName("user_name")
-     */
+    #[VirtualProperty]
+    #[SerializedName('user_name')]
     public function getUserName()
     {
         return $this->user->getUserName();
     }
 
-    /**
-     * @VirtualProperty
-     * @SerializedName("user_email")
-     */
+    #[VirtualProperty]
+    #[SerializedName('user_email')]
     public function getUserEmail()
     {
         return $this->user->getEmail();
     }
 
-    /**
-     * @VirtualProperty
-     * @SerializedName("user_id")
-     */
+    #[VirtualProperty]
+    #[SerializedName('user_id')]
     public function getUserId()
     {
         return $this->user->getId();
@@ -669,11 +625,9 @@ class Entry
         return $tags;
     }
 
-    /**
-     * @VirtualProperty
-     * @SerializedName("tags")
-     * @Groups({"entries_for_user", "export_all"})
-     */
+    #[VirtualProperty]
+    #[SerializedName('tags')]
+    #[Groups(['entries_for_user', 'export_all'])]
     public function getSerializedTags()
     {
         $data = [];
@@ -823,12 +777,11 @@ class Entry
      * Used in the entries filter so it's more explicit for the end user than the uid.
      * Also used in the API.
      *
-     * @VirtualProperty
-     * @SerializedName("is_public")
-     * @Groups({"entries_for_user"})
-     *
      * @return bool
      */
+    #[VirtualProperty]
+    #[SerializedName('is_public')]
+    #[Groups(['entries_for_user'])]
     public function isPublic()
     {
         return null !== $this->uid;

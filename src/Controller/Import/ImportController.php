@@ -13,19 +13,14 @@ use Wallabag\Import\ImportChain;
 
 class ImportController extends AbstractController
 {
-    private RabbitMQConsumerTotalProxy $rabbitMQConsumerTotalProxy;
-    private Client $redisClient;
-
-    public function __construct(RabbitMQConsumerTotalProxy $rabbitMQConsumerTotalProxy, Client $redisClient)
-    {
-        $this->rabbitMQConsumerTotalProxy = $rabbitMQConsumerTotalProxy;
-        $this->redisClient = $redisClient;
+    public function __construct(
+        private readonly RabbitMQConsumerTotalProxy $rabbitMQConsumerTotalProxy,
+        private readonly Client $redisClient,
+    ) {
     }
 
-    /**
-     * @Route("/import/", name="import", methods={"GET"})
-     * @IsGranted("IMPORT_ENTRIES")
-     */
+    #[Route(path: '/import/', name: 'import', methods: ['GET'])]
+    #[IsGranted('IMPORT_ENTRIES')]
     public function importAction(ImportChain $importChain)
     {
         return $this->render('Import/index.html.twig', [
@@ -65,7 +60,7 @@ class ImportController extends AbstractController
                     + $this->rabbitMQConsumerTotalProxy->getTotalMessage('pocket_html')
                     + $this->rabbitMQConsumerTotalProxy->getTotalMessage('omnivore')
                 ;
-            } catch (\Exception $e) {
+            } catch (\Exception) {
                 $rabbitNotInstalled = true;
             }
         } elseif ($craueConfig->get('import_with_redis')) {
@@ -84,7 +79,7 @@ class ImportController extends AbstractController
                     + $this->redisClient->llen('wallabag.import.pocket_html')
                     + $this->redisClient->llen('wallabag.import.omnivore')
                 ;
-            } catch (\Exception $e) {
+            } catch (\Exception) {
                 $redisNotInstalled = true;
             }
         }

@@ -1,8 +1,39 @@
 <?php
 
+use BabDev\PagerfantaBundle\BabDevPagerfantaBundle;
+use Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle;
+use Craue\ConfigBundle\CraueConfigBundle;
+use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
+use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
+use Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle;
+use Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle;
+use FOS\JsRoutingBundle\FOSJsRoutingBundle;
+use FOS\OAuthServerBundle\FOSOAuthServerBundle;
+use FOS\RestBundle\FOSRestBundle;
+use FOS\UserBundle\FOSUserBundle;
+use JMS\SerializerBundle\JMSSerializerBundle;
+use KPhoen\RulerZBundle\KPhoenRulerZBundle;
+use Nelmio\ApiDocBundle\NelmioApiDocBundle;
+use Nelmio\CorsBundle\NelmioCorsBundle;
+use OldSound\RabbitMqBundle\OldSoundRabbitMqBundle;
+use Scheb\TwoFactorBundle\SchebTwoFactorBundle;
+use Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle;
+use Sentry\SentryBundle\SentryBundle;
+use Spiriit\Bundle\FormFilterBundle\SpiriitFormFilterBundle;
+use Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle;
+use Symfony\Bundle\DebugBundle\DebugBundle;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+use Symfony\Bundle\MakerBundle\MakerBundle;
+use Symfony\Bundle\MonologBundle\MonologBundle;
+use Symfony\Bundle\SecurityBundle\SecurityBundle;
+use Symfony\Bundle\TwigBundle\TwigBundle;
+use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
+use Symfony\Bundle\WebServerBundle\WebServerBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
+use Symfony\WebpackEncoreBundle\WebpackEncoreBundle;
+use Twig\Extra\TwigExtraBundle\TwigExtraBundle;
 use Wallabag\Import\ImportCompilerPass;
 
 class AppKernel extends Kernel
@@ -10,45 +41,45 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = [
-            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new Symfony\Bundle\SecurityBundle\SecurityBundle(),
-            new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new Symfony\Bundle\MonologBundle\MonologBundle(),
-            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new FOS\RestBundle\FOSRestBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle(),
-            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
-            new Nelmio\CorsBundle\NelmioCorsBundle(),
-            new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
-            new Spiriit\Bundle\FormFilterBundle\SpiriitFormFilterBundle(),
-            new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new Scheb\TwoFactorBundle\SchebTwoFactorBundle(),
-            new KPhoen\RulerZBundle\KPhoenRulerZBundle(),
-            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
-            new Craue\ConfigBundle\CraueConfigBundle(),
-            new BabDev\PagerfantaBundle\BabDevPagerfantaBundle(),
-            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
-            new Sentry\SentryBundle\SentryBundle(),
-            new Twig\Extra\TwigExtraBundle\TwigExtraBundle(),
-            new Symfony\WebpackEncoreBundle\WebpackEncoreBundle(),
+            new FrameworkBundle(),
+            new SecurityBundle(),
+            new TwigBundle(),
+            new MonologBundle(),
+            new DoctrineBundle(),
+            new SensioFrameworkExtraBundle(),
+            new FOSRestBundle(),
+            new FOSUserBundle(),
+            new JMSSerializerBundle(),
+            new NelmioApiDocBundle(),
+            new NelmioCorsBundle(),
+            new BazingaHateoasBundle(),
+            new SpiriitFormFilterBundle(),
+            new FOSOAuthServerBundle(),
+            new StofDoctrineExtensionsBundle(),
+            new SchebTwoFactorBundle(),
+            new KPhoenRulerZBundle(),
+            new DoctrineMigrationsBundle(),
+            new CraueConfigBundle(),
+            new BabDevPagerfantaBundle(),
+            new FOSJsRoutingBundle(),
+            new OldSoundRabbitMqBundle(),
+            new SentryBundle(),
+            new TwigExtraBundle(),
+            new WebpackEncoreBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
-            $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
-            $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
+            $bundles[] = new DebugBundle();
+            $bundles[] = new WebProfilerBundle();
+            $bundles[] = new DoctrineFixturesBundle();
 
             if ('test' === $this->getEnvironment()) {
-                $bundles[] = new DAMA\DoctrineTestBundle\DAMADoctrineTestBundle();
+                $bundles[] = new DAMADoctrineTestBundle();
             }
 
             if ('dev' === $this->getEnvironment()) {
-                $bundles[] = new Symfony\Bundle\MakerBundle\MakerBundle();
-                $bundles[] = new Symfony\Bundle\WebServerBundle\WebServerBundle();
+                $bundles[] = new MakerBundle();
+                $bundles[] = new WebServerBundle();
             }
         }
 
@@ -69,13 +100,13 @@ class AppKernel extends Kernel
     {
         $loader->load($this->getProjectDir() . '/app/config/config_' . $this->getEnvironment() . '.yml');
 
-        $loader->load(function (ContainerBuilder $container) {
+        $loader->load(function (ContainerBuilder $container): void {
             // $container->setParameter('container.autowiring.strict_mode', true);
             // $container->setParameter('container.dumper.inline_class_loader', true);
             $container->addObjectResource($this);
         });
 
-        $loader->load(function (ContainerBuilder $container) {
+        $loader->load(function (ContainerBuilder $container): void {
             $this->processDatabaseParameters($container);
             $this->defineRedisUrlEnvVar($container);
             $this->defineRabbitMqUrlEnvVar($container);
@@ -89,19 +120,12 @@ class AppKernel extends Kernel
 
     private function processDatabaseParameters(ContainerBuilder $container)
     {
-        switch ($container->getParameter('database_driver')) {
-            case 'pdo_mysql':
-                $scheme = 'mysql';
-                break;
-            case 'pdo_pgsql':
-                $scheme = 'pgsql';
-                break;
-            case 'pdo_sqlite':
-                $scheme = 'sqlite';
-                break;
-            default:
-                throw new RuntimeException('Unsupported database driver: ' . $container->getParameter('database_driver'));
-        }
+        $scheme = match ($container->getParameter('database_driver')) {
+            'pdo_mysql' => 'mysql',
+            'pdo_pgsql' => 'pgsql',
+            'pdo_sqlite' => 'sqlite',
+            default => throw new RuntimeException('Unsupported database driver: ' . $container->getParameter('database_driver')),
+        };
 
         $container->setParameter('database_scheme', $scheme);
 

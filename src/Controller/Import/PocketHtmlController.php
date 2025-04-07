@@ -13,23 +13,16 @@ use Wallabag\Redis\Producer as RedisProducer;
 
 class PocketHtmlController extends HtmlController
 {
-    private PocketHtmlImport $pocketHtmlImport;
-    private Config $craueConfig;
-    private RabbitMqProducer $rabbitMqProducer;
-    private RedisProducer $redisProducer;
-
-    public function __construct(PocketHtmlImport $pocketHtmlImport, Config $craueConfig, RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
-    {
-        $this->pocketHtmlImport = $pocketHtmlImport;
-        $this->craueConfig = $craueConfig;
-        $this->rabbitMqProducer = $rabbitMqProducer;
-        $this->redisProducer = $redisProducer;
+    public function __construct(
+        private readonly PocketHtmlImport $pocketHtmlImport,
+        private readonly Config $craueConfig,
+        private readonly RabbitMqProducer $rabbitMqProducer,
+        private readonly RedisProducer $redisProducer,
+    ) {
     }
 
-    /**
-     * @Route("/import/pocket_html", name="import_pocket_html", methods={"GET", "POST"})
-     * @IsGranted("IMPORT_ENTRIES")
-     */
+    #[Route(path: '/import/pocket_html', name: 'import_pocket_html', methods: ['GET', 'POST'])]
+    #[IsGranted('IMPORT_ENTRIES')]
     public function indexAction(Request $request, TranslatorInterface $translator)
     {
         return parent::indexAction($request, $translator);

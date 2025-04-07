@@ -16,7 +16,7 @@ class TagRepository extends ServiceEntityRepository
 {
     public function __construct(
         ManagerRegistry $registry,
-        private string $tablePrefix,
+        private readonly string $tablePrefix,
     ) {
         parent::__construct($registry, Tag::class);
     }

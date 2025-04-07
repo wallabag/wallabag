@@ -25,35 +25,29 @@ use Wallabag\Repository\TagRepository;
 
 class TagController extends AbstractController
 {
-    private EntityManagerInterface $entityManager;
-    private TagsAssigner $tagsAssigner;
-    private Redirect $redirectHelper;
-    private Security $security;
-
-    public function __construct(EntityManagerInterface $entityManager, TagsAssigner $tagsAssigner, Redirect $redirectHelper, Security $security)
-    {
-        $this->entityManager = $entityManager;
-        $this->tagsAssigner = $tagsAssigner;
-        $this->redirectHelper = $redirectHelper;
-        $this->security = $security;
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly TagsAssigner $tagsAssigner,
+        private readonly Redirect $redirectHelper,
+        private readonly Security $security,
+    ) {
     }
 
     /**
-     * @Route("/new-tag/{entry}", name="new_tag", methods={"POST"}, requirements={"entry" = "\d+"})
-     * @IsGranted("TAG", subject="entry")
-     *
      * @return Response
      */
+    #[Route(path: '/new-tag/{entry}', name: 'new_tag', methods: ['POST'], requirements: ['entry' => '\d+'])]
+    #[IsGranted('TAG', subject: 'entry')]
     public function addTagFormAction(Request $request, Entry $entry, TranslatorInterface $translator)
     {
         $form = $this->createForm(NewTagType::class, new Tag());
         $form->handleRequest($request);
 
         $tags = $form->get('label')->getData() ?? '';
-        $tagsExploded = explode(',', $tags);
+        $tagsExploded = explode(',', (string) $tags);
 
         // avoid too much tag to be added
-        if (\count($tagsExploded) >= NewTagType::MAX_TAGS || \strlen($tags) >= NewTagType::MAX_LENGTH) {
+        if (\count($tagsExploded) >= NewTagType::MAX_TAGS || \strlen((string) $tags) >= NewTagType::MAX_LENGTH) {
             $message = $translator->trans('flashes.tag.notice.too_much_tags', [
                 '%tags%' => NewTagType::MAX_TAGS,
                 '%characters%' => NewTagType::MAX_LENGTH,
@@ -89,11 +83,10 @@ class TagController extends AbstractController
     /**
      * Removes tag from entry.
      *
-     * @Route("/remove-tag/{entry}/{tag}", name="remove_tag", methods={"GET"}, requirements={"entry" = "\d+", "tag" = "\d+"})
-     * @IsGranted("UNTAG", subject="entry")
-     *
      * @return Response
      */
+    #[Route(path: '/remove-tag/{entry}/{tag}', name: 'remove_tag', methods: ['GET'], requirements: ['entry' => '\d+', 'tag' => '\d+'])]
+    #[IsGranted('UNTAG', subject: 'entry')]
     public function removeTagFromEntry(Request $request, Entry $entry, Tag $tag)
     {
         $entry->removeTag($tag);
@@ -113,11 +106,10 @@ class TagController extends AbstractController
     /**
      * Shows tags for current user.
      *
-     * @Route("/tag/list", name="tag", methods={"GET"})
-     * @IsGranted("LIST_TAGS")
-     *
      * @return Response
      */
+    #[Route(path: '/tag/list', name: 'tag', methods: ['GET'])]
+    #[IsGranted('LIST_TAGS')]
     public function showTagAction(TagRepository $tagRepository, EntryRepository $entryRepository)
     {
         $allTagsWithNbEntries = $tagRepository->findAllTagsWithNbEntries($this->getUser()->getId());
@@ -138,13 +130,12 @@ class TagController extends AbstractController
     /**
      * @param int $page
      *
-     * @Route("/tag/list/{slug}/{page}", name="tag_entries", methods={"GET"}, defaults={"page" = "1"})
-     * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
-     * @IsGranted("LIST_ENTRIES")
-     * @IsGranted("VIEW", subject="tag")
-     *
      * @return Response
      */
+    #[Route(path: '/tag/list/{slug}/{page}', name: 'tag_entries', methods: ['GET'], defaults: ['page' => '1'])]
+    #[ParamConverter('tag', options: ['mapping' => ['slug' => 'slug']])]
+    #[IsGranted('LIST_ENTRIES')]
+    #[IsGranted('VIEW', subject: 'tag')]
     public function showEntriesForTagAction(Tag $tag, EntryRepository $entryRepository, PreparePagerForEntries $preparePagerForEntries, $page, Request $request)
     {
         $entriesByTag = $entryRepository->findAllByTagId(
@@ -158,7 +149,7 @@ class TagController extends AbstractController
 
         try {
             $entries->setCurrentPage($page);
-        } catch (OutOfRangeCurrentPageException $e) {
+        } catch (OutOfRangeCurrentPageException) {
             if ($page > 1) {
                 return $this->redirect($this->generateUrl($request->attributes->get('_route'), [
                     'slug' => $tag->getSlug(),
@@ -179,12 +170,11 @@ class TagController extends AbstractController
      * Rename a given tag with a new label
      * Create a new tag with the new name and drop the old one.
      *
-     * @Route("/tag/rename/{slug}", name="tag_rename", methods={"POST"})
-     * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
-     * @IsGranted("EDIT", subject="tag")
-     *
      * @return Response
      */
+    #[Route(path: '/tag/rename/{slug}', name: 'tag_rename', methods: ['POST'])]
+    #[ParamConverter('tag', options: ['mapping' => ['slug' => 'slug']])]
+    #[IsGranted('EDIT', subject: 'tag')]
     public function renameTagAction(Tag $tag, Request $request, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
         $form = $this->createForm(RenameTagType::class, new Tag());
@@ -233,11 +223,10 @@ class TagController extends AbstractController
     /**
      * Tag search results with the current search term.
      *
-     * @Route("/tag/search/{filter}", name="tag_this_search", methods={"GET"})
-     * @IsGranted("CREATE_TAGS")
-     *
      * @return Response
      */
+    #[Route(path: '/tag/search/{filter}', name: 'tag_this_search', methods: ['GET'])]
+    #[IsGranted('CREATE_TAGS')]
     public function tagThisSearchAction($filter, Request $request, EntryRepository $entryRepository)
     {
         $currentRoute = $request->query->has('currentRoute') ? $request->query->get('currentRoute') : '';
@@ -255,7 +244,7 @@ class TagController extends AbstractController
 
             // check to avoid duplicate tags creation
             foreach ($this->entityManager->getUnitOfWork()->getScheduledEntityInsertions() as $entity) {
-                if ($entity instanceof Tag && strtolower($entity->getLabel()) === strtolower($filter)) {
+                if ($entity instanceof Tag && strtolower($entity->getLabel()) === strtolower((string) $filter)) {
                     continue 2;
                 }
                 $this->entityManager->persist($entry);
@@ -269,12 +258,11 @@ class TagController extends AbstractController
     /**
      * Delete a given tag for the current user.
      *
-     * @Route("/tag/delete/{slug}", name="tag_delete", methods={"GET"})
-     * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
-     * @IsGranted("DELETE", subject="tag")
-     *
      * @return Response
      */
+    #[Route(path: '/tag/delete/{slug}', name: 'tag_delete', methods: ['GET'])]
+    #[ParamConverter('tag', options: ['mapping' => ['slug' => 'slug']])]
+    #[IsGranted('DELETE', subject: 'tag')]
     public function removeTagAction(Tag $tag, Request $request, EntryRepository $entryRepository)
     {
         foreach ($tag->getEntriesByUserId($this->getUser()->getId()) as $entry) {

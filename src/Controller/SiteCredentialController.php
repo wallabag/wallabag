@@ -23,25 +23,19 @@ use Wallabag\Repository\SiteCredentialRepository;
  */
 class SiteCredentialController extends AbstractController
 {
-    private EntityManagerInterface $entityManager;
-    private TranslatorInterface $translator;
-    private CryptoProxy $cryptoProxy;
-    private Config $craueConfig;
-
-    public function __construct(EntityManagerInterface $entityManager, TranslatorInterface $translator, CryptoProxy $cryptoProxy, Config $craueConfig)
-    {
-        $this->entityManager = $entityManager;
-        $this->translator = $translator;
-        $this->cryptoProxy = $cryptoProxy;
-        $this->craueConfig = $craueConfig;
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly TranslatorInterface $translator,
+        private readonly CryptoProxy $cryptoProxy,
+        private readonly Config $craueConfig,
+    ) {
     }
 
     /**
      * Lists all User entities.
-     *
-     * @Route("/site-credentials", name="site_credentials_index", methods={"GET"})
-     * @IsGranted("LIST_SITE_CREDENTIALS")
      */
+    #[Route(path: '/site-credentials', name: 'site_credentials_index', methods: ['GET'])]
+    #[IsGranted('LIST_SITE_CREDENTIALS')]
     public function indexAction(SiteCredentialRepository $repository)
     {
         $this->isSiteCredentialsEnabled();
@@ -56,11 +50,10 @@ class SiteCredentialController extends AbstractController
     /**
      * Creates a new site credential entity.
      *
-     * @Route("/site-credentials/new", name="site_credentials_new", methods={"GET", "POST"})
-     * @IsGranted("CREATE_SITE_CREDENTIALS")
-     *
      * @return Response
      */
+    #[Route(path: '/site-credentials/new', name: 'site_credentials_new', methods: ['GET', 'POST'])]
+    #[IsGranted('CREATE_SITE_CREDENTIALS')]
     public function newAction(Request $request)
     {
         $this->isSiteCredentialsEnabled();
@@ -94,11 +87,10 @@ class SiteCredentialController extends AbstractController
     /**
      * Displays a form to edit an existing site credential entity.
      *
-     * @Route("/site-credentials/{id}/edit", name="site_credentials_edit", methods={"GET", "POST"})
-     * @IsGranted("EDIT", subject="siteCredential")
-     *
      * @return Response
      */
+    #[Route(path: '/site-credentials/{id}/edit', name: 'site_credentials_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('EDIT', subject: 'siteCredential')]
     public function editAction(Request $request, SiteCredential $siteCredential)
     {
         $this->isSiteCredentialsEnabled();
@@ -132,11 +124,10 @@ class SiteCredentialController extends AbstractController
     /**
      * Deletes a site credential entity.
      *
-     * @Route("/site-credentials/{id}", name="site_credentials_delete", methods={"DELETE"})
-     * @IsGranted("DELETE", subject="siteCredential")
-     *
      * @return RedirectResponse
      */
+    #[Route(path: '/site-credentials/{id}', name: 'site_credentials_delete', methods: ['DELETE'])]
+    #[IsGranted('DELETE', subject: 'siteCredential')]
     public function deleteAction(Request $request, SiteCredential $siteCredential)
     {
         $this->isSiteCredentialsEnabled();

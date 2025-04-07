@@ -11,19 +11,19 @@
 function isPartialRun(): bool
 {
     foreach ($_SERVER['argv'] as $arg) {
-        if (str_starts_with($arg, '--filter')) {
+        if (str_starts_with((string) $arg, '--filter')) {
             return true;
         }
 
-        if (str_starts_with($arg, '--testsuite')) {
+        if (str_starts_with((string) $arg, '--testsuite')) {
             return true;
         }
 
-        if (str_starts_with($arg, '--group')) {
+        if (str_starts_with((string) $arg, '--group')) {
             return true;
         }
 
-        if (str_starts_with($arg, '--exclude-group')) {
+        if (str_starts_with((string) $arg, '--exclude-group')) {
             return true;
         }
     }

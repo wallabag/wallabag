@@ -15,19 +15,14 @@ use Wallabag\Redis\Producer as RedisProducer;
 
 class ReadabilityController extends AbstractController
 {
-    private RabbitMqProducer $rabbitMqProducer;
-    private RedisProducer $redisProducer;
-
-    public function __construct(RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
-    {
-        $this->rabbitMqProducer = $rabbitMqProducer;
-        $this->redisProducer = $redisProducer;
+    public function __construct(
+        private readonly RabbitMqProducer $rabbitMqProducer,
+        private readonly RedisProducer $redisProducer,
+    ) {
     }
 
-    /**
-     * @Route("/import/readability", name="import_readability", methods={"GET", "POST"})
-     * @IsGranted("IMPORT_ENTRIES")
-     */
+    #[Route(path: '/import/readability', name: 'import_readability', methods: ['GET', 'POST'])]
+    #[IsGranted('IMPORT_ENTRIES')]
     public function indexAction(Request $request, ReadabilityImport $readability, Config $craueConfig, TranslatorInterface $translator)
     {
         $form = $this->createForm(UploadImportType::class);

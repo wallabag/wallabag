@@ -50,7 +50,7 @@ class DeveloperControllerTest extends WallabagTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $data = json_decode($client->getResponse()->getContent(), true);
+        $data = json_decode((string) $client->getResponse()->getContent(), true);
         $this->assertArrayHasKey('access_token', $data);
         $this->assertArrayHasKey('expires_in', $data);
         $this->assertArrayHasKey('token_type', $data);

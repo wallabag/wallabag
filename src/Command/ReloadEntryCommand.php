@@ -21,20 +21,13 @@ class ReloadEntryCommand extends Command
     protected static $defaultName = 'wallabag:entry:reload';
     protected static $defaultDescription = 'Reload entries';
 
-    private EntryRepository $entryRepository;
-    private UserRepository $userRepository;
-    private EntityManagerInterface $entityManager;
-    private ContentProxy $contentProxy;
-    private EventDispatcherInterface $dispatcher;
-
-    public function __construct(EntryRepository $entryRepository, UserRepository $userRepository, EntityManagerInterface $entityManager, ContentProxy $contentProxy, EventDispatcherInterface $dispatcher)
-    {
-        $this->entryRepository = $entryRepository;
-        $this->userRepository = $userRepository;
-        $this->entityManager = $entityManager;
-        $this->contentProxy = $contentProxy;
-        $this->dispatcher = $dispatcher;
-
+    public function __construct(
+        private readonly EntryRepository $entryRepository,
+        private readonly UserRepository $userRepository,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly ContentProxy $contentProxy,
+        private readonly EventDispatcherInterface $dispatcher,
+    ) {
         parent::__construct();
     }
 
@@ -62,7 +55,7 @@ class ReloadEntryCommand extends Command
                 $userId = $this->userRepository
                     ->findOneByUserName($username)
                     ->getId();
-            } catch (NoResultException $e) {
+            } catch (NoResultException) {
                 $io->error(\sprintf('User "%s" not found.', $username));
 
                 return 1;

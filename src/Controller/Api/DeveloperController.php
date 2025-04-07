@@ -18,10 +18,9 @@ class DeveloperController extends AbstractController
     /**
      * List all clients and link to create a new one.
      *
-     * @Route("/developer", name="developer", methods={"GET"})
-     *
      * @return Response
      */
+    #[Route(path: '/developer', name: 'developer', methods: ['GET'])]
     public function indexAction(ClientRepository $repo)
     {
         $clients = $repo->findByUser($this->getUser()->getId());
@@ -34,10 +33,9 @@ class DeveloperController extends AbstractController
     /**
      * Create a client (an app).
      *
-     * @Route("/developer/client/create", name="developer_create_client", methods={"GET", "POST"})
-     *
      * @return Response
      */
+    #[Route(path: '/developer/client/create', name: 'developer_create_client', methods: ['GET', 'POST'])]
     public function createClientAction(Request $request, EntityManagerInterface $entityManager, TranslatorInterface $translator)
     {
         $client = new Client($this->getUser());
@@ -69,10 +67,9 @@ class DeveloperController extends AbstractController
     /**
      * Remove a client.
      *
-     * @Route("/developer/client/delete/{id}", name="developer_delete_client", methods={"POST"}, requirements={"id" = "\d+"})
-     *
      * @return RedirectResponse
      */
+    #[Route(path: '/developer/client/delete/{id}', name: 'developer_delete_client', methods: ['POST'], requirements: ['id' => '\d+'])]
     public function deleteClientAction(Request $request, Client $client, EntityManagerInterface $entityManager, TranslatorInterface $translator)
     {
         if (!$this->isCsrfTokenValid('delete-client', $request->request->get('token'))) {
@@ -97,10 +94,9 @@ class DeveloperController extends AbstractController
     /**
      * Display developer how to use an existing app.
      *
-     * @Route("/developer/howto/first-app", name="developer_howto_firstapp", methods={"GET"})
-     *
      * @return Response
      */
+    #[Route(path: '/developer/howto/first-app', name: 'developer_howto_firstapp', methods: ['GET'])]
     public function howtoFirstAppAction()
     {
         return $this->render('Developer/howto_app.html.twig');

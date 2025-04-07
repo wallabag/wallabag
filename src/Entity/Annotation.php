@@ -14,12 +14,11 @@ use Wallabag\Repository\AnnotationRepository;
 
 /**
  * Annotation.
- *
- * @ExclusionPolicy("none")
  */
 #[ORM\Table(name: 'annotation')]
 #[ORM\Entity(repositoryClass: AnnotationRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[ExclusionPolicy('none')]
 class Annotation
 {
     use EntityTimestampsTrait;
@@ -34,10 +33,9 @@ class Annotation
 
     /**
      * @var string
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'text', type: 'text')]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $text;
 
     /**
@@ -54,36 +52,26 @@ class Annotation
 
     /**
      * @var string
-     *
-     * @Assert\Length(
-     *     max = 10000,
-     *     maxMessage = "validator.quote_length_too_high"
-     * )
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'quote', type: 'text')]
+    #[Assert\Length(max: 10000, maxMessage: 'validator.quote_length_too_high')]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $quote;
 
     /**
      * @var array
-     *
-     * @Groups({"entries_for_user", "export_all"})
      */
     #[ORM\Column(name: 'ranges', type: 'array')]
+    #[Groups(['entries_for_user', 'export_all'])]
     private $ranges;
 
-    /**
-     * @Exclude
-     */
     #[ORM\ManyToOne(targetEntity: User::class)]
+    #[Exclude]
     private $user;
 
-    /**
-     * @Exclude
-     */
     #[ORM\JoinColumn(name: 'entry_id', referencedColumnName: 'id', onDelete: 'cascade')]
     #[ORM\ManyToOne(targetEntity: Entry::class, inversedBy: 'annotations')]
+    #[Exclude]
     private $entry;
 
     /*
@@ -220,10 +208,8 @@ class Annotation
         return $this->user;
     }
 
-    /**
-     * @VirtualProperty
-     * @SerializedName("user")
-     */
+    #[VirtualProperty]
+    #[SerializedName('user')]
     public function getUserName()
     {
         return $this->user->getName();
@@ -254,10 +240,8 @@ class Annotation
         return $this->entry;
     }
 
-    /**
-     * @VirtualProperty
-     * @SerializedName("annotator_schema_version")
-     */
+    #[VirtualProperty]
+    #[SerializedName('annotator_schema_version')]
     public function getVersion()
     {
         return 'v1.0';

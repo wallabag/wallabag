@@ -8,11 +8,9 @@ use Doctrine\ORM\Tools\Event\GenerateSchemaEventArgs;
 
 class SchemaAdapterSubscriber implements EventSubscriber
 {
-    private string $databaseTablePrefix;
-
-    public function __construct(string $databaseTablePrefix)
-    {
-        $this->databaseTablePrefix = $databaseTablePrefix;
+    public function __construct(
+        private readonly string $databaseTablePrefix,
+    ) {
     }
 
     public function getSubscribedEvents(): array

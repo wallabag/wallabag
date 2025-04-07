@@ -12,11 +12,9 @@ class EntryDeletedEvent extends Event
 {
     public const NAME = 'entry.deleted';
 
-    protected $entry;
-
-    public function __construct(Entry $entry)
-    {
-        $this->entry = $entry;
+    public function __construct(
+        protected Entry $entry,
+    ) {
     }
 
     public function getEntry(): Entry
