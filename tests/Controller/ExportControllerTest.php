@@ -11,8 +11,6 @@ class ExportControllerTest extends WallabagTestCase
 {
     private $adminEntry;
     private $bobEntry;
-    private $sameDomainEntry;
-    private $sameDomainEntry2;
 
     public function testLogin()
     {

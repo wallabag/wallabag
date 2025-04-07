@@ -95,7 +95,7 @@ class PinboardImport extends AbstractImport
             'is_archived' => ('no' === $importedEntry['toread']) || $this->markAsRead,
             'is_starred' => false,
             'created_at' => $importedEntry['time'],
-            'tags' => explode(' ', (string) $importedEntry['tags']),
+            'tags' => array_filter(explode(' ', (string) $importedEntry['tags'])),
         ];
 
         $entry = new Entry($this->user);

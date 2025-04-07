@@ -125,10 +125,6 @@ class FeedController extends AbstractController
         $perPage = $user->getConfig()->getFeedLimit() ?: $this->getParameter('wallabag.feed_limit');
         $entries->setMaxPerPage($perPage);
 
-        if (null === $entries) {
-            throw $this->createNotFoundException('No entries found?');
-        }
-
         try {
             $entries->setCurrentPage($page);
         } catch (OutOfRangeCurrentPageException) {

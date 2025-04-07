@@ -13,7 +13,7 @@ class UtilsTest extends TestCase
      */
     public function testCorrectWordsCountForDifferentLanguages($filename, $text, $expectedCount)
     {
-        static::assertSame((float) $expectedCount, Utils::getReadingTime($text), 'Reading time for: ' . $filename);
+        static::assertSame($expectedCount, Utils::getReadingTime($text), 'Reading time for: ' . $filename);
     }
 
     public function examples()
@@ -30,7 +30,7 @@ class UtilsTest extends TestCase
             $examples[] = [
                 $file->getRelativePathname(),
                 $match[1], // content
-                $match[2], // reading time
+                (int) $match[2], // reading time
             ];
         }
 

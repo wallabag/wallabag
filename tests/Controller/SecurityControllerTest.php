@@ -88,8 +88,6 @@ class SecurityControllerTest extends WallabagTestCase
 
         if (!$client->getContainer()->getParameter('fosuser_registration')) {
             $this->markTestSkipped('fosuser_registration is not enabled.');
-
-            return;
         }
 
         $client->followRedirects();

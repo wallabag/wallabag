@@ -52,7 +52,7 @@ class AuthCodeMailer implements AuthCodeMailerInterface
         ]);
 
         $email = (new Email())
-            ->from(new Address($this->senderEmail, $this->senderName ?? $this->senderEmail))
+            ->from(new Address($this->senderEmail, $this->senderName ?: $this->senderEmail))
             ->to($user->getEmailAuthRecipient())
             ->subject($subject)
             ->text($bodyText)
