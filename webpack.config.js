@@ -10,6 +10,7 @@ Encore
   .addEntry('main', './assets/index.js')
   .addEntry('public', './assets/share.js')
   .splitEntryChunks()
+  .enableStimulusBridge('./assets/controllers.json')
   .enableSingleRuntimeChunk()
   .cleanupOutputBeforeBuild()
   .enableBuildNotifications()
@@ -21,7 +22,6 @@ Encore
     config.corejs = '3.23';
   })
   .enableSassLoader()
-  .enablePostCssLoader()
-  .autoProvidejQuery();
+  .enablePostCssLoader();
 
 module.exports = Encore.getWebpackConfig();

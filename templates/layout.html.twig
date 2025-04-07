@@ -35,7 +35,7 @@
 
 {% block messages %}
     {% for flash_message in app.session.flashbag.get('notice') %}
-        <p class="material-toast hidden">{{ flash_message|trans }}</p>
+        <p class="hidden" data-controller="materialize--toast">{{ flash_message|trans }}</p>
     {% endfor %}
 {% endblock %}
 
@@ -43,7 +43,7 @@
 
 {% block menu %}
     <nav class="cyan darken-1">
-        <ul id="slide-out" class="left-bar sidenav sidenav-fixed">
+        <ul id="slide-out" class="left-bar sidenav sidenav-fixed" data-controller="materialize--sidenav">
             {% block logo %}
                 <li class="logo border-bottom">
                     {% if is_granted('LIST_ENTRIES') %}
@@ -79,8 +79,8 @@
                 </li>
             {% endif %}
         </ul>
-        <div class="nav-panels">
-            <div class="nav-panel-actions nav-panel-item">
+        <div class="nav-panels" data-controller="topbar">
+            <div class="nav-panel-actions nav-panel-item" data-topbar-target="actions">
                 <div class="nav-panel-top">
                     <a href="#" data-target="slide-out" class="nav-panel-menu sidenav-trigger"><i class="material-icons">menu</i></a>
                     <h1 class="left action">
@@ -90,18 +90,18 @@
                 </div>
                 <ul class="input-field nav-panel-buttom">
                     <li class="bold toggle-add-url-container">
-                        <a class="waves-effect tooltipped toggle-add-url" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.add_new_entry'|trans }}" href="{{ path('new') }}" id="nav-btn-add">
+                        <a class="waves-effect toggle-add-url" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.add_new_entry'|trans }}" href="{{ path('new') }}" data-action="topbar#showAddUrl:prevent:stop" data-shortcuts-target="showAddUrl">
                             <i class="material-icons">add</i>
                         </a>
                     </li>
                     <li>
-                        <a class="waves-effect tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.search'|trans }}" href="javascript: void(null);" id="nav-btn-search">
+                        <a class="waves-effect" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.search'|trans }}" href="javascript: void(null);" data-action="topbar#showSearch:prevent:stop" data-shortcuts-target="showSearch">
                             <i class="material-icons">search</i>
                         </a>
                     </li>
                     {% block nav_panel_extra_actions '' %}
                     <li class="bold">
-                        <a class="wave-effect tooltipped dropdown-trigger" data-covertrigger="false" data-constrainwidth="false" data-target="dropdown-account" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.account'|trans }}" href="#" id="news_menu">
+                        <a class="wave-effect dropdown-trigger" data-controller="materialize--dropdown materialize--tooltip" data-target="dropdown-account" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.account'|trans }}" href="#" id="news_menu">
                             <i class="material-icons" id="news_link">account_circle</i>
                         </a>
                     </li>
@@ -134,19 +134,19 @@
                         <li class="divider"></li>
                     {% endif %}
                     <li>
-                        <a href="#" class="js-theme-toggle" data-theme="light">
+                        <a href="#" data-action="click->dark-theme#useLight:prevent">
                             <i class="theme-toggle-icon material-icons tiny">brightness_high</i>
                             <span>{{ 'menu.left.theme_toggle_light'|trans }}</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="js-theme-toggle" data-theme="dark">
+                        <a href="#" data-action="click->dark-theme#useDark:prevent">
                             <i class="theme-toggle-icon material-icons tiny">brightness_low</i>
                             <span>{{ 'menu.left.theme_toggle_dark'|trans }}</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="js-theme-toggle" data-theme="auto">
+                        <a href="#" data-action="click->dark-theme#useAuto:prevent">
                             <i class="theme-toggle-icon material-icons tiny">brightness_auto</i>
                             <span>{{ 'menu.left.theme_toggle_auto'|trans }}</span>
                         </a>

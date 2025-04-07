@@ -1,0 +1,4 @@
+{
+    "controllers": [],
+    "entrypoints": []
+}

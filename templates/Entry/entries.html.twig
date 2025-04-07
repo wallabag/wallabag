@@ -24,21 +24,21 @@
 {% block nav_panel_extra_actions %}
     {% if active_route %}
         <li>
-            <a class="waves-effect tooltipped js-random-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', {'type': active_route}) }}">
+            <a class="waves-effect js-random-action" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', {'type': active_route}) }}">
                 <i class="material-icons">casino</i>
             </a>
         </li>
     {% endif %}
     {% if has_filters %}
         <li class="button-filters">
-            <a class="nav-panel-menu sidenav-trigger tooltipped js-filters-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-target="filters">
+            <a class="nav-panel-menu sidenav-trigger js-filters-action" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-target="filters">
                 <i class="material-icons">filter_list</i>
             </a>
         </li>
     {% endif %}
     {% if has_exports %}
         <li class="button-export">
-            <a class="nav-panel-menu sidenav-trigger tooltipped js-export-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.export'|trans }}" href="#" data-target="export">
+            <a class="nav-panel-menu sidenav-trigger js-export-action" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.export'|trans }}" href="#" data-target="export">
                 <i class="material-icons">file_download</i>
             </a>
         </li>
@@ -53,15 +53,15 @@
     {% if current_route == 'homepage' %}
         {% set current_route = 'unread' %}
     {% endif %}
-    <form name="form_mass_action" action="{{ path('mass_action', {redirect: current_path}) }}" method="post">
-    <div class="results">
+    <form name="form_mass_action" action="{{ path('mass_action', {redirect: current_path}) }}" method="post" data-controller="batch-edit entries-navigation">
+    <div class="results" data-entries-navigation-target="paginationWrapper">
         <div class="nb-results">
             {{ 'entry.list.number_on_the_page'|trans({'%count%': entries.count}) }}
             {% if entries.count > 0 %}
                 <a class="results-item" href="{{ path('switch_view_mode', {redirect: current_path}) }}"><i class="material-icons">{% if list_mode == 0 %}view_list{% else %}view_module{% endif %}</i></a>
             {% endif %}
             {% if entries.count > 0 and is_granted('EDIT_ENTRIES') %}
-                <label for="mass-action-inputs-displayed" class="mass-action-toggle results-item tooltipped" data-position="right" data-delay="50" data-tooltip="{{ 'entry.list.toggle_mass_action'|trans }}"><i class="material-icons">library_add_check</i></label>
+                <label for="mass-action-inputs-displayed" class="mass-action-toggle results-item" data-controller="materialize--tooltip" data-position="right" data-delay="50" data-tooltip="{{ 'entry.list.toggle_mass_action'|trans }}"><i class="material-icons">library_add_check</i></label>
             {% endif %}
             {% if app.user.config.feedToken %}
                 {% include "Entry/_feed_link.html.twig" %}
@@ -77,22 +77,22 @@
         <input id="mass-action-inputs-displayed" class="toggle-checkbox" type="checkbox" />
         <div class="mass-action">
             <div class="mass-action-group">
-                <input type="checkbox" class="entry-checkbox-input" data-toggle="[data-js='entry-checkbox']" data-js="checkboxes-toggle" />
+                <input type="checkbox" class="entry-checkbox-input" data-action="batch-edit#toggleSelection" />
                 <button class="mass-action-button btn cyan darken-1" type="submit" name="toggle-read" title="{{ 'entry.list.toogle_as_read'|trans }}"><i class="material-icons">done</i></button>
                 <button class="mass-action-button btn cyan darken-1" type="submit" name="toggle-star" title="{{ 'entry.list.toogle_as_star'|trans }}" ><i class="material-icons">star</i></button>
                 <button class="mass-action-button btn cyan darken-1" type="submit" name="delete" onclick="return confirm('{{ 'entry.confirm.delete_entries'|trans|escape('js') }}')" title="{{ 'entry.list.delete'|trans }}"><i class="material-icons">delete</i></button>
             </div>
 
             <div class="mass-action-tags">
-                <button class="btn cyan darken-1 mass-action-button mass-action-button--tags" type="submit" name="tag" title="{{ 'entry.list.add_tags'|trans }}"><i class="material-icons">label</i></button>
-                <input type="text" class="mass-action-tags-input" name="tags" placeholder="{{ 'entry.list.mass_action_tags_input_placeholder'|trans }}" />
+                <button class="btn cyan darken-1 mass-action-button mass-action-button--tags" type="submit" name="tag" title="{{ 'entry.list.add_tags'|trans }}" data-batch-edit-target="tagAction"><i class="material-icons">label</i></button>
+                <input type="text" class="mass-action-tags-input" name="tags" placeholder="{{ 'entry.list.mass_action_tags_input_placeholder'|trans }}" data-action="keydown.enter->batch-edit#tagSelection:prevent:stop" />
             </div>
         </div>
 
         <ol class="entries {% if list_mode == 1 %}collection{% else %}row entries-row data{% endif %}">
 
             {% for entry in entries %}
-                <li id="entry-{{ entry.id|e }}" class="{% if list_mode != 0 %}col collection-item{% endif %} s12" data-entry-id="{{ entry.id|e }}" data-test="entry">
+                <li id="entry-{{ entry.id|e }}" class="{% if list_mode != 0 %}col collection-item{% endif %} s12" data-entry-id="{{ entry.id|e }}" data-test="entry" data-entries-navigation-target="card">
                     {% if list_mode == 1 %}
                         {% include "Entry/_card_list.html.twig" with {'entry': entry, 'currentRoute': current_route, 'routes': entries_with_archived_class_routes} only %}
                     {% elseif not entry.previewPicture is null and entry.mimetype starts with 'image/' %}
@@ -114,7 +114,7 @@
 
     <!-- Export -->
     {% if has_exports and is_granted('EXPORT_ENTRIES') %}
-        <div id="export" class="sidenav" data-edge="right">
+        <div id="export" class="sidenav" data-controller="materialize--sidenav" data-materialize--sidenav-edge-value="right">
         {% set current_tag = null %}
         {% if tag is defined %}
             {% set current_tag = tag.slug %}
@@ -140,7 +140,7 @@
 
     <!-- Filters -->
     {% if has_filters %}
-    <div id="filters" class="sidenav" data-edge="right">
+    <div id="filters" class="sidenav" data-controller="materialize--sidenav" data-materialize--sidenav-edge-value="right">
         <form action="{{ path('all') }}">
 
             <h4 class="center">{{ 'entry.filters.title'|trans }}</h4>
