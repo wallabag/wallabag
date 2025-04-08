@@ -14,7 +14,7 @@ env:
 jobs:
   phpunit:
     name: "PHP ${{ matrix.php }} using ${{ matrix.database }}"
-    runs-on: "ubuntu-20.04"
+    runs-on: ubuntu-latest
     services:
       rabbitmq:
         image: rabbitmq:3-alpine
@@ -83,7 +83,7 @@ jobs:
 
   phpunit_no_prefix:
     name: "PHP ${{ matrix.php }} using ${{ matrix.database }} without prefix"
-    runs-on: "ubuntu-20.04"
+    runs-on: ubuntu-latest
     services:
       rabbitmq:
         image: rabbitmq:3-alpine
