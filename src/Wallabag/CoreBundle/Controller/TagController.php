@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -87,12 +88,16 @@ class TagController extends AbstractController
     /**
      * Removes tag from entry.
      *
-     * @Route("/remove-tag/{entry}/{tag}", requirements={"entry" = "\d+", "tag" = "\d+"}, name="remove_tag")
+     * @Route("/remove-tag/{entry}/{tag}", name="remove_tag", methods={"POST"}, requirements={"entry" = "\d+", "tag" = "\d+"})
      *
      * @return Response
      */
     public function removeTagFromEntry(Request $request, Entry $entry, Tag $tag)
     {
+        if (!$this->isCsrfTokenValid('remove-tag', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $this->checkUserAction($entry);
 
         $entry->removeTag($tag);
@@ -228,12 +233,16 @@ class TagController extends AbstractController
     /**
      * Tag search results with the current search term.
      *
-     * @Route("/tag/search/{filter}", name="tag_this_search")
+     * @Route("/tag/search/{filter}", name="tag_this_search", methods={"POST"})
      *
      * @return Response
      */
     public function tagThisSearchAction($filter, Request $request, EntryRepository $entryRepository)
     {
+        if (!$this->isCsrfTokenValid('tag-this-search', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $currentRoute = $request->query->has('currentRoute') ? $request->query->get('currentRoute') : '';
 
         /** @var QueryBuilder $qb */
@@ -263,13 +272,17 @@ class TagController extends AbstractController
     /**
      * Delete a given tag for the current user.
      *
-     * @Route("/tag/delete/{slug}", name="tag_delete")
+     * @Route("/tag/delete/{slug}", name="tag_delete", methods={"POST"})
      * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
      *
      * @return Response
      */
     public function removeTagAction(Tag $tag, Request $request, EntryRepository $entryRepository)
     {
+        if (!$this->isCsrfTokenValid('tag-delete', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         foreach ($tag->getEntriesByUserId($this->getUser()->getId()) as $entry) {
             $entryRepository->removeTag($this->getUser()->getId(), $tag);
         }

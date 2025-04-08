@@ -38,3 +38,18 @@ nav .input-field input {
 .tab {
   flex: 1;
 }
+
+.btn-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: $blue-accent-color;
+
+  &:focus {
+    background: none;
+  }
+}
+
+.inline-block {
+  display: inline-block;
+}

@@ -26,12 +26,20 @@
     {% if current_route == 'homepage' %}
         {% set current_route = 'unread' %}
     {% endif %}
-    <form name="form_mass_action" action="{{ path('mass_action', {redirect: current_path}) }}" method="post">
+    <form id="form_mass_action" name="form_mass_action" action="{{ path('mass_action', {redirect: current_path}) }}" method="post">
+        <input type="hidden" name="token" value="{{ csrf_token('mass-action') }}"/>
+    </form>
     <div class="results">
         <div class="nb-results">
             {{ 'entry.list.number_on_the_page'|trans({'%count%': entries.count}) }}
             {% if entries.count > 0 %}
-                <a class="results-item" href="{{ path('switch_view_mode', {redirect: current_path}) }}"><i class="material-icons">{% if list_mode == 0 %}view_list{% else %}view_module{% endif %}</i></a>
+                <form action="{{ path('switch_view_mode', {redirect: current_path}) }}" method="post" class="inline-block">
+                    <input type="hidden" name="token" value="{{ csrf_token('switch-view-mode') }}"/>
+
+                    <button type="submit" class="btn-link results-item">
+                        <i class="material-icons">{% if list_mode == 0 %}view_list{% else %}view_module{% endif %}</i>
+                    </button>
+                </form>
             {% endif %}
             {% if entries.count > 0 %}
                 <label for="mass-action-inputs-displayed" class="mass-action-toggle results-item tooltipped" data-position="right" data-delay="50" data-tooltip="{{ 'entry.list.toggle_mass_action'|trans }}"><i class="material-icons">library_add_check</i></label>
@@ -40,7 +48,13 @@
                 {% include "@WallabagCore/Entry/_feed_link.html.twig" %}
             {% endif %}
         </div>
-        {% if current_route == 'search' %}<div><a href="{{ path('tag_this_search', {'filter': searchTerm, 'currentRoute': app.request.get('currentRoute'), redirect: current_path}) }}" title="{{ 'entry.list.assign_search_tag'|trans }}">{{ 'entry.list.assign_search_tag'|trans }}</a></div>{% endif %}
+        {% if current_route == 'search' %}
+            <form action="{{ path('tag_this_search', {'filter': searchTerm, 'currentRoute': app.request.get('currentRoute'), redirect: current_path}) }}" method="post">
+                <input type="hidden" name="token" value="{{ csrf_token('tag-this-search') }}"/>
+
+                <button type="submit" class="btn-link" title="{{ 'entry.list.assign_search_tag'|trans }}">{{ 'entry.list.assign_search_tag'|trans }}</button>
+            </form>
+        {% endif %}
         {% if entries.getNbPages > 1 %}
             {{ pagerfanta(entries, 'default_wallabag') }}
         {% endif %}
@@ -50,15 +64,15 @@
         <input id="mass-action-inputs-displayed" class="toggle-checkbox" type="checkbox" />
         <div class="mass-action">
             <div class="mass-action-group">
-                <input type="checkbox" class="entry-checkbox-input" data-toggle="[data-js='entry-checkbox']" data-js="checkboxes-toggle" />
-                <button class="mass-action-button btn cyan darken-1" type="submit" name="toggle-read" title="{{ 'entry.list.toogle_as_read'|trans }}"><i class="material-icons">done</i></button>
-                <button class="mass-action-button btn cyan darken-1" type="submit" name="toggle-star" title="{{ 'entry.list.toogle_as_star'|trans }}" ><i class="material-icons">star</i></button>
-                <button class="mass-action-button btn cyan darken-1" type="submit" name="delete" onclick="return confirm('{{ 'entry.confirm.delete_entries'|trans|escape('js') }}')" title="{{ 'entry.list.delete'|trans }}"><i class="material-icons">delete</i></button>
+                <input type="checkbox" form="form_mass_action" class="entry-checkbox-input" data-toggle="[data-js='entry-checkbox']" data-js="checkboxes-toggle" />
+                <button class="mass-action-button btn cyan darken-1" type="submit" form="form_mass_action" name="toggle-read" title="{{ 'entry.list.toogle_as_read'|trans }}"><i class="material-icons">done</i></button>
+                <button class="mass-action-button btn cyan darken-1" type="submit" form="form_mass_action" name="toggle-star" title="{{ 'entry.list.toogle_as_star'|trans }}" ><i class="material-icons">star</i></button>
+                <button class="mass-action-button btn cyan darken-1" type="submit" form="form_mass_action" name="delete" onclick="return confirm('{{ 'entry.confirm.delete_entries'|trans|escape('js') }}')" title="{{ 'entry.list.delete'|trans }}"><i class="material-icons">delete</i></button>
             </div>
 
             <div class="mass-action-tags">
-                <button class="btn cyan darken-1 mass-action-button mass-action-button--tags" type="submit" name="tag" title="{{ 'entry.list.add_tags'|trans }}"><i class="material-icons">label</i></button>
-                <input type="text" class="mass-action-tags-input" name="tags" placeholder="{{ 'entry.list.mass_action_tags_input_placeholder'|trans }}" />
+                <button class="btn cyan darken-1 mass-action-button mass-action-button--tags" type="submit" form="form_mass_action" name="tag" title="{{ 'entry.list.add_tags'|trans }}"><i class="material-icons">label</i></button>
+                <input type="text" form="form_mass_action" class="mass-action-tags-input" name="tags" placeholder="{{ 'entry.list.mass_action_tags_input_placeholder'|trans }}" />
             </div>
         </div>
 
@@ -77,7 +91,6 @@
             {% endfor %}
         </ol>
     {% endif %}
-</form>
 
     {% if entries.getNbPages > 1 %}
         <div class="results">

@@ -30,6 +30,7 @@ framework:
         handler_id: session.handler.native_file
         save_path: "%kernel.project_dir%/var/sessions/%kernel.environment%"
         cookie_secure: auto
+        cookie_samesite: lax
     fragments: ~
     http_method_override: true
     assets: ~

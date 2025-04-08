@@ -14,6 +14,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\CoreBundle\Entity\Entry;
@@ -52,12 +53,16 @@ class EntryController extends AbstractController
     }
 
     /**
-     * @Route("/mass", name="mass_action")
+     * @Route("/mass", name="mass_action", methods={"POST"})
      *
      * @return Response
      */
     public function massAction(Request $request, TagRepository $tagRepository)
     {
+        if (!$this->isCsrfTokenValid('mass-action', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $values = $request->request->all();
 
         $tagsToAdd = [];
@@ -400,12 +405,16 @@ class EntryController extends AbstractController
      * Reload an entry.
      * Refetch content from the website and make it readable again.
      *
-     * @Route("/reload/{id}", requirements={"id" = "\d+"}, name="reload_entry")
+     * @Route("/reload/{id}", name="reload_entry", methods={"POST"}, requirements={"id" = "\d+"})
      *
      * @return RedirectResponse
      */
-    public function reloadAction(Entry $entry)
+    public function reloadAction(Request $request, Entry $entry)
     {
+        if (!$this->isCsrfTokenValid('reload-entry', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $this->checkUserAction($entry);
 
         $this->updateEntry($entry, 'entry_reloaded');
@@ -429,12 +438,16 @@ class EntryController extends AbstractController
     /**
      * Changes read status for an entry.
      *
-     * @Route("/archive/{id}", requirements={"id" = "\d+"}, name="archive_entry")
+     * @Route("/archive/{id}", name="archive_entry", methods={"POST"}, requirements={"id" = "\d+"})
      *
      * @return RedirectResponse
      */
     public function toggleArchiveAction(Request $request, Entry $entry)
     {
+        if (!$this->isCsrfTokenValid('archive-entry', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $this->checkUserAction($entry);
 
         $entry->toggleArchive();
@@ -458,12 +471,16 @@ class EntryController extends AbstractController
     /**
      * Changes starred status for an entry.
      *
-     * @Route("/star/{id}", requirements={"id" = "\d+"}, name="star_entry")
+     * @Route("/star/{id}", name="star_entry", methods={"POST"}, requirements={"id" = "\d+"})
      *
      * @return RedirectResponse
      */
     public function toggleStarAction(Request $request, Entry $entry)
     {
+        if (!$this->isCsrfTokenValid('star-entry', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $this->checkUserAction($entry);
 
         $entry->toggleStar();
@@ -488,12 +505,16 @@ class EntryController extends AbstractController
     /**
      * Deletes entry and redirect to the homepage or the last viewed page.
      *
-     * @Route("/delete/{id}", requirements={"id" = "\d+"}, name="delete_entry")
+     * @Route("/delete/{id}", name="delete_entry", methods={"POST"}, requirements={"id" = "\d+"})
      *
      * @return RedirectResponse
      */
     public function deleteEntryAction(Request $request, Entry $entry)
     {
+        if (!$this->isCsrfTokenValid('delete-entry', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $this->checkUserAction($entry);
 
         // generates the view url for this entry to check for redirection later
@@ -526,12 +547,16 @@ class EntryController extends AbstractController
     /**
      * Get public URL for entry (and generate it if necessary).
      *
-     * @Route("/share/{id}", requirements={"id" = "\d+"}, name="share")
+     * @Route("/share/{id}", name="share", methods={"POST"}, requirements={"id" = "\d+"})
      *
      * @return Response
      */
-    public function shareAction(Entry $entry)
+    public function shareAction(Request $request, Entry $entry)
     {
+        if (!$this->isCsrfTokenValid('share-entry', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $this->checkUserAction($entry);
 
         if (null === $entry->getUid()) {
@@ -549,12 +574,16 @@ class EntryController extends AbstractController
     /**
      * Disable public sharing for an entry.
      *
-     * @Route("/share/delete/{id}", requirements={"id" = "\d+"}, name="delete_share")
+     * @Route("/share/delete/{id}", name="delete_share", methods={"POST"}, requirements={"id" = "\d+"})
      *
      * @return Response
      */
-    public function deleteShareAction(Entry $entry)
+    public function deleteShareAction(Request $request, Entry $entry)
     {
+        if (!$this->isCsrfTokenValid('delete-share', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $this->checkUserAction($entry);
 
         $entry->cleanUid();
@@ -570,7 +599,7 @@ class EntryController extends AbstractController
     /**
      * Ability to view a content publicly.
      *
-     * @Route("/share/{uid}", requirements={"uid" = ".+"}, name="share_entry")
+     * @Route("/share/{uid}", name="share_entry", methods={"GET"}, requirements={"uid" = ".+"})
      * @Cache(maxage="25200", smaxage="25200", public=true)
      *
      * @return Response

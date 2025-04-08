@@ -26,14 +26,22 @@
             </ul>
             <ul class="right">
                 <li>
-                    <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_read'|trans }}" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" id="markAsRead">
-                        <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
-                    </a>
+                    <form action="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" method="post" class="inline-block">
+                        <input type="hidden" name="token" value="{{ csrf_token('archive-entry') }}"/>
+
+                        <button type="submit" class="waves-effect" title="{{ 'entry.view.left_menu.set_as_read'|trans }}">
+                            <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
+                        </button>
+                    </form>
                 </li>
                 <li>
-                    <a class="waves-effect" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" id="setFav">
-                        <i class="material-icons small">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
-                    </a>
+                    <form action="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" method="post" class="inline-block">
+                        <input type="hidden" name="token" value="{{ csrf_token('star-entry') }}"/>
+
+                        <button type="submit" class="waves-effect" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}">
+                            <i class="material-icons small">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
+                        </button>
+                    </form>
                 </li>
             </ul>
         </div>
@@ -56,10 +64,14 @@
         </li>
 
         <li class="bold">
-            <a class="waves-effect collapsible-header" onclick="return confirm('{{ 'entry.confirm.reload'|trans|escape('js') }}')" title="{{ 'entry.view.left_menu.re_fetch_content'|trans }}" href="{{ path('reload_entry', {'id': entry.id}) }}" id="reload">
-                <i class="material-icons small">refresh</i>
-                <span>{{ 'entry.view.left_menu.re_fetch_content'|trans }}</span>
-            </a>
+            <form action="{{ path('reload_entry', {'id': entry.id}) }}" method="post">
+                <input type="hidden" name="token" value="{{ csrf_token('reload-entry') }}"/>
+
+                <button type="submit" class="waves-effect collapsible-header" onclick="return confirm('{{ 'entry.confirm.reload'|trans|escape('js') }}')" title="{{ 'entry.view.left_menu.re_fetch_content'|trans }}">
+                    <i class="material-icons small">refresh</i>
+                    <span>{{ 'entry.view.left_menu.re_fetch_content'|trans }}</span>
+                </button>
+            </form>
             <div class="collapsible-body"></div>
         </li>
 
@@ -69,25 +81,37 @@
         {% endif %}
 
         <li class="bold hide-on-med-and-down">
-            <a class="waves-effect collapsible-header markasread" title="{{ mark_as_read_label|trans }}" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" id="markAsRead">
-                <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
-                <span>{{ mark_as_read_label|trans }}</span>
-            </a>
+            <form action="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" method="post">
+                <input type="hidden" name="token" value="{{ csrf_token('archive-entry') }}"/>
+
+                <button type="submit" class="waves-effect collapsible-header markasread" title="{{ mark_as_read_label|trans }}">
+                    <i class="material-icons small">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
+                    <span>{{ mark_as_read_label|trans }}</span>
+                </button>
+            </form>
             <div class="collapsible-body"></div>
         </li>
 
         <li class="bold hide-on-med-and-down">
-            <a class="waves-effect collapsible-header favorite" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" id="setFav">
-                <i class="material-icons spall">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
-                <span>{{ 'entry.view.left_menu.set_as_starred'|trans }}</span>
-            </a>
+            <form action="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" method="post">
+                <input type="hidden" name="token" value="{{ csrf_token('star-entry') }}"/>
+
+                <button type="submit" class="waves-effect collapsible-header favorite" title="{{ 'entry.view.left_menu.set_as_starred'|trans }}">
+                    <i class="material-icons spall">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
+                    <span>{{ 'entry.view.left_menu.set_as_starred'|trans }}</span>
+                </button>
+            </form>
             <div class="collapsible-body"></div>
         </li>
         <li class="bold border-bottom">
-            <a class="waves-effect collapsible-header delete" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" title="{{ 'entry.view.left_menu.delete'|trans }}" href="{{ path('delete_entry', {'id': entry.id, redirect: current_path}) }}">
-                <i class="material-icons small">delete</i>
-                <span>{{ 'entry.view.left_menu.delete'|trans }}</span>
-            </a>
+            <form action="{{ path('delete_entry', {'id': entry.id, redirect: current_path}) }}" method="post">
+                <input type="hidden" name="token" value="{{ csrf_token('delete-entry') }}"/>
+
+                <button type="submit" class="waves-effect collapsible-header delete" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')" title="{{ 'entry.view.left_menu.delete'|trans }}">
+                    <i class="material-icons small">delete</i>
+                    <span>{{ 'entry.view.left_menu.delete'|trans }}</span>
+                </button>
+            </form>
             <div class="collapsible-body"></div>
         </li>
 
@@ -135,14 +159,22 @@
                 <ul>
                     {% if craue_setting('share_public') %}
                         <li>
-                            <a href="{{ path('share', {'id': entry.id}) }}" target="_blank" title="{{ 'entry.view.left_menu.public_link'|trans }}" class="tool icon-eye">
-                                <span>{{ 'entry.view.left_menu.public_link'|trans }}</span>
-                            </a>
+                            <form action="{{ path('share', {'id': entry.id}) }}" method="post">
+                                <input type="hidden" name="token" value="{{ csrf_token('share-entry') }}"/>
+
+                                <button type="submit" formtarget="_blank" class="btn-link tool icon-eye" title="{{ 'entry.view.left_menu.public_link'|trans }}">
+                                    <span>{{ 'entry.view.left_menu.public_link'|trans }}</span>
+                                </button>
+                            </form>
                         </li>
                         <li>
-                            <a href="{{ path('delete_share', {'id': entry.id}) }}" title="{{ 'entry.view.left_menu.delete_public_link'|trans }}" class="tool icon-no-eye">
-                                <span>{{ 'entry.view.left_menu.delete_public_link'|trans }}</span>
-                            </a>
+                            <form action="{{ path('delete_share', {'id': entry.id}) }}" method="post">
+                                <input type="hidden" name="token" value="{{ csrf_token('delete-share') }}"/>
+
+                                <button type="submit" class="btn-link tool icon-no-eye" title="{{ 'entry.view.left_menu.delete_public_link'|trans }}">
+                                    <span>{{ 'entry.view.left_menu.delete_public_link'|trans }}</span>
+                                </button>
+                            </form>
                         </li>
                     {% endif %}
                     {% if craue_setting('share_twitter') %}
@@ -300,9 +332,33 @@
               <i class="material-icons">menu</i>
             </a>
             <ul>
-              <li><a class="btn-floating" href="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i></a></li>
-              <li><a class="btn-floating" href="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}"><i class="material-icons">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i></a></li>
-              <li><a class="btn-floating" href="{{ path('delete_entry', {'id': entry.id, redirect: current_path}) }}" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')"><i class="material-icons">delete</i></a></li>
+              <li>
+                  <form action="{{ path('archive_entry', {'id': entry.id, redirect: current_path}) }}" method="post" class="inline-block">
+                      <input type="hidden" name="token" value="{{ csrf_token('archive-entry') }}"/>
+
+                      <button type="submit" class="btn-floating">
+                          <i class="material-icons">{% if entry.isArchived == 0 %}done{% else %}unarchive{% endif %}</i>
+                      </button>
+                  </form>
+              </li>
+              <li>
+                  <form action="{{ path('star_entry', {'id': entry.id, redirect: current_path}) }}" method="post" class="inline-block">
+                      <input type="hidden" name="token" value="{{ csrf_token('star-entry') }}"/>
+
+                      <button type="submit" class="btn-floating">
+                          <i class="material-icons">{% if entry.isStarred == 0 %}star_outline{% else %}star{% endif %}</i>
+                      </button>
+                  </form>
+              </li>
+              <li>
+                  <form action="{{ path('delete_entry', {'id': entry.id, redirect: current_path}) }}" method="post" class="inline-block">
+                      <input type="hidden" name="token" value="{{ csrf_token('delete-entry') }}"/>
+
+                      <button type="submit" class="btn-floating" onclick="return confirm('{{ 'entry.confirm.delete'|trans|escape('js') }}')">
+                          <i class="material-icons">delete</i>
+                      </button>
+                  </form>
+              </li>
             </ul>
         </div>
     </div>

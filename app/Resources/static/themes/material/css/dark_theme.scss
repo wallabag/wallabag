@@ -62,7 +62,9 @@
   .nav-panels .input-field input:focus,
   .results-item,
   .side-nav li > a,
-  .side-nav li > a > i.material-icons {
+  .side-nav li > a > i.material-icons,
+  .side-nav li button,
+  .side-nav li button > i.material-icons {
     color: #dfdfdf;
   }
 
@@ -87,6 +89,7 @@
 
   .mass-action-tags .mass-action-tags-input.mass-action-tags-input,
   .side-nav li:not(.logo) > a:hover,
+  .side-nav li:not(.logo) button:hover,
   .side-nav .collapsible-header:hover,
   .side-nav.fixed .collapsible-header:hover {
     background-color: #1d1d1d;
