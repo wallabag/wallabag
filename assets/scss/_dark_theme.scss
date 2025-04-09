@@ -63,7 +63,9 @@
   .input-field input:focus,
   .results-item,
   .sidenav li > a,
-  .sidenav li > a > i.material-icons {
+  .sidenav li > a > i.material-icons,
+  .sidenav li button,
+  .sidenav li button > i.material-icons {
     color: #dfdfdf;
   }
 
@@ -88,6 +90,7 @@
 
   .mass-action-tags .mass-action-tags-input.mass-action-tags-input,
   .sidenav li:not(.logo) > a:hover,
+  .sidenav li:not(.logo) button:hover,
   .sidenav .collapsible-header:hover,
   .sidenav.sidenav-fixed .collapsible-header:hover {
     background-color: #1d1d1d;

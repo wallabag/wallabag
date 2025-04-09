@@ -328,7 +328,8 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('config.form_feed.no_token', $body[0]);
 
-        $client->request('GET', '/generate-token');
+        $client->submit($crawler->selectButton('config.form_feed.token_create')->form());
+
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
@@ -337,38 +338,34 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertStringContainsString('config.form_feed.token_reset', $body[0]);
     }
 
-    public function testGenerateTokenAjax()
-    {
-        $this->logInAs('admin');
-        $client = $this->getTestClient();
-
-        $client->request(
-            'GET',
-            '/generate-token',
-            [],
-            [],
-            ['HTTP_X-Requested-With' => 'XMLHttpRequest']
-        );
-
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $content = json_decode((string) $client->getResponse()->getContent(), true);
-        $this->assertArrayHasKey('token', $content);
-    }
-
     public function testRevokeTokenAjax()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $client->request(
-            'GET',
-            '/revoke-token',
-            [],
-            [],
-            ['HTTP_X-Requested-With' => 'XMLHttpRequest']
-        );
+        // set the token
+        $em = $client->getContainer()->get(EntityManagerInterface::class);
+        $user = $em
+            ->getRepository(User::class)
+            ->findOneByUsername('admin');
 
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        if (!$user) {
+            $this->markTestSkipped('No user found in db.');
+        }
+
+        $config = $user->getConfig();
+        $config->setFeedToken('abcd1234');
+        $em->persist($config);
+        $em->flush();
+
+        $crawler = $client->request('GET', '/config');
+
+        $client->submit($crawler->selectButton('config.form_feed.token_revoke')->form());
+
+        $crawler = $client->followRedirect();
+
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+        $this->assertStringContainsString('config.form_feed.token_create', $body[0]);
     }
 
     public function testFeedUpdate()
@@ -484,9 +481,8 @@ class ConfigControllerTest extends WallabagTestCase
 
         $this->assertStringContainsString('readingTime <= 30', $crawler->filter('body')->extract(['_text'])[0]);
 
-        $deleteLink = $crawler->filter('.delete_tagging_rule')->last()->link();
+        $crawler = $client->submit($crawler->filter('#set5')->selectButton('delete')->form());
 
-        $crawler = $client->click($deleteLink);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
@@ -576,7 +572,7 @@ class ConfigControllerTest extends WallabagTestCase
             ->getRepository(TaggingRule::class)
             ->findAll()[0];
 
-        $crawler = $client->request('GET', '/tagging-rule/delete/' . $rule->getId());
+        $crawler = $client->request('POST', '/tagging-rule/delete/' . $rule->getId());
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
@@ -646,9 +642,9 @@ class ConfigControllerTest extends WallabagTestCase
 
         $this->assertStringContainsString('host = "example.org"', $crawler->filter('body')->extract(['_text'])[0]);
 
-        $deleteLink = $crawler->filter('div[id=set6] a.delete')->last()->link();
+        $form = $crawler->filter('#set6')->selectButton('delete')->form();
 
-        $crawler = $client->click($deleteLink);
+        $crawler = $client->submit($form);
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
@@ -713,7 +709,7 @@ class ConfigControllerTest extends WallabagTestCase
             ->getRepository(IgnoreOriginUserRule::class)
             ->findAll()[0];
 
-        $crawler = $client->request('GET', '/ignore-origin-user-rule/edit/' . $rule->getId());
+        $crawler = $client->request('POST', '/ignore-origin-user-rule/delete/' . $rule->getId());
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
@@ -768,7 +764,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertStringNotContainsString('config.form_user.delete.button', $body[0]);
 
         $client->request('POST', '/account/delete');
-        $this->assertSame(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(400, $client->getResponse()->getStatusCode());
 
         $user = $em
             ->getRepository(User::class)
@@ -1113,37 +1109,38 @@ class ConfigControllerTest extends WallabagTestCase
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $client->request('GET', '/unread/list');
+        $crawler = $client->request('GET', '/unread/list');
 
         $this->assertStringContainsString('row data', $client->getResponse()->getContent());
 
-        $client->request('GET', '/config/view-mode');
-        $crawler = $client->followRedirect();
+        $form = $crawler->filter('.nb-results')->selectButton('view_list')->form();
 
-        $client->request('GET', '/unread/list');
+        $client->submit($form);
+
+        $client->followRedirect();
 
         $this->assertStringContainsString('collection', $client->getResponse()->getContent());
-
-        $client->request('GET', '/config/view-mode');
     }
 
     public function testChangeLocaleWithoutReferer()
     {
         $client = $this->getTestClient();
 
-        $client->request('GET', '/locale/de');
-        $client->followRedirect();
+        $crawler = $client->request('POST', '/locale/de');
 
-        $this->assertSame('de', $client->getRequest()->getLocale());
-        $this->assertSame('de', $client->getContainer()->get(SessionInterface::class)->get('_locale'));
+        $this->assertSame(400, $client->getResponse()->getStatusCode());
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+        $this->assertStringContainsString('Bad CSRF token.', $body[0]);
     }
 
     public function testChangeLocaleWithReferer()
     {
         $client = $this->getTestClient();
 
-        $client->request('GET', '/login');
-        $client->request('GET', '/locale/de');
+        $crawler = $client->request('GET', '/login');
+
+        $client->submit($crawler->selectButton('Deutsch')->form());
+
         $client->followRedirect();
 
         $this->assertSame('de', $client->getRequest()->getLocale());
@@ -1154,8 +1151,12 @@ class ConfigControllerTest extends WallabagTestCase
     {
         $client = $this->getTestClient();
 
-        $client->request('GET', '/login');
-        $client->request('GET', '/locale/yuyuyuyu');
+        $crawler = $client->request('GET', '/login');
+        $token = $crawler->filter('form[action="/locale/de"] input[name=token]')->attr('value');
+
+        $client->request('POST', '/locale/yuyuyuyu', [
+            'token' => $token,
+        ]);
         $client->followRedirect();
 
         $this->assertNotSame('yuyuyuyu', $client->getRequest()->getLocale());
@@ -1376,8 +1377,6 @@ class ConfigControllerTest extends WallabagTestCase
         $client->request('GET', '/unread/list');
 
         $this->assertStringNotContainsString('class="preview"', $client->getResponse()->getContent());
-
-        $client->request('GET', '/config/view-mode');
     }
 
     public function testGeneratedCSS()

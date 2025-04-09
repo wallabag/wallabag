@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\Controller\AbstractController;
@@ -73,7 +74,7 @@ class DeveloperController extends AbstractController
     public function deleteClientAction(Request $request, Client $client, EntityManagerInterface $entityManager, TranslatorInterface $translator)
     {
         if (!$this->isCsrfTokenValid('delete-client', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
         if (null === $this->getUser() || $client->getUser()->getId() !== $this->getUser()->getId()) {

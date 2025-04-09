@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraints\Locale as LocaleConstraint;
@@ -253,7 +254,7 @@ class ConfigController extends AbstractController
     public function disableOtpEmailAction(Request $request)
     {
         if (!$this->isCsrfTokenValid('otp', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
         $user = $this->getUser();
@@ -278,7 +279,7 @@ class ConfigController extends AbstractController
     public function otpEmailAction(Request $request)
     {
         if (!$this->isCsrfTokenValid('otp', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
         $user = $this->getUser();
@@ -306,7 +307,7 @@ class ConfigController extends AbstractController
     public function disableOtpAppAction(Request $request)
     {
         if (!$this->isCsrfTokenValid('otp', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
         $user = $this->getUser();
@@ -333,7 +334,7 @@ class ConfigController extends AbstractController
     public function otpAppAction(Request $request, GoogleAuthenticatorInterface $googleAuthenticator)
     {
         if (!$this->isCsrfTokenValid('otp', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
         $user = $this->getUser();
@@ -392,7 +393,7 @@ class ConfigController extends AbstractController
     public function otpAppCheckAction(Request $request, GoogleAuthenticatorInterface $googleAuthenticator)
     {
         if (!$this->isCsrfTokenValid('otp', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
         $isValid = $googleAuthenticator->checkCode(
@@ -425,19 +426,19 @@ class ConfigController extends AbstractController
     /**
      * @return RedirectResponse|JsonResponse
      */
-    #[Route(path: '/generate-token', name: 'generate_token', methods: ['GET'])]
+    #[Route(path: '/generate-token', name: 'generate_token', methods: ['POST'])]
     #[IsGranted('EDIT_CONFIG')]
     public function generateTokenAction(Request $request)
     {
+        if (!$this->isCsrfTokenValid('generate-token', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $config = $this->getConfig();
         $config->setFeedToken(Utils::generateToken());
 
         $this->entityManager->persist($config);
         $this->entityManager->flush();
-
-        if ($request->isXmlHttpRequest()) {
-            return new JsonResponse(['token' => $config->getFeedToken()]);
-        }
 
         $this->addFlash(
             'notice',
@@ -450,19 +451,19 @@ class ConfigController extends AbstractController
     /**
      * @return RedirectResponse|JsonResponse
      */
-    #[Route(path: '/revoke-token', name: 'revoke_token', methods: ['GET'])]
+    #[Route(path: '/revoke-token', name: 'revoke_token', methods: ['POST'])]
     #[IsGranted('EDIT_CONFIG')]
     public function revokeTokenAction(Request $request)
     {
+        if (!$this->isCsrfTokenValid('revoke-token', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $config = $this->getConfig();
         $config->setFeedToken(null);
 
         $this->entityManager->persist($config);
         $this->entityManager->flush();
-
-        if ($request->isXmlHttpRequest()) {
-            return new JsonResponse();
-        }
 
         $this->addFlash(
             'notice',
@@ -477,10 +478,14 @@ class ConfigController extends AbstractController
      *
      * @return RedirectResponse
      */
-    #[Route(path: '/tagging-rule/delete/{taggingRule}', name: 'delete_tagging_rule', methods: ['GET'], requirements: ['taggingRule' => '\d+'])]
+    #[Route(path: '/tagging-rule/delete/{taggingRule}', name: 'delete_tagging_rule', methods: ['POST'], requirements: ['taggingRule' => '\d+'])]
     #[IsGranted('DELETE', subject: 'taggingRule')]
-    public function deleteTaggingRuleAction(TaggingRule $taggingRule)
+    public function deleteTaggingRuleAction(Request $request, TaggingRule $taggingRule)
     {
+        if (!$this->isCsrfTokenValid('delete-tagging-rule', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $this->entityManager->remove($taggingRule);
         $this->entityManager->flush();
 
@@ -509,10 +514,14 @@ class ConfigController extends AbstractController
      *
      * @return RedirectResponse
      */
-    #[Route(path: '/ignore-origin-user-rule/delete/{ignoreOriginUserRule}', name: 'delete_ignore_origin_rule', methods: ['GET'], requirements: ['ignoreOriginUserRule' => '\d+'])]
+    #[Route(path: '/ignore-origin-user-rule/delete/{ignoreOriginUserRule}', name: 'delete_ignore_origin_rule', methods: ['POST'], requirements: ['ignoreOriginUserRule' => '\d+'])]
     #[IsGranted('DELETE', subject: 'ignoreOriginUserRule')]
-    public function deleteIgnoreOriginRuleAction(IgnoreOriginUserRule $ignoreOriginUserRule)
+    public function deleteIgnoreOriginRuleAction(Request $request, IgnoreOriginUserRule $ignoreOriginUserRule)
     {
+        if (!$this->isCsrfTokenValid('delete-ignore-origin-rule', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $this->entityManager->remove($ignoreOriginUserRule);
         $this->entityManager->flush();
 
@@ -546,7 +555,7 @@ class ConfigController extends AbstractController
     public function resetAction(Request $request, string $type, AnnotationRepository $annotationRepository, EntryRepository $entryRepository, TaggingRuleRepository $taggingRuleRepository)
     {
         if (!$this->isCsrfTokenValid('reset-area', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
         switch ($type) {
@@ -602,7 +611,7 @@ class ConfigController extends AbstractController
     public function deleteAccountAction(Request $request, UserRepository $userRepository, TokenStorageInterface $tokenStorage)
     {
         if (!$this->isCsrfTokenValid('delete-account', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
         $enabledUsers = $userRepository->getSumEnabledUsers();
@@ -627,10 +636,14 @@ class ConfigController extends AbstractController
      *
      * @return RedirectResponse
      */
-    #[Route(path: '/config/view-mode', name: 'switch_view_mode', methods: ['GET'])]
+    #[Route(path: '/config/view-mode', name: 'switch_view_mode', methods: ['POST'])]
     #[IsGranted('EDIT_CONFIG')]
     public function changeViewModeAction(Request $request)
     {
+        if (!$this->isCsrfTokenValid('switch-view-mode', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $user = $this->getUser();
         $user->getConfig()->setListMode(!$user->getConfig()->getListMode());
 
@@ -649,10 +662,14 @@ class ConfigController extends AbstractController
      *
      * @return RedirectResponse
      */
-    #[Route(path: '/locale/{language}', name: 'changeLocale', methods: ['GET'])]
+    #[Route(path: '/locale/{language}', name: 'changeLocale', methods: ['POST'])]
     #[IsGranted('PUBLIC_ACCESS')]
     public function setLocaleAction(Request $request, ValidatorInterface $validator, $language = null)
     {
+        if (!$this->isCsrfTokenValid('change-locale', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $errors = $validator->validate($language, new LocaleConstraint(['canonicalize' => true]));
 
         if (0 === \count($errors)) {

@@ -105,7 +105,7 @@ class DeveloperControllerTest extends WallabagTestCase
 
         $this->logInAs('bob');
         $client->request('POST', '/developer/client/delete/' . $adminApiClient->getId());
-        $this->assertSame(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(400, $client->getResponse()->getStatusCode());
 
         // Try to remove the admin's client with the good user
         $this->logInAs('admin');

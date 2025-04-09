@@ -14,6 +14,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -52,6 +53,10 @@ class EntryController extends AbstractController
     #[IsGranted('EDIT_ENTRIES')]
     public function massAction(Request $request, TagRepository $tagRepository)
     {
+        if (!$this->isCsrfTokenValid('mass-action', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $values = $request->request->all();
 
         $tagsToAdd = [];
@@ -395,10 +400,14 @@ class EntryController extends AbstractController
      *
      * @return RedirectResponse
      */
-    #[Route(path: '/reload/{id}', name: 'reload_entry', methods: ['GET'], requirements: ['id' => '\d+'])]
+    #[Route(path: '/reload/{id}', name: 'reload_entry', methods: ['POST'], requirements: ['id' => '\d+'])]
     #[IsGranted('RELOAD', subject: 'entry')]
-    public function reloadAction(Entry $entry)
+    public function reloadAction(Request $request, Entry $entry)
     {
+        if (!$this->isCsrfTokenValid('reload-entry', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $this->updateEntry($entry, 'entry_reloaded');
 
         // if refreshing entry failed, don't save it
@@ -422,10 +431,14 @@ class EntryController extends AbstractController
      *
      * @return RedirectResponse
      */
-    #[Route(path: '/archive/{id}', name: 'archive_entry', methods: ['GET'], requirements: ['id' => '\d+'])]
+    #[Route(path: '/archive/{id}', name: 'archive_entry', methods: ['POST'], requirements: ['id' => '\d+'])]
     #[IsGranted('ARCHIVE', subject: 'entry')]
     public function toggleArchiveAction(Request $request, Entry $entry)
     {
+        if (!$this->isCsrfTokenValid('archive-entry', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $entry->toggleArchive();
         $this->entityManager->flush();
 
@@ -449,10 +462,14 @@ class EntryController extends AbstractController
      *
      * @return RedirectResponse
      */
-    #[Route(path: '/star/{id}', name: 'star_entry', methods: ['GET'], requirements: ['id' => '\d+'])]
+    #[Route(path: '/star/{id}', name: 'star_entry', methods: ['POST'], requirements: ['id' => '\d+'])]
     #[IsGranted('STAR', subject: 'entry')]
     public function toggleStarAction(Request $request, Entry $entry)
     {
+        if (!$this->isCsrfTokenValid('star-entry', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $entry->toggleStar();
         $entry->updateStar($entry->isStarred());
         $this->entityManager->flush();
@@ -477,10 +494,14 @@ class EntryController extends AbstractController
      *
      * @return RedirectResponse
      */
-    #[Route(path: '/delete/{id}', name: 'delete_entry', methods: ['GET'], requirements: ['id' => '\d+'])]
+    #[Route(path: '/delete/{id}', name: 'delete_entry', methods: ['POST'], requirements: ['id' => '\d+'])]
     #[IsGranted('DELETE', subject: 'entry')]
     public function deleteEntryAction(Request $request, Entry $entry)
     {
+        if (!$this->isCsrfTokenValid('delete-entry', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         // generates the view url for this entry to check for redirection later
         // to avoid redirecting to the deleted entry. Ugh.
         $url = $this->generateUrl(
@@ -513,10 +534,14 @@ class EntryController extends AbstractController
      *
      * @return Response
      */
-    #[Route(path: '/share/{id}', name: 'share', methods: ['GET'], requirements: ['id' => '\d+'])]
+    #[Route(path: '/share/{id}', name: 'share', methods: ['POST'], requirements: ['id' => '\d+'])]
     #[IsGranted('SHARE', subject: 'entry')]
-    public function shareAction(Entry $entry)
+    public function shareAction(Request $request, Entry $entry)
     {
+        if (!$this->isCsrfTokenValid('share-entry', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         if (null === $entry->getUid()) {
             $entry->generateUid();
 
@@ -534,10 +559,14 @@ class EntryController extends AbstractController
      *
      * @return Response
      */
-    #[Route(path: '/share/delete/{id}', name: 'delete_share', methods: ['GET'], requirements: ['id' => '\d+'])]
+    #[Route(path: '/share/delete/{id}', name: 'delete_share', methods: ['POST'], requirements: ['id' => '\d+'])]
     #[IsGranted('UNSHARE', subject: 'entry')]
-    public function deleteShareAction(Entry $entry)
+    public function deleteShareAction(Request $request, Entry $entry)
     {
+        if (!$this->isCsrfTokenValid('delete-share', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $entry->cleanUid();
 
         $this->entityManager->persist($entry);

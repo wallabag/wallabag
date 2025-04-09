@@ -13,7 +13,7 @@ permissions:
 jobs:
   coding-standards:
     name: "CS Fixer, PHPStan & TwigCS"
-    runs-on: "ubuntu-20.04"
+    runs-on: ubuntu-latest
 
     steps:
       - name: "Checkout"

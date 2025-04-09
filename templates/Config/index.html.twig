@@ -182,47 +182,62 @@
                     </div>
 
                     <div id="set2" class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                {{ 'config.form_feed.description'|trans }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col s12">
+                                <h6 class="grey-text">{{ 'config.form_feed.token_label'|trans }}</h6>
+                                <div>
+                                    {% if feed.token %}
+                                        {{ feed.token }}
+                                    {% else %}
+                                        <em>{{ 'config.form_feed.no_token'|trans }}</em>
+                                    {% endif %}
+
+                                    {% if feed.token %}
+                                        –
+                                        <form action="{{ path('generate_token') }}" method="post" class="inline-block">
+                                            <input type="hidden" name="token" value="{{ csrf_token('generate-token') }}"/>
+
+                                            <button type="submit" class="btn-link">{{ 'config.form_feed.token_reset'|trans }}</button>
+                                        </form>
+                                        –
+                                        <form action="{{ path('revoke_token') }}" method="post" class="inline-block">
+                                            <input type="hidden" name="token" value="{{ csrf_token('revoke-token') }}"/>
+
+                                            <button type="submit" class="btn-link">{{ 'config.form_feed.token_revoke'|trans }}</button>
+                                        </form>
+                                    {% else %}
+                                        –
+                                        <form action="{{ path('generate_token') }}" method="post" class="inline-block">
+                                            <input type="hidden" name="token" value="{{ csrf_token('generate-token') }}"/>
+
+                                            <button type="submit" class="btn-link">{{ 'config.form_feed.token_create'|trans }}</button>
+                                        </form>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% if feed.token %}
+                        <div class="row">
+                            <div class="col s12">
+                                <h6 class="grey-text">{{ 'config.form_feed.feed_links'|trans }}</h6>
+                                <ul>
+                                    <li><a href="{{ path('unread_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.unread'|trans }}</a></li>
+                                    <li><a href="{{ path('starred_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.starred'|trans }}</a></li>
+                                    <li><a href="{{ path('archive_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.archive'|trans }}</a></li>
+                                    <li><a href="{{ path('all_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.all'|trans }}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        {% endif %}
+
                         {{ form_start(form.feed) }}
                             {{ form_errors(form.feed) }}
-
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    {{ 'config.form_feed.description'|trans }}
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col s12">
-                                    <h6 class="grey-text">{{ 'config.form_feed.token_label'|trans }}</h6>
-                                    <div>
-                                        {% if feed.token %}
-                                            {{ feed.token }}
-                                        {% else %}
-                                            <em>{{ 'config.form_feed.no_token'|trans }}</em>
-                                        {% endif %}
-
-                                        {% if feed.token %}
-                                            – <a href="{{ path('generate_token') }}">{{ 'config.form_feed.token_reset'|trans }}</a>
-                                            – <a href="{{ path('revoke_token') }}">{{ 'config.form_feed.token_revoke'|trans }}</a>
-                                        {% else %}
-                                            – <a href="{{ path('generate_token') }}">{{ 'config.form_feed.token_create'|trans }}</a>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                            {% if feed.token %}
-                            <div class="row">
-                                <div class="col s12">
-                                    <h6 class="grey-text">{{ 'config.form_feed.feed_links'|trans }}</h6>
-                                    <ul>
-                                        <li><a href="{{ path('unread_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.unread'|trans }}</a></li>
-                                        <li><a href="{{ path('starred_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.starred'|trans }}</a></li>
-                                        <li><a href="{{ path('archive_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.archive'|trans }}</a></li>
-                                        <li><a href="{{ path('all_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.all'|trans }}</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            {% endif %}
 
                             <div class="row">
                                 <div class="input-field col s12">
@@ -384,9 +399,13 @@
                                         <a href="{{ path('edit_tagging_rule', {taggingRule: tagging_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="mode_edit_tagging_rule">
                                             <i class="tool grey-text material-icons">mode_edit</i>
                                         </a>
-                                        <a href="{{ path('delete_tagging_rule', {taggingRule: tagging_rule.id}) }}" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="delete_tagging_rule">
-                                            <i class="tool grey-text material-icons">delete</i>
-                                        </a>
+                                        <form action="{{ path('delete_tagging_rule', {taggingRule: tagging_rule.id}) }}" method="post" class="inline-block">
+                                            <input type="hidden" name="token" value="{{ csrf_token('delete-tagging-rule') }}"/>
+
+                                            <button type="submit" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="btn-link">
+                                                <i class="tool grey-text material-icons">delete</i>
+                                            </button>
+                                        </form>
                                     </li>
                                     {% endfor %}
                                 </ul>
@@ -564,9 +583,13 @@
                                         <a href="{{ path('edit_ignore_origin_rule', {ignoreOriginUserRule: ignore_origin_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="mode_edit">
                                             <i class="tool grey-text material-icons">mode_edit</i>
                                         </a>
-                                        <a href="{{ path('delete_ignore_origin_rule', {ignoreOriginUserRule: ignore_origin_rule.id}) }}" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="delete">
-                                            <i class="tool grey-text material-icons">delete</i>
-                                        </a>
+                                        <form action="{{ path('delete_ignore_origin_rule', {ignoreOriginUserRule: ignore_origin_rule.id}) }}" method="post" class="inline-block">
+                                            <input type="hidden" name="token" value="{{ csrf_token('delete-ignore-origin-rule') }}"/>
+
+                                            <button type="submit" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="btn-link">
+                                                <i class="tool grey-text material-icons">delete</i>
+                                            </button>
+                                        </form>
                                     </li>
                                     {% endfor %}
                                 </ul>
