@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.6.12](https://github.com/wallabag/wallabag/tree/2.6.12)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.11...2.6.12)
+
+### Technical stuff
+
+* Fix changelog by @yguedidi in [https://github.com/wallabag/wallabag/pull/8135](https://github.com/wallabag/wallabag/pull/8135)
+* Update dependencies by @yguedidi in [https://github.com/wallabag/wallabag/pull/8136](https://github.com/wallabag/wallabag/pull/8136)
+
 ## [2.6.11](https://github.com/wallabag/wallabag/tree/2.6.11)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.10...2.6.11)
 
