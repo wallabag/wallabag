@@ -57,5 +57,5 @@ parameters:
 
         -
             message: "#^Method FOS\\\\UserBundle\\\\Model\\\\UserManagerInterface\\:\\:updateUser()#"
-            count: 6
+            count: 7
             path: src/Wallabag/CoreBundle/Controller/ConfigController.php
