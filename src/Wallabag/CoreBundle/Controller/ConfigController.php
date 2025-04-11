@@ -402,12 +402,14 @@ class ConfigController extends AbstractController
             throw new BadRequestHttpException('Bad CSRF token.');
         }
 
+        $user = $this->getUser();
+
         $isValid = $googleAuthenticator->checkCode(
-            $this->getUser(),
+            $user,
             $request->get('_auth_code')
         );
 
-        if (true === $isValid) {
+        if ($isValid) {
             $this->addFlash(
                 'notice',
                 'flashes.config.notice.otp_enabled'
@@ -417,14 +419,14 @@ class ConfigController extends AbstractController
         }
 
         $this->addFlash(
-            'two_factor',
-            'scheb_two_factor.code_invalid'
+            'notice',
+            'flashes.config.notice.otp_code_invalid'
         );
 
-        $this->addFlash(
-            'notice',
-            'scheb_two_factor.code_invalid'
-        );
+        $user->setGoogleAuthenticatorSecret(null);
+        $user->setBackupCodes(null);
+
+        $this->userManager->updateUser($user, true);
 
         return $this->redirect($this->generateUrl('config') . '#set3');
     }
