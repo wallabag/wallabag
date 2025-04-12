@@ -133,7 +133,10 @@ server {
         try_files $uri /app.php$is_args$args;
     }
     location ~ ^/app\.php(/|$) {
-        # if, for some reason, you are still using PHP 5,
+        # You may need to replace /run/php/php7.0-fpm.sock below with
+        # a different version, e.g. /run/php/php7.4-fpm.sock. The path
+        # should refer to an existing file in the filesystem.
+        # If, for some reason, you are still using PHP 5,
         # then replace /run/php/php7.0 by /var/run/php5
         fastcgi_pass unix:/run/php/php7.0-fpm.sock;
         fastcgi_split_path_info ^(.+\.php)(/.*)$;
