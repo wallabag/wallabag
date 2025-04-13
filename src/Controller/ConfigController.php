@@ -313,6 +313,7 @@ class ConfigController extends AbstractController
         $user = $this->getUser();
 
         $user->setGoogleAuthenticatorSecret('');
+        $user->setGoogleAuthenticator(false);
         $user->setBackupCodes(null);
 
         $this->userManager->updateUser($user);
@@ -353,11 +354,6 @@ class ConfigController extends AbstractController
 
         $this->userManager->updateUser($user);
         $this->entityManager->flush();
-
-        $this->addFlash(
-            'notice',
-            'flashes.config.notice.otp_enabled'
-        );
 
         return $this->render('Config/otp_app.html.twig', [
             'backupCodes' => $backupCodes,
@@ -408,6 +404,9 @@ class ConfigController extends AbstractController
                 'notice',
                 'flashes.config.notice.otp_enabled'
             );
+            $user->setGoogleAuthenticator(true);
+            $this->userManager->updateUser($user);
+            $this->entityManager->flush();
 
             return $this->redirect($this->generateUrl('config') . '#set3');
         }
@@ -421,8 +420,9 @@ class ConfigController extends AbstractController
         $user->setBackupCodes(null);
 
         $this->userManager->updateUser($user);
+        $this->entityManager->flush();
 
-        return $this->redirect($this->generateUrl('config') . '#set3');
+        return $this->redirect($this->generateUrl('config_otp_app'), 307);
     }
 
     /**

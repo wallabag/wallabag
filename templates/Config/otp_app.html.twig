@@ -18,14 +18,14 @@
                                 <img data-controller="qrcode" data-qrcode-url-value="{{ qr_code|raw }}" class="hide-on-med-and-down" />
                             </p>
 
-                            <div data-controller="highlight">
+                            <div id="config_otp_app_secret">
                                 {{ 'config.otp.app.two_factor_code_description_5'|trans }} <pre><code>{{ secret }}</code></pre>
                             </div>
                         </li>
                         <li>
                             <p>{{ 'config.otp.app.two_factor_code_description_3'|trans }}</p>
 
-                            <div data-controller="highlight"><pre><code>{{ backupCodes|join("\n") }}</code></pre></div>
+                            <div><pre><code>{{ backupCodes|join("\n") }}</code></pre></div>
                         </li>
                         <li>
                             <p>{{ 'config.otp.app.two_factor_code_description_4'|trans }}</p>
@@ -36,7 +36,7 @@
                             </div>
                             {% endfor %}
 
-                            <form class="form" action="{{ path("config_otp_app_check") }}" method="post">
+                            <form class="form" action="{{ path("config_otp_app_check") }}" method="post" name="config_otp_app_check">
                                 <input type="hidden" name="token" value="{{ csrf_token('otp') }}" />
                                 <div class="card-content">
                                     <div class="row">
