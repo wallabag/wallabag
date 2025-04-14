@@ -154,6 +154,15 @@ a.original:not(.waves-effect) {
   }
 }
 
+.card .card-content .card-title,
+.card-stacked .card-content .card-title {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
 .card-entry-labels li,
 .card-tag-labels li {
   margin: 10px 10px 10px auto;

@@ -4,10 +4,10 @@
     {% endif %}
     {% if is_granted('VIEW', entry) %}
         <a href="{{ path('view', {'id': entry.id}) }}" title="{{ entry.title|striptags|e('html_attr') }}" class="card-title dot-ellipsis dot-resize-update">
-            {{ entry.title|striptags|u.truncate(80, '…', false)|default('entry.default_title'|trans)|raw }}
+            {{ entry.title|striptags|default('entry.default_title'|trans)|raw }}
         </a>
     {% else %}
-        {{ entry.title|striptags|u.truncate(80, '…', false)|default('entry.default_title'|trans)|raw }}
+        {{ entry.title|striptags|default('entry.default_title'|trans)|raw }}
     {% endif %}
 
     <div class="{{ subClass|default('original grey-text') }}">
