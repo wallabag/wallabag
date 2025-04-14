@@ -681,6 +681,7 @@ flashes:
             tagging_rules_not_imported: Błąd podczas importowania zasad tagowania
             ignore_origin_rules_deleted: Usunięto zasadę ignorowania pochodzenia
             tagging_rules_reset: Reguły tagowania zostały zresetowane
+            otp_code_invalid: Nieprawidłowy kod uwierzytelniania dwuskładnikowego
     entry:
         notice:
             entry_already_saved: Wpis już został dodany %date%
