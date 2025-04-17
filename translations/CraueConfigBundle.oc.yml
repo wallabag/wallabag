@@ -33,3 +33,4 @@ restricted_access: Activar l'autenticacion pels sites amb peatge
 api_user_registration: Autorizar los utilizaires a se marcar amb l'API
 store_article_headers: Activar se wallabag garda las entèstas HTTP per cada article
 shaarli_share_origin_url: Activar lo partatge de l’url amb Shaarli, se lo servici es activat
+share_linkding: Activar lo partiment amb Linkding

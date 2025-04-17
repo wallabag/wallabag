@@ -672,6 +672,7 @@ flashes:
             password_updated: Contrasinal actualizado
             config_saved: Gardouse o axuste.
             tagging_rules_reset: Restablecer regras de etiquetado
+            otp_code_invalid: O código de autenticación 2FA non é válido
 error:
     page_title: Houbo un fallo
 ignore_origin_instance_rule:
