@@ -173,7 +173,7 @@ jobs:
 
   phpunit-without-rmq-redis:
     name: "PHP ${{ matrix.php }} using ${{ matrix.database }} without Rabbit & Redis"
-    runs-on: "ubuntu-20.04"
+    runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false
