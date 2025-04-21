@@ -1066,10 +1066,10 @@
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.27.8.tgz#6667fac16c436b5434a387a34dedb013198f6e6e"
   integrity sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==
 
-"@symfony/stimulus-bridge@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@symfony/stimulus-bridge/-/stimulus-bridge-4.0.0.tgz#dbd352a373f8ff323f2895e0bb29f22b9abcc122"
-  integrity sha512-BfeXHAyNtE2hFJtTKFS8vLW2ElqNyzUZJJ4TMeUhrjBjYVt4/myeQxpLidy995l+TEzryE7YrnShqLviBr3pAg==
+"@symfony/stimulus-bridge@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@symfony/stimulus-bridge/-/stimulus-bridge-4.0.1.tgz#af0ddabc88254648a812fc328c0f407a6d5f40dc"
+  integrity sha512-+/kSQ4qFXMbZS+HjkhzOxwdN+60pMev7kzzDpQV/Tdm/iIWoxx5GDsVcdLaBb2783BVQHyrBP72JerF2SXTbTg==
   dependencies:
     "@hotwired/stimulus-webpack-helpers" "^1.0.1"
     "@types/webpack-env" "^1.16.4"

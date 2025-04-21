@@ -82,7 +82,7 @@
     "@fontsource/oswald": "^5.2.5",
     "@hotwired/stimulus": "^3.2.2",
     "@materializecss/materialize": "^1.2.2",
-    "@symfony/stimulus-bridge": "^4.0.0",
+    "@symfony/stimulus-bridge": "^4.0.1",
     "annotator": "wallabag/annotator#master",
     "clipboard": "^2.0.11",
     "hammerjs": "^2.0.8",
