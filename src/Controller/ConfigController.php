@@ -647,7 +647,7 @@ class ConfigController extends AbstractController
         }
 
         $user = $this->getUser();
-        $user->getConfig()->setListMode(!$user->getConfig()->getListMode());
+        $user->getConfig()->setListMode((int) !$user->getConfig()->getListMode());
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();

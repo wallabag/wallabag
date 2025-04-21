@@ -102,7 +102,7 @@ class EntryController extends AbstractController
         if (isset($values['entry-checkbox'])) {
             foreach ($values['entry-checkbox'] as $id) {
                 /** @var Entry * */
-                $entry = $this->entryRepository->findById((int) $id)[0];
+                $entry = $this->entryRepository->findById([(int) $id])[0];
 
                 if (!$this->security->isGranted('EDIT', $entry)) {
                     throw $this->createAccessDeniedException('You can not access this entry.');

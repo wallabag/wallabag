@@ -238,7 +238,7 @@ class Config
     /**
      * Set feed Token.
      *
-     * @param string $feedToken
+     * @param string|null $feedToken
      *
      * @return Config
      */
@@ -252,7 +252,7 @@ class Config
     /**
      * Get feedToken.
      *
-     * @return string
+     * @return string|null
      */
     public function getFeedToken()
     {

@@ -308,10 +308,10 @@ class EntryRestController extends WallabagRestController
         $isNotParsed = (null === $request->query->get('notParsed')) ? null : (bool) $request->query->get('notParsed');
         $sort = strtolower($request->query->get('sort', 'created'));
         $order = strtolower($request->query->get('order', 'desc'));
-        $page = (int) $request->query->get('page', 1);
-        $perPage = (int) $request->query->get('perPage', 30);
+        $page = $request->query->getInt('page', 1);
+        $perPage = $request->query->getInt('perPage', 30);
         $tags = \is_array($request->query->all()['tags'] ?? '') ? '' : (string) $request->query->get('tags', '');
-        $since = $request->query->get('since', 0);
+        $since = $request->query->getInt('since');
         $detail = strtolower($request->query->get('detail', 'full'));
         $domainName = (null === $request->query->get('domain_name')) ? '' : (string) $request->query->get('domain_name');
         $httpStatus = (!\array_key_exists((int) $request->query->get('http_status'), Response::$statusTexts)) ? null : (int) $request->query->get('http_status');

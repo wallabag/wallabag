@@ -54,7 +54,7 @@ class ExportController extends AbstractController
         if ('same_domain' === $category) {
             $entries = $entryRepository->getBuilderForSameDomainByUser(
                 $this->getUser()->getId(),
-                $request->query->get('entry')
+                $request->query->getInt('entry')
             )->getQuery()
              ->getResult();
 

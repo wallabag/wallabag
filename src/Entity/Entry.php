@@ -383,7 +383,7 @@ class Entry
 
     public function toggleArchive()
     {
-        $this->updateArchived($this->isArchived() ^ 1);
+        $this->updateArchived((bool) ($this->isArchived() ^ 1));
 
         return $this;
     }
