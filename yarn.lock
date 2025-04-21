@@ -2526,10 +2526,10 @@ eslint-visitor-keys@^3.3.0, eslint-visitor-keys@^3.4.1, eslint-visitor-keys@^3.4
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-3.4.3.tgz#0cd72fe8550e3c2eae156a96a4dddcd1c8ac5800"
   integrity sha512-wpc+LXeiyiisxPlEkUzU6svyS1frIO3Mgxj1fdy7Pm8Ygzguax2N3Fa/D/ag1WqbOprdI+uY6wMUl8/a2G+iag==
 
-eslint-webpack-plugin@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-webpack-plugin/-/eslint-webpack-plugin-5.0.0.tgz#f131f066efeae9ebf738901869f0034764e71bb4"
-  integrity sha512-iDhXf2r55KO1UhMfpus8oGp93wdNF+934q5kEkwa7qn3BH9f51QEC11xQidt+8jfqRnEYYZa2/8lhac7U/vqWw==
+eslint-webpack-plugin@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-webpack-plugin/-/eslint-webpack-plugin-5.0.1.tgz#411ea796918e26659e3aef3a776527609e837817"
+  integrity sha512-Ur100Vi+z0uP7j4Z8Ccah0pXmNHhl3f7P2hCYZj3mZCOSc33G5c1R/vZ4KCapwWikPgRyD4dkangx6JW3KaVFQ==
   dependencies:
     "@types/eslint" "^9.6.1"
     jest-worker "^29.7.0"
