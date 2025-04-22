@@ -208,7 +208,7 @@ class DownloadImages
             case 'png':
                 imagealphablending($im, false);
                 imagesavealpha($im, true);
-                imagepng($im, $localPath, ceil(self::REGENERATE_PICTURES_QUALITY / 100 * 9));
+                imagepng($im, $localPath, (int) ceil(self::REGENERATE_PICTURES_QUALITY / 100 * 9));
                 $this->logger->debug('DownloadImages: Re-creating png');
                 break;
             case 'webp':
@@ -254,7 +254,7 @@ class DownloadImages
      */
     public function getRelativePath($entryId, $createFolder = true)
     {
-        $hashId = hash('crc32', $entryId);
+        $hashId = hash('crc32', (string) $entryId);
         $relativePath = $hashId[0] . '/' . $hashId[1] . '/' . $hashId;
         $folderPath = $this->baseFolder . '/' . $relativePath;
 

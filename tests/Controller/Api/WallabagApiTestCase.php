@@ -3,7 +3,6 @@
 namespace Tests\Wallabag\Controller\Api;
 
 use Doctrine\ORM\EntityManagerInterface;
-use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManager;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -17,7 +16,7 @@ abstract class WallabagApiTestCase extends WebTestCase
     protected $client;
 
     /**
-     * @var UserInterface
+     * @var User
      */
     protected $user;
 
@@ -49,9 +48,12 @@ abstract class WallabagApiTestCase extends WebTestCase
         $userManager = $container->get('fos_user.user_manager');
         $firewallName = $container->getParameter('fos_user.firewall_name');
 
-        $this->user = $userManager->findUserBy(['username' => 'admin']);
+        $adminUser = $userManager->findUserBy(['username' => 'admin']);
+        \assert($adminUser instanceof User);
 
-        $client->loginUser($this->user, $firewallName);
+        $this->user = $adminUser;
+
+        $client->loginUser($adminUser, $firewallName);
 
         return $client;
     }

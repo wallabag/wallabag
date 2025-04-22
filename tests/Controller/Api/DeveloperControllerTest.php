@@ -5,6 +5,7 @@ namespace Tests\Wallabag\Controller\Api;
 use Doctrine\ORM\EntityManagerInterface;
 use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Api\Client;
+use Wallabag\Entity\User;
 
 class DeveloperControllerTest extends WallabagTestCase
 {
@@ -133,7 +134,10 @@ class DeveloperControllerTest extends WallabagTestCase
         $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
         $userManager = static::getContainer()->get('fos_user.user_manager');
+
         $user = $userManager->findUserBy(['username' => $username]);
+        \assert($user instanceof User);
+
         $apiClient = new Client($user);
         $apiClient->setName('My app');
         $apiClient->setAllowedGrantTypes($grantTypes);

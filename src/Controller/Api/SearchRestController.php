@@ -62,8 +62,8 @@ class SearchRestController extends WallabagRestController
     public function getSearchAction(Request $request, EntryRepository $entryRepository)
     {
         $term = $request->query->get('term');
-        $page = (int) $request->query->get('page', 1);
-        $perPage = (int) $request->query->get('perPage', 30);
+        $page = $request->query->getInt('page', 1);
+        $perPage = $request->query->getInt('perPage', 30);
 
         $qb = $entryRepository->getBuilderForSearchByUser(
             $this->getUser()->getId(),

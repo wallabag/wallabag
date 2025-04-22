@@ -285,13 +285,13 @@ class EntriesExport
                 '<dt>' . $this->translator->trans('entry.metadata.added_on') . '</dt><dd>' . $entry->getCreatedAt()->format('Y-m-d') . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.address') . '</dt><dd><a href="' . $entry->getUrl() . '">' . $entry->getUrl() . '</a></dd>' .
                 '</dl>';
-            $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+            $pdf->writeHTMLCell(0, 0, null, null, $html, 0, 1);
 
             $pdf->AddPage();
             $html = '<h1>' . $entry->getTitle() . '</h1>';
             $html .= $entry->getContent();
 
-            $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+            $pdf->writeHTMLCell(0, 0, null, null, $html, 0, 1);
         }
 
         /*
@@ -300,7 +300,7 @@ class EntriesExport
         $pdf->AddPage();
         $html = $this->getExportInformation('tcpdf');
 
-        $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+        $pdf->writeHTMLCell(0, 0, null, null, $html, 0, 1);
 
         // set image scale factor
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);

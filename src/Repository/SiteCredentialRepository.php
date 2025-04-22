@@ -5,12 +5,13 @@ namespace Wallabag\Repository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Wallabag\Entity\SiteCredential;
+use Wallabag\Entity\User;
 use Wallabag\Helper\CryptoProxy;
 
 /**
  * SiteCredentialRepository.
  *
- * @method SiteCredential[] findByUser(int $userId)
+ * @method SiteCredential[] findByUser(User $user)
  */
 class SiteCredentialRepository extends ServiceEntityRepository
 {

@@ -127,7 +127,7 @@ class FeedControllerTest extends WallabagTestCase
         $client = $this->getTestClient();
         $client->request('GET', '/feed/admin/SUPERTOKEN/starred');
 
-        $this->assertSame(200, $client->getResponse()->getStatusCode(), 1);
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $this->validateDom($client->getResponse()->getContent(), 'starred');
     }

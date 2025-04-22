@@ -13,7 +13,7 @@ use Wallabag\Entity\Tag;
 use Wallabag\Helper\UrlHasher;
 
 /**
- * @method Entry[]    findById(int $id)
+ * @method Entry[]    findById(int[] $id)
  * @method Entry|null findOneByUser(int $userId)
  */
 class EntryRepository extends ServiceEntityRepository
@@ -171,9 +171,9 @@ class EntryRepository extends ServiceEntityRepository
     /**
      * Retrieves entries filtered with a search term for a user.
      *
-     * @param int    $userId
-     * @param string $term
-     * @param string $currentRoute
+     * @param int                                          $userId
+     * @param string                                       $term
+     * @param 'starred'|'unread'|'homepage'|'archive'|null $currentRoute
      *
      * @return QueryBuilder
      */

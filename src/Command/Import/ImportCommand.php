@@ -96,6 +96,7 @@ class ImportCommand extends Command
 
         $this->tokenStorage->setToken($token);
         $user = $this->tokenStorage->getToken()->getUser();
+        \assert($user instanceof User);
 
         $import = match ($input->getOption('importer')) {
             'v2' => $this->wallabagV2Import,

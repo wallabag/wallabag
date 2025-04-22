@@ -8,6 +8,7 @@ use FOS\UserBundle\FOSUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Wallabag\Entity\Config;
+use Wallabag\Entity\User;
 
 /**
  * This listener will create the associated configuration when a user register.
@@ -48,7 +49,10 @@ class CreateConfigListener implements EventSubscriberInterface
             $language = $session->get('_locale', $this->language);
         }
 
-        $config = new Config($event->getUser());
+        $user = $event->getUser();
+        \assert($user instanceof User);
+
+        $config = new Config($user);
         $config->setItemsPerPage($this->itemsOnPage);
         $config->setFeedLimit($this->feedLimit);
         $config->setLanguage($language);

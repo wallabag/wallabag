@@ -32,7 +32,7 @@ class EntryControllerTest extends WallabagTestCase
     {
         if ($this->downloadImagesEnabled) {
             $client = static::createClient();
-            $client->getContainer()->get(Config::class)->set('download_images_enabled', 0);
+            $client->getContainer()->get(Config::class)->set('download_images_enabled', '0');
 
             $this->downloadImagesEnabled = false;
         }
@@ -689,7 +689,7 @@ class EntryControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->find($entry->getId());
 
-        $this->assertSame(1, $res->isArchived());
+        $this->assertTrue($res->isArchived());
     }
 
     public function testToggleStar()
@@ -1400,7 +1400,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl('https://www.lemonde.fr/incorrect-url/');
-        $entry->setHttpStatus(404);
+        $entry->setHttpStatus('404');
         $this->getEntityManager()->persist($entry);
 
         $this->getEntityManager()->flush();
@@ -1418,12 +1418,12 @@ class EntryControllerTest extends WallabagTestCase
 
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl($this->url);
-        $entry->setHttpStatus(200);
+        $entry->setHttpStatus('200');
         $this->getEntityManager()->persist($entry);
 
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl('http://www.nextinpact.com/news/101235-wallabag-alternative-libre-a-pocket-creuse-petit-a-petit-son-nid.htm');
-        $entry->setHttpStatus(200);
+        $entry->setHttpStatus('200');
         $this->getEntityManager()->persist($entry);
 
         $this->getEntityManager()->flush();
@@ -1868,14 +1868,14 @@ class EntryControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->find($entry1->getId());
 
-        $this->assertSame(1, $res->isArchived());
+        $this->assertTrue($res->isArchived());
 
         $res = $client->getContainer()
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry2->getId());
 
-        $this->assertSame(1, $res->isArchived());
+        $this->assertTrue($res->isArchived());
 
         $crawler = $client->request('GET', '/all/list');
         $token = $crawler->filter('#form_mass_action input[name=token]')->attr('value');
