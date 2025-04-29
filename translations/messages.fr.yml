@@ -550,6 +550,10 @@ import:
         page_title: Importer > Pocket HTML
         description: Cet importateur importera toutes vos signets Pocket (via exportation HTML). Il suffit d'aller à https://getpocket.com/export, puis d'exporter le fichier HTML. Un fichier HTML sera téléchargé (comme « ril_export.html »).
         how_to: Veuillez choisir le fichier de sauvegarde de signets et cliquez sur le bouton ci-dessous pour l'importer. Pensez au fait que le processus peut prendre longtemps puisque tous les articles doivent être récupérés.
+    omnivore:
+        description: Cet outil va importer tous vos articles depuis Omnivore.
+        page_title: Importer > Omnivore
+        how_to: Merci de dézipper votre export Omnivore, puis de déposer un par un chaque fichier JSON appelé "metadata_x_to_y.json".
 developer:
     page_title: Gestion des clients API
     welcome_message: Bienvenue sur l’API de wallabag
@@ -671,6 +675,7 @@ flashes:
             ignore_origin_rules_deleted: "Règle d'omission d'origine supprimée"
             ignore_origin_rules_updated: "Règle d'omission d'origine mise à jour"
             tagging_rules_reset: Réinitialisation des règles de tags
+            otp_code_invalid: Code d'authentification à deux facteurs invalide
     entry:
         notice:
             entry_already_saved: Article déjà sauvegardé le %date%
