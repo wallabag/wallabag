@@ -18768,16 +18768,16 @@
         },
         {
             "name": "shipmonk/composer-dependency-analyser",
-            "version": "1.8.2",
+            "version": "1.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shipmonk-rnd/composer-dependency-analyser.git",
-                "reference": "f374f5366028fd7ece8aeaffa76895d73dc0a05a"
+                "reference": "ca6b2725cd4854d97c1ce08e6954a74fbdd25372"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shipmonk-rnd/composer-dependency-analyser/zipball/f374f5366028fd7ece8aeaffa76895d73dc0a05a",
-                "reference": "f374f5366028fd7ece8aeaffa76895d73dc0a05a",
+                "url": "https://api.github.com/repos/shipmonk-rnd/composer-dependency-analyser/zipball/ca6b2725cd4854d97c1ce08e6954a74fbdd25372",
+                "reference": "ca6b2725cd4854d97c1ce08e6954a74fbdd25372",
                 "shasum": ""
             },
             "require": {
@@ -18828,9 +18828,9 @@
             ],
             "support": {
                 "issues": "https://github.com/shipmonk-rnd/composer-dependency-analyser/issues",
-                "source": "https://github.com/shipmonk-rnd/composer-dependency-analyser/tree/1.8.2"
+                "source": "https://github.com/shipmonk-rnd/composer-dependency-analyser/tree/1.8.3"
             },
-            "time": "2024-12-30T12:31:04+00:00"
+            "time": "2025-02-10T13:31:57+00:00"
         },
         {
             "name": "symfony/css-selector",
