@@ -552,6 +552,10 @@ import:
         page_title: Importar > Pocket HTML
         description: Aquesta aisina d’importacion importarà totes vòstres marcadors Pocket (via un expòrt HTML). Anatz simplament a https://getpocket.com/export puèi exportar lo fichièr HTML. Se telecargarà un fichièr HTML (coma « ril_export.html »).
         how_to: Mercés de seleccionar lo fichièr de salvagarda de marcadors e de clicar lo boton çai-jos per l’importar. Remarcatz qu’aquò pòt trigar, lo temps que totes los articles sián recuperats.
+    pocket_csv:
+        page_title: Importar > Pocket HTML
+        description: Aquesta aisina d’importacion importarà totes vòstres marcadors Pocket (via un expòrt HTML). Anatz simplament a https://getpocket.com/export puèi exportar lo fichièr HTML. Se telecargarà un fichièr HTML (coma « ril_export.html »).
+        how_to: Mercés de seleccionar lo fichièr de salvagarda de marcadors e de clicar lo boton çai-jos per l’importar. Remarcatz qu’aquò pòt trigar, lo temps que totes los articles sián recuperats.
     omnivore:
         page_title: Importar > Omnivore
 developer:

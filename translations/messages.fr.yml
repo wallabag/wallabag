@@ -550,6 +550,10 @@ import:
         page_title: Importer > Pocket HTML
         description: Cet importateur importera toutes vos signets Pocket (via exportation HTML). Il suffit d'aller à https://getpocket.com/export, puis d'exporter le fichier HTML. Un fichier HTML sera téléchargé (comme « ril_export.html »).
         how_to: Veuillez choisir le fichier de sauvegarde de signets et cliquez sur le bouton ci-dessous pour l'importer. Pensez au fait que le processus peut prendre longtemps puisque tous les articles doivent être récupérés.
+    pocket_csv:
+        page_title: Importer > Pocket CSV
+        description: Cet importateur importera toutes vos signets Pocket (via exportation CSV). Il suffit d'aller à https://getpocket.com/export, puis d'exporter le fichier. Un fichier ZIP sera téléchargé (comme « pocket.zip »). Décompressez le et vous obtiendrez un fichier CSV appelé "part_000000.csv".
+        how_to: Veuillez choisir le fichier de sauvegarde de signets et cliquez sur le bouton ci-dessous pour l'importer. Pensez au fait que le processus peut prendre longtemps puisque tous les articles doivent être récupérés.
     omnivore:
         description: Cet outil va importer tous vos articles depuis Omnivore.
         page_title: Importer > Omnivore

@@ -58,6 +58,7 @@ class ImportController extends AbstractController
                     + $this->rabbitMQConsumerTotalProxy->getTotalMessage('elcurator')
                     + $this->rabbitMQConsumerTotalProxy->getTotalMessage('shaarli')
                     + $this->rabbitMQConsumerTotalProxy->getTotalMessage('pocket_html')
+                    + $this->rabbitMQConsumerTotalProxy->getTotalMessage('pocket_csv')
                     + $this->rabbitMQConsumerTotalProxy->getTotalMessage('omnivore')
                 ;
             } catch (\Exception) {
@@ -77,6 +78,7 @@ class ImportController extends AbstractController
                     + $this->redisClient->llen('wallabag.import.elcurator')
                     + $this->redisClient->llen('wallabag.import.shaarli')
                     + $this->redisClient->llen('wallabag.import.pocket_html')
+                    + $this->redisClient->llen('wallabag.import.pocket_csv')
                     + $this->redisClient->llen('wallabag.import.omnivore')
                 ;
             } catch (\Exception) {

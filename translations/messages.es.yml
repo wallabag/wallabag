@@ -550,6 +550,10 @@ import:
         description: Esta herramienta importará todos tus marcadores de Pocket (vía HTML). Sólo tienes que ir a https://getpocket.com/export, y luego exportar el archivo HTML. Se descargará un archivo HTML (como "ril_export.html").
         page_title: Importar > Pocket HTML
         how_to: Por favor, elige el archivo de la copia de seguridad del marcador y haz clic en el botón inferior para importarlo. Ten en cuenta que el proceso puede llevar mucho tiempo, ya que hay que recuperar todos los artículos.
+    pocket_csv:
+        description: Esta herramienta importará todos tus marcadores de Pocket (vía HTML). Sólo tienes que ir a https://getpocket.com/export, y luego exportar el archivo HTML. Se descargará un archivo HTML (como "ril_export.html").
+        page_title: Importar > Pocket HTML
+        how_to: Por favor, elige el archivo de la copia de seguridad del marcador y haz clic en el botón inferior para importarlo. Ten en cuenta que el proceso puede llevar mucho tiempo, ya que hay que recuperar todos los artículos.
     omnivore:
         page_title: Importar > Omnivore
         description: Este importador importará todos sus artículos de Omnivore.

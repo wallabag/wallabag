@@ -483,6 +483,10 @@ import:
         page_title: 匯入 > Pocket HTML
         description: 這匯入器將匯入你在 Pocket 中的全部書籤（經 HTML 匯出）。你只須前往 https://getpocket.com/export 匯出 HTML檔案，將提供一個可下載的 HTML 檔案（名為「ril_export.html」之類）。
         how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要擷取全部的文章，整個過程可能會花費一段時間。
+    pocket_csv:
+        page_title: 匯入 > Pocket HTML
+        description: 這匯入器將匯入你在 Pocket 中的全部書籤（經 HTML 匯出）。你只須前往 https://getpocket.com/export 匯出 HTML檔案，將提供一個可下載的 HTML 檔案（名為「ril_export.html」之類）。
+        how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要擷取全部的文章，整個過程可能會花費一段時間。
     firefox:
         page_title: 匯入 > Firefox
         description: 這匯入器將匯入你在 Firefox 中的全部書籤。在書籤收藏庫（Ctrl+Shift+O）的「匯入及備份」中選擇「備份」後，你將取得一個 JSON 檔案。
