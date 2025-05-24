@@ -236,7 +236,7 @@ entry:
         filtered: Odfiltrowane wpisy
         filtered_tags: 'Filtrowane po tagach:'
         filtered_search: 'Filtrowanie po wyszukiwaniu:'
-        untagged: Odtaguj wpisy
+        untagged: Nieotagowane wpisy
         all: Wszystkie przedmioty
         with_annotations: Wpisy z adnotacjami
         same_domain: Ta sama domena
@@ -478,7 +478,7 @@ tag:
     list:
         number_on_the_page: '{0} Nie ma tagów.|{1} Jest jeden tag.|]1,Inf[ Są %count% tagi.'
         see_untagged_entries: Zobacz nieotagowane wpisy
-        untagged: Odtaguj wpisy
+        untagged: Nieotagowane wpisy
         no_untagged_entries: Nie ma nieoznaczonych wpisów.
     new:
         add: Dodaj
