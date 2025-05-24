@@ -71,7 +71,7 @@ class PocketCsvControllerTest extends WallabagCoreTestCase
 
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../fixtures/ril_export.html', 'Bookmarks');
+        $file = new UploadedFile(__DIR__ . '/../fixtures/pocket.csv', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,

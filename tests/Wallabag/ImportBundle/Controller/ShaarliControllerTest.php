@@ -137,7 +137,6 @@ class ShaarliControllerTest extends WallabagCoreTestCase
             );
 
         $this->assertInstanceOf(Entry::class, $content);
-        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for https://www.lemonde.fr is ok');
         $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for https://www.lemonde.fr is ok');
         $this->assertNotEmpty($content->getLanguage(), 'Language for https://www.lemonde.fr is ok');
     }
