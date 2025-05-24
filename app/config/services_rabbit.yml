@@ -21,6 +21,7 @@ services:
             $omnivoreConsumer: '@old_sound_rabbit_mq.import_omnivore_consumer'
             $shaarliConsumer: '@old_sound_rabbit_mq.import_shaarli_consumer'
             $pocketHtmlConsumer: '@old_sound_rabbit_mq.import_pocket_html_consumer'
+            $pocketCsvConsumer: '@old_sound_rabbit_mq.import_pocket_csv_consumer'
 
     wallabag_import.consumer.amqp.pocket:
         class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
@@ -86,3 +87,8 @@ services:
         class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\PocketHtmlImport'
+
+    wallabag_import.consumer.amqp.pocket_csv:
+        class: Wallabag\ImportBundle\Consumer\AMQPEntryConsumer
+        arguments:
+            $import: '@Wallabag\ImportBundle\Import\PocketCsvImport'

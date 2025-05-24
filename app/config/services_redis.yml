@@ -212,3 +212,19 @@ services:
         class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\PocketHtmlImport'
+
+    # pocket csv
+    wallabag_import.queue.redis.pocket_csv:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            $queueName: "wallabag.import.pocket_csv"
+
+    wallabag_import.producer.redis.pocket_csv:
+        class: Wallabag\ImportBundle\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.pocket_csv"
+
+    wallabag_import.consumer.redis.pocket_csv:
+        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        arguments:
+            $import: '@Wallabag\ImportBundle\Import\PocketCsvImport'
