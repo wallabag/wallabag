@@ -131,6 +131,11 @@ services:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_pocket_html_producer'
             $redisProducer: '@wallabag_import.producer.redis.pocket_html'
 
+    Wallabag\ImportBundle\Controller\PocketCsvController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_pocket_csv_producer'
+            $redisProducer: '@wallabag_import.producer.redis.pocket_csv'
+
     Wallabag\ImportBundle\:
         resource: '../../src/Wallabag/ImportBundle/*'
         exclude: '../../src/Wallabag/ImportBundle/{Consumer,Controller,Redis}'
@@ -411,6 +416,10 @@ services:
     Wallabag\ImportBundle\Import\PocketHtmlImport:
         tags:
             -  { name: wallabag_import.import, alias: pocket_html }
+
+    Wallabag\ImportBundle\Import\PocketCsvImport:
+        tags:
+            -  { name: wallabag_import.import, alias: pocket_csv }
 
     # to factorize the proximity and bypass translation for prev & next
     pagerfanta.view.default_wallabag:
