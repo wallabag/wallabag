@@ -38,7 +38,7 @@ class PocketCsvImportTest extends TestCase
     public function testImport()
     {
         $pocketCsvImport = $this->getPocketCsvImport(false, 7);
-        $pocketCsvImport->setFilepath(__DIR__ . '/../fixtures/Import/part_000000.csv');
+        $pocketCsvImport->setFilepath(__DIR__ . '/../fixtures/Import/pocket.csv');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -71,7 +71,7 @@ class PocketCsvImportTest extends TestCase
     public function testImportAndMarkAllAsRead()
     {
         $pocketCsvImport = $this->getPocketCsvImport(false, 1);
-        $pocketCsvImport->setFilepath(__DIR__ . '/../fixtures/Import/part_000000.csv');
+        $pocketCsvImport->setFilepath(__DIR__ . '/../fixtures/Import/pocket.csv');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -109,7 +109,7 @@ class PocketCsvImportTest extends TestCase
     public function testImportWithRabbit()
     {
         $pocketCsvImport = $this->getPocketCsvImport();
-        $pocketCsvImport->setFilepath(__DIR__ . '/../fixtures/Import/part_000000.csv');
+        $pocketCsvImport->setFilepath(__DIR__ . '/../fixtures/Import/pocket.csv');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -149,7 +149,7 @@ class PocketCsvImportTest extends TestCase
     public function testImportWithRedis()
     {
         $pocketCsvImport = $this->getPocketCsvImport();
-        $pocketCsvImport->setFilepath(__DIR__ . '/../fixtures/Import/part_000000.csv');
+        $pocketCsvImport->setFilepath(__DIR__ . '/../fixtures/Import/pocket.csv');
 
         $entryRepo = $this->getMockBuilder(EntryRepository::class)
             ->disableOriginalConstructor()
@@ -203,7 +203,7 @@ class PocketCsvImportTest extends TestCase
     public function testImportUserNotDefined()
     {
         $pocketCsvImport = $this->getPocketCsvImport(true);
-        $pocketCsvImport->setFilepath(__DIR__ . '/../fixtures/Import/part_000000.csv');
+        $pocketCsvImport->setFilepath(__DIR__ . '/../fixtures/Import/pocket.csv');
 
         $res = $pocketCsvImport->import();
 

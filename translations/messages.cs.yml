@@ -559,10 +559,6 @@ import:
         how_to: Zvolte soubor zálohy záložek a kliknutím na níže uvedené tlačítko jej naimportujte. Pamatujte na to, že tento proces může trvat dlouho, protože je třeba načíst všechny články.
         page_title: Import > Pocket HTML
         description: Tento importér naimportuje všechny vaše záložky z Pocket. Stačí přejít na https://getpocket.com/export) a exportovat soubor HTML, který bude stažen (například „ril_export.html“).
-    pocket_csv:
-        how_to: Zvolte soubor zálohy záložek a kliknutím na níže uvedené tlačítko jej naimportujte. Pamatujte na to, že tento proces může trvat dlouho, protože je třeba načíst všechny články.
-        page_title: Import > Pocket HTML
-        description: Tento importér naimportuje všechny vaše záložky z Pocket. Stačí přejít na https://getpocket.com/export) a exportovat soubor HTML, který bude stažen (například „ril_export.html“).
     omnivore:
         how_to: Rozbalte prosím svůj export z Omnivoru, následně nahrajte jeden po druhém všechny JSON soubory s názevem "metadata_x_to_y.json".
         page_title: Import > Omnivore

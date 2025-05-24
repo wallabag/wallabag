@@ -553,10 +553,6 @@ import:
         page_title: Importuj > Pocket HTML
         description: Ten importer zaimportuje wszystkie zakładki Pocket (za pośrednictwem eksportu HTML). Po prostu przejdź do https://getpocket.com/export, a następnie wyeksportuj plik HTML. Plik HTML zostanie pobrany (np. „ril_export.html”).
         how_to: Wybierz swój plik z zakładkami i naciśnij poniższy przycisk, aby je zaimportować. Może to zająć dłuższą chwilę, zanim wszystkie artykuły zostaną przeniesione.
-    pocket_csv:
-        page_title: Importuj > Pocket HTML
-        description: Ten importer zaimportuje wszystkie zakładki Pocket (za pośrednictwem eksportu HTML). Po prostu przejdź do https://getpocket.com/export, a następnie wyeksportuj plik HTML. Plik HTML zostanie pobrany (np. „ril_export.html”).
-        how_to: Wybierz swój plik z zakładkami i naciśnij poniższy przycisk, aby je zaimportować. Może to zająć dłuższą chwilę, zanim wszystkie artykuły zostaną przeniesione.
     omnivore:
         description: Ten importer zaimportuje wszystkie Twoje artykuły z Omnivore.
         page_title: Importuj > Omnivore

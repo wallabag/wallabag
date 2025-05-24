@@ -549,10 +549,6 @@ import:
         page_title: İçe Aktar > Pocket HTML
         description: Bu içe aktarıcı tüm Pocket yer imlerinizi (HTML dışa aktarmayla) içe aktaracaktır. https://getpocket.com adresine gidin, sonra HTML dosyasını dışa aktarın. Bir HTML dosyası ("ril_export.html" gibi) indirilecektir.
         how_to: Lütfen yer imi yedek dosyasını seçin ve onu içe aktarmak aşağıdaki düğmeye tıklayın. Tüm makaleler sitelerinden çekileceği için sürecin uzun sürebileceğini unutmayın.
-    pocket_csv:
-        page_title: İçe Aktar > Pocket HTML
-        description: Bu içe aktarıcı tüm Pocket yer imlerinizi (HTML dışa aktarmayla) içe aktaracaktır. https://getpocket.com adresine gidin, sonra HTML dosyasını dışa aktarın. Bir HTML dosyası ("ril_export.html" gibi) indirilecektir.
-        how_to: Lütfen yer imi yedek dosyasını seçin ve onu içe aktarmak aşağıdaki düğmeye tıklayın. Tüm makaleler sitelerinden çekileceği için sürecin uzun sürebileceğini unutmayın.
 user:
     form:
         username_label: Kullanıcı adı

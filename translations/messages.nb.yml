@@ -473,10 +473,6 @@ import:
         how_to: Velg sikkerhetskopifilen for bokmerke og klikk på knappen nedenfor for å importere den. Merk at prosessen kan ta lang tid siden alle artiklene må hentes.
         page_title: Importer > Pocket HTML
         description: Denne modulen vil importere alle Pocket-bokmerkene dine (via HTML-eksport). Gå til https://getpocket.com/export, og eksporter HTML-filen derfra. En HTML-fil vil bli lastet ned (som «ril_export.html»).
-    pocket_csv:
-        how_to: Velg sikkerhetskopifilen for bokmerke og klikk på knappen nedenfor for å importere den. Merk at prosessen kan ta lang tid siden alle artiklene må hentes.
-        page_title: Importer > Pocket HTML
-        description: Denne modulen vil importere alle Pocket-bokmerkene dine (via HTML-eksport). Gå til https://getpocket.com/export, og eksporter HTML-filen derfra. En HTML-fil vil bli lastet ned (som «ril_export.html»).
 tag:
     new:
         placeholder: Du kan legge til flere stikkord, delt med komma.

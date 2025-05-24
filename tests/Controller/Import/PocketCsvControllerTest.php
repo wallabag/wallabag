@@ -71,7 +71,7 @@ class PocketCsvControllerTest extends WallabagTestCase
 
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/part_000000.csv', 'Bookmarks');
+        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/pocket.csv', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,
@@ -99,7 +99,7 @@ class PocketCsvControllerTest extends WallabagTestCase
         $crawler = $client->request('GET', '/import/pocket_csv');
         $form = $crawler->filter('form[name=upload_import_file] > button[type=submit]')->form();
 
-        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/part_000000.csv', 'Bookmarks');
+        $file = new UploadedFile(__DIR__ . '/../../fixtures/Import/pocket.csv', 'Bookmarks');
 
         $data = [
             'upload_import_file[file]' => $file,

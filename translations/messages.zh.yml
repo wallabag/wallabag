@@ -553,10 +553,6 @@ import:
         page_title: 导入 > Pocket HTML
         how_to: 请选择书签备份文件并点击下面的按钮导入。请注意，由于必须获取所有文章，因此该过程可能需要很长时间。
         description: 此导入器将导入您所有的 Pocket 书签（通过 HTML 导出）。只需转到 https://getpocket.com/export，然后导出 HTML 文件。将下载一个 HTML 文件（如“ril_export.html”）。
-    pocket_csv:
-        page_title: 导入 > Pocket HTML
-        how_to: 请选择书签备份文件并点击下面的按钮导入。请注意，由于必须获取所有文章，因此该过程可能需要很长时间。
-        description: 此导入器将导入您所有的 Pocket 书签（通过 HTML 导出）。只需转到 https://getpocket.com/export，然后导出 HTML 文件。将下载一个 HTML 文件（如“ril_export.html”）。
 developer:
     page_title: 'API 客户端管理'
     welcome_message: '欢迎来到 wallabag API'

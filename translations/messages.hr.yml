@@ -113,10 +113,6 @@ import:
         page_title: Uvoz > Pocket HTML
         how_to: Odaberi datoteku sigurnosne kopije zabilježaka i pritisni donji gumb za uvoz. Postupak može trajati dugo jer se moraju dohvatiti svi članci.
         description: Ovaj uvoznik uvozi sve tvoje Pocket zabilješke (putem HTML izvoza). Idi na https://getpocket.com/export, zatim izvezi HTML datoteku. Preuzet će se HTML datoteka (poput „ril_export.html”).
-    pocket_csv:
-        page_title: Uvoz > Pocket HTML
-        how_to: Odaberi datoteku sigurnosne kopije zabilježaka i pritisni donji gumb za uvoz. Postupak može trajati dugo jer se moraju dohvatiti svi članci.
-        description: Ovaj uvoznik uvozi sve tvoje Pocket zabilješke (putem HTML izvoza). Idi na https://getpocket.com/export, zatim izvezi HTML datoteku. Preuzet će se HTML datoteka (poput „ril_export.html”).
     omnivore:
         page_title: Uvoz > Omnivore
         description: Ovaj uvoznik uvozi sve tvoje Omnivor članke.

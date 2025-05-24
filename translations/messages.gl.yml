@@ -477,10 +477,6 @@ import:
         page_title: Importar > Pocket HTML
         description: Este importador traerá todos os teus marcadores en Pocket (vía exportación HTML). Vai a https://getpocket.com/export, e exporta o ficheiro HTML. Descargarás un ficheiro HTML (tipo "ril_export.html").
         how_to: Elixe o ficheiro da copia de apoio cos marcadores e preme no botón para importalo. Ten en conta que o proceso podería demorarse porque hai que importar todos os artigos.
-    pocket_csv:
-        page_title: Importar > Pocket HTML
-        description: Este importador traerá todos os teus marcadores en Pocket (vía exportación HTML). Vai a https://getpocket.com/export, e exporta o ficheiro HTML. Descargarás un ficheiro HTML (tipo "ril_export.html").
-        how_to: Elixe o ficheiro da copia de apoio cos marcadores e preme no botón para importalo. Ten en conta que o proceso podería demorarse porque hai que importar todos os artigos.
     shaarli:
         page_title: Importar > Shaarli
         description: Este importador traerá todos os teus marcadores de Shaarli. Vai á sección Ferramentas, e despois en "Exportar base de datos", elixe os teus marcadores e expórtaos. Terás un ficheiro HTML.
