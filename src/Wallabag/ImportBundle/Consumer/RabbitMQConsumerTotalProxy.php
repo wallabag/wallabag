@@ -21,9 +21,24 @@ class RabbitMQConsumerTotalProxy
     private Consumer $deliciousConsumer;
     private Consumer $elcuratorConsumer;
     private Consumer $omnivoreConsumer;
+    private Consumer $shaarliConsumer;
+    private Consumer $pocketHtmlConsumer;
 
-    public function __construct(Consumer $pocketConsumer, Consumer $readabilityConsumer, Consumer $wallabagV1Consumer, Consumer $wallabagV2Consumer, Consumer $firefoxConsumer, Consumer $chromeConsumer, Consumer $instapaperConsumer, Consumer $pinboardConsumer, Consumer $deliciousConsumer, Consumer $elcuratorConsumer, Consumer $omnivoreConsumer)
-    {
+    public function __construct(
+        Consumer $pocketConsumer,
+        Consumer $readabilityConsumer,
+        Consumer $wallabagV1Consumer,
+        Consumer $wallabagV2Consumer,
+        Consumer $firefoxConsumer,
+        Consumer $chromeConsumer,
+        Consumer $instapaperConsumer,
+        Consumer $pinboardConsumer,
+        Consumer $deliciousConsumer,
+        Consumer $elcuratorConsumer,
+        Consumer $omnivoreConsumer,
+        Consumer $shaarliConsumer,
+        Consumer $pocketHtmlConsumer
+    ) {
         $this->pocketConsumer = $pocketConsumer;
         $this->readabilityConsumer = $readabilityConsumer;
         $this->wallabagV1Consumer = $wallabagV1Consumer;
@@ -35,6 +50,8 @@ class RabbitMQConsumerTotalProxy
         $this->deliciousConsumer = $deliciousConsumer;
         $this->elcuratorConsumer = $elcuratorConsumer;
         $this->omnivoreConsumer = $omnivoreConsumer;
+        $this->shaarliConsumer = $shaarliConsumer;
+        $this->pocketHtmlConsumer = $pocketHtmlConsumer;
     }
 
     /**
@@ -81,6 +98,12 @@ class RabbitMQConsumerTotalProxy
                 break;
             case 'omnivore':
                 $consumer = $this->omnivoreConsumer;
+                break;
+            case 'shaarli':
+                $consumer = $this->shaarliConsumer;
+                break;
+            case 'pocket_html':
+                $consumer = $this->pocketHtmlConsumer;
                 break;
             default:
                 return 0;
