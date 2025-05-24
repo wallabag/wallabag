@@ -23,6 +23,7 @@ class RabbitMQConsumerTotalProxy
     private Consumer $omnivoreConsumer;
     private Consumer $shaarliConsumer;
     private Consumer $pocketHtmlConsumer;
+    private Consumer $pocketCsvConsumer;
 
     public function __construct(
         Consumer $pocketConsumer,
@@ -37,7 +38,8 @@ class RabbitMQConsumerTotalProxy
         Consumer $elcuratorConsumer,
         Consumer $omnivoreConsumer,
         Consumer $shaarliConsumer,
-        Consumer $pocketHtmlConsumer
+        Consumer $pocketHtmlConsumer,
+        Consumer $pocketCsvConsumer
     ) {
         $this->pocketConsumer = $pocketConsumer;
         $this->readabilityConsumer = $readabilityConsumer;
@@ -52,6 +54,7 @@ class RabbitMQConsumerTotalProxy
         $this->omnivoreConsumer = $omnivoreConsumer;
         $this->shaarliConsumer = $shaarliConsumer;
         $this->pocketHtmlConsumer = $pocketHtmlConsumer;
+        $this->pocketCsvConsumer = $pocketCsvConsumer;
     }
 
     /**
@@ -104,6 +107,9 @@ class RabbitMQConsumerTotalProxy
                 break;
             case 'pocket_html':
                 $consumer = $this->pocketHtmlConsumer;
+                break;
+            case 'pocket_csv':
+                $consumer = $this->pocketCsvConsumer;
                 break;
             default:
                 return 0;
