@@ -534,6 +534,14 @@ import:
         page_title: Import > del.icio.us
         description: This importer will import all your Delicious bookmarks. Since 2021, you can export again your data from it using the export page (https://del.icio.us/export). Choose the "JSON" format and download it (like "delicious_export.2021.02.06_21.10.json").
         how_to: Please select your Delicious export and click on the button below to upload and import it.
+    shaarli:
+        page_title: Import > Shaarli
+        description: This importer will import all your Shaarli bookmarks. Just go to the Tools section, then into "Export database", choose your bookmarks and export them. You will obtain a HTML file.
+        how_to: Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched.
+    pocket_html:
+        page_title: Import > Pocket HTML
+        description: This importer will import all your Pocket bookmarks (via HTML export). Just go to https://getpocket.com/export, then export the HTML file. An HTML file will be downloaded (like "ril_export.html").
+        how_to: Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched.
 developer:
     page_title: API clients management
     welcome_message: Welcome to the wallabag API
