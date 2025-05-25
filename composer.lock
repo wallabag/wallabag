@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "313f6b39034c27c58a102bfadb5ae30f",
+    "content-hash": "931e1540547040b66585959dcbbd4e30",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -4719,16 +4719,16 @@
         },
         {
             "name": "j0k3r/php-readability",
-            "version": "1.2.12",
+            "version": "1.2.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/php-readability.git",
-                "reference": "109a22662de0d703f01387e5714ad4f9a03b95c0"
+                "reference": "563835730692eb369a73fe4bb9a1b44a603c4ce7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/109a22662de0d703f01387e5714ad4f9a03b95c0",
-                "reference": "109a22662de0d703f01387e5714ad4f9a03b95c0",
+                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/563835730692eb369a73fe4bb9a1b44a603c4ce7",
+                "reference": "563835730692eb369a73fe4bb9a1b44a603c4ce7",
                 "shasum": ""
             },
             "require": {
@@ -4740,7 +4740,7 @@
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.14",
                 "monolog/monolog": "^1.24|^2.1",
-                "symfony/phpunit-bridge": "^4.4|^5.3|^6.0|^7.0"
+                "symfony/phpunit-bridge": "^4.4|^5.3"
             },
             "suggest": {
                 "ext-tidy": "Used to clean up given HTML and to avoid problems with bad HTML structure."
@@ -4790,7 +4790,7 @@
             ],
             "support": {
                 "issues": "https://github.com/j0k3r/php-readability/issues",
-                "source": "https://github.com/j0k3r/php-readability/tree/1.2.12"
+                "source": "https://github.com/j0k3r/php-readability/tree/1.2.10"
             },
             "funding": [
                 {
@@ -4798,7 +4798,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-04T09:20:40+00:00"
+            "time": "2022-06-13T04:15:24+00:00"
         },
         {
             "name": "javibravo/simpleue",

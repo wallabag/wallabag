@@ -80,6 +80,7 @@
         "html2text/html2text": "^4.3.1",
         "incenteev/composer-parameter-handler": "^2.1.5",
         "j0k3r/graby": "^2.4.5",
+        "j0k3r/php-readability": "1.2.10",
         "javibravo/simpleue": "^2.1",
         "jms/serializer": "^3.29.1",
         "jms/serializer-bundle": "^5.3.1",
