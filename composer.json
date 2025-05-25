@@ -37,6 +37,9 @@
         "email": "hello@wallabag.org",
         "issues": "https://github.com/wallabag/wallabag/issues"
     },
+    "_comment": [
+        "j0k3r/php-readability is pinned to 1.2.10 due to a regression in 1.2.12"
+    ],
     "require": {
         "php": ">=7.4",
         "ext-ctype": "*",
@@ -80,6 +83,7 @@
         "html2text/html2text": "^4.3.1",
         "incenteev/composer-parameter-handler": "^2.1.5",
         "j0k3r/graby": "^2.4.5",
+        "j0k3r/php-readability": "1.2.10",
         "javibravo/simpleue": "^2.1",
         "jms/serializer": "^3.29.1",
         "jms/serializer-bundle": "^5.3.1",
