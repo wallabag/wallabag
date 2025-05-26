@@ -20,10 +20,14 @@ abstract class HtmlController extends AbstractController
     #[IsGranted('IMPORT_ENTRIES')]
     public function indexAction(Request $request, TranslatorInterface $translator)
     {
+        $wallabag = $this->getImportService();
+        if (!$this->isGranted('USE_IMPORTER', $wallabag)) {
+            throw $this->createAccessDeniedException('You can not access this importer.');
+        }
+
         $form = $this->createForm(UploadImportType::class);
         $form->handleRequest($request);
 
-        $wallabag = $this->getImportService();
         $wallabag->setUser($this->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {

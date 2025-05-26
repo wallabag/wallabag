@@ -276,55 +276,80 @@ services:
 
     Wallabag\Import\PocketImport:
         calls:
+            - [ setEnabled, [ '@=service(''craue_config'').get(''pocket_enabled'')' ] ]
             - [ setClient, [ '@Symfony\Contracts\HttpClient\HttpClientInterface $pocketClient' ] ]
         tags:
             -  { name: wallabag.import, alias: pocket }
 
     Wallabag\Import\WallabagV1Import:
+        calls:
+            - [ setEnabled, [ '@=service(''craue_config'').get(''wallabag_v1_enabled'')' ] ]
         tags:
             -  { name: wallabag.import, alias: wallabag_v1 }
 
     Wallabag\Import\WallabagV2Import:
+        calls:
+            - [ setEnabled, [ '@=service(''craue_config'').get(''wallabag_v2_enabled'')' ] ]
         tags:
             -  { name: wallabag.import, alias: wallabag_v2 }
 
     Wallabag\Import\ElcuratorImport:
+        calls:
+            - [ setEnabled, [ '@=service(''craue_config'').get(''elcurator_enabled'')' ] ]
         tags:
             -  { name: wallabag.import, alias: elcurator }
 
     Wallabag\Import\ReadabilityImport:
+        calls:
+            - [ setEnabled, [ '@=service(''craue_config'').get(''readibility_enabled'')' ] ]
         tags:
             -  { name: wallabag.import, alias: readability }
 
     Wallabag\Import\InstapaperImport:
+        calls:
+            - [ setEnabled, [ '@=service(''craue_config'').get(''instapaper_enabled'')' ] ]
         tags:
             -  { name: wallabag.import, alias: instapaper }
 
     Wallabag\Import\PinboardImport:
+        calls:
+            - [ setEnabled, [ '@=service(''craue_config'').get(''pinboard_enabled'')' ] ]
         tags:
             -  { name: wallabag.import, alias: pinboard }
 
     Wallabag\Import\DeliciousImport:
+        calls:
+            - [ setEnabled, [ '@=service(''craue_config'').get(''delicious_enabled'')' ] ]
         tags:
             -  { name: wallabag.import, alias: delicious }
 
     Wallabag\Import\OmnivoreImport:
+        calls:
+            - [ setEnabled, [ '@=service(''craue_config'').get(''omnivore_enabled'')' ] ]
         tags:
             -  { name: wallabag.import, alias: omnivore }
 
     Wallabag\Import\FirefoxImport:
+        calls:
+            - [ setEnabled, [ '@=service(''craue_config'').get(''firefox_enabled'')' ] ]
         tags:
             -  { name: wallabag.import, alias: firefox }
 
     Wallabag\Import\ChromeImport:
+        calls:
+            - [ setEnabled, [ '@=service(''craue_config'').get(''chrome_enabled'')' ] ]
         tags:
             -  { name: wallabag.import, alias: chrome }
 
     Wallabag\Import\ShaarliImport:
+        calls:
+            - [ setEnabled, [ '@=service(''craue_config'').get(''shaarli_enabled'')' ] ]
         tags:
             -  { name: wallabag.import, alias: shaarli }
 
     Wallabag\Import\PocketHtmlImport:
+        calls:
+            - [ setEnabled, [ '@=service(''craue_config'').get(''pocket_html_enabled'')' ] ]
         tags:
             -  { name: wallabag.import, alias: pocket_html }
 
