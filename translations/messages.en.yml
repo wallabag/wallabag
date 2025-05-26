@@ -553,6 +553,10 @@ import:
         page_title: Import > Pocket HTML
         description: This importer will import all your Pocket bookmarks (via HTML export). Just go to https://getpocket.com/export, then export the HTML file. An HTML file will be downloaded (like "ril_export.html").
         how_to: Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched.
+    pocket_csv:
+        page_title: Import > Pocket CSV
+        description: This importer will import all your Pocket bookmarks (via CSV export). Just go to https://getpocket.com/export, then export the file. A ZIP file will be downloaded (like "pocket.zip"). Extract it, you will obtain a CSV file, called "part_000000.csv".
+        how_to: Please choose the bookmark backup file and click on the button below to import it. Note that the process may take a long time since all articles have to be fetched.
 developer:
     page_title: API clients management
     welcome_message: Welcome to the wallabag API
