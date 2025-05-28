@@ -51,7 +51,7 @@ footer:
     wallabag:
         elsewhere: Weż wallabag ze sobą
         social: Społeczność
-        powered_by: Kontrolowany przez
+        powered_by: działa dzięki
         about: O nas
     stats: Od %user_creation% przeczytałeś %nb_archives% artykułów. To jest %per_day% dziennie!
 config:
@@ -231,13 +231,13 @@ entry:
     default_title: Tytuł wpisu
     page_titles:
         unread: Nieprzeczytane wpisy
-        starred: Wpisy wyróżnione
+        starred: Wyróżnione wpisy
         archived: Zarchiwizowane wpisy
         filtered: Odfiltrowane wpisy
         filtered_tags: 'Filtrowane po tagach:'
         filtered_search: 'Filtrowanie po wyszukiwaniu:'
         untagged: Nieotagowane wpisy
-        all: Wszystkie przedmioty
+        all: Wszystkie wpisy
         with_annotations: Wpisy z adnotacjami
         same_domain: Ta sama domena
     list:
