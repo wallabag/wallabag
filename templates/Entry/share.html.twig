@@ -24,7 +24,7 @@
         <header class="block">
             <h1>{{ entry.title|e|raw }}</h1>
             <a href="{{ entry.url|e }}" target="_blank" rel="noopener" title="{{ 'entry.view.original_article'|trans }} : {{ entry.title|e|raw }}" class="tool">{{ entry.domainName|removeWww }}</a>
-            <p class="shared-by">{{ "entry.public.shared_by_wallabag"|trans({'%wallabag_instance%': url('homepage'), '%username%': entry.user.username|escape})|raw }}.</p>
+            <p class="shared-by">{{ "entry.public.shared_by_wallabag"|trans({'%wallabag_instance%': url('homepage'), '%username%': entry.user.name|escape})|raw }}.</p>
         </header>
         <article class="block">
             {{ entry.content|raw }}
