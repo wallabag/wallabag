@@ -1,3 +1,12 @@
+FROM golang as envsubst
+
+ARG ENVSUBST_VERSION=v1.3.0
+
+# envsubst from gettext can not replace env vars with default values
+# this package is not available for ARM32 and we have to build it from source code
+# flag -ldflags "-s -w" produces a smaller executable
+RUN go install -ldflags "-s -w" -v github.com/a8m/envsubst/cmd/envsubst@${ENVSUBST_VERSION}
+
 FROM php:8.2-fpm AS rootless
 
 ARG DEBIAN_FRONTEND=noninteractive
@@ -75,10 +84,8 @@ RUN mkdir -p /tmp/blackfire \
 
 RUN npm install -g yarn
 
-RUN curl -L -o /usr/local/bin/envsubst https://github.com/a8m/envsubst/releases/download/v1.1.0/envsubst-`uname -s`-`uname -m`; \
-    chmod +x /usr/local/bin/envsubst
-
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+COPY --from=envsubst /go/bin/envsubst /usr/local/bin/envsubst
 
 COPY entrypoint.sh /entrypoint.sh
 COPY config/ /opt/wallabag/config/
