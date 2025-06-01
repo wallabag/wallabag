@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.6.13](https://github.com/wallabag/wallabag/tree/2.6.13)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.12...2.6.13)
+
+### Improvement
+
+* Add Pocket and Shaarli import by @nicosomb in [https://github.com/wallabag/wallabag/pull/8193](https://github.com/wallabag/wallabag/pull/8193)
+
+### Fixes
+
+*  Avoid non-validated OTP to be enabled #8139 by @j0k3r in [https://github.com/wallabag/wallabag/pull/8139](https://github.com/wallabag/wallabag/pull/8139)
+
+### Technical stuff
+
+* Add j0k3r/php-readability:1.2.10 as a dependency to fix regression (about latin1 instead of UTF-8 used for entries) by @nicosomb [https://github.com/wallabag/wallabag/pull/8194](https://github.com/wallabag/wallabag/pull/8194)
+
 ## [2.6.12](https://github.com/wallabag/wallabag/tree/2.6.12)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.11...2.6.12)
 
