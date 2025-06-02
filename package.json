@@ -56,7 +56,7 @@
     "file-loader": "^6.2.0",
     "lato-font": "^3.0.0",
     "mini-css-extract-plugin": "^2.9.2",
-    "postcss": "^8.5.3",
+    "postcss": "^8.5.4",
     "postcss-loader": "^8.1.1",
     "postcss-scss": "^4.0.9",
     "regenerator-runtime": "^0.14.1",
