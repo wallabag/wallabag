@@ -197,6 +197,7 @@ menu:
         theme_toggle_auto: Thema automatisch
         theme_toggle_dark: Donker thema
         theme_toggle_light: Licht thema
+        with_annotations: Met aantekeningen
 security:
     login:
         password: Wachtwoord
