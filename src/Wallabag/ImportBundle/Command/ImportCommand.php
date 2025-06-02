@@ -13,11 +13,14 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Wallabag\ImportBundle\Import\ChromeImport;
 use Wallabag\ImportBundle\Import\DeliciousImport;
+use Wallabag\ImportBundle\Import\ElcuratorImport;
 use Wallabag\ImportBundle\Import\FirefoxImport;
 use Wallabag\ImportBundle\Import\InstapaperImport;
 use Wallabag\ImportBundle\Import\OmnivoreImport;
 use Wallabag\ImportBundle\Import\PinboardImport;
+use Wallabag\ImportBundle\Import\PocketHtmlImport;
 use Wallabag\ImportBundle\Import\ReadabilityImport;
+use Wallabag\ImportBundle\Import\ShaarliImport;
 use Wallabag\ImportBundle\Import\WallabagV1Import;
 use Wallabag\ImportBundle\Import\WallabagV2Import;
 use Wallabag\UserBundle\Entity\User;
@@ -37,9 +40,27 @@ class ImportCommand extends Command
     private DeliciousImport $deliciousImport;
     private OmnivoreImport $omnivoreImport;
     private WallabagV1Import $wallabagV1Import;
+    private ElcuratorImport $elcuratorImport;
+    private ShaarliImport $shaarliImport;
+    private PocketHtmlImport $pocketHtmlImport;
 
-    public function __construct(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage, UserRepository $userRepository, WallabagV2Import $wallabagV2Import, FirefoxImport $firefoxImport, ChromeImport $chromeImport, ReadabilityImport $readabilityImport, InstapaperImport $instapaperImport, PinboardImport $pinboardImport, DeliciousImport $deliciousImport, OmnivoreImport $omnivoreImport, WallabagV1Import $wallabagV1Import)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        TokenStorageInterface $tokenStorage,
+        UserRepository $userRepository,
+        WallabagV2Import $wallabagV2Import,
+        FirefoxImport $firefoxImport,
+        ChromeImport $chromeImport,
+        ReadabilityImport $readabilityImport,
+        InstapaperImport $instapaperImport,
+        PinboardImport $pinboardImport,
+        DeliciousImport $deliciousImport,
+        WallabagV1Import $wallabagV1Import,
+        ElcuratorImport $elcuratorImport,
+        OmnivoreImport $omnivoreImport,
+        ShaarliImport $shaarliImport,
+        PocketHtmlImport $pocketHtmlImport
+    ) {
         $this->entityManager = $entityManager;
         $this->tokenStorage = $tokenStorage;
         $this->userRepository = $userRepository;
@@ -52,6 +73,9 @@ class ImportCommand extends Command
         $this->deliciousImport = $deliciousImport;
         $this->omnivoreImport = $omnivoreImport;
         $this->wallabagV1Import = $wallabagV1Import;
+        $this->elcuratorImport = $elcuratorImport;
+        $this->shaarliImport = $shaarliImport;
+        $this->pocketHtmlImport = $pocketHtmlImport;
 
         parent::__construct();
     }
@@ -63,7 +87,7 @@ class ImportCommand extends Command
             ->setDescription('Import entries from a JSON export')
             ->addArgument('username', InputArgument::REQUIRED, 'User to populate')
             ->addArgument('filepath', InputArgument::REQUIRED, 'Path to the JSON file')
-            ->addOption('importer', null, InputOption::VALUE_OPTIONAL, 'The importer to use: v1, v2, instapaper, pinboard, delicious, readability, firefox or chrome', 'v1')
+            ->addOption('importer', null, InputOption::VALUE_OPTIONAL, 'The importer to use: v1, v2, instapaper, pinboard, delicious, readability, firefox, chrome, elcurator, shaarli or pocket', 'v1')
             ->addOption('markAsRead', null, InputOption::VALUE_OPTIONAL, 'Mark all entries as read', false)
             ->addOption('useUserId', null, InputOption::VALUE_NONE, 'Use user id instead of username to find account')
             ->addOption('disableContentUpdate', null, InputOption::VALUE_NONE, 'Disable fetching updated content from URL')
@@ -125,6 +149,15 @@ class ImportCommand extends Command
                 break;
             case 'omnivore':
                 $import = $this->omnivoreImport;
+            break;
+            case 'elcurator':
+                $import = $this->elcuratorImport;
+                break;
+            case 'shaarli':
+                $import = $this->shaarliImport;
+                break;
+            case 'pocket':
+                $import = $this->pocketHtmlImport;
                 break;
             default:
                 $import = $this->wallabagV1Import;

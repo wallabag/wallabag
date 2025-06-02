@@ -121,6 +121,16 @@ services:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_wallabag_v2_producer'
             $redisProducer: '@wallabag_import.producer.redis.wallabag_v2'
 
+    Wallabag\ImportBundle\Controller\ShaarliController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_shaarli_producer'
+            $redisProducer: '@wallabag_import.producer.redis.shaarli'
+
+    Wallabag\ImportBundle\Controller\PocketHtmlController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_pocket_html_producer'
+            $redisProducer: '@wallabag_import.producer.redis.pocket_html'
+
     Wallabag\ImportBundle\:
         resource: '../../src/Wallabag/ImportBundle/*'
         exclude: '../../src/Wallabag/ImportBundle/{Consumer,Controller,Redis}'
@@ -393,6 +403,14 @@ services:
     Wallabag\ImportBundle\Import\ChromeImport:
         tags:
             -  { name: wallabag_import.import, alias: chrome }
+
+    Wallabag\ImportBundle\Import\ShaarliImport:
+        tags:
+            -  { name: wallabag_import.import, alias: shaarli }
+
+    Wallabag\ImportBundle\Import\PocketHtmlImport:
+        tags:
+            -  { name: wallabag_import.import, alias: pocket_html }
 
     # to factorize the proximity and bypass translation for prev & next
     pagerfanta.view.default_wallabag:

@@ -180,3 +180,35 @@ services:
         class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
         arguments:
             $import: '@Wallabag\ImportBundle\Import\ChromeImport'
+
+    # shaarli
+    wallabag_import.queue.redis.shaarli:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            $queueName: "wallabag.import.shaarli"
+
+    wallabag_import.producer.redis.shaarli:
+        class: Wallabag\ImportBundle\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.shaarli"
+
+    wallabag_import.consumer.redis.shaarli:
+        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        arguments:
+            $import: '@Wallabag\ImportBundle\Import\ShaarliImport'
+
+    # pocket html
+    wallabag_import.queue.redis.pocket_html:
+        class: Simpleue\Queue\RedisQueue
+        arguments:
+            $queueName: "wallabag.import.pocket_html"
+
+    wallabag_import.producer.redis.pocket_html:
+        class: Wallabag\ImportBundle\Redis\Producer
+        arguments:
+            - "@wallabag_import.queue.redis.pocket_html"
+
+    wallabag_import.consumer.redis.pocket_html:
+        class: Wallabag\ImportBundle\Consumer\RedisEntryConsumer
+        arguments:
+            $import: '@Wallabag\ImportBundle\Import\PocketHtmlImport'

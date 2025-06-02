@@ -167,5 +167,5 @@ wallabag_core:
             rule: _all ~ "https?://www\.lemonde\.fr/tiny.*"
 
 wallabag_import:
-    allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain', 'text/csv']
+    allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain', 'text/csv', 'text/html']
     resource_dir: "%kernel.project_dir%/web/uploads/import"
