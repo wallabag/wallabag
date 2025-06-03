@@ -33,12 +33,30 @@ class EntryDeletionRestControllerTest extends WallabagApiTestCase
 
     public function testGetEntryDeletionsSince()
     {
-        // Test date range filter - get deletions from last 2 days
         $since = (new \DateTime('-2 days'))->getTimestamp();
         $this->client->request('GET', "/api/entry-deletions?since={$since}");
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
         $this->assertGreaterThanOrEqual(1, \count($content['_embedded']['items']));
+    }
+
+    public function testGetEntryDeletionsWithSinceBeforeCutoffDate()
+    {
+        $sinceBeforeCutoff = (new \DateTime('-410 days'))->getTimestamp();
+        $this->client->request('GET', "/api/entry-deletions?since={$sinceBeforeCutoff}");
+        $this->assertSame(410, $this->client->getResponse()->getStatusCode());
+
+        $content = $this->client->getResponse()->getContent();
+        $this->assertStringContainsString('The requested since date', $content);
+        $this->assertStringContainsString('is before the data retention cutoff date', $content);
+        $this->assertStringContainsString('X-Wallabag-Entry-Deletion-Cutoff', $content);
+
+        $response = $this->client->getResponse();
+        $this->assertTrue($response->headers->has('X-Wallabag-Entry-Deletion-Cutoff'));
+
+        $cutoffTimestamp = $response->headers->get('X-Wallabag-Entry-Deletion-Cutoff');
+        $this->assertIsNumeric($cutoffTimestamp);
+        $this->assertGreaterThan($sinceBeforeCutoff, (int) $cutoffTimestamp);
     }
 }
