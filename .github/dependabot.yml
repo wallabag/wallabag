@@ -35,6 +35,9 @@ updates:
     phpstan-dependencies:
       patterns:
         - "phpstan/*"
+    graby-site-config:
+      patterns:
+        - "j0k3r/graby-site-config"
   reviewers:
   - j0k3r
   - yguedidi
