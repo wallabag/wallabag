@@ -32,6 +32,7 @@ parameters:
     wallabag.action_mark_as_read: 1
     wallabag.list_mode: 0
     wallabag.display_thumbnails: 1
+    wallabag.entry_deletion_expiration_days: 90
     wallabag.fetching_error_message_title: 'No title found'
     wallabag.fetching_error_message: |
         wallabag can't retrieve contents for this article. Please <a href="https://doc.wallabag.org/en/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.

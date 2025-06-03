@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Wallabag\Helper\EntryDeletionExpirationConfig;
 use Wallabag\Repository\EntryDeletionRepository;
 
 class PurgeEntryDeletionsCommand extends Command
@@ -18,6 +19,7 @@ class PurgeEntryDeletionsCommand extends Command
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly EntryDeletionRepository $entryDeletionRepository,
+        private readonly EntryDeletionExpirationConfig $expirationConfig,
     ) {
         parent::__construct();
     }
@@ -25,13 +27,6 @@ class PurgeEntryDeletionsCommand extends Command
     protected function configure()
     {
         $this
-            ->addOption(
-                'older-than',
-                null,
-                InputOption::VALUE_REQUIRED,
-                'Purge records older than this date (format: YYYY-MM-DD)',
-                '-30 days'
-            )
             ->addOption(
                 'dry-run',
                 null,
@@ -44,18 +39,10 @@ class PurgeEntryDeletionsCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $olderThan = $input->getOption('older-than');
         $dryRun = (bool) $input->getOption('dry-run');
 
-        try {
-            $date = new \DateTime($olderThan);
-        } catch (\Exception $e) {
-            $io->error(sprintf('Invalid date format: %s.\nYou can use any format supported by PHP (e.g. YYYY-MM-DD).', $olderThan));
-
-            return 1;
-        }
-
-        $count = $this->entryDeletionRepository->countAllBefore($date);
+        $cutoff = $this->expirationConfig->getCutoffDate();
+        $count = $this->entryDeletionRepository->countAllBefore($cutoff);
 
         if ($dryRun) {
             $io->text('Dry run mode <info>enabled</info> (no records will be deleted)');
@@ -78,14 +65,14 @@ class PurgeEntryDeletionsCommand extends Command
 
         $confirmMessage = sprintf(
             'Are you sure you want to delete records older than %s? (count: %d)',
-            $date->format('Y-m-d'),
+            $cutoff->format('Y-m-d'),
             $count,
         );
         if (!$io->confirm($confirmMessage)) {
             return 0;
         }
 
-        $this->entryDeletionRepository->deleteAllBefore($date);
+        $this->entryDeletionRepository->deleteAllBefore($cutoff);
 
         $io->success(sprintf('Successfully deleted %d records.', $count));
 
