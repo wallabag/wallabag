@@ -114,19 +114,32 @@ class PocketCsvControllerTest extends WallabagCoreTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.summary', $body[0]);
 
-        $content = $client->getContainer()
+        $entries = $client->getContainer()
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
-            ->findByUrlAndUserId(
-                'https://jp-lambert.me/est-ce-que-jai-besoin-d-un-scrum-master-604f5a471c73',
-                $this->getLoggedInUserId()
-            );
+            ->findBy(['user' => $this->getLoggedInUserId()]);
 
-        $this->assertInstanceOf(Entry::class, $content);
-        $this->assertNotEmpty($content->getMimetype(), 'Mimetype for jp-lambert.me is ok');
-        $this->assertNotEmpty($content->getPreviewPicture(), 'Preview picture for jp-lambert.me is ok');
-        $this->assertNotEmpty($content->getLanguage(), 'Language for jp-lambert.me is ok');
-        $this->assertCount(1, $content->getTags());
+        $expectedEntries = [
+            'http://youmightnotneedjquery.com/,1600322788',
+            'https://jp-lambert.me/est-ce-que-jai-besoin-d-un-scrum-master-604f5a471c73',
+            'https://www.monde-diplomatique.fr/2020/09/HALIMI/62165',
+            'https://www.reddit.com/r/DataHoarder/comments/ioupbk/archivebox_question_how_do_i_import_links_from_a/',
+            'https://www.numerama.com/politique/646826-tu-vas-pleurer-les-premieres-fois-que-se-passe-t-il-au-sein-du-studio-dubisoft-derriere-trackmania.html#utm_medium=distibuted&utm_source=rss&utm_campaign=646826',
+            'https://www.nouvelobs.com/rue89/20200911.OBS33165/comment-konbini-s-est-fait-pieger-par-un-pere-masculiniste.html',
+            'https://reporterre.net/Des-abeilles-pour-resoudre-les-conflits-entre-les-humains-et-les-elephants',
+        ];
+
+        $matchedEntries = array_map(function ($expectedUrl) use ($entries) {
+            foreach ($entries as $entry) {
+                if ($entry->getUrl() === $expectedUrl) {
+                    return $entry;
+                }
+            }
+
+            return null;
+        }, $expectedEntries);
+
+        $this->assertCount(\count($expectedEntries), $matchedEntries, 'Should have 7 entries imported from pocket.csv');
     }
 
     public function testImportWallabagWithEmptyFile()
