@@ -40,4 +40,24 @@ class EntryDeletionRepository extends ServiceEntityRepository
 
         return $pager;
     }
+
+    public function countAllBefore(\DateTime $date): int
+    {
+        return $this->createQueryBuilder('de')
+            ->select('COUNT(de.id)')
+            ->where('de.deletedAt < :date')
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function deleteAllBefore(\DateTime $date)
+    {
+        $this->createQueryBuilder('de')
+            ->delete()
+            ->where('de.deletedAt < :date')
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->execute();
+    }
 }
