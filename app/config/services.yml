@@ -31,6 +31,7 @@ services:
             $supportUrl: '@=service(''craue_config'').get(''wallabag_support_url'')'
             $fonts: '%wallabag.fonts%'
             $defaultIgnoreOriginInstanceRules: '%wallabag.default_ignore_origin_instance_rules%'
+            $entryDeletionExpirationDays: '%wallabag.entry_deletion_expiration_days%'
 
     Wallabag\:
         resource: '../../src/*'
@@ -253,6 +254,11 @@ services:
     Wallabag\Helper\DownloadImages:
         arguments:
             $baseFolder: "%kernel.project_dir%/web/assets/images"
+            
+
+    Wallabag\Helper\EntryDeletionExpirationConfig:
+        arguments:
+            $defaultExpirationDays: '%wallabag.entry_deletion_expiration_days%'
 
     Wallabag\Command\InstallCommand:
         arguments:
