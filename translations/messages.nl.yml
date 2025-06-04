@@ -9,16 +9,16 @@ config:
             300_word: Ik lees ~300 woorden per minuut
             200_word: Ik lees ~200 woorden per minuut
             100_word: Ik lees ~100 woorden per minuut
-            help_message: 'U can online tooling gebruiken om uw leessnelheid te bepalen:'
+            help_message: 'Je kunt online programma''s gebruiken om je leessnelheid te bepalen:'
             label: Leessnelheid
         language_label: Taal
         items_per_page_label: Items per pagina
-        help_pocket_consumer_key: Verplicht voor het importeren uit Pocket. U kan dit aanmaken in uw Pocket account.
+        help_pocket_consumer_key: Verplicht voor het importeren uit Pocket. Je kan dit aanmaken in je Pocket account.
         help_language: U kan de taal van wallabag aanpassen.
         help_reading_speed: wallabag berekend een leestijd voor ieder artikel. U kan hier aangeven of u een snelle of langzame lezer bent waardoor wallabag een accurate tijd kan berekenen per artikel.
         help_items_per_page: U kan de hoeveelheid getoonde artikelen per pagina aanpassen.
-        android_instruction: Tik hier om uw Android-appvooraf in te vullen
-        android_configuration: Configureer uw Android applicatie
+        android_instruction: Tik hier om je Android-app vooraf in te vullen
+        android_configuration: Configureer je Android applicatie
         pocket_consumer_key_label: Consumer key voor Pocket om inhoud te importeren
     form:
         save: Opslaan
@@ -43,7 +43,7 @@ config:
         twoFactorAuthentication_label: Twee factor authenticatie
         email_label: E-mailadres
         name_label: Naam
-        two_factor_description: Inschakken van 2-factor-authenticatie betekend dat u een email krijgt met een code elke keer als verbinding maakt met een nieuw niet vertrouwd apparaat.
+        two_factor_description: Inschakelen van 2-factor-authenticatie betekend dat je een email krijgt met een code, elke keer als je verbinding maakt met een nieuw, niet vertrouwd apparaat.
         two_factor:
             action_app: Gebruik OTP app
             action_email: Gebruik email
@@ -76,7 +76,7 @@ config:
                 mimetype: Media type van het item
                 language: Taal van het item
                 content: Inhoud van het item
-                isStarred: Of het item gemarkeerd is of niet
+                isStarred: Of het item een ster heeft of niet
                 isArchived: Of het item gearchiveerd is of niet
                 url: URL van het item
                 title: Titel van het item
@@ -87,7 +87,7 @@ config:
             how_to_use_them_title: Hoe gebruik is ze?
             tagging_rules_definition_title: Wat betekend "label regels"?
             title: FAQ
-            how_to_use_them_description: 'Laten we aannemen dat u nieuwe vermeldingen wilt labelen als « <i>korte lezing</i> » wanneer de leestijd minder dan 3 minuten bedraagt.<br />In dat geval moet u « readingTime &lt;= 3 » in het <i>Regelveld</i> en « <i>korte lezing</i> » in het <i>Labels</i> veld.<br />Meerdere labels kunnen tegelijkertijd worden toegevoegd door ze te scheiden met een komma:« <i>korte lezing, belangrijk</i> »<br />Complexe regels kunnen worden geschreven met behulp van vooraf gedefinieerde operators: if « <i>readingTime &gt;= 5 AND domainName = "www.php.net"</i> » label dan als« <i>lange lezing, php</i> »'
+            how_to_use_them_description: 'Als voorbeeld nemen we aan dat je items wil labelen als « <i>korte lezing</i> » wanneer de leestijd minder dan 3 minuten is.<br />In dat geval zet je « readingTime &lt;= 3 » in het <i>Regelveld</i> en « <i>korte lezing</i> » in het <i>Labels</i> veld.<br />Meerdere labels kunnen tegelijkertijd worden toegevoegd door ze te scheiden met een komma: « <i>korte lezing, belangrijk</i> »<br />Complexe regels kunnen worden geschreven met behulp van de beschikbare operators: als « <i>readingTime &gt;= 5 AND domainName = "www.php.net"</i> » label dan als « <i>lange lezing, php</i> »'
         tags_label: Labels
         rule_label: Regel
         edit_rule_label: wijzig
@@ -107,23 +107,23 @@ config:
         repeat_new_password_label: Herhaal nieuw wachtwoord
         new_password_label: Nieuw wachtwoord
         old_password_label: Huidig wachtwoord
-        description: U kan hier uw wachtwoord wijzigen. Uw nieuwe wachtwoord moet minimaal 8 tekens lang zijn.
+        description: Je kan hier je wachtwoord wijzigen. Je nieuwe wachtwoord moet minimaal 8 tekens lang zijn.
     reset:
         confirm: Weet u het zeker? (DIT IS ONOMKEERBAAR)
         archived: Verwijder ALLE gearchiveerde items
         entries: Verwijder ALLE items
         tags: Verwijder ALLE labels
         annotations: Verwijder ALLE annotaties
-        description: Door onderstaande knoppen te gebruiken kan u bepaalde informatie van uw account verwijderen. Wees gewaarschuwd dat NIET niet ongedaan gemaakt kan worden.
+        description: Door onderstaande knoppen te gebruiken kan je bepaalde informatie van je account verwijderen. Wees gewaarschuwd, de verwijderde informatie kan NIET HERSTELD worden!
         title: Reset opties (a.k.a gevaarlijke zone)
     otp:
         app:
             enable: Inschakelen
             cancel: Annuleer
-            two_factor_code_description_4: 'Test een OTP-code van uw geconfigureerde app:'
-            two_factor_code_description_3: 'Bewaar deze back-upcodes op een veilige plaats, u kunt dit gebruiken voor het geval u de toegang tot uw OTP-app verliest:'
-            two_factor_code_description_2: 'U kunt de QR-code scannen met uw app:'
-            two_factor_code_description_1: U hebt zojuist de OTP-tweefactorauthenticatie ingeschakeld, uw OTP-app geopend en die code gebruikt om een eenmalig wachtwoord te krijgen. Het verdwijnt nadat de pagina opnieuw is geladen.
+            two_factor_code_description_4: 'Test een OTP-code van jouw geconfigureerde app:'
+            two_factor_code_description_3: 'Bewaar deze back-upcodes op een veilige plaats, je kunt deze gebruiken voor het geval je de toegang tot je OTP-app verliest:'
+            two_factor_code_description_2: 'Je kunt de QR-code scannen met jouw app:'
+            two_factor_code_description_1: Je hebt zojuist de OTP-tweefactorauthenticatie ingeschakeld, je OTP-app geopend en die code gebruikt om een eenmalig wachtwoord te krijgen. De code verdwijnt na het verlaten of herladen van deze pagina.
         page_title: Twee-factor authenticatie
     form_ignore_origin_rules:
         faq:
@@ -149,14 +149,14 @@ config:
         feed_link:
             all: Alles
             archive: Gearchiveerd
-            starred: Gemarkeerd
+            starred: Met ster
             unread: Ongelezen
         token_revoke: Token intrekken
         token_reset: Token opnieuw genereren
-        token_create: Creëer uw token
+        token_create: Creëer een token
         no_token: Geen token
         token_label: Feed token
-        description: Met Atom-feeds van wallabag kunt u uw opgeslagen artikelen lezen met uw favoriete Atom-lezer. U moet wel eerst een token genereren.
+        description: Met Atom-feeds van wallabag kunt je je opgeslagen artikelen lezen met je favoriete Atom-lezer. Je moet wel eerst een token genereren.
 footer:
     stats: Sinds %user_creation% heeft u %nb_archives% artikelen gelezen. Dat is ongeveer %per_day% per dag!
     wallabag:
@@ -166,7 +166,7 @@ footer:
         elsewhere: Neem wallabag met u mee
 menu:
     search_form:
-        input_label: Vul uw zoeksuggestie hier in
+        input_label: Vul je zoeksuggestie hier in
     top:
         export: Exporteer
         filter_entries: Filter items
@@ -190,7 +190,7 @@ menu:
         config: Configuratie
         all_articles: Alle items
         archive: Archief
-        starred: Gemarkeerd
+        starred: Met ster
         unread: Ongelezen
         ignore_origin_instance_rules: Globaal negeer-oorsprongsregels
         quickstart: Snelstart
@@ -209,10 +209,10 @@ security:
         forgot_password: Wachtwoord vergeten?
         keep_logged_in: Houdt mij ingelogd
     register:
-        go_to_account: Ga naar uw account
+        go_to_account: Ga naar je account
         page_title: Maak een account
     resetting:
-        description: Voer uw e-mailadres hieronder in en wij sturen u instructies voor het opnieuw instellen van uw wachtwoord.
+        description: Voer je e-mailadres hieronder in en wij sturen je instructies voor het opnieuw instellen van je wachtwoord.
 flashes:
     site_credential:
         notice:
@@ -232,7 +232,7 @@ flashes:
         notice:
             summary_with_queue: 'Importeren samenvatting: %queued% in wachtrij.'
             summary: 'Importeren samenvatting: %imported% imported, %skipped% reeds opgeslagen.'
-            failed_on_file: Fout bij het verwerken van importeren. Controleer uw geïmporteerde bestand.
+            failed_on_file: Fout bij het verwerken van importeren. Controleer het geïmporteerde bestand.
             failed: Importeren gefaald, probeer opnieuw.
         error:
             rabbit_enabled_not_installed: RabbitMQ is ingeschakeld voor het afhandelen van asynchroon importeren, maar het lijkt erop dat <u> we er geen verbinding mee kunnen maken </u>. Controleer de RabbitMQ-configuratie.
@@ -244,7 +244,7 @@ flashes:
             entry_already_saved: Item is reeds opgeslagen op %date%
             entry_deleted: Item verwijderd
             entry_unstarred: Item gedemarkeerd
-            entry_starred: Item gemarkeerd
+            entry_starred: Item is nu met ster
             entry_unarchived: Item gedearchiveerd
             entry_archived: Item gearchiveerd
             entry_reloaded: Item herladen
@@ -340,15 +340,15 @@ developer:
             paragraph_6: 'Het acces_token is handig om een verzoek op de API te doen. Bijvoorbeeld:'
             paragraph_5: 'De API geeft een vergelijkbare reactie:'
             paragraph_4: 'Dus, creëer een token(vervang client_id, client_geheim, gebruikersnaam en wachtwoord met de juiste waardes):'
-            paragraph_3: Om deze token te maken, moet u <a href="%link%">een nieuwe client creëren</a>.
+            paragraph_3: Om het token te maken, moet je <a href="%link%">een nieuwe client creëren</a>.
             paragraph_2: U heeft een token nodig om te communiceren tussen applicaties van derde partijen en de wallabag API.
             paragraph_8: Als je alle API-eindpunten wilt zien, kun je <a href="%link%"> onze API-documentatie </a> bekijken.
-            paragraph_1: De volgende commando's maken gebruik van de <a href="https://github.com/jkbrzt/httpie"> HTTPie-bibliotheek </a>. Zorg ervoor dat het op uw systeem is geïnstalleerd voordat u het gebruikt.
+            paragraph_1: De volgende commando's maken gebruik van de <a href="https://github.com/jkbrzt/httpie">HTTPie-bibliotheek</a>. Zorg ervoor dat deze op jouw systeem is geïnstalleerd voordat je het gebruikt.
         page_title: API client beheren > Hoe creëer je je eerste applicatie
     client_parameter:
         read_howto: Lees de beschrijving "Hoe creëer je je eerste applicatie"
         back: Terug
-        page_description: Dit zijn uw client parameters.
+        page_description: Dit zijn de client parameters.
         page_title: API client beheer > Client parameters
         field_secret: Client geheim
         field_id: Client ID
@@ -360,7 +360,7 @@ developer:
             save_label: Maak een nieuwe client
             redirect_uris_label: Omleiding URLs (optioneel)
             name_label: Naam van de client
-        page_description: U staat op het punt een nieuwe client aan te maken. Vul het onderstaande veld in voor de omleidings-URI van uw applicatie.
+        page_description: Je staat op het punt een nieuwe client aan te maken. Vul het onderstaande veld in voor de omleidings-URI van jouw applicatie.
         copy_to_clipboard: Kopieer
     existing_clients:
         field_grant_types: Grant type toegestaan
@@ -375,7 +375,7 @@ developer:
     welcome_message: Welkom bij de wallabag API
     remove:
         action: Verwijder client %name%
-        warn_message_2: Als u dit verwijdert, kan elke app die met die client is geconfigureerd, niet meer verbinden met uw wallabag.
+        warn_message_2: Als je dit verwijdert, kan elke app die met deze client is geconfigureerd, niet meer verbinden met jouw wallabag.
         warn_message_1: U heeft de mogelijkheid om client %name% te verwijderen. Deze actie is ONOMKEERBAAR!
     clients:
         create_new: Maak een nieuwe client
@@ -384,28 +384,28 @@ developer:
     page_title: API client beheren
 import:
     pinboard:
-        how_to: Selecteer uw Pinboard exporteur en klik onderstaande knop om die te uploaden en importeren.
+        how_to: Kies je Pinboard exportbestand en klik op de knop om deze te uploaden en importeren.
         page_title: Importeer > Pinboard
         description: Deze importeur importeert al je Pinboard-artikelen. Klik op de "back-uppagina" (https://pinboard.in/settings/backup) op "JSON" in het gedeelte "Bladwijzers". Er wordt een JSON-bestand gedownload (zoals "pinboard_export").
     instapaper:
-        how_to: Selecteer uw Instapaper exporteur en klik onderstaande knop om die te uploaden en importeren.
+        how_to: Kies je Instapaper exportbestand en klik de knop om deze te uploaden en importeren.
         page_title: Importeer > Instapaper
-        description: Deze importeur importeert al uw Instapaper-artikelen. Klik op de instellingenpagina (https://www.instapaper.com/user) op "Download .CSV-bestand" in het gedeelte "Exporteren". Er wordt een CSV-bestand gedownload (zoals "instapaper-export.csv").
+        description: Deze importeur importeert al je Instapaper-artikelen. Klik op de instellingenpagina (https://www.instapaper.com/user) op "Download .CSV-bestand" in het gedeelte "Exporteren". Er wordt een CSV-bestand gedownload (zoals "instapaper-export.csv").
     chrome:
-        description: 'Deze importeur importeert al uw Chrome-bladwijzers. De locatie van het bestand is afhankelijk van uw besturingssysteem: <ul> <li> Onder Linux, ga naar de <code> ~ /.config/chromium/Default/</code>directory </li> <li> In Windows, het zou in <code>% LOCALAPPDATA%\Google\Chrome\User Data\Default </code> </li> <li> Op OS X moeten staan in <code> ~/Library/Application Support/Google/Chrome/Default /Bookmarks </code> </li> </ul> Zodra u daar bent, kopieert u het <code> bladwijzer </code> -bestand ergens waar u het kunt vinden. <em> <br> Let op dat als u Chromium in plaats van Chrome heeft, u de paden dienovereenkomstig corrigeren moet. </em> </p>'
+        description: 'Deze importeur importeert al je Chrome-bladwijzers. De locatie van het bestand is afhankelijk van je besturingssysteem: <ul><li>Onder Linux, ga naar de <code>~/.config/chromium/Default/</code>directory</li><li>In Windows, zou het in <code>%LOCALAPPDATA%\Google\Chrome\User Data\Default</code></li><li>Onder OS X moet het staan in <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Zodra je daar bent, kopieer je het <code>Bookmarks</code> bestand ergens waar je het kan vinden.<em><br>Let op dat als je Chromium gebruikt in plaats van Chrome, dat de paden dan aangepast moeten worden.</em></p>'
         page_title: Importeer > Chrome
         how_to: Kies het back-upbestand van de bladwijzer en klik op de onderstaande knop om het te importeren. Houd er rekening mee dat het proces lang kan duren, aangezien alle artikelen moeten worden opgehaald.
     readability:
-        how_to: Selecteer uw Readability exporteur en klik onderstaande knop om die te uploaden en importeren.
+        how_to: Kies het Readability exportbestand en klik de knop om deze te uploaden en importeren.
         page_title: Importeer > Readability
-        description: Deze importeur importeert al uw Readability-artikelen. Klik bij tools (https://www.readability.com/tools/) op "Uw gegevens exporteren" in het gedeelte "Gegevensexport". U ontvangt een e-mail om een json te downloaden (die in feite niet op .json eindigt).
+        description: Deze importeur importeert al je Readability-artikelen.
     wallabag_v2:
         page_title: Importeren > Wallabag v2
         description: Deze importeur importeert al uw Wallabag v2-artikelen. Ga naar "Alle artikelen" en klik in de exporteer zijbalk op "JSON". Je hebt een "All Articles.json" -bestand.
     wallabag_v1:
-        how_to: Selecteer uw wallabag exporteur en klik onderstaande knop om die te uploaden en importeren.
+        how_to: Kies je wallabag exportbestand en klik op de knop om deze te uploaden en importeren.
         page_title: Importeren > Wallabag v1
-        description: Deze importeur importeert al uw Wallabag v1-artikelen. Klik op je configuratiepagina op "JSON-exporteren" in de sectie "Exporteer je wallabag-gegevens". Je hebt het bestand "wallabag-export-1-xxxx-xx-xx.json".
+        description: Deze importeur importeert al je Wallabag v1-artikelen. Klik in de configuratiepagina op "JSON-exporteren" in de sectie "Exporteer je wallabag-gegevens". Je krijgt dan het bestand "wallabag-export-1-xxxx-xx-xx.json".
     pocket:
         connect_to_pocket: Verbind Pocket en importeer data
         config_missing:
@@ -413,30 +413,30 @@ import:
             admin_message: U moet %keyurls%a pocket_consumer_key%keyurle% definiëren.
             description: Pocket importeren is niet geconfigureerd.
         page_title: Importeer > Pocket
-        authorize_message: U kunt uw gegevens importeren vanuit uw Pocket-account. U hoeft alleen maar op de onderstaande knop te klikken en de applicatie te autoriseren om verbinding te maken met getpocket.com.
-        description: Deze importeur importeert al uw Pocket-gegevens. Pocket staat niet toe om inhoud van hun dienst op te halen, dus de leesbare inhoud van elk artikel wordt opnieuw opgehaald door wallabag.
+        authorize_message: Je kunt je gegevens importeren vanuit jouw Pocket-account. Je hoeft alleen maar op de onderstaande knop te klikken en de applicatie te autoriseren om verbinding te maken met getpocket.com.
+        description: Deze importeur importeert al je Pocket-gegevens. Pocket staat niet toe om inhoud van hun dienst op te halen, dus de leesbare inhoud van elk artikel wordt opnieuw opgehaald door wallabag.
     form:
         file_label: Bestand
         mark_as_read_label: Markeer alle geïmporteerde items als gelezen
         mark_as_read_title: Markeer als gelezen?
         save_label: Upload bestand
-    page_description: Welkom bij de wallabag importeur. Selecteer uw vorige dienst waarvan u wilt migreren.
+    page_description: Welkom bij de wallabag importeur. Selecteer de dienst waarvan je wil migreren.
     page_title: Importeren
     firefox:
         page_title: Importeer > Firefox
-        description: Deze importeur importeert al uw Firefox-bladwijzers. Ga naar uw bladwijzers (Ctrl + Shift + O), en kies dan "Importeren en back-up", kies "Back-up…". U krijgt een .json-bestand.
+        description: Deze importeur importeert al je Firefox-bladwijzers. Ga naar je Bibliotheek (Ctrl + Shift + O), klik op de knop "↓↑" en dan "Reserve kopie maken…". Je krijgt een .json-bestand.
         how_to: Kies het back-upbestand van de bladwijzer en klik op de onderstaande knop om het te importeren. Houd er rekening mee dat het proces lang kan duren, aangezien alle artikelen moeten worden opgehaald.
     action:
         import_contents: Importeer inhoud
     worker:
         enabled: 'Het importeren wordt asynchroon uitgevoerd. Zodra de importeer taak is gestart, zal een extern proces de taken één voor één afhandelen. De huidige service is:'
-        download_images_warning: U heeft het downloaden van afbeeldingen voor uw artikelen ingeschakeld. In combinatie met de klassieke import kan het eeuwen duren om door te gaan (of het mislukt misschien). We <strong> raden sterk aan </strong> om asynchroon importeren in te schakelen om fouten te voorkomen.
+        download_images_warning: Je hebt het downloaden van afbeeldingen voor je artikelen ingeschakeld. In combinatie met de klassieke import kan dat een eeuwigheid duren (of het mislukt misschien). We <strong>raden sterk aan</strong> om asynchroon importeren in te schakelen om fouten te voorkomen.
     elcurator:
-        description: Deze importeur importeert al je elCurator-artikelen. Ga naar voorkeuren in uw elCurator-account en exporteer vervolgens uw inhoud. Je krijgt een JSON-bestand.
+        description: Deze importeur importeert al je elCurator-artikelen.
         page_title: Importeer > elCurator
 export:
     unknown: Onbekend
-    footer_template: <div style="text-align:center;"><p>Gemaakt door wallabag met %method%</p><p>Open <a href="https://github.com/wallabag/wallabag/issues">een probleem</a> als u problemen ondervind met dit E-Book op uw apparaat.</p></div>
+    footer_template: <div style="text-align:center;"><p>Gemaakt door wallabag met %method%</p><p>Make een <a href="https://github.com/wallabag/wallabag/issues">issue</a> aan (in het Engels) als je problemen ondervind met dit E-Book op jouw apparaat.</p></div>
 tag:
     new:
         placeholder: U kan meerdere labels toevoegen door ze te splitsen met comma.
@@ -457,26 +457,26 @@ quickstart:
     docs:
         all_docs: En zo veel andere artikelen!
         fetching_errors: Wat kan ik doen als bij het ophalen van een artikel iets fout gaat?
-        search_filters: Bekijk hoe u uw artikelen kan vinden door middel van zoeken en filteren
-        export: Converteer uw artikelen naar ePUB of PDF
-        annotate: Annoteer uw artikel
+        search_filters: Bekijk hoe je jouw artikelen kan vinden door middel van zoeken en filteren
+        export: Converteer je artikelen naar ePUB of PDF
+        annotate: Annoteer je artikel
         title: Volledige documentatie
         description: Er zijn zoveel functies in wallabag. Aarzel niet om de handleiding te lezen om ze te leren kennen en te leren hoe u ze kunt gebruiken.
     developer:
         use_docker: Gebruiker Docker om wallabag te installeren
-        create_application: Creëer uw applicaties van derden
+        create_application: Creëer applicaties van derden
         description: 'We hebben ook aan de ontwikkelaars gedacht: Docker, API, vertalingen, etc.'
         title: Ontwikkelaars
     migrate:
         wallabag_v2: Migreren van wallabag v2
         wallabag_v1: Migreren van wallabag v1
-        description: Gebruikt u een andere dienst? Wij helpen u uw data naar wallabag te halen.
+        description: Gebruik je een andere dienst? Wij helpen je jouw data naar wallabag te halen.
         title: Migreer van een bestaande dienst
         instapaper: Migreer van Instapaper
         readability: Migreer van Readability
         pocket: Migreer van Pocket
     first_steps:
-        new_article: Sla uw eerste artikel op
+        new_article: Sla je eerste artikel op
         unread_articles: En classificeer het!
         title: Eerste stappen
         description: Nu wallabag goed is geconfigureerd, is het tijd om het web te archiveren. U kunt op het teken rechtsboven + klikken om een link toe te voegen.
@@ -489,7 +489,7 @@ quickstart:
         description: 'Als een administrator heeft u privileges op wallabag. U kan:'
         title: Administratie
     intro:
-        paragraph_1: We begeleiden u tijdens uw bezoek aan wallabag en laten u enkele functies zien die u mogelijk interesseren.
+        paragraph_1: We begeleiden je tijdens je bezoek aan wallabag en laten je enkele functies zien die je vast interesseren.
         paragraph_2: Volg ons!
         title: Welkom bij wallabag!
     configure:
@@ -510,7 +510,7 @@ howto:
         add_link: Voeg nieuwe link toe
         delete: Verwijder het item
         toggle_archive: Verander lees status van het item
-        toggle_favorite: Verander gemarkeerd status van het item
+        toggle_favorite: Wissel met/zonder ster van het item
         open_original: Open originele URL van het item
         search: Toon het zoekformulier
         list_title: Snelkoppelingen beschikbaar in overzicht pagina's
@@ -522,7 +522,7 @@ howto:
         go_tags: Ga naar labels
         go_all: Ga naar alle items
         go_archive: Ga naar gearchiveerd
-        go_starred: Ga naar gemarkeerd
+        go_starred: Ga naar met ster
         go_unread: Ga naar ongelezen
         all_pages_title: Snelkoppelingen beschikbaar op alle paginas
         action: Actie
@@ -535,7 +535,7 @@ howto:
         mobile_apps: Mobiele apps
         browser_addons: Browser plugins
     bookmarklet:
-        description: 'Sleep deze link naar uw bladwijzerbalk:'
+        description: 'Sleep deze link naar je bladwijzerbalk:'
     mobile_apps:
         ios: met de App Store
         windows: met de Microsoft Store
@@ -602,7 +602,7 @@ entry:
             delete: Verwijder
             re_fetch_content: Opnieuw ophalen van inhoud
             view_original_article: Origineel artikel
-            set_as_starred: Verander gemarkeerd
+            set_as_starred: Wissel met/zonder ster
             set_as_unread: Markeer als ongelezen
             set_as_read: Markeer als gelezen
             back_to_homepage: Terug
@@ -655,15 +655,15 @@ entry:
         preview_picture_help: Voorbeeld afbeelding
         preview_picture_label: Heeft een voorbeeld afbeelding
         unread_label: Ongelezen
-        starred_label: Gemarkeerd
+        starred_label: Met ster
         archived_label: Gearchiveerd
         status_label: Status
         title: Filters
     list:
         export_title: Exporteer
         delete: Verwijder
-        toogle_as_star: Verander gemarkeerd
-        toogle_as_read: Verander gemarkeerd als gelezen
+        toogle_as_star: Wissel met/zonder ster
+        toogle_as_read: Als gelezen markeren
         original_article: origineel
         reading_time_less_one_minute_short: '&lt; 1 min'
         reading_time_minutes_short: '%readingTime% min'
@@ -679,7 +679,7 @@ entry:
         filtered_tags: 'Gefilterd op labels:'
         filtered: Gefilterde items
         archived: Gearchiveerde items
-        starred: Gemarkeerde items
+        starred: Items met ster
         unread: Ongelezen items
     default_title: Titel van het item
 ignore_origin_instance_rule:
