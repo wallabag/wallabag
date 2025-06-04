@@ -15,7 +15,7 @@ config:
         items_per_page_label: Items per pagina
         help_pocket_consumer_key: Verplicht voor het importeren uit Pocket. Je kan dit aanmaken in je Pocket account.
         help_language: U kan de taal van wallabag aanpassen.
-        help_reading_speed: wallabag berekend een leestijd voor ieder artikel. U kan hier aangeven of u een snelle of langzame lezer bent waardoor wallabag een accurate tijd kan berekenen per artikel.
+        help_reading_speed: wallabag berekend een leestijd voor ieder artikel aan de hand van hoe snel je leest. Hier kan je aangeven hoe snel je leest.
         help_items_per_page: U kan de hoeveelheid getoonde artikelen per pagina aanpassen.
         android_instruction: Tik hier om je Android-app vooraf in te vullen
         android_configuration: Configureer je Android applicatie
@@ -37,8 +37,8 @@ config:
         delete:
             title: Verwijder mijn account (a.k.a gevaarlijke zone)
             button: Verwijder mijn account
-            confirm: Weet u het zeker? (DIT KAN NIET ONGEDAAN GEMAAKT WORDEN)
-            description: Als je je account verwijdert, worden AL je artikelen, AL je tags, AL je annotaties en je account PERMANENT verwijderd (het kan niet ONGEDAAN gemaakt worden). U wordt vervolgens uitgelogd.
+            confirm: Weet je het zeker? (DIT KAN NIET ONGEDAAN GEMAAKT WORDEN)
+            description: Als je je account verwijdert, worden AL je artikelen, AL je labels, AL je annotaties en je account PERMANENT verwijderd (het kan niet ONGEDAAN gemaakt worden). Je wordt vervolgens uitgelogd.
         help_twoFactorAuthentication: Wanneer u 2FA inschakelt, krijgt u bij elke inlogactie bij wallabag een code per mail.
         twoFactorAuthentication_label: Twee factor authenticatie
         email_label: E-mailadres
@@ -82,10 +82,10 @@ config:
                 title: Titel van het item
                 label: Variabel
             meaning: Betekenis
-            variables_available_description: 'De volgende variabelen en operatoren kunnen gebruikt worden om label regels te maken:'
+            variables_available_description: 'De volgende variabelen en operatoren kunnen gebruikt worden om labelregels te maken:'
             variables_available_title: Welke variabelen en operatoren kan ik gebruiken om regels te schrijven?
             how_to_use_them_title: Hoe gebruik is ze?
-            tagging_rules_definition_title: Wat betekend "label regels"?
+            tagging_rules_definition_title: Wat zijn “labelregels”?
             title: FAQ
             how_to_use_them_description: 'Als voorbeeld nemen we aan dat je items wil labelen als « <i>korte lezing</i> » wanneer de leestijd minder dan 3 minuten is.<br />In dat geval zet je « readingTime &lt;= 3 » in het <i>Regelveld</i> en « <i>korte lezing</i> » in het <i>Labels</i> veld.<br />Meerdere labels kunnen tegelijkertijd worden toegevoegd door ze te scheiden met een komma: « <i>korte lezing, belangrijk</i> »<br />Complexe regels kunnen worden geschreven met behulp van de beschikbare operators: als « <i>readingTime &gt;= 5 AND domainName = "www.php.net"</i> » label dan als « <i>lange lezing, php</i> »'
         tags_label: Labels
@@ -98,24 +98,25 @@ config:
         import_submit: Importeer
         file_label: JSON bestand
         card:
-            export_tagging_rules_detail: Hiermee wordt een JSON-bestand gedownload dat u kunt gebruiken om labelregels elders te importeren of om er een back-up van te maken.
+            export_tagging_rules_detail: Hiermee wordt een JSON-bestand gedownload dat je kan gebruiken om labelregels elders te importeren of om er een back-up van te maken.
             new_tagging_rule: Maak een labelregel
             import_tagging_rules: Importeer labelregels
             export_tagging_rules: Exporteer labelregels
-            import_tagging_rules_detail: Selecteer het JSON-bestand dat u eerder hebt geëxporteerd.
+            import_tagging_rules_detail: Selecteer het JSON-bestand dat je eerder hebt geëxporteerd.
     form_password:
         repeat_new_password_label: Herhaal nieuw wachtwoord
         new_password_label: Nieuw wachtwoord
         old_password_label: Huidig wachtwoord
         description: Je kan hier je wachtwoord wijzigen. Je nieuwe wachtwoord moet minimaal 8 tekens lang zijn.
     reset:
-        confirm: Weet u het zeker? (DIT IS ONOMKEERBAAR)
+        confirm: Weet je het zeker? (DIT IS ONOMKEERBAAR)
         archived: Verwijder ALLE gearchiveerde items
         entries: Verwijder ALLE items
         tags: Verwijder ALLE labels
         annotations: Verwijder ALLE annotaties
         description: Door onderstaande knoppen te gebruiken kan je bepaalde informatie van je account verwijderen. Wees gewaarschuwd, de verwijderde informatie kan NIET HERSTELD worden!
         title: Reset opties (a.k.a gevaarlijke zone)
+        tagging_rules: Verwijder ALLE labelregels
     otp:
         app:
             enable: Inschakelen
@@ -139,7 +140,7 @@ config:
             meaning: Betekenis
             variables_available_description: 'De volgende variabelen en operatoren kunnen worden gebruikt om regels voor het negeren van oorsprong te creëren:'
             variables_available_title: Welke variabelen en operatoren kunnen gebruikt worden om regels te schrijven?
-            how_to_use_them_description: Laten we aannemen dat u de oorsprong van een item wilt negeren dat afkomstig is van «<i>rss.example.com</i>» (<i>wetende dat na een omleiding het daadwerkelijke adres example.com is</i>) . <br />In dat geval moet u «host =" rss.example.com "» in het veld <i> Regel </i> plaatsen.
+            how_to_use_them_description: Als je de bron van een item wil negeren als het afkomstig is van «<i>rss.example.com</i>» (<i>wetende dat na een omleiding het daadwerkelijke adres example.com is</i>). <br />In dat geval kun je «host = "rss.example.com"» in het veld <i>Regel</i> plaatsen.
             how_to_use_them_title: Hoe gebruik ik ze?
             ignore_origin_rules_definition_description: Ze worden door wallabag gebruikt om automatisch een oorsprongsadres te negeren na een omleiding. <br />Als een omleiding plaatsvindt tijdens het ophalen van een nieuw item, zullen alle regels voor het negeren van de oorsprong (<i>door de gebruiker gedefinieerd en door de instantie gedefinieerd</i>) gebruikt worden om het oorspronkelijke adres te negeren.
             title: Veelgestelde vragen
@@ -158,12 +159,12 @@ config:
         token_label: Feed token
         description: Met Atom-feeds van wallabag kunt je je opgeslagen artikelen lezen met je favoriete Atom-lezer. Je moet wel eerst een token genereren.
 footer:
-    stats: Sinds %user_creation% heeft u %nb_archives% artikelen gelezen. Dat is ongeveer %per_day% per dag!
+    stats: Sinds %user_creation% heb je %nb_archives% artikelen gelezen. Dat is ongeveer %per_day% per dag!
     wallabag:
         about: Over
         powered_by: mogelijk gemaakt door
         social: Sociaal
-        elsewhere: Neem wallabag met u mee
+        elsewhere: Neem wallabag met je mee
 menu:
     search_form:
         input_label: Vul je zoeksuggestie hier in
@@ -266,7 +267,7 @@ flashes:
             config_saved: Configuratie opgeslagen.
             ignore_origin_rules_updated: Negeer oorsprongregel gewijzigd
             ignore_origin_rules_deleted: Negeer oorsprongregel verwijderd
-            tagging_rules_not_imported: Fout bij importeren van labeling regels
+            tagging_rules_not_imported: Fout bij importeren van labelregels
             tagging_rules_imported: Labeling regels geïmporteerd
             otp_disabled: Twee factor authenticatie uitgeschakeld
             otp_enabled: Twee factor authenticatie ingeschakeld
@@ -287,7 +288,7 @@ error:
 site_credential:
     form:
         back_to_list: Terug naar lijst
-        delete_confirm: Weet u het zeker?
+        delete_confirm: Weet je het zeker?
         delete: Verwijder
         save: Opslaan
         password_label: Wachtwoord
@@ -302,7 +303,7 @@ site_credential:
     edit_site_credential: Wijzig bestaande inloggegevens
     new_site_credential: Creëer inloggegevens
     page_title: Beheer van inloggegevens van de site
-    description: Hier kunt u alle inloggegevens beheren voor sites die dit nodig hebben (maken, bewerken en verwijderen), zoals een betaalmuur, een authenticatie, enz.
+    description: Hier kunt je alle inloggegevens beheren voor sites die dit nodig hebben (maken, bewerken en verwijderen), zoals een betaalmuur, een authenticatie, enz.
 user:
     form:
         repeat_new_password_label: Herhaal nieuw wachtwoord
@@ -310,7 +311,7 @@ user:
         name_label: Naam
         username_label: Gebruikersnaam
         back_to_list: Terug naar lijst
-        delete_confirm: Weet u het zeker?
+        delete_confirm: Weet je het zeker?
         delete: Verwijder
         save: Opslaan
         twofactor_label: Twee factor authenticatie
@@ -326,7 +327,7 @@ user:
         yes: Ja
         edit_action: Wijzig
         actions: Acties
-    description: Hier kan u alle gebruikers beheren (creëren, wijzigen en verwijderen)
+    description: Hier kan je alle gebruikers beheren (creëren, wijzigen en verwijderen)
     edit_user: Wijzig een bestaande gebruiker
     new_user: Maak een nieuwe gebruiker
     search:
@@ -341,7 +342,7 @@ developer:
             paragraph_5: 'De API geeft een vergelijkbare reactie:'
             paragraph_4: 'Dus, creëer een token(vervang client_id, client_geheim, gebruikersnaam en wachtwoord met de juiste waardes):'
             paragraph_3: Om het token te maken, moet je <a href="%link%">een nieuwe client creëren</a>.
-            paragraph_2: U heeft een token nodig om te communiceren tussen applicaties van derde partijen en de wallabag API.
+            paragraph_2: Je hebt een token nodig om te communiceren tussen applicaties van derde partijen en de wallabag API.
             paragraph_8: Als je alle API-eindpunten wilt zien, kun je <a href="%link%"> onze API-documentatie </a> bekijken.
             paragraph_1: De volgende commando's maken gebruik van de <a href="https://github.com/jkbrzt/httpie">HTTPie-bibliotheek</a>. Zorg ervoor dat deze op jouw systeem is geïnstalleerd voordat je het gebruikt.
         page_title: API client beheren > Hoe creëer je je eerste applicatie
@@ -439,7 +440,7 @@ export:
     footer_template: <div style="text-align:center;"><p>Gemaakt door wallabag met %method%</p><p>Make een <a href="https://github.com/wallabag/wallabag/issues">issue</a> aan (in het Engels) als je problemen ondervind met dit E-Book op jouw apparaat.</p></div>
 tag:
     new:
-        placeholder: U kan meerdere labels toevoegen door ze te splitsen met comma.
+        placeholder: Je kan meerdere labels toevoegen, gescheiden door een komma.
         add: Toevoegen
     list:
         number_on_the_page: '{0} Er zijn geen labels.|{1} Er is één label.|]1,Inf[ Er zijn %count% labels.'
@@ -449,7 +450,7 @@ tag:
     page_title: Labels
 quickstart:
     support:
-        description: Wij zijn er voor u als u hulp nodig heeft.
+        description: Als je wat hulp kan gebruiken, wij zijn er voor jou.
         title: Ondersteuning
         matrix: Op Matrix
         email: Per e-mail
@@ -486,7 +487,7 @@ quickstart:
         export: Configureer exporteren
         analytics: Configureer analytics
         new_user: Creëer een nieuwe gebruiker
-        description: 'Als een administrator heeft u privileges op wallabag. U kan:'
+        description: 'Als een administrator heb je privileges op wallabag. Je kan:'
         title: Administratie
     intro:
         paragraph_1: We begeleiden je tijdens je bezoek aan wallabag en laten je enkele functies zien die je vast interesseren.
@@ -496,7 +497,7 @@ quickstart:
         tagging_rules: Schrijf regels om automatisch labels toe te voegen aan artikelen
         rss: Schakel RSS-feeds in
         language: Verander taal en uiterlijk
-        description: Om een applicatie te vinden die bij u past kan u een kijkje nemen op de configuratiepagina van wallabag.
+        description: Om een applicatie te vinden die bij je past kan je een kijkje nemen op de configuratiepagina van wallabag.
         title: Configureer de applicatie
         feed: Ingeschakelde feeds
     more: Meer…
@@ -618,8 +619,8 @@ entry:
         reading_time: Geschatte leestijd
         published_on: Gepubliceerd op
     confirm:
-        delete_tag: Weet u zeker dat u dit label wilt verwijderen van dit artikel?
-        delete: Weet u zeker dat u dit artikel wilt verwijderen?
+        delete_tag: Weet je zeker dat je dit label wilt verwijderen van dit artikel?
+        delete: Weet je zeker dat je dit artikel wilt verwijderen?
     public:
         shared_by_wallabag: Dit artikel is gedeeld door %username% met <a href='%wallabag_instance%'>wallabag</a>
     edit:
@@ -689,13 +690,13 @@ ignore_origin_instance_rule:
         create_new_one: Maak een nieuwe algemene regel voor het negeren van de oorsprong
         no: Nee
         yes: Ja
-    description: Hier kunt u de algemene regels voor het negeren van oorsprong beheren die worden gebruikt om bepaalde patronen van de oorspronkelijke URL te negeren.
+    description: Hier kunt je de algemene regels voor het negeren van oorsprong beheren die worden gebruikt om bepaalde patronen van de oorspronkelijke URL te negeren.
     edit_ignore_origin_instance_rule: Bewerk een bestaande regel voor het negeren van de oorsprong
     new_ignore_origin_instance_rule: Maak een algemene regel voor het negeren van de oorsprong
     page_title: Globale negeer oorsprongsregels
     form:
         back_to_list: Terug naar lijst
-        delete_confirm: Weet u het zeker?
+        delete_confirm: Weet je het zeker?
         delete: Verwijder
         save: Opslaan
         rule_label: Regel
