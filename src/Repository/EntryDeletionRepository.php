@@ -17,14 +17,8 @@ class EntryDeletionRepository extends ServiceEntityRepository
 
     /**
      * Find deletions for a specific user since a given date. The result is paginated.
-     *
-     * @param  int    $userId
-     * @param  int    $since
-     * @param  int    $page
-     * @param  int    $perPage
-     * @param  string $order
      */
-    public function findEntryDeletions($userId, $since = 0, $order = 'asc'): Pagerfanta
+    public function findEntryDeletions(int $userId, int $since = 0, string $order = 'asc'): Pagerfanta
     {
         $qb = $this->createQueryBuilder('de')
             ->where('de.user = :userId')->setParameter('userId', $userId)

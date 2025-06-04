@@ -2,7 +2,6 @@
 
 namespace Wallabag\Command;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -17,7 +16,6 @@ class PurgeEntryDeletionsCommand extends Command
     protected static $defaultDescription = 'Purge old entry deletion records';
 
     public function __construct(
-        private readonly EntityManagerInterface $entityManager,
         private readonly EntryDeletionRepository $entryDeletionRepository,
         private readonly EntryDeletionExpirationConfig $expirationConfig,
     ) {
@@ -46,10 +44,14 @@ class PurgeEntryDeletionsCommand extends Command
 
         if ($dryRun) {
             $io->text('Dry run mode <info>enabled</info> (no records will be deleted)');
+            if (0 === $count) {
+                $io->success('No entry deletion records found.');
+            } else {
+                $io->success(\sprintf('Would have deleted %d records.', $count));
+            }
 
             return 0;
         }
-
 
         if (0 === $count) {
             $io->success('No entry deletion records found.');
@@ -57,13 +59,7 @@ class PurgeEntryDeletionsCommand extends Command
             return 0;
         }
 
-        if ($dryRun) {
-            $io->success(sprintf('Would have deleted %d records.', $count));
-
-            return 0;
-        }
-
-        $confirmMessage = sprintf(
+        $confirmMessage = \sprintf(
             'Are you sure you want to delete records older than %s? (count: %d)',
             $cutoff->format('Y-m-d'),
             $count,
@@ -74,7 +70,7 @@ class PurgeEntryDeletionsCommand extends Command
 
         $this->entryDeletionRepository->deleteAllBefore($cutoff);
 
-        $io->success(sprintf('Successfully deleted %d records.', $count));
+        $io->success(\sprintf('Successfully deleted %d records.', $count));
 
         return 0;
     }

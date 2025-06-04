@@ -4,9 +4,8 @@ namespace Wallabag\OpenApi\Attribute\PagerFanta;
 
 use Nelmio\ApiDocBundle\Attribute\Model;
 use OpenApi\Attributes as OA;
-use Attribute;
 
-#[Attribute(Attribute::TARGET_CLASS)]
+#[\Attribute(\Attribute::TARGET_CLASS)]
 class JsonContent extends OA\JsonContent
 {
     public function __construct(string|array|null $modelClass = null)
@@ -21,7 +20,7 @@ class JsonContent extends OA\JsonContent
                             property: 'items',
                             type: 'array',
                             items: new OA\Items(ref: new Model(type: $modelClass))
-                        )
+                        ),
                     ]
                 ),
                 new OA\Property(property: 'page', type: 'integer'),
@@ -51,9 +50,9 @@ class JsonContent extends OA\JsonContent
                             property: 'next',
                             type: 'object',
                             properties: [new OA\Property(property: 'href', type: 'string')]
-                        )
+                        ),
                     ]
-                )
+                ),
             ]
         );
     }

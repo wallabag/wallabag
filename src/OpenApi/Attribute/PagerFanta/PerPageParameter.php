@@ -3,9 +3,8 @@
 namespace Wallabag\OpenApi\Attribute\PagerFanta;
 
 use OpenApi\Attributes as OA;
-use Attribute;
 
-#[Attribute(Attribute::TARGET_METHOD)]
+#[\Attribute(\Attribute::TARGET_METHOD)]
 class PerPageParameter extends OA\Parameter
 {
     public function __construct(

@@ -4,12 +4,12 @@ namespace Tests\Wallabag\Controller\Api;
 
 /**
  * Test the entry deletion REST API endpoints.
- * 
+ *
  * The fixtures set up the following entry deletions:
  * - Admin user: 1 deletion from 4 days ago (entry_id: 1004)
  * - Admin user: 1 deletion from 1 day ago (entry_id: 1001)
  * - Bob user: 1 deletion from 3 days ago (entry_id: 1003)
- * 
+ *
  * The logged in user is admin.
  */
 class EntryDeletionRestControllerTest extends WallabagApiTestCase
@@ -21,7 +21,7 @@ class EntryDeletionRestControllerTest extends WallabagApiTestCase
 
         $content = json_decode($this->client->getResponse()->getContent(), true);
         // check that only the items for the current user are returned
-        $this->assertEquals(2, \count($content['_embedded']['items']));
+        $this->assertCount(2, $content['_embedded']['items']);
 
         // validate the deletion schema on the first item
         $deletionData = $content['_embedded']['items'][0];

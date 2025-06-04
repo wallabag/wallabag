@@ -12,7 +12,7 @@ use Wallabag\Repository\EntryDeletionRepository;
 
 /**
  * Test the purge entry deletions command.
- * 
+ *
  * The fixtures set up the following entry deletions:
  * - Admin user: 1 deletion from 4 days ago (entry_id: 1004)
  * - Admin user: 1 deletion from 1 day ago (entry_id: 1001)

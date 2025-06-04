@@ -7,12 +7,11 @@ use Hateoas\Representation\Factory\PagerfantaFactory;
 use OpenApi\Attributes as OA;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\GoneHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Wallabag\Entity\EntryDeletion;
 use Wallabag\Helper\EntryDeletionExpirationConfig;
-use Wallabag\Repository\EntryDeletionRepository;
 use Wallabag\OpenApi\Attribute as WOA;
+use Wallabag\Repository\EntryDeletionRepository;
 
 class EntryDeletionRestController extends WallabagRestController
 {
@@ -33,7 +32,7 @@ class EntryDeletionRestController extends WallabagRestController
             ),
             new WOA\OrderParameter(),
             new WOA\PagerFanta\PageParameter(),
-            new WOA\PagerFanta\PerPageParameter(default: 100)
+            new WOA\PagerFanta\PerPageParameter(default: 100),
         ],
         responses: [
             new OA\Response(
@@ -57,22 +56,22 @@ class EntryDeletionRestController extends WallabagRestController
                         schema: new OA\Schema(type: 'integer')
                     ),
                 ]
-            )
+            ),
         ]
     )]
     #[IsGranted('LIST_ENTRIES')]
     public function getEntryDeletionsAction(
         Request $request,
         EntryDeletionRepository $entryDeletionRepository,
-        EntryDeletionExpirationConfig $expirationConfig
+        EntryDeletionExpirationConfig $expirationConfig,
     ) {
         $this->validateAuthentication();
         $userId = $this->getUser()->getId();
 
-        $page = $request->query->get('page', 1);
-        $perPage = $request->query->get('perPage', 100);
-        $order = $request->query->get('order', 'desc');
-        $since = (int)$request->query->get('since', 0);
+        $page = $request->query->getInt('page', 1);
+        $perPage = $request->query->getInt('perPage', 100);
+        $order = strtolower($request->query->get('order', 'desc'));
+        $since = $request->query->getInt('since', 0);
 
         if (!\in_array($order, ['asc', 'desc'], true)) {
             $order = 'desc';
@@ -85,7 +84,7 @@ class EntryDeletionRestController extends WallabagRestController
                 return $this->json(
                     [
                         'message' => "The requested since date ({$since}) is before the data retention cutoff date ({$cutoff}).\n"
-                            . "You can get the cutoff date programmatically from the X-Wallabag-Entry-Deletion-Cutoff header.",
+                            . 'You can get the cutoff date programmatically from the X-Wallabag-Entry-Deletion-Cutoff header.',
                     ],
                     410,
                     headers: [

@@ -28,6 +28,7 @@ class EntryDeletionExpirationConfig
     public function setExpirationDays(int $days): self
     {
         $this->expirationDays = $days;
+
         return $this;
     }
 }
