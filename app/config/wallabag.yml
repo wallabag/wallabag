@@ -1,5 +1,5 @@
 wallabag_core:
-    version: 2.6.13
+    version: 2.6.14-dev
     paypal_url: "https://liberapay.com/wallabag/donate"
     languages:
         en: 'English'
