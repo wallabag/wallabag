@@ -80,6 +80,7 @@
         "incenteev/composer-parameter-handler": "^2.2",
         "j0k3r/graby": "^2.4.6",
         "j0k3r/graby-site-config": "^1.0.197",
+        "j0k3r/php-readability": "^1.2.13",
         "javibravo/simpleue": "^2.1",
         "jms/serializer": "^3.32.3",
         "jms/serializer-bundle": "^5.5.1",

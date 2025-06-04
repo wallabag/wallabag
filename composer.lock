@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "00b8f95df6ec0572c06ad6f34847405c",
+    "content-hash": "8a12584ee6ea6887963779b321b4860e",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -4261,16 +4261,16 @@
         },
         {
             "name": "j0k3r/php-readability",
-            "version": "1.2.12",
+            "version": "1.2.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/php-readability.git",
-                "reference": "109a22662de0d703f01387e5714ad4f9a03b95c0"
+                "reference": "b9dde0f4cd46e9fc082bb37f75dc94ecd2f8faad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/109a22662de0d703f01387e5714ad4f9a03b95c0",
-                "reference": "109a22662de0d703f01387e5714ad4f9a03b95c0",
+                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/b9dde0f4cd46e9fc082bb37f75dc94ecd2f8faad",
+                "reference": "b9dde0f4cd46e9fc082bb37f75dc94ecd2f8faad",
                 "shasum": ""
             },
             "require": {
@@ -4332,7 +4332,7 @@
             ],
             "support": {
                 "issues": "https://github.com/j0k3r/php-readability/issues",
-                "source": "https://github.com/j0k3r/php-readability/tree/1.2.12"
+                "source": "https://github.com/j0k3r/php-readability/tree/1.2.13"
             },
             "funding": [
                 {
@@ -4340,7 +4340,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-04T09:20:40+00:00"
+            "time": "2025-06-03T08:02:58+00:00"
         },
         {
             "name": "javibravo/simpleue",
@@ -19449,6 +19449,6 @@
         "ext-tokenizer": "*",
         "ext-xml": "*"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }

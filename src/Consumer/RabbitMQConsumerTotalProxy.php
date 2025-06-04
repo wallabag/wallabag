@@ -23,6 +23,7 @@ class RabbitMQConsumerTotalProxy
         private readonly Consumer $elcuratorConsumer,
         private readonly Consumer $shaarliConsumer,
         private readonly Consumer $pocketHtmlConsumer,
+        private readonly Consumer $pocketCsvConsumer,
         private readonly Consumer $omnivoreConsumer,
     ) {
     }
@@ -74,6 +75,9 @@ class RabbitMQConsumerTotalProxy
                 break;
             case 'pocket_html':
                 $consumer = $this->pocketHtmlConsumer;
+                break;
+            case 'pocket_csv':
+                $consumer = $this->pocketCsvConsumer;
                 break;
             case 'omnivore':
                 $consumer = $this->omnivoreConsumer;

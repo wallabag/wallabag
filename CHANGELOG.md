@@ -5,6 +5,22 @@
 * **[BC BREAK]** Convert 403 errors to 404 errors by @yguedidi in https://github.com/wallabag/wallabag/pull/8075
 * `wallassets/` folder renamed to `build/`
 
+## [2.6.13](https://github.com/wallabag/wallabag/tree/2.6.13)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.12...2.6.13)
+
+### Improvements
+
+* Add support of Pocket CSV import by @kdecherf and @nicosomb in [https://github.com/wallabag/wallabag/pull/8240](https://github.com/wallabag/wallabag/pull/8240)
+* Backport Pocket and Shaarli HTML imports from master by @nicosomb in [https://github.com/wallabag/wallabag/pull/8193](https://github.com/wallabag/wallabag/pull/8193)
+
+### Fixes
+
+*  Avoid non-validated OTP to be enabled #8139 by @j0k3r in [https://github.com/wallabag/wallabag/pull/8139](https://github.com/wallabag/wallabag/pull/8139)
+
+### Technical stuff
+
+* Update j0k3r/php-readability:1.2.13 to fix regression (about latin1 instead of UTF-8 used for entries) by @nicosomb [https://github.com/wallabag/wallabag/pull/8194](https://github.com/wallabag/wallabag/pull/8194)
+
 ## [2.6.12](https://github.com/wallabag/wallabag/tree/2.6.12)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.11...2.6.12)
 
@@ -12,7 +28,6 @@
 
 * Fix changelog by @yguedidi in [https://github.com/wallabag/wallabag/pull/8135](https://github.com/wallabag/wallabag/pull/8135)
 * Update dependencies by @yguedidi in [https://github.com/wallabag/wallabag/pull/8136](https://github.com/wallabag/wallabag/pull/8136)
-
 
 ## [2.6.11](https://github.com/wallabag/wallabag/tree/2.6.11)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.10...2.6.11)
