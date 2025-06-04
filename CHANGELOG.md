@@ -3,9 +3,10 @@
 ## [2.6.13](https://github.com/wallabag/wallabag/tree/2.6.13)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.12...2.6.13)
 
-### Improvement
+### Improvements
 
-* Add Pocket and Shaarli import by @nicosomb in [https://github.com/wallabag/wallabag/pull/8193](https://github.com/wallabag/wallabag/pull/8193)
+* Add support of Pocket CSV import by @kdecherf and @nicosomb in [https://github.com/wallabag/wallabag/pull/8240](https://github.com/wallabag/wallabag/pull/8240)
+* Backport Pocket and Shaarli HTML imports from master by @nicosomb in [https://github.com/wallabag/wallabag/pull/8193](https://github.com/wallabag/wallabag/pull/8193)
 
 ### Fixes
 
@@ -13,7 +14,7 @@
 
 ### Technical stuff
 
-* Add j0k3r/php-readability:1.2.10 as a dependency to fix regression (about latin1 instead of UTF-8 used for entries) by @nicosomb [https://github.com/wallabag/wallabag/pull/8194](https://github.com/wallabag/wallabag/pull/8194)
+* Update j0k3r/php-readability:1.2.13 to fix regression (about latin1 instead of UTF-8 used for entries) by @nicosomb [https://github.com/wallabag/wallabag/pull/8194](https://github.com/wallabag/wallabag/pull/8194)
 
 ## [2.6.12](https://github.com/wallabag/wallabag/tree/2.6.12)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.11...2.6.12)
