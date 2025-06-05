@@ -5,7 +5,7 @@ restricted_access: Schakel authenticatie voor betaalde websites in
 download_images_enabled: Download afbeelding lokaal
 matomo_enabled: Schakel Matomo in
 matomo_site_id: ID van uw Matomo website
-matomo_host: Adres van uw Matomo website (zonder http:// of https://)
+matomo_host: Adres van jouw Matomo website (zonder http:// of https://)
 modify_settings: bevestig
 misc: overig
 import: importeer
