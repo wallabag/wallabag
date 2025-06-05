@@ -31,6 +31,7 @@ services:
             $supportUrl: '@=service(''craue_config'').get(''wallabag_support_url'')'
             $fonts: '%wallabag.fonts%'
             $defaultIgnoreOriginInstanceRules: '%wallabag.default_ignore_origin_instance_rules%'
+            $defaultUserAgent: "%wallabag.user_agent%"
 
     Wallabag\:
         resource: '../../src/*'
@@ -206,6 +207,8 @@ services:
             $config:
                 error_message: '%wallabag.fetching_error_message%'
                 error_message_title: '%wallabag.fetching_error_message_title%'
+                http_client:
+                    ua_browser: "%wallabag.user_agent%"
             $client: '@psr18.wallabag.client'
         calls:
             - [ setLogger, [ "@logger" ] ]
