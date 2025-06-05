@@ -9,8 +9,9 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Wallabag\Entity\Entry;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Wallabag\Entity\User;
+use Wallabag\Event\EntryDeletedEvent;
 use Wallabag\Repository\EntryRepository;
 use Wallabag\Repository\UserRepository;
 
@@ -26,6 +27,7 @@ class CleanDuplicatesCommand extends Command
         private readonly EntityManagerInterface $entityManager,
         private readonly EntryRepository $entryRepository,
         private readonly UserRepository $userRepository,
+        private readonly EventDispatcherInterface $eventDispatcher,
     ) {
         parent::__construct();
     }
@@ -86,7 +88,12 @@ class CleanDuplicatesCommand extends Command
             if (\in_array($url, $urls, true)) {
                 ++$duplicatesCount;
 
-                $this->entityManager->remove($this->entryRepository->find($entry['id']));
+                $entryToDelete = $this->entryRepository->find($entry['id']);
+
+                // entry deleted, dispatch event about it!
+                $this->eventDispatcher->dispatch(new EntryDeletedEvent($entryToDelete), EntryDeletedEvent::NAME);
+
+                $this->entityManager->remove($entryToDelete);
                 $this->entityManager->flush(); // Flushing at the end of the loop would require the instance not being online
             } else {
                 $urls[] = $entry['url'];
