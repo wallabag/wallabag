@@ -557,6 +557,10 @@ import:
         description: Ten importer zaimportuje wszystkie Twoje artykuły z Omnivore.
         page_title: Importuj > Omnivore
         how_to: Rozpakuj eksport z Omnivore, a następnie prześlij po kolei wszystkie pliki JSON o nazwie „metadata_x_to_y.json”.
+    pocket_csv:
+        description: Ten importer zaimportuje wszystkie zakładki Pocket (poprzez eksport CSV). Po prostu przejdź do https://getpocket.com/export, a następnie wyeksportuj plik. Zostanie pobrany plik ZIP (taki jak „pocket.zip”). Wypakuj go, otrzymasz plik CSV o nazwie „part_000000.csv”.
+        page_title: Importuj > Pocket CSV
+        how_to: Wybierz plik kopii zapasowej zakładek i kliknij przycisk poniżej, aby go zaimportować. Należy pamiętać, że proces ten może potrwać długo, ponieważ wszystkie artykuły muszą zostać pobrane.
 developer:
     page_title: Zarządzanie klientami API
     welcome_message: Witaj w API wallabag

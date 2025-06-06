@@ -485,6 +485,10 @@ import:
         page_title: Importar > Omnivore
         how_to: Descomprime a exportación de Omnivore, e despois sube un a un cada ficheiro JSON con nome «metadata_x_to_y.json".
         description: Este importador vai traer todos os teus artigos de Omnivore.
+    pocket_csv:
+        how_to: Selecciona o ficheiro de copia de apoio dos marcadores e preme no botón inferior para importalo. Ten en conta que o proceso podería demorarse xa que deben procesarse todos os artigos.
+        description: Con este asistente vas importar os teus marcadores desde Pocket (usando a exportación CSV). Só tes que ir a https://getpocket.com/export e exportar un ficheiro. Descargarás un ficheiro ZIP (tipo «pocket.zip»). Extrae o ficheiro CSV que contén, ten nome «part_000000.csv».
+        page_title: Importar > CSV desde Pocket
 export:
     unknown: Descoñecido
     footer_template: <div style="text-align:center;"><p>Creado por wallabag con %method%</p><p>Abre <a href="https://github.com/wallabag/wallabag/issues">unha incidencia</a> se tes problemas para visualizar este E-Book no teu dispositivo.</p></div>
