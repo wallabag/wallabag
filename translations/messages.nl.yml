@@ -12,7 +12,7 @@ config:
             help_message: 'Je kunt online programma''s gebruiken om je leessnelheid te bepalen:'
             label: Leessnelheid
         language_label: Taal
-        items_per_page_label: Items per pagina
+        items_per_page_label: Artikelen per pagina
         help_pocket_consumer_key: Verplicht voor het importeren uit Pocket. Je kan dit aanmaken in je Pocket account.
         help_language: U kan de taal van wallabag aanpassen.
         help_reading_speed: wallabag berekend een leestijd voor ieder artikel aan de hand van hoe snel je leest. Hier kan je aangeven hoe snel je leest.
@@ -20,11 +20,21 @@ config:
         android_instruction: Tik hier om je Android-app vooraf in te vullen
         android_configuration: Configureer je Android applicatie
         pocket_consumer_key_label: Consumer key voor Pocket om inhoud te importeren
+        help_display_thumbnails: Jij bepaalt of je de artikel mini-afbeelding wilt zien. Uitzetten is handig bij een langzame verbinding.
+        display_thumbnails_label: Toon artikel mini-afbeelding (handig bij langzame verbindingen).
+        help_font: Kies de lettertypefamilie die je wil gebruiken.
+        help_lineheight: Kies de regelhoogte die je wil gebruiken.
+        help_maxwidth: Kies de maximale breedte die je wil gebruiken.
+        font_label: Lettertypefamilie
+        help_fontsize: Kies de lettergrootte die je wil gebruiken.
+        fontsize_label: Lettergrootte
+        lineheight_label: Regelhoogte
+        maxwidth_label: Maximale breedte
     form:
         save: Opslaan
     tab_menu:
         new_user: Voeg gebruiker toe
-        rules: Label regels
+        rules: Labelregels
         password: Wachtwoord
         user_info: Gebruikers informatie
         rss: RSS
@@ -32,6 +42,7 @@ config:
         ignore_origin: Negeer oorsprong regels
         feed: Feeds
         reset: Reset gebied
+        article_display: Artikel weergave
     page_title: Configuratie
     form_user:
         delete:
@@ -43,21 +54,21 @@ config:
         twoFactorAuthentication_label: Twee factor authenticatie
         email_label: E-mailadres
         name_label: Naam
-        two_factor_description: Inschakelen van 2-factor-authenticatie betekend dat je een email krijgt met een code, elke keer als je verbinding maakt met een nieuw, niet vertrouwd apparaat.
+        two_factor_description: Inschakelen van tweestapsverificatie betekend dat je een e-mail krijgt met een code, elke keer als je verbinding maakt met een nieuw, niet vertrouwd apparaat.
         two_factor:
             action_app: Gebruik OTP app
-            action_email: Gebruik email
+            action_email: Gebruik e-mail
             state_disabled: Uitgeschakeld
             state_enabled: Ingeschakeld
             table_action: Actie
             table_state: Status
             table_method: Methode
-            googleTwoFactor_label: Gebruik maken van OTP app (open de app, zoals Google Authenticator, Authy of FreeOTP, om een eenmalige code te krijgen)
-            emailTwoFactor_label: Gebruik maken van email (ontvang een code per mail)
+            googleTwoFactor_label: Gebruik tweestapsverificatie met eenmalige codes van een OTP app (zoals Google Authenticator, Authy of FreeOTP)
+            emailTwoFactor_label: Gebruik tweestapsverificatie met eenmalige codes die je per e-mail ontvangt
         login_label: Login (kan niet veranderd worden)
     form_rules:
         faq:
-            tagging_rules_definition_description: Dit zijn regels die door Wallabag worden gebruikt om automatisch nieuwe items te labelen. <br /> Elke keer dat een nieuw item wordt toegevoegd, worden alle labelregels gebruikt om de labels toe te voegen die je hebt geconfigureerd, waardoor je de moeite van het handmatig classificeren van je items bespaart.
+            tagging_rules_definition_description: Dit zijn regels die door Wallabag worden gebruikt om automatisch nieuwe artikelen te labelen. <br /> Elke keer dat een nieuw artikel wordt toegevoegd, worden de labelregels gebruikt om labels toe te voegen. Hierdoor bespaar je de moeite van handmatig classificeren.
             operator_description:
                 matches: 'Valideert dat een <i>onderwerp</i> gelijk is aan <i>zoek</i> (hoofdletter-ongevoelig.<br />Voorbeeld: <code>titel gelijk aan "voetbal"</code>'
                 notmatches: 'Valideert dat een <i>onderwerp</i> niet gelijk is aan <i>zoek</i> (hoofdletter-ongevoelig.<br />Voorbeeld: <code>titel niet gelijk aan "voetbal"</code>'
@@ -71,15 +82,15 @@ config:
                 less_than: Minder dan…
                 label: Operator
             variable_description:
-                domainName: De domeinnaam van het item
-                readingTime: De verwachte leestijd van het item, in minuten
-                mimetype: Media type van het item
-                language: Taal van het item
-                content: Inhoud van het item
-                isStarred: Of het item een ster heeft of niet
-                isArchived: Of het item gearchiveerd is of niet
-                url: URL van het item
-                title: Titel van het item
+                domainName: De domeinnaam van het artikel
+                readingTime: De verwachte leestijd van het artikel, in minuten
+                mimetype: Media type van het artikel
+                language: Taal van het artikel
+                content: Inhoud van het artikel
+                isStarred: Of het artikel een ster heeft of niet
+                isArchived: Of het artikel gearchiveerd is of niet
+                url: URL van het artikel
+                title: Titel van het artikel
                 label: Variabel
             meaning: Betekenis
             variables_available_description: 'De volgende variabelen en operatoren kunnen gebruikt worden om labelregels te maken:'
@@ -87,7 +98,7 @@ config:
             how_to_use_them_title: Hoe gebruik is ze?
             tagging_rules_definition_title: Wat zijn “labelregels”?
             title: FAQ
-            how_to_use_them_description: 'Als voorbeeld nemen we aan dat je items wil labelen als « <i>korte lezing</i> » wanneer de leestijd minder dan 3 minuten is.<br />In dat geval zet je « readingTime &lt;= 3 » in het <i>Regelveld</i> en « <i>korte lezing</i> » in het <i>Labels</i> veld.<br />Meerdere labels kunnen tegelijkertijd worden toegevoegd door ze te scheiden met een komma: « <i>korte lezing, belangrijk</i> »<br />Complexe regels kunnen worden geschreven met behulp van de beschikbare operators: als « <i>readingTime &gt;= 5 AND domainName = "www.php.net"</i> » label dan als « <i>lange lezing, php</i> »'
+            how_to_use_them_description: 'Als voorbeeld nemen we aan dat je artikelen wil labelen als « <i>korte lezing</i> » wanneer de leestijd minder dan 3 minuten is.<br />In dat geval zet je « readingTime &lt;= 3 » in het <i>Regelveld</i> en « <i>korte lezing</i> » in het <i>Labels</i> veld.<br />Meerdere labels kunnen tegelijkertijd worden toegevoegd door ze te scheiden met een komma: « <i>korte lezing, belangrijk</i> »<br />Complexe regels kunnen worden geschreven met behulp van de beschikbare operators: als « <i>readingTime &gt;= 5 AND domainName = "www.php.net"</i> » label dan als « <i>lange lezing, php</i> »'
         tags_label: Labels
         rule_label: Regel
         edit_rule_label: wijzig
@@ -102,7 +113,7 @@ config:
             new_tagging_rule: Maak een labelregel
             import_tagging_rules: Importeer labelregels
             export_tagging_rules: Exporteer labelregels
-            import_tagging_rules_detail: Selecteer het JSON-bestand dat je eerder hebt geëxporteerd.
+            import_tagging_rules_detail: Kies het JSON-bestand dat je eerder hebt geëxporteerd.
     form_password:
         repeat_new_password_label: Herhaal nieuw wachtwoord
         new_password_label: Nieuw wachtwoord
@@ -110,22 +121,24 @@ config:
         description: Je kan hier je wachtwoord wijzigen. Je nieuwe wachtwoord moet minimaal 8 tekens lang zijn.
     reset:
         confirm: Weet je het zeker? (DIT IS ONOMKEERBAAR)
-        archived: Verwijder ALLE gearchiveerde items
-        entries: Verwijder ALLE items
+        archived: Verwijder ALLE gearchiveerde artikelen
+        entries: Verwijder ALLE artikelen
         tags: Verwijder ALLE labels
         annotations: Verwijder ALLE annotaties
-        description: Door onderstaande knoppen te gebruiken kan je bepaalde informatie van je account verwijderen. Wees gewaarschuwd, de verwijderde informatie kan NIET HERSTELD worden!
+        description: Door onderstaande knoppen te gebruiken kan je bepaalde informatie van je account verwijderen. Wees gewaarschuwd, de verwijderde informatie kan NIET HERSTELD worden.
         title: Reset opties (a.k.a gevaarlijke zone)
         tagging_rules: Verwijder ALLE labelregels
     otp:
         app:
             enable: Inschakelen
             cancel: Annuleer
-            two_factor_code_description_4: 'Test een OTP-code van jouw geconfigureerde app:'
+            two_factor_code_description_4: 'Test een OTP-code van jouw OTP-app:'
             two_factor_code_description_3: 'Bewaar deze back-upcodes op een veilige plaats, je kunt deze gebruiken voor het geval je de toegang tot je OTP-app verliest:'
             two_factor_code_description_2: 'Je kunt de QR-code scannen met jouw app:'
-            two_factor_code_description_1: Je hebt zojuist de OTP-tweefactorauthenticatie ingeschakeld, je OTP-app geopend en die code gebruikt om een eenmalig wachtwoord te krijgen. De code verdwijnt na het verlaten of herladen van deze pagina.
-        page_title: Twee-factor authenticatie
+            two_factor_code_description_1: Je hebt zojuist de tweestapsverificatie met OTP app ingeschakeld. Open jouw OTP-app en gebruik de QR-code om een eenmalig wachtwoord te krijgen. Let op, de QR-code verdwijnt na het verlaten of opnieuw laden van deze pagina.
+            qrcode_label: QR code
+            two_factor_code_description_5: 'Als je de QR code niet kan scannen, voer dan het geheim in:'
+        page_title: Tweestapsverificatie
     form_ignore_origin_rules:
         faq:
             ignore_origin_rules_definition_title: Wat betekent “negeer oorsprong regels”?
@@ -140,13 +153,13 @@ config:
             meaning: Betekenis
             variables_available_description: 'De volgende variabelen en operatoren kunnen worden gebruikt om regels voor het negeren van oorsprong te creëren:'
             variables_available_title: Welke variabelen en operatoren kunnen gebruikt worden om regels te schrijven?
-            how_to_use_them_description: Als je de bron van een item wil negeren als het afkomstig is van «<i>rss.example.com</i>» (<i>wetende dat na een omleiding het daadwerkelijke adres example.com is</i>). <br />In dat geval kun je «host = "rss.example.com"» in het veld <i>Regel</i> plaatsen.
+            how_to_use_them_description: Als je de bron van een artikel wil negeren als het afkomstig is van «<i>rss.example.com</i>» (<i>wetende dat na een omleiding het daadwerkelijke adres example.com is</i>). <br />In dat geval kun je «host = "rss.example.com"» in het veld <i>Regel</i> plaatsen.
             how_to_use_them_title: Hoe gebruik ik ze?
-            ignore_origin_rules_definition_description: Ze worden door wallabag gebruikt om automatisch een oorsprongsadres te negeren na een omleiding. <br />Als een omleiding plaatsvindt tijdens het ophalen van een nieuw item, zullen alle regels voor het negeren van de oorsprong (<i>door de gebruiker gedefinieerd en door de instantie gedefinieerd</i>) gebruikt worden om het oorspronkelijke adres te negeren.
+            ignore_origin_rules_definition_description: Ze worden door wallabag gebruikt om automatisch een bronadres te negeren na een omleiding. <br />Als een omleiding plaatsvindt tijdens het ophalen van een nieuw artikel, zullen alle regels voor het negeren van de bron (<i>door de gebruiker gedefinieerd en door het systeem gedefinieerd</i>) gebruikt worden om het bronadres te negeren.
             title: Veelgestelde vragen
     form_feed:
         feed_links: Feedlinks
-        feed_limit: Aantal items in de feed
+        feed_limit: Aantal artikelen in de feed
         feed_link:
             all: Alles
             archive: Gearchiveerd
@@ -170,11 +183,11 @@ menu:
         input_label: Vul je zoeksuggestie hier in
     top:
         export: Exporteer
-        filter_entries: Filter items
+        filter_entries: Filter artikelen
         search: Zoeken
-        add_new_entry: Voeg nieuw item toe
+        add_new_entry: Voeg nieuw artikel toe
         account: Mijn account
-        random_entry: Spring naar een willekeurig item van de lijst
+        random_entry: Spring naar een willekeurig artikel in de lijst
     left:
         site_credentials: Site inloggegevens
         users_management: Gebruikersbeheer
@@ -189,7 +202,7 @@ menu:
         internal_settings: Interne Instellingen
         tags: Labels
         config: Configuratie
-        all_articles: Alle items
+        all_articles: Alle artikelen
         archive: Archief
         starred: Met ster
         unread: Ongelezen
@@ -234,32 +247,32 @@ flashes:
             summary_with_queue: 'Importeren samenvatting: %queued% in wachtrij.'
             summary: 'Importeren samenvatting: %imported% imported, %skipped% reeds opgeslagen.'
             failed_on_file: Fout bij het verwerken van importeren. Controleer het geïmporteerde bestand.
-            failed: Importeren gefaald, probeer opnieuw.
+            failed: Importeren mislukt, probeer opnieuw.
         error:
             rabbit_enabled_not_installed: RabbitMQ is ingeschakeld voor het afhandelen van asynchroon importeren, maar het lijkt erop dat <u> we er geen verbinding mee kunnen maken </u>. Controleer de RabbitMQ-configuratie.
             redis_enabled_not_installed: Redis is ingeschakeld voor het afhandelen van asynchroon importeren, maar het lijkt erop dat <u> we er geen verbinding mee kunnen maken </u>. Controleer de Redis-configuratie.
     entry:
         notice:
-            entry_reloaded_failed: Item herladen maar ophalen van inhoud gefaald
-            entry_saved_failed: Item opgeslagen maar ophalen van inhoud is gefaald
-            entry_already_saved: Item is reeds opgeslagen op %date%
-            entry_deleted: Item verwijderd
-            entry_unstarred: Item gedemarkeerd
-            entry_starred: Item is nu met ster
-            entry_unarchived: Item gedearchiveerd
-            entry_archived: Item gearchiveerd
-            entry_reloaded: Item herladen
-            entry_updated: Item geüpdatet
-            entry_saved: Item opgeslagen
+            entry_reloaded_failed: Artikelen opnieuw geladen maar ophalen van inhoud mislukt
+            entry_saved_failed: Artikel opgeslagen maar ophalen van inhoud is mislukt
+            entry_already_saved: Artikel is reeds opgeslagen op %date%
+            entry_deleted: Artikel verwijderd
+            entry_unstarred: Artikel is nu zonder ster
+            entry_starred: Artikel is nu met ster
+            entry_unarchived: Artikel gedearchiveerd
+            entry_archived: Artikel gearchiveerd
+            entry_reloaded: Artikel is opnieuw geladen
+            entry_updated: Artikel geüpdatet
+            entry_saved: Artikel opgeslagen
             no_random_entry: Er is geen artikel met deze criteria gevonden
     config:
         notice:
-            archived_reset: Gearchiveerde items verwijderd
+            archived_reset: Gearchiveerde artikelen verwijderd
             rss_token_updated: RSS token geüpdatet
-            tagging_rules_deleted: Labeling regel verwijderd
-            tagging_rules_updated: Labeling regels geüpdatet
+            tagging_rules_deleted: Labelregel verwijderd
+            tagging_rules_updated: Labelregels geüpdatet
             rss_updated: RSS informatie geüpdatet
-            entries_reset: Items gereset
+            entries_reset: Artikelen gereset
             tags_reset: Labels gereset
             annotations_reset: Annotaties gereset
             user_updated: Informatie veranderd
@@ -268,16 +281,19 @@ flashes:
             ignore_origin_rules_updated: Negeer oorsprongregel gewijzigd
             ignore_origin_rules_deleted: Negeer oorsprongregel verwijderd
             tagging_rules_not_imported: Fout bij importeren van labelregels
-            tagging_rules_imported: Labeling regels geïmporteerd
-            otp_disabled: Twee factor authenticatie uitgeschakeld
-            otp_enabled: Twee factor authenticatie ingeschakeld
+            tagging_rules_imported: Labelregels geïmporteerd
+            otp_disabled: Tweestapsverificatie uitgeschakeld
+            otp_enabled: Tweestapsverificatie ingeschakeld
             feed_token_revoked: Feed token ingetrokken
             feed_token_updated: Feed token gewijzigd
             feed_updated: Feed informatie gewijzigd
+            tagging_rules_reset: Reset labelregels
+            otp_code_invalid: Foute tweestapsverificatie code
     tag:
         notice:
             tag_added: Label toegevoegd
             tag_renamed: Label hernoemd
+            too_much_tags: Om performance problemen te vermijden, kun je niet meer dan %tags% labels tegelijk toevoegen, en zijn labels met meer dan %characters% tekens niet toegestaan.
     ignore_origin_instance_rule:
         notice:
             deleted: Globale oorsprongregel voor negeren verwijderd
@@ -319,8 +335,8 @@ user:
         email_label: E-mail
         plain_password_label: ????
         last_login_label: Laatste login
-        twofactor_google_label: Twee factor authenticatie met OTP app
-        twofactor_email_label: Twee factor authenticatie met email
+        twofactor_google_label: Tweestapsverificatie met OTP app
+        twofactor_email_label: Tweestapsverificatie via e-mail
     list:
         create_new_one: Maak een nieuwe gebruiker
         no: Nee
@@ -331,13 +347,13 @@ user:
     edit_user: Wijzig een bestaande gebruiker
     new_user: Maak een nieuwe gebruiker
     search:
-        placeholder: Filter op username of email
+        placeholder: Filter op gebruikersnaam of e-mail
     page_title: Gebruikersbeheer
 developer:
     howto:
         back: Terug
         description:
-            paragraph_7: Dit verzoek geeft als resultaat alle items voor deze gebruiker.
+            paragraph_7: Dit verzoek geeft als resultaat alle artikelen voor deze gebruiker.
             paragraph_6: 'Het acces_token is handig om een verzoek op de API te doen. Bijvoorbeeld:'
             paragraph_5: 'De API geeft een vergelijkbare reactie:'
             paragraph_4: 'Dus, creëer een token(vervang client_id, client_geheim, gebruikersnaam en wachtwoord met de juiste waardes):'
@@ -387,26 +403,26 @@ import:
     pinboard:
         how_to: Kies je Pinboard exportbestand en klik op de knop om deze te uploaden en importeren.
         page_title: Importeer > Pinboard
-        description: Deze importeur importeert al je Pinboard-artikelen. Klik op de "back-uppagina" (https://pinboard.in/settings/backup) op "JSON" in het gedeelte "Bladwijzers". Er wordt een JSON-bestand gedownload (zoals "pinboard_export").
+        description: Importeer je Pinboard-artikelen. Klik op de "back-uppagina" (https://pinboard.in/settings/backup) op "JSON" in het gedeelte "Bladwijzers". Er wordt een JSON-bestand gedownload (zoals "pinboard_export").
     instapaper:
         how_to: Kies je Instapaper exportbestand en klik de knop om deze te uploaden en importeren.
         page_title: Importeer > Instapaper
-        description: Deze importeur importeert al je Instapaper-artikelen. Klik op de instellingenpagina (https://www.instapaper.com/user) op "Download .CSV-bestand" in het gedeelte "Exporteren". Er wordt een CSV-bestand gedownload (zoals "instapaper-export.csv").
+        description: Importeer je Instapaper-artikelen. Klik op de instellingenpagina (https://www.instapaper.com/user) op "Download .CSV-bestand" in het gedeelte "Exporteren". Er wordt een CSV-bestand gedownload (zoals "instapaper-export.csv").
     chrome:
-        description: 'Deze importeur importeert al je Chrome-bladwijzers. De locatie van het bestand is afhankelijk van je besturingssysteem: <ul><li>Onder Linux, ga naar de <code>~/.config/chromium/Default/</code>directory</li><li>In Windows, zou het in <code>%LOCALAPPDATA%\Google\Chrome\User Data\Default</code></li><li>Onder OS X moet het staan in <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Zodra je daar bent, kopieer je het <code>Bookmarks</code> bestand ergens waar je het kan vinden.<em><br>Let op dat als je Chromium gebruikt in plaats van Chrome, dat de paden dan aangepast moeten worden.</em></p>'
+        description: 'Importeer je Chrome-bladwijzers. De locatie van het bestand is afhankelijk van je besturingssysteem: <ul><li>Onder Linux, ga naar de <code>~/.config/chromium/Default/</code>directory</li><li>In Windows, zou het in <code>%LOCALAPPDATA%\Google\Chrome\User Data\Default</code></li><li>Onder OS X moet het staan in <code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>Zodra je daar bent, kopieer je het <code>Bookmarks</code> bestand ergens waar je het kan vinden.<em><br>Let op dat als je Chromium gebruikt in plaats van Chrome, dat de paden dan aangepast moeten worden.</em></p>'
         page_title: Importeer > Chrome
         how_to: Kies het back-upbestand van de bladwijzer en klik op de onderstaande knop om het te importeren. Houd er rekening mee dat het proces lang kan duren, aangezien alle artikelen moeten worden opgehaald.
     readability:
         how_to: Kies het Readability exportbestand en klik de knop om deze te uploaden en importeren.
         page_title: Importeer > Readability
-        description: Deze importeur importeert al je Readability-artikelen.
+        description: Importeer je Readability-artikelen.
     wallabag_v2:
         page_title: Importeren > Wallabag v2
-        description: Deze importeur importeert al uw Wallabag v2-artikelen. Ga naar "Alle artikelen" en klik in de exporteer zijbalk op "JSON". Je hebt een "All Articles.json" -bestand.
+        description: Importeer al uw Wallabag v2-artikelen. Ga naar "Alle artikelen" en klik in de exporteer zijbalk op "JSON". Je hebt een "All Articles.json" -bestand.
     wallabag_v1:
         how_to: Kies je wallabag exportbestand en klik op de knop om deze te uploaden en importeren.
         page_title: Importeren > Wallabag v1
-        description: Deze importeur importeert al je Wallabag v1-artikelen. Klik in de configuratiepagina op "JSON-exporteren" in de sectie "Exporteer je wallabag-gegevens". Je krijgt dan het bestand "wallabag-export-1-xxxx-xx-xx.json".
+        description: Importeer al je Wallabag v1-artikelen. Klik in de configuratiepagina op "JSON-exporteren" in de sectie "Exporteer je wallabag-gegevens". Je krijgt dan het bestand "wallabag-export-1-xxxx-xx-xx.json".
     pocket:
         connect_to_pocket: Verbind Pocket en importeer data
         config_missing:
@@ -415,17 +431,17 @@ import:
             description: Pocket importeren is niet geconfigureerd.
         page_title: Importeer > Pocket
         authorize_message: Je kunt je gegevens importeren vanuit jouw Pocket-account. Je hoeft alleen maar op de onderstaande knop te klikken en de applicatie te autoriseren om verbinding te maken met getpocket.com.
-        description: Deze importeur importeert al je Pocket-gegevens. Pocket staat niet toe om inhoud van hun dienst op te halen, dus de leesbare inhoud van elk artikel wordt opnieuw opgehaald door wallabag.
+        description: Importeer je gegevens van Pocket. Pocket staat het niet toe om inhoud van hun dienst op te halen, dus de leesbare inhoud van elk artikel wordt opnieuw opgehaald door wallabag.
     form:
         file_label: Bestand
-        mark_as_read_label: Markeer alle geïmporteerde items als gelezen
+        mark_as_read_label: Markeer alle geïmporteerde artikelen als gelezen
         mark_as_read_title: Markeer als gelezen?
         save_label: Upload bestand
     page_description: Welkom bij de wallabag importeur. Selecteer de dienst waarvan je wil migreren.
     page_title: Importeren
     firefox:
         page_title: Importeer > Firefox
-        description: Deze importeur importeert al je Firefox-bladwijzers. Ga naar je Bibliotheek (Ctrl + Shift + O), klik op de knop "↓↑" en dan "Reserve kopie maken…". Je krijgt een .json-bestand.
+        description: Importeer je Firefox-bladwijzers. Ga naar je Bibliotheek (Ctrl + Shift + O), klik op de knop "↓↑" en dan "Reserve kopie maken…". Je krijgt een .json-bestand.
         how_to: Kies het back-upbestand van de bladwijzer en klik op de onderstaande knop om het te importeren. Houd er rekening mee dat het proces lang kan duren, aangezien alle artikelen moeten worden opgehaald.
     action:
         import_contents: Importeer inhoud
@@ -433,8 +449,29 @@ import:
         enabled: 'Het importeren wordt asynchroon uitgevoerd. Zodra de importeer taak is gestart, zal een extern proces de taken één voor één afhandelen. De huidige service is:'
         download_images_warning: Je hebt het downloaden van afbeeldingen voor je artikelen ingeschakeld. In combinatie met de klassieke import kan dat een eeuwigheid duren (of het mislukt misschien). We <strong>raden sterk aan</strong> om asynchroon importeren in te schakelen om fouten te voorkomen.
     elcurator:
-        description: Deze importeur importeert al je elCurator-artikelen.
+        description: Importeer al je elCurator-artikelen.
         page_title: Importeer > elCurator
+        how_to: Kies je elCurator exportbestand en druk op de knop om deze uploaden en importeren.
+    pocket_html:
+        page_title: Importeer > Pocket HTML
+        how_to: Kies het Pocket exportbestand en druk op de knop om het te importeren. Let op, het proces kan lang duren omdat alle artikelen opgehaald moeten worden.
+        description: Importeer je Pocket bookmarks (via HTML export). Ga naar https://getpocket.com/export, exporteer dan een HTML bestand. Een HTML bestand genaamd "ril_export.html" wordt gedownload.
+    shaarli:
+        how_to: Kies een bookmark-backupbestand en druk op de knop om het te importeren. Let op, het proces kan lang duren omdat alle artikelen opgehaald moeten worden.
+        description: Importeer je Shaarli bookmarks. Log in, ga naar de Tools sectie, kies "Export database", kies je bookmarks en exporteer. Je krijgt een HTML bestand.
+        page_title: Importeer > Shaarli
+    delicious:
+        how_to: Kies je Delicious exportbestand en druk op de knop om deze te importeren.
+        page_title: Importeer > del.icio.us
+        description: Importeer je Delicious bookmarks. Sinds 2021 kun je je data weer exporteren via de pagina https://del.icio.us/export. Kies het "JSON" formaat. Je krijgt een bestand met de naam die lijkt op "delicious_export.2021.02.06_21.10.json".
+    omnivore:
+        page_title: Importeer > Omnivore
+        how_to: Unzip het Omnivore exportbestand, upload dan, een voor een, elk JSON bestand met de naam "metadata_x_to_y.json".
+        description: Importeer al je Omnivore artikelen.
+    pocket_csv:
+        page_title: Importeer > Pocket CSV
+        how_to: Kies het bookmark backupbestand en druk op de knop om het te importeren. Let op, het proces kan lang duren omdat alle artikelen opgehaald moeten worden.
+        description: Importeer je Pocket bookmarks (via CSV export). Ga naar https://getpocket.com/export, exporteer dan een CSV bestand. Een ZIP bestand genaamd "pocket.zip" wordt gedownload. Unzip het krijgt dan een csv bestand genaamd "part_000000.csv".
 export:
     unknown: Onbekend
     footer_template: <div style="text-align:center;"><p>Gemaakt door wallabag met %method%</p><p>Make een <a href="https://github.com/wallabag/wallabag/issues">issue</a> aan (in het Engels) als je problemen ondervind met dit E-Book op jouw apparaat.</p></div>
@@ -444,10 +481,12 @@ tag:
         add: Toevoegen
     list:
         number_on_the_page: '{0} Er zijn geen labels.|{1} Er is één label.|]1,Inf[ Er zijn %count% labels.'
-        see_untagged_entries: Toon niet gelabelde items
-        no_untagged_entries: Er zijn geen items zonder labels.
-        untagged: Niet gelabelde items
+        see_untagged_entries: Toon niet gelabelde artikelen
+        no_untagged_entries: Er zijn geen artikelen zonder label.
+        untagged: Niet gelabelde artikelen
     page_title: Labels
+    confirm:
+        delete: Verwijder het label %name%
 quickstart:
     support:
         description: Als je wat hulp kan gebruiken, wij zijn er voor jou.
@@ -505,14 +544,14 @@ quickstart:
 howto:
     shortcuts:
         article_title: Snelkoppelingen beschikbaar op startscherm
-        open_article: Toon het geselecteerde item
+        open_article: Toon het geselecteerde artikel
         arrows_navigation: Navigeer door artikelen
         hide_form: Verberg het huidige formulier (zoeken of nieuwe link)
         add_link: Voeg nieuwe link toe
-        delete: Verwijder het item
-        toggle_archive: Verander lees status van het item
-        toggle_favorite: Wissel met/zonder ster van het item
-        open_original: Open originele URL van het item
+        delete: Verwijder het artikel
+        toggle_archive: Verander lees status van het artikel
+        toggle_favorite: Wissel met/zonder ster van het artikel
+        open_original: Open originele URL van het artikel
         search: Toon het zoekformulier
         list_title: Snelkoppelingen beschikbaar in overzicht pagina's
         go_logout: Uitloggen
@@ -521,7 +560,7 @@ howto:
         go_import: Ga naar importeren
         go_config: Ga naar configuratie
         go_tags: Ga naar labels
-        go_all: Ga naar alle items
+        go_all: Ga naar alle artikelen
         go_archive: Ga naar gearchiveerd
         go_starred: Ga naar met ster
         go_unread: Ga naar ongelezen
@@ -621,21 +660,23 @@ entry:
     confirm:
         delete_tag: Weet je zeker dat je dit label wilt verwijderen van dit artikel?
         delete: Weet je zeker dat je dit artikel wilt verwijderen?
+        reload: Weet je zeker dat je dit artikel opnieuw wil ophalen?
+        delete_entries: Weet je zeker dat je deze artikelen wilt verwijderen?
     public:
         shared_by_wallabag: Dit artikel is gedeeld door %username% met <a href='%wallabag_instance%'>wallabag</a>
     edit:
         save_label: Opslaan
-        origin_url_label: Oorspronkelijke url (waar je dit item gevonden hebt)
+        origin_url_label: Oorspronkelijke url (waar je dit artikel gevonden hebt)
         url_label: Url
         title_label: Titel
-        page_title: Wijzig een item
+        page_title: Wijzig een artikel
     search:
         placeholder: Waar ben je naar op zoek?
     new:
         form_new:
             url_label: Url
         placeholder: http://website.nl
-        page_title: Sla nieuw item op
+        page_title: Sla nieuw artikel op
     filters:
         action:
             filter: Filter
@@ -660,6 +701,8 @@ entry:
         archived_label: Gearchiveerd
         status_label: Status
         title: Filters
+        parsed_label: Niet correct opgehaald
+        annotated_label: Geannoteerd
     list:
         export_title: Exporteer
         delete: Verwijder
@@ -672,17 +715,24 @@ entry:
         reading_time_less_one_minute: 'geschatte leestijd: &lt; 1 min'
         reading_time_minutes: 'geschatte leestijd: %readingTime% min'
         reading_time: geschatte leestijd
-        number_on_the_page: '{0} Er zijn geen items.|{1} Er is één item.|]1,Inf[ Er zijn %count% items.'
+        number_on_the_page: '{0} Er zijn geen artikelen.|{1} Er is één artikel.|]1,Inf[ Er zijn %count% artikelen.'
+        toggle_mass_action: Massaal schakelen actie
+        mass_action_tags_input_placeholder: label1, label2, label3
+        add_tags: Voeg labels toe
+        show_same_domain: Toon artikelen met hetzelfde domein
+        assign_search_tag: Label elke resultaat met deze zoekopdracht
     page_titles:
-        all: Alle items
-        untagged: Ongelabelde items
+        all: Alle artikelen
+        untagged: Ongelabelde artikelen
         filtered_search: 'Gefilterd met zoeken:'
         filtered_tags: 'Gefilterd op labels:'
-        filtered: Gefilterde items
-        archived: Gearchiveerde items
-        starred: Items met ster
-        unread: Ongelezen items
-    default_title: Titel van het item
+        filtered: Gefilterde artikelen
+        archived: Gearchiveerde artikelen
+        starred: Artikelen met ster
+        unread: Ongelezen artikelen
+        with_annotations: Artikelen met annotatie
+        same_domain: Hetzelfde domein
+    default_title: Titel van het artikel
 ignore_origin_instance_rule:
     list:
         edit_action: Wijzig
