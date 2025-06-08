@@ -64,7 +64,7 @@ Then you can access your wallabag.
 
 This service always ships the latest release of wallabag. [You can create your account here](https://app.wallabag.it/). Try it for free: you'll get a 14-day free trial with no limitation (no credit card information required).
 
-## Installation with Docker
+## Installation with Docker or Docker compose
 
 We provide you a Docker image to install wallabag easily. Have a look at
 our repository on [Docker Hub](https://hub.docker.com/r/wallabag/wallabag/) for more information.
