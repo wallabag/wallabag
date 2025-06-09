@@ -312,7 +312,8 @@ class ConfigController extends AbstractController
 
         $user = $this->getUser();
 
-        $user->setGoogleAuthenticatorSecret('');
+        $user->setGoogleAuthenticatorSecret(null);
+        $user->setGoogleAuthenticator(false);
         $user->setBackupCodes(null);
 
         $this->userManager->updateUser($user);
@@ -408,6 +409,9 @@ class ConfigController extends AbstractController
                 'notice',
                 'flashes.config.notice.otp_enabled'
             );
+            $user->setGoogleAuthenticator(true);
+            $this->userManager->updateUser($user);
+            $this->entityManager->flush();
 
             return $this->redirect($this->generateUrl('config') . '#set3');
         }
