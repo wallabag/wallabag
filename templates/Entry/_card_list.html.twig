@@ -12,7 +12,7 @@
         {% endif %}
     </div>
     {% endif %}
-    {% include "Entry/Card/_content.html.twig" with {'entry': entry, 'withMetadata': true, 'subClass': 'metadata'} only %}
+    {% include "Entry/Card/_content.html.twig" with {'entry': entry, 'withMetadata': true, 'subClass': 'metadata', 'currentRoute': currentRoute} only %}
 
     {% set current_path = app.request.requesturi %}
 

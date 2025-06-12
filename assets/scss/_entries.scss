@@ -183,6 +183,12 @@
   display: none;
 }
 
+blockquote.annotations {
+  margin-top: 5px;
+  padding-left: 1rem;
+  border-left: 5px solid #00acc1;
+}
+
 footer {
   &.page-footer {
     margin-top: 10px;
