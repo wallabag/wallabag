@@ -28,6 +28,7 @@ parameters:
     database_charset: utf8mb4
     domain_name: https://your-wallabag-instance.wallabag.org
     mailer_dsn: smtp://127.0.0.1
+    wallabag_user_agent: "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2"
     locale: en
     secret: ovmpmAWXRCabNlMgzlzFXDYmCFfzGv
     twofactor_auth: true
@@ -93,6 +94,7 @@ You can check about how to properly [configure email in the dedicated section]({
 
 | Name | Description | Default |
 | -----|-------------|-------- |
+| wallabag_user_agent (**new in 2.X.X**) | Default User-Agent used in HTTP requests when fetching content | "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2" |
 | locale | Default language of your wallabag instance (like en, fr, es, etc.) | en |
 | secret | This is a string that should be unique to your application and it's commonly used to add more entropy to security related operations. | ovmpmAWXRCabNlMgzlzFXDYmCFfzGv |
 | twofactor_auth | true to enable the possibility of Two factor authentication | true |
