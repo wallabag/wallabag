@@ -183,4 +183,3 @@ parameters:
         - 'text/html'
         - 'application/vnd.ms-excel'
     wallabag.resource_dir: "%kernel.project_dir%/web/uploads/import"
-    wallabag.user_agent: "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2"
