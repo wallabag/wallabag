@@ -732,7 +732,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $this->assertSame(400, $client->getResponse()->getStatusCode());
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
-        $this->assertStringContainsString('Bad CSRF token.', $body[0]);
+        $this->assertStringContainsString('400: Bad Request', $body[0]);
     }
 
     /**
