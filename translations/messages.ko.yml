@@ -199,6 +199,7 @@ entry:
         starred_label: 즐겨찾기
         status_label: 상태
         title: 필터
+        annotated_label: 주석 있음
     edit:
         origin_url_label: 원본 URL (원본 문서의 위치)
         page_title: 문서 수정
@@ -244,7 +245,7 @@ entry:
         reading_time_less_one_minute: '예상 읽기 시간: &lt; 1 분'
         reading_time_minutes: '예상 읽기 시간: %readingTime% 분'
         reading_time: 예상 읽기 시간
-        number_on_the_page: '{0} 기사가 없습니다.|{1} 기사가 하나 있습니다.|]1,Inf[ %count % 기사가 있습니다.'
+        number_on_the_page: '{0} 기사가 없습니다.|{1} 기사가 하나 있습니다.|]1,Inf[ %count%개 기사가 있습니다.'
     default_title: 기사의 제목
 howto:
     bookmarklet:
@@ -552,6 +553,7 @@ menu:
         tags: 태그
         config: 설정
         starred: 즐겨찾기
+        with_annotations: 주석 있음
     search_form:
         input_label: 여기에 검색어 입력
 error:
