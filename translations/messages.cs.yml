@@ -558,11 +558,14 @@ import:
     pocket_html:
         how_to: Zvolte soubor zálohy záložek a kliknutím na níže uvedené tlačítko jej naimportujte. Pamatujte na to, že tento proces může trvat dlouho, protože je třeba načíst všechny články.
         page_title: Import > Pocket HTML
-        description: Tento importér naimportuje všechny vaše záložky z Pocket. Stačí přejít na https://getpocket.com/export) a exportovat soubor HTML, který bude stažen (například „ril_export.html“).
+        description: Tento importér naimportuje všechny vaše záložky z Pocketu (prostřednictvím HTML exportu). Stačí přejít na https://getpocket.com/export a exportovat soubor HTML, který bude stažen (například „ril_export.html“).
     omnivore:
         how_to: Rozbalte prosím svůj export z Omnivoru, následně nahrajte jeden po druhém všechny JSON soubory s názevem "metadata_x_to_y.json".
         page_title: Import > Omnivore
         description: Tento importér naimportuje všechny vaše články z Omnivore.
+    pocket_csv:
+        page_title: Import > Pocket CSV
+        description: Tento importér naimportuje všechny vaše záložky z Pocketu (prostřednictvím CSV exportu). Stačí přejít na https://getpocket.com/export a exportovat soubor. Stáhne se ZIP soubor (např. "pocket.zip"). Po rozbalení získáte CSV soubor, nazvaný "part_000000.csv".
 flashes:
     config:
         notice:
@@ -585,6 +588,7 @@ flashes:
             user_updated: Informace byla aktualizována
             config_saved: Konfigurace byla uložena.
             tagging_rules_reset: Pravidla štítkování byla obnovena
+            otp_code_invalid: Neplatný dvoufaktorový autentizační kód
     ignore_origin_instance_rule:
         notice:
             deleted: Globální pravidlo ignorování bylo odstraněno
