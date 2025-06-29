@@ -565,7 +565,7 @@ import:
         description: Tento importér naimportuje všechny vaše články z Omnivore.
     pocket_csv:
         page_title: Import > Pocket CSV
-        description: Tento importér naimportuje všechny vaše záložky z Pocketu (prostřednictvím CSV exportu). Stačí přejít na https://getpocket.com/export a exportovat soubor. Stáhne se ZIP soubor (např. "pocket.zip"). Po rozbalení získáte CSV soubor, nazvaný "part_000000.csv".
+        description: Tento importér naimportuje všechny vaše záložky z Pocketu (prostřednictvím CSV exportu). Stačí přejít na https://getpocket.com/export a exportovat soubor. Stáhne se ZIP soubor (např. „pocket.zip“). Po rozbalení získáte CSV soubor, nazvaný „part_000000.csv“.
 flashes:
     config:
         notice:
