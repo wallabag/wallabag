@@ -66,14 +66,19 @@ This service always ships the latest release of wallabag. [You can create your a
 
 ## Installation with Docker or Docker compose
 
-We provide you a Docker image to install wallabag easily. Have a look at
-our repository on [Docker Hub](https://hub.docker.com/r/wallabag/wallabag/) for more information.
-
 ### Command to launch container
 
+This example starts Wallabag at `http://localhost:8080` using SQLite backend and persists its data to Docker named volumes:
+
 ```bash
-docker pull wallabag/wallabag
+docker run \
+  -v wallabag-data:/var/www/wallabag/data \
+  -v wallabag-images:/var/www/wallabag/web/assets/images \
+  -p 8080:80 -e "SYMFONY__ENV__DOMAIN_NAME=http://localhost:8080" \
+  wallabag/wallabag
 ```
+
+The default username and password are `wallabag:wallabag`. For more information, see [Wallabag on Docker Hub](https://hub.docker.com/r/wallabag/wallabag/).
 
 ## Installation on Cloudron
 
