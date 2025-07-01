@@ -68,7 +68,7 @@ This service always ships the latest release of wallabag. [You can create your a
 
 ### Command to launch container
 
-This example starts Wallabag at `http://localhost:8080` using SQLite backend and persists its data to Docker named volumes:
+This example starts wallabag at `http://localhost:8080` using SQLite backend and persists its data to Docker named volumes:
 
 ```bash
 docker run \
