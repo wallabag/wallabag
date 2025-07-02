@@ -190,6 +190,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             'tags' => 'foo',
             'since' => 1443274283,
             'public' => 0,
+            'annotations' => 1,
         ]);
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
@@ -217,6 +218,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             $this->assertStringContainsString('tags=foo', $content['_links'][$link]['href']);
             $this->assertStringContainsString('since=1443274283', $content['_links'][$link]['href']);
             $this->assertStringContainsString('public=0', $content['_links'][$link]['href']);
+            $this->assertStringContainsString('annotations=1', $content['_links'][$link]['href']);
         }
 
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
@@ -1382,5 +1384,86 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->assertGreaterThan(0, $content['id']);
         $this->assertSame('https://www.lemonde.fr/m-perso/article/2017/06/25/antoine-de-caunes-je-veux-avoir-le-droit-de-tatonner_5150728_4497916.html', $content['url']);
+    }
+
+    public function testGetEntriesWithAnnotationsFilter()
+    {
+        // Test filter for entries WITH annotations
+        // From fixtures: entry1, entry2 have annotations (for admin-user), entry3 has annotations (for bob-user)
+        // entry4, entry5, entry6 don't have annotations
+        $this->client->request('GET', '/api/entries', [
+            'annotations' => 1,
+        ]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey('items', $content['_embedded']);
+
+        // Check that only entries with annotations are returned
+        $entriesWithAnnotations = ['http://0.0.0.0/entry1', 'http://0.0.0.0/entry2'];
+        $entriesWithoutAnnotations = ['http://0.0.0.0/entry4', 'http://0.0.0.0/entry5', 'http://0.0.0.0/entry6'];
+
+        foreach ($content['_embedded']['items'] as $item) {
+            if (\in_array($item['url'], $entriesWithAnnotations, true)) {
+                $this->assertNotEmpty($item['annotations'], 'Entry with URL ' . $item['url'] . ' should have annotations');
+            }
+            $this->assertNotContains($item['url'], $entriesWithoutAnnotations, 'Entry without annotations should NOT be in the results');
+        }
+
+        // Ensure we have at least the entries with annotations for admin-user
+        $foundUrls = array_column($content['_embedded']['items'], 'url');
+        $this->assertContains('http://0.0.0.0/entry1', $foundUrls, 'entry1 with annotations should be in the results');
+        $this->assertContains('http://0.0.0.0/entry2', $foundUrls, 'entry2 with annotations should be in the results');
+
+        // Check pagination links contain the filter
+        $this->assertArrayHasKey('_links', $content);
+        foreach (['self', 'first', 'last'] as $link) {
+            $this->assertArrayHasKey('href', $content['_links'][$link]);
+            $this->assertStringContainsString('annotations=1', $content['_links'][$link]['href']);
+        }
+
+        $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
+    }
+
+    public function testGetEntriesWithoutAnnotationsFilter()
+    {
+        // Test filter for entries WITHOUT annotations
+        $this->client->request('GET', '/api/entries', [
+            'annotations' => 0,
+        ]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey('items', $content['_embedded']);
+
+        // Check that only entries without annotations are returned
+        $entriesWithoutAnnotations = ['http://0.0.0.0/entry4', 'http://0.0.0.0/entry5', 'http://0.0.0.0/entry6'];
+        $entriesWithAnnotations = ['http://0.0.0.0/entry1', 'http://0.0.0.0/entry2'];
+
+        foreach ($content['_embedded']['items'] as $item) {
+            if (\in_array($item['url'], $entriesWithoutAnnotations, true)) {
+                $this->assertEmpty($item['annotations'], 'Entry with URL ' . $item['url'] . ' should NOT have annotations');
+            }
+            $this->assertNotContains($item['url'], $entriesWithAnnotations, 'Entry with annotations should NOT be in the results');
+        }
+
+        // Ensure we have the entries without annotations for admin-user
+        $foundUrls = array_column($content['_embedded']['items'], 'url');
+        $this->assertContains('http://0.0.0.0/entry4', $foundUrls, 'entry4 without annotations should be in the results');
+        $this->assertContains('http://0.0.0.0/entry5', $foundUrls, 'entry5 without annotations should be in the results');
+        $this->assertContains('http://0.0.0.0/entry6', $foundUrls, 'entry6 without annotations should be in the results');
+
+        // Check pagination links contain the filter
+        $this->assertArrayHasKey('_links', $content);
+        foreach (['self', 'first', 'last'] as $link) {
+            $this->assertArrayHasKey('href', $content['_links'][$link]);
+            $this->assertStringContainsString('annotations=0', $content['_links'][$link]['href']);
+        }
+
+        $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
     }
 }
