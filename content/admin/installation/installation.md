@@ -78,7 +78,7 @@ docker run \
   wallabag/wallabag
 ```
 
-The default username and password are `wallabag:wallabag`. For more information, see [Wallabag on Docker Hub](https://hub.docker.com/r/wallabag/wallabag/).
+The default username and password are `wallabag:wallabag`. For more information, see [wallabag on Docker Hub](https://hub.docker.com/r/wallabag/wallabag/).
 
 ## Installation on Cloudron
 
