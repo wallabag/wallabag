@@ -269,6 +269,16 @@ class EntryRestController extends WallabagRestController
      *             example="example.com",
      *         )
      *     ),
+     *     @OA\Parameter(
+     *         name="annotations",
+     *         in="query",
+     *         description="filter by entries with annotations. Use 1 for entries with annotations, 0 for entries without annotations. All entries by default",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="integer",
+     *             enum={"1", "0"}
+     *         )
+     *     ),
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
@@ -294,6 +304,7 @@ class EntryRestController extends WallabagRestController
         $since = $request->query->get('since', 0);
         $detail = strtolower($request->query->get('detail', 'full'));
         $domainName = (null === $request->query->get('domain_name')) ? '' : (string) $request->query->get('domain_name');
+        $hasAnnotations = (null === $request->query->get('annotations')) ? null : (bool) $request->query->get('annotations');
 
         try {
             /** @var Pagerfanta $pager */
@@ -307,7 +318,8 @@ class EntryRestController extends WallabagRestController
                 $since,
                 $tags,
                 $detail,
-                $domainName
+                $domainName,
+                $hasAnnotations
             );
         } catch (\Exception $e) {
             throw new BadRequestHttpException($e->getMessage());
@@ -332,6 +344,7 @@ class EntryRestController extends WallabagRestController
                     'tags' => $tags,
                     'since' => $since,
                     'detail' => $detail,
+                    'annotations' => $hasAnnotations,
                 ],
                 true
             )
