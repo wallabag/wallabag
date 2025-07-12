@@ -23,6 +23,7 @@ class InstapaperController extends AbstractController
 
     #[Route(path: '/import/instapaper', name: 'import_instapaper', methods: ['GET', 'POST'])]
     #[IsGranted('IMPORT_ENTRIES')]
+    #[IsGranted('USE_IMPORTER', subject: 'instapaper')]
     public function indexAction(Request $request, InstapaperImport $instapaper, Config $craueConfig, TranslatorInterface $translator)
     {
         $form = $this->createForm(UploadImportType::class);
