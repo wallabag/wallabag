@@ -12,13 +12,14 @@ use Wallabag\Doctrine\WallabagMigration;
  */
 final class Version20250413133131 extends WallabagMigration
 {
+    
     public function up(Schema $schema): void
     {
         $userTable = $schema->getTable($this->getTable('user'));
 
-        $this->skipIf($userTable->hasColumn('googleauthenticator'), 'It seems that you already played this migration.');
+        $this->skipIf($userTable->hasColumn('google_authenticator'), 'It seems that you already played this migration.');
 
-        $userTable->addColumn('googleauthenticator', 'boolean', [
+        $userTable->addColumn('google_authenticator', 'boolean', [
             'default' => false,
             'notnull' => true,
         ]);
@@ -27,6 +28,6 @@ final class Version20250413133131 extends WallabagMigration
     public function down(Schema $schema): void
     {
         $userTable = $schema->getTable($this->getTable('user'));
-        $userTable->dropColumn('googleauthenticator');
+        $userTable->dropColumn('google_authenticator');
     }
 }

@@ -147,7 +147,7 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     #[ORM\Column(name: 'googleAuthenticatorSecret', type: 'string', nullable: true)]
     private $googleAuthenticatorSecret;
 
-    #[ORM\Column(name: 'googleAuthenticator', type: 'boolean')]
+    #[ORM\Column(name: 'google_authenticator', type: 'boolean')]
     private $googleAuthenticator = false;
 
     /**
