@@ -20,7 +20,7 @@ final class Version20250413133131 extends WallabagMigration
 
         $userTable->addColumn('googleauthenticator', 'boolean', [
             'default' => false,
-            'notnull' => false,
+            'notnull' => true,
         ]);
     }
 
