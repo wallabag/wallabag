@@ -3,6 +3,7 @@
 namespace Tests\Wallabag\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -1223,27 +1224,69 @@ class ConfigControllerTest extends WallabagTestCase
 
     public function testUserEnable2faGoogle()
     {
+        $googleAuthenticatorMock = $this->createMock(GoogleAuthenticatorInterface::class);
+        $googleAuthenticatorMock
+            ->method('generateSecret')
+            ->willReturn('DUMMYSECRET');
+        $googleAuthenticatorMock
+            ->method('checkCode')
+            ->willReturnCallback(function ($user, $code) {
+                return $code === '123456';
+            });
+        
         $this->logInAs('admin');
         $client = $this->getTestClient();
+        $client->disableReboot(); // Disable reboot to keep the mock in the container
+
+        // fixme Not sure of the best way to set the mock in the container here
+        // name::class notation does not work in this context
+        //self::getContainer()->set(GoogleAuthenticatorInterface::class, $googleAuthenticatorMock);
+        self::getContainer()->set('scheb_two_factor.security.google_authenticator', $googleAuthenticatorMock);
+        //static::$kernel->getContainer()->set('scheb_two_factor.security.google_authenticator', $googleAuthenticatorMock);
 
         $crawler = $client->request('GET', '/config');
-
         $form = $crawler->filter('form[name=config_otp_app]')->form();
-        $client->submit($form);
+        $crawler = $client->submit($form);
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        // restore user
+        $secret = $crawler->filter('div#config_otp_app_secret pre code')->innerText();
+        $this->assertSame('DUMMYSECRET', $secret);
+
+        // First test: send invalid OTP code
+        $form = $crawler->filter('form[name=config_otp_app_check]')->form();
+        $data = [
+            '_auth_code' => '000000',
+        ];
+        $client->submit($form, $data);
+
+        $this->assertSame(307, $client->getResponse()->getStatusCode());
+        $this->assertStringContainsString('flashes.config.notice.otp_code_invalid', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
+
+        // Follow the redirect to the OTP check form again
+        $crawler = $client->followRedirect();
+
+        // Second test: send valid OTP code
+        $form = $crawler->filter('form[name=config_otp_app_check]')->form();
+        $data = [
+            '_auth_code' => '123456',
+        ];
+        $client->submit($form, $data);
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+        $this->assertStringContainsString('flashes.config.notice.otp_enabled', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
+
         $em = $this->getEntityManager();
         $user = $em
             ->getRepository(User::class)
             ->findOneByUsername('admin');
 
         $this->assertTrue($user->isGoogleTwoFactor());
-        $this->assertGreaterThan(0, $user->getBackupCodes());
+        $this->assertGreaterThan(0, count($user->getBackupCodes()));
 
-        $user->setGoogleAuthenticatorSecret(false);
-        $user->setBackupCodes(null);
+        // Restore user
+        $user->setGoogleAuthenticatorSecret(null);
+        $user->setBackupCodes([]);
         $em->persist($user);
         $em->flush();
     }
