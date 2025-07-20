@@ -1231,9 +1231,9 @@ class ConfigControllerTest extends WallabagTestCase
         $googleAuthenticatorMock
             ->method('checkCode')
             ->willReturnCallback(function ($user, $code) {
-                return $code === '123456';
+                return '123456' === $code;
             });
-        
+
         $this->logInAs('admin');
         $client = $this->getTestClient();
         $client->disableReboot(); // Disable reboot to keep the mock in the container
@@ -1289,7 +1289,7 @@ class ConfigControllerTest extends WallabagTestCase
             ->findOneByUsername('admin');
 
         $this->assertTrue($user->isGoogleTwoFactor());
-        $this->assertGreaterThan(0, count($user->getBackupCodes()));
+        $this->assertGreaterThan(0, \count($user->getBackupCodes()));
 
         // Restore user
         $user->setGoogleAuthenticatorSecret(null);

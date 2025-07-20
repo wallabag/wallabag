@@ -269,9 +269,6 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
         $this->emailTwoFactor = $emailTwoFactor;
     }
 
-    /**
-     * @param bool $googleAuthenticator
-     */
     public function setGoogleAuthenticator(bool $googleAuthenticator): void
     {
         $this->googleAuthenticator = $googleAuthenticator;

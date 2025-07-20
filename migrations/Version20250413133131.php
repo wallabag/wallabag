@@ -8,11 +8,10 @@ use Doctrine\DBAL\Schema\Schema;
 use Wallabag\Doctrine\WallabagMigration;
 
 /**
- * Add boolean for two-step setup for google authenticator
+ * Add boolean for two-step setup for google authenticator.
  */
 final class Version20250413133131 extends WallabagMigration
 {
-    
     public function up(Schema $schema): void
     {
         $userTable = $schema->getTable($this->getTable('user'));
