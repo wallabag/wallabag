@@ -1253,6 +1253,13 @@ class ConfigControllerTest extends WallabagTestCase
         $secret = $crawler->filter('div#config_otp_app_secret pre code')->innerText();
         $this->assertSame('DUMMYSECRET', $secret);
 
+        $em = $this->getEntityManager();
+        $user = $em
+            ->getRepository(User::class)
+            ->findOneByUsername('admin');
+        // At this phase, the user should not have 2FA enabled
+        $this->assertFalse($user->isGoogleTwoFactor());
+
         // First test: send invalid OTP code
         $form = $crawler->filter('form[name=config_otp_app_check]')->form();
         $data = [
@@ -1286,6 +1293,7 @@ class ConfigControllerTest extends WallabagTestCase
 
         // Restore user
         $user->setGoogleAuthenticatorSecret(null);
+        $user->setGoogleAuthenticator(false);
         $user->setBackupCodes([]);
         $em->persist($user);
         $em->flush();
@@ -1302,6 +1310,7 @@ class ConfigControllerTest extends WallabagTestCase
             ->findOneByUsername('admin');
 
         $user->setGoogleAuthenticatorSecret('Google2FA');
+        $user->setGoogleAuthenticator(true);
         $em->persist($user);
         $em->flush();
 
@@ -1314,7 +1323,6 @@ class ConfigControllerTest extends WallabagTestCase
 
         $this->assertStringContainsString('flashes.config.notice.otp_disabled', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->get('notice')[0]);
 
-        // restore user
         $em = $this->getEntityManager();
         $user = $em
             ->getRepository(User::class)
@@ -1322,6 +1330,7 @@ class ConfigControllerTest extends WallabagTestCase
 
         $this->assertEmpty($user->getGoogleAuthenticatorSecret());
         $this->assertEmpty($user->getBackupCodes());
+        $this->assertFalse($user->isGoogleTwoFactor());
     }
 
     public function testExportTaggingRule()

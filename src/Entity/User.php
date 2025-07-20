@@ -147,7 +147,9 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     #[ORM\Column(name: 'googleAuthenticatorSecret', type: 'string', nullable: true)]
     private $googleAuthenticatorSecret;
 
-    #[ORM\Column(name: 'google_authenticator', type: 'boolean')]
+    // default value is explicitly set to false here to ensure that Doctrine
+    // does not complain about schema mapping mismatch
+    #[ORM\Column(name: 'google_authenticator', type: 'boolean', options: ['default' => false])]
     private $googleAuthenticator = false;
 
     /**
