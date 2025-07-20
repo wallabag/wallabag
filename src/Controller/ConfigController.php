@@ -312,7 +312,7 @@ class ConfigController extends AbstractController
 
         $user = $this->getUser();
 
-        $user->setGoogleAuthenticatorSecret(null);
+        $user->setGoogleAuthenticatorSecret('');
         $user->setGoogleAuthenticator(false);
         $user->setBackupCodes(null);
 

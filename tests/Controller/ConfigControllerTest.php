@@ -1292,7 +1292,7 @@ class ConfigControllerTest extends WallabagTestCase
         $this->assertGreaterThan(0, \count($user->getBackupCodes()));
 
         // Restore user
-        $user->setGoogleAuthenticatorSecret(null);
+        $user->setGoogleAuthenticatorSecret('');
         $user->setGoogleAuthenticator(false);
         $user->setBackupCodes([]);
         $em->persist($user);
@@ -1328,7 +1328,7 @@ class ConfigControllerTest extends WallabagTestCase
             ->getRepository(User::class)
             ->findOneByUsername('admin');
 
-        $this->assertNull($user->getGoogleAuthenticatorSecret());
+        $this->assertEmpty($user->getGoogleAuthenticatorSecret());
         $this->assertEmpty($user->getBackupCodes());
         $this->assertFalse($user->isGoogleTwoFactor());
     }
