@@ -1328,7 +1328,7 @@ class ConfigControllerTest extends WallabagTestCase
             ->getRepository(User::class)
             ->findOneByUsername('admin');
 
-        $this->assertEmpty($user->getGoogleAuthenticatorSecret());
+        $this->assertNull($user->getGoogleAuthenticatorSecret());
         $this->assertEmpty($user->getBackupCodes());
         $this->assertFalse($user->isGoogleTwoFactor());
     }
