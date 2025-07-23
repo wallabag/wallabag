@@ -22,6 +22,8 @@ final class Version20250413133131 extends WallabagMigration
             'default' => false,
             'notnull' => true,
         ]);
+
+        $this->addSql("UPDATE " . $this->getTable('user') . " SET google_authenticator = 1 WHERE googleAuthenticatorSecret IS NOT NULL AND googleAuthenticatorSecret <> '';");
     }
 
     public function down(Schema $schema): void
