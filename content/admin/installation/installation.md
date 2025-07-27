@@ -23,7 +23,7 @@ You can have a look at [Symfony documentation](http://symfony.com/doc/current/co
 {{< /callout >}}
 
 {{< callout type="info" >}}
-If you want to use SQLite to store your data, please put `%kernel.root_dir%/../data/db/wallabag.sqlite` for the `database_path` parameter during installation.
+If you want to use SQLite to store your data, please put `"%kernel.root_dir%/../data/db/wallabag.sqlite"` for the `database_path` parameter during installation.
 {{< /callout >}}
 
 {{< callout type="info" >}}
