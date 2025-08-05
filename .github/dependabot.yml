@@ -35,10 +35,6 @@ updates:
     phpstan-dependencies:
       patterns:
         - "phpstan/*"
-  reviewers:
-  - j0k3r
-  - yguedidi
-  - Kdecherf
   ignore:
   - dependency-name: symfony/*
     update-types: [ "version-update:semver-major" ]
