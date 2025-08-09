@@ -99,7 +99,7 @@
         "php-amqplib/php-amqplib": "^3.7.3",
         "php-amqplib/rabbitmq-bundle": "^2.17.3",
         "pragmarx/recovery": "^0.2.1",
-        "predis/predis": "^2.3.0",
+        "predis/predis": "^3.2.0",
         "psr/http-client": "^1.0.3",
         "psr/http-factory": "^1.1.0",
         "psr/http-message": "^2.0",
