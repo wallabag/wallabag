@@ -46,14 +46,14 @@ abstract class AbstractConsumer
 
         $this->import->setUser($user);
 
+        $entry = $this->import->parseEntry($storedEntry);
+
         if (false === $this->import->validateEntry($storedEntry)) {
             $this->logger->warning('Entry is invalid', ['entry' => $storedEntry]);
 
             // return true to skip message
             return true;
         }
-
-        $entry = $this->import->parseEntry($storedEntry);
 
         if (null === $entry) {
             $this->logger->warning('Entry already exists', ['entry' => $storedEntry]);
