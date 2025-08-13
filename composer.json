@@ -70,7 +70,7 @@
         "doctrine/orm": "^2.20.2",
         "doctrine/persistence": "^3.4",
         "egulias/email-validator": "^4.0.4",
-        "enshrined/svg-sanitize": "^0.21",
+        "enshrined/svg-sanitize": "^0.22",
         "friendsofsymfony/jsrouting-bundle": "^3.5",
         "friendsofsymfony/oauth-server-bundle": "dev-master#dc8ff343363cf794d30eb1a123610d186a43f162",
         "friendsofsymfony/rest-bundle": "^3.8",
