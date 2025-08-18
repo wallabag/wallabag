@@ -233,6 +233,8 @@ class EntryFilterType extends AbstractType
                         return;
                     }
 
+                    \assert($filterQuery instanceof ORMQuery);
+
                     $filterQuery->getQueryBuilder()->leftJoin('e.tags', 't');
                     $andExpr = $filterQuery->getExpr()->andX();
                     $orExpr = $filterQuery->getExpr()->orX();
