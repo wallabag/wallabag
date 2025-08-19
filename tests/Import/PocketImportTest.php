@@ -185,8 +185,7 @@ class PocketImportTest extends TestCase
                     }
                 }
             }
-JSON
-                , ['response_headers' => ['Content-Type: application/json']]),
+JSON, ['response_headers' => ['Content-Type: application/json']]),
         ]);
 
         $pocketImport = $this->getPocketImport('ConsumerKey', 1);
@@ -274,8 +273,7 @@ JSON
                     }
                 }
             }
-JSON
-                , ['response_headers' => ['Content-Type: application/json']]),
+JSON, ['response_headers' => ['Content-Type: application/json']]),
         ]);
 
         $pocketImport = $this->getPocketImport('ConsumerKey', 2);
@@ -352,8 +350,7 @@ JSON;
                     "229279690": $body
                 }
             }
-JSON
-                , ['response_headers' => ['Content-Type: application/json']]),
+JSON, ['response_headers' => ['Content-Type: application/json']]),
         ]);
 
         $pocketImport = $this->getPocketImport();
@@ -435,8 +432,7 @@ JSON;
                     "229279690": $body
                 }
             }
-JSON
-                , ['response_headers' => ['Content-Type: application/json']]),
+JSON, ['response_headers' => ['Content-Type: application/json']]),
         ]);
 
         $pocketImport = $this->getPocketImport();
@@ -512,8 +508,7 @@ JSON
                 }
             }
 
-JSON
-                , ['response_headers' => ['Content-Type: application/json']]),
+JSON, ['response_headers' => ['Content-Type: application/json']]),
         ]);
 
         $pocketImport = $this->getPocketImport('ConsumerKey', 1);
