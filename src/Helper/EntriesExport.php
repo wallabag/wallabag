@@ -212,6 +212,9 @@ class EntriesExport
             if ($entryCount > 1) {
                 $chapterName = "{$i}. {$entry->getTitle()}";
                 $chapter = $chapterStart . "<h1>({$i}/{$entryCount}) {$entry->getTitle()}</h1>";
+                if (null !== $entry->getPreviewPicture()) {
+                    $chapter .= "<img src=\"{$entry->getPreviewPicture()}\">";
+                }
             } else {
                 $book->setDescription($entry->getUrl());
                 if (null !== $entry->getPreviewPicture()) {
@@ -221,10 +224,6 @@ class EntriesExport
                 $chapter = $chapterStart . "<h1>{$entry->getTitle()}</h1>";
             }
 
-            if (null !== $entry->getPreviewPicture()) {
-                // TODO Try to re-use the cover image from before
-                $chapter .= "<img src=\"{$entry->getPreviewPicture()}\">";
-            }
 
             $chapter .= '<dl>' .
                 '<dt>' . $this->translator->trans('entry.view.published_by') . '</dt><dd>' . $authors . '</dd>' .
