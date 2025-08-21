@@ -226,18 +226,17 @@ class EntriesExport
                 $chapter .= "<img src=\"{$entry->getPreviewPicture()}\">";
             }
 
-            // TODO Add translations for internal and public links
             $chapter .= '<dl>' .
                 '<dt>' . $this->translator->trans('entry.view.published_by') . '</dt><dd>' . $authors . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.published_on') . '</dt><dd>' . $publishedDate . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.added_on') . '</dt><dd>' . $entry->getCreatedAt()->format('Y-m-d') . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.reading_time') . '</dt><dd>' . $this->translator->trans('entry.metadata.reading_time_minutes_short', ['%readingTime%' => $readingTime]) . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.address') . '</dt><dd><a href="' . $entry->getUrl() . '">' . $entry->getUrl() . '</a></dd>' .
-                '<dt>Internal link</dt><dd><a href="' . $internalLink . '">' . $internalLink . '</a></dd>';
+                '<dt>' . $this->translator->trans('entry.metadata.internal_link') . '</dt><dd><a href="' . $internalLink . '">' . $internalLink . '</a></dd>';
 
             if ($entry->isPublic()) {
                 $publicLink = $this->wallabagUrl . '/share/' . $entry->getUid();
-                $chapter .= '<dt>' . $this->translator->trans('entry.filters.is_public_help') . '</dt><dd><a href="' . $publicLink . '">' . $publicLink . '</a></dd>';
+                $chapter .= '<dt>' . $this->translator->trans('entry.metadata.public_link') . '</dt><dd><a href="' . $publicLink . '">' . $publicLink . '</a></dd>';
             }
 
             $chapter .= '</dl>' .
