@@ -86,17 +86,20 @@ class EntriesExport
      */
     public function updateAuthor($method)
     {
-        if ('entry' !== $method) {
+        if ($method !== 'entry') {
             $this->author = 'Various authors';
 
             return $this;
         }
 
-        $this->author = $this->entries[0]->getDomainName();
-
         $publishedBy = $this->entries[0]->getPublishedBy();
-        if (!empty($publishedBy)) {
+        $domainName = $this->entries[0]->getDomainName();
+        if (!empty($publishedBy) && !empty($publishedBy[0])) {
             $this->author = implode(', ', $publishedBy);
+        } elseif (!empty($domainName)) {
+            $this->author = $domainName;
+        } else {
+            $this->author = $this->translator->trans('export.unknown');
         }
 
         return $this;
@@ -188,13 +191,14 @@ class EntriesExport
             // use a hash of the original URL plus title as chapter filename inside the Epub
             $filename = sha1(\sprintf('%s:%s', $entry->getUrl(), $entry->getTitle()));
 
-            $authors = $entry->getDomainName();
-            if (empty($authors)) { // TODO Test this
-                $authors = $this->translator->trans('export.unknown');
-            }
             $publishedBy = $entry->getPublishedBy();
-            if (!empty($publishedBy)) {
-                $authors = implode(',', $publishedBy);
+            $domainName = $entry->getDomainName();
+            if (!empty($publishedBy) && !empty($publishedBy[0])) {
+                $authors = implode(', ', $publishedBy);
+            } elseif (!empty($domainName)) {
+                $authors = $domainName;
+            } else {
+                $authors = $this->translator->trans('export.unknown');
             }
 
             $publishedAt = $entry->getPublishedAt();
@@ -295,7 +299,7 @@ class EntriesExport
 
             $publishedBy = $entry->getPublishedBy();
             $authors = $this->translator->trans('export.unknown');
-            if (!empty($publishedBy)) {
+            if (!empty($publishedBy) && !empty($publishedBy[0])) {
                 $authors = implode(',', $publishedBy);
             }
 
