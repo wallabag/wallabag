@@ -5,23 +5,20 @@ namespace Wallabag\Event\Listener;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Security\Core\AuthenticationEvents;
+use Symfony\Component\Security\Http\Event\LoginFailureEvent;
 
 class AuthenticationFailureListener implements EventSubscriberInterface
 {
-    private $requestStack;
-    private $logger;
-
-    public function __construct(RequestStack $requestStack, LoggerInterface $logger)
-    {
-        $this->requestStack = $requestStack;
-        $this->logger = $logger;
+    public function __construct(
+        private readonly RequestStack $requestStack,
+        private readonly LoggerInterface $logger,
+    ) {
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
-            AuthenticationEvents::AUTHENTICATION_FAILURE => 'onAuthenticationFailure',
+            LoginFailureEvent::class => 'onAuthenticationFailure',
         ];
     }
 
@@ -30,7 +27,7 @@ class AuthenticationFailureListener implements EventSubscriberInterface
      */
     public function onAuthenticationFailure()
     {
-        $request = $this->requestStack->getMasterRequest();
+        $request = $this->requestStack->getMainRequest();
 
         $this->logger->error('Authentication failure for user "' . $request->request->get('_username') . '", from IP "' . $request->getClientIp() . '", with UA: "' . $request->server->get('HTTP_USER_AGENT') . '".');
     }

@@ -26,10 +26,12 @@
                                     <input class="file-path validate" type="text">
                                 </div>
                             </div>
-                            <div class="input-field col s6 with-checkbox">
-                                <h6>{{ 'import.form.mark_as_read_title'|trans }}</h6>
-                                {{ form_widget(form.mark_as_read) }}
-                                {{ form_label(form.mark_as_read) }}
+                            <h6 class="col s12">{{ 'import.form.mark_as_read_title'|trans }}</h6>
+                            <div class="col s6 with-checkbox">
+                                <label for="{{ form.mark_as_read.vars.id }}">
+                                    {{ form_widget(form.mark_as_read) }}
+                                    <span>{{ form.mark_as_read.vars.label|trans }}</span>
+                                </label>
                             </div>
                         </div>
 

@@ -5,8 +5,6 @@ imports:
     - { resource: wallabag.yml }
 
 parameters:
-    # Allows to use the live reload feature for changes in assets
-    use_webpack_dev_server: false
     craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\SymfonyCacheComponentAdapter
     env(DATABASE_URL): '%database_scheme%://%database_user%:%database_password%@%database_host%:%database_port%/%database_name%?unix_socket=%database_socket%&charset=%database_charset%'
 
@@ -31,9 +29,13 @@ framework:
         handler_id: session.handler.native_file
         save_path: "%kernel.project_dir%/var/sessions/%kernel.environment%"
         cookie_secure: auto
+        cookie_samesite: lax
+        storage_factory_id: session.storage.factory.native
     fragments: ~
     http_method_override: true
-    assets: ~
+    assets:
+        base_url: '%domain_name%'
+        json_manifest_path: '%kernel.project_dir%/web/build/manifest.json'
     mailer:
         dsn: "%mailer_dsn%"
     http_client:
@@ -47,6 +49,10 @@ framework:
                     X-Accept: 'application/json'
             request_html_function.client:
                 scope: '.*'
+            browser.client:
+                scope: '.*'
+                verify_host: false
+                verify_peer: false
 
 # Twig Configuration
 twig:
@@ -56,6 +62,7 @@ twig:
     form_themes:
         - "@SpiriitFormFilter/Form/form_div_layout.html.twig"
     globals:
+        wallabag_url: '%domain_name%'
         registration_enabled: '%fosuser_registration%'
 
 # Doctrine Configuration
@@ -72,7 +79,7 @@ doctrine:
                 auto_mapping: true
                 mappings:
                     Wallabag:
-                        type: annotation
+                        type: attribute
                         is_bundle: false
                         dir: '%kernel.project_dir%/src/Entity'
                         prefix: 'Wallabag\Entity'
@@ -95,6 +102,8 @@ doctrine_migrations:
             version_column_name: 'version'
             version_column_length: 192
             executed_at_column_name: 'executed_at'
+    services:
+        Doctrine\Migrations\Version\MigrationFactory: Wallabag\Doctrine\MigrationFactoryDecorator
 
 fos_rest:
     param_fetcher_listener: true
@@ -190,7 +199,7 @@ fos_user:
         address: "%from_email%"
         sender_name: wallabag
     service:
-        mailer: Wallabag\Mailer\UserMailer
+        mailer: fos_user.mailer.twig_symfony
 
 fos_oauth_server:
     db_driver:           orm
@@ -225,19 +234,11 @@ scheb_two_factor:
         template: "Authentication/form.html.twig"
         mailer: Wallabag\Mailer\AuthCodeMailer
 
-rulerz:
-    targets:
-        doctrine: true
-
 old_sound_rabbit_mq:
     connections:
         default:
-            host:     "%rabbitmq_host%"
-            port:     "%rabbitmq_port%"
-            user:     "%rabbitmq_user%"
-            password: "%rabbitmq_password%"
-            vhost:    /
-            lazy:     true
+            url: "%env(RABBITMQ_URL)%"
+            lazy: true
     producers:
         import_pocket:
             connection: default
@@ -303,6 +304,11 @@ old_sound_rabbit_mq:
             connection: default
             exchange_options:
                 name: 'wallabag.import.pocket_html'
+                type: topic
+        import_pocket_csv:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.pocket_csv'
                 type: topic
     consumers:
         import_pocket:
@@ -422,6 +428,15 @@ old_sound_rabbit_mq:
                 name: 'wallabag.import.pocket_html'
             callback: wallabag.consumer.amqp.pocket_html
             qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
+        import_pocket_csv:
+            connection: default
+            exchange_options:
+                name: 'wallabag.import.pocket_csv'
+                type: topic
+            queue_options:
+                name: 'wallabag.import.pocket_csv'
+            callback: wallabag.consumer.amqp.pocket_csv
+            qos_options: {prefetch_count: "%rabbitmq_prefetch_count%"}
 
 fos_js_routing:
     routes_to_expose:
@@ -449,17 +464,6 @@ sensio_framework_extra:
    router:
         annotations: false
 
-httplug:
-    clients:
-        wallabag:
-            factory: Wallabag\Helper\HttpClientFactory
-            config:
-                defaults:
-                    timeout: 10
-            plugins: ['httplug.plugin.logger']
-    discovery:
-        client: false
-
 # define custom entity so we can override length attribute to fix utf8mb4 issue
 craue_config:
     entity_name: Wallabag\Entity\InternalSetting
@@ -467,3 +471,8 @@ craue_config:
 when@dev:
     maker:
         root_namespace: 'Wallabag'
+
+webpack_encore:
+    output_path: '%kernel.project_dir%/web/build'
+    script_attributes:
+        defer: true

@@ -17,7 +17,7 @@ class SiteCredentialControllerTest extends WallabagTestCase
 
         $client->getContainer()->get(Config::class)->set('restricted_access', 0);
 
-        $client->request('GET', '/site-credentials/');
+        $client->request('GET', '/site-credentials');
 
         $this->assertSame(404, $client->getResponse()->getStatusCode());
 
@@ -29,7 +29,7 @@ class SiteCredentialControllerTest extends WallabagTestCase
         $this->logInAs('admin');
         $client = $this->getTestClient();
 
-        $crawler = $client->request('GET', '/site-credentials/');
+        $crawler = $client->request('GET', '/site-credentials');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
@@ -114,7 +114,7 @@ class SiteCredentialControllerTest extends WallabagTestCase
 
         $client->request('GET', '/site-credentials/' . $credential->getId() . '/edit');
 
-        $this->assertSame(403, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
     public function testDeleteSiteCredential()

@@ -14,17 +14,14 @@ use Wallabag\Entity\Config;
 
 class ConfigType extends AbstractType
 {
-    private $languages = [];
-    private $fonts = [];
-
     /**
      * @param array $languages Languages come from configuration, array just code language as key and label as value
      * @param array $fonts     Fonts come from configuration, array just font name as key / value
      */
-    public function __construct($languages, $fonts)
-    {
-        $this->languages = $languages;
-        $this->fonts = $fonts;
+    public function __construct(
+        private $languages,
+        private $fonts,
+    ) {
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -104,7 +101,7 @@ class ConfigType extends AbstractType
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'config';
     }

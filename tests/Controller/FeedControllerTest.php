@@ -36,7 +36,7 @@ class FeedControllerTest extends WallabagTestCase
         $this->assertSame('admin', $xpath->query('/a:feed/a:author/a:name')->item(0)->nodeValue);
 
         $this->assertSame(1, $xpath->query('/a:feed/a:subtitle')->length);
-        if (null !== $tagValue && str_starts_with($type, 'tag')) {
+        if (null !== $tagValue && str_starts_with((string) $type, 'tag')) {
             $this->assertSame('wallabag — ' . $type . ' ' . $tagValue . ' feed', $xpath->query('/a:feed/a:title')->item(0)->nodeValue);
             $this->assertSame('Atom feed for entries tagged with ' . $tagValue, $xpath->query('/a:feed/a:subtitle')->item(0)->nodeValue);
         } else {
@@ -45,7 +45,7 @@ class FeedControllerTest extends WallabagTestCase
         }
 
         $this->assertSame(1, $xpath->query('/a:feed/a:link[@rel="self"]')->length);
-        $this->assertStringContainsString($type, $xpath->query('/a:feed/a:link[@rel="self"]')->item(0)->getAttribute('href'));
+        $this->assertStringContainsString($type, $xpath->query('/a:feed/a:link[@rel="self"]')->item(0)->attributes['href']->value);
 
         $this->assertSame(1, $xpath->query('/a:feed/a:link[@rel="last"]')->length);
 
@@ -127,7 +127,7 @@ class FeedControllerTest extends WallabagTestCase
         $client = $this->getTestClient();
         $client->request('GET', '/feed/admin/SUPERTOKEN/starred');
 
-        $this->assertSame(200, $client->getResponse()->getStatusCode(), 1);
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         $this->validateDom($client->getResponse()->getContent(), 'starred');
     }

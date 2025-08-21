@@ -18,7 +18,6 @@ share_twitter: "Включить возможность поделиться в 
 share_unmark: "Включить возможность поделиться в Unmark.it"
 show_printlink: "Отображать ссылки в версии для печати"
 wallabag_support_url: "Поддержка URL для wallabag"
-wallabag_url: "URL *вашего* wallabag сервиса"
 entry: "запись"
 export: "экспорт"
 import: "импорт"

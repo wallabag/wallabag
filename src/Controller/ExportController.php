@@ -2,10 +2,12 @@
 
 namespace Wallabag\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Wallabag\Entity\Entry;
 use Wallabag\Helper\EntriesExport;
 use Wallabag\Repository\EntryRepository;
 use Wallabag\Repository\TagRepository;
@@ -19,27 +21,13 @@ class ExportController extends AbstractController
     /**
      * Gets one entry content.
      *
-     * @Route("/export/{id}.{format}", name="export_entry", requirements={
-     *     "format": "epub|pdf|json|xml|txt|csv|md",
-     *     "id": "\d+"
-     * })
-     *
      * @return Response
      */
-    public function downloadEntryAction(Request $request, EntryRepository $entryRepository, EntriesExport $entriesExport, string $format, int $id)
+    #[Route(path: '/export/{entry}.{format}', name: 'export_entry', methods: ['GET'], requirements: ['format' => 'epub|pdf|json|xml|txt|csv|md', 'entry' => '\d+'])]
+    #[IsGranted('EXPORT', subject: 'entry')]
+    public function downloadEntryAction(Request $request, EntryRepository $entryRepository, EntriesExport $entriesExport, string $format, Entry $entry)
     {
         try {
-            $entry = $entryRepository->find($id);
-
-            /*
-             * We duplicate EntryController::checkUserAction here as a quick fix for an improper authorization vulnerability
-             *
-             * This should be eventually rewritten
-             */
-            if (null === $entry || null === $this->getUser() || $this->getUser()->getId() !== $entry->getUser()->getId()) {
-                throw new NotFoundHttpException();
-            }
-
             return $entriesExport
                 ->setEntries($entry)
                 ->updateTitle('entry')
@@ -53,13 +41,10 @@ class ExportController extends AbstractController
     /**
      * Export all entries for current user.
      *
-     * @Route("/export/{category}.{format}", name="export_entries", requirements={
-     *     "format": "epub|pdf|json|xml|txt|csv|md",
-     *     "category": "all|unread|starred|archive|tag_entries|untagged|search|annotated|same_domain"
-     * })
-     *
      * @return Response
      */
+    #[Route(path: '/export/{category}.{format}', name: 'export_entries', methods: ['GET'], requirements: ['format' => 'epub|pdf|json|xml|txt|csv|md', 'category' => 'all|unread|starred|archive|tag_entries|untagged|search|annotated|same_domain'])]
+    #[IsGranted('EXPORT_ENTRIES')]
     public function downloadEntriesAction(Request $request, EntryRepository $entryRepository, TagRepository $tagRepository, EntriesExport $entriesExport, string $format, string $category, int $entry = 0)
     {
         $method = ucfirst($category);
@@ -69,7 +54,7 @@ class ExportController extends AbstractController
         if ('same_domain' === $category) {
             $entries = $entryRepository->getBuilderForSameDomainByUser(
                 $this->getUser()->getId(),
-                $request->get('entry')
+                $request->query->getInt('entry')
             )->getQuery()
              ->getResult();
 
@@ -84,8 +69,8 @@ class ExportController extends AbstractController
 
             $title = 'Tag ' . $tag->getLabel();
         } elseif ('search' === $category) {
-            $searchTerm = (isset($request->get('search_entry')['term']) ? $request->get('search_entry')['term'] : '');
-            $currentRoute = (null !== $request->query->get('currentRoute') ? $request->query->get('currentRoute') : '');
+            $searchTerm = $request->query->all('search_entry')['term'] ?? '';
+            $currentRoute = $request->query->get('currentRoute') ?? '';
 
             $entries = $entryRepository->getBuilderForSearchByUser(
                 $this->getUser()->getId(),

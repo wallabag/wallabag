@@ -12,20 +12,15 @@ use Wallabag\Helper\DownloadImages;
 
 class DownloadImagesSubscriber implements EventSubscriberInterface
 {
-    private $em;
-    private $downloadImages;
-    private $enabled;
-    private $logger;
-
-    public function __construct(EntityManagerInterface $em, DownloadImages $downloadImages, $enabled, LoggerInterface $logger)
-    {
-        $this->em = $em;
-        $this->downloadImages = $downloadImages;
-        $this->enabled = $enabled;
-        $this->logger = $logger;
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly DownloadImages $downloadImages,
+        private $enabled,
+        private readonly LoggerInterface $logger,
+    ) {
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             EntrySavedEvent::NAME => 'onEntrySaved',
@@ -84,7 +79,7 @@ class DownloadImagesSubscriber implements EventSubscriberInterface
      *
      * @todo If we want to add async download, it should be done in that method
      *
-     * @return string|false False in case of async
+     * @return string
      */
     private function downloadImages(Entry $entry)
     {

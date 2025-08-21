@@ -1,6 +1,6 @@
 <?php
 
-namespace Security\Voter;
+namespace Tests\Wallabag\Security\Voter;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -133,6 +133,20 @@ class EntryVoterTest extends TestCase
         $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::UNSHARE]));
     }
 
+    public function testVoteReturnsDeniedForNonEntryUserExport(): void
+    {
+        $this->token->method('getUser')->willReturn(new User());
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::EXPORT]));
+    }
+
+    public function testVoteReturnsGrantedForEntryUserExport(): void
+    {
+        $this->token->method('getUser')->willReturn($this->user);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::EXPORT]));
+    }
+
     public function testVoteReturnsDeniedForNonEntryUserDelete(): void
     {
         $this->token->method('getUser')->willReturn(new User());
@@ -145,5 +159,75 @@ class EntryVoterTest extends TestCase
         $this->token->method('getUser')->willReturn($this->user);
 
         $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::DELETE]));
+    }
+
+    public function testVoteReturnsDeniedForNonEntryUserListAnnotations(): void
+    {
+        $this->token->method('getUser')->willReturn(new User());
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::LIST_ANNOTATIONS]));
+    }
+
+    public function testVoteReturnsGrantedForEntryUserListAnnotations(): void
+    {
+        $this->token->method('getUser')->willReturn($this->user);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::LIST_ANNOTATIONS]));
+    }
+
+    public function testVoteReturnsDeniedForNonEntryUserCreateAnnotations(): void
+    {
+        $this->token->method('getUser')->willReturn(new User());
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::CREATE_ANNOTATIONS]));
+    }
+
+    public function testVoteReturnsGrantedForEntryUserCreateAnnotations(): void
+    {
+        $this->token->method('getUser')->willReturn($this->user);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::CREATE_ANNOTATIONS]));
+    }
+
+    public function testVoteReturnsDeniedForNonEntryUserListTags(): void
+    {
+        $this->token->method('getUser')->willReturn(new User());
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::LIST_TAGS]));
+    }
+
+    public function testVoteReturnsGrantedForEntryUserListTags(): void
+    {
+        $this->token->method('getUser')->willReturn($this->user);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::LIST_TAGS]));
+    }
+
+    public function testVoteReturnsDeniedForNonEntryUserTag(): void
+    {
+        $this->token->method('getUser')->willReturn(new User());
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::TAG]));
+    }
+
+    public function testVoteReturnsGrantedForEntryUserTag(): void
+    {
+        $this->token->method('getUser')->willReturn($this->user);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::TAG]));
+    }
+
+    public function testVoteReturnsDeniedForNonEntryUserUntag(): void
+    {
+        $this->token->method('getUser')->willReturn(new User());
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::UNTAG]));
+    }
+
+    public function testVoteReturnsGrantedForEntryUserUntag(): void
+    {
+        $this->token->method('getUser')->willReturn($this->user);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->entryVoter->vote($this->token, $this->entry, [EntryVoter::UNTAG]));
     }
 }

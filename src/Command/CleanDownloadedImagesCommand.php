@@ -16,14 +16,10 @@ class CleanDownloadedImagesCommand extends Command
     protected static $defaultName = 'wallabag:clean-downloaded-images';
     protected static $defaultDescription = 'Cleans downloaded images which are no more associated to an entry';
 
-    private EntryRepository $entryRepository;
-    private DownloadImages $downloadImages;
-
-    public function __construct(EntryRepository $entryRepository, DownloadImages $downloadImages)
-    {
-        $this->entryRepository = $entryRepository;
-        $this->downloadImages = $downloadImages;
-
+    public function __construct(
+        private readonly EntryRepository $entryRepository,
+        private readonly DownloadImages $downloadImages,
+    ) {
         parent::__construct();
     }
 
@@ -38,7 +34,7 @@ class CleanDownloadedImagesCommand extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 

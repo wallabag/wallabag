@@ -3,6 +3,7 @@
 namespace Wallabag\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Wallabag\Entity\Tag;
@@ -13,8 +14,10 @@ use Wallabag\Entity\Tag;
  */
 class TagRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
+    public function __construct(
+        ManagerRegistry $registry,
+        private readonly string $tablePrefix,
+    ) {
         parent::__construct($registry, Tag::class);
     }
 
@@ -83,6 +86,36 @@ class TagRepository extends ServiceEntityRepository
             ->orderBy('t.label')
             ->getQuery()
             ->getArrayResult();
+    }
+
+    /**
+     * Find all tags per user with nb entries.
+     *
+     * @param int $userId
+     *
+     * @return array<array{tag: Tag, nbEntries: int}>
+     */
+    public function findAllTagsWithNbEntries($userId)
+    {
+        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
+        $rsm->addRootEntityFromClassMetadata(Tag::class, 't');
+        $rsm->addEntityResult(Tag::class, 't', 'tag');
+        $rsm->addScalarResult('nbEntries', 'nbEntries', 'integer');
+
+        $sql = <<<SQL
+            SELECT DISTINCT {$rsm->generateSelectClause()}, count(e.id) as nbEntries
+            FROM {$this->tablePrefix}tag t
+            LEFT JOIN {$this->tablePrefix}entry_tag et ON et.tag_id = t.id
+            JOIN {$this->tablePrefix}entry e ON e.id = et.entry_id
+            WHERE e.user_id = :userId
+            GROUP BY t.id
+            ORDER BY t.label
+        SQL;
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+        $query->setParameter('userId', $userId);
+
+        return $query->getResult();
     }
 
     public function findByLabelsAndUser($labels, $userId)

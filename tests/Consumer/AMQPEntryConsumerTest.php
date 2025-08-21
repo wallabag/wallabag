@@ -25,7 +25,7 @@ class AMQPEntryConsumerTest extends TestCase
             ->method('flush');
 
         $em
-            ->expects($this->exactly(2))
+            ->expects($this->once())
             ->method('clear');
 
         $body = <<<'JSON'

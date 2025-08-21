@@ -21,19 +21,14 @@ use Wallabag\Entity\User;
 
 class WallabagRestController extends AbstractFOSRestController
 {
-    protected EntityManagerInterface $entityManager;
-    protected SerializerInterface $serializer;
-    protected AuthorizationCheckerInterface $authorizationChecker;
-    protected TokenStorageInterface $tokenStorage;
-    protected TranslatorInterface $translator;
-
-    public function __construct(EntityManagerInterface $entityManager, SerializerInterface $serializer, AuthorizationCheckerInterface $authorizationChecker, TokenStorageInterface $tokenStorage, TranslatorInterface $translator)
-    {
-        $this->entityManager = $entityManager;
-        $this->serializer = $serializer;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->tokenStorage = $tokenStorage;
-        $this->translator = $translator;
+    public function __construct(
+        protected EntityManagerInterface $entityManager,
+        protected SerializerInterface $serializer,
+        protected AuthorizationCheckerInterface $authorizationChecker,
+        protected TokenStorageInterface $tokenStorage,
+        protected TranslatorInterface $translator,
+        protected bool $registrationEnabled,
+    ) {
     }
 
     /**
@@ -55,10 +50,9 @@ class WallabagRestController extends AbstractFOSRestController
      *
      * @deprecated Should use info endpoint instead
      *
-     * @Route("/api/version.{_format}", methods={"GET"}, name="api_get_version", defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/version.{_format}', name: 'api_get_version', methods: ['GET'], defaults: ['_format' => 'json'])]
     public function getVersionAction()
     {
         $version = $this->getParameter('wallabag.version');
@@ -78,15 +72,14 @@ class WallabagRestController extends AbstractFOSRestController
      *     )
      * )
      *
-     * @Route("/api/info.{_format}", methods={"GET"}, name="api_get_info", defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/info.{_format}', name: 'api_get_info', methods: ['GET'], defaults: ['_format' => 'json'])]
     public function getInfoAction(Config $craueConfig)
     {
         $info = new ApplicationInfo(
             $this->getParameter('wallabag.version'),
-            $this->getParameter('fosuser_registration') && $craueConfig->get('api_user_registration'),
+            $this->registrationEnabled && $craueConfig->get('api_user_registration'),
         );
 
         return (new JsonResponse())->setJson($this->serializer->serialize($info, 'json'));
@@ -96,22 +89,6 @@ class WallabagRestController extends AbstractFOSRestController
     {
         if (false === $this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw new AccessDeniedException();
-        }
-    }
-
-    /**
-     * Validate that the first id is equal to the second one.
-     * If not, throw exception. It means a user try to access information from an other user.
-     *
-     * @param int $requestUserId User id from the requested source
-     */
-    protected function validateUserAccess($requestUserId)
-    {
-        $user = $this->tokenStorage->getToken()->getUser();
-        \assert($user instanceof User);
-
-        if ($requestUserId !== $user->getId()) {
-            throw $this->createAccessDeniedException('Access forbidden. Entry user id: ' . $requestUserId . ', logged user id: ' . $user->getId());
         }
     }
 

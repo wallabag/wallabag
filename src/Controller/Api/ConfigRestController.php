@@ -23,10 +23,9 @@ class ConfigRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/config.{_format}", methods={"GET"}, name="api_get_config", defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/config.{_format}', name: 'api_get_config', methods: ['GET'], defaults: ['_format' => 'json'])]
     public function getConfigAction(SerializerInterface $serializer)
     {
         $this->validateAuthentication();

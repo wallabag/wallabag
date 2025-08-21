@@ -35,7 +35,8 @@ class TagControllerTest extends WallabagTestCase
         $entry->setUrl('http://0.0.0.0/foo');
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
-        $this->getEntityManager()->clear();
+
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/view/' . $entry->getId());
 
@@ -120,14 +121,15 @@ class TagControllerTest extends WallabagTestCase
         $entry->addTag($tag);
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
-        $this->getEntityManager()->clear();
+
+        $client = $this->getTestClient();
 
         // We make a first request to set an history and test redirection after tag deletion
         $crawler = $client->request('GET', '/view/' . $entry->getId());
         $entryUri = $client->getRequest()->getRequestUri();
 
-        $link = $crawler->filter('a[href^="/remove-tag/' . $entry->getId() . '/' . $tag->getId() . '"]')->link();
-        $client->click($link);
+        $form = $crawler->filter('form[action^="/remove-tag/' . $entry->getId() . '/' . $tag->getId() . '"]')->form();
+        $client->submit($form);
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertSame($entryUri, $client->getResponse()->getTargetUrl());
@@ -136,9 +138,8 @@ class TagControllerTest extends WallabagTestCase
         $entry = $this->getEntityManager()->getRepository(Entry::class)->find($entry->getId());
         $this->assertNotContains($this->tagName, $entry->getTagsLabel());
 
-        $client->request('GET', '/remove-tag/' . $entry->getId() . '/' . $tag->getId());
-
-        $this->assertSame(404, $client->getResponse()->getStatusCode());
+        $client->request('GET', '/view/' . $entry->getId());
+        $this->assertStringNotContainsString('/remove-tag/' . $entry->getId() . '/' . $tag->getId(), $client->getResponse()->getContent());
 
         $tag = $client->getContainer()
             ->get(EntityManagerInterface::class)
@@ -166,11 +167,12 @@ class TagControllerTest extends WallabagTestCase
         $entry2->addTag($tag);
         $this->getEntityManager()->persist($entry2);
         $this->getEntityManager()->flush();
-        $this->getEntityManager()->clear();
+
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/tag/list');
-        $link = $crawler->filter('a[id="delete-' . $tag->getSlug() . '"]')->link();
-        $client->click($link);
+        $form = $crawler->filter('#tag-' . $tag->getId())->selectButton('delete')->form();
+        $client->submit($form);
 
         $tag = $client->getContainer()
             ->get(EntityManagerInterface::class)
@@ -254,7 +256,8 @@ class TagControllerTest extends WallabagTestCase
         $this->getEntityManager()->persist($entry2);
 
         $this->getEntityManager()->flush();
-        $this->getEntityManager()->clear();
+
+        $client = $this->getTestClient();
 
         // We make a first request to set an history and test redirection after tag deletion
         $crawler = $client->request('GET', '/tag/list');
@@ -321,7 +324,8 @@ class TagControllerTest extends WallabagTestCase
         $this->getEntityManager()->persist($entry);
 
         $this->getEntityManager()->flush();
-        $this->getEntityManager()->clear();
+
+        $client = $this->getTestClient();
 
         // We make a first request to set an history and test redirection after tag deletion
         $crawler = $client->request('GET', '/tag/list');
@@ -376,7 +380,8 @@ class TagControllerTest extends WallabagTestCase
         $this->getEntityManager()->persist($entry);
 
         $this->getEntityManager()->flush();
-        $this->getEntityManager()->clear();
+
+        $client = $this->getTestClient();
 
         // We make a first request to set an history and test redirection after tag deletion
         $crawler = $client->request('GET', '/tag/list');
@@ -446,7 +451,8 @@ class TagControllerTest extends WallabagTestCase
         $this->getEntityManager()->persist($entry2);
 
         $this->getEntityManager()->flush();
-        $this->getEntityManager()->clear();
+
+        $client = $this->getTestClient();
 
         // We make a first request to set an history and test redirection after tag deletion
         $crawler = $client->request('GET', '/tag/list');
@@ -496,7 +502,8 @@ class TagControllerTest extends WallabagTestCase
         $entry->setUrl('http://0.0.0.0/tag-caché');
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
-        $this->getEntityManager()->clear();
+
+        $client = $this->getTestClient();
 
         $crawler = $client->request('GET', '/view/' . $entry->getId());
 
@@ -548,7 +555,7 @@ class TagControllerTest extends WallabagTestCase
 
         $crawler = $client->submit($form, $data);
 
-        $client->click($crawler->selectLink('entry.list.assign_search_tag')->link());
+        $client->submit($crawler->selectButton('entry.list.assign_search_tag')->form());
         $client->followRedirect();
 
         $entries = $client->getContainer()

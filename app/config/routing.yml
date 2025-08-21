@@ -13,6 +13,7 @@ doc-api-json:
 
 homepage:
     path: "/{page}"
+    methods: GET
     defaults:
         _controller: 'Wallabag\Controller\EntryController::showUnreadAction'
         page : 1
@@ -27,23 +28,27 @@ fos_oauth_server_token:
 
 craue_config_settings_modify:
     path: /settings
+    methods: [GET, POST]
     defaults:
         _controller: 'Craue\ConfigBundle\Controller\SettingsController::modifyAction'
 
 fos_js_routing:
-    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing-sf4.xml"
 
 2fa_login:
     path: /2fa
+    methods: GET
     defaults:
         _controller: "scheb_two_factor.form_controller:form"
 
 2fa_login_check:
     path: /2fa_check
+    methods: POST
 
 # redirect RSS feed to Atom
 rss_to_atom_unread:
     path: /{username}/{token}/unread.xml
+    methods: GET
     defaults:
         _controller: 'Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction'
         route: unread_feed
@@ -51,6 +56,7 @@ rss_to_atom_unread:
 
 rss_to_atom_archive:
     path: /{username}/{token}/archive.xml
+    methods: GET
     defaults:
         _controller: 'Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction'
         route: archive_feed
@@ -58,6 +64,7 @@ rss_to_atom_archive:
 
 rss_to_atom_starred:
     path: /{username}/{token}/starred.xml
+    methods: GET
     defaults:
         _controller: 'Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction'
         route: starred_feed
@@ -65,6 +72,7 @@ rss_to_atom_starred:
 
 rss_to_atom_all:
     path: /{username}/{token}/all.xml
+    methods: GET
     defaults:
         _controller: 'Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction'
         route: all_feed
@@ -72,6 +80,7 @@ rss_to_atom_all:
 
 rss_to_atom_tags:
     path: /{username}/{token}/tags/{slug}.xml
+    methods: GET
     defaults:
         _controller: 'Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction'
         route: tag_feed

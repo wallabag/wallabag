@@ -5,22 +5,21 @@ namespace Wallabag\Repository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Wallabag\Entity\SiteCredential;
+use Wallabag\Entity\User;
 use Wallabag\Helper\CryptoProxy;
 
 /**
  * SiteCredentialRepository.
  *
- * @method SiteCredential[] findByUser(int $userId)
+ * @method SiteCredential[] findByUser(User $user)
  */
 class SiteCredentialRepository extends ServiceEntityRepository
 {
-    private $cryptoProxy;
-
-    public function __construct(ManagerRegistry $registry, CryptoProxy $cryptoProxy)
-    {
+    public function __construct(
+        ManagerRegistry $registry,
+        private readonly CryptoProxy $cryptoProxy,
+    ) {
         parent::__construct($registry, SiteCredential::class);
-
-        $this->cryptoProxy = $cryptoProxy;
     }
 
     /**

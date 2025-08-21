@@ -40,7 +40,7 @@ class TaggingRuleType extends AbstractType
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'tagging_rule';
     }

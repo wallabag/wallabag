@@ -5,8 +5,9 @@ use ShipMonk\ComposerDependencyAnalyser\Config\ErrorType;
 
 $config = new Configuration();
 
-return $config
+$config
     ->disableComposerAutoloadPathScan()
+    ->disableExtensionsAnalysis()
     ->enableAnalysisOfUnusedDevDependencies()
     ->addPathToScan(__DIR__ . '/app', false)
     ->addPathToScan(__DIR__ . '/migrations', false)
@@ -22,14 +23,13 @@ return $config
         'friendsoftwig/twigcs',
         'incenteev/composer-parameter-handler',
         'j0k3r/graby-site-config',
+        'j0k3r/php-readability',
         'laminas/laminas-code',
         'lcobucci/jwt',
         'mgargano/simplehtmldom',
         'mnapoli/piwik-twig-extension',
         'ocramius/proxy-manager',
         'pagerfanta/twig',
-        'php-http/client-common',
-        'php-http/httplug',
         'php-http/mock-client',
         'phpstan/extension-installer',
         'phpstan/phpstan',
@@ -38,30 +38,22 @@ return $config
         'phpstan/phpstan-symfony',
         'psr/http-client',
         'psr/http-factory',
-        'psr/http-message',
-        'rulerz-php/doctrine-orm',
-        'scheb/2fa-qr-code',
+        'rector/rector',
         'scheb/2fa-trusted-device',
         'shipmonk/composer-dependency-analyser',
         'symfony/asset',
-        'symfony/browser-kit',
         'symfony/css-selector',
-        'symfony/doctrine-bridge',
         'symfony/google-mailer',
         'symfony/intl',
         'symfony/phpunit-bridge',
-        'symfony/polyfill-php80',
-        'symfony/polyfill-php81',
         'symfony/proxy-manager-bridge',
         'symfony/templating',
         'symfony/var-dumper',
         'twig/string-extra',
     ], [ErrorType::UNUSED_DEPENDENCY])
     ->ignoreErrorsOnPackages([
-        'guzzlehttp/streams',
         'monolog/monolog',
         'symfony/filesystem',
-        'symfony/http-client',
     ], [ErrorType::PROD_DEPENDENCY_ONLY_IN_DEV])
     ->ignoreErrorsOnPackages([
         'dama/doctrine-test-bundle',
@@ -71,4 +63,9 @@ return $config
         'symfony/web-profiler-bundle',
         'symfony/web-server-bundle',
     ], [ErrorType::DEV_DEPENDENCY_IN_PROD])
+    ->ignoreErrorsOnPackages([
+        'gedmo/doctrine-extensions',
+    ], [ErrorType::SHADOW_DEPENDENCY])
 ;
+
+return $config;

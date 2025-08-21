@@ -51,7 +51,7 @@ footer:
     wallabag:
         elsewhere: Weż wallabag ze sobą
         social: Społeczność
-        powered_by: Kontrolowany przez
+        powered_by: działa dzięki
         about: O nas
     stats: Od %user_creation% przeczytałeś %nb_archives% artykułów. To jest %per_day% dziennie!
 config:
@@ -100,19 +100,6 @@ config:
         lineheight_label: Wysokość linii
         maxwidth_label: Maksymalna szerokość
         help_fontsize: Możesz wybrać rozmiar czcionek do użycia.
-    form_rss:
-        description: Kanały RSS prowadzone przez wallabag pozwalają Ci na czytanie twoich zapisanych artykułów w twoim ulubionym czytniku RSS. Musisz najpierw wygenerować tokena.‌
-        token_label: Token RSS
-        no_token: Brak tokena
-        token_create: Stwórz tokena
-        token_reset: Zresetuj swojego tokena
-        rss_links: RSS links
-        rss_link:
-            unread: Nieprzeczytane
-            starred: Oznaczone gwiazdką
-            archive: Archiwum
-            all: Wszystkie
-        rss_limit: Link do RSS
     form_user:
         two_factor_description: Włączenie autoryzacji dwuetapowej oznacza, że będziesz otrzymywał maile z kodem przy każdym nowym, niezaufanym połączeniu.
         name_label: Nazwa
@@ -244,13 +231,13 @@ entry:
     default_title: Tytuł wpisu
     page_titles:
         unread: Nieprzeczytane wpisy
-        starred: Wpisy wyróżnione
+        starred: Wyróżnione wpisy
         archived: Zarchiwizowane wpisy
         filtered: Odfiltrowane wpisy
         filtered_tags: 'Filtrowane po tagach:'
         filtered_search: 'Filtrowanie po wyszukiwaniu:'
-        untagged: Odtaguj wpisy
-        all: Wszystkie przedmioty
+        untagged: Nieotagowane wpisy
+        all: Wszystkie wpisy
         with_annotations: Wpisy z adnotacjami
         same_domain: Ta sama domena
     list:
@@ -491,7 +478,7 @@ tag:
     list:
         number_on_the_page: '{0} Nie ma tagów.|{1} Jest jeden tag.|]1,Inf[ Są %count% tagi.'
         see_untagged_entries: Zobacz nieotagowane wpisy
-        untagged: Odtaguj wpisy
+        untagged: Nieotagowane wpisy
         no_untagged_entries: Nie ma nieoznaczonych wpisów.
     new:
         add: Dodaj
@@ -570,6 +557,10 @@ import:
         description: Ten importer zaimportuje wszystkie Twoje artykuły z Omnivore.
         page_title: Importuj > Omnivore
         how_to: Rozpakuj eksport z Omnivore, a następnie prześlij po kolei wszystkie pliki JSON o nazwie „metadata_x_to_y.json”.
+    pocket_csv:
+        description: Ten importer zaimportuje wszystkie zakładki Pocket (poprzez eksport CSV). Po prostu przejdź do https://getpocket.com/export, a następnie wyeksportuj plik. Zostanie pobrany plik ZIP (taki jak „pocket.zip”). Wypakuj go, otrzymasz plik CSV o nazwie „part_000000.csv”.
+        page_title: Importuj > Pocket CSV
+        how_to: Wybierz plik kopii zapasowej zakładek i kliknij przycisk poniżej, aby go zaimportować. Należy pamiętać, że proces ten może potrwać długo, ponieważ wszystkie artykuły muszą zostać pobrane.
 developer:
     page_title: Zarządzanie klientami API
     welcome_message: Witaj w API wallabag
@@ -694,6 +685,7 @@ flashes:
             tagging_rules_not_imported: Błąd podczas importowania zasad tagowania
             ignore_origin_rules_deleted: Usunięto zasadę ignorowania pochodzenia
             tagging_rules_reset: Reguły tagowania zostały zresetowane
+            otp_code_invalid: Nieprawidłowy kod uwierzytelniania dwuskładnikowego
     entry:
         notice:
             entry_already_saved: Wpis już został dodany %date%

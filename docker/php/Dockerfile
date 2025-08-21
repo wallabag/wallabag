@@ -1,4 +1,13 @@
-FROM php:8.1-fpm AS rootless
+FROM golang as envsubst
+
+ARG ENVSUBST_VERSION=v1.3.0
+
+# envsubst from gettext can not replace env vars with default values
+# this package is not available for ARM32 and we have to build it from source code
+# flag -ldflags "-s -w" produces a smaller executable
+RUN go install -ldflags "-s -w" -v github.com/a8m/envsubst/cmd/envsubst@${ENVSUBST_VERSION}
+
+FROM php:8.2-fpm AS rootless
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG NODE_VERSION=20
@@ -12,8 +21,7 @@ RUN apt-get update \
       openssl \
       software-properties-common
 
-RUN curl 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key' | apt-key add - \
-    && echo "deb https://deb.nodesource.com/node_${NODE_VERSION}.x $(lsb_release -cs) main" > /etc/apt/sources.list.d/nodesource.list
+RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash -
 
 RUN apt-get update && apt-get install -y \
         libmcrypt-dev \
@@ -51,14 +59,13 @@ RUN docker-php-ext-install -j "$(nproc)" \
         tidy \
         zip
 
-RUN pecl install redis; \
-    pecl install imagick; \
-    pecl install xdebug-3.1.6; \
-    docker-php-ext-enable \
+RUN pecl install redis-6.1.0 \
+    && pecl install imagick-3.7.0 \
+    && pecl install xdebug-3.4.1 \
+    && docker-php-ext-enable \
         redis \
         imagick \
-        xdebug \
-    ;
+        xdebug
 
 RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
     && architecture=$(uname -m) \
@@ -77,10 +84,8 @@ RUN mkdir -p /tmp/blackfire \
 
 RUN npm install -g yarn
 
-RUN curl -L -o /usr/local/bin/envsubst https://github.com/a8m/envsubst/releases/download/v1.1.0/envsubst-`uname -s`-`uname -m`; \
-    chmod +x /usr/local/bin/envsubst
-
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+COPY --from=envsubst /go/bin/envsubst /usr/local/bin/envsubst
 
 COPY entrypoint.sh /entrypoint.sh
 COPY config/ /opt/wallabag/config/

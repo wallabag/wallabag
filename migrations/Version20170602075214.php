@@ -12,9 +12,7 @@ class Version20170602075214 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        $apiUserRegistration = $this->container
-            ->get('doctrine.orm.default_entity_manager')
-            ->getConnection()
+        $apiUserRegistration = $this->connection
             ->fetchOne('SELECT * FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'api_user_registration'");
 
         $this->skipIf(false !== $apiUserRegistration, 'It seems that you already played this migration.');

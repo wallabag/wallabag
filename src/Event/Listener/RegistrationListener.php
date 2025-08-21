@@ -11,22 +11,15 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class RegistrationListener implements EventSubscriberInterface
 {
     /**
-     * @var bool
+     * @param bool $registrationEnabled
      */
-    private $registrationEnabled;
-
-    /**
-     * @var UrlGeneratorInterface
-     */
-    private $urlGenerator;
-
-    public function __construct($registrationEnabled, UrlGeneratorInterface $urlGenerator)
-    {
-        $this->registrationEnabled = $registrationEnabled;
-        $this->urlGenerator = $urlGenerator;
+    public function __construct(
+        private $registrationEnabled,
+        private readonly UrlGeneratorInterface $urlGenerator,
+    ) {
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             FOSUserEvents::REGISTRATION_INITIALIZE => 'onRegistrationInitialize',

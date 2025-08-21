@@ -66,6 +66,7 @@ class SecurityControllerTest extends WallabagTestCase
             ->getRepository(User::class)
             ->findOneByUsername('admin');
         $user->setGoogleAuthenticatorSecret('26LDIHYGHNELOQEM');
+        $user->setGoogleAuthenticator(true);
         $em->persist($user);
         $em->flush();
 
@@ -78,6 +79,7 @@ class SecurityControllerTest extends WallabagTestCase
             ->getRepository(User::class)
             ->findOneByUsername('admin');
         $user->setGoogleAuthenticatorSecret(null);
+        $user->setGoogleAuthenticator(false);
         $em->persist($user);
         $em->flush();
     }
@@ -88,8 +90,6 @@ class SecurityControllerTest extends WallabagTestCase
 
         if (!$client->getContainer()->getParameter('fosuser_registration')) {
             $this->markTestSkipped('fosuser_registration is not enabled.');
-
-            return;
         }
 
         $client->followRedirects();

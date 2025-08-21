@@ -1,6 +1,6 @@
 # wallabag
 
-![CI](https://github.com/wallabag/wallabag/workflows/CI/badge.svg)
+[![CI](https://github.com/wallabag/wallabag/actions/workflows/continuous-integration.yml/badge.svg?branch=master)](https://github.com/wallabag/wallabag/actions/workflows/continuous-integration.yml?query=branch%3Amaster)
 [![Matrix](https://matrix.to/img/matrix-badge.svg)](https://matrix.to/#/#wallabag:matrix.org)
 [![Donation Status](https://img.shields.io/liberapay/goal/wallabag.svg?logo=liberapay)](https://liberapay.com/wallabag/donate)
 [![Translation status](https://hosted.weblate.org/widgets/wallabag/-/svg-badge.svg)](https://hosted.weblate.org/engage/wallabag/?utm_source=widget)

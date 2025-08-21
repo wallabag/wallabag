@@ -11,8 +11,6 @@ class ExportControllerTest extends WallabagTestCase
 {
     private $adminEntry;
     private $bobEntry;
-    private $sameDomainEntry;
-    private $sameDomainEntry2;
 
     public function testLogin()
     {
@@ -177,7 +175,7 @@ class ExportControllerTest extends WallabagTestCase
         $this->assertSame('attachment; filename="Archive articles.csv"', $headers->get('content-disposition'));
         $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
 
-        $csv = str_getcsv($client->getResponse()->getContent(), "\n");
+        $csv = str_getcsv((string) $client->getResponse()->getContent(), "\n");
 
         $this->assertGreaterThan(1, $csv);
         // +1 for title line
@@ -216,7 +214,7 @@ class ExportControllerTest extends WallabagTestCase
         $this->assertSame('attachment; filename="' . $this->getSanitizedFilename($contentInDB->getTitle()) . '.json"', $headers->get('content-disposition'));
         $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
 
-        $content = json_decode($client->getResponse()->getContent(), true);
+        $content = json_decode((string) $client->getResponse()->getContent(), true);
         $this->assertArrayHasKey('id', $content[0]);
         $this->assertArrayHasKey('title', $content[0]);
         $this->assertArrayHasKey('url', $content[0]);
@@ -262,7 +260,7 @@ class ExportControllerTest extends WallabagTestCase
         $this->assertSame('attachment; filename="Search entry search articles.json"', $headers->get('content-disposition'));
         $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
 
-        $content = json_decode($client->getResponse()->getContent(), true);
+        $content = json_decode((string) $client->getResponse()->getContent(), true);
         $this->assertCount(1, $content);
 
         $this->tearDownForJsonExportFromSearch();
@@ -339,7 +337,7 @@ class ExportControllerTest extends WallabagTestCase
         $this->assertSame('attachment; filename="Same domain articles.json"', $headers->get('content-disposition'));
         $this->assertSame('UTF-8', $headers->get('content-transfer-encoding'));
 
-        $content = json_decode($client->getResponse()->getContent(), true);
+        $content = json_decode((string) $client->getResponse()->getContent(), true);
         $this->assertCount(4, $content);
     }
 

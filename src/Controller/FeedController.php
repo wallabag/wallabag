@@ -6,6 +6,7 @@ use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
 use Pagerfanta\Pagerfanta;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,22 +20,19 @@ use Wallabag\Repository\EntryRepository;
 
 class FeedController extends AbstractController
 {
-    private EntryRepository $entryRepository;
-
-    public function __construct(EntryRepository $entryRepository)
-    {
-        $this->entryRepository = $entryRepository;
+    public function __construct(
+        private readonly EntryRepository $entryRepository,
+    ) {
     }
 
     /**
      * Shows unread entries for current user.
      *
-     * @Route("/feed/{username}/{token}/unread/{page}", name="unread_feed", defaults={"page"=1, "_format"="xml"})
-     *
-     * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
-     *
      * @return Response
      */
+    #[Route(path: '/feed/{username}/{token}/unread/{page}', name: 'unread_feed', methods: ['GET'], defaults: ['page' => 1, '_format' => 'xml'])]
+    #[IsGranted('PUBLIC_ACCESS')]
+    #[ParamConverter('user', class: User::class, converter: 'username_feed_token_converter')]
     public function showUnreadFeedAction(User $user, $page)
     {
         return $this->showEntries('unread', $user, $page);
@@ -43,12 +41,11 @@ class FeedController extends AbstractController
     /**
      * Shows read entries for current user.
      *
-     * @Route("/feed/{username}/{token}/archive/{page}", name="archive_feed", defaults={"page"=1, "_format"="xml"})
-     *
-     * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
-     *
      * @return Response
      */
+    #[Route(path: '/feed/{username}/{token}/archive/{page}', name: 'archive_feed', methods: ['GET'], defaults: ['page' => 1, '_format' => 'xml'])]
+    #[IsGranted('PUBLIC_ACCESS')]
+    #[ParamConverter('user', class: User::class, converter: 'username_feed_token_converter')]
     public function showArchiveFeedAction(User $user, $page)
     {
         return $this->showEntries('archive', $user, $page);
@@ -57,12 +54,11 @@ class FeedController extends AbstractController
     /**
      * Shows starred entries for current user.
      *
-     * @Route("/feed/{username}/{token}/starred/{page}", name="starred_feed", defaults={"page"=1, "_format"="xml"})
-     *
-     * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
-     *
      * @return Response
      */
+    #[Route(path: '/feed/{username}/{token}/starred/{page}', name: 'starred_feed', methods: ['GET'], defaults: ['page' => 1, '_format' => 'xml'])]
+    #[IsGranted('PUBLIC_ACCESS')]
+    #[ParamConverter('user', class: User::class, converter: 'username_feed_token_converter')]
     public function showStarredFeedAction(User $user, $page)
     {
         return $this->showEntries('starred', $user, $page);
@@ -71,12 +67,11 @@ class FeedController extends AbstractController
     /**
      * Shows all entries for current user.
      *
-     * @Route("/feed/{username}/{token}/all/{page}", name="all_feed", defaults={"page"=1, "_format"="xml"})
-     *
-     * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
-     *
      * @return Response
      */
+    #[Route(path: '/feed/{username}/{token}/all/{page}', name: 'all_feed', methods: ['GET'], defaults: ['page' => 1, '_format' => 'xml'])]
+    #[IsGranted('PUBLIC_ACCESS')]
+    #[ParamConverter('user', class: User::class, converter: 'username_feed_token_converter')]
     public function showAllFeedAction(User $user, $page)
     {
         return $this->showEntries('all', $user, $page);
@@ -85,13 +80,12 @@ class FeedController extends AbstractController
     /**
      * Shows entries associated to a tag for current user.
      *
-     * @Route("/feed/{username}/{token}/tags/{slug}/{page}", name="tag_feed", defaults={"page"=1, "_format"="xml"})
-     *
-     * @ParamConverter("user", class="Wallabag\Entity\User", converter="username_feed_token_converter")
-     * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
-     *
      * @return Response
      */
+    #[Route(path: '/feed/{username}/{token}/tags/{slug}/{page}', name: 'tag_feed', methods: ['GET'], defaults: ['page' => 1, '_format' => 'xml'])]
+    #[IsGranted('PUBLIC_ACCESS')]
+    #[ParamConverter('user', class: User::class, converter: 'username_feed_token_converter')]
+    #[ParamConverter('tag', options: ['mapping' => ['slug' => 'slug']])]
     public function showTagsFeedAction(Request $request, User $user, Tag $tag, PreparePagerForEntries $preparePagerForEntries, $page)
     {
         $sort = $request->query->get('sort', 'created');
@@ -131,13 +125,9 @@ class FeedController extends AbstractController
         $perPage = $user->getConfig()->getFeedLimit() ?: $this->getParameter('wallabag.feed_limit');
         $entries->setMaxPerPage($perPage);
 
-        if (null === $entries) {
-            throw $this->createNotFoundException('No entries found?');
-        }
-
         try {
             $entries->setCurrentPage($page);
-        } catch (OutOfRangeCurrentPageException $e) {
+        } catch (OutOfRangeCurrentPageException) {
             if ($page > 1) {
                 return $this->redirect($url . '?page=' . $entries->getNbPages(), 302);
             }
@@ -150,7 +140,6 @@ class FeedController extends AbstractController
                 'url' => $url,
                 'entries' => $entries,
                 'user' => $user->getUsername(),
-                'domainName' => $this->getParameter('domain_name'),
                 'version' => $this->getParameter('wallabag.version'),
                 'tag' => $tag->getSlug(),
                 'updated' => $this->prepareFeedUpdatedDate($entries, $sort),
@@ -186,22 +175,13 @@ class FeedController extends AbstractController
      */
     private function showEntries(string $type, User $user, $page = 1)
     {
-        switch ($type) {
-            case 'starred':
-                $qb = $this->entryRepository->getBuilderForStarredByUser($user->getId());
-                break;
-            case 'archive':
-                $qb = $this->entryRepository->getBuilderForArchiveByUser($user->getId());
-                break;
-            case 'unread':
-                $qb = $this->entryRepository->getBuilderForUnreadByUser($user->getId());
-                break;
-            case 'all':
-                $qb = $this->entryRepository->getBuilderForAllByUser($user->getId());
-                break;
-            default:
-                throw new \InvalidArgumentException(\sprintf('Type "%s" is not implemented.', $type));
-        }
+        $qb = match ($type) {
+            'starred' => $this->entryRepository->getBuilderForStarredByUser($user->getId()),
+            'archive' => $this->entryRepository->getBuilderForArchiveByUser($user->getId()),
+            'unread' => $this->entryRepository->getBuilderForUnreadByUser($user->getId()),
+            'all' => $this->entryRepository->getBuilderForAllByUser($user->getId()),
+            default => throw new \InvalidArgumentException(\sprintf('Type "%s" is not implemented.', $type)),
+        };
 
         $pagerAdapter = new DoctrineORMAdapter($qb->getQuery(), true, false);
         $entries = new Pagerfanta($pagerAdapter);
@@ -220,7 +200,7 @@ class FeedController extends AbstractController
 
         try {
             $entries->setCurrentPage((int) $page);
-        } catch (OutOfRangeCurrentPageException $e) {
+        } catch (OutOfRangeCurrentPageException) {
             if ($page > 1) {
                 return $this->redirect($url . '/' . $entries->getNbPages());
             }
@@ -231,7 +211,6 @@ class FeedController extends AbstractController
             'url' => $url,
             'entries' => $entries,
             'user' => $user->getUsername(),
-            'domainName' => $this->getParameter('domain_name'),
             'version' => $this->getParameter('wallabag.version'),
             'updated' => $this->prepareFeedUpdatedDate($entries),
         ], new Response('', 200, ['Content-Type' => 'application/atom+xml']));

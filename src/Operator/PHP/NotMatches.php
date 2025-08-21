@@ -16,6 +16,10 @@ class NotMatches
 {
     public function __invoke($subject, $pattern)
     {
-        return false === stripos($subject, $pattern);
+        if (null === $subject) {
+            return true;
+        }
+
+        return false === stripos((string) $subject, (string) $pattern);
     }
 }

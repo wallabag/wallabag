@@ -8,10 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\AuthenticationEvents;
-use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Http\Authenticator\AuthenticatorInterface;
+use Symfony\Component\Security\Http\Event\LoginFailureEvent;
 use Wallabag\Event\Listener\AuthenticationFailureListener;
 
 class AuthenticationFailureListenerTest extends TestCase
@@ -43,7 +42,7 @@ class AuthenticationFailureListenerTest extends TestCase
 
     public function testOnAuthenticationFailure()
     {
-        $token = $this->getMockBuilder(TokenInterface::class)
+        $authenticator = $this->getMockBuilder(AuthenticatorInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -51,15 +50,9 @@ class AuthenticationFailureListenerTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $event = new AuthenticationFailureEvent(
-            $token,
-            $exception
-        );
+        $event = new LoginFailureEvent($exception, $authenticator, $this->requestStack->getMainRequest(), null, 'main', null);
 
-        $this->dispatcher->dispatch(
-            $event,
-            AuthenticationEvents::AUTHENTICATION_FAILURE
-        );
+        $this->dispatcher->dispatch($event);
 
         $records = $this->logHandler->getRecords();
 

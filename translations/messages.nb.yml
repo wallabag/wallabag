@@ -100,16 +100,6 @@ config:
         help_lineheight: Du kan velge linjehøyde du vil bruke.
         font_label: Skrifttype
         help_fontsize: Du kan velge skriftstørrelse du vil bruke.
-    form_rss:
-        token_label: RSS-symbol
-        no_token: Inget symbol
-        token_create: Opprett ditt symbol
-        token_reset: Regenerer ditt symbol
-        rss_links: RSS-lenker
-        rss_link:
-            unread: ulest
-            starred: stjernemerket
-            archive: arkivert
     form_user:
         name_label: Navn
         email_label: E-post
@@ -202,6 +192,7 @@ config:
         tags: Fjern ALLE etiketter
         annotations: Fjern ALLE anføringer
         title: Tilbakestill område (faresone)
+        tagging_rules: Fjern ALLE regler for tagging
     form_feed:
         no_token: Ingen symbol
         token_label: Strøm-symbol

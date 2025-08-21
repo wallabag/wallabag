@@ -47,8 +47,6 @@ parameters:
 
     from_email: no-reply@wallabag.org
 
-    rss_limit: 50
-
     # RabbitMQ processing
     rabbitmq_host: localhost
     rabbitmq_port: 5672
@@ -57,7 +55,7 @@ parameters:
     rabbitmq_prefetch_count: 10
 
     # Redis processing
-    redis_scheme: tcp
+    redis_scheme: redis
     redis_host: localhost
     redis_port: 6379
     redis_path: null

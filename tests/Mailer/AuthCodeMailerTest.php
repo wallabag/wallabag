@@ -54,7 +54,7 @@ TWIG;
 
         $user = new User();
         $user->setEmailTwoFactor(true);
-        $user->setEmailAuthCode(666666);
+        $user->setEmailAuthCode('666666');
         $user->setEmail('test@wallabag.io');
         $user->setName('Bob');
 
@@ -63,8 +63,7 @@ TWIG;
             $this->twig,
             'nobody@test.io',
             'wallabag test',
-            'http://0.0.0.0/support',
-            'http://0.0.0.0/'
+            'http://0.0.0.0/support'
         );
 
         $authCodeMailer->sendAuthCode($user);

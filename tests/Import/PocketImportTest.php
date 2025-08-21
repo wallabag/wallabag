@@ -185,8 +185,7 @@ class PocketImportTest extends TestCase
                     }
                 }
             }
-JSON
-                , ['response_headers' => ['Content-Type: application/json']]),
+JSON, ['response_headers' => ['Content-Type: application/json']]),
         ]);
 
         $pocketImport = $this->getPocketImport('ConsumerKey', 1);
@@ -207,9 +206,7 @@ JSON
         $this->em
             ->expects($this->any())
             ->method('persist')
-            ->with($this->callback(function ($persistedEntry) {
-                return (bool) $persistedEntry->isArchived() && (bool) $persistedEntry->isStarred();
-            }));
+            ->with($this->callback(fn ($persistedEntry) => (bool) $persistedEntry->isArchived() && (bool) $persistedEntry->isStarred()));
 
         $entry = new Entry($this->user);
 
@@ -276,8 +273,7 @@ JSON
                     }
                 }
             }
-JSON
-                , ['response_headers' => ['Content-Type: application/json']]),
+JSON, ['response_headers' => ['Content-Type: application/json']]),
         ]);
 
         $pocketImport = $this->getPocketImport('ConsumerKey', 2);
@@ -299,9 +295,7 @@ JSON
         $this->em
             ->expects($this->any())
             ->method('persist')
-            ->with($this->callback(function ($persistedEntry) {
-                return (bool) $persistedEntry->isArchived();
-            }));
+            ->with($this->callback(fn ($persistedEntry) => (bool) $persistedEntry->isArchived()));
 
         $entry = new Entry($this->user);
 
@@ -356,8 +350,7 @@ JSON;
                     "229279690": $body
                 }
             }
-JSON
-                , ['response_headers' => ['Content-Type: application/json']]),
+JSON, ['response_headers' => ['Content-Type: application/json']]),
         ]);
 
         $pocketImport = $this->getPocketImport();
@@ -439,8 +432,7 @@ JSON;
                     "229279690": $body
                 }
             }
-JSON
-                , ['response_headers' => ['Content-Type: application/json']]),
+JSON, ['response_headers' => ['Content-Type: application/json']]),
         ]);
 
         $pocketImport = $this->getPocketImport();
@@ -516,8 +508,7 @@ JSON
                 }
             }
 
-JSON
-                , ['response_headers' => ['Content-Type: application/json']]),
+JSON, ['response_headers' => ['Content-Type: application/json']]),
         ]);
 
         $pocketImport = $this->getPocketImport('ConsumerKey', 1);

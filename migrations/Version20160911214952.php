@@ -12,18 +12,14 @@ class Version20160911214952 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        $redis = $this->container
-            ->get('doctrine.orm.default_entity_manager')
-            ->getConnection()
+        $redis = $this->connection
             ->fetchOne('SELECT * FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'import_with_redis'");
 
         if (false === $redis) {
             $this->addSql('INSERT INTO ' . $this->getTable('craue_config_setting') . " (name, value, section) VALUES ('import_with_redis', 0, 'import')");
         }
 
-        $rabbitmq = $this->container
-            ->get('doctrine.orm.default_entity_manager')
-            ->getConnection()
+        $rabbitmq = $this->connection
             ->fetchOne('SELECT * FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'import_with_rabbitmq'");
 
         if (false === $rabbitmq) {

@@ -12,18 +12,14 @@ class Version20161117071626 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        $share = $this->container
-            ->get('doctrine.orm.default_entity_manager')
-            ->getConnection()
+        $share = $this->connection
             ->fetchOne('SELECT * FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'share_unmark'");
 
         if (false === $share) {
             $this->addSql('INSERT INTO ' . $this->getTable('craue_config_setting') . " (name, value, section) VALUES ('share_unmark', 0, 'entry')");
         }
 
-        $unmark = $this->container
-            ->get('doctrine.orm.default_entity_manager')
-            ->getConnection()
+        $unmark = $this->connection
             ->fetchOne('SELECT * FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'unmark_url'");
 
         if (false === $unmark) {

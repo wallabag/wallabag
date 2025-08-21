@@ -10,48 +10,22 @@ use OldSound\RabbitMqBundle\RabbitMq\Consumer;
  */
 class RabbitMQConsumerTotalProxy
 {
-    private Consumer $pocketConsumer;
-    private Consumer $readabilityConsumer;
-    private Consumer $wallabagV1Consumer;
-    private Consumer $wallabagV2Consumer;
-    private Consumer $firefoxConsumer;
-    private Consumer $chromeConsumer;
-    private Consumer $instapaperConsumer;
-    private Consumer $pinboardConsumer;
-    private Consumer $deliciousConsumer;
-    private Consumer $elcuratorConsumer;
-    private Consumer $shaarliConsumer;
-    private Consumer $pocketHtmlConsumer;
-    private Consumer $omnivoreConsumer;
-
     public function __construct(
-        Consumer $pocketConsumer,
-        Consumer $readabilityConsumer,
-        Consumer $wallabagV1Consumer,
-        Consumer $wallabagV2Consumer,
-        Consumer $firefoxConsumer,
-        Consumer $chromeConsumer,
-        Consumer $instapaperConsumer,
-        Consumer $pinboardConsumer,
-        Consumer $deliciousConsumer,
-        Consumer $elcuratorConsumer,
-        Consumer $shaarliConsumer,
-        Consumer $pocketHtmlConsumer,
-        Consumer $omnivoreConsumer
+        private readonly Consumer $pocketConsumer,
+        private readonly Consumer $readabilityConsumer,
+        private readonly Consumer $wallabagV1Consumer,
+        private readonly Consumer $wallabagV2Consumer,
+        private readonly Consumer $firefoxConsumer,
+        private readonly Consumer $chromeConsumer,
+        private readonly Consumer $instapaperConsumer,
+        private readonly Consumer $pinboardConsumer,
+        private readonly Consumer $deliciousConsumer,
+        private readonly Consumer $elcuratorConsumer,
+        private readonly Consumer $shaarliConsumer,
+        private readonly Consumer $pocketHtmlConsumer,
+        private readonly Consumer $pocketCsvConsumer,
+        private readonly Consumer $omnivoreConsumer,
     ) {
-        $this->pocketConsumer = $pocketConsumer;
-        $this->readabilityConsumer = $readabilityConsumer;
-        $this->wallabagV1Consumer = $wallabagV1Consumer;
-        $this->wallabagV2Consumer = $wallabagV2Consumer;
-        $this->firefoxConsumer = $firefoxConsumer;
-        $this->chromeConsumer = $chromeConsumer;
-        $this->instapaperConsumer = $instapaperConsumer;
-        $this->pinboardConsumer = $pinboardConsumer;
-        $this->deliciousConsumer = $deliciousConsumer;
-        $this->elcuratorConsumer = $elcuratorConsumer;
-        $this->shaarliConsumer = $shaarliConsumer;
-        $this->pocketHtmlConsumer = $pocketHtmlConsumer;
-        $this->omnivoreConsumer = $omnivoreConsumer;
     }
 
     /**
@@ -102,6 +76,9 @@ class RabbitMQConsumerTotalProxy
             case 'pocket_html':
                 $consumer = $this->pocketHtmlConsumer;
                 break;
+            case 'pocket_csv':
+                $consumer = $this->pocketCsvConsumer;
+                break;
             case 'omnivore':
                 $consumer = $this->omnivoreConsumer;
                 break;
@@ -115,6 +92,6 @@ class RabbitMQConsumerTotalProxy
             return 0;
         }
 
-        return $message->delivery_info['message_count'] + 1;
+        return $message->getMessageCount() + 1;
     }
 }

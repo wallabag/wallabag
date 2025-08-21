@@ -3,6 +3,7 @@
 namespace Wallabag\Import;
 
 use Psr\Log\LoggerAwareInterface;
+use Wallabag\Entity\User;
 
 interface ImportInterface extends LoggerAwareInterface
 {
@@ -42,4 +43,24 @@ interface ImportInterface extends LoggerAwareInterface
      * @return array
      */
     public function getSummary();
+
+    /**
+     * Set current user.
+     * Could the current *connected* user or one retrieve by the consumer.
+     */
+    public function setUser(User $user);
+
+    /**
+     * Set file path to the json file.
+     *
+     * @param string $filepath
+     */
+    public function setFilepath($filepath): static;
+
+    /**
+     * Set whether articles must be all marked as read.
+     *
+     * @param bool $markAsRead
+     */
+    public function setMarkAsRead($markAsRead): static;
 }

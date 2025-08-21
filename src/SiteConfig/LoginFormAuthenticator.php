@@ -2,18 +2,19 @@
 
 namespace Wallabag\SiteConfig;
 
-use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Cookie\CookieJar;
+use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Wallabag\ExpressionLanguage\AuthenticatorProvider;
 
 class LoginFormAuthenticator
 {
-    private ExpressionLanguage $expressionLanguage;
+    private readonly ExpressionLanguage $expressionLanguage;
 
-    public function __construct(AuthenticatorProvider $authenticatorProvider)
-    {
+    public function __construct(
+        private readonly HttpBrowser $browser,
+        AuthenticatorProvider $authenticatorProvider,
+    ) {
         $this->expressionLanguage = new ExpressionLanguage(null, [$authenticatorProvider]);
     }
 
@@ -22,17 +23,14 @@ class LoginFormAuthenticator
      *
      * @return self
      */
-    public function login(SiteConfig $siteConfig, ClientInterface $guzzle)
+    public function login(SiteConfig $siteConfig)
     {
         $postFields = [
             $siteConfig->getUsernameField() => $siteConfig->getUsername(),
             $siteConfig->getPasswordField() => $siteConfig->getPassword(),
         ] + $this->getExtraFields($siteConfig);
 
-        $guzzle->post(
-            $siteConfig->getLoginUri(),
-            ['body' => $postFields, 'allow_redirects' => true, 'verify' => false]
-        );
+        $this->browser->request('POST', $siteConfig->getLoginUri(), $postFields, [], $this->getHttpHeaders($siteConfig));
 
         return $this;
     }
@@ -42,15 +40,12 @@ class LoginFormAuthenticator
      *
      * @return bool
      */
-    public function isLoggedIn(SiteConfig $siteConfig, ClientInterface $guzzle)
+    public function isLoggedIn(SiteConfig $siteConfig)
     {
-        if (($cookieJar = $guzzle->getDefaultOption('cookies')) instanceof CookieJar) {
-            /** @var \GuzzleHttp\Cookie\SetCookie $cookie */
-            foreach ($cookieJar as $cookie) {
-                // check required cookies
-                if ($cookie->getDomain() === $siteConfig->getHost()) {
-                    return true;
-                }
+        foreach ($this->browser->getCookieJar()->all() as $cookie) {
+            // check required cookies
+            if ($cookie->getDomain() === $siteConfig->getHost()) {
+                return true;
             }
         }
 
@@ -71,11 +66,25 @@ class LoginFormAuthenticator
             $crawler = new Crawler((string) $html);
 
             $loggedIn = $crawler->evaluate((string) $siteConfig->getNotLoggedInXpath());
-        } catch (\Throwable $e) {
+        } catch (\Throwable) {
             return false;
         }
 
         return \count($loggedIn) > 0;
+    }
+
+    /**
+     * Processes http_header(*) config, prepending HTTP_ string to the header's name.
+     * See : https://github.com/symfony/browser-kit/blob/5.4/AbstractBrowser.php#L349.
+     */
+    protected function getHttpHeaders(SiteConfig $siteConfig): array
+    {
+        $headers = [];
+        foreach ($siteConfig->getHttpHeaders() as $headerName => $headerValue) {
+            $headers["HTTP_$headerName"] = $headerValue;
+        }
+
+        return $headers;
     }
 
     /**
@@ -89,9 +98,9 @@ class LoginFormAuthenticator
         $extraFields = [];
 
         foreach ($siteConfig->getExtraFields() as $fieldName => $fieldValue) {
-            if ('@=' === substr($fieldValue, 0, 2)) {
+            if (str_starts_with((string) $fieldValue, '@=')) {
                 $fieldValue = $this->expressionLanguage->evaluate(
-                    substr($fieldValue, 2),
+                    substr((string) $fieldValue, 2),
                     [
                         'config' => $siteConfig,
                     ]

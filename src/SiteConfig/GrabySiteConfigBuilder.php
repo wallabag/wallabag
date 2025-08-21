@@ -10,34 +10,14 @@ use Wallabag\Repository\SiteCredentialRepository;
 class GrabySiteConfigBuilder implements SiteConfigBuilder
 {
     /**
-     * @var ConfigBuilder
-     */
-    private $grabyConfigBuilder;
-
-    /**
-     * @var SiteCredentialRepository
-     */
-    private $credentialRepository;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * @var TokenStorageInterface
-     */
-    private $token;
-
-    /**
      * GrabySiteConfigBuilder constructor.
      */
-    public function __construct(ConfigBuilder $grabyConfigBuilder, TokenStorageInterface $token, SiteCredentialRepository $credentialRepository, LoggerInterface $logger)
-    {
-        $this->grabyConfigBuilder = $grabyConfigBuilder;
-        $this->credentialRepository = $credentialRepository;
-        $this->logger = $logger;
-        $this->token = $token;
+    public function __construct(
+        private readonly ConfigBuilder $grabyConfigBuilder,
+        private readonly TokenStorageInterface $token,
+        private readonly SiteCredentialRepository $credentialRepository,
+        private readonly LoggerInterface $logger,
+    ) {
     }
 
     public function buildForHost($host)
@@ -46,7 +26,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
 
         // required by credentials below
         $host = strtolower($host);
-        if ('www.' === substr($host, 0, 4)) {
+        if (str_starts_with($host, 'www.')) {
             $host = substr($host, 4);
         }
 
@@ -85,6 +65,7 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
             'notLoggedInXpath' => $config->not_logged_in_xpath ?: null,
             'username' => $credentials['username'],
             'password' => $credentials['password'],
+            'httpHeaders' => $config->http_header,
         ];
 
         $config = new SiteConfig($parameters);
@@ -114,11 +95,11 @@ class GrabySiteConfigBuilder implements SiteConfigBuilder
 
         $extraFields = [];
         foreach ($extraFieldsStrings as $extraField) {
-            if (!str_contains($extraField, '=')) {
+            if (!str_contains((string) $extraField, '=')) {
                 continue;
             }
 
-            list($fieldName, $fieldValue) = explode('=', $extraField, 2);
+            [$fieldName, $fieldValue] = explode('=', (string) $extraField, 2);
             $extraFields[$fieldName] = $fieldValue;
         }
 

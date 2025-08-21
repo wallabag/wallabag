@@ -53,7 +53,7 @@ class RedirectTest extends TestCase
 
         $this->user->setConfig($config);
 
-        $this->token = new UsernamePasswordToken($this->user, 'password', 'key');
+        $this->token = new UsernamePasswordToken($this->user, 'key');
         $tokenStorage = new TokenStorage();
         $tokenStorage->setToken($this->token);
 

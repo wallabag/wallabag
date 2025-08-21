@@ -3,6 +3,7 @@
 namespace Wallabag\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use JMS\Serializer\Annotation\Accessor;
@@ -16,18 +17,17 @@ use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface as GoogleTwoFactorInte
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Wallabag\Entity\Api\Client;
 use Wallabag\Helper\EntityTimestampsTrait;
+use Wallabag\Repository\UserRepository;
 
 /**
  * User.
- *
- * @XmlRoot("user")
- * @ORM\Entity(repositoryClass="Wallabag\Repository\UserRepository")
- * @ORM\Table(name="`user`")
- * @ORM\HasLifecycleCallbacks()
- *
- * @UniqueEntity("email")
- * @UniqueEntity("username")
  */
+#[ORM\Table(name: '`user`')]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[UniqueEntity('email')]
+#[UniqueEntity('username')]
+#[XmlRoot('user')]
 class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorInterface, BackupCodeInterface
 {
     use EntityTimestampsTrait;
@@ -36,33 +36,29 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     *
      * @OA\Property(
      *      description="The unique numeric id of the user",
      *      type="int",
      *      example=12,
      * )
-     *
-     * @Groups({"user_api", "user_api_with_client"})
      */
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[Groups(['user_api', 'user_api_with_client'])]
     protected $id;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(name="name", type="text", nullable=true)
      *
      * @OA\Property(
      *      description="The personal Name of the user",
      *      type="string",
      *      example="Walla Baggger",
      * )
-     *
-     * @Groups({"user_api", "user_api_with_client"})
      */
+    #[ORM\Column(name: 'name', type: 'text', nullable: true)]
+    #[Groups(['user_api', 'user_api_with_client'])]
     protected $name;
 
     /**
@@ -73,9 +69,8 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      *      type="string",
      *      example="wallabag",
      * )
-     *
-     * @Groups({"user_api", "user_api_with_client"})
      */
+    #[Groups(['user_api', 'user_api_with_client'])]
     protected $username;
 
     /**
@@ -86,64 +81,53 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      *      type="string",
      *      example="wallabag@wallabag.io",
      * )
-     *
-     * @Groups({"user_api", "user_api_with_client"})
      */
+    #[Groups(['user_api', 'user_api_with_client'])]
     protected $email;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime")
      *
      * @OA\Property(
      *      description="Creation date of the user account. (In ISO 8601 format)",
      *      type="string",
      *      example="2023-06-27T19:25:44+0000",
      * )
-     *
-     * @Groups({"user_api", "user_api_with_client"})
      */
+    #[ORM\Column(name: 'created_at', type: 'datetime')]
+    #[Groups(['user_api', 'user_api_with_client'])]
     protected $createdAt;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime")
      *
      * @OA\Property(
      *      description="Update date of the user account. (In ISO 8601 format)",
      *      type="string",
      *      example="2023-06-27T19:37:30+0000",
      * )
-     *
-     * @Groups({"user_api", "user_api_with_client"})
      */
+    #[ORM\Column(name: 'updated_at', type: 'datetime')]
+    #[Groups(['user_api', 'user_api_with_client'])]
     protected $updatedAt;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Wallabag\Entity\Entry", mappedBy="user", cascade={"remove"})
-     */
+    #[ORM\OneToMany(targetEntity: Entry::class, mappedBy: 'user', cascade: ['remove'])]
     protected $entries;
 
-    /**
-     * @ORM\OneToOne(targetEntity="Wallabag\Entity\Config", mappedBy="user", cascade={"remove"})
-     */
+    #[ORM\OneToOne(targetEntity: Config::class, mappedBy: 'user', cascade: ['remove'])]
     protected $config;
 
     /**
-     * @var ArrayCollection&iterable<SiteCredential>
-     *
-     * @ORM\OneToMany(targetEntity="Wallabag\Entity\SiteCredential", mappedBy="user", cascade={"remove"})
+     * @var Collection<SiteCredential>
      */
-    protected $siteCredentials;
+    #[ORM\OneToMany(targetEntity: SiteCredential::class, mappedBy: 'user', cascade: ['remove'])]
+    protected Collection $siteCredentials;
 
     /**
-     * @var ArrayCollection&iterable<Client>
-     *
-     * @ORM\OneToMany(targetEntity="Wallabag\Entity\Api\Client", mappedBy="user", cascade={"remove"})
+     * @var Collection<Client>
      */
-    protected $clients;
+    #[ORM\OneToMany(targetEntity: Client::class, mappedBy: 'user', cascade: ['remove'])]
+    protected Collection $clients;
 
     /**
      * @see getFirstClient() below
@@ -152,40 +136,40 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      *      description="Default client created during user registration. Used for further authorization",
      *      ref=@Model(type=Client::class, groups={"user_api_with_client"})
      * )
-     *
-     * @Groups({"user_api_with_client"})
-     * @Accessor(getter="getFirstClient")
      */
+    #[Groups(['user_api_with_client'])]
+    #[Accessor(getter: 'getFirstClient')]
     protected $default_client;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $authCode;
 
-    /**
-     * @ORM\Column(name="googleAuthenticatorSecret", type="string", nullable=true)
-     */
+    #[ORM\Column(name: 'googleAuthenticatorSecret', type: 'string', nullable: true)]
     private $googleAuthenticatorSecret;
+
+    // default value is explicitly set to false here to ensure that Doctrine
+    // does not complain about schema mapping mismatch
+    #[ORM\Column(name: 'google_authenticator', type: 'boolean', options: ['default' => false])]
+    private $googleAuthenticator = false;
 
     /**
      * @var array
-     *
-     * @ORM\Column(type="json", nullable=true)
      */
+    #[ORM\Column(type: 'json', nullable: true)]
     private $backupCodes;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(type="boolean")
      */
+    #[ORM\Column(type: 'boolean')]
     private $emailTwoFactor = false;
 
     public function __construct()
     {
         parent::__construct();
         $this->entries = new ArrayCollection();
+        $this->siteCredentials = new ArrayCollection();
+        $this->clients = new ArrayCollection();
         $this->roles = ['ROLE_USER'];
     }
 
@@ -240,7 +224,7 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
     }
 
     /**
-     * @return ArrayCollection<Entry>
+     * @return Collection<Entry>
      */
     public function getEntries()
     {
@@ -285,6 +269,11 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
         $this->emailTwoFactor = $emailTwoFactor;
     }
 
+    public function setGoogleAuthenticator(bool $googleAuthenticator): void
+    {
+        $this->googleAuthenticator = $googleAuthenticator;
+    }
+
     /**
      * Used in the user config form to be "like" the email option.
      */
@@ -315,7 +304,7 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
 
     public function isGoogleAuthenticatorEnabled(): bool
     {
-        return $this->googleAuthenticatorSecret ? true : false;
+        return $this->googleAuthenticator;
     }
 
     public function getGoogleAuthenticatorUsername(): string
@@ -362,13 +351,15 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      */
     public function addClient(Client $client)
     {
-        $this->clients[] = $client;
+        if (!$this->clients->contains($client)) {
+            $this->clients->add($client);
+        }
 
         return $this;
     }
 
     /**
-     * @return ArrayCollection<Client>
+     * @return Collection<Client>
      */
     public function getClients()
     {
@@ -382,7 +373,7 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
      */
     public function getFirstClient()
     {
-        if (!empty($this->clients)) {
+        if (!$this->clients->isEmpty()) {
             return $this->clients->first();
         }
 
@@ -401,7 +392,7 @@ class User extends BaseUser implements EmailTwoFactorInterface, GoogleTwoFactorI
         foreach ($this->backupCodes as $key => $backupCode) {
             // backup code are hashed using `password_hash`
             // see ConfigController->otpAppAction
-            if (password_verify($code, $backupCode)) {
+            if (password_verify($code, (string) $backupCode)) {
                 return $key;
             }
         }

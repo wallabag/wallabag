@@ -100,19 +100,6 @@ config:
         fontsize_label: Talha de polissa
         lineheight_label: Nautor de linha
         maxwidth_label: Largor maximala
-    form_rss:
-        description: Los fluxes RSS fornits per wallabag vos permeton de legir vòstres articles salvagardats dins vòstre lector de fluxes preferit. Per los poder emplegar, vos cal, d'en primièr crear un geton.
-        token_label: Geton RSS
-        no_token: Pas cap de geton generat
-        token_create: Creatz vòstre geton
-        token_reset: Reïnicializatz vòstre geton
-        rss_links: URLs de vòstres fluxes RSS
-        rss_link:
-            unread: Pas legits
-            starred: Favorits
-            archive: Legits
-            all: Totes
-        rss_limit: Nombre d'articles dins un flux RSS
     form_user:
         two_factor_description: Activar l'autentificacion en dos temps vòl dire que recebretz un còdi per corrièl per cada novèla connexion pas aprovada.
         name_label: Nom
@@ -143,6 +130,7 @@ config:
         entries: Levar TOTES los articles
         archived: Levar TOTES los articles archivats
         confirm: Sètz vertadièrament segur ? (AQUÒ ES IRREVERSIBLE)
+        tagging_rules: Suprimir TOTAS las règlas d’etiquetas
     form_password:
         description: Podètz cambiar vòstre senhal aquí. Vòstre senhal deu èsser long d'almens 8 caractèrs.
         old_password_label: Senhal actual
@@ -564,6 +552,8 @@ import:
         page_title: Importar > Pocket HTML
         description: Aquesta aisina d’importacion importarà totes vòstres marcadors Pocket (via un expòrt HTML). Anatz simplament a https://getpocket.com/export puèi exportar lo fichièr HTML. Se telecargarà un fichièr HTML (coma « ril_export.html »).
         how_to: Mercés de seleccionar lo fichièr de salvagarda de marcadors e de clicar lo boton çai-jos per l’importar. Remarcatz qu’aquò pòt trigar, lo temps que totes los articles sián recuperats.
+    omnivore:
+        page_title: Importar > Omnivore
 developer:
     page_title: Gestion dels clients API
     welcome_message: Vos desirem la benvenguda sus l'API de wallabag

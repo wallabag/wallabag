@@ -1,8 +1,27 @@
-const path = require('path');
+const Encore = require('@symfony/webpack-encore');
 
-function buildConfig(options) {
-  const env = options.prod ? 'prod' : 'dev';
-  return require(path.resolve(__dirname, `app/config/webpack/${env}.js`));
+if (!Encore.isRuntimeEnvironmentConfigured()) {
+  Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
 }
 
-module.exports = buildConfig;
+Encore
+  .setOutputPath('web/build/')
+  .setPublicPath('/build')
+  .addEntry('main', './assets/index.js')
+  .addEntry('public', './assets/share.js')
+  .splitEntryChunks()
+  .enableStimulusBridge('./assets/controllers.json')
+  .enableSingleRuntimeChunk()
+  .cleanupOutputBeforeBuild()
+  .enableBuildNotifications()
+  .enableSourceMaps(!Encore.isProduction())
+  .enableVersioning(Encore.isProduction())
+  .configureBabelPresetEnv((config) => {
+    config.modules = false;
+    config.useBuiltIns = 'usage';
+    config.corejs = '3.23';
+  })
+  .enableSassLoader()
+  .enablePostCssLoader();
+
+module.exports = Encore.getWebpackConfig();

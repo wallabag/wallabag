@@ -1,0 +1,57 @@
+@use "variables";
+
+/* ==========================================================================
+ * Various
+ * ========================================================================== */
+
+div.settings div.file-field {
+  /* force height on non-input field in the settings page */
+  div,
+  ul {
+    margin-top: 40px;
+  }
+
+  /* but avoid to kill all file input */
+  div {
+    margin-top: inherit;
+  }
+}
+
+/* override materializecss pointer-event disabled on checkboxes */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked,
+.input-field label {
+  pointer-events: initial;
+}
+
+.input-field label.active {
+  font-size: 1rem;
+}
+
+nav .input-field input {
+  margin: 0;
+  padding-left: 0.5rem;
+}
+
+.tabs {
+  display: flex;
+}
+
+.tab {
+  flex: 1;
+}
+
+.btn-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: variables.$blue-accent-color;
+
+  &:focus {
+    background: none;
+  }
+}
+
+.inline-block {
+  display: inline-block;
+}

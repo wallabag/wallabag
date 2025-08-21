@@ -37,24 +37,15 @@ class InstallCommand extends Command
         'curl_multi_init',
     ];
 
-    private EntityManagerInterface $entityManager;
-    private EventDispatcherInterface $dispatcher;
-    private UserManagerInterface $userManager;
-    private TableMetadataStorageConfiguration $tableMetadataStorageConfiguration;
-    private string $databaseDriver;
-    private array $defaultSettings;
-    private array $defaultIgnoreOriginInstanceRules;
-
-    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $dispatcher, UserManagerInterface $userManager, TableMetadataStorageConfiguration $tableMetadataStorageConfiguration, string $databaseDriver, array $defaultSettings, array $defaultIgnoreOriginInstanceRules)
-    {
-        $this->entityManager = $entityManager;
-        $this->dispatcher = $dispatcher;
-        $this->userManager = $userManager;
-        $this->tableMetadataStorageConfiguration = $tableMetadataStorageConfiguration;
-        $this->databaseDriver = $databaseDriver;
-        $this->defaultSettings = $defaultSettings;
-        $this->defaultIgnoreOriginInstanceRules = $defaultIgnoreOriginInstanceRules;
-
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly EventDispatcherInterface $dispatcher,
+        private readonly UserManagerInterface $userManager,
+        private readonly TableMetadataStorageConfiguration $tableMetadataStorageConfiguration,
+        private readonly string $databaseDriver,
+        private readonly array $defaultSettings,
+        private readonly array $defaultIgnoreOriginInstanceRules,
+    ) {
         parent::__construct();
     }
 
@@ -70,7 +61,7 @@ class InstallCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->defaultInput = $input;
 
@@ -138,7 +129,7 @@ class InstallCommand extends Command
 
         // now check if MySQL isn't too old to handle utf8mb4
         if ($conn->isConnected() && $conn->getDatabasePlatform() instanceof MySQLPlatform) {
-            $version = $conn->query('select version()')->fetchOne();
+            $version = $conn->executeQuery('select version()')->fetchOne();
             $minimalVersion = '5.5.4';
 
             if (false === version_compare($version, $minimalVersion, '>')) {
@@ -151,9 +142,9 @@ class InstallCommand extends Command
         // testing if PostgreSQL > 9.1
         if ($conn->isConnected() && $conn->getDatabasePlatform() instanceof PostgreSQLPlatform) {
             // return version should be like "PostgreSQL 9.5.4 on x86_64-apple-darwin15.6.0, compiled by Apple LLVM version 8.0.0 (clang-800.0.38), 64-bit"
-            $version = $conn->query('SELECT version();')->fetchOne();
+            $version = $conn->executeQuery('SELECT version();')->fetchOne();
 
-            preg_match('/PostgreSQL ([0-9\.]+)/i', $version, $matches);
+            preg_match('/PostgreSQL ([0-9\.]+)/i', (string) $version, $matches);
 
             if (isset($matches[1]) & version_compare($matches[1], '9.2.0', '<')) {
                 $fulfilled = false;
@@ -411,7 +402,7 @@ class InstallCommand extends Command
 
         try {
             return \in_array($databaseName, $schemaManager->listDatabases(), true);
-        } catch (DriverException $e) {
+        } catch (DriverException) {
             // it means we weren't able to get database list, assume the database doesn't exist
 
             return false;

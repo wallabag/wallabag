@@ -28,12 +28,8 @@ class ClientType extends AbstractType
 
         $builder->get('redirect_uris')
             ->addModelTransformer(new CallbackTransformer(
-                function ($originalUri) {
-                    return $originalUri;
-                },
-                function ($submittedUri) {
-                    return [$submittedUri];
-                }
+                fn ($originalUri) => $originalUri,
+                fn ($submittedUri) => [$submittedUri]
             ))
         ;
     }
@@ -45,7 +41,7 @@ class ClientType extends AbstractType
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'client';
     }

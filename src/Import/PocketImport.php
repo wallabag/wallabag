@@ -9,7 +9,7 @@ use Wallabag\Entity\Entry;
 
 class PocketImport extends AbstractImport
 {
-    public const NB_ELEMENTS = 5000;
+    public const NB_ELEMENTS = 30;
     /**
      * @var HttpClientInterface
      */

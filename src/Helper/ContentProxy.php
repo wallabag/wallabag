@@ -17,26 +17,19 @@ use Wallabag\Tools\Utils;
  */
 class ContentProxy
 {
-    protected $graby;
-    protected $tagger;
-    protected $ignoreOriginProcessor;
-    protected $validator;
-    protected $logger;
     protected $mimeTypes;
-    protected $fetchingErrorMessage;
     protected $eventDispatcher;
-    protected $storeArticleHeaders;
 
-    public function __construct(Graby $graby, RuleBasedTagger $tagger, RuleBasedIgnoreOriginProcessor $ignoreOriginProcessor, ValidatorInterface $validator, LoggerInterface $logger, $fetchingErrorMessage, $storeArticleHeaders = false)
-    {
-        $this->graby = $graby;
-        $this->tagger = $tagger;
-        $this->ignoreOriginProcessor = $ignoreOriginProcessor;
-        $this->validator = $validator;
-        $this->logger = $logger;
+    public function __construct(
+        protected Graby $graby,
+        protected RuleBasedTagger $tagger,
+        protected RuleBasedIgnoreOriginProcessor $ignoreOriginProcessor,
+        protected ValidatorInterface $validator,
+        protected LoggerInterface $logger,
+        protected $fetchingErrorMessage,
+        protected $storeArticleHeaders = false,
+    ) {
         $this->mimeTypes = new MimeTypes();
-        $this->fetchingErrorMessage = $fetchingErrorMessage;
-        $this->storeArticleHeaders = $storeArticleHeaders;
     }
 
     /**
@@ -59,7 +52,7 @@ class ContentProxy
 
             $fetchedContent['title'] = $this->sanitizeContentTitle(
                 $fetchedContent['title'],
-                isset($fetchedContent['headers']['content-type']) ? $fetchedContent['headers']['content-type'] : ''
+                $fetchedContent['headers']['content-type'] ?? ''
             );
 
             // when content is imported, we have information in $content
@@ -107,7 +100,9 @@ class ContentProxy
             return;
         }
 
-        $this->logger->warning('Language validation failed. ' . (string) $errors);
+        foreach ($errors as $error) {
+            $this->logger->warning('Language validation failed. ' . $error->getMessage());
+        }
     }
 
     /**
@@ -128,7 +123,9 @@ class ContentProxy
             return;
         }
 
-        $this->logger->warning('PreviewPicture validation failed. ' . (string) $errors);
+        foreach ($errors as $error) {
+            $this->logger->warning('PreviewPicture validation failed. ' . $error->getMessage());
+        }
     }
 
     /**
@@ -146,11 +143,8 @@ class ContentProxy
         }
 
         try {
-            // is it already a DateTime?
             // (it's inside the try/catch in case of fail to be parse time string)
-            if (!$date instanceof \DateTime) {
-                $date = new \DateTime($date);
-            }
+            $date = new \DateTime($date);
 
             $entry->setPublishedAt($date);
         } catch (\Exception $e) {

@@ -16,12 +16,9 @@ class RedisWorkerCommand extends Command
     protected static $defaultName = 'wallabag:import:redis-worker';
     protected static $defaultDescription = 'Launch Redis worker';
 
-    private $container;
-
-    public function __construct(ContainerInterface $container)
-    {
-        $this->container = $container;
-
+    public function __construct(
+        private readonly ContainerInterface $container,
+    ) {
         parent::__construct();
     }
 
@@ -33,7 +30,7 @@ class RedisWorkerCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('Worker started at: ' . (new \DateTime())->format('d-m-Y G:i:s'));
         $output->writeln('Waiting for message ...');

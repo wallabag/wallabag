@@ -115,6 +115,26 @@ import:
     action:
         import_contents: 콘텐츠 가져오기
     page_title: 가져오기
+    delicious:
+        how_to: Delicious 내보내기를 선택하고 아래 버튼을 클릭하여 업로드하고 가져오십시오.
+        page_title: 가져오기 > del.icio.us
+        description: '이 가져오기 도구는 모든 Delicious 북마크를 가져옵니다. 2021년부터 내보내기 페이지 (https://del.icio.us/export)를 사용하여 데이터를 다시 내보낼 수 있습니다. "JSON" 형식을 선택하고 다운로드하십시오 (예: "delicious_export.2021.02.06_21.10.json").'
+    shaarli:
+        page_title: 가져오기 > Shaarli
+        description: 이 가져오기 도구는 모든 Shaarli 북마크를 가져옵니다. 도구 섹션으로 이동한 다음 "데이터베이스 내보내기"에서 북마크를 선택하고 내보내십시오. HTML 파일을 얻게 됩니다.
+        how_to: 북마크 백업 파일을 선택하고 아래 버튼을 클릭하여 가져오십시오. 모든 문서를 가져와야하므로 처리 시간이 오래 걸릴 수 있습니다.
+    omnivore:
+        page_title: 가져오기 > Omnivore
+        description: 이 가져오기 도구는 모든 Omnivore 문서를 가져옵니다.
+        how_to: Omnivore 내보내기 압축을 풀고 "metadata_x_to_y.json" 이라는 각 JSON 파일을 하나씩 업로드하십시오.
+    pocket_html:
+        description: '이 가져오기 도구는 모든 Pocket 북마크 (HTML 내보내기 통해)를 가져옵니다. https://getpocket.com/export 로 이동한 다음 HTML 파일을 내보내십시오. HTML 파일이 다운로드됩니다 (예: "ril_export.html").'
+        page_title: 가져오기 > Pocket HTML
+        how_to: 북마크 백업 파일을 선택하고 아래 버튼을 클릭하여 가져오십시오. 모든 문서를 가져와야하므로 처리 시간이 오래 걸릴 수 있습니다.
+    pocket_csv:
+        description: '이 가져오기 도구는 모든 Pocket 북마크 (CSV 내보내기 통해)를 가져옵니다. https://getpocket.com/export 로 이동한 다음 파일을 내보내십시오. ZIP 파일이 다운로드됩니다 (예: "pocket.zip"). 압축을 풀면 "part_000000.csv" 라는 CSV 파일을 얻게 됩니다.'
+        how_to: 북마크 백업 파일을 선택하고 아래 버튼을 클릭하여 가져오십시오. 모든 문서를 가져와야하므로 처리 시간이 오래 걸릴 수 있습니다.
+        page_title: 가져오기 > Pocket CSV
 about:
     third_party:
         description: '다음은 wallabag에 사용되는 타사 라이브러리 목록입니다 (저작권 포함):'
@@ -199,6 +219,8 @@ entry:
         starred_label: 즐겨찾기
         status_label: 상태
         title: 필터
+        annotated_label: 주석 있음
+        parsed_label: 올바르게 가져오지 못함
     edit:
         origin_url_label: 원본 URL (원본 문서의 위치)
         page_title: 문서 수정
@@ -219,9 +241,13 @@ entry:
         filtered_tags: '태그로 필터링:'
         filtered: 필터링한 기사
         unread: 읽지않은 기사
+        with_annotations: 주석이 있는 문서
+        same_domain: 동일 도메인
     confirm:
         delete_tag: 문서에서 해당 태그를 제거 하시겠습니까?
         delete: 해당 문서를 제거 하시겠습니까?
+        delete_entries: 이 문서를 제거 하시겠습니까?
+        reload: 해당 문서를 다시 로드 하시겠습니까?
     public:
         shared_by_wallabag: 이 문서는 %username% 님이 <a href='%wallabag_instance%'>wallabag</a>와 공유했습니다
     metadata:
@@ -238,13 +264,18 @@ entry:
         toogle_as_read: 읽음으로 전환
         toogle_as_star: 즐겨찾기 전환
         original_article: 원본
-        reading_time_less_one_minute_short: '&lt; 1 분'
+        reading_time_less_one_minute_short: '< 1 분'
         reading_time_minutes_short: '%readingTime% 분'
         number_of_tags: '{1} 및 1 개의 다른 태그|]1,Inf[및 %count% 다른 태그'
-        reading_time_less_one_minute: '예상 읽기 시간: &lt; 1 분'
+        reading_time_less_one_minute: '예상 읽기 시간: < 1 분'
         reading_time_minutes: '예상 읽기 시간: %readingTime% 분'
         reading_time: 예상 읽기 시간
-        number_on_the_page: '{0} 기사가 없습니다.|{1} 기사가 하나 있습니다.|]1,Inf[ %count % 기사가 있습니다.'
+        number_on_the_page: '{0} 기사가 없습니다.|{1} 기사가 하나 있습니다.|]1,Inf[ %count%개 기사가 있습니다.'
+        assign_search_tag: 이 검색을 각 결과에 태그로 할당
+        show_same_domain: 동일 도메인을 가진 문서 보기
+        toggle_mass_action: 대량 작업 전환
+        mass_action_tags_input_placeholder: 태그1, 태그2, 태그3
+        add_tags: 태그 추가
     default_title: 기사의 제목
 howto:
     bookmarklet:
@@ -283,7 +314,7 @@ howto:
             via_google_play: 구글 플레이를 통해
             via_f_droid: F-Droid를 통해
         windows: 마이크로소프트 스토어에서
-        ios: 아이튠즈 스토어에서
+        ios: 앱스토어에서
     browser_addons:
         opera: 오페라 애드온
         chrome: 크롬 애드온
@@ -331,6 +362,7 @@ flashes:
             tagging_rules_deleted: 태그 지정 규칙이 삭제되었습니다
             tagging_rules_updated: 태그 지정 규칙이 업데이트되었습니다
             password_updated: 비밀번호가 업데이트 되었습니다
+            otp_code_invalid: 2단계 인증 코드가 유효하지 않습니다
     ignore_origin_instance_rule:
         notice:
             deleted: 전역 원본 무시 규칙이 삭제되었습니다
@@ -363,6 +395,7 @@ flashes:
         notice:
             tag_renamed: 태그 이름이 변경되었습니다
             tag_added: 태그가 추가되었습니다
+            too_much_tags: 성능 문제 방지를 위해 한 번에 %tags%개 이상의 태그나 %characters%자 이상의 태그를 추가할 수 없습니다.
 config:
     form_ignore_origin_rules:
         faq:
@@ -396,7 +429,7 @@ config:
                 title: 문서 제목
                 label: 변수
             tagging_rules_definition_description: wallabag 에서 자동으로 새 문서에 태그를 지정하는 데 사용하는 규칙입니다. <br /> 태그 지정 규칙이 새 문서가 추가 될 때마다 태그를 구성하는 데 사용되므로, 수동으로 분류하는 수고를 덜 수 있습니다.
-            how_to_use_them_description: '읽기 시간이 3 분 미만인 경우 «<i> 짧은 읽기 </i>» 와 같은 새 기사에 태그를 지정한다고 가정합니다. <br />이 경우 <i> 규칙</i> 을 입력해야합니다. <i>태그</i> 필드에 « readingTime &lt;= 3 » 을 입력하고 « <i>짧은 읽기</i>» 를 입력하십시오. <br /> 여러 태그를 쉼표로구분하여 한 번에 추가 할 수 있습니다: « <i> 짧은 읽기, 반드시 읽기</i> » <br /> 사전 정의 된 연산자를 사용하여 복잡한 규칙을 작성할 수 있습니다: 만약 « <i>readingTime &gt;= 5 AND domainName = "www.php.net"</i> » 다음으로 태그 «<i> 긴 읽기, php</i>»'
+            how_to_use_them_description: '읽기 시간이 3 분 미만인 경우 «<i> 짧은 읽기 </i>» 와 같은 새 기사에 태그를 지정한다고 가정합니다. <br />이 경우 <i> 규칙</i> 을 입력해야합니다. <i>태그</i> 필드에 « readingTime <= 3 » 을 입력하고 « <i>짧은 읽기</i>» 를 입력하십시오. <br /> 여러 태그를 쉼표로구분하여 한 번에 추가 할 수 있습니다: « <i> 짧은 읽기, 반드시 읽기</i> » <br /> 사전 정의 된 연산자를 사용하여 복잡한 규칙을 작성할 수 있습니다: 만약 « <i>readingTime >= 5 AND domainName = "www.php.net"</i> » 다음으로 태그 «<i> 긴 읽기, php</i>»'
             operator_description:
                 and: 하나의 규칙 그리고 다른 규칙
                 or: 하나의 규칙 또는 다른 규칙
@@ -438,6 +471,7 @@ config:
         annotations: 모든 주석 제거
         confirm: 정말 하시겠습니까? (되돌릴 수 없습니다)
         tags: 모든 태그 제거
+        tagging_rules: 모든 태그 지정 규칙 제거
     form_feed:
         feed_link:
             archive: 보관
@@ -493,6 +527,16 @@ config:
             help_message: '온라인 도구를 사용하여 읽기 속도를 측정 할 수 있습니다:'
             label: 읽기 속도
         language_label: 언어
+        help_font: 사용하고 싶은 글꼴 모음을 선택할 수 있습니다.
+        help_fontsize: 사용하고 싶은 글꼴 크기를 선택할 수 있습니다.
+        help_lineheight: 사용하고 싶은 줄 높이를 선택할 수 있습니다.
+        lineheight_label: 줄 높이
+        maxwidth_label: 최대 너비
+        help_maxwidth: 사용하고 싶은 최대 너비를 선택할 수 있습니다.
+        font_label: 글꼴 모음
+        fontsize_label: 글꼴 크기
+        help_display_thumbnails: 문서 썸네일을 표시할지 여부를 결정할 수 있습니다. 느린 연결에 유용합니다.
+        display_thumbnails_label: 문서 썸네일 표시 (느린 연결에 유용).
     otp:
         app:
             qrcode_label: QR 코드
@@ -513,6 +557,7 @@ config:
         user_info: 사용자 정보
         feed: 피드
         settings: 설정
+        article_display: 문서 표시
     form:
         save: 저장
     page_title: 설정
@@ -526,7 +571,7 @@ menu:
         random_entry: 해당 목록에서 임의의 문서로 이동
         add_new_entry: 새 문서 추가
         filter_entries: 기사 필터
-        account: 나의 계정
+        account: 내 계정
         export: 내보내기
         search: 검색
     left:
@@ -541,7 +586,7 @@ menu:
         theme_toggle_auto: 자동 테마
         theme_toggle_dark: 어두운 테마
         theme_toggle_light: 밝은 테마
-        quickstart: 빠른시작
+        quickstart: 빠른 시작
         search: 검색
         users_management: 사용자 관리
         save_link: 링크 저장
@@ -552,6 +597,7 @@ menu:
         tags: 태그
         config: 설정
         starred: 즐겨찾기
+        with_annotations: 주석 있음
     search_form:
         input_label: 여기에 검색어 입력
 error:
@@ -636,7 +682,7 @@ quickstart:
     configure:
         tagging_rules: 문서를 자동으로 태그하는 규칙 작성
         feed: 피드 활성화
-        language: 언어 및 디자인 변경
+        language: 언어 및 인터페이스 변경
         description: 자신에게 맞는 앱을 얻으려면, wallabag의 구성을 살펴보십시오.
         title: 응용 프로그램 구성
     more: 더보기…
@@ -693,3 +739,5 @@ tag:
         see_untagged_entries: 태그가 없는 문서보기
         number_on_the_page: '{0} 태그가 없습니다.|{1} 태그가 1 개 있습니다.|]1,Inf[태그가 %count% 개 있습니다.'
     page_title: 태그
+    confirm:
+        delete: '%name% 태그 삭제'

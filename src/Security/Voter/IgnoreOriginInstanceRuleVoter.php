@@ -12,11 +12,9 @@ class IgnoreOriginInstanceRuleVoter extends Voter
     public const EDIT = 'EDIT';
     public const DELETE = 'DELETE';
 
-    private Security $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
+    public function __construct(
+        private readonly Security $security,
+    ) {
     }
 
     protected function supports(string $attribute, $subject): bool
@@ -34,12 +32,9 @@ class IgnoreOriginInstanceRuleVoter extends Voter
 
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
     {
-        switch ($attribute) {
-            case self::EDIT:
-            case self::DELETE:
-                return $this->security->isGranted('ROLE_SUPER_ADMIN');
-        }
-
-        return false;
+        return match ($attribute) {
+            self::EDIT, self::DELETE => $this->security->isGranted('ROLE_SUPER_ADMIN'),
+            default => false,
+        };
     }
 }

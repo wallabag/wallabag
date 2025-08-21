@@ -19,16 +19,12 @@ class GenerateUrlHashesCommand extends Command
     protected static $defaultDescription = 'Generates hashed urls for each entry';
 
     protected OutputInterface $output;
-    private EntityManagerInterface $entityManager;
-    private EntryRepository $entryRepository;
-    private UserRepository $userRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, EntryRepository $entryRepository, UserRepository $userRepository)
-    {
-        $this->entityManager = $entityManager;
-        $this->entryRepository = $entryRepository;
-        $this->userRepository = $userRepository;
-
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly EntryRepository $entryRepository,
+        private readonly UserRepository $userRepository,
+    ) {
         parent::__construct();
     }
 
@@ -39,7 +35,7 @@ class GenerateUrlHashesCommand extends Command
             ->addArgument('username', InputArgument::OPTIONAL, 'User to process entries');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->output = $output;
 
@@ -49,7 +45,7 @@ class GenerateUrlHashesCommand extends Command
             try {
                 $user = $this->getUser($username);
                 $this->generateHashedUrls($user);
-            } catch (NoResultException $e) {
+            } catch (NoResultException) {
                 $output->writeln(\sprintf('<error>User "%s" not found.</error>', $username));
 
                 return 1;

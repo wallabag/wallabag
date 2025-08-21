@@ -21,6 +21,7 @@ use Wallabag\Import\FirefoxImport;
 use Wallabag\Import\InstapaperImport;
 use Wallabag\Import\OmnivoreImport;
 use Wallabag\Import\PinboardImport;
+use Wallabag\Import\PocketCsvImport;
 use Wallabag\Import\PocketHtmlImport;
 use Wallabag\Import\ReadabilityImport;
 use Wallabag\Import\ShaarliImport;
@@ -33,55 +34,24 @@ class ImportCommand extends Command
     protected static $defaultName = 'wallabag:import';
     protected static $defaultDescription = 'Import entries from a JSON export';
 
-    private EntityManagerInterface $entityManager;
-    private TokenStorageInterface $tokenStorage;
-    private UserRepository $userRepository;
-    private WallabagV2Import $wallabagV2Import;
-    private FirefoxImport $firefoxImport;
-    private ChromeImport $chromeImport;
-    private ReadabilityImport $readabilityImport;
-    private InstapaperImport $instapaperImport;
-    private PinboardImport $pinboardImport;
-    private DeliciousImport $deliciousImport;
-    private OmnivoreImport $omnivoreImport;
-    private WallabagV1Import $wallabagV1Import;
-    private ElcuratorImport $elcuratorImport;
-    private ShaarliImport $shaarliImport;
-    private PocketHtmlImport $pocketHtmlImport;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        TokenStorageInterface $tokenStorage,
-        UserRepository $userRepository,
-        WallabagV2Import $wallabagV2Import,
-        FirefoxImport $firefoxImport,
-        ChromeImport $chromeImport,
-        ReadabilityImport $readabilityImport,
-        InstapaperImport $instapaperImport,
-        PinboardImport $pinboardImport,
-        DeliciousImport $deliciousImport,
-        WallabagV1Import $wallabagV1Import,
-        ElcuratorImport $elcuratorImport,
-        ShaarliImport $shaarliImport,
-        PocketHtmlImport $pocketHtmlImport,
-        OmnivoreImport $omnivoreImport
+        private readonly EntityManagerInterface $entityManager,
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly UserRepository $userRepository,
+        private readonly WallabagV2Import $wallabagV2Import,
+        private readonly FirefoxImport $firefoxImport,
+        private readonly ChromeImport $chromeImport,
+        private readonly ReadabilityImport $readabilityImport,
+        private readonly InstapaperImport $instapaperImport,
+        private readonly PinboardImport $pinboardImport,
+        private readonly DeliciousImport $deliciousImport,
+        private readonly WallabagV1Import $wallabagV1Import,
+        private readonly ElcuratorImport $elcuratorImport,
+        private readonly ShaarliImport $shaarliImport,
+        private readonly PocketHtmlImport $pocketHtmlImport,
+        private readonly PocketCsvImport $pocketCsvImport,
+        private readonly OmnivoreImport $omnivoreImport,
     ) {
-        $this->entityManager = $entityManager;
-        $this->tokenStorage = $tokenStorage;
-        $this->userRepository = $userRepository;
-        $this->wallabagV2Import = $wallabagV2Import;
-        $this->firefoxImport = $firefoxImport;
-        $this->chromeImport = $chromeImport;
-        $this->readabilityImport = $readabilityImport;
-        $this->instapaperImport = $instapaperImport;
-        $this->pinboardImport = $pinboardImport;
-        $this->deliciousImport = $deliciousImport;
-        $this->omnivoreImport = $omnivoreImport;
-        $this->wallabagV1Import = $wallabagV1Import;
-        $this->elcuratorImport = $elcuratorImport;
-        $this->shaarliImport = $shaarliImport;
-        $this->pocketHtmlImport = $pocketHtmlImport;
-
         parent::__construct();
     }
 
@@ -90,14 +60,14 @@ class ImportCommand extends Command
         $this
             ->addArgument('username', InputArgument::REQUIRED, 'User to populate')
             ->addArgument('filepath', InputArgument::REQUIRED, 'Path to the JSON file')
-            ->addOption('importer', null, InputOption::VALUE_OPTIONAL, 'The importer to use: v1, v2, instapaper, pinboard, delicious, readability, firefox, chrome, elcurator, shaarli or pocket', 'v1')
+            ->addOption('importer', null, InputOption::VALUE_OPTIONAL, 'The importer to use: v1, v2, instapaper, pinboard, delicious, readability, firefox, chrome, elcurator, shaarli, pocket or pocket_csv', 'v1')
             ->addOption('markAsRead', null, InputOption::VALUE_OPTIONAL, 'Mark all entries as read', false)
             ->addOption('useUserId', null, InputOption::VALUE_NONE, 'Use user id instead of username to find account')
             ->addOption('disableContentUpdate', null, InputOption::VALUE_NONE, 'Disable fetching updated content from URL')
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('Start : ' . (new \DateTime())->format('d-m-Y G:i:s') . ' ---');
 
@@ -107,9 +77,7 @@ class ImportCommand extends Command
 
         // Turning off doctrine default logs queries for saving memory
         $middlewares = $this->entityManager->getConnection()->getConfiguration()->getMiddlewares();
-        $middlewaresWithoutLogging = array_filter($middlewares, function (Middleware $middleware) {
-            return !$middleware instanceof LoggingMiddleware;
-        });
+        $middlewaresWithoutLogging = array_filter($middlewares, fn (Middleware $middleware) => !$middleware instanceof LoggingMiddleware);
         $this->entityManager->getConnection()->getConfiguration()->setMiddlewares($middlewaresWithoutLogging);
 
         if ($input->getOption('useUserId')) {
@@ -125,50 +93,28 @@ class ImportCommand extends Command
         // Authenticate user for paywalled websites
         $token = new UsernamePasswordToken(
             $entityUser,
-            null,
             'main',
             $entityUser->getRoles());
 
         $this->tokenStorage->setToken($token);
         $user = $this->tokenStorage->getToken()->getUser();
+        \assert($user instanceof User);
 
-        switch ($input->getOption('importer')) {
-            case 'v2':
-                $import = $this->wallabagV2Import;
-                break;
-            case 'firefox':
-                $import = $this->firefoxImport;
-                break;
-            case 'chrome':
-                $import = $this->chromeImport;
-                break;
-            case 'readability':
-                $import = $this->readabilityImport;
-                break;
-            case 'instapaper':
-                $import = $this->instapaperImport;
-                break;
-            case 'pinboard':
-                $import = $this->pinboardImport;
-                break;
-            case 'delicious':
-                $import = $this->deliciousImport;
-                break;
-            case 'elcurator':
-                $import = $this->elcuratorImport;
-                break;
-            case 'shaarli':
-                $import = $this->shaarliImport;
-                break;
-            case 'pocket':
-                $import = $this->pocketHtmlImport;
-                break;
-            case 'omnivore':
-                $import = $this->omnivoreImport;
-                break;
-            default:
-                $import = $this->wallabagV1Import;
-        }
+        $import = match ($input->getOption('importer')) {
+            'v2' => $this->wallabagV2Import,
+            'firefox' => $this->firefoxImport,
+            'chrome' => $this->chromeImport,
+            'readability' => $this->readabilityImport,
+            'instapaper' => $this->instapaperImport,
+            'pinboard' => $this->pinboardImport,
+            'delicious' => $this->deliciousImport,
+            'elcurator' => $this->elcuratorImport,
+            'shaarli' => $this->shaarliImport,
+            'pocket' => $this->pocketHtmlImport,
+            'pocket_csv' => $this->pocketCsvImport,
+            'omnivore' => $this->omnivoreImport,
+            default => $this->wallabagV1Import,
+        };
 
         $import->setMarkAsRead($input->getOption('markAsRead'));
         $import->setDisableContentUpdate($input->getOption('disableContentUpdate'));

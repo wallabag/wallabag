@@ -8,6 +8,7 @@ use Nelmio\ApiDocBundle\Annotation\Operation;
 use OpenApi\Annotations as OA;
 use Pagerfanta\Pagerfanta;
 use Psr\Log\LoggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\Tag;
 use Wallabag\Event\EntryDeletedEvent;
@@ -83,14 +85,12 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/exists.{_format}", methods={"GET"}, name="api_get_entries_exists", defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/exists.{_format}', name: 'api_get_entries_exists', methods: ['GET'], defaults: ['_format' => 'json'])]
+    #[IsGranted('LIST_ENTRIES')]
     public function getEntriesExistsAction(Request $request, EntryRepository $entryRepository)
     {
-        $this->validateAuthentication();
-
         $returnId = (null === $request->query->get('return_id')) ? false : (bool) $request->query->get('return_id');
 
         $hashedUrls = $request->query->all('hashed_urls');
@@ -131,9 +131,7 @@ class EntryRestController extends WallabagRestController
         }
 
         if (false === $returnId) {
-            $results = array_map(function ($v) {
-                return null !== $v;
-            }, $results);
+            $results = array_map(fn ($v) => null !== $v, $results);
         }
 
         $results = $this->replaceUrlHashes($results, $urlHashMap);
@@ -292,33 +290,43 @@ class EntryRestController extends WallabagRestController
      *             example="200",
      *         )
      *     ),
+     *     @OA\Parameter(
+     *         name="annotations",
+     *         in="query",
+     *         description="filter entries with annotations. all entries by default",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="integer",
+     *             enum={"1", "0"},
+     *             default="0"
+     *         )
+     *     ),
      *     @OA\Response(
      *         response="200",
      *         description="Returned when successful"
      *     )
      * )
      *
-     * @Route("/api/entries.{_format}", methods={"GET"}, name="api_get_entries", defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries.{_format}', name: 'api_get_entries', methods: ['GET'], defaults: ['_format' => 'json'])]
+    #[IsGranted('LIST_ENTRIES')]
     public function getEntriesAction(Request $request, EntryRepository $entryRepository)
     {
-        $this->validateAuthentication();
-
         $isArchived = (null === $request->query->get('archive')) ? null : (bool) $request->query->get('archive');
         $isStarred = (null === $request->query->get('starred')) ? null : (bool) $request->query->get('starred');
         $isPublic = (null === $request->query->get('public')) ? null : (bool) $request->query->get('public');
         $isNotParsed = (null === $request->query->get('notParsed')) ? null : (bool) $request->query->get('notParsed');
         $sort = strtolower($request->query->get('sort', 'created'));
         $order = strtolower($request->query->get('order', 'desc'));
-        $page = (int) $request->query->get('page', 1);
-        $perPage = (int) $request->query->get('perPage', 30);
-        $tags = \is_array($request->query->get('tags')) ? '' : (string) $request->query->get('tags', '');
-        $since = $request->query->get('since', 0);
+        $page = $request->query->getInt('page', 1);
+        $perPage = $request->query->getInt('perPage', 30);
+        $tags = \is_array($request->query->all()['tags'] ?? '') ? '' : (string) $request->query->get('tags', '');
+        $since = $request->query->getInt('since');
         $detail = strtolower($request->query->get('detail', 'full'));
         $domainName = (null === $request->query->get('domain_name')) ? '' : (string) $request->query->get('domain_name');
         $httpStatus = (!\array_key_exists((int) $request->query->get('http_status'), Response::$statusTexts)) ? null : (int) $request->query->get('http_status');
+        $hasAnnotations = (null === $request->query->get('annotations')) ? null : (bool) $request->query->get('annotations');
 
         try {
             /** @var Pagerfanta $pager */
@@ -334,7 +342,8 @@ class EntryRestController extends WallabagRestController
                 $detail,
                 $domainName,
                 $isNotParsed,
-                $httpStatus
+                $httpStatus,
+                $hasAnnotations
             );
         } catch (\Exception $e) {
             throw new BadRequestHttpException($e->getMessage());
@@ -360,6 +369,7 @@ class EntryRestController extends WallabagRestController
                     'tags' => $tags,
                     'since' => $since,
                     'detail' => $detail,
+                    'annotations' => $hasAnnotations,
                 ],
                 true
             )
@@ -390,15 +400,12 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}.{_format}", methods={"GET"}, name="api_get_entry", defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/{entry}.{_format}', name: 'api_get_entry', methods: ['GET'], defaults: ['_format' => 'json'])]
+    #[IsGranted('VIEW', subject: 'entry')]
     public function getEntryAction(Entry $entry)
     {
-        $this->validateAuthentication();
-        $this->validateUserAccess($entry->getUser()->getId());
-
         return $this->sendResponse($entry);
     }
 
@@ -434,15 +441,12 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}/export.{_format}", methods={"GET"}, name="api_get_entry_export", defaults={"_format": "json"})
-     *
      * @return Response
      */
+    #[Route(path: '/api/entries/{entry}/export.{_format}', name: 'api_get_entry_export', methods: ['GET'], defaults: ['_format' => 'json'])]
+    #[IsGranted('VIEW', subject: 'entry')]
     public function getEntryExportAction(Entry $entry, Request $request, EntriesExport $entriesExport)
     {
-        $this->validateAuthentication();
-        $this->validateUserAccess($entry->getUser()->getId());
-
         return $entriesExport
             ->setEntries($entry)
             ->updateTitle('entry')
@@ -469,15 +473,13 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/list.{_format}", methods={"DELETE"}, name="api_delete_entries_list", defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/list.{_format}', name: 'api_delete_entries_list', methods: ['DELETE'], defaults: ['_format' => 'json'])]
+    #[IsGranted('DELETE_ENTRIES')]
     public function deleteEntriesListAction(Request $request, EntryRepository $entryRepository, EventDispatcherInterface $eventDispatcher)
     {
-        $this->validateAuthentication();
-
-        $urls = json_decode($request->query->get('urls', []));
+        $urls = json_decode($request->query->get('urls', '[]'));
 
         if (empty($urls)) {
             return $this->sendResponse([]);
@@ -494,7 +496,7 @@ class EntryRestController extends WallabagRestController
 
             $results[$key]['url'] = $url;
 
-            if (false !== $entry) {
+            if (false !== $entry && $this->authorizationChecker->isGranted('DELETE', $entry)) {
                 // entry deleted, dispatch event about it!
                 $eventDispatcher->dispatch(new EntryDeletedEvent($entry), EntryDeletedEvent::NAME);
 
@@ -527,17 +529,15 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/lists.{_format}", methods={"POST"}, name="api_post_entries_list", defaults={"_format": "json"})
-     *
      * @throws HttpException When limit is reached
      *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/lists.{_format}', name: 'api_post_entries_list', methods: ['POST'], defaults: ['_format' => 'json'])]
+    #[IsGranted('CREATE_ENTRIES')]
     public function postEntriesListAction(Request $request, EntryRepository $entryRepository, EventDispatcherInterface $eventDispatcher, ContentProxy $contentProxy)
     {
-        $this->validateAuthentication();
-
-        $urls = json_decode($request->query->get('urls', []));
+        $urls = json_decode($request->query->get('urls', '[]'));
 
         $limit = $this->getParameter('wallabag.api_limit_mass_actions');
 
@@ -568,7 +568,7 @@ class EntryRestController extends WallabagRestController
             $this->entityManager->persist($entry);
             $this->entityManager->flush();
 
-            $results[$key]['entry'] = $entry instanceof Entry ? $entry->getId() : false;
+            $results[$key]['entry'] = $entry->getId();
 
             // entry saved, dispatch event about it!
             $eventDispatcher->dispatch(new EntrySavedEvent($entry), EntrySavedEvent::NAME);
@@ -712,14 +712,19 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries.{_format}", methods={"POST"}, name="api_post_entries", defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
-    public function postEntriesAction(Request $request, EntryRepository $entryRepository, ContentProxy $contentProxy, LoggerInterface $logger, TagsAssigner $tagsAssigner, EventDispatcherInterface $eventDispatcher)
-    {
-        $this->validateAuthentication();
-
+    #[Route(path: '/api/entries.{_format}', name: 'api_post_entries', methods: ['POST'], defaults: ['_format' => 'json'])]
+    #[IsGranted('CREATE_ENTRIES')]
+    public function postEntriesAction(
+        Request $request,
+        EntryRepository $entryRepository,
+        ContentProxy $contentProxy,
+        LoggerInterface $logger,
+        TagsAssigner $tagsAssigner,
+        EventDispatcherInterface $eventDispatcher,
+        ValidatorInterface $validator,
+    ) {
         $url = $request->request->get('url');
 
         $entry = $entryRepository->findByUrlAndUserId(
@@ -743,7 +748,7 @@ class EntryRestController extends WallabagRestController
                     'html' => !empty($data['content']) ? $data['content'] : $entry->getContent(),
                     'url' => $entry->getUrl(),
                     'language' => !empty($data['language']) ? $data['language'] : $entry->getLanguage(),
-                    'date' => !empty($data['publishedAt']) ? $data['publishedAt'] : $entry->getPublishedAt(),
+                    'date' => !empty($data['publishedAt']) ? $data['publishedAt'] : $entry->getPublishedAt()?->format('Y-m-d H:i:s') ?? '',
                     // faking the open graph preview picture
                     'image' => !empty($data['picture']) ? $data['picture'] : $entry->getPreviewPicture(),
                     'authors' => \is_string($data['authors']) ? explode(',', $data['authors']) : $entry->getPublishedBy(),
@@ -786,6 +791,16 @@ class EntryRestController extends WallabagRestController
 
         if (empty($entry->getTitle())) {
             $contentProxy->setDefaultEntryTitle($entry);
+        }
+
+        $errors = $validator->validate($entry);
+        if (\count($errors) > 0) {
+            $errorsString = '';
+            foreach ($errors as $error) {
+                $errorsString .= $error->getMessage() . "\n";
+            }
+
+            throw new BadRequestHttpException($errorsString);
         }
 
         $this->entityManager->persist($entry);
@@ -920,15 +935,12 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}.{_format}", methods={"PATCH"}, name="api_patch_entries", defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/{entry}.{_format}', name: 'api_patch_entries', methods: ['PATCH'], defaults: ['_format' => 'json'])]
+    #[IsGranted('EDIT', subject: 'entry')]
     public function patchEntriesAction(Entry $entry, Request $request, ContentProxy $contentProxy, LoggerInterface $logger, TagsAssigner $tagsAssigner, EventDispatcherInterface $eventDispatcher)
     {
-        $this->validateAuthentication();
-        $this->validateUserAccess($entry->getUser()->getId());
-
         $data = $this->retrieveValueFromRequest($request);
 
         // this is a special case where user want to manually update the entry content
@@ -1037,15 +1049,12 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}/reload.{_format}", methods={"PATCH"}, name="api_patch_entries_reload", defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/{entry}/reload.{_format}', name: 'api_patch_entries_reload', methods: ['PATCH'], defaults: ['_format' => 'json'])]
+    #[IsGranted('RELOAD', subject: 'entry')]
     public function patchEntriesReloadAction(Entry $entry, ContentProxy $contentProxy, LoggerInterface $logger, EventDispatcherInterface $eventDispatcher)
     {
-        $this->validateAuthentication();
-        $this->validateUserAccess($entry->getUser()->getId());
-
         try {
             $contentProxy->updateEntry($entry, $entry->getUrl());
         } catch (\Exception $e) {
@@ -1094,18 +1103,16 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}.{_format}", methods={"DELETE"}, name="api_delete_entries", defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/{entry}.{_format}', name: 'api_delete_entries', methods: ['DELETE'], defaults: ['_format' => 'json'])]
+    #[IsGranted('DELETE', subject: 'entry')]
     public function deleteEntriesAction(Entry $entry, Request $request, EventDispatcherInterface $eventDispatcher)
     {
         $expect = $request->query->get('expect', 'entry');
         if (!\in_array($expect, ['id', 'entry'], true)) {
             throw new BadRequestHttpException(\sprintf("expect: 'id' or 'entry' expected, %s given", $expect));
         }
-        $this->validateAuthentication();
-        $this->validateUserAccess($entry->getUser()->getId());
 
         $response = $this->sendResponse([
             'id' => $entry->getId(),
@@ -1147,15 +1154,12 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}/tags.{_format}", methods={"GET"}, name="api_get_entries_tags", defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/{entry}/tags.{_format}', name: 'api_get_entries_tags', methods: ['GET'], defaults: ['_format' => 'json'])]
+    #[IsGranted('LIST_TAGS', subject: 'entry')]
     public function getEntriesTagsAction(Entry $entry)
     {
-        $this->validateAuthentication();
-        $this->validateUserAccess($entry->getUser()->getId());
-
         return $this->sendResponse($entry->getTags());
     }
 
@@ -1191,15 +1195,12 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}/tags.{_format}", methods={"POST"}, name="api_post_entries_tags", defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/{entry}/tags.{_format}', name: 'api_post_entries_tags', methods: ['POST'], defaults: ['_format' => 'json'])]
+    #[IsGranted('TAG', subject: 'entry')]
     public function postEntriesTagsAction(Request $request, Entry $entry, TagsAssigner $tagsAssigner)
     {
-        $this->validateAuthentication();
-        $this->validateUserAccess($entry->getUser()->getId());
-
         $tags = $request->request->get('tags', '');
         if (!empty($tags)) {
             $tagsAssigner->assignTagsToEntry($entry, $tags);
@@ -1243,15 +1244,12 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/{entry}/tags/{tag}.{_format}", methods={"DELETE"}, name="api_delete_entries_tags", defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/{entry}/tags/{tag}.{_format}', name: 'api_delete_entries_tags', methods: ['DELETE'], defaults: ['_format' => 'json'])]
+    #[IsGranted('UNTAG', subject: 'entry')]
     public function deleteEntriesTagsAction(Entry $entry, Tag $tag)
     {
-        $this->validateAuthentication();
-        $this->validateUserAccess($entry->getUser()->getId());
-
         $entry->removeTag($tag);
 
         $this->entityManager->persist($entry);
@@ -1279,15 +1277,13 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/tags/list.{_format}", methods={"DELETE"}, name="api_delete_entries_tags_list", defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/tags/list.{_format}', name: 'api_delete_entries_tags_list', methods: ['DELETE'], defaults: ['_format' => 'json'])]
+    #[IsGranted('DELETE_TAGS')]
     public function deleteEntriesTagsListAction(Request $request, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
-        $this->validateAuthentication();
-
-        $list = json_decode($request->query->get('list', []));
+        $list = json_decode($request->query->get('list', '[]'));
 
         if (empty($list)) {
             return $this->sendResponse([]);
@@ -1307,7 +1303,7 @@ class EntryRestController extends WallabagRestController
 
             $tags = $element->tags;
 
-            if (false !== $entry && !(empty($tags))) {
+            if (false !== $entry && !(empty($tags)) && $this->authorizationChecker->isGranted('UNTAG', $entry)) {
                 $tags = explode(',', $tags);
                 foreach ($tags as $label) {
                     $label = trim($label);
@@ -1346,15 +1342,13 @@ class EntryRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/entries/tags/lists.{_format}", methods={"POST"}, name="api_post_entries_tags_list", defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/entries/tags/lists.{_format}', name: 'api_post_entries_tags_list', methods: ['POST'], defaults: ['_format' => 'json'])]
+    #[IsGranted('CREATE_TAGS')]
     public function postEntriesTagsListAction(Request $request, EntryRepository $entryRepository, TagsAssigner $tagsAssigner)
     {
-        $this->validateAuthentication();
-
-        $list = json_decode($request->query->get('list', []));
+        $list = json_decode($request->query->get('list', '[]'));
 
         if (empty($list)) {
             return $this->sendResponse([]);
@@ -1374,7 +1368,7 @@ class EntryRestController extends WallabagRestController
 
             $tags = $element->tags;
 
-            if (false !== $entry && !(empty($tags))) {
+            if (false !== $entry && !(empty($tags)) && $this->authorizationChecker->isGranted('TAG', $entry)) {
                 $tagsAssigner->assignTagsToEntry($entry, $tags);
 
                 $this->entityManager->persist($entry);
@@ -1413,7 +1407,7 @@ class EntryRestController extends WallabagRestController
     {
         return [
             'title' => $request->request->get('title'),
-            'tags' => $request->request->get('tags', []),
+            'tags' => $request->request->get('tags', ''),
             'isArchived' => $request->request->get('archive'),
             'isStarred' => $request->request->get('starred'),
             'isPublic' => $request->request->get('public'),
@@ -1421,7 +1415,7 @@ class EntryRestController extends WallabagRestController
             'language' => $request->request->get('language'),
             'picture' => $request->request->get('preview_picture'),
             'publishedAt' => $request->request->get('published_at'),
-            'authors' => $request->request->get('authors', ''),
+            'authors' => $request->request->all()['authors'] ?? '',
             'origin_url' => $request->request->get('origin_url', ''),
         ];
     }

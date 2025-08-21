@@ -8,6 +8,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 use Twig\Environment;
+use Wallabag\Entity\User;
 
 /**
  * Custom mailer for TwoFactorBundle email.
@@ -16,61 +17,17 @@ use Twig\Environment;
 class AuthCodeMailer implements AuthCodeMailerInterface
 {
     /**
-     * Mailer.
-     *
-     * @var MailerInterface
+     * @param string $senderEmail sender email address
+     * @param string $senderName  sender name
+     * @param string $supportUrl  support URL to report any bugs
      */
-    private $mailer;
-
-    /**
-     * Twig to render the html's email.
-     *
-     * @var Environment
-     */
-    private $twig;
-
-    /**
-     * Sender email address.
-     *
-     * @var string
-     */
-    private $senderEmail;
-
-    /**
-     * Sender name.
-     *
-     * @var string
-     */
-    private $senderName;
-
-    /**
-     * Support URL to report any bugs.
-     *
-     * @var string
-     */
-    private $supportUrl;
-
-    /**
-     * Url for the wallabag instance (only used for image in the HTML email template).
-     *
-     * @var string
-     */
-    private $wallabagUrl;
-
-    /**
-     * @param string $senderEmail
-     * @param string $senderName
-     * @param string $supportUrl  wallabag support url
-     * @param string $wallabagUrl wallabag instance url
-     */
-    public function __construct(MailerInterface $mailer, Environment $twig, $senderEmail, $senderName, $supportUrl, $wallabagUrl)
-    {
-        $this->mailer = $mailer;
-        $this->twig = $twig;
-        $this->senderEmail = $senderEmail;
-        $this->senderName = $senderName;
-        $this->supportUrl = $supportUrl;
-        $this->wallabagUrl = $wallabagUrl;
+    public function __construct(
+        private readonly MailerInterface $mailer,
+        private readonly Environment $twig,
+        private $senderEmail,
+        private $senderName,
+        private $supportUrl,
+    ) {
     }
 
     /**
@@ -78,6 +35,8 @@ class AuthCodeMailer implements AuthCodeMailerInterface
      */
     public function sendAuthCode(TwoFactorInterface $user): void
     {
+        \assert($user instanceof User);
+
         $template = $this->twig->load('TwoFactor/email_auth_code.html.twig');
 
         $subject = $template->renderBlock('subject', []);
@@ -85,7 +44,6 @@ class AuthCodeMailer implements AuthCodeMailerInterface
             'user' => $user->getName(),
             'code' => $user->getEmailAuthCode(),
             'support_url' => $this->supportUrl,
-            'wallabag_url' => $this->wallabagUrl,
         ]);
         $bodyText = $template->renderBlock('body_text', [
             'user' => $user->getName(),
@@ -94,7 +52,7 @@ class AuthCodeMailer implements AuthCodeMailerInterface
         ]);
 
         $email = (new Email())
-            ->from(new Address($this->senderEmail, $this->senderName ?? $this->senderEmail))
+            ->from(new Address($this->senderEmail, $this->senderName ?: $this->senderEmail))
             ->to($user->getEmailAuthRecipient())
             ->subject($subject)
             ->text($bodyText)

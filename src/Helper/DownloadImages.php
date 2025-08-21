@@ -16,19 +16,16 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 class DownloadImages
 {
     public const REGENERATE_PICTURES_QUALITY = 80;
-
-    private $client;
-    private $baseFolder;
-    private $logger;
     private $mimeTypes;
     private $wallabagUrl;
 
-    public function __construct(HttpClientInterface $downloadImagesClient, $baseFolder, $wallabagUrl, LoggerInterface $logger)
-    {
-        $this->client = $downloadImagesClient;
-        $this->baseFolder = $baseFolder;
-        $this->wallabagUrl = rtrim($wallabagUrl, '/');
-        $this->logger = $logger;
+    public function __construct(
+        private readonly HttpClientInterface $client,
+        private $baseFolder,
+        $wallabagUrl,
+        private readonly LoggerInterface $logger,
+    ) {
+        $this->wallabagUrl = rtrim((string) $wallabagUrl, '/');
         $this->mimeTypes = new MimeTypes();
 
         $this->setFolder();
@@ -101,10 +98,10 @@ class DownloadImages
      *     - re-saved it (for security reason)
      *     - return the new local path.
      *
-     * @param int    $entryId      ID of the entry
-     * @param string $imagePath    Path to the image to retrieve
-     * @param string $url          Url from where the image were found
-     * @param string $relativePath Relative local path to saved the image
+     * @param int         $entryId      ID of the entry
+     * @param string|null $imagePath    Path to the image to retrieve
+     * @param string      $url          Url from where the image were found
+     * @param string      $relativePath Relative local path to saved the image
      *
      * @return string|false Relative url to access the image from the web
      */
@@ -139,7 +136,7 @@ class DownloadImages
         }
 
         $ext = $this->getExtensionFromResponse($res, $imagePath);
-        if (false === $res) {
+        if (false === $ext) {
             return false;
         }
 
@@ -174,7 +171,7 @@ class DownloadImages
 
         try {
             $im = imagecreatefromstring($res->getContent());
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             $im = false;
         }
 
@@ -193,7 +190,7 @@ class DownloadImages
                         $imagick->readImageBlob($res->getContent());
                         $imagick->setImageFormat('gif');
                         $imagick->writeImages($localPath, true);
-                    } catch (\Exception $e) {
+                    } catch (\Exception) {
                         // if Imagick fail, fallback to the default solution
                         imagegif($im, $localPath);
                     }
@@ -211,7 +208,7 @@ class DownloadImages
             case 'png':
                 imagealphablending($im, false);
                 imagesavealpha($im, true);
-                imagepng($im, $localPath, ceil(self::REGENERATE_PICTURES_QUALITY / 100 * 9));
+                imagepng($im, $localPath, (int) ceil(self::REGENERATE_PICTURES_QUALITY / 100 * 9));
                 $this->logger->debug('DownloadImages: Re-creating png');
                 break;
             case 'webp':
@@ -257,7 +254,7 @@ class DownloadImages
      */
     public function getRelativePath($entryId, $createFolder = true)
     {
-        $hashId = hash('crc32', $entryId);
+        $hashId = hash('crc32', (string) $entryId);
         $relativePath = $hashId[0] . '/' . $hashId[1] . '/' . $hashId;
         $folderPath = $this->baseFolder . '/' . $relativePath;
 
@@ -294,9 +291,7 @@ class DownloadImages
                 preg_match_all($pattern, $srcsetAttribute, $matches);
 
                 $srcset = \call_user_func_array('array_merge', $matches);
-                $srcsetUrls = array_map(function ($src) {
-                    return trim(explode(' ', $src, 2)[0]);
-                }, $srcset);
+                $srcsetUrls = array_map(fn ($src) => trim(explode(' ', (string) $src, 2)[0]), $srcset);
                 $urls = array_merge($srcsetUrls, $urls);
             }
 

@@ -13,7 +13,7 @@ use Wallabag\Entity\Tag;
 use Wallabag\Helper\UrlHasher;
 
 /**
- * @method Entry[]    findById(int $id)
+ * @method Entry[]    findById(int[] $id)
  * @method Entry|null findOneByUser(int $userId)
  */
 class EntryRepository extends ServiceEntityRepository
@@ -171,9 +171,9 @@ class EntryRepository extends ServiceEntityRepository
     /**
      * Retrieves entries filtered with a search term for a user.
      *
-     * @param int    $userId
-     * @param string $term
-     * @param string $currentRoute
+     * @param int                                          $userId
+     * @param string                                       $term
+     * @param 'starred'|'unread'|'homepage'|'archive'|null $currentRoute
      *
      * @return QueryBuilder
      */
@@ -229,21 +229,6 @@ class EntryRepository extends ServiceEntityRepository
     }
 
     /**
-     * Retrieve entries with annotations count for a user.
-     *
-     * @param int $userId
-     *
-     * @return QueryBuilder
-     */
-    public function getCountBuilderForAnnotationsByUser($userId)
-    {
-        return $this
-            ->getQueryBuilderByUser($userId)
-            ->innerJoin('e.annotations', 'a')
-        ;
-    }
-
-    /**
      * Retrieve untagged entries for a user.
      *
      * @param int $userId
@@ -283,16 +268,17 @@ class EntryRepository extends ServiceEntityRepository
      * @param string $order
      * @param int    $since
      * @param string $tags
-     * @param string $detail      'metadata' or 'full'. Include content field if 'full'
+     * @param string $detail         'metadata' or 'full'. Include content field if 'full'
      * @param string $domainName
      * @param int    $httpStatus
      * @param bool   $isNotParsed
+     * @param bool   $hasAnnotations
      *
      * @todo Breaking change: replace default detail=full by detail=metadata in a future version
      *
      * @return Pagerfanta
      */
-    public function findEntries($userId, $isArchived = null, $isStarred = null, $isPublic = null, $sort = 'created', $order = 'asc', $since = 0, $tags = '', $detail = 'full', $domainName = '', $isNotParsed = null, $httpStatus = null)
+    public function findEntries($userId, $isArchived = null, $isStarred = null, $isPublic = null, $sort = 'created', $order = 'asc', $since = 0, $tags = '', $detail = 'full', $domainName = '', $isNotParsed = null, $httpStatus = null, $hasAnnotations = null)
     {
         if (!\in_array(strtolower($detail), ['full', 'metadata'], true)) {
             throw new \Exception('Detail "' . $detail . '" parameter is wrong, allowed: full or metadata');
@@ -304,9 +290,7 @@ class EntryRepository extends ServiceEntityRepository
 
         if ('metadata' === $detail) {
             $fieldNames = $this->getClassMetadata()->getFieldNames();
-            $fields = array_filter($fieldNames, function ($k) {
-                return 'content' !== $k;
-            });
+            $fields = array_filter($fieldNames, fn ($k) => 'content' !== $k);
             $qb->select(\sprintf('partial e.{%s}', implode(',', $fields)));
         }
 
@@ -357,6 +341,16 @@ class EntryRepository extends ServiceEntityRepository
 
         if (\is_string($domainName) && '' !== $domainName) {
             $qb->andWhere('e.domainName = :domainName')->setParameter('domainName', $domainName);
+        }
+
+        if (null !== $hasAnnotations) {
+            if ($hasAnnotations) {
+                $qb->leftJoin('e.annotations', 'a')
+                   ->andWhere('a.id IS NOT NULL');
+            } else {
+                $qb->leftJoin('e.annotations', 'a')
+                   ->andWhere('a.id IS NULL');
+            }
         }
 
         if (!\in_array(strtolower($order), ['asc', 'desc'], true)) {

@@ -8,6 +8,7 @@ use Nelmio\ApiDocBundle\Annotation\Operation;
 use OpenApi\Annotations as OA;
 use Pagerfanta\Doctrine\ORM\QueryAdapter as DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -54,17 +55,15 @@ class SearchRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/search.{_format}", methods={"GET"}, name="api_get_search", defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/search.{_format}', name: 'api_get_search', methods: ['GET'], defaults: ['_format' => 'json'])]
+    #[IsGranted('LIST_ENTRIES')]
     public function getSearchAction(Request $request, EntryRepository $entryRepository)
     {
-        $this->validateAuthentication();
-
         $term = $request->query->get('term');
-        $page = (int) $request->query->get('page', 1);
-        $perPage = (int) $request->query->get('perPage', 30);
+        $page = $request->query->getInt('page', 1);
+        $perPage = $request->query->getInt('perPage', 30);
 
         $qb = $entryRepository->getBuilderForSearchByUser(
             $this->getUser()->getId(),

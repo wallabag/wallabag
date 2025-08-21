@@ -8,6 +8,7 @@ use FOS\UserBundle\FOSUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Wallabag\Entity\Config;
+use Wallabag\Entity\User;
 
 /**
  * This listener will create the associated configuration when a user register.
@@ -15,30 +16,20 @@ use Wallabag\Entity\Config;
  */
 class CreateConfigListener implements EventSubscriberInterface
 {
-    private $em;
-    private $itemsOnPage;
-    private $feedLimit;
-    private $language;
-    private $readingSpeed;
-    private $actionMarkAsRead;
-    private $listMode;
-    private $requestStack;
-    private $displayThumbnails;
-
-    public function __construct(EntityManagerInterface $em, $itemsOnPage, $feedLimit, $language, $readingSpeed, $actionMarkAsRead, $listMode, $displayThumbnails, RequestStack $requestStack)
-    {
-        $this->em = $em;
-        $this->itemsOnPage = $itemsOnPage;
-        $this->feedLimit = $feedLimit;
-        $this->language = $language;
-        $this->readingSpeed = $readingSpeed;
-        $this->actionMarkAsRead = $actionMarkAsRead;
-        $this->listMode = $listMode;
-        $this->requestStack = $requestStack;
-        $this->displayThumbnails = $displayThumbnails;
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private $itemsOnPage,
+        private $feedLimit,
+        private $language,
+        private $readingSpeed,
+        private $actionMarkAsRead,
+        private $listMode,
+        private $displayThumbnails,
+        private readonly RequestStack $requestStack,
+    ) {
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             // when a user register using the normal form
@@ -53,12 +44,15 @@ class CreateConfigListener implements EventSubscriberInterface
     {
         $language = $this->language;
 
-        if ($this->requestStack->getMasterRequest()) {
-            $session = $this->requestStack->getMasterRequest()->getSession();
+        if ($this->requestStack->getMainRequest()) {
+            $session = $this->requestStack->getMainRequest()->getSession();
             $language = $session->get('_locale', $this->language);
         }
 
-        $config = new Config($event->getUser());
+        $user = $event->getUser();
+        \assert($user instanceof User);
+
+        $config = new Config($user);
         $config->setItemsPerPage($this->itemsOnPage);
         $config->setFeedLimit($this->feedLimit);
         $config->setLanguage($language);

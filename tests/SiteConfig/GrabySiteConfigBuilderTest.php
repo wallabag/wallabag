@@ -55,7 +55,7 @@ class GrabySiteConfigBuilderTest extends WallabagTestCase
             ->method('getId')
             ->willReturn(1);
 
-        $token = new UsernamePasswordToken($user, 'pass', 'provider');
+        $token = new UsernamePasswordToken($user, 'provider');
 
         $tokenStorage = new TokenStorage();
         $tokenStorage->setToken($token);
@@ -114,7 +114,7 @@ class GrabySiteConfigBuilderTest extends WallabagTestCase
             ->method('getId')
             ->willReturn(1);
 
-        $token = new UsernamePasswordToken($user, 'pass', 'provider');
+        $token = new UsernamePasswordToken($user, 'provider');
 
         $tokenStorage = new TokenStorage();
         $tokenStorage->setToken($token);
@@ -173,7 +173,7 @@ class GrabySiteConfigBuilderTest extends WallabagTestCase
             ->method('getId')
             ->willReturn(1);
 
-        $token = new UsernamePasswordToken($user, 'pass', 'provider');
+        $token = new UsernamePasswordToken($user, 'provider');
 
         $tokenStorage = new TokenStorage();
         $tokenStorage->setToken($token);
@@ -291,7 +291,7 @@ class GrabySiteConfigBuilderTest extends WallabagTestCase
             ->method('getId')
             ->willReturn(1);
 
-        $token = new UsernamePasswordToken($user, 'pass', 'provider');
+        $token = new UsernamePasswordToken($user, 'provider');
 
         $tokenStorage = new TokenStorage();
         $tokenStorage->setToken($token);

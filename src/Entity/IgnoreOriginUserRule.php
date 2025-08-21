@@ -5,41 +5,38 @@ namespace Wallabag\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\RulerZ\Validator\Constraints as RulerZAssert;
 use Symfony\Component\Validator\Constraints as Assert;
+use Wallabag\Repository\IgnoreOriginUserRuleRepository;
 
 /**
  * Ignore Origin rule.
- *
- * @ORM\Entity(repositoryClass="Wallabag\Repository\IgnoreOriginUserRuleRepository")
- * @ORM\Table(name="`ignore_origin_user_rule`")
  */
+#[ORM\Table(name: '`ignore_origin_user_rule`')]
+#[ORM\Entity(repositoryClass: IgnoreOriginUserRuleRepository::class)]
 class IgnoreOriginUserRule implements IgnoreOriginRuleInterface, RuleInterface
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private $id;
 
     /**
      * @var string
      *
-     * @Assert\NotBlank()
-     * @Assert\Length(max=255)
      * @RulerZAssert\ValidRule(
      *  allowed_variables={"host","_all"},
      *  allowed_operators={"=","~"}
      * )
-     * @ORM\Column(name="rule", type="string", nullable=false)
      */
+    #[ORM\Column(name: 'rule', type: 'string', nullable: false)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
     private $rule;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Wallabag\Entity\Config", inversedBy="ignoreOriginRules")
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: Config::class, inversedBy: 'ignoreOriginRules')]
     private $config;
 
     /**

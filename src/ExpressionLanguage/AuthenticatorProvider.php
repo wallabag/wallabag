@@ -9,11 +9,9 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class AuthenticatorProvider implements ExpressionFunctionProviderInterface
 {
-    private HttpClientInterface $requestHtmlFunctionClient;
-
-    public function __construct(HttpClientInterface $requestHtmlFunctionClient)
-    {
-        $this->requestHtmlFunctionClient = $requestHtmlFunctionClient;
+    public function __construct(
+        private readonly HttpClientInterface $requestHtmlFunctionClient,
+    ) {
     }
 
     public function getFunctions(): array
@@ -31,12 +29,10 @@ class AuthenticatorProvider implements ExpressionFunctionProviderInterface
     {
         return new ExpressionFunction(
             'request_html',
-            function () {
+            function (): void {
                 throw new \Exception('Not supported');
             },
-            function (array $arguments, $uri) {
-                return $this->requestHtmlFunctionClient->request('GET', $uri)->getContent();
-            }
+            fn (array $arguments, $uri) => $this->requestHtmlFunctionClient->request('GET', $uri)->getContent()
         );
     }
 
@@ -44,7 +40,7 @@ class AuthenticatorProvider implements ExpressionFunctionProviderInterface
     {
         return new ExpressionFunction(
             'preg_match',
-            function () {
+            function (): void {
                 throw new \Exception('Not supported');
             },
             function (array $arguments, $pattern, $html) {
@@ -63,7 +59,7 @@ class AuthenticatorProvider implements ExpressionFunctionProviderInterface
     {
         return new ExpressionFunction(
             'xpath',
-            function () {
+            function (): void {
                 throw new \Exception('Not supported');
             },
             function (array $arguments, $xpathQuery, $html) {
@@ -71,7 +67,7 @@ class AuthenticatorProvider implements ExpressionFunctionProviderInterface
                     $crawler = new Crawler((string) $html);
 
                     $crawler = $crawler->filterXPath($xpathQuery);
-                } catch (\Throwable $e) {
+                } catch (\Throwable) {
                     return '';
                 }
 

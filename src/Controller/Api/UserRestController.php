@@ -34,7 +34,7 @@ class UserRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/user.{_format}", methods={"GET"}, name="api_get_user", defaults={"_format": "json"})
+     * @Route("/api/user.{_format}", name="api_get_user", methods={"GET"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
@@ -98,13 +98,13 @@ class UserRestController extends WallabagRestController
      *
      * @todo Make this method (or the whole API) accessible only through https
      *
-     * @Route("/api/user.{_format}", methods={"PUT"}, name="api_put_user", defaults={"_format": "json"})
+     * @Route("/api/user.{_format}", name="api_put_user", methods={"PUT"}, defaults={"_format": "json"})
      *
      * @return JsonResponse
      */
     public function putUserAction(Request $request, Config $craueConfig, UserManagerInterface $userManager, EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher)
     {
-        if (!$this->getParameter('fosuser_registration') || !$craueConfig->get('api_user_registration')) {
+        if (!$this->registrationEnabled || !$craueConfig->get('api_user_registration')) {
             $json = $this->serializer->serialize(['error' => "Server doesn't allow registrations"], 'json');
 
             return (new JsonResponse())

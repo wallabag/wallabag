@@ -209,19 +209,6 @@ config:
             enable: "启用"
             two_factor_code_description_5: 如果你看不到二维码或无法扫描它，请在你的应用程序中输入下列认证代码：
             qrcode_label: 二维码
-    form_rss:
-        rss_limit: RSS源中的条目数
-        rss_link:
-            all: 全部
-            archive: 已存档
-            starred: 已标星
-            unread: 未读
-        rss_links: RSS链接
-        token_reset: 重新生成你的令牌
-        token_create: 创建你的令牌
-        no_token: 没有令牌
-        token_label: RSS令牌
-        description: wallabag提供的RSS源可以让你用你喜欢的RSS阅读器阅读你保存的文章。首先需要生成一个令牌。
     form_ignore_origin_rules:
         faq:
             operator_description:

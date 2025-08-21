@@ -30,6 +30,7 @@ services:
             $storeArticleHeaders: '@=service(''craue_config'').get(''store_article_headers'')'
             $supportUrl: '@=service(''craue_config'').get(''wallabag_support_url'')'
             $fonts: '%wallabag.fonts%'
+            $defaultIgnoreOriginInstanceRules: '%wallabag.default_ignore_origin_instance_rules%'
 
     Wallabag\:
         resource: '../../src/*'
@@ -106,6 +107,14 @@ services:
         arguments:
             $rabbitMqProducer: '@old_sound_rabbit_mq.import_pocket_html_producer'
             $redisProducer: '@wallabag.producer.redis.pocket_html'
+
+    Wallabag\Controller\Import\PocketCsvController:
+        arguments:
+            $rabbitMqProducer: '@old_sound_rabbit_mq.import_pocket_csv_producer'
+            $redisProducer: '@wallabag.producer.redis.pocket_csv'
+
+    Wallabag\Doctrine\MigrationFactoryDecorator:
+        decorates: doctrine.migrations.migrations_factory
 
     Doctrine\DBAL\Connection:
         alias: doctrine.dbal.default_connection
@@ -187,11 +196,17 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
 
+    psr18.wallabag.client:
+        class: Symfony\Component\HttpClient\Psr18Client
+        arguments:
+            $client: '@Wallabag\HttpClient\WallabagClient'
+
     Graby\Graby:
         arguments:
             $config:
                 error_message: '%wallabag.fetching_error_message%'
                 error_message_title: '%wallabag.fetching_error_message_title%'
+            $client: '@psr18.wallabag.client'
         calls:
             - [ setLogger, [ "@logger" ] ]
         tags:
@@ -201,9 +216,6 @@ services:
         arguments:
             $config: {}
 
-    wallabag.http_client:
-        alias: 'httplug.client.wallabag'
-
     Wallabag\SiteConfig\GrabySiteConfigBuilder:
         tags:
             - { name: monolog.logger, channel: graby }
@@ -212,11 +224,9 @@ services:
     Wallabag\SiteConfig\SiteConfigBuilder:
         alias: Wallabag\SiteConfig\GrabySiteConfigBuilder
 
-    GuzzleHttp\Cookie\CookieJar: ~
-
-    Wallabag\Helper\HttpClientFactory:
-        calls:
-            - ['addSubscriber', ['@Wallabag\Guzzle\AuthenticatorSubscriber']]
+    Symfony\Component\BrowserKit\HttpBrowser:
+        arguments:
+            $client: '@browser.client'
 
     RulerZ\RulerZ:
         alias: rulerz
@@ -225,17 +235,9 @@ services:
         tags:
             - { name: rulerz.operator, target: native, operator: matches }
 
-    Wallabag\Operator\Doctrine\Matches:
-        tags:
-            - { name: rulerz.operator, target: doctrine, operator: matches, inline: true }
-
     Wallabag\Operator\PHP\NotMatches:
         tags:
             - { name: rulerz.operator, target: native, operator: notmatches }
-
-    Wallabag\Operator\Doctrine\NotMatches:
-        tags:
-            - { name: rulerz.operator, target: doctrine, operator: notmatches, inline: true }
 
     Wallabag\Operator\PHP\PatternMatches:
         tags:
@@ -243,12 +245,7 @@ services:
 
     Predis\Client:
         arguments:
-            $parameters:
-                scheme: '%redis_scheme%'
-                host: '%redis_host%'
-                port: '%redis_port%'
-                path: '%redis_path%'
-                password: '%redis_password%'
+            $parameters: '%env(REDIS_URL)%'
 
     Wallabag\Event\Subscriber\SQLiteCascadeDeleteSubscriber:
         tags:
@@ -267,16 +264,6 @@ services:
             $databaseDriver: '%database_driver%'
             $defaultSettings: '%wallabag.default_internal_settings%'
             $defaultIgnoreOriginInstanceRules: '%wallabag.default_ignore_origin_instance_rules%'
-
-    Wallabag\Mailer\UserMailer:
-        arguments:
-            $parameters:
-                template:
-                    confirmation: '%fos_user.registration.confirmation.template%'
-                    resetting: '%fos_user.resetting.email.template%'
-                from_email:
-                    confirmation: '%fos_user.registration.confirmation.from_email%'
-                    resetting: '%fos_user.resetting.email.from_email%'
 
     Wallabag\Event\Listener\CreateConfigListener:
         arguments:
@@ -345,6 +332,10 @@ services:
     Wallabag\Import\PocketHtmlImport:
         tags:
             -  { name: wallabag.import, alias: pocket_html }
+
+    Wallabag\Import\PocketCsvImport:
+        tags:
+            -  { name: wallabag.import, alias: pocket_csv }
 
     # to factorize the proximity and bypass translation for prev & next
     pagerfanta.view.default_wallabag:

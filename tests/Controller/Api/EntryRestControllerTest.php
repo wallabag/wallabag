@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\Container;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\Tag;
-use Wallabag\Entity\User;
 use Wallabag\Helper\ContentProxy;
 
 class EntryRestControllerTest extends WallabagApiTestCase
@@ -110,7 +109,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
 
         $this->client->request('GET', '/api/entries/' . $entry->getId() . '.json');
 
-        $this->assertSame(403, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
     }
 
     public function testGetEntries()
@@ -228,6 +227,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             'public' => 0,
             'notParsed' => 0,
             'http_status' => 200,
+            'annotations' => 1,
         ]);
 
         $this->assertSame(200, $this->client->getResponse()->getStatusCode());
@@ -255,6 +255,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
             $this->assertStringContainsString('tags=foo', $content['_links'][$link]['href']);
             $this->assertStringContainsString('since=1443274283', $content['_links'][$link]['href']);
             $this->assertStringContainsString('public=0', $content['_links'][$link]['href']);
+            $this->assertStringContainsString('annotations=1', $content['_links'][$link]['href']);
         }
 
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
@@ -301,6 +302,86 @@ class EntryRestControllerTest extends WallabagApiTestCase
         foreach (['self', 'first', 'last'] as $link) {
             $this->assertArrayHasKey('href', $content['_links'][$link]);
             $this->assertStringContainsString('public=1', $content['_links'][$link]['href']);
+        }
+
+        $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
+    }
+
+    public function testGetEntriesWithAnnotationsFilter()
+    {
+        // Test filter for entries WITH annotations
+        // From fixtures: entry1 and entry2 have annotations, entry4, entry5, entry6, entry7 don't
+        $this->client->request('GET', '/api/entries', [
+            'annotations' => 1,
+        ]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey('items', $content['_embedded']);
+
+        // Check that only entries with annotations are returned
+        $entriesWithAnnotations = ['http://0.0.0.0/entry1', 'http://0.0.0.0/entry2'];
+        $entriesWithoutAnnotations = ['http://0.0.0.0/entry4', 'http://0.0.0.0/entry5', 'http://0.0.0.0/entry6', 'http://0.0.0.0/entry7'];
+
+        foreach ($content['_embedded']['items'] as $item) {
+            if (\in_array($item['url'], $entriesWithAnnotations, true)) {
+                $this->assertNotEmpty($item['annotations'], 'Entry with URL ' . $item['url'] . ' should have annotations');
+            }
+            $this->assertNotContains($item['url'], $entriesWithoutAnnotations, 'Entry without annotations should NOT be in the results');
+        }
+
+        // Ensure we have at least the entries with annotations
+        $foundUrls = array_column($content['_embedded']['items'], 'url');
+        $this->assertContains('http://0.0.0.0/entry1', $foundUrls, 'entry1 with annotations should be in the results');
+        $this->assertContains('http://0.0.0.0/entry2', $foundUrls, 'entry2 with annotations should be in the results');
+
+        // Check pagination links contain the filter
+        $this->assertArrayHasKey('_links', $content);
+        foreach (['self', 'first', 'last'] as $link) {
+            $this->assertArrayHasKey('href', $content['_links'][$link]);
+            $this->assertStringContainsString('annotations=1', $content['_links'][$link]['href']);
+        }
+
+        $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
+    }
+
+    public function testGetEntriesWithoutAnnotationsFilter()
+    {
+        // Test filter for entries WITHOUT annotations
+        // From fixtures: entry1 and entry2 have annotations, entry4, entry5, entry6, entry7 don't
+        $this->client->request('GET', '/api/entries', [
+            'annotations' => 0,
+        ]);
+
+        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        $this->assertArrayHasKey('items', $content['_embedded']);
+
+        // Check that only entries without annotations are returned
+        $entriesWithAnnotations = ['http://0.0.0.0/entry1', 'http://0.0.0.0/entry2'];
+        $entriesWithoutAnnotations = ['http://0.0.0.0/entry4', 'http://0.0.0.0/entry5', 'http://0.0.0.0/entry6', 'http://0.0.0.0/entry7'];
+
+        foreach ($content['_embedded']['items'] as $item) {
+            $this->assertNotContains($item['url'], $entriesWithAnnotations, 'Entry with annotations should NOT be in the results');
+            if (\in_array($item['url'], $entriesWithoutAnnotations, true)) {
+                $this->assertEmpty($item['annotations'], 'Entry with URL ' . $item['url'] . ' should not have annotations');
+            }
+        }
+
+        // Ensure we have at least some entries without annotations
+        $foundUrls = array_column($content['_embedded']['items'], 'url');
+        $foundWithoutAnnotations = array_intersect($foundUrls, $entriesWithoutAnnotations);
+        $this->assertNotEmpty($foundWithoutAnnotations, 'Should have at least one entry without annotations in the results');
+
+        // Check pagination links contain the filter
+        $this->assertArrayHasKey('_links', $content);
+        foreach (['self', 'first', 'last'] as $link) {
+            $this->assertArrayHasKey('href', $content['_links'][$link]);
+            $this->assertStringContainsString('annotations=0', $content['_links'][$link]['href']);
         }
 
         $this->assertSame('application/json', $this->client->getResponse()->headers->get('Content-Type'));
@@ -535,13 +616,13 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testDeleteEntry()
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
-        $entry = new Entry($em->getReference(User::class, 1));
+        $entry = new Entry($this->user);
         $entry->setUrl('http://0.0.0.0/test-delete-entry');
         $entry->setTitle('Test delete entry');
         $em->persist($entry);
         $em->flush();
 
-        $em->clear();
+        $this->client = $this->createAuthorizedClient();
 
         $e = [
             'title' => $entry->getTitle(),
@@ -569,12 +650,12 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testDeleteEntryExpectId()
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
-        $entry = new Entry($em->getReference(User::class, 1));
+        $entry = new Entry($this->user);
         $entry->setUrl('http://0.0.0.0/test-delete-entry-id');
         $em->persist($entry);
         $em->flush();
 
-        $em->clear();
+        $this->client = $this->createAuthorizedClient();
 
         $id = $entry->getId();
 
@@ -599,6 +680,25 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $this->client->request('DELETE', '/api/entries/1.json?expect=badrequest');
 
         $this->assertSame(400, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testBadFormatURL()
+    {
+        $this->client->request('POST', '/api/entries.json', [
+            'url' => 'wallabagIsAwesome',
+            'tags' => 'google',
+            'title' => 'New title for my article',
+            'content' => 'my content',
+            'language' => 'de',
+            'published_at' => '2016-09-08T11:55:58+0200',
+            'authors' => 'bob,helen',
+            'public' => 1,
+        ]);
+
+        $this->assertSame(400, $this->client->getResponse()->getStatusCode());
+
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+        $this->assertStringContainsString('The url \'"wallabagIsAwesome"\' is not a valid url', $content['message']);
     }
 
     public function testPostEntry()
@@ -640,14 +740,15 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testPostSameEntry()
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
-        $entry = new Entry($em->getReference(User::class, $this->getUserId()));
+        $entry = new Entry($this->user);
         $entry->setUrl('https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment');
         $entry->setArchived(true);
         $entry->addTag((new Tag())->setLabel('google'));
         $entry->addTag((new Tag())->setLabel('apple'));
         $em->persist($entry);
         $em->flush();
-        $em->clear();
+
+        $this->client = $this->createAuthorizedClient();
 
         $this->client->request('POST', '/api/entries.json', [
             'url' => 'https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment',
@@ -672,7 +773,7 @@ class EntryRestControllerTest extends WallabagApiTestCase
         $container = $this->client->getContainer();
         $contentProxy = $this->getMockBuilder(ContentProxy::class)
             ->disableOriginalConstructor()
-            ->setMethods(['updateEntry'])
+            ->onlyMethods(['updateEntry'])
             ->getMock();
         $contentProxy->expects($this->any())
             ->method('updateEntry')
@@ -1241,14 +1342,14 @@ class EntryRestControllerTest extends WallabagApiTestCase
     {
         $this->client->request('GET', '/api/entries/exists?url=');
 
-        $this->assertSame(403, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
     }
 
     public function testGetEntriesExistsWithNoHashedUrl()
     {
         $this->client->request('GET', '/api/entries/exists?hashed_url=');
 
-        $this->assertSame(403, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
     }
 
     public function testReloadEntryErrorWhileFetching()
@@ -1335,14 +1436,14 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testDeleteEntriesTagsListAction()
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
-        $entry = new Entry($em->getReference(User::class, $this->getUserId()));
+        $entry = new Entry($this->user);
         $entry->setUrl('http://0.0.0.0/test-entry');
         $entry->addTag((new Tag())->setLabel('foo-tag'));
         $entry->addTag((new Tag())->setLabel('bar-tag'));
         $em->persist($entry);
         $em->flush();
 
-        $em->clear();
+        $this->client = $this->createAuthorizedClient();
 
         $list = [
             [
@@ -1403,10 +1504,12 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testDeleteEntriesListAction()
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
-        $em->persist((new Entry($em->getReference(User::class, $this->getUserId())))->setUrl('http://0.0.0.0/test-entry1'));
+        $em->persist((new Entry($this->user))->setUrl('http://0.0.0.0/test-entry1'));
 
         $em->flush();
-        $em->clear();
+
+        $this->client = $this->createAuthorizedClient();
+
         $list = [
             'http://0.0.0.0/test-entry1',
             'http://0.0.0.0/test-entry-not-exist',
@@ -1461,14 +1564,15 @@ class EntryRestControllerTest extends WallabagApiTestCase
     public function testRePostEntryAndReUsePublishedAt()
     {
         $em = $this->client->getContainer()->get(EntityManagerInterface::class);
-        $entry = new Entry($em->getReference(User::class, $this->getUserId()));
+        $entry = new Entry($this->user);
         $entry->setTitle('Antoine de Caunes : « Je veux avoir le droit de tâtonner »');
         $entry->setContent('hihi');
         $entry->setUrl('https://www.lemonde.fr/m-perso/article/2017/06/25/antoine-de-caunes-je-veux-avoir-le-droit-de-tatonner_5150728_4497916.html');
         $entry->setPublishedAt(new \DateTime('2017-06-26T07:46:02+0200'));
         $em->persist($entry);
         $em->flush();
-        $em->clear();
+
+        $this->client = $this->createAuthorizedClient();
 
         $this->client->request('POST', '/api/entries.json', [
             'url' => 'https://www.lemonde.fr/m-perso/article/2017/06/25/antoine-de-caunes-je-veux-avoir-le-droit-de-tatonner_5150728_4497916.html',

@@ -11,7 +11,7 @@
 
                     <div class="row">
                         <div class="div_tabs col s12">
-                            <ul class="tabs">
+                            <ul class="tabs" data-controller="materialize--tabs">
                                 {% for section in sections|craue_sortSections %}
                                     <li class="tab col s12 m6 l3"><a href="#set-{{ section }}">{{ section|trans({}, 'CraueConfigBundle') }}</a></li>
                                 {% endfor %}
@@ -22,9 +22,13 @@
                             <div id="set-{{ section }}" class="col s12">
                                 {% for setting in form.settings %}
                                     {% if setting.vars.value.section == section %}
-                                        {{ form_row(setting.value, {
-                                            'label': setting.vars.value.name|trans({}, 'CraueConfigBundle'),
-                                        }) }}
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                {{ form_row(setting.value, {
+                                                    'label': setting.vars.value.name|trans({}, 'CraueConfigBundle'),
+                                                }) }}
+                                            </div>
+                                        </div>
                                     {% endif %}
                                 {% endfor %}
                             </div>

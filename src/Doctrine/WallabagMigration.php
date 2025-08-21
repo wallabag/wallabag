@@ -5,17 +5,14 @@ namespace Wallabag\Doctrine;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
-abstract class WallabagMigration extends AbstractMigration implements ContainerAwareInterface
+abstract class WallabagMigration extends AbstractMigration
 {
     public const UN_ESCAPED_TABLE = true;
 
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
+    protected string $tablePrefix;
+    protected array $defaultIgnoreOriginInstanceRules;
+    protected string $fetchingErrorMessage;
 
     // because there are declared as abstract in `AbstractMigration` we need to delarer here too
     public function up(Schema $schema): void
@@ -24,11 +21,6 @@ abstract class WallabagMigration extends AbstractMigration implements ContainerA
 
     public function down(Schema $schema): void
     {
-    }
-
-    public function setContainer(?ContainerInterface $container = null)
-    {
-        $this->container = $container;
     }
 
     /**
@@ -41,14 +33,24 @@ abstract class WallabagMigration extends AbstractMigration implements ContainerA
         return false;
     }
 
-    protected function getTablePrefix(): string
+    public function setTablePrefix(string $tablePrefix): void
     {
-        return (string) $this->container->getParameter('database_table_prefix');
+        $this->tablePrefix = $tablePrefix;
+    }
+
+    public function setDefaultIgnoreOriginInstanceRules(array $defaultIgnoreOriginInstanceRules): void
+    {
+        $this->defaultIgnoreOriginInstanceRules = $defaultIgnoreOriginInstanceRules;
+    }
+
+    public function setFetchingErrorMessage(string $fetchingErrorMessage): void
+    {
+        $this->fetchingErrorMessage = $fetchingErrorMessage;
     }
 
     protected function getTable($tableName, $unEscaped = false)
     {
-        $table = $this->container->getParameter('database_table_prefix') . $tableName;
+        $table = $this->tablePrefix . $tableName;
 
         if (self::UN_ESCAPED_TABLE === $unEscaped) {
             return $table;
@@ -87,9 +89,7 @@ abstract class WallabagMigration extends AbstractMigration implements ContainerA
      */
     protected function generateIdentifierName(array $columnNames, string $prefix = ''): string
     {
-        $hash = implode('', array_map(static function ($column): string {
-            return dechex(crc32($column));
-        }, $columnNames));
+        $hash = implode('', array_map(static fn ($column): string => dechex(crc32($column)), $columnNames));
 
         return strtoupper(substr($prefix . '_' . $hash, 0, $this->platform->getMaxIdentifierLength()));
     }

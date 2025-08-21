@@ -12,21 +12,23 @@
                     <h3>{{ 'quickstart.intro.title'|trans }}</h3>
 
                     <ul class="row data">
-                        <li class="col l4 m6 s12">
-                            <div class="card teal darken-1">
-                                <div class="card-content white-text">
-                                    <span class="card-title white-text">{{ 'quickstart.configure.title'|trans }}</span>
-                                    <p>{{ 'quickstart.configure.description'|trans }}</p>
+                        {% if is_granted('EDIT_CONFIG') %}
+                            <li class="col l4 m6 s12">
+                                <div class="card teal darken-1">
+                                    <div class="card-content white-text">
+                                        <span class="card-title white-text">{{ 'quickstart.configure.title'|trans }}</span>
+                                        <p>{{ 'quickstart.configure.description'|trans }}</p>
+                                    </div>
+                                    <div class="card-action">
+                                        <ul>
+                                            <li><a href="{{ path('config') }}">{{ 'quickstart.configure.language'|trans }}</a></li>
+                                            <li><a href="{{ path('config') }}#set2">{{ 'quickstart.configure.feed'|trans }}</a></li>
+                                            <li><a href="{{ path('config') }}#set5">{{ 'quickstart.more'|trans }}</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="card-action">
-                                    <ul>
-                                        <li><a href="{{ path('config') }}">{{ 'quickstart.configure.language'|trans }}</a></li>
-                                        <li><a href="{{ path('config') }}#set2">{{ 'quickstart.configure.feed'|trans }}</a></li>
-                                        <li><a href="{{ path('config') }}#set5">{{ 'quickstart.more'|trans }}</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                        {% endif %}
 
                         <li class="col l4 m6 s12">
                             <div class="card green darken-1">
@@ -45,22 +47,24 @@
                             </div>
                         </li>
 
-                        <li class="col l4 m6 s12">
-                            <div class="card light-green darken-1">
-                                <div class="card-content white-text">
-                                    <span class="card-title white-text">{{ 'quickstart.migrate.title'|trans }}</span>
-                                    <p>{{ 'quickstart.migrate.description'|trans }}</p>
+                        {% if is_granted('IMPORT_ENTRIES') %}
+                            <li class="col l4 m6 s12">
+                                <div class="card light-green darken-1">
+                                    <div class="card-content white-text">
+                                        <span class="card-title white-text">{{ 'quickstart.migrate.title'|trans }}</span>
+                                        <p>{{ 'quickstart.migrate.description'|trans }}</p>
+                                    </div>
+                                    <div class="card-action">
+                                        <ul>
+                                            <li><a href="{{ path('import_pocket_csv') }}">{{ 'quickstart.migrate.pocket'|trans }}</a></li>
+                                            <li><a href="{{ path('import_readability') }}">{{ 'quickstart.migrate.readability'|trans }}</a></li>
+                                            <li><a href="{{ path('import_instapaper') }}">{{ 'quickstart.migrate.instapaper'|trans }}</a></li>
+                                            <li><a href="{{ path('import') }}">{{ 'quickstart.more'|trans }}</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="card-action">
-                                    <ul>
-                                        <li><a href="{{ path('import_pocket') }}">{{ 'quickstart.migrate.pocket'|trans }}</a></li>
-                                        <li><a href="{{ path('import_readability') }}">{{ 'quickstart.migrate.readability'|trans }}</a></li>
-                                        <li><a href="{{ path('import_instapaper') }}">{{ 'quickstart.migrate.instapaper'|trans }}</a></li>
-                                        <li><a href="{{ path('import') }}">{{ 'quickstart.more'|trans }}</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                        {% endif %}
 
                         <li class="col l4 m6 s12">
                             <div class="card blue darken-1">
@@ -71,7 +75,6 @@
                                 <div class="card-action">
                                     <ul>
                                         <li><a href="{{ path('developer') }}">{{ 'quickstart.developer.create_application'|trans }}</a></li>
-                                        <li><a href="https://doc.wallabag.org/en/developer/docker.html">{{ 'quickstart.developer.use_docker'|trans }}</a></li>
                                         <li><a href="https://doc.wallabag.org/">{{ 'quickstart.more'|trans }}</a></li>
                                     </ul>
                                 </div>

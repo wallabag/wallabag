@@ -10,19 +10,20 @@ use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use PragmaRX\Recovery\Recovery as BackupCodes;
 use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Validator\Constraints\Locale as LocaleConstraint;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Wallabag\Entity\Config as ConfigEntity;
 use Wallabag\Entity\IgnoreOriginUserRule;
-use Wallabag\Entity\RuleInterface;
 use Wallabag\Entity\TaggingRule;
 use Wallabag\Event\ConfigUpdatedEvent;
 use Wallabag\Form\Type\ChangePasswordType;
@@ -44,38 +45,20 @@ use Wallabag\Tools\Utils;
 
 class ConfigController extends AbstractController
 {
-    private EntityManagerInterface $entityManager;
-    private UserManagerInterface $userManager;
-    private EntryRepository $entryRepository;
-    private TagRepository $tagRepository;
-    private AnnotationRepository $annotationRepository;
-    private ConfigRepository $configRepository;
-    private EventDispatcherInterface $eventDispatcher;
-    private Redirect $redirectHelper;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        UserManagerInterface $userManager,
-        EntryRepository $entryRepository,
-        TagRepository $tagRepository,
-        AnnotationRepository $annotationRepository,
-        ConfigRepository $configRepository,
-        EventDispatcherInterface $eventDispatcher,
-        Redirect $redirectHelper
+        private readonly EntityManagerInterface $entityManager,
+        private readonly UserManagerInterface $userManager,
+        private readonly EntryRepository $entryRepository,
+        private readonly TagRepository $tagRepository,
+        private readonly AnnotationRepository $annotationRepository,
+        private readonly ConfigRepository $configRepository,
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly Redirect $redirectHelper,
     ) {
-        $this->entityManager = $entityManager;
-        $this->userManager = $userManager;
-        $this->entryRepository = $entryRepository;
-        $this->tagRepository = $tagRepository;
-        $this->annotationRepository = $annotationRepository;
-        $this->configRepository = $configRepository;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->redirectHelper = $redirectHelper;
     }
 
-    /**
-     * @Route("/config", name="config")
-     */
+    #[Route(path: '/config', name: 'config', methods: ['GET', 'POST'])]
+    #[IsGranted('EDIT_CONFIG')]
     public function indexAction(Request $request, Config $craueConfig, TaggingRuleRepository $taggingRuleRepository, IgnoreOriginUserRuleRepository $ignoreOriginUserRuleRepository, UserRepository $userRepository)
     {
         $config = $this->getConfig();
@@ -108,7 +91,8 @@ class ConfigController extends AbstractController
             $message = 'flashes.config.notice.password_updated';
 
             $user->setPlainPassword($pwdForm->get('new_password')->getData());
-            $this->userManager->updateUser($user, true);
+            $this->userManager->updateUser($user);
+            $this->entityManager->flush();
 
             $this->addFlash('notice', $message);
 
@@ -123,7 +107,8 @@ class ConfigController extends AbstractController
         $userForm->handleRequest($request);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
-            $this->userManager->updateUser($user, true);
+            $this->userManager->updateUser($user);
+            $this->entityManager->flush();
 
             $this->addFlash(
                 'notice',
@@ -257,26 +242,26 @@ class ConfigController extends AbstractController
                 'username' => $user->getUsername(),
                 'token' => $config->getFeedToken(),
             ],
-            'wallabag_url' => $this->getParameter('domain_name'),
             'enabled_users' => $userRepository->getSumEnabledUsers(),
         ]);
     }
 
     /**
      * Disable 2FA using email.
-     *
-     * @Route("/config/otp/email/disable", name="disable_otp_email", methods={"POST"})
      */
+    #[Route(path: '/config/otp/email/disable', name: 'disable_otp_email', methods: ['POST'])]
+    #[IsGranted('EDIT_CONFIG')]
     public function disableOtpEmailAction(Request $request)
     {
         if (!$this->isCsrfTokenValid('otp', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
         $user = $this->getUser();
         $user->setEmailTwoFactor(false);
 
-        $this->userManager->updateUser($user, true);
+        $this->userManager->updateUser($user);
+        $this->entityManager->flush();
 
         $this->addFlash(
             'notice',
@@ -288,13 +273,13 @@ class ConfigController extends AbstractController
 
     /**
      * Enable 2FA using email.
-     *
-     * @Route("/config/otp/email", name="config_otp_email", methods={"POST"})
      */
+    #[Route(path: '/config/otp/email', name: 'config_otp_email', methods: ['POST'])]
+    #[IsGranted('EDIT_CONFIG')]
     public function otpEmailAction(Request $request)
     {
         if (!$this->isCsrfTokenValid('otp', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
         $user = $this->getUser();
@@ -303,7 +288,8 @@ class ConfigController extends AbstractController
         $user->setBackupCodes(null);
         $user->setEmailTwoFactor(true);
 
-        $this->userManager->updateUser($user, true);
+        $this->userManager->updateUser($user);
+        $this->entityManager->flush();
 
         $this->addFlash(
             'notice',
@@ -315,21 +301,23 @@ class ConfigController extends AbstractController
 
     /**
      * Disable 2FA using OTP app.
-     *
-     * @Route("/config/otp/app/disable", name="disable_otp_app", methods={"POST"})
      */
+    #[Route(path: '/config/otp/app/disable', name: 'disable_otp_app', methods: ['POST'])]
+    #[IsGranted('EDIT_CONFIG')]
     public function disableOtpAppAction(Request $request)
     {
         if (!$this->isCsrfTokenValid('otp', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
         $user = $this->getUser();
 
         $user->setGoogleAuthenticatorSecret('');
+        $user->setGoogleAuthenticator(false);
         $user->setBackupCodes(null);
 
-        $this->userManager->updateUser($user, true);
+        $this->userManager->updateUser($user);
+        $this->entityManager->flush();
 
         $this->addFlash(
             'notice',
@@ -341,13 +329,13 @@ class ConfigController extends AbstractController
 
     /**
      * Enable 2FA using OTP app, user will need to confirm the generated code from the app.
-     *
-     * @Route("/config/otp/app", name="config_otp_app", methods={"POST"})
      */
+    #[Route(path: '/config/otp/app', name: 'config_otp_app', methods: ['POST'])]
+    #[IsGranted('EDIT_CONFIG')]
     public function otpAppAction(Request $request, GoogleAuthenticatorInterface $googleAuthenticator)
     {
         if (!$this->isCsrfTokenValid('otp', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
         $user = $this->getUser();
@@ -358,20 +346,14 @@ class ConfigController extends AbstractController
 
         $backupCodes = (new BackupCodes())->toArray();
         $backupCodesHashed = array_map(
-            function ($backupCode) {
-                return password_hash($backupCode, \PASSWORD_DEFAULT);
-            },
+            fn ($backupCode) => password_hash((string) $backupCode, \PASSWORD_DEFAULT),
             $backupCodes
         );
 
         $user->setBackupCodes($backupCodesHashed);
 
-        $this->userManager->updateUser($user, true);
-
-        $this->addFlash(
-            'notice',
-            'flashes.config.notice.otp_enabled'
-        );
+        $this->userManager->updateUser($user);
+        $this->entityManager->flush();
 
         return $this->render('Config/otp_app.html.twig', [
             'backupCodes' => $backupCodes,
@@ -384,6 +366,7 @@ class ConfigController extends AbstractController
      * Cancelling 2FA using OTP app.
      *
      * @Route("/config/otp/app/cancel", name="config_otp_app_cancel")
+     * @IsGranted("EDIT_CONFIG")
      *
      * XXX: commented until we rewrite 2fa with a real two-steps activation
      */
@@ -400,58 +383,64 @@ class ConfigController extends AbstractController
 
     /**
      * Validate OTP code.
-     *
-     * @Route("/config/otp/app/check", name="config_otp_app_check", methods={"POST"})
      */
+    #[Route(path: '/config/otp/app/check', name: 'config_otp_app_check', methods: ['POST'])]
+    #[IsGranted('EDIT_CONFIG')]
     public function otpAppCheckAction(Request $request, GoogleAuthenticatorInterface $googleAuthenticator)
     {
         if (!$this->isCsrfTokenValid('otp', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
+        $user = $this->getUser();
+
         $isValid = $googleAuthenticator->checkCode(
-            $this->getUser(),
-            $request->get('_auth_code')
+            $user,
+            $request->request->get('_auth_code')
         );
 
-        if (true === $isValid) {
+        if ($isValid) {
             $this->addFlash(
                 'notice',
                 'flashes.config.notice.otp_enabled'
             );
+            $user->setGoogleAuthenticator(true);
+            $this->userManager->updateUser($user);
+            $this->entityManager->flush();
 
             return $this->redirect($this->generateUrl('config') . '#set3');
         }
 
         $this->addFlash(
-            'two_factor',
-            'scheb_two_factor.code_invalid'
-        );
-
-        $this->addFlash(
             'notice',
-            'scheb_two_factor.code_invalid'
+            'flashes.config.notice.otp_code_invalid'
         );
 
-        return $this->redirect($this->generateUrl('config') . '#set3');
+        $user->setGoogleAuthenticatorSecret(null);
+        $user->setBackupCodes(null);
+
+        $this->userManager->updateUser($user);
+        $this->entityManager->flush();
+
+        return $this->redirect($this->generateUrl('config_otp_app'), 307);
     }
 
     /**
-     * @Route("/generate-token", name="generate_token")
-     *
      * @return RedirectResponse|JsonResponse
      */
+    #[Route(path: '/generate-token', name: 'generate_token', methods: ['POST'])]
+    #[IsGranted('EDIT_CONFIG')]
     public function generateTokenAction(Request $request)
     {
+        if (!$this->isCsrfTokenValid('generate-token', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $config = $this->getConfig();
         $config->setFeedToken(Utils::generateToken());
 
         $this->entityManager->persist($config);
         $this->entityManager->flush();
-
-        if ($request->isXmlHttpRequest()) {
-            return new JsonResponse(['token' => $config->getFeedToken()]);
-        }
 
         $this->addFlash(
             'notice',
@@ -462,21 +451,21 @@ class ConfigController extends AbstractController
     }
 
     /**
-     * @Route("/revoke-token", name="revoke_token")
-     *
      * @return RedirectResponse|JsonResponse
      */
+    #[Route(path: '/revoke-token', name: 'revoke_token', methods: ['POST'])]
+    #[IsGranted('EDIT_CONFIG')]
     public function revokeTokenAction(Request $request)
     {
+        if (!$this->isCsrfTokenValid('revoke-token', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $config = $this->getConfig();
         $config->setFeedToken(null);
 
         $this->entityManager->persist($config);
         $this->entityManager->flush();
-
-        if ($request->isXmlHttpRequest()) {
-            return new JsonResponse();
-        }
 
         $this->addFlash(
             'notice',
@@ -489,15 +478,17 @@ class ConfigController extends AbstractController
     /**
      * Deletes a tagging rule and redirect to the config homepage.
      *
-     * @Route("/tagging-rule/delete/{id}", requirements={"id" = "\d+"}, name="delete_tagging_rule")
-     *
      * @return RedirectResponse
      */
-    public function deleteTaggingRuleAction(TaggingRule $rule)
+    #[Route(path: '/tagging-rule/delete/{taggingRule}', name: 'delete_tagging_rule', methods: ['POST'], requirements: ['taggingRule' => '\d+'])]
+    #[IsGranted('DELETE', subject: 'taggingRule')]
+    public function deleteTaggingRuleAction(Request $request, TaggingRule $taggingRule)
     {
-        $this->validateRuleAction($rule);
+        if (!$this->isCsrfTokenValid('delete-tagging-rule', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
 
-        $this->entityManager->remove($rule);
+        $this->entityManager->remove($taggingRule);
         $this->entityManager->flush();
 
         $this->addFlash(
@@ -511,29 +502,29 @@ class ConfigController extends AbstractController
     /**
      * Edit a tagging rule.
      *
-     * @Route("/tagging-rule/edit/{id}", requirements={"id" = "\d+"}, name="edit_tagging_rule")
-     *
      * @return RedirectResponse
      */
-    public function editTaggingRuleAction(TaggingRule $rule)
+    #[Route(path: '/tagging-rule/edit/{taggingRule}', name: 'edit_tagging_rule', methods: ['GET'], requirements: ['taggingRule' => '\d+'])]
+    #[IsGranted('EDIT', subject: 'taggingRule')]
+    public function editTaggingRuleAction(TaggingRule $taggingRule)
     {
-        $this->validateRuleAction($rule);
-
-        return $this->redirect($this->generateUrl('config') . '?tagging-rule=' . $rule->getId() . '#set5');
+        return $this->redirect($this->generateUrl('config') . '?tagging-rule=' . $taggingRule->getId() . '#set5');
     }
 
     /**
      * Deletes an ignore origin rule and redirect to the config homepage.
      *
-     * @Route("/ignore-origin-user-rule/delete/{id}", requirements={"id" = "\d+"}, name="delete_ignore_origin_rule")
-     *
      * @return RedirectResponse
      */
-    public function deleteIgnoreOriginRuleAction(IgnoreOriginUserRule $rule)
+    #[Route(path: '/ignore-origin-user-rule/delete/{ignoreOriginUserRule}', name: 'delete_ignore_origin_rule', methods: ['POST'], requirements: ['ignoreOriginUserRule' => '\d+'])]
+    #[IsGranted('DELETE', subject: 'ignoreOriginUserRule')]
+    public function deleteIgnoreOriginRuleAction(Request $request, IgnoreOriginUserRule $ignoreOriginUserRule)
     {
-        $this->validateRuleAction($rule);
+        if (!$this->isCsrfTokenValid('delete-ignore-origin-rule', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
 
-        $this->entityManager->remove($rule);
+        $this->entityManager->remove($ignoreOriginUserRule);
         $this->entityManager->flush();
 
         $this->addFlash(
@@ -547,28 +538,26 @@ class ConfigController extends AbstractController
     /**
      * Edit an ignore origin rule.
      *
-     * @Route("/ignore-origin-user-rule/edit/{id}", requirements={"id" = "\d+"}, name="edit_ignore_origin_rule")
-     *
      * @return RedirectResponse
      */
-    public function editIgnoreOriginRuleAction(IgnoreOriginUserRule $rule)
+    #[Route(path: '/ignore-origin-user-rule/edit/{ignoreOriginUserRule}', name: 'edit_ignore_origin_rule', methods: ['GET'], requirements: ['ignoreOriginUserRule' => '\d+'])]
+    #[IsGranted('EDIT', subject: 'ignoreOriginUserRule')]
+    public function editIgnoreOriginRuleAction(IgnoreOriginUserRule $ignoreOriginUserRule)
     {
-        $this->validateRuleAction($rule);
-
-        return $this->redirect($this->generateUrl('config') . '?ignore-origin-user-rule=' . $rule->getId() . '#set6');
+        return $this->redirect($this->generateUrl('config') . '?ignore-origin-user-rule=' . $ignoreOriginUserRule->getId() . '#set6');
     }
 
     /**
      * Remove all annotations OR tags OR entries for the current user.
      *
-     * @Route("/reset/{type}", requirements={"id" = "annotations|tags|entries|tagging_rules"}, name="config_reset", methods={"POST"})
-     *
      * @return RedirectResponse
      */
+    #[Route(path: '/reset/{type}', name: 'config_reset', methods: ['POST'], requirements: ['id' => 'annotations|tags|entries|tagging_rules'])]
+    #[IsGranted('EDIT_CONFIG')]
     public function resetAction(Request $request, string $type, AnnotationRepository $annotationRepository, EntryRepository $entryRepository, TaggingRuleRepository $taggingRuleRepository)
     {
         if (!$this->isCsrfTokenValid('reset-area', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
         switch ($type) {
@@ -616,16 +605,15 @@ class ConfigController extends AbstractController
     /**
      * Delete account for current user.
      *
-     * @Route("/account/delete", name="delete_account", methods={"POST"})
-     *
      * @throws AccessDeniedHttpException
-     *
      * @return RedirectResponse
      */
+    #[Route(path: '/account/delete', name: 'delete_account', methods: ['POST'])]
+    #[IsGranted('EDIT_CONFIG')]
     public function deleteAccountAction(Request $request, UserRepository $userRepository, TokenStorageInterface $tokenStorage)
     {
         if (!$this->isCsrfTokenValid('delete-account', $request->request->get('token'))) {
-            throw $this->createAccessDeniedException('Bad CSRF token.');
+            throw new BadRequestHttpException('Bad CSRF token.');
         }
 
         $enabledUsers = $userRepository->getSumEnabledUsers();
@@ -648,14 +636,18 @@ class ConfigController extends AbstractController
     /**
      * Switch view mode for current user.
      *
-     * @Route("/config/view-mode", name="switch_view_mode")
-     *
      * @return RedirectResponse
      */
+    #[Route(path: '/config/view-mode', name: 'switch_view_mode', methods: ['POST'])]
+    #[IsGranted('EDIT_CONFIG')]
     public function changeViewModeAction(Request $request)
     {
+        if (!$this->isCsrfTokenValid('switch-view-mode', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $user = $this->getUser();
-        $user->getConfig()->setListMode(!$user->getConfig()->getListMode());
+        $user->getConfig()->setListMode((int) !$user->getConfig()->getListMode());
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
@@ -670,12 +662,16 @@ class ConfigController extends AbstractController
      *
      * @param string $language
      *
-     * @Route("/locale/{language}", name="changeLocale")
-     *
      * @return RedirectResponse
      */
+    #[Route(path: '/locale/{language}', name: 'changeLocale', methods: ['POST'])]
+    #[IsGranted('PUBLIC_ACCESS')]
     public function setLocaleAction(Request $request, ValidatorInterface $validator, $language = null)
     {
+        if (!$this->isCsrfTokenValid('change-locale', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $errors = $validator->validate($language, new LocaleConstraint(['canonicalize' => true]));
 
         if (0 === \count($errors)) {
@@ -688,10 +684,10 @@ class ConfigController extends AbstractController
     /**
      * Export tagging rules for the logged in user.
      *
-     * @Route("/tagging-rule/export", name="export_tagging_rule")
-     *
      * @return Response
      */
+    #[Route(path: '/tagging-rule/export', name: 'export_tagging_rule', methods: ['GET'])]
+    #[IsGranted('EDIT_CONFIG')]
     public function exportTaggingRulesAction()
     {
         $data = SerializerBuilder::create()->build()->serialize(
@@ -700,7 +696,7 @@ class ConfigController extends AbstractController
             SerializationContext::create()->setGroups(['export_tagging_rule'])
         );
 
-        return Response::create(
+        return new Response(
             $data,
             200,
             [
@@ -767,16 +763,6 @@ class ConfigController extends AbstractController
         }
 
         $this->entityManager->flush();
-    }
-
-    /**
-     * Validate that a rule can be edited/deleted by the current user.
-     */
-    private function validateRuleAction(RuleInterface $rule)
-    {
-        if ($this->getUser()->getId() !== $rule->getConfig()->getUser()->getId()) {
-            throw $this->createAccessDeniedException('You can not access this rule.');
-        }
     }
 
     /**

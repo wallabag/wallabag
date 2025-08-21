@@ -18,14 +18,14 @@
                         <td>{{ 'developer.client_parameter.field_id'|trans }}</td>
                         <td>
                             <strong><code>{{ client_id }}</code></strong>
-                            <button class="btn" data-clipboard-text="{{ client_id }}">{{ 'developer.client.copy_to_clipboard'|trans }}</button>
+                            <button class="btn" data-controller="clipboard" data-clipboard-text="{{ client_id }}">{{ 'developer.client.copy_to_clipboard'|trans }}</button>
                         </td>
                     </tr>
                     <tr>
                         <td>{{ 'developer.client_parameter.field_secret'|trans }}</td>
                         <td>
                             <strong><code>{{ client_secret }}</code></strong>
-                            <button class="btn" data-clipboard-text="{{ client_secret }}">{{ 'developer.client.copy_to_clipboard'|trans }}</button>
+                            <button class="btn" data-controller="clipboard" data-clipboard-text="{{ client_secret }}">{{ 'developer.client.copy_to_clipboard'|trans }}</button>
                         </td>
                     </tr>
                 </table>

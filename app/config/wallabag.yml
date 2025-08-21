@@ -1,5 +1,5 @@
 parameters:
-    wallabag.version: 2.6.10
+    wallabag.version: 2.7.0-dev
     wallabag.paypal_url: "https://liberapay.com/wallabag/donate"
     wallabag.languages:
         en: 'English'
@@ -18,6 +18,7 @@ parameters:
         pt: 'Português'
         ru: 'Русский'
         ja: '日本語'
+        ko: '한국어'
         zh: '简体中文'
         uk: 'Українська'
         hr: 'Hrvatski'
@@ -175,5 +176,11 @@ parameters:
         - 'Montserrat'
         - 'OpenDyslexicRegular'
         - 'Oswald'
-    wallabag.allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain', 'text/csv', 'text/html']
+    wallabag.allow_mimetypes:
+        - 'application/octet-stream'
+        - 'application/json'
+        - 'text/plain'
+        - 'text/csv'
+        - 'text/html'
+        - 'application/vnd.ms-excel'
     wallabag.resource_dir: "%kernel.project_dir%/web/uploads/import"

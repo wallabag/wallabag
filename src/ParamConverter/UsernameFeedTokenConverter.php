@@ -18,14 +18,12 @@ use Wallabag\Repository\UserRepository;
  */
 class UsernameFeedTokenConverter implements ParamConverterInterface
 {
-    private $registry;
-
     /**
      * @param ManagerRegistry $registry Manager registry
      */
-    public function __construct(?ManagerRegistry $registry = null)
-    {
-        $this->registry = $registry;
+    public function __construct(
+        private readonly ?ManagerRegistry $registry = null,
+    ) {
     }
 
     /**
@@ -33,7 +31,7 @@ class UsernameFeedTokenConverter implements ParamConverterInterface
      *
      * Check, if object supported by our converter
      */
-    public function supports(ParamConverter $configuration)
+    public function supports(ParamConverter $configuration): bool
     {
         // If there is no manager, this means that only Doctrine DBAL is configured
         // In this case we can do nothing and just return
@@ -50,7 +48,7 @@ class UsernameFeedTokenConverter implements ParamConverterInterface
         $em = $this->registry->getManagerForClass($configuration->getClass());
 
         // Check, if class name is what we need
-        if (null !== $em && 'Wallabag\Entity\User' !== $em->getClassMetadata($configuration->getClass())->getName()) {
+        if (null !== $em && User::class !== $em->getClassMetadata($configuration->getClass())->getName()) {
             return false;
         }
 
@@ -65,7 +63,7 @@ class UsernameFeedTokenConverter implements ParamConverterInterface
      * @throws \InvalidArgumentException When route attributes are missing
      * @throws NotFoundHttpException     When object not found
      */
-    public function apply(Request $request, ParamConverter $configuration)
+    public function apply(Request $request, ParamConverter $configuration): bool
     {
         $username = $request->attributes->get('username');
         $feedToken = $request->attributes->get('token');

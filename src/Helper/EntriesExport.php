@@ -19,10 +19,6 @@ use Wallabag\Entity\User;
  */
 class EntriesExport
 {
-    private $wallabagUrl;
-    private $logoPath;
-    private $translator;
-    private $tokenStorage;
     private $title = '';
     private $entries = [];
     private $author = 'wallabag';
@@ -34,12 +30,12 @@ class EntriesExport
      * @param string                $logoPath     Path to the logo FROM THE BUNDLE SCOPE
      * @param TokenStorageInterface $tokenStorage Needed to retrieve the current user
      */
-    public function __construct(TranslatorInterface $translator, $wallabagUrl, $logoPath, TokenStorageInterface $tokenStorage)
-    {
-        $this->translator = $translator;
-        $this->wallabagUrl = $wallabagUrl;
-        $this->logoPath = $logoPath;
-        $this->tokenStorage = $tokenStorage;
+    public function __construct(
+        private readonly TranslatorInterface $translator,
+        private $wallabagUrl,
+        private $logoPath,
+        private readonly TokenStorageInterface $tokenStorage,
+    ) {
     }
 
     /**
@@ -258,7 +254,7 @@ class EntriesExport
         // Do not add "Guide" chapter for "CoverPage"
         $book->setisReferencesAddedToToc(false);
 
-        return Response::create(
+        return new Response(
             $book->getBook(),
             200,
             [
@@ -313,13 +309,13 @@ class EntriesExport
                 '<dt>' . $this->translator->trans('entry.metadata.added_on') . '</dt><dd>' . $entry->getCreatedAt()->format('Y-m-d') . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.address') . '</dt><dd><a href="' . $entry->getUrl() . '">' . $entry->getUrl() . '</a></dd>' .
                 '</dl>';
-            $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+            $pdf->writeHTMLCell(0, 0, null, null, $html, 0, 1);
 
             $pdf->AddPage();
             $html = '<h1>' . $entry->getTitle() . '</h1>';
             $html .= $entry->getContent();
 
-            $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+            $pdf->writeHTMLCell(0, 0, null, null, $html, 0, 1);
         }
 
         /*
@@ -328,12 +324,12 @@ class EntriesExport
         $pdf->AddPage();
         $html = $this->getExportInformation('tcpdf');
 
-        $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+        $pdf->writeHTMLCell(0, 0, null, null, $html, 0, 1);
 
         // set image scale factor
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
-        return Response::create(
+        return new Response(
             $pdf->Output('', 'S'),
             200,
             [
@@ -378,7 +374,7 @@ class EntriesExport
         $output = stream_get_contents($handle);
         fclose($handle);
 
-        return Response::create(
+        return new Response(
             $output,
             200,
             [
@@ -394,7 +390,7 @@ class EntriesExport
      */
     private function produceJson(): Response
     {
-        return Response::create(
+        return new Response(
             $this->prepareSerializingContent('json'),
             200,
             [
@@ -410,7 +406,7 @@ class EntriesExport
      */
     private function produceXml(): Response
     {
-        return Response::create(
+        return new Response(
             $this->prepareSerializingContent('xml'),
             200,
             [
@@ -434,7 +430,7 @@ class EntriesExport
             $content .= $html->getText();
         }
 
-        return Response::create(
+        return new Response(
             $content,
             200,
             [
@@ -457,7 +453,7 @@ class EntriesExport
             $content .= $converter->convert('<h1>' . $entry->getTitle() . '</h1>' . $entry->getContent());
         }
 
-        return Response::create(
+        return new Response(
             $content,
             200,
             [

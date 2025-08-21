@@ -21,9 +21,11 @@
             </div>
 
             {% if displayTrustedOption %}
-            <div class="input-field col s12">
-                <input id="_trusted" type="checkbox" name="{{ trustedParameterName }}" />
-                <label for="_trusted">{{ "trusted"|trans({}, 'SchebTwoFactorBundle') }}</label>
+            <div class="input-field col s12 with-checkbox">
+                <label for="_trusted">
+                    <input id="_trusted" type="checkbox" name="{{ trustedParameterName }}"/>
+                    <span>{{ "trusted"|trans({}, 'SchebTwoFactorBundle') }}</span>
+                </label>
             </div>
             {% endif %}
         </div>

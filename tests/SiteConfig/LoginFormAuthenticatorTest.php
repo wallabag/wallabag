@@ -2,13 +2,12 @@
 
 namespace Tests\Wallabag\SiteConfig;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Message\Response;
-use GuzzleHttp\Stream\Stream;
-use GuzzleHttp\Subscriber\Mock;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Contracts\HttpClient\ResponseInterface;
 use Wallabag\ExpressionLanguage\AuthenticatorProvider;
 use Wallabag\SiteConfig\LoginFormAuthenticator;
 use Wallabag\SiteConfig\SiteConfig;
@@ -17,16 +16,6 @@ class LoginFormAuthenticatorTest extends TestCase
 {
     public function testLoginPost()
     {
-        $response = new Response(
-            200,
-            ['content-type' => 'text/html'],
-            Stream::factory('')
-        );
-        $guzzle = new Client();
-        $guzzle->getEmitter()->attach(new Mock([$response]));
-
-        $mockHttpClient = new MockHttpClient([new MockResponse('', ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']])]);
-
         $siteConfig = new SiteConfig([
             'host' => 'example.com',
             'loginUri' => 'http://example.com/login',
@@ -40,25 +29,23 @@ class LoginFormAuthenticatorTest extends TestCase
             'password' => 'unkn0wn',
         ]);
 
-        $authenticatorProvider = new AuthenticatorProvider($mockHttpClient);
-        $auth = new LoginFormAuthenticator($authenticatorProvider);
-        $res = $auth->login($siteConfig, $guzzle);
+        $browserResponse = new MockResponse('<html></html>', ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']]);
+        $browserClient = new MockHttpClient([$browserResponse]);
+        $browser = new HttpBrowser($browserClient);
+
+        $requestHtmlFunctionResponse = new MockResponse('<html></html>', ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']]);
+        $requestHtmlFunctionClient = new MockHttpClient([$requestHtmlFunctionResponse]);
+        $authenticatorProvider = new AuthenticatorProvider($requestHtmlFunctionClient);
+
+        $auth = new LoginFormAuthenticator($browser, $authenticatorProvider);
+
+        $res = $auth->login($siteConfig);
 
         $this->assertInstanceOf(LoginFormAuthenticator::class, $res);
     }
 
     public function testLoginPostWithExtraFieldsButEmptyHtml()
     {
-        $response = new Response(
-            200,
-            ['content-type' => 'text/html'],
-            Stream::factory('<html></html>')
-        );
-        $guzzle = new Client();
-        $guzzle->getEmitter()->attach(new Mock([$response, $response]));
-
-        $mockHttpClient = new MockHttpClient([new MockResponse('<html></html>', ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']])]);
-
         $siteConfig = new SiteConfig([
             'host' => 'example.com',
             'loginUri' => 'http://example.com/login',
@@ -73,9 +60,17 @@ class LoginFormAuthenticatorTest extends TestCase
             'password' => 'unkn0wn',
         ]);
 
-        $authenticatorProvider = new AuthenticatorProvider($mockHttpClient);
-        $auth = new LoginFormAuthenticator($authenticatorProvider);
-        $res = $auth->login($siteConfig, $guzzle);
+        $browserResponse = new MockResponse('<html></html>', ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']]);
+        $browserClient = new MockHttpClient([$browserResponse]);
+        $browser = new HttpBrowser($browserClient);
+
+        $requestHtmlFunctionResponse = new MockResponse('<html></html>', ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']]);
+        $requestHtmlFunctionClient = new MockHttpClient([$requestHtmlFunctionResponse]);
+        $authenticatorProvider = new AuthenticatorProvider($requestHtmlFunctionClient);
+
+        $auth = new LoginFormAuthenticator($browser, $authenticatorProvider);
+
+        $res = $auth->login($siteConfig);
 
         $this->assertInstanceOf(LoginFormAuthenticator::class, $res);
     }
@@ -83,49 +78,6 @@ class LoginFormAuthenticatorTest extends TestCase
     // testing preg_match
     public function testLoginPostWithExtraFieldsWithRegex()
     {
-        $response = $this->getMockBuilder(Response::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $response->expects($this->any())
-            ->method('getBody')
-            ->willReturn(file_get_contents(__DIR__ . '/../fixtures/aoc.media.html'));
-
-        $response->expects($this->any())
-            ->method('getStatusCode')
-            ->willReturn(200);
-
-        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../fixtures/aoc.media.html'), ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']])]);
-
-        $client = $this->getMockBuilder(Client::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $client->expects($this->any())
-            ->method('post')
-            ->with(
-                $this->equalTo('https://aoc.media/wp-admin/admin-ajax.php'),
-                $this->equalTo([
-                    'body' => [
-                        'nom' => 'johndoe',
-                        'password' => 'unkn0wn',
-                        'security' => 'c506c1b8bc',
-                        'action' => 'login_user',
-                    ],
-                    'allow_redirects' => true,
-                    'verify' => false,
-                ])
-            )
-            ->willReturn($response);
-
-        $client->expects($this->any())
-            ->method('get')
-            ->with(
-                $this->equalTo('https://aoc.media/'),
-                $this->equalTo([])
-            )
-            ->willReturn($response);
-
         $siteConfig = new SiteConfig([
             'host' => 'aoc.media',
             'loginUri' => 'https://aoc.media/wp-admin/admin-ajax.php',
@@ -139,78 +91,44 @@ class LoginFormAuthenticatorTest extends TestCase
             'password' => 'unkn0wn',
         ]);
 
-        $authenticatorProvider = new AuthenticatorProvider($mockHttpClient);
-        $auth = new LoginFormAuthenticator($authenticatorProvider);
-        $res = $auth->login($siteConfig, $client);
-
-        $this->assertInstanceOf(LoginFormAuthenticator::class, $res);
-    }
-
-    public function testLoginPostWithExtraFieldsWithData()
-    {
-        $response = $this->getMockBuilder(Response::class)
-            ->disableOriginalConstructor()
+        $browserResponse = new MockResponse('<html></html>', ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']]);
+        $browserClient = new MockHttpClient([$browserResponse]);
+        $browser = $this->getMockBuilder(HttpBrowser::class)
+            ->setConstructorArgs([$browserClient])
             ->getMock();
-
-        $response->expects($this->any())
-            ->method('getBody')
-            ->willReturn(file_get_contents(__DIR__ . '/../fixtures/nextinpact-login.html'));
-
-        $response->expects($this->any())
-            ->method('getStatusCode')
-            ->willReturn(200);
-
-        $mockHttpClient = new MockHttpClient([new MockResponse(file_get_contents(__DIR__ . '/../fixtures/nextinpact-login.html'), ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']])]);
-
-        $client = $this->getMockBuilder(Client::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $client->expects($this->any())
-            ->method('post')
+        $browser->expects($this->any())
+            ->method('request')
             ->with(
-                $this->equalTo('https://compte.nextinpact.com/Account/Login'),
+                $this->equalTo('POST'),
+                $this->equalTo('https://aoc.media/wp-admin/admin-ajax.php'),
                 $this->equalTo([
-                    'body' => [
-                        'UserName' => 'johndoe',
-                        'Password' => 'unkn0wn',
-                        '__RequestVerificationToken' => 's6x2QcnQDUL92mkKSi_JuUBXcgUYx_Plf-KyQ2eJypKAjQZIeTvaFHOsfEdTrcSXt3dt2CW39V7r9V16LUtvjszodAU1',
-                        'returnUrl' => 'https://www.nextinpact.com/news/102835-pour-cour-comptes-fonctionnement-actuel-vote-par-internet-nest-pas-satisfaisant.htm',
-                    ],
-                    'allow_redirects' => true,
-                    'verify' => false,
+                    'nom' => 'johndoe',
+                    'password' => 'unkn0wn',
+                    'security' => 'c506c1b8bc',
+                    'action' => 'login_user',
                 ])
             )
-            ->willReturn($response);
+        ;
 
-        $client->expects($this->any())
-            ->method('get')
+        $requestHtmlFunctionResponse = $this->getMockBuilder(ResponseInterface::class)->getMock();
+        $requestHtmlFunctionResponse->expects($this->any())
+            ->method('getContent')
+            ->willReturn(file_get_contents(__DIR__ . '/../fixtures/aoc.media.html'))
+        ;
+        $requestHtmlFunctionClient = $this->getMockBuilder(HttpClientInterface::class)->getMock();
+        $requestHtmlFunctionClient->expects($this->any())
+            ->method('request')
             ->with(
-                $this->equalTo('https://compte.nextinpact.com/Account/Login?http://www.nextinpact.com/'),
-                $this->equalTo([
-                    'headers' => [
-                        'X-Requested-With' => 'XMLHttpRequest',
-                    ],
-                ])
+                $this->equalTo('GET'),
+                $this->equalTo('https://aoc.media/'),
             )
-            ->willReturn($response);
+            ->willReturn($requestHtmlFunctionResponse)
+        ;
+        $authenticatorProvider = new AuthenticatorProvider($requestHtmlFunctionClient);
 
-        $siteConfig = new SiteConfig([
-            'host' => 'nextinpact.com',
-            'loginUri' => 'https://compte.nextinpact.com/Account/Login',
-            'usernameField' => 'UserName',
-            'passwordField' => 'Password',
-            'extraFields' => [
-                '__RequestVerificationToken' => '@=xpath(\'//form[@action="/Account/Login"]/input[@name="__RequestVerificationToken"]\', request_html(\'https://compte.nextinpact.com/Account/Login?http://www.nextinpact.com/\', {\'headers\': {\'X-Requested-With\':\'XMLHttpRequest\'}}))',
-                'returnUrl' => 'https://www.nextinpact.com/news/102835-pour-cour-comptes-fonctionnement-actuel-vote-par-internet-nest-pas-satisfaisant.htm',
-            ],
-            'username' => 'johndoe',
-            'password' => 'unkn0wn',
-        ]);
+        $auth = new LoginFormAuthenticator($browser, $authenticatorProvider);
 
-        $authenticatorProvider = new AuthenticatorProvider($mockHttpClient);
-        $auth = new LoginFormAuthenticator($authenticatorProvider);
-        $res = $auth->login($siteConfig, $client);
+        $res = $auth->login($siteConfig);
 
         $this->assertInstanceOf(LoginFormAuthenticator::class, $res);
     }
@@ -225,10 +143,16 @@ class LoginFormAuthenticatorTest extends TestCase
             'password' => 'unkn0wn',
         ]);
 
-        $mockHttpClient = new MockHttpClient();
+        $browserResponse = new MockResponse('<html></html>', ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']]);
+        $browserClient = new MockHttpClient([$browserResponse]);
+        $browser = new HttpBrowser($browserClient);
 
-        $authenticatorProvider = new AuthenticatorProvider($mockHttpClient);
-        $auth = new LoginFormAuthenticator($authenticatorProvider);
+        $requestHtmlFunctionResponse = new MockResponse('<html></html>', ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']]);
+        $requestHtmlFunctionClient = new MockHttpClient([$requestHtmlFunctionResponse]);
+        $authenticatorProvider = new AuthenticatorProvider($requestHtmlFunctionClient);
+
+        $auth = new LoginFormAuthenticator($browser, $authenticatorProvider);
+
         $loginRequired = $auth->isLoginRequired($siteConfig, file_get_contents(__DIR__ . '/../fixtures/nextinpact-login.html'));
 
         $this->assertFalse($loginRequired);
@@ -245,12 +169,76 @@ class LoginFormAuthenticatorTest extends TestCase
             'notLoggedInXpath' => '//h2[@class="title_reserve_article"]',
         ]);
 
-        $mockHttpClient = new MockHttpClient();
+        $browserResponse = new MockResponse('<html></html>', ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']]);
+        $browserClient = new MockHttpClient([$browserResponse]);
+        $browser = new HttpBrowser($browserClient);
 
-        $authenticatorProvider = new AuthenticatorProvider($mockHttpClient);
-        $auth = new LoginFormAuthenticator($authenticatorProvider);
+        $requestHtmlFunctionResponse = new MockResponse('<html></html>', ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']]);
+        $requestHtmlFunctionClient = new MockHttpClient([$requestHtmlFunctionResponse]);
+        $authenticatorProvider = new AuthenticatorProvider($requestHtmlFunctionClient);
+
+        $auth = new LoginFormAuthenticator($browser, $authenticatorProvider);
+
         $loginRequired = $auth->isLoginRequired($siteConfig, file_get_contents(__DIR__ . '/../fixtures/nextinpact-article.html'));
 
         $this->assertTrue($loginRequired);
+    }
+
+    public function testLoginPostWithUserAgentHeaderWithData()
+    {
+        $siteConfig = new SiteConfig([
+            'host' => 'nextinpact.com',
+            'loginUri' => 'https://compte.nextinpact.com/Account/Login',
+            'usernameField' => 'UserName',
+            'passwordField' => 'Password',
+            'username' => 'johndoe',
+            'password' => 'unkn0wn',
+            'httpHeaders' => [
+                'user-agent' => 'Wallabag (Guzzle/5)',
+            ],
+        ]);
+
+        $browserResponse = new MockResponse('<html></html>', ['http_code' => 200, 'response_headers' => ['content-type' => 'text/html']]);
+        $browserClient = new MockHttpClient([$browserResponse]);
+        $browser = $this->getMockBuilder(HttpBrowser::class)
+            ->setConstructorArgs([$browserClient])
+            ->getMock();
+        $browser->expects($this->any())
+            ->method('request')
+            ->with(
+                $this->equalTo('POST'),
+                $this->equalTo('https://compte.nextinpact.com/Account/Login'),
+                $this->equalTo([
+                    'UserName' => 'johndoe',
+                    'Password' => 'unkn0wn',
+                ]),
+                $this->equalTo([]),
+                $this->equalTo([
+                    'HTTP_user-agent' => 'Wallabag (Guzzle/5)',
+                ]),
+            )
+        ;
+
+        $requestHtmlFunctionResponse = $this->getMockBuilder(ResponseInterface::class)->getMock();
+        $requestHtmlFunctionResponse->expects($this->any())
+            ->method('getContent')
+            ->willReturn(file_get_contents(__DIR__ . '/../fixtures/nextinpact-login.html'))
+        ;
+        $requestHtmlFunctionClient = $this->getMockBuilder(HttpClientInterface::class)->getMock();
+        $requestHtmlFunctionClient->expects($this->any())
+            ->method('request')
+            ->with(
+                $this->equalTo('GET'),
+                $this->equalTo('https://nextinpact.com/'),
+            )
+            ->willReturn($requestHtmlFunctionResponse)
+        ;
+        $authenticatorProvider = new AuthenticatorProvider($requestHtmlFunctionClient);
+
+        $auth = new LoginFormAuthenticator($browser, $authenticatorProvider);
+
+        $res = $auth->login($siteConfig);
+
+        $this->assertInstanceOf(LoginFormAuthenticator::class, $res);
     }
 }

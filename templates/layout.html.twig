@@ -1,15 +1,33 @@
 {% extends "base.html.twig" %}
 
+{% set current_route = app.request.attributes.get('_route') %}
+{% set current_route_from_query_params = app.request.query.get('currentRoute') %}
+
+{% set active_route = null %}
+{% if current_route == 'all' or current_route_from_query_params == 'all' %}
+   {% set active_route = 'all' %}
+{% elseif current_route == 'annotated' or current_route_from_query_params == 'annotated' %}
+   {% set active_route = 'annotated' %}
+{% elseif current_route == 'archive' or current_route_from_query_params == 'archive' %}
+   {% set active_route = 'archive' %}
+{% elseif current_route == 'starred' or current_route_from_query_params == 'starred' %}
+   {% set active_route = 'starred' %}
+{% elseif current_route == 'unread' or current_route == 'homepage' or current_route_from_query_params == 'unread' %}
+   {% set active_route = 'unread' %}
+{% elseif current_route == 'untagged' %}
+   {% set active_route = 'untagged' %}
+{% endif %}
+
 {% block css %}
     {{ parent() }}
-    {% if not app.debug %}
-        <link rel="stylesheet" href="{{ asset('wallassets/material.css') }}">
-    {% endif %}
+
+    {{ encore_entry_link_tags('main') }}
 {% endblock %}
 
 {% block scripts %}
     {{ parent() }}
-    <script src="{{ asset('wallassets/material' ~ (app.debug ? '.dev' : '') ~ '.js') }}"></script>
+
+    {{ encore_entry_script_tags('main') }}
 {% endblock %}
 
 {% block header %}
@@ -17,9 +35,7 @@
 
 {% block messages %}
     {% for flash_message in app.session.flashbag.get('notice') %}
-        <script>
-            Materialize.toast('{{ flash_message|trans }}', 4000);
-        </script>
+        <p class="hidden" data-controller="materialize--toast">{{ flash_message|trans }}</p>
     {% endfor %}
 {% endblock %}
 
@@ -27,7 +43,7 @@
 
 {% block menu %}
     <nav class="cyan darken-1">
-        <ul id="slide-out" class="left-bar side-nav fixed">
+        <ul id="slide-out" class="left-bar sidenav sidenav-fixed" data-controller="materialize--sidenav">
             {% block logo %}
                 <li class="logo border-bottom">
                     {% if is_granted('LIST_ENTRIES') %}
@@ -39,24 +55,6 @@
                     {% endif %}
                 </li>
             {% endblock %}
-
-            {% set current_route = app.request.attributes.get('_route') %}
-            {% set current_route_from_query_params = app.request.query.get('currentRoute') %}
-
-            {% set active_route = null %}
-            {% if current_route == 'all' or current_route_from_query_params == 'all' %}
-               {% set active_route = 'all' %}
-            {% elseif current_route == 'annotated' or current_route_from_query_params == 'annotated' %}
-               {% set active_route = 'annotated' %}
-            {% elseif current_route == 'archive' or current_route_from_query_params == 'archive' %}
-               {% set active_route = 'archive' %}
-            {% elseif current_route == 'starred' or current_route_from_query_params == 'starred' %}
-               {% set active_route = 'starred' %}
-            {% elseif current_route == 'unread' or current_route == 'homepage' or current_route_from_query_params == 'unread' %}
-               {% set active_route = 'unread' %}
-            {% elseif current_route == 'untagged' %}
-               {% set active_route = 'untagged' %}
-            {% endif %}
 
             {% if is_granted('LIST_ENTRIES') %}
                 <li class="bold {% if active_route == 'unread' %}active{% endif %}">
@@ -75,14 +73,16 @@
                     <a class="waves-effect" href="{{ path('all') }}">{{ 'menu.left.all_articles'|trans }} <span class="items-number grey-text">{{ count_entries('all') }}</span></a>
                 </li>
             {% endif %}
-            <li class="bold {% if current_route == 'tags' %}active{% endif %}">
-                <a class="waves-effect" href="{{ path('tag') }}">{{ 'menu.left.tags'|trans }} <span class="items-number grey-text">{{ count_tags() }}</span></a>
-            </li>
+            {% if is_granted('LIST_TAGS') %}
+                <li class="bold {% if current_route == 'tags' %}active{% endif %}">
+                    <a class="waves-effect" href="{{ path('tag') }}">{{ 'menu.left.tags'|trans }} <span class="items-number grey-text">{{ count_tags() }}</span></a>
+                </li>
+            {% endif %}
         </ul>
-        <div class="nav-panels">
-            <div class="nav-panel-actions nav-panel-item">
+        <div class="nav-panels" data-controller="topbar">
+            <div class="nav-panel-actions nav-panel-item" data-topbar-target="actions">
                 <div class="nav-panel-top">
-                    <button data-activates="slide-out" class="nav-panel-menu button-collapse"><i class="material-icons">menu</i></button>
+                    <a href="#" data-target="slide-out" class="nav-panel-menu sidenav-trigger"><i class="material-icons">menu</i></a>
                     <h1 class="left action">
                         {% block title %}
                         {% endblock %}
@@ -90,42 +90,30 @@
                 </div>
                 <ul class="input-field nav-panel-buttom">
                     <li class="bold toggle-add-url-container">
-                        <a class="waves-effect tooltipped toggle-add-url" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.add_new_entry'|trans }}" href="{{ path('new') }}" id="nav-btn-add">
+                        <a class="waves-effect toggle-add-url" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.add_new_entry'|trans }}" href="{{ path('new') }}" data-action="topbar#showAddUrl:prevent:stop" data-shortcuts-target="showAddUrl">
                             <i class="material-icons">add</i>
                         </a>
                     </li>
                     <li>
-                        <a class="waves-effect tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.search'|trans }}" href="javascript: void(null);" id="nav-btn-search">
+                        <a class="waves-effect" data-controller="materialize--tooltip" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.search'|trans }}" href="javascript: void(null);" data-action="topbar#showSearch:prevent:stop" data-shortcuts-target="showSearch">
                             <i class="material-icons">search</i>
                         </a>
                     </li>
-                    {% if active_route and is_granted('LIST_ENTRIES') %}
-                    <li id="button_random">
-                        <a class="waves-effect tooltipped js-random-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.random_entry'|trans }}" href="{{ path('random_entry', {'type': active_route}) }}">
-                            <i class="material-icons">casino</i>
-                        </a>
-                    </li>
-                    {% endif %}
-                    <li id="button_filters" class="button-filters">
-                        <a class="nav-panel-menu button-collapse-right tooltipped js-filters-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.filter_entries'|trans }}" href="#" data-activates="filters">
-                            <i class="material-icons">filter_list</i>
-                        </a>
-                    </li>
-                    <li id="button_export" class="button-export">
-                        <a class="nav-panel-menu button-collapse-right tooltipped js-export-action" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.export'|trans }}" href="#" data-activates="export">
-                            <i class="material-icons">file_download</i>
-                        </a>
-                    </li>
+                    {% block nav_panel_extra_actions '' %}
                     <li class="bold">
-                        <a class="wave-effect tooltipped dropdown-button" data-beloworigin="true" data-constrainwidth="false" data-activates="dropdown-account" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.account'|trans }}" href="#" id="news_menu">
+                        <a class="wave-effect dropdown-trigger" data-controller="materialize--dropdown materialize--tooltip" data-target="dropdown-account" data-position="bottom" data-delay="50" data-tooltip="{{ 'menu.top.account'|trans }}" href="#" id="news_menu">
                             <i class="material-icons" id="news_link">account_circle</i>
                         </a>
                     </li>
                 </ul>
                 <ul id="dropdown-account" class="dropdown-content">
-                    <li><a href="{{ path('config') }}"><i class="material-icons">settings</i> {{ 'menu.left.config'|trans }}</a></li>
+                    {% if is_granted('EDIT_CONFIG') %}
+                        <li><a href="{{ path('config') }}"><i class="material-icons">settings</i> {{ 'menu.left.config'|trans }}</a></li>
+                    {% endif %}
                     <li><a href="{{ path('developer') }}"><i class="material-icons">smartphone</i> {{ 'menu.left.developer'|trans }}</a></li>
-                    <li><a href="{{ path('import') }}"><i class="material-icons">import_export</i> {{ 'menu.left.import'|trans }}</a></li>
+                    {% if is_granted('IMPORT_ENTRIES') %}
+                        <li><a href="{{ path('import') }}"><i class="material-icons">import_export</i> {{ 'menu.left.import'|trans }}</a></li>
+                    {% endif %}
                     {% if craue_setting('restricted_access') and is_granted('LIST_SITE_CREDENTIALS') %}
                         <li><a href="{{ path('site_credentials_index') }}"><i class="material-icons">vpn_key</i> {{ 'menu.left.site_credentials'|trans }}</a></li>
                     {% endif %}
@@ -146,19 +134,19 @@
                         <li class="divider"></li>
                     {% endif %}
                     <li>
-                        <a href="#" class="js-theme-toggle" data-theme="light">
+                        <a href="#" data-action="click->dark-theme#useLight:prevent">
                             <i class="theme-toggle-icon material-icons tiny">brightness_high</i>
                             <span>{{ 'menu.left.theme_toggle_light'|trans }}</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="js-theme-toggle" data-theme="dark">
+                        <a href="#" data-action="click->dark-theme#useDark:prevent">
                             <i class="theme-toggle-icon material-icons tiny">brightness_low</i>
                             <span>{{ 'menu.left.theme_toggle_dark'|trans }}</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="js-theme-toggle" data-theme="auto">
+                        <a href="#" data-action="click->dark-theme#useAuto:prevent">
                             <i class="theme-toggle-icon material-icons tiny">brightness_auto</i>
                             <span>{{ 'menu.left.theme_toggle_auto'|trans }}</span>
                         </a>

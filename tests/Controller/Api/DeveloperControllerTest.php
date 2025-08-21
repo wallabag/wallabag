@@ -5,6 +5,7 @@ namespace Tests\Wallabag\Controller\Api;
 use Doctrine\ORM\EntityManagerInterface;
 use Tests\Wallabag\WallabagTestCase;
 use Wallabag\Entity\Api\Client;
+use Wallabag\Entity\User;
 
 class DeveloperControllerTest extends WallabagTestCase
 {
@@ -50,7 +51,7 @@ class DeveloperControllerTest extends WallabagTestCase
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $data = json_decode($client->getResponse()->getContent(), true);
+        $data = json_decode((string) $client->getResponse()->getContent(), true);
         $this->assertArrayHasKey('access_token', $data);
         $this->assertArrayHasKey('expires_in', $data);
         $this->assertArrayHasKey('token_type', $data);
@@ -105,7 +106,7 @@ class DeveloperControllerTest extends WallabagTestCase
 
         $this->logInAs('bob');
         $client->request('POST', '/developer/client/delete/' . $adminApiClient->getId());
-        $this->assertSame(403, $client->getResponse()->getStatusCode());
+        $this->assertSame(400, $client->getResponse()->getStatusCode());
 
         // Try to remove the admin's client with the good user
         $this->logInAs('admin');
@@ -133,7 +134,10 @@ class DeveloperControllerTest extends WallabagTestCase
         $client = $this->getTestClient();
         $em = $client->getContainer()->get(EntityManagerInterface::class);
         $userManager = static::getContainer()->get('fos_user.user_manager');
+
         $user = $userManager->findUserBy(['username' => $username]);
+        \assert($user instanceof User);
+
         $apiClient = new Client($user);
         $apiClient->setName('My app');
         $apiClient->setAllowedGrantTypes($grantTypes);

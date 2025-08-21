@@ -16,7 +16,7 @@ env:
 jobs:
   phpunit:
     name: "PHP ${{ matrix.php }} using ${{ matrix.database }}"
-    runs-on: "ubuntu-20.04"
+    runs-on: ubuntu-latest
     services:
       rabbitmq:
         image: rabbitmq:3-alpine
@@ -31,9 +31,6 @@ jobs:
       fail-fast: false
       matrix:
         php:
-          - "7.4"
-          - "8.0"
-          - "8.1"
           - "8.2"
           - "8.3"
           - "8.4"
@@ -44,7 +41,7 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@v5"
         with:
           fetch-depth: 2
 
@@ -56,6 +53,12 @@ jobs:
           tools: pecl
           extensions: json, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
+
+      - name: "Install Node"
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: 'yarn'
 
       - name: "Setup MySQL"
         if: "${{ matrix.database == 'mysql' }}"
@@ -76,6 +79,12 @@ jobs:
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 
+      - name: "Install dependencies with Yarn"
+        run: yarn install
+
+      - name: "Build assets with Yarn"
+        run: yarn build:dev
+
       - name: "Prepare database configuration"
         run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
 
@@ -84,7 +93,7 @@ jobs:
 
   phpunit_no_prefix:
     name: "PHP ${{ matrix.php }} using ${{ matrix.database }} without prefix"
-    runs-on: "ubuntu-20.04"
+    runs-on: ubuntu-latest
     services:
       rabbitmq:
         image: rabbitmq:3-alpine
@@ -107,7 +116,7 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@v5"
         with:
           fetch-depth: 2
 
@@ -119,6 +128,12 @@ jobs:
           tools: pecl
           extensions: json, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
+
+      - name: "Install Node"
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: 'yarn'
 
       - name: "Remove database prefix"
         run: |
@@ -144,6 +159,12 @@ jobs:
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
 
+      - name: "Install dependencies with Yarn"
+        run: yarn install
+
+      - name: "Build assets with Yarn"
+        run: yarn build:dev
+
       - name: "Prepare database configuration"
         run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml
 
@@ -152,7 +173,7 @@ jobs:
 
   phpunit-without-rmq-redis:
     name: "PHP ${{ matrix.php }} using ${{ matrix.database }} without Rabbit & Redis"
-    runs-on: "ubuntu-20.04"
+    runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false
@@ -166,7 +187,7 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@v5"
         with:
           fetch-depth: 2
 
@@ -178,6 +199,12 @@ jobs:
           tools: pecl
           extensions: json, pdo, pdo_mysql, pdo_sqlite, pdo_pgsql, curl, imagick, pgsql, gd, tidy
           ini-values: "date.timezone=Europe/Paris"
+
+      - name: "Install Node"
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: 'yarn'
 
       - name: "Setup MySQL"
         if: "${{ matrix.database == 'mysql' }}"
@@ -197,6 +224,12 @@ jobs:
         uses: "ramsey/composer-install@v3"
         with:
           composer-options: "--optimize-autoloader --prefer-dist"
+
+      - name: "Install dependencies with Yarn"
+        run: yarn install
+
+      - name: "Build assets with Yarn"
+        run: yarn build:dev
 
       - name: "Prepare database configuration"
         run: cp app/config/tests/parameters_test.${{ matrix.database }}.yml app/config/parameters_test.yml

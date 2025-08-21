@@ -82,6 +82,6 @@ class LocaleListenerTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        return new RequestEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST);
+        return new RequestEvent($kernel, $request, HttpKernelInterface::MAIN_REQUEST);
     }
 }

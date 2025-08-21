@@ -12,9 +12,7 @@ class Version20161122144743 extends WallabagMigration
 {
     public function up(Schema $schema): void
     {
-        $access = $this->container
-            ->get('doctrine.orm.default_entity_manager')
-            ->getConnection()
+        $access = $this->connection
             ->fetchOne('SELECT * FROM ' . $this->getTable('craue_config_setting') . " WHERE name = 'restricted_access'");
 
         $this->skipIf(false !== $access, 'It seems that you already played this migration.');

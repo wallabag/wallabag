@@ -100,19 +100,6 @@ config:
         fontsize_label: Yazı tipi boyutu
         lineheight_label: Satır yüksekliği
         help_fontsize: Kullanmak istediğiniz yazı tipi boyutunu seçebilirsiniz.
-    form_rss:
-        description: wallabag RSS akışı kaydetmiş olduğunuz makalelerini favori RSS okuyucunuzda görüntülemenizi sağlar. Bunu yapabilmek için öncelikle belirteç (token) oluşturmalısınız.
-        token_label: RSS belirteci (token)
-        no_token: Belirteç (token) yok
-        token_create: Yeni belirteç (token) oluştur
-        token_reset: Belirteci (token) sıfırla
-        rss_links: RSS akış bağlantıları
-        rss_link:
-            unread: Okunmayan
-            starred: Favoriler
-            archive: Arşiv
-            all: Tümü
-        rss_limit: RSS içeriğinden talep edilecek makale limiti
     form_user:
         two_factor_description: İki adımlı kimlik doğrulamayı etkinleştirmek, her yeni güvenilmeyen bağlantıda bir kod içeren bir e-posta alacağınız anlamına gelir.
         name_label: İsim

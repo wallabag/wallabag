@@ -20,6 +20,7 @@ class EntryControllerTest extends WallabagTestCase
     public const AN_URL_CONTAINING_AN_ARTICLE_WITH_IMAGE = 'https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment';
     public $downloadImagesEnabled = false;
     public $url = 'https://www.20minutes.fr/sport/jo_2024/4095122-20240712-jo-paris-2024-saut-ange-bombe-comment-anne-hidalgo-va-plonger-seine-si-fait-vraiment';
+    public $wrongUrl = 'wallabagIsAwesome';
     private $entryDataTestAttribute = '[data-test="entry"]';
 
     /**
@@ -31,7 +32,7 @@ class EntryControllerTest extends WallabagTestCase
     {
         if ($this->downloadImagesEnabled) {
             $client = static::createClient();
-            $client->getContainer()->get(Config::class)->set('download_images_enabled', 0);
+            $client->getContainer()->get(Config::class)->set('download_images_enabled', '0');
 
             $this->downloadImagesEnabled = false;
         }
@@ -137,9 +138,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $crawler = $client->submit($form);
 
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
-        $this->assertCount(1, $alert = $crawler->filter('form ul li')->extract(['_text']));
-        $this->assertSame('This value should not be blank.', $alert[0]);
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -423,6 +422,38 @@ class EntryControllerTest extends WallabagTestCase
         $em->flush();
     }
 
+    /**
+     * @group NetworkCalls
+     */
+    public function testBadFormatURL()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $client->getContainer()->get(Config::class)->set('store_article_headers', 1);
+
+        $crawler = $client->request('GET', '/new');
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $form = $crawler->filter('form[name=entry]')->form();
+
+        $data = [
+            'entry[url]' => $this->wrongUrl,
+        ];
+
+        $client->submit($form, $data);
+
+        $this->assertSame(302, $client->getResponse()->getStatusCode());
+
+        $content = $client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
+            ->findByUrlAndUserId($this->wrongUrl, $this->getLoggedInUserId());
+
+        $this->assertFalse($content);
+    }
+
     public function testArchive()
     {
         $this->logInAs('admin');
@@ -507,9 +538,12 @@ class EntryControllerTest extends WallabagTestCase
         $entry->setContent('');
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
-        $this->getEntityManager()->clear();
 
-        $client->request('GET', '/reload/' . $entry->getId());
+        $client = $this->getTestClient();
+
+        $crawler = $client->request('GET', '/view/' . $entry->getId());
+
+        $client->submit($crawler->selectButton('entry.view.left_menu.re_fetch_content')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
@@ -530,7 +564,9 @@ class EntryControllerTest extends WallabagTestCase
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
 
-        $client->request('GET', '/reload/' . $entry->getId());
+        $crawler = $client->request('GET', '/view/' . $entry->getId());
+
+        $client->submit($crawler->selectButton('entry.view.left_menu.re_fetch_content')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
@@ -639,9 +675,12 @@ class EntryControllerTest extends WallabagTestCase
         $entry->setUrl($this->url);
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
-        $this->getEntityManager()->clear();
 
-        $client->request('GET', '/archive/' . $entry->getId());
+        $client = $this->getTestClient();
+
+        $crawler = $client->request('GET', '/view/' . $entry->getId());
+
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.set_as_read')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
@@ -650,7 +689,7 @@ class EntryControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->find($entry->getId());
 
-        $this->assertSame(1, $res->isArchived());
+        $this->assertTrue($res->isArchived());
     }
 
     public function testToggleStar()
@@ -662,9 +701,12 @@ class EntryControllerTest extends WallabagTestCase
         $entry->setUrl($this->url);
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
-        $this->getEntityManager()->clear();
 
-        $client->request('GET', '/star/' . $entry->getId());
+        $client = $this->getTestClient();
+
+        $crawler = $client->request('GET', '/view/' . $entry->getId());
+
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.set_as_starred')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
@@ -686,13 +728,11 @@ class EntryControllerTest extends WallabagTestCase
         $this->getEntityManager()->persist($entry);
         $this->getEntityManager()->flush();
 
-        $client->request('GET', '/delete/' . $entry->getId());
+        $crawler = $client->request('POST', '/delete/' . $entry->getId());
 
-        $this->assertSame(302, $client->getResponse()->getStatusCode());
-
-        $client->request('GET', '/delete/' . $entry->getId());
-
-        $this->assertSame(404, $client->getResponse()->getStatusCode());
+        $this->assertSame(400, $client->getResponse()->getStatusCode());
+        $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
+        $this->assertStringContainsString('Bad CSRF token.', $body[0]);
     }
 
     /**
@@ -728,10 +768,11 @@ class EntryControllerTest extends WallabagTestCase
         $em->persist($content);
         $em->flush();
 
-        $client->request('GET', '/view/' . $content->getId());
+        $crawler = $client->request('GET', '/view/' . $content->getId());
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
-        $client->request('GET', '/delete/' . $content->getId());
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.delete')->form());
+
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $client->followRedirect();
@@ -750,7 +791,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $client->request('GET', '/view/' . $content->getId());
 
-        $this->assertSame(403, $client->getResponse()->getStatusCode());
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
 
     public function testFilterOnReadingTime()
@@ -1169,14 +1210,18 @@ class EntryControllerTest extends WallabagTestCase
         $content->setUrl($this->url);
         $this->getEntityManager()->persist($content);
         $this->getEntityManager()->flush();
-        $this->getEntityManager()->clear();
+
+        $client = $this->getTestClient();
 
         // no uid
         $client->request('GET', '/share/' . $content->getUid());
         $this->assertSame(404, $client->getResponse()->getStatusCode());
 
         // generating the uid
-        $client->request('GET', '/share/' . $content->getId());
+        $crawler = $client->request('GET', '/view/' . $content->getId());
+
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.public_link')->form());
+
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
         $shareUrl = $client->getResponse()->getTargetUrl();
@@ -1203,12 +1248,19 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertSame(404, $client->getResponse()->getStatusCode());
 
         // removing the share
-        $client->request('GET', '/share/delete/' . $content->getId());
+        $client->getContainer()->get(Config::class)->set('share_public', 1);
+        $this->logInAs('admin');
+        $crawler = $client->request('GET', '/view/' . $content->getId());
+
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.delete_public_link')->form());
+
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
-        // share is now disable
+        // share is now removed
         $client->request('GET', '/share/' . $content->getUid());
         $this->assertSame(404, $client->getResponse()->getStatusCode());
+
+        $client->getContainer()->get(Config::class)->set('share_public', 0);
     }
 
     /**
@@ -1248,7 +1300,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertSame($url, $entry->getUrl());
         $this->assertStringContainsString('Comment Hidalgo', $entry->getTitle());
         // instead of checking for the filename (which might change) check that the image is now local
-        $this->assertStringContainsString(rtrim($client->getContainer()->getParameter('domain_name'), '/') . '/assets/images/', $entry->getContent());
+        $this->assertStringContainsString(rtrim((string) $client->getContainer()->getParameter('domain_name'), '/') . '/assets/images/', $entry->getContent());
 
         $client->getContainer()->get(Config::class)->set('download_images_enabled', 0);
     }
@@ -1284,7 +1336,9 @@ class EntryControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->findByUrlAndUserId($url, $this->getLoggedInUserId());
 
-        $client->request('GET', '/delete/' . $content->getId());
+        $crawler = $client->request('GET', '/view/' . $content->getId());
+
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.delete')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
 
@@ -1307,8 +1361,9 @@ class EntryControllerTest extends WallabagTestCase
 
         $this->getEntityManager()->flush();
 
-        $client->request('GET', '/view/' . $entry->getId());
-        $client->request('GET', '/archive/' . $entry->getId());
+        $crawler = $client->request('GET', '/view/' . $entry->getId());
+
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.set_as_read')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertSame('/', $client->getResponse()->headers->get('location'));
@@ -1332,8 +1387,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $crawler = $client->request('GET', '/view/' . $entry->getId());
 
-        $link = $crawler->filter('a[id="markAsRead"]')->link();
-        $client->click($link);
+        $client->submit($crawler->filter('.left-bar')->selectButton('entry.view.left_menu.set_as_read')->form());
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertStringContainsString('/view/' . $entry->getId(), $client->getResponse()->headers->get('location'));
@@ -1346,7 +1400,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl('https://www.lemonde.fr/incorrect-url/');
-        $entry->setHttpStatus(404);
+        $entry->setHttpStatus('404');
         $this->getEntityManager()->persist($entry);
 
         $this->getEntityManager()->flush();
@@ -1364,12 +1418,12 @@ class EntryControllerTest extends WallabagTestCase
 
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl($this->url);
-        $entry->setHttpStatus(200);
+        $entry->setHttpStatus('200');
         $this->getEntityManager()->persist($entry);
 
         $entry = new Entry($this->getLoggedInUser());
         $entry->setUrl('http://www.nextinpact.com/news/101235-wallabag-alternative-libre-a-pocket-creuse-petit-a-petit-son-nid.htm');
-        $entry->setHttpStatus(200);
+        $entry->setHttpStatus('200');
         $this->getEntityManager()->persist($entry);
 
         $this->getEntityManager()->flush();
@@ -1469,7 +1523,8 @@ class EntryControllerTest extends WallabagTestCase
         $crawler = $client->submit($form, $data);
 
         $this->assertCount(1, $crawler->filter($this->entryDataTestAttribute));
-        $client->request('GET', '/delete/' . $entry->getId());
+
+        $client->submit($crawler->filter('.tools, .tools-list')->selectButton('delete')->form());
 
         // test on list of all articles
         $crawler = $client->request('GET', '/all/list');
@@ -1526,11 +1581,43 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertCount(2, $crawler->filter($this->entryDataTestAttribute));
     }
 
+    public function testActionInSearchResults()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+
+        $config = $this->getLoggedInUser()->getConfig();
+        $config->setActionMarkAsRead(ConfigEntity::REDIRECT_TO_CURRENT_PAGE);
+        $this->getEntityManager()->persist($config);
+
+        $entry = new Entry($this->getLoggedInUser());
+        $entry->setUrl($this->url);
+        $entry->setTitle('ActionInSearchResults');
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
+
+        // Search on unread list
+        $crawler = $client->request('GET', '/unread/list');
+
+        $form = $crawler->filter('form[name=search]')->form();
+        $data = [
+            'search_entry[term]' => 'ActionInSearchResults',
+        ];
+
+        $crawler = $client->submit($form, $data);
+        $currentUrl = $client->getRequest()->getUri();
+        $form = $crawler->filter('.tools, .tools-list')->selectButton('delete')->form();
+        $client->submit($form);
+        $client->followRedirect();
+        $nextUrl = $client->getRequest()->getUri();
+        $this->assertSame($currentUrl, $nextUrl);
+    }
+
     public function dataForLanguage()
     {
         return [
             'ru' => [
-                'https://ru.wikipedia.org/wiki/Открытое_программное_обеспечение',
+                'https://ru.wikipedia.org/wiki/%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9_%D1%8F%D0%B7%D1%8B%D0%BA',
                 'ru',
             ],
             'fr' => [
@@ -1538,23 +1625,23 @@ class EntryControllerTest extends WallabagTestCase
                 'fr',
             ],
             'de' => [
-                'https://www.bild.de/politik/ausland/theresa-may/wahlbeben-grossbritannien-analyse-52108924.bild.html',
+                'https://de.wikipedia.org/wiki/Deutsche_Sprache',
                 'de',
             ],
             'it' => [
-                'https://www.ansa.it/sito/notizie/mondo/europa/2017/06/08/voto-gb-seggi-aperti-misure-sicurezza-rafforzate_0cb71f7f-e23b-4d5f-95ca-bc12296419f0.html',
+                'https://it.wikipedia.org/wiki/Lingua_italiana',
                 'it',
             ],
-            'zh_CN' => [
-                'http://tuijian.hao123.com/tuijian/?__noscript__-=1',
-                'zh_CN',
+            'zh' => [
+                'https://zh.wikipedia.org/wiki/%E7%8F%BE%E4%BB%A3%E6%A8%99%E6%BA%96%E6%BC%A2%E8%AA%9E',
+                'zh',
             ],
             'pt_BR' => [
-                'https://esportes.r7.com/lance/futebol/victor-hugo-e-matheus-franca-devem-desfalcar-flamengo-no-carioca-22112022/',
+                'https://www.monpetitbresil.com/pages/quem-somos',
                 'pt_BR',
             ],
-            'es-ES' => [
-                'https://elpais.com/internacional/2022-11-03/ultima-hora-de-la-guerra-entre-rusia-y-ucrania-hoy-en-directo.html',
+            'es' => [
+                'https://es.wikipedia.org/wiki/Idioma_espa%C3%B1ol',
                 'es',
             ],
         ];
@@ -1654,7 +1741,7 @@ class EntryControllerTest extends WallabagTestCase
         $container = $client->getContainer();
         $contentProxy = $this->getMockBuilder(ContentProxy::class)
             ->disableOriginalConstructor()
-            ->setMethods(['updateEntry'])
+            ->onlyMethods(['updateEntry'])
             ->getMock();
         $contentProxy->expects($this->any())
             ->method('updateEntry')
@@ -1693,7 +1780,7 @@ class EntryControllerTest extends WallabagTestCase
         $this->assertSame('example.com', $content->getDomainName());
     }
 
-    public function testEntryDeleteTagLink()
+    public function testEntryDeleteTagForm()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -1704,10 +1791,7 @@ class EntryControllerTest extends WallabagTestCase
 
         $crawler = $client->request('GET', '/view/' . $entry->getId());
 
-        // As long as the deletion link of a tag is following
-        // a link to the tag view, we take the second one to retrieve
-        // the deletion link of the first tag
-        $link = $crawler->filter('body div#article div.tools ul.tags li.chip a')->extract(['href'])[1];
+        $link = $crawler->filter('body div#article div.tools ul.tags li.chip form')->extract(['action'])[0];
 
         $this->assertStringStartsWith(\sprintf('/remove-tag/%s/%s', $entry->getId(), $tag->getId()), $link);
     }
@@ -1760,14 +1844,19 @@ class EntryControllerTest extends WallabagTestCase
         $this->getEntityManager()->persist($entry3);
 
         $this->getEntityManager()->flush();
-        $this->getEntityManager()->clear();
+
+        $client = $this->getTestClient();
 
         $entries = [];
-        $entries[] = $entry1->getId();
-        $entries[] = $entry2->getId();
+        $entries[] = $entry1Id = $entry1->getId();
+        $entries[] = $entry2Id = $entry2->getId();
+
+        $crawler = $client->request('GET', '/all/list');
+        $token = $crawler->filter('#form_mass_action input[name=token]')->attr('value');
 
         // Mass actions : archive
         $client->request('POST', '/mass', [
+            'token' => $token,
             'toggle-archive' => '',
             'entry-checkbox' => $entries,
         ]);
@@ -1779,17 +1868,21 @@ class EntryControllerTest extends WallabagTestCase
             ->getRepository(Entry::class)
             ->find($entry1->getId());
 
-        $this->assertSame(1, $res->isArchived());
+        $this->assertTrue($res->isArchived());
 
         $res = $client->getContainer()
             ->get(EntityManagerInterface::class)
             ->getRepository(Entry::class)
             ->find($entry2->getId());
 
-        $this->assertSame(1, $res->isArchived());
+        $this->assertTrue($res->isArchived());
+
+        $crawler = $client->request('GET', '/all/list');
+        $token = $crawler->filter('#form_mass_action input[name=token]')->attr('value');
 
         // Mass actions : star
         $client->request('POST', '/mass', [
+            'token' => $token,
             'toggle-star' => '',
             'entry-checkbox' => $entries,
         ]);
@@ -1810,8 +1903,12 @@ class EntryControllerTest extends WallabagTestCase
 
         $this->assertTrue($res->isStarred());
 
+        $crawler = $client->request('GET', '/all/list');
+        $token = $crawler->filter('#form_mass_action input[name=token]')->attr('value');
+
         // Mass actions : tag
         $client->request('POST', '/mass', [
+            'token' => $token,
             'tag' => '',
             'tags' => 'foo',
             'entry-checkbox' => $entries,
@@ -1840,17 +1937,29 @@ class EntryControllerTest extends WallabagTestCase
 
         $this->assertNotContains('foo', $res->getTagsLabel());
 
+        $crawler = $client->request('GET', '/all/list');
+        $token = $crawler->filter('#form_mass_action input[name=token]')->attr('value');
+
         // Mass actions : delete
         $client->request('POST', '/mass', [
+            'token' => $token,
             'delete' => '',
             'entry-checkbox' => $entries,
         ]);
 
-        $client->request('GET', '/delete/' . $entry1->getId());
-        $this->assertSame(404, $client->getResponse()->getStatusCode());
+        $res = $client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
+            ->find($entry1Id);
 
-        $client->request('GET', '/delete/' . $entry2->getId());
-        $this->assertSame(404, $client->getResponse()->getStatusCode());
+        $this->assertNull($res);
+
+        $res = $client->getContainer()
+            ->get(EntityManagerInterface::class)
+            ->getRepository(Entry::class)
+            ->find($entry2Id);
+
+        $this->assertNull($res);
     }
 
     public function testGetSameDomainEntries()

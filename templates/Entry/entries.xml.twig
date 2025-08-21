@@ -3,10 +3,10 @@
     {% if type != 'tag' %}
         <title>wallabag — {{ type }} feed</title>
         <subtitle type="html">Atom feed for {{ type }} entries</subtitle>
-        <id>wallabag:{{ domainName|removeScheme|removeWww }}:{{ user }}:{{ type }}</id>
+        <id>wallabag:{{ wallabag_url|removeScheme|removeWww }}:{{ user }}:{{ type }}</id>
         <link rel="alternate" type="text/html" href="{{ url(type) }}"/>
     {% else %}
-        <id>wallabag:{{ domainName|removeScheme|removeWww }}:{{ user }}:{{ type }}:{{ tag }}</id>
+        <id>wallabag:{{ wallabag_url|removeScheme|removeWww }}:{{ user }}:{{ type }}:{{ tag }}</id>
         <link rel="alternate" type="text/html" href="{{ url('tag_entries', {'slug': tag}) }}"/>
         <title>wallabag — {{ type }} {{ tag }} feed</title>
         <subtitle type="html">Atom feed for entries tagged with {{ tag }}</subtitle>
@@ -31,12 +31,10 @@
     {% for entry in entries %}
     <entry>
         <title><![CDATA[{{ entry.title|e }}]]></title>
-        <link href="{{ entry.url }}"/>
-        <link rel="alternate" type="text/html"
+        <link rel="alternate" href="{{ entry.url }}"/>
+        <link rel="via" type="text/html"
               href="{{ url('view', {'id': entry.id}) }}"/>
-        <link rel="via"
-              href="{{ entry.url }}"/>
-        <id>wallabag:{{ domainName|removeScheme|removeWww }}:{{ user }}:entry:{{ entry.id }}</id>
+        <id>wallabag:{{ wallabag_url|removeScheme|removeWww }}:{{ user }}:entry:{{ entry.id }}</id>
         <updated>{{ entry.updatedAt|date('c') }}</updated>
         <published>{{ entry.createdAt|date('c') }}</published>
         {% for tag in entry.tags %}

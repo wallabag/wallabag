@@ -26,10 +26,9 @@ class TagRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/tags.{_format}", methods={"GET"}, name="api_get_tags", defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/tags.{_format}', name: 'api_get_tags', methods: ['GET'], defaults: ['_format' => 'json'])]
     public function getTagsAction(TagRepository $tagRepository)
     {
         $this->validateAuthentication();
@@ -63,14 +62,13 @@ class TagRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/tag/label.{_format}", methods={"DELETE"}, name="api_delete_tag_label", defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/tag/label.{_format}', name: 'api_delete_tag_label', methods: ['DELETE'], defaults: ['_format' => 'json'])]
     public function deleteTagLabelAction(Request $request, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
         $this->validateAuthentication();
-        $label = $request->get('tag', '');
+        $label = $request->request->get('tag', $request->query->get('tag', ''));
 
         $tags = $tagRepository->findByLabelsAndUser([$label], $this->getUser()->getId());
 
@@ -111,15 +109,14 @@ class TagRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/tags/label.{_format}", methods={"DELETE"}, name="api_delete_tags_label", defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/tags/label.{_format}', name: 'api_delete_tags_label', methods: ['DELETE'], defaults: ['_format' => 'json'])]
     public function deleteTagsLabelAction(Request $request, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
         $this->validateAuthentication();
 
-        $tagsLabels = $request->get('tags', '');
+        $tagsLabels = $request->request->get('tags', $request->query->get('tags', ''));
 
         $tags = $tagRepository->findByLabelsAndUser(explode(',', $tagsLabels), $this->getUser()->getId());
 
@@ -158,10 +155,9 @@ class TagRestController extends WallabagRestController
      *     )
      * )
      *
-     * @Route("/api/tags/{tag}.{_format}", methods={"DELETE"}, name="api_delete_tag", defaults={"_format": "json"})
-     *
      * @return JsonResponse
      */
+    #[Route(path: '/api/tags/{tag}.{_format}', name: 'api_delete_tag', methods: ['DELETE'], defaults: ['_format' => 'json'])]
     public function deleteTagAction(Tag $tag, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
         $this->validateAuthentication();

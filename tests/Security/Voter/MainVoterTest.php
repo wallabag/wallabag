@@ -1,6 +1,6 @@
 <?php
 
-namespace Security\Voter;
+namespace Tests\Wallabag\Security\Voter;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -84,6 +84,90 @@ class MainVoterTest extends TestCase
         $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->mainVoter->vote($this->token, null, [MainVoter::EDIT_ENTRIES]));
     }
 
+    public function testVoteReturnsDeniedForNonUserExportEntries(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_USER')->willReturn(false);
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->mainVoter->vote($this->token, null, [MainVoter::EXPORT_ENTRIES]));
+    }
+
+    public function testVoteReturnsGrantedForUserExportEntries(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_USER')->willReturn(true);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->mainVoter->vote($this->token, null, [MainVoter::EXPORT_ENTRIES]));
+    }
+
+    public function testVoteReturnsDeniedForNonUserImportEntries(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_USER')->willReturn(false);
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->mainVoter->vote($this->token, null, [MainVoter::IMPORT_ENTRIES]));
+    }
+
+    public function testVoteReturnsGrantedForUserImportEntries(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_USER')->willReturn(true);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->mainVoter->vote($this->token, null, [MainVoter::IMPORT_ENTRIES]));
+    }
+
+    public function testVoteReturnsDeniedForNonUserDeleteEntries(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_USER')->willReturn(false);
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->mainVoter->vote($this->token, null, [MainVoter::DELETE_ENTRIES]));
+    }
+
+    public function testVoteReturnsGrantedForUserDeleteEntries(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_USER')->willReturn(true);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->mainVoter->vote($this->token, null, [MainVoter::DELETE_ENTRIES]));
+    }
+
+    public function testVoteReturnsDeniedForNonUserListTags(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_USER')->willReturn(false);
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->mainVoter->vote($this->token, null, [MainVoter::LIST_TAGS]));
+    }
+
+    public function testVoteReturnsGrantedForUserListTags(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_USER')->willReturn(true);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->mainVoter->vote($this->token, null, [MainVoter::LIST_TAGS]));
+    }
+
+    public function testVoteReturnsDeniedForNonUserCreateTags(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_USER')->willReturn(false);
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->mainVoter->vote($this->token, null, [MainVoter::CREATE_TAGS]));
+    }
+
+    public function testVoteReturnsGrantedForUserCreateTags(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_USER')->willReturn(true);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->mainVoter->vote($this->token, null, [MainVoter::CREATE_TAGS]));
+    }
+
+    public function testVoteReturnsDeniedForNonUserDeleteTags(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_USER')->willReturn(false);
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->mainVoter->vote($this->token, null, [MainVoter::DELETE_TAGS]));
+    }
+
+    public function testVoteReturnsGrantedForUserDeleteTags(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_USER')->willReturn(true);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->mainVoter->vote($this->token, null, [MainVoter::DELETE_TAGS]));
+    }
+
     public function testVoteReturnsDeniedForNonUserListSiteCredentials(): void
     {
         $this->security->method('isGranted')->with('ROLE_USER')->willReturn(false);
@@ -110,5 +194,19 @@ class MainVoterTest extends TestCase
         $this->security->method('isGranted')->with('ROLE_USER')->willReturn(true);
 
         $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->mainVoter->vote($this->token, null, [MainVoter::CREATE_SITE_CREDENTIALS]));
+    }
+
+    public function testVoteReturnsDeniedForNonUserEditConfig(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_USER')->willReturn(false);
+
+        $this->assertSame(VoterInterface::ACCESS_DENIED, $this->mainVoter->vote($this->token, null, [MainVoter::EDIT_CONFIG]));
+    }
+
+    public function testVoteReturnsGrantedForUserEditConfig(): void
+    {
+        $this->security->method('isGranted')->with('ROLE_USER')->willReturn(true);
+
+        $this->assertSame(VoterInterface::ACCESS_GRANTED, $this->mainVoter->vote($this->token, null, [MainVoter::EDIT_CONFIG]));
     }
 }

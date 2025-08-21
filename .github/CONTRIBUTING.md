@@ -24,7 +24,7 @@ If you want to test using an other database than SQLite, uncomment the `postgres
 
 ### Using your own PHP server
 
-- Ensure you are running PHP >= 7.4.
+- Ensure you are running PHP >= 8.2.
 - Clone the repository
 - Launch `composer install`
 - If you got some errors, fix them (they might be related to some missing PHP extension from your machine)
@@ -55,3 +55,7 @@ To run the tests locally run `make test`.
 To run the PHP formatter run `make fix-cs`.
 
 To run the PHPStan static analysis run `make phpstan`.
+
+To run the JS linter run `make lint-js`.
+
+To run the SCSS linter run `make lint-scss`.

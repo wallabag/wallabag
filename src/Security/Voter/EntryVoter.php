@@ -16,7 +16,13 @@ class EntryVoter extends Voter
     public const ARCHIVE = 'ARCHIVE';
     public const SHARE = 'SHARE';
     public const UNSHARE = 'UNSHARE';
+    public const EXPORT = 'EXPORT';
     public const DELETE = 'DELETE';
+    public const LIST_ANNOTATIONS = 'LIST_ANNOTATIONS';
+    public const CREATE_ANNOTATIONS = 'CREATE_ANNOTATIONS';
+    public const LIST_TAGS = 'LIST_TAGS';
+    public const TAG = 'TAG';
+    public const UNTAG = 'UNTAG';
 
     protected function supports(string $attribute, $subject): bool
     {
@@ -24,7 +30,7 @@ class EntryVoter extends Voter
             return false;
         }
 
-        if (!\in_array($attribute, [self::VIEW, self::EDIT, self::RELOAD, self::STAR, self::ARCHIVE, self::SHARE, self::UNSHARE, self::DELETE], true)) {
+        if (!\in_array($attribute, [self::VIEW, self::EDIT, self::RELOAD, self::STAR, self::ARCHIVE, self::SHARE, self::UNSHARE, self::EXPORT, self::DELETE, self::LIST_ANNOTATIONS, self::CREATE_ANNOTATIONS, self::LIST_TAGS, self::TAG, self::UNTAG], true)) {
             return false;
         }
 
@@ -41,18 +47,9 @@ class EntryVoter extends Voter
             return false;
         }
 
-        switch ($attribute) {
-            case self::VIEW:
-            case self::EDIT:
-            case self::RELOAD:
-            case self::STAR:
-            case self::ARCHIVE:
-            case self::SHARE:
-            case self::UNSHARE:
-            case self::DELETE:
-                return $user === $subject->getUser();
-        }
-
-        return false;
+        return match ($attribute) {
+            self::VIEW, self::EDIT, self::RELOAD, self::STAR, self::ARCHIVE, self::SHARE, self::UNSHARE, self::EXPORT, self::DELETE, self::LIST_ANNOTATIONS, self::CREATE_ANNOTATIONS, self::LIST_TAGS, self::TAG, self::UNTAG => $user === $subject->getUser(),
+            default => false,
+        };
     }
 }

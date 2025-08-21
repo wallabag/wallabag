@@ -45,14 +45,12 @@ final class Version20190826204730 extends WallabagMigration
 
     public function postUp(Schema $schema): void
     {
-        foreach ($this->container->getParameter('wallabag.default_ignore_origin_instance_rules') as $entity) {
-            $previous_rule = $this->container
-                ->get('doctrine.orm.default_entity_manager')
-                ->getConnection()
+        foreach ($this->defaultIgnoreOriginInstanceRules as $entity) {
+            $previous_rule = $this->connection
                 ->fetchOne('SELECT * FROM ' . $this->getTable('ignore_origin_instance_rule') . " WHERE rule = '" . $entity['rule'] . "'");
 
             if (false === $previous_rule) {
-                $this->addSql('INSERT INTO ' . $this->getTable('ignore_origin_instance_rule') . " (rule) VALUES ('" . $entity['rule'] . "');");
+                $this->connection->executeQuery('INSERT INTO ' . $this->getTable('ignore_origin_instance_rule') . " (rule) VALUES ('" . $entity['rule'] . "');");
             }
         }
     }

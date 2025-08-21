@@ -4,6 +4,7 @@ namespace Wallabag\Controller\Import;
 
 use Craue\ConfigBundle\Util\Config;
 use OldSound\RabbitMqBundle\RabbitMq\Producer as RabbitMqProducer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -12,22 +13,16 @@ use Wallabag\Redis\Producer as RedisProducer;
 
 class FirefoxController extends BrowserController
 {
-    private FirefoxImport $firefoxImport;
-    private Config $craueConfig;
-    private RabbitMqProducer $rabbitMqProducer;
-    private RedisProducer $redisProducer;
-
-    public function __construct(FirefoxImport $firefoxImport, Config $craueConfig, RabbitMqProducer $rabbitMqProducer, RedisProducer $redisProducer)
-    {
-        $this->firefoxImport = $firefoxImport;
-        $this->craueConfig = $craueConfig;
-        $this->rabbitMqProducer = $rabbitMqProducer;
-        $this->redisProducer = $redisProducer;
+    public function __construct(
+        private readonly FirefoxImport $firefoxImport,
+        private readonly Config $craueConfig,
+        private readonly RabbitMqProducer $rabbitMqProducer,
+        private readonly RedisProducer $redisProducer,
+    ) {
     }
 
-    /**
-     * @Route("/import/firefox", name="import_firefox")
-     */
+    #[Route(path: '/import/firefox', name: 'import_firefox', methods: ['GET', 'POST'])]
+    #[IsGranted('IMPORT_ENTRIES')]
     public function indexAction(Request $request, TranslatorInterface $translator)
     {
         return parent::indexAction($request, $translator);

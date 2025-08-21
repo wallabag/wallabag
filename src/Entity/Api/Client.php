@@ -9,43 +9,34 @@ use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
 use OpenApi\Annotations as OA;
 use Wallabag\Entity\User;
+use Wallabag\Repository\Api\ClientRepository;
 
-/**
- * @ORM\Table("oauth2_clients")
- * @ORM\Entity(repositoryClass="Wallabag\Repository\Api\ClientRepository")
- */
+#[ORM\Table('oauth2_clients')]
+#[ORM\Entity(repositoryClass: ClientRepository::class)]
 class Client extends BaseClient
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+    #[ORM\Id]
+    #[ORM\Column(type: 'integer')]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="text", nullable=false)
      *
      * @OA\Property(
      *      description="Name of the API client",
      *      type="string",
      *      example="Default Client",
      * )
-     *
-     * @Groups({"user_api_with_client"})
      */
+    #[ORM\Column(name: 'name', type: 'text', nullable: false)]
+    #[Groups(['user_api_with_client'])]
     protected $name;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Wallabag\Entity\Api\RefreshToken", mappedBy="client", cascade={"remove"})
-     */
+    #[ORM\OneToMany(targetEntity: RefreshToken::class, mappedBy: 'client', cascade: ['remove'])]
     protected $refreshTokens;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Wallabag\Entity\Api\AccessToken", mappedBy="client", cascade={"remove"})
-     */
+    #[ORM\OneToMany(targetEntity: AccessToken::class, mappedBy: 'client', cascade: ['remove'])]
     protected $accessTokens;
 
     /**
@@ -56,15 +47,12 @@ class Client extends BaseClient
      *      type="string",
      *      example="2lmubx2m9vy80ss8c4wwcsg8ok44s88ocwcc8wo0w884oc8440",
      * )
-     *
-     * @SerializedName("client_secret")
-     * @Groups({"user_api_with_client"})
      */
+    #[SerializedName('client_secret')]
+    #[Groups(['user_api_with_client'])]
     protected $secret;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Wallabag\Entity\User", inversedBy="clients")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'clients')]
     private $user;
 
     public function __construct(User $user)
@@ -106,17 +94,15 @@ class Client extends BaseClient
     }
 
     /**
-     * @VirtualProperty
-     *
      * @OA\Property(
      *      description="Client secret used for authorization",
      *      type="string",
      *      example="3_1lpybsn0od40css4w4ko8gsc8cwwskggs8kgg448ko0owo4c84",
      * )
-     *
-     * @SerializedName("client_id")
-     * @Groups({"user_api_with_client"})
      */
+    #[VirtualProperty]
+    #[SerializedName('client_id')]
+    #[Groups(['user_api_with_client'])]
     public function getClientId()
     {
         return $this->getId() . '_' . $this->getRandomId();

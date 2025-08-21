@@ -3,63 +3,57 @@
 namespace Wallabag\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\XmlRoot;
+use Wallabag\Repository\TagRepository;
 
 /**
  * Tag.
- *
- * @XmlRoot("tag")
- * @ORM\Table(
- *     name="`tag`",
- *     indexes={
- *         @ORM\Index(columns={"label"}),
- *     }
- * )
- * @ORM\Entity(repositoryClass="Wallabag\Repository\TagRepository")
- * @ExclusionPolicy("all")
  */
-class Tag
+#[ORM\Table(name: '`tag`')]
+#[ORM\Index(columns: ['label'])]
+#[ORM\Entity(repositoryClass: TagRepository::class)]
+#[XmlRoot('tag')]
+#[ExclusionPolicy('all')]
+class Tag implements \Stringable
 {
     /**
      * @var int
-     *
-     * @Expose
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[Expose]
     private $id;
 
     /**
      * @var string
-     *
-     * @Expose
-     * @ORM\Column(name="label", type="text")
      */
+    #[ORM\Column(name: 'label', type: 'text')]
+    #[Expose]
     private $label;
 
-    /**
-     * @Expose
-     * @Gedmo\Slug(fields={"label"}, prefix="t:")
-     * @ORM\Column(length=128, unique=true)
-     */
+    #[ORM\Column(length: 128, unique: true)]
+    #[Gedmo\Slug(fields: ['label'], prefix: 't:')]
+    #[Expose]
     private $slug;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Entry", mappedBy="tags", cascade={"persist"})
+     * @var Collection<Entry>
      */
-    private $entries;
+    #[ORM\ManyToMany(targetEntity: Entry::class, mappedBy: 'tags', cascade: ['persist'])]
+    private Collection $entries;
 
     public function __construct()
     {
         $this->entries = new ArrayCollection();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->label;
     }
@@ -131,7 +125,7 @@ class Tag
     /**
      * Get entries for this tag.
      *
-     * @return ArrayCollection<Entry>
+     * @return Collection<Entry>
      */
     public function getEntries()
     {

@@ -15,20 +15,17 @@
                             <p>{{ 'config.otp.app.two_factor_code_description_2'|trans }}</p>
 
                             <p>
-                                <img id="2faQrcode" class="hide-on-med-and-down" />
-                                <script>
-                                    document.getElementById('2faQrcode').src = jrQrcode.getQrBase64('{{ qr_code|raw }}');
-                                </script>
+                                <img data-controller="qrcode" data-qrcode-url-value="{{ qr_code|raw }}" class="hide-on-med-and-down" />
                             </p>
 
-                            <p>
-                                {{ 'config.otp.app.two_factor_code_description_5'|trans }} <pre>{{ secret }}</pre>
-                            </p>
+                            <div id="config_otp_app_secret">
+                                {{ 'config.otp.app.two_factor_code_description_5'|trans }} <pre><code>{{ secret }}</code></pre>
+                            </div>
                         </li>
                         <li>
                             <p>{{ 'config.otp.app.two_factor_code_description_3'|trans }}</p>
 
-                            <p><pre>{{ backupCodes|join("\n") }}</pre></p>
+                            <div><pre><code>{{ backupCodes|join("\n") }}</code></pre></div>
                         </li>
                         <li>
                             <p>{{ 'config.otp.app.two_factor_code_description_4'|trans }}</p>
@@ -39,13 +36,13 @@
                             </div>
                             {% endfor %}
 
-                            <form class="form" action="{{ path("config_otp_app_check") }}" method="post">
+                            <form class="form" action="{{ path("config_otp_app_check") }}" method="post" name="config_otp_app_check">
                                 <input type="hidden" name="token" value="{{ csrf_token('otp') }}" />
                                 <div class="card-content">
                                     <div class="row">
                                         <div class="input-field col s12">
                                             <label for="_auth_code">{{ "auth_code"|trans({}, 'SchebTwoFactorBundle') }}</label>
-                                            <input id="_auth_code" type="text" autocomplete="off" name="_auth_code" />
+                                            <input id="_auth_code" type="text" autocomplete="off" name="_auth_code" required="required" />
                                         </div>
                                     </div>
                                 </div>

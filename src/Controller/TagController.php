@@ -6,10 +6,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Exception\OutOfRangeCurrentPageException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Wallabag\Entity\Entry;
 use Wallabag\Entity\Tag;
@@ -23,32 +26,29 @@ use Wallabag\Repository\TagRepository;
 
 class TagController extends AbstractController
 {
-    private EntityManagerInterface $entityManager;
-    private TagsAssigner $tagsAssigner;
-    private Redirect $redirectHelper;
-
-    public function __construct(EntityManagerInterface $entityManager, TagsAssigner $tagsAssigner, Redirect $redirectHelper)
-    {
-        $this->entityManager = $entityManager;
-        $this->tagsAssigner = $tagsAssigner;
-        $this->redirectHelper = $redirectHelper;
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly TagsAssigner $tagsAssigner,
+        private readonly Redirect $redirectHelper,
+        private readonly Security $security,
+    ) {
     }
 
     /**
-     * @Route("/new-tag/{entry}", requirements={"entry" = "\d+"}, name="new_tag", methods={"POST"})
-     *
      * @return Response
      */
+    #[Route(path: '/new-tag/{entry}', name: 'new_tag', methods: ['POST'], requirements: ['entry' => '\d+'])]
+    #[IsGranted('TAG', subject: 'entry')]
     public function addTagFormAction(Request $request, Entry $entry, TranslatorInterface $translator)
     {
         $form = $this->createForm(NewTagType::class, new Tag());
         $form->handleRequest($request);
 
         $tags = $form->get('label')->getData() ?? '';
-        $tagsExploded = explode(',', $tags);
+        $tagsExploded = explode(',', (string) $tags);
 
         // avoid too much tag to be added
-        if (\count($tagsExploded) >= NewTagType::MAX_TAGS || \strlen($tags) >= NewTagType::MAX_LENGTH) {
+        if (\count($tagsExploded) >= NewTagType::MAX_TAGS || \strlen((string) $tags) >= NewTagType::MAX_LENGTH) {
             $message = $translator->trans('flashes.tag.notice.too_much_tags', [
                 '%tags%' => NewTagType::MAX_TAGS,
                 '%characters%' => NewTagType::MAX_LENGTH,
@@ -59,8 +59,6 @@ class TagController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->checkUserAction($entry);
-
             $this->tagsAssigner->assignTagsToEntry(
                 $entry,
                 $form->get('label')->getData()
@@ -86,19 +84,21 @@ class TagController extends AbstractController
     /**
      * Removes tag from entry.
      *
-     * @Route("/remove-tag/{entry}/{tag}", requirements={"entry" = "\d+", "tag" = "\d+"}, name="remove_tag")
-     *
      * @return Response
      */
+    #[Route(path: '/remove-tag/{entry}/{tag}', name: 'remove_tag', methods: ['POST'], requirements: ['entry' => '\d+', 'tag' => '\d+'])]
+    #[IsGranted('UNTAG', subject: 'entry')]
     public function removeTagFromEntry(Request $request, Entry $entry, Tag $tag)
     {
-        $this->checkUserAction($entry);
+        if (!$this->isCsrfTokenValid('remove-tag', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
 
         $entry->removeTag($tag);
         $this->entityManager->flush();
 
         // remove orphan tag in case no entries are associated to it
-        if (0 === \count($tag->getEntries())) {
+        if (0 === \count($tag->getEntries()) && $this->security->isGranted('DELETE', $tag)) {
             $this->entityManager->remove($tag);
             $this->entityManager->flush();
         }
@@ -111,22 +111,22 @@ class TagController extends AbstractController
     /**
      * Shows tags for current user.
      *
-     * @Route("/tag/list", name="tag")
-     *
      * @return Response
      */
+    #[Route(path: '/tag/list', name: 'tag', methods: ['GET'])]
+    #[IsGranted('LIST_TAGS')]
     public function showTagAction(TagRepository $tagRepository, EntryRepository $entryRepository)
     {
-        $tags = $tagRepository->findAllFlatTagsWithNbEntries($this->getUser()->getId());
+        $allTagsWithNbEntries = $tagRepository->findAllTagsWithNbEntries($this->getUser()->getId());
         $nbEntriesUntagged = $entryRepository->countUntaggedEntriesByUser($this->getUser()->getId());
 
         $renameForms = [];
-        foreach ($tags as $tag) {
-            $renameForms[$tag['id']] = $this->createForm(RenameTagType::class, new Tag())->createView();
+        foreach ($allTagsWithNbEntries as $tagWithNbEntries) {
+            $renameForms[$tagWithNbEntries['tag']->getId()] = $this->createForm(RenameTagType::class, new Tag())->createView();
         }
 
         return $this->render('Tag/tags.html.twig', [
-            'tags' => $tags,
+            'allTagsWithNbEntries' => $allTagsWithNbEntries,
             'renameForms' => $renameForms,
             'nbEntriesUntagged' => $nbEntriesUntagged,
         ]);
@@ -135,11 +135,12 @@ class TagController extends AbstractController
     /**
      * @param int $page
      *
-     * @Route("/tag/list/{slug}/{page}", name="tag_entries", defaults={"page" = "1"})
-     * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
-     *
      * @return Response
      */
+    #[Route(path: '/tag/list/{slug}/{page}', name: 'tag_entries', methods: ['GET'], defaults: ['page' => '1'])]
+    #[ParamConverter('tag', options: ['mapping' => ['slug' => 'slug']])]
+    #[IsGranted('LIST_ENTRIES')]
+    #[IsGranted('VIEW', subject: 'tag')]
     public function showEntriesForTagAction(Tag $tag, EntryRepository $entryRepository, PreparePagerForEntries $preparePagerForEntries, $page, Request $request)
     {
         $entriesByTag = $entryRepository->findAllByTagId(
@@ -153,9 +154,9 @@ class TagController extends AbstractController
 
         try {
             $entries->setCurrentPage($page);
-        } catch (OutOfRangeCurrentPageException $e) {
+        } catch (OutOfRangeCurrentPageException) {
             if ($page > 1) {
-                return $this->redirect($this->generateUrl($request->get('_route'), [
+                return $this->redirect($this->generateUrl($request->attributes->get('_route'), [
                     'slug' => $tag->getSlug(),
                     'page' => $entries->getNbPages(),
                 ]), 302);
@@ -174,11 +175,11 @@ class TagController extends AbstractController
      * Rename a given tag with a new label
      * Create a new tag with the new name and drop the old one.
      *
-     * @Route("/tag/rename/{slug}", name="tag_rename")
-     * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
-     *
      * @return Response
      */
+    #[Route(path: '/tag/rename/{slug}', name: 'tag_rename', methods: ['POST'])]
+    #[ParamConverter('tag', options: ['mapping' => ['slug' => 'slug']])]
+    #[IsGranted('EDIT', subject: 'tag')]
     public function renameTagAction(Tag $tag, Request $request, TagRepository $tagRepository, EntryRepository $entryRepository)
     {
         $form = $this->createForm(RenameTagType::class, new Tag());
@@ -227,12 +228,16 @@ class TagController extends AbstractController
     /**
      * Tag search results with the current search term.
      *
-     * @Route("/tag/search/{filter}", name="tag_this_search")
-     *
      * @return Response
      */
+    #[Route(path: '/tag/search/{filter}', name: 'tag_this_search', methods: ['POST'])]
+    #[IsGranted('CREATE_TAGS')]
     public function tagThisSearchAction($filter, Request $request, EntryRepository $entryRepository)
     {
+        if (!$this->isCsrfTokenValid('tag-this-search', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         $currentRoute = $request->query->has('currentRoute') ? $request->query->get('currentRoute') : '';
 
         /** @var QueryBuilder $qb */
@@ -248,7 +253,7 @@ class TagController extends AbstractController
 
             // check to avoid duplicate tags creation
             foreach ($this->entityManager->getUnitOfWork()->getScheduledEntityInsertions() as $entity) {
-                if ($entity instanceof Tag && strtolower($entity->getLabel()) === strtolower($filter)) {
+                if ($entity instanceof Tag && strtolower($entity->getLabel()) === strtolower((string) $filter)) {
                     continue 2;
                 }
                 $this->entityManager->persist($entry);
@@ -262,13 +267,17 @@ class TagController extends AbstractController
     /**
      * Delete a given tag for the current user.
      *
-     * @Route("/tag/delete/{slug}", name="tag_delete")
-     * @ParamConverter("tag", options={"mapping": {"slug": "slug"}})
-     *
      * @return Response
      */
+    #[Route(path: '/tag/delete/{slug}', name: 'tag_delete', methods: ['POST'])]
+    #[ParamConverter('tag', options: ['mapping' => ['slug' => 'slug']])]
+    #[IsGranted('DELETE', subject: 'tag')]
     public function removeTagAction(Tag $tag, Request $request, EntryRepository $entryRepository)
     {
+        if (!$this->isCsrfTokenValid('tag-delete', $request->request->get('token'))) {
+            throw new BadRequestHttpException('Bad CSRF token.');
+        }
+
         foreach ($tag->getEntriesByUserId($this->getUser()->getId()) as $entry) {
             $entryRepository->removeTag($this->getUser()->getId(), $tag);
         }
@@ -281,15 +290,5 @@ class TagController extends AbstractController
         $redirectUrl = $this->redirectHelper->to($request->query->get('redirect'), true);
 
         return $this->redirect($redirectUrl);
-    }
-
-    /**
-     * Check if the logged user can manage the given entry.
-     */
-    private function checkUserAction(Entry $entry)
-    {
-        if (null === $this->getUser() || $this->getUser()->getId() !== $entry->getUser()->getId()) {
-            throw $this->createAccessDeniedException('You can not access this entry.');
-        }
     }
 }

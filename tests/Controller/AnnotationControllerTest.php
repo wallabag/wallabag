@@ -82,10 +82,7 @@ class AnnotationControllerTest extends WallabagTestCase
         }
 
         $this->client->request('GET', $prefixUrl . '/' . $entry->getId() . '.json');
-        $this->assertSame(200, $this->client->getResponse()->getStatusCode());
-
-        $content = json_decode($this->client->getResponse()->getContent(), true);
-        $this->assertGreaterThanOrEqual(0, $content['total']);
+        $this->assertSame(404, $this->client->getResponse()->getStatusCode());
     }
 
     /**

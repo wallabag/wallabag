@@ -4,7 +4,7 @@ namespace Wallabag\Event\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
-use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\PreRemoveEventArgs;
 use Doctrine\Persistence\ManagerRegistry;
 use Wallabag\Entity\Entry;
 
@@ -17,11 +17,9 @@ use Wallabag\Entity\Entry;
  */
 class SQLiteCascadeDeleteSubscriber implements EventSubscriber
 {
-    private $doctrine;
-
-    public function __construct(ManagerRegistry $doctrine)
-    {
-        $this->doctrine = $doctrine;
+    public function __construct(
+        private readonly ManagerRegistry $doctrine,
+    ) {
     }
 
     /**
@@ -38,7 +36,7 @@ class SQLiteCascadeDeleteSubscriber implements EventSubscriber
      * We removed everything related to the upcoming removed entry because SQLite can't handle it on it own.
      * We do it in the preRemove, because we can't retrieve tags in the postRemove (because the entry id is gone).
      */
-    public function preRemove(LifecycleEventArgs $args)
+    public function preRemove(PreRemoveEventArgs $args)
     {
         $entity = $args->getObject();
         if (!$this->doctrine->getConnection()->getDatabasePlatform() instanceof SqlitePlatform

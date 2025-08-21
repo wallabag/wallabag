@@ -10,7 +10,7 @@
 
                 <div class="row">
                     <div class="tabs-container col s12">
-                        <ul class="tabs">
+                        <ul class="tabs" data-controller="materialize--tabs">
                             <li class="tab col s12 m6 l3"><a class="active" href="#set1">{{ 'config.tab_menu.settings'|trans }}</a></li>
                             <li class="tab col s12 m6 l3"><a href="#set2">{{ 'config.tab_menu.feed'|trans }}</a></li>
                             <li class="tab col s12 m6 l3"><a href="#set3">{{ 'config.tab_menu.user_info'|trans }}</a></li>
@@ -21,7 +21,7 @@
                         </ul>
                     </div>
 
-                    <div id="set1" class="col s12">
+                    <div id="set1" class="col s12" data-controller="config">
                         {{ form_start(form.config) }}
                             {{ form_errors(form.config) }}
 
@@ -32,7 +32,7 @@
                                 {{ form_label(form.config.items_per_page) }}
                             </div>
                             <div class="input-field col s1">
-                                <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_items_per_page'|trans }}">
+                                <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_items_per_page'|trans }}">
                                     <i class="material-icons">live_help</i>
                                 </a>
                             </div>
@@ -41,11 +41,13 @@
                         <div class="row">
                             <div class="input-field col s11 settings-checkbox-col">
                                 {{ form_errors(form.config.display_thumbnails) }}
-                                {{ form_widget(form.config.display_thumbnails) }}
-                                {{ form_label(form.config.display_thumbnails, null, {'label_attr': {'class': 'settings-checkbox-label'}}) }}
+                                <label for="{{ form.config.display_thumbnails.vars.id }}" class="settings-checkbox-label">
+                                    {{ form_widget(form.config.display_thumbnails) }}
+                                    <span>{{ form.config.display_thumbnails.vars.label|trans }}</span>
+                                </label>
                             </div>
                             <div class="input-field col s1">
-                                <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_display_thumbnails'|trans }}">
+                                <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_display_thumbnails'|trans }}">
                                     <i class="material-icons">live_help</i>
                                 </a>
                             </div>
@@ -62,14 +64,14 @@
                                     </p>
                                 </div>
                                 <div class="input-field col s1">
-                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_reading_speed'|trans }}">
+                                    <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_reading_speed'|trans }}">
                                         <i class="material-icons">live_help</i>
                                     </a>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="input-field col s11">
+                                <div class="input-field col s11" data-controller="materialize--form-select">
                                     {{ form_errors(form.config.action_mark_as_read) }}
                                     {{ form_widget(form.config.action_mark_as_read) }}
                                     {{ form_label(form.config.action_mark_as_read) }}
@@ -77,13 +79,13 @@
                             </div>
 
                             <div class="row">
-                                <div class="input-field col s11">
+                                <div class="input-field col s11" data-controller="materialize--form-select">
                                     {{ form_errors(form.config.language) }}
                                     {{ form_widget(form.config.language) }}
                                     {{ form_label(form.config.language) }}
                                 </div>
                                 <div class="input-field col s1">
-                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_language'|trans }}">
+                                    <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_language'|trans }}">
                                         <i class="material-icons">live_help</i>
                                     </a>
                                 </div>
@@ -100,7 +102,7 @@
                                     </p>
                                 </div>
                                 <div class="input-field col s1">
-                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_pocket_consumer_key'|trans }}">
+                                    <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_pocket_consumer_key'|trans }}">
                                         <i class="material-icons">live_help</i>
                                     </a>
                                 </div>
@@ -110,34 +112,31 @@
                                 <div class="input-field col s12">
                                     <h5>{{ 'config.form_settings.android_configuration'|trans }}</h5>
                                     <a href="wallabag://{{ app.user.username }}@{{ wallabag_url }}" class="waves-effect waves-light btn hide-on-large-only">{{ 'config.form_settings.android_instruction'|trans }}</a>
-                                    <img id="androidQrcode" class="hide-on-med-and-down" alt="{{ 'config.otp.app.qrcode_label'|trans }}" />
+                                    <img data-controller="qrcode" data-qrcode-url-value="wallabag://{{ app.user.username }}@{{ wallabag_url }}" class="hide-on-med-and-down" alt="{{ 'config.otp.app.qrcode_label'|trans }}" />
                                 </div>
-                                <script>
-                                    document.getElementById('androidQrcode').src = jrQrcode.getQrBase64('wallabag://{{ app.user.username }}@{{ wallabag_url }}');
-                                </script>
                             </div>
 
                             <h5>{{ 'config.tab_menu.article_display'|trans }}</h5>
 
                             <div class="row">
-                                <div class="input-field col s5">
+                                <div class="input-field col s5" data-controller="materialize--form-select">
                                     {{ form_errors(form.config.font) }}
-                                    {{ form_widget(form.config.font) }}
+                                    {{ form_widget(form.config.font, {attr: {'data-config-target': 'font', 'data-action': 'config#updatePreview'}}) }}
                                     {{ form_label(form.config.font) }}
                                 </div>
                                 <div class="input-field col s1">
-                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_font'|trans }}">
+                                    <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_font'|trans }}">
                                         <i class="material-icons">live_help</i>
                                     </a>
                                 </div>
 
                                 <div class="input-field col s5">
                                     {{ form_errors(form.config.lineHeight) }}
-                                    {{ form_widget(form.config.lineHeight) }}
+                                    {{ form_widget(form.config.lineHeight, {attr: {'data-config-target': 'lineHeight', 'data-action': 'config#updatePreview'}}) }}
                                     {{ form_label(form.config.lineHeight, null, {'label_attr': {'class': 'settings-range-label'}}) }}
                                 </div>
                                 <div class="input-field col s1">
-                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_lineheight'|trans }}">
+                                    <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_lineheight'|trans }}">
                                         <i class="material-icons">live_help</i>
                                     </a>
                                 </div>
@@ -146,22 +145,22 @@
                             <div class="row">
                                 <div class="input-field col s5">
                                     {{ form_errors(form.config.fontsize) }}
-                                    {{ form_widget(form.config.fontsize) }}
+                                    {{ form_widget(form.config.fontsize, {attr: {'data-config-target': 'fontSize', 'data-action': 'config#updatePreview'}}) }}
                                     {{ form_label(form.config.fontsize, null, {'label_attr': {'class': 'settings-range-label'}}) }}
                                 </div>
                                 <div class="input-field col s1">
-                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_fontsize'|trans }}">
+                                    <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_fontsize'|trans }}">
                                         <i class="material-icons">live_help</i>
                                     </a>
                                 </div>
 
                                 <div class="input-field col s5">
                                     {{ form_errors(form.config.maxWidth) }}
-                                    {{ form_widget(form.config.maxWidth) }}
+                                    {{ form_widget(form.config.maxWidth, {attr: {'data-config-target': 'maxWidth', 'data-action': 'config#updatePreview'}}) }}
                                     {{ form_label(form.config.maxWidth, null, {'label_attr': {'class': 'settings-range-label'}}) }}
                                 </div>
                                 <div class="input-field col s1">
-                                    <a href="#" class="tooltipped" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_maxwidth'|trans }}">
+                                    <a href="#" data-controller="materialize--tooltip" data-position="left" data-delay="50" data-tooltip="{{ 'config.form_settings.help_maxwidth'|trans }}">
                                         <i class="material-icons">live_help</i>
                                     </a>
                                 </div>
@@ -169,8 +168,8 @@
 
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <div id="preview-article">
-                                        <article id="preview-content">
+                                    <div id="preview-article" data-config-target="previewArticle">
+                                        <article id="preview-content" data-config-target="previewContent">
                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                                         </article>
                                     </div>
@@ -183,47 +182,62 @@
                     </div>
 
                     <div id="set2" class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                {{ 'config.form_feed.description'|trans }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col s12">
+                                <h6 class="grey-text">{{ 'config.form_feed.token_label'|trans }}</h6>
+                                <div>
+                                    {% if feed.token %}
+                                        {{ feed.token }}
+                                    {% else %}
+                                        <em>{{ 'config.form_feed.no_token'|trans }}</em>
+                                    {% endif %}
+
+                                    {% if feed.token %}
+                                        –
+                                        <form action="{{ path('generate_token') }}" method="post" class="inline-block">
+                                            <input type="hidden" name="token" value="{{ csrf_token('generate-token') }}"/>
+
+                                            <button type="submit" class="btn-link">{{ 'config.form_feed.token_reset'|trans }}</button>
+                                        </form>
+                                        –
+                                        <form action="{{ path('revoke_token') }}" method="post" class="inline-block">
+                                            <input type="hidden" name="token" value="{{ csrf_token('revoke-token') }}"/>
+
+                                            <button type="submit" class="btn-link">{{ 'config.form_feed.token_revoke'|trans }}</button>
+                                        </form>
+                                    {% else %}
+                                        –
+                                        <form action="{{ path('generate_token') }}" method="post" class="inline-block">
+                                            <input type="hidden" name="token" value="{{ csrf_token('generate-token') }}"/>
+
+                                            <button type="submit" class="btn-link">{{ 'config.form_feed.token_create'|trans }}</button>
+                                        </form>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% if feed.token %}
+                        <div class="row">
+                            <div class="col s12">
+                                <h6 class="grey-text">{{ 'config.form_feed.feed_links'|trans }}</h6>
+                                <ul>
+                                    <li><a href="{{ path('unread_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.unread'|trans }}</a></li>
+                                    <li><a href="{{ path('starred_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.starred'|trans }}</a></li>
+                                    <li><a href="{{ path('archive_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.archive'|trans }}</a></li>
+                                    <li><a href="{{ path('all_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.all'|trans }}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        {% endif %}
+
                         {{ form_start(form.feed) }}
                             {{ form_errors(form.feed) }}
-
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    {{ 'config.form_feed.description'|trans }}
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col s12">
-                                    <h6 class="grey-text">{{ 'config.form_feed.token_label'|trans }}</h6>
-                                    <div>
-                                        {% if feed.token %}
-                                            {{ feed.token }}
-                                        {% else %}
-                                            <em>{{ 'config.form_feed.no_token'|trans }}</em>
-                                        {% endif %}
-
-                                        {% if feed.token %}
-                                            – <a href="{{ path('generate_token') }}">{{ 'config.form_feed.token_reset'|trans }}</a>
-                                            – <a href="{{ path('revoke_token') }}">{{ 'config.form_feed.token_revoke'|trans }}</a>
-                                        {% else %}
-                                            – <a href="{{ path('generate_token') }}">{{ 'config.form_feed.token_create'|trans }}</a>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                            {% if feed.token %}
-                            <div class="row">
-                                <div class="col s12">
-                                    <h6 class="grey-text">{{ 'config.form_feed.feed_links'|trans }}</h6>
-                                    <ul>
-                                        <li><a href="{{ path('unread_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.unread'|trans }}</a></li>
-                                        <li><a href="{{ path('starred_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.starred'|trans }}</a></li>
-                                        <li><a href="{{ path('archive_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.archive'|trans }}</a></li>
-                                        <li><a href="{{ path('all_feed', {'username': feed.username, 'token': feed.token}) }}">{{ 'config.form_feed.feed_link.all'|trans }}</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            {% endif %}
 
                             <div class="row">
                                 <div class="input-field col s12">
@@ -382,12 +396,16 @@
                                         {{ 'config.form_rules.then_tag_as_label'|trans }}
                                         « {{ tagging_rule.tags|join(', ') }} »
 
-                                        <a href="{{ path('edit_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="mode_edit_tagging_rule">
+                                        <a href="{{ path('edit_tagging_rule', {taggingRule: tagging_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="mode_edit_tagging_rule">
                                             <i class="tool grey-text material-icons">mode_edit</i>
                                         </a>
-                                        <a href="{{ path('delete_tagging_rule', {id: tagging_rule.id}) }}" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="delete_tagging_rule">
-                                            <i class="tool grey-text material-icons">delete</i>
-                                        </a>
+                                        <form action="{{ path('delete_tagging_rule', {taggingRule: tagging_rule.id}) }}" method="post" class="inline-block">
+                                            <input type="hidden" name="token" value="{{ csrf_token('delete-tagging-rule') }}"/>
+
+                                            <button type="submit" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="btn-link">
+                                                <i class="tool grey-text material-icons">delete</i>
+                                            </button>
+                                        </form>
                                     </li>
                                     {% endfor %}
                                 </ul>
@@ -562,12 +580,16 @@
                                     <li>
                                         {{ 'config.form_rules.if_label'|trans }}
                                         « {{ ignore_origin_rule.rule }} »
-                                        <a href="{{ path('edit_ignore_origin_rule', {id: ignore_origin_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="mode_edit">
+                                        <a href="{{ path('edit_ignore_origin_rule', {ignoreOriginUserRule: ignore_origin_rule.id}) }}" title="{{ 'config.form_rules.edit_rule_label'|trans }}" class="mode_edit">
                                             <i class="tool grey-text material-icons">mode_edit</i>
                                         </a>
-                                        <a href="{{ path('delete_ignore_origin_rule', {id: ignore_origin_rule.id}) }}" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="delete">
-                                            <i class="tool grey-text material-icons">delete</i>
-                                        </a>
+                                        <form action="{{ path('delete_ignore_origin_rule', {ignoreOriginUserRule: ignore_origin_rule.id}) }}" method="post" class="inline-block">
+                                            <input type="hidden" name="token" value="{{ csrf_token('delete-ignore-origin-rule') }}"/>
+
+                                            <button type="submit" title="{{ 'config.form_rules.delete_rule_label'|trans }}" class="btn-link">
+                                                <i class="tool grey-text material-icons">delete</i>
+                                            </button>
+                                        </form>
                                     </li>
                                     {% endfor %}
                                 </ul>

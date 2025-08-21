@@ -17,26 +17,20 @@ use Wallabag\Repository\IgnoreOriginInstanceRuleRepository;
 
 /**
  * IgnoreOriginInstanceRuleController controller.
- *
- * @Route("/ignore-origin-instance-rules")
  */
 class IgnoreOriginInstanceRuleController extends AbstractController
 {
-    private EntityManagerInterface $entityManager;
-    private TranslatorInterface $translator;
-
-    public function __construct(EntityManagerInterface $entityManager, TranslatorInterface $translator)
-    {
-        $this->entityManager = $entityManager;
-        $this->translator = $translator;
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly TranslatorInterface $translator,
+    ) {
     }
 
     /**
      * Lists all IgnoreOriginInstanceRule entities.
-     *
-     * @Route("/", name="ignore_origin_instance_rules_index", methods={"GET"})
-     * @IsGranted("LIST_IGNORE_ORIGIN_INSTANCE_RULES")
      */
+    #[Route(path: '/ignore-origin-instance-rules', name: 'ignore_origin_instance_rules_index', methods: ['GET'])]
+    #[IsGranted('LIST_IGNORE_ORIGIN_INSTANCE_RULES')]
     public function indexAction(IgnoreOriginInstanceRuleRepository $repository)
     {
         $rules = $repository->findAll();
@@ -49,11 +43,10 @@ class IgnoreOriginInstanceRuleController extends AbstractController
     /**
      * Creates a new ignore origin instance rule entity.
      *
-     * @Route("/new", name="ignore_origin_instance_rules_new", methods={"GET", "POST"})
-     * @IsGranted("CREATE_IGNORE_ORIGIN_INSTANCE_RULES")
-     *
      * @return Response
      */
+    #[Route(path: '/ignore-origin-instance-rules/new', name: 'ignore_origin_instance_rules_new', methods: ['GET', 'POST'])]
+    #[IsGranted('CREATE_IGNORE_ORIGIN_INSTANCE_RULES')]
     public function newAction(Request $request)
     {
         $ignoreOriginInstanceRule = new IgnoreOriginInstanceRule();
@@ -82,11 +75,10 @@ class IgnoreOriginInstanceRuleController extends AbstractController
     /**
      * Displays a form to edit an existing ignore origin instance rule entity.
      *
-     * @Route("/{id}/edit", name="ignore_origin_instance_rules_edit", methods={"GET", "POST"})
-     * @IsGranted("EDIT", subject="ignoreOriginInstanceRule")
-     *
      * @return Response
      */
+    #[Route(path: '/ignore-origin-instance-rules/{id}/edit', name: 'ignore_origin_instance_rules_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('EDIT', subject: 'ignoreOriginInstanceRule')]
     public function editAction(Request $request, IgnoreOriginInstanceRule $ignoreOriginInstanceRule)
     {
         $deleteForm = $this->createDeleteForm($ignoreOriginInstanceRule);
@@ -115,11 +107,10 @@ class IgnoreOriginInstanceRuleController extends AbstractController
     /**
      * Deletes a site credential entity.
      *
-     * @Route("/{id}", name="ignore_origin_instance_rules_delete", methods={"DELETE"})
-     * @IsGranted("DELETE", subject="ignoreOriginInstanceRule")
-     *
      * @return RedirectResponse
      */
+    #[Route(path: '/ignore-origin-instance-rules/{id}', name: 'ignore_origin_instance_rules_delete', methods: ['DELETE'])]
+    #[IsGranted('DELETE', subject: 'ignoreOriginInstanceRule')]
     public function deleteAction(Request $request, IgnoreOriginInstanceRule $ignoreOriginInstanceRule)
     {
         $form = $this->createDeleteForm($ignoreOriginInstanceRule);
