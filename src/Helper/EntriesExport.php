@@ -86,7 +86,7 @@ class EntriesExport
      */
     public function updateAuthor($method)
     {
-        if ($method !== 'entry') {
+        if ('entry' !== $method) {
             $this->author = 'Various authors';
 
             return $this;
@@ -237,7 +237,7 @@ class EntriesExport
 
             if ($entry->isPublic()) {
                 $publicLink = $this->wallabagUrl . '/share/' . $entry->getUid();
-                $chapter .= '<dt>Public link</dt><dd><a href="' . $publicLink . '">' . $publicLink . '</a></dd>';
+                $chapter .= '<dt>' . $this->translator->trans('entry.filters.is_public_help') . '</dt><dd><a href="' . $publicLink . '">' . $publicLink . '</a></dd>';
             }
 
             $chapter .= '</dl>' .
