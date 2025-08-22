@@ -60,6 +60,9 @@ one (or many if you want to support many) cron job:
 # for Pocket import
 bin/console rabbitmq:consumer --env=prod import_pocket -w
 
+# for Pocket CSV import
+bin/console rabbitmq:consumer --env=prod import_pocket_csv -w
+
 # for Readability import
 bin/console rabbitmq:consumer --env=prod import_readability -w
 
@@ -127,6 +130,9 @@ one (or many if you want to support many) cron job:
 ```
 # for Pocket import
 bin/console wallabag:import:redis-worker --env=prod pocket -vv >> /path/to/wallabag/var/logs/redis-pocket.log
+
+# for Pocket CSV import
+bin/console wallabag:import:redis-worker --env=prod pocket_csv -vv >> /path/to/wallabag/var/logs/redis-pocket.log
 
 # for Readability import
 bin/console wallabag:import:redis-worker --env=prod readability -vv >> /path/to/wallabag/var/logs/redis-readability.log
