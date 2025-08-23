@@ -93,7 +93,7 @@
         "nelmio/api-doc-bundle": "^4.38.1",
         "nelmio/cors-bundle": "^2.5",
         "ocramius/proxy-manager": "^2.1.1",
-        "pagerfanta/core": "^3.8",
+        "pagerfanta/core": "^4.7",
         "pagerfanta/doctrine-orm-adapter": "^4.7",
         "pagerfanta/twig": "^4.7",
         "php-amqplib/php-amqplib": "^3.7.3",
