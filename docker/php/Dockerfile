@@ -1,4 +1,4 @@
-FROM php:8.1-fpm AS rootless
+FROM php:8.1-fpm-bookworm AS rootless
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG NODE_VERSION=20
