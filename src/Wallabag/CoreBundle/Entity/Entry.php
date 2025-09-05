@@ -15,6 +15,7 @@ use Wallabag\AnnotationBundle\Entity\Annotation;
 use Wallabag\CoreBundle\Helper\EntityTimestampsTrait;
 use Wallabag\CoreBundle\Helper\UrlHasher;
 use Wallabag\UserBundle\Entity\User;
+use Wallabag\CoreBundle\Tools\Utils;
 
 /**
  * Entry.
@@ -656,6 +657,15 @@ class Entry
     public function setReadingTime($readingTime)
     {
         $this->readingTime = $readingTime;
+    }
+
+
+    /**
+     * @return float
+     */
+    public function getUserReadingTime()
+    {
+        return round($this->readingTime / $this->getUser()->getConfig()->getReadingSpeed() * Utils::DEFAULT_WORDS_PER_MINUTE);
     }
 
     /**
