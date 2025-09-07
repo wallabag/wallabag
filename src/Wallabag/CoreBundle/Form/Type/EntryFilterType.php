@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wallabag\CoreBundle\Repository\EntryRepository;
+use Wallabag\CoreBundle\Tools\Utils;
 use Wallabag\UserBundle\Entity\User;
 
 class EntryFilterType extends AbstractType
@@ -57,8 +58,8 @@ class EntryFilterType extends AbstractType
                         return;
                     }
 
-                    $min = (int) ($lower * $user->getConfig()->getReadingSpeed() / 200);
-                    $max = (int) ($upper * $user->getConfig()->getReadingSpeed() / 200);
+                    $min = (int) ($lower * $user->getConfig()->getReadingSpeed() / Utils::DEFAULT_WORDS_PER_MINUTE);
+                    $max = (int) ($upper * $user->getConfig()->getReadingSpeed() / Utils::DEFAULT_WORDS_PER_MINUTE);
 
                     if (null === $lower && null !== $upper) {
                         // only lower value is defined: query all entries with reading LOWER THAN this value

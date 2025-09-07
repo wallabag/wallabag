@@ -4,6 +4,8 @@ namespace Wallabag\CoreBundle\Tools;
 
 class Utils
 {
+    public const DEFAULT_WORDS_PER_MINUTE = 200;
+
     /**
      * Generate a token used for Feeds.
      *
@@ -28,6 +30,6 @@ class Utils
      */
     public static function getReadingTime($text)
     {
-        return floor(\count(preg_split('~([^\p{L}\p{N}\']+|(\p{Han}|\p{Hiragana}|\p{Katakana}|\p{Hangul}){1,2})~u', strip_tags($text))) / 200);
+        return floor(\count(preg_split('~([^\p{L}\p{N}\']+|(\p{Han}|\p{Hiragana}|\p{Katakana}|\p{Hangul}){1,2})~u', strip_tags($text))) / self::DEFAULT_WORDS_PER_MINUTE);
     }
 }
