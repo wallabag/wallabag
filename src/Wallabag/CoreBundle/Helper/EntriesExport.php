@@ -210,7 +210,7 @@ class EntriesExport
                 $publishedDate = $entry->getPublishedAt()->format('Y-m-d');
             }
 
-            $readingTime = round($entry->getReadingTime() / $user->getConfig()->getReadingSpeed() * 200);
+            $readingTime = $entry->getUserReadingTime();
 
             $titlepage = $content_start .
                 '<h1>' . $entry->getTitle() . '</h1>' .
@@ -331,7 +331,7 @@ class EntriesExport
                 $authors = implode(',', $publishedBy);
             }
 
-            $readingTime = $entry->getReadingTime() / $user->getConfig()->getReadingSpeed() * 200;
+            $readingTime = $entry->getUserReadingTime();
 
             $pdf->addPage();
             $html = '<h1>' . $entry->getTitle() . '</h1>' .

@@ -133,7 +133,7 @@ class RuleBasedTagger
     private function fixEntry(Entry $entry)
     {
         $clonedEntry = clone $entry;
-        $clonedEntry->setReadingTime($entry->getReadingTime() / $entry->getUser()->getConfig()->getReadingSpeed() * 200);
+        $clonedEntry->setReadingTime($entry->getUserReadingTime());
 
         return $clonedEntry;
     }

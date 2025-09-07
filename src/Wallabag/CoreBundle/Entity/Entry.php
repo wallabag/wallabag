@@ -659,6 +659,14 @@ class Entry
     }
 
     /**
+     * @return float
+     */
+    public function getUserReadingTime()
+    {
+        return round($this->readingTime / $this->getUser()->getConfig()->getReadingSpeed() * 200);
+    }
+
+    /**
      * @return string
      */
     public function getDomainName()
