@@ -916,10 +916,10 @@
   resolved "https://registry.yarnpkg.com/@fontsource/montserrat/-/montserrat-5.2.7.tgz#07fd32925b5e704e570fdcf17c67fe32a12f1f4c"
   integrity sha512-UUa6yixHm3DISsFTcEq3AVVWRUpl3HGQXq/4QVXpSnIPMOqH5Qmer/PeNphkg/5jgA4XfmijymkmD59x8TYOSw==
 
-"@fontsource/oswald@^5.2.6":
-  version "5.2.6"
-  resolved "https://registry.yarnpkg.com/@fontsource/oswald/-/oswald-5.2.6.tgz#34ec796848d484dcdb26af42f6a18ca7315dcd56"
-  integrity sha512-2rMxNdRrTjuhz2alrqMgOR45HOdxcLdzHYTdmque2idEH7TmG7fsYEpRr3qCL3TFpInr5OygAYvTEGWBy2d06g==
+"@fontsource/oswald@^5.2.7":
+  version "5.2.7"
+  resolved "https://registry.yarnpkg.com/@fontsource/oswald/-/oswald-5.2.7.tgz#a2eb6f8027c3f773cf2ad5360c39e0b0cdf6c10c"
+  integrity sha512-LVV1f+cxAP57Zv5K0Wdy/V/4iCNeSLUh1e3h5NlFYETJnArIvxvQpzfo5UWe+Li22RqLCQeubt9PYuKfH6JM6g==
 
 "@hotwired/stimulus-webpack-helpers@^1.0.1":
   version "1.0.1"
