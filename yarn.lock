@@ -901,25 +901,25 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.57.1.tgz#de633db3ec2ef6a3c89e2f19038063e8a122e2c2"
   integrity sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==
 
-"@fontsource/atkinson-hyperlegible@^5.2.7":
-  version "5.2.7"
-  resolved "https://registry.yarnpkg.com/@fontsource/atkinson-hyperlegible/-/atkinson-hyperlegible-5.2.7.tgz#c7c8b32feeaa1a866a7790b4ea75727ea294a0d0"
-  integrity sha512-WUCchUMKXKH9VO1ZStn64CMdWl+l+kJY+6Ia9lFoO5C+z7jHx3Z2y73lBnHwz3n8it5Hs2wdk0JDyhs8hPbXxw==
+"@fontsource/atkinson-hyperlegible@^5.2.8":
+  version "5.2.8"
+  resolved "https://registry.yarnpkg.com/@fontsource/atkinson-hyperlegible/-/atkinson-hyperlegible-5.2.8.tgz#7a4581bab2837cf4000a2917cdadc9dbf0bf49e9"
+  integrity sha512-HciLcJ5DIK/OVOdo71EbEN4NnvDFlp6/SpAxtcbWf2aAdcsOuPqITxj5KNEXb48qSPSdnnZdGGnSJChPKi3/bA==
 
-"@fontsource/eb-garamond@^5.2.6":
-  version "5.2.6"
-  resolved "https://registry.yarnpkg.com/@fontsource/eb-garamond/-/eb-garamond-5.2.6.tgz#a3690b0213e65e80083e08f8782c25e40d79c7ee"
-  integrity sha512-tyfij001YUzGAdIVxWSmID5zlR6PUzMUDm4GjwDlfBEtlS+slyypAmtkM7x4oG1mS0n9pqFbQW+WlmNm1UVJQA==
-
-"@fontsource/montserrat@^5.2.7":
+"@fontsource/eb-garamond@^5.2.7":
   version "5.2.7"
-  resolved "https://registry.yarnpkg.com/@fontsource/montserrat/-/montserrat-5.2.7.tgz#07fd32925b5e704e570fdcf17c67fe32a12f1f4c"
-  integrity sha512-UUa6yixHm3DISsFTcEq3AVVWRUpl3HGQXq/4QVXpSnIPMOqH5Qmer/PeNphkg/5jgA4XfmijymkmD59x8TYOSw==
+  resolved "https://registry.yarnpkg.com/@fontsource/eb-garamond/-/eb-garamond-5.2.7.tgz#68bd97f7a9b456815df6d48ae97da3aefc40b432"
+  integrity sha512-V42tTlHDbnDo0+lENnXKWMx63Llq6Gfl2l7ozkoeRQN60S0jm6hEgCLlOT/5YyKAN9QZ0e2ofpy0rGKlz9jBrw==
 
-"@fontsource/oswald@^5.2.7":
-  version "5.2.7"
-  resolved "https://registry.yarnpkg.com/@fontsource/oswald/-/oswald-5.2.7.tgz#a2eb6f8027c3f773cf2ad5360c39e0b0cdf6c10c"
-  integrity sha512-LVV1f+cxAP57Zv5K0Wdy/V/4iCNeSLUh1e3h5NlFYETJnArIvxvQpzfo5UWe+Li22RqLCQeubt9PYuKfH6JM6g==
+"@fontsource/montserrat@^5.2.8":
+  version "5.2.8"
+  resolved "https://registry.yarnpkg.com/@fontsource/montserrat/-/montserrat-5.2.8.tgz#4be164061dbab2b81bc803e9ceed47f5bd9c9f88"
+  integrity sha512-xTjLxSbSfCycDB0pwmNsfNvdfWPaDaRQ2LC6yt/ZI7SdvXG52zHnzNYC/09mzuAuWNJyShkteutfCoDgym56hQ==
+
+"@fontsource/oswald@^5.2.8":
+  version "5.2.8"
+  resolved "https://registry.yarnpkg.com/@fontsource/oswald/-/oswald-5.2.8.tgz#8e2f29f3a08f5c928e995770a0727bdb3ba5e6cd"
+  integrity sha512-DFoPK1BqsFIQhVjs2xgO/oL9veF9oUJgFojEWIU+nazUrfqsBDtAMI4n9L9CZFX3kQNDLcCyzKx1xoEDvQT4WQ==
 
 "@hotwired/stimulus-webpack-helpers@^1.0.1":
   version "1.0.1"
