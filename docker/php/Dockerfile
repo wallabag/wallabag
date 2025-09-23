@@ -18,8 +18,7 @@ RUN apt-get update \
       curl \
       gnupg \
       lsb-release \
-      openssl \
-      software-properties-common
+      openssl
 
 RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash -
 
