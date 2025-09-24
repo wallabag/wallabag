@@ -27,7 +27,7 @@
                     <form class="card-tag-form hidden" data-tag-target="form" action="{{ path('tag_rename', {'slug': tag.slug, redirect: current_path}) }}" method="POST">
                         {{ form_widget(renameForms[tag.id].label, {'attr': {'value': tag.label, 'data-tag-target': 'input'}}) }}
                         {{ form_rest(renameForms[tag.id]) }}
-                        <button type="submit"><i class="material-icons">done</i></button>
+                        <button type="submit"><i class="material-icons">archive</i></button>
                     </form>
                     <button type="button" data-tag-target="edit" data-action="tag#showForm">
                         <i class="material-icons">mode_edit</i>
