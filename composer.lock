@@ -4064,16 +4064,16 @@
         },
         {
             "name": "j0k3r/graby",
-            "version": "2.4.6",
+            "version": "v2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/graby.git",
-                "reference": "75437c1928bb036dbb07c61dba40ad6aaa2ffb99"
+                "reference": "b126fd53579860339dbd07deae7c7d7ba2af22c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/graby/zipball/75437c1928bb036dbb07c61dba40ad6aaa2ffb99",
-                "reference": "75437c1928bb036dbb07c61dba40ad6aaa2ffb99",
+                "url": "https://api.github.com/repos/j0k3r/graby/zipball/b126fd53579860339dbd07deae7c7d7ba2af22c7",
+                "reference": "b126fd53579860339dbd07deae7c7d7ba2af22c7",
                 "shasum": ""
             },
             "require": {
@@ -4083,7 +4083,7 @@
                 "guzzlehttp/psr7": "^1.5.0|^2.0",
                 "http-interop/http-factory-guzzle": "^1.1",
                 "j0k3r/graby-site-config": "^1.0.181",
-                "j0k3r/httplug-ssrf-plugin": "^2.0",
+                "j0k3r/httplug-ssrf-plugin": "^2.0|^3.0",
                 "j0k3r/php-readability": "^1.2.10",
                 "monolog/monolog": "^1.18.0|^2.0",
                 "php": ">=7.1.3",
@@ -4137,7 +4137,7 @@
             "description": "Graby helps you extract article content from web pages",
             "support": {
                 "issues": "https://github.com/j0k3r/graby/issues",
-                "source": "https://github.com/j0k3r/graby/tree/2.4.6"
+                "source": "https://github.com/j0k3r/graby/tree/v2.5.0"
             },
             "funding": [
                 {
@@ -4145,7 +4145,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-24T06:22:45+00:00"
+            "time": "2025-09-26T10:59:41+00:00"
         },
         {
             "name": "j0k3r/graby-site-config",
@@ -4193,34 +4193,35 @@
         },
         {
             "name": "j0k3r/httplug-ssrf-plugin",
-            "version": "v2.0.2",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/httplug-ssrf-plugin.git",
-                "reference": "b60e8068054bdb15fdf1e62cd314d941c62a3b72"
+                "reference": "f319726d6c3908c18b1cc4bcfdfc8b9e98b1401b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/httplug-ssrf-plugin/zipball/b60e8068054bdb15fdf1e62cd314d941c62a3b72",
-                "reference": "b60e8068054bdb15fdf1e62cd314d941c62a3b72",
+                "url": "https://api.github.com/repos/j0k3r/httplug-ssrf-plugin/zipball/f319726d6c3908c18b1cc4bcfdfc8b9e98b1401b",
+                "reference": "f319726d6c3908c18b1cc4bcfdfc8b9e98b1401b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2.9",
-                "php-http/client-common": "^2.0",
-                "php-http/discovery": "^1.5",
-                "php-http/message": "^1.7",
-                "php-http/message-factory": "^1.0.2"
+                "php": ">=7.4",
+                "php-http/client-common": "^2.6",
+                "php-http/discovery": "^1.15",
+                "php-http/message": "^1.13",
+                "psr/http-factory": "^1.0",
+                "psr/http-message": "^1.0 || ^2.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.14",
-                "guzzlehttp/psr7": "^1.0",
-                "php-http/guzzle6-adapter": "^2.0",
-                "php-http/mock-client": "^1.0",
-                "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^0.12",
-                "phpstan/phpstan-phpunit": "^0.12",
-                "symfony/phpunit-bridge": "~5.0"
+                "friendsofphp/php-cs-fixer": "^3.16",
+                "guzzlehttp/guzzle": "^7.5",
+                "guzzlehttp/psr7": "^2.0",
+                "php-http/guzzle7-adapter": "^1.0",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "symfony/phpunit-bridge": "^7.2.0"
             },
             "type": "library",
             "autoload": {
@@ -4258,33 +4259,39 @@
             ],
             "support": {
                 "issues": "https://github.com/j0k3r/httplug-ssrf-plugin/issues",
-                "source": "https://github.com/j0k3r/httplug-ssrf-plugin/tree/master"
+                "source": "https://github.com/j0k3r/httplug-ssrf-plugin/tree/v3.0.1"
             },
-            "time": "2020-06-26T06:05:06+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/j0k3r",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-01-06T09:13:08+00:00"
         },
         {
             "name": "j0k3r/php-readability",
-            "version": "1.2.13",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/j0k3r/php-readability.git",
-                "reference": "b9dde0f4cd46e9fc082bb37f75dc94ecd2f8faad"
+                "reference": "774363e18df0c00f1b640f60f46536c867ef143d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/b9dde0f4cd46e9fc082bb37f75dc94ecd2f8faad",
-                "reference": "b9dde0f4cd46e9fc082bb37f75dc94ecd2f8faad",
+                "url": "https://api.github.com/repos/j0k3r/php-readability/zipball/774363e18df0c00f1b640f60f46536c867ef143d",
+                "reference": "774363e18df0c00f1b640f60f46536c867ef143d",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "masterminds/html5": "^2.7",
-                "php": ">=5.6.0",
-                "psr/log": "^1.0"
+                "php": ">=7.2",
+                "psr/log": "^1.0.1 || ^2.0 || ^3.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.14",
-                "monolog/monolog": "^1.24|^2.1",
+                "monolog/monolog": "^1.24|^2.1|^3.0",
                 "symfony/phpunit-bridge": "^4.4|^5.3|^6.0|^7.0"
             },
             "suggest": {
@@ -4335,7 +4342,7 @@
             ],
             "support": {
                 "issues": "https://github.com/j0k3r/php-readability/issues",
-                "source": "https://github.com/j0k3r/php-readability/tree/1.2.13"
+                "source": "https://github.com/j0k3r/php-readability/tree/1.3.0"
             },
             "funding": [
                 {
@@ -4343,7 +4350,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-03T08:02:58+00:00"
+            "time": "2025-09-26T19:40:38+00:00"
         },
         {
             "name": "javibravo/simpleue",
@@ -5187,16 +5194,16 @@
         },
         {
             "name": "masterminds/html5",
-            "version": "2.9.0",
+            "version": "2.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Masterminds/html5-php.git",
-                "reference": "f5ac2c0b0a2eefca70b2ce32a5809992227e75a6"
+                "reference": "fcf91eb64359852f00d921887b219479b4f21251"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/f5ac2c0b0a2eefca70b2ce32a5809992227e75a6",
-                "reference": "f5ac2c0b0a2eefca70b2ce32a5809992227e75a6",
+                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/fcf91eb64359852f00d921887b219479b4f21251",
+                "reference": "fcf91eb64359852f00d921887b219479b4f21251",
                 "shasum": ""
             },
             "require": {
@@ -5248,9 +5255,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Masterminds/html5-php/issues",
-                "source": "https://github.com/Masterminds/html5-php/tree/2.9.0"
+                "source": "https://github.com/Masterminds/html5-php/tree/2.10.0"
             },
-            "time": "2024-03-31T07:05:07+00:00"
+            "time": "2025-07-25T09:04:22+00:00"
         },
         {
             "name": "mgargano/simplehtmldom",
@@ -6367,61 +6374,6 @@
                 "source": "https://github.com/php-http/message/tree/1.16.2"
             },
             "time": "2024-10-02T11:34:13+00:00"
-        },
-        {
-            "name": "php-http/message-factory",
-            "version": "1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-http/message-factory.git",
-                "reference": "4d8778e1c7d405cbb471574821c1ff5b68cc8f57"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-http/message-factory/zipball/4d8778e1c7d405cbb471574821c1ff5b68cc8f57",
-                "reference": "4d8778e1c7d405cbb471574821c1ff5b68cc8f57",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4",
-                "psr/http-message": "^1.0 || ^2.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Http\\Message\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Márk Sági-Kazár",
-                    "email": "mark.sagikazar@gmail.com"
-                }
-            ],
-            "description": "Factory interfaces for PSR-7 HTTP Message",
-            "homepage": "http://php-http.org",
-            "keywords": [
-                "factory",
-                "http",
-                "message",
-                "stream",
-                "uri"
-            ],
-            "support": {
-                "issues": "https://github.com/php-http/message-factory/issues",
-                "source": "https://github.com/php-http/message-factory/tree/1.1.0"
-            },
-            "abandoned": "psr/http-factory",
-            "time": "2023-04-14T14:16:17+00:00"
         },
         {
             "name": "php-http/promise",
@@ -8244,16 +8196,16 @@
         },
         {
             "name": "simplepie/simplepie",
-            "version": "1.8.1",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplepie/simplepie.git",
-                "reference": "a567b8ab9b6145a23e6a9ec2b6b74f56d52f7ad1"
+                "reference": "76cccb1b2c5dcaf44f304c925ab30c0f48643992"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplepie/simplepie/zipball/a567b8ab9b6145a23e6a9ec2b6b74f56d52f7ad1",
-                "reference": "a567b8ab9b6145a23e6a9ec2b6b74f56d52f7ad1",
+                "url": "https://api.github.com/repos/simplepie/simplepie/zipball/76cccb1b2c5dcaf44f304c925ab30c0f48643992",
+                "reference": "76cccb1b2c5dcaf44f304c925ab30c0f48643992",
                 "shasum": ""
             },
             "require": {
@@ -8263,9 +8215,14 @@
                 "php": ">=7.2.0"
             },
             "require-dev": {
+                "donatj/mock-webserver": "^2.7",
                 "friendsofphp/php-cs-fixer": "^2.19 || ^3.8",
-                "psr/simple-cache": "^1 || ^2 || ^3",
-                "yoast/phpunit-polyfills": "^1.0.1"
+                "mf2/mf2": "^0.5.0",
+                "phpstan/phpstan": "~1.12.2",
+                "phpunit/phpunit": "^8 || ^9 || ^10",
+                "psr/http-client": "^1.0",
+                "psr/http-factory": "^1.0",
+                "psr/simple-cache": "^1 || ^2 || ^3"
             },
             "suggest": {
                 "ext-curl": "",
@@ -8314,9 +8271,9 @@
             ],
             "support": {
                 "issues": "https://github.com/simplepie/simplepie/issues",
-                "source": "https://github.com/simplepie/simplepie/tree/1.8.1"
+                "source": "https://github.com/simplepie/simplepie/tree/1.9.0"
             },
-            "time": "2024-11-22T16:33:20+00:00"
+            "time": "2025-09-12T06:34:27+00:00"
         },
         {
             "name": "smalot/pdfparser",
@@ -11330,16 +11287,16 @@
         },
         {
             "name": "symfony/polyfill-intl-idn",
-            "version": "v1.31.0",
+            "version": "v1.33.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-idn.git",
-                "reference": "c36586dcf89a12315939e00ec9b4474adcb1d773"
+                "reference": "9614ac4d8061dc257ecc64cba1b140873dce8ad3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/c36586dcf89a12315939e00ec9b4474adcb1d773",
-                "reference": "c36586dcf89a12315939e00ec9b4474adcb1d773",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/9614ac4d8061dc257ecc64cba1b140873dce8ad3",
+                "reference": "9614ac4d8061dc257ecc64cba1b140873dce8ad3",
                 "shasum": ""
             },
             "require": {
@@ -11393,7 +11350,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-idn/tree/v1.31.0"
+                "source": "https://github.com/symfony/polyfill-intl-idn/tree/v1.33.0"
             },
             "funding": [
                 {
@@ -11405,11 +11362,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-09T11:45:10+00:00"
+            "time": "2024-09-10T14:38:51+00:00"
         },
         {
             "name": "symfony/polyfill-intl-normalizer",
