@@ -205,4 +205,17 @@ class ReadabilityControllerTest extends WallabagTestCase
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.failed', $body[0]);
     }
+
+    public function testImportReadabilityDisabled()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+        $client->getContainer()->get(Config::class)->set('readability_enabled', 0);
+
+        $client->request('GET', '/import/readability');
+
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
+
+        $client->getContainer()->get(Config::class)->set('readability_enabled', 1);
+    }
 }

@@ -75,6 +75,11 @@ class PocketControllerTest extends WallabagTestCase
             ->method('getRequestToken')
             ->willReturn('token');
 
+        $pocketImport
+            ->expects($this->once())
+            ->method('isEnabled')
+            ->willReturn(true);
+
         static::$kernel->getContainer()->set(PocketImport::class, $pocketImport);
 
         $client->request('POST', '/import/pocket/auth');
@@ -96,6 +101,11 @@ class PocketControllerTest extends WallabagTestCase
             ->expects($this->once())
             ->method('authorize')
             ->willReturn(false);
+
+        $pocketImport
+            ->expects($this->once())
+            ->method('isEnabled')
+            ->willReturn(true);
 
         static::$kernel->getContainer()->set(PocketImport::class, $pocketImport);
 
@@ -131,6 +141,11 @@ class PocketControllerTest extends WallabagTestCase
             ->method('import')
             ->willReturn(true);
 
+        $pocketImport
+            ->expects($this->once())
+            ->method('isEnabled')
+            ->willReturn(true);
+
         static::$kernel->getContainer()->set(PocketImport::class, $pocketImport);
 
         $client->request('GET', '/import/pocket/callback');
@@ -138,5 +153,18 @@ class PocketControllerTest extends WallabagTestCase
         $this->assertSame(302, $client->getResponse()->getStatusCode());
         $this->assertStringContainsString('/', $client->getResponse()->headers->get('location'), 'Import is ok, redirect to homepage');
         $this->assertSame('flashes.import.notice.summary', $client->getContainer()->get(SessionInterface::class)->getFlashBag()->peek('notice')[0]);
+    }
+
+    public function testImportPocketDisabled()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+        $client->getContainer()->get(Config::class)->set('pocket_enabled', 0);
+
+        $client->request('GET', '/import/pocket');
+
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
+
+        $client->getContainer()->get(Config::class)->set('pocket_enabled', 1);
     }
 }

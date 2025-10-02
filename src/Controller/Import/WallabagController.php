@@ -28,15 +28,15 @@ abstract class WallabagController extends AbstractController
      */
     public function indexAction(Request $request, TranslatorInterface $translator)
     {
-        $wallabag = $this->getImportService();
-        if (!$this->isGranted('USE_IMPORTER', $wallabag)) {
-            throw $this->createAccessDeniedException('You can not access this importer.');
+        $import = $this->getImportService();
+        if (!$import->isEnabled()) {
+            throw $this->createNotFoundException('Import is disabled');
         }
 
         $form = $this->createForm(UploadImportType::class);
         $form->handleRequest($request);
 
-        $wallabag->setUser($this->getUser());
+        $import->setUser($this->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('file')->getData();
@@ -44,7 +44,7 @@ abstract class WallabagController extends AbstractController
             $name = $this->getUser()->getId() . '.json';
 
             if (null !== $file && \in_array($file->getClientMimeType(), $this->allowMimetypes, true) && $file->move($this->resourceDir, $name)) {
-                $res = $wallabag
+                $res = $import
                     ->setFilepath($this->resourceDir . '/' . $name)
                     ->setMarkAsRead($markAsRead)
                     ->import();
@@ -52,7 +52,7 @@ abstract class WallabagController extends AbstractController
                 $message = 'flashes.import.notice.failed';
 
                 if (true === $res) {
-                    $summary = $wallabag->getSummary();
+                    $summary = $import->getSummary();
                     $message = $translator->trans('flashes.import.notice.summary', [
                         '%imported%' => $summary['imported'],
                         '%skipped%' => $summary['skipped'],
@@ -77,7 +77,7 @@ abstract class WallabagController extends AbstractController
 
         return $this->render($this->getImportTemplate(), [
             'form' => $form->createView(),
-            'import' => $wallabag,
+            'import' => $import,
         ]);
     }
 
