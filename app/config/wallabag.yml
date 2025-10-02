@@ -143,7 +143,7 @@ parameters:
             value: 1
             section: import
         -
-            name: readibility_enabled
+            name: readability_enabled
             value: 1
             section: import
         -
@@ -176,10 +176,6 @@ parameters:
             section: import
         -
             name: pocket_html_enabled
-            value: 1
-            section: import
-        -
-            name: pocket_csv_enabled
             value: 1
             section: import
         -

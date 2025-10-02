@@ -18,10 +18,8 @@ class ImportChain
      */
     public function addImport(ImportInterface $import, $alias)
     {
-        // if (true === $import->isEnabled()) {
         $this->imports[$alias] = $import;
 
-        // }
         return $this;
     }
 

@@ -79,7 +79,7 @@ final class Version20250526113708 extends WallabagMigration
             'section' => 'import',
         ],
         [
-            'name' => 'pocket_csv_enabled',
+            'name' => 'elcurator_enabled',
             'value' => '1',
             'section' => 'import',
         ],

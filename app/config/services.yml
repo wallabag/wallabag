@@ -301,7 +301,7 @@ services:
 
     Wallabag\Import\ReadabilityImport:
         calls:
-            - [ setEnabled, [ '@=service(''craue_config'').get(''readibility_enabled'')' ] ]
+            - [ setEnabled, [ '@=service(''craue_config'').get(''readability_enabled'')' ] ]
         tags:
             -  { name: wallabag.import, alias: readability }
 

@@ -23,9 +23,12 @@ class OmnivoreController extends AbstractController
 
     #[Route(path: '/import/omnivore', name: 'import_omnivore', methods: ['GET', 'POST'])]
     #[IsGranted('IMPORT_ENTRIES')]
-    #[IsGranted('USE_IMPORTER', subject: 'omnivore')]
     public function indexAction(Request $request, OmnivoreImport $omnivore, Config $craueConfig, TranslatorInterface $translator)
     {
+        if (!$omnivore->isEnabled()) {
+            throw $this->createNotFoundException('Import is disabled');
+        }
+
         $form = $this->createForm(UploadImportType::class);
         $form->handleRequest($request);
 
