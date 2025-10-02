@@ -502,7 +502,7 @@ class EntryRestController extends WallabagRestController
      *     @OA\Parameter(
      *         name="urls",
      *         in="query",
-     *         description="Urls (as an array) to create. A JSON array of urls [{'url': 'http://...'}, {'url': 'http://...'}]",
+     *         description="Urls (as an array) to create. A JSON array of urls ['http://...', 'http://...']",
      *         required=true,
      *         @OA\Schema(type="string")
      *     ),
