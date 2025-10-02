@@ -28,6 +28,8 @@ parameters:
 
     mailer_dsn: smtp://127.0.0.1
 
+    wallabag_user_agent: "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2"
+
     locale: en
 
     # A secret key that's used to generate certain security-related tokens

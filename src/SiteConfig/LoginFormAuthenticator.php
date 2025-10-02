@@ -14,6 +14,7 @@ class LoginFormAuthenticator
     public function __construct(
         private readonly HttpBrowser $browser,
         AuthenticatorProvider $authenticatorProvider,
+        private readonly string $defaultUserAgent,
     ) {
         $this->expressionLanguage = new ExpressionLanguage(null, [$authenticatorProvider]);
     }
@@ -82,6 +83,10 @@ class LoginFormAuthenticator
         $headers = [];
         foreach ($siteConfig->getHttpHeaders() as $headerName => $headerValue) {
             $headers["HTTP_$headerName"] = $headerValue;
+        }
+
+        if (empty($headers['HTTP_user-agent'])) {
+            $headers['HTTP_user-agent'] = $this->defaultUserAgent;
         }
 
         return $headers;
