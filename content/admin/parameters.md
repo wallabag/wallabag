@@ -94,7 +94,6 @@ You can check about how to properly [configure email in the dedicated section]({
 
 | Name | Description | Default |
 | -----|-------------|-------- |
-| wallabag_user_agent (**new in 2.X.X**) | Default User-Agent used in HTTP requests when fetching content | "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2" |
 | locale | Default language of your wallabag instance (like en, fr, es, etc.) | en |
 | secret | This is a string that should be unique to your application and it's commonly used to add more entropy to security related operations. | ovmpmAWXRCabNlMgzlzFXDYmCFfzGv |
 | twofactor_auth | true to enable the possibility of Two factor authentication | true |
@@ -108,6 +107,7 @@ You can check about how to properly [configure email in the dedicated section]({
 | domain_name | Full URL of your wallabag instance (without the trailing slash) | https://your-wallabag-instance.wallabag.org |
 | sentry_dsn (**new in 2.4.0**) | DSN from [Sentry](https://sentry.io/welcome/) which logs errors | null |
 | server_name (**new in 2.4.1**) | User-friendly name of your instance for the 2FA issuer | "Your wallabag instance" |
+| wallabag_user_agent (**new in 2.7.0**) | Default User-Agent used in HTTP requests when fetching content | "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2" |
 
 ## RabbitMQ options
 
