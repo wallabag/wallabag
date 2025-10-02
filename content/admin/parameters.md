@@ -28,6 +28,7 @@ parameters:
     database_charset: utf8mb4
     domain_name: https://your-wallabag-instance.wallabag.org
     mailer_dsn: smtp://127.0.0.1
+    wallabag_user_agent: "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2"
     locale: en
     secret: ovmpmAWXRCabNlMgzlzFXDYmCFfzGv
     twofactor_auth: true
@@ -106,6 +107,7 @@ You can check about how to properly [configure email in the dedicated section]({
 | domain_name | Full URL of your wallabag instance (without the trailing slash) | https://your-wallabag-instance.wallabag.org |
 | sentry_dsn (**new in 2.4.0**) | DSN from [Sentry](https://sentry.io/welcome/) which logs errors | null |
 | server_name (**new in 2.4.1**) | User-friendly name of your instance for the 2FA issuer | "Your wallabag instance" |
+| wallabag_user_agent (**new in 2.7.0**) | Default User-Agent used in HTTP requests when fetching content | "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.92 Safari/535.2" |
 
 ## RabbitMQ options
 
