@@ -66,6 +66,7 @@ config:
         reset: Zurücksetzen
         ignore_origin: Regeln fürs Ignorieren des Ursprungs
         feed: Feeds
+        article_display: Artikelanzeige
     form:
         save: Speichern
     form_settings:
