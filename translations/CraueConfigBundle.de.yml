@@ -31,5 +31,5 @@ download_images_enabled: Bilder lokal herunterladen
 restricted_access: Authentifizierung für Webseiten mit Paywall aktivieren
 api_user_registration: Registrierung eines Benutzers über die API ermöglichen
 store_article_headers: Speichern von HTTP-Headern für jeden Artikel aktivieren
-shaarli_share_origin_url: Original-URL mit Shaarli teilen, wenn der Service aktiviert
-  ist
+shaarli_share_origin_url: Original-URL mit Shaarli teilen, wenn der Service aktiviert ist
+share_linkding: Freigabe zu Linkding aktivieren
