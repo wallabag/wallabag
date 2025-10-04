@@ -25,6 +25,10 @@ class ReadabilityController extends AbstractController
     #[IsGranted('IMPORT_ENTRIES')]
     public function indexAction(Request $request, ReadabilityImport $readability, Config $craueConfig, TranslatorInterface $translator)
     {
+        if (!$readability->isEnabled()) {
+            throw $this->createNotFoundException('Import is disabled');
+        }
+
         $form = $this->createForm(UploadImportType::class);
         $form->handleRequest($request);
 

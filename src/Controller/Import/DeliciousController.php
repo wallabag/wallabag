@@ -25,6 +25,10 @@ class DeliciousController extends AbstractController
     #[IsGranted('IMPORT_ENTRIES')]
     public function indexAction(Request $request, DeliciousImport $delicious, Config $craueConfig, TranslatorInterface $translator)
     {
+        if (!$delicious->isEnabled()) {
+            throw $this->createNotFoundException('Import is disabled');
+        }
+
         $form = $this->createForm(UploadImportType::class);
         $form->handleRequest($request);
 

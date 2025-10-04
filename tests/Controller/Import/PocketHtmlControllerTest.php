@@ -91,7 +91,7 @@ class PocketHtmlControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportWallabagWithPocketHtmlFile()
+    public function testImportPocketHtmlWithFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -129,7 +129,7 @@ class PocketHtmlControllerTest extends WallabagTestCase
         $this->assertCount(3, $content->getTags());
     }
 
-    public function testImportWallabagWithEmptyFile()
+    public function testImportPocketHtmlWithEmptyFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -151,5 +151,18 @@ class PocketHtmlControllerTest extends WallabagTestCase
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.failed', $body[0]);
+    }
+
+    public function testImportPocketHtmlDisabled()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+        $client->getContainer()->get(Config::class)->set('pocket_html_enabled', 0);
+
+        $client->request('GET', '/import/pocket_html');
+
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
+
+        $client->getContainer()->get(Config::class)->set('pocket_html_enabled', 1);
     }
 }

@@ -20,11 +20,15 @@ abstract class HtmlController extends AbstractController
     #[IsGranted('IMPORT_ENTRIES')]
     public function indexAction(Request $request, TranslatorInterface $translator)
     {
+        $import = $this->getImportService();
+        if (!$import->isEnabled()) {
+            throw $this->createNotFoundException('Import is disabled');
+        }
+
         $form = $this->createForm(UploadImportType::class);
         $form->handleRequest($request);
 
-        $wallabag = $this->getImportService();
-        $wallabag->setUser($this->getUser());
+        $import->setUser($this->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('file')->getData();
@@ -32,7 +36,7 @@ abstract class HtmlController extends AbstractController
             $name = $this->getUser()->getId() . '.html';
 
             if (null !== $file && \in_array($file->getClientMimeType(), $this->getParameter('wallabag.allow_mimetypes'), true) && $file->move($this->getParameter('wallabag.resource_dir'), $name)) {
-                $res = $wallabag
+                $res = $import
                     ->setFilepath($this->getParameter('wallabag.resource_dir') . '/' . $name)
                     ->setMarkAsRead($markAsRead)
                     ->import();
@@ -40,7 +44,7 @@ abstract class HtmlController extends AbstractController
                 $message = 'flashes.import.notice.failed';
 
                 if (true === $res) {
-                    $summary = $wallabag->getSummary();
+                    $summary = $import->getSummary();
                     $message = $translator->trans('flashes.import.notice.summary', [
                         '%imported%' => $summary['imported'],
                         '%skipped%' => $summary['skipped'],
@@ -64,7 +68,7 @@ abstract class HtmlController extends AbstractController
 
         return $this->render($this->getImportTemplate(), [
             'form' => $form->createView(),
-            'import' => $wallabag,
+            'import' => $import,
         ]);
     }
 

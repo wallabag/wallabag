@@ -91,7 +91,7 @@ class ChromeControllerTest extends WallabagTestCase
         $client->getContainer()->get(Config::class)->set('import_with_redis', 0);
     }
 
-    public function testImportWallabagWithChromeFile()
+    public function testImportChromeWithFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -132,7 +132,7 @@ class ChromeControllerTest extends WallabagTestCase
         $this->assertSame('07', $createdAt->format('m'));
     }
 
-    public function testImportWallabagWithEmptyFile()
+    public function testImportChromeWithEmptyFile()
     {
         $this->logInAs('admin');
         $client = $this->getTestClient();
@@ -154,5 +154,18 @@ class ChromeControllerTest extends WallabagTestCase
 
         $this->assertGreaterThan(1, $body = $crawler->filter('body')->extract(['_text']));
         $this->assertStringContainsString('flashes.import.notice.failed', $body[0]);
+    }
+
+    public function testImportChromeDisabled()
+    {
+        $this->logInAs('admin');
+        $client = $this->getTestClient();
+        $client->getContainer()->get(Config::class)->set('chrome_enabled', 0);
+
+        $client->request('GET', '/import/chrome');
+
+        $this->assertSame(404, $client->getResponse()->getStatusCode());
+
+        $client->getContainer()->get(Config::class)->set('chrome_enabled', 1);
     }
 }

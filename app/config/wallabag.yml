@@ -128,6 +128,58 @@ parameters:
             value: 0
             section: import
         -
+            name: pocket_enabled
+            value: 1
+            section: import
+        -
+            name: wallabag_v1_enabled
+            value: 1
+            section: import
+        -
+            name: wallabag_v2_enabled
+            value: 1
+            section: import
+        -
+            name: elcurator_enabled
+            value: 1
+            section: import
+        -
+            name: readability_enabled
+            value: 1
+            section: import
+        -
+            name: instapaper_enabled
+            value: 1
+            section: import
+        -
+            name: pinboard_enabled
+            value: 1
+            section: import
+        -
+            name: delicious_enabled
+            value: 1
+            section: import
+        -
+            name: omnivore_enabled
+            value: 1
+            section: import
+        -
+            name: firefox_enabled
+            value: 1
+            section: import
+        -
+            name: chrome_enabled
+            value: 1
+            section: import
+        -
+            name: shaarli_enabled
+            value: 1
+            section: import
+        -
+            name: pocket_html_enabled
+            value: 1
+            section: import
+        -
             name: matomo_enabled
             value: 0
             section: analytics
