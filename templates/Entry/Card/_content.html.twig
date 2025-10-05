@@ -1,0 +1,22 @@
+<div class="card-content">
+    {% if withPreview is defined %}
+        <i class="grey-text text-darken-4 activator material-icons right">more_vert</i>
+    {% endif %}
+    {% if is_granted('VIEW', entry) %}
+        <a href="{{ path('view', {'id': entry.id}) }}" title="{{ entry.title|striptags|e('html_attr') }}" class="card-title dot-ellipsis dot-resize-update">
+            {{ entry.title|striptags|default('entry.default_title'|trans)|raw }}
+        </a>
+    {% else %}
+        {{ entry.title|striptags|default('entry.default_title'|trans)|raw }}
+    {% endif %}
+
+    <div class="{{ subClass|default('original grey-text') }}">
+        <a href="{{ entry.url|e }}" target="_blank" title="{{ entry.domainName|removeWww }}" class="tool grey-text">{{ entry.domainName|removeWww }}</a>
+        {% if withMetadata is defined %}
+            {% include "Entry/_tags.html.twig" with {'tags': entry.tags|slice(0, 3), 'entryId': entry.id, 'listClass': ' hide-on-med-and-down'} only %}
+            <div class="reading-time grey-text">
+                <div class="card-reading-time">{% include "Entry/_reading_time.html.twig" with {'entry': entry} only %}</div>
+            </div>
+        {% endif %}
+    </div>
+</div>

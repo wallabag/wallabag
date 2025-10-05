@@ -1,35 +1,21 @@
-wallabag_annotation:
-    resource: "@WallabagAnnotationBundle/Controller/"
-    type: annotation
-    prefix: /
-
-wallabag_import:
-    resource: "@WallabagImportBundle/Controller/"
-    type: annotation
-    prefix: /import
-
-wallabag_user:
-    resource: "@WallabagUserBundle/Controller/"
-    type: annotation
-    prefix: /users
-
-wallabag_api:
-    resource: "@WallabagApiBundle/Controller/"
-    type: annotation
-    prefix: /
-
 app:
-    resource: "@WallabagCoreBundle/Controller/"
+    resource: ../../src/Controller/
     type: annotation
 
 doc-api:
-    resource: "@NelmioApiDocBundle/Resources/config/routing/swaggerui.xml"
+    resource: "@NelmioApiDocBundle/config/routing/swaggerui.xml"
     prefix: /api/doc
+
+doc-api-json:
+    path: /api/doc.json
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger }
 
 homepage:
     path: "/{page}"
+    methods: GET
     defaults:
-        _controller: 'Wallabag\CoreBundle\Controller\EntryController::showUnreadAction'
+        _controller: 'Wallabag\Controller\EntryController::showUnreadAction'
         page : 1
     requirements:
         page: \d+
@@ -42,23 +28,27 @@ fos_oauth_server_token:
 
 craue_config_settings_modify:
     path: /settings
+    methods: [GET, POST]
     defaults:
         _controller: 'Craue\ConfigBundle\Controller\SettingsController::modifyAction'
 
 fos_js_routing:
-    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing-sf4.xml"
 
 2fa_login:
     path: /2fa
+    methods: GET
     defaults:
         _controller: "scheb_two_factor.form_controller:form"
 
 2fa_login_check:
     path: /2fa_check
+    methods: POST
 
 # redirect RSS feed to Atom
 rss_to_atom_unread:
     path: /{username}/{token}/unread.xml
+    methods: GET
     defaults:
         _controller: 'Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction'
         route: unread_feed
@@ -66,6 +56,7 @@ rss_to_atom_unread:
 
 rss_to_atom_archive:
     path: /{username}/{token}/archive.xml
+    methods: GET
     defaults:
         _controller: 'Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction'
         route: archive_feed
@@ -73,6 +64,7 @@ rss_to_atom_archive:
 
 rss_to_atom_starred:
     path: /{username}/{token}/starred.xml
+    methods: GET
     defaults:
         _controller: 'Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction'
         route: starred_feed
@@ -80,6 +72,7 @@ rss_to_atom_starred:
 
 rss_to_atom_all:
     path: /{username}/{token}/all.xml
+    methods: GET
     defaults:
         _controller: 'Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction'
         route: all_feed
@@ -87,6 +80,7 @@ rss_to_atom_all:
 
 rss_to_atom_tags:
     path: /{username}/{token}/tags/{slug}.xml
+    methods: GET
     defaults:
         _controller: 'Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction'
         route: tag_feed

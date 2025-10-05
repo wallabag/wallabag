@@ -1,0 +1,19 @@
+{% if tags is iterable and tags is not empty %}
+    <ul class="tags{{ listClass|default("") }}">
+        {% for tag in tags %}
+            <li class="chip">
+                <a class="chip-label" href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a>
+                {% if withRemove is defined and withRemove == true and is_granted('DELETE', tag) %}
+                    {% set current_path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+                    <form action="{{ path('remove_tag', {'entry': entryId, 'tag': tag.id, redirect: current_path}) }}" method="post">
+                        <input type="hidden" name="token" value="{{ csrf_token('remove-tag') }}"/>
+
+                        <button type="submit" class="btn-link chip-action" onclick="return confirm('{{ 'entry.confirm.delete_tag'|trans|escape('js') }}')">
+                            <i class="material-icons vertical-align-middle">delete</i>
+                        </button>
+                    </form>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

@@ -1,0 +1,14 @@
+<form class="tags-add-form" name="tag" method="post" action="{{ path('new_tag', {'entry': entry.id}) }}">
+    {% if form_errors(form) %}
+        <span class="black-text">{{ form_errors(form) }}</span>
+    {% endif %}
+
+    {% if form_errors(form.label) %}
+        <span class="black-text">{{ form_errors(form.label) }}</span>
+    {% endif %}
+
+    {{ form_widget(form.label, {'attr': {'autocomplete': 'off', 'data-add-tag-target': 'input'}}) }}
+
+    {{ form_widget(form.add, {'attr': {'class': 'btn waves-effect waves-light tags-add-form-submit'}}) }}
+    {{ form_widget(form._token) }}
+</form>

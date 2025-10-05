@@ -3,10 +3,14 @@ imports:
     - { resource: parameters_test.yml }
     - { resource: services_test.yml }
 
+parameters:
+    fosuser_registration: true
+    wallabag_dbname_suffix: '_test'
+
 framework:
     test: ~
     session:
-        storage_id: session.storage.mock_file
+        storage_factory_id: session.storage.factory.mock_file
     profiler:
         collect: false
     translator:
@@ -20,14 +24,8 @@ web_profiler:
 
 doctrine:
     dbal:
-        driver: "%test_database_driver%"
-        host: "%test_database_host%"
-        port: "%test_database_port%"
-        dbname: "%test_database_name%"
-        user: "%test_database_user%"
-        password: "%test_database_password%"
-        charset: "%test_database_charset%"
-        path: "%env(TEST_DATABASE_PATH)%"
+        dbname_suffix: '%wallabag_dbname_suffix%' # for MySQL and PostgreSQL
+        use_savepoints: true
 
     orm:
         metadata_cache_driver:
@@ -36,3 +34,8 @@ doctrine:
         query_cache_driver:
             type: service
             id: filesystem_cache
+
+dama_doctrine_test:
+    enable_static_connection: true
+    enable_static_meta_data_cache: true
+    enable_static_query_cache: true

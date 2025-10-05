@@ -1,0 +1,23 @@
+<div class="card entry-card{% if currentRoute in routes and entry.isArchived %} archived{% endif %}">
+    <div class="card-body">
+        <div class="card-fullimage">
+            <ul class="card-entry-labels">
+            {% for tag in entry.tags|slice(0, 3) %}
+                <li title="{{ tag.label }}"><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
+            {% endfor %}
+            </ul>
+            {% if app.user.config.displayThumbnails %}
+                {% if is_granted('VIEW', entry) %}
+                    <a href="{{ path('view', {'id': entry.id}) }}">
+                        <span class="preview" style="background-image: url({{ entry.previewPicture }})"></span>
+                    </a>
+                {% else %}
+                    <span class="preview" style="background-image: url({{ entry.previewPicture }})"></span>
+                {% endif %}
+            {% endif %}
+        </div>
+        {% include "Entry/Card/_content.html.twig" with {'entry': entry} only %}
+    </div>
+
+    {% include "Entry/_card_actions.html.twig" with {'entry': entry} only %}
+</div>

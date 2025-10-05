@@ -4,73 +4,210 @@ config:
         settings: 設定
         password: 密碼
         rules: 標籤規則
-        ignore_origin: 忽略原始規則
+        ignore_origin: 忽略來源規則
         reset: 重設區域
         new_user: 新增使用者
         user_info: 使用者資訊
-    page_title: 設定
+        article_display: 顯示文章
+    page_title: 設置
     form_settings:
         theme_label: 主題
         reading_speed:
-            300_word: 我每分鐘約可讀 300 個字
+            300_word: 我每分鐘可讀約 300 個字
             label: 閱讀速度
             help_message: 你可以使用線上工具來預估你的閱讀速度：
-            100_word: 我每分鐘約可讀 100 個字
-            200_word: 我每分鐘約可讀 200 個字
-            400_word: 我每分鐘約可讀 400 個字
+            100_word: 我每分鐘可讀約 100 個字
+            200_word: 我每分鐘可讀約 200 個字
+            400_word: 我每分鐘可讀約 400 個字
         action_mark_as_read:
             redirect_homepage: 回到首頁
-            redirect_current_page: 停留在本頁
-            label: 將一個項目刪除、收藏或標記為已讀後該做什麼呢？
-        help_items_per_page: 你可以調整每頁呈現的項目數量。
-        items_per_page_label: 每頁項目數量
+            redirect_current_page: 停留於當前頁面
+            label: 將一篇文章刪除、收藏或標記為已讀後該怎麼做？
+        help_items_per_page: 你可以調整每頁顯示的文章數。
+        items_per_page_label: 每頁項目數
         language_label: 語言
+        android_configuration: 設置你的 Android 應用程式
+        help_display_thumbnails: 可以決定是否顯示文章縮圖。連線緩慢時有所幫助。
+        display_thumbnails_label: 顯示文章縮圖（用於連線緩慢時）。
+        help_pocket_consumer_key: 匯入 Pocket 時必須。可於你的 Pocket 帳號內建立。
+        pocket_consumer_key_label: 使用 Pocket 的消費者密鑰匯入內容
+        help_reading_speed: wallabag 能夠計算閱讀每篇文章的所需時間。你可在此設定，不論你偏好快速或慢速閱讀，wallabag 均能運算每篇文章需要的閱讀時間。
+        fontsize_label: 字體大小
+        help_language: 你可以變更 wallabag 介面的語言。
+        android_instruction: 按此以預先填寫你的 Android 應用程式
+        help_font: 你能選擇顯示的字型。
+        help_fontsize: 你能選擇字型大小。
+        help_lineheight: 你能選擇字行間距。
+        help_maxwidth: 你能選擇文章的闊度上限。
+        font_label: 字體
+        lineheight_label: 行高
+        maxwidth_label: 闊度上限
     form_feed:
         description: 你可以使用你喜愛的 Atom 閱讀器來閱讀由 wallabag 提供的 Atom 訂閱源。為此你需要先產生一組 token。
+        feed_link:
+            unread: 未讀
+            archive: 已封存
+            starred: 已收藏
+            all: 全部
+        feed_links: 訂閱源連結
+        feed_limit: 訂閱源內的項目數
+        no_token: 沒有 token
+        token_label: 訂閱源 token
+        token_create: 建立你的 token
+        token_reset: 再次產生 token
+        token_revoke: 註銷 token
     form_user:
         delete:
-            description: 如果你移除了你自己的帳號，你所有的項目、標籤、註釋包含你的帳號本身都會被 "用久" 的移除（無法復原）。然後你將會被自動登出。
+            description: 如你移除自己的帳號，你所有的文章、標籤、註釋以及帳號本身都會被「永久」地移除（無法復原）。然後你將會被登出。
+            title: 刪除我的帳號（危險地帶）
+            confirm: 你真的確定？（此舉無法復原）
+            button: 刪除我的帳號
+        name_label: 名稱
+        two_factor:
+            emailTwoFactor_label: 使用電子郵件（以接收代碼）
+            table_method: 方式
+            table_state: 狀態
+            state_enabled: 已啟用
+            table_action: 操作
+            action_email: 使用電子郵件
+            state_disabled: 已停用
+            action_app: 使用驗證器
+            googleTwoFactor_label: 使用驗證器（開啟例如 Google Authenticator 、Authy 或 FreeOTP 等應用程式以取得一次性代碼）
+        two_factor_description: 開啟雙重驗證即意味每當有不信任的連線時，你會收到付有代碼的電子郵件。
+        login_label: 登入帳號（無法更改）
+        email_label: 電子郵件
     form:
         save: 儲存
+    form_rules:
+        tags_label: 標籤
+        export: 匯出
+        faq:
+            variable_description:
+                url: 條目網址
+                title: 條目標題
+                label: 變數
+                isArchived: 條目是否已封存
+                isStarred: 條目是否已收藏
+                domainName: 條目域名
+                content: 條目內容
+                language: 條目使用語言
+                mimetype: 條目檔案類型
+                readingTime: 預計閱讀需時（分鐘）
+            how_to_use_them_title: 應怎麼使用？
+            title: 常見問題
+            tagging_rules_definition_description: 它們是 wallabag 為新條目自動加上標籤的規則。<br />每當添加新條目時， 所有的標籤規則將用於新增你已設置的標籤，以免卻手動分類的麻煩。
+            tagging_rules_definition_title: 「標籤規則」的意思是？
+            meaning: 意思
+            variables_available_title: 規則可使用的變數和運算子有哪些？
+            operator_description:
+                label: 運算子
+                greater_than: 相等或大於…
+                or: 或
+                and: 和
+                equal_to: 等於…
+                strictly_greater_than: 必須大於…
+                less_than: 相等或少於…
+                strictly_less_than: 必須少於…
+                matches: 當 <i>對象</i> 符合 <i>搜尋條件</i>（不分大小寫）。<br />例如：<code>title matches "football"</code>
+                notmatches: 當 <i>對象</i> 並不符合 <i>搜尋條件</i>（不分大小寫）。<br />例如：<code>title notmatches "football"</code>
+                not_equal_to: 不等於…
+            how_to_use_them_description: 先假設你想把閱讀需時 3 分鐘以下的新條目加上「 <i>短文</i>」標籤。<br />在那情況下， 你應該在 <i>規則</i> 欄填上「readingTime &lt;= 3」和「<i>短文</i>」於 <i>標籤</i> 欄內。<br />可使用半形逗號加上多個標籤：「<i>短文, 必讀</i>。」<br />複合規則可利用預定義運算子編寫：如「<i>readingTime &gt;= 5 AND domainName = "www.php.net"</i>」則標籤為「 <i>長文, php</i>。」
+            variables_available_description: 建立規則時可使用以下的變數和運算子：
+        delete_rule_label: 刪除
+        card:
+            new_tagging_rule: 建立標籤規則
+            import_tagging_rules: 匯入標籤規則
+            export_tagging_rules: 匯出標籤規則
+            export_tagging_rules_detail: 將提供一個可用於匯入或備份標籤規則的 JSON 檔案。
+            import_tagging_rules_detail: 你需選取先前匯出的 JSON 檔案。
+        import_submit: 匯入
+        rule_label: 規則
+        edit_rule_label: 編輯
+        file_label: JSON 檔案
+        if_label: 如
+        then_tag_as_label: 則標籤為
+    otp:
+        app:
+            cancel: 取消
+            qrcode_label: QR碼
+            two_factor_code_description_1: 你剛啟用雙重驗證器，開啟你的應用程式然後使用出現的代碼以取得一次性密碼。頁面重整後它將會消失。
+            two_factor_code_description_3: 此外，請把下列備用代碼保存於安全的地方。以便你不能使用驗證器時之需：
+            two_factor_code_description_4: 測試顯示於驗證器的代碼：
+            enable: 啟用
+            two_factor_code_description_2: 你可以使用應用程式來掃描以下QR碼：
+            two_factor_code_description_5: 如果你看不到或無法掃描QR碼，請在應用程式內輸入以下代碼：
+        page_title: 雙重驗證
+    reset:
+        tags: 移除所有標籤
+        tagging_rules: 移除所有標籤規則
+        title: 重設區域（危險地帶）
+        entries: 移除所有條目
+        archived: 移除所有已封存條目
+        confirm: 你真的確定？（此舉無法復原）
+        description: 點擊以下按鈕時，你將能移除自己帳號內的部分資料。須注意這些行動是不可回溯的。
+        annotations: 移除所有註釋
+    form_password:
+        description: 你可在此變更密碼。新密碼須至少有 8 個字元。
+        old_password_label: 目前密碼
+        new_password_label: 新密碼
+        repeat_new_password_label: 再次輸入新密碼
+    form_ignore_origin_rules:
+        faq:
+            title: 常見問題
+            how_to_use_them_title: 應怎麼使用？
+            variables_available_title: 規則可使用的變數和運算子有哪些？
+            meaning: 意思
+            variable_description:
+                label: 變數
+                host: 網路主機位址
+                _all: 完整網址，主要用作模式匹配
+            operator_description:
+                label: 運算子
+                matches: 當 <i>對象</i> 符合 <i>搜尋條件</i>（不分大小寫）。<br />例如：<code>_all ~ "https?://rss.example.com/foobar/.*"</code>
+                equal_to: 等同……
+            ignore_origin_rules_definition_title: 「忽略來源規則」的意思是？
+            variables_available_description: 建立忽略來源規則時可使用以下的變數和運算子：
+            ignore_origin_rules_definition_description: 它們是 wallabag 用來忽略網域名稱轉址作為來源的規則。<br />如存取新條目時發生重新導向，所有忽略來源規則（ <i>基於使用者定義及實例定義</i>）將用於忽略來源網址。
+            how_to_use_them_description: 先假設你想忽略條目來源「<i>rss.example.com</i>」（ <i>因得知重新導向後的域名為 example.com</i>）。<br />在那情況下，你應該在 <i>規則</i> 欄內填上「host = "rss.example.com"」。
 menu:
     left:
         quickstart: 快速開始
-        ignore_origin_instance_rules: 全域忽略原始規則
+        ignore_origin_instance_rules: 全域忽略來源規則
         howto: 指南
-        with_annotations: 附有註釋的
+        with_annotations: 含註釋
         tags: 標籤
         internal_settings: 內部設定
         import: 匯入
         logout: 登出
         search: 搜尋
-        back_to_unread: 回到未讀項目
+        back_to_unread: 回到未讀文章
         users_management: 使用者管理
         site_credentials: 網站憑證
         theme_toggle_light: 淺色主題
         theme_toggle_dark: 深色主題
         theme_toggle_auto: 根據系統設定自動設定主題
-        developer: 客戶端 API 管理
-        config: 設定
+        developer: 用戶端 API 管理
+        config: 設置
         unread: 未讀
-        starred: 收藏
+        starred: 已收藏
         about: 關於
         save_link: 儲存連結
-        all_articles: 所有項目
-        archive: 歸檔
+        all_articles: 所有條目
+        archive: 封存
     top:
-        random_entry: 由列表中隨機選擇項目
+        random_entry: 跳至列表中的隨機條目
         account: 我的帳號
         export: 匯出
-        filter_entries: 項目篩選
+        filter_entries: 條目篩選
         search: 搜尋
-        add_new_entry: 新增項目
+        add_new_entry: 新增條目
     search_form:
         input_label: 請在此輸入搜尋字串
 security:
     login:
         submit: 登入
         register: 註冊
-        page_title: 歡迎使用 wallabag!
+        page_title: 歡迎使用 wallabag！
         keep_logged_in: 保持登入狀態
         forgot_password: 忘記密碼了嗎？
         cancel: 取消
@@ -80,28 +217,518 @@ security:
         page_title: 建立一個新帳號
         go_to_account: 前往你的帳號
     resetting:
-        description: 請輸入您的電子郵件地址，我們將會寄送密碼重製操作指示。
+        description: 請輸入你的電子郵件地址，我們將會寄送重設密碼操作指示。
 footer:
     wallabag:
         elsewhere: 將 wallabag 隨身攜帶
         social: 社群
-        powered_by: 運行於
+        powered_by: 技術提供
         about: 關於
-    stats: 自從 %user_creation% 以來，你已閱讀 %nb_archives% 篇項目. 這大約是 %per_day% 篇一天!
+    stats: 自 %user_creation% 以來，你已閱讀 %nb_archives% 篇文章。這大約是 %per_day% 篇一天！
 entry:
     list:
-        show_same_domain: 顯示同一域名的項目
+        show_same_domain: 顯示同一域名的文章
+        export_title: 匯出
+        delete: 刪除
+        add_tags: 添加標簽
+        number_on_the_page: '{0} 沒有任何條目。|{1} 有 1 篇條目。|]1,Inf[ 共有 %count% 篇條目。'
+        reading_time: 閱讀約需時
+        reading_time_minutes_short: '%readingTime% 分鐘'
+        reading_time_less_one_minute_short: '&lt; 1 分鐘'
+        reading_time_less_one_minute: 閱讀約需時：&lt; 1 分鐘
+        reading_time_minutes: 閱讀約需時： %readingTime% 分鐘
+        original_article: 原文
+        toogle_as_read: 變更閱讀狀態
+        toogle_as_star: 變更收藏狀態
+        assign_search_tag: 為全部搜尋結果均加上同名標籤
+        number_of_tags: '{1}以及另一個標籤|]1,Inf[及另外 %count% 個標籤'
+        mass_action_tags_input_placeholder: 標籤1, 標籤2, 標籤3
+        toggle_mass_action: 進行批次操作
+    edit:
+        url_label: 網址
+        title_label: 標題
+        save_label: 儲存
+        origin_url_label: 來源網址（該條目內所列）
+        page_title: 編輯條目
+    new:
+        form_new:
+            url_label: 網址
+        placeholder: http://website.com
+        page_title: 儲存新條目
+    view:
+        left_menu:
+            theme_toggle_dark: 深色
+            delete: 刪除
+            theme_toggle_light: 淺色
+            set_as_unread: 標記為未讀
+            export: 匯出
+            print: 列印
+            add_a_tag: 添加標籤
+            share_content: 分享
+            back_to_homepage: 返回
+            set_as_read: 標記為已讀
+            share_email_label: 電子郵件
+            problem:
+                description: 這篇文章出問題了嗎？
+                label: 有問題？
+            delete_public_link: 刪除公開連結
+            public_link: 公開連結
+            theme_toggle: 變更主題
+            back_to_top: 回到頂端
+            set_as_starred: 變更收藏狀態
+            re_fetch_content: 再次擷取內容
+            theme_toggle_auto: 自動
+            view_original_article: 原文連結
+        edit_title: 編輯標題
+        annotations_on_the_entry: '{0} 沒有註釋|{1}有 1 個註釋|]1,Inf[ 有 %count% 個註釋'
+        created_at: 建立日期
+        published_at: 發布日期
+        published_by: 發布者
+        provided_by: 得知途經
+        original_article: 原文
+    filters:
+        unread_label: 未讀
+        archived_label: 已封存
+        starred_label: 已收藏
+        reading_time:
+            label: 閱讀時間（分鐘）
+            from: 從
+            to: 到
+        created_at:
+            label: 建立日期
+            from: 由
+            to: 直至
+        action:
+            filter: 篩選
+            clear: 清除
+        domain_label: 域名
+        language_label: 語言
+        title: 篩選條件
+        annotated_label: 已附註
+        preview_picture_label: 含預覽圖像
+        preview_picture_help: 預覽圖像
+        http_status_label: HTTP 狀態碼
+        parsed_label: 未正確擷取
+        status_label: 狀態
+        is_public_label: 設有公開連結
+        is_public_help: 公開連結
+    page_titles:
+        untagged: 未標簽條目
+        all: 所有條目
+        unread: 未讀條目
+        archived: 已封存條目
+        with_annotations: 含註釋條目
+        starred: 已收藏條目
+        filtered_tags: 經標籤篩選：
+        filtered_search: 經搜尋篩選：
+        filtered: 已篩選條目
+        same_domain: 同一域名
+    metadata:
+        reading_time: 閱讀約需時
+        reading_time_minutes_short: '%readingTime% 分鐘'
+        published_on: 發布於
+        added_on: 添加於
+        address: 地址
+    default_title: 條目標題
+    search:
+        placeholder: 想要尋找甚麼？
+    confirm:
+        reload: 你確定想要重新載入文章嗎？
+        delete: 你確定要移除該文章嗎？
+        delete_tag: 你確定要移除該文章的指定標籤嗎？
+        delete_entries: 你確定要移除指定文章嗎？
+    public:
+        shared_by_wallabag: 這篇文章是 %username% 經由 <a href='%wallabag_instance%'>wallabag</a> 分享
 howto:
     shortcuts:
-        arrows_navigation: 在項目間導覽
+        arrows_navigation: 在文章間瀏覽
+        go_config: 前往設置
+        action: 動作
+        go_developers: 往開發人員頁面
+        search: 顯示搜尋欄位
+        article_title: 在條目頁面可用的快速鍵
+        toggle_archive: 變更條目的閱讀狀態
+        toggle_favorite: 變更條目的收藏狀態
+        hide_form: 隱藏現有的搜尋或新連結欄位
+        go_archive: 前往封存頁
+        go_all: 往所有條目頁面
+        delete: 刪除條目
+        add_link: 添加新連結
+        open_article: 開啟所選條目
+        go_logout: 登出
+        open_original: 開啟條目的原文網址
+        page_description: 以下是 wallabag 內可用的快速鍵。
+        shortcut: 快速鍵
+        go_import: 前往匯入頁
+        list_title: 在列表頁面可用的快速鍵
+        go_tags: 前往標籤頁
+        go_howto: 前往指南（這頁！）
+        all_pages_title: 所有頁面可用的快速鍵
+        go_unread: 前往未讀頁
+        go_starred: 前往收藏頁
+    top_menu:
+        mobile_apps: 行動裝置應用程式
+        bookmarklet: 小書籤
+        browser_addons: 瀏覽器附加元件
+    mobile_apps:
+        android:
+            via_google_play: 經由 Google Play
+            via_f_droid: 經由 F-Droid
+        ios: 於 App Store
+        windows: 於 Microsoft Store
+    page_title: 指南
+    tab_menu:
+        add_link: 添加連結
+        shortcuts: 使用快速鍵
+    bookmarklet:
+        description: 拖曳這連結到你的書籤列上：
+    browser_addons:
+        firefox: Firefox 附加元件
+        chrome: Chrome 擴充功能
+        opera: Opera 外掛程式
+    page_description: 可使用數種方式來儲存文章：
+    form:
+        description: 例如這頁面
 quickstart:
     first_steps:
-        unread_articles: 然後將他分類！
+        unread_articles: 然後將之分類！
+        new_article: 儲存你的首篇文章
+        description: 現在 wallabag 經已設置完畢，是時候封存網頁了。你可以點擊位於右上角的 + 符號以添加連結。
+        title: 首要步驟
     docs:
-        all_docs: 還有另外許多的項目！
-        export: 將你的項目轉換為 ePUB 或 PDF 版本
+        all_docs: 以及更多文章！
+        export: 將你的文章轉換為 ePUB 或 PDF 格式
+        title: 完整說明文件
+        annotate: 在文章中插入註釋
+        description: wallabag 功能眾多。勿猶豫，馬上閱讀使用手冊並學以致用吧。
+        search_filters: 來看看你能利用搜尋及篩選功能來查找文章
+        fetching_errors: 當擷取文章時出現錯誤應該怎麼辦？
     configure:
-        tagging_rules: 撰寫規則來自動化標籤你的項目
+        tagging_rules: 撰寫規則來自動化標籤你的文章
+        language: 變更語言及介面
+        title: 設置應用程式
+        feed: 開啟訂閱源
+        description: 為了令應用程式符合你的需要，得先查看 wallabag 的設置。
+    intro:
+        title: 歡迎使用 wallabag！
+        paragraph_2: 跟著我們吧！
+    page_title: 快速開始
+    admin:
+        new_user: 新增使用者
+        export: 匯出設置
+        import: 設置匯入
+        analytics: 設置資料分析
+        title: 管理
+        description: 作為管理員，你有 wallabag 的各種權限。包括：
+        sharing: 啟用部分用於分享文章的參數
+    more: 更多…
+    support:
+        email: 經由電子郵件
+        title: 支援
+        description: 如需協助，我們在此。
+        github: 在 GitHub
+        gitter: 在 Gitter
+    developer:
+        create_application: 建立你的第三方應用程式
+        title: 開發人員
+        description: 我們亦有考慮開發人員的需要：Docker、API、翻譯，以及其他。
+        use_docker: 使用 Docker 安裝 wallabag
+    migrate:
+        wallabag_v2: 從 wallabag v2 遷移
+        readability: 從 Readability 遷移
+        title: 從既有服務遷移
+        pocket: 從 Pocket 遷移
+        wallabag_v1: 從 wallabag v1 遷移
+        instapaper: 從 Instapaper 遷移
+        description: 你在使用其他服務嗎？我們能協助你將資料擷取到 wallabag。
 import:
     wallabag_v1:
-        description: 這個匯入器將會匯入 wallabag v1 中你所有的項目。在設定頁面的 "匯出 wallabag 資料" 頁簽中，點選 "匯出 JSON 檔"，你將會得到檔名為 "wallabag-export-1-xxxx-xx-xx.json" 檔案。
+        description: 這匯入器將匯入你在 wallabag v1 中的所有文章。在設置頁面的「匯出 wallabag 資料」部分點選「匯出 JSON 檔」，你將得到名為「wallabag-export-1-xxxx-xx-xx.json」的檔案。
+        page_title: 匯入 > Wallabag v1
+        how_to: 請選取你的 wallabag 匯出檔案然後點擊以下按鈕上載以匯入資料。
+    page_title: 匯入
+    pocket:
+        config_missing:
+            admin_message: 你需要設定 %keyurls%pocket_consumer_key%keyurle%（Pocket 的消費者密鑰） 。
+            description: 尚未設置匯入 Pocket。
+            user_message: 你的伺服器管理員需要設定 Pocket 用 API 密鑰。
+        page_title: 匯入 > Pocket
+        description: 這匯入器將匯入你在 Pocket 中的所有資料。Pocket 並不允許我們從他們那邊擷取內容，因此 wallabag 將重新存取可讀的文章。
+        connect_to_pocket: 和 Pocket 連線並匯入資料
+        authorize_message: 你能夠匯入在 Pocket 中的所有資料。只需點擊以下按鈕並允許應用程式連上 getpocket.com。
+    wallabag_v2:
+        description: 這匯入器將匯入你在 wallabag v2 中的所有文章。先前往「全部文章」，然後於側邊欄點選「JSON」，你將得到名為「All articles.json」的檔案。
+        page_title: 匯入 > Wallabag v2
+    form:
+        file_label: 檔案
+        save_label: 上載檔案
+        mark_as_read_title: 是否全部標示為已讀？
+        mark_as_read_label: 把匯入的所有條目均標為已讀
+    chrome:
+        page_title: 匯入 > Chrome
+        description: 這匯入器將匯入你在 Chrome 中的全部書籤。 其檔案位置則基於你的作業系統：<ul><li>Linux 的話，請找 <code>~/.config/chromium/Default/</code> 目錄</li><li>Windows的話，應當在 <code>%LOCALAPPDATA%\Google\Chrome\User Data\Default</code></li><li>至於 OS X，則理應位於<code>~/Library/Application Support/Google/Chrome/Default/Bookmarks</code></li></ul>當到達指定位置，複製 <code>Bookmarks</code> 檔案到你可以找到的位置。<em><br>請注意如你使用的是 Chromium 而非 Chrome，則須對路徑作出相應調整。</em></p>
+        how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要擷取全部的文章，整個過程可能會花費一段時間。
+    elcurator:
+        page_title: 匯入 > elCurator
+        description: 這匯入器將匯入你在 elCurator 中的所有文章。
+    pinboard:
+        page_title: 匯入 > Pinboard
+        how_to: 請選取你的 Pinboard 匯出檔案然後點擊以下按鈕上載以匯入資料。
+        description: 這匯入器將匯入你在 Pinboard 中的所有文章。在備份頁（https://pinboard.in/settings/backup）的「Bookmarks」部分點擊「JSON」後，將提供一個可下載的 JSON 檔案（名為「pinboard_export 」之類）。
+    delicious:
+        page_title: 匯入 > del.icio.us
+        how_to: 請選取你的 Delicious 匯出檔案然後點擊以下按鈕上載以匯入資料。
+        description: 這匯入器將匯入你在 Delicious 中的全部書籤。由 2021 年開始，你能利用匯出頁（https://del.icio.us/export）再次匯出你的資料。請選擇「JSON」格式下載（名為「delicious_export.2021.02.06_21.10.json」之類）。
+    pocket_html:
+        page_title: 匯入 > Pocket HTML
+        description: 這匯入器將匯入你在 Pocket 中的全部書籤（經 HTML 匯出）。你只須前往 https://getpocket.com/export 匯出 HTML檔案，將提供一個可下載的 HTML 檔案（名為「ril_export.html」之類）。
+        how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要擷取全部的文章，整個過程可能會花費一段時間。
+    firefox:
+        page_title: 匯入 > Firefox
+        description: 這匯入器將匯入你在 Firefox 中的全部書籤。在書籤收藏庫（Ctrl+Shift+O）的「匯入及備份」中選擇「備份」後，你將取得一個 JSON 檔案。
+        how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要擷取全部的文章，整個過程可能會花費一段時間。
+    instapaper:
+        page_title: 匯入 > Instapaper
+        description: 這匯入器將匯入你在 Instapaper 中的所有文章。在設定頁（https://www.instapaper.com/user）的「Export」部分點擊「Download .CSV file」後，將提供一個可下載的 CSV 檔案（名為「instapaper-export.csv」之類）。
+        how_to: 請選取你的 Instapaper 匯出檔案然後點擊以下按鈕上載以匯入資料。
+    readability:
+        page_title: 匯入 > Readability
+        how_to: 請選取你的 Readability 匯出檔案然後點擊以下按鈕上載以匯入資料。
+        description: 這匯入器將匯入你在 Readability 中的所有文章。
+    shaarli:
+        page_title: 匯入 > Shaarli
+        description: 這匯入器將匯入你在 Shaarli 中的全部書籤。先到 Tools 頁點擊「Export database」，選擇你想保存的書籤然後將之匯出。你將得到一個 HTML 檔案。
+        how_to: 請選取書籤備份檔案然後點擊以下按鈕匯入。須注意由於需要擷取全部的文章，整個過程可能會花費一段時間。
+    action:
+        import_contents: 匯入內容
+    page_description: 歡迎使用 wallabag 匯入器。請選取想要遷移的服務來源。
+    worker:
+        download_images_warning: 你已啟用本機下載文章圖像。當和傳統格式一同匯入時會需時極久（甚至失敗）。我們<strong>強力建議</strong>啟用異步方式匯入資料以防止出錯。
+        enabled: 匯入是異步進行的。當匯入任務啟動後，一個外部 Worker 將一次處理一項作業。目前的服務是：
+about:
+    who_behind_wallabag:
+        version: 版本
+        many_contributors: 以及<a href="https://github.com/wallabag/wallabag/graphs/contributors">在 GitHub 上</a>的眾多貢獻者♥
+        website: 網站
+        project_website: 專案網站
+        license: 授權
+        developped_by: 開發人員
+    page_title: 關於
+    top_menu:
+        who_behind_wallabag: wallabag 的背後
+        helping: 幫助 wallabag
+        getting_help: 取得協助
+        contributors: 貢獻者
+        third_party: 第三方函式庫
+    getting_help:
+        documentation: 說明文件
+        support: <a href="https://github.com/wallabag/wallabag/issues">於 GitHub</a>
+        bug_reports: 報告漏洞
+    contributors:
+        description: 為 wallabag 網路應用程式版的貢獻者們送上感謝
+    third_party:
+        license: 授權條款
+        description: 以下是 wallabag 使用的第三方函式庫（及其授權）：
+        package: 套件
+    helping:
+        by_paypal: 經由 Liberapay
+        description: wallabag 是免費且開源的。你能協助我們：
+tag:
+    page_title: 標籤
+    new:
+        add: 添加
+        placeholder: 你可使用半形逗號分隔多個標籤。
+    list:
+        untagged: 未標簽條目
+        no_untagged_entries: 沒有未標簽條目。
+        see_untagged_entries: 檢視未標簽條目
+        number_on_the_page: '{0} 沒有任何標籤。|{1} 有 1 個標籤。|]1,Inf[ 共有 %count% 個標籤。'
+    confirm:
+        delete: 刪除 %name% 標籤
+user:
+    form:
+        username_label: 使用者名稱
+        name_label: 名稱
+        delete_confirm: 你確定？
+        delete: 刪除
+        save: 儲存
+        password_label: 密碼
+        last_login_label: 最後登入
+        email_label: 電子郵件
+        enabled_label: 已啟用
+        twofactor_email_label: 經電子郵件進行雙重驗證
+        repeat_new_password_label: 再次輸入新密碼
+        twofactor_google_label: 經驗證器進行雙重驗證
+        back_to_list: 返回列表
+        plain_password_label: ????
+    new_user: 新增使用者
+    list:
+        edit_action: 編輯
+        create_new_one: 新增使用者
+        no: 否
+        actions: 操作
+        yes: 是
+    edit_user: 編輯現有使用者
+    page_title: 使用者管理
+    description: 你能夠在此頁面管理所有使用者（建立、編輯以及刪除）
+    search:
+        placeholder: 經由使用者名稱或電子郵件篩選
+ignore_origin_instance_rule:
+    form:
+        delete: 刪除
+        save: 儲存
+        delete_confirm: 你確定？
+        rule_label: 規則
+        back_to_list: 返回列表
+    list:
+        edit_action: 編輯
+        actions: 操作
+        yes: 是
+        no: 否
+        create_new_one: 建立新的全域忽略來源規則
+    edit_ignore_origin_instance_rule: 編輯現有全域忽略來源規則
+    new_ignore_origin_instance_rule: 建立全域忽略來源規則
+    page_title: 全域忽略來源規則
+    description: 你可在此管理忽略部分來源格式的全域忽略來源規則。
+site_credential:
+    form:
+        delete_confirm: 你確定？
+        save: 儲存
+        delete: 刪除
+        username_label: 登入帳號
+        password_label: 密碼
+        back_to_list: 返回列表
+        host_label: 網路主機名稱（subdomain.example.org，.example.org 等等）
+    list:
+        edit_action: 編輯
+        yes: 是
+        no: 否
+        create_new_one: 建立新憑證
+        actions: 操作
+    new_site_credential: 建立新憑證
+    edit_site_credential: 編輯現有憑證
+    page_title: 網站憑證管理
+    description: 你可以在這管理（建立、編輯及刪除）需要憑證的網站，例如付費和認證等。
+developer:
+    client_parameter:
+        back: 返回
+        field_id: 用戶端 ID
+        field_name: 用戶端名稱
+        read_howto: 閱讀指南「建立我的第一個應用程式」
+        field_secret: 用戶端密碼
+        page_title: 用戶端 API 管理 > 用戶端參數
+        page_description: 這邊是你的用戶端參數。
+    howto:
+        back: 返回
+        page_title: 用戶端 API 管理 > 如何建立第一個應用程式
+        description:
+            paragraph_8: 如果想知道全部 API 端點，你可以查看<a href="%link%">我們的 API 說明文件</a>。
+            paragraph_2: 你需要 token 作為第三方應用程式及 wallabag API 之間傳遞資訊的橋樑。
+            paragraph_4: 現在建立你的 token（需把 client_id「用戶端 ID」、client_secret「用戶端密碼」、username「使用者名稱」和 password「密碼」替換為相應值）：
+            paragraph_1: 以下指令均基於 <a href="https://github.com/jkbrzt/httpie">HTTPie 函式庫</a>。請在使用前確定已安裝於你的系統內。
+            paragraph_3: 點擊<a href="%link%">建立新用戶端</a>以取得所需的 token。
+            paragraph_6: access_token 用於向 API 端點進行有效的請求。如：
+            paragraph_5: API 將傳回類似以下的回應：
+            paragraph_7: 這將提供你使用者的所有條目。
+    client:
+        action_back: 返回
+        form:
+            name_label: 用戶端名稱
+            save_label: 建立新用戶端
+            redirect_uris_label: 重定向 URI（選填）
+        copy_to_clipboard: 複製
+        page_title: 用戶端 API 管理 > 新用戶端
+        page_description: 你將建立新用戶端，請於下欄填寫應用程式的重定向 URI。
+    existing_clients:
+        field_id: 用戶端 ID
+        title: 現有用戶端
+        field_secret: 用戶端密碼
+        no_client: 沒有用戶端。
+        field_uris: 重定向 URI
+        field_grant_types: 已許可授權方式
+    welcome_message: 歡迎使用 wallabag API
+    documentation: 說明文件
+    full_documentation: 檢視完整的 API 說明文件
+    page_title: 用戶端 API 管理
+    remove:
+        warn_message_1: 你能夠移除用戶端 %name%。此乃不可回溯之舉！
+        action: 移除用戶端 %name%
+        warn_message_2: 你移除的話，所有利用該用戶端的應用程式均無法再次通過 wallabag 驗證。
+    clients:
+        title: 用戶端
+        create_new: 建立新用戶端
+    list_methods: API methods 列表
+    how_to_first_app: 如何建立我的第一個應用程式
+flashes:
+    config:
+        notice:
+            config_saved: 已儲存設置。
+            password_updated: 已更新密碼
+            feed_updated: 已更新訂閱源資訊
+            feed_token_updated: 已更新訂閱源 token
+            feed_token_revoked: 已註銷訂閱源 token
+            otp_enabled: 已啟用雙重驗證
+            otp_disabled: 已停用雙重驗證
+            entries_reset: 已重設條目
+            archived_reset: 完成刪除已封存條目
+            tags_reset: 已重設標籤
+            tagging_rules_reset: 已重設標籤規則
+            annotations_reset: 已重設註釋
+            tagging_rules_updated: 已更新標籤規則
+            tagging_rules_deleted: 已刪除標籤規則
+            ignore_origin_rules_updated: 已更新忽略來源規則
+            ignore_origin_rules_deleted: 已刪除忽略來源規則
+            tagging_rules_imported: 已匯入標籤規則
+            tagging_rules_not_imported: 匯入標籤規則時出現錯誤
+            user_updated: 已更新資訊
+    entry:
+        notice:
+            entry_archived: 已封存條目
+            entry_unarchived: 已取消封存條目
+            entry_reloaded_failed: 已重新載入條目但未能擷取內容
+            entry_updated: 已更新條目
+            entry_saved_failed: 已儲存條目但未能擷取內容
+            entry_reloaded: 已重新載入條目
+            entry_starred: 條目已收藏
+            entry_deleted: 已刪除條目
+            entry_unstarred: 已取消收藏條目
+            entry_already_saved: 已於 %date% 儲存該條目
+            entry_saved: 已儲存條目
+            no_random_entry: 查無條件相符之文章
+    site_credential:
+        notice:
+            added: 已新增網站憑證「%host%」
+            updated: 已更新網站憑證「%host%」
+            deleted: 已刪除網站憑證「%host%」
+    developer:
+        notice:
+            client_created: 已建立新用戶端 %name%。
+            client_deleted: 已刪除用戶端 %name%
+    ignore_origin_instance_rule:
+        notice:
+            deleted: 已刪除全域忽略來源規則
+            updated: 已更新全域忽略來源規則
+            added: 已添加全域忽略來源規則
+    tag:
+        notice:
+            tag_added: 已添加標籤
+            tag_renamed: 已重新命名標籤
+            too_much_tags: 為防止產生效能問題，你不能一口氣添加 %tags% 個或以上，和 %characters% 字完以上的標籤。
+    user:
+        notice:
+            updated: 已更新使用者「%username%」
+            deleted: 已刪除使用者「%username%」
+            added: 已新增使用者「%username%」
+    import:
+        notice:
+            failed: 匯入失敗，請重試。
+            failed_on_file: 匯入時出現錯誤。請檢查你的匯入檔案。
+            summary: 匯入概況：已匯入%imported% 篇，既有 %skipped% 篇。
+            summary_with_queue: 匯入摘要：%queued% 個項目在佇列。
+        error:
+            rabbit_enabled_not_installed: 已啟用 RabbitMQ 處理異步匯入，但我們<u>似乎無法連線</u>。請檢查 RabbitMQ 設置。
+            redis_enabled_not_installed: 已啟用 Redis 處理異步匯入，但我們<u>似乎無法連線</u>。請檢查 Redis 設置。
+error:
+    page_title: 出現錯誤
+export:
+    unknown: 不明

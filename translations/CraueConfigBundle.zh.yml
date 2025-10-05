@@ -32,3 +32,4 @@ restricted_access: 启用针对带有付费墙网站的认证
 api_user_registration: 允许新用户通过 API 注册
 store_article_headers: 让 wallabag 存储每篇文章的 HTTP header
 shaarli_share_origin_url: 如果启用了服务，则将原始链接分享到 Shaarli
+share_linkding: 启用分享到 Linkedin

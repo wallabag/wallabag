@@ -66,6 +66,7 @@ config:
         reset: '重置区域'
         rss: RSS
         ignore_origin: 忽略来源规则
+        article_display: 显示文章
     form:
         save: '保存'
     form_settings:
@@ -89,6 +90,16 @@ config:
         help_reading_speed: "wallabag 会为每篇文章计算阅读时间，你可以通过这个列表选择自己是个速读者或是慢读者。wallabag 会根据你的选择重新计算每篇文章的阅读时间。"
         help_language: "你可以在此处更改 wallabag 的界面语言。"
         help_pocket_consumer_key: "导入 Pocket 项目时需要用到。你可以在自己的 Pocket 账户中创建。"
+        help_display_thumbnails: 您可以决定是否显示文章缩略图。对于网速较慢的情况很有用。
+        display_thumbnails_label: 显示文章缩略图（对于网速不快有用）。
+        help_font: 您可以选择想要使用的字体系列。
+        help_fontsize: 您可以选择想要使用的字体大小。
+        help_lineheight: 您可以选择想要使用的行高。
+        help_maxwidth: 您可以选择想要使用的最大宽度。
+        font_label: 字体系列
+        fontsize_label: 字体大小
+        lineheight_label: 行高
+        maxwidth_label: 最大宽度
     form_feed:
         description: 'wallabag 提供的 Atom 订阅源能方便你在最喜欢的 RSS 阅读器上阅读自己保存的文章，为此你需要先生成一个令牌。'
         token_label: '订阅源令牌'
@@ -129,6 +140,7 @@ config:
         title: '重置区（危险区域）'
         description: '一旦你点击这个按钮，你就可以移除你账号中的某些信息。请注意这些操作是不可撤销的。'
         annotations: "删除所有标注"
+        tagging_rules: "删除所有标签规则"
         tags: "删除所有标签"
         entries: "删除所有项目"
         archived: "删除所有已存档项目"
@@ -197,19 +209,6 @@ config:
             enable: "启用"
             two_factor_code_description_5: 如果你看不到二维码或无法扫描它，请在你的应用程序中输入下列认证代码：
             qrcode_label: 二维码
-    form_rss:
-        rss_limit: RSS源中的条目数
-        rss_link:
-            all: 全部
-            archive: 已存档
-            starred: 已标星
-            unread: 未读
-        rss_links: RSS链接
-        token_reset: 重新生成你的令牌
-        token_create: 创建你的令牌
-        no_token: 没有令牌
-        token_label: RSS令牌
-        description: wallabag提供的RSS源可以让你用你喜欢的RSS阅读器阅读你保存的文章。首先需要生成一个令牌。
     form_ignore_origin_rules:
         faq:
             operator_description:
@@ -256,6 +255,8 @@ entry:
         export_title: '导出'
         assign_search_tag: 将此搜索作为标签分配给每个结果
         show_same_domain: 显示同一域名的文章
+        mass_action_tags_input_placeholder: 标签1、标签2、标签3
+        add_tags: 添加标签
     filters:
         title: '筛选器'
         status_label: '状态'
@@ -281,6 +282,7 @@ entry:
             clear: '清除'
             filter: '筛选'
         annotated_label: 已注释
+        parsed_label: 未正确获取
     view:
         left_menu:
             back_to_top: '返回顶部'
@@ -331,6 +333,7 @@ entry:
         delete: "你确定要删除这篇文章吗？"
         delete_tag: "你确定要从这篇文章删除该标签吗？"
         delete_entries: 你确定要删除这些文章吗？
+        reload: 您确定要重新加载该文章吗？
     metadata:
         reading_time: "预计阅读时间"
         reading_time_minutes_short: "%readingTime% 分钟"
@@ -425,7 +428,7 @@ quickstart:
     configure:
         title: '配置应用程序'
         description: '为了得到一个适合你的应用程序，请看一眼 wallabag 的配置页面。'
-        language: '变更语言和设计'
+        language: '更改语言和界面'
         feed: '启用订阅源'
         tagging_rules: '编写规则来给你的文章自动加上标签'
         rss: 启用RSS源
@@ -468,7 +471,7 @@ quickstart:
         description: '如果你需要帮助，我们在这里。'
         github: 'GitHub 上'
         email: '通过 Email'
-        gitter: 'Gitter 上'
+        matrix: 'Matrix 上'
 tag:
     page_title: '标签'
     list:
@@ -514,10 +517,10 @@ import:
         description: '这个导入器会导入你 wallabag v2 账户中的所有文章。前往 “所有项目”，然后在“导出” 侧边栏上，点击 "JSON"。 你会得到一个名为 "All articles.json" 的文件。'
     elcurator:
         page_title: '导入 > elCurator'
-        description: '这个导入器会导入你 elCurator 账户中的所有内容。前往你 elCurator 账户的偏好设置页面，然后导出你的内容。你将得到一个 JSON 文件。'
+        description: '该导入器将导入您所有的 elCurator 文章。'
     readability:
         page_title: '导入 > Readability'
-        description: '这个导入器会导入你 Readability 账户中的所有内容。在 tools（https://www.readability.com/tools/）页面，点击 "Data Export" 一栏下的 "Export your data"，你将会收到一封邮件，根据邮件指示下载得到一个 JSON 文件(尽管它并不以. json 结尾)。'
+        description: '该导入器将导入您所有的 Readability 文章。'
         how_to: '请选择你的 Readability 导出文件并点击下方按钮来上传和导入它。'
     worker:
         enabled: "导入是异步进行的。一旦导入任务开始，一个外部 worker 就会一次处理一个 job。目前的服务是："
@@ -542,6 +545,14 @@ import:
         how_to: 请选择你的 Delicious 导出，点击下面的按钮上传并导入。
         page_title: 导入 > del.icio.us
         description: 此导入器将导入你所有的 Delicious 书签。 自 2021 年起，你可以使用导出页面 (https://del.icio.us/export) 再次从中导出数据。 选择“JSON”格式并下载（如“delicious_export.2021.02.06_21.10.json”）。
+    shaarli:
+        page_title: 导入 > Shaarli
+        description: 此导入器将导入您所有的 Shaarli 书签。只需转到“工具”部分，然后进入“导出数据库”，选择您的书签并导出它们。您将获得一个 HTML 文件。
+        how_to: 请选择书签备份文件并点击下面的按钮导入。请注意，由于必须获取所有文章，因此该过程可能需要很长时间。
+    pocket_html:
+        page_title: 导入 > Pocket HTML
+        how_to: 请选择书签备份文件并点击下面的按钮导入。请注意，由于必须获取所有文章，因此该过程可能需要很长时间。
+        description: 此导入器将导入您所有的 Pocket 书签（通过 HTML 导出）。只需转到 https://getpocket.com/export，然后导出 HTML 文件。将下载一个 HTML 文件（如“ril_export.html”）。
 developer:
     page_title: 'API 客户端管理'
     welcome_message: '欢迎来到 wallabag API'
@@ -655,6 +666,7 @@ flashes:
             feed_token_revoked: '订阅源令牌已作废'
             annotations_reset: 标注已重置
             tags_reset: 标签已重置
+            tagging_rules_reset: 标签规则已重置
             entries_reset: 项目列表已重置
             archived_reset: 所有存档项目已删除
             otp_enabled: 两步验证已启用
@@ -683,6 +695,7 @@ flashes:
         notice:
             tag_added: '标签添加成功'
             tag_renamed: '标签重命名成功'
+            too_much_tags: 为了避免性能问题，您不能一次添加超过 %tags% 个标签，或添加包含超过 %characters% 个字符的标签。
     import:
         notice:
             failed: '导入失败，请重试。'

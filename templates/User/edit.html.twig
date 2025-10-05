@@ -1,0 +1,88 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ 'user.page_title'|trans }}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <h4>{{ 'user.edit_user'|trans }}</h4>
+
+                        <div id="set6" class="col s12">
+                            {{ form_start(edit_form) }}
+                                {{ form_errors(edit_form) }}
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        {{ form_label(edit_form.name) }}
+                                        {{ form_errors(edit_form.name) }}
+                                        {{ form_widget(edit_form.name) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        {{ form_label(edit_form.username) }}
+                                        {{ form_errors(edit_form.username) }}
+                                        {{ form_widget(edit_form.username) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        {{ form_label(edit_form.email) }}
+                                        {{ form_errors(edit_form.email) }}
+                                        {{ form_widget(edit_form.email) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <label for="{{ edit_form.enabled.vars.id }}">
+                                            {{ form_widget(edit_form.enabled) }}
+                                            <span>{{ edit_form.enabled.vars.label|trans }}</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="row" data-controller="fake-radio">
+                                    <div class="input-field col s12">
+                                        <label for="{{ edit_form.emailTwoFactor.vars.id }}">
+                                            {{ form_widget(edit_form.emailTwoFactor, {attr: {'data-fake-radio-target': 'emailTwoFactor', 'data-action': 'fake-radio#uncheckGoogle'}}) }}
+                                            <span>{{ edit_form.emailTwoFactor.vars.label|trans }}</span>
+                                        </label>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <label for="{{ edit_form.googleTwoFactor.vars.id }}">
+                                            {{ form_widget(edit_form.googleTwoFactor, {attr: {'data-fake-radio-target': 'googleTwoFactor', 'data-action': 'fake-radio#uncheckEmail'}}) }}
+                                            <span>{{ edit_form.googleTwoFactor.vars.label|trans }}</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <br/>
+
+                                {{ form_widget(edit_form.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+                                {{ form_widget(edit_form._token) }}
+                            </form>
+                            <p>
+                                {% if is_granted('DELETE', user) %}
+                                    {{ form_start(delete_form) }}
+                                        <button onclick="return confirm('{{ 'user.form.delete_confirm'|trans|escape('js') }}')" type="submit" class="btn waves-effect waves-light red">{{ 'user.form.delete'|trans }}</button>
+                                    {{ form_end(delete_form) }}
+                                {% else %}
+                                    <button disabled="disabled" type="button" class="btn waves-effect waves-light red">{{ 'user.form.delete'|trans }}</button>
+                                {% endif %}
+                            </p>
+                            <p><a class="waves-effect waves-light btn blue-grey" href="{{ path('user_index') }}">{{ 'user.form.back_to_list'|trans }}</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

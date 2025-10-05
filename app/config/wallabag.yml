@@ -1,7 +1,7 @@
-wallabag_core:
-    version: 2.6.7
-    paypal_url: "https://liberapay.com/wallabag/donate"
-    languages:
+parameters:
+    wallabag.version: 2.7.0-dev
+    wallabag.paypal_url: "https://liberapay.com/wallabag/donate"
+    wallabag.languages:
         en: 'English'
         fr: 'Français'
         de: 'Deutsch'
@@ -18,25 +18,27 @@ wallabag_core:
         pt: 'Português'
         ru: 'Русский'
         ja: '日本語'
+        ko: '한국어'
         zh: '简体中文'
         uk: 'Українська'
         hr: 'Hrvatski'
         cs: 'Čeština'
         el: 'Ελληνικά'
-    items_on_page: 12
-    language: '%locale%'
-    rss_limit: 50
-    reading_speed: 200
-    cache_lifetime: 10
-    action_mark_as_read: 1
-    list_mode: 0
-    display_thumbnails: 1
-    fetching_error_message_title: 'No title found'
-    fetching_error_message: |
+        gl: 'Galego'
+    wallabag.items_on_page: 12
+    wallabag.language: '%locale%'
+    wallabag.feed_limit: 50
+    wallabag.reading_speed: 200
+    wallabag.cache_lifetime: 10
+    wallabag.action_mark_as_read: 1
+    wallabag.list_mode: 0
+    wallabag.display_thumbnails: 1
+    wallabag.fetching_error_message_title: 'No title found'
+    wallabag.fetching_error_message: |
         wallabag can't retrieve contents for this article. Please <a href="https://doc.wallabag.org/en/user/errors_during_fetching.html#how-can-i-help-to-fix-that">troubleshoot this issue</a>.
-    api_limit_mass_actions: 10
-    encryption_key_path: "%kernel.project_dir%/data/site-credentials-secret-key.txt"
-    default_internal_settings:
+    wallabag.api_limit_mass_actions: 10
+    wallabag.site_credentials.encryption_key_path: "%kernel.project_dir%/data/site-credentials-secret-key.txt"
+    wallabag.default_internal_settings:
         -
             name: share_public
             value: 1
@@ -64,6 +66,14 @@ wallabag_core:
         -
             name: shaarli_url
             value: https://myshaarli.com
+            section: entry
+        -
+            name: share_linkding
+            value: 1
+            section: entry
+        -
+            name: linkding_url
+            value: https://linkding.example.com
             section: entry
         -
             name: share_mail
@@ -106,6 +116,10 @@ wallabag_core:
             value: 1
             section: export
         -
+            name: export_md
+            value: 1
+            section: export
+        -
             name: import_with_redis
             value: 0
             section: import
@@ -131,7 +145,7 @@ wallabag_core:
             section: misc
         -
             name: wallabag_support_url
-            value: https://www.wallabag.org/pages/support.html
+            value: https://github.com/wallabag/wallabag/issues/new/choose
             section: misc
         -
             name: api_user_registration
@@ -146,14 +160,14 @@ wallabag_core:
             value: 0
             section: entry
 
-    default_ignore_origin_instance_rules:
+    wallabag.default_ignore_origin_instance_rules:
         -
             rule: host = "feedproxy.google.com"
         -
             rule: host = "feeds.reuters.com"
         -
             rule: _all ~ "https?://www\.lemonde\.fr/tiny.*"
-    fonts:
+    wallabag.fonts:
         - 'Sans-serif'
         - 'Serif'
         - 'Atkinson Hyperlegible'
@@ -162,7 +176,11 @@ wallabag_core:
         - 'Montserrat'
         - 'OpenDyslexicRegular'
         - 'Oswald'
-
-wallabag_import:
-    allow_mimetypes: ['application/octet-stream', 'application/json', 'text/plain', 'text/csv', 'text/html']
-    resource_dir: "%kernel.project_dir%/web/uploads/import"
+    wallabag.allow_mimetypes:
+        - 'application/octet-stream'
+        - 'application/json'
+        - 'text/plain'
+        - 'text/csv'
+        - 'text/html'
+        - 'application/vnd.ms-excel'
+    wallabag.resource_dir: "%kernel.project_dir%/web/uploads/import"

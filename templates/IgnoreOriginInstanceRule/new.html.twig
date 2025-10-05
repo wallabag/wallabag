@@ -1,0 +1,80 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ 'ignore_origin_instance_rule.page_title'|trans }}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <h4>{{ 'ignore_origin_instance_rule.new_ignore_origin_instance_rule'|trans }}</h4>
+
+                        <div id="set6" class="col s12">
+                            {{ form_start(form) }}
+                                {{ form_errors(form) }}
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        {{ form_label(form.rule) }}
+                                        {{ form_errors(form.rule) }}
+                                        {{ form_widget(form.rule) }}
+                                    </div>
+                                </div>
+
+                                {{ form_widget(form.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+                                {{ form_rest(form) }}
+                            </form>
+                            <p><a class="waves-effect waves-light btn blue-grey" href="{{ path('ignore_origin_instance_rules_index') }}">{{ 'ignore_origin_instance_rule.form.back_to_list'|trans }}</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <h4>{{ 'config.form_ignore_origin_rules.faq.title'|trans }}</h4>
+
+                        <h5>{{ 'config.form_ignore_origin_rules.faq.ignore_origin_rules_definition_title'|trans }}</h5>
+                        <p class="help">{{ 'config.form_ignore_origin_rules.faq.ignore_origin_rules_definition_description'|trans|raw }}</p>
+
+                        <h5>{{ 'config.form_ignore_origin_rules.faq.how_to_use_them_title'|trans }}</h5>
+                        <p class="help">{{ 'config.form_ignore_origin_rules.faq.how_to_use_them_description'|trans|raw }}</p>
+
+                        <h5>{{ 'config.form_ignore_origin_rules.faq.variables_available_title'|trans }}</h5>
+                        <p class="help">
+                            {{ 'config.form_ignore_origin_rules.faq.variables_available_description'|trans }}
+                        </p>
+
+                        <table class="bordered">
+                            <thead>
+                                <tr>
+                                    <th>{{ 'config.form_ignore_origin_rules.faq.variable_description.label'|trans }}</th>
+                                    <th>{{ 'config.form_ignore_origin_rules.faq.meaning'|trans }}</th>
+                                    <th>{{ 'config.form_ignore_origin_rules.faq.operator_description.label'|trans }}</th>
+                                    <th>{{ 'config.form_ignore_origin_rules.faq.meaning'|trans }}</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>host</td>
+                                    <td>{{ 'config.form_ignore_origin_rules.faq.variable_description.host'|trans }}</td>
+                                    <td>=</td>
+                                    <td>{{ 'config.form_ignore_origin_rules.faq.operator_description.equal_to'|trans }}</td>
+                                </tr>
+                                <tr>
+                                    <td>_all</td>
+                                    <td>{{ 'config.form_ignore_origin_rules.faq.variable_description._all'|trans }}</td>
+                                    <td>~</td>
+                                    <td>{{ 'config.form_ignore_origin_rules.faq.operator_description.matches'|trans|raw }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

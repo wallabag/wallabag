@@ -1,0 +1,75 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ 'user.page_title'|trans }}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel">
+                {% if users.getNbPages > 1 %}
+                    {{ pagerfanta(users, 'default_wallabag') }}
+                {% endif %}
+                <div class="row">
+                    <div class="col s6">
+                        <p class="help">{{ 'user.description'|trans|raw }}</p>
+                    </div>
+                    <div class="col s6">
+                        {% if is_granted('LIST_USERS') %}
+                            <div class="input-field">
+                                <form name="search_users" method="GET" action="{{ path('user_index') }}">
+                                    {% if form_errors(searchForm) %}
+                                        <span class="black-text">{{ form_errors(searchForm) }}</span>
+                                    {% endif %}
+
+                                    {% if form_errors(searchForm.term) %}
+                                        <span class="black-text">{{ form_errors(searchForm.term) }}</span>
+                                    {% endif %}
+
+                                    {{ form_widget(searchForm.term, {'attr': {'autocomplete': 'off', 'placeholder': 'user.search.placeholder'}}) }}
+
+                                    {{ form_rest(searchForm) }}
+                                </form>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <table class="bordered">
+                        <thead>
+                            <tr>
+                                <th>{{ 'user.form.username_label'|trans }}</th>
+                                <th>{{ 'user.form.email_label'|trans }}</th>
+                                <th>{{ 'user.form.last_login_label'|trans }}</th>
+                                <th>{{ 'user.list.actions'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{% if user.lastLogin %}{{ user.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                <td>
+                                    {% if is_granted('EDIT', user) %}
+                                        <a href="{{ path('user_edit', {'id': user.id}) }}">{{ 'user.list.edit_action'|trans }}</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <br />
+                    {% if is_granted('CREATE_USERS') %}
+                        <p>
+                            <a href="{{ path('user_new') }}" class="waves-effect waves-light btn">{{ 'user.list.create_new_one'|trans }}</a>
+                        </p>
+                    {% endif %}
+                    {% if users.getNbPages > 1 %}
+                        {{ pagerfanta(users, 'default_wallabag') }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

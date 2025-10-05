@@ -99,20 +99,7 @@ config:
         lineheight_label: Interlineación
         maxwidth_label: Anchura máxima
         help_display_thumbnails: Puedes decidir si deseas mostrar o no las miniaturas de los artículos. Útil para conexiones lentas.
-        display_thumbnails_label: Mostrar las miniaturas de los artículos (útil para conexiones lentas).
-    form_rss:
-        description: 'Los feeds RSS proporcionados por wallabag permiten leer los artículos guardados con su lector RSS favorito. Primero necesitas generar un token.'
-        token_label: 'Token RSS'
-        no_token: 'Sin token'
-        token_create: 'Crear un token'
-        token_reset: 'Reiniciar el token'
-        rss_links: 'URLs de feeds RSS'
-        rss_link:
-            unread: 'Sin leer'
-            starred: 'Favoritos'
-            archive: 'Archivados'
-            all: Todos
-        rss_limit: 'Número de artículos en el feed RSS'
+        display_thumbnails_label: Mostrar las miniaturas de los artículos (útil para conexiones lentas).'
     form_user:
         two_factor_description: "Activar la autenticación en dos pasos significa que recibirás un código por correo electrónico en cada nueva conexión que no sea de confianza."
         name_label: 'Nombre'
@@ -143,6 +130,7 @@ config:
         entries: Eliminar TODOS los artículos
         archived: Eliminar TODOS los artículos archivados
         confirm: ¿Estás completamente seguro? (NO SE PUEDE DESHACER)
+        tagging_rules: Eliminar TODAS las reglas de etiquetado
     form_password:
         description: "Puedes cambiar la contraseña aquí. Tu nueva contraseña debe tener al menos 8 caracteres."
         old_password_label: 'Contraseña actual'
@@ -484,7 +472,7 @@ quickstart:
         description: 'Si necesitas ayuda, estamos a tu disposición.'
         github: 'En GitHub'
         email: 'Por correo electrónico'
-        gitter: 'En Gitter'
+        matrix: 'En Matrix'
 tag:
     page_title: 'Etiquetas'
     list:
@@ -549,6 +537,7 @@ import:
     elcurator:
         description: Esta herramienta importará todos tus artículos desde elCurator.
         page_title: Importar > elCurator
+        how_to: Seleccione su exportación de elCurator y haga clic en el botón a continuación para cargarla e importarla.
     delicious:
         page_title: Importar > del.icio.us
         description: Importa todos tus artículos de Delicious. Desde 2021 puedes exportar tus datos de nuevo utilizando la página de exportación (https://del.icio.us/export). Elige el formato "JSON" y descárgalo (por ejemplo "delicious_export.2021.02.06_21.10.json").
@@ -561,6 +550,10 @@ import:
         description: Esta herramienta importará todos tus marcadores de Pocket (vía HTML). Sólo tienes que ir a https://getpocket.com/export, y luego exportar el archivo HTML. Se descargará un archivo HTML (como "ril_export.html").
         page_title: Importar > Pocket HTML
         how_to: Por favor, elige el archivo de la copia de seguridad del marcador y haz clic en el botón inferior para importarlo. Ten en cuenta que el proceso puede llevar mucho tiempo, ya que hay que recuperar todos los artículos.
+    omnivore:
+        page_title: Importar > Omnivore
+        description: Este importador importará todos sus artículos de Omnivore.
+        how_to: Por favor, descomprima su exportación de Omnivore y luego cargue cada archivo JSON llamado "metadata_x_to_y.json" uno por uno.
 developer:
     page_title: 'Gestión de clientes API'
     welcome_message: 'Bienvenido al API de wallabag'
@@ -684,6 +677,7 @@ flashes:
             tagging_rules_not_imported: Error durante la importación de las reglas de etiquetado
             ignore_origin_rules_deleted: Regla de origen ignorado eliminada
             ignore_origin_rules_updated: Regla de origen ignorado actualizada
+            tagging_rules_reset: Se han restablecido las reglas de etiquetas
     entry:
         notice:
             entry_already_saved: 'Artículo ya guardado el %fecha%'

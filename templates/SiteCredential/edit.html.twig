@@ -1,0 +1,62 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ 'site_credential.page_title'|trans }}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <h4>{{ 'site_credential.edit_site_credential'|trans }}</h4>
+
+                        <div id="set6" class="col s12">
+                            {{ form_start(edit_form) }}
+                                {{ form_errors(edit_form) }}
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        {{ form_label(edit_form.host) }}
+                                        {{ form_errors(edit_form.host) }}
+                                        {{ form_widget(edit_form.host) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        {{ form_label(edit_form.username) }}
+                                        {{ form_errors(edit_form.username) }}
+                                        {{ form_widget(edit_form.username) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        {{ form_label(edit_form.password) }}
+                                        {{ form_errors(edit_form.password) }}
+                                        {{ form_widget(edit_form.password) }}
+                                    </div>
+                                </div>
+
+                                <br/>
+
+                                {{ form_widget(edit_form.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+                                {{ form_widget(edit_form._token) }}
+                            </form>
+                            {% if is_granted('DELETE', credential) %}
+                                <p>
+                                    {{ form_start(delete_form) }}
+                                        <button onclick="return confirm('{{ 'site_credential.form.delete_confirm'|trans|escape('js') }}')" type="submit" class="btn waves-effect waves-light red">{{ 'site_credential.form.delete'|trans }}</button>
+                                    {{ form_end(delete_form) }}
+                                </p>
+                            {% endif %}
+                            <p><a class="waves-effect waves-light btn blue-grey" href="{{ path('site_credentials_index') }}">{{ 'site_credential.form.back_to_list'|trans }}</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

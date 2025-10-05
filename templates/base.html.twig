@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% set lang = app.request.locale|default('') -%}
+<!--[if lte IE 6]><html class="no-js ie6 ie67 ie678"{% if lang is not empty %} lang="{{ lang }}"{% endif %}><![endif]-->
+<!--[if lte IE 7]><html class="no-js ie7 ie67 ie678"{% if lang is not empty %} lang="{{ lang }}"{% endif %}><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 ie678"{% if lang is not empty %} lang="{{ lang }}"{% endif %}><![endif]-->
+<!--[if gt IE 8]><html class="no-js"{% if lang is not empty %} lang="{{ lang }}"{% endif %}><![endif]-->
+<html{% if lang is not empty %} lang="{{ lang }}"{% endif %} class="{{ theme_class() }}" data-controller="dark-theme shortcuts" data-shortcuts-entries-navigation-outlet="[data-controller~='entries-navigation']">
+    <head>
+        {% block head %}
+            <meta name="viewport" content="initial-scale=1.0">
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <meta name="referrer" content="strict-origin-when-cross-origin">
+            <!--[if IE]>
+            <meta http-equiv="X-UA-Compatible" content="IE=10">
+            <![endif]-->
+
+            <link rel="apple-touch-icon" type="image/png" href="{{ asset('img/appicon/apple-touch-icon-152.png') }}" sizes="152x152">
+            <link rel="icon" type="image/png" href="{{ asset('img/appicon/apple-touch-icon-152.png') }}" sizes="152x152">
+
+            <link rel="apple-touch-icon" type="image/png" href="{{ asset('img/appicon/apple-touch-icon-144.png') }}" sizes="144x144">
+            <link rel="icon" type="image/png" href="{{ asset('img/appicon/apple-touch-icon-144.png') }}" sizes="144x144">
+
+            <link rel="apple-touch-icon" type="image/png" href="{{ asset('img/appicon/apple-touch-icon-120.png') }}" sizes="120x120">
+            <link rel="icon" type="image/png" href="{{ asset('img/appicon/apple-touch-icon-120.png') }}" sizes="120x120">
+
+            <link rel="apple-touch-icon" type="image/png" href="{{ asset('img/appicon/apple-touch-icon-114.png') }}" sizes="114x114">
+            <link rel="icon" type="image/png" href="{{ asset('img/appicon/apple-touch-icon-114.png') }}" sizes="114x114">
+
+            <link rel="apple-touch-icon" type="image/png" href="{{ asset('img/appicon/apple-touch-icon-76.png') }}" sizes="76x76">
+            <link rel="icon" type="image/png" href="{{ asset('img/appicon/apple-touch-icon-76.png') }}" sizes="76x76">
+
+            <link rel="apple-touch-icon" type="image/png" href="{{ asset('img/appicon/apple-touch-icon-72.png') }}" sizes="72x72">
+            <link rel="icon" type="image/png" href="{{ asset('img/appicon/apple-touch-icon-72.png') }}" sizes="72x72">
+
+            <link rel="apple-touch-icon" type="image/png" href="{{ asset('img/appicon/apple-touch-icon-57.png') }}" sizes="57x57">
+            <link rel="icon" type="image/png" href="{{ asset('img/appicon/apple-touch-icon-57.png') }}" sizes="57x57">
+
+            <link rel="apple-touch-icon" type="image/png" href="{{ asset('img/appicon/apple-touch-icon.png') }}">
+            <link rel="icon" type="image/png" href="{{ asset('img/appicon/apple-touch-icon.png') }}">
+
+            <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+
+            <link rel="manifest" href="{{ asset('manifest.json') }}">
+
+            {% block css %}
+            {% endblock %}
+            {% if asset_file_exists('custom.css') %}
+                <link rel="stylesheet" href="{{ asset('custom.css') }}">
+            {% endif %}
+            {% block scripts %}
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', {callback: 'fos.Router.setData'}) }}"></script>
+            {% endblock %}
+
+            <title>{% block title %}{% endblock %} – wallabag</title>
+        {% endblock %}
+    </head>
+
+    <body class="{% block body_class %}{% endblock %}">
+        {% block header %}{% endblock %}
+
+        <div id="main">
+            {% block menu %}{% endblock %}
+
+            <main>
+                {% block precontent %}{% endblock %}
+
+                {% block messages %}{% endblock %}
+
+                <div id="content" dir="auto">
+                    {% block content %}{% endblock %}
+                </div>
+            </main>
+        </div>
+
+        {% block footer %}{% endblock %}
+
+        {% if craue_setting('matomo_enabled') %}
+            {{ matomo(craue_setting('matomo_host'), craue_setting('matomo_site_id')) }}
+        {% endif %}
+    </body>
+</html>

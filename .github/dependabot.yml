@@ -15,13 +15,13 @@ updates:
       patterns:
         - "*fontsource*"
   ignore:
-  - dependency-name: materialize-css
+  - dependency-name: "@materializecss/materialize"
     versions:
-    - "> 0.98.2"
+    - "> 1.2.2"
 - package-ecosystem: composer
   directory: "/"
   schedule:
-    interval: daily
+    interval: weekly
     time: "04:00"
     timezone: Europe/Paris
   open-pull-requests-limit: 10
@@ -29,18 +29,15 @@ updates:
     symfony-dependencies:
       patterns:
         - "symfony/*"
-  reviewers:
-  - j0k3r
-  - tcitworld
-  - Kdecherf
+    twig-dependencies:
+      patterns:
+        - "twig/*"
+    phpstan-dependencies:
+      patterns:
+        - "phpstan/*"
   ignore:
-  - dependency-name: lcobucci/jwt
-    versions:
-    - ">= 4.2.0"
-  # until we add support for Symfony 5+
   - dependency-name: symfony/*
-    versions:
-    - ">= 5.0.0"
+    update-types: [ "version-update:semver-major" ]
 - package-ecosystem: github-actions
   directory: "/"
   schedule:

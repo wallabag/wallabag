@@ -1,0 +1,78 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ 'developer.page_title'|trans }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel settings">
+
+            <div class="row">
+                <h3>{{ 'developer.welcome_message'|trans }}</h3>
+
+                <h4>{{ 'developer.documentation'|trans }}</h4>
+
+                <ul>
+                    <li><a href="{{ path('developer_howto_firstapp') }}">{{ 'developer.how_to_first_app'|trans }}</a></li>
+                    <li><a href="https://doc.wallabag.org/en/developer/api/readme.html">{{ 'developer.full_documentation'|trans }}</a></li>
+                    <li><a href="{{ path('nelmio_api_doc.swagger_ui') }}">{{ 'developer.list_methods'|trans }}</a></li>
+                </ul>
+
+                <h4>{{ 'developer.clients.title'|trans }}</h4>
+                <ul>
+                    <li><a href="{{ path('developer_create_client') }}" class="waves-effect waves-light btn">{{ 'developer.clients.create_new'|trans }}</a></li>
+                </ul>
+
+                <h4>{{ 'developer.existing_clients.title'|trans }}</h4>
+                {% if clients %}
+                    <ul class="collapsible" data-controller="materialize--collapsible" data-materialize--collapsible-accordion-value="false">
+                        {% for client in clients %}
+                            <li>
+                                <div class="collapsible-header">{{ client.name }} - #{{ client.id }}</div>
+                                <div class="collapsible-body">
+                                    <table class="striped">
+                                        <tr>
+                                            <td>{{ 'developer.existing_clients.field_id'|trans }}</td>
+                                            <td>
+                                                <strong><code>{{ client.clientId }}</code></strong>
+                                                <button class="btn" data-controller="clipboard" data-clipboard-text="{{ client.clientId }}">{{ 'developer.client.copy_to_clipboard'|trans }}</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ 'developer.existing_clients.field_secret'|trans }}</td>
+                                            <td>
+                                                <strong><code>{{ client.secret }}</code></strong>
+                                                <button class="btn" data-controller="clipboard" data-clipboard-text="{{ client.secret }}">{{ 'developer.client.copy_to_clipboard'|trans }}</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ 'developer.existing_clients.field_uris'|trans }}</td>
+                                            <td><strong><code>{{ client.redirectUris|json_encode() }}</code></strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ 'developer.existing_clients.field_grant_types'|trans }}</td>
+                                            <td><strong><code>{{ client.allowedGrantTypes|json_encode() }}</code></strong></td>
+                                        </tr>
+                                    </table>
+
+                                    <p>{{ 'developer.remove.warn_message_1'|trans({'%name%': client.name}) }}</p>
+                                    <p>{{ 'developer.remove.warn_message_2'|trans({'%name%': client.name}) }}</p>
+                                    <form action="{{ path('developer_delete_client', {id: client.id}) }}" method="post" name="delete-client">
+                                        <input type="hidden" name="token" value="{{ csrf_token('delete-client') }}" />
+
+                                        <button class="waves-effect waves-light btn red" type="submit">{{ 'developer.remove.action'|trans({'%name%': client.name}) }}</button>
+                                    </form>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    {{ 'developer.existing_clients.no_client'|trans }}
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -3,5 +3,5 @@ validator:
     password_must_match: Kata sandi harus cocok.
     password_too_short: Kata sandi Anda harus setidaknya 8 karakter.
     item_per_page_too_high: Ini akan mematikan aplikasi
-    rss_limit_too_high: Ini akan mematikan aplikasi
+    feed_limit_too_high: Ini akan mematikan aplikasi
     quote_length_too_high: Kutipannya terlalu panjang. Setidaknya butuh {{ limit }} karakter atau kurang.

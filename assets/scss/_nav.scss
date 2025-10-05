@@ -1,0 +1,208 @@
+/* ==========================================================================
+   Nav
+   ========================================================================== */
+nav {
+  height: auto;
+  line-height: initial;
+}
+
+// adapted from anchor styles from node_modules/@materializecss/materialize/sass/components/_navbar.scss
+nav ul button {
+  transition: background-color .3s;
+  font-size: 1rem;
+  color: #fff;
+  display: block;
+  padding: 0 15px;
+  cursor: pointer;
+  background: none;
+  border: 0;
+
+  &:focus {
+    background: none;
+  }
+
+  &:hover {
+    background-color: rgba(0 0 0 / 10%);
+  }
+}
+
+nav {
+  input {
+    color: #aaa;
+  }
+
+  ul button:hover,
+  ul a:hover {
+    background-color: initial;
+  }
+}
+
+.nav-panel-item .sidenav-trigger {
+  margin-left: 0;
+  margin-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  height: auto;
+  line-height: 1;
+  background-color: transparent;
+  border: none;
+}
+
+.nav-panel-item {
+  display: flex;
+  padding: 0.6rem 0.4rem 0.6rem 0.75rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+
+  button,
+  a {
+    padding: 10px 15px;
+  }
+}
+
+.nav-panel-item .material-icons {
+  height: auto;
+  line-height: 1;
+}
+
+.nav-input {
+  display: none;
+}
+
+.nav-panel-buttom {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+.nav-panel-item .add,
+.nav-panel-item .search,
+.nav-panels .close {
+  color: #444 !important;
+}
+
+.nav-panels {
+  transition: background 0.2s ease;
+
+  .action {
+    margin: 0;
+    font-size: 2.1rem;
+  }
+
+  .input-field input {
+    display: block;
+    font-size: 1.2rem;
+    line-height: inherit;
+    height: 3rem;
+  }
+
+  .input-field input:focus {
+    border: 0;
+    box-shadow: none;
+    color: #444;
+  }
+
+  /* materializecss override */
+  .input-field.input-field input {
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+
+  .input-field.input-field input:focus {
+    border-bottom: none;
+    box-shadow: initial;
+  }
+}
+
+.nav-panel-top {
+  display: flex;
+  align-items: center;
+}
+
+.input-field {
+  &.nav-panel-item label {
+    left: 1rem;
+  }
+
+  &.nav-panel-item .close {
+    color: transparent;
+    cursor: pointer;
+    font-size: 2rem;
+    transition: 0.3s color;
+  }
+
+  &.nav-panel-item {
+    display: flex;
+    flex: 1;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  &.nav-panel-add.disabled,
+  &.nav-panel-add.disabled input {
+    background-color: whitesmoke;
+  }
+}
+
+.nav-panel-add,
+.nav-panel-search {
+  background-color: white;
+}
+
+.nav-form-button {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+
+  &:focus {
+    background-color: inherit;
+  }
+}
+
+.nav-form-button,
+.nav-panel-item .close {
+  margin: 0 1%;
+}
+
+.entry-nav-top--sticky {
+  position: sticky;
+  top: 0;
+}
+
+.dropdown-content {
+  width: 100%;
+
+  li {
+    min-height: auto;
+    padding-right: 15px;
+  }
+
+  li > a {
+    display: flex;
+    padding: 14px 10px;
+    align-items: center;
+    white-space: initial;
+  }
+}
+
+@media (min-width: 993px) {
+  .toggle-add-url-container {
+    flex-grow: 1;
+  }
+
+  .toggle-add-url {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+  }
+
+  .sidenav-trigger {
+    display: none;
+  }
+
+  .dropdown-content {
+    min-width: 300px;
+    width: initial;
+  }
+}

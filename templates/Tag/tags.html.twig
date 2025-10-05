@@ -1,0 +1,52 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ 'tag.page_title'|trans }}{% endblock %}
+
+{% block content %}
+    {% set current_path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+
+    <div class="results clearfix">
+        {{ 'tag.list.number_on_the_page'|trans({'%count%': allTagsWithNbEntries|length}) }}
+    </div>
+
+    <div class="row">
+        <ul class="card-tag-labels">
+            {% if is_granted('LIST_ENTRIES') %}
+                <li class="chip">
+                    <a href="{{ path('untagged') }}">{{ 'tag.list.untagged'|trans }} ({{ nbEntriesUntagged }})</a>
+                </li>
+            {% endif %}
+            {% for tagWithNbEntries in allTagsWithNbEntries %}
+                {% set tag = tagWithNbEntries.tag %}
+                {% set nbEntries = tagWithNbEntries.nbEntries %}
+                <li title="{{ tag.label }} ({{ nbEntries }})" id="tag-{{ tag.id }}" class="chip" data-controller="tag">
+                    <a href="{{ path('tag_entries', {'slug': tag.slug}) }}" class="card-tag-link" data-tag-target="link">
+                        {{ tag.label }}&nbsp;({{ nbEntries }})
+                    </a>
+                    {% if renameForms is defined and renameForms[tag.id] is defined and is_granted('EDIT', tag) %}
+                    <form class="card-tag-form hidden" data-tag-target="form" action="{{ path('tag_rename', {'slug': tag.slug, redirect: current_path}) }}" method="POST">
+                        {{ form_widget(renameForms[tag.id].label, {'attr': {'value': tag.label, 'data-tag-target': 'input'}}) }}
+                        {{ form_rest(renameForms[tag.id]) }}
+                        <button type="submit"><i class="material-icons">done</i></button>
+                    </form>
+                    <button type="button" data-tag-target="edit" data-action="tag#showForm">
+                        <i class="material-icons">mode_edit</i>
+                    </button>
+                    {% endif %}
+                    {% if is_granted('DELETE', tag) %}
+                        <form action="{{ path('tag_delete', {'slug': tag.slug, redirect: current_path}) }}" method="post" class="inline-block">
+                            <input type="hidden" name="token" value="{{ csrf_token('tag-delete') }}"/>
+
+                            <button type="submit" class="btn-link card-tag-icon card-tag-delete" onclick="return confirm('{{ 'tag.confirm.delete'|trans({'%name%': tag.label})|escape('js') }}')">
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </form>
+                    {% endif %}
+                    {% if app.user.config.feedToken %}
+                        <a rel="alternate" type="application/atom+xml" href="{{ path('tag_feed', {'username': app.user.username, 'token': app.user.config.feedToken, 'slug': tag.slug}) }}" class="card-tag-icon"><i class="material-icons">rss_feed</i></a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

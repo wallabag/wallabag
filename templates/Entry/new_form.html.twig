@@ -1,0 +1,15 @@
+<form class="input-field nav-panel-item nav-panel-add" style="display: none" name="entry" method="post" action="{{ path('new_entry') }}" data-topbar-target="addUrl" data-action="topbar#submittingUrl">
+    {% if form_errors(form) %}
+        <span class="black-text">{{ form_errors(form) }}</span>
+    {% endif %}
+    <button type="submit" class="nav-form-button" aria-label="add"><i class="material-icons add" aria-hidden="true"></i></button>
+
+    {% if form_errors(form.url) %}
+        <span class="black-text">{{ form_errors(form.url) }}</span>
+    {% endif %}
+
+    {{ form_widget(form.url, {'attr': {'autocomplete': 'off', 'placeholder': 'entry.new.placeholder', 'data-topbar-target': 'addUrlInput'}}) }}
+    <i class="material-icons close" aria-label="clear" role="button" data-action="click->topbar#showActions" data-shortcuts-target="showActions"></i>
+
+    {{ form_rest(form) }}
+</form>

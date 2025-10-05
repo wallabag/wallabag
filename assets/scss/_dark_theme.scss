@@ -1,0 +1,159 @@
+.dark-theme {
+  body {
+    background-color: #101010;
+  }
+
+  #article,
+  .card,
+  .card-panel,
+  .card .card-reveal,
+  .card-stacked .preview:not(.preview--default),
+  .card .preview:not(.preview--default),
+  .collapsible-header,
+  .collection,
+  .dropdown-content,
+  .sidenav,
+  .sidenav .collapsible-body,
+  .sidenav.sidenav-fixed .collapsible-body,
+  .tabs {
+    background-color: #131716;
+  }
+
+  table.striped > tbody > tr:nth-child(2n+1),
+  .dropdown-content li {
+    background-color: #232323;
+  }
+
+  .dropdown-content li:hover,
+  .dropdown-content li.active,
+  .dropdown-content li.selected,
+  .pagination li:not(.active) a:hover,
+  .pagination li:not(.active) a:active,
+  .pagination li:not(.active) a:focus {
+    background-color: #2c2c2c;
+  }
+
+  .dropdown-content .divider {
+    background-color: #383838;
+  }
+
+  .collection {
+    border-color: transparent;
+  }
+
+  .collection .collection-item {
+    border-color: #121212;
+  }
+
+  .card:hover,
+  .collection .collection-item:hover {
+    background-color: #272727;
+  }
+
+  #content,
+  #article article,
+  #article article h1,
+  #article article h2,
+  #article article h3,
+  #article article h4,
+  #article article h5,
+  #article article h6,
+  .dropdown-content li > a,
+  .input-field input,
+  .input-field input:focus,
+  .results-item,
+  .sidenav li > a,
+  .sidenav li > a > i.material-icons,
+  .sidenav li button,
+  .sidenav li button > i.material-icons {
+    color: #dfdfdf;
+  }
+
+  .cyan,
+  .cyan.darken-1,
+  .cyan.darken-2,
+  .nav-panel-add,
+  .nav-panel-search {
+    background-color: #1d1d1d !important;
+  }
+
+  .grey-text.text-darken-4,
+  .nav-panel-item .add,
+  .nav-panel-item .search,
+  .nav-panels .close {
+    color: #dfdfdf !important;
+  }
+
+  .sidenav li.active {
+    background-color: #2f2f2f;
+  }
+
+  .mass-action-tags .mass-action-tags-input.mass-action-tags-input,
+  .sidenav li:not(.logo) > a:hover,
+  .sidenav li:not(.logo) button:hover,
+  .sidenav .collapsible-header:hover,
+  .sidenav.sidenav-fixed .collapsible-header:hover {
+    background-color: #1d1d1d;
+  }
+
+  #article {
+    box-shadow: 0 0 10px #1d1d1d;
+  }
+
+  .card,
+  .collection .collection-item {
+    background-color: #1d1d1d;
+  }
+
+  .card-action {
+    background-color: transparent;
+  }
+
+  .logo img,
+  .preview.preview--default,
+  .typo-logo {
+    filter: invert(100%);
+  }
+
+  .border-bottom,
+  .collapsible,
+  .collapsible-body,
+  .collapsible-header {
+    border-color: #222;
+  }
+
+  .pagination li.active {
+    background-color: #666;
+  }
+
+  .hljs,
+  #article pre {
+    color: #abb2bf;
+    background-color: #282c34;
+  }
+
+  nav input {
+    color: #abb2bf;
+  }
+
+  input[type="url"]:not(.browser-default):disabled {
+    color: #9e9e9e;
+  }
+
+  .input-field.nav-panel-add.disabled,
+  .input-field.nav-panel-add.disabled input {
+    background-color: transparent;
+  }
+
+  .z-depth-4 {
+    box-shadow: 0 16px 24px 2px rgba(255 255 255 / 14%),
+                0 6px 30px 5px rgba(255 255 255 / 12%),
+                0 8px 10px -7px rgba(255 255 255 / 20%);
+  }
+
+  @media only screen and (min-width: 992px) {
+    #article {
+      background-color: #101010;
+    }
+  }
+}

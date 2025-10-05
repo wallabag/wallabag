@@ -1,0 +1,183 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ 'howto.page_title'|trans }}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel settings">
+
+                <div class="row">
+                    <div class="tabs-container col s12">
+                        <ul class="tabs" data-controller="materialize--tabs">
+                            <li class="tab col s12 m6 l3"><a class="active" href="#set1">{{ 'howto.tab_menu.add_link'|trans }}</a></li>
+                            <li class="tab col s12 m6 l3"><a href="#set2">{{ 'howto.tab_menu.shortcuts'|trans }}</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="set1" class="col s12">
+                        <p>{{ 'howto.page_description'|trans }}</p>
+
+                        <div class="row">
+
+                            {% if is_granted('CREATE_ENTRIES') %}
+                                <div class="col s12">
+                                    <a href="{{ path('new') }}">{{ 'howto.form.description'|trans }}</a>
+                                </div>
+                            {% endif %}
+
+                            <div class="col s12">
+                                <h5>{{ 'howto.top_menu.browser_addons'|trans }}</h5>
+                                <ul>
+                                    <li><a href="{{ addonsUrl.firefox }}" target="_blank" rel="noopener">{{ 'howto.browser_addons.firefox'|trans }}</a></li>
+                                    <li><a href="{{ addonsUrl.chrome }}" target="_blank" rel="noopener">{{ 'howto.browser_addons.chrome'|trans }}</a></li>
+                                    <li><a href="{{ addonsUrl.opera }}" target="_blank" rel="noopener">{{ 'howto.browser_addons.opera'|trans }}</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="col s12">
+                                <h5>{{ 'howto.top_menu.mobile_apps'|trans }}</h5>
+                                <ul>
+                                    <li>Android: <a href="{{ addonsUrl.f_droid }}" target="_blank" rel="noopener">{{ 'howto.mobile_apps.android.via_f_droid'|trans }}</a> / <a href="{{ addonsUrl.google_play }}" target="_blank" rel="noopener">{{ 'howto.mobile_apps.android.via_google_play'|trans }}</a></li>
+                                    <li>iOS: <a href="{{ addonsUrl.ios }}" target="_blank">{{ 'howto.mobile_apps.ios'|trans }}</a></li>
+                                    <li>Windows Phone: <a href="{{ addonsUrl.windows }}" target="_blank" rel="noopener">{{ 'howto.mobile_apps.windows'|trans }}</a></li>
+                                </ul>
+                            </div>
+
+                            {% if is_granted('CREATE_ENTRIES') %}
+                                <div class="col s12">
+                                    <h5>{{ 'howto.top_menu.bookmarklet'|trans }}</h5>
+                                    {{ 'howto.bookmarklet.description'|trans }}
+                                    {% include 'Static/_bookmarklet.html.twig' %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div id="set2" class="col s12">
+                        <p>{{ 'howto.shortcuts.page_description'|trans }}</p>
+
+                        <h5>{{ 'howto.shortcuts.all_pages_title'|trans }}</h5>
+
+                        <table class="bordered">
+                            <thead>
+                                <tr>
+                                    <th>{{ 'howto.shortcuts.shortcut'|trans }}</th>
+                                    <th>{{ 'howto.shortcuts.action'|trans }}</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td><code>g u</code></td>
+                                    <td>{{ 'howto.shortcuts.go_unread'|trans }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>g s</code></td>
+                                    <td>{{ 'howto.shortcuts.go_starred'|trans }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>g r</code></td>
+                                    <td>{{ 'howto.shortcuts.go_archive'|trans }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>g a</code></td>
+                                    <td>{{ 'howto.shortcuts.go_all'|trans }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>g t</code></td>
+                                    <td>{{ 'howto.shortcuts.go_tags'|trans }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>g c</code></td>
+                                    <td>{{ 'howto.shortcuts.go_config'|trans }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>g i</code></td>
+                                    <td>{{ 'howto.shortcuts.go_import'|trans }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>g d</code></td>
+                                    <td>{{ 'howto.shortcuts.go_developers'|trans }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>?</code></td>
+                                    <td>{{ 'howto.shortcuts.go_howto'|trans }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>g l</code></td>
+                                    <td>{{ 'howto.shortcuts.go_logout'|trans }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>g n</code></td>
+                                    <td>{{ 'howto.shortcuts.add_link'|trans }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>esc</code></td>
+                                    <td>{{ 'howto.shortcuts.hide_form'|trans }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>← →</code></td>
+                                    <td>{{ 'howto.shortcuts.arrows_navigation'|trans }}</td>
+                                </tr>
+                                <tr>
+                                    <td><code>enter</code></td>
+                                    <td>{{ 'howto.shortcuts.open_article'|trans }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h5>{{ 'howto.shortcuts.list_title'|trans }}</h5>
+
+                        <table class="bordered">
+                            <thead>
+                            <tr>
+                                <th>{{ 'howto.shortcuts.shortcut'|trans }}</th>
+                                <th>{{ 'howto.shortcuts.action'|trans }}</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td><code>s</code></td>
+                                <td>{{ 'howto.shortcuts.search'|trans }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <h5>{{ 'howto.shortcuts.article_title'|trans }}</h5>
+
+                        <table class="bordered">
+                            <thead>
+                            <tr>
+                                <th>{{ 'howto.shortcuts.shortcut'|trans }}</th>
+                                <th>{{ 'howto.shortcuts.action'|trans }}</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td><code>o</code></td>
+                                <td>{{ 'howto.shortcuts.open_original'|trans }}</td>
+                            </tr>
+                            <tr>
+                                <td><code>f</code></td>
+                                <td>{{ 'howto.shortcuts.toggle_favorite'|trans }}</td>
+                            </tr>
+                            <tr>
+                                <td><code>a</code></td>
+                                <td>{{ 'howto.shortcuts.toggle_archive'|trans }}</td>
+                            </tr>
+                            <tr>
+                                <td><code>del</code></td>
+                                <td>{{ 'howto.shortcuts.delete'|trans }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

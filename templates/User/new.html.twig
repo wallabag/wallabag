@@ -1,0 +1,61 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ 'user.page_title'|trans }}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <h4>{{ 'user.new_user'|trans }}</h4>
+
+                        <div id="set6" class="col s12">
+                            {{ form_start(form) }}
+                                {{ form_errors(form) }}
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        {{ form_label(form.username) }}
+                                        {{ form_errors(form.username) }}
+                                        {{ form_widget(form.username) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        {{ form_label(form.plainPassword.first) }}
+                                        {{ form_errors(form.plainPassword.first) }}
+                                        {{ form_widget(form.plainPassword.first) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        {{ form_label(form.plainPassword.second) }}
+                                        {{ form_errors(form.plainPassword.second) }}
+                                        {{ form_widget(form.plainPassword.second) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        {{ form_label(form.email) }}
+                                        {{ form_errors(form.email) }}
+                                        {{ form_widget(form.email) }}
+                                    </div>
+                                </div>
+
+                                {{ form_widget(form.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+                                {{ form_rest(form) }}
+                            </form>
+                            <p><a class="waves-effect waves-light btn blue-grey" href="{{ path('user_index') }}">{{ 'user.form.back_to_list'|trans }}</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

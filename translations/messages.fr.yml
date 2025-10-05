@@ -141,6 +141,7 @@ config:
         entries: Supprimer TOUS les articles
         archived: Supprimer TOUS les articles archivés
         confirm: Êtes-vous vraiment sûr ? (C’EST IRRÉVERSIBLE)
+        tagging_rules: Supprimer TOUTES les règles de tags
     form_password:
         description: Vous pouvez changer ici votre mot de passe. Le mot de passe doit contenir au moins 8 caractères.
         old_password_label: Mot de passe actuel
@@ -468,7 +469,7 @@ quickstart:
         description: Parce que vous avez peut-être besoin de nous poser une question, nous sommes disponibles pour vous.
         github: Sur GitHub
         email: Par courriel
-        gitter: Sur Gitter
+        matrix: Sur Matrix
 tag:
     confirm:
         delete: Supprimer le tag %name%
@@ -506,7 +507,7 @@ import:
     wallabag_v1:
         page_title: Importer > wallabag v1
         description: Cet outil va importer toutes vos données de wallabag v1. Sur votre page de configuration de wallabag v1, cliquez sur « Export JSON » dans la section « Exporter vos données de wallabag ». Vous allez récupérer un fichier « wallabag-export-1-xxxx-xx-xx.json ».
-        how_to: Choisissez le fichier de votre export wallabag v1 et cliquez sur le bouton ci-dessous pour l’importer.
+        how_to: Choisissez le fichier de votre export wallabag et cliquez sur le bouton ci-dessous pour l’importer.
     wallabag_v2:
         page_title: Importer > wallabag v2
         description: Cet outil va importer tous vos articles d’une autre instance de wallabag v2. Allez dans tous vos articles, puis, sur la barre latérale, cliquez sur « JSON ». Vous allez récupérer un fichier « All articles.json ».
@@ -536,6 +537,7 @@ import:
     elcurator:
         description: Cet outil va importer tous vos articles depuis elCurator.
         page_title: Importer > elCurator
+        how_to: Choisissez le fichier de votre export elCurator et cliquez sur le bouton ci-dessous pour l’importer.
     delicious:
         page_title: Importer > del.icio.us
         how_to: Choisissez le fichier de votre export Delicious et cliquez sur le bouton ci-dessous pour l'importer.
@@ -548,6 +550,14 @@ import:
         page_title: Importer > Pocket HTML
         description: Cet importateur importera toutes vos signets Pocket (via exportation HTML). Il suffit d'aller à https://getpocket.com/export, puis d'exporter le fichier HTML. Un fichier HTML sera téléchargé (comme « ril_export.html »).
         how_to: Veuillez choisir le fichier de sauvegarde de signets et cliquez sur le bouton ci-dessous pour l'importer. Pensez au fait que le processus peut prendre longtemps puisque tous les articles doivent être récupérés.
+    pocket_csv:
+        page_title: Importer > Pocket CSV
+        description: Cet importateur importera toutes vos signets Pocket (via exportation CSV). Il suffit d'aller à https://getpocket.com/export, puis d'exporter le fichier. Un fichier ZIP sera téléchargé (comme « pocket.zip »). Décompressez le et vous obtiendrez un fichier CSV appelé "part_000000.csv".
+        how_to: Veuillez choisir le fichier de sauvegarde de signets et cliquez sur le bouton ci-dessous pour l'importer. Pensez au fait que le processus peut prendre longtemps puisque tous les articles doivent être récupérés.
+    omnivore:
+        description: Cet outil va importer tous vos articles depuis Omnivore.
+        page_title: Importer > Omnivore
+        how_to: Merci de dézipper votre export Omnivore, puis de déposer un par un chaque fichier JSON appelé "metadata_x_to_y.json".
 developer:
     page_title: Gestion des clients API
     welcome_message: Bienvenue sur l’API de wallabag
@@ -668,6 +678,8 @@ flashes:
             tagging_rules_not_imported: Impossible d'importer les règles
             ignore_origin_rules_deleted: "Règle d'omission d'origine supprimée"
             ignore_origin_rules_updated: "Règle d'omission d'origine mise à jour"
+            tagging_rules_reset: Réinitialisation des règles de tags
+            otp_code_invalid: Code d'authentification à deux facteurs invalide
     entry:
         notice:
             entry_already_saved: Article déjà sauvegardé le %date%

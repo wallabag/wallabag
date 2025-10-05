@@ -1,0 +1,124 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ 'quickstart.page_title'|trans }}{% endblock %}
+
+{% block content %}
+
+    <div class="row quickstart">
+        <div class="col s12">
+            <div class="card-panel settings">
+
+                <div class="row">
+                    <h3>{{ 'quickstart.intro.title'|trans }}</h3>
+
+                    <ul class="row data">
+                        {% if is_granted('EDIT_CONFIG') %}
+                            <li class="col l4 m6 s12">
+                                <div class="card teal darken-1">
+                                    <div class="card-content white-text">
+                                        <span class="card-title white-text">{{ 'quickstart.configure.title'|trans }}</span>
+                                        <p>{{ 'quickstart.configure.description'|trans }}</p>
+                                    </div>
+                                    <div class="card-action">
+                                        <ul>
+                                            <li><a href="{{ path('config') }}">{{ 'quickstart.configure.language'|trans }}</a></li>
+                                            <li><a href="{{ path('config') }}#set2">{{ 'quickstart.configure.feed'|trans }}</a></li>
+                                            <li><a href="{{ path('config') }}#set5">{{ 'quickstart.more'|trans }}</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endif %}
+
+                        <li class="col l4 m6 s12">
+                            <div class="card green darken-1">
+                                <div class="card-content white-text">
+                                    <span class="card-title white-text">{{ 'quickstart.first_steps.title'|trans }}</span>
+                                    <p>{{ 'quickstart.first_steps.description'|trans }}</p>
+                                </div>
+                                <div class="card-action">
+                                    <ul>
+                                        <li><a href="https://doc.wallabag.org/en/user/articles/save.html">{{ 'quickstart.first_steps.new_article'|trans }}</a></li>
+                                        {% if is_granted('LIST_ENTRIES') %}
+                                            <li><a href="{{ path('unread') }}">{{ 'quickstart.first_steps.unread_articles'|trans }}</a></li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+
+                        {% if is_granted('IMPORT_ENTRIES') %}
+                            <li class="col l4 m6 s12">
+                                <div class="card light-green darken-1">
+                                    <div class="card-content white-text">
+                                        <span class="card-title white-text">{{ 'quickstart.migrate.title'|trans }}</span>
+                                        <p>{{ 'quickstart.migrate.description'|trans }}</p>
+                                    </div>
+                                    <div class="card-action">
+                                        <ul>
+                                            <li><a href="{{ path('import_pocket_csv') }}">{{ 'quickstart.migrate.pocket'|trans }}</a></li>
+                                            <li><a href="{{ path('import_readability') }}">{{ 'quickstart.migrate.readability'|trans }}</a></li>
+                                            <li><a href="{{ path('import_instapaper') }}">{{ 'quickstart.migrate.instapaper'|trans }}</a></li>
+                                            <li><a href="{{ path('import') }}">{{ 'quickstart.more'|trans }}</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endif %}
+
+                        <li class="col l4 m6 s12">
+                            <div class="card blue darken-1">
+                                <div class="card-content white-text">
+                                    <span class="card-title white-text">{{ 'quickstart.developer.title'|trans }}</span>
+                                    <p>{{ 'quickstart.developer.description'|trans }}</p>
+                                </div>
+                                <div class="card-action">
+                                    <ul>
+                                        <li><a href="{{ path('developer') }}">{{ 'quickstart.developer.create_application'|trans }}</a></li>
+                                        <li><a href="https://doc.wallabag.org/">{{ 'quickstart.more'|trans }}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="col l4 m6 s12">
+                            <div class="card light-blue darken-1">
+                                <div class="card-content white-text">
+                                    <span class="card-title white-text">{{ 'quickstart.docs.title'|trans }}</span>
+                                    <p>{{ 'quickstart.docs.description'|trans }}</p>
+                                </div>
+                                <div class="card-action">
+                                    <ul>
+                                        <li><a href="https://doc.wallabag.org/en/user/articles/annotations.html">{{ 'quickstart.docs.annotate'|trans }}</a></li>
+                                        <li><a href="https://doc.wallabag.org/en/user/articles/download.html">{{ 'quickstart.docs.export'|trans }}</a></li>
+                                        <li><a href="https://doc.wallabag.org/">{{ 'quickstart.docs.all_docs'|trans }}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="col l4 m6 s12">
+                            <div class="card cyan darken-1">
+                                <div class="card-content white-text">
+                                    <span class="card-title white-text">{{ 'quickstart.support.title'|trans }}</span>
+                                    <p>{{ 'quickstart.support.description'|trans }}</p>
+                                </div>
+                                <div class="card-action">
+                                    <ul>
+                                        <li><a href="https://github.com/wallabag/wallabag/issues/">{{ 'quickstart.support.github'|trans }}</a></li>
+                                        <li><a href="mailto:hello@wallabag.org">{{ 'quickstart.support.email'|trans }}</a></li>
+                                        <li><a href="https://matrix.to/#/#wallabag:matrix.org">{{ 'quickstart.support.matrix'|trans }}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

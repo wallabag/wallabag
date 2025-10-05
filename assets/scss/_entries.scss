@@ -1,0 +1,232 @@
+@use "variables";
+
+/* ==========================================================================
+ * Entries
+ * ========================================================================== */
+
+.mass-action-toggle {
+  display: inline-flex;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  &:focus {
+    background-color: transparent;
+  }
+}
+
+.mass-action {
+  margin: 20px 5px 10px 20px;
+}
+
+.mass-action-group {
+  display: flex;
+  padding: 3px;
+  align-items: center;
+  gap: 30px;
+}
+
+.mass-action-button {
+  height: 36px;
+  line-height: 36px;
+  padding: 0 0.7rem;
+
+  i {
+    font-size: 1rem;
+  }
+}
+
+.mass-action-button--tags {
+  border-radius: 2px 0 0 2px;
+}
+
+.card-stacked .entry-checkbox {
+  margin: 10px 15px 10px 5px;
+}
+
+.card .entry-checkbox {
+  position: absolute;
+  display: flex;
+  padding: 10px;
+  inset: 0;
+  justify-content: flex-end;
+  align-items: start;
+  background-color: rgb(0 172 193 / 20%);
+  cursor: pointer;
+  z-index: 10;
+}
+
+.entries .entry-checkbox-input,
+.mass-action .entry-checkbox-input {
+  position: relative;
+  width: 20px;
+  min-height: 25px;
+  opacity: initial;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.toggle-checkbox:not(:checked) + .mass-action,
+.toggle-checkbox:not(:checked) + .mass-action-tags,
+.toggle-checkbox:not(:checked) ~ .entries .entry-checkbox,
+.toggle-checkbox:checked ~ .entries .card-preview {
+  display: none;
+}
+
+.mass-action-tags {
+  display: flex;
+  margin-top: 10px;
+
+  .mass-action-tags-input.mass-action-tags-input {
+    margin: 0;
+    padding: 0 5px;
+    height: 34px;
+    background: white;
+    border-bottom: 3px solid #c5ebef;
+  }
+
+  .mass-action-tags-input.mass-action-tags-input.mass-action-tags-input:focus {
+    border-bottom: 3px solid variables.$blue-accent-color;
+    box-shadow: none;
+  }
+}
+
+.entries {
+  list-style: none;
+}
+
+.collection {
+  margin: 5px 15px 0;
+  padding: 0;
+
+  .collection-item {
+    padding: 7px;
+    height: 65px;
+  }
+}
+
+.results {
+  display: flex;
+  margin-bottom: 10px;
+  padding: 1rem 1rem 0;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.nb-results {
+  display: inline-flex;
+  margin-bottom: 20px;
+  gap: 30px;
+}
+
+.results-item {
+  color: #444;
+}
+
+.pagination {
+  ul {
+    display: flex;
+    margin: 0;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    .prev.disabled,
+    .next.disabled {
+      display: none;
+    }
+  }
+
+  li {
+    padding: 0;
+
+    &:not(.active) a:hover,
+    &:not(.active) a:active,
+    &:not(.active) a:focus {
+      background-color: #e6e6e6;
+    }
+
+    &:not(:last-of-type) {
+      margin-right: 10px;
+    }
+  }
+
+  span,
+  a {
+    padding: 0 10px;
+    height: 30px;
+    display: block;
+    line-height: 30px;
+  }
+
+  .disabled {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
+  li.active span {
+    padding: 0 10px;
+    height: 30px;
+    display: block;
+    color: #fff;
+  }
+}
+
+.footer-text {
+  margin: 0.7rem 0.5rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.picker__date-display {
+  display: none;
+}
+
+footer {
+  &.page-footer {
+    margin-top: 10px;
+    padding-top: 0;
+  }
+
+  .row {
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (min-width: 993px) {
+  .results {
+    margin-bottom: 0;
+  }
+
+  .nb-results {
+    margin-bottom: 0;
+    gap: 0;
+  }
+
+  .mass-action-button {
+    height: 24px;
+    line-height: 24px;
+    padding: 0 0.5rem;
+  }
+
+  .mass-action-group {
+    gap: 10px;
+  }
+
+  .mass-action-tags {
+    margin-top: 0;
+    margin-left: 7px;
+    flex-wrap: initial;
+  }
+
+  .mass-action {
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+
+    .mass-action-tags-input.mass-action-tags-input {
+      height: 21px;
+    }
+  }
+}

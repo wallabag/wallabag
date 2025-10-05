@@ -1,0 +1,35 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ 'import.page_title'|trans }}{% endblock %}
+
+{% block messages %}
+    {{ render(controller('Wallabag\\Controller\\Import\\ImportController::checkQueueAction')) }}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel settings">
+            {% include 'Import/_information.html.twig' %}
+
+            {{ 'import.page_description'|trans }}
+            <div class="row">
+                {% for import in imports %}
+                <div class="col s6 m3">
+                    <div class="card">
+                      <div class="card-content">
+                        <span class="card-title">{{ import.name }}</span>
+                      </div>
+                      <div class="card-action">
+                        <a href="{{ path(import.url) }}">{{ 'import.action.import_contents'|trans }}</a>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

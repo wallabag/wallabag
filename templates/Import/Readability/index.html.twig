@@ -1,0 +1,47 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ 'import.readability.page_title'|trans }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12">
+        <div class="card-panel settings">
+            {% include 'Import/_information.html.twig' %}
+
+            <div class="row">
+                <blockquote>{{ import.description|trans }}</blockquote>
+                <p>{{ 'import.readability.how_to'|trans }}</p>
+
+                <div class="col s12">
+                    {{ form_start(form, {'method': 'POST'}) }}
+                        {{ form_errors(form) }}
+                        <div class="row">
+                            <div class="file-field input-field col s12">
+                                {{ form_errors(form.file) }}
+                                <div class="btn">
+                                    <span>{{ form.file.vars.label|trans }}</span>
+                                    {{ form_widget(form.file) }}
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                            <h6 class="col s12">{{ 'import.form.mark_as_read_title'|trans }}</h6>
+                            <div class="col s6 with-checkbox">
+                                <label for="{{ form.mark_as_read.vars.id }}">
+                                    {{ form_widget(form.mark_as_read) }}
+                                    <span>{{ form.mark_as_read.vars.label|trans }}</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        {{ form_widget(form.save, {'attr': {'class': 'btn waves-effect waves-light'}}) }}
+
+                        {{ form_rest(form) }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

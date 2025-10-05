@@ -1,0 +1,46 @@
+<div class="card entry-card{% if currentRoute in routes and entry.isArchived %} archived{% endif %}">
+    {% include "Entry/Card/_mass_checkbox.html.twig" with {'entry': entry} only %}
+    <div class="card-body">
+        <div class="{% if app.user.config.displayThumbnails %}card-image{% endif %} waves-effect waves-block waves-light">
+            <ul class="card-entry-labels">
+            {% for tag in entry.tags|slice(0, 3) %}
+                <li title="{{ tag.label }}"><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
+            {% endfor %}
+            </ul>
+            {% if app.user.config.displayThumbnails %}
+                {% set preview_class_modifier = entry.previewPicture ? '' : ' preview--default' %}
+                {% if is_granted('VIEW', entry) %}
+                    <a href="{{ path('view', {'id': entry.id}) }}">
+                        <span class="preview{{ preview_class_modifier }}" style="background-image: url({{ entry.previewPicture|default(asset('img/logo-square.svg')) }})"></span>
+                    </a>
+                {% else %}
+                    <span class="preview{{ preview_class_modifier }}" style="background-image: url({{ entry.previewPicture|default(asset('img/logo-square.svg')) }})"></span>
+                {% endif %}
+            {% endif %}
+        </div>
+        {% include "Entry/Card/_content.html.twig" with {'entry': entry, 'withPreview': true} only %}
+    </div>
+
+    <div class="card-reveal">
+        <i class="card-title activator grey-text text-darken-4 material-icons right">clear</i>
+        <span class="card-title">
+            {% if is_granted('VIEW', entry) %}
+                <a href="{{ path('view', {'id': entry.id}) }}" title="{{ entry.title|striptags|e('html_attr') }}">
+                    {{ entry.title|striptags|u.truncate(80, '…', false)|raw }}
+                </a>
+            {% else %}
+                {{ entry.title|striptags|u.truncate(80, '…', false)|raw }}
+            {% endif %}
+        </span>
+
+        <p>{{ entry.content|striptags|slice(0, 250)|raw }}&hellip;</p>
+
+        <ul class="card-entry-labels-hidden">
+            {% for tag in entry.tags %}
+                <li title="{{ tag.label }}"><a href="{{ path('tag_entries', {'slug': tag.slug}) }}">{{ tag.label }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% include "Entry/_card_actions.html.twig" with {'entry': entry} only %}
+</div>

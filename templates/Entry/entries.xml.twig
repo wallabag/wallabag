@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    {% if type != 'tag' %}
+        <title>wallabag — {{ type }} feed</title>
+        <subtitle type="html">Atom feed for {{ type }} entries</subtitle>
+        <id>wallabag:{{ wallabag_url|removeScheme|removeWww }}:{{ user }}:{{ type }}</id>
+        <link rel="alternate" type="text/html" href="{{ url(type) }}"/>
+    {% else %}
+        <id>wallabag:{{ wallabag_url|removeScheme|removeWww }}:{{ user }}:{{ type }}:{{ tag }}</id>
+        <link rel="alternate" type="text/html" href="{{ url('tag_entries', {'slug': tag}) }}"/>
+        <title>wallabag — {{ type }} {{ tag }} feed</title>
+        <subtitle type="html">Atom feed for entries tagged with {{ tag }}</subtitle>
+    {% endif %}
+    {% if updated %}
+        <updated>{{ updated|date('c') }}</updated> {# Indicates the last time the feed was modified in a significant way. #}
+    {% endif %}
+    <link rel="self" type="application/atom+xml" href="{{ app.request.uri }}"/>
+    {% if entries.hasPreviousPage %}
+        <link rel="previous" href="{{ url }}/{{ entries.previousPage }}"/>
+    {% endif -%}
+    {% if entries.hasNextPage %}
+        <link rel="next" href="{{ url }}/{{ entries.nextPage }}"/>
+    {% endif -%}
+    <link rel="last" href="{{ url }}/{{ entries.nbPages }}"/>
+    <generator uri="https://wallabag.org" version="{{ version }}">wallabag</generator>
+    <author>
+        <name>{{ user }}</name>
+    </author>
+    <icon>{{ asset('favicon.ico') }}</icon>
+    <logo>{{ asset('img/logo-square.svg') }}</logo>
+    {% for entry in entries %}
+    <entry>
+        <title><![CDATA[{{ entry.title|e }}]]></title>
+        <link rel="alternate" href="{{ entry.url }}"/>
+        <link rel="via" type="text/html"
+              href="{{ url('view', {'id': entry.id}) }}"/>
+        <id>wallabag:{{ wallabag_url|removeScheme|removeWww }}:{{ user }}:entry:{{ entry.id }}</id>
+        <updated>{{ entry.updatedAt|date('c') }}</updated>
+        <published>{{ entry.createdAt|date('c') }}</published>
+        {% for tag in entry.tags %}
+            <category term="{{ tag.slug }}" label="{{ tag.label }}" />
+        {% endfor %}
+        {% for author in entry.publishedBy %}
+        <author>
+            <name>{{ author }}</name>
+        </author>
+        {% endfor %}
+        <content type="html" {% if entry.language %}xml:lang="{{ entry.language[:2] }}"{% endif %}>
+            <![CDATA[{%- if entry.readingTime > 0 -%}{{ 'entry.list.reading_time_minutes'|trans({'%readingTime%': entry.readingTime}) }}{%- else -%}{{ 'entry.list.reading_time_less_one_minute'|trans|raw }}{%- endif %}{{ entry.content|raw -}}]]>
+        </content>
+    </entry>
+    {% endfor %}
+</feed>

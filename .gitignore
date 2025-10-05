@@ -15,7 +15,7 @@
 .php-cs-fixer.cache
 .phpunit.result.cache
 phpunit.xml
-docker-compose.override.yml
+compose.override.yaml
 
 # Parameters
 /app/config/parameters.yml
@@ -29,7 +29,7 @@ web/uploads/
 !/web/bundles/.gitkeep
 /web/assets/images/*
 !web/assets/images/.gitkeep
-/web/wallassets/*.dev.js
+/web/build/*
 
 # Build
 /app/build
@@ -38,6 +38,7 @@ web/uploads/
 
 # Development
 docker/php/env
+docker/php/blackfire
 
 # Composer PHAR
 /composer.phar
@@ -48,9 +49,6 @@ data/db/wallabag*.sqlite
 # assets stuff
 node_modules/
 bin
-app/Resources/build/
-!/src/Wallabag/CoreBundle/Resources/public
-/src/Wallabag/CoreBundle/Resources/public/*
 package-lock.json
 
 # Test-generated files
@@ -60,3 +58,7 @@ specialexport.json
 
 # Custom CSS file
 web/custom.css
+
+.env.local
+
+yarn-error.log

@@ -2,9 +2,9 @@ auth_code:
     mailer:
         body:
             signature: Het wallabag team
-            support: 'Twijfel niet om contact met ons op te nemen als u problemen ervaart:'
+            support: 'Twijfel niet om contact met ons op te nemen als je problemen ervaart:'
             second_para: 'Dit is de code:'
-            first_para: Omdat twee-factor-authenticatie verplicht is voor uw wallabag account en een nieuw apparaat dit zojuist gebruikt heeft, sturen we u een code ter verificatie.
+            first_para: Omdat tweestapsverificatie verplicht is voor je wallabag account en een nieuw apparaat dit zojuist gebruikt heeft, sturen we je een code ter verificatie.
             hello: Hallo %user%,
         subject: wallabag authenticatiecode
     on: aan

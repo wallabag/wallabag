@@ -89,19 +89,6 @@ config:
         help_language: "Вы можете изменить язык интерфейса wallabag."
         help_pocket_consumer_key: "Обязательно для импорта из Pocket. Вы можете создать это в Вашем аккаунте на Pocket."
         android_instruction: Нажмите здесь, чтобы предустановить ваше приложение для Android
-    form_rss:
-        description: 'RSS фид созданный с помощью wallabag позволяет читать Ваши записи через Ваш любимый RSS агрегатор. Для начала Вам потребуется создать ключ.'
-        token_label: 'RSS ключ'
-        no_token: 'Ключ не задан'
-        token_create: 'Создать ключ'
-        token_reset: 'Пересоздать ключ'
-        rss_links: 'ссылка на RSS'
-        rss_link:
-            unread: 'непрочитанные'
-            starred: 'помеченные'
-            archive: 'архивные'
-            all: Все
-        rss_limit: 'Количество записей в фиде'
     form_user:
         two_factor_description: "Включить двухфакторную аутентификацию, Вы получите сообщение на указанный email с кодом, при каждом новом непроверенном подключении."
         name_label: 'Имя'
@@ -469,7 +456,7 @@ quickstart:
         description: 'Если Вам нужна помощь, мы здесь чтобы помочь Вам.'
         github: 'На GitHub'
         email: 'По email'
-        gitter: 'На Gitter'
+        matrix: 'На Matrix'
 tag:
     page_title: 'Теги'
     list:

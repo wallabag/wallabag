@@ -1,5 +1,83 @@
 # Changelog
 
+## Upcoming changes
+
+* **[BC BREAK]** Convert 403 errors to 404 errors by @yguedidi in https://github.com/wallabag/wallabag/pull/8075
+* `wallassets/` folder renamed to `build/`
+
+## [2.6.13](https://github.com/wallabag/wallabag/tree/2.6.13)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.12...2.6.13)
+
+### Improvements
+
+* Add support of Pocket CSV import by @kdecherf and @nicosomb in [https://github.com/wallabag/wallabag/pull/8240](https://github.com/wallabag/wallabag/pull/8240)
+* Backport Pocket and Shaarli HTML imports from master by @nicosomb in [https://github.com/wallabag/wallabag/pull/8193](https://github.com/wallabag/wallabag/pull/8193)
+
+### Fixes
+
+*  Avoid non-validated OTP to be enabled #8139 by @j0k3r in [https://github.com/wallabag/wallabag/pull/8139](https://github.com/wallabag/wallabag/pull/8139)
+
+### Technical stuff
+
+* Update j0k3r/php-readability:1.2.13 to fix regression (about latin1 instead of UTF-8 used for entries) by @nicosomb [https://github.com/wallabag/wallabag/pull/8194](https://github.com/wallabag/wallabag/pull/8194)
+
+## [2.6.12](https://github.com/wallabag/wallabag/tree/2.6.12)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.11...2.6.12)
+
+### Technical stuff
+
+* Fix changelog by @yguedidi in [https://github.com/wallabag/wallabag/pull/8135](https://github.com/wallabag/wallabag/pull/8135)
+* Update dependencies by @yguedidi in [https://github.com/wallabag/wallabag/pull/8136](https://github.com/wallabag/wallabag/pull/8136)
+
+## [2.6.11](https://github.com/wallabag/wallabag/tree/2.6.11)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.10...2.6.11)
+
+### Security fix
+* Protect actions with a CSRF token by @yguedidi in https://github.com/wallabag/wallabag/commit/99c8a06594d6ee7480ce4d041ccff3025b353656
+
+### Fixes
+
+* Fix redirection after action in search results by @nicosomb in [https://github.com/wallabag/wallabag/pull/7827](https://github.com/wallabag/wallabag/pull/7827)
+* Fix title tag filter by @nicosomb in [https://github.com/wallabag/wallabag/pull/7846](https://github.com/wallabag/wallabag/pull/7846)
+* Change NB_ELEMENTS in pocket importer to 30 by @j0k3r in [https://github.com/wallabag/wallabag/pull/7993](https://github.com/wallabag/wallabag/pull/7993)
+* Fix entries counter for annotated entries in the menu by @j0k3r in [https://github.com/wallabag/wallabag/pull/7999](https://github.com/wallabag/wallabag/pull/7999)
+
+### Technical stuff
+
+* Prepare 2.6.11 release by @yguedidi in [https://github.com/wallabag/wallabag/pull/8133](https://github.com/wallabag/wallabag/pull/8133)
+
+## [2.6.10](https://github.com/wallabag/wallabag/tree/2.6.10)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.9...2.6.10)
+
+### Improvement
+
+* Add Omnivore import by @nicosomb in https://github.com/wallabag/wallabag/pull/7754
+
+### Fixes
+
+* Update site config & tests by @j0k3r in https://github.com/wallabag/wallabag/pull/7582 (fixes "Key provided is shorter
+  than 256 bits, only 240 bits provided" https://github.com/wallabag/wallabag/issues/7531)
+* Update site config by @yguedidi in https://github.com/wallabag/wallabag/pull/7623
+* Replace gitter with matrix by @nicosomb in https://github.com/wallabag/wallabag/pull/7753
+
+## [2.6.9](https://github.com/wallabag/wallabag/tree/2.6.9)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.8...2.6.9)
+
+### Fixes
+* Fix same domain pagination by @yguedidi in https://github.com/wallabag/wallabag/pull/7266
+* Upgrade PHP dependencies by @yguedidi in https://github.com/wallabag/wallabag/pull/7272
+* Use a proper "how to" for elCurator by @j0k3r in https://github.com/wallabag/wallabag/pull/7323
+
+## [2.6.8](https://github.com/wallabag/wallabag/tree/2.6.8)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.7...2.6.8)
+
+### Fixes
+* Update deps & Node 20 by @j0k3r in https://github.com/wallabag/wallabag/pull/7134
+* Fix dark mode disabled url 2.6 by @Simounet in https://github.com/wallabag/wallabag/pull/7133
+* Make database dependent commands lazy by @yguedidi in https://github.com/wallabag/wallabag/pull/7142
+* Fix docker setup by @yguedidi in https://github.com/wallabag/wallabag/pull/7141
+* Remove session-based redirection by @yguedidi in https://github.com/wallabag/wallabag/pull/7140
+
 ## [2.6.7](https://github.com/wallabag/wallabag/tree/2.6.7)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.6...2.6.7)
 

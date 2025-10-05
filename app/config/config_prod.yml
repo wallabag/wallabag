@@ -1,10 +1,6 @@
 imports:
     - { resource: config.yml }
 
-framework:
-    assets:
-        # json_manifest_path: '%kernel.project_dir%/web/bundles/wallabagcore/manifest.json'
-
 #doctrine:
 #    orm:
 #        metadata_cache_driver: apc
