@@ -1,28 +1,48 @@
 # Changelog
 
+## [2.6.14](https://github.com/wallabag/wallabag/tree/2.6.14)
+[Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.13...2.6.14)
+
+### Improvements
+
+* Add annotations filter to entries API endpoint by @skn in https://github.com/wallabag/wallabag/pull/8346
+
+### Fixes
+
+* Fix reading time computation for short entries by @andreadecorte in https://github.com/wallabag/wallabag/pull/8332
+* Fix `urls` parameter when sending many urls to be stored using the API by @j0k3r in https://github.com/wallabag/wallabag/pull/8488
+* Fix docker base image by @yguedidi in https://github.com/wallabag/wallabag/pull/8440
+
+### Technical stuff
+
+* Change version in wallabag.yml by @nicosomb in https://github.com/wallabag/wallabag/pull/8251
+* Fix deprecation by @j0k3r in https://github.com/wallabag/wallabag/pull/8267
+* Update dependencies by @yguedidi in https://github.com/wallabag/wallabag/pull/8435
+* Bump deps (mostly for siteconfig) by @j0k3r in https://github.com/wallabag/wallabag/pull/8489
+
 ## [2.6.13](https://github.com/wallabag/wallabag/tree/2.6.13)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.12...2.6.13)
 
 ### Improvements
 
-* Add support of Pocket CSV import by @kdecherf and @nicosomb in [https://github.com/wallabag/wallabag/pull/8240](https://github.com/wallabag/wallabag/pull/8240)
-* Backport Pocket and Shaarli HTML imports from master by @nicosomb in [https://github.com/wallabag/wallabag/pull/8193](https://github.com/wallabag/wallabag/pull/8193)
+* Add support of Pocket CSV import by @kdecherf and @nicosomb in https://github.com/wallabag/wallabag/pull/8240
+* Backport Pocket and Shaarli HTML imports from master by @nicosomb in https://github.com/wallabag/wallabag/pull/8193
 
 ### Fixes
 
-*  Avoid non-validated OTP to be enabled #8139 by @j0k3r in [https://github.com/wallabag/wallabag/pull/8139](https://github.com/wallabag/wallabag/pull/8139)
+* Avoid non-validated OTP to be enabled #8139 by @j0k3r in https://github.com/wallabag/wallabag/pull/8139
 
 ### Technical stuff
 
-* Update j0k3r/php-readability:1.2.13 to fix regression (about latin1 instead of UTF-8 used for entries) by @nicosomb [https://github.com/wallabag/wallabag/pull/8194](https://github.com/wallabag/wallabag/pull/8194)
+* Update j0k3r/php-readability:1.2.13 to fix regression (about latin1 instead of UTF-8 used for entries) by @nicosomb https://github.com/wallabag/wallabag/pull/8194
 
 ## [2.6.12](https://github.com/wallabag/wallabag/tree/2.6.12)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.11...2.6.12)
 
 ### Technical stuff
 
-* Fix changelog by @yguedidi in [https://github.com/wallabag/wallabag/pull/8135](https://github.com/wallabag/wallabag/pull/8135)
-* Update dependencies by @yguedidi in [https://github.com/wallabag/wallabag/pull/8136](https://github.com/wallabag/wallabag/pull/8136)
+* Fix changelog by @yguedidi in https://github.com/wallabag/wallabag/pull/8135
+* Update dependencies by @yguedidi in https://github.com/wallabag/wallabag/pull/8136
 
 ## [2.6.11](https://github.com/wallabag/wallabag/tree/2.6.11)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.10...2.6.11)
@@ -32,14 +52,14 @@
 
 ### Fixes
 
-* Fix redirection after action in search results by @nicosomb in [https://github.com/wallabag/wallabag/pull/7827](https://github.com/wallabag/wallabag/pull/7827)
-* Fix title tag filter by @nicosomb in [https://github.com/wallabag/wallabag/pull/7846](https://github.com/wallabag/wallabag/pull/7846)
-* Change NB_ELEMENTS in pocket importer to 30 by @j0k3r in [https://github.com/wallabag/wallabag/pull/7993](https://github.com/wallabag/wallabag/pull/7993)
-* Fix entries counter for annotated entries in the menu by @j0k3r in [https://github.com/wallabag/wallabag/pull/7999](https://github.com/wallabag/wallabag/pull/7999)
+* Fix redirection after action in search results by @nicosomb in https://github.com/wallabag/wallabag/pull/7827
+* Fix title tag filter by @nicosomb in https://github.com/wallabag/wallabag/pull/7846
+* Change NB_ELEMENTS in pocket importer to 30 by @j0k3r in https://github.com/wallabag/wallabag/pull/7993
+* Fix entries counter for annotated entries in the menu by @j0k3r in https://github.com/wallabag/wallabag/pull/7999
 
 ### Technical stuff
 
-* Prepare 2.6.11 release by @yguedidi in [https://github.com/wallabag/wallabag/pull/8133](https://github.com/wallabag/wallabag/pull/8133)
+* Prepare 2.6.11 release by @yguedidi in https://github.com/wallabag/wallabag/pull/8133
 
 ## [2.6.10](https://github.com/wallabag/wallabag/tree/2.6.10)
 [Full Changelog](https://github.com/wallabag/wallabag/compare/2.6.9...2.6.10)
