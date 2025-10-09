@@ -224,7 +224,6 @@ class EntriesExport
                 $chapter = $chapterStart . "<h1>{$entry->getTitle()}</h1>";
             }
 
-
             $chapter .= '<dl>' .
                 '<dt>' . $this->translator->trans('entry.view.published_by') . '</dt><dd>' . $authors . '</dd>' .
                 '<dt>' . $this->translator->trans('entry.metadata.published_on') . '</dt><dd>' . $publishedDate . '</dd>' .
