@@ -1,5 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
 import annotator from 'annotator';
+import WallabagArticle from '../components/wallabag_article_component';
 
 export default class extends Controller {
   static values = {
@@ -11,11 +12,17 @@ export default class extends Controller {
   };
 
   connect() {
-    this.app = new annotator.App();
+    if (this.element instanceof WallabagArticle) {
+      this.element.getOnLoadedPromise().then((element) => this.setup(element));
+      return;
+    }
 
-    this.app.include(annotator.ui.main, {
-      element: this.element,
-    });
+    this.setup(this.element);
+  }
+
+  setup(element) {
+    this.app = new annotator.App();
+    this.app.include(annotator.ui.main, { element });
 
     const authorization = {
       permits() { return true; },

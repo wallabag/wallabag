@@ -9,7 +9,11 @@ Encore
   .setPublicPath('/build')
   .addEntry('main', './assets/index.js')
   .addEntry('public', './assets/share.js')
+  .addEntry('wallabag_article_component', './assets/components/wallabag_article_component.js')
   .splitEntryChunks()
+  .configureSplitChunks((splitChunks) => {
+    splitChunks.chunks = (chunk) => chunk.name !== 'wallabag_article_component';
+  })
   .enableStimulusBridge('./assets/controllers.json')
   .enableSingleRuntimeChunk()
   .cleanupOutputBeforeBuild()

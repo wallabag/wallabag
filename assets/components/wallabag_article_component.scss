@@ -1,0 +1,20 @@
+@use '../scss/mixins/reset' as *;
+@use '../scss/mixins/general' as *;
+@use '../scss/mixins/article' as *;
+
+@use '../scss/variables';
+@use '../scss/fonts';
+
+/* ==========================================================================
+   <wallabag-article> DOM style
+   ========================================================================== */
+
+.wallabag_article_component {
+  @include reset();
+  @include general();
+  @include article();
+
+  a {
+    color: variables.$blue-accent-color;
+  }
+}
