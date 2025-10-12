@@ -65,6 +65,7 @@ config:
         new_user: Aggiungi utente
         feed: Flussi
         reset: Area di reset
+        ignore_origin: Ignora le regole di origine
     form:
         save: Salva
     form_settings:
@@ -88,6 +89,16 @@ config:
         help_reading_speed: wallabag calcola un tempo di lettura per ogni articolo. Puoi definire qui, grazie a questa lista, se sei un lettore lento o veloce. wallabag ricalcolerà la velocità di lettura per ogni articolo.
         help_language: Puoi cambiare la lingua dell'interfaccia di wallabag.
         help_pocket_consumer_key: Richiesta per importare da Pocket. La puoi creare nel tuo account Pocket.
+        help_display_thumbnails: Puoi decidere di mostrare o meno le anteprime degli articoli. Utile per connessioni lente.
+        help_font: Puoi scegliere la famiglia di font da utilizzare.
+        help_fontsize: Puoi scegliere la dimensione del font da utilizzare.
+        help_lineheight: Puoi scegliere l'altezza della riga da utilizzare.
+        help_maxwidth: Puoi scegliere la larghezza massima da utilizzare.
+        display_thumbnails_label: Mostra le anteprime degli articoli (utile per connessioni lente).
+        font_label: Famiglia dei font
+        fontsize_label: Dimensione del font
+        lineheight_label: Altezza della riga
+        maxwidth_label: Larghezza massima
     form_user:
         two_factor_description: Abilitando l'autenticazione a due fattori riceverai un'e-mail con un codice per ogni nuova connesione non verificata.
         name_label: Nome
@@ -102,6 +113,14 @@ config:
         two_factor:
             action_email: Usa l'e-mail
             emailTwoFactor_label: Utilizzando la posta elettronica (ricevere un codice tramite posta elettronica)
+            googleTwoFactor_label: Utilizzo di un'app OTP (aprire l'app, come Google Authenticator, Authy, Aegis o FreeOTP, per ottenere un codice monouso)
+            table_method: Metodo
+            table_state: Stato
+            table_action: Azione
+            state_enabled: Abilitato
+            state_disabled: Disabilitato
+            action_app: Usa l'app OTP
+        login_label: Login (non può essere modificato)
     reset:
         title: Area di reset (zona pericolosa)
         description: Premendo i tasti sottostanti potrai rimuovere delle informazioni dal tuo account. Ricorda che queste azioni sono IRREVERSIBILI.
@@ -110,6 +129,7 @@ config:
         entries: Rimuovi TUTTI gli articoli
         confirm: Sei veramente sicuro? (NON PUOI TORNARE INDIETRO)
         archived: Rimuovi TUTTE le voci archiviate
+        tagging_rules: Rimuovi TUTTE le regole di etichettatura
     form_password:
         description: Qui puoi cambiare la tua password. La tua nuova password dovrebbe essere composta da almeno 8 caratteri.
         old_password_label: Password corrente
@@ -160,6 +180,51 @@ config:
             import_tagging_rules: Importa le regole di etichettatura
             new_tagging_rule: Crea una regola di etichettatura
             export_tagging_rules_detail: Questo scaricherà un file JSON che potrai usare per importare le regole di etichettatura altrove o per farne un backup.
+        file_label: file JSON
+        import_submit: Importa
+        export: Esporta
+    form_feed:
+        description: I feed Atom forniti da wallabag ti consentono di leggere gli articoli salvati con il tuo lettore Atom preferito. Devi prima generare un token.
+        token_label: Token del feed
+        no_token: Nessun token
+        token_create: Crea il tuo token
+        token_reset: Rigenera il tuo token
+        token_revoke: Revoca il token
+        feed_links: Link al feed
+        feed_link:
+            unread: Non letti
+            starred: Preferiti
+            all: Tutti
+        feed_limit: Numero di elementi nel feed
+    form_ignore_origin_rules:
+        faq:
+            title: FAQ
+            ignore_origin_rules_definition_title: Cosa significa “ignorare le regole di origine”?
+            ignore_origin_rules_definition_description: Sono utilizzate da wallabag per ignorare automaticamente un indirizzo di origine dopo un reindirizzamento.<br />Se durante il recupero di una nuova voce si verifica un reindirizzamento, tutte le regole di ignorare l'origine (<i>definite dall'utente e definite dall'istanza</i>) saranno utilizzate per ignorare l'indirizzo di origine.
+            how_to_use_them_title: Come si usano?
+            how_to_use_them_description: Supponiamo che tu voglia ignorare l'origine di una voce proveniente da « <i>rss.example.com</i> » (<i>sapendo che dopo un reindirizzamento, l'indirizzo effettivo è example.com</i>).<br />In tal caso, dovresti inserire « host = "rss.example.com" » nel campo <i>Regola</i>.
+            variables_available_title: Quali variabili e operatori posso utilizzare per scrivere le regole?
+            variables_available_description: 'È possibile utilizzare le seguenti variabili e operatori per creare regole di ignorare origine:'
+            meaning: Significato
+            variable_description:
+                label: Variabile
+                host: Host dell'indirizzo web
+                _all: Indirizzo completo, principalmente per il pattern matching
+            operator_description:
+                label: Operatore
+                equal_to: Uguale a..
+                matches: 'Verifica che un <i>soggetto</i> corrisponda a una <i>ricerca</i> (senza distinzione tra maiuscole e minuscole).<br />Esempio: <code>_all ~ “https?://rss.example.com/foobar/.*”</code>'
+    otp:
+        page_title: Autenticazione a due fattori
+        app:
+            two_factor_code_description_1: Hai appena abilitato l'autenticazione a due fattori OTP, apri la tua app OTP e utilizza quel codice per ottenere una password monouso. Scomparirà dopo il ricaricamento della pagina.
+            two_factor_code_description_2: 'Scansiona questo QR Code con la tua app:'
+            two_factor_code_description_3: "Inoltre, conserva questi codici di backup in un luogo sicuro, potrai utilizzarli nel caso in cui perdessi l'accesso alla tua app OTP:"
+            two_factor_code_description_4: 'Prova un codice OTP dalla tua app configurata:'
+            two_factor_code_description_5: 'Se non riesci a vedere il codice QR o non riesci a scansionarlo, inserisci il seguente segreto nella tua app:'
+            cancel: Cancella
+            enable: Abilita
+            qrcode_label: QR Code
 entry:
     default_title: Titolo del contenuto
     page_titles:
@@ -171,6 +236,8 @@ entry:
         filtered_search: 'Filtrati per ricerca:'
         untagged: Articoli non etichettati
         all: Tutti gli articoli
+        with_annotations: Contenuti con annotazioni
+        same_domain: Stesso dominio
     list:
         number_on_the_page: "{0} Non ci sono contenuti.|{1} C'è un contenuto.|]1,Inf[ Ci sono %count% contenuti."
         reading_time: tempo di lettura stimato
@@ -184,6 +251,7 @@ entry:
         toogle_as_star: Segna come non preferito
         delete: Elimina
         export_title: Esporta
+        show_same_domain: Mostra articoli con lo stesso dominio
     filters:
         title: Filtri
         status_label: Stato
@@ -258,6 +326,7 @@ entry:
         reading_time_minutes_short: '%readingTime% min'
         address: Indirizzo
         added_on: Aggiunto il
+        published_on: Pubblicato in data
 about:
     page_title: A proposito
     top_menu:
@@ -346,9 +415,10 @@ quickstart:
     configure:
         title: Configura l'applicazione
         description: Per avere un'applicazione che ti soddisfi, dai un'occhiata alla configurazione di wallabag.
-        language: Cambia lingua e design
+        language: Cambia lingua e interfaccia
         rss: Abilita i feed RSS
         tagging_rules: Scrivi delle regole per etichettare automaticamente i contenuti
+        feed: Abilita feeds
     admin:
         title: Amministrazione
         description: 'Come amministratore, hai la possibilità di svolgere le seguenti operazioni in wallabag:'
@@ -395,6 +465,7 @@ tag:
         number_on_the_page: "{0} Non ci sono etichette.|{1} C'è un'etichetta.|]1,Inf[ ci sono %count% etichette."
         see_untagged_entries: Vedi articoli non etichettati
         untagged: Articoli non etichettati
+        no_untagged_entries: Non ci sono contenuti non etichettati.
     new:
         add: Aggiungi
         placeholder: Puoi aggiungere varie etichette, separate da una virgola.
@@ -426,7 +497,7 @@ import:
         description: Questo importatore copierà tutti i tuoi dati da un wallabag v2. Vai in «Tutti i contenuti», e, nella barra laterale di esportazione, clicca su «JSON». Otterrai un file «Tutti i contenuti.json».
     readability:
         page_title: Importa da > Readability
-        description: Questo importatore copierà tutti i tuoi articoli da Readability. Nella pagina strumenti (https://www.readability.com/tools/), clicca su «Export your data» nella sezione «Data Export». Riceverai un'e-mail per scaricare un file json (che tuttavia non termina con .json).
+        description: Questo importatore copierà tutti i tuoi articoli da Readability.
         how_to: Seleziona la tua esportazione da Readability e clicca sul bottone sottostante per caricarla ed importarla.
     worker:
         enabled: "L'importazione è asincrona. Una volta iniziata l'importazione, un worker esterno gestirà i compiti uno alla volta. Il servizio corrente è:"
@@ -447,6 +518,8 @@ import:
         page_title: Importa da > Pinboard
         description: Questo importatore copierà tutti i tuoi articoli da Pinboard. Sulla pagina di backup (https://pinboard.in/settings/backup), clicca su "JSON" nella sezione "Bookmarks". Sarà scaricato un file JSON (come "pinboard_export").
         how_to: Scegli la tua esportazione da Pinboard e clicca sul bottone sottostante per caricarla ed importarla.
+    elcurator:
+        page_title: Importa -> elCurator
 developer:
     page_title: Gestione client API
     welcome_message: Benvenuto nelle API di wallabag
@@ -476,6 +549,7 @@ developer:
             redirect_uris_label: Redirect URI
             save_label: Crea un nuovo client
         action_back: Indietro
+        copy_to_clipboard: Copia
     client_parameter:
         page_title: Gestione client API > Parametri Client
         page_description: Questi sono i tuoi parametri del client.
@@ -522,6 +596,7 @@ user:
         delete_confirm: Sei sicuro?
         back_to_list: Torna alla lista
         twofactor_email_label: Autenticazione a due fattori tramite e-mail
+        twofactor_google_label: Autenticazione a due fattori tramite applicazione OTP
     search:
         placeholder: Filtra per nome utente o e-mail
 error:
