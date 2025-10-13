@@ -5692,16 +5692,16 @@
         },
         {
             "name": "pagerfanta/core",
-            "version": "v4.7.1",
+            "version": "v4.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Pagerfanta/core.git",
-                "reference": "829eaa9737b3cfae1406f67a4e9ee36e0e37caf9"
+                "reference": "8809e9cfccf2f468a102f2ca4483f030b3c7e15c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Pagerfanta/core/zipball/829eaa9737b3cfae1406f67a4e9ee36e0e37caf9",
-                "reference": "829eaa9737b3cfae1406f67a4e9ee36e0e37caf9",
+                "url": "https://api.github.com/repos/Pagerfanta/core/zipball/8809e9cfccf2f468a102f2ca4483f030b3c7e15c",
+                "reference": "8809e9cfccf2f468a102f2ca4483f030b3c7e15c",
                 "shasum": ""
             },
             "require": {
@@ -5729,9 +5729,9 @@
                 "pagerfanta"
             ],
             "support": {
-                "source": "https://github.com/Pagerfanta/core/tree/v4.7.1"
+                "source": "https://github.com/Pagerfanta/core/tree/v4.7.2"
             },
-            "time": "2024-12-13T15:05:37+00:00"
+            "time": "2025-10-02T15:54:19+00:00"
         },
         {
             "name": "pagerfanta/doctrine-orm-adapter",
