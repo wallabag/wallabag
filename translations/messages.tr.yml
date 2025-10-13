@@ -537,6 +537,7 @@ import:
     elcurator:
         description: Bu içe aktarıcı tüm elCurator makalelerinizi içe aktaracak.
         page_title: İçe Aktar > elCurator
+        how_to: Lütfen elCurator dışa aktarımınızı seçin ve aşağıdaki düğmeye tıklayarak yükleyin ve içe aktarın.
     delicious:
         page_title: İçe aktar > del.icio.us
         description: Bu içe aktarıcı tüm Delicious yer imlerinizi içe aktaracaktır. 2021'den beri, dışa aktarma sayfasını kullanarak verilerinizi tekrar dışa aktarabilirsiniz (https://del.icio.us/export). "JSON" biçimini seçin ve indirin ("delicious_export.2021.02.06_21.10.json" gibi).
@@ -549,6 +550,14 @@ import:
         page_title: İçe Aktar > Pocket HTML
         description: Bu içe aktarıcı tüm Pocket yer imlerinizi (HTML dışa aktarmayla) içe aktaracaktır. https://getpocket.com adresine gidin, sonra HTML dosyasını dışa aktarın. Bir HTML dosyası ("ril_export.html" gibi) indirilecektir.
         how_to: Lütfen yer imi yedek dosyasını seçin ve onu içe aktarmak aşağıdaki düğmeye tıklayın. Tüm makaleler sitelerinden çekileceği için sürecin uzun sürebileceğini unutmayın.
+    omnivore:
+        page_title: İçe Aktar > Omnivore
+        description: Bu içe aktarıcı, tüm Omnivore makalelerinizi içe aktaracak.
+        how_to: Omnivore dışa aktarımınızı çıkarın, ardından “metadata_x_to_y.json” adlı her bir JSON dosyasını tek tek yükleyin.
+    pocket_csv:
+        page_title: İçe Aktar > Pocket CSV
+        description: Bu içe aktarıcı, tüm Pocket yer imlerinizi (CSV dışa aktarımı yoluyla) içe aktaracak. https://getpocket.com/export adresine gidin ve dosyayı dışa aktarın. Bir ZIP dosyası indirilecektir (örneğin "pocket.zip"). Dosyayı çıkardığınızda, "part_000000.csv" adlı bir CSV dosyası elde edeceksiniz.
+        how_to: Yer imleri yedek dosyanızı seçip aşağıdaki düğmeye tıklayarak içe aktarabilirsiniz. Bu işlem, tüm bağlantılar işlenip kaydedileceği için uzun zaman alabilir.
 user:
     form:
         username_label: Kullanıcı adı
@@ -602,6 +611,7 @@ flashes:
             ignore_origin_rules_updated: Orijinal kaynağı yok say kuralı güncellendi
             ignore_origin_rules_deleted: Orijinal kaynağı yok say kuralı silindi
             tagging_rules_reset: Etiketleme kuralları sıfırlandı
+            otp_code_invalid: Geçersiz iki adımlı kimlik doğrulama kodu
     entry:
         notice:
             entry_already_saved: Makale zaten %date% tarihinde kaydedilmiş
